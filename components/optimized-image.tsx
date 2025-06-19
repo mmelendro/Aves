@@ -31,14 +31,24 @@ export default function OptimizedImage({
   const [hasError, setHasError] = useState(false)
 
   return (
-    <div className={cn("relative overflow-hidden group", className)}>
+    <div
+      className={cn("relative overflow-hidden group flex items-center justify-center", className)}
+      style={{ aspectRatio: `${width}/${height}` }}
+    >
       <Image
         src={src || "/placeholder.svg"}
         alt={alt}
         width={width}
         height={height}
         priority={priority}
-        style={style}
+        style={{
+          ...style,
+          objectFit: "contain",
+          width: "100%",
+          height: "100%",
+          maxWidth: "100%",
+          maxHeight: "100%",
+        }}
         className={cn(
           "transition-all duration-300 ease-in-out",
           "group-hover:scale-105 group-hover:brightness-110",

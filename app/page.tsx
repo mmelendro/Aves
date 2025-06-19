@@ -66,9 +66,9 @@ export default function AVESLandingPage() {
               <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
-                width={50}
-                height={50}
-                className="object-contain"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
                 priority
               />
             </Link>
@@ -796,33 +796,117 @@ export default function AVESLandingPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Interested Tour Type</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Select a tour type</option>
-                    <option>AVES Adventure</option>
-                    <option>AVES Vision</option>
-                    <option>AVES Elevate</option>
-                    <option>AVES Souls</option>
-                    <option>Not sure yet</option>
-                  </select>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Interested Tour Types (select all that apply)
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">🍃 AVES Adventure</span>
+                    </label>
+                    <label className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">🪶 AVES Vision</span>
+                    </label>
+                    <label className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">🌼 AVES Elevate</span>
+                    </label>
+                    <label className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">🍓 AVES Souls</span>
+                    </label>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Bioregions of Interest</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Select bioregion(s)</option>
-                    <option>Quetzal Highlands (Western Andes)</option>
-                    <option>Hummingbird Haven (Central Andes)</option>
-                    <option>Páramo Paradise (Eastern Andes)</option>
-                    <option>Wetland Wonders (Llanos)</option>
-                    <option>Canopy Kingdom (Amazon)</option>
-                    <option>Endemic Empire (Biogeographic Chocó)</option>
-                    <option>Coastal Crown (Caribbean + Sierra Nevada)</option>
-                    <option>Valley Voyager (Cauca Valley)</option>
-                    <option>River Realm (Magdalena Valley)</option>
-                    <option>Massif Majesty (Macizo Colombiano)</option>
-                    <option>Multiple regions</option>
-                  </select>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Bioregions of Interest (select all that apply)
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Quetzal Highlands (Western Andes)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Hummingbird Haven (Central Andes)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Páramo Paradise (Eastern Andes)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Wetland Wonders (Llanos)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Canopy Kingdom (Amazon)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Endemic Empire (Biogeographic Chocó)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Coastal Crown (Caribbean + Sierra Nevada)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Valley Voyager (Cauca Valley)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">River Realm (Magdalena Valley)</span>
+                    </label>
+                    <label className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span className="text-sm text-gray-700">Massif Majesty (Macizo Colombiano)</span>
+                    </label>
+                  </div>
                 </div>
 
                 <div>
