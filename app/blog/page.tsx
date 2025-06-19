@@ -1,0 +1,509 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Calendar, User, MapPin, ArrowRight, Menu, X, ChevronDown } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+
+export default function BlogPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const blogPosts = [
+    {
+      id: "hummingbird-vision-journey",
+      title: "Jewels of the Andes: A Vision Journey Through Colombia's Hummingbird Sanctuaries",
+      excerpt:
+        "In the sacred heights of Colombia's three Andean cordilleras, where mist meets mountain and time seems to pause, we embark on a spiritual pilgrimage to witness nature's most exquisite aerial dancers—the hummingbirds.",
+      image: "/images/rainbow-bearded-thornbill-vision.jpg",
+      imageAlt: "Rainbow-bearded Thornbill displaying its spectacular fiery throat in high-altitude páramo habitat",
+      author: "Martin Melendro",
+      date: "June 12, 2025",
+      location: "Three Andean Cordilleras",
+      readTime: "12 min read",
+      category: "Vision Photography",
+      categoryColor: "bg-purple-100 text-purple-800",
+    },
+    {
+      id: "sierra-nevada-indigenous-birding",
+      title: "Guardians of the Sky: Birding with the Kogi and Wayuu in Sierra Nevada de Santa Marta",
+      excerpt:
+        "The pre-dawn air was crisp as we began our ascent into the Sierra Nevada de Santa Marta, the world's highest coastal mountain range. Our destination: the sacred territories of the Kogi and Wayuu peoples, where ancient wisdom meets extraordinary biodiversity.",
+      image: "/images/cardinal-guajiro.jpg",
+      imageAlt: "Vermilion Cardinal (Cardinalis phoeniceus) - the endemic Cardinal Guajiro in its natural habitat",
+      author: "Martin Melendro",
+      date: "March 15, 2025",
+      location: "Sierra Nevada de Santa Marta",
+      readTime: "8 min read",
+      category: "Indigenous Partnerships",
+      categoryColor: "bg-emerald-100 text-emerald-800",
+    },
+    {
+      id: "paramo-manizales-thornbill",
+      title: "Fire and Ice: From Páramo Peaks to Thermal Springs and Manakin Magic",
+      excerpt:
+        "An eight-day journey through Colombia's Central Andes reveals the extraordinary diversity that exists within a single mountain range. From the frigid páramo heights where Rainbow-bearded Thornbills defy the elements, through therapeutic thermal springs, to the lush cloud forests where manakins dance.",
+      image: "/images/rainbow-bearded-thornbill.jpg",
+      imageAlt:
+        "Rainbow-bearded Thornbill (Chalcostigma herrani) displaying its spectacular iridescent throat in high-altitude páramo habitat",
+      author: "Martin Melendro",
+      date: "April 8, 2025",
+      location: "Manizales & Chinchiná, Caldas",
+      readTime: "8 min read",
+      category: "High Altitude Birding",
+      categoryColor: "bg-blue-100 text-blue-800",
+    },
+    {
+      id: "choco-toucan-expedition",
+      title: "Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Rainforest Jewel",
+      excerpt:
+        "The Biogeographic Chocó represents one of Earth's most extraordinary biodiversity hotspots—a narrow strip of Pacific rainforest that harbors more endemic species per square kilometer than almost anywhere else on the planet.",
+      image: "/images/yellow-throated-toucan-blog.jpg",
+      imageAlt:
+        "Yellow-throated Toucan (Ramphastos ambiguus) displaying its magnificent bill in the Chocó rainforest canopy",
+      author: "Martin Melendro",
+      date: "May 22, 2025",
+      location: "Biogeographic Chocó",
+      readTime: "10 min read",
+      category: "Rainforest Expeditions",
+      categoryColor: "bg-green-100 text-green-800",
+    },
+  ]
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Link href="/">
+              <Image
+                src="/images/aves-logo.png"
+                alt="AVES Birdwatching Tours Logo"
+                width={50}
+                height={50}
+                className="object-contain"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {/* Tours Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+                Tours
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/tours"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
+                >
+                  All Tours Overview
+                </Link>
+                <Link
+                  href="/tours/adventure"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🍃 AVES Adventure
+                </Link>
+                <Link
+                  href="/tours/vision"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🪶 AVES Vision
+                </Link>
+                <Link
+                  href="/tours/elevate"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🌼 AVES Elevate
+                </Link>
+                <Link
+                  href="/tours/souls"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🍓 AVES Souls
+                </Link>
+              </div>
+            </div>
+            {/* About Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+                About
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/about"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  About AVES
+                </Link>
+                <Link
+                  href="/team"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  Our Team
+                </Link>
+              </div>
+            </div>
+            <Link href="/about/b-corp" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              B Corp Journey
+            </Link>
+            <Link href="/blog" className="text-emerald-600 font-semibold">
+              Blog
+            </Link>
+            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              Conservation
+            </Link>
+            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              Contact
+            </Link>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+
+          <Button className="hidden md:block bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t">
+            <nav className="container mx-auto px-4 py-4 space-y-4">
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">Tours</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/tours"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    All Tours Overview
+                  </Link>
+                  <Link
+                    href="/tours/adventure"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🍃 AVES Adventure
+                  </Link>
+                  <Link
+                    href="/tours/vision"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🪶 AVES Vision
+                  </Link>
+                  <Link
+                    href="/tours/elevate"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🌼 AVES Elevate
+                  </Link>
+                  <Link
+                    href="/tours/souls"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🍓 AVES Souls
+                  </Link>
+                </div>
+              </div>
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">About</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/about"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    About AVES
+                  </Link>
+                  <Link
+                    href="/team"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Our Team
+                  </Link>
+                </div>
+              </div>
+              <Link
+                href="/about/b-corp"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                B Corp Journey
+              </Link>
+              <Link
+                href="/blog"
+                className="block text-emerald-600 font-semibold py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/conservation"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Conservation
+              </Link>
+              <Link
+                href="/contact"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="pt-4">
+                <Link href="/shopping">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 mt-4">Book Your Journey</Button>
+                </Link>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">AVES Blog</h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            Discover the extraordinary world of Colombian birds through field reports, conservation stories, and expert
+            insights from the most biodiverse country on Earth.
+          </p>
+        </div>
+      </section>
+
+      {/* Blog Posts Grid */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {blogPosts.map((post, index) => (
+              <article key={post.id} className="group">
+                <Link href={`/blog/${post.id}`}>
+                  <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
+                    <Image
+                      src={post.image || "/placeholder.svg"}
+                      alt={post.imageAlt}
+                      width={600}
+                      height={338}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        objectPosition:
+                          post.id === "sierra-nevada-indigenous-birding"
+                            ? "center 20%"
+                            : post.id === "paramo-manizales-thornbill"
+                              ? "center 30%"
+                              : post.id === "choco-toucan-expedition"
+                                ? "center 40%"
+                                : "center",
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <Badge className={`absolute top-4 left-4 ${post.categoryColor}`}>{post.category}</Badge>
+                  </div>
+                </Link>
+
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center">
+                      <User className="w-4 h-4 mr-1" />
+                      <Link href="/team#martin-melendro" className="hover:text-emerald-600 transition-colors">
+                        {post.author}
+                      </Link>
+                    </div>
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {post.date}
+                    </div>
+                    <div className="flex items-center">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      {post.location}
+                    </div>
+                    <span>{post.readTime}</span>
+                  </div>
+
+                  <Link href={`/blog/${post.id}`}>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors leading-tight">
+                      {post.title}
+                    </h2>
+                  </Link>
+
+                  <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
+
+                  <Link
+                    href={`/blog/${post.id}`}
+                    className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium group-hover:gap-2 transition-all"
+                  >
+                    Read Full Story
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:ml-0 transition-all" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="py-16 bg-emerald-50">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Stay Updated on Our Latest Adventures</h2>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            Get exclusive field reports, conservation updates, and early access to new tour announcements delivered to
+            your inbox.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+            <Button className="bg-emerald-600 hover:bg-emerald-700 px-8">Subscribe</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <Image
+                  src="/images/aves-logo.png"
+                  alt="AVES Birdwatching Tours Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-gray-400 mb-4">
+                Premium birding tours in Colombia, committed to conservation and sustainable tourism.
+              </p>
+              <div className="flex space-x-4">
+                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
+                  <span className="text-sm">f</span>
+                </div>
+                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
+                  <span className="text-sm">ig</span>
+                </div>
+                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
+                  <span className="text-sm">tw</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Tours</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/tours/adventure" className="hover:text-white transition-colors flex items-center">
+                    🍃 AVES Adventure
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tours/vision" className="hover:text-white transition-colors flex items-center">
+                    🪶 AVES Vision
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tours/elevate" className="hover:text-white transition-colors flex items-center">
+                    🌼 AVES Elevate
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tours/souls" className="hover:text-white transition-colors flex items-center">
+                    🍓 AVES Souls
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/about" className="hover:text-white transition-colors">
+                    🦅 About AVES
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/team" className="hover:text-white transition-colors">
+                    👥 Our Team
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/conservation" className="hover:text-white transition-colors">
+                    🌱 Conservation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about/b-corp" className="hover:text-white transition-colors flex items-center group">
+                    <span className="mr-1">🌱</span>B Corp Journey & Sustainability
+                    <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity">↑</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    📝 Blog
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Resources</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    🐦 Bird Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    ✈️ Travel Tips
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-white transition-colors">
+                    📞 Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
+            <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                🔒 Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                📋 Terms of Service
+              </Link>
+              <Link href="/cookies" className="hover:text-white transition-colors">
+                🍪 Cookie Policy
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
