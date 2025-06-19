@@ -1,10 +1,68 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Calendar, User, MapPin, Droplets, TreePine } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
+import OptimizedImage from "@/components/optimized-image"
+import SpeciesTooltip from "@/components/species-tooltip"
+import ImageGallery from "@/components/image-gallery"
+import AudioPlayer from "@/components/audio-player"
 
 export default function ChocoToucanBlogPost() {
+  const yellowThroatedToucanData = {
+    commonName: "Yellow-throated Toucan",
+    scientificName: "Ramphastos ambiguus",
+    spanishName: "Tucán de Garganta Amarilla",
+    ebirdCode: "yethtou1",
+    description: "Flagship species of the Chocó rainforest, largest toucan in Colombia",
+  }
+
+  const collaredAracariData = {
+    commonName: "Collared Aracari",
+    scientificName: "Pteroglossus torquatus",
+    spanishName: "Arasarí de Collar",
+    ebirdCode: "colarc1",
+    description: "Smaller toucan species specializing in rainforest understory",
+  }
+
+  const greenHoneycreeperData = {
+    commonName: "Green Honeycreeper",
+    scientificName: "Chlorophanes spiza",
+    spanishName: "Mielero Verde",
+    ebirdCode: "grehon1",
+    description: "Brilliant blue-headed nectar specialist of the Chocó canopy",
+  }
+
+  const redLoredAmazonData = {
+    commonName: "Red-lored Amazon",
+    scientificName: "Amazona autumnalis",
+    spanishName: "Loro Frentirrojo",
+    ebirdCode: "relama1",
+    description: "Large parrot species and important seed disperser",
+  }
+
+  const galleryImages = [
+    {
+      src: "/images/yellow-throated-toucan-blog.jpg",
+      alt: "Yellow-throated Toucan displaying its magnificent bill",
+      caption: "Yellow-throated Toucan (Ramphastos ambiguus) - Chocó rainforest flagship species",
+    },
+    {
+      src: "/images/collared-aracari.jpg",
+      alt: "Collared Aracari in rainforest understory",
+      caption: "Collared Aracari (Pteroglossus torquatus) showing colorful plumage",
+    },
+    {
+      src: "/images/green-honeycreeper-blue.jpg",
+      alt: "Green Honeycreeper male with brilliant turquoise head",
+      caption: "Green Honeycreeper (Chlorophanes spiza) male in the Chocó canopy",
+    },
+    {
+      src: "/images/red-lored-amazons-pair.jpg",
+      alt: "Red-lored Amazons pair in Chocó rainforest canopy",
+      caption: "Red-lored Amazons (Amazona autumnalis) - Chocó canopy specialists",
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -12,12 +70,13 @@ export default function ChocoToucanBlogPost() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/">
-              <Image
+              <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
                 width={50}
                 height={50}
                 className="object-contain"
+                priority
               />
             </Link>
           </div>
@@ -61,7 +120,7 @@ export default function ChocoToucanBlogPost() {
             </div>
             <div className="flex items-center">
               <Calendar className="w-4 h-4 mr-2" />
-              October 22, 2024
+              May 22, 2025
             </div>
             <div className="flex items-center">
               <MapPin className="w-4 h-4 mr-2" />
@@ -73,26 +132,39 @@ export default function ChocoToucanBlogPost() {
 
         {/* Hero Image */}
         <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-          <Image
+          <OptimizedImage
             src="/images/yellow-throated-toucan-blog.jpg"
             alt="Yellow-throated Toucan (Ramphastos ambiguus) displaying its magnificent bill in the Chocó rainforest canopy"
             width={1200}
             height={675}
             className="object-cover w-full h-full"
+            priority
           />
           <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-            <p className="text-sm font-medium">Yellow-throated Toucan (Ramphastos ambiguus)</p>
+            <p className="text-sm font-medium">
+              <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip> (Ramphastos
+              ambiguus)
+            </p>
             <p className="text-xs opacity-90">Chocó rainforest flagship species</p>
           </div>
         </div>
+
+        {/* Audio Player for Toucan Calls */}
+        <AudioPlayer
+          src="/audio/yellow-throated-toucan-call.mp3"
+          title="Yellow-throated Toucan Dawn Chorus"
+          species="Ramphastos ambiguus"
+          className="mb-8"
+        />
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none">
           <p className="text-xl text-gray-700 leading-relaxed mb-8">
             The Biogeographic Chocó represents one of Earth's most extraordinary biodiversity hotspots—a narrow strip of
             Pacific rainforest that harbors more endemic species per square kilometer than almost anywhere else on the
-            planet. Our expedition into this green cathedral was guided by one magnificent species: the Yellow-throated
-            Toucan, whose presence signals the health of one of the world's most threatened ecosystems.
+            planet. Our expedition into this green cathedral was guided by one magnificent species: the{" "}
+            <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>, whose presence
+            signals the health of one of the world's most threatened ecosystems.
           </p>
 
           <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Chocó: A Biodiversity Supernova</h2>
@@ -128,21 +200,24 @@ export default function ChocoToucanBlogPost() {
 
           <div className="grid md:grid-cols-2 gap-8 my-8">
             <div>
-              <Image
+              <OptimizedImage
                 src="/images/collared-aracari.jpg"
                 alt="Collared Aracari (Pteroglossus torquatus) showing colorful plumage in rainforest understory"
                 width={400}
                 height={300}
                 className="rounded-lg shadow-lg object-cover w-full h-64"
               />
-              <p className="text-sm text-gray-600 mt-2 italic">Collared Aracari in the rainforest understory</p>
+              <p className="text-sm text-gray-600 mt-2 italic">
+                <SpeciesTooltip species={collaredAracariData}>Collared Aracari</SpeciesTooltip> in the rainforest
+                understory
+              </p>
             </div>
             <div className="flex flex-col justify-center">
               <p className="mb-4">
-                The Yellow-throated Toucan reigns as the Chocó's most iconic species, its massive bill serving as both a
-                foraging tool and a thermoregulatory device in the humid rainforest environment. These magnificent birds
-                play crucial ecological roles as seed dispersers, helping maintain the forest's incredible plant
-                diversity.
+                The <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip> reigns as
+                the Chocó's most iconic species, its massive bill serving as both a foraging tool and a thermoregulatory
+                device in the humid rainforest environment. These magnificent birds play crucial ecological roles as
+                seed dispersers, helping maintain the forest's incredible plant diversity.
               </p>
               <p>
                 Our first encounter came at dawn on our second day, when the distinctive yelping calls of a toucan pair
@@ -172,10 +247,11 @@ export default function ChocoToucanBlogPost() {
           <div className="grid md:grid-cols-2 gap-8 my-8">
             <div className="flex flex-col justify-center">
               <p className="mb-4">
-                Among the most spectacular discoveries was a family group of Green Honeycreepers, their brilliant blue
-                heads contrasting sharply with their emerald bodies as they moved through the canopy in search of nectar
-                and small insects. These birds exemplify the Chocó's evolutionary creativity—their specialized bills
-                perfectly adapted for accessing nectar from the region's abundant flowering plants.
+                Among the most spectacular discoveries was a family group of{" "}
+                <SpeciesTooltip species={greenHoneycreeperData}>Green Honeycreepers</SpeciesTooltip>, their brilliant
+                blue heads contrasting sharply with their emerald bodies as they moved through the canopy in search of
+                nectar and small insects. These birds exemplify the Chocó's evolutionary creativity—their specialized
+                bills perfectly adapted for accessing nectar from the region's abundant flowering plants.
               </p>
               <p>
                 The honeycreepers' feeding behavior revealed the intricate relationships between Chocó birds and plants.
@@ -184,14 +260,17 @@ export default function ChocoToucanBlogPost() {
               </p>
             </div>
             <div>
-              <Image
+              <OptimizedImage
                 src="/images/green-honeycreeper-blue.jpg"
                 alt="Green Honeycreeper (Chlorophanes spiza) male with brilliant turquoise head in Chocó rainforest"
                 width={400}
                 height={300}
                 className="rounded-lg shadow-lg object-cover w-full h-64"
               />
-              <p className="text-sm text-gray-600 mt-2 italic">Green Honeycreeper male in the Chocó canopy</p>
+              <p className="text-sm text-gray-600 mt-2 italic">
+                <SpeciesTooltip species={greenHoneycreeperData}>Green Honeycreeper</SpeciesTooltip> male in the Chocó
+                canopy
+              </p>
             </div>
           </div>
 
@@ -210,8 +289,9 @@ export default function ChocoToucanBlogPost() {
               <div>
                 <h3 className="font-bold text-red-900 mb-2">Conservation Crisis</h3>
                 <p className="text-red-800">
-                  Less than 25% of the original Chocó forest remains intact. Species like the Yellow-throated Toucan,
-                  which require large territories and continuous forest cover, are particularly vulnerable to habitat
+                  Less than 25% of the original Chocó forest remains intact. Species like the{" "}
+                  <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>, which
+                  require large territories and continuous forest cover, are particularly vulnerable to habitat
                   fragmentation. Protecting remaining forest corridors is critical for the survival of the region's
                   endemic species.
                 </p>
@@ -229,7 +309,7 @@ export default function ChocoToucanBlogPost() {
           <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Canopy's Hidden World</h2>
 
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden my-8 shadow-lg">
-            <Image
+            <OptimizedImage
               src="/images/red-lored-amazons-pair.jpg"
               alt="Red-lored Amazons (Amazona autumnalis) pair in Chocó rainforest canopy against blue sky"
               width={600}
@@ -237,7 +317,9 @@ export default function ChocoToucanBlogPost() {
               className="object-cover w-full h-full"
             />
             <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-              <p className="text-sm font-medium">Red-lored Amazons (Amazona autumnalis)</p>
+              <p className="text-sm font-medium">
+                <SpeciesTooltip species={redLoredAmazonData}>Red-lored Amazons</SpeciesTooltip> (Amazona autumnalis)
+              </p>
               <p className="text-xs opacity-90">Chocó canopy specialists</p>
             </div>
           </div>
@@ -245,9 +327,10 @@ export default function ChocoToucanBlogPost() {
           <p className="mb-6">
             Our canopy tower provided access to a world that few people ever experience—the aerial highways where
             toucans, parrots, and countless other species spend their lives. From this vantage point, we could observe
-            behaviors impossible to see from the ground: the intricate social interactions of Red-lored Amazon flocks,
-            the territorial displays of trogons, and the complex foraging strategies that allow multiple toucan species
-            to coexist in the same forest.
+            behaviors impossible to see from the ground: the intricate social interactions of{" "}
+            <SpeciesTooltip species={redLoredAmazonData}>Red-lored Amazon</SpeciesTooltip> flocks, the territorial
+            displays of trogons, and the complex foraging strategies that allow multiple toucan species to coexist in
+            the same forest.
           </p>
 
           <p className="mb-6">
@@ -261,22 +344,32 @@ export default function ChocoToucanBlogPost() {
             <h3 className="font-bold text-blue-900 mb-2">Chocó Species Highlights</h3>
             <ul className="text-blue-800 space-y-1">
               <li>
-                • <strong>Yellow-throated Toucan</strong> (<em>Ramphastos ambiguus</em>) - Flagship species
+                •{" "}
+                <strong>
+                  <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>
+                </strong>{" "}
+                (<em>Ramphastos ambiguus</em>) - Flagship species
               </li>
               <li>
-                • <strong>Collared Aracari</strong> (<em>Pteroglossus torquatus</em>) - Understory specialist
+                •{" "}
+                <strong>
+                  <SpeciesTooltip species={collaredAracariData}>Collared Aracari</SpeciesTooltip>
+                </strong>{" "}
+                (<em>Pteroglossus torquatus</em>) - Understory specialist
               </li>
               <li>
-                • <strong>Green Honeycreeper</strong> (<em>Chlorophanes spiza</em>) - Nectar specialist
+                •{" "}
+                <strong>
+                  <SpeciesTooltip species={greenHoneycreeperData}>Green Honeycreeper</SpeciesTooltip>
+                </strong>{" "}
+                (<em>Chlorophanes spiza</em>) - Nectar specialist
               </li>
               <li>
-                • <strong>Red-lored Amazon</strong> (<em>Amazona autumnalis</em>) - Canopy frugivore
-              </li>
-              <li>
-                • <strong>Chocó Vireo</strong> (<em>Vireo masteri</em>) - Regional endemic
-              </li>
-              <li>
-                • <strong>Beautiful Treerunner</strong> (<em>Margarornis bellulus</em>) - Chocó endemic
+                •{" "}
+                <strong>
+                  <SpeciesTooltip species={redLoredAmazonData}>Red-lored Amazon</SpeciesTooltip>
+                </strong>{" "}
+                (<em>Amazona autumnalis</em>) - Canopy frugivore
               </li>
             </ul>
           </div>
@@ -291,11 +384,16 @@ export default function ChocoToucanBlogPost() {
           </p>
 
           <p className="mb-6">
-            The Yellow-throated Toucan's portrait session became the expedition's highlight. After three days of patient
-            observation, we learned the birds' routine well enough to position ourselves at their favorite fruiting tree
-            just as the morning light reached optimal intensity. The resulting images captured not just the bird's
-            physical beauty, but the essence of the Chocó itself—vibrant, mysterious, and utterly irreplaceable.
+            The <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan's</SpeciesTooltip> portrait
+            session became the expedition's highlight. After three days of patient observation, we learned the birds'
+            routine well enough to position ourselves at their favorite fruiting tree just as the morning light reached
+            optimal intensity. The resulting images captured not just the bird's physical beauty, but the essence of the
+            Chocó itself—vibrant, mysterious, and utterly irreplaceable.
           </p>
+
+          {/* Image Gallery */}
+          <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Expedition Gallery</h3>
+          <ImageGallery images={galleryImages} className="mb-8" />
 
           <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">A Call to Action</h2>
 
@@ -307,9 +405,10 @@ export default function ChocoToucanBlogPost() {
           </p>
 
           <p className="mb-6">
-            The Yellow-throated Toucan, with its magnificent presence and ecological importance, serves as an ambassador
-            for this threatened ecosystem. Every sighting reminds us that we're witnessing something extraordinary and
-            fragile—a natural heritage that could disappear within our lifetimes without immediate conservation action.
+            The <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>, with its
+            magnificent presence and ecological importance, serves as an ambassador for this threatened ecosystem. Every
+            sighting reminds us that we're witnessing something extraordinary and fragile—a natural heritage that could
+            disappear within our lifetimes without immediate conservation action.
           </p>
 
           <p className="mb-8">
@@ -324,55 +423,6 @@ export default function ChocoToucanBlogPost() {
               portion of all tour proceeds supports Chocó forest protection and community development programs.
             </p>
           </div>
-
-          {/* New Content */}
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Choco Toucan Expedition</h2>
-
-          <div className="mb-5">
-            <span className="text-gray-500">Published: May 22, 2025</span>
-          </div>
-
-          <img
-            src="/images/choco-toucan.jpg" // Replace with your actual image path
-            alt="Choco Toucan"
-            className="w-full rounded-lg mb-5"
-          />
-
-          <p className="mb-5">
-            Embark on an unforgettable journey into the heart of the rainforest, where the elusive Choco Toucan reigns
-            supreme. This vibrant bird, with its striking plumage and playful demeanor, is a true marvel of nature.
-          </p>
-
-          <p className="mb-5">
-            Our expedition takes you deep into the Choco region, a biodiversity hotspot teeming with exotic flora and
-            fauna. Led by experienced local guides, you'll have the opportunity to witness the Choco Toucan in its
-            natural habitat, learn about its unique behavior, and contribute to its conservation.
-          </p>
-
-          <h2 className="text-2xl font-bold mb-3">What to Expect</h2>
-
-          <ul className="list-disc list-inside mb-5">
-            <li>Guided hikes through pristine rainforest trails</li>
-            <li>Expert insights into the Choco Toucan's ecology</li>
-            <li>Opportunities for birdwatching and wildlife photography</li>
-            <li>Immersive cultural experiences with local communities</li>
-            <li>Delicious, locally sourced meals</li>
-          </ul>
-
-          <h2 className="text-2xl font-bold mb-3">Conservation Efforts</h2>
-
-          <p className="mb-5">
-            A portion of the proceeds from this expedition will be donated to local conservation organizations working
-            to protect the Choco Toucan and its habitat. By joining us, you'll be directly contributing to the
-            preservation of this incredible species for future generations.
-          </p>
-
-          <h2 className="text-2xl font-bold mb-3">Book Your Adventure</h2>
-
-          <p>
-            Ready to experience the magic of the Choco Toucan Expedition? Contact us today to learn more and reserve
-            your spot!
-          </p>
         </div>
 
         {/* Related Links */}

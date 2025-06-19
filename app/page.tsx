@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import {
-  Star,
   Users,
   Leaf,
   Globe,
@@ -20,8 +19,11 @@ import {
   X,
   ChevronDown,
 } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
+import OptimizedImage from "@/components/optimized-image"
+import SpeciesTooltip from "@/components/species-tooltip"
+import TourComparison from "@/components/tour-comparison"
+import { CookieManagementButton } from "@/components/cookie-management-button"
 
 export default function AVESLandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -30,6 +32,30 @@ export default function AVESLandingPage() {
     window.scrollTo(0, 0)
   }, [])
 
+  const vermilionCardinalData = {
+    commonName: "Vermilion Cardinal",
+    scientificName: "Cardinalis phoeniceus",
+    spanishName: "Cardenal Guajiro",
+    ebirdCode: "vercar1",
+    description: "Endemic to northern Colombia and Venezuela, known as Ishuu in Wayuu language",
+  }
+
+  const greenHermitData = {
+    commonName: "Green Hermit",
+    scientificName: "Phaethornis guy",
+    spanishName: "Colibrí Ermitaño Verde",
+    ebirdCode: "greher1",
+    description: "Large hummingbird specialist of cloud forest environments",
+  }
+
+  const maskedTrogonData = {
+    commonName: "Masked Trogon",
+    scientificName: "Trogon personatus",
+    spanishName: "Trogón Enmascarado",
+    ebirdCode: "mastro1",
+    description: "Brilliant red-breasted cloud forest jewel",
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -37,12 +63,13 @@ export default function AVESLandingPage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/">
-              <Image
+              <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
                 width={50}
                 height={50}
                 className="object-contain"
+                priority
               />
             </Link>
           </div>
@@ -295,13 +322,14 @@ export default function AVESLandingPage() {
 
             <div className="relative">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
+                <OptimizedImage
                   src="/images/cardinal-guajiro.jpg"
                   alt="Vermilion Cardinal - striking red bird with black face mask, known as Ishuu in Wayuu language, representing the cultural connection between indigenous communities and Colombia's avian diversity"
                   width={480}
                   height={600}
                   className="object-cover w-full h-full"
                   style={{ objectPosition: "center 20%" }}
+                  priority
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
@@ -315,7 +343,9 @@ export default function AVESLandingPage() {
                     <Award className="w-6 h-6 text-emerald-600" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900">Vermilion Cardinal</div>
+                    <div className="font-semibold text-gray-900">
+                      <SpeciesTooltip species={vermilionCardinalData}>Vermilion Cardinal</SpeciesTooltip>
+                    </div>
                     <div className="text-sm text-gray-600 italic">Cardinalis phoeniceus</div>
                     <div className="text-xs text-emerald-600">
                       Ishuu (Wayuu) • Cardenal Guajiro (Spanish) • Caribbean Coast Endemic • View on eBird →
@@ -503,8 +533,22 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Why Colombia Section */}
+      {/* Tour Comparison Section */}
       <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Compare Our Tours</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Not sure which tour is right for you? Use our comparison tool to explore the differences and find your
+              perfect Colombian birding adventure.
+            </p>
+          </div>
+          <TourComparison />
+        </div>
+      </section>
+
+      {/* Why Colombia Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -518,20 +562,20 @@ export default function AVESLandingPage() {
               </p>
 
               <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="text-center p-4 bg-emerald-50 rounded-lg">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">1,900+</div>
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                  <div className="text-3xl font-bold text-emerald-600 mb-1">1,900+</div>
                   <div className="text-sm text-gray-700">Bird Species</div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 rounded-lg">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">200+</div>
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                  <div className="text-3xl font-bold text-emerald-600 mb-1">200+</div>
                   <div className="text-sm text-gray-700">Endemic Species</div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 rounded-lg">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">10</div>
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                  <div className="text-3xl font-bold text-emerald-600 mb-1">10</div>
                   <div className="text-sm text-gray-700">Bioregions</div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 rounded-lg">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">85+</div>
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                  <div className="text-3xl font-bold text-emerald-600 mb-1">85+</div>
                   <div className="text-sm text-gray-700">Hummingbird Species</div>
                 </div>
               </div>
@@ -546,7 +590,7 @@ export default function AVESLandingPage() {
 
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
+                <OptimizedImage
                   src="/images/green-hermit-hummingbird.jpg"
                   alt="Green Hermit Hummingbird - large emerald-green hummingbird with curved bill and white-tipped tail, known as Colibrí Ermitaño Verde in Spanish, representing Colombia's incredible hummingbird diversity with over 85 species"
                   width={600}
@@ -566,7 +610,9 @@ export default function AVESLandingPage() {
                     <Globe className="w-6 h-6 text-emerald-600" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900">Green Hermit</div>
+                    <div className="font-semibold text-gray-900">
+                      <SpeciesTooltip species={greenHermitData}>Green Hermit</SpeciesTooltip>
+                    </div>
                     <div className="text-sm text-gray-600 italic">Phaethornis guy</div>
                     <div className="text-xs text-emerald-600">
                       Colibrí Ermitaño Verde (Spanish) • Cloud Forest Specialist • View on eBird →
@@ -651,12 +697,12 @@ export default function AVESLandingPage() {
                 </div>
               </div>
               <div className="aspect-square rounded-xl overflow-hidden relative">
-                <Image
+                <OptimizedImage
                   src="/images/masked-trogon-male.jpg"
-                  alt="Masked Trogon male - brilliant red-breasted bird with black head and barred black-and-white tail, known as Trogón Enmascarado in Spanish, representing cloud forest conservation efforts in Colombia's montane ecosystems"
+                  alt="Masked Trogon representing cloud forest conservation efforts"
                   width={400}
                   height={400}
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   style={{ objectPosition: "center 25%" }}
                 />
                 <div className="absolute -bottom-4 -right-4 bg-white rounded-xl p-3 shadow-lg">
@@ -667,10 +713,12 @@ export default function AVESLandingPage() {
                     className="flex items-center space-x-2 hover:bg-gray-50 transition-colors rounded-lg p-1 -m-1"
                   >
                     <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <Star className="w-4 h-4 text-emerald-600" />
+                      <Award className="w-4 h-4 text-emerald-600" />
                     </div>
                     <div className="text-xs">
-                      <div className="font-semibold text-gray-900">Masked Trogon</div>
+                      <div className="font-semibold text-gray-900">
+                        <SpeciesTooltip species={maskedTrogonData}>Masked Trogon</SpeciesTooltip>
+                      </div>
                       <div className="text-gray-600 italic">Trogon personatus</div>
                       <div className="text-emerald-600">
                         Trogón Enmascarado (Spanish) • Cloud Forest Jewel • eBird →
@@ -681,202 +729,6 @@ export default function AVESLandingPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* About AVES Section */}
-      <section id="about" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative">
-              <Image
-                src="/images/chestnut-crowned-antpitta.jpg"
-                alt="Chestnut-crowned Antpitta - secretive ground-dwelling bird with distinctive rufous crown and heavily streaked underparts, known as Tororoi Coronirrufo in Spanish, representing AVES' scientific approach to finding elusive cloud forest specialists"
-                width={600}
-                height={450}
-                className="object-cover w-full h-full"
-                style={{ objectPosition: "center 30%" }}
-              />
-              <div className="absolute -top-4 -left-4 bg-white rounded-xl p-3 shadow-lg">
-                <a
-                  href="https://ebird.org/species/chcant2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 hover:bg-gray-50 transition-colors rounded-lg p-1 -m-1"
-                >
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                    <Award className="w-4 h-4 text-red-600" />
-                  </div>
-                  <div className="text-xs">
-                    <div className="font-semibold text-gray-900">Chestnut-crowned Antpitta</div>
-                    <div className="text-gray-600 italic">Grallaria ruficapilla</div>
-                    <div className="text-red-600">
-                      Tororoi Coronirrufo (Spanish) • Cloud Forest Specialist • eBird →
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 mb-4">About AVES</Badge>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Pioneering Sustainable Birding Tourism</h2>
-              <p className="text-lg text-gray-600 mb-6">
-                AVES Birdwatching Tours was founded with a simple yet powerful vision: to create transformative birding
-                experiences that showcase Colombia's incredible biodiversity while directly contributing to its
-                conservation for future generations.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mr-3 mt-1" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Conservation-First Approach</div>
-                    <div className="text-gray-600">
-                      Every tour directly funds habitat protection and community development
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mr-3 mt-1" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Expert Local Partnerships</div>
-                    <div className="text-gray-600">
-                      Collaborating with Colombia's top ornithologists and conservation organizations
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mr-3 mt-1" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Small Group Excellence</div>
-                    <div className="text-gray-600">
-                      Maximum 4 guests per tour for personalized, low-impact experiences
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mr-3 mt-1" />
-                  <div>
-                    <div className="font-semibold text-gray-900">B Corp Standards</div>
-                    <div className="text-gray-600">
-                      Committed to the highest levels of social and environmental accountability
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-emerald-50 rounded-lg p-6 mb-8">
-                <h3 className="font-semibold text-gray-900 mb-2">Our Mission</h3>
-                <p className="text-gray-700 italic">
-                  "To deliver immersive, scientifically enriched birding experiences that transparently finance
-                  ecosystem restoration, uplift local communities, and foster lasting environmental stewardship."
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
-                  <div className="text-2xl font-bold text-emerald-600 mb-1">2025</div>
-                  <div className="text-sm text-gray-600">Founded</div>
-                </div>
-                <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
-                  <div className="text-2xl font-bold text-emerald-600 mb-1">100%</div>
-                  <div className="text-sm text-gray-600">Carbon Neutral</div>
-                </div>
-              </div>
-
-              <Link href="/about">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
-                >
-                  Learn About Our Impact
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Guests Say</h2>
-            <p className="text-xl text-gray-600">Hear from birders who've experienced Colombia's magic with AVES</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 border-0 shadow-lg">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <blockquote className="text-gray-700 mb-6">
-                "As experienced birders, we were impressed by the quality of guides and the exclusive access to pristine
-                habitats. The conservation focus made our trip even more meaningful."
-              </blockquote>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
-                <div>
-                  <div className="font-semibold text-gray-900">Lisa & Peter</div>
-                  <div className="text-sm text-gray-600">Pender Island, BC</div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-8 border-0 shadow-lg">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <blockquote className="text-gray-700 mb-6">
-                "The small group size and personalized attention made all the difference. Every detail was perfectly
-                planned, and the eco-lodges were exceptional."
-              </blockquote>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
-                <div>
-                  <div className="font-semibold text-gray-900">Royann and Sylvain</div>
-                  <div className="text-sm text-gray-600">Vancouver Island, BC</div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-emerald-600">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">Ready for Your Colombian Birding Adventure?</h2>
-          <p className="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
-            Join us for an exclusive, conservation-focused birding experience in the world's most biodiverse country.
-            Limited to 4 guests per tour for the ultimate personalized adventure.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link href="/shopping">
-              <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
-                Book Your Journey Now
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <a href="https://calendly.com/aves-tours/consultation" target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4"
-              >
-                Schedule a Consultation
-              </Button>
-            </a>
-          </div>
-
-          <p className="text-emerald-100 text-sm">Tours launching Q1 2026 • Early bird pricing available</p>
         </div>
       </section>
 
@@ -995,7 +847,7 @@ export default function AVESLandingPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Image
+                <OptimizedImage
                   src="/images/aves-logo.png"
                   alt="AVES Birdwatching Tours Logo"
                   width={40}
@@ -1023,22 +875,22 @@ export default function AVESLandingPage() {
               <h4 className="font-semibold mb-4">Tours</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/tours/adventure" className="hover:text-white transition-colors">
+                  <Link href="/shopping?preset=adventure" className="hover:text-white transition-colors">
                     🍃 AVES Adventure
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tours/vision" className="hover:text-white transition-colors">
+                  <Link href="/shopping?preset=vision" className="hover:text-white transition-colors">
                     🪶 AVES Vision
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tours/elevate" className="hover:text-white transition-colors">
+                  <Link href="/shopping?preset=elevate" className="hover:text-white transition-colors">
                     🌼 AVES Elevate
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tours/souls" className="hover:text-white transition-colors">
+                  <Link href="/shopping?preset=souls" className="hover:text-white transition-colors">
                     🍓 AVES Souls
                   </Link>
                 </li>
@@ -1109,9 +961,11 @@ export default function AVESLandingPage() {
               <Link href="/terms" className="hover:text-white transition-colors">
                 📋 Terms of Service
               </Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">
-                🍪 Cookie Policy
-              </Link>
+              <CookieManagementButton
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white transition-colors p-0 h-auto font-normal"
+              />
             </div>
           </div>
         </div>

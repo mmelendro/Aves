@@ -68,7 +68,7 @@ export default function AboutPage() {
             <Link href="/#conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
               Conservation
             </Link>
-            <Link href="/#contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
+            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
               Contact
             </Link>
           </nav>
@@ -142,7 +142,7 @@ export default function AboutPage() {
                 Conservation
               </Link>
               <Link
-                href="/#contact"
+                href="/contact"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -423,7 +423,7 @@ export default function AboutPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#contact" className="hover:text-white transition-colors">
+                  <Link href="/contact" className="hover:text-white transition-colors">
                     📞 Contact
                   </Link>
                 </li>

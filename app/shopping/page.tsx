@@ -267,7 +267,7 @@ Looking forward to hearing from you!
             <Link href="/#conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
               Conservation
             </Link>
-            <Link href="/#contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
+            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
               Contact
             </Link>
           </nav>
@@ -341,7 +341,7 @@ Looking forward to hearing from you!
                 Conservation
               </Link>
               <Link
-                href="/#contact"
+                href="/contact"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -755,7 +755,7 @@ Looking forward to hearing from you!
                         <Info className="w-4 h-4 mr-1" />
                         Need help?
                       </div>
-                      <Link href="/#contact" className="text-emerald-600 hover:text-emerald-700 underline">
+                      <Link href="/contact" className="text-emerald-600 hover:text-emerald-700 underline">
                         Contact our team for custom itineraries
                       </Link>
                     </div>

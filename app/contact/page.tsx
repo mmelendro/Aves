@@ -393,17 +393,17 @@ export default function ContactPage() {
                     <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity">↑</span>
                   </Link>
                 </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    📝 Blog
-                  </Link>
-                </li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    📝 Blog
+                  </Link>
+                </li>
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
                     🐦 Bird Guide

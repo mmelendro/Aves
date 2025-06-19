@@ -45,10 +45,7 @@ export default function BCorpPage() {
             <Link href="/blog" className="text-gray-700 hover:text-emerald-600 transition-colors">
               Blog
             </Link>
-            <Link href="/#conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Conservation
-            </Link>
-            <Link href="/#contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
+            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
               Contact
             </Link>
           </nav>
@@ -103,14 +100,7 @@ export default function BCorpPage() {
                 Blog
               </Link>
               <Link
-                href="/#conservation"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Conservation
-              </Link>
-              <Link
-                href="/#contact"
+                href="/contact"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -687,43 +677,12 @@ export default function BCorpPage() {
                     📝 Blog
                   </Link>
                 </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    🐦 Bird Guide
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    ✈️ Travel Tips
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#contact" className="hover:text-white transition-colors">
+                  <Link href="/contact" className="hover:text-white transition-colors">
                     📞 Contact
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
-            <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
-              <Link href="/privacy" className="hover:text-white transition-colors">
-                🔒 Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
-                📋 Terms of Service
-              </Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">
-                🍪 Cookie Policy
-              </Link>
             </div>
           </div>
         </div>

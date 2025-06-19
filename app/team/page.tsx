@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Calendar, Globe, Instagram, Menu, X } from "lucide-react"
+import { MapPin, Calendar, Globe, Instagram, Menu, X, Users } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -53,12 +53,17 @@ export default function TeamPage() {
             </Link>
           </nav>
 
+          {/* Desktop CTA Button */}
+          <div className="hidden md:block">
+            <Link href="/shopping">
+              <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Adventure</Button>
+            </Link>
+          </div>
+
           {/* Mobile Menu Button */}
           <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-
-          <Button className="hidden md:block bg-emerald-600 hover:bg-emerald-700">Book Your Adventure</Button>
         </div>
 
         {/* Mobile Navigation */}
@@ -449,7 +454,7 @@ export default function TeamPage() {
               <Button className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-3">Book Your Adventure</Button>
               <Button
                 variant="outline"
-                className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white text-lg px-8 py-3"
+                className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-3"
               >
                 <Link href="/#contact">Contact Our Team</Link>
               </Button>
@@ -492,22 +497,22 @@ export default function TeamPage() {
               <h4 className="font-semibold mb-4">Tours</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/tours/adventure" className="hover:text-white transition-colors flex items-center">
+                  <Link href="/tours/adventure" className="hover:text-white transition-colors">
                     🍃 AVES Adventure
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tours/vision" className="hover:text-white transition-colors flex items-center">
+                  <Link href="/tours/vision" className="hover:text-white transition-colors">
                     🪶 AVES Vision
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tours/elevate" className="hover:text-white transition-colors flex items-center">
+                  <Link href="/tours/elevate" className="hover:text-white transition-colors">
                     🌼 AVES Elevate
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tours/souls" className="hover:text-white transition-colors flex items-center">
+                  <Link href="/tours/souls" className="hover:text-white transition-colors">
                     🍓 AVES Souls
                   </Link>
                 </li>
@@ -523,18 +528,19 @@ export default function TeamPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/team" className="hover:text-white transition-colors">
-                    👥 Our Team
+                  <Link href="/team" className="hover:text-white transition-colors flex items-center">
+                    <Users className="w-4 h-4 mr-2" />
+                    Our Team
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#conservation" className="hover:text-white transition-colors">
+                  <Link href="/conservation" className="hover:text-white transition-colors">
                     🌱 Conservation
                   </Link>
                 </li>
                 <li>
                   <Link href="/about/b-corp" className="hover:text-white transition-colors flex items-center group">
-                    <span className="mr-1">🌱</span>B Corp Journey & Sustainability
+                    <span className="mr-1 text-xs font-bold bg-white text-gray-900 px-1 rounded">B</span>B Corp Journey
                     <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity">↑</span>
                   </Link>
                 </li>
@@ -545,7 +551,6 @@ export default function TeamPage() {
                 </li>
               </ul>
             </div>
-
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-400">
@@ -555,31 +560,11 @@ export default function TeamPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    ✈️ Travel Tips
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#contact" className="hover:text-white transition-colors">
+                  <Link href="/contact" className="hover:text-white transition-colors">
                     📞 Contact
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
-            <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
-              <Link href="/privacy" className="hover:text-white transition-colors">
-                🔒 Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
-                📋 Terms of Service
-              </Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">
-                🍪 Cookie Policy
-              </Link>
             </div>
           </div>
         </div>
