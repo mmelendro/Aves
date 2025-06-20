@@ -130,7 +130,7 @@ export default function CheckoutPage() {
               alt="AVES Birdwatching Tours Logo"
               width={40}
               height={40}
-              className="object-contain"
+              className="w-10 h-10 object-contain"
             />
             <span className="text-xl font-bold text-gray-900">AVES</span>
           </Link>

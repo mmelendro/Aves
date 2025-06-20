@@ -23,9 +23,9 @@ export default function TermsPage() {
               <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
-                width={50}
-                height={50}
-                className="object-contain"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
                 priority
               />
             </Link>

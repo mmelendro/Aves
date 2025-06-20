@@ -78,7 +78,11 @@ export default function AVESLandingPage() {
           <nav className="hidden md:flex items-center space-x-8">
             {/* Tours Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+              <button
+                className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
                 Tours
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
@@ -959,22 +963,22 @@ export default function AVESLandingPage() {
               <h4 className="font-semibold mb-4">Tours</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/shopping?preset=adventure" className="hover:text-white transition-colors">
+                  <Link href="/tours/adventure" className="hover:text-white transition-colors">
                     🍃 AVES Adventure
                   </Link>
                 </li>
                 <li>
-                  <Link href="/shopping?preset=vision" className="hover:text-white transition-colors">
+                  <Link href="/tours/vision" className="hover:text-white transition-colors">
                     🪶 AVES Vision
                   </Link>
                 </li>
                 <li>
-                  <Link href="/shopping?preset=elevate" className="hover:text-white transition-colors">
+                  <Link href="/tours/elevate" className="hover:text-white transition-colors">
                     🌼 AVES Elevate
                   </Link>
                 </li>
                 <li>
-                  <Link href="/shopping?preset=souls" className="hover:text-white transition-colors">
+                  <Link href="/tours/souls" className="hover:text-white transition-colors">
                     🍓 AVES Souls
                   </Link>
                 </li>
