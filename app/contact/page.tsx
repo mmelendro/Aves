@@ -1,25 +1,232 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, ArrowRight, Menu, X, ChevronDown, Users } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { NavigationHeader } from "@/components/navigation-header"
 
 export default function ContactPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Header */}
-      <NavigationHeader currentPage="/contact" />
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Link href="/">
+              <Image
+                src="/images/aves-logo.png"
+                alt="AVES Birdwatching Tours Logo"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {/* Tours Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+                Tours
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/tours"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
+                >
+                  All Tours Overview
+                </Link>
+                <Link
+                  href="/tours/adventure"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🍃 AVES Adventure
+                </Link>
+                <Link
+                  href="/tours/vision"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🪶 AVES Vision
+                </Link>
+                <Link
+                  href="/tours/elevate"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🌼 AVES Elevate
+                </Link>
+                <Link
+                  href="/tours/souls"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🍓 AVES Souls
+                </Link>
+              </div>
+            </div>
+            {/* About Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+                About
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/about"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  About AVES
+                </Link>
+                <Link
+                  href="/team"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  Our Team
+                </Link>
+              </div>
+            </div>
+            <Link href="/about/b-corp" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              B Corp Journey
+            </Link>
+            <Link href="/blog" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              Blog
+            </Link>
+            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              Conservation
+            </Link>
+            <Link href="/contact" className="text-emerald-600 font-medium transition-colors">
+              Contact
+            </Link>
+          </nav>
+
+          {/* Desktop CTA Button */}
+          <div className="hidden md:block">
+            <Link href="/shopping">
+              <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t">
+            <nav className="container mx-auto px-4 py-4 space-y-4">
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">Tours</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/tours"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    All Tours Overview
+                  </Link>
+                  <Link
+                    href="/tours/adventure"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🍃 AVES Adventure
+                  </Link>
+                  <Link
+                    href="/tours/vision"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🪶 AVES Vision
+                  </Link>
+                  <Link
+                    href="/tours/elevate"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🌼 AVES Elevate
+                  </Link>
+                  <Link
+                    href="/tours/souls"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🍓 AVES Souls
+                  </Link>
+                </div>
+              </div>
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">About</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/about"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    About AVES
+                  </Link>
+                  <Link
+                    href="/team"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Team
+                  </Link>
+                </div>
+              </div>
+              <Link
+                href="/about/b-corp"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                B Corp Journey
+              </Link>
+              <Link
+                href="/blog"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/conservation"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Conservation
+              </Link>
+              <Link
+                href="/contact"
+                className="block text-emerald-600 font-medium transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="pt-4">
+                <Link href="/shopping">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
+                </Link>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
@@ -101,70 +308,74 @@ export default function ContactPage() {
             </div>
 
             <Card className="p-8 border-0 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                    <Input placeholder="Your first name" />
+              <CardHeader className="px-0 pt-0">
+                <CardTitle className="text-2xl font-bold text-gray-900">Send Us a Message</CardTitle>
+              </CardHeader>
+              <CardContent className="px-0 pb-0">
+                <form className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                      <Input placeholder="Your first name" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                      <Input placeholder="Your last name" />
+                    </div>
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                    <Input placeholder="Your last name" />
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <Input type="email" placeholder="your.email@example.com" />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <Input type="email" placeholder="your.email@example.com" />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
+                    <Input placeholder="+1 (555) 123-4567" />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
-                  <Input placeholder="+1 (555) 123-4567" />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Interested Tour Type</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option>Select a tour type</option>
+                      <option>AVES Adventure</option>
+                      <option>AVES Vision</option>
+                      <option>AVES Elevate</option>
+                      <option>AVES Souls</option>
+                      <option>Custom Itinerary</option>
+                      <option>Not sure yet</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Interested Tour Type</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Select a tour type</option>
-                    <option>AVES Adventure</option>
-                    <option>AVES Vision</option>
-                    <option>AVES Elevate</option>
-                    <option>AVES Souls</option>
-                    <option>Custom Itinerary</option>
-                    <option>Not sure yet</option>
-                  </select>
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Bioregions of Interest</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option>Select bioregion(s)</option>
+                      <option>Quetzal Highlands (Western Andes)</option>
+                      <option>Hummingbird Haven (Central Andes)</option>
+                      <option>Páramo Paradise (Eastern Andes)</option>
+                      <option>Wetland Wonders (Llanos)</option>
+                      <option>Canopy Kingdom (Amazon)</option>
+                      <option>Endemic Empire (Biogeographic Chocó)</option>
+                      <option>Coastal Crown (Caribbean + Sierra Nevada)</option>
+                      <option>Valley Voyager (Cauca Valley)</option>
+                      <option>River Realm (Magdalena Valley)</option>
+                      <option>Massif Majesty (Macizo Colombiano)</option>
+                      <option>Multiple regions</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Bioregions of Interest</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Select bioregion(s)</option>
-                    <option>Quetzal Highlands (Western Andes)</option>
-                    <option>Hummingbird Haven (Central Andes)</option>
-                    <option>Páramo Paradise (Eastern Andes)</option>
-                    <option>Wetland Wonders (Llanos)</option>
-                    <option>Canopy Kingdom (Amazon)</option>
-                    <option>Endemic Empire (Biogeographic Chocó)</option>
-                    <option>Coastal Crown (Caribbean + Sierra Nevada)</option>
-                    <option>Valley Voyager (Cauca Valley)</option>
-                    <option>River Realm (Magdalena Valley)</option>
-                    <option>Massif Majesty (Macizo Colombiano)</option>
-                    <option>Multiple regions</option>
-                  </select>
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <Textarea
+                      rows={4}
+                      placeholder="Tell us about your birding interests, travel dates, group size, and any questions you have..."
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                  <Textarea
-                    rows={4}
-                    placeholder="Tell us about your birding interests, travel dates, group size, and any questions you have..."
-                  />
-                </div>
-
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Send Message</Button>
-              </form>
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Send Message</Button>
+                </form>
+              </CardContent>
             </Card>
           </div>
         </div>
@@ -205,22 +416,22 @@ export default function ContactPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/tours/adventure" className="hover:text-white transition-colors">
-                    AVES Adventure
+                    🍃 AVES Adventure
                   </Link>
                 </li>
                 <li>
                   <Link href="/tours/vision" className="hover:text-white transition-colors">
-                    AVES Vision
+                    🪶 AVES Vision
                   </Link>
                 </li>
                 <li>
                   <Link href="/tours/elevate" className="hover:text-white transition-colors">
-                    AVES Elevate
+                    🌼 AVES Elevate
                   </Link>
                 </li>
                 <li>
                   <Link href="/tours/souls" className="hover:text-white transition-colors">
-                    AVES Souls
+                    🍓 AVES Souls
                   </Link>
                 </li>
               </ul>
@@ -230,24 +441,25 @@ export default function ContactPage() {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="#about" className="hover:text-white transition-colors">
-                    About AVES
+                  <Link href="/about" className="hover:text-white transition-colors">
+                    🦅 About AVES
                   </Link>
                 </li>
                 <li>
-                  <Link href="#conservation" className="hover:text-white transition-colors">
-                    Conservation
+                  <Link href="/team" className="hover:text-white transition-colors flex items-center">
+                    <Users className="w-4 h-4 mr-2" />
+                    Our Team
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#conservation" className="hover:text-white transition-colors flex items-center group">
-                    <span className="mr-1">🌱</span>B Corp Journey & Sustainability
+                  <Link href="/conservation" className="hover:text-white transition-colors">
+                    🌱 Conservation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about/b-corp" className="hover:text-white transition-colors flex items-center group">
+                    <span className="mr-1 text-xs font-bold bg-white text-gray-900 px-1 rounded">B</span>B Corp Journey
                     <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity">↑</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    Blog
                   </Link>
                 </li>
               </ul>
@@ -258,17 +470,17 @@ export default function ContactPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
-                    Bird Guide
+                    🐦 Bird Guide
                   </Link>
                 </li>
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
-                    Travel Tips
+                    ✈️ Travel Tips
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact
+                    📞 Contact
                   </Link>
                 </li>
               </ul>
@@ -279,13 +491,13 @@ export default function ContactPage() {
             <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
             <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
               <Link href="/privacy" className="hover:text-white transition-colors">
-                Privacy Policy
+                🔒 Privacy Policy
               </Link>
               <Link href="/terms" className="hover:text-white transition-colors">
-                Terms of Service
+                📋 Terms of Service
               </Link>
               <Link href="/cookies" className="hover:text-white transition-colors">
-                Cookie Policy
+                🍪 Cookie Policy
               </Link>
             </div>
           </div>

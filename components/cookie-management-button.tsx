@@ -75,6 +75,3 @@ export function CookieManagementLink({
     </button>
   )
 }
-
-// Add this line at the very end of the file, after the CookieManagementLink component
-export default CookieManagementButton

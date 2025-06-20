@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Users, Globe, Award, ArrowRight, CheckCircle, Mail, Phone, MapPin } from "lucide-react"
+import { Users, Leaf, Globe, Award, ArrowRight, CheckCircle, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import SpeciesTooltip from "@/components/species-tooltip"
@@ -395,6 +395,113 @@ export default function AVESLandingPage() {
                     </div>
                   </div>
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Conservation Impact Section */}
+      <section id="conservation" className="py-20 bg-emerald-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌱 Conservation Impact</Badge>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Travel That Makes a Difference</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Every AVES tour directly supports habitat conservation and local communities. We're committed to becoming
+              the first B Corp certified birding company in Colombia.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <Card className="text-center p-8 border-0 shadow-lg">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Leaf className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Carbon Neutral Tours</h3>
+              <p className="text-gray-600">
+                All tours operate with full carbon neutrality, with offsets reinvested in critical bird habitat
+                preservation projects.
+              </p>
+            </Card>
+
+            <Card className="text-center p-8 border-0 shadow-lg">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Community Support</h3>
+              <p className="text-gray-600">
+                We partner with local communities, providing fair employment and supporting community-managed
+                conservation initiatives.
+              </p>
+            </Card>
+
+            <Card className="text-center p-8 border-0 shadow-lg">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Habitat Protection</h3>
+              <p className="text-gray-600">
+                10% of net profits fund our Conservation Endowment Trust, dedicated to permanent habitat restoration and
+                protection.
+              </p>
+            </Card>
+          </div>
+
+          <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Pursuing B Corp Certification</h3>
+                <p className="text-gray-600 mb-6">
+                  AVES is committed to meeting the highest standards of social and environmental responsibility. We're
+                  working toward B Corp certification, joining BirdsChile as only the second birding-focused B Corp
+                  globally.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
+                    <span className="text-gray-700">Transparent impact reporting</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
+                    <span className="text-gray-700">Stakeholder governance model</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
+                    <span className="text-gray-700">Environmental accountability</span>
+                  </div>
+                </div>
+              </div>
+              <div className="aspect-square rounded-xl overflow-hidden relative">
+                <OptimizedImage
+                  src="/images/masked-trogon-male.jpg"
+                  alt="Masked Trogon representing cloud forest conservation efforts"
+                  width={400}
+                  height={400}
+                  className="object-contain w-full h-full"
+                  style={{ objectPosition: "center 25%" }}
+                />
+                <div className="absolute -bottom-4 -right-4 bg-white rounded-xl p-3 shadow-lg">
+                  <a
+                    href="https://ebird.org/species/mastro1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 hover:bg-gray-50 transition-colors rounded-lg p-1 -m-1"
+                  >
+                    <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                      <Award className="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <div className="text-xs">
+                      <div className="font-semibold text-gray-900">
+                        <SpeciesTooltip species={maskedTrogonData}>Masked Trogon</SpeciesTooltip>
+                      </div>
+                      <div className="text-gray-600 italic">Trogon personatus</div>
+                      <div className="text-emerald-600">
+                        Trogón Enmascarado (Spanish) • Cloud Forest Jewel • eBird →
+                      </div>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

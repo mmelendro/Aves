@@ -1,14 +1,15 @@
 "use client"
 
-import { NavigationHeader } from "@/components/navigation-header"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, User, MapPin, ArrowRight } from "lucide-react"
+import { Calendar, User, MapPin, ArrowRight, Menu, X, ChevronDown } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function BlogPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const blogPosts = [
     {
       id: "hummingbird-vision-journey",
@@ -77,8 +78,205 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Header */}
-      <NavigationHeader currentPage="/blog" />
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Link href="/">
+              <Image
+                src="/images/aves-logo.png"
+                alt="AVES Birdwatching Tours Logo"
+                width={50}
+                height={50}
+                className="object-contain"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {/* Tours Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+                Tours
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/tours"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
+                >
+                  All Tours Overview
+                </Link>
+                <Link
+                  href="/tours/adventure"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🍃 AVES Adventure
+                </Link>
+                <Link
+                  href="/tours/vision"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🪶 AVES Vision
+                </Link>
+                <Link
+                  href="/tours/elevate"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🌼 AVES Elevate
+                </Link>
+                <Link
+                  href="/tours/souls"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  🍓 AVES Souls
+                </Link>
+              </div>
+            </div>
+            {/* About Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+                About
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/about"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  About AVES
+                </Link>
+                <Link
+                  href="/team"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  Our Team
+                </Link>
+              </div>
+            </div>
+            <Link href="/about/b-corp" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              B Corp Journey
+            </Link>
+            <Link href="/blog" className="text-emerald-600 font-semibold">
+              Blog
+            </Link>
+            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              Conservation
+            </Link>
+            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
+              Contact
+            </Link>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+
+          <Button className="hidden md:block bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t">
+            <nav className="container mx-auto px-4 py-4 space-y-4">
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">Tours</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/tours"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    All Tours Overview
+                  </Link>
+                  <Link
+                    href="/tours/adventure"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🍃 AVES Adventure
+                  </Link>
+                  <Link
+                    href="/tours/vision"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🪶 AVES Vision
+                  </Link>
+                  <Link
+                    href="/tours/elevate"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🌼 AVES Elevate
+                  </Link>
+                  <Link
+                    href="/tours/souls"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    🍓 AVES Souls
+                  </Link>
+                </div>
+              </div>
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">About</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/about"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    About AVES
+                  </Link>
+                  <Link
+                    href="/team"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Our Team
+                  </Link>
+                </div>
+              </div>
+              <Link
+                href="/about/b-corp"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                B Corp Journey
+              </Link>
+              <Link
+                href="/blog"
+                className="block text-emerald-600 font-semibold py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/conservation"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Conservation
+              </Link>
+              <Link
+                href="/contact"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="pt-4">
+                <Link href="/shopping">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 mt-4">Book Your Journey</Button>
+                </Link>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
