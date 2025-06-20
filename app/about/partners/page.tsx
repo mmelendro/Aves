@@ -1,16 +1,77 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Menu, X, ChevronDown, Shield, Settings, Eye, Target, Users } from "lucide-react"
+import { Users, Leaf, Globe, ArrowRight, Menu, X, ChevronDown, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import { CookieManagementButton } from "@/components/cookie-management-button"
 
-export default function CookiesPage() {
+export default function PartnersPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  const partners = [
+    {
+      id: "proaves",
+      name: "Fundación ProAves",
+      logo: "/images/partners/proaves-logo.png",
+      description:
+        "Colombia's leading bird conservation organization, protecting over 1 million acres of critical habitat. ProAves operates the renowned El Dorado Nature Reserve in the Sierra Nevada de Santa Marta, home to 22 endemic bird species and our flagship conservation partnership.",
+      website: "https://www.proaves.org",
+      category: "Conservation Foundation",
+    },
+    {
+      id: "el-dorado",
+      name: "El Dorado Nature Reserve",
+      logo: "/images/partners/el-dorado-logo.png",
+      description:
+        "An award-winning ecolodge and research station in the Sierra Nevada de Santa Marta. This unique partnership offers unparalleled access to endemic species while directly funding habitat protection and local community development through sustainable tourism.",
+      website: "https://www.proaves.org/en/el-dorado-nature-reserve/",
+      category: "Ecolodge & Research Station",
+    },
+    {
+      id: "choco-lodge",
+      name: "Chocó Lodge",
+      logo: "/images/partners/choco-lodge-logo.png",
+      description:
+        "A community-owned ecolodge in the heart of the Chocó bioregion, one of the world's most biodiverse hotspots. Our partnership supports local Afro-Colombian communities while providing access to over 400 bird species in pristine rainforest habitat.",
+      website: "https://www.choco-lodge.com",
+      category: "Community Ecolodge",
+    },
+    {
+      id: "selva",
+      name: "Fundación Selva",
+      logo: "/images/partners/selva-logo.png",
+      description:
+        "Dedicated to protecting Colombia's tropical forests through research, education, and sustainable development. Their work in the Amazon and Chocó regions provides crucial scientific data that informs our conservation-focused tour itineraries and supports habitat protection.",
+      website: "https://www.fundacionselva.org",
+      category: "Research Foundation",
+    },
+    {
+      id: "tanager",
+      name: "Tanager Tourism",
+      logo: "/images/partners/tanager-logo.png",
+      description:
+        "A pioneering sustainable tourism operator specializing in birding and nature photography tours across Colombia. Their expertise in remote locations and commitment to responsible travel practices makes them an ideal partner for our most adventurous expeditions.",
+      website: "https://www.tanagertourism.com",
+      category: "Sustainable Tourism",
+    },
+    {
+      id: "humboldt",
+      name: "Instituto Humboldt",
+      logo: "/images/partners/humboldt-logo.png",
+      description:
+        "Colombia's premier biodiversity research institute, providing scientific expertise and species data that enhances our educational programs. Their research on endemic species and ecosystem conservation directly informs our tour content and conservation messaging.",
+      website: "https://www.humboldt.org.co",
+      category: "Research Institute",
+    },
+  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -77,7 +138,7 @@ export default function CookiesPage() {
             </div>
             {/* About Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+              <button className="flex items-center text-emerald-600 hover:text-emerald-700 transition-colors">
                 About
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
@@ -96,7 +157,7 @@ export default function CookiesPage() {
                 </Link>
                 <Link
                   href="/about/partners"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                  className="block px-4 py-3 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 transition-colors"
                 >
                   Our Partners
                 </Link>
@@ -178,7 +239,7 @@ export default function CookiesPage() {
                 </div>
               </div>
               <div className="py-2">
-                <div className="text-gray-700 font-medium py-2">About</div>
+                <div className="text-emerald-600 font-medium py-2">About</div>
                 <div className="pl-4 space-y-2">
                   <Link
                     href="/about"
@@ -196,7 +257,7 @@ export default function CookiesPage() {
                   </Link>
                   <Link
                     href="/about/partners"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    className="block text-emerald-600 font-medium py-1"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Our Partners
@@ -245,151 +306,153 @@ export default function CookiesPage() {
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-blue-50" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-6">
-              🍪 Privacy & Transparency
+          <div className="text-center">
+            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
+              🤝 Conservation Partnerships
             </Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Our Cookie
-              <span className="text-emerald-600 block">Policy</span>
+              Our
+              <span className="text-emerald-600 block">Conservation Partners</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              We believe in transparency about how we collect and use data. Learn about our cookie practices and how you
-              can control your privacy preferences.
+              AVES Colombia collaborates with leading conservation organizations, ecolodges, and research institutions
+              to protect Colombia's incredible biodiversity while supporting local communities through sustainable
+              tourism.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Cookie Policy Content */}
+      {/* Partners Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Introduction */}
-            <Card className="mb-12 border-0 shadow-lg">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                    <Shield className="w-6 h-6 text-emerald-600" />
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Conservation & Tourism Partners</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Together, we're creating a network of sustainable tourism that directly contributes to habitat protection
+              and community development across Colombia.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {partners.map((partner) => (
+              <Card key={partner.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <OptimizedImage
+                          src={partner.logo || "/placeholder.svg"}
+                          alt={`${partner.name} logo`}
+                          width={64}
+                          height={64}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-xl font-semibold text-gray-900 mb-1">{partner.name}</h3>
+                          <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-3">
+                            {partner.category}
+                          </Badge>
+                        </div>
+                        <Link
+                          href={partner.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-shrink-0 ml-4"
+                        >
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Visit Site
+                          </Button>
+                        </Link>
+                      </div>
+                      <p className="text-gray-600 leading-relaxed">{partner.description}</p>
+                    </div>
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900">Introduction</h2>
-                </div>
-                <div className="space-y-4 text-gray-600 leading-relaxed">
-                  <p>
-                    This Cookie Policy explains how AVES Colombia uses cookies and similar technologies to recognize you
-                    when you visit our website. It explains what these technologies are and why we use them, as well as
-                    your rights to control our use of them.
-                  </p>
-                  <p>
-                    Cookies are small data files that are placed on your computer or mobile device when you visit a
-                    website. Cookies are widely used by website owners to make their websites work, or to work more
-                    efficiently, as well as to provide reporting information.
-                  </p>
-                </div>
-              </CardContent>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership Benefits Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why We Partner</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our partnerships create a multiplier effect for conservation impact and community benefit across
+              Colombia's diverse ecosystems.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center p-8 border-0 shadow-lg">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Leaf className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Conservation Impact</h3>
+              <p className="text-gray-600">
+                Direct funding for habitat protection and species research through sustainable tourism revenue.
+              </p>
             </Card>
 
-            {/* Types of Cookies */}
-            <Card className="mb-12 border-0 shadow-lg">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                    <Settings className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-900">Types of Cookies We Use</h2>
-                </div>
-                <p className="text-gray-600 mb-8">
-                  We use first-party and third-party cookies for several purposes. First-party cookies are set by us,
-                  while third-party cookies are set by third-party domains.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="p-6 bg-gray-50 rounded-lg">
-                    <div className="flex items-center mb-4">
-                      <Shield className="w-6 h-6 text-emerald-600 mr-3" />
-                      <h3 className="text-lg font-semibold text-gray-900">Strictly Necessary</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      These cookies are essential to enable you to browse our website and use its features, such as
-                      accessing secure areas.
-                    </p>
-                  </div>
-
-                  <div className="p-6 bg-gray-50 rounded-lg">
-                    <div className="flex items-center mb-4">
-                      <Eye className="w-6 h-6 text-blue-600 mr-3" />
-                      <h3 className="text-lg font-semibold text-gray-900">Performance</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      These cookies collect information about how visitors use our website, such as which pages are
-                      visited most often.
-                    </p>
-                  </div>
-
-                  <div className="p-6 bg-gray-50 rounded-lg">
-                    <div className="flex items-center mb-4">
-                      <Settings className="w-6 h-6 text-purple-600 mr-3" />
-                      <h3 className="text-lg font-semibold text-gray-900">Functionality</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      These cookies allow our website to remember choices you make and provide enhanced, personalized
-                      features.
-                    </p>
-                  </div>
-
-                  <div className="p-6 bg-gray-50 rounded-lg">
-                    <div className="flex items-center mb-4">
-                      <Target className="w-6 h-6 text-orange-600 mr-3" />
-                      <h3 className="text-lg font-semibold text-gray-900">Targeting</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      These cookies are used to deliver advertisements that are more relevant to you and your interests.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
+            <Card className="text-center p-8 border-0 shadow-lg">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Community Development</h3>
+              <p className="text-gray-600">
+                Supporting local communities through employment, training, and sustainable economic opportunities.
+              </p>
             </Card>
 
-            {/* Managing Preferences */}
-            <Card className="mb-12 border-0 shadow-lg">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                    <Users className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-900">Managing Your Cookie Preferences</h2>
-                </div>
-                <div className="space-y-4 text-gray-600 leading-relaxed mb-8">
-                  <p>
-                    You have the right to decide whether to accept or reject cookies. You can exercise your cookie
-                    preferences by using our cookie consent manager. You can set or amend your web browser controls to
-                    accept or refuse cookies.
-                  </p>
-                  <p>
-                    If you choose to reject cookies, you may still use our website though your access to some
-                    functionality and areas of our website may be restricted.
-                  </p>
-                </div>
-
-                <div className="bg-emerald-50 border-l-4 border-emerald-600 p-6 rounded-lg">
-                  <div className="flex items-center mb-4">
-                    <span className="mr-3 text-sm font-bold bg-emerald-600 text-white px-2 py-1 rounded">B</span>
-                    <h3 className="text-xl font-semibold text-emerald-800">Manage Your Preferences Now</h3>
-                  </div>
-                  <p className="text-emerald-700 mb-4">
-                    Take control of your privacy. Use our preference center to customize your cookie settings according
-                    to your preferences.
-                  </p>
-                  <CookieManagementButton
-                    variant="default"
-                    size="lg"
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                  >
-                    Open Cookie Preference Center
-                  </CookieManagementButton>
-                </div>
-              </CardContent>
+            <Card className="text-center p-8 border-0 shadow-lg">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Scientific Research</h3>
+              <p className="text-gray-600">
+                Contributing to biodiversity research and species monitoring that informs conservation strategies.
+              </p>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20 bg-emerald-50">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Join Our Conservation Network</h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Experience Colombia's biodiversity while directly supporting conservation and community development through
+            our partner network.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/tours">
+              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-4">
+                Explore Tours
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-4"
+              >
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -465,7 +528,7 @@ export default function CookiesPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about/partners" className="hover:text-white transition-colors">
+                  <Link href="/about/partners" className="hover:text-white transition-colors text-white">
                     🤝 Our Partners
                   </Link>
                 </li>

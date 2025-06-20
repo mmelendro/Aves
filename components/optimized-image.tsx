@@ -32,8 +32,17 @@ export default function OptimizedImage({
 
   return (
     <div
-      className={cn("relative overflow-hidden group flex items-center justify-center", className)}
-      style={{ aspectRatio: `${width}/${height}` }}
+      className={cn(
+        "relative overflow-hidden flex items-center justify-center",
+        // Only apply hover effects on non-touch devices
+        "md:group md:hover:scale-105 md:hover:brightness-110",
+        className,
+      )}
+      style={{
+        aspectRatio: `${width}/${height}`,
+        touchAction: "pan-y pinch-zoom",
+        ...style,
+      }}
     >
       <Image
         src={src || "/placeholder.svg"}
@@ -42,16 +51,17 @@ export default function OptimizedImage({
         height={height}
         priority={priority}
         style={{
-          ...style,
           objectFit: "contain",
           width: "100%",
           height: "100%",
           maxWidth: "100%",
           maxHeight: "100%",
+          touchAction: "pan-y pinch-zoom",
+          ...style,
         }}
         className={cn(
-          "transition-all duration-300 ease-in-out",
-          "group-hover:scale-105 group-hover:brightness-110",
+          // Only apply hover transitions on desktop
+          "md:transition-all md:duration-300 md:ease-in-out",
           isLoading ? "blur-sm" : "blur-0",
           hasError ? "opacity-50" : "opacity-100",
           onClick ? "cursor-pointer" : "",

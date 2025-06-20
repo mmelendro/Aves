@@ -1,14 +1,15 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Calendar, Globe, Instagram, Menu, X, Users, ChevronDown } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import OptimizedImage from "@/components/optimized-image"
+import { CookieManagementButton } from "@/components/cookie-management-button"
 
 export default function TeamPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -21,12 +22,13 @@ export default function TeamPage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/">
-              <Image
+              <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
                 width={40}
                 height={40}
                 className="w-10 h-10 object-contain"
+                priority
               />
             </Link>
           </div>
@@ -35,7 +37,11 @@ export default function TeamPage() {
           <nav className="hidden md:flex items-center space-x-8">
             {/* Tours Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+              <button
+                className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
                 Tours
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
@@ -74,7 +80,7 @@ export default function TeamPage() {
             </div>
             {/* About Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-emerald-600 font-medium transition-colors">
+              <button className="flex items-center text-emerald-600 hover:text-emerald-700 transition-colors">
                 About
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
@@ -87,9 +93,15 @@ export default function TeamPage() {
                 </Link>
                 <Link
                   href="/team"
-                  className="block px-4 py-3 text-emerald-600 font-medium hover:bg-emerald-50 transition-colors"
+                  className="block px-4 py-3 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 transition-colors"
                 >
                   Our Team
+                </Link>
+                <Link
+                  href="/about/partners"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  Our Partners
                 </Link>
               </div>
             </div>
@@ -115,13 +127,17 @@ export default function TeamPage() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
+        {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t">
             <nav className="container mx-auto px-4 py-4 space-y-4">
               <div className="py-2">
@@ -130,35 +146,35 @@ export default function TeamPage() {
                   <Link
                     href="/tours"
                     className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     All Tours Overview
                   </Link>
                   <Link
                     href="/tours/adventure"
                     className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     🍃 AVES Adventure
                   </Link>
                   <Link
                     href="/tours/vision"
                     className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     🪶 AVES Vision
                   </Link>
                   <Link
                     href="/tours/elevate"
                     className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     🌼 AVES Elevate
                   </Link>
                   <Link
                     href="/tours/souls"
                     className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     🍓 AVES Souls
                   </Link>
@@ -170,44 +186,51 @@ export default function TeamPage() {
                   <Link
                     href="/about"
                     className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     About AVES
                   </Link>
                   <Link
                     href="/team"
                     className="block text-emerald-600 font-medium transition-colors py-1"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     Our Team
+                  </Link>
+                  <Link
+                    href="/about/partners"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Partners
                   </Link>
                 </div>
               </div>
               <Link
                 href="/about/b-corp"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 B Corp Journey
               </Link>
               <Link
                 href="/blog"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Blog
               </Link>
               <Link
                 href="/conservation"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Conservation
               </Link>
               <Link
                 href="/contact"
                 className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Contact
               </Link>
@@ -302,7 +325,7 @@ export default function TeamPage() {
 
               <div className="order-1 lg:order-2">
                 <div className="relative">
-                  <Image
+                  <OptimizedImage
                     src="/images/martin-melendro.jpg"
                     alt="Martin Melendro - AVES Founder and Lead Ornithologist"
                     width={500}
@@ -576,7 +599,7 @@ export default function TeamPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Image
+                <OptimizedImage
                   src="/images/aves-logo.png"
                   alt="AVES Birdwatching Tours Logo"
                   width={40}
@@ -641,6 +664,11 @@ export default function TeamPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/about/partners" className="hover:text-white transition-colors text-white">
+                    🤝 Our Partners
+                  </Link>
+                </li>
+                <li>
                   <Link href="/conservation" className="hover:text-white transition-colors">
                     🌱 Conservation
                   </Link>
@@ -658,6 +686,7 @@ export default function TeamPage() {
                 </li>
               </ul>
             </div>
+
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-400">
@@ -667,11 +696,33 @@ export default function TeamPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    ✈️ Travel Tips
+                  </Link>
+                </li>
+                <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
                     📞 Contact
                   </Link>
                 </li>
               </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
+            <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                🔒 Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                📋 Terms of Service
+              </Link>
+              <CookieManagementButton
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white transition-colors p-0 h-auto font-normal"
+              />
             </div>
           </div>
         </div>

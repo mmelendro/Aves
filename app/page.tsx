@@ -332,7 +332,10 @@ export default function AVESLandingPage() {
                   width={480}
                   height={600}
                   className="object-cover w-full h-full"
-                  style={{ objectPosition: "center 20%" }}
+                  style={{
+                    objectPosition: "center 20%",
+                    touchAction: "pan-y pinch-zoom",
+                  }}
                   priority
                 />
               </div>
@@ -342,6 +345,7 @@ export default function AVESLandingPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 hover:bg-gray-50 transition-colors rounded-lg p-1 -m-1"
+                  style={{ touchAction: "manipulation" }}
                 >
                   <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
                     <Award className="w-6 h-6 text-emerald-600" />

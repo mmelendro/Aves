@@ -92,3 +92,79 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Mobile scroll optimization */
+@layer utilities {
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+/* Prevent mobile zoom on double tap and ensure smooth scrolling */
+@media (max-width: 768px) {
+  * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Allow text selection for content areas */
+  p,
+  span,
+  div[class*="text"],
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  /* Prevent zoom on form inputs */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  /* Smooth scrolling for mobile */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Desktop hover effects only */
+@media (min-width: 769px) {
+  .group:hover .group-hover\:scale-105 {
+    transform: scale(1.05);
+  }
+
+  .group:hover .group-hover\:brightness-110 {
+    filter: brightness(1.1);
+  }
+}

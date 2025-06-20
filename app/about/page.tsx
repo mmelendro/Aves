@@ -4,10 +4,12 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, ArrowRight, Users, Menu, X, ChevronDown, Shield } from "lucide-react"
+import { CheckCircle, ArrowRight, Users, Menu, X, ChevronDown, Shield } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import OptimizedImage from "@/components/optimized-image"
+import { CookieManagementButton } from "@/components/cookie-management-button"
 
 export default function AboutPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -31,12 +33,13 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/">
-              <Image
+              <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
                 width={40}
                 height={40}
                 className="w-10 h-10 object-contain"
+                priority
               />
             </Link>
           </div>
@@ -45,7 +48,11 @@ export default function AboutPage() {
           <nav className="hidden md:flex items-center space-x-8">
             {/* Tours Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
+              <button
+                className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
                 Tours
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
@@ -84,14 +91,14 @@ export default function AboutPage() {
             </div>
             {/* About Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-emerald-600 font-medium transition-colors">
+              <button className="flex items-center text-emerald-600 hover:text-emerald-700 transition-colors">
                 About
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
               <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <Link
                   href="/about"
-                  className="block px-4 py-3 text-emerald-600 font-medium hover:bg-emerald-50 transition-colors"
+                  className="block px-4 py-3 text-emerald-600 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
                 >
                   About AVES
                 </Link>
@@ -100,6 +107,12 @@ export default function AboutPage() {
                   className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
                 >
                   Our Team
+                </Link>
+                <Link
+                  href="/about/partners"
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                >
+                  Our Partners
                 </Link>
               </div>
             </div>
@@ -183,17 +196,24 @@ export default function AboutPage() {
                 <div className="pl-4 space-y-2">
                   <Link
                     href="/about"
-                    className="block text-emerald-600 font-medium transition-colors py-1"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     About AVES
                   </Link>
                   <Link
                     href="/team"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    className="block text-emerald-600 font-medium transition-colors py-1"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Our Team
+                  </Link>
+                  <Link
+                    href="/about/partners"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Partners
                   </Link>
                 </div>
               </div>
@@ -236,7 +256,7 @@ export default function AboutPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
         <div className="container mx-auto px-4 text-center">
           <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">About AVES</Badge>
           <h1 className="text-5xl font-bold text-gray-900 mb-6">Pioneering Sustainable Birding Tourism</h1>
@@ -398,7 +418,7 @@ export default function AboutPage() {
                   <div className="space-y-3">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2">Stakeholder-Centric Ownership</h4>
-                      <ul className="text-sm space-y-1 ml-4">
+                      <ul className="space-y-1 text-sm">
                         <li>
                           • <strong>Employee Stock Option Plan (ESOP):</strong> Up to 10% of shares reserved for
                           employees
@@ -415,7 +435,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2">Regulatory Compliance</h4>
-                      <ul className="text-sm space-y-1 ml-4">
+                      <ul className="space-y-1 text-sm">
                         <li>• Canadian Business Registration & Provincial Licensing</li>
                         <li>• Colombian National Tourism Registry (RNT) Compliance</li>
                         <li>• Comprehensive Liability & Professional Insurance Coverage</li>
@@ -543,7 +563,7 @@ export default function AboutPage() {
                   <span className="font-semibold text-emerald-600">25%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Tour Operations (COGS):</span>
+                  <span>Business Operations:</span>
                   <span className="font-semibold text-gray-600">50%</span>
                 </div>
                 <div className="flex justify-between">
@@ -689,7 +709,6 @@ export default function AboutPage() {
             <Link href="/shopping">
               <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
                 Book Your Journey
-                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
           </div>
@@ -702,7 +721,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Image
+                <OptimizedImage
                   src="/images/aves-logo.png"
                   alt="AVES Birdwatching Tours Logo"
                   width={40}
@@ -711,8 +730,7 @@ export default function AboutPage() {
                 />
               </div>
               <p className="text-gray-400 mb-4">
-                Premium birding tours in Colombia, committed to conservation through our innovative Conservation
-                Endowment Trust structure.
+                Premium birding tours in Colombia, committed to conservation and sustainable tourism.
               </p>
               <div className="flex space-x-4">
                 <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
@@ -768,7 +786,12 @@ export default function AboutPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#conservation" className="hover:text-white transition-colors">
+                  <Link href="/about/partners" className="hover:text-white transition-colors text-white">
+                    🤝 Our Partners
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/conservation" className="hover:text-white transition-colors">
                     🌱 Conservation
                   </Link>
                 </li>
@@ -778,17 +801,17 @@ export default function AboutPage() {
                     <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity">↑</span>
                   </Link>
                 </li>
+                <li>
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    📝 Blog
+                  </Link>
+                </li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    📝 Blog
-                  </Link>
-                </li>
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
                     🐦 Bird Guide
@@ -817,9 +840,11 @@ export default function AboutPage() {
               <Link href="/terms" className="hover:text-white transition-colors">
                 📋 Terms of Service
               </Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">
-                🍪 Cookie Policy
-              </Link>
+              <CookieManagementButton
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white transition-colors p-0 h-auto font-normal"
+              />
             </div>
           </div>
         </div>
