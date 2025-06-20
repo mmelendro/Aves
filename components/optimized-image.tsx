@@ -15,6 +15,7 @@ interface OptimizedImageProps {
   priority?: boolean
   style?: React.CSSProperties
   onClick?: () => void
+  fallback?: string
 }
 
 export default function OptimizedImage({
@@ -26,9 +27,21 @@ export default function OptimizedImage({
   priority = false,
   style,
   onClick,
+  fallback = "/placeholder.svg",
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
+  const [currentSrc, setCurrentSrc] = useState(src)
+
+  const handleError = () => {
+    setIsLoading(false)
+    setHasError(true)
+    if (currentSrc !== fallback) {
+      setCurrentSrc(fallback)
+      setHasError(false)
+      setIsLoading(true)
+    }
+  }
 
   return (
     <div
@@ -45,13 +58,13 @@ export default function OptimizedImage({
       }}
     >
       <Image
-        src={src || "/placeholder.svg"}
+        src={currentSrc || "/placeholder.svg"}
         alt={alt}
         width={width}
         height={height}
         priority={priority}
         style={{
-          objectFit: "contain",
+          objectFit: "cover", // Changed from "contain" to "cover" for better circular framing
           width: "100%",
           height: "100%",
           maxWidth: "100%",
@@ -71,7 +84,7 @@ export default function OptimizedImage({
           // Enhanced responsive transitions - only on desktop
           "md:transition-all md:duration-300 md:ease-in-out",
           // Improved responsive scaling and centering
-          "object-contain mx-auto",
+          "object-cover mx-auto", // Changed from "object-contain" to "object-cover"
           // Responsive sizing constraints
           "max-w-full max-h-full",
           // Loading and error states
@@ -85,16 +98,13 @@ export default function OptimizedImage({
           "lg:max-w-[20px] lg:max-h-[20px]",
         )}
         onLoad={() => setIsLoading(false)}
-        onError={() => {
-          setIsLoading(false)
-          setHasError(true)
-        }}
+        onError={handleError}
         onClick={onClick}
         loading={priority ? "eager" : "lazy"}
         sizes="(max-width: 640px) 16px, (max-width: 768px) 18px, 20px"
       />
       {isLoading && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />}
-      {hasError && (
+      {hasError && currentSrc === fallback && (
         <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
           <span className="text-gray-400 text-sm">Image unavailable</span>
         </div>

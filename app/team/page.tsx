@@ -276,16 +276,16 @@ export default function TeamPage() {
                   </p>
 
                   <p>
-                    Fluent in Spanish, English, and basic indigenous languages, Martin specializes in creating
-                    transformative birding experiences that go beyond species lists. His approach emphasizes cultural
-                    exchange, conservation education, and sustainable tourism practices that benefit local communities.
+                    Fluent in Spanish and English, Martin specializes in creating transformative birding experiences
+                    that go beyond species lists. His approach emphasizes cultural exchange, conservation education, and
+                    sustainable tourism practices that benefit local communities.
                   </p>
 
                   <p>
-                    Martin holds a degree in Biology from Universidad Nacional de Colombia and has contributed to
-                    numerous conservation projects throughout the Neotropics. His field work has focused on endemic
-                    species conservation, habitat restoration, and the intersection of traditional ecological knowledge
-                    with modern conservation science.
+                    Through years of field experience, Martin has contributed to numerous conservation projects
+                    throughout the Neotropics. His field work has focused on endemic species conservation, habitat
+                    restoration, and the intersection of traditional ecological knowledge with modern conservation
+                    science.
                   </p>
 
                   <p>
@@ -307,7 +307,7 @@ export default function TeamPage() {
                   </div>
                   <div className="flex items-center">
                     <Globe className="w-4 h-4 mr-2" />
-                    Spanish, English, Indigenous languages
+                    Spanish, English
                   </div>
                 </div>
 
@@ -344,10 +344,11 @@ export default function TeamPage() {
           {/* Indigenous Guides Section */}
           <div className="border-t border-gray-200 pt-16">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Indigenous Community Guides</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Local Community Guides</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Our indigenous partners bring generations of traditional ecological knowledge and deep cultural
-                connections to the territories we explore together.
+                Our local partners are regional experts who bring deep knowledge of their territories, combining
+                traditional ecological wisdom, scientific understanding, and intimate connections to the landscapes we
+                explore together.
               </p>
             </div>
 
@@ -355,8 +356,15 @@ export default function TeamPage() {
               {/* Yeferson Guale Epiayu */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-emerald-600">YE</span>
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/yeferson-guale-epiayu.png"
+                      alt="Yeferson Guale Epiayu - Wayuu Community Guide specializing in Sierra Nevada de Santa Marta"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">Yeferson Guale Epiayu</h3>
                   <p className="text-emerald-600 font-medium">Wayuu Community Guide</p>
@@ -396,8 +404,15 @@ export default function TeamPage() {
               {/* Dagoberto Rudas */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-blue-600">DR</span>
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/dagoberto-rudas.png"
+                      alt="Dagoberto Rudas - Tayrona Community Guide specializing in cloud forest birding"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">Dagoberto Rudas</h3>
                   <p className="text-blue-600 font-medium">Tayrona Community Guide</p>
@@ -434,55 +449,83 @@ export default function TeamPage() {
                 </div>
               </div>
 
-              {/* Carlos Moreno */}
+              {/* Gleison Fernando Guarin Largo */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-green-600">CM</span>
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/gleison-guarin.png"
+                      alt="Gleison Fernando Guarin Largo - Tatamá National Park Specialist and acoustic ornithologist"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Carlos Moreno</h3>
-                  <p className="text-green-600 font-medium">Chocó Specialist Guide</p>
+                  <h3 className="text-xl font-bold text-gray-900">Gleison Fernando Guarin Largo</h3>
+                  <p className="text-green-600 font-medium">Tatamá National Park Specialist</p>
                 </div>
 
                 <div className="space-y-4 text-gray-700 text-sm">
                   <p>
-                    Carlos has spent over two decades studying the Chocó's endemic birds and serves as our primary guide
-                    for Pacific coast expeditions. His intimate knowledge of Chocó endemics and rainforest navigation
-                    skills are unmatched in the region.
+                    Gleison is part of the family that owns Montezuma Ecolodge in Tatamá National Park, Chocó. An
+                    exceptional acoustic ornithologist, he can identify over 1,000 bird species by their sounds alone.
+                    His expertise in the region's endemic species makes him invaluable for our Chocó expeditions.
                   </p>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-gray-900">Expertise:</h4>
                     <ul className="space-y-1">
-                      <li>• Chocó endemic species</li>
-                      <li>• Rainforest navigation</li>
-                      <li>• Toucan behavior specialist</li>
-                      <li>• Conservation research</li>
+                      <li>• Acoustic bird identification (1000+ species)</li>
+                      <li>• Chocó endemic species specialist</li>
+                      <li>• Cornell University collaborator</li>
+                      <li>• Sound recording and documentation</li>
                     </ul>
                   </div>
 
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>Río Ñambí Reserve</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://instagram.com/gleisonguarin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-green-600 transition-colors"
+                      >
+                        @gleisonguarin
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>Montezuma Ecolodge, Tatamá National Park</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* David - El Dorado */}
+              {/* David Jara */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-purple-600">DE</span>
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/david-jara.png"
+                      alt="David Jara - El Dorado Cloud Forest Guide and multi-regional tour leader"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">David</h3>
-                  <p className="text-purple-600 font-medium">El Dorado Cloud Forest Guide</p>
+                  <h3 className="text-xl font-bold text-gray-900">David Jara</h3>
+                  <p className="text-purple-600 font-medium">El Dorado Cloud Forest Guide & Tour Leader</p>
                 </div>
 
                 <div className="space-y-4 text-gray-700 text-sm">
                   <p>
-                    David is our resident expert for El Dorado Reserve's cloud forest ecosystem. With over a decade of
-                    experience in the Sierra Nevada's montane forests, he has an unmatched ability to locate the
-                    region's most elusive endemic species in challenging weather conditions.
+                    David Jara is our expert tour leader for El Dorado Reserve's cloud forest ecosystem and beyond. With
+                    over a decade of experience in the Sierra Nevada's montane forests, he has an unmatched ability to
+                    locate the region's most elusive endemic species in challenging weather conditions. David leads
+                    tours across multiple regions and collaborates with several renowned birding operators.
                   </p>
 
                   <div className="space-y-2">
@@ -490,83 +533,199 @@ export default function TeamPage() {
                     <ul className="space-y-1">
                       <li>• Cloud forest endemic species</li>
                       <li>• Montane ecosystem navigation</li>
+                      <li>• Multi-region tour leadership</li>
                       <li>• Weather pattern interpretation</li>
                       <li>• High-altitude birding techniques</li>
+                      <li>• Cross-operator collaboration</li>
                     </ul>
                   </div>
 
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>El Dorado Reserve</span>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-gray-900">Tour Operator Affiliations:</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center text-gray-600">
+                        <Instagram className="w-4 h-4 mr-2" />
+                        <a
+                          href="https://www.instagram.com/amazorinoquiabirding/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-purple-600 transition-colors"
+                        >
+                          @amazorinoquiabirding
+                        </a>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <Instagram className="w-4 h-4 mr-2" />
+                        <a
+                          href="https://www.instagram.com/manakinnaturetours/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-purple-600 transition-colors"
+                        >
+                          @manakinnaturetours
+                        </a>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <Instagram className="w-4 h-4 mr-2" />
+                        <a
+                          href="https://www.instagram.com/expeditionminca/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-purple-600 transition-colors"
+                        >
+                          @expeditionminca
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.instagram.com/davidjara20/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-600 transition-colors font-medium"
+                      >
+                        @davidjara20
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>El Dorado Reserve & Multi-Regional Tours</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* David - Minca */}
+              {/* David Faunal */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-orange-600">DM</span>
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/david-faunal-birds-reserve.jpg"
+                      alt="Birds at David Faunal's Observatorio de Aves de Minca - showcasing the diverse avian life at the reserve"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                      fallback="/images/manakin-1.jpg"
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">David</h3>
-                  <p className="text-orange-600 font-medium">Minca Transitional Forest Guide</p>
+                  <h3 className="text-xl font-bold text-gray-900">David Faunal</h3>
+                  <p className="text-orange-600 font-medium">Minca Observatory Owner & Transitional Forest Guide</p>
                 </div>
 
                 <div className="space-y-4 text-gray-700 text-sm">
                   <p>
-                    David specializes in Minca's unique transitional forest ecosystem, where cloud forest meets dry
-                    forest. His expertise in this ecological gradient allows visitors to experience species from
-                    multiple elevations in a single location, making him invaluable for efficient birding.
+                    David Faunal is the owner and operator of Observatorio de Aves de Minca, a premier birdwatching
+                    destination in the Sierra Nevada de Santa Marta. His observatory specializes in Minca's unique
+                    transitional forest ecosystem, where cloud forest meets dry forest, creating exceptional birding
+                    opportunities.
+                  </p>
+
+                  <p>
+                    With years of experience in the region, David has developed an intimate knowledge of local bird
+                    behavior and migration patterns. His observatory provides visitors with unparalleled access to
+                    hummingbird feeding stations and strategic viewing points for observing the area's incredible avian
+                    diversity.
                   </p>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-gray-900">Expertise:</h4>
                     <ul className="space-y-1">
                       <li>• Transitional forest ecology</li>
+                      <li>• Hummingbird behavior and feeding patterns</li>
                       <li>• Multi-elevation species tracking</li>
+                      <li>• Observatory management and bird photography</li>
                       <li>• Coffee plantation birding</li>
-                      <li>• Hummingbird behavior specialist</li>
                     </ul>
                   </div>
 
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>Minca Region</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.instagram.com/faunal_observatorioavesminca/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-orange-600 transition-colors"
+                      >
+                        @faunal_observatorioavesminca
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.observatoriodeavesdeminca.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-orange-600 transition-colors"
+                      >
+                        observatoriodeavesdeminca.com
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>Observatorio de Aves de Minca</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Martin - Kogi Liaison */}
+              {/* Nicolas Rozo */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-indigo-600">MK</span>
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/nicolas-rozo.png"
+                      alt="Nicolas Rozo - Bogotá Region Ornithologist specializing in páramo ecosystems"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Martin</h3>
-                  <p className="text-indigo-600 font-medium">Kogi Cultural Liaison</p>
+                  <h3 className="text-xl font-bold text-gray-900">Nicolas Rozo</h3>
+                  <p className="text-indigo-600 font-medium">Bogotá Region Ornithologist</p>
                 </div>
 
                 <div className="space-y-4 text-gray-700 text-sm">
                   <p>
-                    Martin serves as our cultural liaison with the Kogi people, facilitating respectful exchanges
-                    between visitors and indigenous communities. His deep understanding of Kogi protocols and
-                    traditional ecological knowledge ensures meaningful cultural experiences while maintaining
-                    appropriate boundaries.
+                    Nicolas holds a degree in Biology from Universidad Distrital and is our expert ornithologist for the
+                    Bogotá region. His specialized knowledge of high-altitude páramo ecosystems makes him the ideal
+                    guide for exploring Chingaza and Sumapaz National Parks, where he leads expeditions to observe
+                    endemic Andean species.
                   </p>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-gray-900">Expertise:</h4>
                     <ul className="space-y-1">
-                      <li>• Kogi cultural protocols</li>
-                      <li>• Traditional ecological knowledge</li>
-                      <li>• Sacred site interpretation</li>
-                      <li>• Cross-cultural communication</li>
+                      <li>• High-altitude páramo ornithology</li>
+                      <li>• Andean endemic species specialist</li>
+                      <li>• Chingaza and Sumapaz ecosystems</li>
+                      <li>• Scientific research and documentation</li>
                     </ul>
                   </div>
 
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>Kogi Territory</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.instagram.com/nicolas_rozop/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-indigo-600 transition-colors"
+                      >
+                        @nicolas_rozop
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>Bogotá region páramo ecosystems</span>
+                    </div>
                   </div>
                 </div>
               </div>
