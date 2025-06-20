@@ -16,8 +16,9 @@ export default function BlogPage() {
       title: "Jewels of the Andes: A Vision Journey Through Colombia's Hummingbird Sanctuaries",
       excerpt:
         "In the sacred heights of Colombia's three Andean cordilleras, where mist meets mountain and time seems to pause, we embark on a spiritual pilgrimage to witness nature's most exquisite aerial dancers—the hummingbirds.",
-      image: "/images/rainbow-bearded-thornbill-vision.jpg",
-      imageAlt: "Rainbow-bearded Thornbill displaying its spectacular fiery throat in high-altitude páramo habitat",
+      image: "/images/long-tailed-sylph.jpg",
+      imageAlt:
+        "Long-tailed Sylph (Aglaiocercus kingii) displaying its magnificent elongated tail feathers and iridescent green plumage in cloud forest habitat",
       author: "Martin Melendro",
       date: "June 12, 2025",
       location: "Three Andean Cordilleras",
@@ -304,13 +305,15 @@ export default function BlogPage() {
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                       style={{
                         objectPosition:
-                          post.id === "sierra-nevada-indigenous-birding"
-                            ? "center 20%"
-                            : post.id === "paramo-manizales-thornbill"
-                              ? "center 30%"
-                              : post.id === "choco-toucan-expedition"
-                                ? "center 40%"
-                                : "center",
+                          post.id === "hummingbird-vision-journey"
+                            ? "center 25%"
+                            : post.id === "sierra-nevada-indigenous-birding"
+                              ? "center 20%"
+                              : post.id === "paramo-manizales-thornbill"
+                                ? "center 15%"
+                                : post.id === "choco-toucan-expedition"
+                                  ? "center 40%"
+                                  : "center",
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
