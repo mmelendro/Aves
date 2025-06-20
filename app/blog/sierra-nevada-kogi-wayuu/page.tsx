@@ -1,58 +1,107 @@
-import Image from "next/image"
+import { NavigationHeader } from "@/components/navigation-header"
 
 export default function Page() {
   return (
-    <div className="container mx-auto py-12">
-      <h1 className="text-4xl font-bold mb-8">
-        Sierra Nevada de Santa Marta: Kogi, Wayuu, and the Golden-headed Quetzal
-      </h1>
-
-      <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-        <Image
-          src="/images/golden-headed-quetzal.jpg"
-          alt="Golden-headed Quetzal (Pharomachrus auriceps) displaying its brilliant emerald plumage and golden head in Sierra Nevada cloud forest"
-          width={1200}
-          height={675}
-          className="object-cover w-full h-full"
-        />
-        <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-          <p className="text-sm font-medium">Golden-headed Quetzal (Pharomachrus auriceps)</p>
-          <p className="text-xs opacity-90">Endemic to the Sierra Nevada cloud forests</p>
+    <main className="flex min-h-screen flex-col items-center p-24">
+      {/* Navigation Header */}
+      <NavigationHeader currentPage="/blog" />
+      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-100 lg:p-4 lg:dark:bg-zinc-800/30">
+          Get started by editing&nbsp;
+          <code className="font-mono font-bold">app/page.tsx</code>
+        </p>
+        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+          <a
+            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            By <img src="/vercel.svg" alt="Vercel Logo" className="dark:invert" width={100} height={24} priority />
+          </a>
         </div>
       </div>
 
-      <p className="mb-6">
-        The Sierra Nevada de Santa Marta is an isolated mountain range in northern Colombia, rising abruptly from the
-        Caribbean coast. This unique geographical feature creates a diverse range of ecosystems, from tropical
-        rainforests to cloud forests and even páramo (high-altitude tundra). It is home to two distinct indigenous
-        groups: the Kogi and the Wayuu.
-      </p>
+      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] dark:before:bg-gradient-radial dark:before:from-black dark:before:to-transparent dark:after:from-sky-800 dark:after:via-blue-800 dark:opacity-50">
+        <img
+          src="/images/sierra-nevada.jpg"
+          alt="Sierra Nevada"
+          className="dark:invert"
+          width={300}
+          height={300}
+          priority
+        />
+      </div>
 
-      <h2 className="text-2xl font-semibold mb-4">The Kogi People</h2>
-      <p className="mb-6">
-        The Kogi are an ancient civilization that has managed to preserve their traditional way of life for centuries.
-        They believe they are the "Elder Brothers" of humanity and are responsible for maintaining the balance of the
-        world. They live in small, isolated villages high in the mountains and practice a deep connection with nature.
-      </p>
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+        <a
+          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Docs{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Find in-depth information about Next.js features and API.
+          </p>
+        </a>
 
-      <h2 className="text-2xl font-semibold mb-4">The Wayuu People</h2>
-      <p className="mb-6">
-        In contrast to the Kogi, the Wayuu inhabit the arid La Guajira Peninsula to the north of the Sierra Nevada. They
-        are the largest indigenous group in Colombia and are known for their strong matriarchal society and their
-        vibrant textile traditions, particularly their intricate woven bags called "mochilas."
-      </p>
+        <a
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Learn{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Learn about Next.js in an interactive course with&nbsp;quizzes!
+          </p>
+        </a>
 
-      <h2 className="text-2xl font-semibold mb-4">The Golden-headed Quetzal</h2>
-      <p className="mb-6">
-        The cloud forests of the Sierra Nevada are also home to a remarkable array of biodiversity, including the
-        Golden-headed Quetzal (Pharomachrus auriceps). This stunning bird, with its iridescent emerald plumage and
-        golden head, is a symbol of the region's natural beauty.
-      </p>
+        <a
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Templates{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Discover and deploy boilerplate example Next.js&nbsp;projects.
+          </p>
+        </a>
 
-      <p className="mb-6">
-        The Sierra Nevada de Santa Marta is a place of immense cultural and ecological significance. It is a reminder of
-        the importance of preserving indigenous traditions and protecting biodiversity for future generations.
-      </p>
-    </div>
+        <a
+          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Deploy{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          </p>
+        </a>
+      </div>
+    </main>
   )
 }

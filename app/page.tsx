@@ -1,33 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import {
-  Users,
-  Leaf,
-  Globe,
-  Award,
-  ArrowRight,
-  CheckCircle,
-  Mail,
-  Phone,
-  MapPin,
-  Menu,
-  X,
-  ChevronDown,
-} from "lucide-react"
+import { Users, Globe, Award, ArrowRight, CheckCircle, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import SpeciesTooltip from "@/components/species-tooltip"
 import TourComparison from "@/components/tour-comparison"
 import { CookieManagementButton } from "@/components/cookie-management-button"
+import { NavigationHeader } from "@/components/navigation-header"
 
 export default function AVESLandingPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -58,219 +44,8 @@ export default function AVESLandingPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Link href="/">
-              <OptimizedImage
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10 object-contain"
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {/* Tours Dropdown */}
-            <div className="relative group">
-              <button
-                className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors"
-                aria-expanded="false"
-                aria-haspopup="true"
-              >
-                Tours
-                <ChevronDown className="w-4 h-4 ml-1" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <Link
-                  href="/tours"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
-                >
-                  All Tours Overview
-                </Link>
-                <Link
-                  href="/tours/adventure"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-                >
-                  🍃 AVES Adventure
-                </Link>
-                <Link
-                  href="/tours/vision"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-                >
-                  🪶 AVES Vision
-                </Link>
-                <Link
-                  href="/tours/elevate"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-                >
-                  🌼 AVES Elevate
-                </Link>
-                <Link
-                  href="/tours/souls"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-                >
-                  🍓 AVES Souls
-                </Link>
-              </div>
-            </div>
-            {/* About Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-emerald-600 transition-colors">
-                About
-                <ChevronDown className="w-4 h-4 ml-1" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <Link
-                  href="/about"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-                >
-                  About AVES
-                </Link>
-                <Link
-                  href="/team"
-                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-                >
-                  Our Team
-                </Link>
-              </div>
-            </div>
-            <Link href="/about/b-corp" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              B Corp Journey
-            </Link>
-            <Link href="/blog" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Blog
-            </Link>
-            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Conservation
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Contact
-            </Link>
-          </nav>
-
-          {/* Desktop CTA Button */}
-          <div className="hidden md:block">
-            <Link href="/shopping">
-              <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle mobile menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <nav className="container mx-auto px-4 py-4 space-y-4">
-              <div className="py-2">
-                <div className="text-gray-700 font-medium py-2">Tours</div>
-                <div className="pl-4 space-y-2">
-                  <Link
-                    href="/tours"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    All Tours Overview
-                  </Link>
-                  <Link
-                    href="/tours/adventure"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🍃 AVES Adventure
-                  </Link>
-                  <Link
-                    href="/tours/vision"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🪶 AVES Vision
-                  </Link>
-                  <Link
-                    href="/tours/elevate"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🌼 AVES Elevate
-                  </Link>
-                  <Link
-                    href="/tours/souls"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🍓 AVES Souls
-                  </Link>
-                </div>
-              </div>
-              <div className="py-2">
-                <div className="text-gray-700 font-medium py-2">About</div>
-                <div className="pl-4 space-y-2">
-                  <Link
-                    href="/about"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    About AVES
-                  </Link>
-                  <Link
-                    href="/team"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Our Team
-                  </Link>
-                </div>
-              </div>
-              <Link
-                href="/about/b-corp"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                B Corp Journey
-              </Link>
-              <Link
-                href="/blog"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/conservation"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Conservation
-              </Link>
-              <Link
-                href="/contact"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              <div className="pt-4">
-                <Link href="/shopping">
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
-      </header>
+      {/* Navigation Header */}
+      <NavigationHeader currentPage="/" />
 
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
@@ -299,13 +74,6 @@ export default function AVESLandingPage() {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-4"
-                >
-                  Download Brochure
-                </Button>
               </div>
 
               <div className="grid grid-cols-3 gap-8 pt-8 border-t">
@@ -633,113 +401,6 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Conservation Impact Section */}
-      <section id="conservation" className="py-20 bg-emerald-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌱 Conservation Impact</Badge>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Travel That Makes a Difference</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every AVES tour directly supports habitat conservation and local communities. We're committed to becoming
-              the first B Corp certified birding company in Colombia.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <Card className="text-center p-8 border-0 shadow-lg">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf className="w-8 h-8 text-emerald-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Carbon Neutral Tours</h3>
-              <p className="text-gray-600">
-                All tours operate with full carbon neutrality, with offsets reinvested in critical bird habitat
-                preservation projects.
-              </p>
-            </Card>
-
-            <Card className="text-center p-8 border-0 shadow-lg">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-emerald-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Community Support</h3>
-              <p className="text-gray-600">
-                We partner with local communities, providing fair employment and supporting community-managed
-                conservation initiatives.
-              </p>
-            </Card>
-
-            <Card className="text-center p-8 border-0 shadow-lg">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Globe className="w-8 h-8 text-emerald-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Habitat Protection</h3>
-              <p className="text-gray-600">
-                10% of net profits fund our Conservation Endowment Trust, dedicated to permanent habitat restoration and
-                protection.
-              </p>
-            </Card>
-          </div>
-
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Pursuing B Corp Certification</h3>
-                <p className="text-gray-600 mb-6">
-                  AVES is committed to meeting the highest standards of social and environmental responsibility. We're
-                  working toward B Corp certification, joining BirdsChile as only the second birding-focused B Corp
-                  globally.
-                </p>
-                <div className="space-y-3">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                    <span className="text-gray-700">Transparent impact reporting</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                    <span className="text-gray-700">Stakeholder governance model</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                    <span className="text-gray-700">Environmental accountability</span>
-                  </div>
-                </div>
-              </div>
-              <div className="aspect-square rounded-xl overflow-hidden relative">
-                <OptimizedImage
-                  src="/images/masked-trogon-male.jpg"
-                  alt="Masked Trogon representing cloud forest conservation efforts"
-                  width={400}
-                  height={400}
-                  className="object-contain w-full h-full"
-                  style={{ objectPosition: "center 25%" }}
-                />
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-xl p-3 shadow-lg">
-                  <a
-                    href="https://ebird.org/species/mastro1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 hover:bg-gray-50 transition-colors rounded-lg p-1 -m-1"
-                  >
-                    <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <Award className="w-4 h-4 text-emerald-600" />
-                    </div>
-                    <div className="text-xs">
-                      <div className="font-semibold text-gray-900">
-                        <SpeciesTooltip species={maskedTrogonData}>Masked Trogon</SpeciesTooltip>
-                      </div>
-                      <div className="text-gray-600 italic">Trogon personatus</div>
-                      <div className="text-emerald-600">
-                        Trogón Enmascarado (Spanish) • Cloud Forest Jewel • eBird →
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" className="py-20">
         <div className="container mx-auto px-4">
@@ -968,22 +629,22 @@ export default function AVESLandingPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/tours/adventure" className="hover:text-white transition-colors">
-                    🍃 AVES Adventure
+                    AVES Adventure
                   </Link>
                 </li>
                 <li>
                   <Link href="/tours/vision" className="hover:text-white transition-colors">
-                    🪶 AVES Vision
+                    AVES Vision
                   </Link>
                 </li>
                 <li>
                   <Link href="/tours/elevate" className="hover:text-white transition-colors">
-                    🌼 AVES Elevate
+                    AVES Elevate
                   </Link>
                 </li>
                 <li>
                   <Link href="/tours/souls" className="hover:text-white transition-colors">
-                    🍓 AVES Souls
+                    AVES Souls
                   </Link>
                 </li>
               </ul>
@@ -994,7 +655,7 @@ export default function AVESLandingPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/about" className="hover:text-white transition-colors">
-                    🦅 About AVES
+                    About AVES
                   </Link>
                 </li>
                 <li>
@@ -1004,8 +665,13 @@ export default function AVESLandingPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/about/partners" className="hover:text-white transition-colors">
+                    Our Partners
+                  </Link>
+                </li>
+                <li>
                   <Link href="/conservation" className="hover:text-white transition-colors">
-                    🌱 Conservation
+                    Conservation
                   </Link>
                 </li>
                 <li>
@@ -1016,7 +682,7 @@ export default function AVESLandingPage() {
                 </li>
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
-                    📝 Blog
+                    Blog
                   </Link>
                 </li>
               </ul>
@@ -1027,17 +693,17 @@ export default function AVESLandingPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
-                    🐦 Bird Guide
+                    Bird Guide
                   </Link>
                 </li>
                 <li>
                   <Link href="/blog" className="hover:text-white transition-colors">
-                    ✈️ Travel Tips
+                    Travel Tips
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
-                    📞 Contact
+                    Contact
                   </Link>
                 </li>
               </ul>
@@ -1048,10 +714,10 @@ export default function AVESLandingPage() {
             <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
             <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
               <Link href="/privacy" className="hover:text-white transition-colors">
-                🔒 Privacy Policy
+                Privacy Policy
               </Link>
               <Link href="/terms" className="hover:text-white transition-colors">
-                📋 Terms of Service
+                Terms of Service
               </Link>
               <CookieManagementButton
                 variant="ghost"

@@ -56,15 +56,33 @@ export default function OptimizedImage({
           height: "100%",
           maxWidth: "100%",
           maxHeight: "100%",
+          // Enhanced responsive logo handling
+          minWidth: "24px",
+          minHeight: "24px",
+          // Ensure proper scaling on all devices
+          transform: "scale(1)",
+          transformOrigin: "center",
+          // Prevent layout shift during loading
+          aspectRatio: `${width}/${height}`,
           touchAction: "pan-y pinch-zoom",
           ...style,
         }}
         className={cn(
-          // Only apply hover transitions on desktop
+          // Enhanced responsive transitions - only on desktop
           "md:transition-all md:duration-300 md:ease-in-out",
+          // Improved responsive scaling and centering
+          "object-contain mx-auto",
+          // Responsive sizing constraints
+          "max-w-full max-h-full",
+          // Loading and error states
           isLoading ? "blur-sm" : "blur-0",
           hasError ? "opacity-50" : "opacity-100",
+          // Interactive states
           onClick ? "cursor-pointer" : "",
+          // Logo-specific responsive classes - optimized for footer balance
+          "sm:max-w-[16px] sm:max-h-[16px]",
+          "md:max-w-[18px] md:max-h-[18px]",
+          "lg:max-w-[20px] lg:max-h-[20px]",
         )}
         onLoad={() => setIsLoading(false)}
         onError={() => {
@@ -73,7 +91,7 @@ export default function OptimizedImage({
         }}
         onClick={onClick}
         loading={priority ? "eager" : "lazy"}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes="(max-width: 640px) 16px, (max-width: 768px) 18px, 20px"
       />
       {isLoading && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />}
       {hasError && (

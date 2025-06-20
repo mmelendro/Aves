@@ -25,12 +25,12 @@ const tourFeatures: TourFeature[] = [
   {
     name: "Duration",
     adventure: "7-14 days",
-    vision: "10-12 days",
-    elevate: "8-15 days",
-    souls: "7-10 days",
+    vision: "7-14 days",
+    elevate: "7-14 days",
+    souls: "7-14 days",
   },
   {
-    name: "Price Range",
+    name: "Average Daily Price",
     adventure: "$1,000/day",
     vision: "$1,250/day",
     elevate: "$1,500/day",
@@ -51,17 +51,24 @@ const tourFeatures: TourFeature[] = [
     souls: true,
   },
   {
+    name: "Private Transportation",
+    adventure: true,
+    vision: true,
+    elevate: true,
+    souls: true,
+  },
+  {
+    name: "Endemic Species Focus",
+    adventure: true,
+    vision: true,
+    elevate: true,
+    souls: true,
+  },
+  {
     name: "Photography Instruction & Workshops",
     adventure: false,
     vision: true,
     elevate: false,
-    souls: false,
-  },
-  {
-    name: "Luxury Amenities & Services",
-    adventure: false,
-    vision: false,
-    elevate: true,
     souls: false,
   },
   {
@@ -70,6 +77,20 @@ const tourFeatures: TourFeature[] = [
     vision: false,
     elevate: true,
     souls: false,
+  },
+  {
+    name: "Gourmet Dining",
+    adventure: false,
+    vision: false,
+    elevate: true,
+    souls: true,
+  },
+  {
+    name: "Luxury Amenities & Premium Services",
+    adventure: false,
+    vision: false,
+    elevate: true,
+    souls: true,
   },
   {
     name: "Cultural Immersion Experiences",
@@ -90,20 +111,6 @@ const tourFeatures: TourFeature[] = [
     adventure: false,
     vision: false,
     elevate: false,
-    souls: true,
-  },
-  {
-    name: "Private Transportation",
-    adventure: true,
-    vision: true,
-    elevate: true,
-    souls: true,
-  },
-  {
-    name: "Endemic Species Focus",
-    adventure: true,
-    vision: true,
-    elevate: true,
     souls: true,
   },
 ]
@@ -176,19 +183,75 @@ export default function TourComparison() {
     return colorMap[color as keyof typeof colorMap] || "bg-gray-600 text-white border-gray-600"
   }
 
-  const renderFeatureValue = (value: boolean | string) => {
+  const renderFeatureValue = (value: boolean | string, tourId: string) => {
     if (typeof value === "boolean") {
       return value ? (
-        <CheckCircle className="w-6 h-6 text-green-500 drop-shadow-sm" />
+        <div className="flex items-center justify-center relative">
+          <CheckCircle
+            className={`w-6 h-6 drop-shadow-sm ${
+              tourId === "adventure"
+                ? "text-emerald-500"
+                : tourId === "vision"
+                  ? "text-purple-500"
+                  : tourId === "elevate"
+                    ? "text-yellow-500"
+                    : "text-red-500"
+            }`}
+          />
+          {/* Subtle glow effect for premium tiers */}
+          {(tourId === "elevate" || tourId === "souls") && (
+            <div
+              className={`absolute w-8 h-8 rounded-full -z-10 opacity-20 ${
+                tourId === "elevate" ? "bg-yellow-200" : "bg-red-200"
+              }`}
+            ></div>
+          )}
+        </div>
       ) : (
-        <span className="text-gray-400">—</span>
+        <span className="text-gray-300 text-lg font-light">—</span>
       )
     }
-    return <span className="text-sm font-medium">{value}</span>
+    return (
+      <span
+        className={`text-sm font-medium ${
+          tourId === "souls"
+            ? "text-red-700 font-semibold"
+            : tourId === "elevate"
+              ? "text-yellow-700 font-semibold"
+              : tourId === "vision"
+                ? "text-purple-700 font-semibold"
+                : "text-emerald-700 font-semibold"
+        }`}
+      >
+        {value}
+      </span>
+    )
   }
 
   return (
-    <div className="space-y-12 p-8 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl shadow-lg border border-gray-100">
+    <div className="space-y-12 p-8 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl shadow-lg border border-gray-100 relative">
+      {/* Enhanced tier progression indicator */}
+      <div className="absolute top-4 right-4 flex items-center space-x-2 opacity-40">
+        <div className="flex flex-col items-center space-y-1">
+          <div className="w-3 h-3 bg-emerald-500 rounded-full shadow-sm"></div>
+          <div className="text-xs text-emerald-600 font-medium">Basic</div>
+        </div>
+        <div className="w-px h-8 bg-gray-300"></div>
+        <div className="flex flex-col items-center space-y-1">
+          <div className="w-3 h-3 bg-purple-500 rounded-full shadow-sm"></div>
+          <div className="text-xs text-purple-600 font-medium">Pro</div>
+        </div>
+        <div className="w-px h-8 bg-gray-300"></div>
+        <div className="flex flex-col items-center space-y-1">
+          <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-sm"></div>
+          <div className="text-xs text-yellow-600 font-medium">Luxury</div>
+        </div>
+        <div className="w-px h-8 bg-gray-300"></div>
+        <div className="flex flex-col items-center space-y-1">
+          <div className="w-3 h-3 bg-red-500 rounded-full shadow-sm"></div>
+          <div className="text-xs text-red-600 font-medium">Premium</div>
+        </div>
+      </div>
       {/* Introduction */}
       <div className="text-center space-y-4 mb-8">
         <h2 className="text-3xl font-bold text-gray-900">Choose Your Perfect Colombian Birding Adventure</h2>
@@ -263,7 +326,7 @@ export default function TourComparison() {
                     {selectedTours.map((tourId) => (
                       <td key={tourId} className="p-4 text-center">
                         <div className="flex items-center justify-center min-h-[40px]">
-                          {renderFeatureValue(feature[tourId as keyof TourFeature] as boolean | string)}
+                          {renderFeatureValue(feature[tourId as keyof TourFeature] as boolean | string, tourId)}
                         </div>
                       </td>
                     ))}
