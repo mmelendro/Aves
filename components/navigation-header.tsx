@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 import Link from "next/link"
@@ -12,6 +12,47 @@ interface NavigationHeaderProps {
 
 export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add("menu-open")
+      // Store current scroll position
+      const scrollY = window.scrollY
+      document.body.style.top = `-${scrollY}px`
+    } else {
+      document.body.classList.remove("menu-open")
+      // Restore scroll position
+      const scrollY = document.body.style.top
+      document.body.style.top = ""
+      if (scrollY) {
+        window.scrollTo(0, Number.parseInt(scrollY || "0") * -1)
+      }
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove("menu-open")
+      document.body.style.top = ""
+    }
+  }, [mobileMenuOpen])
+
+  // Handle ESC key to close mobile menu
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
+    }
+
+    if (mobileMenuOpen) {
+      document.addEventListener("keydown", handleEscKey)
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey)
+    }
+  }, [mobileMenuOpen])
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
@@ -157,115 +198,133 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           className="md:hidden p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle mobile menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
         </button>
       </div>
 
+      {/* Mobile Navigation Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 top-[73px] bg-black/20 z-30"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t">
-          <nav className="container mx-auto px-4 py-4 space-y-4">
-            <div className="py-2">
-              <div className="text-gray-700 font-medium py-2">Tours</div>
-              <div className="pl-4 space-y-2">
-                <Link
-                  href="/tours"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  All Tours Overview
-                </Link>
-                <Link
-                  href="/tours/adventure"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  AVES Adventure
-                </Link>
-                <Link
-                  href="/tours/vision"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  AVES Vision
-                </Link>
-                <Link
-                  href="/tours/elevate"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  AVES Elevate
-                </Link>
-                <Link
-                  href="/tours/souls"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  AVES Souls
-                </Link>
+        <div className="md:hidden fixed inset-x-0 top-[73px] z-40 bg-white border-t shadow-lg">
+          <div className="max-h-[calc(100vh-73px)] overflow-y-auto overscroll-contain">
+            <nav id="mobile-navigation" className="container mx-auto px-4 py-4 space-y-4">
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">Tours</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/tours"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    All Tours Overview
+                  </Link>
+                  <Link
+                    href="/tours/adventure"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    AVES Adventure
+                  </Link>
+                  <Link
+                    href="/tours/vision"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    AVES Vision
+                  </Link>
+                  <Link
+                    href="/tours/elevate"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    AVES Elevate
+                  </Link>
+                  <Link
+                    href="/tours/souls"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    AVES Souls
+                  </Link>
+                </div>
               </div>
-            </div>
-            <div className="py-2">
-              <div className="text-gray-700 font-medium py-2">About</div>
-              <div className="pl-4 space-y-2">
-                <Link
-                  href="/about"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  About AVES
-                </Link>
-                <Link
-                  href="/team"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Our Team
-                </Link>
-                <Link
-                  href="/about/partners"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Our Partners
-                </Link>
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">About</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/about"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    About AVES
+                  </Link>
+                  <Link
+                    href="/team"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Team
+                  </Link>
+                  <Link
+                    href="/about/partners"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Partners
+                  </Link>
+                </div>
               </div>
-            </div>
-            <Link
-              href="/about/b-corp"
-              className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              B Corp Journey
-            </Link>
-            <Link
-              href="/blog"
-              className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Blog
-            </Link>
-            <Link
-              href="/conservation"
-              className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Conservation
-            </Link>
-            <Link
-              href="/contact"
-              className="block text-gray-700 hover:text-emerald-600 transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
-            <div className="pt-4">
-              <Link href="/shopping">
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
+              <Link
+                href="/about/b-corp"
+                className="mobile-menu-item block text-gray-700 hover:text-emerald-600 transition-colors py-2 focus:outline-none"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                B Corp Journey
               </Link>
-            </div>
-          </nav>
+              <Link
+                href="/blog"
+                className="mobile-menu-item block text-gray-700 hover:text-emerald-600 transition-colors py-2 focus:outline-none"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/conservation"
+                className="mobile-menu-item block text-gray-700 hover:text-emerald-600 transition-colors py-2 focus:outline-none"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Conservation
+              </Link>
+              <Link
+                href="/contact"
+                className="mobile-menu-item block text-gray-700 hover:text-emerald-600 transition-colors py-2 focus:outline-none"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="pt-4 pb-2">
+                <Link href="/shopping">
+                  <Button
+                    className="w-full bg-emerald-600 hover:bg-emerald-700"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Book Your Journey
+                  </Button>
+                </Link>
+              </div>
+            </nav>
+          </div>
         </div>
       )}
     </header>

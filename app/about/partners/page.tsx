@@ -8,6 +8,7 @@ import { Users, Leaf, Globe, ArrowRight, Menu, X, ChevronDown, ExternalLink } fr
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import { CookieManagementButton } from "@/components/cookie-management-button"
+import { cn } from "@/lib/utils"
 
 export default function PartnersPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -20,7 +21,7 @@ export default function PartnersPage() {
     {
       id: "proaves",
       name: "Fundación ProAves",
-      logo: "/images/partners/proaves-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Proaves-uNr98rqYDPhDEWaKP6rOMR2BpDebz0.gif",
       description:
         "Colombia's leading bird conservation organization, protecting over 1 million acres of critical habitat across 29 nature reserves. ProAves has discovered 15 new bird species and leads groundbreaking conservation efforts including the protection of critically endangered species like the Blue-billed Curassow and Yellow-eared Parrot.",
       website: "https://proaves.org/en/",
@@ -30,7 +31,7 @@ export default function PartnersPage() {
     {
       id: "el-dorado",
       name: "ProAves El Dorado Reserve",
-      logo: "/images/partners/el-dorado-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ElDorado-jG9NzEyeb8afnzxKfKaALuYlKis10L.png",
       description:
         "An award-winning ecolodge and research station in the Sierra Nevada de Santa Marta, protecting habitat for 22 endemic bird species. This unique cloud forest reserve offers unparalleled access to endemic species while directly funding habitat protection through sustainable ecotourism.",
       website: "https://proaves.org/en/proaves-el-dorado-reserve/",
@@ -40,7 +41,7 @@ export default function PartnersPage() {
     {
       id: "montezuma",
       name: "Montezuma Rainforest Lodge",
-      logo: "/images/partners/montezuma-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Montezuma-uD6jOfKuFacfO8EBv66OaXWJ11msyD.webp",
       description:
         "A premier eco-lodge nestled in the heart of Colombia's pristine rainforest, offering luxury accommodations with direct access to incredible biodiversity. The lodge provides expert-guided birding tours and supports local conservation initiatives while maintaining the highest standards of sustainable tourism.",
       website: "https://montezumarainforest.com/",
@@ -50,7 +51,7 @@ export default function PartnersPage() {
     {
       id: "hacienda-bosque",
       name: "Hacienda El Bosque",
-      logo: "/images/partners/hacienda-bosque-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hacienda%20el%20Bosque-CcDbCAFi8PGERoeC9RV2IHBrZ7v2Zb.png",
       description:
         "A charming mountain retreat specializing in high-altitude birding experiences and sustainable agriculture. This family-owned hacienda offers intimate access to Andean cloud forest species while supporting local communities through responsible tourism and organic farming practices.",
       website: "https://www.instagram.com/haciendaelbosque/",
@@ -60,7 +61,7 @@ export default function PartnersPage() {
     {
       id: "selva",
       name: "Fundación Selva",
-      logo: "/images/partners/selva-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-SELVA-Cs5ncIEoRRhVmEJbOsYEObrKToFaEx.png",
       description:
         "Dedicated to protecting Colombia's tropical forests through research, education, and sustainable development. Their comprehensive approach includes biodiversity monitoring, community engagement, and habitat restoration across critical ecosystems in the Amazon and Chocó regions.",
       website: "https://www.selva.org.co/en/home/",
@@ -70,7 +71,7 @@ export default function PartnersPage() {
     {
       id: "refugio-esmeralda",
       name: "Refugio La Esmeralda",
-      logo: "/images/partners/refugio-esmeralda-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Refugio%20La%20Esmeralda-6EqP7mLLqiYWEv45xv3PRXrk13YUlH.png",
       description:
         "A hidden gem ecolodge offering authentic wilderness experiences in pristine natural settings. This intimate refuge provides exceptional birding opportunities while maintaining minimal environmental impact and supporting local conservation efforts through community-based tourism.",
       website: "https://www.instagram.com/refugiolaesmeraldaoficial/",
@@ -80,7 +81,7 @@ export default function PartnersPage() {
     {
       id: "finca-suasie",
       name: "Finca Suasie",
-      logo: "/images/partners/finca-suasie-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Finca%20Suasie-buMkScxufSseucAtYRyytpm4cEomB4.png",
       description:
         "Specializing in high-altitude birding experiences in the Chingaza National Park region, offering unique access to páramo ecosystems and endemic Andean species. This working farm combines sustainable agriculture with exceptional birding opportunities at elevations above 3,000 meters.",
       website: "https://fincasuasie.com/en/birdwatching-in-chingaza-with-lodging/",
@@ -90,7 +91,7 @@ export default function PartnersPage() {
     {
       id: "termales-ruiz",
       name: "Termales del Ruiz",
-      logo: "/images/partners/termales-ruiz-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Termales%20del%20Ruiz-8xj86TcNFAli9zxWTi4QKq1bgK3Kwn.png",
       description:
         "Combining the therapeutic benefits of natural hot springs with exceptional high-altitude birding opportunities in the Los Nevados National Park. This unique partnership offers relaxation and birding at extreme elevations, with access to specialized Andean species and stunning volcanic landscapes.",
       website: "https://termalesdelruiz.com/servicios/avistamiento-de-aves/",
@@ -366,14 +367,21 @@ export default function PartnersPage() {
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-gray-200 shadow-sm">
+                      <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center overflow-hidden border-2 border-emerald-100 shadow-sm hover:border-emerald-200 transition-colors duration-200">
                         <OptimizedImage
                           src={partner.logo || "/placeholder.svg"}
                           alt={`${partner.name} official logo`}
                           width={80}
                           height={80}
-                          className="max-w-full max-h-full object-contain p-2 transition-transform duration-200 group-hover:scale-105"
-                          priority={partner.id === "proaves"} // Priority loading for first partner
+                          className={cn(
+                            "max-w-full max-h-full object-contain p-3 transition-transform duration-200 group-hover:scale-105",
+                            partner.id === "proaves" ? "filter drop-shadow-sm" : "",
+                          )}
+                          priority={partner.id === "proaves"}
+                          style={{
+                            filter:
+                              partner.id === "proaves" ? "drop-shadow(0 2px 4px rgba(16, 185, 129, 0.1))" : "none",
+                          }}
                           onError={(e) => {
                             console.warn(`Failed to load logo for ${partner.name}`)
                             e.currentTarget.src =

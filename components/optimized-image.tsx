@@ -49,17 +49,26 @@ export default function OptimizedImage({
         "relative overflow-hidden flex items-center justify-center",
         // Only apply hover effects on non-touch devices
         "md:group md:hover:scale-105 md:hover:brightness-110",
-        // Enhanced logo container styling with better visual hierarchy
+        // Enhanced logo container styling with special ProAves treatment
         src.includes("logo") || src.includes("partners")
           ? "bg-white rounded-lg border border-gray-100 shadow-sm"
           : "bg-gray-100 rounded-lg",
-        // Professional partner logo presentation
-        src.includes("proaves") ? "border-emerald-200 bg-gradient-to-br from-white to-emerald-50" : "",
+        // Special styling for ProAves logo with conservation theme - enhanced for GIF
+        src.includes("proaves") ? "border-emerald-200 bg-gradient-to-br from-white to-emerald-50 shadow-md" : "",
+        // Enhanced visual hierarchy for partner logos with GIF support
+        src.includes("partners") ? "hover:shadow-lg transition-shadow duration-200" : "",
+        // GIF-specific optimizations for smooth animation
+        src.includes(".gif") ? "will-change-transform backface-visibility-hidden" : "",
         className,
       )}
       style={{
         aspectRatio: `${width}/${height}`,
         touchAction: "pan-y pinch-zoom",
+        // GIF performance optimizations
+        ...(src.includes(".gif") && {
+          transform: "translateZ(0)", // Hardware acceleration for GIF
+          WebkitTransform: "translateZ(0)",
+        }),
         ...style,
       }}
     >
@@ -86,6 +95,12 @@ export default function OptimizedImage({
           touchAction: "pan-y pinch-zoom",
           // Add padding for logos to prevent edge cropping, special handling for ProAves
           padding: src.includes("logo") || src.includes("partners") ? (src.includes("proaves") ? "12px" : "8px") : "0",
+          // GIF-specific optimizations
+          ...(src.includes(".gif") && {
+            imageRendering: "auto",
+            WebkitImageRendering: "auto",
+            msImageRendering: "auto",
+          }),
           ...style,
         }}
         className={cn(
