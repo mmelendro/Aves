@@ -22,54 +22,80 @@ export default function PartnersPage() {
       name: "Fundación ProAves",
       logo: "/images/partners/proaves-logo.png",
       description:
-        "Colombia's leading bird conservation organization, protecting over 1 million acres of critical habitat. ProAves operates the renowned El Dorado Nature Reserve in the Sierra Nevada de Santa Marta, home to 22 endemic bird species and our flagship conservation partnership.",
-      website: "https://www.proaves.org",
+        "Colombia's leading bird conservation organization, protecting over 1 million acres of critical habitat across 29 nature reserves. ProAves has discovered 15 new bird species and leads groundbreaking conservation efforts including the protection of critically endangered species like the Blue-billed Curassow and Yellow-eared Parrot.",
+      website: "https://proaves.org/en/",
       category: "Conservation Foundation",
+      keyContributions: ["29 Protected Reserves", "15 New Species Discovered", "1M+ Acres Protected"],
     },
     {
       id: "el-dorado",
-      name: "El Dorado Nature Reserve",
+      name: "ProAves El Dorado Reserve",
       logo: "/images/partners/el-dorado-logo.png",
       description:
-        "An award-winning ecolodge and research station in the Sierra Nevada de Santa Marta. This unique partnership offers unparalleled access to endemic species while directly funding habitat protection and local community development through sustainable tourism.",
-      website: "https://www.proaves.org/en/el-dorado-nature-reserve/",
+        "An award-winning ecolodge and research station in the Sierra Nevada de Santa Marta, protecting habitat for 22 endemic bird species. This unique cloud forest reserve offers unparalleled access to endemic species while directly funding habitat protection through sustainable ecotourism.",
+      website: "https://proaves.org/en/proaves-el-dorado-reserve/",
       category: "Ecolodge & Research Station",
+      keyContributions: ["22 Endemic Species", "Cloud Forest Protection", "Research Station"],
     },
     {
-      id: "choco-lodge",
-      name: "Chocó Lodge",
-      logo: "/images/partners/choco-lodge-logo.png",
+      id: "montezuma",
+      name: "Montezuma Rainforest Lodge",
+      logo: "/images/partners/montezuma-logo.png",
       description:
-        "A community-owned ecolodge in the heart of the Chocó bioregion, one of the world's most biodiverse hotspots. Our partnership supports local Afro-Colombian communities while providing access to over 400 bird species in pristine rainforest habitat.",
-      website: "https://www.choco-lodge.com",
-      category: "Community Ecolodge",
+        "A premier eco-lodge nestled in the heart of Colombia's pristine rainforest, offering luxury accommodations with direct access to incredible biodiversity. The lodge provides expert-guided birding tours and supports local conservation initiatives while maintaining the highest standards of sustainable tourism.",
+      website: "https://montezumarainforest.com/",
+      category: "Luxury Ecolodge",
+      keyContributions: ["Luxury Eco-Tourism", "Expert Guides", "Rainforest Access"],
+    },
+    {
+      id: "hacienda-bosque",
+      name: "Hacienda El Bosque",
+      logo: "/images/partners/hacienda-bosque-logo.png",
+      description:
+        "A charming mountain retreat specializing in high-altitude birding experiences and sustainable agriculture. This family-owned hacienda offers intimate access to Andean cloud forest species while supporting local communities through responsible tourism and organic farming practices.",
+      website: "https://www.instagram.com/haciendaelbosque/",
+      category: "Mountain Retreat",
+      keyContributions: ["High-Altitude Birding", "Sustainable Agriculture", "Cloud Forest Access"],
     },
     {
       id: "selva",
       name: "Fundación Selva",
       logo: "/images/partners/selva-logo.png",
       description:
-        "Dedicated to protecting Colombia's tropical forests through research, education, and sustainable development. Their work in the Amazon and Chocó regions provides crucial scientific data that informs our conservation-focused tour itineraries and supports habitat protection.",
-      website: "https://www.fundacionselva.org",
+        "Dedicated to protecting Colombia's tropical forests through research, education, and sustainable development. Their comprehensive approach includes biodiversity monitoring, community engagement, and habitat restoration across critical ecosystems in the Amazon and Chocó regions.",
+      website: "https://www.selva.org.co/en/home/",
       category: "Research Foundation",
+      keyContributions: ["Forest Protection", "Biodiversity Research", "Community Programs"],
     },
     {
-      id: "tanager",
-      name: "Tanager Tourism",
-      logo: "/images/partners/tanager-logo.png",
+      id: "refugio-esmeralda",
+      name: "Refugio La Esmeralda",
+      logo: "/images/partners/refugio-esmeralda-logo.png",
       description:
-        "A pioneering sustainable tourism operator specializing in birding and nature photography tours across Colombia. Their expertise in remote locations and commitment to responsible travel practices makes them an ideal partner for our most adventurous expeditions.",
-      website: "https://www.tanagertourism.com",
-      category: "Sustainable Tourism",
+        "A hidden gem ecolodge offering authentic wilderness experiences in pristine natural settings. This intimate refuge provides exceptional birding opportunities while maintaining minimal environmental impact and supporting local conservation efforts through community-based tourism.",
+      website: "https://www.instagram.com/refugiolaesmeraldaoficial/",
+      category: "Wilderness Refuge",
+      keyContributions: ["Wilderness Access", "Minimal Impact Tourism", "Community Support"],
     },
     {
-      id: "humboldt",
-      name: "Instituto Humboldt",
-      logo: "/images/partners/humboldt-logo.png",
+      id: "finca-suasie",
+      name: "Finca Suasie",
+      logo: "/images/partners/finca-suasie-logo.png",
       description:
-        "Colombia's premier biodiversity research institute, providing scientific expertise and species data that enhances our educational programs. Their research on endemic species and ecosystem conservation directly informs our tour content and conservation messaging.",
-      website: "https://www.humboldt.org.co",
-      category: "Research Institute",
+        "Specializing in high-altitude birding experiences in the Chingaza National Park region, offering unique access to páramo ecosystems and endemic Andean species. This working farm combines sustainable agriculture with exceptional birding opportunities at elevations above 3,000 meters.",
+      website: "https://fincasuasie.com/en/birdwatching-in-chingaza-with-lodging/",
+      category: "High-Altitude Birding",
+      keyContributions: ["Páramo Access", "Endemic Species", "3,000m+ Elevation"],
+    },
+    {
+      id: "termales-ruiz",
+      name: "Termales del Ruiz",
+      logo: "/images/partners/termales-ruiz-logo.png",
+      description:
+        "Combining the therapeutic benefits of natural hot springs with exceptional high-altitude birding opportunities in the Los Nevados National Park. This unique partnership offers relaxation and birding at extreme elevations, with access to specialized Andean species and stunning volcanic landscapes.",
+      website: "https://termalesdelruiz.com/servicios/avistamiento-de-aves/",
+      category: "Thermal Springs & Birding",
+      keyContributions: ["Thermal Springs", "Volcanic Landscapes", "High-Altitude Species"],
     },
   ]
 
@@ -334,19 +360,30 @@ export default function PartnersPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {partners.map((partner) => (
               <Card key={partner.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-gray-200 shadow-sm">
                         <OptimizedImage
                           src={partner.logo || "/placeholder.svg"}
-                          alt={`${partner.name} logo`}
-                          width={64}
-                          height={64}
-                          className="max-w-full max-h-full object-contain"
+                          alt={`${partner.name} official logo`}
+                          width={80}
+                          height={80}
+                          className="max-w-full max-h-full object-contain p-2 transition-transform duration-200 group-hover:scale-105"
+                          priority={partner.id === "proaves"} // Priority loading for first partner
+                          onError={(e) => {
+                            console.warn(`Failed to load logo for ${partner.name}`)
+                            e.currentTarget.src =
+                              "/placeholder.svg?height=80&width=80&text=" +
+                              partner.name
+                                .split(" ")
+                                .map((w) => w[0])
+                                .join("")
+                          }}
+                          sizes="(max-width: 768px) 64px, 80px"
                         />
                       </div>
                     </div>
@@ -374,7 +411,19 @@ export default function PartnersPage() {
                           </Button>
                         </Link>
                       </div>
-                      <p className="text-gray-600 leading-relaxed">{partner.description}</p>
+                      <p className="text-gray-600 leading-relaxed mb-4">{partner.description}</p>
+
+                      {/* Key Contributions */}
+                      <div className="flex flex-wrap gap-2">
+                        {partner.keyContributions.map((contribution, index) => (
+                          <span
+                            key={index}
+                            className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700"
+                          >
+                            {contribution}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </CardContent>

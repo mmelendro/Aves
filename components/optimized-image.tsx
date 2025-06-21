@@ -49,6 +49,12 @@ export default function OptimizedImage({
         "relative overflow-hidden flex items-center justify-center",
         // Only apply hover effects on non-touch devices
         "md:group md:hover:scale-105 md:hover:brightness-110",
+        // Enhanced logo container styling with better visual hierarchy
+        src.includes("logo") || src.includes("partners")
+          ? "bg-white rounded-lg border border-gray-100 shadow-sm"
+          : "bg-gray-100 rounded-lg",
+        // Professional partner logo presentation
+        src.includes("proaves") ? "border-emerald-200 bg-gradient-to-br from-white to-emerald-50" : "",
         className,
       )}
       style={{
@@ -64,7 +70,7 @@ export default function OptimizedImage({
         height={height}
         priority={priority}
         style={{
-          objectFit: "cover", // Changed from "contain" to "cover" for better circular framing
+          objectFit: src.includes("logo") || src.includes("partners") ? "contain" : "cover",
           width: "100%",
           height: "100%",
           maxWidth: "100%",
@@ -78,13 +84,15 @@ export default function OptimizedImage({
           // Prevent layout shift during loading
           aspectRatio: `${width}/${height}`,
           touchAction: "pan-y pinch-zoom",
+          // Add padding for logos to prevent edge cropping, special handling for ProAves
+          padding: src.includes("logo") || src.includes("partners") ? (src.includes("proaves") ? "12px" : "8px") : "0",
           ...style,
         }}
         className={cn(
           // Enhanced responsive transitions - only on desktop
           "md:transition-all md:duration-300 md:ease-in-out",
-          // Improved responsive scaling and centering
-          "object-cover mx-auto", // Changed from "object-contain" to "object-cover"
+          // Improved responsive scaling and centering - conditional based on image type
+          src.includes("logo") ? "object-contain mx-auto" : "object-cover mx-auto",
           // Responsive sizing constraints
           "max-w-full max-h-full",
           // Loading and error states
