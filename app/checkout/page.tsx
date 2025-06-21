@@ -7,10 +7,9 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowRight, ArrowLeft, CheckCircle, Calendar, Users, CreditCard, Shield } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
+import { NavigationHeader } from "@/components/navigation-header"
 
 const tourTypes = {
   adventure: {
@@ -122,52 +121,7 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/images/aves-logo.png"
-              alt="AVES Birdwatching Tours Logo"
-              width={40}
-              height={40}
-              className="w-10 h-10 object-contain"
-            />
-            <span className="text-xl font-bold text-gray-900">AVES</span>
-          </Link>
-          <div className="flex items-center space-x-4">
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step >= 1 ? "bg-emerald-600 text-white" : "bg-gray-200 text-gray-600"
-              }`}
-            >
-              1
-            </div>
-            <span className="text-sm font-medium">Tour Selection</span>
-          </div>
-          <div className="w-8 h-px bg-gray-300"></div>
-          <div className="flex items-center space-x-2">
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step >= 2 ? "bg-emerald-600 text-white" : "bg-gray-200 text-gray-600"
-              }`}
-            >
-              2
-            </div>
-            <span className="text-sm font-medium">Your Details</span>
-          </div>
-          <div className="w-8 h-px bg-gray-300"></div>
-          <div className="flex items-center space-x-2">
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step >= 3 ? "bg-emerald-600 text-white" : "bg-gray-200 text-gray-600"
-              }`}
-            >
-              3
-            </div>
-            <span className="text-sm font-medium">Payment</span>
-          </div>
-        </div>
-      </header>
+      <NavigationHeader currentPage="/checkout" />
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
