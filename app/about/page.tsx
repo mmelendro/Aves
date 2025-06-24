@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, ArrowRight, Users, Menu, X, ChevronDown, Shield } from "lucide-react"
+import { CheckCircle, ArrowRight, Users, Menu, X, ChevronDown, Shield, Award } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -272,14 +272,37 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative">
-              <Image
-                src="/images/chestnut-crowned-antpitta.jpg"
-                alt="Chestnut-crowned Antpitta representing AVES' scientific approach to finding elusive cloud forest specialists"
-                width={600}
-                height={450}
-                className="object-contain w-full h-full"
-              />
+            <div className="space-y-4 relative">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative bg-gradient-to-br from-emerald-50 to-blue-50">
+                <Image
+                  src="/images/blue-crowned-motmot-new.jpg"
+                  alt="Blue-crowned Motmot representing AVES' commitment to discovering Colombia's endemic highland species"
+                  width={600}
+                  height={450}
+                  className="object-cover w-full h-full"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+              </div>
+              <div className="absolute -bottom-[70px] left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-gray-100 min-w-max max-w-xs z-10">
+                <a
+                  href="https://ebird.org/species/blcmot1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-3 hover:bg-gray-50/50 transition-colors rounded-lg p-1 -m-1"
+                >
+                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Award className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-900 text-sm whitespace-nowrap">Blue-crowned Motmot</div>
+                    <div className="text-xs text-gray-600 italic whitespace-nowrap">Momotus coeruliceps</div>
+                    <div className="text-xs text-emerald-600 whitespace-nowrap">
+                      Barranquero Coroniazul • View on eBird →
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
 
             <div>
@@ -586,7 +609,7 @@ export default function AboutPage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Average Tour Value:</span>
-                  <span className="font-semibold">CAD $10,400-$18,200</span>
+                  <span className="font-semibtml">CAD $10,400-$18,200</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Gross Margin Target:</span>

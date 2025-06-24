@@ -309,6 +309,17 @@ export default function TeamPage() {
                     <Globe className="w-4 h-4 mr-2" />
                     Spanish, English
                   </div>
+                  <div className="flex items-center">
+                    <Globe className="w-4 h-4 mr-2" />
+                    <a
+                      href="https://ebird.org/profile/NDc2OTE5OA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-600 hover:text-emerald-700 transition-colors font-medium"
+                    >
+                      View eBird Profile
+                    </a>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -333,7 +344,7 @@ export default function TeamPage() {
                     className="rounded-2xl shadow-2xl object-cover w-full"
                   />
                   <div className="absolute -bottom-6 -right-6 bg-emerald-600 text-white p-4 rounded-lg shadow-lg">
-                    <p className="font-semibold">1,200+ species</p>
+                    <p className="font-semibold">500+ species</p>
                     <p className="text-sm opacity-90">documented in Colombia</p>
                   </div>
                 </div>
@@ -342,7 +353,7 @@ export default function TeamPage() {
           </div>
 
           {/* Indigenous Guides Section */}
-          <div className="border-t border-gray-200 pt-16">
+          <div id="guides" className="border-t border-gray-200 pt-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Local Community Guides</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
@@ -364,6 +375,7 @@ export default function TeamPage() {
                       height={96}
                       className="w-full h-full object-cover"
                       style={{ objectFit: "cover" }}
+                      fallback="/images/manakin-1.jpg"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">Yeferson Guale Epiayu</h3>
@@ -592,6 +604,28 @@ export default function TeamPage() {
                       </a>
                     </div>
                     <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://ebird.org/profile/MTA2NjQxMA/CO-MET"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 hover:text-purple-700 transition-colors font-medium"
+                      >
+                        View eBird Profile
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.facebook.com/AmazorinoquiaBirding"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-600 transition-colors"
+                      >
+                        Amazorinoquia Birding Facebook
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
                       <MapPin className="w-4 h-4 mr-2" />
                       <span>El Dorado Reserve & Multi-Regional Tours</span>
                     </div>
@@ -723,8 +757,189 @@ export default function TeamPage() {
                       </a>
                     </div>
                     <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://ebird.org/profile/MTE0NzM0NQ/CO"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+                      >
+                        View eBird Profile
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
                       <MapPin className="w-4 h-4 mr-2" />
                       <span>Bogotá region páramo ecosystems</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Jaider Carrillo */}
+              <div className="bg-gray-50 rounded-2xl p-8">
+                <div className="text-center mb-6">
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/Jaider Carrillo.jpg"
+                      alt="Jaider Carrillo - Perijá Mountains Specialist and endemic species guide"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Jaider Carrillo</h3>
+                  <p className="text-teal-600 font-medium">Perijá Mountains Specialist</p>
+                </div>
+
+                <div className="space-y-4 text-gray-700 text-sm">
+                  <p>
+                    Jaider Carrillo is our expert guide for the Perijá Mountains region, specializing in the unique
+                    endemic species found in this biogeographically distinct mountain range. His deep knowledge of the
+                    area's avifauna and challenging terrain makes him invaluable for expeditions seeking rare and
+                    endemic birds found nowhere else in Colombia.
+                  </p>
+
+                  <p>
+                    With extensive experience in the region's diverse ecosystems, from cloud forests to páramo, Jaider
+                    has developed exceptional skills in locating and identifying the area's most elusive species. His
+                    expertise in Perijá endemic birds makes him essential for serious birders seeking to complete their
+                    Colombian species lists.
+                  </p>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-gray-900">Expertise:</h4>
+                    <ul className="space-y-1">
+                      <li>• Perijá Mountains endemic species</li>
+                      <li>• High-altitude cloud forest navigation</li>
+                      <li>• Endemic bird behavior and ecology</li>
+                      <li>• Challenging terrain expedition leadership</li>
+                      <li>• Cross-border birding protocols</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.instagram.com/jaidercarrillo20"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-teal-600 transition-colors"
+                      >
+                        @jaidercarrillo20
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.instagram.com/perija_birding_travel/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-teal-600 transition-colors"
+                      >
+                        @perija_birding_travel
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://ebird.org/profile/MTQ2MDk3Ng/CO"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-teal-600 hover:text-teal-700 transition-colors font-medium"
+                      >
+                        View eBird Profile
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>Perijá Mountains Endemic Region</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Jose Luis Ropero */}
+              <div className="bg-gray-50 rounded-2xl p-8">
+                <div className="text-center mb-6">
+                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <OptimizedImage
+                      src="/images/jose-luis-ropero.png"
+                      alt="Jose Luis Ropero - Adventure Tourism Specialist and multi-ecosystem guide"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Jose Luis Ropero</h3>
+                  <p className="text-amber-600 font-medium">Adventure Tourism Specialist</p>
+                </div>
+
+                <div className="space-y-4 text-gray-700 text-sm">
+                  <p>
+                    Jose Luis Ropero is the founder of Ropero Aventuras and brings extensive experience in adventure
+                    tourism and multi-ecosystem birding expeditions. His comprehensive knowledge of Colombia's diverse
+                    regions and ability to navigate challenging terrains makes him an exceptional guide for adventurous
+                    birding expeditions.
+                  </p>
+
+                  <p>
+                    With a passion for combining adventure tourism with responsible birding practices, Jose Luis
+                    specializes in creating unique experiences that showcase Colombia's incredible biodiversity while
+                    supporting local communities. His expertise spans multiple ecosystems and regions throughout
+                    Colombia.
+                  </p>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-gray-900">Expertise:</h4>
+                    <ul className="space-y-1">
+                      <li>• Multi-ecosystem birding expeditions</li>
+                      <li>• Adventure tourism and logistics</li>
+                      <li>• Community-based tourism development</li>
+                      <li>• Challenging terrain navigation</li>
+                      <li>• Sustainable tourism practices</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center text-gray-600">
+                      <Instagram className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://www.instagram.com/roperoaventuras"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-amber-600 transition-colors"
+                      >
+                        @roperoaventuras
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://roperoaventuras.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-amber-600 transition-colors"
+                      >
+                        roperoaventuras.com
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Globe className="w-4 h-4 mr-2" />
+                      <a
+                        href="https://ebird.org/profile/NjQ2ODY5/CO"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-amber-600 hover:text-amber-700 transition-colors font-medium"
+                      >
+                        View eBird Profile
+                      </a>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>Multi-Regional Adventure Tourism</span>
                     </div>
                   </div>
                 </div>

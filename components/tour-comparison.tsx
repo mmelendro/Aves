@@ -279,7 +279,7 @@ export default function TourComparison() {
                 <div className="font-bold text-base">{tour.name}</div>
                 <div className="text-sm font-medium opacity-90">{tour.description}</div>
                 <div className="text-xs opacity-75 leading-tight px-1">{tour.valueProposition}</div>
-                <div className="text-xs font-semibold opacity-95 bg-white/25 rounded-full px-2 py-0.5 mt-2">
+                <div className="text-xs font-semibold opacity-95 bg-white/25 rounded-full px-2 py-0.5 mt-2 text-center leading-tight break-words hyphens-auto max-w-full">
                   {tour.keyBenefit}
                 </div>
               </div>

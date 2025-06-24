@@ -111,7 +111,7 @@ export function BeforeAfterSlider({
         style={{
           height: `${height}px`,
           width: "100%",
-          maxWidth: `${width}px`,
+          maxWidth: "none",
           aspectRatio: "3/2",
           minHeight: "200px",
         }}
@@ -140,7 +140,9 @@ export function BeforeAfterSlider({
           />
           {/* Subtle overlay to emphasize the natural solution */}
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/3 via-transparent to-emerald-900/6"></div>
-          <div className="absolute top-3 left-3 bg-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md z-20">
+          <div
+            className={`absolute top-3 left-3 bg-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md z-20 transition-opacity duration-300 ${sliderPosition < 50 ? "opacity-100" : "opacity-0"}`}
+          >
             {beforeLabel}
           </div>
         </div>
@@ -174,7 +176,9 @@ export function BeforeAfterSlider({
               unoptimized={false}
             />
           </div>
-          <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md z-20">
+          <div
+            className={`absolute top-3 right-3 bg-red-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md z-20 transition-opacity duration-300 ${sliderPosition >= 50 ? "opacity-100" : "opacity-0"}`}
+          >
             {afterLabel}
           </div>
         </div>

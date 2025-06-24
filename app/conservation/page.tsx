@@ -73,26 +73,24 @@ export default function ConservationPage() {
               <Card className="p-6 border-red-200 bg-red-50">
                 <div className="flex items-center mb-4">
                   <AlertTriangle className="w-6 h-6 text-red-600 mr-3" />
-                  <h3 className="text-lg font-bold text-red-800">After Degradation: Polluted Habitat</h3>
+                  <h3 className="text-lg font-bold text-red-800">After Conservation: Protected Habitat</h3>
                 </div>
                 <ul className="space-y-3 text-red-700 text-sm">
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>
-                      Birds forced to incorporate plastic waste into nest construction due to habitat pollution
-                    </span>
+                    <span>Birds build nests with natural materials like twigs, grass, and organic fibers</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Plastic materials break down into microplastics, entering the food chain through chicks</span>
+                    <span>Clean environments support healthy reproduction and stronger chick development</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Toxic chemicals from plastics affect bird health, reproduction, and ecosystem balance</span>
+                    <span>Natural food chains remain uncontaminated, supporting biodiversity recovery</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Contamination spreads through predator-prey relationships, affecting entire ecosystems</span>
+                    <span>Thriving bird populations indicate healthy ecosystems that benefit all wildlife</span>
                   </li>
                 </ul>
               </Card>
@@ -105,19 +103,21 @@ export default function ConservationPage() {
                 <ul className="space-y-3 text-emerald-700 text-sm">
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-emerald-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Birds build nests with natural materials like twigs, grass, and organic fibers</span>
+                    <span>
+                      Birds forced to incorporate plastic waste into nest construction due to habitat pollution
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-emerald-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Clean environments support healthy reproduction and stronger chick development</span>
+                    <span>Plastic materials break down into microplastics, entering the food chain through chicks</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-emerald-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Natural food chains remain uncontaminated, supporting biodiversity recovery</span>
+                    <span>Toxic chemicals from plastics affect bird health, reproduction, and ecosystem balance</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-emerald-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Thriving bird populations indicate healthy ecosystems that benefit all wildlife</span>
+                    <span>Contamination spreads through predator-prey relationships, affecting entire ecosystems</span>
                   </li>
                 </ul>
               </Card>
@@ -216,10 +216,12 @@ export default function ConservationPage() {
               <div className="text-sm text-gray-600">Profits to Conservation</div>
             </Card>
 
-            <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="text-3xl font-bold text-emerald-600 mb-2">50+</div>
-              <div className="text-sm text-gray-600">Local Guides Employed</div>
-            </Card>
+            <Link href="/team#guides" className="block">
+              <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer hover:bg-gray-50">
+                <div className="text-3xl font-bold text-emerald-600 mb-2">10+</div>
+                <div className="text-sm text-gray-600">Local Guides Employed</div>
+              </Card>
+            </Link>
 
             <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-3xl font-bold text-emerald-600 mb-2">5</div>
