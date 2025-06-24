@@ -148,7 +148,7 @@ export function CookiePreferenceCenter() {
                   variant="outline"
                   size="sm"
                   onClick={resetConsent}
-                  className="text-blue-600 border-blue-300 hover:bg-blue-100"
+                  className="text-blue-600 border-blue-300 hover:bg-blue-50 hover:text-blue-700"
                 >
                   <RefreshCw className="w-4 h-4 mr-1" />
                   Reset All
@@ -223,13 +223,21 @@ export function CookiePreferenceCenter() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
-            <Button onClick={acceptAll} className="flex-1 bg-emerald-600 hover:bg-emerald-700">
+            <Button onClick={acceptAll} className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white">
               Accept All Cookies
             </Button>
-            <Button onClick={rejectAll} variant="outline" className="flex-1">
+            <Button
+              onClick={rejectAll}
+              variant="outline"
+              className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50"
+            >
               Reject Non-Essential
             </Button>
-            <Button onClick={handleSavePreferences} variant="outline" className="flex-1">
+            <Button
+              onClick={handleSavePreferences}
+              variant="outline"
+              className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50"
+            >
               Save My Preferences
             </Button>
           </div>

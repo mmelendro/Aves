@@ -50,7 +50,7 @@ export function CookieBanner() {
                   <Button
                     onClick={rejectAll}
                     variant="outline"
-                    className="flex-1 border-gray-300 hover:bg-gray-50"
+                    className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50"
                     size="sm"
                   >
                     Reject Non-Essential

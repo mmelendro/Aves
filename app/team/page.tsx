@@ -780,7 +780,7 @@ export default function TeamPage() {
                 <div className="text-center mb-6">
                   <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
                     <OptimizedImage
-                      src="/images/Jaider Carrillo.jpg"
+                      src="/images/jaider-carrillo.png"
                       alt="Jaider Carrillo - Perijá Mountains Specialist and endemic species guide"
                       width={96}
                       height={96}

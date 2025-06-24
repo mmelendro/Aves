@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                   </div>
 
                   <div className="flex justify-end mt-8">
-                    <Button onClick={() => setStep(2)} className="bg-emerald-600 hover:bg-emerald-700">
+                    <Button onClick={() => setStep(2)} className="bg-emerald-600 hover:bg-emerald-700 text-white">
                       Continue to Details
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -298,13 +298,17 @@ export default function CheckoutPage() {
                   </form>
 
                   <div className="flex justify-between mt-8">
-                    <Button variant="outline" onClick={() => setStep(1)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setStep(1)}
+                      className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                    >
                       <ArrowLeft className="mr-2 w-4 h-4" />
                       Back to Tours
                     </Button>
                     <Button
                       onClick={() => setStep(3)}
-                      className="bg-emerald-600 hover:bg-emerald-700"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white"
                       disabled={!formData.firstName || !formData.lastName || !formData.email}
                     >
                       Continue to Payment
@@ -415,11 +419,15 @@ export default function CheckoutPage() {
                   </div>
 
                   <div className="flex justify-between mt-8">
-                    <Button variant="outline" onClick={() => setStep(1)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setStep(1)}
+                      className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                    >
                       <ArrowLeft className="mr-2 w-4 h-4" />
                       Back to Tours
                     </Button>
-                    <Button className="bg-emerald-600 hover:bg-emerald-700">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
                       Pay Deposit (${depositAmount.toLocaleString()})
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>

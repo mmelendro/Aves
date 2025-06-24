@@ -336,6 +336,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
                           onClick={() => {
                             const newCount = Math.max(1, tour.participants - 1)
                             tourSelections.forEach((t) => updateTourSelection(t.id, "participants", newCount))
@@ -350,6 +351,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
                           onClick={() => {
                             const newCount = Math.min(4, tour.participants + 1)
                             tourSelections.forEach((t) => updateTourSelection(t.id, "participants", newCount))
@@ -373,6 +375,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
                           onClick={() => updateTourSelection(tour.id, "totalDays", Math.max(3, tour.totalDays - 1))}
                           disabled={tour.totalDays <= 3}
                         >
@@ -384,6 +387,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
                           onClick={() => updateTourSelection(tour.id, "totalDays", Math.min(14, tour.totalDays + 1))}
                           disabled={tour.totalDays >= 14}
                         >
@@ -409,6 +413,7 @@ Looking forward to hearing from you!
                           <Button
                             variant="outline"
                             size="sm"
+                            className="border-gray-300 text-gray-900 hover:bg-gray-50"
                             onClick={() => updateTourSelection(tour.id, "breakDays", Math.max(0, tour.breakDays - 1))}
                             disabled={tour.breakDays <= 0}
                           >
@@ -420,6 +425,7 @@ Looking forward to hearing from you!
                           <Button
                             variant="outline"
                             size="sm"
+                            className="border-gray-300 text-gray-900 hover:bg-gray-50"
                             onClick={() => updateTourSelection(tour.id, "breakDays", Math.min(5, tour.breakDays + 1))}
                             disabled={tour.breakDays >= 5}
                           >
@@ -460,7 +466,11 @@ Looking forward to hearing from you!
               {tourSelections.length < 4 && (
                 <Card className="border-2 border-dashed border-gray-300 hover:border-emerald-500 transition-colors">
                   <CardContent className="flex items-center justify-center py-12">
-                    <Button onClick={addTourSelection} variant="ghost" className="text-emerald-600 hover:bg-emerald-50">
+                    <Button
+                      onClick={addTourSelection}
+                      variant="ghost"
+                      className="text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
+                    >
                       <Plus className="w-5 h-5 mr-2" />
                       Add Another Tour (Max 4)
                     </Button>
@@ -595,7 +605,7 @@ Looking forward to hearing from you!
                   <div className="space-y-3">
                     <Link href="/checkout">
                       <Button
-                        className="w-full bg-emerald-600 hover:bg-emerald-700"
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
                         disabled={!contactInfo.name || !contactInfo.email}
                       >
                         <CreditCard className="w-4 h-4 mr-2" />
@@ -604,15 +614,30 @@ Looking forward to hearing from you!
                     </Link>
 
                     <div className="grid grid-cols-3 gap-2">
-                      <Button variant="outline" size="sm" onClick={saveBooking}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={saveBooking}
+                        className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                      >
                         <Save className="w-4 h-4" />
                         {savedBooking ? "Saved!" : "Save"}
                       </Button>
-                      <Button variant="outline" size="sm" onClick={emailBooking}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={emailBooking}
+                        className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                      >
                         <Mail className="w-4 h-4" />
                         Email
                       </Button>
-                      <Button variant="outline" size="sm" onClick={shareBooking}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={shareBooking}
+                        className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                      >
                         <Share2 className="w-4 h-4" />
                         Share
                       </Button>

@@ -1,0 +1,1124 @@
+{
+  "assetLibrary": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-12-24T14:45:18Z",
+    "totalAssets": 67,
+    "categories": {
+      "birdImages": {
+        "categoryId": "bird-images",
+        "name": "Bird Photography",
+        "description": "High-quality bird photography from Colombian expeditions",
+        "totalAssets": 35,
+        "assets": [
+          {
+            "id": "bird-001",
+            "fileName": "blackburnian-warbler.jpg",
+            "fileType": "image",
+            "path": "/images/blackburnian-warbler.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Blackburnian Warbler perched on branch in Colombian cloud forest",
+            "tags": ["warbler", "songbird", "migration", "forest"],
+            "species": {
+              "commonName": "Blackburnian Warbler",
+              "scientificName": "Setophaga fusca",
+              "family": "Parulidae"
+            }
+          },
+          {
+            "id": "bird-002",
+            "fileName": "blue-bird.jpg",
+            "fileType": "image",
+            "path": "/images/blue-bird.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Blue bird species in natural Colombian habitat",
+            "tags": ["blue", "tropical", "endemic"]
+          },
+          {
+            "id": "bird-003",
+            "fileName": "blue-crowned-motmot.jpg",
+            "fileType": "image",
+            "path": "/images/blue-crowned-motmot.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Blue-crowned Motmot displaying distinctive tail feathers",
+            "tags": ["motmot", "tropical", "distinctive"],
+            "species": {
+              "commonName": "Blue-crowned Motmot",
+              "scientificName": "Momotus coeruliceps",
+              "family": "Momotidae"
+            }
+          },
+          {
+            "id": "bird-004",
+            "fileName": "blue-crowned-motmot-new.jpg",
+            "fileType": "image",
+            "path": "/images/blue-crowned-motmot-new.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Blue-crowned Motmot in natural forest setting",
+            "tags": ["motmot", "updated", "forest"]
+          },
+          {
+            "id": "bird-005",
+            "fileName": "buff-tailed-coronet.jpg",
+            "fileType": "image",
+            "path": "/images/buff-tailed-coronet.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Buff-tailed Coronet hummingbird feeding at flower",
+            "tags": ["hummingbird", "coronet", "feeding"],
+            "species": {
+              "commonName": "Buff-tailed Coronet",
+              "scientificName": "Boissonneaua flavescens",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-006",
+            "fileName": "cardinal-guajiro.jpg",
+            "fileType": "image",
+            "path": "/images/cardinal-guajiro.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Guajiro Cardinal endemic to northern Colombia",
+            "tags": ["cardinal", "endemic", "guajiro", "rare"]
+          },
+          {
+            "id": "bird-007",
+            "fileName": "chestnut-crowned-antpitta.jpg",
+            "fileType": "image",
+            "path": "/images/chestnut-crowned-antpitta.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Chestnut-crowned Antpitta on forest floor",
+            "tags": ["antpitta", "ground-dwelling", "elusive"],
+            "species": {
+              "commonName": "Chestnut-crowned Antpitta",
+              "scientificName": "Grallaria ruficapilla",
+              "family": "Grallariidae"
+            }
+          },
+          {
+            "id": "bird-008",
+            "fileName": "chestnut-crowned-antpitta-ground.jpg",
+            "fileType": "image",
+            "path": "/images/chestnut-crowned-antpitta-ground.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Chestnut-crowned Antpitta foraging on ground",
+            "tags": ["antpitta", "foraging", "ground"]
+          },
+          {
+            "id": "bird-009",
+            "fileName": "collared-aracari.jpg",
+            "fileType": "image",
+            "path": "/images/collared-aracari.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Collared Aracari toucan with distinctive beak",
+            "tags": ["toucan", "aracari", "colorful"],
+            "species": {
+              "commonName": "Collared Aracari",
+              "scientificName": "Pteroglossus torquatus",
+              "family": "Ramphastidae"
+            }
+          },
+          {
+            "id": "bird-010",
+            "fileName": "collared-inca.jpg",
+            "fileType": "image",
+            "path": "/images/collared-inca.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Collared Inca hummingbird with white collar marking",
+            "tags": ["hummingbird", "inca", "collar"],
+            "species": {
+              "commonName": "Collared Inca",
+              "scientificName": "Coeligena torquata",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-011",
+            "fileName": "copper-rumped-hummingbird.jpg",
+            "fileType": "image",
+            "path": "/images/copper-rumped-hummingbird.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Copper-rumped Hummingbird showing metallic plumage",
+            "tags": ["hummingbird", "copper", "metallic"],
+            "species": {
+              "commonName": "Copper-rumped Hummingbird",
+              "scientificName": "Amazilia tobaci",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-012",
+            "fileName": "emerald-toucanet.jpg",
+            "fileType": "image",
+            "path": "/images/emerald-toucanet.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Emerald Toucanet with vibrant green plumage",
+            "tags": ["toucanet", "emerald", "green"],
+            "species": {
+              "commonName": "Emerald Toucanet",
+              "scientificName": "Aulacorhynchus prasinus",
+              "family": "Ramphastidae"
+            }
+          },
+          {
+            "id": "bird-013",
+            "fileName": "green-hermit-feeding.jpg",
+            "fileType": "image",
+            "path": "/images/green-hermit-feeding.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Green Hermit hummingbird feeding at flower",
+            "tags": ["hummingbird", "hermit", "feeding"]
+          },
+          {
+            "id": "bird-014",
+            "fileName": "green-hermit-hummingbird.jpg",
+            "fileType": "image",
+            "path": "/images/green-hermit-hummingbird.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Green Hermit hummingbird in profile",
+            "tags": ["hummingbird", "hermit", "profile"],
+            "species": {
+              "commonName": "Green Hermit",
+              "scientificName": "Phaethornis guy",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-015",
+            "fileName": "green-hermit-perched.jpg",
+            "fileType": "image",
+            "path": "/images/green-hermit-perched.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Green Hermit hummingbird perched on branch",
+            "tags": ["hummingbird", "hermit", "perched"]
+          },
+          {
+            "id": "bird-016",
+            "fileName": "green-honeycreeper-blue.jpg",
+            "fileType": "image",
+            "path": "/images/green-honeycreeper-blue.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Green Honeycreeper with blue coloration",
+            "tags": ["honeycreeper", "blue", "tropical"]
+          },
+          {
+            "id": "bird-017",
+            "fileName": "green-honeycreeper-male.jpg",
+            "fileType": "image",
+            "path": "/images/green-honeycreeper-male.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Male Green Honeycreeper displaying breeding plumage",
+            "tags": ["honeycreeper", "male", "breeding"],
+            "species": {
+              "commonName": "Green Honeycreeper",
+              "scientificName": "Chlorophanes spiza",
+              "family": "Thraupidae"
+            }
+          },
+          {
+            "id": "bird-018",
+            "fileName": "green-winged-macaw.jpg",
+            "fileType": "image",
+            "path": "/images/green-winged-macaw.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Green-winged Macaw showing vibrant plumage",
+            "tags": ["macaw", "parrot", "large"],
+            "species": {
+              "commonName": "Green-winged Macaw",
+              "scientificName": "Ara chloropterus",
+              "family": "Psittacidae"
+            }
+          },
+          {
+            "id": "bird-019",
+            "fileName": "king-vulture.jpg",
+            "fileType": "image",
+            "path": "/images/king-vulture.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "King Vulture with distinctive colorful head",
+            "tags": ["vulture", "scavenger", "colorful"],
+            "species": {
+              "commonName": "King Vulture",
+              "scientificName": "Sarcoramphus papa",
+              "family": "Cathartidae"
+            }
+          },
+          {
+            "id": "bird-020",
+            "fileName": "long-tailed-sylph.jpg",
+            "fileType": "image",
+            "path": "/images/long-tailed-sylph.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Long-tailed Sylph hummingbird with extended tail feathers",
+            "tags": ["hummingbird", "sylph", "long-tail"],
+            "species": {
+              "commonName": "Long-tailed Sylph",
+              "scientificName": "Aglaiocercus kingii",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-021",
+            "fileName": "manakin-1.jpg",
+            "fileType": "image",
+            "path": "/images/manakin-1.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Manakin species displaying courtship behavior",
+            "tags": ["manakin", "courtship", "display"]
+          },
+          {
+            "id": "bird-022",
+            "fileName": "manakin-2.jpg",
+            "fileType": "image",
+            "path": "/images/manakin-2.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Manakin in natural forest habitat",
+            "tags": ["manakin", "forest", "habitat"]
+          },
+          {
+            "id": "bird-023",
+            "fileName": "manakin-3.jpg",
+            "fileType": "image",
+            "path": "/images/manakin-3.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Manakin perched on branch",
+            "tags": ["manakin", "perched", "branch"]
+          },
+          {
+            "id": "bird-024",
+            "fileName": "masked-trogon-male.jpg",
+            "fileType": "image",
+            "path": "/images/masked-trogon-male.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Male Masked Trogon with distinctive facial pattern",
+            "tags": ["trogon", "male", "masked"],
+            "species": {
+              "commonName": "Masked Trogon",
+              "scientificName": "Trogon personatus",
+              "family": "Trogonidae"
+            }
+          },
+          {
+            "id": "bird-025",
+            "fileName": "parrot-cecropia.jpg",
+            "fileType": "image",
+            "path": "/images/parrot-cecropia.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Parrot feeding on Cecropia tree",
+            "tags": ["parrot", "feeding", "cecropia"]
+          },
+          {
+            "id": "bird-026",
+            "fileName": "rainbow-bearded-thornbill.jpg",
+            "fileType": "image",
+            "path": "/images/rainbow-bearded-thornbill.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Rainbow-bearded Thornbill hummingbird with iridescent plumage",
+            "tags": ["hummingbird", "thornbill", "rainbow"],
+            "species": {
+              "commonName": "Rainbow-bearded Thornbill",
+              "scientificName": "Chalcostigma herrani",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-027",
+            "fileName": "rainbow-bearded-thornbill-vision.jpg",
+            "fileType": "image",
+            "path": "/images/rainbow-bearded-thornbill-vision.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Rainbow-bearded Thornbill featured in AVES Vision tour",
+            "tags": ["hummingbird", "thornbill", "vision-tour"]
+          },
+          {
+            "id": "bird-028",
+            "fileName": "red-headed-barbet.jpg",
+            "fileType": "image",
+            "path": "/images/red-headed-barbet.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Red-headed Barbet with distinctive red crown",
+            "tags": ["barbet", "red-headed", "colorful"],
+            "species": {
+              "commonName": "Red-headed Barbet",
+              "scientificName": "Eubucco bourcierii",
+              "family": "Capitonidae"
+            }
+          },
+          {
+            "id": "bird-029",
+            "fileName": "red-headed-parrot.jpg",
+            "fileType": "image",
+            "path": "/images/red-headed-parrot.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Red-headed Parrot in tropical forest",
+            "tags": ["parrot", "red-headed", "tropical"]
+          },
+          {
+            "id": "bird-030",
+            "fileName": "red-lored-amazons-pair.jpg",
+            "fileType": "image",
+            "path": "/images/red-lored-amazons-pair.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Pair of Red-lored Amazon parrots",
+            "tags": ["amazon", "parrot", "pair"],
+            "species": {
+              "commonName": "Red-lored Amazon",
+              "scientificName": "Amazona autumnalis",
+              "family": "Psittacidae"
+            }
+          },
+          {
+            "id": "bird-031",
+            "fileName": "resplendent-quetzal.jpg",
+            "fileType": "image",
+            "path": "/images/resplendent-quetzal.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Resplendent Quetzal with magnificent tail plumes",
+            "tags": ["quetzal", "resplendent", "magnificent"],
+            "species": {
+              "commonName": "Resplendent Quetzal",
+              "scientificName": "Pharomachrus mocinno",
+              "family": "Trogonidae"
+            }
+          },
+          {
+            "id": "bird-032",
+            "fileName": "rufous-tailed-hummingbird.jpg",
+            "fileType": "image",
+            "path": "/images/rufous-tailed-hummingbird.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Rufous-tailed Hummingbird in flight",
+            "tags": ["hummingbird", "rufous-tailed", "flight"],
+            "species": {
+              "commonName": "Rufous-tailed Hummingbird",
+              "scientificName": "Amazilia tzacatl",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-033",
+            "fileName": "vermillion-flycatcher.jpg",
+            "fileType": "image",
+            "path": "/images/vermillion-flycatcher.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Vermillion Flycatcher with bright red plumage",
+            "tags": ["flycatcher", "vermillion", "red"],
+            "species": {
+              "commonName": "Vermillion Flycatcher",
+              "scientificName": "Pyrocephalus rubinus",
+              "family": "Tyrannidae"
+            }
+          },
+          {
+            "id": "bird-034",
+            "fileName": "violet-tailed-sylph.jpg",
+            "fileType": "image",
+            "path": "/images/violet-tailed-sylph.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Violet-tailed Sylph hummingbird with purple tail",
+            "tags": ["hummingbird", "sylph", "violet"],
+            "species": {
+              "commonName": "Violet-tailed Sylph",
+              "scientificName": "Aglaiocercus coelestis",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-035",
+            "fileName": "white-bearded-manakin.jpg",
+            "fileType": "image",
+            "path": "/images/white-bearded-manakin.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "White-bearded Manakin displaying white facial feathers",
+            "tags": ["manakin", "white-bearded", "display"],
+            "species": {
+              "commonName": "White-bearded Manakin",
+              "scientificName": "Manacus manacus",
+              "family": "Pipridae"
+            }
+          },
+          {
+            "id": "bird-036",
+            "fileName": "white-necked-jacobin.jpg",
+            "fileType": "image",
+            "path": "/images/white-necked-jacobin.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "White-necked Jacobin hummingbird with distinctive white collar",
+            "tags": ["hummingbird", "jacobin", "white-necked"],
+            "species": {
+              "commonName": "White-necked Jacobin",
+              "scientificName": "Florisuga mellivora",
+              "family": "Trochilidae"
+            }
+          },
+          {
+            "id": "bird-037",
+            "fileName": "yellow-crowned-amazon.jpg",
+            "fileType": "image",
+            "path": "/images/yellow-crowned-amazon.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Yellow-crowned Amazon parrot with golden crown",
+            "tags": ["amazon", "parrot", "yellow-crowned"],
+            "species": {
+              "commonName": "Yellow-crowned Amazon",
+              "scientificName": "Amazona ochrocephala",
+              "family": "Psittacidae"
+            }
+          },
+          {
+            "id": "bird-038",
+            "fileName": "yellow-crowned-euphonia.jpg",
+            "fileType": "image",
+            "path": "/images/yellow-crowned-euphonia.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Yellow-crowned Euphonia with bright yellow cap",
+            "tags": ["euphonia", "yellow-crowned", "small"],
+            "species": {
+              "commonName": "Yellow-crowned Euphonia",
+              "scientificName": "Euphonia luteicapilla",
+              "family": "Fringillidae"
+            }
+          },
+          {
+            "id": "bird-039",
+            "fileName": "yellow-throated-toucan.jpg",
+            "fileType": "image",
+            "path": "/images/yellow-throated-toucan.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Yellow-throated Toucan with large colorful beak",
+            "tags": ["toucan", "yellow-throated", "large-beak"],
+            "species": {
+              "commonName": "Yellow-throated Toucan",
+              "scientificName": "Ramphastos ambiguus",
+              "family": "Ramphastidae"
+            }
+          },
+          {
+            "id": "bird-040",
+            "fileName": "yellow-throated-toucan-blog.jpg",
+            "fileType": "image",
+            "path": "/images/yellow-throated-toucan-blog.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Yellow-throated Toucan featured in blog post",
+            "tags": ["toucan", "blog", "featured"]
+          },
+          {
+            "id": "bird-041",
+            "fileName": "yellow-warbler.jpg",
+            "fileType": "image",
+            "path": "/images/yellow-warbler.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Yellow Warbler in bright yellow plumage",
+            "tags": ["warbler", "yellow", "songbird"],
+            "species": {
+              "commonName": "Yellow Warbler",
+              "scientificName": "Setophaga petechia",
+              "family": "Parulidae"
+            }
+          }
+        ]
+      },
+      "teamPhotos": {
+        "categoryId": "team-photos",
+        "name": "Team Member Photos",
+        "description": "Professional photos of AVES team members and guides",
+        "totalAssets": 7,
+        "assets": [
+          {
+            "id": "team-001",
+            "fileName": "martin-melendro.jpg",
+            "fileType": "image",
+            "path": "/images/martin-melendro.jpg",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "Martin Melendro, AVES founder and lead guide",
+            "tags": ["founder", "guide", "team"],
+            "person": {
+              "name": "Martin Melendro",
+              "role": "Founder & Lead Guide",
+              "specialization": "Birding expertise and conservation"
+            }
+          },
+          {
+            "id": "team-002",
+            "fileName": "dagoberto-rudas.png",
+            "fileType": "image",
+            "path": "/images/dagoberto-rudas.png",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "Dagoberto Rudas, AVES birding specialist",
+            "tags": ["specialist", "guide", "team"],
+            "person": {
+              "name": "Dagoberto Rudas",
+              "role": "Birding Specialist",
+              "specialization": "Endemic species identification"
+            }
+          },
+          {
+            "id": "team-003",
+            "fileName": "juan-camilo-canadiense.png",
+            "fileType": "image",
+            "path": "/images/juan-camilo-canadiense.png",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "Juan Camilo Canadiense, AVES field guide",
+            "tags": ["guide", "field", "team"],
+            "person": {
+              "name": "Juan Camilo Canadiense",
+              "role": "Field Guide",
+              "specialization": "Field research and guiding"
+            }
+          },
+          {
+            "id": "team-004",
+            "fileName": "david-jara.png",
+            "fileType": "image",
+            "path": "/images/david-jara.png",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "David Jara, AVES conservation specialist",
+            "tags": ["conservation", "specialist", "team"],
+            "person": {
+              "name": "David Jara",
+              "role": "Conservation Specialist",
+              "specialization": "Habitat conservation and research"
+            }
+          },
+          {
+            "id": "team-005",
+            "fileName": "nicolas-rozo.png",
+            "fileType": "image",
+            "path": "/images/nicolas-rozo.png",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "Nicolas Rozo, AVES birding guide",
+            "tags": ["guide", "birding", "team"],
+            "person": {
+              "name": "Nicolas Rozo",
+              "role": "Birding Guide",
+              "specialization": "Mountain and cloud forest birding"
+            }
+          },
+          {
+            "id": "team-006",
+            "fileName": "gleison-guarin.png",
+            "fileType": "image",
+            "path": "/images/gleison-guarin.png",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "Gleison Guarin, AVES field specialist",
+            "tags": ["specialist", "field", "team"],
+            "person": {
+              "name": "Gleison Guarin",
+              "role": "Field Specialist",
+              "specialization": "Tropical birding and photography"
+            }
+          },
+          {
+            "id": "team-007",
+            "fileName": "yeferson-guale-epiayu.png",
+            "fileType": "image",
+            "path": "/images/yeferson-guale-epiayu.png",
+            "category": "teamPhotos",
+            "dimensions": {
+              "width": 800,
+              "height": 800
+            },
+            "altText": "Yeferson Guale Epiayu, AVES indigenous guide",
+            "tags": ["guide", "indigenous", "team"],
+            "person": {
+              "name": "Yeferson Guale Epiayu",
+              "role": "Indigenous Guide",
+              "specialization": "Traditional ecological knowledge and cultural interpretation"
+            }
+          }
+        ]
+      },
+      "accommodations": {
+        "categoryId": "accommodations",
+        "name": "Accommodation Photos",
+        "description": "Photos of lodges and accommodations used in AVES tours",
+        "totalAssets": 4,
+        "assets": [
+          {
+            "id": "accom-001",
+            "fileName": "la-esmeralda-exterior.jpg",
+            "fileType": "image",
+            "path": "/images/la-esmeralda-exterior.jpg",
+            "category": "accommodations",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "La Esmeralda Lodge exterior view in cloud forest setting",
+            "tags": ["lodge", "exterior", "cloud-forest"],
+            "location": {
+              "name": "La Esmeralda Lodge",
+              "region": "Cloud Forest",
+              "amenities": ["birding", "hiking", "nature-viewing"]
+            }
+          },
+          {
+            "id": "accom-002",
+            "fileName": "la-esmeralda-group.jpg",
+            "fileType": "image",
+            "path": "/images/la-esmeralda-group.jpg",
+            "category": "accommodations",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Group of birders at La Esmeralda Lodge",
+            "tags": ["lodge", "group", "birders"]
+          },
+          {
+            "id": "accom-003",
+            "fileName": "la-esmeralda-interior-1.jpg",
+            "fileType": "image",
+            "path": "/images/la-esmeralda-interior-1.jpg",
+            "category": "accommodations",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "La Esmeralda Lodge interior common area",
+            "tags": ["lodge", "interior", "common-area"]
+          },
+          {
+            "id": "accom-004",
+            "fileName": "la-esmeralda-interior-2.jpg",
+            "fileType": "image",
+            "path": "/images/la-esmeralda-interior-2.jpg",
+            "category": "accommodations",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "La Esmeralda Lodge interior dining area",
+            "tags": ["lodge", "interior", "dining"]
+          }
+        ]
+      },
+      "conservation": {
+        "categoryId": "conservation",
+        "name": "Conservation Images",
+        "description": "Images related to conservation efforts and environmental impact",
+        "totalAssets": 4,
+        "assets": [
+          {
+            "id": "conservation-001",
+            "fileName": "bird-nest-natural.jpg",
+            "fileType": "image",
+            "path": "/images/bird-nest-natural.jpg",
+            "category": "conservation",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Natural bird nest in pristine habitat",
+            "tags": ["nest", "natural", "habitat", "conservation"]
+          },
+          {
+            "id": "conservation-002",
+            "fileName": "bird-nest-plastic.jpg",
+            "fileType": "image",
+            "path": "/images/bird-nest-plastic.jpg",
+            "category": "conservation",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Bird nest contaminated with plastic pollution",
+            "tags": ["nest", "plastic", "pollution", "environmental-impact"]
+          },
+          {
+            "id": "conservation-003",
+            "fileName": "plastic-nest.jpg",
+            "fileType": "image",
+            "path": "/images/plastic-nest.jpg",
+            "category": "conservation",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Bird nest showing plastic pollution impact",
+            "tags": ["plastic", "pollution", "environmental-damage"]
+          },
+          {
+            "id": "conservation-004",
+            "fileName": "natural-nest.jpg",
+            "fileType": "image",
+            "path": "/images/natural-nest.jpg",
+            "category": "conservation",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Healthy natural bird nest in protected habitat",
+            "tags": ["natural", "protected", "healthy-habitat"]
+          }
+        ]
+      },
+      "branding": {
+        "categoryId": "branding",
+        "name": "Logos and Branding",
+        "description": "AVES logos and partner organization branding materials",
+        "totalAssets": 4,
+        "assets": [
+          {
+            "id": "brand-001",
+            "fileName": "aves-logo.png",
+            "fileType": "image",
+            "path": "/images/aves-logo.png",
+            "category": "branding",
+            "dimensions": {
+              "width": 512,
+              "height": 512
+            },
+            "altText": "AVES official logo",
+            "tags": ["logo", "branding", "official"],
+            "usage": ["header", "footer", "marketing"]
+          },
+          {
+            "id": "brand-002",
+            "fileName": "tour-icons.png",
+            "fileType": "image",
+            "path": "/images/tour-icons.png",
+            "category": "branding",
+            "dimensions": {
+              "width": 1024,
+              "height": 256
+            },
+            "altText": "AVES tour type icons collection",
+            "tags": ["icons", "tours", "graphics"]
+          },
+          {
+            "id": "brand-003",
+            "fileName": "proaves-logo.gif",
+            "fileType": "image",
+            "path": "/images/partners/proaves-logo.gif",
+            "category": "branding",
+            "dimensions": {
+              "width": 200,
+              "height": 100
+            },
+            "altText": "ProAves Foundation partner logo",
+            "tags": ["partner", "logo", "conservation", "animated"],
+            "partner": {
+              "name": "ProAves Foundation",
+              "type": "Conservation Partner",
+              "website": "https://www.proaves.org"
+            }
+          },
+          {
+            "id": "brand-004",
+            "fileName": "placeholder-logo.png",
+            "fileType": "image",
+            "path": "/placeholder-logo.png",
+            "category": "branding",
+            "dimensions": {
+              "width": 200,
+              "height": 200
+            },
+            "altText": "Generic placeholder logo",
+            "tags": ["placeholder", "fallback"]
+          }
+        ]
+      },
+      "documents": {
+        "categoryId": "documents",
+        "name": "Business Documents",
+        "description": "Official business plans and documentation",
+        "totalAssets": 2,
+        "assets": [
+          {
+            "id": "doc-001",
+            "fileName": "aves-business-plan-2024-2027.pdf",
+            "fileType": "document",
+            "path": "/documents/aves-business-plan-2024-2027.pdf",
+            "category": "documents",
+            "fileSize": "2.5MB",
+            "altText": "AVES comprehensive business plan 2024-2027",
+            "tags": ["business-plan", "strategy", "official"],
+            "document": {
+              "type": "Business Plan",
+              "pages": 45,
+              "version": "1.0",
+              "confidentiality": "Internal Use"
+            }
+          },
+          {
+            "id": "doc-002",
+            "fileName": "aves-focused-business-plan-2024-2027.pdf",
+            "fileType": "document",
+            "path": "/documents/aves-focused-business-plan-2024-2027.pdf",
+            "category": "documents",
+            "fileSize": "1.8MB",
+            "altText": "AVES focused business plan 2024-2027",
+            "tags": ["business-plan", "focused", "strategy"],
+            "document": {
+              "type": "Focused Business Plan",
+              "pages": 32,
+              "version": "1.0",
+              "confidentiality": "Internal Use"
+            }
+          }
+        ]
+      },
+      "placeholders": {
+        "categoryId": "placeholders",
+        "name": "Placeholder Assets",
+        "description": "Fallback images and placeholder content",
+        "totalAssets": 4,
+        "assets": [
+          {
+            "id": "placeholder-001",
+            "fileName": "placeholder.jpg",
+            "fileType": "image",
+            "path": "/placeholder.jpg",
+            "category": "placeholders",
+            "dimensions": {
+              "width": 800,
+              "height": 600
+            },
+            "altText": "Generic placeholder image",
+            "tags": ["placeholder", "fallback", "generic"]
+          },
+          {
+            "id": "placeholder-002",
+            "fileName": "placeholder.svg",
+            "fileType": "image",
+            "path": "/placeholder.svg",
+            "category": "placeholders",
+            "dimensions": {
+              "width": 400,
+              "height": 300
+            },
+            "altText": "SVG placeholder graphic",
+            "tags": ["placeholder", "svg", "scalable"]
+          },
+          {
+            "id": "placeholder-003",
+            "fileName": "placeholder-user.jpg",
+            "fileType": "image",
+            "path": "/placeholder-user.jpg",
+            "category": "placeholders",
+            "dimensions": {
+              "width": 400,
+              "height": 400
+            },
+            "altText": "User profile placeholder image",
+            "tags": ["placeholder", "user", "profile"]
+          },
+          {
+            "id": "placeholder-004",
+            "fileName": "placeholder-logo.svg",
+            "fileType": "image",
+            "path": "/placeholder-logo.svg",
+            "category": "placeholders",
+            "dimensions": {
+              "width": 200,
+              "height": 200
+            },
+            "altText": "Logo placeholder graphic",
+            "tags": ["placeholder", "logo", "svg"]
+          }
+        ]
+      }
+    },
+    "metadata": {
+      "imageFormats": ["jpg", "jpeg", "png", "gif", "svg"],
+      "documentFormats": ["pdf"],
+      "totalFileSize": "125.7MB",
+      "lastAudit": "2024-12-24T14:45:18Z",
+      "brokenLinks": ["/images/Jaider Carrillo.jpg", "/images/jose-luis-ropero.png"],
+      "missingAssets": ["Jaider Carrillo team photo", "Jose Luis Ropero team photo"],
+      "recommendations": [
+        "Add proper team photos for Jaider Carrillo and Jose Luis Ropero",
+        "Optimize large image files for web performance",
+        "Add WebP format versions for better compression",
+        "Create consistent naming convention for all assets"
+      ]
+    }
+  }
+}

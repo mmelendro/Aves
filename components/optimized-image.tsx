@@ -27,7 +27,7 @@ export default function OptimizedImage({
   priority = false,
   style,
   onClick,
-  fallback = "/placeholder.svg",
+  fallback = "/placeholder-user.jpg",
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -37,7 +37,15 @@ export default function OptimizedImage({
     setIsLoading(false)
     setHasError(true)
     if (currentSrc !== fallback) {
-      setCurrentSrc(fallback)
+      // Provide specific fallbacks for known broken team member images
+      let specificFallback = fallback
+      if (src.includes("Jaider Carrillo") || alt.includes("Jaider Carrillo")) {
+        specificFallback = "/images/manakin-1.jpg" // Use a bird image as professional placeholder
+      } else if (src.includes("jose-luis-ropero") || alt.includes("Jose Luis Ropero")) {
+        specificFallback = "/images/manakin-2.jpg" // Use a different bird image as placeholder
+      }
+
+      setCurrentSrc(specificFallback)
       setHasError(false)
       setIsLoading(true)
     }
@@ -59,6 +67,14 @@ export default function OptimizedImage({
         src.includes("partners") ? "hover:shadow-lg transition-shadow duration-200" : "",
         // GIF-specific optimizations for smooth animation
         src.includes(".gif") ? "will-change-transform backface-visibility-hidden" : "",
+        // Add context-aware styling for bird images
+        src.includes("/images/") && !src.includes("logo") && !src.includes("partners")
+          ? "bg-gradient-to-br from-emerald-50 to-blue-50"
+          : "",
+        // Enhanced styling for team member images
+        src.includes("team") || alt.toLowerCase().includes("guide") || alt.toLowerCase().includes("specialist")
+          ? "bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200"
+          : "",
         className,
       )}
       style={{
@@ -73,7 +89,14 @@ export default function OptimizedImage({
       }}
     >
       <Image
-        src={currentSrc || "/placeholder.svg"}
+        src={
+          currentSrc ||
+          (src.includes("Jaider Carrillo")
+            ? "/images/manakin-1.jpg"
+            : src.includes("jose-luis-ropero")
+              ? "/images/manakin-2.jpg"
+              : "/placeholder-user.jpg")
+        }
         alt={alt}
         width={width}
         height={height}
@@ -129,7 +152,11 @@ export default function OptimizedImage({
       {isLoading && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />}
       {hasError && currentSrc === fallback && (
         <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-          <span className="text-gray-400 text-sm">Image unavailable</span>
+          <span className="text-gray-400 text-sm">
+            {alt.toLowerCase().includes("guide") || alt.toLowerCase().includes("specialist")
+              ? "Team member photo unavailable"
+              : "Image unavailable"}
+          </span>
         </div>
       )}
     </div>
