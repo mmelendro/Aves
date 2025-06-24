@@ -269,14 +269,14 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20">
+      <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-4 relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-start lg:items-center">
+            <div className="space-y-4 relative mb-20 lg:mb-4">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative bg-gradient-to-br from-emerald-50 to-blue-50">
                 <Image
                   src="/images/blue-crowned-motmot-new.jpg"
-                  alt="Blue-crowned Motmot representing AVES' commitment to discovering Colombia's endemic highland species"
+                  alt="Andean Motmot representing AVES' commitment to discovering Colombia's endemic highland species"
                   width={600}
                   height={450}
                   className="object-cover w-full h-full"
@@ -286,7 +286,7 @@ export default function AboutPage() {
               </div>
               <div className="absolute -bottom-[70px] left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-gray-100 min-w-max max-w-xs z-10">
                 <a
-                  href="https://ebird.org/species/blcmot1"
+                  href="https://ebird.org/species/higmot1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 hover:bg-gray-50/50 transition-colors rounded-lg p-1 -m-1"
@@ -295,10 +295,10 @@ export default function AboutPage() {
                     <Award className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-gray-900 text-sm whitespace-nowrap">Blue-crowned Motmot</div>
-                    <div className="text-xs text-gray-600 italic whitespace-nowrap">Momotus coeruliceps</div>
+                    <div className="font-semibold text-gray-900 text-sm whitespace-nowrap">Andean Motmot</div>
+                    <div className="text-xs text-gray-600 italic whitespace-nowrap">Momotus aequatorialis</div>
                     <div className="text-xs text-emerald-600 whitespace-nowrap">
-                      Barranquero Coroniazul • View on eBird →
+                      Barranquero Andino • View on eBird →
                     </div>
                   </div>
                 </a>
