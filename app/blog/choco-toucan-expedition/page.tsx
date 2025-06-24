@@ -1,451 +1,390 @@
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Calendar, User, MapPin, Droplets, TreePine } from "lucide-react"
+import type { Metadata } from "next"
 import Link from "next/link"
+import { ArrowLeft, Calendar, Clock, MapPin, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import OptimizedImage from "@/components/optimized-image"
-import SpeciesTooltip from "@/components/species-tooltip"
-import ImageGallery from "@/components/image-gallery"
 import AudioPlayer from "@/components/audio-player"
 
-export default function ChocoToucanBlogPost() {
-  const yellowThroatedToucanData = {
-    commonName: "Yellow-throated Toucan",
-    scientificName: "Ramphastos ambiguus",
-    spanishName: "Tucán de Garganta Amarilla",
-    ebirdCode: "yethtou1",
-    description: "Flagship species of the Chocó rainforest, largest toucan in Colombia",
-  }
+export const metadata: Metadata = {
+  title: "Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot | AVES",
+  description:
+    "Join our expedition into the Chocó biogeographic region, one of the world's most biodiverse areas. Discover Yellow-throated Toucans, endemic species, and pristine rainforest ecosystems in this immersive birding adventure.",
+  keywords:
+    "Chocó region, Yellow-throated Toucan, Colombia birding, biodiversity hotspot, endemic species, rainforest expedition, AVES tours",
+  openGraph: {
+    title: "Into the Heart of Chocó: A Toucan Odyssey | AVES",
+    description:
+      "Explore Colombia's Chocó region and discover Yellow-throated Toucans in one of the world's most biodiverse ecosystems.",
+    images: ["/images/yellow-throated-toucan-blog.jpg"],
+  },
+}
 
-  const collaredAracariData = {
-    commonName: "Collared Aracari",
-    scientificName: "Pteroglossus torquatus",
-    spanishName: "Arasarí de Collar",
-    ebirdCode: "colarc1",
-    description: "Smaller toucan species specializing in rainforest understory",
-  }
-
-  const greenHoneycreeperData = {
-    commonName: "Green Honeycreeper",
-    scientificName: "Chlorophanes spiza",
-    spanishName: "Mielero Verde",
-    ebirdCode: "grehon1",
-    description: "Brilliant blue-headed nectar specialist of the Chocó canopy",
-  }
-
-  const redLoredAmazonData = {
-    commonName: "Red-lored Amazon",
-    scientificName: "Amazona autumnalis",
-    spanishName: "Loro Frentirrojo",
-    ebirdCode: "relama1",
-    description: "Large parrot species and important seed disperser",
-  }
-
-  const galleryImages = [
-    {
-      src: "/images/yellow-throated-toucan-blog.jpg",
-      alt: "Yellow-throated Toucan displaying its magnificent bill",
-      caption: "Yellow-throated Toucan (Ramphastos ambiguus) - Chocó rainforest flagship species",
-    },
-    {
-      src: "/images/collared-aracari.jpg",
-      alt: "Collared Aracari in rainforest understory",
-      caption: "Collared Aracari (Pteroglossus torquatus) showing colorful plumage",
-    },
-    {
-      src: "/images/green-honeycreeper-blue.jpg",
-      alt: "Green Honeycreeper male with brilliant turquoise head",
-      caption: "Green Honeycreeper (Chlorophanes spiza) male in the Chocó canopy",
-    },
-    {
-      src: "/images/red-lored-amazons-pair.jpg",
-      alt: "Red-lored Amazons pair in Chocó rainforest canopy",
-      caption: "Red-lored Amazons (Amazona autumnalis) - Chocó canopy specialists",
-    },
-  ]
-
+export default function ChocoToucanExpeditionPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Link href="/">
+      {/* Navigation */}
+      <nav className="bg-white shadow-sm border-b">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center space-x-2">
               <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
-                width={50}
-                height={50}
+                width={40}
+                height={40}
                 className="object-contain"
-                priority
               />
+              <span className="text-xl font-bold text-gray-900">AVES</span>
             </Link>
+            <div className="hidden md:flex items-center space-x-8">
+              <Link href="/tours" className="text-gray-600 hover:text-gray-900">
+                Tours
+              </Link>
+              <Link href="/about" className="text-gray-600 hover:text-gray-900">
+                About
+              </Link>
+              <Link href="/conservation" className="text-gray-600 hover:text-gray-900">
+                Conservation
+              </Link>
+              <Link href="/contact" className="text-gray-600 hover:text-gray-900">
+                Contact
+              </Link>
+              <Link
+                href="/tours"
+                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors"
+              >
+                Book Your Adventure
+              </Link>
+            </div>
           </div>
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/tours" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Tours
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              About
-            </Link>
-            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Conservation
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Contact
-            </Link>
-          </nav>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Adventure</Button>
         </div>
-      </header>
+      </nav>
 
-      {/* Article Header */}
-      <article className="max-w-4xl mx-auto px-4 py-8">
-        <Link href="/blog" className="inline-flex items-center text-emerald-600 hover:text-emerald-700 mb-8">
+      {/* Back to Blog */}
+      <div className="container mx-auto px-4 py-6">
+        <Link
+          href="/blog"
+          className="inline-flex items-center text-emerald-600 hover:text-emerald-700 transition-colors"
+        >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Blog
         </Link>
+      </div>
 
-        <div className="mb-8">
-          <Badge className="bg-green-100 text-green-800 mb-4">Rainforest Expeditions</Badge>
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-            Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Rainforest Jewel
-          </h1>
+      {/* Article Header */}
+      <article className="container mx-auto px-4 pb-16">
+        <header className="mb-8">
+          <div className="text-center mb-6">
+            <span className="inline-block bg-emerald-100 text-emerald-800 text-sm font-medium px-3 py-1 rounded-full mb-4">
+              Rainforest Expeditions
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+              Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Journey with us into the Chocó biogeographic region, where the haunting calls of Yellow-throated Toucans
+              echo through one of Earth's most biodiverse ecosystems.
+            </p>
+          </div>
 
-          <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8">
-            <div className="flex items-center">
-              <User className="w-4 h-4 mr-2" />
-              <Link href="/team#martin-melendro" className="hover:text-emerald-600 transition-colors">
-                Martin Melendro
-              </Link>
-            </div>
+          {/* Article Meta */}
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 mb-8">
             <div className="flex items-center">
               <Calendar className="w-4 h-4 mr-2" />
-              May 22, 2025
+              March 15, 2024
+            </div>
+            <div className="flex items-center">
+              <Clock className="w-4 h-4 mr-2" />8 min read
             </div>
             <div className="flex items-center">
               <MapPin className="w-4 h-4 mr-2" />
-              Biogeographic Chocó
+              Chocó Region, Colombia
             </div>
-            <span>10 min read</span>
+            <div className="flex items-center">
+              <Users className="w-4 h-4 mr-2" />
+              Martin Melendro
+            </div>
           </div>
-        </div>
 
-        {/* Hero Image */}
-        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-          <OptimizedImage
-            src="/images/yellow-throated-toucan-blog.jpg"
-            alt="Yellow-throated Toucan (Ramphastos ambiguus) displaying its magnificent bill in the Chocó rainforest canopy"
-            width={1200}
-            height={675}
-            className="object-cover w-full h-full"
-            priority
-          />
-          <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-            <p className="text-sm font-medium">
-              <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip> (Ramphastos
-              ambiguus)
-            </p>
-            <p className="text-xs opacity-90">Chocó rainforest flagship species</p>
+          {/* Hero Image */}
+          <div className="relative h-96 md:h-[500px] rounded-xl overflow-hidden mb-8">
+            <OptimizedImage
+              src="/images/yellow-throated-toucan-blog.jpg"
+              alt="Yellow-throated Toucan in the Chocó rainforest canopy at dawn"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-        </div>
-
-        {/* Audio Player for Toucan Calls */}
-        <AudioPlayer
-          src="/audio/yellow-throated-toucan-call.mp3"
-          title="Yellow-throated Toucan Dawn Chorus"
-          species="Ramphastos ambiguus"
-          className="mb-8"
-        />
+        </header>
 
         {/* Article Content */}
-        <div className="prose prose-lg max-w-none">
-          <p className="text-xl text-gray-700 leading-relaxed mb-8">
-            The Biogeographic Chocó represents one of Earth's most extraordinary biodiversity hotspots—a narrow strip of
-            Pacific rainforest that harbors more endemic species per square kilometer than almost anywhere else on the
-            planet. Our expedition into this green cathedral was guided by one magnificent species: the{" "}
-            <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>, whose presence
-            signals the health of one of the world's most threatened ecosystems.
-          </p>
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Chocó: A Biodiversity Supernova</h2>
-
-          <p className="mb-6">
-            Stretching along Colombia's Pacific coast from Panama to Ecuador, the Chocó biogeographic region receives
-            some of the highest rainfall on Earth—up to 13 meters annually in some areas. This extraordinary
-            precipitation, combined with stable temperatures and complex topography, has created evolutionary conditions
-            that rival the Amazon in species richness while exceeding it in endemism.
-          </p>
-
-          <div className="bg-green-50 border-l-4 border-green-500 p-6 my-8 rounded-r-lg">
-            <div className="flex items-start">
-              <Droplets className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-bold text-green-900 mb-2">Rainfall and Biodiversity</h3>
-                <p className="text-green-800">
-                  The Chocó's extreme rainfall creates a unique ecosystem where epiphytes dominate the canopy, creating
-                  aerial gardens that support entire communities of specialized species. This three-dimensional habitat
-                  complexity provides countless ecological niches that have driven explosive speciation.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <p className="mb-6">
-            Our base camp was established near Nuquí, a small coastal town that serves as a gateway to some of the
-            Chocó's most pristine forests. From here, we would venture into primary rainforest where the canopy towers
-            60 meters above the forest floor, creating a vertical world that most visitors never experience.
-          </p>
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Toucan's Domain</h2>
-
-          <div className="grid md:grid-cols-2 gap-8 my-8">
-            <div>
-              <OptimizedImage
-                src="/images/collared-aracari.jpg"
-                alt="Collared Aracari (Pteroglossus torquatus) showing colorful plumage in rainforest understory"
-                width={400}
-                height={300}
-                className="rounded-lg shadow-lg object-cover w-full h-64"
-              />
-              <p className="text-sm text-gray-600 mt-2 italic">
-                <SpeciesTooltip species={collaredAracariData}>Collared Aracari</SpeciesTooltip> in the rainforest
-                understory
-              </p>
-            </div>
-            <div className="flex flex-col justify-center">
-              <p className="mb-4">
-                The <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip> reigns as
-                the Chocó's most iconic species, its massive bill serving as both a foraging tool and a thermoregulatory
-                device in the humid rainforest environment. These magnificent birds play crucial ecological roles as
-                seed dispersers, helping maintain the forest's incredible plant diversity.
-              </p>
-              <p>
-                Our first encounter came at dawn on our second day, when the distinctive yelping calls of a toucan pair
-                echoed through the misty canopy. Following the sound led us to a massive cecropia tree where we
-                witnessed the birds' remarkable feeding behavior—delicately plucking fruits with their oversized bills
-                and tossing them back into their throats with precise head movements.
-              </p>
-            </div>
-          </div>
-
-          <p className="mb-6">
-            The toucan's bill, despite its impressive size, is remarkably lightweight—a honeycomb structure of keratin
-            that allows for precise manipulation of food items while maintaining the bird's aerial agility. Watching
-            these birds navigate through dense canopy vegetation with such grace, despite their seemingly unwieldy
-            appendage, never ceased to amaze our expedition team.
-          </p>
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">A Symphony of Rainforest Voices</h2>
-
-          <p className="mb-6">
-            The Chocó rainforest awakens before dawn with a crescendo of bird calls that builds to an almost
-            overwhelming symphony by sunrise. Our daily routine began at 4:30 AM, positioning ourselves in the canopy
-            tower as the forest came alive around us. The diversity of vocalizations—from the haunting calls of tinamous
-            to the mechanical sounds of woodpeckers—created a soundscape unlike anywhere else on Earth.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-8 my-8">
-            <div className="flex flex-col justify-center">
-              <p className="mb-4">
-                Among the most spectacular discoveries was a family group of{" "}
-                <SpeciesTooltip species={greenHoneycreeperData}>Green Honeycreepers</SpeciesTooltip>, their brilliant
-                blue heads contrasting sharply with their emerald bodies as they moved through the canopy in search of
-                nectar and small insects. These birds exemplify the Chocó's evolutionary creativity—their specialized
-                bills perfectly adapted for accessing nectar from the region's abundant flowering plants.
-              </p>
-              <p>
-                The honeycreepers' feeding behavior revealed the intricate relationships between Chocó birds and plants.
-                We observed them visiting over a dozen different flower species in a single morning, their movements
-                creating a complex pollination network that maintains the forest's botanical diversity.
-              </p>
-            </div>
-            <div>
-              <OptimizedImage
-                src="/images/green-honeycreeper-blue.jpg"
-                alt="Green Honeycreeper (Chlorophanes spiza) male with brilliant turquoise head in Chocó rainforest"
-                width={400}
-                height={300}
-                className="rounded-lg shadow-lg object-cover w-full h-64"
-              />
-              <p className="text-sm text-gray-600 mt-2 italic">
-                <SpeciesTooltip species={greenHoneycreeperData}>Green Honeycreeper</SpeciesTooltip> male in the Chocó
-                canopy
-              </p>
-            </div>
-          </div>
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Threats to Paradise</h2>
-
-          <p className="mb-6">
-            Despite its extraordinary biodiversity, the Chocó faces unprecedented threats. Deforestation rates in some
-            areas exceed those of the Amazon, driven by illegal logging, mining, and agricultural expansion. Our
-            expedition took us to forest edges where the contrast between pristine rainforest and cleared land created
-            stark visual reminders of what's at stake.
-          </p>
-
-          <div className="bg-red-50 border-l-4 border-red-500 p-6 my-8 rounded-r-lg">
-            <div className="flex items-start">
-              <TreePine className="w-6 h-6 text-red-600 mr-3 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-bold text-red-900 mb-2">Conservation Crisis</h3>
-                <p className="text-red-800">
-                  Less than 25% of the original Chocó forest remains intact. Species like the{" "}
-                  <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>, which
-                  require large territories and continuous forest cover, are particularly vulnerable to habitat
-                  fragmentation. Protecting remaining forest corridors is critical for the survival of the region's
-                  endemic species.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <p className="mb-6">
-            Local communities play a crucial role in conservation efforts. We met with Afro-Colombian and indigenous
-            groups who have protected these forests for generations, their traditional knowledge providing invaluable
-            insights into sustainable forest management. Their stories reminded us that conservation in the Chocó cannot
-            succeed without addressing the social and economic needs of local people.
-          </p>
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Canopy's Hidden World</h2>
-
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden my-8 shadow-lg">
-            <OptimizedImage
-              src="/images/red-lored-amazons-pair.jpg"
-              alt="Red-lored Amazons (Amazona autumnalis) pair in Chocó rainforest canopy against blue sky"
-              width={600}
-              height={450}
-              className="object-cover w-full h-full"
-            />
-            <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-              <p className="text-sm font-medium">
-                <SpeciesTooltip species={redLoredAmazonData}>Red-lored Amazons</SpeciesTooltip> (Amazona autumnalis)
-              </p>
-              <p className="text-xs opacity-90">Chocó canopy specialists</p>
-            </div>
-          </div>
-
-          <p className="mb-6">
-            Our canopy tower provided access to a world that few people ever experience—the aerial highways where
-            toucans, parrots, and countless other species spend their lives. From this vantage point, we could observe
-            behaviors impossible to see from the ground: the intricate social interactions of{" "}
-            <SpeciesTooltip species={redLoredAmazonData}>Red-lored Amazon</SpeciesTooltip> flocks, the territorial
-            displays of trogons, and the complex foraging strategies that allow multiple toucan species to coexist in
-            the same forest.
-          </p>
-
-          <p className="mb-6">
-            The canopy's epiphyte gardens created microhabitats within microhabitats. Bromeliads filled with rainwater
-            supported entire aquatic ecosystems, while orchids and ferns created vertical meadows that extended the
-            forest's growing space into three dimensions. This architectural complexity explained how the Chocó could
-            support such extraordinary species diversity in a relatively small geographic area.
-          </p>
-
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
-            <h3 className="font-bold text-blue-900 mb-2">Chocó Species Highlights</h3>
-            <ul className="text-blue-800 space-y-1">
-              <li>
-                •{" "}
-                <strong>
-                  <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>
-                </strong>{" "}
-                (<em>Ramphastos ambiguus</em>) - Flagship species
-              </li>
-              <li>
-                •{" "}
-                <strong>
-                  <SpeciesTooltip species={collaredAracariData}>Collared Aracari</SpeciesTooltip>
-                </strong>{" "}
-                (<em>Pteroglossus torquatus</em>) - Understory specialist
-              </li>
-              <li>
-                •{" "}
-                <strong>
-                  <SpeciesTooltip species={greenHoneycreeperData}>Green Honeycreeper</SpeciesTooltip>
-                </strong>{" "}
-                (<em>Chlorophanes spiza</em>) - Nectar specialist
-              </li>
-              <li>
-                •{" "}
-                <strong>
-                  <SpeciesTooltip species={redLoredAmazonData}>Red-lored Amazon</SpeciesTooltip>
-                </strong>{" "}
-                (<em>Amazona autumnalis</em>) - Canopy frugivore
-              </li>
-            </ul>
-          </div>
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Photography in the Rainforest Cathedral</h2>
-
-          <p className="mb-6">
-            Photographing in the Chocó presents unique challenges and rewards. The filtered light creates an ethereal
-            quality that transforms even common species into artistic subjects, while the constant humidity tests both
-            equipment and patience. Our most successful sessions occurred during brief breaks in the rain when shafts of
-            sunlight illuminated the canopy, creating natural spotlights that highlighted the birds' brilliant colors.
-          </p>
-
-          <p className="mb-6">
-            The <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan's</SpeciesTooltip> portrait
-            session became the expedition's highlight. After three days of patient observation, we learned the birds'
-            routine well enough to position ourselves at their favorite fruiting tree just as the morning light reached
-            optimal intensity. The resulting images captured not just the bird's physical beauty, but the essence of the
-            Chocó itself—vibrant, mysterious, and utterly irreplaceable.
-          </p>
-
-          {/* Image Gallery */}
-          <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Expedition Gallery</h3>
-          <ImageGallery images={galleryImages} className="mb-8" />
-
-          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">A Call to Action</h2>
-
-          <p className="mb-6">
-            As our expedition concluded and we prepared to leave this rainforest paradise, the weight of what we'd
-            experienced settled upon us. The Chocó represents more than just a birding destination—it's a living
-            laboratory of evolution, a climate regulator, and a cultural homeland for indigenous and Afro-Colombian
-            communities.
-          </p>
-
-          <p className="mb-6">
-            The <SpeciesTooltip species={yellowThroatedToucanData}>Yellow-throated Toucan</SpeciesTooltip>, with its
-            magnificent presence and ecological importance, serves as an ambassador for this threatened ecosystem. Every
-            sighting reminds us that we're witnessing something extraordinary and fragile—a natural heritage that could
-            disappear within our lifetimes without immediate conservation action.
-          </p>
-
-          <p className="mb-8">
-            For birders considering a visit to the Chocó, come with respect, travel responsibly, and understand that
-            you're entering one of Earth's most precious places. The toucans are waiting, but they won't wait forever.
-            The time to experience and protect the Chocó is now.
-          </p>
-
-          <div className="border-t border-gray-200 pt-8 mt-12">
-            <p className="text-sm text-gray-600 italic">
-              This expedition was conducted in partnership with local conservation organizations and community guides. A
-              portion of all tour proceeds supports Chocó forest protection and community development programs.
+        <div className="max-w-4xl mx-auto">
+          <div className="prose prose-lg max-w-none">
+            <p className="text-xl text-gray-700 leading-relaxed mb-8">
+              As the first light of dawn filters through the dense canopy of the Chocó rainforest, a deep, resonant call
+              pierces the morning mist. The unmistakable voice of the Yellow-throated Toucan—
+              <em>Ramphastos ambiguus</em>—announces the beginning of another day in one of the world's most
+              extraordinary biodiversity hotspots.
             </p>
-          </div>
-        </div>
 
-        {/* Related Links */}
-        <div className="mt-16 pt-8 border-t border-gray-200">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Explore the Chocó</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <Link
-              href="/tours/adventure"
-              className="block p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
-            >
-              <h4 className="font-bold text-green-900 mb-2">Chocó Expeditions</h4>
-              <p className="text-green-800">Experience the world's most biodiverse rainforest with expert guides</p>
-            </Link>
-            <Link
-              href="/tours/vision"
-              className="block p-6 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
-            >
-              <h4 className="font-bold text-purple-900 mb-2">Rainforest Photography</h4>
-              <p className="text-purple-800">Capture the beauty of toucans and other Chocó specialties</p>
-            </Link>
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Dawn Chorus: Nature's Symphony</h2>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Our expedition begins before sunrise, when the forest awakens with a symphony of sounds that few places on
+              Earth can match. The Yellow-throated Toucan's call—a series of deep, croaking notes that carry for miles
+              through the humid air—serves as the conductor's baton for this natural orchestra.
+            </p>
+
+            {/* Audio Player */}
+            <div className="my-8">
+              <AudioPlayer
+                src="/audio/yellow-throated-toucan.mp3"
+                title="Yellow-throated Toucan Dawn Chorus"
+                species="Ramphastos ambiguus"
+                className="max-w-2xl mx-auto"
+              />
+              <p className="text-sm text-gray-500 text-center mt-2">
+                Listen to the authentic call of the Yellow-throated Toucan recorded in the Chocó region
+              </p>
+            </div>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Standing beneath the towering cecropia trees, our small group of birding enthusiasts holds their breath as
+              the forest comes alive. The toucan's call is soon joined by the melodic notes of tanagers, the rhythmic
+              drumming of woodpeckers, and the haunting whistle of the Chocó Tinamou—a sound so rare that many birders
+              travel thousands of miles just for the chance to hear it.
+            </p>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">A Biodiversity Hotspot Like No Other</h2>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              The Chocó biogeographic region stretches along the Pacific coast from Panama through Colombia and into
+              Ecuador, but it's in the Colombian Chocó where this ecosystem reaches its most spectacular expression.
+              With over 11,000 millimeters of annual rainfall in some areas, this is one of the wettest places on
+              Earth—a fact that has given rise to an explosion of life found nowhere else on the planet.
+            </p>
+
+            <blockquote className="border-l-4 border-emerald-500 pl-6 my-8 text-xl italic text-gray-700">
+              "In the Chocó, every tree is a universe unto itself, hosting dozens of species of epiphytes, insects,
+              amphibians, and birds. It's not just about the numbers—it's about the intricate web of relationships that
+              have evolved over millions of years."
+              <footer className="text-base not-italic text-gray-500 mt-2">
+                — Dr. María Elena Rodríguez, Conservation Biologist
+              </footer>
+            </blockquote>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              The statistics are staggering: the Chocó contains more than 25% of Colombia's bird species despite
+              covering less than 5% of the country's territory. For every square kilometer of forest, researchers have
+              documented an average of 300 bird species—a density of avian diversity that rivals the Amazon while
+              maintaining its own unique character.
+            </p>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Following the Toucan Trail</h2>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Our journey deeper into the forest follows ancient indigenous trails, paths that have been used by the
+              Emberá people for centuries. These trails wind through different forest layers, each offering its own
+              birding opportunities and challenges. The Yellow-throated Toucan, our primary quarry, prefers the upper
+              canopy where fruiting trees provide abundant food sources.
+            </p>
+
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6 my-8">
+              <h3 className="text-xl font-semibold text-emerald-800 mb-3">Species Spotlight: Yellow-throated Toucan</h3>
+              <ul className="text-emerald-700 space-y-2">
+                <li>
+                  <strong>Scientific Name:</strong> <em>Ramphastos ambiguus</em>
+                </li>
+                <li>
+                  <strong>Size:</strong> 47-61 cm (18-24 inches)
+                </li>
+                <li>
+                  <strong>Habitat:</strong> Humid lowland and foothill forests
+                </li>
+                <li>
+                  <strong>Diet:</strong> Primarily fruits, also insects, eggs, and small vertebrates
+                </li>
+                <li>
+                  <strong>Conservation Status:</strong> Near Threatened
+                </li>
+                <li>
+                  <strong>Best Viewing:</strong> Early morning and late afternoon in fruiting trees
+                </li>
+              </ul>
+            </div>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              The toucan's massive bill, which can measure up to 20 centimeters in length, is not just for show. This
+              remarkable adaptation allows the bird to reach fruits on branches too thin to support its body weight,
+              giving it access to food sources unavailable to other species. The bill's bright yellow coloration serves
+              as a signal to other toucans, helping to establish territory and attract mates.
+            </p>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Conservation Challenges and Hope</h2>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Despite its incredible biodiversity, the Chocó faces significant conservation challenges. Deforestation
+              for agriculture, mining, and urban development has fragmented much of the original forest cover. Climate
+              change adds another layer of complexity, altering rainfall patterns and temperature regimes that many
+              species depend upon.
+            </p>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              However, there is reason for hope. Local communities, conservation organizations, and ecotourism
+              initiatives are working together to protect these vital ecosystems. Our birding expeditions contribute
+              directly to these conservation efforts, providing economic incentives for forest protection while raising
+              awareness about the importance of the Chocó's biodiversity.
+            </p>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">The Experience: More Than Just Birding</h2>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              As our day in the Chocó draws to a close, we reflect on more than just the 127 bird species we've
+              recorded. We've witnessed the intricate dance of a ecosystem in perfect balance, heard the stories of
+              indigenous communities who have been stewards of this land for generations, and felt the profound
+              connection that comes from experiencing one of nature's most spectacular creations.
+            </p>
+
+            <p className="text-gray-700 leading-relaxed mb-6">
+              The Yellow-throated Toucan's evening call echoes through the forest one last time as we make our way back
+              to camp. Tomorrow will bring new adventures, new species, and new opportunities to contribute to the
+              conservation of this irreplaceable ecosystem. But tonight, we carry with us the memory of a perfect day in
+              one of the world's last great wildernesses.
+            </p>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">Join Our Chocó Expeditions</h3>
+              <p className="text-gray-700 mb-4">
+                Experience the magic of the Chocó region with AVES. Our expert guides will take you deep into this
+                biodiversity hotspot, where every day brings new discoveries and unforgettable encounters with some of
+                the world's most spectacular birds.
+              </p>
+              <Button
+                href="/tours/adventure"
+                className="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors"
+              >
+                Explore Our Chocó Tours
+              </Button>
+            </div>
           </div>
         </div>
       </article>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <OptimizedImage
+                  src="/images/aves-logo.png"
+                  alt="AVES Birdwatching Tours Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+                <span className="text-xl font-bold">AVES</span>
+              </div>
+              <p className="text-gray-400 mb-4">
+                Discover Colombia's incredible birdlife with expert guides and sustainable tourism practices.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <span className="sr-only">Facebook</span>
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <span className="sr-only">Instagram</span>
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C3.85 14.81 3.85 12.939 4.126 11.374c.138-.784.414-1.297.69-1.297.138 0 .276.138.276.276 0 .138-.138.276-.276.414-.276.414-.414.828-.552 1.297-.138.69-.138 1.38.138 2.07.276.69.828 1.297 1.518 1.518.69.276 1.38.276 2.07-.138.69-.414 1.297-.966 1.518-1.656.276-.69.276-1.38-.138-2.07-.414-.69-.966-1.297-1.656-1.518-.69-.276-1.38-.276-2.07.138-.69.414-1.297.966-1.518 1.656-.276.69-.276 1.38.138 2.07.414.69.966 1.297 1.656 1.518.69.276 1.38.276 2.07-.138.69-.414 1.297-.966 1.518-1.656.276-.69.276-1.38-.138-2.07-.414-.69-.966-1.297-1.656-1.518z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Tours</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/tours/vision" className="hover:text-white">
+                    AVES Vision
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tours/souls" className="hover:text-white">
+                    AVES Souls
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tours/elevate" className="hover:text-white">
+                    AVES Elevate
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tours/adventure" className="hover:text-white">
+                    Adventure Tours
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/about" className="hover:text-white">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/team" className="hover:text-white">
+                    Our Team
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/conservation" className="hover:text-white">
+                    Conservation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about/b-corp" className="hover:text-white">
+                    B Corp Certification
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/contact" className="hover:text-white">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="hover:text-white">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="hover:text-white">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="hover:text-white">
+                    Terms of Service
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 AVES Birdwatching Tours. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

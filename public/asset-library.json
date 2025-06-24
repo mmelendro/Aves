@@ -1,8 +1,8 @@
 {
   "assetLibrary": {
-    "version": "1.0.0",
-    "lastUpdated": "2024-12-24T14:45:18Z",
-    "totalAssets": 67,
+    "version": "1.1.0",
+    "lastUpdated": "2024-12-24T20:30:00Z",
+    "totalAssets": 68,
     "categories": {
       "birdImages": {
         "categoryId": "bird-images",
@@ -680,6 +680,39 @@
           }
         ]
       },
+      "birdAudio": {
+        "categoryId": "bird-audio",
+        "name": "Bird Audio Recordings",
+        "description": "High-quality audio recordings of bird calls and songs from Colombian expeditions",
+        "totalAssets": 1,
+        "assets": [
+          {
+            "id": "audio-001",
+            "fileName": "yellow-throated-toucan.mp3",
+            "fileType": "audio",
+            "path": "/audio/yellow-throated-toucan.mp3",
+            "category": "birdAudio",
+            "duration": "0:45",
+            "fileSize": "1.2MB",
+            "altText": "Yellow-throated Toucan dawn chorus call recording",
+            "tags": ["toucan", "dawn-chorus", "call", "choco-region"],
+            "species": {
+              "commonName": "Yellow-throated Toucan",
+              "scientificName": "Ramphastos ambiguus",
+              "family": "Ramphastidae"
+            },
+            "recording": {
+              "location": "Chocó Region, Colombia",
+              "recordingDate": "2024-03-15",
+              "timeOfDay": "Dawn",
+              "quality": "High",
+              "format": "MP3",
+              "sampleRate": "44.1kHz",
+              "bitRate": "320kbps"
+            }
+          }
+        ]
+      },
       "teamPhotos": {
         "categoryId": "team-photos",
         "name": "Team Member Photos",
@@ -1107,17 +1140,19 @@
       }
     },
     "metadata": {
+      "audioFormats": ["mp3", "wav", "ogg"],
       "imageFormats": ["jpg", "jpeg", "png", "gif", "svg"],
       "documentFormats": ["pdf"],
-      "totalFileSize": "125.7MB",
-      "lastAudit": "2024-12-24T14:45:18Z",
+      "totalFileSize": "126.9MB",
+      "lastAudit": "2024-12-24T20:30:00Z",
       "brokenLinks": ["/images/Jaider Carrillo.jpg", "/images/jose-luis-ropero.png"],
       "missingAssets": ["Jaider Carrillo team photo", "Jose Luis Ropero team photo"],
       "recommendations": [
         "Add proper team photos for Jaider Carrillo and Jose Luis Ropero",
         "Optimize large image files for web performance",
         "Add WebP format versions for better compression",
-        "Create consistent naming convention for all assets"
+        "Create consistent naming convention for all assets",
+        "Consider adding more bird audio recordings for enhanced user experience"
       ]
     }
   }
