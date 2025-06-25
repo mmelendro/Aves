@@ -152,6 +152,42 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </div>
           </div>
 
+          {/* Resources Dropdown */}
+          <div className="relative group">
+            <button
+              className={`flex items-center transition-colors ${
+                currentPage?.startsWith("/blog") ||
+                currentPage?.startsWith("/resources") ||
+                currentPage?.startsWith("/travel-tips")
+                  ? "text-emerald-600"
+                  : "text-gray-700 hover:text-emerald-600"
+              }`}
+            >
+              Resources
+              <ChevronDown className="w-4 h-4 ml-1" />
+            </button>
+            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <Link
+                href="/blog"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                📝 Blog
+              </Link>
+              <Link
+                href="/resources"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                📚 Resources
+              </Link>
+              <Link
+                href="/travel-tips"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                ✈️ Travel Tips
+              </Link>
+            </div>
+          </div>
+
           <Link
             href="/about/b-corp"
             className={`transition-colors ${
@@ -159,14 +195,6 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             }`}
           >
             B Corp Journey
-          </Link>
-          <Link
-            href="/blog"
-            className={`transition-colors ${
-              currentPage?.startsWith("/blog") ? "text-emerald-600" : "text-gray-700 hover:text-emerald-600"
-            }`}
-          >
-            Blog
           </Link>
           <Link
             href="/conservation"
@@ -285,19 +313,38 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   </Link>
                 </div>
               </div>
+              <div className="py-2">
+                <div className="text-gray-700 font-medium py-2">Resources</div>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    href="/blog"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📝 Blog
+                  </Link>
+                  <Link
+                    href="/resources"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📚 Resources
+                  </Link>
+                  <Link
+                    href="/travel-tips"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-1 focus:outline-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    ✈️ Travel Tips
+                  </Link>
+                </div>
+              </div>
               <Link
                 href="/about/b-corp"
                 className="mobile-menu-item block text-gray-700 hover:text-emerald-600 transition-colors py-2 focus:outline-none"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 B Corp Journey
-              </Link>
-              <Link
-                href="/blog"
-                className="mobile-menu-item block text-gray-700 hover:text-emerald-600 transition-colors py-2 focus:outline-none"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Blog
               </Link>
               <Link
                 href="/conservation"
