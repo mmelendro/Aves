@@ -10,6 +10,7 @@ import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import SpeciesTooltip from "@/components/species-tooltip"
 import TourComparison from "@/components/tour-comparison"
+import YouTubeBackground from "@/components/youtube-background"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
@@ -47,53 +48,70 @@ export default function AVESLandingPage() {
       {/* Navigation Header */}
       <NavigationHeader currentPage="/" />
 
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-blue-50" />
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Hero Section with YouTube Background */}
+      <section className="relative py-20 lg:py-32 overflow-hidden min-h-[85vh]">
+        {/* YouTube Background */}
+        <div className="absolute inset-0">
+          <YouTubeBackground
+            videoId="eEteVfDagrs"
+            className="w-full h-full"
+            overlay={true}
+            controls={true}
+            startTime={0}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100">
+                <Badge className="bg-emerald-100/90 text-emerald-800 hover:bg-emerald-100/90 backdrop-blur-sm border border-emerald-200/50">
                   🌿 B Corp Certified • Carbon Neutral Tours
                 </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
                   Discover Colombia's
-                  <span className="text-emerald-600 block">1,900+ Bird Species</span>
+                  <span className="text-emerald-300 block drop-shadow-2xl">1,900+ Bird Species</span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  Join exclusive small-group birding expeditions across Colombia's diverse ecosystems. Experience the
-                  world's most biodiverse country while supporting conservation and local communities.
-                </p>
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-4 border border-white/30 shadow-lg">
+                  <p className="text-xl text-gray-800 leading-relaxed">
+                    Join exclusive small-group birding expeditions across Colombia's diverse ecosystems. Experience the
+                    world's most biodiverse country while supporting conservation and local communities.
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/tours">
-                  <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-4">
+                  <Button
+                    size="lg"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-4 shadow-2xl border border-emerald-500/50 backdrop-blur-sm"
+                  >
                     Explore Our Tours
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
               </div>
 
-              <div className="grid grid-cols-3 gap-8 pt-8 border-t">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600">1,900+</div>
-                  <div className="text-sm text-gray-600">Bird Species</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600">4</div>
-                  <div className="text-sm text-gray-600">Max Group Size</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600">100%</div>
-                  <div className="text-sm text-gray-600">Carbon Neutral</div>
+              <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 border border-white/30 shadow-lg">
+                <div className="grid grid-cols-3 gap-8">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-emerald-600">1,900+</div>
+                    <div className="text-sm text-gray-700">Bird Species</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-emerald-600">4</div>
+                    <div className="text-sm text-gray-700">Max Group Size</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-emerald-600">100%</div>
+                    <div className="text-sm text-gray-700">Carbon Neutral</div>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-white/30">
                 <OptimizedImage
                   src="/images/cardinal-guajiro.jpg"
                   alt="Vermilion Cardinal - striking red bird with black face mask, known as Ishuu in Wayuu language, representing the cultural connection between indigenous communities and Colombia's avian diversity"
@@ -107,12 +125,12 @@ export default function AVESLandingPage() {
                   priority
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
+              <div className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-2xl border border-white/50">
                 <a
                   href="https://ebird.org/species/vercar1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 hover:bg-gray-50 transition-colors rounded-lg p-1 -m-1"
+                  className="flex items-center space-x-3 hover:bg-gray-50/50 transition-colors rounded-lg p-1 -m-1"
                   style={{ touchAction: "manipulation" }}
                 >
                   <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
@@ -323,7 +341,7 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Why Colombia Section */}
+      {/* Why Colombia Section - Restored to Original */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -702,7 +720,6 @@ export default function AVESLandingPage() {
       </section>
 
       {/* Footer */}
-      {/* Use the centralized Footer component */}
       <Footer />
     </div>
   )
