@@ -14,9 +14,9 @@ export function Footer() {
               <OptimizedImage
                 src="/images/aves-logo.png"
                 alt="AVES Birdwatching Tours Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10 object-contain"
+                width={64}
+                height={64}
+                className="w-16 h-16 object-contain"
               />
             </div>
             <p className="text-gray-400 mb-4">
@@ -114,7 +114,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors">
+                <Link href="/travel-tips" className="hover:text-white transition-colors">
                   ✈️ Travel Tips
                 </Link>
               </li>

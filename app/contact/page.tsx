@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -15,6 +15,32 @@ export default function ContactPage() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
+  const [selectedBioregions, setSelectedBioregions] = useState<string[]>([])
+
+  const tourTypes = ["AVES Adventure", "AVES Vision", "AVES Elevate", "AVES Souls", "Custom Itinerary", "Not sure yet"]
+
+  const bioregions = [
+    "Quetzal Highlands (Western Andes)",
+    "Hummingbird Haven (Central Andes)",
+    "Páramo Paradise (Eastern Andes)",
+    "Wetland Wonders (Llanos)",
+    "Canopy Kingdom (Amazon)",
+    "Endemic Empire (Biogeographic Chocó)",
+    "Coastal Crown (Caribbean + Sierra Nevada)",
+    "Valley Voyager (Cauca Valley)",
+    "River Realm (Magdalena Valley)",
+    "Massif Majesty (Macizo Colombiano)",
+  ]
+
+  const toggleSelection = (item: string, selectedItems: string[], setSelectedItems: (items: string[]) => void) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(selectedItems.filter((selected) => selected !== item))
+    } else {
+      setSelectedItems([...selectedItems, item])
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -105,57 +131,128 @@ export default function ContactPage() {
                 <CardTitle className="text-2xl font-bold text-gray-900">Send Us a Message</CardTitle>
               </CardHeader>
               <CardContent className="px-0 pb-0">
-                <form className="space-y-6">
+                <form
+                  className="space-y-6"
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    const formData = new FormData(e.currentTarget)
+                    const submissionData = {
+                      firstName: formData.get("firstName"),
+                      lastName: formData.get("lastName"),
+                      email: formData.get("email"),
+                      phone: formData.get("phone"),
+                      tourTypes: selectedTourTypes,
+                      bioregions: selectedBioregions,
+                      message: formData.get("message"),
+                    }
+                    console.log("Form submission data:", submissionData)
+                    // Here you would typically send the data to your backend
+                    alert(
+                      `Form submitted successfully!\n\nSelected Tour Types: ${selectedTourTypes.join(", ") || "None"}\nSelected Bioregions: ${selectedBioregions.join(", ") || "None"}`,
+                    )
+                  }}
+                >
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                      <Input placeholder="Your first name" />
+                      <Input placeholder="Your first name" name="firstName" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                      <Input placeholder="Your last name" />
+                      <Input placeholder="Your last name" name="lastName" />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <Input type="email" placeholder="your.email@example.com" />
+                    <Input type="email" placeholder="your.email@example.com" name="email" />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
-                    <Input placeholder="+1 (555) 123-4567" />
+                    <Input placeholder="+1 (555) 123-4567" name="phone" />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Interested Tour Type</label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                      <option>Select a tour type</option>
-                      <option>AVES Adventure</option>
-                      <option>AVES Vision</option>
-                      <option>AVES Elevate</option>
-                      <option>AVES Souls</option>
-                      <option>Custom Itinerary</option>
-                      <option>Not sure yet</option>
-                    </select>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Interested Tour Types <span className="text-sm text-gray-500">(Select multiple)</span>
+                    </label>
+                    <div className="border border-gray-300 rounded-md p-3 bg-white max-h-40 overflow-y-auto">
+                      {tourTypes.map((tourType) => (
+                        <label
+                          key={tourType}
+                          className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-2"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedTourTypes.includes(tourType)}
+                            onChange={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
+                            className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                          />
+                          <span className="text-sm">{tourType}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {selectedTourTypes.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {selectedTourTypes.map((tourType) => (
+                          <span
+                            key={tourType}
+                            className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-800"
+                          >
+                            {tourType}
+                            <button
+                              type="button"
+                              onClick={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
+                              className="ml-1 text-emerald-600 hover:text-emerald-800"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Bioregions of Interest</label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                      <option>Select bioregion(s)</option>
-                      <option>Quetzal Highlands (Western Andes)</option>
-                      <option>Hummingbird Haven (Central Andes)</option>
-                      <option>Páramo Paradise (Eastern Andes)</option>
-                      <option>Wetland Wonders (Llanos)</option>
-                      <option>Canopy Kingdom (Amazon)</option>
-                      <option>Endemic Empire (Biogeographic Chocó)</option>
-                      <option>Coastal Crown (Caribbean + Sierra Nevada)</option>
-                      <option>Valley Voyager (Cauca Valley)</option>
-                      <option>River Realm (Magdalena Valley)</option>
-                      <option>Massif Majesty (Macizo Colombiano)</option>
-                      <option>Multiple regions</option>
-                    </select>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Bioregions of Interest <span className="text-sm text-gray-500">(Select multiple)</span>
+                    </label>
+                    <div className="border border-gray-300 rounded-md p-3 bg-white max-h-40 overflow-y-auto">
+                      {bioregions.map((bioregion) => (
+                        <label
+                          key={bioregion}
+                          className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-2"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedBioregions.includes(bioregion)}
+                            onChange={() => toggleSelection(bioregion, selectedBioregions, setSelectedBioregions)}
+                            className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                          />
+                          <span className="text-sm">{bioregion}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {selectedBioregions.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {selectedBioregions.map((bioregion) => (
+                          <span
+                            key={bioregion}
+                            className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800"
+                          >
+                            {bioregion}
+                            <button
+                              type="button"
+                              onClick={() => toggleSelection(bioregion, selectedBioregions, setSelectedBioregions)}
+                              className="ml-1 text-blue-600 hover:text-blue-800"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div>
@@ -163,6 +260,7 @@ export default function ContactPage() {
                     <Textarea
                       rows={4}
                       placeholder="Tell us about your birding interests, travel dates, group size, and any questions you have..."
+                      name="message"
                     />
                   </div>
 
