@@ -29,7 +29,7 @@ import EndemicBirdsCarousel from "@/components/endemic-birds-carousel"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import FloatingAVESNavigation from "@/components/floating-aves-navigation"
-import VideoSlider from "@/components/video-slider"
+import VideoCarousel from "@/components/video-carousel"
 import {
   DURATION_OPTIONS,
   LOCATION_OPTIONS,
@@ -117,17 +117,21 @@ ${formData.firstName} ${formData.lastName}`)
       {/* Navigation Header */}
       <NavigationHeader currentPage="/" />
 
-      {/* Video Introduction Section */}
+      {/* Video Carousel Section */}
       <section className="relative py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-6">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-3">
+          <div className="text-center mb-8">
+            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
               🎥 Experience Colombia's Natural Beauty
             </Badge>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Discover Your Next Birding Adventure</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Explore breathtaking footage from Colombia's most spectacular birding destinations
+            </p>
           </div>
 
-          <div className="relative max-w-4xl mx-auto">
-            <VideoSlider autoPlay={true} autoPlayInterval={10000} />
+          <div className="relative max-w-6xl mx-auto">
+            <VideoCarousel autoPlay={true} autoPlayInterval={12000} />
           </div>
         </div>
       </section>
@@ -588,25 +592,40 @@ ${formData.firstName} ${formData.lastName}`)
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
-                  <div className="text-3xl font-bold text-emerald-600 mb-1">1,900+</div>
-                  <div className="text-sm text-gray-700">Bird Species</div>
-                  <div className="text-xs text-emerald-600 mt-1">20% of world total</div>
-                </div>
-                <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
-                  <div className="text-3xl font-bold text-emerald-600 mb-1">200+</div>
-                  <div className="text-sm text-gray-700">Endemic Species</div>
-                  <div className="text-xs text-emerald-600 mt-1">Found nowhere else</div>
-                </div>
+                <a
+                  href="https://birdsofcolombia.com/pages/birds-by-order-and-family"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100 hover:bg-emerald-100 hover:border-emerald-200 transition-all duration-300 hover:shadow-md cursor-pointer group"
+                >
+                  <div className="text-3xl font-bold text-emerald-600 mb-1 group-hover:text-emerald-700">1,900+</div>
+                  <div className="text-sm text-gray-700 group-hover:text-gray-800">Bird Species</div>
+                  <div className="text-xs text-emerald-600 mt-1 group-hover:text-emerald-700">20% of world total</div>
+                </a>
+                <a
+                  href="https://birdsofcolombia.com/pages/endemic-birds"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100 hover:bg-emerald-100 hover:border-emerald-200 transition-all duration-300 hover:shadow-md cursor-pointer group"
+                >
+                  <div className="text-3xl font-bold text-emerald-600 mb-1 group-hover:text-emerald-700">80+</div>
+                  <div className="text-sm text-gray-700 group-hover:text-gray-800">Endemic Species</div>
+                  <div className="text-xs text-emerald-600 mt-1 group-hover:text-emerald-700">Found nowhere else</div>
+                </a>
+                <a
+                  href="https://birdsofcolombia.com/pages/hummingbirds-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100 hover:bg-emerald-100 hover:border-emerald-200 transition-all duration-300 hover:shadow-md cursor-pointer group"
+                >
+                  <div className="text-3xl font-bold text-emerald-600 mb-1 group-hover:text-emerald-700">135+</div>
+                  <div className="text-sm text-gray-700 group-hover:text-gray-800">Hummingbird Species</div>
+                  <div className="text-xs text-emerald-600 mt-1 group-hover:text-emerald-700">Most in the world</div>
+                </a>
                 <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
                   <div className="text-3xl font-bold text-emerald-600 mb-1">10</div>
                   <div className="text-sm text-gray-700">Bioregions</div>
                   <div className="text-xs text-emerald-600 mt-1">Diverse ecosystems</div>
-                </div>
-                <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
-                  <div className="text-3xl font-bold text-emerald-600 mb-1">85+</div>
-                  <div className="text-sm text-gray-700">Hummingbird Species</div>
-                  <div className="text-xs text-emerald-600 mt-1">Most in the world</div>
                 </div>
               </div>
 
