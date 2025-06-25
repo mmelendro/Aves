@@ -63,7 +63,7 @@ export default function ResourcesPage() {
               world's most biodiverse country.
             </p>
             <div className="flex flex-col sm:flex-row gap-2 justify-center mb-2">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700" asChild>
+              <Button size="lg" asChild>
                 <a href="#resources">
                   <Bird className="w-5 h-5 mr-2" />
                   Start Planning Your Trip
