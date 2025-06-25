@@ -13,7 +13,6 @@ import {
   ArrowRight,
   CheckCircle,
   Mail,
-  Phone,
   MapPin,
   Star,
   Calendar,
@@ -31,9 +30,28 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import FloatingAVESNavigation from "@/components/floating-aves-navigation"
 import VideoSlider from "@/components/video-slider"
+import {
+  DURATION_OPTIONS,
+  LOCATION_OPTIONS,
+  TOUR_TYPE_OPTIONS,
+  EXPERIENCE_LEVELS,
+  GROUP_SIZE_OPTIONS,
+} from "@/lib/form-options"
 
 export default function AVESLandingPage() {
   const [isVisible, setIsVisible] = useState(false)
+  const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([])
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    travelDate: "",
+    groupSize: "1 person",
+    desiredDuration: "8 days",
+    experienceLevel: "Beginner birder",
+    specialRequests: "",
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -56,32 +74,50 @@ export default function AVESLandingPage() {
     description: "Brilliant red-breasted cloud forest jewel",
   }
 
+  const toggleSelection = (item: string, selectedItems: string[], setSelectedItems: (items: string[]) => void) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(selectedItems.filter((selected) => selected !== item))
+    } else {
+      setSelectedItems([...selectedItems, item])
+    }
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const generateEmailLink = () => {
+    const subject = encodeURIComponent("Colombian Birding Tour Inquiry")
+    const body = encodeURIComponent(`Hello AVES Team,
+
+I'm interested in planning a Colombian birding adventure. Here are my details:
+
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Travel Date: ${formData.travelDate || "Not specified"}
+Group Size: ${formData.groupSize}
+Desired Duration: ${formData.desiredDuration}
+Experience Level: ${formData.experienceLevel}
+
+Interested Tour Types: ${selectedTourTypes.length > 0 ? selectedTourTypes.join(", ") : "Not specified"}
+Desired Locations: ${selectedLocations.length > 0 ? selectedLocations.join(", ") : "Not specified"}
+
+Special Interests/Requests: ${formData.specialRequests || "None specified"}
+
+I look forward to hearing from you within 24 hours as mentioned on your website.
+
+Best regards,
+${formData.firstName} ${formData.lastName}`)
+
+    return `mailto:info@aves.com?subject=${subject}&body=${body}`
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation Header */}
       <NavigationHeader currentPage="/" />
 
-      {/* Trust Bar - Social Proof */}
-      <section className="bg-emerald-600 text-white py-3">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-sm">
-            <div className="flex items-center space-x-2">
-              <Shield className="w-4 h-4" />
-              <span>B Corp Certified</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Award className="w-4 h-4" />
-              <span>Carbon Neutral Tours</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Users className="w-4 h-4" />
-              <span>Small Groups (Max 4)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Introduction Section - Enhanced with Slider */}
+      {/* Video Introduction Section */}
       <section className="relative py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
@@ -137,6 +173,14 @@ export default function AVESLandingPage() {
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span className="text-gray-700">100% carbon neutral</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Shield className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span className="text-gray-700">B Corp certified</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Users className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span className="text-gray-700">Small groups (max 4)</span>
                     </div>
                   </div>
                 </div>
@@ -410,8 +454,8 @@ export default function AVESLandingPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">
                   <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                    <Phone className="mr-2 w-4 h-4" />
-                    Speak with an Expert
+                    <Mail className="mr-2 w-4 h-4" />
+                    Contact Our Experts
                   </Button>
                 </Link>
                 <Link href="/tours">
@@ -674,8 +718,12 @@ export default function AVESLandingPage() {
                 10% of net profits fund our Conservation Endowment Trust, dedicated to permanent habitat restoration and
                 protection across Colombia's critical ecosystems.
               </p>
-              <div className="text-2xl font-bold text-emerald-600">Active</div>
-              <div className="text-xs text-gray-500">Conservation Projects</div>
+              <Link href="/conservation">
+                <Button variant="outline" size="sm" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50">
+                  Learn About Our Conservation Efforts
+                  <ArrowRight className="ml-2 w-3 h-3" />
+                </Button>
+              </Link>
             </Card>
           </div>
 
@@ -743,7 +791,7 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Enhanced Contact Section with Lead Magnet */}
+      {/* Enhanced Contact Section */}
       <section id="contact" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
@@ -764,19 +812,13 @@ export default function AVESLandingPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900">Email</div>
-                    <div className="text-gray-600">info@aves.com</div>
-                    <div className="text-xs text-emerald-600">Response within 2 hours</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                    <Phone className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Phone</div>
-                    <div className="text-gray-600">+1 (555) 123-AVES</div>
-                    <div className="text-xs text-emerald-600">Available 9 AM - 6 PM EST</div>
+                    <a
+                      href={generateEmailLink()}
+                      className="text-emerald-600 hover:text-emerald-700 hover:underline transition-colors"
+                    >
+                      info@aves.com
+                    </a>
+                    <div className="text-xs text-emerald-600">Response within 24 hours</div>
                   </div>
                 </div>
 
@@ -803,32 +845,120 @@ export default function AVESLandingPage() {
                 <div className="grid md:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">First Name *</label>
-                    <Input placeholder="Your first name" className="text-sm" required />
+                    <Input
+                      placeholder="Your first name"
+                      className="text-sm"
+                      required
+                      value={formData.firstName}
+                      onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">Last Name *</label>
-                    <Input placeholder="Your last name" className="text-sm" required />
+                    <Input
+                      placeholder="Your last name"
+                      className="text-sm"
+                      required
+                      value={formData.lastName}
+                      onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">Email *</label>
-                  <Input type="email" placeholder="your.email@example.com" className="text-sm" required />
+                  <Input
+                    type="email"
+                    placeholder="your.email@example.com"
+                    className="text-sm"
+                    required
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                  />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">Travel Dates</label>
-                    <Input type="date" className="text-sm" />
+                    <Input
+                      type="date"
+                      className="text-sm"
+                      value={formData.travelDate}
+                      onChange={(e) => handleInputChange("travelDate", e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">Group Size</label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                      <option>1 person</option>
-                      <option>2 people</option>
-                      <option>3 people</option>
-                      <option>4 people</option>
+                    <select
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      value={formData.groupSize}
+                      onChange={(e) => handleInputChange("groupSize", e.target.value)}
+                    >
+                      {GROUP_SIZE_OPTIONS.map((size) => (
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
+                      ))}
                     </select>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Desired Duration</label>
+                    <select
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      value={formData.desiredDuration}
+                      onChange={(e) => handleInputChange("desiredDuration", e.target.value)}
+                    >
+                      {DURATION_OPTIONS.map((duration) => (
+                        <option key={duration} value={duration}>
+                          {duration}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Desired Locations <span className="text-gray-500">(Select multiple)</span>
+                    </label>
+                    <div className="relative">
+                      <div className="border border-gray-300 rounded-md p-2 bg-white max-h-32 overflow-y-auto">
+                        {LOCATION_OPTIONS.map((location) => (
+                          <label
+                            key={location}
+                            className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-1"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedLocations.includes(location)}
+                              onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                              className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 text-xs"
+                            />
+                            <span className="text-xs text-gray-700">{location}</span>
+                          </label>
+                        ))}
+                      </div>
+                      {selectedLocations.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {selectedLocations.map((location) => (
+                            <span
+                              key={location}
+                              className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800"
+                            >
+                              {location.length > 20 ? `${location.substring(0, 20)}...` : location}
+                              <button
+                                type="button"
+                                onClick={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                                className="ml-1 text-blue-600 hover:text-blue-800"
+                              >
+                                ×
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -837,44 +967,54 @@ export default function AVESLandingPage() {
                     Interested Tour Types * (select all that apply)
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <label className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                      />
-                      <span className="text-xs text-gray-700">🍃 AVES Adventure</span>
-                    </label>
-                    <label className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                      />
-                      <span className="text-xs text-gray-700">🪶 AVES Vision</span>
-                    </label>
-                    <label className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                      />
-                      <span className="text-xs text-gray-700">🌼 AVES Elevate</span>
-                    </label>
-                    <label className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                      />
-                      <span className="text-xs text-gray-700">🍓 AVES Souls</span>
-                    </label>
+                    {TOUR_TYPE_OPTIONS.map((tourType) => (
+                      <label
+                        key={tourType}
+                        className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedTourTypes.includes(tourType)}
+                          onChange={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
+                          className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                        />
+                        <span className="text-xs text-gray-700">{tourType}</span>
+                      </label>
+                    ))}
                   </div>
+                  {selectedTourTypes.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {selectedTourTypes.map((tourType) => (
+                        <span
+                          key={tourType}
+                          className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-800"
+                        >
+                          {tourType}
+                          <button
+                            type="button"
+                            onClick={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
+                            className="ml-1 text-emerald-600 hover:text-emerald-800"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">Experience Level</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Beginner birder</option>
-                    <option>Intermediate birder</option>
-                    <option>Advanced birder</option>
-                    <option>Professional/Guide</option>
+                  <select
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    value={formData.experienceLevel}
+                    onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
+                  >
+                    {EXPERIENCE_LEVELS.map((level) => (
+                      <option key={level} value={level}>
+                        {level}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -884,6 +1024,8 @@ export default function AVESLandingPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
                     rows={3}
                     placeholder="Photography focus, specific species interests, accessibility needs, etc."
+                    value={formData.specialRequests}
+                    onChange={(e) => handleInputChange("specialRequests", e.target.value)}
                   ></textarea>
                 </div>
 

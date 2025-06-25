@@ -5,11 +5,17 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react"
+import { Mail, MapPin, Clock, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
+import {
+  DURATION_OPTIONS,
+  LOCATION_OPTIONS,
+  CONTACT_TOUR_TYPE_OPTIONS,
+  GROUP_SIZE_OPTIONS,
+  EXPERIENCE_LEVELS,
+} from "@/lib/form-options"
 
 export default function ContactPage() {
   useEffect(() => {
@@ -17,22 +23,17 @@ export default function ContactPage() {
   }, [])
 
   const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
-  const [selectedBioregions, setSelectedBioregions] = useState<string[]>([])
-
-  const tourTypes = ["AVES Adventure", "AVES Vision", "AVES Elevate", "AVES Souls", "Custom Itinerary", "Not sure yet"]
-
-  const bioregions = [
-    "Quetzal Highlands (Western Andes)",
-    "Hummingbird Haven (Central Andes)",
-    "Páramo Paradise (Eastern Andes)",
-    "Wetland Wonders (Llanos)",
-    "Canopy Kingdom (Amazon)",
-    "Endemic Empire (Biogeographic Chocó)",
-    "Coastal Crown (Caribbean + Sierra Nevada)",
-    "Valley Voyager (Cauca Valley)",
-    "River Realm (Magdalena Valley)",
-    "Massif Majesty (Macizo Colombiano)",
-  ]
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([])
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    travelDate: "",
+    groupSize: "1 person",
+    desiredDuration: "8 days",
+    experienceLevel: "Beginner birder",
+    specialRequests: "",
+  })
 
   const toggleSelection = (item: string, selectedItems: string[], setSelectedItems: (items: string[]) => void) => {
     if (selectedItems.includes(item)) {
@@ -40,6 +41,36 @@ export default function ContactPage() {
     } else {
       setSelectedItems([...selectedItems, item])
     }
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const generateEmailLink = () => {
+    const subject = encodeURIComponent("Colombian Birding Tour Inquiry")
+    const body = encodeURIComponent(`Hello AVES Team,
+
+I'm interested in planning a Colombian birding adventure. Here are my details:
+
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Travel Date: ${formData.travelDate || "Not specified"}
+Group Size: ${formData.groupSize}
+Desired Duration: ${formData.desiredDuration}
+Experience Level: ${formData.experienceLevel}
+
+Interested Tour Types: ${selectedTourTypes.length > 0 ? selectedTourTypes.join(", ") : "Not specified"}
+Desired Locations/Bioregions: ${selectedLocations.length > 0 ? selectedLocations.join(", ") : "Not specified"}
+
+Special Interests/Requests: ${formData.specialRequests || "None specified"}
+
+I look forward to hearing from you within 24 hours as mentioned on your website.
+
+Best regards,
+${formData.firstName} ${formData.lastName}`)
+
+    return `mailto:info@aves.com?subject=${subject}&body=${body}`
   }
 
   return (
@@ -77,17 +108,13 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900">Email</div>
-                    <div className="text-gray-600">info@aves.com</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                    <Phone className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Phone</div>
-                    <div className="text-gray-600">+1 (555) 123-AVES</div>
+                    <a
+                      href={generateEmailLink()}
+                      className="text-emerald-600 hover:text-emerald-700 hover:underline transition-colors"
+                    >
+                      info@aves.com
+                    </a>
+                    <div className="text-xs text-emerald-600">Response within 24 hours</div>
                   </div>
                 </div>
 
@@ -98,6 +125,7 @@ export default function ContactPage() {
                   <div>
                     <div className="font-semibold text-gray-900">Based in</div>
                     <div className="text-gray-600">Vancouver, Canada & Bogotá, Colombia</div>
+                    <div className="text-xs text-emerald-600">Local expertise, global reach</div>
                   </div>
                 </div>
 
@@ -108,6 +136,7 @@ export default function ContactPage() {
                   <div>
                     <div className="font-semibold text-gray-900">Response Time</div>
                     <div className="text-gray-600">Within 24 hours</div>
+                    <div className="text-xs text-emerald-600">For all inquiries</div>
                   </div>
                 </div>
               </div>
@@ -128,60 +157,171 @@ export default function ContactPage() {
 
             <Card className="p-8 border-0 shadow-lg">
               <CardHeader className="px-0 pt-0">
-                <CardTitle className="text-2xl font-bold text-gray-900">Send Us a Message</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">Get Your Custom Tour Quote</CardTitle>
               </CardHeader>
               <CardContent className="px-0 pb-0">
+                <p className="text-sm text-gray-600 mb-6">
+                  Fill out this form and we'll send you a personalized tour recommendation and quote within 24 hours.
+                </p>
+
                 <form
-                  className="space-y-6"
+                  className="space-y-4"
                   onSubmit={(e) => {
                     e.preventDefault()
-                    const formData = new FormData(e.currentTarget)
                     const submissionData = {
-                      firstName: formData.get("firstName"),
-                      lastName: formData.get("lastName"),
-                      email: formData.get("email"),
-                      phone: formData.get("phone"),
+                      firstName: formData.firstName,
+                      lastName: formData.lastName,
+                      email: formData.email,
+                      travelDate: formData.travelDate,
+                      groupSize: formData.groupSize,
+                      desiredDuration: formData.desiredDuration,
+                      experienceLevel: formData.experienceLevel,
+                      desiredLocations: selectedLocations,
                       tourTypes: selectedTourTypes,
-                      bioregions: selectedBioregions,
-                      message: formData.get("message"),
+                      specialRequests: formData.specialRequests,
                     }
                     console.log("Form submission data:", submissionData)
                     // Here you would typically send the data to your backend
                     alert(
-                      `Form submitted successfully!\n\nSelected Tour Types: ${selectedTourTypes.join(", ") || "None"}\nSelected Bioregions: ${selectedBioregions.join(", ") || "None"}`,
+                      `Form submitted successfully!\n\nSelected Tour Types: ${selectedTourTypes.join(", ") || "None"}\nSelected Locations/Bioregions: ${selectedLocations.join(", ") || "None"}`,
                     )
                   }}
                 >
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                      <Input placeholder="Your first name" name="firstName" />
+                      <label className="block text-xs font-medium text-gray-700 mb-1">First Name *</label>
+                      <Input
+                        placeholder="Your first name"
+                        className="text-sm"
+                        name="firstName"
+                        required
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange("firstName", e.target.value)}
+                      />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                      <Input placeholder="Your last name" name="lastName" />
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Last Name *</label>
+                      <Input
+                        placeholder="Your last name"
+                        className="text-sm"
+                        name="lastName"
+                        required
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange("lastName", e.target.value)}
+                      />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <Input type="email" placeholder="your.email@example.com" name="email" />
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Email *</label>
+                    <Input
+                      type="email"
+                      placeholder="your.email@example.com"
+                      className="text-sm"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Travel Dates</label>
+                      <Input
+                        type="date"
+                        className="text-sm"
+                        name="travelDate"
+                        value={formData.travelDate}
+                        onChange={(e) => handleInputChange("travelDate", e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Group Size</label>
+                      <select
+                        name="groupSize"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        value={formData.groupSize}
+                        onChange={(e) => handleInputChange("groupSize", e.target.value)}
+                      >
+                        {GROUP_SIZE_OPTIONS.map((size) => (
+                          <option key={size} value={size}>
+                            {size}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Desired Duration</label>
+                      <select
+                        name="desiredDuration"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        value={formData.desiredDuration}
+                        onChange={(e) => handleInputChange("desiredDuration", e.target.value)}
+                      >
+                        {DURATION_OPTIONS.map((duration) => (
+                          <option key={duration} value={duration}>
+                            {duration}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                        Desired Locations <span className="text-gray-500">(Select multiple)</span>
+                      </label>
+                      <div className="relative">
+                        <div className="border border-gray-300 rounded-md p-2 bg-white max-h-32 overflow-y-auto">
+                          {LOCATION_OPTIONS.map((location) => (
+                            <label
+                              key={location}
+                              className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-1"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={selectedLocations.includes(location)}
+                                onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                                className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 text-xs"
+                              />
+                              <span className="text-xs text-gray-700">{location}</span>
+                            </label>
+                          ))}
+                        </div>
+                        {selectedLocations.length > 0 && (
+                          <div className="mt-2 flex flex-wrap gap-1">
+                            {selectedLocations.map((location) => (
+                              <span
+                                key={location}
+                                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800"
+                              >
+                                {location.length > 20 ? `${location.substring(0, 20)}...` : location}
+                                <button
+                                  type="button"
+                                  onClick={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                                  className="ml-1 text-blue-600 hover:text-blue-800"
+                                >
+                                  ×
+                                </button>
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
-                    <Input placeholder="+1 (555) 123-4567" name="phone" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Interested Tour Types <span className="text-sm text-gray-500">(Select multiple)</span>
+                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                      Interested Tour Types * (select all that apply)
                     </label>
-                    <div className="border border-gray-300 rounded-md p-3 bg-white max-h-40 overflow-y-auto">
-                      {tourTypes.map((tourType) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {CONTACT_TOUR_TYPE_OPTIONS.map((tourType) => (
                         <label
                           key={tourType}
-                          className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-2"
+                          className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer"
                         >
                           <input
                             type="checkbox"
@@ -189,7 +329,7 @@ export default function ContactPage() {
                             onChange={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
                             className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
                           />
-                          <span className="text-sm">{tourType}</span>
+                          <span className="text-xs text-gray-700">{tourType}</span>
                         </label>
                       ))}
                     </div>
@@ -215,56 +355,43 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Bioregions of Interest <span className="text-sm text-gray-500">(Select multiple)</span>
-                    </label>
-                    <div className="border border-gray-300 rounded-md p-3 bg-white max-h-40 overflow-y-auto">
-                      {bioregions.map((bioregion) => (
-                        <label
-                          key={bioregion}
-                          className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-2"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={selectedBioregions.includes(bioregion)}
-                            onChange={() => toggleSelection(bioregion, selectedBioregions, setSelectedBioregions)}
-                            className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                          />
-                          <span className="text-sm">{bioregion}</span>
-                        </label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Experience Level</label>
+                    <select
+                      name="experienceLevel"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      value={formData.experienceLevel}
+                      onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
+                    >
+                      {EXPERIENCE_LEVELS.map((level) => (
+                        <option key={level} value={level}>
+                          {level}
+                        </option>
                       ))}
-                    </div>
-                    {selectedBioregions.length > 0 && (
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {selectedBioregions.map((bioregion) => (
-                          <span
-                            key={bioregion}
-                            className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800"
-                          >
-                            {bioregion}
-                            <button
-                              type="button"
-                              onClick={() => toggleSelection(bioregion, selectedBioregions, setSelectedBioregions)}
-                              className="ml-1 text-blue-600 hover:text-blue-800"
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                    <Textarea
-                      rows={4}
-                      placeholder="Tell us about your birding interests, travel dates, group size, and any questions you have..."
-                      name="message"
-                    />
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Special Interests or Requests
+                    </label>
+                    <textarea
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                      rows={3}
+                      placeholder="Photography focus, specific species interests, accessibility needs, etc."
+                      name="specialRequests"
+                      value={formData.specialRequests}
+                      onChange={(e) => handleInputChange("specialRequests", e.target.value)}
+                    ></textarea>
                   </div>
 
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Send Message</Button>
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-sm py-3">
+                    Get My Custom Quote
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+
+                  <p className="text-xs text-gray-500 text-center">
+                    We'll respond within 24 hours with a personalized recommendation and quote.
+                  </p>
                 </form>
               </CardContent>
             </Card>
