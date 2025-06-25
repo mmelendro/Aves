@@ -1,0 +1,11 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle Background -->
+  <circle cx="24" cy="24" r="23" fill="#ffffff" stroke="#F3B233" stroke-width="2"></circle>
+
+  <!-- Petal Shape -->
+  <path d="M24 16
+           C21 18, 20 23, 22 28
+           C24 32, 28 32, 30 29
+           C32 25, 29 20, 26 18
+           C25 17, 24 16, 24 16Z" fill="#F3B233"></path>
+</svg>

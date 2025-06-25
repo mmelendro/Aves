@@ -1,0 +1,13 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle Background -->
+  <circle cx="24" cy="24" r="23" fill="#ffffff" stroke="#D72631" stroke-width="2"></circle>
+
+  <!-- Heart-shaped Berry -->
+  <path d="M24 32
+           L20 28
+           C16 24, 16 19, 20 17
+           C22 16, 24 18, 24 19
+           C24 18, 26 16, 28 17
+           C32 19, 32 24, 28 28
+           L24 32Z" fill="#D72631"></path>
+</svg>

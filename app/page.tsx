@@ -15,7 +15,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Play,
   Star,
   Calendar,
   Shield,
@@ -27,15 +26,11 @@ import {
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import SpeciesTooltip from "@/components/species-tooltip"
-import TourComparison from "@/components/tour-comparison"
-import YouTubeBackground from "@/components/youtube-background"
 import EndemicBirdsCarousel from "@/components/endemic-birds-carousel"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
-import EnhancedCTAButton from "@/components/enhanced-cta-button"
-import SectionNavigator from "@/components/section-navigator"
-import CTATestingFramework from "@/components/cta-testing-framework"
-import ScrollDebugPanel from "@/components/scroll-debug-panel"
+import FloatingAVESNavigation from "@/components/floating-aves-navigation"
+import VideoSlider from "@/components/video-slider"
 
 export default function AVESLandingPage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -71,11 +66,6 @@ export default function AVESLandingPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-sm">
             <div className="flex items-center space-x-2">
-              <Star className="w-4 h-4 text-yellow-300" />
-              <span className="font-medium">4.9/5 Rating</span>
-              <span className="text-emerald-200">• 200+ Reviews</span>
-            </div>
-            <div className="flex items-center space-x-2">
               <Shield className="w-4 h-4" />
               <span>B Corp Certified</span>
             </div>
@@ -91,40 +81,17 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Video Introduction Section */}
+      {/* Video Introduction Section - Enhanced with Slider */}
       <section className="relative py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
             <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-3">
               🎥 Experience Colombia's Natural Beauty
             </Badge>
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Sierra Nevada & Tayrona National Park</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover the breathtaking landscapes where our birding adventures take place - from pristine Caribbean
-              coastlines to cloud-covered mountain peaks.
-            </p>
           </div>
 
           <div className="relative max-w-4xl mx-auto">
-            <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-              <YouTubeBackground
-                videoId="eEteVfDagrs"
-                className="w-full h-full"
-                overlay={true}
-                controls={true}
-                startTime={0}
-              />
-            </div>
-
-            {/* Video Caption */}
-            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-              <div className="bg-white rounded-full px-6 py-2 shadow-lg border border-gray-200">
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <Play className="w-4 h-4 text-emerald-600" />
-                  <span>Aerial footage of Colombia's premier birding destinations</span>
-                </div>
-              </div>
-            </div>
+            <VideoSlider autoPlay={true} autoPlayInterval={10000} />
           </div>
         </div>
       </section>
@@ -199,24 +166,6 @@ export default function AVESLandingPage() {
                 </Link>
               </div>
 
-              {/* Social Proof Stats */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 border border-emerald-100 shadow-sm">
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-emerald-600">1,900+</div>
-                    <div className="text-xs text-gray-600">Bird Species</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-emerald-600">200+</div>
-                    <div className="text-xs text-gray-600">Happy Clients</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-emerald-600">4.9★</div>
-                    <div className="text-xs text-gray-600">Average Rating</div>
-                  </div>
-                </div>
-              </div>
-
               {/* Urgency/Scarcity Element */}
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                 <div className="flex items-center space-x-2 text-amber-800">
@@ -240,7 +189,7 @@ export default function AVESLandingPage() {
                     <p className="text-sm text-gray-700 italic">
                       "Absolutely incredible experience! Saw 180+ species in 10 days."
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">- Sarah M., Wildlife Photographer</p>
+                    <p className="text-xs text-gray-500 mt-1">- Royann, Wildlife Photographer</p>
                   </div>
                 </div>
               </div>
@@ -465,15 +414,15 @@ export default function AVESLandingPage() {
                     Speak with an Expert
                   </Button>
                 </Link>
-                <Link href="#comparison">
-                  <EnhancedCTAButton
-                    targetSection="comparison"
+                <Link href="/tours">
+                  <Button
+                    size="lg"
                     variant="outline"
                     className="border-emerald-600 text-emerald-600 hover:bg-emerald-50"
-                    trackingEvent="compare_tours_cta"
                   >
+                    <Binoculars className="mr-2 w-4 h-4" />
                     Compare All Tours
-                  </EnhancedCTAButton>
+                  </Button>
                 </Link>
               </div>
             </div>
@@ -481,7 +430,7 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Social Proof Section - New */}
+      {/* Customer Reviews Section - Updated Reviews */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -490,6 +439,7 @@ export default function AVESLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
+            {/* Royann's Updated Review */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
@@ -501,21 +451,23 @@ export default function AVESLandingPage() {
                   <span className="ml-2 text-sm text-gray-600">5.0</span>
                 </div>
                 <p className="text-gray-700 mb-4 italic">
-                  "Absolutely incredible! We saw 180+ species including 15 endemics. The guides were phenomenal and the
-                  accommodations exceeded expectations."
+                  "Absolutely extraordinary! I photographed over 500 species including more than 30 endemics. The guides
+                  knew exactly where to position me for the perfect shots. My camera has never captured such incredible
+                  diversity!"
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-emerald-600 font-bold">SM</span>
+                    <span className="text-emerald-600 font-bold">R</span>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Sarah Mitchell</p>
-                    <p className="text-sm text-gray-600">Wildlife Photographer, UK</p>
+                    <p className="font-semibold text-gray-900">Royann</p>
+                    <p className="text-sm text-gray-600">Wildlife Photographer, USA</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
+            {/* Sylvain's Review in French */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
@@ -527,21 +479,23 @@ export default function AVESLandingPage() {
                   <span className="ml-2 text-sm text-gray-600">5.0</span>
                 </div>
                 <p className="text-gray-700 mb-4 italic">
-                  "The AVES Vision tour was perfect for photography. Professional hides, expert guidance, and stunning
-                  locations. My portfolio has never looked better!"
+                  "Une expérience absolument magnifique! Les guides étaient exceptionnels et connaissaient parfaitement
+                  les habitats. J'ai observé des espèces que je n'aurais jamais imaginé voir. Un voyage inoubliable au
+                  cœur de la biodiversité colombienne!"
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-emerald-600 font-bold">MR</span>
+                    <span className="text-emerald-600 font-bold">S</span>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Michael Rodriguez</p>
-                    <p className="text-sm text-gray-600">Nature Photographer, USA</p>
+                    <p className="font-semibold text-gray-900">Sylvain</p>
+                    <p className="text-sm text-gray-600">Ornithologue amateur, Québec</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
+            {/* Lisa & Peter's Updated Review */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
@@ -553,40 +507,27 @@ export default function AVESLandingPage() {
                   <span className="ml-2 text-sm text-gray-600">5.0</span>
                 </div>
                 <p className="text-gray-700 mb-4 italic">
-                  "Our honeymoon with AVES Souls was magical. Romantic settings, incredible birds, and memories that
-                  will last a lifetime. Highly recommended!"
+                  "At our age, we thought our traveling days were behind us, but AVES made this the most memorable trip
+                  of our lives! The care, attention, and incredible birds we saw exceeded all expectations. A perfect
+                  adventure for our 80s!"
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-emerald-600 font-bold">EJ</span>
+                    <span className="text-emerald-600 font-bold">L&P</span>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Emma & James</p>
-                    <p className="text-sm text-gray-600">Newlyweds, Canada</p>
+                    <p className="font-semibold text-gray-900">Lisa & Peter</p>
+                    <p className="text-sm text-gray-600">Retirees, Pender Island</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
-        </div>
-      </section>
-
-      {/* Tour Comparison Section */}
-      <section id="comparison" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Compare Our Tours</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Not sure which tour is right for you? Use our comparison tool to explore the differences and find your
-              perfect Colombian birding adventure.
-            </p>
-          </div>
-          <TourComparison />
         </div>
       </section>
 
       {/* Why Colombia Section - Enhanced */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -716,8 +657,12 @@ export default function AVESLandingPage() {
                 We partner with local communities, providing fair employment and supporting community-managed
                 conservation initiatives.
               </p>
-              <div className="text-2xl font-bold text-emerald-600">50+</div>
-              <div className="text-xs text-gray-500">Local Families Supported</div>
+              <Link href="/about/partners">
+                <Button variant="outline" size="sm" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50">
+                  View Our Partners
+                  <ArrowRight className="ml-2 w-3 h-3" />
+                </Button>
+              </Link>
             </Card>
 
             <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -727,10 +672,10 @@ export default function AVESLandingPage() {
               <h3 className="text-lg font-bold text-gray-900 mb-3">Habitat Protection</h3>
               <p className="text-gray-600 text-sm mb-4">
                 10% of net profits fund our Conservation Endowment Trust, dedicated to permanent habitat restoration and
-                protection.
+                protection across Colombia's critical ecosystems.
               </p>
-              <div className="text-2xl font-bold text-emerald-600">1,200</div>
-              <div className="text-xs text-gray-500">Hectares Protected</div>
+              <div className="text-2xl font-bold text-emerald-600">Active</div>
+              <div className="text-xs text-gray-500">Conservation Projects</div>
             </Card>
           </div>
 
@@ -811,18 +756,6 @@ export default function AVESLandingPage() {
                 Ready to plan your Colombian birding adventure? Our expert team will help you choose the perfect tour
                 and create an unforgettable experience tailored to your interests.
               </p>
-
-              {/* Lead Magnet */}
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6 mb-6">
-                <h3 className="font-bold text-emerald-800 mb-2">🎁 Free Colombia Birding Guide</h3>
-                <p className="text-sm text-emerald-700 mb-3">
-                  Download our comprehensive 50-page guide featuring the top 100 birds to see in Colombia, including
-                  maps, best viewing times, and photography tips.
-                </p>
-                <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700">
-                  Download Free Guide
-                </Button>
-              </div>
 
               <div className="space-y-4">
                 <div className="flex items-center">
@@ -968,25 +901,8 @@ export default function AVESLandingPage() {
         </div>
       </section>
 
-      {/* Section Navigator */}
-      <SectionNavigator
-        sections={[
-          { id: "tours", label: "Tour Types" },
-          { id: "comparison", label: "Compare Tours" },
-          { id: "conservation", label: "Conservation" },
-          { id: "contact", label: "Contact" },
-        ]}
-      />
-
-      {/* Development Testing Framework - Remove in production */}
-      {process.env.NODE_ENV === "development" && (
-        <div className="container mx-auto px-4 py-8">
-          <CTATestingFramework />
-        </div>
-      )}
-
-      {/* Development Debug Panel - Remove in production */}
-      {process.env.NODE_ENV === "development" && <ScrollDebugPanel />}
+      {/* Floating AVES Navigation */}
+      <FloatingAVESNavigation autoHideDuration={8000} />
 
       {/* Footer */}
       <Footer />

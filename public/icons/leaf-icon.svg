@@ -1,0 +1,11 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle Background -->
+  <circle cx="24" cy="24" r="23" fill="#ffffff" stroke="#4C9A2A" stroke-width="2"></circle>
+  
+  <!-- Leaf Shape -->
+  <path d="M32 16
+           C29 15, 25 17, 22 20
+           C19 23, 17 28, 16 32
+           C20 31, 25 29, 28 26
+           C31 23, 33 19, 32 16Z" fill="#4C9A2A"></path>
+</svg>

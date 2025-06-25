@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { CheckCircle, ArrowRight, Users, Globe, Award } from "lucide-react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
+import TourComparison from "@/components/tour-comparison"
 
 export default function ToursPage() {
   return (
@@ -223,8 +224,22 @@ export default function ToursPage() {
         </div>
       </section>
 
-      {/* Why Choose AVES Section */}
+      {/* Tour Comparison Section - Moved from Homepage */}
       <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Compare Our Tours</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Not sure which tour is right for you? Use our detailed comparison tool to explore the differences and find
+              your perfect Colombian birding adventure.
+            </p>
+          </div>
+          <TourComparison />
+        </div>
+      </section>
+
+      {/* Why Choose AVES Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose AVES?</h2>
