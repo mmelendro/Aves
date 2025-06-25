@@ -29,7 +29,6 @@ import EndemicBirdsCarousel from "@/components/endemic-birds-carousel"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import FloatingAVESNavigation from "@/components/floating-aves-navigation"
-import VideoCarousel from "@/components/video-carousel"
 import {
   DURATION_OPTIONS,
   LOCATION_OPTIONS,
@@ -116,25 +115,6 @@ ${formData.firstName} ${formData.lastName}`)
     <div className="min-h-screen bg-white">
       {/* Navigation Header */}
       <NavigationHeader currentPage="/" />
-
-      {/* Video Carousel Section */}
-      <section className="relative py-8 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
-              🎥 Experience Colombia's Natural Beauty
-            </Badge>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Discover Your Next Birding Adventure</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Explore breathtaking footage from Colombia's most spectacular birding destinations
-            </p>
-          </div>
-
-          <div className="relative max-w-6xl mx-auto">
-            <VideoCarousel autoPlay={true} autoPlayInterval={12000} />
-          </div>
-        </div>
-      </section>
 
       {/* Hero Section - Enhanced Value Proposition */}
       <section
