@@ -1,43 +1,33 @@
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Calendar, User, MapPin, Camera, Heart } from "lucide-react"
+import { ArrowLeft, Calendar, User, MapPin, Camera, Heart, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { NavigationHeader } from "@/components/navigation-header"
+import { Footer } from "@/components/footer"
+import { Button } from "@/components/ui/button"
 
 export default function SierraNevadaBlogPost() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Link href="/">
-              <Image
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={50}
-                height={50}
-                className="object-contain"
-              />
+      <NavigationHeader currentPage="/blog" />
+
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-4">
+        <div className="container mx-auto px-4">
+          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-emerald-600 transition-colors">
+              Home
             </Link>
-          </div>
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/tours" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Tours
+            <span>→</span>
+            <Link href="/blog" className="hover:text-emerald-600 transition-colors">
+              Blog
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              About
-            </Link>
-            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Conservation
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Contact
-            </Link>
+            <span>→</span>
+            <span className="text-gray-900">Guardians of the Sky: Birding with the Kogi and Wayuu</span>
           </nav>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Adventure</Button>
         </div>
-      </header>
+      </div>
 
       {/* Article Header */}
       <article className="max-w-4xl mx-auto px-4 py-8">
@@ -575,6 +565,18 @@ export default function SierraNevadaBlogPost() {
         {/* Related Links */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Plan Your Sierra Nevada Adventure</h3>
+          <div className="text-center mb-8">
+            <p className="text-lg text-gray-600 mb-6">
+              Experience the magic of the Sierra Nevada with indigenous guides and discover endemic species found
+              nowhere else on Earth.
+            </p>
+            <Link href="/shopping?region=caribbean">
+              <Button className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors inline-flex items-center gap-2">
+                Explore Our Sierra Nevada Tours
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             <Link
               href="/tours/adventure/sierra-nevada"
@@ -649,6 +651,7 @@ export default function SierraNevadaBlogPost() {
           <span>Published: March 15, 2025</span>
         </div>
       </article>
+      <Footer />
     </div>
   )
 }

@@ -1,44 +1,34 @@
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Calendar, User, MapPin, Thermometer, Mountain, Clock } from "lucide-react"
+import { ArrowLeft, Calendar, User, MapPin, Thermometer, Mountain, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import AuthorBio from "@/components/author-bio"
+import { NavigationHeader } from "@/components/navigation-header"
+import { Footer } from "@/components/footer"
+import { Button } from "@/components/ui/button"
 
 export default function ParamoManizalesThornbillPost() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Link href="/">
-              <Image
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={50}
-                height={50}
-                className="object-contain"
-              />
+      <NavigationHeader currentPage="/blog" />
+
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-4">
+        <div className="container mx-auto px-4">
+          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-emerald-600 transition-colors">
+              Home
             </Link>
-          </div>
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/tours" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Tours
+            <span>→</span>
+            <Link href="/blog" className="hover:text-emerald-600 transition-colors">
+              Blog
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              About
-            </Link>
-            <Link href="/conservation" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Conservation
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-emerald-600 transition-colors">
-              Contact
-            </Link>
+            <span>→</span>
+            <span className="text-gray-900">Fire and Ice: From Páramo Peaks to Thermal Springs</span>
           </nav>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Adventure</Button>
         </div>
-      </header>
+      </div>
 
       {/* Article Header */}
       <article className="max-w-4xl mx-auto px-4 py-8">
@@ -505,6 +495,18 @@ export default function ParamoManizalesThornbillPost() {
         {/* Related Links */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Experience High-Altitude Birding</h3>
+          <div className="text-center mb-8">
+            <p className="text-lg text-gray-600 mb-6">
+              Discover the incredible diversity of Colombia's Central Andes, from páramo specialists to cloud forest
+              manakins.
+            </p>
+            <Link href="/shopping?region=central-andes">
+              <Button className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors inline-flex items-center gap-2">
+                Explore Our Central Andes Tours
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
           <div className="grid md:grid-cols-2 gap-6">
             <Link
               href="/tours/adventure"
@@ -525,126 +527,7 @@ export default function ParamoManizalesThornbillPost() {
       </article>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Image
-                  src="/images/aves-logo.png"
-                  alt="AVES Birdwatching Tours Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
-              <p className="text-gray-400 mb-4">
-                Premium birding tours in Colombia, committed to conservation and sustainable tourism.
-              </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
-                  <span className="text-sm">f</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
-                  <span className="text-sm">ig</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors cursor-pointer">
-                  <span className="text-sm">tw</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Tours</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/tours/adventure" className="hover:text-white transition-colors">
-                    AVES Adventure
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/vision" className="hover:text-white transition-colors">
-                    AVES Vision
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/elevate" className="hover:text-white transition-colors">
-                    AVES Elevate
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/souls" className="hover:text-white transition-colors">
-                    AVES Souls
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="#about" className="hover:text-white transition-colors">
-                    🦅 About AVES
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#conservation" className="hover:text-white transition-colors">
-                    🌱 Conservation
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#conservation" className="hover:text-white transition-colors flex items-center group">
-                    <span className="mr-1">🌱</span>B Corp Journey & Sustainability
-                    <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity">↑</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    📝 Blog
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    🐦 Bird Guide
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    ✈️ Travel Tips
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    📞 Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2025 AVES. All rights reserved.</p>
-            <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
-              <Link href="/privacy" className="hover:text-white transition-colors">
-                🔒 Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
-                📋 Terms of Service
-              </Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">
-                🍪 Cookie Policy
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

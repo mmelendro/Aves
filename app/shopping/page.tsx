@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -74,11 +75,14 @@ interface TourSelection {
 }
 
 export default function ShoppingPage() {
+  const searchParams = useSearchParams()
+  const preselectedRegion = searchParams.get("region")
+
   const [tourSelections, setTourSelections] = useState<TourSelection[]>([
     {
       id: "1",
       tourType: "adventure",
-      bioregion: "western-andes",
+      bioregion: preselectedRegion || "western-andes",
       participants: 2,
       totalDays: 8,
       breakDays: 0,
@@ -92,6 +96,19 @@ export default function ShoppingPage() {
     phone: "",
   })
   const [savedBooking, setSavedBooking] = useState(false)
+
+  // Update the first tour's bioregion when URL parameter changes
+  useEffect(() => {
+    if (preselectedRegion && tourSelections.length > 0) {
+      // Check if the preselected region exists in our bioregions
+      const regionExists = bioregions.some((region) => region.id === preselectedRegion)
+      if (regionExists) {
+        setTourSelections((prev) =>
+          prev.map((tour, index) => (index === 0 ? { ...tour, bioregion: preselectedRegion } : tour)),
+        )
+      }
+    }
+  }, [preselectedRegion])
 
   const addTourSelection = () => {
     if (tourSelections.length < 4) {
@@ -244,6 +261,15 @@ Looking forward to hearing from you!
                   Flexible duration
                 </span>
               </div>
+              {preselectedRegion && (
+                <div className="mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                  <p className="text-emerald-800 text-sm">
+                    <strong>{bioregions.find((region) => region.id === preselectedRegion)?.name} Selected:</strong>{" "}
+                    We've pre-selected the {bioregions.find((region) => region.id === preselectedRegion)?.subtitle}{" "}
+                    region for your first tour based on your interest in our blog post!
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Tour Selections */}
@@ -258,6 +284,9 @@ Looking forward to hearing from you!
                           <Badge variant="outline" className="ml-2">
                             +{tour.breakDays} break days
                           </Badge>
+                        )}
+                        {tour.bioregion === "choco" && (
+                          <Badge className="ml-2 bg-emerald-100 text-emerald-800">Chocó Featured</Badge>
                         )}
                       </CardTitle>
                       {tourSelections.length > 1 && (

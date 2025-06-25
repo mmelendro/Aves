@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowLeft, Calendar, Clock, MapPin, Users } from "lucide-react"
+import { Calendar, Clock, MapPin, Users, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import OptimizedImage from "@/components/optimized-image"
 import AudioPlayer from "@/components/audio-player"
+import { NavigationHeader } from "@/components/navigation-header"
+import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot | AVES",
@@ -22,57 +24,28 @@ export const metadata: Metadata = {
 export default function ChocoToucanExpeditionPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2">
-              <OptimizedImage
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={40}
-                height={40}
-                className="object-contain"
-              />
-              <span className="text-xl font-bold text-gray-900">AVES</span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/tours" className="text-gray-600 hover:text-gray-900">
-                Tours
-              </Link>
-              <Link href="/about" className="text-gray-600 hover:text-gray-900">
-                About
-              </Link>
-              <Link href="/conservation" className="text-gray-600 hover:text-gray-900">
-                Conservation
-              </Link>
-              <Link href="/contact" className="text-gray-600 hover:text-gray-900">
-                Contact
-              </Link>
-              <Link
-                href="/tours"
-                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors"
-              >
-                Book Your Adventure
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Header */}
+      <NavigationHeader currentPage="/blog" />
 
-      {/* Back to Blog */}
-      <div className="container mx-auto px-4 py-6">
-        <Link
-          href="/blog"
-          className="inline-flex items-center text-emerald-600 hover:text-emerald-700 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Blog
-        </Link>
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-4">
+        <div className="container mx-auto px-4">
+          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-emerald-600 transition-colors">
+              Home
+            </Link>
+            <span>→</span>
+            <Link href="/blog" className="hover:text-emerald-600 transition-colors">
+              Blog
+            </Link>
+            <span>→</span>
+            <span className="text-gray-900">Into the Heart of Chocó: A Toucan Odyssey</span>
+          </nav>
+        </div>
       </div>
 
       {/* Article Header */}
-      <article className="container mx-auto px-4 pb-16">
+      <article className="container mx-auto px-4 py-16">
         <header className="mb-8">
           <div className="text-center mb-6">
             <span className="inline-block bg-emerald-100 text-emerald-800 text-sm font-medium px-3 py-1 rounded-full mb-4">
@@ -260,131 +233,19 @@ export default function ChocoToucanExpeditionPage() {
                 biodiversity hotspot, where every day brings new discoveries and unforgettable encounters with some of
                 the world's most spectacular birds.
               </p>
-              <Button
-                href="/tours/adventure"
-                className="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors"
-              >
-                Explore Our Chocó Tours
-              </Button>
+              <Link href="/shopping?region=choco">
+                <Button className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors inline-flex items-center gap-2">
+                  Explore Our Chocó Tours
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </article>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <OptimizedImage
-                  src="/images/aves-logo.png"
-                  alt="AVES Birdwatching Tours Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-                <span className="text-xl font-bold">AVES</span>
-              </div>
-              <p className="text-gray-400 mb-4">
-                Discover Colombia's incredible birdlife with expert guides and sustainable tourism practices.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white">
-                  <span className="sr-only">Facebook</span>
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                  </svg>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white">
-                  <span className="sr-only">Instagram</span>
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C3.85 14.81 3.85 12.939 4.126 11.374c.138-.784.414-1.297.69-1.297.138 0 .276.138.276.276 0 .138-.138.276-.276.414-.276.414-.414.828-.552 1.297-.138.69-.138 1.38.138 2.07.276.69.828 1.297 1.518 1.518.69.276 1.38.276 2.07-.138.69-.414 1.297-.966 1.518-1.656.276-.69.276-1.38-.138-2.07-.414-.69-.966-1.297-1.656-1.518-.69-.276-1.38-.276-2.07.138-.69.414-1.297.966-1.518 1.656-.276.69-.276 1.38.138 2.07.414.69.966 1.297 1.656 1.518.69.276 1.38.276 2.07-.138.69-.414 1.297-.966 1.518-1.656.276-.69.276-1.38-.138-2.07-.414-.69-.966-1.297-1.656-1.518z" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Tours</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/tours/vision" className="hover:text-white">
-                    AVES Vision
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/souls" className="hover:text-white">
-                    AVES Souls
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/elevate" className="hover:text-white">
-                    AVES Elevate
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/adventure" className="hover:text-white">
-                    Adventure Tours
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/about" className="hover:text-white">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/team" className="hover:text-white">
-                    Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/conservation" className="hover:text-white">
-                    Conservation
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about/b-corp" className="hover:text-white">
-                    B Corp Certification
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/contact" className="hover:text-white">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="hover:text-white">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white">
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 AVES Birdwatching Tours. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -59,9 +59,14 @@ export default function OptimizedImage({
         "w-full h-full",
         // Only apply hover effects on non-touch devices
         "md:group md:hover:scale-105 md:hover:brightness-110",
-        // Enhanced logo container styling with special ProAves treatment
+        // Enhanced logo container styling with special ProAves treatment and footer optimization
         src.includes("logo") || src.includes("partners")
-          ? "bg-white rounded-lg border border-gray-100 shadow-sm"
+          ? `bg-white rounded-lg border border-gray-100 shadow-sm ${
+              // Footer logo containers - expanded by factor of 4 for enhanced visibility with centering
+              className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+                ? "max-w-[80px] w-[80px] h-[80px] sm:max-w-[96px] sm:w-[96px] sm:h-[96px] md:max-w-[112px] md:w-[112px] md:h-[112px] mx-auto flex-shrink-0"
+                : "max-w-[40px] w-[40px] h-[40px] sm:max-w-[44px] sm:w-[44px] sm:h-[44px]"
+            }`
           : "bg-gray-100 rounded-lg",
         // Special styling for ProAves logo with conservation theme - enhanced for GIF
         src.includes("proaves") ? "border-emerald-200 bg-gradient-to-br from-white to-emerald-50 shadow-md" : "",
@@ -76,6 +81,11 @@ export default function OptimizedImage({
         // Enhanced styling for team member images
         src.includes("team") || alt.toLowerCase().includes("guide") || alt.toLowerCase().includes("specialist")
           ? "bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200"
+          : "",
+        // Footer-specific centering
+        src.includes("logo") &&
+          (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/"))
+          ? "mx-auto justify-self-center place-self-center"
           : "",
         className,
       )}
@@ -97,6 +107,26 @@ export default function OptimizedImage({
           minHeight: "200px",
           maxHeight: "600px",
         }),
+        // Footer logo centering optimization
+        ...(src.includes("logo") &&
+          (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")) && {
+            maxWidth: "112px",
+            maxHeight: "112px",
+            width: "112px",
+            height: "112px",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }),
+        // Footer logo size optimization - expanded by factor of 4
+        ...(src.includes("logo") &&
+          (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")) && {
+            maxWidth: "112px",
+            maxHeight: "112px",
+            width: "112px",
+            height: "112px",
+          }),
         ...style,
       }}
     >
@@ -124,9 +154,21 @@ export default function OptimizedImage({
           height: "100%",
           maxWidth: "100%",
           maxHeight: "100%",
-          // Enhanced responsive logo handling with strict maximum constraints
-          minWidth: src.includes("logo") ? (width >= 50 ? "28px" : "24px") : "24px",
-          minHeight: src.includes("logo") ? (height >= 50 ? "28px" : "24px") : "24px",
+          // Enhanced responsive logo handling with footer optimization
+          minWidth: src.includes("logo")
+            ? className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+              ? "80px" // Footer logos - expanded by factor of 4
+              : width >= 50
+                ? "28px"
+                : "24px" // Header logos - standard size
+            : "24px",
+          minHeight: src.includes("logo")
+            ? className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+              ? "80px" // Footer logos - expanded by factor of 4
+              : height >= 50
+                ? "28px"
+                : "24px" // Header logos - standard size
+            : "24px",
           // Enhanced scaling for toucan images to fill frame completely
           ...((src.includes("toucan") || alt.toLowerCase().includes("toucan")) && {
             minWidth: "100%",
@@ -174,13 +216,15 @@ export default function OptimizedImage({
           hasError ? "opacity-50" : "opacity-100",
           // Interactive states
           onClick ? "cursor-pointer" : "",
-          // Context-aware logo sizing with strict maximum constraints
+          // Context-aware logo sizing with footer optimization
           src.includes("logo") &&
-            // Header logos - with strict maximum limits to prevent oversizing
-            (width >= 50 || height >= 50
-              ? "sm:max-w-[40px] sm:max-h-[40px] md:max-w-[44px] md:max-h-[44px] lg:max-w-[48px] lg:max-h-[48px] xl:max-w-[50px] xl:max-h-[50px]"
-              : // Footer logos - smaller, balanced size
-                "sm:max-w-[28px] sm:max-h-[28px] md:max-w-[32px] md:max-h-[32px] lg:max-w-[36px] lg:max-h-[36px]"),
+            // Footer logos - expanded by factor of 4 for enhanced visibility
+            (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+              ? "sm:max-w-[80px] sm:max-h-[80px] md:max-w-[96px] md:max-h-[96px] lg:max-w-[112px] lg:max-h-[112px]"
+              : // Header logos - standard size with strict maximum limits
+                width >= 50 || height >= 50
+                ? "sm:max-w-[40px] sm:max-h-[40px] md:max-w-[44px] md:max-h-[44px] lg:max-w-[48px] lg:max-h-[48px] xl:max-w-[50px] xl:max-h-[50px]"
+                : "sm:max-w-[28px] sm:max-h-[28px] md:max-w-[32px] md:max-h-[32px] lg:max-w-[36px] lg:max-h-[36px]"),
 
           // Add strict containment classes to prevent overflow (only for logos)
           src.includes("logo") && "!max-w-[50px] !max-h-[50px]",

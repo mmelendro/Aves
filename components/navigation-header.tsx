@@ -58,7 +58,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Link href="/">
+          <Link href="/" className="flex items-center">
             <OptimizedImage
               src="/images/aves-logo.png"
               alt="AVES Birdwatching Tours Logo"
