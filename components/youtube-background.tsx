@@ -26,29 +26,90 @@ export default function YouTubeBackground({
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
   const [player, setPlayer] = useState<any>(null)
+  const [isIntersecting, setIsIntersecting] = useState(false)
+  const [apiLoaded, setApiLoaded] = useState(false)
   const playerRef = useRef<HTMLDivElement>(null)
-  const [isYouTubeAPIReady, setIsYouTubeAPIReady] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Load YouTube API
+  // Check if YouTube API is already loaded
   useEffect(() => {
-    if (typeof window !== "undefined" && !window.YT) {
-      const tag = document.createElement("script")
-      tag.src = "https://www.youtube.com/iframe_api"
-      const firstScriptTag = document.getElementsByTagName("script")[0]
-      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
-
-      window.onYouTubeIframeAPIReady = () => {
-        setIsYouTubeAPIReady(true)
-      }
-    } else if (window.YT && window.YT.Player) {
-      setIsYouTubeAPIReady(true)
+    if (typeof window !== "undefined" && window.YT && window.YT.Player) {
+      setApiLoaded(true)
     }
   }, [])
 
+  // Intersection Observer for lazy loading
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsIntersecting(true)
+          observer.disconnect()
+        }
+      },
+      {
+        rootMargin: "50px",
+        threshold: 0.1,
+      },
+    )
+
+    observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  // Load YouTube API when needed
+  useEffect(() => {
+    if (!isIntersecting || apiLoaded) return
+
+    const loadYouTubeAPI = () => {
+      if (typeof window === "undefined") return
+
+      // Check if script already exists
+      const existingScript = document.querySelector('script[src*="youtube.com/iframe_api"]')
+      if (existingScript) {
+        setApiLoaded(true)
+        return
+      }
+
+      const script = document.createElement("script")
+      script.src = "https://www.youtube.com/iframe_api"
+      script.async = true
+      script.defer = true
+
+      script.onload = () => {
+        setApiLoaded(true)
+      }
+
+      script.onerror = () => {
+        console.error("Failed to load YouTube API")
+        setHasError(true)
+        setIsLoading(false)
+      }
+
+      document.head.appendChild(script)
+
+      // Global callback for YouTube API
+      window.onYouTubeIframeAPIReady = () => {
+        setApiLoaded(true)
+      }
+    }
+
+    loadYouTubeAPI()
+  }, [isIntersecting, apiLoaded])
+
   // Initialize YouTube player
   useEffect(() => {
-    if (isYouTubeAPIReady && playerRef.current && !player) {
+    if (!apiLoaded || !playerRef.current || !isIntersecting || player) return
+
+    const initializePlayer = () => {
       try {
+        if (!window.YT || !window.YT.Player) {
+          setTimeout(initializePlayer, 100)
+          return
+        }
+
         const newPlayer = new window.YT.Player(playerRef.current, {
           videoId: videoId,
           playerVars: {
@@ -66,26 +127,35 @@ export default function YouTubeBackground({
             end: endTime,
             enablejsapi: 1,
             origin: window.location.origin,
+            quality: "hd720",
+            vq: "hd720",
           },
           events: {
             onReady: (event: any) => {
+              console.log("YouTube player ready")
               setIsLoading(false)
               setPlayer(event.target)
-              // Attempt to play
+              event.target.setPlaybackQuality("hd720")
               event.target.playVideo()
             },
             onStateChange: (event: any) => {
               if (event.data === window.YT.PlayerState.PLAYING) {
                 setIsPlaying(true)
+                // Upgrade quality after initial load
+                setTimeout(() => {
+                  if (navigator.connection && navigator.connection.effectiveType === "4g") {
+                    event.target.setPlaybackQuality("hd1080")
+                  }
+                }, 3000)
               } else if (event.data === window.YT.PlayerState.PAUSED) {
                 setIsPlaying(false)
               } else if (event.data === window.YT.PlayerState.ENDED) {
-                // Loop the video
                 event.target.seekTo(startTime || 0)
                 event.target.playVideo()
               }
             },
-            onError: () => {
+            onError: (event: any) => {
+              console.error("YouTube player error:", event.data)
               setHasError(true)
               setIsLoading(false)
             },
@@ -97,7 +167,9 @@ export default function YouTubeBackground({
         setIsLoading(false)
       }
     }
-  }, [isYouTubeAPIReady, videoId, startTime, endTime, player])
+
+    initializePlayer()
+  }, [apiLoaded, videoId, startTime, endTime, isIntersecting, player])
 
   const togglePlay = () => {
     if (player) {
@@ -126,30 +198,34 @@ export default function YouTubeBackground({
   }
 
   return (
-    <div className={`relative w-full h-full ${className}`}>
+    <div ref={containerRef} className={`relative w-full h-full ${className}`}>
       {/* YouTube Player Container */}
-      <div className="absolute inset-0 w-full h-full">
-        <div
-          ref={playerRef}
-          className="w-full h-full"
-          style={{
-            transform: "scale(1.1)", // Slight zoom to hide YouTube controls
-            transformOrigin: "center center",
-          }}
-        />
-      </div>
+      {isIntersecting && (
+        <div className="absolute inset-0 w-full h-full">
+          <div
+            ref={playerRef}
+            className="w-full h-full"
+            style={{
+              transform: "scale(1.1)",
+              transformOrigin: "center center",
+            }}
+          />
+        </div>
+      )}
 
       {/* Overlay */}
       {overlay && (
-        <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+        <div className="absolute inset-0 bg-black/20 bg-gradient-to-b from-black/10 via-transparent to-black/30 will-change-transform" />
       )}
 
       {/* Loading State */}
-      {isLoading && (
+      {(isLoading || !isIntersecting) && (
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50">
           <div className="flex flex-col items-center space-y-4 text-emerald-600">
             <Loader2 className="w-8 h-8 animate-spin" />
-            <p className="text-sm font-medium">Loading Sierra Nevada footage...</p>
+            <p className="text-sm font-medium">
+              {!isIntersecting ? "Preparing Sierra Nevada footage..." : "Loading Sierra Nevada footage..."}
+            </p>
           </div>
         </div>
       )}
@@ -174,7 +250,7 @@ export default function YouTubeBackground({
       )}
 
       {/* Video Controls */}
-      {controls && !isLoading && !hasError && (
+      {controls && !isLoading && !hasError && isIntersecting && (
         <div className="absolute bottom-4 right-4 flex space-x-2 z-10">
           <Button
             size="sm"

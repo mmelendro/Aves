@@ -87,6 +87,12 @@ export default function OptimizedImage({
           (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/"))
           ? "mx-auto justify-self-center place-self-center"
           : "",
+        // Carousel-specific container optimizations for full image visibility
+        className?.includes("carousel")
+          ? "bg-gradient-to-br from-emerald-50 to-blue-50 border border-emerald-100 shadow-sm"
+          : "",
+        // Carousel active slide gets enhanced styling
+        className?.includes("carousel-active") ? "ring-2 ring-emerald-200 shadow-lg" : "",
         className,
       )}
       style={{
@@ -127,6 +133,26 @@ export default function OptimizedImage({
             width: "112px",
             height: "112px",
           }),
+        // Carousel-specific aspect ratio and containment
+        ...(className?.includes("carousel") && {
+          aspectRatio: "16/10",
+          minHeight: "200px",
+          maxHeight: "500px",
+          contain: "layout style paint",
+          willChange: "transform",
+        }),
+        // Ensure proper image containment for carousel slides
+        ...(className?.includes("carousel") && {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+        }),
+        // Performance optimization for carousel images
+        ...(className?.includes("carousel") && {
+          contentVisibility: "auto",
+          containIntrinsicSize: "800px 500px",
+        }),
         ...style,
       }}
     >
@@ -208,6 +234,8 @@ export default function OptimizedImage({
           src.includes("logo") ? "object-contain mx-auto" : "object-cover mx-auto",
           // Enhanced responsive sizing constraints to prevent overflow
           "max-w-full max-h-full w-full h-full",
+          // Carousel-specific optimizations
+          className?.includes("carousel") ? "select-none pointer-events-none" : "",
           // Enhanced classes for toucan images to ensure full frame coverage
           (src.includes("toucan") || alt.toLowerCase().includes("toucan")) &&
             "!object-cover !w-full !h-full !min-w-full !min-h-full",
@@ -231,6 +259,38 @@ export default function OptimizedImage({
           // Ensure proper containment within frame
           "flex-shrink-0",
         )}
+        loading={
+          priority || className?.includes("carousel-active")
+            ? "eager"
+            : className?.includes("carousel")
+              ? "lazy"
+              : priority
+                ? "eager"
+                : "lazy"
+        }
+        sizes={
+          className?.includes("carousel")
+            ? "(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 800px"
+            : src.includes("logo")
+              ? "(max-width: 640px) 32px, (max-width: 768px) 36px, 40px"
+              : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        }
+        {...(className?.includes("carousel") && {
+          "data-carousel": "true",
+          onLoad: () => {
+            setIsLoading(false)
+            // Preload next carousel image
+            if (typeof window !== "undefined" && window.requestIdleCallback) {
+              window.requestIdleCallback(() => {
+                // Preload logic handled by carousel component
+              })
+            }
+          },
+        })}
+        {...(className?.includes("carousel") && {
+          fetchPriority: className?.includes("carousel-active") ? "high" : "low",
+          decoding: "async",
+        })}
         onLoad={() => setIsLoading(false)}
         onError={handleError}
         onClick={
@@ -243,8 +303,6 @@ export default function OptimizedImage({
               }
             : undefined)
         }
-        loading={priority ? "eager" : "lazy"}
-        sizes="(max-width: 640px) 32px, (max-width: 768px) 36px, 40px"
       />
       {isLoading && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />}
       {hasError && currentSrc === fallback && (
