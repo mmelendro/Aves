@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Play, Pause, Volume2, VolumeX, Loader2, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 interface YouTubeBackgroundProps {
   videoId: string
@@ -213,9 +214,23 @@ export default function YouTubeBackground({
         </div>
       )}
 
-      {/* Overlay */}
+      {/* Enhanced Overlay with Interaction Support */}
       {overlay && (
-        <div className="absolute inset-0 bg-black/20 bg-gradient-to-b from-black/10 via-transparent to-black/30 will-change-transform" />
+        <div
+          className={cn(
+            "absolute inset-0 pointer-events-none transition-opacity duration-300",
+            "bg-gradient-to-b from-black/5 via-transparent to-black/20",
+            isLoading && "bg-black/10",
+            hasError && "bg-red-900/10",
+          )}
+          style={{
+            background: hasError
+              ? "linear-gradient(to bottom, rgba(239, 68, 68, 0.05), transparent, rgba(239, 68, 68, 0.1))"
+              : isLoading
+                ? "linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent, rgba(0, 0, 0, 0.15))"
+                : "linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent, rgba(0, 0, 0, 0.2))",
+          }}
+        />
       )}
 
       {/* Loading State */}
