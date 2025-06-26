@@ -493,9 +493,11 @@ ${formData.firstName} ${formData.lastName}`)
                   <span className="ml-2 text-xs sm:text-sm text-gray-600">5.0</span>
                 </div>
                 <p className="text-gray-700 mb-3 sm:mb-4 italic text-sm sm:text-base leading-relaxed">
-                  "Absolutely extraordinary! I photographed over 500 species including more than 30 endemics. The guides
-                  knew exactly where to position me for the perfect shots. My camera has never captured such incredible
-                  diversity!"
+                  "My AVES expedition to Colombia was absolutely extraordinary! Over the course of our journey, I
+                  documented over 500 species, including more than 30 endemic species and hundreds of lifers, and
+                  captured photographs of more than 350 species. The guides knew exactly where to position me for the
+                  perfect shots, and their expertise in locating rare endemics was unmatched. My camera has never
+                  captured such incredible diversity!"
                 </p>
                 <div className="flex items-center">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
