@@ -121,3 +121,103 @@ body {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Enhanced Mobile Carousel Optimizations */
+@media (max-width: 768px) {
+  /* Smooth touch scrolling for carousel thumbnails */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Prevent text selection during swipe */
+  .carousel-container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Optimize touch interactions */
+  .carousel-touch-area {
+    touch-action: pan-x pinch-zoom;
+  }
+
+  /* Prevent bounce scrolling on carousel */
+  .carousel-no-bounce {
+    overscroll-behavior: contain;
+  }
+}
+
+/* Enhanced responsive image scaling */
+.carousel-image-container {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+}
+
+.carousel-image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, transparent 51%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-image-container:hover::before {
+  opacity: 1;
+}
+
+/* Mobile-specific button enhancements */
+@media (max-width: 640px) {
+  .carousel-button {
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .carousel-thumbnail {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+/* Accessibility improvements */
+.carousel-container:focus-within {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Performance optimizations */
+.carousel-slide {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Loading state improvements */
+.carousel-loading {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 2s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

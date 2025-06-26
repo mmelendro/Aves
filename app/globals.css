@@ -93,44 +93,143 @@ body {
   }
 }
 
-/* Enhanced contrast for better accessibility */
-.btn-contrast-fix {
-  --btn-primary-bg: #059669;
-  --btn-primary-text: #ffffff;
-  --btn-primary-hover: #047857;
-  --btn-secondary-bg: #f3f4f6;
-  --btn-secondary-text: #111827;
-  --btn-secondary-hover: #e5e7eb;
-  --btn-outline-border: #d1d5db;
-  --btn-outline-bg: #ffffff;
-  --btn-outline-text: #111827;
-  --btn-outline-hover: #f9fafb;
-  --btn-ghost-text: #111827;
-  --btn-ghost-hover: #f3f4f6;
-  --btn-destructive-bg: #dc2626;
-  --btn-destructive-text: #ffffff;
-  --btn-destructive-hover: #b91c1c;
+/* Enhanced Mobile Navigation and Touch Interactions */
+@media (max-width: 768px) {
+  /* Smooth scrolling for mobile menu */
+  .mobile-menu-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Enhanced touch scrolling */
+  .mobile-menu-container {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Improved touch targets */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better button sizing for mobile */
+  .mobile-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improved form inputs for mobile */
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+
+  /* Better spacing for mobile cards */
+  .mobile-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  /* Improved text readability */
+  .mobile-text {
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  /* Better image scaling */
+  .mobile-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
-/* Ensure minimum contrast ratios */
-.contrast-enhanced {
-  color: #111827 !important;
-  background-color: #ffffff !important;
+/* Focus styles for mobile menu items */
+.mobile-menu-item:focus {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+  border-radius: 4px;
+  background-color: rgba(16, 185, 129, 0.1);
 }
 
-.contrast-enhanced:hover {
-  color: #111827 !important;
-  background-color: #f3f4f6 !important;
+/* Enhanced touch feedback */
+.touch-feedback:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
 }
 
-/* Fix for grey on grey issues */
-.btn-grey-fix {
-  color: #111827 !important;
-  background-color: #e5e7eb !important;
-  border: 1px solid #d1d5db !important;
+/* Better carousel controls for mobile */
+@media (max-width: 640px) {
+  .carousel-button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .carousel-indicator {
+    width: 8px;
+    height: 8px;
+  }
 }
 
-.btn-grey-fix:hover {
-  color: #111827 !important;
-  background-color: #d1d5db !important;
+/* Improved floating elements positioning */
+@media (max-width: 1024px) {
+  .floating-element {
+    position: relative;
+    transform: none;
+    margin: 1rem auto;
+  }
+}
+
+/* Better form styling for mobile */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-input {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  .form-button {
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+/* Enhanced accessibility for mobile */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-animation {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Better contrast for mobile readability */
+@media (max-width: 768px) {
+  .mobile-text-contrast {
+    color: #1f2937;
+    font-weight: 500;
+  }
+
+  .mobile-link-contrast {
+    color: #059669;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
 }

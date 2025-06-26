@@ -2,125 +2,256 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ChevronUp, X } from "lucide-react"
-import { useSmoothScroll } from "@/hooks/use-smooth-scroll"
+import { Card } from "@/components/ui/card"
+import { Leaf, Camera, Award, Heart, X, ChevronUp, MapPin, Calendar } from "lucide-react"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 interface FloatingAVESNavigationProps {
   autoHideDuration?: number
 }
 
-export default function FloatingAVESNavigation({ autoHideDuration = 5000 }: FloatingAVESNavigationProps) {
+export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: FloatingAVESNavigationProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [isExpanded, setIsExpanded] = useState(false)
-  const scrollToSection = useSmoothScroll()
+  const [isMobile, setIsMobile] = useState(false)
 
+  // Detect mobile screen size
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false)
-    }, autoHideDuration)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
 
-    return () => clearTimeout(timer)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  // Auto-hide functionality
+  useEffect(() => {
+    if (autoHideDuration > 0) {
+      const timer = setTimeout(() => {
+        setIsVisible(false)
+      }, autoHideDuration)
+
+      return () => clearTimeout(timer)
+    }
   }, [autoHideDuration])
 
-  const handleNavigation = (sectionId: string) => {
-    scrollToSection(sectionId)
-    setIsExpanded(false)
-  }
+  // Hide on scroll for mobile
+  useEffect(() => {
+    if (!isMobile) return
+
+    let lastScrollY = window.scrollY
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+        setIsExpanded(false)
+      }
+      lastScrollY = currentScrollY
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isMobile])
 
   if (!isVisible) return null
 
+  const tours = [
+    {
+      id: "adventure",
+      name: "AVES Adventure",
+      icon: Leaf,
+      color: "emerald",
+      emoji: "🍃",
+      description: "Signature birding expeditions",
+      href: "/tours/adventure",
+    },
+    {
+      id: "vision",
+      name: "AVES Vision",
+      icon: Camera,
+      color: "purple",
+      emoji: "🪶",
+      description: "Photography workshops",
+      href: "/tours/vision",
+    },
+    {
+      id: "elevate",
+      name: "AVES Elevate",
+      icon: Award,
+      color: "yellow",
+      emoji: "🌼",
+      description: "Luxury expeditions",
+      href: "/tours/elevate",
+    },
+    {
+      id: "souls",
+      name: "AVES Souls",
+      icon: Heart,
+      color: "red",
+      emoji: "🍓",
+      description: "Romantic retreats",
+      href: "/tours/souls",
+    },
+  ]
+
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      {isExpanded ? (
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-300">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-gray-700">Quick Navigation</span>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => setIsExpanded(false)}
-              className="h-6 w-6 p-0 hover:bg-gray-100"
-            >
-              <X className="w-4 h-4" />
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            {/* A - Adventure (Leaf) */}
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleNavigation("tours")}
-              className="flex flex-col items-center p-3 h-auto border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300"
-            >
-              <img src="/icons/leaf-icon.svg" alt="Adventure" className="w-6 h-6 mb-1" />
-              <span className="text-xs font-medium text-emerald-700">Adventure</span>
-            </Button>
-
-            {/* V - Vision (Feather) */}
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleNavigation("tours")}
-              className="flex flex-col items-center p-3 h-auto border-purple-200 hover:bg-purple-50 hover:border-purple-300"
-            >
-              <img src="/icons/feather-icon.svg" alt="Vision" className="w-6 h-6 mb-1" />
-              <span className="text-xs font-medium text-purple-700">Vision</span>
-            </Button>
-
-            {/* E - Elevate (Petal) */}
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleNavigation("tours")}
-              className="flex flex-col items-center p-3 h-auto border-yellow-200 hover:bg-yellow-50 hover:border-yellow-300"
-            >
-              <img src="/icons/petal-icon.svg" alt="Elevate" className="w-6 h-6 mb-1" />
-              <span className="text-xs font-medium text-yellow-700">Elevate</span>
-            </Button>
-
-            {/* S - Souls (Heart) */}
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleNavigation("tours")}
-              className="flex flex-col items-center p-3 h-auto border-red-200 hover:bg-red-50 hover:border-red-300"
-            >
-              <img src="/icons/heart-icon.svg" alt="Souls" className="w-6 h-6 mb-1" />
-              <span className="text-xs font-medium text-red-700">Souls</span>
-            </Button>
-          </div>
-
-          <div className="pt-2 border-t border-gray-100">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleNavigation("conservation")}
-              className="w-full text-xs hover:bg-emerald-50 border-emerald-200"
-            >
-              Conservation Impact
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleNavigation("contact")}
-              className="w-full text-xs mt-2 hover:bg-emerald-50 border-emerald-200"
-            >
-              Contact Us
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <Button
-          onClick={() => setIsExpanded(true)}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full w-14 h-14 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110"
-        >
-          <div className="flex flex-col items-center">
-            <ChevronUp className="w-5 h-5" />
-            <span className="text-xs font-bold">AVES</span>
-          </div>
-        </Button>
+    <div
+      className={cn(
+        "fixed z-40 transition-all duration-500 ease-in-out",
+        isMobile ? "bottom-4 right-4 left-4" : "bottom-6 right-6",
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
       )}
+    >
+      <Card
+        className={cn(
+          "bg-white/95 backdrop-blur-sm border border-gray-200 shadow-xl",
+          isMobile ? "rounded-2xl" : "rounded-xl",
+        )}
+      >
+        {/* Mobile Compact View */}
+        {isMobile && !isExpanded && (
+          <div className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <Leaf className="w-4 h-4 text-emerald-600" />
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900 text-sm">AVES Tours</div>
+                  <div className="text-xs text-gray-600">4 unique experiences</div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Button
+                  size="sm"
+                  onClick={() => setIsExpanded(true)}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-xs px-3 py-2 h-8"
+                >
+                  <ChevronUp className="w-3 h-3 mr-1" />
+                  View
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsVisible(false)}
+                  className="text-gray-400 hover:text-gray-600 p-1 h-8 w-8"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Expanded View */}
+        {isMobile && isExpanded && (
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="font-bold text-gray-900 text-base">Choose Your AVES Experience</h3>
+                <p className="text-xs text-gray-600">Discover Colombia's incredible biodiversity</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsExpanded(false)}
+                className="text-gray-400 hover:text-gray-600 p-1 h-8 w-8"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              {tours.map((tour) => {
+                const IconComponent = tour.icon
+                return (
+                  <Link key={tour.id} href={tour.href}>
+                    <div className="p-3 rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-200 touch-manipulation">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <span className="text-lg">{tour.emoji}</span>
+                        <IconComponent className="w-4 h-4 text-gray-600" />
+                      </div>
+                      <div className="text-xs font-semibold text-gray-900 mb-1">{tour.name}</div>
+                      <div className="text-xs text-gray-600">{tour.description}</div>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+
+            <div className="flex space-x-2">
+              <Link href="/tours" className="flex-1">
+                <Button size="sm" variant="outline" className="w-full text-xs h-9 touch-manipulation">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  All Tours
+                </Button>
+              </Link>
+              <Link href="/contact" className="flex-1">
+                <Button size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700 text-xs h-9 touch-manipulation">
+                  <Calendar className="w-3 h-3 mr-1" />
+                  Plan Trip
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* Desktop View */}
+        {!isMobile && (
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="font-bold text-gray-900 text-lg">Choose Your AVES Experience</h3>
+                <p className="text-sm text-gray-600">Discover Colombia's incredible biodiversity</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsVisible(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {tours.map((tour) => {
+                const IconComponent = tour.icon
+                return (
+                  <Link key={tour.id} href={tour.href}>
+                    <div className="p-4 rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-200 group">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <span className="text-2xl">{tour.emoji}</span>
+                        <IconComponent className="w-5 h-5 text-gray-600 group-hover:text-emerald-600" />
+                      </div>
+                      <div className="text-sm font-semibold text-gray-900 mb-1">{tour.name}</div>
+                      <div className="text-xs text-gray-600">{tour.description}</div>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+
+            <div className="flex space-x-3">
+              <Link href="/tours" className="flex-1">
+                <Button size="sm" variant="outline" className="w-full">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  View All Tours
+                </Button>
+              </Link>
+              <Link href="/contact" className="flex-1">
+                <Button size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Plan Your Trip
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </Card>
     </div>
   )
 }
