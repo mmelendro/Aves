@@ -154,14 +154,16 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </div>
           </div>
 
-          {/* Resources Dropdown - Bioregions link removed */}
+          {/* Resources Dropdown */}
           <div className="relative group">
             <Link
               href="/resources"
               className={`flex items-center transition-colors ${
                 currentPage?.startsWith("/blog") ||
                 currentPage?.startsWith("/resources") ||
-                currentPage?.startsWith("/travel-tips")
+                currentPage?.startsWith("/travel-tips") ||
+                currentPage?.startsWith("/endemic-birds") ||
+                currentPage?.startsWith("/bioregions")
                   ? "text-emerald-600"
                   : "text-gray-700 hover:text-emerald-600"
               }`}
@@ -169,7 +171,19 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               Resources
               <ChevronDown className="w-4 h-4 ml-1" />
             </Link>
-            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <Link
+                href="/endemic-birds"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
+              >
+                🦅 Endemic Birds Explorer
+              </Link>
+              <Link
+                href="/bioregions"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                🗺️ Bioregions Map
+              </Link>
               <Link
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
@@ -245,7 +259,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         />
       )}
 
-      {/* Mobile Navigation - Enhanced - Bioregions link removed */}
+      {/* Mobile Navigation - Enhanced */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-[73px] z-40 bg-white border-t shadow-lg">
           <div className="max-h-[calc(100vh-73px)] overflow-y-auto overscroll-contain">
@@ -337,6 +351,20 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   Resources
                 </Link>
                 <div className="pl-4 space-y-3 mt-3">
+                  <Link
+                    href="/endemic-birds"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🦅 Endemic Birds Explorer
+                  </Link>
+                  <Link
+                    href="/bioregions"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🗺️ Bioregions Map
+                  </Link>
                   <Link
                     href="/blog"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
