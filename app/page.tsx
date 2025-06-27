@@ -7,8 +7,6 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import {
   Users,
-  Leaf,
-  Globe,
   Award,
   ArrowRight,
   CheckCircle,
@@ -21,7 +19,6 @@ import {
   Heart,
   TelescopeIcon as Binoculars,
   Clock,
-  Quote,
   ExternalLink,
   Map,
 } from "lucide-react"
@@ -217,26 +214,6 @@ ${formData.firstName} ${formData.lastName}`)
                   autoPlay={true}
                   autoPlayInterval={7000}
                 />
-              </div>
-
-              {/* Floating testimonial */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl border border-gray-100 max-w-sm hidden lg:block">
-                <div className="flex items-start space-x-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Quote className="w-5 h-5 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-700 italic mb-2">"{reviews[currentReview].text.slice(0, 80)}..."</p>
-                    <p className="text-xs text-gray-500">
-                      - {reviews[currentReview].author}, {reviews[currentReview].location}
-                    </p>
-                    <div className="flex items-center mt-1">
-                      {[...Array(reviews[currentReview].rating)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -501,18 +478,18 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* The AVES Difference Section - Streamlined & Conversion-Focused */}
+      {/* Why Choose AVES - Consolidated Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">The AVES Difference</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose AVES</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We're passionate conservationists, expert birders, and your partners in discovering Colombia's incredible
-              avian diversity.
+              avian diversity with award-winning excellence.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Expert Guides */}
             <div className="text-center">
               <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -521,7 +498,7 @@ ${formData.firstName} ${formData.lastName}`)
               <h3 className="text-xl font-bold text-gray-900 mb-3">Expert Local Guides</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
                 Our certified ornithologist guides know every bird call, behavior, and habitat across Colombia's diverse
-                regions.
+                regions, ensuring exceptional wildlife encounters.
               </p>
               <Link
                 href="/team"
@@ -532,34 +509,43 @@ ${formData.firstName} ${formData.lastName}`)
               </Link>
             </div>
 
-            {/* Conservation Impact */}
+            {/* Conservation & B Corp */}
             <div className="text-center">
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf className="w-8 h-8 text-green-600" />
+                <Shield className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Conservation Impact</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">B Corp Certified Conservation</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
                 Every tour directly supports habitat protection and local communities. We're B Corp certified and
-                operate 100% carbon-neutral expeditions.
+                operate 100% carbon-neutral expeditions with verified impact.
               </p>
-              <Link
-                href="/conservation"
-                className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
-              >
-                Our Conservation Work
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/about/b-corp"
+                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
+                >
+                  Our B Corp Journey
+                  <ArrowRight className="w-3 h-3 ml-1" />
+                </Link>
+                <Link
+                  href="/conservation"
+                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
+                >
+                  Conservation Impact
+                  <ArrowRight className="w-3 h-3 ml-1" />
+                </Link>
+              </div>
             </div>
 
-            {/* Exclusive Access */}
-            <div className="text-center">
+            {/* Exclusive Access & Recognition */}
+            <div className="text-center md:col-span-2 lg:col-span-1">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Globe className="w-8 h-8 text-blue-600" />
+                <Award className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Exclusive Access</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Exclusive Access & Recognition</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Access private reserves, research stations, and remote locations unavailable to other tour operators.
-                Small groups ensure minimal impact.
+                Access private reserves and research stations unavailable to others. Recommended by leading
+                ornithologists and featured in top birding publications worldwide.
               </p>
               <Link
                 href="/about/partners"
@@ -568,6 +554,28 @@ ${formData.firstName} ${formData.lastName}`)
                 Our Partner Network
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
+            </div>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-12 bg-gradient-to-r from-gray-50 to-emerald-50 rounded-xl p-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div>
+                <div className="text-2xl font-bold text-emerald-600 mb-1">B Corp</div>
+                <div className="text-sm text-gray-600">Certified</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-green-600 mb-1">100%</div>
+                <div className="text-sm text-gray-600">Carbon Neutral</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-blue-600 mb-1">Max 4</div>
+                <div className="text-sm text-gray-600">Guests per Tour</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-purple-600 mb-1">24hr</div>
+                <div className="text-sm text-gray-600">Response Time</div>
+              </div>
             </div>
           </div>
         </div>
@@ -625,75 +633,6 @@ ${formData.firstName} ${formData.lastName}`)
                 </div>
               </div>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Award-Winning Birding Excellence - Streamlined */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Award-Winning Birding Excellence</h2>
-            <p className="text-lg text-gray-600">
-              Trusted by birders worldwide for our commitment to quality and conservation
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* B Corp Certification */}
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">B Corp Certified</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                Certified for meeting the highest standards of social and environmental performance, accountability, and
-                transparency.
-              </p>
-              <Link
-                href="/about/b-corp"
-                className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
-              >
-                Learn About Our B Corp Journey
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </Link>
-            </div>
-
-            {/* Carbon Neutral */}
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">100% Carbon Neutral</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                All our tours are carbon neutral through verified offset programs and sustainable travel practices.
-              </p>
-              <Link
-                href="/conservation"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
-              >
-                Explore Our Conservation Efforts
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </Link>
-            </div>
-
-            {/* Expert Recognition */}
-            <div className="text-center">
-              <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-yellow-600" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Expert Recognition</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                Recommended by leading ornithologists and featured in top birding publications worldwide.
-              </p>
-              <Link
-                href="/about/partners"
-                className="inline-flex items-center text-yellow-600 hover:text-yellow-700 font-medium text-sm"
-              >
-                View Our Partnerships
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
