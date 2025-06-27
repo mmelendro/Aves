@@ -21,7 +21,9 @@ import {
   Heart,
   TelescopeIcon as Binoculars,
   Clock,
-  Bird,
+  Quote,
+  ExternalLink,
+  Map,
 } from "lucide-react"
 import Link from "next/link"
 import EnhancedEndemicBirdsCarousel from "@/components/enhanced-endemic-birds-carousel"
@@ -40,6 +42,7 @@ export default function AVESLandingPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
   const [selectedLocations, setSelectedLocations] = useState<string[]>([])
+  const [currentReview, setCurrentReview] = useState(0)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -51,26 +54,41 @@ export default function AVESLandingPage() {
     specialRequests: "",
   })
 
+  const reviews = [
+    {
+      text: "Over 500 species including 40+ endemics! I photographed 330+ species across Caribbean, SNSM, and 3 Andes tours in one incredible month. This was the best experience of my life.",
+      author: "Royann",
+      location: "USA",
+      role: "Wildlife Photographer",
+      rating: 5,
+    },
+    {
+      text: "Une expérience extraordinaire! Les guides connaissent chaque chant d'oiseau. J'ai vu des espèces que je n'aurais jamais imaginées. Merci AVES pour cette aventure inoubliable!",
+      author: "Sylvain",
+      location: "Quebec, Canada",
+      role: "Ornithologue Amateur",
+      rating: 5,
+    },
+    {
+      text: "At 80+ years old, this was our final birding adventure, and AVES made it absolutely perfect. Professional, caring guides who understood our pace. We couldn't have asked for a better farewell trip.",
+      author: "Lisa & Peter",
+      location: "Pender Island, BC",
+      role: "Birding Enthusiasts",
+      rating: 5,
+    },
+  ]
+
   useEffect(() => {
     window.scrollTo(0, 0)
     setIsVisible(true)
+
+    // Auto-rotate reviews every 6 seconds
+    const reviewInterval = setInterval(() => {
+      setCurrentReview((prev) => (prev + 1) % reviews.length)
+    }, 6000)
+
+    return () => clearInterval(reviewInterval)
   }, [])
-
-  const greenHermitData = {
-    commonName: "Green Hermit",
-    scientificName: "Phaethornis guy",
-    spanishName: "Colibrí Ermitaño Verde",
-    ebirdCode: "greher1",
-    description: "Large hummingbird specialist of cloud forest environments",
-  }
-
-  const maskedTrogonData = {
-    commonName: "Masked Trogon",
-    scientificName: "Trogon personatus",
-    spanishName: "Trogón Enmascarado",
-    ebirdCode: "mastro1",
-    description: "Brilliant red-breasted cloud forest jewel",
-  }
 
   const toggleSelection = (item: string, selectedItems: string[], setSelectedItems: (items: string[]) => void) => {
     if (selectedItems.includes(item)) {
@@ -115,141 +133,105 @@ ${formData.firstName} ${formData.lastName}`)
       {/* Navigation Header */}
       <NavigationHeader currentPage="/" />
 
-      {/* Hero Section - Enhanced Mobile Responsiveness */}
+      {/* Hero Section - Streamlined for Conversion */}
       <section
-        className={`relative py-8 sm:py-12 lg:py-16 xl:py-24 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`relative py-12 sm:py-16 lg:py-24 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="container mx-auto px-3 sm:px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
-              <div className="space-y-4 sm:space-y-6">
-                <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 animate-pulse text-xs sm:text-sm">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-8 order-2 lg:order-1">
+              <div className="space-y-6">
+                <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 animate-pulse">
                   🌿 B Corp Certified • Carbon Neutral Tours
                 </Badge>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
                   Discover Colombia's
                   <span className="text-emerald-600 block">1,900+ Bird Species</span>
-                  <span className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600 font-normal block mt-1 sm:mt-2">
-                    With Expert Naturalist Guides
-                  </span>
                 </h1>
+                <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
+                  Join exclusive small-group expeditions with expert ornithologist guides across the world's most
+                  biodiverse country.
+                </p>
 
-                {/* Integrated Avifauna Information */}
-                <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-4 sm:p-6 border border-emerald-200 shadow-sm">
-                  <div className="flex items-start space-x-3 sm:space-x-4">
-                    <div className="bg-emerald-100 p-2 rounded-full flex-shrink-0">
-                      <Bird className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
-                        Colombia's Incredible Avifauna
-                      </h3>
-                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3">
-                        Join exclusive small-group birding expeditions across Colombia's diverse ecosystems. Experience
-                        the world's most biodiverse country while supporting conservation and local communities.
-                      </p>
-                      <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                          <span className="text-gray-600">78+ Endemic Species</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                          <span className="text-gray-600">11 Bioregions</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-emerald-100 shadow-lg">
-                  {/* Value Propositions - Mobile Optimized */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
+                {/* Key Value Props - Simplified */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-100 shadow-lg">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span className="text-gray-700">Expert ornithologist guides</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span className="text-gray-700">Maximum 4 guests per tour</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600 flex-shrink-0" />
-                      <span className="text-gray-700">Premium eco-lodges</span>
+                      <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span className="text-gray-700">78+ endemic species</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span className="text-gray-700">100% carbon neutral</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600 flex-shrink-0" />
-                      <span className="text-gray-700">B Corp certified</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Users className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600 flex-shrink-0" />
-                      <span className="text-gray-700">Small groups (max 4)</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Enhanced CTAs - Mobile Optimized */}
-              <div className="flex flex-col gap-3 sm:gap-4">
-                <Link href="/tours" className="w-full">
+              {/* Primary CTAs - Streamlined */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/tours" className="flex-1">
                   <Button
                     size="lg"
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[48px]"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-base px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
-                    <Binoculars className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+                    <Binoculars className="mr-2 w-5 h-5" />
                     Explore Our Tours
-                    <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
+                    <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
-                <Link href="/contact" className="w-full">
+                <Link href="#contact" className="flex-1">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 shadow-md hover:shadow-lg transition-all duration-300 min-h-[48px] bg-transparent"
+                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-base px-8 py-4 shadow-md hover:shadow-lg transition-all duration-300 bg-transparent"
                   >
-                    <Calendar className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+                    <Calendar className="mr-2 w-5 h-5" />
                     Plan My Trip
                   </Button>
                 </Link>
               </div>
 
-              {/* Urgency/Scarcity Element - Mobile Optimized */}
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
-                <div className="flex items-center space-x-2 text-amber-800">
-                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium">Limited Availability: Only 2-3 tours per month</span>
+              {/* Urgency Element */}
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div className="flex items-center space-x-3 text-amber-800">
+                  <Clock className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">Limited Availability: Only 2-3 tours per month • Book early</span>
                 </div>
               </div>
             </div>
 
-            {/* Enhanced Birds Carousel - Mobile Optimized */}
+            {/* Enhanced Birds Carousel */}
             <div className="relative order-1 lg:order-2">
-              <div className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
+              <div className="aspect-[4/3] lg:aspect-[3/4]">
                 <EnhancedEndemicBirdsCarousel
-                  className="shadow-xl sm:shadow-2xl rounded-lg sm:rounded-xl"
+                  className="shadow-xl rounded-xl"
                   autoPlay={true}
                   autoPlayInterval={7000}
                 />
               </div>
 
-              {/* Floating testimonial - Enhanced positioning */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl border border-gray-100 max-w-sm hidden lg:block xl:block">
+              {/* Floating testimonial */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl border border-gray-100 max-w-sm hidden lg:block">
                 <div className="flex items-start space-x-3">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Star className="w-5 h-5 text-emerald-600" />
+                    <Quote className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-700 italic mb-2">
-                      "Absolutely incredible experience! Saw 180+ species in 10 days. The guides' expertise was
-                      phenomenal."
+                    <p className="text-sm text-gray-700 italic mb-2">"{reviews[currentReview].text.slice(0, 80)}..."</p>
+                    <p className="text-xs text-gray-500">
+                      - {reviews[currentReview].author}, {reviews[currentReview].location}
                     </p>
-                    <p className="text-xs text-gray-500">- Royann, Wildlife Photographer</p>
                     <div className="flex items-center mt-1">
-                      {[...Array(5)].map((_, i) => (
+                      {[...Array(reviews[currentReview].rating)].map((_, i) => (
                         <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
                       ))}
                     </div>
@@ -260,46 +242,74 @@ ${formData.firstName} ${formData.lastName}`)
           </div>
         </div>
 
-        {/* Decorative Elements - Responsive */}
+        {/* Decorative Elements */}
         <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-emerald-100 rounded-full opacity-20 -translate-y-16 sm:-translate-y-24 lg:-translate-y-32 translate-x-16 sm:translate-x-24 lg:translate-x-32"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-36 sm:h-36 lg:w-48 lg:h-48 bg-blue-100 rounded-full opacity-20 translate-y-12 sm:translate-y-18 lg:translate-y-24 -translate-x-12 sm:-translate-x-18 lg:-translate-x-24"></div>
       </section>
 
-      {/* Tour Types Section - Enhanced with Better CTAs */}
-      <section id="tours" className="py-8 sm:py-12 lg:py-16 bg-gray-50">
-        <div className="container mx-auto px-3 sm:px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-3 sm:mb-4 text-xs sm:text-sm">
-              🦅 Choose Your Adventure
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-              Four Unique Birding Experiences
-            </h2>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      {/* Social Proof Section - Streamlined */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Guests Say</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Hear from birding enthusiasts who have experienced Colombia's incredible avifauna with AVES.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {reviews.map((review, index) => (
+              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 italic leading-relaxed mb-4">"{review.text}"</p>
+                  <div>
+                    <p className="font-semibold text-gray-900">{review.author}</p>
+                    <p className="text-sm text-gray-600">
+                      {review.role}, {review.location}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tour Types Section - Conversion Optimized */}
+      <section id="tours" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Four Unique Birding Experiences</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Each tour is carefully crafted for different interests and comfort levels, all featuring expert guides and
               premium accommodations.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-            {/* Adventure Tours - Enhanced Mobile */}
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-1 sm:hover:-translate-y-2 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-emerald-600 text-white px-2 sm:px-3 py-1 text-xs font-bold rounded-bl-lg">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {/* Adventure Tours */}
+            <Card className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <div className="absolute top-0 right-0 bg-emerald-600 text-white px-3 py-1 text-xs font-bold rounded-bl-lg">
                 POPULAR
               </div>
-              <CardContent className="p-4 sm:p-5">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900">🍃 AVES Adventure</h3>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-bold text-gray-900">🍃 AVES Adventure</h3>
                   <div className="flex items-center space-x-1">
-                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
-                    <span className="text-xs sm:text-sm text-gray-600">4.9</span>
+                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                    <span className="text-sm text-gray-600">4.9</span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                   Our signature birding expeditions across Colombia's prime hotspots. 7-14 days of immersive wildlife
-                  discovery through diverse ecosystems.
+                  discovery.
                 </p>
-                <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-5">
+                <div className="space-y-2 mb-5">
                   <div className="flex items-center text-xs text-gray-600">
                     <CheckCircle className="w-3 h-3 text-emerald-600 mr-2 flex-shrink-0" />
                     <span>Professional ornithologist guides</span>
@@ -313,35 +323,33 @@ ${formData.firstName} ${formData.lastName}`)
                     <span>Conservation project visits</span>
                   </div>
                 </div>
-                <div className="space-y-2 sm:space-y-3">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-lg sm:text-xl font-bold text-emerald-600">$8,000</div>
+                      <div className="text-xl font-bold text-emerald-600">$8,000</div>
                       <div className="text-xs text-gray-500">avg. per person</div>
                     </div>
                     <Badge className="bg-emerald-100 text-emerald-800 text-xs">7-14 days</Badge>
                   </div>
                   <Link href="/tours/adventure" className="block">
-                    <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-xs sm:text-sm min-h-[40px]">
-                      View Details & Book
-                    </Button>
+                    <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-sm">View Details & Book</Button>
                   </Link>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Vision Tours - Enhanced */}
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-1 sm:hover:-translate-y-2">
-              <CardContent className="p-4 sm:p-5">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900">🪶 AVES Vision</h3>
-                  <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+            {/* Vision Tours */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-bold text-gray-900">🪶 AVES Vision</h3>
+                  <Camera className="w-5 h-5 text-purple-600" />
                 </div>
-                <p className="text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">
-                  Specialized photography and videography workshops with professional wildlife photographers capturing
-                  Colombia's avian beauty.
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  Specialized photography workshops with professional wildlife photographers capturing Colombia's avian
+                  beauty.
                 </p>
-                <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-5">
+                <div className="space-y-2 mb-5">
                   <div className="flex items-center text-xs text-gray-600">
                     <CheckCircle className="w-3 h-3 text-purple-600 mr-2 flex-shrink-0" />
                     <span>Exclusive photography hides</span>
@@ -355,10 +363,10 @@ ${formData.firstName} ${formData.lastName}`)
                     <span>Professional equipment included</span>
                   </div>
                 </div>
-                <div className="space-y-2 sm:space-y-3">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-lg sm:text-xl font-bold text-purple-600">$10,000</div>
+                      <div className="text-xl font-bold text-purple-600">$10,000</div>
                       <div className="text-xs text-gray-500">avg. per person</div>
                     </div>
                     <Badge className="bg-purple-100 text-purple-800 text-xs">10-12 days</Badge>
@@ -366,7 +374,7 @@ ${formData.firstName} ${formData.lastName}`)
                   <Link href="/tours/vision" className="block">
                     <Button
                       variant="outline"
-                      className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white text-xs sm:text-sm min-h-[40px] bg-transparent"
+                      className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white text-sm bg-transparent"
                     >
                       View Details & Book
                     </Button>
@@ -375,18 +383,17 @@ ${formData.firstName} ${formData.lastName}`)
               </CardContent>
             </Card>
 
-            {/* Elevate Tours - Enhanced */}
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-1 sm:hover:-translate-y-2">
-              <CardContent className="p-4 sm:p-5">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900">🌼 AVES Elevate</h3>
-                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+            {/* Elevate Tours */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-bold text-gray-900">🌼 AVES Elevate</h3>
+                  <Award className="w-5 h-5 text-yellow-500" />
                 </div>
-                <p className="text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">
-                  Premium expeditions with luxury amenities in exclusive locations for the ultimate comfort experience
-                  in Colombia's finest reserves.
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  Premium expeditions with luxury amenities in exclusive locations for the ultimate comfort experience.
                 </p>
-                <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-5">
+                <div className="space-y-2 mb-5">
                   <div className="flex items-center text-xs text-gray-600">
                     <CheckCircle className="w-3 h-3 text-yellow-500 mr-2 flex-shrink-0" />
                     <span>Luxury accommodations</span>
@@ -400,10 +407,10 @@ ${formData.firstName} ${formData.lastName}`)
                     <span>Helicopter transfers</span>
                   </div>
                 </div>
-                <div className="space-y-2 sm:space-y-3">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-lg sm:text-xl font-bold text-yellow-600">$15,000</div>
+                      <div className="text-xl font-bold text-yellow-600">$15,000</div>
                       <div className="text-xs text-gray-500">avg. per person</div>
                     </div>
                     <Badge className="bg-yellow-100 text-yellow-800 text-xs">8-10 days</Badge>
@@ -411,7 +418,7 @@ ${formData.firstName} ${formData.lastName}`)
                   <Link href="/tours/elevate" className="block">
                     <Button
                       variant="outline"
-                      className="w-full border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white text-xs sm:text-sm min-h-[40px] bg-transparent"
+                      className="w-full border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white text-sm bg-transparent"
                     >
                       View Details & Book
                     </Button>
@@ -420,18 +427,17 @@ ${formData.firstName} ${formData.lastName}`)
               </CardContent>
             </Card>
 
-            {/* Souls Tours - Enhanced */}
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-1 sm:hover:-translate-y-2">
-              <CardContent className="p-4 sm:p-5">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900">🍓 AVES Souls</h3>
-                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
+            {/* Souls Tours */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-bold text-gray-900">🍓 AVES Souls</h3>
+                  <Heart className="w-5 h-5 text-red-500" />
                 </div>
-                <p className="text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">
-                  Cultural immersion tours combining birding with indigenous communities, traditional crafts, and local
-                  conservation initiatives.
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  Cultural immersion tours combining birding with indigenous communities and traditional crafts.
                 </p>
-                <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-5">
+                <div className="space-y-2 mb-5">
                   <div className="flex items-center text-xs text-gray-600">
                     <CheckCircle className="w-3 h-3 text-red-500 mr-2 flex-shrink-0" />
                     <span>Indigenous community visits</span>
@@ -445,10 +451,10 @@ ${formData.firstName} ${formData.lastName}`)
                     <span>Community-based lodging</span>
                   </div>
                 </div>
-                <div className="space-y-2 sm:space-y-3">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-lg sm:text-xl font-bold text-red-600">$6,500</div>
+                      <div className="text-xl font-bold text-red-600">$6,500</div>
                       <div className="text-xs text-gray-500">avg. per person</div>
                     </div>
                     <Badge className="bg-red-100 text-red-800 text-xs">6-8 days</Badge>
@@ -456,7 +462,7 @@ ${formData.firstName} ${formData.lastName}`)
                   <Link href="/tours/souls" className="block">
                     <Button
                       variant="outline"
-                      className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-xs sm:text-sm min-h-[40px] bg-transparent"
+                      className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-sm bg-transparent"
                     >
                       View Details & Book
                     </Button>
@@ -466,27 +472,25 @@ ${formData.firstName} ${formData.lastName}`)
             </Card>
           </div>
 
-          {/* Enhanced CTA Section */}
+          {/* CTA Section */}
           <div className="text-center">
-            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-4 sm:p-6 border border-emerald-200">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
-                Can't Decide? Let Us Help You Choose
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 max-w-2xl mx-auto">
+            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-6 border border-emerald-200">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Can't Decide? Let Us Help You Choose</h3>
+              <p className="text-base text-gray-600 mb-4 max-w-2xl mx-auto">
                 Our birding experts will recommend the perfect tour based on your interests, experience level, and
                 travel preferences.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/contact">
-                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-xs sm:text-sm px-4 sm:px-6 min-h-[40px]">
-                    <Mail className="mr-2 w-3 h-3 sm:w-4 sm:h-4" />
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-sm px-6">
+                    <Mail className="mr-2 w-4 h-4" />
                     Get Personal Recommendations
                   </Button>
                 </Link>
                 <Link href="/tours">
                   <Button
                     variant="outline"
-                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-xs sm:text-sm px-4 sm:px-6 min-h-[40px] bg-transparent"
+                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-sm px-6 bg-transparent"
                   >
                     Compare All Tours
                   </Button>
@@ -497,194 +501,263 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Why Choose AVES Section - Enhanced Mobile */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-white">
-        <div className="container mx-auto px-3 sm:px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 mb-3 sm:mb-4 text-xs sm:text-sm">
-              🏆 Why Choose AVES
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">The AVES Difference</h2>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We're not just another tour company. We're passionate conservationists, expert birders, and your partners
-              in discovering Colombia's incredible avian diversity.
+      {/* The AVES Difference Section - Streamlined & Conversion-Focused */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">The AVES Difference</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We're passionate conservationists, expert birders, and your partners in discovering Colombia's incredible
+              avian diversity.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {/* Expert Guides - Enhanced */}
-            <div className="text-center group">
-              <div className="bg-emerald-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600" />
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Expert Guides */}
+            <div className="text-center">
+              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-emerald-600" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Expert Local Guides</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">
-                Our certified ornithologist guides average 15+ years of experience and know every bird call, behavior,
-                and habitat across Colombia's diverse regions.
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Expert Local Guides</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Our certified ornithologist guides know every bird call, behavior, and habitat across Colombia's diverse
+                regions.
               </p>
-              <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-600">
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600" />
-                  <span>Certified ornithologists</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600" />
-                  <span>15+ years average experience</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600" />
-                  <span>Fluent English & Spanish</span>
-                </div>
-              </div>
+              <Link
+                href="/team"
+                className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium"
+              >
+                Meet Our Guides
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
             </div>
 
-            {/* Conservation Focus - Enhanced */}
-            <div className="text-center group">
-              <div className="bg-green-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Leaf className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
+            {/* Conservation Impact */}
+            <div className="text-center">
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Leaf className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Conservation Impact</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Conservation Impact</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
                 Every tour directly supports habitat protection and local communities. We're B Corp certified and
                 operate 100% carbon-neutral expeditions.
               </p>
-              <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-600">
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
-                  <span>B Corp certified company</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
-                  <span>100% carbon neutral tours</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
-                  <span>Direct community support</span>
-                </div>
-              </div>
+              <Link
+                href="/conservation"
+                className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+              >
+                Our Conservation Work
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
             </div>
 
-            {/* Exclusive Access - Enhanced */}
-            <div className="text-center group sm:col-span-2 lg:col-span-1">
-              <div className="bg-blue-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Globe className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+            {/* Exclusive Access */}
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Exclusive Access</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Exclusive Access</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
                 Access private reserves, research stations, and remote locations unavailable to other tour operators.
-                Small groups ensure minimal impact and maximum wildlife encounters.
+                Small groups ensure minimal impact.
               </p>
-              <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-600">
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
-                  <span>Private reserve access</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
-                  <span>Maximum 4 guests per tour</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
-                  <span>Research station visits</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Enhanced Statistics Section */}
-          <div className="mt-8 sm:mt-12 bg-gradient-to-r from-gray-50 to-emerald-50 rounded-xl p-4 sm:p-6 lg:p-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-600 mb-1 sm:mb-2">1,900+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Bird Species in Colombia</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mb-1 sm:mb-2">78+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Endemic Species</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 mb-1 sm:mb-2">98%</div>
-                <div className="text-xs sm:text-sm text-gray-600">Guest Satisfaction</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-600 mb-1 sm:mb-2">15+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Years Experience</div>
-              </div>
+              <Link
+                href="/about/partners"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Our Partner Network
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Contact Form Section - Mobile Optimized */}
-      <section id="contact" className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="container mx-auto px-3 sm:px-4">
+      {/* Colombia by the Numbers - Interactive & Streamlined */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Colombia by the Numbers</h2>
+            <p className="text-lg text-gray-600">Discover why Colombia is the world's birding capital</p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <Link href="/endemic-birds" className="group block">
+              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-emerald-200 hover:border-emerald-300">
+                <div className="text-4xl font-bold text-emerald-600 mb-2 group-hover:text-emerald-700">1,900+</div>
+                <div className="text-sm text-gray-600 group-hover:text-gray-700">Bird Species</div>
+                <div className="text-xs text-emerald-600 mt-1 group-hover:text-emerald-700">#1 Globally</div>
+                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ArrowRight className="w-4 h-4 mx-auto text-emerald-600" />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/endemic-birds" className="group block">
+              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 hover:border-blue-300">
+                <div className="text-4xl font-bold text-blue-600 mb-2 group-hover:text-blue-700">78+</div>
+                <div className="text-sm text-gray-600 group-hover:text-gray-700">Endemic Species</div>
+                <div className="text-xs text-blue-600 mt-1 group-hover:text-blue-700">Found Nowhere Else</div>
+                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ArrowRight className="w-4 h-4 mx-auto text-blue-600" />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/bioregions" className="group block">
+              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-purple-200 hover:border-purple-300">
+                <div className="text-4xl font-bold text-purple-600 mb-2 group-hover:text-purple-700">11</div>
+                <div className="text-sm text-gray-600 group-hover:text-gray-700">Bioregions</div>
+                <div className="text-xs text-purple-600 mt-1 group-hover:text-purple-700">Diverse Ecosystems</div>
+                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ArrowRight className="w-4 h-4 mx-auto text-purple-600" />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/endemic-birds" className="group block">
+              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-orange-200 hover:border-orange-300">
+                <div className="text-4xl font-bold text-orange-600 mb-2 group-hover:text-orange-700">165</div>
+                <div className="text-sm text-gray-600 group-hover:text-gray-700">Hummingbird Species</div>
+                <div className="text-xs text-orange-600 mt-1 group-hover:text-orange-700">Most in the World</div>
+                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ArrowRight className="w-4 h-4 mx-auto text-orange-600" />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Award-Winning Birding Excellence - Streamlined */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Award-Winning Birding Excellence</h2>
+            <p className="text-lg text-gray-600">
+              Trusted by birders worldwide for our commitment to quality and conservation
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* B Corp Certification */}
+            <div className="text-center">
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">B Corp Certified</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Certified for meeting the highest standards of social and environmental performance, accountability, and
+                transparency.
+              </p>
+              <Link
+                href="/about/b-corp"
+                className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
+              >
+                Learn About Our B Corp Journey
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Link>
+            </div>
+
+            {/* Carbon Neutral */}
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Leaf className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">100% Carbon Neutral</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                All our tours are carbon neutral through verified offset programs and sustainable travel practices.
+              </p>
+              <Link
+                href="/conservation"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
+              >
+                Explore Our Conservation Efforts
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Link>
+            </div>
+
+            {/* Expert Recognition */}
+            <div className="text-center">
+              <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-yellow-600" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Expert Recognition</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Recommended by leading ornithologists and featured in top birding publications worldwide.
+              </p>
+              <Link
+                href="/about/partners"
+                className="inline-flex items-center text-yellow-600 hover:text-yellow-700 font-medium text-sm"
+              >
+                View Our Partnerships
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section - Maintained as Requested */}
+      <section id="contact" className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+        <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-6 sm:mb-8">
-              <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-3 sm:mb-4 text-xs sm:text-sm">
-                📧 Get Started Today
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-                Plan Your Colombian Birding Adventure
-              </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Tell us about your birding interests and travel preferences. We'll respond within 24 hours with
-                personalized recommendations and availability.
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Plan Your Colombian Birding Adventure</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Tell us about your birding interests. We'll respond within 24 hours with personalized recommendations.
               </p>
             </div>
 
             <Card className="shadow-xl border-0">
-              <CardContent className="p-4 sm:p-6 lg:p-8">
-                <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+              <CardContent className="p-8">
+                <div className="grid lg:grid-cols-2 gap-8">
                   {/* Contact Form */}
-                  <div className="space-y-4 sm:space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">First Name *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
                         <Input
                           placeholder="Your first name"
                           value={formData.firstName}
                           onChange={(e) => handleInputChange("firstName", e.target.value)}
-                          className="text-sm"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Last Name *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
                         <Input
                           placeholder="Your last name"
                           value={formData.lastName}
                           onChange={(e) => handleInputChange("lastName", e.target.value)}
-                          className="text-sm"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Email Address *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                       <Input
                         type="email"
                         placeholder="your.email@example.com"
                         value={formData.email}
                         onChange={(e) => handleInputChange("email", e.target.value)}
-                        className="text-sm"
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Travel Date</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Travel Date</label>
                         <Input
                           type="date"
                           value={formData.travelDate}
                           onChange={(e) => handleInputChange("travelDate", e.target.value)}
-                          className="text-sm"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Group Size</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Group Size</label>
                         <select
                           value={formData.groupSize}
                           onChange={(e) => handleInputChange("groupSize", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                         >
                           {GROUP_SIZE_OPTIONS.map((option) => (
                             <option key={option} value={option}>
@@ -695,13 +768,13 @@ ${formData.firstName} ${formData.lastName}`)
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Duration</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Duration</label>
                         <select
                           value={formData.desiredDuration}
                           onChange={(e) => handleInputChange("desiredDuration", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                         >
                           {DURATION_OPTIONS.map((option) => (
                             <option key={option} value={option}>
@@ -711,11 +784,11 @@ ${formData.firstName} ${formData.lastName}`)
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Experience Level</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
                         <select
                           value={formData.experienceLevel}
                           onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                         >
                           {EXPERIENCE_LEVELS.map((option) => (
                             <option key={option} value={option}>
@@ -728,16 +801,25 @@ ${formData.firstName} ${formData.lastName}`)
 
                     {/* Tour Type Selection */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">
-                        Interested Tour Types (select all that apply)
-                      </label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <label className="block text-sm font-medium text-gray-700">
+                          Interested Tour Types (select all that apply)
+                        </label>
+                        <Link
+                          href="/tours"
+                          className="text-xs text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          View All Tours
+                        </Link>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
                         {TOUR_TYPE_OPTIONS.map((tourType) => (
                           <button
                             key={tourType}
                             type="button"
                             onClick={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
-                            className={`text-left p-2 sm:p-3 rounded-lg border text-xs sm:text-sm transition-all ${
+                            className={`text-left p-3 rounded-lg border text-sm transition-all ${
                               selectedTourTypes.includes(tourType)
                                 ? "border-emerald-500 bg-emerald-50 text-emerald-700"
                                 : "border-gray-200 hover:border-emerald-300 text-gray-700"
@@ -751,36 +833,45 @@ ${formData.firstName} ${formData.lastName}`)
 
                     {/* Location Preferences */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">
-                        Preferred Locations (select all that interest you)
-                      </label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <label className="block text-sm font-medium text-gray-700">
+                          Preferred Biogeographic Regions (select all that interest you)
+                        </label>
+                        <Link
+                          href="/bioregions"
+                          className="text-xs text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1"
+                        >
+                          <Map className="w-3 h-3" />
+                          Explore Map
+                        </Link>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
                         {LOCATION_OPTIONS.map((location) => (
-                          <button
+                          <label
                             key={location}
-                            type="button"
-                            onClick={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                            className={`text-left p-2 sm:p-3 rounded-lg border text-xs sm:text-sm transition-all ${
-                              selectedLocations.includes(location)
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                : "border-gray-200 hover:border-emerald-300 text-gray-700"
-                            }`}
+                            className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer"
                           >
-                            {location}
-                          </button>
+                            <input
+                              type="checkbox"
+                              checked={selectedLocations.includes(location)}
+                              onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                              className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                            />
+                            <span className="text-xs text-gray-700">{location}</span>
+                          </label>
                         ))}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Special Interests or Requests
                       </label>
                       <textarea
-                        placeholder="Tell us about specific birds you'd like to see, dietary restrictions, mobility considerations, or any other special requests..."
+                        placeholder="Tell us about specific birds you'd like to see, dietary restrictions, or any other special requests..."
                         value={formData.specialRequests}
                         onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                        rows={3}
+                        rows={4}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
                       />
                     </div>
@@ -795,99 +886,77 @@ ${formData.firstName} ${formData.lastName}`)
                         }
                       }}
                     >
-                      <Button
-                        size="lg"
-                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-sm sm:text-base min-h-[48px]"
-                      >
-                        <Mail className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+                      <Button size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-base py-4">
+                        <Mail className="mr-2 w-5 h-5" />
                         Send My Inquiry
                       </Button>
                     </a>
                   </div>
 
-                  {/* Contact Information & Trust Signals */}
-                  <div className="space-y-4 sm:space-y-6">
-                    <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-lg p-4 sm:p-6">
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
-                        Why Book Directly With AVES?
-                      </h3>
-                      <div className="space-y-2 sm:space-y-3">
-                        <div className="flex items-start space-x-2 sm:space-x-3">
-                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                  {/* Contact Information */}
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-lg p-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4">Why Book Direct?</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">24-Hour Response</div>
-                            <div className="text-xs sm:text-sm text-gray-600">
-                              Personal response from our birding experts within 24 hours
-                            </div>
+                            <div className="font-medium text-gray-900">24-Hour Response</div>
+                            <div className="text-sm text-gray-600">Personal response from our birding experts</div>
                           </div>
                         </div>
-                        <div className="flex items-start space-x-2 sm:space-x-3">
-                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">Custom Itineraries</div>
-                            <div className="text-xs sm:text-sm text-gray-600">
-                              Tailored recommendations based on your interests and experience
-                            </div>
+                            <div className="font-medium text-gray-900">Custom Itineraries</div>
+                            <div className="text-sm text-gray-600">Tailored to your interests and experience</div>
                           </div>
                         </div>
-                        <div className="flex items-start space-x-2 sm:space-x-3">
-                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">Best Price Guarantee</div>
-                            <div className="text-xs sm:text-sm text-gray-600">
-                              No booking fees or hidden costs when you book direct
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-start space-x-2 sm:space-x-3">
-                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">Flexible Booking</div>
-                            <div className="text-xs sm:text-sm text-gray-600">
-                              Free date changes up to 60 days before departure
-                            </div>
+                            <div className="font-medium text-gray-900">No Booking Fees</div>
+                            <div className="text-sm text-gray-600">Best rates when you book direct</div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-lg p-4 sm:p-6 border border-gray-200">
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Contact Information</h3>
-                      <div className="space-y-2 sm:space-y-3">
-                        <div className="flex items-center space-x-2 sm:space-x-3">
-                          <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" />
+                    <div className="bg-white rounded-lg p-6 border border-gray-200">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4">Contact Information</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <Mail className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                           <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">Email</div>
-                            <div className="text-xs sm:text-sm text-gray-600">info@aves.com</div>
+                            <div className="font-medium text-gray-900">Email</div>
+                            <div className="text-sm text-gray-600">info@aves.com</div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2 sm:space-x-3">
-                          <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" />
+                        <div className="flex items-center space-x-3">
+                          <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                           <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">Based in</div>
-                            <div className="text-xs sm:text-sm text-gray-600">Bogotá, Colombia</div>
+                            <div className="font-medium text-gray-900">Based in</div>
+                            <div className="text-sm text-gray-600">Bogotá, Colombia</div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2 sm:space-x-3">
-                          <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" />
+                        <div className="flex items-center space-x-3">
+                          <Clock className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                           <div>
-                            <div className="font-medium text-gray-900 text-sm sm:text-base">Response Time</div>
-                            <div className="text-xs sm:text-sm text-gray-600">Within 24 hours</div>
+                            <div className="font-medium text-gray-900">Response Time</div>
+                            <div className="text-sm text-gray-600">Within 24 hours</div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 sm:p-6">
-                      <div className="flex items-start space-x-2 sm:space-x-3">
-                        <Award className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                      <div className="flex items-start space-x-3">
+                        <Award className="w-6 h-6 text-amber-600 mt-0.5 flex-shrink-0" />
                         <div>
-                          <div className="font-bold text-amber-800 text-sm sm:text-base mb-1 sm:mb-2">
-                            Limited Availability
-                          </div>
-                          <div className="text-xs sm:text-sm text-amber-700">
-                            We operate only 2-3 tours per month to ensure exceptional quality and minimal environmental
-                            impact. Book early to secure your preferred dates.
+                          <div className="font-bold text-amber-800 mb-2">Limited Availability</div>
+                          <div className="text-sm text-amber-700">
+                            We operate only 2-3 tours per month to ensure exceptional quality. Book early to secure your
+                            preferred dates.
                           </div>
                         </div>
                       </div>
@@ -900,10 +969,8 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Floating Navigation */}
       <FloatingAVESNavigation />
     </div>
   )

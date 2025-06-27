@@ -15,20 +15,21 @@ export const DURATION_OPTIONS = [
   "Flexible",
 ] as const
 
-// Consolidated location options that include both geographic regions and bioregions
+// Consolidated location options with concise English names and appropriate emojis
 export const LOCATION_OPTIONS = [
-  "Quetzal Highlands (Western Andes)",
-  "Hummingbird Haven (Central Andes)",
-  "Páramo Paradise (Eastern Andes)",
-  "Wetland Wonders (Llanos)",
-  "Canopy Kingdom (Amazon)",
-  "Endemic Empire (Biogeographic Chocó)",
-  "Coastal Crown (Caribbean + Sierra Nevada)",
-  "Valley Voyager (Cauca Valley)",
-  "River Realm (Magdalena Valley)",
-  "Massif Majesty (Macizo Colombiano)",
-  "Multiple Regions",
-  "Let AVES Choose",
+  "🏖️ Caribbean Coast",
+  "🏔️ Sierra Nevada de Santa Marta",
+  "🌊 Pacific Coast Chocó",
+  "⛰️ Western Andes",
+  "🏞️ Cauca Valley",
+  "🗻 Central Andes",
+  "🌄 Magdalena Valley",
+  "🏔️ Eastern Andes",
+  "🌾 Eastern Plains",
+  "🌳 Amazon Rainforest",
+  "🌋 Colombian Massif",
+  "🗺️ Multiple Regions",
+  "✨ Let AVES Choose",
 ] as const
 
 export const TOUR_TYPE_OPTIONS = ["🍃 AVES Adventure", "🪶 AVES Vision", "🌼 AVES Elevate", "🍓 AVES Souls"] as const

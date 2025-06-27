@@ -5,7 +5,17 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Mail, MapPin, Clock, ArrowRight } from "lucide-react"
+import {
+  Mail,
+  MapPin,
+  Clock,
+  ArrowRight,
+  ExternalLink,
+  Map,
+  Bird,
+  TelescopeIcon as Binoculars,
+  CheckCircle,
+} from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
@@ -16,6 +26,133 @@ import {
   GROUP_SIZE_OPTIONS,
   EXPERIENCE_LEVELS,
 } from "@/lib/form-options"
+
+// Helper function to get region information
+const getRegionInfo = (location: string) => {
+  const regionData: Record<
+    string,
+    {
+      emoji: string
+      name: string
+      shortName: string
+      description: string
+      species: string
+      tourLink?: string
+    }
+  > = {
+    "🏖️ Caribbean Coast": {
+      emoji: "🏖️",
+      name: "Caribbean Coast",
+      shortName: "Caribbean",
+      description: "Coastal wetlands, mangroves, and dry forests with unique Caribbean species.",
+      species: "300+",
+      tourLink: "/tours/adventure",
+    },
+    "🏔️ Sierra Nevada de Santa Marta": {
+      emoji: "🏔️",
+      name: "Sierra Nevada de Santa Marta",
+      shortName: "SNSM",
+      description: "World's most important endemic bird area with 15+ species found nowhere else.",
+      species: "600+",
+      tourLink: "/tours/adventure/sierra-nevada",
+    },
+    "🌊 Pacific Coast Chocó": {
+      emoji: "🌊",
+      name: "Pacific Coast Chocó",
+      shortName: "Chocó",
+      description: "One of the world's most biodiverse regions with spectacular endemic species.",
+      species: "800+",
+      tourLink: "/tours/adventure",
+    },
+    "⛰️ Western Andes": {
+      emoji: "⛰️",
+      name: "Western Andes",
+      shortName: "W. Andes",
+      description: "Cloud forests and montane ecosystems with incredible hummingbird diversity.",
+      species: "500+",
+      tourLink: "/tours/vision",
+    },
+    "🏞️ Cauca Valley": {
+      emoji: "🏞️",
+      name: "Cauca Valley",
+      shortName: "Cauca",
+      description: "Inter-Andean valley with dry forests and agricultural landscapes.",
+      species: "250+",
+    },
+    "🗻 Central Andes": {
+      emoji: "🗻",
+      name: "Central Andes",
+      shortName: "C. Andes",
+      description: "Coffee region with cloud forests and high-altitude páramo ecosystems.",
+      species: "450+",
+      tourLink: "/tours/elevate",
+    },
+    "🌄 Magdalena Valley": {
+      emoji: "🌄",
+      name: "Magdalena Valley",
+      shortName: "Magdalena",
+      description: "Major river valley with diverse habitats from wetlands to dry forests.",
+      species: "400+",
+    },
+    "🏔️ Eastern Andes": {
+      emoji: "🏔️",
+      name: "Eastern Andes",
+      shortName: "E. Andes",
+      description: "High-altitude ecosystems including páramo and cloud forests near Bogotá.",
+      species: "350+",
+      tourLink: "/tours/adventure",
+    },
+    "🌾 Eastern Plains": {
+      emoji: "🌾",
+      name: "Eastern Plains",
+      shortName: "Llanos",
+      description: "Vast grasslands and gallery forests with unique grassland species.",
+      species: "300+",
+      tourLink: "/tours/souls",
+    },
+    "🌳 Amazon Rainforest": {
+      emoji: "🌳",
+      name: "Amazon Rainforest",
+      shortName: "Amazon",
+      description: "World's largest rainforest with incredible biodiversity and canopy species.",
+      species: "1000+",
+      tourLink: "/tours/adventure",
+    },
+    "🌋 Colombian Massif": {
+      emoji: "🌋",
+      name: "Colombian Massif",
+      shortName: "Massif",
+      description: "High-altitude volcanic region where the Andes divide into three ranges.",
+      species: "200+",
+    },
+    "🗺️ Multiple Regions": {
+      emoji: "🗺️",
+      name: "Multiple Regions",
+      shortName: "Multi-Region",
+      description: "Experience the best of Colombia across multiple biogeographic regions.",
+      species: "500+",
+      tourLink: "/tours",
+    },
+    "✨ Let AVES Choose": {
+      emoji: "✨",
+      name: "Let AVES Choose",
+      shortName: "Expert Choice",
+      description: "Let our experts design the perfect itinerary based on your interests.",
+      species: "Custom",
+      tourLink: "/contact",
+    },
+  }
+
+  return (
+    regionData[location] || {
+      emoji: "🌍",
+      name: location,
+      shortName: location,
+      description: "Explore this unique Colombian bioregion.",
+      species: "Various",
+    }
+  )
+}
 
 export default function ContactPage() {
   useEffect(() => {
@@ -270,53 +407,36 @@ ${formData.firstName} ${formData.lastName}`)
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
-                        Desired Locations <span className="text-gray-500">(Select multiple)</span>
-                      </label>
-                      <div className="relative">
-                        <div className="border border-gray-300 rounded-md p-2 bg-white max-h-32 overflow-y-auto">
-                          {LOCATION_OPTIONS.map((location) => (
-                            <label
-                              key={location}
-                              className="flex items-center space-x-2 py-1 cursor-pointer hover:bg-gray-50 rounded px-1"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={selectedLocations.includes(location)}
-                                onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                                className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 text-xs"
-                              />
-                              <span className="text-xs text-gray-700">{location}</span>
-                            </label>
-                          ))}
-                        </div>
-                        {selectedLocations.length > 0 && (
-                          <div className="mt-2 flex flex-wrap gap-1">
-                            {selectedLocations.map((location) => (
-                              <span
-                                key={location}
-                                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800"
-                              >
-                                {location.length > 20 ? `${location.substring(0, 20)}...` : location}
-                                <button
-                                  type="button"
-                                  onClick={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                                  className="ml-1 text-blue-600 hover:text-blue-800"
-                                >
-                                  ×
-                                </button>
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Experience Level</label>
+                      <select
+                        name="experienceLevel"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        value={formData.experienceLevel}
+                        onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
+                      >
+                        {EXPERIENCE_LEVELS.map((level) => (
+                          <option key={level} value={level}>
+                            {level}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
+                  {/* Tour Type Selection with Link */}
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-2">
-                      Interested Tour Types * (select all that apply)
-                    </label>
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="block text-xs font-medium text-gray-700">
+                        Interested Tour Types * (select all that apply)
+                      </label>
+                      <Link
+                        href="/tours"
+                        className="text-xs text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        View All Tours
+                      </Link>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {CONTACT_TOUR_TYPE_OPTIONS.map((tourType) => (
                         <label
@@ -354,20 +474,160 @@ ${formData.firstName} ${formData.lastName}`)
                     )}
                   </div>
 
+                  {/* Enhanced Biogeographic Regions Selection */}
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Experience Level</label>
-                    <select
-                      name="experienceLevel"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                      value={formData.experienceLevel}
-                      onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
-                    >
-                      {EXPERIENCE_LEVELS.map((level) => (
-                        <option key={level} value={level}>
-                          {level}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="block text-sm font-medium text-gray-700">Preferred Biogeographic Regions</label>
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href="/avifauna-explorer#bioregions-map"
+                          className="text-xs text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1"
+                        >
+                          <Map className="w-3 h-3" />
+                          Interactive Map
+                        </Link>
+                        <span className="text-gray-300">|</span>
+                        <Link
+                          href="/tours"
+                          className="text-xs text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          View Tours
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Enhanced Region Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                      {LOCATION_OPTIONS.map((location) => {
+                        const isSelected = selectedLocations.includes(location)
+                        const regionInfo = getRegionInfo(location)
+
+                        return (
+                          <div
+                            key={location}
+                            onClick={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                            className={`relative p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
+                              isSelected
+                                ? "border-emerald-500 bg-emerald-50 shadow-md"
+                                : "border-gray-200 hover:border-emerald-300 bg-white"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <div className="flex items-center space-x-2 mb-2">
+                                  <span className="text-lg">{regionInfo.emoji}</span>
+                                  <h4
+                                    className={`font-medium text-sm ${isSelected ? "text-emerald-800" : "text-gray-800"}`}
+                                  >
+                                    {regionInfo.name}
+                                  </h4>
+                                </div>
+                                <p
+                                  className={`text-xs leading-relaxed ${isSelected ? "text-emerald-700" : "text-gray-600"}`}
+                                >
+                                  {regionInfo.description}
+                                </p>
+                                <div className="flex items-center justify-between mt-2">
+                                  <span
+                                    className={`text-xs font-medium ${isSelected ? "text-emerald-600" : "text-gray-500"}`}
+                                  >
+                                    {regionInfo.species} species
+                                  </span>
+                                  {regionInfo.tourLink && (
+                                    <Link
+                                      href={regionInfo.tourLink}
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="text-xs text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+                                    >
+                                      View Tour
+                                      <ArrowRight className="w-3 h-3" />
+                                    </Link>
+                                  )}
+                                </div>
+                              </div>
+                              <div
+                                className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                                  isSelected ? "border-emerald-500 bg-emerald-500" : "border-gray-300"
+                                }`}
+                              >
+                                {isSelected && <CheckCircle className="w-3 h-3 text-white" />}
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                    {/* Selected Regions Summary */}
+                    {selectedLocations.length > 0 && (
+                      <div className="mb-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+                        <div className="flex items-start space-x-2">
+                          <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-medium text-emerald-800">
+                              {selectedLocations.length} region{selectedLocations.length > 1 ? "s" : ""} selected
+                            </p>
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {selectedLocations.map((location) => (
+                                <span
+                                  key={location}
+                                  className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-800"
+                                >
+                                  {getRegionInfo(location).emoji} {getRegionInfo(location).shortName}
+                                  <button
+                                    type="button"
+                                    onClick={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                                    className="ml-1 text-emerald-600 hover:text-emerald-800"
+                                  >
+                                    ×
+                                  </button>
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Informational Callout */}
+                    <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                      <div className="flex items-start space-x-3">
+                        <div className="bg-blue-100 p-2 rounded-full flex-shrink-0">
+                          <Bird className="w-4 h-4 text-blue-600" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-medium text-blue-800 mb-1">Explore Before You Choose</h4>
+                          <p className="text-xs text-blue-700 leading-relaxed mb-2">
+                            Each bioregion offers unique species and experiences. Use our interactive tools to learn
+                            more:
+                          </p>
+                          <div className="flex flex-wrap gap-3 text-xs">
+                            <Link
+                              href="/avifauna-explorer"
+                              className="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
+                            >
+                              <Map className="w-3 h-3 mr-1" />
+                              Avifauna Explorer
+                            </Link>
+                            <Link
+                              href="/endemic-birds"
+                              className="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
+                            >
+                              <Bird className="w-3 h-3 mr-1" />
+                              Endemic Species
+                            </Link>
+                            <Link
+                              href="/tours"
+                              className="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
+                            >
+                              <Binoculars className="w-3 h-3 mr-1" />
+                              All Tours
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div>
