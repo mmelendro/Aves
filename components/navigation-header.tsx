@@ -96,25 +96,76 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 href="/tours/adventure"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                🏔️ AVES Adventure
+                🍃 AVES Adventure
               </Link>
               <Link
                 href="/tours/vision"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                👁️ AVES Vision
+                🪶 AVES Vision
               </Link>
               <Link
                 href="/tours/elevate"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                ⛰️ AVES Elevate
+                🌼 AVES Elevate
               </Link>
               <Link
                 href="/tours/souls"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                🌿 AVES Souls
+                🍓 AVES Souls
+              </Link>
+            </div>
+          </div>
+
+          {/* Resources Dropdown - Enhanced */}
+          <div className="relative group">
+            <Link
+              href="/resources"
+              className={`flex items-center transition-colors ${
+                currentPage?.startsWith("/blog") ||
+                currentPage?.startsWith("/resources") ||
+                currentPage?.startsWith("/travel-tips") ||
+                currentPage?.startsWith("/avifauna-explorer") ||
+                currentPage?.startsWith("/bioregions")
+                  ? "text-emerald-600"
+                  : "text-gray-700 hover:text-emerald-600"
+              }`}
+            >
+              Resources
+              <ChevronDown className="w-4 h-4 ml-1" />
+            </Link>
+            <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <Link
+                href="/avifauna-explorer"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
+              >
+                🦅 Colombian Avifauna Explorer
+              </Link>
+              <Link
+                href="/bioregions"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                🗺️ Bioregions Map
+              </Link>
+              <Link
+                href="/blog"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                📝 Blog & Stories
+              </Link>
+              <Link
+                href="/resources"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                📚 Birding Resources
+              </Link>
+              <Link
+                href="/travel-tips"
+                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
+                ✈️ Travel Tips
               </Link>
             </div>
           </div>
@@ -150,57 +201,6 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
                 🤝 Our Partners
-              </Link>
-            </div>
-          </div>
-
-          {/* Resources Dropdown */}
-          <div className="relative group">
-            <Link
-              href="/resources"
-              className={`flex items-center transition-colors ${
-                currentPage?.startsWith("/blog") ||
-                currentPage?.startsWith("/resources") ||
-                currentPage?.startsWith("/travel-tips") ||
-                currentPage?.startsWith("/endemic-birds") ||
-                currentPage?.startsWith("/bioregions")
-                  ? "text-emerald-600"
-                  : "text-gray-700 hover:text-emerald-600"
-              }`}
-            >
-              Resources
-              <ChevronDown className="w-4 h-4 ml-1" />
-            </Link>
-            <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <Link
-                href="/endemic-birds"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
-              >
-                🦅 Endemic Birds Explorer
-              </Link>
-              <Link
-                href="/bioregions"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                🗺️ Bioregions Map
-              </Link>
-              <Link
-                href="/blog"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                📝 Blog
-              </Link>
-              <Link
-                href="/resources"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                📚 Resources
-              </Link>
-              <Link
-                href="/travel-tips"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                ✈️ Travel Tips
               </Link>
             </div>
           </div>
@@ -285,28 +285,74 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🏔️ AVES Adventure
+                    🍃 AVES Adventure
                   </Link>
                   <Link
                     href="/tours/vision"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    👁️ AVES Vision
+                    🪶 AVES Vision
                   </Link>
                   <Link
                     href="/tours/elevate"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    ⛰️ AVES Elevate
+                    🌼 AVES Elevate
                   </Link>
                   <Link
                     href="/tours/souls"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🌿 AVES Souls
+                    🍓 AVES Souls
+                  </Link>
+                </div>
+              </div>
+              <div className="py-2">
+                <Link
+                  href="/resources"
+                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg touch-manipulation"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Resources
+                </Link>
+                <div className="pl-4 space-y-3 mt-3">
+                  <Link
+                    href="/avifauna-explorer"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🦅 Colombian Avifauna Explorer
+                  </Link>
+                  <Link
+                    href="/bioregions"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🗺️ Bioregions Map
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📝 Blog & Stories
+                  </Link>
+                  <Link
+                    href="/resources"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📚 Birding Resources
+                  </Link>
+                  <Link
+                    href="/travel-tips"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    ✈️ Travel Tips
                   </Link>
                 </div>
               </div>
@@ -339,52 +385,6 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🤝 Our Partners
-                  </Link>
-                </div>
-              </div>
-              <div className="py-2">
-                <Link
-                  href="/resources"
-                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg touch-manipulation"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Resources
-                </Link>
-                <div className="pl-4 space-y-3 mt-3">
-                  <Link
-                    href="/endemic-birds"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🦅 Endemic Birds Explorer
-                  </Link>
-                  <Link
-                    href="/bioregions"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🗺️ Bioregions Map
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    📝 Blog
-                  </Link>
-                  <Link
-                    href="/resources"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    📚 Resources
-                  </Link>
-                  <Link
-                    href="/travel-tips"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    ✈️ Travel Tips
                   </Link>
                 </div>
               </div>

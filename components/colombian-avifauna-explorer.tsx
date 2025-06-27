@@ -1,18 +1,18 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { useRouter, useSearchParams } from "next/navigation"
 import {
   MapPin,
   Bird,
   Search,
   ExternalLink,
   RotateCcw,
-  Camera,
   Heart,
   Info,
   AlertTriangle,
@@ -26,11 +26,13 @@ import {
   Waves,
   Leaf,
   Sun,
+  ShoppingBag,
+  Filter,
 } from "lucide-react"
 
-// Enhanced endemic species data with accurate regional distribution
-const endemicSpeciesData = [
-  // Sierra Nevada de Santa Marta (SNSM) - 23 species
+// Enhanced bird species data including both endemic and notable species
+const birdSpeciesData = [
+  // Endemic Species
   {
     commonName: "Santa Marta Parakeet",
     scientificName: "Pyrrhura viridicata",
@@ -45,6 +47,8 @@ const endemicSpeciesData = [
     elevation: "1200-2800m",
     bestTime: "December-March, July-August",
     imageUrl: "/placeholder.svg?height=200&width=300&text=Santa+Marta+Parakeet",
+    isEndemic: true,
+    category: "Endemic",
   },
   {
     commonName: "Santa Marta Blossomcrown",
@@ -59,6 +63,8 @@ const endemicSpeciesData = [
     elevation: "1800-2800m",
     bestTime: "December-March",
     imageUrl: "/placeholder.svg?height=200&width=300&text=Santa+Marta+Blossomcrown",
+    isEndemic: true,
+    category: "Endemic",
   },
   {
     commonName: "Blue-bearded Helmetcrest",
@@ -73,37 +79,9 @@ const endemicSpeciesData = [
     elevation: "3000-4200m",
     bestTime: "December-March",
     imageUrl: "/placeholder.svg?height=200&width=300&text=Blue-bearded+Helmetcrest",
+    isEndemic: true,
+    category: "Endemic",
   },
-  {
-    commonName: "Santa Marta Warbler",
-    scientificName: "Myiothlypis basilica",
-    spanishName: "Reinita de Santa Marta",
-    ebirdCode: "samwar1",
-    ebirdUrl: "https://ebird.org/species/samwar1",
-    regions: ["SNSM"],
-    conservationStatus: "Endangered",
-    habitat: "Cloud forest understory",
-    description: "Endemic warbler of montane forests, active insectivore with distinctive plumage pattern.",
-    elevation: "1500-2800m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Santa+Marta+Warbler",
-  },
-  {
-    commonName: "Santa Marta Antpitta",
-    scientificName: "Grallaria bangsi",
-    spanishName: "Tororoi de Santa Marta",
-    ebirdCode: "samang1",
-    ebirdUrl: "https://ebird.org/species/samang1",
-    regions: ["SNSM"],
-    conservationStatus: "Endangered",
-    habitat: "Cloud forest floor",
-    description: "Ground-dwelling forest bird, secretive and difficult to observe.",
-    elevation: "1800-2800m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Santa+Marta+Antpitta",
-  },
-
-  // Western Andes - 36 species (showing key ones)
   {
     commonName: "Gorgeted Puffleg",
     scientificName: "Eriocnemis isabellae",
@@ -117,65 +95,9 @@ const endemicSpeciesData = [
     elevation: "1800-2800m",
     bestTime: "December-March",
     imageUrl: "/placeholder.svg?height=200&width=300&text=Gorgeted+Puffleg",
+    isEndemic: true,
+    category: "Endemic",
   },
-  {
-    commonName: "Colorful Puffleg",
-    scientificName: "Eriocnemis mirabilis",
-    spanishName: "Calzadito multicolor",
-    ebirdCode: "colpuf1",
-    ebirdUrl: "https://ebird.org/species/colpuf1",
-    regions: ["Western Andes"],
-    conservationStatus: "Critically Endangered",
-    habitat: "Cloud forests",
-    description: "Spectacular hummingbird with iridescent plumage, extremely rare and localized.",
-    elevation: "1800-2600m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Colorful+Puffleg",
-  },
-  {
-    commonName: "Dusky Starfrontlet",
-    scientificName: "Coeligena orina",
-    spanishName: "Inca oscuro",
-    ebirdCode: "dussta1",
-    ebirdUrl: "https://ebird.org/species/dussta1",
-    regions: ["Western Andes"],
-    conservationStatus: "Critically Endangered",
-    habitat: "Cloud forests",
-    description: "Large dark hummingbird, critically endangered with very small known population.",
-    elevation: "1800-2800m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Dusky+Starfrontlet",
-  },
-  {
-    commonName: "Cauca Guan",
-    scientificName: "Penelope perspicax",
-    spanishName: "Pava caucana",
-    ebirdCode: "caugua1",
-    ebirdUrl: "https://ebird.org/species/caugua1",
-    regions: ["Western Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Cloud forests",
-    description: "Large ground bird of montane forests, threatened by hunting and habitat loss.",
-    elevation: "1500-2800m",
-    bestTime: "Year-round",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Cauca+Guan",
-  },
-  {
-    commonName: "Munchique Wood-Wren",
-    scientificName: "Henicorhina negreti",
-    spanishName: "Cucarachero de Munchique",
-    ebirdCode: "mucwre1",
-    ebirdUrl: "https://ebird.org/species/mucwre1",
-    regions: ["Western Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Cloud forest understory",
-    description: "Endemic wren of Western Andes, secretive understory specialist.",
-    elevation: "1800-2600m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Munchique+Wood-Wren",
-  },
-
-  // Central Andes - 34 species (showing key ones)
   {
     commonName: "Indigo-winged Parrot",
     scientificName: "Hapalopsittaca fuertesi",
@@ -189,264 +111,93 @@ const endemicSpeciesData = [
     elevation: "2000-3400m",
     bestTime: "December-March",
     imageUrl: "/placeholder.svg?height=200&width=300&text=Indigo-winged+Parrot",
+    isEndemic: true,
+    category: "Endemic",
   },
+  // Notable Non-Endemic Species
   {
-    commonName: "Buffy Helmetcrest",
-    scientificName: "Oxypogon stuebelii",
-    spanishName: "Colibrí crestado leonado",
-    ebirdCode: "bufhel1",
-    ebirdUrl: "https://ebird.org/species/bufhel1",
-    regions: ["Central Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Páramo grasslands",
-    description: "High-altitude hummingbird specialist, adapted to harsh páramo conditions.",
-    elevation: "3000-4200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Buffy+Helmetcrest",
-  },
-  {
-    commonName: "Tolima Blossomcrown",
-    scientificName: "Anthocephala berlepschi",
-    spanishName: "Colibrí coronado del Tolima",
-    ebirdCode: "blosac2",
-    ebirdUrl: "https://ebird.org/species/blosac2",
-    regions: ["Central Andes"],
-    conservationStatus: "Critically Endangered",
-    habitat: "Cloud forest edges",
-    description: "Tiny endemic hummingbird, extremely rare and localized to Central Andes.",
-    elevation: "1800-2800m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Tolima+Blossomcrown",
-  },
-  {
-    commonName: "Brown-banded Antpitta",
-    scientificName: "Grallaria milleri",
-    spanishName: "Tororoi pardo",
-    ebirdCode: "brnant1",
-    ebirdUrl: "https://ebird.org/species/brnant1",
-    regions: ["Central Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Cloud forest floor",
-    description: "Secretive ground-dwelling bird of Central Andes cloud forests.",
-    elevation: "2000-3200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Brown-banded+Antpitta",
-  },
-
-  // Eastern Andes - 20 species (showing key ones)
-  {
-    commonName: "Bogotá Rail",
-    scientificName: "Rallus semiplumbeus",
-    spanishName: "Rascón bogotano",
-    ebirdCode: "bograi1",
-    ebirdUrl: "https://ebird.org/species/bograi1",
-    regions: ["Eastern Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Wetlands and marshes",
-    description: "Secretive wetland bird, critically threatened by wetland drainage and urbanization.",
-    elevation: "2500-3200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Bogota+Rail",
-  },
-  {
-    commonName: "Apolinar's Wren",
-    scientificName: "Cistothorus apolinari",
-    spanishName: "Cucarachero de Apolinar",
-    ebirdCode: "aplwre1",
-    ebirdUrl: "https://ebird.org/species/aplwre1",
-    regions: ["Eastern Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Wetland edges",
-    description: "Marsh-dwelling wren, threatened by wetland destruction around Bogotá.",
-    elevation: "2500-3200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Apolinar's+Wren",
-  },
-  {
-    commonName: "Green-bearded Helmetcrest",
-    scientificName: "Oxypogon guerinii",
-    spanishName: "Colibrí crestado barbiverdi",
-    ebirdCode: "grbhel1",
-    ebirdUrl: "https://ebird.org/species/grbhel1",
-    regions: ["Eastern Andes"],
-    conservationStatus: "Endangered",
-    habitat: "Páramo grasslands",
-    description: "High-altitude hummingbird specialist of Eastern Andes páramo.",
-    elevation: "3000-4200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Green-bearded+Helmetcrest",
-  },
-  {
-    commonName: "Brown-breasted Parakeet",
-    scientificName: "Pyrrhura calliptera",
-    spanishName: "Periquito aliasamarillo",
-    ebirdCode: "brbpar1",
-    ebirdUrl: "https://ebird.org/species/brbpar1",
-    regions: ["Eastern Andes"],
-    conservationStatus: "Vulnerable",
+    commonName: "Resplendent Quetzal",
+    scientificName: "Pharomachrus mocinno",
+    spanishName: "Quetzal resplandeciente",
+    ebirdCode: "resquet1",
+    ebirdUrl: "https://ebird.org/species/resquet1",
+    regions: ["Western Andes", "Central Andes"],
+    conservationStatus: "Near Threatened",
     habitat: "Cloud forests",
-    description: "Endemic parakeet of Eastern Andes, social species forming large flocks.",
-    elevation: "1800-3200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Brown-breasted+Parakeet",
-  },
-
-  // Caribbean Coast - Key species
-  {
-    commonName: "Sapphire-bellied Hummingbird",
-    scientificName: "Chrysuronia lilliae",
-    spanishName: "Colibrí ventriazul",
-    ebirdCode: "sabehl1",
-    ebirdUrl: "https://ebird.org/species/sabehl1",
-    regions: ["Caribbean"],
-    conservationStatus: "Critically Endangered",
-    habitat: "Dry forests and gardens",
-    description:
-      "Small hummingbird endemic to northern Colombia, critically endangered with fewer than 1000 individuals remaining.",
-    elevation: "0-500m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Sapphire-bellied+Hummingbird",
-  },
-  {
-    commonName: "Blue-billed Curassow",
-    scientificName: "Crax alberti",
-    spanishName: "Paujil piquiazul",
-    ebirdCode: "blbcur1",
-    ebirdUrl: "https://ebird.org/species/blbcur1",
-    regions: ["Caribbean"],
-    conservationStatus: "Critically Endangered",
-    habitat: "Humid lowland forests",
-    description:
-      "Large ground-dwelling bird of lowland forests, critically endangered due to habitat loss and hunting pressure.",
-    elevation: "0-1000m",
+    description: "Magnificent cloud forest bird with iridescent green plumage and long tail feathers.",
+    elevation: "1400-3000m",
     bestTime: "Year-round",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Blue-billed+Curassow",
+    imageUrl: "/images/resplendent-quetzal.jpg",
+    isEndemic: false,
+    category: "Spectacular",
   },
   {
-    commonName: "Chestnut-winged Chachalaca",
-    scientificName: "Ortalis garrula",
-    spanishName: "Guacharaca caribeña",
-    ebirdCode: "chwcha1",
-    ebirdUrl: "https://ebird.org/species/chwcha1",
-    regions: ["Caribbean"],
+    commonName: "Andean Cock-of-the-Rock",
+    scientificName: "Rupicola peruvianus",
+    spanishName: "Gallito de roca andino",
+    ebirdCode: "andcor1",
+    ebirdUrl: "https://ebird.org/species/andcor1",
+    regions: ["Eastern Andes", "Central Andes"],
     conservationStatus: "Least Concern",
-    habitat: "Dry forests and scrublands",
-    description: "Endemic to the Caribbean coast of Colombia, important seed disperser.",
-    elevation: "0-800m",
+    habitat: "Cloud forests and rocky areas",
+    description: "Spectacular orange bird known for elaborate courtship displays and distinctive crest.",
+    elevation: "500-2400m",
     bestTime: "Year-round",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Chestnut-winged+Chachalaca",
+    imageUrl: "/placeholder.svg?height=200&width=300&text=Andean+Cock-of-the-Rock",
+    isEndemic: false,
+    category: "Spectacular",
   },
-
-  // Pacific Coast - Key species
   {
-    commonName: "Sooty-capped Puffbird",
-    scientificName: "Bucco noanamae",
-    spanishName: "Buco coroninegro",
-    ebirdCode: "socpuf2",
-    ebirdUrl: "https://ebird.org/species/socpuf2",
-    regions: ["Pacific"],
-    conservationStatus: "Near Threatened",
+    commonName: "King Vulture",
+    scientificName: "Sarcoramphus papa",
+    spanishName: "Rey zamuro",
+    ebirdCode: "kinvul1",
+    ebirdUrl: "https://ebird.org/species/kinvul1",
+    regions: ["Amazonia", "Pacific"],
+    conservationStatus: "Least Concern",
     habitat: "Lowland rainforest",
-    description: "Chunky bird of Pacific lowlands, sits motionless for long periods waiting for prey.",
-    elevation: "0-800m",
-    bestTime: "January-March, July-September",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Sooty-capped+Puffbird",
+    description: "Magnificent large vulture with colorful head and impressive wingspan.",
+    elevation: "0-1500m",
+    bestTime: "Year-round",
+    imageUrl: "/images/king-vulture.jpg",
+    isEndemic: false,
+    category: "Spectacular",
   },
   {
-    commonName: "Baudo Oropendola",
-    scientificName: "Psarocolius cassini",
-    spanishName: "Oropéndola del Baudó",
-    ebirdCode: "baooro1",
-    ebirdUrl: "https://ebird.org/species/baooro1",
-    regions: ["Pacific"],
-    conservationStatus: "Least Concern",
+    commonName: "Yellow-throated Toucan",
+    scientificName: "Ramphastos ambiguus",
+    spanishName: "Tucán de garganta amarilla",
+    ebirdCode: "yeltou1",
+    ebirdUrl: "https://ebird.org/species/yeltou1",
+    regions: ["Pacific", "Western Andes"],
+    conservationStatus: "Vulnerable",
     habitat: "Rainforest canopy",
-    description: "Large colonial nesting bird of Pacific rainforests, builds distinctive hanging nests.",
+    description: "Large colorful toucan of Pacific rainforests with distinctive yellow throat.",
+    elevation: "0-2000m",
+    bestTime: "Year-round",
+    imageUrl: "/images/yellow-throated-toucan.jpg",
+    isEndemic: false,
+    category: "Spectacular",
+  },
+  {
+    commonName: "White-necked Jacobin",
+    scientificName: "Florisuga mellivora",
+    spanishName: "Jacobino nuquiblanco",
+    ebirdCode: "whnjac1",
+    ebirdUrl: "https://ebird.org/species/whnjac1",
+    regions: ["Caribbean", "Pacific"],
+    conservationStatus: "Least Concern",
+    habitat: "Forest edges and gardens",
+    description: "Large hummingbird with striking blue and white plumage pattern.",
     elevation: "0-1200m",
-    bestTime: "January-March, July-September",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Baudo+Oropendola",
+    bestTime: "Year-round",
+    imageUrl: "/images/white-necked-jacobin.jpg",
+    isEndemic: false,
+    category: "Common Favorites",
   },
-
-  // Interandean Valleys - Key species
-  {
-    commonName: "White-mantled Barbet",
-    scientificName: "Capito hypoleucus",
-    spanishName: "Barbudo capiblanco",
-    ebirdCode: "whmbab1",
-    ebirdUrl: "https://ebird.org/species/whmbab1",
-    regions: ["Interandean Valleys"],
-    conservationStatus: "Near Threatened",
-    habitat: "Dry forests",
-    description: "Colorful barbet of dry forests, important seed disperser for native trees.",
-    elevation: "200-1500m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=White-mantled+Barbet",
-  },
-  {
-    commonName: "Niceforo's Wren",
-    scientificName: "Thryophilus nicefori",
-    spanishName: "Cucarachero de Nicéforo",
-    ebirdCode: "nicwre1",
-    ebirdUrl: "https://ebird.org/species/nicwre1",
-    regions: ["Interandean Valleys"],
-    conservationStatus: "Endangered",
-    habitat: "Dry forest undergrowth",
-    description: "Secretive wren of dry forests, critically threatened by habitat loss.",
-    elevation: "300-1200m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Niceforo's+Wren",
-  },
-  {
-    commonName: "Tolima Dove",
-    scientificName: "Leptotila conoveri",
-    spanishName: "Tórtola tolimense",
-    ebirdCode: "toldov1",
-    ebirdUrl: "https://ebird.org/species/toldov1",
-    regions: ["Interandean Valleys"],
-    conservationStatus: "Endangered",
-    habitat: "Dry forests",
-    description: "Ground-dwelling dove of dry inter-Andean valleys, threatened by habitat conversion.",
-    elevation: "400-1800m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Tolima+Dove",
-  },
-
-  // Amazonia - Key species
-  {
-    commonName: "Chiribiquete Emerald",
-    scientificName: "Chlorostilbon olivaresi",
-    spanishName: "Esmeralda de Chiribiquete",
-    ebirdCode: "chroli1",
-    ebirdUrl: "https://ebird.org/species/chroli1",
-    regions: ["Amazonia"],
-    conservationStatus: "Data Deficient",
-    habitat: "Tepui summits",
-    description: "Recently discovered hummingbird from tepuis, known from very few specimens.",
-    elevation: "1500-2000m",
-    bestTime: "June-September",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Chiribiquete+Emerald",
-  },
-
-  // Massif - Key species
-  {
-    commonName: "Rainbow-bearded Thornbill",
-    scientificName: "Chalcostigma herrani",
-    spanishName: "Colibrí barbirrainbow",
-    ebirdCode: "rabtho1",
-    ebirdUrl: "https://ebird.org/species/rabtho1",
-    regions: ["Massif"],
-    conservationStatus: "Near Threatened",
-    habitat: "Páramo and high-altitude scrub",
-    description: "High-altitude hummingbird specialist with distinctive iridescent throat patch.",
-    elevation: "3000-4500m",
-    bestTime: "December-March",
-    imageUrl: "/placeholder.svg?height=200&width=300&text=Rainbow-bearded+Thornbill",
-  },
-
-  // Llanos - Currently no endemic species data available
 ]
 
-// 11 distinct regions data based on the provided map
+// 11 distinct regions data
 const regionsData = [
   {
     id: "Pacific",
@@ -457,7 +208,7 @@ const regionsData = [
     color: "#10B981",
     gradient: "from-emerald-500 to-green-600",
     icon: TreePine,
-    speciesCount: 2,
+    endemicSpeciesCount: 2,
     totalSpecies: 875,
     keyFeatures: ["Highest rainfall on Earth", "Chocó endemism hotspot", "Lowland rainforest"],
     coordinates: { x: 15, y: 45 },
@@ -475,7 +226,7 @@ const regionsData = [
     color: "#8B5CF6",
     gradient: "from-purple-500 to-indigo-600",
     icon: Mountain,
-    speciesCount: 36,
+    endemicSpeciesCount: 36,
     totalSpecies: 785,
     keyFeatures: ["Highest endemic concentration", "Cloud forests", "Páramo ecosystems"],
     coordinates: { x: 35, y: 50 },
@@ -493,7 +244,7 @@ const regionsData = [
     color: "#DC2626",
     gradient: "from-red-500 to-rose-600",
     icon: Mountain,
-    speciesCount: 34,
+    endemicSpeciesCount: 34,
     totalSpecies: 720,
     keyFeatures: ["Coffee Triangle", "Highest peaks", "Volcanic soils"],
     coordinates: { x: 50, y: 50 },
@@ -511,7 +262,7 @@ const regionsData = [
     color: "#7C3AED",
     gradient: "from-violet-500 to-purple-600",
     icon: Mountain,
-    speciesCount: 20,
+    endemicSpeciesCount: 20,
     totalSpecies: 650,
     keyFeatures: ["Bogotá plateau", "Extensive páramo", "High-altitude wetlands"],
     coordinates: { x: 65, y: 45 },
@@ -529,7 +280,7 @@ const regionsData = [
     color: "#F59E0B",
     gradient: "from-amber-500 to-orange-600",
     icon: Leaf,
-    speciesCount: 12,
+    endemicSpeciesCount: 12,
     totalSpecies: 550,
     keyFeatures: ["Dry forest remnants", "Agricultural landscapes", "River systems"],
     coordinates: { x: 45, y: 55 },
@@ -547,7 +298,7 @@ const regionsData = [
     color: "#3B82F6",
     gradient: "from-blue-400 to-cyan-500",
     icon: Waves,
-    speciesCount: 6,
+    endemicSpeciesCount: 6,
     totalSpecies: 635,
     keyFeatures: ["Coastal ecosystems", "Dry forests", "San Andrés archipelago"],
     coordinates: { x: 50, y: 15 },
@@ -565,7 +316,7 @@ const regionsData = [
     color: "#06B6D4",
     gradient: "from-cyan-500 to-blue-500",
     icon: Mountain,
-    speciesCount: 23,
+    endemicSpeciesCount: 23,
     totalSpecies: 635,
     keyFeatures: ["Highest coastal mountain", "Exceptional endemism", "All climate zones"],
     coordinates: { x: 60, y: 20 },
@@ -583,7 +334,7 @@ const regionsData = [
     color: "#EAB308",
     gradient: "from-yellow-400 to-amber-500",
     icon: Sun,
-    speciesCount: 0,
+    endemicSpeciesCount: 0,
     totalSpecies: 450,
     keyFeatures: ["Tropical grasslands", "Seasonal wetlands", "Gallery forests"],
     coordinates: { x: 75, y: 40 },
@@ -601,7 +352,7 @@ const regionsData = [
     color: "#16A34A",
     gradient: "from-green-500 to-emerald-600",
     icon: TreePine,
-    speciesCount: 1,
+    endemicSpeciesCount: 1,
     totalSpecies: 1250,
     keyFeatures: ["Lowland rainforest", "Tepui formations", "River systems"],
     coordinates: { x: 60, y: 75 },
@@ -619,7 +370,7 @@ const regionsData = [
     color: "#BE185D",
     gradient: "from-pink-600 to-rose-700",
     icon: Mountain,
-    speciesCount: 3,
+    endemicSpeciesCount: 3,
     totalSpecies: 380,
     keyFeatures: ["Andean division point", "Páramo ecosystems", "Water sources"],
     coordinates: { x: 45, y: 65 },
@@ -631,12 +382,13 @@ const regionsData = [
 ]
 
 interface SpeciesModalProps {
-  species: (typeof endemicSpeciesData)[0] | null
+  species: (typeof birdSpeciesData)[0] | null
   isOpen: boolean
   onClose: () => void
+  onBookTour: (species: (typeof birdSpeciesData)[0]) => void
 }
 
-function SpeciesModal({ species, isOpen, onClose }: SpeciesModalProps) {
+function SpeciesModal({ species, isOpen, onClose, onBookTour }: SpeciesModalProps) {
   if (!species) return null
 
   const getConservationColor = (status: string) => {
@@ -651,8 +403,6 @@ function SpeciesModal({ species, isOpen, onClose }: SpeciesModalProps) {
         return "bg-blue-100 text-blue-800 border-blue-200"
       case "Least Concern":
         return "bg-green-100 text-green-800 border-green-200"
-      case "Data Deficient":
-        return "bg-gray-100 text-gray-800 border-gray-200"
       default:
         return "bg-gray-100 text-gray-800 border-gray-200"
     }
@@ -690,11 +440,14 @@ function SpeciesModal({ species, isOpen, onClose }: SpeciesModalProps) {
               alt={species.commonName}
               className="w-full h-64 object-cover"
             />
-            <div className="absolute top-4 right-4">
+            <div className="absolute top-4 right-4 flex gap-2">
               <Badge className={`${getConservationColor(species.conservationStatus)} flex items-center gap-2`}>
                 {getConservationIcon(species.conservationStatus)}
                 {species.conservationStatus}
               </Badge>
+              {species.isEndemic && (
+                <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200">Endemic</Badge>
+              )}
             </div>
           </div>
 
@@ -720,8 +473,28 @@ function SpeciesModal({ species, isOpen, onClose }: SpeciesModalProps) {
                 <p className="text-gray-700">{species.bestTime}</p>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Region</h4>
-                <Badge variant="outline">{species.regions[0]}</Badge>
+                <h4 className="font-semibold text-gray-900 mb-2">Regions</h4>
+                <div className="flex flex-wrap gap-2">
+                  {species.regions.map((region) => (
+                    <Badge key={region} variant="outline">
+                      {region}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Category</h4>
+                <Badge
+                  className={
+                    species.isEndemic
+                      ? "bg-emerald-100 text-emerald-800"
+                      : species.category === "Spectacular"
+                        ? "bg-purple-100 text-purple-800"
+                        : "bg-blue-100 text-blue-800"
+                  }
+                >
+                  {species.category}
+                </Badge>
               </div>
             </div>
           </div>
@@ -740,11 +513,9 @@ function SpeciesModal({ species, isOpen, onClose }: SpeciesModalProps) {
                 View on eBird
               </a>
             </Button>
-            <Button variant="outline" asChild className="flex-1 bg-transparent">
-              <a href="/tours">
-                <Camera className="w-4 h-4 mr-2" />
-                Plan Tour
-              </a>
+            <Button onClick={() => onBookTour(species)} className="flex-1 bg-emerald-600 hover:bg-emerald-700">
+              <ShoppingBag className="w-4 h-4 mr-2" />
+              Book Tour
             </Button>
           </div>
         </div>
@@ -753,18 +524,34 @@ function SpeciesModal({ species, isOpen, onClose }: SpeciesModalProps) {
   )
 }
 
-export function InteractiveEndemicBirdsExplorer() {
+export function ColombianAvifaunaExplorer() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedSpecies, setSelectedSpecies] = useState<(typeof endemicSpeciesData)[0] | null>(null)
+  const [categoryFilter, setCategoryFilter] = useState<string>("all")
+  const [selectedSpecies, setSelectedSpecies] = useState<(typeof birdSpeciesData)[0] | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Initialize from URL parameters
+  useEffect(() => {
+    const region = searchParams.get("region")
+    const species = searchParams.get("species")
+
+    if (region) {
+      setSelectedRegion(region)
+    }
+    if (species) {
+      setSearchTerm(species)
+    }
+  }, [searchParams])
 
   // Get current region data
   const currentRegion = selectedRegion ? regionsData.find((r) => r.id === selectedRegion) : null
 
   // Filter species based on current selection
   const filteredSpecies = useMemo(() => {
-    let filtered = endemicSpeciesData
+    let filtered = birdSpeciesData
 
     // Filter by search term
     if (searchTerm) {
@@ -776,15 +563,24 @@ export function InteractiveEndemicBirdsExplorer() {
       )
     }
 
+    // Filter by category
+    if (categoryFilter !== "all") {
+      if (categoryFilter === "endemic") {
+        filtered = filtered.filter((species) => species.isEndemic)
+      } else {
+        filtered = filtered.filter((species) => species.category === categoryFilter)
+      }
+    }
+
     // Filter by region
     if (selectedRegion) {
       filtered = filtered.filter((species) => species.regions.includes(selectedRegion))
     }
 
     return filtered
-  }, [searchTerm, selectedRegion])
+  }, [searchTerm, selectedRegion, categoryFilter])
 
-  const handleSpeciesClick = (species: (typeof endemicSpeciesData)[0]) => {
+  const handleSpeciesClick = (species: (typeof birdSpeciesData)[0]) => {
     setSelectedSpecies(species)
     setIsModalOpen(true)
   }
@@ -792,17 +588,27 @@ export function InteractiveEndemicBirdsExplorer() {
   const handleRegionClick = (regionId: string) => {
     if (selectedRegion === regionId) {
       setSelectedRegion(null)
+      router.push("/avifauna-explorer", { scroll: false })
     } else {
       setSelectedRegion(regionId)
+      router.push(`/avifauna-explorer?region=${encodeURIComponent(regionId)}`, { scroll: false })
     }
+  }
+
+  const handleBookTour = (species: (typeof birdSpeciesData)[0]) => {
+    const regions = species.regions.join(",")
+    router.push(`/shopping?regions=${encodeURIComponent(regions)}&species=${encodeURIComponent(species.commonName)}`)
   }
 
   const resetSelection = () => {
     setSelectedRegion(null)
     setSearchTerm("")
+    setCategoryFilter("all")
+    router.push("/avifauna-explorer", { scroll: false })
   }
 
-  const totalEndemics = endemicSpeciesData.length
+  const totalSpecies = birdSpeciesData.length
+  const endemicCount = birdSpeciesData.filter((s) => s.isEndemic).length
 
   return (
     <div className="space-y-8">
@@ -813,26 +619,24 @@ export function InteractiveEndemicBirdsExplorer() {
             <div className="bg-emerald-100 p-2 rounded-full">
               <Bird className="w-6 h-6 text-emerald-600" />
             </div>
-            Colombian Endemic Birds
+            Colombian Avifauna Explorer
           </CardTitle>
           <CardDescription className="text-lg">
-            Discover the incredible diversity of bird species found nowhere else on Earth
+            Discover Colombia's incredible bird diversity across 11 distinct biogeographic regions
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Why Colombia?</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">World's Most Diverse Avifauna</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Colombia is home to more bird species than any other country in the world, with over 1,900 recorded
-                species. Of these, approximately 78+ species are endemic, meaning they are found nowhere else on Earth.
-                This extraordinary diversity is the result of Colombia's unique geography, which includes three separate
-                Andean mountain ranges, two coastlines, Amazon rainforest, and diverse ecosystems ranging from sea level
-                to over 5,700 meters in elevation.
+                species. This extraordinary diversity includes endemic species found nowhere else on Earth, spectacular
+                residents, and remarkable migrants that make Colombia a premier birding destination.
               </p>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-2xl font-bold text-emerald-600">{totalEndemics}+</div>
+                  <div className="text-2xl font-bold text-emerald-600">{endemicCount}+</div>
                   <div className="text-sm text-gray-600">Endemic Species</div>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
@@ -842,20 +646,31 @@ export function InteractiveEndemicBirdsExplorer() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">11 Distinct Regions</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Explore by Category</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Colombia's bird endemism is distributed across 11 distinct biogeographic regions, each with unique
-                characteristics and specialized habitats:
+                Our avifauna explorer showcases different categories of Colombian birds, from endemic species to
+                spectacular residents and common favorites that delight birders worldwide.
               </p>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                {regionsData.slice(0, 6).map((region) => (
-                  <div key={region.id} className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: region.color }} />
-                    <span className="text-gray-700">{region.name}</span>
-                  </div>
-                ))}
+              <div className="grid grid-cols-1 gap-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                  <span className="text-gray-700">
+                    <strong>Endemic:</strong> Found only in Colombia
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-purple-500" />
+                  <span className="text-gray-700">
+                    <strong>Spectacular:</strong> Iconic and sought-after species
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-blue-500" />
+                  <span className="text-gray-700">
+                    <strong>Common Favorites:</strong> Beloved resident species
+                  </span>
+                </div>
               </div>
-              <div className="mt-2 text-xs text-gray-500">+ 5 more regions including Llanos, Amazonia, and Massif</div>
             </div>
           </div>
         </CardContent>
@@ -868,11 +683,11 @@ export function InteractiveEndemicBirdsExplorer() {
             <div>
               <CardTitle className="text-xl flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-emerald-600" />
-                Interactive Birding Regions Map
+                Interactive Biogeographic Regions Map
               </CardTitle>
               <CardDescription>
-                Click on any region to explore its endemic bird species. Each region represents a distinct biogeographic
-                area with unique characteristics.
+                Click on any region to explore its bird species. Each region represents a distinct biogeographic area
+                with unique characteristics and specialized avifauna.
               </CardDescription>
             </div>
             {selectedRegion && (
@@ -931,7 +746,7 @@ export function InteractiveEndemicBirdsExplorer() {
                         </div>
                         <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-white px-3 py-2 rounded-lg shadow-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-20 border">
                           <div className="font-semibold text-gray-900">{region.name}</div>
-                          <div className="text-gray-600">{region.speciesCount} endemic species</div>
+                          <div className="text-gray-600">{region.endemicSpeciesCount} endemic species</div>
                           <div className="text-gray-500">{region.totalSpecies} total species</div>
                         </div>
                       </button>
@@ -956,7 +771,7 @@ export function InteractiveEndemicBirdsExplorer() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
                         <span className="font-medium text-gray-700">Endemic Species:</span>
-                        <div className="text-lg font-bold text-emerald-600">{currentRegion.speciesCount}</div>
+                        <div className="text-lg font-bold text-emerald-600">{currentRegion.endemicSpeciesCount}</div>
                       </div>
                       <div>
                         <span className="font-medium text-gray-700">Total Species:</span>
@@ -1005,7 +820,7 @@ export function InteractiveEndemicBirdsExplorer() {
                     </div>
                     <h4 className="font-medium text-gray-900 text-sm mb-1">{region.name}</h4>
                     <div className="text-xs text-gray-600">
-                      <div className="font-medium text-emerald-600">{region.speciesCount} endemic</div>
+                      <div className="font-medium text-emerald-600">{region.endemicSpeciesCount} endemic</div>
                       <div>{region.totalSpecies} total species</div>
                     </div>
                   </button>
@@ -1016,141 +831,167 @@ export function InteractiveEndemicBirdsExplorer() {
         </CardContent>
       </Card>
 
-      {/* Search and Species List */}
-      {(selectedRegion || searchTerm) && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Search className="w-5 h-5 text-emerald-600" />
-              Endemic Species
-              {currentRegion && ` in ${currentRegion.name}`}
-            </CardTitle>
-            <CardDescription>
-              {filteredSpecies.length > 0
-                ? `Showing ${filteredSpecies.length} endemic species`
-                : selectedRegion && currentRegion?.speciesCount === 0
-                  ? "No endemic species data currently available for this region"
-                  : "No species found matching your criteria"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+      {/* Search and Filter Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Search className="w-5 h-5 text-emerald-600" />
+            Explore Colombian Birds
+            {currentRegion && ` in ${currentRegion.name}`}
+          </CardTitle>
+          <CardDescription>
+            {filteredSpecies.length > 0
+              ? `Showing ${filteredSpecies.length} species`
+              : "No species found matching your criteria"}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {/* Search and Filter Controls */}
+          <div className="space-y-4 mb-6">
             {/* Search Bar */}
-            <div className="mb-6">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <Input
-                  placeholder="Search species by name..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                placeholder="Search by common name, scientific name, or Spanish name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
             </div>
 
-            {/* Species Grid or No Data Message */}
-            {filteredSpecies.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredSpecies.map((species) => (
-                  <Card
-                    key={species.ebirdCode}
-                    className="cursor-pointer hover:shadow-lg transition-shadow group"
-                    onClick={() => handleSpeciesClick(species)}
-                  >
-                    <div className="relative overflow-hidden rounded-t-lg">
-                      <img
-                        src={species.imageUrl || "/placeholder.svg"}
-                        alt={species.commonName}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-2 right-2">
-                        <Badge
-                          variant="secondary"
-                          className={`${
-                            species.conservationStatus === "Critically Endangered"
-                              ? "bg-red-100 text-red-800"
-                              : species.conservationStatus === "Endangered"
-                                ? "bg-orange-100 text-orange-800"
-                                : species.conservationStatus === "Vulnerable"
-                                  ? "bg-yellow-100 text-yellow-800"
-                                  : "bg-blue-100 text-blue-800"
-                          }`}
-                        >
-                          {species.conservationStatus}
-                        </Badge>
+            {/* Filter Controls */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Filter className="w-4 h-4" />
+                  Filter by Category
+                </label>
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                >
+                  <option value="all">All Categories</option>
+                  <option value="endemic">Endemic Species</option>
+                  <option value="Spectacular">Spectacular Species</option>
+                  <option value="Common Favorites">Common Favorites</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Quick Stats</label>
+                <div className="text-sm text-gray-600">
+                  <div>Total: {totalSpecies} species</div>
+                  <div>Endemic: {endemicCount} species</div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Quick Actions</label>
+                <Button onClick={resetSelection} variant="outline" className="w-full bg-transparent">
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Reset All Filters
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Species Grid or No Data Message */}
+          {filteredSpecies.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredSpecies.map((species) => (
+                <Card
+                  key={species.ebirdCode}
+                  className="cursor-pointer hover:shadow-lg transition-shadow group"
+                  onClick={() => handleSpeciesClick(species)}
+                >
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <img
+                      src={species.imageUrl || "/placeholder.svg"}
+                      alt={species.commonName}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-2 right-2 flex gap-2">
+                      <Badge
+                        className={
+                          species.isEndemic
+                            ? "bg-emerald-100 text-emerald-800"
+                            : species.category === "Spectacular"
+                              ? "bg-purple-100 text-purple-800"
+                              : "bg-blue-100 text-blue-800"
+                        }
+                      >
+                        {species.category}
+                      </Badge>
+                    </div>
+                    <div className="absolute top-2 left-2">
+                      <Badge
+                        variant="secondary"
+                        className={`${
+                          species.conservationStatus === "Critically Endangered"
+                            ? "bg-red-100 text-red-800"
+                            : species.conservationStatus === "Endangered"
+                              ? "bg-orange-100 text-orange-800"
+                              : species.conservationStatus === "Vulnerable"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : "bg-green-100 text-green-800"
+                        }`}
+                      >
+                        {species.conservationStatus}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors">
+                      {species.commonName}
+                    </h3>
+                    <p className="text-sm italic text-gray-600 mb-2">{species.scientificName}</p>
+                    <p className="text-sm text-gray-500 mb-3">{species.spanishName}</p>
+                    <div className="space-y-2 text-xs text-gray-600">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        <span>{species.elevation}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        <span>{species.bestTime}</span>
                       </div>
                     </div>
-                    <CardContent className="p-4">
-                      <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors">
-                        {species.commonName}
-                      </h3>
-                      <p className="text-sm italic text-gray-600 mb-2">{species.scientificName}</p>
-                      <p className="text-sm text-gray-500 mb-3">{species.spanishName}</p>
-                      <div className="space-y-2 text-xs text-gray-600">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          <span>{species.elevation}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          <span>{species.bestTime}</span>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-700 mt-3 line-clamp-2">{species.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+                    <p className="text-sm text-gray-700 mt-3 line-clamp-2">{species.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Bird className="w-8 h-8 text-gray-400" />
               </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  {selectedRegion && currentRegion?.speciesCount === 0 ? (
-                    <Info className="w-8 h-8 text-gray-400" />
-                  ) : (
-                    <Bird className="w-8 h-8 text-gray-400" />
-                  )}
-                </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  {selectedRegion && currentRegion?.speciesCount === 0
-                    ? "No Endemic Species Data Available"
-                    : searchTerm
-                      ? "No Species Found"
-                      : "No Endemic Species"}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {selectedRegion && currentRegion?.speciesCount === 0
-                    ? `Endemic species data for ${currentRegion.name} is currently being compiled. This region may have endemic species that haven't been fully documented yet.`
-                    : searchTerm
-                      ? "No species found matching your search criteria. Try adjusting your search terms."
-                      : "Select a region to explore its endemic bird species."}
-                </p>
-                {searchTerm && (
-                  <Button variant="outline" onClick={() => setSearchTerm("")}>
-                    <RotateCcw className="w-4 h-4 mr-2" />
-                    Clear Search
-                  </Button>
-                )}
-                {selectedRegion && currentRegion?.speciesCount === 0 && (
-                  <div className="mt-4 p-4 bg-blue-50 rounded-lg text-sm text-blue-800">
-                    <p className="font-medium mb-2">Want to help with research?</p>
-                    <p>
-                      If you have information about endemic species in this region, please contact our research team.
-                      Citizen science contributions are valuable for conservation efforts.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No Species Found</h3>
+              <p className="text-gray-600 mb-4">
+                {searchTerm || categoryFilter !== "all" || selectedRegion
+                  ? "No species found matching your search criteria. Try adjusting your filters."
+                  : "Start exploring by selecting a region or searching for specific species."}
+              </p>
+              {(searchTerm || categoryFilter !== "all" || selectedRegion) && (
+                <Button variant="outline" onClick={resetSelection}>
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Clear All Filters
+                </Button>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Call to Action */}
       <Card className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white">
         <CardContent className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to Experience Colombia's Endemic Birds?</h2>
+          <h2 className="text-2xl font-bold mb-4">Ready to Experience Colombia's Incredible Birds?</h2>
           <p className="text-lg opacity-90 mb-6 max-w-3xl mx-auto">
-            Join our expert-guided tours to witness these incredible species in their natural habitats. From the cloud
-            forests of the Andes to the rainforests of the Chocó, discover the birds found nowhere else on Earth.
+            Join our expert-guided tours to witness these incredible species in their natural habitats. From endemic
+            species to spectacular residents, discover the birds that make Colombia the world's premier birding
+            destination.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="text-center">
@@ -1177,8 +1018,8 @@ export function InteractiveEndemicBirdsExplorer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-50">
-              <Camera className="w-5 h-5 mr-2" />
-              Plan Your Endemic Species Tour
+              <ShoppingBag className="w-5 h-5 mr-2" />
+              Book Your Birding Adventure
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 bg-transparent">
               <ExternalLink className="w-5 h-5 mr-2" />
@@ -1189,7 +1030,12 @@ export function InteractiveEndemicBirdsExplorer() {
       </Card>
 
       {/* Species Modal */}
-      <SpeciesModal species={selectedSpecies} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <SpeciesModal
+        species={selectedSpecies}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onBookTour={handleBookTour}
+      />
     </div>
   )
 }
