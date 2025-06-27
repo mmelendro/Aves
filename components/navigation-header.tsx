@@ -119,7 +119,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </div>
           </div>
 
-          {/* Resources Dropdown - Enhanced */}
+          {/* Resources Dropdown - Enhanced Mega Menu */}
           <div className="relative group">
             <Link
               href="/resources"
@@ -136,37 +136,70 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               Resources
               <ChevronDown className="w-4 h-4 ml-1" />
             </Link>
-            <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <Link
-                href="/avifauna-explorer"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors border-b"
-              >
-                🦅 Colombian Avifauna Explorer
-              </Link>
-              <Link
-                href="/bioregions"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                🗺️ Bioregions Map
-              </Link>
-              <Link
-                href="/blog"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                📝 Blog & Stories
-              </Link>
-              <Link
-                href="/resources"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                📚 Birding Resources
-              </Link>
-              <Link
-                href="/travel-tips"
-                className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-              >
-                ✈️ Travel Tips
-              </Link>
+            <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="p-2">
+                <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100 mb-2">
+                  Explore & Plan
+                </div>
+                <Link
+                  href="/avifauna-explorer"
+                  className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
+                >
+                  <span className="text-lg mr-3">🦅</span>
+                  <div>
+                    <div className="font-medium">Avifauna Explorer</div>
+                    <div className="text-xs text-gray-500">1,900+ Colombian bird species</div>
+                  </div>
+                </Link>
+                <Link
+                  href="/bioregions"
+                  className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
+                >
+                  <span className="text-lg mr-3">🗺️</span>
+                  <div>
+                    <div className="font-medium">Interactive Bioregions</div>
+                    <div className="text-xs text-gray-500">Explore Colombia's ecosystems</div>
+                  </div>
+                </Link>
+
+                <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100 mb-2 mt-3">
+                  Learn & Prepare
+                </div>
+                <Link
+                  href="/resources"
+                  className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
+                >
+                  <span className="text-lg mr-3">📚</span>
+                  <div>
+                    <div className="font-medium">Expert Resources Hub</div>
+                    <div className="text-xs text-gray-500">Podcasts, guides & preparation</div>
+                  </div>
+                </Link>
+                <Link
+                  href="/travel-tips"
+                  className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
+                >
+                  <span className="text-lg mr-3">✈️</span>
+                  <div>
+                    <div className="font-medium">Travel Essentials</div>
+                    <div className="text-xs text-gray-500">Practical travel advice</div>
+                  </div>
+                </Link>
+
+                <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100 mb-2 mt-3">
+                  Stories & Insights
+                </div>
+                <Link
+                  href="/blog"
+                  className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
+                >
+                  <span className="text-lg mr-3">📝</span>
+                  <div>
+                    <div className="font-medium">Blog & Expeditions</div>
+                    <div className="text-xs text-gray-500">Field stories & discoveries</div>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -316,43 +349,52 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg touch-manipulation"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Resources
+                  Resources Hub
                 </Link>
                 <div className="pl-4 space-y-3 mt-3">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1">Explore & Plan</div>
                   <Link
                     href="/avifauna-explorer"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🦅 Colombian Avifauna Explorer
+                    🦅 Avifauna Explorer
                   </Link>
                   <Link
                     href="/bioregions"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🗺️ Bioregions Map
+                    🗺️ Interactive Bioregions
                   </Link>
-                  <Link
-                    href="/blog"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    📝 Blog & Stories
-                  </Link>
+
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1 mt-4">
+                    Learn & Prepare
+                  </div>
                   <Link
                     href="/resources"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    📚 Birding Resources
+                    📚 Expert Resources Hub
                   </Link>
                   <Link
                     href="/travel-tips"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    ✈️ Travel Tips
+                    ✈️ Travel Essentials
+                  </Link>
+
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1 mt-4">
+                    Stories & Insights
+                  </div>
+                  <Link
+                    href="/blog"
+                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📝 Blog & Expeditions
                   </Link>
                 </div>
               </div>

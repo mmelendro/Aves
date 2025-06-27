@@ -24,6 +24,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
+import { Footer } from "@/components/footer"
 
 const tourTypes = {
   adventure: {
@@ -53,16 +54,16 @@ const tourTypes = {
 }
 
 const bioregions = [
-  { id: "western-andes", name: "Quetzal Highlands", subtitle: "Western Andes", suggestedDays: 8 },
-  { id: "central-andes", name: "Hummingbird Haven", subtitle: "Central Andes", suggestedDays: 8 },
-  { id: "eastern-andes", name: "Páramo Paradise", subtitle: "Eastern Andes", suggestedDays: 8 },
-  { id: "llanos", name: "Wetland Wonders", subtitle: "Llanos", suggestedDays: 8 },
-  { id: "amazon", name: "Canopy Kingdom", subtitle: "Amazon", suggestedDays: 8 },
-  { id: "choco", name: "Endemic Empire", subtitle: "Biogeographic Chocó", suggestedDays: 8 },
-  { id: "caribbean", name: "Coastal Crown", subtitle: "Caribbean + Sierra Nevada", suggestedDays: 8 },
-  { id: "cauca-valley", name: "Valley Voyager", subtitle: "Cauca Valley", suggestedDays: 8 },
-  { id: "magdalena-valley", name: "River Realm", subtitle: "Magdalena Valley", suggestedDays: 8 },
-  { id: "macizo", name: "Massif Majesty", subtitle: "Macizo Colombiano", suggestedDays: 8 },
+  { id: "western-andes", name: "⛰️ Western Andes", subtitle: "Quetzal Highlands", suggestedDays: 8 },
+  { id: "central-andes", name: "🗻 Central Andes", subtitle: "Hummingbird Haven", suggestedDays: 8 },
+  { id: "eastern-andes", name: "🏔️ Eastern Andes", subtitle: "Páramo Paradise", suggestedDays: 8 },
+  { id: "llanos", name: "🌾 Eastern Plains", subtitle: "Wetland Wonders", suggestedDays: 8 },
+  { id: "amazon", name: "🌳 Amazon Rainforest", subtitle: "Canopy Kingdom", suggestedDays: 8 },
+  { id: "choco", name: "🌊 Pacific Coast Chocó", subtitle: "Endemic Empire", suggestedDays: 8 },
+  { id: "caribbean", name: "🏖️ Caribbean Coast", subtitle: "Coastal Crown + Sierra Nevada", suggestedDays: 8 },
+  { id: "cauca-valley", name: "🏞️ Cauca Valley", subtitle: "Valley Voyager", suggestedDays: 8 },
+  { id: "magdalena-valley", name: "🌄 Magdalena Valley", subtitle: "River Realm", suggestedDays: 8 },
+  { id: "macizo", name: "🌋 Colombian Massif", subtitle: "Massif Majesty", suggestedDays: 8 },
 ]
 
 interface TourSelection {
@@ -365,7 +366,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                           onClick={() => {
                             const newCount = Math.max(1, tour.participants - 1)
                             tourSelections.forEach((t) => updateTourSelection(t.id, "participants", newCount))
@@ -380,7 +381,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                           onClick={() => {
                             const newCount = Math.min(4, tour.participants + 1)
                             tourSelections.forEach((t) => updateTourSelection(t.id, "participants", newCount))
@@ -404,7 +405,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                           onClick={() => updateTourSelection(tour.id, "totalDays", Math.max(3, tour.totalDays - 1))}
                           disabled={tour.totalDays <= 3}
                         >
@@ -416,7 +417,7 @@ Looking forward to hearing from you!
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                          className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                           onClick={() => updateTourSelection(tour.id, "totalDays", Math.min(14, tour.totalDays + 1))}
                           disabled={tour.totalDays >= 14}
                         >
@@ -442,7 +443,7 @@ Looking forward to hearing from you!
                           <Button
                             variant="outline"
                             size="sm"
-                            className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                            className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                             onClick={() => updateTourSelection(tour.id, "breakDays", Math.max(0, tour.breakDays - 1))}
                             disabled={tour.breakDays <= 0}
                           >
@@ -454,7 +455,7 @@ Looking forward to hearing from you!
                           <Button
                             variant="outline"
                             size="sm"
-                            className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                            className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                             onClick={() => updateTourSelection(tour.id, "breakDays", Math.min(5, tour.breakDays + 1))}
                             disabled={tour.breakDays >= 5}
                           >
@@ -647,7 +648,7 @@ Looking forward to hearing from you!
                         variant="outline"
                         size="sm"
                         onClick={saveBooking}
-                        className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                        className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                       >
                         <Save className="w-4 h-4" />
                         {savedBooking ? "Saved!" : "Save"}
@@ -656,7 +657,7 @@ Looking forward to hearing from you!
                         variant="outline"
                         size="sm"
                         onClick={emailBooking}
-                        className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                        className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                       >
                         <Mail className="w-4 h-4" />
                         Email
@@ -665,7 +666,7 @@ Looking forward to hearing from you!
                         variant="outline"
                         size="sm"
                         onClick={shareBooking}
-                        className="border-gray-300 text-gray-900 hover:bg-gray-50"
+                        className="border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
                       >
                         <Share2 className="w-4 h-4" />
                         Share
@@ -690,96 +691,7 @@ Looking forward to hearing from you!
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 mt-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">AVES Colombia</h3>
-              <p className="text-gray-400 text-sm">
-                Authentic bird watching and eco-tourism experiences across Colombia's diverse ecosystems.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Tours</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <Link href="/tours/adventure" className="hover:text-white transition-colors">
-                    AVES Adventure
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/vision" className="hover:text-white transition-colors">
-                    AVES Vision
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/elevate" className="hover:text-white transition-colors">
-                    AVES Elevate
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tours/souls" className="hover:text-white transition-colors">
-                    AVES Souls
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <Link href="/about" className="hover:text-white transition-colors">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/team" className="hover:text-white transition-colors">
-                    Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about/partners" className="hover:text-white transition-colors">
-                    Our Partners
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about/b-corp" className="hover:text-white transition-colors">
-                    B Corp Journey
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/cookies" className="hover:text-white transition-colors">
-                    Cookie Policy
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 AVES Colombia. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
