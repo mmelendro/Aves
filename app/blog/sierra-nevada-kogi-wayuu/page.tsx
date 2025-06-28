@@ -1,10 +1,65 @@
+"use client"
+
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Calendar, User, MapPin, Camera, Heart, ArrowRight } from "lucide-react"
+import { ArrowLeft, Calendar, User, MapPin, Camera, Heart, ArrowRight, Play, Pause } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import { useState, useRef } from "react"
+
+function VideoPlayer({ src, poster }: { src: string; poster: string }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [showControls, setShowControls] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  return (
+    <div
+      className="relative group cursor-pointer"
+      onMouseEnter={() => setShowControls(true)}
+      onMouseLeave={() => setShowControls(false)}
+      onClick={togglePlay}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        className="w-full h-full object-cover rounded-lg"
+        loop
+        muted
+        playsInline
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+
+      {/* Play/Pause Overlay */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg transition-opacity duration-300 ${showControls || !isPlaying ? "opacity-100" : "opacity-0"}`}
+      >
+        <div className="bg-white/90 rounded-full p-3 shadow-lg">
+          {isPlaying ? <Pause className="w-6 h-6 text-gray-800" /> : <Play className="w-6 h-6 text-gray-800 ml-1" />}
+        </div>
+      </div>
+
+      {/* Video Label */}
+      <div className="absolute bottom-4 left-4 bg-black/70 text-white p-2 rounded-lg">
+        <p className="text-xs font-medium">El Dorado Reserve Cloud Forest</p>
+      </div>
+    </div>
+  )
+}
 
 export default function SierraNevadaKogiWayuuPost() {
   return (
@@ -29,7 +84,7 @@ export default function SierraNevadaKogiWayuuPost() {
         </div>
       </div>
 
-      {/* Article Header */}
+      {/* Article Header with Video Background */}
       <article className="max-w-4xl mx-auto px-4 py-8">
         <Link href="/blog" className="inline-flex items-center text-emerald-600 hover:text-emerald-700 mb-8">
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -61,7 +116,7 @@ export default function SierraNevadaKogiWayuuPost() {
           </div>
         </div>
 
-        {/* Hero Image */}
+        {/* Hero Image with Enhanced Cardinal Positioning */}
         <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
           <Image
             src="/images/cardinal-guajiro.jpg"
@@ -69,7 +124,8 @@ export default function SierraNevadaKogiWayuuPost() {
             width={1200}
             height={675}
             className="object-cover w-full h-full"
-            style={{ objectPosition: "center" }}
+            style={{ objectPosition: "center 30%" }}
+            priority
           />
           <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
             <p className="text-sm font-medium">Vermilion Cardinal (Cardinalis phoeniceus)</p>
@@ -125,13 +181,33 @@ export default function SierraNevadaKogiWayuuPost() {
 
           <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Day 1-3: El Dorado Cloud Forest Immersion</h2>
 
+          {/* El Dorado Video Section */}
+          <div className="my-12">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="mb-6">
+                  Our expedition began with three full days in the misty cloud forests of El Dorado Reserve, where
+                  David's intimate knowledge of the endemic species proved invaluable. The extended stay allowed us to
+                  explore different trail systems at various times of day, maximizing our chances with the region's most
+                  elusive endemics.
+                </p>
+                <p className="mb-6">
+                  The cloud forest ecosystem of El Dorado represents one of the most biodiverse habitats on Earth. As we
+                  walked through the perpetually mist-shrouded trails, the forest seemed to come alive with the calls of
+                  endemic species found nowhere else on the planet.
+                </p>
+              </div>
+              <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+                <VideoPlayer src="/videos/el-dorado-reserve.mp4" poster="/images/emerald-toucanet.jpg" />
+              </div>
+            </div>
+          </div>
+
           <p className="mb-6">
-            Our expedition began with three full days in the misty cloud forests of El Dorado Reserve, where David's
-            intimate knowledge of the endemic species proved invaluable. The extended stay allowed us to explore
-            different trail systems at various times of day, maximizing our chances with the region's most elusive
-            endemics. Day one focused on the main trails and common species, day two took us to remote areas for
-            specialized endemics, and day three provided flexibility for return visits to promising locations and
-            photography opportunities.
+            Day one focused on the main trails and common species, day two took us to remote areas for specialized
+            endemics, and day three provided flexibility for return visits to promising locations and photography
+            opportunities. The mystical atmosphere of the cloud forest, captured in the video above, gives just a
+            glimpse of the magical environment where we spent our first three days.
           </p>
 
           <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Day 4-5: Minca Transitional Zone Deep Dive</h2>
@@ -187,6 +263,41 @@ export default function SierraNevadaKogiWayuuPost() {
             connection to the land.
           </p>
 
+          {/* Enhanced Cardinal Section with Better Image Positioning */}
+          <div className="grid md:grid-cols-2 gap-8 my-12">
+            <div>
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/images/cardinal-guajiro.jpg"
+                  alt="Close-up of Vermilion Cardinal (Cardinalis phoeniceus) showing detailed facial features and brilliant red plumage"
+                  width={500}
+                  height={375}
+                  className="object-cover w-full h-full"
+                  style={{ objectPosition: "center 25%" }}
+                />
+                <div className="absolute bottom-3 left-3 bg-black/70 text-white p-2 rounded-lg">
+                  <p className="text-xs font-medium">Cardinal Guajiro - Endemic Beauty</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="mb-4">
+                The Vermilion Cardinal, known locally as Cardinal Guajiro, represents one of Colombia's most striking
+                endemic species. Found only in the dry forests and scrublands of the Caribbean coast, this brilliant red
+                bird has become a symbol of the region's unique biodiversity.
+              </p>
+              <p className="mb-4">
+                Our search began in the early morning hours when the cardinals are most active. Yeferson led us through
+                a network of trails known only to local communities, paths that wind through thorny scrub and
+                cacti-dotted landscapes that most tourists never see.
+              </p>
+              <p>
+                The moment we spotted this magnificent bird, with its brilliant crimson plumage and distinctive facial
+                features clearly visible in perfect morning light, we knew we had witnessed something truly special.
+              </p>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-8 my-8">
             <div>
               <Image
@@ -200,24 +311,13 @@ export default function SierraNevadaKogiWayuuPost() {
             </div>
             <div className="flex flex-col justify-center">
               <p className="mb-4">
-                The Vermilion Cardinal, known locally as Cardinal Guajiro, represents one of Colombia's most striking
-                endemic species. Found only in the dry forests and scrublands of the Caribbean coast, this brilliant red
-                bird has become a symbol of the region's unique biodiversity.
-              </p>
-              <p>
-                Our search began in the early morning hours when the cardinals are most active. Dagoberto led us through
-                a network of trails known only to local communities, paths that wind through thorny scrub and
-                cacti-dotted landscapes that most tourists never see.
+                The moment came just as the sun crested the mountains. A flash of brilliant red caught our
+                attention—there, perched on a flowering <em>Guaiacum officinale</em> tree, was a male Cardinal Guajiro
+                in perfect morning light. The bird's crimson plumage seemed to glow against the pale yellow flowers,
+                creating a scene that epitomized the magic of Colombian birding.
               </p>
             </div>
           </div>
-
-          <p className="mb-6">
-            The moment came just as the sun crested the mountains. A flash of brilliant red caught our attention—there,
-            perched on a flowering <em>Guaiacum officinale</em> tree, was a male Cardinal Guajiro in perfect morning
-            light. The bird's crimson plumage seemed to glow against the pale yellow flowers, creating a scene that
-            epitomized the magic of Colombian birding.
-          </p>
 
           <div className="bg-gray-50 p-6 rounded-lg my-8">
             <div className="flex items-start">
@@ -570,7 +670,7 @@ export default function SierraNevadaKogiWayuuPost() {
               Experience the magic of the Sierra Nevada with indigenous guides and discover endemic species found
               nowhere else on Earth.
             </p>
-            <Link href="/shopping?region=caribbean">
+            <Link href="/shopping?preset=adventure&region=caribbean&from=blog">
               <Button className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors inline-flex items-center gap-2">
                 Explore Our Sierra Nevada Tours
                 <ArrowRight className="w-4 h-4" />
@@ -586,7 +686,7 @@ export default function SierraNevadaKogiWayuuPost() {
               <p className="text-emerald-800">Our signature itinerary as described in this article</p>
             </Link>
             <Link
-              href="/tours/adventure"
+              href="/shopping?preset=adventure&region=caribbean"
               className="block p-6 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors"
             >
               <h4 className="font-bold text-emerald-900 mb-2">AVES Adventure Tours</h4>

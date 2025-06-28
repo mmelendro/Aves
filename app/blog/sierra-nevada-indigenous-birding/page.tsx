@@ -29,7 +29,126 @@ export default function SierraNevadaBlogPost() {
         </div>
       </div>
 
-      {/* Article Header */}
+      {/* Video Background Title Section */}
+      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Video */}
+        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+          <source src="/videos/el-dorado-reserve.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        {/* Content Overlay */}
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <Link href="/blog" className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-colors">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Blog
+          </Link>
+
+          <Badge className="bg-emerald-600/80 text-white mb-6 backdrop-blur-sm">Indigenous Partnerships</Badge>
+
+          <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight drop-shadow-2xl">Guardians of the Sky</h1>
+
+          <p className="text-xl lg:text-2xl mb-8 text-white/90 drop-shadow-lg max-w-3xl mx-auto">
+            Birding with the Kogi and Wayuu in Sierra Nevada de Santa Marta
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 mb-8">
+            <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
+              <User className="w-4 h-4 mr-2" />
+              <Link href="/team#martin-melendro" className="hover:text-white transition-colors">
+                Martin Melendro
+              </Link>
+            </div>
+            <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
+              <Calendar className="w-4 h-4 mr-2" />
+              December 15, 2024
+            </div>
+            <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
+              <MapPin className="w-4 h-4 mr-2" />
+              Sierra Nevada de Santa Marta
+            </div>
+            <span className="backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">8 min read</span>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce">
+          <div className="flex flex-col items-center">
+            <span className="text-sm mb-2">Scroll to explore</span>
+            <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Enhanced Cardinal Feature Section */}
+      <div className="relative py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/cardinal-guajiro.jpg"
+                  alt="Vermilion Cardinal (Cardinalis phoeniceus) - the endemic Cardinal Guajiro showing its distinctive bright red plumage and alert facial features in Sierra Nevada de Santa Marta"
+                  width={800}
+                  height={600}
+                  className="object-cover w-full h-full"
+                  style={{ objectPosition: "center 30%" }}
+                  priority
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg border">
+                <p className="text-sm font-semibold text-gray-900">Vermilion Cardinal</p>
+                <p className="text-xs text-gray-600 italic">Cardinalis phoeniceus</p>
+                <p className="text-xs text-emerald-600 font-medium">Endemic to Colombia</p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="inline-flex items-center bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                <Heart className="w-4 h-4 mr-2" />
+                Star Species
+              </div>
+
+              <h2 className="text-4xl font-bold text-gray-900">The Cardinal Guajiro</h2>
+
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Our journey's ultimate prize: the Vermilion Cardinal, known locally as Cardinal Guajiro. This brilliant
+                red bird represents one of Colombia's most striking endemic species, found only in the dry forests and
+                scrublands of the Caribbean coast.
+              </p>
+
+              <div className="space-y-3">
+                <div className="flex items-center text-gray-600">
+                  <MapPin className="w-5 h-5 mr-3 text-red-500" />
+                  <span>Endemic to northern Colombia's Caribbean coast</span>
+                </div>
+                <div className="flex items-center text-gray-600">
+                  <Camera className="w-5 h-5 mr-3 text-red-500" />
+                  <span>Best photographed in early morning golden light</span>
+                </div>
+                <div className="flex items-center text-gray-600">
+                  <User className="w-5 h-5 mr-3 text-red-500" />
+                  <span>Guided by Wayuu expert Yeferson Guale Epiayu</span>
+                </div>
+              </div>
+
+              <Link
+                href="/shopping?preset=sierra-nevada&tour=adventure&region=caribbean"
+                className="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium"
+              >
+                Experience This Journey
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Article Content */}
       <article className="max-w-4xl mx-auto px-4 py-8">
         <Link href="/blog" className="inline-flex items-center text-emerald-600 hover:text-emerald-700 mb-8">
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -58,25 +177,6 @@ export default function SierraNevadaBlogPost() {
               Sierra Nevada de Santa Marta
             </div>
             <span>8 min read</span>
-          </div>
-        </div>
-
-        {/* Hero Image */}
-        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-          <Image
-            src="/images/cardinal-guajiro.jpg"
-            alt="Vermilion Cardinal (Cardinalis phoeniceus) - the endemic Cardinal Guajiro in its natural habitat in Sierra Nevada de Santa Marta"
-            width={1200}
-            height={675}
-            className="object-cover w-full h-full"
-            style={{ objectPosition: "center" }}
-          />
-          <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-            <p className="text-sm font-medium">Vermilion Cardinal (Cardinalis phoeniceus)</p>
-            <p className="text-xs opacity-90">Endemic to Colombia's Caribbean coast</p>
-          </div>
-          <div className="absolute bottom-4 right-4 bg-black/70 text-white p-2 rounded-lg">
-            <p className="text-xs opacity-90">Photo: Royann Petrell</p>
           </div>
         </div>
 
@@ -133,6 +233,19 @@ export default function SierraNevadaBlogPost() {
             specialized endemics, and day three provided flexibility for return visits to promising locations and
             photography opportunities.
           </p>
+
+          <div className="bg-emerald-50 border-l-4 border-emerald-500 p-6 my-8 rounded-r-lg">
+            <div className="flex items-start">
+              <Camera className="w-6 h-6 text-emerald-600 mr-3 mt-1 flex-shrink-0" />
+              <div>
+                <h3 className="font-bold text-emerald-900 mb-2">Cloud Forest Immersion</h3>
+                <p className="text-emerald-800">
+                  The ethereal beauty of El Dorado's cloud forest at dawn creates perfect conditions for endemic species
+                  activity, when the mist provides ideal cover for our most elusive targets.
+                </p>
+              </div>
+            </div>
+          </div>
 
           <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Day 4-5: Minca Transitional Zone Deep Dive</h2>
 
@@ -490,9 +603,7 @@ export default function SierraNevadaBlogPost() {
                 </span>
                 <div>
                   <h4 className="font-bold">Tayrona & Kogi Cultural Exchange</h4>
-                  <p className="text-gray-600">
-                    Inland valleys, higher elevations, and meaningful cultural exchange with the Kogi people
-                  </p>
+                  <p className="text-gray-600">Inland valleys, higher elevations, and meaningful cultural exchange</p>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
   "assetLibrary": {
     "version": "1.1.0",
     "lastUpdated": "2024-12-24T20:30:00Z",
-    "totalAssets": 68,
+    "totalAssets": 72,
     "categories": {
       "birdImages": {
         "categoryId": "bird-images",
@@ -677,6 +677,45 @@
               "scientificName": "Setophaga petechia",
               "family": "Parulidae"
             }
+          },
+          {
+            "id": "bird-042",
+            "fileName": "yellow-throated-toucan-blog.jpg",
+            "fileType": "image",
+            "path": "/images/yellow-throated-toucan-blog.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Yellow-throated Toucan for blog post header",
+            "tags": ["toucan", "blog", "choco"]
+          },
+          {
+            "id": "bird-043",
+            "fileName": "cardinal-guajiro.jpg",
+            "fileType": "image",
+            "path": "/images/cardinal-guajiro.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Vermilion Cardinal (Cardinalis phoeniceus) endemic to Colombia's Caribbean coast",
+            "tags": ["cardinal", "endemic", "caribbean", "sierra-nevada"]
+          },
+          {
+            "id": "bird-044",
+            "fileName": "rainbow-bearded-thornbill-vision.jpg",
+            "fileType": "image",
+            "path": "/images/rainbow-bearded-thornbill-vision.jpg",
+            "category": "birdImages",
+            "dimensions": {
+              "width": 1920,
+              "height": 1280
+            },
+            "altText": "Rainbow-bearded Thornbill for vision tours and photography content",
+            "tags": ["hummingbird", "endemic", "paramo", "vision"]
           }
         ]
       },
@@ -684,7 +723,7 @@
         "categoryId": "bird-audio",
         "name": "Bird Audio Recordings",
         "description": "High-quality audio recordings of bird calls and songs from Colombian expeditions",
-        "totalAssets": 1,
+        "totalAssets": 2,
         "assets": [
           {
             "id": "audio-001",
@@ -709,6 +748,22 @@
               "format": "MP3",
               "sampleRate": "44.1kHz",
               "bitRate": "320kbps"
+            }
+          },
+          {
+            "id": "audio-002",
+            "fileName": "yellow-throated-toucan.mp3",
+            "fileType": "audio",
+            "path": "/audio/yellow-throated-toucan.mp3",
+            "category": "birdAudio",
+            "duration": "0:15",
+            "fileSize": "0.5MB",
+            "altText": "Authentic call of the Yellow-throated Toucan recorded in Colombian cloud forests",
+            "tags": ["toucan", "call", "audio", "choco"],
+            "species": {
+              "commonName": "Yellow-throated Toucan",
+              "scientificName": "Ramphastos ambiguus",
+              "family": "Ramphastidae"
             }
           }
         ]
@@ -1135,6 +1190,32 @@
             },
             "altText": "Logo placeholder graphic",
             "tags": ["placeholder", "logo", "svg"]
+          }
+        ]
+      },
+      "videos": {
+        "categoryId": "videos",
+        "name": "Video Footage",
+        "description": "Aerial and landscape footage from AVES tours",
+        "totalAssets": 2,
+        "assets": [
+          {
+            "id": "sierra-nevada-tayrona",
+            "name": "Sierra Nevada Tayrona",
+            "path": "/videos/sierra-nevada-tayrona.mp4",
+            "description": "Aerial footage of Sierra Nevada de Santa Marta and Tayrona National Park",
+            "duration": "2:30",
+            "resolution": "1920x1080",
+            "tags": ["sierra-nevada", "tayrona", "aerial", "landscape"]
+          },
+          {
+            "id": "el-dorado-reserve",
+            "name": "El Dorado Reserve",
+            "path": "/videos/el-dorado-reserve.mp4",
+            "description": "Cloud forest footage from El Dorado Reserve in Sierra Nevada de Santa Marta",
+            "duration": "1:45",
+            "resolution": "1920x1080",
+            "tags": ["el-dorado", "cloud-forest", "sierra-nevada", "endemic-birds", "conservation"]
           }
         ]
       }
