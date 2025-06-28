@@ -239,6 +239,44 @@ const getMinimumBookingDate = (): Date => {
   return oneMonthFromNow
 }
 
+const REST_DAY_ACTIVITIES = {
+  "Culinary Experiences": [
+    "Gourmet coffee plantation tours",
+    "Traditional Colombian cooking classes",
+    "Local market food tours",
+    "Wine tasting experiences",
+    "Farm-to-table dining experiences",
+  ],
+  "Wellness & Relaxation": [
+    "Spa treatments and massages",
+    "Thermal hot springs visits",
+    "Yoga and meditation sessions",
+    "Nature wellness retreats",
+    "Aromatherapy experiences",
+  ],
+  "Cultural Immersion": [
+    "Indigenous community visits",
+    "Traditional craft workshops",
+    "Local music and dance experiences",
+    "Historical site explorations",
+    "Art gallery and museum tours",
+  ],
+  "Adventure Activities": [
+    "Hiking and nature walks",
+    "River rafting experiences",
+    "Horseback riding tours",
+    "Photography workshops",
+    "Botanical garden visits",
+  ],
+  "Shopping & Local Markets": [
+    "Artisan craft shopping",
+    "Local textile and fabric tours",
+    "Emerald and jewelry shopping",
+    "Traditional market experiences",
+    "Souvenir and gift shopping",
+  ],
+}
+
 interface TourSelection {
   id: string
   tourType: string
@@ -274,6 +312,16 @@ export default function ShoppingPage() {
     region?: string
     fromPage?: string
   }>({})
+  const [restDayOptions, setRestDayOptions] = useState<
+    Record<
+      string,
+      {
+        type: "independent" | "guided" | "none"
+        activities: string[]
+        customRequests: string
+      }
+    >
+  >({})
 
   // Initialize tour selections based on URL parameters
   useEffect(() => {
@@ -398,6 +446,34 @@ export default function ShoppingPage() {
     [tourSelections],
   )
 
+  // Get the highest tour price per day from all selected tours
+  const getHighestTourPrice = useCallback(() => {
+    const basePrices = {
+      "🍃 Adventure Tours": 1000,
+      "🪶 Vision Tours": 1400,
+      "🌼 Elevate Tours": 1200,
+      "🍓 Souls Tours": 1600,
+      "Custom Itinerary": 1100,
+      "Not sure yet": 1000,
+    }
+
+    return Math.max(...tourSelections.map((tour) => basePrices[tour.tourType as keyof typeof basePrices] || 1000))
+  }, [tourSelections])
+
+  const calculateRestDayCost = useCallback(
+    (tourId: string, restDays: number, option: string) => {
+      if (option === "independent") return 0 // Independent rest days are FREE
+
+      // Guided rest day activities cost the same as the highest tour price per day
+      const tour = tourSelections.find((t) => t.id === tourId)
+      if (!tour || option !== "guided") return 0
+
+      const highestTourPrice = getHighestTourPrice()
+      return highestTourPrice * restDays * tour.participants
+    },
+    [tourSelections, getHighestTourPrice],
+  )
+
   const calculateTotalCost = useCallback(() => {
     let totalCost = 0
     let totalDays = 0
@@ -417,8 +493,17 @@ export default function ShoppingPage() {
       // Calculate tour cost: price per day × days × participants
       const tourCost = pricePerDay * tour.totalDays * tour.participants
 
-      // Add rest days cost (same rate as tour days)
-      const restCost = tour.restDays > 0 ? pricePerDay * tour.restDays * tour.participants : 0
+      // Add rest days cost based on option
+      const restDayOption = restDayOptions[tour.id]?.type || "independent"
+      let restCost = 0
+
+      if (tour.restDays > 0) {
+        if (restDayOption === "independent") {
+          restCost = 0 // Independent rest days are FREE
+        } else if (restDayOption === "guided") {
+          restCost = calculateRestDayCost(tour.id, tour.restDays, "guided")
+        }
+      }
 
       totalCost += tourCost + restCost
       totalDays += tour.totalDays + tour.restDays
@@ -434,7 +519,17 @@ export default function ShoppingPage() {
       finalPayment,
       participants: tourSelections[0]?.participants || 2,
     }
-  }, [tourSelections])
+  }, [tourSelections, restDayOptions, calculateRestDayCost])
+
+  const updateRestDayOption = useCallback((tourId: string, field: string, value: any) => {
+    setRestDayOptions((prev) => ({
+      ...prev,
+      [tourId]: {
+        ...prev[tourId],
+        [field]: value,
+      },
+    }))
+  }, [])
 
   const costBreakdown = calculateTotalCost()
   const tripDuration = calculateTotalTripDuration(tourSelections)
@@ -492,7 +587,28 @@ ${tourSelections
 Bioregion: ${tour.bioregion}
 Participants: ${tour.participants}
 Duration: ${tour.totalDays} days${tour.restDays > 0 ? ` + ${tour.restDays} rest days` : ""}
-${tour.startDate && tour.endDate ? `Tour Dates: ${formatDateRange(tour.startDate, tour.endDate)}` : "Tour Dates: To be determined"}`,
+${tour.startDate && tour.endDate ? `Tour Dates: ${formatDateRange(tour.startDate, tour.endDate)}` : "Tour Dates: To be determined"}
+${
+  tour.restDays > 0
+    ? `
+Rest Days: ${tour.restDays} days (${restDayOptions[tour.id]?.type || "independent"})${
+        (restDayOptions[tour.id]?.type || "independent") === "independent"
+          ? " - FREE (self-arranged)"
+          : ` - $${getHighestTourPrice()}/person/day (fully guided)`
+      }${
+        restDayOptions[tour.id]?.type === "guided" && restDayOptions[tour.id]?.activities?.length > 0
+          ? `
+Selected Activities: ${restDayOptions[tour.id].activities.join(", ")}`
+          : ""
+      }${
+        restDayOptions[tour.id]?.customRequests
+          ? `
+Custom Requests: ${restDayOptions[tour.id].customRequests}`
+          : ""
+      }`
+    : ""
+}
+`,
   )
   .join("\n\n")}
 
@@ -511,7 +627,7 @@ Best regards,
 ${contactInfo.firstName} ${contactInfo.lastName}`)
 
     return `mailto:info@aves.com?subject=${subject}&body=${body}`
-  }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration])
+  }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
 
   const getPrefilledMessage = () => {
     const tourTypeName = prefilledInfo.tourType
@@ -951,6 +1067,186 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                         </div>
                       )}
 
+                      {/* Rest Day Customization */}
+                      {index > 0 && tour.restDays > 0 && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-3">
+                            Rest Day Experience Options
+                            <Badge variant="secondary" className="ml-2">
+                              Customize your downtime
+                            </Badge>
+                          </label>
+
+                          {/* Rest Day Type Selection */}
+                          <div className="space-y-3 mb-4">
+                            <div className="grid grid-cols-1 gap-3">
+                              {[
+                                {
+                                  id: "independent",
+                                  title: "Independent Rest Days",
+                                  description: "Explore on your own - you arrange and pay for your own activities",
+                                  price: "FREE",
+                                  highlight: true,
+                                },
+                                {
+                                  id: "guided",
+                                  title: "Fully Guided Rest Days",
+                                  description: "Complete package with accommodation, meals, activities & guide",
+                                  price: `$${getHighestTourPrice()}/person/day`,
+                                  highlight: false,
+                                },
+                              ].map((option) => (
+                                <label
+                                  key={option.id}
+                                  className={`flex items-start space-x-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                    (restDayOptions[tour.id]?.type || "independent") === option.id
+                                      ? "border-blue-500 bg-blue-50 shadow-md"
+                                      : "border-gray-200 hover:border-blue-300 bg-white"
+                                  }`}
+                                >
+                                  <input
+                                    type="radio"
+                                    name={`restDayType-${tour.id}`}
+                                    value={option.id}
+                                    checked={(restDayOptions[tour.id]?.type || "independent") === option.id}
+                                    onChange={(e) => updateRestDayOption(tour.id, "type", e.target.value)}
+                                    className="sr-only"
+                                  />
+                                  <div
+                                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mt-1 ${
+                                      (restDayOptions[tour.id]?.type || "independent") === option.id
+                                        ? "border-blue-500 bg-blue-500"
+                                        : "border-gray-300"
+                                    }`}
+                                  >
+                                    {(restDayOptions[tour.id]?.type || "independent") === option.id && (
+                                      <div className="w-2 h-2 bg-white rounded-full" />
+                                    )}
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <h4 className="font-medium text-gray-900 text-sm">{option.title}</h4>
+                                      {option.highlight && (
+                                        <Badge className="bg-green-100 text-green-800 text-xs">Popular Choice</Badge>
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-gray-600 mt-1 mb-2">{option.description}</p>
+                                    <span
+                                      className={`text-sm font-bold ${
+                                        option.id === "independent" ? "text-green-600" : "text-blue-600"
+                                      } block`}
+                                    >
+                                      {option.price}
+                                    </span>
+                                  </div>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Guided Activities Selection */}
+                          {(restDayOptions[tour.id]?.type || "independent") === "guided" && (
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="text-sm font-medium text-gray-700 mb-3">
+                                  Select Your Preferred Activities
+                                </h4>
+                                <div className="space-y-3">
+                                  {Object.entries(REST_DAY_ACTIVITIES).map(([category, activities]) => (
+                                    <div key={category} className="border border-gray-200 rounded-lg p-3">
+                                      <h5 className="font-medium text-gray-800 text-sm mb-2">{category}</h5>
+                                      <div className="grid grid-cols-1 gap-2">
+                                        {activities.map((activity) => (
+                                          <label key={activity} className="flex items-center space-x-2 text-sm">
+                                            <input
+                                              type="checkbox"
+                                              checked={(restDayOptions[tour.id]?.activities || []).includes(activity)}
+                                              onChange={(e) => {
+                                                const currentActivities = restDayOptions[tour.id]?.activities || []
+                                                const newActivities = e.target.checked
+                                                  ? [...currentActivities, activity]
+                                                  : currentActivities.filter((a) => a !== activity)
+                                                updateRestDayOption(tour.id, "activities", newActivities)
+                                              }}
+                                              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span className="text-gray-700">{activity}</span>
+                                          </label>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Custom Requests */}
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                  Custom Requests & Preferences
+                                </label>
+                                <textarea
+                                  value={restDayOptions[tour.id]?.customRequests || ""}
+                                  onChange={(e) => updateRestDayOption(tour.id, "customRequests", e.target.value)}
+                                  placeholder="Describe any specific activities, dietary preferences, accessibility needs, or special interests for your rest days..."
+                                  rows={3}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                />
+                                <p className="text-xs text-gray-500 mt-1">
+                                  Our local experts will customize your rest day experience based on your preferences
+                                </p>
+                              </div>
+
+                              {/* Rest Day Cost Preview */}
+                              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 border border-blue-200">
+                                <div className="flex justify-between items-center">
+                                  <span className="text-sm font-medium text-blue-800">Guided Rest Days Cost:</span>
+                                  <span className="text-lg font-bold text-blue-600">
+                                    ${calculateRestDayCost(tour.id, tour.restDays, "guided").toLocaleString()}
+                                  </span>
+                                </div>
+                                <p className="text-xs text-blue-700 mt-1">
+                                  ${getHighestTourPrice()}/person/day × {tour.restDays} days × {tour.participants}{" "}
+                                  participant
+                                  {tour.participants > 1 ? "s" : ""}
+                                </p>
+                                <p className="text-xs text-blue-600 mt-1 font-medium">
+                                  Includes: Accommodation, all meals, transportation, activities & expert guide
+                                </p>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Independent Rest Day Info */}
+                          {(restDayOptions[tour.id]?.type || "independent") === "independent" && (
+                            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                              <h4 className="text-sm font-medium text-green-800 mb-2 flex items-center">
+                                <CheckCircle className="w-4 h-4 mr-2" />
+                                Independent Rest Days - FREE
+                              </h4>
+                              <div className="space-y-2 text-sm text-green-700">
+                                <p className="font-medium">What's included at no extra cost:</p>
+                                <ul className="space-y-1 ml-4">
+                                  <li>• Basic accommodation recommendations</li>
+                                  <li>• Local area information and maps</li>
+                                  <li>• 24/7 emergency contact support</li>
+                                  <li>• Transportation coordination for next tour</li>
+                                </ul>
+                                <p className="font-medium mt-3">You arrange and pay for:</p>
+                                <ul className="space-y-1 ml-4">
+                                  <li>• Your own accommodation</li>
+                                  <li>• All meals and activities</li>
+                                  <li>• Local transportation</li>
+                                  <li>• Any tours or experiences</li>
+                                </ul>
+                              </div>
+                              <p className="text-xs text-green-600 mt-3 font-medium">
+                                Perfect for independent travelers who enjoy exploring at their own pace and budget
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
                       {/* Tour Cost Preview */}
                       <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-4 border border-emerald-200">
                         <div className="flex justify-between items-center mb-2">
@@ -967,25 +1263,54 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                               }
                               const pricePerDay = basePrices[tour.tourType as keyof typeof basePrices] || 1000
                               const tourCost = pricePerDay * tour.totalDays * tour.participants
-                              const restCost = tour.restDays > 0 ? pricePerDay * tour.restDays * tour.participants : 0
+
+                              const restDayOption = restDayOptions[tour.id]?.type || "independent"
+                              let restCost = 0
+
+                              if (tour.restDays > 0) {
+                                if (restDayOption === "independent") {
+                                  restCost = 0 // Independent rest days are FREE
+                                } else if (restDayOption === "guided") {
+                                  restCost = calculateRestDayCost(tour.id, tour.restDays, "guided")
+                                }
+                              }
+
                               return (tourCost + restCost).toLocaleString()
                             })()}
                           </span>
                         </div>
-                        <div className="text-sm text-gray-600">
-                          ${(() => {
-                            const basePrices = {
-                              "🍃 Adventure Tours": 1000,
-                              "🪶 Vision Tours": 1400,
-                              "🌼 Elevate Tours": 1200,
-                              "🍓 Souls Tours": 1600,
-                              "Custom Itinerary": 1100,
-                              "Not sure yet": 1000,
-                            }
-                            return (basePrices[tour.tourType as keyof typeof basePrices] || 1000).toLocaleString()
-                          })()} /person/day × {tour.totalDays} days × {tour.participants} participant
-                          {tour.participants > 1 ? "s" : ""}
-                          {tour.restDays > 0 && ` + ${tour.restDays} rest days`}
+                        <div className="text-sm text-gray-600 space-y-1">
+                          <div>
+                            Tour: ${(() => {
+                              const basePrices = {
+                                "🍃 Adventure Tours": 1000,
+                                "🪶 Vision Tours": 1400,
+                                "🌼 Elevate Tours": 1200,
+                                "🍓 Souls Tours": 1600,
+                                "Custom Itinerary": 1100,
+                                "Not sure yet": 1000,
+                              }
+                              const pricePerDay = basePrices[tour.tourType as keyof typeof basePrices] || 1000
+                              return (pricePerDay * tour.totalDays * tour.participants).toLocaleString()
+                            })()} ({tour.totalDays} days × {tour.participants} participant
+                            {tour.participants > 1 ? "s" : ""})
+                          </div>
+                          {tour.restDays > 0 && (
+                            <div>
+                              Rest days: ${(() => {
+                                const restDayOption = restDayOptions[tour.id]?.type || "independent"
+                                if (restDayOption === "independent") {
+                                  return "0 (FREE - independent)"
+                                } else if (restDayOption === "guided") {
+                                  return (
+                                    calculateRestDayCost(tour.id, tour.restDays, "guided").toLocaleString() +
+                                    " (fully guided)"
+                                  )
+                                }
+                                return "0"
+                              })()}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </CardContent>
@@ -1183,6 +1508,21 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                             <div className="text-xs text-gray-500">
                               Start: {tour.startDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })} •
                               End: {tour.endDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                            </div>
+                          </div>
+                        )}
+                        {/* Rest Day Summary */}
+                        {tour.restDays > 0 && index > 0 && (
+                          <div className="mt-2 pt-2 border-t border-gray-200">
+                            <div className="text-xs text-gray-600">
+                              Rest Days:{" "}
+                              {(restDayOptions[tour.id]?.type || "independent") === "independent" ? (
+                                <span className="text-green-600 font-medium">FREE (independent)</span>
+                              ) : (
+                                <span className="text-blue-600 font-medium">
+                                  ${calculateRestDayCost(tour.id, tour.restDays, "guided").toLocaleString()} (guided)
+                                </span>
+                              )}
                             </div>
                           </div>
                         )}
