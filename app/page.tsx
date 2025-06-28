@@ -257,12 +257,12 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Tour Types Section - Conversion Optimized */}
+      {/* Tour Types Section - Updated without AVES acronym */}
       <section id="tours" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Four Unique Birding Experiences</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
               Each tour is carefully crafted for different interests and comfort levels, all featuring expert guides and
               premium accommodations.
             </p>
@@ -276,7 +276,7 @@ ${formData.firstName} ${formData.lastName}`)
               </div>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-gray-900">🍃 AVES Adventure</h3>
+                  <h3 className="text-lg font-bold text-gray-900">🍃 Adventure Tours</h3>
                   <div className="flex items-center space-x-1">
                     <Star className="w-4 h-4 text-yellow-400 fill-current" />
                     <span className="text-sm text-gray-600">4.9</span>
@@ -319,7 +319,7 @@ ${formData.firstName} ${formData.lastName}`)
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-gray-900">🪶 AVES Vision</h3>
+                  <h3 className="text-lg font-bold text-gray-900">🪶 Vision Tours</h3>
                   <Camera className="w-5 h-5 text-purple-600" />
                 </div>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
@@ -364,7 +364,7 @@ ${formData.firstName} ${formData.lastName}`)
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-gray-900">🌼 AVES Elevate</h3>
+                  <h3 className="text-lg font-bold text-gray-900">🌼 Elevate Tours</h3>
                   <Award className="w-5 h-5 text-yellow-500" />
                 </div>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
@@ -408,7 +408,7 @@ ${formData.firstName} ${formData.lastName}`)
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-gray-900">🍓 AVES Souls</h3>
+                  <h3 className="text-lg font-bold text-gray-900">🍓 Souls Tours</h3>
                   <Heart className="w-5 h-5 text-red-500" />
                 </div>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">

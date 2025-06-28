@@ -65,7 +65,7 @@ export function Footer() {
                   href="/tours/adventure"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🍃 AVES Adventure
+                  🍃 Adventure Tours
                 </Link>
               </li>
               <li>
@@ -73,7 +73,7 @@ export function Footer() {
                   href="/tours/vision"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🪶 AVES Vision
+                  🪶 Vision Tours
                 </Link>
               </li>
               <li>
@@ -81,7 +81,7 @@ export function Footer() {
                   href="/tours/elevate"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🌼 AVES Elevate
+                  🌼 Elevate Tours
                 </Link>
               </li>
               <li>
@@ -89,7 +89,7 @@ export function Footer() {
                   href="/tours/souls"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🍓 AVES Souls
+                  🍓 Souls Tours
                 </Link>
               </li>
               <li>

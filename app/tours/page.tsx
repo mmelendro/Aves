@@ -57,7 +57,7 @@ export default function ToursPage() {
             <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">🍃 AVES Adventure</h3>
+                  <h3 className="text-xl font-bold text-gray-900">🍃 Adventure Tours</h3>
                   <Badge className="bg-emerald-100 text-emerald-800">A</Badge>
                 </div>
                 <p className="text-gray-600 mb-6">
@@ -99,7 +99,7 @@ export default function ToursPage() {
             <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">🪶 AVES Vision</h3>
+                  <h3 className="text-xl font-bold text-gray-900">🪶 Vision Tours</h3>
                   <Badge className="bg-purple-100 text-purple-800">V</Badge>
                 </div>
                 <p className="text-gray-600 mb-6">
@@ -141,7 +141,7 @@ export default function ToursPage() {
             <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">🌼 AVES Elevate</h3>
+                  <h3 className="text-xl font-bold text-gray-900">🌼 Elevate Tours</h3>
                   <Badge className="bg-yellow-100 text-yellow-800">E</Badge>
                 </div>
                 <p className="text-gray-600 mb-6">
@@ -183,7 +183,7 @@ export default function ToursPage() {
             <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">🍓 AVES Souls</h3>
+                  <h3 className="text-xl font-bold text-gray-900">🍓 Souls Tours</h3>
                   <Badge className="bg-red-100 text-red-800">S</Badge>
                 </div>
                 <p className="text-gray-600 mb-6">
@@ -299,7 +299,7 @@ export default function ToursPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4"
+                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
               >
                 Contact Us
               </Button>

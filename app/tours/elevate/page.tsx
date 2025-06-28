@@ -33,7 +33,7 @@ export default function ElevatePage() {
                   🌼 High-Altitude Páramo Expeditions
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  AVES Elevate
+                  Elevate Tours
                   <span className="text-yellow-600 block">Central Cordillera Cloud Forest Journey</span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
@@ -53,7 +53,7 @@ export default function ElevatePage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-yellow-600 text-yellow-600 hover:bg-yellow-50 text-lg px-8 py-4"
+                    className="border-yellow-600 text-yellow-600 hover:bg-yellow-50 text-lg px-8 py-4 bg-transparent"
                   >
                     Ask Questions
                   </Button>
@@ -80,7 +80,7 @@ export default function ElevatePage() {
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/rainbow-bearded-thornbill.jpg"
-                  alt="Rainbow-bearded Thornbill in páramo ecosystem representing AVES Elevate tours"
+                  alt="Rainbow-bearded Thornbill in páramo ecosystem representing Elevate Tours"
                   width={480}
                   height={600}
                   className="object-cover w-full h-full"
@@ -343,7 +343,7 @@ export default function ElevatePage() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="w-full border-yellow-600 text-yellow-600 hover:bg-yellow-50"
+                        className="w-full border-yellow-600 text-yellow-600 hover:bg-yellow-50 bg-transparent"
                       >
                         Ask Questions
                       </Button>

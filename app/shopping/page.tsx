@@ -28,25 +28,25 @@ import { Footer } from "@/components/footer"
 
 const tourTypes = {
   adventure: {
-    name: "🍃 AVES Adventure",
+    name: "🍃 Adventure Tours",
     description: "Classic birding expeditions across Colombia's prime hotspots",
     pricePerDay: 1000,
     color: "emerald",
   },
   vision: {
-    name: "🪶 AVES Vision",
+    name: "🪶 Vision Tours",
     description: "Photography workshops with professional wildlife photographers",
     pricePerDay: 1250,
     color: "purple",
   },
   elevate: {
-    name: "🌼 AVES Elevate",
+    name: "🌼 Elevate Tours",
     description: "Premium expeditions with luxury amenities",
     pricePerDay: 1500,
     color: "yellow",
   },
   souls: {
-    name: "🍓 AVES Souls",
+    name: "🍓 Souls Tours",
     description: "Romantic retreats for couples",
     pricePerDay: 1750,
     color: "red",

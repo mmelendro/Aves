@@ -31,7 +31,7 @@ export default function SoulsPage() {
                   🍓 Cultural Immersion & Amazon Transition
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  AVES Souls
+                  Souls Tours
                   <span className="text-red-600 block">Eastern Cordillera Cultural Journey</span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
@@ -51,7 +51,7 @@ export default function SoulsPage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-red-600 text-red-600 hover:bg-red-50 text-lg px-8 py-4"
+                    className="border-red-600 text-red-600 hover:bg-red-50 text-lg px-8 py-4 bg-transparent"
                   >
                     Ask Questions
                   </Button>
@@ -78,7 +78,7 @@ export default function SoulsPage() {
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/vermillion-flycatcher.jpg"
-                  alt="Vermilion Flycatcher in Eastern Cordillera representing AVES Souls tours"
+                  alt="Vermilion Flycatcher in Eastern Cordillera representing Souls Tours"
                   width={480}
                   height={600}
                   className="object-cover w-full h-full"
@@ -345,7 +345,7 @@ export default function SoulsPage() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="w-full border-red-600 text-red-600 hover:bg-red-50"
+                        className="w-full border-red-600 text-red-600 hover:bg-red-50 bg-transparent"
                       >
                         Ask Questions
                       </Button>

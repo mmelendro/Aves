@@ -32,13 +32,18 @@ export const LOCATION_OPTIONS = [
   "✨ Let AVES Choose",
 ] as const
 
-export const TOUR_TYPE_OPTIONS = ["🍃 AVES Adventure", "🪶 AVES Vision", "🌼 AVES Elevate", "🍓 AVES Souls"] as const
+export const TOUR_TYPE_OPTIONS = [
+  "🍃 Adventure Tours",
+  "🪶 Vision Tours",
+  "🌼 Elevate Tours",
+  "🍓 Souls Tours",
+] as const
 
 export const CONTACT_TOUR_TYPE_OPTIONS = [
-  "🍃 AVES Adventure",
-  "🪶 AVES Vision",
-  "🌼 AVES Elevate",
-  "🍓 AVES Souls",
+  "🍃 Adventure Tours",
+  "🪶 Vision Tours",
+  "🌼 Elevate Tours",
+  "🍓 Souls Tours",
   "Custom Itinerary",
   "Not sure yet",
 ] as const

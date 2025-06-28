@@ -61,7 +61,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
   const tours = [
     {
       id: "adventure",
-      name: "AVES Adventure",
+      name: "Adventure Tours",
       icon: Leaf,
       color: "emerald",
       emoji: "🍃",
@@ -70,7 +70,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
     },
     {
       id: "vision",
-      name: "AVES Vision",
+      name: "Vision Tours",
       icon: Camera,
       color: "purple",
       emoji: "🪶",
@@ -79,7 +79,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
     },
     {
       id: "elevate",
-      name: "AVES Elevate",
+      name: "Elevate Tours",
       icon: Award,
       color: "yellow",
       emoji: "🌼",
@@ -88,11 +88,11 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
     },
     {
       id: "souls",
-      name: "AVES Souls",
+      name: "Souls Tours",
       icon: Heart,
       color: "red",
       emoji: "🍓",
-      description: "Romantic retreats",
+      description: "Cultural immersion",
       href: "/tours/souls",
     },
   ]
@@ -120,7 +120,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
                   <Leaf className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900 text-sm">AVES Tours</div>
+                  <div className="font-semibold text-gray-900 text-sm">Book Your Journey</div>
                   <div className="text-xs text-gray-600">4 unique experiences</div>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
           <div className="p-4">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="font-bold text-gray-900 text-base">Choose Your AVES Experience</h3>
+                <h3 className="font-bold text-gray-900 text-base">Choose Your Perfect Tour</h3>
                 <p className="text-xs text-gray-600">Discover Colombia's incredible biodiversity</p>
               </div>
               <Button
@@ -184,7 +184,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
 
             <div className="flex space-x-2">
               <Link href="/tours" className="flex-1">
-                <Button size="sm" variant="outline" className="w-full text-xs h-9 touch-manipulation">
+                <Button size="sm" variant="outline" className="w-full text-xs h-9 touch-manipulation bg-transparent">
                   <MapPin className="w-3 h-3 mr-1" />
                   All Tours
                 </Button>
@@ -204,7 +204,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="font-bold text-gray-900 text-lg">Choose Your AVES Experience</h3>
+                <h3 className="font-bold text-gray-900 text-lg">Choose Your Perfect Tour</h3>
                 <p className="text-sm text-gray-600">Discover Colombia's incredible biodiversity</p>
               </div>
               <Button
@@ -237,7 +237,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
 
             <div className="flex space-x-3">
               <Link href="/tours" className="flex-1">
-                <Button size="sm" variant="outline" className="w-full">
+                <Button size="sm" variant="outline" className="w-full bg-transparent">
                   <MapPin className="w-4 h-4 mr-2" />
                   View All Tours
                 </Button>

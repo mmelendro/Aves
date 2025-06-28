@@ -118,7 +118,7 @@ const tourFeatures: TourFeature[] = [
 const tours = [
   {
     id: "adventure",
-    name: "AVES Adventure",
+    name: "Adventure Tours",
     emoji: "🍃",
     color: "emerald",
     description: "Classic Birding",
@@ -128,7 +128,7 @@ const tours = [
   },
   {
     id: "vision",
-    name: "AVES Vision",
+    name: "Vision Tours",
     emoji: "🪶",
     color: "purple",
     description: "Photography Focus",
@@ -138,7 +138,7 @@ const tours = [
   },
   {
     id: "elevate",
-    name: "AVES Elevate",
+    name: "Elevate Tours",
     emoji: "🌼",
     color: "yellow",
     description: "Luxury Experience",
@@ -148,7 +148,7 @@ const tours = [
   },
   {
     id: "souls",
-    name: "AVES Souls",
+    name: "Souls Tours",
     emoji: "🍓",
     color: "red",
     description: "Couples Retreat",

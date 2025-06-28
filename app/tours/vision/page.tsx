@@ -33,7 +33,7 @@ export default function VisionPage() {
                   🪶 Photography & Chocó Expeditions
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  AVES Vision
+                  Vision Tours
                   <span className="text-purple-600 block">Western Cordillera Chocó Immersion</span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
@@ -53,7 +53,7 @@ export default function VisionPage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-purple-600 text-purple-600 hover:bg-purple-50 text-lg px-8 py-4"
+                    className="border-purple-600 text-purple-600 hover:bg-purple-50 text-lg px-8 py-4 bg-transparent"
                   >
                     Ask Questions
                   </Button>
@@ -80,7 +80,7 @@ export default function VisionPage() {
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/blue-crowned-motmot.jpg"
-                  alt="Blue-crowned Motmot in Chocó rainforest representing AVES Vision tours"
+                  alt="Blue-crowned Motmot in Chocó rainforest representing Vision Tours"
                   width={480}
                   height={600}
                   className="object-cover w-full h-full"
@@ -156,7 +156,7 @@ export default function VisionPage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Sample 8-Day Vision Itinerary</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Sample 8-Day Vision Tour Itinerary</h2>
             <p className="text-xl text-gray-600">
               A photography-focused journey through Colombia's Western Cordillera and Chocó rainforest
             </p>
@@ -343,7 +343,7 @@ export default function VisionPage() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="w-full border-purple-600 text-purple-600 hover:bg-purple-50"
+                        className="w-full border-purple-600 text-purple-600 hover:bg-purple-50 bg-transparent"
                       >
                         Ask Questions
                       </Button>

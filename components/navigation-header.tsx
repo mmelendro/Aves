@@ -96,25 +96,25 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 href="/tours/adventure"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                🍃 AVES Adventure
+                🍃 Adventure Tours
               </Link>
               <Link
                 href="/tours/vision"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                🪶 AVES Vision
+                🪶 Vision Tours
               </Link>
               <Link
                 href="/tours/elevate"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                🌼 AVES Elevate
+                🌼 Elevate Tours
               </Link>
               <Link
                 href="/tours/souls"
                 className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
               >
-                🍓 AVES Souls
+                🍓 Souls Tours
               </Link>
             </div>
           </div>
@@ -318,28 +318,28 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🍃 AVES Adventure
+                    🍃 Adventure Tours
                   </Link>
                   <Link
                     href="/tours/vision"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🪶 AVES Vision
+                    🪶 Vision Tours
                   </Link>
                   <Link
                     href="/tours/elevate"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🌼 AVES Elevate
+                    🌼 Elevate Tours
                   </Link>
                   <Link
                     href="/tours/souls"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🍓 AVES Souls
+                    🍓 Souls Tours
                   </Link>
                 </div>
               </div>
