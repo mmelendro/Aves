@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import {
   Plus,
   Minus,
@@ -21,6 +22,8 @@ import {
   MessageCircle,
   Trash2,
   Info,
+  CheckCircle,
+  X,
 } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
@@ -36,19 +39,19 @@ const tourTypes = {
   vision: {
     name: "🪶 Vision Tours",
     description: "Photography workshops with professional wildlife photographers",
-    pricePerDay: 1250,
+    pricePerDay: 1400,
     color: "purple",
   },
   elevate: {
     name: "🌼 Elevate Tours",
     description: "Premium expeditions with luxury amenities",
-    pricePerDay: 1500,
+    pricePerDay: 1200,
     color: "yellow",
   },
   souls: {
     name: "🍓 Souls Tours",
-    description: "Romantic retreats for couples",
-    pricePerDay: 1750,
+    description: "Cultural immersion tours combining birding with indigenous communities",
+    pricePerDay: 1600,
     color: "red",
   },
 }
@@ -77,18 +80,11 @@ interface TourSelection {
 
 export default function ShoppingPage() {
   const searchParams = useSearchParams()
-  const preselectedRegion = searchParams.get("region")
+  const preselectedTourType = searchParams.get("preset") || searchParams.get("tour")
+  const preselectedRegion = searchParams.get("region") || searchParams.get("bioregion")
+  const fromPage = searchParams.get("from")
 
-  const [tourSelections, setTourSelections] = useState<TourSelection[]>([
-    {
-      id: "1",
-      tourType: "adventure",
-      bioregion: preselectedRegion || "western-andes",
-      participants: 2,
-      totalDays: 8,
-      breakDays: 0,
-    },
-  ])
+  const [tourSelections, setTourSelections] = useState<TourSelection[]>([])
   const [showQuestions, setShowQuestions] = useState(false)
   const [questions, setQuestions] = useState("")
   const [contactInfo, setContactInfo] = useState({
@@ -97,19 +93,51 @@ export default function ShoppingPage() {
     phone: "",
   })
   const [savedBooking, setSavedBooking] = useState(false)
+  const [showPrefilledNotification, setShowPrefilledNotification] = useState(false)
+  const [prefilledInfo, setPrefilledInfo] = useState<{
+    tourType?: string
+    region?: string
+    fromPage?: string
+  }>({})
 
-  // Update the first tour's bioregion when URL parameter changes
+  // Initialize tour selections based on URL parameters
   useEffect(() => {
-    if (preselectedRegion && tourSelections.length > 0) {
-      // Check if the preselected region exists in our bioregions
-      const regionExists = bioregions.some((region) => region.id === preselectedRegion)
-      if (regionExists) {
-        setTourSelections((prev) =>
-          prev.map((tour, index) => (index === 0 ? { ...tour, bioregion: preselectedRegion } : tour)),
-        )
-      }
+    const initialTourType =
+      preselectedTourType && tourTypes[preselectedTourType as keyof typeof tourTypes]
+        ? preselectedTourType
+        : "adventure"
+
+    const initialRegion =
+      preselectedRegion && bioregions.some((region) => region.id === preselectedRegion)
+        ? preselectedRegion
+        : "western-andes"
+
+    const initialTour: TourSelection = {
+      id: "1",
+      tourType: initialTourType,
+      bioregion: initialRegion,
+      participants: 2,
+      totalDays: 8,
+      breakDays: 0,
     }
-  }, [preselectedRegion])
+
+    setTourSelections([initialTour])
+
+    // Show notification if parameters were pre-filled
+    if (preselectedTourType || preselectedRegion) {
+      setPrefilledInfo({
+        tourType: preselectedTourType || undefined,
+        region: preselectedRegion || undefined,
+        fromPage: fromPage || undefined,
+      })
+      setShowPrefilledNotification(true)
+
+      // Auto-hide notification after 8 seconds
+      setTimeout(() => {
+        setShowPrefilledNotification(false)
+      }, 8000)
+    }
+  }, [preselectedTourType, preselectedRegion, fromPage])
 
   const addTourSelection = () => {
     if (tourSelections.length < 4) {
@@ -231,12 +259,59 @@ Looking forward to hearing from you!
     }
   }
 
+  const dismissNotification = () => {
+    setShowPrefilledNotification(false)
+  }
+
+  const getPrefilledMessage = () => {
+    const tourTypeName = prefilledInfo.tourType
+      ? tourTypes[prefilledInfo.tourType as keyof typeof tourTypes]?.name
+      : null
+    const regionName = prefilledInfo.region ? bioregions.find((r) => r.id === prefilledInfo.region)?.name : null
+
+    let message = "Great choice! We've pre-filled your selections"
+
+    if (tourTypeName && regionName) {
+      message += ` with ${tourTypeName} for ${regionName}`
+    } else if (tourTypeName) {
+      message += ` with ${tourTypeName}`
+    } else if (regionName) {
+      message += ` for ${regionName}`
+    }
+
+    if (prefilledInfo.fromPage) {
+      message += ` based on your interest`
+    }
+
+    message += ". You can customize everything below!"
+
+    return message
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Unified Navigation Header */}
       <NavigationHeader currentPage="/shopping" />
 
       <div className="container mx-auto px-4 py-8">
+        {/* Pre-filled Notification */}
+        {showPrefilledNotification && (
+          <div className="mb-6">
+            <Alert className="border-emerald-200 bg-emerald-50">
+              <CheckCircle className="h-4 w-4 text-emerald-600" />
+              <AlertDescription className="text-emerald-800 pr-8">{getPrefilledMessage()}</AlertDescription>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={dismissNotification}
+                className="absolute right-2 top-2 h-6 w-6 p-0 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-100"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </Alert>
+          </div>
+        )}
+
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
@@ -262,15 +337,6 @@ Looking forward to hearing from you!
                   Flexible duration
                 </span>
               </div>
-              {preselectedRegion && (
-                <div className="mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
-                  <p className="text-emerald-800 text-sm">
-                    <strong>{bioregions.find((region) => region.id === preselectedRegion)?.name} Selected:</strong>{" "}
-                    We've pre-selected the {bioregions.find((region) => region.id === preselectedRegion)?.subtitle}{" "}
-                    region for your first tour based on your interest in our blog post!
-                  </p>
-                </div>
-              )}
             </div>
 
             {/* Tour Selections */}
@@ -288,6 +354,9 @@ Looking forward to hearing from you!
                         )}
                         {tour.bioregion === "choco" && (
                           <Badge className="ml-2 bg-emerald-100 text-emerald-800">Chocó Featured</Badge>
+                        )}
+                        {index === 0 && (prefilledInfo.tourType || prefilledInfo.region) && (
+                          <Badge className="ml-2 bg-blue-100 text-blue-800">Pre-selected</Badge>
                         )}
                       </CardTitle>
                       {tourSelections.length > 1 && (
