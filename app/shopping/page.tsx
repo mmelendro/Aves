@@ -23,14 +23,13 @@ import {
   Map,
   Bird,
   Calendar,
-  AlertTriangle,
 } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { LOCATION_OPTIONS, CONTACT_TOUR_TYPE_OPTIONS, EXPERIENCE_LEVELS } from "@/lib/form-options"
 import { useSearchParams } from "next/navigation"
-import { DatePicker } from "@/components/ui/date-picker"
+import { EmbeddedTourCalendar } from "@/components/embedded-tour-calendar"
 
 // Helper function to get region information
 const getRegionInfo = (location: string) => {
@@ -275,7 +274,6 @@ export default function ShoppingPage() {
     region?: string
     fromPage?: string
   }>({})
-  const [dateValidationError, setDateValidationError] = useState<string>("")
 
   // Initialize tour selections based on URL parameters
   useEffect(() => {
@@ -455,8 +453,6 @@ export default function ShoppingPage() {
 
   const updateStartDate = useCallback(
     (date: Date | undefined) => {
-      setDateValidationError("")
-
       if (!date) {
         // Clear all dates if no start date is selected
         setTourSelections(
@@ -465,22 +461,6 @@ export default function ShoppingPage() {
             startDate: undefined,
             endDate: undefined,
           })),
-        )
-        return
-      }
-
-      // Validate that the date is at least 1 month from now
-      const minimumDate = getMinimumBookingDate()
-      if (date < minimumDate) {
-        setDateValidationError(
-          `Tours must be booked at least 1 month in advance. Please select a date on or after ${minimumDate.toLocaleDateString(
-            "en-US",
-            {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            },
-          )}.`,
         )
         return
       }
@@ -560,10 +540,6 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
     setShowPrefilledNotification(false)
   }
 
-  const dismissDateError = () => {
-    setDateValidationError("")
-  }
-
   const minimumBookingDate = getMinimumBookingDate()
 
   return (
@@ -595,26 +571,6 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                 size="sm"
                 onClick={dismissNotification}
                 className="absolute right-2 top-2 h-6 w-6 p-0 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-100"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </Alert>
-          </div>
-        </section>
-      )}
-
-      {/* Date Validation Error */}
-      {dateValidationError && (
-        <section className="py-4">
-          <div className="container mx-auto px-4">
-            <Alert className="border-red-200 bg-red-50">
-              <AlertTriangle className="h-4 w-4 text-red-600" />
-              <AlertDescription className="text-red-800 pr-8">{dateValidationError}</AlertDescription>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={dismissDateError}
-                className="absolute right-2 top-2 h-6 w-6 p-0 text-red-600 hover:text-red-700 hover:bg-red-100"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -655,6 +611,14 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                   </div>
                 </div>
               </div>
+
+              {/* Embedded Calendar Section */}
+              <EmbeddedTourCalendar
+                selectedDate={tourSelections[0]?.startDate}
+                onDateSelect={updateStartDate}
+                minDate={minimumBookingDate}
+                className="mb-8"
+              />
 
               {/* Tour Selections */}
               <div className="space-y-6">
@@ -891,47 +855,6 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                           3-14 days available • 8 days optimal for species diversity and cultural immersion
                         </p>
                       </div>
-
-                      {/* Start Date Selection (only for first tour) */}
-                      {index === 0 && (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">
-                            <Calendar className="w-4 h-4 inline mr-2" />
-                            Tour Start Date *
-                          </label>
-                          <DatePicker
-                            date={tour.startDate}
-                            onDateChange={updateStartDate}
-                            placeholder="Select your tour start date"
-                            className="w-full"
-                            minDate={minimumBookingDate}
-                          />
-                          <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                            <div className="flex items-start space-x-2">
-                              <Clock className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
-                              <div className="text-sm text-amber-800">
-                                <p className="font-medium mb-1">Advance Booking Required</p>
-                                <p>
-                                  Tours must be booked at least 1 month in advance to ensure proper planning and
-                                  coordination. Earliest available date:{" "}
-                                  <span className="font-medium">
-                                    {minimumBookingDate.toLocaleDateString("en-US", {
-                                      weekday: "long",
-                                      month: "long",
-                                      day: "numeric",
-                                      year: "numeric",
-                                    })}
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <p className="text-xs text-gray-500 mt-2">
-                            Start dates for subsequent tours will be calculated automatically based on tour duration and
-                            rest days
-                          </p>
-                        </div>
-                      )}
 
                       {/* Calculated Start Date and Date Range (for all tours when start date is set) */}
                       {tour.startDate && tour.endDate && (
