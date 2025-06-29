@@ -119,7 +119,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </div>
           </div>
 
-          {/* Resources Dropdown - Enhanced Mega Menu */}
+          {/* Resources Dropdown - Enhanced Mega Menu with AVES Explorer */}
           <div className="relative group">
             <Link
               href="/resources"
@@ -127,7 +127,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 currentPage?.startsWith("/blog") ||
                 currentPage?.startsWith("/resources") ||
                 currentPage?.startsWith("/travel-tips") ||
-                currentPage?.startsWith("/avifauna-explorer")
+                currentPage?.startsWith("/aves-explorer")
                   ? "text-emerald-600"
                   : "text-gray-700 hover:text-emerald-600"
               }`}
@@ -141,12 +141,12 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   Explore & Plan
                 </div>
                 <Link
-                  href="/avifauna-explorer"
+                  href="/aves-explorer"
                   className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
                 >
                   <span className="text-lg mr-3">🦅</span>
                   <div>
-                    <div className="font-medium">Avifauna & Bioregions Explorer</div>
+                    <div className="font-medium">AVES Explorer</div>
                     <div className="text-xs text-gray-500">1,900+ species across 11 bioregions & 31 ecoregions</div>
                   </div>
                 </Link>
@@ -281,7 +281,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         />
       )}
 
-      {/* Mobile Navigation - Enhanced */}
+      {/* Mobile Navigation - Enhanced with AVES Explorer */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-[73px] z-40 bg-white border-t shadow-lg">
           <div className="max-h-[calc(100vh-73px)] overflow-y-auto overscroll-contain">
@@ -343,11 +343,11 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 <div className="pl-4 space-y-3 mt-3">
                   <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1">Explore & Plan</div>
                   <Link
-                    href="/avifauna-explorer"
+                    href="/aves-explorer"
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🦅 Avifauna & Bioregions Explorer
+                    🦅 AVES Explorer
                   </Link>
 
                   <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1 mt-4">

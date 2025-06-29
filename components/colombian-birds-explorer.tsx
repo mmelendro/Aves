@@ -340,7 +340,7 @@ export function ColombianBirdsExplorer() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
-      {/* 1. Page Title and Introduction */}
+      {/* 1. Page Title and Introduction - Updated with AVES Explorer branding */}
       <section className="relative bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto text-center">
@@ -349,11 +349,11 @@ export function ColombianBirdsExplorer() {
                 <Bird className="w-16 h-16 text-white" />
               </div>
             </div>
-            <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6">Explore Colombian Birds</h1>
+            <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6">AVES Explorer</h1>
             <p className="text-xl lg:text-2xl text-gray-700 mb-8 leading-relaxed max-w-4xl mx-auto">
-              Discover the world's most diverse avifauna across Colombia's extraordinary landscapes. With over 1,900
-              bird species and 78+ endemics, Colombia offers unparalleled opportunities for birdwatching and
-              conservation discovery.
+              Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11
+              distinct bioregions, explore over 1,900 species, and plan your perfect birding adventure with expert
+              insights and detailed habitat information.
             </p>
 
             <div className="flex justify-center gap-12 mb-8">
@@ -396,7 +396,7 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* 2. Colombia & Its Diversity */}
+      {/* 2. Colombia & Its Diversity - Updated with AVES Explorer references */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -414,14 +414,13 @@ export function ColombianBirdsExplorer() {
                   From sea level to snow-capped peaks at 5,775 meters, Colombia encompasses every climate zone on Earth.
                   The Amazon rainforest meets Andean cloud forests, Caribbean dry forests border Pacific rainforests,
                   and high-altitude páramo grasslands crown the mountains - each ecosystem supporting unique bird
-                  communities found nowhere else. Our color-coded bioregions map reveals these distinct ecological zones
-                  and their remarkable avifauna diversity.
+                  communities found nowhere else. Our AVES Explorer reveals these distinct ecological zones and their
+                  remarkable avifauna diversity.
                 </p>
                 <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   This incredible diversity makes Colombia home to more bird species than any other country, with new
-                  species still being discovered regularly by scientists and birdwatchers alike. Click on the map to
-                  explore our interactive bioregions explorer and discover the specific bird communities that inhabit
-                  each unique ecosystem.
+                  species still being discovered regularly by scientists and birdwatchers alike. Use our interactive
+                  AVES Explorer to discover the specific bird communities that inhabit each unique ecosystem.
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-200">
@@ -444,17 +443,17 @@ export function ColombianBirdsExplorer() {
                   className="relative overflow-hidden rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 group cursor-pointer w-full"
                 >
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Birding%20Regions%20Colombia%20Colour-3VBPiVZzCDHxuYdLOwBDy5j3W5OACf.png"
-                    alt="Colombia's Color-Coded Bioregions Map - Click to Explore Interactive Version"
+                    src="/images/birding-regions-colombia-final.png"
+                    alt="Colombia's Color-Coded Bioregions Map - Click to Explore Interactive AVES Explorer"
                     className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:from-black/50 transition-all duration-300"></div>
                   <div className="absolute bottom-4 left-4 text-white">
                     <p className="text-sm font-medium">Colombia's 11 Bioregions Color Map</p>
-                    <p className="text-xs opacity-90">Click to explore interactive version below ↓</p>
+                    <p className="text-xs opacity-90">Click to explore AVES Explorer below ↓</p>
                   </div>
                   <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-medium opacity-90 group-hover:opacity-100 transition-opacity">
-                    Interactive Map ↓
+                    AVES Explorer ↓
                   </div>
                 </button>
               </div>
@@ -463,14 +462,14 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* 3. Bioregions + Ecoregion Definitions */}
+      {/* 3. Bioregions + Ecoregion Definitions - Updated with AVES Explorer references */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">Understanding Our Classification System</h2>
             <p className="text-lg text-gray-600">
-              We use two complementary approaches to organize and understand Colombia's incredible biodiversity,
-              ensuring both practical tour planning and scientific accuracy.
+              The AVES Explorer uses two complementary approaches to organize and understand Colombia's incredible
+              biodiversity, ensuring both practical tour planning and scientific accuracy.
             </p>
           </div>
 
@@ -565,9 +564,9 @@ export function ColombianBirdsExplorer() {
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Perfect Integration</h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  Our bioregions encompass multiple ecoregions, providing both scientific accuracy and practical tour
-                  organization. This dual approach ensures comprehensive coverage of Colombia's biodiversity while
-                  maintaining operational efficiency for unforgettable birding experiences.
+                  Our AVES Explorer bioregions encompass multiple ecoregions, providing both scientific accuracy and
+                  practical tour organization. This dual approach ensures comprehensive coverage of Colombia's
+                  biodiversity while maintaining operational efficiency for unforgettable birding experiences.
                 </p>
               </CardContent>
             </Card>
@@ -643,12 +642,12 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* 5. Interactive Bioregions Map - Enhanced */}
+      {/* 5. Interactive Bioregions Map - Enhanced with AVES Explorer branding */}
       <section id="bioregions-map" className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Interactive Bioregions Map</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Interactive AVES Explorer Map</h2>
               <p className="text-lg text-gray-600">
                 Click on any region to discover its unique characteristics, key species, and conservation status
               </p>
@@ -675,8 +674,8 @@ export function ColombianBirdsExplorer() {
                 <div className="relative bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 mb-8 border border-emerald-100">
                   <div className="relative mx-auto max-w-4xl">
                     <img
-                      src="/images/colombia-bioregions-map.png"
-                      alt="Colombia Interactive Bioregions Map"
+                      src="/images/birding-regions-colombia-final.png"
+                      alt="Colombia Interactive Bioregions Map - AVES Explorer"
                       className="w-full h-auto opacity-95 rounded-lg shadow-md"
                     />
 

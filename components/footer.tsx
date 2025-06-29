@@ -141,7 +141,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources & Support Column */}
+          {/* Resources & Support Column - Updated with AVES Explorer */}
           <div className="text-center sm:text-left">
             <h4 className="font-semibold mb-4 text-base sm:text-lg text-emerald-400">📚 Resources</h4>
             <ul className="space-y-3 text-gray-400 text-sm sm:text-base">
@@ -160,10 +160,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/avifauna-explorer"
+                  href="/aves-explorer"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🦅 Avifauna & Bioregions Explorer
+                  🦅 AVES Explorer
                 </Link>
               </li>
               <li>
