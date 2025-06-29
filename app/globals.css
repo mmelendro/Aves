@@ -119,6 +119,8 @@ body {
   .touch-manipulation {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    min-height: 32px;
+    min-width: 32px;
   }
 
   /* Better button sizing for mobile */
@@ -181,6 +183,89 @@ body {
     width: 8px;
     height: 8px;
   }
+
+  /* Enhanced carousel mobile styles */
+  .carousel-mobile-optimized {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Better mobile image scaling */
+  .mobile-carousel-image {
+    object-fit: contain;
+    object-position: center;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Mobile-optimized text scaling */
+  .mobile-text-scale {
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
+    line-height: 1.4;
+  }
+
+  /* Better mobile button spacing */
+  .mobile-button-stack {
+    gap: 0.75rem;
+  }
+
+  .mobile-button-stack > * {
+    min-height: 44px;
+    font-size: 0.875rem;
+  }
+
+  /* Larger touch targets for mobile audio controls */
+  .volume-slider {
+    height: 12px !important;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .volume-slider::-webkit-slider-track {
+    height: 12px;
+    border-radius: 6px;
+    background: #4b5563;
+  }
+
+  .volume-slider::-moz-range-track {
+    height: 12px;
+    border-radius: 6px;
+    background: #4b5563;
+  }
+}
+
+/* Enhanced mobile carousel responsiveness */
+@media (max-width: 480px) {
+  .carousel-container {
+    padding: 0.5rem;
+  }
+
+  .carousel-controls {
+    gap: 0.25rem;
+  }
+
+  .carousel-controls button {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  /* Mobile-specific audio indicators */
+  .audio-indicator-mobile {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Better mobile thumbnail grid */
+  .thumbnail-grid-mobile {
+    gap: 0.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .thumbnail-grid-mobile button {
+    min-width: 48px;
+    min-height: 36px;
+  }
 }
 
 /* Improved floating elements positioning */
@@ -231,5 +316,58 @@ body {
     color: #059669;
     text-decoration: underline;
     text-decoration-thickness: 2px;
+  }
+}
+
+/* Mobile landscape optimizations */
+@media (max-width: 896px) and (orientation: landscape) {
+  .hero-mobile-landscape {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .carousel-mobile-landscape {
+    max-height: 60vh;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .ios-audio-fix audio {
+    width: 100%;
+    height: 40px;
+  }
+
+  .ios-volume-slider {
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: #d1d5db;
+    outline: none;
+  }
+
+  .ios-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #059669;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .android-audio-fix {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .android-volume-control {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 }

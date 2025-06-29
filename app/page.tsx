@@ -135,24 +135,24 @@ ${formData.firstName} ${formData.lastName}`)
         className={`relative py-12 sm:py-16 lg:py-24 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div className="space-y-8 order-2 lg:order-1">
               <div className="space-y-6">
                 <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 animate-pulse">
                   🌿 B Corp Certified • Carbon Neutral Tours
                 </Badge>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
                   Discover Colombia's
                   <span className="text-emerald-600 block">1,900+ Bird Species</span>
                 </h1>
-                <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
+                <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed">
                   Join exclusive small-group expeditions with expert ornithologist guides across the world's most
                   biodiverse country.
                 </p>
 
                 {/* Key Value Props - Simplified */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-100 shadow-lg">
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-emerald-100 shadow-lg">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span className="text-gray-700">Expert ornithologist guides</span>
@@ -174,43 +174,45 @@ ${formData.firstName} ${formData.lastName}`)
               </div>
 
               {/* Primary CTAs - Streamlined */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/tours" className="flex-1">
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Link href="/tours" className="w-full">
                   <Button
                     size="lg"
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-base px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
-                    <Binoculars className="mr-2 w-5 h-5" />
+                    <Binoculars className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                     Explore Our Tours
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </Link>
-                <Link href="#contact" className="flex-1">
+                <Link href="#contact" className="w-full">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-base px-8 py-4 shadow-md hover:shadow-lg transition-all duration-300 bg-transparent"
+                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 shadow-md hover:shadow-lg transition-all duration-300 bg-transparent"
                   >
-                    <Calendar className="mr-2 w-5 h-5" />
+                    <Calendar className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                     Plan My Trip
                   </Button>
                 </Link>
               </div>
 
               {/* Urgency Element */}
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                <div className="flex items-center space-x-3 text-amber-800">
-                  <Clock className="w-5 h-5 flex-shrink-0" />
-                  <span className="font-medium">Limited Availability: Only 2-3 tours per month • Book early</span>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
+                <div className="flex items-start sm:items-center space-x-3 text-amber-800">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 sm:mt-0" />
+                  <span className="font-medium text-sm sm:text-base">
+                    Limited Availability: Only 2-3 tours per month • Book early
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Enhanced Birds Carousel */}
             <div className="relative order-1 lg:order-2">
-              <div className="aspect-[4/3] lg:aspect-[3/4]">
+              <div className="aspect-[4/3] sm:aspect-[4/3] lg:aspect-[3/4] w-full max-w-lg mx-auto lg:max-w-none">
                 <EnhancedEndemicBirdsCarousel
-                  className="shadow-xl rounded-xl"
+                  className="shadow-xl rounded-xl w-full h-full"
                   autoPlay={true}
                   autoPlayInterval={7000}
                 />

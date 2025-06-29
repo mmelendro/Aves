@@ -575,8 +575,14 @@ export default function EnhancedEndemicBirdsCarousel({
     }
 
     const audio = new Audio(audioFile)
-    audio.volume = volume
+    // Set volume to a mobile-friendly level
+    audio.volume = Math.min(volume, 0.8) // Cap volume at 80% for mobile
     audio.preload = "auto"
+
+    // Add mobile-specific audio attributes
+    audio.setAttribute("playsinline", "true")
+    audio.setAttribute("webkit-playsinline", "true")
+
     audioRef.current = audio
 
     audio.onloadeddata = () => {
@@ -591,6 +597,7 @@ export default function EnhancedEndemicBirdsCarousel({
       audioRef.current = null
     }
 
+    // Enhanced mobile audio playback
     const playPromise = audio.play()
     if (playPromise !== undefined) {
       playPromise
@@ -600,8 +607,14 @@ export default function EnhancedEndemicBirdsCarousel({
         })
         .catch((error) => {
           console.log("Audio playback failed:", error)
-          const bird = bioregionBirds.find((b) => b.id === birdId)
-          setAudioError(`Audio not available for ${bird?.commonName || "this bird"}`)
+          // For mobile, try a different approach
+          if (error.name === "NotAllowedError") {
+            // Show a user-friendly message for mobile autoplay restrictions
+            setAudioError("Tap to play audio")
+          } else {
+            const bird = bioregionBirds.find((b) => b.id === birdId)
+            setAudioError(`Audio not available for ${bird?.commonName || "this bird"}`)
+          }
           setAudioPlaying(null)
         })
     }
@@ -710,7 +723,7 @@ export default function EnhancedEndemicBirdsCarousel({
       <Card className="overflow-hidden border-0 shadow-2xl">
         <div className="relative">
           {/* Main Image */}
-          <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+          <div className="aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/3] relative overflow-hidden bg-gray-100">
             <img
               src={currentBird.image || "/placeholder.svg?height=600&width=800&text=Bird+Image"}
               alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
@@ -743,43 +756,43 @@ export default function EnhancedEndemicBirdsCarousel({
             <Button
               variant="ghost"
               size="sm"
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full"
+              className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full touch-manipulation"
               onClick={() => handleNavigation("prev")}
               aria-label="Previous bird"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
 
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full"
+              className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full touch-manipulation"
               onClick={() => handleNavigation("next")}
               aria-label="Next bird"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
 
             {/* Control Buttons */}
-            <div className="absolute top-2 right-2 flex gap-1">
+            <div className="absolute top-1 sm:top-2 right-1 sm:right-2 flex gap-0.5 sm:gap-1">
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 touch-manipulation"
                 onClick={togglePlayPause}
                 aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
               >
-                {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+                {isPlaying ? <Pause className="w-2 h-2 sm:w-3 sm:h-3" /> : <Play className="w-2 h-2 sm:w-3 sm:h-3" />}
               </Button>
 
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 touch-manipulation"
                 onClick={toggleInfo}
                 aria-label="Toggle information"
               >
-                <Info className="w-3 h-3" />
+                <Info className="w-2 h-2 sm:w-3 sm:h-3" />
               </Button>
 
               {currentBird.audioFile && (
@@ -788,42 +801,44 @@ export default function EnhancedEndemicBirdsCarousel({
                     variant="ghost"
                     size="sm"
                     className={cn(
-                      "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 transition-all",
-                      audioPlaying === currentBird.id && "bg-green-500/30 ring-2 ring-green-400/50",
+                      "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 transition-all touch-manipulation",
+                      audioPlaying === currentBird.id && "bg-green-500/30 ring-1 sm:ring-2 ring-green-400/50",
                     )}
                     onClick={() => playAudio(currentBird.audioFile!, currentBird.id)}
                     aria-label={audioPlaying === currentBird.id ? "Stop bird call" : "Play bird call"}
                   >
-                    <Volume2 className={cn("w-3 h-3", audioPlaying === currentBird.id && "text-green-400")} />
+                    <Volume2
+                      className={cn("w-2 h-2 sm:w-3 sm:h-3", audioPlaying === currentBird.id && "text-green-400")}
+                    />
                   </Button>
 
-                  {/* Enhanced Volume Control with Slider */}
+                  {/* Enhanced Volume Control with Mobile-Optimized Slider */}
                   <div className="relative" ref={volumeSliderRef}>
                     <Button
                       variant="ghost"
                       size="sm"
                       className={cn(
-                        "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 transition-all",
-                        isMuted && "bg-red-500/30 ring-2 ring-red-400/50",
-                        showVolumeSlider && "bg-blue-500/30 ring-2 ring-blue-400/50",
+                        "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 transition-all touch-manipulation",
+                        isMuted && "bg-red-500/30 ring-1 sm:ring-2 ring-red-400/50",
+                        showVolumeSlider && "bg-blue-500/30 ring-1 sm:ring-2 ring-blue-400/50",
                       )}
                       onClick={toggleVolumeSlider}
                       aria-label="Volume control"
                     >
-                      <VolumeIcon className={cn("w-3 h-3", isMuted && "text-red-400")} />
+                      <VolumeIcon className={cn("w-2 h-2 sm:w-3 sm:h-3", isMuted && "text-red-400")} />
                     </Button>
 
-                    {/* Volume Slider Popup */}
+                    {/* Mobile-Optimized Volume Slider Popup */}
                     {showVolumeSlider && (
-                      <div className="absolute top-full right-0 mt-2 bg-black/80 backdrop-blur-sm rounded-lg p-3 min-w-[200px] z-50">
-                        <div className="space-y-3">
+                      <div className="absolute top-full right-0 mt-1 sm:mt-2 bg-black/90 backdrop-blur-sm rounded-lg p-2 sm:p-3 min-w-[160px] sm:min-w-[200px] z-50 border border-white/20">
+                        <div className="space-y-2 sm:space-y-3">
                           {/* Volume Label */}
                           <div className="flex items-center justify-between text-white text-xs">
                             <span>Volume</span>
                             <span>{Math.round(volume * 100)}%</span>
                           </div>
 
-                          {/* Volume Slider */}
+                          {/* Mobile-Optimized Volume Slider */}
                           <div className="relative">
                             <input
                               type="range"
@@ -832,21 +847,21 @@ export default function EnhancedEndemicBirdsCarousel({
                               step="0.05"
                               value={volume}
                               onChange={(e) => handleVolumeChange(Number.parseFloat(e.target.value))}
-                              className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer volume-slider"
+                              className="w-full h-3 sm:h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer volume-slider touch-manipulation"
                               aria-label="Volume slider"
                             />
                             <div
-                              className="absolute top-0 left-0 h-2 bg-emerald-500 rounded-lg pointer-events-none"
+                              className="absolute top-0 left-0 h-3 sm:h-2 bg-emerald-500 rounded-lg pointer-events-none"
                               style={{ width: `${volume * 100}%` }}
                             />
                           </div>
 
-                          {/* Quick Volume Buttons */}
-                          <div className="flex gap-1 justify-between">
+                          {/* Mobile-Optimized Quick Volume Buttons */}
+                          <div className="grid grid-cols-3 sm:flex gap-1 justify-between">
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-6"
+                              className="text-white hover:bg-white/20 text-xs px-1 sm:px-2 py-1 h-6 touch-manipulation"
                               onClick={() => handleVolumeChange(0)}
                             >
                               0%
@@ -854,15 +869,7 @@ export default function EnhancedEndemicBirdsCarousel({
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-6"
-                              onClick={() => handleVolumeChange(0.25)}
-                            >
-                              25%
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-6"
+                              className="text-white hover:bg-white/20 text-xs px-1 sm:px-2 py-1 h-6 touch-manipulation"
                               onClick={() => handleVolumeChange(0.5)}
                             >
                               50%
@@ -870,15 +877,7 @@ export default function EnhancedEndemicBirdsCarousel({
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-6"
-                              onClick={() => handleVolumeChange(0.75)}
-                            >
-                              75%
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-6"
+                              className="text-white hover:bg-white/20 text-xs px-1 sm:px-2 py-1 h-6 touch-manipulation"
                               onClick={() => handleVolumeChange(1)}
                             >
                               100%
@@ -889,7 +888,7 @@ export default function EnhancedEndemicBirdsCarousel({
                           <Button
                             size="sm"
                             variant="outline"
-                            className="w-full text-white border-white/30 hover:bg-white/20 bg-transparent text-xs"
+                            className="w-full text-white border-white/30 hover:bg-white/20 bg-transparent text-xs touch-manipulation"
                             onClick={toggleMute}
                           >
                             {isMuted ? "Unmute" : "Mute"}
@@ -906,10 +905,10 @@ export default function EnhancedEndemicBirdsCarousel({
                 href={`https://ebird.org/species/${currentBird.ebirdCode}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-md flex items-center justify-center transition-colors"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 rounded-md flex items-center justify-center transition-colors touch-manipulation"
                 aria-label={`View ${currentBird.commonName} on eBird`}
               >
-                <ExternalLink className="w-3 h-3" />
+                <ExternalLink className="w-2 h-2 sm:w-3 sm:h-3" />
               </a>
             </div>
 
@@ -987,30 +986,30 @@ export default function EnhancedEndemicBirdsCarousel({
             )}
 
             {/* Bird Information Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <MapPin className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm font-medium text-emerald-300">{currentBird.bioregion}</span>
+            <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4 text-white">
+              <div className="space-y-1 sm:space-y-2">
+                <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
+                  <span className="text-xs sm:text-sm font-medium text-emerald-300">{currentBird.bioregion}</span>
                   {/* Audio availability indicator */}
                   {currentBird.audioFile && audioLoaded.has(currentBird.id) && (
-                    <Volume2 className="w-3 h-3 text-emerald-400" />
+                    <Volume2 className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
                   )}
                 </div>
 
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold">{currentBird.commonName}</h3>
-                  <p className="text-sm italic opacity-90">{currentBird.scientificName}</p>
+                  <h3 className="text-sm sm:text-lg md:text-xl font-bold">{currentBird.commonName}</h3>
+                  <p className="text-xs sm:text-sm italic opacity-90">{currentBird.scientificName}</p>
                   <p className="text-xs opacity-75">{currentBird.spanishName}</p>
                 </div>
 
                 {showInfo && (
-                  <div className="space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-3 mt-3">
-                    <p className="text-sm leading-relaxed">{currentBird.description}</p>
+                  <div className="space-y-2 sm:space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-2 sm:p-3 mt-2 sm:mt-3">
+                    <p className="text-xs sm:text-sm leading-relaxed">{currentBird.description}</p>
 
-                    <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2 text-xs">
                       <div className="flex items-center gap-1">
-                        <Camera className="w-3 h-3" />
+                        <Camera className="w-2 h-2 sm:w-3 sm:h-3" />
                         <span>{currentBird.bestTime}</span>
                       </div>
                       <div className="flex items-center gap-1">
@@ -1023,29 +1022,32 @@ export default function EnhancedEndemicBirdsCarousel({
                       <span className="font-medium">Habitat:</span> {currentBird.habitat}
                     </div>
 
-                    {/* Audio controls in info panel */}
+                    {/* Mobile-optimized audio controls in info panel */}
                     {currentBird.audioFile && (
-                      <div className="flex items-center gap-2 text-xs">
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
                         <span className="font-medium">Audio:</span>
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-6 px-2 text-xs border-white/30 text-white hover:bg-white/20 bg-transparent"
+                          className="h-5 sm:h-6 px-2 text-xs border-white/30 text-white hover:bg-white/20 bg-transparent touch-manipulation"
                           onClick={() => playAudio(currentBird.audioFile!, currentBird.id)}
                         >
-                          {audioPlaying === currentBird.id ? "Stop Call" : "Play Call"}
+                          {audioPlaying === currentBird.id ? "Stop" : "Play"}
                         </Button>
                         <span className="text-emerald-300">Vol: {Math.round(volume * 100)}%</span>
                         {currentBird.id === "1" && !userInteracted && pageFullyLoaded && (
-                          <span className="text-emerald-300">(Auto-playing on load)</span>
+                          <span className="text-emerald-300 text-xs">(Auto-play)</span>
                         )}
                       </div>
                     )}
 
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex flex-col sm:flex-row gap-2 mt-2 sm:mt-3">
                       <Link href={`/bioregions/${currentBird.bioregionSlug}`}>
-                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs">
-                          Explore {currentBird.bioregion}
+                        <Button
+                          size="sm"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-xs w-full sm:w-auto touch-manipulation"
+                        >
+                          Explore {currentBird.bioregion.split(" ")[0]}
                         </Button>
                       </Link>
                       <Link
@@ -1054,9 +1056,9 @@ export default function EnhancedEndemicBirdsCarousel({
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-white text-white hover:bg-white hover:text-gray-900 text-xs bg-transparent"
+                          className="border-white text-white hover:bg-white hover:text-gray-900 text-xs bg-transparent w-full sm:w-auto touch-manipulation"
                         >
-                          Plan Your Trip
+                          Plan Trip
                         </Button>
                       </Link>
                     </div>
@@ -1069,15 +1071,15 @@ export default function EnhancedEndemicBirdsCarousel({
 
         {/* Thumbnail Navigation */}
         <CardContent className="p-3">
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide pb-2">
             {bioregionBirds.map((bird, index) => (
               <button
                 key={bird.id}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  "flex-shrink-0 w-16 h-12 rounded-md overflow-hidden border-2 transition-all relative",
+                  "flex-shrink-0 w-12 h-9 sm:w-16 sm:h-12 rounded-md overflow-hidden border-2 transition-all relative touch-manipulation",
                   index === currentIndex
-                    ? "border-emerald-500 ring-2 ring-emerald-200"
+                    ? "border-emerald-500 ring-1 sm:ring-2 ring-emerald-200"
                     : "border-gray-200 hover:border-gray-300",
                 )}
                 aria-label={`View ${bird.commonName} from ${bird.bioregion}`}
@@ -1092,26 +1094,13 @@ export default function EnhancedEndemicBirdsCarousel({
                 />
                 {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
 
-                {/* Audio indicator for thumbnails */}
+                {/* Mobile-optimized indicators */}
                 {audioPlaying === bird.id && !isMuted && bird.audioFile && !audioError && (
-                  <div className="absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <div className="absolute top-0 right-0 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse" />
                 )}
 
-                {/* Audio available indicator */}
                 {bird.audioFile && audioLoaded.has(bird.id) && (
-                  <div className="absolute top-0 left-0 w-2 h-2 bg-blue-500 rounded-full" />
-                )}
-
-                {/* Initial autoplay indicator for first bird */}
-                {bird.id === "1" && audioPlaying === bird.id && !userInteracted && pageFullyLoaded && (
-                  <div className="absolute bottom-0 right-0 w-2 h-2 bg-yellow-500 rounded-full animate-pulse" />
-                )}
-
-                {/* Volume level indicator */}
-                {index === currentIndex && !isMuted && volume > 0 && (
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-black/60">
-                    <div className="h-full bg-emerald-400 transition-all" style={{ width: `${volume * 100}%` }} />
-                  </div>
+                  <div className="absolute top-0 left-0 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full" />
                 )}
 
                 {/* Bioregion indicator */}
@@ -1173,8 +1162,8 @@ export default function EnhancedEndemicBirdsCarousel({
       <style jsx>{`
         .volume-slider::-webkit-slider-thumb {
           appearance: none;
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           background: #059669;
           cursor: pointer;
@@ -1183,13 +1172,25 @@ export default function EnhancedEndemicBirdsCarousel({
         }
         
         .volume-slider::-moz-range-thumb {
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           background: #059669;
           cursor: pointer;
           border: 2px solid white;
           box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 640px) {
+          .volume-slider::-webkit-slider-thumb {
+            width: 24px;
+            height: 24px;
+          }
+          
+          .volume-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+          }
         }
       `}</style>
     </div>
