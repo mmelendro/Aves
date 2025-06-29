@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -11,7 +10,6 @@ import {
   Bird,
   TreePine,
   Mountain,
-  Users,
   ChevronRight,
   Waves,
   Leaf,
@@ -19,8 +17,6 @@ import {
   Globe,
   Camera,
   ArrowRight,
-  Shield,
-  BookOpen,
 } from "lucide-react"
 
 // Complete bioregions data with corrected coordinates and accurate color mapping
@@ -127,7 +123,7 @@ const bioregionsData = [
     endemicCount: 12,
     totalSpecies: 420,
     keyBirds: ["Cauca Guan", "Apical Flycatcher", "Greyish Piculet", "Sooty Ant-Tanager", "White-mantled Barbet"],
-    coordinates: { x: 26, y: 62 }, // Corrected to align with blue Cauca valley region
+    coordinates: { x: 26, y: 40 }, // Corrected to align with blue Cauca valley region
     color: "#4169E1",
     gradient: "from-[#4169E1] to-[#3A5FCA]",
     icon: Leaf,
@@ -147,7 +143,7 @@ const bioregionsData = [
     endemicCount: 18,
     totalSpecies: 550,
     keyBirds: ["Niceforo's Wren", "Magdalena Antbird", "Sooty Ant-Tanager", "Apical Flycatcher", "Greyish Piculet"],
-    coordinates: { x: 40, y: 58 }, // Corrected to align with blue central valley region
+    coordinates: { x: 40, y: 36 }, // Corrected to align with blue central valley region
     color: "#1E90FF",
     gradient: "from-[#1E90FF] to-[#1C82E6]",
     icon: Leaf,
@@ -173,7 +169,7 @@ const bioregionsData = [
       "Vermilion Cardinal",
       "Chestnut-winged Chachalaca",
     ],
-    coordinates: { x: 46, y: 18 }, // Corrected to align with orange northern coastal region
+    coordinates: { x: 36, y: 18 }, // Corrected to align with orange northern coastal region
     color: "#FF8C00",
     gradient: "from-[#FF8C00] to-[#E67E00]",
     icon: Waves,
@@ -199,7 +195,7 @@ const bioregionsData = [
       "Santa Marta Antbird",
       "Santa Marta Bush-Tyrant",
     ],
-    coordinates: { x: 60, y: 22 }, // Corrected to align with brown isolated mountain massif
+    coordinates: { x: 47, y: 10 }, // Corrected to align with brown isolated mountain massif
     color: "#D2691E",
     gradient: "from-[#D2691E] to-[#BD5F1B]",
     icon: Mountain,
@@ -265,7 +261,7 @@ const bioregionsData = [
       "Masked Mountain-Tanager",
       "Lacrimose Mountain-Tanager",
     ],
-    coordinates: { x: 36, y: 72 }, // Corrected to align with brown southern mountain massif
+    coordinates: { x: 20, y: 65 }, // Corrected to align with brown southern mountain massif
     color: "#DEB887",
     gradient: "from-[#DEB887] to-[#C8A679]",
     icon: Mountain,
@@ -411,17 +407,21 @@ export function ColombianBirdsExplorer() {
                   Colombia stands as the world's most biodiverse country per square kilometer, a natural treasure
                   positioned at the crossroads of North and South America. This strategic location, combined with three
                   separate Andean mountain ranges and coastlines on both the Pacific Ocean and Caribbean Sea, creates an
-                  extraordinary mosaic of ecosystems.
+                  extraordinary mosaic of ecosystems perfectly illustrated in our comprehensive color-coded bioregions
+                  map.
                 </p>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   From sea level to snow-capped peaks at 5,775 meters, Colombia encompasses every climate zone on Earth.
                   The Amazon rainforest meets Andean cloud forests, Caribbean dry forests border Pacific rainforests,
                   and high-altitude páramo grasslands crown the mountains - each ecosystem supporting unique bird
-                  communities found nowhere else.
+                  communities found nowhere else. Our color-coded bioregions map reveals these distinct ecological zones
+                  and their remarkable avifauna diversity.
                 </p>
                 <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   This incredible diversity makes Colombia home to more bird species than any other country, with new
-                  species still being discovered regularly by scientists and birdwatchers alike.
+                  species still being discovered regularly by scientists and birdwatchers alike. Click on the map to
+                  explore our interactive bioregions explorer and discover the specific bird communities that inhabit
+                  each unique ecosystem.
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-200">
@@ -439,18 +439,24 @@ export function ColombianBirdsExplorer() {
                 </div>
               </div>
               <div className="relative">
-                <div className="relative overflow-hidden rounded-xl shadow-2xl">
+                <button
+                  onClick={() => document.getElementById("bioregions-map")?.scrollIntoView({ behavior: "smooth" })}
+                  className="relative overflow-hidden rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 group cursor-pointer w-full"
+                >
                   <img
-                    src="/images/birding-regions-colombia.png"
-                    alt="Colombia's Diverse Landscapes and Bioregions"
-                    className="w-full h-auto"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Birding%20Regions%20Colombia%20Colour-3VBPiVZzCDHxuYdLOwBDy5j3W5OACf.png"
+                    alt="Colombia's Color-Coded Bioregions Map - Click to Explore Interactive Version"
+                    className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:from-black/50 transition-all duration-300"></div>
                   <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-sm font-medium">Colombia's 11 Bioregions</p>
-                    <p className="text-xs opacity-90">Interactive map below</p>
+                    <p className="text-sm font-medium">Colombia's 11 Bioregions Color Map</p>
+                    <p className="text-xs opacity-90">Click to explore interactive version below ↓</p>
                   </div>
-                </div>
+                  <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-medium opacity-90 group-hover:opacity-100 transition-opacity">
+                    Interactive Map ↓
+                  </div>
+                </button>
               </div>
             </div>
           </div>
@@ -694,15 +700,24 @@ export function ColombianBirdsExplorer() {
                             aria-label={`Explore ${region.name} bioregion - ${region.endemicCount} endemic species`}
                           >
                             <div
-                              className={`w-14 h-14 rounded-full shadow-xl group-hover:scale-125 transition-all duration-300 flex items-center justify-center border-2 border-white/50 ${
-                                isSelected ? "ring-4 ring-white ring-opacity-90 scale-125 shadow-2xl" : ""
+                              className={`w-16 h-16 rounded-full shadow-2xl group-hover:scale-125 transition-all duration-300 flex items-center justify-center border-4 border-white/90 ring-2 ring-gray-900/60 ${
+                                isSelected
+                                  ? "ring-4 ring-white ring-opacity-95 scale-125 shadow-2xl border-white ring-offset-2 ring-offset-gray-900"
+                                  : ""
                               }`}
                               style={{
                                 backgroundColor: region.color,
-                                boxShadow: `0 6px 20px ${region.color}60, 0 0 0 2px rgba(255,255,255,0.3)`,
+                                boxShadow: `0 8px 25px ${region.color}70, 0 0 0 2px rgba(0,0,0,0.8), 0 0 0 4px rgba(255,255,255,0.95), 0 0 0 6px rgba(0,0,0,0.4)`,
                               }}
                             >
-                              <IconComponent className="w-7 h-7 text-white drop-shadow-sm" />
+                              <IconComponent
+                                className="w-8 h-8 text-white drop-shadow-2xl filter contrast-150 brightness-110"
+                                style={{
+                                  filter:
+                                    "drop-shadow(2px 2px 4px rgba(0,0,0,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,0.3))",
+                                  textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+                                }}
+                              />
                             </div>
                             {isHovered && !isSelected && (
                               <div className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-white px-4 py-3 rounded-xl shadow-2xl text-sm font-medium whitespace-nowrap z-20 border border-gray-200 backdrop-blur-sm bg-white/95">
@@ -752,220 +767,9 @@ export function ColombianBirdsExplorer() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-gray-700 mb-6 leading-relaxed text-lg">{currentRegion.detailedDescription}</p>
-
-                      <div className="grid md:grid-cols-4 gap-4 mb-6">
-                        <div
-                          className="text-center p-4 bg-white rounded-lg shadow-sm border-2"
-                          style={{ borderColor: `${currentRegion.color}30` }}
-                        >
-                          <div className="text-2xl font-bold" style={{ color: currentRegion.color }}>
-                            {currentRegion.endemicCount}
-                          </div>
-                          <div className="text-sm text-gray-600">Endemic Species</div>
-                        </div>
-                        <div
-                          className="text-center p-4 bg-white rounded-lg shadow-sm border-2"
-                          style={{ borderColor: `${currentRegion.color}30` }}
-                        >
-                          <div className="text-2xl font-bold" style={{ color: currentRegion.color }}>
-                            {currentRegion.totalSpecies}
-                          </div>
-                          <div className="text-sm text-gray-600">Total Species</div>
-                        </div>
-                        <div
-                          className="text-center p-4 bg-white rounded-lg shadow-sm border-2"
-                          style={{ borderColor: `${currentRegion.color}30` }}
-                        >
-                          <div className="text-lg font-bold" style={{ color: currentRegion.color }}>
-                            {currentRegion.bestTime}
-                          </div>
-                          <div className="text-sm text-gray-600">Best Season</div>
-                        </div>
-                        <div
-                          className="text-center p-4 bg-white rounded-lg shadow-sm border-2"
-                          style={{ borderColor: `${currentRegion.color}30` }}
-                        >
-                          <div className="text-lg font-bold" style={{ color: currentRegion.color }}>
-                            {currentRegion.conservation.includes("UNESCO") ? "UNESCO" : "Protected"}
-                          </div>
-                          <div className="text-sm text-gray-600">Status</div>
-                        </div>
-                      </div>
-
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                          <Bird className="w-5 h-5" style={{ color: currentRegion.color }} />
-                          Key Bird Species:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {currentRegion.keyBirds.map((bird, index) => (
-                            <Badge
-                              key={index}
-                              className="text-sm px-3 py-1 text-white"
-                              style={{ backgroundColor: currentRegion.color }}
-                            >
-                              {bird}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                          <Shield className="w-5 h-5 text-red-600" />
-                          Conservation Threats:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {currentRegion.threats.map((threat, index) => (
-                            <Badge key={index} variant="destructive" className="text-sm px-3 py-1">
-                              {threat}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4">
-                        <Button asChild className="flex-1 text-white" style={{ backgroundColor: currentRegion.color }}>
-                          <Link href={`/shopping?region=${encodeURIComponent(currentRegion.id)}&from=bioregions-map`}>
-                            <Camera className="w-4 h-4 mr-2" />
-                            Book Tour
-                          </Link>
-                        </Button>
-                        <Button
-                          variant="outline"
-                          asChild
-                          className="flex-1 bg-transparent"
-                          style={{ borderColor: currentRegion.color, color: currentRegion.color }}
-                        >
-                          <Link href="/contact">
-                            <Users className="w-4 h-4 mr-2" />
-                            Plan Custom Visit
-                          </Link>
-                        </Button>
-                      </div>
                     </CardContent>
                   </Card>
                 )}
-
-                {/* Strategic CTA after map interaction */}
-                {!selectedRegion && (
-                  <div className="mt-8 text-center">
-                    <div className="bg-gradient-to-r from-emerald-500 to-blue-600 rounded-2xl p-8 text-white">
-                      <h3 className="text-2xl font-bold mb-4">Ready to Explore Colombia's Birds?</h3>
-                      <p className="text-emerald-100 mb-6 max-w-2xl mx-auto">
-                        Join our expert-guided tours to witness these incredible species in their natural habitats.
-                        Every tour supports local conservation efforts.
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button asChild size="lg" className="bg-white text-emerald-600 hover:bg-emerald-50">
-                          <Link href="/shopping">
-                            <Camera className="w-5 h-5 mr-2" />
-                            Book Your Adventure
-                          </Link>
-                        </Button>
-                        <Button
-                          asChild
-                          size="lg"
-                          variant="outline"
-                          className="border-white text-white hover:bg-white hover:text-emerald-600 bg-transparent"
-                        >
-                          <Link href="/contact">
-                            <Users className="w-5 h-5 mr-2" />
-                            Plan Custom Tour
-                          </Link>
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Colombia's Ecoregions Explorer */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Colombia's Ecoregions Explorer</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Dive deeper into the scientific classification of Colombia's ecosystems. Our 31 ecoregions provide the
-                foundation for conservation efforts and biodiversity research.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Ecoregions Matter</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <TreePine className="w-4 h-4 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Conservation Planning</h4>
-                      <p className="text-gray-600">
-                        Ecoregions help identify priority areas for habitat protection and restoration efforts.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Bird className="w-4 h-4 text-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Species Research</h4>
-                      <p className="text-gray-600">
-                        Understanding species assemblages and their ecological relationships within specific habitats.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Globe className="w-4 h-4 text-purple-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Global Standards</h4>
-                      <p className="text-gray-600">
-                        WWF ecoregions provide internationally recognized frameworks for biodiversity assessment.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-6 bg-red-50 rounded-lg border border-red-200">
-                  <div className="text-3xl font-bold text-red-600 mb-2">8</div>
-                  <div className="text-sm text-gray-600">Critical Priority Ecoregions</div>
-                </div>
-                <div className="text-center p-6 bg-orange-50 rounded-lg border border-orange-200">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">12</div>
-                  <div className="text-sm text-gray-600">Vulnerable Ecoregions</div>
-                </div>
-                <div className="text-center p-6 bg-green-50 rounded-lg border border-green-200">
-                  <div className="text-3xl font-bold text-green-600 mb-2">11</div>
-                  <div className="text-sm text-gray-600">Stable Ecoregions</div>
-                </div>
-                <div className="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">31</div>
-                  <div className="text-sm text-gray-600">Total Ecoregions</div>
-                </div>
-              </div>
-            </div>
-
-            <Card className="bg-gradient-to-r from-emerald-50 to-blue-50 border-emerald-200">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Detailed Ecoregion Data</h3>
-                <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-                  Access comprehensive scientific data, species lists, conservation status, and detailed information
-                  about each of Colombia's 31 ecoregions.
-                </p>
-                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  View Ecoregions Database
-                </Button>
               </CardContent>
             </Card>
           </div>
