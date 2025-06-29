@@ -300,6 +300,9 @@ export default function EnhancedEndemicBirdsCarousel({
   const [initialAutoplayAttempted, setInitialAutoplayAttempted] = useState(false)
   const [pageFullyLoaded, setPageFullyLoaded] = useState(false)
   const volumeSliderRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [audioSupported, setAudioSupported] = useState(true)
+  const [debugInfo, setDebugInfo] = useState<string>("")
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % bioregionBirds.length)
@@ -328,12 +331,26 @@ export default function EnhancedEndemicBirdsCarousel({
     }
   }, [])
 
-  // Function to attempt initial autoplay on page load
+  const getAudioErrorMessage = (errorCode: number) => {
+    switch (errorCode) {
+      case MediaError.MEDIA_ERR_ABORTED:
+        return "Audio loading was aborted"
+      case MediaError.MEDIA_ERR_NETWORK:
+        return "Network error loading audio"
+      case MediaError.MEDIA_ERR_DECODE:
+        return "Audio format not supported"
+      case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+        return "Audio file not found or format not supported"
+      default:
+        return "Unknown audio error"
+    }
+  }
+
   const attemptInitialAutoplay = useCallback(() => {
     if (initialAutoplayAttempted || isMuted || currentIndex !== 0 || !pageFullyLoaded) return
 
-    const firstBird = bioregionBirds[0] // Green-bearded Helmetcrest
-    if (!firstBird.audioFile) return
+    const firstBird = bioregionBirds[0]
+    if (!firstBird.audioFile || !audioSupported) return
 
     setInitialAutoplayAttempted(true)
 
@@ -343,55 +360,80 @@ export default function EnhancedEndemicBirdsCarousel({
       audioRef.current.currentTime = 0
     }
 
-    const audio = new Audio(firstBird.audioFile)
-    audio.volume = volume
-    audio.preload = "auto"
+    // Enhanced mobile-friendly audio creation
+    const audio = new Audio()
+
+    // Mobile-specific configuration
+    audio.preload = "metadata" // Changed from "auto" for mobile compatibility
+    audio.crossOrigin = "anonymous"
+    audio.setAttribute("playsinline", "true")
+    audio.setAttribute("webkit-playsinline", "true")
+    audio.volume = Math.min(volume, 0.5) // Lower volume for mobile
+
     audioRef.current = audio
 
-    // Handle successful audio loading
-    audio.onloadeddata = () => {
-      setAudioLoaded((prev) => new Set(prev).add(firstBird.id))
-      setAudioError(null)
-    }
-
-    // Handle audio errors
+    // Enhanced error handling
     audio.onerror = (e) => {
-      console.log(`Initial autoplay audio error for ${firstBird.commonName}:`, e)
+      console.error(`Initial autoplay audio error for ${firstBird.commonName}:`, e)
+      if (audio.error) {
+        const errorMessage = `Audio Error ${audio.error.code}: ${getAudioErrorMessage(audio.error.code)}`
+        console.error(errorMessage)
+        setDebugInfo((prev) => `${prev} | ${errorMessage}`)
+      }
       setAudioError(null) // Don't show error for initial autoplay
       setAudioPlaying(null)
       audioRef.current = null
     }
 
-    // Attempt to play immediately on page load
-    const playPromise = audio.play()
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // Audio started playing successfully
-          setAudioPlaying(firstBird.id)
-          setAudioError(null)
-          console.log("✅ Initial autoplay successful for Green-bearded Helmetcrest")
-        })
-        .catch((error) => {
-          console.log("⚠️ Initial autoplay prevented by browser:", error)
-          // Don't show error for autoplay prevention on initial load
-          setAudioPlaying(null)
-          setAudioError(null)
-        })
+    // Loading handlers
+    audio.onloadedmetadata = () => {
+      setAudioLoaded((prev) => new Set(prev).add(firstBird.id))
+      setAudioError(null)
+      console.log(`Audio metadata loaded for ${firstBird.commonName}`)
     }
 
-    // Handle audio ending
+    audio.oncanplay = () => {
+      console.log(`Audio can play for ${firstBird.commonName}`)
+    }
+
+    // Set source after event listeners
+    audio.src = firstBird.audioFile
+
+    // Mobile-friendly autoplay attempt with longer delay
+    const attemptPlay = () => {
+      const playPromise = audio.play()
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setAudioPlaying(firstBird.id)
+            setAudioError(null)
+            console.log("✅ Initial autoplay successful for Green-bearded Helmetcrest")
+          })
+          .catch((error) => {
+            console.log("⚠️ Initial autoplay prevented by browser:", error)
+            setAudioPlaying(null)
+            setAudioError(null)
+          })
+      }
+    }
+
+    // Longer delay for mobile devices
+    if (isMobile) {
+      setTimeout(attemptPlay, 1000)
+    } else {
+      setTimeout(attemptPlay, 300)
+    }
+
     audio.onended = () => {
       setAudioPlaying(null)
       audioRef.current = null
       setAudioError(null)
     }
-  }, [initialAutoplayAttempted, isMuted, currentIndex, pageFullyLoaded, volume])
+  }, [initialAutoplayAttempted, isMuted, currentIndex, pageFullyLoaded, volume, audioSupported, isMobile])
 
   // Stop current audio and play new audio for the current slide
   const playCurrentSlideAudio = useCallback(() => {
-    // Skip if muted, or if this is the initial load (handled separately)
-    if (isMuted || (!userInteracted && currentIndex === 0 && !initialAutoplayAttempted)) return
+    if (isMuted || (!userInteracted && currentIndex === 0 && !initialAutoplayAttempted) || !audioSupported) return
 
     const currentBird = bioregionBirds[currentIndex]
 
@@ -402,78 +444,120 @@ export default function EnhancedEndemicBirdsCarousel({
       audioRef.current = null
     }
 
-    // Clear any previous audio errors
     setAudioError(null)
     setAudioPlaying(null)
 
-    // Play audio for current bird if available
     if (currentBird.audioFile) {
-      const audio = new Audio(currentBird.audioFile)
-      audio.volume = volume
-      audio.preload = "auto"
+      const audio = new Audio()
+
+      // Enhanced mobile configuration
+      audio.preload = "metadata"
+      audio.crossOrigin = "anonymous"
+      audio.setAttribute("playsinline", "true")
+      audio.setAttribute("webkit-playsinline", "true")
+      audio.volume = Math.min(volume, 0.6)
+
       audioRef.current = audio
 
-      // Handle successful audio loading
-      audio.onloadeddata = () => {
-        setAudioLoaded((prev) => new Set(prev).add(currentBird.id))
-        setAudioError(null)
-      }
-
-      // Handle audio errors
       audio.onerror = (e) => {
-        console.log(`Audio file error for ${currentBird.commonName}:`, e)
-        setAudioError(`Audio not available for ${currentBird.commonName}`)
+        console.error(`Auto-play audio error for ${currentBird.commonName}:`, e)
+        if (audio.error) {
+          const errorMessage = getAudioErrorMessage(audio.error.code)
+          setAudioError(`${errorMessage} for ${currentBird.commonName}`)
+          setDebugInfo((prev) => `${prev} | Error: ${errorMessage}`)
+        } else {
+          setAudioError(`Audio not available for ${currentBird.commonName}`)
+        }
         setAudioPlaying(null)
         audioRef.current = null
       }
 
-      // Attempt to play the audio
-      const playPromise = audio.play()
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            // Audio started playing successfully
-            setAudioPlaying(currentBird.id)
-            setAudioError(null)
-          })
-          .catch((error) => {
-            console.log("Audio autoplay prevented or failed:", error)
-            // Don't show error for autoplay prevention, just log it
-            if (error.name !== "NotAllowedError") {
-              setAudioError(`Audio not available for ${currentBird.commonName}`)
-            }
-            setAudioPlaying(null)
-          })
+      audio.onloadedmetadata = () => {
+        setAudioLoaded((prev) => new Set(prev).add(currentBird.id))
       }
 
-      // Handle audio ending
+      audio.oncanplay = () => {
+        setAudioError(null)
+      }
+
+      // Set source after event listeners
+      audio.src = currentBird.audioFile
+
+      const attemptAutoPlay = () => {
+        const playPromise = audio.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setAudioPlaying(currentBird.id)
+              setAudioError(null)
+            })
+            .catch((error) => {
+              console.log("Auto-play prevented or failed:", error)
+              if (error.name !== "NotAllowedError") {
+                setAudioError(`Audio playback failed for ${currentBird.commonName}`)
+              }
+              setAudioPlaying(null)
+            })
+        }
+      }
+
+      // Mobile-friendly delay
+      if (isMobile) {
+        setTimeout(attemptAutoPlay, 200)
+      } else {
+        attemptAutoPlay()
+      }
+
       audio.onended = () => {
         setAudioPlaying(null)
         audioRef.current = null
         setAudioError(null)
       }
     }
-  }, [currentIndex, isMuted, userInteracted, initialAutoplayAttempted, volume])
+  }, [currentIndex, isMuted, userInteracted, initialAutoplayAttempted, volume, audioSupported, isMobile])
 
   // Effect to handle component mounting and page load detection
   useEffect(() => {
     setComponentMounted(true)
 
+    // Enhanced mobile detection
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase()
+      const isMobileDevice = /iphone|ipad|ipod|android|blackberry|windows phone|opera mini|iemobile/i.test(userAgent)
+      const isIOSDevice = /iphone|ipad|ipod/i.test(userAgent)
+
+      setIsMobile(isMobileDevice)
+      setDebugInfo(
+        `Device: ${isMobileDevice ? "Mobile" : "Desktop"}, iOS: ${isIOSDevice}, UA: ${userAgent.substring(0, 50)}...`,
+      )
+
+      // Test audio support
+      const audio = document.createElement("audio")
+      const canPlayMP3 = audio.canPlayType("audio/mpeg")
+      setAudioSupported(canPlayMP3 !== "")
+
+      console.log("Audio support check:", {
+        canPlayMP3,
+        isMobileDevice,
+        isIOSDevice,
+        userAgent: userAgent.substring(0, 100),
+      })
+    }
+
+    checkMobile()
+
     // Check if page is already loaded
     if (document.readyState === "complete") {
       setPageFullyLoaded(true)
     } else {
-      // Listen for page load completion
       const handleLoad = () => {
         setPageFullyLoaded(true)
       }
 
       window.addEventListener("load", handleLoad)
-
-      // Fallback timeout in case load event doesn't fire
       const fallbackTimer = setTimeout(() => {
         setPageFullyLoaded(true)
-      }, 2000)
+      }, 3000) // Increased timeout for mobile
 
       return () => {
         window.removeEventListener("load", handleLoad)
@@ -481,6 +565,41 @@ export default function EnhancedEndemicBirdsCarousel({
       }
     }
   }, [])
+
+  const checkAudioFileAvailability = useCallback(async (audioFile: string) => {
+    try {
+      const response = await fetch(audioFile, { method: "HEAD" })
+      if (response.ok) {
+        const contentType = response.headers.get("content-type")
+        console.log(`Audio file available: ${audioFile}, Type: ${contentType}`)
+        return { available: true, contentType }
+      } else {
+        console.warn(`Audio file not accessible: ${audioFile} (Status: ${response.status})`)
+        return { available: false, contentType: null }
+      }
+    } catch (error) {
+      console.error(`Error checking audio file: ${audioFile}`, error)
+      return { available: false, contentType: null }
+    }
+  }, [])
+
+  // Add this useEffect after the component mounting effect
+  useEffect(() => {
+    if (componentMounted && audioSupported) {
+      // Verify audio files are accessible
+      bioregionBirds.forEach(async (bird) => {
+        if (bird.audioFile) {
+          const { available, contentType } = await checkAudioFileAvailability(bird.audioFile)
+          if (!available) {
+            console.warn(`Audio file not available for ${bird.commonName}: ${bird.audioFile}`)
+            setDebugInfo((prev) => `${prev} | Missing: ${bird.commonName}`)
+          } else {
+            console.log(`✅ Audio verified for ${bird.commonName}: ${contentType}`)
+          }
+        }
+      })
+    }
+  }, [componentMounted, audioSupported, checkAudioFileAvailability])
 
   // Effect to handle clicks outside volume slider
   useEffect(() => {
@@ -554,7 +673,7 @@ export default function EnhancedEndemicBirdsCarousel({
   const playAudio = (audioFile: string, birdId: string) => {
     setUserInteracted(true)
 
-    if (isMuted) return
+    if (isMuted || !audioSupported) return
 
     // If this bird's audio is already playing, stop it
     if (audioPlaying === birdId) {
@@ -574,55 +693,102 @@ export default function EnhancedEndemicBirdsCarousel({
       audioRef.current.currentTime = 0
     }
 
-    const audio = new Audio(audioFile)
-    // Set volume to a mobile-friendly level
-    audio.volume = Math.min(volume, 0.8) // Cap volume at 80% for mobile
-    audio.preload = "auto"
+    // Enhanced mobile-friendly audio creation
+    const audio = new Audio()
 
-    // Add mobile-specific audio attributes
+    // Comprehensive mobile configuration
+    audio.preload = "metadata"
+    audio.crossOrigin = "anonymous"
     audio.setAttribute("playsinline", "true")
     audio.setAttribute("webkit-playsinline", "true")
+    audio.setAttribute("controls", "false")
+
+    // Mobile-optimized volume
+    audio.volume = Math.min(volume, 0.7)
 
     audioRef.current = audio
 
-    audio.onloadeddata = () => {
-      setAudioLoaded((prev) => new Set(prev).add(birdId))
-    }
-
+    // Enhanced error handling
     audio.onerror = (e) => {
-      console.log(`Audio file error: ${audioFile}`, e)
+      console.error(`Audio file error for ${audioFile}:`, e)
       const bird = bioregionBirds.find((b) => b.id === birdId)
-      setAudioError(`Audio not available for ${bird?.commonName || "this bird"}`)
+
+      if (audio.error) {
+        const errorMessage = getAudioErrorMessage(audio.error.code)
+        setAudioError(`${errorMessage} for ${bird?.commonName || "this bird"}`)
+        setDebugInfo((prev) => `${prev} | Manual play error: ${errorMessage}`)
+      } else {
+        setAudioError(`Audio not available for ${bird?.commonName || "this bird"}`)
+      }
+
       setAudioPlaying(null)
       audioRef.current = null
     }
 
+    // Enhanced loading handlers
+    audio.onloadedmetadata = () => {
+      setAudioLoaded((prev) => new Set(prev).add(birdId))
+      console.log(`Manual play: Audio metadata loaded for ${birdId}`)
+    }
+
+    audio.oncanplay = () => {
+      console.log(`Manual play: Audio can play for ${birdId}`)
+      setAudioError(null)
+    }
+
+    // Set source after all event listeners
+    audio.src = audioFile
+
     // Enhanced mobile audio playback
-    const playPromise = audio.play()
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setAudioPlaying(birdId)
-          setAudioError(null)
-        })
-        .catch((error) => {
-          console.log("Audio playback failed:", error)
-          // For mobile, try a different approach
-          if (error.name === "NotAllowedError") {
-            // Show a user-friendly message for mobile autoplay restrictions
-            setAudioError("Tap to play audio")
-          } else {
+    const attemptPlay = () => {
+      const playPromise = audio.play()
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setAudioPlaying(birdId)
+            setAudioError(null)
+            console.log(`Audio playing successfully for ${birdId}`)
+          })
+          .catch((error) => {
+            console.error("Audio playback failed:", error)
             const bird = bioregionBirds.find((b) => b.id === birdId)
-            setAudioError(`Audio not available for ${bird?.commonName || "this bird"}`)
-          }
-          setAudioPlaying(null)
-        })
+
+            if (error.name === "NotAllowedError") {
+              setAudioError("Tap to enable audio playback")
+            } else if (error.name === "NotSupportedError") {
+              setAudioError(`Audio format not supported for ${bird?.commonName || "this bird"}`)
+            } else if (error.name === "AbortError") {
+              setAudioError("Audio playback was interrupted")
+            } else {
+              setAudioError(`Audio playback failed for ${bird?.commonName || "this bird"}`)
+            }
+            setAudioPlaying(null)
+          })
+      }
+    }
+
+    // Mobile-specific delay and retry logic
+    if (isMobile) {
+      setTimeout(attemptPlay, 150)
+    } else {
+      attemptPlay()
     }
 
     audio.onended = () => {
       setAudioPlaying(null)
       audioRef.current = null
       setAudioError(null)
+      console.log(`Audio ended for ${birdId}`)
+    }
+
+    // Additional mobile event handlers
+    audio.onstalled = () => {
+      console.warn(`Audio stalled for ${birdId}`)
+    }
+
+    audio.onsuspend = () => {
+      console.log(`Audio loading suspended for ${birdId}`)
     }
   }
 
@@ -1009,6 +1175,18 @@ export default function EnhancedEndemicBirdsCarousel({
                 <Badge className="bg-yellow-500/90 text-white border-yellow-400">
                   <VolumeX className="w-3 h-3 mr-1" />
                   Audio Unavailable
+                </Badge>
+              </div>
+            )}
+
+            {/* Debug Information for Mobile Audio Issues */}
+            {process.env.NODE_ENV === "development" && debugInfo && (
+              <div className="absolute bottom-20 left-2 right-2">
+                <Badge className="bg-gray-800/90 text-white text-xs max-w-full">
+                  <div className="truncate">{debugInfo}</div>
+                  {currentBird.audioFile && <div className="text-xs">Audio: {currentBird.audioFile}</div>}
+                  {audioError && <div className="text-red-300 text-xs">Error: {audioError}</div>}
+                  <div className="text-xs">Support: {audioSupported ? "Yes" : "No"}</div>
                 </Badge>
               </div>
             )}
