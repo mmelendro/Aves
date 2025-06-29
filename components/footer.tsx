@@ -160,18 +160,18 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/bioregions"
+                  href="/avifauna-explorer"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🗺️ Bioregions Map
+                  🦅 Avifauna & Bioregions Explorer
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/avifauna-explorer"
+                  href="/travel-tips"
                   className="hover:text-emerald-400 transition-colors touch-manipulation block py-1"
                 >
-                  🔍 Avifauna Explorer
+                  ✈️ Travel Essentials
                 </Link>
               </li>
               <li>

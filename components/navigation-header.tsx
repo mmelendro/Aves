@@ -127,8 +127,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 currentPage?.startsWith("/blog") ||
                 currentPage?.startsWith("/resources") ||
                 currentPage?.startsWith("/travel-tips") ||
-                currentPage?.startsWith("/avifauna-explorer") ||
-                currentPage?.startsWith("/bioregions")
+                currentPage?.startsWith("/avifauna-explorer")
                   ? "text-emerald-600"
                   : "text-gray-700 hover:text-emerald-600"
               }`}
@@ -147,18 +146,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 >
                   <span className="text-lg mr-3">🦅</span>
                   <div>
-                    <div className="font-medium">Avifauna Explorer</div>
-                    <div className="text-xs text-gray-500">1,900+ Colombian bird species</div>
-                  </div>
-                </Link>
-                <Link
-                  href="/bioregions"
-                  className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-colors rounded-md"
-                >
-                  <span className="text-lg mr-3">🗺️</span>
-                  <div>
-                    <div className="font-medium">Interactive Bioregions</div>
-                    <div className="text-xs text-gray-500">Explore Colombia's ecosystems</div>
+                    <div className="font-medium">Avifauna & Bioregions Explorer</div>
+                    <div className="text-xs text-gray-500">1,900+ species across 11 bioregions & 31 ecoregions</div>
                   </div>
                 </Link>
 
@@ -358,14 +347,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    🦅 Avifauna Explorer
-                  </Link>
-                  <Link
-                    href="/bioregions"
-                    className="mobile-menu-item block text-gray-600 hover:text-emerald-600 transition-colors py-2 focus:outline-none text-base touch-manipulation"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🗺️ Interactive Bioregions
+                    🦅 Avifauna & Bioregions Explorer
                   </Link>
 
                   <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1 mt-4">
