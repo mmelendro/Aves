@@ -747,6 +747,24 @@ const TourCard = ({
   )
 }
 
+// Add this function before the useEffect
+const mapBioregionToLocation = (bioregionId: string): string => {
+  const mapping: Record<string, string> = {
+    Pacific: "🌊 Pacific Coast Chocó",
+    "Western Andes": "⛰️ Western Andes",
+    "Central Andes": "🗻 Central Andes",
+    "Eastern Andes": "🏔️ Eastern Andes",
+    "Interandean Valleys": "🌄 Magdalena Valley",
+    Caribbean: "🏖️ Caribbean Coast",
+    SNSM: "🏔️ Sierra Nevada de Santa Marta",
+    Llanos: "🌾 Eastern Plains",
+    Amazonia: "🌳 Amazon Rainforest",
+    Massif: "🌋 Colombian Massif",
+    Marine: "🏖️ Caribbean Coast",
+  }
+  return mapping[bioregionId] || bioregionId
+}
+
 // Main Shopping Page Component
 export default function ShoppingPage() {
   const searchParams = useSearchParams()
@@ -782,8 +800,23 @@ export default function ShoppingPage() {
       preselectedTourType && CONTACT_TOUR_TYPE_OPTIONS.includes(preselectedTourType as any)
         ? preselectedTourType
         : "🍃 Adventure Tours"
-    const initialRegion =
-      preselectedRegion && LOCATION_OPTIONS.includes(preselectedRegion as any) ? preselectedRegion : "⛰️ Western Andes"
+
+    // Handle bioregion parameter - check both 'region' and 'bioregion' params
+    const bioregionParam = preselectedRegion || searchParams.get("bioregion")
+    let initialRegion = "⛰️ Western Andes"
+
+    if (bioregionParam) {
+      // First try direct match with LOCATION_OPTIONS
+      if (LOCATION_OPTIONS.includes(bioregionParam as any)) {
+        initialRegion = bioregionParam
+      } else {
+        // Try mapping from bioregion ID to location option
+        const mappedRegion = mapBioregionToLocation(bioregionParam)
+        if (LOCATION_OPTIONS.includes(mappedRegion as any)) {
+          initialRegion = mappedRegion
+        }
+      }
+    }
 
     const initialTour: TourSelection = {
       id: "1",
@@ -796,16 +829,16 @@ export default function ShoppingPage() {
 
     setTourSelections([initialTour])
 
-    if (preselectedTourType || preselectedRegion) {
+    if (preselectedTourType || bioregionParam) {
       setPrefilledInfo({
         tourType: preselectedTourType || undefined,
-        region: preselectedRegion || undefined,
+        region: bioregionParam || undefined,
         fromPage: fromPage || undefined,
       })
       setShowPrefilledNotification(true)
       setTimeout(() => setShowPrefilledNotification(false), 8000)
     }
-  }, [preselectedTourType, preselectedRegion, fromPage])
+  }, [preselectedTourType, preselectedRegion, fromPage, searchParams])
 
   // Memoized calculations
   const getHighestTourPrice = useMemo(() => {
@@ -1082,15 +1115,15 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
         </div>
       </section>
 
-      {/* Pre-filled Notification */}
       {showPrefilledNotification && (
         <section className="py-4">
           <div className="container mx-auto px-4">
             <Alert className="border-emerald-200 bg-emerald-50 max-w-4xl mx-auto">
               <CheckCircle className="h-4 w-4 text-emerald-600" />
               <AlertDescription className="text-emerald-800 pr-8">
-                Great choice! We've pre-filled your selections based on your interest. You can customize everything
-                below!
+                {prefilledInfo.fromPage === "bioregions-map"
+                  ? `Perfect! We've pre-selected ${prefilledInfo.region ? REGION_DATA[prefilledInfo.region]?.name || prefilledInfo.region : "your region"} based on your map selection. You can customize everything below!`
+                  : "Great choice! We've pre-filled your selections based on your interest. You can customize everything below!"}
               </AlertDescription>
               <Button
                 variant="ghost"
