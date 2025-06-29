@@ -796,21 +796,21 @@ export default function ShoppingPage() {
 
   // Initialize tour selections
   useEffect(() => {
+    // Only run once on mount to prevent infinite loops
+    if (tourSelections.length > 0) return
+
     const initialTourType =
       preselectedTourType && CONTACT_TOUR_TYPE_OPTIONS.includes(preselectedTourType as any)
         ? preselectedTourType
         : "🍃 Adventure Tours"
 
-    // Handle bioregion parameter - check both 'region' and 'bioregion' params
     const bioregionParam = preselectedRegion || searchParams.get("bioregion")
     let initialRegion = "⛰️ Western Andes"
 
     if (bioregionParam) {
-      // First try direct match with LOCATION_OPTIONS
       if (LOCATION_OPTIONS.includes(bioregionParam as any)) {
         initialRegion = bioregionParam
       } else {
-        // Try mapping from bioregion ID to location option
         const mappedRegion = mapBioregionToLocation(bioregionParam)
         if (LOCATION_OPTIONS.includes(mappedRegion as any)) {
           initialRegion = mappedRegion
@@ -836,16 +836,16 @@ export default function ShoppingPage() {
         fromPage: fromPage || undefined,
       })
       setShowPrefilledNotification(true)
-      setTimeout(() => setShowPrefilledNotification(false), 8000)
+      const timer = setTimeout(() => setShowPrefilledNotification(false), 8000)
+      return () => clearTimeout(timer)
     }
-  }, [preselectedTourType, preselectedRegion, fromPage, searchParams])
+  }, []) // Empty dependency array to run only once
 
   // Memoized calculations
-  const getHighestTourPrice = useMemo(() => {
-    return () =>
-      Math.max(
-        ...tourSelections.map((tour) => TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000),
-      )
+  const getHighestTourPrice = useCallback(() => {
+    return Math.max(
+      ...tourSelections.map((tour) => TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000),
+    )
   }, [tourSelections])
 
   const calculateRestDayCost = useCallback(
@@ -853,9 +853,12 @@ export default function ShoppingPage() {
       if (option === "independent") return 0
       const tour = tourSelections.find((t) => t.id === tourId)
       if (!tour || option !== "guided") return 0
-      return getHighestTourPrice() * restDays * tour.participants
+      const highestPrice = Math.max(
+        ...tourSelections.map((t) => TOUR_TYPE_INFO[t.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000),
+      )
+      return highestPrice * restDays * tour.participants
     },
-    [tourSelections, getHighestTourPrice],
+    [tourSelections],
   )
 
   const costBreakdown = useMemo(() => {
@@ -947,12 +950,12 @@ export default function ShoppingPage() {
     [tourSelections],
   )
 
-  const updateTourSelection = useCallback(
-    (id: string, field: keyof TourSelection, value: any) => {
-      const updatedSelections = tourSelections.map((tour) => {
+  const updateTourSelection = useCallback((id: string, field: keyof TourSelection, value: any) => {
+    setTourSelections((prevSelections) => {
+      const updatedSelections = prevSelections.map((tour) => {
         if (tour.id === id) {
           const updatedTour = { ...tour, [field]: value }
-          if (field === "totalDays" && value >= 8 && tourSelections.findIndex((t) => t.id === id) > 0) {
+          if (field === "totalDays" && value >= 8 && prevSelections.findIndex((t) => t.id === id) > 0) {
             updatedTour.restDays = Math.max(updatedTour.restDays, 2)
           }
           return updatedTour
@@ -962,29 +965,23 @@ export default function ShoppingPage() {
 
       const firstTourStartDate = updatedSelections[0]?.startDate
       if (firstTourStartDate) {
-        const recalculatedTours = calculateTourDates(updatedSelections, firstTourStartDate)
-        setTourSelections(recalculatedTours)
-      } else {
-        setTourSelections(updatedSelections)
+        return calculateTourDates(updatedSelections, firstTourStartDate)
       }
-    },
-    [tourSelections],
-  )
+      return updatedSelections
+    })
+  }, [])
 
-  const updateAllParticipants = useCallback(
-    (participants: number) => {
-      const updatedSelections = tourSelections.map((tour) => ({ ...tour, participants }))
+  const updateAllParticipants = useCallback((participants: number) => {
+    setTourSelections((prevSelections) => {
+      const updatedSelections = prevSelections.map((tour) => ({ ...tour, participants }))
       const firstTourStartDate = updatedSelections[0]?.startDate
 
       if (firstTourStartDate) {
-        const recalculatedTours = calculateTourDates(updatedSelections, firstTourStartDate)
-        setTourSelections(recalculatedTours)
-      } else {
-        setTourSelections(updatedSelections)
+        return calculateTourDates(updatedSelections, firstTourStartDate)
       }
-    },
-    [tourSelections],
-  )
+      return updatedSelections
+    })
+  }, [])
 
   const updateRestDayOption = useCallback((tourId: string, field: string, value: any) => {
     setRestDayOptions((prev) => ({
@@ -999,24 +996,18 @@ export default function ShoppingPage() {
     }))
   }, [])
 
-  const updateStartDate = useCallback(
-    (date: Date | undefined) => {
+  const updateStartDate = useCallback((date: Date | undefined) => {
+    setTourSelections((prevSelections) => {
       if (!date) {
-        setTourSelections(
-          tourSelections.map((tour) => ({
-            ...tour,
-            startDate: undefined,
-            endDate: undefined,
-          })),
-        )
-        return
+        return prevSelections.map((tour) => ({
+          ...tour,
+          startDate: undefined,
+          endDate: undefined,
+        }))
       }
-
-      const recalculatedTours = calculateTourDates(tourSelections, date)
-      setTourSelections(recalculatedTours)
-    },
-    [tourSelections],
-  )
+      return calculateTourDates(prevSelections, date)
+    })
+  }, [])
 
   const saveBooking = useCallback(() => {
     const bookingData = {
