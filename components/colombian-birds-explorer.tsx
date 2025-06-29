@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
@@ -323,8 +323,71 @@ export function ColombianBirdsExplorer() {
   const router = useRouter()
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
+  const [screenSize, setScreenSize] = useState<"mobile" | "tablet" | "desktop">("desktop")
 
   const currentRegion = selectedRegion ? bioregionsData.find((r) => r.id === selectedRegion) : null
+
+  // Responsive screen size detection
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width < 640) {
+        setScreenSize("mobile")
+      } else if (width < 1024) {
+        setScreenSize("tablet")
+      } else {
+        setScreenSize("desktop")
+      }
+    }
+
+    handleResize() // Initial check
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  // Dynamic sizing based on screen size
+  const getIconSizes = () => {
+    switch (screenSize) {
+      case "mobile":
+        return {
+          iconSize: "w-10 h-10", // 40px
+          iconInnerSize: "w-5 h-5", // 20px
+          borderWidth: "border-2",
+          tooltipOffset: "top-12",
+          tooltipPadding: "px-2 py-1",
+          tooltipTextSize: "text-xs",
+          hoverScale: "group-hover:scale-110",
+          selectedScale: "scale-110",
+          shadowSize: "shadow-lg",
+        }
+      case "tablet":
+        return {
+          iconSize: "w-12 h-12", // 48px
+          iconInnerSize: "w-6 h-6", // 24px
+          borderWidth: "border-3",
+          tooltipOffset: "top-14",
+          tooltipPadding: "px-3 py-2",
+          tooltipTextSize: "text-sm",
+          hoverScale: "group-hover:scale-115",
+          selectedScale: "scale-115",
+          shadowSize: "shadow-xl",
+        }
+      default: // desktop
+        return {
+          iconSize: "w-16 h-16", // 64px
+          iconInnerSize: "w-8 h-8", // 32px
+          borderWidth: "border-4",
+          tooltipOffset: "top-16",
+          tooltipPadding: "px-4 py-3",
+          tooltipTextSize: "text-sm",
+          hoverScale: "group-hover:scale-125",
+          selectedScale: "scale-125",
+          shadowSize: "shadow-2xl",
+        }
+    }
+  }
+
+  const iconSizes = getIconSizes()
 
   const handleRegionClick = (regionId: string) => {
     if (selectedRegion === regionId) {
@@ -642,7 +705,7 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* 5. Interactive Bioregions Map - Enhanced with AVES Explorer branding */}
+      {/* 5. Interactive Bioregions Map - Enhanced with responsive scaling */}
       <section id="bioregions-map" className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -654,10 +717,10 @@ export function ColombianBirdsExplorer() {
             </div>
 
             <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-2 border-emerald-200">
-              <CardContent className="p-8">
+              <CardContent className="p-4 sm:p-6 lg:p-8">
                 {/* Navigation Breadcrumb */}
                 {selectedRegion && (
-                  <div className="mb-8 flex items-center gap-2 text-lg bg-gray-50 p-4 rounded-lg">
+                  <div className="mb-6 sm:mb-8 flex items-center gap-2 text-base sm:text-lg bg-gray-50 p-3 sm:p-4 rounded-lg">
                     <button
                       onClick={resetSelection}
                       className="hover:text-emerald-600 transition-colors font-medium flex items-center gap-2"
@@ -665,13 +728,13 @@ export function ColombianBirdsExplorer() {
                       <ArrowRight className="w-4 h-4 rotate-180" />
                       All Bioregions
                     </button>
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span className="text-gray-900 font-semibold">{currentRegion?.name}</span>
                   </div>
                 )}
 
-                {/* Map Container with Enhanced Interactivity */}
-                <div className="relative bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 mb-8 border border-emerald-100">
+                {/* Map Container with Enhanced Responsive Interactivity */}
+                <div className="relative bg-gradient-to-br from-blue-50 to-green-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 border border-emerald-100">
                   <div className="relative mx-auto max-w-4xl">
                     <img
                       src="/images/birding-regions-colombia-final.png"
@@ -679,7 +742,7 @@ export function ColombianBirdsExplorer() {
                       className="w-full h-auto opacity-95 rounded-lg shadow-md"
                     />
 
-                    {/* Enhanced Interactive Overlay */}
+                    {/* Enhanced Responsive Interactive Overlay */}
                     <div className="absolute inset-0">
                       {bioregionsData.map((region) => {
                         const IconComponent = region.icon
@@ -691,7 +754,7 @@ export function ColombianBirdsExplorer() {
                             onClick={() => handleRegionClick(region.id)}
                             onMouseEnter={() => setHoveredRegion(region.id)}
                             onMouseLeave={() => setHoveredRegion(null)}
-                            className="absolute transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-4 focus:ring-emerald-400 rounded-full transition-all duration-300"
+                            className={`absolute transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
                             style={{
                               left: `${region.coordinates.x}%`,
                               top: `${region.coordinates.y}%`,
@@ -699,29 +762,38 @@ export function ColombianBirdsExplorer() {
                             aria-label={`Explore ${region.name} bioregion - ${region.endemicCount} endemic species`}
                           >
                             <div
-                              className={`w-16 h-16 rounded-full shadow-2xl group-hover:scale-125 transition-all duration-300 flex items-center justify-center border-4 border-white/90 ring-2 ring-gray-900/60 ${
+                              className={`${iconSizes.iconSize} rounded-full ${iconSizes.shadowSize} transition-all duration-300 flex items-center justify-center ${iconSizes.borderWidth} border-white/90 ring-1 ring-gray-900/40 ${
                                 isSelected
-                                  ? "ring-4 ring-white ring-opacity-95 scale-125 shadow-2xl border-white ring-offset-2 ring-offset-gray-900"
+                                  ? `ring-2 ring-white ring-opacity-95 ${iconSizes.selectedScale} ${iconSizes.shadowSize} border-white ring-offset-1 ring-offset-gray-900`
                                   : ""
                               }`}
                               style={{
                                 backgroundColor: region.color,
-                                boxShadow: `0 8px 25px ${region.color}70, 0 0 0 2px rgba(0,0,0,0.8), 0 0 0 4px rgba(255,255,255,0.95), 0 0 0 6px rgba(0,0,0,0.4)`,
+                                boxShadow:
+                                  screenSize === "mobile"
+                                    ? `0 4px 15px ${region.color}70, 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,255,255,0.9), 0 0 0 3px rgba(0,0,0,0.3)`
+                                    : screenSize === "tablet"
+                                      ? `0 6px 20px ${region.color}70, 0 0 0 1px rgba(0,0,0,0.7), 0 0 0 3px rgba(255,255,255,0.95), 0 0 0 5px rgba(0,0,0,0.35)`
+                                      : `0 8px 25px ${region.color}70, 0 0 0 2px rgba(0,0,0,0.8), 0 0 0 4px rgba(255,255,255,0.95), 0 0 0 6px rgba(0,0,0,0.4)`,
                               }}
                             >
                               <IconComponent
-                                className="w-8 h-8 text-white drop-shadow-2xl filter contrast-150 brightness-110"
+                                className={`${iconSizes.iconInnerSize} text-white drop-shadow-lg filter contrast-125 brightness-105`}
                                 style={{
                                   filter:
-                                    "drop-shadow(2px 2px 4px rgba(0,0,0,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,0.3))",
-                                  textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+                                    screenSize === "mobile"
+                                      ? "drop-shadow(1px 1px 2px rgba(0,0,0,0.8)) drop-shadow(0px 0px 4px rgba(255,255,255,0.2))"
+                                      : "drop-shadow(2px 2px 4px rgba(0,0,0,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,0.3))",
+                                  textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
                                 }}
                               />
                             </div>
-                            {isHovered && !isSelected && (
-                              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-white px-4 py-3 rounded-xl shadow-2xl text-sm font-medium whitespace-nowrap z-20 border border-gray-200 backdrop-blur-sm bg-white/95">
+                            {isHovered && !isSelected && screenSize !== "mobile" && (
+                              <div
+                                className={`absolute ${iconSizes.tooltipOffset} left-1/2 transform -translate-x-1/2 bg-white ${iconSizes.tooltipPadding} rounded-lg ${iconSizes.shadowSize} ${iconSizes.tooltipTextSize} font-medium whitespace-nowrap z-20 border border-gray-200 backdrop-blur-sm bg-white/95`}
+                              >
                                 <div className="font-bold text-gray-900">{region.name}</div>
-                                <div className="font-semibold text-sm" style={{ color: region.color }}>
+                                <div className="font-semibold" style={{ color: region.color }}>
                                   {region.endemicCount} endemic • {region.totalSpecies} total species
                                 </div>
                                 <div className="text-gray-500 text-xs">{region.habitat}</div>
@@ -745,27 +817,35 @@ export function ColombianBirdsExplorer() {
                   >
                     <CardHeader>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3 sm:gap-4">
                           <div
-                            className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg"
+                            className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center shadow-lg"
                             style={{ backgroundColor: currentRegion.color }}
                           >
-                            <currentRegion.icon className="w-8 h-8 text-white" />
+                            <currentRegion.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                           </div>
                           <div>
-                            <CardTitle className="text-2xl text-gray-900">{currentRegion.fullName}</CardTitle>
-                            <CardDescription className="text-lg mt-1 text-gray-600">
+                            <CardTitle className="text-xl sm:text-2xl text-gray-900">
+                              {currentRegion.fullName}
+                            </CardTitle>
+                            <CardDescription className="text-base sm:text-lg mt-1 text-gray-600">
                               {currentRegion.habitat} • {currentRegion.elevation}
                             </CardDescription>
                           </div>
                         </div>
-                        <Button variant="ghost" onClick={resetSelection} className="text-gray-500 hover:text-gray-700">
+                        <Button
+                          variant="ghost"
+                          onClick={resetSelection}
+                          className="text-gray-500 hover:text-gray-700 p-2"
+                        >
                           ✕
                         </Button>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-700 mb-6 leading-relaxed text-lg">{currentRegion.detailedDescription}</p>
+                      <p className="text-gray-700 mb-6 leading-relaxed text-base sm:text-lg">
+                        {currentRegion.detailedDescription}
+                      </p>
                     </CardContent>
                   </Card>
                 )}
