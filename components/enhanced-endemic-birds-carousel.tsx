@@ -326,6 +326,18 @@ export default function EnhancedEndemicBirdsCarousel({
   const [isPlaying, setIsPlaying] = useState(autoPlay)
   const [showInfo, setShowInfo] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Mobile detection with proper hydration handling
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % bioregionBirds.length)
@@ -415,11 +427,258 @@ export default function EnhancedEndemicBirdsCarousel({
     setShowInfo(!showInfo)
   }
 
+  // Mobile-optimized layout
+  if (isMobile) {
+    return (
+      <div className={cn("relative w-full max-w-full overflow-hidden", className)}>
+        <Card className="overflow-hidden border-0 shadow-lg mx-2">
+          <div className="relative">
+            {/* Mobile Main Image - 16:9 aspect ratio for better mobile viewing */}
+            <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+              <img
+                src={currentBird.image || "/placeholder.svg?height=400&width=600&text=Bird+Image"}
+                alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
+                className={cn("w-full h-full transition-all duration-500", currentImagePositioning.className)}
+                style={{
+                  objectPosition: currentImagePositioning.objectPosition,
+                  objectFit: "cover",
+                }}
+                onLoad={() => setIsLoading(false)}
+              />
+
+              {/* Loading Indicator */}
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                  <div className="w-6 h-6 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
+
+              {/* Mobile Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+
+              {/* Mobile Navigation Arrows - Larger touch targets */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-12 h-12 rounded-full touch-manipulation shadow-lg"
+                onClick={() => handleNavigation("prev")}
+                aria-label="Previous bird"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-12 h-12 rounded-full touch-manipulation shadow-lg"
+                onClick={() => handleNavigation("next")}
+                aria-label="Next bird"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </Button>
+
+              {/* Mobile Control Buttons - Repositioned for better accessibility */}
+              <div className="absolute top-3 right-3 flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg"
+                  onClick={togglePlayPause}
+                  aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+                >
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg"
+                  onClick={toggleInfo}
+                  aria-label="Toggle information"
+                >
+                  <Info className="w-4 h-4" />
+                </Button>
+              </div>
+
+              {/* Mobile Status Badges - Smaller and repositioned */}
+              <div className="absolute top-3 left-3 flex flex-col gap-1">
+                <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
+                  {currentBird.status}
+                </Badge>
+                {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
+                  <Badge className="text-xs font-medium border bg-blue-50 text-blue-700 border-blue-200">
+                    Multi-region
+                  </Badge>
+                )}
+              </div>
+
+              {/* Mobile Bird Information Overlay - Optimized spacing */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <MapPin className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm font-medium text-emerald-300 truncate">{currentBird.bioregion}</span>
+                    {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
+                      <span className="text-xs text-blue-300 flex-shrink-0">
+                        +{currentBird.secondaryRegions.length}
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-bold leading-tight">{currentBird.commonName}</h3>
+                    <p className="text-sm italic opacity-90 leading-tight">{currentBird.scientificName}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Content Section */}
+          <CardContent className="p-4">
+            {/* Mobile Info Panel */}
+            {showInfo && (
+              <div className="mb-4 p-3 bg-gray-50 rounded-lg border">
+                <p className="text-sm leading-relaxed mb-3">{currentBird.description}</p>
+
+                <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+                  <div className="flex items-center gap-1">
+                    <Camera className="w-3 h-3 flex-shrink-0" />
+                    <span className="truncate">{currentBird.bestTime}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Badge className={cn("text-xs", getDifficultyColor(currentBird.difficulty))}>
+                      {currentBird.difficulty}
+                    </Badge>
+                  </div>
+                </div>
+
+                <div className="text-xs text-gray-600 mb-3">
+                  <span className="font-medium">Habitat:</span> {currentBird.habitat}
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <Link href={`/bioregions/${currentBird.bioregionSlug}`} className="w-full">
+                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs w-full">
+                      <MapPin className="w-3 h-3 mr-2" />
+                      Explore {currentBird.bioregion.split(" ")[0]}
+                    </Button>
+                  </Link>
+                  <Link
+                    href={`/shopping?region=${encodeURIComponent(currentBird.bioregion)}&tour=Adventure+Tours&from=carousel`}
+                    className="w-full"
+                  >
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-xs w-full bg-transparent"
+                    >
+                      <ExternalLink className="w-3 h-3 mr-2" />
+                      Plan Trip
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Mobile Thumbnail Navigation - Horizontal scroll */}
+            <div className="mb-4">
+              <div
+                className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 carousel-touch-area"
+                style={{ scrollSnapType: "x mandatory" }}
+              >
+                {bioregionBirds.map((bird, index) => {
+                  const thumbnailPositioning = getImagePositioning(bird.id)
+                  return (
+                    <button
+                      key={bird.id}
+                      onClick={() => goToSlide(index)}
+                      className={cn(
+                        "flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all relative touch-manipulation",
+                        index === currentIndex ? "border-emerald-500 ring-2 ring-emerald-200" : "border-gray-200",
+                      )}
+                      style={{ scrollSnapAlign: "start" }}
+                      aria-label={`View ${bird.commonName} from ${bird.bioregion}`}
+                    >
+                      <img
+                        src={bird.image || "/placeholder.svg?height=56&width=56&text=Bird"}
+                        alt={bird.commonName}
+                        className={cn("w-full h-full transition-all", thumbnailPositioning.className)}
+                        style={{
+                          objectPosition: thumbnailPositioning.objectPosition,
+                          objectFit: "cover",
+                        }}
+                      />
+                      {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
+
+                      {/* Multi-region indicator */}
+                      {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
+                        <div className="absolute top-0 right-0 w-2 h-2 bg-blue-400 rounded-full" />
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Progress Indicators */}
+            <div className="flex justify-center gap-1 mb-4">
+              {bioregionBirds.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all touch-manipulation",
+                    index === currentIndex ? "bg-emerald-500" : "bg-gray-300",
+                  )}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Mobile CTA Section */}
+            <div className="p-3 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg border border-emerald-200">
+              <div className="text-center">
+                <h4 className="font-semibold text-gray-900 mb-2 text-sm">Explore Colombia's Bioregions</h4>
+                <p className="text-xs text-gray-600 mb-3 leading-relaxed">
+                  Discover {bioregionBirds.length} unique bioregions with endemic species and spectacular wildlife.
+                </p>
+                <div className="flex flex-col gap-2">
+                  <Link href={`/bioregions/${currentBird.bioregionSlug}`} className="w-full">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-sm w-full">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      Explore {currentBird.bioregion.split(" ")[0]}
+                    </Button>
+                  </Link>
+                  <a
+                    href={`https://ebird.org/species/${currentBird.ebirdCode}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
+                  >
+                    <Button
+                      variant="outline"
+                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-sm w-full bg-transparent"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View on eBird
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // Desktop layout (existing code with responsive improvements)
   return (
-    <div className={cn("relative w-full", className)}>
+    <div className={cn("relative w-full max-w-4xl mx-auto", className)}>
       <Card className="overflow-hidden border-0 shadow-2xl">
         <div className="relative">
-          {/* Main Image */}
+          {/* Desktop Main Image */}
           <div className="aspect-square relative overflow-hidden bg-gray-100">
             <img
               src={currentBird.image || "/placeholder.svg?height=600&width=600&text=Bird+Image"}
@@ -445,39 +704,38 @@ export default function EnhancedEndemicBirdsCarousel({
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-            {/* Navigation Arrows */}
+            {/* Desktop Navigation Arrows */}
             <Button
               variant="ghost"
               size="sm"
-              className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full touch-manipulation"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full"
               onClick={() => handleNavigation("prev")}
               aria-label="Previous bird"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronLeft className="w-5 h-5" />
             </Button>
 
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full touch-manipulation"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full"
               onClick={() => handleNavigation("next")}
               aria-label="Next bird"
             >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronRight className="w-5 h-5" />
             </Button>
 
-            {/* Control Buttons */}
-            <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex flex-col gap-2">
-              {/* Primary Controls Row */}
-              <div className="flex gap-2 sm:gap-3">
+            {/* Desktop Control Buttons */}
+            <div className="absolute top-3 right-3 flex flex-col gap-2">
+              <div className="flex gap-3">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 touch-manipulation relative group"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 relative group"
                   onClick={togglePlayPause}
                   aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
                 >
-                  {isPlaying ? <Pause className="w-3 h-3 sm:w-4 sm:h-4" /> : <Play className="w-3 h-3 sm:w-4 sm:h-4" />}
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                     {isPlaying ? "Pause slideshow" : "Play slideshow"}
                   </div>
@@ -486,27 +744,26 @@ export default function EnhancedEndemicBirdsCarousel({
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 touch-manipulation relative group"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 relative group"
                   onClick={toggleInfo}
                   aria-label="Toggle information"
                 >
-                  <Info className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <Info className="w-4 h-4" />
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                     Toggle information
                   </div>
                 </Button>
               </div>
 
-              {/* External Link Row */}
               <div className="flex justify-end">
                 <a
                   href={`https://ebird.org/species/${currentBird.ebirdCode}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 rounded-md flex items-center justify-center transition-colors touch-manipulation relative group"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group"
                   aria-label={`View ${currentBird.commonName} on eBird`}
                 >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <ExternalLink className="w-4 h-4" />
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                     View on eBird
                   </div>
@@ -514,7 +771,7 @@ export default function EnhancedEndemicBirdsCarousel({
               </div>
             </div>
 
-            {/* Status and Difficulty Badges */}
+            {/* Desktop Status and Difficulty Badges */}
             <div className="absolute top-2 left-2 flex flex-col gap-1">
               <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
                 {currentBird.status}
@@ -522,7 +779,6 @@ export default function EnhancedEndemicBirdsCarousel({
               <Badge className={cn("text-xs font-medium border", getDifficultyColor(currentBird.difficulty))}>
                 {currentBird.difficulty}
               </Badge>
-              {/* Multi-region indicator */}
               {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
                 <Badge className="text-xs font-medium border bg-blue-50 text-blue-700 border-blue-200">
                   Multi-region
@@ -530,15 +786,14 @@ export default function EnhancedEndemicBirdsCarousel({
               )}
             </div>
 
-            {/* Bird Information Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4 text-white">
-              <div className="space-y-1 sm:space-y-2">
-                <div className="flex items-center gap-2 mb-1 sm:mb-2 flex-wrap">
+            {/* Desktop Bird Information Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <div className="flex items-center gap-1">
-                    <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
-                    <span className="text-xs sm:text-sm font-medium text-emerald-300">{currentBird.bioregion}</span>
+                    <MapPin className="w-4 h-4 text-emerald-400" />
+                    <span className="text-sm font-medium text-emerald-300">{currentBird.bioregion}</span>
                   </div>
-                  {/* Secondary regions indicator */}
                   {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
                     <div className="flex items-center gap-1">
                       <span className="text-xs text-blue-300">+{currentBird.secondaryRegions.length} more</span>
@@ -547,16 +802,15 @@ export default function EnhancedEndemicBirdsCarousel({
                 </div>
 
                 <div>
-                  <h3 className="text-sm sm:text-lg md:text-xl font-bold">{currentBird.commonName}</h3>
-                  <p className="text-xs sm:text-sm italic opacity-90">{currentBird.scientificName}</p>
+                  <h3 className="text-xl font-bold">{currentBird.commonName}</h3>
+                  <p className="text-sm italic opacity-90">{currentBird.scientificName}</p>
                   <p className="text-xs opacity-75">{currentBird.spanishName}</p>
                 </div>
 
                 {showInfo && (
-                  <div className="space-y-2 sm:space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-2 sm:p-3 mt-2 sm:mt-3">
-                    <p className="text-xs sm:text-sm leading-relaxed">{currentBird.description}</p>
+                  <div className="space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-3 mt-3">
+                    <p className="text-sm leading-relaxed">{currentBird.description}</p>
 
-                    {/* Regional Distribution */}
                     {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
                       <div className="text-xs">
                         <span className="font-medium text-emerald-300">Primary region:</span> {currentBird.bioregion}
@@ -571,9 +825,9 @@ export default function EnhancedEndemicBirdsCarousel({
                       </div>
                     )}
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2 text-xs">
+                    <div className="grid grid-cols-2 gap-2 text-xs">
                       <div className="flex items-center gap-1">
-                        <Camera className="w-2 h-2 sm:w-3 sm:h-3" />
+                        <Camera className="w-3 h-3" />
                         <span>{currentBird.bestTime}</span>
                       </div>
                       <div className="flex items-center gap-1">
@@ -586,12 +840,9 @@ export default function EnhancedEndemicBirdsCarousel({
                       <span className="font-medium">Habitat:</span> {currentBird.habitat}
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-2 mt-2 sm:mt-3">
+                    <div className="flex flex-row gap-2 mt-3">
                       <Link href={`/bioregions/${currentBird.bioregionSlug}`}>
-                        <Button
-                          size="sm"
-                          className="bg-emerald-600 hover:bg-emerald-700 text-xs w-full sm:w-auto touch-manipulation"
-                        >
+                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs">
                           Explore {currentBird.bioregion.split(" ")[0]}
                         </Button>
                       </Link>
@@ -601,7 +852,7 @@ export default function EnhancedEndemicBirdsCarousel({
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-white text-white hover:bg-white hover:text-gray-900 text-xs bg-transparent w-full sm:w-auto touch-manipulation"
+                          className="border-white text-white hover:bg-white hover:text-gray-900 text-xs bg-transparent"
                         >
                           Plan Trip
                         </Button>
@@ -614,9 +865,9 @@ export default function EnhancedEndemicBirdsCarousel({
           </div>
         </div>
 
-        {/* Thumbnail Navigation */}
+        {/* Desktop Thumbnail Navigation */}
         <CardContent className="p-3">
-          <div className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide pb-2">
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
             {bioregionBirds.map((bird, index) => {
               const thumbnailPositioning = getImagePositioning(bird.id)
               return (
@@ -624,9 +875,9 @@ export default function EnhancedEndemicBirdsCarousel({
                   key={bird.id}
                   onClick={() => goToSlide(index)}
                   className={cn(
-                    "flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-md overflow-hidden border-2 transition-all relative touch-manipulation",
+                    "flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all relative",
                     index === currentIndex
-                      ? "border-emerald-500 ring-1 sm:ring-2 ring-emerald-200"
+                      ? "border-emerald-500 ring-2 ring-emerald-200"
                       : "border-gray-200 hover:border-gray-300",
                   )}
                   aria-label={`View ${bird.commonName} from ${bird.bioregion}`}
@@ -642,12 +893,10 @@ export default function EnhancedEndemicBirdsCarousel({
                   />
                   {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
 
-                  {/* Multi-region indicator for thumbnails */}
                   {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
-                    <div className="absolute top-0 right-0 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-400 rounded-full" />
+                    <div className="absolute top-0 right-0 w-2 h-2 bg-blue-400 rounded-full" />
                   )}
 
-                  {/* Bioregion indicator */}
                   <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-1 py-0.5 truncate">
                     {bird.bioregion.split(" ")[0]}
                     {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
@@ -659,7 +908,7 @@ export default function EnhancedEndemicBirdsCarousel({
             })}
           </div>
 
-          {/* Progress Indicators */}
+          {/* Desktop Progress Indicators */}
           <div className="flex justify-center gap-1 mt-3">
             {bioregionBirds.map((_, index) => (
               <button
@@ -674,7 +923,7 @@ export default function EnhancedEndemicBirdsCarousel({
             ))}
           </div>
 
-          {/* Call-to-Action Section */}
+          {/* Desktop Call-to-Action Section */}
           <div className="mt-4 p-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg border border-emerald-200">
             <div className="text-center">
               <h4 className="font-semibold text-gray-900 mb-2">Ready to Explore Colombia's Bioregions?</h4>
@@ -682,7 +931,7 @@ export default function EnhancedEndemicBirdsCarousel({
                 Discover the incredible diversity of Colombia's {bioregionBirds.length} unique bioregions, each with its
                 own endemic species and spectacular wildlife.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2 justify-center">
+              <div className="flex flex-row gap-2 justify-center">
                 <Link href={`/bioregions/${currentBird.bioregionSlug}`}>
                   <Button className="bg-emerald-600 hover:bg-emerald-700 text-sm">
                     <MapPin className="w-4 h-4 mr-2" />
