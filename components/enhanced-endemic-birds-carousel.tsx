@@ -773,65 +773,87 @@ export default function EnhancedEndemicBirdsCarousel({
               <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
 
-            {/* Control Buttons */}
-            <div className="absolute top-1 sm:top-2 right-1 sm:right-2 flex gap-0.5 sm:gap-1">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 touch-manipulation"
-                onClick={togglePlayPause}
-                aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-              >
-                {isPlaying ? <Pause className="w-2 h-2 sm:w-3 sm:h-3" /> : <Play className="w-2 h-2 sm:w-3 sm:h-3" />}
-              </Button>
+            {/* Control Buttons - Redesigned Layout */}
+            <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex flex-col gap-2">
+              {/* Primary Controls Row */}
+              <div className="flex gap-2 sm:gap-3">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 touch-manipulation relative group"
+                  onClick={togglePlayPause}
+                  aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+                >
+                  {isPlaying ? <Pause className="w-3 h-3 sm:w-4 sm:h-4" /> : <Play className="w-3 h-3 sm:w-4 sm:h-4" />}
+                  {/* Tooltip positioned below button */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                    {isPlaying ? "Pause slideshow" : "Play slideshow"}
+                  </div>
+                </Button>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 touch-manipulation"
-                onClick={toggleInfo}
-                aria-label="Toggle information"
-              >
-                <Info className="w-2 h-2 sm:w-3 sm:h-3" />
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 touch-manipulation relative group"
+                  onClick={toggleInfo}
+                  aria-label="Toggle information"
+                >
+                  <Info className="w-3 h-3 sm:w-4 sm:h-4" />
+                  {/* Tooltip positioned below button */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                    Toggle information
+                  </div>
+                </Button>
+              </div>
 
-              {currentBird.audioFile && (
-                <>
+              {/* Audio Controls Row */}
+              <div className="flex gap-2 sm:gap-3">
+                {currentBird.audioFile && (
                   <Button
                     variant="ghost"
                     size="sm"
                     className={cn(
-                      "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 transition-all touch-manipulation",
-                      audioPlaying === currentBird.id && "bg-green-500/30 ring-1 sm:ring-2 ring-green-400/50",
+                      "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 transition-all touch-manipulation relative group",
+                      audioPlaying === currentBird.id && "bg-green-500/30 ring-2 ring-green-400/50",
                     )}
                     onClick={() => playAudio(currentBird.audioFile!, currentBird.id)}
                     aria-label={audioPlaying === currentBird.id ? "Stop bird call" : "Play bird call"}
                   >
                     <Volume2
-                      className={cn("w-2 h-2 sm:w-3 sm:h-3", audioPlaying === currentBird.id && "text-green-400")}
+                      className={cn("w-3 h-3 sm:w-4 sm:h-4", audioPlaying === currentBird.id && "text-green-400")}
                     />
+                    {/* Tooltip positioned below button */}
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                      {audioPlaying === currentBird.id ? "Stop bird call" : "Play bird call"}
+                    </div>
                   </Button>
+                )}
 
-                  {/* Enhanced Volume Control with Mobile-Optimized Slider */}
+                {/* Enhanced Volume Control with Mobile-Optimized Slider */}
+                {currentBird.audioFile && (
                   <div className="relative" ref={volumeSliderRef}>
                     <Button
                       variant="ghost"
                       size="sm"
                       className={cn(
-                        "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 transition-all touch-manipulation",
-                        isMuted && "bg-red-500/30 ring-1 sm:ring-2 ring-red-400/50",
-                        showVolumeSlider && "bg-blue-500/30 ring-1 sm:ring-2 ring-blue-400/50",
+                        "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 transition-all touch-manipulation relative group",
+                        isMuted && "bg-red-500/30 ring-2 ring-red-400/50",
+                        showVolumeSlider && "bg-blue-500/30 ring-2 ring-blue-400/50",
                       )}
                       onClick={toggleVolumeSlider}
                       aria-label="Volume control"
                     >
-                      <VolumeIcon className={cn("w-2 h-2 sm:w-3 sm:h-3", isMuted && "text-red-400")} />
+                      <VolumeIcon className={cn("w-3 h-3 sm:w-4 sm:h-4", isMuted && "text-red-400")} />
+                      {/* Tooltip positioned below button */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                        Volume control
+                      </div>
                     </Button>
 
-                    {/* Mobile-Optimized Volume Slider Popup */}
+                    {/* Mobile-Optimized Volume Slider Popup - Repositioned */}
                     {showVolumeSlider && (
-                      <div className="absolute top-full right-0 mt-1 sm:mt-2 bg-black/90 backdrop-blur-sm rounded-lg p-2 sm:p-3 min-w-[160px] sm:min-w-[200px] z-50 border border-white/20">
-                        <div className="space-y-2 sm:space-y-3">
+                      <div className="absolute top-full right-0 mt-2 bg-black/90 backdrop-blur-sm rounded-lg p-3 min-w-[180px] sm:min-w-[220px] z-50 border border-white/20 shadow-xl">
+                        <div className="space-y-3">
                           {/* Volume Label */}
                           <div className="flex items-center justify-between text-white text-xs">
                             <span>Volume</span>
@@ -857,11 +879,11 @@ export default function EnhancedEndemicBirdsCarousel({
                           </div>
 
                           {/* Mobile-Optimized Quick Volume Buttons */}
-                          <div className="grid grid-cols-3 sm:flex gap-1 justify-between">
+                          <div className="grid grid-cols-3 gap-1">
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-1 sm:px-2 py-1 h-6 touch-manipulation"
+                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-7 touch-manipulation"
                               onClick={() => handleVolumeChange(0)}
                             >
                               0%
@@ -869,7 +891,7 @@ export default function EnhancedEndemicBirdsCarousel({
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-1 sm:px-2 py-1 h-6 touch-manipulation"
+                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-7 touch-manipulation"
                               onClick={() => handleVolumeChange(0.5)}
                             >
                               50%
@@ -877,7 +899,7 @@ export default function EnhancedEndemicBirdsCarousel({
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-white hover:bg-white/20 text-xs px-1 sm:px-2 py-1 h-6 touch-manipulation"
+                              className="text-white hover:bg-white/20 text-xs px-2 py-1 h-7 touch-manipulation"
                               onClick={() => handleVolumeChange(1)}
                             >
                               100%
@@ -897,19 +919,25 @@ export default function EnhancedEndemicBirdsCarousel({
                       </div>
                     )}
                   </div>
-                </>
-              )}
+                )}
+              </div>
 
-              {/* eBird Link */}
-              <a
-                href={`https://ebird.org/species/${currentBird.ebirdCode}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-6 h-6 sm:w-8 sm:h-8 p-0 rounded-md flex items-center justify-center transition-colors touch-manipulation"
-                aria-label={`View ${currentBird.commonName} on eBird`}
-              >
-                <ExternalLink className="w-2 h-2 sm:w-3 sm:h-3" />
-              </a>
+              {/* External Link Row */}
+              <div className="flex justify-end">
+                <a
+                  href={`https://ebird.org/species/${currentBird.ebirdCode}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 sm:w-10 sm:h-10 p-0 rounded-md flex items-center justify-center transition-colors touch-manipulation relative group"
+                  aria-label={`View ${currentBird.commonName} on eBird`}
+                >
+                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                  {/* Tooltip positioned below button */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                    View on eBird
+                  </div>
+                </a>
+              </div>
             </div>
 
             {/* Status and Difficulty Badges */}
