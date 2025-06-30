@@ -28,6 +28,7 @@ interface EndemicBirdsCarouselProps {
   showThumbnails?: boolean
 }
 
+// Reordered to prioritize regions with actual images first
 const ENDEMIC_BIRDS: BirdData[] = [
   {
     id: "1",
@@ -62,16 +63,30 @@ const ENDEMIC_BIRDS: BirdData[] = [
   },
   {
     id: "4",
-    image: "/images/yellow-crowned-amazon.jpg",
-    commonName: "Yellow-crowned Amazon",
-    scientificName: "Amazona ochrocephala",
-    spanishName: "Lora Real",
-    region: "Caribbean Coast",
-    description: "Charismatic parrot species found in Colombia's northern regions",
-    ebirdCode: "yecama1",
+    image: "/images/velvet-purple-coronet.jpg",
+    commonName: "Velvet-purple Coronet",
+    scientificName: "Boissonneaua jardini",
+    spanishName: "Colibrí Terciopelo Púrpura",
+    region: "Pacific Coast",
+    description:
+      "Stunning hummingbird endemic to Colombia's Pacific slope cloud forests with brilliant iridescent purple plumage",
+    ebirdCode: "vepcor1",
+    conservation: "Near Threatened",
   },
   {
     id: "5",
+    image: "/images/cardinal-guajiro.jpg",
+    commonName: "Vermilion Cardinal",
+    scientificName: "Cardinalis phoeniceus",
+    spanishName: "Cardenal Guajiro",
+    region: "Caribbean Coast",
+    description:
+      "Spectacular endemic cardinal with brilliant vermilion-red plumage found in Colombia's dry coastal regions",
+    ebirdCode: "vercar1",
+    conservation: "Near Threatened",
+  },
+  {
+    id: "6",
     image: "/images/long-tailed-sylph.jpg",
     commonName: "Long-tailed Sylph",
     scientificName: "Aglaiocercus kingii",
@@ -79,6 +94,17 @@ const ENDEMIC_BIRDS: BirdData[] = [
     region: "Andean Slopes",
     description: "Spectacular hummingbird with iridescent plumage and elongated tail",
     ebirdCode: "lotsy1",
+  },
+  // Regions without actual images placed at the end
+  {
+    id: "7",
+    image: "/images/yellow-crowned-amazon.jpg",
+    commonName: "Yellow-crowned Amazon",
+    scientificName: "Amazona ochrocephala",
+    spanishName: "Lora Real",
+    region: "Amazon Basin",
+    description: "Charismatic parrot species found in Colombia's Amazon rainforest regions",
+    ebirdCode: "yecama1",
   },
 ]
 

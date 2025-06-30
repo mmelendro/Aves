@@ -178,17 +178,17 @@ const TOUR_TYPE_INFO = {
     features: ["Moderate hiking", "Remote locations", "Adventure activities"],
   },
   "🪶 Vision Tours": {
-    price: 1400,
+    price: 1250,
     description: "Premium photography-focused experiences",
     features: ["Photography guides", "Premium hides", "Equipment support"],
   },
   "🌼 Elevate Tours": {
-    price: 1200,
+    price: 1500,
     description: "Luxury comfort with exceptional birding",
     features: ["Luxury accommodations", "Gourmet meals", "Premium service"],
   },
   "🍓 Souls Tours": {
-    price: 1600,
+    price: 1750,
     description: "Deep cultural immersion with indigenous communities",
     features: ["Cultural immersion", "Indigenous guides", "Traditional experiences"],
   },

@@ -33,8 +33,9 @@ interface BirdData {
   bioregionDescription: string
 }
 
-// Twelve birds representing Colombia's bioregions
+// Reordered to prioritize regions with actual images first, then regions without images
 const bioregionBirds: BirdData[] = [
+  // REGIONS WITH ACTUAL IMAGES (Priority Display)
   {
     id: "1",
     commonName: "Green-bearded Helmetcrest",
@@ -142,11 +143,11 @@ const bioregionBirds: BirdData[] = [
     commonName: "Andean Motmot",
     scientificName: "Momotus aequatorialis",
     spanishName: "Momoto Andino",
-    bioregion: "Central Andes",
-    bioregionSlug: "central-andes",
+    bioregion: "Western Andes",
+    bioregionSlug: "western-andes",
     secondaryRegions: [
       { name: "Colombian Massif", slug: "colombian-massif" },
-      { name: "Western Andes", slug: "western-andes" },
+      { name: "Central Andes", slug: "central-andes" },
       { name: "Pacific Coast Chocó", slug: "pacific-coast-choco" },
     ],
     family: "Momotidae",
@@ -154,7 +155,7 @@ const bioregionBirds: BirdData[] = [
     status: "Near Endemic",
     habitat: "Humid montane forests and cloud forest edges",
     description:
-      "A stunning bird with a brilliant blue crown and distinctive racket-tipped tail, found across multiple Andean regions with the highest concentrations in the Central Andes.",
+      "A stunning bird with a brilliant blue crown and distinctive racket-tipped tail, found across multiple Andean regions with the highest concentrations in the Western Andes.",
     image: "/images/blue-crowned-motmot-new.jpg",
     audioFile: "/audio/blcmot1.mp3",
     conservationStatus: "Least Concern",
@@ -165,27 +166,6 @@ const bioregionBirds: BirdData[] = [
   },
   {
     id: "6",
-    commonName: "Santa Marta Antbird",
-    scientificName: "Drymophila hellmayri",
-    spanishName: "Hormiguero de Santa Marta",
-    bioregion: "Sierra Nevada de Santa Marta",
-    bioregionSlug: "sierra-nevada-santa-marta",
-    family: "Thamnophilidae",
-    order: "Passeriformes",
-    status: "Endemic",
-    habitat: "Cloud forest understory and bamboo thickets",
-    description:
-      "Endemic antbird found only in the Sierra Nevada de Santa Marta, a symbol of this unique mountain range.",
-    image: "/images/santa-marta-antbird.jpg",
-    audioFile: "/audio/samant1.mp3",
-    conservationStatus: "Near Threatened",
-    bestTime: "December - March",
-    difficulty: "Challenging",
-    ebirdCode: "samant1",
-    bioregionDescription: "World's most important endemic bird area with 15+ species found nowhere else.",
-  },
-  {
-    id: "7",
     commonName: "Vermilion Cardinal",
     scientificName: "Cardinalis phoeniceus",
     spanishName: "Cardenal Guajiro",
@@ -207,7 +187,51 @@ const bioregionBirds: BirdData[] = [
     bioregionDescription: "Dry coastal forests and scrublands with unique Caribbean endemic species.",
   },
   {
+    id: "7",
+    commonName: "Velvet-purple Coronet",
+    scientificName: "Boissonneaua jardini",
+    spanishName: "Colibrí Terciopelo Púrpura",
+    bioregion: "Pacific Coast Chocó",
+    bioregionSlug: "pacific-coast-choco",
+    family: "Trochilidae",
+    order: "Apodiformes",
+    status: "Endemic",
+    habitat: "Cloud forests and forest edges on Pacific slopes",
+    description:
+      "A stunning hummingbird endemic to Colombia's Pacific slope cloud forests, known for its brilliant iridescent purple and blue plumage that shimmers like velvet in the forest light.",
+    image: "/images/velvet-purple-coronet.jpg",
+    audioFile: "/audio/vepcor1.mp3",
+    conservationStatus: "Near Threatened",
+    bestTime: "Year-round",
+    difficulty: "Moderate",
+    ebirdCode: "vepcor1",
+    bioregionDescription: "One of the world's most biodiverse regions with spectacular endemic hummingbirds.",
+  },
+
+  // REGIONS WITHOUT ACTUAL IMAGES (Secondary Display)
+  {
     id: "8",
+    commonName: "Santa Marta Antbird",
+    scientificName: "Drymophila hellmayri",
+    spanishName: "Hormiguero de Santa Marta",
+    bioregion: "Sierra Nevada de Santa Marta",
+    bioregionSlug: "sierra-nevada-santa-marta",
+    family: "Thamnophilidae",
+    order: "Passeriformes",
+    status: "Endemic",
+    habitat: "Cloud forest understory and bamboo thickets",
+    description:
+      "Endemic antbird found only in the Sierra Nevada de Santa Marta, a symbol of this unique mountain range.",
+    image: "/images/santa-marta-antbird.jpg",
+    audioFile: "/audio/samant1.mp3",
+    conservationStatus: "Near Threatened",
+    bestTime: "December - March",
+    difficulty: "Challenging",
+    ebirdCode: "samant1",
+    bioregionDescription: "World's most important endemic bird area with 15+ species found nowhere else.",
+  },
+  {
+    id: "9",
     commonName: "Magdalena Antbird",
     scientificName: "Sipia laemosticta",
     spanishName: "Hormiguero del Magdalena",
@@ -227,7 +251,7 @@ const bioregionBirds: BirdData[] = [
     bioregionDescription: "Major river valley with diverse habitats from wetlands to dry forests.",
   },
   {
-    id: "9",
+    id: "10",
     commonName: "Cauca Guan",
     scientificName: "Penelope perspicax",
     spanishName: "Pava del Cauca",
@@ -248,7 +272,7 @@ const bioregionBirds: BirdData[] = [
     bioregionDescription: "Inter-Andean valley with dry forests and agricultural landscapes.",
   },
   {
-    id: "10",
+    id: "11",
     commonName: "Orinocan Saltator",
     scientificName: "Saltator orenocensis",
     spanishName: "Saltador Llanero",
@@ -268,7 +292,7 @@ const bioregionBirds: BirdData[] = [
     bioregionDescription: "Vast grasslands and gallery forests with unique grassland species.",
   },
   {
-    id: "11",
+    id: "12",
     commonName: "Harpy Eagle",
     scientificName: "Harpia harpyja",
     spanishName: "Águila Arpía",
@@ -287,27 +311,6 @@ const bioregionBirds: BirdData[] = [
     difficulty: "Challenging",
     ebirdCode: "hareag1",
     bioregionDescription: "World's largest rainforest with incredible biodiversity and canopy species.",
-  },
-  {
-    id: "12",
-    commonName: "Yellow-throated Toucan",
-    scientificName: "Ramphastos ambiguus",
-    spanishName: "Tucán Piquiverde",
-    bioregion: "Pacific Coast Chocó",
-    bioregionSlug: "pacific-coast-choco",
-    family: "Ramphastidae",
-    order: "Piciformes",
-    status: "Spectacular",
-    habitat: "Lowland and montane rainforests",
-    description:
-      "A magnificent large toucan with a massive colorful bill and distinctive yellow throat, often seen in fruiting trees.",
-    image: "/images/yellow-throated-toucan.jpg",
-    audioFile: "/audio/yellow-throated-toucan.mp3",
-    conservationStatus: "Vulnerable",
-    bestTime: "Year-round",
-    difficulty: "Easy",
-    ebirdCode: "yettou1",
-    bioregionDescription: "One of the world's most biodiverse regions with spectacular endemic species.",
   },
 ]
 
@@ -397,9 +400,14 @@ export default function EnhancedEndemicBirdsCarousel({
           objectPosition: "left center",
           className: "object-cover object-left",
         }
-      case "7": // Vermilion Cardinal - shift down to show crest
+      case "6": // Vermilion Cardinal - shift down to show crest
         return {
           objectPosition: "center 60%", // Shift down by ~20px equivalent
+          className: "object-cover",
+        }
+      case "7": // Velvet-purple Coronet - center the bird nicely
+        return {
+          objectPosition: "center center",
           className: "object-cover",
         }
       default:
