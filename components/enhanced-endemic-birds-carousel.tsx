@@ -31,6 +31,11 @@ interface BirdData {
   difficulty: "Easy" | "Moderate" | "Challenging"
   ebirdCode: string
   bioregionDescription: string
+  photoCredit?: {
+    photographer: string
+    instagramHandle: string
+    postUrl: string
+  }
 }
 
 // Reordered to prioritize regions with actual images first, then regions without images
@@ -56,6 +61,11 @@ const bioregionBirds: BirdData[] = [
     difficulty: "Challenging",
     ebirdCode: "gnbhel1",
     bioregionDescription: "High-altitude ecosystems including páramo and cloud forests near Bogotá.",
+    photoCredit: {
+      photographer: "Nicolás Rozo",
+      instagramHandle: "@nicolas_rozop",
+      postUrl: "https://www.instagram.com/p/C247ZDJgXBa/",
+    },
   },
   {
     id: "2",
@@ -468,7 +478,7 @@ export default function EnhancedEndemicBirdsCarousel({
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-12 h-12 rounded-full touch-manipulation shadow-lg"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-12 h-12 rounded-full touch-manipulation shadow-lg z-30"
                 onClick={() => handleNavigation("prev")}
                 aria-label="Previous bird"
               >
@@ -478,7 +488,7 @@ export default function EnhancedEndemicBirdsCarousel({
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-12 h-12 rounded-full touch-manipulation shadow-lg"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-12 h-12 rounded-full touch-manipulation shadow-lg z-30"
                 onClick={() => handleNavigation("next")}
                 aria-label="Next bird"
               >
@@ -486,7 +496,7 @@ export default function EnhancedEndemicBirdsCarousel({
               </Button>
 
               {/* Mobile Control Buttons - Repositioned for better accessibility */}
-              <div className="absolute top-3 right-3 flex gap-2">
+              <div className="absolute top-3 right-3 flex gap-2 z-40">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -508,8 +518,33 @@ export default function EnhancedEndemicBirdsCarousel({
                 </Button>
               </div>
 
+              {/* Mobile Photo Attribution Button - Bottom Left Corner to avoid text overlap */}
+              {currentBird.photoCredit && (
+                <div className="absolute bottom-3 left-3 z-50">
+                  <a
+                    href="https://www.instagram.com/p/C247ZDJgXBa/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg flex items-center justify-center transition-all duration-200 relative group"
+                    aria-label="Photo by Nicolas Rozo - One of our expert guides"
+                  >
+                    <span className="text-base">📷</span>
+                    {/* Mobile tooltip - positioned above button with better spacing */}
+                    <div className="absolute bottom-full left-0 mb-3 px-3 py-2 bg-black/95 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[60] shadow-lg min-w-max">
+                      <div className="text-center">
+                        Photo © @nicolas_rozop
+                        <br />
+                        <span className="text-emerald-300">One of our expert guides</span>
+                      </div>
+                      {/* Tooltip arrow */}
+                      <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
+                  </a>
+                </div>
+              )}
+
               {/* Mobile Status Badges - Smaller and repositioned */}
-              <div className="absolute top-3 left-3 flex flex-col gap-1">
+              <div className="absolute top-3 left-3 flex flex-col gap-1 z-30">
                 <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
                   {currentBird.status}
                 </Badge>
@@ -520,9 +555,10 @@ export default function EnhancedEndemicBirdsCarousel({
                 )}
               </div>
 
-              {/* Mobile Bird Information Overlay - Optimized spacing */}
-              <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                <div className="space-y-1">
+              {/* Mobile Bird Information Overlay - Adjusted to avoid button overlap */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 text-white z-20">
+                <div className="space-y-1 pl-16">
+                  {/* Added left padding to avoid overlap with attribution button */}
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="w-3 h-3 text-emerald-400 flex-shrink-0" />
                     <span className="text-sm font-medium text-emerald-300 truncate">{currentBird.bioregion}</span>
@@ -548,6 +584,27 @@ export default function EnhancedEndemicBirdsCarousel({
             {showInfo && (
               <div className="mb-4 p-3 bg-gray-50 rounded-lg border">
                 <p className="text-sm leading-relaxed mb-3">{currentBird.description}</p>
+
+                {/* Mobile Photo Credit in Info Panel */}
+                {currentBird.photoCredit && (
+                  <div className="mb-3 p-3 bg-white rounded border-l-4 border-emerald-500">
+                    <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+                      <span>📷</span>
+                      <span>Photo ©</span>
+                      <a
+                        href="https://www.instagram.com/p/C247ZDJgXBa/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
+                      >
+                        @nicolas_rozop
+                      </a>
+                    </div>
+                    <div className="text-xs text-emerald-600 font-medium">
+                      ✨ Nicolás is one of our expert birding guides
+                    </div>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-2 gap-2 text-xs mb-3">
                   <div className="flex items-center gap-1">
@@ -623,6 +680,11 @@ export default function EnhancedEndemicBirdsCarousel({
                       {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
                         <div className="absolute top-0 right-0 w-2 h-2 bg-blue-400 rounded-full" />
                       )}
+
+                      {/* Photo credit indicator */}
+                      {bird.photoCredit && (
+                        <div className="absolute bottom-0 left-0 w-2 h-2 bg-pink-400 rounded-full" />
+                      )}
                     </button>
                   )
                 })}
@@ -681,7 +743,7 @@ export default function EnhancedEndemicBirdsCarousel({
     )
   }
 
-  // Desktop layout (existing code with responsive improvements)
+  // Desktop layout with photo attribution button repositioned
   return (
     <div className={cn("relative w-full max-w-4xl mx-auto", className)}>
       <Card className="overflow-hidden border-0 shadow-2xl">
@@ -716,7 +778,7 @@ export default function EnhancedEndemicBirdsCarousel({
             <Button
               variant="ghost"
               size="sm"
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-30"
               onClick={() => handleNavigation("prev")}
               aria-label="Previous bird"
             >
@@ -726,7 +788,7 @@ export default function EnhancedEndemicBirdsCarousel({
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-30"
               onClick={() => handleNavigation("next")}
               aria-label="Next bird"
             >
@@ -734,7 +796,7 @@ export default function EnhancedEndemicBirdsCarousel({
             </Button>
 
             {/* Desktop Control Buttons */}
-            <div className="absolute top-3 right-3 flex flex-col gap-2">
+            <div className="absolute top-3 right-3 flex flex-col gap-2 z-40">
               <div className="flex gap-3">
                 <Button
                   variant="ghost"
@@ -779,8 +841,31 @@ export default function EnhancedEndemicBirdsCarousel({
               </div>
             </div>
 
+            {/* Desktop Photo Attribution Button - Bottom Left Corner to avoid text overlap */}
+            {currentBird.photoCredit && (
+              <div className="absolute bottom-4 left-4 z-50">
+                <a
+                  href="https://www.instagram.com/p/C247ZDJgXBa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group"
+                  aria-label="Photo by Nicolas Rozo - One of our expert guides"
+                >
+                  <span className="text-lg">📷</span>
+                  <div className="absolute bottom-full left-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[60] shadow-xl min-w-max">
+                    <div className="text-center leading-relaxed">
+                      <div className="font-medium">Photo © @nicolas_rozop</div>
+                      <div className="text-emerald-300 text-xs mt-1">✨ One of our expert birding guides</div>
+                    </div>
+                    {/* Tooltip arrow */}
+                    <div className="absolute top-full left-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                  </div>
+                </a>
+              </div>
+            )}
+
             {/* Desktop Status and Difficulty Badges */}
-            <div className="absolute top-2 left-2 flex flex-col gap-1">
+            <div className="absolute top-2 left-2 flex flex-col gap-1 z-30">
               <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
                 {currentBird.status}
               </Badge>
@@ -794,9 +879,10 @@ export default function EnhancedEndemicBirdsCarousel({
               )}
             </div>
 
-            {/* Desktop Bird Information Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <div className="space-y-2">
+            {/* Desktop Bird Information Overlay - Adjusted to avoid button overlap */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-20">
+              <div className="space-y-2 pl-16">
+                {/* Added left padding to avoid overlap with attribution button */}
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <div className="flex items-center gap-1">
                     <MapPin className="w-4 h-4 text-emerald-400" />
@@ -818,6 +904,25 @@ export default function EnhancedEndemicBirdsCarousel({
                 {showInfo && (
                   <div className="space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-3 mt-3">
                     <p className="text-sm leading-relaxed">{currentBird.description}</p>
+
+                    {/* Desktop Photo Credit in Info Panel */}
+                    {currentBird.photoCredit && (
+                      <div className="p-3 bg-white/10 backdrop-blur-sm rounded border border-white/20">
+                        <div className="flex items-center gap-2 text-xs mb-1">
+                          <span className="opacity-75">📷</span>
+                          <span className="opacity-90">Photo ©</span>
+                          <a
+                            href="https://www.instagram.com/p/C247ZDJgXBa/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-emerald-300 hover:text-emerald-200 font-medium hover:underline"
+                          >
+                            @nicolas_rozop
+                          </a>
+                        </div>
+                        <div className="text-xs text-emerald-300">✨ Nicolás is one of our expert birding guides</div>
+                      </div>
+                    )}
 
                     {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
                       <div className="text-xs">
@@ -904,6 +1009,9 @@ export default function EnhancedEndemicBirdsCarousel({
                   {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
                     <div className="absolute top-0 right-0 w-2 h-2 bg-blue-400 rounded-full" />
                   )}
+
+                  {/* Photo credit indicator */}
+                  {bird.photoCredit && <div className="absolute bottom-0 left-0 w-2 h-2 bg-pink-400 rounded-full" />}
 
                   <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-1 py-0.5 truncate">
                     {bird.bioregion.split(" ")[0]}
