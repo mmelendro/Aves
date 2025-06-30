@@ -48,7 +48,7 @@ export default function ConservationPage() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="w-full">
             <div className="text-center mb-8">
               <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                 See the life-changing difference your conservation support makes. Drag the slider to witness how
@@ -57,19 +57,20 @@ export default function ConservationPage() {
               </p>
             </div>
 
-            <BeforeAfterSlider
-              beforeImage="/images/natural-nest.jpg"
-              afterImage="/images/plastic-nest.jpg"
-              beforeAlt="Natural bird nest made entirely with organic materials in protected habitat"
-              afterAlt="Bird nest constructed with plastic pollution materials showing environmental impact on wildlife"
-              beforeLabel="Protected Habitat"
-              afterLabel="Polluted Habitat"
-              className="mb-8"
-              height={400}
-              width={600}
-            />
+            <div className="w-full max-w-4xl mx-auto">
+              <BeforeAfterSlider
+                beforeImage="/images/plastic-nest.jpg"
+                afterImage="/images/natural-nest.jpg"
+                beforeAlt="Bird nest constructed with plastic pollution materials showing environmental impact on wildlife"
+                afterAlt="Natural bird nest made entirely with organic materials in protected habitat"
+                beforeLabel="Polluted Habitat"
+                afterLabel="Protected Habitat"
+                className="w-full"
+                height={400}
+              />
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mt-8">
+            <div className="grid md:grid-cols-2 gap-8 mt-8 max-w-4xl mx-auto">
               <Card className="p-6 border-red-200 bg-red-50">
                 <div className="flex items-center mb-4">
                   <AlertTriangle className="w-6 h-6 text-red-600 mr-3" />
@@ -123,7 +124,7 @@ export default function ConservationPage() {
               </Card>
             </div>
 
-            <div className="mt-8 p-6 bg-gradient-to-r from-red-50 via-yellow-50 to-emerald-50 rounded-xl border-l-4 border-emerald-500">
+            <div className="mt-8 p-6 bg-gradient-to-r from-red-50 via-yellow-50 to-emerald-50 rounded-xl border-l-4 border-emerald-500 max-w-4xl mx-auto">
               <div className="text-center">
                 <h4 className="text-lg font-bold text-gray-900 mb-2">Breaking the Pollution Cycle</h4>
                 <p className="text-gray-800 text-sm leading-relaxed">
@@ -268,13 +269,13 @@ export default function ConservationPage() {
                   </Link>
                 </div>
               </div>
-              <div className="aspect-square rounded-xl overflow-hidden relative">
+              <div className="relative w-full h-96 rounded-xl overflow-hidden">
                 <Image
                   src="/images/masked-trogon-male.jpg"
-                  alt="Masked Trogon representing cloud forest conservation efforts"
-                  width={400}
-                  height={400}
-                  className="object-contain w-full h-full"
+                  alt="Masked Trogon (Trogon personatus) representing cloud forest conservation efforts in Colombia"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Photo Attribution for Masked Trogon */}
                 <div className="absolute bottom-3 right-3 z-50">
@@ -282,8 +283,21 @@ export default function ConservationPage() {
                     <span className="text-lg">📷</span>
                     <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
                       <div className="text-center leading-relaxed">
+                        <div className="font-bold text-emerald-300 mb-1">Masked Trogon</div>
+                        <div className="text-xs text-gray-300 mb-2">Trogon personatus</div>
+                        <div className="text-xs text-blue-300 mb-2">Cloud Forest • Andes</div>
                         <div className="font-medium">Photo © Royann Petrell</div>
                         <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+                        <div className="mt-2 pt-2 border-t border-gray-600">
+                          <a
+                            href="https://merlinbirds.org/species/mastro1"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-300 hover:text-blue-200 text-xs underline"
+                          >
+                            View on Merlin Bird ID →
+                          </a>
+                        </div>
                       </div>
                       <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
                     </div>

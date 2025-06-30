@@ -26,7 +26,7 @@ export function BeforeAfterSlider({
   afterLabel = "After",
   className,
   height = 400,
-  width = 600,
+  width,
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
@@ -67,15 +67,15 @@ export function BeforeAfterSlider({
   return (
     <div
       ref={containerRef}
-      className={cn("relative overflow-hidden rounded-lg cursor-col-resize select-none", className)}
-      style={{ height, width: "100%", maxWidth: width }}
+      className={cn("relative overflow-hidden rounded-lg cursor-col-resize select-none w-full", className)}
+      style={{ height, maxWidth: width || "100%" }}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseUp}
     >
-      {/* Before Image (Right side) */}
+      {/* Base Image (Plastic Nest - Right side) */}
       <div className="absolute inset-0">
         <img
           src={afterImage || "/placeholder.svg"}
@@ -83,19 +83,6 @@ export function BeforeAfterSlider({
           className="w-full h-full object-cover"
           draggable={false}
         />
-        {/* Photo Attribution for Trogon Image */}
-        <div className="absolute bottom-3 right-3 z-50">
-          <div className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
-            <span className="text-lg">📷</span>
-            <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
-              <div className="text-center leading-relaxed">
-                <div className="font-medium">Photo © Royann Petrell</div>
-                <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
-              </div>
-              <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
-            </div>
-          </div>
-        </div>
         {afterLabel && (
           <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium">
             {afterLabel}
@@ -103,7 +90,7 @@ export function BeforeAfterSlider({
         )}
       </div>
 
-      {/* After Image (Left side) */}
+      {/* Overlay Image (Natural Nest - Left side) */}
       <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
         <img
           src={beforeImage || "/placeholder.svg"}

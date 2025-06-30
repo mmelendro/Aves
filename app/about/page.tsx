@@ -1,165 +1,195 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Award, Users, Heart, Shield, Leaf, Globe, CheckCircle } from "lucide-react"
+import {
+  Heart,
+  Users,
+  Globe,
+  Award,
+  ArrowRight,
+  Leaf,
+  Eye,
+  Target,
+  CheckCircle,
+  MapPin,
+  Calendar,
+  Star,
+} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
 export default function AboutPage() {
-  const [isVisible, setIsVisible] = useState(false)
-
   useEffect(() => {
     window.scrollTo(0, 0)
-    setIsVisible(true)
   }, [])
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Header */}
+      {/* Header */}
       <NavigationHeader currentPage="/about" />
 
       {/* Hero Section */}
-      <section
-        className={`relative py-20 lg:py-32 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
+        <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100">
-                  🌿 B Corp Certified • Conservation-First
-                </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  About
-                  <span className="text-emerald-600 block">AVES</span>
-                </h1>
-                <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed">
-                  We're passionate conservationists and expert birders dedicated to protecting Colombia's incredible
-                  avian diversity through sustainable, transformative travel experiences.
-                </p>
-              </div>
-
+            <div>
+              <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌿 About AVES</Badge>
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">Connecting Hearts to Colombia's Avian Wonders</h1>
+              <p className="text-xl text-gray-600 mb-8">
+                We're more than a birding company—we're conservation partners, cultural bridges, and guardians of
+                Colombia's extraordinary biodiversity. Every journey creates lasting impact for birds, communities, and
+                the travelers who join our mission.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/team">
-                  <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-4">
-                    Meet Our Team
+                <Link href="/shopping">
+                  <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                    Start Your Journey
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Link href="/about/b-corp">
+                <Link href="/conservation">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-4 bg-transparent"
+                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 bg-transparent"
                   >
-                    Our B Corp Journey
+                    Our Conservation Impact
                   </Button>
                 </Link>
               </div>
             </div>
-
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl relative">
                 <Image
                   src="/images/vermillion-flycatcher.jpg"
-                  alt="Vermilion Cardinal in its natural habitat"
-                  width={480}
-                  height={600}
-                  className="object-cover w-full h-full"
+                  alt="Vermilion Cardinal showcasing Colombia's vibrant bird diversity"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
-              </div>
-
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-6 shadow-lg">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-gray-900">Conservation First</div>
-                    <div className="text-sm text-gray-600">Every tour protects habitat</div>
+                {/* Photo Attribution */}
+                <div className="absolute bottom-3 right-3 z-50">
+                  <div className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © Royann Petrell</div>
+                        <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Photo Attribution */}
-              <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                Photo © Royann Petrell, Early Client
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-100 rounded-full opacity-20 -translate-y-32 translate-x-32"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-100 rounded-full opacity-20 translate-y-24 -translate-x-24"></div>
       </section>
 
-      {/* Mission & Values */}
-      <section className="py-20">
+      {/* Our Story */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Story</h2>
+              <p className="text-xl text-gray-600">Born from passion, driven by purpose</p>
+            </div>
+
+            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+              <p className="text-xl mb-6">
+                AVES was founded on a simple yet powerful belief: that experiencing Colombia's incredible bird diversity
+                can transform both travelers and the landscapes they visit. What started as a passion project has
+                evolved into a conservation-focused enterprise that bridges the gap between world-class birding
+                experiences and meaningful environmental impact.
+              </p>
+
+              <p className="mb-6">
+                Colombia is home to over 1,900 bird species—more than any other country on Earth. Yet many of these
+                species face unprecedented threats from habitat loss, climate change, and human encroachment. We believe
+                that sustainable birding tourism can be a powerful force for conservation, creating economic incentives
+                for habitat protection while fostering deep connections between people and nature.
+              </p>
+
+              <p className="mb-6">
+                Our approach is holistic: we work directly with local communities, employ indigenous and local guides,
+                support conservation research, and ensure that every tour contributes to long-term habitat protection.
+                We're not just showing you birds—we're inviting you to become part of their conservation story.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Mission & Values */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Mission & Values</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We believe that exceptional birding experiences and meaningful conservation go hand in hand.
+              Every decision we make is guided by our commitment to conservation, community, and transformative
+              experiences
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Link href="/conservation" className="group">
-              <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group-hover:scale-105">
-                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
-                  <Shield className="w-8 h-8 text-emerald-600" />
+            <Link href="/conservation" className="block group">
+              <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="w-16 h-16 bg-emerald-100 group-hover:bg-emerald-200 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Leaf className="w-8 h-8 text-emerald-600 group-hover:text-emerald-700 transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-700 mb-4 transition-colors">
                   Conservation First
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Every tour directly supports habitat protection, research, and local communities. We're B Corp
-                  certified with verified environmental and social impact.
+                <p className="text-gray-600 mb-4">
+                  Every tour directly funds habitat protection and restoration projects. We're committed to leaving
+                  ecosystems healthier than we found them.
                 </p>
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-emerald-600 mx-auto" />
+                <div className="flex items-center justify-center text-emerald-600 group-hover:text-emerald-700 opacity-0 group-hover:opacity-100 transition-all">
+                  <span className="text-sm font-medium mr-1">Learn more</span>
+                  <ArrowRight className="w-4 h-4" />
                 </div>
               </Card>
             </Link>
 
-            <Link href="/team" className="group">
-              <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group-hover:scale-105">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
-                  <Users className="w-8 h-8 text-blue-600" />
+            <Link href="/team" className="block group">
+              <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="w-16 h-16 bg-emerald-100 group-hover:bg-emerald-200 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Users className="w-8 h-8 text-emerald-600 group-hover:text-emerald-700 transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-700 mb-4 transition-colors">
                   Expert Guidance
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Our certified ornithologist guides are passionate educators who share deep knowledge of bird behavior,
-                  ecology, and conservation challenges.
+                <p className="text-gray-600 mb-4">
+                  Our team of local and international guides brings decades of experience and deep cultural knowledge to
+                  every expedition.
                 </p>
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-blue-600 mx-auto" />
+                <div className="flex items-center justify-center text-emerald-600 group-hover:text-emerald-700 opacity-0 group-hover:opacity-100 transition-all">
+                  <span className="text-sm font-medium mr-1">Meet our team</span>
+                  <ArrowRight className="w-4 h-4" />
                 </div>
               </Card>
             </Link>
 
-            <Link href="/tours" className="group">
-              <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group-hover:scale-105">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
-                  <Heart className="w-8 h-8 text-purple-600" />
+            <Link href="/tours" className="block group">
+              <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="w-16 h-16 bg-emerald-100 group-hover:bg-emerald-200 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Eye className="w-8 h-8 text-emerald-600 group-hover:text-emerald-700 transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-700 mb-4 transition-colors">
                   Transformative Experiences
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We create life-changing encounters with Colombia's incredible biodiversity, fostering deep connections
-                  between travelers and nature.
+                <p className="text-gray-600 mb-4">
+                  We create life-changing encounters with nature that inspire lasting connections to conservation and
+                  Colombian culture.
                 </p>
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-purple-600 mx-auto" />
+                <div className="flex items-center justify-center text-emerald-600 group-hover:text-emerald-700 opacity-0 group-hover:opacity-100 transition-all">
+                  <span className="text-sm font-medium mr-1">Explore tours</span>
+                  <ArrowRight className="w-4 h-4" />
                 </div>
               </Card>
             </Link>
@@ -167,222 +197,155 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Impact */}
-      <section className="py-20 bg-gray-50">
+      {/* What Sets Us Apart */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Conservation Impact</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Measurable results from our commitment to conservation and community development.
-            </p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Sets Us Apart</h2>
+            <p className="text-xl text-gray-600">The AVES difference in every detail</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 border-0 shadow-lg">
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Leaf className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Habitat Protection</h3>
-                  <p className="text-gray-600">
-                    We partner with local conservation organizations to protect critical bird habitats through direct
-                    funding and land acquisition programs.
-                  </p>
-                </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <Target className="w-6 h-6 text-emerald-600 mr-3" />
+                <h3 className="text-lg font-bold text-gray-900">Small Group Focus</h3>
               </div>
-              <Link href="/conservation" className="inline-flex items-center text-green-600 hover:text-green-700">
-                Learn More About Our Conservation Work
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
+              <p className="text-gray-600">
+                Maximum 8 participants per tour ensures personalized attention and minimal environmental impact.
+              </p>
             </Card>
 
-            <Card className="p-8 border-0 shadow-lg">
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Globe className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Community Development</h3>
-                  <p className="text-gray-600">
-                    Our tours provide sustainable income for local communities while training the next generation of
-                    conservation leaders and guides.
-                  </p>
-                </div>
+            <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <MapPin className="w-6 h-6 text-emerald-600 mr-3" />
+                <h3 className="text-lg font-bold text-gray-900">Exclusive Access</h3>
               </div>
-              <Link href="/about/partners" className="inline-flex items-center text-blue-600 hover:text-blue-700">
-                Meet Our Community Partners
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
+              <p className="text-gray-600">
+                Private reserves and community-managed areas offer unique birding opportunities unavailable elsewhere.
+              </p>
+            </Card>
+
+            <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <Calendar className="w-6 h-6 text-emerald-600 mr-3" />
+                <h3 className="text-lg font-bold text-gray-900">Year-Round Excellence</h3>
+              </div>
+              <p className="text-gray-600">
+                Colombia's equatorial location means exceptional birding opportunities throughout the year.
+              </p>
+            </Card>
+
+            <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <Heart className="w-6 h-6 text-emerald-600 mr-3" />
+                <h3 className="text-lg font-bold text-gray-900">Cultural Immersion</h3>
+              </div>
+              <p className="text-gray-600">
+                Deep connections with indigenous communities and local traditions enrich every experience.
+              </p>
+            </Card>
+
+            <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <Award className="w-6 h-6 text-emerald-600 mr-3" />
+                <h3 className="text-lg font-bold text-gray-900">Conservation Impact</h3>
+              </div>
+              <p className="text-gray-600">
+                Transparent reporting on how your tour directly contributes to habitat protection and research.
+              </p>
+            </Card>
+
+            <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <Star className="w-6 h-6 text-emerald-600 mr-3" />
+                <h3 className="text-lg font-bold text-gray-900">Lifetime Support</h3>
+              </div>
+              <p className="text-gray-600">
+                Post-tour resources, species lists, and ongoing conservation updates keep the connection alive.
+              </p>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* B Corp Certification */}
-      <section className="py-20">
+      {/* Our Commitment */}
+      <section className="py-20 bg-emerald-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden border-0 shadow-xl">
-              <div className="grid md:grid-cols-2 gap-0">
-                <div className="bg-gradient-to-br from-emerald-600 to-blue-600 p-8 text-white flex flex-col justify-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-6">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-4">B Corp Certified</h3>
-                  <p className="text-lg mb-6 text-white/90">
-                    We're proud to be B Corp certified, meeting the highest standards of verified social and
-                    environmental performance, public transparency, and legal accountability.
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" />
-                      <span>Environmental impact verified</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" />
-                      <span>Community benefit measured</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" />
-                      <span>Governance transparency</span>
-                    </div>
-                  </div>
-                </div>
-                <CardContent className="p-8 flex flex-col justify-center">
-                  <h4 className="text-2xl font-bold text-gray-900 mb-4">Our B Corp Journey</h4>
-                  <p className="text-gray-600 mb-6">
-                    Achieving B Corp certification was a rigorous process that validated our commitment to using
-                    business as a force for good. We scored in the top 10% of all B Corps globally for environmental
-                    impact.
-                  </p>
-                  <div className="space-y-4 mb-6">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Overall B Impact Score</span>
-                      <span className="font-bold text-emerald-600">94.2/200</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Environment Score</span>
-                      <span className="font-bold text-green-600">45.8/200</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Community Score</span>
-                      <span className="font-bold text-blue-600">38.1/200</span>
-                    </div>
-                  </div>
-                  <Link href="/about/b-corp">
-                    <Button className="bg-emerald-600 hover:bg-emerald-700">
-                      Read Our B Corp Story
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </Link>
-                </CardContent>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4">Our Commitment to You</h2>
+            <p className="text-xl text-emerald-100 max-w-3xl mx-auto">
+              When you choose AVES, you're not just booking a tour—you're joining a conservation movement
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-8 h-8 text-white" />
               </div>
-            </Card>
+              <h3 className="text-lg font-bold text-white mb-2">Ethical Practices</h3>
+              <p className="text-emerald-100 text-sm">
+                Fair wages, community partnerships, and transparent operations in everything we do.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Global Impact</h3>
+              <p className="text-emerald-100 text-sm">
+                Local actions with global significance for bird conservation and climate resilience.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Personal Growth</h3>
+              <p className="text-emerald-100 text-sm">
+                Transformative experiences that deepen your connection to nature and conservation.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Lifelong Community</h3>
+              <p className="text-emerald-100 text-sm">
+                Join a network of conservation-minded travelers making a difference worldwide.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Team Preview */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Expert Team</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our passionate guides and conservationists bring decades of experience and deep local knowledge to every
-              expedition.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="aspect-square rounded-full overflow-hidden mx-auto mb-4 w-32 h-32">
-                <Image
-                  src="/images/martin-melendro.jpg"
-                  alt="Martin Melendro, AVES Founder & Lead Guide"
-                  width={128}
-                  height={128}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Martin Melendro</h3>
-              <p className="text-emerald-600 font-medium mb-3">Founder & Lead Guide</p>
-              <p className="text-gray-600 text-sm">
-                Ornithologist with 15+ years experience. Expert in Colombian endemics and conservation photography.
-              </p>
-            </Card>
-
-            <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="aspect-square rounded-full overflow-hidden mx-auto mb-4 w-32 h-32">
-                <Image
-                  src="/images/dagoberto-rudas.png"
-                  alt="Dagoberto Rudas, Senior Ornithologist Guide"
-                  width={128}
-                  height={128}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Dagoberto Rudas</h3>
-              <p className="text-blue-600 font-medium mb-3">Senior Ornithologist</p>
-              <p className="text-gray-600 text-sm">
-                Chocó specialist with unmatched knowledge of Pacific slope endemics and rainforest ecology.
-              </p>
-            </Card>
-
-            <Card className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="aspect-square rounded-full overflow-hidden mx-auto mb-4 w-32 h-32">
-                <Image
-                  src="/images/nicolas-rozo.png"
-                  alt="Nicolás Rozo, High-Altitude Specialist"
-                  width={128}
-                  height={128}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Nicolás Rozo</h3>
-              <p className="text-purple-600 font-medium mb-3">High-Altitude Specialist</p>
-              <p className="text-gray-600 text-sm">
-                Páramo expert specializing in high-altitude endemics and Andean ecosystem conservation.
-              </p>
-            </Card>
-          </div>
-
-          <div className="text-center">
-            <Link href="/team">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-4">
-                Meet Our Full Team
+      {/* CTA Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Ready to Make a Difference?</h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Join us in protecting Colombia's incredible biodiversity while experiencing the adventure of a lifetime.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/shopping">
+              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white text-lg px-8 py-4">
+                Book Your Conservation Journey
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-emerald-600 to-blue-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6">Ready to Experience Colombia's Incredible Biodiversity?</h2>
-            <p className="text-xl mb-8 text-white/90">
-              Join us for a transformative birding adventure that supports conservation and creates lasting memories.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/tours">
-                <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
-                  Explore Our Tours
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
-                >
-                  Plan Your Trip
-                </Button>
-              </Link>
-            </div>
+            <Link href="/contact">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-4 bg-transparent"
+              >
+                Get in Touch
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
