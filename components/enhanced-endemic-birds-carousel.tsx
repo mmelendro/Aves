@@ -366,6 +366,7 @@ export default function EnhancedEndemicBirdsCarousel({
   const [showInfo, setShowInfo] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   // Mobile detection with proper hydration handling
   useEffect(() => {
@@ -380,14 +381,17 @@ export default function EnhancedEndemicBirdsCarousel({
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % bioregionBirds.length)
+    setImageLoaded(false)
   }, [])
 
   const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + bioregionBirds.length) % bioregionBirds.length)
+    setImageLoaded(false)
   }, [])
 
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index)
+    setImageLoaded(false)
   }, [])
 
   const handleNavigation = (direction: "next" | "prev") => {
@@ -428,22 +432,27 @@ export default function EnhancedEndemicBirdsCarousel({
 
   const currentBird = bioregionBirds[currentIndex]
 
-  // Function to get image positioning based on bird ID
+  // Function to get image positioning based on bird ID with improved adjustments
   const getImagePositioning = (birdId: string) => {
     switch (birdId) {
-      case "1": // Green-bearded Helmetcrest
+      case "1": // Green-bearded Helmetcrest - eliminate white column on right
         return {
-          objectPosition: "left center",
-          className: "object-cover object-left",
+          objectPosition: "85% center", // Move significantly left to eliminate white space
+          className: "object-cover",
+        }
+      case "2": // Rainbow-bearded Thornbill - prevent crest cutoff
+        return {
+          objectPosition: "center 25%", // Move up to show the crest properly
+          className: "object-cover",
         }
       case "3": // Black-billed Mountain-Toucan - adjusted to show more of left side
         return {
           objectPosition: "20% center", // Show more of the left side to prevent beak cutoff
           className: "object-cover",
         }
-      case "6": // Vermilion Cardinal - shift down to show crest
+      case "6": // Vermilion Cardinal - prevent head cutoff
         return {
-          objectPosition: "center 60%", // Shift down by ~20px equivalent
+          objectPosition: "center 35%", // Move up to show the full head and crest
           className: "object-cover",
         }
       case "7": // Velvet-purple Coronet - center the bird nicely
@@ -476,23 +485,32 @@ export default function EnhancedEndemicBirdsCarousel({
     setShowInfo(!showInfo)
   }
 
+  const handleImageLoad = () => {
+    setIsLoading(false)
+    setImageLoaded(true)
+  }
+
   // Mobile-optimized layout
   if (isMobile) {
     return (
       <div className={cn("relative w-full max-w-full overflow-hidden", className)}>
         <Card className="overflow-hidden border-0 shadow-lg mx-2">
           <div className="relative">
-            {/* Mobile Main Image - Properly sized for mobile */}
+            {/* Mobile Main Image - Properly sized for mobile with fade-in animation */}
             <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
               <img
                 src={currentBird.image || "/placeholder.svg?height=400&width=600&text=Bird+Image"}
                 alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
-                className={cn("w-full h-full transition-all duration-500", currentImagePositioning.className)}
+                className={cn(
+                  "w-full h-full transition-all duration-700 ease-out",
+                  currentImagePositioning.className,
+                  imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95",
+                )}
                 style={{
                   objectPosition: currentImagePositioning.objectPosition,
                   objectFit: "cover",
                 }}
-                onLoad={() => setIsLoading(false)}
+                onLoad={handleImageLoad}
               />
 
               {/* Loading Indicator */}
@@ -572,6 +590,24 @@ export default function EnhancedEndemicBirdsCarousel({
                         <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
                       </div>
                     </a>
+                  ) : currentBird.photoCredit.linkTo ? (
+                    <Link
+                      href={currentBird.photoCredit.linkTo}
+                      className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-gray-900 border border-gray-200 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg flex items-center justify-center transition-all duration-200 relative group"
+                      aria-label={`Photo by ${currentBird.photoCredit.photographer} - View team profile`}
+                    >
+                      <span className="text-base">📷</span>
+                      <div className="absolute bottom-full right-0 mb-3 px-3 py-2 bg-black/95 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                        <div className="text-center">
+                          Photo © {currentBird.photoCredit.photographer}
+                          <br />
+                          <span className="text-emerald-300">
+                            {currentBird.photoCredit.isGuide ? "AVES Guide & Founder" : "Early Client"}
+                          </span>
+                        </div>
+                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                      </div>
+                    </Link>
                   ) : (
                     <div className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-gray-900 border border-gray-200 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg flex items-center justify-center transition-all duration-200 relative group">
                       <span className="text-base">📷</span>
@@ -626,9 +662,9 @@ export default function EnhancedEndemicBirdsCarousel({
 
           {/* Mobile Content Section */}
           <CardContent className="p-4">
-            {/* Mobile Info Panel */}
+            {/* Mobile Info Panel - Fixed functionality */}
             {showInfo && (
-              <div className="mb-4 p-3 bg-gray-50 rounded-lg border">
+              <div className="mb-4 p-3 bg-gray-50 rounded-lg border animate-in slide-in-from-top-2 duration-300">
                 <p className="text-sm leading-relaxed mb-3">{currentBird.description}</p>
 
                 {/* Mobile Photo Credit in Info Panel */}
@@ -791,25 +827,26 @@ export default function EnhancedEndemicBirdsCarousel({
     )
   }
 
-  // Desktop layout - Properly sized for desktop viewing
+  // Desktop layout - Properly sized for desktop viewing with fade-in animation
   return (
     <div className={cn("relative w-full max-w-3xl mx-auto", className)}>
       <Card className="overflow-hidden border-0 shadow-2xl">
         <div className="relative">
-          {/* Desktop Main Image - Properly sized */}
+          {/* Desktop Main Image - Properly sized with fade-in animation */}
           <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
             <img
               src={currentBird.image || "/placeholder.svg?height=600&width=800&text=Bird+Image"}
               alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
               className={cn(
-                "w-full h-full transition-all duration-700 hover:scale-105",
+                "w-full h-full transition-all duration-700 ease-out hover:scale-105",
                 currentImagePositioning.className,
+                imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95",
               )}
               style={{
                 objectPosition: currentImagePositioning.objectPosition,
                 objectFit: "cover",
               }}
-              onLoad={() => setIsLoading(false)}
+              onLoad={handleImageLoad}
             />
 
             {/* Loading Indicator */}
@@ -914,6 +951,23 @@ export default function EnhancedEndemicBirdsCarousel({
                       <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
                     </div>
                   </a>
+                ) : currentBird.photoCredit.linkTo ? (
+                  <Link
+                    href={currentBird.photoCredit.linkTo}
+                    className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group"
+                    aria-label={`Photo by ${currentBird.photoCredit.photographer} - View team profile`}
+                  >
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © {currentBird.photoCredit.photographer}</div>
+                        <div className="text-emerald-300 text-xs mt-1">
+                          ✨ {currentBird.photoCredit.isGuide ? "AVES Guide & Founder" : "Early Client"}
+                        </div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
+                  </Link>
                 ) : (
                   <div className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
                     <span className="text-lg">📷</span>
@@ -968,7 +1022,7 @@ export default function EnhancedEndemicBirdsCarousel({
                 </div>
 
                 {showInfo && (
-                  <div className="space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-3 mt-3">
+                  <div className="space-y-3 bg-black/40 backdrop-blur-sm rounded-lg p-3 mt-3 animate-in slide-in-from-bottom-2 duration-300">
                     <p className="text-sm leading-relaxed">{currentBird.description}</p>
 
                     {/* Desktop Photo Credit in Info Panel */}
