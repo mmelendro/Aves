@@ -62,7 +62,7 @@ export default function ElevatePage() {
 
               <div className="grid grid-cols-3 gap-8 pt-8 border-t">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-yellow-600">$1,200</div>
+                  <div className="text-3xl font-bold text-yellow-600">$1,500</div>
                   <div className="text-sm text-gray-600">per person/day</div>
                 </div>
                 <div className="text-center">
@@ -77,7 +77,7 @@ export default function ElevatePage() {
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
                 <Image
                   src="/images/rainbow-bearded-thornbill.jpg"
                   alt="Rainbow-bearded Thornbill in páramo ecosystem representing Elevate Tours"
@@ -86,7 +86,22 @@ export default function ElevatePage() {
                   className="object-cover w-full h-full"
                   style={{ objectPosition: "center 25%" }}
                 />
+
+                {/* Photo Attribution Button */}
+                <div className="absolute bottom-4 right-4 z-50">
+                  <div className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © Royann Petrell</div>
+                        <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
@@ -276,7 +291,7 @@ export default function ElevatePage() {
             <Card className="p-8 border-0 shadow-xl">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <div className="text-6xl font-bold text-yellow-600 mb-4">$1,200</div>
+                  <div className="text-6xl font-bold text-yellow-600 mb-4">$1,500</div>
                   <div className="text-xl text-gray-600 mb-6">per person per day</div>
 
                   <div className="space-y-4 mb-8">
@@ -304,8 +319,8 @@ export default function ElevatePage() {
 
                   <div className="bg-white rounded-lg p-4 mb-6">
                     <div className="text-sm text-gray-600 mb-2">Sample pricing for 2 people, 8 days:</div>
-                    <div className="text-2xl font-bold text-gray-900">$19,200 total</div>
-                    <div className="text-sm text-gray-500">($9,600 per person)</div>
+                    <div className="text-2xl font-bold text-gray-900">$24,000 total</div>
+                    <div className="text-sm text-gray-500">($12,000 per person)</div>
                   </div>
                 </div>
 
@@ -315,19 +330,19 @@ export default function ElevatePage() {
                     <div className="space-y-3">
                       <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                         <span className="font-medium">7 days</span>
-                        <span className="text-yellow-600 font-bold">$8,400/person</span>
+                        <span className="text-yellow-600 font-bold">$10,500/person</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-yellow-100 rounded-lg border-2 border-yellow-500">
                         <span className="font-medium">8 days (Recommended)</span>
-                        <span className="text-yellow-600 font-bold">$9,600/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">10 days</span>
                         <span className="text-yellow-600 font-bold">$12,000/person</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-white rounded-lg">
+                        <span className="font-medium">10 days</span>
+                        <span className="text-yellow-600 font-bold">$15,000/person</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                         <span className="font-medium">14 days</span>
-                        <span className="text-yellow-600 font-bold">$16,800/person</span>
+                        <span className="text-yellow-600 font-bold">$21,000/person</span>
                       </div>
                     </div>
                   </div>

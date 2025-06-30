@@ -136,8 +136,8 @@ ${formData.firstName} ${formData.lastName}`)
       >
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div className="space-y-8 order-2 lg:order-1">
-              <div className="space-y-6">
+            <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+              <div className="space-y-4 lg:space-y-6">
                 <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 animate-pulse">
                   🌿 B Corp Certified • Carbon Neutral Tours
                 </Badge>
@@ -389,7 +389,7 @@ ${formData.firstName} ${formData.lastName}`)
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-xl font-bold text-yellow-600">$15,000</div>
+                      <div className="text-xl font-bold text-yellow-600">$12,000</div>
                       <div className="text-xs text-gray-500">avg. per person</div>
                     </div>
                     <Badge className="bg-yellow-100 text-yellow-800 text-xs">8-10 days</Badge>
@@ -433,7 +433,7 @@ ${formData.firstName} ${formData.lastName}`)
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-xl font-bold text-red-600">$6,500</div>
+                      <div className="text-xl font-bold text-red-600">$14,000</div>
                       <div className="text-xs text-gray-500">avg. per person</div>
                     </div>
                     <Badge className="bg-red-100 text-red-800 text-xs">6-8 days</Badge>
@@ -591,10 +591,12 @@ ${formData.firstName} ${formData.lastName}`)
             <p className="text-lg text-gray-600">Discover why Colombia is the world's birding capital</p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
             <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-emerald-200 hover:border-emerald-300">
-                <div className="text-4xl font-bold text-emerald-600 mb-2 group-hover:text-emerald-700">1,900+</div>
+              <div className="bg-white rounded-xl p-4 sm:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-emerald-200 hover:border-emerald-300">
+                <div className="text-3xl sm:text-4xl font-bold text-emerald-600 mb-2 group-hover:text-emerald-700">
+                  1,900+
+                </div>
                 <div className="text-sm text-gray-600 group-hover:text-gray-700">Bird Species</div>
                 <div className="text-xs text-emerald-600 mt-1 group-hover:text-emerald-700">#1 Globally</div>
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -604,8 +606,8 @@ ${formData.firstName} ${formData.lastName}`)
             </Link>
 
             <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 hover:border-blue-300">
-                <div className="text-4xl font-bold text-blue-600 mb-2 group-hover:text-blue-700">78+</div>
+              <div className="bg-white rounded-xl p-4 sm:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 hover:border-blue-300">
+                <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2 group-hover:text-blue-700">78+</div>
                 <div className="text-sm text-gray-600 group-hover:text-gray-700">Endemic Species</div>
                 <div className="text-xs text-blue-600 mt-1 group-hover:text-blue-700">Found Nowhere Else</div>
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -615,8 +617,10 @@ ${formData.firstName} ${formData.lastName}`)
             </Link>
 
             <Link href="/bioregions" className="group block">
-              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-purple-200 hover:border-purple-300">
-                <div className="text-4xl font-bold text-purple-600 mb-2 group-hover:text-purple-700">11</div>
+              <div className="bg-white rounded-xl p-4 sm:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-purple-200 hover:border-purple-300">
+                <div className="text-3xl sm:text-4xl font-bold text-purple-600 mb-2 group-hover:text-purple-700">
+                  11
+                </div>
                 <div className="text-sm text-gray-600 group-hover:text-gray-700">Bioregions</div>
                 <div className="text-xs text-purple-600 mt-1 group-hover:text-purple-700">Diverse Ecosystems</div>
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -626,8 +630,10 @@ ${formData.firstName} ${formData.lastName}`)
             </Link>
 
             <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-orange-200 hover:border-orange-300">
-                <div className="text-4xl font-bold text-orange-600 mb-2 group-hover:text-orange-700">165</div>
+              <div className="bg-white rounded-xl p-4 sm:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-orange-200 hover:border-orange-300">
+                <div className="text-3xl sm:text-4xl font-bold text-orange-600 mb-2 group-hover:text-orange-700">
+                  165
+                </div>
                 <div className="text-sm text-gray-600 group-hover:text-gray-700">Hummingbird Species</div>
                 <div className="text-xs text-orange-600 mt-1 group-hover:text-orange-700">Most in the World</div>
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

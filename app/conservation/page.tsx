@@ -261,7 +261,7 @@ export default function ConservationPage() {
                   <Link href="/about/b-corp">
                     <Button
                       variant="outline"
-                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white bg-transparent"
                     >
                       Learn About Our B Corp Journey
                     </Button>
@@ -276,6 +276,19 @@ export default function ConservationPage() {
                   height={400}
                   className="object-contain w-full h-full"
                 />
+                {/* Photo Attribution for Masked Trogon */}
+                <div className="absolute bottom-3 right-3 z-50">
+                  <div className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © Royann Petrell</div>
+                        <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -301,7 +314,7 @@ export default function ConservationPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4"
+                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
               >
                 Learn More About Our Impact
               </Button>

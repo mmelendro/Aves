@@ -60,7 +60,7 @@ export default function SoulsPage() {
 
               <div className="grid grid-cols-3 gap-8 pt-8 border-t">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-red-600">$1,600</div>
+                  <div className="text-3xl font-bold text-red-600">$1,750</div>
                   <div className="text-sm text-gray-600">per person/day</div>
                 </div>
                 <div className="text-center">
@@ -75,7 +75,7 @@ export default function SoulsPage() {
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
                 <Image
                   src="/images/vermillion-flycatcher.jpg"
                   alt="Vermilion Flycatcher in Eastern Cordillera representing Souls Tours"
@@ -84,7 +84,22 @@ export default function SoulsPage() {
                   className="object-cover w-full h-full"
                   style={{ objectPosition: "center 20%" }}
                 />
+
+                {/* Photo Attribution Button */}
+                <div className="absolute bottom-4 right-4 z-50">
+                  <div className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © Royann Petrell</div>
+                        <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
@@ -165,30 +180,28 @@ export default function SoulsPage() {
               {[
                 {
                   day: "Day 1-2",
-                  location: "Sumapaz Páramo & Indigenous Territory",
-                  description: "High-altitude páramo birding with Muisca community guides and traditional ceremonies",
-                  highlights: "Apolinar's Wren, Noble Snipe, Bogotá Rail",
+                  location: "Bogotá & Sumapaz Páramo",
+                  description: "Cultural orientation and high-altitude páramo birding with local community guides",
+                  highlights: "Bearded Helmetcrest, Páramo Pipit, Many-striped Canastero",
                 },
                 {
                   day: "Day 3-4",
-                  location: "Meta River Valley",
+                  location: "Eastern Cordillera Cloud Forest",
                   description:
-                    "Transition zone birding with Sikuani community, learning traditional bird names and uses",
-                  highlights: "Vermilion Flycatcher, Orinocan Saltator, Llanos Canastero",
+                    "Indigenous-guided forest walks learning traditional bird knowledge and medicinal plants",
+                  highlights: "Chestnut-crowned Antpitta, Golden-crowned Tanager, Rusty-breasted Antpitta",
                 },
                 {
                   day: "Day 5-6",
-                  location: "Tinigua National Park",
-                  description:
-                    "Amazon foothills exploration with Nukak guides, traditional hunting and gathering practices",
-                  highlights: "Harpy Eagle, Zigzag Heron, Undulated Antshrike",
+                  location: "Macarena Mountains",
+                  description: "Transition zone birding with endemic species and community conservation projects",
+                  highlights: "Orinoco Goose, Vermilion Flycatcher, White-bearded Flycatcher",
                 },
                 {
                   day: "Day 7-8",
-                  location: "Guaviare River & Petroglyphs",
-                  description:
-                    "Ancient rock art sites and river birding, connecting cultural heritage with conservation",
-                  highlights: "Capped Heron, Agami Heron, Point-tailed Palmcreeper",
+                  location: "Amazon Foothills",
+                  description: "Lowland rainforest immersion with indigenous guides and traditional ceremonies",
+                  highlights: "Harpy Eagle, Zigzag Heron, Amazonian Umbrellabird",
                 },
               ].map((item, index) => (
                 <Card key={index} className="p-6 border-0 shadow-lg">
@@ -217,7 +230,7 @@ export default function SoulsPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Souls Stories from the Field</h2>
             <p className="text-xl text-gray-600">
-              Discover the deep connections between culture, conservation, and community through our field experiences
+              Experience the deep connections between culture, community, and conservation through our guides' stories
             </p>
           </div>
 
@@ -226,32 +239,31 @@ export default function SoulsPage() {
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="aspect-[4/3] md:aspect-auto relative">
                   <Image
-                    src="/images/chestnut-crowned-antpitta.jpg"
-                    alt="Chocó endemic species expedition showcasing cultural connections"
+                    src="/images/vermillion-flycatcher.jpg"
+                    alt="Cultural birding expedition with indigenous communities"
                     width={600}
                     height={400}
                     className="object-cover w-full h-full"
-                    style={{ objectPosition: "center 30%" }}
+                    style={{ objectPosition: "center 20%" }}
                   />
                   <Badge className="absolute top-4 left-4 bg-red-600 text-white">Featured Story</Badge>
                 </div>
                 <CardContent className="p-8 flex flex-col justify-center">
-                  <Badge className="bg-red-100 text-red-800 w-fit mb-4">Cultural Conservation</Badge>
+                  <Badge className="bg-red-100 text-red-800 w-fit mb-4">Cultural Exchange</Badge>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Voices of the Forest: Chocó Endemic Species and Community Wisdom
+                    Voices of the Forest: Learning from Indigenous Bird Keepers
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    An immersive journey into the heart of indigenous territories, where traditional ecological
-                    knowledge meets modern conservation science in protecting Colombia's most endangered endemic
-                    species.
+                    A transformative Souls tour experience working with indigenous communities in the Eastern
+                    Cordillera, discovering how traditional knowledge enhances modern conservation efforts.
                   </p>
                   <div className="flex items-center text-sm text-gray-500 mb-6">
                     <Calendar className="w-4 h-4 mr-2" />
-                    <span>March 28, 2025</span>
+                    <span>June 10, 2025</span>
                     <Clock className="w-4 h-4 ml-4 mr-2" />
                     <span>9 min read</span>
                   </div>
-                  <Link href="/blog/choco-endemic-expedition">
+                  <Link href="/blog/indigenous-bird-keepers">
                     <Button className="bg-red-600 hover:bg-red-700 w-fit">
                       Read Full Story
                       <ArrowRight className="ml-2 w-4 h-4" />
@@ -270,7 +282,7 @@ export default function SoulsPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Souls Tour Pricing</h2>
             <p className="text-xl text-gray-600">
-              Premium cultural immersion experiences with direct community support and impact
+              Premium cultural immersion expeditions with indigenous community partnerships
             </p>
           </div>
 
@@ -278,7 +290,7 @@ export default function SoulsPage() {
             <Card className="p-8 border-0 shadow-xl">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <div className="text-6xl font-bold text-red-600 mb-4">$1,600</div>
+                  <div className="text-6xl font-bold text-red-600 mb-4">$1,750</div>
                   <div className="text-xl text-gray-600 mb-6">per person per day</div>
 
                   <div className="space-y-4 mb-8">
@@ -292,22 +304,22 @@ export default function SoulsPage() {
                     </div>
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-red-600 mr-3" />
-                      <span className="text-gray-700">Community-based accommodation</span>
+                      <span className="text-gray-700">Community project support</span>
                     </div>
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-red-600 mr-3" />
-                      <span className="text-gray-700">Traditional meals and crafts</span>
+                      <span className="text-gray-700">Traditional knowledge workshops</span>
                     </div>
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-red-600 mr-3" />
-                      <span className="text-gray-700">Conservation project support</span>
+                      <span className="text-gray-700">Fair-trade community support</span>
                     </div>
                   </div>
 
                   <div className="bg-white rounded-lg p-4 mb-6">
                     <div className="text-sm text-gray-600 mb-2">Sample pricing for 2 people, 8 days:</div>
-                    <div className="text-2xl font-bold text-gray-900">$25,600 total</div>
-                    <div className="text-sm text-gray-500">($12,800 per person)</div>
+                    <div className="text-2xl font-bold text-gray-900">$28,000 total</div>
+                    <div className="text-sm text-gray-500">($14,000 per person)</div>
                   </div>
                 </div>
 
@@ -317,19 +329,19 @@ export default function SoulsPage() {
                     <div className="space-y-3">
                       <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                         <span className="font-medium">7 days</span>
-                        <span className="text-red-600 font-bold">$11,200/person</span>
+                        <span className="text-red-600 font-bold">$12,250/person</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-red-100 rounded-lg border-2 border-red-500">
                         <span className="font-medium">8 days (Recommended)</span>
-                        <span className="text-red-600 font-bold">$12,800/person</span>
+                        <span className="text-red-600 font-bold">$14,000/person</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                         <span className="font-medium">10 days</span>
-                        <span className="text-red-600 font-bold">$16,000/person</span>
+                        <span className="text-red-600 font-bold">$17,500/person</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                         <span className="font-medium">14 days</span>
-                        <span className="text-red-600 font-bold">$22,400/person</span>
+                        <span className="text-red-600 font-bold">$24,500/person</span>
                       </div>
                     </div>
                   </div>

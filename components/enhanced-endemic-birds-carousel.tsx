@@ -33,8 +33,10 @@ interface BirdData {
   bioregionDescription: string
   photoCredit?: {
     photographer: string
-    instagramHandle: string
-    postUrl: string
+    instagramHandle?: string
+    postUrl?: string
+    linkTo?: string
+    isGuide?: boolean
   }
 }
 
@@ -65,6 +67,8 @@ const bioregionBirds: BirdData[] = [
       photographer: "Nicolás Rozo",
       instagramHandle: "@nicolas_rozop",
       postUrl: "https://www.instagram.com/p/C247ZDJgXBa/",
+      linkTo: "/team#nicolas-rozo",
+      isGuide: true,
     },
   },
   {
@@ -92,6 +96,9 @@ const bioregionBirds: BirdData[] = [
     ebirdCode: "rabtho1",
     bioregionDescription:
       "Coffee region with cloud forests and high-altitude páramo ecosystems across multiple Andean ranges.",
+    photoCredit: {
+      photographer: "Royann Petrell",
+    },
   },
   {
     id: "3",
@@ -120,6 +127,9 @@ const bioregionBirds: BirdData[] = [
     ebirdCode: "bbmtou1",
     bioregionDescription:
       "Montane cloud forests across multiple Andean ranges, representing the extensive distribution of mid-elevation species.",
+    photoCredit: {
+      photographer: "Royann Petrell",
+    },
   },
   {
     id: "4",
@@ -147,6 +157,11 @@ const bioregionBirds: BirdData[] = [
     ebirdCode: "chcant2",
     bioregionDescription:
       "High-altitude volcanic region where the Andes divide, with populations across multiple mountain ranges.",
+    photoCredit: {
+      photographer: "Martin Melendro",
+      linkTo: "/team#martin-melendro",
+      isGuide: true,
+    },
   },
   {
     id: "5",
@@ -173,6 +188,11 @@ const bioregionBirds: BirdData[] = [
     difficulty: "Easy",
     ebirdCode: "higmot1",
     bioregionDescription: "Montane cloud forests with incredible biodiversity across multiple Andean ranges.",
+    photoCredit: {
+      photographer: "Martin Melendro",
+      linkTo: "/team#martin-melendro",
+      isGuide: true,
+    },
   },
   {
     id: "6",
@@ -195,6 +215,9 @@ const bioregionBirds: BirdData[] = [
     difficulty: "Moderate",
     ebirdCode: "vercar1",
     bioregionDescription: "Dry coastal forests and scrublands with unique Caribbean endemic species.",
+    photoCredit: {
+      photographer: "Royann Petrell",
+    },
   },
   {
     id: "7",
@@ -216,6 +239,9 @@ const bioregionBirds: BirdData[] = [
     difficulty: "Moderate",
     ebirdCode: "vepcor1",
     bioregionDescription: "One of the world's most biodiverse regions with spectacular endemic hummingbirds.",
+    photoCredit: {
+      photographer: "Royann Petrell",
+    },
   },
 
   // REGIONS WITHOUT ACTUAL IMAGES (Secondary Display)
@@ -518,28 +544,44 @@ export default function EnhancedEndemicBirdsCarousel({
                 </Button>
               </div>
 
-              {/* Mobile Photo Attribution Button - Bottom Left Corner to avoid text overlap */}
+              {/* Mobile Photo Attribution Button - Bottom Right Corner */}
               {currentBird.photoCredit && (
-                <div className="absolute bottom-3 left-3 z-50">
-                  <a
-                    href="https://www.instagram.com/p/C247ZDJgXBa/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg flex items-center justify-center transition-all duration-200 relative group"
-                    aria-label="Photo by Nicolas Rozo - One of our expert guides"
-                  >
-                    <span className="text-base">📷</span>
-                    {/* Mobile tooltip - positioned above button with better spacing */}
-                    <div className="absolute bottom-full left-0 mb-3 px-3 py-2 bg-black/95 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[60] shadow-lg min-w-max">
-                      <div className="text-center">
-                        Photo © @nicolas_rozop
-                        <br />
-                        <span className="text-emerald-300">One of our expert guides</span>
+                <div className="absolute bottom-3 right-3 z-50">
+                  {currentBird.photoCredit.postUrl ? (
+                    <a
+                      href={currentBird.photoCredit.postUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg flex items-center justify-center transition-all duration-200 relative group"
+                      aria-label={`Photo by ${currentBird.photoCredit.photographer} - View on Instagram`}
+                    >
+                      <span className="text-base">📷</span>
+                      <div className="absolute bottom-full right-0 mb-3 px-3 py-2 bg-black/95 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                        <div className="text-center">
+                          Photo © {currentBird.photoCredit.photographer}
+                          <br />
+                          <span className="text-emerald-300">
+                            {currentBird.photoCredit.isGuide ? "AVES Guide" : "Early Client"}
+                          </span>
+                        </div>
+                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
                       </div>
-                      {/* Tooltip arrow */}
-                      <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </a>
+                  ) : (
+                    <div className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-full touch-manipulation shadow-lg flex items-center justify-center transition-all duration-200 relative group">
+                      <span className="text-base">📷</span>
+                      <div className="absolute bottom-full right-0 mb-3 px-3 py-2 bg-black/95 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                        <div className="text-center">
+                          Photo © {currentBird.photoCredit.photographer}
+                          <br />
+                          <span className="text-emerald-300">
+                            {currentBird.photoCredit.isGuide ? "AVES Guide & Founder" : "Early Client"}
+                          </span>
+                        </div>
+                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                      </div>
                     </div>
-                  </a>
+                  )}
                 </div>
               )}
 
@@ -555,10 +597,9 @@ export default function EnhancedEndemicBirdsCarousel({
                 )}
               </div>
 
-              {/* Mobile Bird Information Overlay - Adjusted to avoid button overlap */}
+              {/* Mobile Bird Information Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-3 text-white z-20">
-                <div className="space-y-1 pl-16">
-                  {/* Added left padding to avoid overlap with attribution button */}
+                <div className="space-y-1 pr-16">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="w-3 h-3 text-emerald-400 flex-shrink-0" />
                     <span className="text-sm font-medium text-emerald-300 truncate">{currentBird.bioregion}</span>
@@ -591,17 +632,19 @@ export default function EnhancedEndemicBirdsCarousel({
                     <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
                       <span>📷</span>
                       <span>Photo ©</span>
-                      <a
-                        href="https://www.instagram.com/p/C247ZDJgXBa/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
-                      >
-                        @nicolas_rozop
-                      </a>
+                      {currentBird.photoCredit.linkTo ? (
+                        <Link
+                          href={currentBird.photoCredit.linkTo}
+                          className="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
+                        >
+                          {currentBird.photoCredit.photographer}
+                        </Link>
+                      ) : (
+                        <span className="text-emerald-600 font-medium">{currentBird.photoCredit.photographer}</span>
+                      )}
                     </div>
                     <div className="text-xs text-emerald-600 font-medium">
-                      ✨ Nicolás is one of our expert birding guides
+                      ✨ {currentBird.photoCredit.isGuide ? "AVES Guide & Founder" : "Early Client"}
                     </div>
                   </div>
                 )}
@@ -834,33 +877,52 @@ export default function EnhancedEndemicBirdsCarousel({
                   aria-label={`View ${currentBird.commonName} on eBird`}
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
-                    View on eBird
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                    <div className="text-center leading-relaxed">
+                      <div className="font-medium">View on eBird</div>
+                    </div>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
                   </div>
                 </a>
               </div>
             </div>
 
-            {/* Desktop Photo Attribution Button - Bottom Left Corner to avoid text overlap */}
+            {/* Desktop Photo Attribution Button - Bottom Right Corner */}
             {currentBird.photoCredit && (
-              <div className="absolute bottom-4 left-4 z-50">
-                <a
-                  href="https://www.instagram.com/p/C247ZDJgXBa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group"
-                  aria-label="Photo by Nicolas Rozo - One of our expert guides"
-                >
-                  <span className="text-lg">📷</span>
-                  <div className="absolute bottom-full left-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[60] shadow-xl min-w-max">
-                    <div className="text-center leading-relaxed">
-                      <div className="font-medium">Photo © @nicolas_rozop</div>
-                      <div className="text-emerald-300 text-xs mt-1">✨ One of our expert birding guides</div>
+              <div className="absolute bottom-4 right-4 z-50">
+                {currentBird.photoCredit.postUrl ? (
+                  <a
+                    href={currentBird.photoCredit.postUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group"
+                    aria-label={`Photo by ${currentBird.photoCredit.photographer} - View on Instagram`}
+                  >
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © {currentBird.photoCredit.photographer}</div>
+                        <div className="text-emerald-300 text-xs mt-1">
+                          ✨ {currentBird.photoCredit.isGuide ? "AVES Guide" : "Early Client"}
+                        </div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
                     </div>
-                    {/* Tooltip arrow */}
-                    <div className="absolute top-full left-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                  </a>
+                ) : (
+                  <div className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
+                    <span className="text-lg">📷</span>
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                      <div className="text-center leading-relaxed">
+                        <div className="font-medium">Photo © {currentBird.photoCredit.photographer}</div>
+                        <div className="text-emerald-300 text-xs mt-1">
+                          ✨ {currentBird.photoCredit.isGuide ? "AVES Guide & Founder" : "Early Client"}
+                        </div>
+                      </div>
+                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+                    </div>
                   </div>
-                </a>
+                )}
               </div>
             )}
 
@@ -879,10 +941,9 @@ export default function EnhancedEndemicBirdsCarousel({
               )}
             </div>
 
-            {/* Desktop Bird Information Overlay - Adjusted to avoid button overlap */}
+            {/* Desktop Bird Information Overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-20">
-              <div className="space-y-2 pl-16">
-                {/* Added left padding to avoid overlap with attribution button */}
+              <div className="space-y-2 pr-16">
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <div className="flex items-center gap-1">
                     <MapPin className="w-4 h-4 text-emerald-400" />
@@ -911,16 +972,20 @@ export default function EnhancedEndemicBirdsCarousel({
                         <div className="flex items-center gap-2 text-xs mb-1">
                           <span className="opacity-75">📷</span>
                           <span className="opacity-90">Photo ©</span>
-                          <a
-                            href="https://www.instagram.com/p/C247ZDJgXBa/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-emerald-300 hover:text-emerald-200 font-medium hover:underline"
-                          >
-                            @nicolas_rozop
-                          </a>
+                          {currentBird.photoCredit.linkTo ? (
+                            <Link
+                              href={currentBird.photoCredit.linkTo}
+                              className="text-emerald-300 hover:text-emerald-200 font-medium hover:underline"
+                            >
+                              {currentBird.photoCredit.photographer}
+                            </Link>
+                          ) : (
+                            <span className="text-emerald-300 font-medium">{currentBird.photoCredit.photographer}</span>
+                          )}
                         </div>
-                        <div className="text-xs text-emerald-300">✨ Nicolás is one of our expert birding guides</div>
+                        <div className="text-xs text-emerald-300">
+                          ✨ {currentBird.photoCredit.isGuide ? "AVES Guide & Founder" : "Early Client"}
+                        </div>
                       </div>
                     )}
 
