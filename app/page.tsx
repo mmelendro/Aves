@@ -1046,26 +1046,34 @@ ${formData.firstName} ${formData.lastName}`)
                         Special Interests or Requests
                       </label>
                       <textarea
-                        placeholder="Tell us about specific birds you'd like to see, dietary restrictions, or any other special requests..."
+                        placeholder="Tell us about specific birds you'd like to see, photography interests, accessibility needs, dietary restrictions, or any other special requests..."
                         value={formData.specialRequests}
                         onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                        rows={isMobile ? 3 : 4}
-                        className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
-                          isMobile ? "text-sm" : "text-sm"
+                        rows={4}
+                        className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none ${
+                          isMobile ? "text-sm" : ""
                         }`}
                       />
                     </div>
 
-                    <a href={generateEmailLink()} className="block w-full">
+                    <a
+                      href={generateEmailLink()}
+                      className="block w-full"
+                      onClick={(e) => {
+                        if (!formData.firstName || !formData.lastName || !formData.email) {
+                          e.preventDefault()
+                          alert("Please fill in your name and email address before submitting.")
+                        }
+                      }}
+                    >
                       <Button
-                        size={isMobile ? "default" : "lg"}
                         className={`w-full bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 ${
-                          isMobile ? "text-sm px-4 py-3 h-12" : "text-base px-8 py-4"
+                          isMobile ? "text-sm h-12" : "text-lg py-4"
                         }`}
                       >
                         <Mail className={`mr-2 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`} />
                         Send My Inquiry
-                        <ArrowRight className={`ml-2 ${isMobile ? "w-3 h-3" : "w-4 h-4"}`} />
+                        <ArrowRight className={`ml-2 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`} />
                       </Button>
                     </a>
 
@@ -1078,12 +1086,13 @@ ${formData.firstName} ${formData.lastName}`)
                   <div
                     className={`bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl ${isMobile ? "p-4" : "p-6"}`}
                   >
-                    <h3 className={`font-bold text-gray-900 mb-4 ${isMobile ? "text-lg" : "text-xl"}`}>Get in Touch</h3>
-                    <div className="space-y-4">
+                    <h3 className={`font-bold text-gray-900 mb-4 ${isMobile ? "text-lg" : "text-xl"}`}>
+                      Get in Touch Directly
+                    </h3>
+
+                    <div className={`space-y-4 ${isMobile ? "mb-4" : "mb-6"}`}>
                       <div className="flex items-start space-x-3">
-                        <Mail
-                          className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-4 h-4 mt-0.5" : "w-5 h-5 mt-0.5"}`}
-                        />
+                        <Mail className={`text-emerald-600 mt-1 flex-shrink-0 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`} />
                         <div>
                           <div className={`font-medium text-gray-900 ${isMobile ? "text-sm" : ""}`}>Email</div>
                           <a
@@ -1101,9 +1110,7 @@ ${formData.firstName} ${formData.lastName}`)
                       </div>
 
                       <div className="flex items-start space-x-3">
-                        <MapPin
-                          className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-4 h-4 mt-0.5" : "w-5 h-5 mt-0.5"}`}
-                        />
+                        <MapPin className={`text-emerald-600 mt-1 flex-shrink-0 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`} />
                         <div>
                           <div className={`font-medium text-gray-900 ${isMobile ? "text-sm" : ""}`}>Based in</div>
                           <div className={`text-gray-700 ${isMobile ? "text-sm" : ""}`}>Bogotá, Colombia</div>
@@ -1112,49 +1119,49 @@ ${formData.firstName} ${formData.lastName}`)
                           </div>
                         </div>
                       </div>
-
-                      <div className="flex items-start space-x-3">
-                        <Clock
-                          className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-4 h-4 mt-0.5" : "w-5 h-5 mt-0.5"}`}
-                        />
-                        <div>
-                          <div className={`font-medium text-gray-900 ${isMobile ? "text-sm" : ""}`}>Response Time</div>
-                          <div className={`text-gray-700 ${isMobile ? "text-sm" : ""}`}>Within 24 hours</div>
-                          <div className={`text-gray-600 ${isMobile ? "text-xs" : "text-sm"}`}>Usually much faster</div>
-                        </div>
-                      </div>
                     </div>
 
-                    <div className={`border-t border-emerald-200 pt-4 ${isMobile ? "mt-4" : "mt-6"}`}>
-                      <h4 className={`font-semibold text-gray-900 mb-3 ${isMobile ? "text-sm" : ""}`}>
-                        Why Contact Us Directly?
-                      </h4>
-                      <ul className={`space-y-2 text-gray-600 ${isMobile ? "text-xs" : "text-sm"}`}>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle
-                            className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-3 h-3 mt-0.5" : "w-4 h-4 mt-0.5"}`}
-                          />
-                          <span>Personalized tour recommendations</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle
-                            className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-3 h-3 mt-0.5" : "w-4 h-4 mt-0.5"}`}
-                          />
-                          <span>Custom itinerary planning</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle
-                            className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-3 h-3 mt-0.5" : "w-4 h-4 mt-0.5"}`}
-                          />
-                          <span>Expert birding advice</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle
-                            className={`text-emerald-600 flex-shrink-0 ${isMobile ? "w-3 h-3 mt-0.5" : "w-4 h-4 mt-0.5"}`}
-                          />
-                          <span>Flexible booking options</span>
-                        </li>
-                      </ul>
+                    {/* Quick Links - Mobile Optimized */}
+                    <div className={`border-t border-emerald-200 pt-4 ${isMobile ? "space-y-2" : "space-y-3"}`}>
+                      <h4 className={`font-medium text-gray-900 ${isMobile ? "text-sm" : ""}`}>Quick Links</h4>
+                      <div className={`${isMobile ? "space-y-1" : "space-y-2"}`}>
+                        <Link
+                          href="/tours"
+                          className={`flex items-center text-emerald-600 hover:text-emerald-700 hover:underline ${
+                            isMobile ? "text-xs" : "text-sm"
+                          }`}
+                        >
+                          <ArrowRight className={`mr-2 ${isMobile ? "w-2 h-2" : "w-3 h-3"}`} />
+                          Browse All Tours
+                        </Link>
+                        <Link
+                          href="/aves-explorer"
+                          className={`flex items-center text-emerald-600 hover:text-emerald-700 hover:underline ${
+                            isMobile ? "text-xs" : "text-sm"
+                          }`}
+                        >
+                          <Map className={`mr-2 ${isMobile ? "w-2 h-2" : "w-3 h-3"}`} />
+                          Explore Interactive Map
+                        </Link>
+                        <Link
+                          href="/endemic-birds"
+                          className={`flex items-center text-emerald-600 hover:text-emerald-700 hover:underline ${
+                            isMobile ? "text-xs" : "text-sm"
+                          }`}
+                        >
+                          <ArrowRight className={`mr-2 ${isMobile ? "w-2 h-2" : "w-3 h-3"}`} />
+                          Endemic Birds Guide
+                        </Link>
+                        <Link
+                          href="/travel-tips"
+                          className={`flex items-center text-emerald-600 hover:text-emerald-700 hover:underline ${
+                            isMobile ? "text-xs" : "text-sm"
+                          }`}
+                        >
+                          <ArrowRight className={`mr-2 ${isMobile ? "w-2 h-2" : "w-3 h-3"}`} />
+                          Travel Tips & Preparation
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

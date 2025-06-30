@@ -7,55 +7,123 @@ import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 
 function VideoPlayer({ src, poster }: { src: string; poster: string }) {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [showControls, setShowControls] = useState(false)
+  const [showControls, setShowControls] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleLoadedData = () => {
+      setIsLoading(false)
+    }
+
+    const handleError = () => {
+      setIsLoading(false)
+      setHasError(true)
+    }
+
+    const handlePlay = () => setIsPlaying(true)
+    const handlePause = () => setIsPlaying(false)
+
+    video.addEventListener("loadeddata", handleLoadedData)
+    video.addEventListener("error", handleError)
+    video.addEventListener("play", handlePlay)
+    video.addEventListener("pause", handlePause)
+
+    return () => {
+      video.removeEventListener("loadeddata", handleLoadedData)
+      video.removeEventListener("error", handleError)
+      video.removeEventListener("play", handlePlay)
+      video.removeEventListener("pause", handlePause)
+    }
+  }, [])
+
   const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-      } else {
-        videoRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
+    const video = videoRef.current
+    if (!video) return
+
+    if (isPlaying) {
+      video.pause()
+    } else {
+      video.play().catch((error) => {
+        console.log("Play failed:", error)
+        setHasError(true)
+      })
     }
   }
 
-  return (
-    <div
-      className="relative group cursor-pointer"
-      onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
-      onClick={togglePlay}
-    >
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        className="w-full h-full object-cover rounded-lg"
-        loop
-        muted
-        playsInline
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      />
-
-      {/* Play/Pause Overlay */}
-      <div
-        className={`absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg transition-opacity duration-300 ${showControls || !isPlaying ? "opacity-100" : "opacity-0"}`}
-      >
-        <div className="bg-white/90 rounded-full p-3 shadow-lg">
-          {isPlaying ? <Pause className="w-6 h-6 text-gray-800" /> : <Play className="w-6 h-6 text-gray-800 ml-1" />}
+  if (hasError) {
+    return (
+      <div className="relative aspect-video w-full bg-gradient-to-br from-emerald-50 to-blue-50 rounded-lg overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-gray-600">
+            <p className="text-lg font-medium">Video temporarily unavailable</p>
+            <p className="text-sm">Showing fallback image</p>
+          </div>
         </div>
+        <img
+          src={poster || "/placeholder.svg"}
+          alt="El Dorado Reserve Cloud Forest"
+          className="w-full h-full object-cover opacity-50"
+        />
       </div>
+    )
+  }
 
-      {/* Video Label */}
-      <div className="absolute bottom-4 left-4 bg-black/70 text-white p-2 rounded-lg">
-        <p className="text-xs font-medium">El Dorado Reserve Cloud Forest</p>
+  return (
+    <div className="relative w-full">
+      {/* Video Container with proper aspect ratio */}
+      <div className="relative aspect-video w-full bg-black rounded-lg overflow-hidden">
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-10">
+            <div className="flex flex-col items-center space-y-4 text-white">
+              <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-sm">Loading video...</p>
+            </div>
+          </div>
+        )}
+
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          poster={poster}
+          preload="metadata"
+          playsInline
+          muted
+          loop
+          onLoadStart={() => setIsLoading(true)}
+          onCanPlay={() => setIsLoading(false)}
+        >
+          <source src={src} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Play/Pause Overlay */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-300 cursor-pointer ${
+            showControls || !isPlaying ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={togglePlay}
+          onMouseEnter={() => setShowControls(true)}
+          onMouseLeave={() => setShowControls(false)}
+        >
+          <div className="bg-white/90 hover:bg-white rounded-full p-4 shadow-lg transition-all duration-200 hover:scale-110">
+            {isPlaying ? <Pause className="w-8 h-8 text-gray-800" /> : <Play className="w-8 h-8 text-gray-800 ml-1" />}
+          </div>
+        </div>
+
+        {/* Video Label */}
+        <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-2 rounded-lg">
+          <p className="text-sm font-medium">El Dorado Reserve Cloud Forest</p>
+          <p className="text-xs opacity-90">Sierra Nevada de Santa Marta</p>
+        </div>
       </div>
     </div>
   )
@@ -183,21 +251,25 @@ export default function SierraNevadaKogiWayuuPost() {
 
           {/* El Dorado Video Section */}
           <div className="my-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <p className="mb-6">
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+              <div className="space-y-6">
+                <p className="text-lg leading-relaxed">
                   Our expedition began with three full days in the misty cloud forests of El Dorado Reserve, where
                   David's intimate knowledge of the endemic species proved invaluable. The extended stay allowed us to
                   explore different trail systems at various times of day, maximizing our chances with the region's most
                   elusive endemics.
                 </p>
-                <p className="mb-6">
+                <p className="leading-relaxed">
                   The cloud forest ecosystem of El Dorado represents one of the most biodiverse habitats on Earth. As we
                   walked through the perpetually mist-shrouded trails, the forest seemed to come alive with the calls of
                   endemic species found nowhere else on the planet.
                 </p>
+                <p className="text-sm text-gray-600 italic">
+                  Click the video to experience the mystical atmosphere of the cloud forest that served as our base for
+                  the first three days.
+                </p>
               </div>
-              <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+              <div className="w-full">
                 <VideoPlayer src="/videos/el-dorado-reserve.mp4" poster="/images/emerald-toucanet.jpg" />
               </div>
             </div>
