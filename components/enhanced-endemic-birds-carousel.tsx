@@ -437,7 +437,7 @@ export default function EnhancedEndemicBirdsCarousel({
     switch (birdId) {
       case "1": // Green-bearded Helmetcrest - eliminate white column on right
         return {
-          objectPosition: "85% center", // Move significantly left to eliminate white space
+          objectPosition: "75% center", // Move further left to eliminate white space completely
           className: "object-cover",
         }
       case "2": // Rainbow-bearded Thornbill - prevent crest cutoff
@@ -492,6 +492,44 @@ export default function EnhancedEndemicBirdsCarousel({
 
   // Mobile-optimized layout
   if (isMobile) {
+    // Function to get image positioning based on bird ID with improved adjustments
+    const getImagePositioning = (birdId: string) => {
+      switch (birdId) {
+        case "1": // Green-bearded Helmetcrest - mobile version
+          return {
+            objectPosition: "75% center", // Consistent positioning for mobile
+            className: "object-cover",
+          }
+        case "2": // Rainbow-bearded Thornbill - prevent crest cutoff
+          return {
+            objectPosition: "center 25%", // Move up to show the crest properly
+            className: "object-cover",
+          }
+        case "3": // Black-billed Mountain-Toucan - adjusted to show more of left side
+          return {
+            objectPosition: "20% center", // Show more of the left side to prevent beak cutoff
+            className: "object-cover",
+          }
+        case "6": // Vermilion Cardinal - prevent head cutoff
+          return {
+            objectPosition: "center 35%", // Move up to show the full head and crest
+            className: "object-cover",
+          }
+        case "7": // Velvet-purple Coronet - center the bird nicely
+          return {
+            objectPosition: "center center",
+            className: "object-cover",
+          }
+        default:
+          return {
+            objectPosition: "center center",
+            className: "object-cover",
+          }
+      }
+    }
+
+    const currentImagePositioning = getImagePositioning(currentBird.id)
+
     return (
       <div className={cn("relative w-full max-w-full overflow-hidden", className)}>
         <Card className="overflow-hidden border-0 shadow-lg mx-2">
