@@ -273,7 +273,7 @@ interface EnhancedEndemicBirdsCarouselProps {
 export default function EnhancedEndemicBirdsCarousel({
   className,
   autoPlay = true,
-  autoPlayInterval = 12000, // Increased to 12 seconds for better viewing experience
+  autoPlayInterval = 12000,
 }: EnhancedEndemicBirdsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
@@ -300,7 +300,7 @@ export default function EnhancedEndemicBirdsCarousel({
     setImageLoaded(false)
     setImageError(false)
     setIsLoading(true)
-    setShowInfo(false) // Ensure info panel closes
+    setShowInfo(false)
     setShowPhotoCredit(false)
   }, [])
 
@@ -309,7 +309,7 @@ export default function EnhancedEndemicBirdsCarousel({
     setImageLoaded(false)
     setImageError(false)
     setIsLoading(true)
-    setShowInfo(false) // Ensure info panel closes
+    setShowInfo(false)
     setShowPhotoCredit(false)
   }, [])
 
@@ -318,7 +318,7 @@ export default function EnhancedEndemicBirdsCarousel({
     setImageLoaded(false)
     setImageError(false)
     setIsLoading(true)
-    setShowInfo(false) // Ensure info panel closes
+    setShowInfo(false)
     setShowPhotoCredit(false)
   }, [])
 
@@ -360,44 +360,56 @@ export default function EnhancedEndemicBirdsCarousel({
 
   const currentBird = bioregionBirds[currentIndex]
 
-  // Enhanced image positioning function with specific fixes for Green-bearded Helmetcrest
+  // Enhanced image positioning function optimized for square aspect ratio
   const getImagePositioning = (birdId: string) => {
     switch (birdId) {
-      case "1": // Green-bearded Helmetcrest - Fixed positioning to center bird's face and eliminate white space
+      case "1": // Green-bearded Helmetcrest - Center on bird's face and crest
         return {
-          objectPosition: "45% 30%", // Centered on bird's face, moved up to show crest properly
+          objectPosition: "center 35%",
           className: "object-cover",
-          transform: "scale(1.15)", // Slight zoom to eliminate white space while maintaining quality
+          transform: "scale(1.2)",
         }
-      case "2": // Rainbow-bearded Thornbill - prevent crest cutoff
+      case "2": // Rainbow-bearded Thornbill - Center on bird with full visibility
         return {
-          objectPosition: "center 25%", // Move up to show the crest properly
-          className: "object-cover",
-          transform: "scale(1.05)",
-        }
-      case "3": // Black-billed Mountain-Toucan - adjusted to show more of left side
-        return {
-          objectPosition: "25% center", // Show more of the left side to prevent beak cutoff
+          objectPosition: "center 30%",
           className: "object-cover",
           transform: "scale(1.1)",
         }
-      case "6": // Vermilion Cardinal - prevent head cutoff
-        return {
-          objectPosition: "center 35%", // Move up to show the full head and crest
-          className: "object-cover",
-          transform: "scale(1.05)",
-        }
-      case "7": // Velvet-purple Coronet - center the bird nicely
+      case "3": // Black-billed Mountain-Toucan - Center on bird's face and beak
         return {
           objectPosition: "center center",
           className: "object-cover",
-          transform: "scale(1.05)",
+          transform: "scale(1.15)",
+        }
+      case "4": // Chestnut-crowned Antpitta - Show full bird including feet
+        return {
+          objectPosition: "center 40%",
+          className: "object-cover",
+          transform: "scale(1.1)",
+        }
+      case "5": // Andean Motmot - Center on bird
+        return {
+          objectPosition: "center center",
+          className: "object-cover",
+          transform: "scale(1.1)",
+        }
+      case "6": // Vermilion Cardinal - Show full bird including crest
+        return {
+          objectPosition: "center 25%",
+          className: "object-cover",
+          transform: "scale(1.1)",
+        }
+      case "7": // Velvet-purple Coronet - Center on bird
+        return {
+          objectPosition: "center center",
+          className: "object-cover",
+          transform: "scale(1.1)",
         }
       default:
         return {
           objectPosition: "center center",
           className: "object-cover",
-          transform: "scale(1.05)",
+          transform: "scale(1.1)",
         }
     }
   }
@@ -423,7 +435,6 @@ export default function EnhancedEndemicBirdsCarousel({
     setShowPhotoCredit(!showPhotoCredit)
   }
 
-  // Enhanced image loading with error handling and preloading
   const handleImageLoad = useCallback(() => {
     setIsLoading(false)
     setImageLoaded(true)
@@ -443,7 +454,6 @@ export default function EnhancedEndemicBirdsCarousel({
     nextImage.src = bioregionBirds[nextIndex].image
   }, [currentIndex])
 
-  // Navigation function for eBird
   const navigateToEbird = (ebirdCode: string) => {
     window.open(`https://ebird.org/species/${ebirdCode}`, "_blank", "noopener,noreferrer")
   }
@@ -454,11 +464,11 @@ export default function EnhancedEndemicBirdsCarousel({
       <div className={cn("relative w-full max-w-full overflow-hidden", className)}>
         <Card className="overflow-hidden border-0 shadow-lg mx-2">
           <div className="relative">
-            {/* Mobile Main Image */}
-            <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
+            {/* Mobile Main Image - Square Aspect Ratio */}
+            <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
               {!imageError ? (
                 <img
-                  src={currentBird.image || "/placeholder.svg?height=400&width=600&text=Bird+Image"}
+                  src={currentBird.image || "/placeholder.svg?height=400&width=400&text=Bird+Image"}
                   alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
                   className={cn(
                     "w-full h-full transition-all duration-1000 ease-out",
@@ -542,18 +552,6 @@ export default function EnhancedEndemicBirdsCarousel({
                   >
                     <Camera className="w-4 h-4" />
                   </Button>
-                )}
-              </div>
-
-              {/* Mobile Status Badges */}
-              <div className="absolute top-3 left-3 flex flex-col gap-1 z-30">
-                <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
-                  {currentBird.status}
-                </Badge>
-                {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
-                  <Badge className="text-xs font-medium border bg-blue-50 text-blue-700 border-blue-200">
-                    Multi-region
-                  </Badge>
                 )}
               </div>
 
@@ -643,76 +641,109 @@ export default function EnhancedEndemicBirdsCarousel({
                   </div>
                 </div>
 
-                {/* Mobile Info Panel - Expands Upward with Optimized Dimensions */}
+                {/* Mobile Info Panel - Enhanced with scrolling */}
                 {showInfo && (
                   <div className="absolute bottom-0 left-0 right-0 bg-black/96 backdrop-blur-md border-t border-white/20 shadow-2xl z-45 animate-in slide-in-from-bottom-3 duration-400 ease-out">
-                    <div className="p-4 max-h-[55vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-                      {/* Header with Bird Names and eBird Link */}
-                      <div className="flex items-center justify-between pb-3 border-b border-white/20">
-                        <div className="flex-1 min-w-0">
+                    <div className="p-3 sm:p-4 max-h-[65vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                      {/* Enhanced Header with responsive text sizing */}
+                      <div className="flex items-start justify-between pb-2 sm:pb-3 border-b border-white/20 mb-2 sm:mb-3">
+                        <div className="flex-1 min-w-0 pr-2">
                           <button
                             onClick={() => navigateToEbird(currentBird.ebirdCode)}
                             className="text-left hover:text-emerald-300 transition-colors cursor-pointer bg-transparent border-0 p-0 group block w-full"
                             aria-label={`View ${currentBird.commonName} on eBird`}
                           >
-                            <div className="flex items-center gap-2 mb-1">
-                              <ExternalLink className="w-3 h-3 text-emerald-400 flex-shrink-0 group-hover:text-emerald-300 transition-colors" />
-                              <span className="text-sm font-bold text-emerald-300 group-hover:text-emerald-200 underline decoration-emerald-400/50 underline-offset-2 group-hover:decoration-emerald-300 transition-all">
-                                {currentBird.commonName}
-                              </span>
+                            <div className="flex items-start gap-2 mb-1">
+                              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400 flex-shrink-0 group-hover:text-emerald-300 transition-colors mt-0.5" />
+                              <div className="flex-1 min-w-0">
+                                <span className="text-sm sm:text-base font-bold text-emerald-300 group-hover:text-emerald-200 underline decoration-emerald-400/50 underline-offset-2 group-hover:decoration-emerald-300 transition-all leading-tight block">
+                                  {currentBird.commonName}
+                                </span>
+                                <p className="text-xs sm:text-sm italic text-blue-300 group-hover:text-blue-200 transition-colors leading-tight mt-0.5">
+                                  {currentBird.scientificName}
+                                </p>
+                                <p className="text-xs text-gray-300 group-hover:text-gray-200 transition-colors leading-tight">
+                                  {currentBird.spanishName}
+                                </p>
+                              </div>
                             </div>
-                            <p className="text-xs italic text-blue-300 group-hover:text-blue-200 transition-colors leading-tight">
-                              {currentBird.scientificName}
-                            </p>
-                            <p className="text-xs text-gray-300 group-hover:text-gray-200 transition-colors leading-tight">
-                              {currentBird.spanishName}
-                            </p>
                           </button>
+                        </div>
+
+                        {/* Status badges in header when panel is open */}
+                        <div className="flex flex-col gap-1 flex-shrink-0">
+                          <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
+                            {currentBird.status}
+                          </Badge>
+                          <Badge
+                            className={cn("text-xs font-medium border", getDifficultyColor(currentBird.difficulty))}
+                          >
+                            {currentBird.difficulty}
+                          </Badge>
+                          {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
+                            <Badge className="text-xs font-medium border bg-blue-50 text-blue-700 border-blue-200">
+                              Multi-region
+                            </Badge>
+                          )}
                         </div>
                       </div>
 
-                      <div>
-                        <p className="text-sm text-blue-300 font-medium">{currentBird.spanishName}</p>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
-                          {currentBird.status}
-                        </Badge>
+                      {/* Conservation status badge */}
+                      <div className="mb-2 sm:mb-3">
                         <Badge className="text-xs font-medium border bg-gray-100 text-gray-800 border-gray-300">
                           {currentBird.conservationStatus}
                         </Badge>
                       </div>
 
-                      <p className="text-sm leading-relaxed opacity-90">{currentBird.description}</p>
+                      {/* Enhanced description with responsive text */}
+                      <div className="mb-3 sm:mb-4">
+                        <p className="text-xs sm:text-sm leading-relaxed opacity-90 text-white">
+                          {currentBird.description}
+                        </p>
+                      </div>
 
-                      <div className="space-y-1 text-xs opacity-75">
-                        <div>
-                          <span className="font-medium text-emerald-300">Habitat:</span> {currentBird.habitat}
+                      {/* Enhanced habitat and timing info */}
+                      <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm opacity-75 mb-3 sm:mb-4">
+                        <div className="flex flex-wrap items-start gap-1">
+                          <span className="font-medium text-emerald-300 flex-shrink-0">Habitat:</span>
+                          <span className="text-white leading-tight">{currentBird.habitat}</span>
                         </div>
-                        <div>
-                          <span className="font-medium text-emerald-300">Best time:</span> {currentBird.bestTime}
+                        <div className="flex flex-wrap items-start gap-1">
+                          <span className="font-medium text-emerald-300 flex-shrink-0">Best time:</span>
+                          <span className="text-white leading-tight">{currentBird.bestTime}</span>
                         </div>
                       </div>
 
+                      {/* Enhanced secondary regions info */}
                       {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
-                        <div className="text-xs opacity-75">
-                          <span className="font-medium text-emerald-300">Also found in:</span>{" "}
-                          {currentBird.secondaryRegions.map((region, index) => (
-                            <span key={region.slug}>
-                              {region.name}
-                              {index < currentBird.secondaryRegions!.length - 1 ? ", " : ""}
+                        <div className="text-xs sm:text-sm opacity-75 mb-3 sm:mb-4">
+                          <div className="mb-1">
+                            <span className="font-medium text-emerald-300">Primary region:</span>{" "}
+                            <span className="text-white">{currentBird.bioregion}</span>
+                          </div>
+                          <div>
+                            <span className="font-medium text-blue-300">Also found in:</span>{" "}
+                            <span className="text-white">
+                              {currentBird.secondaryRegions.map((region, index) => (
+                                <span key={region.slug}>
+                                  {region.name}
+                                  {index < currentBird.secondaryRegions!.length - 1 ? ", " : ""}
+                                </span>
+                              ))}
                             </span>
-                          ))}
+                          </div>
                         </div>
                       )}
 
-                      {/* Action buttons */}
-                      <div className="flex flex-col gap-2 pt-2 border-t border-white/20">
+                      {/* Enhanced action buttons with better spacing */}
+                      <div className="flex flex-col gap-2 pt-2 sm:pt-3 border-t border-white/20">
                         <Link href={`/bioregions/${currentBird.bioregionSlug}`} className="w-full">
-                          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs w-full">
-                            <MapPin className="w-3 h-3 mr-2" />
-                            Explore {currentBird.bioregion.split(" ")[0]}
+                          <Button
+                            size="sm"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-xs sm:text-sm w-full h-8 sm:h-9"
+                          >
+                            <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                            <span className="truncate">Explore {currentBird.bioregion.split(" ")[0]}</span>
                           </Button>
                         </Link>
                         <Link
@@ -722,10 +753,10 @@ export default function EnhancedEndemicBirdsCarousel({
                           <Button
                             size="sm"
                             variant="outline"
-                            className="border-white/30 text-white hover:bg-white/10 text-xs bg-transparent w-full"
+                            className="border-white/30 text-white hover:bg-white/10 text-xs sm:text-sm bg-transparent w-full h-8 sm:h-9"
                           >
-                            <ExternalLink className="w-3 h-3 mr-2" />
-                            Plan Trip
+                            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                            <span className="truncate">Plan Trip</span>
                           </Button>
                         </Link>
                       </div>
@@ -734,7 +765,7 @@ export default function EnhancedEndemicBirdsCarousel({
                 )}
               </div>
 
-              {/* Mobile Fixed Info Button - Enhanced Visual States */}
+              {/* Mobile Fixed Info Button */}
               <Button
                 variant="ghost"
                 size="sm"
@@ -749,14 +780,12 @@ export default function EnhancedEndemicBirdsCarousel({
                 aria-expanded={showInfo}
               >
                 <Info className={cn("w-5 h-5 transition-all duration-400", showInfo ? "rotate-180 scale-110" : "")} />
-                {/* Enhanced Active State Indicators */}
                 {showInfo && (
                   <>
                     <div className="absolute -inset-1 bg-emerald-400/30 rounded-full animate-ping" />
                     <div className="absolute -inset-2 bg-emerald-300/20 rounded-full animate-pulse" />
                   </>
                 )}
-                {/* Enhanced Inactive State Glow */}
                 {!showInfo && (
                   <div className="absolute -inset-0.5 bg-blue-400/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 )}
@@ -766,7 +795,7 @@ export default function EnhancedEndemicBirdsCarousel({
 
           {/* Mobile Content Section */}
           <CardContent className="p-4">
-            {/* Mobile Thumbnail Navigation */}
+            {/* Mobile Thumbnail Navigation - Square thumbnails */}
             <div className="mb-4">
               <div
                 className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 carousel-touch-area"
@@ -857,11 +886,11 @@ export default function EnhancedEndemicBirdsCarousel({
     <div className={cn("relative w-full max-w-3xl mx-auto", className)}>
       <Card className="overflow-hidden border-0 shadow-2xl">
         <div className="relative">
-          {/* Desktop Main Image */}
-          <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
+          {/* Desktop Main Image - Square Aspect Ratio */}
+          <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
             {!imageError ? (
               <img
-                src={currentBird.image || "/placeholder.svg?height=600&width=800&text=Bird+Image"}
+                src={currentBird.image || "/placeholder.svg?height=600&width=600&text=Bird+Image"}
                 alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
                 className={cn(
                   "w-full h-full transition-all duration-1000 ease-out hover:scale-105",
@@ -954,21 +983,6 @@ export default function EnhancedEndemicBirdsCarousel({
               )}
             </div>
 
-            {/* Desktop Status and Difficulty Badges */}
-            <div className="absolute top-2 left-2 flex flex-col gap-1 z-30">
-              <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
-                {currentBird.status}
-              </Badge>
-              <Badge className={cn("text-xs font-medium border", getDifficultyColor(currentBird.difficulty))}>
-                {currentBird.difficulty}
-              </Badge>
-              {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
-                <Badge className="text-xs font-medium border bg-blue-50 text-blue-700 border-blue-200">
-                  Multi-region
-                </Badge>
-              )}
-            </div>
-
             {/* Desktop Photo Credit Popup */}
             {currentBird.photoCredit && showPhotoCredit && (
               <div className="absolute top-16 right-3 z-50">
@@ -1058,86 +1072,120 @@ export default function EnhancedEndemicBirdsCarousel({
                 </div>
               </div>
 
-              {/* Desktop Info Panel - Expands Upward with Optimized Dimensions */}
+              {/* Desktop Info Panel - Enhanced with scrolling */}
               {showInfo && (
                 <div className="absolute bottom-0 left-0 right-0 bg-black/96 backdrop-blur-md border-t border-white/20 shadow-2xl z-45 animate-in slide-in-from-bottom-3 duration-400 ease-out">
-                  <div className="p-6 max-h-[65vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-                    {/* Header with Bird Names and eBird Link */}
-                    <div className="flex items-center justify-between pb-4 border-b border-white/20">
-                      <div className="flex-1 min-w-0">
+                  <div className="p-4 lg:p-6 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                    {/* Enhanced Header with better spacing */}
+                    <div className="flex items-start justify-between pb-3 lg:pb-4 border-b border-white/20 mb-3 lg:mb-4">
+                      <div className="flex-1 min-w-0 pr-4">
                         <button
                           onClick={() => navigateToEbird(currentBird.ebirdCode)}
                           className="text-left hover:text-emerald-300 transition-colors cursor-pointer bg-transparent border-0 p-0 group block w-full"
                           aria-label={`View ${currentBird.commonName} on eBird`}
                         >
-                          <div className="flex items-center gap-2 mb-2">
-                            <ExternalLink className="w-4 h-4 text-emerald-400 flex-shrink-0 group-hover:text-emerald-300 transition-colors" />
-                            <span className="text-lg font-bold text-emerald-300 group-hover:text-emerald-200 underline decoration-emerald-400/50 underline-offset-2 group-hover:decoration-emerald-300 transition-all">
-                              {currentBird.commonName}
-                            </span>
+                          <div className="flex items-start gap-2 mb-2">
+                            <ExternalLink className="w-4 h-4 lg:w-5 lg:h-5 text-emerald-400 flex-shrink-0 group-hover:text-emerald-300 transition-colors mt-1" />
+                            <div className="flex-1 min-w-0">
+                              <span className="text-lg lg:text-xl font-bold text-emerald-300 group-hover:text-emerald-200 underline decoration-emerald-400/50 underline-offset-2 group-hover:decoration-emerald-300 transition-all leading-tight block">
+                                {currentBird.commonName}
+                              </span>
+                              <p className="text-sm lg:text-base italic text-blue-300 group-hover:text-blue-200 transition-colors leading-tight mt-1">
+                                {currentBird.scientificName}
+                              </p>
+                              <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors leading-tight">
+                                {currentBird.spanishName}
+                              </p>
+                            </div>
                           </div>
-                          <p className="text-sm italic text-blue-300 group-hover:text-blue-200 transition-colors leading-tight">
-                            {currentBird.scientificName}
-                          </p>
-                          <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors leading-tight">
-                            {currentBird.spanishName}
-                          </p>
                         </button>
+                      </div>
+
+                      {/* Status badges in header when panel is open */}
+                      <div className="flex flex-col gap-1 flex-shrink-0">
+                        <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
+                          {currentBird.status}
+                        </Badge>
+                        <Badge className={cn("text-xs font-medium border", getDifficultyColor(currentBird.difficulty))}>
+                          {currentBird.difficulty}
+                        </Badge>
+                        {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
+                          <Badge className="text-xs font-medium border bg-blue-50 text-blue-700 border-blue-200">
+                            Multi-region
+                          </Badge>
+                        )}
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
-                        {currentBird.status}
-                      </Badge>
+                    {/* Conservation status */}
+                    <div className="mb-3 lg:mb-4">
                       <Badge className="text-xs font-medium border bg-gray-100 text-gray-800 border-gray-300">
                         {currentBird.conservationStatus}
                       </Badge>
                     </div>
 
-                    <p className="text-sm leading-relaxed opacity-90">{currentBird.description}</p>
+                    {/* Enhanced description */}
+                    <div className="mb-4 lg:mb-5">
+                      <p className="text-sm lg:text-base leading-relaxed opacity-90 text-white">
+                        {currentBird.description}
+                      </p>
+                    </div>
 
-                    <div className="grid grid-cols-1 gap-2 text-sm opacity-75">
-                      <div>
-                        <span className="font-medium text-emerald-300">Habitat:</span> {currentBird.habitat}
+                    {/* Enhanced habitat and timing grid */}
+                    <div className="grid grid-cols-1 gap-2 lg:gap-3 text-sm lg:text-base opacity-75 mb-4 lg:mb-5">
+                      <div className="flex flex-wrap items-start gap-2">
+                        <span className="font-medium text-emerald-300 flex-shrink-0">Habitat:</span>
+                        <span className="text-white leading-tight flex-1">{currentBird.habitat}</span>
                       </div>
-                      <div>
-                        <span className="font-medium text-emerald-300">Best time:</span> {currentBird.bestTime}
+                      <div className="flex flex-wrap items-start gap-2">
+                        <span className="font-medium text-emerald-300 flex-shrink-0">Best time:</span>
+                        <span className="text-white leading-tight flex-1">{currentBird.bestTime}</span>
                       </div>
                     </div>
 
+                    {/* Enhanced secondary regions */}
                     {currentBird.secondaryRegions && currentBird.secondaryRegions.length > 0 && (
-                      <div className="text-sm opacity-75">
-                        <span className="font-medium text-emerald-300">Primary region:</span> {currentBird.bioregion}
-                        <br />
-                        <span className="font-medium text-blue-300">Also found in:</span>{" "}
-                        {currentBird.secondaryRegions.map((region, index) => (
-                          <span key={region.slug}>
-                            {region.name}
-                            {index < currentBird.secondaryRegions!.length - 1 ? ", " : ""}
+                      <div className="text-sm lg:text-base opacity-75 mb-4 lg:mb-5">
+                        <div className="mb-2">
+                          <span className="font-medium text-emerald-300">Primary region:</span>{" "}
+                          <span className="text-white">{currentBird.bioregion}</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-blue-300">Also found in:</span>{" "}
+                          <span className="text-white">
+                            {currentBird.secondaryRegions.map((region, index) => (
+                              <span key={region.slug}>
+                                {region.name}
+                                {index < currentBird.secondaryRegions!.length - 1 ? ", " : ""}
+                              </span>
+                            ))}
                           </span>
-                        ))}
+                        </div>
                       </div>
                     )}
 
-                    {/* Action buttons */}
-                    <div className="flex flex-row gap-3 pt-3 border-t border-white/20">
-                      <Link href={`/bioregions/${currentBird.bioregionSlug}`}>
-                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-sm">
-                          <MapPin className="w-4 h-4 mr-2" />
-                          Explore {currentBird.bioregion.split(" ")[0]}
+                    {/* Enhanced action buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3 pt-3 lg:pt-4 border-t border-white/20">
+                      <Link href={`/bioregions/${currentBird.bioregionSlug}`} className="flex-1">
+                        <Button
+                          size="sm"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-sm lg:text-base w-full h-9 lg:h-10"
+                        >
+                          <MapPin className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
+                          <span className="truncate">Explore {currentBird.bioregion.split(" ")[0]}</span>
                         </Button>
                       </Link>
                       <Link
                         href={`/shopping?region=${encodeURIComponent(currentBird.bioregion)}&tour=Adventure+Tours&from=carousel`}
+                        className="flex-1"
                       >
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-white/30 text-white hover:bg-white/10 text-sm bg-transparent"
+                          className="border-white/30 text-white hover:bg-white/10 text-sm lg:text-base bg-transparent w-full h-9 lg:h-10"
                         >
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Plan Trip
+                          <ExternalLink className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
+                          <span className="truncate">Plan Trip</span>
                         </Button>
                       </Link>
                     </div>
@@ -1146,7 +1194,7 @@ export default function EnhancedEndemicBirdsCarousel({
               )}
             </div>
 
-            {/* Desktop Fixed Info Button - Enhanced Visual States */}
+            {/* Desktop Fixed Info Button */}
             <Button
               variant="ghost"
               size="sm"
@@ -1161,19 +1209,15 @@ export default function EnhancedEndemicBirdsCarousel({
               aria-expanded={showInfo}
             >
               <Info className={cn("w-6 h-6 transition-all duration-400", showInfo ? "rotate-180 scale-110" : "")} />
-              {/* Enhanced Tooltip */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 bg-black/90 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-50 shadow-lg">
-                {showInfo ? "Hide bird details" : "Show bird details"}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-black/90" />
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 bg-black/90 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                {showInfo ? "Hide details" : "Show details"}
               </div>
-              {/* Enhanced Active State Indicators */}
               {showInfo && (
                 <>
                   <div className="absolute -inset-1 bg-emerald-400/30 rounded-full animate-ping" />
                   <div className="absolute -inset-2 bg-emerald-300/20 rounded-full animate-pulse" />
                 </>
               )}
-              {/* Enhanced Inactive State Glow */}
               {!showInfo && (
                 <div className="absolute -inset-0.5 bg-blue-400/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               )}
@@ -1182,10 +1226,10 @@ export default function EnhancedEndemicBirdsCarousel({
         </div>
 
         {/* Desktop Content Section */}
-        <CardContent className="p-6">
-          {/* Desktop Thumbnail Navigation */}
-          <div className="mb-6">
-            <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+        <CardContent className="p-4 lg:p-6">
+          {/* Desktop Thumbnail Navigation - Square thumbnails */}
+          <div className="mb-4 lg:mb-6">
+            <div className="flex gap-2 lg:gap-3 overflow-x-auto scrollbar-hide pb-2 carousel-touch-area">
               {bioregionBirds.map((bird, index) => {
                 const thumbnailPositioning = getImagePositioning(bird.id)
                 return (
@@ -1193,13 +1237,14 @@ export default function EnhancedEndemicBirdsCarousel({
                     key={bird.id}
                     onClick={() => goToSlide(index)}
                     className={cn(
-                      "flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all relative",
+                      "flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all relative aspect-square",
                       index === currentIndex ? "border-emerald-500 ring-2 ring-emerald-200" : "border-gray-200",
                     )}
+                    style={{ scrollSnapAlign: "start" }}
                     aria-label={`View ${bird.commonName} from ${bird.bioregion}`}
                   >
                     <img
-                      src={bird.image || "/placeholder.svg?height=64&width=64&text=Bird"}
+                      src={bird.image || "/placeholder.svg?height=80&width=80&text=Bird"}
                       alt={bird.commonName}
                       className={cn("w-full h-full transition-all", thumbnailPositioning.className)}
                       style={{
@@ -1216,13 +1261,13 @@ export default function EnhancedEndemicBirdsCarousel({
           </div>
 
           {/* Desktop Progress Indicators */}
-          <div className="flex justify-center gap-2 mb-6">
+          <div className="flex justify-center gap-2 mb-4 lg:mb-6">
             {bioregionBirds.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all",
+                  "w-2 h-2 lg:w-3 lg:h-3 rounded-full transition-all",
                   index === currentIndex ? "bg-emerald-500" : "bg-gray-300",
                 )}
                 aria-label={`Go to slide ${index + 1}`}
@@ -1231,16 +1276,16 @@ export default function EnhancedEndemicBirdsCarousel({
           </div>
 
           {/* Desktop CTA Section */}
-          <div className="p-6 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg border border-emerald-200">
+          <div className="p-4 lg:p-6 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg border border-emerald-200">
             <div className="text-center">
-              <h4 className="text-lg font-semibold text-gray-900 mb-3">Explore Colombia's Bioregions</h4>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <h4 className="font-semibold text-gray-900 mb-2 text-base lg:text-lg">Explore Colombia's Bioregions</h4>
+              <p className="text-sm lg:text-base text-gray-600 mb-4 leading-relaxed">
                 Discover {bioregionBirds.length} unique bioregions with endemic species and spectacular wildlife.
               </p>
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href={`/bioregions/${currentBird.bioregionSlug}`}>
-                  <Button className="bg-emerald-600 hover:bg-emerald-700">
-                    <MapPin className="w-4 h-4 mr-2" />
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-sm lg:text-base px-6 lg:px-8">
+                    <MapPin className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
                     Explore {currentBird.bioregion.split(" ")[0]}
                   </Button>
                 </Link>
@@ -1249,9 +1294,9 @@ export default function EnhancedEndemicBirdsCarousel({
                 >
                   <Button
                     variant="outline"
-                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 bg-transparent"
+                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-sm lg:text-base px-6 lg:px-8 bg-transparent"
                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
+                    <ExternalLink className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
                     Plan Trip
                   </Button>
                 </Link>
