@@ -452,7 +452,7 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Why Choose AVES */}
+      {/* Why Choose AVES - Redesigned with Card-Style CTAs */}
       <section className={`bg-gray-50 transition-all duration-500 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
@@ -464,154 +464,71 @@ ${formData.firstName} ${formData.lastName}`)
           </div>
 
           <div className={responsive.grid.features}>
-            {/* Expert Guides */}
-            <div className="text-center">
-              <div className="bg-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Users className="text-emerald-600 w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-4 text-xl">Expert Local Guides</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Our certified ornithologist guides know every bird call, behavior, and habitat across Colombia's diverse
-                regions, ensuring exceptional wildlife encounters.
-              </p>
-              <Link
-                href="/team"
-                className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium"
-              >
-                Meet Our Guides
-                <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* Conservation & B Corp */}
-            <div className="text-center">
-              <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Shield className="text-green-600 w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-4 text-xl">B Corp Certified Conservation</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Every tour directly supports habitat protection and local communities. We're B Corp certified and
-                operate 100% carbon-neutral expeditions with verified impact.
-              </p>
-              <div className="flex flex-col gap-3">
-                <Link
-                  href="/about/b-corp"
-                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
-                >
-                  Our B Corp Journey
-                  <ArrowRight className="ml-1 w-3 h-3" />
-                </Link>
-                <Link
-                  href="/conservation"
-                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
-                >
-                  Conservation Impact
-                  <ArrowRight className="ml-1 w-3 h-3" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Exclusive Access & Recognition */}
-            <div className="text-center">
-              <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Award className="text-blue-600 w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-4 text-xl">Exclusive Access & Recognition</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Access private reserves and research stations unavailable to others. Recommended by leading
-                ornithologists and featured in top birding publications worldwide.
-              </p>
-              <Link
-                href="/about/partners"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Our Partner Network
-                <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="bg-gradient-to-r from-gray-50 to-emerald-50 rounded-xl mt-12 p-8">
-            <div className={responsive.grid.stats}>
-              <div className="text-center">
-                <div className="font-bold text-emerald-600 mb-1 text-2xl lg:text-3xl">B Corp</div>
-                <div className="text-gray-600 text-sm">Certified</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-green-600 mb-1 text-2xl lg:text-3xl">100%</div>
-                <div className="text-gray-600 text-sm">Carbon Neutral</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-blue-600 mb-1 text-2xl lg:text-3xl">Max 4</div>
-                <div className="text-gray-600 text-sm">Guests per Tour</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-purple-600 mb-1 text-2xl lg:text-3xl">24hr</div>
-                <div className="text-gray-600 text-sm">Response Time</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Colombia by the Numbers */}
-      <section className={`bg-white transition-all duration-500 ${responsive.sectionSpacing}`}>
-        <div className={`container mx-auto ${responsive.container}`}>
-          <div className="text-center mb-12">
-            <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>Colombia by the Numbers</h2>
-            <p className={`text-gray-600 ${responsive.textSize.body}`}>
-              Discover why Colombia is the world's birding capital
-            </p>
-          </div>
-
-          <div className={responsive.grid.stats}>
-            <Link href="/endemic-birds" className="group block">
+            {/* Expert Guides - Card Style */}
+            <Link href="/team" className="group block">
               <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-emerald-200 hover:border-emerald-300 p-6">
-                <div className="font-bold text-emerald-600 mb-2 group-hover:text-emerald-700 text-3xl lg:text-4xl">
-                  1,900+
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
+                  <Users className="text-emerald-600 w-8 h-8" />
                 </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Bird Species</div>
-                <div className="text-emerald-600 mt-1 group-hover:text-emerald-700 text-xs">#1 Globally</div>
+                <div className="font-bold text-emerald-600 mb-2 group-hover:text-emerald-700 text-3xl lg:text-4xl">
+                  Expert
+                </div>
+                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Local Guides</div>
+                <div className="text-emerald-600 mt-1 group-hover:text-emerald-700 text-xs">Meet Our Team</div>
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ArrowRight className="mx-auto text-emerald-600 w-4 h-4" />
                 </div>
               </div>
             </Link>
 
-            <Link href="/endemic-birds" className="group block">
+            {/* Conservation & B Corp - Card Style with Multiple Links */}
+            <div className="space-y-4">
+              <Link href="/about/b-corp" className="group block">
+                <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-green-200 hover:border-green-300 p-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                    <Shield className="text-green-600 w-6 h-6" />
+                  </div>
+                  <div className="font-bold text-green-600 mb-1 group-hover:text-green-700 text-2xl lg:text-3xl">
+                    B Corp
+                  </div>
+                  <div className="text-gray-600 group-hover:text-gray-700 text-sm">Certified</div>
+                  <div className="text-green-600 mt-1 group-hover:text-green-700 text-xs">Our Journey</div>
+                  <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ArrowRight className="mx-auto text-green-600 w-3 h-3" />
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/conservation" className="group block">
+                <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-green-200 hover:border-green-300 p-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                    <Shield className="text-green-600 w-6 h-6" />
+                  </div>
+                  <div className="font-bold text-green-600 mb-1 group-hover:text-green-700 text-2xl lg:text-3xl">
+                    100%
+                  </div>
+                  <div className="text-gray-600 group-hover:text-gray-700 text-sm">Carbon Neutral</div>
+                  <div className="text-green-600 mt-1 group-hover:text-green-700 text-xs">Our Impact</div>
+                  <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ArrowRight className="mx-auto text-green-600 w-3 h-3" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Exclusive Access & Recognition - Card Style */}
+            <Link href="/about/partners" className="group block">
               <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 hover:border-blue-300 p-6">
-                <div className="font-bold text-blue-600 mb-2 group-hover:text-blue-700 text-3xl lg:text-4xl">78+</div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Endemic Species</div>
-                <div className="text-blue-600 mt-1 group-hover:text-blue-700 text-xs">Found Nowhere Else</div>
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                  <Award className="text-blue-600 w-8 h-8" />
+                </div>
+                <div className="font-bold text-blue-600 mb-2 group-hover:text-blue-700 text-3xl lg:text-4xl">
+                  Exclusive
+                </div>
+                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Partner Network</div>
+                <div className="text-blue-600 mt-1 group-hover:text-blue-700 text-xs">View Partners</div>
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ArrowRight className="mx-auto text-blue-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/aves-explorer" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-purple-200 hover:border-purple-300 p-6">
-                <div className="font-bold text-purple-600 mb-2 group-hover:text-purple-700 text-3xl lg:text-4xl">
-                  11
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Bioregions</div>
-                <div className="text-purple-600 mt-1 group-hover:text-purple-700 text-xs">Diverse Ecosystems</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-purple-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-orange-200 hover:border-orange-300 p-6">
-                <div className="font-bold text-orange-600 mb-2 group-hover:text-orange-700 text-3xl lg:text-4xl">
-                  165
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Hummingbird Species</div>
-                <div className="text-orange-600 mt-1 group-hover:text-orange-700 text-xs">Most in the World</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-orange-600 w-4 h-4" />
                 </div>
               </div>
             </Link>
