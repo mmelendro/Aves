@@ -602,13 +602,13 @@ export default function HomepageBirdCarousel({
 
             {/* Enhanced Info Popup */}
             {showInfo && (
-              <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-50">
+              <div className="absolute inset-0 bg-black/20 backdrop-blur-lg z-50">
                 <div className="h-full overflow-y-auto p-4">
                   {/* Separate close button in top-right */}
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-white/20 hover:bg-white/30 text-white border-0 z-10"
+                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white border-0 z-10 shadow-lg"
                     onClick={() => setShowInfo(false)}
                     aria-label="Close information"
                   >
@@ -617,16 +617,32 @@ export default function HomepageBirdCarousel({
 
                   <div className="pt-12 pb-6">
                     <div className="mb-4">
-                      <h2 className="text-lg font-bold text-emerald-300 mb-1">{currentBird.commonName}</h2>
-                      <p className="text-sm italic text-blue-300 mb-1">{currentBird.scientificName}</p>
-                      <p className="text-xs text-gray-300 mb-4">{currentBird.spanishName}</p>
+                      <h2 className="text-lg font-bold text-white mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+                        {currentBird.commonName}
+                      </h2>
+                      <p className="text-sm italic text-emerald-200 mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                        {currentBird.scientificName}
+                      </p>
+                      <p className="text-xs text-gray-200 mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                        {currentBird.spanishName}
+                      </p>
 
-                      {/* Status and Difficulty Badges - Now in Info Popup */}
+                      {/* Status and Difficulty Badges - Enhanced with backdrop */}
                       <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
+                        <Badge
+                          className={cn(
+                            "text-xs font-medium border shadow-lg backdrop-blur-sm",
+                            getStatusColor(currentBird.status),
+                          )}
+                        >
                           {currentBird.status}
                         </Badge>
-                        <Badge className={cn("text-xs font-medium border", getDifficultyColor(currentBird.difficulty))}>
+                        <Badge
+                          className={cn(
+                            "text-xs font-medium border shadow-lg backdrop-blur-sm",
+                            getDifficultyColor(currentBird.difficulty),
+                          )}
+                        >
                           {currentBird.difficulty}
                         </Badge>
                       </div>
@@ -635,10 +651,12 @@ export default function HomepageBirdCarousel({
                       <div className="space-y-3 mb-4">
                         {/* Primary Region */}
                         <div>
-                          <span className="font-medium text-emerald-300 text-sm block mb-1">Primary Region:</span>
+                          <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                            Primary Region:
+                          </span>
                           <div
                             className={cn(
-                              "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border",
+                              "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border shadow-lg backdrop-blur-sm",
                               getPrimaryRegionColor(currentBird.primaryRegion),
                             )}
                           >
@@ -650,14 +668,16 @@ export default function HomepageBirdCarousel({
                         {/* Secondary Regions */}
                         {currentBird.secondaryRegions.length > 0 && (
                           <div>
-                            <span className="font-medium text-emerald-300 text-sm block mb-1">Also found in:</span>
+                            <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                              Also found in:
+                            </span>
                             <div className="flex flex-wrap gap-1">
                               {currentBird.secondaryRegions.map((region, index) => (
                                 <div
                                   key={index}
                                   className={cn(
-                                    "px-2 py-1 rounded-full text-xs font-medium border",
-                                    getPrimaryRegionColor(region).replace("/90", "/70"),
+                                    "px-2 py-1 rounded-full text-xs font-medium border shadow-lg backdrop-blur-sm",
+                                    getPrimaryRegionColor(region).replace("/90", "/80"),
                                   )}
                                 >
                                   {region}
@@ -669,12 +689,14 @@ export default function HomepageBirdCarousel({
 
                         {/* Ecoregions */}
                         <div>
-                          <span className="font-medium text-emerald-300 text-sm block mb-1">Ecoregions:</span>
+                          <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                            Ecoregions:
+                          </span>
                           <div className="flex flex-wrap gap-1">
                             {currentBird.ecoregions.map((ecoregion, index) => (
                               <div
                                 key={index}
-                                className="px-2 py-1 rounded-full text-xs font-medium border bg-slate-500/60 text-white border-slate-400/30"
+                                className="px-2 py-1 rounded-full text-xs font-medium border bg-slate-600/90 text-white border-slate-400/60 shadow-lg backdrop-blur-sm"
                               >
                                 {ecoregion}
                               </div>
@@ -686,22 +708,34 @@ export default function HomepageBirdCarousel({
 
                     <div className="space-y-3 mb-4">
                       <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-1">Habitat:</span>
-                        <span className="text-white/90 text-xs">{currentBird.habitat}</span>
+                        <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                          Habitat:
+                        </span>
+                        <span className="text-white text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                          {currentBird.habitat}
+                        </span>
                       </div>
                       <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-1">Best time:</span>
-                        <span className="text-white/90 text-xs">{currentBird.bestTime}</span>
+                        <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                          Best time:
+                        </span>
+                        <span className="text-white text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                          {currentBird.bestTime}
+                        </span>
                       </div>
                       <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-1">Elevation:</span>
-                        <span className="text-white/90 text-xs">{currentBird.elevation}</span>
+                        <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                          Elevation:
+                        </span>
+                        <span className="text-white text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
+                          {currentBird.elevation}
+                        </span>
                       </div>
                     </div>
 
                     <div className="flex flex-col gap-2">
                       <Link href={`/aves-explorer#${currentBird.regionSlug}`}>
-                        <Button className="bg-emerald-600 hover:bg-emerald-700 text-xs w-full h-9">
+                        <Button className="bg-emerald-600/90 hover:bg-emerald-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-emerald-500/40">
                           <MapPin className="w-3 h-3 mr-1" />
                           Explore Region
                         </Button>
@@ -709,7 +743,7 @@ export default function HomepageBirdCarousel({
                       <Link href="/tours">
                         <Button
                           variant="outline"
-                          className="border-white/40 text-white hover:bg-white/15 text-xs bg-white/5 w-full h-9"
+                          className="border-white/70 text-white hover:bg-white/20 text-xs bg-white/10 w-full h-9 shadow-lg backdrop-blur-sm"
                         >
                           <ExternalLink className="w-3 h-3 mr-1" />
                           Plan Trip
