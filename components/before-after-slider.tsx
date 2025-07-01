@@ -30,6 +30,7 @@ export function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleMouseDown = useCallback(() => {
@@ -63,6 +64,21 @@ export function BeforeAfterSlider({
     },
     [isDragging],
   )
+
+  // Handle hover timeout for keeping popups visible
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      setHoverTimeout(null)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      // Popup will hide after delay
+    }, 300) // 300ms delay to allow clicking
+    setHoverTimeout(timeout)
+  }
 
   return (
     <div
@@ -103,6 +119,34 @@ export function BeforeAfterSlider({
             {beforeLabel}
           </div>
         )}
+      </div>
+
+      {/* Photo Attribution Button - Bottom Right Corner */}
+      <div className="absolute bottom-3 right-3 z-50">
+        <a
+          href="https://ebird.org/species/yebori1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-gray-900 border border-gray-200 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-all duration-200 relative group shadow-lg"
+          aria-label="Photo by Royann Petrell - View Yellow-backed Oriole on eBird"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <span className="text-base">📷</span>
+          <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-auto z-[70] shadow-xl whitespace-nowrap">
+            <div className="text-center leading-relaxed">
+              <div className="font-bold text-emerald-300 mb-1">Yellow-backed Oriole</div>
+              <div className="text-xs text-gray-300 mb-2">Icterus chrysater</div>
+              <div className="text-xs text-blue-300 mb-2">Nest Conservation Study</div>
+              <div className="font-medium">Photo © Royann Petrell</div>
+              <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+              <div className="mt-2 pt-2 border-t border-gray-600">
+                <span className="text-blue-300 text-xs">Click to view on eBird →</span>
+              </div>
+            </div>
+            <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
+          </div>
+        </a>
       </div>
 
       {/* Slider Handle */}

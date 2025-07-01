@@ -281,22 +281,22 @@ export default function ConservationPage() {
                 <div className="absolute bottom-3 right-3 z-50">
                   <div className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
                     <span className="text-lg">📷</span>
-                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
+                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-auto z-[70] shadow-xl whitespace-nowrap">
                       <div className="text-center leading-relaxed">
-                        <div className="font-bold text-emerald-300 mb-1">Masked Trogon</div>
+                        <a
+                          href="https://ebird.org/species/mastro1"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-emerald-300 hover:text-emerald-200 font-bold hover:underline block mb-1"
+                        >
+                          Masked Trogon
+                        </a>
                         <div className="text-xs text-gray-300 mb-2">Trogon personatus</div>
                         <div className="text-xs text-blue-300 mb-2">Cloud Forest • Andes</div>
                         <div className="font-medium">Photo © Royann Petrell</div>
                         <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
                         <div className="mt-2 pt-2 border-t border-gray-600">
-                          <a
-                            href="https://merlinbirds.org/species/mastro1"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-300 hover:text-blue-200 text-xs underline"
-                          >
-                            View on Merlin Bird ID →
-                          </a>
+                          <span className="text-blue-300 text-xs">Click species name for eBird →</span>
                         </div>
                       </div>
                       <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
