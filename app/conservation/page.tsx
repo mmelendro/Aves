@@ -274,7 +274,8 @@ export default function ConservationPage() {
                   src="/images/masked-trogon-male.jpg"
                   alt="Masked Trogon (Trogon personatus) representing cloud forest conservation efforts in Colombia"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover"
+                  style={{ objectPosition: "center calc(30% + 30px)" }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Photo Attribution for Masked Trogon */}
@@ -288,6 +289,11 @@ export default function ConservationPage() {
                         <div className="text-xs text-blue-300 mb-2">Cloud Forest • Andes</div>
                         <div className="font-medium">Photo © Royann Petrell</div>
                         <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
+                        <div className="text-xs text-yellow-300 mt-1">
+                          <Link href="/about/partners#lodges" className="hover:text-yellow-200 underline">
+                            Reserva Rio Blanco
+                          </Link>
+                        </div>
                         <div className="mt-2 pt-2 border-t border-gray-600">
                           <a
                             href="https://merlinbirds.org/species/mastro1"

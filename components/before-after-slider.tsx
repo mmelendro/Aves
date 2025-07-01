@@ -75,23 +75,8 @@ export function BeforeAfterSlider({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseUp}
     >
-      {/* Base Image (Plastic Nest - Right side) */}
+      {/* Base Image (plastic-nest.jpg - Left side) */}
       <div className="absolute inset-0">
-        <img
-          src={afterImage || "/placeholder.svg"}
-          alt={afterAlt}
-          className="w-full h-full object-cover"
-          draggable={false}
-        />
-        {afterLabel && (
-          <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium">
-            {afterLabel}
-          </div>
-        )}
-      </div>
-
-      {/* Overlay Image (Natural Nest - Left side) */}
-      <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
         <img
           src={beforeImage || "/placeholder.svg"}
           alt={beforeAlt}
@@ -99,8 +84,23 @@ export function BeforeAfterSlider({
           draggable={false}
         />
         {beforeLabel && (
-          <div className="absolute top-4 left-4 bg-emerald-600 text-white px-3 py-1 rounded-md text-sm font-medium">
+          <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium">
             {beforeLabel}
+          </div>
+        )}
+      </div>
+
+      {/* Overlay Image (natural-nest.jpg - Right side) */}
+      <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}>
+        <img
+          src={afterImage || "/placeholder.svg"}
+          alt={afterAlt}
+          className="w-full h-full object-cover"
+          draggable={false}
+        />
+        {afterLabel && (
+          <div className="absolute top-4 right-4 bg-emerald-600 text-white px-3 py-1 rounded-md text-sm font-medium">
+            {afterLabel}
           </div>
         )}
       </div>
