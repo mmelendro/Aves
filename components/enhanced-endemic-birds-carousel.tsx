@@ -38,12 +38,13 @@ interface BirdData {
     linkTo?: string
     isGuide?: boolean
     title?: string
+    location?: string
+    locationLink?: string
   }
 }
 
-// Updated bird data with corrected attributions and removed Vermillion Flycatcher
+// Bird data - all entries have actual images
 const bioregionBirds: BirdData[] = [
-  // REGIONS WITH ACTUAL IMAGES (Priority Display)
   {
     id: "1",
     commonName: "Green-bearded Helmetcrest",
@@ -101,6 +102,8 @@ const bioregionBirds: BirdData[] = [
     photoCredit: {
       photographer: "Royann Petrell",
       title: "Early Guest",
+      location: "Termales del Ruiz",
+      locationLink: "/about/partners#termales-del-ruiz",
     },
   },
   {
@@ -133,6 +136,8 @@ const bioregionBirds: BirdData[] = [
     photoCredit: {
       photographer: "Royann Petrell",
       title: "Early Guest",
+      location: "Reserva Río Blanco",
+      locationLink: "/about/partners#reserva-rio-blanco",
     },
   },
   {
@@ -166,6 +171,8 @@ const bioregionBirds: BirdData[] = [
       title: "Founder & Lead Guide",
       linkTo: "/team#martin-melendro",
       isGuide: true,
+      location: "Reserva Río Blanco",
+      locationLink: "/about/partners#reserva-rio-blanco",
     },
   },
   {
@@ -198,6 +205,8 @@ const bioregionBirds: BirdData[] = [
       title: "Founder & Lead Guide",
       linkTo: "/team#martin-melendro",
       isGuide: true,
+      location: "Reserva Río Blanco",
+      locationLink: "/about/partners#reserva-rio-blanco",
     },
   },
   {
@@ -249,112 +258,9 @@ const bioregionBirds: BirdData[] = [
     photoCredit: {
       photographer: "Royann Petrell",
       title: "Early Guest",
+      location: "Montezuma Rainforest Lodge",
+      locationLink: "/about/partners#montezuma",
     },
-  },
-
-  // REGIONS WITHOUT ACTUAL IMAGES (Secondary Display)
-  {
-    id: "8",
-    commonName: "Santa Marta Antbird",
-    scientificName: "Drymophila hellmayri",
-    spanishName: "Hormiguero de Santa Marta",
-    bioregion: "Sierra Nevada de Santa Marta",
-    bioregionSlug: "sierra-nevada-santa-marta",
-    family: "Thamnophilidae",
-    order: "Passeriformes",
-    status: "Endemic",
-    habitat: "Cloud forest understory and bamboo thickets",
-    description:
-      "Endemic antbird found only in the Sierra Nevada de Santa Marta, a symbol of this unique mountain range.",
-    image: "/images/santa-marta-antbird.jpg",
-    audioFile: "/audio/samant1.mp3",
-    conservationStatus: "Near Threatened",
-    bestTime: "December - March",
-    difficulty: "Challenging",
-    ebirdCode: "samant1",
-    bioregionDescription: "World's most important endemic bird area with 15+ species found nowhere else.",
-  },
-  {
-    id: "9",
-    commonName: "Magdalena Antbird",
-    scientificName: "Sipia laemosticta",
-    spanishName: "Hormiguero del Magdalena",
-    bioregion: "Magdalena Valley",
-    bioregionSlug: "magdalena-valley",
-    family: "Thamnophilidae",
-    order: "Passeriformes",
-    status: "Endemic",
-    habitat: "Riparian forests and wetland edges",
-    description: "Endemic antbird of the Magdalena Valley, representing the diverse river ecosystems of Colombia.",
-    image: "/images/magdalena-antbird.jpg",
-    audioFile: "/audio/magant1.mp3",
-    conservationStatus: "Endangered",
-    bestTime: "December - March",
-    difficulty: "Moderate",
-    ebirdCode: "magant1",
-    bioregionDescription: "Major river valley with diverse habitats from wetlands to dry forests.",
-  },
-  {
-    id: "10",
-    commonName: "Cauca Guan",
-    scientificName: "Penelope perspicax",
-    spanishName: "Pava del Cauca",
-    bioregion: "Cauca Valley",
-    bioregionSlug: "cauca-valley",
-    family: "Cracidae",
-    order: "Galliformes",
-    status: "Endemic",
-    habitat: "Dry forests and forest edges",
-    description:
-      "Critically endangered endemic guan of the Cauca Valley, symbol of conservation efforts in the region.",
-    image: "/images/cauca-guan.jpg",
-    audioFile: "/audio/caugua1.mp3",
-    conservationStatus: "Critically Endangered",
-    bestTime: "Year-round",
-    difficulty: "Challenging",
-    ebirdCode: "caugua1",
-    bioregionDescription: "Inter-Andean valley with dry forests and agricultural landscapes.",
-  },
-  {
-    id: "11",
-    commonName: "Orinocan Saltator",
-    scientificName: "Saltator orenocensis",
-    spanishName: "Saltador Llanero",
-    bioregion: "Eastern Plains (Llanos)",
-    bioregionSlug: "eastern-plains",
-    family: "Thraupidae",
-    order: "Passeriformes",
-    status: "Regional Specialty",
-    habitat: "Gallery forests and grassland edges",
-    description: "Distinctive saltator of Colombia's vast Eastern Plains, representing the unique Llanos ecosystem.",
-    image: "/images/orinocan-saltator.jpg",
-    audioFile: "/audio/orisal1.mp3",
-    conservationStatus: "Least Concern",
-    bestTime: "December - April",
-    difficulty: "Easy",
-    ebirdCode: "orisal1",
-    bioregionDescription: "Vast grasslands and gallery forests with unique grassland species.",
-  },
-  {
-    id: "12",
-    commonName: "Harpy Eagle",
-    scientificName: "Harpia harpyja",
-    spanishName: "Águila Arpía",
-    bioregion: "Amazon Rainforest",
-    bioregionSlug: "amazon-rainforest",
-    family: "Accipitridae",
-    order: "Accipitriformes",
-    status: "Spectacular",
-    habitat: "Primary rainforest canopy",
-    description:
-      "Magnificent apex predator of the Amazon, one of the world's most powerful eagles and symbol of pristine rainforest.",
-    image: "/images/harpy-eagle.jpg",
-    audioFile: "/audio/hareag1.mp3",
-    conservationStatus: "Near Threatened",
-    bestTime: "June - September",
-    difficulty: "Challenging",
-    ebirdCode: "hareag1",
-    bioregionDescription: "World's largest rainforest with incredible biodiversity and canopy species.",
   },
 ]
 
@@ -367,7 +273,7 @@ interface EnhancedEndemicBirdsCarouselProps {
 export default function EnhancedEndemicBirdsCarousel({
   className,
   autoPlay = true,
-  autoPlayInterval = 8000,
+  autoPlayInterval = 12000, // Increased to 12 seconds for better viewing experience
 }: EnhancedEndemicBirdsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
@@ -376,6 +282,7 @@ export default function EnhancedEndemicBirdsCarousel({
   const [isLoading, setIsLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
   // Mobile detection with proper hydration handling
   useEffect(() => {
@@ -391,6 +298,8 @@ export default function EnhancedEndemicBirdsCarousel({
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % bioregionBirds.length)
     setImageLoaded(false)
+    setImageError(false)
+    setIsLoading(true)
     setShowInfo(false) // Ensure info panel closes
     setShowPhotoCredit(false)
   }, [])
@@ -398,6 +307,8 @@ export default function EnhancedEndemicBirdsCarousel({
   const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + bioregionBirds.length) % bioregionBirds.length)
     setImageLoaded(false)
+    setImageError(false)
+    setIsLoading(true)
     setShowInfo(false) // Ensure info panel closes
     setShowPhotoCredit(false)
   }, [])
@@ -405,6 +316,8 @@ export default function EnhancedEndemicBirdsCarousel({
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index)
     setImageLoaded(false)
+    setImageError(false)
+    setIsLoading(true)
     setShowInfo(false) // Ensure info panel closes
     setShowPhotoCredit(false)
   }, [])
@@ -447,38 +360,44 @@ export default function EnhancedEndemicBirdsCarousel({
 
   const currentBird = bioregionBirds[currentIndex]
 
-  // Function to get image positioning based on bird ID with improved adjustments
+  // Enhanced image positioning function with specific fixes for Green-bearded Helmetcrest
   const getImagePositioning = (birdId: string) => {
     switch (birdId) {
-      case "1": // Green-bearded Helmetcrest - eliminate white column on right
+      case "1": // Green-bearded Helmetcrest - Fixed positioning to center bird's face and eliminate white space
         return {
-          objectPosition: "75% center", // Move further left to eliminate white space completely
+          objectPosition: "45% 30%", // Centered on bird's face, moved up to show crest properly
           className: "object-cover",
+          transform: "scale(1.15)", // Slight zoom to eliminate white space while maintaining quality
         }
       case "2": // Rainbow-bearded Thornbill - prevent crest cutoff
         return {
           objectPosition: "center 25%", // Move up to show the crest properly
           className: "object-cover",
+          transform: "scale(1.05)",
         }
       case "3": // Black-billed Mountain-Toucan - adjusted to show more of left side
         return {
-          objectPosition: "20% center", // Show more of the left side to prevent beak cutoff
+          objectPosition: "25% center", // Show more of the left side to prevent beak cutoff
           className: "object-cover",
+          transform: "scale(1.1)",
         }
       case "6": // Vermilion Cardinal - prevent head cutoff
         return {
           objectPosition: "center 35%", // Move up to show the full head and crest
           className: "object-cover",
+          transform: "scale(1.05)",
         }
       case "7": // Velvet-purple Coronet - center the bird nicely
         return {
           objectPosition: "center center",
           className: "object-cover",
+          transform: "scale(1.05)",
         }
       default:
         return {
           objectPosition: "center center",
           className: "object-cover",
+          transform: "scale(1.05)",
         }
     }
   }
@@ -504,10 +423,25 @@ export default function EnhancedEndemicBirdsCarousel({
     setShowPhotoCredit(!showPhotoCredit)
   }
 
-  const handleImageLoad = () => {
+  // Enhanced image loading with error handling and preloading
+  const handleImageLoad = useCallback(() => {
     setIsLoading(false)
     setImageLoaded(true)
-  }
+    setImageError(false)
+  }, [])
+
+  const handleImageError = useCallback(() => {
+    setIsLoading(false)
+    setImageLoaded(false)
+    setImageError(true)
+  }, [])
+
+  // Preload next image for smoother transitions
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % bioregionBirds.length
+    const nextImage = new Image()
+    nextImage.src = bioregionBirds[nextIndex].image
+  }, [currentIndex])
 
   // Navigation function for eBird
   const navigateToEbird = (ebirdCode: string) => {
@@ -521,26 +455,44 @@ export default function EnhancedEndemicBirdsCarousel({
         <Card className="overflow-hidden border-0 shadow-lg mx-2">
           <div className="relative">
             {/* Mobile Main Image */}
-            <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
-              <img
-                src={currentBird.image || "/placeholder.svg?height=400&width=600&text=Bird+Image"}
-                alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
-                className={cn(
-                  "w-full h-full transition-all duration-700 ease-out",
-                  currentImagePositioning.className,
-                  imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95",
-                )}
-                style={{
-                  objectPosition: currentImagePositioning.objectPosition,
-                  objectFit: "cover",
-                }}
-                onLoad={handleImageLoad}
-              />
+            <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
+              {!imageError ? (
+                <img
+                  src={currentBird.image || "/placeholder.svg?height=400&width=600&text=Bird+Image"}
+                  alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
+                  className={cn(
+                    "w-full h-full transition-all duration-1000 ease-out",
+                    currentImagePositioning.className,
+                    imageLoaded ? "opacity-100" : "opacity-0",
+                  )}
+                  style={{
+                    objectPosition: currentImagePositioning.objectPosition,
+                    objectFit: "cover",
+                    transform: currentImagePositioning.transform || "scale(1)",
+                    transformOrigin: "center center",
+                  }}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                  loading="eager"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                  <div className="text-center p-4">
+                    <div className="w-16 h-16 mx-auto mb-2 bg-gray-300 rounded-full flex items-center justify-center">
+                      <Camera className="w-8 h-8 text-gray-500" />
+                    </div>
+                    <p className="text-sm text-gray-600">Image unavailable</p>
+                  </div>
+                </div>
+              )}
 
-              {/* Loading Indicator */}
-              {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                  <div className="w-6 h-6 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+              {/* Enhanced Loading Indicator */}
+              {isLoading && !imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+                    <p className="text-sm text-emerald-700 font-medium">Loading image...</p>
+                  </div>
                 </div>
               )}
 
@@ -630,6 +582,25 @@ export default function EnhancedEndemicBirdsCarousel({
                         )}
                         <span className="text-blue-300 text-xs">{currentBird.photoCredit.title}</span>
                       </div>
+
+                      {currentBird.photoCredit.location && (
+                        <div>
+                          {currentBird.photoCredit.locationLink ? (
+                            <Link
+                              href={currentBird.photoCredit.locationLink}
+                              className="text-yellow-300 hover:text-yellow-200 text-xs hover:underline block flex items-center gap-1"
+                            >
+                              <MapPin className="w-3 h-3 flex-shrink-0" />
+                              {currentBird.photoCredit.location}
+                            </Link>
+                          ) : (
+                            <span className="text-yellow-300 text-xs flex items-center gap-1">
+                              <MapPin className="w-3 h-3 flex-shrink-0" />
+                              {currentBird.photoCredit.location}
+                            </span>
+                          )}
+                        </div>
+                      )}
 
                       {currentBird.photoCredit.postUrl && (
                         <a
@@ -821,19 +792,10 @@ export default function EnhancedEndemicBirdsCarousel({
                         style={{
                           objectPosition: thumbnailPositioning.objectPosition,
                           objectFit: "cover",
+                          transform: thumbnailPositioning.transform || "scale(1)",
                         }}
                       />
                       {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
-
-                      {/* Multi-region indicator */}
-                      {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
-                        <div className="absolute top-0 right-0 w-2 h-2 bg-blue-400 rounded-full" />
-                      )}
-
-                      {/* Photo credit indicator */}
-                      {bird.photoCredit && (
-                        <div className="absolute bottom-0 left-0 w-2 h-2 bg-pink-400 rounded-full" />
-                      )}
                     </button>
                   )
                 })}
@@ -896,26 +858,44 @@ export default function EnhancedEndemicBirdsCarousel({
       <Card className="overflow-hidden border-0 shadow-2xl">
         <div className="relative">
           {/* Desktop Main Image */}
-          <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
-            <img
-              src={currentBird.image || "/placeholder.svg?height=600&width=800&text=Bird+Image"}
-              alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
-              className={cn(
-                "w-full h-full transition-all duration-700 ease-out hover:scale-105",
-                currentImagePositioning.className,
-                imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95",
-              )}
-              style={{
-                objectPosition: currentImagePositioning.objectPosition,
-                objectFit: "cover",
-              }}
-              onLoad={handleImageLoad}
-            />
+          <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
+            {!imageError ? (
+              <img
+                src={currentBird.image || "/placeholder.svg?height=600&width=800&text=Bird+Image"}
+                alt={`${currentBird.commonName} - ${currentBird.bioregion}`}
+                className={cn(
+                  "w-full h-full transition-all duration-1000 ease-out hover:scale-105",
+                  currentImagePositioning.className,
+                  imageLoaded ? "opacity-100" : "opacity-0",
+                )}
+                style={{
+                  objectPosition: currentImagePositioning.objectPosition,
+                  objectFit: "cover",
+                  transform: currentImagePositioning.transform || "scale(1)",
+                  transformOrigin: "center center",
+                }}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+                loading="eager"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                <div className="text-center p-6">
+                  <div className="w-20 h-20 mx-auto mb-3 bg-gray-300 rounded-full flex items-center justify-center">
+                    <Camera className="w-10 h-10 text-gray-500" />
+                  </div>
+                  <p className="text-gray-600">Image unavailable</p>
+                </div>
+              </div>
+            )}
 
-            {/* Loading Indicator */}
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+            {/* Enhanced Loading Indicator */}
+            {isLoading && !imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+                  <p className="text-emerald-700 font-medium">Loading image...</p>
+                </div>
               </div>
             )}
 
@@ -1014,6 +994,25 @@ export default function EnhancedEndemicBirdsCarousel({
                       )}
                       <span className="text-blue-300 text-sm">{currentBird.photoCredit.title}</span>
                     </div>
+
+                    {currentBird.photoCredit.location && (
+                      <div>
+                        {currentBird.photoCredit.locationLink ? (
+                          <Link
+                            href={currentBird.photoCredit.locationLink}
+                            className="text-yellow-300 hover:text-yellow-200 text-sm hover:underline block flex items-center gap-1"
+                          >
+                            <MapPin className="w-4 h-4 flex-shrink-0" />
+                            {currentBird.photoCredit.location}
+                          </Link>
+                        ) : (
+                          <span className="text-yellow-300 text-sm flex items-center gap-1">
+                            <MapPin className="w-4 h-4 flex-shrink-0" />
+                            {currentBird.photoCredit.location}
+                          </span>
+                        )}
+                      </div>
+                    )}
 
                     {currentBird.photoCredit.postUrl && (
                       <a
@@ -1206,17 +1205,10 @@ export default function EnhancedEndemicBirdsCarousel({
                       style={{
                         objectPosition: thumbnailPositioning.objectPosition,
                         objectFit: "cover",
+                        transform: thumbnailPositioning.transform || "scale(1)",
                       }}
                     />
                     {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
-
-                    {/* Multi-region indicator */}
-                    {bird.secondaryRegions && bird.secondaryRegions.length > 0 && (
-                      <div className="absolute top-0 right-0 w-2 h-2 bg-blue-400 rounded-full" />
-                    )}
-
-                    {/* Photo credit indicator */}
-                    {bird.photoCredit && <div className="absolute bottom-0 left-0 w-2 h-2 bg-pink-400 rounded-full" />}
                   </button>
                 )
               })}
@@ -1230,7 +1222,7 @@ export default function EnhancedEndemicBirdsCarousel({
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all",
+                  "w-3 h-3 rounded-full transition-all",
                   index === currentIndex ? "bg-emerald-500" : "bg-gray-300",
                 )}
                 aria-label={`Go to slide ${index + 1}`}
@@ -1242,11 +1234,10 @@ export default function EnhancedEndemicBirdsCarousel({
           <div className="p-6 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg border border-emerald-200">
             <div className="text-center">
               <h4 className="text-lg font-semibold text-gray-900 mb-3">Explore Colombia's Bioregions</h4>
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed max-w-2xl mx-auto">
-                Discover {bioregionBirds.length} unique bioregions with endemic species and spectacular wildlife. Each
-                region offers distinct ecosystems and birding opportunities.
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                Discover {bioregionBirds.length} unique bioregions with endemic species and spectacular wildlife.
               </p>
-              <div className="flex flex-row gap-3 justify-center">
+              <div className="flex justify-center gap-4">
                 <Link href={`/bioregions/${currentBird.bioregionSlug}`}>
                   <Button className="bg-emerald-600 hover:bg-emerald-700">
                     <MapPin className="w-4 h-4 mr-2" />
@@ -1261,7 +1252,7 @@ export default function EnhancedEndemicBirdsCarousel({
                     className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 bg-transparent"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
-                    Plan Your Adventure
+                    Plan Trip
                   </Button>
                 </Link>
               </div>
