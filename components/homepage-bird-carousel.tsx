@@ -72,10 +72,8 @@ const birdData: BirdData[] = [
     elevation: "3,200 - 4,500m",
     image: "/images/rainbow-bearded-thornbill.jpg",
     photoCredit: {
-      photographer: "Nicolás Rozo",
-      title: "AVES Guide",
-      teamLink: "/team#nicolas-rozo",
-      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+      photographer: "Royann",
+      title: "Wildlife Photographer",
       reserve: "Termales del Ruiz",
       reserveLink: "/about/partners#termales-del-ruiz",
     },
@@ -96,10 +94,8 @@ const birdData: BirdData[] = [
     elevation: "1,500 - 2,800m",
     image: "/images/bbmtou1-black-billed-mountain-toucan.png",
     photoCredit: {
-      photographer: "Nicolás Rozo",
-      title: "AVES Guide",
-      teamLink: "/team#nicolas-rozo",
-      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+      photographer: "Royann",
+      title: "Wildlife Photographer",
       reserve: "Reserva Río Blanco",
       reserveLink: "/about/partners#reserva-rio-blanco",
     },
@@ -120,10 +116,9 @@ const birdData: BirdData[] = [
     elevation: "1,800 - 3,200m",
     image: "/images/chestnut-crowned-antpitta.jpg",
     photoCredit: {
-      photographer: "Nicolás Rozo",
+      photographer: "Martin Meléndro",
       title: "AVES Guide",
-      teamLink: "/team#nicolas-rozo",
-      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+      teamLink: "/team#martin-melendro",
       reserve: "Reserva Río Blanco",
       reserveLink: "/about/partners#reserva-rio-blanco",
     },
@@ -150,10 +145,9 @@ const birdData: BirdData[] = [
     elevation: "1,200 - 2,600m",
     image: "/images/blue-crowned-motmot-new.jpg",
     photoCredit: {
-      photographer: "Nicolás Rozo",
+      photographer: "Martin Meléndro",
       title: "AVES Guide",
-      teamLink: "/team#nicolas-rozo",
-      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+      teamLink: "/team#martin-melendro",
       reserve: "Reserva Río Blanco",
       reserveLink: "/about/partners#reserva-rio-blanco",
     },
@@ -174,10 +168,8 @@ const birdData: BirdData[] = [
     elevation: "0 - 800m",
     image: "/images/cardinal-guajiro.jpg",
     photoCredit: {
-      photographer: "Nicolás Rozo",
-      title: "AVES Guide",
-      teamLink: "/team#nicolas-rozo",
-      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+      photographer: "Royann",
+      title: "Wildlife Photographer",
     },
   },
 ]
@@ -194,48 +186,135 @@ export default function HomepageBirdCarousel({
   autoPlayInterval = 8000,
 }: HomepageBirdCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(autoPlay)
+  const [isPlaying, setIsPlaying] = useState(false) // Start paused to allow first image to load
   const [showInfo, setShowInfo] = useState(false)
   const [showPhotoCredit, setShowPhotoCredit] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageError, setImageError] = useState(false)
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false)
+  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
 
   const currentBird = birdData[currentIndex]
 
+  // Preload all images on component mount
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = birdData.map((bird, index) => {
+        return new Promise<void>((resolve, reject) => {
+          const img = new Image()
+          img.onload = () => {
+            setPreloadedImages((prev) => new Set(prev).add(bird.image))
+            if (index === 0) {
+              setFirstImageLoaded(true)
+              setIsLoading(false)
+              setImageLoaded(true)
+              // Start autoplay only after first image is loaded
+              if (autoPlay) {
+                setTimeout(() => setIsPlaying(true), 1000) // Give 1 second buffer
+              }
+            }
+            resolve()
+          }
+          img.onerror = () => {
+            if (index === 0) {
+              setFirstImageLoaded(true)
+              setIsLoading(false)
+              setImageError(true)
+            }
+            reject()
+          }
+          // Set high priority for first image
+          if (index === 0) {
+            img.fetchPriority = "high"
+          }
+          img.src = bird.image
+        })
+      })
+
+      // Wait for at least the first image to load
+      try {
+        await imagePromises[0]
+      } catch (error) {
+        console.warn("Failed to load first image:", error)
+      }
+
+      // Continue loading other images in background
+      Promise.allSettled(imagePromises.slice(1))
+    }
+
+    preloadImages()
+  }, [autoPlay])
+
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % birdData.length)
-    setImageLoaded(false)
-    setImageError(false)
-    setIsLoading(true)
-    setShowInfo(false)
-    setShowPhotoCredit(false)
-  }, [])
+    // Only advance if first image has loaded or we're not on the first slide
+    if (firstImageLoaded || currentIndex > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % birdData.length)
+      setShowInfo(false)
+      setShowPhotoCredit(false)
+
+      // Update loading states for new image
+      const nextIndex = (currentIndex + 1) % birdData.length
+      const nextImage = birdData[nextIndex].image
+      if (preloadedImages.has(nextImage)) {
+        setIsLoading(false)
+        setImageLoaded(true)
+        setImageError(false)
+      } else {
+        setIsLoading(true)
+        setImageLoaded(false)
+        setImageError(false)
+      }
+    }
+  }, [currentIndex, firstImageLoaded, preloadedImages])
 
   const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + birdData.length) % birdData.length)
-    setImageLoaded(false)
-    setImageError(false)
-    setIsLoading(true)
     setShowInfo(false)
     setShowPhotoCredit(false)
-  }, [])
 
-  const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index)
-    setImageLoaded(false)
-    setImageError(false)
-    setIsLoading(true)
-    setShowInfo(false)
-    setShowPhotoCredit(false)
-  }, [])
+    // Update loading states for new image
+    const prevIndex = (currentIndex - 1 + birdData.length) % birdData.length
+    const prevImage = birdData[prevIndex].image
+    if (preloadedImages.has(prevImage)) {
+      setIsLoading(false)
+      setImageLoaded(true)
+      setImageError(false)
+    } else {
+      setIsLoading(true)
+      setImageLoaded(false)
+      setImageError(false)
+    }
+  }, [currentIndex, preloadedImages])
 
+  const goToSlide = useCallback(
+    (index: number) => {
+      setCurrentIndex(index)
+      setShowInfo(false)
+      setShowPhotoCredit(false)
+
+      // Update loading states for new image
+      const targetImage = birdData[index].image
+      if (preloadedImages.has(targetImage)) {
+        setIsLoading(false)
+        setImageLoaded(true)
+        setImageError(false)
+      } else {
+        setIsLoading(true)
+        setImageLoaded(false)
+        setImageError(false)
+      }
+    },
+    [preloadedImages],
+  )
+
+  // Modified autoplay effect to respect first image loading
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && firstImageLoaded) {
       const interval = setInterval(nextSlide, autoPlayInterval)
       return () => clearInterval(interval)
     }
-  }, [isPlaying, nextSlide, autoPlayInterval])
+  }, [isPlaying, nextSlide, autoPlayInterval, firstImageLoaded])
 
   const handleImageLoad = useCallback(() => {
     setIsLoading(false)
@@ -248,13 +327,6 @@ export default function HomepageBirdCarousel({
     setImageLoaded(false)
     setImageError(true)
   }, [])
-
-  // Preload next image
-  useEffect(() => {
-    const nextIndex = (currentIndex + 1) % birdData.length
-    const nextImage = new Image()
-    nextImage.src = birdData[nextIndex].image
-  }, [currentIndex])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -363,7 +435,8 @@ export default function HomepageBirdCarousel({
                 }}
                 onLoad={handleImageLoad}
                 onError={handleImageError}
-                loading="eager"
+                loading={currentIndex === 0 ? "eager" : "lazy"}
+                fetchPriority={currentIndex === 0 ? "high" : "auto"}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
@@ -376,12 +449,14 @@ export default function HomepageBirdCarousel({
               </div>
             )}
 
-            {/* Loading Indicator */}
+            {/* Enhanced Loading Indicator */}
             {isLoading && !imageError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50">
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
-                  <p className="text-sm text-emerald-700 font-medium">Loading...</p>
+                  <p className="text-sm text-emerald-700 font-medium">
+                    {currentIndex === 0 && !firstImageLoaded ? "Loading first image..." : "Loading..."}
+                  </p>
                 </div>
               </div>
             )}
@@ -418,6 +493,7 @@ export default function HomepageBirdCarousel({
                 className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200"
                 onClick={() => setIsPlaying(!isPlaying)}
                 aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+                disabled={!firstImageLoaded} // Disable until first image loads
               >
                 {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
               </Button>
@@ -433,41 +509,45 @@ export default function HomepageBirdCarousel({
               </Button>
             </div>
 
-            {/* Status Badges - Top Left */}
-            <div className="absolute top-3 left-3 flex flex-col gap-1 z-20">
-              <Badge className={cn("text-xs font-medium border shadow-sm", getStatusColor(currentBird.status))}>
-                {currentBird.status}
-              </Badge>
-              <Badge className={cn("text-xs font-medium border shadow-sm", getDifficultyColor(currentBird.difficulty))}>
-                {currentBird.difficulty}
-              </Badge>
-            </div>
-
-            {/* Bird Information - Bottom */}
+            {/* Bird Information - Bottom with Primary Region Tag */}
             <div className="absolute bottom-0 left-0 right-0 text-white z-20">
-              <div className="p-3 space-y-1">
-                <h3 className="text-lg font-bold leading-tight">{currentBird.commonName}</h3>
-                <p className="text-sm italic opacity-90 leading-tight">{currentBird.scientificName}</p>
-                <p className="text-xs opacity-75 leading-tight">{currentBird.spanishName}</p>
-              </div>
-            </div>
+              <div className="p-3 space-y-2">
+                {/* Bird Names */}
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold leading-tight">{currentBird.commonName}</h3>
+                  <p className="text-sm italic opacity-90 leading-tight">{currentBird.scientificName}</p>
+                  <p className="text-xs opacity-75 leading-tight">{currentBird.spanishName}</p>
+                </div>
 
-            {/* Info Button - Fixed Bottom Right Position */}
-            <div className="absolute bottom-3 right-3 z-40">
-              <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300",
-                  showInfo
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-lg"
-                    : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
-                )}
-                onClick={() => setShowInfo(!showInfo)}
-                aria-label={showInfo ? "Hide bird information" : "Show bird information"}
-              >
-                <Info className={cn("w-4 h-4 transition-all duration-300", showInfo ? "rotate-180" : "")} />
-              </Button>
+                {/* Primary Region Tag and Info Button Row */}
+                <div className="flex items-center justify-between">
+                  <div
+                    className={cn(
+                      "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border backdrop-blur-sm",
+                      getPrimaryRegionColor(currentBird.primaryRegion),
+                    )}
+                  >
+                    <MapPin className="w-3 h-3" />
+                    <span>{currentBird.primaryRegion}</span>
+                  </div>
+
+                  {/* Info Button */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className={cn(
+                      "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300",
+                      showInfo
+                        ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-lg"
+                        : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
+                    )}
+                    onClick={() => setShowInfo(!showInfo)}
+                    aria-label={showInfo ? "Hide bird information" : "Show bird information"}
+                  >
+                    <Info className={cn("w-4 h-4 transition-all duration-300", showInfo ? "rotate-180" : "")} />
+                  </Button>
+                </div>
+              </div>
             </div>
 
             {/* Photo Credit Popup */}
@@ -540,6 +620,16 @@ export default function HomepageBirdCarousel({
                       <h2 className="text-lg font-bold text-emerald-300 mb-1">{currentBird.commonName}</h2>
                       <p className="text-sm italic text-blue-300 mb-1">{currentBird.scientificName}</p>
                       <p className="text-xs text-gray-300 mb-4">{currentBird.spanishName}</p>
+
+                      {/* Status and Difficulty Badges - Now in Info Popup */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <Badge className={cn("text-xs font-medium border", getStatusColor(currentBird.status))}>
+                          {currentBird.status}
+                        </Badge>
+                        <Badge className={cn("text-xs font-medium border", getDifficultyColor(currentBird.difficulty))}>
+                          {currentBird.difficulty}
+                        </Badge>
+                      </div>
 
                       {/* Regional Distribution */}
                       <div className="space-y-3 mb-4">
@@ -638,6 +728,7 @@ export default function HomepageBirdCarousel({
           <div className="flex gap-1 overflow-x-auto scrollbar-hide">
             {birdData.map((bird, index) => {
               const thumbnailPositioning = getImagePositioning(bird.id)
+              const isPreloaded = preloadedImages.has(bird.image)
               return (
                 <button
                   key={bird.id}
@@ -645,6 +736,7 @@ export default function HomepageBirdCarousel({
                   className={cn(
                     "flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all relative",
                     index === currentIndex ? "border-emerald-500 ring-1 ring-emerald-200" : "border-gray-200",
+                    !isPreloaded && "opacity-50", // Visual indicator for unloaded images
                   )}
                   aria-label={`View ${bird.commonName}`}
                 >
@@ -656,8 +748,14 @@ export default function HomepageBirdCarousel({
                       objectPosition: thumbnailPositioning.objectPosition,
                       transform: thumbnailPositioning.transform,
                     }}
+                    loading={index < 3 ? "eager" : "lazy"} // Eager load first 3 thumbnails
                   />
                   {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
+                  {!isPreloaded && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
                 </button>
               )
             })}
