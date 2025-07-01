@@ -18,10 +18,10 @@ import {
   Sun,
   ShoppingBag,
   Globe,
-  BookOpen,
   Heart,
   Camera,
   TelescopeIcon as Binoculars,
+  AlertCircle,
 } from "lucide-react"
 
 // Bioregions data - streamlined for the new design
@@ -30,133 +30,248 @@ const bioregionsData = [
     id: "Pacific",
     name: "Pacific Coast",
     shortDescription: "World's most biodiverse rainforest with extraordinary rainfall and endemic species",
+    fullDescription:
+      "The Chocó bioregion represents the world's most biodiverse rainforest per square kilometer. This extraordinary ecosystem receives up to 12,000mm of annual rainfall, creating perfect conditions for an incredible array of endemic species. From the elusive Banded Ground-Cuckoo to the magnificent Harpy Eagle, this region offers unparalleled birding opportunities in pristine rainforest settings.",
     endemicCount: 67,
     totalSpecies: 875,
-    keyBirds: ["Chocó Vireo", "Harpy Eagle", "Great Green Macaw"],
+    keyBirds: ["Chocó Vireo", "Harpy Eagle", "Great Green Macaw", "Banded Ground-Cuckoo", "Beautiful Treerunner"],
     coordinates: { x: 15, y: 45 },
     color: "#10B981",
     gradient: "from-emerald-500 to-green-600",
     icon: TreePine,
+    highlights: [
+      "Highest rainfall in the Americas",
+      "UNESCO Biosphere Reserve",
+      "Indigenous territories",
+      "Pristine primary forest",
+    ],
+    bestTime: "January-March, July-September",
+    difficulty: "Moderate to Challenging",
   },
   {
     id: "Western Andes",
     name: "Western Andes",
     shortDescription: "Highest concentration of endemic bird species with cloud forests and páramo",
+    fullDescription:
+      "The Western Andes showcase Colombia's most spectacular montane ecosystems, from lush cloud forests to high-altitude páramo. This bioregion boasts the highest concentration of endemic bird species, including the iconic Andean Cock-of-the-rock and the rare Gorgeted Puffleg. The dramatic elevation changes create diverse microhabitats perfect for specialized birding adventures.",
     endemicCount: 45,
     totalSpecies: 785,
-    keyBirds: ["Gorgeted Puffleg", "Andean Cock-of-the-rock", "Cauca Guan"],
+    keyBirds: [
+      "Gorgeted Puffleg",
+      "Andean Cock-of-the-rock",
+      "Cauca Guan",
+      "Plate-billed Mountain-Toucan",
+      "Golden-headed Quetzal",
+    ],
     coordinates: { x: 35, y: 50 },
     color: "#8B5CF6",
     gradient: "from-purple-500 to-indigo-600",
     icon: Mountain,
+    highlights: [
+      "Highest endemic concentration",
+      "Cloud forest ecosystems",
+      "Dramatic elevation changes",
+      "Cock-of-the-rock leks",
+    ],
+    bestTime: "December-March, June-August",
+    difficulty: "Moderate",
   },
   {
     id: "Central Andes",
     name: "Central Andes",
     shortDescription: "Coffee Triangle region with diverse montane ecosystems and Colombia's highest peaks",
+    fullDescription:
+      "The Central Andes encompass Colombia's famous Coffee Triangle, where traditional coffee farms create perfect habitat for montane forest species. This bioregion features the country's highest peaks and most accessible cloud forests, offering excellent opportunities to observe high-altitude specialists like the Indigo-winged Parrot and the critically endangered Yellow-eared Parrot.",
     endemicCount: 34,
     totalSpecies: 720,
-    keyBirds: ["Indigo-winged Parrot", "Yellow-eared Parrot", "Mountain Tapir"],
+    keyBirds: [
+      "Indigo-winged Parrot",
+      "Yellow-eared Parrot",
+      "Mountain Tapir",
+      "Buffy Helmetcrest",
+      "Many-striped Canastero",
+    ],
     coordinates: { x: 50, y: 50 },
     color: "#DC2626",
     gradient: "from-red-500 to-rose-600",
     icon: Mountain,
+    highlights: [
+      "Coffee Triangle region",
+      "Highest peaks in Colombia",
+      "Accessible cloud forests",
+      "Parrot conservation success",
+    ],
+    bestTime: "December-March, July-August",
+    difficulty: "Easy to Moderate",
   },
   {
     id: "Eastern Andes",
     name: "Eastern Andes",
     shortDescription: "Bogotá's surroundings with extensive páramo and high-altitude wetlands",
+    fullDescription:
+      "The Eastern Andes surround Colombia's capital and feature the most extensive páramo ecosystems in the country. This bioregion is crucial for water security and harbors unique high-altitude specialists like the endemic Apolinar's Wren and the mysterious Bogotá Rail. The proximity to Bogotá makes it highly accessible for birding expeditions.",
     endemicCount: 23,
     totalSpecies: 650,
-    keyBirds: ["Apolinar's Wren", "Bogotá Rail", "Andean Flamingo"],
+    keyBirds: ["Apolinar's Wren", "Bogotá Rail", "Andean Flamingo", "Noble Snipe", "Silvery-throated Spinetail"],
     coordinates: { x: 65, y: 45 },
     color: "#7C3AED",
     gradient: "from-violet-500 to-purple-600",
     icon: Mountain,
+    highlights: [
+      "Extensive páramo ecosystems",
+      "High-altitude wetlands",
+      "Easy access from Bogotá",
+      "Water source protection",
+    ],
+    bestTime: "December-March, July-August",
+    difficulty: "Easy to Moderate",
   },
   {
     id: "Interandean Valleys",
     name: "Interandean Valleys",
     shortDescription: "Critically endangered dry forests between mountain ranges",
+    fullDescription:
+      "The Interandean Valleys represent Colombia's most threatened ecosystems - the critically endangered dry forests nestled between the Andean ranges. These unique habitats harbor specialized species like Niceforo's Wren and the Magdalena Antbird, making every sighting precious. Conservation efforts here directly support some of Colombia's rarest birds.",
     endemicCount: 18,
     totalSpecies: 550,
-    keyBirds: ["Niceforo's Wren", "Magdalena Antbird", "Sooty Ant-Tanager"],
+    keyBirds: [
+      "Niceforo's Wren",
+      "Magdalena Antbird",
+      "Sooty Ant-Tanager",
+      "Apical Flycatcher",
+      "Lance-tailed Manakin",
+    ],
     coordinates: { x: 45, y: 55 },
     color: "#F59E0B",
     gradient: "from-amber-500 to-orange-600",
     icon: Leaf,
+    highlights: [
+      "Critically endangered ecosystems",
+      "Unique dry forest species",
+      "Conservation priority",
+      "Rare endemic birds",
+    ],
+    bestTime: "December-March",
+    difficulty: "Moderate",
   },
   {
     id: "Caribbean",
     name: "Caribbean Coast",
     shortDescription: "Coastal plains with dry forests, wetlands, and San Andrés archipelago",
+    fullDescription:
+      "The Caribbean Coast combines diverse coastal ecosystems from dry forests to extensive wetlands, plus the unique San Andrés archipelago. This bioregion is essential for migratory birds and features spectacular waterbird concentrations, including Caribbean Flamingos and magnificent seabird colonies on offshore islands.",
     endemicCount: 12,
     totalSpecies: 635,
-    keyBirds: ["Caribbean Flamingo", "Brown Pelican", "Magnificent Frigatebird"],
+    keyBirds: ["Caribbean Flamingo", "Brown Pelican", "Magnificent Frigatebird", "Scaled Dove", "Vermilion Flycatcher"],
     coordinates: { x: 50, y: 15 },
     color: "#3B82F6",
     gradient: "from-blue-400 to-cyan-500",
     icon: Waves,
+    highlights: ["Migratory bird stopover", "Flamingo colonies", "Seabird islands", "Coastal wetlands"],
+    bestTime: "December-April",
+    difficulty: "Easy",
   },
   {
     id: "SNSM",
     name: "Sierra Nevada de Santa Marta",
     shortDescription: "World's highest coastal mountain with exceptional endemism per unit area",
+    fullDescription:
+      "The Sierra Nevada de Santa Marta stands as the world's highest coastal mountain and boasts the highest level of endemism per unit area globally. This isolated massif harbors 79 endemic species, including the stunning Santa Marta Parakeet and White-tailed Starfrontlet. Indigenous communities protect these sacred mountains, creating a unique cultural-conservation partnership.",
     endemicCount: 79,
     totalSpecies: 635,
-    keyBirds: ["Santa Marta Parakeet", "White-tailed Starfrontlet", "Blue-billed Curassow"],
+    keyBirds: [
+      "Santa Marta Parakeet",
+      "White-tailed Starfrontlet",
+      "Blue-billed Curassow",
+      "Santa Marta Antbird",
+      "Santa Marta Warbler",
+    ],
     coordinates: { x: 60, y: 20 },
     color: "#06B6D4",
     gradient: "from-cyan-500 to-blue-500",
     icon: Mountain,
+    highlights: ["Highest endemism per area", "Indigenous territories", "Isolated evolution", "Sacred mountains"],
+    bestTime: "December-March, July-August",
+    difficulty: "Moderate to Challenging",
   },
   {
     id: "Llanos",
     name: "Llanos",
     shortDescription: "Vast tropical grasslands with seasonal wetlands supporting diverse waterbirds",
+    fullDescription:
+      "The Llanos represent one of South America's most extensive tropical grassland ecosystems, featuring seasonal wetlands that support incredible waterbird diversity. During the wet season, these plains transform into a birding paradise with massive concentrations of Jabiru, Orinoco Goose, and Scarlet Ibis creating unforgettable wildlife spectacles.",
     endemicCount: 8,
     totalSpecies: 450,
-    keyBirds: ["Jabiru", "Orinoco Goose", "Scarlet Ibis"],
+    keyBirds: ["Jabiru", "Orinoco Goose", "Scarlet Ibis", "Sunbittern", "Hoatzin", "Sharp-tailed Ibis"],
     coordinates: { x: 75, y: 40 },
     color: "#EAB308",
     gradient: "from-yellow-400 to-amber-500",
     icon: Sun,
+    highlights: [
+      "Seasonal wetland spectacles",
+      "Massive bird concentrations",
+      "Traditional ranching",
+      "Waterbird paradise",
+    ],
+    bestTime: "December-April (dry season)",
+    difficulty: "Easy to Moderate",
   },
   {
     id: "Amazonia",
     name: "Amazonia",
     shortDescription: "Colombia's portion of the world's largest rainforest with incredible biodiversity",
+    fullDescription:
+      "Colombian Amazonia encompasses the country's portion of the world's largest rainforest, harboring over 1,250 bird species in pristine wilderness. From the mighty Harpy Eagle to the secretive Zigzag Heron, this bioregion offers the ultimate rainforest birding experience. Indigenous territories protect 80% of the forest cover, ensuring sustainable wildlife viewing.",
     endemicCount: 45,
     totalSpecies: 1250,
-    keyBirds: ["Harpy Eagle", "Zigzag Heron", "Amazonian Umbrellabird"],
+    keyBirds: ["Harpy Eagle", "Zigzag Heron", "Amazonian Umbrellabird", "Nocturnal Curassow", "Pavonine Quetzal"],
     coordinates: { x: 60, y: 75 },
     color: "#16A34A",
     gradient: "from-green-500 to-emerald-600",
     icon: TreePine,
+    highlights: ["Highest species diversity", "Indigenous protection", "Pristine wilderness", "Harpy Eagle territory"],
+    bestTime: "June-September (drier season)",
+    difficulty: "Moderate to Challenging",
   },
   {
     id: "Massif",
     name: "Colombian Massif",
     shortDescription: "Where the Andes divide into three ranges with páramo and cloud forest ecosystems",
+    fullDescription:
+      "The Colombian Massif marks the dramatic point where the Andes divide into three separate ranges, creating unique transitional ecosystems. This bioregion combines páramo, cloud forest, and montane habitats, supporting specialized species adapted to these transitional zones. Archaeological sites add cultural significance to the birding experience.",
     endemicCount: 15,
     totalSpecies: 380,
-    keyBirds: ["Nasa indigenous communities", "Coconuco thermal springs", "Archaeological sites"],
+    keyBirds: [
+      "Rusty-headed Spinetail",
+      "Brown-rumped Tapaculo",
+      "Andean Cock-of-the-rock",
+      "Mountain Tapir",
+      "Spectacled Bear",
+    ],
     coordinates: { x: 45, y: 65 },
     color: "#BE185D",
     gradient: "from-pink-600 to-rose-700",
     icon: Mountain,
+    highlights: ["Andean division point", "Transitional ecosystems", "Archaeological sites", "Cultural significance"],
+    bestTime: "December-February, June-August",
+    difficulty: "Moderate",
   },
   {
     id: "Marine",
     name: "Marine Regions",
     shortDescription: "Two ocean systems with coral reefs, mangroves, and diverse marine life",
+    fullDescription:
+      "Colombia's Marine Regions encompass both Pacific and Caribbean ocean systems, featuring coral reefs, mangrove forests, and diverse coastal habitats. These areas are crucial for seabirds, coastal species, and marine wildlife including humpback whales. The combination of terrestrial and marine birding creates unique expedition opportunities.",
     endemicCount: 20,
     totalSpecies: 341,
-    keyBirds: ["Brown Pelican", "Humpback Whale", "Hammerhead Shark"],
+    keyBirds: ["Brown Pelican", "Magnificent Frigatebird", "Laughing Gull", "Royal Tern", "Neotropic Cormorant"],
     coordinates: { x: 25, y: 25 },
     color: "#0EA5E9",
     gradient: "from-sky-500 to-blue-600",
     icon: Waves,
+    highlights: ["Two ocean systems", "Coral reef ecosystems", "Whale watching", "Seabird colonies"],
+    bestTime: "December-April",
+    difficulty: "Easy to Moderate",
   },
 ]
 
@@ -246,7 +361,7 @@ export function ColombianBirdsExplorer() {
                 onClick={() => document.getElementById("bioregions-map")?.scrollIntoView({ behavior: "smooth" })}
               >
                 <MapPin className="w-5 h-5 mr-2" />
-                Explore Bioregions
+                Explore Interactive Map
               </Button>
               <Button
                 size="lg"
@@ -306,127 +421,36 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* Bioregions + Ecoregions Definitions */}
-      <section className="py-16 bg-gray-50">
+      {/* Simplified Classification System */}
+      <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Understanding Our Classification System</h2>
-            <p className="text-lg text-gray-600">
-              We use two complementary approaches to organize Colombia's incredible biodiversity
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Classification System</h2>
+            <p className="text-lg text-gray-600 mb-8">
+              We organize Colombia's biodiversity using <strong>11 practical bioregions</strong> designed for birding
+              tours and <strong>31 scientific ecoregions</strong> for conservation research.
             </p>
-          </div>
-
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-            <Card className="bg-gradient-to-br from-emerald-50 to-green-50 border-emerald-200">
-              <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Globe className="w-8 h-8 text-emerald-600" />
-                </div>
-                <CardTitle className="text-2xl text-emerald-800">11 Bioregions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      <strong>Practical approach</strong> designed for birding tours and operations
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      <strong>Geographic boundaries</strong> that make sense for travel and logistics
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      <strong>Species targeting</strong> optimized for maximum diversity per tour
-                    </span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-              <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <TreePine className="w-8 h-8 text-blue-600" />
-                </div>
-                <CardTitle className="text-2xl text-blue-800">31 Ecoregions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      <strong>Scientific classification</strong> based on species assemblages and habitats
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      <strong>Conservation priorities</strong> defined by environmental conditions
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      <strong>Research framework</strong> for biodiversity assessment and protection
-                    </span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Colombia's 11 Bioregions List */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Colombia's 11 Bioregions</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Each bioregion represents a unique combination of geography, climate, and bird communities
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {bioregionsData.map((region) => {
-                const IconComponent = region.icon
-                return (
-                  <Card
-                    key={region.id}
-                    className="hover:shadow-lg transition-shadow group cursor-pointer"
-                    onClick={() => handleRegionClick(region.id)}
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div
-                          className={`w-12 h-12 rounded-lg bg-gradient-to-br ${region.gradient} flex items-center justify-center shadow-md`}
-                        >
-                          <IconComponent className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                            {region.name}
-                          </h3>
-                          <div className="text-sm text-emerald-600 font-medium">
-                            {region.endemicCount} endemic species
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">{region.shortDescription}</p>
-                      <div className="flex justify-between items-center text-xs text-gray-500">
-                        <span>{region.totalSpecies} total species</span>
-                        <span className="text-emerald-600 font-medium">Click to explore →</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card className="bg-gradient-to-br from-emerald-50 to-green-50 border-emerald-200">
+                <CardContent className="p-6 text-center">
+                  <Globe className="w-12 h-12 text-emerald-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-emerald-800 mb-2">11 Bioregions</h3>
+                  <p className="text-gray-700">
+                    Practical approach for birding tours with geographic boundaries optimized for maximum species
+                    diversity
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+                <CardContent className="p-6 text-center">
+                  <TreePine className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-blue-800 mb-2">31 Ecoregions</h3>
+                  <p className="text-gray-700">
+                    Scientific classification based on species assemblages and environmental conditions for conservation
+                    priorities
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -539,8 +563,8 @@ export function ColombianBirdsExplorer() {
                           <div className="text-sm text-gray-600">Total Species</div>
                         </div>
                         <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                          <div className="text-lg font-bold text-purple-600">Key Birds</div>
-                          <div className="text-xs text-gray-600">Notable Species</div>
+                          <div className="text-lg font-bold text-purple-600">{currentRegion.difficulty}</div>
+                          <div className="text-xs text-gray-600">Difficulty Level</div>
                         </div>
                       </div>
 
@@ -578,90 +602,125 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* Colombia's Ecoregions Explorer */}
+      {/* Colombia's 11 Bioregions Detailed Sections */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Colombia's Ecoregions Explorer</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Colombia's 11 Bioregions</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Dive deeper into the scientific classification of Colombia's ecosystems. Our 31 ecoregions provide the
-                foundation for conservation efforts and biodiversity research.
+                Each bioregion represents a unique combination of geography, climate, and bird communities. Explore
+                detailed information about each region and discover your perfect birding destination.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Ecoregions Matter</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <TreePine className="w-4 h-4 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Conservation Planning</h4>
-                      <p className="text-gray-600">
-                        Ecoregions help identify priority areas for habitat protection and restoration efforts.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Bird className="w-4 h-4 text-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Species Research</h4>
-                      <p className="text-gray-600">
-                        Understanding species assemblages and their ecological relationships within specific habitats.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Globe className="w-4 h-4 text-purple-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Global Standards</h4>
-                      <p className="text-gray-600">
-                        WWF ecoregions provide internationally recognized frameworks for biodiversity assessment.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-6 bg-red-50 rounded-lg border border-red-200">
-                  <div className="text-3xl font-bold text-red-600 mb-2">8</div>
-                  <div className="text-sm text-gray-600">Critical Priority Ecoregions</div>
-                </div>
-                <div className="text-center p-6 bg-orange-50 rounded-lg border border-orange-200">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">12</div>
-                  <div className="text-sm text-gray-600">Vulnerable Ecoregions</div>
-                </div>
-                <div className="text-center p-6 bg-green-50 rounded-lg border border-green-200">
-                  <div className="text-3xl font-bold text-green-600 mb-2">11</div>
-                  <div className="text-sm text-gray-600">Stable Ecoregions</div>
-                </div>
-                <div className="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">31</div>
-                  <div className="text-sm text-gray-600">Total Ecoregions</div>
-                </div>
-              </div>
-            </div>
+            <div className="space-y-12">
+              {bioregionsData.map((region) => {
+                const IconComponent = region.icon
+                return (
+                  <Card key={region.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                    <CardContent className="p-0">
+                      <div className="grid lg:grid-cols-2 gap-0">
+                        {/* Content Side */}
+                        <div className="p-8">
+                          <div className="flex items-center gap-4 mb-6">
+                            <div
+                              className={`w-16 h-16 rounded-xl bg-gradient-to-br ${region.gradient} flex items-center justify-center shadow-lg`}
+                            >
+                              <IconComponent className="w-8 h-8 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-2xl font-bold text-gray-900">{region.name}</h3>
+                              <p className="text-emerald-600 font-semibold">{region.endemicCount} endemic species</p>
+                            </div>
+                          </div>
 
-            <Card className="bg-gradient-to-r from-emerald-50 to-blue-50 border-emerald-200">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Detailed Ecoregion Data</h3>
-                <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-                  Access comprehensive scientific data, species lists, conservation status, and detailed information
-                  about each of Colombia's 31 ecoregions.
-                </p>
-                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  View Ecoregions Database
-                </Button>
-              </CardContent>
-            </Card>
+                          <p className="text-gray-700 mb-6 leading-relaxed">{region.fullDescription}</p>
+
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="text-center p-3 bg-gray-50 rounded-lg">
+                              <div className="text-xl font-bold text-emerald-600">{region.totalSpecies}</div>
+                              <div className="text-xs text-gray-600">Total Species</div>
+                            </div>
+                            <div className="text-center p-3 bg-gray-50 rounded-lg">
+                              <div className="text-sm font-bold text-blue-600">{region.bestTime}</div>
+                              <div className="text-xs text-gray-600">Best Time</div>
+                            </div>
+                          </div>
+
+                          <div className="mb-6">
+                            <h4 className="font-semibold text-gray-900 mb-3">Highlights:</h4>
+                            <div className="grid grid-cols-2 gap-2">
+                              {region.highlights.map((highlight, index) => (
+                                <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
+                                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                  {highlight}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="mb-6">
+                            <h4 className="font-semibold text-gray-900 mb-3">Key Species:</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {region.keyBirds.slice(0, 3).map((bird, index) => (
+                                <Badge key={index} variant="secondary" className="text-xs">
+                                  {bird}
+                                </Badge>
+                              ))}
+                              {region.keyBirds.length > 3 && (
+                                <Badge variant="outline" className="text-xs">
+                                  +{region.keyBirds.length - 3} more
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Future Tour CTA */}
+                          <div className="flex gap-3">
+                            <Button className="flex-1" style={{ backgroundColor: region.color }} disabled>
+                              <Camera className="w-4 h-4 mr-2" />
+                              {region.name} Tours
+                            </Button>
+                            <Button variant="outline" className="flex-1 bg-transparent" asChild>
+                              <Link href="/contact">
+                                <Users className="w-4 h-4 mr-2" />
+                                Plan Visit
+                              </Link>
+                            </Button>
+                          </div>
+
+                          {/* Temporarily Broken Notice */}
+                          <div className="mt-3 flex items-center gap-2 text-sm text-amber-600 bg-amber-50 p-3 rounded-lg">
+                            <AlertCircle className="w-4 h-4" />
+                            <span>Specific {region.name} tour pages coming soon! Contact us to plan your visit.</span>
+                          </div>
+                        </div>
+
+                        {/* Visual Side */}
+                        <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 min-h-[400px] lg:min-h-full">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div
+                              className={`w-32 h-32 rounded-full bg-gradient-to-br ${region.gradient} flex items-center justify-center shadow-2xl opacity-20`}
+                            >
+                              <IconComponent className="w-16 h-16 text-white" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg">
+                              <div className="text-sm font-medium text-gray-900 mb-1">
+                                Difficulty: {region.difficulty}
+                              </div>
+                              <div className="text-xs text-gray-600">Best visited: {region.bestTime}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>
