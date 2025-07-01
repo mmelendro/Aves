@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Switch } from "@/components/ui/switch"
@@ -30,6 +30,13 @@ export function CookiePreferenceCenter() {
     },
   )
 
+  // Update temp preferences when actual preferences change
+  useEffect(() => {
+    if (preferences) {
+      setTempPreferences(preferences)
+    }
+  }, [preferences])
+
   const handleSavePreferences = () => {
     updatePreferences(tempPreferences)
     setShowPreferenceCenter(false)
@@ -38,6 +45,22 @@ export function CookiePreferenceCenter() {
   const handleToggle = (key: keyof CookiePreferences, value: boolean) => {
     if (key === "essential") return // Cannot disable essential cookies
     setTempPreferences((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const handleAcceptAll = () => {
+    console.log("Accept All clicked") // Debug log
+    acceptAll()
+  }
+
+  const handleRejectAll = () => {
+    console.log("Reject All clicked") // Debug log
+    rejectAll()
+  }
+
+  const handleResetConsent = () => {
+    console.log("Reset consent clicked") // Debug log
+    resetConsent()
+    setShowPreferenceCenter(false)
   }
 
   const cookieCategories = [
@@ -147,8 +170,8 @@ export function CookiePreferenceCenter() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={resetConsent}
-                  className="text-blue-600 border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                  onClick={handleResetConsent}
+                  className="text-blue-600 border-blue-300 hover:bg-blue-50 hover:text-blue-700 bg-transparent"
                 >
                   <RefreshCw className="w-4 h-4 mr-1" />
                   Reset All
@@ -223,20 +246,26 @@ export function CookiePreferenceCenter() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
-            <Button onClick={acceptAll} className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white">
+            <Button
+              onClick={handleAcceptAll}
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
+              type="button"
+            >
               Accept All Cookies
             </Button>
             <Button
-              onClick={rejectAll}
+              onClick={handleRejectAll}
               variant="outline"
-              className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50"
+              className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
+              type="button"
             >
               Reject Non-Essential
             </Button>
             <Button
               onClick={handleSavePreferences}
               variant="outline"
-              className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50"
+              className="flex-1 border-gray-300 text-gray-900 hover:bg-gray-50 bg-transparent"
+              type="button"
             >
               Save My Preferences
             </Button>

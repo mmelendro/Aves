@@ -187,6 +187,8 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     setPreferences(allAccepted)
     setHasConsented(true)
     savePreferences(allAccepted)
+    // Close the preference center after accepting all
+    setShowPreferenceCenter(false)
   }
 
   const rejectAll = () => {
@@ -199,6 +201,8 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     setPreferences(onlyEssential)
     setHasConsented(true)
     savePreferences(onlyEssential)
+    // Close the preference center after rejecting all
+    setShowPreferenceCenter(false)
   }
 
   const resetConsent = () => {
