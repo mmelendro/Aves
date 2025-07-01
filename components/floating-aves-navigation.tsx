@@ -11,7 +11,7 @@ interface FloatingAVESNavigationProps {
   autoHideDuration?: number
 }
 
-export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: FloatingAVESNavigationProps) {
+export default function FloatingAVESNavigation({ autoHideDuration = 15000 }: FloatingAVESNavigationProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -120,7 +120,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
                   <Leaf className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900 text-sm">Book Your Journey</div>
+                  <div className="font-semibold text-gray-900 text-sm">Explore Tours</div>
                   <div className="text-xs text-gray-600">4 unique experiences</div>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
           <div className="p-4">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="font-bold text-gray-900 text-base">Choose Your Perfect Tour</h3>
+                <h3 className="font-bold text-gray-900 text-base">Explore Our Tours</h3>
                 <p className="text-xs text-gray-600">Discover Colombia's incredible biodiversity</p>
               </div>
               <Button
@@ -204,7 +204,7 @@ export default function FloatingAVESNavigation({ autoHideDuration = 10000 }: Flo
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="font-bold text-gray-900 text-lg">Choose Your Perfect Tour</h3>
+                <h3 className="font-bold text-gray-900 text-lg">Explore Our Tours</h3>
                 <p className="text-sm text-gray-600">Discover Colombia's incredible biodiversity</p>
               </div>
               <Button
