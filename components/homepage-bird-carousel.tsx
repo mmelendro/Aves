@@ -13,12 +13,15 @@ interface BirdData {
   commonName: string
   scientificName: string
   spanishName: string
-  region: string
+  primaryRegion: string
+  secondaryRegions: string[]
+  ecoregions: string[]
   regionSlug: string
   status: "Endemic" | "Near Endemic" | "Spectacular"
   difficulty: "Easy" | "Moderate" | "Challenging"
   habitat: string
   bestTime: string
+  elevation: string
   image: string
   photoCredit: {
     photographer: string
@@ -36,12 +39,15 @@ const birdData: BirdData[] = [
     commonName: "Green-bearded Helmetcrest",
     scientificName: "Oxypogon guerinii",
     spanishName: "Colibrí Crestado Verde",
-    region: "Eastern Andes",
+    primaryRegion: "Eastern Andes",
+    secondaryRegions: ["Central Andes"],
+    ecoregions: ["High-altitude páramo", "Cloud forest edges", "Alpine scrubland"],
     regionSlug: "eastern-andes",
     status: "Endemic",
     difficulty: "Challenging",
-    habitat: "High-altitude páramo and cloud forest edges",
-    bestTime: "December - March",
+    habitat: "High-altitude páramo and cloud forest edges above 3,000m",
+    bestTime: "December - March (dry season)",
+    elevation: "3,000 - 4,200m",
     image: "/images/green-bearded-helmetcrest.png",
     photoCredit: {
       photographer: "Nicolás Rozo",
@@ -55,12 +61,15 @@ const birdData: BirdData[] = [
     commonName: "Rainbow-bearded Thornbill",
     scientificName: "Chalcostigma herrani",
     spanishName: "Colibrí Barbudo Arcoíris",
-    region: "Central Andes",
+    primaryRegion: "Central Andes",
+    secondaryRegions: ["Eastern Andes"],
+    ecoregions: ["Páramo grasslands", "Volcanic slopes", "Alpine scrub", "High-altitude wetlands"],
     regionSlug: "central-andes",
     status: "Endemic",
     difficulty: "Challenging",
-    habitat: "High-altitude páramo and volcanic slopes",
-    bestTime: "December - March",
+    habitat: "High-altitude páramo and volcanic slopes with scattered shrubs",
+    bestTime: "December - March (clear weather)",
+    elevation: "3,200 - 4,500m",
     image: "/images/rainbow-bearded-thornbill.jpg",
     photoCredit: {
       photographer: "Nicolás Rozo",
@@ -76,12 +85,15 @@ const birdData: BirdData[] = [
     commonName: "Black-billed Mountain-Toucan",
     scientificName: "Andigena nigrirostris",
     spanishName: "Tucán Andino Piquinegro",
-    region: "Central Andes",
+    primaryRegion: "Central Andes",
+    secondaryRegions: ["Western Andes", "Eastern Andes"],
+    ecoregions: ["Montane cloud forest", "Forest canopy", "Secondary growth", "Forest edges"],
     regionSlug: "central-andes",
     status: "Near Endemic",
     difficulty: "Moderate",
-    habitat: "Montane cloud forests at 1,500-2,500m elevation",
-    bestTime: "Year-round",
+    habitat: "Montane cloud forests and forest edges with fruiting trees",
+    bestTime: "Year-round (most active mornings)",
+    elevation: "1,500 - 2,800m",
     image: "/images/bbmtou1-black-billed-mountain-toucan.png",
     photoCredit: {
       photographer: "Nicolás Rozo",
@@ -97,12 +109,15 @@ const birdData: BirdData[] = [
     commonName: "Chestnut-crowned Antpitta",
     scientificName: "Grallaria ruficapilla",
     spanishName: "Tororoi Coronirrufo",
-    region: "Colombian Massif",
+    primaryRegion: "Colombian Massif",
+    secondaryRegions: ["Central Andes", "Western Andes"],
+    ecoregions: ["Cloud forest understory", "Dense leaf litter", "Bamboo thickets", "Mossy forest floor"],
     regionSlug: "colombian-massif",
     status: "Endemic",
     difficulty: "Moderate",
-    habitat: "Cloud forest understory",
-    bestTime: "Year-round",
+    habitat: "Dense cloud forest understory with thick leaf litter",
+    bestTime: "Year-round (dawn and dusk)",
+    elevation: "1,800 - 3,200m",
     image: "/images/chestnut-crowned-antpitta.jpg",
     photoCredit: {
       photographer: "Nicolás Rozo",
@@ -118,12 +133,21 @@ const birdData: BirdData[] = [
     commonName: "Andean Motmot",
     scientificName: "Momotus aequatorialis",
     spanishName: "Momoto Andino",
-    region: "Western Andes",
-    regionSlug: "western-andes",
+    primaryRegion: "Central Andes",
+    secondaryRegions: ["Western Andes", "Eastern Andes", "Colombian Massif"],
+    ecoregions: [
+      "Subtropical forest midstory",
+      "Mossy cloud forest",
+      "Forest edges",
+      "Secondary growth",
+      "Foothills to subtropical zone",
+    ],
+    regionSlug: "central-andes",
     status: "Near Endemic",
     difficulty: "Easy",
-    habitat: "Humid montane forests and cloud forest edges",
-    bestTime: "Year-round",
+    habitat: "Midstory of mossy subtropical forests, forest edges from foothills into subtropical zone",
+    bestTime: "Year-round (most active early morning)",
+    elevation: "1,200 - 2,600m",
     image: "/images/blue-crowned-motmot-new.jpg",
     photoCredit: {
       photographer: "Nicolás Rozo",
@@ -139,12 +163,15 @@ const birdData: BirdData[] = [
     commonName: "Vermilion Cardinal",
     scientificName: "Cardinalis phoeniceus",
     spanishName: "Cardenal Guajiro",
-    region: "Caribbean Coast",
+    primaryRegion: "Caribbean Coast",
+    secondaryRegions: [],
+    ecoregions: ["Dry tropical forest", "Thorny scrubland", "Desert edges", "Arid lowlands"],
     regionSlug: "caribbean-coast",
     status: "Endemic",
     difficulty: "Moderate",
-    habitat: "Dry scrublands and thorny forests",
-    bestTime: "December - April",
+    habitat: "Dry scrublands and thorny forests of the Guajira Peninsula",
+    bestTime: "December - April (dry season)",
+    elevation: "0 - 800m",
     image: "/images/cardinal-guajiro.jpg",
     photoCredit: {
       photographer: "Nicolás Rozo",
@@ -298,6 +325,23 @@ export default function HomepageBirdCarousel({
 
   const currentImagePositioning = getImagePositioning(currentBird.id)
 
+  const getPrimaryRegionColor = (region: string) => {
+    switch (region) {
+      case "Eastern Andes":
+        return "bg-blue-600/90 text-white border-blue-500/50"
+      case "Central Andes":
+        return "bg-purple-600/90 text-white border-purple-500/50"
+      case "Western Andes":
+        return "bg-green-600/90 text-white border-green-500/50"
+      case "Colombian Massif":
+        return "bg-orange-600/90 text-white border-orange-500/50"
+      case "Caribbean Coast":
+        return "bg-cyan-600/90 text-white border-cyan-500/50"
+      default:
+        return "bg-gray-600/90 text-white border-gray-500/50"
+    }
+  }
+
   return (
     <div className={cn("relative w-full max-w-md mx-auto", className)}>
       <Card className="overflow-hidden border-0 shadow-xl">
@@ -307,7 +351,7 @@ export default function HomepageBirdCarousel({
             {!imageError ? (
               <img
                 src={currentBird.image || "/placeholder.svg?height=400&width=400&text=Bird+Image"}
-                alt={`${currentBird.commonName} - ${currentBird.region}`}
+                alt={`${currentBird.commonName} - ${currentBird.primaryRegion}`}
                 className={cn(
                   "w-full h-full object-cover transition-all duration-700 ease-out",
                   imageLoaded ? "opacity-100" : "opacity-0",
@@ -399,14 +443,6 @@ export default function HomepageBirdCarousel({
               </Badge>
             </div>
 
-            {/* Region Info - Top Center */}
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20">
-              <div className="flex items-center gap-1 bg-emerald-600/90 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium">
-                <MapPin className="w-3 h-3" />
-                <span>{currentBird.region}</span>
-              </div>
-            </div>
-
             {/* Bird Information - Bottom */}
             <div className="absolute bottom-0 left-0 right-0 text-white z-20">
               <div className="p-3 space-y-1">
@@ -416,21 +452,23 @@ export default function HomepageBirdCarousel({
               </div>
             </div>
 
-            {/* Info Button - Bottom Right */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className={cn(
-                "absolute bottom-3 right-3 w-10 h-10 p-0 rounded-full border-0 transition-all duration-300 z-40",
-                showInfo
-                  ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-lg"
-                  : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
-              )}
-              onClick={() => setShowInfo(!showInfo)}
-              aria-label={showInfo ? "Hide bird information" : "Show bird information"}
-            >
-              <Info className={cn("w-4 h-4 transition-all duration-300", showInfo ? "rotate-180" : "")} />
-            </Button>
+            {/* Info Button - Fixed Bottom Right Position */}
+            <div className="absolute bottom-3 right-3 z-40">
+              <Button
+                variant="ghost"
+                size="sm"
+                className={cn(
+                  "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300",
+                  showInfo
+                    ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-lg"
+                    : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
+                )}
+                onClick={() => setShowInfo(!showInfo)}
+                aria-label={showInfo ? "Hide bird information" : "Show bird information"}
+              >
+                <Info className={cn("w-4 h-4 transition-all duration-300", showInfo ? "rotate-180" : "")} />
+              </Button>
+            </div>
 
             {/* Photo Credit Popup */}
             {showPhotoCredit && (
@@ -482,15 +520,17 @@ export default function HomepageBirdCarousel({
               </div>
             )}
 
-            {/* Info Popup */}
+            {/* Enhanced Info Popup */}
             {showInfo && (
               <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-50">
                 <div className="h-full overflow-y-auto p-4">
+                  {/* Separate close button in top-right */}
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-white/20 hover:bg-white/30 text-white border-0"
+                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-white/20 hover:bg-white/30 text-white border-0 z-10"
                     onClick={() => setShowInfo(false)}
+                    aria-label="Close information"
                   >
                     <X className="w-4 h-4" />
                   </Button>
@@ -499,7 +539,59 @@ export default function HomepageBirdCarousel({
                     <div className="mb-4">
                       <h2 className="text-lg font-bold text-emerald-300 mb-1">{currentBird.commonName}</h2>
                       <p className="text-sm italic text-blue-300 mb-1">{currentBird.scientificName}</p>
-                      <p className="text-xs text-gray-300">{currentBird.spanishName}</p>
+                      <p className="text-xs text-gray-300 mb-4">{currentBird.spanishName}</p>
+
+                      {/* Regional Distribution */}
+                      <div className="space-y-3 mb-4">
+                        {/* Primary Region */}
+                        <div>
+                          <span className="font-medium text-emerald-300 text-sm block mb-1">Primary Region:</span>
+                          <div
+                            className={cn(
+                              "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border",
+                              getPrimaryRegionColor(currentBird.primaryRegion),
+                            )}
+                          >
+                            <MapPin className="w-3 h-3" />
+                            <span>{currentBird.primaryRegion}</span>
+                          </div>
+                        </div>
+
+                        {/* Secondary Regions */}
+                        {currentBird.secondaryRegions.length > 0 && (
+                          <div>
+                            <span className="font-medium text-emerald-300 text-sm block mb-1">Also found in:</span>
+                            <div className="flex flex-wrap gap-1">
+                              {currentBird.secondaryRegions.map((region, index) => (
+                                <div
+                                  key={index}
+                                  className={cn(
+                                    "px-2 py-1 rounded-full text-xs font-medium border",
+                                    getPrimaryRegionColor(region).replace("/90", "/70"),
+                                  )}
+                                >
+                                  {region}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Ecoregions */}
+                        <div>
+                          <span className="font-medium text-emerald-300 text-sm block mb-1">Ecoregions:</span>
+                          <div className="flex flex-wrap gap-1">
+                            {currentBird.ecoregions.map((ecoregion, index) => (
+                              <div
+                                key={index}
+                                className="px-2 py-1 rounded-full text-xs font-medium border bg-slate-500/60 text-white border-slate-400/30"
+                              >
+                                {ecoregion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="space-y-3 mb-4">
@@ -512,8 +604,8 @@ export default function HomepageBirdCarousel({
                         <span className="text-white/90 text-xs">{currentBird.bestTime}</span>
                       </div>
                       <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-1">Region:</span>
-                        <span className="text-white/90 text-xs">{currentBird.region}</span>
+                        <span className="font-medium text-emerald-300 text-sm block mb-1">Elevation:</span>
+                        <span className="text-white/90 text-xs">{currentBird.elevation}</span>
                       </div>
                     </div>
 
