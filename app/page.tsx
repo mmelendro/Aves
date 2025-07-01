@@ -25,9 +25,9 @@ import {
   Mountain,
 } from "lucide-react"
 import Link from "next/link"
-import EnhancedEndemicBirdsCarousel from "@/components/enhanced-endemic-birds-carousel"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
+import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import {
   DURATION_OPTIONS,
   LOCATION_OPTIONS,
@@ -173,7 +173,7 @@ ${formData.firstName} ${formData.lastName}`)
       {/* Navigation Header */}
       <NavigationHeader currentPage="/" />
 
-      {/* Hero Section - Completely Redesigned for Perfect Responsive Layout */}
+      {/* Hero Section - Restored Two-Column Layout with Carousel */}
       <section
         className={`relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -260,19 +260,9 @@ ${formData.firstName} ${formData.lastName}`)
               </div>
             </div>
 
-            {/* Enhanced Birds Carousel - Right Side on Desktop, Bottom on Mobile */}
+            {/* Bird Carousel - Right Side on Desktop, Bottom on Mobile */}
             <div className={`relative ${isMobile ? "mt-8" : "lg:order-2"}`}>
-              <div
-                className={`w-full mx-auto ${
-                  isMobile ? "aspect-[4/3] max-w-md" : isTablet ? "aspect-[4/3] max-w-lg" : "aspect-[3/4] max-w-xl"
-                }`}
-              >
-                <EnhancedEndemicBirdsCarousel
-                  className="shadow-2xl rounded-2xl w-full h-full"
-                  autoPlay={true}
-                  autoPlayInterval={7000}
-                />
-              </div>
+              <HomepageBirdCarousel className="w-full" autoPlay={true} autoPlayInterval={8000} />
             </div>
           </div>
         </div>
@@ -539,7 +529,7 @@ ${formData.firstName} ${formData.lastName}`)
       {/* Contact Form Section */}
       <section
         id="contact"
-        className={`bg-gradient-to-br from-emerald-50 to-blue-50 transition-all duration-500 ${responsive.sectionSpacing}`}
+        className={`bg-gradient-to-br from-emerald-50 to-blue-50 transition-all duration-500 ${responsive.sectionSpacing} ${isMobile ? "mt-8" : isTablet ? "mt-12" : "mt-16"}`}
       >
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="mx-auto max-w-4xl">
@@ -556,7 +546,7 @@ ${formData.firstName} ${formData.lastName}`)
               <CardContent className="p-8">
                 <div className={`${isMobile ? "space-y-8" : "grid lg:grid-cols-2 gap-12"}`}>
                   {/* Contact Form */}
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${isMobile ? "mt-4" : "mt-6"}`}>
                     <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
                       <div>
                         <label className="block font-medium text-gray-700 mb-2 text-sm">First Name *</label>
@@ -647,7 +637,7 @@ ${formData.firstName} ${formData.lastName}`)
                     </div>
 
                     {/* Tour Type Selection */}
-                    <div>
+                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
                       <div className="flex items-center justify-between mb-3">
                         <label className="block font-medium text-gray-700 text-sm">
                           Interested Tour Types (select all that apply)
@@ -679,7 +669,7 @@ ${formData.firstName} ${formData.lastName}`)
                     </div>
 
                     {/* Location Preferences */}
-                    <div>
+                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
                       <div className="flex items-center justify-between mb-3">
                         <label className="block font-medium text-gray-700 text-sm">
                           Preferred Biogeographic Regions (select all that interest you)
@@ -692,25 +682,29 @@ ${formData.firstName} ${formData.lastName}`)
                           Explore Map
                         </Link>
                       </div>
-                      <div className={`${isMobile ? "grid grid-cols-1 gap-1" : "grid grid-cols-2 gap-2"}`}>
-                        {LOCATION_OPTIONS.map((location) => (
-                          <label
-                            key={location}
-                            className="flex items-center space-x-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer p-2"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedLocations.includes(location)}
-                              onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                              className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                            />
-                            <span className="text-gray-700 text-xs">{location}</span>
-                          </label>
-                        ))}
+                      <div
+                        className={`border border-gray-200 rounded-lg bg-gray-50 ${isMobile ? "max-h-48" : "max-h-56"} overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400`}
+                      >
+                        <div className="p-2 space-y-1">
+                          {LOCATION_OPTIONS.map((location) => (
+                            <label
+                              key={location}
+                              className="flex items-center space-x-2 border border-gray-200 rounded-lg hover:bg-white cursor-pointer p-2 transition-colors duration-200 bg-white/80 hover:bg-white hover:shadow-sm"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={selectedLocations.includes(location)}
+                                onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                                className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 flex-shrink-0"
+                              />
+                              <span className="text-gray-700 text-xs leading-relaxed">{location}</span>
+                            </label>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
-                    <div>
+                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
                       <label className="block font-medium text-gray-700 mb-2 text-sm">
                         Special Interests or Requests
                       </label>
@@ -725,7 +719,7 @@ ${formData.firstName} ${formData.lastName}`)
 
                     <a
                       href={generateEmailLink()}
-                      className="block w-full"
+                      className={`block w-full ${isMobile ? "mt-8" : "mt-10"}`}
                       onClick={(e) => {
                         if (!formData.firstName || !formData.lastName || !formData.email) {
                           e.preventDefault()
