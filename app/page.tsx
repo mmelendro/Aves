@@ -145,7 +145,7 @@ ${formData.firstName} ${formData.lastName}`)
   const getResponsiveClasses = () => ({
     container: isMobile ? "px-4" : isTablet ? "px-6" : "px-4 sm:px-6 lg:px-8",
     heroSpacing: isMobile ? "py-12 px-4" : isTablet ? "py-16 px-6" : "py-20 lg:py-24",
-    sectionSpacing: isMobile ? "py-12" : isTablet ? "py-16" : "py-20",
+    sectionSpacing: isMobile ? "py-16" : isTablet ? "py-20" : "py-24",
     textSize: {
       hero: isMobile ? "text-3xl sm:text-4xl" : isTablet ? "text-4xl lg:text-5xl" : "text-4xl lg:text-5xl xl:text-6xl",
       section: isMobile ? "text-2xl" : isTablet ? "text-3xl" : "text-3xl lg:text-4xl",
@@ -294,75 +294,118 @@ ${formData.firstName} ${formData.lastName}`)
         ></div>
       </section>
 
-      {/* Bioregions Explorer Section - Adjacent to Hero, Not Overlapping */}
-      <section className={`bg-gradient-to-br from-blue-50 to-emerald-50 ${responsive.sectionSpacing}`}>
+      {/* Bioregions Explorer Section - Enhanced with proper spacing and no truncation */}
+      <section
+        className={`bg-gradient-to-br from-blue-50 to-emerald-50 transition-all duration-500 ${responsive.sectionSpacing}`}
+      >
         <div className={`container mx-auto ${responsive.container}`}>
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+          <div className="max-w-7xl mx-auto">
+            {/* Section Header with improved spacing */}
+            <div className="text-center mb-8 lg:mb-12 xl:mb-16">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full mb-6 shadow-lg">
                 <Globe className="h-8 w-8 text-white" />
               </div>
-              <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>
+              <h2 className={`font-bold text-gray-900 mb-4 lg:mb-6 ${responsive.textSize.section}`}>
                 Explore Colombia's Bioregions
               </h2>
-              <p className={`text-gray-600 mx-auto max-w-3xl ${responsive.textSize.body}`}>
+              <p className={`text-gray-600 mx-auto max-w-4xl ${responsive.textSize.body} leading-relaxed`}>
                 Discover 11 unique bioregions, each offering distinct ecosystems and endemic bird species. From Amazon
                 rainforests to Andean cloud forests, plan your perfect birding adventure.
               </p>
             </div>
 
-            {/* Bioregions Quick Preview Cards */}
-            <div className={`${responsive.grid.features} mb-12`}>
-              <Link href="/aves-explorer" className="group">
+            {/* Bioregions Quick Preview Cards with enhanced responsive grid */}
+            <div
+              className={`mb-8 lg:mb-12 xl:mb-16 ${
+                isMobile
+                  ? "space-y-6"
+                  : isTablet
+                    ? "grid md:grid-cols-2 gap-6 lg:gap-8"
+                    : "grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10"
+              }`}
+            >
+              <Link href="/aves-explorer" className="group block">
                 <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-emerald-50 to-green-50">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-200 transition-colors">
-                      <TreePine className="w-6 h-6 text-emerald-600" />
+                  <CardContent className={`text-center ${isMobile ? "p-6" : "p-6 lg:p-8"}`}>
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6 group-hover:bg-emerald-200 transition-colors">
+                      <TreePine className="w-6 h-6 lg:w-7 lg:h-7 text-emerald-600" />
                     </div>
-                    <h3 className="font-bold text-gray-900 mb-2">Amazon & Pacific</h3>
-                    <p className="text-gray-600 text-sm mb-4">
+                    <h3
+                      className={`font-bold text-gray-900 mb-3 lg:mb-4 ${isMobile ? "text-lg" : "text-xl lg:text-2xl"}`}
+                    >
+                      Amazon & Pacific
+                    </h3>
+                    <p
+                      className={`text-gray-600 mb-4 lg:mb-6 leading-relaxed ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
+                    >
                       Pristine rainforests with the highest biodiversity on Earth
                     </p>
-                    <div className="text-emerald-600 font-semibold text-sm">875+ species • 67 endemics</div>
+                    <div className={`text-emerald-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
+                      875+ species • 67 endemics
+                    </div>
                   </CardContent>
                 </Card>
               </Link>
 
-              <Link href="/aves-explorer" className="group">
+              <Link href="/aves-explorer" className="group block">
                 <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-blue-50 to-indigo-50">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-                      <Mountain className="w-6 h-6 text-blue-600" />
+                  <CardContent className={`text-center ${isMobile ? "p-6" : "p-6 lg:p-8"}`}>
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6 group-hover:bg-blue-200 transition-colors">
+                      <Mountain className="w-6 h-6 lg:w-7 lg:h-7 text-blue-600" />
                     </div>
-                    <h3 className="font-bold text-gray-900 mb-2">Andean Ranges</h3>
-                    <p className="text-gray-600 text-sm mb-4">
+                    <h3
+                      className={`font-bold text-gray-900 mb-3 lg:mb-4 ${isMobile ? "text-lg" : "text-xl lg:text-2xl"}`}
+                    >
+                      Andean Ranges
+                    </h3>
+                    <p
+                      className={`text-gray-600 mb-4 lg:mb-6 leading-relaxed ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
+                    >
                       Cloud forests and páramo with spectacular endemic species
                     </p>
-                    <div className="text-blue-600 font-semibold text-sm">720+ species • 45 endemics</div>
+                    <div className={`text-blue-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
+                      720+ species • 45 endemics
+                    </div>
                   </CardContent>
                 </Card>
               </Link>
 
-              <Link href="/aves-explorer" className="group">
-                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-orange-50 to-yellow-50">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-200 transition-colors">
-                      <Bird className="w-6 h-6 text-orange-600" />
+              <Link href="/aves-explorer" className="group block">
+                <Card
+                  className={`h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-orange-50 to-yellow-50 ${
+                    isMobile ? "" : isTablet ? "md:col-span-2 lg:col-span-1" : ""
+                  }`}
+                >
+                  <CardContent className={`text-center ${isMobile ? "p-6" : "p-6 lg:p-8"}`}>
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6 group-hover:bg-orange-200 transition-colors">
+                      <Bird className="w-6 h-6 lg:w-7 lg:h-7 text-orange-600" />
                     </div>
-                    <h3 className="font-bold text-gray-900 mb-2">Sierra Nevada</h3>
-                    <p className="text-gray-600 text-sm mb-4">World's highest coastal mountain with unique endemics</p>
-                    <div className="text-orange-600 font-semibold text-sm">635+ species • 79 endemics</div>
+                    <h3
+                      className={`font-bold text-gray-900 mb-3 lg:mb-4 ${isMobile ? "text-lg" : "text-xl lg:text-2xl"}`}
+                    >
+                      Sierra Nevada
+                    </h3>
+                    <p
+                      className={`text-gray-600 mb-4 lg:mb-6 leading-relaxed ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
+                    >
+                      World's highest coastal mountain with unique endemics
+                    </p>
+                    <div className={`text-orange-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
+                      635+ species • 79 endemics
+                    </div>
                   </CardContent>
                 </Card>
               </Link>
             </div>
 
-            {/* CTA to Full Explorer */}
+            {/* CTA to Full Explorer with enhanced spacing */}
             <div className="text-center">
               <Link href="/aves-explorer">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className={`bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+                    isMobile ? "text-base px-6 py-3" : "text-lg px-8 py-4"
+                  }`}
                 >
                   <Map className="mr-2 w-5 h-5" />
                   Explore Interactive Map
@@ -375,7 +418,7 @@ ${formData.firstName} ${formData.lastName}`)
       </section>
 
       {/* Social Proof Section */}
-      <section className={`bg-white ${responsive.sectionSpacing}`}>
+      <section className={`bg-white transition-all duration-500 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
             <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>What Our Guests Say</h2>
@@ -410,7 +453,7 @@ ${formData.firstName} ${formData.lastName}`)
       </section>
 
       {/* Why Choose AVES */}
-      <section className={`bg-gray-50 ${responsive.sectionSpacing}`}>
+      <section className={`bg-gray-50 transition-all duration-500 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
             <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>Why Choose AVES</h2>
@@ -513,7 +556,7 @@ ${formData.firstName} ${formData.lastName}`)
       </section>
 
       {/* Colombia by the Numbers */}
-      <section className={`bg-white ${responsive.sectionSpacing}`}>
+      <section className={`bg-white transition-all duration-500 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
             <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>Colombia by the Numbers</h2>
@@ -577,7 +620,10 @@ ${formData.firstName} ${formData.lastName}`)
       </section>
 
       {/* Contact Form Section */}
-      <section id="contact" className={`bg-gradient-to-br from-emerald-50 to-blue-50 ${responsive.sectionSpacing}`}>
+      <section
+        id="contact"
+        className={`bg-gradient-to-br from-emerald-50 to-blue-50 transition-all duration-500 ${responsive.sectionSpacing}`}
+      >
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="mx-auto max-w-4xl">
             <div className="text-center mb-12">
