@@ -11,13 +11,11 @@ import {
   ArrowRight,
   CheckCircle,
   Mail,
-  MapPin,
   Star,
   Calendar,
   Shield,
   TelescopeIcon as Binoculars,
   Clock,
-  ExternalLink,
   Map,
   Bird,
   Globe,
@@ -452,7 +450,7 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Why Choose AVES */}
+      {/* Why Choose AVES - Redesigned with Card-Style CTAs */}
       <section className={`bg-gray-50 transition-all duration-500 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
@@ -464,71 +462,118 @@ ${formData.firstName} ${formData.lastName}`)
           </div>
 
           <div className={responsive.grid.features}>
-            {/* Expert Guides */}
-            <div className="text-center">
-              <div className="bg-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Users className="text-emerald-600 w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-4 text-xl">Expert Local Guides</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Our certified ornithologist guides know every bird call, behavior, and habitat across Colombia's diverse
-                regions, ensuring exceptional wildlife encounters.
-              </p>
-              <Link
-                href="/team"
-                className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium"
-              >
-                Meet Our Guides
-                <ArrowRight className="ml-1 w-4 h-4" />
+            {/* Expert Guides - Card Style */}
+            <Link href="/team" className="group block">
+              <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 hover:border-emerald-300">
+                <CardContent className="text-center p-6">
+                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
+                    <Users className="text-emerald-600 w-8 h-8" />
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-xl group-hover:text-emerald-700 transition-colors">
+                    Expert Local Guides
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6 group-hover:text-gray-700 transition-colors">
+                    Our certified ornithologist guides know every bird call, behavior, and habitat across Colombia's
+                    diverse regions, ensuring exceptional wildlife encounters.
+                  </p>
+                  <div className="font-bold text-emerald-600 mb-2 group-hover:text-emerald-700 text-2xl lg:text-3xl transition-colors">
+                    Expert
+                  </div>
+                  <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base transition-colors">
+                    Ornithologist Guides
+                  </div>
+                  <div className="text-emerald-600 mt-1 group-hover:text-emerald-700 text-xs transition-colors">
+                    Meet Our Team
+                  </div>
+                  <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ArrowRight className="mx-auto text-emerald-600 w-4 h-4" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Conservation & B Corp - Card Style with Multiple Links */}
+            <div className="space-y-4">
+              <Link href="/about/b-corp" className="group block">
+                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 hover:border-green-300">
+                  <CardContent className="text-center p-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                      <Shield className="text-green-600 w-6 h-6" />
+                    </div>
+                    <h4 className="font-bold text-gray-900 mb-2 text-lg group-hover:text-green-700 transition-colors">
+                      B Corp Certified
+                    </h4>
+                    <div className="font-bold text-green-600 mb-1 group-hover:text-green-700 text-xl transition-colors">
+                      B Corp
+                    </div>
+                    <div className="text-gray-600 group-hover:text-gray-700 text-sm transition-colors">
+                      Certified Business
+                    </div>
+                    <div className="text-green-600 mt-1 group-hover:text-green-700 text-xs transition-colors">
+                      Our Journey
+                    </div>
+                    <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ArrowRight className="mx-auto text-green-600 w-3 h-3" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link href="/conservation" className="group block">
+                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 hover:border-green-300">
+                  <CardContent className="text-center p-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                      <Shield className="text-green-600 w-6 h-6" />
+                    </div>
+                    <h4 className="font-bold text-gray-900 mb-2 text-lg group-hover:text-green-700 transition-colors">
+                      Conservation Impact
+                    </h4>
+                    <div className="font-bold text-green-600 mb-1 group-hover:text-green-700 text-xl transition-colors">
+                      100%
+                    </div>
+                    <div className="text-gray-600 group-hover:text-gray-700 text-sm transition-colors">
+                      Carbon Neutral
+                    </div>
+                    <div className="text-green-600 mt-1 group-hover:text-green-700 text-xs transition-colors">
+                      Our Impact
+                    </div>
+                    <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ArrowRight className="mx-auto text-green-600 w-3 h-3" />
+                    </div>
+                  </CardContent>
+                </Card>
               </Link>
             </div>
 
-            {/* Conservation & B Corp */}
-            <div className="text-center">
-              <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Shield className="text-green-600 w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-4 text-xl">B Corp Certified Conservation</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Every tour directly supports habitat protection and local communities. We're B Corp certified and
-                operate 100% carbon-neutral expeditions with verified impact.
-              </p>
-              <div className="flex flex-col gap-3">
-                <Link
-                  href="/about/b-corp"
-                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
-                >
-                  Our B Corp Journey
-                  <ArrowRight className="ml-1 w-3 h-3" />
-                </Link>
-                <Link
-                  href="/conservation"
-                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm"
-                >
-                  Conservation Impact
-                  <ArrowRight className="ml-1 w-3 h-3" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Exclusive Access & Recognition */}
-            <div className="text-center">
-              <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Award className="text-blue-600 w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-4 text-xl">Exclusive Access & Recognition</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Access private reserves and research stations unavailable to others. Recommended by leading
-                ornithologists and featured in top birding publications worldwide.
-              </p>
-              <Link
-                href="/about/partners"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Our Partner Network
-                <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
-            </div>
+            {/* Exclusive Access & Recognition - Card Style */}
+            <Link href="/about/partners" className="group block">
+              <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 hover:border-blue-300">
+                <CardContent className="text-center p-6">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                    <Award className="text-blue-600 w-8 h-8" />
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-xl group-hover:text-blue-700 transition-colors">
+                    Exclusive Access & Recognition
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6 group-hover:text-gray-700 transition-colors">
+                    Access private reserves and research stations unavailable to others. Recommended by leading
+                    ornithologists and featured in top birding publications worldwide.
+                  </p>
+                  <div className="font-bold text-blue-600 mb-2 group-hover:text-blue-700 text-2xl lg:text-3xl transition-colors">
+                    Exclusive
+                  </div>
+                  <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base transition-colors">
+                    Partner Network
+                  </div>
+                  <div className="text-blue-600 mt-1 group-hover:text-blue-700 text-xs transition-colors">
+                    View Partners
+                  </div>
+                  <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ArrowRight className="mx-auto text-blue-600 w-4 h-4" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
 
           {/* Trust Indicators */}
@@ -555,74 +600,10 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Colombia by the Numbers */}
-      <section className={`bg-white transition-all duration-500 ${responsive.sectionSpacing}`}>
-        <div className={`container mx-auto ${responsive.container}`}>
-          <div className="text-center mb-12">
-            <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>Colombia by the Numbers</h2>
-            <p className={`text-gray-600 ${responsive.textSize.body}`}>
-              Discover why Colombia is the world's birding capital
-            </p>
-          </div>
-
-          <div className={responsive.grid.stats}>
-            <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-emerald-200 hover:border-emerald-300 p-6">
-                <div className="font-bold text-emerald-600 mb-2 group-hover:text-emerald-700 text-3xl lg:text-4xl">
-                  1,900+
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Bird Species</div>
-                <div className="text-emerald-600 mt-1 group-hover:text-emerald-700 text-xs">#1 Globally</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-emerald-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 hover:border-blue-300 p-6">
-                <div className="font-bold text-blue-600 mb-2 group-hover:text-blue-700 text-3xl lg:text-4xl">78+</div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Endemic Species</div>
-                <div className="text-blue-600 mt-1 group-hover:text-blue-700 text-xs">Found Nowhere Else</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-blue-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/aves-explorer" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-purple-200 hover:border-purple-300 p-6">
-                <div className="font-bold text-purple-600 mb-2 group-hover:text-purple-700 text-3xl lg:text-4xl">
-                  11
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Bioregions</div>
-                <div className="text-purple-600 mt-1 group-hover:text-purple-700 text-xs">Diverse Ecosystems</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-purple-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/endemic-birds" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-orange-200 hover:border-orange-300 p-6">
-                <div className="font-bold text-orange-600 mb-2 group-hover:text-orange-700 text-3xl lg:text-4xl">
-                  165
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Hummingbird Species</div>
-                <div className="text-orange-600 mt-1 group-hover:text-orange-700 text-xs">Most in the World</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-orange-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section */}
+      {/* Contact Form Section - Enhanced with Better Padding */}
       <section
         id="contact"
-        className={`bg-gradient-to-br from-emerald-50 to-blue-50 transition-all duration-500 ${responsive.sectionSpacing}`}
+        className={`bg-gradient-to-br from-emerald-50 to-blue-50 transition-all duration-500 ${responsive.sectionSpacing} pt-32`}
       >
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="mx-auto max-w-4xl">
@@ -729,169 +710,86 @@ ${formData.firstName} ${formData.lastName}`)
                       </div>
                     </div>
 
-                    {/* Tour Type Selection */}
                     <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <label className="block font-medium text-gray-700 text-sm">
-                          Interested Tour Types (select all that apply)
-                        </label>
-                        <Link
-                          href="/tours"
-                          className="text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1 text-xs"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          View All Tours
-                        </Link>
-                      </div>
-                      <div className={`${isMobile ? "grid grid-cols-1 gap-2" : "grid grid-cols-2 gap-2"}`}>
-                        {TOUR_TYPE_OPTIONS.map((tourType) => (
-                          <button
-                            key={tourType}
-                            type="button"
-                            onClick={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
-                            className={`text-left rounded-lg border transition-all p-3 text-sm ${
-                              selectedTourTypes.includes(tourType)
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                : "border-gray-200 hover:border-emerald-300 text-gray-700"
-                            }`}
-                          >
-                            {tourType}
-                          </button>
-                        ))}
-                      </div>
+                      <label className="block font-medium text-gray-700 mb-2 text-sm">
+                        Special Interests or Requests
+                      </label>
+                      <textarea
+                        placeholder="Tell us about specific birds you'd like to see, photography interests, accessibility needs, etc."
+                        value={formData.specialRequests}
+                        onChange={(e) => handleInputChange("specialRequests", e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 h-24 resize-none"
+                      />
                     </div>
+                  </div>
 
-                    {/* Location Preferences */}
+                  {/* Tour Preferences */}
+                  <div className="space-y-6">
                     <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <label className="block font-medium text-gray-700 text-sm">
-                          Preferred Biogeographic Regions (select all that interest you)
-                        </label>
-                        <Link
-                          href="/aves-explorer"
-                          className="text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1 text-xs"
-                        >
-                          <Map className="w-3 h-3" />
-                          Explore Map
-                        </Link>
-                      </div>
-                      <div className={`${isMobile ? "grid grid-cols-1 gap-1" : "grid grid-cols-2 gap-2"}`}>
-                        {LOCATION_OPTIONS.map((location) => (
-                          <label
-                            key={location}
-                            className="flex items-center space-x-2 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer p-2"
-                          >
+                      <h3 className="font-semibold text-gray-900 mb-4 text-lg">Tour Types of Interest</h3>
+                      <div className="space-y-2">
+                        {TOUR_TYPE_OPTIONS.map((type) => (
+                          <label key={type} className="flex items-center space-x-3 cursor-pointer">
                             <input
                               type="checkbox"
-                              checked={selectedLocations.includes(location)}
-                              onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                              className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                              checked={selectedTourTypes.includes(type)}
+                              onChange={() => toggleSelection(type, selectedTourTypes, setSelectedTourTypes)}
+                              className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
                             />
-                            <span className="text-gray-700 text-xs">{location}</span>
+                            <span className="text-gray-700 text-sm">{type}</span>
                           </label>
                         ))}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block font-medium text-gray-700 mb-2 text-sm">
-                        Special Interests or Requests
-                      </label>
-                      <textarea
-                        placeholder="Tell us about specific birds you'd like to see, photography interests, accessibility needs, dietary restrictions, or any other special requests..."
-                        value={formData.specialRequests}
-                        onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                        rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
-                      />
+                      <h3 className="font-semibold text-gray-900 mb-4 text-lg">Preferred Locations</h3>
+                      <div className="space-y-2 max-h-48 overflow-y-auto">
+                        {LOCATION_OPTIONS.map((location) => (
+                          <label key={location} className="flex items-center space-x-3 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={selectedLocations.includes(location)}
+                              onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
+                              className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
+                            />
+                            <span className="text-gray-700 text-sm">{location}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
 
-                    <a
-                      href={generateEmailLink()}
-                      className="block w-full"
-                      onClick={(e) => {
-                        if (!formData.firstName || !formData.lastName || !formData.email) {
-                          e.preventDefault()
-                          alert("Please fill in your name and email address before submitting.")
-                        }
-                      }}
+                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                      <div className="flex items-start space-x-3">
+                        <CheckCircle className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
+                        <div>
+                          <p className="font-medium text-emerald-800 text-sm">24-Hour Response Guarantee</p>
+                          <p className="text-emerald-700 text-xs mt-1">
+                            We'll respond with personalized recommendations within 24 hours
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 text-center">
+                  <a href={generateEmailLink()} className="inline-block w-full sm:w-auto">
+                    <Button
+                      size="lg"
+                      className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg px-12 py-4"
                     >
-                      <Button className="w-full bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 text-lg py-4">
-                        <Mail className="mr-2 w-5 h-5" />
-                        Send My Inquiry
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </Button>
+                      <Mail className="mr-2 w-5 h-5" />
+                      Send My Inquiry
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </a>
+                  <p className="text-gray-600 text-sm mt-4">
+                    Or email us directly at{" "}
+                    <a href="mailto:info@aves.com" className="text-emerald-600 hover:underline">
+                      info@aves.com
                     </a>
-
-                    <p className="text-gray-500 text-center text-sm">
-                      We'll respond within 24 hours with personalized recommendations
-                    </p>
-                  </div>
-
-                  {/* Contact Information */}
-                  <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-6">
-                    <h3 className="font-bold text-gray-900 mb-6 text-xl">Get in Touch Directly</h3>
-
-                    <div className="space-y-6 mb-8">
-                      <div className="flex items-start space-x-3">
-                        <Mail className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
-                        <div>
-                          <div className="font-medium text-gray-900">Email</div>
-                          <a
-                            href="mailto:info@aves.com"
-                            className="text-emerald-600 hover:text-emerald-700 hover:underline"
-                          >
-                            info@aves.com
-                          </a>
-                          <div className="text-gray-600 text-sm">24-hour response guarantee</div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start space-x-3">
-                        <MapPin className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
-                        <div>
-                          <div className="font-medium text-gray-900">Based in</div>
-                          <div className="text-gray-700">Bogotá, Colombia</div>
-                          <div className="text-gray-600 text-sm">Operating nationwide</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div className="border-t border-emerald-200 pt-6 space-y-3">
-                      <h4 className="font-medium text-gray-900">Quick Links</h4>
-                      <div className="space-y-2">
-                        <Link
-                          href="/tours"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <ArrowRight className="mr-2 w-3 h-3" />
-                          Browse All Tours
-                        </Link>
-                        <Link
-                          href="/aves-explorer"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <Map className="mr-2 w-3 h-3" />
-                          Explore Interactive Map
-                        </Link>
-                        <Link
-                          href="/endemic-birds"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <ArrowRight className="mr-2 w-3 h-3" />
-                          Endemic Birds Guide
-                        </Link>
-                        <Link
-                          href="/travel-tips"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <ArrowRight className="mr-2 w-3 h-3" />
-                          Travel Tips & Preparation
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  </p>
                 </div>
               </CardContent>
             </Card>
