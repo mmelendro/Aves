@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -17,6 +17,7 @@ import {
   EXPERIENCE_LEVELS,
   GROUP_SIZE_OPTIONS,
 } from "@/lib/form-options"
+import { useSearchParams } from "next/navigation"
 
 export default function ContactPage() {
   const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
@@ -32,6 +33,18 @@ export default function ContactPage() {
     experienceLevel: "Beginner birder",
     specialRequests: "",
   })
+
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const subject = searchParams.get("subject")
+    if (subject) {
+      setFormData((prev) => ({
+        ...prev,
+        specialRequests: `Subject: ${decodeURIComponent(subject)}\n\n` + prev.specialRequests,
+      }))
+    }
+  }, [searchParams])
 
   const toggleSelection = (item: string, selectedItems: string[], setSelectedItems: (items: string[]) => void) => {
     if (selectedItems.includes(item)) {

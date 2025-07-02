@@ -74,6 +74,22 @@ export default function CheckoutPage() {
     newsletter: false,
   })
 
+  const [showSourceNotification, setShowSourceNotification] = useState(false)
+  const [selectedRegion, setSelectedRegion] = useState("")
+
+  useEffect(() => {
+    const region = searchParams.get("region")
+    const source = searchParams.get("source")
+
+    if (region === "caribbean") {
+      setSelectedRegion("Caribbean")
+      if (source === "caribbean-page") {
+        setShowSourceNotification(true)
+        setTimeout(() => setShowSourceNotification(false), 5000)
+      }
+    }
+  }, [searchParams])
+
   useEffect(() => {
     const tour = searchParams.get("tour")
     if (tour && tourTypes[tour as keyof typeof tourTypes]) {
@@ -122,6 +138,17 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <NavigationHeader currentPage="/checkout" />
+
+      {showSourceNotification && (
+        <div className="container mx-auto px-4 pt-4">
+          <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+            <p className="text-orange-800 text-sm">
+              <strong>Caribbean Region Selected:</strong> You've been directed here from the Caribbean region page. The
+              Caribbean region has been pre-selected for your convenience.
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
@@ -178,6 +205,24 @@ export default function CheckoutPage() {
                             </a>{" "}
                             to arrange discounts for multiple 4-person groups.
                           </p>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Region</label>
+                          <select
+                            value={selectedRegion}
+                            onChange={(e) => setSelectedRegion(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                          >
+                            <option value="">Select a region</option>
+                            <option value="Caribbean">Caribbean + Sierra Nevada</option>
+                            <option value="Western Andes">Western Andes</option>
+                            <option value="Central Andes">Central Andes</option>
+                            <option value="Eastern Andes">Eastern Andes</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Chocó">Biogeographic Chocó</option>
+                            <option value="Llanos">Llanos</option>
+                          </select>
                         </div>
                       </div>
                     </div>

@@ -57,6 +57,30 @@ export const EXPERIENCE_LEVELS = [
 
 export const GROUP_SIZE_OPTIONS = ["1 person", "2 people", "3 people", "4 people"] as const
 
+// Additional options for shopping page and other components
+export const tourOptions = TOUR_TYPE_OPTIONS.map((option) => ({
+  value: option,
+  label: option,
+}))
+
+export const regionOptions = LOCATION_OPTIONS.map((option) => ({
+  value: option,
+  label: option,
+}))
+
+export const accommodationOptions = [
+  { value: "budget", label: "Budget Accommodations" },
+  { value: "standard", label: "Standard Hotels" },
+  { value: "premium", label: "Premium Lodges" },
+  { value: "luxury", label: "Luxury Eco-Resorts" },
+  { value: "mixed", label: "Mixed (Budget + Premium)" },
+] as const
+
+export const experienceOptions = EXPERIENCE_LEVELS.map((level) => ({
+  value: level.toLowerCase().replace(/\s+/g, "-"),
+  label: level,
+}))
+
 // Type definitions for better type safety
 export type DurationOption = (typeof DURATION_OPTIONS)[number]
 export type LocationOption = (typeof LOCATION_OPTIONS)[number]
@@ -64,3 +88,7 @@ export type TourTypeOption = (typeof TOUR_TYPE_OPTIONS)[number]
 export type ContactTourTypeOption = (typeof CONTACT_TOUR_TYPE_OPTIONS)[number]
 export type ExperienceLevel = (typeof EXPERIENCE_LEVELS)[number]
 export type GroupSizeOption = (typeof GROUP_SIZE_OPTIONS)[number]
+export type AccommodationOption = (typeof accommodationOptions)[number]
+export type TourOption = (typeof tourOptions)[number]
+export type RegionOption = (typeof regionOptions)[number]
+export type ExperienceOption = (typeof experienceOptions)[number]

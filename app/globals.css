@@ -2,85 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -93,281 +68,162 @@ body {
   }
 }
 
-/* Enhanced Mobile Navigation and Touch Interactions */
+/* Mobile menu styles */
+.menu-open {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Caribbean-themed animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wave-motion {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1.2);
+  }
+}
+
+@keyframes caribbean-pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.5);
+  }
+}
+
+@keyframes tropical-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-wave-motion {
+  animation: wave-motion 3s ease-in-out infinite;
+}
+
+.animate-caribbean-pulse {
+  animation: caribbean-pulse 2s ease-in-out infinite;
+}
+
+.animate-tropical-float {
+  animation: tropical-float 6s ease-in-out infinite;
+}
+
+/* Text shadow utilities */
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-2xl {
+  text-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* YouTube video container */
+.youtube-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Caribbean glass effect */
+.caribbean-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient backgrounds */
+.tropical-gradient {
+  background: linear-gradient(135deg, #06b6d4 0%, #f59e0b 50%, #ef4444 100%);
+}
+
+.caribbean-gradient {
+  background: linear-gradient(135deg, #0891b2 0%, #0284c7 25%, #06b6d4 50%, #f59e0b 75%, #ef4444 100%);
+}
+
+/* Hero title styling */
+.youtube-hero-title {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
+
+.youtube-hero-subtitle {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Caribbean stats styling */
+.caribbean-stats .bg-white\/10 {
+  transition: all 0.3s ease;
+}
+
+.caribbean-stats .bg-white\/10:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Responsive video scaling */
 @media (max-width: 768px) {
-  /* Smooth scrolling for mobile menu */
-  .mobile-menu-scroll {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+  .youtube-hero-title {
+    font-size: 2.5rem;
+    line-height: 1;
   }
 
-  /* Prevent body scroll when menu is open */
-  body.menu-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Enhanced touch scrolling */
-  .mobile-menu-container {
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Improved touch targets */
-  .touch-manipulation {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    min-height: 32px;
-    min-width: 32px;
-  }
-
-  /* Better button sizing for mobile */
-  .mobile-button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* Improved form inputs for mobile */
-  input,
-  select,
-  textarea {
-    font-size: 16px; /* Prevents zoom on iOS */
-    min-height: 44px;
-  }
-
-  /* Better spacing for mobile cards */
-  .mobile-card {
-    margin-bottom: 1rem;
-    padding: 1rem;
-  }
-
-  /* Improved text readability */
-  .mobile-text {
-    line-height: 1.6;
-    font-size: 14px;
-  }
-
-  /* Better image scaling */
-  .mobile-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+  .youtube-hero-subtitle {
+    font-size: 1.125rem;
   }
 }
 
-/* Focus styles for mobile menu items */
-.mobile-menu-item:focus {
-  outline: 2px solid #10b981;
-  outline-offset: 2px;
-  border-radius: 4px;
-  background-color: rgba(16, 185, 129, 0.1);
-}
-
-/* Enhanced touch feedback */
-.touch-feedback:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease;
-}
-
-/* Better carousel controls for mobile */
-@media (max-width: 640px) {
-  .carousel-button {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+@media (min-width: 1024px) {
+  .youtube-hero-title {
+    font-size: 5rem;
   }
 
-  .carousel-indicator {
-    width: 8px;
-    height: 8px;
-  }
-
-  /* Enhanced carousel mobile styles */
-  .carousel-mobile-optimized {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-  }
-
-  /* Better mobile image scaling */
-  .mobile-carousel-image {
-    object-fit: contain;
-    object-position: center;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Mobile-optimized text scaling */
-  .mobile-text-scale {
-    font-size: clamp(0.75rem, 2.5vw, 1rem);
-    line-height: 1.4;
-  }
-
-  /* Better mobile button spacing */
-  .mobile-button-stack {
-    gap: 0.75rem;
-  }
-
-  .mobile-button-stack > * {
-    min-height: 44px;
-    font-size: 0.875rem;
-  }
-
-  /* Larger touch targets for mobile audio controls */
-  .volume-slider {
-    height: 12px !important;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-
-  .volume-slider::-webkit-slider-track {
-    height: 12px;
-    border-radius: 6px;
-    background: #4b5563;
-  }
-
-  .volume-slider::-moz-range-track {
-    height: 12px;
-    border-radius: 6px;
-    background: #4b5563;
+  .youtube-hero-subtitle {
+    font-size: 1.5rem;
   }
 }
 
-/* Enhanced mobile carousel responsiveness */
-@media (max-width: 480px) {
-  .carousel-container {
-    padding: 0.5rem;
+@media (min-width: 1280px) {
+  .youtube-hero-title {
+    font-size: 6rem;
   }
 
-  .carousel-controls {
-    gap: 0.25rem;
-  }
-
-  .carousel-controls button {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-  }
-
-  /* Mobile-specific audio indicators */
-  .audio-indicator-mobile {
-    width: 6px;
-    height: 6px;
-  }
-
-  /* Better mobile thumbnail grid */
-  .thumbnail-grid-mobile {
-    gap: 0.25rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .thumbnail-grid-mobile button {
-    min-width: 48px;
-    min-height: 36px;
-  }
-}
-
-/* Improved floating elements positioning */
-@media (max-width: 1024px) {
-  .floating-element {
-    position: relative;
-    transform: none;
-    margin: 1rem auto;
-  }
-}
-
-/* Better form styling for mobile */
-@media (max-width: 640px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .form-input {
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-  }
-
-  .form-button {
-    padding: 14px 20px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-}
-
-/* Enhanced accessibility for mobile */
-@media (prefers-reduced-motion: reduce) {
-  .mobile-animation {
-    animation: none;
-    transition: none;
-  }
-}
-
-/* Better contrast for mobile readability */
-@media (max-width: 768px) {
-  .mobile-text-contrast {
-    color: #1f2937;
-    font-weight: 500;
-  }
-
-  .mobile-link-contrast {
-    color: #059669;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-  }
-}
-
-/* Mobile landscape optimizations */
-@media (max-width: 896px) and (orientation: landscape) {
-  .hero-mobile-landscape {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .carousel-mobile-landscape {
-    max-height: 60vh;
-  }
-}
-
-/* iOS Safari specific fixes */
-@supports (-webkit-touch-callout: none) {
-  .ios-audio-fix audio {
-    width: 100%;
-    height: 40px;
-  }
-
-  .ios-volume-slider {
-    -webkit-appearance: none;
-    height: 8px;
-    border-radius: 4px;
-    background: #d1d5db;
-    outline: none;
-  }
-
-  .ios-volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background: #059669;
-    cursor: pointer;
-    border: 2px solid #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-}
-
-/* Android Chrome specific fixes */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .android-audio-fix {
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
-  .android-volume-control {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
+  .youtube-hero-subtitle {
+    font-size: 1.75rem;
   }
 }
