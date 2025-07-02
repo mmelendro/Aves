@@ -1,7 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, ChevronUp, ExternalLink, Mail, Calendar, MapPin, Mountain, Globe } from "lucide-react"
+import {
+  ChevronDown,
+  ChevronUp,
+  ExternalLink,
+  Mail,
+  Calendar,
+  MapPin,
+  Mountain,
+  Globe,
+  Instagram,
+  Facebook,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -12,84 +23,216 @@ import OptimizedImage from "@/components/optimized-image"
 
 const partners = [
   {
-    id: "proaves",
-    name: "ProAves",
+    id: "fundacion-proaves",
+    name: "Fundación ProAves",
     type: "Conservation Organization",
     location: "Colombia",
     description:
-      "Colombia's leading conservation organization dedicated to protecting birds and their habitats. ProAves manages numerous reserves across the country, offering exceptional birding experiences while conducting vital conservation research and community engagement programs.",
-    specialties: ["Bird Conservation", "Habitat Preservation", "Ecotourism", "Research", "Community Engagement"],
-    website: "https://proaves.org",
+      "Colombia's leading conservation organization dedicated to protecting birds and their habitats. ProAves manages numerous reserves across the country, conducting vital conservation research, habitat protection, and community engagement programs. They are pioneers in bird conservation in Colombia with over 25 years of experience.",
+    specialties: [
+      "Bird Conservation",
+      "Habitat Preservation",
+      "Research",
+      "Community Engagement",
+      "Reserve Management",
+    ],
+    website: "https://proaves.org/",
     contact: "info@proaves.org",
     established: "1998",
     area: "Multiple reserves nationwide",
     elevation: "Sea level to 4,000m",
     highlights: [
-      "El Dorado Bird Reserve - Home to 20+ endemic species",
-      "Reinita Cielo Azul Reserve - Critical habitat protection",
-      "ProAves Ecotours - Sustainable tourism programs",
-      "Scientific Research Opportunities",
-      "Community-based conservation initiatives",
+      "Over 25 years of conservation experience",
+      "Manages 30+ nature reserves",
+      "Protects 78+ endemic bird species",
+      "Community-based conservation programs",
+      "Scientific research and monitoring",
+      "Environmental education initiatives",
     ],
     category: "conservation",
     logo: "/images/partners/proaves-logo.gif",
     tags: ["Endemic Species", "Research", "Community Conservation", "Multiple Reserves"],
   },
   {
-    id: "termales-del-ruiz",
-    name: "Termales del Ruiz",
-    type: "Ecotourism Lodge & Reserve",
-    location: "Manizales, Caldas",
+    id: "proaves-el-dorado-reserve",
+    name: "ProAves El Dorado Reserve",
+    type: "Bird Reserve",
+    location: "Sierra Nevada de Santa Marta",
     description:
-      "A renowned ecotourism destination in the Central Andes, famous for its spectacular hummingbird feeders and pristine paramo ecosystem. Termales del Ruiz offers comfortable lodging, natural hot springs, and world-class birdwatching opportunities in one of Colombia's most scenic locations.",
-    specialties: [
-      "Hummingbird Photography",
-      "Paramo Birding",
-      "Thermal Baths",
-      "Andean Scenery",
-      "High-altitude Species",
-    ],
-    website: "https://termalesdelruiz.com",
-    contact: "info@termalesdelruiz.com",
-    established: "1984",
-    area: "Private reserve in Paramo ecosystem",
-    elevation: "3,400m",
+      "The crown jewel of ProAves reserves, El Dorado is home to over 20 endemic bird species found nowhere else on Earth. Located in the Sierra Nevada de Santa Marta, this reserve offers world-class birding opportunities and comfortable accommodations for researchers and birders alike.",
+    specialties: ["Endemic Birds", "Research Station", "Birding Tours", "Scientific Research", "Photography"],
+    website: "https://proaves.org/el-dorado/",
+    contact: "eldorado@proaves.org",
+    established: "2006",
+    area: "1,200 hectares",
+    elevation: "1,800-2,600m",
     highlights: [
-      "Sword-billed Hummingbird feeding stations",
-      "Buff-winged Starfrontlet photography opportunities",
-      "Natural thermal hot springs",
-      "Andean Condor sightings",
-      "Paramo ecosystem exploration",
-      "High-altitude endemic species",
+      "20+ endemic bird species",
+      "Santa Marta Parakeet breeding site",
+      "Research station facilities",
+      "Comfortable eco-lodge accommodation",
+      "Professional birding guides",
+      "Photography blinds and feeders",
     ],
-    category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=Termales+del+Ruiz",
-    tags: ["Hummingbirds", "Hot Springs", "High Altitude", "Photography"],
+    category: "reserves",
+    logo: "/images/partners/proaves-logo.gif",
+    tags: ["Endemics", "Sierra Nevada", "Research", "Accommodation"],
   },
   {
-    id: "montezuma",
+    id: "montezuma-rainforest-lodge",
     name: "Montezuma Rainforest Lodge",
     type: "Ecolodge",
     location: "El Cairo, Valle del Cauca",
     description:
-      "Nestled in the heart of the Chocó biogeographic region, Montezuma Ecolodge provides exclusive access to some of the most biodiverse habitats on Earth. This family-owned lodge combines comfort with conservation, offering incredible birding and wildlife viewing in pristine rainforest settings.",
+      "Nestled in the heart of the Chocó biogeographic region, Montezuma Rainforest Lodge provides exclusive access to some of the most biodiverse habitats on Earth. This family-owned lodge combines comfort with conservation, offering incredible birding and wildlife viewing in pristine rainforest settings.",
     specialties: ["Chocó Endemics", "Rainforest Birding", "Wildlife Observation", "Hiking", "Night Birding"],
-    website: "https://montezumalodge.com",
-    contact: "info@montezumalodge.com",
+    website: "https://montezumarainforest.com/",
+    contact: "info@montezumarainforest.com",
     established: "2005",
     area: "Private rainforest reserve",
     elevation: "1,300-1,800m",
     highlights: [
-      "Goldringed Tanager - Chocó endemic",
-      "Chocó Toucan sightings",
-      "Spectacled Bear habitat",
-      "Howler Monkey encounters",
-      "Night birding expeditions",
-      "Pristine rainforest trails",
+      "Chocó endemic bird species",
+      "Pristine rainforest habitat",
+      "Professional naturalist guides",
+      "Comfortable eco-lodge facilities",
+      "Night birding opportunities",
+      "Wildlife photography",
     ],
     category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=Montezuma+Lodge",
+    logo: "/placeholder.svg?height=80&width=120&text=Montezuma",
     tags: ["Chocó Endemics", "Rainforest", "Wildlife", "Night Birding"],
+  },
+  {
+    id: "hacienda-el-bosque",
+    name: "Hacienda El Bosque",
+    type: "Eco-Hacienda",
+    location: "Colombia",
+    description:
+      "A traditional Colombian hacienda transformed into an eco-friendly birding destination. Hacienda El Bosque offers authentic cultural experiences combined with excellent birding opportunities in diverse habitats including coffee plantations, secondary forest, and wetlands.",
+    specialties: ["Coffee Plantation Birding", "Cultural Tourism", "Wetland Birds", "Traditional Architecture"],
+    website: "https://haciendaelbosque.com/",
+    contact: "info@haciendaelbosque.com",
+    established: "2010",
+    area: "Traditional hacienda with diverse habitats",
+    elevation: "1,200-1,600m",
+    highlights: [
+      "Coffee plantation birding",
+      "Traditional Colombian architecture",
+      "Wetland bird species",
+      "Cultural immersion experiences",
+      "Sustainable agriculture practices",
+      "Local community involvement",
+    ],
+    category: "lodges",
+    logo: "/placeholder.svg?height=80&width=120&text=El+Bosque",
+    tags: ["Coffee Plantation", "Cultural", "Wetlands", "Sustainable"],
+  },
+  {
+    id: "fundacion-selva",
+    name: "Fundación Selva",
+    type: "Conservation Foundation",
+    location: "Colombia",
+    description:
+      "Dedicated to the conservation of Colombia's tropical forests and their biodiversity. Fundación Selva works on habitat protection, research, and community-based conservation programs, with a special focus on forest bird species and their ecosystems.",
+    specialties: ["Forest Conservation", "Biodiversity Research", "Community Programs", "Habitat Protection"],
+    website: "https://selva.org.co/",
+    contact: "info@selva.org.co",
+    established: "2008",
+    area: "Multiple forest conservation projects",
+    elevation: "Varies by project",
+    highlights: [
+      "Tropical forest conservation",
+      "Biodiversity research programs",
+      "Community-based initiatives",
+      "Habitat restoration projects",
+      "Environmental education",
+      "Scientific publications",
+    ],
+    category: "conservation",
+    logo: "/placeholder.svg?height=80&width=120&text=Selva",
+    tags: ["Forest Conservation", "Research", "Community", "Restoration"],
+  },
+  {
+    id: "refugio-la-esmeralda",
+    name: "Refugio La Esmeralda",
+    type: "Mountain Refuge",
+    location: "Colombian Andes",
+    description:
+      "A high-altitude mountain refuge offering access to Andean bird species and spectacular mountain scenery. Refugio La Esmeralda provides rustic but comfortable accommodation for birders seeking high-elevation species in pristine montane environments.",
+    specialties: ["High-altitude Birding", "Andean Species", "Mountain Hiking", "Photography"],
+    website: "https://www.instagram.com/refugiolaesmeraldaoficial/",
+    socialMedia: {
+      instagram: "https://www.instagram.com/refugiolaesmeraldaoficial/",
+    },
+    contact: "Contact via Instagram",
+    established: "2012",
+    area: "High-altitude mountain refuge",
+    elevation: "3,200-3,800m",
+    highlights: [
+      "High-altitude bird species",
+      "Spectacular mountain views",
+      "Andean endemic species",
+      "Photography opportunities",
+      "Hiking trails",
+      "Rustic mountain accommodation",
+    ],
+    category: "lodges",
+    logo: "/placeholder.svg?height=80&width=120&text=La+Esmeralda",
+    tags: ["High Altitude", "Andean Species", "Photography", "Hiking"],
+  },
+  {
+    id: "finca-suasie",
+    name: "Finca Suasie",
+    type: "Private Farm Reserve",
+    location: "Colombia",
+    description:
+      "A private farm dedicated to sustainable agriculture and bird conservation. Finca Suasie demonstrates how agricultural practices can coexist with wildlife conservation, offering birding opportunities in a working farm environment with diverse habitats.",
+    specialties: ["Sustainable Agriculture", "Farm Birding", "Habitat Diversity", "Conservation Education"],
+    website: "https://www.instagram.com/finca_suasie/",
+    socialMedia: {
+      instagram: "https://www.instagram.com/finca_suasie/",
+    },
+    contact: "Contact via Instagram",
+    established: "2015",
+    area: "Private farm with conservation areas",
+    elevation: "1,000-1,400m",
+    highlights: [
+      "Sustainable farming practices",
+      "Diverse bird habitats",
+      "Agricultural birding",
+      "Conservation education",
+      "Habitat restoration",
+      "Community involvement",
+    ],
+    category: "reserves",
+    logo: "/placeholder.svg?height=80&width=120&text=Suasie",
+    tags: ["Sustainable Agriculture", "Farm Birding", "Education", "Restoration"],
+  },
+  {
+    id: "termales-del-ruiz",
+    name: "Termales del Ruiz",
+    type: "Thermal Resort & Reserve",
+    location: "Manizales, Caldas",
+    description:
+      "A renowned ecotourism destination in the Central Andes, famous for its spectacular hummingbird feeders and pristine paramo ecosystem. Termales del Ruiz offers comfortable lodging, natural hot springs, and world-class birdwatching opportunities in one of Colombia's most scenic locations.",
+    specialties: ["Hummingbird Photography", "Paramo Birding", "Thermal Baths", "High-altitude Species"],
+    website: "https://termalesdelruiz.com/",
+    contact: "info@termalesdelruiz.com",
+    established: "1984",
+    area: "Paramo ecosystem reserve",
+    elevation: "3,400m",
+    highlights: [
+      "World-famous hummingbird feeders",
+      "Natural thermal hot springs",
+      "Paramo ecosystem birding",
+      "High-altitude species",
+      "Photography opportunities",
+      "Comfortable accommodation",
+    ],
+    category: "lodges",
+    logo: "/placeholder.svg?height=80&width=120&text=Termales",
+    tags: ["Hummingbirds", "Hot Springs", "Paramo", "Photography"],
   },
   {
     id: "reserva-rio-blanco",
@@ -98,108 +241,101 @@ const partners = [
     location: "Manizales, Caldas",
     description:
       "A pristine cloud forest reserve in the Central Andes, home to spectacular endemic birds including the famous Chestnut-crowned Antpitta and Black-billed Mountain-Toucan. This protected area offers exceptional birding opportunities in montane ecosystems with well-maintained trails and research facilities.",
-    specialties: [
-      "Chestnut-crowned Antpitta",
-      "Black-billed Mountain-Toucan",
-      "Andean Motmot",
-      "Cloud forest species",
-      "Endemic Photography",
-    ],
-    website: "https://reservarioblanco.com",
-    contact: "info@reservarioblanco.com",
+    specialties: ["Cloud Forest Birds", "Antpitta Feeding", "Mountain-Toucan", "Research Station"],
+    website: "https://reservarioblanco.co/",
+    contact: "info@reservarioblanco.co",
     established: "1985",
     area: "4,932 hectares",
     elevation: "2,150-2,800m",
     highlights: [
       "Chestnut-crowned Antpitta feeding station",
-      "Black-billed Mountain-Toucan photography",
-      "Guided cloud forest walks",
+      "Black-billed Mountain-Toucan",
+      "Cloud forest ecosystem",
       "Research station facilities",
-      "Conservation education programs",
-      "Endemic bird photography opportunities",
+      "Well-maintained trails",
+      "Endemic bird photography",
     ],
     category: "reserves",
     logo: "/placeholder.svg?height=80&width=120&text=Rio+Blanco",
     tags: ["Cloud Forest", "Antpitta", "Mountain-Toucan", "Research"],
   },
   {
-    id: "selva-lodge",
-    name: "Selva Lodge Eco-Resort",
-    type: "Eco-Resort",
-    location: "Amazon Basin, Colombia",
+    id: "reserva-sutu",
+    name: "Reserva Sutu",
+    type: "Private Nature Reserve",
+    location: "Colombia",
     description:
-      "Located deep in the Colombian Amazon, Selva Lodge offers an authentic rainforest experience with access to incredible biodiversity. The lodge specializes in lowland rainforest birding, with expert guides and comfortable accommodations in one of the world's most biodiverse regions.",
-    specialties: ["Amazon Birding", "Lowland Rainforest", "Canopy Birding", "River Expeditions", "Indigenous Culture"],
-    website: "https://selvalodge.com",
-    contact: "reservas@selvalodge.com",
-    established: "2010",
-    area: "Amazon rainforest concession",
-    elevation: "200-400m",
+      "A private nature reserve dedicated to bird conservation and sustainable ecotourism. Reserva Sutu offers pristine habitats and excellent birding opportunities while supporting local conservation efforts and community development programs.",
+    specialties: ["Private Reserve", "Conservation", "Ecotourism", "Community Development"],
+    website: "https://www.facebook.com/reservasutu/",
+    socialMedia: {
+      facebook: "https://www.facebook.com/reservasutu/",
+      instagram: "https://www.instagram.com/reservasutu/",
+    },
+    contact: "Contact via social media",
+    established: "2018",
+    area: "Private nature reserve",
+    elevation: "1,500-2,200m",
     highlights: [
-      "Harpy Eagle territory",
-      "Canopy tower birding",
-      "River birding expeditions",
-      "Indigenous community visits",
-      "Night jungle walks",
-      "Over 400 bird species recorded",
+      "Private conservation area",
+      "Sustainable ecotourism",
+      "Community development",
+      "Bird conservation programs",
+      "Habitat protection",
+      "Environmental education",
     ],
-    category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=Selva+Lodge",
-    tags: ["Amazon", "Harpy Eagle", "Canopy", "Indigenous Culture"],
+    category: "reserves",
+    logo: "/placeholder.svg?height=80&width=120&text=Sutu",
+    tags: ["Private Reserve", "Conservation", "Community", "Ecotourism"],
   },
   {
-    id: "fundacion-yubarta",
-    name: "Fundación Yubarta",
-    type: "Marine Conservation Organization",
-    location: "Pacific Coast, Colombia",
+    id: "la-esmeralda",
+    name: "La Esmeralda",
+    type: "Eco-Lodge",
+    location: "Colombian Cloud Forest",
     description:
-      "Dedicated to the conservation of marine ecosystems and seabirds along Colombia's Pacific coast. Fundación Yubarta conducts research on humpback whales and seabirds while promoting sustainable coastal tourism and community-based conservation programs.",
-    specialties: [
-      "Seabird Conservation",
-      "Marine Ecosystems",
-      "Whale Research",
-      "Coastal Birding",
-      "Community Programs",
-    ],
-    website: "https://yubarta.org",
-    contact: "info@yubarta.org",
-    established: "1999",
-    area: "Pacific coastal waters",
-    elevation: "Sea level",
+      "An eco-lodge nestled in Colombia's cloud forest, offering intimate birding experiences in one of the world's most biodiverse ecosystems. La Esmeralda provides comfortable accommodation and expert guiding services for serious birders and nature enthusiasts.",
+    specialties: ["Cloud Forest Birding", "Intimate Groups", "Expert Guides", "Eco-Lodge"],
+    website: "https://www.instagram.com/refugiolaesmeraldaoficial/",
+    socialMedia: {
+      instagram: "https://www.instagram.com/refugiolaesmeraldaoficial/",
+    },
+    contact: "Contact via Instagram",
+    established: "2010",
+    area: "Cloud forest eco-lodge",
+    elevation: "2,000-2,600m",
     highlights: [
-      "Seabird research programs",
-      "Humpback whale migration studies",
-      "Coastal birding expeditions",
-      "Community conservation training",
-      "Marine protected area management",
-      "Pelagic birding opportunities",
+      "Cloud forest ecosystem",
+      "Intimate birding groups",
+      "Expert local guides",
+      "Comfortable eco-lodge",
+      "Endemic species access",
+      "Photography opportunities",
     ],
-    category: "conservation",
-    logo: "/placeholder.svg?height=80&width=120&text=Yubarta",
-    tags: ["Seabirds", "Marine Conservation", "Whales", "Pacific Coast"],
+    category: "lodges",
+    logo: "/placeholder.svg?height=80&width=120&text=La+Esmeralda",
+    tags: ["Cloud Forest", "Intimate Groups", "Expert Guides", "Endemic Species"],
   },
 ]
 
 const categories = {
   conservation: {
     title: "Conservation Organizations",
-    description:
-      "Leading organizations dedicated to bird conservation, research, and habitat protection across Colombia",
+    description: "Leading foundations and organizations dedicated to bird conservation and habitat protection",
     icon: "🦅",
     color: "from-emerald-50 to-green-50",
     hoverColor: "hover:from-emerald-100 hover:to-green-100",
   },
   lodges: {
     title: "Ecolodges & Accommodations",
-    description:
-      "Premium lodges and eco-resorts offering exceptional birding experiences with comfortable accommodations",
+    description: "Premium lodges and eco-resorts offering exceptional birding experiences with comfortable stays",
     icon: "🏨",
     color: "from-blue-50 to-cyan-50",
     hoverColor: "hover:from-blue-100 hover:to-cyan-100",
   },
   reserves: {
     title: "Nature Reserves & Protected Areas",
-    description: "Protected areas and reserves providing access to pristine habitats and endemic species",
+    description: "Protected areas and private reserves providing access to pristine habitats and endemic species",
     icon: "🌲",
     color: "from-green-50 to-emerald-50",
     hoverColor: "hover:from-green-100 hover:to-emerald-100",
@@ -207,8 +343,22 @@ const categories = {
 }
 
 const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case "instagram":
+        return <Instagram className="h-3 w-3" />
+      case "facebook":
+        return <Facebook className="h-3 w-3" />
+      default:
+        return <ExternalLink className="h-3 w-3" />
+    }
+  }
+
   return (
-    <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
+    <Card
+      id={partner.id}
+      className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-md scroll-mt-24"
+    >
       <CardHeader className="pb-3">
         <div className="flex items-start gap-4 mb-3">
           <div className="flex-shrink-0">
@@ -221,7 +371,11 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
             />
           </div>
           <div className="flex-1 min-w-0">
-            <CardTitle className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">{partner.name}</CardTitle>
+            <CardTitle className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
+              <a href={`#${partner.id}`} className="hover:text-emerald-600 transition-colors">
+                {partner.name}
+              </a>
+            </CardTitle>
             <CardDescription className="text-sm text-gray-600 mb-2">
               <div className="flex items-center gap-1 mb-1">
                 <MapPin className="h-3 w-3 flex-shrink-0" />
@@ -294,15 +448,33 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
             <ExternalLink className="h-3 w-3 mr-1" />
             Website
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1 h-8 text-xs bg-transparent"
-            onClick={() => window.open(`mailto:${partner.contact}`, "_blank")}
-          >
-            <Mail className="h-3 w-3 mr-1" />
-            Contact
-          </Button>
+          {partner.socialMedia && (
+            <div className="flex gap-1">
+              {Object.entries(partner.socialMedia).map(([platform, url]) => (
+                <Button
+                  key={platform}
+                  variant="outline"
+                  size="sm"
+                  className="h-8 w-8 p-0 bg-transparent"
+                  onClick={() => window.open(url, "_blank")}
+                  title={`Visit ${platform}`}
+                >
+                  {getSocialIcon(platform)}
+                </Button>
+              ))}
+            </div>
+          )}
+          {!partner.socialMedia && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1 h-8 text-xs bg-transparent"
+              onClick={() => window.open(`mailto:${partner.contact}`, "_blank")}
+            >
+              <Mail className="h-3 w-3 mr-1" />
+              Contact
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>
@@ -323,7 +495,7 @@ const CollapsibleSection = ({
   onToggle: () => void
 }) => {
   return (
-    <div id={category} className="scroll-mt-20">
+    <div id={`${category}-section`} className="scroll-mt-20">
       <div
         className={`flex items-center justify-between p-4 bg-gradient-to-r ${categoryData.color} rounded-lg cursor-pointer ${categoryData.hoverColor} transition-all duration-200 border border-gray-200`}
         onClick={onToggle}
@@ -357,8 +529,8 @@ const CollapsibleSection = ({
 const PartnersPage = () => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     conservation: true,
-    lodges: false,
-    reserves: false,
+    lodges: true,
+    reserves: true,
   })
 
   const toggleSection = (category: string) => {
@@ -388,7 +560,7 @@ const PartnersPage = () => {
     <div className="min-h-screen bg-gray-50">
       <NavigationHeader currentPage="/about/partners" />
 
-      {/* Hero Section - Condensed */}
+      {/* Hero Section */}
       <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 text-white">
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
@@ -419,7 +591,7 @@ const PartnersPage = () => {
         </div>
       </div>
 
-      {/* Quick Navigation - Condensed */}
+      {/* Quick Navigation */}
       <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
         <div className="container mx-auto px-4 py-3">
           <div className="flex flex-wrap justify-center gap-2">
@@ -429,7 +601,7 @@ const PartnersPage = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => {
-                  document.getElementById(key)?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById(`${key}-section`)?.scrollIntoView({ behavior: "smooth" })
                   if (!openSections[key]) {
                     toggleSection(key)
                   }
@@ -445,7 +617,7 @@ const PartnersPage = () => {
         </div>
       </div>
 
-      {/* Main Content - Condensed Spacing */}
+      {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto space-y-6">
           {Object.entries(categories).map(([categoryKey, categoryData]) => {
@@ -463,7 +635,7 @@ const PartnersPage = () => {
           })}
         </div>
 
-        {/* Partnership CTA - Condensed */}
+        {/* Partnership CTA */}
         <div className="max-w-4xl mx-auto mt-12">
           <Card className="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
             <CardHeader className="pb-3">
