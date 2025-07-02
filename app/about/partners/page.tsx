@@ -108,7 +108,7 @@ const partners = [
       "Wildlife photography",
     ],
     category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=Montezuma",
+    logo: "/images/partners/montezuma.webp",
     tags: ["Chocó Endemics", "Rainforest", "Wildlife", "Night Birding"],
   },
   {
@@ -346,13 +346,19 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
     >
       <CardHeader className="pb-3">
         <div className="flex items-start gap-4 mb-3">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center justify-center">
             <OptimizedImage
               src={partner.logo}
               alt={`${partner.name} logo`}
-              width={80}
-              height={60}
-              className="w-20 h-15 object-contain rounded-lg bg-white p-2 border"
+              width={100}
+              height={75}
+              className="w-24 h-18 object-contain rounded-lg bg-white p-3 border shadow-sm"
+              style={{
+                maxWidth: "96px",
+                maxHeight: "72px",
+                minWidth: "96px",
+                minHeight: "72px",
+              }}
             />
           </div>
           <div className="flex-1 min-w-0">
@@ -378,9 +384,9 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
 
         {/* Parent Organization or Private Reserve Badge */}
         {partner.parentOrganization && (
-          <div className="mb-3 p-2 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
             <div className="flex items-center gap-2 text-sm text-blue-800">
-              <Building2 className="h-3 w-3" />
+              <Building2 className="h-4 w-4 flex-shrink-0" />
               <span className="font-medium">Owned by:</span>
               <a
                 href={partner.parentOrganization.website}
@@ -396,7 +402,7 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
 
         {partner.isPrivateReserve && (
           <div className="mb-3">
-            <Badge variant="outline" className="bg-amber-50 text-amber-800 border-amber-200">
+            <Badge variant="outline" className="bg-amber-50 text-amber-800 border-amber-200 font-medium">
               Private Reserve
             </Badge>
           </div>
@@ -405,12 +411,12 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
         <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">{partner.description}</p>
       </CardHeader>
 
-      <CardContent className="pt-0 space-y-3">
+      <CardContent className="pt-0 space-y-4">
         {/* Tags */}
         <div>
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {partner.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+              <Badge key={index} variant="secondary" className="text-xs px-2 py-1 font-medium">
                 {tag}
               </Badge>
             ))}
@@ -420,12 +426,12 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
         {/* Location Details */}
         <div className="grid grid-cols-1 gap-2 text-xs bg-gray-50 p-3 rounded-lg">
           <div className="flex items-center gap-2">
-            <Globe className="h-3 w-3 text-gray-500" />
+            <Globe className="h-3 w-3 text-gray-500 flex-shrink-0" />
             <span className="font-medium text-gray-700">Area:</span>
             <span className="text-gray-600 truncate">{partner.area}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Mountain className="h-3 w-3 text-gray-500" />
+            <Mountain className="h-3 w-3 text-gray-500 flex-shrink-0" />
             <span className="font-medium text-gray-700">Elevation:</span>
             <span className="text-gray-600">{partner.elevation}</span>
           </div>
@@ -434,10 +440,10 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
         {/* Key Highlights */}
         <div>
           <h4 className="font-semibold text-gray-900 mb-2 text-sm">Key Highlights</h4>
-          <ul className="space-y-1 max-h-24 overflow-y-auto">
+          <ul className="space-y-1.5 max-h-28 overflow-y-auto">
             {partner.highlights.slice(0, 4).map((highlight, index) => (
               <li key={index} className="text-xs text-gray-600 flex items-start gap-2">
-                <span className="text-emerald-500 mt-0.5 flex-shrink-0">•</span>
+                <span className="text-emerald-500 mt-0.5 flex-shrink-0 font-bold">•</span>
                 <span className="line-clamp-1">{highlight}</span>
               </li>
             ))}
@@ -455,21 +461,21 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 min-w-0 h-8 text-xs bg-transparent"
+              className="flex-1 min-w-0 h-9 text-xs bg-transparent hover:bg-gray-50 font-medium"
               onClick={() => window.open(partner.website, "_blank")}
             >
-              <ExternalLink className="h-3 w-3 mr-1" />
+              <ExternalLink className="h-3 w-3 mr-1.5" />
               Website
             </Button>
           )}
           {partner.socialMedia && (
-            <div className="flex gap-1">
+            <div className="flex gap-1.5">
               {Object.entries(partner.socialMedia).map(([platform, url]) => (
                 <Button
                   key={platform}
                   variant="outline"
                   size="sm"
-                  className="h-8 w-8 p-0 bg-transparent"
+                  className="h-9 w-9 p-0 bg-transparent hover:bg-gray-50"
                   onClick={() => window.open(url, "_blank")}
                   title={`Visit ${platform}`}
                 >
@@ -500,18 +506,18 @@ const CollapsibleSection = ({
   return (
     <div id={`${category}-section`} className="scroll-mt-20">
       <div
-        className={`flex items-center justify-between p-4 bg-gradient-to-r ${categoryData.color} rounded-lg cursor-pointer ${categoryData.hoverColor} transition-all duration-200 border border-gray-200`}
+        className={`flex items-center justify-between p-4 bg-gradient-to-r ${categoryData.color} rounded-lg cursor-pointer ${categoryData.hoverColor} transition-all duration-200 border border-gray-200 shadow-sm`}
         onClick={onToggle}
       >
         <div className="flex items-center gap-3">
-          <span className="text-xl">{categoryData.icon}</span>
+          <span className="text-2xl">{categoryData.icon}</span>
           <div>
             <h2 className="text-xl font-bold text-gray-900">{categoryData.title}</h2>
             <p className="text-gray-600 text-sm mt-0.5 hidden sm:block">{categoryData.description}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="outline" className="bg-white text-xs">
+        <div className="flex items-center gap-3">
+          <Badge variant="outline" className="bg-white text-xs font-medium px-2 py-1">
             {categoryPartners.length}
           </Badge>
           {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
@@ -519,7 +525,7 @@ const CollapsibleSection = ({
       </div>
 
       {isOpen && (
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {categoryPartners.map((partner) => (
             <PartnerCard key={partner.id} partner={partner} />
           ))}
@@ -565,29 +571,29 @@ const PartnersPage = () => {
 
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 text-white">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Our Valued Partners</h1>
-            <p className="text-lg md:text-xl text-emerald-100 mb-6 leading-relaxed">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Valued Partners</h1>
+            <p className="text-xl md:text-2xl text-emerald-100 mb-8 leading-relaxed">
               Collaborating with Colombia's finest conservation organizations, ecolodges, and nature reserves to deliver
               exceptional birding experiences while supporting local communities and conservation efforts.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-4">
               <Button
                 onClick={expandAll}
                 variant="secondary"
-                size="sm"
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+                size="lg"
+                className="bg-white/10 hover:bg-white/20 text-white border-white/20 font-medium"
               >
-                Expand All
+                Expand All Sections
               </Button>
               <Button
                 onClick={collapseAll}
                 variant="secondary"
-                size="sm"
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+                size="lg"
+                className="bg-white/10 hover:bg-white/20 text-white border-white/20 font-medium"
               >
-                Collapse All
+                Collapse All Sections
               </Button>
             </div>
           </div>
@@ -596,8 +602,8 @@ const PartnersPage = () => {
 
       {/* Quick Navigation */}
       <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex flex-wrap justify-center gap-2">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-wrap justify-center gap-3">
             {Object.entries(categories).map(([key, category]) => (
               <Button
                 key={key}
@@ -609,9 +615,9 @@ const PartnersPage = () => {
                     toggleSection(key)
                   }
                 }}
-                className="flex items-center gap-1 text-xs h-8"
+                className="flex items-center gap-2 text-sm h-10 px-4 font-medium hover:bg-gray-100"
               >
-                <span>{category.icon}</span>
+                <span className="text-lg">{category.icon}</span>
                 <span className="hidden sm:inline">{category.title}</span>
                 <span className="sm:hidden">{category.title.split(" ")[0]}</span>
               </Button>
@@ -621,8 +627,8 @@ const PartnersPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-7xl mx-auto space-y-6">
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto space-y-8">
           {Object.entries(categories).map(([categoryKey, categoryData]) => {
             const categoryPartners = partners.filter((p) => p.category === categoryKey)
             return (
@@ -636,36 +642,6 @@ const PartnersPage = () => {
               />
             )
           })}
-        </div>
-
-        {/* Partnership Information */}
-        <div className="max-w-4xl mx-auto mt-12">
-          <Card className="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-xl text-center text-gray-900">Partnership Network</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <p className="text-gray-700 text-center mb-4 text-sm leading-relaxed">
-                Our carefully selected partners represent the best of Colombia's birding destinations, conservation
-                efforts, and sustainable tourism initiatives. Each partnership is built on shared values of
-                conservation, community engagement, and exceptional birding experiences.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div className="p-3 bg-white rounded-lg">
-                  <div className="text-2xl font-bold text-emerald-600">10+</div>
-                  <div className="text-sm text-gray-600">Partner Organizations</div>
-                </div>
-                <div className="p-3 bg-white rounded-lg">
-                  <div className="text-2xl font-bold text-emerald-600">25+</div>
-                  <div className="text-sm text-gray-600">Years Combined Experience</div>
-                </div>
-                <div className="p-3 bg-white rounded-lg">
-                  <div className="text-2xl font-bold text-emerald-600">100+</div>
-                  <div className="text-sm text-gray-600">Endemic Species Protected</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
 
