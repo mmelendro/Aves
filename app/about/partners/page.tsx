@@ -5,13 +5,13 @@ import {
   ChevronDown,
   ChevronUp,
   ExternalLink,
-  Mail,
   Calendar,
   MapPin,
   Mountain,
   Globe,
   Instagram,
   Facebook,
+  Building2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -37,7 +37,10 @@ const partners = [
       "Reserve Management",
     ],
     website: "https://proaves.org/",
-    contact: "info@proaves.org",
+    socialMedia: {
+      facebook: "https://www.facebook.com/ProAves",
+      instagram: "https://www.instagram.com/proaves_colombia/",
+    },
     established: "1998",
     area: "Multiple reserves nationwide",
     elevation: "Sea level to 4,000m",
@@ -50,7 +53,7 @@ const partners = [
       "Environmental education initiatives",
     ],
     category: "conservation",
-    logo: "/images/partners/proaves-logo.gif",
+    logo: "/images/partners/proaves.gif",
     tags: ["Endemic Species", "Research", "Community Conservation", "Multiple Reserves"],
   },
   {
@@ -62,7 +65,10 @@ const partners = [
       "The crown jewel of ProAves reserves, El Dorado is home to over 20 endemic bird species found nowhere else on Earth. Located in the Sierra Nevada de Santa Marta, this reserve offers world-class birding opportunities and comfortable accommodations for researchers and birders alike.",
     specialties: ["Endemic Birds", "Research Station", "Birding Tours", "Scientific Research", "Photography"],
     website: "https://proaves.org/el-dorado/",
-    contact: "eldorado@proaves.org",
+    parentOrganization: {
+      name: "Fundación ProAves",
+      website: "https://proaves.org/",
+    },
     established: "2006",
     area: "1,200 hectares",
     elevation: "1,800-2,600m",
@@ -75,7 +81,7 @@ const partners = [
       "Photography blinds and feeders",
     ],
     category: "reserves",
-    logo: "/images/partners/proaves-logo.gif",
+    logo: "/images/partners/el-dorado.png",
     tags: ["Endemics", "Sierra Nevada", "Research", "Accommodation"],
   },
   {
@@ -87,7 +93,9 @@ const partners = [
       "Nestled in the heart of the Chocó biogeographic region, Montezuma Rainforest Lodge provides exclusive access to some of the most biodiverse habitats on Earth. This family-owned lodge combines comfort with conservation, offering incredible birding and wildlife viewing in pristine rainforest settings.",
     specialties: ["Chocó Endemics", "Rainforest Birding", "Wildlife Observation", "Hiking", "Night Birding"],
     website: "https://montezumarainforest.com/",
-    contact: "info@montezumarainforest.com",
+    socialMedia: {
+      instagram: "https://www.instagram.com/montezumarainforest/",
+    },
     established: "2005",
     area: "Private rainforest reserve",
     elevation: "1,300-1,800m",
@@ -112,7 +120,6 @@ const partners = [
       "A traditional Colombian hacienda transformed into an eco-friendly birding destination. Hacienda El Bosque offers authentic cultural experiences combined with excellent birding opportunities in diverse habitats including coffee plantations, secondary forest, and wetlands.",
     specialties: ["Coffee Plantation Birding", "Cultural Tourism", "Wetland Birds", "Traditional Architecture"],
     website: "https://haciendaelbosque.com/",
-    contact: "info@haciendaelbosque.com",
     established: "2010",
     area: "Traditional hacienda with diverse habitats",
     elevation: "1,200-1,600m",
@@ -125,7 +132,7 @@ const partners = [
       "Local community involvement",
     ],
     category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=El+Bosque",
+    logo: "/images/partners/hacienda-el-bosque.png",
     tags: ["Coffee Plantation", "Cultural", "Wetlands", "Sustainable"],
   },
   {
@@ -137,7 +144,10 @@ const partners = [
       "Dedicated to the conservation of Colombia's tropical forests and their biodiversity. Fundación Selva works on habitat protection, research, and community-based conservation programs, with a special focus on forest bird species and their ecosystems.",
     specialties: ["Forest Conservation", "Biodiversity Research", "Community Programs", "Habitat Protection"],
     website: "https://selva.org.co/",
-    contact: "info@selva.org.co",
+    socialMedia: {
+      facebook: "https://www.facebook.com/FundacionSelva",
+      instagram: "https://www.instagram.com/fundacion_selva/",
+    },
     established: "2008",
     area: "Multiple forest conservation projects",
     elevation: "Varies by project",
@@ -150,7 +160,7 @@ const partners = [
       "Scientific publications",
     ],
     category: "conservation",
-    logo: "/placeholder.svg?height=80&width=120&text=Selva",
+    logo: "/images/partners/logo-selva.png",
     tags: ["Forest Conservation", "Research", "Community", "Restoration"],
   },
   {
@@ -161,11 +171,14 @@ const partners = [
     description:
       "A high-altitude mountain refuge offering access to Andean bird species and spectacular mountain scenery. Refugio La Esmeralda provides rustic but comfortable accommodation for birders seeking high-elevation species in pristine montane environments.",
     specialties: ["High-altitude Birding", "Andean Species", "Mountain Hiking", "Photography"],
-    website: "https://www.instagram.com/refugiolaesmeraldaoficial/",
+    website: "https://www.chec.com.co/",
     socialMedia: {
       instagram: "https://www.instagram.com/refugiolaesmeraldaoficial/",
     },
-    contact: "Contact via Instagram",
+    parentOrganization: {
+      name: "CHEC (Central Hidroeléctrica de Caldas)",
+      website: "https://www.chec.com.co/",
+    },
     established: "2012",
     area: "High-altitude mountain refuge",
     elevation: "3,200-3,800m",
@@ -178,22 +191,21 @@ const partners = [
       "Rustic mountain accommodation",
     ],
     category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=La+Esmeralda",
+    logo: "/images/partners/refugio-la-esmeralda.png",
     tags: ["High Altitude", "Andean Species", "Photography", "Hiking"],
   },
   {
     id: "finca-suasie",
     name: "Finca Suasie",
-    type: "Private Farm Reserve",
+    type: "Private Reserve",
     location: "Colombia",
     description:
       "A private farm dedicated to sustainable agriculture and bird conservation. Finca Suasie demonstrates how agricultural practices can coexist with wildlife conservation, offering birding opportunities in a working farm environment with diverse habitats.",
     specialties: ["Sustainable Agriculture", "Farm Birding", "Habitat Diversity", "Conservation Education"],
-    website: "https://www.instagram.com/finca_suasie/",
     socialMedia: {
       instagram: "https://www.instagram.com/finca_suasie/",
     },
-    contact: "Contact via Instagram",
+    isPrivateReserve: true,
     established: "2015",
     area: "Private farm with conservation areas",
     elevation: "1,000-1,400m",
@@ -206,8 +218,8 @@ const partners = [
       "Community involvement",
     ],
     category: "reserves",
-    logo: "/placeholder.svg?height=80&width=120&text=Suasie",
-    tags: ["Sustainable Agriculture", "Farm Birding", "Education", "Restoration"],
+    logo: "/images/partners/finca-suasie.png",
+    tags: ["Private Reserve", "Sustainable Agriculture", "Farm Birding", "Education"],
   },
   {
     id: "termales-del-ruiz",
@@ -218,7 +230,10 @@ const partners = [
       "A renowned ecotourism destination in the Central Andes, famous for its spectacular hummingbird feeders and pristine paramo ecosystem. Termales del Ruiz offers comfortable lodging, natural hot springs, and world-class birdwatching opportunities in one of Colombia's most scenic locations.",
     specialties: ["Hummingbird Photography", "Paramo Birding", "Thermal Baths", "High-altitude Species"],
     website: "https://termalesdelruiz.com/",
-    contact: "info@termalesdelruiz.com",
+    socialMedia: {
+      facebook: "https://www.facebook.com/TermalesdelRuiz",
+      instagram: "https://www.instagram.com/termalesdelruiz/",
+    },
     established: "1984",
     area: "Paramo ecosystem reserve",
     elevation: "3,400m",
@@ -231,7 +246,7 @@ const partners = [
       "Comfortable accommodation",
     ],
     category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=Termales",
+    logo: "/images/partners/termales-del-ruiz.png",
     tags: ["Hummingbirds", "Hot Springs", "Paramo", "Photography"],
   },
   {
@@ -243,7 +258,6 @@ const partners = [
       "A pristine cloud forest reserve in the Central Andes, home to spectacular endemic birds including the famous Chestnut-crowned Antpitta and Black-billed Mountain-Toucan. This protected area offers exceptional birding opportunities in montane ecosystems with well-maintained trails and research facilities.",
     specialties: ["Cloud Forest Birds", "Antpitta Feeding", "Mountain-Toucan", "Research Station"],
     website: "https://reservarioblanco.co/",
-    contact: "info@reservarioblanco.co",
     established: "1985",
     area: "4,932 hectares",
     elevation: "2,150-2,800m",
@@ -267,12 +281,11 @@ const partners = [
     description:
       "A private nature reserve dedicated to bird conservation and sustainable ecotourism. Reserva Sutu offers pristine habitats and excellent birding opportunities while supporting local conservation efforts and community development programs.",
     specialties: ["Private Reserve", "Conservation", "Ecotourism", "Community Development"],
-    website: "https://www.facebook.com/reservasutu/",
     socialMedia: {
       facebook: "https://www.facebook.com/reservasutu/",
       instagram: "https://www.instagram.com/reservasutu/",
     },
-    contact: "Contact via social media",
+    isPrivateReserve: true,
     established: "2018",
     area: "Private nature reserve",
     elevation: "1,500-2,200m",
@@ -287,34 +300,6 @@ const partners = [
     category: "reserves",
     logo: "/placeholder.svg?height=80&width=120&text=Sutu",
     tags: ["Private Reserve", "Conservation", "Community", "Ecotourism"],
-  },
-  {
-    id: "la-esmeralda",
-    name: "La Esmeralda",
-    type: "Eco-Lodge",
-    location: "Colombian Cloud Forest",
-    description:
-      "An eco-lodge nestled in Colombia's cloud forest, offering intimate birding experiences in one of the world's most biodiverse ecosystems. La Esmeralda provides comfortable accommodation and expert guiding services for serious birders and nature enthusiasts.",
-    specialties: ["Cloud Forest Birding", "Intimate Groups", "Expert Guides", "Eco-Lodge"],
-    website: "https://www.instagram.com/refugiolaesmeraldaoficial/",
-    socialMedia: {
-      instagram: "https://www.instagram.com/refugiolaesmeraldaoficial/",
-    },
-    contact: "Contact via Instagram",
-    established: "2010",
-    area: "Cloud forest eco-lodge",
-    elevation: "2,000-2,600m",
-    highlights: [
-      "Cloud forest ecosystem",
-      "Intimate birding groups",
-      "Expert local guides",
-      "Comfortable eco-lodge",
-      "Endemic species access",
-      "Photography opportunities",
-    ],
-    category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=La+Esmeralda",
-    tags: ["Cloud Forest", "Intimate Groups", "Expert Guides", "Endemic Species"],
   },
 ]
 
@@ -390,6 +375,33 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
             </CardDescription>
           </div>
         </div>
+
+        {/* Parent Organization or Private Reserve Badge */}
+        {partner.parentOrganization && (
+          <div className="mb-3 p-2 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="flex items-center gap-2 text-sm text-blue-800">
+              <Building2 className="h-3 w-3" />
+              <span className="font-medium">Owned by:</span>
+              <a
+                href={partner.parentOrganization.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline font-semibold"
+              >
+                {partner.parentOrganization.name}
+              </a>
+            </div>
+          </div>
+        )}
+
+        {partner.isPrivateReserve && (
+          <div className="mb-3">
+            <Badge variant="outline" className="bg-amber-50 text-amber-800 border-amber-200">
+              Private Reserve
+            </Badge>
+          </div>
+        )}
+
         <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">{partner.description}</p>
       </CardHeader>
 
@@ -437,17 +449,19 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
 
         <Separator />
 
-        {/* Contact Buttons */}
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1 h-8 text-xs bg-transparent"
-            onClick={() => window.open(partner.website, "_blank")}
-          >
-            <ExternalLink className="h-3 w-3 mr-1" />
-            Website
-          </Button>
+        {/* Website and Social Media Links */}
+        <div className="flex gap-2 flex-wrap">
+          {partner.website && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1 min-w-0 h-8 text-xs bg-transparent"
+              onClick={() => window.open(partner.website, "_blank")}
+            >
+              <ExternalLink className="h-3 w-3 mr-1" />
+              Website
+            </Button>
+          )}
           {partner.socialMedia && (
             <div className="flex gap-1">
               {Object.entries(partner.socialMedia).map(([platform, url]) => (
@@ -463,17 +477,6 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
                 </Button>
               ))}
             </div>
-          )}
-          {!partner.socialMedia && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1 h-8 text-xs bg-transparent"
-              onClick={() => window.open(`mailto:${partner.contact}`, "_blank")}
-            >
-              <Mail className="h-3 w-3 mr-1" />
-              Contact
-            </Button>
           )}
         </div>
       </CardContent>
@@ -635,25 +638,31 @@ const PartnersPage = () => {
           })}
         </div>
 
-        {/* Partnership CTA */}
+        {/* Partnership Information */}
         <div className="max-w-4xl mx-auto mt-12">
           <Card className="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
             <CardHeader className="pb-3">
-              <CardTitle className="text-xl text-center text-gray-900">Interested in Partnering with AVES?</CardTitle>
+              <CardTitle className="text-xl text-center text-gray-900">Partnership Network</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <p className="text-gray-700 text-center mb-4 text-sm leading-relaxed">
-                We're always looking to collaborate with organizations that share our commitment to sustainable birding
-                tourism and conservation. If you're interested in becoming a partner, we'd love to hear from you.
+                Our carefully selected partners represent the best of Colombia's birding destinations, conservation
+                efforts, and sustainable tourism initiatives. Each partnership is built on shared values of
+                conservation, community engagement, and exceptional birding experiences.
               </p>
-              <div className="flex justify-center">
-                <Button
-                  className="bg-emerald-600 hover:bg-emerald-700"
-                  onClick={() => window.open("/contact", "_blank")}
-                >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Get in Touch
-                </Button>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div className="p-3 bg-white rounded-lg">
+                  <div className="text-2xl font-bold text-emerald-600">10+</div>
+                  <div className="text-sm text-gray-600">Partner Organizations</div>
+                </div>
+                <div className="p-3 bg-white rounded-lg">
+                  <div className="text-2xl font-bold text-emerald-600">25+</div>
+                  <div className="text-sm text-gray-600">Years Combined Experience</div>
+                </div>
+                <div className="p-3 bg-white rounded-lg">
+                  <div className="text-2xl font-bold text-emerald-600">100+</div>
+                  <div className="text-sm text-gray-600">Endemic Species Protected</div>
+                </div>
               </div>
             </CardContent>
           </Card>
