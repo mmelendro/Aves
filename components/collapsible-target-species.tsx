@@ -1,34 +1,98 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Bird, ChevronDown, ChevronUp, MapPin, Clock, Mountain } from 'lucide-react'
-import OptimizedImage from "./optimized-image"
-import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { ChevronDown, ChevronUp, Star, MapPin } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface TargetSpecies {
   name: string
   scientificName: string
-  image: string
-  description: string
   status: string
-  funFact: string
-  habitat?: string
-  bestTime?: string
-  elevation?: string
+  difficulty: string
+  habitat: string
+  bestTime: string
 }
 
 interface CollapsibleTargetSpeciesProps {
-  species: TargetSpecies[]
   region: string
+  className?: string
 }
 
-function CollapsibleTargetSpecies({ species, region }: CollapsibleTargetSpeciesProps) {
+const regionSpeciesData: Record<string, { title: string; species: TargetSpecies[] }> = {
+  caribbean: {
+    title: "Caribbean Coast Target Species",
+    species: [
+      {
+        name: "Vermilion Cardinal",
+        scientificName: "Paroaria nigrogenis",
+        status: "Endemic",
+        difficulty: "Moderate",
+        habitat: "Dry scrublands and thorny forests",
+        bestTime: "December - April (dry season)",
+      },
+      {
+        name: "Lance-tailed Manakin",
+        scientificName: "Chiroxiphia lanceolata",
+        status: "Near Endemic",
+        difficulty: "Moderate",
+        habitat: "Lowland forests and forest edges",
+        bestTime: "Year-round (most active early morning)",
+      },
+      {
+        name: "White-bellied Antbird",
+        scientificName: "Myrmeciza longipes",
+        status: "Spectacular",
+        difficulty: "Challenging",
+        habitat: "Dense forest understory, following army ant swarms",
+        bestTime: "Year-round (dawn and dusk)",
+      },
+      {
+        name: "Red-billed Emerald",
+        scientificName: "Chlorostilbon gibsoni",
+        status: "Endemic",
+        difficulty: "Easy",
+        habitat: "Gardens, forest edges, and flowering plants",
+        bestTime: "Year-round (flowering seasons)",
+      },
+      {
+        name: "Crested Bobwhite",
+        scientificName: "Colinus cristatus",
+        status: "Endemic",
+        difficulty: "Moderate",
+        habitat: "Open grasslands and scrublands",
+        bestTime: "Early morning and late afternoon",
+      },
+      {
+        name: "Buff-breasted Wren",
+        scientificName: "Cantorchilus leucotis",
+        status: "Near Endemic",
+        difficulty: "Easy",
+        habitat: "Dry scrublands and thorny forests",
+        bestTime: "Year-round (most vocal at dawn)",
+      },
+    ],
+  },
+}
+
+function CollapsibleTargetSpecies({ region, className }: CollapsibleTargetSpeciesProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const data = regionSpeciesData[region]
+
+  if (!data) {
+    return (
+      <div className={cn("w-full max-w-4xl mx-auto", className)}>
+        <Card>
+          <CardContent className="p-8 text-center">
+            <p className="text-gray-500">Species data not available for this region.</p>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -38,181 +102,96 @@ function CollapsibleTargetSpecies({ species, region }: CollapsibleTargetSpeciesP
         return "bg-orange-100 text-orange-800 border-orange-200"
       case "Spectacular":
         return "bg-purple-100 text-purple-800 border-purple-200"
-      case "Resident":
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200"
+    }
+  }
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "Easy":
         return "bg-green-100 text-green-800 border-green-200"
+      case "Moderate":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200"
+      case "Challenging":
+        return "bg-red-100 text-red-800 border-red-200"
       default:
         return "bg-gray-100 text-gray-800 border-gray-200"
     }
   }
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full">
-      <CollapsibleTrigger asChild>
-        <Button
-          variant="outline"
-          className="w-full justify-between p-4 sm:p-6 h-auto border-l-4 border-l-orange-500 hover:bg-orange-50 bg-transparent transition-all duration-200"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-100 rounded-full flex-shrink-0">
-              <Bird className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
-            </div>
-            <div className="text-left min-w-0 flex-1">
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 truncate">Target Species</h3>
-              <p className="text-xs sm:text-sm text-gray-600 mt-1 line-clamp-2">
-                {species.length} signature birds of the {region} region
-              </p>
-            </div>
-          </div>
-          <div className="flex-shrink-0 ml-2">
-            {isOpen ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
-          </div>
-        </Button>
-      </CollapsibleTrigger>
-
-      <CollapsibleContent className="pt-4 sm:pt-6">
-        <Accordion type="single" collapsible className="w-full space-y-3 sm:space-y-4">
-          {species.map((bird, index) => (
-            <AccordionItem
-              key={index}
-              value={`species-${index}`}
-              className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-            >
-              <AccordionTrigger className="px-4 sm:px-6 py-3 sm:py-4 hover:bg-gray-50 [&[data-state=open]]:bg-orange-50 [&>svg]:shrink-0">
-                <div className="flex items-center gap-3 sm:gap-4 w-full min-w-0">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden flex-shrink-0">
-                    <OptimizedImage
-                      src={bird.image}
-                      alt={bird.name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 text-left min-w-0">
-                    <div className="flex items-start gap-2 mb-1">
-                      <h4 className="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 flex-1">
-                        {bird.name}
-                      </h4>
-                      <Badge className={`text-xs border flex-shrink-0 ${getStatusColor(bird.status)}`}>
-                        {bird.status}
-                      </Badge>
-                    </div>
-                    <p className="text-xs sm:text-sm italic text-gray-500 line-clamp-1">{bird.scientificName}</p>
-                  </div>
+    <div className={cn("w-full max-w-4xl mx-auto", className)}>
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <Card>
+          <CollapsibleTrigger asChild>
+            <CardHeader className="cursor-pointer hover:bg-gray-50 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-2xl font-bold flex items-center gap-2">
+                    <Star className="w-6 h-6 text-yellow-500" />
+                    {data.title}
+                  </CardTitle>
+                  <p className="text-gray-600 mt-2">Discover the must-see species that make this region special</p>
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className="px-4 sm:px-6 pb-4 sm:pb-6">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {/* Image Section */}
-                  <div className="lg:col-span-1">
-                    <div className="aspect-square rounded-lg overflow-hidden mb-4">
-                      <OptimizedImage
-                        src={bird.image}
-                        alt={bird.name}
-                        width={300}
-                        height={300}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      {bird.habitat && (
-                        <div className="flex items-start gap-2 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
-                          <span className="line-clamp-2">{bird.habitat}</span>
+                <Button variant="ghost" size="sm" className="ml-4">
+                  {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </Button>
+              </div>
+            </CardHeader>
+          </CollapsibleTrigger>
+
+          <CollapsibleContent>
+            <CardContent className="pt-0">
+              <div className="grid gap-4 md:grid-cols-2">
+                {data.species.map((species, index) => (
+                  <Card key={index} className="border-l-4 border-l-blue-500">
+                    <CardContent className="p-4">
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="font-semibold text-lg text-gray-900">{species.name}</h4>
+                          <p className="text-sm italic text-gray-600">{species.scientificName}</p>
                         </div>
-                      )}
-                      {bird.bestTime && (
-                        <div className="flex items-start gap-2 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                          <span className="line-clamp-2">{bird.bestTime}</span>
+
+                        <div className="flex flex-wrap gap-2">
+                          <Badge className={cn("text-xs font-medium border", getStatusColor(species.status))}>
+                            {species.status}
+                          </Badge>
+                          <Badge className={cn("text-xs font-medium border", getDifficultyColor(species.difficulty))}>
+                            {species.difficulty}
+                          </Badge>
                         </div>
-                      )}
-                      {bird.elevation && (
-                        <div className="flex items-start gap-2 text-sm text-gray-600">
-                          <Mountain className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                          <span>{bird.elevation}</span>
+
+                        <div className="space-y-2 text-sm">
+                          <div>
+                            <span className="font-medium text-gray-700 flex items-center gap-1">
+                              <MapPin className="w-3 h-3" />
+                              Habitat:
+                            </span>
+                            <span className="text-gray-600 ml-4">{species.habitat}</span>
+                          </div>
+                          <div>
+                            <span className="font-medium text-gray-700">Best time:</span>
+                            <span className="text-gray-600 ml-2">{species.bestTime}</span>
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
 
-                  {/* Content Section */}
-                  <div className="lg:col-span-2 space-y-4">
-                    <div>
-                      <h5 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">About This Species</h5>
-                      <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{bird.description}</p>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-orange-50 to-red-50 p-3 sm:p-4 rounded-lg border-l-4 border-orange-500">
-                      <h5 className="font-semibold text-orange-800 mb-2 flex items-center gap-2 text-sm sm:text-base">
-                        <Bird className="w-4 h-4 flex-shrink-0" />
-                        Fun Fact
-                      </h5>
-                      <p className="text-orange-700 leading-relaxed text-sm sm:text-base">{bird.funFact}</p>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link
-                        href={`/checkout?region=${region.toLowerCase().replace(/\s+/g, "-")}&source=species-${index}`}
-                        className="flex-1"
-                      >
-                        <Button className="bg-orange-500 hover:bg-orange-600 text-white w-full touch-manipulation">
-                          See This Bird on Tour
-                        </Button>
-                      </Link>
-                      <Link
-                        href={`/contact?subject=${encodeURIComponent(`${bird.name} - ${region} Tour`)}`}
-                        className="flex-1"
-                      >
-                        <Button
-                          variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 w-full bg-transparent touch-manipulation"
-                        >
-                          Ask About This Species
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-
-        {/* Section CTA */}
-        <div className="mt-6 sm:mt-8">
-          <Card className="bg-gradient-to-r from-orange-50 to-red-50 border-orange-200">
-            <CardContent className="p-4 sm:p-6 text-center">
-              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">Ready to See These Amazing Birds?</h4>
-              <p className="text-gray-600 mb-4 max-w-2xl mx-auto text-sm sm:text-base">
-                Join our expert guides to observe these spectacular species in their natural Caribbean coast habitats.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  href={`/checkout?region=${region.toLowerCase().replace(/\s+/g, "-")}&source=target-species-section`}
-                >
-                  <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 touch-manipulation">
-                    Book {region} Tour
-                  </Button>
-                </Link>
-                <Link href="/contact?subject=Target+Species+Questions">
-                  <Button
-                    variant="outline"
-                    className="border-orange-500 text-orange-500 hover:bg-orange-50 px-6 bg-transparent touch-manipulation"
-                  >
-                    Speak with Our Experts
-                  </Button>
-                </Link>
+              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Pro Tip:</strong> Our expert guides know the best times and locations for each species. Book a
+                  tour to maximize your chances of seeing these incredible birds!
+                </p>
               </div>
             </CardContent>
-          </Card>
-        </div>
-      </CollapsibleContent>
-    </Collapsible>
+          </CollapsibleContent>
+        </Card>
+      </Collapsible>
+    </div>
   )
 }
 

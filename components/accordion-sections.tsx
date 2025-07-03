@@ -1,267 +1,271 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronUp, Bird, Calendar, MapPin, Star } from 'lucide-react'
-import Link from "next/link"
-
-interface Species {
-  name: string
-  scientific: string
-  status: string
-}
-
-interface ItineraryDay {
-  day: number
-  title: string
-  activities: string[]
-  accommodation: string
-  meals: string
-}
-
-interface Accommodation {
-  name: string
-  location: string
-  description: string
-  amenities: string[]
-  rating: number
-  nights: number
-}
+import { Info, MapPin, Users, Camera, Bed } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface AccordionSectionsProps {
-  speciesList: Species[]
-  detailedItinerary: ItineraryDay[]
-  accommodations: Accommodation[]
+  region: string
+  className?: string
 }
 
-function AccordionSections({ speciesList, detailedItinerary, accommodations }: AccordionSectionsProps) {
-  const [openSection, setOpenSection] = useState<string | null>(null)
+const regionAccordionData: Record<string, any> = {
+  caribbean: {
+    sections: [
+      {
+        id: "accommodations",
+        title: "Accommodations",
+        icon: <Bed className="w-5 h-5" />,
+        content: {
+          type: "accommodations",
+          data: [
+            {
+              name: "Hotel Casa Verde",
+              location: "Santa Marta",
+              description: "Comfortable colonial-style hotel in the heart of Santa Marta's historic district",
+              amenities: ["Air conditioning", "WiFi", "Restaurant", "Pool", "Historic location"],
+              rating: 4.2,
+              nights: 4,
+            },
+            {
+              name: "Las Gaviotas Eco-Lodge",
+              location: "Las Gaviotas Reserve",
+              description: "Rustic eco-lodge within the forest reserve, perfect for early morning birding",
+              amenities: ["Fan cooling", "Shared bathrooms", "Restaurant", "Birding trails", "Canopy tower"],
+              rating: 4.0,
+              nights: 2,
+            },
+            {
+              name: "Hotel Almirante Padilla",
+              location: "Riohacha",
+              description: "Modern hotel near Riohacha's coastal birding sites",
+              amenities: ["Air conditioning", "WiFi", "Restaurant", "Beach access", "Tour desk"],
+              rating: 3.8,
+              nights: 1,
+            },
+          ],
+        },
+      },
+      {
+        id: "species-list",
+        title: "Complete Species List",
+        icon: <Camera className="w-5 h-5" />,
+        content: {
+          type: "species-list",
+          data: [
+            { name: "Vermilion Cardinal", scientific: "Paroaria nigrogenis", status: "Endemic" },
+            { name: "Lance-tailed Manakin", scientific: "Chiroxiphia lanceolata", status: "Resident" },
+            { name: "White-bellied Antbird", scientific: "Myrmeciza longipes", status: "Resident" },
+            { name: "Red-billed Emerald", scientific: "Chlorostilbon gibsoni", status: "Endemic" },
+            { name: "Crested Bobwhite", scientific: "Colinus cristatus", status: "Endemic" },
+            { name: "Buff-breasted Wren", scientific: "Cantorchilus leucotis", status: "Resident" },
+            { name: "Barred Antshrike", scientific: "Thamnophilus doliatus", status: "Resident" },
+            { name: "Crimson-crested Woodpecker", scientific: "Campephilus melanoleucos", status: "Resident" },
+            { name: "Groove-billed Ani", scientific: "Crotophaga sulcirostris", status: "Resident" },
+            { name: "Pied Puffbird", scientific: "Notharchus tectus", status: "Resident" },
+            { name: "Bicolored Conebill", scientific: "Conirostrum bicolor", status: "Resident" },
+            { name: "Yellow-crowned Amazon", scientific: "Amazona ochrocephala", status: "Resident" },
+          ],
+        },
+      },
+      {
+        id: "curious-facts",
+        title: "Curious Facts",
+        icon: <Info className="w-5 h-5" />,
+        content: {
+          type: "facts",
+          data: [
+            {
+              icon: "🌊",
+              title: "Mangrove Diversity",
+              description:
+                "The Caribbean coast hosts five different mangrove species, creating unique microhabitats that support over 150 bird species in these coastal forests alone.",
+            },
+            {
+              icon: "🦅",
+              title: "Endemic Hotspot",
+              description:
+                "The Caribbean region is home to 12 endemic bird species, including the spectacular Vermilion Cardinal, found only in northern Colombia and northwestern Venezuela.",
+            },
+            {
+              icon: "🌿",
+              title: "Dry Forest Rarity",
+              description:
+                "Less than 2% of Colombia's original dry forest remains, making Tayrona National Park's dry forest one of the most important conservation areas in the country.",
+            },
+            {
+              icon: "🎭",
+              title: "Indigenous Wisdom",
+              description:
+                "The Kogi people of the Sierra Nevada consider themselves the 'Elder Brothers' of humanity and maintain detailed knowledge of over 300 bird species in their traditional territory.",
+            },
+          ],
+        },
+      },
+      {
+        id: "what-to-expect",
+        title: "What to Expect",
+        icon: <Users className="w-5 h-5" />,
+        content: {
+          type: "expectations",
+          data: [
+            {
+              icon: "🌴",
+              title: "Coastal Diversity",
+              description:
+                "Experience incredible bird diversity across mangroves, scrublands, and coastal forests with over 200 species possible.",
+            },
+            {
+              icon: "🦜",
+              title: "Endemic Species",
+              description: "Encounter unique Caribbean coast endemics and specialties found nowhere else in Colombia.",
+            },
+            {
+              icon: "☀️",
+              title: "Perfect Climate",
+              description:
+                "Enjoy year-round birding weather with warm temperatures and minimal rainfall in coastal areas.",
+            },
+            {
+              icon: "🎭",
+              title: "Cultural Immersion",
+              description:
+                "Connect with indigenous Kogi communities and learn about their deep relationship with nature.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
 
-  const toggleSection = (section: string) => {
-    setOpenSection(openSection === section ? null : section)
+function AccordionSections({ region, className }: AccordionSectionsProps) {
+  const data = regionAccordionData[region]
+
+  if (!data) {
+    return (
+      <div className={cn("w-full max-w-4xl mx-auto", className)}>
+        <Card>
+          <CardContent className="p-8 text-center">
+            <p className="text-gray-500">Detailed information not available for this region.</p>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-4 h-4 ${i < Math.floor(rating) ? "text-yellow-400 fill-current" : "text-gray-300"}`}
-      />
-    ))
+  const renderContent = (section: any) => {
+    switch (section.content.type) {
+      case "accommodations":
+        return (
+          <div className="space-y-4">
+            {section.content.data.map((accommodation: any, index: number) => (
+              <Card key={index} className="border-l-4 border-l-blue-500">
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h4 className="font-semibold text-lg">{accommodation.name}</h4>
+                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                        <MapPin className="w-3 h-3" />
+                        <span>{accommodation.location}</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="flex items-center gap-1">
+                        <span className="text-sm font-medium">★ {accommodation.rating}</span>
+                      </div>
+                      <div className="text-xs text-gray-500">{accommodation.nights} nights</div>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3">{accommodation.description}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {accommodation.amenities.map((amenity: string, idx: number) => (
+                      <Badge key={idx} variant="outline" className="text-xs">
+                        {amenity}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )
+
+      case "species-list":
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {section.content.data.map((species: any, index: number) => (
+              <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <div className="font-medium text-sm">{species.name}</div>
+                  <div className="text-xs italic text-gray-600">{species.scientific}</div>
+                </div>
+                <Badge variant={species.status === "Endemic" ? "default" : "secondary"} className="text-xs">
+                  {species.status}
+                </Badge>
+              </div>
+            ))}
+          </div>
+        )
+
+      case "facts":
+        return (
+          <div className="space-y-4">
+            {section.content.data.map((fact: any, index: number) => (
+              <div key={index} className="flex gap-4 p-4 bg-blue-50 rounded-lg">
+                <div className="text-2xl flex-shrink-0">{fact.icon}</div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">{fact.title}</h4>
+                  <p className="text-sm text-gray-700">{fact.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+
+      case "expectations":
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {section.content.data.map((expectation: any, index: number) => (
+              <div key={index} className="flex gap-3 p-4 bg-green-50 rounded-lg">
+                <div className="text-xl flex-shrink-0">{expectation.icon}</div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">{expectation.title}</h4>
+                  <p className="text-sm text-gray-700">{expectation.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+
+      default:
+        return <div>Content not available</div>
+    }
   }
 
   return (
-    <section className="py-16 px-4 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-gray-800">Detailed Information</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore comprehensive details about species, itinerary, and accommodations for your Caribbean coast
-            adventure.
-          </p>
-        </div>
-
-        <div className="space-y-4">
-          {/* Species List Accordion */}
-          <Card className="overflow-hidden hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
-            <CardHeader
-              className="cursor-pointer hover:bg-gray-50 transition-colors"
-              onClick={() => toggleSection("species")}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-orange-100 rounded-full">
-                    <Bird className="w-5 h-5 text-orange-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl text-gray-800">Species List</CardTitle>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {speciesList.length} species including endemics and specialties
-                    </p>
-                  </div>
-                </div>
-                {openSection === "species" ? (
-                  <ChevronUp className="w-5 h-5 text-gray-500" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-500" />
-                )}
-              </div>
-            </CardHeader>
-            {openSection === "species" && (
-              <CardContent className="pt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {speciesList.map((species, index) => (
-                    <div key={index} className="p-4 bg-white rounded-lg border hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-semibold text-gray-800 text-sm">{species.name}</h4>
-                        <Badge variant={species.status === "Endemic" ? "destructive" : "secondary"} className="text-xs">
-                          {species.status}
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-gray-500 italic">{species.scientific}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 text-center">
-                  <Link href="/checkout?region=caribbean&source=species-list">
-                    <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-                      Book Tour to See These Species
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            )}
-          </Card>
-
-          {/* Detailed Itinerary Accordion */}
-          <Card className="overflow-hidden hover:shadow-lg transition-shadow border-l-4 border-l-green-500">
-            <CardHeader
-              className="cursor-pointer hover:bg-gray-50 transition-colors"
-              onClick={() => toggleSection("itinerary")}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-100 rounded-full">
-                    <Calendar className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl text-gray-800">Detailed Itinerary</CardTitle>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {detailedItinerary.length}-day comprehensive birding adventure
-                    </p>
-                  </div>
-                </div>
-                {openSection === "itinerary" ? (
-                  <ChevronUp className="w-5 h-5 text-gray-500" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-500" />
-                )}
-              </div>
-            </CardHeader>
-            {openSection === "itinerary" && (
-              <CardContent className="pt-0">
-                <div className="space-y-6">
-                  {detailedItinerary.map((day, index) => (
-                    <div key={index} className="p-6 bg-white rounded-lg border hover:shadow-md transition-shadow">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                          {day.day}
-                        </div>
-                        <h4 className="text-lg font-bold text-gray-800">{day.title}</h4>
-                      </div>
-
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                        <div className="lg:col-span-2">
-                          <h5 className="font-semibold text-gray-700 mb-2">Activities:</h5>
-                          <ul className="space-y-1">
-                            {day.activities.map((activity, actIndex) => (
-                              <li key={actIndex} className="text-sm text-gray-600 flex items-start gap-2">
-                                <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                {activity}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="space-y-3">
-                          <div>
-                            <h5 className="font-semibold text-gray-700 text-sm">Accommodation:</h5>
-                            <p className="text-sm text-gray-600">{day.accommodation}</p>
-                          </div>
-                          <div>
-                            <h5 className="font-semibold text-gray-700 text-sm">Meals:</h5>
-                            <p className="text-sm text-gray-600">{day.meals}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 text-center">
-                  <Link href="/checkout?region=caribbean&source=detailed-itinerary">
-                    <Button className="bg-green-500 hover:bg-green-600 text-white">Book This Complete Adventure</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            )}
-          </Card>
-
-          {/* Accommodations Accordion */}
-          <Card className="overflow-hidden hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
-            <CardHeader
-              className="cursor-pointer hover:bg-gray-50 transition-colors"
-              onClick={() => toggleSection("accommodations")}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-full">
-                    <MapPin className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl text-gray-800">Accommodations</CardTitle>
-                    <p className="text-sm text-gray-600 mt-1">{accommodations.length} carefully selected properties</p>
-                  </div>
-                </div>
-                {openSection === "accommodations" ? (
-                  <ChevronUp className="w-5 h-5 text-gray-500" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-500" />
-                )}
-              </div>
-            </CardHeader>
-            {openSection === "accommodations" && (
-              <CardContent className="pt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {accommodations.map((accommodation, index) => (
-                    <div key={index} className="p-6 bg-white rounded-lg border hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h4 className="text-lg font-bold text-gray-800">{accommodation.name}</h4>
-                          <p className="text-sm text-gray-500 flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {accommodation.location}
-                          </p>
-                        </div>
-                        <Badge variant="outline" className="text-xs">
-                          {accommodation.nights} {accommodation.nights === 1 ? "night" : "nights"}
-                        </Badge>
-                      </div>
-
-                      <div className="flex items-center gap-1 mb-3">
-                        {renderStars(accommodation.rating)}
-                        <span className="text-sm text-gray-600 ml-2">{accommodation.rating}/5</span>
-                      </div>
-
-                      <p className="text-sm text-gray-700 mb-4 leading-relaxed">{accommodation.description}</p>
-
-                      <div>
-                        <h5 className="font-semibold text-gray-700 text-sm mb-2">Amenities:</h5>
-                        <div className="flex flex-wrap gap-1">
-                          {accommodation.amenities.map((amenity, amenityIndex) => (
-                            <Badge key={amenityIndex} variant="secondary" className="text-xs">
-                              {amenity}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 text-center">
-                  <Link href="/checkout?region=caribbean&source=accommodations">
-                    <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-                      Book Tour with These Accommodations
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            )}
-          </Card>
-        </div>
+    <div className={cn("w-full max-w-4xl mx-auto", className)}>
+      <div className="text-center mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Detailed Information</h2>
+        <p className="text-lg text-gray-600">Everything you need to know about your Caribbean coast adventure</p>
       </div>
-    </section>
+
+      <Accordion type="single" collapsible className="space-y-4">
+        {data.sections.map((section: any) => (
+          <AccordionItem key={section.id} value={section.id} className="border rounded-lg">
+            <AccordionTrigger className="px-6 py-4 hover:no-underline">
+              <div className="flex items-center gap-3">
+                {section.icon}
+                <span className="font-semibold text-left">{section.title}</span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6">{renderContent(section)}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   )
 }
 

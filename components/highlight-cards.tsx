@@ -1,78 +1,73 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bird, Trees, Target } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
+import type { ReactNode } from "react"
 
-interface HighlightCardsProps {
-  highlights: {
-    birds: string[]
-    habitats: string[]
-    targets: string[]
-  }
+interface Highlight {
+  icon: ReactNode
+  title: string
+  description: string
+  color: string
 }
 
-function HighlightCards({ highlights }: HighlightCardsProps) {
+interface HighlightCardsProps {
+  highlights: Highlight[]
+  className?: string
+}
+
+function HighlightCards({ highlights, className }: HighlightCardsProps) {
+  const getColorClasses = (color: string) => {
+    switch (color) {
+      case "emerald":
+        return "bg-emerald-50 border-emerald-200 text-emerald-600"
+      case "blue":
+        return "bg-blue-50 border-blue-200 text-blue-600"
+      case "purple":
+        return "bg-purple-50 border-purple-200 text-purple-600"
+      case "orange":
+        return "bg-orange-50 border-orange-200 text-orange-600"
+      case "red":
+        return "bg-red-50 border-red-200 text-red-600"
+      case "yellow":
+        return "bg-yellow-50 border-yellow-200 text-yellow-600"
+      default:
+        return "bg-gray-50 border-gray-200 text-gray-600"
+    }
+  }
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-      <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
-        <CardHeader className="text-center pb-4">
-          <div className="mx-auto mb-3 p-3 bg-orange-100 rounded-full w-fit">
-            <Bird className="w-6 h-6 text-orange-600" />
-          </div>
-          <CardTitle className="text-lg text-gray-800">Featured Birds</CardTitle>
-          <p className="text-sm text-gray-600">Key species you'll encounter</p>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {highlights.birds.map((bird, index) => (
-              <div key={index} className="flex items-center gap-2 p-2 bg-orange-50 rounded-lg">
-                <div className="w-2 h-2 bg-orange-500 rounded-full flex-shrink-0"></div>
-                <span className="text-sm font-medium text-gray-800">{bird}</span>
+    <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6", className)}>
+      {highlights.map((highlight, index) => (
+        <Card
+          key={index}
+          className={cn(
+            "border-2 transition-all duration-300 hover:shadow-lg hover:scale-105",
+            getColorClasses(highlight.color),
+          )}
+        >
+          <CardContent className="p-6 text-center">
+            <div className="flex justify-center mb-4">
+              <div
+                className={cn(
+                  "p-3 rounded-full",
+                  highlight.color === "emerald" && "bg-emerald-100",
+                  highlight.color === "blue" && "bg-blue-100",
+                  highlight.color === "purple" && "bg-purple-100",
+                  highlight.color === "orange" && "bg-orange-100",
+                  highlight.color === "red" && "bg-red-100",
+                  highlight.color === "yellow" && "bg-yellow-100",
+                  !["emerald", "blue", "purple", "orange", "red", "yellow"].includes(highlight.color) && "bg-gray-100",
+                )}
+              >
+                {highlight.icon}
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-green-500">
-        <CardHeader className="text-center pb-4">
-          <div className="mx-auto mb-3 p-3 bg-green-100 rounded-full w-fit">
-            <Trees className="w-6 h-6 text-green-600" />
-          </div>
-          <CardTitle className="text-lg text-gray-800">Key Habitats</CardTitle>
-          <p className="text-sm text-gray-600">Diverse ecosystems to explore</p>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {highlights.habitats.map((habitat, index) => (
-              <div key={index} className="flex items-center gap-2 p-2 bg-green-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-                <span className="text-sm font-medium text-gray-800">{habitat}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-red-500">
-        <CardHeader className="text-center pb-4">
-          <div className="mx-auto mb-3 p-3 bg-red-100 rounded-full w-fit">
-            <Target className="w-6 h-6 text-red-600" />
-          </div>
-          <CardTitle className="text-lg text-gray-800">Target Species</CardTitle>
-          <p className="text-sm text-gray-600">Endemic & specialty birds</p>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {highlights.targets.map((target, index) => (
-              <div key={index} className="flex items-center gap-2 p-2 bg-red-50 rounded-lg">
-                <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0"></div>
-                <span className="text-sm font-medium text-gray-800">{target}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            </div>
+            <h3 className="font-semibold text-lg mb-2 text-gray-900">{highlight.title}</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">{highlight.description}</p>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   )
 }
