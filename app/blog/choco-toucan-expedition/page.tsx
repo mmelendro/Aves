@@ -112,7 +112,7 @@ export default function ChocoToucanExpeditionPage() {
             {/* Audio Player */}
             <div className="my-8">
               <AudioPlayer
-                src="/audio/yellow-throated-toucan.mp3"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Yellow-throated%20Toucan-YZaM0Q4HERiJp55ECemjfgYkdJIYwZ.mp3"
                 title="Yellow-throated Toucan Dawn Chorus"
                 species="Ramphastos ambiguus"
                 className="max-w-2xl mx-auto"

@@ -270,7 +270,7 @@ export default function SierraNevadaKogiWayuuPost() {
                 </p>
               </div>
               <div className="w-full">
-                <VideoPlayer src="/videos/el-dorado-reserve.mp4" poster="/images/emerald-toucanet.jpg" />
+                <VideoPlayer src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/El%20Dorado-uJoK4deoS3MdNzKIGAUTejTN6o5Bcx.mp4" poster="/images/emerald-toucanet.jpg" />
               </div>
             </div>
           </div>
