@@ -160,7 +160,7 @@ const birdData: BirdData[] = [
     primaryRegion: "Caribbean Coast",
     secondaryRegions: [],
     ecoregions: ["Dry tropical forest", "Thorny scrubland", "Desert edges", "Arid lowlands"],
-    regionSlug: "caribbean-coast",
+    regionSlug: "caribbean",
     status: "Endemic",
     difficulty: "Moderate",
     habitat: "Dry scrublands and thorny forests of the Guajira Peninsula",
@@ -219,6 +219,9 @@ export default function HomepageBirdCarousel({
   const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
 
   const currentBird = birdData[currentIndex]
+
+  // Check if current bird should show the Explore Region button (only Vermilion Cardinal)
+  const shouldShowExploreRegion = currentBird.id === "6" // Vermilion Cardinal
 
   // Preload all images on component mount with proper error handling
   useEffect(() => {
@@ -783,13 +786,19 @@ export default function HomepageBirdCarousel({
                       </div>
                     </div>
 
+                    {/* Action Buttons - Conditional Explore Region Button */}
                     <div className="flex flex-col gap-2">
-                      <Link href={`/aves-explorer#${currentBird.regionSlug}`}>
-                        <Button className="bg-emerald-600/90 hover:bg-emerald-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-emerald-500/40 carousel-button">
-                          <MapPin className="w-3 h-3 mr-1" />
-                          Explore Region
-                        </Button>
-                      </Link>
+                      {/* Only show Explore Region button for Vermilion Cardinal */}
+                      {shouldShowExploreRegion && (
+                        <Link href="/regions/caribbean">
+                          <Button className="bg-emerald-600/90 hover:bg-emerald-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-emerald-500/40 carousel-button">
+                            <MapPin className="w-3 h-3 mr-1" />
+                            Explore Caribbean Region
+                          </Button>
+                        </Link>
+                      )}
+
+                      {/* Plan Trip button - always visible */}
                       <Link href="/tours">
                         <Button
                           variant="outline"
