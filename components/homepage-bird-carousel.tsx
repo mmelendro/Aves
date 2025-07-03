@@ -70,7 +70,7 @@ const birdData: BirdData[] = [
     habitat: "High-altitude páramo and volcanic slopes with scattered shrubs",
     bestTime: "December - March (clear weather)",
     elevation: "3,200 - 4,500m",
-    image: "/images/rainbow-bearded-thornbill.jpg",
+    image: "/images/rabtho1.jpg",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -407,10 +407,10 @@ export default function HomepageBirdCarousel({
           objectPosition: "center 35%",
           transform: "scale(1.2)",
         }
-      case "2": // Rainbow-bearded Thornbill
+      case "2": // Rainbow-bearded Thornbill - Updated for rabtho1.jpg
         return {
-          objectPosition: "center 30%",
-          transform: "scale(1.1)",
+          objectPosition: "center 25%", // Focus on the bird's head and colorful throat
+          transform: "scale(1.15)", // Slight zoom to highlight the rainbow beard
         }
       case "3": // Black-billed Mountain-Toucan
         return {
@@ -432,10 +432,10 @@ export default function HomepageBirdCarousel({
           objectPosition: "center 25%",
           transform: "scale(1.1)",
         }
-      case "7": // Andean Cock-of-the-rock - Optimized for eye and wing focus
+      case "7": // Andean Cock-of-the-rock
         return {
-          objectPosition: "center 40%", // Centered on bird's eye and wing area
-          transform: "scale(1.0)", // Minimal scaling to preserve original width
+          objectPosition: "center 40%",
+          transform: "scale(1.0)",
         }
       default:
         return {
@@ -543,7 +543,7 @@ export default function HomepageBirdCarousel({
                 className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
                 onClick={() => setIsPlaying(!isPlaying)}
                 aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-                disabled={!firstImageLoaded} // Disable until first image loads
+                disabled={!firstImageLoaded}
               >
                 {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
               </Button>
@@ -820,7 +820,7 @@ export default function HomepageBirdCarousel({
                   className={cn(
                     "flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all relative carousel-thumbnail",
                     index === currentIndex ? "border-emerald-500 ring-1 ring-emerald-200" : "border-gray-200",
-                    !isPreloaded && "opacity-50", // Visual indicator for unloaded images
+                    !isPreloaded && "opacity-50",
                   )}
                   aria-label={`View ${bird.commonName}`}
                 >
@@ -832,10 +832,9 @@ export default function HomepageBirdCarousel({
                       objectPosition: thumbnailPositioning.objectPosition,
                       transform: thumbnailPositioning.transform,
                     }}
-                    loading={index < 3 ? "eager" : "lazy"} // Eager load first 3 thumbnails
+                    loading={index < 3 ? "eager" : "lazy"}
                     onError={(e) => {
                       console.warn(`Failed to load thumbnail: ${bird.image}`)
-                      // Don't prevent the error from bubbling up, just log it
                     }}
                   />
                   {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}

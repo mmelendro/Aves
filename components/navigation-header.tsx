@@ -484,10 +484,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 "md:hidden fixed top-4 right-4 z-[60] flex items-center justify-center transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500/50 rounded-xl touch-manipulation",
                 // Size: ~40px as requested
                 "w-10 h-10 p-2",
-                // Background styling with subtle transparency
+                // Enhanced background styling with better contrast
                 mobileMenuOpen
-                  ? "bg-white/95 backdrop-blur-md border-2 border-emerald-200 shadow-xl scale-110"
-                  : "bg-white/20 backdrop-blur-sm border border-white/30 shadow-lg scale-100 hover:scale-105",
+                  ? "bg-white/98 backdrop-blur-md border-2 border-emerald-200 shadow-2xl scale-110"
+                  : "bg-white/30 backdrop-blur-sm border border-white/40 shadow-xl scale-100 hover:scale-105",
               )}
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -498,7 +498,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               <div className="relative flex items-center justify-center w-full h-full">
                 {mobileMenuOpen ? (
                   <X
-                    className={cn("transition-all duration-500 ease-in-out", "w-6 h-6 text-gray-700 drop-shadow-md")}
+                    className={cn("transition-all duration-500 ease-in-out", "w-6 h-6 text-gray-800 drop-shadow-md")}
                   />
                 ) : (
                   <OptimizedImage
@@ -508,7 +508,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     height={24}
                     className={cn(
                       "object-contain transition-all duration-500 ease-in-out",
-                      "w-6 h-6 opacity-90 drop-shadow-sm",
+                      "w-6 h-6 opacity-95 drop-shadow-sm",
                     )}
                     style={{
                       objectFit: "contain",
@@ -518,17 +518,17 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   />
                 )}
 
-                {/* Subtle glow effect */}
+                {/* Enhanced glow effect */}
                 <div
                   className={cn(
                     "absolute inset-0 rounded-xl transition-all duration-500 ease-in-out pointer-events-none",
-                    mobileMenuOpen ? "bg-emerald-100/30 shadow-lg opacity-100" : "bg-white/10 shadow-sm opacity-60",
+                    mobileMenuOpen ? "bg-emerald-100/40 shadow-xl opacity-100" : "bg-white/20 shadow-lg opacity-70",
                   )}
                 />
 
                 {/* Active state indicator */}
                 {mobileMenuOpen && (
-                  <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-emerald-400/20 to-emerald-600/20 animate-pulse" />
+                  <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-emerald-400/30 to-emerald-600/30 animate-pulse" />
                 )}
               </div>
             </button>
@@ -536,72 +536,74 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* Mobile Navigation Slide-out Menu */}
+      {/* Mobile Navigation Slide-out Menu with Enhanced Transparency */}
       <div
         className={cn(
-          "md:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-md border-l border-white/20 shadow-2xl z-50 transition-all duration-500 ease-in-out",
+          "md:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] z-50 transition-all duration-500 ease-in-out",
+          // Enhanced transparent background with better visibility
+          "bg-white/85 backdrop-blur-xl border-l border-white/30 shadow-2xl",
           mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
         )}
         id="mobile-navigation"
       >
-        {/* Menu Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-100/50">
+        {/* Menu Header with Enhanced Contrast */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-200/60 bg-white/20 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
             <OptimizedImage
               src="/images/aves-logo.png"
               alt="AVES Logo"
               width={32}
               height={32}
-              className="w-8 h-8 object-contain"
+              className="w-8 h-8 object-contain drop-shadow-sm"
             />
-            <span className="text-xl font-bold text-gray-800">AVES</span>
+            <span className="text-xl font-bold text-gray-900 drop-shadow-sm">AVES</span>
           </div>
         </div>
 
-        {/* Menu Content */}
-        <div className="flex flex-col h-full pt-6 pb-20 overflow-y-auto">
+        {/* Menu Content with Enhanced Readability */}
+        <div className="flex flex-col h-full pt-6 pb-20 overflow-y-auto bg-gradient-to-b from-white/10 to-white/20">
           <nav className="px-6 space-y-6 flex-1">
             {/* Tours Section */}
             <div className="space-y-3">
               <Link
                 href="/tours"
-                className="text-gray-800 font-semibold text-lg hover:text-emerald-600 transition-colors block touch-manipulation"
+                className="text-gray-900 font-semibold text-lg hover:text-emerald-600 transition-colors block touch-manipulation drop-shadow-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Tours
               </Link>
-              <div className="pl-4 space-y-3">
+              <div className="pl-4 space-y-3 bg-white/20 rounded-lg p-3 backdrop-blur-sm">
                 <Link
                   href="/tours"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🗺️ All Tours Overview
                 </Link>
                 <Link
                   href="/tours/adventure"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🍃 Adventure Tours
                 </Link>
                 <Link
                   href="/tours/vision"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🪶 Vision Tours
                 </Link>
                 <Link
                   href="/tours/elevate"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🌼 Elevate Tours
                 </Link>
                 <Link
                   href="/tours/souls"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🍓 Souls Tours
@@ -613,45 +615,47 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             <div className="space-y-3">
               <Link
                 href="/resources"
-                className="text-gray-800 font-semibold text-lg hover:text-emerald-600 transition-colors block touch-manipulation"
+                className="text-gray-900 font-semibold text-lg hover:text-emerald-600 transition-colors block touch-manipulation drop-shadow-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Resources Hub
               </Link>
-              <div className="pl-4 space-y-3">
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1">Explore & Plan</div>
+              <div className="pl-4 space-y-3 bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                <div className="text-xs font-semibold text-gray-700 uppercase tracking-wide py-1 drop-shadow-sm">
+                  Explore & Plan
+                </div>
                 <Link
                   href="/aves-explorer"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🦅 AVES Explorer
                 </Link>
 
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1 mt-4">
+                <div className="text-xs font-semibold text-gray-700 uppercase tracking-wide py-1 mt-4 drop-shadow-sm">
                   Learn & Prepare
                 </div>
                 <Link
                   href="/resources"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   📚 Expert Resources Hub
                 </Link>
                 <Link
                   href="/travel-tips"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   ✈️ Travel Essentials
                 </Link>
 
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1 mt-4">
+                <div className="text-xs font-semibold text-gray-700 uppercase tracking-wide py-1 mt-4 drop-shadow-sm">
                   Stories & Insights
                 </div>
                 <Link
                   href="/blog"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   📝 Blog & Expeditions
@@ -663,29 +667,29 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             <div className="space-y-3">
               <Link
                 href="/about"
-                className="text-gray-800 font-semibold text-lg hover:text-emerald-600 transition-colors block touch-manipulation"
+                className="text-gray-900 font-semibold text-lg hover:text-emerald-600 transition-colors block touch-manipulation drop-shadow-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 About
               </Link>
-              <div className="pl-4 space-y-3">
+              <div className="pl-4 space-y-3 bg-white/20 rounded-lg p-3 backdrop-blur-sm">
                 <Link
                   href="/about"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🏢 About AVES
                 </Link>
                 <Link
                   href="/team"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   👥 Our Team
                 </Link>
                 <Link
                   href="/about/partners"
-                  className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   🤝 Our Partners
@@ -696,32 +700,32 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             {/* Other Links */}
             <Link
               href="/about/b-corp"
-              className="block text-gray-800 font-semibold hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation"
+              className="block text-gray-900 font-semibold hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation drop-shadow-sm"
               onClick={() => setMobileMenuOpen(false)}
             >
               B Corp Journey
             </Link>
             <Link
               href="/conservation"
-              className="block text-gray-800 font-semibold hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation"
+              className="block text-gray-900 font-semibold hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation drop-shadow-sm"
               onClick={() => setMobileMenuOpen(false)}
             >
               Conservation
             </Link>
             <Link
               href="/contact"
-              className="block text-gray-800 font-semibold hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation"
+              className="block text-gray-900 font-semibold hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation drop-shadow-sm"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
             </Link>
           </nav>
 
-          {/* CTA Button */}
-          <div className="px-6 pt-6 border-t border-gray-100/50">
+          {/* CTA Button with Enhanced Visibility */}
+          <div className="px-6 pt-6 border-t border-gray-200/60 bg-white/20 backdrop-blur-sm">
             <Link href="/shopping">
               <Button
-                className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 min-h-[48px] text-base rounded-xl touch-manipulation"
+                className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 min-h-[48px] text-base rounded-xl touch-manipulation shadow-lg font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Book Your Journey
@@ -731,10 +735,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Menu Backdrop */}
+      {/* Mobile Menu Backdrop with Enhanced Transparency */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-all duration-500 ease-in-out"
+          className="md:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-all duration-500 ease-in-out"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
