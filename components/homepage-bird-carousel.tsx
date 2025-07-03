@@ -220,50 +220,71 @@ export default function HomepageBirdCarousel({
 
   const currentBird = birdData[currentIndex]
 
-  // Preload all images on component mount
+  // Preload all images on component mount with proper error handling
   useEffect(() => {
     const preloadImages = async () => {
-      const imagePromises = birdData.map((bird, index) => {
-        return new Promise<void>((resolve, reject) => {
-          const img = new Image()
-          img.onload = () => {
-            setPreloadedImages((prev) => new Set(prev).add(bird.image))
-            if (index === 0) {
-              setFirstImageLoaded(true)
-              setIsLoading(false)
-              setImageLoaded(true)
-              // Start autoplay only after first image is loaded
-              if (autoPlay) {
-                setTimeout(() => setIsPlaying(true), 1000) // Give 1 second buffer
-              }
-            }
-            resolve()
-          }
-          img.onerror = () => {
-            if (index === 0) {
-              setFirstImageLoaded(true)
-              setIsLoading(false)
-              setImageError(true)
-            }
-            reject()
-          }
-          // Set high priority for first image
-          if (index === 0) {
-            img.fetchPriority = "high"
-          }
-          img.src = bird.image
-        })
-      })
-
-      // Wait for at least the first image to load
       try {
-        await imagePromises[0]
-      } catch (error) {
-        console.warn("Failed to load first image:", error)
-      }
+        const imagePromises = birdData.map((bird, index) => {
+          return new Promise<void>((resolve) => {
+            const img = new Image()
 
-      // Continue loading other images in background
-      Promise.allSettled(imagePromises.slice(1))
+            const handleLoad = () => {
+              setPreloadedImages((prev) => new Set(prev).add(bird.image))
+              if (index === 0) {
+                setFirstImageLoaded(true)
+                setIsLoading(false)
+                setImageLoaded(true)
+                // Start autoplay only after first image is loaded
+                if (autoPlay) {
+                  setTimeout(() => setIsPlaying(true), 1000) // Give 1 second buffer
+                }
+              }
+              resolve()
+            }
+
+            const handleError = () => {
+              console.warn(`Failed to load image: ${bird.image}`)
+              if (index === 0) {
+                setFirstImageLoaded(true)
+                setIsLoading(false)
+                setImageError(true)
+              }
+              resolve() // Resolve even on error to prevent hanging
+            }
+
+            img.onload = handleLoad
+            img.onerror = handleError
+
+            // Set high priority for first image
+            if (index === 0) {
+              img.fetchPriority = "high"
+            }
+            img.src = bird.image
+          })
+        })
+
+        // Wait for at least the first image to load/fail
+        try {
+          await imagePromises[0]
+        } catch (error) {
+          console.warn("Error loading first image:", error)
+          setFirstImageLoaded(true)
+          setIsLoading(false)
+          setImageError(true)
+        }
+
+        // Continue loading other images in background
+        try {
+          await Promise.allSettled(imagePromises.slice(1))
+        } catch (error) {
+          console.warn("Error loading additional images:", error)
+        }
+      } catch (error) {
+        console.warn("Error in preloadImages:", error)
+        setFirstImageLoaded(true)
+        setIsLoading(false)
+        setImageError(true)
+      }
     }
 
     preloadImages()
@@ -346,10 +367,11 @@ export default function HomepageBirdCarousel({
   }, [])
 
   const handleImageError = useCallback(() => {
+    console.warn(`Failed to load current image: ${currentBird.image}`)
     setIsLoading(false)
     setImageLoaded(false)
     setImageError(true)
-  }, [])
+  }, [currentBird.image])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -443,17 +465,17 @@ export default function HomepageBirdCarousel({
   }
 
   return (
-    <div className={cn("relative w-full max-w-md mx-auto", className)}>
+    <div className={cn("relative w-full max-w-md mx-auto carousel-container", className)}>
       <Card className="overflow-hidden border-0 shadow-xl">
         <div className="relative">
           {/* Main Image - Perfect Square */}
-          <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50">
+          <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50 carousel-image-container">
             {!imageError ? (
               <img
                 src={currentBird.image || "/placeholder.svg?height=400&width=400&text=Bird+Image"}
                 alt={`${currentBird.commonName} - ${currentBird.primaryRegion}`}
                 className={cn(
-                  "w-full h-full object-cover transition-all duration-700 ease-out",
+                  "w-full h-full object-cover transition-all duration-700 ease-out carousel-slide",
                   imageLoaded ? "opacity-100" : "opacity-0",
                 )}
                 style={{
@@ -479,7 +501,7 @@ export default function HomepageBirdCarousel({
 
             {/* Enhanced Loading Indicator */}
             {isLoading && !imageError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50">
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50 carousel-loading">
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
                   <p className="text-sm text-emerald-700 font-medium">
@@ -496,7 +518,7 @@ export default function HomepageBirdCarousel({
             <Button
               variant="ghost"
               size="sm"
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 rounded-full z-30 transition-all duration-200"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 rounded-full z-30 transition-all duration-200 carousel-button"
               onClick={prevSlide}
               aria-label="Previous bird"
             >
@@ -506,7 +528,7 @@ export default function HomepageBirdCarousel({
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 rounded-full z-30 transition-all duration-200"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 rounded-full z-30 transition-all duration-200 carousel-button"
               onClick={nextSlide}
               aria-label="Next bird"
             >
@@ -518,7 +540,7 @@ export default function HomepageBirdCarousel({
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
                 onClick={() => setIsPlaying(!isPlaying)}
                 aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
                 disabled={!firstImageLoaded} // Disable until first image loads
@@ -529,7 +551,7 @@ export default function HomepageBirdCarousel({
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
                 onClick={() => setShowPhotoCredit(!showPhotoCredit)}
                 aria-label="View photo credit"
               >
@@ -564,7 +586,7 @@ export default function HomepageBirdCarousel({
                     variant="ghost"
                     size="sm"
                     className={cn(
-                      "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300",
+                      "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300 carousel-button",
                       showInfo
                         ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-lg"
                         : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
@@ -631,12 +653,12 @@ export default function HomepageBirdCarousel({
             {/* Enhanced Info Popup */}
             {showInfo && (
               <div className="absolute inset-0 bg-black/20 backdrop-blur-lg z-50">
-                <div className="h-full overflow-y-auto p-4">
+                <div className="h-full overflow-y-auto p-4 mobile-menu-scroll">
                   {/* Separate close button in top-right */}
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white border-0 z-10 shadow-lg"
+                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white border-0 z-10 shadow-lg carousel-button"
                     onClick={() => setShowInfo(false)}
                     aria-label="Close information"
                   >
@@ -763,7 +785,7 @@ export default function HomepageBirdCarousel({
 
                     <div className="flex flex-col gap-2">
                       <Link href={`/aves-explorer#${currentBird.regionSlug}`}>
-                        <Button className="bg-emerald-600/90 hover:bg-emerald-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-emerald-500/40">
+                        <Button className="bg-emerald-600/90 hover:bg-emerald-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-emerald-500/40 carousel-button">
                           <MapPin className="w-3 h-3 mr-1" />
                           Explore Region
                         </Button>
@@ -771,7 +793,7 @@ export default function HomepageBirdCarousel({
                       <Link href="/tours">
                         <Button
                           variant="outline"
-                          className="border-white/70 text-white hover:bg-white/20 text-xs bg-white/10 w-full h-9 shadow-lg backdrop-blur-sm"
+                          className="border-white/70 text-white hover:bg-white/20 text-xs bg-white/10 w-full h-9 shadow-lg backdrop-blur-sm carousel-button"
                         >
                           <ExternalLink className="w-3 h-3 mr-1" />
                           Plan Trip
@@ -787,7 +809,7 @@ export default function HomepageBirdCarousel({
 
         {/* Thumbnail Navigation */}
         <CardContent className="p-3">
-          <div className="flex gap-1 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-1 overflow-x-auto scrollbar-hide carousel-touch-area carousel-no-bounce">
             {birdData.map((bird, index) => {
               const thumbnailPositioning = getImagePositioning(bird.id)
               const isPreloaded = preloadedImages.has(bird.image)
@@ -796,7 +818,7 @@ export default function HomepageBirdCarousel({
                   key={bird.id}
                   onClick={() => goToSlide(index)}
                   className={cn(
-                    "flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all relative",
+                    "flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all relative carousel-thumbnail",
                     index === currentIndex ? "border-emerald-500 ring-1 ring-emerald-200" : "border-gray-200",
                     !isPreloaded && "opacity-50", // Visual indicator for unloaded images
                   )}
@@ -811,6 +833,10 @@ export default function HomepageBirdCarousel({
                       transform: thumbnailPositioning.transform,
                     }}
                     loading={index < 3 ? "eager" : "lazy"} // Eager load first 3 thumbnails
+                    onError={(e) => {
+                      console.warn(`Failed to load thumbnail: ${bird.image}`)
+                      // Don't prevent the error from bubbling up, just log it
+                    }}
                   />
                   {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
                   {!isPreloaded && (
@@ -830,7 +856,7 @@ export default function HomepageBirdCarousel({
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  "w-1.5 h-1.5 rounded-full transition-all",
+                  "w-1.5 h-1.5 rounded-full transition-all carousel-button",
                   index === currentIndex ? "bg-emerald-500" : "bg-gray-300",
                 )}
                 aria-label={`Go to slide ${index + 1}`}
