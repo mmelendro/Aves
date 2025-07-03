@@ -138,7 +138,7 @@ I look forward to hearing from you within 24 hours as mentioned on your website.
 Best regards,
 ${formData.firstName} ${formData.lastName}`)
 
-    return `mailto:info@aves.com?subject=${subject}&body=${body}`
+    return `mailto:info@aves.bio?subject=${subject}&body=${body}`
   }
 
   // Responsive class helpers
@@ -749,10 +749,10 @@ ${formData.firstName} ${formData.lastName}`)
                         <div>
                           <div className="font-medium text-gray-900">Email</div>
                           <a
-                            href="mailto:info@aves.com"
+                            href="mailto:info@aves.bio"
                             className="text-emerald-600 hover:text-emerald-700 hover:underline"
                           >
-                            info@aves.com
+                            info@aves.bio
                           </a>
                           <div className="text-gray-600 text-sm">24-hour response guarantee</div>
                         </div>
@@ -762,8 +762,8 @@ ${formData.firstName} ${formData.lastName}`)
                         <MapPin className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
                         <div>
                           <div className="font-medium text-gray-900">Based in</div>
-                          <div className="text-gray-700">Bogotá, Colombia</div>
-                          <div className="text-gray-600 text-sm">Operating nationwide</div>
+                          <div className="text-gray-700">Vancouver, Canada and Bogota, Colombia</div>
+                          <div className="text-gray-600 text-sm">Operating in Colombia</div>
                         </div>
                       </div>
                     </div>

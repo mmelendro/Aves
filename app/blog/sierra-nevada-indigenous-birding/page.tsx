@@ -33,7 +33,7 @@ export default function SierraNevadaBlogPost() {
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Video */}
         <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
-          <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/El%20Dorado-uJoK4deoS3MdNzKIGAUTejTN6o5Bcx.mp4" type="video/mp4" />
+          <source src="/videos/el-dorado-reserve.mp4" type="video/mp4" />
         </video>
 
         {/* Dark Overlay */}

@@ -10,13 +10,13 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
 export default function AudioTestPage() {
-  const [selectedAudio, setSelectedAudio] = useState("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-njVmyxK8Wn7VWVxZmnAUGhKKqEHDmg.mp3")
+  const [selectedAudio, setSelectedAudio] = useState("/audio/gnbhel1.mp3")
 
   const audioFiles = [
-    { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-njVmyxK8Wn7VWVxZmnAUGhKKqEHDmg.mp3", name: "Green-bearded Helmetcrest" },
-    { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-zlI0qx9zdy6wFmPwI8rEJXXYXjJp3H.mp3", name: "Rainbow-bearded Thornbill" },
-    { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-6pqzdAPhoSOUOXsdXTRugdtXK67CbY.mp3", name: "Chestnut-crowned Antpitta" },
-    { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Yellow-throated%20Toucan-YZaM0Q4HERiJp55ECemjfgYkdJIYwZ.mp3", name: "Yellow-throated Toucan" },
+    { file: "/audio/gnbhel1.mp3", name: "Green-bearded Helmetcrest" },
+    { file: "/audio/rabtho1.mp3", name: "Rainbow-bearded Thornbill" },
+    { file: "/audio/chcant2.mp3", name: "Chestnut-crowned Antpitta" },
+    { file: "/audio/yellow-throated-toucan.mp3", name: "Yellow-throated Toucan" },
   ]
 
   return (

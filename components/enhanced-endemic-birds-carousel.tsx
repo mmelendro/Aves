@@ -59,7 +59,7 @@ const bioregionBirds: BirdData[] = [
     description:
       "A spectacular endemic hummingbird with distinctive green throat feathers and crest, found only in Colombia's Eastern Andes.",
     image: "/images/green-bearded-helmetcrest.png",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-njVmyxK8Wn7VWVxZmnAUGhKKqEHDmg.mp3",
+    audioFile: "/audio/gnbhel1.mp3",
     conservationStatus: "Near Threatened",
     bestTime: "December - March",
     difficulty: "Challenging",
@@ -92,7 +92,7 @@ const bioregionBirds: BirdData[] = [
     description:
       "A spectacular endemic hummingbird with iridescent rainbow plumage on its throat and distinctive white leg puffs. Primarily found in the Central Andes with populations extending to the Western Andes and Colombian Massif.",
     image: "/images/rainbow-bearded-thornbill.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-zlI0qx9zdy6wFmPwI8rEJXXYXjJp3H.mp3",
+    audioFile: "/audio/rabtho1.mp3",
     conservationStatus: "Near Threatened",
     bestTime: "December - March",
     difficulty: "Challenging",
@@ -159,7 +159,7 @@ const bioregionBirds: BirdData[] = [
     description:
       "An elusive ground-dwelling bird known for its distinctive chestnut crown and secretive nature in dense cloud forests. Primarily found in the Colombian Massif with populations extending across multiple Andean regions.",
     image: "/images/chestnut-crowned-antpitta.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-6pqzdAPhoSOUOXsdXTRugdtXK67CbY.mp3",
+    audioFile: "/audio/chcant2.mp3",
     conservationStatus: "Least Concern",
     bestTime: "Year-round",
     difficulty: "Moderate",

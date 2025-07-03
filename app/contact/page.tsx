@@ -82,7 +82,7 @@ I look forward to hearing from you within 24 hours as mentioned on your website.
 Best regards,
 ${formData.firstName} ${formData.lastName}`)
 
-    return `mailto:info@aves.com?subject=${subject}&body=${body}`
+    return `mailto:info@aves.bio?subject=${subject}&body=${body}`
   }
 
   return (
@@ -117,10 +117,10 @@ ${formData.firstName} ${formData.lastName}`)
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Email Us</h3>
                 <p className="text-gray-600 mb-4">Get personalized tour recommendations</p>
                 <a
-                  href="mailto:info@aves.com"
+                  href="mailto:info@aves.bio"
                   className="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
                 >
-                  info@aves.com
+                  info@aves.bio
                 </a>
                 <div className="text-sm text-gray-500 mt-2">24-hour response guarantee</div>
               </CardContent>
@@ -133,8 +133,8 @@ ${formData.firstName} ${formData.lastName}`)
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Visit Us</h3>
                 <p className="text-gray-600 mb-4">Based in Colombia's capital</p>
-                <div className="text-gray-700 font-medium">Bogotá, Colombia</div>
-                <div className="text-sm text-gray-500 mt-2">Operating nationwide</div>
+                <div className="text-gray-700 font-medium">Vancouver, Canada and Bogota, Colombia</div>
+                <div className="text-sm text-gray-500 mt-2">Operating in Colombia</div>
               </CardContent>
             </Card>
 
@@ -454,10 +454,10 @@ ${formData.firstName} ${formData.lastName}`)
                           <Mail className="text-emerald-600 mt-1 flex-shrink-0 w-4 h-4" />
                           <div>
                             <a
-                              href="mailto:info@aves.com"
+                              href="mailto:info@aves.bio"
                               className="text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
                             >
-                              info@aves.com
+                              info@aves.bio
                             </a>
                             <div className="text-gray-600 text-xs">24-hour response guarantee</div>
                           </div>
@@ -466,8 +466,8 @@ ${formData.firstName} ${formData.lastName}`)
                         <div className="flex items-start space-x-3">
                           <MapPin className="text-emerald-600 mt-1 flex-shrink-0 w-4 h-4" />
                           <div>
-                            <div className="text-gray-700 text-sm">Bogotá, Colombia</div>
-                            <div className="text-gray-600 text-xs">Operating nationwide</div>
+                            <div className="text-gray-700 text-sm">Vancouver, Canada and Bogota, Colombia</div>
+                            <div className="text-gray-600 text-xs">Operating in Colombia</div>
                           </div>
                         </div>
                       </div>

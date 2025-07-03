@@ -22,87 +22,137 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   // Handle scroll detection for consistent background across all pages
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      setIsScrolled(scrollPosition > 10)
+      try {
+        const scrollPosition = window.scrollY
+        setIsScrolled(scrollPosition > 10)
+      } catch (error) {
+        console.warn("Error handling scroll:", error)
+      }
     }
 
     handleScroll() // Check initial scroll position
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      try {
+        window.removeEventListener("scroll", handleScroll)
+      } catch (error) {
+        console.warn("Error removing scroll listener:", error)
+      }
+    }
   }, [])
 
   // Handle auto-collapse after 3 seconds when cursor leaves menu area
   useEffect(() => {
-    if (desktopMenuExpanded && !isHovering) {
-      collapseTimeoutRef.current = setTimeout(() => {
-        setDesktopMenuExpanded(false)
-      }, 3000)
-    } else if (collapseTimeoutRef.current) {
-      clearTimeout(collapseTimeoutRef.current)
-      collapseTimeoutRef.current = null
+    try {
+      if (desktopMenuExpanded && !isHovering) {
+        collapseTimeoutRef.current = setTimeout(() => {
+          setDesktopMenuExpanded(false)
+        }, 3000)
+      } else if (collapseTimeoutRef.current) {
+        clearTimeout(collapseTimeoutRef.current)
+        collapseTimeoutRef.current = null
+      }
+    } catch (error) {
+      console.warn("Error in auto-collapse effect:", error)
     }
 
     return () => {
-      if (collapseTimeoutRef.current) {
-        clearTimeout(collapseTimeoutRef.current)
+      try {
+        if (collapseTimeoutRef.current) {
+          clearTimeout(collapseTimeoutRef.current)
+        }
+      } catch (error) {
+        console.warn("Error clearing timeout:", error)
       }
     }
   }, [desktopMenuExpanded, isHovering])
 
   // Handle mouse enter/leave for the entire menu area
   const handleMouseEnter = () => {
-    setIsHovering(true)
+    try {
+      setIsHovering(true)
+    } catch (error) {
+      console.warn("Error handling mouse enter:", error)
+    }
   }
 
   const handleMouseLeave = () => {
-    setIsHovering(false)
+    try {
+      setIsHovering(false)
+    } catch (error) {
+      console.warn("Error handling mouse leave:", error)
+    }
   }
 
   // Toggle desktop menu
   const toggleDesktopMenu = () => {
-    setDesktopMenuExpanded(!desktopMenuExpanded)
+    try {
+      setDesktopMenuExpanded(!desktopMenuExpanded)
+    } catch (error) {
+      console.warn("Error toggling desktop menu:", error)
+    }
   }
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.classList.add("menu-open")
-      const scrollY = window.scrollY
-      document.body.style.top = `-${scrollY}px`
-    } else {
-      document.body.classList.remove("menu-open")
-      const scrollY = document.body.style.top
-      document.body.style.top = ""
-      if (scrollY) {
-        window.scrollTo(0, Number.parseInt(scrollY || "0") * -1)
+    try {
+      if (mobileMenuOpen) {
+        document.body.classList.add("menu-open")
+        const scrollY = window.scrollY
+        document.body.style.top = `-${scrollY}px`
+      } else {
+        document.body.classList.remove("menu-open")
+        const scrollY = document.body.style.top
+        document.body.style.top = ""
+        if (scrollY) {
+          window.scrollTo(0, Number.parseInt(scrollY || "0") * -1)
+        }
       }
+    } catch (error) {
+      console.warn("Error managing body scroll:", error)
     }
 
     return () => {
-      document.body.classList.remove("menu-open")
-      document.body.style.top = ""
+      try {
+        document.body.classList.remove("menu-open")
+        document.body.style.top = ""
+      } catch (error) {
+        console.warn("Error cleaning up body scroll:", error)
+      }
     }
   }, [mobileMenuOpen])
 
   // Handle ESC key to close menus
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        if (mobileMenuOpen) {
-          setMobileMenuOpen(false)
+      try {
+        if (event.key === "Escape") {
+          if (mobileMenuOpen) {
+            setMobileMenuOpen(false)
+          }
+          if (desktopMenuExpanded) {
+            setDesktopMenuExpanded(false)
+          }
         }
-        if (desktopMenuExpanded) {
-          setDesktopMenuExpanded(false)
-        }
+      } catch (error) {
+        console.warn("Error handling ESC key:", error)
       }
     }
 
-    if (mobileMenuOpen || desktopMenuExpanded) {
-      document.addEventListener("keydown", handleEscKey)
+    try {
+      if (mobileMenuOpen || desktopMenuExpanded) {
+        document.addEventListener("keydown", handleEscKey)
+      }
+    } catch (error) {
+      console.warn("Error adding keydown listener:", error)
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscKey)
+      try {
+        document.removeEventListener("keydown", handleEscKey)
+      } catch (error) {
+        console.warn("Error removing keydown listener:", error)
+      }
     }
   }, [mobileMenuOpen, desktopMenuExpanded])
 
@@ -126,7 +176,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             desktopMenuExpanded ? "py-5" : "py-3",
           )}
         >
-          {/* Unified Logo and Toggle Section */}
+          {/* Logo and Toggle Section */}
           <div
             className={cn(
               "flex items-center transition-all duration-700 ease-out",
@@ -143,7 +193,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               )}
               aria-label={desktopMenuExpanded ? "Collapse menu" : "Expand menu"}
             >
-              {/* Unified Logo Container */}
+              {/* Logo Container with Animation */}
               <div
                 className={cn(
                   "relative transition-all duration-700 ease-out flex items-center justify-center flex-shrink-0",
@@ -160,8 +210,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   className={cn(
                     "object-contain transition-all duration-700 ease-out drop-shadow-sm",
                     desktopMenuExpanded
-                      ? "w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10"
-                      : "w-6 h-6 sm:w-7 sm:h-7 md:w-6 md:h-6",
+                      ? "w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 opacity-100"
+                      : "w-6 h-6 sm:w-7 sm:h-7 md:w-6 md:h-6 opacity-60",
                   )}
                   style={{
                     objectFit: "contain",
@@ -170,18 +220,16 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   priority
                 />
 
-                {/* Unified glow effect */}
+                {/* Glow effect */}
                 <div
                   className={cn(
                     "absolute inset-0 rounded-lg transition-all duration-700 ease-out pointer-events-none",
-                    desktopMenuExpanded
-                      ? "shadow-md opacity-15 bg-gradient-radial from-emerald-200/10 to-transparent"
-                      : "shadow-sm opacity-10 bg-gradient-radial from-emerald-100/8 to-transparent",
+                    desktopMenuExpanded ? "shadow-md opacity-15" : "shadow-sm opacity-10",
                   )}
                 />
               </div>
 
-              {/* Unified Arrow indicator */}
+              {/* Arrow indicator */}
               <div
                 className={cn(
                   "transition-all duration-500 ease-out flex items-center justify-center flex-shrink-0",
@@ -199,7 +247,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </button>
           </div>
 
-          {/* Unified Desktop Navigation - Expandable */}
+          {/* Desktop Navigation - Expandable */}
           <nav
             className={cn(
               "hidden md:flex items-center transition-all duration-700 ease-out",
@@ -395,7 +443,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </Link>
           </nav>
 
-          {/* Unified Desktop CTA Button */}
+          {/* Desktop CTA Button */}
           <div
             className={cn(
               "hidden md:block transition-all duration-700 ease-out",
@@ -411,7 +459,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </Link>
           </div>
 
-          {/* Unified Mobile Menu Button */}
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-3 -mr-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 bg-white/10 backdrop-blur-sm border border-white/20"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -428,7 +476,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </div>
 
-      {/* Unified Mobile Navigation Backdrop */}
+      {/* Mobile Navigation Backdrop */}
       {mobileMenuOpen && (
         <div
           className="md:hidden fixed inset-0 top-[73px] bg-black/20 backdrop-blur-sm z-30"
@@ -437,7 +485,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         />
       )}
 
-      {/* Unified Mobile Navigation */}
+      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-[73px] z-40 bg-white/95 backdrop-blur-md border-t border-white/20 shadow-xl">
           <div className="max-h-[calc(100vh-73px)] overflow-y-auto overscroll-contain">
