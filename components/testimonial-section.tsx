@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { Quote } from "lucide-react"
+import { Quote } from 'lucide-react'
 
 interface TestimonialSectionProps {
   testimonial: {
@@ -11,7 +11,7 @@ interface TestimonialSectionProps {
   }
 }
 
-export default function TestimonialSection({ testimonial }: TestimonialSectionProps) {
+function TestimonialSection({ testimonial }: TestimonialSectionProps) {
   return (
     <section className="py-16 px-4 bg-gradient-to-r from-orange-500 to-red-500">
       <div className="max-w-4xl mx-auto">
@@ -40,3 +40,6 @@ export default function TestimonialSection({ testimonial }: TestimonialSectionPr
     </section>
   )
 }
+
+export default TestimonialSection
+export { TestimonialSection }

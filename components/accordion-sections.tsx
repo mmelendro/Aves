@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronUp, Bird, Calendar, MapPin, Star } from "lucide-react"
+import { ChevronDown, ChevronUp, Bird, Calendar, MapPin, Star } from 'lucide-react'
 import Link from "next/link"
 
 interface Species {
@@ -36,7 +36,7 @@ interface AccordionSectionsProps {
   accommodations: Accommodation[]
 }
 
-export default function AccordionSections({ speciesList, detailedItinerary, accommodations }: AccordionSectionsProps) {
+function AccordionSections({ speciesList, detailedItinerary, accommodations }: AccordionSectionsProps) {
   const [openSection, setOpenSection] = useState<string | null>(null)
 
   const toggleSection = (section: string) => {
@@ -264,3 +264,6 @@ export default function AccordionSections({ speciesList, detailedItinerary, acco
     </section>
   )
 }
+
+export default AccordionSections
+export { AccordionSections }

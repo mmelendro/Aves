@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MapPin, Info, ChevronDown, ChevronUp } from "lucide-react"
+import { MapPin, Info, ChevronDown, ChevronUp } from 'lucide-react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 
 interface MapLocation {
@@ -20,7 +20,7 @@ interface InteractiveRegionMapProps {
   region: string
 }
 
-export default function InteractiveRegionMap({ locations, region }: InteractiveRegionMapProps) {
+function InteractiveRegionMap({ locations, region }: InteractiveRegionMapProps) {
   const [selectedLocation, setSelectedLocation] = useState<MapLocation | null>(null)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -177,3 +177,6 @@ export default function InteractiveRegionMap({ locations, region }: InteractiveR
     </Collapsible>
   )
 }
+
+export default InteractiveRegionMap
+export { InteractiveRegionMap }

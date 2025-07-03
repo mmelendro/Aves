@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, X } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { caribbeanData } from "@/lib/caribbean-data"
@@ -15,7 +15,7 @@ interface HomepageBirdCarouselProps {
   autoPlayInterval?: number
 }
 
-export default function CaribbeanBirdCarousel({
+function CaribbeanBirdCarousel({
   className,
   autoPlay = true,
   autoPlayInterval = 8000,
@@ -650,3 +650,6 @@ export default function CaribbeanBirdCarousel({
     </div>
   )
 }
+
+export default CaribbeanBirdCarousel
+export { CaribbeanBirdCarousel }

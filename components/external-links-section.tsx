@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { LucideExternalLink, Info } from "lucide-react"
+import { LucideExternalLink, Info } from 'lucide-react'
 import Link from "next/link"
 
 interface ExternalLink {
@@ -16,7 +16,7 @@ interface ExternalLinksSectionProps {
   links: ExternalLink[]
 }
 
-export default function ExternalLinksSection({ links }: ExternalLinksSectionProps) {
+function ExternalLinksSection({ links }: ExternalLinksSectionProps) {
   // Return null if no links to display (removed partner links)
   if (!links || links.length === 0) {
     return (
@@ -101,3 +101,6 @@ export default function ExternalLinksSection({ links }: ExternalLinksSectionProp
     </section>
   )
 }
+
+export default ExternalLinksSection
+export { ExternalLinksSection }

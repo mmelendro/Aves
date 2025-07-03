@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Bird, ChevronDown, ChevronUp, MapPin, Clock, Mountain } from "lucide-react"
+import { Bird, ChevronDown, ChevronUp, MapPin, Clock, Mountain } from 'lucide-react'
 import OptimizedImage from "./optimized-image"
 import Link from "next/link"
 
@@ -27,7 +27,7 @@ interface CollapsibleTargetSpeciesProps {
   region: string
 }
 
-export default function CollapsibleTargetSpecies({ species, region }: CollapsibleTargetSpeciesProps) {
+function CollapsibleTargetSpecies({ species, region }: CollapsibleTargetSpeciesProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const getStatusColor = (status: string) => {
@@ -215,3 +215,6 @@ export default function CollapsibleTargetSpecies({ species, region }: Collapsibl
     </Collapsible>
   )
 }
+
+export default CollapsibleTargetSpecies
+export { CollapsibleTargetSpecies }

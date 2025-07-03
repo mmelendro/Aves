@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bird, Trees, Target } from "lucide-react"
+import { Bird, Trees, Target } from 'lucide-react'
 
 interface HighlightCardsProps {
   highlights: {
@@ -11,7 +11,7 @@ interface HighlightCardsProps {
   }
 }
 
-export default function HighlightCards({ highlights }: HighlightCardsProps) {
+function HighlightCards({ highlights }: HighlightCardsProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
       <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
@@ -76,3 +76,6 @@ export default function HighlightCards({ highlights }: HighlightCardsProps) {
     </div>
   )
 }
+
+export default HighlightCards
+export { HighlightCards }

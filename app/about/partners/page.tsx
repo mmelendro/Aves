@@ -301,6 +301,33 @@ const partners = [
     logo: "/placeholder.svg?height=80&width=120&text=Sutu",
     tags: ["Private Reserve", "Conservation", "Community", "Ecotourism"],
   },
+  {
+    id: "jardin-de-rocas",
+    name: "Jardín de Rocas",
+    type: "Ecolodge & Nature Reserve",
+    location: "Central Andes, Colombia",
+    description:
+      "A premier ecolodge and nature reserve specializing in cloud forest birding experiences. Jardín de Rocas offers exceptional opportunities to observe spectacular Neotropical species including the iconic Andean Cock-of-the-rock in their natural habitat. The lodge combines comfortable accommodation with expert guiding services in pristine montane forest environments.",
+    specialties: ["Cock-of-the-rock", "Cloud Forest Birding", "Montane Species", "Photography", "Expert Guiding"],
+    website: "https://www.jardinderocas.org/",
+    socialMedia: {
+      instagram: "https://www.instagram.com/jardinderocas/",
+    },
+    established: "2010",
+    area: "Private cloud forest reserve",
+    elevation: "1,400 - 2,400m",
+    highlights: [
+      "Andean Cock-of-the-rock observation",
+      "Cloud forest ecosystem",
+      "Expert naturalist guides",
+      "Photography opportunities",
+      "Comfortable ecolodge facilities",
+      "Montane forest species diversity",
+    ],
+    category: "lodges",
+    logo: "/placeholder.svg?height=80&width=120&text=Jardin+Rocas",
+    tags: ["Cock-of-the-rock", "Cloud Forest", "Photography", "Expert Guides"],
+  },
 ]
 
 const categories = {

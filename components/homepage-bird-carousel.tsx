@@ -172,6 +172,29 @@ const birdData: BirdData[] = [
       title: "Wildlife Photographer",
     },
   },
+  {
+    id: "7",
+    commonName: "Andean Cock-of-the-rock",
+    scientificName: "Rupicola peruvianus",
+    spanishName: "Gallito de Roca Andino",
+    primaryRegion: "Central Andes",
+    secondaryRegions: ["Western Andes", "Eastern Andes", "Colombian Massif"],
+    ecoregions: ["Cloud forest", "Montane forest", "Forest understory", "Rocky outcrops"],
+    regionSlug: "central-andes",
+    status: "Spectacular",
+    difficulty: "Moderate",
+    habitat: "Cloud forests and montane forests with rocky outcrops and dense understory",
+    bestTime: "Year-round (most active early morning)",
+    elevation: "1,400 - 2,400m",
+    image: "/images/andean-cock-of-the-rock.jpg",
+    photoCredit: {
+      photographer: "Martin Melendro",
+      title: "AVES Lead Guide & Founder",
+      teamLink: "/team#martin-melendro",
+      reserve: "Jardín de Rocas",
+      reserveLink: "/about/partners#jardin-de-rocas",
+    },
+  },
 ]
 
 interface HomepageBirdCarouselProps {
@@ -354,7 +377,7 @@ export default function HomepageBirdCarousel({
     }
   }
 
-  // Enhanced image positioning for perfect square framing
+  // Enhanced image positioning for perfect square framing with focus on bird's eye and wing
   const getImagePositioning = (birdId: string) => {
     switch (birdId) {
       case "1": // Green-bearded Helmetcrest
@@ -386,6 +409,11 @@ export default function HomepageBirdCarousel({
         return {
           objectPosition: "center 25%",
           transform: "scale(1.1)",
+        }
+      case "7": // Andean Cock-of-the-rock - Optimized for eye and wing focus
+        return {
+          objectPosition: "center 40%", // Centered on bird's eye and wing area
+          transform: "scale(1.0)", // Minimal scaling to preserve original width
         }
       default:
         return {

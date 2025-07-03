@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Calendar, ChevronDown, ChevronUp, MapPin, Utensils, Bed, Activity } from "lucide-react"
+import { Calendar, ChevronDown, ChevronUp, MapPin, Utensils, Bed, Activity } from 'lucide-react'
 import Link from "next/link"
 
 interface ItineraryStep {
@@ -30,7 +30,7 @@ interface CollapsibleItineraryProps {
   region: string
 }
 
-export default function CollapsibleItinerary({
+function CollapsibleItinerary({
   conciseItinerary,
   detailedItinerary,
   region,
@@ -237,3 +237,6 @@ export default function CollapsibleItinerary({
     </Collapsible>
   )
 }
+
+export default CollapsibleItinerary
+export { CollapsibleItinerary }

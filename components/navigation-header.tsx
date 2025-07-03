@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown, ChevronRight, ChevronLeft } from "lucide-react"
+import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import { cn } from "@/lib/utils"
@@ -93,6 +93,15 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     }
   }
 
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    try {
+      setMobileMenuOpen(!mobileMenuOpen)
+    } catch (error) {
+      console.warn("Error toggling mobile menu:", error)
+    }
+  }
+
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     try {
@@ -165,7 +174,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         className={cn(
           "transition-all duration-700 ease-out",
           // Unified background behavior across all pages
-          desktopMenuExpanded || isScrolled
+          desktopMenuExpanded || isScrolled || mobileMenuOpen
             ? "bg-white/95 backdrop-blur-md border-b border-white/30 shadow-lg"
             : "bg-white/10 backdrop-blur-sm border-b border-white/10 shadow-sm",
         )}
@@ -176,10 +185,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             desktopMenuExpanded ? "py-5" : "py-3",
           )}
         >
-          {/* Logo and Toggle Section */}
+          {/* Desktop Logo and Toggle Section */}
           <div
             className={cn(
-              "flex items-center transition-all duration-700 ease-out",
+              "hidden md:flex items-center transition-all duration-700 ease-out",
               desktopMenuExpanded ? "pr-8 min-w-[120px]" : "pr-4 min-w-[80px]",
             )}
           >
@@ -246,6 +255,9 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               </div>
             </button>
           </div>
+
+          {/* Mobile Logo Placeholder - Hidden on Mobile */}
+          <div className="md:hidden flex-1" />
 
           {/* Desktop Navigation - Expandable */}
           <nav
@@ -459,19 +471,52 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile AVES Logo Button - Replaces Hamburger Menu */}
           <button
-            className="md:hidden p-3 -mr-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 bg-white/10 backdrop-blur-sm border border-white/20"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle mobile menu"
+            className={cn(
+              "md:hidden flex items-center justify-center transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-emerald-500/50 rounded-xl touch-manipulation",
+              // Size transitions - inactive ~25px, active scales up
+              mobileMenuOpen
+                ? "w-16 h-16 p-3 bg-white/95 backdrop-blur-md border-2 border-emerald-200 shadow-xl scale-110"
+                : "w-12 h-12 p-2.5 bg-white/20 backdrop-blur-sm border border-white/30 shadow-lg scale-100 hover:scale-105",
+            )}
+            onClick={toggleMobileMenu}
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700 transition-transform duration-200" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700 transition-transform duration-200" />
-            )}
+            {/* AVES Logo with Perfect Centering */}
+            <div className="relative flex items-center justify-center w-full h-full">
+              <OptimizedImage
+                src="/images/aves-logo.png"
+                alt="AVES Navigation Menu"
+                width={32}
+                height={32}
+                className={cn(
+                  "object-contain transition-all duration-500 ease-out",
+                  // Logo size - inactive ~25px (fits in 12x12 container), active scales proportionally
+                  mobileMenuOpen ? "w-10 h-10 opacity-100 drop-shadow-md" : "w-7 h-7 opacity-90 drop-shadow-sm",
+                )}
+                style={{
+                  objectFit: "contain",
+                  objectPosition: "center",
+                }}
+                priority
+              />
+
+              {/* Subtle glow effect */}
+              <div
+                className={cn(
+                  "absolute inset-0 rounded-xl transition-all duration-500 ease-out pointer-events-none",
+                  mobileMenuOpen ? "bg-emerald-100/30 shadow-lg opacity-100" : "bg-white/10 shadow-sm opacity-60",
+                )}
+              />
+
+              {/* Active state indicator */}
+              {mobileMenuOpen && (
+                <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-emerald-400/20 to-emerald-600/20 animate-pulse" />
+              )}
+            </div>
           </button>
         </div>
       </div>
@@ -493,7 +538,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               <div className="py-2">
                 <Link
                   href="/tours"
-                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg"
+                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg touch-manipulation"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Tours
@@ -501,35 +546,35 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 <div className="pl-4 space-y-3 mt-3">
                   <Link
                     href="/tours"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🗺️ All Tours Overview
                   </Link>
                   <Link
                     href="/tours/adventure"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🍃 Adventure Tours
                   </Link>
                   <Link
                     href="/tours/vision"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🪶 Vision Tours
                   </Link>
                   <Link
                     href="/tours/elevate"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🌼 Elevate Tours
                   </Link>
                   <Link
                     href="/tours/souls"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🍓 Souls Tours
@@ -539,7 +584,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               <div className="py-2">
                 <Link
                   href="/resources"
-                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg"
+                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg touch-manipulation"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Resources Hub
@@ -548,7 +593,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide py-1">Explore & Plan</div>
                   <Link
                     href="/aves-explorer"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🦅 AVES Explorer
@@ -559,14 +604,14 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   </div>
                   <Link
                     href="/resources"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     📚 Expert Resources Hub
                   </Link>
                   <Link
                     href="/travel-tips"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     ✈️ Travel Essentials
@@ -577,7 +622,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   </div>
                   <Link
                     href="/blog"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     📝 Blog & Expeditions
@@ -587,7 +632,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               <div className="py-2">
                 <Link
                   href="/about"
-                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg"
+                  className="text-gray-700 font-medium py-3 hover:text-emerald-600 transition-colors block text-lg touch-manipulation"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   About
@@ -595,21 +640,21 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 <div className="pl-4 space-y-3 mt-3">
                   <Link
                     href="/about"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🏢 About AVES
                   </Link>
                   <Link
                     href="/team"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     👥 Our Team
                   </Link>
                   <Link
                     href="/about/partners"
-                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base"
+                    className="block text-gray-600 hover:text-emerald-600 transition-colors py-2 text-base touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     🤝 Our Partners
@@ -618,21 +663,21 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               </div>
               <Link
                 href="/about/b-corp"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 B Corp Journey
               </Link>
               <Link
                 href="/conservation"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Conservation
               </Link>
               <Link
                 href="/contact"
-                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg"
+                className="block text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg touch-manipulation"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contact
@@ -640,7 +685,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               <div className="pt-6 pb-4 border-t border-gray-100/50">
                 <Link href="/shopping">
                   <Button
-                    className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 min-h-[48px] text-base rounded-xl"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 min-h-[48px] text-base rounded-xl touch-manipulation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Book Your Journey
