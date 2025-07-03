@@ -481,13 +481,13 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             {/* Mobile AVES Logo Button - Fixed Position */}
             <button
               className={cn(
-                "md:hidden fixed top-4 right-4 z-[60] flex items-center justify-center transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500/50 rounded-xl touch-manipulation",
-                // Consistent size: 40px
-                "w-10 h-10 p-2",
+                "md:hidden fixed top-4 right-4 z-[60] flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500/50 rounded-xl touch-manipulation",
+                // Consistent size: 44px for better touch target
+                "w-11 h-11 p-2.5",
                 // Enhanced background styling with better contrast
                 mobileMenuOpen
-                  ? "bg-white/98 backdrop-blur-md border-2 border-emerald-200 shadow-2xl scale-110"
-                  : "bg-white/40 backdrop-blur-sm border border-white/60 shadow-xl scale-100 hover:scale-105",
+                  ? "bg-white/95 backdrop-blur-md border-2 border-emerald-200 shadow-2xl scale-105"
+                  : "bg-white/80 backdrop-blur-sm border border-white/60 shadow-xl scale-100 hover:scale-105",
               )}
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -498,7 +498,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               <div className="relative flex items-center justify-center w-full h-full">
                 {mobileMenuOpen ? (
                   <X
-                    className={cn("transition-all duration-500 ease-in-out", "w-6 h-6 text-gray-800 drop-shadow-md")}
+                    className={cn("transition-all duration-300 ease-in-out", "w-6 h-6 text-gray-800 drop-shadow-md")}
                   />
                 ) : (
                   <OptimizedImage
@@ -507,7 +507,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     width={24}
                     height={24}
                     className={cn(
-                      "object-contain transition-all duration-500 ease-in-out",
+                      "object-contain transition-all duration-300 ease-in-out",
                       "w-6 h-6 opacity-95 drop-shadow-sm",
                     )}
                     style={{
@@ -521,7 +521,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 {/* Enhanced glow effect */}
                 <div
                   className={cn(
-                    "absolute inset-0 rounded-xl transition-all duration-500 ease-in-out pointer-events-none",
+                    "absolute inset-0 rounded-xl transition-all duration-300 ease-in-out pointer-events-none",
                     mobileMenuOpen ? "bg-emerald-100/40 shadow-xl opacity-100" : "bg-white/20 shadow-lg opacity-70",
                   )}
                 />
@@ -536,21 +536,21 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* Mobile Navigation Slide-out Menu - Fixed Positioning and Sizing */}
+      {/* Mobile Navigation Slide-out Menu - Enhanced Right-side Alignment */}
       <div
         className={cn(
           "md:hidden fixed top-0 right-0 h-full z-50 transition-all duration-500 ease-in-out",
-          // Fixed width that displaces content halfway across screen
-          "w-[50vw] min-w-[280px] max-w-[320px]",
-          // Enhanced transparent background with better visibility
-          "bg-white/75 backdrop-blur-xl border-l border-white/40 shadow-2xl",
+          // Enhanced width and positioning for better right-side alignment
+          "w-[75vw] min-w-[280px] max-w-[350px]",
+          // Enhanced transparent background with smooth transitions
+          "bg-white/85 backdrop-blur-xl border-l border-white/40 shadow-2xl",
           mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
         )}
         id="mobile-navigation"
         data-mobile-menu
       >
         {/* Menu Header with Enhanced Contrast */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200/60 bg-white/30 backdrop-blur-sm">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200/60 bg-white/40 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
             <OptimizedImage
               src="/images/aves-logo.png"
@@ -564,7 +564,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
 
         {/* Menu Content with Enhanced Readability */}
-        <div className="flex flex-col h-full pt-4 pb-20 overflow-y-auto bg-gradient-to-b from-white/20 to-white/30 mobile-menu-scroll">
+        <div className="flex flex-col h-full pt-4 pb-20 overflow-y-auto bg-gradient-to-b from-white/30 to-white/40 mobile-menu-scroll">
           <nav className="px-4 space-y-4 flex-1">
             {/* Tours Section */}
             <div className="space-y-2">
@@ -575,7 +575,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               >
                 Tours
               </Link>
-              <div className="pl-3 space-y-2 bg-white/30 rounded-lg p-3 backdrop-blur-sm">
+              <div className="pl-3 space-y-2 bg-white/40 rounded-lg p-3 backdrop-blur-sm border border-white/30">
                 <Link
                   href="/tours"
                   className="block text-gray-800 hover:text-emerald-600 transition-colors py-1.5 text-sm touch-manipulation font-medium mobile-menu-item"
@@ -623,7 +623,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               >
                 Resources Hub
               </Link>
-              <div className="pl-3 space-y-2 bg-white/30 rounded-lg p-3 backdrop-blur-sm">
+              <div className="pl-3 space-y-2 bg-white/40 rounded-lg p-3 backdrop-blur-sm border border-white/30">
                 <div className="text-xs font-semibold text-gray-700 uppercase tracking-wide py-1 drop-shadow-sm">
                   Explore & Plan
                 </div>
@@ -675,7 +675,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               >
                 About
               </Link>
-              <div className="pl-3 space-y-2 bg-white/30 rounded-lg p-3 backdrop-blur-sm">
+              <div className="pl-3 space-y-2 bg-white/40 rounded-lg p-3 backdrop-blur-sm border border-white/30">
                 <Link
                   href="/about"
                   className="block text-gray-800 hover:text-emerald-600 transition-colors py-1.5 text-sm touch-manipulation font-medium mobile-menu-item"
@@ -725,7 +725,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           </nav>
 
           {/* CTA Button with Enhanced Visibility */}
-          <div className="px-4 pt-4 border-t border-gray-200/60 bg-white/30 backdrop-blur-sm">
+          <div className="px-4 pt-4 border-t border-gray-200/60 bg-white/40 backdrop-blur-sm">
             <Link href="/shopping">
               <Button
                 className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 min-h-[44px] text-sm rounded-xl touch-manipulation shadow-lg font-semibold"
@@ -741,7 +741,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
       {/* Mobile Menu Backdrop with Enhanced Transparency */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-all duration-500 ease-in-out"
+          className="md:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-all duration-500 ease-in-out"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />

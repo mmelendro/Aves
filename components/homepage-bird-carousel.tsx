@@ -95,7 +95,7 @@ const birdData: BirdData[] = [
     habitat: "Montane cloud forests and forest edges with fruiting trees",
     bestTime: "Year-round (most active mornings)",
     elevation: "1,500 - 2,800m",
-    image: "/images/bbmtou1-black-billed-mountain-toucan.png",
+    image: "/images/bbmtou1-square.png",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -432,10 +432,10 @@ export default function HomepageBirdCarousel({
           objectPosition: "center 25%", // Focus on the bird's head and colorful throat
           transform: "scale(1.15)", // Slight zoom to highlight the rainbow beard
         }
-      case "3": // Black-billed Mountain-Toucan
+      case "3": // Black-billed Mountain-Toucan - Updated for bbmtou1-square.png
         return {
-          objectPosition: "center center",
-          transform: "scale(1.15)",
+          objectPosition: "center 20%", // Position toucan's face and eye at the top
+          transform: "scale(1.0)", // No scaling needed for square format
         }
       case "4": // Chestnut-crowned Antpitta
         return {
@@ -534,65 +534,65 @@ export default function HomepageBirdCarousel({
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows - Enhanced positioning to avoid thumbnail overlap */}
             <Button
               variant="ghost"
               size="sm"
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 rounded-full z-30 transition-all duration-200 carousel-button"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg"
               onClick={prevSlide}
               aria-label="Previous bird"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5" />
             </Button>
 
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 rounded-full z-30 transition-all duration-200 carousel-button"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg"
               onClick={nextSlide}
               aria-label="Next bird"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-5 h-5" />
             </Button>
 
-            {/* Top Control Buttons */}
-            <div className="absolute top-3 right-3 flex gap-2 z-40">
+            {/* Top Control Buttons - Enhanced positioning */}
+            <div className="absolute top-3 right-3 flex gap-2 z-50">
               {currentBird.audioFile && (
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
                   onClick={playAudio}
                   aria-label="Play bird call"
                 >
-                  <Volume2 className="w-3 h-3" />
+                  <Volume2 className="w-4 h-4" />
                 </Button>
               )}
 
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
                 onClick={() => setIsPlaying(!isPlaying)}
                 aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
                 disabled={!firstImageLoaded}
               >
-                {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
               </Button>
 
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
                 onClick={() => setShowPhotoCredit(!showPhotoCredit)}
                 aria-label="View photo credit"
               >
-                <Camera className="w-3 h-3" />
+                <Camera className="w-4 h-4" />
               </Button>
             </div>
 
             {/* Bird Information - Bottom with Primary Region Tag */}
-            <div className="absolute bottom-0 left-0 right-0 text-white z-20">
+            <div className="absolute bottom-0 left-0 right-0 text-white z-30">
               <div className="p-3 space-y-2">
                 {/* Bird Names */}
                 <div className="space-y-1">
@@ -618,290 +618,212 @@ export default function HomepageBirdCarousel({
                     variant="ghost"
                     size="sm"
                     className={cn(
-                      "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300 carousel-button",
+                      "w-10 h-10 p-0 rounded-full border-0 transition-all duration-300 carousel-button shadow-lg",
                       showInfo
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-lg"
-                        : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
+                        ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110"
+                        : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white",
                     )}
                     onClick={() => setShowInfo(!showInfo)}
                     aria-label={showInfo ? "Hide bird information" : "Show bird information"}
                   >
-                    <Info className={cn("w-4 h-4 transition-all duration-300", showInfo ? "rotate-180" : "")} />
+                    {showInfo ? <X className="w-4 h-4" /> : <Info className="w-4 h-4" />}
                   </Button>
                 </div>
               </div>
             </div>
-
-            {/* Photo Credit Popup */}
-            {showPhotoCredit && (
-              <div className="absolute top-14 right-3 z-50">
-                <div className="bg-black/95 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-xs shadow-xl min-w-[180px]">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Camera className="w-3 h-3" />
-                    <span className="font-medium">Photo Credit</span>
-                  </div>
-                  <div className="space-y-1">
-                    {currentBird.photoCredit.teamLink ? (
-                      <Link
-                        href={currentBird.photoCredit.teamLink}
-                        className="text-emerald-300 hover:text-emerald-200 font-medium hover:underline block"
-                      >
-                        {currentBird.photoCredit.photographer}
-                      </Link>
-                    ) : (
-                      <span className="text-emerald-300 font-medium">{currentBird.photoCredit.photographer}</span>
-                    )}
-                    <p className="text-blue-300 text-xs">{currentBird.photoCredit.title}</p>
-                    {currentBird.photoCredit.reserve && (
-                      <div>
-                        {currentBird.photoCredit.reserveLink ? (
-                          <Link
-                            href={currentBird.photoCredit.reserveLink}
-                            className="text-yellow-300 hover:text-yellow-200 text-xs hover:underline flex items-center gap-1"
-                          >
-                            <MapPin className="w-3 h-3" />
-                            {currentBird.photoCredit.reserve}
-                          </Link>
-                        ) : (
-                          <span className="text-yellow-300 text-xs">{currentBird.photoCredit.reserve}</span>
-                        )}
-                      </div>
-                    )}
-                    {currentBird.photoCredit.instagramPost && (
-                      <a
-                        href={currentBird.photoCredit.instagramPost}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-300 hover:text-blue-200 text-xs hover:underline block"
-                      >
-                        📱 View on Instagram
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Enhanced Info Popup */}
-            {showInfo && (
-              <div className="absolute inset-0 bg-black/20 backdrop-blur-lg z-50">
-                <div className="h-full overflow-y-auto p-4 mobile-menu-scroll">
-                  {/* Separate close button in top-right */}
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white border-0 z-10 shadow-lg carousel-button"
-                    onClick={() => setShowInfo(false)}
-                    aria-label="Close information"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-
-                  <div className="pt-12 pb-6">
-                    <div className="mb-4">
-                      <h2 className="text-lg font-bold text-white mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
-                        {currentBird.commonName}
-                      </h2>
-                      <p className="text-sm italic text-emerald-200 mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                        {currentBird.scientificName}
-                      </p>
-                      <p className="text-xs text-gray-200 mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                        {currentBird.spanishName}
-                      </p>
-
-                      {/* Status and Difficulty Badges - Enhanced with backdrop */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge
-                          className={cn(
-                            "text-xs font-medium border shadow-lg backdrop-blur-sm",
-                            getStatusColor(currentBird.status),
-                          )}
-                        >
-                          {currentBird.status}
-                        </Badge>
-                        <Badge
-                          className={cn(
-                            "text-xs font-medium border shadow-lg backdrop-blur-sm",
-                            getDifficultyColor(currentBird.difficulty),
-                          )}
-                        >
-                          {currentBird.difficulty}
-                        </Badge>
-                      </div>
-
-                      {/* Regional Distribution */}
-                      <div className="space-y-3 mb-4">
-                        {/* Primary Region */}
-                        <div>
-                          <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                            Primary Region:
-                          </span>
-                          <div
-                            className={cn(
-                              "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border shadow-lg backdrop-blur-sm",
-                              getPrimaryRegionColor(currentBird.primaryRegion),
-                            )}
-                          >
-                            <MapPin className="w-3 h-3" />
-                            <span>{currentBird.primaryRegion}</span>
-                          </div>
-                        </div>
-
-                        {/* Secondary Regions */}
-                        {currentBird.secondaryRegions.length > 0 && (
-                          <div>
-                            <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                              Also found in:
-                            </span>
-                            <div className="flex flex-wrap gap-1">
-                              {currentBird.secondaryRegions.map((region, index) => (
-                                <div
-                                  key={index}
-                                  className={cn(
-                                    "px-2 py-1 rounded-full text-xs font-medium border shadow-lg backdrop-blur-sm",
-                                    getPrimaryRegionColor(region).replace("/90", "/80"),
-                                  )}
-                                >
-                                  {region}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Ecoregions */}
-                        <div>
-                          <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                            Ecoregions:
-                          </span>
-                          <div className="flex flex-wrap gap-1">
-                            {currentBird.ecoregions.map((ecoregion, index) => (
-                              <div
-                                key={index}
-                                className="px-2 py-1 rounded-full text-xs font-medium border bg-slate-600/90 text-white border-slate-400/60 shadow-lg backdrop-blur-sm"
-                              >
-                                {ecoregion}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3 mb-4">
-                      <div>
-                        <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                          Habitat:
-                        </span>
-                        <span className="text-white text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                          {currentBird.habitat}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                          Best time:
-                        </span>
-                        <span className="text-white text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                          {currentBird.bestTime}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-white text-sm block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                          Elevation:
-                        </span>
-                        <span className="text-white text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_3px_rgb(0_0_0_/_80%)]">
-                          {currentBird.elevation}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Action Buttons - Conditional Explore Region Button */}
-                    <div className="flex flex-col gap-2">
-                      {/* Only show Explore Region button for Vermilion Cardinal */}
-                      {shouldShowExploreRegion && (
-                        <Link href="/regions/caribbean">
-                          <Button className="bg-emerald-600/90 hover:bg-emerald-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-emerald-500/40 carousel-button">
-                            <MapPin className="w-3 h-3 mr-1" />
-                            Explore Caribbean Region
-                          </Button>
-                        </Link>
-                      )}
-
-                      {/* Plan Trip button - always visible */}
-                      <Link href="/tours">
-                        <Button
-                          variant="outline"
-                          className="border-white/70 text-white hover:bg-white/20 text-xs bg-white/10 w-full h-9 shadow-lg backdrop-blur-sm carousel-button"
-                        >
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          Plan Trip
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
-        </div>
 
-        {/* Thumbnail Navigation */}
-        <CardContent className="p-3">
-          <div className="flex gap-1 overflow-x-auto scrollbar-hide carousel-touch-area carousel-no-bounce">
-            {birdData.map((bird, index) => {
-              const thumbnailPositioning = getImagePositioning(bird.id)
-              const isPreloaded = preloadedImages.has(bird.image)
-              return (
+          {/* Enhanced Thumbnail Navigation - Fixed positioning to avoid overlap */}
+          <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200/50 p-3 carousel-thumbnails">
+            <div className="flex justify-center gap-2 mb-3">
+              {birdData.map((bird, index) => (
                 <button
                   key={bird.id}
-                  onClick={() => goToSlide(index)}
                   className={cn(
-                    "flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all relative carousel-thumbnail",
-                    index === currentIndex ? "border-emerald-500 ring-1 ring-emerald-200" : "border-gray-200",
-                    !isPreloaded && "opacity-50",
+                    "w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 carousel-thumbnail",
+                    index === currentIndex
+                      ? "border-emerald-500 ring-2 ring-emerald-200 scale-110 shadow-lg"
+                      : "border-gray-200 hover:border-gray-300 hover:scale-105 shadow-sm",
                   )}
+                  onClick={() => goToSlide(index)}
                   aria-label={`View ${bird.commonName}`}
                 >
                   <img
-                    src={bird.image || "/placeholder.svg?height=48&width=48&text=Bird"}
+                    src={bird.image || "/placeholder.svg"}
                     alt={bird.commonName}
-                    className="w-full h-full object-cover transition-all"
+                    className="w-full h-full object-cover"
                     style={{
-                      objectPosition: thumbnailPositioning.objectPosition,
-                      transform: thumbnailPositioning.transform,
+                      objectPosition: getImagePositioning(bird.id).objectPosition,
+                      transform: "scale(1.1)",
                     }}
-                    loading={index < 3 ? "eager" : "lazy"}
-                    onError={(e) => {
-                      console.warn(`Failed to load thumbnail: ${bird.image}`)
-                    }}
+                    loading="lazy"
                   />
-                  {index === currentIndex && <div className="absolute inset-0 bg-emerald-500/20" />}
-                  {!isPreloaded && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                      <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  )}
                 </button>
-              )
-            })}
-          </div>
+              ))}
+            </div>
 
-          {/* Progress Indicators */}
-          <div className="flex justify-center gap-1 mt-3">
-            {birdData.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={cn(
-                  "w-1.5 h-1.5 rounded-full transition-all carousel-button",
-                  index === currentIndex ? "bg-emerald-500" : "bg-gray-300",
-                )}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+            {/* Progress Indicators */}
+            <div className="flex justify-center gap-1.5">
+              {birdData.map((_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-300 carousel-indicator",
+                    index === currentIndex ? "bg-emerald-600 scale-125" : "bg-gray-300 hover:bg-gray-400",
+                  )}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
-        </CardContent>
+        </div>
       </Card>
+
+      {/* Enhanced Information Panel */}
+      {showInfo && (
+        <Card className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-md border border-white/20 shadow-xl z-50 carousel-info-panel">
+          <CardContent className="p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <h4 className="font-semibold text-gray-900">Species Information</h4>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-8 h-8 p-0 rounded-full hover:bg-gray-100"
+                onClick={() => setShowInfo(false)}
+                aria-label="Close information panel"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div>
+                <span className="font-medium text-gray-700">Status:</span>
+                <Badge className={cn("ml-2 text-xs", getStatusColor(currentBird.status))} variant="outline">
+                  {currentBird.status}
+                </Badge>
+              </div>
+              <div>
+                <span className="font-medium text-gray-700">Difficulty:</span>
+                <Badge className={cn("ml-2 text-xs", getDifficultyColor(currentBird.difficulty))} variant="outline">
+                  {currentBird.difficulty}
+                </Badge>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-sm">
+              <div>
+                <span className="font-medium text-gray-700">Habitat:</span>
+                <p className="text-gray-600 mt-1">{currentBird.habitat}</p>
+              </div>
+              <div>
+                <span className="font-medium text-gray-700">Best Time:</span>
+                <p className="text-gray-600 mt-1">{currentBird.bestTime}</p>
+              </div>
+              <div>
+                <span className="font-medium text-gray-700">Elevation:</span>
+                <p className="text-gray-600 mt-1">{currentBird.elevation}</p>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-sm">
+              <div>
+                <span className="font-medium text-gray-700">Ecoregions:</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {currentBird.ecoregions.map((ecoregion, index) => (
+                    <Badge key={index} variant="secondary" className="text-xs">
+                      {ecoregion}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-2 pt-2">
+              <Link href="/aves-explorer" className="flex-1">
+                <Button variant="outline" size="sm" className="w-full text-xs bg-transparent">
+                  <ExternalLink className="w-3 h-3 mr-1" />
+                  Explore Species
+                </Button>
+              </Link>
+              {shouldShowExploreRegion && (
+                <Link href={`/regions/${currentBird.regionSlug}`} className="flex-1">
+                  <Button variant="outline" size="sm" className="w-full text-xs bg-transparent">
+                    <MapPin className="w-3 h-3 mr-1" />
+                    Explore Region
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Enhanced Photo Credit Panel */}
+      {showPhotoCredit && (
+        <Card className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-md border border-white/20 shadow-xl z-50 carousel-credit-panel">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="font-semibold text-gray-900">Photo Credit</h4>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-8 h-8 p-0 rounded-full hover:bg-gray-100"
+                onClick={() => setShowPhotoCredit(false)}
+                aria-label="Close photo credit panel"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            <div className="space-y-2 text-sm">
+              <div>
+                <span className="font-medium text-gray-700">Photographer:</span>
+                <span className="ml-2 text-gray-600">{currentBird.photoCredit.photographer}</span>
+              </div>
+              <div>
+                <span className="font-medium text-gray-700">Title:</span>
+                <span className="ml-2 text-gray-600">{currentBird.photoCredit.title}</span>
+              </div>
+              {currentBird.photoCredit.reserve && (
+                <div>
+                  <span className="font-medium text-gray-700">Location:</span>
+                  <span className="ml-2 text-gray-600">{currentBird.photoCredit.reserve}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex gap-2 mt-3">
+              {currentBird.photoCredit.teamLink && (
+                <Link href={currentBird.photoCredit.teamLink}>
+                  <Button variant="outline" size="sm" className="text-xs bg-transparent">
+                    <ExternalLink className="w-3 h-3 mr-1" />
+                    View Profile
+                  </Button>
+                </Link>
+              )}
+              {currentBird.photoCredit.instagramPost && (
+                <a href={currentBird.photoCredit.instagramPost} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="sm" className="text-xs bg-transparent">
+                    <ExternalLink className="w-3 h-3 mr-1" />
+                    Instagram
+                  </Button>
+                </a>
+              )}
+              {currentBird.photoCredit.reserveLink && (
+                <Link href={currentBird.photoCredit.reserveLink}>
+                  <Button variant="outline" size="sm" className="text-xs bg-transparent">
+                    <MapPin className="w-3 h-3 mr-1" />
+                    Reserve Info
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 }
