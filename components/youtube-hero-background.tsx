@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Volume2, VolumeX, Play, Pause } from "lucide-react"
 import Link from "next/link"
@@ -21,6 +21,204 @@ export default function YouTubeHeroBackground({
   const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
   const [showControls, setShowControls] = useState(false)
+  const [connectionSpeed, setConnectionSpeed] = useState<"slow" | "medium" | "fast">("medium")
+  const [videoQuality, setVideoQuality] = useState("hd1080")
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const playerRef = useRef<any>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Detect connection speed and device type
+  useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth <= 768 ||
+          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+      )
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
+    // Estimate connection speed
+    const estimateConnectionSpeed = async () => {
+      try {
+        // Use Network Information API if available
+        if ("connection" in navigator) {
+          const connection = (navigator as any).connection
+          const effectiveType = connection?.effectiveType
+
+          switch (effectiveType) {
+            case "slow-2g":
+            case "2g":
+              setConnectionSpeed("slow")
+              setVideoQuality("medium")
+              break
+            case "3g":
+              setConnectionSpeed("medium")
+              setVideoQuality("hd720")
+              break
+            case "4g":
+            default:
+              setConnectionSpeed("fast")
+              setVideoQuality("hd1080")
+              break
+          }
+        } else {
+          // Fallback: Simple speed test
+          const startTime = performance.now()
+          const response = await fetch("/placeholder.svg?height=100&width=100", { cache: "no-cache" })
+          await response.blob()
+          const endTime = performance.now()
+          const duration = endTime - startTime
+
+          if (duration > 1000) {
+            setConnectionSpeed("slow")
+            setVideoQuality("medium")
+          } else if (duration > 500) {
+            setConnectionSpeed("medium")
+            setVideoQuality("hd720")
+          } else {
+            setConnectionSpeed("fast")
+            setVideoQuality("hd1080")
+          }
+        }
+      } catch (error) {
+        console.log("Connection speed estimation failed, using default quality")
+        setConnectionSpeed("medium")
+        setVideoQuality("hd720")
+      }
+    }
+
+    estimateConnectionSpeed()
+
+    return () => {
+      window.removeEventListener("resize", checkMobile)
+    }
+  }, [])
+
+  // Load YouTube API
+  useEffect(() => {
+    const loadYouTubeAPI = () => {
+      if (window.YT && window.YT.Player) {
+        initializePlayer()
+        return
+      }
+
+      const script = document.createElement("script")
+      script.src = "https://www.youtube.com/iframe_api"
+      script.async = true
+      document.body.appendChild(script)
+
+      window.onYouTubeIframeAPIReady = initializePlayer
+    }
+
+    const initializePlayer = () => {
+      if (!containerRef.current) return
+
+      // Determine optimal quality based on connection and device
+      let quality = videoQuality
+      if (isMobile && connectionSpeed === "slow") {
+        quality = "medium"
+      } else if (isMobile && connectionSpeed === "medium") {
+        quality = "hd720"
+      }
+
+      playerRef.current = new window.YT.Player("youtube-player", {
+        videoId: videoId,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: videoId,
+          controls: 0,
+          showinfo: 0,
+          rel: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          playsinline: 1,
+          enablejsapi: 1,
+          origin: window.location.origin,
+          quality: quality,
+          hd: quality.includes("hd") ? 1 : 0,
+          // Optimize for immediate loading
+          start: 0,
+          end: 0,
+          cc_load_policy: 0,
+          fs: 0,
+          disablekb: 1,
+        },
+        events: {
+          onReady: (event: any) => {
+            setIsVideoLoaded(true)
+            event.target.setPlaybackQuality(quality)
+
+            // Ensure autoplay works on mobile
+            if (isMobile) {
+              // Try to play with sound first, fallback to muted
+              event.target.unMute()
+              event.target.playVideo()
+
+              setTimeout(() => {
+                if (event.target.getPlayerState() !== 1) {
+                  event.target.mute()
+                  event.target.playVideo()
+                }
+              }, 1000)
+            } else {
+              event.target.playVideo()
+            }
+          },
+          onStateChange: (event: any) => {
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setIsPlaying(true)
+            } else if (event.data === window.YT.PlayerState.PAUSED) {
+              setIsPlaying(false)
+            }
+          },
+          onError: (event: any) => {
+            console.error("YouTube player error:", event.data)
+            // Fallback to lower quality on error
+            if (quality === "hd1080") {
+              event.target.setPlaybackQuality("hd720")
+            } else if (quality === "hd720") {
+              event.target.setPlaybackQuality("medium")
+            }
+          },
+        },
+      })
+    }
+
+    loadYouTubeAPI()
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy()
+      }
+    }
+  }, [videoId, videoQuality, isMobile, connectionSpeed])
+
+  const toggleMute = () => {
+    if (playerRef.current) {
+      if (isMuted) {
+        playerRef.current.unMute()
+      } else {
+        playerRef.current.mute()
+      }
+      setIsMuted(!isMuted)
+    }
+  }
+
+  const togglePlayPause = () => {
+    if (playerRef.current) {
+      if (isPlaying) {
+        playerRef.current.pauseVideo()
+      } else {
+        playerRef.current.playVideo()
+      }
+    }
+  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -32,28 +230,37 @@ export default function YouTubeHeroBackground({
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* YouTube Video Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <div className="youtube-container">
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`}
-            title="Caribbean Coast Background Video"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            className="absolute top-1/2 left-1/2 w-screen h-screen min-w-full min-h-full object-cover transform -translate-x-1/2 -translate-y-1/2 scale-105"
-            style={{
-              width: "100vw",
-              height: "56.25vw", // 16:9 aspect ratio
-              minHeight: "100vh",
-              minWidth: "177.77vh", // 16:9 aspect ratio
-            }}
-          />
-        </div>
-
-        {/* Fallback Image */}
+      <div ref={containerRef} className="absolute inset-0 w-full h-full">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${fallbackImage})` }}
+          id="youtube-player"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          style={{
+            width: "100vw",
+            height: "56.25vw", // 16:9 aspect ratio
+            minHeight: "100vh",
+            minWidth: "177.77vh", // 16:9 aspect ratio
+            pointerEvents: "none",
+          }}
         />
+
+        {/* Fallback Image - shown while video loads */}
+        {!isVideoLoaded && (
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${fallbackImage})` }}
+          />
+        )}
+
+        {/* Loading indicator */}
+        {!isVideoLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <div className="text-white text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+              <p className="text-lg font-semibold">Loading stunning 8K footage...</p>
+              <p className="text-sm opacity-75">Optimizing for your connection ({connectionSpeed} speed detected)</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Caribbean-themed Gradient Overlay */}
@@ -143,31 +350,38 @@ export default function YouTubeHeroBackground({
 
       {/* Video Controls */}
       <div
-        className="absolute top-4 right-4 flex gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-4 right-4 flex gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300 z-10"
         onMouseEnter={() => setShowControls(true)}
         onMouseLeave={() => setShowControls(false)}
       >
         <Button
           size="sm"
           variant="outline"
-          className="bg-black/50 border-white/30 text-white hover:bg-black/70"
-          onClick={() => setIsMuted(!isMuted)}
+          className="bg-black/50 border-white/30 text-white hover:bg-black/70 pointer-events-auto"
+          onClick={toggleMute}
         >
           {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </Button>
         <Button
           size="sm"
           variant="outline"
-          className="bg-black/50 border-white/30 text-white hover:bg-black/70"
-          onClick={() => setIsPlaying(!isPlaying)}
+          className="bg-black/50 border-white/30 text-white hover:bg-black/70 pointer-events-auto"
+          onClick={togglePlayPause}
         >
           {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
         </Button>
       </div>
 
+      {/* Video Quality Indicator */}
+      {isVideoLoaded && (
+        <div className="absolute bottom-4 right-4 text-xs text-white/60 bg-black/30 px-2 py-1 rounded">
+          {videoQuality.toUpperCase()} • {connectionSpeed} connection
+        </div>
+      )}
+
       {/* Attribution */}
       <div className="absolute bottom-4 left-4 text-xs text-white/60">
-        Video: Tayrona National Park by Martín Melendro Torres
+        8K Drone Footage: Caribbean Shores to Sierra Nevada by Martín Melendro Torres
       </div>
     </section>
   )

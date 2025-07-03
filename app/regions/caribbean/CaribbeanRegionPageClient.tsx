@@ -30,22 +30,56 @@ export default function CaribbeanRegionPageClient() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-50 to-white">
       <style jsx>{`
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-  .animate-shimmer {
-    animation: shimmer 2s infinite;
-  }
-`}</style>
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+        @keyframes wave-motion {
+          0%, 100% { transform: translateX(-50%) scaleX(1); }
+          50% { transform: translateX(-50%) scaleX(1.1); }
+        }
+        .animate-wave-motion {
+          animation: wave-motion 2s ease-in-out infinite;
+        }
+        @keyframes caribbean-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        .animate-caribbean-pulse {
+          animation: caribbean-pulse 2s ease-in-out infinite;
+        }
+        .text-shadow-lg {
+          text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .text-shadow-2xl {
+          text-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+      `}</style>
+
       {/* Navigation Header */}
       <NavigationHeader currentPage="/regions/caribbean" />
 
-      {/* YouTube Hero Background Section */}
+      {/* YouTube Hero Background Section with 8K Video */}
       <YouTubeHeroBackground
         title="Caribbean Coast Paradise"
         subtitle="Where turquoise waters meet endemic treasures"
-        videoId="eEteVfDagrs"
+        videoId="QdV1BJNZQE0"
         fallbackImage="/images/caribbean-coast-fallback.jpg"
       />
 
@@ -349,6 +383,7 @@ export default function CaribbeanRegionPageClient() {
             </CardContent>
           </Card>
         </section>
+
         {/* Discount Details Modal */}
         {showDiscountModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
