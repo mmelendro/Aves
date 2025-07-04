@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, X, Volume2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 
@@ -23,6 +23,7 @@ interface BirdData {
   bestTime: string
   elevation: string
   image: string
+  audioFile?: string
   photoCredit: {
     photographer: string
     title: string
@@ -49,6 +50,7 @@ const birdData: BirdData[] = [
     bestTime: "December - March (dry season)",
     elevation: "3,000 - 4,200m",
     image: "/images/green-bearded-helmetcrest.png",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-njVmyxK8Wn7VWVxZmnAUGhKKqEHDmg.mp3",
     photoCredit: {
       photographer: "Nicolás Rozo",
       title: "AVES Guide",
@@ -71,6 +73,7 @@ const birdData: BirdData[] = [
     bestTime: "December - March (clear weather)",
     elevation: "3,200 - 4,500m",
     image: "/images/rabtho1.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-zlI0qx9zdy6wFmPwI8rEJXXYXjJp3H.mp3",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -115,6 +118,7 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (dawn and dusk)",
     elevation: "1,800 - 3,200m",
     image: "/images/chestnut-crowned-antpitta.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-6pqzdAPhoSOUOXsdXTRugdtXK67CbY.mp3",
     photoCredit: {
       photographer: "Martin Meléndro",
       title: "AVES Guide",
@@ -376,6 +380,19 @@ export default function HomepageBirdCarousel({
     setImageError(true)
   }, [currentBird.image])
 
+  const playAudio = useCallback(() => {
+    if (currentBird.audioFile) {
+      try {
+        const audio = new Audio(currentBird.audioFile)
+        audio.play().catch((error) => {
+          console.warn("Audio play failed:", error)
+        })
+      } catch (error) {
+        console.warn("Audio creation failed:", error)
+      }
+    }
+  }, [currentBird.audioFile])
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Endemic":
@@ -540,6 +557,18 @@ export default function HomepageBirdCarousel({
 
             {/* Top Control Buttons */}
             <div className="absolute top-3 right-3 flex gap-2 z-40">
+              {currentBird.audioFile && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-8 h-8 p-0 rounded-full transition-all duration-200 carousel-button"
+                  onClick={playAudio}
+                  aria-label="Play bird call"
+                >
+                  <Volume2 className="w-3 h-3" />
+                </Button>
+              )}
+
               <Button
                 variant="ghost"
                 size="sm"

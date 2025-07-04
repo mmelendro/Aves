@@ -78,7 +78,7 @@
   /* Slide all content including carousel to the left when menu is open */
   body.mobile-menu-open > *:not(header):not([data-mobile-menu]),
   html.mobile-menu-open body > *:not(header):not([data-mobile-menu]) {
-    transform: translateX(-280px);
+    transform: translateX(-50vw);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
