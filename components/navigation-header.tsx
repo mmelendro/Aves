@@ -280,7 +280,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     href="/tours"
                     className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 border-b border-gray-100/50 rounded-t-xl"
                   >
-                    🗺️ All Tours Overview
+                    🗺️ AVES Tours
                   </Link>
                   <Link
                     href="/tours/adventure"
@@ -309,10 +309,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 </div>
               </div>
 
-              {/* Resources Dropdown */}
+              {/* Explore Dropdown */}
               <div className="relative group">
                 <Link
-                  href="/resources"
+                  href="/aves-explorer"
                   className={cn(
                     "flex items-center transition-all duration-300 font-medium text-sm lg:text-base whitespace-nowrap hover:text-emerald-600",
                     currentPage?.startsWith("/blog") ||
@@ -323,84 +323,58 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                       : "text-gray-700",
                   )}
                 >
-                  Resources
+                  Explore
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:rotate-180" />
                 </Link>
-                <div className="absolute top-full left-0 mt-2 w-80 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                  <div className="p-3">
-                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100/50 mb-2">
-                      Explore & Plan
-                    </div>
-                    <Link
-                      href="/aves-explorer"
-                      className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-lg"
-                    >
-                      <span className="text-lg mr-3">🦅</span>
-                      <div>
-                        <div className="font-medium">AVES Explorer</div>
-                        <div className="text-xs text-gray-500">1,900+ species across 11 bioregions & 31 ecoregions</div>
-                      </div>
-                    </Link>
-
-                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100/50 mb-2 mt-3">
-                      Learn & Prepare
-                    </div>
-                    <Link
-                      href="/resources"
-                      className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-lg"
-                    >
-                      <span className="text-lg mr-3">📚</span>
-                      <div>
-                        <div className="font-medium">Expert Resources Hub</div>
-                        <div className="text-xs text-gray-500">Podcasts, guides & preparation</div>
-                      </div>
-                    </Link>
-                    <Link
-                      href="/travel-tips"
-                      className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-lg"
-                    >
-                      <span className="text-lg mr-3">✈️</span>
-                      <div>
-                        <div className="font-medium">Travel Essentials</div>
-                        <div className="text-xs text-gray-500">Practical travel advice</div>
-                      </div>
-                    </Link>
-
-                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100/50 mb-2 mt-3">
-                      Stories & Insights
-                    </div>
-                    <Link
-                      href="/blog"
-                      className="flex items-center px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-lg"
-                    >
-                      <span className="text-lg mr-3">📝</span>
-                      <div>
-                        <div className="font-medium">Blog & Expeditions</div>
-                        <div className="text-xs text-gray-500">Field stories & discoveries</div>
-                      </div>
-                    </Link>
-                  </div>
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <Link
+                    href="/aves-explorer"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 border-b border-gray-100/50 rounded-t-xl"
+                  >
+                    🦅 Colombia
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200"
+                  >
+                    📝 Birding with AVES
+                  </Link>
+                  <Link
+                    href="/resources"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200"
+                  >
+                    📚 Birding in Colombia
+                  </Link>
+                  <Link
+                    href="/travel-tips"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-b-xl"
+                  >
+                    ✈️ Travel Essentials
+                  </Link>
                 </div>
               </div>
 
-              {/* About Dropdown */}
+              {/* AVES Dropdown */}
               <div className="relative group">
                 <Link
                   href="/about"
                   className={cn(
                     "flex items-center transition-all duration-300 font-medium text-sm lg:text-base whitespace-nowrap hover:text-emerald-600",
-                    currentPage?.startsWith("/about") || currentPage?.startsWith("/team")
+                    currentPage?.startsWith("/about") ||
+                      currentPage?.startsWith("/team") ||
+                      currentPage?.startsWith("/conservation") ||
+                      currentPage?.startsWith("/contact")
                       ? "text-emerald-600"
                       : "text-gray-700",
                   )}
                 >
-                  About
+                  AVES
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:rotate-180" />
                 </Link>
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                   <Link
                     href="/about"
-                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-t-xl"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 border-b border-gray-100/50 rounded-t-xl"
                   >
                     🏢 About AVES
                   </Link>
@@ -412,40 +386,30 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   </Link>
                   <Link
                     href="/about/partners"
-                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-b-xl"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200"
                   >
                     🤝 Our Partners
                   </Link>
+                  <Link
+                    href="/about/b-corp"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200"
+                  >
+                    🌿 Our B Corp Journey
+                  </Link>
+                  <Link
+                    href="/conservation"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200"
+                  >
+                    🌱 Conservation
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 rounded-b-xl"
+                  >
+                    📞 Contact
+                  </Link>
                 </div>
               </div>
-
-              <Link
-                href="/about/b-corp"
-                className={cn(
-                  "transition-all duration-300 font-medium text-sm lg:text-base whitespace-nowrap hover:text-emerald-600",
-                  currentPage === "/about/b-corp" ? "text-emerald-600" : "text-gray-700",
-                )}
-              >
-                B Corp Journey
-              </Link>
-              <Link
-                href="/conservation"
-                className={cn(
-                  "transition-all duration-300 font-medium text-sm lg:text-base whitespace-nowrap hover:text-emerald-600",
-                  currentPage === "/conservation" ? "text-emerald-600" : "text-gray-700",
-                )}
-              >
-                Conservation
-              </Link>
-              <Link
-                href="/contact"
-                className={cn(
-                  "transition-all duration-300 font-medium text-sm lg:text-base whitespace-nowrap hover:text-emerald-600",
-                  currentPage === "/contact" ? "text-emerald-600" : "text-gray-700",
-                )}
-              >
-                Contact
-              </Link>
             </nav>
 
             {/* Desktop CTA Button */}
@@ -464,7 +428,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               </Link>
             </div>
 
-            {/* New Mobile AVES Logo Button - Top Right Corner */}
+            {/* Mobile AVES Logo Button - Top Right Corner */}
             <button
               className={cn(
                 "md:hidden fixed top-4 right-4 z-[60] flex items-center justify-center transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-emerald-500/50 rounded-xl touch-manipulation",
@@ -517,7 +481,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* New Mobile Navigation Slide-out Menu - 75% Screen Width */}
+      {/* Mobile Navigation Slide-out Menu - 75% Screen Width */}
       <div
         className={cn(
           "md:hidden fixed top-0 right-0 h-full z-50 transition-all duration-500 ease-out",
@@ -542,7 +506,6 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             />
             <span className="text-xl font-bold text-gray-900 drop-shadow-sm">AVES</span>
           </div>
-          <span className="text-sm text-gray-600 font-medium">Navigation</span>
         </div>
 
         {/* Menu Content with Smooth Scrolling */}
@@ -563,7 +526,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  🗺️ All Tours Overview
+                  🗺️ AVES Tours
                 </Link>
                 <Link
                   href="/tours/adventure"
@@ -596,36 +559,36 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               </div>
             </div>
 
-            {/* Resources Section */}
+            {/* Explore Section */}
             <div className="space-y-3">
               <Link
-                href="/resources"
+                href="/aves-explorer"
                 className="text-gray-900 font-bold text-lg hover:text-emerald-600 transition-all duration-300 block touch-manipulation drop-shadow-sm mobile-menu-item"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Resources Hub
+                Explore
               </Link>
               <div className="pl-4 space-y-3 bg-white/60 rounded-xl p-4 backdrop-blur-sm border border-white/50 shadow-sm">
-                <div className="text-xs font-bold text-gray-600 uppercase tracking-wide py-1 drop-shadow-sm">
-                  Explore & Plan
-                </div>
                 <Link
                   href="/aves-explorer"
                   className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  🦅 AVES Explorer
+                  🦅 Colombia
                 </Link>
-
-                <div className="text-xs font-bold text-gray-600 uppercase tracking-wide py-1 mt-4 drop-shadow-sm">
-                  Learn & Prepare
-                </div>
+                <Link
+                  href="/blog"
+                  className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  📝 Birding with AVES
+                </Link>
                 <Link
                   href="/resources"
                   className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  📚 Expert Resources Hub
+                  📚 Birding in Colombia
                 </Link>
                 <Link
                   href="/travel-tips"
@@ -634,28 +597,17 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 >
                   ✈️ Travel Essentials
                 </Link>
-
-                <div className="text-xs font-bold text-gray-600 uppercase tracking-wide py-1 mt-4 drop-shadow-sm">
-                  Stories & Insights
-                </div>
-                <Link
-                  href="/blog"
-                  className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  📝 Blog & Expeditions
-                </Link>
               </div>
             </div>
 
-            {/* About Section */}
+            {/* AVES Section */}
             <div className="space-y-3">
               <Link
                 href="/about"
                 className="text-gray-900 font-bold text-lg hover:text-emerald-600 transition-all duration-300 block touch-manipulation drop-shadow-sm mobile-menu-item"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                About
+                AVES
               </Link>
               <div className="pl-4 space-y-3 bg-white/60 rounded-xl p-4 backdrop-blur-sm border border-white/50 shadow-sm">
                 <Link
@@ -679,31 +631,29 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 >
                   🤝 Our Partners
                 </Link>
+                <Link
+                  href="/about/b-corp"
+                  className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  🌿 Our B Corp Journey
+                </Link>
+                <Link
+                  href="/conservation"
+                  className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  🌱 Conservation
+                </Link>
+                <Link
+                  href="/contact"
+                  className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  📞 Contact
+                </Link>
               </div>
             </div>
-
-            {/* Other Links */}
-            <Link
-              href="/about/b-corp"
-              className="block text-gray-900 font-bold hover:text-emerald-600 transition-all duration-300 py-3 text-lg touch-manipulation drop-shadow-sm mobile-menu-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              B Corp Journey
-            </Link>
-            <Link
-              href="/conservation"
-              className="block text-gray-900 font-bold hover:text-emerald-600 transition-all duration-300 py-3 text-lg touch-manipulation drop-shadow-sm mobile-menu-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Conservation
-            </Link>
-            <Link
-              href="/contact"
-              className="block text-gray-900 font-bold hover:text-emerald-600 transition-all duration-300 py-3 text-lg touch-manipulation drop-shadow-sm mobile-menu-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
           </nav>
 
           {/* CTA Button with Enhanced Styling */}

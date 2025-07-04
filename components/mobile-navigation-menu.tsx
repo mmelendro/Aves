@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, X, MapPin, Compass, BookOpen, Users, Mail, Shield, FileText, Cookie } from "lucide-react"
+import { Menu, X, MapPin, BookOpen, Users, Mail, Shield, FileText, Cookie } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -32,7 +32,7 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
         </SheetTrigger>
         <SheetContent side="right" className="w-80 p-0 bg-white">
           <div className="flex flex-col h-full">
-            {/* Header - Navigation text completely removed */}
+            {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div className="flex items-center gap-3">
                 <Image src="/images/aves-logo.png" alt="AVES" width={40} height={40} className="rounded-lg" />
@@ -62,7 +62,7 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
                       className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
                     >
                       <MapPin className="h-5 w-5 text-blue-500" />
-                      <span>All Tours Overview</span>
+                      <span>AVES Tours</span>
                     </Link>
                     <Link
                       href="/tours/adventure"
@@ -99,84 +99,48 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
                   </div>
                 </div>
 
-                {/* Regions Section */}
+                {/* Explore Section */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Regions</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Explore</h3>
                   <div className="space-y-3">
                     <Link
-                      href="/regions/caribbean"
+                      href="/aves-explorer"
                       onClick={closeMenu}
                       className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
                     >
-                      <Compass className="h-5 w-5 text-cyan-500" />
-                      <span>Caribbean Coast</span>
+                      <div className="h-5 w-5 text-amber-700">🦅</div>
+                      <span>Colombia</span>
                     </Link>
                     <Link
-                      href="/endemic-birds"
+                      href="/blog"
                       onClick={closeMenu}
                       className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
                     >
-                      <div className="h-5 w-5 text-purple-500">🦅</div>
-                      <span>Endemic Birds</span>
+                      <BookOpen className="h-5 w-5 text-indigo-500" />
+                      <span>Birding with AVES</span>
+                    </Link>
+                    <Link
+                      href="/resources"
+                      onClick={closeMenu}
+                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
+                    >
+                      <BookOpen className="h-5 w-5 text-blue-500" />
+                      <span>Birding in Colombia</span>
+                    </Link>
+                    <Link
+                      href="/travel-tips"
+                      onClick={closeMenu}
+                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
+                    >
+                      <div className="h-5 w-5 text-orange-500">✈️</div>
+                      <span>Travel Essentials</span>
                     </Link>
                   </div>
                 </div>
 
-                {/* Resources Hub Section */}
+                {/* AVES Section */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Resources Hub</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">EXPLORE & PLAN</h4>
-                      <div className="space-y-3">
-                        <Link
-                          href="/aves-explorer"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <div className="h-5 w-5 text-amber-700">🦅</div>
-                          <span>AVES Explorer</span>
-                        </Link>
-                        <Link
-                          href="/avifauna-explorer"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <Compass className="h-5 w-5 text-emerald-500" />
-                          <span>Avifauna Explorer</span>
-                        </Link>
-                        <Link
-                          href="/resources"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <BookOpen className="h-5 w-5 text-blue-500" />
-                          <span>Resources</span>
-                        </Link>
-                        <Link
-                          href="/blog"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <BookOpen className="h-5 w-5 text-indigo-500" />
-                          <span>Blog</span>
-                        </Link>
-                        <Link
-                          href="/travel-tips"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <div className="h-5 w-5 text-orange-500">✈️</div>
-                          <span>Travel Tips</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* About Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">About</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">AVES</h3>
                   <div className="space-y-3">
                     <Link
                       href="/about"
@@ -200,7 +164,15 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
                       className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
                     >
                       <div className="h-5 w-5 text-purple-500">🤝</div>
-                      <span>Partners</span>
+                      <span>Our Partners</span>
+                    </Link>
+                    <Link
+                      href="/about/b-corp"
+                      onClick={closeMenu}
+                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
+                    >
+                      <div className="h-5 w-5 text-green-500">🌿</div>
+                      <span>Our B Corp Journey</span>
                     </Link>
                     <Link
                       href="/conservation"
@@ -211,27 +183,12 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
                       <span>Conservation</span>
                     </Link>
                     <Link
-                      href="/about/b-corp"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-green-500">🌿</div>
-                      <span>B Corp Certified</span>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Contact Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact</h3>
-                  <div className="space-y-3">
-                    <Link
                       href="/contact"
                       onClick={closeMenu}
                       className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
                     >
                       <Mail className="h-5 w-5 text-blue-500" />
-                      <span>Contact Us</span>
+                      <span>Contact</span>
                     </Link>
                   </div>
                 </div>
@@ -240,6 +197,16 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
 
             {/* Footer */}
             <div className="border-t border-gray-200 p-6">
+              <div className="mb-4">
+                <Link href="/shopping">
+                  <Button
+                    className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    onClick={closeMenu}
+                  >
+                    Book Your Journey
+                  </Button>
+                </Link>
+              </div>
               <div className="flex flex-wrap gap-4 text-sm text-gray-500">
                 <Link
                   href="/privacy"
