@@ -339,7 +339,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                     href="/aves-explorer"
                     className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-200 border-b border-gray-100/50 rounded-t-xl"
                   >
-                    🦅 Colombia
+                    🦅 Explore Colombia
                   </Link>
                   <Link
                     href="/blog"
@@ -592,7 +592,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   className="block text-gray-800 hover:text-emerald-600 transition-all duration-300 py-2 text-base touch-manipulation font-medium mobile-menu-item"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  🦅 Colombia
+                  🦅 Explore Colombia
                 </Link>
                 <Link
                   href="/blog"

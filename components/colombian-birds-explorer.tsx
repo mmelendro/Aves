@@ -358,12 +358,12 @@ export function ColombianBirdsExplorer() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">AVES Explorer</h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Explore Colombia</h1>
 
           {/* Description */}
           <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11
-            distinct bioregions, explore over 1,900 species, and plan your perfect birding adventure with expert
+            Discover Colombia's incredible bird diversity with our interactive Explore Colombia tool. Navigate through
+            11 distinct bioregions, explore over 1,900 species, and plan your perfect birding adventure with expert
             insights and detailed habitat information.
           </p>
 
@@ -418,7 +418,7 @@ export function ColombianBirdsExplorer() {
                   <Badge variant="secondary" className="mx-1 bg-emerald-100 text-emerald-800 font-semibold">
                     11 bioregions
                   </Badge>{" "}
-                  (major ecological areas) containing{" "}
+                  containing{" "}
                   <Badge variant="secondary" className="mx-1 bg-blue-100 text-blue-800 font-semibold">
                     31 ecoregions
                   </Badge>{" "}
@@ -440,7 +440,7 @@ export function ColombianBirdsExplorer() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Interactive AVES Explorer Map</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Interactive Colombia Explorer Map</h2>
               <p className="text-lg text-gray-600">
                 Click on any region to discover its unique characteristics, key species, and conservation status
               </p>
@@ -468,7 +468,7 @@ export function ColombianBirdsExplorer() {
                   <div className="relative mx-auto max-w-4xl">
                     <img
                       src="/images/birding-regions-colombia-final.png"
-                      alt="Colombia Interactive Bioregions Map - AVES Explorer"
+                      alt="Colombia Interactive Bioregions Map - Explore Colombia"
                       className="w-full h-auto opacity-95 rounded-lg shadow-md"
                     />
 
