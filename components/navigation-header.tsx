@@ -25,6 +25,11 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
       try {
         const scrollPosition = window.scrollY
         setIsScrolled(scrollPosition > 10)
+
+        // Enhanced mobile logo visibility during scroll
+        if (typeof window !== "undefined" && window.innerWidth <= 768) {
+          document.body.classList.toggle("scrolling", scrollPosition > 0)
+        }
       } catch (error) {
         console.warn("Error handling scroll:", error)
       }
@@ -35,6 +40,9 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     return () => {
       try {
         window.removeEventListener("scroll", handleScroll)
+        if (typeof document !== "undefined") {
+          document.body.classList.remove("scrolling")
+        }
       } catch (error) {
         console.warn("Error removing scroll listener:", error)
       }
@@ -436,15 +444,24 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 "w-11 h-11 p-2.5",
                 // Enhanced styling with smooth transitions
                 mobileMenuOpen
-                  ? "bg-white/95 backdrop-blur-lg border-2 border-emerald-200 shadow-2xl scale-110"
-                  : "bg-white/90 backdrop-blur-md border border-white/60 shadow-xl scale-100 hover:scale-105",
+                  ? "bg-white/98 backdrop-blur-lg border-2 border-emerald-200 shadow-2xl scale-110"
+                  : "bg-white/95 backdrop-blur-md border border-white/70 shadow-xl scale-100 hover:scale-105",
+                // Ensure proper stacking and visibility during scroll
+                "will-change-transform transform-gpu",
               )}
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
+              style={{
+                // Ensure consistent positioning across all mobile devices
+                position: "fixed",
+                top: "16px",
+                right: "16px",
+                zIndex: 60,
+              }}
             >
-              {/* AVES Logo - Always visible */}
+              {/* AVES Logo - Always visible with enhanced contrast */}
               <div className="relative flex items-center justify-center w-full h-full">
                 <OptimizedImage
                   src="/images/aves-logo.png"
@@ -453,27 +470,28 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                   height={24}
                   className={cn(
                     "object-contain transition-all duration-500 ease-out",
-                    "w-6 h-6 opacity-95 drop-shadow-md",
+                    "w-6 h-6 opacity-100 drop-shadow-lg",
                     mobileMenuOpen && "rotate-180 scale-110",
                   )}
                   style={{
                     objectFit: "contain",
                     objectPosition: "center",
+                    filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
                   }}
                   priority
                 />
 
-                {/* Enhanced glow effect */}
+                {/* Enhanced glow effect with better visibility */}
                 <div
                   className={cn(
                     "absolute inset-0 rounded-xl transition-all duration-500 ease-out pointer-events-none",
-                    mobileMenuOpen ? "bg-emerald-100/50 shadow-2xl opacity-100" : "bg-white/30 shadow-lg opacity-80",
+                    mobileMenuOpen ? "bg-emerald-100/60 shadow-2xl opacity-100" : "bg-white/40 shadow-lg opacity-90",
                   )}
                 />
 
-                {/* Active state pulse */}
+                {/* Active state pulse with enhanced visibility */}
                 {mobileMenuOpen && (
-                  <div className="absolute -inset-2 rounded-xl bg-gradient-to-r from-emerald-400/20 to-emerald-600/20 animate-pulse" />
+                  <div className="absolute -inset-2 rounded-xl bg-gradient-to-r from-emerald-400/30 to-emerald-600/30 animate-pulse" />
                 )}
               </div>
             </button>

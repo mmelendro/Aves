@@ -5,7 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { MapPin, Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, ArrowRight } from "lucide-react"
+import { Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, ArrowRight } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Calendar, Users } from "lucide-react"
 
 // Complete bioregions data with corrected coordinates and accurate color mapping
 const bioregionsData = [
@@ -344,87 +346,97 @@ export function ColombianBirdsExplorer() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
-      {/* Consolidated Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            {/* AVES Explorer Icon */}
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full mb-8 shadow-lg">
-              <Bird className="h-10 w-10 text-white" />
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+      {/* Hero Section - Optimized spacing */}
+      <section className="relative pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Icon */}
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+              <Bird className="w-8 h-8 text-white" />
             </div>
+          </div>
 
-            {/* Main Title */}
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">AVES Explorer</h1>
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">AVES Explorer</h1>
 
-            {/* Consolidated Description */}
-            <div className="max-w-4xl mx-auto mb-12">
-              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11
-                distinct bioregions, explore over 1,900 species, and plan your perfect birding adventure with expert
-                insights and detailed habitat information.
-              </p>
+          {/* Description */}
+          <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto mb-8 leading-relaxed">
+            Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11
+            distinct bioregions, explore over 1,900 species, and plan your perfect birding adventure with expert
+            insights and detailed habitat information.
+          </p>
 
-              {/* Key Facts */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-emerald-600 mb-2">1,900+</div>
-                  <div className="text-gray-600 font-medium">Bird Species</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">78+</div>
-                  <div className="text-gray-600 font-medium">Endemic Species</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-purple-600 mb-2">11</div>
-                  <div className="text-gray-600 font-medium">Bioregions</div>
-                </div>
-              </div>
-
-              {/* Simplified Classification Explanation */}
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 mb-12 border border-white/20 shadow-lg">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4 text-center">
-                  Understanding Colombia's Biodiversity
-                </h3>
-                <p className="text-gray-700 text-center leading-relaxed">
-                  Colombia stands as the world's most biodiverse country per square kilometer. Our classification system
-                  organizes this incredible diversity into <strong>11 bioregions</strong>
-                  (major ecological areas) containing <strong>31 ecoregions</strong> (specific habitat types). This
-                  strategic location at the crossroads of North and South America, combined with three Andean mountain
-                  ranges and coastlines on both oceans, creates an unparalleled variety of ecosystems and the highest
-                  bird diversity on Earth.
-                </p>
-              </div>
+          {/* Statistics - Enhanced layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-emerald-600 mb-2">1,900+</div>
+              <div className="text-gray-600 font-medium">Bird Species</div>
             </div>
-
-            {/* Call to Action */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                onClick={() => document.getElementById("interactive-map")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                <MapPin className="mr-2 h-5 w-5" />
-                Explore Interactive Map
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 bg-transparent"
-                asChild
-              >
-                <Link href="/tours">
-                  <Bird className="mr-2 h-5 w-5" />
-                  Book Your Tour
-                </Link>
-              </Button>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">78+</div>
+              <div className="text-gray-600 font-medium">Endemic Species</div>
             </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-purple-600 mb-2">11</div>
+              <div className="text-gray-600 font-medium">Bioregions</div>
+            </div>
+          </div>
+
+          {/* Prominent Book Your Tour Button */}
+          <div className="mb-16">
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Link href="/tours">
+                <Calendar className="w-5 h-5 mr-2" />
+                Book Your Birding Adventure
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
+      {/* Biodiversity Information Section - Optimized spacing */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <CardContent className="p-8 sm:p-12">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+                  Understanding Colombia's Biodiversity
+                </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-blue-600 mx-auto mb-6"></div>
+              </div>
+
+              <div className="max-w-4xl mx-auto text-center">
+                <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  Colombia stands as the world's most biodiverse country per square kilometer. Our classification system
+                  organizes this incredible diversity into{" "}
+                  <Badge variant="secondary" className="mx-1 bg-emerald-100 text-emerald-800 font-semibold">
+                    11 bioregions
+                  </Badge>{" "}
+                  (major ecological areas) containing{" "}
+                  <Badge variant="secondary" className="mx-1 bg-blue-100 text-blue-800 font-semibold">
+                    31 ecoregions
+                  </Badge>{" "}
+                  (specific habitat types).
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  This strategic location at the crossroads of North and South America, combined with three Andean
+                  mountain ranges and coastlines on both oceans, creates an unparalleled variety of ecosystems and the
+                  highest bird diversity on Earth.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Interactive Map Section */}
-      <section id="interactive-map" className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+      <section id="interactive-map" className="py-16 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -631,6 +643,60 @@ export function ColombianBirdsExplorer() {
                 )}
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Call-to-Action Section - Enhanced positioning */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-blue-700">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            Ready to Experience Colombia's Avian Wonders?
+          </h2>
+          <p className="text-xl text-emerald-100 mb-8 leading-relaxed">
+            Join our expert-guided birding tours and discover the incredible diversity you've just explored. From
+            endemic hummingbirds in the Andes to colorful toucans in the Amazon rainforest.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-emerald-700 hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Link href="/tours">
+                <Calendar className="w-5 h-5 mr-2" />
+                View All Tours
+              </Link>
+            </Button>
+
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 bg-transparent"
+            >
+              <Link href="/contact">
+                <Users className="w-5 h-5 mr-2" />
+                Plan Custom Tour
+              </Link>
+            </Button>
+          </div>
+
+          {/* Additional Information */}
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+            <div className="text-emerald-100">
+              <div className="text-2xl font-bold text-white mb-2">Expert Guides</div>
+              <div className="text-sm">Professional ornithologists with decades of experience</div>
+            </div>
+            <div className="text-emerald-100">
+              <div className="text-2xl font-bold text-white mb-2">Small Groups</div>
+              <div className="text-sm">Maximum 4 guests per tour for personalized experience</div>
+            </div>
+            <div className="text-emerald-100">
+              <div className="text-2xl font-bold text-white mb-2">Carbon Neutral</div>
+              <div className="text-sm">100% carbon neutral tours supporting conservation</div>
+            </div>
           </div>
         </div>
       </section>

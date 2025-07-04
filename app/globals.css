@@ -1066,3 +1066,339 @@
     }
   }
 }
+
+/* Enhanced Mobile Sticky Logo Positioning */
+@media (max-width: 768px) {
+  /* Ensure body has proper padding to prevent logo overlap */
+  body {
+    padding-top: 0;
+  }
+
+  /* Enhanced sticky logo positioning */
+  .mobile-sticky-logo {
+    position: fixed !important;
+    top: 16px !important;
+    right: 16px !important;
+    z-index: 60 !important;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Prevent content overlap with sticky logo */
+  .mobile-content-padding {
+    padding-top: 76px; /* Space for sticky logo + safe area */
+  }
+
+  /* Enhanced visibility during scroll */
+  .mobile-sticky-logo:not(.menu-open) {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* Enhanced active state */
+  .mobile-sticky-logo.menu-open {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 2px solid rgba(16, 185, 129, 0.2) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Ensure logo doesn't interfere with carousel or other interactive elements */
+  .carousel-container,
+  .interactive-element {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Safe area adjustments for different mobile devices */
+  @supports (padding: max(0px)) {
+    .mobile-sticky-logo {
+      top: max(16px, env(safe-area-inset-top, 16px)) !important;
+      right: max(16px, env(safe-area-inset-right, 16px)) !important;
+    }
+  }
+
+  /* iPhone X and newer safe area support */
+  @supports (padding: constant(safe-area-inset-top)) {
+    .mobile-sticky-logo {
+      top: calc(constant(safe-area-inset-top) + 16px) !important;
+      right: calc(constant(safe-area-inset-right) + 16px) !important;
+    }
+  }
+
+  /* Enhanced touch target for better accessibility */
+  .mobile-sticky-logo {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent logo from interfering with page content during scroll */
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Enhanced visibility on different backgrounds */
+  .mobile-sticky-logo::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-sticky-logo:hover::before {
+    opacity: 1;
+  }
+
+  /* Landscape orientation adjustments */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .mobile-sticky-logo {
+      top: 12px !important;
+      right: 12px !important;
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+
+  /* Small mobile devices (iPhone SE, etc.) */
+  @media (max-width: 375px) {
+    .mobile-sticky-logo {
+      top: 12px !important;
+      right: 12px !important;
+    }
+  }
+
+  /* Large mobile devices (iPhone Pro Max, etc.) */
+  @media (min-width: 414px) and (max-width: 768px) {
+    .mobile-sticky-logo {
+      top: 20px !important;
+      right: 20px !important;
+    }
+  }
+}
+
+/* Enhanced scroll behavior for mobile */
+@media (max-width: 768px) {
+  /* Smooth scrolling optimization */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent logo jitter during scroll */
+  .mobile-sticky-logo {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  /* Enhanced performance during scroll */
+  body.scrolling .mobile-sticky-logo {
+    will-change: transform;
+  }
+
+  body:not(.scrolling) .mobile-sticky-logo {
+    will-change: auto;
+  }
+}
+
+/* High contrast mode support for mobile logo */
+@media (max-width: 768px) and (prefers-contrast: high) {
+  .mobile-sticky-logo {
+    background: white !important;
+    border: 2px solid black !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .mobile-sticky-logo img {
+    filter: contrast(1.2) !important;
+  }
+}
+
+/* Reduced motion support for mobile logo */
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  .mobile-sticky-logo {
+    transition: none !important;
+  }
+
+  .mobile-sticky-logo * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* AVES Explorer Page Specific Optimizations */
+.aves-explorer-page {
+  /* Optimized spacing and layout */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #dbeafe 100%);
+}
+
+/* Enhanced map container styling */
+.aves-explorer-map-container {
+  /* Perfect centering and sizing to match page margins */
+  max-width: 1280px; /* 7xl container */
+  margin: 0 auto;
+  padding: 0 2rem; /* Match page padding */
+}
+
+@media (min-width: 640px) {
+  .aves-explorer-map-container {
+    padding: 0 1.5rem; /* sm:px-6 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .aves-explorer-map-container {
+    padding: 0 2rem; /* lg:px-8 */
+  }
+}
+
+/* Enhanced map background and shadow */
+.aves-explorer-map-wrapper {
+  background: white;
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+  border: 1px solid rgba(229, 231, 235, 1); /* border-gray-100 */
+  padding: 1.5rem; /* p-6 */
+}
+
+@media (min-width: 640px) {
+  .aves-explorer-map-wrapper {
+    padding: 2rem; /* sm:p-8 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .aves-explorer-map-wrapper {
+    padding: 3rem; /* lg:p-12 */
+  }
+}
+
+/* Enhanced CTA section styling */
+.aves-explorer-cta {
+  background: linear-gradient(135deg, #059669 0%, #1d4ed8 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.aves-explorer-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    repeat;
+  pointer-events: none;
+}
+
+/* Enhanced button hover effects */
+.aves-explorer-btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.aves-explorer-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.aves-explorer-btn:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* Enhanced responsive typography */
+@media (max-width: 640px) {
+  .aves-explorer-title {
+    font-size: 2.5rem; /* text-4xl */
+    line-height: 1.1;
+  }
+
+  .aves-explorer-subtitle {
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.6;
+  }
+
+  .aves-explorer-stats {
+    font-size: 2rem; /* text-3xl */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .aves-explorer-title {
+    font-size: 3rem; /* text-5xl */
+    line-height: 1.1;
+  }
+
+  .aves-explorer-subtitle {
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.5;
+  }
+
+  .aves-explorer-stats {
+    font-size: 2.5rem; /* text-4xl */
+  }
+}
+
+@media (min-width: 1025px) {
+  .aves-explorer-title {
+    font-size: 3.75rem; /* text-6xl */
+    line-height: 1;
+  }
+
+  .aves-explorer-subtitle {
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.5;
+  }
+
+  .aves-explorer-stats {
+    font-size: 2.5rem; /* text-4xl */
+  }
+}
+
+/* Enhanced accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  .aves-explorer-btn {
+    transition: none;
+  }
+
+  .aves-explorer-btn:hover,
+  .aves-explorer-btn:active {
+    transform: none;
+  }
+}
+
+/* Enhanced focus styles */
+.aves-explorer-btn:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+/* Print optimizations */
+@media print {
+  .aves-explorer-cta {
+    background: white !important;
+    color: black !important;
+  }
+
+  .aves-explorer-btn {
+    border: 2px solid black !important;
+    background: white !important;
+    color: black !important;
+  }
+}
