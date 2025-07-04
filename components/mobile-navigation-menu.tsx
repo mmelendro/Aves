@@ -1,12 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, X, MapPin, Compass, BookOpen, Users, Mail, Shield, FileText, Cookie } from "lucide-react"
+import { X, ChevronRight, MapPin, TelescopeIcon as Binoculars, BookOpen, Phone, Info } from "lucide-react"
+import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
-import { cn } from "@/lib/utils"
 
 interface MobileNavigationMenuProps {
   className?: string
@@ -15,261 +14,222 @@ interface MobileNavigationMenuProps {
 export default function MobileNavigationMenu({ className }: MobileNavigationMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const closeMenu = () => setIsOpen(false)
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape)
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape)
+      document.body.style.overflow = "unset"
+    }
+  }, [isOpen])
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  const navigationItems = [
+    {
+      title: "Tours",
+      icon: <Binoculars className="w-5 h-5" />,
+      items: [
+        { name: "All Tours", href: "/tours" },
+        { name: "Adventure Tours", href: "/tours/adventure" },
+        { name: "Elevate Tours", href: "/tours/elevate" },
+        { name: "Souls Tours", href: "/tours/souls" },
+        { name: "Vision Tours", href: "/tours/vision" },
+        { name: "Sierra Nevada", href: "/tours/adventure/sierra-nevada" },
+      ],
+    },
+    {
+      title: "Regions",
+      icon: <MapPin className="w-5 h-5" />,
+      items: [
+        { name: "Caribbean Coast", href: "/regions/caribbean" },
+        { name: "Eastern Andes", href: "/regions/eastern-andes" },
+        { name: "Central Andes", href: "/regions/central-andes" },
+        { name: "Western Andes", href: "/regions/western-andes" },
+        { name: "Colombian Massif", href: "/regions/colombian-massif" },
+      ],
+    },
+    {
+      title: "Resources",
+      icon: <BookOpen className="w-5 h-5" />,
+      items: [
+        { name: "All Resources", href: "/resources" },
+        { name: "Endemic Birds", href: "/endemic-birds" },
+        { name: "Avifauna Explorer", href: "/avifauna-explorer" },
+        { name: "Aves Explorer", href: "/aves-explorer" },
+        { name: "Travel Tips", href: "/travel-tips" },
+        { name: "Blog", href: "/blog" },
+      ],
+    },
+    {
+      title: "About",
+      icon: <Info className="w-5 h-5" />,
+      items: [
+        { name: "About AVES", href: "/about" },
+        { name: "Our Team", href: "/team" },
+        { name: "Partners", href: "/about/partners" },
+        { name: "B Corp Certified", href: "/about/b-corp" },
+        { name: "Conservation", href: "/conservation" },
+      ],
+    },
+    {
+      title: "Contact",
+      icon: <Phone className="w-5 h-5" />,
+      items: [
+        { name: "Contact Us", href: "/contact" },
+        { name: "Plan My Trip", href: "/shopping" },
+        { name: "Checkout", href: "/checkout" },
+      ],
+    },
+  ]
 
   return (
-    <div className={cn("md:hidden", className)}>
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="p-2 hover:bg-gray-100 transition-colors"
-            aria-label="Open navigation menu"
-          >
-            <Menu className="h-6 w-6 text-gray-700" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="right" className="w-80 p-0 bg-white">
-          <div className="flex flex-col h-full">
-            {/* Header - Navigation text completely removed */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+    <>
+      {/* AVES Logo Button - Top Right */}
+      <div className={cn("fixed top-4 right-4 z-50", className)}>
+        <Button
+          onClick={toggleMenu}
+          className={cn(
+            "w-12 h-12 p-0 rounded-full bg-white/90 hover:bg-white backdrop-blur-sm border border-gray-200/50 shadow-lg transition-all duration-300 hover:scale-105 active:scale-95",
+            isOpen && "rotate-180",
+          )}
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+        >
+          <div className="relative w-8 h-8">
+            <Image
+              src="/images/aves-logo.png"
+              alt="AVES"
+              width={32}
+              height={32}
+              className="w-full h-full object-contain"
+              priority
+            />
+          </div>
+        </Button>
+      </div>
+
+      {/* Backdrop Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/10 backdrop-blur-sm z-40 transition-all duration-500 ease-out"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Navigation Menu */}
+      <div
+        className={cn(
+          "fixed top-0 right-0 h-full w-3/4 bg-white/90 backdrop-blur-md border-l border-gray-200/50 shadow-2xl z-50 transition-all duration-500 ease-out",
+          isOpen ? "translate-x-0" : "translate-x-full",
+        )}
+      >
+        <div className="h-full overflow-y-auto">
+          {/* Header - NAVIGATION TEXT COMPLETELY REMOVED */}
+          <div className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-gray-200/50 p-4">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Image src="/images/aves-logo.png" alt="AVES" width={40} height={40} className="rounded-lg" />
-                <span className="text-xl font-bold text-gray-900">AVES</span>
+                <div className="relative w-8 h-8">
+                  <Image
+                    src="/images/aves-logo.png"
+                    alt="AVES"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                {/* AVES text also removed to match the clean design */}
               </div>
               <Button
+                onClick={closeMenu}
                 variant="ghost"
                 size="sm"
-                onClick={closeMenu}
-                className="p-2 hover:bg-gray-100 transition-colors"
-                aria-label="Close navigation menu"
+                className="w-8 h-8 p-0 rounded-full hover:bg-gray-100"
+                aria-label="Close menu"
               >
-                <X className="h-5 w-5 text-gray-500" />
+                <X className="w-4 h-4" />
               </Button>
             </div>
+          </div>
 
-            {/* Navigation Content */}
-            <div className="flex-1 overflow-y-auto py-6">
-              <nav className="space-y-8 px-6">
-                {/* Tours Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Tours</h3>
-                  <div className="space-y-3">
-                    <Link
-                      href="/tours"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <MapPin className="h-5 w-5 text-blue-500" />
-                      <span>All Tours Overview</span>
-                    </Link>
-                    <Link
-                      href="/tours/adventure"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-green-500">🌿</div>
-                      <span>Adventure Tours</span>
-                    </Link>
-                    <Link
-                      href="/tours/vision"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-amber-600">🪶</div>
-                      <span>Vision Tours</span>
-                    </Link>
-                    <Link
-                      href="/tours/elevate"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-yellow-500">🌻</div>
-                      <span>Elevate Tours</span>
-                    </Link>
-                    <Link
-                      href="/tours/souls"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-red-500">🍓</div>
-                      <span>Souls Tours</span>
-                    </Link>
-                  </div>
+          {/* Navigation Content */}
+          <div className="p-4 space-y-6">
+            {navigationItems.map((section, sectionIndex) => (
+              <div key={section.title} className="space-y-3">
+                {/* Section Header */}
+                <div className="flex items-center gap-3 px-2">
+                  <div className="text-emerald-600">{section.icon}</div>
+                  <h3 className="text-base font-semibold text-gray-900">{section.title}</h3>
                 </div>
 
-                {/* Regions Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Regions</h3>
-                  <div className="space-y-3">
+                {/* Section Items */}
+                <div className="space-y-1">
+                  {section.items.map((item, itemIndex) => (
                     <Link
-                      href="/regions/caribbean"
+                      key={item.href}
+                      href={item.href}
                       onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
+                      className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200 group"
                     >
-                      <Compass className="h-5 w-5 text-cyan-500" />
-                      <span>Caribbean Coast</span>
+                      <span className="text-sm font-medium text-gray-700 group-hover:text-emerald-700">
+                        {item.name}
+                      </span>
+                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition-colors duration-200" />
                     </Link>
-                    <Link
-                      href="/endemic-birds"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-purple-500">🦅</div>
-                      <span>Endemic Birds</span>
-                    </Link>
-                  </div>
+                  ))}
                 </div>
 
-                {/* Resources Hub Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Resources Hub</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">EXPLORE & PLAN</h4>
-                      <div className="space-y-3">
-                        <Link
-                          href="/aves-explorer"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <div className="h-5 w-5 text-amber-700">🦅</div>
-                          <span>AVES Explorer</span>
-                        </Link>
-                        <Link
-                          href="/avifauna-explorer"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <Compass className="h-5 w-5 text-emerald-500" />
-                          <span>Avifauna Explorer</span>
-                        </Link>
-                        <Link
-                          href="/resources"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <BookOpen className="h-5 w-5 text-blue-500" />
-                          <span>Resources</span>
-                        </Link>
-                        <Link
-                          href="/blog"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <BookOpen className="h-5 w-5 text-indigo-500" />
-                          <span>Blog</span>
-                        </Link>
-                        <Link
-                          href="/travel-tips"
-                          onClick={closeMenu}
-                          className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                        >
-                          <div className="h-5 w-5 text-orange-500">✈️</div>
-                          <span>Travel Tips</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* About Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">About</h3>
-                  <div className="space-y-3">
-                    <Link
-                      href="/about"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <Users className="h-5 w-5 text-emerald-500" />
-                      <span>About AVES</span>
-                    </Link>
-                    <Link
-                      href="/team"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <Users className="h-5 w-5 text-blue-500" />
-                      <span>Our Team</span>
-                    </Link>
-                    <Link
-                      href="/about/partners"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-purple-500">🤝</div>
-                      <span>Partners</span>
-                    </Link>
-                    <Link
-                      href="/conservation"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-green-600">🌱</div>
-                      <span>Conservation</span>
-                    </Link>
-                    <Link
-                      href="/about/b-corp"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <div className="h-5 w-5 text-green-500">🌿</div>
-                      <span>B Corp Certified</span>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Contact Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact</h3>
-                  <div className="space-y-3">
-                    <Link
-                      href="/contact"
-                      onClick={closeMenu}
-                      className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors"
-                    >
-                      <Mail className="h-5 w-5 text-blue-500" />
-                      <span>Contact Us</span>
-                    </Link>
-                  </div>
-                </div>
-              </nav>
-            </div>
-
-            {/* Footer */}
-            <div className="border-t border-gray-200 p-6">
-              <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                <Link
-                  href="/privacy"
-                  onClick={closeMenu}
-                  className="flex items-center gap-2 hover:text-emerald-600 transition-colors"
-                >
-                  <Shield className="h-4 w-4" />
-                  <span>Privacy Policy</span>
-                </Link>
-                <Link
-                  href="/terms"
-                  onClick={closeMenu}
-                  className="flex items-center gap-2 hover:text-emerald-600 transition-colors"
-                >
-                  <FileText className="h-4 w-4" />
-                  <span>Terms of Service</span>
-                </Link>
-                <Link
-                  href="/cookies"
-                  onClick={closeMenu}
-                  className="flex items-center gap-2 hover:text-emerald-600 transition-colors"
-                >
-                  <Cookie className="h-4 w-4" />
-                  <span>Cookie Policy</span>
-                </Link>
+                {/* Divider (except for last section) */}
+                {sectionIndex < navigationItems.length - 1 && <div className="border-t border-gray-200/50 pt-2" />}
               </div>
+            ))}
+
+            {/* Footer Links */}
+            <div className="pt-6 border-t border-gray-200/50 space-y-2">
+              <Link
+                href="/privacy"
+                onClick={closeMenu}
+                className="block px-4 py-2 text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                onClick={closeMenu}
+                className="block px-4 py-2 text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200"
+              >
+                Terms of Service
+              </Link>
+              <Link
+                href="/cookies"
+                onClick={closeMenu}
+                className="block px-4 py-2 text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200"
+              >
+                Cookie Policy
+              </Link>
             </div>
           </div>
-        </SheetContent>
-      </Sheet>
-    </div>
+        </div>
+      </div>
+    </>
   )
 }
