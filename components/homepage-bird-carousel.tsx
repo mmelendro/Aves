@@ -1,483 +1,885 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect, useCallback, useRef } from "react"
-import { ChevronLeft, ChevronRight, Info, X, Camera, Instagram } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import OptimizedImage from "@/components/optimized-image"
-import Link from "next/link"
+import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, X, Volume2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
+import Image from "next/image"
 
 interface BirdData {
   id: string
-  name: string
+  commonName: string
   scientificName: string
-  region: string
+  spanishName: string
+  primaryRegion: string
+  secondaryRegions: string[]
+  ecoregions: string[]
   regionSlug: string
+  status: "Endemic" | "Near Endemic" | "Spectacular"
+  difficulty: "Easy" | "Moderate" | "Challenging"
+  habitat: string
+  bestTime: string
+  elevation: string
   image: string
-  photographer?: string
-  instagramUrl?: string
-  profileUrl?: string
-  elevation?: string
-  primaryRegion?: string
-  alsoFoundIn?: string[]
-  ecoregions?: string[]
-  description?: string
+  audioFile?: string
+  photoCredit: {
+    photographer: string
+    title: string
+    teamLink?: string
+    instagramPost?: string
+    reserve?: string
+    reserveLink?: string
+  }
 }
 
 const birdData: BirdData[] = [
   {
-    id: "green-bearded-helmetcrest",
-    name: "Green-bearded Helmetcrest",
+    id: "1",
+    commonName: "Green-bearded Helmetcrest",
     scientificName: "Oxypogon guerinii",
-    region: "Eastern Andes",
-    regionSlug: "eastern-andes",
-    image: "/images/green-bearded-helmetcrest.png",
-    photographer: "Dagoberto Rudas",
-    profileUrl: "/team#dagoberto-rudas",
-    elevation: "3,000 - 4,200m",
+    spanishName: "Colibrí Crestado Verde",
     primaryRegion: "Eastern Andes",
-    alsoFoundIn: ["Central Andes"],
-    ecoregions: ["High-altitude páramo", "Montane forest", "Forest understory"],
-    description: "A spectacular endemic hummingbird found only in Colombia's high-altitude páramo ecosystems.",
+    secondaryRegions: ["Central Andes"],
+    ecoregions: ["High-altitude páramo", "Cloud forest edges", "Alpine scrubland"],
+    regionSlug: "eastern-andes",
+    status: "Endemic",
+    difficulty: "Challenging",
+    habitat: "High-altitude páramo and cloud forest edges above 3,000m",
+    bestTime: "December - March (dry season)",
+    elevation: "3,000 - 4,200m",
+    image: "/images/green-bearded-helmetcrest.png",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-njVmyxK8Wn7VWVxZmnAUGhKKqEHDmg.mp3",
+    photoCredit: {
+      photographer: "Nicolás Rozo",
+      title: "AVES Guide",
+      teamLink: "/team#nicolas-rozo",
+      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+    },
   },
   {
-    id: "rainbow-bearded-thornbill",
-    name: "Rainbow-bearded Thornbill",
+    id: "2",
+    commonName: "Rainbow-bearded Thornbill",
     scientificName: "Chalcostigma herrani",
-    region: "Central Andes",
-    regionSlug: "central-andes",
-    image: "/images/rainbow-bearded-thornbill.jpg",
-    photographer: "Juan Camilo Canadiense",
-    profileUrl: "/team#juan-camilo-canadiense",
-    elevation: "1,800 - 3,500m",
+    spanishName: "Colibrí Barbudo Arcoíris",
     primaryRegion: "Central Andes",
-    alsoFoundIn: ["Eastern Andes", "Western Andes"],
-    ecoregions: ["Cloud forest", "Montane forest", "Forest understory"],
-    description: "One of Colombia's most colorful endemic hummingbirds, known for its iridescent plumage.",
-  },
-  {
-    id: "chestnut-crowned-antpitta",
-    name: "Chestnut-crowned Antpitta",
-    scientificName: "Grallaria ruficapilla",
-    region: "Central Andes",
+    secondaryRegions: ["Eastern Andes"],
+    ecoregions: ["Páramo grasslands", "Volcanic slopes", "Alpine scrub", "High-altitude wetlands"],
     regionSlug: "central-andes",
-    image: "/images/chestnut-crowned-antpitta.jpg",
-    photographer: "David Jara",
-    profileUrl: "/team#david-jara",
-    elevation: "1,400 - 2,800m",
-    primaryRegion: "Central Andes",
-    alsoFoundIn: ["Eastern Andes", "Western Andes", "Colombian Massif"],
-    ecoregions: ["Cloud forest", "Montane forest", "Forest understory"],
-    description: "A secretive ground-dwelling bird endemic to Colombia's Andean cloud forests.",
+    status: "Endemic",
+    difficulty: "Challenging",
+    habitat: "High-altitude páramo and volcanic slopes with scattered shrubs",
+    bestTime: "December - March (clear weather)",
+    elevation: "3,200 - 4,500m",
+    image: "/images/rabtho1.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-zlI0qx9zdy6wFmPwI8rEJXXYXjJp3H.mp3",
+    photoCredit: {
+      photographer: "Royann",
+      title: "Wildlife Photographer",
+      reserve: "Termales del Ruiz",
+      reserveLink: "/about/partners#termales-del-ruiz",
+    },
   },
   {
-    id: "cardinal-guajiro",
-    name: "Vermilion Cardinal",
-    scientificName: "Cardinalis phoeniceus",
-    region: "Caribbean",
-    regionSlug: "caribbean",
-    image: "/images/cardinal-guajiro.jpg",
-    photographer: "Nicolás Rozo",
-    profileUrl: "/team#nicolas-rozo",
-    elevation: "0 - 500m",
-    primaryRegion: "Caribbean Coast",
-    alsoFoundIn: ["Magdalena Valley"],
-    ecoregions: ["Dry forest", "Scrubland", "Coastal areas"],
-    description: "A stunning endemic cardinal found only in Colombia's Caribbean coastal regions.",
-  },
-  {
-    id: "black-billed-mountain-toucan",
-    name: "Black-billed Mountain-Toucan",
+    id: "3",
+    commonName: "Black-billed Mountain-Toucan",
     scientificName: "Andigena nigrirostris",
-    region: "Western Andes",
-    regionSlug: "western-andes",
-    image: "/images/bbmtou1-black-billed-mountain-toucan.png",
-    photographer: "Gleison Guarín",
-    profileUrl: "/team#gleison-guarin",
-    elevation: "1,500 - 3,200m",
-    primaryRegion: "Western Andes",
-    alsoFoundIn: ["Central Andes"],
-    ecoregions: ["Cloud forest", "Montane forest", "Forest canopy"],
-    description: "A magnificent toucan species endemic to Colombia's Andean cloud forests.",
+    spanishName: "Tucán Andino Piquinegro",
+    primaryRegion: "Central Andes",
+    secondaryRegions: ["Western Andes", "Eastern Andes"],
+    ecoregions: ["Montane cloud forest", "Forest canopy", "Secondary growth", "Forest edges"],
+    regionSlug: "central-andes",
+    status: "Near Endemic",
+    difficulty: "Moderate",
+    habitat: "Montane cloud forests and forest edges with fruiting trees",
+    bestTime: "Year-round (most active mornings)",
+    elevation: "1,500 - 2,800m",
+    image: "/images/bbmtou1-square.png",
+    photoCredit: {
+      photographer: "Royann",
+      title: "Wildlife Photographer",
+      reserve: "Reserva Río Blanco",
+      reserveLink: "/about/partners#reserva-rio-blanco",
+    },
   },
   {
-    id: "velvet-purple-coronet",
-    name: "Velvet-purple Coronet",
+    id: "4",
+    commonName: "Chestnut-crowned Antpitta",
+    scientificName: "Grallaria ruficapilla",
+    spanishName: "Tororoi Coronirrufo",
+    primaryRegion: "Colombian Massif",
+    secondaryRegions: ["Central Andes", "Western Andes"],
+    ecoregions: ["Cloud forest understory", "Dense leaf litter", "Bamboo thickets", "Mossy forest floor"],
+    regionSlug: "colombian-massif",
+    status: "Endemic",
+    difficulty: "Moderate",
+    habitat: "Dense cloud forest understory with thick leaf litter",
+    bestTime: "Year-round (dawn and dusk)",
+    elevation: "1,800 - 3,200m",
+    image: "/images/chestnut-crowned-antpitta.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-6pqzdAPhoSOUOXsdXTRugdtXK67CbY.mp3",
+    photoCredit: {
+      photographer: "Martin Meléndro",
+      title: "AVES Guide",
+      teamLink: "/team#martin-melendro",
+      reserve: "Reserva Río Blanco",
+      reserveLink: "/about/partners#reserva-rio-blanco",
+    },
+  },
+  {
+    id: "5",
+    commonName: "Andean Motmot",
+    scientificName: "Momotus aequatorialis",
+    spanishName: "Momoto Andino",
+    primaryRegion: "Central Andes",
+    secondaryRegions: ["Western Andes", "Eastern Andes", "Colombian Massif"],
+    ecoregions: [
+      "Subtropical forest midstory",
+      "Mossy cloud forest",
+      "Forest edges",
+      "Secondary growth",
+      "Foothills to subtropical zone",
+    ],
+    regionSlug: "central-andes",
+    status: "Near Endemic",
+    difficulty: "Easy",
+    habitat: "Midstory of mossy subtropical forests, forest edges from foothills into subtropical zone",
+    bestTime: "Year-round (most active early morning)",
+    elevation: "1,200 - 2,600m",
+    image: "/images/blue-crowned-motmot-new.jpg",
+    photoCredit: {
+      photographer: "Martin Meléndro",
+      title: "AVES Guide",
+      teamLink: "/team#martin-melendro",
+      reserve: "Reserva Río Blanco",
+      reserveLink: "/about/partners#reserva-rio-blanco",
+    },
+  },
+  {
+    id: "6",
+    commonName: "Vermilion Cardinal",
+    scientificName: "Cardinalis phoeniceus",
+    spanishName: "Cardenal Guajiro",
+    primaryRegion: "Caribbean Coast",
+    secondaryRegions: [],
+    ecoregions: ["Dry tropical forest", "Thorny scrubland", "Desert edges", "Arid lowlands"],
+    regionSlug: "caribbean",
+    status: "Endemic",
+    difficulty: "Moderate",
+    habitat: "Dry scrublands and thorny forests of the Guajira Peninsula",
+    bestTime: "December - April (dry season)",
+    elevation: "0 - 800m",
+    image: "/images/cardinal-guajiro.jpg",
+    photoCredit: {
+      photographer: "Royann",
+      title: "Wildlife Photographer",
+    },
+  },
+  {
+    id: "7",
+    commonName: "Velvet-purple Coronet",
     scientificName: "Boissonneaua jardini",
-    region: "Western Andes",
-    regionSlug: "western-andes",
-    image: "/images/velvet-purple-coronet.jpg",
-    photographer: "Yeferson Gualé Epiayu",
-    profileUrl: "/team#yeferson-guale-epiayu",
-    elevation: "1,200 - 2,400m",
+    spanishName: "Coronita Terciopelo Púrpura",
     primaryRegion: "Western Andes",
-    alsoFoundIn: ["Central Andes"],
-    ecoregions: ["Cloud forest", "Montane forest", "Forest edge"],
-    description: "A beautiful hummingbird with distinctive velvet-purple plumage found in Colombia's cloud forests.",
+    secondaryRegions: ["Central Andes"],
+    ecoregions: ["Cloud forest", "Montane forest", "Forest edges", "Secondary growth"],
+    regionSlug: "western-andes",
+    status: "Near Endemic",
+    difficulty: "Easy",
+    habitat: "Cloud forests and forest edges in the Western Andes",
+    bestTime: "Year-round (most active early morning)",
+    elevation: "1,200 - 2,400m",
+    image: "/images/velvet-purple-coronet.jpg",
+    photoCredit: {
+      photographer: "Martin Melendro",
+      title: "AVES Lead Guide & Founder",
+      teamLink: "/team#martin-melendro",
+      reserve: "Jardín de Rocas",
+      reserveLink: "/about/partners#jardin-de-rocas",
+    },
   },
 ]
 
-export default function HomepageBirdCarousel() {
+interface HomepageBirdCarouselProps {
+  className?: string
+  autoPlay?: boolean
+  autoPlayInterval?: number
+}
+
+export default function HomepageBirdCarousel({
+  className,
+  autoPlay = true,
+  autoPlayInterval = 8000,
+}: HomepageBirdCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
   const [showPhotoCredit, setShowPhotoCredit] = useState(false)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [imageLoaded, setImageLoaded] = useState(false)
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const [imageError, setImageError] = useState(false)
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false)
+  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
 
   const currentBird = birdData[currentIndex]
 
-  // Auto-play functionality
-  useEffect(() => {
-    if (isAutoPlaying && !showInfo && !showPhotoCredit) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % birdData.length)
-      }, 5000)
-    } else if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
+  // Check if current bird should show the Explore Region button (only Vermilion Cardinal)
+  const shouldShowExploreRegion = currentBird.id === "6" // Vermilion Cardinal
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
+  // Preload all images on component mount with proper error handling
+  useEffect(() => {
+    const preloadImages = async () => {
+      try {
+        const imagePromises = birdData.map((bird, index) => {
+          return new Promise<void>((resolve) => {
+            const img = new window.Image()
+
+            const handleLoad = () => {
+              setPreloadedImages((prev) => new Set(prev).add(bird.image))
+              if (index === 0) {
+                setFirstImageLoaded(true)
+                setIsLoading(false)
+                setImageLoaded(true)
+                // Start autoplay only after first image is loaded
+                if (autoPlay) {
+                  setTimeout(() => setIsPlaying(true), 1000)
+                }
+              }
+              resolve()
+            }
+
+            const handleError = () => {
+              console.warn(`Failed to load image: ${bird.image}`)
+              if (index === 0) {
+                setFirstImageLoaded(true)
+                setIsLoading(false)
+                setImageError(true)
+              }
+              resolve()
+            }
+
+            img.onload = handleLoad
+            img.onerror = handleError
+            img.src = bird.image
+          })
+        })
+
+        // Wait for at least the first image to load/fail
+        try {
+          await imagePromises[0]
+        } catch (error) {
+          console.warn("Error loading first image:", error)
+          setFirstImageLoaded(true)
+          setIsLoading(false)
+          setImageError(true)
+        }
+
+        // Continue loading other images in background
+        try {
+          await Promise.allSettled(imagePromises.slice(1))
+        } catch (error) {
+          console.warn("Error loading additional images:", error)
+        }
+      } catch (error) {
+        console.warn("Error in preloadImages:", error)
+        setFirstImageLoaded(true)
+        setIsLoading(false)
+        setImageError(true)
       }
     }
-  }, [isAutoPlaying, showInfo, showPhotoCredit])
 
-  // Navigation functions
-  const goToNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % birdData.length)
-    setImageLoaded(false)
+    preloadImages()
+  }, [autoPlay])
+
+  const nextSlide = useCallback(() => {
+    if (firstImageLoaded || currentIndex > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % birdData.length)
+      setShowInfo(false)
+      setShowPhotoCredit(false)
+
+      // Update loading states for new image
+      const nextIndex = (currentIndex + 1) % birdData.length
+      const nextImage = birdData[nextIndex].image
+      if (preloadedImages.has(nextImage)) {
+        setIsLoading(false)
+        setImageLoaded(true)
+        setImageError(false)
+      } else {
+        setIsLoading(true)
+        setImageLoaded(false)
+        setImageError(false)
+      }
+    }
+  }, [currentIndex, firstImageLoaded, preloadedImages])
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + birdData.length) % birdData.length)
+    setShowInfo(false)
+    setShowPhotoCredit(false)
+
+    // Update loading states for new image
+    const prevIndex = (currentIndex - 1 + birdData.length) % birdData.length
+    const prevImage = birdData[prevIndex].image
+    if (preloadedImages.has(prevImage)) {
+      setIsLoading(false)
+      setImageLoaded(true)
+      setImageError(false)
+    } else {
+      setIsLoading(true)
+      setImageLoaded(false)
+      setImageError(false)
+    }
+  }, [currentIndex, preloadedImages])
+
+  const goToSlide = useCallback(
+    (index: number) => {
+      setCurrentIndex(index)
+      setShowInfo(false)
+      setShowPhotoCredit(false)
+
+      // Update loading states for new image
+      const targetImage = birdData[index].image
+      if (preloadedImages.has(targetImage)) {
+        setIsLoading(false)
+        setImageLoaded(true)
+        setImageError(false)
+      } else {
+        setIsLoading(true)
+        setImageLoaded(false)
+        setImageError(false)
+      }
+    },
+    [preloadedImages],
+  )
+
+  // Modified autoplay effect to respect first image loading
+  useEffect(() => {
+    if (isPlaying && firstImageLoaded) {
+      const interval = setInterval(nextSlide, autoPlayInterval)
+      return () => clearInterval(interval)
+    }
+  }, [isPlaying, nextSlide, autoPlayInterval, firstImageLoaded])
+
+  const handleImageLoad = useCallback(() => {
+    setIsLoading(false)
+    setImageLoaded(true)
+    setImageError(false)
   }, [])
 
-  const goToPrevious = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + birdData.length) % birdData.length)
+  const handleImageError = useCallback(() => {
+    console.warn(`Failed to load current image: ${currentBird.image}`)
+    setIsLoading(false)
     setImageLoaded(false)
-  }, [])
+    setImageError(true)
+  }, [currentBird.image])
 
-  const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index)
-    setImageLoaded(false)
-  }, [])
+  const playAudio = useCallback(() => {
+    if (currentBird.audioFile) {
+      try {
+        const audio = new Audio(currentBird.audioFile)
+        audio.play().catch((error) => {
+          console.warn("Audio play failed:", error)
+        })
+      } catch (error) {
+        console.warn("Audio creation failed:", error)
+      }
+    }
+  }, [currentBird.audioFile])
 
-  // Touch handlers for mobile swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
-
-    if (isLeftSwipe) {
-      goToNext()
-    } else if (isRightSwipe) {
-      goToPrevious()
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Endemic":
+        return "bg-red-100 text-red-800 border-red-200"
+      case "Near Endemic":
+        return "bg-orange-100 text-orange-800 border-orange-200"
+      case "Spectacular":
+        return "bg-purple-100 text-purple-800 border-purple-200"
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200"
     }
   }
 
-  // Close panels when changing slides
-  useEffect(() => {
-    setShowInfo(false)
-    setShowPhotoCredit(false)
-  }, [currentIndex])
-
-  // Handle info panel toggle
-  const toggleInfo = () => {
-    setShowInfo(!showInfo)
-    setShowPhotoCredit(false)
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "Easy":
+        return "bg-green-100 text-green-800 border-green-200"
+      case "Moderate":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200"
+      case "Challenging":
+        return "bg-red-100 text-red-800 border-red-200"
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200"
+    }
   }
 
-  // Handle photo credit toggle
-  const togglePhotoCredit = () => {
-    setShowPhotoCredit(!showPhotoCredit)
-    setShowInfo(false)
+  // Enhanced image positioning for perfect square framing with focus on bird's eye and wing
+  const getImagePositioning = (birdId: string) => {
+    switch (birdId) {
+      case "1": // Green-bearded Helmetcrest
+        return {
+          objectPosition: "center 35%",
+          transform: "scale(1.2)",
+        }
+      case "2": // Rainbow-bearded Thornbill
+        return {
+          objectPosition: "center 25%",
+          transform: "scale(1.15)",
+        }
+      case "3": // Black-billed Mountain-Toucan
+        return {
+          objectPosition: "center 20%",
+          transform: "scale(1.0)",
+        }
+      case "4": // Chestnut-crowned Antpitta
+        return {
+          objectPosition: "center 40%",
+          transform: "scale(1.1)",
+        }
+      case "5": // Andean Motmot
+        return {
+          objectPosition: "center center",
+          transform: "scale(1.1)",
+        }
+      case "6": // Vermilion Cardinal
+        return {
+          objectPosition: "center 25%",
+          transform: "scale(1.1)",
+        }
+      case "7": // Velvet-purple Coronet
+        return {
+          objectPosition: "center 30%",
+          transform: "scale(1.1)",
+        }
+      default:
+        return {
+          objectPosition: "center center",
+          transform: "scale(1.1)",
+        }
+    }
+  }
+
+  const currentImagePositioning = getImagePositioning(currentBird.id)
+
+  const getPrimaryRegionColor = (region: string) => {
+    switch (region) {
+      case "Eastern Andes":
+        return "bg-blue-600/90 text-white border-blue-500/50"
+      case "Central Andes":
+        return "bg-purple-600/90 text-white border-purple-500/50"
+      case "Western Andes":
+        return "bg-green-600/90 text-white border-green-500/50"
+      case "Colombian Massif":
+        return "bg-orange-600/90 text-white border-orange-500/50"
+      case "Caribbean Coast":
+        return "bg-cyan-600/90 text-white border-cyan-500/50"
+      default:
+        return "bg-gray-600/90 text-white border-gray-500/50"
+    }
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden carousel-container">
-      {/* Main Image Container */}
-      <div
-        className="relative aspect-square bg-gradient-to-br from-emerald-50 to-cyan-50 carousel-image-container"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* Bird Image */}
-        <div className="relative w-full h-full overflow-hidden">
-          <OptimizedImage
-            src={currentBird.image}
-            alt={`${currentBird.name} - ${currentBird.scientificName}`}
-            width={400}
-            height={400}
-            className={cn(
-              "w-full h-full object-cover transition-all duration-700 ease-out carousel-slide",
-              imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105",
+    <div className={cn("relative w-full max-w-md mx-auto carousel-container", className)}>
+      <Card className="overflow-hidden border-0 shadow-xl">
+        <div className="relative">
+          {/* Main Image - Perfect Square */}
+          <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50 carousel-image-container">
+            {!imageError ? (
+              <Image
+                src={currentBird.image || "/placeholder.svg"}
+                alt={`${currentBird.commonName} - ${currentBird.primaryRegion}`}
+                fill
+                className={cn(
+                  "object-cover transition-all duration-700 ease-out carousel-slide",
+                  imageLoaded ? "opacity-100" : "opacity-0",
+                )}
+                style={{
+                  objectPosition: currentImagePositioning.objectPosition,
+                  transform: currentImagePositioning.transform,
+                  transformOrigin: "center center",
+                }}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+                priority={currentIndex === 0}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                <div className="text-center p-4">
+                  <div className="w-16 h-16 mx-auto mb-2 bg-gray-300 rounded-full flex items-center justify-center">
+                    <Camera className="w-8 h-8 text-gray-500" />
+                  </div>
+                  <p className="text-sm text-gray-600">Image unavailable</p>
+                </div>
+              </div>
             )}
-            onLoad={() => setImageLoaded(true)}
-            priority={currentIndex === 0}
-            style={{
-              objectFit: "cover",
-              objectPosition: "center",
-            }}
-          />
 
-          {/* Loading overlay */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-cyan-100 animate-pulse carousel-loading" />
-          )}
-        </div>
-
-        {/* Navigation Arrows - Hidden when info panel is open */}
-        {!showInfo && (
-          <>
-            <button
-              onClick={goToPrevious}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 carousel-button z-30"
-              aria-label="Previous bird"
-            >
-              <ChevronLeft className="w-5 h-5 text-gray-700" />
-            </button>
-
-            <button
-              onClick={goToNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 carousel-button z-30"
-              aria-label="Next bird"
-            >
-              <ChevronRight className="w-5 h-5 text-gray-700" />
-            </button>
-          </>
-        )}
-
-        {/* Bird Information Overlay - Hidden when info panel is open */}
-        {!showInfo && (
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 transition-all duration-300 ease-in-out">
-            <div className="flex items-end justify-between">
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-bold text-lg leading-tight drop-shadow-lg">{currentBird.name}</h3>
-                <p className="text-white/90 text-sm italic drop-shadow-md">{currentBird.scientificName}</p>
-                <div className="mt-2">
-                  <span className="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">
-                    {currentBird.region}
-                  </span>
+            {/* Enhanced Loading Indicator */}
+            {isLoading && !imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50 carousel-loading">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+                  <p className="text-sm text-emerald-700 font-medium">
+                    {currentIndex === 0 && !firstImageLoaded ? "Loading first image..." : "Loading..."}
+                  </p>
                 </div>
               </div>
+            )}
 
-              <div className="flex items-center space-x-2 ml-3">
-                <button
-                  onClick={toggleInfo}
-                  className="w-8 h-8 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 border border-white/30 hover:border-white/50"
-                  aria-label="Show bird information"
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+            {/* Navigation Arrows - Only show when info panel is closed */}
+            {!showInfo && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "absolute left-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg",
+                    "top-1/3 -translate-y-1/2 md:top-1/2",
+                  )}
+                  onClick={prevSlide}
+                  aria-label="Previous bird"
                 >
-                  <Info className="w-4 h-4 text-white drop-shadow-sm" />
-                </button>
+                  <ChevronLeft className="w-5 h-5" />
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "absolute right-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg",
+                    "top-1/3 -translate-y-1/2 md:top-1/2",
+                  )}
+                  onClick={nextSlide}
+                  aria-label="Next bird"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </Button>
+              </>
+            )}
+
+            {/* Top Control Buttons - Only show when info panel is closed */}
+            {!showInfo && (
+              <div className="absolute top-3 right-3 flex gap-2 z-50">
+                {currentBird.audioFile && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
+                    onClick={playAudio}
+                    aria-label="Play bird call"
+                  >
+                    <Volume2 className="w-4 h-4" />
+                  </Button>
+                )}
+
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+                  disabled={!firstImageLoaded}
+                >
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
+                  onClick={() => setShowPhotoCredit(!showPhotoCredit)}
+                  aria-label="View photo credit"
+                >
+                  <Camera className="w-4 h-4" />
+                </Button>
               </div>
-            </div>
-          </div>
-        )}
+            )}
 
-        {/* Photo Credit Button - Hidden when info panel is open */}
-        {!showInfo && currentBird.photographer && (
-          <button
-            onClick={togglePhotoCredit}
-            className="absolute top-3 left-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-xs font-medium transition-all duration-300 hover:scale-105 active:scale-95 border border-white/30 hover:border-white/50 z-20"
-            aria-label="Show photo credit"
-          >
-            <Camera className="w-3 h-3 inline mr-1" />
-            Photo Credit
-          </button>
-        )}
+            {/* Bird Information - Bottom with Primary Region Tag - CONDITIONALLY HIDDEN */}
+            {!showInfo && (
+              <div className="absolute bottom-0 left-0 right-0 text-white z-30 transition-all duration-300 ease-in-out">
+                <div className="p-3 space-y-2">
+                  {/* Bird Names */}
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold leading-tight drop-shadow-lg">{currentBird.commonName}</h3>
+                    <p className="text-sm italic opacity-90 leading-tight drop-shadow-md">
+                      {currentBird.scientificName}
+                    </p>
+                    <p className="text-xs opacity-75 leading-tight drop-shadow-md">{currentBird.spanishName}</p>
+                  </div>
 
-        {/* Close Button - Only visible when info panel is open */}
-        {showInfo && (
-          <button
-            onClick={() => setShowInfo(false)}
-            className="absolute top-4 right-4 w-10 h-10 bg-emerald-600 hover:bg-emerald-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg z-50"
-            aria-label="Close information panel"
-          >
-            <X className="w-5 h-5 text-white" />
-          </button>
-        )}
+                  {/* Primary Region Tag and Info Button Row */}
+                  <div className="flex items-center justify-between gap-3">
+                    <div
+                      className={cn(
+                        "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border backdrop-blur-sm shadow-lg",
+                        getPrimaryRegionColor(currentBird.primaryRegion),
+                      )}
+                    >
+                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      <span className="whitespace-nowrap">{currentBird.primaryRegion}</span>
+                    </div>
 
-        {/* Species Information Panel */}
-        {showInfo && (
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm p-6 overflow-y-auto z-40 carousel-info-panel">
-            <div className="text-white space-y-4">
-              <div>
-                <h2 className="text-2xl font-bold mb-1">{currentBird.name}</h2>
-                <p className="text-emerald-300 text-lg italic">{currentBird.scientificName}</p>
-              </div>
-
-              {currentBird.elevation && (
-                <div>
-                  <h3 className="text-emerald-400 font-semibold mb-1">Elevation:</h3>
-                  <p className="text-gray-200">{currentBird.elevation}</p>
-                </div>
-              )}
-
-              {currentBird.primaryRegion && (
-                <div>
-                  <h3 className="text-emerald-400 font-semibold mb-1">Primary Region:</h3>
-                  <p className="text-gray-200">{currentBird.primaryRegion}</p>
-                </div>
-              )}
-
-              {currentBird.alsoFoundIn && currentBird.alsoFoundIn.length > 0 && (
-                <div>
-                  <h3 className="text-emerald-400 font-semibold mb-1">Also found in:</h3>
-                  <p className="text-gray-200">{currentBird.alsoFoundIn.join(", ")}</p>
-                </div>
-              )}
-
-              {currentBird.ecoregions && currentBird.ecoregions.length > 0 && (
-                <div>
-                  <h3 className="text-emerald-400 font-semibold mb-2">Ecoregions:</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {currentBird.ecoregions.map((ecoregion, index) => (
-                      <span
-                        key={index}
-                        className="bg-white/20 text-white text-xs px-2 py-1 rounded-full border border-white/30"
-                      >
-                        {ecoregion}
-                      </span>
-                    ))}
+                    {/* Info Button */}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-shrink-0 w-11 h-11 p-0 rounded-full border-0 transition-all duration-300 shadow-lg bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white hover:scale-105"
+                      onClick={() => setShowInfo(true)}
+                      aria-label="Show bird information"
+                    >
+                      <Info className="w-5 h-5" />
+                    </Button>
                   </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {currentBird.description && (
-                <div>
-                  <h3 className="text-emerald-400 font-semibold mb-1">About this species:</h3>
-                  <p className="text-gray-200 leading-relaxed">{currentBird.description}</p>
+            {/* Species Information Panel - Enhanced Layout with Smooth Transitions */}
+            {showInfo && (
+              <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-60 animate-in fade-in-0 duration-300">
+                <div className="h-full overflow-y-auto p-6 mobile-menu-scroll">
+                  {/* Close Button - Fixed position */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="absolute top-4 right-4 w-10 h-10 p-0 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white border-0 z-70 shadow-lg transition-all duration-200 hover:scale-105"
+                    onClick={() => setShowInfo(false)}
+                    aria-label="Close species information"
+                  >
+                    <X className="w-5 h-5" />
+                  </Button>
+
+                  {/* Content with proper spacing */}
+                  <div className="pt-4 pb-8 max-w-sm mx-auto">
+                    {/* Header - Single source of truth for species name */}
+                    <div className="mb-6">
+                      <h2 className="text-xl font-bold text-emerald-300 mb-2 leading-tight pr-12">
+                        {currentBird.commonName}
+                      </h2>
+                      <p className="text-base italic text-blue-300 mb-1 leading-tight">{currentBird.scientificName}</p>
+                      <p className="text-sm text-gray-300 leading-tight">{currentBird.spanishName}</p>
+                    </div>
+
+                    {/* Status Badges */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      <Badge className={cn("text-xs font-medium border shadow-sm", getStatusColor(currentBird.status))}>
+                        {currentBird.status}
+                      </Badge>
+                      <Badge
+                        className={cn(
+                          "text-xs font-medium border shadow-sm",
+                          getDifficultyColor(currentBird.difficulty),
+                        )}
+                      >
+                        {currentBird.difficulty}
+                      </Badge>
+                    </div>
+
+                    {/* Details Grid with improved spacing */}
+                    <div className="space-y-5 mb-6">
+                      <div>
+                        <span className="font-medium text-emerald-300 text-sm block mb-2">Habitat:</span>
+                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.habitat}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-emerald-300 text-sm block mb-2">Best Time:</span>
+                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.bestTime}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-emerald-300 text-sm block mb-2">Elevation:</span>
+                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.elevation}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-emerald-300 text-sm block mb-2">Primary Region:</span>
+                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.primaryRegion}</span>
+                      </div>
+                      {currentBird.secondaryRegions.length > 0 && (
+                        <div>
+                          <span className="font-medium text-blue-300 text-sm block mb-2">Also found in:</span>
+                          <span className="text-white/90 text-sm leading-relaxed block">
+                            {currentBird.secondaryRegions.join(", ")}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Ecoregions with improved layout */}
+                    <div className="space-y-3 mb-8">
+                      <span className="font-medium text-emerald-300 text-sm block">Ecoregions:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentBird.ecoregions.map((ecoregion, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs py-1 px-2">
+                            {ecoregion}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons - Enhanced for Full Functionality */}
+                    <div className="flex gap-3 pt-4 border-t border-white/10">
+                      <Link href="/aves-explorer" className="flex-1" prefetch={true}>
+                        <Button
+                          size="sm"
+                          className="w-full text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white border-0 shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                          }}
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
+                          <span>Explore Species</span>
+                        </Button>
+                      </Link>
+                      {shouldShowExploreRegion && (
+                        <Link href={`/regions/${currentBird.regionSlug}`} className="flex-1" prefetch={true}>
+                          <Button
+                            size="sm"
+                            className="w-full text-sm font-semibold bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white border-0 shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                            }}
+                          >
+                            <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>Caribbean</span>
+                          </Button>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex flex-col space-y-3 pt-4 border-t border-white/20">
-                <Link href="/aves-explorer" prefetch={true}>
-                  <Button
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span>Explore Species</span>
-                  </Button>
-                </Link>
-
-                <Link href={`/regions/${currentBird.regionSlug}`} prefetch={true}>
-                  <Button
-                    className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span>{currentBird.region}</span>
-                  </Button>
-                </Link>
               </div>
-            </div>
-          </div>
-        )}
+            )}
 
-        {/* Photo Credit Panel */}
-        {showPhotoCredit && currentBird.photographer && (
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6 z-40 carousel-credit-panel">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center border border-white/20">
-              <Camera className="w-8 h-8 text-white mx-auto mb-3" />
-              <h3 className="text-white font-semibold text-lg mb-2">Photo by</h3>
-              <p className="text-emerald-300 font-bold text-xl mb-4">{currentBird.photographer}</p>
-
-              <div className="flex flex-col space-y-3">
-                {currentBird.profileUrl && (
-                  <Link href={currentBird.profileUrl} prefetch={true}>
+            {/* Photo Credit Panel - Only show when info panel is closed */}
+            {showPhotoCredit && !showInfo && (
+              <div className="absolute top-16 right-3 z-60">
+                <div className="bg-black/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[220px] border border-white/10">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Camera className="w-4 h-4 flex-shrink-0" />
+                      <span className="font-medium">Photo Credit</span>
+                    </div>
                     <Button
-                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-                      onClick={(e) => e.stopPropagation()}
+                      variant="ghost"
+                      size="sm"
+                      className="w-6 h-6 p-0 rounded-full hover:bg-white/20 text-white border-0"
+                      onClick={() => setShowPhotoCredit(false)}
+                      aria-label="Close photo credit"
                     >
-                      <span>Profile</span>
+                      <X className="w-3 h-3" />
                     </Button>
-                  </Link>
-                )}
+                  </div>
 
-                {currentBird.instagramUrl && (
-                  <a
-                    href={currentBird.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full"
-                    onClick={(e) => e.stopPropagation()}
+                  <div className="space-y-2">
+                    <div>
+                      <span className="font-medium text-emerald-300 block">{currentBird.photoCredit.photographer}</span>
+                      <span className="text-blue-300 text-sm">{currentBird.photoCredit.title}</span>
+                    </div>
+                    {currentBird.photoCredit.reserve && (
+                      <div>
+                        <span className="text-yellow-300 text-sm flex items-center gap-1">
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
+                          {currentBird.photoCredit.reserve}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2 mt-3">
+                    {currentBird.photoCredit.teamLink && (
+                      <Link href={currentBird.photoCredit.teamLink} prefetch={true}>
+                        <Button
+                          size="sm"
+                          className="text-xs font-medium bg-emerald-600/90 hover:bg-emerald-700 active:bg-emerald-800 text-white border-0 shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                          }}
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1 flex-shrink-0" />
+                          <span>Profile</span>
+                        </Button>
+                      </Link>
+                    )}
+                    {currentBird.photoCredit.instagramPost && (
+                      <a
+                        href={currentBird.photoCredit.instagramPost}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block"
+                      >
+                        <Button
+                          size="sm"
+                          className="text-xs font-medium bg-blue-600/90 hover:bg-blue-700 active:bg-blue-800 text-white border-0 shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                          }}
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1 flex-shrink-0" />
+                          <span>Instagram</span>
+                        </Button>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Enhanced Thumbnail Navigation - Mobile-optimized spacing */}
+          <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200/50 carousel-thumbnails">
+            <div className="p-3 md:p-3">
+              <div className="flex justify-center gap-2 mb-3 px-2 md:px-0">
+                {birdData.map((bird, index) => (
+                  <button
+                    key={bird.id}
+                    className={cn(
+                      "w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 carousel-thumbnail",
+                      index === currentIndex
+                        ? "border-emerald-500 ring-2 ring-emerald-200 scale-110 shadow-lg"
+                        : "border-gray-200 hover:border-gray-300 hover:scale-105 shadow-sm",
+                    )}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`View ${bird.commonName}`}
                   >
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
-                      <Instagram className="w-4 h-4 mr-2" />
-                      <span>Instagram</span>
-                    </Button>
-                  </a>
-                )}
+                    <Image
+                      src={bird.image || "/placeholder.svg"}
+                      alt={bird.commonName}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-cover"
+                      style={{
+                        objectPosition: getImagePositioning(bird.id).objectPosition,
+                        transform: "scale(1.1)",
+                      }}
+                      loading="lazy"
+                      sizes="48px"
+                    />
+                  </button>
+                ))}
               </div>
 
-              <button
-                onClick={() => setShowPhotoCredit(false)}
-                className="mt-4 text-white/70 hover:text-white text-sm transition-colors duration-200"
-              >
-                Close
-              </button>
+              {/* Progress Indicators */}
+              <div className="flex justify-center gap-1.5">
+                {birdData.map((_, index) => (
+                  <button
+                    key={index}
+                    className={cn(
+                      "w-2 h-2 rounded-full transition-all duration-300 carousel-indicator",
+                      index === currentIndex ? "bg-emerald-600 scale-125" : "bg-gray-300 hover:bg-gray-400",
+                    )}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* Thumbnail Navigation */}
-      <div className="carousel-thumbnails">
-        <div className="flex space-x-2 overflow-x-auto scrollbar-hide pb-2">
-          {birdData.map((bird, index) => (
-            <button
-              key={bird.id}
-              onClick={() => goToSlide(index)}
-              className={cn(
-                "flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 hover:scale-105 active:scale-95 carousel-thumbnail",
-                index === currentIndex ? "border-emerald-500 shadow-lg" : "border-gray-300 hover:border-emerald-300",
-              )}
-              aria-label={`View ${bird.name}`}
-            >
-              <OptimizedImage
-                src={bird.image}
-                alt={bird.name}
-                width={48}
-                height={48}
-                className="w-full h-full object-cover"
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
-            </button>
-          ))}
         </div>
-
-        {/* Progress Indicators */}
-        <div className="flex justify-center space-x-2 mt-3">
-          {birdData.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all duration-300 hover:scale-125 active:scale-90 carousel-indicator",
-                index === currentIndex ? "bg-emerald-500 shadow-md" : "bg-gray-300 hover:bg-emerald-300",
-              )}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+      </Card>
     </div>
   )
 }
