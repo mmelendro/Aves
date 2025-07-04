@@ -429,10 +429,16 @@ export default function EnhancedEndemicBirdsCarousel({
 
   const toggleInfo = () => {
     setShowInfo(!showInfo)
+    if (showPhotoCredit) {
+      setShowPhotoCredit(false)
+    }
   }
 
   const togglePhotoCredit = () => {
     setShowPhotoCredit(!showPhotoCredit)
+    if (showInfo) {
+      setShowInfo(false)
+    }
   }
 
   const handleImageLoad = useCallback(() => {
@@ -555,15 +561,15 @@ export default function EnhancedEndemicBirdsCarousel({
                 )}
               </div>
 
-              {/* Mobile Info Button - Bottom Right Corner - Fixed Position */}
+              {/* Mobile Info Button - Restored Version 18 Style */}
               <Button
                 variant="ghost"
                 size="sm"
                 className={cn(
-                  "absolute bottom-4 right-4 w-12 h-12 p-0 rounded-full shadow-xl border border-gray-200 transition-all duration-300 touch-manipulation z-40",
+                  "absolute bottom-4 right-4 w-12 h-12 p-0 rounded-full shadow-xl border-2 transition-all duration-300 touch-manipulation z-40",
                   showInfo
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40"
-                    : "bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-gray-900",
+                    ? "bg-emerald-600 text-white hover:bg-emerald-700 border-emerald-500 scale-110 shadow-emerald-500/40"
+                    : "bg-white/95 backdrop-blur-sm hover:bg-white text-emerald-600 hover:text-emerald-700 border-emerald-200 hover:border-emerald-300",
                 )}
                 onClick={toggleInfo}
                 aria-label={showInfo ? "Hide bird information" : "Show bird information"}
@@ -572,10 +578,10 @@ export default function EnhancedEndemicBirdsCarousel({
                 <Info className={cn("w-5 h-5 transition-all duration-300", showInfo ? "rotate-180" : "")} />
               </Button>
 
-              {/* Mobile Photo Credit Popup */}
+              {/* Mobile Photo Credit Popup - Restored Version 18 Style */}
               {currentBird.photoCredit && showPhotoCredit && (
                 <div className="absolute top-16 right-3 z-50">
-                  <div className="bg-black/95 backdrop-blur-sm text-white px-3 py-3 rounded-lg text-xs shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[200px]">
+                  <div className="bg-black/95 backdrop-blur-sm text-white px-3 py-3 rounded-lg text-xs shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[200px] border border-white/10">
                     <div className="flex items-center gap-2 mb-2">
                       <Camera className="w-3 h-3 flex-shrink-0" />
                       <span className="font-medium">Photo Credit</span>
@@ -632,7 +638,7 @@ export default function EnhancedEndemicBirdsCarousel({
                 </div>
               )}
 
-              {/* Mobile Bird Information Display */}
+              {/* Mobile Bird Information Display - Restored Version 18 Style */}
               <div className="absolute bottom-0 left-0 right-0 text-white z-20">
                 <div className="p-3 space-y-2">
                   {/* Region Info */}
@@ -659,10 +665,10 @@ export default function EnhancedEndemicBirdsCarousel({
                 </div>
               </div>
 
-              {/* Mobile More Details Popup */}
+              {/* Mobile Species Information Box - Restored Version 18 Style */}
               {showInfo && (
                 <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-50 animate-in fade-in-0 duration-300">
-                  <div className="h-full overflow-y-auto p-4">
+                  <div className="h-full overflow-y-auto p-4 mobile-menu-scroll">
                     {/* Close Button */}
                     <Button
                       variant="ghost"
@@ -944,15 +950,15 @@ export default function EnhancedEndemicBirdsCarousel({
               )}
             </div>
 
-            {/* Desktop Info Button - Bottom Right Corner - Fixed Position */}
+            {/* Desktop Info Button - Restored Version 18 Style */}
             <Button
               variant="ghost"
               size="sm"
               className={cn(
-                "absolute bottom-4 right-4 w-12 h-12 p-0 rounded-full border-0 transition-all duration-300 group z-40",
+                "absolute bottom-4 right-4 w-12 h-12 p-0 rounded-full border-2 transition-all duration-300 group z-40",
                 showInfo
-                  ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 shadow-emerald-500/40 shadow-xl"
-                  : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 shadow-lg",
+                  ? "bg-emerald-600 text-white hover:bg-emerald-700 border-emerald-500 scale-110 shadow-emerald-500/40 shadow-xl"
+                  : "bg-white/95 backdrop-blur-sm text-emerald-600 hover:text-emerald-700 border-emerald-200 hover:border-emerald-300 shadow-lg hover:bg-white",
               )}
               onClick={toggleInfo}
               aria-label={showInfo ? "Hide bird information" : "Show bird information"}
@@ -964,10 +970,10 @@ export default function EnhancedEndemicBirdsCarousel({
               </div>
             </Button>
 
-            {/* Desktop Photo Credit Popup */}
+            {/* Desktop Photo Credit Popup - Restored Version 18 Style */}
             {currentBird.photoCredit && showPhotoCredit && (
               <div className="absolute top-16 right-3 z-50">
-                <div className="bg-black/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[220px]">
+                <div className="bg-black/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[220px] border border-white/10">
                   <div className="flex items-center gap-2 mb-3">
                     <Camera className="w-4 h-4 flex-shrink-0" />
                     <span className="font-medium">Photo Credit</span>
@@ -1024,7 +1030,7 @@ export default function EnhancedEndemicBirdsCarousel({
               </div>
             )}
 
-            {/* Desktop Bird Information Display */}
+            {/* Desktop Bird Information Display - Restored Version 18 Style */}
             <div className="absolute bottom-0 left-0 right-0 text-white z-20">
               <div className="p-4 space-y-3">
                 {/* Region Info */}
@@ -1054,7 +1060,7 @@ export default function EnhancedEndemicBirdsCarousel({
               </div>
             </div>
 
-            {/* Desktop More Details Popup */}
+            {/* Desktop Species Information Box - Restored Version 18 Style */}
             {showInfo && (
               <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-50 animate-in fade-in-0 duration-300">
                 <div className="h-full overflow-y-auto p-6">
