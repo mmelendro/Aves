@@ -534,7 +534,7 @@ export default function HomepageBirdCarousel({
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-            {/* Navigation Arrows - Responsive positioning to avoid thumbnail overlap */}
+            {/* Navigation Arrows - Only show when info panel is closed */}
             {!showInfo && (
               <>
                 <Button
@@ -567,7 +567,7 @@ export default function HomepageBirdCarousel({
               </>
             )}
 
-            {/* Top Control Buttons - Hide when info panel is open */}
+            {/* Top Control Buttons - Only show when info panel is closed */}
             {!showInfo && (
               <div className="absolute top-3 right-3 flex gap-2 z-50">
                 {currentBird.audioFile && (
@@ -605,48 +605,47 @@ export default function HomepageBirdCarousel({
               </div>
             )}
 
-            {/* Bird Information - Bottom with Primary Region Tag */}
-            <div className="absolute bottom-0 left-0 right-0 text-white z-30">
-              <div className="p-3 space-y-2">
-                {/* Bird Names */}
-                <div className="space-y-1">
-                  <h3 className="text-lg font-bold leading-tight drop-shadow-lg">{currentBird.commonName}</h3>
-                  <p className="text-sm italic opacity-90 leading-tight drop-shadow-md">{currentBird.scientificName}</p>
-                  <p className="text-xs opacity-75 leading-tight drop-shadow-md">{currentBird.spanishName}</p>
-                </div>
-
-                {/* Primary Region Tag and Info Button Row */}
-                <div className="flex items-center justify-between gap-3">
-                  <div
-                    className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border backdrop-blur-sm shadow-lg",
-                      getPrimaryRegionColor(currentBird.primaryRegion),
-                    )}
-                  >
-                    <MapPin className="w-3 h-3 flex-shrink-0" />
-                    <span className="whitespace-nowrap">{currentBird.primaryRegion}</span>
+            {/* Bird Information - Bottom with Primary Region Tag - CONDITIONALLY HIDDEN */}
+            {!showInfo && (
+              <div className="absolute bottom-0 left-0 right-0 text-white z-30 transition-all duration-300 ease-in-out">
+                <div className="p-3 space-y-2">
+                  {/* Bird Names */}
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold leading-tight drop-shadow-lg">{currentBird.commonName}</h3>
+                    <p className="text-sm italic opacity-90 leading-tight drop-shadow-md">
+                      {currentBird.scientificName}
+                    </p>
+                    <p className="text-xs opacity-75 leading-tight drop-shadow-md">{currentBird.spanishName}</p>
                   </div>
 
-                  {/* Info Button */}
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className={cn(
-                      "flex-shrink-0 w-11 h-11 p-0 rounded-full border-0 transition-all duration-300 shadow-lg",
-                      showInfo
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700 scale-110 ring-2 ring-emerald-300/50"
-                        : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white hover:scale-105",
-                    )}
-                    onClick={() => setShowInfo(!showInfo)}
-                    aria-label={showInfo ? "Hide bird information" : "Show bird information"}
-                  >
-                    {showInfo ? <X className="w-5 h-5" /> : <Info className="w-5 h-5" />}
-                  </Button>
+                  {/* Primary Region Tag and Info Button Row */}
+                  <div className="flex items-center justify-between gap-3">
+                    <div
+                      className={cn(
+                        "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border backdrop-blur-sm shadow-lg",
+                        getPrimaryRegionColor(currentBird.primaryRegion),
+                      )}
+                    >
+                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      <span className="whitespace-nowrap">{currentBird.primaryRegion}</span>
+                    </div>
+
+                    {/* Info Button */}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-shrink-0 w-11 h-11 p-0 rounded-full border-0 transition-all duration-300 shadow-lg bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white hover:scale-105"
+                      onClick={() => setShowInfo(true)}
+                      aria-label="Show bird information"
+                    >
+                      <Info className="w-5 h-5" />
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* Species Information Panel - Enhanced Layout */}
+            {/* Species Information Panel - Enhanced Layout with Smooth Transitions */}
             {showInfo && (
               <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-60 animate-in fade-in-0 duration-300">
                 <div className="h-full overflow-y-auto p-6 mobile-menu-scroll">
@@ -654,7 +653,7 @@ export default function HomepageBirdCarousel({
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute top-4 right-4 w-10 h-10 p-0 rounded-full bg-white/20 hover:bg-white/30 text-white border-0 z-70"
+                    className="absolute top-4 right-4 w-10 h-10 p-0 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white border-0 z-70 shadow-lg transition-all duration-200 hover:scale-105"
                     onClick={() => setShowInfo(false)}
                     aria-label="Close species information"
                   >
@@ -663,7 +662,7 @@ export default function HomepageBirdCarousel({
 
                   {/* Content with proper spacing */}
                   <div className="pt-4 pb-8 max-w-sm mx-auto">
-                    {/* Header */}
+                    {/* Header - Single source of truth for species name */}
                     <div className="mb-6">
                       <h2 className="text-xl font-bold text-emerald-300 mb-2 leading-tight pr-12">
                         {currentBird.commonName}
@@ -727,27 +726,33 @@ export default function HomepageBirdCarousel({
                       </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex gap-2">
-                      <Link href="/aves-explorer" className="flex-1">
+                    {/* Action Buttons - Enhanced for Full Functionality */}
+                    <div className="flex gap-3 pt-4 border-t border-white/10">
+                      <Link href="/aves-explorer" className="flex-1" prefetch={true}>
                         <Button
-                          variant="outline"
                           size="sm"
-                          className="w-full text-xs bg-white/10 hover:bg-white/20 border-white/20"
+                          className="w-full text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white border-0 shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                          onClick={(e) => {
+                            // Ensure the click event propagates properly
+                            e.stopPropagation()
+                          }}
                         >
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          Explore Species
+                          <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
+                          <span>Explore Species</span>
                         </Button>
                       </Link>
                       {shouldShowExploreRegion && (
-                        <Link href={`/regions/${currentBird.regionSlug}`} className="flex-1">
+                        <Link href={`/regions/${currentBird.regionSlug}`} className="flex-1" prefetch={true}>
                           <Button
-                            variant="outline"
                             size="sm"
-                            className="w-full text-xs bg-white/10 hover:bg-white/20 border-white/20"
+                            className="w-full text-sm font-semibold bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white border-0 shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                            onClick={(e) => {
+                              // Ensure the click event propagates properly
+                              e.stopPropagation()
+                            }}
                           >
-                            <MapPin className="w-3 h-3 mr-1" />
-                            Explore Region
+                            <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>Caribbean</span>
                           </Button>
                         </Link>
                       )}
@@ -757,8 +762,8 @@ export default function HomepageBirdCarousel({
               </div>
             )}
 
-            {/* Photo Credit Panel - Fixed Positioning as Overlay */}
-            {showPhotoCredit && (
+            {/* Photo Credit Panel - Only show when info panel is closed */}
+            {showPhotoCredit && !showInfo && (
               <div className="absolute top-16 right-3 z-60">
                 <div className="bg-black/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[220px] border border-white/10">
                   <div className="flex items-center justify-between mb-3">
@@ -794,18 +799,35 @@ export default function HomepageBirdCarousel({
 
                   <div className="flex gap-2 mt-3">
                     {currentBird.photoCredit.teamLink && (
-                      <Link href={currentBird.photoCredit.teamLink}>
-                        <Button variant="outline" size="sm" className="text-xs bg-transparent">
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          Profile
+                      <Link href={currentBird.photoCredit.teamLink} prefetch={true}>
+                        <Button
+                          size="sm"
+                          className="text-xs font-medium bg-emerald-600/90 hover:bg-emerald-700 active:bg-emerald-800 text-white border-0 shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                          }}
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1 flex-shrink-0" />
+                          <span>Profile</span>
                         </Button>
                       </Link>
                     )}
                     {currentBird.photoCredit.instagramPost && (
-                      <a href={currentBird.photoCredit.instagramPost} target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" size="sm" className="text-xs bg-transparent">
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          Instagram
+                      <a
+                        href={currentBird.photoCredit.instagramPost}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block"
+                      >
+                        <Button
+                          size="sm"
+                          className="text-xs font-medium bg-blue-600/90 hover:bg-blue-700 active:bg-blue-800 text-white border-0 shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                          }}
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1 flex-shrink-0" />
+                          <span>Instagram</span>
                         </Button>
                       </a>
                     )}
