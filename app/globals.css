@@ -1402,3 +1402,55 @@
     color: black !important;
   }
 }
+
+/* Enhanced Footer Transparency and Visibility */
+footer {
+  /* Ensure footer is always visible and properly positioned */
+  position: relative;
+  z-index: 20;
+  margin-top: auto;
+}
+
+/* Footer transparency effects for background videos */
+.footer-transparent {
+  background: rgba(17, 24, 39, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Enhanced footer text contrast for better readability */
+footer h3,
+footer h4 {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+footer p,
+footer a {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive footer adjustments */
+@media (max-width: 640px) {
+  footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 641px) {
+  footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* Footer hover effects enhancement */
+footer a:hover {
+  text-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+/* Ensure footer content is always readable */
+footer .container {
+  position: relative;
+  z-index: 1;
+}
