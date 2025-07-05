@@ -398,7 +398,7 @@ ${formData.firstName} ${formData.lastName}`)
                   }`}
                 >
                   <Map className="mr-2 w-5 h-5" />
-                  Explore Colombia Map
+                  Explore Interactive Map
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -784,7 +784,7 @@ ${formData.firstName} ${formData.lastName}`)
                           className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
                         >
                           <Map className="mr-2 w-3 h-3" />
-                          Explore Colombia Map
+                          Explore Interactive Map
                         </Link>
                         <Link
                           href="/endemic-birds"

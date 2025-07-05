@@ -4,11 +4,11 @@ import { Footer } from "@/components/footer"
 import { ColombianBirdsExplorer } from "@/components/colombian-birds-explorer"
 
 export const metadata: Metadata = {
-  title: "Explore Colombia | Interactive Colombian Birds & Bioregions Guide | AVES Colombia",
+  title: "AVES Explorer | Interactive Colombian Birds & Bioregions Guide | AVES Colombia",
   description:
-    "Discover Colombia's incredible bird diversity with our interactive Explore Colombia tool. Navigate through 11 bioregions and 31 ecoregions, explore over 1,900 species, and plan your perfect birding adventure with expert insights.",
+    "Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11 bioregions and 31 ecoregions, explore over 1,900 species, and plan your perfect birding adventure with expert insights.",
   keywords: [
-    "Explore Colombia",
+    "AVES Explorer",
     "Colombian birds",
     "Colombia bird diversity",
     "Colombian bioregions",
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     "Colombian ecoregions",
     "bird identification Colombia",
     "Colombia geography birding",
-    "Explore Colombia tool",
+    "AVES Explorer tool",
     "explore Colombian birds",
     "Colombia birding map",
   ],
   openGraph: {
-    title: "Explore Colombia | Interactive Colombian Birds Guide",
+    title: "AVES Explorer | Interactive Colombian Birds Guide",
     description:
-      "Discover Colombia's incredible bird diversity with our interactive Explore Colombia tool. Navigate through 11 bioregions, explore over 1,900 species, and plan your perfect birding adventure.",
+      "Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11 bioregions, explore over 1,900 species, and plan your perfect birding adventure.",
     images: ["/images/aves-logo.png"],
   },
 }
