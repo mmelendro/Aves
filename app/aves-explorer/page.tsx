@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 
 export default function AvesExplorerPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="relative min-h-screen">
       <NavigationHeader currentPage="/aves-explorer" />
-      <main className="flex-1">
+      <main className="relative">
         <ColombianBirdsExplorer />
       </main>
-      <Footer />
+      <Footer transparent={true} />
     </div>
   )
 }

@@ -350,8 +350,8 @@ export function ColombianBirdsExplorer() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Full-Page YouTube Video Background */}
-      <div className="fixed inset-0 z-0">
+      {/* Full-Page YouTube Video Background - Extended to cover entire page */}
+      <div className="fixed inset-0 z-0 w-full h-full">
         <YouTubeHeroBackground
           videoId="QdV1BJNZQE0"
           title=""
@@ -389,23 +389,23 @@ export function ColombianBirdsExplorer() {
 
       {/* Main Content with Transparent Background */}
       <div className="relative z-10">
-        <section className="py-6 px-4 sm:px-6 lg:px-8">
+        <section className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               {/* Left Column - Biodiversity Info */}
-              <div className="order-2 lg:order-1 space-y-6">
+              <div className="order-2 lg:order-1 space-y-8">
                 {/* Colombia's Biodiversity - Enhanced Transparency */}
                 <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
                         <Bird className="w-6 h-6 text-white" />
                       </div>
                       <h2 className="text-xl font-bold text-white">Colombia's Biodiversity</h2>
                     </div>
-                    <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-blue-400 mb-4"></div>
+                    <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-blue-400 mb-6"></div>
 
-                    <div className="space-y-3 text-white/90">
+                    <div className="space-y-4 text-white/90">
                       <p className="leading-relaxed">
                         Colombia stands as the world's most biodiverse country per square kilometer. Our classification
                         system organizes this incredible diversity into{" "}
@@ -436,7 +436,7 @@ export function ColombianBirdsExplorer() {
 
                 {/* Getting Started Accordion - Enhanced Transparency */}
                 <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20">
-                  <CardContent className="p-6">
+                  <CardContent className="p-8">
                     <Collapsible open={isGettingStartedOpen} onOpenChange={setIsGettingStartedOpen}>
                       <CollapsibleTrigger className="flex items-center justify-between w-full text-left">
                         <h3 className="text-lg font-semibold text-white">Getting Started</h3>
@@ -446,14 +446,14 @@ export function ColombianBirdsExplorer() {
                           }`}
                         />
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-4">
-                        <div className="space-y-3 text-white/80 text-sm bg-black/20 p-4 rounded-lg border border-white/20">
+                      <CollapsibleContent className="mt-6">
+                        <div className="space-y-4 text-white/80 text-sm bg-black/20 p-6 rounded-lg border border-white/20">
                           <p>
                             Click on any region in the interactive map to discover its unique ecosystems, endemic
                             species, and conservation status. Each bioregion offers distinct birding opportunities and
                             specialized tour experiences.
                           </p>
-                          <ul className="space-y-2 ml-4">
+                          <ul className="space-y-3 ml-4">
                             <li className="flex items-start gap-2">
                               <span className="text-emerald-400">•</span>
                               <span>Expert guides with decades of local experience</span>
@@ -476,9 +476,9 @@ export function ColombianBirdsExplorer() {
                 {/* Selected Region Details - Enhanced Transparency */}
                 {currentRegion && (
                   <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20 animate-fade-in-up">
-                    <CardContent className="p-6">
+                    <CardContent className="p-8">
                       {/* Navigation Breadcrumb */}
-                      <div className="mb-4 flex items-center gap-2 text-sm bg-black/20 p-3 rounded-lg border border-white/20">
+                      <div className="mb-6 flex items-center gap-2 text-sm bg-black/20 p-4 rounded-lg border border-white/20">
                         <button
                           onClick={resetSelection}
                           className="hover:text-emerald-300 transition-colors font-medium flex items-center gap-2 text-white/80"
@@ -491,7 +491,7 @@ export function ColombianBirdsExplorer() {
                       </div>
 
                       {/* Region Header */}
-                      <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center gap-3 mb-6">
                         <div
                           className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
                           style={{ backgroundColor: currentRegion.color }}
@@ -507,13 +507,13 @@ export function ColombianBirdsExplorer() {
                       </div>
 
                       {/* Region Description */}
-                      <p className="text-white/80 mb-4 text-sm leading-relaxed">{currentRegion.detailedDescription}</p>
+                      <p className="text-white/80 mb-6 text-sm leading-relaxed">{currentRegion.detailedDescription}</p>
 
                       {/* Key Information */}
-                      <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="bg-black/20 p-3 rounded-lg border border-white/20">
-                          <h4 className="font-semibold text-white mb-1 text-sm">Species Count</h4>
-                          <div className="space-y-1 text-xs">
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="bg-black/20 p-4 rounded-lg border border-white/20">
+                          <h4 className="font-semibold text-white mb-2 text-sm">Species Count</h4>
+                          <div className="space-y-2 text-xs">
                             <div className="flex justify-between">
                               <span className="text-white/70">Total:</span>
                               <span className="font-medium text-white">{currentRegion.totalSpecies}</span>
@@ -524,20 +524,20 @@ export function ColombianBirdsExplorer() {
                             </div>
                           </div>
                         </div>
-                        <div className="bg-black/20 p-3 rounded-lg border border-white/20">
-                          <h4 className="font-semibold text-white mb-1 text-sm">Best Time</h4>
+                        <div className="bg-black/20 p-4 rounded-lg border border-white/20">
+                          <h4 className="font-semibold text-white mb-2 text-sm">Best Time</h4>
                           <p className="font-medium text-xs text-white/80">{currentRegion.bestTime}</p>
                         </div>
                       </div>
 
                       {/* Key Species */}
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-white mb-2 text-sm">Key Species</h4>
-                        <div className="flex flex-wrap gap-1">
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-white mb-3 text-sm">Key Species</h4>
+                        <div className="flex flex-wrap gap-2">
                           {currentRegion.keyBirds.slice(0, 3).map((bird, index) => (
                             <span
                               key={index}
-                              className="px-2 py-1 text-xs rounded-full border border-white/30"
+                              className="px-3 py-1 text-xs rounded-full border border-white/30"
                               style={{
                                 color: "white",
                                 backgroundColor: `${currentRegion.color}30`,
@@ -550,7 +550,7 @@ export function ColombianBirdsExplorer() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex gap-2">
+                      <div className="flex gap-3">
                         <Button
                           asChild
                           size="sm"
@@ -585,9 +585,17 @@ export function ColombianBirdsExplorer() {
               {/* Right Column - Interactive Map with Transparent Background */}
               <div className="order-1 lg:order-2">
                 <Card className="bg-white/5 backdrop-blur-lg shadow-2xl border border-white/20">
-                  <CardContent className="p-4 sm:p-6">
+                  <CardContent className="p-6 sm:p-8">
+                    {/* Map Title */}
+                    <div className="text-center mb-6">
+                      <h2 className="text-2xl font-bold text-white mb-3">The Map</h2>
+                      <p className="text-white/80 text-sm">
+                        Click on any region to discover its unique ecosystems and species
+                      </p>
+                    </div>
+
                     {/* Interactive Map Container - Transparent Background */}
-                    <div className="relative bg-transparent rounded-lg p-4 mb-4 border border-white/20">
+                    <div className="relative bg-transparent rounded-lg p-6 mb-6 border border-white/20">
                       <div className="relative mx-auto">
                         <img
                           src="/images/birding-regions-colombia-final.png"
@@ -649,24 +657,17 @@ export function ColombianBirdsExplorer() {
                       </div>
                     </div>
 
-                    {/* Map Instructions */}
-                    <div className="text-center mb-4">
-                      <p className="text-sm text-white/80 font-medium">
-                        Click on any region to discover its unique ecosystems and species
-                      </p>
-                    </div>
-
                     {/* Statistics Below Map - Enhanced Transparency */}
-                    <div className="grid grid-cols-3 gap-3 text-center">
-                      <div className="bg-emerald-500/20 backdrop-blur-sm text-white rounded-lg p-3 shadow-lg border border-emerald-400/30">
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div className="bg-emerald-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-emerald-400/30">
                         <div className="text-lg sm:text-xl font-bold">1,900+</div>
                         <div className="text-emerald-200 text-xs font-medium">Bird Species</div>
                       </div>
-                      <div className="bg-blue-500/20 backdrop-blur-sm text-white rounded-lg p-3 shadow-lg border border-blue-400/30">
+                      <div className="bg-blue-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-blue-400/30">
                         <div className="text-lg sm:text-xl font-bold">78+</div>
                         <div className="text-blue-200 text-xs font-medium">Endemic Species</div>
                       </div>
-                      <div className="bg-purple-500/20 backdrop-blur-sm text-white rounded-lg p-3 shadow-lg border border-purple-400/30">
+                      <div className="bg-purple-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-purple-400/30">
                         <div className="text-lg sm:text-xl font-bold">11</div>
                         <div className="text-purple-200 text-xs font-medium">Bioregions</div>
                       </div>
@@ -679,10 +680,10 @@ export function ColombianBirdsExplorer() {
         </section>
 
         {/* Call-to-Action Section with Maximum Transparency */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-black/5 backdrop-blur-sm relative overflow-hidden">
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/5 backdrop-blur-sm relative overflow-hidden">
           <div className="relative z-10 max-w-6xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 text-shadow-2xl">
                 Ready to Experience Colombia's Avian Wonders?
               </h2>
               <p className="text-xl text-white/90 leading-relaxed max-w-3xl mx-auto text-shadow-lg">
@@ -692,11 +693,11 @@ export function ColombianBirdsExplorer() {
             </div>
 
             {/* CTA Buttons with Enhanced Transparency */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
               <Link href="/tours">
                 <Button
                   size="lg"
-                  className="w-full bg-white/15 backdrop-blur-md text-white hover:bg-white/25 font-semibold py-3 border border-white/30 shadow-lg"
+                  className="w-full bg-white/15 backdrop-blur-md text-white hover:bg-white/25 font-semibold py-4 border border-white/30 shadow-lg"
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   View All Tours
@@ -706,7 +707,7 @@ export function ColombianBirdsExplorer() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full border-white/40 text-white hover:bg-white/15 font-semibold py-3 bg-transparent backdrop-blur-md shadow-lg"
+                  className="w-full border-white/40 text-white hover:bg-white/15 font-semibold py-4 bg-transparent backdrop-blur-md shadow-lg"
                 >
                   <Users className="w-5 h-5 mr-2" />
                   Plan Custom Tour
@@ -715,17 +716,17 @@ export function ColombianBirdsExplorer() {
             </div>
 
             {/* Additional Information Grid with Maximum Transparency */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <div className="text-2xl font-bold text-white mb-2 text-shadow-lg">Expert Guides</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/20">
+                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Expert Guides</div>
                 <div className="text-sm text-shadow">Professional ornithologists with decades of experience</div>
               </div>
-              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <div className="text-2xl font-bold text-white mb-2 text-shadow-lg">Small Groups</div>
+              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/20">
+                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Small Groups</div>
                 <div className="text-sm text-shadow">Maximum 4 guests per tour for personalized experience</div>
               </div>
-              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <div className="text-2xl font-bold text-white mb-2 text-shadow-lg">Carbon Neutral</div>
+              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/20">
+                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Carbon Neutral</div>
                 <div className="text-sm text-shadow">100% carbon neutral tours supporting conservation</div>
               </div>
             </div>
