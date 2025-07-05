@@ -1,47 +1,28 @@
-import type { Metadata } from "next"
+import { ColombianBirdsExplorer } from "@/components/colombian-birds-explorer"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
-import { ColombianBirdsExplorer } from "@/components/colombian-birds-explorer"
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AVES Explorer | Interactive Colombian Birds & Bioregions Guide | AVES Colombia",
+  title: "AVES Explorer - Discover Colombia's Incredible Bird Diversity",
   description:
-    "Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11 bioregions and 31 ecoregions, explore over 1,900 species, and plan your perfect birding adventure with expert insights.",
-  keywords: [
-    "AVES Explorer",
-    "Colombian birds",
-    "Colombia bird diversity",
-    "Colombian bioregions",
-    "bird watching Colombia",
-    "Colombian avifauna",
-    "endemic birds Colombia",
-    "birding Colombia",
-    "Colombia bird guide",
-    "interactive bird explorer",
-    "Colombian biodiversity",
-    "AVES Colombia tours",
-    "birding tours Colombia",
-    "Colombian ecoregions",
-    "bird identification Colombia",
-    "Colombia geography birding",
-    "AVES Explorer tool",
-    "explore Colombian birds",
-    "Colombia birding map",
-  ],
+    "Explore Colombia's 11 bioregions and discover over 1,900 bird species with our interactive map. Plan your birding adventure with expert guides.",
+  keywords: "Colombia birding, bird watching tours, Colombian birds, bioregions, endemic species, birding guide",
   openGraph: {
-    title: "AVES Explorer | Interactive Colombian Birds Guide",
-    description:
-      "Discover Colombia's incredible bird diversity with our interactive AVES Explorer. Navigate through 11 bioregions, explore over 1,900 species, and plan your perfect birding adventure.",
+    title: "AVES Explorer - Colombia's Bird Diversity",
+    description: "Interactive exploration of Colombia's incredible avian biodiversity across 11 unique bioregions.",
     images: ["/images/aves-logo.png"],
   },
 }
 
-export default function AVESExplorerPage() {
+export default function AvesExplorerPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <NavigationHeader currentPage="/aves-explorer" />
-      <ColombianBirdsExplorer />
+      <main>
+        <ColombianBirdsExplorer />
+      </main>
       <Footer />
-    </div>
+    </>
   )
 }

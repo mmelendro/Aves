@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, ArrowRight } from "lucide-react"
+import { Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, ArrowRight, ChevronDown } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users } from "lucide-react"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import YouTubeHeroBackground from "@/components/youtube-hero-background"
 
 // Complete bioregions data with corrected coordinates and accurate color mapping
 const bioregionsData = [
@@ -268,6 +270,7 @@ export function ColombianBirdsExplorer() {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
   const [screenSize, setScreenSize] = useState<"mobile" | "tablet" | "desktop">("desktop")
+  const [isGettingStartedOpen, setIsGettingStartedOpen] = useState(false)
 
   const currentRegion = selectedRegion ? bioregionsData.find((r) => r.id === selectedRegion) : null
 
@@ -346,111 +349,198 @@ export function ColombianBirdsExplorer() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
-      {/* Hero Section with Centered Title */}
-      <section className="relative pt-20 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Explore Colombia</h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Discover Colombia's incredible bird diversity with our interactive explorer. Navigate through distinct
-            bioregions and plan your perfect birding adventure.
+    <div className="min-h-screen relative">
+      {/* Full-Page YouTube Video Background */}
+      <div className="fixed inset-0 z-0">
+        <YouTubeHeroBackground
+          videoId="QdV1BJNZQE0"
+          title=""
+          subtitle=""
+          className="w-full h-full"
+          showAttribution={false}
+          attributionText=""
+        />
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/20"></div>
+      </div>
+
+      {/* Hero Section with Content */}
+      <div className="relative z-10 w-full h-[40vh] min-h-[320px] flex items-center justify-center">
+        <div className="text-center text-white px-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-shadow-2xl">Explore Colombia</h1>
+          <p className="text-lg sm:text-xl lg:text-2xl mb-8 text-shadow-lg max-w-3xl mx-auto">
+            Discover Colombia's incredible bird diversity with our interactive explorer
           </p>
-          <div className="mb-8">
+          <div className="mb-4">
             <Button
               asChild
               size="lg"
-              className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               <Link href="/tours">
-                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Book Your Birding Adventure
+                <Calendar className="w-4 h-4 mr-2" />
+                Book Your Adventure
               </Link>
             </Button>
           </div>
+          <div className="text-xs text-white/70 mt-4">Drone Footage by Martín Melendro Torres</div>
         </div>
-      </section>
+      </div>
 
-      {/* Split Layout Section - Dynamic Region Info (Left) + Interactive Map (Right) */}
-      <section className="pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            {/* Left Column - Dynamic Region Information */}
-            <div className="order-2 lg:order-1">
-              <Card className="bg-white/95 backdrop-blur-sm shadow-xl border-2 border-emerald-200 h-full">
-                <CardContent className="p-6 lg:p-8">
-                  {currentRegion ? (
-                    // Selected Region Details
-                    <div>
+      {/* Main Content with Transparent Background */}
+      <div className="relative z-10">
+        <section className="py-6 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+              {/* Left Column - Biodiversity Info */}
+              <div className="order-2 lg:order-1 space-y-6">
+                {/* Colombia's Biodiversity - Enhanced Transparency */}
+                <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                        <Bird className="w-6 h-6 text-white" />
+                      </div>
+                      <h2 className="text-xl font-bold text-white">Colombia's Biodiversity</h2>
+                    </div>
+                    <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-blue-400 mb-4"></div>
+
+                    <div className="space-y-3 text-white/90">
+                      <p className="leading-relaxed">
+                        Colombia stands as the world's most biodiverse country per square kilometer. Our classification
+                        system organizes this incredible diversity into{" "}
+                        <Badge
+                          variant="secondary"
+                          className="bg-emerald-500/20 text-emerald-200 font-semibold border border-emerald-400/30"
+                        >
+                          11 bioregions
+                        </Badge>{" "}
+                        (major ecological areas) containing{" "}
+                        <Badge
+                          variant="secondary"
+                          className="bg-blue-500/20 text-blue-200 font-semibold border border-blue-400/30"
+                        >
+                          31 ecoregions
+                        </Badge>{" "}
+                        (specific habitat types).
+                      </p>
+
+                      <p className="leading-relaxed">
+                        This strategic location at the crossroads of North and South America, combined with three Andean
+                        mountain ranges and coastlines on both oceans, creates an unparalleled variety of ecosystems and
+                        the highest bird diversity on Earth.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Getting Started Accordion - Enhanced Transparency */}
+                <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20">
+                  <CardContent className="p-6">
+                    <Collapsible open={isGettingStartedOpen} onOpenChange={setIsGettingStartedOpen}>
+                      <CollapsibleTrigger className="flex items-center justify-between w-full text-left">
+                        <h3 className="text-lg font-semibold text-white">Getting Started</h3>
+                        <ChevronDown
+                          className={`w-5 h-5 text-white/70 transition-transform duration-200 ${
+                            isGettingStartedOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="mt-4">
+                        <div className="space-y-3 text-white/80 text-sm bg-black/20 p-4 rounded-lg border border-white/20">
+                          <p>
+                            Click on any region in the interactive map to discover its unique ecosystems, endemic
+                            species, and conservation status. Each bioregion offers distinct birding opportunities and
+                            specialized tour experiences.
+                          </p>
+                          <ul className="space-y-2 ml-4">
+                            <li className="flex items-start gap-2">
+                              <span className="text-emerald-400">•</span>
+                              <span>Expert guides with decades of local experience</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <span className="text-emerald-400">•</span>
+                              <span>Small groups (max 4 guests) for personalized attention</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <span className="text-emerald-400">•</span>
+                              <span>Specialized tour experiences available for each region</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </CardContent>
+                </Card>
+
+                {/* Selected Region Details - Enhanced Transparency */}
+                {currentRegion && (
+                  <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20 animate-fade-in-up">
+                    <CardContent className="p-6">
                       {/* Navigation Breadcrumb */}
-                      <div className="mb-6 flex items-center gap-2 text-sm bg-gray-50 p-3 rounded-lg">
+                      <div className="mb-4 flex items-center gap-2 text-sm bg-black/20 p-3 rounded-lg border border-white/20">
                         <button
                           onClick={resetSelection}
-                          className="hover:text-emerald-600 transition-colors font-medium flex items-center gap-2"
+                          className="hover:text-emerald-300 transition-colors font-medium flex items-center gap-2 text-white/80"
                         >
                           <ArrowRight className="w-4 h-4 rotate-180" />
                           All Bioregions
                         </button>
-                        <ChevronRight className="w-4 h-4" />
-                        <span className="text-gray-900 font-semibold">{currentRegion.name}</span>
+                        <ChevronRight className="w-4 h-4 text-white/60" />
+                        <span className="text-white font-semibold">{currentRegion.name}</span>
                       </div>
 
                       {/* Region Header */}
-                      <div className="flex items-center gap-4 mb-6">
+                      <div className="flex items-center gap-3 mb-4">
                         <div
-                          className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+                          className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
                           style={{ backgroundColor: currentRegion.color }}
                         >
-                          <currentRegion.icon className="w-6 h-6 text-white" />
+                          <currentRegion.icon className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                          <h2 className="text-2xl font-bold text-gray-900">{currentRegion.fullName}</h2>
-                          <p className="text-gray-600 mt-1">
+                          <h3 className="text-lg font-bold text-white">{currentRegion.fullName}</h3>
+                          <p className="text-white/70 text-sm">
                             {currentRegion.habitat} • {currentRegion.elevation}
                           </p>
                         </div>
                       </div>
 
                       {/* Region Description */}
-                      <p className="text-gray-700 mb-6 leading-relaxed">{currentRegion.detailedDescription}</p>
+                      <p className="text-white/80 mb-4 text-sm leading-relaxed">{currentRegion.detailedDescription}</p>
 
-                      {/* Key Information Grid */}
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="bg-gray-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-gray-900 mb-2">Species Count</h4>
-                          <div className="space-y-1 text-sm">
+                      {/* Key Information */}
+                      <div className="grid grid-cols-2 gap-3 mb-4">
+                        <div className="bg-black/20 p-3 rounded-lg border border-white/20">
+                          <h4 className="font-semibold text-white mb-1 text-sm">Species Count</h4>
+                          <div className="space-y-1 text-xs">
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Total:</span>
-                              <span className="font-medium">{currentRegion.totalSpecies}</span>
+                              <span className="text-white/70">Total:</span>
+                              <span className="font-medium text-white">{currentRegion.totalSpecies}</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Endemic:</span>
-                              <span className="font-medium">{currentRegion.endemicCount}</span>
+                              <span className="text-white/70">Endemic:</span>
+                              <span className="font-medium text-white">{currentRegion.endemicCount}</span>
                             </div>
                           </div>
                         </div>
-                        <div className="bg-gray-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-gray-900 mb-2">Visit Info</h4>
-                          <div className="space-y-1 text-sm">
-                            <div>
-                              <span className="text-gray-600">Best Time:</span>
-                              <p className="font-medium">{currentRegion.bestTime}</p>
-                            </div>
-                          </div>
+                        <div className="bg-black/20 p-3 rounded-lg border border-white/20">
+                          <h4 className="font-semibold text-white mb-1 text-sm">Best Time</h4>
+                          <p className="font-medium text-xs text-white/80">{currentRegion.bestTime}</p>
                         </div>
                       </div>
 
                       {/* Key Species */}
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3">Key Species</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {currentRegion.keyBirds.map((bird, index) => (
+                      <div className="mb-4">
+                        <h4 className="font-semibold text-white mb-2 text-sm">Key Species</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {currentRegion.keyBirds.slice(0, 3).map((bird, index) => (
                             <span
                               key={index}
-                              className="px-3 py-1 text-sm rounded-full border"
+                              className="px-2 py-1 text-xs rounded-full border border-white/30"
                               style={{
-                                borderColor: currentRegion.color,
-                                color: currentRegion.color,
-                                backgroundColor: `${currentRegion.color}10`,
+                                color: "white",
+                                backgroundColor: `${currentRegion.color}30`,
                               }}
                             >
                               {bird}
@@ -460,231 +550,188 @@ export function ColombianBirdsExplorer() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex flex-col sm:flex-row gap-3">
+                      <div className="flex gap-2">
                         <Button
                           asChild
-                          className="flex-1"
+                          size="sm"
+                          className="flex-1 text-xs"
                           style={{
                             backgroundColor: currentRegion.color,
                             borderColor: currentRegion.color,
                           }}
                         >
                           <Link href="/tours">
-                            <Bird className="w-4 h-4 mr-2" />
-                            Explore Tours
+                            <Bird className="w-3 h-3 mr-1" />
+                            Tours
                           </Link>
                         </Button>
                         <Button
                           variant="outline"
                           asChild
-                          className="flex-1 border-2 bg-transparent"
-                          style={{
-                            borderColor: currentRegion.color,
-                            color: currentRegion.color,
-                          }}
+                          size="sm"
+                          className="flex-1 text-xs bg-transparent text-white border-white/30 hover:bg-white/10"
                         >
                           <Link href="/contact">
-                            <Camera className="w-4 h-4 mr-2" />
+                            <Camera className="w-3 h-3 mr-1" />
                             Plan Visit
                           </Link>
                         </Button>
                       </div>
-                    </div>
-                  ) : (
-                    // Default State - General Information
-                    <div>
-                      <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
-                          <Bird className="w-8 h-8 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">Colombia's Biodiversity</h2>
-                        <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-blue-600 mx-auto mb-6"></div>
-                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
 
-                      <div className="space-y-6">
-                        <p className="text-gray-700 leading-relaxed">
-                          Colombia stands as the world's most biodiverse country per square kilometer. Our
-                          classification system organizes this incredible diversity into{" "}
-                          <Badge variant="secondary" className="mx-1 bg-emerald-100 text-emerald-800 font-semibold">
-                            11 bioregions
-                          </Badge>{" "}
-                          (major ecological areas) containing{" "}
-                          <Badge variant="secondary" className="mx-1 bg-blue-100 text-blue-800 font-semibold">
-                            31 ecoregions
-                          </Badge>{" "}
-                          (specific habitat types).
-                        </p>
+              {/* Right Column - Interactive Map with Transparent Background */}
+              <div className="order-1 lg:order-2">
+                <Card className="bg-white/5 backdrop-blur-lg shadow-2xl border border-white/20">
+                  <CardContent className="p-4 sm:p-6">
+                    {/* Interactive Map Container - Transparent Background */}
+                    <div className="relative bg-transparent rounded-lg p-4 mb-4 border border-white/20">
+                      <div className="relative mx-auto">
+                        <img
+                          src="/images/birding-regions-colombia-final.png"
+                          alt="Colombia Interactive Bioregions Map"
+                          className="w-full h-auto rounded-md shadow-lg opacity-90"
+                        />
 
-                        <p className="text-gray-700 leading-relaxed">
-                          This strategic location at the crossroads of North and South America, combined with three
-                          Andean mountain ranges and coastlines on both oceans, creates an unparalleled variety of
-                          ecosystems and the highest bird diversity on Earth.
-                        </p>
-
-                        <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-6 rounded-lg border border-emerald-200">
-                          <h3 className="font-semibold text-gray-900 mb-3">Getting Started</h3>
-                          <p className="text-gray-700 text-sm">
-                            Click on any region in the interactive map to discover its unique ecosystems, endemic
-                            species, and conservation status. Each bioregion offers distinct birding opportunities and
-                            specialized tour experiences.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Column - Compact Interactive Map */}
-            <div className="order-1 lg:order-2">
-              <Card className="bg-white/95 backdrop-blur-sm shadow-xl border-2 border-emerald-200">
-                <CardContent className="p-4 sm:p-6">
-                  {/* Map Instructions */}
-                  <div className="text-center mb-4">
-                    <p className="text-sm sm:text-base text-gray-600 font-medium">
-                      Click on any region to discover its unique ecosystems and species
-                    </p>
-                  </div>
-
-                  {/* Compact Interactive Map Container */}
-                  <div className="relative bg-gradient-to-br from-blue-50 to-green-50 rounded-lg p-4 mb-4 border border-emerald-100">
-                    <div className="relative mx-auto">
-                      <img
-                        src="/images/birding-regions-colombia-final.png"
-                        alt="Colombia Interactive Bioregions Map"
-                        className="w-full h-auto opacity-95 rounded-md shadow-sm"
-                      />
-
-                      {/* Interactive Overlay with Smaller Icons */}
-                      <div className="absolute inset-0">
-                        {bioregionsData.map((region) => {
-                          const IconComponent = region.icon
-                          const isSelected = selectedRegion === region.id
-                          const isHovered = hoveredRegion === region.id
-                          return (
-                            <button
-                              key={region.id}
-                              onClick={() => handleRegionClick(region.id)}
-                              onMouseEnter={() => setHoveredRegion(region.id)}
-                              onMouseLeave={() => setHoveredRegion(null)}
-                              className={`absolute transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
-                              style={{
-                                left: `${region.coordinates.x}%`,
-                                top: `${region.coordinates.y}%`,
-                              }}
-                              aria-label={`Explore ${region.name} bioregion`}
-                            >
-                              <div
-                                className={`${iconSizes.iconSize} rounded-full ${iconSizes.shadowSize} transition-all duration-300 flex items-center justify-center ${iconSizes.borderWidth} border-white/90 ${
-                                  isSelected
-                                    ? `ring-2 ring-white ring-opacity-95 ${iconSizes.selectedScale} border-white`
-                                    : ""
-                                }`}
+                        {/* Interactive Overlay */}
+                        <div className="absolute inset-0">
+                          {bioregionsData.map((region) => {
+                            const IconComponent = region.icon
+                            const isSelected = selectedRegion === region.id
+                            const isHovered = hoveredRegion === region.id
+                            return (
+                              <button
+                                key={region.id}
+                                onClick={() => handleRegionClick(region.id)}
+                                onMouseEnter={() => setHoveredRegion(region.id)}
+                                onMouseLeave={() => setHoveredRegion(null)}
+                                className={`absolute transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
                                 style={{
-                                  backgroundColor: region.color,
-                                  boxShadow: isSelected
-                                    ? `0 0 0 2px ${region.color}40, 0 4px 15px ${region.color}70`
-                                    : `0 2px 8px ${region.color}50`,
+                                  left: `${region.coordinates.x}%`,
+                                  top: `${region.coordinates.y}%`,
                                 }}
+                                aria-label={`Explore ${region.name} bioregion`}
                               >
-                                <IconComponent
-                                  className={`${iconSizes.iconInnerSize} text-white drop-shadow-sm`}
-                                  style={{
-                                    filter: "drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.8))",
-                                  }}
-                                />
-                              </div>
-                              {isHovered && !isSelected && screenSize === "desktop" && (
                                 <div
-                                  className={`absolute ${iconSizes.tooltipOffset} left-1/2 transform -translate-x-1/2 bg-white ${iconSizes.tooltipPadding} rounded-md ${iconSizes.shadowSize} ${iconSizes.tooltipTextSize} font-medium whitespace-nowrap z-20 border border-gray-200`}
+                                  className={`${iconSizes.iconSize} rounded-full ${iconSizes.shadowSize} transition-all duration-300 flex items-center justify-center ${iconSizes.borderWidth} border-white ${
+                                    isSelected
+                                      ? `ring-2 ring-white ring-opacity-95 ${iconSizes.selectedScale} border-white`
+                                      : ""
+                                  }`}
+                                  style={{
+                                    backgroundColor: region.color,
+                                    boxShadow: isSelected
+                                      ? `0 0 0 2px ${region.color}40, 0 4px 15px ${region.color}70`
+                                      : `0 2px 8px ${region.color}50`,
+                                  }}
                                 >
-                                  <div className="font-bold text-gray-900">{region.name}</div>
-                                  <div className="text-xs text-gray-500">Click to explore</div>
+                                  <IconComponent
+                                    className={`${iconSizes.iconInnerSize} text-white drop-shadow-sm`}
+                                    style={{
+                                      filter: "drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.8))",
+                                    }}
+                                  />
                                 </div>
-                              )}
-                            </button>
-                          )
-                        })}
+                                {isHovered && !isSelected && screenSize === "desktop" && (
+                                  <div
+                                    className={`absolute ${iconSizes.tooltipOffset} left-1/2 transform -translate-x-1/2 bg-black/90 backdrop-blur-sm ${iconSizes.tooltipPadding} rounded-md ${iconSizes.shadowSize} ${iconSizes.tooltipTextSize} font-medium whitespace-nowrap z-20 border border-white/30`}
+                                  >
+                                    <div className="font-bold text-white">{region.name}</div>
+                                    <div className="text-xs text-white/70">Click to explore</div>
+                                  </div>
+                                )}
+                              </button>
+                            )
+                          })}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Condensed Statistics Below Map */}
-                  <div className="grid grid-cols-3 gap-3 text-center">
-                    <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-lg p-3 shadow-sm">
-                      <div className="text-lg sm:text-xl font-bold">1,900+</div>
-                      <div className="text-emerald-100 text-xs font-medium">Bird Species</div>
+                    {/* Map Instructions */}
+                    <div className="text-center mb-4">
+                      <p className="text-sm text-white/80 font-medium">
+                        Click on any region to discover its unique ecosystems and species
+                      </p>
                     </div>
-                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-3 shadow-sm">
-                      <div className="text-lg sm:text-xl font-bold">78+</div>
-                      <div className="text-blue-100 text-xs font-medium">Endemic Species</div>
+
+                    {/* Statistics Below Map - Enhanced Transparency */}
+                    <div className="grid grid-cols-3 gap-3 text-center">
+                      <div className="bg-emerald-500/20 backdrop-blur-sm text-white rounded-lg p-3 shadow-lg border border-emerald-400/30">
+                        <div className="text-lg sm:text-xl font-bold">1,900+</div>
+                        <div className="text-emerald-200 text-xs font-medium">Bird Species</div>
+                      </div>
+                      <div className="bg-blue-500/20 backdrop-blur-sm text-white rounded-lg p-3 shadow-lg border border-blue-400/30">
+                        <div className="text-lg sm:text-xl font-bold">78+</div>
+                        <div className="text-blue-200 text-xs font-medium">Endemic Species</div>
+                      </div>
+                      <div className="bg-purple-500/20 backdrop-blur-sm text-white rounded-lg p-3 shadow-lg border border-purple-400/30">
+                        <div className="text-lg sm:text-xl font-bold">11</div>
+                        <div className="text-purple-200 text-xs font-medium">Bioregions</div>
+                      </div>
                     </div>
-                    <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-3 shadow-sm">
-                      <div className="text-lg sm:text-xl font-bold">11</div>
-                      <div className="text-purple-100 text-xs font-medium">Bioregions</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Call-to-Action Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-blue-700">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Experience Colombia's Avian Wonders?
-          </h2>
-          <p className="text-xl text-emerald-100 mb-8 leading-relaxed">
-            Join our expert-guided birding tours and discover the incredible diversity you've just explored. From
-            endemic hummingbirds in the Andes to colorful toucans in the Amazon rainforest.
-          </p>
+        {/* Call-to-Action Section with Maximum Transparency */}
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-black/5 backdrop-blur-sm relative overflow-hidden">
+          <div className="relative z-10 max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-shadow-2xl">
+                Ready to Experience Colombia's Avian Wonders?
+              </h2>
+              <p className="text-xl text-white/90 leading-relaxed max-w-3xl mx-auto text-shadow-lg">
+                Join our expert-guided birding tours and discover the incredible diversity you've just explored. From
+                endemic hummingbirds in the Andes to colorful toucans in the Amazon rainforest.
+              </p>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-white text-emerald-700 hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
+            {/* CTA Buttons with Enhanced Transparency */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-10">
               <Link href="/tours">
-                <Calendar className="w-5 h-5 mr-2" />
-                View All Tours
+                <Button
+                  size="lg"
+                  className="w-full bg-white/15 backdrop-blur-md text-white hover:bg-white/25 font-semibold py-3 border border-white/30 shadow-lg"
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  View All Tours
+                </Button>
               </Link>
-            </Button>
-
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 bg-transparent"
-            >
               <Link href="/contact">
-                <Users className="w-5 h-5 mr-2" />
-                Plan Custom Tour
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full border-white/40 text-white hover:bg-white/15 font-semibold py-3 bg-transparent backdrop-blur-md shadow-lg"
+                >
+                  <Users className="w-5 h-5 mr-2" />
+                  Plan Custom Tour
+                </Button>
               </Link>
-            </Button>
-          </div>
+            </div>
 
-          {/* Additional Information */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-            <div className="text-emerald-100">
-              <div className="text-2xl font-bold text-white mb-2">Expert Guides</div>
-              <div className="text-sm">Professional ornithologists with decades of experience</div>
-            </div>
-            <div className="text-emerald-100">
-              <div className="text-2xl font-bold text-white mb-2">Small Groups</div>
-              <div className="text-sm">Maximum 4 guests per tour for personalized experience</div>
-            </div>
-            <div className="text-emerald-100">
-              <div className="text-2xl font-bold text-white mb-2">Carbon Neutral</div>
-              <div className="text-sm">100% carbon neutral tours supporting conservation</div>
+            {/* Additional Information Grid with Maximum Transparency */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/20">
+                <div className="text-2xl font-bold text-white mb-2 text-shadow-lg">Expert Guides</div>
+                <div className="text-sm text-shadow">Professional ornithologists with decades of experience</div>
+              </div>
+              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/20">
+                <div className="text-2xl font-bold text-white mb-2 text-shadow-lg">Small Groups</div>
+                <div className="text-sm text-shadow">Maximum 4 guests per tour for personalized experience</div>
+              </div>
+              <div className="text-white/90 bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/20">
+                <div className="text-2xl font-bold text-white mb-2 text-shadow-lg">Carbon Neutral</div>
+                <div className="text-sm text-shadow">100% carbon neutral tours supporting conservation</div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   )
 }
