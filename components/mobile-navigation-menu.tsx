@@ -17,8 +17,43 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
   const [isOpen, setIsOpen] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
+  const [screenWidth, setScreenWidth] = useState(0)
+  const [screenHeight, setScreenHeight] = useState(0)
   const menuContentRef = useRef<HTMLDivElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout>()
+
+  // Track screen dimensions for responsive scaling
+  useEffect(() => {
+    const updateScreenDimensions = () => {
+      setScreenWidth(window.innerWidth)
+      setScreenHeight(window.innerHeight)
+    }
+
+    updateScreenDimensions()
+    window.addEventListener("resize", updateScreenDimensions)
+    window.addEventListener("orientationchange", updateScreenDimensions)
+
+    return () => {
+      window.removeEventListener("resize", updateScreenDimensions)
+      window.removeEventListener("orientationchange", updateScreenDimensions)
+    }
+  }, [])
+
+  // Calculate responsive font sizes based on screen dimensions
+  const getResponsiveFontSizes = useCallback(() => {
+    const baseWidth = 375 // iPhone SE width as baseline
+    const scaleFactor = Math.min(screenWidth / baseWidth, 1.2) // Max scale of 1.2x
+    const minScale = 0.8 // Minimum scale for very small screens
+
+    const finalScale = Math.max(Math.min(scaleFactor, 1.2), minScale)
+
+    return {
+      title: `${Math.max(1.25 * finalScale, 1)}rem`, // 20px base, min 16px
+      sectionHeader: `${Math.max(1.125 * finalScale, 0.9)}rem`, // 18px base, min 14.4px
+      menuItem: `${Math.max(1 * finalScale, 0.85)}rem`, // 16px base, min 13.6px
+      footerLink: `${Math.max(0.875 * finalScale, 0.75)}rem`, // 14px base, min 12px
+    }
+  }, [screenWidth])
 
   // Enhanced scroll position management with smooth transitions
   useEffect(() => {
@@ -31,12 +66,12 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
       document.body.classList.add("mobile-menu-open")
       document.documentElement.classList.add("mobile-menu-open")
 
-      // Prevent background scrolling with enhanced smooth lock
+      // Prevent background scrolling while allowing menu scroll
       document.body.style.position = "fixed"
       document.body.style.top = `-${currentScrollY}px`
+      document.body.style.left = "0"
+      document.body.style.right = "0"
       document.body.style.width = "100%"
-      document.body.style.height = "100vh"
-      document.body.style.overflow = "hidden"
       document.body.style.overscrollBehavior = "none"
     } else {
       // Remove classes and restore scroll position
@@ -46,9 +81,9 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
       // Restore scrolling with enhanced smoothness
       document.body.style.position = ""
       document.body.style.top = ""
+      document.body.style.left = ""
+      document.body.style.right = ""
       document.body.style.width = ""
-      document.body.style.height = ""
-      document.body.style.overflow = ""
       document.body.style.overscrollBehavior = ""
 
       // Restore scroll position with smooth behavior
@@ -66,9 +101,9 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
       document.documentElement.classList.remove("mobile-menu-open")
       document.body.style.position = ""
       document.body.style.top = ""
+      document.body.style.left = ""
+      document.body.style.right = ""
       document.body.style.width = ""
-      document.body.style.height = ""
-      document.body.style.overflow = ""
       document.body.style.overscrollBehavior = ""
     }
   }, [isOpen, scrollPosition])
@@ -78,7 +113,7 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
     const menuElement = menuContentRef.current
     if (!menuElement) return
 
-    const handleScroll = () => {
+    const handleScroll = (e: Event) => {
       setIsScrolling(true)
 
       // Clear existing timeout
@@ -131,7 +166,7 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
           } else {
             window.location.href = href
           }
-        }, 200)
+        }, 300)
       }
     },
     [closeMenu],
@@ -139,17 +174,23 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
 
   // Enhanced touch handling for better mobile experience
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    e.stopPropagation()
+    // Allow natural touch behavior for scrolling
   }, [])
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    // Allow scrolling within the menu
-    e.stopPropagation()
+    // Allow natural scroll behavior
   }, [])
+
+  // Prevent background scroll without affecting menu scroll
+  const handleSheetOpenChange = useCallback((open: boolean) => {
+    setIsOpen(open)
+  }, [])
+
+  const responsiveFontSizes = getResponsiveFontSizes()
 
   return (
     <div className={cn("md:hidden", className)}>
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <Sheet open={isOpen} onOpenChange={handleSheetOpenChange}>
         <SheetTrigger asChild>
           <Button
             variant="ghost"
@@ -162,37 +203,34 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
         </SheetTrigger>
         <SheetContent
           side="right"
-          className="w-80 p-0 mobile-menu-transparent border-l-0 shadow-2xl mobile-menu-container"
+          className="mobile-menu-container-70 p-0 border-l-0 shadow-2xl"
           data-mobile-menu="true"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
+          style={{
+            width: `${Math.min(screenWidth * 0.7, 320)}px`, // 70% width, max 320px
+            maxWidth: `${Math.min(screenWidth * 0.7, 320)}px`,
+          }}
         >
-          <div
-            ref={menuContentRef}
-            className={cn("flex flex-col mobile-menu-scroll-container", isScrolling && "scrolling")}
-            style={{
-              height: "100vh",
-              maxHeight: "100vh",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {/* Enhanced Header with improved transparency */}
+          {/* Swipe-in animation wrapper with 50% transparency */}
+          <div className="mobile-menu-wrapper-70">
+            {/* Fixed Header - Non-scrollable with responsive text */}
             <div
-              className="flex items-center justify-between p-6 border-b border-white/20 mobile-menu-section-header flex-shrink-0"
-              style={{ minHeight: "80px" }}
+              className="mobile-menu-header-70 flex items-center justify-between p-4 border-b border-white/20"
+              style={{ minHeight: "70px" }}
             >
               <div className="flex items-center gap-3">
                 <Image
                   src="/images/aves-logo.png"
                   alt="AVES"
-                  width={40}
-                  height={40}
+                  width={screenWidth < 350 ? 32 : 36}
+                  height={screenWidth < 350 ? 32 : 36}
                   className="rounded-lg logo-animation"
                   priority
                 />
-                <span className="text-xl font-bold mobile-menu-text-enhanced">AVES</span>
+                <span className="font-bold mobile-menu-text-enhanced" style={{ fontSize: responsiveFontSizes.title }}>
+                  AVES
+                </span>
               </div>
               <Button
                 variant="ghost"
@@ -200,209 +238,187 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
                 onClick={closeMenu}
                 className="p-2 hover:bg-white/20 transition-all duration-300 touch-manipulation"
                 aria-label="Close navigation menu"
+                style={{ minWidth: "40px", minHeight: "40px" }}
               >
                 <X className="h-5 w-5 text-gray-600" />
               </Button>
             </div>
 
-            {/* Enhanced Navigation Content with optimized scrolling */}
+            {/* Scrollable Content Area with responsive text scaling */}
             <div
-              className="mobile-menu-scroll-area flex-1"
+              ref={menuContentRef}
+              className={cn("mobile-menu-scroll-area-70", isScrolling && "scrolling")}
               style={{
-                overflow: "auto",
-                overflowX: "hidden",
-                overflowY: "auto",
-                height: "calc(100vh - 80px - 200px)", // Account for header and footer
-                maxHeight: "calc(100vh - 80px - 200px)",
-                WebkitOverflowScrolling: "touch",
-                scrollBehavior: "smooth",
-                overscrollBehavior: "contain",
-                scrollbarWidth: "thin",
-                scrollbarColor: "rgba(156, 163, 175, 0.4) transparent",
+                height: `calc(100vh - 70px - ${screenHeight < 600 ? "160px" : "180px"})`,
+                maxHeight: `calc(100vh - 70px - ${screenHeight < 600 ? "160px" : "180px"})`,
               }}
             >
-              <nav className="space-y-8 px-6 py-6">
-                {/* Tours Section with enhanced styling */}
-                <div className="scroll-snap-start">
-                  <h3 className="text-lg font-semibold mb-4 mobile-menu-section-header p-3 rounded-lg">Tours</h3>
-                  <div className="space-y-3">
-                    <Link
-                      href="/tours"
-                      onClick={handleLinkClick("/tours")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <MapPin className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                      <span>AVES Tours</span>
+              <nav className="mobile-menu-nav-70">
+                {/* Tours Section with responsive text */}
+                <div className="mobile-menu-section-70">
+                  <h3 className="mobile-menu-section-title-70" style={{ fontSize: responsiveFontSizes.sectionHeader }}>
+                    Tours
+                  </h3>
+                  <div className="mobile-menu-section-content-70">
+                    <Link href="/tours" onClick={handleLinkClick("/tours")} className="mobile-menu-link-70">
+                      <MapPin className="mobile-menu-icon-70 text-blue-500" />
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>AVES Tours</span>
                     </Link>
                     <Link
                       href="/tours/adventure"
                       onClick={handleLinkClick("/tours/adventure")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-green-500 flex-shrink-0">🌿</div>
-                      <span>Adventure Tours</span>
+                      <div className="mobile-menu-icon-70 text-green-500">🌿</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Adventure Tours</span>
                     </Link>
                     <Link
                       href="/tours/vision"
                       onClick={handleLinkClick("/tours/vision")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-amber-600 flex-shrink-0">🪶</div>
-                      <span>Vision Tours</span>
+                      <div className="mobile-menu-icon-70 text-amber-600">🪶</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Vision Tours</span>
                     </Link>
                     <Link
                       href="/tours/elevate"
                       onClick={handleLinkClick("/tours/elevate")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-yellow-500 flex-shrink-0">🌻</div>
-                      <span>Elevate Tours</span>
+                      <div className="mobile-menu-icon-70 text-yellow-500">🌻</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Elevate Tours</span>
                     </Link>
-                    <Link
-                      href="/tours/souls"
-                      onClick={handleLinkClick("/tours/souls")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <div className="h-5 w-5 text-red-500 flex-shrink-0">🍓</div>
-                      <span>Souls Tours</span>
+                    <Link href="/tours/souls" onClick={handleLinkClick("/tours/souls")} className="mobile-menu-link-70">
+                      <div className="mobile-menu-icon-70 text-red-500">🍓</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Souls Tours</span>
                     </Link>
                   </div>
                 </div>
 
-                {/* Explore Section with enhanced styling */}
-                <div className="scroll-snap-start">
-                  <h3 className="text-lg font-semibold mb-4 mobile-menu-section-header p-3 rounded-lg">Explore</h3>
-                  <div className="space-y-3">
+                {/* Explore Section with responsive text */}
+                <div className="mobile-menu-section-70">
+                  <h3 className="mobile-menu-section-title-70" style={{ fontSize: responsiveFontSizes.sectionHeader }}>
+                    Explore
+                  </h3>
+                  <div className="mobile-menu-section-content-70">
                     <Link
                       href="/aves-explorer"
                       onClick={handleLinkClick("/aves-explorer")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-amber-700 flex-shrink-0">🦅</div>
-                      <span>Colombia</span>
+                      <div className="mobile-menu-icon-70 text-amber-700">🦅</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Colombia</span>
                     </Link>
-                    <Link
-                      href="/blog"
-                      onClick={handleLinkClick("/blog")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <BookOpen className="h-5 w-5 text-indigo-500 flex-shrink-0" />
-                      <span>Birding with AVES</span>
+                    <Link href="/blog" onClick={handleLinkClick("/blog")} className="mobile-menu-link-70">
+                      <BookOpen className="mobile-menu-icon-70 text-indigo-500" />
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Birding with AVES</span>
                     </Link>
-                    <Link
-                      href="/resources"
-                      onClick={handleLinkClick("/resources")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <BookOpen className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                      <span>Birding in Colombia</span>
+                    <Link href="/resources" onClick={handleLinkClick("/resources")} className="mobile-menu-link-70">
+                      <BookOpen className="mobile-menu-icon-70 text-blue-500" />
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Birding in Colombia</span>
                     </Link>
-                    <Link
-                      href="/travel-tips"
-                      onClick={handleLinkClick("/travel-tips")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <div className="h-5 w-5 text-orange-500 flex-shrink-0">✈️</div>
-                      <span>Travel Essentials</span>
+                    <Link href="/travel-tips" onClick={handleLinkClick("/travel-tips")} className="mobile-menu-link-70">
+                      <div className="mobile-menu-icon-70 text-orange-500">✈️</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Travel Essentials</span>
                     </Link>
                   </div>
                 </div>
 
-                {/* AVES Section with enhanced styling */}
-                <div className="scroll-snap-start">
-                  <h3 className="text-lg font-semibold mb-4 mobile-menu-section-header p-3 rounded-lg">AVES</h3>
-                  <div className="space-y-3">
-                    <Link
-                      href="/about"
-                      onClick={handleLinkClick("/about")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <Users className="h-5 w-5 text-emerald-500 flex-shrink-0" />
-                      <span>About AVES</span>
+                {/* AVES Section with responsive text */}
+                <div className="mobile-menu-section-70">
+                  <h3 className="mobile-menu-section-title-70" style={{ fontSize: responsiveFontSizes.sectionHeader }}>
+                    AVES
+                  </h3>
+                  <div className="mobile-menu-section-content-70">
+                    <Link href="/about" onClick={handleLinkClick("/about")} className="mobile-menu-link-70">
+                      <Users className="mobile-menu-icon-70 text-emerald-500" />
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>About AVES</span>
                     </Link>
-                    <Link
-                      href="/team"
-                      onClick={handleLinkClick("/team")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <Users className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                      <span>Our Team</span>
+                    <Link href="/team" onClick={handleLinkClick("/team")} className="mobile-menu-link-70">
+                      <Users className="mobile-menu-icon-70 text-blue-500" />
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Our Team</span>
                     </Link>
                     <Link
                       href="/about/partners"
                       onClick={handleLinkClick("/about/partners")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-purple-500 flex-shrink-0">🤝</div>
-                      <span>Our Partners</span>
+                      <div className="mobile-menu-icon-70 text-purple-500">🤝</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Our Partners</span>
                     </Link>
                     <Link
                       href="/about/b-corp"
                       onClick={handleLinkClick("/about/b-corp")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-green-500 flex-shrink-0">🌿</div>
-                      <span>Our B Corp Journey</span>
+                      <div className="mobile-menu-icon-70 text-green-500">🌿</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Our B Corp Journey</span>
                     </Link>
                     <Link
                       href="/conservation"
                       onClick={handleLinkClick("/conservation")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
+                      className="mobile-menu-link-70"
                     >
-                      <div className="h-5 w-5 text-green-600 flex-shrink-0">🌱</div>
-                      <span>Conservation</span>
+                      <div className="mobile-menu-icon-70 text-green-600">🌱</div>
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Conservation</span>
                     </Link>
-                    <Link
-                      href="/contact"
-                      onClick={handleLinkClick("/contact")}
-                      className="flex items-center gap-3 p-3 rounded-lg mobile-menu-item-enhanced mobile-menu-item touch-manipulation"
-                    >
-                      <Mail className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                      <span>Contact</span>
+                    <Link href="/contact" onClick={handleLinkClick("/contact")} className="mobile-menu-link-70">
+                      <Mail className="mobile-menu-icon-70 text-blue-500" />
+                      <span style={{ fontSize: responsiveFontSizes.menuItem }}>Contact</span>
                     </Link>
                   </div>
                 </div>
               </nav>
             </div>
 
-            {/* Enhanced Footer with improved transparency */}
+            {/* Fixed Footer - Non-scrollable with responsive text */}
             <div
-              className="border-t border-white/20 p-6 mobile-menu-cta-area flex-shrink-0"
-              style={{ minHeight: "200px" }}
+              className="mobile-menu-footer-70 border-t border-white/20 p-4"
+              style={{
+                minHeight: screenHeight < 600 ? "160px" : "180px",
+                maxHeight: screenHeight < 600 ? "160px" : "180px",
+              }}
             >
-              <div className="mb-4">
+              <div className="mb-3">
                 <Link href="/shopping">
                   <Button
-                    className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation"
                     onClick={handleLinkClick("/shopping")}
+                    style={{
+                      fontSize: responsiveFontSizes.menuItem,
+                      minHeight: "44px",
+                    }}
                   >
                     Book Your Journey
                   </Button>
                 </Link>
               </div>
-              <div className="flex flex-wrap gap-4 text-sm">
+              <div className="flex flex-wrap gap-3 text-sm">
                 <Link
                   href="/privacy"
                   onClick={handleLinkClick("/privacy")}
                   className="flex items-center gap-2 hover:text-emerald-600 transition-colors mobile-menu-text-enhanced touch-manipulation"
+                  style={{ fontSize: responsiveFontSizes.footerLink }}
                 >
-                  <Shield className="h-4 w-4 flex-shrink-0" />
+                  <Shield className="h-3 w-3 flex-shrink-0" />
                   <span>Privacy Policy</span>
                 </Link>
                 <Link
                   href="/terms"
                   onClick={handleLinkClick("/terms")}
                   className="flex items-center gap-2 hover:text-emerald-600 transition-colors mobile-menu-text-enhanced touch-manipulation"
+                  style={{ fontSize: responsiveFontSizes.footerLink }}
                 >
-                  <FileText className="h-4 w-4 flex-shrink-0" />
+                  <FileText className="h-3 w-3 flex-shrink-0" />
                   <span>Terms of Service</span>
                 </Link>
                 <Link
                   href="/cookies"
                   onClick={handleLinkClick("/cookies")}
                   className="flex items-center gap-2 hover:text-emerald-600 transition-colors mobile-menu-text-enhanced touch-manipulation"
+                  style={{ fontSize: responsiveFontSizes.footerLink }}
                 >
-                  <Cookie className="h-4 w-4 flex-shrink-0" />
+                  <Cookie className="h-3 w-3 flex-shrink-0" />
                   <span>Cookie Policy</span>
                 </Link>
               </div>
