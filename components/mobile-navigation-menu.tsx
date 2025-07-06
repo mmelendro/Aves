@@ -8,7 +8,6 @@ import { Menu, X, MapPin, BookOpen, Users, Mail, Shield, FileText, Cookie } from
 import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { useSmoothScroll } from "@/hooks/use-smooth-scroll"
 
 interface MobileNavigationMenuProps {
   className?: string
@@ -19,27 +18,28 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
   const menuContentRef = useRef<HTMLDivElement>(null)
-  const { scrollToSection } = useSmoothScroll()
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>()
 
   // Enhanced scroll position management with smooth transitions
   useEffect(() => {
     if (isOpen) {
-      // Store current scroll position with smooth transition
+      // Store current scroll position
       const currentScrollY = window.scrollY
       setScrollPosition(currentScrollY)
 
-      // Add classes for mobile menu state with enhanced animations
+      // Add classes for mobile menu state
       document.body.classList.add("mobile-menu-open")
       document.documentElement.classList.add("mobile-menu-open")
 
-      // Prevent background scrolling with smooth lock
+      // Prevent background scrolling with enhanced smooth lock
       document.body.style.position = "fixed"
       document.body.style.top = `-${currentScrollY}px`
       document.body.style.width = "100%"
+      document.body.style.height = "100vh"
       document.body.style.overflow = "hidden"
-      document.body.style.transition = "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+      document.body.style.overscrollBehavior = "none"
     } else {
-      // Remove classes and restore scroll position with smooth transition
+      // Remove classes and restore scroll position
       document.body.classList.remove("mobile-menu-open")
       document.documentElement.classList.remove("mobile-menu-open")
 
@@ -47,8 +47,9 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
       document.body.style.position = ""
       document.body.style.top = ""
       document.body.style.width = ""
+      document.body.style.height = ""
       document.body.style.overflow = ""
-      document.body.style.transition = ""
+      document.body.style.overscrollBehavior = ""
 
       // Restore scroll position with smooth behavior
       requestAnimationFrame(() => {
@@ -59,37 +60,49 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
       })
     }
 
-    // Enhanced cleanup function
+    // Cleanup function
     return () => {
       document.body.classList.remove("mobile-menu-open")
       document.documentElement.classList.remove("mobile-menu-open")
       document.body.style.position = ""
       document.body.style.top = ""
       document.body.style.width = ""
+      document.body.style.height = ""
       document.body.style.overflow = ""
-      document.body.style.transition = ""
+      document.body.style.overscrollBehavior = ""
     }
   }, [isOpen, scrollPosition])
 
-  // Enhanced scroll detection for menu content
+  // Enhanced scroll detection for menu content with optimized performance
   useEffect(() => {
     const menuElement = menuContentRef.current
     if (!menuElement) return
 
-    let scrollTimeout: NodeJS.Timeout
-
     const handleScroll = () => {
       setIsScrolling(true)
-      clearTimeout(scrollTimeout)
-      scrollTimeout = setTimeout(() => {
+
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+
+      // Set new timeout
+      scrollTimeoutRef.current = setTimeout(() => {
         setIsScrolling(false)
       }, 150)
     }
 
-    menuElement.addEventListener("scroll", handleScroll, { passive: true })
+    // Add scroll listener with passive option for better performance
+    menuElement.addEventListener("scroll", handleScroll, {
+      passive: true,
+      capture: false,
+    })
+
     return () => {
       menuElement.removeEventListener("scroll", handleScroll)
-      clearTimeout(scrollTimeout)
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
     }
   }, [isOpen])
 
@@ -103,21 +116,34 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
         e.preventDefault()
         closeMenu()
 
-        // Enhanced smooth navigation with delay for menu close animation
+        // Enhanced smooth navigation with proper delay
         setTimeout(() => {
           if (href.startsWith("#")) {
-            scrollToSection(href, 80)
+            // Smooth scroll to section
+            const element = document.getElementById(href.substring(1))
+            if (element) {
+              element.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+              })
+            }
           } else {
             window.location.href = href
           }
         }, 200)
       }
     },
-    [closeMenu, scrollToSection],
+    [closeMenu],
   )
 
   // Enhanced touch handling for better mobile experience
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.stopPropagation()
+  }, [])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    // Allow scrolling within the menu
     e.stopPropagation()
   }, [])
 
@@ -136,16 +162,27 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
         </SheetTrigger>
         <SheetContent
           side="right"
-          className="w-80 p-0 mobile-menu-transparent border-l-0 shadow-2xl"
+          className="w-80 p-0 mobile-menu-transparent border-l-0 shadow-2xl mobile-menu-container"
           data-mobile-menu="true"
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         >
           <div
             ref={menuContentRef}
-            className={cn("flex flex-col h-full mobile-menu-scroll-optimized", isScrolling && "scrolling")}
+            className={cn("flex flex-col mobile-menu-scroll-container", isScrolling && "scrolling")}
+            style={{
+              height: "100vh",
+              maxHeight: "100vh",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
             {/* Enhanced Header with improved transparency */}
-            <div className="flex items-center justify-between p-6 border-b border-white/20 mobile-menu-section-header">
+            <div
+              className="flex items-center justify-between p-6 border-b border-white/20 mobile-menu-section-header flex-shrink-0"
+              style={{ minHeight: "80px" }}
+            >
               <div className="flex items-center gap-3">
                 <Image
                   src="/images/aves-logo.png"
@@ -168,9 +205,23 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
               </Button>
             </div>
 
-            {/* Enhanced Navigation Content with smooth scrolling */}
-            <div className="flex-1 overflow-y-auto py-6 mobile-menu-scroll-optimized">
-              <nav className="space-y-8 px-6">
+            {/* Enhanced Navigation Content with optimized scrolling */}
+            <div
+              className="mobile-menu-scroll-area flex-1"
+              style={{
+                overflow: "auto",
+                overflowX: "hidden",
+                overflowY: "auto",
+                height: "calc(100vh - 80px - 200px)", // Account for header and footer
+                maxHeight: "calc(100vh - 80px - 200px)",
+                WebkitOverflowScrolling: "touch",
+                scrollBehavior: "smooth",
+                overscrollBehavior: "contain",
+                scrollbarWidth: "thin",
+                scrollbarColor: "rgba(156, 163, 175, 0.4) transparent",
+              }}
+            >
+              <nav className="space-y-8 px-6 py-6">
                 {/* Tours Section with enhanced styling */}
                 <div className="scroll-snap-start">
                   <h3 className="text-lg font-semibold mb-4 mobile-menu-section-header p-3 rounded-lg">Tours</h3>
@@ -315,7 +366,10 @@ export default function MobileNavigationMenu({ className }: MobileNavigationMenu
             </div>
 
             {/* Enhanced Footer with improved transparency */}
-            <div className="border-t border-white/20 p-6 mobile-menu-cta-area">
+            <div
+              className="border-t border-white/20 p-6 mobile-menu-cta-area flex-shrink-0"
+              style={{ minHeight: "200px" }}
+            >
               <div className="mb-4">
                 <Link href="/shopping">
                   <Button
