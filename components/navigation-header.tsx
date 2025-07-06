@@ -17,8 +17,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const [isHovering, setIsHovering] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuHeight, setMobileMenuHeight] = useState(0)
+  const [isMenuAnimating, setIsMenuAnimating] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const mobileMenuContentRef = useRef<HTMLDivElement>(null)
   const collapseTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Handle scroll detection for consistent background across all pages
@@ -51,31 +53,41 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     }
   }, [])
 
-  // Handle mobile menu height calculation and smooth scrolling
+  // Enhanced mobile menu height calculation with smooth transitions
   useEffect(() => {
     const calculateMobileMenuHeight = () => {
-      if (mobileMenuRef.current && mobileMenuOpen) {
-        const menuContent = mobileMenuRef.current.querySelector("[data-menu-content]")
-        if (menuContent) {
-          const contentHeight = menuContent.scrollHeight
-          const viewportHeight = window.innerHeight
-          const headerHeight = 80 // Account for header space
-          const maxHeight = Math.min(contentHeight + 40, viewportHeight - headerHeight) // Add padding
-          setMobileMenuHeight(maxHeight)
-        }
+      if (mobileMenuContentRef.current && mobileMenuOpen) {
+        const contentHeight = mobileMenuContentRef.current.scrollHeight
+        const viewportHeight = window.innerHeight
+        const headerHeight = 80 // Account for header space
+        const maxHeight = Math.min(contentHeight + 40, viewportHeight - headerHeight)
+
+        // Smooth height transition
+        setMobileMenuHeight(maxHeight)
+      } else {
+        setMobileMenuHeight(0)
       }
     }
 
     if (mobileMenuOpen) {
+      setIsMenuAnimating(true)
       // Small delay to ensure DOM is ready
-      setTimeout(calculateMobileMenuHeight, 50)
+      const timer = setTimeout(() => {
+        calculateMobileMenuHeight()
+        setIsMenuAnimating(false)
+      }, 50)
+
       window.addEventListener("resize", calculateMobileMenuHeight)
+      window.addEventListener("orientationchange", calculateMobileMenuHeight)
+
+      return () => {
+        clearTimeout(timer)
+        window.removeEventListener("resize", calculateMobileMenuHeight)
+        window.removeEventListener("orientationchange", calculateMobileMenuHeight)
+      }
     } else {
       setMobileMenuHeight(0)
-    }
-
-    return () => {
-      window.removeEventListener("resize", calculateMobileMenuHeight)
+      setIsMenuAnimating(false)
     }
   }, [mobileMenuOpen])
 
@@ -131,35 +143,25 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     }
   }
 
-  // Toggle mobile menu with enhanced scrolling behavior
+  // Enhanced mobile menu toggle with smooth scrolling
   const toggleMobileMenu = () => {
     try {
       const newState = !mobileMenuOpen
       setMobileMenuOpen(newState)
 
-      // Enhanced mobile menu state management
       if (newState) {
-        document.body.classList.add("mobile-menu-open")
-        // Smooth scroll to top when opening menu
+        // Smooth scroll to top when opening menu for better UX
         window.scrollTo({ top: 0, behavior: "smooth" })
-      } else {
-        document.body.classList.remove("mobile-menu-open")
-      }
-    } catch (error) {
-      console.warn("Error toggling mobile menu:", error)
-    }
-  }
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    try {
-      if (mobileMenuOpen) {
+        document.body.classList.add("mobile-menu-open")
+        // Prevent body scroll
         document.body.style.overflow = "hidden"
         document.body.style.position = "fixed"
         document.body.style.width = "100%"
         document.body.style.top = `-${window.scrollY}px`
       } else {
+        // Restore scroll position when closing
         const scrollY = document.body.style.top
+        document.body.classList.remove("mobile-menu-open")
         document.body.style.overflow = ""
         document.body.style.position = ""
         document.body.style.width = ""
@@ -169,20 +171,9 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         }
       }
     } catch (error) {
-      console.warn("Error managing body scroll:", error)
+      console.warn("Error toggling mobile menu:", error)
     }
-
-    return () => {
-      try {
-        document.body.style.overflow = ""
-        document.body.style.position = ""
-        document.body.style.width = ""
-        document.body.style.top = ""
-      } catch (error) {
-        console.warn("Error cleaning up body scroll:", error)
-      }
-    }
-  }, [mobileMenuOpen])
+  }
 
   // Handle ESC key to close menus
   useEffect(() => {
@@ -190,8 +181,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
       try {
         if (event.key === "Escape") {
           if (mobileMenuOpen) {
-            setMobileMenuOpen(false)
-            document.body.classList.remove("mobile-menu-open")
+            toggleMobileMenu()
           }
           if (desktopMenuExpanded) {
             setDesktopMenuExpanded(false)
@@ -584,199 +574,108 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* Enhanced Mobile Navigation Slide-out Menu with Dynamic Height */}
+      {/* Enhanced Mobile Navigation Slide-out Menu with Dynamic Height and Smooth Scrolling */}
       <div
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden fixed top-0 right-0 z-50 transition-all duration-500 ease-out",
-          // Dynamic width - 75% screen width as requested
+          "md:hidden fixed top-0 right-0 z-50 transition-all duration-500 ease-out overflow-hidden",
+          // Dynamic width - 75% screen width
           "w-[75vw]",
           // Enhanced transparency for AVES Explorer
           isAvesExplorer
-            ? "bg-white/85 backdrop-blur-xl border-l border-white/40 shadow-2xl"
-            : "bg-white/90 backdrop-blur-xl border-l border-white/50 shadow-2xl",
+            ? "bg-white/90 backdrop-blur-xl border-l border-white/50 shadow-2xl"
+            : "bg-white/95 backdrop-blur-xl border-l border-white/60 shadow-2xl",
           mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
         )}
         style={{
           height: mobileMenuOpen ? `${mobileMenuHeight}px` : "0px",
           maxHeight: "100vh",
           top: "80px", // Start below header
+          transition:
+            "height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s ease-out, opacity 0.5s ease-out",
         }}
         id="mobile-navigation"
         role="navigation"
         aria-label="Mobile navigation menu"
       >
         {/* Mobile Menu Content with Enhanced Scrolling */}
-        <div className="flex flex-col h-full overflow-hidden" data-menu-content>
+        <div
+          ref={mobileMenuContentRef}
+          className={cn(
+            "flex flex-col h-full transition-opacity duration-300",
+            isMenuAnimating ? "opacity-0" : "opacity-100",
+          )}
+        >
           {/* Scrollable Navigation Content */}
-          <div className="flex-1 overflow-y-auto py-6 px-6 mobile-menu-scroll">
+          <div className="flex-1 overflow-y-auto py-6 px-6 mobile-menu-scroll-enhanced">
             <nav className="space-y-6">
               {/* Tours Section */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">Tours</h3>
-                <div className="space-y-2 pl-4">
-                  <Link
-                    href="/tours"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+              <div className="space-y-3 mobile-menu-section">
+                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2 mobile-menu-header">
+                  Tours
+                </h3>
+                <div className="space-y-1 pl-4">
+                  <Link href="/tours" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🗺️ AVES Tours
                   </Link>
-                  <Link
-                    href="/tours/adventure"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/tours/adventure" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🍃 Adventure Tours
                   </Link>
-                  <Link
-                    href="/tours/vision"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/tours/vision" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🪶 Vision Tours
                   </Link>
-                  <Link
-                    href="/tours/elevate"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/tours/elevate" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🌼 Elevate Tours
                   </Link>
-                  <Link
-                    href="/tours/souls"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/tours/souls" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🍓 Souls Tours
                   </Link>
                 </div>
               </div>
 
               {/* Explore Section */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">Explore</h3>
-                <div className="space-y-2 pl-4">
-                  <Link
-                    href="/aves-explorer"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+              <div className="space-y-3 mobile-menu-section">
+                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2 mobile-menu-header">
+                  Explore
+                </h3>
+                <div className="space-y-1 pl-4">
+                  <Link href="/aves-explorer" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🦅 Colombia
                   </Link>
-                  <Link
-                    href="/blog"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/blog" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     📝 Birding with AVES
                   </Link>
-                  <Link
-                    href="/resources"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/resources" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     📚 Birding in Colombia
                   </Link>
-                  <Link
-                    href="/travel-tips"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/travel-tips" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     ✈️ Travel Essentials
                   </Link>
                 </div>
               </div>
 
               {/* AVES Section */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">AVES</h3>
-                <div className="space-y-2 pl-4">
-                  <Link
-                    href="/about"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+              <div className="space-y-3 mobile-menu-section">
+                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2 mobile-menu-header">
+                  AVES
+                </h3>
+                <div className="space-y-1 pl-4">
+                  <Link href="/about" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🏢 About AVES
                   </Link>
-                  <Link
-                    href="/team"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/team" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     👥 Our Team
                   </Link>
-                  <Link
-                    href="/about/partners"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/about/partners" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🤝 Our Partners
                   </Link>
-                  <Link
-                    href="/about/b-corp"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/about/b-corp" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🌿 Our B Corp Journey
                   </Link>
-                  <Link
-                    href="/conservation"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/conservation" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     🌱 Conservation
                   </Link>
-                  <Link
-                    href="/contact"
-                    className="block py-3 text-gray-700 hover:text-emerald-600 transition-colors duration-200 mobile-menu-item touch-manipulation"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      document.body.classList.remove("mobile-menu-open")
-                    }}
-                  >
+                  <Link href="/contact" className="mobile-menu-link" onClick={toggleMobileMenu}>
                     📞 Contact
                   </Link>
                 </div>
@@ -785,14 +684,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           </div>
 
           {/* Fixed Mobile CTA Button */}
-          <div className="border-t border-gray-200/50 p-6 bg-white/95 backdrop-blur-sm">
-            <Link
-              href="/shopping"
-              onClick={() => {
-                setMobileMenuOpen(false)
-                document.body.classList.remove("mobile-menu-open")
-              }}
-            >
+          <div className="border-t border-gray-200/50 p-6 bg-white/95 backdrop-blur-sm mobile-menu-cta">
+            <Link href="/shopping" onClick={toggleMobileMenu}>
               <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation">
                 Book Your Journey
               </Button>
@@ -805,10 +698,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
       {mobileMenuOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-500"
-          onClick={() => {
-            setMobileMenuOpen(false)
-            document.body.classList.remove("mobile-menu-open")
-          }}
+          onClick={toggleMobileMenu}
           aria-hidden="true"
         />
       )}
