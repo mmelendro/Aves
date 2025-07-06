@@ -531,63 +531,63 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* Enhanced Mobile Navigation Slide-out Menu with Improved Scrolling */}
+      {/* Enhanced Mobile Navigation Slide-out Menu with 50% Transparency */}
       <div
         ref={mobileMenuRef}
         className={cn(
           "md:hidden fixed top-0 right-0 h-full z-50 transition-all duration-500 ease-out",
           // Exactly 75% screen width as requested
           "w-[75vw]",
-          // Enhanced transparency for AVES Explorer
-          isAvesExplorer
-            ? "bg-white/90 backdrop-blur-xl border-l border-white/50 shadow-2xl"
-            : "bg-white/95 backdrop-blur-xl border-l border-white/60 shadow-2xl",
+          // 50% transparency effect with enhanced backdrop blur for readability
+          "bg-white/50 backdrop-blur-xl border-l border-white/30 shadow-2xl",
           mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
         )}
         id="mobile-navigation"
         role="navigation"
         aria-label="Mobile navigation menu"
       >
-        {/* Mobile Menu Content with Enhanced Scrolling */}
+        {/* Mobile Menu Content with Enhanced Scrolling and Transparency */}
         <div className="flex flex-col h-full">
-          {/* Scrollable Navigation Content */}
+          {/* Scrollable Navigation Content with Enhanced Contrast */}
           <div className="flex-1 overflow-y-auto pt-20 pb-6 px-6 mobile-menu-scroll-optimized">
             <nav className="space-y-6">
               {/* Tours Section */}
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">Tours</h3>
+                <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-300/60 pb-2 bg-white/40 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm">
+                  Tours
+                </h3>
                 <div className="space-y-2 pl-4">
                   <Link
                     href="/tours"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🗺️ AVES Tours
                   </Link>
                   <Link
                     href="/tours/adventure"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🍃 Adventure Tours
                   </Link>
                   <Link
                     href="/tours/vision"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🪶 Vision Tours
                   </Link>
                   <Link
                     href="/tours/elevate"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🌼 Elevate Tours
                   </Link>
                   <Link
                     href="/tours/souls"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🍓 Souls Tours
@@ -597,32 +597,34 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
               {/* Explore Section */}
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">Explore</h3>
+                <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-300/60 pb-2 bg-white/40 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm">
+                  Explore
+                </h3>
                 <div className="space-y-2 pl-4">
                   <Link
                     href="/aves-explorer"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🦅 Colombia
                   </Link>
                   <Link
                     href="/blog"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     📝 Birding with AVES
                   </Link>
                   <Link
                     href="/resources"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     📚 Birding in Colombia
                   </Link>
                   <Link
                     href="/travel-tips"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     ✈️ Travel Essentials
@@ -632,46 +634,48 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
               {/* AVES Section */}
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">AVES</h3>
+                <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-300/60 pb-2 bg-white/40 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm">
+                  AVES
+                </h3>
                 <div className="space-y-2 pl-4">
                   <Link
                     href="/about"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🏢 About AVES
                   </Link>
                   <Link
                     href="/team"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     👥 Our Team
                   </Link>
                   <Link
                     href="/about/partners"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🤝 Our Partners
                   </Link>
                   <Link
                     href="/about/b-corp"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🌿 Our B Corp Journey
                   </Link>
                   <Link
                     href="/conservation"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     🌱 Conservation
                   </Link>
                   <Link
                     href="/contact"
-                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    className="block py-3 px-3 text-gray-800 hover:text-emerald-700 hover:bg-white/60 rounded-lg transition-all duration-200 touch-manipulation font-medium backdrop-blur-sm shadow-sm"
                     onClick={toggleMobileMenu}
                   >
                     📞 Contact
@@ -681,8 +685,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </nav>
           </div>
 
-          {/* Fixed Mobile CTA Button */}
-          <div className="border-t border-gray-200/50 p-6 bg-white/95 backdrop-blur-sm">
+          {/* Fixed Mobile CTA Button with Enhanced Transparency */}
+          <div className="border-t border-gray-300/50 p-6 bg-white/60 backdrop-blur-lg shadow-lg">
             <Link href="/shopping" onClick={toggleMobileMenu}>
               <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation">
                 Book Your Journey
@@ -692,10 +696,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Menu Backdrop */}
+      {/* Mobile Menu Backdrop with Enhanced Transparency */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-500"
+          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-500"
           onClick={toggleMobileMenu}
           aria-hidden="true"
         />
