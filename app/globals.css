@@ -430,8 +430,21 @@
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .carousel-button {
-    border: 2px solid currentColor;
+  .nav-backdrop {
+    background: white !important;
+    border: 2px solid black !important;
+  }
+
+  .nav-item-hover {
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-item-hover:hover {
+    border-bottom-color: black;
+  }
+
+  .carousel-container {
+    border: 2px solid black;
   }
 
   .mobile-menu-item {
@@ -671,26 +684,6 @@
 @media print {
   header {
     display: none !important;
-  }
-}
-
-/* Unified high contrast mode support */
-@media (prefers-contrast: high) {
-  .nav-backdrop {
-    background: white !important;
-    border: 2px solid black !important;
-  }
-
-  .nav-item-hover {
-    border-bottom: 2px solid transparent;
-  }
-
-  .nav-item-hover:hover {
-    border-bottom-color: black;
-  }
-
-  .carousel-container {
-    border: 2px solid black;
   }
 }
 
