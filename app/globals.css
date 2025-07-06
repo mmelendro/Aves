@@ -13,11 +13,11 @@
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
@@ -68,38 +68,212 @@
   }
 }
 
-/* Enhanced Mobile Menu with Refined 50% Transparency Effects and Smooth Scrolling */
+/* Custom scrollbar styles */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced mobile navigation styles */
 @media (max-width: 768px) {
-  /* Smooth page content sliding when mobile menu is open */
+  .mobile-nav-overlay {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .mobile-nav-content {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Ensure smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+    transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Custom focus styles for better accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Enhanced backdrop blur support */
+@supports (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Ensure proper z-index stacking */
+.mobile-nav-trigger {
+  z-index: 50;
+}
+
+.mobile-nav-sheet {
+  z-index: 100;
+}
+
+/* Smooth scroll snap for better navigation */
+.scroll-snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-start {
+  scroll-snap-align: start;
+}
+
+/* Enhanced touch targets for mobile */
+@media (max-width: 768px) {
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Improved text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Enhanced mobile menu styles */
+.mobile-menu-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.mobile-menu-item:hover {
+  transform: translateX(4px);
+}
+
+.mobile-menu-item:active {
+  transform: translateX(2px);
+  transition-duration: 0.1s;
+}
+
+/* Ensure proper contrast for accessibility */
+.text-contrast {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced glass morphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive design utilities */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .backdrop-blur-md {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced Mobile Menu with Advanced Smooth Scrolling and Refined 50% Transparency */
+@media (max-width: 768px) {
+  /* Advanced smooth page content sliding when mobile menu is open */
   body.mobile-menu-open,
   html.mobile-menu-open {
     overflow: hidden;
+    scroll-behavior: smooth;
   }
 
-  /* Enhanced smooth sliding animation for page content */
+  /* Enhanced smooth sliding animation for page content with hardware acceleration */
   body.mobile-menu-open > *:not(header):not([data-mobile-menu]),
   html.mobile-menu-open body > *:not(header):not([data-mobile-menu]) {
     transform: translateX(-50vw);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
   }
 
-  /* Ensure header stays perfectly positioned */
+  /* Ensure header stays perfectly positioned with enhanced z-index */
   body.mobile-menu-open header,
   html.mobile-menu-open header {
     transform: none !important;
     z-index: 60;
+    position: relative;
   }
 
-  /* Smooth return animation when menu closes */
+  /* Enhanced smooth return animation when menu closes */
   body:not(.mobile-menu-open) > *:not(header),
   html:not(.mobile-menu-open) body > *:not(header) {
     transform: translateX(0);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
+    backface-visibility: hidden;
   }
 
-  /* Enhanced Mobile Menu Scrolling Optimization with Refined Transparency */
+  /* Advanced Mobile Menu Scrolling Optimization with Refined Transparency */
   .mobile-menu-scroll-optimized {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
@@ -107,10 +281,11 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
     scroll-snap-type: y proximity;
+    scroll-padding-top: 1rem;
   }
 
   .mobile-menu-scroll-optimized::-webkit-scrollbar {
-    width: 3px;
+    width: 4px;
   }
 
   .mobile-menu-scroll-optimized::-webkit-scrollbar-track {
@@ -127,6 +302,11 @@
     background-color: rgba(156, 163, 175, 0.6);
   }
 
+  /* Enhanced scrolling indicator for active scroll state */
+  .mobile-menu-scroll-optimized.scrolling::-webkit-scrollbar-thumb {
+    background-color: rgba(16, 185, 129, 0.6);
+  }
+
   /* Enhanced touch targets for mobile menu items with refined transparency */
   .touch-manipulation {
     min-height: 48px;
@@ -134,32 +314,39 @@
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
-  /* Refined mobile menu transparency effects with better backdrop blur */
+  /* Refined mobile menu transparency effects with enhanced backdrop blur */
   .mobile-menu-transparent {
     background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%) brightness(110%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(110%);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 0 0 1px
+      rgba(255, 255, 255, 0.1);
   }
 
-  /* Enhanced text contrast for refined transparency */
+  /* Enhanced text contrast for refined transparency with better readability */
   .mobile-menu-text-enhanced {
     color: rgb(17, 24, 39) !important;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
     letter-spacing: -0.01em;
+    line-height: 1.4;
   }
 
-  /* Enhanced section headers with refined glass effect */
+  /* Enhanced section headers with refined glass effect and better contrast */
   .mobile-menu-section-header {
     background: rgba(255, 255, 255, 0.65) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%) brightness(105%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%) brightness(105%);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 0 0 1px
+      rgba(255, 255, 255, 0.1);
     color: rgb(17, 24, 39) !important;
     font-weight: 700;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
@@ -169,8 +356,8 @@
   /* Enhanced menu item backgrounds with refined transparency and smooth interactions */
   .mobile-menu-item-enhanced {
     background: rgba(255, 255, 255, 0.45) !important;
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    backdrop-filter: blur(12px) saturate(150%) brightness(102%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%) brightness(102%);
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
     color: rgb(31, 41, 55) !important;
@@ -178,6 +365,7 @@
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     scroll-snap-align: start;
+    scroll-margin-top: 0.5rem;
   }
 
   .mobile-menu-item-enhanced:hover,
@@ -185,7 +373,7 @@
     background: rgba(255, 255, 255, 0.75) !important;
     color: rgb(5, 150, 105) !important;
     transform: translateX(6px) scale(1.02);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 0 0 1px rgba(5, 150, 105, 0.2);
     border-color: rgba(5, 150, 105, 0.2);
   }
 
@@ -197,8 +385,8 @@
   /* Enhanced CTA button area with refined transparency */
   .mobile-menu-cta-area {
     background: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%) brightness(108%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(108%);
     border-top: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
   }
@@ -210,85 +398,102 @@
     -webkit-backdrop-filter: blur(6px);
   }
 
-  /* Smooth scroll behavior for menu sections */
+  /* Advanced smooth scroll behavior for menu sections */
   .mobile-menu-scroll-optimized > nav > div {
     scroll-snap-align: start;
     scroll-margin-top: 1rem;
   }
 
-  /* Enhanced carousel container positioning with smooth transitions */
-  .carousel-container {
-    position: relative;
-    z-index: 10;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  .scroll-snap-start {
+    scroll-snap-align: start;
+    scroll-margin-top: 1rem;
+  }
+
+  /* Enhanced performance optimizations for smooth scrolling */
+  .mobile-menu-scroll-optimized * {
     will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
-  /* Maintain carousel interactivity during slide animation */
-  body.mobile-menu-open .carousel-container {
-    pointer-events: auto;
-    transform: translateX(-50vw);
-  }
-
-  /* Ensure carousel buttons remain perfectly clickable */
-  body.mobile-menu-open .carousel-button {
-    pointer-events: auto;
-    position: relative;
-    z-index: 15;
-  }
-
-  /* Enhanced carousel thumbnail positioning */
-  .carousel-thumbnails {
-    position: relative;
-    z-index: 20;
-    margin-top: 0;
-    padding: 16px 12px;
-    border-top: 1px solid rgba(229, 231, 235, 0.5);
-  }
-
-  /* Enhanced navigation button positioning */
-  .carousel-nav-button {
+  /* Advanced touch feedback for better mobile experience */
+  .mobile-menu-item-enhanced:active::before {
+    content: "";
     position: absolute;
-    z-index: 30;
-    min-width: 48px;
-    min-height: 48px;
-    touch-action: manipulation;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(5, 150, 105, 0.1);
+    border-radius: inherit;
+    pointer-events: none;
+    animation: touch-feedback 0.2s ease-out;
   }
 
-  /* Enhanced touch targets for mobile */
-  .carousel-button {
-    min-width: 48px;
-    min-height: 48px;
-    touch-action: manipulation;
+  @keyframes touch-feedback {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Enhanced mobile menu button with better feedback */
+  .mobile-menu-btn {
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* Prevent thumbnail overlap with navigation buttons */
-  .carousel-thumbnail {
     position: relative;
-    z-index: 25;
-    min-width: 48px;
-    min-height: 48px;
-    touch-action: manipulation;
+    overflow: hidden;
+  }
+
+  .mobile-menu-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .mobile-menu-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Enhanced logo animation for better visual feedback */
+  .logo-animation {
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
-}
 
-/* Enhanced Mobile Carousel Optimizations */
-@media (max-width: 768px) {
-  /* Smooth touch scrolling for carousel thumbnails */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .logo-animation:hover {
+    transform: scale(1.05) rotate(2deg);
+  }
+
+  /* Advanced scroll momentum for iOS devices */
+  .mobile-menu-scroll-optimized {
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
   }
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  /* Enhanced focus management for accessibility */
+  .mobile-menu-item-enhanced:focus-visible {
+    outline: 2px solid rgb(5, 150, 105);
+    outline-offset: 2px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 0 0 4px rgba(5, 150, 105, 0.2);
   }
 
-  /* Prevent text selection during swipe */
-  .carousel-container {
+  /* Enhanced button focus states */
+  .touch-manipulation:focus-visible {
+    outline: 2px solid rgb(5, 150, 105);
+    outline-offset: 2px;
+  }
+
+  /* Improved text selection prevention during interactions */
+  .mobile-menu-transparent * {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -296,21 +501,62 @@
     -webkit-touch-callout: none;
   }
 
-  /* Optimize touch interactions */
-  .carousel-touch-area {
-    touch-action: pan-x pinch-zoom;
+  /* Allow text selection for readable content */
+  .mobile-menu-text-enhanced {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
   }
+}
 
-  /* Prevent bounce scrolling on carousel */
-  .carousel-no-bounce {
+/* Enhanced Mobile Carousel Optimizations for Smooth Scrolling */
+@media (max-width: 768px) {
+  /* Advanced smooth touch scrolling for carousel thumbnails */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     overscroll-behavior: contain;
   }
 
-  /* Smooth scrolling for mobile menu */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Enhanced text selection prevention during swipe with better performance */
+  .carousel-container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Advanced touch interactions optimization */
+  .carousel-touch-area {
+    touch-action: pan-x pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced bounce scrolling prevention */
+  .carousel-no-bounce {
+    overscroll-behavior: contain;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+  }
+
+  /* Advanced smooth scrolling for mobile menu with momentum */
   .mobile-menu-scroll {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     overscroll-behavior: contain;
+    scroll-snap-type: y proximity;
   }
 }
 
@@ -560,17 +806,6 @@
 
 .dropdown-animation {
   animation: dropdown-fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes dropdown-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .cta-button {
@@ -955,7 +1190,7 @@
 
 .hover-caribbean-lift:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px -4px rgba(14, 165, 233, 0.4), 0 8px 16px -4px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.4), 0 8px 16px rgba(6, 182, 212, 0.3);
 }
 
 /* Caribbean Button Styles */
@@ -1122,5 +1357,93 @@
   .card-caribbean {
     border: 1px solid black !important;
     box-shadow: none !important;
+  }
+}
+
+/* Enhanced Performance Optimizations for Smooth Animations */
+.mobile-menu-transparent,
+.mobile-menu-section-header,
+.mobile-menu-item-enhanced,
+.mobile-menu-cta-area,
+.mobile-menu-btn,
+.logo-animation {
+  will-change: transform, opacity, background;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Advanced Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-item-enhanced,
+  .mobile-menu-btn,
+  .logo-animation,
+  body.mobile-menu-open > *:not(header):not([data-mobile-menu]),
+  html.mobile-menu-open body > *:not(header):not([data-mobile-menu]),
+  body:not(.mobile-menu-open) > *:not(header),
+  html:not(.mobile-menu-open) body > *:not(header) {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .mobile-menu-scroll-optimized {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .mobile-menu-transparent {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgb(0, 0, 0) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .mobile-menu-text-enhanced {
+    color: rgb(0, 0, 0) !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
+  }
+
+  .mobile-menu-item-enhanced {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid rgb(0, 0, 0) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .mobile-menu-section-header {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgb(0, 0, 0) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Advanced Browser Compatibility Fallbacks */
+@supports not (backdrop-filter: blur(24px)) {
+  .mobile-menu-transparent {
+    background: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .mobile-menu-section-header {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .mobile-menu-item-enhanced {
+    background: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .mobile-menu-cta-area {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+/* Enhanced Print Styles */
+@media print {
+  .mobile-menu-transparent,
+  .mobile-menu-btn,
+  [data-mobile-menu] {
+    display: none !important;
   }
 }

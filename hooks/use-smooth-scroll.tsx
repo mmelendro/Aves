@@ -14,14 +14,14 @@ export function useSmoothScroll() {
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
         const offsetPosition = elementPosition - offset
 
-        // Use smooth scrolling with fallback
+        // Enhanced smooth scrolling with better browser support
         if ("scrollBehavior" in document.documentElement.style) {
           window.scrollTo({
             top: offsetPosition,
             behavior: "smooth",
           })
         } else {
-          // Fallback for browsers that don't support smooth scrolling
+          // Enhanced fallback for browsers that don't support smooth scrolling
           smoothScrollPolyfill(offsetPosition)
         }
 
@@ -44,7 +44,7 @@ export function useSmoothScroll() {
   return { scrollToSection }
 }
 
-// Polyfill for smooth scrolling in older browsers
+// Enhanced polyfill for smooth scrolling with better easing
 function smoothScrollPolyfill(targetPosition: number) {
   const startPosition = window.pageYOffset
   const distance = targetPosition - startPosition
@@ -54,16 +54,16 @@ function smoothScrollPolyfill(targetPosition: number) {
   function animation(currentTime: number) {
     if (start === null) start = currentTime
     const timeElapsed = currentTime - start
-    const run = ease(timeElapsed, startPosition, distance, duration)
+    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration)
     window.scrollTo(0, run)
     if (timeElapsed < duration) requestAnimationFrame(animation)
   }
 
-  function ease(t: number, b: number, c: number, d: number) {
+  function easeInOutCubic(t: number, b: number, c: number, d: number) {
     t /= d / 2
-    if (t < 1) return (c / 2) * t * t + b
-    t--
-    return (-c / 2) * (t * (t - 2) - 1) + b
+    if (t < 1) return (c / 2) * t * t * t + b
+    t -= 2
+    return (c / 2) * (t * t * t + 2) + b
   }
 
   requestAnimationFrame(animation)
