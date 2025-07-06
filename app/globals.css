@@ -68,39 +68,160 @@
   }
 }
 
-/* Enhanced Mobile Menu with 50% Transparency Effects */
+/* Enhanced Mobile Menu with Refined 50% Transparency Effects and Smooth Scrolling */
 @media (max-width: 768px) {
-  /* Apply sliding effect to the entire page content when mobile menu is open */
+  /* Smooth page content sliding when mobile menu is open */
   body.mobile-menu-open,
   html.mobile-menu-open {
     overflow: hidden;
   }
 
-  /* Push all content to the left by exactly half screen width */
+  /* Enhanced smooth sliding animation for page content */
   body.mobile-menu-open > *:not(header):not([data-mobile-menu]),
   html.mobile-menu-open body > *:not(header):not([data-mobile-menu]) {
     transform: translateX(-50vw);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
   /* Ensure header stays perfectly positioned */
   body.mobile-menu-open header,
   html.mobile-menu-open header {
     transform: none !important;
+    z-index: 60;
   }
 
-  /* Default state - content in normal position with smooth return */
+  /* Smooth return animation when menu closes */
   body:not(.mobile-menu-open) > *:not(header),
   html:not(.mobile-menu-open) body > *:not(header) {
     transform: translateX(0);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
-  /* Enhanced carousel container positioning */
+  /* Enhanced Mobile Menu Scrolling Optimization with Refined Transparency */
+  .mobile-menu-scroll-optimized {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+    scroll-snap-type: y proximity;
+  }
+
+  .mobile-menu-scroll-optimized::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .mobile-menu-scroll-optimized::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .mobile-menu-scroll-optimized::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.4);
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+  }
+
+  .mobile-menu-scroll-optimized::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.6);
+  }
+
+  /* Enhanced touch targets for mobile menu items with refined transparency */
+  .touch-manipulation {
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+
+  /* Refined mobile menu transparency effects with better backdrop blur */
+  .mobile-menu-transparent {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  }
+
+  /* Enhanced text contrast for refined transparency */
+  .mobile-menu-text-enhanced {
+    color: rgb(17, 24, 39) !important;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+    letter-spacing: -0.01em;
+  }
+
+  /* Enhanced section headers with refined glass effect */
+  .mobile-menu-section-header {
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+    color: rgb(17, 24, 39) !important;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Enhanced menu item backgrounds with refined transparency and smooth interactions */
+  .mobile-menu-item-enhanced {
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+    color: rgb(31, 41, 55) !important;
+    font-weight: 500;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    scroll-snap-align: start;
+  }
+
+  .mobile-menu-item-enhanced:hover,
+  .mobile-menu-item-enhanced:focus {
+    background: rgba(255, 255, 255, 0.75) !important;
+    color: rgb(5, 150, 105) !important;
+    transform: translateX(6px) scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+    border-color: rgba(5, 150, 105, 0.2);
+  }
+
+  .mobile-menu-item-enhanced:active {
+    transform: translateX(3px) scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Enhanced CTA button area with refined transparency */
+  .mobile-menu-cta-area {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  }
+
+  /* Enhanced backdrop with refined opacity for better content visibility */
+  .mobile-menu-backdrop-transparent {
+    background: rgba(0, 0, 0, 0.12) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* Smooth scroll behavior for menu sections */
+  .mobile-menu-scroll-optimized > nav > div {
+    scroll-snap-align: start;
+    scroll-margin-top: 1rem;
+  }
+
+  /* Enhanced carousel container positioning with smooth transitions */
   .carousel-container {
     position: relative;
     z-index: 10;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
   /* Maintain carousel interactivity during slide animation */
@@ -116,15 +237,6 @@
     z-index: 15;
   }
 
-  /* Prevent carousel from interfering with menu backdrop */
-  .carousel-container .absolute {
-    z-index: auto;
-  }
-
-  .carousel-container .z-50 {
-    z-index: 45; /* Lower than mobile menu z-index */
-  }
-
   /* Enhanced carousel thumbnail positioning */
   .carousel-thumbnails {
     position: relative;
@@ -132,6 +244,23 @@
     margin-top: 0;
     padding: 16px 12px;
     border-top: 1px solid rgba(229, 231, 235, 0.5);
+  }
+
+  /* Enhanced navigation button positioning */
+  .carousel-nav-button {
+    position: absolute;
+    z-index: 30;
+    min-width: 48px;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  /* Enhanced touch targets for mobile */
+  .carousel-button {
+    min-width: 48px;
+    min-height: 48px;
+    touch-action: manipulation;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Prevent thumbnail overlap with navigation buttons */
@@ -142,112 +271,6 @@
     min-height: 48px;
     touch-action: manipulation;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* Enhanced navigation button positioning */
-  .carousel-nav-button {
-    position: absolute;
-    z-index: 30;
-    min-width: 44px;
-    min-height: 44px;
-    touch-action: manipulation;
-  }
-
-  /* Enhanced Mobile Menu Scrolling Optimization with 50% Transparency */
-  .mobile-menu-scroll-optimized {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(156, 163, 175, 0.6) transparent;
-  }
-
-  .mobile-menu-scroll-optimized::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .mobile-menu-scroll-optimized::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .mobile-menu-scroll-optimized::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.6);
-    border-radius: 2px;
-  }
-
-  .mobile-menu-scroll-optimized::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(156, 163, 175, 0.8);
-  }
-
-  /* Enhanced touch targets for mobile menu items with transparency */
-  .touch-manipulation {
-    min-height: 44px;
-    min-width: 44px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Enhanced mobile menu transparency effects */
-  .mobile-menu-transparent {
-    background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Enhanced text contrast for 50% transparency */
-  .mobile-menu-text-enhanced {
-    color: rgb(17, 24, 39) !important;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-  }
-
-  /* Enhanced section headers with better contrast */
-  .mobile-menu-section-header {
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    color: rgb(17, 24, 39) !important;
-    font-weight: 700;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
-  }
-
-  /* Enhanced menu item backgrounds with transparency */
-  .mobile-menu-item-enhanced {
-    background: rgba(255, 255, 255, 0.4) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    color: rgb(31, 41, 55) !important;
-    font-weight: 500;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
-  }
-
-  .mobile-menu-item-enhanced:hover {
-    background: rgba(255, 255, 255, 0.7) !important;
-    color: rgb(5, 150, 105) !important;
-    transform: translateX(4px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Enhanced CTA button area with transparency */
-  .mobile-menu-cta-area {
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Enhanced backdrop with reduced opacity */
-  .mobile-menu-backdrop-transparent {
-    background: rgba(0, 0, 0, 0.15) !important;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
   }
 }
 
@@ -281,14 +304,6 @@
   /* Prevent bounce scrolling on carousel */
   .carousel-no-bounce {
     overscroll-behavior: contain;
-  }
-
-  /* Enhanced touch targets for mobile */
-  .carousel-button {
-    min-width: 44px;
-    min-height: 44px;
-    touch-action: manipulation;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Smooth scrolling for mobile menu */
@@ -407,6 +422,10 @@
   html:not(.mobile-menu-open) body > *:not(header) {
     transition: none !important;
   }
+
+  .mobile-menu-item-enhanced {
+    transition: none !important;
+  }
 }
 
 /* High contrast mode support */
@@ -425,7 +444,7 @@
 
   /* Enhanced contrast for transparent mobile menu */
   .mobile-menu-transparent {
-    background: rgba(255, 255, 255, 0.9) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     border: 2px solid rgb(0, 0, 0) !important;
   }
 
@@ -433,6 +452,11 @@
     color: rgb(0, 0, 0) !important;
     font-weight: 700 !important;
     text-shadow: none !important;
+  }
+
+  .mobile-menu-item-enhanced {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid rgb(0, 0, 0) !important;
   }
 }
 
