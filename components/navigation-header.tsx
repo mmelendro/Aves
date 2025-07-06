@@ -16,11 +16,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const [desktopMenuExpanded, setDesktopMenuExpanded] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuHeight, setMobileMenuHeight] = useState(0)
-  const [isMenuAnimating, setIsMenuAnimating] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-  const mobileMenuContentRef = useRef<HTMLDivElement>(null)
   const collapseTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Handle scroll detection for consistent background across all pages
@@ -52,44 +49,6 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
       }
     }
   }, [])
-
-  // Enhanced mobile menu height calculation with smooth transitions
-  useEffect(() => {
-    const calculateMobileMenuHeight = () => {
-      if (mobileMenuContentRef.current && mobileMenuOpen) {
-        const contentHeight = mobileMenuContentRef.current.scrollHeight
-        const viewportHeight = window.innerHeight
-        const headerHeight = 80 // Account for header space
-        const maxHeight = Math.min(contentHeight + 40, viewportHeight - headerHeight)
-
-        // Smooth height transition
-        setMobileMenuHeight(maxHeight)
-      } else {
-        setMobileMenuHeight(0)
-      }
-    }
-
-    if (mobileMenuOpen) {
-      setIsMenuAnimating(true)
-      // Small delay to ensure DOM is ready
-      const timer = setTimeout(() => {
-        calculateMobileMenuHeight()
-        setIsMenuAnimating(false)
-      }, 50)
-
-      window.addEventListener("resize", calculateMobileMenuHeight)
-      window.addEventListener("orientationchange", calculateMobileMenuHeight)
-
-      return () => {
-        clearTimeout(timer)
-        window.removeEventListener("resize", calculateMobileMenuHeight)
-        window.removeEventListener("orientationchange", calculateMobileMenuHeight)
-      }
-    } else {
-      setMobileMenuHeight(0)
-      setIsMenuAnimating(false)
-    }
-  }, [mobileMenuOpen])
 
   // Handle auto-collapse after 3 seconds when cursor leaves menu area
   useEffect(() => {
@@ -143,29 +102,27 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     }
   }
 
-  // Enhanced mobile menu toggle with smooth scrolling
+  // Enhanced mobile menu toggle with improved scroll management
   const toggleMobileMenu = () => {
     try {
       const newState = !mobileMenuOpen
       setMobileMenuOpen(newState)
 
       if (newState) {
-        // Smooth scroll to top when opening menu for better UX
-        window.scrollTo({ top: 0, behavior: "smooth" })
-        document.body.classList.add("mobile-menu-open")
-        // Prevent body scroll
-        document.body.style.overflow = "hidden"
+        // Store current scroll position
+        const scrollY = window.scrollY
         document.body.style.position = "fixed"
+        document.body.style.top = `-${scrollY}px`
         document.body.style.width = "100%"
-        document.body.style.top = `-${window.scrollY}px`
+        document.body.style.overflow = "hidden"
       } else {
-        // Restore scroll position when closing
+        // Restore scroll position
         const scrollY = document.body.style.top
-        document.body.classList.remove("mobile-menu-open")
-        document.body.style.overflow = ""
         document.body.style.position = ""
-        document.body.style.width = ""
         document.body.style.top = ""
+        document.body.style.width = ""
+        document.body.style.overflow = ""
+
         if (scrollY) {
           window.scrollTo(0, Number.parseInt(scrollY || "0") * -1)
         }
@@ -574,12 +531,12 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* Enhanced Mobile Navigation Slide-out Menu with Dynamic Height and Smooth Scrolling */}
+      {/* Enhanced Mobile Navigation Slide-out Menu with Improved Scrolling */}
       <div
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden fixed top-0 right-0 z-50 transition-all duration-500 ease-out overflow-hidden",
-          // Dynamic width - 75% screen width
+          "md:hidden fixed top-0 right-0 h-full z-50 transition-all duration-500 ease-out",
+          // Exactly 75% screen width as requested
           "w-[75vw]",
           // Enhanced transparency for AVES Explorer
           isAvesExplorer
@@ -587,95 +544,136 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             : "bg-white/95 backdrop-blur-xl border-l border-white/60 shadow-2xl",
           mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
         )}
-        style={{
-          height: mobileMenuOpen ? `${mobileMenuHeight}px` : "0px",
-          maxHeight: "100vh",
-          top: "80px", // Start below header
-          transition:
-            "height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s ease-out, opacity 0.5s ease-out",
-        }}
         id="mobile-navigation"
         role="navigation"
         aria-label="Mobile navigation menu"
       >
         {/* Mobile Menu Content with Enhanced Scrolling */}
-        <div
-          ref={mobileMenuContentRef}
-          className={cn(
-            "flex flex-col h-full transition-opacity duration-300",
-            isMenuAnimating ? "opacity-0" : "opacity-100",
-          )}
-        >
+        <div className="flex flex-col h-full">
           {/* Scrollable Navigation Content */}
-          <div className="flex-1 overflow-y-auto py-6 px-6 mobile-menu-scroll-enhanced">
+          <div className="flex-1 overflow-y-auto pt-20 pb-6 px-6 mobile-menu-scroll-optimized">
             <nav className="space-y-6">
               {/* Tours Section */}
-              <div className="space-y-3 mobile-menu-section">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2 mobile-menu-header">
-                  Tours
-                </h3>
-                <div className="space-y-1 pl-4">
-                  <Link href="/tours" className="mobile-menu-link" onClick={toggleMobileMenu}>
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">Tours</h3>
+                <div className="space-y-2 pl-4">
+                  <Link
+                    href="/tours"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🗺️ AVES Tours
                   </Link>
-                  <Link href="/tours/adventure" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/tours/adventure"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🍃 Adventure Tours
                   </Link>
-                  <Link href="/tours/vision" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/tours/vision"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🪶 Vision Tours
                   </Link>
-                  <Link href="/tours/elevate" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/tours/elevate"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🌼 Elevate Tours
                   </Link>
-                  <Link href="/tours/souls" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/tours/souls"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🍓 Souls Tours
                   </Link>
                 </div>
               </div>
 
               {/* Explore Section */}
-              <div className="space-y-3 mobile-menu-section">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2 mobile-menu-header">
-                  Explore
-                </h3>
-                <div className="space-y-1 pl-4">
-                  <Link href="/aves-explorer" className="mobile-menu-link" onClick={toggleMobileMenu}>
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">Explore</h3>
+                <div className="space-y-2 pl-4">
+                  <Link
+                    href="/aves-explorer"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🦅 Colombia
                   </Link>
-                  <Link href="/blog" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/blog"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     📝 Birding with AVES
                   </Link>
-                  <Link href="/resources" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/resources"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     📚 Birding in Colombia
                   </Link>
-                  <Link href="/travel-tips" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/travel-tips"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     ✈️ Travel Essentials
                   </Link>
                 </div>
               </div>
 
               {/* AVES Section */}
-              <div className="space-y-3 mobile-menu-section">
-                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2 mobile-menu-header">
-                  AVES
-                </h3>
-                <div className="space-y-1 pl-4">
-                  <Link href="/about" className="mobile-menu-link" onClick={toggleMobileMenu}>
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200/50 pb-2">AVES</h3>
+                <div className="space-y-2 pl-4">
+                  <Link
+                    href="/about"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🏢 About AVES
                   </Link>
-                  <Link href="/team" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/team"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     👥 Our Team
                   </Link>
-                  <Link href="/about/partners" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/about/partners"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🤝 Our Partners
                   </Link>
-                  <Link href="/about/b-corp" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/about/b-corp"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🌿 Our B Corp Journey
                   </Link>
-                  <Link href="/conservation" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/conservation"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     🌱 Conservation
                   </Link>
-                  <Link href="/contact" className="mobile-menu-link" onClick={toggleMobileMenu}>
+                  <Link
+                    href="/contact"
+                    className="block py-3 px-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 rounded-lg transition-all duration-200 touch-manipulation"
+                    onClick={toggleMobileMenu}
+                  >
                     📞 Contact
                   </Link>
                 </div>
@@ -684,7 +682,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           </div>
 
           {/* Fixed Mobile CTA Button */}
-          <div className="border-t border-gray-200/50 p-6 bg-white/95 backdrop-blur-sm mobile-menu-cta">
+          <div className="border-t border-gray-200/50 p-6 bg-white/95 backdrop-blur-sm">
             <Link href="/shopping" onClick={toggleMobileMenu}>
               <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation">
                 Book Your Journey
