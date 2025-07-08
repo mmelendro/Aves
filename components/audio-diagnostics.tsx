@@ -16,9 +16,9 @@ interface AudioTestResult {
 }
 
 const audioFiles = [
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-njVmyxK8Wn7VWVxZmnAUGhKKqEHDmg.mp3", name: "Green-bearded Helmetcrest" },
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-zlI0qx9zdy6wFmPwI8rEJXXYXjJp3H.mp3", name: "Rainbow-bearded Thornbill" },
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-6pqzdAPhoSOUOXsdXTRugdtXK67CbY.mp3", name: "Chestnut-crowned Antpitta" },
+  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3", name: "Green-bearded Helmetcrest" },
+  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3", name: "Rainbow-bearded Thornbill" },
+  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3", name: "Chestnut-crowned Antpitta" },
   { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Yellow-throated%20Toucan-YZaM0Q4HERiJp55ECemjfgYkdJIYwZ.mp3", name: "Yellow-throated Toucan" },
 ]
 
