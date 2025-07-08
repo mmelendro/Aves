@@ -250,6 +250,33 @@ const partners = [
     tags: ["Hummingbirds", "Hot Springs", "Paramo", "Photography"],
   },
   {
+    id: "observatorio-aves-el-faunal",
+    name: "Observatorio de Aves El Faunal",
+    type: "Bird Observatory & Ecolodge",
+    location: "Minca, Sierra Nevada de Santa Marta",
+    description:
+      "A specialized bird observatory and ecolodge located in the heart of Minca, offering exceptional birding opportunities in the Sierra Nevada de Santa Marta. El Faunal provides comfortable eco-friendly accommodation surrounded by lush tropical vegetation, making it an ideal base for exploring the incredible avian diversity of this UNESCO Biosphere Reserve.",
+    specialties: ["Bird Observatory", "Sierra Nevada Birding", "Eco-accommodation", "Tropical Species", "Photography"],
+    website: "https://www.observatoriodeavesdeminca.com/",
+    socialMedia: {
+      facebook: "https://www.facebook.com/FaunalMinca/",
+    },
+    established: "2015",
+    area: "Private reserve in tropical forest",
+    elevation: "600-1,200m",
+    highlights: [
+      "Strategic location in Sierra Nevada",
+      "Specialized bird observation facilities",
+      "Eco-friendly lodge accommodation",
+      "Tropical forest birding",
+      "Photography opportunities",
+      "Expert local guides",
+    ],
+    category: "lodges",
+    logo: "/images/partners/el-faunal.jpg",
+    tags: ["Sierra Nevada", "Observatory", "Tropical Forest", "Photography"],
+  },
+  {
     id: "reserva-rio-blanco",
     name: "Reserva Río Blanco",
     type: "Cloud Forest Reserve",
