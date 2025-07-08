@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Mail, MapPin, Clock, ArrowRight, CheckCircle, ExternalLink, Map } from "lucide-react"
+import { Mail, ArrowRight, CheckCircle, ExternalLink, Map } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
@@ -77,12 +77,12 @@ Desired Locations: ${selectedLocations.length > 0 ? selectedLocations.join(", ")
 
 Special Interests/Requests: ${formData.specialRequests || "None specified"}
 
-I look forward to hearing from you within 24 hours as mentioned on your website.
+I look forward to hearing from you soon.
 
 Best regards,
 ${formData.firstName} ${formData.lastName}`)
 
-    return `mailto:info@aves.bio?subject=${subject}&body=${body}`
+    return `mailto:contact@aves.bio?subject=${subject}&body=${body}`
   }
 
   return (
@@ -91,9 +91,9 @@ ${formData.firstName} ${formData.lastName}`)
       <NavigationHeader currentPage="/contact" />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-16 lg:py-24">
+      <section className="relative bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
               🌿 Expert Birding Consultations
             </Badge>
@@ -102,64 +102,20 @@ ${formData.firstName} ${formData.lastName}`)
               <span className="text-emerald-600 block">Birding Adventure</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Connect with our expert ornithologists to design your perfect Colombian birding expedition. We respond
-              within 24 hours with personalized recommendations.
+              Connect with our expert ornithologists to design your perfect Colombian birding expedition. Share your
+              interests and we'll create a personalized recommendation.
             </p>
-          </div>
-
-          {/* Contact Methods */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <Card className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="w-8 h-8 text-emerald-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Email Us</h3>
-                <p className="text-gray-600 mb-4">Get personalized tour recommendations</p>
-                <a
-                  href="mailto:info@aves.bio"
-                  className="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
-                >
-                  info@aves.bio
-                </a>
-                <div className="text-sm text-gray-500 mt-2">24-hour response guarantee</div>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Visit Us</h3>
-                <p className="text-gray-600 mb-4">Based in Colombia's capital</p>
-                <div className="text-gray-700 font-medium">Vancouver, Canada and Bogota, Colombia</div>
-                <div className="text-sm text-gray-500 mt-2">Operating in Colombia</div>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-8 h-8 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Response Time</h3>
-                <p className="text-gray-600 mb-4">Fast, professional service</p>
-                <div className="text-purple-600 font-bold text-lg">Within 24 Hours</div>
-                <div className="text-sm text-gray-500 mt-2">Guaranteed response</div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="shadow-xl border-0">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+              <CardHeader className="text-center pb-6">
+                <CardTitle className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                   Tell Us About Your Birding Interests
                 </CardTitle>
                 <p className="text-gray-600 text-lg">
@@ -361,7 +317,7 @@ ${formData.firstName} ${formData.lastName}`)
                     </a>
 
                     <p className="text-gray-500 text-center text-sm">
-                      We'll respond within 24 hours with personalized recommendations
+                      We'll get back to you with personalized recommendations
                     </p>
                   </div>
 
@@ -445,33 +401,6 @@ ${formData.firstName} ${formData.lastName}`)
                         </Link>
                       </div>
                     </div>
-
-                    {/* Direct Contact */}
-                    <div className="border-t border-emerald-200 pt-4 mt-6">
-                      <h4 className="font-medium text-gray-900 mb-3">Direct Contact</h4>
-                      <div className="space-y-3">
-                        <div className="flex items-start space-x-3">
-                          <Mail className="text-emerald-600 mt-1 flex-shrink-0 w-4 h-4" />
-                          <div>
-                            <a
-                              href="mailto:info@aves.bio"
-                              className="text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                            >
-                              info@aves.bio
-                            </a>
-                            <div className="text-gray-600 text-xs">24-hour response guarantee</div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start space-x-3">
-                          <MapPin className="text-emerald-600 mt-1 flex-shrink-0 w-4 h-4" />
-                          <div>
-                            <div className="text-gray-700 text-sm">Vancouver, Canada and Bogota, Colombia</div>
-                            <div className="text-gray-600 text-xs">Operating in Colombia</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -481,10 +410,10 @@ ${formData.firstName} ${formData.lastName}`)
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
               <p className="text-gray-600 text-lg">Common questions about planning your Colombian birding adventure</p>
             </div>
