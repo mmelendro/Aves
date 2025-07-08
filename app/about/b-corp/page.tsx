@@ -2,7 +2,19 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Target, Users, Leaf, Globe, Award, ArrowRight } from "lucide-react"
+import {
+  CheckCircle,
+  Clock,
+  Target,
+  Users,
+  Leaf,
+  Globe,
+  Award,
+  ArrowRight,
+  PowerIcon as Gear,
+  Hourglass,
+  ExternalLink,
+} from "lucide-react"
 import Link from "next/link"
 import { useEffect } from "react"
 import { NavigationHeader } from "@/components/navigation-header"
@@ -23,273 +35,148 @@ export default function BCorpPage() {
         <div className="container mx-auto px-4 text-center">
           <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌱 Sustainability Journey</Badge>
           <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Our B Corp Journey</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            AVES is committed to becoming the first B Corp certified birding company in Colombia, joining BirdsChile as
-            only the second birding-focused B Corp globally. Our journey toward certification reflects our dedication to
-            the highest standards of social and environmental responsibility.
-          </p>
+
+          {/* Introductory Summary */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto mb-8 border border-emerald-100">
+            <p className="text-xl text-gray-700 font-medium leading-relaxed">
+              AVES is committed to becoming the first B Corp certified birding company operating in Colombia. Our
+              journey toward certification reflects our dedication to meeting the rigorous standards set by{" "}
+              <a
+                href="https://www.bcorporation.net/en-us/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 hover:text-emerald-700 font-semibold underline decoration-2 underline-offset-2 transition-colors duration-200 inline-flex items-center gap-1"
+              >
+                B Lab
+                <ExternalLink className="w-4 h-4" />
+              </a>{" "}
+              for social and environmental responsibility in sustainable birding tourism.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* What is B Corp Section */}
-      <section className="py-20">
+      {/* What is B Corp Section - Condensed */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Does B Corp Certification Mean?</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              B Corp certification is awarded to companies that meet the highest standards of verified social and
-              environmental performance, public transparency, and legal accountability to balance profit and purpose.
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">B Corp Certification Standards</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              B Corp certification requires meeting the highest verified standards across five key impact areas.{" "}
+              <a
+                href="https://www.bcorporation.net/en-us/standards/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 hover:text-emerald-700 font-semibold underline decoration-2 underline-offset-2 transition-colors duration-200 inline-flex items-center gap-1"
+              >
+                Learn more about B Corp Standards
+                <ExternalLink className="w-4 h-4" />
+              </a>
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-8 bg-emerald-50 rounded-2xl">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Globe className="w-8 h-8 text-emerald-600" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center p-6 bg-emerald-50 rounded-xl">
+              <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Globe className="w-6 h-6 text-emerald-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Environment</h3>
-              <p className="text-gray-600">
-                Measuring environmental impact and commitment to sustainable practices, carbon neutrality, and habitat
-                protection.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Environment</h3>
+              <p className="text-sm text-gray-600">Carbon neutrality, habitat protection, and sustainable practices.</p>
             </div>
 
-            <div className="text-center p-8 bg-blue-50 rounded-2xl">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-blue-600" />
+            <div className="text-center p-6 bg-blue-50 rounded-xl">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Users className="w-6 h-6 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Community</h3>
-              <p className="text-gray-600">
-                Supporting local communities, indigenous partnerships, and contributing to economic development in the
-                regions we operate.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Community</h3>
+              <p className="text-sm text-gray-600">Indigenous partnerships and local economic development.</p>
             </div>
 
-            <div className="text-center p-8 bg-purple-50 rounded-2xl">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="w-8 h-8 text-purple-600" />
+            <div className="text-center p-6 bg-purple-50 rounded-xl">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Target className="w-6 h-6 text-purple-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Governance</h3>
-              <p className="text-gray-600">
-                Transparent decision-making, stakeholder engagement, and accountability in all business operations and
-                impact reporting.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Governance</h3>
+              <p className="text-sm text-gray-600">Transparent decision-making and stakeholder accountability.</p>
             </div>
 
-            <div className="text-center p-8 bg-orange-50 rounded-2xl">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-orange-600" />
+            <div className="text-center p-6 bg-orange-50 rounded-xl">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Award className="w-6 h-6 text-orange-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Impact</h3>
-              <p className="text-gray-600">
-                Measuring and improving positive impact on workers, customers, suppliers, and the broader ecosystem.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Impact</h3>
+              <p className="text-sm text-gray-600">Measuring positive impact on all stakeholders.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Our Roadmap Section */}
+      {/* Timeline Roadmap Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our B Corp Certification Roadmap</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Certification Timeline</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're taking a systematic approach to meet and exceed B Corp standards across all areas of our business,
-              addressing the comprehensive B Impact Assessment that evaluates companies across five key impact areas.
+              A systematic three-phase approach to achieving B Corp certification and becoming Colombia's first
+              certified sustainable birding company.
             </p>
           </div>
 
-          <div className="space-y-16">
-            {/* Phase 1 - Foundation & Assessment (Completed) */}
+          <div className="max-w-4xl mx-auto">
+            {/* Timeline Container */}
             <div className="relative">
-              <div className="flex items-start space-x-8">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                    <CheckCircle className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-white rounded-xl p-8 shadow-xl border-l-4 border-emerald-600">
-                    <div className="flex items-center mb-6">
-                      <Badge className="bg-emerald-100 text-emerald-800 mr-4 text-sm font-semibold">✓ Completed</Badge>
-                      <h3 className="text-3xl font-bold text-gray-900">Phase 1: Foundation & Assessment</h3>
-                    </div>
-                    <p className="text-lg text-gray-600 mb-6">
-                      Completed comprehensive baseline assessment across all five B Corp impact areas, establishing
-                      measurement frameworks and identifying areas for improvement.
-                    </p>
+              {/* Vertical Timeline Line */}
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-400 via-blue-400 to-blue-400 hidden md:block"></div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-bold text-gray-900 mb-3">Governance Assessment</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Mission lock and legal accountability framework established</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Stakeholder governance model with indigenous representation</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Transparency and accountability policies implemented</span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="font-bold text-gray-900 mb-3">Workers Assessment</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Fair compensation analysis for all team members and guides</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Professional development and training programs established</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Health, safety, and wellness benefits framework</span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="font-bold text-gray-900 mb-3">Community Impact</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Indigenous partnership protocols and revenue sharing models</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Local supplier diversity and community investment tracking</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Economic impact measurement in operating regions</span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="font-bold text-gray-900 mb-3">Environment & Customers</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Complete carbon footprint assessment and neutrality plan</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Conservation impact measurement framework</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-1 flex-shrink-0" />
-                            <span>Customer education and engagement programs</span>
-                          </li>
-                        </ul>
-                      </div>
+              {/* Phase 1 - Foundation & Assessment (In Progress) */}
+              <div className="relative mb-16">
+                <div className="flex items-start">
+                  {/* Timeline Icon */}
+                  <div className="flex-shrink-0 relative z-10">
+                    <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                      <Gear className="w-8 h-8 text-white animate-spin" style={{ animationDuration: "3s" }} />
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Phase 2 - Implementation & Improvement (In Progress) */}
-            <div className="relative">
-              <div className="flex items-start space-x-8">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                    <Clock className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-white rounded-xl p-8 shadow-xl border-l-4 border-blue-600">
-                    <div className="flex items-center mb-6">
-                      <Badge className="bg-blue-100 text-blue-800 mr-4 text-sm font-semibold">🔄 In Progress</Badge>
-                      <h3 className="text-3xl font-bold text-gray-900">Phase 2: Implementation & Improvement</h3>
-                    </div>
-                    <p className="text-lg text-gray-600 mb-6">
-                      Currently implementing enhanced policies and practices to meet B Corp standards, with focus on
-                      achieving minimum scores across all impact areas and preparing for verification.
-                    </p>
-
-                    <div className="space-y-6">
-                      <div className="bg-blue-50 rounded-lg p-6">
-                        <h4 className="font-bold text-blue-900 mb-4">Key Questions We're Addressing:</h4>
-                        <div className="grid md:grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <p className="font-medium text-blue-800 mb-2">Governance & Accountability:</p>
-                            <ul className="space-y-1 text-blue-700">
-                              <li>• How do we ensure stakeholder voice in major decisions?</li>
-                              <li>• What legal structures best protect our mission?</li>
-                              <li>• How do we measure and report our impact transparently?</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <p className="font-medium text-blue-800 mb-2">Worker Equity & Benefits:</p>
-                            <ul className="space-y-1 text-blue-700">
-                              <li>• How do we ensure fair compensation across all roles?</li>
-                              <li>• What professional development opportunities can we provide?</li>
-                              <li>• How do we create inclusive, safe working environments?</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <p className="font-medium text-blue-800 mb-2">Community Investment:</p>
-                            <ul className="space-y-1 text-blue-700">
-                              <li>• How do we maximize economic benefits to local communities?</li>
-                              <li>• What percentage of suppliers should be local/diverse?</li>
-                              <li>• How do we support indigenous land rights and sovereignty?</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <p className="font-medium text-blue-800 mb-2">Environmental Impact:</p>
-                            <ul className="space-y-1 text-blue-700">
-                              <li>• How do we achieve and maintain carbon neutrality?</li>
-                              <li>• What conservation outcomes can we directly measure?</li>
-                              <li>• How do we minimize our operational footprint?</li>
-                            </ul>
-                          </div>
+                  {/* Content */}
+                  <div className="ml-8 flex-1">
+                    <div className="bg-white rounded-xl p-8 shadow-lg border-l-4 border-amber-500">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                        <div>
+                          <Badge className="bg-amber-100 text-amber-800 mb-2 text-sm font-semibold">
+                            ⚙️ In Progress
+                          </Badge>
+                          <h3 className="text-2xl font-bold text-gray-900">Phase 1: Foundation & Assessment</h3>
+                          <p className="text-gray-600 mt-2">
+                            Comprehensive baseline assessment and framework establishment
+                          </p>
                         </div>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <h4 className="font-bold text-gray-900 mb-3">Current Implementation Focus</h4>
-                          <ul className="space-y-2 text-gray-700">
-                            <li className="flex items-start">
-                              <Clock className="w-4 h-4 text-blue-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Enhanced worker equity policies and profit-sharing programs</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Clock className="w-4 h-4 text-blue-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Supplier diversity initiatives and local sourcing expansion</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Clock className="w-4 h-4 text-blue-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Community investment program with measurable outcomes</span>
-                            </li>
+                          <h4 className="font-bold text-gray-900 mb-3 flex items-center">
+                            <CheckCircle className="w-4 h-4 text-emerald-600 mr-2" />
+                            Completed Assessments
+                          </h4>
+                          <ul className="space-y-2 text-sm text-gray-700">
+                            <li>• Governance and legal accountability framework</li>
+                            <li>• Worker equity and compensation analysis</li>
+                            <li>• Indigenous partnership protocols established</li>
+                            <li>• Carbon footprint assessment completed</li>
                           </ul>
                         </div>
 
                         <div>
-                          <h4 className="font-bold text-gray-900 mb-3">Environmental Certifications</h4>
-                          <ul className="space-y-2 text-gray-700">
-                            <li className="flex items-start">
-                              <Clock className="w-4 h-4 text-blue-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>ISO 14001 Environmental Management System certification</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Clock className="w-4 h-4 text-blue-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Carbon Trust certification for carbon neutrality</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Clock className="w-4 h-4 text-blue-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Conservation impact verification through third parties</span>
-                            </li>
+                          <h4 className="font-bold text-gray-900 mb-3 flex items-center">
+                            <Clock className="w-4 h-4 text-amber-600 mr-2" />
+                            Current Focus Areas
+                          </h4>
+                          <ul className="space-y-2 text-sm text-gray-700">
+                            <li>• Stakeholder governance model refinement</li>
+                            <li>• Community investment measurement</li>
+                            <li>• Environmental impact verification</li>
+                            <li>• Transparency reporting systems</li>
                           </ul>
                         </div>
                       </div>
@@ -297,42 +184,93 @@ export default function BCorpPage() {
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Phase 3 - Verification & Certification (Planned) */}
-            <div className="relative">
-              <div className="flex items-start space-x-8">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                    <Target className="w-8 h-8 text-white" />
+              {/* Phase 2 - Implementation (Coming Q3 2025) */}
+              <div className="relative mb-16">
+                <div className="flex items-start">
+                  {/* Timeline Icon */}
+                  <div className="flex-shrink-0 relative z-10">
+                    <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                      <Hourglass className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="ml-8 flex-1">
+                    <div className="bg-white rounded-xl p-8 shadow-lg border-l-4 border-blue-500">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                        <div>
+                          <Badge className="bg-blue-100 text-blue-800 mb-2 text-sm font-semibold">
+                            ⏳ Coming Q3 2025
+                          </Badge>
+                          <h3 className="text-2xl font-bold text-gray-900">Phase 2: Implementation</h3>
+                          <p className="text-gray-600 mt-2">Enhanced policies and practices to meet B Corp standards</p>
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <h4 className="font-bold text-gray-900 mb-3">Implementation Priorities</h4>
+                          <ul className="space-y-2 text-sm text-gray-700">
+                            <li>• Enhanced worker equity and profit-sharing</li>
+                            <li>• Supplier diversity expansion</li>
+                            <li>• Community investment programs</li>
+                            <li>• ISO 14001 environmental certification</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-bold text-gray-900 mb-3">Target Outcomes</h4>
+                          <ul className="space-y-2 text-sm text-gray-700">
+                            <li>• 80+ B Impact Assessment score</li>
+                            <li>• Carbon Trust certification</li>
+                            <li>• Third-party impact verification</li>
+                            <li>• Legal structure amendments</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="flex-1">
-                  <div className="bg-white rounded-xl p-8 shadow-xl border-l-4 border-purple-600">
-                    <div className="flex items-center mb-6">
-                      <Badge className="bg-purple-100 text-purple-800 mr-4 text-sm font-semibold">🎯 Q2 2025</Badge>
-                      <h3 className="text-3xl font-bold text-gray-900">Phase 3: Verification & Certification</h3>
-                    </div>
-                    <p className="text-lg text-gray-600 mb-6">
-                      Final assessment, third-party verification, and submission for official B Corp certification. This
-                      phase includes rigorous documentation review and site verification processes.
-                    </p>
+              </div>
 
-                    <div className="space-y-6">
-                      <div className="bg-purple-50 rounded-lg p-6">
-                        <h4 className="font-bold text-purple-900 mb-4">Certification Requirements & Timeline:</h4>
-                        <div className="grid md:grid-cols-3 gap-4">
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-purple-600 mb-2">80+</div>
-                            <div className="text-sm text-purple-800">Minimum B Impact Score Required</div>
+              {/* Phase 3 - Verification (Coming Q3 2026) */}
+              <div className="relative">
+                <div className="flex items-start">
+                  {/* Timeline Icon */}
+                  <div className="flex-shrink-0 relative z-10">
+                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                      <Hourglass className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="ml-8 flex-1">
+                    <div className="bg-white rounded-xl p-8 shadow-lg border-l-4 border-blue-600">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                        <div>
+                          <Badge className="bg-blue-100 text-blue-800 mb-2 text-sm font-semibold">
+                            🎯 Coming Q3 2026
+                          </Badge>
+                          <h3 className="text-2xl font-bold text-gray-900">Phase 3: Verification & Certification</h3>
+                          <p className="text-gray-600 mt-2">Final assessment and official B Corp certification</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-blue-50 rounded-lg p-6 mb-6">
+                        <h4 className="font-bold text-blue-900 mb-4">Certification Milestones</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                          <div>
+                            <div className="text-2xl font-bold text-blue-600 mb-1">200+</div>
+                            <div className="text-xs text-blue-800">Assessment Questions</div>
                           </div>
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-purple-600 mb-2">6-10</div>
-                            <div className="text-sm text-purple-800">Months Verification Process</div>
+                          <div>
+                            <div className="text-2xl font-bold text-blue-600 mb-1">6-10</div>
+                            <div className="text-xs text-blue-800">Months Process</div>
                           </div>
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-purple-600 mb-2">3rd</div>
-                            <div className="text-sm text-purple-800">Party Site Verification</div>
+                          <div>
+                            <div className="text-2xl font-bold text-blue-600 mb-1">1st</div>
+                            <div className="text-xs text-blue-800">B Corp in Colombia</div>
                           </div>
                         </div>
                       </div>
@@ -340,60 +278,20 @@ export default function BCorpPage() {
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
                           <h4 className="font-bold text-gray-900 mb-3">Verification Process</h4>
-                          <ul className="space-y-2 text-gray-700">
-                            <li className="flex items-start">
-                              <Target className="w-4 h-4 text-purple-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Complete B Impact Assessment submission (200+ questions)</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Target className="w-4 h-4 text-purple-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Documentation review and evidence verification</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Target className="w-4 h-4 text-purple-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>On-site verification including community interviews</span>
-                            </li>
+                          <ul className="space-y-2 text-sm text-gray-700">
+                            <li>• Complete B Impact Assessment submission</li>
+                            <li>• Documentation review and evidence verification</li>
+                            <li>• On-site verification with community interviews</li>
                           </ul>
                         </div>
 
                         <div>
-                          <h4 className="font-bold text-gray-900 mb-3">Legal Accountability</h4>
-                          <ul className="space-y-2 text-gray-700">
-                            <li className="flex items-start">
-                              <Target className="w-4 h-4 text-purple-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Legal structure amendment to include stakeholder governance</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Target className="w-4 h-4 text-purple-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Mission lock provisions in corporate documents</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Target className="w-4 h-4 text-purple-600 mr-2 mt-1 flex-shrink-0" />
-                              <span>Annual benefit report publication commitment</span>
-                            </li>
+                          <h4 className="font-bold text-gray-900 mb-3">Expected Outcomes</h4>
+                          <ul className="space-y-2 text-sm text-gray-700">
+                            <li>• Official B Corp certification</li>
+                            <li>• Global B Corp community membership</li>
+                            <li>• Annual impact reporting commitment</li>
                           </ul>
-                        </div>
-                      </div>
-
-                      <div className="bg-gray-50 rounded-lg p-6">
-                        <h4 className="font-bold text-gray-900 mb-3">Expected Outcomes & Impact</h4>
-                        <div className="grid md:grid-cols-2 gap-4 text-gray-700">
-                          <div>
-                            <p className="font-medium mb-2">Certification Achievement:</p>
-                            <ul className="space-y-1 text-sm">
-                              <li>• Official B Corp certification and logo usage rights</li>
-                              <li>• Membership in global B Corp community</li>
-                              <li>• Access to B Corp marketing and partnership opportunities</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <p className="font-medium mb-2">Ongoing Commitments:</p>
-                            <ul className="space-y-1 text-sm">
-                              <li>• Annual impact reporting and transparency</li>
-                              <li>• Recertification every three years</li>
-                              <li>• Continuous improvement in all impact areas</li>
-                            </ul>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -405,68 +303,62 @@ export default function BCorpPage() {
         </div>
       </section>
 
-      {/* Current Initiatives Section */}
-      <section className="py-20">
+      {/* Current Initiatives Section - Condensed */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Current B Corp Initiatives</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're already implementing many B Corp principles in our daily operations and tour experiences.
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Current B Corp Initiatives</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              We're already implementing B Corp principles in our operations and tour experiences.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-emerald-50 rounded-lg p-8">
-              <Leaf className="w-12 h-12 text-emerald-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Carbon Neutral Operations</h3>
-              <p className="text-gray-600">
-                All tours operate with full carbon neutrality, with offsets reinvested in critical bird habitat
-                preservation projects throughout Colombia.
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-emerald-50 rounded-lg p-6">
+              <Leaf className="w-10 h-10 text-emerald-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Carbon Neutral Operations</h3>
+              <p className="text-sm text-gray-600">
+                All tours operate with full carbon neutrality, with offsets reinvested in habitat preservation.
               </p>
             </div>
 
-            <div className="bg-blue-50 rounded-lg p-8">
-              <Users className="w-12 h-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Indigenous Partnerships</h3>
-              <p className="text-gray-600">
-                Fair employment and revenue sharing with indigenous communities, supporting traditional ecological
-                knowledge and land rights.
+            <div className="bg-blue-50 rounded-lg p-6">
+              <Users className="w-10 h-10 text-blue-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Indigenous Partnerships</h3>
+              <p className="text-sm text-gray-600">
+                Fair employment and revenue sharing with indigenous communities and traditional knowledge holders.
               </p>
             </div>
 
-            <div className="bg-purple-50 rounded-lg p-8">
-              <Globe className="w-12 h-12 text-purple-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Conservation Endowment</h3>
-              <p className="text-gray-600">
-                10% of net profits fund our Conservation Endowment Trust, dedicated to permanent habitat restoration and
-                protection.
+            <div className="bg-purple-50 rounded-lg p-6">
+              <Globe className="w-10 h-10 text-purple-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Conservation Endowment</h3>
+              <p className="text-sm text-gray-600">
+                10% of net profits fund our Conservation Endowment Trust for permanent habitat protection.
               </p>
             </div>
 
-            <div className="bg-orange-50 rounded-lg p-8">
-              <Award className="w-12 h-12 text-orange-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Transparent Reporting</h3>
-              <p className="text-gray-600">
-                Annual impact reports detailing our environmental, social, and economic contributions to conservation
-                and communities.
+            <div className="bg-orange-50 rounded-lg p-6">
+              <Award className="w-10 h-10 text-orange-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Transparent Reporting</h3>
+              <p className="text-sm text-gray-600">
+                Annual impact reports detailing environmental, social, and economic contributions.
               </p>
             </div>
 
-            <div className="bg-green-50 rounded-lg p-8">
-              <Target className="w-12 h-12 text-green-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Stakeholder Governance</h3>
-              <p className="text-gray-600">
-                Advisory board including indigenous representatives, conservation scientists, and community leaders
-                guiding our decisions.
+            <div className="bg-green-50 rounded-lg p-6">
+              <Target className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Stakeholder Governance</h3>
+              <p className="text-sm text-gray-600">
+                Advisory board with indigenous representatives and conservation scientists guiding decisions.
               </p>
             </div>
 
-            <div className="bg-yellow-50 rounded-lg p-8">
-              <CheckCircle className="w-12 h-12 text-yellow-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Worker Equity</h3>
-              <p className="text-gray-600">
-                Profit-sharing programs, comprehensive benefits, and professional development opportunities for all team
-                members and guides.
+            <div className="bg-yellow-50 rounded-lg p-6">
+              <CheckCircle className="w-10 h-10 text-yellow-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Worker Equity</h3>
+              <p className="text-sm text-gray-600">
+                Profit-sharing programs and comprehensive benefits for all team members and guides.
               </p>
             </div>
           </div>
@@ -488,13 +380,15 @@ export default function BCorpPage() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4"
-            >
-              Download Impact Report
-            </Button>
+            <Link href="/about">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
+              >
+                Learn About Our Mission
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
