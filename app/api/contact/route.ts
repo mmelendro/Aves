@@ -6,6 +6,7 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     const { firstName, lastName, email } = body
+
     if (!firstName || !lastName || !email) {
       return NextResponse.json(
         { error: "Missing required fields: firstName, lastName, and email are required" },
@@ -19,57 +20,50 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email format" }, { status: 400 })
     }
 
-    // Prepare email content
-    const emailContent = `
-New Colombian Birding Tour Inquiry
+    // Format the email content
+    const emailContent = {
+      to: "mmelendro@gmail.com",
+      subject: "Colombian Birding Tour Inquiry",
+      body: `Hello AVES Team,
 
-Contact Information:
-- Name: ${firstName} ${lastName}
-- Email: ${email}
-- Phone: ${body.phone || "Not provided"}
-- Travel Date: ${body.travelDate || "Not specified"}
-- Group Size: ${body.groupSize || "Not specified"}
-- Desired Duration: ${body.desiredDuration || "Not specified"}
-- Experience Level: ${body.experienceLevel || "Not specified"}
+I'm interested in planning a Colombian birding adventure. Here are my details:
 
-Tour Preferences:
-- Interested Tour Types: ${body.selectedTourTypes?.length > 0 ? body.selectedTourTypes.join(", ") : "Not specified"}
-- Desired Locations: ${body.selectedLocations?.length > 0 ? body.selectedLocations.join(", ") : "Not specified"}
+Name: ${firstName} ${lastName}
+Email: ${email}
+Travel Date: ${body.travelDate || "Not specified"}
+Group Size: ${body.groupSize || "Not specified"}
+Desired Duration: ${body.desiredDuration || "Not specified"}
+Experience Level: ${body.experienceLevel || "Not specified"}
 
-Special Interests/Requests:
-${body.specialRequests || "None specified"}
+Interested Tour Types: ${body.selectedTourTypes?.length > 0 ? body.selectedTourTypes.join(", ") : "Not specified"}
+Desired Locations: ${body.selectedLocations?.length > 0 ? body.selectedLocations.join(", ") : "Not specified"}
 
----
-This inquiry was submitted through the AVES website contact form.
-Please respond within 24 hours as promised on the website.
-    `.trim()
+Special Interests/Requests: ${body.specialRequests || "None specified"}
 
-    // In a real implementation, you would use a service like:
-    // - SendGrid
-    // - Nodemailer with SMTP
-    // - AWS SES
-    // - Resend
-    // - etc.
+I look forward to hearing from you within 24 hours as mentioned on your website.
 
-    // For this example, we'll simulate the email sending
-    // Replace this with actual email service integration
-    console.log("Email would be sent to: mmelendro@gmail.com")
-    console.log("Subject: Colombian Birding Tour Inquiry")
-    console.log("Content:", emailContent)
+Best regards,
+${firstName} ${lastName}`,
+    }
 
-    // Simulate email sending delay
+    // Here you would integrate with your email service
+    // For now, we'll simulate a successful email send
+    console.log("Email would be sent:", emailContent)
+
+    // Simulate processing time
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // For demonstration, we'll always return success
-    // In production, handle actual email service responses
-    return NextResponse.json({
-      success: true,
-      message: "Your inquiry has been sent successfully! We will respond within 24 hours.",
-    })
-  } catch (error) {
-    console.error("Contact form submission error:", error)
     return NextResponse.json(
-      { error: "Failed to send inquiry. Please try again or contact us directly at info@aves.bio" },
+      {
+        success: true,
+        message: "Your inquiry has been sent successfully! We'll respond within 24 hours.",
+      },
+      { status: 200 },
+    )
+  } catch (error) {
+    console.error("Contact form error:", error)
+    return NextResponse.json(
+      { error: "Failed to send inquiry. Please try again or contact us directly." },
       { status: 500 },
     )
   }
