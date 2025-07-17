@@ -109,6 +109,7 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active mornings)",
     elevation: "1,500 - 2,800m",
     image: "/images/bbmtou1-square.png",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -161,6 +162,7 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active early morning)",
     elevation: "1,200 - 2,600m",
     image: "/images/blue-crowned-motmot-new.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
     photoCredit: {
       photographer: "Martin Meléndro",
       title: "AVES Guide",
@@ -184,6 +186,7 @@ const birdData: BirdData[] = [
     bestTime: "December - April (dry season)",
     elevation: "0 - 800m",
     image: "/images/cardinal-guajiro.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -204,6 +207,7 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active early morning)",
     elevation: "1,200 - 2,400m",
     image: "/images/velvet-purple-coronet.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
     photoCredit: {
       photographer: "Martin Melendro",
       title: "AVES Lead Guide & Founder",

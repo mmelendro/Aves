@@ -126,7 +126,7 @@ const bioregionBirds: BirdData[] = [
     description:
       "A striking mountain toucan with distinctive black bill and colorful plumage, found across Colombia's Andean ranges at elevations between 1,500-2,500m. Primarily inhabits the Central Andes with populations extending throughout the Western and Eastern Andes, Colombian Massif, and Cauca Valley.",
     image: "/images/bbmtou1-black-billed-mountain-toucan.png",
-    audioFile: "/audio/bbmtou1.mp3",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
     conservationStatus: "Least Concern",
     bestTime: "Year-round",
     difficulty: "Moderate",
@@ -224,7 +224,7 @@ const bioregionBirds: BirdData[] = [
     description:
       "A spectacular endemic cardinal with brilliant vermilion-red plumage, found primarily along Colombia's Caribbean coast. This striking bird inhabits dry scrublands and thorny forests, with some populations extending into the northern Magdalena Valley.",
     image: "/images/cardinal-guajiro.jpg",
-    audioFile: "/audio/vercar1.mp3",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
     conservationStatus: "Near Threatened",
     bestTime: "December - April",
     difficulty: "Moderate",
@@ -249,7 +249,7 @@ const bioregionBirds: BirdData[] = [
     description:
       "A stunning hummingbird endemic to Colombia's Pacific slope cloud forests, known for its brilliant iridescent purple and blue plumage that shimmers like velvet in the forest light.",
     image: "/images/velvet-purple-coronet.jpg",
-    audioFile: "/audio/vepcor1.mp3",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
     conservationStatus: "Near Threatened",
     bestTime: "Year-round",
     difficulty: "Moderate",
