@@ -461,7 +461,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                       : "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-4 py-2 text-xs lg:text-sm opacity-90 hover:opacity-100",
                   )}
                 >
-                  {desktopMenuExpanded ? "Book Your Journey" : "Book Tour"}
+                  Book Your Journey
                 </Button>
               </Link>
             </div>

@@ -69,6 +69,8 @@ const birdData: BirdData[] = [
       title: "AVES Guide",
       teamLink: "/team#nicolas-rozo",
       instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
+      reserve: "Parque Natural Del Sumapaz",
+      reserveLink: "/about/partners#parque-natural-del-sumapaz",
     },
   },
   {
@@ -190,6 +192,8 @@ const birdData: BirdData[] = [
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
+      reserve: "La Guajira",
+      reserveLink: "/about/partners#la-guajira",
     },
   },
   {
@@ -1377,10 +1381,19 @@ export default function HomepageBirdCarousel({
                     </div>
                     {currentBird.photoCredit.reserve && (
                       <div>
-                        <span className="text-yellow-300 text-sm flex items-center gap-1">
-                          <MapPin className="w-4 h-4 flex-shrink-0" />
-                          {currentBird.photoCredit.reserve}
-                        </span>
+                        {currentBird.photoCredit.reserveLink ? (
+                          <Link href={currentBird.photoCredit.reserveLink} prefetch={true}>
+                            <span className="text-yellow-300 text-sm flex items-center gap-1 hover:text-yellow-200 transition-colors duration-200 cursor-pointer underline decoration-yellow-300/50 hover:decoration-yellow-200 underline-offset-2">
+                              <MapPin className="w-4 h-4 flex-shrink-0" />
+                              {currentBird.photoCredit.reserve}
+                            </span>
+                          </Link>
+                        ) : (
+                          <span className="text-yellow-300 text-sm flex items-center gap-1">
+                            <MapPin className="w-4 h-4 flex-shrink-0" />
+                            {currentBird.photoCredit.reserve}
+                          </span>
+                        )}
                       </div>
                     )}
                   </div>
