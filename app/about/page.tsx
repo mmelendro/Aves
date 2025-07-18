@@ -212,7 +212,7 @@ export default function AboutPage() {
                 <h3 className="text-lg font-bold text-gray-900">Small Group Focus</h3>
               </div>
               <p className="text-gray-600">
-                Maximum 8 participants per tour ensures personalized attention and minimal environmental impact.
+                Maximum 4 participants per tour ensures personalized attention and minimal environmental impact.
               </p>
             </Card>
 

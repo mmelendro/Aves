@@ -136,7 +136,7 @@ const birdData: BirdData[] = [
     image: "/images/chestnut-crowned-antpitta.jpg",
     audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
     photoCredit: {
-      photographer: "Martin Meléndro",
+      photographer: "Martin Melendro",
       title: "AVES Guide",
       teamLink: "/team#martin-melendro",
       reserve: "Reserva Río Blanco",
@@ -1375,44 +1375,37 @@ export default function HomepageBirdCarousel({
                   </div>
 
                   <div className="space-y-2">
-                    <div>
+                    {currentBird.photoCredit.teamLink ? (
+                      <Link href={currentBird.photoCredit.teamLink} prefetch={true}>
+                        <span className="font-medium text-emerald-300 block hover:text-emerald-200 transition-colors duration-200 cursor-pointer underline decoration-emerald-300/50 hover:decoration-emerald-200 underline-offset-2">
+                          {currentBird.photoCredit.photographer}
+                        </span>
+                      </Link>
+                    ) : (
                       <span className="font-medium text-emerald-300 block">{currentBird.photoCredit.photographer}</span>
-                      <span className="text-blue-300 text-sm">{currentBird.photoCredit.title}</span>
-                    </div>
-                    {currentBird.photoCredit.reserve && (
-                      <div>
-                        {currentBird.photoCredit.reserveLink ? (
-                          <Link href={currentBird.photoCredit.reserveLink} prefetch={true}>
-                            <span className="text-yellow-300 text-sm flex items-center gap-1 hover:text-yellow-200 transition-colors duration-200 cursor-pointer underline decoration-yellow-300/50 hover:decoration-yellow-200 underline-offset-2">
-                              <MapPin className="w-4 h-4 flex-shrink-0" />
-                              {currentBird.photoCredit.reserve}
-                            </span>
-                          </Link>
-                        ) : (
-                          <span className="text-yellow-300 text-sm flex items-center gap-1">
+                    )}
+                    <span className="text-blue-300 text-sm">{currentBird.photoCredit.title}</span>
+                  </div>
+                  {currentBird.photoCredit.reserve && (
+                    <div>
+                      {currentBird.photoCredit.reserveLink ? (
+                        <Link href={currentBird.photoCredit.reserveLink} prefetch={true}>
+                          <span className="text-yellow-300 text-sm flex items-center gap-1 hover:text-yellow-200 transition-colors duration-200 cursor-pointer underline decoration-yellow-300/50 hover:decoration-yellow-200 underline-offset-2">
                             <MapPin className="w-4 h-4 flex-shrink-0" />
                             {currentBird.photoCredit.reserve}
                           </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                        </Link>
+                      ) : (
+                        <span className="text-yellow-300 text-sm flex items-center gap-1">
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
+                          {currentBird.photoCredit.reserve}
+                        </span>
+                      )}
+                    </div>
+                  )}
 
+                  {/* Action Buttons - Enhanced for Full Functionality */}
                   <div className="flex gap-2 mt-3">
-                    {currentBird.photoCredit.teamLink && (
-                      <Link href={currentBird.photoCredit.teamLink} prefetch={true}>
-                        <Button
-                          size="sm"
-                          className="text-xs font-medium bg-emerald-600/90 hover:bg-emerald-700 active:bg-emerald-800 text-white border-0 shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                          }}
-                        >
-                          <ExternalLink className="w-3 h-3 mr-1 flex-shrink-0" />
-                          <span>Profile</span>
-                        </Button>
-                      </Link>
-                    )}
                     {currentBird.photoCredit.instagramPost && (
                       <a
                         href={currentBird.photoCredit.instagramPost}
