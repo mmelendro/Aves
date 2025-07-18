@@ -28,6 +28,7 @@ import {
   DollarSign,
   ChevronDown,
   ChevronUp,
+  User,
 } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
@@ -35,6 +36,10 @@ import { Footer } from "@/components/footer"
 import { LOCATION_OPTIONS, CONTACT_TOUR_TYPE_OPTIONS, EXPERIENCE_LEVELS } from "@/lib/form-options"
 import { useSearchParams } from "next/navigation"
 import { EmbeddedTourCalendar } from "@/components/embedded-tour-calendar"
+import { AuthProvider, useAuth } from "@/hooks/use-auth"
+import { UserAccountPanel } from "@/components/auth/user-account-panel"
+import { AccountCreationPrompt } from "@/components/auth/account-creation-prompt"
+import { AuthModal } from "@/components/auth/auth-modal"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -763,9 +768,10 @@ const mapBioregionToLocation = (bioregionId: string): string => {
   return mapping[bioregionId] || bioregionId
 }
 
-// Main Shopping Page Component
-export default function ShoppingPage() {
+// Main Shopping Page Component with Auth Integration
+function ShoppingPageContent() {
   const searchParams = useSearchParams()
+  const { user, loading: authLoading, signOut } = useAuth()
   const preselectedTourType = searchParams.get("preset") || searchParams.get("tour")
   const preselectedRegion = searchParams.get("region") || searchParams.get("bioregion")
   const fromPage = searchParams.get("from")
@@ -790,7 +796,8 @@ export default function ShoppingPage() {
     fromPage?: string
   }>({})
   const [restDayOptions, setRestDayOptions] = useState<Record<string, RestDayOptions>>({})
-  const [currentStep, setCurrentStep] = useState(1)
+  const [showAccountPrompt, setShowAccountPrompt] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false)
 
   // Initialize tour selections
   useEffect(() => {
@@ -838,6 +845,16 @@ export default function ShoppingPage() {
       return () => clearTimeout(timer)
     }
   }, []) // Empty dependency array to run only once
+
+  // Show account prompt when contact info is filled and user is not logged in
+  useEffect(() => {
+    if (!user && !authLoading && contactInfo.firstName && contactInfo.lastName && contactInfo.email) {
+      const timer = setTimeout(() => {
+        setShowAccountPrompt(true)
+      }, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [user, authLoading, contactInfo])
 
   // Memoized calculations
   const getHighestTourPrice = useCallback(() => {
@@ -1062,6 +1079,18 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
     return `mailto:info@aves.com?subject=${subject}&body=${body}`
   }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
 
+  const handleAccountCreated = useCallback(
+    (newUser: any) => {
+      setShowAccountPrompt(false)
+      setShowAuthModal(false)
+      // Optionally save current booking to user's account
+      if (tourSelections.length > 0) {
+        saveBooking()
+      }
+    },
+    [tourSelections, saveBooking],
+  )
+
   // Progress calculation
   const progress = useMemo(() => {
     let completed = 0
@@ -1076,6 +1105,15 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
   }, [tourSelections, contactInfo])
 
   const minimumBookingDate = getMinimumBookingDate()
+
+  const bookingData = useMemo(
+    () => ({
+      tours: tourSelections,
+      contactInfo,
+      totalCost: costBreakdown.totalCost,
+    }),
+    [tourSelections, contactInfo, costBreakdown.totalCost],
+  )
 
   return (
     <div className="min-h-screen bg-white">
@@ -1260,6 +1298,11 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                 </CardContent>
               </Card>
 
+              {/* Account Creation Prompt */}
+              {showAccountPrompt && !user && (
+                <AccountCreationPrompt contactInfo={contactInfo} onAccountCreated={handleAccountCreated} />
+              )}
+
               {/* Questions Section - Collapsible */}
               <Card className="border-2 border-purple-200">
                 <CardHeader className="pb-3">
@@ -1285,8 +1328,12 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
               </Card>
             </div>
 
-            {/* Booking Summary - Right Column */}
-            <div className="lg:col-span-1">
+            {/* Right Column - Account Panel & Booking Summary */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* User Account Panel */}
+              <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} />
+
+              {/* Booking Summary */}
               <Card className="sticky top-24 border-2 border-emerald-200 shadow-xl">
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center text-xl">
@@ -1388,21 +1435,36 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
 
                     {/* Action Buttons */}
                     <div className="space-y-3">
-                      <a
-                        href={generateEmailLink()}
-                        className="block w-full"
-                        onClick={(e) => {
-                          if (!contactInfo.firstName || !contactInfo.lastName || !contactInfo.email) {
-                            e.preventDefault()
-                            alert("Please fill in your name and email address before sending your inquiry.")
-                          }
-                        }}
-                      >
-                        <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
-                          <Mail className="mr-2 w-4 h-4" />
-                          Send Booking Request
-                        </Button>
-                      </a>
+                      {/* Primary CTA - Enhanced for Account Users */}
+                      <div className="space-y-2">
+                        <a
+                          href={generateEmailLink()}
+                          className="block w-full"
+                          onClick={(e) => {
+                            if (!contactInfo.firstName || !contactInfo.lastName || !contactInfo.email) {
+                              e.preventDefault()
+                              alert("Please fill in your name and email address before sending your inquiry.")
+                            }
+                          }}
+                        >
+                          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
+                            <Mail className="mr-2 w-4 h-4" />
+                            Send Booking Request
+                          </Button>
+                        </a>
+
+                        {/* Account Creation CTA for non-users */}
+                        {!user && contactInfo.firstName && contactInfo.lastName && contactInfo.email && (
+                          <Button
+                            onClick={() => setShowAuthModal(true)}
+                            variant="outline"
+                            className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                          >
+                            <User className="mr-2 w-4 h-4" />
+                            Create Account & Send Request
+                          </Button>
+                        )}
+                      </div>
 
                       <div className="grid grid-cols-2 gap-2">
                         <Button
@@ -1429,11 +1491,29 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
 
       <Footer />
 
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={handleAccountCreated}
+        prefilledData={contactInfo}
+        mode="signup"
+      />
+
       {savedBooking && (
         <div className="fixed bottom-4 right-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-md shadow-lg z-50">
           Booking saved to local storage!
         </div>
       )}
     </div>
+  )
+}
+
+// Wrapped component with AuthProvider
+export default function ShoppingPage() {
+  return (
+    <AuthProvider>
+      <ShoppingPageContent />
+    </AuthProvider>
   )
 }
