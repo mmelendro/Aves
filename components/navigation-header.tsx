@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronRight, ChevronLeft, Calendar } from "lucide-react"
+import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import { cn } from "@/lib/utils"
@@ -16,7 +16,6 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const [desktopMenuExpanded, setDesktopMenuExpanded] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [ctaHovered, setCtaHovered] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const collapseTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -451,58 +450,18 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
               </div>
             </nav>
 
-            {/* Always Visible Desktop CTA Button - Primary CTA */}
-            <div className="hidden md:block">
+            {/* Desktop CTA Button */}
+            <div className="hidden md:block transition-all duration-300 ease-out">
               <Link href="/shopping">
                 <Button
                   className={cn(
-                    "relative overflow-hidden group transition-all duration-500 ease-out",
-                    "bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800",
-                    "text-white font-semibold shadow-lg hover:shadow-xl",
-                    "transform hover:scale-105 active:scale-95",
-                    "border border-emerald-500/20 hover:border-emerald-400/30",
-                    // Size adjustments based on menu state
-                    desktopMenuExpanded ? "px-6 py-2.5 text-base rounded-xl" : "px-5 py-2 text-sm rounded-lg",
-                    // Enhanced visibility on AVES Explorer
-                    isAvesExplorer && "ring-2 ring-white/20 hover:ring-white/40",
+                    "text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 whitespace-nowrap",
+                    desktopMenuExpanded
+                      ? "bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 px-6 py-2.5 text-sm lg:text-base"
+                      : "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-4 py-2 text-xs lg:text-sm opacity-90 hover:opacity-100",
                   )}
-                  onMouseEnter={() => setCtaHovered(true)}
-                  onMouseLeave={() => setCtaHovered(false)}
                 >
-                  {/* Animated background gradient */}
-                  <div
-                    className={cn(
-                      "absolute inset-0 bg-gradient-to-r from-emerald-500 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-                    )}
-                  />
-
-                  {/* Subtle pulse animation */}
-                  <div
-                    className={cn(
-                      "absolute inset-0 bg-white/10 rounded-lg opacity-0 animate-pulse",
-                      ctaHovered && "opacity-100",
-                    )}
-                  />
-
-                  {/* Content */}
-                  <div className="relative flex items-center space-x-2">
-                    <Calendar
-                      className={cn(
-                        "transition-all duration-300",
-                        desktopMenuExpanded ? "w-5 h-5" : "w-4 h-4",
-                        ctaHovered && "rotate-12 scale-110",
-                      )}
-                    />
-                    <span className="whitespace-nowrap">Book Your Journey</span>
-                  </div>
-
-                  {/* Shimmer effect on hover */}
-                  <div
-                    className={cn(
-                      "absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white/20 to-transparent",
-                      "transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700",
-                    )}
-                  />
+                  {desktopMenuExpanded ? "Book Your Journey" : "Book Tour"}
                 </Button>
               </Link>
             </div>
@@ -726,21 +685,11 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </nav>
           </div>
 
-          {/* Enhanced Mobile CTA Button - Always Visible and Prominent */}
+          {/* Fixed Mobile CTA Button with Enhanced Transparency */}
           <div className="border-t border-gray-300/50 p-6 bg-white/60 backdrop-blur-lg shadow-lg">
             <Link href="/shopping" onClick={toggleMobileMenu}>
-              <Button className="w-full relative overflow-hidden group bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation border border-emerald-500/20">
-                {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Content */}
-                <div className="relative flex items-center justify-center space-x-3">
-                  <Calendar className="w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
-                  <span className="text-lg">Book Your Journey</span>
-                </div>
-
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation">
+                Book Your Journey
               </Button>
             </Link>
           </div>

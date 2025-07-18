@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   ChevronDown,
   ChevronUp,
@@ -396,7 +396,7 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
   return (
     <Card
       id={partner.id}
-      className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-md scroll-mt-24"
+      className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-md scroll-mt-32 target:ring-2 target:ring-emerald-500 target:ring-offset-2 target:shadow-2xl"
     >
       <CardHeader className="pb-3">
         <div className="flex items-start gap-4 mb-3">
@@ -558,7 +558,7 @@ const CollapsibleSection = ({
   onToggle: () => void
 }) => {
   return (
-    <div id={`${category}-section`} className="scroll-mt-20">
+    <div id={`${category}-section`} className="scroll-mt-32">
       <div
         className={`flex items-center justify-between p-4 bg-gradient-to-r ${categoryData.color} rounded-lg cursor-pointer ${categoryData.hoverColor} transition-all duration-200 border border-gray-200 shadow-sm`}
         onClick={onToggle}
@@ -596,6 +596,58 @@ const PartnersPage = () => {
     reserves: true,
   })
 
+  // Enhanced anchor navigation with proper scroll behavior
+  useEffect(() => {
+    // Handle direct anchor navigation on page load and hash changes
+    const handleAnchorNavigation = () => {
+      const hash = window.location.hash.substring(1)
+      if (hash) {
+        // Small delay to ensure page is fully loaded and sections are expanded
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element) {
+            // Ensure the section containing this partner is open
+            const partner = partners.find((p) => p.id === hash)
+            if (partner) {
+              setOpenSections((prev) => ({
+                ...prev,
+                [partner.category]: true,
+              }))
+
+              // Additional delay to allow section to expand
+              setTimeout(() => {
+                const headerOffset = 120
+                const elementPosition = element.getBoundingClientRect().top
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: "smooth",
+                })
+
+                // Highlight the target element briefly
+                element.classList.add("ring-2", "ring-emerald-500", "ring-offset-2", "shadow-2xl")
+                setTimeout(() => {
+                  element.classList.remove("ring-2", "ring-emerald-500", "ring-offset-2", "shadow-2xl")
+                }, 3000)
+              }, 300)
+            }
+          }
+        }, 500)
+      }
+    }
+
+    // Handle initial load
+    handleAnchorNavigation()
+
+    // Handle hash changes (back/forward navigation)
+    window.addEventListener("hashchange", handleAnchorNavigation)
+
+    return () => {
+      window.removeEventListener("hashchange", handleAnchorNavigation)
+    }
+  }, [])
+
   const toggleSection = (category: string) => {
     setOpenSections((prev) => ({
       ...prev,
@@ -619,8 +671,26 @@ const PartnersPage = () => {
     })
   }
 
+  // Enhanced scroll to section function
+  const scrollToSection = (sectionKey: string) => {
+    const element = document.getElementById(`${sectionKey}-section`)
+    if (element) {
+      const headerOffset = 120
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      })
+    }
+    if (!openSections[sectionKey]) {
+      toggleSection(sectionKey)
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" style={{ scrollBehavior: "smooth" }}>
       <NavigationHeader currentPage="/about/partners" />
 
       {/* Hero Section */}
@@ -654,7 +724,7 @@ const PartnersPage = () => {
         </div>
       </div>
 
-      {/* Quick Navigation */}
+      {/* Enhanced Quick Navigation with Smooth Scrolling */}
       <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-wrap justify-center gap-3">
@@ -663,13 +733,8 @@ const PartnersPage = () => {
                 key={key}
                 variant="ghost"
                 size="sm"
-                onClick={() => {
-                  document.getElementById(`${key}-section`)?.scrollIntoView({ behavior: "smooth" })
-                  if (!openSections[key]) {
-                    toggleSection(key)
-                  }
-                }}
-                className="flex items-center gap-2 text-sm h-10 px-4 font-medium hover:bg-gray-100"
+                onClick={() => scrollToSection(key)}
+                className="flex items-center gap-2 text-sm h-10 px-4 font-medium hover:bg-gray-100 transition-all duration-200"
               >
                 <span className="text-lg">{category.icon}</span>
                 <span className="hidden sm:inline">{category.title}</span>
