@@ -249,18 +249,18 @@ function EnhancedBirdImage({
       {/* Bottom Info Bar - Hidden when info overlay is shown */}
       {!showInfo && (
         <div
-          className={`absolute bottom-0 left-0 right-0 text-white transition-all duration-300 ${
+          className={`absolute bottom-0 left-0 right-0 p-0.5 text-white transition-all duration-300 ${
             showOverlay ? "translate-y-0 opacity-100" : "translate-y-2 opacity-90"
           }`}
         >
-          <div className="backdrop-blur-md bg-black/70 rounded-lg px-2 py-1 mx-1 mb-1 border border-white/20">
-            <h3 className="font-medium text-sm text-white drop-shadow-lg leading-none">{species.commonName}</h3>
+          <div className="backdrop-blur-md bg-black/70 rounded-lg p-1 border border-white/20">
+            <h3 className="font-medium text-xs text-white drop-shadow-lg leading-tight">{species.commonName}</h3>
             {species.spanishName && (
-              <p className="text-emerald-200 text-xs font-medium drop-shadow-md leading-none">{species.spanishName}</p>
+              <p className="text-emerald-200 text-xs font-medium drop-shadow-md leading-tight">{species.spanishName}</p>
             )}
-            <p className="text-xs text-white/95 italic drop-shadow-md leading-none">{species.scientificName}</p>
+            <p className="text-xs text-white/95 italic drop-shadow-md leading-tight">{species.scientificName}</p>
             {species.conservation && (
-              <Badge className="mt-0.5 bg-amber-500/90 text-white hover:bg-amber-500 backdrop-blur-sm text-xs border border-amber-400/50 px-1.5 py-0 leading-none h-3.5 inline-block">
+              <Badge className="mt-0.5 bg-amber-500/90 text-white hover:bg-amber-500 backdrop-blur-sm text-xs border border-amber-400/50 px-1 py-0 leading-tight h-3">
                 {species.conservation}
               </Badge>
             )}

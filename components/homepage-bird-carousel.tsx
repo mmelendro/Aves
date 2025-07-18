@@ -1,22 +1,10 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  ChevronLeft,
-  ChevronRight,
-  Play,
-  Pause,
-  Info,
-  Camera,
-  MapPin,
-  ExternalLink,
-  X,
-  Volume2,
-  VolumeX,
-} from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
@@ -36,7 +24,6 @@ interface BirdData {
   bestTime: string
   elevation: string
   image: string
-  audioFile?: string
   photoCredit: {
     photographer: string
     title: string
@@ -63,7 +50,6 @@ const birdData: BirdData[] = [
     bestTime: "December - March (dry season)",
     elevation: "3,000 - 4,200m",
     image: "/images/green-bearded-helmetcrest.png",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
     photoCredit: {
       photographer: "Nicolás Rozo",
       title: "AVES Guide",
@@ -86,7 +72,6 @@ const birdData: BirdData[] = [
     bestTime: "December - March (clear weather)",
     elevation: "3,200 - 4,500m",
     image: "/images/rabtho1.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -109,7 +94,6 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active mornings)",
     elevation: "1,500 - 2,800m",
     image: "/images/bbmtou1-square.png",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -132,7 +116,6 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (dawn and dusk)",
     elevation: "1,800 - 3,200m",
     image: "/images/chestnut-crowned-antpitta.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
     photoCredit: {
       photographer: "Martin Meléndro",
       title: "AVES Guide",
@@ -162,7 +145,6 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active early morning)",
     elevation: "1,200 - 2,600m",
     image: "/images/blue-crowned-motmot-new.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
     photoCredit: {
       photographer: "Martin Meléndro",
       title: "AVES Guide",
@@ -186,7 +168,6 @@ const birdData: BirdData[] = [
     bestTime: "December - April (dry season)",
     elevation: "0 - 800m",
     image: "/images/cardinal-guajiro.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -207,7 +188,6 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active early morning)",
     elevation: "1,200 - 2,400m",
     image: "/images/velvet-purple-coronet.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
     photoCredit: {
       photographer: "Martin Melendro",
       title: "AVES Lead Guide & Founder",
@@ -239,458 +219,10 @@ export default function HomepageBirdCarousel({
   const [firstImageLoaded, setFirstImageLoaded] = useState(false)
   const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
 
-  // Enhanced audio state management for mobile compatibility
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.7)
-  const [showVolumeSlider, setShowVolumeSlider] = useState(false)
-  const [audioError, setAudioError] = useState(false)
-  const [audioLoading, setAudioLoading] = useState(false)
-  const [audioReady, setAudioReady] = useState(false)
-  const [userInteracted, setUserInteracted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [audioFileExists, setAudioFileExists] = useState<Record<string, boolean>>({})
-
-  // Audio refs and management
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const audioContextRef = useRef<AudioContext | null>(null)
-  const loadTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const eventListenersRef = useRef<Array<{ event: string; handler: EventListener }>>([])
-
   const currentBird = birdData[currentIndex]
 
   // Check if current bird should show the Explore Region button (only Vermilion Cardinal)
   const shouldShowExploreRegion = currentBird.id === "6" // Vermilion Cardinal
-
-  // Detect mobile device on mount
-  useEffect(() => {
-    const checkMobile = () => {
-      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
-      const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i
-      const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0
-      setIsMobile(mobileRegex.test(userAgent.toLowerCase()) || isTouchDevice)
-    }
-
-    checkMobile()
-  }, [])
-
-  // Check if audio file exists
-  const checkAudioFileExists = useCallback(
-    async (audioFile: string): Promise<boolean> => {
-      if (audioFileExists[audioFile] !== undefined) {
-        return audioFileExists[audioFile]
-      }
-
-      try {
-        const response = await fetch(audioFile, { method: "HEAD" })
-        const exists = response.ok
-        setAudioFileExists((prev) => ({ ...prev, [audioFile]: exists }))
-        return exists
-      } catch (error) {
-        console.warn(`Audio file check failed for ${audioFile}:`, error)
-        setAudioFileExists((prev) => ({ ...prev, [audioFile]: false }))
-        return false
-      }
-    },
-    [audioFileExists],
-  )
-
-  // Initialize AudioContext for mobile browsers
-  const initializeAudioContext = useCallback(async () => {
-    if (!isMobile || audioContextRef.current) return true
-
-    try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
-      if (AudioContextClass) {
-        audioContextRef.current = new AudioContextClass()
-
-        // Resume context if suspended (common on mobile)
-        if (audioContextRef.current.state === "suspended") {
-          await audioContextRef.current.resume()
-        }
-
-        return audioContextRef.current.state === "running"
-      }
-    } catch (error) {
-      console.warn("AudioContext initialization failed:", error)
-    }
-
-    return false
-  }, [isMobile])
-
-  // Enhanced audio cleanup function with proper event listener removal
-  const cleanupAudio = useCallback(() => {
-    // Clear timeout
-    if (loadTimeoutRef.current) {
-      clearTimeout(loadTimeoutRef.current)
-      loadTimeoutRef.current = null
-    }
-
-    // Clean up existing audio with proper event listener removal
-    if (audioRef.current) {
-      // Pause and reset audio
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
-
-      // Remove all tracked event listeners
-      eventListenersRef.current.forEach(({ event, handler }) => {
-        audioRef.current?.removeEventListener(event, handler)
-      })
-      eventListenersRef.current = []
-
-      // Only clear src after removing event listeners to prevent error events
-      try {
-        audioRef.current.src = ""
-        audioRef.current.load()
-      } catch (error) {
-        // Ignore errors during cleanup
-      }
-
-      audioRef.current = null
-    }
-
-    // Reset audio states
-    setIsAudioPlaying(false)
-    setAudioError(false)
-    setAudioLoading(false)
-    setAudioReady(false)
-  }, [])
-
-  // Enhanced audio initialization with better error handling and file validation
-  const initializeAudio = useCallback(async () => {
-    cleanupAudio()
-
-    if (!currentBird.audioFile) {
-      return
-    }
-
-    try {
-      // First check if audio file exists
-      const fileExists = await checkAudioFileExists(currentBird.audioFile)
-      if (!fileExists) {
-        console.warn(`Audio file not found: ${currentBird.audioFile}`)
-        setAudioError(true)
-        setAudioLoading(false)
-        setAudioReady(false)
-        return
-      }
-
-      setAudioLoading(true)
-      setAudioError(false)
-      setAudioReady(false)
-
-      // Initialize AudioContext for mobile
-      if (isMobile) {
-        await initializeAudioContext()
-      }
-
-      // Create new audio element with mobile-optimized settings
-      const audio = new Audio()
-      audioRef.current = audio
-
-      // Mobile-specific audio attributes
-      if (isMobile) {
-        audio.setAttribute("playsinline", "true")
-        audio.setAttribute("webkit-playsinline", "true")
-        audio.preload = "metadata" // Better for mobile
-      } else {
-        audio.preload = "metadata"
-      }
-
-      audio.crossOrigin = "anonymous"
-      audio.volume = volume
-      audio.loop = false
-
-      // Enhanced event listeners with better mobile handling
-      const addEventListenerWithTracking = (event: string, handler: EventListener) => {
-        audio.addEventListener(event, handler)
-        eventListenersRef.current.push({ event, handler })
-      }
-
-      const handleLoadStart = () => {
-        console.log(`Audio load started: ${currentBird.commonName}`)
-        setAudioLoading(true)
-        setAudioError(false)
-      }
-
-      const handleLoadedData = () => {
-        console.log(`Audio data loaded: ${currentBird.commonName}`)
-        setAudioLoading(false)
-        setAudioReady(true)
-        setAudioError(false)
-
-        if (loadTimeoutRef.current) {
-          clearTimeout(loadTimeoutRef.current)
-          loadTimeoutRef.current = null
-        }
-      }
-
-      const handleCanPlay = () => {
-        console.log(`Audio can play: ${currentBird.commonName}`)
-        setAudioLoading(false)
-        setAudioReady(true)
-        setAudioError(false)
-      }
-
-      const handleCanPlayThrough = () => {
-        console.log(`Audio can play through: ${currentBird.commonName}`)
-        setAudioLoading(false)
-        setAudioReady(true)
-        setAudioError(false)
-      }
-
-      const handleEnded = () => {
-        console.log(`Audio ended: ${currentBird.commonName}`)
-        setIsAudioPlaying(false)
-      }
-
-      const handleError = (e: Event) => {
-        // Only handle errors if this is still the current audio element
-        if (audioRef.current !== audio) {
-          return
-        }
-
-        const error = audio.error
-        let errorMessage = "Unknown audio error"
-
-        if (error) {
-          switch (error.code) {
-            case MediaError.MEDIA_ERR_ABORTED:
-              errorMessage = "Audio loading was aborted"
-              break
-            case MediaError.MEDIA_ERR_NETWORK:
-              errorMessage = "Network error loading audio"
-              break
-            case MediaError.MEDIA_ERR_DECODE:
-              errorMessage = "Audio format not supported"
-              break
-            case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-              errorMessage = "Audio file not found or format not supported"
-              break
-          }
-        }
-
-        console.error(`Audio error for ${currentBird.commonName}:`, errorMessage, error)
-
-        // Mark file as non-existent for future reference
-        if (currentBird.audioFile) {
-          setAudioFileExists((prev) => ({ ...prev, [currentBird.audioFile!]: false }))
-        }
-
-        setAudioError(true)
-        setIsAudioPlaying(false)
-        setAudioLoading(false)
-        setAudioReady(false)
-      }
-
-      const handleStalled = () => {
-        console.warn(`Audio stalled: ${currentBird.commonName}`)
-      }
-
-      const handleWaiting = () => {
-        console.log(`Audio waiting: ${currentBird.commonName}`)
-        setAudioLoading(true)
-      }
-
-      const handlePlaying = () => {
-        console.log(`Audio playing: ${currentBird.commonName}`)
-        setIsAudioPlaying(true)
-        setAudioLoading(false)
-        setAudioError(false)
-      }
-
-      const handlePause = () => {
-        console.log(`Audio paused: ${currentBird.commonName}`)
-        setIsAudioPlaying(false)
-      }
-
-      // Add all event listeners with tracking
-      addEventListenerWithTracking("loadstart", handleLoadStart)
-      addEventListenerWithTracking("loadeddata", handleLoadedData)
-      addEventListenerWithTracking("canplay", handleCanPlay)
-      addEventListenerWithTracking("canplaythrough", handleCanPlayThrough)
-      addEventListenerWithTracking("ended", handleEnded)
-      addEventListenerWithTracking("error", handleError)
-      addEventListenerWithTracking("stalled", handleStalled)
-      addEventListenerWithTracking("waiting", handleWaiting)
-      addEventListenerWithTracking("playing", handlePlaying)
-      addEventListenerWithTracking("pause", handlePause)
-
-      // Set timeout for loading (mobile networks can be slow)
-      loadTimeoutRef.current = setTimeout(() => {
-        if (audioRef.current === audio && !audioReady && !audioError) {
-          console.warn(`Audio load timeout: ${currentBird.commonName}`)
-          setAudioError(true)
-          setAudioLoading(false)
-          setAudioReady(false)
-        }
-      }, 10000) // 10 second timeout for mobile
-
-      // Set the source last to trigger loading
-      audio.src = currentBird.audioFile
-
-      // For mobile devices, explicitly call load()
-      if (isMobile) {
-        audio.load()
-      }
-    } catch (error) {
-      console.error(`Error initializing audio for ${currentBird.commonName}:`, error)
-      setAudioError(true)
-      setAudioLoading(false)
-      setAudioReady(false)
-    }
-  }, [
-    currentBird.audioFile,
-    currentBird.commonName,
-    volume,
-    cleanupAudio,
-    initializeAudioContext,
-    isMobile,
-    checkAudioFileExists,
-  ])
-
-  // Enhanced audio toggle with mobile-specific handling
-  const toggleAudio = useCallback(async () => {
-    // Mark user interaction for mobile autoplay policies
-    if (!userInteracted) {
-      setUserInteracted(true)
-    }
-
-    if (!audioRef.current || !currentBird.audioFile) {
-      console.warn("No audio element or file available")
-      return
-    }
-
-    // Check if audio file exists before attempting to play
-    if (audioFileExists[currentBird.audioFile] === false) {
-      console.warn("Audio file does not exist, cannot play")
-      setAudioError(true)
-      return
-    }
-
-    try {
-      if (isAudioPlaying) {
-        // Pause audio
-        audioRef.current.pause()
-        setIsAudioPlaying(false)
-        console.log(`Audio paused: ${currentBird.commonName}`)
-      } else {
-        // Play audio
-        if (audioError) {
-          console.log("Audio error detected, reinitializing...")
-          await initializeAudio()
-          // Wait a bit for initialization
-          await new Promise((resolve) => setTimeout(resolve, 500))
-        }
-
-        if (!audioRef.current) {
-          console.warn("Audio element not available after initialization")
-          return
-        }
-
-        // Ensure AudioContext is running for mobile
-        if (isMobile) {
-          await initializeAudioContext()
-        }
-
-        setAudioLoading(true)
-
-        // Check if audio is ready to play
-        if (audioReady || audioRef.current.readyState >= 2) {
-          try {
-            const playPromise = audioRef.current.play()
-
-            if (playPromise !== undefined) {
-              await playPromise
-              setIsAudioPlaying(true)
-              setAudioLoading(false)
-              console.log(`Audio started playing: ${currentBird.commonName}`)
-            }
-          } catch (playError) {
-            console.error(`Error playing audio for ${currentBird.commonName}:`, playError)
-            setAudioError(true)
-            setIsAudioPlaying(false)
-            setAudioLoading(false)
-
-            // Try to reinitialize on play error (common on mobile)
-            if (isMobile) {
-              setTimeout(() => initializeAudio(), 1000)
-            }
-          }
-        } else {
-          // Audio not ready, wait for it
-          console.log("Audio not ready, waiting...")
-
-          const waitForReady = () => {
-            if (audioRef.current && (audioReady || audioRef.current.readyState >= 2)) {
-              audioRef.current
-                .play()
-                .then(() => {
-                  setIsAudioPlaying(true)
-                  setAudioLoading(false)
-                  console.log(`Audio started playing (after wait): ${currentBird.commonName}`)
-                })
-                .catch((error) => {
-                  console.error(`Error playing audio after wait: ${currentBird.commonName}:`, error)
-                  setAudioError(true)
-                  setIsAudioPlaying(false)
-                  setAudioLoading(false)
-                })
-            } else {
-              // Still not ready, set error
-              console.warn(`Audio still not ready: ${currentBird.commonName}`)
-              setAudioError(true)
-              setAudioLoading(false)
-            }
-          }
-
-          // Wait up to 3 seconds for audio to be ready
-          setTimeout(waitForReady, 3000)
-        }
-      }
-    } catch (error) {
-      console.error(`Error toggling audio for ${currentBird.commonName}:`, error)
-      setAudioError(true)
-      setIsAudioPlaying(false)
-      setAudioLoading(false)
-    }
-  }, [
-    isAudioPlaying,
-    currentBird.audioFile,
-    currentBird.commonName,
-    audioError,
-    audioReady,
-    userInteracted,
-    initializeAudio,
-    initializeAudioContext,
-    isMobile,
-    audioFileExists,
-  ])
-
-  const handleVolumeChange = useCallback((newVolume: number) => {
-    setVolume(newVolume)
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume
-    }
-  }, [])
-
-  // Initialize audio when bird changes
-  useEffect(() => {
-    initializeAudio()
-
-    return () => {
-      cleanupAudio()
-    }
-  }, [initializeAudio, cleanupAudio])
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      cleanupAudio()
-      if (audioContextRef.current) {
-        audioContextRef.current.close()
-      }
-    }
-  }, [cleanupAudio])
 
   // Preload all images on component mount with proper error handling
   useEffect(() => {
@@ -757,19 +289,11 @@ export default function HomepageBirdCarousel({
     preloadImages()
   }, [autoPlay])
 
-  // Enhanced slide navigation with audio completion check
   const nextSlide = useCallback(() => {
     if (firstImageLoaded || currentIndex > 0) {
-      // If audio is playing, pause it before changing slides
-      if (isAudioPlaying && audioRef.current) {
-        audioRef.current.pause()
-        setIsAudioPlaying(false)
-      }
-
       setCurrentIndex((prevIndex) => (prevIndex + 1) % birdData.length)
       setShowInfo(false)
       setShowPhotoCredit(false)
-      setShowVolumeSlider(false)
 
       // Update loading states for new image
       const nextIndex = (currentIndex + 1) % birdData.length
@@ -784,19 +308,12 @@ export default function HomepageBirdCarousel({
         setImageError(false)
       }
     }
-  }, [currentIndex, firstImageLoaded, preloadedImages, isAudioPlaying])
+  }, [currentIndex, firstImageLoaded, preloadedImages])
 
   const prevSlide = useCallback(() => {
-    // If audio is playing, pause it before changing slides
-    if (isAudioPlaying && audioRef.current) {
-      audioRef.current.pause()
-      setIsAudioPlaying(false)
-    }
-
     setCurrentIndex((prevIndex) => (prevIndex - 1 + birdData.length) % birdData.length)
     setShowInfo(false)
     setShowPhotoCredit(false)
-    setShowVolumeSlider(false)
 
     // Update loading states for new image
     const prevIndex = (currentIndex - 1 + birdData.length) % birdData.length
@@ -810,20 +327,13 @@ export default function HomepageBirdCarousel({
       setImageLoaded(false)
       setImageError(false)
     }
-  }, [currentIndex, preloadedImages, isAudioPlaying])
+  }, [currentIndex, preloadedImages])
 
   const goToSlide = useCallback(
     (index: number) => {
-      // If audio is playing, pause it before changing slides
-      if (isAudioPlaying && audioRef.current) {
-        audioRef.current.pause()
-        setIsAudioPlaying(false)
-      }
-
       setCurrentIndex(index)
       setShowInfo(false)
       setShowPhotoCredit(false)
-      setShowVolumeSlider(false)
 
       // Update loading states for new image
       const targetImage = birdData[index].image
@@ -837,21 +347,16 @@ export default function HomepageBirdCarousel({
         setImageError(false)
       }
     },
-    [preloadedImages, isAudioPlaying],
+    [preloadedImages],
   )
 
-  // Enhanced autoplay effect that waits for audio completion
+  // Modified autoplay effect to respect first image loading
   useEffect(() => {
     if (isPlaying && firstImageLoaded) {
-      // If audio is playing, wait for it to complete before advancing
-      if (isAudioPlaying) {
-        return // Don't set interval while audio is playing
-      }
-
       const interval = setInterval(nextSlide, autoPlayInterval)
       return () => clearInterval(interval)
     }
-  }, [isPlaying, nextSlide, autoPlayInterval, firstImageLoaded, isAudioPlaying])
+  }, [isPlaying, nextSlide, autoPlayInterval, firstImageLoaded])
 
   const handleImageLoad = useCallback(() => {
     setIsLoading(false)
@@ -957,27 +462,6 @@ export default function HomepageBirdCarousel({
     }
   }
 
-  // Function to determine if current bird has light background that needs enhanced button visibility
-  const hasLightBackground = (birdId: string) => {
-    // Birds with white/light backgrounds that need enhanced button visibility
-    return birdId === "3" || birdId === "1" // Black-billed Mountain-Toucan and Green-bearded Helmetcrest
-  }
-
-  // Enhanced button styling for light background images
-  const getEnhancedButtonStyle = (baseClasses: string) => {
-    if (hasLightBackground(currentBird.id)) {
-      return cn(
-        baseClasses,
-        "bg-black/40 backdrop-blur-md hover:bg-black/50 border border-white/20 shadow-xl",
-        "ring-1 ring-black/10",
-      )
-    }
-    return cn(baseClasses, "bg-white/20 backdrop-blur-sm hover:bg-white/30")
-  }
-
-  // Check if current bird has audio and it's available
-  const hasAvailableAudio = currentBird.audioFile && audioFileExists[currentBird.audioFile] !== false
-
   return (
     <div className={cn("relative w-full max-w-md mx-auto carousel-container", className)}>
       <Card className="overflow-hidden border-0 shadow-xl">
@@ -1026,13 +510,8 @@ export default function HomepageBirdCarousel({
               </div>
             )}
 
-            {/* Enhanced Gradient Overlay for light background images */}
-            <div
-              className={cn(
-                "absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent",
-                hasLightBackground(currentBird.id) && "from-black/70 to-black/10",
-              )}
-            />
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
             {/* Navigation Arrows - Only show when info panel is closed */}
             {!showInfo && (
@@ -1041,9 +520,8 @@ export default function HomepageBirdCarousel({
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "absolute left-2 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg",
+                    "absolute left-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg",
                     "top-1/3 -translate-y-1/2 md:top-1/2",
-                    getEnhancedButtonStyle(""),
                   )}
                   onClick={prevSlide}
                   aria-label="Previous bird"
@@ -1055,9 +533,8 @@ export default function HomepageBirdCarousel({
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "absolute right-2 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg",
+                    "absolute right-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 rounded-full z-40 transition-all duration-200 carousel-button shadow-lg",
                     "top-1/3 -translate-y-1/2 md:top-1/2",
-                    getEnhancedButtonStyle(""),
                   )}
                   onClick={nextSlide}
                   aria-label="Next bird"
@@ -1067,108 +544,13 @@ export default function HomepageBirdCarousel({
               </>
             )}
 
-            {/* Top Control Buttons - Enhanced with Audio Controls and Better Mobile Support */}
+            {/* Top Control Buttons - Only show when info panel is closed - AUDIO BUTTONS REMOVED */}
             {!showInfo && (
               <div className="absolute top-3 right-3 flex gap-2 z-50">
-                {/* Audio Controls - Only show if bird has audio and it's available */}
-                {hasAvailableAudio && (
-                  <div className="relative flex gap-2">
-                    {/* Audio Play/Pause Button with enhanced mobile feedback */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={cn(
-                        "text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg",
-                        audioError && "opacity-50 cursor-not-allowed",
-                        isAudioPlaying && "ring-2 ring-emerald-400/50",
-                        audioLoading && "animate-pulse",
-                        getEnhancedButtonStyle(""),
-                      )}
-                      onClick={toggleAudio}
-                      aria-label={
-                        audioLoading
-                          ? "Loading audio..."
-                          : audioError
-                            ? "Audio unavailable - tap to retry"
-                            : isAudioPlaying
-                              ? "Pause bird sound"
-                              : "Play bird sound"
-                      }
-                    >
-                      {audioLoading ? (
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      ) : audioError ? (
-                        <div className="w-4 h-4 flex items-center justify-center">
-                          <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
-                        </div>
-                      ) : isAudioPlaying ? (
-                        <Pause className="w-4 h-4" />
-                      ) : (
-                        <Play className="w-4 h-4" />
-                      )}
-                    </Button>
-
-                    {/* Volume Control Button */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={cn(
-                        "text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg",
-                        audioError && "opacity-50 cursor-not-allowed",
-                        showVolumeSlider && "ring-2 ring-blue-400/50",
-                        getEnhancedButtonStyle(""),
-                      )}
-                      onClick={() => setShowVolumeSlider(!showVolumeSlider)}
-                      disabled={audioError}
-                      aria-label="Volume control"
-                    >
-                      {volume === 0 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                    </Button>
-
-                    {/* Volume Slider */}
-                    {showVolumeSlider && !audioError && (
-                      <div className="absolute top-12 right-0 bg-black/95 backdrop-blur-sm rounded-lg p-3 shadow-xl border border-white/10 min-w-[140px] animate-in slide-in-from-top-2">
-                        <div className="flex items-center gap-2">
-                          <VolumeX className="w-3 h-3 text-white/70 flex-shrink-0" />
-                          <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.1"
-                            value={volume}
-                            onChange={(e) => handleVolumeChange(Number.parseFloat(e.target.value))}
-                            className="flex-1 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
-                            style={{
-                              background: `linear-gradient(to right, #10b981 0%, #10b981 ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
-                            }}
-                          />
-                          <Volume2 className="w-3 h-3 text-white/70 flex-shrink-0" />
-                        </div>
-                        <div className="text-center mt-2">
-                          <span className="text-xs text-white/70">{Math.round(volume * 100)}%</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mobile Audio Status Indicator */}
-                    {isMobile && (audioLoading || audioError || !audioReady) && (
-                      <div className="absolute -bottom-8 right-0 bg-black/90 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
-                        {audioLoading && "Loading..."}
-                        {audioError && "Error - Tap to retry"}
-                        {!audioReady && !audioLoading && !audioError && "Preparing..."}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Slideshow Control */}
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={cn(
-                    "text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg",
-                    getEnhancedButtonStyle(""),
-                  )}
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
                   onClick={() => setIsPlaying(!isPlaying)}
                   aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
                   disabled={!firstImageLoaded}
@@ -1176,14 +558,10 @@ export default function HomepageBirdCarousel({
                   {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                 </Button>
 
-                {/* Photo Credit Button */}
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={cn(
-                    "text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg",
-                    getEnhancedButtonStyle(""),
-                  )}
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg"
                   onClick={() => setShowPhotoCredit(!showPhotoCredit)}
                   aria-label="View photo credit"
                 >
@@ -1221,10 +599,7 @@ export default function HomepageBirdCarousel({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className={cn(
-                        "flex-shrink-0 w-11 h-11 p-0 rounded-full border-0 transition-all duration-300 shadow-lg text-white hover:scale-105",
-                        getEnhancedButtonStyle(""),
-                      )}
+                      className="flex-shrink-0 w-11 h-11 p-0 rounded-full border-0 transition-all duration-300 shadow-lg bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white hover:scale-105"
                       onClick={() => setShowInfo(true)}
                       aria-label="Show bird information"
                     >
@@ -1433,10 +808,10 @@ export default function HomepageBirdCarousel({
                   <button
                     key={bird.id}
                     className={cn(
-                      "w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 carousel-thumbnail relative",
+                      "w-12 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 carousel-thumbnail",
                       index === currentIndex
                         ? "border-emerald-500 ring-2 ring-emerald-200 scale-110 shadow-lg"
-                        : "border-gray-300 hover:border-gray-400 hover:scale-105 shadow-sm",
+                        : "border-gray-200 hover:border-gray-300 hover:scale-105 shadow-sm",
                     )}
                     onClick={() => goToSlide(index)}
                     aria-label={`View ${bird.commonName}`}
@@ -1454,12 +829,6 @@ export default function HomepageBirdCarousel({
                       loading="lazy"
                       sizes="48px"
                     />
-                    {/* Audio indicator for birds with sound - only show if audio is available */}
-                    {bird.audioFile && audioFileExists[bird.audioFile] !== false && audioReady && (
-                      <div className="absolute top-0.5 right-0.5 w-3 h-3 bg-emerald-500 rounded-full flex items-center justify-center">
-                        <Volume2 className="w-2 h-2 text-white" />
-                      </div>
-                    )}
                   </button>
                 ))}
               </div>
@@ -1482,30 +851,6 @@ export default function HomepageBirdCarousel({
           </div>
         </div>
       </Card>
-
-      {/* Custom CSS for volume slider */}
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: #10b981;
-          cursor: pointer;
-          border: 2px solid white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .slider::-moz-range-thumb {
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: #10b981;
-          cursor: pointer;
-          border: 2px solid white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-      `}</style>
     </div>
   )
 }
