@@ -313,6 +313,29 @@ const birdData: BirdData[] = [
       reserveLink: "/about/partners#proaves",
     },
   },
+  {
+    id: "12",
+    commonName: "Golden-headed Quetzal",
+    scientificName: "Pharomachrus auriceps",
+    spanishName: "Quetzal Cabecidorado",
+    primaryRegion: "Eastern Andes",
+    secondaryRegions: ["Central Andes", "Western Andes"],
+    ecoregions: ["Cloud forest", "Montane forest", "Forest canopy", "Secondary growth"],
+    regionSlug: "eastern-andes",
+    status: "Spectacular",
+    difficulty: "Moderate",
+    habitat: "Cloud forests and montane forests with fruiting trees",
+    bestTime: "Year-round (most active early morning)",
+    elevation: "1,200 - 2,800m",
+    image: "/images/gohque1.jpg",
+    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-O2SEW0cbNWsNGuBflkixHCiSmeivLj.mp3",
+    photoCredit: {
+      photographer: "Royann",
+      title: "Wildlife Photographer",
+      reserve: "Chamicero de Perija",
+      reserveLink: "/about/partners#fundacion-proaves",
+    },
+  },
 ]
 
 interface HomepageBirdCarouselProps {
@@ -362,10 +385,10 @@ export default function HomepageBirdCarousel({
   // Check if current bird should show the Explore Region button (only Vermilion Cardinal)
   const shouldShowExploreRegion = currentBird.id === "6" // Vermilion Cardinal
 
-  // Check if current bird should show eBird button
-  const shouldShowEBirdButton = ["8", "9", "10", "11"].includes(currentBird.id) // Golden-headed Manakin, Striped Manakin, Scaled Dove, Yellow-throated Toucan
+  // Check if current bird should show eBird button - Updated to include Golden-headed Quetzal
+  const shouldShowEBirdButton = ["8", "9", "10", "11", "12"].includes(currentBird.id) // Golden-headed Manakin, Striped Manakin, Scaled Dove, Yellow-throated Toucan, Golden-headed Quetzal
 
-  // Get eBird URL for current bird
+  // Get eBird URL for current bird - Updated to include Golden-headed Quetzal
   const getEBirdUrl = (birdId: string) => {
     switch (birdId) {
       case "8":
@@ -376,6 +399,8 @@ export default function HomepageBirdCarousel({
         return "https://ebird.org/species/scadov1"
       case "11":
         return "https://ebird.org/species/bkmtou1"
+      case "12":
+        return "https://ebird.org/species/gohque1"
       default:
         return ""
     }
@@ -1044,7 +1069,7 @@ export default function HomepageBirdCarousel({
     }
   }
 
-  // Enhanced image positioning for perfect square framing with focus on bird's eye and wing
+  // Enhanced image positioning for perfect square framing with focus on bird's eye and wing - Updated to include Golden-headed Quetzal
   const getImagePositioning = (birdId: string) => {
     switch (birdId) {
       case "1": // Green-bearded Helmetcrest
@@ -1102,6 +1127,11 @@ export default function HomepageBirdCarousel({
           objectPosition: "center 30%",
           transform: "scale(1.1)",
         }
+      case "12": // Golden-headed Quetzal
+        return {
+          objectPosition: "center 25%",
+          transform: "scale(1.15)",
+        }
       default:
         return {
           objectPosition: "center center",
@@ -1112,57 +1142,108 @@ export default function HomepageBirdCarousel({
 
   const currentImagePositioning = getImagePositioning(currentBird.id)
 
+  // Updated region colors to match Aves Explorer map exactly
   const getPrimaryRegionColor = (region: string) => {
     switch (region) {
-      case "Eastern Andes":
-        return "bg-blue-600/90 text-white border-blue-500/50"
-      case "Central Andes":
-        return "bg-purple-600/90 text-white border-purple-500/50"
+      case "Pacific":
+      case "Pacific Coast":
+        return "bg-[#228B22]/90 text-white border-[#228B22]/50"
       case "Western Andes":
-        return "bg-green-600/90 text-white border-green-500/50"
-      case "Colombian Massif":
-        return "bg-orange-600/90 text-white border-orange-500/50"
+        return "bg-[#8B4513]/90 text-white border-[#8B4513]/50"
+      case "Central Andes":
+        return "bg-[#A0522D]/90 text-white border-[#A0522D]/50"
+      case "Eastern Andes":
+        return "bg-[#CD853F]/90 text-white border-[#CD853F]/50"
+      case "Cauca Valley":
+        return "bg-[#4169E1]/90 text-white border-[#4169E1]/50"
+      case "Magdalena Valley":
+        return "bg-[#1E90FF]/90 text-white border-[#1E90FF]/50"
+      case "Caribbean":
       case "Caribbean Coast":
-        return "bg-cyan-600/90 text-white border-cyan-500/50"
+        return "bg-[#FF8C00]/90 text-white border-[#FF8C00]/50"
+      case "SNSM":
+      case "Sierra Nevada de Santa Marta":
+        return "bg-[#D2691E]/90 text-white border-[#D2691E]/50"
+      case "Llanos":
+        return "bg-[#FFD700]/90 text-white border-[#FFD700]/50"
+      case "Amazonia":
+        return "bg-[#32CD32]/90 text-white border-[#32CD32]/50"
+      case "Massif":
+      case "Colombian Massif":
+        return "bg-[#DEB887]/90 text-white border-[#DEB887]/50"
       case "Cauca River Region":
-        return "bg-yellow-600/90 text-white border-yellow-500/50"
+        return "bg-[#4169E2]/90 text-white border-[#4169E2]/50"
       default:
         return "bg-gray-600/90 text-white border-gray-500/50"
     }
   }
 
-  // New function to get region-specific text colors for photo credit links
+  // Updated region text colors to match Aves Explorer map exactly
   const getRegionTextColor = (region: string) => {
     switch (region) {
-      case "Eastern Andes":
+      case "Pacific":
+      case "Pacific Coast":
         return {
-          base: "text-blue-300",
-          hover: "hover:text-blue-200",
-        }
-      case "Central Andes":
-        return {
-          base: "text-purple-300",
-          hover: "hover:text-purple-200",
+          base: "text-[#228B22]",
+          hover: "hover:text-[#1F7A1F]",
         }
       case "Western Andes":
         return {
-          base: "text-green-300",
-          hover: "hover:text-green-200",
+          base: "text-[#8B4513]",
+          hover: "hover:text-[#7A3E11]",
         }
-      case "Colombian Massif":
+      case "Central Andes":
         return {
-          base: "text-orange-300",
-          hover: "hover:text-orange-200",
+          base: "text-[#A0522D]",
+          hover: "hover:text-[#8F4928]",
         }
+      case "Eastern Andes":
+        return {
+          base: "text-[#CD853F]",
+          hover: "hover:text-[#B8763A]",
+        }
+      case "Cauca Valley":
+        return {
+          base: "text-[#4169E1]",
+          hover: "hover:text-[#3A5FCA]",
+        }
+      case "Magdalena Valley":
+        return {
+          base: "text-[#1E90FF]",
+          hover: "hover:text-[#1C82E6]",
+        }
+      case "Caribbean":
       case "Caribbean Coast":
         return {
-          base: "text-cyan-300",
-          hover: "hover:text-cyan-200",
+          base: "text-[#FF8C00]",
+          hover: "hover:text-[#E67E00]",
+        }
+      case "SNSM":
+      case "Sierra Nevada de Santa Marta":
+        return {
+          base: "text-[#D2691E]",
+          hover: "hover:text-[#BD5F1B]",
+        }
+      case "Llanos":
+        return {
+          base: "text-[#FFD700]",
+          hover: "hover:text-[#E6C200]",
+        }
+      case "Amazonia":
+        return {
+          base: "text-[#32CD32]",
+          hover: "hover:text-[#2DB82D]",
+        }
+      case "Massif":
+      case "Colombian Massif":
+        return {
+          base: "text-[#DEB887]",
+          hover: "hover:text-[#C8A679]",
         }
       case "Cauca River Region":
         return {
-          base: "text-yellow-300",
-          hover: "hover:text-yellow-200",
+          base: "text-[#4169E2]",
+          hover: "hover:text-[#3A5FCA]",
         }
       default:
         return {
@@ -1494,40 +1575,49 @@ export default function HomepageBirdCarousel({
                       </Badge>
                     </div>
 
-                    {/* Details Grid with improved spacing */}
-                    <div className="space-y-5 mb-6">
+                    {/* Information Grid */}
+                    <div className="space-y-4 text-sm">
+                      {/* Primary Region */}
                       <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-2">Habitat:</span>
-                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.habitat}</span>
+                        <h4 className="font-semibold text-emerald-300 mb-1">Primary Region</h4>
+                        <p className="text-gray-300 leading-relaxed">{currentBird.primaryRegion}</p>
                       </div>
-                      <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-2">Best Time:</span>
-                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.bestTime}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-2">Elevation:</span>
-                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.elevation}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-2">Primary Region:</span>
-                        <span className="text-white/90 text-sm leading-relaxed block">{currentBird.primaryRegion}</span>
-                      </div>
+
+                      {/* Secondary Regions */}
                       {currentBird.secondaryRegions.length > 0 && (
                         <div>
-                          <span className="font-medium text-emerald-300 text-sm block mb-2">Also Found In:</span>
-                          <span className="text-white/90 text-sm leading-relaxed block">
-                            {currentBird.secondaryRegions.join(", ")}
-                          </span>
+                          <h4 className="font-semibold text-emerald-300 mb-1">Also Found In</h4>
+                          <p className="text-gray-300 leading-relaxed">{currentBird.secondaryRegions.join(", ")}</p>
                         </div>
                       )}
+
+                      {/* Habitat */}
                       <div>
-                        <span className="font-medium text-emerald-300 text-sm block mb-2">Ecoregions:</span>
-                        <div className="flex flex-wrap gap-1.5 mt-2">
+                        <h4 className="font-semibold text-emerald-300 mb-1">Habitat</h4>
+                        <p className="text-gray-300 leading-relaxed">{currentBird.habitat}</p>
+                      </div>
+
+                      {/* Elevation */}
+                      <div>
+                        <h4 className="font-semibold text-emerald-300 mb-1">Elevation</h4>
+                        <p className="text-gray-300 leading-relaxed">{currentBird.elevation}</p>
+                      </div>
+
+                      {/* Best Time */}
+                      <div>
+                        <h4 className="font-semibold text-emerald-300 mb-1">Best Time to Visit</h4>
+                        <p className="text-gray-300 leading-relaxed">{currentBird.bestTime}</p>
+                      </div>
+
+                      {/* Ecoregions */}
+                      <div>
+                        <h4 className="font-semibold text-emerald-300 mb-2">Ecoregions</h4>
+                        <div className="flex flex-wrap gap-1.5">
                           {currentBird.ecoregions.map((ecoregion, index) => (
                             <Badge
                               key={index}
                               variant="outline"
-                              className="text-xs bg-white/10 text-white/80 border-white/20 hover:bg-white/20 transition-colors"
+                              className="text-xs bg-emerald-900/30 text-emerald-200 border-emerald-700/50 hover:bg-emerald-800/40 transition-colors"
                             >
                               {ecoregion}
                             </Badge>
@@ -1537,18 +1627,18 @@ export default function HomepageBirdCarousel({
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="space-y-3">
+                    <div className="mt-8 space-y-3">
                       {/* Conditional Explore Region Button - Only for Vermilion Cardinal */}
                       {shouldShowExploreRegion && (
-                        <Link href="/regions/caribbean" className="block">
-                          <Button className="w-full bg-cyan-600 hover:bg-cyan-700 text-white border-0 shadow-lg transition-all duration-200 hover:scale-[1.02]">
+                        <Link href={`/regions/${currentBird.regionSlug}`} className="block">
+                          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white border-0 shadow-lg transition-all duration-200 hover:scale-[1.02]">
                             <MapPin className="w-4 h-4 mr-2" />
-                            Explore Caribbean Region
+                            Explore {currentBird.primaryRegion}
                           </Button>
                         </Link>
                       )}
 
-                      {/* Conditional eBird Button */}
+                      {/* Conditional eBird Button - Updated to include Golden-headed Quetzal */}
                       {shouldShowEBirdButton && (
                         <a
                           href={getEBirdUrl(currentBird.id)}
@@ -1562,35 +1652,25 @@ export default function HomepageBirdCarousel({
                           </Button>
                         </a>
                       )}
-
-                      {/* Explore All Birds Button */}
-                      <Link href="/aves-explorer" className="block">
-                        <Button
-                          variant="outline"
-                          className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 shadow-lg transition-all duration-200 hover:scale-[1.02]"
-                        >
-                          Explore All Birds
-                        </Button>
-                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Photo Credit Panel - Reverted to v3 style with region colors */}
+            {/* Photo Credit Panel - Version 1 Style: Compact Popup */}
             {showPhotoCredit && !showInfo && (
               <div className="absolute top-16 right-3 z-60">
-                <div className="bg-black/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[220px] border border-white/10">
-                  <div className="flex items-center justify-between mb-3">
+                <div className="bg-black/90 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[200px] max-w-[280px] border border-white/10">
+                  <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Camera className="w-4 h-4 flex-shrink-0" />
-                      <span className="font-medium">Photo Credit</span>
+                      <span className="font-medium text-xs">Photo Credit</span>
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="w-6 h-6 p-0 rounded-full hover:bg-white/20 text-white border-0"
+                      className="w-5 h-5 p-0 rounded-full hover:bg-white/20 text-white border-0 flex-shrink-0"
                       onClick={() => setShowPhotoCredit(false)}
                       aria-label="Close photo credit"
                     >
@@ -1599,13 +1679,18 @@ export default function HomepageBirdCarousel({
                   </div>
 
                   <div className="space-y-2">
+                    {/* Photographer */}
                     <div>
-                      <span className="text-white/70 text-xs">Photographer:</span>
-                      <div className="text-white font-medium">
+                      <span className="text-white/60 text-xs block">Photographer:</span>
+                      <div className="text-white text-sm font-medium">
                         {currentBird.photoCredit.teamLink ? (
                           <Link
                             href={currentBird.photoCredit.teamLink}
-                            className={cn("transition-colors", regionColors.base, regionColors.hover)}
+                            className={cn(
+                              "transition-colors underline decoration-dotted underline-offset-2",
+                              regionColors.base,
+                              regionColors.hover,
+                            )}
                           >
                             {currentBird.photoCredit.photographer}
                           </Link>
@@ -1613,17 +1698,24 @@ export default function HomepageBirdCarousel({
                           currentBird.photoCredit.photographer
                         )}
                       </div>
-                      <div className="text-white/80 text-xs">{currentBird.photoCredit.title}</div>
+                      {currentBird.photoCredit.title && (
+                        <div className="text-white/70 text-xs">{currentBird.photoCredit.title}</div>
+                      )}
                     </div>
 
+                    {/* Location */}
                     {currentBird.photoCredit.reserve && (
                       <div>
-                        <span className="text-white/70 text-xs">Location:</span>
-                        <div className="text-white/90 text-xs">
+                        <span className="text-white/60 text-xs block">Location:</span>
+                        <div className="text-white/90 text-sm">
                           {currentBird.photoCredit.reserveLink ? (
                             <Link
                               href={currentBird.photoCredit.reserveLink}
-                              className={cn("transition-colors", regionColors.base, regionColors.hover)}
+                              className={cn(
+                                "transition-colors underline decoration-dotted underline-offset-2",
+                                regionColors.base,
+                                regionColors.hover,
+                              )}
                             >
                               {currentBird.photoCredit.reserve}
                             </Link>
@@ -1634,6 +1726,7 @@ export default function HomepageBirdCarousel({
                       </div>
                     )}
 
+                    {/* Instagram Link */}
                     {currentBird.photoCredit.instagramPost && (
                       <div className="pt-2 border-t border-white/10">
                         <a
@@ -1641,13 +1734,13 @@ export default function HomepageBirdCarousel({
                           target="_blank"
                           rel="noopener noreferrer"
                           className={cn(
-                            "inline-flex items-center gap-1 text-xs transition-colors",
+                            "inline-flex items-center gap-1.5 text-xs transition-colors",
                             regionColors.base,
                             regionColors.hover,
                           )}
                         >
-                          <ExternalLink className="w-3 h-3" />
-                          View on Instagram
+                          <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                          <span>View on Instagram</span>
                         </a>
                       </div>
                     )}
@@ -1657,31 +1750,31 @@ export default function HomepageBirdCarousel({
             )}
           </div>
 
-          {/* Enhanced Thumbnail Navigation with Scroll Arrows */}
-          <div className="relative bg-white border-t">
-            {/* Left Scroll Arrow */}
+          {/* Enhanced Thumbnail Navigation with Scroll Controls */}
+          <div className="relative bg-gradient-to-r from-emerald-50 to-blue-50 border-t border-emerald-100">
+            {/* Scroll Left Button */}
             {canScrollThumbnails("left") && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 p-0 rounded-full bg-white/90 hover:bg-white shadow-md border border-gray-200"
+                className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200"
                 onClick={() => scrollThumbnails("left")}
                 aria-label="Scroll thumbnails left"
               >
-                <ChevronLeft className="w-4 h-4 text-gray-600" />
+                <ChevronLeft className="w-4 h-4 text-emerald-700" />
               </Button>
             )}
 
-            {/* Right Scroll Arrow */}
+            {/* Scroll Right Button */}
             {canScrollThumbnails("right") && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 p-0 rounded-full bg-white/90 hover:bg-white shadow-md border border-gray-200"
+                className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200"
                 onClick={() => scrollThumbnails("right")}
                 aria-label="Scroll thumbnails right"
               >
-                <ChevronRight className="w-4 h-4 text-gray-600" />
+                <ChevronRight className="w-4 h-4 text-emerald-700" />
               </Button>
             )}
 
@@ -1696,9 +1789,9 @@ export default function HomepageBirdCarousel({
                   key={bird.id}
                   className={cn(
                     "flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 hover:scale-105",
-                    currentIndex === index
+                    index === currentIndex
                       ? "border-emerald-500 ring-2 ring-emerald-200 shadow-lg"
-                      : "border-gray-200 hover:border-gray-300 shadow-sm",
+                      : "border-gray-200 hover:border-emerald-300 shadow-sm",
                   )}
                   onClick={() => goToSlide(index)}
                   aria-label={`View ${bird.commonName}`}
@@ -1711,8 +1804,7 @@ export default function HomepageBirdCarousel({
                     className="w-full h-full object-cover"
                     style={{
                       objectPosition: getImagePositioning(bird.id).objectPosition,
-                      transform: getImagePositioning(bird.id).transform,
-                      transformOrigin: "center center",
+                      transform: "scale(1.1)",
                     }}
                   />
                 </button>
