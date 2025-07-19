@@ -323,7 +323,7 @@ ${formData.firstName} ${formData.lastName}`)
                     <h3
                       className={`font-bold text-gray-900 mb-3 lg:mb-4 ${isMobile ? "text-lg" : "text-xl lg:text-2xl"}`}
                     >
-                      Amazon & Pacific
+                      Amazon
                     </h3>
                     <p
                       className={`text-gray-600 mb-4 lg:mb-6 leading-relaxed ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
@@ -331,7 +331,7 @@ ${formData.firstName} ${formData.lastName}`)
                       Pristine rainforests with the highest biodiversity on Earth
                     </p>
                     <div className={`text-emerald-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
-                      875+ species • 67 endemics
+                      1,100+ species
                     </div>
                   </CardContent>
                 </Card>
@@ -354,7 +354,7 @@ ${formData.firstName} ${formData.lastName}`)
                       Cloud forests and páramo with spectacular endemic species
                     </p>
                     <div className={`text-blue-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
-                      720+ species • 45 endemics
+                      1,100+ species • 55 endemics
                     </div>
                   </CardContent>
                 </Card>
@@ -381,7 +381,7 @@ ${formData.firstName} ${formData.lastName}`)
                       World's highest coastal mountain with unique endemics
                     </p>
                     <div className={`text-orange-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
-                      635+ species • 79 endemics
+                      500+ species • 26 endemics
                     </div>
                   </CardContent>
                 </Card>
