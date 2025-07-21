@@ -3,271 +3,202 @@
 ## Overview
 This guide provides comprehensive documentation for the Supabase integration with the AVES website, including user authentication, data storage, and admin functionality.
 
-## Database Schema
-
-### Tables
-
-#### 1. profiles
-Stores user profile information and preferences.
-
-**Columns:**
-- `id` (UUID, Primary Key) - References auth.users(id)
-- `email` (TEXT, NOT NULL) - User's email address
-- `full_name` (TEXT) - User's full name
-- `phone` (TEXT) - User's phone number
-- `experience_level` (TEXT) - Birding experience level
-- `is_admin` (BOOLEAN) - Admin privileges flag
-- `registration_method` (TEXT) - How user registered (form, google, magic_link)
-- `marketing_consent` (BOOLEAN) - Marketing email consent
-- `newsletter_subscribed` (BOOLEAN) - Newsletter subscription status
-- `created_at` (TIMESTAMP) - Account creation date
-- `updated_at` (TIMESTAMP) - Last profile update
-- `last_login` (TIMESTAMP) - Last login timestamp
-
-#### 2. bookings
-Stores tour booking information.
-
-**Columns:**
-- `id` (UUID, Primary Key) - Unique booking identifier
-- `user_id` (UUID, Foreign Key) - References profiles(id)
-- `booking_data` (JSONB) - Structured booking information
-- `status` (TEXT) - Booking status (draft, pending, confirmed, cancelled, completed)
-- `total_cost` (DECIMAL) - Total booking cost
-- `tour_selections` (JSONB) - Selected tours array
-- `payment_status` (TEXT) - Payment processing status
-- `confirmation_number` (TEXT) - Unique confirmation number
-- `created_at` (TIMESTAMP) - Booking creation date
-- `updated_at` (TIMESTAMP) - Last booking update
-
-#### 3. inquiries
-Stores customer inquiries and support requests.
-
-**Columns:**
-- `id` (UUID, Primary Key) - Unique inquiry identifier
-- `user_id` (UUID, Foreign Key) - References profiles(id), nullable
-- `email` (TEXT, NOT NULL) - Inquirer's email
-- `full_name` (TEXT, NOT NULL) - Inquirer's name
-- `message` (TEXT, NOT NULL) - Inquiry message
-- `inquiry_type` (TEXT) - Type of inquiry (general, booking, support, etc.)
-- `status` (TEXT) - Processing status (pending, in_progress, resolved, closed)
-- `priority` (TEXT) - Priority level (low, medium, high, urgent)
-- `assigned_to` (UUID) - Admin user assigned to inquiry
-- `created_at` (TIMESTAMP) - Inquiry creation date
-
-#### 4. admin_logs
-Tracks admin actions for audit purposes.
-
-**Columns:**
-- `id` (UUID, Primary Key) - Unique log identifier
-- `admin_id` (UUID, Foreign Key) - References profiles(id)
-- `action` (TEXT, NOT NULL) - Action performed
-- `target_type` (TEXT, NOT NULL) - Type of target (user, booking, inquiry)
-- `target_id` (UUID) - ID of affected record
-- `details` (JSONB) - Additional action details
-- `created_at` (TIMESTAMP) - Action timestamp
-- `ip_address` (INET) - Admin's IP address
-
 ## Environment Variables
-
-Add these to your `.env.local` file:
+Ensure these environment variables are set:
 
 \`\`\`env
 NEXT_PUBLIC_SUPABASE_URL=https://vlizimtetekemaiivnsf.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsaXppbXRldGVrZW1haWl2bnNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MTUwODMsImV4cCI6MjA2ODM5MTA4M30.tsrP54YBn3U5k_0xvqfvmleApNjFjKxO3u8iQc9n90E
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
+SUPABASE_SERVICE_ROLE_KEY=[Your Service Role Key]
 \`\`\`
+
+## Database Schema
+
+### Tables Created:
+1. **profiles** - User profile information
+2. **bookings** - Tour booking data
+3. **inquiries** - Contact form submissions
+4. **admin_logs** - Admin action audit trail
+
+### Key Features:
+- Row Level Security (RLS) enabled
+- Automatic profile creation on user signup
+- Admin privilege system
+- Audit logging for admin actions
 
 ## Authentication Methods
 
-### 1. Email/Password Registration
-- Form-based registration with validation
-- Password requirements: 8+ characters, uppercase, lowercase, number
+### 1. Form-based Registration
+- Email/password with validation
+- Profile creation with user preferences
 - Email verification required
-- Automatic profile creation
 
 ### 2. Google OAuth
-- One-click Google sign-in
-- Automatic profile creation from Google data
-- Seamless redirect handling
+- Seamless Google sign-in
+- Automatic profile creation
+- Redirect handling via `/auth/callback`
 
 ### 3. Magic Link
 - Passwordless authentication
-- Email-based login links
-- Secure token-based authentication
+- Email-based sign-in
+- Secure token validation
+
+## Error Handling
+
+### Network Issues
+- Connection status monitoring
+- Retry mechanisms with exponential backoff
+- User-friendly error messages
+- Offline state detection
+
+### Common Errors Resolved:
+- DNS_PROBE_POSSIBLE: Network connectivity checks
+- Failed to fetch: Retry logic and connection validation
+- OAuth redirect issues: Proper callback handling
 
 ## Admin Functionality
 
 ### Admin Account Creation
-An admin account is automatically created when a user registers with the email `admin@aves.bio`. This account has elevated privileges including:
+- Automatic admin privileges for `admin@aves.bio`
+- Admin dashboard access control
+- Comprehensive user management
 
-- View all user data
-- Manage bookings and inquiries
+### Admin Features:
+- View all users, bookings, and inquiries
 - Export data to CSV
-- Access admin dashboard
-- View audit logs
-
-### Admin Dashboard Features
-- **User Management**: View, search, and manage all user accounts
-- **Booking Management**: Track and manage all tour bookings
-- **Inquiry Management**: Handle customer inquiries and support requests
-- **Data Export**: Export user, booking, and inquiry data to CSV
-- **Audit Logging**: Track all admin actions for compliance
-
-## Security Features
-
-### Row Level Security (RLS)
-All tables implement RLS policies to ensure data privacy:
-- Users can only access their own data
-- Admins have elevated access to all data
-- Anonymous users have limited access
-
-### Data Validation
-- Input sanitization to prevent XSS attacks
-- Email format validation
-- Password strength requirements
-- Phone number format validation
-
-### Privacy Compliance
-- Marketing consent tracking
-- Newsletter subscription management
-- Data export capabilities for GDPR compliance
-- Secure data deletion policies
-
-## API Usage Examples
-
-### Creating a User Profile
-\`\`\`typescript
-import { createUserProfile } from '@/lib/supabase'
-
-const profileData = {
-  id: user.id,
-  email: 'user@example.com',
-  full_name: 'John Doe',
-  experience_level: 'Intermediate birder',
-  marketing_consent: true,
-  newsletter_subscribed: true
-}
-
-const { data, error } = await createUserProfile(profileData)
-\`\`\`
-
-### Logging Admin Actions
-\`\`\`typescript
-import { logAdminAction } from '@/lib/supabase'
-
-await logAdminAction(
-  adminId,
-  'USER_PROFILE_UPDATE',
-  'profile',
-  userId,
-  { field_updated: 'experience_level', new_value: 'Advanced birder' }
-)
-\`\`\`
-
-### Querying User Data (Admin)
-\`\`\`typescript
-const { data: users } = await supabase
-  .from('profiles')
-  .select('*')
-  .order('created_at', { ascending: false })
-\`\`\`
+- Update inquiry status
+- Audit log viewing
+- Real-time statistics
 
 ## Testing Instructions
 
 ### 1. User Registration Testing
-1. Navigate to the website homepage
-2. Click "Create Account" or any sign-up button
-3. Test form registration:
-   - Fill out all required fields
-   - Test password validation
-   - Verify email confirmation
-4. Test Google OAuth:
-   - Click "Google" sign-in button
-   - Complete Google authentication
-   - Verify profile creation
-5. Test Magic Link:
-   - Enter email address
-   - Click "Magic Link" button
-   - Check email and click link
-   - Verify authentication
+\`\`\`bash
+# Test form registration
+1. Navigate to any page with auth modal
+2. Click "Sign Up"
+3. Fill form with valid data
+4. Verify email confirmation
+5. Check profile creation in database
 
-### 2. Admin Access Testing
-1. Register with email `admin@aves.bio`
-2. Complete registration process
-3. Navigate to `/admin`
-4. Verify admin dashboard access
-5. Test admin functions:
-   - View user data
-   - Export CSV files
-   - Update inquiry status
-   - View audit logs
+# Test Google OAuth
+1. Click "Google" button
+2. Complete OAuth flow
+3. Verify redirect to /auth/callback
+4. Check profile creation
 
-### 3. Data Privacy Testing
-1. Create regular user account
-2. Verify user can only see own data
-3. Test admin account can see all data
-4. Verify RLS policies are working
-5. Test data export functionality
+# Test Magic Link
+1. Enter email address
+2. Click "Magic Link"
+3. Check email for link
+4. Click link and verify authentication
+\`\`\`
 
-### 4. Error Handling Testing
-1. Test invalid email formats
-2. Test weak passwords
-3. Test duplicate email registration
-4. Test network connectivity issues
-5. Verify appropriate error messages
+### 2. Contact Form Testing
+\`\`\`bash
+# Test form submission
+1. Navigate to /contact
+2. Fill out complete form
+3. Submit inquiry
+4. Verify database entry
+5. Check admin dashboard for inquiry
+
+# Test error handling
+1. Disconnect internet
+2. Try submitting form
+3. Verify error message
+4. Reconnect and retry
+\`\`\`
+
+### 3. Admin Dashboard Testing
+\`\`\`bash
+# Test admin access
+1. Register with admin@aves.bio
+2. Navigate to /admin
+3. Verify dashboard access
+4. Test data export functions
+5. Test inquiry management
+\`\`\`
+
+## Security Features
+
+### Data Protection:
+- Input sanitization and validation
+- XSS protection
+- SQL injection prevention via Supabase RLS
+- CSRF protection
+
+### Privacy Compliance:
+- GDPR-compliant data handling
+- Marketing consent tracking
+- Data export functionality
+- User data deletion capabilities
 
 ## Troubleshooting
 
-### Common Issues
+### Common Issues:
 
-#### 1. Authentication Errors
-- **Issue**: "Invalid login credentials"
-- **Solution**: Verify email/password combination, check if email is verified
+1. **"Failed to fetch" errors**
+   - Check internet connection
+   - Verify Supabase URL and keys
+   - Check browser network tab for specific errors
 
-#### 2. Profile Creation Failures
-- **Issue**: User authenticated but no profile created
-- **Solution**: Check database triggers, verify RLS policies
+2. **Google OAuth not working**
+   - Verify OAuth configuration in Supabase
+   - Check redirect URLs
+   - Ensure proper callback handling
 
-#### 3. Admin Access Denied
-- **Issue**: Cannot access admin dashboard
-- **Solution**: Verify `is_admin` flag in profiles table, check email address
+3. **Profile creation failures**
+   - Check RLS policies
+   - Verify database permissions
+   - Review trigger functions
 
-#### 4. Data Export Issues
-- **Issue**: CSV export fails
-- **Solution**: Check admin permissions, verify data exists
+4. **Admin access denied**
+   - Confirm email is exactly `admin@aves.bio`
+   - Check `is_admin` flag in database
+   - Verify RLS policies for admin access
 
-### Database Maintenance
+### Debug Steps:
+1. Check browser console for errors
+2. Verify network connectivity
+3. Check Supabase dashboard for logs
+4. Review database triggers and functions
+5. Test with different browsers/devices
 
-#### Regular Tasks
-1. Monitor user registration trends
-2. Clean up old inquiry records
-3. Archive completed bookings
-4. Review admin logs for security
+## Performance Optimizations
 
-#### Performance Optimization
-1. Monitor query performance
-2. Update table statistics
-3. Review and optimize indexes
-4. Clean up unused data
+### Implemented:
+- Connection pooling
+- Query optimization with indexes
+- Retry mechanisms for failed requests
+- Efficient data loading strategies
+- Proper error boundaries
+
+### Monitoring:
+- Connection status indicators
+- Loading states for all operations
+- Error tracking and reporting
+- Performance metrics collection
+
+## Deployment Checklist
+
+- [ ] Environment variables configured
+- [ ] Database schema deployed
+- [ ] RLS policies active
+- [ ] OAuth providers configured
+- [ ] Email templates set up
+- [ ] Admin account created
+- [ ] Error handling tested
+- [ ] Performance monitoring enabled
 
 ## Support and Maintenance
 
-### Monitoring
-- Set up alerts for failed registrations
-- Monitor admin action logs
-- Track user engagement metrics
-- Monitor database performance
+### Regular Tasks:
+- Monitor error logs
+- Review admin audit trails
+- Update security policies
+- Backup database regularly
+- Test authentication flows
 
-### Backup Strategy
-- Automated daily backups via Supabase
-- Point-in-time recovery available
-- Regular backup testing
-- Data retention policies
-
-### Updates and Migrations
-- Version control for schema changes
-- Staged deployment process
-- Rollback procedures
-- User communication for maintenance
-
-For additional support or questions, contact the development team or refer to the Supabase documentation.
+### Contact Information:
+For technical support or questions about this integration, contact the development team or refer to the Supabase documentation.

@@ -3,11 +3,35 @@ import { createClient } from "@supabase/supabase-js"
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Validate environment variables
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Missing Supabase environment variables")
+}
+
+// Client-side Supabase client
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    flowType: "pkce",
+  },
+  global: {
+    headers: {
+      "X-Client-Info": "aves-website",
+    },
+  },
+})
 
 // Server-side client for admin operations
 export const createServerClient = () => {
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!serviceRoleKey) {
+    console.warn("Service role key not available - admin functions will be limited")
+    return supabase
+  }
+
+  return createClient(supabaseUrl, serviceRoleKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
@@ -207,28 +231,51 @@ export type Database = {
   }
 }
 
-// Helper functions for common operations
+// Helper functions with error handling
 export const getUserProfile = async (userId: string) => {
-  const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
-
-  return { data, error }
+  try {
+    const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
+    return { data, error }
+  } catch (err) {
+    console.error("Error fetching user profile:", err)
+    return { data: null, error: err }
+  }
 }
 
 export const updateUserProfile = async (userId: string, updates: any) => {
-  const { data, error } = await supabase
-    .from("profiles")
-    .update({ ...updates, updated_at: new Date().toISOString() })
-    .eq("id", userId)
-    .select()
-    .single()
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .update({ ...updates, updated_at: new Date().toISOString() })
+      .eq("id", userId)
+      .select()
+      .single()
 
-  return { data, error }
+    return { data, error }
+  } catch (err) {
+    console.error("Error updating user profile:", err)
+    return { data: null, error: err }
+  }
 }
 
 export const createUserProfile = async (profile: Database["public"]["Tables"]["profiles"]["Insert"]) => {
-  const { data, error } = await supabase.from("profiles").insert(profile).select().single()
+  try {
+    const { data, error } = await supabase.from("profiles").insert(profile).select().single()
+    return { data, error }
+  } catch (err) {
+    console.error("Error creating user profile:", err)
+    return { data: null, error: err }
+  }
+}
 
-  return { data, error }
+export const createInquiry = async (inquiry: Database["public"]["Tables"]["inquiries"]["Insert"]) => {
+  try {
+    const { data, error } = await supabase.from("inquiries").insert(inquiry).select().single()
+    return { data, error }
+  } catch (err) {
+    console.error("Error creating inquiry:", err)
+    return { data: null, error: err }
+  }
 }
 
 export const logAdminAction = async (
@@ -238,14 +285,29 @@ export const logAdminAction = async (
   targetId?: string,
   details?: any,
 ) => {
-  const { error } = await supabase.from("admin_logs").insert({
-    admin_id: adminId,
-    action,
-    target_type: targetType,
-    target_id: targetId,
-    details,
-    created_at: new Date().toISOString(),
-  })
+  try {
+    const { error } = await supabase.from("admin_logs").insert({
+      admin_id: adminId,
+      action,
+      target_type: targetType,
+      target_id: targetId,
+      details,
+      created_at: new Date().toISOString(),
+    })
 
-  return { error }
+    return { error }
+  } catch (err) {
+    console.error("Error logging admin action:", err)
+    return { error: err }
+  }
+}
+
+// Network connectivity check
+export const checkSupabaseConnection = async () => {
+  try {
+    const { data, error } = await supabase.from("profiles").select("count").limit(1)
+    return { connected: !error, error }
+  } catch (err) {
+    return { connected: false, error: err }
+  }
 }
