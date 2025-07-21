@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { AuthModal } from "./auth-modal"
+import { EnhancedAuthModal } from "./enhanced-auth-modal"
 import { User, Star, Shield, Calendar, Heart, CheckCircle, Sparkles } from "lucide-react"
 
 interface AccountCreationPromptProps {
@@ -102,7 +102,7 @@ export function AccountCreationPrompt({ contactInfo, onAccountCreated, className
 
         <div className="text-xs text-center text-gray-500 mt-3">Free forever • No spam • Secure with Supabase</div>
 
-        <AuthModal
+        <EnhancedAuthModal
           isOpen={showAuthModal}
           onClose={() => setShowAuthModal(false)}
           onSuccess={onAccountCreated}
