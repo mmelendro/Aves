@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js"
 
-// Enhanced Supabase configuration with admin support
+// Enhanced Supabase configuration with proper error handling
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
@@ -17,13 +17,14 @@ const getOrigin = () => {
   return process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 }
 
-// Create enhanced Supabase client
+// Create enhanced Supabase client with proper OAuth configuration
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true,
     flowType: "pkce",
+    debug: process.env.NODE_ENV === "development",
   },
   global: {
     headers: {
@@ -40,7 +41,100 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 })
 
-// Admin authentication functions
+// Enhanced Google OAuth sign-in with proper configuration
+export const signInWithGoogle = async () => {
+  try {
+    const redirectTo = `${getOrigin()}/auth/callback`
+
+    console.log("Initiating Google OAuth with redirect:", redirectTo)
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+          hd: undefined, // Remove domain restriction
+        },
+        skipBrowserRedirect: false,
+      },
+    })
+
+    if (error) {
+      console.error("Google OAuth configuration error:", error)
+      throw error
+    }
+
+    console.log("Google OAuth initiated successfully:", data)
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Google sign in failed:", error)
+    return {
+      success: false,
+      data: null,
+      error: handleSupabaseError(error),
+    }
+  }
+}
+
+// Enhanced email sign-up
+export const signUpWithEmail = async (userData: {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string
+  experienceLevel?: string
+}) => {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email: userData.email.toLowerCase().trim(),
+      password: userData.password,
+      options: {
+        data: {
+          full_name: `${userData.firstName} ${userData.lastName}`,
+          first_name: userData.firstName,
+          last_name: userData.lastName,
+          phone: userData.phone || "",
+          experience_level: userData.experienceLevel || "Beginner birder",
+        },
+        emailRedirectTo: `${getOrigin()}/auth/callback`,
+      },
+    })
+
+    if (error) throw error
+
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Sign up error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+// Enhanced email sign-in
+export const signInWithEmail = async (email: string, password: string) => {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.toLowerCase().trim(),
+      password: password,
+    })
+
+    if (error) throw error
+
+    // Update last login timestamp
+    if (data.user) {
+      await updateLastLogin(data.user.id)
+    }
+
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Sign in error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+// Admin authentication with enhanced security
 export const signInAdmin = async (email: string, password: string) => {
   try {
     // First, sign in with email and password
@@ -85,88 +179,13 @@ export const signInAdmin = async (email: string, password: string) => {
   }
 }
 
-// Enhanced authentication functions
-export const signUpWithEmail = async (userData: {
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-  phone?: string
-  experienceLevel?: string
-}) => {
-  try {
-    const { data, error } = await supabase.auth.signUp({
-      email: userData.email.toLowerCase().trim(),
-      password: userData.password,
-      options: {
-        data: {
-          full_name: `${userData.firstName} ${userData.lastName}`,
-          first_name: userData.firstName,
-          last_name: userData.lastName,
-          phone: userData.phone || "",
-          experience_level: userData.experienceLevel || "Beginner birder",
-        },
-        emailRedirectTo: `${getOrigin()}/auth/callback`,
-      },
-    })
-
-    if (error) throw error
-
-    return { success: true, data, error: null }
-  } catch (error: any) {
-    console.error("Sign up error:", error)
-    return { success: false, data: null, error: handleSupabaseError(error) }
-  }
-}
-
-export const signInWithEmail = async (email: string, password: string) => {
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email.toLowerCase().trim(),
-      password: password,
-    })
-
-    if (error) throw error
-
-    // Update last login timestamp
-    if (data.user) {
-      await updateLastLogin(data.user.id)
-    }
-
-    return { success: true, data, error: null }
-  } catch (error: any) {
-    console.error("Sign in error:", error)
-    return { success: false, data: null, error: handleSupabaseError(error) }
-  }
-}
-
-export const signInWithGoogle = async () => {
-  try {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${getOrigin()}/auth/callback?next=/dashboard`,
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    })
-
-    if (error) throw error
-    return { success: true, data, error: null }
-  } catch (error: any) {
-    console.error("Google sign in error:", error)
-    return { success: false, data: null, error: handleSupabaseError(error) }
-  }
-}
-
+// Magic link sign-in
 export const signInWithMagicLink = async (email: string) => {
   try {
     const { data, error } = await supabase.auth.signInWithOtp({
       email: email.toLowerCase().trim(),
       options: {
-        emailRedirectTo: `${getOrigin()}/auth/callback?next=/dashboard`,
+        emailRedirectTo: `${getOrigin()}/auth/callback`,
       },
     })
 
@@ -210,7 +229,13 @@ export const updatePassword = async (newPassword: string) => {
 // Helper functions
 const updateLastLogin = async (userId: string) => {
   try {
-    await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", userId)
+    await supabase
+      .from("profiles")
+      .update({
+        last_login: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", userId)
   } catch (error) {
     console.warn("Failed to update last login:", error)
   }
@@ -228,13 +253,14 @@ export const logAuditAction = async (userId: string | null, action: string, deta
       new_values: details?.new_values,
       ip_address: details?.ip_address,
       user_agent: details?.user_agent || (typeof window !== "undefined" ? window.navigator.userAgent : null),
+      created_at: new Date().toISOString(),
     })
   } catch (error) {
     console.error("Failed to log audit action:", error)
   }
 }
 
-// Enhanced error handling
+// Enhanced error handling with specific OAuth error messages
 export const handleSupabaseError = (error: any): string => {
   console.error("Supabase Error Details:", {
     message: error?.message,
@@ -244,14 +270,34 @@ export const handleSupabaseError = (error: any): string => {
     status: error?.status,
   })
 
-  // Handle specific admin errors
-  if (error?.message?.includes("Admin privileges required")) {
-    return "Access denied. Administrator privileges are required for this action."
+  // Handle OAuth specific errors
+  if (error?.message?.includes("OAuth")) {
+    return "OAuth authentication failed. Please check your Google account settings and try again."
   }
 
-  // Handle Google OAuth errors
+  // Handle Google OAuth provider errors
   if (error?.message?.includes("provider is not enabled") || error?.message?.includes("Unsupported provider")) {
-    return "Google sign-in is not enabled. Please contact support or try email/password sign-in."
+    return "Google sign-in is not properly configured. Please contact support."
+  }
+
+  // Handle redirect URI errors
+  if (error?.message?.includes("redirect_uri") || error?.message?.includes("redirect")) {
+    return "OAuth redirect configuration error. Please contact support."
+  }
+
+  // Handle code exchange errors
+  if (error?.message?.includes("code") && error?.message?.includes("exchange")) {
+    return "Authorization code exchange failed. Please try signing in again."
+  }
+
+  // Handle session errors
+  if (error?.message?.includes("session") || error?.message?.includes("token")) {
+    return "Session creation failed. Please try signing in again."
+  }
+
+  // Handle admin errors
+  if (error?.message?.includes("Admin privileges required")) {
+    return "Access denied. Administrator privileges are required for this action."
   }
 
   // Handle magic link errors
@@ -329,11 +375,12 @@ export const requireAdmin = async () => {
   return true
 }
 
-// Connection test
+// Connection test with detailed diagnostics
 export const testSupabaseConnection = async () => {
   const startTime = Date.now()
 
   try {
+    // Test basic connectivity
     const { data: healthCheck, error: healthError } = await supabase
       .from("profiles")
       .select("count", { count: "exact", head: true })
@@ -350,6 +397,7 @@ export const testSupabaseConnection = async () => {
       }
     }
 
+    // Test authentication
     const {
       data: { user },
       error: authError,
@@ -363,6 +411,8 @@ export const testSupabaseConnection = async () => {
         hasUser: !!user,
         userEmail: user?.email,
         recordCount: healthCheck?.count || 0,
+        supabaseUrl: supabaseUrl.substring(0, 30) + "...",
+        environment: process.env.NODE_ENV,
       },
     }
   } catch (error: any) {
@@ -374,5 +424,16 @@ export const testSupabaseConnection = async () => {
         stack: error.stack,
       },
     }
+  }
+}
+
+// OAuth URL debugging helper
+export const getOAuthDebugInfo = () => {
+  return {
+    origin: getOrigin(),
+    redirectTo: `${getOrigin()}/auth/callback`,
+    supabaseUrl: supabaseUrl.substring(0, 30) + "...",
+    environment: process.env.NODE_ENV,
+    timestamp: new Date().toISOString(),
   }
 }
