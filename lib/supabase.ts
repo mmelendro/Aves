@@ -1,10 +1,10 @@
 import { createClient } from "@supabase/supabase-js"
 
 // Supabase configuration with validation
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://vlizimtetekemaiivnsf.supabase.co"
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://krzmqusxxrfljjkdbklx.supabase.co"
 const supabaseAnonKey =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsaXppbXRldGVrZW1haWl2bnNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MTUwODMsImV4cCI6MjA2ODM5MTA4M30.tsrP54YBn3U5k_0xvqfvmleApNjFjKxO3u8iQc9n90E"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtyem1xdXN4eHJmbGpqa2Ria2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA2MDY5NTIsImV4cCI6MjA2NjE4Mjk1Mn0.qMknujUIfozjqsiMs6CG9OvinUHTIdjvEU_kQJyArlE"
 
 // Validate configuration
 if (!supabaseUrl || !supabaseAnonKey) {
