@@ -10,7 +10,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { Checkbox } from "@/components/ui/checkbox"
-import { supabase, handleSupabaseError, logUserAction } from "@/lib/supabase"
+import {
+  supabase,
+  handleSupabaseError,
+  logUserAction,
+  signUpWithEmail,
+  signInWithEmail,
+  signInWithGoogle,
+  signInWithMagicLink,
+} from "@/lib/supabase"
 import {
   User,
   Mail,
@@ -145,24 +153,6 @@ export function EnhancedAuthModal({
     }
 
     try {
-      // First, test the connection
-      const { data: testData, error: testError } = await supabase
-        .from("profiles")
-        .select("count", { count: "exact", head: true })
-
-      if (testError) {
-        console.error("Connection test failed:", testError)
-        if (testError.message.includes("Tenant or user not found")) {
-          setMessage({
-            type: "error",
-            text: "Database connection failed. Please check the diagnostics panel for more information.",
-          })
-          setShowDiagnostics(true)
-          setLoading(false)
-          return
-        }
-      }
-
       // Check if user already exists
       const { data: existingUser } = await supabase
         .from("profiles")
@@ -176,27 +166,24 @@ export function EnhancedAuthModal({
         return
       }
 
-      const { data, error } = await supabase.auth.signUp({
-        email: signUpForm.email.toLowerCase(),
+      // Use the enhanced sign up function
+      const result = await signUpWithEmail({
+        email: signUpForm.email,
         password: signUpForm.password,
-        options: {
-          data: {
-            full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
-            first_name: signUpForm.firstName,
-            last_name: signUpForm.lastName,
-            phone: signUpForm.phone,
-            experience_level: signUpForm.experienceLevel,
-          },
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
+        firstName: signUpForm.firstName,
+        lastName: signUpForm.lastName,
+        phone: signUpForm.phone,
+        experienceLevel: signUpForm.experienceLevel,
       })
 
-      if (error) throw error
+      if (!result.success) {
+        throw new Error(result.error)
+      }
 
-      if (data.user) {
+      if (result.data?.user) {
         // Create profile in profiles table
         const { error: profileError } = await supabase.from("profiles").insert({
-          id: data.user.id,
+          id: result.data.user.id,
           email: signUpForm.email.toLowerCase(),
           full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
           phone: signUpForm.phone,
@@ -213,7 +200,7 @@ export function EnhancedAuthModal({
         }
 
         // Log the signup action
-        await logUserAction(data.user.id, "user_signup", {
+        await logUserAction(result.data.user.id, "user_signup", {
           email: signUpForm.email,
           experience_level: signUpForm.experienceLevel,
           gdpr_consent: signUpForm.gdprConsent,
@@ -234,7 +221,11 @@ export function EnhancedAuthModal({
       const errorMessage = handleSupabaseError(error)
       setMessage({ type: "error", text: errorMessage })
 
-      if (error?.message?.includes("Tenant or user not found")) {
+      if (
+        error?.message?.includes("Tenant or user not found") ||
+        error?.message?.includes("provider is not enabled") ||
+        error?.message?.includes("SMTP")
+      ) {
         setShowDiagnostics(true)
       }
     } finally {
@@ -253,19 +244,18 @@ export function EnhancedAuthModal({
     }
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: signInForm.email.toLowerCase(),
-        password: signInForm.password,
-      })
+      const result = await signInWithEmail(signInForm.email, signInForm.password)
 
-      if (error) throw error
+      if (!result.success) {
+        throw new Error(result.error)
+      }
 
-      if (data.user) {
+      if (result.data?.user) {
         // Update last login
-        await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", data.user.id)
+        await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", result.data.user.id)
 
         // Log the signin action
-        await logUserAction(data.user.id, "user_signin", {
+        await logUserAction(result.data.user.id, "user_signin", {
           email: signInForm.email,
           remember_me: signInForm.rememberMe,
         })
@@ -273,7 +263,7 @@ export function EnhancedAuthModal({
         setMessage({ type: "success", text: "Successfully signed in!" })
 
         setTimeout(() => {
-          onSuccess(data.user)
+          onSuccess(result.data.user)
           onClose()
         }, 1000)
       }
@@ -281,7 +271,7 @@ export function EnhancedAuthModal({
       const errorMessage = handleSupabaseError(error)
       setMessage({ type: "error", text: errorMessage })
 
-      if (error?.message?.includes("Tenant or user not found")) {
+      if (error?.message?.includes("Tenant or user not found") || error?.message?.includes("Email not confirmed")) {
         setShowDiagnostics(true)
       }
     } finally {
@@ -294,30 +284,25 @@ export function EnhancedAuthModal({
     setMessage(null)
 
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback?next=/shopping`,
-          queryParams: {
-            access_type: "offline",
-            prompt: "consent",
-          },
-        },
-      })
+      const result = await signInWithGoogle()
 
-      if (error) throw error
+      if (!result.success) {
+        throw new Error(result.error)
+      }
 
       // Log the OAuth attempt
       await logUserAction(null, "oauth_signin_attempt", {
         provider: "google",
         redirect_to: "/shopping",
       })
+
+      // The redirect will happen automatically
     } catch (error: any) {
       const errorMessage = handleSupabaseError(error)
       setMessage({ type: "error", text: errorMessage })
       setLoading(false)
 
-      if (error?.message?.includes("Tenant or user not found")) {
+      if (error?.message?.includes("provider is not enabled")) {
         setShowDiagnostics(true)
       }
     }
@@ -342,14 +327,11 @@ export function EnhancedAuthModal({
     }
 
     try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email: email.toLowerCase(),
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback?next=/shopping`,
-        },
-      })
+      const result = await signInWithMagicLink(email)
 
-      if (error) throw error
+      if (!result.success) {
+        throw new Error(result.error)
+      }
 
       // Log the magic link request
       await logUserAction(null, "magic_link_request", {
@@ -364,7 +346,7 @@ export function EnhancedAuthModal({
       const errorMessage = handleSupabaseError(error)
       setMessage({ type: "error", text: errorMessage })
 
-      if (error?.message?.includes("Tenant or user not found")) {
+      if (error?.message?.includes("SMTP") || error?.message?.includes("rate limit")) {
         setShowDiagnostics(true)
       }
     } finally {
@@ -414,7 +396,7 @@ export function EnhancedAuthModal({
             <Settings className="h-4 w-4 text-yellow-600" />
             <AlertDescription className="text-yellow-800">
               <div className="flex items-center justify-between">
-                <span>Connection issues detected. Check diagnostics for details.</span>
+                <span>Authentication issues detected. Check diagnostics for solutions.</span>
                 <Button size="sm" variant="outline" onClick={() => router.push("/diagnostics")} className="ml-2">
                   View Diagnostics
                 </Button>

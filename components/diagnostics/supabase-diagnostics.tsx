@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { supabase, testSupabaseConnection } from "@/lib/supabase"
-import { CheckCircle, XCircle, AlertTriangle, RefreshCw, Database, Settings } from "lucide-react"
+import { CheckCircle, XCircle, AlertTriangle, RefreshCw, Database, Settings, Mail, Chrome, Key } from "lucide-react"
 
 interface DiagnosticResult {
   name: string
@@ -110,7 +110,106 @@ export function SupabaseDiagnostics() {
         })
       }
 
-      // Test 5: Database Schema
+      // Test 5: Google OAuth Configuration
+      try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: `${window.location.origin}/auth/callback`,
+            skipBrowserRedirect: true, // Don't actually redirect, just test
+          },
+        })
+
+        if (error) {
+          if (error.message.includes("provider is not enabled")) {
+            results.push({
+              name: "Google OAuth Configuration",
+              status: "error",
+              message: "Google provider is not enabled in Supabase project",
+              details: {
+                error: error.message,
+                solution: "Enable Google provider in Supabase Dashboard > Authentication > Providers",
+              },
+            })
+          } else {
+            results.push({
+              name: "Google OAuth Configuration",
+              status: "warning",
+              message: `Google OAuth issue: ${error.message}`,
+              details: error,
+            })
+          }
+        } else {
+          results.push({
+            name: "Google OAuth Configuration",
+            status: "success",
+            message: "Google OAuth provider is configured",
+            details: data,
+          })
+        }
+      } catch (error: any) {
+        results.push({
+          name: "Google OAuth Configuration",
+          status: "error",
+          message: `Google OAuth test failed: ${error.message}`,
+          details: error,
+        })
+      }
+
+      // Test 6: Email Configuration
+      try {
+        // Test magic link (won't actually send, just test configuration)
+        const { error } = await supabase.auth.signInWithOtp({
+          email: "test@example.com",
+          options: {
+            shouldCreateUser: false, // Don't create user
+          },
+        })
+
+        if (error) {
+          if (error.message.includes("SMTP")) {
+            results.push({
+              name: "Email Configuration",
+              status: "error",
+              message: "SMTP configuration issue - emails cannot be sent",
+              details: {
+                error: error.message,
+                solution: "Configure SMTP settings in Supabase Dashboard > Settings > Auth",
+              },
+            })
+          } else if (error.message.includes("rate limit")) {
+            results.push({
+              name: "Email Configuration",
+              status: "success",
+              message: "Email service is configured (rate limited response)",
+              details: error,
+            })
+          } else {
+            results.push({
+              name: "Email Configuration",
+              status: "warning",
+              message: `Email service issue: ${error.message}`,
+              details: error,
+            })
+          }
+        } else {
+          results.push({
+            name: "Email Configuration",
+            status: "success",
+            message: "Email service is configured and working",
+            details: { status: "configured" },
+          })
+        }
+      } catch (error: any) {
+        results.push({
+          name: "Email Configuration",
+          status: "error",
+          message: `Email test failed: ${error.message}`,
+          details: error,
+        })
+      }
+
+      // Test 7: Database Schema
       try {
         const { data, error } = await supabase.from("profiles").select("count", { count: "exact", head: true })
 
@@ -120,7 +219,10 @@ export function SupabaseDiagnostics() {
               name: "Database Schema",
               status: "error",
               message: "Profiles table not found. Database needs to be set up.",
-              details: error,
+              details: {
+                error,
+                solution: "Run the database setup scripts: fix-tenant-error.sql",
+              },
             })
           } else {
             results.push({
@@ -147,7 +249,7 @@ export function SupabaseDiagnostics() {
         })
       }
 
-      // Test 6: Admin User Check
+      // Test 8: Admin User Check
       try {
         const { data, error } = await supabase
           .from("profiles")
@@ -161,7 +263,10 @@ export function SupabaseDiagnostics() {
               name: "Admin User",
               status: "warning",
               message: "Admin user not found. Needs to be created.",
-              details: error,
+              details: {
+                error,
+                solution: "Create admin user and run create-admin-user.sql script",
+              },
             })
           } else {
             results.push({
@@ -187,6 +292,25 @@ export function SupabaseDiagnostics() {
           details: error,
         })
       }
+
+      // Test 9: Redirect URL Configuration
+      const currentOrigin = typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+      const expectedRedirects = [
+        `${currentOrigin}/auth/callback`,
+        `${currentOrigin}/auth/callback?next=/shopping`,
+        "https://aves-colombia.vercel.app/auth/callback",
+      ]
+
+      results.push({
+        name: "Redirect URL Configuration",
+        status: "warning",
+        message: "Manual verification required - check Supabase Auth settings",
+        details: {
+          currentOrigin,
+          expectedRedirects,
+          instructions: "Verify these URLs are configured in Supabase Dashboard > Authentication > URL Configuration",
+        },
+      })
     } catch (error: any) {
       results.push({
         name: "General Error",
@@ -287,59 +411,225 @@ export function SupabaseDiagnostics() {
         </CardContent>
       </Card>
 
-      {/* Troubleshooting Guide */}
+      {/* Comprehensive Troubleshooting Guide */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Settings className="w-5 h-5" />
-            Troubleshooting Guide
+            Authentication Issues Troubleshooting Guide
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
+          {/* Google Sign-In Issues */}
+          <div className="border-l-4 border-blue-500 pl-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Chrome className="w-5 h-5 text-blue-600" />
+              <h3 className="font-semibold text-blue-900">Google Sign-In: "Unsupported provider" Error</h3>
+            </div>
+            <div className="space-y-2 text-sm text-gray-700">
+              <p>
+                <strong>Root Cause:</strong> Google OAuth provider is not enabled in Supabase project.
+              </p>
+              <p>
+                <strong>Solution Steps:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>Go to Supabase Dashboard → Authentication → Providers</li>
+                <li>Find "Google" in the list and click to configure</li>
+                <li>Enable the provider by toggling it ON</li>
+                <li>
+                  Add your Google OAuth credentials:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>Client ID: Get from Google Cloud Console</li>
+                    <li>Client Secret: Get from Google Cloud Console</li>
+                  </ul>
+                </li>
+                <li>
+                  Set redirect URL:{" "}
+                  <code className="bg-gray-100 px-1 rounded">
+                    https://vlizimtetekemaiivnsf.supabase.co/auth/v1/callback
+                  </code>
+                </li>
+                <li>Save configuration</li>
+              </ol>
+              <p>
+                <strong>Google Cloud Console Setup:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>Go to Google Cloud Console → APIs & Services → Credentials</li>
+                <li>Create OAuth 2.0 Client ID</li>
+                <li>
+                  Add authorized redirect URIs:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>
+                      <code className="bg-gray-100 px-1 rounded">
+                        https://vlizimtetekemaiivnsf.supabase.co/auth/v1/callback
+                      </code>
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          {/* Magic Link Issues */}
+          <div className="border-l-4 border-purple-500 pl-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Mail className="w-5 h-5 text-purple-600" />
+              <h3 className="font-semibold text-purple-900">Magic Link: "ERR_CONNECTION_REFUSED" Error</h3>
+            </div>
+            <div className="space-y-2 text-sm text-gray-700">
+              <p>
+                <strong>Root Cause:</strong> Incorrect redirect URL configuration or local development server issues.
+              </p>
+              <p>
+                <strong>Solution Steps:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>
+                  Configure Site URL in Supabase:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>Go to Supabase Dashboard → Settings → Auth</li>
+                    <li>
+                      Set Site URL to: <code className="bg-gray-100 px-1 rounded">http://localhost:3000</code>{" "}
+                      (development)
+                    </li>
+                    <li>
+                      Or: <code className="bg-gray-100 px-1 rounded">https://aves-colombia.vercel.app</code>{" "}
+                      (production)
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Add Redirect URLs:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>
+                      <code className="bg-gray-100 px-1 rounded">http://localhost:3000/auth/callback</code>
+                    </li>
+                    <li>
+                      <code className="bg-gray-100 px-1 rounded">https://aves-colombia.vercel.app/auth/callback</code>
+                    </li>
+                  </ul>
+                </li>
+                <li>Ensure development server is running on port 3000</li>
+                <li>Check firewall settings allow localhost:3000</li>
+                <li>Test with production URL if local issues persist</li>
+              </ol>
+            </div>
+          </div>
+
+          {/* Email/Password Issues */}
+          <div className="border-l-4 border-green-500 pl-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Key className="w-5 h-5 text-green-600" />
+              <h3 className="font-semibold text-green-900">Email/Password: Verification Email Not Sent</h3>
+            </div>
+            <div className="space-y-2 text-sm text-gray-700">
+              <p>
+                <strong>Root Cause:</strong> SMTP configuration not set up in Supabase.
+              </p>
+              <p>
+                <strong>Solution Steps:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>
+                  Configure SMTP in Supabase:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>Go to Supabase Dashboard → Settings → Auth</li>
+                    <li>Scroll to "SMTP Settings"</li>
+                    <li>Enable custom SMTP</li>
+                    <li>Configure with your email provider (Gmail, SendGrid, etc.)</li>
+                  </ul>
+                </li>
+                <li>
+                  Alternative - Use Supabase's built-in email:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>Disable "Enable custom SMTP"</li>
+                    <li>Supabase will use their default email service</li>
+                    <li>Note: Limited to development/testing</li>
+                  </ul>
+                </li>
+                <li>
+                  Test email configuration:
+                  <ul className="list-disc list-inside ml-4 mt-1">
+                    <li>Create a test user</li>
+                    <li>Check email delivery</li>
+                    <li>Verify email templates are working</li>
+                  </ul>
+                </li>
+              </ol>
+              <p>
+                <strong>Email Template Configuration:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>Go to Supabase Dashboard → Authentication → Email Templates</li>
+                <li>Customize "Confirm signup" template</li>
+                <li>
+                  Ensure redirect URL is correct:{" "}
+                  <code className="bg-gray-100 px-1 rounded">{"{{ .SiteURL }}/auth/callback"}</code>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          {/* General Configuration */}
           <Alert>
             <AlertTriangle className="h-4 w-4" />
             <AlertDescription>
-              <strong>"Tenant or user not found" Error Solutions:</strong>
+              <strong>Important Configuration Checklist:</strong>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>Site URL matches your domain (localhost:3000 for development)</li>
+                <li>Redirect URLs include /auth/callback endpoint</li>
+                <li>Email confirmation is enabled in Auth settings</li>
+                <li>RLS policies allow user registration and profile creation</li>
+                <li>Database tables exist (run setup scripts if needed)</li>
+              </ul>
             </AlertDescription>
           </Alert>
 
-          <div className="space-y-3 text-sm">
-            <div className="border-l-4 border-blue-500 pl-4">
-              <h4 className="font-medium">1. Verify Supabase Project</h4>
-              <p className="text-gray-600">
-                Ensure the Supabase project exists and the URL is correct:
-                <code className="bg-gray-100 px-1 rounded ml-1">https://vlizimtetekemaiivnsf.supabase.co</code>
-              </p>
-            </div>
-
-            <div className="border-l-4 border-green-500 pl-4">
-              <h4 className="font-medium">2. Check API Keys</h4>
-              <p className="text-gray-600">
-                Verify that the anon key matches your Supabase project settings. Keys should not be expired or from a
-                different project.
-              </p>
-            </div>
-
-            <div className="border-l-4 border-yellow-500 pl-4">
-              <h4 className="font-medium">3. Database Setup</h4>
-              <p className="text-gray-600">
-                Run the SQL setup script in your Supabase SQL editor to create the required tables and policies.
-              </p>
-            </div>
-
-            <div className="border-l-4 border-purple-500 pl-4">
-              <h4 className="font-medium">4. Create Admin User</h4>
-              <p className="text-gray-600">
-                Create the admin account (info@aves.bio) through Supabase Auth, then update the role in the profiles
-                table.
-              </p>
-            </div>
-
-            <div className="border-l-4 border-red-500 pl-4">
-              <h4 className="font-medium">5. Network Issues</h4>
-              <p className="text-gray-600">
-                Check your internet connection and ensure Supabase services are not blocked by firewalls.
-              </p>
+          {/* Quick Actions */}
+          <div className="bg-gray-50 rounded-lg p-4">
+            <h4 className="font-medium mb-3">Quick Actions</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  window.open("https://supabase.com/dashboard/project/vlizimtetekemaiivnsf/auth/providers", "_blank")
+                }
+              >
+                Configure Auth Providers
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  window.open(
+                    "https://supabase.com/dashboard/project/vlizimtetekemaiivnsf/auth/url-configuration",
+                    "_blank",
+                  )
+                }
+              >
+                Configure URLs
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  window.open("https://supabase.com/dashboard/project/vlizimtetekemaiivnsf/settings/auth", "_blank")
+                }
+              >
+                SMTP Settings
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  window.open("https://supabase.com/dashboard/project/vlizimtetekemaiivnsf/auth/templates", "_blank")
+                }
+              >
+                Email Templates
+              </Button>
             </div>
           </div>
         </CardContent>

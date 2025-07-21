@@ -1,64 +1,112 @@
 -- Create Admin User Script for AVES Colombia
--- Run this script after creating the admin user through Supabase Auth UI
+-- This script sets up the admin user and ensures proper permissions
 
--- First, create the user through Supabase Auth Dashboard or API:
--- Email: info@aves.bio
--- Password: MotMot2025!
+-- First, check if the admin user exists in auth.users
+DO $$
+DECLARE
+    admin_user_id UUID;
+BEGIN
+    -- Look for existing admin user
+    SELECT id INTO admin_user_id 
+    FROM auth.users 
+    WHERE email = 'info@aves.bio';
+    
+    IF admin_user_id IS NULL THEN
+        RAISE NOTICE 'Admin user not found in auth.users. Please create the user through Supabase Auth first.';
+        RAISE NOTICE 'Steps to create admin user:';
+        RAISE NOTICE '1. Go to Supabase Dashboard > Authentication > Users';
+        RAISE NOTICE '2. Click "Add User"';
+        RAISE NOTICE '3. Email: info@aves.bio';
+        RAISE NOTICE '4. Password: MotMot2025!';
+        RAISE NOTICE '5. Email Confirm: true';
+        RAISE NOTICE '6. Then run this script again';
+    ELSE
+        -- Admin user exists, ensure profile is set up correctly
+        INSERT INTO public.profiles (
+            id,
+            email,
+            full_name,
+            role,
+            gdpr_consent,
+            marketing_consent,
+            created_at,
+            updated_at
+        ) VALUES (
+            admin_user_id,
+            'info@aves.bio',
+            'AVES Admin',
+            'admin',
+            true,
+            false,
+            NOW(),
+            NOW()
+        ) ON CONFLICT (id) DO UPDATE SET
+            role = 'admin',
+            updated_at = NOW();
+            
+        RAISE NOTICE 'Admin user profile created/updated successfully';
+        RAISE NOTICE 'Admin User ID: %', admin_user_id;
+    END IF;
+END $$;
 
--- Then run this script to set up the admin role and permissions
+-- Ensure RLS policies allow admin access
+DO $$
+BEGIN
+    -- Drop existing policies if they exist
+    DROP POLICY IF EXISTS "Admin full access to profiles" ON public.profiles;
+    DROP POLICY IF EXISTS "Admin full access to bookings" ON public.bookings;
+    DROP POLICY IF EXISTS "Admin full access to audit_logs" ON public.audit_logs;
+    
+    -- Create admin policies for profiles
+    CREATE POLICY "Admin full access to profiles" ON public.profiles
+        FOR ALL USING (
+            EXISTS (
+                SELECT 1 FROM public.profiles 
+                WHERE id = auth.uid() AND role = 'admin'
+            )
+        );
+    
+    -- Create admin policies for bookings
+    CREATE POLICY "Admin full access to bookings" ON public.bookings
+        FOR ALL USING (
+            EXISTS (
+                SELECT 1 FROM public.profiles 
+                WHERE id = auth.uid() AND role = 'admin'
+            )
+        );
+    
+    -- Create admin policies for audit_logs
+    CREATE POLICY "Admin full access to audit_logs" ON public.audit_logs
+        FOR ALL USING (
+            EXISTS (
+                SELECT 1 FROM public.profiles 
+                WHERE id = auth.uid() AND role = 'admin'
+            )
+        );
+    
+    RAISE NOTICE 'Admin RLS policies created successfully';
+END $$;
 
--- Update the user's role to admin (replace the UUID with the actual user ID)
--- You can find the user ID in the Supabase Auth dashboard
-UPDATE auth.users 
-SET raw_user_meta_data = jsonb_set(
-    COALESCE(raw_user_meta_data, '{}'), 
-    '{role}', 
-    '"admin"'
-)
-WHERE email = 'info@aves.bio';
+-- Grant necessary permissions
+GRANT ALL ON public.profiles TO authenticated;
+GRANT ALL ON public.bookings TO authenticated;
+GRANT ALL ON public.audit_logs TO authenticated;
 
--- Update or insert the profile with admin role
-INSERT INTO public.profiles (
-    id, 
-    email, 
-    full_name, 
-    role, 
-    gdpr_consent, 
-    marketing_consent,
-    created_at,
-    updated_at
-)
-SELECT 
-    id,
-    email,
-    COALESCE(raw_user_meta_data->>'full_name', 'AVES Admin'),
-    'admin',
-    true,
-    false,
-    created_at,
-    NOW()
-FROM auth.users 
-WHERE email = 'info@aves.bio'
-ON CONFLICT (id) 
-DO UPDATE SET 
-    role = 'admin',
-    full_name = COALESCE(EXCLUDED.full_name, 'AVES Admin'),
-    updated_at = NOW();
+-- Create function to check admin status
+CREATE OR REPLACE FUNCTION public.is_admin(user_id UUID DEFAULT auth.uid())
+RETURNS BOOLEAN AS $$
+BEGIN
+    RETURN EXISTS (
+        SELECT 1 FROM public.profiles 
+        WHERE id = user_id AND role = 'admin'
+    );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- Verify the admin user was created correctly
-SELECT 
-    p.id,
-    p.email,
-    p.full_name,
-    p.role,
-    p.created_at,
-    u.email_confirmed_at,
-    u.last_sign_in_at
-FROM public.profiles p
-JOIN auth.users u ON p.id = u.id
-WHERE p.email = 'info@aves.bio';
+-- Grant execute permission on the function
+GRANT EXECUTE ON FUNCTION public.is_admin TO authenticated;
 
--- Grant additional permissions if needed
--- (The RLS policies should already handle admin access)
-
-COMMENT ON TABLE public.profiles IS 'Admin user info@aves.bio has been configured with admin role';
+RAISE NOTICE 'Admin user setup completed. Please verify:';
+RAISE NOTICE '1. User exists in auth.users with email info@aves.bio';
+RAISE NOTICE '2. Profile exists in public.profiles with role = admin';
+RAISE NOTICE '3. User can access /admin page';

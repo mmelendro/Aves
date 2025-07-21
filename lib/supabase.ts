@@ -1,8 +1,9 @@
 import { createClient } from "@supabase/supabase-js"
 
 // Supabase configuration with validation
-const supabaseUrl = "https://vlizimtetekemaiivnsf.supabase.co"
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://vlizimtetekemaiivnsf.supabase.co"
 const supabaseAnonKey =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsaXppbXRldGVrZW1haWl2bnNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MTUwODMsImV4cCI6MjA2ODM5MTA4M30.tsrP54YBn3U5k_0xvqfvmleApNjFjKxO3u8iQc9n90E"
 
 // Validate configuration
@@ -12,6 +13,15 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 if (!supabaseUrl.startsWith("https://")) {
   throw new Error("Invalid Supabase URL format. URL must start with https://")
+}
+
+// Get current origin for redirect URLs
+const getOrigin = () => {
+  if (typeof window !== "undefined") {
+    return window.location.origin
+  }
+  // Fallback for server-side rendering
+  return process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 }
 
 // Create Supabase client with enhanced configuration
@@ -43,6 +53,96 @@ export const testSupabaseConnection = async () => {
   } catch (error: any) {
     console.error("Supabase connection test error:", error)
     return { success: false, error: error.message }
+  }
+}
+
+// Enhanced authentication functions with proper error handling
+export const signUpWithEmail = async (userData: {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string
+  experienceLevel?: string
+}) => {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email: userData.email.toLowerCase(),
+      password: userData.password,
+      options: {
+        data: {
+          full_name: `${userData.firstName} ${userData.lastName}`,
+          first_name: userData.firstName,
+          last_name: userData.lastName,
+          phone: userData.phone || "",
+          experience_level: userData.experienceLevel || "Beginner birder",
+        },
+        emailRedirectTo: `${getOrigin()}/auth/callback`,
+      },
+    })
+
+    if (error) throw error
+
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Sign up error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+export const signInWithEmail = async (email: string, password: string) => {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.toLowerCase(),
+      password: password,
+    })
+
+    if (error) throw error
+
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Sign in error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+export const signInWithGoogle = async () => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${getOrigin()}/auth/callback?next=/shopping`,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    })
+
+    if (error) throw error
+
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Google sign in error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+export const signInWithMagicLink = async (email: string) => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: email.toLowerCase(),
+      options: {
+        emailRedirectTo: `${getOrigin()}/auth/callback?next=/shopping`,
+      },
+    })
+
+    if (error) throw error
+
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Magic link error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
   }
 }
 
@@ -204,6 +304,10 @@ export const handleSupabaseError = (error: any) => {
     return "Database connection failed. Please check your internet connection and try again. If the problem persists, contact support."
   }
 
+  if (error?.message?.includes("provider is not enabled")) {
+    return "This sign-in method is not available. Please try email/password or contact support."
+  }
+
   if (error?.message?.includes("Invalid login credentials")) {
     return "Invalid email or password. Please check your credentials and try again."
   }
@@ -218,6 +322,14 @@ export const handleSupabaseError = (error: any) => {
 
   if (error?.message?.includes("Password should be at least 6 characters")) {
     return "Password must be at least 6 characters long."
+  }
+
+  if (error?.message?.includes("SMTP")) {
+    return "Email service is temporarily unavailable. Please try again later or contact support."
+  }
+
+  if (error?.message?.includes("rate limit")) {
+    return "Too many requests. Please wait a moment before trying again."
   }
 
   if (error?.code === "PGRST116") {
