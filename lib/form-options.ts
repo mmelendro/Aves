@@ -92,3 +92,10 @@ export type AccommodationOption = (typeof accommodationOptions)[number]
 export type TourOption = (typeof tourOptions)[number]
 export type RegionOption = (typeof regionOptions)[number]
 export type ExperienceOption = (typeof experienceOptions)[number]
+
+export const transportOptions = [
+  { value: "included", label: "All Transport Included" },
+  { value: "partial", label: "Partial Transport Included" },
+  { value: "self-arranged", label: "Self-Arranged Transport" },
+  { value: "flexible", label: "Flexible Transport Options" },
+] as const
