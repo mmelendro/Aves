@@ -39,7 +39,7 @@ import { EmbeddedTourCalendar } from "@/components/embedded-tour-calendar"
 import { AuthProvider, useAuth } from "@/hooks/use-auth"
 import { UserAccountPanel } from "@/components/auth/user-account-panel"
 import { AccountCreationPrompt } from "@/components/auth/account-creation-prompt"
-import { EnhancedAuthModal } from "@/components/auth/enhanced-auth-modal"
+import { AuthModal } from "@/components/auth/auth-modal"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -1300,11 +1300,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
 
               {/* Account Creation Prompt */}
               {showAccountPrompt && !user && (
-                <AccountCreationPrompt
-                  contactInfo={contactInfo}
-                  onAccountCreated={handleAccountCreated}
-                  setShowAuthModal={setShowAuthModal}
-                />
+                <AccountCreationPrompt contactInfo={contactInfo} onAccountCreated={handleAccountCreated} />
               )}
 
               {/* Questions Section - Collapsible */}
@@ -1496,7 +1492,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
       <Footer />
 
       {/* Auth Modal */}
-      <EnhancedAuthModal
+      <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         onSuccess={handleAccountCreated}

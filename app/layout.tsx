@@ -1,6 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import ClientRootLayout from "./client-layout"
+import "./globals.css"
+import "../styles/mobile-navigation.css"
+import { CookieBanner } from "@/components/cookie-banner"
+import { CookieConsentProvider } from "@/components/cookie-consent-manager"
+import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
+import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
 
 export const metadata: Metadata = {
   title: {
@@ -84,8 +89,51 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <ClientRootLayout>{children}</ClientRootLayout>
+  return (
+    <html lang="en">
+      <body>
+        <CookieConsentProvider>
+          {children}
+          <CookiePreferenceCenter />
+          <CookieBanner />
+          <MobileNavigationOverlay />
+        </CookieConsentProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TravelAgency",
+              name: "AVES Colombia",
+              description:
+                "Expert-guided bird watching and eco-tourism experiences across Colombia's diverse ecosystems",
+              url: "https://aves-colombia.com",
+              logo: "https://aves-colombia.com/images/aves-logo.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+57-XXX-XXX-XXXX",
+                contactType: "customer service",
+                availableLanguage: ["English", "Spanish"],
+              },
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "CO",
+                addressRegion: "Colombia",
+              },
+              sameAs: [
+                "https://facebook.com/AVESColombia",
+                "https://instagram.com/AVESColombia",
+                "https://twitter.com/AVESColombia",
+              ],
+              offers: {
+                "@type": "Offer",
+                category: "Eco-Tourism",
+                description: "Bird watching tours and sustainable travel experiences",
+              },
+            }),
+          }}
+        />
+      </body>
+    </html>
+  )
 }
-
-
-import './globals.css'
