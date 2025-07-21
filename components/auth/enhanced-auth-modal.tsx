@@ -1,279 +1,141 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+
+import { useState } from "react"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Separator } from "@/components/ui/separator"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
-  supabase,
-  handleSupabaseError,
-  logUserAction,
   signUpWithEmail,
   signInWithEmail,
   signInWithGoogle,
   signInWithMagicLink,
-} from "@/lib/supabase"
-import {
-  User,
-  Mail,
-  Eye,
-  EyeOff,
-  UserPlus,
-  LogIn,
-  AlertCircle,
-  CheckCircle,
-  Chrome,
-  Shield,
-  Info,
-  Settings,
-} from "lucide-react"
-import { useRouter } from "next/navigation"
+  resetPassword,
+} from "@/lib/enhanced-supabase"
+import { Eye, EyeOff, Mail, Lock, User, Phone, CheckCircle, XCircle } from "lucide-react"
 
-interface EnhancedAuthModalProps {
+interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
-  onSuccess: (user: any) => void
-  prefilledData?: {
-    firstName?: string
-    lastName?: string
-    email?: string
-    phone?: string
-    experienceLevel?: string
-  }
-  mode?: "signup" | "signin"
+  defaultTab?: "signin" | "signup"
 }
 
-export function EnhancedAuthModal({
-  isOpen,
-  onClose,
-  onSuccess,
-  prefilledData,
-  mode = "signup",
-}: EnhancedAuthModalProps) {
-  const [activeTab, setActiveTab] = useState(mode)
+export function EnhancedAuthModal({ isOpen, onClose, defaultTab = "signin" }: AuthModalProps) {
+  const [activeTab, setActiveTab] = useState(defaultTab)
   const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState("")
+  const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [message, setMessage] = useState<{ type: "success" | "error" | "info"; text: string } | null>(null)
-  const [showDiagnostics, setShowDiagnostics] = useState(false)
-  const router = useRouter()
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showResetForm, setShowResetForm] = useState(false)
 
-  // Form states
-  const [signUpForm, setSignUpForm] = useState({
-    email: prefilledData?.email || "",
+  // Sign In Form State
+  const [signInData, setSignInData] = useState({
+    email: "",
+    password: "",
+  })
+
+  // Sign Up Form State
+  const [signUpData, setSignUpData] = useState({
+    email: "",
     password: "",
     confirmPassword: "",
-    firstName: prefilledData?.firstName || "",
-    lastName: prefilledData?.lastName || "",
-    phone: prefilledData?.phone || "",
-    experienceLevel: prefilledData?.experienceLevel || "Beginner birder",
-    gdprConsent: false,
-    marketingConsent: false,
+    firstName: "",
+    lastName: "",
+    phone: "",
+    experienceLevel: "",
   })
 
-  const [signInForm, setSignInForm] = useState({
-    email: prefilledData?.email || "",
-    password: "",
-    rememberMe: false,
-  })
+  // Reset Password Form State
+  const [resetEmail, setResetEmail] = useState("")
 
-  useEffect(() => {
-    if (prefilledData) {
-      setSignUpForm((prev) => ({
-        ...prev,
-        email: prefilledData.email || prev.email,
-        firstName: prefilledData.firstName || prev.firstName,
-        lastName: prefilledData.lastName || prev.lastName,
-        phone: prefilledData.phone || prev.phone,
-        experienceLevel: prefilledData.experienceLevel || prev.experienceLevel,
-      }))
-      setSignInForm((prev) => ({
-        ...prev,
-        email: prefilledData.email || prev.email,
-      }))
-    }
-  }, [prefilledData])
+  const validatePassword = (pwd: string) => {
+    const minLength = pwd.length >= 8
+    const hasUpper = /[A-Z]/.test(pwd)
+    const hasLower = /[a-z]/.test(pwd)
+    const hasNumber = /\d/.test(pwd)
+    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(pwd)
 
-  const validateForm = () => {
-    if (activeTab === "signup") {
-      if (!signUpForm.firstName.trim()) {
-        setMessage({ type: "error", text: "First name is required" })
-        return false
-      }
-      if (!signUpForm.lastName.trim()) {
-        setMessage({ type: "error", text: "Last name is required" })
-        return false
-      }
-      if (!signUpForm.email.trim()) {
-        setMessage({ type: "error", text: "Email is required" })
-        return false
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpForm.email)) {
-        setMessage({ type: "error", text: "Please enter a valid email address" })
-        return false
-      }
-      if (signUpForm.password.length < 6) {
-        setMessage({ type: "error", text: "Password must be at least 6 characters long" })
-        return false
-      }
-      if (signUpForm.password !== signUpForm.confirmPassword) {
-        setMessage({ type: "error", text: "Passwords do not match" })
-        return false
-      }
-      if (!signUpForm.gdprConsent) {
-        setMessage({ type: "error", text: "You must accept the Privacy Policy to create an account" })
-        return false
-      }
-    } else {
-      if (!signInForm.email.trim()) {
-        setMessage({ type: "error", text: "Email is required" })
-        return false
-      }
-      if (!signInForm.password.trim()) {
-        setMessage({ type: "error", text: "Password is required" })
-        return false
-      }
+    return {
+      minLength,
+      hasUpper,
+      hasLower,
+      hasNumber,
+      hasSpecial,
+      isValid: minLength && hasUpper && hasLower && hasNumber && hasSpecial,
     }
-    return true
   }
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const passwordValidation = validatePassword(signUpData.password)
+  const passwordsMatch = signUpData.password === signUpData.confirmPassword && signUpData.password.length > 0
+
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setMessage(null)
-
-    if (!validateForm()) {
-      setLoading(false)
-      return
-    }
+    setError("")
+    setMessage("")
 
     try {
-      // Check if user already exists
-      const { data: existingUser } = await supabase
-        .from("profiles")
-        .select("email")
-        .eq("email", signUpForm.email.toLowerCase())
-        .single()
+      const result = await signInWithEmail(signInData.email, signInData.password)
 
-      if (existingUser) {
-        setMessage({ type: "error", text: "An account with this email already exists. Please sign in instead." })
-        setLoading(false)
-        return
-      }
-
-      // Use the enhanced sign up function
-      const result = await signUpWithEmail({
-        email: signUpForm.email,
-        password: signUpForm.password,
-        firstName: signUpForm.firstName,
-        lastName: signUpForm.lastName,
-        phone: signUpForm.phone,
-        experienceLevel: signUpForm.experienceLevel,
-      })
-
-      if (!result.success) {
-        throw new Error(result.error)
-      }
-
-      if (result.data?.user) {
-        // Create profile in profiles table
-        const { error: profileError } = await supabase.from("profiles").insert({
-          id: result.data.user.id,
-          email: signUpForm.email.toLowerCase(),
-          full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
-          phone: signUpForm.phone,
-          experience_level: signUpForm.experienceLevel,
-          gdpr_consent: signUpForm.gdprConsent,
-          marketing_consent: signUpForm.marketingConsent,
-          role: "user",
-          created_at: new Date().toISOString(),
-        })
-
-        if (profileError) {
-          console.error("Profile creation error:", profileError)
-          // Don't fail the signup if profile creation fails
-        }
-
-        // Log the signup action
-        await logUserAction(result.data.user.id, "user_signup", {
-          email: signUpForm.email,
-          experience_level: signUpForm.experienceLevel,
-          gdpr_consent: signUpForm.gdprConsent,
-          marketing_consent: signUpForm.marketingConsent,
-        })
-
-        setMessage({
-          type: "success",
-          text: "Account created successfully! Please check your email to verify your account before signing in.",
-        })
-
+      if (result.success) {
+        setMessage("Successfully signed in! Redirecting...")
         setTimeout(() => {
-          setActiveTab("signin")
-          setMessage({ type: "info", text: "Please verify your email before signing in." })
-        }, 3000)
+          onClose()
+          window.location.reload()
+        }, 1000)
+      } else {
+        setError(result.error || "Failed to sign in")
       }
-    } catch (error: any) {
-      const errorMessage = handleSupabaseError(error)
-      setMessage({ type: "error", text: errorMessage })
-
-      if (
-        error?.message?.includes("Tenant or user not found") ||
-        error?.message?.includes("provider is not enabled") ||
-        error?.message?.includes("SMTP")
-      ) {
-        setShowDiagnostics(true)
-      }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred")
     } finally {
       setLoading(false)
     }
   }
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setMessage(null)
 
-    if (!validateForm()) {
-      setLoading(false)
+    if (!passwordValidation.isValid) {
+      setError("Please ensure your password meets all requirements.")
       return
     }
 
+    if (!passwordsMatch) {
+      setError("Passwords do not match.")
+      return
+    }
+
+    setLoading(true)
+    setError("")
+    setMessage("")
+
     try {
-      const result = await signInWithEmail(signInForm.email, signInForm.password)
+      const result = await signUpWithEmail(signUpData)
 
-      if (!result.success) {
-        throw new Error(result.error)
-      }
-
-      if (result.data?.user) {
-        // Update last login
-        await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", result.data.user.id)
-
-        // Log the signin action
-        await logUserAction(result.data.user.id, "user_signin", {
-          email: signInForm.email,
-          remember_me: signInForm.rememberMe,
+      if (result.success) {
+        setMessage("Account created successfully! Please check your email to verify your account.")
+        // Clear form
+        setSignUpData({
+          email: "",
+          password: "",
+          confirmPassword: "",
+          firstName: "",
+          lastName: "",
+          phone: "",
+          experienceLevel: "",
         })
-
-        setMessage({ type: "success", text: "Successfully signed in!" })
-
-        setTimeout(() => {
-          onSuccess(result.data.user)
-          onClose()
-        }, 1000)
+      } else {
+        setError(result.error || "Failed to create account")
       }
-    } catch (error: any) {
-      const errorMessage = handleSupabaseError(error)
-      setMessage({ type: "error", text: errorMessage })
-
-      if (error?.message?.includes("Tenant or user not found") || error?.message?.includes("Email not confirmed")) {
-        setShowDiagnostics(true)
-      }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred")
     } finally {
       setLoading(false)
     }
@@ -281,436 +143,567 @@ export function EnhancedAuthModal({
 
   const handleGoogleSignIn = async () => {
     setLoading(true)
-    setMessage(null)
+    setError("")
+    setMessage("")
 
     try {
       const result = await signInWithGoogle()
 
-      if (!result.success) {
-        throw new Error(result.error)
+      if (result.success) {
+        setMessage("Redirecting to Google...")
+        // The redirect will happen automatically
+      } else {
+        setError(result.error || "Failed to sign in with Google")
       }
-
-      // Log the OAuth attempt
-      await logUserAction(null, "oauth_signin_attempt", {
-        provider: "google",
-        redirect_to: "/shopping",
-      })
-
-      // The redirect will happen automatically
-    } catch (error: any) {
-      const errorMessage = handleSupabaseError(error)
-      setMessage({ type: "error", text: errorMessage })
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred")
+    } finally {
       setLoading(false)
-
-      if (error?.message?.includes("provider is not enabled")) {
-        setShowDiagnostics(true)
-      }
     }
   }
 
   const handleMagicLink = async () => {
+    if (!signInData.email) {
+      setError("Please enter your email address first.")
+      return
+    }
+
     setLoading(true)
-    setMessage(null)
-
-    const email = activeTab === "signup" ? signUpForm.email : signInForm.email
-
-    if (!email.trim()) {
-      setMessage({ type: "error", text: "Please enter your email address" })
-      setLoading(false)
-      return
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setMessage({ type: "error", text: "Please enter a valid email address" })
-      setLoading(false)
-      return
-    }
+    setError("")
+    setMessage("")
 
     try {
-      const result = await signInWithMagicLink(email)
+      const result = await signInWithMagicLink(signInData.email)
 
-      if (!result.success) {
-        throw new Error(result.error)
+      if (result.success) {
+        setMessage("Magic link sent! Please check your email and click the link to sign in.")
+      } else {
+        setError(result.error || "Failed to send magic link")
       }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred")
+    } finally {
+      setLoading(false)
+    }
+  }
 
-      // Log the magic link request
-      await logUserAction(null, "magic_link_request", {
-        email: email.toLowerCase(),
-      })
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault()
 
-      setMessage({
-        type: "success",
-        text: "Magic link sent! Check your email and click the link to sign in. The link will expire in 1 hour.",
-      })
-    } catch (error: any) {
-      const errorMessage = handleSupabaseError(error)
-      setMessage({ type: "error", text: errorMessage })
+    if (!resetEmail) {
+      setError("Please enter your email address.")
+      return
+    }
 
-      if (error?.message?.includes("SMTP") || error?.message?.includes("rate limit")) {
-        setShowDiagnostics(true)
+    setLoading(true)
+    setError("")
+    setMessage("")
+
+    try {
+      const result = await resetPassword(resetEmail)
+
+      if (result.success) {
+        setMessage("Password reset link sent! Please check your email.")
+        setShowResetForm(false)
+        setResetEmail("")
+      } else {
+        setError(result.error || "Failed to send reset link")
       }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred")
     } finally {
       setLoading(false)
     }
   }
 
   const resetForm = () => {
-    setSignUpForm({
+    setError("")
+    setMessage("")
+    setSignInData({ email: "", password: "" })
+    setSignUpData({
       email: "",
       password: "",
       confirmPassword: "",
       firstName: "",
       lastName: "",
       phone: "",
-      experienceLevel: "Beginner birder",
-      gdprConsent: false,
-      marketingConsent: false,
+      experienceLevel: "",
     })
-    setSignInForm({
-      email: "",
-      password: "",
-      rememberMe: false,
-    })
-    setMessage(null)
-    setShowDiagnostics(false)
+    setResetEmail("")
+    setShowResetForm(false)
+    setShowPassword(false)
+    setShowConfirmPassword(false)
   }
 
-  useEffect(() => {
-    if (!isOpen) {
-      resetForm()
-    }
-  }, [isOpen])
+  const handleClose = () => {
+    resetForm()
+    onClose()
+  }
+
+  if (showResetForm) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center">
+              <Lock className="w-5 h-5 mr-2" />
+              Reset Password
+            </DialogTitle>
+            <DialogDescription>
+              Enter your email address and we'll send you a link to reset your password.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handlePasswordReset} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="resetEmail">Email Address</Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input
+                  id="resetEmail"
+                  type="email"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="pl-10"
+                  required
+                />
+              </div>
+            </div>
+
+            {error && (
+              <Alert variant="destructive">
+                <XCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            {message && (
+              <Alert>
+                <CheckCircle className="h-4 w-4" />
+                <AlertDescription>{message}</AlertDescription>
+              </Alert>
+            )}
+
+            <div className="flex space-x-2">
+              <Button type="button" variant="outline" onClick={() => setShowResetForm(false)} className="flex-1">
+                Back
+              </Button>
+              <Button type="submit" disabled={loading} className="flex-1">
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Sending...
+                  </>
+                ) : (
+                  "Send Reset Link"
+                )}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+    )
+  }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <User className="w-5 h-5 text-emerald-600" />
-            Join the AVES Flock
-          </DialogTitle>
+          <DialogTitle>Welcome to AVES Colombia</DialogTitle>
+          <DialogDescription>
+            Sign in to your account or create a new one to start your birding adventure.
+          </DialogDescription>
         </DialogHeader>
 
-        {showDiagnostics && (
-          <Alert className="border-yellow-200 bg-yellow-50">
-            <Settings className="h-4 w-4 text-yellow-600" />
-            <AlertDescription className="text-yellow-800">
-              <div className="flex items-center justify-between">
-                <span>Authentication issues detected. Check diagnostics for solutions.</span>
-                <Button size="sm" variant="outline" onClick={() => router.push("/diagnostics")} className="ml-2">
-                  View Diagnostics
-                </Button>
-              </div>
-            </AlertDescription>
-          </Alert>
-        )}
-
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "signin" | "signup")}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="signup" className="flex items-center gap-2">
-              <UserPlus className="w-4 h-4" />
-              Sign Up
-            </TabsTrigger>
-            <TabsTrigger value="signin" className="flex items-center gap-2">
-              <LogIn className="w-4 h-4" />
-              Sign In
-            </TabsTrigger>
+            <TabsTrigger value="signin">Sign In</TabsTrigger>
+            <TabsTrigger value="signup">Sign Up</TabsTrigger>
           </TabsList>
-
-          {message && (
-            <Alert
-              className={
-                message.type === "success"
-                  ? "border-green-200 bg-green-50"
-                  : message.type === "info"
-                    ? "border-blue-200 bg-blue-50"
-                    : "border-red-200 bg-red-50"
-              }
-            >
-              {message.type === "success" ? (
-                <CheckCircle className="h-4 w-4 text-green-600" />
-              ) : message.type === "info" ? (
-                <Info className="h-4 w-4 text-blue-600" />
-              ) : (
-                <AlertCircle className="h-4 w-4 text-red-600" />
-              )}
-              <AlertDescription
-                className={
-                  message.type === "success"
-                    ? "text-green-800"
-                    : message.type === "info"
-                      ? "text-blue-800"
-                      : "text-red-800"
-                }
-              >
-                {message.text}
-              </AlertDescription>
-            </Alert>
-          )}
-
-          <TabsContent value="signup" className="space-y-4">
-            <form onSubmit={handleSignUp} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="firstName">First Name *</Label>
-                  <Input
-                    id="firstName"
-                    type="text"
-                    value={signUpForm.firstName}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, firstName: e.target.value })}
-                    required
-                    disabled={loading}
-                    maxLength={50}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="lastName">Last Name *</Label>
-                  <Input
-                    id="lastName"
-                    type="text"
-                    value={signUpForm.lastName}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, lastName: e.target.value })}
-                    required
-                    disabled={loading}
-                    maxLength={50}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="signupEmail">Email *</Label>
-                <Input
-                  id="signupEmail"
-                  type="email"
-                  value={signUpForm.email}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, email: e.target.value })}
-                  required
-                  disabled={loading}
-                  maxLength={100}
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="phone">Phone (Optional)</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={signUpForm.phone}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, phone: e.target.value })}
-                  disabled={loading}
-                  maxLength={20}
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="experienceLevel">Birding Experience</Label>
-                <select
-                  id="experienceLevel"
-                  value={signUpForm.experienceLevel}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, experienceLevel: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  disabled={loading}
-                >
-                  <option value="Beginner birder">Beginner birder</option>
-                  <option value="Intermediate birder">Intermediate birder</option>
-                  <option value="Advanced birder">Advanced birder</option>
-                  <option value="Expert/Professional">Expert/Professional</option>
-                </select>
-              </div>
-
-              <div>
-                <Label htmlFor="password">Password *</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={signUpForm.password}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, password: e.target.value })}
-                    required
-                    disabled={loading}
-                    minLength={6}
-                    maxLength={100}
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                    disabled={loading}
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </Button>
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="confirmPassword">Confirm Password *</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  value={signUpForm.confirmPassword}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, confirmPassword: e.target.value })}
-                  required
-                  disabled={loading}
-                  minLength={6}
-                  maxLength={100}
-                />
-              </div>
-
-              {/* GDPR Compliance */}
-              <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
-                <div className="flex items-start space-x-2">
-                  <Shield className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                  <div className="text-sm">
-                    <h4 className="font-medium text-gray-900 mb-2">Data Privacy & Consent</h4>
-
-                    <div className="flex items-start space-x-2 mb-3">
-                      <Checkbox
-                        id="gdprConsent"
-                        checked={signUpForm.gdprConsent}
-                        onCheckedChange={(checked) => setSignUpForm({ ...signUpForm, gdprConsent: !!checked })}
-                        disabled={loading}
-                      />
-                      <Label htmlFor="gdprConsent" className="text-xs leading-relaxed">
-                        I agree to the{" "}
-                        <a
-                          href="/privacy"
-                          target="_blank"
-                          className="text-emerald-600 hover:underline"
-                          rel="noreferrer"
-                        >
-                          Privacy Policy
-                        </a>{" "}
-                        and{" "}
-                        <a href="/terms" target="_blank" className="text-emerald-600 hover:underline" rel="noreferrer">
-                          Terms of Service
-                        </a>
-                        . I understand my data will be processed securely and I can request deletion at any time. *
-                      </Label>
-                    </div>
-
-                    <div className="flex items-start space-x-2">
-                      <Checkbox
-                        id="marketingConsent"
-                        checked={signUpForm.marketingConsent}
-                        onCheckedChange={(checked) => setSignUpForm({ ...signUpForm, marketingConsent: !!checked })}
-                        disabled={loading}
-                      />
-                      <Label htmlFor="marketingConsent" className="text-xs leading-relaxed">
-                        I would like to receive marketing communications about tours, special offers, and birding tips.
-                        (Optional)
-                      </Label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <Button type="submit" className="w-full" disabled={loading || !signUpForm.gdprConsent}>
-                {loading ? "Creating Account..." : "Create Account"}
-              </Button>
-            </form>
-          </TabsContent>
 
           <TabsContent value="signin" className="space-y-4">
             <form onSubmit={handleSignIn} className="space-y-4">
-              <div>
-                <Label htmlFor="signinEmail">Email</Label>
-                <Input
-                  id="signinEmail"
-                  type="email"
-                  value={signInForm.email}
-                  onChange={(e) => setSignInForm({ ...signInForm, email: e.target.value })}
-                  required
-                  disabled={loading}
-                  maxLength={100}
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="signinPassword">Password</Label>
+              <div className="space-y-2">
+                <Label htmlFor="signin-email">Email</Label>
                 <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
-                    id="signinPassword"
-                    type={showPassword ? "text" : "password"}
-                    value={signInForm.password}
-                    onChange={(e) => setSignInForm({ ...signInForm, password: e.target.value })}
+                    id="signin-email"
+                    type="email"
+                    value={signInData.email}
+                    onChange={(e) => setSignInData({ ...signInData, email: e.target.value })}
+                    placeholder="Enter your email"
+                    className="pl-10"
                     required
-                    disabled={loading}
-                    maxLength={100}
                   />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                    disabled={loading}
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </Button>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="rememberMe"
-                  checked={signInForm.rememberMe}
-                  onCheckedChange={(checked) => setSignInForm({ ...signInForm, rememberMe: !!checked })}
-                  disabled={loading}
-                />
-                <Label htmlFor="rememberMe" className="text-sm">
-                  Remember me
-                </Label>
+              <div className="space-y-2">
+                <Label htmlFor="signin-password">Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="signin-password"
+                    type={showPassword ? "text" : "password"}
+                    value={signInData.password}
+                    onChange={(e) => setSignInData({ ...signInData, password: e.target.value })}
+                    placeholder="Enter your password"
+                    className="pl-10 pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-400" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-400" />
+                    )}
+                  </button>
+                </div>
               </div>
 
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowResetForm(true)}
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Forgot password?
+                </button>
+              </div>
+
+              {error && (
+                <Alert variant="destructive">
+                  <XCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
+              {message && (
+                <Alert>
+                  <CheckCircle className="h-4 w-4" />
+                  <AlertDescription>{message}</AlertDescription>
+                </Alert>
+              )}
+
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Signing In..." : "Sign In"}
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Signing In...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
             </form>
-          </TabsContent>
 
-          <div className="space-y-4">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <Separator className="w-full" />
+                <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleGoogleSignIn}
-                disabled={loading}
-                className="w-full bg-transparent"
-              >
-                <Chrome className="mr-2 h-4 w-4" />
+            <div className="grid grid-cols-2 gap-2">
+              <Button type="button" variant="outline" onClick={handleGoogleSignIn} disabled={loading}>
+                <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  />
+                </svg>
                 Google
               </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleMagicLink}
-                disabled={loading}
-                className="w-full bg-transparent"
-              >
-                <Mail className="mr-2 h-4 w-4" />
+              <Button type="button" variant="outline" onClick={handleMagicLink} disabled={loading || !signInData.email}>
+                <Mail className="w-4 h-4 mr-2" />
                 Magic Link
               </Button>
             </div>
+          </TabsContent>
 
-            <div className="text-xs text-center text-gray-600">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Shield className="w-3 h-3" />
-                <span>Secured by Supabase • GDPR Compliant</span>
+          <TabsContent value="signup" className="space-y-4">
+            <form onSubmit={handleSignUp} className="space-y-4">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="firstName"
+                      value={signUpData.firstName}
+                      onChange={(e) => setSignUpData({ ...signUpData, firstName: e.target.value })}
+                      placeholder="First name"
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    id="lastName"
+                    value={signUpData.lastName}
+                    onChange={(e) => setSignUpData({ ...signUpData, lastName: e.target.value })}
+                    placeholder="Last name"
+                    required
+                  />
+                </div>
               </div>
-              Your data is encrypted and stored securely. We never share your information with third parties.
+
+              <div className="space-y-2">
+                <Label htmlFor="signup-email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="signup-email"
+                    type="email"
+                    value={signUpData.email}
+                    onChange={(e) => setSignUpData({ ...signUpData, email: e.target.value })}
+                    placeholder="Enter your email"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone (Optional)</Label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={signUpData.phone}
+                    onChange={(e) => setSignUpData({ ...signUpData, phone: e.target.value })}
+                    placeholder="Your phone number"
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="experienceLevel">Birding Experience</Label>
+                <Select
+                  value={signUpData.experienceLevel}
+                  onValueChange={(value) => setSignUpData({ ...signUpData, experienceLevel: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your experience level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Beginner birder">Beginner birder</SelectItem>
+                    <SelectItem value="Intermediate birder">Intermediate birder</SelectItem>
+                    <SelectItem value="Advanced birder">Advanced birder</SelectItem>
+                    <SelectItem value="Expert birder">Expert birder</SelectItem>
+                    <SelectItem value="Professional ornithologist">Professional ornithologist</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="signup-password">Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="signup-password"
+                    type={showPassword ? "text" : "password"}
+                    value={signUpData.password}
+                    onChange={(e) => setSignUpData({ ...signUpData, password: e.target.value })}
+                    placeholder="Create a password"
+                    className="pl-10 pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-400" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-400" />
+                    )}
+                  </button>
+                </div>
+
+                {/* Password Requirements */}
+                {signUpData.password && (
+                  <div className="text-xs space-y-1">
+                    <div
+                      className={`flex items-center ${passwordValidation.minLength ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {passwordValidation.minLength ? (
+                        <CheckCircle className="w-3 h-3 mr-1" />
+                      ) : (
+                        <XCircle className="w-3 h-3 mr-1" />
+                      )}
+                      At least 8 characters
+                    </div>
+                    <div
+                      className={`flex items-center ${passwordValidation.hasUpper ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {passwordValidation.hasUpper ? (
+                        <CheckCircle className="w-3 h-3 mr-1" />
+                      ) : (
+                        <XCircle className="w-3 h-3 mr-1" />
+                      )}
+                      One uppercase letter
+                    </div>
+                    <div
+                      className={`flex items-center ${passwordValidation.hasLower ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {passwordValidation.hasLower ? (
+                        <CheckCircle className="w-3 h-3 mr-1" />
+                      ) : (
+                        <XCircle className="w-3 h-3 mr-1" />
+                      )}
+                      One lowercase letter
+                    </div>
+                    <div
+                      className={`flex items-center ${passwordValidation.hasNumber ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {passwordValidation.hasNumber ? (
+                        <CheckCircle className="w-3 h-3 mr-1" />
+                      ) : (
+                        <XCircle className="w-3 h-3 mr-1" />
+                      )}
+                      One number
+                    </div>
+                    <div
+                      className={`flex items-center ${passwordValidation.hasSpecial ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {passwordValidation.hasSpecial ? (
+                        <CheckCircle className="w-3 h-3 mr-1" />
+                      ) : (
+                        <XCircle className="w-3 h-3 mr-1" />
+                      )}
+                      One special character
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={signUpData.confirmPassword}
+                    onChange={(e) => setSignUpData({ ...signUpData, confirmPassword: e.target.value })}
+                    placeholder="Confirm your password"
+                    className="pl-10 pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-3"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-400" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-400" />
+                    )}
+                  </button>
+                </div>
+
+                {signUpData.confirmPassword && (
+                  <div className={`text-xs flex items-center ${passwordsMatch ? "text-green-600" : "text-red-600"}`}>
+                    {passwordsMatch ? <CheckCircle className="w-3 h-3 mr-1" /> : <XCircle className="w-3 h-3 mr-1" />}
+                    Passwords match
+                  </div>
+                )}
+              </div>
+
+              {error && (
+                <Alert variant="destructive">
+                  <XCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
+              {message && (
+                <Alert>
+                  <CheckCircle className="h-4 w-4" />
+                  <AlertDescription>{message}</AlertDescription>
+                </Alert>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={loading || !passwordValidation.isValid || !passwordsMatch}
+              >
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Creating Account...
+                  </>
+                ) : (
+                  "Create Account"
+                )}
+              </Button>
+            </form>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+              </div>
             </div>
-          </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className="w-full bg-transparent"
+            >
+              <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                />
+              </svg>
+              Continue with Google
+            </Button>
+          </TabsContent>
         </Tabs>
       </DialogContent>
     </Dialog>

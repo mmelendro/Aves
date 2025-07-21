@@ -2,57 +2,115 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { supabase, logUserAction } from "@/lib/supabase"
+import { supabase } from "@/lib/enhanced-supabase"
 import { Card, CardContent } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import { CheckCircle, XCircle, Loader2 } from "lucide-react"
 
 export default function AuthCallback() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("Processing authentication...")
 
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
-        const { data, error } = await supabase.auth.getSession()
+        // Get the code from URL parameters
+        const code = searchParams.get("code")
+        const error = searchParams.get("error")
+        const errorDescription = searchParams.get("error_description")
+        const next = searchParams.get("next") || "/shopping"
 
+        // Handle OAuth errors
         if (error) {
-          console.error("Auth callback error:", error)
+          console.error("OAuth error:", error, errorDescription)
           setStatus("error")
-          setMessage("Authentication failed. Please try again.")
+          setMessage(errorDescription || "Authentication failed. Please try again.")
+
+          setTimeout(() => {
+            router.push("/shopping?error=auth_failed")
+          }, 3000)
           return
         }
 
-        if (data.session?.user) {
-          const user = data.session.user
+        // Handle magic link or OAuth callback with code
+        if (code) {
+          setMessage("Completing authentication...")
 
-          // Update last login
-          await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", user.id)
+          const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
 
-          // Log successful authentication
-          await logUserAction(user.id, "auth_callback_success", {
-            provider: user.app_metadata?.provider || "email",
-            email: user.email,
-          })
+          if (exchangeError) {
+            console.error("Code exchange error:", exchangeError)
+            setStatus("error")
+            setMessage("Failed to complete authentication. The link may have expired.")
 
-          setStatus("success")
-          setMessage("Authentication successful! Redirecting...")
+            setTimeout(() => {
+              router.push("/shopping?error=auth_expired")
+            }, 3000)
+            return
+          }
 
-          // Redirect to the next page or shopping page
-          const nextUrl = searchParams.get("next") || "/shopping"
-          setTimeout(() => {
-            router.push(nextUrl)
-          }, 2000)
+          if (data.session && data.user) {
+            setStatus("success")
+            setMessage("Authentication successful! Redirecting...")
+
+            // Log the successful authentication
+            console.log("User authenticated:", data.user.email)
+
+            // Redirect to the intended page
+            setTimeout(() => {
+              router.push(next)
+            }, 1500)
+          } else {
+            setStatus("error")
+            setMessage("Authentication completed but no session was created.")
+
+            setTimeout(() => {
+              router.push("/shopping?error=no_session")
+            }, 3000)
+          }
         } else {
-          setStatus("error")
-          setMessage("No user session found. Please try signing in again.")
+          // No code parameter - check if user is already authenticated
+          const {
+            data: { session },
+            error: sessionError,
+          } = await supabase.auth.getSession()
+
+          if (sessionError) {
+            console.error("Session error:", sessionError)
+            setStatus("error")
+            setMessage("Failed to verify authentication status.")
+
+            setTimeout(() => {
+              router.push("/shopping?error=session_error")
+            }, 3000)
+            return
+          }
+
+          if (session) {
+            setStatus("success")
+            setMessage("Already authenticated! Redirecting...")
+
+            setTimeout(() => {
+              router.push(next)
+            }, 1500)
+          } else {
+            setStatus("error")
+            setMessage("No authentication code found. Please try signing in again.")
+
+            setTimeout(() => {
+              router.push("/shopping?error=no_code")
+            }, 3000)
+          }
         }
-      } catch (error) {
-        console.error("Unexpected error in auth callback:", error)
+      } catch (error: any) {
+        console.error("Auth callback error:", error)
         setStatus("error")
-        setMessage("An unexpected error occurred. Please try again.")
+        setMessage("An unexpected error occurred during authentication.")
+
+        setTimeout(() => {
+          router.push("/shopping?error=unexpected")
+        }, 3000)
       }
     }
 
@@ -60,46 +118,33 @@ export default function AuthCallback() {
   }, [router, searchParams])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
       <Card className="w-full max-w-md">
-        <CardContent className="p-6">
-          <div className="text-center space-y-4">
-            {status === "loading" && (
-              <>
-                <Loader2 className="w-8 h-8 animate-spin mx-auto text-emerald-600" />
-                <h2 className="text-xl font-semibold">Authenticating...</h2>
-                <p className="text-gray-600">Please wait while we complete your sign-in.</p>
-              </>
-            )}
+        <CardContent className="flex flex-col items-center justify-center p-8 text-center">
+          {status === "loading" && (
+            <>
+              <Loader2 className="w-8 h-8 animate-spin text-blue-600 mb-4" />
+              <h2 className="text-lg font-semibold mb-2">Authenticating</h2>
+              <p className="text-gray-600">{message}</p>
+            </>
+          )}
 
-            {status === "success" && (
-              <>
-                <CheckCircle className="w-8 h-8 mx-auto text-green-600" />
-                <h2 className="text-xl font-semibold text-green-800">Success!</h2>
-                <Alert className="border-green-200 bg-green-50">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <AlertDescription className="text-green-800">{message}</AlertDescription>
-                </Alert>
-              </>
-            )}
+          {status === "success" && (
+            <>
+              <CheckCircle className="w-8 h-8 text-green-600 mb-4" />
+              <h2 className="text-lg font-semibold text-green-600 mb-2">Success!</h2>
+              <p className="text-gray-600">{message}</p>
+            </>
+          )}
 
-            {status === "error" && (
-              <>
-                <AlertCircle className="w-8 h-8 mx-auto text-red-600" />
-                <h2 className="text-xl font-semibold text-red-800">Authentication Failed</h2>
-                <Alert className="border-red-200 bg-red-50">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
-                  <AlertDescription className="text-red-800">{message}</AlertDescription>
-                </Alert>
-                <button
-                  onClick={() => router.push("/shopping")}
-                  className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
-                >
-                  Return to Shopping
-                </button>
-              </>
-            )}
-          </div>
+          {status === "error" && (
+            <>
+              <XCircle className="w-8 h-8 text-red-600 mb-4" />
+              <h2 className="text-lg font-semibold text-red-600 mb-2">Authentication Failed</h2>
+              <p className="text-gray-600 mb-4">{message}</p>
+              <p className="text-sm text-gray-500">You will be redirected to the login page shortly.</p>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
