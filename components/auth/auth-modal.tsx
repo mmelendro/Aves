@@ -10,7 +10,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
-import { supabase } from "@/lib/supabase"
+import { Checkbox } from "@/components/ui/checkbox"
+import { supabase, createUserProfile, logAdminAction } from "@/lib/supabase"
 import { User, Mail, Eye, EyeOff, UserPlus, LogIn, AlertCircle, CheckCircle, Chrome } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -44,11 +45,15 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
     lastName: prefilledData?.lastName || "",
     phone: prefilledData?.phone || "",
     experienceLevel: prefilledData?.experienceLevel || "Beginner birder",
+    marketingConsent: false,
+    newsletterSubscribed: true,
+    termsAccepted: false,
   })
 
   const [signInForm, setSignInForm] = useState({
     email: prefilledData?.email || "",
     password: "",
+    rememberMe: false,
   })
 
   useEffect(() => {
@@ -68,10 +73,38 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
     }
   }, [prefilledData])
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  const validatePassword = (password: string) => {
+    // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/
+    return passwordRegex.test(password)
+  }
+
+  const sanitizeInput = (input: string) => {
+    return input.trim().replace(/[<>]/g, "")
+  }
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setMessage(null)
+
+    // Validation
+    if (!signUpForm.termsAccepted) {
+      setMessage({ type: "error", text: "Please accept the Terms of Service and Privacy Policy" })
+      setLoading(false)
+      return
+    }
+
+    if (!validateEmail(signUpForm.email)) {
+      setMessage({ type: "error", text: "Please enter a valid email address" })
+      setLoading(false)
+      return
+    }
 
     if (signUpForm.password !== signUpForm.confirmPassword) {
       setMessage({ type: "error", text: "Passwords do not match" })
@@ -79,23 +112,48 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
       return
     }
 
-    if (signUpForm.password.length < 6) {
-      setMessage({ type: "error", text: "Password must be at least 6 characters long" })
+    if (!validatePassword(signUpForm.password)) {
+      setMessage({
+        type: "error",
+        text: "Password must be at least 8 characters with uppercase, lowercase, and number",
+      })
       setLoading(false)
       return
     }
 
+    // Sanitize inputs
+    const sanitizedData = {
+      email: sanitizeInput(signUpForm.email.toLowerCase()),
+      firstName: sanitizeInput(signUpForm.firstName),
+      lastName: sanitizeInput(signUpForm.lastName),
+      phone: sanitizeInput(signUpForm.phone),
+      experienceLevel: signUpForm.experienceLevel,
+    }
+
     try {
+      // Check if user already exists
+      const { data: existingUser } = await supabase
+        .from("profiles")
+        .select("email")
+        .eq("email", sanitizedData.email)
+        .single()
+
+      if (existingUser) {
+        setMessage({ type: "error", text: "An account with this email already exists" })
+        setLoading(false)
+        return
+      }
+
       const { data, error } = await supabase.auth.signUp({
-        email: signUpForm.email,
+        email: sanitizedData.email,
         password: signUpForm.password,
         options: {
           data: {
-            full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
-            first_name: signUpForm.firstName,
-            last_name: signUpForm.lastName,
-            phone: signUpForm.phone,
-            experience_level: signUpForm.experienceLevel,
+            full_name: `${sanitizedData.firstName} ${sanitizedData.lastName}`,
+            first_name: sanitizedData.firstName,
+            last_name: sanitizedData.lastName,
+            phone: sanitizedData.phone,
+            experience_level: sanitizedData.experienceLevel,
           },
         },
       })
@@ -103,31 +161,49 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
       if (error) throw error
 
       if (data.user) {
-        setMessage({
-          type: "success",
-          text: "Account created successfully! Please check your email to verify your account.",
-        })
-
-        // Create profile in profiles table
-        const { error: profileError } = await supabase.from("profiles").insert({
+        // Create comprehensive profile
+        const profileData = {
           id: data.user.id,
-          email: signUpForm.email,
-          full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
-          phone: signUpForm.phone,
-          experience_level: signUpForm.experienceLevel,
+          email: sanitizedData.email,
+          full_name: `${sanitizedData.firstName} ${sanitizedData.lastName}`,
+          phone: sanitizedData.phone || null,
+          experience_level: sanitizedData.experienceLevel,
           created_at: new Date().toISOString(),
-        })
+          updated_at: new Date().toISOString(),
+          is_admin: sanitizedData.email === "admin@aves.bio",
+          registration_method: "form",
+          marketing_consent: signUpForm.marketingConsent,
+          newsletter_subscribed: signUpForm.newsletterSubscribed,
+          last_login: new Date().toISOString(),
+        }
+
+        const { error: profileError } = await createUserProfile(profileData)
 
         if (profileError) {
           console.error("Profile creation error:", profileError)
-        }
+          setMessage({ type: "error", text: "Account created but profile setup failed. Please contact support." })
+        } else {
+          setMessage({
+            type: "success",
+            text: "Account created successfully! Please check your email to verify your account.",
+          })
 
-        setTimeout(() => {
-          onSuccess(data.user)
-          onClose()
-        }, 2000)
+          // Log the registration
+          if (profileData.is_admin) {
+            await logAdminAction(data.user.id, "ADMIN_ACCOUNT_CREATED", "profile", data.user.id, {
+              email: sanitizedData.email,
+              registration_method: "form",
+            })
+          }
+
+          setTimeout(() => {
+            onSuccess(data.user)
+            onClose()
+          }, 2000)
+        }
       }
     } catch (error: any) {
+      console.error("Sign up error:", error)
       setMessage({ type: "error", text: error.message || "An error occurred during sign up" })
     } finally {
       setLoading(false)
@@ -139,22 +215,39 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
     setLoading(true)
     setMessage(null)
 
+    if (!validateEmail(signInForm.email)) {
+      setMessage({ type: "error", text: "Please enter a valid email address" })
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: signInForm.email,
+        email: sanitizeInput(signInForm.email.toLowerCase()),
         password: signInForm.password,
       })
 
       if (error) throw error
 
       if (data.user) {
+        // Update last login
+        await supabase
+          .from("profiles")
+          .update({
+            last_login: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", data.user.id)
+
         setMessage({ type: "success", text: "Successfully signed in!" })
+
         setTimeout(() => {
           onSuccess(data.user)
           onClose()
         }, 1000)
       }
     } catch (error: any) {
+      console.error("Sign in error:", error)
       setMessage({ type: "error", text: error.message || "An error occurred during sign in" })
     } finally {
       setLoading(false)
@@ -169,12 +262,17 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/shopping?auth=success`,
+          redirectTo: `${window.location.origin}/auth/callback`,
+          queryParams: {
+            access_type: "offline",
+            prompt: "consent",
+          },
         },
       })
 
       if (error) throw error
     } catch (error: any) {
+      console.error("Google sign in error:", error)
       setMessage({ type: "error", text: error.message || "An error occurred with Google sign in" })
       setLoading(false)
     }
@@ -192,11 +290,17 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
       return
     }
 
+    if (!validateEmail(email)) {
+      setMessage({ type: "error", text: "Please enter a valid email address" })
+      setLoading(false)
+      return
+    }
+
     try {
       const { error } = await supabase.auth.signInWithOtp({
-        email,
+        email: sanitizeInput(email.toLowerCase()),
         options: {
-          emailRedirectTo: `${window.location.origin}/shopping?auth=success`,
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       })
 
@@ -207,6 +311,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
         text: "Magic link sent! Check your email and click the link to sign in.",
       })
     } catch (error: any) {
+      console.error("Magic link error:", error)
       setMessage({ type: "error", text: error.message || "An error occurred sending magic link" })
     } finally {
       setLoading(false)
@@ -215,7 +320,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <User className="w-5 h-5 text-emerald-600" />
@@ -260,6 +365,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                     onChange={(e) => setSignUpForm({ ...signUpForm, firstName: e.target.value })}
                     required
                     disabled={loading}
+                    maxLength={50}
                   />
                 </div>
                 <div>
@@ -271,6 +377,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                     onChange={(e) => setSignUpForm({ ...signUpForm, lastName: e.target.value })}
                     required
                     disabled={loading}
+                    maxLength={50}
                   />
                 </div>
               </div>
@@ -284,6 +391,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                   onChange={(e) => setSignUpForm({ ...signUpForm, email: e.target.value })}
                   required
                   disabled={loading}
+                  maxLength={100}
                 />
               </div>
 
@@ -295,6 +403,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                   value={signUpForm.phone}
                   onChange={(e) => setSignUpForm({ ...signUpForm, phone: e.target.value })}
                   disabled={loading}
+                  maxLength={20}
                 />
               </div>
 
@@ -324,7 +433,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                     onChange={(e) => setSignUpForm({ ...signUpForm, password: e.target.value })}
                     required
                     disabled={loading}
-                    minLength={6}
+                    minLength={8}
                   />
                   <Button
                     type="button"
@@ -337,6 +446,9 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  At least 8 characters with uppercase, lowercase, and number
+                </p>
               </div>
 
               <div>
@@ -348,11 +460,61 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                   onChange={(e) => setSignUpForm({ ...signUpForm, confirmPassword: e.target.value })}
                   required
                   disabled={loading}
-                  minLength={6}
+                  minLength={8}
                 />
               </div>
 
-              <Button type="submit" className="w-full" disabled={loading}>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="termsAccepted"
+                    checked={signUpForm.termsAccepted}
+                    onCheckedChange={(checked) => setSignUpForm({ ...signUpForm, termsAccepted: checked as boolean })}
+                    disabled={loading}
+                  />
+                  <Label htmlFor="termsAccepted" className="text-sm">
+                    I agree to the{" "}
+                    <a href="/terms" className="text-emerald-600 hover:underline" target="_blank" rel="noreferrer">
+                      Terms of Service
+                    </a>{" "}
+                    and{" "}
+                    <a href="/privacy" className="text-emerald-600 hover:underline" target="_blank" rel="noreferrer">
+                      Privacy Policy
+                    </a>{" "}
+                    *
+                  </Label>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="newsletterSubscribed"
+                    checked={signUpForm.newsletterSubscribed}
+                    onCheckedChange={(checked) =>
+                      setSignUpForm({ ...signUpForm, newsletterSubscribed: checked as boolean })
+                    }
+                    disabled={loading}
+                  />
+                  <Label htmlFor="newsletterSubscribed" className="text-sm">
+                    Subscribe to our newsletter for birding tips and tour updates
+                  </Label>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="marketingConsent"
+                    checked={signUpForm.marketingConsent}
+                    onCheckedChange={(checked) =>
+                      setSignUpForm({ ...signUpForm, marketingConsent: checked as boolean })
+                    }
+                    disabled={loading}
+                  />
+                  <Label htmlFor="marketingConsent" className="text-sm">
+                    I consent to receive marketing communications from AVES
+                  </Label>
+                </div>
+              </div>
+
+              <Button type="submit" className="w-full" disabled={loading || !signUpForm.termsAccepted}>
                 {loading ? "Creating Account..." : "Create Account"}
               </Button>
             </form>
@@ -369,6 +531,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                   onChange={(e) => setSignInForm({ ...signInForm, email: e.target.value })}
                   required
                   disabled={loading}
+                  maxLength={100}
                 />
               </div>
 
@@ -394,6 +557,18 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="rememberMe"
+                  checked={signInForm.rememberMe}
+                  onCheckedChange={(checked) => setSignInForm({ ...signInForm, rememberMe: checked as boolean })}
+                  disabled={loading}
+                />
+                <Label htmlFor="rememberMe" className="text-sm">
+                  Remember me
+                </Label>
               </div>
 
               <Button type="submit" className="w-full" disabled={loading}>
@@ -433,17 +608,6 @@ export function AuthModal({ isOpen, onClose, onSuccess, prefilledData, mode = "s
                 <Mail className="mr-2 h-4 w-4" />
                 Magic Link
               </Button>
-            </div>
-
-            <div className="text-xs text-center text-gray-600">
-              By creating an account, you agree to our{" "}
-              <a href="/terms" className="text-emerald-600 hover:underline">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a href="/privacy" className="text-emerald-600 hover:underline">
-                Privacy Policy
-              </a>
             </div>
           </div>
         </Tabs>

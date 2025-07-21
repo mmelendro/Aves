@@ -314,9 +314,9 @@ const birdSpeciesData = [
   },
   {
     id: "strman5",
-    commonName: "Striped Manakin",
+    commonName: "Striolated Manakin",
     scientificName: "Machaeropterus regulus",
-    spanishName: "Saltarín Rayado",
+    spanishName: "Saltarín Estriado",
     family: "Pipridae",
     order: "Passeriformes",
     image: "/images/strman5.jpg",
@@ -328,13 +328,12 @@ const birdSpeciesData = [
     conservationStatus: "Least Concern",
     difficulty: "Moderate",
     bestTime: "Year-round",
-    description:
-      "A distinctive manakin with bold striped pattern and red crown. Known for its unique mechanical wing sounds produced during courtship displays.",
+    description: "A distinctive manakin with fine striolated (streaked) pattern and red crown.",
     behaviors: ["Wing snapping displays", "Lek behavior", "Fruit foraging"],
     dietaryPreferences: ["Small fruits", "Berries", "Insects"],
     breedingSeason: "February - August",
     migrationPattern: "Resident",
-    photographyTips: "Listen for wing snaps to locate displaying males",
+    photographyTips: "Listen for wing snaps to locate displaying males; look for fine streaked pattern",
     funFacts: [
       "Wing sounds can be heard 100m away",
       "Modified wing feathers create mechanical sounds",
@@ -344,7 +343,7 @@ const birdSpeciesData = [
     experienceLevel: "Intermediate",
     rarity: 6,
     photographyDifficulty: 5,
-    tags: ["Manakin", "Striped", "Wing sounds", "Display", "Unique"],
+    tags: ["Manakin", "Striolated", "Wing sounds", "Display", "Unique"],
   },
   {
     id: "scadov1",
