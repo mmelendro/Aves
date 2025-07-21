@@ -1,13 +1,23 @@
 import { createClient } from "@supabase/supabase-js"
 
+// Enhanced Supabase configuration with admin support
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
+// Validate configuration
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing Supabase environment variables")
+  throw new Error("Missing Supabase configuration. Please check your environment variables.")
 }
 
-// Create the main Supabase client
+// Get current origin for redirect URLs
+const getOrigin = () => {
+  if (typeof window !== "undefined") {
+    return window.location.origin
+  }
+  return process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+}
+
+// Create enhanced Supabase client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
@@ -20,35 +30,62 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
       "X-Client-Info": "aves-colombia-app",
     },
   },
+  db: {
+    schema: "public",
+  },
+  realtime: {
+    params: {
+      eventsPerSecond: 10,
+    },
+  },
 })
 
-// Enhanced Google OAuth sign-in with proper error handling
-export const signInWithGoogle = async () => {
+// Admin authentication functions
+export const signInAdmin = async (email: string, password: string) => {
   try {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
+    // First, sign in with email and password
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.toLowerCase().trim(),
+      password: password,
     })
 
-    if (error) {
-      console.error("Google OAuth error:", error)
-      throw error
+    if (error) throw error
+
+    // Verify admin role
+    if (data.user) {
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("role, full_name")
+        .eq("id", data.user.id)
+        .single()
+
+      if (profileError) {
+        await supabase.auth.signOut()
+        throw new Error("Failed to verify user profile")
+      }
+
+      if (profile.role !== "admin") {
+        await supabase.auth.signOut()
+        throw new Error("Access denied. Admin privileges required.")
+      }
+
+      // Log admin login
+      await logAuditAction(data.user.id, "admin_login", {
+        email: data.user.email,
+        timestamp: new Date().toISOString(),
+      })
+
+      return { success: true, data, error: null, profile }
     }
 
-    return { data, error: null }
+    return { success: false, data: null, error: "Authentication failed" }
   } catch (error: any) {
-    console.error("Google sign-in failed:", error)
-    return { data: null, error: error.message }
+    console.error("Admin sign in error:", error)
+    return { success: false, data: null, error: error.message }
   }
 }
 
-// Enhanced email sign-up
+// Enhanced authentication functions
 export const signUpWithEmail = async (userData: {
   email: string
   password: string
@@ -59,7 +96,7 @@ export const signUpWithEmail = async (userData: {
 }) => {
   try {
     const { data, error } = await supabase.auth.signUp({
-      email: userData.email,
+      email: userData.email.toLowerCase().trim(),
       password: userData.password,
       options: {
         data: {
@@ -69,77 +106,273 @@ export const signUpWithEmail = async (userData: {
           phone: userData.phone || "",
           experience_level: userData.experienceLevel || "Beginner birder",
         },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: `${getOrigin()}/auth/callback`,
       },
     })
 
     if (error) throw error
 
-    // Create user profile
-    if (data.user) {
-      const { error: profileError } = await supabase.from("profiles").insert({
-        id: data.user.id,
-        email: userData.email,
-        full_name: `${userData.firstName} ${userData.lastName}`,
-        phone: userData.phone || "",
-        experience_level: userData.experienceLevel || "Beginner birder",
-        created_at: new Date().toISOString(),
-      })
-
-      if (profileError) {
-        console.warn("Profile creation error:", profileError)
-      }
-    }
-
-    return { data, error: null }
+    return { success: true, data, error: null }
   } catch (error: any) {
-    console.error("Sign-up error:", error)
-    return { data: null, error: error.message }
+    console.error("Sign up error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
   }
 }
 
-// Enhanced email sign-in
 export const signInWithEmail = async (email: string, password: string) => {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: email.toLowerCase().trim(),
+      password: password,
     })
 
     if (error) throw error
 
-    // Update last login
+    // Update last login timestamp
     if (data.user) {
-      await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", data.user.id)
+      await updateLastLogin(data.user.id)
     }
 
-    return { data, error: null }
+    return { success: true, data, error: null }
   } catch (error: any) {
-    console.error("Sign-in error:", error)
-    return { data: null, error: error.message }
+    console.error("Sign in error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
   }
 }
 
-// Sign out
-export const signOut = async () => {
-  const { error } = await supabase.auth.signOut()
-  if (error) {
-    console.error("Sign-out error:", error)
+export const signInWithGoogle = async () => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${getOrigin()}/auth/callback?next=/dashboard`,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    })
+
+    if (error) throw error
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Google sign in error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
   }
-  return { error }
 }
 
-// Get current user
+export const signInWithMagicLink = async (email: string) => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: email.toLowerCase().trim(),
+      options: {
+        emailRedirectTo: `${getOrigin()}/auth/callback?next=/dashboard`,
+      },
+    })
+
+    if (error) throw error
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Magic link error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+// Password reset functionality
+export const resetPassword = async (email: string) => {
+  try {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${getOrigin()}/auth/reset-password`,
+    })
+
+    if (error) throw error
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Password reset error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+export const updatePassword = async (newPassword: string) => {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    })
+
+    if (error) throw error
+    return { success: true, data, error: null }
+  } catch (error: any) {
+    console.error("Password update error:", error)
+    return { success: false, data: null, error: handleSupabaseError(error) }
+  }
+}
+
+// Helper functions
+const updateLastLogin = async (userId: string) => {
+  try {
+    await supabase.from("profiles").update({ last_login: new Date().toISOString() }).eq("id", userId)
+  } catch (error) {
+    console.warn("Failed to update last login:", error)
+  }
+}
+
+// Audit logging function
+export const logAuditAction = async (userId: string | null, action: string, details?: any) => {
+  try {
+    await supabase.from("audit_logs").insert({
+      user_id: userId,
+      action,
+      table_name: details?.table_name,
+      record_id: details?.record_id,
+      old_values: details?.old_values,
+      new_values: details?.new_values,
+      ip_address: details?.ip_address,
+      user_agent: details?.user_agent || (typeof window !== "undefined" ? window.navigator.userAgent : null),
+    })
+  } catch (error) {
+    console.error("Failed to log audit action:", error)
+  }
+}
+
+// Enhanced error handling
+export const handleSupabaseError = (error: any): string => {
+  console.error("Supabase Error Details:", {
+    message: error?.message,
+    code: error?.code,
+    details: error?.details,
+    hint: error?.hint,
+    status: error?.status,
+  })
+
+  // Handle specific admin errors
+  if (error?.message?.includes("Admin privileges required")) {
+    return "Access denied. Administrator privileges are required for this action."
+  }
+
+  // Handle Google OAuth errors
+  if (error?.message?.includes("provider is not enabled") || error?.message?.includes("Unsupported provider")) {
+    return "Google sign-in is not enabled. Please contact support or try email/password sign-in."
+  }
+
+  // Handle magic link errors
+  if (error?.message?.includes("Email link is invalid or has expired")) {
+    return "The magic link has expired. Please request a new one."
+  }
+
+  // Handle RLS policy errors
+  if (error?.message?.includes("policy")) {
+    return "Access permission error. Please ensure you're properly authenticated and try again."
+  }
+
+  // Handle connection errors
+  if (error?.message?.includes("Failed to fetch") || error?.message?.includes("network")) {
+    return "Network connection error. Please check your internet connection and try again."
+  }
+
+  // Handle authentication errors
+  if (error?.message?.includes("Invalid login credentials")) {
+    return "Invalid email or password. Please check your credentials and try again."
+  }
+
+  if (error?.message?.includes("Email not confirmed")) {
+    return "Please check your email and click the confirmation link before signing in."
+  }
+
+  if (error?.message?.includes("User already registered")) {
+    return "An account with this email already exists. Please sign in instead."
+  }
+
+  // Handle validation errors
+  if (error?.message?.includes("Password should be at least")) {
+    return "Password must be at least 6 characters long."
+  }
+
+  // Handle rate limiting
+  if (error?.message?.includes("rate limit") || error?.code === "429") {
+    return "Too many requests. Please wait a moment before trying again."
+  }
+
+  // Handle server errors
+  if (error?.status >= 500) {
+    return "Server error occurred. Please try again later or contact support if the problem persists."
+  }
+
+  return error?.message || "An unexpected error occurred. Please try again."
+}
+
+// User role checking functions
 export const getCurrentUser = async () => {
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser()
-  return { user, error }
+  return user
 }
 
-// Get user profile
-export const getUserProfile = async (userId: string) => {
-  const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
-  return { data, error }
+export const getCurrentUserProfile = async () => {
+  const user = await getCurrentUser()
+  if (!user) return null
+
+  const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+  return profile
+}
+
+export const isAdmin = async () => {
+  const profile = await getCurrentUserProfile()
+  return profile?.role === "admin"
+}
+
+export const requireAdmin = async () => {
+  const admin = await isAdmin()
+  if (!admin) {
+    throw new Error("Admin privileges required")
+  }
+  return true
+}
+
+// Connection test
+export const testSupabaseConnection = async () => {
+  const startTime = Date.now()
+
+  try {
+    const { data: healthCheck, error: healthError } = await supabase
+      .from("profiles")
+      .select("count", { count: "exact", head: true })
+
+    if (healthError) {
+      return {
+        success: false,
+        error: healthError.message,
+        details: {
+          code: healthError.code,
+          hint: healthError.hint,
+          responseTime: Date.now() - startTime,
+        },
+      }
+    }
+
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser()
+
+    return {
+      success: true,
+      message: "Connection successful",
+      details: {
+        responseTime: Date.now() - startTime,
+        hasUser: !!user,
+        userEmail: user?.email,
+        recordCount: healthCheck?.count || 0,
+      },
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.message,
+      details: {
+        responseTime: Date.now() - startTime,
+        stack: error.stack,
+      },
+    }
+  }
 }
