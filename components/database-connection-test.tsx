@@ -22,6 +22,7 @@ import {
   Cloud,
   Settings,
   Shield,
+  FileText,
 } from "lucide-react"
 import { supabaseConnectionTest, type TestResults, type ConnectionTestResult } from "@/lib/supabase-connection-test"
 import { toast } from "sonner"
@@ -149,8 +150,7 @@ export function DatabaseConnectionTest() {
           <h1 className="text-4xl font-bold text-gray-900">Database Connection Test</h1>
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Comprehensive testing of Supabase connectivity, authentication, and CRUD operations with corrected schema
-          using user_id fields
+          Comprehensive testing of Supabase connectivity, schema validation, authentication, and CRUD operations
         </p>
       </div>
 
@@ -212,7 +212,7 @@ export function DatabaseConnectionTest() {
               <Alert className="mt-4 border-green-200 bg-green-50">
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  All database operations are working correctly with the updated schema using user_id fields!
+                  All database operations are working correctly with the proper schema using user_id fields!
                 </AlertDescription>
               </Alert>
             ) : (
@@ -220,6 +220,12 @@ export function DatabaseConnectionTest() {
                 <XCircle className="h-4 w-4 text-red-600" />
                 <AlertDescription className="text-red-800">
                   Some tests failed. Check the detailed results below and console logs for debugging information.
+                  {!testResults.schemaValidation.success && (
+                    <div className="mt-2 p-2 bg-red-100 rounded">
+                      <strong>Schema Issue:</strong> Run the create-user-profiles-table-v2.sql script to fix the
+                      database schema.
+                    </div>
+                  )}
                 </AlertDescription>
               </Alert>
             )}
@@ -230,8 +236,9 @@ export function DatabaseConnectionTest() {
       {/* Detailed Test Results */}
       {testResults && (
         <Tabs defaultValue="basic" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="schema">Schema</TabsTrigger>
             <TabsTrigger value="profiles">Profiles</TabsTrigger>
             <TabsTrigger value="bookings">Bookings</TabsTrigger>
             <TabsTrigger value="storage">Storage</TabsTrigger>
@@ -256,13 +263,41 @@ export function DatabaseConnectionTest() {
                 <TestStatus
                   result={testResults.database}
                   title="Database Connection"
-                  description="Basic connectivity to Supabase database using user_id field"
+                  description="Basic connectivity to Supabase database"
                 />
                 <TestStatus
                   result={testResults.authentication}
                   title="Authentication Status"
                   description="User session and authentication state"
                 />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="schema" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Database Schema Validation
+                </CardTitle>
+                <CardDescription>Verify table structure and column definitions</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TestStatus
+                  result={testResults.schemaValidation}
+                  title="Schema Validation"
+                  description="Check if user_profiles table has correct structure with user_id primary key"
+                />
+                {!testResults.schemaValidation.success && (
+                  <Alert className="border-yellow-200 bg-yellow-50">
+                    <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                    <AlertDescription className="text-yellow-800">
+                      <strong>Action Required:</strong> The database schema needs to be updated. Run the SQL script:{" "}
+                      <code>scripts/create-user-profiles-table-v2.sql</code>
+                    </AlertDescription>
+                  </Alert>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -378,7 +413,9 @@ export function DatabaseConnectionTest() {
               <Loader2 className="h-8 w-8 animate-spin mx-auto text-emerald-600" />
               <div>
                 <h3 className="text-lg font-medium text-gray-900">Running Database Tests</h3>
-                <p className="text-gray-600">Testing connectivity, authentication, and CRUD operations...</p>
+                <p className="text-gray-600">
+                  Testing connectivity, schema validation, authentication, and CRUD operations...
+                </p>
               </div>
             </div>
           </CardContent>
@@ -388,12 +425,12 @@ export function DatabaseConnectionTest() {
       {/* Instructions */}
       <Card className="bg-blue-50 border-blue-200">
         <CardHeader>
-          <CardTitle className="text-blue-900">Testing Instructions</CardTitle>
+          <CardTitle className="text-blue-900">Setup Instructions</CardTitle>
         </CardHeader>
         <CardContent className="text-blue-800 space-y-2">
           <p>
-            <strong>Schema Update:</strong> All queries now use <code>user_id</code> instead of <code>id</code> for the
-            user_profiles table primary key.
+            <strong>Database Setup:</strong> If schema validation fails, run the SQL script:
+            <code className="bg-blue-100 px-1 rounded">scripts/create-user-profiles-table-v2.sql</code>
           </p>
           <p>
             <strong>Authentication:</strong> Some tests require user authentication. Sign in to test full CRUD
