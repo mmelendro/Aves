@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClientSupabaseClient } from "./supabase-client"
 import { refreshSupabaseSchemaCache } from "./schema-cache-refresh"
 
 export interface ConnectionTestResult {
@@ -43,7 +43,7 @@ export class SupabaseConnectionTest {
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
     if (supabaseUrl && supabaseAnonKey) {
-      this.supabase = createClient(supabaseUrl, supabaseAnonKey)
+      this.supabase = createClientSupabaseClient()
     }
   }
 
@@ -54,8 +54,8 @@ export class SupabaseConnectionTest {
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
     const details = {
-      NEXT_PUBLIC_SUPABASE_URL: supabaseUrl ? "Set" : "Missing",
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: supabaseAnonKey ? "Set" : "Missing",
+      NEXT_PUBLIC_SUPABASE_URL: supabaseUrl ? "✅ Set" : "❌ Missing",
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: supabaseAnonKey ? "✅ Set" : "❌ Missing",
       urlValid: supabaseUrl ? supabaseUrl.startsWith("https://") : false,
       keyValid: supabaseAnonKey ? supabaseAnonKey.length > 50 : false,
     }
@@ -758,20 +758,73 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
 export const supabaseConnectionTest = new SupabaseConnectionTest()
 
 // Legacy exports for backward compatibility
-export const testSupabaseConnection = async (): Promise<ConnectionTestResult> => {
-  const results = await supabaseConnectionTest.runFullConnectionTest()
-  return {
-    success: results.summary.overallSuccess,
-    message: results.summary.overallSuccess
-      ? `All ${results.summary.totalTests} tests passed successfully`
-      : `${results.summary.failedTests} of ${results.summary.totalTests} tests failed`,
-    timestamp: new Date().toISOString(),
-    details: results,
+export async function testSupabaseConnection(): Promise<ConnectionTestResult> {
+  const timestamp = new Date().toISOString()
+
+  try {
+    // Check environment variables
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      return {
+        success: false,
+        message: "NEXT_PUBLIC_SUPABASE_URL environment variable is missing",
+        timestamp,
+      }
+    }
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      return {
+        success: false,
+        message: "NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable is missing",
+        timestamp,
+      }
+    }
+
+    // Create Supabase client
+    const supabase = createClientSupabaseClient()
+
+    // Test basic connection with a simple query
+    const { data, error } = await supabase.from("user_profiles").select("count", { count: "exact", head: true })
+
+    if (error) {
+      console.error("Supabase connection test failed:", error)
+      return {
+        success: false,
+        message: `Database connection failed: ${error.message}`,
+        timestamp,
+        details: error,
+      }
+    }
+
+    // Test authentication status
+    const { data: authData, error: authError } = await supabase.auth.getSession()
+
+    if (authError) {
+      console.warn("Auth session check failed:", authError)
+    }
+
+    return {
+      success: true,
+      message: "Successfully connected to Supabase database",
+      timestamp,
+      details: {
+        authStatus: authData?.session ? "Authenticated" : "Not authenticated",
+        tableAccess: "user_profiles table accessible",
+      },
+    }
+  } catch (error) {
+    console.error("Connection test error:", error)
+    return {
+      success: false,
+      message: `Connection test failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      timestamp,
+      details: error,
+    }
   }
 }
 
-export const logEnvironmentStatus = (): void => {
-  console.log("🔧 Environment Status Check:")
-  console.log("NEXT_PUBLIC_SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL ? "Set" : "Missing")
-  console.log("NEXT_PUBLIC_SUPABASE_ANON_KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Set" : "Missing")
+export function logEnvironmentStatus() {
+  console.log("🔍 Environment Status:")
+  console.log("- NEXT_PUBLIC_SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL ? "✅ Set" : "❌ Missing")
+  console.log("- NEXT_PUBLIC_SUPABASE_ANON_KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "✅ Set" : "❌ Missing")
+  console.log("- Environment:", process.env.NODE_ENV)
 }
