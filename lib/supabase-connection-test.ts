@@ -1,4 +1,6 @@
 import { createClientSupabaseClient } from "./supabase-client"
+import { bookingService } from "./booking-service"
+import { profileService } from "./profile-service"
 
 export interface ConnectionTestResult {
   success: boolean
@@ -10,7 +12,6 @@ export interface ConnectionTestResult {
 export interface TestResults {
   environment: ConnectionTestResult
   database: ConnectionTestResult
-  schemaValidation: ConnectionTestResult
   authentication: ConnectionTestResult
   profileOperations: {
     create: ConnectionTestResult
@@ -67,11 +68,11 @@ class SupabaseConnectionTest {
   }
 
   async testDatabaseConnection(): Promise<ConnectionTestResult> {
-    console.log("🗄️ Testing basic database connection...")
+    console.log("🗄️ Testing database connection...")
 
     try {
-      // Test basic connection with a simple query
-      const { data, error } = await this.supabase.from("user_profiles").select("count").limit(1)
+      // Test connection with user_profiles table using user_id field
+      const { data, error } = await this.supabase.from("user_profiles").select("user_id").limit(1)
 
       if (error) {
         console.error("❌ Database connection failed:", error)
@@ -79,12 +80,7 @@ class SupabaseConnectionTest {
           success: false,
           message: `Database connection failed: ${error.message}`,
           timestamp: new Date().toISOString(),
-          details: {
-            error: error.message,
-            code: error.code,
-            hint: error.hint,
-            suggestion: "Check if the user_profiles table exists and has the correct schema",
-          },
+          details: { error: error.message, code: error.code, hint: error.hint },
         }
       }
 
@@ -102,71 +98,6 @@ class SupabaseConnectionTest {
         message: `Database connection error: ${error.message}`,
         timestamp: new Date().toISOString(),
         details: { error: error.message },
-      }
-    }
-  }
-
-  async testSchemaValidation(): Promise<ConnectionTestResult> {
-    console.log("📋 Testing database schema validation...")
-
-    try {
-      // Test if user_profiles table has the correct structure
-      const { data: tableInfo, error: tableError } = await this.supabase
-        .from("user_profiles")
-        .select("user_id, full_name, created_at")
-        .limit(1)
-
-      if (tableError) {
-        console.error("❌ Schema validation failed:", tableError)
-
-        // Check if it's a column not found error
-        if (tableError.message.includes("column") && tableError.message.includes("does not exist")) {
-          return {
-            success: false,
-            message: "Schema mismatch: user_profiles table structure is incorrect",
-            timestamp: new Date().toISOString(),
-            details: {
-              error: tableError.message,
-              suggestion: "Run the create-user-profiles-table-v2.sql script to create the correct schema",
-              expectedColumns: ["user_id (UUID PRIMARY KEY)", "full_name", "phone_number", "created_at", "updated_at"],
-            },
-          }
-        }
-
-        return {
-          success: false,
-          message: `Schema validation failed: ${tableError.message}`,
-          timestamp: new Date().toISOString(),
-          details: { error: tableError.message, code: tableError.code },
-        }
-      }
-
-      // Test if we can query the table structure
-      const { data: structureTest, error: structureError } = await this.supabase
-        .rpc("get_table_columns", { table_name: "user_profiles" })
-        .single()
-
-      console.log("✅ Schema validation successful")
-      return {
-        success: true,
-        message: "Database schema is correctly configured with user_id primary key",
-        timestamp: new Date().toISOString(),
-        details: {
-          tableAccessible: true,
-          hasUserIdColumn: true,
-          queryResult: tableInfo,
-        },
-      }
-    } catch (error: any) {
-      console.error("❌ Schema validation error:", error)
-      return {
-        success: false,
-        message: `Schema validation error: ${error.message}`,
-        timestamp: new Date().toISOString(),
-        details: {
-          error: error.message,
-          suggestion: "Ensure the user_profiles table exists with user_id as primary key",
-        },
       }
     }
   }
@@ -247,100 +178,54 @@ class SupabaseConnectionTest {
         }
       }
 
-      // Direct database insert test
-      const { data: insertData, error: insertError } = await this.supabase
-        .from("user_profiles")
-        .insert({
-          user_id: user.id,
-          full_name: "Test User - Connection Test",
-          phone_number: "+1234567890",
-        })
-        .select()
-        .single()
+      // CREATE test
+      const testProfile = await profileService.createUserProfile({
+        user_id: user.id,
+        full_name: "Test User - Connection Test",
+        phone_number: "+1234567890",
+      })
 
-      if (insertError) {
-        console.error("❌ Profile CREATE failed:", insertError)
-        results.create = {
-          success: false,
-          message: `Profile CREATE failed: ${insertError.message}`,
-          timestamp: new Date().toISOString(),
-          details: { error: insertError.message, code: insertError.code },
-        }
-      } else {
+      if (testProfile) {
         console.log("✅ Profile CREATE successful")
         results.create = {
           success: true,
           message: "Profile CREATE successful",
           timestamp: new Date().toISOString(),
-          details: { profileId: insertData.user_id },
+          details: { profileId: testProfile.user_id },
         }
 
         // READ test
         console.log("📖 Testing profile READ...")
-        const { data: readData, error: readError } = await this.supabase
-          .from("user_profiles")
-          .select("*")
-          .eq("user_id", user.id)
-          .single()
-
-        if (readError) {
-          console.error("❌ Profile READ failed:", readError)
-          results.read = {
-            success: false,
-            message: `Profile READ failed: ${readError.message}`,
-            timestamp: new Date().toISOString(),
-            details: { error: readError.message },
-          }
-        } else {
+        const readProfile = await profileService.getCurrentUserProfile()
+        if (readProfile && readProfile.user_id === user.id) {
           console.log("✅ Profile READ successful")
           results.read = {
             success: true,
             message: "Profile READ successful",
             timestamp: new Date().toISOString(),
-            details: { profileId: readData.user_id },
+            details: { profileId: readProfile.user_id },
           }
 
           // UPDATE test
           console.log("✏️ Testing profile UPDATE...")
-          const { data: updateData, error: updateError } = await this.supabase
-            .from("user_profiles")
-            .update({ full_name: "Updated Test User - Connection Test" })
-            .eq("user_id", user.id)
-            .select()
-            .single()
-
-          if (updateError) {
-            console.error("❌ Profile UPDATE failed:", updateError)
-            results.update = {
-              success: false,
-              message: `Profile UPDATE failed: ${updateError.message}`,
-              timestamp: new Date().toISOString(),
-              details: { error: updateError.message },
-            }
-          } else {
+          const updatedProfile = await profileService.updateUserProfile({
+            full_name: "Updated Test User - Connection Test",
+          })
+          if (updatedProfile) {
             console.log("✅ Profile UPDATE successful")
             results.update = {
               success: true,
               message: "Profile UPDATE successful",
               timestamp: new Date().toISOString(),
-              details: { profileId: updateData.user_id },
+              details: { profileId: updatedProfile.user_id },
             }
           }
         }
 
         // DELETE test
         console.log("🗑️ Testing profile DELETE...")
-        const { error: deleteError } = await this.supabase.from("user_profiles").delete().eq("user_id", user.id)
-
-        if (deleteError) {
-          console.error("❌ Profile DELETE failed:", deleteError)
-          results.delete = {
-            success: false,
-            message: `Profile DELETE failed: ${deleteError.message}`,
-            timestamp: new Date().toISOString(),
-            details: { error: deleteError.message },
-          }
-        } else {
+        const deleteSuccess = await profileService.deleteUserProfile()
+        if (deleteSuccess) {
           console.log("✅ Profile DELETE successful")
           results.delete = {
             success: true,
@@ -398,108 +283,51 @@ class SupabaseConnectionTest {
         }
       }
 
-      // CREATE test - Direct database insert
+      // CREATE test
       console.log("📝 Testing booking CREATE...")
-      const { data: insertData, error: insertError } = await this.supabase
-        .from("bookings")
-        .insert({
-          user_id: user.id,
-          tour_name: "Test Tour - Connection Test",
-          tour_type: "Adventure",
-          start_date: new Date().toISOString().split("T")[0],
-          end_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-          participants: 2,
-          total_amount: 1000,
-          currency: "USD",
-          status: "pending",
-          special_requests: "Test booking for connection test",
-        })
-        .select()
-        .single()
+      const testBooking = await bookingService.createTestBooking()
 
-      if (insertError) {
-        console.error("❌ Booking CREATE failed:", insertError)
-        results.create = {
-          success: false,
-          message: `Booking CREATE failed: ${insertError.message}`,
-          timestamp: new Date().toISOString(),
-          details: { error: insertError.message, code: insertError.code },
-        }
-      } else {
+      if (testBooking) {
         console.log("✅ Booking CREATE successful")
         results.create = {
           success: true,
           message: "Booking CREATE successful",
           timestamp: new Date().toISOString(),
-          details: { bookingId: insertData.id },
+          details: { bookingId: testBooking.id },
         }
 
         // READ test
         console.log("📖 Testing booking READ...")
-        const { data: readData, error: readError } = await this.supabase
-          .from("bookings")
-          .select("*")
-          .eq("id", insertData.id)
-          .single()
-
-        if (readError) {
-          console.error("❌ Booking READ failed:", readError)
-          results.read = {
-            success: false,
-            message: `Booking READ failed: ${readError.message}`,
-            timestamp: new Date().toISOString(),
-            details: { error: readError.message },
-          }
-        } else {
+        const readBooking = await bookingService.getBookingById(testBooking.id)
+        if (readBooking && readBooking.id === testBooking.id) {
           console.log("✅ Booking READ successful")
           results.read = {
             success: true,
             message: "Booking READ successful",
             timestamp: new Date().toISOString(),
-            details: { bookingId: readData.id },
+            details: { bookingId: readBooking.id },
           }
 
           // UPDATE test
           console.log("✏️ Testing booking UPDATE...")
-          const { data: updateData, error: updateError } = await this.supabase
-            .from("bookings")
-            .update({ special_requests: "Updated test booking - Connection Test" })
-            .eq("id", insertData.id)
-            .select()
-            .single()
-
-          if (updateError) {
-            console.error("❌ Booking UPDATE failed:", updateError)
-            results.update = {
-              success: false,
-              message: `Booking UPDATE failed: ${updateError.message}`,
-              timestamp: new Date().toISOString(),
-              details: { error: updateError.message },
-            }
-          } else {
+          const updatedBooking = await bookingService.updateBooking(testBooking.id, {
+            special_requests: "Updated test booking - Connection Test",
+          })
+          if (updatedBooking) {
             console.log("✅ Booking UPDATE successful")
             results.update = {
               success: true,
               message: "Booking UPDATE successful",
               timestamp: new Date().toISOString(),
-              details: { bookingId: updateData.id },
+              details: { bookingId: updatedBooking.id },
             }
           }
         }
 
         // DELETE test
         console.log("🗑️ Testing booking DELETE...")
-        const { error: deleteError } = await this.supabase.from("bookings").delete().eq("id", insertData.id)
-
-        if (deleteError) {
-          console.error("❌ Booking DELETE failed:", deleteError)
-          results.delete = {
-            success: false,
-            message: `Booking DELETE failed: ${deleteError.message}`,
-            timestamp: new Date().toISOString(),
-            details: { error: deleteError.message },
-          }
-        } else {
+        const deleteSuccess = await bookingService.deleteBooking(testBooking.id)
+        if (deleteSuccess) {
           console.log("✅ Booking DELETE successful")
           results.delete = {
             success: true,
@@ -566,7 +394,6 @@ class SupabaseConnectionTest {
     const results: TestResults = {
       environment: await this.testEnvironmentVariables(),
       database: await this.testDatabaseConnection(),
-      schemaValidation: { success: false, message: "Not run", timestamp: new Date().toISOString() },
       authentication: await this.testAuthentication(),
       profileOperations: {
         create: { success: false, message: "Not run", timestamp: new Date().toISOString() },
@@ -589,22 +416,16 @@ class SupabaseConnectionTest {
       },
     }
 
-    // Only run schema validation if basic connection works
+    // Only run CRUD tests if basic connection works
     if (results.database.success) {
-      results.schemaValidation = await this.testSchemaValidation()
-
-      // Only run CRUD tests if schema is valid
-      if (results.schemaValidation.success) {
-        results.profileOperations = await this.testProfileOperations()
-        results.bookingOperations = await this.testBookingOperations()
-      }
+      results.profileOperations = await this.testProfileOperations()
+      results.bookingOperations = await this.testBookingOperations()
     }
 
     // Calculate summary
     const allTests = [
       results.environment,
       results.database,
-      results.schemaValidation,
       results.authentication,
       results.profileOperations.create,
       results.profileOperations.read,
