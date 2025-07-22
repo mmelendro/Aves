@@ -11,78 +11,138 @@ export type Database = {
       user_profiles: {
         Row: {
           user_id: string
-          updated_at: string | null
           first_name: string | null
           last_name: string | null
           email: string
           phone: string | null
+          profile_image_url: string | null
           passport_number: string | null
           passport_country: string | null
           passport_expiry: string | null
           insurance_provider: string | null
           insurance_policy_number: string | null
+          insurance_coverage_details: string | null
           ebird_profile_url: string | null
+          ebird_username: string | null
           dietary_preferences: string | null
-          allergies: string | null
-          medical_history: string | null
+          food_allergies: string | null
+          other_allergies: string | null
+          medical_conditions: string | null
           current_medications: string | null
-          vaccinations: string[] | null
+          medical_notes: string | null
           emergency_contact_name: string | null
           emergency_contact_relationship: string | null
           emergency_contact_phone: string | null
-          social_media_handles: Record<string, string> | null
-          uploaded_documents: string[] | null
+          emergency_contact_email: string | null
+          instagram_handle: string | null
+          facebook_profile: string | null
+          twitter_handle: string | null
+          linkedin_profile: string | null
+          covid_vaccination_status: string | null
+          yellow_fever_vaccination: boolean | null
+          yellow_fever_vaccination_date: string | null
+          hepatitis_a_vaccination: boolean | null
+          hepatitis_a_vaccination_date: string | null
+          hepatitis_b_vaccination: boolean | null
+          hepatitis_b_vaccination_date: string | null
+          typhoid_vaccination: boolean | null
+          typhoid_vaccination_date: string | null
+          other_vaccinations: string | null
+          newsletter_subscription: boolean | null
+          marketing_emails: boolean | null
+          sms_notifications: boolean | null
           created_at: string
+          updated_at: string
         }
         Insert: {
           user_id: string
-          updated_at?: string | null
           first_name?: string | null
           last_name?: string | null
           email: string
           phone?: string | null
+          profile_image_url?: string | null
           passport_number?: string | null
           passport_country?: string | null
           passport_expiry?: string | null
           insurance_provider?: string | null
           insurance_policy_number?: string | null
+          insurance_coverage_details?: string | null
           ebird_profile_url?: string | null
+          ebird_username?: string | null
           dietary_preferences?: string | null
-          allergies?: string | null
-          medical_history?: string | null
+          food_allergies?: string | null
+          other_allergies?: string | null
+          medical_conditions?: string | null
           current_medications?: string | null
-          vaccinations?: string[] | null
+          medical_notes?: string | null
           emergency_contact_name?: string | null
           emergency_contact_relationship?: string | null
           emergency_contact_phone?: string | null
-          social_media_handles?: Record<string, string> | null
-          uploaded_documents?: string[] | null
+          emergency_contact_email?: string | null
+          instagram_handle?: string | null
+          facebook_profile?: string | null
+          twitter_handle?: string | null
+          linkedin_profile?: string | null
+          covid_vaccination_status?: string | null
+          yellow_fever_vaccination?: boolean | null
+          yellow_fever_vaccination_date?: string | null
+          hepatitis_a_vaccination?: boolean | null
+          hepatitis_a_vaccination_date?: string | null
+          hepatitis_b_vaccination?: boolean | null
+          hepatitis_b_vaccination_date?: string | null
+          typhoid_vaccination?: boolean | null
+          typhoid_vaccination_date?: string | null
+          other_vaccinations?: string | null
+          newsletter_subscription?: boolean | null
+          marketing_emails?: boolean | null
+          sms_notifications?: boolean | null
           created_at?: string
+          updated_at?: string
         }
         Update: {
           user_id?: string
-          updated_at?: string | null
           first_name?: string | null
           last_name?: string | null
           email?: string
           phone?: string | null
+          profile_image_url?: string | null
           passport_number?: string | null
           passport_country?: string | null
           passport_expiry?: string | null
           insurance_provider?: string | null
           insurance_policy_number?: string | null
+          insurance_coverage_details?: string | null
           ebird_profile_url?: string | null
+          ebird_username?: string | null
           dietary_preferences?: string | null
-          allergies?: string | null
-          medical_history?: string | null
+          food_allergies?: string | null
+          other_allergies?: string | null
+          medical_conditions?: string | null
           current_medications?: string | null
-          vaccinations?: string[] | null
+          medical_notes?: string | null
           emergency_contact_name?: string | null
           emergency_contact_relationship?: string | null
           emergency_contact_phone?: string | null
-          social_media_handles?: Record<string, string> | null
-          uploaded_documents?: string[] | null
+          emergency_contact_email?: string | null
+          instagram_handle?: string | null
+          facebook_profile?: string | null
+          twitter_handle?: string | null
+          linkedin_profile?: string | null
+          covid_vaccination_status?: string | null
+          yellow_fever_vaccination?: boolean | null
+          yellow_fever_vaccination_date?: string | null
+          hepatitis_a_vaccination?: boolean | null
+          hepatitis_a_vaccination_date?: string | null
+          hepatitis_b_vaccination?: boolean | null
+          hepatitis_b_vaccination_date?: string | null
+          typhoid_vaccination?: boolean | null
+          typhoid_vaccination_date?: string | null
+          other_vaccinations?: string | null
+          newsletter_subscription?: boolean | null
+          marketing_emails?: boolean | null
+          sms_notifications?: boolean | null
           created_at?: string
+          updated_at?: string
         }
       }
       user_bookings: {

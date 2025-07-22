@@ -1,183 +1,149 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createClientSupabaseClient } from "./supabase-client"
 import type { Database } from "./supabase"
 
+export type Booking = Database["public"]["Tables"]["bookings"]["Row"]
+export type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
+export type BookingUpdate = Database["public"]["Tables"]["bookings"]["Update"]
+
 export interface BookingData {
-  tours: any[]
+  tourType: string
+  region: string
+  dates: {
+    start: string
+    end: string
+  }
+  participants: number
+  accommodationType: string
+  totalCost: number
   contactInfo: {
-    firstName: string
-    lastName: string
+    name: string
     email: string
     phone: string
-    travelDate: string
-    experienceLevel: string
   }
-  questions?: string
-  totalCost: number
-  restDayOptions?: Record<string, any>
+  tourSelections: {
+    [key: string]: any
+  }
+  specialRequests?: string
 }
 
 export class BookingService {
-  private supabase = createClientComponentClient<Database>()
+  private supabase = createClientSupabaseClient()
 
-  async saveBooking(bookingData: BookingData): Promise<{ success: boolean; bookingId?: string; error?: string }> {
+  async saveBooking(userId: string, bookingData: BookingData): Promise<Booking | null> {
     try {
-      const {
-        data: { user },
-        error: userError,
-      } = await this.supabase.auth.getUser()
-
-      if (userError || !user) {
-        return { success: false, error: "User not authenticated" }
-      }
-
       const { data, error } = await this.supabase
         .from("bookings")
-        .insert({
-          user_id: user.id,
-          booking_data: bookingData,
-          total_cost: bookingData.totalCost,
-          contact_info: bookingData.contactInfo,
-          tour_selections: bookingData.tours,
-          special_requests: bookingData.questions || null,
-          status: "draft",
-        })
+        .upsert(
+          {
+            user_id: userId,
+            booking_data: bookingData,
+            status: "draft",
+            total_cost: bookingData.totalCost,
+            contact_info: bookingData.contactInfo,
+            tour_selections: bookingData.tourSelections,
+            special_requests: bookingData.specialRequests || null,
+            updated_at: new Date().toISOString(),
+          },
+          {
+            onConflict: "user_id,status",
+            ignoreDuplicates: false,
+          },
+        )
         .select()
         .single()
 
       if (error) {
         console.error("Error saving booking:", error)
-        return { success: false, error: error.message }
+        throw error
       }
 
-      return { success: true, bookingId: data.id }
+      return data
     } catch (error) {
       console.error("Error in saveBooking:", error)
-      return { success: false, error: "Failed to save booking" }
+      throw error
     }
   }
 
-  async updateBooking(bookingId: string, bookingData: BookingData): Promise<{ success: boolean; error?: string }> {
+  async getUserBookings(userId: string): Promise<Booking[]> {
     try {
-      const { error } = await this.supabase
-        .from("bookings")
-        .update({
-          booking_data: bookingData,
-          total_cost: bookingData.totalCost,
-          contact_info: bookingData.contactInfo,
-          tour_selections: bookingData.tours,
-          special_requests: bookingData.questions || null,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", bookingId)
-
-      if (error) {
-        console.error("Error updating booking:", error)
-        return { success: false, error: error.message }
-      }
-
-      return { success: true }
-    } catch (error) {
-      console.error("Error in updateBooking:", error)
-      return { success: false, error: "Failed to update booking" }
-    }
-  }
-
-  async getUserBookings(): Promise<{ success: boolean; bookings?: any[]; error?: string }> {
-    try {
-      const {
-        data: { user },
-        error: userError,
-      } = await this.supabase.auth.getUser()
-
-      if (userError || !user) {
-        return { success: false, error: "User not authenticated" }
-      }
-
       const { data, error } = await this.supabase
         .from("bookings")
         .select("*")
-        .eq("user_id", user.id)
+        .eq("user_id", userId)
         .order("created_at", { ascending: false })
 
       if (error) {
-        console.error("Error fetching bookings:", error)
-        return { success: false, error: error.message }
+        console.error("Error fetching user bookings:", error)
+        throw error
       }
 
-      return { success: true, bookings: data || [] }
+      return data || []
     } catch (error) {
       console.error("Error in getUserBookings:", error)
-      return { success: false, error: "Failed to fetch bookings" }
+      return []
     }
   }
 
-  async getCurrentDraftBooking(): Promise<{ success: boolean; booking?: any; error?: string }> {
+  async getDraftBooking(userId: string): Promise<Booking | null> {
     try {
-      const {
-        data: { user },
-        error: userError,
-      } = await this.supabase.auth.getUser()
-
-      if (userError || !user) {
-        return { success: false, error: "User not authenticated" }
-      }
-
       const { data, error } = await this.supabase
         .from("bookings")
         .select("*")
-        .eq("user_id", user.id)
+        .eq("user_id", userId)
         .eq("status", "draft")
         .order("updated_at", { ascending: false })
         .limit(1)
-        .maybeSingle()
+        .single()
 
-      if (error) {
-        console.error("Error fetching current booking:", error)
-        return { success: false, error: error.message }
+      if (error && error.code !== "PGRST116") {
+        console.error("Error fetching draft booking:", error)
+        throw error
       }
 
-      return { success: true, booking: data }
+      return data
     } catch (error) {
-      console.error("Error in getCurrentDraftBooking:", error)
-      return { success: false, error: "Failed to fetch current booking" }
+      console.error("Error in getDraftBooking:", error)
+      return null
     }
   }
 
-  async deleteBooking(bookingId: string): Promise<{ success: boolean; error?: string }> {
+  async updateBookingStatus(bookingId: string, status: string): Promise<Booking | null> {
+    try {
+      const { data, error } = await this.supabase
+        .from("bookings")
+        .update({
+          status,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", bookingId)
+        .select()
+        .single()
+
+      if (error) {
+        console.error("Error updating booking status:", error)
+        throw error
+      }
+
+      return data
+    } catch (error) {
+      console.error("Error in updateBookingStatus:", error)
+      throw error
+    }
+  }
+
+  async deleteBooking(bookingId: string): Promise<boolean> {
     try {
       const { error } = await this.supabase.from("bookings").delete().eq("id", bookingId)
 
       if (error) {
         console.error("Error deleting booking:", error)
-        return { success: false, error: error.message }
+        throw error
       }
 
-      return { success: true }
+      return true
     } catch (error) {
       console.error("Error in deleteBooking:", error)
-      return { success: false, error: "Failed to delete booking" }
-    }
-  }
-
-  async submitBookingForReview(bookingId: string): Promise<{ success: boolean; error?: string }> {
-    try {
-      const { error } = await this.supabase
-        .from("bookings")
-        .update({
-          status: "pending",
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", bookingId)
-
-      if (error) {
-        console.error("Error submitting booking:", error)
-        return { success: false, error: error.message }
-      }
-
-      return { success: true }
-    } catch (error) {
-      console.error("Error in submitBookingForReview:", error)
-      return { success: false, error: "Failed to submit booking" }
+      return false
     }
   }
 }

@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
-import { createClientSupabaseClient } from "@/lib/supabase-client"
+import { profileService, type UserProfile } from "@/lib/profile-service"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   User,
   Camera,
@@ -21,46 +22,27 @@ import {
   Shield,
   Heart,
   Users,
-  Upload,
   Bell,
   Lock,
   Instagram,
   Facebook,
   Twitter,
+  Linkedin,
   Globe,
   AlertCircle,
-  Trash2,
-  Download,
   CheckCircle,
   XCircle,
+  Loader2,
+  Phone,
+  Mail,
+  MapPin,
+  Calendar,
+  Stethoscope,
+  Syringe,
+  Upload,
+  X,
 } from "lucide-react"
 import { toast } from "sonner"
-
-interface UserProfile {
-  user_id: string
-  first_name: string | null
-  last_name: string | null
-  email: string
-  phone: string | null
-  passport_number: string | null
-  passport_country: string | null
-  passport_expiry: string | null
-  insurance_provider: string | null
-  insurance_policy_number: string | null
-  ebird_profile_url: string | null
-  dietary_preferences: string | null
-  allergies: string | null
-  medical_history: string | null
-  current_medications: string | null
-  vaccinations: string[] | null
-  emergency_contact_name: string | null
-  emergency_contact_relationship: string | null
-  emergency_contact_phone: string | null
-  social_media_handles: Record<string, string> | null
-  uploaded_documents: string[] | null
-  created_at: string
-  updated_at: string | null
-}
 
 interface AccountSettingsClientProps {
   initialProfile: UserProfile | null
@@ -69,9 +51,7 @@ interface AccountSettingsClientProps {
 }
 
 export default function AccountSettingsClient({ initialProfile, userId, userEmail }: AccountSettingsClientProps) {
-  const supabase = createClientSupabaseClient()
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const documentInputRef = useRef<HTMLInputElement>(null)
 
   const [profile, setProfile] = useState<UserProfile>(
     initialProfile || {
@@ -80,91 +60,78 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       last_name: "",
       email: userEmail,
       phone: "",
+      profile_image_url: "",
       passport_number: "",
       passport_country: "",
       passport_expiry: "",
       insurance_provider: "",
       insurance_policy_number: "",
+      insurance_coverage_details: "",
       ebird_profile_url: "",
+      ebird_username: "",
       dietary_preferences: "",
-      allergies: "",
-      medical_history: "",
+      food_allergies: "",
+      other_allergies: "",
+      medical_conditions: "",
       current_medications: "",
-      vaccinations: [],
+      medical_notes: "",
       emergency_contact_name: "",
       emergency_contact_relationship: "",
       emergency_contact_phone: "",
-      social_media_handles: {},
-      uploaded_documents: [],
+      emergency_contact_email: "",
+      instagram_handle: "",
+      facebook_profile: "",
+      twitter_handle: "",
+      linkedin_profile: "",
+      covid_vaccination_status: "",
+      yellow_fever_vaccination: false,
+      yellow_fever_vaccination_date: "",
+      hepatitis_a_vaccination: false,
+      hepatitis_a_vaccination_date: "",
+      hepatitis_b_vaccination: false,
+      hepatitis_b_vaccination_date: "",
+      typhoid_vaccination: false,
+      typhoid_vaccination_date: "",
+      other_vaccinations: "",
+      newsletter_subscription: true,
+      marketing_emails: true,
+      sms_notifications: false,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     },
   )
 
-  const [profileImage, setProfileImage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [uploadingDocument, setUploadingDocument] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle")
-  const [notifications, setNotifications] = useState({
-    email: true,
-    sms: false,
-    marketing: true,
-  })
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
 
   // Create profile if it doesn't exist
   useEffect(() => {
     const createProfileIfNeeded = async () => {
       if (!initialProfile) {
         try {
-          const { error } = await supabase.from("user_profiles").insert({
+          await profileService.createUserProfile({
             user_id: userId,
             email: userEmail,
             first_name: "",
             last_name: "",
-            created_at: new Date().toISOString(),
           })
-
-          if (error && error.code !== "23505") {
-            // 23505 is duplicate key error
-            console.error("Error creating profile:", error)
-          }
         } catch (error) {
-          console.error("Error in createProfileIfNeeded:", error)
+          console.error("Error creating profile:", error)
         }
       }
     }
 
     createProfileIfNeeded()
-  }, [initialProfile, userId, userEmail, supabase])
+  }, [initialProfile, userId, userEmail])
 
   const handleInputChange = (field: keyof UserProfile, value: any) => {
     setProfile((prev) => ({
       ...prev,
       [field]: value,
     }))
-    setSaveStatus("idle")
-  }
-
-  const handleSocialMediaChange = (platform: string, value: string) => {
-    setProfile((prev) => ({
-      ...prev,
-      social_media_handles: {
-        ...prev.social_media_handles,
-        [platform]: value,
-      },
-    }))
-    setSaveStatus("idle")
-  }
-
-  const handleVaccinationChange = (vaccinations: string) => {
-    const vaccinationArray = vaccinations
-      .split(",")
-      .map((v) => v.trim())
-      .filter((v) => v)
-    setProfile((prev) => ({
-      ...prev,
-      vaccinations: vaccinationArray,
-    }))
+    setHasUnsavedChanges(true)
     setSaveStatus("idle")
   }
 
@@ -172,6 +139,7 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
     const file = event.target.files?.[0]
     if (!file) return
 
+    // Validate file
     if (file.size > 5 * 1024 * 1024) {
       toast.error("Image size must be less than 5MB")
       return
@@ -183,94 +151,23 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
     }
 
     try {
-      setIsLoading(true)
-      const fileExt = file.name.split(".").pop()
-      const fileName = `${userId}-${Date.now()}.${fileExt}`
+      setUploadingImage(true)
+      const imageUrl = await profileService.uploadProfileImage(userId, file)
 
-      const { error: uploadError } = await supabase.storage.from("profile-images").upload(fileName, file)
-
-      if (uploadError) throw uploadError
-
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from("profile-images").getPublicUrl(fileName)
-
-      setProfileImage(publicUrl)
-      toast.success("Profile image uploaded successfully")
+      if (imageUrl) {
+        setProfile((prev) => ({
+          ...prev,
+          profile_image_url: imageUrl,
+        }))
+        setHasUnsavedChanges(true)
+        toast.success("Profile image uploaded successfully")
+      }
     } catch (error) {
       console.error("Error uploading image:", error)
       toast.error("Failed to upload image")
     } finally {
-      setIsLoading(false)
+      setUploadingImage(false)
     }
-  }
-
-  const handleDocumentUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-    if (!files) return
-
-    const allowedTypes = [
-      "application/pdf",
-      "image/jpeg",
-      "image/png",
-      "image/jpg",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ]
-
-    try {
-      setUploadingDocument(true)
-      const uploadedUrls: string[] = []
-
-      for (const file of Array.from(files)) {
-        if (file.size > 10 * 1024 * 1024) {
-          toast.error(`${file.name} is too large. Maximum size is 10MB`)
-          continue
-        }
-
-        if (!allowedTypes.includes(file.type)) {
-          toast.error(`${file.name} is not a supported file type`)
-          continue
-        }
-
-        const fileExt = file.name.split(".").pop()
-        const fileName = `${userId}-${Date.now()}-${file.name}`
-
-        const { error: uploadError } = await supabase.storage.from("user-documents").upload(fileName, file)
-
-        if (uploadError) {
-          console.error("Upload error:", uploadError)
-          continue
-        }
-
-        const {
-          data: { publicUrl },
-        } = supabase.storage.from("user-documents").getPublicUrl(fileName)
-
-        uploadedUrls.push(publicUrl)
-      }
-
-      if (uploadedUrls.length > 0) {
-        setProfile((prev) => ({
-          ...prev,
-          uploaded_documents: [...(prev.uploaded_documents || []), ...uploadedUrls],
-        }))
-        toast.success(`${uploadedUrls.length} document(s) uploaded successfully`)
-      }
-    } catch (error) {
-      console.error("Error uploading documents:", error)
-      toast.error("Failed to upload documents")
-    } finally {
-      setUploadingDocument(false)
-    }
-  }
-
-  const handleRemoveDocument = (urlToRemove: string) => {
-    setProfile((prev) => ({
-      ...prev,
-      uploaded_documents: prev.uploaded_documents?.filter((url) => url !== urlToRemove) || [],
-    }))
-    setSaveStatus("idle")
   }
 
   const handleSaveProfile = async () => {
@@ -278,22 +175,10 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       setSaveStatus("saving")
       setIsLoading(true)
 
-      const profileData = {
-        ...profile,
-        updated_at: new Date().toISOString(),
-      }
-
-      const { error } = await supabase.from("user_profiles").upsert(profileData, {
-        onConflict: "user_id",
-        ignoreDuplicates: false,
-      })
-
-      if (error) {
-        console.error("Database error:", error)
-        throw error
-      }
+      await profileService.upsertUserProfile(profile)
 
       setSaveStatus("saved")
+      setHasUnsavedChanges(false)
       toast.success("Profile updated successfully")
 
       // Reset save status after 3 seconds
@@ -322,12 +207,14 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       case "error":
         return "Try Again"
       default:
-        return "Save Changes"
+        return hasUnsavedChanges ? "Save Changes" : "All Saved"
     }
   }
 
   const getSaveButtonIcon = () => {
     switch (saveStatus) {
+      case "saving":
+        return <Loader2 className="h-4 w-4 animate-spin" />
       case "saved":
         return <CheckCircle className="h-4 w-4" />
       case "error":
@@ -338,11 +225,11 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
   }
 
   return (
-    <div className="p-6">
-      {/* Connection Status Alert */}
-      <Alert className="mb-6">
-        <AlertCircle className="h-4 w-4" />
-        <AlertDescription>
+    <div className="p-8">
+      {/* Status Alert */}
+      <Alert className="mb-6 border-green-200 bg-green-50">
+        <CheckCircle className="h-4 w-4 text-green-600" />
+        <AlertDescription className="text-green-800">
           {initialProfile
             ? "Profile loaded successfully from database"
             : "New profile created - please fill in your information"}
@@ -350,42 +237,74 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       </Alert>
 
       <Tabs defaultValue="personal" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="personal">Personal</TabsTrigger>
-          <TabsTrigger value="travel">Travel</TabsTrigger>
-          <TabsTrigger value="health">Health</TabsTrigger>
-          <TabsTrigger value="emergency">Emergency</TabsTrigger>
-          <TabsTrigger value="documents">Documents</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-6 bg-gray-100 p-1 rounded-xl">
+          <TabsTrigger value="personal" className="rounded-lg">
+            Personal
+          </TabsTrigger>
+          <TabsTrigger value="travel" className="rounded-lg">
+            Travel
+          </TabsTrigger>
+          <TabsTrigger value="health" className="rounded-lg">
+            Health
+          </TabsTrigger>
+          <TabsTrigger value="emergency" className="rounded-lg">
+            Emergency
+          </TabsTrigger>
+          <TabsTrigger value="social" className="rounded-lg">
+            Social
+          </TabsTrigger>
+          <TabsTrigger value="preferences" className="rounded-lg">
+            Preferences
+          </TabsTrigger>
         </TabsList>
 
         {/* Personal Information Tab */}
         <TabsContent value="personal" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Camera className="h-5 w-5 text-blue-600" />
                 Profile Photo
               </CardTitle>
               <CardDescription>Upload a profile photo to personalize your account</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center gap-4">
-                <Avatar className="h-20 w-20">
-                  <AvatarImage src={profileImage || undefined} />
-                  <AvatarFallback className="text-lg">{getInitials()}</AvatarFallback>
-                </Avatar>
-                <div className="space-y-2">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-6">
+                <div className="relative">
+                  <Avatar className="h-24 w-24 border-4 border-white shadow-lg">
+                    <AvatarImage src={profile.profile_image_url || undefined} />
+                    <AvatarFallback className="text-xl bg-gradient-to-br from-blue-500 to-green-500 text-white">
+                      {getInitials()}
+                    </AvatarFallback>
+                  </Avatar>
+                  {uploadingImage && (
+                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
+                      <Loader2 className="h-6 w-6 text-white animate-spin" />
+                    </div>
+                  )}
+                </div>
+                <div className="space-y-3">
                   <Button
                     variant="outline"
                     onClick={() => fileInputRef.current?.click()}
-                    disabled={isLoading}
-                    className="flex items-center gap-2"
+                    disabled={uploadingImage}
+                    className="flex items-center gap-2 hover:bg-blue-50"
                   >
-                    <Camera className="h-4 w-4" />
-                    Upload Photo
+                    <Upload className="h-4 w-4" />
+                    {uploadingImage ? "Uploading..." : "Upload Photo"}
                   </Button>
                   <p className="text-sm text-gray-500">JPG, PNG up to 5MB</p>
+                  {profile.profile_image_url && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleInputChange("profile_image_url", "")}
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    >
+                      <X className="h-4 w-4 mr-1" />
+                      Remove Photo
+                    </Button>
+                  )}
                 </div>
                 <input
                   ref={fileInputRef}
@@ -398,122 +317,104 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Basic Information</CardTitle>
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <User className="h-5 w-5 text-green-600" />
+                Basic Information
+              </CardTitle>
               <CardDescription>Your personal details for tour bookings</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name *</Label>
+                  <Label htmlFor="firstName" className="text-sm font-medium text-gray-700">
+                    First Name *
+                  </Label>
                   <Input
                     id="firstName"
                     value={profile.first_name || ""}
                     onChange={(e) => handleInputChange("first_name", e.target.value)}
                     placeholder="Enter your first name"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name *</Label>
+                  <Label htmlFor="lastName" className="text-sm font-medium text-gray-700">
+                    Last Name *
+                  </Label>
                   <Input
                     id="lastName"
                     value={profile.last_name || ""}
                     onChange={(e) => handleInputChange("last_name", e.target.value)}
                     placeholder="Enter your last name"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" value={profile.email} disabled className="bg-gray-50" />
+                <Label htmlFor="email" className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email Address
+                </Label>
+                <Input id="email" type="email" value={profile.email} disabled className="bg-gray-50 border-gray-200" />
                 <p className="text-sm text-gray-500">Email cannot be changed. Contact support if needed.</p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label htmlFor="phone" className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  Phone Number
+                </Label>
                 <Input
                   id="phone"
                   type="tel"
                   value={profile.phone || ""}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
                   placeholder="+1 (555) 123-4567"
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Globe className="h-5 w-5 text-green-600" />
                 eBird Integration
               </CardTitle>
               <CardDescription>Connect your eBird profile to share your birding achievements</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <Alert>
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>
+            <CardContent className="p-6 space-y-4">
+              <Alert className="border-blue-200 bg-blue-50">
+                <AlertCircle className="h-4 w-4 text-blue-600" />
+                <AlertDescription className="text-blue-800">
                   eBird is a real-time, online bird checklist program. Share your eBird profile to connect with other
                   birders and showcase your sightings.
                 </AlertDescription>
               </Alert>
-              <div className="space-y-2">
-                <Label htmlFor="ebirdUrl">eBird Profile URL</Label>
-                <Input
-                  id="ebirdUrl"
-                  type="url"
-                  value={profile.ebird_profile_url || ""}
-                  onChange={(e) => handleInputChange("ebird_profile_url", e.target.value)}
-                  placeholder="https://ebird.org/profile/your-username"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Social Media</CardTitle>
-              <CardDescription>Connect your social media profiles to share your birding adventures</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="instagram" className="flex items-center gap-2">
-                    <Instagram className="h-4 w-4" />
-                    Instagram
-                  </Label>
+                  <Label htmlFor="ebirdUsername">eBird Username</Label>
                   <Input
-                    id="instagram"
-                    value={profile.social_media_handles?.instagram || ""}
-                    onChange={(e) => handleSocialMediaChange("instagram", e.target.value)}
-                    placeholder="@yourusername"
+                    id="ebirdUsername"
+                    value={profile.ebird_username || ""}
+                    onChange={(e) => handleInputChange("ebird_username", e.target.value)}
+                    placeholder="your-ebird-username"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="facebook" className="flex items-center gap-2">
-                    <Facebook className="h-4 w-4" />
-                    Facebook
-                  </Label>
+                  <Label htmlFor="ebirdUrl">eBird Profile URL</Label>
                   <Input
-                    id="facebook"
-                    value={profile.social_media_handles?.facebook || ""}
-                    onChange={(e) => handleSocialMediaChange("facebook", e.target.value)}
-                    placeholder="facebook.com/yourprofile"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="twitter" className="flex items-center gap-2">
-                    <Twitter className="h-4 w-4" />
-                    Twitter/X
-                  </Label>
-                  <Input
-                    id="twitter"
-                    value={profile.social_media_handles?.twitter || ""}
-                    onChange={(e) => handleSocialMediaChange("twitter", e.target.value)}
-                    placeholder="@yourusername"
+                    id="ebirdUrl"
+                    type="url"
+                    value={profile.ebird_profile_url || ""}
+                    onChange={(e) => handleInputChange("ebird_profile_url", e.target.value)}
+                    placeholder="https://ebird.org/profile/your-username"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </div>
@@ -523,23 +424,27 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
 
         {/* Travel Information Tab */}
         <TabsContent value="travel" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <CreditCard className="h-5 w-5 text-blue-600" />
                 Passport Information
               </CardTitle>
               <CardDescription>Required for international travel and tour bookings</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="passportNumber">Passport Number</Label>
+                  <Label htmlFor="passportNumber" className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    Passport Number
+                  </Label>
                   <Input
                     id="passportNumber"
                     value={profile.passport_number || ""}
                     onChange={(e) => handleInputChange("passport_number", e.target.value)}
                     placeholder="Enter passport number"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -549,31 +454,36 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                     value={profile.passport_country || ""}
                     onChange={(e) => handleInputChange("passport_country", e.target.value)}
                     placeholder="e.g., United States"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="passportExpiry">Expiry Date</Label>
+                <Label htmlFor="passportExpiry" className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  Expiry Date
+                </Label>
                 <Input
                   id="passportExpiry"
                   type="date"
                   value={profile.passport_expiry || ""}
                   onChange={(e) => handleInputChange("passport_expiry", e.target.value)}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Shield className="h-5 w-5 text-green-600" />
                 Travel Insurance
               </CardTitle>
               <CardDescription>Insurance information for your safety during tours</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="insuranceProvider">Insurance Provider</Label>
                   <Input
@@ -581,6 +491,7 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                     value={profile.insurance_provider || ""}
                     onChange={(e) => handleInputChange("insurance_provider", e.target.value)}
                     placeholder="e.g., World Nomads"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -590,8 +501,20 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                     value={profile.insurance_policy_number || ""}
                     onChange={(e) => handleInputChange("insurance_policy_number", e.target.value)}
                     placeholder="Enter policy number"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="coverageDetails">Coverage Details</Label>
+                <Textarea
+                  id="coverageDetails"
+                  value={profile.insurance_coverage_details || ""}
+                  onChange={(e) => handleInputChange("insurance_coverage_details", e.target.value)}
+                  placeholder="Brief description of your insurance coverage"
+                  rows={3}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                />
               </div>
             </CardContent>
           </Card>
@@ -599,15 +522,15 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
 
         {/* Health Information Tab */}
         <TabsContent value="health" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Heart className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Heart className="h-5 w-5 text-green-600" />
                 Dietary Preferences & Allergies
               </CardTitle>
               <CardDescription>Help us accommodate your dietary needs during tours</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-6 space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="dietaryPreferences">Dietary Preferences</Label>
                 <Textarea
@@ -616,35 +539,54 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                   onChange={(e) => handleInputChange("dietary_preferences", e.target.value)}
                   placeholder="e.g., Vegetarian, Vegan, Gluten-free, etc."
                   rows={3}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="allergies">Allergies</Label>
-                <Textarea
-                  id="allergies"
-                  value={profile.allergies || ""}
-                  onChange={(e) => handleInputChange("allergies", e.target.value)}
-                  placeholder="List any food allergies or sensitivities"
-                  rows={3}
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="foodAllergies">Food Allergies</Label>
+                  <Textarea
+                    id="foodAllergies"
+                    value={profile.food_allergies || ""}
+                    onChange={(e) => handleInputChange("food_allergies", e.target.value)}
+                    placeholder="List any food allergies"
+                    rows={3}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="otherAllergies">Other Allergies</Label>
+                  <Textarea
+                    id="otherAllergies"
+                    value={profile.other_allergies || ""}
+                    onChange={(e) => handleInputChange("other_allergies", e.target.value)}
+                    placeholder="Environmental, medication, etc."
+                    rows={3}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Medical Information</CardTitle>
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Stethoscope className="h-5 w-5 text-blue-600" />
+                Medical Information
+              </CardTitle>
               <CardDescription>Confidential medical information for emergency situations</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-6 space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="medicalHistory">Medical History</Label>
+                <Label htmlFor="medicalConditions">Medical Conditions</Label>
                 <Textarea
-                  id="medicalHistory"
-                  value={profile.medical_history || ""}
-                  onChange={(e) => handleInputChange("medical_history", e.target.value)}
-                  placeholder="Brief medical history relevant to travel"
+                  id="medicalConditions"
+                  value={profile.medical_conditions || ""}
+                  onChange={(e) => handleInputChange("medical_conditions", e.target.value)}
+                  placeholder="Any medical conditions relevant to travel"
                   rows={3}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
               <div className="space-y-2">
@@ -655,20 +597,142 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                   onChange={(e) => handleInputChange("current_medications", e.target.value)}
                   placeholder="List current medications and dosages"
                   rows={3}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="vaccinations">Vaccinations</Label>
+                <Label htmlFor="medicalNotes">Additional Medical Notes</Label>
                 <Textarea
-                  id="vaccinations"
-                  value={profile.vaccinations?.join(", ") || ""}
-                  onChange={(e) => handleVaccinationChange(e.target.value)}
-                  placeholder="List vaccinations (separate with commas)"
+                  id="medicalNotes"
+                  value={profile.medical_notes || ""}
+                  onChange={(e) => handleInputChange("medical_notes", e.target.value)}
+                  placeholder="Any other medical information we should know"
                   rows={3}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
-                <p className="text-sm text-gray-500">
-                  Include relevant travel vaccinations like Yellow Fever, Hepatitis A/B, etc.
-                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Syringe className="h-5 w-5 text-green-600" />
+                Vaccination History
+              </CardTitle>
+              <CardDescription>Track your travel-related vaccinations</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="covidStatus">COVID-19 Vaccination Status</Label>
+                <Select
+                  value={profile.covid_vaccination_status || ""}
+                  onValueChange={(value) => handleInputChange("covid_vaccination_status", value)}
+                >
+                  <SelectTrigger className="border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                    <SelectValue placeholder="Select vaccination status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fully-vaccinated">Fully Vaccinated</SelectItem>
+                    <SelectItem value="partially-vaccinated">Partially Vaccinated</SelectItem>
+                    <SelectItem value="not-vaccinated">Not Vaccinated</SelectItem>
+                    <SelectItem value="prefer-not-to-say">Prefer Not to Say</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="yellowFever"
+                      checked={profile.yellow_fever_vaccination || false}
+                      onCheckedChange={(checked) => handleInputChange("yellow_fever_vaccination", checked)}
+                    />
+                    <Label htmlFor="yellowFever">Yellow Fever</Label>
+                  </div>
+                  {profile.yellow_fever_vaccination && (
+                    <Input
+                      type="date"
+                      value={profile.yellow_fever_vaccination_date || ""}
+                      onChange={(e) => handleInputChange("yellow_fever_vaccination_date", e.target.value)}
+                      placeholder="Vaccination date"
+                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="hepatitisA"
+                      checked={profile.hepatitis_a_vaccination || false}
+                      onCheckedChange={(checked) => handleInputChange("hepatitis_a_vaccination", checked)}
+                    />
+                    <Label htmlFor="hepatitisA">Hepatitis A</Label>
+                  </div>
+                  {profile.hepatitis_a_vaccination && (
+                    <Input
+                      type="date"
+                      value={profile.hepatitis_a_vaccination_date || ""}
+                      onChange={(e) => handleInputChange("hepatitis_a_vaccination_date", e.target.value)}
+                      placeholder="Vaccination date"
+                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="hepatitisB"
+                      checked={profile.hepatitis_b_vaccination || false}
+                      onCheckedChange={(checked) => handleInputChange("hepatitis_b_vaccination", checked)}
+                    />
+                    <Label htmlFor="hepatitisB">Hepatitis B</Label>
+                  </div>
+                  {profile.hepatitis_b_vaccination && (
+                    <Input
+                      type="date"
+                      value={profile.hepatitis_b_vaccination_date || ""}
+                      onChange={(e) => handleInputChange("hepatitis_b_vaccination_date", e.target.value)}
+                      placeholder="Vaccination date"
+                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="typhoid"
+                      checked={profile.typhoid_vaccination || false}
+                      onCheckedChange={(checked) => handleInputChange("typhoid_vaccination", checked)}
+                    />
+                    <Label htmlFor="typhoid">Typhoid</Label>
+                  </div>
+                  {profile.typhoid_vaccination && (
+                    <Input
+                      type="date"
+                      value={profile.typhoid_vaccination_date || ""}
+                      onChange={(e) => handleInputChange("typhoid_vaccination_date", e.target.value)}
+                      placeholder="Vaccination date"
+                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="otherVaccinations">Other Vaccinations</Label>
+                <Textarea
+                  id="otherVaccinations"
+                  value={profile.other_vaccinations || ""}
+                  onChange={(e) => handleInputChange("other_vaccinations", e.target.value)}
+                  placeholder="List any other relevant vaccinations"
+                  rows={3}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                />
               </div>
             </CardContent>
           </Card>
@@ -676,15 +740,15 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
 
         {/* Emergency Contact Tab */}
         <TabsContent value="emergency" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-red-50 to-orange-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Users className="h-5 w-5 text-red-600" />
                 Emergency Contact
               </CardTitle>
               <CardDescription>Primary contact person in case of emergency during tours</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-6 space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="emergencyName">Full Name *</Label>
                 <Input
@@ -692,16 +756,18 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                   value={profile.emergency_contact_name || ""}
                   onChange={(e) => handleInputChange("emergency_contact_name", e.target.value)}
                   placeholder="Emergency contact's full name"
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="emergencyRelationship">Relationship</Label>
                   <Select
                     value={profile.emergency_contact_relationship || ""}
                     onValueChange={(value) => handleInputChange("emergency_contact_relationship", value)}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="border-gray-300 focus:border-red-500 focus:ring-red-500">
                       <SelectValue placeholder="Select relationship" />
                     </SelectTrigger>
                     <SelectContent>
@@ -710,18 +776,111 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
                       <SelectItem value="child">Child</SelectItem>
                       <SelectItem value="sibling">Sibling</SelectItem>
                       <SelectItem value="friend">Friend</SelectItem>
+                      <SelectItem value="partner">Partner</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="emergencyPhone">Phone Number *</Label>
+                  <Label htmlFor="emergencyPhone" className="flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    Phone Number *
+                  </Label>
                   <Input
                     id="emergencyPhone"
                     type="tel"
                     value={profile.emergency_contact_phone || ""}
                     onChange={(e) => handleInputChange("emergency_contact_phone", e.target.value)}
                     placeholder="+1 (555) 123-4567"
+                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="emergencyEmail" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email Address
+                </Label>
+                <Input
+                  id="emergencyEmail"
+                  type="email"
+                  value={profile.emergency_contact_email || ""}
+                  onChange={(e) => handleInputChange("emergency_contact_email", e.target.value)}
+                  placeholder="emergency.contact@email.com"
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Social Media Tab */}
+        <TabsContent value="social" className="space-y-6">
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Instagram className="h-5 w-5 text-purple-600" />
+                Social Media Profiles
+              </CardTitle>
+              <CardDescription>Connect your social media profiles to share your birding adventures</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="instagram" className="flex items-center gap-2">
+                    <Instagram className="h-4 w-4 text-pink-600" />
+                    Instagram
+                  </Label>
+                  <Input
+                    id="instagram"
+                    value={profile.instagram_handle || ""}
+                    onChange={(e) => handleInputChange("instagram_handle", e.target.value)}
+                    placeholder="@yourusername"
+                    className="border-gray-300 focus:border-pink-500 focus:ring-pink-500"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="facebook" className="flex items-center gap-2">
+                    <Facebook className="h-4 w-4 text-blue-600" />
+                    Facebook
+                  </Label>
+                  <Input
+                    id="facebook"
+                    value={profile.facebook_profile || ""}
+                    onChange={(e) => handleInputChange("facebook_profile", e.target.value)}
+                    placeholder="facebook.com/yourprofile"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="twitter" className="flex items-center gap-2">
+                    <Twitter className="h-4 w-4 text-blue-400" />
+                    Twitter/X
+                  </Label>
+                  <Input
+                    id="twitter"
+                    value={profile.twitter_handle || ""}
+                    onChange={(e) => handleInputChange("twitter_handle", e.target.value)}
+                    placeholder="@yourusername"
+                    className="border-gray-300 focus:border-blue-400 focus:ring-blue-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="linkedin" className="flex items-center gap-2">
+                    <Linkedin className="h-4 w-4 text-blue-700" />
+                    LinkedIn
+                  </Label>
+                  <Input
+                    id="linkedin"
+                    value={profile.linkedin_profile || ""}
+                    onChange={(e) => handleInputChange("linkedin_profile", e.target.value)}
+                    placeholder="linkedin.com/in/yourprofile"
+                    className="border-gray-300 focus:border-blue-700 focus:ring-blue-700"
                   />
                 </div>
               </div>
@@ -729,132 +888,75 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
           </Card>
         </TabsContent>
 
-        {/* Documents Tab */}
-        <TabsContent value="documents" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Upload className="h-5 w-5" />
-                Document Upload
-              </CardTitle>
-              <CardDescription>Upload important documents for your tours (passport, insurance, etc.)</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                <Upload className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                <Button
-                  variant="outline"
-                  onClick={() => documentInputRef.current?.click()}
-                  disabled={uploadingDocument}
-                  className="mb-2"
-                >
-                  {uploadingDocument ? "Uploading..." : "Choose Files"}
-                </Button>
-                <p className="text-sm text-gray-500">PDF, JPG, PNG, DOC, DOCX up to 10MB each</p>
-                <input
-                  ref={documentInputRef}
-                  type="file"
-                  multiple
-                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
-                  onChange={handleDocumentUpload}
-                  className="hidden"
-                />
-              </div>
-
-              {profile.uploaded_documents && profile.uploaded_documents.length > 0 && (
-                <div className="space-y-2">
-                  <Label>Uploaded Documents</Label>
-                  <div className="space-y-2">
-                    {profile.uploaded_documents.map((url, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-                        <div className="flex items-center gap-2">
-                          <Upload className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm">Document {index + 1}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Button variant="ghost" size="sm" onClick={() => window.open(url, "_blank")}>
-                            <Download className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleRemoveDocument(url)}>
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Settings Tab */}
-        <TabsContent value="settings" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Bell className="h-5 w-5" />
+        {/* Preferences Tab */}
+        <TabsContent value="preferences" className="space-y-6">
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Bell className="h-5 w-5 text-green-600" />
                 Notification Preferences
               </CardTitle>
               <CardDescription>Choose how you'd like to receive updates about your tours</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
+            <CardContent className="p-6 space-y-6">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="space-y-0.5">
-                  <Label>Email Notifications</Label>
-                  <p className="text-sm text-gray-500">Receive tour updates and confirmations via email</p>
+                  <Label className="text-base font-medium">Newsletter Subscription</Label>
+                  <p className="text-sm text-gray-500">Receive our monthly birding newsletter</p>
                 </div>
                 <Switch
-                  checked={notifications.email}
-                  onCheckedChange={(checked) => setNotifications((prev) => ({ ...prev, email: checked }))}
+                  checked={profile.newsletter_subscription || false}
+                  onCheckedChange={(checked) => handleInputChange("newsletter_subscription", checked)}
                 />
               </div>
-              <Separator />
-              <div className="flex items-center justify-between">
+
+              <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="space-y-0.5">
-                  <Label>SMS Notifications</Label>
+                  <Label className="text-base font-medium">Marketing Emails</Label>
+                  <p className="text-sm text-gray-500">Receive promotional offers and tour announcements</p>
+                </div>
+                <Switch
+                  checked={profile.marketing_emails || false}
+                  onCheckedChange={(checked) => handleInputChange("marketing_emails", checked)}
+                />
+              </div>
+
+              <div className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="space-y-0.5">
+                  <Label className="text-base font-medium">SMS Notifications</Label>
                   <p className="text-sm text-gray-500">Receive important updates via text message</p>
                 </div>
                 <Switch
-                  checked={notifications.sms}
-                  onCheckedChange={(checked) => setNotifications((prev) => ({ ...prev, sms: checked }))}
-                />
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Marketing Communications</Label>
-                  <p className="text-sm text-gray-500">Receive newsletters and promotional offers</p>
-                </div>
-                <Switch
-                  checked={notifications.marketing}
-                  onCheckedChange={(checked) => setNotifications((prev) => ({ ...prev, marketing: checked }))}
+                  checked={profile.sms_notifications || false}
+                  onCheckedChange={(checked) => handleInputChange("sms_notifications", checked)}
                 />
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Lock className="h-5 w-5" />
+          <Card className="border-0 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-t-lg">
+              <CardTitle className="flex items-center gap-2 text-gray-800">
+                <Lock className="h-5 w-5 text-gray-600" />
                 Account Security
               </CardTitle>
               <CardDescription>Manage your account security settings</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <Button variant="outline" className="w-full bg-transparent">
+            <CardContent className="p-6 space-y-4">
+              <Button variant="outline" className="w-full justify-start bg-transparent">
+                <Lock className="h-4 w-4 mr-2" />
                 Change Password
               </Button>
-              <Button variant="outline" className="w-full bg-transparent">
+              <Button variant="outline" className="w-full justify-start bg-transparent">
+                <Shield className="h-4 w-4 mr-2" />
                 Enable Two-Factor Authentication
               </Button>
               <Separator />
-              <div className="text-center">
+              <div className="text-center space-y-2">
                 <Button variant="destructive" className="w-full">
                   Delete Account
                 </Button>
-                <p className="text-sm text-gray-500 mt-2">This action cannot be undone</p>
+                <p className="text-sm text-gray-500">This action cannot be undone</p>
               </div>
             </CardContent>
           </Card>
@@ -862,11 +964,18 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       </Tabs>
 
       {/* Save Button */}
-      <div className="flex justify-end pt-6 border-t">
+      <div className="flex justify-between items-center pt-6 border-t bg-gray-50 -mx-8 px-8 py-4 rounded-b-2xl">
+        <div className="text-sm text-gray-500">{hasUnsavedChanges && "You have unsaved changes"}</div>
         <Button
           onClick={handleSaveProfile}
-          disabled={isLoading}
-          className={`px-8 ${saveStatus === "saved" ? "bg-green-600 hover:bg-green-700" : ""} ${saveStatus === "error" ? "bg-red-600 hover:bg-red-700" : ""}`}
+          disabled={isLoading || (!hasUnsavedChanges && saveStatus !== "error")}
+          className={`px-8 py-2 ${
+            saveStatus === "saved"
+              ? "bg-green-600 hover:bg-green-700"
+              : saveStatus === "error"
+                ? "bg-red-600 hover:bg-red-700"
+                : "bg-blue-600 hover:bg-blue-700"
+          } text-white font-medium rounded-lg transition-colors duration-200`}
         >
           <div className="flex items-center gap-2">
             {getSaveButtonIcon()}
