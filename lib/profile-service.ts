@@ -1,9 +1,5 @@
 import { createClientSupabaseClient } from "./supabase-client"
-import type { Database } from "./supabase"
-
-export type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"]
-export type UserProfileInsert = Database["public"]["Tables"]["user_profiles"]["Insert"]
-export type UserProfileUpdate = Database["public"]["Tables"]["user_profiles"]["Update"]
+import type { UserProfile, UserProfileInsert, UserProfileUpdate } from "./supabase"
 
 export class ProfileService {
   private supabase = createClientSupabaseClient()
@@ -24,9 +20,9 @@ export class ProfileService {
     }
   }
 
-  async createUserProfile(profile: UserProfileInsert): Promise<UserProfile | null> {
+  async createUserProfile(profileData: UserProfileInsert): Promise<UserProfile | null> {
     try {
-      const { data, error } = await this.supabase.from("user_profiles").insert(profile).select().single()
+      const { data, error } = await this.supabase.from("user_profiles").insert(profileData).select().single()
 
       if (error) {
         console.error("Error creating user profile:", error)
@@ -44,7 +40,10 @@ export class ProfileService {
     try {
       const { data, error } = await this.supabase
         .from("user_profiles")
-        .update(updates)
+        .update({
+          ...updates,
+          updated_at: new Date().toISOString(),
+        })
         .eq("user_id", userId)
         .select()
         .single()
@@ -63,65 +62,43 @@ export class ProfileService {
 
   async uploadProfileImage(userId: string, file: File): Promise<string | null> {
     try {
-      // Delete existing profile image if it exists
-      await this.deleteProfileImage(userId)
-
       const fileExt = file.name.split(".").pop()
-      const fileName = `${userId}/profile.${fileExt}`
+      const fileName = `${userId}-${Date.now()}.${fileExt}`
+      const filePath = `profile-images/${fileName}`
 
-      const { error: uploadError } = await this.supabase.storage.from("profile-images").upload(fileName, file, {
-        upsert: true,
-      })
+      const { error: uploadError } = await this.supabase.storage.from("user-uploads").upload(filePath, file)
 
       if (uploadError) {
-        console.error("Error uploading profile image:", uploadError)
+        console.error("Error uploading file:", uploadError)
         throw uploadError
       }
 
-      const {
-        data: { publicUrl },
-      } = this.supabase.storage.from("profile-images").getPublicUrl(fileName)
+      const { data } = this.supabase.storage.from("user-uploads").getPublicUrl(filePath)
 
-      return publicUrl
+      return data.publicUrl
     } catch (error) {
       console.error("Error in uploadProfileImage:", error)
-      throw error
+      return null
     }
   }
 
-  async deleteProfileImage(userId: string): Promise<void> {
+  async removeProfileImage(imageUrl: string): Promise<boolean> {
     try {
-      const { data: files } = await this.supabase.storage.from("profile-images").list(`${userId}/`)
+      // Extract file path from URL
+      const urlParts = imageUrl.split("/")
+      const filePath = urlParts.slice(-2).join("/")
 
-      if (files && files.length > 0) {
-        const filesToDelete = files.map((file) => `${userId}/${file.name}`)
-        await this.supabase.storage.from("profile-images").remove(filesToDelete)
-      }
-    } catch (error) {
-      console.error("Error deleting profile image:", error)
-    }
-  }
-
-  async upsertUserProfile(profile: UserProfileInsert | UserProfileUpdate): Promise<UserProfile | null> {
-    try {
-      const { data, error } = await this.supabase
-        .from("user_profiles")
-        .upsert(profile, {
-          onConflict: "user_id",
-          ignoreDuplicates: false,
-        })
-        .select()
-        .single()
+      const { error } = await this.supabase.storage.from("user-uploads").remove([filePath])
 
       if (error) {
-        console.error("Error upserting user profile:", error)
+        console.error("Error removing file:", error)
         throw error
       }
 
-      return data
+      return true
     } catch (error) {
-      console.error("Error in upsertUserProfile:", error)
-      throw error
+      console.error("Error in removeProfileImage:", error)
+      return false
     }
   }
 }

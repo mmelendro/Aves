@@ -1,166 +1,281 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef, useEffect } from "react"
-import { profileService, type UserProfile } from "@/lib/profile-service"
+
+import { useState, useEffect, useCallback } from "react"
+import { useRouter } from "next/navigation"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Switch } from "@/components/ui/switch"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Checkbox } from "@/components/ui/checkbox"
+import { toast } from "sonner"
 import {
   User,
   Camera,
-  CreditCard,
-  Shield,
+  Trash2,
+  Save,
+  Loader2,
+  Check,
+  AlertCircle,
+  Plane,
   Heart,
-  Users,
-  Bell,
-  Lock,
+  Shield,
+  Phone,
   Instagram,
   Facebook,
   Twitter,
   Linkedin,
-  Globe,
-  AlertCircle,
-  CheckCircle,
-  XCircle,
-  Loader2,
-  Phone,
-  Mail,
   MapPin,
   Calendar,
-  Stethoscope,
-  Syringe,
+  FileText,
   Upload,
-  X,
 } from "lucide-react"
-import { toast } from "sonner"
+import { profileService } from "@/lib/profile-service"
+import { testSupabaseConnection, logEnvironmentStatus } from "@/lib/supabase-connection-test"
+import type { UserProfile } from "@/lib/supabase"
 
-interface AccountSettingsClientProps {
-  initialProfile: UserProfile | null
-  userId: string
-  userEmail: string
+interface FormData {
+  full_name: string
+  phone_number: string
+  ebird_username: string
+  ebird_profile_url: string
+  passport_number: string
+  passport_country: string
+  passport_expiry_date: string
+  insurance_provider: string
+  insurance_policy_number: string
+  insurance_coverage_details: string
+  insurance_expiry_date: string
+  dietary_preferences: string[]
+  food_allergies: string
+  environmental_allergies: string
+  other_allergies: string
+  medical_conditions: string
+  current_medications: string
+  medical_notes: string
+  covid_vaccination_status: string
+  yellow_fever_vaccination: boolean
+  yellow_fever_date: string
+  hepatitis_a_vaccination: boolean
+  hepatitis_a_date: string
+  hepatitis_b_vaccination: boolean
+  hepatitis_b_date: string
+  typhoid_vaccination: boolean
+  typhoid_date: string
+  other_vaccinations: string
+  emergency_contact_name: string
+  emergency_contact_relationship: string
+  emergency_contact_phone: string
+  emergency_contact_email: string
+  instagram_handle: string
+  facebook_profile: string
+  twitter_handle: string
+  linkedin_profile: string
 }
 
-export default function AccountSettingsClient({ initialProfile, userId, userEmail }: AccountSettingsClientProps) {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+type SaveStatus = "idle" | "saving" | "saved" | "error"
 
-  const [profile, setProfile] = useState<UserProfile>(
-    initialProfile || {
-      user_id: userId,
-      first_name: "",
-      last_name: "",
-      email: userEmail,
-      phone: "",
-      profile_image_url: "",
-      passport_number: "",
-      passport_country: "",
-      passport_expiry: "",
-      insurance_provider: "",
-      insurance_policy_number: "",
-      insurance_coverage_details: "",
-      ebird_profile_url: "",
-      ebird_username: "",
-      dietary_preferences: "",
-      food_allergies: "",
-      other_allergies: "",
-      medical_conditions: "",
-      current_medications: "",
-      medical_notes: "",
-      emergency_contact_name: "",
-      emergency_contact_relationship: "",
-      emergency_contact_phone: "",
-      emergency_contact_email: "",
-      instagram_handle: "",
-      facebook_profile: "",
-      twitter_handle: "",
-      linkedin_profile: "",
-      covid_vaccination_status: "",
-      yellow_fever_vaccination: false,
-      yellow_fever_vaccination_date: "",
-      hepatitis_a_vaccination: false,
-      hepatitis_a_vaccination_date: "",
-      hepatitis_b_vaccination: false,
-      hepatitis_b_vaccination_date: "",
-      typhoid_vaccination: false,
-      typhoid_vaccination_date: "",
-      other_vaccinations: "",
-      newsletter_subscription: true,
-      marketing_emails: true,
-      sms_notifications: false,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    },
-  )
+const DIETARY_OPTIONS = [
+  "Vegetarian",
+  "Vegan",
+  "Gluten-free",
+  "Dairy-free",
+  "Nut-free",
+  "Halal",
+  "Kosher",
+  "Low-sodium",
+  "Diabetic-friendly",
+]
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [uploadingImage, setUploadingImage] = useState(false)
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle")
+const RELATIONSHIP_OPTIONS = ["Spouse", "Partner", "Parent", "Child", "Sibling", "Friend", "Colleague", "Other"]
+
+const COVID_VACCINATION_OPTIONS = [
+  "Not vaccinated",
+  "Partially vaccinated (1 dose)",
+  "Fully vaccinated (2 doses)",
+  "Boosted (3+ doses)",
+]
+
+export default function AccountSettingsClient() {
+  const router = useRouter()
+  const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [formData, setFormData] = useState<FormData>({
+    full_name: "",
+    phone_number: "",
+    ebird_username: "",
+    ebird_profile_url: "",
+    passport_number: "",
+    passport_country: "",
+    passport_expiry_date: "",
+    insurance_provider: "",
+    insurance_policy_number: "",
+    insurance_coverage_details: "",
+    insurance_expiry_date: "",
+    dietary_preferences: [],
+    food_allergies: "",
+    environmental_allergies: "",
+    other_allergies: "",
+    medical_conditions: "",
+    current_medications: "",
+    medical_notes: "",
+    covid_vaccination_status: "",
+    yellow_fever_vaccination: false,
+    yellow_fever_date: "",
+    hepatitis_a_vaccination: false,
+    hepatitis_a_date: "",
+    hepatitis_b_vaccination: false,
+    hepatitis_b_date: "",
+    typhoid_vaccination: false,
+    typhoid_date: "",
+    other_vaccinations: "",
+    emergency_contact_name: "",
+    emergency_contact_relationship: "",
+    emergency_contact_phone: "",
+    emergency_contact_email: "",
+    instagram_handle: "",
+    facebook_profile: "",
+    twitter_handle: "",
+    linkedin_profile: "",
+  })
+
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle")
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [connectionTestResult, setConnectionTestResult] = useState<any>(null)
 
-  // Create profile if it doesn't exist
+  // Test database connection on component mount
   useEffect(() => {
-    const createProfileIfNeeded = async () => {
-      if (!initialProfile) {
-        try {
-          await profileService.createUserProfile({
-            user_id: userId,
-            email: userEmail,
-            first_name: "",
-            last_name: "",
-          })
-        } catch (error) {
-          console.error("Error creating profile:", error)
-        }
+    const runConnectionTest = async () => {
+      console.log("🚀 Running Supabase connection test...")
+      logEnvironmentStatus()
+
+      const result = await testSupabaseConnection()
+      setConnectionTestResult(result)
+
+      if (result.success) {
+        toast.success("Database connection verified successfully!")
+      } else {
+        toast.error(`Database connection failed: ${result.message}`)
       }
     }
 
-    createProfileIfNeeded()
-  }, [initialProfile, userId, userEmail])
+    runConnectionTest()
+  }, [])
 
-  const handleInputChange = (field: keyof UserProfile, value: any) => {
-    setProfile((prev) => ({
+  // Load user profile
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        setIsLoading(true)
+        const userProfile = await profileService.getCurrentUserProfile()
+
+        if (userProfile) {
+          setProfile(userProfile)
+          setFormData({
+            full_name: userProfile.full_name || "",
+            phone_number: userProfile.phone_number || "",
+            ebird_username: userProfile.ebird_username || "",
+            ebird_profile_url: userProfile.ebird_profile_url || "",
+            passport_number: userProfile.passport_number || "",
+            passport_country: userProfile.passport_country || "",
+            passport_expiry_date: userProfile.passport_expiry_date || "",
+            insurance_provider: userProfile.insurance_provider || "",
+            insurance_policy_number: userProfile.insurance_policy_number || "",
+            insurance_coverage_details: userProfile.insurance_coverage_details || "",
+            insurance_expiry_date: userProfile.insurance_expiry_date || "",
+            dietary_preferences: userProfile.dietary_preferences || [],
+            food_allergies: userProfile.food_allergies || "",
+            environmental_allergies: userProfile.environmental_allergies || "",
+            other_allergies: userProfile.other_allergies || "",
+            medical_conditions: userProfile.medical_conditions || "",
+            current_medications: userProfile.current_medications || "",
+            medical_notes: userProfile.medical_notes || "",
+            covid_vaccination_status: userProfile.covid_vaccination_status || "",
+            yellow_fever_vaccination: userProfile.yellow_fever_vaccination || false,
+            yellow_fever_date: userProfile.yellow_fever_date || "",
+            hepatitis_a_vaccination: userProfile.hepatitis_a_vaccination || false,
+            hepatitis_a_date: userProfile.hepatitis_a_date || "",
+            hepatitis_b_vaccination: userProfile.hepatitis_b_vaccination || false,
+            hepatitis_b_date: userProfile.hepatitis_b_date || "",
+            typhoid_vaccination: userProfile.typhoid_vaccination || false,
+            typhoid_date: userProfile.typhoid_date || "",
+            other_vaccinations: userProfile.other_vaccinations || "",
+            emergency_contact_name: userProfile.emergency_contact_name || "",
+            emergency_contact_relationship: userProfile.emergency_contact_relationship || "",
+            emergency_contact_phone: userProfile.emergency_contact_phone || "",
+            emergency_contact_email: userProfile.emergency_contact_email || "",
+            instagram_handle: userProfile.instagram_handle || "",
+            facebook_profile: userProfile.facebook_profile || "",
+            twitter_handle: userProfile.twitter_handle || "",
+            linkedin_profile: userProfile.linkedin_profile || "",
+          })
+        }
+      } catch (error) {
+        console.error("Error loading profile:", error)
+        toast.error("Failed to load profile data")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadProfile()
+  }, [])
+
+  const handleInputChange = useCallback((field: keyof FormData, value: any) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    setHasUnsavedChanges(true)
+    setSaveStatus("idle")
+  }, [])
+
+  const handleDietaryPreferenceChange = useCallback((preference: string, checked: boolean) => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: value,
+      dietary_preferences: checked
+        ? [...prev.dietary_preferences, preference]
+        : prev.dietary_preferences.filter((p) => p !== preference),
     }))
     setHasUnsavedChanges(true)
     setSaveStatus("idle")
-  }
+  }, [])
 
-  const handleProfileImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
 
     // Validate file
     if (file.size > 5 * 1024 * 1024) {
-      toast.error("Image size must be less than 5MB")
+      toast.error("Image must be less than 5MB")
       return
     }
 
     if (!file.type.startsWith("image/")) {
-      toast.error("Please upload a valid image file")
+      toast.error("Please select an image file")
       return
     }
 
     try {
       setUploadingImage(true)
-      const imageUrl = await profileService.uploadProfileImage(userId, file)
+      const imageUrl = await profileService.uploadProfileImage(file)
 
       if (imageUrl) {
-        setProfile((prev) => ({
-          ...prev,
+        const updatedProfile = await profileService.updateUserProfile({
           profile_image_url: imageUrl,
-        }))
-        setHasUnsavedChanges(true)
-        toast.success("Profile image uploaded successfully")
+        })
+
+        if (updatedProfile) {
+          setProfile(updatedProfile)
+          toast.success("Profile image updated successfully!")
+        }
+      } else {
+        toast.error("Failed to upload image")
       }
     } catch (error) {
       console.error("Error uploading image:", error)
@@ -170,818 +285,893 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
     }
   }
 
-  const handleSaveProfile = async () => {
+  const handleRemoveImage = async () => {
+    if (!profile?.profile_image_url) return
+
+    try {
+      setUploadingImage(true)
+      const success = await profileService.removeProfileImage(profile.profile_image_url)
+
+      if (success) {
+        setProfile((prev) => (prev ? { ...prev, profile_image_url: null } : null))
+        toast.success("Profile image removed successfully!")
+      } else {
+        toast.error("Failed to remove image")
+      }
+    } catch (error) {
+      console.error("Error removing image:", error)
+      toast.error("Failed to remove image")
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
+  const handleSave = async () => {
     try {
       setSaveStatus("saving")
-      setIsLoading(true)
 
-      await profileService.upsertUserProfile(profile)
+      const updatedProfile = await profileService.updateUserProfile(formData)
 
-      setSaveStatus("saved")
-      setHasUnsavedChanges(false)
-      toast.success("Profile updated successfully")
+      if (updatedProfile) {
+        setProfile(updatedProfile)
+        setHasUnsavedChanges(false)
+        setSaveStatus("saved")
+        toast.success("Profile updated successfully!")
 
-      // Reset save status after 3 seconds
-      setTimeout(() => setSaveStatus("idle"), 3000)
+        // Reset status after 3 seconds
+        setTimeout(() => setSaveStatus("idle"), 3000)
+      } else {
+        setSaveStatus("error")
+        toast.error("Failed to update profile")
+      }
     } catch (error) {
       console.error("Error saving profile:", error)
       setSaveStatus("error")
-      toast.error("Failed to save profile. Please try again.")
-    } finally {
-      setIsLoading(false)
+      toast.error("Failed to update profile")
     }
   }
 
-  const getInitials = () => {
-    const first = profile.first_name?.[0] || ""
-    const last = profile.last_name?.[0] || ""
-    return (first + last).toUpperCase() || userEmail[0]?.toUpperCase() || "U"
-  }
-
-  const getSaveButtonText = () => {
+  const getSaveButtonContent = () => {
     switch (saveStatus) {
       case "saving":
-        return "Saving..."
+        return (
+          <>
+            <Loader2 className="w-4 h-4 animate-spin mr-2" />
+            Saving...
+          </>
+        )
       case "saved":
-        return "Saved!"
+        return (
+          <>
+            <Check className="w-4 h-4 mr-2" />
+            Saved
+          </>
+        )
       case "error":
-        return "Try Again"
+        return (
+          <>
+            <AlertCircle className="w-4 h-4 mr-2" />
+            Error
+          </>
+        )
       default:
-        return hasUnsavedChanges ? "Save Changes" : "All Saved"
+        return (
+          <>
+            <Save className="w-4 h-4 mr-2" />
+            Save Changes
+          </>
+        )
     }
   }
 
-  const getSaveButtonIcon = () => {
+  const getSaveButtonVariant = () => {
     switch (saveStatus) {
-      case "saving":
-        return <Loader2 className="h-4 w-4 animate-spin" />
       case "saved":
-        return <CheckCircle className="h-4 w-4" />
+        return "default"
       case "error":
-        return <XCircle className="h-4 w-4" />
+        return "destructive"
       default:
-        return null
+        return "default"
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto text-emerald-600" />
+          <p className="text-gray-600">Loading your profile...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="p-8">
-      {/* Status Alert */}
-      <Alert className="mb-6 border-green-200 bg-green-50">
-        <CheckCircle className="h-4 w-4 text-green-600" />
-        <AlertDescription className="text-green-800">
-          {initialProfile
-            ? "Profile loaded successfully from database"
-            : "New profile created - please fill in your information"}
-        </AlertDescription>
-      </Alert>
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 p-4">
+      <div className="max-w-4xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold text-gray-900">Account Settings</h1>
+          <p className="text-gray-600">Manage your profile and preferences for AVES Colombia</p>
 
-      <Tabs defaultValue="personal" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-6 bg-gray-100 p-1 rounded-xl">
-          <TabsTrigger value="personal" className="rounded-lg">
-            Personal
-          </TabsTrigger>
-          <TabsTrigger value="travel" className="rounded-lg">
-            Travel
-          </TabsTrigger>
-          <TabsTrigger value="health" className="rounded-lg">
-            Health
-          </TabsTrigger>
-          <TabsTrigger value="emergency" className="rounded-lg">
-            Emergency
-          </TabsTrigger>
-          <TabsTrigger value="social" className="rounded-lg">
-            Social
-          </TabsTrigger>
-          <TabsTrigger value="preferences" className="rounded-lg">
-            Preferences
-          </TabsTrigger>
-        </TabsList>
+          {/* Connection Status */}
+          {connectionTestResult && (
+            <div
+              className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${
+                connectionTestResult.success ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+              }`}
+            >
+              {connectionTestResult.success ? (
+                <Check className="w-4 h-4 mr-1" />
+              ) : (
+                <AlertCircle className="w-4 h-4 mr-1" />
+              )}
+              Database: {connectionTestResult.success ? "Connected" : "Error"}
+            </div>
+          )}
+        </div>
 
-        {/* Personal Information Tab */}
-        <TabsContent value="personal" className="space-y-6">
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Camera className="h-5 w-5 text-blue-600" />
-                Profile Photo
-              </CardTitle>
-              <CardDescription>Upload a profile photo to personalize your account</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-6">
-                <div className="relative">
-                  <Avatar className="h-24 w-24 border-4 border-white shadow-lg">
-                    <AvatarImage src={profile.profile_image_url || undefined} />
-                    <AvatarFallback className="text-xl bg-gradient-to-br from-blue-500 to-green-500 text-white">
-                      {getInitials()}
+        {/* Save Button - Fixed Position */}
+        <div className="sticky top-4 z-10 flex justify-end">
+          <Button
+            onClick={handleSave}
+            disabled={!hasUnsavedChanges || saveStatus === "saving"}
+            variant={getSaveButtonVariant()}
+            className="shadow-lg"
+          >
+            {getSaveButtonContent()}
+          </Button>
+        </div>
+
+        {/* Main Content */}
+        <Tabs defaultValue="personal" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-6 lg:grid-cols-6">
+            <TabsTrigger value="personal" className="text-xs">
+              Personal
+            </TabsTrigger>
+            <TabsTrigger value="travel" className="text-xs">
+              Travel
+            </TabsTrigger>
+            <TabsTrigger value="health" className="text-xs">
+              Health
+            </TabsTrigger>
+            <TabsTrigger value="emergency" className="text-xs">
+              Emergency
+            </TabsTrigger>
+            <TabsTrigger value="social" className="text-xs">
+              Social
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="text-xs">
+              Settings
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Personal Information Tab */}
+          <TabsContent value="personal">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="w-5 h-5" />
+                  Personal Information
+                </CardTitle>
+                <CardDescription>Update your basic profile information and eBird integration</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Profile Picture */}
+                <div className="flex items-center space-x-4">
+                  <Avatar className="w-20 h-20">
+                    <AvatarImage src={profile?.profile_image_url || ""} />
+                    <AvatarFallback className="text-lg">
+                      {formData.full_name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase() || "U"}
                     </AvatarFallback>
                   </Avatar>
-                  {uploadingImage && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
-                      <Loader2 className="h-6 w-6 text-white animate-spin" />
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        disabled={uploadingImage}
+                        onClick={() => document.getElementById("image-upload")?.click()}
+                      >
+                        {uploadingImage ? (
+                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                        ) : (
+                          <Camera className="w-4 h-4 mr-2" />
+                        )}
+                        Upload Photo
+                      </Button>
+                      {profile?.profile_image_url && (
+                        <Button variant="outline" size="sm" disabled={uploadingImage} onClick={handleRemoveImage}>
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Remove
+                        </Button>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-500">JPG, PNG or GIF. Max size 5MB.</p>
+                    <input
+                      id="image-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Basic Information */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="full_name">Full Name</Label>
+                    <Input
+                      id="full_name"
+                      value={formData.full_name}
+                      onChange={(e) => handleInputChange("full_name", e.target.value)}
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone_number">Phone Number</Label>
+                    <Input
+                      id="phone_number"
+                      value={formData.phone_number}
+                      onChange={(e) => handleInputChange("phone_number", e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                </div>
+
+                {/* eBird Integration */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-lg font-semibold">eBird Integration</h3>
+                    <Badge variant="secondary">Optional</Badge>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="ebird_username">eBird Username</Label>
+                      <Input
+                        id="ebird_username"
+                        value={formData.ebird_username}
+                        onChange={(e) => handleInputChange("ebird_username", e.target.value)}
+                        placeholder="your-ebird-username"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="ebird_profile_url">eBird Profile URL</Label>
+                      <Input
+                        id="ebird_profile_url"
+                        value={formData.ebird_profile_url}
+                        onChange={(e) => handleInputChange("ebird_profile_url", e.target.value)}
+                        placeholder="https://ebird.org/profile/..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Travel Information Tab */}
+          <TabsContent value="travel">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Plane className="w-5 h-5" />
+                  Travel Information
+                </CardTitle>
+                <CardDescription>Passport and insurance details for international travel</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Passport Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    Passport Information
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="passport_number">Passport Number</Label>
+                      <Input
+                        id="passport_number"
+                        value={formData.passport_number}
+                        onChange={(e) => handleInputChange("passport_number", e.target.value)}
+                        placeholder="A12345678"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="passport_country">Issuing Country</Label>
+                      <Input
+                        id="passport_country"
+                        value={formData.passport_country}
+                        onChange={(e) => handleInputChange("passport_country", e.target.value)}
+                        placeholder="United States"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="passport_expiry_date">Expiry Date</Label>
+                      <Input
+                        id="passport_expiry_date"
+                        type="date"
+                        value={formData.passport_expiry_date}
+                        onChange={(e) => handleInputChange("passport_expiry_date", e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Insurance Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold flex items-center gap-2">
+                    <Shield className="w-4 h-4" />
+                    Travel Insurance
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="insurance_provider">Insurance Provider</Label>
+                      <Input
+                        id="insurance_provider"
+                        value={formData.insurance_provider}
+                        onChange={(e) => handleInputChange("insurance_provider", e.target.value)}
+                        placeholder="World Nomads, Allianz, etc."
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="insurance_policy_number">Policy Number</Label>
+                      <Input
+                        id="insurance_policy_number"
+                        value={formData.insurance_policy_number}
+                        onChange={(e) => handleInputChange("insurance_policy_number", e.target.value)}
+                        placeholder="Policy number"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="insurance_expiry_date">Expiry Date</Label>
+                      <Input
+                        id="insurance_expiry_date"
+                        type="date"
+                        value={formData.insurance_expiry_date}
+                        onChange={(e) => handleInputChange("insurance_expiry_date", e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="insurance_coverage_details">Coverage Details</Label>
+                    <Textarea
+                      id="insurance_coverage_details"
+                      value={formData.insurance_coverage_details}
+                      onChange={(e) => handleInputChange("insurance_coverage_details", e.target.value)}
+                      placeholder="Describe your coverage (medical, evacuation, etc.)"
+                      rows={3}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Health Information Tab */}
+          <TabsContent value="health">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Heart className="w-5 h-5" />
+                  Health Information
+                </CardTitle>
+                <CardDescription>
+                  Dietary preferences, allergies, medical conditions, and vaccination history
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Dietary Preferences */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Dietary Preferences</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {DIETARY_OPTIONS.map((option) => (
+                      <div key={option} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`dietary-${option}`}
+                          checked={formData.dietary_preferences.includes(option)}
+                          onCheckedChange={(checked) => handleDietaryPreferenceChange(option, checked as boolean)}
+                        />
+                        <Label htmlFor={`dietary-${option}`} className="text-sm">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Allergies */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Allergies</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="food_allergies">Food Allergies</Label>
+                      <Textarea
+                        id="food_allergies"
+                        value={formData.food_allergies}
+                        onChange={(e) => handleInputChange("food_allergies", e.target.value)}
+                        placeholder="List any food allergies"
+                        rows={3}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="environmental_allergies">Environmental Allergies</Label>
+                      <Textarea
+                        id="environmental_allergies"
+                        value={formData.environmental_allergies}
+                        onChange={(e) => handleInputChange("environmental_allergies", e.target.value)}
+                        placeholder="Pollen, dust, etc."
+                        rows={3}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="other_allergies">Other Allergies</Label>
+                      <Textarea
+                        id="other_allergies"
+                        value={formData.other_allergies}
+                        onChange={(e) => handleInputChange("other_allergies", e.target.value)}
+                        placeholder="Medications, materials, etc."
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Medical Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Medical Information</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="medical_conditions">Medical Conditions</Label>
+                      <Textarea
+                        id="medical_conditions"
+                        value={formData.medical_conditions}
+                        onChange={(e) => handleInputChange("medical_conditions", e.target.value)}
+                        placeholder="Any medical conditions we should know about"
+                        rows={3}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="current_medications">Current Medications</Label>
+                      <Textarea
+                        id="current_medications"
+                        value={formData.current_medications}
+                        onChange={(e) => handleInputChange("current_medications", e.target.value)}
+                        placeholder="List current medications"
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="medical_notes">Additional Medical Notes</Label>
+                    <Textarea
+                      id="medical_notes"
+                      value={formData.medical_notes}
+                      onChange={(e) => handleInputChange("medical_notes", e.target.value)}
+                      placeholder="Any other medical information"
+                      rows={3}
+                    />
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Vaccination History */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Vaccination History</h3>
+
+                  {/* COVID-19 Vaccination */}
+                  <div className="space-y-2">
+                    <Label htmlFor="covid_vaccination_status">COVID-19 Vaccination Status</Label>
+                    <Select
+                      value={formData.covid_vaccination_status}
+                      onValueChange={(value) => handleInputChange("covid_vaccination_status", value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select vaccination status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {COVID_VACCINATION_OPTIONS.map((option) => (
+                          <SelectItem key={option} value={option}>
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Travel Vaccinations */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Travel Vaccinations</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Yellow Fever */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="yellow_fever_vaccination"
+                            checked={formData.yellow_fever_vaccination}
+                            onCheckedChange={(checked) =>
+                              handleInputChange("yellow_fever_vaccination", checked as boolean)
+                            }
+                          />
+                          <Label htmlFor="yellow_fever_vaccination">Yellow Fever</Label>
+                        </div>
+                        {formData.yellow_fever_vaccination && (
+                          <Input
+                            type="date"
+                            value={formData.yellow_fever_date}
+                            onChange={(e) => handleInputChange("yellow_fever_date", e.target.value)}
+                            placeholder="Vaccination date"
+                          />
+                        )}
+                      </div>
+
+                      {/* Hepatitis A */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="hepatitis_a_vaccination"
+                            checked={formData.hepatitis_a_vaccination}
+                            onCheckedChange={(checked) =>
+                              handleInputChange("hepatitis_a_vaccination", checked as boolean)
+                            }
+                          />
+                          <Label htmlFor="hepatitis_a_vaccination">Hepatitis A</Label>
+                        </div>
+                        {formData.hepatitis_a_vaccination && (
+                          <Input
+                            type="date"
+                            value={formData.hepatitis_a_date}
+                            onChange={(e) => handleInputChange("hepatitis_a_date", e.target.value)}
+                            placeholder="Vaccination date"
+                          />
+                        )}
+                      </div>
+
+                      {/* Hepatitis B */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="hepatitis_b_vaccination"
+                            checked={formData.hepatitis_b_vaccination}
+                            onCheckedChange={(checked) =>
+                              handleInputChange("hepatitis_b_vaccination", checked as boolean)
+                            }
+                          />
+                          <Label htmlFor="hepatitis_b_vaccination">Hepatitis B</Label>
+                        </div>
+                        {formData.hepatitis_b_vaccination && (
+                          <Input
+                            type="date"
+                            value={formData.hepatitis_b_date}
+                            onChange={(e) => handleInputChange("hepatitis_b_date", e.target.value)}
+                            placeholder="Vaccination date"
+                          />
+                        )}
+                      </div>
+
+                      {/* Typhoid */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="typhoid_vaccination"
+                            checked={formData.typhoid_vaccination}
+                            onCheckedChange={(checked) => handleInputChange("typhoid_vaccination", checked as boolean)}
+                          />
+                          <Label htmlFor="typhoid_vaccination">Typhoid</Label>
+                        </div>
+                        {formData.typhoid_vaccination && (
+                          <Input
+                            type="date"
+                            value={formData.typhoid_date}
+                            onChange={(e) => handleInputChange("typhoid_date", e.target.value)}
+                            placeholder="Vaccination date"
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Other Vaccinations */}
+                  <div className="space-y-2">
+                    <Label htmlFor="other_vaccinations">Other Vaccinations</Label>
+                    <Textarea
+                      id="other_vaccinations"
+                      value={formData.other_vaccinations}
+                      onChange={(e) => handleInputChange("other_vaccinations", e.target.value)}
+                      placeholder="List any other vaccinations"
+                      rows={3}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Emergency Contact Tab */}
+          <TabsContent value="emergency">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Phone className="w-5 h-5" />
+                  Emergency Contact
+                </CardTitle>
+                <CardDescription>Primary emergency contact information</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="emergency_contact_name">Contact Name</Label>
+                    <Input
+                      id="emergency_contact_name"
+                      value={formData.emergency_contact_name}
+                      onChange={(e) => handleInputChange("emergency_contact_name", e.target.value)}
+                      placeholder="Full name of emergency contact"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="emergency_contact_relationship">Relationship</Label>
+                    <Select
+                      value={formData.emergency_contact_relationship}
+                      onValueChange={(value) => handleInputChange("emergency_contact_relationship", value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select relationship" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {RELATIONSHIP_OPTIONS.map((option) => (
+                          <SelectItem key={option} value={option}>
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="emergency_contact_phone">Phone Number</Label>
+                    <Input
+                      id="emergency_contact_phone"
+                      value={formData.emergency_contact_phone}
+                      onChange={(e) => handleInputChange("emergency_contact_phone", e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="emergency_contact_email">Email Address</Label>
+                    <Input
+                      id="emergency_contact_email"
+                      type="email"
+                      value={formData.emergency_contact_email}
+                      onChange={(e) => handleInputChange("emergency_contact_email", e.target.value)}
+                      placeholder="emergency@example.com"
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Social Media Tab */}
+          <TabsContent value="social">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Instagram className="w-5 h-5" />
+                  Social Media
+                </CardTitle>
+                <CardDescription>Connect your social media profiles to share your birding experiences</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="instagram_handle" className="flex items-center gap-2">
+                      <Instagram className="w-4 h-4" />
+                      Instagram Handle
+                    </Label>
+                    <Input
+                      id="instagram_handle"
+                      value={formData.instagram_handle}
+                      onChange={(e) => handleInputChange("instagram_handle", e.target.value)}
+                      placeholder="@yourusername"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="facebook_profile" className="flex items-center gap-2">
+                      <Facebook className="w-4 h-4" />
+                      Facebook Profile
+                    </Label>
+                    <Input
+                      id="facebook_profile"
+                      value={formData.facebook_profile}
+                      onChange={(e) => handleInputChange("facebook_profile", e.target.value)}
+                      placeholder="https://facebook.com/yourprofile"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="twitter_handle" className="flex items-center gap-2">
+                      <Twitter className="w-4 h-4" />
+                      Twitter/X Handle
+                    </Label>
+                    <Input
+                      id="twitter_handle"
+                      value={formData.twitter_handle}
+                      onChange={(e) => handleInputChange("twitter_handle", e.target.value)}
+                      placeholder="@yourusername"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="linkedin_profile" className="flex items-center gap-2">
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn Profile
+                    </Label>
+                    <Input
+                      id="linkedin_profile"
+                      value={formData.linkedin_profile}
+                      onChange={(e) => handleInputChange("linkedin_profile", e.target.value)}
+                      placeholder="https://linkedin.com/in/yourprofile"
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Settings Tab */}
+          <TabsContent value="settings">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="w-5 h-5" />
+                  Account Settings
+                </CardTitle>
+                <CardDescription>Manage your account preferences and data</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Connection Status */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Database Connection Status</h3>
+                  {connectionTestResult && (
+                    <div
+                      className={`p-4 rounded-lg border ${
+                        connectionTestResult.success ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        {connectionTestResult.success ? (
+                          <Check className="w-5 h-5 text-green-600" />
+                        ) : (
+                          <AlertCircle className="w-5 h-5 text-red-600" />
+                        )}
+                        <span
+                          className={`font-medium ${connectionTestResult.success ? "text-green-800" : "text-red-800"}`}
+                        >
+                          {connectionTestResult.success ? "Connected" : "Connection Error"}
+                        </span>
+                      </div>
+                      <p className={`text-sm ${connectionTestResult.success ? "text-green-700" : "text-red-700"}`}>
+                        {connectionTestResult.message}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Last checked: {new Date(connectionTestResult.timestamp).toLocaleString()}
+                      </p>
                     </div>
                   )}
                 </div>
-                <div className="space-y-3">
-                  <Button
-                    variant="outline"
-                    onClick={() => fileInputRef.current?.click()}
-                    disabled={uploadingImage}
-                    className="flex items-center gap-2 hover:bg-blue-50"
-                  >
-                    <Upload className="h-4 w-4" />
-                    {uploadingImage ? "Uploading..." : "Upload Photo"}
-                  </Button>
-                  <p className="text-sm text-gray-500">JPG, PNG up to 5MB</p>
-                  {profile.profile_image_url && (
+
+                <Separator />
+
+                {/* Account Actions */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Account Actions</h3>
+                  <div className="space-y-3">
                     <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleInputChange("profile_image_url", "")}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      variant="outline"
+                      onClick={() => router.push("/account/bookings")}
+                      className="w-full justify-start"
                     >
-                      <X className="h-4 w-4 mr-1" />
-                      Remove Photo
+                      <Calendar className="w-4 h-4 mr-2" />
+                      View My Bookings
                     </Button>
-                  )}
-                </div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleProfileImageUpload}
-                  className="hidden"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <User className="h-5 w-5 text-green-600" />
-                Basic Information
-              </CardTitle>
-              <CardDescription>Your personal details for tour bookings</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-sm font-medium text-gray-700">
-                    First Name *
-                  </Label>
-                  <Input
-                    id="firstName"
-                    value={profile.first_name || ""}
-                    onChange={(e) => handleInputChange("first_name", e.target.value)}
-                    placeholder="Enter your first name"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-sm font-medium text-gray-700">
-                    Last Name *
-                  </Label>
-                  <Input
-                    id="lastName"
-                    value={profile.last_name || ""}
-                    onChange={(e) => handleInputChange("last_name", e.target.value)}
-                    placeholder="Enter your last name"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  Email Address
-                </Label>
-                <Input id="email" type="email" value={profile.email} disabled className="bg-gray-50 border-gray-200" />
-                <p className="text-sm text-gray-500">Email cannot be changed. Contact support if needed.</p>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  Phone Number
-                </Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={profile.phone || ""}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="+1 (555) 123-4567"
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Globe className="h-5 w-5 text-green-600" />
-                eBird Integration
-              </CardTitle>
-              <CardDescription>Connect your eBird profile to share your birding achievements</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              <Alert className="border-blue-200 bg-blue-50">
-                <AlertCircle className="h-4 w-4 text-blue-600" />
-                <AlertDescription className="text-blue-800">
-                  eBird is a real-time, online bird checklist program. Share your eBird profile to connect with other
-                  birders and showcase your sightings.
-                </AlertDescription>
-              </Alert>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="ebirdUsername">eBird Username</Label>
-                  <Input
-                    id="ebirdUsername"
-                    value={profile.ebird_username || ""}
-                    onChange={(e) => handleInputChange("ebird_username", e.target.value)}
-                    placeholder="your-ebird-username"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="ebirdUrl">eBird Profile URL</Label>
-                  <Input
-                    id="ebirdUrl"
-                    type="url"
-                    value={profile.ebird_profile_url || ""}
-                    onChange={(e) => handleInputChange("ebird_profile_url", e.target.value)}
-                    placeholder="https://ebird.org/profile/your-username"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Travel Information Tab */}
-        <TabsContent value="travel" className="space-y-6">
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <CreditCard className="h-5 w-5 text-blue-600" />
-                Passport Information
-              </CardTitle>
-              <CardDescription>Required for international travel and tour bookings</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="passportNumber" className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    Passport Number
-                  </Label>
-                  <Input
-                    id="passportNumber"
-                    value={profile.passport_number || ""}
-                    onChange={(e) => handleInputChange("passport_number", e.target.value)}
-                    placeholder="Enter passport number"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="passportCountry">Country of Issue</Label>
-                  <Input
-                    id="passportCountry"
-                    value={profile.passport_country || ""}
-                    onChange={(e) => handleInputChange("passport_country", e.target.value)}
-                    placeholder="e.g., United States"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="passportExpiry" className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  Expiry Date
-                </Label>
-                <Input
-                  id="passportExpiry"
-                  type="date"
-                  value={profile.passport_expiry || ""}
-                  onChange={(e) => handleInputChange("passport_expiry", e.target.value)}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Shield className="h-5 w-5 text-green-600" />
-                Travel Insurance
-              </CardTitle>
-              <CardDescription>Insurance information for your safety during tours</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="insuranceProvider">Insurance Provider</Label>
-                  <Input
-                    id="insuranceProvider"
-                    value={profile.insurance_provider || ""}
-                    onChange={(e) => handleInputChange("insurance_provider", e.target.value)}
-                    placeholder="e.g., World Nomads"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="policyNumber">Policy Number</Label>
-                  <Input
-                    id="policyNumber"
-                    value={profile.insurance_policy_number || ""}
-                    onChange={(e) => handleInputChange("insurance_policy_number", e.target.value)}
-                    placeholder="Enter policy number"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="coverageDetails">Coverage Details</Label>
-                <Textarea
-                  id="coverageDetails"
-                  value={profile.insurance_coverage_details || ""}
-                  onChange={(e) => handleInputChange("insurance_coverage_details", e.target.value)}
-                  placeholder="Brief description of your insurance coverage"
-                  rows={3}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Health Information Tab */}
-        <TabsContent value="health" className="space-y-6">
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Heart className="h-5 w-5 text-green-600" />
-                Dietary Preferences & Allergies
-              </CardTitle>
-              <CardDescription>Help us accommodate your dietary needs during tours</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="dietaryPreferences">Dietary Preferences</Label>
-                <Textarea
-                  id="dietaryPreferences"
-                  value={profile.dietary_preferences || ""}
-                  onChange={(e) => handleInputChange("dietary_preferences", e.target.value)}
-                  placeholder="e.g., Vegetarian, Vegan, Gluten-free, etc."
-                  rows={3}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="foodAllergies">Food Allergies</Label>
-                  <Textarea
-                    id="foodAllergies"
-                    value={profile.food_allergies || ""}
-                    onChange={(e) => handleInputChange("food_allergies", e.target.value)}
-                    placeholder="List any food allergies"
-                    rows={3}
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="otherAllergies">Other Allergies</Label>
-                  <Textarea
-                    id="otherAllergies"
-                    value={profile.other_allergies || ""}
-                    onChange={(e) => handleInputChange("other_allergies", e.target.value)}
-                    placeholder="Environmental, medication, etc."
-                    rows={3}
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Stethoscope className="h-5 w-5 text-blue-600" />
-                Medical Information
-              </CardTitle>
-              <CardDescription>Confidential medical information for emergency situations</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="medicalConditions">Medical Conditions</Label>
-                <Textarea
-                  id="medicalConditions"
-                  value={profile.medical_conditions || ""}
-                  onChange={(e) => handleInputChange("medical_conditions", e.target.value)}
-                  placeholder="Any medical conditions relevant to travel"
-                  rows={3}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="currentMedications">Current Medications</Label>
-                <Textarea
-                  id="currentMedications"
-                  value={profile.current_medications || ""}
-                  onChange={(e) => handleInputChange("current_medications", e.target.value)}
-                  placeholder="List current medications and dosages"
-                  rows={3}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="medicalNotes">Additional Medical Notes</Label>
-                <Textarea
-                  id="medicalNotes"
-                  value={profile.medical_notes || ""}
-                  onChange={(e) => handleInputChange("medical_notes", e.target.value)}
-                  placeholder="Any other medical information we should know"
-                  rows={3}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Syringe className="h-5 w-5 text-green-600" />
-                Vaccination History
-              </CardTitle>
-              <CardDescription>Track your travel-related vaccinations</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="covidStatus">COVID-19 Vaccination Status</Label>
-                <Select
-                  value={profile.covid_vaccination_status || ""}
-                  onValueChange={(value) => handleInputChange("covid_vaccination_status", value)}
-                >
-                  <SelectTrigger className="border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-                    <SelectValue placeholder="Select vaccination status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="fully-vaccinated">Fully Vaccinated</SelectItem>
-                    <SelectItem value="partially-vaccinated">Partially Vaccinated</SelectItem>
-                    <SelectItem value="not-vaccinated">Not Vaccinated</SelectItem>
-                    <SelectItem value="prefer-not-to-say">Prefer Not to Say</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="yellowFever"
-                      checked={profile.yellow_fever_vaccination || false}
-                      onCheckedChange={(checked) => handleInputChange("yellow_fever_vaccination", checked)}
-                    />
-                    <Label htmlFor="yellowFever">Yellow Fever</Label>
+                    <Button
+                      variant="outline"
+                      onClick={() => router.push("/account/billing")}
+                      className="w-full justify-start"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Billing & Payments
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={async () => {
+                        const result = await testSupabaseConnection()
+                        setConnectionTestResult(result)
+                        if (result.success) {
+                          toast.success("Connection test successful!")
+                        } else {
+                          toast.error("Connection test failed")
+                        }
+                      }}
+                      className="w-full justify-start"
+                    >
+                      <AlertCircle className="w-4 h-4 mr-2" />
+                      Test Database Connection
+                    </Button>
                   </div>
-                  {profile.yellow_fever_vaccination && (
-                    <Input
-                      type="date"
-                      value={profile.yellow_fever_vaccination_date || ""}
-                      onChange={(e) => handleInputChange("yellow_fever_vaccination_date", e.target.value)}
-                      placeholder="Vaccination date"
-                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                    />
-                  )}
                 </div>
 
+                <Separator />
+
+                {/* Data Management */}
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="hepatitisA"
-                      checked={profile.hepatitis_a_vaccination || false}
-                      onCheckedChange={(checked) => handleInputChange("hepatitis_a_vaccination", checked)}
-                    />
-                    <Label htmlFor="hepatitisA">Hepatitis A</Label>
+                  <h3 className="text-lg font-semibold">Data Management</h3>
+                  <div className="space-y-3">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        const dataStr = JSON.stringify(formData, null, 2)
+                        const dataBlob = new Blob([dataStr], { type: "application/json" })
+                        const url = URL.createObjectURL(dataBlob)
+                        const link = document.createElement("a")
+                        link.href = url
+                        link.download = "aves-profile-data.json"
+                        link.click()
+                        URL.revokeObjectURL(url)
+                        toast.success("Profile data exported successfully!")
+                      }}
+                      className="w-full justify-start"
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      Export Profile Data
+                    </Button>
                   </div>
-                  {profile.hepatitis_a_vaccination && (
-                    <Input
-                      type="date"
-                      value={profile.hepatitis_a_vaccination_date || ""}
-                      onChange={(e) => handleInputChange("hepatitis_a_vaccination_date", e.target.value)}
-                      placeholder="Vaccination date"
-                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                    />
-                  )}
                 </div>
 
+                {/* Danger Zone */}
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="hepatitisB"
-                      checked={profile.hepatitis_b_vaccination || false}
-                      onCheckedChange={(checked) => handleInputChange("hepatitis_b_vaccination", checked)}
-                    />
-                    <Label htmlFor="hepatitisB">Hepatitis B</Label>
+                  <h3 className="text-lg font-semibold text-red-600">Danger Zone</h3>
+                  <div className="p-4 border border-red-200 rounded-lg bg-red-50">
+                    <p className="text-sm text-red-700 mb-3">These actions are permanent and cannot be undone.</p>
+                    <Button
+                      variant="destructive"
+                      onClick={() => {
+                        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+                          toast.error("Account deletion is not yet implemented")
+                        }
+                      }}
+                      className="w-full"
+                    >
+                      <Trash2 className="w-4 h-4 mr-2" />
+                      Delete Account
+                    </Button>
                   </div>
-                  {profile.hepatitis_b_vaccination && (
-                    <Input
-                      type="date"
-                      value={profile.hepatitis_b_vaccination_date || ""}
-                      onChange={(e) => handleInputChange("hepatitis_b_vaccination_date", e.target.value)}
-                      placeholder="Vaccination date"
-                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                    />
-                  )}
                 </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
 
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="typhoid"
-                      checked={profile.typhoid_vaccination || false}
-                      onCheckedChange={(checked) => handleInputChange("typhoid_vaccination", checked)}
-                    />
-                    <Label htmlFor="typhoid">Typhoid</Label>
-                  </div>
-                  {profile.typhoid_vaccination && (
-                    <Input
-                      type="date"
-                      value={profile.typhoid_vaccination_date || ""}
-                      onChange={(e) => handleInputChange("typhoid_vaccination_date", e.target.value)}
-                      placeholder="Vaccination date"
-                      className="ml-6 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="otherVaccinations">Other Vaccinations</Label>
-                <Textarea
-                  id="otherVaccinations"
-                  value={profile.other_vaccinations || ""}
-                  onChange={(e) => handleInputChange("other_vaccinations", e.target.value)}
-                  placeholder="List any other relevant vaccinations"
-                  rows={3}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Emergency Contact Tab */}
-        <TabsContent value="emergency" className="space-y-6">
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-red-50 to-orange-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Users className="h-5 w-5 text-red-600" />
-                Emergency Contact
-              </CardTitle>
-              <CardDescription>Primary contact person in case of emergency during tours</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="emergencyName">Full Name *</Label>
-                <Input
-                  id="emergencyName"
-                  value={profile.emergency_contact_name || ""}
-                  onChange={(e) => handleInputChange("emergency_contact_name", e.target.value)}
-                  placeholder="Emergency contact's full name"
-                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="emergencyRelationship">Relationship</Label>
-                  <Select
-                    value={profile.emergency_contact_relationship || ""}
-                    onValueChange={(value) => handleInputChange("emergency_contact_relationship", value)}
-                  >
-                    <SelectTrigger className="border-gray-300 focus:border-red-500 focus:ring-red-500">
-                      <SelectValue placeholder="Select relationship" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="spouse">Spouse</SelectItem>
-                      <SelectItem value="parent">Parent</SelectItem>
-                      <SelectItem value="child">Child</SelectItem>
-                      <SelectItem value="sibling">Sibling</SelectItem>
-                      <SelectItem value="friend">Friend</SelectItem>
-                      <SelectItem value="partner">Partner</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="emergencyPhone" className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
-                    Phone Number *
-                  </Label>
-                  <Input
-                    id="emergencyPhone"
-                    type="tel"
-                    value={profile.emergency_contact_phone || ""}
-                    onChange={(e) => handleInputChange("emergency_contact_phone", e.target.value)}
-                    placeholder="+1 (555) 123-4567"
-                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="emergencyEmail" className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  Email Address
-                </Label>
-                <Input
-                  id="emergencyEmail"
-                  type="email"
-                  value={profile.emergency_contact_email || ""}
-                  onChange={(e) => handleInputChange("emergency_contact_email", e.target.value)}
-                  placeholder="emergency.contact@email.com"
-                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Social Media Tab */}
-        <TabsContent value="social" className="space-y-6">
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Instagram className="h-5 w-5 text-purple-600" />
-                Social Media Profiles
-              </CardTitle>
-              <CardDescription>Connect your social media profiles to share your birding adventures</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="instagram" className="flex items-center gap-2">
-                    <Instagram className="h-4 w-4 text-pink-600" />
-                    Instagram
-                  </Label>
-                  <Input
-                    id="instagram"
-                    value={profile.instagram_handle || ""}
-                    onChange={(e) => handleInputChange("instagram_handle", e.target.value)}
-                    placeholder="@yourusername"
-                    className="border-gray-300 focus:border-pink-500 focus:ring-pink-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="facebook" className="flex items-center gap-2">
-                    <Facebook className="h-4 w-4 text-blue-600" />
-                    Facebook
-                  </Label>
-                  <Input
-                    id="facebook"
-                    value={profile.facebook_profile || ""}
-                    onChange={(e) => handleInputChange("facebook_profile", e.target.value)}
-                    placeholder="facebook.com/yourprofile"
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="twitter" className="flex items-center gap-2">
-                    <Twitter className="h-4 w-4 text-blue-400" />
-                    Twitter/X
-                  </Label>
-                  <Input
-                    id="twitter"
-                    value={profile.twitter_handle || ""}
-                    onChange={(e) => handleInputChange("twitter_handle", e.target.value)}
-                    placeholder="@yourusername"
-                    className="border-gray-300 focus:border-blue-400 focus:ring-blue-400"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="linkedin" className="flex items-center gap-2">
-                    <Linkedin className="h-4 w-4 text-blue-700" />
-                    LinkedIn
-                  </Label>
-                  <Input
-                    id="linkedin"
-                    value={profile.linkedin_profile || ""}
-                    onChange={(e) => handleInputChange("linkedin_profile", e.target.value)}
-                    placeholder="linkedin.com/in/yourprofile"
-                    className="border-gray-300 focus:border-blue-700 focus:ring-blue-700"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Preferences Tab */}
-        <TabsContent value="preferences" className="space-y-6">
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Bell className="h-5 w-5 text-green-600" />
-                Notification Preferences
-              </CardTitle>
-              <CardDescription>Choose how you'd like to receive updates about your tours</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="space-y-0.5">
-                  <Label className="text-base font-medium">Newsletter Subscription</Label>
-                  <p className="text-sm text-gray-500">Receive our monthly birding newsletter</p>
-                </div>
-                <Switch
-                  checked={profile.newsletter_subscription || false}
-                  onCheckedChange={(checked) => handleInputChange("newsletter_subscription", checked)}
-                />
-              </div>
-
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="space-y-0.5">
-                  <Label className="text-base font-medium">Marketing Emails</Label>
-                  <p className="text-sm text-gray-500">Receive promotional offers and tour announcements</p>
-                </div>
-                <Switch
-                  checked={profile.marketing_emails || false}
-                  onCheckedChange={(checked) => handleInputChange("marketing_emails", checked)}
-                />
-              </div>
-
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="space-y-0.5">
-                  <Label className="text-base font-medium">SMS Notifications</Label>
-                  <p className="text-sm text-gray-500">Receive important updates via text message</p>
-                </div>
-                <Switch
-                  checked={profile.sms_notifications || false}
-                  onCheckedChange={(checked) => handleInputChange("sms_notifications", checked)}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-gray-800">
-                <Lock className="h-5 w-5 text-gray-600" />
-                Account Security
-              </CardTitle>
-              <CardDescription>Manage your account security settings</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              <Button variant="outline" className="w-full justify-start bg-transparent">
-                <Lock className="h-4 w-4 mr-2" />
-                Change Password
-              </Button>
-              <Button variant="outline" className="w-full justify-start bg-transparent">
-                <Shield className="h-4 w-4 mr-2" />
-                Enable Two-Factor Authentication
-              </Button>
-              <Separator />
-              <div className="text-center space-y-2">
-                <Button variant="destructive" className="w-full">
-                  Delete Account
-                </Button>
-                <p className="text-sm text-gray-500">This action cannot be undone</p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-
-      {/* Save Button */}
-      <div className="flex justify-between items-center pt-6 border-t bg-gray-50 -mx-8 px-8 py-4 rounded-b-2xl">
-        <div className="text-sm text-gray-500">{hasUnsavedChanges && "You have unsaved changes"}</div>
-        <Button
-          onClick={handleSaveProfile}
-          disabled={isLoading || (!hasUnsavedChanges && saveStatus !== "error")}
-          className={`px-8 py-2 ${
-            saveStatus === "saved"
-              ? "bg-green-600 hover:bg-green-700"
-              : saveStatus === "error"
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-blue-600 hover:bg-blue-700"
-          } text-white font-medium rounded-lg transition-colors duration-200`}
-        >
-          <div className="flex items-center gap-2">
-            {getSaveButtonIcon()}
-            {getSaveButtonText()}
+        {/* Unsaved Changes Warning */}
+        {hasUnsavedChanges && (
+          <div className="fixed bottom-4 right-4 bg-amber-100 border border-amber-300 rounded-lg p-4 shadow-lg">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-amber-600" />
+              <span className="text-sm text-amber-800">You have unsaved changes</span>
+            </div>
           </div>
-        </Button>
+        )}
       </div>
     </div>
   )

@@ -1,42 +1,65 @@
-import type { Metadata } from "next"
-import { redirect } from "next/navigation"
+import { Suspense } from "react"
 import { getCurrentUser } from "@/lib/supabase-server"
-import { profileService } from "@/lib/profile-service"
+import { redirect } from "next/navigation"
 import AccountSettingsClient from "./AccountSettingsClient"
+import { Card, CardContent } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
 
-export const metadata: Metadata = {
-  title: "Account Settings - AVES Colombia",
-  description: "Manage your profile, preferences, and personal information for AVES Colombia birding tours.",
-  keywords: "account settings, profile management, AVES Colombia, birding tours, user profile",
+function SettingsLoadingSkeleton() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 p-4">
+      <div className="max-w-4xl mx-auto space-y-6">
+        <div className="text-center space-y-2">
+          <Skeleton className="h-8 w-48 mx-auto" />
+          <Skeleton className="h-4 w-96 mx-auto" />
+        </div>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <Skeleton className="h-20 w-20 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-4 w-48" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+              </div>
+
+              <div className="space-y-4">
+                <Skeleton className="h-20 w-full" />
+                <Skeleton className="h-20 w-full" />
+                <Skeleton className="h-20 w-full" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
 }
 
-export default async function AccountSettingsPage() {
+export default async function SettingsPage() {
   const user = await getCurrentUser()
 
   if (!user) {
     redirect("/auth/login?redirect=/account/settings")
   }
 
-  // Fetch user profile data
-  let profile = null
-  try {
-    profile = await profileService.getUserProfile(user.id)
-  } catch (error) {
-    console.error("Error fetching profile:", error)
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-green-600 to-blue-600 px-8 py-6">
-            <h1 className="text-3xl font-bold text-white">Account Settings</h1>
-            <p className="text-green-100 mt-2">Manage your profile and preferences for AVES Colombia birding tours</p>
-          </div>
-
-          <AccountSettingsClient initialProfile={profile} userId={user.id} userEmail={user.email || ""} />
-        </div>
-      </div>
-    </div>
+    <Suspense fallback={<SettingsLoadingSkeleton />}>
+      <AccountSettingsClient />
+    </Suspense>
   )
+}
+
+export const metadata = {
+  title: "Account Settings | AVES Colombia",
+  description: "Manage your account settings, profile information, and preferences for AVES Colombia birding tours.",
 }
