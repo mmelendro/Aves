@@ -213,7 +213,7 @@ export function DatabaseConnectionTest() {
               <Shield className="h-5 w-5" />
               Test Summary
             </CardTitle>
-            <CardDescription>Overall test execution results</CardDescription>
+            <CardDescription>Overall test execution results including schema cache refresh</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -242,15 +242,17 @@ export function DatabaseConnectionTest() {
               <Alert className="mt-4 border-green-200 bg-green-50">
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  All database operations are working correctly! Your Supabase setup is properly configured.
+                  ✅ All database operations are working correctly! Schema cache has been refreshed and synchronized.
+                  <br />
+                  <strong>birding_experience</strong> and <strong>currency</strong> columns have been validated.
                 </AlertDescription>
               </Alert>
             ) : (
               <Alert className="mt-4 border-red-200 bg-red-50">
                 <XCircle className="h-4 w-4 text-red-600" />
                 <AlertDescription className="text-red-800">
-                  Some tests failed. Check the detailed results below. If the schema validation failed, you may need to
-                  run the SQL script provided in the details.
+                  ❌ Some tests failed. Check the detailed results below. Schema cache refresh may have identified
+                  missing columns.
                 </AlertDescription>
               </Alert>
             )}
@@ -261,9 +263,10 @@ export function DatabaseConnectionTest() {
       {/* Detailed Test Results */}
       {testResults && (
         <Tabs defaultValue="basic" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="schema">Schema</TabsTrigger>
+            <TabsTrigger value="refresh">Cache</TabsTrigger>
             <TabsTrigger value="profiles">Profiles</TabsTrigger>
             <TabsTrigger value="bookings">Bookings</TabsTrigger>
             <TabsTrigger value="storage">Storage</TabsTrigger>
@@ -312,7 +315,7 @@ export function DatabaseConnectionTest() {
                 <TestStatus
                   result={testResults.schemaValidation}
                   title="Schema Validation"
-                  description="Verify user_profiles table has correct structure with id and user_id columns"
+                  description="Verify tables have correct structure including birding_experience column"
                 />
                 {!testResults.schemaValidation.success && (
                   <Alert className="border-amber-200 bg-amber-50">
@@ -322,6 +325,47 @@ export function DatabaseConnectionTest() {
                       run the SQL script provided in the test details above in your Supabase SQL editor.
                     </AlertDescription>
                   </Alert>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="refresh" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <RefreshCw className="h-5 w-5" />
+                  Schema Cache Refresh
+                </CardTitle>
+                <CardDescription>Comprehensive schema cache refresh and validation of critical columns</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TestStatus
+                  result={testResults.schemaRefresh}
+                  title="Schema Cache Refresh"
+                  description="Refresh cache and validate birding_experience and currency columns"
+                />
+                {testResults.schemaRefresh.success && testResults.schemaRefresh.details && (
+                  <div className="grid grid-cols-2 gap-4 mt-4">
+                    <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <span className="font-medium text-green-800">birding_experience</span>
+                      </div>
+                      <p className="text-sm text-green-700 mt-1">
+                        {testResults.schemaRefresh.details.birdingExperienceFound ? "✅ Found" : "❌ Missing"}
+                      </p>
+                    </div>
+                    <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <span className="font-medium text-green-800">currency</span>
+                      </div>
+                      <p className="text-sm text-green-700 mt-1">
+                        {testResults.schemaRefresh.details.currencyFound ? "✅ Found" : "❌ Missing"}
+                      </p>
+                    </div>
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -452,7 +496,7 @@ export function DatabaseConnectionTest() {
               <div>
                 <h3 className="text-lg font-medium text-gray-900">Running Database Tests</h3>
                 <p className="text-gray-600">
-                  Testing connectivity, schema validation, authentication, and CRUD operations...
+                  Testing connectivity, schema validation, cache refresh, authentication, and CRUD operations...
                 </p>
               </div>
             </div>
@@ -467,8 +511,12 @@ export function DatabaseConnectionTest() {
         </CardHeader>
         <CardContent className="text-blue-800 space-y-2">
           <p>
-            <strong>Schema Setup:</strong> If schema validation fails, run the provided SQL script in your Supabase SQL
-            editor.
+            <strong>Schema Cache Refresh:</strong> The test now includes automatic schema cache refresh to ensure
+            synchronization with the current database structure.
+          </p>
+          <p>
+            <strong>Critical Columns:</strong> Special validation for <code>birding_experience</code> and{" "}
+            <code>currency</code> columns that are essential for AVES functionality.
           </p>
           <p>
             <strong>Authentication:</strong> Some tests require user authentication. Sign in to test full CRUD

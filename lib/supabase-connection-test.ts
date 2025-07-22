@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
+import { refreshSupabaseSchemaCache } from "./schema-cache-refresh"
 
 export interface ConnectionTestResult {
   success: boolean
@@ -11,6 +12,7 @@ export interface TestResults {
   environment: ConnectionTestResult
   database: ConnectionTestResult
   schemaValidation: ConnectionTestResult
+  schemaRefresh: ConnectionTestResult
   authentication: ConnectionTestResult
   profileOperations: {
     create: ConnectionTestResult
@@ -89,13 +91,11 @@ export class SupabaseConnectionTest {
       }
 
       // Simple test - try to query the user_profiles table directly
-      // If it doesn't exist, we'll get a clear error message
       const { data, error } = await this.supabase.from("user_profiles").select("id, user_id").limit(1)
 
       if (error) {
         console.error("❌ Database connection failed:", error)
 
-        // Check if it's a table doesn't exist error
         if (error.message.includes("relation") && error.message.includes("does not exist")) {
           return {
             success: false,
@@ -207,7 +207,7 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
       // Test if we can query the table structure by trying to select specific columns
       const { data, error } = await this.supabase
         .from("user_profiles")
-        .select("id, user_id, full_name, phone_number, created_at, updated_at")
+        .select("id, user_id, full_name, phone_number, birding_experience, created_at, updated_at")
         .limit(0) // We don't need actual data, just want to test the columns exist
 
       if (error) {
@@ -238,7 +238,7 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
       console.log("✅ Schema validation successful")
       return {
         success: true,
-        message: "Schema validation successful - all required columns exist",
+        message: "Schema validation successful - all required columns exist including birding_experience",
         timestamp: new Date().toISOString(),
         details: { message: "All required columns are present" },
       }
@@ -247,6 +247,39 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
       return {
         success: false,
         message: `Schema validation error: ${error.message}`,
+        timestamp: new Date().toISOString(),
+        details: { error: error.message },
+      }
+    }
+  }
+
+  async testSchemaRefresh(): Promise<ConnectionTestResult> {
+    console.log("🔄 Testing schema cache refresh...")
+
+    try {
+      const refreshResult = await refreshSupabaseSchemaCache()
+
+      console.log(refreshResult.success ? "✅ Schema cache refresh successful" : "❌ Schema cache refresh failed")
+
+      return {
+        success: refreshResult.success,
+        message: refreshResult.message,
+        timestamp: refreshResult.timestamp,
+        details: {
+          userProfilesValid: refreshResult.userProfilesValidation.success,
+          bookingsValid: refreshResult.bookingsValidation.success,
+          birdingExperienceFound: refreshResult.userProfilesValidation.details.columns.some(
+            (col) => col.name === "birding_experience",
+          ),
+          currencyFound: refreshResult.bookingsValidation.details.columns.some((col) => col.name === "currency"),
+          summary: refreshResult.summary,
+        },
+      }
+    } catch (error: any) {
+      console.error("❌ Schema refresh error:", error)
+      return {
+        success: false,
+        message: `Schema refresh error: ${error.message}`,
         timestamp: new Date().toISOString(),
         details: { error: error.message },
       }
@@ -662,6 +695,7 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
       environment: await this.testEnvironmentVariables(),
       database: await this.testDatabaseConnection(),
       schemaValidation: await this.testSchemaValidation(),
+      schemaRefresh: await this.testSchemaRefresh(),
       authentication: await this.testAuthentication(),
       profileOperations: {
         create: { success: false, message: "Not run", timestamp: new Date().toISOString() },
@@ -695,6 +729,7 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
       results.environment,
       results.database,
       results.schemaValidation,
+      results.schemaRefresh,
       results.authentication,
       results.profileOperations.create,
       results.profileOperations.read,
