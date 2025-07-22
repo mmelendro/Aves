@@ -12,7 +12,6 @@ export type Database = {
     Tables: {
       user_profiles: {
         Row: {
-          id: string
           user_id: string
           full_name: string | null
           phone_number: string | null
@@ -55,7 +54,6 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          id?: string
           user_id: string
           full_name?: string | null
           phone_number?: string | null
@@ -98,7 +96,6 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          id?: string
           user_id?: string
           full_name?: string | null
           phone_number?: string | null
@@ -139,44 +136,6 @@ export type Database = {
           linkedin_profile?: string | null
           created_at?: string
           updated_at?: string
-        }
-      }
-      user_bookings: {
-        Row: {
-          booking_id: string
-          user_id: string
-          tour_type: string
-          region: string
-          start_date: string
-          end_date: string
-          price: number
-          booking_status: string
-          created_at: string
-          updated_at: string | null
-        }
-        Insert: {
-          booking_id?: string
-          user_id: string
-          tour_type: string
-          region: string
-          start_date: string
-          end_date: string
-          price: number
-          booking_status?: string
-          created_at?: string
-          updated_at?: string | null
-        }
-        Update: {
-          booking_id?: string
-          user_id?: string
-          tour_type?: string
-          region?: string
-          start_date?: string
-          end_date?: string
-          price?: number
-          booking_status?: string
-          created_at?: string
-          updated_at?: string | null
         }
       }
       bookings: {
@@ -189,8 +148,12 @@ export type Database = {
           end_date: string
           participants: number
           total_amount: number
-          status: string
+          currency: string | null
+          status: string | null
           special_requests: string | null
+          contact_name: string | null
+          contact_email: string | null
+          contact_phone: string | null
           created_at: string
           updated_at: string
         }
@@ -201,10 +164,14 @@ export type Database = {
           tour_type: string
           start_date: string
           end_date: string
-          participants: number
+          participants?: number
           total_amount: number
-          status?: string
+          currency?: string | null
+          status?: string | null
           special_requests?: string | null
+          contact_name?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -217,8 +184,12 @@ export type Database = {
           end_date?: string
           participants?: number
           total_amount?: number
-          status?: string
+          currency?: string | null
+          status?: string | null
           special_requests?: string | null
+          contact_name?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
           created_at?: string
           updated_at?: string
         }

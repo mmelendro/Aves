@@ -4,78 +4,169 @@ import type { UserProfile, UserProfileInsert, UserProfileUpdate } from "./supaba
 export class ProfileService {
   private supabase = createClientSupabaseClient()
 
-  async getUserProfile(userId: string): Promise<UserProfile | null> {
+  async getCurrentUserProfile(): Promise<UserProfile | null> {
     try {
-      const { data, error } = await this.supabase.from("user_profiles").select("*").eq("user_id", userId).single()
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
 
-      if (error && error.code !== "PGRST116") {
-        console.error("Error fetching user profile:", error)
-        throw error
+      if (authError || !user) {
+        console.log("No authenticated user found:", authError?.message)
+        return null
       }
 
-      return data
+      console.log("Fetching profile for user:", user.id)
+
+      const { data: profile, error } = await this.supabase
+        .from("user_profiles")
+        .select("*")
+        .eq("user_id", user.id)
+        .single()
+
+      if (error) {
+        if (error.code === "PGRST116") {
+          // Profile doesn't exist, create one
+          console.log("Profile not found, creating new profile for user:", user.id)
+          return await this.createUserProfile({
+            user_id: user.id,
+            full_name: user.user_metadata?.full_name || "",
+            phone_number: user.user_metadata?.phone_number || "",
+          })
+        }
+        console.error("Error fetching profile:", error)
+        return null
+      }
+
+      console.log("Profile fetched successfully:", profile.user_id)
+      return profile
     } catch (error) {
-      console.error("Error in getUserProfile:", error)
+      console.error("Error in getCurrentUserProfile:", error)
       return null
     }
   }
 
   async createUserProfile(profileData: UserProfileInsert): Promise<UserProfile | null> {
     try {
-      const { data, error } = await this.supabase.from("user_profiles").insert(profileData).select().single()
+      console.log("Creating profile for user:", profileData.user_id)
+
+      const { data: profile, error } = await this.supabase.from("user_profiles").insert(profileData).select().single()
 
       if (error) {
-        console.error("Error creating user profile:", error)
+        console.error("Error creating profile:", error)
         throw error
       }
 
-      return data
+      console.log("Profile created successfully:", profile.user_id)
+      return profile
     } catch (error) {
       console.error("Error in createUserProfile:", error)
       throw error
     }
   }
 
-  async updateUserProfile(userId: string, updates: UserProfileUpdate): Promise<UserProfile | null> {
+  async updateUserProfile(profileData: UserProfileUpdate): Promise<UserProfile | null> {
     try {
-      const { data, error } = await this.supabase
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
+
+      if (authError || !user) {
+        console.error("No authenticated user found for update:", authError?.message)
+        return null
+      }
+
+      console.log("Updating profile for user:", user.id)
+
+      const { data: profile, error } = await this.supabase
         .from("user_profiles")
         .update({
-          ...updates,
+          ...profileData,
           updated_at: new Date().toISOString(),
         })
-        .eq("user_id", userId)
+        .eq("user_id", user.id)
         .select()
         .single()
 
       if (error) {
-        console.error("Error updating user profile:", error)
+        console.error("Error updating profile:", error)
         throw error
       }
 
-      return data
+      console.log("Profile updated successfully:", profile.user_id)
+      return profile
     } catch (error) {
       console.error("Error in updateUserProfile:", error)
       throw error
     }
   }
 
-  async uploadProfileImage(userId: string, file: File): Promise<string | null> {
+  async deleteUserProfile(): Promise<boolean> {
     try {
-      const fileExt = file.name.split(".").pop()
-      const fileName = `${userId}-${Date.now()}.${fileExt}`
-      const filePath = `profile-images/${fileName}`
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
 
-      const { error: uploadError } = await this.supabase.storage.from("user-uploads").upload(filePath, file)
-
-      if (uploadError) {
-        console.error("Error uploading file:", uploadError)
-        throw uploadError
+      if (authError || !user) {
+        console.error("No authenticated user found for deletion:", authError?.message)
+        return false
       }
 
-      const { data } = this.supabase.storage.from("user-uploads").getPublicUrl(filePath)
+      console.log("Deleting profile for user:", user.id)
 
-      return data.publicUrl
+      const { error } = await this.supabase.from("user_profiles").delete().eq("user_id", user.id)
+
+      if (error) {
+        console.error("Error deleting profile:", error)
+        return false
+      }
+
+      console.log("Profile deleted successfully for user:", user.id)
+      return true
+    } catch (error) {
+      console.error("Error in deleteUserProfile:", error)
+      return false
+    }
+  }
+
+  async uploadProfileImage(file: File): Promise<string | null> {
+    try {
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
+
+      if (authError || !user) {
+        console.error("No authenticated user found for image upload:", authError?.message)
+        return null
+      }
+
+      // Generate unique filename
+      const fileExt = file.name.split(".").pop()
+      const fileName = `${user.id}/profile-${Date.now()}.${fileExt}`
+
+      console.log("Uploading profile image:", fileName)
+
+      // Upload file to storage
+      const { data: uploadData, error: uploadError } = await this.supabase.storage
+        .from("profile-images")
+        .upload(fileName, file, {
+          cacheControl: "3600",
+          upsert: false,
+        })
+
+      if (uploadError) {
+        console.error("Error uploading image:", uploadError)
+        return null
+      }
+
+      // Get public URL
+      const { data: urlData } = this.supabase.storage.from("profile-images").getPublicUrl(uploadData.path)
+
+      console.log("Profile image uploaded successfully:", urlData.publicUrl)
+      return urlData.publicUrl
     } catch (error) {
       console.error("Error in uploadProfileImage:", error)
       return null
@@ -84,17 +175,35 @@ export class ProfileService {
 
   async removeProfileImage(imageUrl: string): Promise<boolean> {
     try {
-      // Extract file path from URL
-      const urlParts = imageUrl.split("/")
-      const filePath = urlParts.slice(-2).join("/")
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
 
-      const { error } = await this.supabase.storage.from("user-uploads").remove([filePath])
-
-      if (error) {
-        console.error("Error removing file:", error)
-        throw error
+      if (authError || !user) {
+        console.error("No authenticated user found for image removal:", authError?.message)
+        return false
       }
 
+      // Extract file path from URL
+      const urlParts = imageUrl.split("/")
+      const fileName = urlParts[urlParts.length - 1]
+      const filePath = `${user.id}/${fileName}`
+
+      console.log("Removing profile image:", filePath)
+
+      // Remove file from storage
+      const { error } = await this.supabase.storage.from("profile-images").remove([filePath])
+
+      if (error) {
+        console.error("Error removing image:", error)
+        return false
+      }
+
+      // Update profile to remove image URL
+      await this.updateUserProfile({ profile_image_url: null })
+
+      console.log("Profile image removed successfully")
       return true
     } catch (error) {
       console.error("Error in removeProfileImage:", error)

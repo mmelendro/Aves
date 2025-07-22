@@ -1,4 +1,6 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClientSupabaseClient } from "./supabase-client"
+import { bookingService } from "./booking-service"
+import { profileService } from "./profile-service"
 
 export interface ConnectionTestResult {
   success: boolean
@@ -11,10 +13,17 @@ export interface TestResults {
   environment: ConnectionTestResult
   database: ConnectionTestResult
   authentication: ConnectionTestResult
-  bookingPermissions: {
-    insert: ConnectionTestResult
-    select: ConnectionTestResult
-    cleanup: ConnectionTestResult
+  profileOperations: {
+    create: ConnectionTestResult
+    read: ConnectionTestResult
+    update: ConnectionTestResult
+    delete: ConnectionTestResult
+  }
+  bookingOperations: {
+    create: ConnectionTestResult
+    read: ConnectionTestResult
+    update: ConnectionTestResult
+    delete: ConnectionTestResult
   }
   storage: ConnectionTestResult
   summary: {
@@ -26,14 +35,7 @@ export interface TestResults {
 }
 
 class SupabaseConnectionTest {
-  private supabase: any
-
-  constructor() {
-    this.supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
-    )
-  }
+  private supabase = createClientSupabaseClient()
 
   async testEnvironmentVariables(): Promise<ConnectionTestResult> {
     console.log("🔧 Testing environment variables...")
@@ -69,7 +71,8 @@ class SupabaseConnectionTest {
     console.log("🗄️ Testing database connection...")
 
     try {
-      const { data, error } = await this.supabase.from("user_profiles").select("id").limit(1)
+      // Test connection with user_profiles table using user_id field
+      const { data, error } = await this.supabase.from("user_profiles").select("user_id").limit(1)
 
       if (error) {
         console.error("❌ Database connection failed:", error)
@@ -86,7 +89,7 @@ class SupabaseConnectionTest {
         success: true,
         message: "Database connection successful",
         timestamp: new Date().toISOString(),
-        details: { queryResult: data },
+        details: { queryResult: data, recordCount: data?.length || 0 },
       }
     } catch (error: any) {
       console.error("❌ Database connection error:", error)
@@ -142,151 +145,213 @@ class SupabaseConnectionTest {
     }
   }
 
-  async testBookingInsert(): Promise<ConnectionTestResult> {
-    console.log("📝 Testing booking INSERT permission...")
+  async testProfileOperations(): Promise<{
+    create: ConnectionTestResult
+    read: ConnectionTestResult
+    update: ConnectionTestResult
+    delete: ConnectionTestResult
+  }> {
+    console.log("👤 Testing profile CRUD operations...")
+
+    const results = {
+      create: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      read: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      update: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      delete: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+    }
 
     try {
-      const testBooking = {
-        tour_name: "Test Tour - Connection Test",
-        tour_date: new Date().toISOString().split("T")[0],
-        participants: 1,
-        total_price: 100.0,
-        status: "pending",
-        created_at: new Date().toISOString(),
-      }
+      // Test CREATE
+      console.log("📝 Testing profile CREATE...")
+      const {
+        data: { user },
+      } = await this.supabase.auth.getUser()
 
-      const { data, error } = await this.supabase.from("bookings").insert(testBooking).select().single()
-
-      if (error) {
-        console.error("❌ Booking INSERT failed:", error)
+      if (!user) {
+        const message = "Profile operations require authentication"
+        console.log("⚠️", message)
         return {
-          success: false,
-          message: `INSERT failed: ${error.message}`,
-          timestamp: new Date().toISOString(),
-          details: {
-            error: error.message,
-            code: error.code,
-            hint: error.hint,
-            testData: testBooking,
-          },
+          create: { success: false, message, timestamp: new Date().toISOString() },
+          read: { success: false, message, timestamp: new Date().toISOString() },
+          update: { success: false, message, timestamp: new Date().toISOString() },
+          delete: { success: false, message, timestamp: new Date().toISOString() },
         }
       }
 
-      console.log("✅ Booking INSERT successful:", data)
-      return {
-        success: true,
-        message: "INSERT operation successful",
-        timestamp: new Date().toISOString(),
-        details: { insertedRecord: data, testData: testBooking },
+      // CREATE test
+      const testProfile = await profileService.createUserProfile({
+        user_id: user.id,
+        full_name: "Test User - Connection Test",
+        phone_number: "+1234567890",
+      })
+
+      if (testProfile) {
+        console.log("✅ Profile CREATE successful")
+        results.create = {
+          success: true,
+          message: "Profile CREATE successful",
+          timestamp: new Date().toISOString(),
+          details: { profileId: testProfile.user_id },
+        }
+
+        // READ test
+        console.log("📖 Testing profile READ...")
+        const readProfile = await profileService.getCurrentUserProfile()
+        if (readProfile && readProfile.user_id === user.id) {
+          console.log("✅ Profile READ successful")
+          results.read = {
+            success: true,
+            message: "Profile READ successful",
+            timestamp: new Date().toISOString(),
+            details: { profileId: readProfile.user_id },
+          }
+
+          // UPDATE test
+          console.log("✏️ Testing profile UPDATE...")
+          const updatedProfile = await profileService.updateUserProfile({
+            full_name: "Updated Test User - Connection Test",
+          })
+          if (updatedProfile) {
+            console.log("✅ Profile UPDATE successful")
+            results.update = {
+              success: true,
+              message: "Profile UPDATE successful",
+              timestamp: new Date().toISOString(),
+              details: { profileId: updatedProfile.user_id },
+            }
+          }
+        }
+
+        // DELETE test
+        console.log("🗑️ Testing profile DELETE...")
+        const deleteSuccess = await profileService.deleteUserProfile()
+        if (deleteSuccess) {
+          console.log("✅ Profile DELETE successful")
+          results.delete = {
+            success: true,
+            message: "Profile DELETE successful",
+            timestamp: new Date().toISOString(),
+          }
+        }
       }
     } catch (error: any) {
-      console.error("❌ Booking INSERT error:", error)
-      return {
+      console.error("❌ Profile operations error:", error)
+      const errorMessage = `Profile operations error: ${error.message}`
+      const errorResult = {
         success: false,
-        message: `INSERT error: ${error.message}`,
+        message: errorMessage,
         timestamp: new Date().toISOString(),
         details: { error: error.message },
       }
+
+      if (results.create.success === false && results.create.message === "Not run") {
+        results.create = errorResult
+      }
     }
+
+    return results
   }
 
-  async testBookingSelect(insertedId?: string): Promise<ConnectionTestResult> {
-    console.log("🔍 Testing booking SELECT permission...")
+  async testBookingOperations(): Promise<{
+    create: ConnectionTestResult
+    read: ConnectionTestResult
+    update: ConnectionTestResult
+    delete: ConnectionTestResult
+  }> {
+    console.log("📅 Testing booking CRUD operations...")
+
+    const results = {
+      create: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      read: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      update: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      delete: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+    }
 
     try {
-      let query = this.supabase.from("bookings").select("*")
+      const {
+        data: { user },
+      } = await this.supabase.auth.getUser()
 
-      if (insertedId) {
-        query = query.eq("id", insertedId)
-      } else {
-        query = query.eq("tour_name", "Test Tour - Connection Test").limit(1)
-      }
-
-      const { data, error } = await query
-
-      if (error) {
-        console.error("❌ Booking SELECT failed:", error)
+      if (!user) {
+        const message = "Booking operations require authentication"
+        console.log("⚠️", message)
         return {
-          success: false,
-          message: `SELECT failed: ${error.message}`,
-          timestamp: new Date().toISOString(),
-          details: {
-            error: error.message,
-            code: error.code,
-            hint: error.hint,
-            searchCriteria: insertedId ? { id: insertedId } : { tour_name: "Test Tour - Connection Test" },
-          },
+          create: { success: false, message, timestamp: new Date().toISOString() },
+          read: { success: false, message, timestamp: new Date().toISOString() },
+          update: { success: false, message, timestamp: new Date().toISOString() },
+          delete: { success: false, message, timestamp: new Date().toISOString() },
         }
       }
 
-      const recordFound = data && data.length > 0
-      console.log(recordFound ? "✅ Booking SELECT successful:" : "⚠️ No records found:", data)
+      // CREATE test
+      console.log("📝 Testing booking CREATE...")
+      const testBooking = await bookingService.createTestBooking()
 
-      return {
-        success: true,
-        message: recordFound
-          ? "SELECT operation successful - record retrieved"
-          : "SELECT operation successful - no records found",
-        timestamp: new Date().toISOString(),
-        details: {
-          recordsFound: data?.length || 0,
-          retrievedData: data,
-          searchCriteria: insertedId ? { id: insertedId } : { tour_name: "Test Tour - Connection Test" },
-        },
-      }
-    } catch (error: any) {
-      console.error("❌ Booking SELECT error:", error)
-      return {
-        success: false,
-        message: `SELECT error: ${error.message}`,
-        timestamp: new Date().toISOString(),
-        details: { error: error.message },
-      }
-    }
-  }
-
-  async testBookingCleanup(): Promise<ConnectionTestResult> {
-    console.log("🧹 Testing booking cleanup (DELETE)...")
-
-    try {
-      const { data, error } = await this.supabase
-        .from("bookings")
-        .delete()
-        .eq("tour_name", "Test Tour - Connection Test")
-        .select()
-
-      if (error) {
-        console.error("❌ Booking DELETE failed:", error)
-        return {
-          success: false,
-          message: `DELETE failed: ${error.message}`,
+      if (testBooking) {
+        console.log("✅ Booking CREATE successful")
+        results.create = {
+          success: true,
+          message: "Booking CREATE successful",
           timestamp: new Date().toISOString(),
-          details: {
-            error: error.message,
-            code: error.code,
-            hint: error.hint,
-          },
+          details: { bookingId: testBooking.id },
+        }
+
+        // READ test
+        console.log("📖 Testing booking READ...")
+        const readBooking = await bookingService.getBookingById(testBooking.id)
+        if (readBooking && readBooking.id === testBooking.id) {
+          console.log("✅ Booking READ successful")
+          results.read = {
+            success: true,
+            message: "Booking READ successful",
+            timestamp: new Date().toISOString(),
+            details: { bookingId: readBooking.id },
+          }
+
+          // UPDATE test
+          console.log("✏️ Testing booking UPDATE...")
+          const updatedBooking = await bookingService.updateBooking(testBooking.id, {
+            special_requests: "Updated test booking - Connection Test",
+          })
+          if (updatedBooking) {
+            console.log("✅ Booking UPDATE successful")
+            results.update = {
+              success: true,
+              message: "Booking UPDATE successful",
+              timestamp: new Date().toISOString(),
+              details: { bookingId: updatedBooking.id },
+            }
+          }
+        }
+
+        // DELETE test
+        console.log("🗑️ Testing booking DELETE...")
+        const deleteSuccess = await bookingService.deleteBooking(testBooking.id)
+        if (deleteSuccess) {
+          console.log("✅ Booking DELETE successful")
+          results.delete = {
+            success: true,
+            message: "Booking DELETE successful",
+            timestamp: new Date().toISOString(),
+          }
         }
       }
-
-      const deletedCount = data?.length || 0
-      console.log(`✅ Booking cleanup successful - ${deletedCount} records deleted`)
-
-      return {
-        success: true,
-        message: `Cleanup successful - ${deletedCount} test records deleted`,
-        timestamp: new Date().toISOString(),
-        details: { deletedRecords: deletedCount, deletedData: data },
-      }
     } catch (error: any) {
-      console.error("❌ Booking cleanup error:", error)
-      return {
+      console.error("❌ Booking operations error:", error)
+      const errorMessage = `Booking operations error: ${error.message}`
+      const errorResult = {
         success: false,
-        message: `Cleanup error: ${error.message}`,
+        message: errorMessage,
         timestamp: new Date().toISOString(),
         details: { error: error.message },
       }
+
+      if (results.create.success === false && results.create.message === "Not run") {
+        results.create = errorResult
+      }
     }
+
+    return results
   }
 
   async testStorageAccess(): Promise<ConnectionTestResult> {
@@ -330,10 +395,17 @@ class SupabaseConnectionTest {
       environment: await this.testEnvironmentVariables(),
       database: await this.testDatabaseConnection(),
       authentication: await this.testAuthentication(),
-      bookingPermissions: {
-        insert: { success: false, message: "Not run", timestamp: new Date().toISOString() },
-        select: { success: false, message: "Not run", timestamp: new Date().toISOString() },
-        cleanup: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      profileOperations: {
+        create: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+        read: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+        update: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+        delete: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+      },
+      bookingOperations: {
+        create: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+        read: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+        update: { success: false, message: "Not run", timestamp: new Date().toISOString() },
+        delete: { success: false, message: "Not run", timestamp: new Date().toISOString() },
       },
       storage: await this.testStorageAccess(),
       summary: {
@@ -344,18 +416,10 @@ class SupabaseConnectionTest {
       },
     }
 
-    // Only run booking tests if basic connection works
+    // Only run CRUD tests if basic connection works
     if (results.database.success) {
-      results.bookingPermissions.insert = await this.testBookingInsert()
-
-      // Get the inserted record ID for SELECT test
-      let insertedId: string | undefined
-      if (results.bookingPermissions.insert.success && results.bookingPermissions.insert.details?.insertedRecord?.id) {
-        insertedId = results.bookingPermissions.insert.details.insertedRecord.id
-      }
-
-      results.bookingPermissions.select = await this.testBookingSelect(insertedId)
-      results.bookingPermissions.cleanup = await this.testBookingCleanup()
+      results.profileOperations = await this.testProfileOperations()
+      results.bookingOperations = await this.testBookingOperations()
     }
 
     // Calculate summary
@@ -363,9 +427,14 @@ class SupabaseConnectionTest {
       results.environment,
       results.database,
       results.authentication,
-      results.bookingPermissions.insert,
-      results.bookingPermissions.select,
-      results.bookingPermissions.cleanup,
+      results.profileOperations.create,
+      results.profileOperations.read,
+      results.profileOperations.update,
+      results.profileOperations.delete,
+      results.bookingOperations.create,
+      results.bookingOperations.read,
+      results.bookingOperations.update,
+      results.bookingOperations.delete,
       results.storage,
     ]
 

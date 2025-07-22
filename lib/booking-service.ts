@@ -1,251 +1,230 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClientSupabaseClient } from "./supabase-client"
+import type { Booking, BookingInsert, BookingUpdate } from "./supabase"
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+export class BookingService {
+  private supabase = createClientSupabaseClient()
 
-export interface Booking {
-  id?: string
-  user_id?: string
-  tour_name: string
-  tour_date: string
-  participants: number
-  total_price: number
-  status: "pending" | "confirmed" | "cancelled"
-  special_requests?: string
-  dietary_requirements?: string
-  emergency_contact?: string
-  created_at?: string
-  updated_at?: string
-}
-
-export interface BookingResponse {
-  success: boolean
-  data?: Booking | Booking[]
-  error?: string
-  message?: string
-}
-
-class BookingService {
-  async createBooking(bookingData: Omit<Booking, "id" | "created_at" | "updated_at">): Promise<BookingResponse> {
+  async getUserBookings(): Promise<Booking[]> {
     try {
-      console.log("📝 Creating new booking:", bookingData)
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
 
-      const { data, error } = await supabase
+      if (authError || !user) {
+        console.log("No authenticated user found:", authError?.message)
+        return []
+      }
+
+      console.log("Fetching bookings for user:", user.id)
+
+      const { data: bookings, error } = await this.supabase
+        .from("bookings")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+
+      if (error) {
+        console.error("Error fetching bookings:", error)
+        return []
+      }
+
+      console.log(`Fetched ${bookings?.length || 0} bookings for user:`, user.id)
+      return bookings || []
+    } catch (error) {
+      console.error("Error in getUserBookings:", error)
+      return []
+    }
+  }
+
+  async getBookingById(bookingId: string): Promise<Booking | null> {
+    try {
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
+
+      if (authError || !user) {
+        console.log("No authenticated user found:", authError?.message)
+        return null
+      }
+
+      console.log("Fetching booking:", bookingId, "for user:", user.id)
+
+      const { data: booking, error } = await this.supabase
+        .from("bookings")
+        .select("*")
+        .eq("id", bookingId)
+        .eq("user_id", user.id)
+        .single()
+
+      if (error) {
+        if (error.code === "PGRST116") {
+          console.log("Booking not found:", bookingId)
+          return null
+        }
+        console.error("Error fetching booking:", error)
+        return null
+      }
+
+      console.log("Booking fetched successfully:", booking.id)
+      return booking
+    } catch (error) {
+      console.error("Error in getBookingById:", error)
+      return null
+    }
+  }
+
+  async createBooking(bookingData: Omit<BookingInsert, "user_id">): Promise<Booking | null> {
+    try {
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
+
+      if (authError || !user) {
+        console.error("No authenticated user found for booking creation:", authError?.message)
+        return null
+      }
+
+      console.log("Creating booking for user:", user.id)
+
+      const { data: booking, error } = await this.supabase
         .from("bookings")
         .insert({
           ...bookingData,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
+          user_id: user.id,
         })
         .select()
         .single()
 
       if (error) {
-        console.error("❌ Booking creation failed:", error)
-        return {
-          success: false,
-          error: error.message,
-          message: `Failed to create booking: ${error.message}`,
-        }
+        console.error("Error creating booking:", error)
+        throw error
       }
 
-      console.log("✅ Booking created successfully:", data)
-      return {
-        success: true,
-        data,
-        message: "Booking created successfully",
-      }
-    } catch (error: any) {
-      console.error("❌ Booking creation error:", error)
-      return {
-        success: false,
-        error: error.message,
-        message: `Booking creation error: ${error.message}`,
-      }
+      console.log("Booking created successfully:", booking.id)
+      return booking
+    } catch (error) {
+      console.error("Error in createBooking:", error)
+      throw error
     }
   }
 
-  async getBooking(bookingId: string): Promise<BookingResponse> {
+  async updateBooking(bookingId: string, updates: BookingUpdate): Promise<Booking | null> {
     try {
-      console.log("🔍 Retrieving booking:", bookingId)
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
 
-      const { data, error } = await supabase.from("bookings").select("*").eq("id", bookingId).single()
-
-      if (error) {
-        console.error("❌ Booking retrieval failed:", error)
-        return {
-          success: false,
-          error: error.message,
-          message: `Failed to retrieve booking: ${error.message}`,
-        }
+      if (authError || !user) {
+        console.error("No authenticated user found for booking update:", authError?.message)
+        return null
       }
 
-      console.log("✅ Booking retrieved successfully:", data)
-      return {
-        success: true,
-        data,
-        message: "Booking retrieved successfully",
-      }
-    } catch (error: any) {
-      console.error("❌ Booking retrieval error:", error)
-      return {
-        success: false,
-        error: error.message,
-        message: `Booking retrieval error: ${error.message}`,
-      }
-    }
-  }
+      console.log("Updating booking:", bookingId, "for user:", user.id)
 
-  async getUserBookings(userId: string): Promise<BookingResponse> {
-    try {
-      console.log("📋 Retrieving user bookings for:", userId)
-
-      const { data, error } = await supabase
-        .from("bookings")
-        .select("*")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        console.error("❌ User bookings retrieval failed:", error)
-        return {
-          success: false,
-          error: error.message,
-          message: `Failed to retrieve user bookings: ${error.message}`,
-        }
-      }
-
-      console.log(`✅ Retrieved ${data?.length || 0} bookings for user`)
-      return {
-        success: true,
-        data,
-        message: `Retrieved ${data?.length || 0} bookings`,
-      }
-    } catch (error: any) {
-      console.error("❌ User bookings retrieval error:", error)
-      return {
-        success: false,
-        error: error.message,
-        message: `User bookings retrieval error: ${error.message}`,
-      }
-    }
-  }
-
-  async updateBooking(bookingId: string, updates: Partial<Booking>): Promise<BookingResponse> {
-    try {
-      console.log("📝 Updating booking:", bookingId, updates)
-
-      const { data, error } = await supabase
+      const { data: booking, error } = await this.supabase
         .from("bookings")
         .update({
           ...updates,
           updated_at: new Date().toISOString(),
         })
         .eq("id", bookingId)
+        .eq("user_id", user.id)
         .select()
         .single()
 
       if (error) {
-        console.error("❌ Booking update failed:", error)
-        return {
-          success: false,
-          error: error.message,
-          message: `Failed to update booking: ${error.message}`,
-        }
+        console.error("Error updating booking:", error)
+        throw error
       }
 
-      console.log("✅ Booking updated successfully:", data)
-      return {
-        success: true,
-        data,
-        message: "Booking updated successfully",
-      }
-    } catch (error: any) {
-      console.error("❌ Booking update error:", error)
-      return {
-        success: false,
-        error: error.message,
-        message: `Booking update error: ${error.message}`,
-      }
+      console.log("Booking updated successfully:", booking.id)
+      return booking
+    } catch (error) {
+      console.error("Error in updateBooking:", error)
+      throw error
     }
   }
 
-  async deleteBooking(bookingId: string): Promise<BookingResponse> {
+  async deleteBooking(bookingId: string): Promise<boolean> {
     try {
-      console.log("🗑️ Deleting booking:", bookingId)
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
 
-      const { data, error } = await supabase.from("bookings").delete().eq("id", bookingId).select().single()
+      if (authError || !user) {
+        console.error("No authenticated user found for booking deletion:", authError?.message)
+        return false
+      }
+
+      console.log("Deleting booking:", bookingId, "for user:", user.id)
+
+      const { error } = await this.supabase.from("bookings").delete().eq("id", bookingId).eq("user_id", user.id)
 
       if (error) {
-        console.error("❌ Booking deletion failed:", error)
-        return {
-          success: false,
-          error: error.message,
-          message: `Failed to delete booking: ${error.message}`,
-        }
+        console.error("Error deleting booking:", error)
+        return false
       }
 
-      console.log("✅ Booking deleted successfully:", data)
-      return {
-        success: true,
-        data,
-        message: "Booking deleted successfully",
-      }
-    } catch (error: any) {
-      console.error("❌ Booking deletion error:", error)
-      return {
-        success: false,
-        error: error.message,
-        message: `Booking deletion error: ${error.message}`,
-      }
+      console.log("Booking deleted successfully:", bookingId)
+      return true
+    } catch (error) {
+      console.error("Error in deleteBooking:", error)
+      return false
     }
   }
 
-  async testBookingPermissions(): Promise<{
-    insert: BookingResponse
-    select: BookingResponse
-    cleanup: BookingResponse
-  }> {
-    console.log("🧪 Testing booking table permissions...")
-
-    // Test INSERT
-    const testBooking: Omit<Booking, "id" | "created_at" | "updated_at"> = {
-      tour_name: "Test Tour - Permission Check",
-      tour_date: new Date().toISOString().split("T")[0],
-      participants: 1,
-      total_price: 100.0,
-      status: "pending",
+  async createTestBooking(): Promise<Booking | null> {
+    const testBookingData = {
+      tour_name: "Test Sierra Nevada Adventure - Connection Test",
+      tour_type: "adventure",
+      start_date: "2024-06-15",
+      end_date: "2024-06-22",
+      participants: 2,
+      total_amount: 2500.0,
+      status: "test" as const,
+      special_requests: "This is a test booking for database connection verification",
     }
 
-    const insertResult = await this.createBooking(testBooking)
+    return await this.createBooking(testBookingData)
+  }
 
-    // Test SELECT
-    let selectResult: BookingResponse
-    if (insertResult.success && insertResult.data && "id" in insertResult.data) {
-      selectResult = await this.getBooking(insertResult.data.id!)
-    } else {
-      selectResult = {
-        success: false,
-        error: "No booking ID to test SELECT",
-        message: "SELECT test skipped - INSERT failed",
+  async cleanupTestBookings(): Promise<number> {
+    try {
+      const {
+        data: { user },
+        error: authError,
+      } = await this.supabase.auth.getUser()
+
+      if (authError || !user) {
+        console.error("No authenticated user found for cleanup:", authError?.message)
+        return 0
       }
-    }
 
-    // Test cleanup (DELETE)
-    let cleanupResult: BookingResponse
-    if (insertResult.success && insertResult.data && "id" in insertResult.data) {
-      cleanupResult = await this.deleteBooking(insertResult.data.id!)
-    } else {
-      cleanupResult = {
-        success: false,
-        error: "No booking ID to cleanup",
-        message: "Cleanup test skipped - INSERT failed",
+      console.log("Cleaning up test bookings for user:", user.id)
+
+      const { data: deletedBookings, error } = await this.supabase
+        .from("bookings")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("status", "test")
+        .select()
+
+      if (error) {
+        console.error("Error cleaning up test bookings:", error)
+        return 0
       }
-    }
 
-    return {
-      insert: insertResult,
-      select: selectResult,
-      cleanup: cleanupResult,
+      const deletedCount = deletedBookings?.length || 0
+      console.log(`Cleaned up ${deletedCount} test bookings for user:`, user.id)
+      return deletedCount
+    } catch (error) {
+      console.error("Error in cleanupTestBookings:", error)
+      return 0
     }
   }
 }

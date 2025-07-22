@@ -1,339 +1,412 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { CheckCircle, XCircle, AlertCircle, ChevronDown, Database, Shield, Cloud, User, Loader2 } from "lucide-react"
-import { supabaseConnectionTest, type TestResults } from "@/lib/supabase-connection-test"
+import {
+  Database,
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  Loader2,
+  Play,
+  RefreshCw,
+  ChevronDown,
+  ChevronRight,
+  User,
+  Calendar,
+  Cloud,
+  Settings,
+  Shield,
+} from "lucide-react"
+import { supabaseConnectionTest, type TestResults, type ConnectionTestResult } from "@/lib/supabase-connection-test"
+import { toast } from "sonner"
+
+interface TestStatusProps {
+  result: ConnectionTestResult
+  title: string
+  description?: string
+}
+
+function TestStatus({ result, title, description }: TestStatusProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const getStatusIcon = () => {
+    if (result.message === "Not run") {
+      return <AlertTriangle className="h-4 w-4 text-gray-400" />
+    }
+    return result.success ? (
+      <CheckCircle className="h-4 w-4 text-green-600" />
+    ) : (
+      <XCircle className="h-4 w-4 text-red-600" />
+    )
+  }
+
+  const getStatusColor = () => {
+    if (result.message === "Not run") return "bg-gray-50 border-gray-200"
+    return result.success ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+  }
+
+  const getStatusText = () => {
+    if (result.message === "Not run") return "Not Run"
+    return result.success ? "Passed" : "Failed"
+  }
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger asChild>
+        <div className={`p-4 rounded-lg border cursor-pointer transition-colors hover:bg-gray-50 ${getStatusColor()}`}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              {getStatusIcon()}
+              <div>
+                <h4 className="font-medium text-gray-900">{title}</h4>
+                {description && <p className="text-sm text-gray-600">{description}</p>}
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Badge variant={result.success ? "default" : "destructive"}>{getStatusText()}</Badge>
+              {isOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+            </div>
+          </div>
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent className="mt-2">
+        <div className="bg-gray-50 p-4 rounded-lg border">
+          <div className="space-y-2">
+            <div>
+              <span className="font-medium text-gray-700">Message:</span>
+              <span className="ml-2 text-gray-900">{result.message}</span>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700">Timestamp:</span>
+              <span className="ml-2 text-gray-600">{new Date(result.timestamp).toLocaleString()}</span>
+            </div>
+            {result.details && (
+              <div>
+                <span className="font-medium text-gray-700">Details:</span>
+                <pre className="mt-1 p-2 bg-white rounded border text-xs overflow-auto max-h-40">
+                  {JSON.stringify(result.details, null, 2)}
+                </pre>
+              </div>
+            )}
+          </div>
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  )
+}
 
 export function DatabaseConnectionTest() {
+  const [testResults, setTestResults] = useState<TestResults | null>(null)
   const [isRunning, setIsRunning] = useState(false)
-  const [results, setResults] = useState<TestResults | null>(null)
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({})
+  const [hasRun, setHasRun] = useState(false)
 
   const runTests = async () => {
     setIsRunning(true)
-    setResults(null)
+    setHasRun(false)
+    toast.info("Starting comprehensive database tests...")
 
     try {
-      console.log("🚀 Starting comprehensive database tests...")
-      const testResults = await supabaseConnectionTest.runFullConnectionTest()
-      setResults(testResults)
-      console.log("✅ All tests completed")
+      const results = await supabaseConnectionTest.runFullConnectionTest()
+      setTestResults(results)
+      setHasRun(true)
+
+      if (results.summary.overallSuccess) {
+        toast.success(`All ${results.summary.totalTests} tests passed successfully!`)
+      } else {
+        toast.error(`${results.summary.failedTests} of ${results.summary.totalTests} tests failed`)
+      }
     } catch (error) {
-      console.error("❌ Test execution error:", error)
+      console.error("Error running tests:", error)
+      toast.error("Failed to run tests. Check console for details.")
     } finally {
       setIsRunning(false)
     }
   }
 
-  const toggleSection = (section: string) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }))
+  const resetTests = () => {
+    setTestResults(null)
+    setHasRun(false)
+    toast.info("Tests reset. Ready to run again.")
   }
 
-  const getStatusIcon = (success: boolean) => {
-    return success ? <CheckCircle className="h-5 w-5 text-green-500" /> : <XCircle className="h-5 w-5 text-red-500" />
-  }
-
-  const getStatusBadge = (success: boolean) => {
-    return (
-      <Badge variant={success ? "default" : "destructive"} className={success ? "bg-green-500" : ""}>
-        {success ? "PASSED" : "FAILED"}
-      </Badge>
-    )
-  }
-
-  const formatTimestamp = (timestamp: string) => {
-    return new Date(timestamp).toLocaleTimeString()
-  }
-
-  const TestResultCard = ({
-    title,
-    result,
-    icon,
-  }: {
-    title: string
-    result: { success: boolean; message: string; timestamp: string; details?: any }
-    icon: React.ReactNode
-  }) => (
-    <Card className="mb-4">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {icon}
-            <CardTitle className="text-lg">{title}</CardTitle>
-          </div>
-          <div className="flex items-center gap-2">
-            {getStatusIcon(result.success)}
-            {getStatusBadge(result.success)}
-          </div>
-        </div>
-        <CardDescription>
-          {result.message} • {formatTimestamp(result.timestamp)}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Collapsible open={expandedSections[title]} onOpenChange={() => toggleSection(title)}>
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" className="w-full justify-between p-0">
-              <span>View Details</span>
-              <ChevronDown className={`h-4 w-4 transition-transform ${expandedSections[title] ? "rotate-180" : ""}`} />
-            </Button>
-          </CollapsibleTrigger>
-          <CollapsibleContent className="mt-4">
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <pre className="text-sm overflow-auto max-h-64 whitespace-pre-wrap">
-                {JSON.stringify(result.details, null, 2)}
-              </pre>
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
-      </CardContent>
-    </Card>
-  )
-
-  const BookingPermissionsCard = ({ permissions }: { permissions: TestResults["bookingPermissions"] }) => (
-    <Card className="mb-4">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Shield className="h-5 w-5" />
-            <CardTitle className="text-lg">Booking Table Permissions</CardTitle>
-          </div>
-        </div>
-        <CardDescription>Testing INSERT, SELECT, and DELETE operations on bookings table</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="flex flex-col p-3 border rounded-lg">
-            <div className="flex items-center justify-between mb-2">
-              <div className="font-medium">INSERT Test</div>
-              <div className="flex items-center gap-2">
-                {getStatusIcon(permissions.insert.success)}
-                {getStatusBadge(permissions.insert.success)}
-              </div>
-            </div>
-            <div className="text-sm text-gray-600">{permissions.insert.message}</div>
-            <div className="text-xs text-gray-500 mt-1">{formatTimestamp(permissions.insert.timestamp)}</div>
-          </div>
-
-          <div className="flex flex-col p-3 border rounded-lg">
-            <div className="flex items-center justify-between mb-2">
-              <div className="font-medium">SELECT Test</div>
-              <div className="flex items-center gap-2">
-                {getStatusIcon(permissions.select.success)}
-                {getStatusBadge(permissions.select.success)}
-              </div>
-            </div>
-            <div className="text-sm text-gray-600">{permissions.select.message}</div>
-            <div className="text-xs text-gray-500 mt-1">{formatTimestamp(permissions.select.timestamp)}</div>
-          </div>
-
-          <div className="flex flex-col p-3 border rounded-lg">
-            <div className="flex items-center justify-between mb-2">
-              <div className="font-medium">Cleanup Test</div>
-              <div className="flex items-center gap-2">
-                {getStatusIcon(permissions.cleanup.success)}
-                {getStatusBadge(permissions.cleanup.success)}
-              </div>
-            </div>
-            <div className="text-sm text-gray-600">{permissions.cleanup.message}</div>
-            <div className="text-xs text-gray-500 mt-1">{formatTimestamp(permissions.cleanup.timestamp)}</div>
-          </div>
-        </div>
-
-        <Collapsible
-          open={expandedSections["booking-permissions"]}
-          onOpenChange={() => toggleSection("booking-permissions")}
-        >
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" className="w-full justify-between p-0">
-              <span>View Detailed Results</span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${expandedSections["booking-permissions"] ? "rotate-180" : ""}`}
-              />
-            </Button>
-          </CollapsibleTrigger>
-          <CollapsibleContent className="mt-4 space-y-4">
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-2">INSERT Operation Details</h4>
-              <pre className="text-sm overflow-auto max-h-32 whitespace-pre-wrap">
-                {JSON.stringify(permissions.insert.details, null, 2)}
-              </pre>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-2">SELECT Operation Details</h4>
-              <pre className="text-sm overflow-auto max-h-32 whitespace-pre-wrap">
-                {JSON.stringify(permissions.select.details, null, 2)}
-              </pre>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-2">Cleanup Operation Details</h4>
-              <pre className="text-sm overflow-auto max-h-32 whitespace-pre-wrap">
-                {JSON.stringify(permissions.cleanup.details, null, 2)}
-              </pre>
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
-      </CardContent>
-    </Card>
-  )
+  useEffect(() => {
+    // Auto-run tests on component mount
+    runTests()
+  }, [])
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Supabase Database Connection Test</h1>
-        <p className="text-gray-600">Comprehensive testing of database connectivity, permissions, and operations</p>
+    <div className="max-w-6xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="text-center space-y-4">
+        <div className="flex items-center justify-center gap-2">
+          <Database className="h-8 w-8 text-emerald-600" />
+          <h1 className="text-4xl font-bold text-gray-900">Database Connection Test</h1>
+        </div>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          Comprehensive testing of Supabase connectivity, authentication, and CRUD operations with corrected schema
+          using user_id fields
+        </p>
       </div>
 
-      <div className="mb-6">
-        <Button onClick={runTests} disabled={isRunning} size="lg" className="w-full md:w-auto">
+      {/* Control Buttons */}
+      <div className="flex justify-center gap-4">
+        <Button onClick={runTests} disabled={isRunning} size="lg" className="min-w-32">
           {isRunning ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Running Tests...
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Running...
             </>
           ) : (
-            "Run Connection Tests"
+            <>
+              <Play className="h-4 w-4 mr-2" />
+              Run Tests
+            </>
           )}
+        </Button>
+        <Button onClick={resetTests} variant="outline" size="lg" disabled={isRunning}>
+          <RefreshCw className="h-4 w-4 mr-2" />
+          Reset
         </Button>
       </div>
 
-      {results && (
-        <div className="space-y-6">
-          {/* Summary Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertCircle className="h-5 w-5" />
-                Test Summary
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="text-center p-4 bg-blue-50 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{results.summary.totalTests}</div>
-                  <div className="text-sm text-blue-800">Total Tests</div>
-                </div>
-                <div className="text-center p-4 bg-green-50 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">{results.summary.passedTests}</div>
-                  <div className="text-sm text-green-800">Passed</div>
-                </div>
-                <div className="text-center p-4 bg-red-50 rounded-lg">
-                  <div className="text-2xl font-bold text-red-600">{results.summary.failedTests}</div>
-                  <div className="text-sm text-red-800">Failed</div>
-                </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-600">
-                    {Math.round((results.summary.passedTests / results.summary.totalTests) * 100)}%
-                  </div>
-                  <div className="text-sm text-gray-800">Success Rate</div>
-                </div>
+      {/* Test Results Summary */}
+      {testResults && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5" />
+              Test Summary
+            </CardTitle>
+            <CardDescription>Overall test execution results</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-gray-900">{testResults.summary.totalTests}</div>
+                <div className="text-sm text-gray-600">Total Tests</div>
               </div>
-
-              {results.summary.overallSuccess ? (
-                <Alert className="border-green-200 bg-green-50">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <AlertTitle className="text-green-800">All Tests Passed!</AlertTitle>
-                  <AlertDescription className="text-green-700">
-                    Your Supabase configuration is working correctly. All database operations are functioning as
-                    expected.
-                  </AlertDescription>
-                </Alert>
-              ) : (
-                <Alert className="border-red-200 bg-red-50">
-                  <XCircle className="h-4 w-4 text-red-500" />
-                  <AlertTitle className="text-red-800">Some Tests Failed</AlertTitle>
-                  <AlertDescription className="text-red-700">
-                    {results.summary.failedTests} of {results.summary.totalTests} tests failed. Please check the
-                    detailed results below to identify and fix issues.
-                  </AlertDescription>
-                </Alert>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Detailed Results */}
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="connection">Connection</TabsTrigger>
-              <TabsTrigger value="permissions">Permissions</TabsTrigger>
-              <TabsTrigger value="storage">Storage</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="overview" className="space-y-4">
-              <TestResultCard
-                title="Environment Variables"
-                result={results.environment}
-                icon={<Database className="h-5 w-5" />}
-              />
-              <TestResultCard
-                title="Database Connection"
-                result={results.database}
-                icon={<Database className="h-5 w-5" />}
-              />
-              <TestResultCard
-                title="Authentication Status"
-                result={results.authentication}
-                icon={<User className="h-5 w-5" />}
-              />
-              <TestResultCard title="Storage Access" result={results.storage} icon={<Cloud className="h-5 w-5" />} />
-            </TabsContent>
-
-            <TabsContent value="connection" className="space-y-4">
-              <TestResultCard
-                title="Environment Configuration"
-                result={results.environment}
-                icon={<Database className="h-5 w-5" />}
-              />
-              <TestResultCard
-                title="Database Connectivity"
-                result={results.database}
-                icon={<Database className="h-5 w-5" />}
-              />
-            </TabsContent>
-
-            <TabsContent value="permissions" className="space-y-4">
-              <TestResultCard
-                title="User Authentication"
-                result={results.authentication}
-                icon={<User className="h-5 w-5" />}
-              />
-              <BookingPermissionsCard permissions={results.bookingPermissions} />
-            </TabsContent>
-
-            <TabsContent value="storage" className="space-y-4">
-              <TestResultCard
-                title="Storage Bucket Access"
-                result={results.storage}
-                icon={<Cloud className="h-5 w-5" />}
-              />
-            </TabsContent>
-          </Tabs>
-        </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600">{testResults.summary.passedTests}</div>
+                <div className="text-sm text-gray-600">Passed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-600">{testResults.summary.failedTests}</div>
+                <div className="text-sm text-gray-600">Failed</div>
+              </div>
+              <div className="text-center">
+                <div
+                  className={`text-2xl font-bold ${testResults.summary.overallSuccess ? "text-green-600" : "text-red-600"}`}
+                >
+                  {testResults.summary.overallSuccess ? "✓" : "✗"}
+                </div>
+                <div className="text-sm text-gray-600">Status</div>
+              </div>
+            </div>
+            {testResults.summary.overallSuccess ? (
+              <Alert className="mt-4 border-green-200 bg-green-50">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800">
+                  All database operations are working correctly with the updated schema using user_id fields!
+                </AlertDescription>
+              </Alert>
+            ) : (
+              <Alert className="mt-4 border-red-200 bg-red-50">
+                <XCircle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-800">
+                  Some tests failed. Check the detailed results below and console logs for debugging information.
+                </AlertDescription>
+              </Alert>
+            )}
+          </CardContent>
+        </Card>
       )}
 
-      {isRunning && (
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-            <p className="text-gray-600">Running comprehensive database tests...</p>
-            <p className="text-sm text-gray-500 mt-2">This may take a few moments...</p>
-          </div>
-        </div>
+      {/* Detailed Test Results */}
+      {testResults && (
+        <Tabs defaultValue="basic" className="space-y-4">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="profiles">Profiles</TabsTrigger>
+            <TabsTrigger value="bookings">Bookings</TabsTrigger>
+            <TabsTrigger value="storage">Storage</TabsTrigger>
+            <TabsTrigger value="raw">Raw Data</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="basic" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="h-5 w-5" />
+                  Basic Connectivity Tests
+                </CardTitle>
+                <CardDescription>Environment, database connection, and authentication tests</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TestStatus
+                  result={testResults.environment}
+                  title="Environment Variables"
+                  description="Supabase URL and API key configuration"
+                />
+                <TestStatus
+                  result={testResults.database}
+                  title="Database Connection"
+                  description="Basic connectivity to Supabase database using user_id field"
+                />
+                <TestStatus
+                  result={testResults.authentication}
+                  title="Authentication Status"
+                  description="User session and authentication state"
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="profiles" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="h-5 w-5" />
+                  Profile CRUD Operations
+                </CardTitle>
+                <CardDescription>Create, Read, Update, Delete operations on user_profiles table</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TestStatus
+                  result={testResults.profileOperations.create}
+                  title="Create Profile"
+                  description="Insert new profile record with user_id"
+                />
+                <TestStatus
+                  result={testResults.profileOperations.read}
+                  title="Read Profile"
+                  description="Select profile record by user_id"
+                />
+                <TestStatus
+                  result={testResults.profileOperations.update}
+                  title="Update Profile"
+                  description="Update profile record using user_id"
+                />
+                <TestStatus
+                  result={testResults.profileOperations.delete}
+                  title="Delete Profile"
+                  description="Delete profile record by user_id"
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="bookings" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5" />
+                  Booking CRUD Operations
+                </CardTitle>
+                <CardDescription>Create, Read, Update, Delete operations on bookings table</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TestStatus
+                  result={testResults.bookingOperations.create}
+                  title="Create Booking"
+                  description="Insert new booking record with user_id reference"
+                />
+                <TestStatus
+                  result={testResults.bookingOperations.read}
+                  title="Read Booking"
+                  description="Select booking record by id and user_id"
+                />
+                <TestStatus
+                  result={testResults.bookingOperations.update}
+                  title="Update Booking"
+                  description="Update booking record using id and user_id"
+                />
+                <TestStatus
+                  result={testResults.bookingOperations.delete}
+                  title="Delete Booking"
+                  description="Delete booking record by id and user_id"
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="storage" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Cloud className="h-5 w-5" />
+                  Storage Access Test
+                </CardTitle>
+                <CardDescription>Supabase storage bucket access and permissions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <TestStatus
+                  result={testResults.storage}
+                  title="Storage Access"
+                  description="List storage buckets and verify permissions"
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="raw" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Raw Test Data</CardTitle>
+                <CardDescription>Complete test results in JSON format for debugging</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <pre className="bg-gray-50 p-4 rounded-lg text-xs overflow-auto max-h-96 border">
+                  {JSON.stringify(testResults, null, 2)}
+                </pre>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       )}
+
+      {/* Loading State */}
+      {isRunning && !testResults && (
+        <Card>
+          <CardContent className="flex items-center justify-center py-12">
+            <div className="text-center space-y-4">
+              <Loader2 className="h-8 w-8 animate-spin mx-auto text-emerald-600" />
+              <div>
+                <h3 className="text-lg font-medium text-gray-900">Running Database Tests</h3>
+                <p className="text-gray-600">Testing connectivity, authentication, and CRUD operations...</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Instructions */}
+      <Card className="bg-blue-50 border-blue-200">
+        <CardHeader>
+          <CardTitle className="text-blue-900">Testing Instructions</CardTitle>
+        </CardHeader>
+        <CardContent className="text-blue-800 space-y-2">
+          <p>
+            <strong>Schema Update:</strong> All queries now use <code>user_id</code> instead of <code>id</code> for the
+            user_profiles table primary key.
+          </p>
+          <p>
+            <strong>Authentication:</strong> Some tests require user authentication. Sign in to test full CRUD
+            operations.
+          </p>
+          <p>
+            <strong>Console Logs:</strong> Open browser DevTools to see detailed operation logs and error messages.
+          </p>
+          <p>
+            <strong>Test Data:</strong> All test records are automatically cleaned up after testing.
+          </p>
+        </CardContent>
+      </Card>
     </div>
   )
 }
-
-// Named export as required
