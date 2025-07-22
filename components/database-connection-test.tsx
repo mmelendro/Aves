@@ -22,6 +22,8 @@ import {
   Cloud,
   Settings,
   Shield,
+  FileText,
+  Copy,
 } from "lucide-react"
 import { supabaseConnectionTest, type TestResults, type ConnectionTestResult } from "@/lib/supabase-connection-test"
 import { toast } from "sonner"
@@ -56,6 +58,11 @@ function TestStatus({ result, title, description }: TestStatusProps) {
     return result.success ? "Passed" : "Failed"
   }
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    toast.success("Copied to clipboard!")
+  }
+
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger asChild>
@@ -88,9 +95,33 @@ function TestStatus({ result, title, description }: TestStatusProps) {
             </div>
             {result.details && (
               <div>
-                <span className="font-medium text-gray-700">Details:</span>
-                <pre className="mt-1 p-2 bg-white rounded border text-xs overflow-auto max-h-40">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-medium text-gray-700">Details:</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => copyToClipboard(JSON.stringify(result.details, null, 2))}
+                  >
+                    <Copy className="h-3 w-3 mr-1" />
+                    Copy
+                  </Button>
+                </div>
+                <pre className="p-2 bg-white rounded border text-xs overflow-auto max-h-40">
                   {JSON.stringify(result.details, null, 2)}
+                </pre>
+              </div>
+            )}
+            {result.details?.sqlScript && (
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-medium text-gray-700">SQL Script to Fix:</span>
+                  <Button variant="ghost" size="sm" onClick={() => copyToClipboard(result.details.sqlScript)}>
+                    <Copy className="h-3 w-3 mr-1" />
+                    Copy SQL
+                  </Button>
+                </div>
+                <pre className="p-2 bg-blue-50 rounded border text-xs overflow-auto max-h-60 border-blue-200">
+                  {result.details.sqlScript}
                 </pre>
               </div>
             )}
@@ -149,8 +180,7 @@ export function DatabaseConnectionTest() {
           <h1 className="text-4xl font-bold text-gray-900">Database Connection Test</h1>
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Comprehensive testing of Supabase connectivity, authentication, and CRUD operations with corrected schema
-          using user_id fields
+          Comprehensive testing of Supabase connectivity, schema validation, authentication, and CRUD operations
         </p>
       </div>
 
@@ -212,14 +242,15 @@ export function DatabaseConnectionTest() {
               <Alert className="mt-4 border-green-200 bg-green-50">
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  All database operations are working correctly with the updated schema using user_id fields!
+                  All database operations are working correctly! Your Supabase setup is properly configured.
                 </AlertDescription>
               </Alert>
             ) : (
               <Alert className="mt-4 border-red-200 bg-red-50">
                 <XCircle className="h-4 w-4 text-red-600" />
                 <AlertDescription className="text-red-800">
-                  Some tests failed. Check the detailed results below and console logs for debugging information.
+                  Some tests failed. Check the detailed results below. If the schema validation failed, you may need to
+                  run the SQL script provided in the details.
                 </AlertDescription>
               </Alert>
             )}
@@ -230,8 +261,9 @@ export function DatabaseConnectionTest() {
       {/* Detailed Test Results */}
       {testResults && (
         <Tabs defaultValue="basic" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="schema">Schema</TabsTrigger>
             <TabsTrigger value="profiles">Profiles</TabsTrigger>
             <TabsTrigger value="bookings">Bookings</TabsTrigger>
             <TabsTrigger value="storage">Storage</TabsTrigger>
@@ -256,13 +288,41 @@ export function DatabaseConnectionTest() {
                 <TestStatus
                   result={testResults.database}
                   title="Database Connection"
-                  description="Basic connectivity to Supabase database using user_id field"
+                  description="Basic connectivity to Supabase database"
                 />
                 <TestStatus
                   result={testResults.authentication}
                   title="Authentication Status"
                   description="User session and authentication state"
                 />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="schema" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Schema Validation
+                </CardTitle>
+                <CardDescription>Database table structure and column validation</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TestStatus
+                  result={testResults.schemaValidation}
+                  title="Schema Validation"
+                  description="Verify user_profiles table has correct structure with id and user_id columns"
+                />
+                {!testResults.schemaValidation.success && (
+                  <Alert className="border-amber-200 bg-amber-50">
+                    <AlertTriangle className="h-4 w-4 text-amber-600" />
+                    <AlertDescription className="text-amber-800">
+                      <strong>Schema Issue Detected:</strong> The database schema needs to be set up or updated. Please
+                      run the SQL script provided in the test details above in your Supabase SQL editor.
+                    </AlertDescription>
+                  </Alert>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -280,7 +340,7 @@ export function DatabaseConnectionTest() {
                 <TestStatus
                   result={testResults.profileOperations.create}
                   title="Create Profile"
-                  description="Insert new profile record with user_id"
+                  description="Insert new profile record with user_id reference"
                 />
                 <TestStatus
                   result={testResults.profileOperations.read}
@@ -361,6 +421,19 @@ export function DatabaseConnectionTest() {
                 <CardDescription>Complete test results in JSON format for debugging</CardDescription>
               </CardHeader>
               <CardContent>
+                <div className="flex justify-end mb-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(JSON.stringify(testResults, null, 2))
+                      toast.success("Raw data copied to clipboard!")
+                    }}
+                  >
+                    <Copy className="h-3 w-3 mr-1" />
+                    Copy All
+                  </Button>
+                </div>
                 <pre className="bg-gray-50 p-4 rounded-lg text-xs overflow-auto max-h-96 border">
                   {JSON.stringify(testResults, null, 2)}
                 </pre>
@@ -378,7 +451,9 @@ export function DatabaseConnectionTest() {
               <Loader2 className="h-8 w-8 animate-spin mx-auto text-emerald-600" />
               <div>
                 <h3 className="text-lg font-medium text-gray-900">Running Database Tests</h3>
-                <p className="text-gray-600">Testing connectivity, authentication, and CRUD operations...</p>
+                <p className="text-gray-600">
+                  Testing connectivity, schema validation, authentication, and CRUD operations...
+                </p>
               </div>
             </div>
           </CardContent>
@@ -388,12 +463,12 @@ export function DatabaseConnectionTest() {
       {/* Instructions */}
       <Card className="bg-blue-50 border-blue-200">
         <CardHeader>
-          <CardTitle className="text-blue-900">Testing Instructions</CardTitle>
+          <CardTitle className="text-blue-900">Setup Instructions</CardTitle>
         </CardHeader>
         <CardContent className="text-blue-800 space-y-2">
           <p>
-            <strong>Schema Update:</strong> All queries now use <code>user_id</code> instead of <code>id</code> for the
-            user_profiles table primary key.
+            <strong>Schema Setup:</strong> If schema validation fails, run the provided SQL script in your Supabase SQL
+            editor.
           </p>
           <p>
             <strong>Authentication:</strong> Some tests require user authentication. Sign in to test full CRUD
