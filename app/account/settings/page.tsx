@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
+import { getCurrentUser, getUserProfile } from "@/lib/supabase-server"
 import AccountSettingsClient from "./AccountSettingsClient"
 
 export const metadata: Metadata = {
@@ -10,18 +9,14 @@ export const metadata: Metadata = {
 }
 
 export default async function AccountSettingsPage() {
-  const supabase = createServerComponentClient({ cookies })
+  const user = await getCurrentUser()
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  if (!session) {
+  if (!user) {
     redirect("/auth/login?redirect=/account/settings")
   }
 
   // Fetch user profile data
-  const { data: profile } = await supabase.from("user_profiles").select("*").eq("user_id", session.user.id).single()
+  const profile = await getUserProfile(user.id)
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -32,11 +27,7 @@ export default async function AccountSettingsPage() {
             <p className="text-gray-600 mt-1">Manage your profile and preferences for AVES Colombia tours</p>
           </div>
 
-          <AccountSettingsClient
-            initialProfile={profile}
-            userId={session.user.id}
-            userEmail={session.user.email || ""}
-          />
+          <AccountSettingsClient initialProfile={profile} userId={user.id} userEmail={user.email || ""} />
         </div>
       </div>
     </div>

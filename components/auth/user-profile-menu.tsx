@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { useState, useEffect } from "react"
+import { createClientSupabaseClient } from "@/lib/supabase-client"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
@@ -17,6 +17,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Settings, Calendar, CreditCard, LogOut, ChevronDown } from "lucide-react"
 import { toast } from "sonner"
 
+interface UserProfile {
+  first_name: string | null
+  last_name: string | null
+  email: string
+}
+
 interface UserProfileMenuProps {
   user: {
     id: string
@@ -30,9 +36,33 @@ interface UserProfileMenuProps {
 }
 
 export default function UserProfileMenu({ user }: UserProfileMenuProps) {
-  const supabase = createClientComponentClient()
+  const supabase = createClientSupabaseClient()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [profile, setProfile] = useState<UserProfile | null>(null)
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("user_profiles")
+          .select("first_name, last_name, email")
+          .eq("user_id", user.id)
+          .single()
+
+        if (error && error.code !== "PGRST116") {
+          console.error("Error fetching profile:", error)
+          return
+        }
+
+        setProfile(data)
+      } catch (error) {
+        console.error("Error in fetchProfile:", error)
+      }
+    }
+
+    fetchProfile()
+  }, [user.id, supabase])
 
   const handleSignOut = async () => {
     try {
@@ -52,21 +82,47 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
   }
 
   const getDisplayName = () => {
+    // First try to get name from database profile
+    if (profile?.first_name && profile?.last_name) {
+      return `${profile.first_name} ${profile.last_name}`
+    }
+    if (profile?.first_name) {
+      return profile.first_name
+    }
+
+    // Fallback to user metadata
     const { first_name, last_name } = user.user_metadata || {}
     if (first_name && last_name) {
       return `${first_name} ${last_name}`
     }
     if (first_name) return first_name
+
+    // Final fallback to email
     return user.email?.split("@")[0] || "User"
   }
 
   const getInitials = () => {
+    // First try to get initials from database profile
+    if (profile?.first_name && profile?.last_name) {
+      return `${profile.first_name[0]}${profile.last_name[0]}`.toUpperCase()
+    }
+    if (profile?.first_name) {
+      return profile.first_name[0].toUpperCase()
+    }
+
+    // Fallback to user metadata
     const { first_name, last_name } = user.user_metadata || {}
     if (first_name && last_name) {
       return `${first_name[0]}${last_name[0]}`.toUpperCase()
     }
     if (first_name) return first_name[0].toUpperCase()
+
+    // Final fallback to email
     return user.email?.[0]?.toUpperCase() || "U"
+  }
+
+  const getEmail = () => {
+    return profile?.email || user.email || ""
   }
 
   return (
@@ -86,7 +142,8 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{getDisplayName()}</p>
-            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+            <p className="text-xs leading-none text-muted-foreground">{getEmail()}</p>
+            {profile && <p className="text-xs leading-none text-green-600">Profile loaded</p>}
           </div>
         </DropdownMenuLabel>
 

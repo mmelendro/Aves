@@ -1,9 +1,8 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useRef } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { useState, useRef, useEffect } from "react"
+import { createClientSupabaseClient } from "@/lib/supabase-client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -32,6 +31,8 @@ import {
   AlertCircle,
   Trash2,
   Download,
+  CheckCircle,
+  XCircle,
 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -58,7 +59,7 @@ interface UserProfile {
   social_media_handles: Record<string, string> | null
   uploaded_documents: string[] | null
   created_at: string
-  updated_at: string
+  updated_at: string | null
 }
 
 interface AccountSettingsClientProps {
@@ -68,7 +69,7 @@ interface AccountSettingsClientProps {
 }
 
 export default function AccountSettingsClient({ initialProfile, userId, userEmail }: AccountSettingsClientProps) {
-  const supabase = createClientComponentClient()
+  const supabase = createClientSupabaseClient()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const documentInputRef = useRef<HTMLInputElement>(null)
 
@@ -103,17 +104,45 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
   const [profileImage, setProfileImage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [uploadingDocument, setUploadingDocument] = useState(false)
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle")
   const [notifications, setNotifications] = useState({
     email: true,
     sms: false,
     marketing: true,
   })
 
+  // Create profile if it doesn't exist
+  useEffect(() => {
+    const createProfileIfNeeded = async () => {
+      if (!initialProfile) {
+        try {
+          const { error } = await supabase.from("user_profiles").insert({
+            user_id: userId,
+            email: userEmail,
+            first_name: "",
+            last_name: "",
+            created_at: new Date().toISOString(),
+          })
+
+          if (error && error.code !== "23505") {
+            // 23505 is duplicate key error
+            console.error("Error creating profile:", error)
+          }
+        } catch (error) {
+          console.error("Error in createProfileIfNeeded:", error)
+        }
+      }
+    }
+
+    createProfileIfNeeded()
+  }, [initialProfile, userId, userEmail, supabase])
+
   const handleInputChange = (field: keyof UserProfile, value: any) => {
     setProfile((prev) => ({
       ...prev,
       [field]: value,
     }))
+    setSaveStatus("idle")
   }
 
   const handleSocialMediaChange = (platform: string, value: string) => {
@@ -124,6 +153,7 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
         [platform]: value,
       },
     }))
+    setSaveStatus("idle")
   }
 
   const handleVaccinationChange = (vaccinations: string) => {
@@ -135,6 +165,7 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       ...prev,
       vaccinations: vaccinationArray,
     }))
+    setSaveStatus("idle")
   }
 
   const handleProfileImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -239,23 +270,38 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
       ...prev,
       uploaded_documents: prev.uploaded_documents?.filter((url) => url !== urlToRemove) || [],
     }))
+    setSaveStatus("idle")
   }
 
   const handleSaveProfile = async () => {
     try {
+      setSaveStatus("saving")
       setIsLoading(true)
 
-      const { error } = await supabase.from("user_profiles").upsert({
+      const profileData = {
         ...profile,
         updated_at: new Date().toISOString(),
+      }
+
+      const { error } = await supabase.from("user_profiles").upsert(profileData, {
+        onConflict: "user_id",
+        ignoreDuplicates: false,
       })
 
-      if (error) throw error
+      if (error) {
+        console.error("Database error:", error)
+        throw error
+      }
 
+      setSaveStatus("saved")
       toast.success("Profile updated successfully")
+
+      // Reset save status after 3 seconds
+      setTimeout(() => setSaveStatus("idle"), 3000)
     } catch (error) {
       console.error("Error saving profile:", error)
-      toast.error("Failed to save profile")
+      setSaveStatus("error")
+      toast.error("Failed to save profile. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -267,8 +313,42 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
     return (first + last).toUpperCase() || userEmail[0]?.toUpperCase() || "U"
   }
 
+  const getSaveButtonText = () => {
+    switch (saveStatus) {
+      case "saving":
+        return "Saving..."
+      case "saved":
+        return "Saved!"
+      case "error":
+        return "Try Again"
+      default:
+        return "Save Changes"
+    }
+  }
+
+  const getSaveButtonIcon = () => {
+    switch (saveStatus) {
+      case "saved":
+        return <CheckCircle className="h-4 w-4" />
+      case "error":
+        return <XCircle className="h-4 w-4" />
+      default:
+        return null
+    }
+  }
+
   return (
     <div className="p-6">
+      {/* Connection Status Alert */}
+      <Alert className="mb-6">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>
+          {initialProfile
+            ? "Profile loaded successfully from database"
+            : "New profile created - please fill in your information"}
+        </AlertDescription>
+      </Alert>
+
       <Tabs defaultValue="personal" className="space-y-6">
         <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="personal">Personal</TabsTrigger>
@@ -783,8 +863,15 @@ export default function AccountSettingsClient({ initialProfile, userId, userEmai
 
       {/* Save Button */}
       <div className="flex justify-end pt-6 border-t">
-        <Button onClick={handleSaveProfile} disabled={isLoading} className="px-8">
-          {isLoading ? "Saving..." : "Save Changes"}
+        <Button
+          onClick={handleSaveProfile}
+          disabled={isLoading}
+          className={`px-8 ${saveStatus === "saved" ? "bg-green-600 hover:bg-green-700" : ""} ${saveStatus === "error" ? "bg-red-600 hover:bg-red-700" : ""}`}
+        >
+          <div className="flex items-center gap-2">
+            {getSaveButtonIcon()}
+            {getSaveButtonText()}
+          </div>
         </Button>
       </div>
     </div>
