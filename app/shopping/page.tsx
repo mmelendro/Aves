@@ -29,6 +29,8 @@ import {
   ChevronDown,
   ChevronUp,
   User,
+  Loader2,
+  Database,
 } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
@@ -40,6 +42,7 @@ import { AuthProvider, useAuth } from "@/hooks/use-auth"
 import { UserAccountPanel } from "@/components/auth/user-account-panel"
 import { AccountCreationPrompt } from "@/components/auth/account-creation-prompt"
 import { AuthModal } from "@/components/auth/auth-modal"
+import { bookingService, type BookingData } from "@/lib/booking-service"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -798,6 +801,9 @@ function ShoppingPageContent() {
   const [restDayOptions, setRestDayOptions] = useState<Record<string, RestDayOptions>>({})
   const [showAccountPrompt, setShowAccountPrompt] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [currentBookingId, setCurrentBookingId] = useState<string | null>(null)
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle")
 
   // Initialize tour selections
   useEffect(() => {
@@ -855,6 +861,35 @@ function ShoppingPageContent() {
       return () => clearTimeout(timer)
     }
   }, [user, authLoading, contactInfo])
+
+  // Load saved booking when user logs in
+  const handleBookingLoaded = useCallback((booking: any) => {
+    if (booking && booking.booking_data) {
+      const bookingData = booking.booking_data
+
+      // Load tour selections
+      if (bookingData.tours && Array.isArray(bookingData.tours)) {
+        setTourSelections(bookingData.tours)
+      }
+
+      // Load contact info
+      if (bookingData.contactInfo) {
+        setContactInfo(bookingData.contactInfo)
+      }
+
+      // Load questions
+      if (bookingData.questions) {
+        setQuestions(bookingData.questions)
+      }
+
+      // Load rest day options
+      if (bookingData.restDayOptions) {
+        setRestDayOptions(bookingData.restDayOptions)
+      }
+
+      setCurrentBookingId(booking.id)
+    }
+  }, [])
 
   // Memoized calculations
   const getHighestTourPrice = useCallback(() => {
@@ -1024,17 +1059,57 @@ function ShoppingPageContent() {
     })
   }, [])
 
-  const saveBooking = useCallback(() => {
-    const bookingData = {
-      tours: tourSelections,
-      contactInfo,
-      questions,
-      timestamp: new Date().toISOString(),
+  // Enhanced save booking function with Supabase integration
+  const saveBooking = useCallback(async () => {
+    if (!user) {
+      setShowAuthModal(true)
+      return
     }
-    localStorage.setItem("aves-booking", JSON.stringify(bookingData))
-    setSavedBooking(true)
-    setTimeout(() => setSavedBooking(false), 3000)
-  }, [tourSelections, contactInfo, questions])
+
+    setIsSaving(true)
+    setSaveStatus("saving")
+
+    try {
+      const bookingData: BookingData = {
+        tours: tourSelections,
+        contactInfo,
+        questions,
+        totalCost: costBreakdown.totalCost,
+        restDayOptions,
+      }
+
+      let result
+      if (currentBookingId) {
+        // Update existing booking
+        result = await bookingService.updateBooking(currentBookingId, bookingData)
+      } else {
+        // Create new booking
+        result = await bookingService.saveBooking(bookingData)
+        if (result.success && result.bookingId) {
+          setCurrentBookingId(result.bookingId)
+        }
+      }
+
+      if (result.success) {
+        setSaveStatus("saved")
+        setSavedBooking(true)
+        setTimeout(() => {
+          setSavedBooking(false)
+          setSaveStatus("idle")
+        }, 3000)
+      } else {
+        setSaveStatus("error")
+        console.error("Failed to save booking:", result.error)
+        setTimeout(() => setSaveStatus("idle"), 3000)
+      }
+    } catch (error) {
+      console.error("Error saving booking:", error)
+      setSaveStatus("error")
+      setTimeout(() => setSaveStatus("idle"), 3000)
+    } finally {
+      setIsSaving(false)
+    }
+  }, [user, tourSelections, contactInfo, questions, costBreakdown.totalCost, restDayOptions, currentBookingId])
 
   const generateEmailLink = useCallback(() => {
     const subject = encodeURIComponent("Colombian Birding Tour Booking Request")
@@ -1071,13 +1146,24 @@ ${tripDuration.startDate && tripDuration.endDate ? `Complete Trip: ${formatDateR
 
 ${questions ? `SPECIAL REQUESTS:\n${questions}` : ""}
 
+${currentBookingId ? `Booking ID: ${currentBookingId}` : ""}
+
 I look forward to hearing from you within 24 hours as mentioned on your website.
 
 Best regards,
 ${contactInfo.firstName} ${contactInfo.lastName}`)
 
     return `mailto:info@aves.com?subject=${subject}&body=${body}`
-  }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
+  }, [
+    tourSelections,
+    contactInfo,
+    questions,
+    costBreakdown,
+    tripDuration,
+    restDayOptions,
+    getHighestTourPrice,
+    currentBookingId,
+  ])
 
   const handleAccountCreated = useCallback(
     (newUser: any) => {
@@ -1331,7 +1417,13 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
             {/* Right Column - Account Panel & Booking Summary */}
             <div className="lg:col-span-1 space-y-6">
               {/* User Account Panel */}
-              <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} />
+              <UserAccountPanel
+                user={user}
+                onSignOut={signOut}
+                bookingData={bookingData}
+                currentBookingId={currentBookingId}
+                onBookingLoaded={handleBookingLoaded}
+              />
 
               {/* Booking Summary */}
               <Card className="sticky top-24 border-2 border-emerald-200 shadow-xl">
@@ -1339,6 +1431,12 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                   <CardTitle className="flex items-center text-xl">
                     <Calculator className="w-5 h-5 mr-2 text-emerald-600" />
                     Booking Summary
+                    {currentBookingId && (
+                      <Badge variant="outline" className="ml-2 text-xs">
+                        <Database className="w-3 h-3 mr-1" />
+                        Saved
+                      </Badge>
+                    )}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -1469,17 +1567,38 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                       <div className="grid grid-cols-2 gap-2">
                         <Button
                           variant="outline"
-                          className="text-blue-600 hover:bg-blue-50 w-full bg-transparent"
+                          className={`text-blue-600 hover:bg-blue-50 w-full bg-transparent ${
+                            saveStatus === "saving" ? "opacity-50" : ""
+                          }`}
                           onClick={saveBooking}
+                          disabled={isSaving || !user}
                         >
-                          <Save className="mr-2 w-4 h-4" />
-                          Save
+                          {isSaving ? (
+                            <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                          ) : saveStatus === "saved" ? (
+                            <CheckCircle className="mr-2 w-4 h-4" />
+                          ) : (
+                            <Save className="mr-2 w-4 h-4" />
+                          )}
+                          {saveStatus === "saving" ? "Saving..." : saveStatus === "saved" ? "Saved!" : "Save"}
                         </Button>
                         <Button variant="outline" className="text-purple-600 hover:bg-purple-50 w-full bg-transparent">
                           <Share2 className="mr-2 w-4 h-4" />
                           Share
                         </Button>
                       </div>
+
+                      {/* Save Status Messages */}
+                      {saveStatus === "error" && (
+                        <div className="text-xs text-red-600 text-center">
+                          Failed to save booking. Please try again.
+                        </div>
+                      )}
+                      {!user && (
+                        <div className="text-xs text-gray-500 text-center">
+                          Sign in to save your booking to the database
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>
@@ -1501,8 +1620,9 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
       />
 
       {savedBooking && (
-        <div className="fixed bottom-4 right-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-md shadow-lg z-50">
-          Booking saved to local storage!
+        <div className="fixed bottom-4 right-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-md shadow-lg z-50 flex items-center gap-2">
+          <Database className="w-4 h-4" />
+          Booking saved to database!
         </div>
       )}
     </div>

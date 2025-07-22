@@ -123,6 +123,44 @@ export type Database = {
           updated_at?: string | null
         }
       }
+      bookings: {
+        Row: {
+          id: string
+          user_id: string
+          booking_data: any
+          status: string
+          created_at: string
+          updated_at: string
+          total_cost: number | null
+          contact_info: any | null
+          tour_selections: any | null
+          special_requests: string | null
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          booking_data: any
+          status?: string
+          created_at?: string
+          updated_at?: string
+          total_cost?: number | null
+          contact_info?: any | null
+          tour_selections?: any | null
+          special_requests?: string | null
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          booking_data?: any
+          status?: string
+          created_at?: string
+          updated_at?: string
+          total_cost?: number | null
+          contact_info?: any | null
+          tour_selections?: any | null
+          special_requests?: string | null
+        }
+      }
     }
   }
 }

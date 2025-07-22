@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { AuthModal } from "./auth-modal"
+import { bookingService } from "@/lib/booking-service"
 import {
   User,
   LogOut,
@@ -19,6 +20,7 @@ import {
   ChevronUp,
   UserPlus,
   LogIn,
+  Loader2,
 } from "lucide-react"
 import type { User as SupabaseUser } from "@supabase/supabase-js"
 
@@ -30,18 +32,75 @@ interface UserAccountPanelProps {
     contactInfo: any
     totalCost: number
   }
+  currentBookingId?: string
+  onBookingLoaded?: (booking: any) => void
 }
 
-export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPanelProps) {
+export function UserAccountPanel({
+  user,
+  onSignOut,
+  bookingData,
+  currentBookingId,
+  onBookingLoaded,
+}: UserAccountPanelProps) {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authMode, setAuthMode] = useState<"signup" | "signin">("signin")
   const [isExpanded, setIsExpanded] = useState(false)
   const [isSigningOut, setIsSigningOut] = useState(false)
+  const [savedBookings, setSavedBookings] = useState<any[]>([])
+  const [currentDraftBooking, setCurrentDraftBooking] = useState<any>(null)
+  const [loadingBookings, setLoadingBookings] = useState(false)
+
+  // Fetch user bookings when user is available
+  useEffect(() => {
+    if (user) {
+      fetchUserBookings()
+      fetchCurrentDraftBooking()
+    } else {
+      setSavedBookings([])
+      setCurrentDraftBooking(null)
+    }
+  }, [user])
+
+  const fetchUserBookings = async () => {
+    if (!user) return
+
+    setLoadingBookings(true)
+    try {
+      const result = await bookingService.getUserBookings()
+      if (result.success && result.bookings) {
+        setSavedBookings(result.bookings)
+      }
+    } catch (error) {
+      console.error("Error fetching bookings:", error)
+    } finally {
+      setLoadingBookings(false)
+    }
+  }
+
+  const fetchCurrentDraftBooking = async () => {
+    if (!user) return
+
+    try {
+      const result = await bookingService.getCurrentDraftBooking()
+      if (result.success && result.booking) {
+        setCurrentDraftBooking(result.booking)
+        // If there's a callback to load the booking data into the form
+        if (onBookingLoaded) {
+          onBookingLoaded(result.booking)
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching current draft booking:", error)
+    }
+  }
 
   const handleSignOut = async () => {
     setIsSigningOut(true)
     try {
       await onSignOut()
+      setSavedBookings([])
+      setCurrentDraftBooking(null)
     } finally {
       setIsSigningOut(false)
     }
@@ -49,7 +108,11 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
 
   const handleAuthSuccess = (newUser: any) => {
     setShowAuthModal(false)
-    // Optionally refresh the page or update state
+    // Refresh bookings after successful auth
+    if (newUser) {
+      fetchUserBookings()
+      fetchCurrentDraftBooking()
+    }
   }
 
   const openAuthModal = (mode: "signup" | "signin") => {
@@ -68,6 +131,20 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
       .join("")
       .toUpperCase()
       .slice(0, 2)
+
+    // Calculate total saved bookings cost
+    const totalSavedBookingsCost = savedBookings.reduce((sum, booking) => sum + (booking.total_cost || 0), 0)
+    const totalBookings = savedBookings.length
+
+    // Use current booking data if available, otherwise use draft booking from database
+    const displayBookingData =
+      bookingData ||
+      (currentDraftBooking
+        ? {
+            tours: currentDraftBooking.tour_selections || [],
+            totalCost: currentDraftBooking.total_cost || 0,
+          }
+        : null)
 
     return (
       <Card className="border-2 border-emerald-200 shadow-lg">
@@ -133,24 +210,56 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
             </div>
 
             {/* Current Booking Status */}
-            {bookingData && bookingData.tours.length > 0 && (
+            {displayBookingData && displayBookingData.tours.length > 0 && (
               <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
                 <h4 className="font-medium text-blue-800 mb-2 flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   Current Booking
+                  {currentDraftBooking && (
+                    <Badge variant="outline" className="text-xs ml-2">
+                      Saved to Database
+                    </Badge>
+                  )}
                 </h4>
                 <div className="text-xs text-blue-700 space-y-1">
                   <div>
-                    {bookingData.tours.length} tour{bookingData.tours.length > 1 ? "s" : ""} selected
+                    {displayBookingData.tours.length} tour{displayBookingData.tours.length > 1 ? "s" : ""} selected
                   </div>
-                  <div className="font-medium">${bookingData.totalCost.toLocaleString()} total</div>
+                  <div className="font-medium">${displayBookingData.totalCost.toLocaleString()} total</div>
+                  {currentDraftBooking && (
+                    <div className="text-xs text-gray-600 mt-1">
+                      Last saved: {new Date(currentDraftBooking.updated_at).toLocaleDateString()}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Saved Bookings Summary */}
+            {totalBookings > 0 && (
+              <div className="bg-purple-50 rounded-lg p-3 border border-purple-200">
+                <h4 className="font-medium text-purple-800 mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  Booking History
+                  {loadingBookings && <Loader2 className="w-3 h-3 animate-spin" />}
+                </h4>
+                <div className="text-xs text-purple-700 space-y-1">
+                  <div>
+                    {totalBookings} booking{totalBookings > 1 ? "s" : ""} saved
+                  </div>
+                  <div className="font-medium">${totalSavedBookingsCost.toLocaleString()} total value</div>
                 </div>
               </div>
             )}
 
             {/* Action Buttons */}
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="flex-1 text-gray-600 hover:text-gray-700 bg-transparent">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1 text-gray-600 hover:text-gray-700 bg-transparent"
+                onClick={() => (window.location.href = "/account/settings")}
+              >
                 <Settings className="w-4 h-4 mr-2" />
                 Settings
               </Button>
