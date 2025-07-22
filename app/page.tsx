@@ -4,20 +4,13 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
 import {
-  Users,
-  Award,
   ArrowRight,
   CheckCircle,
-  Mail,
-  MapPin,
   Star,
   Calendar,
-  Shield,
   TelescopeIcon as Binoculars,
   Clock,
-  ExternalLink,
   Map,
   Bird,
   Globe,
@@ -28,13 +21,6 @@ import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
-import {
-  DURATION_OPTIONS,
-  LOCATION_OPTIONS,
-  TOUR_TYPE_OPTIONS,
-  EXPERIENCE_LEVELS,
-  GROUP_SIZE_OPTIONS,
-} from "@/lib/form-options"
 
 export default function AVESLandingPage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -154,7 +140,7 @@ ${formData.firstName} ${formData.lastName}`)
     grid: {
       hero: isMobile ? "space-y-8" : "grid lg:grid-cols-2 gap-12 lg:gap-16 items-center",
       features: isMobile
-        ? "space-y-8"
+        ? "grid grid-cols-1 gap-3 text-sm"
         : isTablet
           ? "grid md:grid-cols-2 gap-8"
           : "grid md:grid-cols-2 lg:grid-cols-3 gap-8",
@@ -237,11 +223,11 @@ ${formData.firstName} ${formData.lastName}`)
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
-                <Link href="#contact" className={isMobile ? "w-full" : "flex-1"}>
+                <Link href="/shopping" className={isMobile ? "w-full" : "flex-1"}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 shadow-md hover:shadow-lg transition-all duration-300 bg-transparent text-base lg:text-lg px-8 py-4"
+                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 shadow-md hover:shadow-xl transition-all duration-300 bg-transparent text-base lg:text-lg px-8 py-4"
                   >
                     <Calendar className="mr-2 w-5 h-5" />
                     Plan My Trip
@@ -429,376 +415,9 @@ ${formData.firstName} ${formData.lastName}`)
                   <p className="text-gray-700 italic leading-relaxed mb-6 flex-grow text-sm lg:text-base">
                     "{review.text}"
                   </p>
-                  <div>
-                    <p className="font-semibold text-gray-900">{review.author}</p>
-                    <p className="text-gray-600 text-sm">
-                      {review.role}, {review.location}
-                    </p>
-                  </div>
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose AVES - Redesigned with Card-Style CTAs */}
-      <section className={`bg-gray-50 transition-all duration-500 ${responsive.sectionSpacing}`}>
-        <div className={`container mx-auto ${responsive.container}`}>
-          <div className="text-center mb-12">
-            <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>Why Choose AVES</h2>
-            <p className={`text-gray-600 mx-auto max-w-3xl ${responsive.textSize.body}`}>
-              We're passionate conservationists, expert birders, and your partners in discovering Colombia's incredible
-              avian diversity with award-winning excellence.
-            </p>
-          </div>
-
-          <div className={responsive.grid.features}>
-            {/* Expert Guides - Card Style */}
-            <Link href="/team" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-emerald-200 hover:border-emerald-300 p-6">
-                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
-                  <Users className="text-emerald-600 w-8 h-8" />
-                </div>
-                <div className="font-bold text-emerald-600 mb-2 group-hover:text-emerald-700 text-3xl lg:text-4xl">
-                  Expert
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Local Guides</div>
-                <div className="text-emerald-600 mt-1 group-hover:text-emerald-700 text-xs">Meet Our Team</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-emerald-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-
-            {/* Conservation & B Corp - Card Style with Multiple Links */}
-            <div className="space-y-4">
-              <Link href="/about/b-corp" className="group block">
-                <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-green-200 hover:border-green-300 p-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                    <Shield className="text-green-600 w-6 h-6" />
-                  </div>
-                  <div className="font-bold text-green-600 mb-1 group-hover:text-green-700 text-2xl lg:text-3xl">
-                    B Corp
-                  </div>
-                  <div className="text-gray-600 group-hover:text-gray-700 text-sm">Certified</div>
-                  <div className="text-green-600 mt-1 group-hover:text-green-700 text-xs">Our Journey</div>
-                  <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight className="mx-auto text-green-600 w-3 h-3" />
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/conservation" className="group block">
-                <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-green-200 hover:border-green-300 p-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                    <Shield className="text-green-600 w-6 h-6" />
-                  </div>
-                  <div className="font-bold text-green-600 mb-1 group-hover:text-green-700 text-2xl lg:text-3xl">
-                    100%
-                  </div>
-                  <div className="text-gray-600 group-hover:text-gray-700 text-sm">Carbon Neutral</div>
-                  <div className="text-green-600 mt-1 group-hover:text-green-700 text-xs">Our Impact</div>
-                  <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight className="mx-auto text-green-600 w-3 h-3" />
-                  </div>
-                </div>
-              </Link>
-            </div>
-
-            {/* Exclusive Access & Recognition - Card Style */}
-            <Link href="/about/partners" className="group block">
-              <div className="bg-white rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 hover:border-blue-300 p-6">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
-                  <Award className="text-blue-600 w-8 h-8" />
-                </div>
-                <div className="font-bold text-blue-600 mb-2 group-hover:text-blue-700 text-3xl lg:text-4xl">
-                  Exclusive
-                </div>
-                <div className="text-gray-600 group-hover:text-gray-700 text-sm lg:text-base">Partner Network</div>
-                <div className="text-blue-600 mt-1 group-hover:text-blue-700 text-xs">View Partners</div>
-                <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="mx-auto text-blue-600 w-4 h-4" />
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section */}
-      <section
-        id="contact"
-        className={`bg-gradient-to-br from-emerald-50 to-blue-50 transition-all duration-500 ${responsive.sectionSpacing} ${isMobile ? "mt-8" : isTablet ? "mt-12" : "mt-16"}`}
-      >
-        <div className={`container mx-auto ${responsive.container}`}>
-          <div className="mx-auto max-w-4xl">
-            <div className="text-center mb-12">
-              <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>
-                Plan Your Colombian Birding Adventure
-              </h2>
-              <p className={`text-gray-600 mx-auto max-w-2xl ${responsive.textSize.body}`}>
-                Tell us about your birding interests. We'll respond within 24 hours with personalized recommendations.
-              </p>
-            </div>
-
-            <Card className="shadow-xl border-0">
-              <CardContent className="p-8">
-                <div className={`${isMobile ? "space-y-8" : "grid lg:grid-cols-2 gap-12"}`}>
-                  {/* Contact Form */}
-                  <div className={`space-y-6 ${isMobile ? "mt-4" : "mt-6"}`}>
-                    <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">First Name *</label>
-                        <Input
-                          placeholder="Your first name"
-                          value={formData.firstName}
-                          onChange={(e) => handleInputChange("firstName", e.target.value)}
-                          className="h-11"
-                        />
-                      </div>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Last Name *</label>
-                        <Input
-                          placeholder="Your last name"
-                          value={formData.lastName}
-                          onChange={(e) => handleInputChange("lastName", e.target.value)}
-                          className="h-11"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block font-medium text-gray-700 mb-2 text-sm">Email Address *</label>
-                      <Input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        className="h-11"
-                      />
-                    </div>
-
-                    <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Travel Date</label>
-                        <Input
-                          type="date"
-                          value={formData.travelDate}
-                          onChange={(e) => handleInputChange("travelDate", e.target.value)}
-                          className="h-11"
-                        />
-                      </div>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Group Size</label>
-                        <select
-                          value={formData.groupSize}
-                          onChange={(e) => handleInputChange("groupSize", e.target.value)}
-                          className="w-full px-3 py-2 h-11 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        >
-                          {GROUP_SIZE_OPTIONS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Duration</label>
-                        <select
-                          value={formData.desiredDuration}
-                          onChange={(e) => handleInputChange("desiredDuration", e.target.value)}
-                          className="w-full px-3 py-2 h-11 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        >
-                          {DURATION_OPTIONS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Experience Level</label>
-                        <select
-                          value={formData.experienceLevel}
-                          onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
-                          className="w-full px-3 py-2 h-11 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        >
-                          {EXPERIENCE_LEVELS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Tour Type Selection */}
-                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
-                      <div className="flex items-center justify-between mb-3">
-                        <label className="block font-medium text-gray-700 text-sm">
-                          Interested Tour Types (select all that apply)
-                        </label>
-                        <Link
-                          href="/tours"
-                          className="text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1 text-xs"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          View All Tours
-                        </Link>
-                      </div>
-                      <div className={`${isMobile ? "grid grid-cols-1 gap-2" : "grid grid-cols-2 gap-2"}`}>
-                        {TOUR_TYPE_OPTIONS.map((tourType) => (
-                          <button
-                            key={tourType}
-                            type="button"
-                            onClick={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
-                            className={`text-left rounded-lg border transition-all p-3 text-sm ${
-                              selectedTourTypes.includes(tourType)
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                : "border-gray-200 hover:border-emerald-300 text-gray-700"
-                            }`}
-                          >
-                            {tourType}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Location Preferences */}
-                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
-                      <div className="flex items-center justify-between mb-3">
-                        <label className="block font-medium text-gray-700 text-sm">
-                          Preferred Biogeographic Regions (select all that interest you)
-                        </label>
-                        <Link
-                          href="/aves-explorer"
-                          className="text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1 text-xs"
-                        >
-                          <Map className="w-3 h-3" />
-                          Explore Map
-                        </Link>
-                      </div>
-                      <div
-                        className={`border border-gray-200 rounded-lg bg-gray-50 ${isMobile ? "max-h-48" : "max-h-56"} overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400`}
-                      >
-                        <div className="p-2 space-y-1">
-                          {LOCATION_OPTIONS.map((location) => (
-                            <label
-                              key={location}
-                              className="flex items-center space-x-2 border border-gray-200 rounded-lg hover:bg-white cursor-pointer p-2 transition-colors duration-200 bg-white/80 hover:bg-white hover:shadow-sm"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={selectedLocations.includes(location)}
-                                onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                                className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 flex-shrink-0"
-                              />
-                              <span className="text-gray-700 text-xs leading-relaxed">{location}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
-                      <label className="block font-medium text-gray-700 mb-2 text-sm">
-                        Special Interests or Requests
-                      </label>
-                      <textarea
-                        placeholder="Tell us about specific birds you'd like to see, photography interests, accessibility needs, dietary restrictions, or any other special requests..."
-                        value={formData.specialRequests}
-                        onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                        rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
-                      />
-                    </div>
-
-                    <a
-                      href={generateEmailLink()}
-                      className={`block w-full ${isMobile ? "mt-8" : "mt-10"}`}
-                      onClick={(e) => {
-                        if (!formData.firstName || !formData.lastName || !formData.email) {
-                          e.preventDefault()
-                          alert("Please fill in your name and email address before submitting.")
-                        }
-                      }}
-                    >
-                      <Button className="w-full bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 text-lg py-4">
-                        <Mail className="mr-2 w-5 h-5" />
-                        Send My Inquiry
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </Button>
-                    </a>
-
-                    <p className="text-gray-500 text-center text-sm">
-                      We'll respond within 24 hours with personalized recommendations
-                    </p>
-                  </div>
-
-                  {/* Contact Information */}
-                  <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-6">
-                    <h3 className="font-bold text-gray-900 mb-6 text-xl">Get in Touch Directly</h3>
-
-                    <div className="space-y-6 mb-8">
-                      <div className="flex items-start space-x-3">
-                        <Mail className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
-                        <div>
-                          <div className="font-medium text-gray-900">Email</div>
-                          <a
-                            href="mailto:info@aves.bio"
-                            className="text-emerald-600 hover:text-emerald-700 hover:underline"
-                          >
-                            info@aves.bio
-                          </a>
-                          <div className="text-gray-600 text-sm">24-hour response guarantee</div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start space-x-3">
-                        <MapPin className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
-                        <div>
-                          <div className="font-medium text-gray-900">Based in</div>
-                          <div className="text-gray-700">Vancouver, Canada and Bogota, Colombia</div>
-                          <div className="text-gray-600 text-sm">Operating in Colombia</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div className="border-t border-emerald-200 pt-6 space-y-3">
-                      <h4 className="font-medium text-gray-900">Quick Links</h4>
-                      <div className="space-y-2">
-                        <Link
-                          href="/tours"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <ArrowRight className="mr-2 w-3 h-3" />
-                          Browse All Tours
-                        </Link>
-                        <Link
-                          href="/aves-explorer"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <Map className="mr-2 w-3 h-3" />
-                          Explore Interactive Map
-                        </Link>
-                        <Link
-                          href="/travel-tips"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <ArrowRight className="mr-2 w-3 h-3" />
-                          Travel Tips & Preparation
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
