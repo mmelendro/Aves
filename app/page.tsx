@@ -17,7 +17,6 @@ import {
   Shield,
   TelescopeIcon as Binoculars,
   Clock,
-  ExternalLink,
   Map,
   Bird,
   Globe,
@@ -28,13 +27,6 @@ import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
-import {
-  DURATION_OPTIONS,
-  LOCATION_OPTIONS,
-  TOUR_TYPE_OPTIONS,
-  EXPERIENCE_LEVELS,
-  GROUP_SIZE_OPTIONS,
-} from "@/lib/form-options"
 
 export default function AVESLandingPage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -73,7 +65,7 @@ export default function AVESLandingPage() {
       text: "At 80+ years old, this was our final birding adventure, and AVES made it absolutely perfect. Professional, caring guides who understood our pace. We couldn't have asked for a better farewell trip.",
       author: "Lisa & Peter",
       location: "Pender Island, BC",
-      role: "Birding Enthusiasts",
+      role: "Bird Enthusiasts",
       rating: 5,
     },
   ]
@@ -237,11 +229,11 @@ ${formData.firstName} ${formData.lastName}`)
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
-                <Link href="#contact" className={isMobile ? "w-full" : "flex-1"}>
+                <Link href="/shopping" className={isMobile ? "w-full" : "flex-1"}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 shadow-md hover:shadow-lg transition-all duration-300 bg-transparent text-base lg:text-lg px-8 py-4"
+                    className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 shadow-md hover:shadow-xl transition-all duration-300 bg-transparent text-base lg:text-lg px-8 py-4"
                   >
                     <Calendar className="mr-2 w-5 h-5" />
                     Plan My Trip
@@ -442,7 +434,7 @@ ${formData.firstName} ${formData.lastName}`)
         </div>
       </section>
 
-      {/* Why Choose AVES - Redesigned with Card-Style CTAs */}
+      {/* Why Choose AVES Section */}
       <section className={`bg-gray-50 transition-all duration-500 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
@@ -549,208 +541,75 @@ ${formData.firstName} ${formData.lastName}`)
                   <div className={`space-y-6 ${isMobile ? "mt-4" : "mt-6"}`}>
                     <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
                       <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">First Name *</label>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          Full Name
+                        </label>
                         <Input
-                          placeholder="Your first name"
-                          value={formData.firstName}
-                          onChange={(e) => handleInputChange("firstName", e.target.value)}
-                          className="h-11"
+                          type="text"
+                          id="name"
+                          name="name"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                          placeholder="Your full name"
                         />
                       </div>
                       <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Last Name *</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          Email Address
+                        </label>
                         <Input
-                          placeholder="Your last name"
-                          value={formData.lastName}
-                          onChange={(e) => handleInputChange("lastName", e.target.value)}
-                          className="h-11"
+                          type="email"
+                          id="email"
+                          name="email"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                          placeholder="your.email@example.com"
                         />
                       </div>
                     </div>
-
                     <div>
-                      <label className="block font-medium text-gray-700 mb-2 text-sm">Email Address *</label>
-                      <Input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        className="h-11"
-                      />
-                    </div>
-
-                    <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Travel Date</label>
-                        <Input
-                          type="date"
-                          value={formData.travelDate}
-                          onChange={(e) => handleInputChange("travelDate", e.target.value)}
-                          className="h-11"
-                        />
-                      </div>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Group Size</label>
-                        <select
-                          value={formData.groupSize}
-                          onChange={(e) => handleInputChange("groupSize", e.target.value)}
-                          className="w-full px-3 py-2 h-11 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        >
-                          {GROUP_SIZE_OPTIONS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Duration</label>
-                        <select
-                          value={formData.desiredDuration}
-                          onChange={(e) => handleInputChange("desiredDuration", e.target.value)}
-                          className="w-full px-3 py-2 h-11 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        >
-                          {DURATION_OPTIONS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block font-medium text-gray-700 mb-2 text-sm">Experience Level</label>
-                        <select
-                          value={formData.experienceLevel}
-                          onChange={(e) => handleInputChange("experienceLevel", e.target.value)}
-                          className="w-full px-3 py-2 h-11 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        >
-                          {EXPERIENCE_LEVELS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Tour Type Selection */}
-                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
-                      <div className="flex items-center justify-between mb-3">
-                        <label className="block font-medium text-gray-700 text-sm">
-                          Interested Tour Types (select all that apply)
-                        </label>
-                        <Link
-                          href="/tours"
-                          className="text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1 text-xs"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          View All Tours
-                        </Link>
-                      </div>
-                      <div className={`${isMobile ? "grid grid-cols-1 gap-2" : "grid grid-cols-2 gap-2"}`}>
-                        {TOUR_TYPE_OPTIONS.map((tourType) => (
-                          <button
-                            key={tourType}
-                            type="button"
-                            onClick={() => toggleSelection(tourType, selectedTourTypes, setSelectedTourTypes)}
-                            className={`text-left rounded-lg border transition-all p-3 text-sm ${
-                              selectedTourTypes.includes(tourType)
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                : "border-gray-200 hover:border-emerald-300 text-gray-700"
-                            }`}
-                          >
-                            {tourType}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Location Preferences */}
-                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
-                      <div className="flex items-center justify-between mb-3">
-                        <label className="block font-medium text-gray-700 text-sm">
-                          Preferred Biogeographic Regions (select all that interest you)
-                        </label>
-                        <Link
-                          href="/aves-explorer"
-                          className="text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1 text-xs"
-                        >
-                          <Map className="w-3 h-3" />
-                          Explore Map
-                        </Link>
-                      </div>
-                      <div
-                        className={`border border-gray-200 rounded-lg bg-gray-50 ${isMobile ? "max-h-48" : "max-h-56"} overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400`}
+                      <label htmlFor="tour-interest" className="block text-sm font-medium text-gray-700 mb-2">
+                        Tour Interest
+                      </label>
+                      <select
+                        id="tour-interest"
+                        name="tour-interest"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
                       >
-                        <div className="p-2 space-y-1">
-                          {LOCATION_OPTIONS.map((location) => (
-                            <label
-                              key={location}
-                              className="flex items-center space-x-2 border border-gray-200 rounded-lg hover:bg-white cursor-pointer p-2 transition-colors duration-200 bg-white/80 hover:bg-white hover:shadow-sm"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={selectedLocations.includes(location)}
-                                onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                                className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 flex-shrink-0"
-                              />
-                              <span className="text-gray-700 text-xs leading-relaxed">{location}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
+                        <option value="">Select a tour type</option>
+                        <option value="adventure">Adventure Tours</option>
+                        <option value="vision">Vision Tours</option>
+                        <option value="elevate">Elevate Tours</option>
+                        <option value="souls">Souls Tours</option>
+                        <option value="custom">Custom Tour</option>
+                      </select>
                     </div>
-
-                    <div className={`${isMobile ? "mt-6" : "mt-8"}`}>
-                      <label className="block font-medium text-gray-700 mb-2 text-sm">
-                        Special Interests or Requests
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                        Message
                       </label>
                       <textarea
-                        placeholder="Tell us about specific birds you'd like to see, photography interests, accessibility needs, dietary restrictions, or any other special requests..."
-                        value={formData.specialRequests}
-                        onChange={(e) => handleInputChange("specialRequests", e.target.value)}
+                        id="message"
+                        name="message"
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                        placeholder="Tell us about your birding interests and preferred dates..."
                       />
                     </div>
-
-                    <a
-                      href={generateEmailLink()}
-                      className={`block w-full ${isMobile ? "mt-8" : "mt-10"}`}
-                      onClick={(e) => {
-                        if (!formData.firstName || !formData.lastName || !formData.email) {
-                          e.preventDefault()
-                          alert("Please fill in your name and email address before submitting.")
-                        }
-                      }}
-                    >
-                      <Button className="w-full bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 text-lg py-4">
-                        <Mail className="mr-2 w-5 h-5" />
-                        Send My Inquiry
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </Button>
-                    </a>
-
-                    <p className="text-gray-500 text-center text-sm">
-                      We'll respond within 24 hours with personalized recommendations
-                    </p>
+                    <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                      Send Message
+                    </Button>
                   </div>
 
-                  {/* Contact Information */}
-                  <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-6">
-                    <h3 className="font-bold text-gray-900 mb-6 text-xl">Get in Touch Directly</h3>
-
-                    <div className="space-y-6 mb-8">
-                      <div className="flex items-start space-x-3">
-                        <Mail className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
+                  {/* Quick Links and Info */}
+                  <div>
+                    <h3 className="text-2xl font-bold mb-6 text-gray-900">Get in Touch Directly</h3>
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-emerald-50 transition-colors group">
+                        <Mail className="w-5 h-5 text-emerald-600 group-hover:text-emerald-700" />
                         <div>
-                          <div className="font-medium text-gray-900">Email</div>
+                          <div className="font-medium text-gray-900 group-hover:text-emerald-700">Email</div>
                           <a
                             href="mailto:info@aves.bio"
-                            className="text-emerald-600 hover:text-emerald-700 hover:underline"
+                            className="text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
                           >
                             info@aves.bio
                           </a>
@@ -758,10 +617,10 @@ ${formData.firstName} ${formData.lastName}`)
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3">
-                        <MapPin className="text-emerald-600 mt-1 flex-shrink-0 w-5 h-5" />
+                      <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-emerald-50 transition-colors group">
+                        <MapPin className="w-5 h-5 text-emerald-600 group-hover:text-emerald-700" />
                         <div>
-                          <div className="font-medium text-gray-900">Based in</div>
+                          <div className="font-medium text-gray-900 group-hover:text-emerald-700">Based in</div>
                           <div className="text-gray-700">Vancouver, Canada and Bogota, Colombia</div>
                           <div className="text-gray-600 text-sm">Operating in Colombia</div>
                         </div>
