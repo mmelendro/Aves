@@ -100,62 +100,85 @@ export function Footer({ transparent = false }: FooterProps) {
             <ul className={`space-y-3 text-sm sm:text-base ${transparent ? "text-white" : "text-gray-200"}`}>
               <li>
                 <Link
-                  href="/tours/adventure"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  href="/tours"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  🍃 Adventure Tours
+                  AVES Tours
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tours/adventure"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
+                >
+                  Adventure Tours
                 </Link>
               </li>
               <li>
                 <Link
                   href="/tours/vision"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  🪶 Vision Tours
+                  Vision Tours
                 </Link>
               </li>
               <li>
                 <Link
                   href="/tours/elevate"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  🌼 Elevate Tours
+                  Elevate Tours
                 </Link>
               </li>
               <li>
                 <Link
                   href="/tours/souls"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  🍓 Souls Tours
+                  Souls Tours
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Explore Column */}
+          <div className="text-center sm:text-left">
+            <h4
+              className={`font-semibold mb-4 text-base sm:text-lg text-emerald-400 ${transparent ? "drop-shadow-lg text-shadow-lg" : "drop-shadow-sm"}`}
+            >
+              🌎 Explore
+            </h4>
+            <ul className={`space-y-3 text-sm sm:text-base ${transparent ? "text-white" : "text-gray-200"}`}>
+              <li>
+                <Link
+                  href="/aves-explorer"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
+                >
+                  Colombia
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/tours"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  href="/blog"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  🗺️ View All Tours
+                  Birding with AVES
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/resources"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
+                >
+                  Birding in Colombia
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/travel-tips"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
+                >
+                  Travel Essentials
                 </Link>
               </li>
             </ul>
@@ -166,227 +189,92 @@ export function Footer({ transparent = false }: FooterProps) {
             <h4
               className={`font-semibold mb-4 text-base sm:text-lg text-emerald-400 ${transparent ? "drop-shadow-lg text-shadow-lg" : "drop-shadow-sm"}`}
             >
-              🏢 Company
+              🏢 AVES
             </h4>
             <ul className={`space-y-3 text-sm sm:text-base ${transparent ? "text-white" : "text-gray-200"}`}>
               <li>
                 <Link
                   href="/about"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  ℹ️ About AVES
+                  About AVES
                 </Link>
               </li>
               <li>
                 <Link
                   href="/team"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  👥 Our Team
+                  Our Team
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about/partners"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  🤝 Our Partners
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/conservation"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
-                >
-                  🌱 Conservation
+                  Our Partners
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about/b-corp"
-                  className={`hover:text-emerald-400 transition-colors duration-300 inline-flex items-center group touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  <span
-                    className={`mr-1 text-xs font-bold bg-white text-gray-900 px-1 rounded ${transparent ? "shadow-md" : ""}`}
-                  >
-                    B
-                  </span>
-                  B Corp Journey
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources & Support Column - Updated with AVES Explorer */}
-          <div className="text-center sm:text-left">
-            <h4
-              className={`font-semibold mb-4 text-base sm:text-lg text-emerald-400 ${transparent ? "drop-shadow-lg text-shadow-lg" : "drop-shadow-sm"}`}
-            >
-              📚 Resources
-            </h4>
-            <ul className={`space-y-3 text-sm sm:text-base ${transparent ? "text-white" : "text-gray-200"}`}>
-              <li>
-                <Link
-                  href="/resources"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
-                >
-                  🎯 Resource Hub
+                  Our B Corp Journey
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/blog"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
+                  href="/conservation"
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  📝 Blog & Stories
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/aves-explorer"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
-                >
-                  🦅 AVES Explorer
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/travel-tips"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
-                >
-                  ✈️ Travel Essentials
+                  Conservation
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 mt-4 pt-4 hover:translate-x-1 transform ${
-                    transparent
-                      ? "border-t border-white/40 drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "border-t border-gray-600/50 drop-shadow-sm"
-                  }`}
+                  className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                 >
-                  📞 Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/shopping"
-                  className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation block py-1 hover:translate-x-1 transform ${
-                    transparent
-                      ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                      : "drop-shadow-sm"
-                  }`}
-                >
-                  🎫 Book a Tour
+                  Contact
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Section with Copyright and Legal Links */}
-        <div className={`mt-12 pt-8 ${transparent ? "border-t border-white/40" : "border-t border-gray-600/50"}`}>
-          <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
-            <div className="text-center sm:text-left">
-              <p
-                className={`text-xs sm:text-sm ${transparent ? "text-white drop-shadow-md text-shadow-md" : "text-gray-200 drop-shadow-sm"}`}
-              >
-                © 2025 AVES Colombia. All rights reserved.
-              </p>
-              <p
-                className={`text-xs mt-1 ${transparent ? "text-white/90 drop-shadow-md text-shadow-md" : "text-gray-300 drop-shadow-sm"}`}
-              >
-                Sustainable birding tours supporting conservation and local communities.
-              </p>
-            </div>
-
-            {/* Legal Links */}
-            <div
-              className={`flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-center ${transparent ? "text-white" : "text-gray-200"}`}
+        {/* Bottom Section */}
+        <div className="border-t border-gray-700/50 mt-8 pt-8 text-center">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p
+              className={`text-sm ${transparent ? "text-white drop-shadow-md text-shadow-md" : "text-gray-300 drop-shadow-sm"}`}
             >
+              © 2024 AVES Colombia. All rights reserved.
+            </p>
+            <div className="flex flex-wrap justify-center sm:justify-end space-x-4 text-sm">
               <Link
                 href="/privacy"
-                className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation ${
-                  transparent
-                    ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                    : "drop-shadow-sm"
-                }`}
+                className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "text-white drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "text-gray-300 drop-shadow-sm"}`}
               >
-                🔒 Privacy Policy
+                Privacy Policy
               </Link>
               <Link
                 href="/terms"
-                className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation ${
-                  transparent
-                    ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                    : "drop-shadow-sm"
-                }`}
+                className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "text-white drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "text-gray-300 drop-shadow-sm"}`}
               >
-                📋 Terms of Service
+                Terms of Service
               </Link>
               <Link
                 href="/cookies"
-                className={`hover:text-emerald-400 transition-colors duration-300 touch-manipulation ${
-                  transparent
-                    ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg hover:text-shadow-lg"
-                    : "drop-shadow-sm"
-                }`}
+                className={`hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation ${transparent ? "text-white drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "text-gray-300 drop-shadow-sm"}`}
               >
-                🍪 Cookie Policy
+                Cookie Policy
               </Link>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Conditional gradient overlay based on transparency */}
-      {transparent && (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 via-gray-900/10 to-transparent pointer-events-none -z-10"></div>
-          <div className="absolute inset-0 bg-radial-gradient from-gray-900/20 via-transparent to-transparent pointer-events-none -z-10"></div>
-        </>
-      )}
-
-      {!transparent && (
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent pointer-events-none -z-10"></div>
-      )}
     </footer>
   )
 }

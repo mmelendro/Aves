@@ -1,186 +1,246 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Play, Pause, Volume2, VolumeX, RotateCcw } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface MobileAudioPlayerProps {
   src: string
   title: string
-  autoPlay?: boolean
   className?: string
 }
 
-export default function MobileAudioPlayer({ src, title, autoPlay = false, className }: MobileAudioPlayerProps) {
+export default function MobileAudioPlayer({ src, title, className }: MobileAudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [volume, setVolume] = useState(0.7)
   const [isMuted, setIsMuted] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [canPlay, setCanPlay] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [userInteracted, setUserInteracted] = useState(false)
+
   const audioRef = useRef<HTMLAudioElement>(null)
+  const progressRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
 
-    // Mobile-optimized audio setup
-    audio.preload = "metadata"
-    audio.crossOrigin = "anonymous"
-    audio.setAttribute("playsinline", "true")
-    audio.setAttribute("webkit-playsinline", "true")
-    audio.volume = 0.6
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration)
+      setIsLoading(false)
+    }
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime)
+    }
+
+    const handleEnded = () => {
+      setIsPlaying(false)
+      setCurrentTime(0)
+    }
+
+    const handleError = () => {
+      setError("Failed to load audio file")
+      setIsLoading(false)
+    }
 
     const handleLoadStart = () => {
       setIsLoading(true)
       setError(null)
     }
 
-    const handleCanPlay = () => {
-      setIsLoading(false)
-      setCanPlay(true)
-      setError(null)
-
-      if (autoPlay) {
-        // Attempt autoplay with user gesture requirement
-        const playPromise = audio.play()
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => setIsPlaying(true))
-            .catch((error) => {
-              console.log("Autoplay prevented:", error)
-              setIsPlaying(false)
-            })
-        }
-      }
-    }
-
-    const handleError = (e: Event) => {
-      setIsLoading(false)
-      setCanPlay(false)
-      setIsPlaying(false)
-
-      if (audio.error) {
-        switch (audio.error.code) {
-          case MediaError.MEDIA_ERR_ABORTED:
-            setError("Audio loading was aborted")
-            break
-          case MediaError.MEDIA_ERR_NETWORK:
-            setError("Network error loading audio")
-            break
-          case MediaError.MEDIA_ERR_DECODE:
-            setError("Audio format not supported")
-            break
-          case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-            setError("Audio file not found")
-            break
-          default:
-            setError("Unknown audio error")
-        }
-      } else {
-        setError("Audio playback failed")
-      }
-    }
-
-    const handleEnded = () => {
-      setIsPlaying(false)
-    }
-
-    audio.addEventListener("loadstart", handleLoadStart)
-    audio.addEventListener("canplay", handleCanPlay)
-    audio.addEventListener("error", handleError)
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata)
+    audio.addEventListener("timeupdate", handleTimeUpdate)
     audio.addEventListener("ended", handleEnded)
+    audio.addEventListener("error", handleError)
+    audio.addEventListener("loadstart", handleLoadStart)
 
     return () => {
-      audio.removeEventListener("loadstart", handleLoadStart)
-      audio.removeEventListener("canplay", handleCanPlay)
-      audio.removeEventListener("error", handleError)
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata)
+      audio.removeEventListener("timeupdate", handleTimeUpdate)
       audio.removeEventListener("ended", handleEnded)
+      audio.removeEventListener("error", handleError)
+      audio.removeEventListener("loadstart", handleLoadStart)
     }
-  }, [autoPlay])
+  }, [src])
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     const audio = audioRef.current
-    if (!audio || !canPlay) return
+    if (!audio) return
 
-    if (isPlaying) {
-      audio.pause()
-      setIsPlaying(false)
-    } else {
-      const playPromise = audio.play()
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch((error) => {
-            console.error("Play failed:", error)
-            setError("Playback failed - tap to try again")
-            setIsPlaying(false)
-          })
+    setUserInteracted(true)
+
+    try {
+      if (isPlaying) {
+        audio.pause()
+        setIsPlaying(false)
+      } else {
+        const playPromise = audio.play()
+        if (playPromise !== undefined) {
+          await playPromise
+          setIsPlaying(true)
+        }
       }
+    } catch (error) {
+      console.error("Error playing audio:", error)
+      setError("Playback failed. Tap to retry.")
+      setIsPlaying(false)
     }
+  }
+
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current
+    const progressBar = progressRef.current
+    if (!audio || !progressBar) return
+
+    const rect = progressBar.getBoundingClientRect()
+    const clickX = e.clientX - rect.left
+    const newTime = (clickX / rect.width) * duration
+
+    audio.currentTime = newTime
+    setCurrentTime(newTime)
   }
 
   const toggleMute = () => {
     const audio = audioRef.current
     if (!audio) return
 
-    audio.muted = !isMuted
-    setIsMuted(!isMuted)
+    if (isMuted) {
+      audio.volume = volume
+      setIsMuted(false)
+    } else {
+      audio.volume = 0
+      setIsMuted(true)
+    }
   }
 
-  const retry = () => {
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = Number.parseFloat(e.target.value)
     const audio = audioRef.current
     if (!audio) return
 
-    setError(null)
-    setIsLoading(true)
-    audio.load()
+    setVolume(newVolume)
+    audio.volume = newVolume
+    setIsMuted(newVolume === 0)
   }
 
+  const resetAudio = () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    audio.currentTime = 0
+    setCurrentTime(0)
+    setIsPlaying(false)
+    setError(null)
+  }
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60)
+    const seconds = Math.floor(time % 60)
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`
+  }
+
+  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0
+
   return (
-    <Card className={className}>
+    <Card className={cn("w-full max-w-md mx-auto", className)}>
       <CardContent className="p-4">
-        <audio ref={audioRef} src={src} />
+        <audio ref={audioRef} src={src} preload="metadata" playsInline webkit-playsinline="true" />
 
-        <div className="space-y-3">
-          <div className="text-sm font-medium truncate">{title}</div>
+        <div className="space-y-4">
+          {/* Title */}
+          <div className="text-center">
+            <h3 className="font-medium text-gray-900 truncate">{title}</h3>
+            {error && <p className="text-sm text-red-600 mt-1">{error}</p>}
+          </div>
 
-          {error && <div className="text-xs text-red-600 bg-red-50 p-2 rounded">{error}</div>}
+          {/* Progress Bar */}
+          <div className="space-y-2">
+            <div
+              ref={progressRef}
+              className="w-full h-2 bg-gray-200 rounded-full cursor-pointer relative overflow-hidden"
+              onClick={handleProgressClick}
+            >
+              <div
+                className="h-full bg-emerald-600 rounded-full transition-all duration-100"
+                style={{ width: `${progressPercentage}%` }}
+              />
+              {isLoading && <div className="absolute inset-0 bg-gray-300 animate-pulse rounded-full" />}
+            </div>
 
-          <div className="flex items-center gap-2">
+            <div className="flex justify-between text-xs text-gray-500">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(duration)}</span>
+            </div>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-center space-x-4">
             <Button
               variant="outline"
               size="sm"
+              onClick={resetAudio}
+              disabled={isLoading}
+              className="w-10 h-10 p-0 bg-transparent"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </Button>
+
+            <Button
               onClick={togglePlayPause}
-              disabled={!canPlay || isLoading}
-              className="flex-shrink-0 bg-transparent"
+              disabled={isLoading || !!error}
+              className="w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700"
             >
               {isLoading ? (
-                <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : isPlaying ? (
-                <Pause className="w-4 h-4" />
+                <Pause className="w-5 h-5 text-white" />
               ) : (
-                <Play className="w-4 h-4" />
+                <Play className="w-5 h-5 text-white ml-0.5" />
               )}
             </Button>
 
-            <Button variant="ghost" size="sm" onClick={toggleMute} disabled={!canPlay} className="flex-shrink-0">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleMute}
+              disabled={isLoading}
+              className="w-10 h-10 p-0 bg-transparent"
+            >
               {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
             </Button>
-
-            {error && (
-              <Button variant="ghost" size="sm" onClick={retry} className="flex-shrink-0">
-                <RotateCcw className="w-4 h-4" />
-              </Button>
-            )}
-
-            <div className="flex-1 text-xs text-gray-500">
-              {isLoading && "Loading..."}
-              {canPlay && !isPlaying && !error && "Ready to play"}
-              {isPlaying && "Playing"}
-              {error && "Error occurred"}
-            </div>
           </div>
+
+          {/* Volume Control */}
+          <div className="flex items-center space-x-2">
+            <VolumeX className="w-4 h-4 text-gray-400" />
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={isMuted ? 0 : volume}
+              onChange={handleVolumeChange}
+              className="flex-1 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              style={{
+                background: `linear-gradient(to right, #10b981 0%, #10b981 ${(isMuted ? 0 : volume) * 100}%, #e5e7eb ${(isMuted ? 0 : volume) * 100}%, #e5e7eb 100%)`,
+              }}
+            />
+            <Volume2 className="w-4 h-4 text-gray-400" />
+          </div>
+
+          {/* Mobile-specific tips */}
+          {!userInteracted && (
+            <div className="text-xs text-gray-500 text-center bg-gray-50 p-2 rounded">
+              Tap play button to start audio playback
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

@@ -1,241 +1,318 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Volume2, CheckCircle, XCircle, AlertTriangle } from "lucide-react"
-
-interface AudioTestResult {
-  file: string
-  name: string
-  status: "loading" | "success" | "error" | "not-tested"
-  error?: string
-  duration?: number
-  canPlay?: boolean
-}
-
-const audioFiles = [
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3", name: "Green-bearded Helmetcrest" },
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3", name: "Rainbow-bearded Thornbill" },
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3", name: "Chestnut-crowned Antpitta" },
-  { file: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Yellow-throated%20Toucan-YZaM0Q4HERiJp55ECemjfgYkdJIYwZ.mp3", name: "Yellow-throated Toucan" },
-]
+import { CheckCircle, XCircle, AlertCircle, Volume2 } from "lucide-react"
 
 export default function AudioDiagnostics() {
-  const [testResults, setTestResults] = useState<AudioTestResult[]>(
-    audioFiles.map((f) => ({ ...f, status: "not-tested" })),
-  )
-  const [deviceInfo, setDeviceInfo] = useState<string>("")
-  const [audioSupport, setAudioSupport] = useState<any>({})
-  const [isRunning, setIsRunning] = useState(false)
+  const [diagnostics, setDiagnostics] = useState({
+    browserSupport: false,
+    audioContext: false,
+    mediaDevices: false,
+    autoplayPolicy: "unknown",
+    touchRequired: false,
+  })
+
+  const [testResults, setTestResults] = useState({
+    basicPlayback: "pending",
+    contextResume: "pending",
+    volumeControl: "pending",
+    mobileFriendly: "pending",
+  })
 
   useEffect(() => {
-    // Gather device information
-    const userAgent = navigator.userAgent
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(userAgent)
-    const isIOS = /iPhone|iPad|iPod/i.test(userAgent)
-
-    setDeviceInfo(`${isMobile ? "Mobile" : "Desktop"} | ${isIOS ? "iOS" : "Other"} | ${userAgent.substring(0, 50)}...`)
-
-    // Test audio format support
-    const audio = document.createElement("audio")
-    const support = {
-      mp3: audio.canPlayType("audio/mpeg"),
-      wav: audio.canPlayType("audio/wav"),
-      ogg: audio.canPlayType("audio/ogg"),
-      m4a: audio.canPlayType("audio/mp4"),
-    }
-    setAudioSupport(support)
+    runDiagnostics()
   }, [])
 
-  const testAudioFile = async (audioFile: AudioTestResult, index: number) => {
-    setTestResults((prev) => prev.map((item, i) => (i === index ? { ...item, status: "loading" } : item)))
+  const runDiagnostics = async () => {
+    // Browser support check
+    const audioSupport = !!(window.Audio && document.createElement("audio").canPlayType)
 
+    // AudioContext support
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
+    const audioContextSupport = !!AudioContextClass
+
+    // Media devices support
+    const mediaDevicesSupport = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+
+    // Touch device detection
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0
+
+    // Autoplay policy detection
+    let autoplayPolicy = "unknown"
     try {
-      // First, check if file exists
-      const response = await fetch(audioFile.file, { method: "HEAD" })
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: File not found`)
-      }
-
-      // Test audio playback
       const audio = new Audio()
-      audio.preload = "metadata"
-      audio.crossOrigin = "anonymous"
-      audio.setAttribute("playsinline", "true")
-      audio.setAttribute("webkit-playsinline", "true")
-
-      return new Promise<void>((resolve, reject) => {
-        const timeout = setTimeout(() => {
-          reject(new Error("Audio loading timeout"))
-        }, 10000)
-
-        audio.onloadedmetadata = () => {
-          clearTimeout(timeout)
-          setTestResults((prev) =>
-            prev.map((item, i) =>
-              i === index
-                ? {
-                    ...item,
-                    status: "success",
-                    duration: audio.duration,
-                    canPlay: true,
-                  }
-                : item,
-            ),
-          )
-          resolve()
+      const playPromise = audio.play()
+      if (playPromise !== undefined) {
+        try {
+          await playPromise
+          autoplayPolicy = "allowed"
+          audio.pause()
+        } catch (error) {
+          autoplayPolicy = "blocked"
         }
-
-        audio.onerror = (e) => {
-          clearTimeout(timeout)
-          const errorMsg = audio.error
-            ? `Error ${audio.error.code}: ${getErrorMessage(audio.error.code)}`
-            : "Unknown audio error"
-
-          setTestResults((prev) =>
-            prev.map((item, i) =>
-              i === index
-                ? {
-                    ...item,
-                    status: "error",
-                    error: errorMsg,
-                    canPlay: false,
-                  }
-                : item,
-            ),
-          )
-          reject(new Error(errorMsg))
-        }
-
-        audio.src = audioFile.file
-      })
+      }
     } catch (error) {
-      setTestResults((prev) =>
-        prev.map((item, i) =>
-          i === index
-            ? {
-                ...item,
-                status: "error",
-                error: error instanceof Error ? error.message : "Unknown error",
-                canPlay: false,
-              }
-            : item,
-        ),
-      )
+      autoplayPolicy = "error"
     }
+
+    setDiagnostics({
+      browserSupport: audioSupport,
+      audioContext: audioContextSupport,
+      mediaDevices: mediaDevicesSupport,
+      autoplayPolicy,
+      touchRequired: isTouchDevice,
+    })
+
+    // Run tests
+    await runTests()
   }
 
-  const getErrorMessage = (errorCode: number) => {
-    switch (errorCode) {
-      case MediaError.MEDIA_ERR_ABORTED:
-        return "Loading aborted"
-      case MediaError.MEDIA_ERR_NETWORK:
-        return "Network error"
-      case MediaError.MEDIA_ERR_DECODE:
-        return "Decode error"
-      case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-        return "Format not supported"
+  const runTests = async () => {
+    // Test 1: Basic playback
+    try {
+      const audio = new Audio("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3")
+      audio.volume = 0.1 // Low volume for testing
+
+      const playPromise = audio.play()
+      if (playPromise !== undefined) {
+        await playPromise
+        setTestResults((prev) => ({ ...prev, basicPlayback: "success" }))
+        audio.pause()
+      }
+    } catch (error) {
+      setTestResults((prev) => ({ ...prev, basicPlayback: "failed" }))
+    }
+
+    // Test 2: AudioContext resume
+    if (diagnostics.audioContext) {
+      try {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
+        const audioContext = new AudioContextClass()
+
+        if (audioContext.state === "suspended") {
+          await audioContext.resume()
+        }
+
+        setTestResults((prev) => ({
+          ...prev,
+          contextResume: audioContext.state === "running" ? "success" : "failed",
+        }))
+
+        audioContext.close()
+      } catch (error) {
+        setTestResults((prev) => ({ ...prev, contextResume: "failed" }))
+      }
+    }
+
+    // Test 3: Volume control
+    try {
+      const audio = new Audio()
+      audio.volume = 0.5
+      setTestResults((prev) => ({
+        ...prev,
+        volumeControl: audio.volume === 0.5 ? "success" : "failed",
+      }))
+    } catch (error) {
+      setTestResults((prev) => ({ ...prev, volumeControl: "failed" }))
+    }
+
+    // Test 4: Mobile-friendly features
+    const mobileScore = [
+      diagnostics.touchRequired,
+      diagnostics.audioContext,
+      diagnostics.autoplayPolicy !== "unknown",
+    ].filter(Boolean).length
+
+    setTestResults((prev) => ({
+      ...prev,
+      mobileFriendly: mobileScore >= 2 ? "success" : "warning",
+    }))
+  }
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "success":
+        return <CheckCircle className="w-4 h-4 text-green-600" />
+      case "failed":
+        return <XCircle className="w-4 h-4 text-red-600" />
+      case "warning":
+        return <AlertCircle className="w-4 h-4 text-yellow-600" />
       default:
-        return "Unknown error"
+        return <div className="w-4 h-4 border-2 border-gray-300 border-t-transparent rounded-full animate-spin" />
     }
   }
 
-  const runAllTests = async () => {
-    setIsRunning(true)
-    for (let i = 0; i < audioFiles.length; i++) {
-      await testAudioFile(testResults[i], i)
-      // Small delay between tests
-      await new Promise((resolve) => setTimeout(resolve, 500))
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "success":
+        return "bg-green-100 text-green-800"
+      case "failed":
+        return "bg-red-100 text-red-800"
+      case "warning":
+        return "bg-yellow-100 text-yellow-800"
+      default:
+        return "bg-gray-100 text-gray-800"
     }
-    setIsRunning(false)
-  }
-
-  const playTestAudio = (audioFile: string) => {
-    const audio = new Audio(audioFile)
-    audio.volume = 0.5
-    audio.play().catch(console.error)
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Audio Diagnostics Tool</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Volume2 className="w-5 h-5" />
+            Browser Audio Diagnostics
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Device Information */}
-          <div>
-            <h3 className="font-semibold mb-2">Device Information</h3>
-            <p className="text-sm text-gray-600 break-all">{deviceInfo}</p>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <h4 className="font-medium text-sm">Browser Capabilities</h4>
 
-          {/* Audio Format Support */}
-          <div>
-            <h3 className="font-semibold mb-2">Audio Format Support</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {Object.entries(audioSupport).map(([format, support]) => (
-                <Badge key={format} variant={support ? "default" : "destructive"} className="justify-center">
-                  {format.toUpperCase()}: {support ? "✓" : "✗"}
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Audio Support</span>
+                <Badge className={getStatusColor(diagnostics.browserSupport ? "success" : "failed")}>
+                  {diagnostics.browserSupport ? "Supported" : "Not Supported"}
                 </Badge>
-              ))}
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">AudioContext API</span>
+                <Badge className={getStatusColor(diagnostics.audioContext ? "success" : "failed")}>
+                  {diagnostics.audioContext ? "Available" : "Not Available"}
+                </Badge>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Media Devices</span>
+                <Badge className={getStatusColor(diagnostics.mediaDevices ? "success" : "warning")}>
+                  {diagnostics.mediaDevices ? "Available" : "Limited"}
+                </Badge>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Touch Device</span>
+                <Badge className={getStatusColor(diagnostics.touchRequired ? "warning" : "success")}>
+                  {diagnostics.touchRequired ? "Yes (Mobile)" : "No (Desktop)"}
+                </Badge>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Autoplay Policy</span>
+                <Badge
+                  className={getStatusColor(
+                    diagnostics.autoplayPolicy === "allowed"
+                      ? "success"
+                      : diagnostics.autoplayPolicy === "blocked"
+                        ? "warning"
+                        : "failed",
+                  )}
+                >
+                  {diagnostics.autoplayPolicy}
+                </Badge>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="font-medium text-sm">Functionality Tests</h4>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Basic Playback</span>
+                <div className="flex items-center gap-2">
+                  {getStatusIcon(testResults.basicPlayback)}
+                  <Badge className={getStatusColor(testResults.basicPlayback)}>{testResults.basicPlayback}</Badge>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Context Resume</span>
+                <div className="flex items-center gap-2">
+                  {getStatusIcon(testResults.contextResume)}
+                  <Badge className={getStatusColor(testResults.contextResume)}>{testResults.contextResume}</Badge>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Volume Control</span>
+                <div className="flex items-center gap-2">
+                  {getStatusIcon(testResults.volumeControl)}
+                  <Badge className={getStatusColor(testResults.volumeControl)}>{testResults.volumeControl}</Badge>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Mobile Friendly</span>
+                <div className="flex items-center gap-2">
+                  {getStatusIcon(testResults.mobileFriendly)}
+                  <Badge className={getStatusColor(testResults.mobileFriendly)}>{testResults.mobileFriendly}</Badge>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Test Controls */}
-          <div className="flex gap-2">
-            <Button onClick={runAllTests} disabled={isRunning}>
-              {isRunning ? "Testing..." : "Run All Tests"}
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => setTestResults(audioFiles.map((f) => ({ ...f, status: "not-tested" })))}
-            >
-              Reset
+          <div className="pt-4 border-t">
+            <Button onClick={runDiagnostics} className="w-full">
+              Re-run Diagnostics
             </Button>
           </div>
+        </CardContent>
+      </Card>
 
-          {/* Test Results */}
-          <div className="space-y-2">
-            <h3 className="font-semibold">Test Results</h3>
-            {testResults.map((result, index) => (
-              <div key={result.file} className="flex items-center justify-between p-3 border rounded">
-                <div className="flex-1">
-                  <div className="font-medium">{result.name}</div>
-                  <div className="text-sm text-gray-500">{result.file}</div>
-                  {result.duration && (
-                    <div className="text-xs text-gray-400">Duration: {result.duration.toFixed(2)}s</div>
-                  )}
-                  {result.error && <div className="text-xs text-red-500">{result.error}</div>}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {result.status === "loading" && (
-                    <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                  )}
-                  {result.status === "success" && (
-                    <>
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <Button size="sm" variant="outline" onClick={() => playTestAudio(result.file)}>
-                        <Volume2 className="w-3 h-3" />
-                      </Button>
-                    </>
-                  )}
-                  {result.status === "error" && <XCircle className="w-4 h-4 text-red-500" />}
-                  {result.status === "not-tested" && <AlertTriangle className="w-4 h-4 text-gray-400" />}
-
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => testAudioFile(result, index)}
-                    disabled={result.status === "loading"}
-                  >
-                    Test
-                  </Button>
+      <Card>
+        <CardHeader>
+          <CardTitle>Recommendations</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3 text-sm">
+            {diagnostics.autoplayPolicy === "blocked" && (
+              <div className="flex items-start gap-2 p-3 bg-yellow-50 rounded-lg">
+                <AlertCircle className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-yellow-800">Autoplay Blocked</p>
+                  <p className="text-yellow-700">
+                    Audio requires user interaction to play. This is normal browser behavior.
+                  </p>
                 </div>
               </div>
-            ))}
+            )}
+
+            {diagnostics.touchRequired && (
+              <div className="flex items-start gap-2 p-3 bg-blue-50 rounded-lg">
+                <AlertCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-blue-800">Mobile Device Detected</p>
+                  <p className="text-blue-700">
+                    Enhanced mobile audio controls are active for better touch experience.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {!diagnostics.audioContext && (
+              <div className="flex items-start gap-2 p-3 bg-red-50 rounded-lg">
+                <XCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-red-800">AudioContext Not Available</p>
+                  <p className="text-red-700">
+                    Advanced audio features may not work properly. Consider updating your browser.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-start gap-2 p-3 bg-green-50 rounded-lg">
+              <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-green-800">Audio System Status</p>
+                <p className="text-green-700">
+                  The homepage bird carousel includes enhanced audio controls with mobile optimization, volume control,
+                  and proper error handling for the best user experience.
+                </p>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

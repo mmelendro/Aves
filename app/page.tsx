@@ -787,13 +787,6 @@ ${formData.firstName} ${formData.lastName}`)
                           Explore Interactive Map
                         </Link>
                         <Link
-                          href="/endemic-birds"
-                          className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
-                        >
-                          <ArrowRight className="mr-2 w-3 h-3" />
-                          Endemic Birds Guide
-                        </Link>
-                        <Link
                           href="/travel-tips"
                           className="flex items-center text-emerald-600 hover:text-emerald-700 hover:underline text-sm"
                         >
