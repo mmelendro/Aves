@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import DatabaseImplementationOrchestrator from "@/components/database-implementation-orchestrator"
+import DatabaseSchemaVisualizer from "@/components/database-schema-visualizer"
 
 export const metadata: Metadata = {
-  title: "Database Implementation - AVES Colombia",
-  description: "Execute the 5-phase implementation plan for Supabase database enhancements",
+  title: "Database Schema Analysis - AVES Colombia",
+  description: "Interactive database schema visualization and gap analysis for Supabase implementation",
 }
 
 export default function DatabaseImplementationPage() {
-  return <DatabaseImplementationOrchestrator />
+  return <DatabaseSchemaVisualizer />
 }
