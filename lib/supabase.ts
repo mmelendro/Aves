@@ -12,6 +12,8 @@ export type Database = {
     Tables: {
       bookings: {
         Row: {
+          id: string
+          user_id: string
           booking_date: string
           booking_reference: string
           contact_email: string
@@ -19,7 +21,6 @@ export type Database = {
           contact_phone: string
           created_at: string
           end_date: string
-          id: string
           notes: string | null
           participants: number
           start_date: string
@@ -27,9 +28,10 @@ export type Database = {
           total_price: number
           tour_type: string
           updated_at: string
-          user_id: string
         }
         Insert: {
+          id?: string
+          user_id: string
           booking_date?: string
           booking_reference?: string
           contact_email: string
@@ -37,7 +39,6 @@ export type Database = {
           contact_phone: string
           created_at?: string
           end_date: string
-          id?: string
           notes?: string | null
           participants: number
           start_date: string
@@ -45,9 +46,10 @@ export type Database = {
           total_price: number
           tour_type: string
           updated_at?: string
-          user_id: string
         }
         Update: {
+          id?: string
+          user_id?: string
           booking_date?: string
           booking_reference?: string
           contact_email?: string
@@ -55,7 +57,6 @@ export type Database = {
           contact_phone?: string
           created_at?: string
           end_date?: string
-          id?: string
           notes?: string | null
           participants?: number
           start_date?: string
@@ -63,12 +64,21 @@ export type Database = {
           total_price?: number
           tour_type?: string
           updated_at?: string
-          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_profiles: {
         Row: {
+          id: string
+          auth_user_id: string
           covid_vaccination_status: string | null
           created_at: string
           current_medications: string | null
@@ -87,7 +97,6 @@ export type Database = {
           hepatitis_a_vaccination: boolean | null
           hepatitis_b_date: string | null
           hepatitis_b_vaccination: boolean | null
-          id: string
           instagram_handle: string | null
           insurance_coverage_details: string | null
           insurance_expiry_date: string | null
@@ -107,11 +116,12 @@ export type Database = {
           typhoid_date: string | null
           typhoid_vaccination: boolean | null
           updated_at: string
-          user_id: string
           yellow_fever_date: string | null
           yellow_fever_vaccination: boolean | null
         }
         Insert: {
+          id?: string
+          auth_user_id: string
           covid_vaccination_status?: string | null
           created_at?: string
           current_medications?: string | null
@@ -130,7 +140,6 @@ export type Database = {
           hepatitis_a_vaccination?: boolean | null
           hepatitis_b_date?: string | null
           hepatitis_b_vaccination?: boolean | null
-          id?: string
           instagram_handle?: string | null
           insurance_coverage_details?: string | null
           insurance_expiry_date?: string | null
@@ -150,11 +159,12 @@ export type Database = {
           typhoid_date?: string | null
           typhoid_vaccination?: boolean | null
           updated_at?: string
-          user_id: string
           yellow_fever_date?: string | null
           yellow_fever_vaccination?: boolean | null
         }
         Update: {
+          id?: string
+          auth_user_id?: string
           covid_vaccination_status?: string | null
           created_at?: string
           current_medications?: string | null
@@ -173,7 +183,6 @@ export type Database = {
           hepatitis_a_vaccination?: boolean | null
           hepatitis_b_date?: string | null
           hepatitis_b_vaccination?: boolean | null
-          id?: string
           instagram_handle?: string | null
           insurance_coverage_details?: string | null
           insurance_expiry_date?: string | null
@@ -193,7 +202,6 @@ export type Database = {
           typhoid_date?: string | null
           typhoid_vaccination?: boolean | null
           updated_at?: string
-          user_id?: string
           yellow_fever_date?: string | null
           yellow_fever_vaccination?: boolean | null
         }

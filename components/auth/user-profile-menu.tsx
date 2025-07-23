@@ -18,9 +18,10 @@ import { Settings, Calendar, CreditCard, LogOut, ChevronDown } from "lucide-reac
 import { toast } from "sonner"
 
 interface UserProfile {
-  first_name: string | null
-  last_name: string | null
-  email: string
+  id: string
+  full_name: string | null
+  phone_number: string | null
+  profile_image_url: string | null
 }
 
 interface UserProfileMenuProps {
@@ -46,8 +47,8 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
       try {
         const { data, error } = await supabase
           .from("user_profiles")
-          .select("first_name, last_name, email")
-          .eq("user_id", user.id)
+          .select("id, full_name, phone_number, profile_image_url")
+          .eq("auth_user_id", user.id)
           .single()
 
         if (error && error.code !== "PGRST116") {
@@ -83,11 +84,8 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
 
   const getDisplayName = () => {
     // First try to get name from database profile
-    if (profile?.first_name && profile?.last_name) {
-      return `${profile.first_name} ${profile.last_name}`
-    }
-    if (profile?.first_name) {
-      return profile.first_name
+    if (profile?.full_name) {
+      return profile.full_name
     }
 
     // Fallback to user metadata
@@ -103,11 +101,13 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
 
   const getInitials = () => {
     // First try to get initials from database profile
-    if (profile?.first_name && profile?.last_name) {
-      return `${profile.first_name[0]}${profile.last_name[0]}`.toUpperCase()
-    }
-    if (profile?.first_name) {
-      return profile.first_name[0].toUpperCase()
+    if (profile?.full_name) {
+      return profile.full_name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)
     }
 
     // Fallback to user metadata
@@ -122,7 +122,11 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
   }
 
   const getEmail = () => {
-    return profile?.email || user.email || ""
+    return user.email || ""
+  }
+
+  const getProfileImage = () => {
+    return profile?.profile_image_url || user.user_metadata?.avatar_url || "/placeholder.svg"
   }
 
   return (
@@ -130,7 +134,7 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="flex items-center gap-2 px-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user.user_metadata?.avatar_url || "/placeholder.svg"} />
+            <AvatarImage src={getProfileImage() || "/placeholder.svg"} />
             <AvatarFallback className="text-sm">{getInitials()}</AvatarFallback>
           </Avatar>
           <span className="hidden md:inline-block font-medium">{getDisplayName()}</span>
@@ -143,16 +147,16 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{getDisplayName()}</p>
             <p className="text-xs leading-none text-muted-foreground">{getEmail()}</p>
-            {profile && <p className="text-xs leading-none text-green-600">Profile loaded</p>}
+            {profile && <p className="text-xs leading-none text-green-600">Profile ID: {profile.id.slice(0, 8)}...</p>}
           </div>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href="/account/settings" className="flex items-center gap-2">
+          <Link href="/settings" className="flex items-center gap-2">
             <Settings className="h-4 w-4" />
-            Account Settings
+            Settings
           </Link>
         </DropdownMenuItem>
 

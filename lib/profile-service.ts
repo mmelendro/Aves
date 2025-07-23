@@ -16,20 +16,20 @@ export class ProfileService {
         return null
       }
 
-      console.log("Fetching profile for user:", user.id)
+      console.log("Fetching profile for auth user:", user.id)
 
       const { data: profile, error } = await this.supabase
         .from("user_profiles")
         .select("*")
-        .eq("user_id", user.id)
+        .eq("auth_user_id", user.id)
         .single()
 
       if (error) {
         if (error.code === "PGRST116") {
           // Profile doesn't exist, create one
-          console.log("Profile not found, creating new profile for user:", user.id)
+          console.log("Profile not found, creating new profile for auth user:", user.id)
           return await this.createUserProfile({
-            user_id: user.id,
+            auth_user_id: user.id,
             full_name: user.user_metadata?.full_name || "",
             phone_number: user.user_metadata?.phone_number || "",
           })
@@ -38,7 +38,7 @@ export class ProfileService {
         return null
       }
 
-      console.log("Profile fetched successfully:", profile.user_id)
+      console.log("Profile fetched successfully for profile ID:", profile.id)
       return profile
     } catch (error) {
       console.error("Error in getCurrentUserProfile:", error)
@@ -48,7 +48,7 @@ export class ProfileService {
 
   async createUserProfile(profileData: UserProfileInsert): Promise<UserProfile | null> {
     try {
-      console.log("Creating profile for user:", profileData.user_id)
+      console.log("Creating profile for auth user:", profileData.auth_user_id)
 
       const { data: profile, error } = await this.supabase.from("user_profiles").insert(profileData).select().single()
 
@@ -57,7 +57,7 @@ export class ProfileService {
         throw error
       }
 
-      console.log("Profile created successfully:", profile.user_id)
+      console.log("Profile created successfully with ID:", profile.id)
       return profile
     } catch (error) {
       console.error("Error in createUserProfile:", error)
@@ -77,7 +77,7 @@ export class ProfileService {
         return null
       }
 
-      console.log("Updating profile for user:", user.id)
+      console.log("Updating profile for auth user:", user.id)
 
       const { data: profile, error } = await this.supabase
         .from("user_profiles")
@@ -85,7 +85,7 @@ export class ProfileService {
           ...profileData,
           updated_at: new Date().toISOString(),
         })
-        .eq("user_id", user.id)
+        .eq("auth_user_id", user.id)
         .select()
         .single()
 
@@ -94,7 +94,7 @@ export class ProfileService {
         throw error
       }
 
-      console.log("Profile updated successfully:", profile.user_id)
+      console.log("Profile updated successfully with ID:", profile.id)
       return profile
     } catch (error) {
       console.error("Error in updateUserProfile:", error)
@@ -114,16 +114,16 @@ export class ProfileService {
         return false
       }
 
-      console.log("Deleting profile for user:", user.id)
+      console.log("Deleting profile for auth user:", user.id)
 
-      const { error } = await this.supabase.from("user_profiles").delete().eq("user_id", user.id)
+      const { error } = await this.supabase.from("user_profiles").delete().eq("auth_user_id", user.id)
 
       if (error) {
         console.error("Error deleting profile:", error)
         return false
       }
 
-      console.log("Profile deleted successfully for user:", user.id)
+      console.log("Profile deleted successfully for auth user:", user.id)
       return true
     } catch (error) {
       console.error("Error in deleteUserProfile:", error)

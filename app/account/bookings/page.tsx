@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { getCurrentUser } from "@/lib/supabase-server"
+import { getCurrentUser, getUserProfile } from "@/lib/supabase-server"
 import { createServerSupabaseClient } from "@/lib/supabase-server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -20,11 +20,18 @@ export default async function BookingsPage() {
 
   const supabase = createServerSupabaseClient()
 
-  // Fetch user bookings
+  // Get user profile first
+  const userProfile = await getUserProfile(user.id)
+
+  if (!userProfile) {
+    redirect("/settings?message=Please complete your profile first")
+  }
+
+  // Fetch user bookings using profile ID
   const { data: bookings, error } = await supabase
-    .from("user_bookings")
+    .from("bookings")
     .select("*")
-    .eq("user_id", user.id)
+    .eq("user_id", userProfile.id)
     .order("created_at", { ascending: false })
 
   if (error) {
@@ -57,18 +64,18 @@ export default async function BookingsPage() {
         {bookings && bookings.length > 0 ? (
           <div className="space-y-6">
             {bookings.map((booking) => (
-              <Card key={booking.booking_id} className="overflow-hidden">
+              <Card key={booking.id} className="overflow-hidden">
                 <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50">
                   <div className="flex justify-between items-start">
                     <div>
                       <CardTitle className="text-xl">{booking.tour_type} Tour</CardTitle>
                       <CardDescription className="flex items-center gap-2 mt-1">
                         <MapPin className="h-4 w-4" />
-                        {booking.region}
+                        {booking.booking_reference}
                       </CardDescription>
                     </div>
-                    <Badge className={getStatusColor(booking.booking_status)}>
-                      {booking.booking_status.charAt(0).toUpperCase() + booking.booking_status.slice(1)}
+                    <Badge className={getStatusColor(booking.status)}>
+                      {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                     </Badge>
                   </div>
                 </CardHeader>
@@ -92,7 +99,7 @@ export default async function BookingsPage() {
                       <DollarSign className="h-5 w-5 text-gray-400" />
                       <div>
                         <p className="text-sm font-medium">Total Cost</p>
-                        <p className="text-sm text-gray-600">${booking.price.toLocaleString()}</p>
+                        <p className="text-sm text-gray-600">${booking.total_price.toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
@@ -100,6 +107,11 @@ export default async function BookingsPage() {
                     <p className="text-xs text-gray-500">
                       Booked on {new Date(booking.created_at).toLocaleDateString()}
                     </p>
+                    {booking.notes && (
+                      <p className="text-sm text-gray-600 mt-2">
+                        <strong>Notes:</strong> {booking.notes}
+                      </p>
+                    )}
                   </div>
                 </CardContent>
               </Card>

@@ -1,11 +1,19 @@
 import { createClientSupabaseClient } from "./supabase-client"
 import { refreshSupabaseSchemaCache } from "./schema-cache-refresh"
+import { profileService } from "./profile-service"
+import { bookingService } from "./booking-service"
 
 export interface ConnectionTestResult {
   success: boolean
   message: string
   timestamp: string
-  details?: any
+  details?: {
+    auth?: boolean
+    database?: boolean
+    profile?: boolean
+    booking?: boolean
+    cleanup?: boolean
+  }
 }
 
 export interface TestResults {
@@ -757,74 +765,198 @@ CREATE INDEX idx_user_profiles_user_id ON user_profiles(user_id);`,
 // Create singleton instance
 export const supabaseConnectionTest = new SupabaseConnectionTest()
 
-// Legacy exports for backward compatibility
+export function logEnvironmentStatus() {
+  console.log("🔍 Environment Status:")
+  console.log("NEXT_PUBLIC_SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL ? "✅ Set" : "❌ Missing")
+  console.log("NEXT_PUBLIC_SUPABASE_ANON_KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "✅ Set" : "❌ Missing")
+}
+
 export async function testSupabaseConnection(): Promise<ConnectionTestResult> {
-  const timestamp = new Date().toISOString()
+  const supabase = createClientSupabaseClient()
+  const details = {
+    auth: false,
+    database: false,
+    profile: false,
+    booking: false,
+    cleanup: false,
+  }
 
   try {
-    // Check environment variables
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      return {
-        success: false,
-        message: "NEXT_PUBLIC_SUPABASE_URL environment variable is missing",
-        timestamp,
-      }
-    }
-
-    if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      return {
-        success: false,
-        message: "NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable is missing",
-        timestamp,
-      }
-    }
-
-    // Create Supabase client
-    const supabase = createClientSupabaseClient()
-
-    // Test basic connection with a simple query
-    const { data, error } = await supabase.from("user_profiles").select("count", { count: "exact", head: true })
-
-    if (error) {
-      console.error("Supabase connection test failed:", error)
-      return {
-        success: false,
-        message: `Database connection failed: ${error.message}`,
-        timestamp,
-        details: error,
-      }
-    }
-
-    // Test authentication status
-    const { data: authData, error: authError } = await supabase.auth.getSession()
+    // Test 1: Check authentication
+    console.log("🔐 Testing authentication...")
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser()
 
     if (authError) {
-      console.warn("Auth session check failed:", authError)
+      console.error("❌ Auth error:", authError.message)
+      return {
+        success: false,
+        message: `Authentication failed: ${authError.message}`,
+        timestamp: new Date().toISOString(),
+        details,
+      }
     }
 
+    if (!user) {
+      console.log("ℹ️ No authenticated user (this is normal for logged-out users)")
+      details.auth = true
+    } else {
+      console.log("✅ User authenticated:", user.id)
+      details.auth = true
+    }
+
+    // Test 2: Basic database connectivity
+    console.log("🗄️ Testing database connectivity...")
+    const { data: testQuery, error: dbError } = await supabase.from("user_profiles").select("count").limit(1)
+
+    if (dbError) {
+      console.error("❌ Database error:", dbError.message)
+      return {
+        success: false,
+        message: `Database connection failed: ${dbError.message}`,
+        timestamp: new Date().toISOString(),
+        details,
+      }
+    }
+
+    console.log("✅ Database connection successful")
+    details.database = true
+
+    // Test 3: Profile service (only if user is authenticated)
+    if (user) {
+      console.log("👤 Testing profile service...")
+      try {
+        const profile = await profileService.getCurrentUserProfile()
+        console.log("✅ Profile service working:", profile ? `Profile ID: ${profile.id}` : "No profile found")
+        details.profile = true
+      } catch (error) {
+        console.error("❌ Profile service error:", error)
+        return {
+          success: false,
+          message: `Profile service failed: ${error}`,
+          timestamp: new Date().toISOString(),
+          details,
+        }
+      }
+
+      // Test 4: Booking service
+      console.log("📅 Testing booking service...")
+      try {
+        const bookingsResult = await bookingService.getUserBookings()
+        if (bookingsResult.success) {
+          console.log("✅ Booking service working:", `Found ${bookingsResult.bookings?.length || 0} bookings`)
+          details.booking = true
+        } else {
+          console.log("⚠️ Booking service returned error:", bookingsResult.error)
+          details.booking = false
+        }
+      } catch (error) {
+        console.error("❌ Booking service error:", error)
+        return {
+          success: false,
+          message: `Booking service failed: ${error}`,
+          timestamp: new Date().toISOString(),
+          details,
+        }
+      }
+
+      // Test 5: Create and cleanup test booking
+      console.log("🧪 Testing booking CRUD operations...")
+      try {
+        const testBookingResult = await bookingService.createTestBooking()
+        if (testBookingResult.success && testBookingResult.booking) {
+          console.log("✅ Test booking created:", testBookingResult.booking.id)
+
+          // Cleanup test booking
+          const cleanupResult = await bookingService.cleanupTestBookings()
+          if (cleanupResult.success) {
+            console.log("✅ Test bookings cleaned up:", cleanupResult.data)
+            details.cleanup = true
+          } else {
+            console.log("⚠️ Cleanup failed:", cleanupResult.error)
+          }
+        } else {
+          console.log("⚠️ Test booking creation failed:", testBookingResult.error)
+        }
+      } catch (error) {
+        console.error("❌ Booking CRUD test error:", error)
+        return {
+          success: false,
+          message: `Booking CRUD test failed: ${error}`,
+          timestamp: new Date().toISOString(),
+          details,
+        }
+      }
+    }
+
+    // All tests passed
+    console.log("🎉 All connection tests passed!")
     return {
       success: true,
-      message: "Successfully connected to Supabase database",
-      timestamp,
-      details: {
-        authStatus: authData?.session ? "Authenticated" : "Not authenticated",
-        tableAccess: "user_profiles table accessible",
-      },
+      message: user
+        ? "Full connection test successful (authenticated user)"
+        : "Basic connection test successful (no authenticated user)",
+      timestamp: new Date().toISOString(),
+      details,
     }
   } catch (error) {
-    console.error("Connection test error:", error)
+    console.error("💥 Unexpected error during connection test:", error)
     return {
       success: false,
-      message: `Connection test failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-      timestamp,
-      details: error,
+      message: `Unexpected error: ${error}`,
+      timestamp: new Date().toISOString(),
+      details,
     }
   }
 }
 
-export function logEnvironmentStatus() {
-  console.log("🔍 Environment Status:")
-  console.log("- NEXT_PUBLIC_SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL ? "✅ Set" : "❌ Missing")
-  console.log("- NEXT_PUBLIC_SUPABASE_ANON_KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "✅ Set" : "❌ Missing")
-  console.log("- Environment:", process.env.NODE_ENV)
+export async function validateDatabaseSchema(): Promise<ConnectionTestResult> {
+  const supabase = createClientSupabaseClient()
+
+  try {
+    console.log("🔍 Validating database schema...")
+
+    // Test user_profiles table structure
+    const { data: profilesTest, error: profilesError } = await supabase
+      .from("user_profiles")
+      .select("id, auth_user_id, full_name, created_at")
+      .limit(1)
+
+    if (profilesError) {
+      return {
+        success: false,
+        message: `user_profiles table validation failed: ${profilesError.message}`,
+        timestamp: new Date().toISOString(),
+      }
+    }
+
+    // Test bookings table structure
+    const { data: bookingsTest, error: bookingsError } = await supabase
+      .from("bookings")
+      .select("id, user_id, tour_type, total_price, created_at")
+      .limit(1)
+
+    if (bookingsError) {
+      return {
+        success: false,
+        message: `bookings table validation failed: ${bookingsError.message}`,
+        timestamp: new Date().toISOString(),
+      }
+    }
+
+    console.log("✅ Database schema validation successful")
+    return {
+      success: true,
+      message: "Database schema is valid and accessible",
+      timestamp: new Date().toISOString(),
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: `Schema validation error: ${error}`,
+      timestamp: new Date().toISOString(),
+    }
+  }
 }

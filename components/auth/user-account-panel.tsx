@@ -133,7 +133,7 @@ export function UserAccountPanel({
       .slice(0, 2)
 
     // Calculate total saved bookings cost
-    const totalSavedBookingsCost = savedBookings.reduce((sum, booking) => sum + (booking.total_cost || 0), 0)
+    const totalSavedBookingsCost = savedBookings.reduce((sum, booking) => sum + (booking.total_price || 0), 0)
     const totalBookings = savedBookings.length
 
     // Use current booking data if available, otherwise use draft booking from database
@@ -142,7 +142,7 @@ export function UserAccountPanel({
       (currentDraftBooking
         ? {
             tours: currentDraftBooking.tour_selections || [],
-            totalCost: currentDraftBooking.total_cost || 0,
+            totalCost: currentDraftBooking.total_price || 0,
           }
         : null)
 
@@ -258,7 +258,7 @@ export function UserAccountPanel({
                 variant="outline"
                 size="sm"
                 className="flex-1 text-gray-600 hover:text-gray-700 bg-transparent"
-                onClick={() => (window.location.href = "/account/settings")}
+                onClick={() => (window.location.href = "/settings")}
               >
                 <Settings className="w-4 h-4 mr-2" />
                 Settings
