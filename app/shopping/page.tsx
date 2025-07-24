@@ -40,6 +40,7 @@ import { AuthProvider, useAuth } from "@/hooks/use-auth"
 import { UserAccountPanel } from "@/components/auth/user-account-panel"
 import { AccountCreationPrompt } from "@/components/auth/account-creation-prompt"
 import { AuthModal } from "@/components/auth/auth-modal"
+import { GoogleCalendarButton } from "@/components/google-calendar-button"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -1479,6 +1480,20 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                           <Share2 className="mr-2 w-4 h-4" />
                           Share
                         </Button>
+                      </div>
+
+                      <p className="text-sm text-gray-500 text-center mt-4">Need to discuss timing?</p>
+
+                      {/* Google Calendar Button - Modal version with consistent styling */}
+                      <div className="flex items-center justify-center pt-2 border-t border-gray-200">
+                        <div className="flex items-center gap-3 text-sm text-gray-600">
+                          <span>Prefer to talk first?</span>
+                          <GoogleCalendarButton
+                            variant="outline"
+                            size="sm"
+                            className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-400"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

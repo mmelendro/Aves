@@ -7,9 +7,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Mail, MapPin, CheckCircle, Users, Award, Eye, Leaf, ArrowRight, Calendar, Globe, ExternalLink } from 'lucide-react'
+import { Mail, MapPin, CheckCircle, Users, Award, Eye, ArrowRight, Globe, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import { GoogleCalendarButton } from "@/components/google-calendar-button"
 
 interface ContactFormSectionProps {
   showTitle?: boolean
@@ -18,11 +18,11 @@ interface ContactFormSectionProps {
   className?: string
 }
 
-export function ContactFormSection({ 
-  showTitle = true, 
-  showFAQ = false, 
+export function ContactFormSection({
+  showTitle = true,
+  showFAQ = false,
   variant = "homepage",
-  className = ""
+  className = "",
 }: ContactFormSectionProps) {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -43,7 +43,7 @@ export function ContactFormSection({
     { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
     { id: "vision", label: "Vision Tours", icon: "👁️" },
     { id: "elevate", label: "Elevate Tours", icon: "⬆️" },
-    { id: "souls", label: "Souls Tours", icon: "💫" }
+    { id: "souls", label: "Souls Tours", icon: "💫" },
   ]
 
   const bioregions = [
@@ -58,27 +58,19 @@ export function ContactFormSection({
     { id: "eastern-plains", label: "Eastern Plains", emoji: "🌾" },
     { id: "amazon", label: "Amazon Rainforest", emoji: "🌳" },
     { id: "colombian-massif", label: "Colombian Massif", emoji: "🏕️" },
-    { id: "multiple", label: "Multiple Regions", emoji: "🗺️" }
+    { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
   ]
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const toggleTourType = (tourType: string) => {
-    setSelectedTourTypes(prev => 
-      prev.includes(tourType) 
-        ? prev.filter(t => t !== tourType)
-        : [...prev, tourType]
-    )
+    setSelectedTourTypes((prev) => (prev.includes(tourType) ? prev.filter((t) => t !== tourType) : [...prev, tourType]))
   }
 
   const toggleRegion = (region: string) => {
-    setSelectedRegions(prev => 
-      prev.includes(region) 
-        ? prev.filter(r => r !== region)
-        : [...prev, region]
-    )
+    setSelectedRegions((prev) => (prev.includes(region) ? prev.filter((r) => r !== region) : [...prev, region]))
   }
 
   const generateEmailLink = () => {
@@ -111,20 +103,24 @@ ${formData.firstName} ${formData.lastName}`)
   const faqItems = [
     {
       question: "How far in advance should I book my tour?",
-      answer: "We recommend booking 3-6 months in advance, especially for peak birding seasons (December-March and July-August). Our small group sizes (maximum 4 guests) mean tours fill up quickly."
+      answer:
+        "We recommend booking 3-6 months in advance, especially for peak birding seasons (December-March and July-August). Our small group sizes (maximum 4 guests) mean tours fill up quickly.",
     },
     {
       question: "What's included in your tour packages?",
-      answer: "All tours include expert ornithologist guides, transportation, accommodation, meals, park entrance fees, and specialized birding equipment. International flights and personal items are not included."
+      answer:
+        "All tours include expert ornithologist guides, transportation, accommodation, meals, park entrance fees, and specialized birding equipment. International flights and personal items are not included.",
     },
     {
       question: "Do I need birding experience to join a tour?",
-      answer: "Not at all! We welcome birders of all experience levels, from complete beginners to expert ornithologists. Our guides adapt the experience to match your skill level and interests."
+      answer:
+        "Not at all! We welcome birders of all experience levels, from complete beginners to expert ornithologists. Our guides adapt the experience to match your skill level and interests.",
     },
     {
       question: "What makes AVES different from other tour operators?",
-      answer: "We're B Corp certified, operate 100% carbon-neutral tours, maintain small group sizes (max 4 guests), and provide access to private reserves unavailable to other operators. Our guides are certified ornithologists, not just general nature guides."
-    }
+      answer:
+        "We're B Corp certified, operate 100% carbon-neutral tours, maintain small group sizes (max 4 guests), and provide access to private reserves unavailable to other operators. Our guides are certified ornithologists, not just general nature guides.",
+    },
   ]
 
   return (
@@ -132,9 +128,7 @@ ${formData.firstName} ${formData.lastName}`)
       <div className="container mx-auto px-4">
         {showTitle && (
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Plan Your Colombian Birding Adventure
-            </h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Plan Your Colombian Birding Adventure</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Tell us about your birding interests. We'll respond within 24 hours with personalized recommendations.
             </p>
@@ -147,9 +141,7 @@ ${formData.firstName} ${formData.lastName}`)
             <div className="lg:col-span-2">
               <Card className="border-0 shadow-xl bg-white">
                 <CardContent className="p-6 lg:p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Tell Us About Your Birding Interests
-                  </h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Tell Us About Your Birding Interests</h3>
                   <p className="text-gray-600 mb-8">
                     The more details you provide, the better we can customize your Colombian birding experience.
                   </p>
@@ -158,9 +150,7 @@ ${formData.firstName} ${formData.lastName}`)
                     {/* Personal Information */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          First Name *
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
                         <Input
                           placeholder="Your first name"
                           value={formData.firstName}
@@ -169,9 +159,7 @@ ${formData.firstName} ${formData.lastName}`)
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Last Name *
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
                         <Input
                           placeholder="Your last name"
                           value={formData.lastName}
@@ -183,9 +171,7 @@ ${formData.firstName} ${formData.lastName}`)
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Email Address *
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                         <Input
                           type="email"
                           placeholder="your.email@example.com"
@@ -195,9 +181,7 @@ ${formData.firstName} ${formData.lastName}`)
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Phone Number
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                         <Input
                           placeholder="+1 (555) 123-4567"
                           value={formData.phone}
@@ -209,9 +193,7 @@ ${formData.firstName} ${formData.lastName}`)
                     {/* Travel Preferences */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Preferred Travel Date
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Travel Date</label>
                         <Input
                           type="date"
                           value={formData.travelDate}
@@ -219,10 +201,11 @@ ${formData.firstName} ${formData.lastName}`)
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Group Size
-                        </label>
-                        <Select value={formData.groupSize} onValueChange={(value) => handleInputChange("groupSize", value)}>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Group Size</label>
+                        <Select
+                          value={formData.groupSize}
+                          onValueChange={(value) => handleInputChange("groupSize", value)}
+                        >
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
@@ -238,10 +221,11 @@ ${formData.firstName} ${formData.lastName}`)
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Desired Duration
-                        </label>
-                        <Select value={formData.duration} onValueChange={(value) => handleInputChange("duration", value)}>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Desired Duration</label>
+                        <Select
+                          value={formData.duration}
+                          onValueChange={(value) => handleInputChange("duration", value)}
+                        >
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
@@ -255,10 +239,11 @@ ${formData.firstName} ${formData.lastName}`)
                         </Select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Experience Level
-                        </label>
-                        <Select value={formData.experienceLevel} onValueChange={(value) => handleInputChange("experienceLevel", value)}>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
+                        <Select
+                          value={formData.experienceLevel}
+                          onValueChange={(value) => handleInputChange("experienceLevel", value)}
+                        >
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
@@ -278,7 +263,10 @@ ${formData.firstName} ${formData.lastName}`)
                         <label className="block text-sm font-medium text-gray-700">
                           Interested Tour Types (select all that apply)
                         </label>
-                        <Link href="/tours" className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1">
+                        <Link
+                          href="/tours"
+                          className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1"
+                        >
                           View All Tours <ExternalLink className="w-3 h-3" />
                         </Link>
                       </div>
@@ -290,7 +278,10 @@ ${formData.firstName} ${formData.lastName}`)
                               checked={selectedTourTypes.includes(tour.id)}
                               onCheckedChange={() => toggleTourType(tour.id)}
                             />
-                            <label htmlFor={tour.id} className="text-sm text-gray-700 cursor-pointer flex items-center gap-2">
+                            <label
+                              htmlFor={tour.id}
+                              className="text-sm text-gray-700 cursor-pointer flex items-center gap-2"
+                            >
                               <span>{tour.icon}</span>
                               {tour.label}
                             </label>
@@ -305,7 +296,10 @@ ${formData.firstName} ${formData.lastName}`)
                         <label className="block text-sm font-medium text-gray-700">
                           Preferred Biogeographic Regions (select all that interest you)
                         </label>
-                        <Link href="/aves-explorer" className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1">
+                        <Link
+                          href="/aves-explorer"
+                          className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1"
+                        >
                           Explore Map <ExternalLink className="w-3 h-3" />
                         </Link>
                       </div>
@@ -317,7 +311,10 @@ ${formData.firstName} ${formData.lastName}`)
                               checked={selectedRegions.includes(region.id)}
                               onCheckedChange={() => toggleRegion(region.id)}
                             />
-                            <label htmlFor={region.id} className="text-sm text-gray-700 cursor-pointer flex items-center gap-2">
+                            <label
+                              htmlFor={region.id}
+                              className="text-sm text-gray-700 cursor-pointer flex items-center gap-2"
+                            >
                               <span>{region.emoji}</span>
                               {region.label}
                             </label>
@@ -348,9 +345,18 @@ ${formData.firstName} ${formData.lastName}`)
                           <ArrowRight className="ml-2 w-4 h-4" />
                         </Button>
                       </a>
-                      <p className="text-sm text-gray-500 text-center mt-3">
+
+                      <p className="text-sm text-gray-500 text-center mt-4">
                         We'll get back to you with personalized recommendations
                       </p>
+
+                      {/* Google Calendar Button - Fixed without empty box */}
+                      <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200">
+                        <div className="flex items-center gap-3 text-sm text-gray-600">
+                          <span>Prefer to talk first?</span>
+                          <GoogleCalendarButton variant="outline" size="sm" />
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </CardContent>
@@ -368,28 +374,36 @@ ${formData.firstName} ${formData.lastName}`)
                       <CheckCircle className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Expert Ornithologist Guides</div>
-                        <div className="text-sm text-gray-600">Certified local experts with deep knowledge of Colombian avifauna</div>
+                        <div className="text-sm text-gray-600">
+                          Certified local experts with deep knowledge of Colombian avifauna
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <Users className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Small Group Expeditions</div>
-                        <div className="text-sm text-gray-600">Maximum 4 guests per tour for personalized attention</div>
+                        <div className="text-sm text-gray-600">
+                          Maximum 4 guests per tour for personalized attention
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <Award className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">B Corp Certified</div>
-                        <div className="text-sm text-gray-600">100% carbon neutral with verified conservation impact</div>
+                        <div className="text-sm text-gray-600">
+                          100% carbon neutral with verified conservation impact
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <Eye className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Exclusive Access</div>
-                        <div className="text-sm text-gray-600">Private reserves and research stations unavailable to others</div>
+                        <div className="text-sm text-gray-600">
+                          Private reserves and research stations unavailable to others
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -432,7 +446,10 @@ ${formData.firstName} ${formData.lastName}`)
                       <ArrowRight className="w-4 h-4 mr-2" />
                       Browse All Tours
                     </Link>
-                    <Link href="/aves-explorer" className="flex items-center text-emerald-600 hover:text-emerald-700 text-sm">
+                    <Link
+                      href="/aves-explorer"
+                      className="flex items-center text-emerald-600 hover:text-emerald-700 text-sm"
+                    >
                       <Globe className="w-4 h-4 mr-2" />
                       Explore Interactive Map
                     </Link>
@@ -440,7 +457,10 @@ ${formData.firstName} ${formData.lastName}`)
                       <ArrowRight className="w-4 h-4 mr-2" />
                       Bird Species Explorer
                     </Link>
-                    <Link href="/travel-tips" className="flex items-center text-emerald-600 hover:text-emerald-700 text-sm">
+                    <Link
+                      href="/travel-tips"
+                      className="flex items-center text-emerald-600 hover:text-emerald-700 text-sm"
+                    >
                       <ArrowRight className="w-4 h-4 mr-2" />
                       Travel Tips & Preparation
                     </Link>
@@ -455,9 +475,7 @@ ${formData.firstName} ${formData.lastName}`)
         {showFAQ && (
           <div className="mt-16">
             <div className="text-center mb-12">
-              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                Frequently Asked Questions
-              </h3>
+              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h3>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Common questions about planning your Colombian birding adventure
               </p>
@@ -467,12 +485,8 @@ ${formData.firstName} ${formData.lastName}`)
               {faqItems.map((item, index) => (
                 <Card key={index} className="border-0 shadow-lg bg-white">
                   <CardContent className="p-6">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3">
-                      {item.question}
-                    </h4>
-                    <p className="text-gray-600 leading-relaxed">
-                      {item.answer}
-                    </p>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-3">{item.question}</h4>
+                    <p className="text-gray-600 leading-relaxed">{item.answer}</p>
                   </CardContent>
                 </Card>
               ))}

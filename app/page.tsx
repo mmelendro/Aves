@@ -4,7 +4,22 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, CheckCircle, Star, Calendar, TelescopeIcon as Binoculars, Clock, Map, Bird, Globe, TreePine, Mountain, Award, Leaf, Eye, Users } from 'lucide-react'
+import {
+  ArrowRight,
+  CheckCircle,
+  Star,
+  Calendar,
+  TelescopeIcon as Binoculars,
+  Clock,
+  Map,
+  Bird,
+  Globe,
+  TreePine,
+  Mountain,
+  Award,
+  Leaf,
+  Eye,
+} from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
@@ -384,9 +399,7 @@ export default function AVESLandingPage() {
                   <CheckCircle className="w-8 h-8 text-emerald-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Expert</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Local Guides
-                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">Local Guides</p>
                 <Link href="/team" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
                   Meet Our Team
                 </Link>
@@ -399,10 +412,11 @@ export default function AVESLandingPage() {
                   <Leaf className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">B Corp</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Certified
-                </p>
-                <Link href="/about/b-corp" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                <p className="text-gray-600 text-sm leading-relaxed">Certified</p>
+                <Link
+                  href="/about/b-corp"
+                  className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"
+                >
                   Our Journey
                 </Link>
               </CardContent>
@@ -414,10 +428,11 @@ export default function AVESLandingPage() {
                   <Eye className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Exclusive</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Partner Network
-                </p>
-                <Link href="/about/partners" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                <p className="text-gray-600 text-sm leading-relaxed">Partner Network</p>
+                <Link
+                  href="/about/partners"
+                  className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"
+                >
                   View Partners
                 </Link>
               </CardContent>
@@ -429,10 +444,11 @@ export default function AVESLandingPage() {
                   <Award className="w-8 h-8 text-purple-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">100%</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Carbon Neutral
-                </p>
-                <Link href="/conservation" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                <p className="text-gray-600 text-sm leading-relaxed">Carbon Neutral</p>
+                <Link
+                  href="/conservation"
+                  className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"
+                >
                   Our Impact
                 </Link>
               </CardContent>
