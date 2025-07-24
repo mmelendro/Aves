@@ -14,6 +14,7 @@ export function GoogleCalendarModal({ isOpen, onClose }: GoogleCalendarModalProp
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
+  // Working Google Calendar appointment scheduling URL
   const calendarUrl =
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1mXX026neUIehbViYvZCFxxkZ7aTaga8rMBslAp2r0VsuTWoYN_43n_SRjZUeSVefNaKYftXEr?gv=true"
 
