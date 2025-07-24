@@ -21,7 +21,7 @@ interface SignupFormProps {
 
 const EXPERIENCE_LEVELS = ["Beginner birder", "Intermediate birder", "Advanced birder", "Expert/Professional"]
 
-export function SignupForm({ redirectTo }: SignupFormProps) {
+export default function SignupForm({ redirectTo }: SignupFormProps) {
   const router = useRouter()
   const { signUp, signInWithOAuth } = useAuth()
 

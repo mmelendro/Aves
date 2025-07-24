@@ -1,21 +1,20 @@
 import { createClient } from "@supabase/supabase-js"
 import type { Database } from "./database.types"
 
-// Environment variables with fallbacks
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || ""
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ""
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ""
+// Validate environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-// Validate required environment variables
 if (!supabaseUrl) {
-  throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable")
+  throw new Error("Missing env.NEXT_PUBLIC_SUPABASE_URL")
 }
 
 if (!supabaseAnonKey) {
-  throw new Error("Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable")
+  throw new Error("Missing env.NEXT_PUBLIC_SUPABASE_ANON_KEY")
 }
 
-// Client-side Supabase client
+// Create the main Supabase client
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
@@ -24,22 +23,20 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   },
 })
 
-// Server-side Supabase client with service role (optional)
+// Create server-side client (fallback to regular client if service key not available)
 export const getSupabaseServer = () => {
-  if (!supabaseServiceKey) {
-    console.warn("SUPABASE_SERVICE_ROLE_KEY not available, falling back to anon key")
-    return createClient<Database>(supabaseUrl, supabaseAnonKey)
+  if (supabaseServiceKey) {
+    return createClient<Database>(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    })
   }
 
-  return createClient<Database>(supabaseUrl, supabaseServiceKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
+  // Fallback to regular client
+  return supabase
 }
 
-// Admin client for server-side operations
-export const supabaseAdmin = getSupabaseServer()
-
-export default supabase
+// Export the server client as well for convenience
+export const supabaseServer = getSupabaseServer()

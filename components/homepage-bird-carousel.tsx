@@ -305,7 +305,7 @@ const birdData: BirdData[] = [
     bestTime: "Year-round (most active early morning)",
     elevation: "800 - 2,400m",
     image: "/images/bkmtou1.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bkmtou1-Z7kswt5kh0hyKXzsni4zrZNFem5LY6.mp3",
+    // Removed audioFile to prevent the error
     photoCredit: {
       photographer: "Royann",
       title: "Wildlife Photographer",
@@ -385,10 +385,10 @@ export default function HomepageBirdCarousel({
   // Check if current bird should show the Explore Region button (only Vermilion Cardinal)
   const shouldShowExploreRegion = currentBird.id === "6" // Vermilion Cardinal
 
-  // Check if current bird should show eBird button - Updated to include Golden-headed Quetzal
-  const shouldShowEBirdButton = ["8", "9", "10", "11", "12"].includes(currentBird.id) // Golden-headed Manakin, Striped Manakin, Scaled Dove, Yellow-throated Toucan, Golden-headed Quetzal
+  // Check if current bird should show eBird button - Updated to exclude Yellow-throated Toucan
+  const shouldShowEBirdButton = ["8", "9", "10", "12"].includes(currentBird.id) // Golden-headed Manakin, Striped Manakin, Scaled Dove, Golden-headed Quetzal
 
-  // Get eBird URL for current bird - Updated to include Golden-headed Quetzal
+  // Get eBird URL for current bird - Updated to exclude Yellow-throated Toucan
   const getEBirdUrl = (birdId: string) => {
     switch (birdId) {
       case "8":
@@ -397,8 +397,6 @@ export default function HomepageBirdCarousel({
         return "https://ebird.org/species/strman5"
       case "10":
         return "https://ebird.org/species/scadov1"
-      case "11":
-        return "https://ebird.org/species/bkmtou1"
       case "12":
         return "https://ebird.org/species/gohque1"
       default:
@@ -450,7 +448,7 @@ export default function HomepageBirdCarousel({
     [thumbnailScrollPosition],
   )
 
-  // Check if audio file exists
+  // Enhanced audio file validation with better error handling
   const checkAudioFileExists = useCallback(
     async (audioFile: string): Promise<boolean> => {
       if (audioFileExists[audioFile] !== undefined) {
@@ -458,12 +456,26 @@ export default function HomepageBirdCarousel({
       }
 
       try {
+        // First try a HEAD request
         const response = await fetch(audioFile, { method: "HEAD" })
-        const exists = response.ok
-        setAudioFileExists((prev) => ({ ...prev, [audioFile]: exists }))
-        return exists
+        if (response.ok) {
+          setAudioFileExists((prev) => ({ ...prev, [audioFile]: true }))
+          return true
+        }
+
+        // If HEAD fails, try a GET request with range header to minimize data transfer
+        const rangeResponse = await fetch(audioFile, {
+          headers: { Range: "bytes=0-1023" }, // Just get first 1KB
+        })
+
+        if (rangeResponse.ok || rangeResponse.status === 206) {
+          setAudioFileExists((prev) => ({ ...prev, [audioFile]: true }))
+          return true
+        }
+
+        throw new Error(`HTTP ${response.status}`)
       } catch (error) {
-        console.warn(`Audio file check failed for ${audioFile}:`, error)
+        console.warn(`Audio file validation failed for ${audioFile}:`, error)
         setAudioFileExists((prev) => ({ ...prev, [audioFile]: false }))
         return false
       }
@@ -627,7 +639,7 @@ export default function HomepageBirdCarousel({
         }
 
         const error = audio.error
-        let errorMessage = "Unknown audio error"
+        let errorMessage = "Audio file not available"
 
         if (error) {
           switch (error.code) {
@@ -646,7 +658,7 @@ export default function HomepageBirdCarousel({
           }
         }
 
-        console.error(`Audio error for ${currentBird.commonName}:`, errorMessage, error)
+        console.warn(`Audio error for ${currentBird.commonName}:`, errorMessage)
 
         // Mark file as non-existent for future reference
         if (currentBird.audioFile) {
@@ -1638,7 +1650,7 @@ export default function HomepageBirdCarousel({
                         </Link>
                       )}
 
-                      {/* Conditional eBird Button - Updated to include Golden-headed Quetzal */}
+                      {/* Conditional eBird Button - Updated to exclude Yellow-throated Toucan */}
                       {shouldShowEBirdButton && (
                         <a
                           href={getEBirdUrl(currentBird.id)}

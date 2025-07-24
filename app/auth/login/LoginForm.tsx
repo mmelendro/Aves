@@ -13,7 +13,7 @@ import { Separator } from "@/components/ui/separator"
 import { useAuth } from "@/hooks/use-auth-enhanced"
 import { Eye, EyeOff, Mail, Lock, Loader2 } from "lucide-react"
 
-export function LoginForm() {
+export default function LoginForm() {
   const router = useRouter()
   const { signIn, signInWithGoogle, loading } = useAuth()
 

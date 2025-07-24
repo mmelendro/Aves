@@ -2,17 +2,24 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import { supabase } from "@/lib/supabase-client"
-import { useAuth } from "./use-auth-enhanced"
-import type { Database } from "@/lib/database.types"
+import type { User } from "@supabase/supabase-js"
 
-type Booking = Database["public"]["Tables"]["bookings"]["Row"]
-type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
-type BookingUpdate = Database["public"]["Tables"]["bookings"]["Update"]
+interface Booking {
+  id: string
+  user_id: string
+  tour_name: string
+  tour_date: string
+  participants: number
+  status: "pending" | "confirmed" | "cancelled"
+  total_amount: number
+  created_at: string
+  updated_at: string
+}
 
 interface BookingStats {
   totalBookings: number
-  upcomingBookings: number
-  completedBookings: number
+  confirmedBookings: number
+  pendingBookings: number
   cancelledBookings: number
   totalRevenue: number
   averageBookingValue: number
@@ -22,24 +29,52 @@ interface BookingsContextType {
   bookings: Booking[]
   loading: boolean
   error: string | null
-  createBooking: (booking: BookingInsert) => Promise<{ data: Booking | null; error: string | null }>
-  updateBooking: (id: string, updates: BookingUpdate) => Promise<{ data: Booking | null; error: string | null }>
-  deleteBooking: (id: string) => Promise<{ error: string | null }>
+  createBooking: (booking: Omit<Booking, "id" | "created_at" | "updated_at">) => Promise<Booking | null>
+  updateBooking: (id: string, updates: Partial<Booking>) => Promise<boolean>
+  deleteBooking: (id: string) => Promise<boolean>
   refreshBookings: () => Promise<void>
-  getBookingById: (id: string) => Booking | null
-  getUserBookings: (userId: string) => Booking[]
 }
 
 const BookingsContext = createContext<BookingsContextType | undefined>(undefined)
 
 export function BookingsProvider({ children }: { children: ReactNode }) {
-  const { user } = useAuth()
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
-  // Load bookings
-  const loadBookings = async () => {
+  // Get current user
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser()
+        setUser(user)
+      } catch (err) {
+        console.error("Error getting user:", err)
+      }
+    }
+
+    getUser()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  // Fetch bookings
+  const fetchBookings = async () => {
+    if (!user) {
+      setBookings([])
+      setLoading(false)
+      return
+    }
+
     try {
       setLoading(true)
       setError(null)
@@ -47,6 +82,7 @@ export function BookingsProvider({ children }: { children: ReactNode }) {
       const { data, error: fetchError } = await supabase
         .from("bookings")
         .select("*")
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false })
 
       if (fetchError) {
@@ -54,85 +90,99 @@ export function BookingsProvider({ children }: { children: ReactNode }) {
       }
 
       setBookings(data || [])
-    } catch (err: any) {
-      setError(err.message || "Failed to load bookings")
-      console.error("Error loading bookings:", err)
+    } catch (err) {
+      console.error("Error fetching bookings:", err)
+      setError(err instanceof Error ? err.message : "Failed to fetch bookings")
+      setBookings([])
     } finally {
       setLoading(false)
     }
   }
 
-  // Initialize bookings
+  // Refresh bookings when user changes
   useEffect(() => {
-    loadBookings()
-  }, [])
+    fetchBookings()
+  }, [user])
 
-  // Create booking
-  const createBooking = async (booking: BookingInsert) => {
-    try {
-      const { data, error: insertError } = await supabase.from("bookings").insert(booking).select().single()
-
-      if (insertError) {
-        return { data: null, error: insertError.message }
-      }
-
-      setBookings((prev) => [data, ...prev])
-      return { data, error: null }
-    } catch (err: any) {
-      return { data: null, error: err.message || "Failed to create booking" }
+  const createBooking = async (
+    bookingData: Omit<Booking, "id" | "created_at" | "updated_at">,
+  ): Promise<Booking | null> => {
+    if (!user) {
+      setError("User must be logged in to create bookings")
+      return null
     }
-  }
 
-  // Update booking
-  const updateBooking = async (id: string, updates: BookingUpdate) => {
     try {
-      const { data, error: updateError } = await supabase
+      setError(null)
+
+      const { data, error: createError } = await supabase
         .from("bookings")
-        .update(updates)
-        .eq("id", id)
+        .insert([{ ...bookingData, user_id: user.id }])
         .select()
         .single()
 
-      if (updateError) {
-        return { data: null, error: updateError.message }
+      if (createError) {
+        throw createError
       }
 
-      setBookings((prev) => prev.map((booking) => (booking.id === id ? data : booking)))
-      return { data, error: null }
-    } catch (err: any) {
-      return { data: null, error: err.message || "Failed to update booking" }
+      if (data) {
+        setBookings((prev) => [data, ...prev])
+        return data
+      }
+
+      return null
+    } catch (err) {
+      console.error("Error creating booking:", err)
+      setError(err instanceof Error ? err.message : "Failed to create booking")
+      return null
     }
   }
 
-  // Delete booking
-  const deleteBooking = async (id: string) => {
+  const updateBooking = async (id: string, updates: Partial<Booking>): Promise<boolean> => {
     try {
-      const { error: deleteError } = await supabase.from("bookings").delete().eq("id", id)
+      setError(null)
+
+      const { error: updateError } = await supabase
+        .from("bookings")
+        .update(updates)
+        .eq("id", id)
+        .eq("user_id", user?.id)
+
+      if (updateError) {
+        throw updateError
+      }
+
+      setBookings((prev) => prev.map((booking) => (booking.id === id ? { ...booking, ...updates } : booking)))
+
+      return true
+    } catch (err) {
+      console.error("Error updating booking:", err)
+      setError(err instanceof Error ? err.message : "Failed to update booking")
+      return false
+    }
+  }
+
+  const deleteBooking = async (id: string): Promise<boolean> => {
+    try {
+      setError(null)
+
+      const { error: deleteError } = await supabase.from("bookings").delete().eq("id", id).eq("user_id", user?.id)
 
       if (deleteError) {
-        return { error: deleteError.message }
+        throw deleteError
       }
 
       setBookings((prev) => prev.filter((booking) => booking.id !== id))
-      return { error: null }
-    } catch (err: any) {
-      return { error: err.message || "Failed to delete booking" }
+      return true
+    } catch (err) {
+      console.error("Error deleting booking:", err)
+      setError(err instanceof Error ? err.message : "Failed to delete booking")
+      return false
     }
   }
 
-  // Refresh bookings
   const refreshBookings = async () => {
-    await loadBookings()
-  }
-
-  // Get booking by ID
-  const getBookingById = (id: string) => {
-    return bookings.find((booking) => booking.id === id) || null
-  }
-
-  // Get user bookings
-  const getUserBookings = (userId: string) => {
-    return bookings.filter((booking) => booking.user_id === userId)
+    await fetchBookings()
   }
 
   const value: BookingsContextType = {
@@ -143,8 +193,6 @@ export function BookingsProvider({ children }: { children: ReactNode }) {
     updateBooking,
     deleteBooking,
     refreshBookings,
-    getBookingById,
-    getUserBookings,
   }
 
   return <BookingsContext.Provider value={value}>{children}</BookingsContext.Provider>
@@ -158,77 +206,38 @@ export function useBookings() {
   return context
 }
 
-// Standalone hook for booking statistics
 export function useBookingStats(): {
   stats: BookingStats | null
   loading: boolean
   error: string | null
-  refreshStats: () => Promise<void>
 } {
+  const { bookings, loading, error } = useBookings()
   const [stats, setStats] = useState<BookingStats | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  const loadStats = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-
-      // Get all bookings for statistics
-      const { data: bookings, error: fetchError } = await supabase.from("bookings").select("*")
-
-      if (fetchError) {
-        throw fetchError
-      }
-
-      if (!bookings) {
-        setStats({
-          totalBookings: 0,
-          upcomingBookings: 0,
-          completedBookings: 0,
-          cancelledBookings: 0,
-          totalRevenue: 0,
-          averageBookingValue: 0,
-        })
-        return
-      }
-
-      const now = new Date()
-      const totalBookings = bookings.length
-      const upcomingBookings = bookings.filter((b) => b.status === "confirmed" && new Date(b.tour_date) > now).length
-      const completedBookings = bookings.filter((b) => b.status === "completed").length
-      const cancelledBookings = bookings.filter((b) => b.status === "cancelled").length
-
-      const totalRevenue = bookings
-        .filter((b) => b.status !== "cancelled")
-        .reduce((sum, b) => sum + (b.total_amount || 0), 0)
-
-      const averageBookingValue = totalBookings > 0 ? totalRevenue / totalBookings : 0
-
-      setStats({
-        totalBookings,
-        upcomingBookings,
-        completedBookings,
-        cancelledBookings,
-        totalRevenue,
-        averageBookingValue,
-      })
-    } catch (err: any) {
-      setError(err.message || "Failed to load booking statistics")
-      console.error("Error loading booking stats:", err)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   useEffect(() => {
-    loadStats()
-  }, [])
+    if (loading || error || !bookings.length) {
+      setStats(null)
+      return
+    }
 
-  return {
-    stats,
-    loading,
-    error,
-    refreshStats: loadStats,
-  }
+    const totalBookings = bookings.length
+    const confirmedBookings = bookings.filter((b) => b.status === "confirmed").length
+    const pendingBookings = bookings.filter((b) => b.status === "pending").length
+    const cancelledBookings = bookings.filter((b) => b.status === "cancelled").length
+
+    const totalRevenue = bookings.filter((b) => b.status === "confirmed").reduce((sum, b) => sum + b.total_amount, 0)
+
+    const averageBookingValue = confirmedBookings > 0 ? totalRevenue / confirmedBookings : 0
+
+    setStats({
+      totalBookings,
+      confirmedBookings,
+      pendingBookings,
+      cancelledBookings,
+      totalRevenue,
+      averageBookingValue,
+    })
+  }, [bookings, loading, error])
+
+  return { stats, loading, error }
 }

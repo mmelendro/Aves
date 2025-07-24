@@ -27,7 +27,7 @@ interface DashboardClientProps {
   initialProfile: UserProfile | null
 }
 
-export function DashboardClient({ initialProfile }: DashboardClientProps) {
+export default function DashboardClient({ initialProfile }: DashboardClientProps) {
   const { user, profile } = useAuth()
   const { bookings: savedBookings } = useBookings("saved")
   const { bookings: purchasedBookings } = useBookings("purchased")
