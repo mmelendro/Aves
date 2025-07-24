@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { createClientSupabaseClient } from "@/lib/supabase-client"
+import { useState } from "react"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
@@ -17,13 +17,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Settings, Calendar, CreditCard, LogOut, ChevronDown } from "lucide-react"
 import { toast } from "sonner"
 
-interface UserProfile {
-  id: string
-  full_name: string | null
-  phone_number: string | null
-  profile_image_url: string | null
-}
-
 interface UserProfileMenuProps {
   user: {
     id: string
@@ -37,33 +30,9 @@ interface UserProfileMenuProps {
 }
 
 export default function UserProfileMenu({ user }: UserProfileMenuProps) {
-  const supabase = createClientSupabaseClient()
+  const supabase = createClientComponentClient()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [profile, setProfile] = useState<UserProfile | null>(null)
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("user_profiles")
-          .select("id, full_name, phone_number, profile_image_url")
-          .eq("auth_user_id", user.id)
-          .single()
-
-        if (error && error.code !== "PGRST116") {
-          console.error("Error fetching profile:", error)
-          return
-        }
-
-        setProfile(data)
-      } catch (error) {
-        console.error("Error in fetchProfile:", error)
-      }
-    }
-
-    fetchProfile()
-  }, [user.id, supabase])
 
   const handleSignOut = async () => {
     try {
@@ -83,50 +52,21 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
   }
 
   const getDisplayName = () => {
-    // First try to get name from database profile
-    if (profile?.full_name) {
-      return profile.full_name
-    }
-
-    // Fallback to user metadata
     const { first_name, last_name } = user.user_metadata || {}
     if (first_name && last_name) {
       return `${first_name} ${last_name}`
     }
     if (first_name) return first_name
-
-    // Final fallback to email
     return user.email?.split("@")[0] || "User"
   }
 
   const getInitials = () => {
-    // First try to get initials from database profile
-    if (profile?.full_name) {
-      return profile.full_name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2)
-    }
-
-    // Fallback to user metadata
     const { first_name, last_name } = user.user_metadata || {}
     if (first_name && last_name) {
       return `${first_name[0]}${last_name[0]}`.toUpperCase()
     }
     if (first_name) return first_name[0].toUpperCase()
-
-    // Final fallback to email
     return user.email?.[0]?.toUpperCase() || "U"
-  }
-
-  const getEmail = () => {
-    return user.email || ""
-  }
-
-  const getProfileImage = () => {
-    return profile?.profile_image_url || user.user_metadata?.avatar_url || "/placeholder.svg"
   }
 
   return (
@@ -134,7 +74,7 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="flex items-center gap-2 px-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={getProfileImage() || "/placeholder.svg"} />
+            <AvatarImage src={user.user_metadata?.avatar_url || "/placeholder.svg"} />
             <AvatarFallback className="text-sm">{getInitials()}</AvatarFallback>
           </Avatar>
           <span className="hidden md:inline-block font-medium">{getDisplayName()}</span>
@@ -146,17 +86,16 @@ export default function UserProfileMenu({ user }: UserProfileMenuProps) {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{getDisplayName()}</p>
-            <p className="text-xs leading-none text-muted-foreground">{getEmail()}</p>
-            {profile && <p className="text-xs leading-none text-green-600">Profile ID: {profile.id.slice(0, 8)}...</p>}
+            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
           </div>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href="/settings" className="flex items-center gap-2">
+          <Link href="/account/settings" className="flex items-center gap-2">
             <Settings className="h-4 w-4" />
-            Settings
+            Account Settings
           </Link>
         </DropdownMenuItem>
 

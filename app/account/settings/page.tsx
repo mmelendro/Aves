@@ -1,65 +1,44 @@
-import { Suspense } from "react"
-import { getCurrentUser } from "@/lib/supabase-server"
+import type { Metadata } from "next"
 import { redirect } from "next/navigation"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
 import AccountSettingsClient from "./AccountSettingsClient"
-import { Card, CardContent } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
 
-function SettingsLoadingSkeleton() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 p-4">
-      <div className="max-w-4xl mx-auto space-y-6">
-        <div className="text-center space-y-2">
-          <Skeleton className="h-8 w-48 mx-auto" />
-          <Skeleton className="h-4 w-96 mx-auto" />
-        </div>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <Skeleton className="h-20 w-20 rounded-full" />
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-32" />
-                  <Skeleton className="h-4 w-48" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Skeleton className="h-10 w-full" />
-                <Skeleton className="h-10 w-full" />
-                <Skeleton className="h-10 w-full" />
-                <Skeleton className="h-10 w-full" />
-              </div>
-
-              <div className="space-y-4">
-                <Skeleton className="h-20 w-full" />
-                <Skeleton className="h-20 w-full" />
-                <Skeleton className="h-20 w-full" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  )
+export const metadata: Metadata = {
+  title: "Account Settings - AVES Colombia",
+  description: "Manage your profile, preferences, and booking information for AVES Colombia birding tours.",
 }
 
-export default async function SettingsPage() {
-  const user = await getCurrentUser()
+export default async function AccountSettingsPage() {
+  const supabase = createServerComponentClient({ cookies })
 
-  if (!user) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session) {
     redirect("/auth/login?redirect=/account/settings")
   }
 
-  return (
-    <Suspense fallback={<SettingsLoadingSkeleton />}>
-      <AccountSettingsClient />
-    </Suspense>
-  )
-}
+  // Fetch user profile data
+  const { data: profile } = await supabase.from("user_profiles").select("*").eq("user_id", session.user.id).single()
 
-export const metadata = {
-  title: "Account Settings | AVES Colombia",
-  description: "Manage your account settings, profile information, and preferences for AVES Colombia birding tours.",
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white shadow-lg rounded-lg">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
+            <p className="text-gray-600 mt-1">Manage your profile and preferences for AVES Colombia tours</p>
+          </div>
+
+          <AccountSettingsClient
+            initialProfile={profile}
+            userId={session.user.id}
+            userEmail={session.user.email || ""}
+          />
+        </div>
+      </div>
+    </div>
+  )
 }

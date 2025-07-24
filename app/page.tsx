@@ -4,41 +4,18 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {
-  ArrowRight,
-  CheckCircle,
-  Star,
-  Calendar,
-  TelescopeIcon as Binoculars,
-  Clock,
-  Map,
-  Bird,
-  Globe,
-  TreePine,
-  Mountain,
-} from "lucide-react"
+import { ArrowRight, CheckCircle, Star, Calendar, TelescopeIcon as Binoculars, Clock, Map, Bird, Globe, TreePine, Mountain, Award, Leaf, Eye, Users } from 'lucide-react'
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import { ContactFormSection } from "@/components/contact-form-section"
 
 export default function AVESLandingPage() {
   const [isVisible, setIsVisible] = useState(false)
-  const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
-  const [selectedLocations, setSelectedLocations] = useState<string[]>([])
   const [currentReview, setCurrentReview] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    travelDate: "",
-    groupSize: "1 person",
-    desiredDuration: "8 days",
-    experienceLevel: "Beginner birder",
-    specialRequests: "",
-  })
 
   const reviews = [
     {
@@ -88,44 +65,6 @@ export default function AVESLandingPage() {
 
     return () => clearInterval(reviewInterval)
   }, [])
-
-  const toggleSelection = (item: string, selectedItems: string[], setSelectedItems: (items: string[]) => void) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems(selectedItems.filter((selected) => selected !== item))
-    } else {
-      setSelectedItems([...selectedItems, item])
-    }
-  }
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const generateEmailLink = () => {
-    const subject = encodeURIComponent("Colombian Birding Tour Inquiry")
-    const body = encodeURIComponent(`Hello AVES Team,
-
-I'm interested in planning a Colombian birding adventure. Here are my details:
-
-Name: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Travel Date: ${formData.travelDate || "Not specified"}
-Group Size: ${formData.groupSize}
-Desired Duration: ${formData.desiredDuration}
-Experience Level: ${formData.experienceLevel}
-
-Interested Tour Types: ${selectedTourTypes.length > 0 ? selectedTourTypes.join(", ") : "Not specified"}
-Desired Locations: ${selectedLocations.length > 0 ? selectedLocations.join(", ") : "Not specified"}
-
-Special Interests/Requests: ${formData.specialRequests || "None specified"}
-
-I look forward to hearing from you within 24 hours as mentioned on your website.
-
-Best regards,
-${formData.firstName} ${formData.lastName}`)
-
-    return `mailto:info@aves.bio?subject=${subject}&body=${body}`
-  }
 
   // Responsive class helpers
   const getResponsiveClasses = () => ({
@@ -415,12 +354,95 @@ ${formData.firstName} ${formData.lastName}`)
                   <p className="text-gray-700 italic leading-relaxed mb-6 flex-grow text-sm lg:text-base">
                     "{review.text}"
                   </p>
+                  <div className="text-sm">
+                    <div className="font-semibold text-gray-900">{review.author}</div>
+                    <div className="text-gray-600">{review.location}</div>
+                    <div className="text-gray-500">{review.role}</div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Why Choose AVES Section */}
+      <section className={`bg-gradient-to-br from-gray-50 to-blue-50 ${responsive.sectionSpacing}`}>
+        <div className={`container mx-auto ${responsive.container}`}>
+          <div className="text-center mb-12">
+            <h2 className={`font-bold text-gray-900 mb-4 ${responsive.textSize.section}`}>Why Choose AVES</h2>
+            <p className={`text-gray-600 mx-auto max-w-2xl ${responsive.textSize.body}`}>
+              We're passionate conservationists, expert birders, and your partners in discovering Colombia's incredible
+              avian diversity with award-winning excellence.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-8 h-8 text-emerald-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Expert</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Local Guides
+                </p>
+                <Link href="/team" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                  Meet Our Team
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Leaf className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">B Corp</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Certified
+                </p>
+                <Link href="/about/b-corp" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                  Our Journey
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Eye className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Exclusive</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Partner Network
+                </p>
+                <Link href="/about/partners" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                  View Partners
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Award className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">100%</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Carbon Neutral
+                </p>
+                <Link href="/conservation" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
+                  Our Impact
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section - No FAQ on homepage */}
+      <ContactFormSection showTitle={true} showFAQ={false} variant="homepage" />
 
       {/* Footer */}
       <Footer />
