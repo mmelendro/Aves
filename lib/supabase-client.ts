@@ -1,11 +1,18 @@
 import { createClient } from "@supabase/supabase-js"
 import type { Database } from "./database.types"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+// Environment variables with fallbacks
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || ""
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ""
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ""
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing Supabase environment variables")
+// Validate required environment variables
+if (!supabaseUrl) {
+  throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable")
+}
+
+if (!supabaseAnonKey) {
+  throw new Error("Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable")
 }
 
 // Client-side Supabase client
@@ -15,30 +22,13 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
     persistSession: true,
     detectSessionInUrl: true,
   },
-  realtime: {
-    params: {
-      eventsPerSecond: 10,
-    },
-  },
 })
 
-// Server-side Supabase client (for use in API routes and server components)
-export const createServerClient = () => {
-  return createClient<Database>(supabaseUrl, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
-}
-
-// Add this export after the existing createServerClient function
+// Server-side Supabase client with service role (optional)
 export const getSupabaseServer = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-
-  if (!supabaseUrl || !supabaseServiceKey) {
-    throw new Error("Missing Supabase server environment variables")
+  if (!supabaseServiceKey) {
+    console.warn("SUPABASE_SERVICE_ROLE_KEY not available, falling back to anon key")
+    return createClient<Database>(supabaseUrl, supabaseAnonKey)
   }
 
   return createClient<Database>(supabaseUrl, supabaseServiceKey, {
@@ -49,26 +39,7 @@ export const getSupabaseServer = () => {
   })
 }
 
-// Helper function to handle Supabase errors
-export const handleSupabaseError = (error: any) => {
-  console.error("Supabase error:", error)
+// Admin client for server-side operations
+export const supabaseAdmin = getSupabaseServer()
 
-  if (error?.code === "PGRST301") {
-    return "Resource not found"
-  }
-
-  if (error?.code === "23505") {
-    return "This record already exists"
-  }
-
-  if (error?.code === "42501") {
-    return "You do not have permission to perform this action"
-  }
-
-  return error?.message || "An unexpected error occurred"
-}
-
-// Type-safe query builder helpers
-export const createTypedSupabaseClient = () => {
-  return supabase
-}
+export default supabase

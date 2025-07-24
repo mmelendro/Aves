@@ -6,6 +6,7 @@ import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
+import { AuthProvider } from "@/hooks/use-auth-enhanced"
 
 export const metadata: Metadata = {
   title: {
@@ -92,12 +93,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CookieConsentProvider>
-          {children}
-          <CookiePreferenceCenter />
-          <CookieBanner />
-          <MobileNavigationOverlay />
-        </CookieConsentProvider>
+        <AuthProvider>
+          <CookieConsentProvider>
+            {children}
+            <CookiePreferenceCenter />
+            <CookieBanner />
+            <MobileNavigationOverlay />
+          </CookieConsentProvider>
+        </AuthProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

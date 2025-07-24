@@ -1,36 +1,42 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
-import { getSupabaseServer } from "@/lib/supabase-client"
+import Link from "next/link"
 import { SignupForm } from "./SignupForm"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: "Sign Up - AVES Colombia",
+  title: "Sign Up | AVES Colombia",
   description: "Create your AVES Colombia account to start your birding adventure.",
 }
 
-export default async function SignupPage({
-  searchParams,
-}: {
-  searchParams: { redirect?: string }
-}) {
-  const supabase = getSupabaseServer()
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+// Make this page dynamic to avoid static generation issues
+export const dynamic = "force-dynamic"
 
-  // Redirect if already logged in
-  if (session) {
-    redirect(searchParams.redirect || "/dashboard")
-  }
-
+export default function SignupPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">Join the AVES Community</h2>
-          <p className="mt-2 text-sm text-gray-600">Create your account to start your Colombian birding adventure</p>
-        </div>
-        <SignupForm redirectTo={searchParams.redirect} />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50 px-4">
+      <div className="w-full max-w-md">
+        <Card className="shadow-xl border-0">
+          <CardHeader className="space-y-1 text-center">
+            <CardTitle className="text-2xl font-bold text-emerald-800">Join AVES Colombia</CardTitle>
+            <CardDescription className="text-gray-600">
+              Create your account to start your birding adventure
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <SignupForm />
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                Already have an account?{" "}
+                <Link
+                  href="/auth/login"
+                  className="font-medium text-emerald-600 hover:text-emerald-500 transition-colors"
+                >
+                  Sign in here
+                </Link>
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

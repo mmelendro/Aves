@@ -1,25 +1,14 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
-import { getSupabaseServer } from "@/lib/supabase-client"
 import { DashboardClient } from "./DashboardClient"
 
 export const metadata: Metadata = {
-  title: "Dashboard - AVES Colombia",
-  description: "Manage your Colombian birding adventures and bookings.",
+  title: "Dashboard | AVES Colombia",
+  description: "Manage your AVES Colombia bookings and account.",
 }
 
-export default async function DashboardPage() {
-  const supabase = getSupabaseServer()
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+// Make this page dynamic to avoid static generation issues
+export const dynamic = "force-dynamic"
 
-  if (!session) {
-    redirect("/auth/login?redirect=/dashboard")
-  }
-
-  // Fetch user profile
-  const { data: profile } = await supabase.from("user_profiles").select("*").eq("id", session.user.id).single()
-
-  return <DashboardClient initialProfile={profile} />
+export default function DashboardPage() {
+  return <DashboardClient />
 }

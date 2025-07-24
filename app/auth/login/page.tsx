@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   description: "Sign in to your AVES Colombia account to manage your birding adventures.",
 }
 
+// Make this page dynamic to avoid static generation issues
+export const dynamic = "force-dynamic"
+
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-blue-50 px-4">
