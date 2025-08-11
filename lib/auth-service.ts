@@ -1,9 +1,9 @@
-import { supabase } from "./supabase"
-import type { Database } from "./database.types"
+import { supabase } from "./supabase-client"
+import type { Database } from "./supabase"
 
-type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"]
-type UserProfileInsert = Database["public"]["Tables"]["user_profiles"]["Insert"]
-type UserProfileUpdate = Database["public"]["Tables"]["user_profiles"]["Update"]
+type UserProfile = Database["public"]["Tables"]["profiles"]["Row"]
+type UserProfileInsert = Database["public"]["Tables"]["profiles"]["Insert"]
+type UserProfileUpdate = Database["public"]["Tables"]["profiles"]["Update"]
 
 export class AuthService {
   // Sign up with email and password
@@ -13,7 +13,6 @@ export class AuthService {
         email,
         password,
         options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || window.location.origin,
           data: {
             full_name: userData?.full_name || "",
             first_name: userData?.first_name || "",
@@ -113,7 +112,7 @@ export class AuthService {
   // Create user profile
   static async createUserProfile(profileData: UserProfileInsert) {
     try {
-      const { data, error } = await supabase.from("user_profiles").insert(profileData).select().single()
+      const { data, error } = await supabase.from("profiles").insert(profileData).select().single()
 
       if (error) throw error
       return { data, error: null }
@@ -125,7 +124,7 @@ export class AuthService {
   // Get user profile
   static async getUserProfile(userId: string): Promise<{ data: UserProfile | null; error: string | null }> {
     try {
-      const { data, error } = await supabase.from("user_profiles").select("*").eq("id", userId).single()
+      const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
 
       if (error) throw error
       return { data, error: null }
@@ -137,7 +136,7 @@ export class AuthService {
   // Update user profile
   static async updateUserProfile(userId: string, updates: UserProfileUpdate) {
     try {
-      const { data, error } = await supabase.from("user_profiles").update(updates).eq("id", userId).select().single()
+      const { data, error } = await supabase.from("profiles").update(updates).eq("id", userId).select().single()
 
       if (error) throw error
       return { data, error: null }

@@ -211,6 +211,12 @@ export function Footer({ transparent = false }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/deck" className={linkClasses}>
+                  <span>📊</span>
+                  <span>Investor's Deck</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className={linkClasses}>
                   <span>📞</span>
                   <span>Contact Us</span>

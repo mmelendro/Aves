@@ -3,202 +3,284 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          id: string
-          updated_at: string | null
-          username: string | null
-          full_name: string | null
-          avatar_url: string | null
-          website: string | null
-          email: string
-          phone: string | null
-          experience_level: string | null
-          preferences: any | null
-          created_at: string
-          last_login: string | null
-          marketing_consent: boolean | null
-          gdpr_consent: boolean | null
-          role: string | null
-          first_name: string | null
-          last_name: string | null
-        }
-        Insert: {
-          id: string
-          updated_at?: string | null
-          username?: string | null
-          full_name?: string | null
-          avatar_url?: string | null
-          website?: string | null
-          email: string
-          phone?: string | null
-          experience_level?: string | null
-          preferences?: any | null
-          created_at?: string
-          last_login?: string | null
-          marketing_consent?: boolean | null
-          gdpr_consent?: boolean | null
-          role?: string | null
-          first_name?: string | null
-          last_name?: string | null
-        }
-        Update: {
-          id?: string
-          updated_at?: string | null
-          username?: string | null
-          full_name?: string | null
-          avatar_url?: string | null
-          website?: string | null
-          email?: string
-          phone?: string | null
-          experience_level?: string | null
-          preferences?: any | null
-          created_at?: string
-          last_login?: string | null
-          marketing_consent?: boolean | null
-          gdpr_consent?: boolean | null
-          role?: string | null
-          first_name?: string | null
-          last_name?: string | null
-        }
-      }
-      bookings: {
-        Row: {
-          id: string
-          user_id: string | null
-          booking_data: any | null
-          status: string | null
-          created_at: string
-          updated_at: string | null
-          total_cost: number | null
-          contact_info: any | null
-          tour_selections: any | null
-          special_requests: string | null
-          booking_reference: string | null
-          payment_status: string | null
-          start_date: string | null
-          end_date: string | null
-          participants: number | null
-          tour_type: string | null
-          tour_name: string | null
-          currency: string | null
-          total_amount: number | null
-          total_price: number | null
-        }
-        Insert: {
-          id?: string
-          user_id?: string | null
-          booking_data?: any | null
-          status?: string | null
-          created_at?: string
-          updated_at?: string | null
-          total_cost?: number | null
-          contact_info?: any | null
-          tour_selections?: any | null
-          special_requests?: string | null
-          booking_reference?: string | null
-          payment_status?: string | null
-          start_date?: string | null
-          end_date?: string | null
-          participants?: number | null
-          tour_type?: string | null
-          tour_name?: string | null
-          currency?: string | null
-          total_amount?: number | null
-          total_price?: number | null
-        }
-        Update: {
-          id?: string
-          user_id?: string | null
-          booking_data?: any | null
-          status?: string | null
-          created_at?: string
-          updated_at?: string | null
-          total_cost?: number | null
-          contact_info?: any | null
-          tour_selections?: any | null
-          special_requests?: string | null
-          booking_reference?: string | null
-          payment_status?: string | null
-          start_date?: string | null
-          end_date?: string | null
-          participants?: number | null
-          tour_type?: string | null
-          tour_name?: string | null
-          currency?: string | null
-          total_amount?: number | null
-          total_price?: number | null
-        }
-      }
       user_profiles: {
         Row: {
           id: string
-          email: string | null
+          email: string
           full_name: string | null
           first_name: string | null
           last_name: string | null
           phone: string | null
           country: string | null
           city: string | null
-          birding_experience: string | null
+          date_of_birth: string | null
+          birding_experience: "beginner" | "intermediate" | "advanced" | "expert" | null
           dietary_restrictions: string[] | null
-          special_requirements: string | null
           emergency_contact_name: string | null
           emergency_contact_phone: string | null
           passport_number: string | null
           passport_expiry: string | null
-          date_of_birth: string | null
           travel_insurance_provider: string | null
           travel_insurance_policy: string | null
+          special_requirements: string | null
           profile_image_url: string | null
           created_at: string
-          updated_at: string | null
+          updated_at: string
         }
         Insert: {
           id: string
-          email?: string | null
+          email: string
           full_name?: string | null
           first_name?: string | null
           last_name?: string | null
           phone?: string | null
           country?: string | null
           city?: string | null
-          birding_experience?: string | null
+          date_of_birth?: string | null
+          birding_experience?: "beginner" | "intermediate" | "advanced" | "expert" | null
           dietary_restrictions?: string[] | null
-          special_requirements?: string | null
           emergency_contact_name?: string | null
           emergency_contact_phone?: string | null
           passport_number?: string | null
           passport_expiry?: string | null
-          date_of_birth?: string | null
           travel_insurance_provider?: string | null
           travel_insurance_policy?: string | null
+          special_requirements?: string | null
           profile_image_url?: string | null
           created_at?: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Update: {
           id?: string
-          email?: string | null
+          email?: string
           full_name?: string | null
           first_name?: string | null
           last_name?: string | null
           phone?: string | null
           country?: string | null
           city?: string | null
-          birding_experience?: string | null
+          date_of_birth?: string | null
+          birding_experience?: "beginner" | "intermediate" | "advanced" | "expert" | null
           dietary_restrictions?: string[] | null
-          special_requirements?: string | null
           emergency_contact_name?: string | null
           emergency_contact_phone?: string | null
           passport_number?: string | null
           passport_expiry?: string | null
-          date_of_birth?: string | null
           travel_insurance_provider?: string | null
           travel_insurance_policy?: string | null
+          special_requirements?: string | null
           profile_image_url?: string | null
           created_at?: string
-          updated_at?: string | null
+          updated_at?: string
+        }
+      }
+      trips: {
+        Row: {
+          id: string
+          title: string
+          slug: string
+          description: string | null
+          short_description: string | null
+          duration_days: number
+          difficulty_level: "easy" | "moderate" | "challenging" | "expert" | null
+          max_participants: number | null
+          price_per_person: number
+          currency: string | null
+          region: string
+          best_months: string[] | null
+          featured_image_url: string | null
+          gallery_images: string[] | null
+          is_active: boolean | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          slug: string
+          description?: string | null
+          short_description?: string | null
+          duration_days: number
+          difficulty_level?: "easy" | "moderate" | "challenging" | "expert" | null
+          max_participants?: number | null
+          price_per_person: number
+          currency?: string | null
+          region: string
+          best_months?: string[] | null
+          featured_image_url?: string | null
+          gallery_images?: string[] | null
+          is_active?: boolean | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          slug?: string
+          description?: string | null
+          short_description?: string | null
+          duration_days?: number
+          difficulty_level?: "easy" | "moderate" | "challenging" | "expert" | null
+          max_participants?: number | null
+          price_per_person?: number
+          currency?: string | null
+          region?: string
+          best_months?: string[] | null
+          featured_image_url?: string | null
+          gallery_images?: string[] | null
+          is_active?: boolean | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      trip_itineraries: {
+        Row: {
+          id: string
+          trip_id: string | null
+          day_number: number
+          title: string
+          description: string | null
+          activities: string[] | null
+          accommodation: string | null
+          meals_included: string[] | null
+          location: string | null
+          coordinates: unknown | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          trip_id?: string | null
+          day_number: number
+          title: string
+          description?: string | null
+          activities?: string[] | null
+          accommodation?: string | null
+          meals_included?: string[] | null
+          location?: string | null
+          coordinates?: unknown | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          trip_id?: string | null
+          day_number?: number
+          title?: string
+          description?: string | null
+          activities?: string[] | null
+          accommodation?: string | null
+          meals_included?: string[] | null
+          location?: string | null
+          coordinates?: unknown | null
+          created_at?: string
+        }
+      }
+      trip_target_birds: {
+        Row: {
+          id: string
+          trip_id: string | null
+          common_name: string
+          scientific_name: string | null
+          family: string | null
+          endemic: boolean | null
+          rarity_level: "common" | "uncommon" | "rare" | "very_rare" | null
+          image_url: string | null
+          audio_url: string | null
+          description: string | null
+          best_viewing_time: string | null
+          habitat: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          trip_id?: string | null
+          common_name: string
+          scientific_name?: string | null
+          family?: string | null
+          endemic?: boolean | null
+          rarity_level?: "common" | "uncommon" | "rare" | "very_rare" | null
+          image_url?: string | null
+          audio_url?: string | null
+          description?: string | null
+          best_viewing_time?: string | null
+          habitat?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          trip_id?: string | null
+          common_name?: string
+          scientific_name?: string | null
+          family?: string | null
+          endemic?: boolean | null
+          rarity_level?: "common" | "uncommon" | "rare" | "very_rare" | null
+          image_url?: string | null
+          audio_url?: string | null
+          description?: string | null
+          best_viewing_time?: string | null
+          habitat?: string | null
+          created_at?: string
+        }
+      }
+      trip_resources: {
+        Row: {
+          id: string
+          trip_id: string | null
+          title: string
+          description: string | null
+          resource_type:
+            | "travel_tip"
+            | "packing_list"
+            | "weather_info"
+            | "cultural_info"
+            | "safety_info"
+            | "equipment"
+            | "external_link"
+            | null
+          content: string | null
+          url: string | null
+          file_url: string | null
+          order_index: number | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          trip_id?: string | null
+          title: string
+          description?: string | null
+          resource_type?:
+            | "travel_tip"
+            | "packing_list"
+            | "weather_info"
+            | "cultural_info"
+            | "safety_info"
+            | "equipment"
+            | "external_link"
+            | null
+          content?: string | null
+          url?: string | null
+          file_url?: string | null
+          order_index?: number | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          trip_id?: string | null
+          title?: string
+          description?: string | null
+          resource_type?:
+            | "travel_tip"
+            | "packing_list"
+            | "weather_info"
+            | "cultural_info"
+            | "safety_info"
+            | "equipment"
+            | "external_link"
+            | null
+          content?: string | null
+          url?: string | null
+          file_url?: string | null
+          order_index?: number | null
+          created_at?: string
         }
       }
       trip_bookings: {
@@ -299,65 +381,6 @@ export interface Database {
           file_name?: string | null
           is_read?: boolean | null
           created_at?: string
-        }
-      }
-      trips: {
-        Row: {
-          id: string
-          title: string
-          slug: string
-          description: string | null
-          short_description: string | null
-          duration_days: number
-          difficulty_level: "easy" | "moderate" | "challenging" | "expert" | null
-          max_participants: number | null
-          price_per_person: number
-          currency: string | null
-          region: string
-          best_months: string[] | null
-          featured_image_url: string | null
-          gallery_images: string[] | null
-          is_active: boolean | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          title: string
-          slug: string
-          description?: string | null
-          short_description?: string | null
-          duration_days: number
-          difficulty_level?: "easy" | "moderate" | "challenging" | "expert" | null
-          max_participants?: number | null
-          price_per_person: number
-          currency?: string | null
-          region: string
-          best_months?: string[] | null
-          featured_image_url?: string | null
-          gallery_images?: string[] | null
-          is_active?: boolean | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          title?: string
-          slug?: string
-          description?: string | null
-          short_description?: string | null
-          duration_days?: number
-          difficulty_level?: "easy" | "moderate" | "challenging" | "expert" | null
-          max_participants?: number | null
-          price_per_person?: number
-          currency?: string | null
-          region?: string
-          best_months?: string[] | null
-          featured_image_url?: string | null
-          gallery_images?: string[] | null
-          is_active?: boolean | null
-          created_at?: string
-          updated_at?: string
         }
       }
     }
