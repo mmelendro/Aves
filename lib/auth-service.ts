@@ -1,4 +1,4 @@
-import { supabase } from "./supabase-client"
+import { supabase } from "./supabase"
 import type { Database } from "./database.types"
 
 type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"]
@@ -13,6 +13,7 @@ export class AuthService {
         email,
         password,
         options: {
+          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || window.location.origin,
           data: {
             full_name: userData?.full_name || "",
             first_name: userData?.first_name || "",

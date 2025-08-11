@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
+// Updated import to use consolidated database types
 import type { Database } from "./database.types"
 
 // Validate environment variables

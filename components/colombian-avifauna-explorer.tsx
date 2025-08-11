@@ -6,23 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import {
-  MapPin,
-  Bird,
-  TreePine,
-  Mountain,
-  Users,
-  ChevronRight,
-  Waves,
-  Leaf,
-  Sun,
-  ShoppingBag,
-  Globe,
-  Heart,
-  Camera,
-  TelescopeIcon as Binoculars,
-  AlertCircle,
-} from "lucide-react"
+import { MapPin, Bird, TreePine, Mountain, Users, ChevronRight, Waves, Leaf, Sun, Globe, Calendar } from "lucide-react"
 
 // Bioregions data - streamlined for the new design
 const bioregionsData = [
@@ -47,6 +31,8 @@ const bioregionsData = [
     ],
     bestTime: "January-March, July-September",
     difficulty: "Moderate to Challenging",
+    tourTypes: ["Adventure", "Vision"],
+    bookingCTA: "Explore Pacific Tours",
   },
   {
     id: "Western Andes",
@@ -75,6 +61,8 @@ const bioregionsData = [
     ],
     bestTime: "December-March, June-August",
     difficulty: "Moderate",
+    tourTypes: ["Adventure", "Elevate"],
+    bookingCTA: "Book Western Andes",
   },
   {
     id: "Central Andes",
@@ -103,6 +91,8 @@ const bioregionsData = [
     ],
     bestTime: "December-March, July-August",
     difficulty: "Easy to Moderate",
+    tourTypes: ["Adventure", "Elevate", "Souls"],
+    bookingCTA: "Discover Central Andes",
   },
   {
     id: "Eastern Andes",
@@ -125,6 +115,8 @@ const bioregionsData = [
     ],
     bestTime: "December-March, July-August",
     difficulty: "Easy to Moderate",
+    tourTypes: ["Adventure", "Vision"],
+    bookingCTA: "Explore Eastern Andes",
   },
   {
     id: "Interandean Valleys",
@@ -153,6 +145,8 @@ const bioregionsData = [
     ],
     bestTime: "December-March",
     difficulty: "Moderate",
+    tourTypes: ["Adventure", "Vision"],
+    bookingCTA: "Visit Dry Forests",
   },
   {
     id: "Caribbean",
@@ -170,6 +164,8 @@ const bioregionsData = [
     highlights: ["Migratory bird stopover", "Flamingo colonies", "Seabird islands", "Coastal wetlands"],
     bestTime: "December-April",
     difficulty: "Easy",
+    tourTypes: ["Adventure", "Souls"],
+    bookingCTA: "Book Caribbean Tour",
   },
   {
     id: "SNSM",
@@ -193,6 +189,8 @@ const bioregionsData = [
     highlights: ["Highest endemism per area", "Indigenous territories", "Isolated evolution", "Sacred mountains"],
     bestTime: "December-March, July-August",
     difficulty: "Moderate to Challenging",
+    tourTypes: ["Adventure", "Vision", "Elevate"],
+    bookingCTA: "Discover Sierra Nevada",
   },
   {
     id: "Llanos",
@@ -215,6 +213,8 @@ const bioregionsData = [
     ],
     bestTime: "December-April (dry season)",
     difficulty: "Easy to Moderate",
+    tourTypes: ["Adventure", "Vision"],
+    bookingCTA: "Experience Llanos",
   },
   {
     id: "Amazonia",
@@ -232,6 +232,8 @@ const bioregionsData = [
     highlights: ["Highest species diversity", "Indigenous protection", "Pristine wilderness", "Harpy Eagle territory"],
     bestTime: "June-September (drier season)",
     difficulty: "Moderate to Challenging",
+    tourTypes: ["Adventure", "Vision", "Elevate"],
+    bookingCTA: "Explore Amazon",
   },
   {
     id: "Massif",
@@ -255,6 +257,8 @@ const bioregionsData = [
     highlights: ["Andean division point", "Transitional ecosystems", "Archaeological sites", "Cultural significance"],
     bestTime: "December-February, June-August",
     difficulty: "Moderate",
+    tourTypes: ["Adventure", "Elevate"],
+    bookingCTA: "Visit Colombian Massif",
   },
   {
     id: "Marine",
@@ -272,6 +276,8 @@ const bioregionsData = [
     highlights: ["Two ocean systems", "Coral reef ecosystems", "Whale watching", "Seabird colonies"],
     bestTime: "December-April",
     difficulty: "Easy to Moderate",
+    tourTypes: ["Adventure", "Souls"],
+    bookingCTA: "Marine Expeditions",
   },
 ]
 
@@ -322,6 +328,12 @@ export function ColombianBirdsExplorer() {
     setSelectedRegion(null)
   }
 
+  // Enhanced booking CTA handler
+  const handleBookingCTA = (region: any) => {
+    // Navigate to shopping page with pre-selected region
+    router.push(`/shopping?region=${encodeURIComponent(region.name)}&focus=${region.id}`)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
       {/* Hero Section */}
@@ -369,8 +381,8 @@ export function ColombianBirdsExplorer() {
                 asChild
                 className="border-2 border-emerald-500 text-emerald-600 hover:bg-emerald-50 bg-transparent text-lg px-8 py-4"
               >
-                <Link href="/tours">
-                  <Camera className="w-5 h-5 mr-2" />
+                <Link href="/shopping">
+                  <Calendar className="w-5 h-5 mr-2" />
                   Book Your Tour
                 </Link>
               </Button>
@@ -531,7 +543,7 @@ export function ColombianBirdsExplorer() {
                   </div>
                 </div>
 
-                {/* Region Details Panel */}
+                {/* Enhanced Region Details Panel with Strategic CTAs */}
                 {currentRegion && (
                   <Card className="bg-gradient-to-r from-emerald-50 to-blue-50 border-emerald-200">
                     <CardHeader>
@@ -568,6 +580,22 @@ export function ColombianBirdsExplorer() {
                         </div>
                       </div>
 
+                      {/* Tour Types Available */}
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Available Tour Types:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {currentRegion.tourTypes.map((type, index) => (
+                            <Badge
+                              key={index}
+                              variant="outline"
+                              className="text-sm bg-blue-50 text-blue-700 border-blue-200"
+                            >
+                              {type} Tours
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
                       <div className="mb-6">
                         <h4 className="font-semibold text-gray-900 mb-3">Key Bird Species:</h4>
                         <div className="flex flex-wrap gap-2">
@@ -579,19 +607,36 @@ export function ColombianBirdsExplorer() {
                         </div>
                       </div>
 
+                      {/* Enhanced Strategic CTAs */}
                       <div className="flex gap-4">
-                        <Button asChild className="flex-1">
-                          <Link href="/tours">
-                            <Camera className="w-4 h-4 mr-2" />
-                            Book Tour
-                          </Link>
+                        <Button
+                          className="flex-1"
+                          onClick={() => handleBookingCTA(currentRegion)}
+                          style={{ backgroundColor: currentRegion.color }}
+                        >
+                          <Calendar className="w-4 h-4 mr-2" />
+                          {currentRegion.bookingCTA}
                         </Button>
-                        <Button variant="outline" asChild className="flex-1 bg-transparent">
+                        <Button variant="outline" className="flex-1 bg-transparent" asChild>
                           <Link href="/contact">
                             <Users className="w-4 h-4 mr-2" />
-                            Plan Visit
+                            Plan Custom Visit
                           </Link>
                         </Button>
+                      </div>
+
+                      {/* Additional Info */}
+                      <div className="mt-4 p-4 bg-white/60 rounded-lg">
+                        <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <span className="font-medium text-gray-700">Best Time:</span>
+                            <p className="text-gray-600">{currentRegion.bestTime}</p>
+                          </div>
+                          <div>
+                            <span className="font-medium text-gray-700">Difficulty:</span>
+                            <p className="text-gray-600">{currentRegion.difficulty}</p>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -602,7 +647,7 @@ export function ColombianBirdsExplorer() {
         </div>
       </section>
 
-      {/* Colombia's 11 Bioregions Detailed Sections */}
+      {/* Colombia's 11 Bioregions Detailed Sections - Enhanced with Strategic CTAs */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -676,11 +721,15 @@ export function ColombianBirdsExplorer() {
                             </div>
                           </div>
 
-                          {/* Future Tour CTA */}
+                          {/* Enhanced Strategic CTAs */}
                           <div className="flex gap-3">
-                            <Button className="flex-1" style={{ backgroundColor: region.color }} disabled>
-                              <Camera className="w-4 h-4 mr-2" />
-                              {region.name} Tours
+                            <Button
+                              className="flex-1"
+                              style={{ backgroundColor: region.color }}
+                              onClick={() => handleBookingCTA(region)}
+                            >
+                              <Calendar className="w-4 h-4 mr-2" />
+                              {region.bookingCTA}
                             </Button>
                             <Button variant="outline" className="flex-1 bg-transparent" asChild>
                               <Link href="/contact">
@@ -689,29 +738,19 @@ export function ColombianBirdsExplorer() {
                               </Link>
                             </Button>
                           </div>
-
-                          {/* Temporarily Broken Notice */}
-                          <div className="mt-3 flex items-center gap-2 text-sm text-amber-600 bg-amber-50 p-3 rounded-lg">
-                            <AlertCircle className="w-4 h-4" />
-                            <span>Specific {region.name} tour pages coming soon! Contact us to plan your visit.</span>
-                          </div>
                         </div>
 
                         {/* Visual Side */}
                         <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 min-h-[400px] lg:min-h-full">
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <div
-                              className={`w-32 h-32 rounded-full bg-gradient-to-br ${region.gradient} flex items-center justify-center shadow-2xl opacity-20`}
-                            >
-                              <IconComponent className="w-16 h-16 text-white" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-4 left-4 right-4">
-                            <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg">
-                              <div className="text-sm font-medium text-gray-900 mb-1">
-                                Difficulty: {region.difficulty}
+                            <div className="text-center p-8">
+                              <div
+                                className={`w-24 h-24 rounded-full bg-gradient-to-br ${region.gradient} flex items-center justify-center shadow-xl mb-4 mx-auto`}
+                              >
+                                <IconComponent className="w-12 h-12 text-white" />
                               </div>
-                              <div className="text-xs text-gray-600">Best visited: {region.bestTime}</div>
+                              <h4 className="text-xl font-bold text-gray-800 mb-2">{region.name}</h4>
+                              <p className="text-gray-600 text-sm">{region.shortDescription}</p>
                             </div>
                           </div>
                         </div>
@@ -726,38 +765,32 @@ export function ColombianBirdsExplorer() {
       </section>
 
       {/* Featured Birds Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Colombian Birds</h2>
-              <p className="text-lg text-gray-600">Meet some of Colombia's most remarkable bird species</p>
+              <p className="text-lg text-gray-600">
+                Discover some of Colombia's most spectacular and endemic bird species
+              </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {featuredBirds.map((bird, index) => (
                 <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="relative">
+                  <div className="aspect-video relative">
                     <img
                       src={bird.imageUrl || "/placeholder.svg"}
                       alt={bird.commonName}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-3 right-3">
-                      <Badge
-                        className={bird.isEndemic ? "bg-emerald-100 text-emerald-800" : "bg-blue-100 text-blue-800"}
-                      >
-                        {bird.isEndemic ? "Endemic" : "Resident"}
-                      </Badge>
-                    </div>
+                    {bird.isEndemic && <Badge className="absolute top-2 right-2 bg-emerald-600">Endemic</Badge>}
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="font-bold text-gray-900 mb-2">{bird.commonName}</h3>
-                    <p className="text-sm italic text-gray-600 mb-2">{bird.scientificName}</p>
-                    <p className="text-sm text-gray-600 mb-3">{bird.region}</p>
-                    <Badge variant="outline" className="text-xs">
-                      {bird.status}
-                    </Badge>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{bird.commonName}</h3>
+                    <p className="text-sm text-gray-600 italic mb-2">{bird.scientificName}</p>
+                    <p className="text-sm text-gray-700 mb-2">Region: {bird.region}</p>
+                    <Badge variant={bird.status === "Endangered" ? "destructive" : "secondary"}>{bird.status}</Badge>
                   </CardContent>
                 </Card>
               ))}
@@ -767,53 +800,31 @@ export function ColombianBirdsExplorer() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-emerald-600 to-blue-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-emerald-600 to-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="flex justify-center mb-8">
-              <div className="bg-white/20 p-6 rounded-full">
-                <Heart className="w-12 h-12 text-white" />
-              </div>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">Ready to Experience Colombia's Avian Wonders?</h2>
-            <p className="text-xl text-emerald-100 mb-8 leading-relaxed max-w-3xl mx-auto">
-              Join our expert-guided tours to witness these incredible species in their natural habitats. From endemic
-              hummingbirds to spectacular toucans, create memories that will last a lifetime.
+            <h2 className="text-4xl font-bold text-white mb-6">Ready to Explore Colombia's Birds?</h2>
+            <p className="text-xl text-emerald-100 mb-8">
+              Join us on an unforgettable birding adventure through Colombia's most spectacular bioregions
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-              <Button asChild size="lg" className="bg-white text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" variant="secondary" asChild className="text-lg px-8 py-4">
                 <Link href="/shopping">
-                  <ShoppingBag className="w-6 h-6 mr-3" />
-                  Book Your Adventure
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Book Your Tour
                 </Link>
               </Button>
               <Button
-                asChild
                 size="lg"
                 variant="outline"
+                asChild
                 className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
               >
-                <Link href="/tours">
-                  <Binoculars className="w-6 h-6 mr-3" />
-                  Explore All Tours
+                <Link href="/contact">
+                  <Users className="w-5 h-5 mr-2" />
+                  Plan Custom Trip
                 </Link>
               </Button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div>
-                <h4 className="font-semibold mb-2">Expert Guides</h4>
-                <p className="text-emerald-100 text-sm">Local ornithologists and indigenous guides</p>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">Small Groups</h4>
-                <p className="text-emerald-100 text-sm">Maximum 8 participants per tour</p>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">Conservation Focus</h4>
-                <p className="text-emerald-100 text-sm">Supporting local communities and habitat protection</p>
-              </div>
             </div>
           </div>
         </div>

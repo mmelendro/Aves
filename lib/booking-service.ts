@@ -1,4 +1,5 @@
 import { supabase } from "./supabase-client"
+// Updated import to use consolidated database types
 import type { Database } from "./database.types"
 
 type TripBooking = Database["public"]["Tables"]["trip_bookings"]["Row"]

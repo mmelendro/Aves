@@ -165,7 +165,7 @@ export default function AVESLandingPage() {
                 </div>
               </div>
 
-              {/* Primary CTAs */}
+              {/* Primary CTAs - Enhanced with Strategic Booking Flow */}
               <div className={`flex gap-4 ${isMobile ? "flex-col" : "flex-col sm:flex-row"}`}>
                 <Link href="/tours" className={isMobile ? "w-full" : "flex-1"}>
                   <Button
@@ -184,7 +184,7 @@ export default function AVESLandingPage() {
                     className="w-full border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 shadow-md hover:shadow-xl transition-all duration-300 bg-transparent text-base lg:text-lg px-8 py-4"
                   >
                     <Calendar className="mr-2 w-5 h-5" />
-                    Plan My Trip
+                    Book Your Adventure
                   </Button>
                 </Link>
               </div>
@@ -224,8 +224,9 @@ export default function AVESLandingPage() {
         ></div>
       </section>
 
-      {/* Bioregions Explorer Section - Enhanced with proper spacing and no truncation */}
+      {/* Bioregions Explorer Section - Enhanced with Strategic CTAs and Anchor Links */}
       <section
+        id="explore-colombia"
         className={`bg-gradient-to-br from-blue-50 to-emerald-50 transition-all duration-500 ${responsive.sectionSpacing}`}
       >
         <div className={`container mx-auto ${responsive.container}`}>
@@ -244,7 +245,7 @@ export default function AVESLandingPage() {
               </p>
             </div>
 
-            {/* Bioregions Quick Preview Cards with enhanced responsive grid */}
+            {/* Enhanced Bioregions Quick Preview Cards with Strategic CTAs */}
             <div
               className={`mb-8 lg:mb-12 xl:mb-16 ${
                 isMobile
@@ -254,7 +255,8 @@ export default function AVESLandingPage() {
                     : "grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10"
               }`}
             >
-              <Link href="/aves-explorer" className="group block">
+              {/* Amazon - Enhanced with Direct Booking CTA */}
+              <Link href="/aves-explorer#Amazonia" className="group block">
                 <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-emerald-50 to-green-50">
                   <CardContent className={`text-center ${isMobile ? "p-6" : "p-6 lg:p-8"}`}>
                     <div className="w-12 h-12 lg:w-14 lg:h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6 group-hover:bg-emerald-200 transition-colors">
@@ -270,14 +272,22 @@ export default function AVESLandingPage() {
                     >
                       Pristine rainforests with the highest biodiversity on Earth
                     </p>
-                    <div className={`text-emerald-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
+                    <div
+                      className={`text-emerald-600 font-semibold mb-4 ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
+                    >
                       1,100+ species
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                        Explore Amazon Tours
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
               </Link>
 
-              <Link href="/aves-explorer" className="group block">
+              {/* Andean Ranges - Enhanced with Regional Focus */}
+              <Link href="/aves-explorer#Central%20Andes" className="group block">
                 <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-blue-50 to-indigo-50">
                   <CardContent className={`text-center ${isMobile ? "p-6" : "p-6 lg:p-8"}`}>
                     <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6 group-hover:bg-blue-200 transition-colors">
@@ -293,14 +303,22 @@ export default function AVESLandingPage() {
                     >
                       Cloud forests and páramo with spectacular endemic species
                     </p>
-                    <div className={`text-blue-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
+                    <div
+                      className={`text-blue-600 font-semibold mb-4 ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
+                    >
                       1,100+ species • 55 endemics
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                        View Andes Tours
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
               </Link>
 
-              <Link href="/aves-explorer" className="group block">
+              {/* Sierra Nevada - Enhanced with Direct Regional Link */}
+              <Link href="/aves-explorer#SNSM" className="group block">
                 <Card
                   className={`h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-orange-50 to-yellow-50 ${
                     isMobile ? "" : isTablet ? "md:col-span-2 lg:col-span-1" : ""
@@ -320,16 +338,23 @@ export default function AVESLandingPage() {
                     >
                       World's highest coastal mountain with unique endemics
                     </p>
-                    <div className={`text-orange-600 font-semibold ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}>
+                    <div
+                      className={`text-orange-600 font-semibold mb-4 ${isMobile ? "text-sm" : "text-base lg:text-lg"}`}
+                    >
                       500+ species • 26 endemics
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button size="sm" className="bg-orange-600 hover:bg-orange-700 text-white">
+                        Discover Sierra Nevada
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
               </Link>
             </div>
 
-            {/* CTA to Full Explorer with enhanced spacing */}
-            <div className="text-center">
+            {/* Enhanced CTA to Full Explorer with Strategic Booking Flow */}
+            <div className="text-center space-y-4">
               <Link href="/aves-explorer">
                 <Button
                   size="lg"
@@ -342,6 +367,13 @@ export default function AVESLandingPage() {
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
+              <p className="text-sm text-gray-600">
+                Or{" "}
+                <Link href="/shopping" className="text-emerald-600 hover:text-emerald-700 font-medium underline">
+                  book your tour directly
+                </Link>{" "}
+                to start planning your adventure
+              </p>
             </div>
           </div>
         </div>
@@ -378,10 +410,28 @@ export default function AVESLandingPage() {
               </Card>
             ))}
           </div>
+
+          {/* Enhanced CTA after testimonials */}
+          <div className="text-center mt-12">
+            <p className="text-gray-600 mb-6">Ready to create your own birding memories?</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <Link href="/shopping" className="flex-1">
+                <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  Book Your Tour
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+              <Link href="/contact" className="flex-1">
+                <Button variant="outline" className="w-full bg-transparent">
+                  Ask Questions
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Why Choose AVES Section */}
+      {/* Why Choose AVES Section - Enhanced with Strategic CTAs */}
       <section className={`bg-gradient-to-br from-gray-50 to-blue-50 ${responsive.sectionSpacing}`}>
         <div className={`container mx-auto ${responsive.container}`}>
           <div className="text-center mb-12">
@@ -393,71 +443,93 @@ export default function AVESLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center group">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
                   <CheckCircle className="w-8 h-8 text-emerald-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Expert</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">Local Guides</p>
-                <Link href="/team" className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block">
-                  Meet Our Team
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Expert Guides</h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  Local ornithologist guides with decades of experience
+                </p>
+                <Link href="/team" className="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                  Meet Our Team →
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center group">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
                   <Leaf className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">B Corp</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">Certified</p>
-                <Link
-                  href="/about/b-corp"
-                  className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"
-                >
-                  Our Journey
+                <h3 className="text-xl font-bold text-gray-900 mb-4">B Corp Certified</h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  Committed to environmental and social responsibility
+                </p>
+                <Link href="/about/b-corp" className="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                  Our Journey →
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center group">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
                   <Eye className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Exclusive</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">Partner Network</p>
-                <Link
-                  href="/about/partners"
-                  className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"
-                >
-                  View Partners
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Exclusive Access</h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  Private reserves and unique birding locations
+                </p>
+                <Link href="/about/partners" className="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                  View Partners →
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white text-center group">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
                   <Award className="w-8 h-8 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">100%</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">Carbon Neutral</p>
-                <Link
-                  href="/conservation"
-                  className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"
-                >
-                  Our Impact
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Carbon Neutral</h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  100% carbon neutral tours with conservation impact
+                </p>
+                <Link href="/conservation" className="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                  Our Impact →
                 </Link>
               </CardContent>
             </Card>
           </div>
+
+          {/* Strategic CTA after Why Choose AVES */}
+          <div className="text-center mt-12 bg-white rounded-xl p-8 shadow-lg">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Experience the Difference?</h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Join the exclusive group of birders who have discovered Colombia's incredible avifauna with AVES. Limited
+              spots available.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+              <Link href="/shopping" className="flex-1">
+                <Button size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  <Calendar className="mr-2 w-5 h-5" />
+                  Book Now
+                </Button>
+              </Link>
+              <Link href="/tours" className="flex-1">
+                <Button size="lg" variant="outline" className="w-full bg-transparent">
+                  <Binoculars className="mr-2 w-5 h-5" />
+                  View Tours
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Contact Form Section - No FAQ on homepage */}
+      {/* Contact Form Section - Enhanced with Strategic Positioning */}
       <ContactFormSection showTitle={true} showFAQ={false} variant="homepage" />
 
       {/* Footer */}
