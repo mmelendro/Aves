@@ -22,6 +22,10 @@ export interface Database {
           experience_level: string | null
           preferences: Json | null
           created_at: string
+          role: string | null
+          gdpr_consent: boolean | null
+          marketing_consent: boolean | null
+          last_login: string | null
         }
         Insert: {
           id: string
@@ -35,6 +39,10 @@ export interface Database {
           experience_level?: string | null
           preferences?: Json | null
           created_at?: string
+          role?: string | null
+          gdpr_consent?: boolean | null
+          marketing_consent?: boolean | null
+          last_login?: string | null
         }
         Update: {
           id?: string
@@ -48,6 +56,10 @@ export interface Database {
           experience_level?: string | null
           preferences?: Json | null
           created_at?: string
+          role?: string | null
+          gdpr_consent?: boolean | null
+          marketing_consent?: boolean | null
+          last_login?: string | null
         }
       }
       user_profiles: {
@@ -58,8 +70,19 @@ export interface Database {
           last_name: string | null
           full_name: string | null
           phone: string | null
-          experience_level: string | null
-          preferences: Json | null
+          date_of_birth: string | null
+          passport_number: string | null
+          passport_expiry: string | null
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          dietary_restrictions: string[] | null
+          special_requirements: string | null
+          travel_insurance_provider: string | null
+          travel_insurance_policy: string | null
+          birding_experience: string | null
+          city: string | null
+          country: string | null
+          profile_image_url: string | null
           created_at: string
           updated_at: string | null
         }
@@ -70,8 +93,19 @@ export interface Database {
           last_name?: string | null
           full_name?: string | null
           phone?: string | null
-          experience_level?: string | null
-          preferences?: Json | null
+          date_of_birth?: string | null
+          passport_number?: string | null
+          passport_expiry?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          dietary_restrictions?: string[] | null
+          special_requirements?: string | null
+          travel_insurance_provider?: string | null
+          travel_insurance_policy?: string | null
+          birding_experience?: string | null
+          city?: string | null
+          country?: string | null
+          profile_image_url?: string | null
           created_at?: string
           updated_at?: string | null
         }
@@ -82,8 +116,19 @@ export interface Database {
           last_name?: string | null
           full_name?: string | null
           phone?: string | null
-          experience_level?: string | null
-          preferences?: Json | null
+          date_of_birth?: string | null
+          passport_number?: string | null
+          passport_expiry?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          dietary_restrictions?: string[] | null
+          special_requirements?: string | null
+          travel_insurance_provider?: string | null
+          travel_insurance_policy?: string | null
+          birding_experience?: string | null
+          city?: string | null
+          country?: string | null
+          profile_image_url?: string | null
           created_at?: string
           updated_at?: string | null
         }
@@ -92,80 +137,211 @@ export interface Database {
         Row: {
           id: string
           user_id: string
-          booking_data: Json
+          booking_reference: string | null
+          tour_name: string | null
+          tour_type: string | null
           status: string
-          created_at: string
-          updated_at: string | null
+          payment_status: string
+          start_date: string | null
+          end_date: string | null
+          participants: number | null
+          total_price: number | null
           total_cost: number | null
+          total_amount: number | null
+          currency: string | null
+          booking_data: Json | null
           contact_info: Json | null
           tour_selections: Json | null
           special_requests: string | null
           subtotal: number | null
           taxes: number | null
+          created_at: string
+          updated_at: string | null
         }
         Insert: {
           id?: string
           user_id: string
-          booking_data: Json
+          booking_reference?: string | null
+          tour_name?: string | null
+          tour_type?: string | null
           status?: string
-          created_at?: string
-          updated_at?: string | null
+          payment_status?: string
+          start_date?: string | null
+          end_date?: string | null
+          participants?: number | null
+          total_price?: number | null
           total_cost?: number | null
+          total_amount?: number | null
+          currency?: string | null
+          booking_data?: Json | null
           contact_info?: Json | null
           tour_selections?: Json | null
           special_requests?: string | null
           subtotal?: number | null
           taxes?: number | null
+          created_at?: string
+          updated_at?: string | null
         }
         Update: {
           id?: string
           user_id?: string
-          booking_data?: Json
+          booking_reference?: string | null
+          tour_name?: string | null
+          tour_type?: string | null
           status?: string
-          created_at?: string
-          updated_at?: string | null
+          payment_status?: string
+          start_date?: string | null
+          end_date?: string | null
+          participants?: number | null
+          total_price?: number | null
           total_cost?: number | null
+          total_amount?: number | null
+          currency?: string | null
+          booking_data?: Json | null
           contact_info?: Json | null
           tour_selections?: Json | null
           special_requests?: string | null
           subtotal?: number | null
           taxes?: number | null
+          created_at?: string
+          updated_at?: string | null
+        }
+      }
+      user_bookings: {
+        Row: {
+          id: string
+          user_id: string
+          trip_template_id: string | null
+          participants: number | null
+          duration_days: number | null
+          start_date: string | null
+          end_date: string | null
+          base_cost: number | null
+          additional_costs: number | null
+          total_cost: number | null
+          booking_reference: string | null
+          tour_type: string | null
+          bioregion: string | null
+          currency: string | null
+          booking_status: string | null
+          payment_status: string | null
+          special_requests: string | null
+          dietary_requirements: string | null
+          accommodation_preferences: string | null
+          inquiry_sent_at: string | null
+          confirmed_at: string | null
+          created_at: string
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          trip_template_id?: string | null
+          participants?: number | null
+          duration_days?: number | null
+          start_date?: string | null
+          end_date?: string | null
+          base_cost?: number | null
+          additional_costs?: number | null
+          total_cost?: number | null
+          booking_reference?: string | null
+          tour_type?: string | null
+          bioregion?: string | null
+          currency?: string | null
+          booking_status?: string | null
+          payment_status?: string | null
+          special_requests?: string | null
+          dietary_requirements?: string | null
+          accommodation_preferences?: string | null
+          inquiry_sent_at?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          trip_template_id?: string | null
+          participants?: number | null
+          duration_days?: number | null
+          start_date?: string | null
+          end_date?: string | null
+          base_cost?: number | null
+          additional_costs?: number | null
+          total_cost?: number | null
+          booking_reference?: string | null
+          tour_type?: string | null
+          bioregion?: string | null
+          currency?: string | null
+          booking_status?: string | null
+          payment_status?: string | null
+          special_requests?: string | null
+          dietary_requirements?: string | null
+          accommodation_preferences?: string | null
+          inquiry_sent_at?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          updated_at?: string | null
         }
       }
       trip_bookings: {
         Row: {
           id: string
           user_id: string
-          trip_id: string
-          booking_status: string
-          payment_status: string
-          total_amount: number
-          participants: number
+          trip_id: string | null
+          participants: number | null
+          booking_date: string | null
+          departure_date: string | null
+          return_date: string | null
+          total_amount: number | null
+          currency: string | null
+          booking_status: string | null
+          payment_status: string | null
+          payment_method: string | null
+          payment_reference: string | null
           special_requests: string | null
+          notes: string | null
+          cancellation_reason: string | null
           created_at: string
           updated_at: string | null
         }
         Insert: {
           id?: string
           user_id: string
-          trip_id: string
-          booking_status?: string
-          payment_status?: string
-          total_amount: number
-          participants: number
+          trip_id?: string | null
+          participants?: number | null
+          booking_date?: string | null
+          departure_date?: string | null
+          return_date?: string | null
+          total_amount?: number | null
+          currency?: string | null
+          booking_status?: string | null
+          payment_status?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
           special_requests?: string | null
+          notes?: string | null
+          cancellation_reason?: string | null
           created_at?: string
           updated_at?: string | null
         }
         Update: {
           id?: string
           user_id?: string
-          trip_id?: string
-          booking_status?: string
-          payment_status?: string
-          total_amount?: number
-          participants?: number
+          trip_id?: string | null
+          participants?: number | null
+          booking_date?: string | null
+          departure_date?: string | null
+          return_date?: string | null
+          total_amount?: number | null
+          currency?: string | null
+          booking_status?: string | null
+          payment_status?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
           special_requests?: string | null
+          notes?: string | null
+          cancellation_reason?: string | null
           created_at?: string
           updated_at?: string | null
         }
@@ -173,63 +349,134 @@ export interface Database {
       chat_messages: {
         Row: {
           id: string
-          booking_id: string
-          sender_id: string
-          message: string
-          is_read: boolean
+          booking_id: string | null
+          sender_id: string | null
+          sender_type: string | null
+          message: string | null
+          message_type: string | null
+          file_url: string | null
+          file_name: string | null
+          is_read: boolean | null
           created_at: string
         }
         Insert: {
           id?: string
-          booking_id: string
-          sender_id: string
-          message: string
-          is_read?: boolean
+          booking_id?: string | null
+          sender_id?: string | null
+          sender_type?: string | null
+          message?: string | null
+          message_type?: string | null
+          file_url?: string | null
+          file_name?: string | null
+          is_read?: boolean | null
           created_at?: string
         }
         Update: {
           id?: string
-          booking_id?: string
-          sender_id?: string
-          message?: string
-          is_read?: boolean
+          booking_id?: string | null
+          sender_id?: string | null
+          sender_type?: string | null
+          message?: string | null
+          message_type?: string | null
+          file_url?: string | null
+          file_name?: string | null
+          is_read?: boolean | null
           created_at?: string
         }
       }
-      trips: {
+      trip_chat_messages: {
         Row: {
           id: string
-          title: string
-          slug: string
-          duration_days: number
-          price_per_person: number
-          featured_image_url: string | null
-          region: string | null
-          difficulty_level: string | null
+          booking_id: string | null
+          sender_id: string | null
+          sender_type: string | null
+          sender_name: string | null
+          sender_email: string | null
+          subject: string | null
+          message_content: string | null
+          message_type: string | null
+          email_message_id: string | null
+          in_reply_to: string | null
+          is_read: boolean | null
+          requires_response: boolean | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          booking_id?: string | null
+          sender_id?: string | null
+          sender_type?: string | null
+          sender_name?: string | null
+          sender_email?: string | null
+          subject?: string | null
+          message_content?: string | null
+          message_type?: string | null
+          email_message_id?: string | null
+          in_reply_to?: string | null
+          is_read?: boolean | null
+          requires_response?: boolean | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          booking_id?: string | null
+          sender_id?: string | null
+          sender_type?: string | null
+          sender_name?: string | null
+          sender_email?: string | null
+          subject?: string | null
+          message_content?: string | null
+          message_type?: string | null
+          email_message_id?: string | null
+          in_reply_to?: string | null
+          is_read?: boolean | null
+          requires_response?: boolean | null
+          created_at?: string
+        }
+      }
+      booking_payments: {
+        Row: {
+          id: string
+          booking_id: string | null
+          amount: number | null
+          currency: string | null
+          payment_type: string | null
+          payment_status: string | null
+          payment_method: string | null
+          payment_provider_id: string | null
+          due_date: string | null
+          paid_at: string | null
+          notes: string | null
           created_at: string
           updated_at: string | null
         }
         Insert: {
           id?: string
-          title: string
-          slug: string
-          duration_days: number
-          price_per_person: number
-          featured_image_url?: string | null
-          region?: string | null
-          difficulty_level?: string | null
+          booking_id?: string | null
+          amount?: number | null
+          currency?: string | null
+          payment_type?: string | null
+          payment_status?: string | null
+          payment_method?: string | null
+          payment_provider_id?: string | null
+          due_date?: string | null
+          paid_at?: string | null
+          notes?: string | null
           created_at?: string
           updated_at?: string | null
         }
         Update: {
           id?: string
-          title?: string
-          slug?: string
-          duration_days?: number
-          price_per_person?: number
-          featured_image_url?: string | null
-          region?: string | null
-          difficulty_level?: string | null
+          booking_id?: string | null
+          amount?: number | null
+          currency?: string | null
+          payment_type?: string | null
+          payment_status?: string | null
+          payment_method?: string | null
+          payment_provider_id?: string | null
+          due_date?: string | null
+          paid_at?: string | null
+          notes?: string | null
           created_at?: string
           updated_at?: string | null
         }
@@ -237,67 +484,126 @@ export interface Database {
       contact_submissions: {
         Row: {
           id: string
-          first_name: string
-          last_name: string
-          email: string
+          first_name: string | null
+          last_name: string | null
+          email: string | null
           phone: string | null
           group_size: string | null
           duration: string | null
+          travel_date: string | null
           selected_tour_types: string[] | null
           selected_regions: string[] | null
           experience_level: string | null
-          travel_date: string | null
           special_requests: string | null
-          status: string
+          status: string | null
           admin_notes: string | null
-          email_sent: boolean
-          email_sent_at: string | null
-          contacted_at: string | null
           contacted_by: string | null
+          contacted_at: string | null
+          email_sent: boolean | null
+          email_sent_at: string | null
           created_at: string
           updated_at: string | null
         }
         Insert: {
           id?: string
-          first_name: string
-          last_name: string
-          email: string
+          first_name?: string | null
+          last_name?: string | null
+          email?: string | null
           phone?: string | null
           group_size?: string | null
           duration?: string | null
+          travel_date?: string | null
           selected_tour_types?: string[] | null
           selected_regions?: string[] | null
           experience_level?: string | null
-          travel_date?: string | null
           special_requests?: string | null
-          status?: string
+          status?: string | null
           admin_notes?: string | null
-          email_sent?: boolean
-          email_sent_at?: string | null
-          contacted_at?: string | null
           contacted_by?: string | null
+          contacted_at?: string | null
+          email_sent?: boolean | null
+          email_sent_at?: string | null
           created_at?: string
           updated_at?: string | null
         }
         Update: {
           id?: string
-          first_name?: string
-          last_name?: string
-          email?: string
+          first_name?: string | null
+          last_name?: string | null
+          email?: string | null
           phone?: string | null
           group_size?: string | null
           duration?: string | null
+          travel_date?: string | null
           selected_tour_types?: string[] | null
           selected_regions?: string[] | null
           experience_level?: string | null
-          travel_date?: string | null
           special_requests?: string | null
-          status?: string
+          status?: string | null
           admin_notes?: string | null
-          email_sent?: boolean
-          email_sent_at?: string | null
-          contacted_at?: string | null
           contacted_by?: string | null
+          contacted_at?: string | null
+          email_sent?: boolean | null
+          email_sent_at?: string | null
+          created_at?: string
+          updated_at?: string | null
+        }
+      }
+      trips: {
+        Row: {
+          id: string
+          title: string | null
+          slug: string | null
+          description: string | null
+          short_description: string | null
+          duration_days: number | null
+          price_per_person: number | null
+          max_participants: number | null
+          currency: string | null
+          region: string | null
+          difficulty_level: string | null
+          best_months: string[] | null
+          featured_image_url: string | null
+          gallery_images: string[] | null
+          is_active: boolean | null
+          created_at: string
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          title?: string | null
+          slug?: string | null
+          description?: string | null
+          short_description?: string | null
+          duration_days?: number | null
+          price_per_person?: number | null
+          max_participants?: number | null
+          currency?: string | null
+          region?: string | null
+          difficulty_level?: string | null
+          best_months?: string[] | null
+          featured_image_url?: string | null
+          gallery_images?: string[] | null
+          is_active?: boolean | null
+          created_at?: string
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          title?: string | null
+          slug?: string | null
+          description?: string | null
+          short_description?: string | null
+          duration_days?: number | null
+          price_per_person?: number | null
+          max_participants?: number | null
+          currency?: string | null
+          region?: string | null
+          difficulty_level?: string | null
+          best_months?: string[] | null
+          featured_image_url?: string | null
+          gallery_images?: string[] | null
+          is_active?: boolean | null
           created_at?: string
           updated_at?: string | null
         }
@@ -319,4 +625,3 @@ export interface Database {
 }
 
 // Adding explicit named export for Database interface
-export { Database }

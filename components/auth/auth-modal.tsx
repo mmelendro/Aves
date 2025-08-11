@@ -137,7 +137,6 @@ export function AuthModal({
         email: signUpForm.email,
         password: signUpForm.password,
         options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/shopping`,
           data: {
             full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
             first_name: signUpForm.firstName,
@@ -151,24 +150,24 @@ export function AuthModal({
       if (error) throw error
 
       if (data.user) {
-        const { error: profileError } = await supabase.from("profiles").upsert({
+        setMessage({
+          type: "success",
+          text: "Account created successfully! Please check your email to verify your account.",
+        })
+
+        // Create profile in profiles table
+        const { error: profileError } = await supabase.from("profiles").insert({
           id: data.user.id,
           email: signUpForm.email,
           full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
           phone: signUpForm.phone,
           experience_level: signUpForm.experienceLevel,
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         })
 
         if (profileError) {
           console.error("Profile creation error:", profileError)
         }
-
-        setMessage({
-          type: "success",
-          text: "Account created successfully! Please check your email to verify your account.",
-        })
 
         setTimeout(() => {
           onSuccess(data.user)
@@ -176,11 +175,7 @@ export function AuthModal({
         }, 2000)
       }
     } catch (error: any) {
-      console.error("Sign-up error:", error)
-      setMessage({
-        type: "error",
-        text: error.message || "An error occurred during sign up. Please try again.",
-      })
+      setMessage({ type: "error", text: error.message || "An error occurred during sign up" })
     } finally {
       setLoading(false)
     }
@@ -221,27 +216,13 @@ export function AuthModal({
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo:
-            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/shopping?auth=success`,
-          queryParams: {
-            access_type: "offline",
-            prompt: "consent",
-          },
+          redirectTo: `${window.location.origin}/shopping?auth=success`,
         },
       })
 
       if (error) throw error
-
-      setMessage({
-        type: "success",
-        text: "Redirecting to Google for authentication...",
-      })
     } catch (error: any) {
-      console.error("Google sign-in error:", error)
-      setMessage({
-        type: "error",
-        text: error.message || "Failed to sign in with Google. Please try again.",
-      })
+      setMessage({ type: "error", text: error.message || "An error occurred with Google sign in" })
       setLoading(false)
     }
   }

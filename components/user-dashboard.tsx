@@ -1,61 +1,94 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, Users, MessageCircle, Clock, Eye, ChevronRight } from "lucide-react"
-import { supabase } from "@/lib/supabase"
-import type { User } from "@supabase/supabase-js"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
+import { supabase } from "@/lib/supabase"
+import {
+  BookOpen,
+  Calendar,
+  MessageCircle,
+  CreditCard,
+  User,
+  Save,
+  Clock,
+  DollarSign,
+  Users,
+  X,
+  RefreshCw,
+} from "lucide-react"
+import type { User as SupabaseUser } from "@supabase/supabase-js"
 
-interface Booking {
-  id: string
-  booking_reference: string
-  status: string
-  payment_status: string
-  total_cost: number
-  participants: number
-  start_date: string
-  end_date: string
-  tour_selections: any[]
-  contact_info: any
-  special_requests: string
-  created_at: string
-  updated_at: string
+interface UserDashboardProps {
+  user: SupabaseUser
+  isOpen: boolean
+  onClose: () => void
+  currentBookingData?: {
+    tours: any[]
+    contactInfo: any
+    totalCost: number
+  }
+  onSaveBooking?: () => Promise<void>
 }
 
-interface ChatMessage {
+interface BookingData {
+  id: string
+  booking_reference: string
+  tour_name: string
+  tour_type: string
+  status: string
+  payment_status: string
+  start_date: string
+  end_date: string
+  participants: number
+  total_cost: number
+  created_at: string
+  tour_selections: any
+}
+
+interface MessageData {
   id: string
   message: string
   sender_type: string
   created_at: string
   is_read: boolean
   booking_id: string
+  message_type: string
 }
 
-interface UserDashboardProps {
-  user: User
-  onClose?: () => void
+interface PaymentData {
+  id: string
+  amount: number
+  payment_status: string
+  payment_type: string
+  due_date: string
+  created_at: string
+  booking_id: string
 }
 
-export function UserDashboard({ user, onClose }: UserDashboardProps) {
-  const [bookings, setBookings] = useState<Booking[]>([])
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+export function UserDashboard({ user, isOpen, onClose, currentBookingData, onSaveBooking }: UserDashboardProps) {
+  const [activeTab, setActiveTab] = useState("bookings")
+  const [bookings, setBookings] = useState<BookingData[]>([])
+  const [messages, setMessages] = useState<MessageData[]>([])
+  const [payments, setPayments] = useState<PaymentData[]>([])
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
   const { toast } = useToast()
 
+  // Load user data when dashboard opens
   useEffect(() => {
-    if (user) {
+    if (isOpen && user) {
       loadUserData()
     }
-  }, [user])
+  }, [isOpen, user])
 
   const loadUserData = async () => {
+    setLoading(true)
     try {
-      setLoading(true)
-
       // Load bookings
       const { data: bookingsData, error: bookingsError } = await supabase
         .from("bookings")
@@ -64,27 +97,32 @@ export function UserDashboard({ user, onClose }: UserDashboardProps) {
         .order("created_at", { ascending: false })
 
       if (bookingsError) throw bookingsError
+      setBookings(bookingsData || [])
 
       // Load messages
       const { data: messagesData, error: messagesError } = await supabase
         .from("chat_messages")
-        .select(`
-          *,
-          bookings!inner(user_id)
-        `)
-        .eq("bookings.user_id", user.id)
+        .select("*")
+        .in("booking_id", bookingsData?.map((b) => b.id) || [])
         .order("created_at", { ascending: false })
-        .limit(10)
 
       if (messagesError) throw messagesError
-
-      setBookings(bookingsData || [])
       setMessages(messagesData || [])
-    } catch (error) {
+
+      // Load payments
+      const { data: paymentsData, error: paymentsError } = await supabase
+        .from("booking_payments")
+        .select("*")
+        .in("booking_id", bookingsData?.map((b) => b.id) || [])
+        .order("created_at", { ascending: false })
+
+      if (paymentsError) throw paymentsError
+      setPayments(paymentsData || [])
+    } catch (error: any) {
       console.error("Error loading user data:", error)
       toast({
-        title: "Error Loading Data",
-        description: "Failed to load your dashboard data. Please try again.",
+        title: "Error",
+        description: "Failed to load your data. Please try again.",
         variant: "destructive",
       })
     } finally {
@@ -92,28 +130,38 @@ export function UserDashboard({ user, onClose }: UserDashboardProps) {
     }
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "confirmed":
-        return "bg-green-100 text-green-800"
-      case "pending":
-        return "bg-yellow-100 text-yellow-800"
-      case "draft":
-        return "bg-blue-100 text-blue-800"
-      case "cancelled":
-        return "bg-red-100 text-red-800"
-      default:
-        return "bg-gray-100 text-gray-800"
+  const handleSaveCurrentBooking = async () => {
+    if (!onSaveBooking || !currentBookingData) return
+
+    setSaving(true)
+    try {
+      await onSaveBooking()
+      toast({
+        title: "Booking Saved",
+        description: "Your booking has been saved successfully!",
+      })
+      // Reload data to show the new booking
+      await loadUserData()
+    } catch (error: any) {
+      console.error("Error saving booking:", error)
+      toast({
+        title: "Error",
+        description: "Failed to save booking. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setSaving(false)
     }
   }
 
-  const getPaymentStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
+  const getStatusColor = (status: string) => {
+    switch (status?.toLowerCase()) {
+      case "confirmed":
       case "paid":
         return "bg-green-100 text-green-800"
       case "pending":
         return "bg-yellow-100 text-yellow-800"
-      case "failed":
+      case "cancelled":
         return "bg-red-100 text-red-800"
       default:
         return "bg-gray-100 text-gray-800"
@@ -128,222 +176,267 @@ export function UserDashboard({ user, onClose }: UserDashboardProps) {
     })
   }
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(amount)
-  }
+  const unreadMessages = messages.filter((m) => !m.is_read).length
 
-  if (loading) {
-    return (
-      <Card className="border-2 border-emerald-200">
-        <CardContent className="p-6">
-          <div className="animate-pulse space-y-4">
-            <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-            <div className="space-y-2">
-              <div className="h-3 bg-gray-200 rounded"></div>
-              <div className="h-3 bg-gray-200 rounded w-5/6"></div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    )
-  }
+  if (!isOpen) return null
 
   return (
-    <Card className="border-2 border-emerald-200 shadow-lg">
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-xl text-emerald-800">
-            Welcome back, {user.user_metadata?.full_name || user.email?.split("@")[0]}!
-          </CardTitle>
-          {onClose && (
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              ×
-            </Button>
-          )}
-        </div>
-      </CardHeader>
-
-      <CardContent>
-        <Tabs defaultValue="bookings" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="bookings" className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              Bookings ({bookings.length})
-            </TabsTrigger>
-            <TabsTrigger value="messages" className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4" />
-              Messages ({messages.filter((m) => !m.is_read).length})
-            </TabsTrigger>
-            <TabsTrigger value="account" className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Account
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="bookings" className="space-y-4 mt-4">
-            {bookings.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                <p>No bookings yet</p>
-                <p className="text-sm">Your saved tours will appear here</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {bookings.map((booking) => (
-                  <Card key={booking.id} className="border border-gray-200 hover:border-emerald-300 transition-colors">
-                    <CardContent className="p-4">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <Badge className={getStatusColor(booking.status)}>{booking.status}</Badge>
-                            <Badge className={getPaymentStatusColor(booking.payment_status)}>
-                              {booking.payment_status}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-600">
-                            Ref: {booking.booking_reference || booking.id.slice(0, 8)}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-bold text-emerald-600">{formatCurrency(booking.total_cost)}</p>
-                          <p className="text-xs text-gray-500">
-                            {booking.participants} participant{booking.participants !== 1 ? "s" : ""}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-blue-600" />
-                          <span>{booking.start_date ? formatDate(booking.start_date) : "TBD"}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-purple-600" />
-                          <span>Created {formatDate(booking.created_at)}</span>
-                        </div>
-                      </div>
-
-                      {booking.tour_selections && booking.tour_selections.length > 0 && (
-                        <div className="mt-3 pt-3 border-t border-gray-100">
-                          <p className="text-xs text-gray-600 mb-2">Tours:</p>
-                          <div className="flex flex-wrap gap-1">
-                            {booking.tour_selections.slice(0, 3).map((tour: any, idx: number) => (
-                              <Badge key={idx} variant="outline" className="text-xs">
-                                {tour.bioregion?.replace(/^[🏖️🏔️🌊⛰️🏞️🗻🌄🌾🌳🌋🗺️✨]\s*/u, "") || `Tour ${idx + 1}`}
-                              </Badge>
-                            ))}
-                            {booking.tour_selections.length > 3 && (
-                              <Badge variant="outline" className="text-xs">
-                                +{booking.tour_selections.length - 3} more
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <Button variant="outline" size="sm" className="text-xs bg-transparent">
-                          <Eye className="w-3 h-3 mr-1" />
-                          View Details
-                        </Button>
-                        {booking.status === "draft" && (
-                          <Button size="sm" className="text-xs bg-emerald-600 hover:bg-emerald-700">
-                            Continue Editing
-                            <ChevronRight className="w-3 h-3 ml-1" />
-                          </Button>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="messages" className="space-y-4 mt-4">
-            {messages.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <MessageCircle className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                <p>No messages yet</p>
-                <p className="text-sm">Communication with our team will appear here</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {messages.map((message) => (
-                  <Card
-                    key={message.id}
-                    className={`border ${!message.is_read ? "border-emerald-300 bg-emerald-50" : "border-gray-200"}`}
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <Badge variant={message.sender_type === "admin" ? "default" : "secondary"}>
-                            {message.sender_type === "admin" ? "AVES Team" : "You"}
-                          </Badge>
-                          {!message.is_read && <Badge className="bg-emerald-600 text-white text-xs">New</Badge>}
-                        </div>
-                        <span className="text-xs text-gray-500">{formatDate(message.created_at)}</span>
-                      </div>
-                      <p className="text-sm text-gray-700 line-clamp-3">{message.message}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="account" className="space-y-4 mt-4">
-            <div className="space-y-4">
-              <Card className="border border-gray-200">
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3">Account Information</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Email:</span>
-                      <span>{user.email}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Member since:</span>
-                      <span>{formatDate(user.created_at)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Total bookings:</span>
-                      <span>{bookings.length}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Unread messages:</span>
-                      <span>{messages.filter((m) => !m.is_read).length}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border border-gray-200">
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3">Quick Stats</h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                      <div className="text-2xl font-bold text-emerald-600">
-                        {bookings.filter((b) => b.status === "confirmed").length}
-                      </div>
-                      <div className="text-xs text-emerald-700">Confirmed Tours</div>
-                    </div>
-                    <div className="text-center p-3 bg-blue-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-600">
-                        {bookings.filter((b) => b.status === "draft").length}
-                      </div>
-                      <div className="text-xs text-blue-700">Draft Bookings</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-4xl max-h-[90vh] overflow-hidden">
+        <CardHeader className="pb-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-xl text-gray-900 flex items-center gap-2">
+                <User className="w-5 h-5 text-emerald-600" />
+                Your AVES Dashboard
+              </CardTitle>
+              <p className="text-sm text-gray-600 mt-1">Welcome back, {user.user_metadata?.first_name || "Member"}</p>
             </div>
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+            <Button variant="ghost" size="sm" onClick={onClose} className="text-gray-500 hover:text-gray-700">
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Save Current Booking Button */}
+          {currentBookingData && currentBookingData.tours.length > 0 && (
+            <Alert className="mt-4 border-emerald-200 bg-emerald-50">
+              <Save className="h-4 w-4 text-emerald-600" />
+              <AlertDescription className="flex items-center justify-between">
+                <span className="text-emerald-800">
+                  You have unsaved booking selections ({currentBookingData.tours.length} tours, $
+                  {currentBookingData.totalCost.toLocaleString()})
+                </span>
+                <Button
+                  onClick={handleSaveCurrentBooking}
+                  disabled={saving}
+                  size="sm"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white ml-4"
+                >
+                  {saving ? (
+                    <>
+                      <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-3 h-3 mr-1" />
+                      Save Booking
+                    </>
+                  )}
+                </Button>
+              </AlertDescription>
+            </Alert>
+          )}
+        </CardHeader>
+
+        <CardContent className="overflow-y-auto max-h-[calc(90vh-120px)]">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsTrigger value="bookings" className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4" />
+                <span className="hidden sm:inline">Bookings</span>
+                <Badge variant="secondary" className="ml-1 text-xs">
+                  {bookings.length}
+                </Badge>
+              </TabsTrigger>
+              <TabsTrigger value="messages" className="flex items-center gap-2">
+                <MessageCircle className="w-4 h-4" />
+                <span className="hidden sm:inline">Messages</span>
+                {unreadMessages > 0 && <Badge className="ml-1 bg-red-500 text-white text-xs">{unreadMessages}</Badge>}
+              </TabsTrigger>
+              <TabsTrigger value="payments" className="flex items-center gap-2">
+                <CreditCard className="w-4 h-4" />
+                <span className="hidden sm:inline">Payments</span>
+                <Badge variant="secondary" className="ml-1 text-xs">
+                  {payments.length}
+                </Badge>
+              </TabsTrigger>
+              <TabsTrigger value="account" className="flex items-center gap-2">
+                <User className="w-4 h-4" />
+                <span className="hidden sm:inline">Account</span>
+              </TabsTrigger>
+            </TabsList>
+
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <RefreshCw className="w-6 h-6 animate-spin text-emerald-600" />
+                <span className="ml-2 text-gray-600">Loading your data...</span>
+              </div>
+            ) : (
+              <>
+                {/* Bookings Tab */}
+                <TabsContent value="bookings" className="space-y-4">
+                  {bookings.length === 0 ? (
+                    <div className="text-center py-12">
+                      <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">No bookings yet</h3>
+                      <p className="text-gray-600">Your saved and confirmed bookings will appear here.</p>
+                    </div>
+                  ) : (
+                    <div className="grid gap-4">
+                      {bookings.map((booking) => (
+                        <Card key={booking.id} className="border-l-4 border-l-emerald-500">
+                          <CardContent className="p-4">
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h4 className="font-medium text-gray-900">
+                                  {booking.tour_name || `${booking.tour_type} Tour`}
+                                </h4>
+                                <p className="text-sm text-gray-600">Ref: {booking.booking_reference}</p>
+                              </div>
+                              <div className="flex gap-2">
+                                <Badge className={getStatusColor(booking.status)}>{booking.status}</Badge>
+                                <Badge className={getStatusColor(booking.payment_status)}>
+                                  {booking.payment_status}
+                                </Badge>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4 text-blue-600" />
+                                <span>
+                                  {formatDate(booking.start_date)} - {formatDate(booking.end_date)}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Users className="w-4 h-4 text-purple-600" />
+                                <span>{booking.participants} people</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <DollarSign className="w-4 h-4 text-green-600" />
+                                <span>${booking.total_cost?.toLocaleString()}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-gray-600" />
+                                <span>{formatDate(booking.created_at)}</span>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </TabsContent>
+
+                {/* Messages Tab */}
+                <TabsContent value="messages" className="space-y-4">
+                  {messages.length === 0 ? (
+                    <div className="text-center py-12">
+                      <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">No messages</h3>
+                      <p className="text-gray-600">Messages from the AVES team will appear here.</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {messages.map((message) => (
+                        <Card
+                          key={message.id}
+                          className={`${!message.is_read ? "border-l-4 border-l-blue-500 bg-blue-50" : ""}`}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <Badge variant={message.sender_type === "admin" ? "default" : "secondary"}>
+                                  {message.sender_type === "admin" ? "AVES Team" : "You"}
+                                </Badge>
+                                {!message.is_read && <Badge className="bg-blue-500 text-white text-xs">New</Badge>}
+                              </div>
+                              <span className="text-xs text-gray-500">{formatDate(message.created_at)}</span>
+                            </div>
+                            <p className="text-sm text-gray-700">{message.message}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </TabsContent>
+
+                {/* Payments Tab */}
+                <TabsContent value="payments" className="space-y-4">
+                  {payments.length === 0 ? (
+                    <div className="text-center py-12">
+                      <CreditCard className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">No payments</h3>
+                      <p className="text-gray-600">Your payment history will appear here.</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {payments.map((payment) => (
+                        <Card key={payment.id}>
+                          <CardContent className="p-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <DollarSign className="w-4 h-4 text-green-600" />
+                                <span className="font-medium">${payment.amount?.toLocaleString()}</span>
+                                <Badge className={getStatusColor(payment.payment_status)}>
+                                  {payment.payment_status}
+                                </Badge>
+                              </div>
+                              <span className="text-sm text-gray-600">{formatDate(payment.created_at)}</span>
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <span>Type: {payment.payment_type}</span>
+                              {payment.due_date && <span className="ml-4">Due: {formatDate(payment.due_date)}</span>}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </TabsContent>
+
+                {/* Account Tab */}
+                <TabsContent value="account" className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Account Information</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <label className="font-medium text-gray-700">Email</label>
+                          <p className="text-gray-600">{user.email}</p>
+                        </div>
+                        <div>
+                          <label className="font-medium text-gray-700">Full Name</label>
+                          <p className="text-gray-600">{user.user_metadata?.full_name || "Not provided"}</p>
+                        </div>
+                        <div>
+                          <label className="font-medium text-gray-700">Phone</label>
+                          <p className="text-gray-600">{user.user_metadata?.phone || "Not provided"}</p>
+                        </div>
+                        <div>
+                          <label className="font-medium text-gray-700">Experience Level</label>
+                          <p className="text-gray-600">{user.user_metadata?.experience_level || "Not specified"}</p>
+                        </div>
+                      </div>
+
+                      {/* Quick Stats */}
+                      <div className="grid grid-cols-3 gap-4 mt-6 pt-4 border-t">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-emerald-600">{bookings.length}</div>
+                          <div className="text-xs text-gray-600">Total Bookings</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-600">{unreadMessages}</div>
+                          <div className="text-xs text-gray-600">Unread Messages</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600">
+                            ${payments.reduce((sum, p) => sum + (p.amount || 0), 0).toLocaleString()}
+                          </div>
+                          <div className="text-xs text-gray-600">Total Paid</div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </>
+            )}
+          </Tabs>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

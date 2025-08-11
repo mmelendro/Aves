@@ -1,5 +1,5 @@
 import { supabase } from "./supabase-client"
-import type { Database } from "./database.types"
+import type { Database } from "./supabase"
 
 type Booking = Database["public"]["Tables"]["bookings"]["Row"]
 type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
@@ -11,74 +11,6 @@ type ChatMessage = Database["public"]["Tables"]["chat_messages"]["Row"]
 type ChatMessageInsert = Database["public"]["Tables"]["chat_messages"]["Insert"]
 
 export class BookingService {
-  static async saveUserSelections(userId: string, selectionsData: any) {
-    try {
-      const bookingData: BookingInsert = {
-        user_id: userId,
-        tour_selections: selectionsData.tours,
-        contact_info: selectionsData.contactInfo,
-        total_amount: selectionsData.totalCost,
-        participants: selectionsData.totalParticipants,
-        status: "draft",
-        payment_status: "pending",
-        booking_data: {
-          restDayOptions: selectionsData.restDayOptions,
-          specialRequests: selectionsData.specialRequests,
-        },
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      }
-
-      const { data, error } = await supabase.from("bookings").insert(bookingData).select().single()
-
-      if (error) throw error
-      return { success: true, booking: data, error: null }
-    } catch (error: any) {
-      console.error("Error saving user selections:", error)
-      return { success: false, booking: null, error: error.message }
-    }
-  }
-
-  static async updateUserSelections(bookingId: string, selectionsData: any) {
-    try {
-      const updateData: BookingUpdate = {
-        tour_selections: selectionsData.tours,
-        contact_info: selectionsData.contactInfo,
-        total_amount: selectionsData.totalCost,
-        participants: selectionsData.totalParticipants,
-        booking_data: {
-          restDayOptions: selectionsData.restDayOptions,
-          specialRequests: selectionsData.specialRequests,
-        },
-        updated_at: new Date().toISOString(),
-      }
-
-      const { data, error } = await supabase.from("bookings").update(updateData).eq("id", bookingId).select().single()
-
-      if (error) throw error
-      return { success: true, booking: data, error: null }
-    } catch (error: any) {
-      console.error("Error updating user selections:", error)
-      return { success: false, booking: null, error: error.message }
-    }
-  }
-
-  static async getUserBookings(userId: string) {
-    try {
-      const { data, error } = await supabase
-        .from("bookings")
-        .select("*")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false })
-
-      if (error) throw error
-      return { success: true, bookings: data, error: null }
-    } catch (error: any) {
-      console.error("Error getting user bookings:", error)
-      return { success: false, bookings: null, error: error.message }
-    }
-  }
-
   // Create a new booking
   static async createBooking(bookingData: TripBookingInsert) {
     try {
@@ -104,8 +36,8 @@ export class BookingService {
     }
   }
 
-  // Get user's trip bookings with optional status filter
-  static async getUserTripBookings(userId: string, status?: string) {
+  // Get user's bookings with optional status filter
+  static async getUserBookings(userId: string, status?: string) {
     try {
       let query = supabase
         .from("trip_bookings")
