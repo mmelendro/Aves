@@ -43,6 +43,7 @@ import { AuthModal } from "@/components/auth/auth-modal"
 import { GoogleCalendarButton } from "@/components/google-calendar-button"
 import { BookingService } from "@/lib/booking-service"
 import { useToast } from "@/hooks/use-toast"
+import { UserDashboard } from "@/components/user-dashboard"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -777,6 +778,9 @@ function ShoppingPageContent() {
   const { user, loading: authLoading, signOut } = useAuth()
   const { toast } = useToast()
   const [currentBookingId, setCurrentBookingId] = useState<string | null>(null)
+
+  const [showDashboard, setShowDashboard] = useState(false)
+
   const preselectedTourType = searchParams.get("preset") || searchParams.get("tour")
   const preselectedRegion = searchParams.get("region") || searchParams.get("bioregion")
   const fromPage = searchParams.get("from")
@@ -1191,6 +1195,14 @@ ${contactForm.firstName} ${contactForm.lastName}`)
 
   useEffect(() => {
     if (user && !authLoading) {
+      setShowDashboard(true)
+    } else {
+      setShowDashboard(false)
+    }
+  }, [user, authLoading])
+
+  useEffect(() => {
+    if (user && !authLoading) {
       const loadUserBookings = async () => {
         const result = await BookingService.getUserBookings(user.id)
         if (result.success && result.bookings && result.bookings.length > 0) {
@@ -1236,418 +1248,463 @@ ${contactForm.firstName} ${contactForm.lastName}`)
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <NavigationHeader currentPage="/shopping" />
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+      <NavigationHeader />
 
-      {/* Optimized Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">Build Your Adventure</Badge>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Plan Your Colombian Birding Journey</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Create your perfect multi-tour birding experience across Colombia's diverse bioregions with expert
-              guidance.
-            </p>
-          </div>
-
-          {/* Progress Indicator */}
-          <div className="max-w-md mx-auto">
-            <div className="flex justify-between text-sm text-gray-600 mb-2">
-              <span>Progress</span>
-              <span>{Math.round(progress)}% Complete</span>
-            </div>
-            <Progress value={progress} className="h-2" />
-          </div>
+      {user && showDashboard && (
+        <div className="container mx-auto px-4 py-6">
+          <UserDashboard user={user} onClose={() => setShowDashboard(false)} />
         </div>
-      </section>
-
-      {showPrefilledNotification && (
-        <section className="py-4">
-          <div className="container mx-auto px-4">
-            <Alert className="border-emerald-200 bg-emerald-50 max-w-4xl mx-auto">
-              <CheckCircle className="h-4 w-4 text-emerald-600" />
-              <AlertDescription className="text-emerald-800 pr-8">
-                {prefilledInfo.fromPage === "bioregions-map"
-                  ? `Perfect! We've pre-selected ${prefilledInfo.region ? REGION_DATA[prefilledInfo.region]?.name || prefilledInfo.region : "your region"} based on your map selection. You can customize everything below!`
-                  : "Great choice! We've pre-filled your selections based on your interest. You can customize everything below!"}
-              </AlertDescription>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowPrefilledNotification(false)}
-                className="absolute right-2 top-2 h-6 w-6 p-0 text-emerald-600 hover:text-emerald-700"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </Alert>
-          </div>
-        </section>
       )}
 
-      {/* Main Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Tour Builder - Left Column */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Quick Tips */}
-              <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-3">
-                    <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-medium text-blue-800 mb-2">Expert Recommendations</h3>
-                      <div className="grid md:grid-cols-2 gap-4 text-sm text-blue-700">
-                        <ul className="space-y-1">
-                          <li>• 8-day tours for optimal diversity</li>
-                          <li>• 2-day rest periods recommended</li>
-                          <li>• Maximum 4 participants per tour</li>
-                        </ul>
-                        <ul className="space-y-1">
-                          <li>• Combine different bioregions</li>
-                          <li>• Book 1 month in advance</li>
-                          <li>• Independent rest days are FREE</li>
-                        </ul>
+      <div className="container mx-auto px-4 py-8">
+        {/* Optimized Hero Section */}
+        <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-8">
+              <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">Build Your Adventure</Badge>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Plan Your Colombian Birding Journey</h1>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Create your perfect multi-tour birding experience across Colombia's diverse bioregions with expert
+                guidance.
+              </p>
+            </div>
+
+            {/* Progress Indicator */}
+            <div className="max-w-md mx-auto">
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span>Progress</span>
+                <span>{Math.round(progress)}% Complete</span>
+              </div>
+              <Progress value={progress} className="h-2" />
+            </div>
+          </div>
+        </section>
+
+        {showPrefilledNotification && (
+          <section className="py-4">
+            <div className="container mx-auto px-4">
+              <Alert className="border-emerald-200 bg-emerald-50 max-w-4xl mx-auto">
+                <CheckCircle className="h-4 w-4 text-emerald-600" />
+                <AlertDescription className="text-emerald-800 pr-8">
+                  {prefilledInfo.fromPage === "bioregions-map"
+                    ? `Perfect! We've pre-selected ${prefilledInfo.region ? REGION_DATA[prefilledInfo.region]?.name || prefilledInfo.region : "your region"} based on your map selection. You can customize everything below!`
+                    : "Great choice! We've pre-filled your selections based on your interest. You can customize everything below!"}
+                </AlertDescription>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowPrefilledNotification(false)}
+                  className="absolute right-2 top-2 h-6 w-6 p-0 text-emerald-600 hover:text-emerald-700"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </Alert>
+            </div>
+          </section>
+        )}
+
+        {/* Main Content */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Tour Builder - Left Column */}
+              <div className="lg:col-span-2 space-y-8">
+                {/* Quick Tips */}
+                <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-3">
+                      <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-medium text-blue-800 mb-2">Expert Recommendations</h3>
+                        <div className="grid md:grid-cols-2 gap-4 text-sm text-blue-700">
+                          <ul className="space-y-1">
+                            <li>• 8-day tours for optimal diversity</li>
+                            <li>• 2-day rest periods recommended</li>
+                            <li>• Maximum 4 participants per tour</li>
+                          </ul>
+                          <ul className="space-y-1">
+                            <li>• Combine different bioregions</li>
+                            <li>• Book 1 month in advance</li>
+                            <li>• Independent rest days are FREE</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
+
+                {/* Calendar Section */}
+                <EmbeddedTourCalendar
+                  selectedDate={tourSelections[0]?.startDate}
+                  onDateSelect={updateStartDate}
+                  minDate={minimumBookingDate}
+                />
+
+                {/* Tour Selections */}
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-bold text-gray-900">Your Tours</h2>
+                    <Badge variant="outline" className="text-sm">
+                      {tourSelections.length} of 4 tours
+                    </Badge>
                   </div>
-                </CardContent>
-              </Card>
 
-              {/* Calendar Section */}
-              <EmbeddedTourCalendar
-                selectedDate={tourSelections[0]?.startDate}
-                onDateSelect={updateStartDate}
-                minDate={minimumBookingDate}
-              />
+                  {tourSelections.map((tour, index) => (
+                    <TourCard
+                      key={tour.id}
+                      tour={tour}
+                      index={index}
+                      isFirst={index === 0}
+                      onUpdate={(field, value) => {
+                        if (field === "participants") {
+                          updateAllParticipants(value)
+                        } else {
+                          updateTourSelection(tour.id, field, value)
+                        }
+                      }}
+                      onRemove={() => removeTourSelection(tour.id)}
+                      restDayOptions={
+                        restDayOptions[tour.id] || { type: "independent", activities: [], customRequests: "" }
+                      }
+                      onRestDayUpdate={(field, value) => updateRestDayOption(tour.id, field, value)}
+                      calculateRestDayCost={calculateRestDayCost}
+                      getHighestTourPrice={getHighestTourPrice}
+                      tourSelections={tourSelections}
+                      prefilledInfo={prefilledInfo}
+                    />
+                  ))}
 
-              {/* Tour Selections */}
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-gray-900">Your Tours</h2>
-                  <Badge variant="outline" className="text-sm">
-                    {tourSelections.length} of 4 tours
-                  </Badge>
+                  {/* Add Tour Button */}
+                  {tourSelections.length < 4 && (
+                    <Card className="border-2 border-dashed border-emerald-300 hover:border-emerald-500 transition-colors">
+                      <CardContent className="flex items-center justify-center py-8">
+                        <Button
+                          onClick={addTourSelection}
+                          variant="ghost"
+                          className="text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
+                        >
+                          <Plus className="w-5 h-5 mr-2" />
+                          Add Another Tour ({4 - tourSelections.length} remaining)
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )}
                 </div>
 
-                {tourSelections.map((tour, index) => (
-                  <TourCard
-                    key={tour.id}
-                    tour={tour}
-                    index={index}
-                    isFirst={index === 0}
-                    onUpdate={(field, value) => {
-                      if (field === "participants") {
-                        updateAllParticipants(value)
-                      } else {
-                        updateTourSelection(tour.id, field, value)
-                      }
-                    }}
-                    onRemove={() => removeTourSelection(tour.id)}
-                    restDayOptions={
-                      restDayOptions[tour.id] || { type: "independent", activities: [], customRequests: "" }
-                    }
-                    onRestDayUpdate={(field, value) => updateRestDayOption(tour.id, field, value)}
-                    calculateRestDayCost={calculateRestDayCost}
-                    getHighestTourPrice={getHighestTourPrice}
-                    tourSelections={tourSelections}
-                    prefilledInfo={prefilledInfo}
-                  />
-                ))}
-
-                {/* Add Tour Button */}
-                {tourSelections.length < 4 && (
-                  <Card className="border-2 border-dashed border-emerald-300 hover:border-emerald-500 transition-colors">
-                    <CardContent className="flex items-center justify-center py-8">
-                      <Button
-                        onClick={addTourSelection}
-                        variant="ghost"
-                        className="text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
+                {/* Contact Information - Compact */}
+                <Card className="border-2 border-blue-200">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl">Contact Information</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="First Name *"
+                        value={contactForm.firstName}
+                        onChange={(e) => setContactForm({ ...contactForm, firstName: e.target.value })}
+                      />
+                      <Input
+                        placeholder="Last Name *"
+                        value={contactForm.lastName}
+                        onChange={(e) => setContactForm({ ...contactForm, lastName: e.target.value })}
+                      />
+                    </div>
+                    <Input
+                      type="email"
+                      placeholder="Email Address *"
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                    />
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="Phone (Optional)"
+                        value={contactForm.phone}
+                        onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                      />
+                      <select
+                        value={contactForm.experienceLevel}
+                        onChange={(e) => setContactForm({ ...contactForm, experienceLevel: e.target.value })}
+                        className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                       >
-                        <Plus className="w-5 h-5 mr-2" />
-                        Add Another Tour ({4 - tourSelections.length} remaining)
+                        {EXPERIENCE_LEVELS.map((level) => (
+                          <option key={level} value={level}>
+                            {level}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Account Creation Prompt */}
+                {showAccountPrompt && !user && (
+                  <AccountCreationPrompt contactInfo={contactInfo} onAccountCreated={handleAccountCreated} />
+                )}
+
+                {/* Questions Section - Collapsible */}
+                <Card className="border-2 border-purple-200">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg">Questions & Special Requests</CardTitle>
+                      <Button variant="ghost" size="sm" onClick={() => setShowQuestions(!showQuestions)}>
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        {showQuestions ? "Hide" : "Add Questions"}
                       </Button>
+                    </div>
+                  </CardHeader>
+                  {showQuestions && (
+                    <CardContent>
+                      <textarea
+                        value={questions}
+                        onChange={(e) => setQuestions(e.target.value)}
+                        placeholder="Any questions about the tours, dietary restrictions, accessibility needs, specific birds you'd like to see, or other special requests..."
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                      />
+                    </CardContent>
+                  )}
+                </Card>
+              </div>
+
+              {/* Right Column - Account Panel & Booking Summary */}
+              <div className="lg:col-span-1 space-y-6">
+                {user && (
+                  <Card className="border-2 border-emerald-200">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg text-emerald-800">Your Account</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">Signed in as:</span>
+                          <span className="text-sm font-medium">{user.email}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setShowDashboard(!showDashboard)}
+                            className="flex-1"
+                          >
+                            {showDashboard ? "Hide Dashboard" : "Show Dashboard"}
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={signOut}
+                            className="text-red-600 hover:text-red-700 bg-transparent"
+                          >
+                            Sign Out
+                          </Button>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 )}
-              </div>
 
-              {/* Contact Information - Compact */}
-              <Card className="border-2 border-blue-200">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-xl">Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder="First Name *"
-                      value={contactForm.firstName}
-                      onChange={(e) => setContactForm({ ...contactForm, firstName: e.target.value })}
-                    />
-                    <Input
-                      placeholder="Last Name *"
-                      value={contactForm.lastName}
-                      onChange={(e) => setContactForm({ ...contactForm, lastName: e.target.value })}
-                    />
-                  </div>
-                  <Input
-                    type="email"
-                    placeholder="Email Address *"
-                    value={contactForm.email}
-                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                  />
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder="Phone (Optional)"
-                      value={contactForm.phone}
-                      onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                    />
-                    <select
-                      value={contactForm.experienceLevel}
-                      onChange={(e) => setContactForm({ ...contactForm, experienceLevel: e.target.value })}
-                      className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    >
-                      {EXPERIENCE_LEVELS.map((level) => (
-                        <option key={level} value={level}>
-                          {level}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </CardContent>
-              </Card>
+                {/* User Account Panel */}
+                <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} />
 
-              {/* Account Creation Prompt */}
-              {showAccountPrompt && !user && (
-                <AccountCreationPrompt contactInfo={contactInfo} onAccountCreated={handleAccountCreated} />
-              )}
-
-              {/* Questions Section - Collapsible */}
-              <Card className="border-2 border-purple-200">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">Questions & Special Requests</CardTitle>
-                    <Button variant="ghost" size="sm" onClick={() => setShowQuestions(!showQuestions)}>
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      {showQuestions ? "Hide" : "Add Questions"}
-                    </Button>
-                  </div>
-                </CardHeader>
-                {showQuestions && (
-                  <CardContent>
-                    <textarea
-                      value={questions}
-                      onChange={(e) => setQuestions(e.target.value)}
-                      placeholder="Any questions about the tours, dietary restrictions, accessibility needs, specific birds you'd like to see, or other special requests..."
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
-                    />
-                  </CardContent>
-                )}
-              </Card>
-            </div>
-
-            {/* Right Column - Account Panel & Booking Summary */}
-            <div className="lg:col-span-1 space-y-6">
-              {/* User Account Panel */}
-              <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} />
-
-              {/* Booking Summary */}
-              <Card className="sticky top-24 border-2 border-emerald-200 shadow-xl">
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center text-xl">
-                    <Calculator className="w-5 h-5 mr-2 text-emerald-600" />
-                    Booking Summary
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Trip Overview */}
-                  {tripDuration.startDate && tripDuration.endDate && (
-                    <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-4 border border-emerald-200">
-                      <h4 className="font-semibold text-emerald-800 mb-3 flex items-center">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Trip Overview
-                      </h4>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-emerald-700">Duration:</span>
-                          <span className="font-medium text-emerald-800">{tripDuration.totalDays} days</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-emerald-700">Dates:</span>
-                          <span className="font-medium text-emerald-800">
-                            {formatDateRange(tripDuration.startDate, tripDuration.endDate)}
-                          </span>
+                {/* Booking Summary */}
+                <Card className="sticky top-24 border-2 border-emerald-200 shadow-xl">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center text-xl">
+                      <Calculator className="w-5 h-5 mr-2 text-emerald-600" />
+                      Booking Summary
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* Trip Overview */}
+                    {tripDuration.startDate && tripDuration.endDate && (
+                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-4 border border-emerald-200">
+                        <h4 className="font-semibold text-emerald-800 mb-3 flex items-center">
+                          <Calendar className="w-4 h-4 mr-2" />
+                          Trip Overview
+                        </h4>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-emerald-700">Duration:</span>
+                            <span className="font-medium text-emerald-800">{tripDuration.totalDays} days</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-emerald-700">Dates:</span>
+                            <span className="font-medium text-emerald-800">
+                              {formatDateRange(tripDuration.startDate, tripDuration.endDate)}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Tours Summary - Compact */}
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-gray-900 border-b pb-2">Selected Tours</h4>
-                    {tourSelections.map((tour, index) => {
-                      const regionInfo = REGION_DATA[tour.bioregion]
-                      const restDayOption = restDayOptions[tour.id]?.type || "independent"
-                      const tourCost =
-                        (TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000) *
-                        tour.totalDays *
-                        tour.participants
-                      const restCost =
-                        tour.restDays > 0 && restDayOption === "guided"
-                          ? calculateRestDayCost(tour.id, tour.restDays, "guided")
-                          : 0
+                    {/* Tours Summary - Compact */}
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-gray-900 border-b pb-2">Selected Tours</h4>
+                      {tourSelections.map((tour, index) => {
+                        const regionInfo = REGION_DATA[tour.bioregion]
+                        const restDayOption = restDayOptions[tour.id]?.type || "independent"
+                        const tourCost =
+                          (TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000) *
+                          tour.totalDays *
+                          tour.participants
+                        const restCost =
+                          tour.restDays > 0 && restDayOption === "guided"
+                            ? calculateRestDayCost(tour.id, tour.restDays, "guided")
+                            : 0
 
-                      return (
-                        <div key={tour.id} className="bg-gray-50 rounded-lg p-3">
-                          <div className="flex justify-between items-start mb-2">
-                            <div>
-                              <div className="font-medium text-sm text-gray-900">
-                                Tour {index + 1}: {tour.tourType.replace(/[🍃🪶🌼🍓]/gu, "").trim()}
-                              </div>
-                              <div className="text-xs text-gray-600">
-                                {regionInfo?.shortName} • {tour.totalDays} days
-                                {tour.restDays > 0 && ` + ${tour.restDays} rest`}
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <div className="font-bold text-sm text-emerald-600">
-                                ${(tourCost + restCost).toLocaleString()}
-                              </div>
-                              {tour.restDays > 0 && (
-                                <div className="text-xs text-gray-500">
-                                  Rest: {restCost === 0 ? "FREE" : `$${restCost.toLocaleString()}`}
+                        return (
+                          <div key={tour.id} className="bg-gray-50 rounded-lg p-3">
+                            <div className="flex justify-between items-start mb-2">
+                              <div>
+                                <div className="font-medium text-sm text-gray-900">
+                                  Tour {index + 1}: {tour.tourType.replace(/[🍃🪶🌼🍓]/gu, "").trim()}
                                 </div>
-                              )}
+                                <div className="text-xs text-gray-600">
+                                  {regionInfo?.shortName} • {tour.totalDays} days
+                                  {tour.restDays > 0 && ` + ${tour.restDays} rest`}
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <div className="font-bold text-sm text-emerald-600">
+                                  ${(tourCost + restCost).toLocaleString()}
+                                </div>
+                                {tour.restDays > 0 && (
+                                  <div className="text-xs text-gray-500">
+                                    Rest: {restCost === 0 ? "FREE" : `$${restCost.toLocaleString()}`}
+                                  </div>
+                                )}
+                              </div>
                             </div>
+                            {tour.startDate && tour.endDate && (
+                              <div className="text-xs text-blue-600 font-medium">
+                                {formatDateRange(tour.startDate, tour.endDate)}
+                              </div>
+                            )}
                           </div>
-                          {tour.startDate && tour.endDate && (
-                            <div className="text-xs text-blue-600 font-medium">
-                              {formatDateRange(tour.startDate, tour.endDate)}
-                            </div>
+                        )
+                      })}
+                    </div>
+
+                    {/* Cost Breakdown */}
+                    <div className="border-t pt-4">
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-lg font-bold text-gray-900">Total Cost</span>
+                        <span className="text-2xl font-bold text-emerald-600">
+                          ${costBreakdown.totalCost.toLocaleString()}
+                        </span>
+                      </div>
+
+                      <div className="space-y-2 text-sm text-gray-600 mb-6">
+                        <div className="flex justify-between">
+                          <span>Deposit (30%):</span>
+                          <span className="font-medium">${costBreakdown.depositAmount.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Final Payment:</span>
+                          <span className="font-medium">${costBreakdown.finalPayment.toLocaleString()}</span>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-2">Final payment due 30 days before departure</div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="space-y-3">
+                        {/* Primary CTA - Enhanced for Account Users */}
+                        <div className="space-y-2">
+                          <a
+                            href={generateEmailLink()}
+                            className="block w-full"
+                            onClick={(e) => {
+                              if (!contactForm.firstName || !contactForm.lastName || !contactForm.email) {
+                                e.preventDefault()
+                                alert("Please fill in your name and email address before sending your inquiry.")
+                              }
+                            }}
+                          >
+                            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
+                              <Mail className="mr-2 w-4 h-4" />
+                              Send Booking Request
+                            </Button>
+                          </a>
+
+                          {/* Account Creation CTA for non-users */}
+                          {!user && contactForm.firstName && contactForm.lastName && contactForm.email && (
+                            <Button
+                              onClick={() => setShowAuthModal(true)}
+                              variant="outline"
+                              className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                            >
+                              <User className="mr-2 w-4 h-4" />
+                              Create Account & Send Request
+                            </Button>
                           )}
                         </div>
-                      )
-                    })}
-                  </div>
 
-                  {/* Cost Breakdown */}
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-lg font-bold text-gray-900">Total Cost</span>
-                      <span className="text-2xl font-bold text-emerald-600">
-                        ${costBreakdown.totalCost.toLocaleString()}
-                      </span>
-                    </div>
-
-                    <div className="space-y-2 text-sm text-gray-600 mb-6">
-                      <div className="flex justify-between">
-                        <span>Deposit (30%):</span>
-                        <span className="font-medium">${costBreakdown.depositAmount.toLocaleString()}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Final Payment:</span>
-                        <span className="font-medium">${costBreakdown.finalPayment.toLocaleString()}</span>
-                      </div>
-                      <div className="text-xs text-gray-500 mt-2">Final payment due 30 days before departure</div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="space-y-3">
-                      {/* Primary CTA - Enhanced for Account Users */}
-                      <div className="space-y-2">
-                        <a
-                          href={generateEmailLink()}
-                          className="block w-full"
-                          onClick={(e) => {
-                            if (!contactForm.firstName || !contactForm.lastName || !contactForm.email) {
-                              e.preventDefault()
-                              alert("Please fill in your name and email address before sending your inquiry.")
-                            }
-                          }}
-                        >
-                          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
-                            <Mail className="mr-2 w-4 h-4" />
-                            Send Booking Request
-                          </Button>
-                        </a>
-
-                        {/* Account Creation CTA for non-users */}
-                        {!user && contactForm.firstName && contactForm.lastName && contactForm.email && (
-                          <Button
-                            onClick={() => setShowAuthModal(true)}
-                            variant="outline"
-                            className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-50"
-                          >
-                            <User className="mr-2 w-4 h-4" />
-                            Create Account & Send Request
-                          </Button>
-                        )}
-                      </div>
-
-                      <Button
-                        onClick={handleSaveSelections}
-                        disabled={saving || tourSelections.length === 0 || !user}
-                        className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
-                      >
-                        <Save className="w-4 h-4" />
-                        {saving ? "Saving to Database..." : saved ? "Saved to Database!" : "Save to Database"}
-                      </Button>
-
-                      <div className="grid grid-cols-2 gap-2">
                         <Button
-                          variant="outline"
-                          className="text-blue-600 hover:bg-blue-50 w-full bg-transparent"
-                          onClick={saveBooking}
+                          onClick={handleSaveSelections}
+                          disabled={saving || tourSelections.length === 0 || !user}
+                          className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
                         >
-                          <Save className="mr-2 w-4 h-4" />
-                          Save
+                          <Save className="w-4 h-4" />
+                          {saving ? "Saving to Database..." : saved ? "Saved to Database!" : "Save to Database"}
                         </Button>
-                        <Button variant="outline" className="text-purple-600 hover:bg-purple-50 w-full bg-transparent">
-                          <Share2 className="mr-2 w-4 h-4" />
-                          Share
-                        </Button>
-                      </div>
 
-                      <p className="text-sm text-gray-500 text-center mt-4">Need to discuss timing?</p>
-
-                      {/* Google Calendar Button - Modal version with consistent styling */}
-                      <div className="flex items-center justify-center pt-2 border-t border-gray-200">
-                        <div className="flex items-center gap-3 text-sm text-gray-600">
-                          <span>Prefer to talk first?</span>
-                          <GoogleCalendarButton
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button
                             variant="outline"
-                            size="sm"
-                            className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-400"
-                          />
+                            className="text-blue-600 hover:bg-blue-50 w-full bg-transparent"
+                            onClick={saveBooking}
+                          >
+                            <Save className="mr-2 w-4 h-4" />
+                            Save
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="text-purple-600 hover:bg-purple-50 w-full bg-transparent"
+                          >
+                            <Share2 className="mr-2 w-4 h-4" />
+                            Share
+                          </Button>
+                        </div>
+
+                        <p className="text-sm text-gray-500 text-center mt-4">Need to discuss timing?</p>
+
+                        {/* Google Calendar Button - Modal version with consistent styling */}
+                        <div className="flex items-center justify-center pt-2 border-t border-gray-200">
+                          <div className="flex items-center gap-3 text-sm text-gray-600">
+                            <span>Prefer to talk first?</span>
+                            <GoogleCalendarButton
+                              variant="outline"
+                              size="sm"
+                              className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-400"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
+        <Footer />
 
-      {/* Auth Modal */}
-      <AuthModal
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-        onSuccess={handleAccountCreated}
-        prefilledData={contactForm}
-        mode="signup"
-      />
+        {/* Auth Modal */}
+        <AuthModal
+          isOpen={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+          onSuccess={handleAccountCreated}
+          prefilledData={contactForm}
+          mode="signup"
+        />
 
-      {savedBooking && (
-        <div className="fixed bottom-4 right-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-md shadow-lg z-50">
-          Booking saved to local storage!
-        </div>
-      )}
+        {savedBooking && (
+          <div className="fixed bottom-4 right-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-md shadow-lg z-50">
+            Booking saved to local storage!
+          </div>
+        )}
+      </div>
     </div>
   )
 }
