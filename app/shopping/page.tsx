@@ -41,6 +41,8 @@ import { UserAccountPanel } from "@/components/auth/user-account-panel"
 import { AccountCreationPrompt } from "@/components/auth/account-creation-prompt"
 import { AuthModal } from "@/components/auth/auth-modal"
 import { GoogleCalendarButton } from "@/components/google-calendar-button"
+import { BookingService } from "@/lib/booking-service"
+import { useToast } from "@/hooks/use-toast"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -773,6 +775,8 @@ const mapBioregionToLocation = (bioregionId: string): string => {
 function ShoppingPageContent() {
   const searchParams = useSearchParams()
   const { user, loading: authLoading, signOut } = useAuth()
+  const { toast } = useToast()
+  const [currentBookingId, setCurrentBookingId] = useState<string | null>(null)
   const preselectedTourType = searchParams.get("preset") || searchParams.get("tour")
   const preselectedRegion = searchParams.get("region") || searchParams.get("bioregion")
   const fromPage = searchParams.get("from")
@@ -799,6 +803,17 @@ function ShoppingPageContent() {
   const [restDayOptions, setRestDayOptions] = useState<Record<string, RestDayOptions>>({})
   const [showAccountPrompt, setShowAccountPrompt] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [contactForm, setContactForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    travelDate: "",
+    experienceLevel: "Beginner birder",
+    specialRequests: "",
+  })
 
   // Initialize tour selections
   useEffect(() => {
@@ -849,13 +864,13 @@ function ShoppingPageContent() {
 
   // Show account prompt when contact info is filled and user is not logged in
   useEffect(() => {
-    if (!user && !authLoading && contactInfo.firstName && contactInfo.lastName && contactInfo.email) {
+    if (!user && !authLoading && contactForm.firstName && contactForm.lastName && contactForm.email) {
       const timer = setTimeout(() => {
         setShowAccountPrompt(true)
       }, 2000)
       return () => clearTimeout(timer)
     }
-  }, [user, authLoading, contactInfo])
+  }, [user, authLoading, contactForm])
 
   // Memoized calculations
   const getHighestTourPrice = useCallback(() => {
@@ -1044,11 +1059,11 @@ function ShoppingPageContent() {
 I'm interested in booking the following Colombian birding adventure:
 
 CONTACT INFORMATION:
-Name: ${contactInfo.firstName} ${contactInfo.lastName}
-Email: ${contactInfo.email}
-Phone: ${contactInfo.phone || "Not provided"}
-Travel Date: ${contactInfo.travelDate || "Flexible"}
-Experience Level: ${contactInfo.experienceLevel}
+Name: ${contactForm.firstName} ${contactForm.lastName}
+Email: ${contactForm.email}
+Phone: ${contactForm.phone || "Not provided"}
+Travel Date: ${contactForm.travelDate || "Flexible"}
+Experience Level: ${contactForm.experienceLevel}
 
 TOUR SELECTIONS:
 ${tourSelections
@@ -1075,10 +1090,10 @@ ${questions ? `SPECIAL REQUESTS:\n${questions}` : ""}
 I look forward to hearing from you within 24 hours as mentioned on your website.
 
 Best regards,
-${contactInfo.firstName} ${contactInfo.lastName}`)
+${contactForm.firstName} ${contactForm.lastName}`)
 
     return `mailto:info@aves.com?subject=${subject}&body=${body}`
-  }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
+  }, [tourSelections, contactForm, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
 
   const handleAccountCreated = useCallback(
     (newUser: any) => {
@@ -1099,11 +1114,11 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
 
     if (tourSelections.length > 0 && tourSelections[0].tourType && tourSelections[0].bioregion) completed++
     if (tourSelections[0]?.startDate) completed++
-    if (contactInfo.firstName && contactInfo.lastName && contactInfo.email) completed++
+    if (contactForm.firstName && contactForm.lastName && contactForm.email) completed++
     if (true) completed++ // Always count as ready to book
 
     return (completed / total) * 100
-  }, [tourSelections, contactInfo])
+  }, [tourSelections, contactForm])
 
   const minimumBookingDate = getMinimumBookingDate()
 
@@ -1113,8 +1128,112 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
       contactInfo,
       totalCost: costBreakdown.totalCost,
     }),
-    [tourSelections, contactInfo, costBreakdown.totalCost],
+    [tourSelections, contactForm, costBreakdown.totalCost],
   )
+
+  const handleSaveSelections = async () => {
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to save your selections.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    setSaving(true)
+
+    const selectionsData = {
+      tours: tourSelections,
+      contactInfo: {
+        firstName: contactForm.firstName,
+        lastName: contactForm.lastName,
+        email: contactForm.email,
+        phone: contactForm.phone,
+        experienceLevel: contactForm.experienceLevel,
+      },
+      totalCost: calculateTotalCost(),
+      totalParticipants: tourSelections.reduce((sum, tour) => sum + tour.participants, 0),
+      restDayOptions,
+      specialRequests: contactForm.specialRequests,
+    }
+
+    try {
+      let result
+      if (currentBookingId) {
+        result = await BookingService.updateUserSelections(currentBookingId, selectionsData)
+      } else {
+        result = await BookingService.saveUserSelections(user.id, selectionsData)
+        if (result.success && result.booking) {
+          setCurrentBookingId(result.booking.id)
+        }
+      }
+
+      if (result.success) {
+        setSaved(true)
+        setTimeout(() => setSaved(false), 3000)
+        toast({
+          title: "Selections Saved",
+          description: "Your tour selections have been saved to the database.",
+        })
+      }
+    } catch (error) {
+      console.error("Error saving selections:", error)
+      toast({
+        title: "Save Failed",
+        description: "Failed to save your selections. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  useEffect(() => {
+    if (user && !authLoading) {
+      const loadUserBookings = async () => {
+        const result = await BookingService.getUserBookings(user.id)
+        if (result.success && result.bookings && result.bookings.length > 0) {
+          const latestBooking = result.bookings[0]
+          if (latestBooking.status === "draft") {
+            setCurrentBookingId(latestBooking.id)
+            if (latestBooking.tour_selections) {
+              setTourSelections(latestBooking.tour_selections)
+            }
+            if (latestBooking.contact_info) {
+              setContactForm((prev) => ({
+                ...prev,
+                ...latestBooking.contact_info,
+              }))
+            }
+            toast({
+              title: "Draft Loaded",
+              description: "Your previous selections have been loaded.",
+            })
+          }
+        }
+      }
+      loadUserBookings()
+    }
+  }, [user, authLoading, toast])
+
+  const calculateTotalCost = () => {
+    let totalCost = 0
+
+    tourSelections.forEach((tour) => {
+      const tourTypeInfo = TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]
+      const pricePerDay = tourTypeInfo?.price || 1000
+      const tourCost = pricePerDay * tour.totalDays * tour.participants
+
+      const restDayOption = restDayOptions[tour.id]?.type || "independent"
+      const restCost =
+        tour.restDays > 0 && restDayOption === "guided" ? calculateRestDayCost(tour.id, tour.restDays, "guided") : 0
+
+      totalCost += tourCost + restCost
+    })
+
+    return totalCost
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -1263,30 +1382,30 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                   <div className="grid md:grid-cols-2 gap-4">
                     <Input
                       placeholder="First Name *"
-                      value={contactInfo.firstName}
-                      onChange={(e) => setContactInfo({ ...contactInfo, firstName: e.target.value })}
+                      value={contactForm.firstName}
+                      onChange={(e) => setContactForm({ ...contactForm, firstName: e.target.value })}
                     />
                     <Input
                       placeholder="Last Name *"
-                      value={contactInfo.lastName}
-                      onChange={(e) => setContactInfo({ ...contactInfo, lastName: e.target.value })}
+                      value={contactForm.lastName}
+                      onChange={(e) => setContactForm({ ...contactForm, lastName: e.target.value })}
                     />
                   </div>
                   <Input
                     type="email"
                     placeholder="Email Address *"
-                    value={contactInfo.email}
-                    onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                   />
                   <div className="grid md:grid-cols-2 gap-4">
                     <Input
                       placeholder="Phone (Optional)"
-                      value={contactInfo.phone}
-                      onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
+                      value={contactForm.phone}
+                      onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
                     />
                     <select
-                      value={contactInfo.experienceLevel}
-                      onChange={(e) => setContactInfo({ ...contactInfo, experienceLevel: e.target.value })}
+                      value={contactForm.experienceLevel}
+                      onChange={(e) => setContactForm({ ...contactForm, experienceLevel: e.target.value })}
                       className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     >
                       {EXPERIENCE_LEVELS.map((level) => (
@@ -1442,7 +1561,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                           href={generateEmailLink()}
                           className="block w-full"
                           onClick={(e) => {
-                            if (!contactInfo.firstName || !contactInfo.lastName || !contactInfo.email) {
+                            if (!contactForm.firstName || !contactForm.lastName || !contactForm.email) {
                               e.preventDefault()
                               alert("Please fill in your name and email address before sending your inquiry.")
                             }
@@ -1455,7 +1574,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                         </a>
 
                         {/* Account Creation CTA for non-users */}
-                        {!user && contactInfo.firstName && contactInfo.lastName && contactInfo.email && (
+                        {!user && contactForm.firstName && contactForm.lastName && contactForm.email && (
                           <Button
                             onClick={() => setShowAuthModal(true)}
                             variant="outline"
@@ -1466,6 +1585,15 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
                           </Button>
                         )}
                       </div>
+
+                      <Button
+                        onClick={handleSaveSelections}
+                        disabled={saving || tourSelections.length === 0 || !user}
+                        className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
+                      >
+                        <Save className="w-4 h-4" />
+                        {saving ? "Saving to Database..." : saved ? "Saved to Database!" : "Save to Database"}
+                      </Button>
 
                       <div className="grid grid-cols-2 gap-2">
                         <Button
@@ -1511,7 +1639,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         onSuccess={handleAccountCreated}
-        prefilledData={contactInfo}
+        prefilledData={contactForm}
         mode="signup"
       />
 
@@ -1524,7 +1652,6 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
   )
 }
 
-// Wrapped component with AuthProvider
 export default function ShoppingPage() {
   return (
     <AuthProvider>
