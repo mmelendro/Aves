@@ -624,4 +624,4 @@ export interface Database {
   }
 }
 
-// Adding explicit named export for Database interface
+export { Database }

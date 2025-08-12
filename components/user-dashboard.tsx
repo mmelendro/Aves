@@ -1,11 +1,17 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { supabase } from "@/lib/supabase"
 import {
@@ -20,6 +26,9 @@ import {
   Users,
   X,
   RefreshCw,
+  Camera,
+  Edit3,
+  Check,
 } from "lucide-react"
 import type { User as SupabaseUser } from "@supabase/supabase-js"
 
@@ -70,13 +79,32 @@ interface PaymentData {
   booking_id: string
 }
 
+interface UserProfile {
+  id: string
+  full_name: string | null
+  email: string | null
+  phone: string | null
+  profile_image_url: string | null
+  birding_experience: string | null
+  city: string | null
+  country: string | null
+  dietary_restrictions: string[] | null
+  special_requirements: string | null
+  emergency_contact_name: string | null
+  emergency_contact_phone: string | null
+}
+
 export function UserDashboard({ user, isOpen, onClose, currentBookingData, onSaveBooking }: UserDashboardProps) {
   const [activeTab, setActiveTab] = useState("bookings")
   const [bookings, setBookings] = useState<BookingData[]>([])
   const [messages, setMessages] = useState<MessageData[]>([])
   const [payments, setPayments] = useState<PaymentData[]>([])
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [editingProfile, setEditingProfile] = useState(false)
+  const [profileSaving, setProfileSaving] = useState(false)
+  const [imageUploading, setImageUploading] = useState(false)
   const { toast } = useToast()
 
   // Load user data when dashboard opens
@@ -98,6 +126,19 @@ export function UserDashboard({ user, isOpen, onClose, currentBookingData, onSav
 
       if (bookingsError) throw bookingsError
       setBookings(bookingsData || [])
+
+      // Load user profile
+      const { data: profileData, error: profileError } = await supabase
+        .from("user_profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single()
+
+      if (profileError && profileError.code !== "PGRST116") {
+        console.error("Error loading profile:", profileError)
+      } else {
+        setUserProfile(profileData)
+      }
 
       // Load messages
       const { data: messagesData, error: messagesError } = await supabase
@@ -151,6 +192,64 @@ export function UserDashboard({ user, isOpen, onClose, currentBookingData, onSav
       })
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    setImageUploading(true)
+    try {
+      const { data, error } = await supabase.storage
+        .from("profile-images")
+        .upload(`public/${user.id}/${file.name}`, file)
+      if (error) throw error
+
+      const { data: updatedProfile, error: updateError } = await supabase
+        .from("user_profiles")
+        .update({ profile_image_url: data.publicUrl })
+        .eq("id", user.id)
+        .single()
+
+      if (updateError) throw updateError
+      setUserProfile(updatedProfile)
+    } catch (error: any) {
+      console.error("Error uploading image:", error)
+      toast({
+        title: "Error",
+        description: "Failed to upload image. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setImageUploading(false)
+    }
+  }
+
+  const handleProfileUpdate = async (formData: FormData) => {
+    setProfileSaving(true)
+    try {
+      const { data, error } = await supabase
+        .from("user_profiles")
+        .update(Object.fromEntries(formData.entries()))
+        .eq("id", user.id)
+        .single()
+
+      if (error) throw error
+      setUserProfile(data)
+      toast({
+        title: "Profile Updated",
+        description: "Your profile has been updated successfully!",
+      })
+    } catch (error: any) {
+      console.error("Error updating profile:", error)
+      toast({
+        title: "Error",
+        description: "Failed to update profile. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setProfileSaving(false)
     }
   }
 
@@ -390,27 +489,226 @@ export function UserDashboard({ user, isOpen, onClose, currentBookingData, onSav
                 <TabsContent value="account" className="space-y-4">
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-lg">Account Information</CardTitle>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">Account Information</CardTitle>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setEditingProfile(!editingProfile)}
+                          className="flex items-center gap-2"
+                        >
+                          {editingProfile ? (
+                            <>
+                              <X className="w-4 h-4" />
+                              Cancel
+                            </>
+                          ) : (
+                            <>
+                              <Edit3 className="w-4 h-4" />
+                              Edit Profile
+                            </>
+                          )}
+                        </Button>
+                      </div>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <label className="font-medium text-gray-700">Email</label>
-                          <p className="text-gray-600">{user.email}</p>
+                    <CardContent className="space-y-6">
+                      {/* Profile Image Section */}
+                      <div className="flex items-center gap-4">
+                        <div className="relative">
+                          <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                            {userProfile?.profile_image_url ? (
+                              <img
+                                src={userProfile.profile_image_url || "/placeholder.svg"}
+                                alt="Profile"
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <User className="w-8 h-8 text-gray-400" />
+                            )}
+                          </div>
+                          {editingProfile && (
+                            <label className="absolute -bottom-1 -right-1 bg-emerald-600 text-white p-1.5 rounded-full cursor-pointer hover:bg-emerald-700 transition-colors">
+                              <Camera className="w-3 h-3" />
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                className="hidden"
+                                disabled={imageUploading}
+                              />
+                            </label>
+                          )}
                         </div>
                         <div>
-                          <label className="font-medium text-gray-700">Full Name</label>
-                          <p className="text-gray-600">{user.user_metadata?.full_name || "Not provided"}</p>
-                        </div>
-                        <div>
-                          <label className="font-medium text-gray-700">Phone</label>
-                          <p className="text-gray-600">{user.user_metadata?.phone || "Not provided"}</p>
-                        </div>
-                        <div>
-                          <label className="font-medium text-gray-700">Experience Level</label>
-                          <p className="text-gray-600">{user.user_metadata?.experience_level || "Not specified"}</p>
+                          <h3 className="font-medium text-gray-900">
+                            {userProfile?.full_name || user.user_metadata?.full_name || "Member"}
+                          </h3>
+                          <p className="text-sm text-gray-600">{user.email}</p>
+                          {imageUploading && (
+                            <p className="text-xs text-emerald-600 flex items-center gap-1 mt-1">
+                              <RefreshCw className="w-3 h-3 animate-spin" />
+                              Uploading...
+                            </p>
+                          )}
                         </div>
                       </div>
+
+                      {editingProfile ? (
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault()
+                            const formData = new FormData(e.currentTarget)
+                            handleProfileUpdate(formData)
+                          }}
+                          className="space-y-4"
+                        >
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="full_name">Full Name</Label>
+                              <Input
+                                id="full_name"
+                                name="full_name"
+                                defaultValue={userProfile?.full_name || ""}
+                                placeholder="Enter your full name"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="phone">Phone</Label>
+                              <Input
+                                id="phone"
+                                name="phone"
+                                defaultValue={userProfile?.phone || ""}
+                                placeholder="Enter your phone number"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="city">City</Label>
+                              <Input
+                                id="city"
+                                name="city"
+                                defaultValue={userProfile?.city || ""}
+                                placeholder="Enter your city"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="country">Country</Label>
+                              <Input
+                                id="country"
+                                name="country"
+                                defaultValue={userProfile?.country || ""}
+                                placeholder="Enter your country"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="birding_experience">Birding Experience</Label>
+                              <Select name="birding_experience" defaultValue={userProfile?.birding_experience || ""}>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select experience level" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="beginner">Beginner</SelectItem>
+                                  <SelectItem value="intermediate">Intermediate</SelectItem>
+                                  <SelectItem value="advanced">Advanced</SelectItem>
+                                  <SelectItem value="expert">Expert</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <div>
+                              <Label htmlFor="emergency_contact_name">Emergency Contact Name</Label>
+                              <Input
+                                id="emergency_contact_name"
+                                name="emergency_contact_name"
+                                defaultValue={userProfile?.emergency_contact_name || ""}
+                                placeholder="Emergency contact name"
+                              />
+                            </div>
+                            <div className="md:col-span-2">
+                              <Label htmlFor="emergency_contact_phone">Emergency Contact Phone</Label>
+                              <Input
+                                id="emergency_contact_phone"
+                                name="emergency_contact_phone"
+                                defaultValue={userProfile?.emergency_contact_phone || ""}
+                                placeholder="Emergency contact phone"
+                              />
+                            </div>
+                            <div className="md:col-span-2">
+                              <Label htmlFor="special_requirements">Special Requirements</Label>
+                              <Textarea
+                                id="special_requirements"
+                                name="special_requirements"
+                                defaultValue={userProfile?.special_requirements || ""}
+                                placeholder="Any special requirements or notes"
+                                rows={3}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              type="submit"
+                              disabled={profileSaving}
+                              className="bg-emerald-600 hover:bg-emerald-700"
+                            >
+                              {profileSaving ? (
+                                <>
+                                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                                  Saving...
+                                </>
+                              ) : (
+                                <>
+                                  <Check className="w-4 h-4 mr-2" />
+                                  Save Changes
+                                </>
+                              )}
+                            </Button>
+                            <Button type="button" variant="outline" onClick={() => setEditingProfile(false)}>
+                              Cancel
+                            </Button>
+                          </div>
+                        </form>
+                      ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <label className="font-medium text-gray-700">Email</label>
+                            <p className="text-gray-600">{user.email}</p>
+                          </div>
+                          <div>
+                            <label className="font-medium text-gray-700">Full Name</label>
+                            <p className="text-gray-600">{userProfile?.full_name || "Not provided"}</p>
+                          </div>
+                          <div>
+                            <label className="font-medium text-gray-700">Phone</label>
+                            <p className="text-gray-600">{userProfile?.phone || "Not provided"}</p>
+                          </div>
+                          <div>
+                            <label className="font-medium text-gray-700">Experience Level</label>
+                            <p className="text-gray-600 capitalize">
+                              {userProfile?.birding_experience || "Not specified"}
+                            </p>
+                          </div>
+                          <div>
+                            <label className="font-medium text-gray-700">Location</label>
+                            <p className="text-gray-600">
+                              {userProfile?.city && userProfile?.country
+                                ? `${userProfile.city}, ${userProfile.country}`
+                                : "Not provided"}
+                            </p>
+                          </div>
+                          <div>
+                            <label className="font-medium text-gray-700">Emergency Contact</label>
+                            <p className="text-gray-600">
+                              {userProfile?.emergency_contact_name
+                                ? `${userProfile.emergency_contact_name} (${userProfile.emergency_contact_phone || "No phone"})`
+                                : "Not provided"}
+                            </p>
+                          </div>
+                          {userProfile?.special_requirements && (
+                            <div className="md:col-span-2">
+                              <label className="font-medium text-gray-700">Special Requirements</label>
+                              <p className="text-gray-600">{userProfile.special_requirements}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
 
                       {/* Quick Stats */}
                       <div className="grid grid-cols-3 gap-4 mt-6 pt-4 border-t">
