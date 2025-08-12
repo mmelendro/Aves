@@ -2,15 +2,23 @@
 
 import { useEffect, useState, useCallback, useMemo } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Progress } from "@/components/ui/progress"
 import {
   Plus,
   Minus,
+  Calculator,
+  Save,
+  Mail,
+  Share2,
+  MessageCircle,
   Trash2,
+  Info,
   CheckCircle,
+  X,
   ExternalLink,
   Map,
   Bird,
@@ -20,13 +28,19 @@ import {
   DollarSign,
   ChevronDown,
   ChevronUp,
+  User,
 } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { LOCATION_OPTIONS, CONTACT_TOUR_TYPE_OPTIONS, EXPERIENCE_LEVELS } from "@/lib/form-options"
 import { useSearchParams } from "next/navigation"
-import { useAuth } from "@/hooks/use-auth"
+import { EmbeddedTourCalendar } from "@/components/embedded-tour-calendar"
+import { AuthProvider, useAuth } from "@/hooks/use-auth"
+import { UserAccountPanel } from "@/components/auth/user-account-panel"
+import { AccountCreationPrompt } from "@/components/auth/account-creation-prompt"
+import { AuthModal } from "@/components/auth/auth-modal"
+import { GoogleCalendarButton } from "@/components/google-calendar-button"
 
 // Optimized region data with enhanced information
 const REGION_DATA: Record<
@@ -758,7 +772,7 @@ const mapBioregionToLocation = (bioregionId: string): string => {
 // Main Shopping Page Component with Auth Integration
 function ShoppingPageContent() {
   const searchParams = useSearchParams()
-  const { user, loading: authLoading, signOut, supabase } = useAuth()
+  const { user, loading: authLoading, signOut } = useAuth()
   const preselectedTourType = searchParams.get("preset") || searchParams.get("tour")
   const preselectedRegion = searchParams.get("region") || searchParams.get("bioregion")
   const fromPage = searchParams.get("from")
@@ -785,176 +799,313 @@ function ShoppingPageContent() {
   const [restDayOptions, setRestDayOptions] = useState<Record<string, RestDayOptions>>({})
   const [showAccountPrompt, setShowAccountPrompt] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
-  const [showDashboard, setShowDashboard] = useState(false)
 
-  const [progress, setProgress] = useState(0)
-  const [costBreakdown, setCostBreakdown] = useState({
-    totalCost: 0,
-    depositAmount: 0,
-    finalPayment: 0,
-  })
-
-  const minimumBookingDate = useMemo(() => getMinimumBookingDate(), [])
-
-  // Prefill logic
+  // Initialize tour selections
   useEffect(() => {
-    if (preselectedTourType || preselectedRegion || fromPage) {
-      const mappedRegion = preselectedRegion ? mapBioregionToLocation(preselectedRegion) : undefined
+    // Only run once on mount to prevent infinite loops
+    if (tourSelections.length > 0) return
 
+    const initialTourType =
+      preselectedTourType && CONTACT_TOUR_TYPE_OPTIONS.includes(preselectedTourType as any)
+        ? preselectedTourType
+        : "🍃 Adventure Tours"
+
+    const bioregionParam = preselectedRegion || searchParams.get("bioregion")
+    let initialRegion = "⛰️ Western Andes"
+
+    if (bioregionParam) {
+      if (LOCATION_OPTIONS.includes(bioregionParam as any)) {
+        initialRegion = bioregionParam
+      } else {
+        const mappedRegion = mapBioregionToLocation(bioregionParam)
+        if (LOCATION_OPTIONS.includes(mappedRegion as any)) {
+          initialRegion = mappedRegion
+        }
+      }
+    }
+
+    const initialTour: TourSelection = {
+      id: "1",
+      tourType: initialTourType,
+      bioregion: initialRegion,
+      participants: 2,
+      totalDays: 8,
+      restDays: 0,
+    }
+
+    setTourSelections([initialTour])
+
+    if (preselectedTourType || bioregionParam) {
       setPrefilledInfo({
         tourType: preselectedTourType || undefined,
-        region: mappedRegion,
+        region: bioregionParam || undefined,
         fromPage: fromPage || undefined,
       })
-
-      setTourSelections([
-        {
-          id: Date.now().toString(),
-          tourType: preselectedTourType || "🍃 Adventure Tours",
-          bioregion: mappedRegion || "⛰️ Western Andes",
-          participants: 2,
-          totalDays: 8,
-          restDays: 0,
-        },
-      ])
       setShowPrefilledNotification(true)
-    } else {
-      setTourSelections([
-        {
-          id: Date.now().toString(),
-          tourType: "🍃 Adventure Tours",
-          bioregion: "⛰️ Western Andes",
-          participants: 2,
-          totalDays: 8,
-          restDays: 0,
-        },
-      ])
+      const timer = setTimeout(() => setShowPrefilledNotification(false), 8000)
+      return () => clearTimeout(timer)
     }
-  }, [preselectedTourType, preselectedRegion, fromPage])
+  }, []) // Empty dependency array to run only once
 
-  // Tour date calculation
+  // Show account prompt when contact info is filled and user is not logged in
   useEffect(() => {
-    if (tourSelections.length > 0 && tourSelections[0]) {
-      const calculatedTours = calculateTourDates(tourSelections, tourSelections[0].startDate)
-      setTourSelections(calculatedTours)
+    if (!user && !authLoading && contactInfo.firstName && contactInfo.lastName && contactInfo.email) {
+      const timer = setTimeout(() => {
+        setShowAccountPrompt(true)
+      }, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [user, authLoading, contactInfo])
+
+  // Memoized calculations
+  const getHighestTourPrice = useCallback(() => {
+    return Math.max(
+      ...tourSelections.map((tour) => TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000),
+    )
+  }, [tourSelections])
+
+  const calculateRestDayCost = useCallback(
+    (tourId: string, restDays: number, option: string) => {
+      if (option === "independent") return 0
+      const tour = tourSelections.find((t) => t.id === tourId)
+      if (!tour || option !== "guided") return 0
+      const highestPrice = Math.max(
+        ...tourSelections.map((t) => TOUR_TYPE_INFO[t.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000),
+      )
+      return highestPrice * restDays * tour.participants
+    },
+    [tourSelections],
+  )
+
+  const costBreakdown = useMemo(() => {
+    let totalCost = 0
+    let totalDays = 0
+
+    tourSelections.forEach((tour) => {
+      const tourTypeInfo = TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]
+      const pricePerDay = tourTypeInfo?.price || 1000
+      const tourCost = pricePerDay * tour.totalDays * tour.participants
+
+      const restDayOption = restDayOptions[tour.id]?.type || "independent"
+      const restCost =
+        tour.restDays > 0 && restDayOption === "guided" ? calculateRestDayCost(tour.id, tour.restDays, "guided") : 0
+
+      totalCost += tourCost + restCost
+      totalDays += tour.totalDays + tour.restDays
+    })
+
+    return {
+      totalCost,
+      totalDays,
+      depositAmount: Math.round(totalCost * 0.3),
+      finalPayment: totalCost - Math.round(totalCost * 0.3),
+      participants: tourSelections[0]?.participants || 2,
+    }
+  }, [tourSelections, restDayOptions, calculateRestDayCost])
+
+  const tripDuration = useMemo(() => {
+    if (tourSelections.length === 0 || !tourSelections[0]?.startDate) {
+      return { totalDays: 0 }
+    }
+
+    const firstTour = tourSelections[0]
+    const lastTour = tourSelections[tourSelections.length - 1]
+
+    if (!firstTour.startDate || !lastTour.endDate) {
+      return { totalDays: 0 }
+    }
+
+    const timeDiff = lastTour.endDate.getTime() - firstTour.startDate.getTime()
+    const totalDays = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1
+
+    return {
+      startDate: firstTour.startDate,
+      endDate: lastTour.endDate,
+      totalDays,
     }
   }, [tourSelections])
 
-  // Cost calculation
-  useEffect(() => {
-    const totalCost = tourSelections.reduce((sum, tour) => {
-      const tourTypeInfo =
-        TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO] || TOUR_TYPE_INFO["🍃 Adventure Tours"]
-      const tourCost = tourTypeInfo.price * tour.totalDays * tour.participants
-      const restCost =
-        tour.restDays > 0
-          ? restDayOptions[tour.id]?.type === "independent"
-            ? 0
-            : calculateRestDayCost(tour.id, tour.restDays, "guided")
-          : 0
-      return sum + tourCost + restCost
-    }, 0)
-
-    const depositAmount = totalCost * 0.3
-    const finalPayment = totalCost - depositAmount
-
-    setCostBreakdown({
-      totalCost,
-      depositAmount,
-      finalPayment,
-    })
-  }, [tourSelections, restDayOptions])
-
-  // Progress calculation
-  useEffect(() => {
-    let completedFields = 0
-
-    if (tourSelections.length > 0) {
-      completedFields += tourSelections.length * 2 // tourType and bioregion
-      completedFields += tourSelections.reduce((sum, tour) => {
-        return sum + (tour.participants > 0 ? 1 : 0) + (tour.totalDays > 0 ? 1 : 0)
-      }, 0)
-    }
-
-    if (contactInfo.firstName) completedFields++
-    if (contactInfo.lastName) completedFields++
-    if (contactInfo.email) completedFields++
-
-    const totalFields = tourSelections.length * 4 + 3
-    const calculatedProgress = (completedFields / totalFields) * 100
-
-    setProgress(Math.min(100, calculatedProgress))
-  }, [tourSelections, contactInfo])
-
+  // Event handlers
   const addTourSelection = useCallback(() => {
-    setTourSelections((prevSelections) => [
-      ...prevSelections,
-      {
+    if (tourSelections.length < 4) {
+      const newTour: TourSelection = {
         id: Date.now().toString(),
         tourType: "🍃 Adventure Tours",
-        bioregion: "⛰️ Western Andes",
-        participants: 2,
+        bioregion: "🗻 Central Andes",
+        participants: tourSelections[0]?.participants || 2,
         totalDays: 8,
-        restDays: 0,
-      },
-    ])
-  }, [])
+        restDays: 2,
+      }
+
+      const updatedSelections = [...tourSelections, newTour]
+      const firstTourStartDate = tourSelections[0]?.startDate
+
+      if (firstTourStartDate) {
+        const recalculatedTours = calculateTourDates(updatedSelections, firstTourStartDate)
+        setTourSelections(recalculatedTours)
+      } else {
+        setTourSelections(updatedSelections)
+      }
+    }
+  }, [tourSelections])
+
+  const removeTourSelection = useCallback(
+    (id: string) => {
+      if (tourSelections.length > 1) {
+        const updatedSelections = tourSelections.filter((tour) => tour.id !== id)
+        const firstTourStartDate = updatedSelections[0]?.startDate
+
+        if (firstTourStartDate) {
+          const recalculatedTours = calculateTourDates(updatedSelections, firstTourStartDate)
+          setTourSelections(recalculatedTours)
+        } else {
+          setTourSelections(updatedSelections)
+        }
+      }
+    },
+    [tourSelections],
+  )
 
   const updateTourSelection = useCallback((id: string, field: keyof TourSelection, value: any) => {
-    setTourSelections((prevSelections) =>
-      prevSelections.map((tour) => (tour.id === id ? { ...tour, [field]: value } : tour)),
-    )
-  }, [])
-
-  const removeTourSelection = useCallback((id: string) => {
-    setTourSelections((prevSelections) => prevSelections.filter((tour) => tour.id !== id))
-    setRestDayOptions((prevOptions) => {
-      const newOptions = { ...prevOptions }
-      delete newOptions[id]
-      return newOptions
-    })
-  }, [])
-
-  const updateStartDate = useCallback((date: Date) => {
     setTourSelections((prevSelections) => {
-      const firstTour = prevSelections[0]
-      if (firstTour) {
-        return calculateTourDates(
-          prevSelections.map((tour, index) => (index === 0 ? { ...tour, startDate: date } : { ...tour })),
-          date,
-        )
+      const updatedSelections = prevSelections.map((tour) => {
+        if (tour.id === id) {
+          const updatedTour = { ...tour, [field]: value }
+          if (field === "totalDays" && value >= 8 && prevSelections.findIndex((t) => t.id === id) > 0) {
+            updatedTour.restDays = Math.max(updatedTour.restDays, 2)
+          }
+          return updatedTour
+        }
+        return tour
+      })
+
+      const firstTourStartDate = updatedSelections[0]?.startDate
+      if (firstTourStartDate) {
+        return calculateTourDates(updatedSelections, firstTourStartDate)
       }
-      return prevSelections
+      return updatedSelections
     })
   }, [])
 
-  const updateAllParticipants = useCallback((value: number) => {
-    setTourSelections((prevSelections) => prevSelections.map((tour) => ({ ...tour, participants: value })))
+  const updateAllParticipants = useCallback((participants: number) => {
+    setTourSelections((prevSelections) => {
+      const updatedSelections = prevSelections.map((tour) => ({ ...tour, participants }))
+      const firstTourStartDate = updatedSelections[0]?.startDate
+
+      if (firstTourStartDate) {
+        return calculateTourDates(updatedSelections, firstTourStartDate)
+      }
+      return updatedSelections
+    })
   }, [])
 
   const updateRestDayOption = useCallback((tourId: string, field: string, value: any) => {
-    setRestDayOptions((prevOptions) => ({
-      ...prevOptions,
+    setRestDayOptions((prev) => ({
+      ...prev,
       [tourId]: {
-        ...prevOptions[tourId],
+        type: "independent",
+        activities: [],
+        customRequests: "",
+        ...prev[tourId],
         [field]: value,
       },
     }))
   }, [])
 
-  const calculateRestDayCost = useCallback((tourId: string, restDays: number, option: string): number => {
-    if (option === "independent") return 0
-    const highestTourPrice = getHighestTourPrice()
-    return highestTourPrice * restDays
+  const updateStartDate = useCallback((date: Date | undefined) => {
+    setTourSelections((prevSelections) => {
+      if (!date) {
+        return prevSelections.map((tour) => ({
+          ...tour,
+          startDate: undefined,
+          endDate: undefined,
+        }))
+      }
+      return calculateTourDates(prevSelections, date)
+    })
   }, [])
 
-  const getHighestTourPrice = useCallback((): number => {
-    return Object.values(TOUR_TYPE_INFO).reduce((max, tourType) => Math.max(max, tourType.price), 0)
-  }, [])
+  const saveBooking = useCallback(() => {
+    const bookingData = {
+      tours: tourSelections,
+      contactInfo,
+      questions,
+      timestamp: new Date().toISOString(),
+    }
+    localStorage.setItem("aves-booking", JSON.stringify(bookingData))
+    setSavedBooking(true)
+    setTimeout(() => setSavedBooking(false), 3000)
+  }, [tourSelections, contactInfo, questions])
 
-  const handleAccountCreated = useCallback(() => {
-    setShowAccountPrompt(false)
-  }, [])
+  const generateEmailLink = useCallback(() => {
+    const subject = encodeURIComponent("Colombian Birding Tour Booking Request")
+    const body = encodeURIComponent(`Hello AVES Team,
+
+I'm interested in booking the following Colombian birding adventure:
+
+CONTACT INFORMATION:
+Name: ${contactInfo.firstName} ${contactInfo.lastName}
+Email: ${contactInfo.email}
+Phone: ${contactInfo.phone || "Not provided"}
+Travel Date: ${contactInfo.travelDate || "Flexible"}
+Experience Level: ${contactInfo.experienceLevel}
+
+TOUR SELECTIONS:
+${tourSelections
+  .map((tour, index) => {
+    const regionInfo = REGION_DATA[tour.bioregion]
+    const restDayOption = restDayOptions[tour.id]?.type || "independent"
+    return `Tour ${index + 1}: ${tour.tourType}
+Bioregion: ${regionInfo?.name || tour.bioregion}
+Participants: ${tour.participants}
+Duration: ${tour.totalDays} days${tour.restDays > 0 ? ` + ${tour.restDays} rest days` : ""}
+${tour.startDate && tour.endDate ? `Tour Dates: ${formatDateRange(tour.startDate, tour.endDate)}` : "Tour Dates: To be determined"}
+${tour.restDays > 0 ? `Rest Days: ${tour.restDays} days (${restDayOption === "independent" ? "FREE - independent" : `$${getHighestTourPrice()}/person/day - fully guided`})` : ""}`
+  })
+  .join("\n\n")}
+
+BOOKING SUMMARY:
+Total Cost: $${costBreakdown.totalCost.toLocaleString()}
+Total Duration: ${costBreakdown.totalDays} days
+Participants: ${costBreakdown.participants}
+${tripDuration.startDate && tripDuration.endDate ? `Complete Trip: ${formatDateRange(tripDuration.startDate, tripDuration.endDate)}` : "Trip Dates: To be determined"}
+
+${questions ? `SPECIAL REQUESTS:\n${questions}` : ""}
+
+I look forward to hearing from you within 24 hours as mentioned on your website.
+
+Best regards,
+${contactInfo.firstName} ${contactInfo.lastName}`)
+
+    return `mailto:info@aves.com?subject=${subject}&body=${body}`
+  }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
+
+  const handleAccountCreated = useCallback(
+    (newUser: any) => {
+      setShowAccountPrompt(false)
+      setShowAuthModal(false)
+      // Optionally save current booking to user's account
+      if (tourSelections.length > 0) {
+        saveBooking()
+      }
+    },
+    [tourSelections, saveBooking],
+  )
+
+  // Progress calculation
+  const progress = useMemo(() => {
+    let completed = 0
+    const total = 4
+
+    if (tourSelections.length > 0 && tourSelections[0].tourType && tourSelections[0].bioregion) completed++
+    if (tourSelections[0]?.startDate) completed++
+    if (contactInfo.firstName && contactInfo.lastName && contactInfo.email) completed++
+    if (true) completed++ // Always count as ready to book
+
+    return (completed / total) * 100
+  }, [tourSelections, contactInfo])
+
+  const minimumBookingDate = getMinimumBookingDate()
 
   const bookingData = useMemo(
     () => ({
@@ -965,209 +1116,419 @@ function ShoppingPageContent() {
     [tourSelections, contactInfo, costBreakdown.totalCost],
   )
 
-  const tripDuration = useMemo(() => {
-    if (tourSelections.length === 0) {
-      return { startDate: undefined, endDate: undefined, totalDays: 0 }
-    }
-
-    const firstTour = tourSelections[0]
-    const lastTour = tourSelections[tourSelections.length - 1]
-
-    if (!firstTour || !lastTour) {
-      return { startDate: undefined, endDate: undefined, totalDays: 0 }
-    }
-
-    const startDate = firstTour.startDate
-    const endDate = lastTour.endDate
-    const totalDays = tourSelections.reduce((sum, tour) => sum + tour.totalDays, 0)
-
-    return { startDate, endDate, totalDays }
-  }, [tourSelections])
-
-  const generateEmailLink = useCallback(() => {
-    const subject = `Booking Request - ${contactInfo.firstName} ${contactInfo.lastName}`
-    const body = `
-      Contact Information:
-      Name: ${contactInfo.firstName} ${contactInfo.lastName}
-      Email: ${contactInfo.email}
-      Phone: ${contactInfo.phone}
-      Experience Level: ${contactInfo.experienceLevel}
-
-      Tour Details:
-      ${tourSelections
-        .map(
-          (tour, index) => `
-        Tour ${index + 1}:
-        Type: ${tour.tourType}
-        Bioregion: ${tour.bioregion}
-        Participants: ${tour.participants}
-        Duration: ${tour.totalDays} days
-        Rest Days: ${tour.restDays} days
-        ${
-          tour.startDate && tour.endDate
-            ? `Dates: ${formatDateRange(tour.startDate, tour.endDate)}`
-            : "Dates: Not yet scheduled"
-        }
-      `,
-        )
-        .join("\n")}
-
-      Questions & Special Requests:
-      ${questions}
-
-      Total Cost: $${costBreakdown.totalCost.toLocaleString()}
-    `
-
-    return `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-  }, [contactInfo, tourSelections, questions, costBreakdown])
-
-  const saveBooking = useCallback(async () => {
-    try {
-      localStorage.setItem("savedBooking", JSON.stringify(bookingData))
-      setSavedBooking(true)
-      setTimeout(() => setSavedBooking(false), 3000)
-    } catch (error) {
-      console.error("Error saving booking to local storage:", error)
-    }
-  }, [bookingData])
-
   return (
-    <div>
-      {/* Navigation Header */}
-      <NavigationHeader />
+    <div className="min-h-screen bg-white">
+      <NavigationHeader currentPage="/shopping" />
+
+      {/* Optimized Hero Section */}
+      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">Build Your Adventure</Badge>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Plan Your Colombian Birding Journey</h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Create your perfect multi-tour birding experience across Colombia's diverse bioregions with expert
+              guidance.
+            </p>
+          </div>
+
+          {/* Progress Indicator */}
+          <div className="max-w-md mx-auto">
+            <div className="flex justify-between text-sm text-gray-600 mb-2">
+              <span>Progress</span>
+              <span>{Math.round(progress)}% Complete</span>
+            </div>
+            <Progress value={progress} className="h-2" />
+          </div>
+        </div>
+      </section>
+
+      {showPrefilledNotification && (
+        <section className="py-4">
+          <div className="container mx-auto px-4">
+            <Alert className="border-emerald-200 bg-emerald-50 max-w-4xl mx-auto">
+              <CheckCircle className="h-4 w-4 text-emerald-600" />
+              <AlertDescription className="text-emerald-800 pr-8">
+                {prefilledInfo.fromPage === "bioregions-map"
+                  ? `Perfect! We've pre-selected ${prefilledInfo.region ? REGION_DATA[prefilledInfo.region]?.name || prefilledInfo.region : "your region"} based on your map selection. You can customize everything below!`
+                  : "Great choice! We've pre-filled your selections based on your interest. You can customize everything below!"}
+              </AlertDescription>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowPrefilledNotification(false)}
+                className="absolute right-2 top-2 h-6 w-6 p-0 text-emerald-600 hover:text-emerald-700"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </Alert>
+          </div>
+        </section>
+      )}
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        {/* Prefilled Notification */}
-        {showPrefilledNotification && (
-          <Alert className="mb-6">
-            <AlertDescription>Your booking has been pre-filled based on your previous selections.</AlertDescription>
-          </Alert>
-        )}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Tour Builder - Left Column */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Quick Tips */}
+              <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-3">
+                    <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-medium text-blue-800 mb-2">Expert Recommendations</h3>
+                      <div className="grid md:grid-cols-2 gap-4 text-sm text-blue-700">
+                        <ul className="space-y-1">
+                          <li>• 8-day tours for optimal diversity</li>
+                          <li>• 2-day rest periods recommended</li>
+                          <li>• Maximum 4 participants per tour</li>
+                        </ul>
+                        <ul className="space-y-1">
+                          <li>• Combine different bioregions</li>
+                          <li>• Book 1 month in advance</li>
+                          <li>• Independent rest days are FREE</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-        {/* Tour Selections */}
-        <div className="space-y-6">
-          {tourSelections.map((tour, index) => (
-            <TourCard
-              key={tour.id}
-              tour={tour}
-              index={index}
-              isFirst={index === 0}
-              onUpdate={(field, value) => updateTourSelection(tour.id, field, value)}
-              onRemove={() => removeTourSelection(tour.id)}
-              restDayOptions={restDayOptions[tour.id] || { type: "independent", activities: [], customRequests: "" }}
-              onRestDayUpdate={(field, value) => updateRestDayOption(tour.id, field, value)}
-              calculateRestDayCost={calculateRestDayCost}
-              getHighestTourPrice={getHighestTourPrice}
-              tourSelections={tourSelections}
-              prefilledInfo={prefilledInfo}
-            />
-          ))}
-        </div>
+              {/* Calendar Section */}
+              <EmbeddedTourCalendar
+                selectedDate={tourSelections[0]?.startDate}
+                onDateSelect={updateStartDate}
+                minDate={minimumBookingDate}
+              />
 
-        {/* Add Tour Button */}
-        <Button onClick={addTourSelection} className="mt-6">
-          Add Another Tour
-        </Button>
+              {/* Tour Selections */}
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold text-gray-900">Your Tours</h2>
+                  <Badge variant="outline" className="text-sm">
+                    {tourSelections.length} of 4 tours
+                  </Badge>
+                </div>
 
-        {/* Contact Information */}
-        <div className="mt-8">
-          <h3 className="text-lg font-medium mb-4">Contact Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              label="First Name"
-              value={contactInfo.firstName}
-              onChange={(e) => setContactInfo({ ...contactInfo, firstName: e.target.value })}
-              className="col-span-2 md:col-span-1"
-            />
-            <Input
-              label="Last Name"
-              value={contactInfo.lastName}
-              onChange={(e) => setContactInfo({ ...contactInfo, lastName: e.target.value })}
-              className="col-span-2 md:col-span-1"
-            />
-            <Input
-              label="Email"
-              value={contactInfo.email}
-              onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
-              className="col-span-2"
-            />
-            <Input
-              label="Phone"
-              value={contactInfo.phone}
-              onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
-              className="col-span-2"
-            />
-            <Input
-              label="Travel Date"
-              type="date"
-              value={contactInfo.travelDate}
-              onChange={(e) => setContactInfo({ ...contactInfo, travelDate: e.target.value })}
-              min={minimumBookingDate.toISOString().split("T")[0]}
-              className="col-span-2"
-            />
-            <div className="col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
-              <select
-                value={contactInfo.experienceLevel}
-                onChange={(e) => setContactInfo({ ...contactInfo, experienceLevel: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              >
-                {EXPERIENCE_LEVELS.map((level) => (
-                  <option key={level} value={level}>
-                    {level}
-                  </option>
+                {tourSelections.map((tour, index) => (
+                  <TourCard
+                    key={tour.id}
+                    tour={tour}
+                    index={index}
+                    isFirst={index === 0}
+                    onUpdate={(field, value) => {
+                      if (field === "participants") {
+                        updateAllParticipants(value)
+                      } else {
+                        updateTourSelection(tour.id, field, value)
+                      }
+                    }}
+                    onRemove={() => removeTourSelection(tour.id)}
+                    restDayOptions={
+                      restDayOptions[tour.id] || { type: "independent", activities: [], customRequests: "" }
+                    }
+                    onRestDayUpdate={(field, value) => updateRestDayOption(tour.id, field, value)}
+                    calculateRestDayCost={calculateRestDayCost}
+                    getHighestTourPrice={getHighestTourPrice}
+                    tourSelections={tourSelections}
+                    prefilledInfo={prefilledInfo}
+                  />
                 ))}
-              </select>
+
+                {/* Add Tour Button */}
+                {tourSelections.length < 4 && (
+                  <Card className="border-2 border-dashed border-emerald-300 hover:border-emerald-500 transition-colors">
+                    <CardContent className="flex items-center justify-center py-8">
+                      <Button
+                        onClick={addTourSelection}
+                        variant="ghost"
+                        className="text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
+                      >
+                        <Plus className="w-5 h-5 mr-2" />
+                        Add Another Tour ({4 - tourSelections.length} remaining)
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+
+              {/* Contact Information - Compact */}
+              <Card className="border-2 border-blue-200">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-xl">Contact Information</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <Input
+                      placeholder="First Name *"
+                      value={contactInfo.firstName}
+                      onChange={(e) => setContactInfo({ ...contactInfo, firstName: e.target.value })}
+                    />
+                    <Input
+                      placeholder="Last Name *"
+                      value={contactInfo.lastName}
+                      onChange={(e) => setContactInfo({ ...contactInfo, lastName: e.target.value })}
+                    />
+                  </div>
+                  <Input
+                    type="email"
+                    placeholder="Email Address *"
+                    value={contactInfo.email}
+                    onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
+                  />
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <Input
+                      placeholder="Phone (Optional)"
+                      value={contactInfo.phone}
+                      onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
+                    />
+                    <select
+                      value={contactInfo.experienceLevel}
+                      onChange={(e) => setContactInfo({ ...contactInfo, experienceLevel: e.target.value })}
+                      className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    >
+                      {EXPERIENCE_LEVELS.map((level) => (
+                        <option key={level} value={level}>
+                          {level}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Account Creation Prompt */}
+              {showAccountPrompt && !user && (
+                <AccountCreationPrompt contactInfo={contactInfo} onAccountCreated={handleAccountCreated} />
+              )}
+
+              {/* Questions Section - Collapsible */}
+              <Card className="border-2 border-purple-200">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-lg">Questions & Special Requests</CardTitle>
+                    <Button variant="ghost" size="sm" onClick={() => setShowQuestions(!showQuestions)}>
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      {showQuestions ? "Hide" : "Add Questions"}
+                    </Button>
+                  </div>
+                </CardHeader>
+                {showQuestions && (
+                  <CardContent>
+                    <textarea
+                      value={questions}
+                      onChange={(e) => setQuestions(e.target.value)}
+                      placeholder="Any questions about the tours, dietary restrictions, accessibility needs, specific birds you'd like to see, or other special requests..."
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                    />
+                  </CardContent>
+                )}
+              </Card>
+            </div>
+
+            {/* Right Column - Account Panel & Booking Summary */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* User Account Panel */}
+              <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} />
+
+              {/* Booking Summary */}
+              <Card className="sticky top-24 border-2 border-emerald-200 shadow-xl">
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center text-xl">
+                    <Calculator className="w-5 h-5 mr-2 text-emerald-600" />
+                    Booking Summary
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* Trip Overview */}
+                  {tripDuration.startDate && tripDuration.endDate && (
+                    <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-4 border border-emerald-200">
+                      <h4 className="font-semibold text-emerald-800 mb-3 flex items-center">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Trip Overview
+                      </h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-emerald-700">Duration:</span>
+                          <span className="font-medium text-emerald-800">{tripDuration.totalDays} days</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-emerald-700">Dates:</span>
+                          <span className="font-medium text-emerald-800">
+                            {formatDateRange(tripDuration.startDate, tripDuration.endDate)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tours Summary - Compact */}
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-gray-900 border-b pb-2">Selected Tours</h4>
+                    {tourSelections.map((tour, index) => {
+                      const regionInfo = REGION_DATA[tour.bioregion]
+                      const restDayOption = restDayOptions[tour.id]?.type || "independent"
+                      const tourCost =
+                        (TOUR_TYPE_INFO[tour.tourType as keyof typeof TOUR_TYPE_INFO]?.price || 1000) *
+                        tour.totalDays *
+                        tour.participants
+                      const restCost =
+                        tour.restDays > 0 && restDayOption === "guided"
+                          ? calculateRestDayCost(tour.id, tour.restDays, "guided")
+                          : 0
+
+                      return (
+                        <div key={tour.id} className="bg-gray-50 rounded-lg p-3">
+                          <div className="flex justify-between items-start mb-2">
+                            <div>
+                              <div className="font-medium text-sm text-gray-900">
+                                Tour {index + 1}: {tour.tourType.replace(/[🍃🪶🌼🍓]/gu, "").trim()}
+                              </div>
+                              <div className="text-xs text-gray-600">
+                                {regionInfo?.shortName} • {tour.totalDays} days
+                                {tour.restDays > 0 && ` + ${tour.restDays} rest`}
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="font-bold text-sm text-emerald-600">
+                                ${(tourCost + restCost).toLocaleString()}
+                              </div>
+                              {tour.restDays > 0 && (
+                                <div className="text-xs text-gray-500">
+                                  Rest: {restCost === 0 ? "FREE" : `$${restCost.toLocaleString()}`}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          {tour.startDate && tour.endDate && (
+                            <div className="text-xs text-blue-600 font-medium">
+                              {formatDateRange(tour.startDate, tour.endDate)}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Cost Breakdown */}
+                  <div className="border-t pt-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-lg font-bold text-gray-900">Total Cost</span>
+                      <span className="text-2xl font-bold text-emerald-600">
+                        ${costBreakdown.totalCost.toLocaleString()}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2 text-sm text-gray-600 mb-6">
+                      <div className="flex justify-between">
+                        <span>Deposit (30%):</span>
+                        <span className="font-medium">${costBreakdown.depositAmount.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Final Payment:</span>
+                        <span className="font-medium">${costBreakdown.finalPayment.toLocaleString()}</span>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-2">Final payment due 30 days before departure</div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="space-y-3">
+                      {/* Primary CTA - Enhanced for Account Users */}
+                      <div className="space-y-2">
+                        <a
+                          href={generateEmailLink()}
+                          className="block w-full"
+                          onClick={(e) => {
+                            if (!contactInfo.firstName || !contactInfo.lastName || !contactInfo.email) {
+                              e.preventDefault()
+                              alert("Please fill in your name and email address before sending your inquiry.")
+                            }
+                          }}
+                        >
+                          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
+                            <Mail className="mr-2 w-4 h-4" />
+                            Send Booking Request
+                          </Button>
+                        </a>
+
+                        {/* Account Creation CTA for non-users */}
+                        {!user && contactInfo.firstName && contactInfo.lastName && contactInfo.email && (
+                          <Button
+                            onClick={() => setShowAuthModal(true)}
+                            variant="outline"
+                            className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                          >
+                            <User className="mr-2 w-4 h-4" />
+                            Create Account & Send Request
+                          </Button>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          variant="outline"
+                          className="text-blue-600 hover:bg-blue-50 w-full bg-transparent"
+                          onClick={saveBooking}
+                        >
+                          <Save className="mr-2 w-4 h-4" />
+                          Save
+                        </Button>
+                        <Button variant="outline" className="text-purple-600 hover:bg-purple-50 w-full bg-transparent">
+                          <Share2 className="mr-2 w-4 h-4" />
+                          Share
+                        </Button>
+                      </div>
+
+                      <p className="text-sm text-gray-500 text-center mt-4">Need to discuss timing?</p>
+
+                      {/* Google Calendar Button - Modal version with consistent styling */}
+                      <div className="flex items-center justify-center pt-2 border-t border-gray-200">
+                        <div className="flex items-center gap-3 text-sm text-gray-600">
+                          <span>Prefer to talk first?</span>
+                          <GoogleCalendarButton
+                            variant="outline"
+                            size="sm"
+                            className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-400"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Questions & Special Requests */}
-        <div className="mt-8">
-          <h3 className="text-lg font-medium mb-4">Questions & Special Requests</h3>
-          <textarea
-            value={questions}
-            onChange={(e) => setQuestions(e.target.value)}
-            placeholder="Feel free to ask any questions or specify any special requests..."
-            rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          />
-        </div>
-
-        {/* Cost Breakdown */}
-        <div className="mt-8 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-4 border border-emerald-200">
-          <div className="flex justify-between items-center mb-2">
-            <span className="font-medium text-gray-900">Total Cost:</span>
-            <span className="text-xl font-bold text-emerald-600">${costBreakdown.totalCost.toLocaleString()}</span>
-          </div>
-          <div className="text-sm text-gray-600 space-y-1">
-            <div className="flex justify-between">
-              <span>Deposit Amount:</span>
-              <span>${costBreakdown.depositAmount.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Final Payment:</span>
-              <span>${costBreakdown.finalPayment.toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Save Booking Button */}
-        <Button onClick={saveBooking} className="mt-6">
-          Save Booking
-        </Button>
-
-        {/* Email Booking Button */}
-        <Button onClick={() => (window.location.href = generateEmailLink())} className="mt-6">
-          Email Booking
-        </Button>
-      </div>
-
-      {/* Footer */}
       <Footer />
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={handleAccountCreated}
+        prefilledData={contactInfo}
+        mode="signup"
+      />
+
+      {savedBooking && (
+        <div className="fixed bottom-4 right-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-md shadow-lg z-50">
+          Booking saved to local storage!
+        </div>
+      )}
     </div>
   )
 }
 
-export default ShoppingPageContent
+// Wrapped component with AuthProvider
+export default function ShoppingPage() {
+  return (
+    <AuthProvider>
+      <ShoppingPageContent />
+    </AuthProvider>
+  )
+}
