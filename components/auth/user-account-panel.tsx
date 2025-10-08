@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { AuthModal } from "./auth-modal"
+import { BookingService } from "@/lib/booking-service"
 import {
   User,
   LogOut,
@@ -19,6 +21,7 @@ import {
   ChevronUp,
   UserPlus,
   LogIn,
+  Save,
 } from "lucide-react"
 import type { User as SupabaseUser } from "@supabase/supabase-js"
 
@@ -33,10 +36,13 @@ interface UserAccountPanelProps {
 }
 
 export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPanelProps) {
+  const router = useRouter()
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authMode, setAuthMode] = useState<"signup" | "signin">("signin")
   const [isExpanded, setIsExpanded] = useState(false)
   const [isSigningOut, setIsSigningOut] = useState(false)
+  const [isSavingBooking, setIsSavingBooking] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   const handleSignOut = async () => {
     setIsSigningOut(true)
@@ -49,7 +55,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
 
   const handleAuthSuccess = (newUser: any) => {
     setShowAuthModal(false)
-    // Optionally refresh the page or update state
   }
 
   const openAuthModal = (mode: "signup" | "signin") => {
@@ -57,7 +62,40 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
     setShowAuthModal(true)
   }
 
-  // If user is logged in
+  const handleSaveBooking = async () => {
+    if (!user || !bookingData || bookingData.tours.length === 0) return
+
+    setIsSavingBooking(true)
+    setSaveError(null)
+
+    try {
+      const { data, error } = await BookingService.createBooking({
+        user_id: user.id,
+        tour_selections: bookingData.tours,
+        contact_info: bookingData.contactInfo,
+        total_cost: bookingData.totalCost,
+        booking_data: {
+          timestamp: new Date().toISOString(),
+          source: "shopping_page",
+        },
+      })
+
+      if (error) {
+        throw new Error(error)
+      }
+
+      if (data) {
+        BookingService.clearPendingBooking()
+        router.push(`/booking/confirmation?id=${data.id}`)
+      }
+    } catch (error: any) {
+      console.error("[v0] Error saving booking:", error)
+      setSaveError(error.message || "Failed to save booking")
+    } finally {
+      setIsSavingBooking(false)
+    }
+  }
+
   if (user) {
     const userMetadata = user.user_metadata || {}
     const fullName = userMetadata.full_name || userMetadata.name || "AVES Member"
@@ -96,7 +134,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
 
         {isExpanded && (
           <CardContent className="space-y-4">
-            {/* User Info */}
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2 text-gray-600">
                 <Mail className="w-4 h-4" />
@@ -118,7 +155,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
               )}
             </div>
 
-            {/* Account Benefits */}
             <div className="bg-emerald-50 rounded-lg p-3 border border-emerald-200">
               <h4 className="font-medium text-emerald-800 mb-2 flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
@@ -132,7 +168,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
               </ul>
             </div>
 
-            {/* Current Booking Status */}
             {bookingData && bookingData.tours.length > 0 && (
               <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
                 <h4 className="font-medium text-blue-800 mb-2 flex items-center gap-2">
@@ -145,10 +180,19 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
                   </div>
                   <div className="font-medium">${bookingData.totalCost.toLocaleString()} total</div>
                 </div>
+                <Button
+                  onClick={handleSaveBooking}
+                  disabled={isSavingBooking}
+                  className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white"
+                  size="sm"
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  {isSavingBooking ? "Saving..." : "Save Booking to Account"}
+                </Button>
+                {saveError && <p className="text-xs text-red-600 mt-2">{saveError}</p>}
               </div>
             )}
 
-            {/* Action Buttons */}
             <div className="flex gap-2">
               <Button variant="outline" size="sm" className="flex-1 text-gray-600 hover:text-gray-700 bg-transparent">
                 <Settings className="w-4 h-4 mr-2" />
@@ -171,7 +215,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
     )
   }
 
-  // If user is not logged in
   return (
     <>
       <Card className="border-2 border-blue-200 shadow-lg">
@@ -183,7 +226,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
           <p className="text-sm text-gray-600">Sign in to save your booking and access exclusive benefits</p>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Benefits Preview */}
           <div className="bg-gradient-to-r from-blue-50 to-emerald-50 rounded-lg p-4 border border-blue-200">
             <h4 className="font-medium text-blue-800 mb-3">Member Benefits</h4>
             <div className="grid grid-cols-1 gap-2 text-sm">
@@ -202,7 +244,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
             </div>
           </div>
 
-          {/* Dynamic Auth Buttons */}
           <div className="space-y-3">
             <Button
               onClick={() => openAuthModal("signin")}
@@ -225,7 +266,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
         </CardContent>
       </Card>
 
-      {/* Enhanced Auth Modal */}
       <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}

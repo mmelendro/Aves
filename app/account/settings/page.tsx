@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createServerClient } from "@/lib/supabase/server"
 import { cookies } from "next/headers"
 import AccountSettingsClient from "./AccountSettingsClient"
 
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 }
 
 export default async function AccountSettingsPage() {
-  const supabase = createServerComponentClient({ cookies })
+  const cookieStore = cookies()
+  const supabase = createServerClient(cookieStore)
 
   const {
     data: { session },
@@ -20,7 +21,6 @@ export default async function AccountSettingsPage() {
     redirect("/auth/login?redirect=/account/settings")
   }
 
-  // Fetch user profile data
   const { data: profile } = await supabase.from("user_profiles").select("*").eq("user_id", session.user.id).single()
 
   return (

@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -68,7 +68,7 @@ interface AccountSettingsClientProps {
 }
 
 export default function AccountSettingsClient({ initialProfile, userId, userEmail }: AccountSettingsClientProps) {
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const documentInputRef = useRef<HTMLInputElement>(null)
 

@@ -1,63 +1,55 @@
-import { supabase } from "./supabase-client"
-import type { Database } from "./supabase"
+import { createClient } from "@/lib/supabase/client"
+import type { Database } from "./database.types"
 
 type Booking = Database["public"]["Tables"]["bookings"]["Row"]
 type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
 type BookingUpdate = Database["public"]["Tables"]["bookings"]["Update"]
-type TripBooking = Database["public"]["Tables"]["trip_bookings"]["Row"]
-type TripBookingInsert = Database["public"]["Tables"]["trip_bookings"]["Insert"]
-type TripBookingUpdate = Database["public"]["Tables"]["trip_bookings"]["Update"]
-type ChatMessage = Database["public"]["Tables"]["chat_messages"]["Row"]
-type ChatMessageInsert = Database["public"]["Tables"]["chat_messages"]["Insert"]
 
 export class BookingService {
-  // Create a new booking
-  static async createBooking(bookingData: TripBookingInsert) {
+  private static getClient() {
+    return createClient()
+  }
+
+  static async createBooking(bookingData: {
+    user_id: string
+    tour_selections: any[]
+    contact_info: any
+    questions?: string
+    total_cost: number
+    booking_data?: any
+  }): Promise<{ data: Booking | null; error: string | null }> {
     try {
-      const { data, error } = await supabase
-        .from("trip_bookings")
-        .insert(bookingData)
-        .select(`
-          *,
-          trips:trip_id (
-            title,
-            slug,
-            duration_days,
-            price_per_person,
-            featured_image_url
-          )
-        `)
-        .single()
+      const supabase = this.getClient()
+
+      const insertData: BookingInsert = {
+        user_id: bookingData.user_id,
+        tour_selections: bookingData.tour_selections,
+        contact_info: bookingData.contact_info,
+        questions: bookingData.questions,
+        total_amount: bookingData.total_cost,
+        booking_data: bookingData.booking_data || {},
+        status: "pending",
+      }
+
+      const { data, error } = await supabase.from("bookings").insert(insertData).select().single()
 
       if (error) throw error
       return { data, error: null }
     } catch (error: any) {
+      console.error("[v0] Error creating booking:", error)
       return { data: null, error: error.message }
     }
   }
 
-  // Get user's bookings with optional status filter
+  // Get user's bookings
   static async getUserBookings(userId: string, status?: string) {
     try {
-      let query = supabase
-        .from("trip_bookings")
-        .select(`
-          *,
-          trips:trip_id (
-            title,
-            slug,
-            duration_days,
-            price_per_person,
-            featured_image_url,
-            region,
-            difficulty_level
-          )
-        `)
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false })
+      const supabase = this.getClient()
+
+      let query = supabase.from("bookings").select("*").eq("user_id", userId).order("created_at", { ascending: false })
 
       if (status) {
-        query = query.eq("booking_status", status)
+        query = query.eq("status", status)
       }
 
       const { data, error } = await query
@@ -65,6 +57,7 @@ export class BookingService {
       if (error) throw error
       return { data, error: null }
     } catch (error: any) {
+      console.error("[v0] Error fetching bookings:", error)
       return { data: null, error: error.message }
     }
   }
@@ -72,49 +65,29 @@ export class BookingService {
   // Get booking by ID
   static async getBookingById(bookingId: string) {
     try {
-      const { data, error } = await supabase
-        .from("trip_bookings")
-        .select(`
-          *,
-          trips:trip_id (
-            *,
-            trip_itineraries (*),
-            trip_target_birds (*),
-            trip_resources (*)
-          )
-        `)
-        .eq("id", bookingId)
-        .single()
+      const supabase = this.getClient()
+
+      const { data, error } = await supabase.from("bookings").select("*").eq("id", bookingId).single()
 
       if (error) throw error
       return { data, error: null }
     } catch (error: any) {
+      console.error("[v0] Error fetching booking:", error)
       return { data: null, error: error.message }
     }
   }
 
   // Update booking
-  static async updateBooking(bookingId: string, updates: TripBookingUpdate) {
+  static async updateBooking(bookingId: string, updates: BookingUpdate) {
     try {
-      const { data, error } = await supabase
-        .from("trip_bookings")
-        .update(updates)
-        .eq("id", bookingId)
-        .select(`
-          *,
-          trips:trip_id (
-            title,
-            slug,
-            duration_days,
-            price_per_person,
-            featured_image_url
-          )
-        `)
-        .single()
+      const supabase = this.getClient()
+
+      const { data, error } = await supabase.from("bookings").update(updates).eq("id", bookingId).select().single()
 
       if (error) throw error
       return { data, error: null }
     } catch (error: any) {
+      console.error("[v0] Error updating booking:", error)
       return { data: null, error: error.message }
     }
   }
@@ -122,120 +95,45 @@ export class BookingService {
   // Delete booking
   static async deleteBooking(bookingId: string) {
     try {
-      const { error } = await supabase.from("trip_bookings").delete().eq("id", bookingId)
+      const supabase = this.getClient()
+
+      const { error } = await supabase.from("bookings").delete().eq("id", bookingId)
 
       if (error) throw error
       return { error: null }
     } catch (error: any) {
+      console.error("[v0] Error deleting booking:", error)
       return { error: error.message }
     }
   }
 
-  // Get booking statistics for user
-  static async getBookingStats(userId: string) {
+  static saveToLocalStorage(bookingData: any) {
     try {
-      const { data, error } = await supabase
-        .from("trip_bookings")
-        .select("booking_status, payment_status, total_amount")
-        .eq("user_id", userId)
-
-      if (error) throw error
-
-      const stats = {
-        total: data.length,
-        saved: data.filter((b) => b.booking_status === "saved").length,
-        confirmed: data.filter((b) => b.booking_status === "confirmed").length,
-        paid: data.filter((b) => b.booking_status === "paid").length,
-        completed: data.filter((b) => b.booking_status === "completed").length,
-        cancelled: data.filter((b) => b.booking_status === "cancelled").length,
-        totalSpent: data.filter((b) => b.payment_status === "paid").reduce((sum, b) => sum + (b.total_amount || 0), 0),
-      }
-
-      return { data: stats, error: null }
-    } catch (error: any) {
-      return { data: null, error: error.message }
+      localStorage.setItem("aves-pending-booking", JSON.stringify(bookingData))
+      return true
+    } catch (error) {
+      console.error("[v0] Error saving to localStorage:", error)
+      return false
     }
   }
 
-  // Chat message methods
-  static async sendMessage(messageData: ChatMessageInsert) {
+  static getPendingBooking() {
     try {
-      const { data, error } = await supabase.from("chat_messages").insert(messageData).select().single()
-
-      if (error) throw error
-      return { data, error: null }
-    } catch (error: any) {
-      return { data: null, error: error.message }
+      const data = localStorage.getItem("aves-pending-booking")
+      return data ? JSON.parse(data) : null
+    } catch (error) {
+      console.error("[v0] Error reading from localStorage:", error)
+      return null
     }
   }
 
-  // Get chat messages for a booking
-  static async getChatMessages(bookingId: string) {
+  static clearPendingBooking() {
     try {
-      const { data, error } = await supabase
-        .from("chat_messages")
-        .select("*")
-        .eq("booking_id", bookingId)
-        .order("created_at", { ascending: true })
-
-      if (error) throw error
-      return { data, error: null }
-    } catch (error: any) {
-      return { data: null, error: error.message }
+      localStorage.removeItem("aves-pending-booking")
+      return true
+    } catch (error) {
+      console.error("[v0] Error clearing localStorage:", error)
+      return false
     }
-  }
-
-  // Mark messages as read
-  static async markMessagesAsRead(bookingId: string, userId: string) {
-    try {
-      const { error } = await supabase
-        .from("chat_messages")
-        .update({ is_read: true })
-        .eq("booking_id", bookingId)
-        .neq("sender_id", userId)
-
-      if (error) throw error
-      return { error: null }
-    } catch (error: any) {
-      return { error: error.message }
-    }
-  }
-
-  // Subscribe to chat messages
-  static subscribeToChatMessages(bookingId: string, callback: (message: ChatMessage) => void) {
-    return supabase
-      .channel(`chat_messages:${bookingId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "chat_messages",
-          filter: `booking_id=eq.${bookingId}`,
-        },
-        (payload) => {
-          callback(payload.new as ChatMessage)
-        },
-      )
-      .subscribe()
-  }
-
-  // Subscribe to booking updates
-  static subscribeToBookingUpdates(userId: string, callback: (booking: TripBooking) => void) {
-    return supabase
-      .channel(`trip_bookings:${userId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "trip_bookings",
-          filter: `user_id=eq.${userId}`,
-        },
-        (payload) => {
-          callback(payload.new as TripBooking)
-        },
-      )
-      .subscribe()
   }
 }

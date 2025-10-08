@@ -1,18 +1,30 @@
-import { supabase } from "./supabase-client"
-import type { Database } from "./supabase"
+import { createClient } from "@/lib/supabase/client"
+import type { Database } from "./database.types"
 
-type UserProfile = Database["public"]["Tables"]["profiles"]["Row"]
-type UserProfileInsert = Database["public"]["Tables"]["profiles"]["Insert"]
-type UserProfileUpdate = Database["public"]["Tables"]["profiles"]["Update"]
+type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"]
+type UserProfileInsert = Database["public"]["Tables"]["user_profiles"]["Insert"]
+type UserProfileUpdate = Database["public"]["Tables"]["user_profiles"]["Update"]
+
+let supabaseInstance: ReturnType<typeof createClient> | null = null
+
+function getSupabaseClient() {
+  if (!supabaseInstance) {
+    supabaseInstance = createClient()
+  }
+  return supabaseInstance
+}
 
 export class AuthService {
   // Sign up with email and password
   static async signUp(email: string, password: string, userData?: Partial<UserProfileInsert>) {
     try {
+      const supabase = getSupabaseClient()
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
+          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || window.location.origin,
           data: {
             full_name: userData?.full_name || "",
             first_name: userData?.first_name || "",
@@ -41,6 +53,8 @@ export class AuthService {
   // Sign in with email and password
   static async signIn(email: string, password: string) {
     try {
+      const supabase = getSupabaseClient()
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -56,6 +70,8 @@ export class AuthService {
   // Sign in with Google OAuth
   static async signInWithGoogle() {
     try {
+      const supabase = getSupabaseClient()
+
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
@@ -73,6 +89,7 @@ export class AuthService {
   // Sign out
   static async signOut() {
     try {
+      const supabase = getSupabaseClient()
       const { error } = await supabase.auth.signOut()
       if (error) throw error
       return { error: null }
@@ -84,6 +101,8 @@ export class AuthService {
   // Reset password
   static async resetPassword(email: string) {
     try {
+      const supabase = getSupabaseClient()
+
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/reset-password`,
       })
@@ -98,6 +117,8 @@ export class AuthService {
   // Update password
   static async updatePassword(password: string) {
     try {
+      const supabase = getSupabaseClient()
+
       const { data, error } = await supabase.auth.updateUser({
         password,
       })
@@ -112,7 +133,9 @@ export class AuthService {
   // Create user profile
   static async createUserProfile(profileData: UserProfileInsert) {
     try {
-      const { data, error } = await supabase.from("profiles").insert(profileData).select().single()
+      const supabase = getSupabaseClient()
+
+      const { data, error } = await supabase.from("user_profiles").insert(profileData).select().single()
 
       if (error) throw error
       return { data, error: null }
@@ -124,7 +147,9 @@ export class AuthService {
   // Get user profile
   static async getUserProfile(userId: string): Promise<{ data: UserProfile | null; error: string | null }> {
     try {
-      const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
+      const supabase = getSupabaseClient()
+
+      const { data, error } = await supabase.from("user_profiles").select("*").eq("id", userId).single()
 
       if (error) throw error
       return { data, error: null }
@@ -136,7 +161,9 @@ export class AuthService {
   // Update user profile
   static async updateUserProfile(userId: string, updates: UserProfileUpdate) {
     try {
-      const { data, error } = await supabase.from("profiles").update(updates).eq("id", userId).select().single()
+      const supabase = getSupabaseClient()
+
+      const { data, error } = await supabase.from("user_profiles").update(updates).eq("id", userId).select().single()
 
       if (error) throw error
       return { data, error: null }
@@ -148,6 +175,8 @@ export class AuthService {
   // Get current session
   static async getCurrentSession() {
     try {
+      const supabase = getSupabaseClient()
+
       const {
         data: { session },
         error,
@@ -162,6 +191,8 @@ export class AuthService {
   // Get current user
   static async getCurrentUser() {
     try {
+      const supabase = getSupabaseClient()
+
       const {
         data: { user },
         error,
@@ -175,6 +206,7 @@ export class AuthService {
 
   // Listen to auth state changes
   static onAuthStateChange(callback: (event: string, session: any) => void) {
+    const supabase = getSupabaseClient()
     return supabase.auth.onAuthStateChange(callback)
   }
 }

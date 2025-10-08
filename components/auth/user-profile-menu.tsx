@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createBrowserClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
@@ -30,7 +30,7 @@ interface UserProfileMenuProps {
 }
 
 export default function UserProfileMenu({ user }: UserProfileMenuProps) {
-  const supabase = createClientComponentClient()
+  const supabase = createBrowserClient()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 

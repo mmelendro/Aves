@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,7 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
-import { supabase } from "@/lib/supabase"
+import { createBrowserClient } from "@/lib/supabase/client"
 import {
   User,
   Mail,
@@ -57,6 +56,7 @@ export function AuthModal({
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const router = useRouter()
+  const supabase = createBrowserClient()
 
   // Form states
   const [signUpForm, setSignUpForm] = useState({
@@ -137,6 +137,8 @@ export function AuthModal({
         email: signUpForm.email,
         password: signUpForm.password,
         options: {
+          emailRedirectTo:
+            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/auth/callback`,
           data: {
             full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
             first_name: signUpForm.firstName,
@@ -155,9 +157,8 @@ export function AuthModal({
           text: "Account created successfully! Please check your email to verify your account.",
         })
 
-        // Create profile in profiles table
-        const { error: profileError } = await supabase.from("profiles").insert({
-          id: data.user.id,
+        const { error: profileError } = await supabase.from("user_profiles").insert({
+          user_id: data.user.id,
           email: signUpForm.email,
           full_name: `${signUpForm.firstName} ${signUpForm.lastName}`,
           phone: signUpForm.phone,
@@ -216,7 +217,7 @@ export function AuthModal({
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/shopping?auth=success`,
+          redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
         },
       })
 
@@ -243,7 +244,7 @@ export function AuthModal({
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/shopping?auth=success`,
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
         },
       })
 
