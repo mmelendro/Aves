@@ -69,6 +69,10 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
     setSaveError(null)
 
     try {
+      console.log("[v0] Starting booking save process")
+      console.log("[v0] User ID:", user.id)
+      console.log("[v0] Booking data:", bookingData)
+
       const { data, error } = await BookingService.createBooking({
         user_id: user.id,
         tour_selections: bookingData.tours,
@@ -80,12 +84,16 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
         },
       })
 
+      console.log("[v0] Booking service response:", { data, error })
+
       if (error) {
         throw new Error(error)
       }
 
       if (data) {
+        console.log("[v0] Booking saved successfully, clearing localStorage")
         BookingService.clearPendingBooking()
+        console.log("[v0] Redirecting to confirmation page")
         router.push(`/booking/confirmation?id=${data.id}`)
       }
     } catch (error: any) {

@@ -1,9 +1,38 @@
 import { createClient } from "@/lib/supabase/client"
-import type { Database } from "./database.types"
 
-type Booking = Database["public"]["Tables"]["bookings"]["Row"]
-type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
-type BookingUpdate = Database["public"]["Tables"]["bookings"]["Update"]
+interface BookingInsert {
+  user_id: string
+  tour_selections?: any
+  contact_info?: any
+  booking_data?: any
+  total_amount?: number
+  total_cost?: number
+  total_price?: number
+  status?: string
+  payment_status?: string
+  tour_name?: string
+  tour_type?: string
+  participants?: number
+  start_date?: string
+  end_date?: string
+  special_requests?: string
+  booking_reference?: string
+  currency?: string
+}
+
+interface Booking {
+  id: string
+  user_id: string
+  tour_selections?: any
+  contact_info?: any
+  booking_data?: any
+  total_amount?: number
+  total_cost?: number
+  status?: string
+  payment_status?: string
+  created_at: string
+  updated_at: string
+}
 
 export class BookingService {
   private static getClient() {
@@ -14,26 +43,39 @@ export class BookingService {
     user_id: string
     tour_selections: any[]
     contact_info: any
-    questions?: string
     total_cost: number
     booking_data?: any
   }): Promise<{ data: Booking | null; error: string | null }> {
     try {
+      console.log("[v0] Creating booking with data:", bookingData)
       const supabase = this.getClient()
+
+      const bookingReference = `AVES-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
 
       const insertData: BookingInsert = {
         user_id: bookingData.user_id,
         tour_selections: bookingData.tour_selections,
         contact_info: bookingData.contact_info,
-        questions: bookingData.questions,
-        total_amount: bookingData.total_cost,
         booking_data: bookingData.booking_data || {},
+        total_amount: bookingData.total_cost,
+        total_cost: bookingData.total_cost,
+        total_price: bookingData.total_cost,
         status: "pending",
+        payment_status: "pending",
+        booking_reference: bookingReference,
+        currency: "USD",
       }
+
+      console.log("[v0] Insert data:", insertData)
 
       const { data, error } = await supabase.from("bookings").insert(insertData).select().single()
 
-      if (error) throw error
+      if (error) {
+        console.error("[v0] Supabase error:", error)
+        throw error
+      }
+
+      console.log("[v0] Booking created successfully:", data)
       return { data, error: null }
     } catch (error: any) {
       console.error("[v0] Error creating booking:", error)
@@ -44,6 +86,7 @@ export class BookingService {
   // Get user's bookings
   static async getUserBookings(userId: string, status?: string) {
     try {
+      console.log("[v0] Fetching bookings for user:", userId)
       const supabase = this.getClient()
 
       let query = supabase.from("bookings").select("*").eq("user_id", userId).order("created_at", { ascending: false })
@@ -54,7 +97,12 @@ export class BookingService {
 
       const { data, error } = await query
 
-      if (error) throw error
+      if (error) {
+        console.error("[v0] Error fetching bookings:", error)
+        throw error
+      }
+
+      console.log("[v0] Fetched bookings:", data)
       return { data, error: null }
     } catch (error: any) {
       console.error("[v0] Error fetching bookings:", error)
@@ -78,7 +126,7 @@ export class BookingService {
   }
 
   // Update booking
-  static async updateBooking(bookingId: string, updates: BookingUpdate) {
+  static async updateBooking(bookingId: string, updates: Partial<BookingInsert>) {
     try {
       const supabase = this.getClient()
 
