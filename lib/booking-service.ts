@@ -18,8 +18,13 @@ interface Booking {
   questions?: string
   status: string
   total_cost: number
+  total_amount: number
   deposit_amount: number
   booking_reference: string
+  participants: number
+  currency: string
+  start_date?: string
+  end_date?: string
   created_at: string
   updated_at: string
 }
@@ -37,6 +42,13 @@ export class BookingService {
       // Calculate deposit (30% of total)
       const depositAmount = Math.round(bookingData.total_cost * 0.3)
 
+      // Extract participants from first tour selection
+      const participants = bookingData.tour_selections[0]?.participants || 1
+
+      // Extract dates if available
+      const startDate = bookingData.tour_selections[0]?.startDate || null
+      const endDate = bookingData.tour_selections[0]?.endDate || null
+
       const insertData = {
         user_id: bookingData.user_id,
         tour_selections: bookingData.tour_selections,
@@ -45,7 +57,12 @@ export class BookingService {
         questions: bookingData.questions || null,
         status: "pending",
         total_cost: bookingData.total_cost,
+        total_amount: bookingData.total_cost, // For admin dashboard compatibility
         deposit_amount: depositAmount,
+        participants: participants,
+        currency: "USD",
+        start_date: startDate,
+        end_date: endDate,
       }
 
       console.log("[v0] Inserting booking:", insertData)
@@ -140,7 +157,7 @@ export class BookingService {
 
       const { data, error } = await supabase
         .from("bookings")
-        .select("*, user_profiles(email, full_name, first_name, last_name)")
+        .select("*, user_profiles!bookings_user_id_fkey(email, full_name, first_name, last_name)")
         .order("created_at", { ascending: false })
 
       if (error) {

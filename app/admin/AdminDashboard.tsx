@@ -40,7 +40,7 @@ export default function AdminDashboard({ bookings, adminUser }: AdminDashboardPr
     const cancelled = bookings.filter((b) => b.status === "cancelled").length
     const totalRevenue = bookings
       .filter((b) => b.status === "confirmed")
-      .reduce((sum, b) => sum + (b.total_amount || 0), 0)
+      .reduce((sum, b) => sum + (b.total_cost || b.total_amount || 0), 0)
 
     return {
       total,
@@ -263,7 +263,9 @@ export default function AdminDashboard({ bookings, adminUser }: AdminDashboardPr
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-emerald-600">{formatCurrency(booking.total_amount)}</p>
+                        <p className="text-2xl font-bold text-emerald-600">
+                          {formatCurrency(booking.total_cost || booking.total_amount || 0)}
+                        </p>
                         <p className="text-sm text-gray-600">
                           {booking.tour_selections?.length || 0} tour{booking.tour_selections?.length !== 1 ? "s" : ""}
                         </p>
