@@ -1,35 +1,25 @@
 import { createClient } from "@/lib/supabase/client"
 
-interface BookingInsert {
+interface BookingData {
   user_id: string
-  tour_selections?: any
-  contact_info?: any
+  tour_selections: any[]
+  contact_info: any
+  total_cost: number
   booking_data?: any
-  total_amount?: number
-  total_cost?: number
-  total_price?: number
-  status?: string
-  payment_status?: string
-  tour_name?: string
-  tour_type?: string
-  participants?: number
-  start_date?: string
-  end_date?: string
-  special_requests?: string
-  booking_reference?: string
-  currency?: string
+  questions?: string
 }
 
 interface Booking {
   id: string
   user_id: string
-  tour_selections?: any
-  contact_info?: any
+  tour_selections: any
+  contact_info: any
   booking_data?: any
-  total_amount?: number
-  total_cost?: number
-  status?: string
-  payment_status?: string
+  questions?: string
+  status: string
+  total_cost: number
+  deposit_amount: number
+  booking_reference: string
   created_at: string
   updated_at: string
 }
@@ -39,34 +29,26 @@ export class BookingService {
     return createClient()
   }
 
-  static async createBooking(bookingData: {
-    user_id: string
-    tour_selections: any[]
-    contact_info: any
-    total_cost: number
-    booking_data?: any
-  }): Promise<{ data: Booking | null; error: string | null }> {
+  static async createBooking(bookingData: BookingData): Promise<{ data: Booking | null; error: string | null }> {
     try {
       console.log("[v0] Creating booking with data:", bookingData)
       const supabase = this.getClient()
 
-      const bookingReference = `AVES-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+      // Calculate deposit (30% of total)
+      const depositAmount = Math.round(bookingData.total_cost * 0.3)
 
-      const insertData: BookingInsert = {
+      const insertData = {
         user_id: bookingData.user_id,
         tour_selections: bookingData.tour_selections,
         contact_info: bookingData.contact_info,
-        booking_data: bookingData.booking_data || {},
-        total_amount: bookingData.total_cost,
-        total_cost: bookingData.total_cost,
-        total_price: bookingData.total_cost,
+        booking_data: bookingData.booking_data || { timestamp: new Date().toISOString() },
+        questions: bookingData.questions || null,
         status: "pending",
-        payment_status: "pending",
-        booking_reference: bookingReference,
-        currency: "USD",
+        total_cost: bookingData.total_cost,
+        deposit_amount: depositAmount,
       }
 
-      console.log("[v0] Insert data:", insertData)
+      console.log("[v0] Inserting booking:", insertData)
 
       const { data, error } = await supabase.from("bookings").insert(insertData).select().single()
 
@@ -83,7 +65,6 @@ export class BookingService {
     }
   }
 
-  // Get user's bookings
   static async getUserBookings(userId: string, status?: string) {
     try {
       console.log("[v0] Fetching bookings for user:", userId)
@@ -110,7 +91,6 @@ export class BookingService {
     }
   }
 
-  // Get booking by ID
   static async getBookingById(bookingId: string) {
     try {
       const supabase = this.getClient()
@@ -125,8 +105,7 @@ export class BookingService {
     }
   }
 
-  // Update booking
-  static async updateBooking(bookingId: string, updates: Partial<BookingInsert>) {
+  static async updateBooking(bookingId: string, updates: Partial<Booking>) {
     try {
       const supabase = this.getClient()
 
@@ -140,7 +119,6 @@ export class BookingService {
     }
   }
 
-  // Delete booking
   static async deleteBooking(bookingId: string) {
     try {
       const supabase = this.getClient()
@@ -152,6 +130,29 @@ export class BookingService {
     } catch (error: any) {
       console.error("[v0] Error deleting booking:", error)
       return { error: error.message }
+    }
+  }
+
+  static async getAllBookings() {
+    try {
+      console.log("[v0] Fetching all bookings for admin")
+      const supabase = this.getClient()
+
+      const { data, error } = await supabase
+        .from("bookings")
+        .select("*, user_profiles(email, full_name, first_name, last_name)")
+        .order("created_at", { ascending: false })
+
+      if (error) {
+        console.error("[v0] Error fetching all bookings:", error)
+        throw error
+      }
+
+      console.log("[v0] Fetched all bookings:", data)
+      return { data, error: null }
+    } catch (error: any) {
+      console.error("[v0] Error fetching all bookings:", error)
+      return { data: null, error: error.message }
     }
   }
 
