@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { CustomBookingService } from "@/lib/custom-booking-service"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -35,8 +36,19 @@ interface UserAccountPanelProps {
 export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPanelProps) {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authMode, setAuthMode] = useState<"signup" | "signin">("signin")
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
   const [isSigningOut, setIsSigningOut] = useState(false)
+  const [bookings, setBookings] = useState<any[]>([])
+
+  useEffect(() => {
+    if (user) {
+      CustomBookingService.getUserBookings(user.id).then(({ data }) => {
+        if (data) {
+          setBookings(data)
+        }
+      })
+    }
+  }, [user])
 
   const handleSignOut = async () => {
     setIsSigningOut(true)
@@ -132,18 +144,21 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
               </ul>
             </div>
 
-            {/* Current Booking Status */}
-            {bookingData && bookingData.tours.length > 0 && (
+            {/* Saved Bookings */}
+            {bookings.length > 0 && (
               <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
                 <h4 className="font-medium text-blue-800 mb-2 flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  Current Booking
+                  Saved Bookings
                 </h4>
                 <div className="text-xs text-blue-700 space-y-1">
-                  <div>
-                    {bookingData.tours.length} tour{bookingData.tours.length > 1 ? "s" : ""} selected
-                  </div>
-                  <div className="font-medium">${bookingData.totalCost.toLocaleString()} total</div>
+                  {bookings.map((booking) => (
+                    <div key={booking.id}>
+                      {booking.tour_selections.length} tour
+                      {booking.tour_selections.length > 1 ? "s" : ""} selected - $
+                      {booking.total_cost.toLocaleString()} total
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
