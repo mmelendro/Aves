@@ -1025,17 +1025,39 @@ function ShoppingPageContent() {
     })
   }, [])
 
-  const saveBooking = useCallback(() => {
+  const saveBooking = useCallback(async () => {
+    if (!user) {
+      setShowAuthModal(true)
+      return
+    }
+
     const bookingData = {
       tours: tourSelections,
       contactInfo,
+      totalCost: costBreakdown.totalCost,
       questions,
-      timestamp: new Date().toISOString(),
     }
-    localStorage.setItem("aves-booking", JSON.stringify(bookingData))
-    setSavedBooking(true)
-    setTimeout(() => setSavedBooking(false), 3000)
-  }, [tourSelections, contactInfo, questions])
+
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save booking.')
+      }
+
+      setSavedBooking(true)
+      setTimeout(() => setSavedBooking(false), 3000)
+    } catch (error) {
+      console.error(error)
+      // You might want to show an error message to the user
+    }
+  }, [tourSelections, contactInfo, costBreakdown.totalCost, user])
 
   const generateEmailLink = useCallback(() => {
     const subject = encodeURIComponent("Colombian Birding Tour Booking Request")
