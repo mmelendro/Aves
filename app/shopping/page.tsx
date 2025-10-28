@@ -799,6 +799,12 @@ function ShoppingPageContent() {
   const [restDayOptions, setRestDayOptions] = useState<Record<string, RestDayOptions>>({})
   const [showAccountPrompt, setShowAccountPrompt] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [authMode, setAuthMode] = useState<"signup" | "signin">("signin")
+
+  const openAuthModal = (mode: "signup" | "signin") => {
+    setAuthMode(mode)
+    setShowAuthModal(true)
+  }
 
   // Initialize tour selections
   useEffect(() => {
@@ -1039,12 +1045,13 @@ function ShoppingPageContent() {
     }
 
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch(`/api/bookings?timestamp=${new Date().getTime()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(bookingData),
+        credentials: 'include',
       })
 
       if (!response.ok) {
@@ -1354,7 +1361,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
             {/* Right Column - Account Panel & Booking Summary */}
             <div className="lg:col-span-1 space-y-6">
               {/* User Account Panel */}
-              <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} />
+              <UserAccountPanel user={user} onSignOut={signOut} bookingData={bookingData} openAuthModal={openAuthModal} />
 
               {/* Booking Summary */}
               <Card className="sticky top-24 border-2 border-emerald-200 shadow-xl">
@@ -1534,7 +1541,7 @@ ${contactInfo.firstName} ${contactInfo.lastName}`)
         onClose={() => setShowAuthModal(false)}
         onSuccess={handleAccountCreated}
         prefilledData={contactInfo}
-        mode="signup"
+        mode={authMode}
       />
 
       {savedBooking && (

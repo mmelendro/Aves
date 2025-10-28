@@ -31,11 +31,10 @@ interface UserAccountPanelProps {
     contactInfo: any
     totalCost: number
   }
+  openAuthModal: (mode: "signup" | "signin") => void
 }
 
-export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPanelProps) {
-  const [showAuthModal, setShowAuthModal] = useState(false)
-  const [authMode, setAuthMode] = useState<"signup" | "signin">("signin")
+export function UserAccountPanel({ user, onSignOut, bookingData, openAuthModal }: UserAccountPanelProps) {
   const [isExpanded, setIsExpanded] = useState(true)
   const [isSigningOut, setIsSigningOut] = useState(false)
   const [bookings, setBookings] = useState<any[]>([])
@@ -57,16 +56,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
     } finally {
       setIsSigningOut(false)
     }
-  }
-
-  const handleAuthSuccess = (newUser: any) => {
-    setShowAuthModal(false)
-    // Optionally refresh the page or update state
-  }
-
-  const openAuthModal = (mode: "signup" | "signin") => {
-    setAuthMode(mode)
-    setShowAuthModal(true)
   }
 
   // If user is logged in
@@ -239,15 +228,6 @@ export function UserAccountPanel({ user, onSignOut, bookingData }: UserAccountPa
           <p className="text-xs text-center text-gray-600">Join thousands of birders exploring Colombia</p>
         </CardContent>
       </Card>
-
-      {/* Enhanced Auth Modal */}
-      <AuthModal
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-        onSuccess={handleAuthSuccess}
-        mode={authMode}
-        prefilledData={bookingData?.contactInfo}
-      />
     </>
   )
 }
