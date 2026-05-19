@@ -33,7 +33,7 @@ export function Footer({ transparent = false }: FooterProps) {
                 className={`w-12 h-12 sm:w-16 sm:h-16 object-contain ${transparent ? "drop-shadow-lg" : ""}`}
               />
             </div>
-            <h3 className={`text-lg font-bold mb-3 text-emerald-400 ${headingClasses}`}>AVES Colombia</h3>
+            <h3 className={`text-lg font-bold mb-3 text-emerald-400 ${headingClasses}`}>AVES Tours</h3>
             <p className={`mb-6 text-sm sm:text-base leading-relaxed max-w-sm mx-auto ${textClasses}`}>
               Premium birding tours in Colombia, committed to conservation and sustainable tourism.
             </p>
@@ -54,46 +54,41 @@ export function Footer({ transparent = false }: FooterProps) {
 
             {/* Social Media */}
             <div className="flex justify-center space-x-4">
+              {/* TODO: Update with real social media URLs */}
               <a
-                href="https://facebook.com/avescolombia"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#"
                 className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
                   transparent
                     ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
                     : "bg-gray-800/60 backdrop-blur-sm shadow-lg"
                 }`}
-                aria-label="Follow AVES Colombia on Facebook"
+                aria-label="Follow AVES Tours on Facebook"
               >
                 <span className={`text-sm font-bold ${transparent ? "text-white drop-shadow-lg" : "text-white"}`}>
                   f
                 </span>
               </a>
               <a
-                href="https://instagram.com/avescolombia"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#"
                 className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
                   transparent
                     ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
                     : "bg-gray-800/60 backdrop-blur-sm shadow-lg"
                 }`}
-                aria-label="Follow AVES Colombia on Instagram"
+                aria-label="Follow AVES Tours on Instagram"
               >
                 <span className={`text-sm font-bold ${transparent ? "text-white drop-shadow-lg" : "text-white"}`}>
                   ig
                 </span>
               </a>
               <a
-                href="https://twitter.com/avescolombia"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#"
                 className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
                   transparent
                     ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
                     : "bg-gray-800/60 backdrop-blur-sm shadow-lg"
                 }`}
-                aria-label="Follow AVES Colombia on Twitter"
+                aria-label="Follow AVES Tours on Twitter"
               >
                 <span className={`text-sm font-bold ${transparent ? "text-white drop-shadow-lg" : "text-white"}`}>
                   tw
@@ -223,7 +218,7 @@ export function Footer({ transparent = false }: FooterProps) {
         {/* Bottom Section */}
         <div className="border-t border-gray-700/50 mt-8 pt-8 text-center">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <p className={`text-sm ${textClasses}`}>© 2024 AVES Colombia. All rights reserved.</p>
+            <p className={`text-sm ${textClasses}`}>© 2026 AVES Tours. All rights reserved.</p>
             <div className="flex flex-wrap justify-center sm:justify-end space-x-4 text-sm">
               <Link href="/privacy" className={`${linkClasses} justify-center sm:justify-start`}>
                 <span>🔒</span>

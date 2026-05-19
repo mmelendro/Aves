@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { BirdingCalendar } from "@/components/birding-calendar"
 
 export const metadata: Metadata = {
-  title: "Birding Events Calendar | AVES Colombia",
+  title: "Birding Events Calendar | AVES Tours",
   description:
     "Discover major birding festivals, ornithological congresses, and citizen science events across Colombia. Plan your birding adventures with our comprehensive events calendar.",
   keywords: [

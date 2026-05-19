@@ -5,8 +5,8 @@ import { cookies } from "next/headers"
 import AccountSettingsClient from "./AccountSettingsClient"
 
 export const metadata: Metadata = {
-  title: "Account Settings - AVES Colombia",
-  description: "Manage your profile, preferences, and booking information for AVES Colombia birding tours.",
+  title: "Account Settings - AVES Tours",
+  description: "Manage your profile, preferences, and booking information for AVES Tours birding tours.",
 }
 
 export default async function AccountSettingsPage() {
@@ -29,7 +29,7 @@ export default async function AccountSettingsPage() {
         <div className="bg-white shadow-lg rounded-lg">
           <div className="px-6 py-4 border-b border-gray-200">
             <h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
-            <p className="text-gray-600 mt-1">Manage your profile and preferences for AVES Colombia tours</p>
+            <p className="text-gray-600 mt-1">Manage your profile and preferences for AVES Tours</p>
           </div>
 
           <AccountSettingsClient

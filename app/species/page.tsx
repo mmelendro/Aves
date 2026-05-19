@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer"
 import { BirdSpeciesExplorer } from "@/components/bird-species-explorer"
 
 export const metadata: Metadata = {
-  title: "Discover Colombian Bird Species | Interactive Species Explorer | AVES Colombia",
+  title: "Discover Colombian Bird Species | Interactive Species Explorer | AVES Tours",
   description:
     "Explore Colombia's incredible bird diversity with our interactive species explorer. Listen to bird songs, learn about habitats, and create your personalized birding itinerary with expert recommendations.",
   keywords: [

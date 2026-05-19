@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import ResourcesPageClient from "./ResourcesPageClient"
 
 export const metadata: Metadata = {
-  title: "Expert Resources Hub | AVES Colombia",
+  title: "Expert Resources Hub | AVES Tours",
   description:
     "Your comprehensive birding resource center. Expert podcasts, official guides, preparation tips, and conservation insights for your Colombian birding adventure.",
   keywords: [

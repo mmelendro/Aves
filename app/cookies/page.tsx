@@ -277,7 +277,7 @@ export default function CookiesPage() {
                 </div>
                 <div className="space-y-4 text-gray-600 leading-relaxed">
                   <p>
-                    This Cookie Policy explains how AVES Colombia uses cookies and similar technologies to recognize you
+                    This Cookie Policy explains how AVES Tours uses cookies and similar technologies to recognize you
                     when you visit our website. It explains what these technologies are and why we use them, as well as
                     your rights to control our use of them.
                   </p>

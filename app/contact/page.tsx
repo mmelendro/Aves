@@ -87,8 +87,8 @@ export default function ContactPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Our Offices</h3>
                   <div className="space-y-3 text-gray-600">
                     <div>
-                      <div className="font-semibold text-gray-900">Vancouver, Canada</div>
-                      <div className="text-sm">North American Operations</div>
+                      <div className="font-semibold text-gray-900">Sydney, Australia</div>
+                      <div className="text-sm">Operations Hub</div>
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900">Bogotá, Colombia</div>

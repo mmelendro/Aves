@@ -37,7 +37,7 @@ export default function TermsPage() {
                 Our B Corp Service Commitment
               </h2>
               <p className="text-emerald-700 mb-0">
-                As a Certified B Corporation, AVES Colombia operates under the highest standards of social and
+                As a Certified B Corporation, AVES Tours operates under the highest standards of social and
                 environmental performance, accountability, and transparency. These terms reflect our commitment to
                 creating positive impact for all stakeholders - our guests, local communities, wildlife, and the
                 environment.
@@ -48,7 +48,7 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
               <p className="mb-4">
-                By accessing and using AVES Colombia's services, including our website, booking platform, and tour
+                By accessing and using AVES Tours's services, including our website, booking platform, and tour
                 experiences, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree
                 to these terms, please do not use our services.
               </p>
@@ -96,7 +96,7 @@ export default function TermsPage() {
                 <ul className="list-disc pl-6 space-y-2">
                   <li>All bookings must be confirmed with a deposit of 30% of the total tour cost</li>
                   <li>Full payment is required 60 days before tour departure</li>
-                  <li>Bookings are subject to availability and confirmation by AVES Colombia</li>
+                  <li>Bookings are subject to availability and confirmation by AVES Tours</li>
                   <li>We reserve the right to decline bookings that don't align with our values or safety standards</li>
                 </ul>
               </div>
@@ -199,7 +199,7 @@ export default function TermsPage() {
 
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Content and Branding</h3>
               <p>
-                All AVES Colombia content, including tour descriptions, educational materials, and branding, is
+                All AVES Tours content, including tour descriptions, educational materials, and branding, is
                 protected by copyright. Guests may share experiences but may not reproduce our content for commercial
                 purposes.
               </p>

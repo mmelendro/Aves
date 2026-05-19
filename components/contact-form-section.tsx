@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -38,6 +38,8 @@ export function ContactFormSection({
 
   const [selectedTourTypes, setSelectedTourTypes] = useState<string[]>([])
   const [selectedRegions, setSelectedRegions] = useState<string[]>([])
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
   const tourTypes = [
     { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
@@ -73,31 +75,38 @@ export function ContactFormSection({
     setSelectedRegions((prev) => (prev.includes(region) ? prev.filter((r) => r !== region) : [...prev, region]))
   }
 
-  const generateEmailLink = () => {
-    const subject = encodeURIComponent("Colombian Birding Tour Inquiry")
-    const body = encodeURIComponent(`Hello AVES Team,
-
-I'm interested in planning a Colombian birding adventure. Here are my details:
-
-Name: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Phone: ${formData.phone || "Not provided"}
-Travel Date: ${formData.travelDate || "Not specified"}
-Group Size: ${formData.groupSize}
-Desired Duration: ${formData.duration}
-Experience Level: ${formData.experienceLevel}
-
-Interested Tour Types: ${selectedTourTypes.length > 0 ? selectedTourTypes.join(", ") : "Not specified"}
-Preferred Biogeographic Regions: ${selectedRegions.length > 0 ? selectedRegions.join(", ") : "Not specified"}
-
-Special Interests/Requests: ${formData.specialRequests || "None specified"}
-
-I look forward to hearing from you within 24 hours as mentioned on your website.
-
-Best regards,
-${formData.firstName} ${formData.lastName}`)
-
-    return `mailto:info@aves.bio?subject=${subject}&body=${body}`
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          travelDate: formData.travelDate,
+          groupSize: formData.groupSize,
+          duration: formData.duration,
+          experienceLevel: formData.experienceLevel,
+          tourTypes: selectedTourTypes,
+          regions: selectedRegions,
+          message: formData.specialRequests,
+        }),
+      })
+      if (res.ok) {
+        setSubmitStatus("success")
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch {
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const faqItems = [
@@ -119,7 +128,7 @@ ${formData.firstName} ${formData.lastName}`)
     {
       question: "What makes AVES different from other tour operators?",
       answer:
-        "We're B Corp certified, operate 100% carbon-neutral tours, maintain small group sizes (max 4 guests), and provide access to private reserves unavailable to other operators. Our guides are certified ornithologists, not just general nature guides.",
+        "We're pursuing B Corp certification, operate 100% carbon-neutral tours, maintain small group sizes (max 4 guests), and provide access to private reserves unavailable to other operators. Our guides are certified ornithologists, not just general nature guides.",
     },
   ]
 
@@ -146,7 +155,7 @@ ${formData.firstName} ${formData.lastName}`)
                     The more details you provide, the better we can customize your Colombian birding experience.
                   </p>
 
-                  <form className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
                     {/* Personal Information */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
@@ -338,17 +347,33 @@ ${formData.firstName} ${formData.lastName}`)
 
                     {/* Submit Button */}
                     <div className="pt-4">
-                      <a href={generateEmailLink()}>
-                        <Button size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
-                          <Mail className="mr-2 w-5 h-5" />
-                          Send My Inquiry
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                      </a>
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                        disabled={isSubmitting}
+                      >
+                        <Mail className="mr-2 w-5 h-5" />
+                        {isSubmitting ? "Sending..." : "Send My Inquiry"}
+                        {!isSubmitting && <ArrowRight className="ml-2 w-4 h-4" />}
+                      </Button>
 
-                      <p className="text-sm text-gray-500 text-center mt-4">
-                        We'll get back to you with personalized recommendations
-                      </p>
+                      {submitStatus === "success" && (
+                        <p className="text-sm text-emerald-600 text-center mt-4 font-medium">
+                          Thank you — we'll be in touch within 24 hours.
+                        </p>
+                      )}
+                      {submitStatus === "error" && (
+                        <p className="text-sm text-red-600 text-center mt-4">
+                          Something went wrong. Please email us directly at{" "}
+                          <a href="mailto:info@aves.bio" className="underline">info@aves.bio</a>
+                        </p>
+                      )}
+                      {submitStatus === "idle" && (
+                        <p className="text-sm text-gray-500 text-center mt-4">
+                          We'll get back to you with personalized recommendations
+                        </p>
+                      )}
 
                       {/* Google Calendar Button - Fixed without empty box */}
                       <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200">
@@ -391,7 +416,7 @@ ${formData.firstName} ${formData.lastName}`)
                     <div className="flex items-start space-x-3">
                       <Award className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-gray-900">B Corp Certified</div>
+                        <div className="font-semibold text-gray-900">Pursuing B Corp Certification</div>
                         <div className="text-sm text-gray-600">
                           100% carbon neutral with verified conservation impact
                         </div>
@@ -429,7 +454,7 @@ ${formData.firstName} ${formData.lastName}`)
                       <MapPin className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Based in</div>
-                        <div className="text-gray-700">Vancouver, Canada and Bogotá, Colombia</div>
+                        <div className="text-gray-700">Sydney, Australia and Bogotá, Colombia</div>
                         <div className="text-sm text-gray-600">Operating in Colombia</div>
                       </div>
                     </div>

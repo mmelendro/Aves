@@ -125,7 +125,7 @@ export default function AVESLandingPage() {
             <div className={`space-y-6 lg:space-y-8 ${isMobile ? "text-center" : "lg:order-1"}`}>
               <div className="space-y-4 lg:space-y-6">
                 <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 animate-pulse inline-flex items-center gap-2">
-                  🌿 B Corp Certified • Carbon Neutral Tours
+                  🌿 Pursuing B Corp Certification • Carbon Neutral Tours
                 </Badge>
 
                 <h1 className={`font-bold text-gray-900 leading-tight ${responsive.textSize.hero}`}>
@@ -412,7 +412,7 @@ export default function AVESLandingPage() {
                   <Leaf className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">B Corp</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">Certified</p>
+                <p className="text-gray-600 text-sm leading-relaxed">Pursuing Certification</p>
                 <Link
                   href="/about/b-corp"
                   className="text-emerald-600 hover:text-emerald-700 text-sm mt-2 inline-block"

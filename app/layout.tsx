@@ -10,8 +10,8 @@ import { AuthProvider } from "@/hooks/use-auth-enhanced"
 
 export const metadata: Metadata = {
   title: {
-    default: "AVES Colombia | Authentic Bird Watching & Eco-Tourism Experiences",
-    template: "%s | AVES Colombia",
+    default: "AVES Tours | Authentic Bird Watching & Eco-Tourism Experiences",
+    template: "%s | AVES Tours",
   },
   description:
     "Discover Colombia's incredible biodiversity with AVES. Expert-guided bird watching tours across the Caribbean Coast, Andes, and Amazon. Sustainable eco-tourism supporting local communities and conservation.",
@@ -30,30 +30,30 @@ export const metadata: Metadata = {
     "hummingbirds Colombia",
     "endemic species",
   ],
-  authors: [{ name: "AVES Colombia" }],
-  creator: "AVES Colombia",
-  publisher: "AVES Colombia",
+  authors: [{ name: "AVES Tours" }],
+  creator: "AVES Tours",
+  publisher: "AVES Tours",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://aves-colombia.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "AVES Colombia | Authentic Bird Watching & Eco-Tourism",
+    title: "AVES Tours | Authentic Bird Watching & Eco-Tourism",
     description:
       "Expert-guided bird watching tours across Colombia's diverse ecosystems. Sustainable travel supporting conservation and local communities.",
-    url: "https://aves-colombia.com",
-    siteName: "AVES Colombia",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
+    siteName: "AVES Tours",
     images: [
       {
         url: "/images/aves-logo.png",
         width: 1200,
         height: 630,
-        alt: "AVES Colombia - Bird Watching & Eco-Tourism",
+        alt: "AVES Tours - Bird Watching & Eco-Tourism",
       },
     ],
     locale: "en_US",
@@ -61,12 +61,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AVES Colombia | Authentic Bird Watching & Eco-Tourism",
+    title: "AVES Tours | Authentic Bird Watching & Eco-Tourism",
     description:
       "Expert-guided bird watching tours across Colombia's diverse ecosystems. Sustainable travel supporting conservation and local communities.",
     images: ["/images/aves-logo.png"],
-    creator: "@AVESColombia",
   },
+  // TODO: Add real Google Search Console verification code
   robots: {
     index: true,
     follow: true,
@@ -77,10 +77,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
   },
     generator: 'v0.dev'
 }
@@ -107,11 +103,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
-              name: "AVES Colombia",
+              name: "AVES Tours",
               description:
                 "Expert-guided bird watching and eco-tourism experiences across Colombia's diverse ecosystems",
-              url: "https://aves-colombia.com",
-              logo: "https://aves-colombia.com/images/aves-logo.png",
+              url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
+              logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/aves-logo.png`,
               contactPoint: {
                 "@type": "ContactPoint",
                 telephone: "+57-XXX-XXX-XXXX",
@@ -123,11 +119,7 @@ export default function RootLayout({
                 addressCountry: "CO",
                 addressRegion: "Colombia",
               },
-              sameAs: [
-                "https://facebook.com/AVESColombia",
-                "https://instagram.com/AVESColombia",
-                "https://twitter.com/AVESColombia",
-              ],
+              sameAs: [],
               offers: {
                 "@type": "Offer",
                 category: "Eco-Tourism",
