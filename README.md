@@ -1,5 +1,7 @@
 # AVES Colombia - Enhanced Interactive Birding Explorer
 
+For the current pnpm setup and branch-based preview/release process, follow [CONTRIBUTING.md](CONTRIBUTING.md). It supersedes the older setup and deployment examples below.
+
 *Automatically synced with your [v0.dev](https://v0.dev) deployments*
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/mmelendro-9273s-projects/v0-company-landing-page)
