@@ -531,7 +531,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
 
-      {/* Enhanced Mobile Navigation Slide-out Menu with 50% Transparency */}
+      {/* Fade within the viewport so the closed menu cannot widen the page. */}
       <div
         ref={mobileMenuRef}
         className={cn(
@@ -540,7 +540,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           "w-[75vw]",
           // 50% transparency effect with enhanced backdrop blur for readability
           "bg-white/50 backdrop-blur-xl border-l border-white/30 shadow-2xl",
-          mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none",
         )}
         id="mobile-navigation"
         role="navigation"

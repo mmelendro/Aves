@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/", "/_next/"],
     },
-    sitemap: "https://aves-colombia.com/sitemap.xml",
+    sitemap: "https://aves.bio/sitemap.xml",
   }
 }

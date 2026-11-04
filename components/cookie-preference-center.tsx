@@ -150,11 +150,11 @@ export function CookiePreferenceCenter() {
           {/* B Corp Commitment */}
           <div className="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-lg">
             <div className="flex items-center mb-2">
-              <span className="mr-2 text-sm font-bold bg-emerald-600 text-white px-2 py-1 rounded">B</span>
-              <h3 className="font-semibold text-emerald-800">Our B Corp Cookie Commitment</h3>
+              <Shield className="mr-2 h-5 w-5 text-emerald-700" aria-hidden="true" />
+              <h3 className="font-semibold text-emerald-800">Our Privacy Commitment</h3>
             </div>
             <p className="text-emerald-700 text-sm">
-              As a Certified B Corporation, we believe in transparency and user control. You have complete control over
+              We believe in transparency and user control. You have complete control over
               your cookie preferences, and we'll respect your choices.
             </p>
           </div>

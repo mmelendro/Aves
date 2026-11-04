@@ -143,7 +143,7 @@ export function MobileNavigationOverlay({ currentPage }: MobileNavigationOverlay
           "md:hidden fixed top-0 right-0 h-full z-[95] transition-all duration-500 ease-out",
           "w-[75vw] max-w-sm",
           "bg-white/50 backdrop-blur-xl border-l border-white/30 shadow-2xl",
-          isMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible",
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none",
         )}
         role="navigation"
         aria-label="Mobile navigation menu"

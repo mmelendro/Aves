@@ -570,7 +570,7 @@ function CaribbeanBirdCarousel({
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <Link href="/checkout?region=caribbean&source=carousel-info">
+                      <Link href="/shopping?region=Caribbean&from=carousel-info">
                         <Button className="bg-orange-600/90 hover:bg-orange-700/90 text-xs w-full h-9 shadow-lg backdrop-blur-sm border border-orange-500/40">
                           <MapPin className="w-3 h-3 mr-1" />
                           Book Caribbean Tour

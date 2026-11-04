@@ -48,6 +48,18 @@ export const CONTACT_TOUR_TYPE_OPTIONS = [
   "Not sure yet",
 ] as const
 
+// Accept stable tour IDs as well as labels used by older links and recommendations.
+export function resolveTourTypePreset(value: string | null | undefined): ContactTourTypeOption | undefined {
+  const normalized = value?.trim().toLowerCase()
+  if (!normalized) return undefined
+
+  return CONTACT_TOUR_TYPE_OPTIONS.find((option, index) => {
+    const label = (index < TOUR_TYPE_OPTIONS.length ? option.slice(option.indexOf(" ") + 1) : option).toLowerCase()
+    const tourId = index < TOUR_TYPE_OPTIONS.length ? label.replace(/ tours$/, "") : undefined
+    return normalized === option.toLowerCase() || normalized === label || normalized === tourId
+  })
+}
+
 export const EXPERIENCE_LEVELS = [
   "Beginner birder",
   "Intermediate birder",

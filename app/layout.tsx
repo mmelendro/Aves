@@ -110,7 +110,7 @@ export default function RootLayout({
               logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/aves-logo.png`,
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+57-XXX-XXX-XXXX",
+                email: "info@aves.bio",
                 contactType: "customer service",
                 availableLanguage: ["English", "Spanish"],
               },

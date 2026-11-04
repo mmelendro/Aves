@@ -33,7 +33,7 @@ import {
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
-import { LOCATION_OPTIONS, CONTACT_TOUR_TYPE_OPTIONS, EXPERIENCE_LEVELS } from "@/lib/form-options"
+import { LOCATION_OPTIONS, CONTACT_TOUR_TYPE_OPTIONS, EXPERIENCE_LEVELS, resolveTourTypePreset } from "@/lib/form-options"
 import { useSearchParams } from "next/navigation"
 import { EmbeddedTourCalendar } from "@/components/embedded-tour-calendar"
 import { AuthProvider, useAuth } from "@/hooks/use-auth"
@@ -439,7 +439,7 @@ const TourCard = ({
                   Map
                 </Link>
                 <span className="text-gray-300">|</span>
-                <Link href="/endemic-birds" className="text-blue-600 hover:underline flex items-center gap-1">
+                <Link href="/species" className="text-blue-600 hover:underline flex items-center gap-1">
                   <Bird className="w-3 h-3" />
                   Species
                 </Link>
@@ -774,7 +774,9 @@ function ShoppingPageContent() {
   const searchParams = useSearchParams()
   const { user, loading: authLoading, signOut } = useAuth()
   const preselectedTourType = searchParams.get("preset") || searchParams.get("tour")
-  const preselectedRegion = searchParams.get("region") || searchParams.get("bioregion")
+  const preselectedRegion =
+    searchParams.get("region") || searchParams.get("bioregion") ||
+    (preselectedTourType === "sierra-nevada" ? "SNSM" : null)
   const fromPage = searchParams.get("from")
 
   // State management
@@ -805,10 +807,8 @@ function ShoppingPageContent() {
     // Only run once on mount to prevent infinite loops
     if (tourSelections.length > 0) return
 
-    const initialTourType =
-      preselectedTourType && CONTACT_TOUR_TYPE_OPTIONS.includes(preselectedTourType as any)
-        ? preselectedTourType
-        : "🍃 Adventure Tours"
+    const resolvedTourType = resolveTourTypePreset(preselectedTourType)
+    const initialTourType = resolvedTourType || "🍃 Adventure Tours"
 
     const bioregionParam = preselectedRegion || searchParams.get("bioregion")
     let initialRegion = "⛰️ Western Andes"
@@ -835,10 +835,10 @@ function ShoppingPageContent() {
 
     setTourSelections([initialTour])
 
-    if (preselectedTourType || bioregionParam) {
+    if (resolvedTourType || bioregionParam) {
       setPrefilledInfo({
-        tourType: preselectedTourType || undefined,
-        region: bioregionParam || undefined,
+        tourType: resolvedTourType,
+        region: bioregionParam ? initialRegion : undefined,
         fromPage: fromPage || undefined,
       })
       setShowPrefilledNotification(true)
@@ -1077,7 +1077,7 @@ I look forward to hearing from you within 24 hours as mentioned on your website.
 Best regards,
 ${contactInfo.firstName} ${contactInfo.lastName}`)
 
-    return `mailto:info@aves.com?subject=${subject}&body=${body}`
+    return `mailto:info@aves.bio?subject=${subject}&body=${body}`
   }, [tourSelections, contactInfo, questions, costBreakdown, tripDuration, restDayOptions, getHighestTourPrice])
 
   const handleAccountCreated = useCallback(
