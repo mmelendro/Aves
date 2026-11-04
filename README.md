@@ -29,7 +29,9 @@ TypeScript checks remain enabled during builds. Commit `pnpm-lock.yaml` with dep
 
 The public preview passed the production build with normal type validation, 36 isolated contact API tests, and a dependency audit with zero known findings. Homepage, navigation and carousel styling were compared against the Colombian source. Browser review covered desktop, mobile and tablet layouts, mobile navigation, region/tour handoff, and waitlist consent/error handling. The 22-route HTTP sample returned all expected statuses. Full accessibility certification and measured performance scoring were not performed.
 
-The source homepage preserves all 126 original class attributes; the carousel preserves all 115. The original CSS and Tailwind configuration are retained. Australian photography attribution and licence links are available at `/credits`.
+The source homepage preserves all 126 original class attributes. The carousel retains the original layout and play, volume and slideshow controls. The original CSS and Tailwind configuration are retained. Australian photography and field-recording attribution and licence links are available at `/credits`.
+
+The carousel includes original MP3 field recordings for the Superb Fairywren, Rainbow Lorikeet and Sulphur-crested Cockatoo. Each recording starts only after a visitor presses play; playing or buffering holds the slideshow, and changing birds stops the previous recording. Recording sources, sound-specific licences and locations are documented in `content/audio-credits.json`. These independent wildlife recordings may include ambient sounds and are not recordings of AVES tours.
 
 ## Email delivery
 

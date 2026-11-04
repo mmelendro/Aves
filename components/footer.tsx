@@ -233,7 +233,7 @@ export function Footer({ transparent = false }: FooterProps) {
                 <span>Cookie Policy</span>
               </Link>
               <Link href="/credits" className={`${linkClasses} justify-center sm:justify-start`}>
-                <span>📷</span><span>Photography</span>
+                <span>📷</span><span>Photo & Sound Credits</span>
               </Link>
             </div>
           </div>
