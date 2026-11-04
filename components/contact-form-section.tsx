@@ -1,0 +1,90 @@
+"use client"
+
+import { useEffect, useId, useRef, useState } from "react"
+import Link from "next/link"
+import { ArrowRight, Award, CheckCircle, Globe, Mail, MapPin, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent } from "@/components/ui/card"
+
+type Intent = "inquiry" | "waitlist"
+type Props = { showTitle?: boolean; showFAQ?: boolean; variant?: "homepage" | "contact-page"; className?: string }
+
+export function ContactFormSection({ showTitle = true, showFAQ = false, variant = "homepage", className = "" }: Props) {
+  const [intent, setIntent] = useState<Intent>("inquiry")
+  const [region, setRegion] = useState("")
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+  const [feedback, setFeedback] = useState("")
+  const [tourStyle, setTourStyle] = useState("")
+  const Title = variant === "contact-page" ? "h1" : "h2"
+  const inFlight = useRef(false)
+  const prefix = useId()
+  const id = (name: string) => `${prefix}-${name}`
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get("intent") === "waitlist") setIntent("waitlist")
+    const regions: Record<string, string> = { queensland: "Queensland", "new-south-wales": "New South Wales", tasmania: "Tasmania" }
+    const requested = params.get("region")
+    if (requested && Object.hasOwn(regions, requested)) setRegion(regions[requested])
+    const tour = params.get("tour")
+    const tourNames: Record<string, string> = { adventure: "Adventure Tours", vision: "Vision Tours", elevate: "Elevate Tours", souls: "Souls Tours" }
+    if (tour && Object.hasOwn(tourNames, tour)) setTourStyle(tourNames[tour])
+  }, [])
+
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (inFlight.current) return
+    const form = event.currentTarget
+    const values = new FormData(form)
+    inFlight.current = true
+    setStatus("sending")
+    setFeedback("")
+    try {
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+        intent, name: values.get("name"), email: values.get("email"), region,
+        travelWhen: values.get("travelWhen") || "", partySize: values.get("partySize") || "",
+        message: intent === "inquiry" ? `${tourStyle ? `Tour style: ${tourStyle}\n\n` : ""}${values.get("message") || ""}` : "", updates: values.get("updates") === "on", website: values.get("website") || "",
+      }) })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(result.error || "Your request could not be accepted. Please try again or email info@aves.bio.")
+      setStatus("success")
+      setFeedback(intent === "waitlist" ? "Your request to join the Australian launch list has been submitted. Thank you for being part of the beginning." : "Your inquiry has been submitted to AVES. We'll be in touch to discuss your Australian journey.")
+      form.reset()
+      setRegion("")
+    } catch (error) {
+      setStatus("error")
+      setFeedback(error instanceof Error ? error.message : "Please try again or email info@aves.bio.")
+    } finally { inFlight.current = false }
+  }
+
+  return <section id="inquiry" className={`bg-gradient-to-br from-emerald-50 to-blue-50 py-16 lg:py-24 ${className}`}>
+    <div className="container mx-auto px-4">
+      {showTitle && <div className="text-center mb-12"><Title className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Plan Your Australian Birding Adventure</Title><p className="text-lg text-gray-600 max-w-2xl mx-auto">Tell us about your interests, or join the launch list as our Australian journeys take shape.</p></div>}
+      <div className="max-w-7xl mx-auto"><div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="lg:col-span-2"><Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8">
+          <div className="grid grid-cols-2 gap-3 mb-8" aria-label="Choose inquiry or launch list">{(["inquiry", "waitlist"] as const).map(mode => <Button type="button" key={mode} variant={intent === mode ? "default" : "outline"} className={intent === mode ? "bg-emerald-600 hover:bg-emerald-700" : "border-emerald-600 text-emerald-700"} aria-pressed={intent === mode} onClick={() => { setIntent(mode); setStatus("idle"); setFeedback("") }} disabled={status === "sending"}>{mode === "inquiry" ? "Plan My Trip" : "Join the Launch List"}</Button>)}</div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">{intent === "inquiry" ? "Tell Us About Your Birding Interests" : "Be Part of Our Australian Beginning"}</h3>
+          <p className="text-gray-600 mb-8">{intent === "inquiry" ? "Share your ideas so we can discuss a journey around your interests. No fixed plans needed." : "Receive launch news and updates as our Australian journeys develop."}</p>
+          <form className="space-y-6" onSubmit={submit}>
+            {tourStyle && intent === "inquiry" && <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">Your interest: <strong>{tourStyle}</strong></p>}
+            <div className="grid md:grid-cols-2 gap-4"><div><label htmlFor={id("name")} className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label><Input id={id("name")} name="name" autoComplete="name" placeholder="Your name" maxLength={100} required /></div><div><label htmlFor={id("email")} className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label><Input id={id("email")} name="email" type="email" autoComplete="email" placeholder="Your email address" maxLength={254} required /></div></div>
+            {intent === "inquiry" && <><div><label htmlFor={id("region")} className="block text-sm font-medium text-gray-700 mb-2">Preferred Australian Region</label><select id={id("region")} value={region} onChange={event => setRegion(event.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"><option value="">I'm open to inspiration</option><option>Queensland</option><option>New South Wales</option><option>Tasmania</option><option>Several Australian regions</option><option>Somewhere else in Australia</option></select></div><div className="grid md:grid-cols-2 gap-4"><div><label htmlFor={id("travelWhen")} className="block text-sm font-medium text-gray-700 mb-2">Preferred Travel Time</label><Input id={id("travelWhen")} name="travelWhen" placeholder="A month, a season, or flexible" maxLength={100} /></div><div><label htmlFor={id("partySize")} className="block text-sm font-medium text-gray-700 mb-2">Group Size</label><select id={id("partySize")} name="partySize" defaultValue="" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"><option value="">Still deciding</option><option>1 person</option><option>2 people</option><option>3–4 people</option><option>5+ people</option></select></div></div><div><label htmlFor={id("message")} className="block text-sm font-medium text-gray-700 mb-2">Special Interests or Requests</label><Textarea id={id("message")} name="message" rows={4} maxLength={3000} placeholder="Tell us about the birds, places, photography interests or experiences you have in mind…" /></div></>}
+            <div className="hidden" aria-hidden="true"><label htmlFor={id("website")}>Website</label><input id={id("website")} name="website" autoComplete="off" tabIndex={-1} /></div>
+            <label className="flex items-start gap-3 text-sm text-gray-700"><input className="mt-1 accent-emerald-600" type="checkbox" name="updates" required={intent === "waitlist"} key={intent} /><span>{intent === "waitlist" ? "Yes, email me AVES Australia launch news and trip updates. I can unsubscribe at any time." : "Email me Australian launch news and trip updates. (Optional; unsubscribe at any time.)"}</span></label>
+            <p className="text-sm text-gray-500">We'll use your details to respond to this request. Read <Link href="/privacy" className="text-emerald-700 underline">how we care for your information</Link>.</p>
+            <div className="pt-4"><Button type="submit" size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" disabled={status === "sending"}><Mail className="mr-2 w-5 h-5" />{status === "sending" ? "Sending…" : intent === "waitlist" ? "Join the Launch List" : "Send My Inquiry"}<ArrowRight className="ml-2 w-4 h-4" /></Button>
+              {feedback && <p className={`text-sm text-center mt-4 ${status === "error" ? "text-red-700" : "text-emerald-700 font-medium"}`} role={status === "error" ? "alert" : "status"}>{feedback}{status === "error" && <> <a href="mailto:info@aves.bio" className="underline">Email AVES directly</a>.</>}</p>}
+              <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200"><a href="mailto:info@aves.bio" className="text-sm text-emerald-700 hover:underline">Prefer to email us directly? info@aves.bio</a></div>
+            </div>
+          </form>
+        </CardContent></Card></div>
+        <div className="space-y-6"><Card className="border-0 shadow-lg bg-emerald-50"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Your Australian Journey</h4><div className="space-y-4">{[{icon:CheckCircle,title:"Built Around Your Interests",text:"Share what you'd love to see and how you like to travel."},{icon:Users,title:"Your Pace, Your People",text:"Tell us your group size, experience and preferred pace."},{icon:Award,title:"Pursuing B Corp Certification",text:"An ongoing journey. AVES is not yet certified."},{icon:Globe,title:"Several Australian Regions",text:"Queensland, New South Wales, Tasmania — and your ideas."}].map(item => <div className="flex items-start space-x-3" key={item.title}><item.icon className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">{item.title}</div><div className="text-sm text-gray-600">{item.text}</div></div></div>)}</div></CardContent></Card>
+          <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Get in Touch Directly</h4><div className="space-y-4"><div className="flex items-start space-x-3"><Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">Email</div><a href="mailto:info@aves.bio" className="text-emerald-600 hover:text-emerald-700">info@aves.bio</a></div></div><div className="flex items-start space-x-3"><MapPin className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">Australia, a New Chapter</div><p className="text-sm text-gray-600">Inquiries are open. Dates, guides, pricing and availability will be confirmed personally before booking.</p></div></div></div></CardContent></Card>
+          <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Quick Links</h4><div className="space-y-3">{[["/aves-explorer","Explore Australian Regions"],["/species","Discover Australian Birdlife"],["/about","About AVES Australia"]].map(([href,label]) => <Link key={href} href={href} className="flex items-center text-emerald-600 hover:text-emerald-700 text-sm"><ArrowRight className="w-4 h-4 mr-2" />{label}</Link>)}</div></CardContent></Card></div>
+      </div></div>
+      {showFAQ && <div className="mt-16 max-w-4xl mx-auto space-y-6"><h3 className="text-2xl lg:text-3xl font-bold text-gray-900 text-center mb-8">Frequently Asked Questions</h3>{[["Can I book a tour now?","We are welcoming inquiries while our Australian offering takes shape. Arrangements, availability and pricing will be confirmed personally before any booking."],["Do I need birding experience?","Curiosity is a good starting point. Tell us about your interests and experience so we can discuss an appropriate journey."],["What will the launch list send me?","Australian launch news and trip updates. You can leave at any time by emailing info@aves.bio."]].map(([question,answer]) => <Card className="border-0 shadow-lg bg-white" key={question}><CardContent className="p-6"><h4 className="text-lg font-semibold text-gray-900 mb-3">{question}</h4><p className="text-gray-600 leading-relaxed">{answer}</p></CardContent></Card>)}</div>}
+    </div>
+  </section>
+}
