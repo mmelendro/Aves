@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
+import { sitePath } from "@/lib/site-path"
 
 interface BirdData {
   id: string
@@ -307,7 +308,7 @@ export default function HomepageBirdCarousel({
 
             img.onload = handleLoad
             img.onerror = handleError
-            img.src = bird.image
+            img.src = sitePath(bird.image)
           })
         })
 
@@ -687,7 +688,7 @@ export default function HomepageBirdCarousel({
         <audio
           key={currentBird.id}
           ref={audioRef}
-          src={currentBird.audioFile}
+          src={currentBird.audioFile ? sitePath(currentBird.audioFile) : undefined}
           preload="metadata"
           aria-label={`${currentBird.commonName} recording`}
           onLoadedMetadata={() => setAudioReady(true)}
@@ -705,7 +706,7 @@ export default function HomepageBirdCarousel({
           <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50 carousel-image-container">
             {!imageError ? (
               <Image
-                src={currentBird.image || "/placeholder.svg"}
+                src={sitePath(currentBird.image || "/placeholder.svg")}
                 alt={`${currentBird.commonName} - ${currentBird.primaryRegion}`}
                 fill
                 className={cn(
@@ -1225,7 +1226,7 @@ export default function HomepageBirdCarousel({
                   aria-label={`View ${bird.commonName}`}
                 >
                   <Image
-                    src={bird.image || "/placeholder.svg"}
+                    src={sitePath(bird.image || "/placeholder.svg")}
                     alt={bird.commonName}
                     width={64}
                     height={64}

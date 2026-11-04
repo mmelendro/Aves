@@ -5,11 +5,13 @@ import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
+import { canonicalUrl } from "@/lib/site-path"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  metadataBase: new URL(new URL(canonicalUrl()).origin),
+  alternates: { canonical: canonicalUrl() },
   title: { default: "AVES Australia — Follow the birds", template: "%s | AVES Australia" },
   description: "A new Australian chapter for AVES. Explore birding and nature inspiration, plan a custom journey, or join our launch list.",
   robots: { index: process.env.VERCEL_ENV === "production" && Boolean(siteUrl), follow: true },

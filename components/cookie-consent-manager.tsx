@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, createContext, useContext, type ReactNode } from "react"
+import { SITE_BASE_PATH } from "@/lib/site-path"
 
 export interface CookiePreferences {
   essential: boolean
@@ -29,7 +30,7 @@ const DEFAULT_PREFERENCES: CookiePreferences = {
   functional: false,
 }
 
-const STORAGE_KEY = "aves-cookie-preferences"
+const STORAGE_KEY = "aves-australia-cookie-preferences"
 const CONSENT_VERSION = "1.0"
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
@@ -110,7 +111,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
       expires.setFullYear(expires.getFullYear() + 1)
       document.cookie = `${STORAGE_KEY}=${encodeURIComponent(
         JSON.stringify(data),
-      )}; expires=${expires.toUTCString()}; path=/; SameSite=Lax; Secure`
+      )}; expires=${expires.toUTCString()}; path=${SITE_BASE_PATH}; SameSite=Lax; Secure`
     } catch (error) {
       console.warn("Failed to save to cookies:", error)
     }
@@ -209,7 +210,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.removeItem(STORAGE_KEY)
       // Remove cookie
-      document.cookie = `${STORAGE_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+      document.cookie = `${STORAGE_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${SITE_BASE_PATH};`
     } catch (error) {
       console.warn("Failed to reset consent:", error)
     }

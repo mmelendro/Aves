@@ -6,6 +6,7 @@ import { PageShell } from "@/components/page-shell"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { information } from "@/content/information"
+import { canonicalUrl } from "@/lib/site-path"
 
 type Props = { params: Promise<{slug:string[]}> }
 const styles = [
@@ -17,7 +18,7 @@ const styles = [
 
 export async function generateMetadata({params}:Props):Promise<Metadata> {
   const path = (await params).slug.join("/")
-  return {title:information[path]?.title || styles.find(style=>`tours/${style.slug}`===path)?.name || "Australian Trip Styles"}
+  return {title:information[path]?.title || styles.find(style=>`tours/${style.slug}`===path)?.name || "Australian Trip Styles", alternates: { canonical: canonicalUrl(`/${path}`) }}
 }
 
 export default async function InformationPage({params}:Props) {

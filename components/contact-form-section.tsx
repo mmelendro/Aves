@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
+import { sitePath } from "@/lib/site-path"
 
 type Intent = "inquiry" | "waitlist"
 type Props = { showTitle?: boolean; showFAQ?: boolean; variant?: "homepage" | "contact-page"; className?: string }
@@ -50,11 +51,11 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
         message: submittedIntent === "inquiry" ? `${tourStyle ? `Tour style: ${tourStyle}\n\n` : ""}${values.get("message") || ""}` : "", updates: values.get("updates") === "on", website: values.get("website") || "",
       })
       if (submission.current?.body !== body) submission.current = { body, key: crypto.randomUUID() }
-      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": submission.current.key }, body })
+      const response = await fetch(sitePath("/api/contact"), { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": submission.current.key }, body })
       const result = await response.json().catch(() => ({}))
-      if (!response.ok) throw new Error(result?.error || "Your request could not be accepted. Please try again or email info@aves.bio.")
+      if (!response.ok) throw new Error(result?.error || "Your request could not be accepted. Please try again or email mmelendro@gmail.com.")
       if (result?.success !== true || result?.status !== "stored" || result?.intent !== submittedIntent) {
-        throw new Error("Your request could not be confirmed. Please try again or email info@aves.bio.")
+        throw new Error("Your request could not be confirmed. Please try again or email mmelendro@gmail.com.")
       }
       submission.current = null
       setStatus("success")
@@ -63,7 +64,7 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
       setRegion("")
     } catch (error) {
       setStatus("error")
-      setFeedback(error instanceof Error ? error.message : "Please try again or email info@aves.bio.")
+      setFeedback(error instanceof Error ? error.message : "Please try again or email mmelendro@gmail.com.")
     } finally { inFlight.current = false }
   }
 
@@ -83,16 +84,16 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
             <label className="flex items-start gap-3 text-sm text-gray-700"><input className="mt-1 accent-emerald-600" type="checkbox" name="updates" required={intent === "waitlist"} key={intent} /><span>{intent === "waitlist" ? "Yes, email me AVES Australia launch news and trip updates. I can unsubscribe at any time." : "Email me Australian launch news and trip updates. (Optional; unsubscribe at any time.)"}</span></label>
             <p className="text-sm text-gray-500">We'll use your details to respond to this request. Read <Link href="/privacy" className="text-emerald-700 underline">how we care for your information</Link>.</p>
             <div className="pt-4"><Button type="submit" size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" disabled={status === "sending"}><Mail className="mr-2 w-5 h-5" />{status === "sending" ? "Sending…" : intent === "waitlist" ? "Join the Launch List" : "Send My Inquiry"}<ArrowRight className="ml-2 w-4 h-4" /></Button>
-              {feedback && <p className={`text-sm text-center mt-4 ${status === "error" ? "text-red-700" : "text-emerald-700 font-medium"}`} role={status === "error" ? "alert" : "status"}>{feedback}{status === "error" && <> <a href="mailto:info@aves.bio" className="underline">Email AVES directly</a>.</>}</p>}
-              <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200"><a href="mailto:info@aves.bio" className="text-sm text-emerald-700 hover:underline">Prefer to email us directly? info@aves.bio</a></div>
+              {feedback && <p className={`text-sm text-center mt-4 ${status === "error" ? "text-red-700" : "text-emerald-700 font-medium"}`} role={status === "error" ? "alert" : "status"}>{feedback}{status === "error" && <> <a href="mailto:mmelendro@gmail.com" className="underline">Email AVES directly</a>.</>}</p>}
+              <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200"><a href="mailto:mmelendro@gmail.com" className="text-sm text-emerald-700 hover:underline">Prefer to email us directly? mmelendro@gmail.com</a></div>
             </div>
           </form>
         </CardContent></Card></div>
         <div className="space-y-6"><Card className="border-0 shadow-lg bg-emerald-50"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Your Australian Journey</h4><div className="space-y-4">{[{icon:CheckCircle,title:"Built Around Your Interests",text:"Share what you'd love to see and how you like to travel."},{icon:Users,title:"Your Pace, Your People",text:"Tell us your group size, experience and preferred pace."},{icon:Award,title:"Pursuing B Corp Certification",text:"An ongoing journey. AVES is not yet certified."},{icon:Globe,title:"Several Australian Regions",text:"Queensland, New South Wales, Tasmania — and your ideas."}].map(item => <div className="flex items-start space-x-3" key={item.title}><item.icon className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">{item.title}</div><div className="text-sm text-gray-600">{item.text}</div></div></div>)}</div></CardContent></Card>
-          <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Get in Touch Directly</h4><div className="space-y-4"><div className="flex items-start space-x-3"><Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">Email</div><a href="mailto:info@aves.bio" className="text-emerald-600 hover:text-emerald-700">info@aves.bio</a></div></div><div className="flex items-start space-x-3"><MapPin className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">Australia, a New Chapter</div><p className="text-sm text-gray-600">Inquiries are open. Dates, guides, pricing and availability will be confirmed personally before booking.</p></div></div></div></CardContent></Card>
+          <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Get in Touch Directly</h4><div className="space-y-4"><div className="flex items-start space-x-3"><Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">Email</div><a href="mailto:mmelendro@gmail.com" className="text-emerald-600 hover:text-emerald-700">mmelendro@gmail.com</a></div></div><div className="flex items-start space-x-3"><MapPin className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" /><div><div className="font-semibold text-gray-900">Australia, a New Chapter</div><p className="text-sm text-gray-600">Inquiries are open. Dates, guides, pricing and availability will be confirmed personally before booking.</p></div></div></div></CardContent></Card>
           <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><h4 className="text-lg font-bold text-gray-900 mb-4">Quick Links</h4><div className="space-y-3">{[["/aves-explorer","Explore Australian Regions"],["/species","Discover Australian Birdlife"],["/about","About AVES Australia"]].map(([href,label]) => <Link key={href} href={href} className="flex items-center text-emerald-600 hover:text-emerald-700 text-sm"><ArrowRight className="w-4 h-4 mr-2" />{label}</Link>)}</div></CardContent></Card></div>
       </div></div>
-      {showFAQ && <div className="mt-16 max-w-4xl mx-auto space-y-6"><h3 className="text-2xl lg:text-3xl font-bold text-gray-900 text-center mb-8">Frequently Asked Questions</h3>{[["Can I book a tour now?","We are welcoming inquiries while our Australian offering takes shape. Arrangements, availability and pricing will be confirmed personally before any booking."],["Do I need birding experience?","Curiosity is a good starting point. Tell us about your interests and experience so we can discuss an appropriate journey."],["What will the launch list send me?","Australian launch news and trip updates. You can leave at any time by emailing info@aves.bio."]].map(([question,answer]) => <Card className="border-0 shadow-lg bg-white" key={question}><CardContent className="p-6"><h4 className="text-lg font-semibold text-gray-900 mb-3">{question}</h4><p className="text-gray-600 leading-relaxed">{answer}</p></CardContent></Card>)}</div>}
+      {showFAQ && <div className="mt-16 max-w-4xl mx-auto space-y-6"><h3 className="text-2xl lg:text-3xl font-bold text-gray-900 text-center mb-8">Frequently Asked Questions</h3>{[["Can I book a tour now?","We are welcoming inquiries while our Australian offering takes shape. Arrangements, availability and pricing will be confirmed personally before any booking."],["Do I need birding experience?","Curiosity is a good starting point. Tell us about your interests and experience so we can discuss an appropriate journey."],["What will the launch list send me?","Australian launch news and trip updates. You can leave at any time by emailing mmelendro@gmail.com."]].map(([question,answer]) => <Card className="border-0 shadow-lg bg-white" key={question}><CardContent className="p-6"><h4 className="text-lg font-semibold text-gray-900 mb-3">{question}</h4><p className="text-gray-600 leading-relaxed">{answer}</p></CardContent></Card>)}</div>}
     </div>
   </section>
 }

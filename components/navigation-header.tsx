@@ -451,7 +451,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </nav>
 
             {/* Desktop CTA Button */}
-            <div className="hidden md:block transition-all duration-300 ease-out">
+            <div className="hidden md:flex items-center gap-4 transition-all duration-300 ease-out">
+              <Link href="/account" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 whitespace-nowrap">
+                My Trips
+              </Link>
               <Link href="/contact">
                 <Button
                   className={cn(
@@ -687,6 +690,9 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
           {/* Fixed Mobile CTA Button with Enhanced Transparency */}
           <div className="border-t border-gray-300/50 p-6 bg-white/60 backdrop-blur-lg shadow-lg">
+            <Link href="/account" onClick={toggleMobileMenu} className="block mb-3 rounded-xl border border-emerald-200 bg-white/80 py-3 text-center font-medium text-emerald-800 hover:bg-emerald-50">
+              My Trips · Sign In
+            </Link>
             <Link href="/contact" onClick={toggleMobileMenu}>
               <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation">
                 Plan Your Journey

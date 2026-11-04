@@ -1,5 +1,6 @@
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
+import { sitePath } from "@/lib/site-path"
 
 interface FooterProps {
   transparent?: boolean
@@ -43,11 +44,11 @@ export function Footer({ transparent = false }: FooterProps) {
               <div className="flex items-center justify-center space-x-2">
                 <span>📧</span>
                 <a
-                  href="mailto:info@aves.bio"
+                  href="mailto:mmelendro@gmail.com"
                   className={`hover:text-emerald-400 transition-colors duration-300 ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                   aria-label="Email AVES Australia"
                 >
-                  info@aves.bio
+                  mmelendro@gmail.com
                 </a>
               </div>
             </div>
@@ -56,7 +57,7 @@ export function Footer({ transparent = false }: FooterProps) {
             <div className="flex justify-center space-x-4">
               {/* TODO: Update with real social media URLs */}
               <a
-                href="mailto:info@aves.bio"
+                href="mailto:mmelendro@gmail.com"
                 className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
                   transparent
                     ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
@@ -82,7 +83,7 @@ export function Footer({ transparent = false }: FooterProps) {
                 </span>
               </a>
               <a
-                href="/contact?intent=waitlist"
+                href={sitePath("/contact?intent=waitlist")}
                 className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
                   transparent
                     ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"

@@ -1,0 +1,82 @@
+"use client"
+
+import { useCallback, useEffect, useId, useRef, useState } from "react"
+import Link from "next/link"
+import { Bird, Edit3, LogOut, MapPin, Plus, RefreshCw, Send } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { createClient } from "@/lib/supabase/client"
+import { sitePath } from "@/lib/site-path"
+import { AccountRequestError, accountRequest, dateLabel, errorMessage, regionSummary, type Proposal, type TripPlan } from "./account-api"
+import { ProposalCard } from "./proposal-card"
+import { TripPlanEditor } from "./trip-plan-editor"
+
+function QuoteRequestForm({ plan, onSubmitted, onCancel }: { plan: TripPlan; onSubmitted: (plan: TripPlan) => void; onCancel: () => void }) {
+  const prefix = useId()
+  const request = useRef<{ payload: string; key: string } | null>(null)
+  const busyRef = useRef(false)
+  const [busy, setBusy] = useState(false)
+  const [feedback, setFeedback] = useState("")
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (busyRef.current) return
+    const values = new FormData(event.currentTarget)
+    const payload = JSON.stringify({ expectedUpdatedAt: plan.updatedAt, contactName: String(values.get("contactName") || "").trim() })
+    busyRef.current = true; setBusy(true); setFeedback("")
+    try {
+      if (request.current?.payload !== payload) request.current = { payload, key: crypto.randomUUID() }
+      const result = await accountRequest<{ success: boolean; status: string; requestId: string; plan: TripPlan }>(`/api/account/plans/${plan.id}/quote-requests`, { method: "POST", headers: { "Idempotency-Key": request.current.key }, body: payload })
+      if (result.success !== true || result.status !== "stored" || !result.requestId || result.plan?.id !== plan.id || result.plan.status !== "quote_requested") throw new Error("Your quote request could not be confirmed. Please try again.")
+      request.current = null
+      onSubmitted(result.plan)
+    } catch (error) { setFeedback(error instanceof AccountRequestError && error.status === 409 ? `${error.message} Cancel this request, then choose Refresh Saved Plans to see its current status.` : errorMessage(error)) }
+    finally { busyRef.current = false; setBusy(false) }
+  }
+  return <form onSubmit={submit} className="mt-6 border-t border-gray-200 pt-6 space-y-4"><fieldset disabled={busy} className="space-y-4"><div><label htmlFor={`${prefix}-name`} className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label><Input id={`${prefix}-name`} name="contactName" autoComplete="name" maxLength={120} required /></div><p className="text-sm text-gray-600">Send this saved plan to AVES for a personal quote. These details will become a submitted record; to change them later, start another draft. This does not create a booking.</p><div className="flex flex-wrap gap-3"><Button type="submit" className="bg-emerald-600 hover:bg-emerald-700"><Send className="w-4 h-4 mr-2" />{busy ? "Submitting…" : "Submit Quote Request"}</Button><Button type="button" variant="outline" onClick={onCancel}>Cancel</Button></div></fieldset>{feedback && <p className="text-sm text-red-700" role="alert">{feedback}</p>}</form>
+}
+
+export function AccountDashboard({ email }: { email: string }) {
+  const [plans, setPlans] = useState<TripPlan[]>([])
+  const [proposals, setProposals] = useState<Proposal[]>([])
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
+  const [feedback, setFeedback] = useState("")
+  const [editing, setEditing] = useState<TripPlan | "new" | null>(null)
+  const [requesting, setRequesting] = useState<string | null>(null)
+  const [signingOut, setSigningOut] = useState(false)
+  const load = useCallback(async () => {
+    setLoading(true); setError("")
+    try {
+      const [saved, issued] = await Promise.all([accountRequest<{ plans: TripPlan[]; isAdmin?: boolean }>("/api/account/plans"), accountRequest<{ proposals: Proposal[] }>("/api/account/proposals")])
+      if (!Array.isArray(saved.plans) || !Array.isArray(issued.proposals)) throw new Error("Your account information could not be loaded. Please try again.")
+      setPlans(saved.plans); setProposals(issued.proposals.filter(proposal => proposal.status === "sent"))
+      setIsAdmin(saved.isAdmin === true)
+    } catch (error) {
+      setIsAdmin(false)
+      if (error instanceof AccountRequestError && error.status === 401) window.location.assign(sitePath("/account/sign-in"))
+      else setError(errorMessage(error))
+    } finally { setLoading(false) }
+  }, [])
+  useEffect(() => { void load() }, [load])
+  async function signOut() {
+    setSigningOut(true); setError("")
+    try { const { error } = await createClient().auth.signOut({ scope: "local" }); if (error) throw error; window.location.replace(sitePath("/account/sign-in")) }
+    catch (error) { setError(errorMessage(error)); setSigningOut(false) }
+  }
+  function replacePlan(plan: TripPlan) { setPlans(current => [plan, ...current.filter(item => item.id !== plan.id)]) }
+
+  return <div className="space-y-8">
+    <div className="flex flex-wrap items-center justify-between gap-4"><p className="text-gray-600 break-all">Signed in as <span className="font-medium text-gray-900">{email}</span></p><Button variant="outline" onClick={signOut} disabled={signingOut}><LogOut className="w-4 h-4 mr-2" />{signingOut ? "Signing out…" : "Sign Out"}</Button></div>
+    {isAdmin && <Card className="border-0 shadow-lg bg-emerald-50"><CardContent className="p-6 flex flex-wrap items-center justify-between gap-4"><p className="text-emerald-900 font-medium">Your private AVES owner workspace</p><Button asChild className="bg-emerald-600 hover:bg-emerald-700"><Link href="/admin/quotes">Open Quote Inbox</Link></Button></CardContent></Card>}
+    {error && <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><p role="alert" className="text-red-700 mb-4">{error}</p><Button variant="outline" onClick={() => void load()} disabled={loading}>Try Again</Button></CardContent></Card>}
+    {feedback && <p className="text-emerald-700 font-medium" role="status">{feedback}</p>}
+    <div className="flex flex-wrap items-center justify-between gap-4"><h2 className="text-2xl lg:text-3xl font-bold text-gray-900">My Trip Plans</h2><div className="flex flex-wrap gap-3"><Button variant="outline" onClick={() => void load()} disabled={Boolean(editing || requesting) || loading}><RefreshCw className="w-4 h-4 mr-2" />Refresh Saved Plans</Button><Button onClick={() => { setEditing("new"); setFeedback("") }} disabled={Boolean(editing || requesting) || loading} className="bg-emerald-600 hover:bg-emerald-700"><Plus className="w-4 h-4 mr-2" />Start a New Plan</Button></div></div>
+    {editing && <TripPlanEditor key={editing === "new" ? "new" : editing.id} plan={editing === "new" ? undefined : editing} onCancel={() => setEditing(null)} onSaved={plan => { replacePlan(plan); setEditing(null); setFeedback("Your trip draft has been saved. You can keep refining it or request a quote when you're ready.") }} />}
+    {loading ? <p role="status" className="text-gray-600">Loading your saved plans…</p> : plans.length === 0 && !error ? <Card className="border-0 shadow-lg bg-white"><CardContent className="p-8 text-center"><Bird className="w-10 h-10 text-emerald-600 mx-auto mb-4" /><h3 className="text-xl font-bold text-gray-900 mb-3">A Little Curiosity Is a Good Start</h3><p className="text-gray-600 mb-5">Save the birds, places and experiences you'd love to explore. You don't need a finished itinerary.</p><Link href="/aves-explorer" className="text-emerald-700 underline">Explore Australian Regions</Link></CardContent></Card> : <div className="grid lg:grid-cols-2 gap-6">{plans.map(plan => <Card key={plan.id} className="border-0 shadow-lg bg-white"><CardContent className="p-6 lg:p-8"><div className="flex flex-wrap items-center justify-between gap-3 mb-4"><h3 className="text-xl font-bold text-gray-900 break-words">{plan.title}</h3><Badge className={plan.status === "draft" ? "bg-blue-100 text-blue-800 hover:bg-blue-100" : "bg-emerald-100 text-emerald-800 hover:bg-emerald-100"}>{plan.status === "draft" ? "Draft" : "Quote Requested"}</Badge></div><p className="flex items-start gap-2 text-sm text-emerald-700 mb-4"><MapPin className="w-4 h-4 mt-0.5 shrink-0" />{regionSummary(plan.regions)}</p><dl className="grid sm:grid-cols-2 gap-4 text-sm mb-4"><div><dt className="font-semibold text-gray-900">Travel Timing</dt><dd className="text-gray-600">{plan.travelWhen || "Flexible"}</dd></div><div><dt className="font-semibold text-gray-900">Group Size</dt><dd className="text-gray-600">{plan.partySize || "Still deciding"}</dd></div></dl>{plan.message && <p className="text-gray-600 whitespace-pre-wrap break-words mb-5">{plan.message}</p>}<p className="text-xs text-gray-500 mb-5">Updated {dateLabel(plan.updatedAt)}</p>{plan.status === "draft" ? <div className="flex flex-wrap gap-3"><Button variant="outline" onClick={() => { setEditing(plan); setFeedback("") }} disabled={Boolean(editing || requesting)}><Edit3 className="w-4 h-4 mr-2" />Edit Draft</Button><Button onClick={() => { setRequesting(plan.id); setFeedback("") }} disabled={Boolean(editing || requesting)} className="bg-emerald-600 hover:bg-emerald-700">Request a Quote</Button></div> : <p className="text-sm text-gray-600">Your request is saved for AVES to review. This submitted plan is kept unchanged; you can start another draft for different ideas.</p>}{requesting === plan.id && <QuoteRequestForm plan={plan} onCancel={() => setRequesting(null)} onSubmitted={saved => { replacePlan(saved); setRequesting(null); setFeedback("Your quote request has been saved for AVES to review. This is not a confirmed booking.") }} />}</CardContent></Card>)}</div>}
+    <div className="pt-6"><h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">My Proposals</h2>{proposals.length > 0 ? <div className="grid lg:grid-cols-2 gap-6">{proposals.map(proposal => <ProposalCard key={proposal.id} proposal={proposal} />)}</div> : <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6"><p className="text-gray-600">Issued proposals from AVES will appear here after you request a quote.</p></CardContent></Card>}</div>
+    <p className="text-sm text-gray-500">Have a question about a saved request or proposal? <a href="mailto:mmelendro@gmail.com" className="text-emerald-700 underline">Contact AVES</a>.</p>
+  </div>
+}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { X, Cookie, Settings } from "lucide-react"
 import { useCookieConsent } from "./cookie-consent-manager"
+import { sitePath } from "@/lib/site-path"
 
 export function CookieBanner() {
   const { hasConsented, acceptAll, rejectAll, setShowPreferenceCenter } = useCookieConsent()
@@ -59,7 +60,7 @@ export function CookieBanner() {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   We remember your privacy preferences in your browser. This Australian version has no analytics
                   or advertising scripts enabled. You can choose your preferences or learn more in our{" "}
-                  <a href="/cookies" className="text-emerald-600 hover:text-emerald-700 underline">
+                  <a href={sitePath("/cookies")} className="text-emerald-600 hover:text-emerald-700 underline">
                     Cookie Policy
                   </a>
                   .

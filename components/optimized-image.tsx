@@ -5,6 +5,7 @@ import type React from "react"
 import Image from "next/image"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import { isSiteHome, sitePath } from "@/lib/site-path"
 
 interface OptimizedImageProps {
   src: string
@@ -63,7 +64,7 @@ export default function OptimizedImage({
         src.includes("logo") || src.includes("partners")
           ? `bg-white rounded-lg border border-gray-100 shadow-sm ${
               // Footer logo containers - expanded by factor of 4 for enhanced visibility with centering
-              className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+              className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname))
                 ? "max-w-[80px] w-[80px] h-[80px] sm:max-w-[96px] sm:w-[96px] sm:h-[96px] md:max-w-[112px] md:w-[112px] md:h-[112px] mx-auto flex-shrink-0"
                 : "max-w-[40px] w-[40px] h-[40px] sm:max-w-[44px] sm:w-[44px] sm:h-[44px]"
             }`
@@ -84,7 +85,7 @@ export default function OptimizedImage({
           : "",
         // Footer-specific centering
         src.includes("logo") &&
-          (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/"))
+          (className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname)))
           ? "mx-auto justify-self-center place-self-center"
           : "",
         // Carousel-specific container optimizations for full image visibility
@@ -115,7 +116,7 @@ export default function OptimizedImage({
         }),
         // Footer logo centering optimization
         ...(src.includes("logo") &&
-          (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")) && {
+          (className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname))) && {
             maxWidth: "112px",
             maxHeight: "112px",
             width: "112px",
@@ -127,7 +128,7 @@ export default function OptimizedImage({
           }),
         // Footer logo size optimization - expanded by factor of 4
         ...(src.includes("logo") &&
-          (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")) && {
+          (className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname))) && {
             maxWidth: "112px",
             maxHeight: "112px",
             width: "112px",
@@ -157,14 +158,14 @@ export default function OptimizedImage({
       }}
     >
       <Image
-        src={
+        src={sitePath(
           currentSrc ||
           (src.includes("Jaider Carrillo")
             ? "/images/manakin-1.jpg"
             : src.includes("jose-luis-ropero")
               ? "/images/manakin-2.jpg"
               : "/placeholder-user.jpg")
-        }
+        )}
         alt={alt}
         width={width}
         height={height}
@@ -182,14 +183,14 @@ export default function OptimizedImage({
           maxHeight: "100%",
           // Enhanced responsive logo handling with footer optimization
           minWidth: src.includes("logo")
-            ? className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+            ? className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname))
               ? "80px" // Footer logos - expanded by factor of 4
               : width >= 50
                 ? "28px"
                 : "24px" // Header logos - standard size
             : "24px",
           minHeight: src.includes("logo")
-            ? className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+            ? className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname))
               ? "80px" // Footer logos - expanded by factor of 4
               : height >= 50
                 ? "28px"
@@ -247,7 +248,7 @@ export default function OptimizedImage({
           // Context-aware logo sizing with footer optimization
           src.includes("logo") &&
             // Footer logos - expanded by factor of 4 for enhanced visibility
-            (className?.includes("footer") || (typeof window !== "undefined" && window.location.pathname === "/")
+            (className?.includes("footer") || (typeof window !== "undefined" && isSiteHome(window.location.pathname))
               ? "sm:max-w-[80px] sm:max-h-[80px] md:max-w-[96px] md:max-h-[96px] lg:max-w-[112px] lg:max-h-[112px]"
               : // Header logos - standard size with strict maximum limits
                 width >= 50 || height >= 50
@@ -298,7 +299,7 @@ export default function OptimizedImage({
           (src.includes("logo")
             ? () => {
                 if (typeof window !== "undefined") {
-                  window.location.href = "/#top"
+                  window.location.href = sitePath("/#top")
                 }
               }
             : undefined)

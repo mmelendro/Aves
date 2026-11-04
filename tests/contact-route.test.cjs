@@ -93,7 +93,7 @@ test("inquiry saves before sending one owner notification and records provider a
   assert.deepEqual(h.options, [{ idempotencyKey: `contact/${receipt.request_id}` }])
   assert.deepEqual(h.notifications, [[receipt.request_id, "accepted", "test-acceptance-id", null]])
   assert.equal(h.calls.length, 1)
-  assert.equal(h.calls[0].to, "info@aves.bio")
+  assert.equal(h.calls[0].to, "mmelendro@gmail.com")
   assert.equal(h.calls[0].from, "AVES Australia <noreply@aves.bio>")
   assert.equal(h.calls[0].replyTo, "visitor@example.com")
   assert.equal(h.calls[0].subject, "[AVES Australia] Custom tour inquiry from Test Birder")

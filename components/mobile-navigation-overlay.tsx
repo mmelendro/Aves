@@ -410,6 +410,9 @@ export function MobileNavigationOverlay({ currentPage }: MobileNavigationOverlay
 
           {/* Footer CTA Button */}
           <div className="flex-shrink-0 p-6 border-t border-white/30 bg-white/60 backdrop-blur-lg">
+            <Link href="/account" onClick={handleLinkClick} className="block mb-3 rounded-xl border border-emerald-200 bg-white/80 py-3 text-center font-medium text-emerald-800 hover:bg-emerald-50">
+              My Trips · Sign In
+            </Link>
             <Link href="/contact" onClick={handleLinkClick}>
               <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Plan Your Journey

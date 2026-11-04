@@ -100,12 +100,12 @@ export async function POST(req: NextRequest) {
       return reply({ error: "This request has changed. Please refresh the form and submit your latest details." }, 409)
     }
     if (error instanceof ContactStoreError && error.status === 429) {
-      return NextResponse.json({ error: "Please wait 15 minutes before sending another request, or email info@aves.bio." }, {
+      return NextResponse.json({ error: "Please wait 15 minutes before sending another request, or email mmelendro@gmail.com." }, {
         status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "900" },
       })
     }
     console.error("Australia contact storage did not confirm acceptance")
-    return reply({ error: "We couldn't confirm that your request was saved. Please try again or email info@aves.bio." }, 503)
+    return reply({ error: "We couldn't confirm that your request was saved. Please try again or email mmelendro@gmail.com." }, 503)
   }
 
   const storedResponse = () => reply({ success: true, status: "stored", intent: payload.intent }, 200)
@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
     }
   }
   const apiKey = process.env.RESEND_API_KEY?.trim()
-  const contactEmail = process.env.CONTACT_EMAIL?.trim() || "info@aves.bio"
+  const contactEmail = process.env.CONTACT_EMAIL?.trim() || "mmelendro@gmail.com"
   const contactFrom = process.env.CONTACT_FROM?.trim() || "AVES Australia <noreply@aves.bio>"
   if (!apiKey || !emailAddress.safeParse(contactEmail).success || !isValidSender(contactFrom)) {
     await recordOutcome("failed", null, "email_configuration_missing")
