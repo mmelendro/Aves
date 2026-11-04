@@ -26,6 +26,7 @@
     "react": "19.0.9",
     "react-dom": "19.0.9",
     "resend": "6.12.3",
+    "server-only": "0.0.1",
     "tailwind-merge": "2.5.5",
     "zod": "4.6.6"
   },

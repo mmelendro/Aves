@@ -1,8 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 import { z } from "zod"
+import { createHash } from "node:crypto"
+import { ContactStoreError, saveContactRequest, recordContactNotification } from "@/lib/contact-store"
 
 const MAX_REQUEST_BYTES = 32_768
+const CONSENT_VERSION = "au-launch-updates-2026-11-05"
 const singleLine = (maxLength: number) =>
   z.string().trim().max(maxLength).regex(/^[^\u0000-\u001f\u007f]*$/, "Must be a single line of text")
 const emailAddress = singleLine(254).email()
@@ -75,16 +78,58 @@ export async function POST(req: NextRequest) {
     return reply({ error: "Please check your request details.", fields: request.error.flatten().fieldErrors }, 400)
   }
 
+  const idempotencyKey = z.uuid().safeParse(req.headers.get("idempotency-key"))
+  if (!idempotencyKey.success) {
+    return reply({ error: "Please refresh the form and try again." }, 400)
+  }
+
+  const payload = {
+    intent: request.data.intent, name: request.data.name, email: request.data.email.toLowerCase(),
+    region: request.data.region, travelWhen: request.data.travelWhen,
+    partySize: String(request.data.partySize ?? ""), message: request.data.message,
+    updates: request.data.updates, consentVersion: CONSENT_VERSION,
+  }
+  let receipt
+  try {
+    receipt = await saveContactRequest({
+      ...payload, idempotencyKey: idempotencyKey.data,
+      payloadHash: createHash("sha256").update(JSON.stringify(payload)).digest("hex"),
+    })
+  } catch (error) {
+    if (error instanceof ContactStoreError && error.status === 409) {
+      return reply({ error: "This request has changed. Please refresh the form and submit your latest details." }, 409)
+    }
+    if (error instanceof ContactStoreError && error.status === 429) {
+      return NextResponse.json({ error: "Please wait 15 minutes before sending another request, or email info@aves.bio." }, {
+        status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "900" },
+      })
+    }
+    console.error("Australia contact storage did not confirm acceptance")
+    return reply({ error: "We couldn't confirm that your request was saved. Please try again or email info@aves.bio." }, 503)
+  }
+
+  const storedResponse = () => reply({ success: true, status: "stored", intent: payload.intent }, 200)
+  // An unchanged retry returns the original receipt without reapplying consent
+  // or sending another notification. Saving is the success boundary.
+  if (!receipt.created) return storedResponse()
+
+  const recordOutcome = async (status: "accepted" | "failed", providerId: string | null, errorCode: string | null) => {
+    try {
+      await recordContactNotification(receipt.request_id, status, providerId, errorCode)
+    } catch {
+      console.error("Australia contact notification status could not be recorded")
+    }
+  }
   const apiKey = process.env.RESEND_API_KEY?.trim()
   const contactEmail = process.env.CONTACT_EMAIL?.trim() || "info@aves.bio"
   const contactFrom = process.env.CONTACT_FROM?.trim() || "AVES Australia <noreply@aves.bio>"
   if (!apiKey || !emailAddress.safeParse(contactEmail).success || !isValidSender(contactFrom)) {
-    console.error("Australia contact email configuration is missing or invalid")
-    return reply({ error: "This service is temporarily unavailable. Please email info@aves.bio." }, 503)
+    await recordOutcome("failed", null, "email_configuration_missing")
+    return storedResponse()
   }
 
-  const { intent, name, email, region, travelWhen, partySize, message, updates } = request.data
-  const submittedAt = new Date().toISOString()
+  const { intent, name, email, region, travelWhen, partySize, message, updates } = payload
+  const submittedAt = receipt.submitted_at
   const label = intent === "waitlist" ? "Waitlist request" : "Custom tour inquiry"
   const emailBody = `${label} — AVES Australia
 
@@ -98,29 +143,35 @@ Party size: ${partySize || "Not specified"}
 
 Updates consent submitted: ${updates ? "Yes" : "No"}
 Consent timestamp (UTC): ${updates ? submittedAt : "No opt-in submitted"}
+Consent wording version: ${CONSENT_VERSION}
+Request reference: ${receipt.request_id}
 
 Message:
 ${message || "None"}`
 
+  let notificationTimeout: ReturnType<typeof setTimeout> | undefined
   try {
     const resend = new Resend(apiKey)
-    const result = await resend.emails.send({
+    const result = await Promise.race([resend.emails.send({
       from: contactFrom,
       to: contactEmail,
       replyTo: email,
       subject: `[AVES Australia] ${label} from ${name}`,
       text: emailBody,
-    })
+    }, { idempotencyKey: `contact/${receipt.request_id}` }), new Promise<never>((_, reject) => {
+      notificationTimeout = setTimeout(() => reject(new Error("Notification acceptance unconfirmed")), 8_000)
+    })])
     if (result.error || !result.data?.id) {
-      console.error("Australia contact request was not accepted by the email provider")
-      return reply({ error: "Your request could not be accepted. Please try again or email info@aves.bio." }, 502)
+      await recordOutcome("failed", null, "email_provider_rejected")
+    } else {
+      await recordOutcome("accepted", result.data.id, null)
     }
-
-    // This records provider acceptance of the owner's notification, not inbox
-    // delivery or a confirmed booking. No automatic visitor email is sent.
-    return reply({ success: true, status: "accepted", intent }, 200)
   } catch {
-    console.error("Australia contact email request failed")
-    return reply({ error: "Your request could not be accepted. Please try again or email info@aves.bio." }, 502)
+    await recordOutcome("failed", null, "email_provider_unconfirmed")
+  } finally {
+    clearTimeout(notificationTimeout)
   }
+  // The request is durable even if notification delivery is unavailable.
+  // No visitor email, booking, or verified subscription is created here.
+  return storedResponse()
 }

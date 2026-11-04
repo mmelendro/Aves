@@ -19,6 +19,7 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
   const [tourStyle, setTourStyle] = useState("")
   const Title = variant === "contact-page" ? "h1" : "h2"
   const inFlight = useRef(false)
+  const submission = useRef<{ body: string; key: string } | null>(null)
   const prefix = useId()
   const id = (name: string) => `${prefix}-${name}`
 
@@ -38,19 +39,26 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
     if (inFlight.current) return
     const form = event.currentTarget
     const values = new FormData(form)
+    const submittedIntent = intent
     inFlight.current = true
     setStatus("sending")
     setFeedback("")
     try {
-      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
-        intent, name: values.get("name"), email: values.get("email"), region,
+      const body = JSON.stringify({
+        intent: submittedIntent, name: values.get("name"), email: values.get("email"), region,
         travelWhen: values.get("travelWhen") || "", partySize: values.get("partySize") || "",
-        message: intent === "inquiry" ? `${tourStyle ? `Tour style: ${tourStyle}\n\n` : ""}${values.get("message") || ""}` : "", updates: values.get("updates") === "on", website: values.get("website") || "",
-      }) })
+        message: submittedIntent === "inquiry" ? `${tourStyle ? `Tour style: ${tourStyle}\n\n` : ""}${values.get("message") || ""}` : "", updates: values.get("updates") === "on", website: values.get("website") || "",
+      })
+      if (submission.current?.body !== body) submission.current = { body, key: crypto.randomUUID() }
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": submission.current.key }, body })
       const result = await response.json().catch(() => ({}))
-      if (!response.ok) throw new Error(result.error || "Your request could not be accepted. Please try again or email info@aves.bio.")
+      if (!response.ok) throw new Error(result?.error || "Your request could not be accepted. Please try again or email info@aves.bio.")
+      if (result?.success !== true || result?.status !== "stored" || result?.intent !== submittedIntent) {
+        throw new Error("Your request could not be confirmed. Please try again or email info@aves.bio.")
+      }
+      submission.current = null
       setStatus("success")
-      setFeedback(intent === "waitlist" ? "Your request to join the Australian launch list has been submitted. Thank you for being part of the beginning." : "Your inquiry has been submitted to AVES. We'll be in touch to discuss your Australian journey.")
+      setFeedback(submittedIntent === "waitlist" ? "Your Australian launch-list request and email preference have been saved. Thank you for being part of the beginning." : "Your inquiry has been saved for AVES to review. Thank you for sharing your Australian travel interests.")
       form.reset()
       setRegion("")
     } catch (error) {
