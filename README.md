@@ -31,6 +31,8 @@ The public preview passed production builds with normal type validation. The dur
 
 The source homepage preserves all 126 original class attributes. The carousel retains the original layout and play, volume and slideshow controls. The original CSS and Tailwind configuration are retained. Australian photography and field-recording attribution and licence links are available at `/credits`.
 
+The account release passes 150 automated tests, strict type checks and a production build. Real hosted Auth/HTTP verification passed password sessions, own-account isolation, draft create/edit/retry, frozen quote requests, owner inbox access, proposal draft/issue/revision handling and sign-out. Browser checks also verified client sign-in, an issued proposal in the client account, owner-only inbox access and editing/issuing a labelled synthetic proposal. These checks deliberately disabled outbound email; they do not establish signup/recovery or notification delivery. Synthetic test records are tracked separately in the workspace audit manifest.
+
 The carousel includes original MP3 field recordings for the Superb Fairywren, Rainbow Lorikeet and Sulphur-crested Cockatoo. Each recording starts only after a visitor presses play; playing or buffering holds the slideshow, and changing birds stops the previous recording. Recording sources, sound-specific licences and locations are documented in `content/audio-credits.json`. These independent wildlife recordings may include ambient sounds and are not recordings of AVES tours.
 
 ## Request storage and email notifications

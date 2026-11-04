@@ -15,6 +15,6 @@ export function ProposalCard({ proposal, owner = false }: { proposal: Proposal; 
     <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mb-6">{proposal.issuedAt && <span>Issued {dateLabel(proposal.issuedAt)}</span>}{proposal.validUntil && <span>Valid until {dateLabel(proposal.validUntil)}</span>}</div>
     <div className="space-y-6">{[["Your Proposed Journey", proposal.itinerary], ["Inclusions", proposal.inclusions], ["Exclusions", proposal.exclusions]].map(([title, text]) => <div key={title}><h4 className="font-semibold text-gray-900 mb-2">{title}</h4><p className="text-gray-600 whitespace-pre-wrap break-words leading-relaxed">{text || "Not specified"}</p></div>)}</div>
     <p className="mt-6 pt-5 border-t border-gray-200 text-sm text-gray-500">This page does not take payments or confirm a booking. Please discuss any questions or changes with AVES.</p>
-    {owner && <div className="mt-4"><NotificationStatus status={proposal.notificationStatus} /></div>}
+    {owner && <div className="mt-4">{proposal.status === "draft" ? <p className="text-sm text-gray-500">Draft — only you can see this; no email has been sent.</p> : <NotificationStatus status={proposal.notificationStatus} />}</div>}
   </CardContent></Card>
 }
