@@ -1,243 +1,87 @@
+import Image from "next/image"
 import Link from "next/link"
-import OptimizedImage from "@/components/optimized-image"
 import { sitePath } from "@/lib/site-path"
 
 interface FooterProps {
   transparent?: boolean
 }
 
+const exploreLinks = [
+  { href: "/aves-explorer", label: "Regions" },
+  { href: "/tours", label: "Birding Experiences" },
+  { href: "/species", label: "Australian Birdlife" },
+]
+
+const planningLinks = [
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/contact", label: "Plan My Trip" },
+  { href: "/account", label: "My Trips" },
+  { href: "/contact?intent=waitlist", label: "Australian Updates" },
+]
+
+const aboutLinks = [
+  { href: "/about", label: "About AVES" },
+  { href: "/about/b-corp", label: "Our B Corp Journey" },
+  { href: "/conservation", label: "Responsible Birding" },
+]
+
+const legalLinks = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/cookies", label: "Cookies" },
+  { href: "/credits", label: "Photo & Sound Credits" },
+]
+
+const linkClassName = "inline-flex min-h-11 items-center rounded-lg text-sm text-gray-200 transition-colors hover:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+
 export function Footer({ transparent = false }: FooterProps) {
-  const footerClasses = transparent
-    ? "relative bg-gray-900/50 backdrop-blur-lg text-white py-12 sm:py-16 z-20 border-t border-white/20"
-    : "bg-gray-900/95 backdrop-blur-sm text-white py-12 sm:py-16 relative z-10"
-
-  const linkClasses = transparent
-    ? "hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation drop-shadow-md text-shadow-md hover:drop-shadow-lg flex items-center space-x-2"
-    : "hover:text-emerald-400 transition-colors duration-300 cursor-pointer touch-manipulation drop-shadow-sm flex items-center space-x-2"
-
-  const textClasses = transparent ? "text-white drop-shadow-md text-shadow-md" : "text-gray-200 drop-shadow-sm"
-
-  const headingClasses = transparent ? "drop-shadow-lg text-shadow-lg" : "drop-shadow-sm"
-
   return (
-    <footer className={footerClasses}>
-      <div className="container mx-auto px-3 sm:px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6">
-          {/* Logo and Description Column */}
-          <div className="text-center sm:col-span-2 lg:col-span-1">
-            <div className="flex justify-center mb-4">
-              <OptimizedImage
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={64}
-                height={64}
-                className={`w-12 h-12 sm:w-16 sm:h-16 object-contain ${transparent ? "drop-shadow-lg" : ""}`}
-              />
-            </div>
-            <h3 className={`text-lg font-bold mb-3 text-emerald-400 ${headingClasses}`}>AVES Tours</h3>
-            <p className={`mb-6 text-sm sm:text-base leading-relaxed max-w-sm mx-auto ${textClasses}`}>
-              A new Australian chapter for AVES. Birding, nature and custom trip planning.
+    <footer className={`relative z-10 border-t border-white/10 py-12 text-white sm:py-16 ${transparent ? "bg-gray-900/90 backdrop-blur-lg" : "bg-gray-900/95 backdrop-blur-sm"}`}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <Link href="/" aria-label="AVES Australia home" className="mb-4 inline-flex min-h-11 items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900">
+              <Image src={sitePath("/images/aves-logo.png")} alt="" width={56} height={56} className="h-14 w-14 rounded-xl bg-white object-contain p-1" />
+              <span className="text-lg font-semibold text-emerald-300">AVES Australia</span>
+            </Link>
+            <p className="max-w-sm text-sm leading-relaxed text-gray-200">
+              Birding, nature and custom trip planning across Australia.
             </p>
-
-            {/* Contact Info */}
-            <div className={`mb-6 text-sm ${textClasses}`}>
-              <div className="flex items-center justify-center space-x-2">
-                <span>📧</span>
-                <a
-                  href="mailto:mmelendro@gmail.com"
-                  className={`hover:text-emerald-400 transition-colors duration-300 ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
-                  aria-label="Email AVES Australia"
-                >
-                  mmelendro@gmail.com
-                </a>
-              </div>
-            </div>
-
-            {/* Social Media */}
-            <div className="flex justify-center space-x-4">
-              {/* TODO: Update with real social media URLs */}
-              <a
-                href="mailto:mmelendro@gmail.com"
-                className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
-                  transparent
-                    ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
-                    : "bg-gray-800/60 backdrop-blur-sm shadow-lg"
-                }`}
-                aria-label="Email AVES Australia"
-              >
-                <span className={`text-sm font-bold ${transparent ? "text-white drop-shadow-lg" : "text-white"}`}>
-                  @
-                </span>
-              </a>
-              <a
-                href="https://aves.bio/"
-                className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
-                  transparent
-                    ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
-                    : "bg-gray-800/60 backdrop-blur-sm shadow-lg"
-                }`}
-                aria-label="Visit AVES Colombia"
-              >
-                <span className={`text-sm font-bold ${transparent ? "text-white drop-shadow-lg" : "text-white"}`}>
-                  CO
-                </span>
-              </a>
-              <a
-                href={sitePath("/contact?intent=waitlist")}
-                className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all duration-300 cursor-pointer touch-manipulation transform hover:scale-110 ${
-                  transparent
-                    ? "bg-gray-800/40 backdrop-blur-md border border-white/30 hover:border-emerald-400/50 shadow-xl"
-                    : "bg-gray-800/60 backdrop-blur-sm shadow-lg"
-                }`}
-                aria-label="Join the Australian launch list"
-              >
-                <span className={`text-sm font-bold ${transparent ? "text-white drop-shadow-lg" : "text-white"}`}>
-                  AU
-                </span>
-              </a>
-            </div>
+            <a href="mailto:mmelendro@gmail.com" className={`mt-3 ${linkClassName}`}>
+              mmelendro@gmail.com
+            </a>
           </div>
 
-          {/* Tours Column */}
-          <div className="text-center sm:text-left">
-            <h4 className={`font-semibold mb-4 text-base sm:text-lg text-emerald-400 ${headingClasses}`}>🦅 Tours</h4>
-            <ul className={`space-y-3 text-sm sm:text-base ${textClasses}`}>
-              <li>
-                <Link href="/tours" className={linkClasses}>
-                  <span>🗺️</span>
-                  <span>All Tours</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tours/adventure" className={linkClasses}>
-                  <span>🏔️</span>
-                  <span>Adventure Tours</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tours/vision" className={linkClasses}>
-                  <span>👁️</span>
-                  <span>Vision Tours</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tours/elevate" className={linkClasses}>
-                  <span>⬆️</span>
-                  <span>Elevate Tours</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tours/souls" className={linkClasses}>
-                  <span>✨</span>
-                  <span>Souls Tours</span>
-                </Link>
-              </li>
+          <nav aria-label="Explore Australia">
+            <h2 className="mb-3 text-base font-semibold text-emerald-300">Explore Australia</h2>
+            <ul>
+              {exploreLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
             </ul>
-          </div>
+          </nav>
 
-          {/* Explore Column */}
-          <div className="text-center sm:text-left">
-            <h4 className={`font-semibold mb-4 text-base sm:text-lg text-emerald-400 ${headingClasses}`}>🌎 Explore</h4>
-            <ul className={`space-y-3 text-sm sm:text-base ${textClasses}`}>
-              <li>
-                <Link href="/aves-explorer" className={linkClasses}>
-                  <span>🇦🇺</span>
-                  <span>Australia Explorer</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/species" className={linkClasses}>
-                  <span>🐦</span>
-                  <span>Bird Species</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className={linkClasses}>
-                  <span>📝</span>
-                  <span>Birding Blog</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className={linkClasses}>
-                  <span>📚</span>
-                  <span>Birding Resources</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/travel-tips" className={linkClasses}>
-                  <span>🎒</span>
-                  <span>Travel Tips</span>
-                </Link>
-              </li>
+          <nav aria-label="Plan your trip">
+            <h2 className="mb-3 text-base font-semibold text-emerald-300">Plan Your Trip</h2>
+            <ul>
+              {planningLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
             </ul>
-          </div>
+          </nav>
 
-          {/* Company Column */}
-          <div className="text-center sm:text-left">
-            <h4 className={`font-semibold mb-4 text-base sm:text-lg text-emerald-400 ${headingClasses}`}>🏢 Company</h4>
-            <ul className={`space-y-3 text-sm sm:text-base ${textClasses}`}>
-              <li>
-                <Link href="/about" className={linkClasses}>
-                  <span>ℹ️</span>
-                  <span>About AVES</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/team" className={linkClasses}>
-                  <span>👥</span>
-                  <span>Our Team</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/partners" className={linkClasses}>
-                  <span>🤝</span>
-                  <span>Our Partners</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/b-corp" className={linkClasses}>
-                  <span>🌱</span>
-                  <span>B Corp Journey</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/conservation" className={linkClasses}>
-                  <span>🌿</span>
-                  <span>Conservation</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className={linkClasses}>
-                  <span>📞</span>
-                  <span>Contact Us</span>
-                </Link>
-              </li>
+          <nav aria-label="About AVES">
+            <h2 className="mb-3 text-base font-semibold text-emerald-300">About AVES</h2>
+            <ul>
+              {aboutLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
+              <li><a href="https://aves.bio/" className={linkClassName}>Visit AVES Colombia</a></li>
             </ul>
-          </div>
+          </nav>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-gray-700/50 mt-8 pt-8 text-center">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <p className={`text-sm ${textClasses}`}>© 2026 AVES Tours. All rights reserved.</p>
-            <div className="flex flex-wrap justify-center sm:justify-end space-x-4 text-sm">
-              <Link href="/privacy" className={`${linkClasses} justify-center sm:justify-start`}>
-                <span>🔒</span>
-                <span>Privacy Policy</span>
-              </Link>
-              <Link href="/terms" className={`${linkClasses} justify-center sm:justify-start`}>
-                <span>📋</span>
-                <span>Terms of Service</span>
-              </Link>
-              <Link href="/cookies" className={`${linkClasses} justify-center sm:justify-start`}>
-                <span>🍪</span>
-                <span>Cookie Policy</span>
-              </Link>
-              <Link href="/credits" className={`${linkClasses} justify-center sm:justify-start`}>
-                <span>📷</span><span>Photo & Sound Credits</span>
-              </Link>
-            </div>
-          </div>
+        <div className="mt-8 flex flex-col gap-4 border-t border-gray-700/70 pt-6 lg:flex-row lg:items-center lg:justify-between">
+          <p className="text-sm text-gray-300">© 2026 AVES. All rights reserved.</p>
+          <nav aria-label="Legal information and credits">
+            <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              {legalLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>

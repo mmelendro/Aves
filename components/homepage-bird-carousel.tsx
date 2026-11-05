@@ -154,7 +154,6 @@ export default function HomepageBirdCarousel({
   const [showVolumeSlider, setShowVolumeSlider] = useState(false)
   const [audioError, setAudioError] = useState(false)
   const [audioLoading, setAudioLoading] = useState(false)
-  const [audioReady, setAudioReady] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   // Thumbnail navigation state
@@ -237,7 +236,6 @@ export default function HomepageBirdCarousel({
     setIsAudioPlaying(false)
     setAudioError(false)
     setAudioLoading(false)
-    setAudioReady(false)
     setShowVolumeSlider(false)
     if (audio) audio.volume = volumeRef.current
     return () => { audio?.pause() }
@@ -691,8 +689,6 @@ export default function HomepageBirdCarousel({
           src={currentBird.audioFile ? sitePath(currentBird.audioFile) : undefined}
           preload="metadata"
           aria-label={`${currentBird.commonName} recording`}
-          onLoadedMetadata={() => setAudioReady(true)}
-          onCanPlay={() => setAudioReady(true)}
           onPlaying={() => { setIsAudioPlaying(true); setAudioLoading(false); setAudioError(false) }}
           onPause={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
           onEnded={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
@@ -872,12 +868,11 @@ export default function HomepageBirdCarousel({
                       </div>
                     )}
 
-                    {/* Mobile Audio Status Indicator */}
-                    {isMobile && (audioLoading || audioError || !audioReady) && (
+                    {/* Idle audio may defer loading until Play; show only active loading or errors. */}
+                    {isMobile && (audioLoading || audioError) && (
                       <div className="absolute -bottom-8 right-0 bg-black/90 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
                         {audioLoading && "Loading..."}
                         {audioError && "Error - Tap to retry"}
-                        {!audioReady && !audioLoading && !audioError && "Preparing..."}
                       </div>
                     )}
                   </div>

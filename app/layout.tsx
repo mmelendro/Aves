@@ -1,10 +1,8 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import "../styles/mobile-navigation.css"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
-import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
 import { canonicalUrl } from "@/lib/site-path"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -19,5 +17,5 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en-AU"><body><CookieConsentProvider>{children}<CookiePreferenceCenter /><CookieBanner /><MobileNavigationOverlay /></CookieConsentProvider></body></html>
+  return <html lang="en-AU"><body><CookieConsentProvider>{children}<CookiePreferenceCenter /><CookieBanner /></CookieConsentProvider></body></html>
 }

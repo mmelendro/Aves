@@ -1,22 +1,43 @@
 "use client"
-import { useEffect, useState } from "react"
+
+import { useId, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Bird, MapPin } from "lucide-react"
+import { ArrowRight, CalendarDays, MapPin } from "lucide-react"
+import { AustraliaRegionMap } from "@/components/australia-region-map"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { regions } from "@/content/regions"
 import { sitePath } from "@/lib/site-path"
 
-export function RegionExplorer() {
-  const [selected, setSelected] = useState("all")
-  useEffect(() => {
-    const region = new URLSearchParams(window.location.search).get("region")
-    if (regions.some(item => item.id === region)) setSelected(region!)
-  }, [])
-  return <section className="bg-gradient-to-br from-blue-50 to-emerald-50 py-16 lg:py-24"><div className="container mx-auto px-4 max-w-7xl"><div className="flex flex-wrap justify-center gap-3 mb-10" aria-label="Choose Australian region">{[{id:"all",state:"All Regions"},...regions].map(region => <Button key={region.id} variant={selected === region.id ? "default" : "outline"} className={selected === region.id ? "bg-emerald-600 hover:bg-emerald-700" : "bg-white text-emerald-700 border-emerald-200"} aria-pressed={selected === region.id} onClick={() => setSelected(region.id)}>{region.state}</Button>)}</div>
-    <div className={`grid ${selected === "all" ? "md:grid-cols-2 lg:grid-cols-3" : "max-w-3xl mx-auto"} gap-8`}>{regions.filter(region => selected === "all" || selected === region.id).map(region => <Card key={region.id} className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white"><div className="relative aspect-[4/3]"><Image src={sitePath(region.image)} alt={region.alt} fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover" /></div><CardContent className="p-6 lg:p-8"><Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4"><MapPin className="w-3 h-3 mr-1" />{region.state}</Badge><h2 className="text-2xl font-bold text-gray-900 mb-4">{region.landscape}</h2><p className="text-gray-600 leading-relaxed mb-4">{region.description}</p><p className="text-sm text-gray-600 leading-relaxed mb-6">{region.detail}</p><Link href={`/contact?region=${region.id}`}><Button className="w-full bg-emerald-600 hover:bg-emerald-700"><Bird className="mr-2 w-4 h-4" />Ask About This Region<ArrowRight className="ml-2 w-4 h-4" /></Button></Link><a href={region.source} target="_blank" rel="noreferrer" className="block text-sm text-emerald-700 mt-4 text-center underline">Official destination information</a></CardContent></Card>)}</div>
-    <div className="text-center mt-12 bg-white/90 rounded-xl border border-emerald-100 shadow-lg p-6"><h3 className="text-xl font-bold text-gray-900 mb-3">Have Another Australian Region in Mind?</h3><p className="text-gray-600 mb-5">These places are a starting point for inspiration. Tell us where you would love to explore.</p><Link href="/contact"><Button variant="outline" className="border-emerald-600 text-emerald-700">Plan a Custom Journey <ArrowRight className="ml-2 w-4 h-4" /></Button></Link></div>
-  </div></section>
+export function RegionExplorer({ compact = false, initialRegion = "queensland" }: { compact?: boolean; initialRegion?: string }) {
+  const [selectedRegion, setSelectedRegion] = useState(regions.some(region => region.id === initialRegion) ? initialRegion : "queensland")
+  const region = regions.find(item => item.id === selectedRegion) || regions[0]
+  const prefix = useId()
+
+  return <section className="bg-gradient-to-br from-blue-50 to-emerald-50 py-12 lg:py-16" aria-labelledby={`${prefix}-heading`}>
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mb-8 max-w-3xl">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-emerald-700">Three starting points. A whole world of birdlife.</p>
+        <h2 id={`${prefix}-heading`} className="text-3xl font-bold text-gray-900 lg:text-4xl">{compact ? "Where will your curiosity take you?" : "Find your place on the map"}</h2>
+        <p className="mt-4 text-lg leading-relaxed text-gray-600">Choose a highlighted state or use the region buttons. Explore the specific areas inspiring our Australian journeys, with practical notes to help you plan.</p>
+      </div>
+      <div className="mb-6 flex flex-wrap gap-3" role="group" aria-label="Choose Australian region">{regions.map(item => <Button key={item.id} type="button" variant={item.id === selectedRegion ? "default" : "outline"} aria-pressed={item.id === selectedRegion} aria-controls={`${prefix}-detail`} onClick={() => setSelectedRegion(item.id)} className={`min-h-11 rounded-lg px-4 ${item.id === selectedRegion ? "bg-emerald-600 text-white hover:bg-emerald-700" : "border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50"}`}>{item.state}</Button>)}</div>
+      <p className="sr-only" role="status" aria-live="polite">Showing {region.state}: {region.landscape}.</p>
+      <div className="grid items-start gap-6 lg:grid-cols-12">
+        <div className="lg:col-span-7"><AustraliaRegionMap selectedRegion={selectedRegion} onSelectRegion={setSelectedRegion} /></div>
+        <article id={`${prefix}-detail`} aria-labelledby={`${prefix}-region-name`} className="overflow-hidden rounded-xl border border-emerald-100 bg-white shadow-lg lg:col-span-5">
+          <figure><div className="relative aspect-[16/7]"><Image src={sitePath(region.image)} alt={region.alt} fill sizes="(max-width: 1023px) 100vw, 480px" className="object-cover" /></div>{region.photoCaption && <figcaption className="border-b border-emerald-100 bg-emerald-50/50 px-6 py-3 text-xs leading-relaxed text-gray-600">{region.photoCaption} <Link href="/credits" className="font-medium text-emerald-800 underline underline-offset-2">Photo credits</Link></figcaption>}</figure>
+          <div className="p-6">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-800"><MapPin className="h-3.5 w-3.5" aria-hidden="true" />{region.state}</p>
+            <h3 id={`${prefix}-region-name`} className="text-2xl font-bold text-gray-900">{region.landscape}</h3>
+            <p className="mt-3 leading-relaxed text-gray-600">{region.description}</p>
+            <dl className="mt-5 space-y-3 text-sm"><div><dt className="font-semibold text-gray-900">Start your planning</dt><dd className="mt-1 leading-relaxed text-gray-600">{region.gateway}</dd></div><div><dt className="flex items-center gap-2 font-semibold text-gray-900"><CalendarDays className="h-4 w-4 text-emerald-700" aria-hidden="true" />Seasonal perspective</dt><dd className="mt-1 leading-relaxed text-gray-600">{region.season.summary}</dd></div></dl>
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row"><Button asChild className="min-h-11 rounded-lg bg-emerald-600 px-4 hover:bg-emerald-700"><Link href={`/regions/${region.id}`}>Explore {region.state === "New South Wales" ? "NSW" : region.state}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button><Button asChild variant="outline" className="min-h-11 rounded-lg border-emerald-200 text-emerald-700"><Link href={`/contact?region=${region.id}`}>Ask about this region</Link></Button></div>
+          </div>
+        </article>
+      </div>
+      {!compact && <div className="mt-12"><h2 className="mb-6 text-2xl font-bold text-gray-900">Explore each region in more detail</h2><div className="grid gap-5 md:grid-cols-3">{regions.map(item => <article key={item.id} className="flex flex-col rounded-xl border border-emerald-100 bg-white p-6 shadow-md"><h3 className="text-xl font-bold text-gray-900">{item.state}</h3><p className="mt-2 text-sm font-medium text-emerald-700">{item.landscape}</p><p className="mt-4 flex-1 leading-relaxed text-gray-600">{item.planningLength}</p><Link href={`/regions/${item.id}`} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-emerald-700 underline-offset-4 hover:underline">Read the {item.state === "New South Wales" ? "NSW" : item.state} guide <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></article>)}</div></div>}
+      <div className="mt-8 flex flex-col gap-3 rounded-xl border border-emerald-100 bg-white/80 p-5 sm:flex-row sm:items-center sm:justify-between"><p className="max-w-2xl text-sm leading-relaxed text-gray-600">These are starting points for a custom enquiry, not confirmed departures or statewide tour coverage. Have another part of Australia in mind?</p><Link href="/contact" className="inline-flex min-h-11 shrink-0 items-center gap-2 font-semibold text-emerald-700 underline-offset-4 hover:underline">Tell us your ideas <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
+    </div>
+  </section>
 }
