@@ -360,13 +360,13 @@ export function ContactFormSection({
 
                       {submitStatus === "success" && (
                         <p className="text-sm text-emerald-600 text-center mt-4 font-medium">
-                          Thank you — we'll be in touch within 24 hours.
+                          Your enquiry has been submitted to AVES. We'll reply personally.
                         </p>
                       )}
                       {submitStatus === "error" && (
                         <p className="text-sm text-red-600 text-center mt-4">
                           Something went wrong. Please email us directly at{" "}
-                          <a href="mailto:info@aves.bio" className="underline">info@aves.bio</a>
+                          <a href="mailto:mmelendro@gmail.com" className="underline">mmelendro@gmail.com</a>
                         </p>
                       )}
                       {submitStatus === "idle" && (
@@ -444,8 +444,8 @@ export function ContactFormSection({
                       <Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Email</div>
-                        <a href="mailto:info@aves.bio" className="text-emerald-600 hover:text-emerald-700">
-                          info@aves.bio
+                        <a href="mailto:mmelendro@gmail.com" className="text-emerald-600 hover:text-emerald-700">
+                          mmelendro@gmail.com
                         </a>
                         <div className="text-sm text-gray-600">24-hour response guarantee</div>
                       </div>

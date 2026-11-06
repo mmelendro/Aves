@@ -43,11 +43,11 @@ export function Footer({ transparent = false }: FooterProps) {
               <div className="flex items-center justify-center space-x-2">
                 <span>📧</span>
                 <a
-                  href="mailto:info@aves.bio"
+                  href="mailto:mmelendro@gmail.com"
                   className={`hover:text-emerald-400 transition-colors duration-300 ${transparent ? "drop-shadow-md text-shadow-md hover:drop-shadow-lg" : "drop-shadow-sm"}`}
                   aria-label="Email AVES Colombia"
                 >
-                  info@aves.bio
+                  mmelendro@gmail.com
                 </a>
               </div>
             </div>

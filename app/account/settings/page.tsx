@@ -4,6 +4,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import AccountSettingsClient from "./AccountSettingsClient"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
   title: "Account Settings - AVES Tours",
   description: "Manage your profile, preferences, and booking information for AVES Tours birding tours.",
@@ -13,15 +15,16 @@ export default async function AccountSettingsPage() {
   const supabase = createServerComponentClient({ cookies })
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession()
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser()
 
-  if (!session) {
+  if (authError || !user) {
     redirect("/auth/login?redirect=/account/settings")
   }
 
   // Fetch user profile data
-  const { data: profile } = await supabase.from("user_profiles").select("*").eq("user_id", session.user.id).single()
+  const { data: profile } = await supabase.from("user_profiles").select("*").eq("user_id", user.id).single()
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -34,8 +37,8 @@ export default async function AccountSettingsPage() {
 
           <AccountSettingsClient
             initialProfile={profile}
-            userId={session.user.id}
-            userEmail={session.user.email || ""}
+            userId={user.id}
+            userEmail={user.email || ""}
           />
         </div>
       </div>

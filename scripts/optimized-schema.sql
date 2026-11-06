@@ -1,3 +1,5 @@
+-- DESTRUCTIVE DEVELOPMENT BOOTSTRAP ONLY. Never run against a populated database.
+-- This is an alternative to create-user-tables.sql, not a compatible migration.
 -- Drop existing tables to start fresh
 DROP TABLE IF EXISTS public.chat_messages CASCADE;
 DROP TABLE IF EXISTS public.trip_bookings CASCADE;
@@ -163,13 +165,13 @@ ALTER TABLE public.chat_messages ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for user_profiles
 CREATE POLICY "Users can view own profile" ON public.user_profiles
-    FOR SELECT USING (auth.uid() = id);
+    FOR SELECT TO authenticated USING (auth.uid() = id);
 
 CREATE POLICY "Users can update own profile" ON public.user_profiles
-    FOR UPDATE USING (auth.uid() = id);
+    FOR UPDATE TO authenticated USING (auth.uid() = id) WITH CHECK (auth.uid() = id);
 
 CREATE POLICY "Users can insert own profile" ON public.user_profiles
-    FOR INSERT WITH CHECK (auth.uid() = id);
+    FOR INSERT TO authenticated WITH CHECK (auth.uid() = id);
 
 -- RLS Policies for trips (public read access)
 CREATE POLICY "Anyone can view active trips" ON public.trips
@@ -207,17 +209,27 @@ CREATE POLICY "Anyone can view trip resources" ON public.trip_resources
 
 -- RLS Policies for trip_bookings
 CREATE POLICY "Users can view own bookings" ON public.trip_bookings
-    FOR SELECT USING (auth.uid() = user_id);
+    FOR SELECT TO authenticated USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can insert own bookings" ON public.trip_bookings
-    FOR INSERT WITH CHECK (auth.uid() = user_id);
+    FOR INSERT TO authenticated WITH CHECK (
+        auth.uid() = user_id
+        AND booking_status IN ('saved', 'inquiry')
+        AND payment_status = 'pending'
+        AND total_amount IS NULL
+        AND payment_method IS NULL AND payment_reference IS NULL
+        AND notes IS NULL
+        AND EXISTS (SELECT 1 FROM public.trips AS t WHERE t.id = trip_bookings.trip_id AND t.is_active)
+    );
 
 CREATE POLICY "Users can update own bookings" ON public.trip_bookings
-    FOR UPDATE USING (auth.uid() = user_id);
+    FOR UPDATE TO authenticated
+    USING (auth.uid() = user_id AND booking_status IN ('saved', 'inquiry') AND payment_status = 'pending' AND total_amount IS NULL)
+    WITH CHECK (auth.uid() = user_id AND booking_status IN ('saved', 'inquiry') AND payment_status = 'pending' AND total_amount IS NULL);
 
 -- RLS Policies for chat_messages
 CREATE POLICY "Users can view messages for own bookings" ON public.chat_messages
-    FOR SELECT USING (
+    FOR SELECT TO authenticated USING (
         EXISTS (
             SELECT 1 FROM public.trip_bookings 
             WHERE trip_bookings.id = chat_messages.booking_id 
@@ -226,8 +238,12 @@ CREATE POLICY "Users can view messages for own bookings" ON public.chat_messages
     );
 
 CREATE POLICY "Users can insert messages for own bookings" ON public.chat_messages
-    FOR INSERT WITH CHECK (
-        EXISTS (
+    FOR INSERT TO authenticated WITH CHECK (
+        sender_id = auth.uid()
+        AND sender_type = 'user'
+        AND message_type IN ('text', 'image', 'file')
+        AND is_read = false
+        AND EXISTS (
             SELECT 1 FROM public.trip_bookings 
             WHERE trip_bookings.id = chat_messages.booking_id 
             AND trip_bookings.user_id = auth.uid()
@@ -241,7 +257,8 @@ BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = '';
+REVOKE ALL ON FUNCTION public.handle_updated_at() FROM PUBLIC, anon, authenticated;
 
 -- Create triggers for updated_at
 CREATE TRIGGER handle_user_profiles_updated_at
@@ -255,3 +272,23 @@ CREATE TRIGGER handle_trips_updated_at
 CREATE TRIGGER handle_trip_bookings_updated_at
     BEFORE UPDATE ON public.trip_bookings
     FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+-- RLS selects rows; column grants independently protect payment/status/identity.
+-- Revoke broad defaults before granting only the fields a customer may submit.
+REVOKE ALL ON public.user_profiles, public.trip_bookings, public.chat_messages
+    FROM PUBLIC, anon, authenticated;
+GRANT SELECT, INSERT, UPDATE ON public.user_profiles TO authenticated;
+GRANT SELECT ON public.trip_bookings, public.chat_messages TO authenticated;
+GRANT INSERT (id, user_id, trip_id, booking_status, participants, booking_date,
+    departure_date, return_date, special_requests) ON public.trip_bookings TO authenticated;
+GRANT UPDATE (participants, departure_date, return_date, special_requests,
+    cancellation_reason) ON public.trip_bookings TO authenticated;
+GRANT INSERT (id, booking_id, sender_type, sender_id, message, message_type,
+    file_url, file_name) ON public.chat_messages TO authenticated;
+
+REVOKE ALL ON public.trips, public.trip_itineraries, public.trip_target_birds,
+    public.trip_resources FROM PUBLIC, anon, authenticated;
+GRANT SELECT ON public.trips, public.trip_itineraries, public.trip_target_birds,
+    public.trip_resources TO anon, authenticated;
+GRANT ALL ON public.user_profiles, public.trip_bookings, public.chat_messages,
+    public.trips, public.trip_itineraries, public.trip_target_birds, public.trip_resources TO service_role;

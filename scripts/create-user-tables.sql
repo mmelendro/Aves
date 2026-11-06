@@ -36,7 +36,9 @@ CREATE TABLE user_bookings (
     region TEXT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    price NUMERIC(10,2) NOT NULL CHECK (price >= 0),
+    -- Zero is an unpriced pending request, never a confirmed price or charge.
+    -- Only trusted server/admin operations may assign an authoritative price.
+    price NUMERIC(10,2) NOT NULL DEFAULT 0 CHECK (price >= 0),
     booking_status TEXT NOT NULL DEFAULT 'pending' CHECK (booking_status IN ('pending', 'confirmed', 'cancelled', 'completed')),
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -63,7 +65,8 @@ BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ language 'plpgsql';
+$$ language 'plpgsql' SET search_path = '';
+REVOKE ALL ON FUNCTION public.update_updated_at_column() FROM PUBLIC, anon, authenticated;
 
 -- Create triggers to automatically update updated_at
 CREATE TRIGGER update_user_profiles_updated_at 
@@ -79,93 +82,70 @@ ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_bookings ENABLE ROW LEVEL SECURITY;
 
 -- Create RLS policies for user_profiles table
+-- RLS must not grant customers SELECT on auth.users just to check staff status.
+-- This helper returns only the caller's server-managed role, not account data.
+CREATE SCHEMA IF NOT EXISTS private;
+REVOKE ALL ON SCHEMA private FROM PUBLIC, anon;
+GRANT USAGE ON SCHEMA private TO authenticated;
+CREATE OR REPLACE FUNCTION private.is_site_admin()
+RETURNS BOOLEAN LANGUAGE sql STABLE SECURITY DEFINER SET search_path = '' AS $$
+    SELECT EXISTS (
+        SELECT 1 FROM auth.users AS u
+        WHERE u.id = auth.uid() AND u.raw_app_meta_data->>'role' = 'admin'
+    );
+$$;
+REVOKE ALL ON FUNCTION private.is_site_admin() FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION private.is_site_admin() TO authenticated;
+
 -- Policy: Users can view and edit their own profile
 CREATE POLICY "Users can view own profile" ON user_profiles
-    FOR SELECT USING (auth.uid() = user_id);
+    FOR SELECT TO authenticated USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can update own profile" ON user_profiles
-    FOR UPDATE USING (auth.uid() = user_id);
+    FOR UPDATE TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can insert own profile" ON user_profiles
-    FOR INSERT WITH CHECK (auth.uid() = user_id);
+    FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
 
 -- Policy: Admins can view all profiles
 CREATE POLICY "Admins can view all profiles" ON user_profiles
-    FOR SELECT USING (
-        EXISTS (
-            SELECT 1 FROM auth.users 
-            WHERE auth.users.id = auth.uid() 
-            AND auth.users.raw_app_meta_data->>'role' = 'admin'
-        )
-    );
+    FOR SELECT TO authenticated USING ((SELECT private.is_site_admin()));
 
 -- Policy: Admins can update all profiles
 CREATE POLICY "Admins can update all profiles" ON user_profiles
-    FOR UPDATE USING (
-        EXISTS (
-            SELECT 1 FROM auth.users 
-            WHERE auth.users.id = auth.uid() 
-            AND auth.users.raw_app_meta_data->>'role' = 'admin'
-        )
-    );
+    FOR UPDATE TO authenticated USING ((SELECT private.is_site_admin()))
+    WITH CHECK ((SELECT private.is_site_admin()));
 
 -- Create RLS policies for user_bookings table
 -- Policy: Users can view their own bookings
 CREATE POLICY "Users can view own bookings" ON user_bookings
-    FOR SELECT USING (
-        user_id IN (
-            SELECT user_id FROM user_profiles WHERE user_id = auth.uid()
-        )
-    );
+    FOR SELECT TO authenticated USING (user_id = auth.uid());
 
 -- Policy: Users can create their own bookings
 CREATE POLICY "Users can create own bookings" ON user_bookings
-    FOR INSERT WITH CHECK (
-        user_id IN (
-            SELECT user_id FROM user_profiles WHERE user_id = auth.uid()
-        )
+    FOR INSERT TO authenticated WITH CHECK (
+        user_id = auth.uid() AND booking_status = 'pending' AND price = 0
     );
 
 -- Policy: Users can update their own bookings (with restrictions)
 CREATE POLICY "Users can update own bookings" ON user_bookings
-    FOR UPDATE USING (
-        user_id IN (
-            SELECT user_id FROM user_profiles WHERE user_id = auth.uid()
-        )
-        AND booking_status IN ('pending', 'confirmed') -- Only allow updates for certain statuses
-    );
+    FOR UPDATE TO authenticated USING (user_id = auth.uid() AND booking_status = 'pending' AND price = 0)
+    WITH CHECK (user_id = auth.uid() AND booking_status = 'pending' AND price = 0);
 
 -- Policy: Admins can view all bookings
 CREATE POLICY "Admins can view all bookings" ON user_bookings
-    FOR SELECT USING (
-        EXISTS (
-            SELECT 1 FROM auth.users 
-            WHERE auth.users.id = auth.uid() 
-            AND auth.users.raw_app_meta_data->>'role' = 'admin'
-        )
-    );
+    FOR SELECT TO authenticated USING ((SELECT private.is_site_admin()));
 
 -- Policy: Admins can update all bookings
 CREATE POLICY "Admins can update all bookings" ON user_bookings
-    FOR UPDATE USING (
-        EXISTS (
-            SELECT 1 FROM auth.users 
-            WHERE auth.users.id = auth.uid() 
-            AND auth.users.raw_app_meta_data->>'role' = 'admin'
-        )
-    );
+    FOR UPDATE TO authenticated USING ((SELECT private.is_site_admin()))
+    WITH CHECK ((SELECT private.is_site_admin()));
 
 -- Policy: Admins can delete bookings
 CREATE POLICY "Admins can delete bookings" ON user_bookings
-    FOR DELETE USING (
-        EXISTS (
-            SELECT 1 FROM auth.users 
-            WHERE auth.users.id = auth.uid() 
-            AND auth.users.raw_app_meta_data->>'role' = 'admin'
-        )
-    );
+    FOR DELETE TO authenticated USING ((SELECT private.is_site_admin()));
 
--- Create a view for booking statistics (admins only)
+-- Invoker-security statistics respect the caller's booking SELECT policies.
 CREATE VIEW booking_statistics AS
 SELECT 
     tour_type,
@@ -183,11 +163,16 @@ ORDER BY booking_month DESC, tour_type, region;
 ALTER VIEW booking_statistics SET (security_invoker = true);
 
 -- Grant appropriate permissions
+REVOKE ALL ON public.user_profiles, public.user_bookings, public.booking_statistics FROM PUBLIC, anon, authenticated;
 GRANT SELECT ON user_profiles TO authenticated;
 GRANT INSERT, UPDATE ON user_profiles TO authenticated;
 GRANT SELECT ON user_bookings TO authenticated;
-GRANT INSERT, UPDATE ON user_bookings TO authenticated;
+-- Financial state, identity and audit timestamps cannot be supplied by a browser.
+-- Admin status changes use the separately authorized SECURITY DEFINER RPC.
+GRANT INSERT (booking_id, user_id, tour_type, region, start_date, end_date) ON user_bookings TO authenticated;
+GRANT UPDATE (tour_type, region, start_date, end_date) ON user_bookings TO authenticated;
 GRANT SELECT ON booking_statistics TO authenticated;
+GRANT ALL ON public.user_profiles, public.user_bookings TO service_role;
 
 -- Create function to validate passport expiry
 CREATE OR REPLACE FUNCTION validate_passport_expiry()
@@ -198,7 +183,8 @@ BEGIN
     END IF;
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = '';
+REVOKE ALL ON FUNCTION public.validate_passport_expiry() FROM PUBLIC, anon, authenticated;
 
 -- Create trigger for passport validation
 CREATE TRIGGER validate_passport_expiry_trigger
@@ -214,13 +200,16 @@ BEGIN
         RAISE EXCEPTION 'Start date must be before end date';
     END IF;
     
-    IF NEW.start_date <= CURRENT_DATE THEN
+    -- Later administrative status changes must still work after departure.
+    IF (TG_OP = 'INSERT' OR NEW.start_date IS DISTINCT FROM OLD.start_date)
+       AND NEW.start_date <= CURRENT_DATE THEN
         RAISE EXCEPTION 'Start date must be in the future';
     END IF;
     
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = '';
+REVOKE ALL ON FUNCTION public.validate_booking_dates() FROM PUBLIC, anon, authenticated;
 
 -- Create trigger for booking date validation
 CREATE TRIGGER validate_booking_dates_trigger
@@ -235,3 +224,4 @@ COMMENT ON COLUMN user_profiles.vaccinations IS 'JSON array storing vaccination 
 COMMENT ON COLUMN user_profiles.social_media_handles IS 'JSON object with social media platform keys and handle values';
 COMMENT ON COLUMN user_profiles.uploaded_documents IS 'Array of document URLs stored in Supabase Storage';
 COMMENT ON COLUMN user_bookings.booking_status IS 'Status: pending, confirmed, cancelled, or completed';
+COMMENT ON COLUMN user_bookings.price IS 'Server-controlled price; a customer-created pending request starts at 0 (unpriced), not a charge. Trusted pricing is required before confirmation.';

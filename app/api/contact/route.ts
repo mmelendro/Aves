@@ -33,7 +33,34 @@ function reply(body: Record<string, unknown>, status: number) {
   return NextResponse.json(body, { status, headers: { "Cache-Control": "no-store" } })
 }
 
+function hasAllowedOrigin(req: NextRequest) {
+  const origin = req.headers.get("origin")
+  // Requests without Origin remain supported; this is not bot/rate protection.
+  if (origin === null) return req.headers.get("sec-fetch-site") !== "cross-site"
+  if (req.headers.get("sec-fetch-site") === "cross-site") return false
+  try {
+    const parsed = new URL(origin)
+    if (!["https:", "http:"].includes(parsed.protocol) || parsed.origin !== origin) return false
+    const allowed = new Set([new URL(req.url).origin])
+    try {
+      const configured = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio")
+      if (["https:", "http:"].includes(configured.protocol) && !configured.username && !configured.password) {
+        allowed.add(configured.origin)
+      }
+    } catch {
+      // Invalid optional site configuration must not open a different origin.
+    }
+    return allowed.has(origin)
+  } catch {
+    return false
+  }
+}
+
 export async function POST(req: NextRequest) {
+  if (!hasAllowedOrigin(req)) {
+    return reply({ error: "Please submit your inquiry from the AVES website." }, 403)
+  }
+
   if (req.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") {
     return reply({ error: "Please submit the inquiry as JSON." }, 415)
   }
@@ -60,10 +87,10 @@ export async function POST(req: NextRequest) {
   }
 
   const apiKey = process.env.RESEND_API_KEY?.trim()
-  const contactEmail = process.env.CONTACT_EMAIL?.trim() || "info@aves.bio"
+  const contactEmail = process.env.CONTACT_EMAIL?.trim() || "mmelendro@gmail.com"
   if (!apiKey || !emailAddress.safeParse(contactEmail).success) {
     console.error("Contact form email configuration is missing or invalid")
-    return reply({ error: "The inquiry service is temporarily unavailable. Please email info@aves.bio." }, 503)
+    return reply({ error: "The inquiry service is temporarily unavailable. Please email mmelendro@gmail.com." }, 503)
   }
 
   try {
@@ -110,31 +137,14 @@ ${message || "None"}
 
     if (primary.error || !primary.data?.id) {
       console.error("Contact inquiry was not accepted by the email provider")
-      return reply({ error: "Your inquiry could not be accepted. Please try again or email info@aves.bio." }, 502)
+      return reply({ error: "Your inquiry could not be accepted. Please try again or email mmelendro@gmail.com." }, 502)
     }
 
-    // The primary inquiry is accepted. A confirmation failure must not invite
-    // the visitor to retry and submit the same inquiry to AVES again.
-    let confirmationAccepted = false
-    try {
-      const confirmation = await resend.emails.send({
-        from: "AVES Tours <noreply@aves.bio>",
-        to: email,
-        subject: "Your inquiry has been submitted — AVES Tours",
-        text: `Hi ${firstName},\n\nThank you for reaching out! Your inquiry has been submitted to AVES. We aim to respond within 24 hours.\n\nBest regards,\nThe AVES Tours Team\ninfo@aves.bio`,
-      })
-      confirmationAccepted = !confirmation.error && Boolean(confirmation.data?.id)
-    } catch {
-      // Preserve primary success if the confirmation request fails.
-    }
-    if (!confirmationAccepted) {
-      console.error("Contact inquiry accepted, but confirmation email was not accepted")
-    }
-
+    // The visitor address is unverified: send only to the configured AVES inbox.
     // Provider acceptance does not establish final inbox delivery.
-    return reply({ success: true, status: "accepted", confirmationAccepted }, 200)
+    return reply({ success: true, status: "accepted" }, 200)
   } catch {
     console.error("Contact inquiry email request failed")
-    return reply({ error: "Your inquiry could not be accepted. Please try again or email info@aves.bio." }, 502)
+    return reply({ error: "Your inquiry could not be accepted. Please try again or email mmelendro@gmail.com." }, 502)
   }
 }

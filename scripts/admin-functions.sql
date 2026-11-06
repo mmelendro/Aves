@@ -1,7 +1,7 @@
 -- Administrative functions for managing users and bookings
 
 -- Function to get user booking summary
-CREATE OR REPLACE FUNCTION get_user_booking_summary(target_user_id UUID)
+CREATE OR REPLACE FUNCTION public.get_user_booking_summary(target_user_id UUID)
 RETURNS TABLE (
     total_bookings BIGINT,
     confirmed_bookings BIGINT,
@@ -11,6 +11,14 @@ RETURNS TABLE (
     favorite_region TEXT
 ) AS $$
 BEGIN
+    -- app_metadata is server-managed; user_metadata is never an authority.
+    IF auth.uid() IS NULL OR (auth.uid() IS DISTINCT FROM target_user_id AND NOT EXISTS (
+        SELECT 1 FROM auth.users AS u
+        WHERE u.id = auth.uid() AND u.raw_app_meta_data->>'role' = 'admin'
+    )) THEN
+        RAISE EXCEPTION 'Access denied' USING ERRCODE = '42501';
+    END IF;
+
     RETURN QUERY
     SELECT 
         COUNT(*) as total_bookings,
@@ -19,13 +27,13 @@ BEGIN
         COUNT(*) FILTER (WHERE booking_status = 'cancelled') as cancelled_bookings,
         COALESCE(SUM(price) FILTER (WHERE booking_status IN ('confirmed', 'completed')), 0) as total_spent,
         MODE() WITHIN GROUP (ORDER BY region) as favorite_region
-    FROM user_bookings 
-    WHERE user_id = target_user_id;
+    FROM public.user_bookings AS b
+    WHERE b.user_id = target_user_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = '';
 
 -- Function to update booking status (admin only)
-CREATE OR REPLACE FUNCTION admin_update_booking_status(
+CREATE OR REPLACE FUNCTION public.admin_update_booking_status(
     target_booking_id UUID,
     new_status TEXT
 )
@@ -41,25 +49,25 @@ BEGIN
     ) INTO admin_check;
     
     IF NOT admin_check THEN
-        RAISE EXCEPTION 'Access denied: Admin privileges required';
+        RAISE EXCEPTION 'Access denied: Admin privileges required' USING ERRCODE = '42501';
     END IF;
     
     -- Validate status
-    IF new_status NOT IN ('pending', 'confirmed', 'cancelled', 'completed') THEN
+    IF new_status IS NULL OR new_status NOT IN ('pending', 'confirmed', 'cancelled', 'completed') THEN
         RAISE EXCEPTION 'Invalid booking status';
     END IF;
     
     -- Update booking
-    UPDATE user_bookings 
+    UPDATE public.user_bookings
     SET booking_status = new_status, updated_at = NOW()
     WHERE booking_id = target_booking_id;
     
     RETURN FOUND;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = '';
 
 -- Function to get booking analytics
-CREATE OR REPLACE FUNCTION get_booking_analytics(
+CREATE OR REPLACE FUNCTION public.get_booking_analytics(
     start_date DATE DEFAULT NULL,
     end_date DATE DEFAULT NULL
 )
@@ -78,7 +86,7 @@ BEGIN
         WHERE auth.users.id = auth.uid() 
         AND auth.users.raw_app_meta_data->>'role' = 'admin'
     ) THEN
-        RAISE EXCEPTION 'Access denied: Admin privileges required';
+        RAISE EXCEPTION 'Access denied: Admin privileges required' USING ERRCODE = '42501';
     END IF;
     
     RETURN QUERY
@@ -89,15 +97,15 @@ BEGIN
             AVG(price) as avg_booking_value,
             MODE() WITHIN GROUP (ORDER BY tour_type) as top_tour_type,
             MODE() WITHIN GROUP (ORDER BY region) as top_region
-        FROM user_bookings 
-        WHERE (start_date IS NULL OR created_at::date >= start_date)
-        AND (end_date IS NULL OR created_at::date <= end_date)
+        FROM public.user_bookings AS b
+        WHERE (get_booking_analytics.start_date IS NULL OR b.created_at::date >= get_booking_analytics.start_date)
+        AND (get_booking_analytics.end_date IS NULL OR b.created_at::date <= get_booking_analytics.end_date)
         AND booking_status IN ('confirmed', 'completed')
     )
     SELECT 
         CASE 
-            WHEN start_date IS NOT NULL AND end_date IS NOT NULL 
-            THEN start_date::text || ' to ' || end_date::text
+            WHEN get_booking_analytics.start_date IS NOT NULL AND get_booking_analytics.end_date IS NOT NULL
+            THEN get_booking_analytics.start_date::text || ' to ' || get_booking_analytics.end_date::text
             ELSE 'All time'
         END as period,
         bs.total_bookings,
@@ -107,9 +115,12 @@ BEGIN
         bs.top_region
     FROM booking_stats bs;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = '';
 
--- Grant execute permissions to authenticated users
-GRANT EXECUTE ON FUNCTION get_user_booking_summary(UUID) TO authenticated;
-GRANT EXECUTE ON FUNCTION admin_update_booking_status(UUID, TEXT) TO authenticated;
-GRANT EXECUTE ON FUNCTION get_booking_analytics(DATE, DATE) TO authenticated;
+-- Functions otherwise inherit EXECUTE for PUBLIC, which includes anonymous users.
+REVOKE ALL ON FUNCTION public.get_user_booking_summary(UUID) FROM PUBLIC, anon;
+REVOKE ALL ON FUNCTION public.admin_update_booking_status(UUID, TEXT) FROM PUBLIC, anon;
+REVOKE ALL ON FUNCTION public.get_booking_analytics(DATE, DATE) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.get_user_booking_summary(UUID) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.admin_update_booking_status(UUID, TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.get_booking_analytics(DATE, DATE) TO authenticated;
