@@ -13,6 +13,10 @@ begin
 end;
 $$;
 
+-- Test helpers need explicit grants now that new functions default to private.
+grant execute on function pg_temp.v(text), pg_temp.u(text), pg_temp.expect_error(text,text)
+  to authenticated, service_role;
+
 do $$
 declare k text; role_name text; f text;
 begin

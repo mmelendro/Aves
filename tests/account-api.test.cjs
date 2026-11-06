@@ -79,6 +79,16 @@ test("draft reuse with a different payload conflicts", async () => {
   assert.equal((await h.plansPost(request({ id: planId, ...values }))).status, 409)
 })
 
+test("draft capacity conflict explains how to free space without a misleading retry timer", async () => {
+  const h = harness({ results: [{ data: null, error: { code: "PT409", message: "private database detail" } }] })
+  const response = await h.plansPost(request({ id: planId, ...values }))
+  assert.equal(response.status, 409)
+  assert.equal(response.headers.get("retry-after"), null)
+  assert.match((await response.json()).error, /50 draft plans.*Delete.*submit/)
+  assert.equal(h.queries.length, 1)
+  assert.equal(h.notices.length, 0)
+})
+
 test("draft collision with another owner's ID reveals no plan", async () => {
   const h = harness({ results: [{ data: null, error: { code: "23505" } }, { data: null, error: null }] })
   assert.equal((await h.plansPost(request({ id: planId, ...values }))).status, 404)
@@ -130,6 +140,8 @@ test("list plans and client proposals always filter by verified owner; drafts ne
   assert.ok(h.queries[0].operations.some(op => op[1] === "user_id" && op[2] === ownerId))
   assert.ok(h.queries[1].operations.some(op => op[1] === "client_user_id" && op[2] === ownerId))
   assert.ok(h.queries[1].operations.some(op => op[1] === "status" && op[2] === "sent"))
+  assert.equal(h.queries[1].operations.find(op => op[0] === "select")[1],
+    "id,quote_request_id,client_user_id,version,status,total_cents,currency,itinerary,inclusions,exclusions,valid_until,issued_at,updated_at,notification_status")
 })
 
 test("quote saves authenticated owner/email and immutable snapshot before owner notification", async () => {

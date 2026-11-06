@@ -11,6 +11,7 @@ import { canonicalUrl } from "@/lib/site-path"
 import { createPlanSchema, updatePlanSchema, quoteSchema, revisionSchema, createProposalSchema, updateProposalSchema, quoteStatusSchema, mapPlan, mapProposal, type PlanRow, type ProposalRow } from "@/lib/account-models"
 
 const planColumns = "id,title,details,status,updated_at,create_payload_hash"
+const proposalColumns = "id,quote_request_id,client_user_id,version,status,total_cents,currency,itinerary,inclusions,exclusions,valid_until,issued_at,updated_at,notification_status"
 const hash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex")
 function uuid(value: string) {
   if (!z.uuid().safeParse(value).success) throw new AccountError(404, "This item could not be found.")
@@ -44,6 +45,7 @@ export const plansPost = (request: Request) => accountHandler(async () => {
     if (original.create_payload_hash !== payloadHash) throw new AccountError(409, "This request has changed. Save it as a new plan.")
     return { plan: mapPlan(original) }
   }
+  if (error?.code === "PT409") throw new AccountError(409, "You can keep up to 50 draft plans. Delete an unused draft or submit one for a quote before creating another.")
   if (error || !data) storageFailed()
   return { plan: mapPlan(data as PlanRow) }
 })
@@ -90,7 +92,7 @@ export const quotePost = (request: Request, id: string) => accountHandler(async 
 
 export const proposalsGet = () => accountHandler(async () => {
   const { user, client } = await requireAccountUser()
-  const { data, error } = await client.from("quote_proposals").select("*").eq("client_user_id", user.id).eq("status", "sent").order("issued_at", { ascending: false }).limit(100)
+  const { data, error } = await client.from("quote_proposals").select(proposalColumns).eq("client_user_id", user.id).eq("status", "sent").order("issued_at", { ascending: false }).limit(100)
   if (error || !data) storageFailed()
   return { proposals: (data as ProposalRow[]).map(mapProposal) }
 })
