@@ -7,7 +7,8 @@ import { sitePath } from "@/lib/site-path"
 
 const portalLinks = [
   { href: "/account", label: "My Trips" },
-  { href: "https://aves.bio/", label: "Colombia" },
+  { href: "https://aves.bio/", label: "All destinations" },
+  { href: "https://aves.bio/colombia", label: "Colombia" },
   { href: "https://aves.bio/australia", label: "Australia" },
 ] as const
 

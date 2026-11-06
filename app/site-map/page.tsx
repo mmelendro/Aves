@@ -28,7 +28,15 @@ export default function SiteMapPage() {
             </section>
           ))}
         </div>
-        <p className="mt-10 text-gray-600">Looking for our Colombian website? <a href="https://aves.bio/site-map" className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">Visit the AVES Colombia site map</a>.</p>
+        <nav aria-label="AVES destinations" className="mt-10 flex flex-wrap gap-x-6 gap-y-2">
+          {[
+            { href: "https://aves.bio/", label: "All destinations" },
+            { href: "https://aves.bio/colombia", label: "Visit AVES Colombia" },
+            { href: "https://aves.bio/site-map", label: "AVES site map" },
+          ].map(({ href, label }) => (
+            <a key={href} href={href} className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">{label}</a>
+          ))}
+        </nav>
       </div>
     </PageShell>
   )

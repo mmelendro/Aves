@@ -71,7 +71,8 @@ export function Footer({ transparent = false }: FooterProps) {
             <h2 className="mb-3 text-base font-semibold text-emerald-300">About AVES</h2>
             <ul>
               {aboutLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
-              <li><a href="https://aves.bio/" className={linkClassName}>Visit AVES Colombia</a></li>
+              <li><a href="https://aves.bio/colombia" className={linkClassName}>Visit AVES Colombia</a></li>
+              <li><a href="https://aves.bio/" className={linkClassName}>All destinations</a></li>
             </ul>
           </nav>
         </div>

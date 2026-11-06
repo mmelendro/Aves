@@ -13,6 +13,7 @@ interface NavigationHeaderProps {
 }
 
 const navigationLinks = [
+  { href: "https://aves.bio/", label: "All destinations" },
   { href: "/aves-explorer", label: "Regions" },
   { href: "/tours", label: "Birding Experiences" },
   { href: "/how-it-works", label: "How It Works" },
@@ -71,7 +72,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 href={href}
                 aria-current={isActive(href) ? "page" : undefined}
                 className={cn(
-                  "flex min-h-11 items-center rounded-xl px-3 text-sm font-medium whitespace-nowrap transition-colors hover:bg-emerald-50 hover:text-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2",
+                  "flex min-h-11 items-center rounded-xl px-2 text-sm font-medium whitespace-nowrap transition-colors hover:bg-emerald-50 hover:text-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2 xl:px-3",
                   isActive(href) ? "bg-emerald-50 text-emerald-900" : "text-gray-700",
                 )}
               >
