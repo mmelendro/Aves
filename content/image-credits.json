@@ -377,6 +377,29 @@
         "commonName": "Apical Flycatcher",
         "scientificName": "Myiarchus apicalis"
       }
+    },
+    {
+      "file": "destinations/splendid-fairywren.jpg",
+      "path": "/images/destinations/splendid-fairywren.jpg",
+      "title": "Splendid Blue Wren, Denmark WA.jpg",
+      "creator": "BaroBert",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/User:BaroBert",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Splendid_Blue_Wren,_Denmark_WA.jpg",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Splendid_Blue_Wren%2C_Denmark_WA.jpg/960px-Splendid_Blue_Wren%2C_Denmark_WA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Splendid Blue Wren, Denmark WA.jpg by BaroBert / Wikimedia Commons / CC BY-SA 3.0",
+      "location": "Denmark, Western Australia, Australia",
+      "alt": "A blue male Splendid Fairywren in Denmark, Western Australia",
+      "width": 800,
+      "height": 1200,
+      "bytes": 154373,
+      "verifiedOn": "2026-11-06",
+      "modifications": "Wikimedia thumbnail resized to a maximum 1200 px edge and JPEG-compressed for the web; website may crop to fit its layout. No generative edits. Image adaptations remain under CC BY-SA 3.0.",
+      "species": {
+        "commonName": "Splendid Fairywren",
+        "scientificName": "Malurus splendens"
+      }
     }
   ]
 }

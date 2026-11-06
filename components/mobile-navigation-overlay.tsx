@@ -16,7 +16,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
 
   useEffect(() => {
     if (!open) return
-    const desktop = window.matchMedia("(min-width: 1024px)")
+    const desktop = window.matchMedia("(min-width: 1280px)")
     const closeOnDesktop = () => {
       if (desktop.matches) setOpen(false)
     }
@@ -33,7 +33,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="flex min-h-11 items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2 lg:hidden"
+          className="flex min-h-11 items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2 xl:hidden"
         >
           <Menu className="h-5 w-5" aria-hidden="true" />
           Menu
@@ -55,7 +55,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
             </Dialog.Close>
           </div>
           <Dialog.Description className="sr-only">
-            Explore Colombian regions, learn about the journeys, or plan your trip.
+            Choose an AVES destination, explore Colombian regions, or plan your trip.
           </Dialog.Description>
           <nav aria-label="Mobile navigation" className="space-y-1">
             {links.map(({ href, label }) => {
@@ -81,6 +81,13 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
             >
               Plan My Trip
             </Link>
+            <a
+              href="https://aves.bio/australia"
+              onClick={() => setOpen(false)}
+              className="flex min-h-12 items-center justify-center rounded-xl px-4 text-sm font-semibold text-emerald-800 underline underline-offset-4 hover:bg-emerald-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700"
+            >
+              Visit AVES Australia
+            </a>
           </nav>
         </Dialog.Content>
       </Dialog.Portal>

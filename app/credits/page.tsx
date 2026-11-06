@@ -8,7 +8,7 @@ import { canonicalUrl, sitePath } from "@/lib/site-path"
 export const metadata: Metadata = { title: "Photography & Recording Credits", alternates: { canonical: canonicalUrl("/credits") } }
 export default function CreditsPage() {
   return (
-    <PageShell path="/credits" title="The People Behind the Photographs & Sounds" description="Thank you to the photographers and field recordists who make these glimpses of Colombia possible. Original files, authors and licence information are linked below.">
+    <PageShell path="/credits" title="The People Behind the Photographs & Sounds" description="Thank you to the photographers and field recordists who bring AVES destinations to life. Credits for the main homepage and Colombian website are below; each country also maintains its own media credits.">
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8">
           {credits.images.map(photo => (

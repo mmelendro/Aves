@@ -1,18 +1,28 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { PageShell } from "@/components/page-shell"
+import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
+import { Badge } from "@/components/ui/badge"
 import { publicPageGroups } from "@/lib/public-pages"
 import { canonicalUrl } from "@/lib/site-path"
 
 export const metadata: Metadata = {
-  title: "Site Map",
-  description: "Find AVES Colombia's region guides, birdlife, experiences and trip-planning information in one place.",
+  title: "AVES Site Map",
+  description: "Find the main AVES homepage, Colombia's region guides and trip-planning information, and the Australia site map.",
   alternates: { canonical: canonicalUrl("/site-map") },
 }
 
 export default function SiteMapPage() {
   return (
-    <PageShell path="/site-map" title="Find Your Way Around AVES Colombia" description="Explore a place, meet its birds, or find the information you need to start planning.">
+    <div className="min-h-screen bg-white">
+      <GlobalHeader />
+      <main id="main-content" tabIndex={-1}>
+        <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-12 lg:py-16">
+          <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+            <Badge className="mb-5 bg-emerald-100 text-emerald-800 hover:bg-emerald-100">🌿 AVES</Badge>
+            <h1 className="mb-5 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">AVES Site Map</h1>
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 lg:text-xl">Choose a country from the AVES homepage, or explore Colombia's regions, birds and trip-planning information here.</p>
+          </div>
+        </section>
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {publicPageGroups.map(group => (
@@ -28,8 +38,17 @@ export default function SiteMapPage() {
             </section>
           ))}
         </div>
-        <p className="mt-10 text-gray-600">Looking for our Australian website? <a href="https://aves.bio/australia/site-map" className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">Visit the AVES Australia site map</a>.</p>
+        <section aria-labelledby="australia-directory" className="mt-10 rounded-2xl border border-emerald-100 bg-emerald-50/50 p-6">
+          <h2 id="australia-directory" className="text-xl font-semibold text-emerald-950">Explore Australia</h2>
+          <p className="mt-2 text-gray-600">Discover Australia's regions, birdlife and journey planning on our Australian website.</p>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1">
+            <li><a href="https://aves.bio/australia" className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">Australia Home</a></li>
+            <li><a href="https://aves.bio/australia/site-map" className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">Australia Site Map</a></li>
+          </ul>
+        </section>
       </div>
-    </PageShell>
+      </main>
+      <GlobalFooter />
+    </div>
   )
 }

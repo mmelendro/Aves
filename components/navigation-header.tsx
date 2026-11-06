@@ -12,6 +12,7 @@ interface NavigationHeaderProps {
 }
 
 const navigationLinks = [
+  { href: "/", label: "Destinations" },
   { href: "/aves-explorer", label: "Regions" },
   { href: "/tours", label: "Birding Experiences" },
   { href: "/how-it-works", label: "How It Works" },
@@ -36,7 +37,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </a>
         <div className="container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Link
-            href="/"
+            href="/colombia"
             aria-label="AVES Colombia home"
             className="flex min-h-11 shrink-0 items-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
           >
@@ -54,7 +55,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </span>
           </Link>
 
-          <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
+          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
               const NavigationLink = href.startsWith("/australia/") ? "a" : Link
               return <NavigationLink

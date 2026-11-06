@@ -21,7 +21,7 @@ export default function ParamoManizalesThornbillPost() {
       <div className="bg-gray-50 py-4">
         <div className="container mx-auto px-4">
           <nav className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-emerald-600 transition-colors">
+            <Link href="/colombia" className="hover:text-emerald-600 transition-colors">
               Home
             </Link>
             <span>→</span>

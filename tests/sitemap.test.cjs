@@ -128,11 +128,15 @@ test("each listed Colombia page declares its own canonical URL", () => {
   function metadataFrom(file) {
     const source = readFileSync(file, "utf8")
     const ast = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
+    const constants = []
     for (const statement of ast.statements) {
       if (!ts.isVariableStatement(statement)) continue
+      for (const item of statement.declarationList.declarations) {
+        if (item.initializer && ts.isStringLiteral(item.initializer)) constants.push(`const ${item.name.getText(ast)} = ${item.initializer.getText(ast)}`)
+      }
       const declaration = statement.declarationList.declarations.find(item => item.name.getText(ast) === "metadata")
       if (!declaration?.initializer) continue
-      const code = ts.transpileModule("exports.metadata = " + declaration.initializer.getText(ast), {
+      const code = ts.transpileModule(constants.join(";\n") + ";\nexports.metadata = " + declaration.initializer.getText(ast), {
         compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
       }).outputText
       const result = {}

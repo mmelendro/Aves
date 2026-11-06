@@ -7,29 +7,28 @@ import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
 
 export const metadata: Metadata = {
   title: {
-    default: "AVES Tours | Authentic Bird Watching & Eco-Tourism Experiences",
-    template: "%s | AVES Tours",
+    default: "AVES | Follow the birds",
+    template: "%s | AVES",
   },
   description:
-    "Discover Colombia's incredible biodiversity with AVES. Expert-guided bird watching tours across the Caribbean Coast, Andes, and Amazon. Sustainable eco-tourism supporting local communities and conservation.",
+    "Explore Colombia and Australia with AVES. Discover remarkable birdlife, save your trip ideas and request a personally planned birding journey.",
   keywords: [
     "Colombia bird watching",
-    "eco-tourism Colombia",
+    "Australia bird watching",
     "birding tours",
     "sustainable tourism",
-    "Colombian birds",
+    "Australian birds",
     "nature photography",
     "conservation travel",
-    "indigenous communities",
     "Andes birding",
     "Caribbean Coast birds",
     "Amazon birds",
     "hummingbirds Colombia",
     "endemic species",
   ],
-  authors: [{ name: "AVES Tours" }],
-  creator: "AVES Tours",
-  publisher: "AVES Tours",
+  authors: [{ name: "AVES" }],
+  creator: "AVES",
+  publisher: "AVES",
   formatDetection: {
     email: false,
     address: false,
@@ -40,17 +39,15 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "AVES Tours | Authentic Bird Watching & Eco-Tourism",
+    title: "AVES | Follow the birds",
     description:
-      "Expert-guided bird watching tours across Colombia's diverse ecosystems. Sustainable travel supporting conservation and local communities.",
+      "Explore Colombia and Australia. Discover remarkable birdlife and plan your own AVES journey.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
-    siteName: "AVES Tours",
+    siteName: "AVES",
     images: [
       {
         url: "/images/aves-logo.png",
-        width: 1200,
-        height: 630,
-        alt: "AVES Tours - Bird Watching & Eco-Tourism",
+        alt: "AVES — Follow the birds",
       },
     ],
     locale: "en_US",
@@ -58,9 +55,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AVES Tours | Authentic Bird Watching & Eco-Tourism",
+    title: "AVES | Follow the birds",
     description:
-      "Expert-guided bird watching tours across Colombia's diverse ecosystems. Sustainable travel supporting conservation and local communities.",
+      "Explore Colombia and Australia. Discover remarkable birdlife and plan your own AVES journey.",
     images: ["/images/aves-logo.png"],
   },
   // TODO: Add real Google Search Console verification code
@@ -75,7 +72,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -97,9 +93,9 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
-              name: "AVES Tours",
+              name: "AVES",
               description:
-                "Expert-guided bird watching and eco-tourism experiences across Colombia's diverse ecosystems",
+                "Personally planned birding and nature journeys in Colombia and Australia",
               url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
               logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/aves-logo.png`,
               contactPoint: {
@@ -108,12 +104,10 @@ export default function RootLayout({
                 contactType: "customer service",
                 availableLanguage: ["English", "Spanish"],
               },
-              address: {
-                "@type": "PostalAddress",
-                addressCountry: "CO",
-                addressRegion: "Colombia",
-              },
-              sameAs: [],
+              areaServed: [
+                { "@type": "Country", name: "Colombia" },
+                { "@type": "Country", name: "Australia" },
+              ],
               offers: {
                 "@type": "Offer",
                 category: "Eco-Tourism",

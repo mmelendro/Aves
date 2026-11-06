@@ -48,7 +48,7 @@ export function Footer({ transparent = false }: FooterProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" aria-label="AVES Colombia home" className="mb-4 inline-flex min-h-11 items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900">
+            <Link href="/colombia" aria-label="AVES Colombia home" className="mb-4 inline-flex min-h-11 items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900">
               <Image src="/images/aves-logo.png" alt="" width={56} height={56} className="h-14 w-14 rounded-xl bg-white object-contain p-1" />
               <span className="text-lg font-semibold text-emerald-300">AVES Colombia</span>
             </Link>
@@ -80,6 +80,7 @@ export function Footer({ transparent = false }: FooterProps) {
             <h2 className="mb-3 text-base font-semibold text-emerald-300">About AVES</h2>
             <ul>
               {aboutLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
+              <li><Link href="/" className={linkClassName}>All AVES Destinations</Link></li>
               <li><a href="https://aves.bio/australia" className={linkClassName}>Visit AVES Australia</a></li>
             </ul>
           </nav>

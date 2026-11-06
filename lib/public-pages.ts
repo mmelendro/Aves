@@ -4,13 +4,14 @@ export type PublicPageGroup = { id: string; title: string; pages: { href: string
 
 export const publicPageGroups: PublicPageGroup[] = [
   {
-    id: "start", title: "Start Exploring",
+    id: "start", title: "AVES & Colombia",
     pages: [
-      { href: "/", label: "Colombia Home" },
+      { href: "/", label: "AVES Home — All Destinations" },
+      { href: "/colombia", label: "Colombia Home" },
       { href: "/aves-explorer", label: "Explore the Regions" },
       { href: "/species", label: "Colombian Birdlife" },
       { href: "/how-it-works", label: "How It Works" },
-      { href: "/contact", label: "Plan My Trip" },
+      { href: "/contact", label: "Plan My Colombia Trip" },
     ],
   },
   {
@@ -30,7 +31,7 @@ export const publicPageGroups: PublicPageGroup[] = [
     ],
   },
   {
-    id: "experiences", title: "Birding Experiences",
+    id: "experiences", title: "Colombia Birding Experiences",
     pages: [
       { href: "/tours", label: "Birding Experiences" },
       { href: "/tours/adventure", label: "Adventure Tours" },
@@ -41,7 +42,7 @@ export const publicPageGroups: PublicPageGroup[] = [
     ],
   },
   {
-    id: "about", title: "About AVES",
+    id: "about", title: "About AVES Colombia",
     pages: [
       { href: "/about", label: "About AVES Colombia" },
       { href: "/team", label: "Our Team" },
@@ -51,7 +52,7 @@ export const publicPageGroups: PublicPageGroup[] = [
     ],
   },
   {
-    id: "planning", title: "Reading & Planning",
+    id: "planning", title: "Colombia Reading & Planning",
     pages: [
       { href: "/blog", label: "Birding Blog" },
       { href: "/blog/hummingbird-vision-journey", label: "Hummingbird Sanctuaries" },
