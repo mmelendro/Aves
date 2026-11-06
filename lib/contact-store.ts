@@ -2,6 +2,7 @@ import "server-only"
 import { z } from "zod"
 
 export type ContactRequestInput = {
+  country?: "australia" | "colombia"
   idempotencyKey: string
   payloadHash: string
   intent: "inquiry" | "waitlist"
@@ -52,7 +53,7 @@ function configuration() {
   return { origin: url.origin, headers }
 }
 
-async function rpc(name: "submit_contact_request" | "record_contact_notification", body: Record<string, unknown>) {
+async function rpc(name: "submit_shared_contact_request" | "record_contact_notification", body: Record<string, unknown>) {
   try {
     const { origin, headers } = configuration()
     const response = await fetch(`${origin}/rest/v1/rpc/${name}`, {
@@ -74,7 +75,8 @@ async function rpc(name: "submit_contact_request" | "record_contact_notification
 }
 
 export async function saveContactRequest(input: ContactRequestInput): Promise<ContactReceipt> {
-  const data = await rpc("submit_contact_request", {
+  const data = await rpc("submit_shared_contact_request", {
+    p_country: input.country || "australia",
     p_idempotency_key: input.idempotencyKey, p_payload_hash: input.payloadHash,
     p_intent: input.intent, p_name: input.name, p_email: input.email,
     p_updates: input.updates, p_consent_version: input.consentVersion,

@@ -3,6 +3,7 @@ import { Resend } from "resend"
 import { z } from "zod"
 import { createHash } from "node:crypto"
 import { ContactStoreError, saveContactRequest, recordContactNotification } from "@/lib/contact-store"
+import { countryLabels, isCountryRegion, isColombiaRegion } from "@/content/trip-options"
 
 const MAX_REQUEST_BYTES = 32_768
 const CONSENT_VERSION = "au-launch-updates-2026-11-05"
@@ -11,6 +12,7 @@ const singleLine = (maxLength: number) =>
 const emailAddress = singleLine(254).email()
 
 const requestSchema = z.object({
+  country: z.enum(["australia", "colombia"]).optional().default("australia"),
   intent: z.enum(["inquiry", "waitlist"]),
   name: singleLine(120).min(1),
   email: emailAddress,
@@ -23,6 +25,10 @@ const requestSchema = z.object({
 }).refine((value) => value.intent !== "waitlist" || value.updates, {
   message: "Please opt in to updates to join the waitlist.",
   path: ["updates"],
+}).refine(value => !value.region || (value.country === "colombia"
+  ? isCountryRegion("colombia", value.region)
+  : !isColombiaRegion(value.region)), {
+  message: "Choose a region in the selected country.", path: ["region"],
 })
 
 function reply(body: Record<string, unknown>, status: number) {
@@ -65,6 +71,19 @@ async function readBody(req: NextRequest): Promise<{ body: unknown } | { status:
 }
 
 export async function POST(req: NextRequest) {
+  const origin = req.headers.get("origin")
+  const requestUrl = new URL(req.url)
+  let localAlias = false
+  try {
+    const originUrl = new URL(origin || "")
+    const loopback = new Set(["localhost", "127.0.0.1", "[::1]"])
+    localAlias = origin === originUrl.origin && loopback.has(requestUrl.hostname) && loopback.has(originUrl.hostname)
+      && originUrl.protocol === requestUrl.protocol && originUrl.port === requestUrl.port
+  } catch { /* Malformed origins fail closed below. */ }
+  if (req.headers.get("sec-fetch-site") === "cross-site" || (origin
+    && origin !== requestUrl.origin && origin !== "https://aves.bio" && !localAlias)) {
+    return reply({ error: "Please send your request from the AVES website." }, 403)
+  }
   if (req.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") {
     return reply({ error: "Please submit your request as JSON." }, 415)
   }
@@ -83,11 +102,13 @@ export async function POST(req: NextRequest) {
     return reply({ error: "Please refresh the form and try again." }, 400)
   }
 
+  const consentVersion = request.data.country === "colombia" ? "co-travel-updates-2026-11-06" : CONSENT_VERSION
   const payload = {
     intent: request.data.intent, name: request.data.name, email: request.data.email.toLowerCase(),
     region: request.data.region, travelWhen: request.data.travelWhen,
     partySize: String(request.data.partySize ?? ""), message: request.data.message,
-    updates: request.data.updates, consentVersion: CONSENT_VERSION,
+    updates: request.data.updates, consentVersion,
+    ...(request.data.country === "colombia" ? { country: "colombia" as const } : {}),
   }
   let receipt
   try {
@@ -104,11 +125,11 @@ export async function POST(req: NextRequest) {
         status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "900" },
       })
     }
-    console.error("Australia contact storage did not confirm acceptance")
+    console.error("AVES contact storage did not confirm acceptance")
     return reply({ error: "We couldn't confirm that your request was saved. Please try again or email mmelendro@gmail.com." }, 503)
   }
 
-  const storedResponse = () => reply({ success: true, status: "stored", intent: payload.intent }, 200)
+  const storedResponse = () => reply({ success: true, status: "stored", intent: payload.intent, country: request.data.country }, 200)
   // An unchanged retry returns the original receipt without reapplying consent
   // or sending another notification. Saving is the success boundary.
   if (!receipt.created) return storedResponse()
@@ -117,12 +138,12 @@ export async function POST(req: NextRequest) {
     try {
       await recordContactNotification(receipt.request_id, status, providerId, errorCode)
     } catch {
-      console.error("Australia contact notification status could not be recorded")
+      console.error("AVES contact notification status could not be recorded")
     }
   }
   const apiKey = process.env.RESEND_API_KEY?.trim()
   const contactEmail = process.env.CONTACT_EMAIL?.trim() || "mmelendro@gmail.com"
-  const contactFrom = process.env.CONTACT_FROM?.trim() || "AVES Australia <noreply@aves.bio>"
+  const contactFrom = process.env.CONTACT_FROM?.trim() || "AVES <noreply@aves.bio>"
   if (!apiKey || !emailAddress.safeParse(contactEmail).success || !isValidSender(contactFrom)) {
     await recordOutcome("failed", null, "email_configuration_missing")
     return storedResponse()
@@ -131,9 +152,11 @@ export async function POST(req: NextRequest) {
   const { intent, name, email, region, travelWhen, partySize, message, updates } = payload
   const submittedAt = receipt.submitted_at
   const label = intent === "waitlist" ? "Waitlist request" : "Custom tour inquiry"
-  const emailBody = `${label} — AVES Australia
+  const countryLabel = countryLabels[request.data.country]
+  const emailBody = `${label} — AVES ${countryLabel}
 
 Intent: ${intent}
+Country: ${countryLabel}
 Submitted at (UTC): ${submittedAt}
 Name: ${name}
 Email: ${email}
@@ -143,7 +166,7 @@ Party size: ${partySize || "Not specified"}
 
 Updates consent submitted: ${updates ? "Yes" : "No"}
 Consent timestamp (UTC): ${updates ? submittedAt : "No opt-in submitted"}
-Consent wording version: ${CONSENT_VERSION}
+Consent wording version: ${consentVersion}
 Request reference: ${receipt.request_id}
 
 Message:
@@ -156,7 +179,7 @@ ${message || "None"}`
       from: contactFrom,
       to: contactEmail,
       replyTo: email,
-      subject: `[AVES Australia] ${label} from ${name}`,
+      subject: `[AVES ${countryLabel}] ${label} from ${name}`,
       text: emailBody,
     }, { idempotencyKey: `contact/${receipt.request_id}` }), new Promise<never>((_, reject) => {
       notificationTimeout = setTimeout(() => reject(new Error("Notification acceptance unconfirmed")), 8_000)

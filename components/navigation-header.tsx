@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
 import { SITE_BASE_PATH, sitePath } from "@/lib/site-path"
 import { cn } from "@/lib/utils"
+import { PortalNavigation } from "@/components/account/portal-navigation"
 
 interface NavigationHeaderProps {
   currentPage?: string
@@ -29,6 +30,10 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
       : rawPath
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
+
+  if (["/account", "/admin", "/auth"].some(path => activePath === path || activePath.startsWith(path + "/"))) {
+    return <PortalNavigation currentPage={activePath} />
+  }
 
   return (
     <>

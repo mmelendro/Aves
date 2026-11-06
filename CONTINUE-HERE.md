@@ -1,43 +1,61 @@
-# AVES Australia — working snapshot, 6 November 2026
+# AVES Australia and shared AVES portal — handoff, 6 November 2026
 
-This branch contains the full Australian application at the repository root. It preserves the latest local edits for cloud development while the original laptop is offline. This GitHub upload is not a production deployment.
+**Shared-account release pending.** Australia remains published at https://aves.bio/australia. The newer code generalising its working account/backend to both Colombia and Australia is verified, but is not yet the public release listed below.
 
-## Source and hosting
+## Source and current live releases
 
-- Repository: https://github.com/mmelendro/Aves
-- Australia branch: `australia/preview` (this branch).
-- Colombia branch: `webmaster/readiness-2026-11-05` (separate application and independent history).
-- Use separate checkouts to work on both; do not merge this branch into Colombia or `main`.
-- Public site: https://aves.bio/australia.
+- Repository: https://github.com/mmelendro/Aves.
+- Australia checkout/branch: `australia` / `australia/preview`.
 - Hosting project: `mmelendro-9273s-projects/aves-australia`.
-- Last published Australian code: `11f78d1`; the regional expansion in this snapshot is newer and unpublished.
-- Automatic Vercel Git deployments are disabled for these two working branches in `vercel.json`. This prevents a backup push from deploying either unfinished application.
+- Live Australia: `88601b6`, deployment `dpl_96tkV7vQzoJYAVJLQTZSvu1SuFFc`.
+- Colombia checkout/branch: `source` / `webmaster/readiness-2026-11-05`.
+- Live Colombia redesign: `00e2129`, deployment `dpl_HbF8jQLfBNQNZrxnTTYDcM1fk8Ry`, at https://aves.bio/. It superseded the urgent hotfix.
+- Colombia's Vercel production branch is now `webmaster/readiness-2026-11-05`, verified through the API.
+- Keep the public applications and independent Git histories separate. Their account backend is shared; this is not a merge of the two website codebases.
+- Preserve branch-specific automatic-deployment guards in `vercel.json`. Update final release IDs only after publication and verification succeed.
 
-## Latest agreed change and completed implementation
+## One shared account/database — supersedes separate Colombia migration
 
-Maintain AVES's existing visual style. Provide at least 20 homepage birds, selectable Australian regions with trip enquiries and personal quotes, clear species distributions, and a bird carousel for every region. Bring Colombia closer to this layout and add its own 20+ birds and regional carousels.
+The user explicitly chose one AVES account/database for both countries and abandoned migration of old Colombian data. Reuse the existing working backend `qeyprwftrouztlqmwuzv`. Do not point this app at either old Colombian project or restart a separate account migration.
 
-- `content/birds.ts` combines 20 verified profiles with real photographs, range and habitat notes, sources and credits.
-- Seventeen birds have licensed local recordings. Regent Bowerbird, Victoria's Riflebird and Gouldian Finch show unavailable audio. Emu is labelled a captive female recording, Southern Cassowary as chick calls.
-- Six states, Northern Territory, ACT and Jervis Bay Territory are selectable on the map, have regional guides and prefilled enquiry links. External territories are not represented on this map.
-- `content/region-options.ts` keeps enquiries and saved-plan choices aligned.
-- `content/regional-birds.ts` contains 39 sourced local selections across all nine regions, with 3–6 birds in each carousel. Local occurrence and wider species range are distinct.
-- `components/regional-bird-carousel.tsx` filters the shared catalogue, adds local occurrence notes and renders region-specific collections.
-- The shared homepage carousel accepts an optional `birds` prop. Its latest thumbnail controls use separate grid columns to prevent arrows covering bird thumbnails on narrow screens.
+Hosted migration `20261106113240_shared_country_plans_and_contacts.sql` is **applied**. Hosted rollback verification **passed**, with these observed counts unchanged before/after: 5 Auth users, 4 Australian plans, 0 Colombian plans, 3 quote requests and 4 contact requests. No permanent Colombian test plan was introduced by that rollback suite. This verifies the schema change, not the pending frontend deployment.
 
-## Verification and stopping point
+The earlier contact, account/quote, draft quota/default-privilege and client-column migrations remain applied. Preserve their ownership checks, immutable submitted/issued snapshots, trusted owner membership, explicit projections and least-privilege grants.
 
-All 156 automated tests and the latest production build passed. Earlier browser checks verified all 20 bird selections, all 17 recordings, all nine keyboard map selections and all nine enquiry presets. The latest regional carousels and final thumbnail-grid fix still need browser checks at 320px, 390px and desktop widths before publication. No new database migration is needed for these region values.
+The paused old project `krzmqusxxrfljjkdbklx` and empty unused replacement `gfxirgzvbpytgfffolhj` remain pending deletion **after** the shared cutover is published and verified. No old data import or database deletion has occurred. Supabase Free remains the selected plan; no paid backup/security service was enabled by this work.
 
-The existing Australian backend supports signup/sign-in, saved trip plans, quote requests, owner-created priced proposals and email notifications. Preserve its security and separate database. Contact address: `mmelendro@gmail.com`. AVES is pursuing B Corp certification. Booking remains a personal request/quote process, not instant payment or guaranteed availability.
+## Prepared implementation
 
-## Next steps
+- The existing signup/sign-in, saved plans, quote requests, owner-issued AUD proposals and notification records serve both countries. Generic AVES account labels and country selection preserve the existing public website style.
+- Colombia links enter `/australia/account?country=colombia&region=<canonical-slug>`. The safe auth return parameter is unprefixed `next=/account?country=colombia&region=...`; never accept arbitrary external destinations.
+- Shared contact accepts an explicit country and validates that country's regions. Existing Australian requests/consent wording remain compatible. Colombia uses its own explicit optional trip-updates consent; an inquiry does not imply marketing permission.
+- Successful contact receipts include the stored request's country. Colombia requires `{success:true,status:"stored",intent:"inquiry",country:"colombia"}`. Durable saving and email-provider acceptance/delivery remain distinct.
+- The Colombia public app has retired its conflicting auth/profile/booking/document clients and points to this maintained portal/backend. Old shopping links become personal inquiries, with recognised presets preserved.
+- No instant reservations, payments, fabricated delivery states or automatic visitor confirmation emails are introduced.
 
-1. Confirm `content/regional-birds.ts` contains all nine keys and locally sourced selections. The Western Australia Laughing Kookaburra is explicitly introduced; no Emu is listed for Tasmania.
-2. Verify the latest carousel layout and each regional collection, including touch/keyboard navigation, available calls, local-range notes and enquiry links.
-3. Finish Colombia's missing bird/region/credit data and map integration on its separate branch; its `CONTINUE-HERE.md` describes the outstanding work.
-4. Stage and verify each application in the correct Vercel project before publishing. Preserve the `/australia` routing on the Colombian project.
+Australian public content remains intact: twenty sourced bird profiles, genuine credited photographs, seventeen licensed recordings and nine regional guides (six states, NT, ACT and Jervis Bay Territory). The regional catalogue provides 39 local selections. Preserve accurate local occurrence versus wider ranges, introduced-species labels, missing recordings and user-initiated playback.
 
-The fixed Next base path is `/australia`. Native asset/API URLs use `sitePath`; Next Link paths remain unprefixed. Existing public routing sends exact `/australia` and descendants to `https://aves-australia.vercel.app` while preserving `/australia` in the destination. Do not remove those routes or change broader Colombia routing/DNS.
+## Verified checks and email configuration
 
-Use Node 22 and pnpm 10.34.5. Run `corepack pnpm install --frozen-lockfile --ignore-scripts`, then `corepack pnpm test`, `corepack pnpm typecheck`, and `corepack pnpm build`. Production keys and customer data are excluded from Git. A cloud workspace must use secure service connections/configuration for backend checks or deployment; never commit credentials or ask for them in chat.
+- Latest shared/Australia local checks: **191 automated tests**, full strict type checking and production build all pass.
+- Latest Colombia local checks: **61 automated tests**, full strict type checking and production build all pass; the old TypeScript build bypass is removed.
+- Hosted shared-country rollback suite passed with unchanged counts as recorded above. These results do not replace live verification of the new deployments.
+- Vercel `CONTACT_FROM` and Supabase's SMTP display name were renamed to AVES. Auth templates now use generic AVES wording while preserving their existing callback/recovery links.
+- Password-change, email-change and MFA-change security alerts were enabled. SMTP display name AVES and the four security-alert switches were verified after reloading the dashboard. MFA-change alerts are not proof of completed owner MFA enrollment.
+- Automatic approval review **blocked the attempted removal of obsolete hosting connections/environment variables before deployment**. No variables were removed. Follow deployment and verification with the cleanup; do not bypass the review or report cleanup as finished.
+
+## Routing and release order
+
+The fixed Next base path remains `/australia`. Native assets/API requests use `sitePath`; internal Next links remain unprefixed. Native anchors cross between the independently deployed public apps. Colombia's hosting project forwards exact `/australia` and descendants to `https://aves-australia.vercel.app`, preserving the prefix. Do not remove those rules, broaden them over Colombia's assets/API or change DNS.
+
+1. Finish the shared release review; SMTP persistence is verified.
+2. Deploy this upgraded shared/Australia app first, against the already-applied migration. Verify both countries' account, draft, quote/proposal and contact flows, with controlled fixtures and truthful notification results.
+3. Only then deploy the Colombia cleanup. Its requests must not hit the old Australia-only handler, which does not understand country.
+4. Verify public routing, redirects, cookies, mobile navigation and country-preserving form/account presets. Record both final public commits and deployment IDs in the handoffs.
+5. After successful cutover, remove obsolete hosting connections/variables and retire the two unused Colombian databases through the authorised review process. These actions remain pending.
+
+Contact: `mmelendro@gmail.com`. AVES is pursuing B Corp certification, not certified. Preserve the emerald palette, rounded cards and genuine bird media.
+
+Use Node 22 and pinned pnpm 10.34.5. Run a frozen install with lifecycle scripts disabled, `pnpm test`, `pnpm typecheck` and `pnpm build`. Credentials, private environment files, customer data and hosting-auth files stay out of Git and chat. Use controlled service tests; never print auth tokens or change the real owner's password during QA.
+
+The retained database display name is AVES Shared Accounts (same project reference and Sydney region). Shared privacy notices and proposal information were corrected to match the current account and inquiry flows.

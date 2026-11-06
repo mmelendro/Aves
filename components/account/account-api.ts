@@ -1,8 +1,7 @@
 import { sitePath } from "@/lib/site-path"
-import { regionLabels } from "@/content/region-options"
-export { regionLabels } from "@/content/region-options"
+import { countryLabels, countryRegionLabels, type TripCountry } from "@/content/trip-options"
 
-export type TripFields = { title: string; regions: string[]; travelWhen: string; partySize: string; message: string }
+export type TripFields = { country?: TripCountry; title: string; regions: string[]; travelWhen: string; partySize: string; message: string }
 export type TripPlan = TripFields & { id: string; status: "draft" | "quote_requested"; updatedAt: string }
 export type ProposalFields = { totalCents: number; currency: "AUD"; itinerary: string; inclusions: string; exclusions: string; validUntil: string | null }
 export type Proposal = ProposalFields & { id: string; quoteRequestId: string; version: number; status: "draft" | "sent"; issuedAt: string | null; updatedAt: string; notificationStatus: "pending" | "accepted" | "failed" }
@@ -23,7 +22,9 @@ export async function accountRequest<T>(path: string, options: RequestInit = {})
   return result as T
 }
 
-export function regionSummary(regions: string[]) { return regions.map(region => regionLabels[region] || region).join(", ") || "Open to inspiration" }
+export function tripCountry(country?: TripCountry): TripCountry { return country === "colombia" ? "colombia" : "australia" }
+export function countryLabel(country?: TripCountry) { return countryLabels[tripCountry(country)] }
+export function regionSummary(regions: string[], country?: TripCountry) { const labels = countryRegionLabels[tripCountry(country)]; return regions.map(region => labels[region] || region).join(", ") || "Open to inspiration" }
 export function dateLabel(value: string | null | undefined) {
   if (!value) return "Not specified"
   const date = new Date(value.length === 10 ? `${value}T12:00:00Z` : value)

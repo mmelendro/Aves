@@ -9,9 +9,12 @@ import { cn } from "@/lib/utils"
 interface MobileNavigationOverlayProps {
   currentPage: string
   links: readonly { href: string; label: string }[]
+  title?: string
+  description?: string
+  callToAction?: { href: string; label: string }
 }
 
-export function MobileNavigationOverlay({ currentPage, links }: MobileNavigationOverlayProps) {
+export function MobileNavigationOverlay({ currentPage, links, title = "AVES Australia", description = "Explore Australian regions, plan your trip, or visit your saved plans.", callToAction = { href: "/contact", label: "Plan My Trip" } }: MobileNavigationOverlayProps) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -43,7 +46,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
         <Dialog.Overlay className="fixed inset-0 z-[70] bg-emerald-950/40 backdrop-blur-sm" />
         <Dialog.Content className="fixed inset-x-4 top-4 z-[80] mx-auto max-h-[calc(100dvh_-_2rem)] max-w-md overflow-y-auto rounded-2xl border border-emerald-100 bg-gradient-to-br from-white via-emerald-50 to-blue-50 p-5 shadow-2xl focus:outline-none sm:inset-x-auto sm:right-6 sm:w-[calc(100%_-_3rem)]">
           <div className="mb-5 flex items-center justify-between gap-3">
-            <Dialog.Title className="text-lg font-semibold text-emerald-900">AVES Australia</Dialog.Title>
+            <Dialog.Title className="text-lg font-semibold text-emerald-900">{title}</Dialog.Title>
             <Dialog.Close asChild>
               <button
                 type="button"
@@ -55,7 +58,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
             </Dialog.Close>
           </div>
           <Dialog.Description className="sr-only">
-            Explore Australian regions, plan your trip, or visit your saved plans.
+            {description}
           </Dialog.Description>
           <nav aria-label="Mobile navigation" className="space-y-1">
             {links.map(({ href, label }) => (
@@ -73,12 +76,12 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={callToAction.href}
               onClick={() => setOpen(false)}
-              aria-current={isActive("/contact") ? "page" : undefined}
+              aria-current={isActive(callToAction.href) ? "page" : undefined}
               className="!mt-4 flex min-h-12 items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 px-4 font-semibold text-white shadow-sm hover:from-emerald-700 hover:to-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
             >
-              Plan My Trip
+              {callToAction.label}
             </Link>
           </nav>
         </Dialog.Content>

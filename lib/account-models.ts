@@ -1,8 +1,9 @@
 import { z } from "zod"
+import type { TripCountry } from "@/content/trip-options"
 export const singleLine = (max: number) => z.string().trim().max(max).regex(/^[^\u0000-\u001f\u007f]*$/)
 export const revision = z.string().min(1).max(50).refine(value => Number.isFinite(Date.parse(value)))
 export const planFields = {
-  title: singleLine(120).min(1), regions: z.array(singleLine(160).min(1)).max(10),
+  title: singleLine(120).min(1), country: z.enum(["australia", "colombia"]).optional(), regions: z.array(singleLine(160).min(1)).max(20),
   travelWhen: singleLine(160), partySize: singleLine(40), message: z.string().trim().max(5000),
 }
 export const createPlanSchema = z.object({ id: z.uuid(), ...planFields }).strict()
@@ -18,9 +19,9 @@ export const createProposalSchema = z.object({ id: z.uuid(), ...proposalFields }
 export const updateProposalSchema = z.object({ ...proposalFields, expectedUpdatedAt: revision }).strict()
 export const quoteStatusSchema = z.object({ status: z.enum(["reviewing", "responded", "closed"]) }).strict()
 
-export type PlanRow = { id: string; title: string; details: { regions: string[]; travelWhen: string; partySize: string; message: string }; status: "draft" | "quote_requested"; updated_at: string; create_payload_hash?: string }
+export type PlanRow = { id: string; title: string; details: { country?: TripCountry; regions: string[]; travelWhen: string; partySize: string; message: string }; status: "draft" | "quote_requested"; updated_at: string; create_payload_hash?: string }
 export function mapPlan(row: PlanRow) {
-  return { id: row.id, title: row.title, ...row.details, status: row.status, updatedAt: row.updated_at }
+  return { id: row.id, title: row.title, ...row.details, country: row.details.country || "australia", status: row.status, updatedAt: row.updated_at }
 }
 export type ProposalRow = {
   id: string; quote_request_id: string; version: number; status: "draft" | "sent"; total_cents: number; currency: "AUD";

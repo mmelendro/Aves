@@ -12,6 +12,7 @@ const appRequire = createRequire(resolve(appRoot, "package.json"))
 const ts = appRequire("typescript")
 const nextServer = appRequire("next/server")
 const zod = appRequire("zod")
+const tripOptions = require("./helpers/load-ts.cjs")()("content/trip-options.ts")
 const compiled = ts.transpileModule(readFileSync(resolve(appRoot, "app/api/contact/route.ts"), "utf8"), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, esModuleInterop: true },
 }).outputText
@@ -52,6 +53,7 @@ function harness(outcome = accepted, environment = {}, storage = {}, timers = { 
     if (name === "next/server") return nextServer
     if (name === "zod") return zod
     if (name === "node:crypto") return crypto
+    if (name === "@/content/trip-options") return tripOptions
     if (name === "@/lib/contact-store") return {
       ContactStoreError,
       saveContactRequest: async (input) => {
@@ -88,13 +90,13 @@ test("inquiry saves before sending one owner notification and records provider a
   const response = await h.submit()
   assert.equal(response.status, 200)
   assert.equal(response.headers.get("cache-control"), "no-store")
-  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry" })
+  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry", country: "australia" })
   assert.deepEqual(h.events, ["save", "email", "notification"])
   assert.deepEqual(h.options, [{ idempotencyKey: `contact/${receipt.request_id}` }])
   assert.deepEqual(h.notifications, [[receipt.request_id, "accepted", "test-acceptance-id", null]])
   assert.equal(h.calls.length, 1)
   assert.equal(h.calls[0].to, "mmelendro@gmail.com")
-  assert.equal(h.calls[0].from, "AVES Australia <noreply@aves.bio>")
+  assert.equal(h.calls[0].from, "AVES <noreply@aves.bio>")
   assert.equal(h.calls[0].replyTo, "visitor@example.com")
   assert.equal(h.calls[0].subject, "[AVES Australia] Custom tour inquiry from Test Birder")
   assert.match(h.calls[0].text, /Intent: inquiry/)
@@ -104,11 +106,59 @@ test("inquiry saves before sending one owner notification and records provider a
   assert.match(h.calls[0].text, /First line\nSecond line/)
 })
 
+test("Colombia enquiry stores country and exact consent scope before owner notification", async () => {
+  const h = harness()
+  const response = await h.submit({ ...validInquiry, country: "colombia", region: "cauca-valley", updates: true })
+  assert.equal(response.status, 200)
+  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry", country: "colombia" })
+  assert.equal(h.saves[0].country, "colombia")
+  assert.equal(h.saves[0].consentVersion, "co-travel-updates-2026-11-06")
+  assert.match(h.calls[0].subject, /AVES Colombia/)
+  assert.match(h.calls[0].text, /Country: Colombia/)
+  assert.deepEqual(h.events, ["save", "email", "notification"])
+})
+
+test("shared contact rejects foreign origins and explicit cross-site before storage", async () => {
+  for (const extra of [{ Origin: "https://attacker.test" }, { Origin: "https://aves.bio", "Sec-Fetch-Site": "cross-site" }]) {
+    const h = harness()
+    assert.equal((await h.submit(validInquiry, { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey, ...extra })).status, 403)
+    assert.equal(h.saves.length, 0)
+  }
+  for (const origin of [undefined, "https://aves.bio", "https://example.test"]) {
+    const h = harness()
+    assert.equal((await h.submit(validInquiry, { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey, ...(origin ? { Origin: origin } : {}) })).status, 200)
+  }
+})
+
+test("local contact accepts only same-port same-scheme loopback aliases", async () => {
+  for (const [origin, status] of [["http://127.0.0.1:3000", 200], ["http://127.0.0.1:3001", 403], ["https://127.0.0.1:3000", 403], ["http://attacker.test:3000", 403]]) {
+    const h = harness()
+    const response = await h.invoke(new Request("http://localhost:3000/australia/api/contact", {
+      method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey, Origin: origin }, body: JSON.stringify(validInquiry),
+    }))
+    assert.equal(response.status, status)
+    assert.equal(h.saves.length, status === 200 ? 1 : 0)
+  }
+})
+
+for (const body of [
+  { ...validInquiry, country: "peru" },
+  { ...validInquiry, country: "colombia", region: "tasmania" },
+  { ...validInquiry, country: "australia", region: "pacific" },
+  { ...validInquiry, country: "colombia", region: "unknown" },
+  { ...validInquiry, country: "colombia", region: "pacific", intent: "waitlist", updates: false },
+]) test("invalid destination or consent cannot reach shared contact storage", async () => {
+  const h = harness()
+  assert.equal((await h.submit(body)).status, 400)
+  assert.equal(h.saves.length, 0)
+  assert.equal(h.calls.length, 0)
+})
+
 test("waitlist requires explicit updates consent and records timestamp in owner notification", async () => {
   const h = harness()
   const response = await h.submit({ intent: "waitlist", name: "Test Birder", email: "visitor@example.com", updates: true })
   assert.equal(response.status, 200)
-  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "waitlist" })
+  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "waitlist", country: "australia" })
   assert.equal(h.calls.length, 1)
   assert.match(h.calls[0].subject, /Waitlist request/)
   assert.match(h.calls[0].text, /Updates consent submitted: Yes/)
@@ -212,7 +262,7 @@ for (const [label, env] of [
     const h = harness(undefined, env)
     const response = await h.submit()
     assert.equal(response.status, 200)
-    assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry" })
+    assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry", country: "australia" })
     assert.equal(h.calls.length, 0)
     assert.deepEqual(h.events, ["save", "notification"])
     assert.deepEqual(h.notifications, [[receipt.request_id, "failed", null, "email_configuration_missing"]])
@@ -229,7 +279,7 @@ for (const [label, result] of [
     const response = await h.submit()
     assert.equal(response.status, 200)
     assert.equal(h.calls.length, 1)
-    assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry" })
+    assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry", country: "australia" })
     assert.deepEqual(h.notifications, [[receipt.request_id, "failed", null,
       result instanceof Error ? "email_provider_unconfirmed" : "email_provider_rejected"]])
     assert.doesNotMatch(JSON.stringify(h.logs), /private provider|private transport|visitor@example.com/)
@@ -303,7 +353,7 @@ test("an unconfirmed storage result cannot send or report success; retry uses th
   assert.equal(uncertain.status, 503)
   assert.doesNotMatch(await uncertain.text(), /private|success/)
   const retry = await h.submit()
-  assert.deepEqual(await retry.json(), { success: true, status: "stored", intent: "inquiry" })
+  assert.deepEqual(await retry.json(), { success: true, status: "stored", intent: "inquiry", country: "australia" })
   assert.equal(h.saves[0].idempotencyKey, h.saves[1].idempotencyKey)
   assert.equal(h.saves[0].payloadHash, h.saves[1].payloadHash)
   assert.equal(h.calls.length, 0)
@@ -314,7 +364,7 @@ for (const outcome of [accepted, new Error("private mail transport failure")]) {
     const h = harness(outcome, {}, { record: () => { throw new Error("private status update details") } })
     const response = await h.submit()
     assert.equal(response.status, 200)
-    assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry" })
+    assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry", country: "australia" })
     assert.equal(h.notifications.length, 1)
     assert.doesNotMatch(JSON.stringify(h.logs), /private|visitor@example.com/)
   })
@@ -334,7 +384,7 @@ test("a slow notification times out after its bound and still returns durable su
   assert.deepEqual(h.events, ["save", "email"])
   fireTimeout()
   const response = await pending
-  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry" })
+  assert.deepEqual(await response.json(), { success: true, status: "stored", intent: "inquiry", country: "australia" })
   assert.deepEqual(h.notifications, [[receipt.request_id, "failed", null, "email_provider_unconfirmed"]])
   assert.deepEqual(cleared, [timerHandle])
   resolveEmail(accepted)

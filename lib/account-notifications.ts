@@ -10,7 +10,7 @@ export async function notifyAccount(kind: "quote" | "proposal", id: string, to: 
     try { await accountRpc(outcomeRpc, { ...identity, p_status: status, p_provider_id: providerId, p_error_code: errorCode }) } catch { /* Durable request/proposal remains successful. */ }
   }
   const key = process.env.RESEND_API_KEY?.trim()
-  const from = process.env.CONTACT_FROM?.trim() || "AVES Australia <noreply@aves.bio>"
+  const from = process.env.CONTACT_FROM?.trim() || "AVES <noreply@aves.bio>"
   if (!key || !z.email().safeParse(to).success || /[\r\n]/.test(from)) { await record("failed", null, "email_configuration_missing"); return "failed" as const }
   let timer: ReturnType<typeof setTimeout> | undefined
   try {

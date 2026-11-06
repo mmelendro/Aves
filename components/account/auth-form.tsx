@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { createClient } from "@/lib/supabase/client"
 import { sitePath } from "@/lib/site-path"
+import { accountEntryHref, accountReturnPath } from "./account-navigation"
 
 type Mode = "sign-in" | "sign-up" | "forgot-password" | "reset-password"
 
@@ -17,7 +18,8 @@ function callbackUrl(next: "/account" | "/account/reset-password") {
   return url.href
 }
 
-export function AuthForm({ mode }: { mode: Mode }) {
+export function AuthForm({ mode, next = "/account" }: { mode: Mode; next?: string }) {
+  const destination = accountReturnPath(next)
   const prefix = useId()
   const busyRef = useRef(false)
   const [busy, setBusy] = useState(false)
@@ -70,11 +72,11 @@ export function AuthForm({ mode }: { mode: Mode }) {
       if (mode === "sign-in") {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw new Error(error.code === "email_not_confirmed" ? "Please confirm your email before signing in. Check your inbox for your account confirmation link." : "We couldn't sign you in. Check your email and password, or use the password reset link.")
-        window.location.assign(sitePath("/account"))
+        window.location.assign(sitePath(destination))
       } else if (mode === "sign-up") {
         const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: callbackUrl("/account") } })
         if (error) throw new Error(error.message || "We couldn't create your account. Please try again later.")
-        window.location.assign(sitePath("/account/check-email"))
+        window.location.assign(sitePath(accountEntryHref("/account/check-email", destination)))
       } else if (mode === "forgot-password") {
         const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: callbackUrl("/account/reset-password") })
         if (error) throw new Error("We couldn't request a reset link right now. Please try again later.")
@@ -100,7 +102,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
   return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8">
     <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6"><LockKeyhole className="w-6 h-6 text-emerald-700" /></div>
     <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? "Welcome Back" : mode === "sign-up" ? "Make Room for Your Next Adventure" : mode === "forgot-password" ? "Let's Get You Back In" : "Choose a New Password"}</h2>
-    <p className="text-gray-600 mb-8">{mode === "sign-in" ? "Sign in to return to your ideas, saved plans and quote requests." : mode === "sign-up" ? "Save your Australian travel ideas and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
+    <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your Colombia and Australia trip ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
     <form onSubmit={submit} className="space-y-6">
       <fieldset disabled={busy || !recoveryReady || (mode === "reset-password" && success)} className="space-y-6">
         {mode !== "reset-password" && <div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">Email Address</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div>}
@@ -114,15 +116,15 @@ export function AuthForm({ mode }: { mode: Mode }) {
       {feedback && <p className={`text-sm ${success ? "text-emerald-700" : "text-red-700"}`} role={success ? "status" : "alert"}>{feedback}</p>}
     </form>
     <div className="mt-8 pt-6 border-t border-gray-200 space-y-3 text-sm">
-      {mode === "sign-in" && <><p><Link href="/account/forgot-password" className="text-emerald-700 underline">Forgot your password?</Link></p><p><Link href="/account/check-email" className="text-emerald-700 underline">Need a new confirmation link?</Link></p><p className="text-gray-600">New to AVES? <Link href="/account/sign-up" className="text-emerald-700 underline">Create an account</Link>.</p></>}
-      {mode === "sign-up" && <p className="text-gray-600">Already have an account? <Link href="/account/sign-in" className="text-emerald-700 underline">Sign in</Link>.</p>}
+      {mode === "sign-in" && <><p><Link href="/account/forgot-password" className="text-emerald-700 underline">Forgot your password?</Link></p><p><Link href={accountEntryHref("/account/check-email", destination)} className="text-emerald-700 underline">Need a new confirmation link?</Link></p><p className="text-gray-600">New to AVES? <Link href={accountEntryHref("/account/sign-up", destination)} className="text-emerald-700 underline">Create an account</Link>.</p></>}
+      {mode === "sign-up" && <p className="text-gray-600">Already have an account? <Link href={accountEntryHref("/account/sign-in", destination)} className="text-emerald-700 underline">Sign in</Link>.</p>}
       {mode === "forgot-password" && <Link href="/account/sign-in" className="text-emerald-700 underline">Return to sign in</Link>}
       {mode === "reset-password" && <Link href={success ? "/account" : "/account/forgot-password"} className="text-emerald-700 underline">{success ? "Return to My Trip Plans" : "Request a New Reset Link"}</Link>}
     </div>
   </CardContent></Card>
 }
 
-export function CheckEmail() {
+export function CheckEmail({ next = "/account" }: { next?: string }) {
   const prefix = useId()
   const busyRef = useRef(false)
   const [busy, setBusy] = useState(false)
@@ -145,7 +147,7 @@ export function CheckEmail() {
     <h2 className="text-2xl font-bold text-gray-900 mb-4">Confirm Your Email</h2>
     <p className="text-gray-600 mb-5">Check your inbox for an AVES account confirmation link. If a confirmation was issued, follow the link to finish setting up your account. Check your spam folder too.</p>
     <p className="text-gray-600 mb-8">Already confirmed your email or have an account? You can sign in to continue.</p>
-    <Button asChild size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"><Link href="/account/sign-in"><CheckCircle className="w-4 h-4 mr-2" />Continue to Sign In</Link></Button>
+    <Button asChild size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"><Link href={accountEntryHref("/account/sign-in", next)}><CheckCircle className="w-4 h-4 mr-2" />Continue to Sign In</Link></Button>
     <form onSubmit={resend} className="mt-8 pt-6 border-t border-gray-200 space-y-4"><fieldset disabled={busy} className="space-y-4"><legend className="font-semibold text-gray-900 mb-3">Need a New Confirmation Link?</legend><div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">Account Email Address</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div><Button type="submit" variant="outline" className="w-full">{busy ? "Requesting…" : "Request a Confirmation Link"}</Button></fieldset>{feedback && <p role={failed ? "alert" : "status"} className={`text-sm ${failed ? "text-red-700" : "text-emerald-700"}`}>{feedback}</p>}</form>
     <p className="text-sm text-gray-500 mt-6">Need help? <a href="mailto:mmelendro@gmail.com" className="text-emerald-700 underline">Contact AVES</a>.</p>
   </CardContent></Card>

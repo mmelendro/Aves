@@ -1,6 +1,20 @@
-# Australia inquiry and account storage
+# Shared AVES inquiry and account storage
 
-The contact schema supports the Australia inquiry and launch-list form through server-only data access. The account schema adds owned trip plans, quote requests, and versioned priced proposals for Supabase Auth users. Neither migration creates real accounts, grants an owner membership, enrolls anyone in a campaign, or sends email.
+This database supports both Australia and Colombia through one AVES account and owner portal. The application remains in the `australia` repository and the shared portal is served at `/australia/account`. Contact records use server-only data access; authenticated clients own their trip plans, quote requests, and issued proposals. Migrations do not create real accounts, grant an owner membership, enroll anyone in a campaign, or send email.
+
+## Shared-country architecture and rollout
+
+[20261106113240_shared_country_plans_and_contacts.sql](migrations/20261106113240_shared_country_plans_and_contacts.sql) extends the existing working database. The coordinating agent confirmed hosted application and a successful run of the dedicated hosted rollback verifier on 6 November 2026 (Sydney). The before/after totals remained 5 Auth users, 4 plans (all Australia), 3 quote requests, and 4 contact requests. Shared application deployment remains a separate pending release check.
+
+- A plan's optional `details.country` is `australia` or `colombia`; missing historical values mean Australia. API responses normalize the country. Australian serialization omits the default country to preserve existing creation hashes and retry receipts.
+- New plan selections must belong to the chosen country. Colombia supports all 11 canonical regions; region options live in `content/trip-options.ts`. Existing Australian freeform region strings can be retained exactly when editing that same Australian plan; they cannot be added to a new plan. Both the HTTP handler and a database trigger enforce these rules.
+- Quote requests freeze country with the plan snapshot. Account ownership, confirmed identity, owner authorization, RLS, the 50-draft limit, quote throttling, and immutable issued proposals remain unchanged. Proposal prices remain explicitly **AUD**, including Colombia proposals.
+- Each private contact request stores its country, defaulting existing records to Australia. Country-specific consent versions remain linked to the request. Global email suppression continues to apply; a request for one country does not authorize marketing for the other.
+- The old `submit_contact_request` RPC remains compatible for Australian callers. New application code uses the service-only `submit_shared_contact_request` wrapper. No private table or privileged RPC becomes browser-accessible.
+
+Rollout order: apply the compatibility migration, deploy and verify the shared application, then publish Colombia's form/portal links. Colombia must require `country: "colombia"` in the stored response: the former Australian handler would otherwise discard an unknown country field. Keep both older Colombia projects intact until the coordinating agent verifies cutover; this migration imports nothing from them and deletes nothing.
+
+The shared contact HTTP contract is `POST /australia/api/contact`, with an `Idempotency-Key` UUID and `{country?, intent, name, email, region?, travelWhen?, partySize?, message?, updates, website?}`. A successful durable receipt is `{success: true, status: "stored", intent, country}`. Colombia accepts one canonical region or an empty selection; additional preferences belong in the message. Waitlist requests require explicit updates consent. Country selection is not an authorization boundary: verified account ownership still controls every private account record.
 
 ## Private records and access
 
@@ -8,7 +22,7 @@ The contact schema supports the Australia inquiry and launch-list form through s
 - `private.launch_subscribers` stores one normalized email per address, with `requested` or `suppressed` status. A form submission leaves `email_verified_at` null.
 - `private.consent_events` stores consent and suppression evidence. The application can insert/read events but cannot update or delete them.
 
-Keep `private` out of the Data API's exposed schemas. All three tables have RLS enabled and no browser-access policies. `anon`, `authenticated`, and `PUBLIC` have no table privileges. The three RPCs below use `SECURITY INVOKER`, an empty search path, qualified table names, and explicit execution grants only to `service_role`.
+Keep `private` out of the Data API's exposed schemas. All three tables have RLS enabled and no browser-access policies. `anon`, `authenticated`, and `PUBLIC` have no table privileges. The contact RPCs below use `SECURITY INVOKER`, an empty search path, qualified table names, and explicit execution grants only to `service_role`.
 
 Use a dedicated backend client with the server-only Supabase secret key. Never use a `NEXT_PUBLIC_` variable for that key, attach a visitor session to this client, or expose the private tables through browser queries. The service role bypasses RLS; the route's validation and the database grants/constraints remain important.
 
@@ -32,6 +46,8 @@ p_message text = ''
 
 It returns `{request_id, created, submitted_at, notification_status, subscriber_status}`. A new submission, applicable subscriber update, and consent evidence commit together. Waiting-list requests require `p_updates=true`; an inquiry with `false` does not unsubscribe an existing subscriber.
 
+`public.submit_shared_contact_request` takes the same arguments plus final `p_country text = 'australia'`. It validates country/region, delegates atomic storage and locking to the original RPC, records country on the request, and rejects a replay for a different country. Its database receipt has the same shape; the HTTP route adds the validated country. The original RPC is retained for older Australian application versions.
+
 Hash the canonical validated submission, including its consent version, on the server. A retry with the same key/hash returns the original request without reapplying consent. Reusing the key with a different hash raises `PT409`. Request-key locks serialize concurrent retries; email locks enforce at most five new submissions per normalized email within 15 minutes (`PT429`). Retries do not consume this quota. No IP addresses are collected.
 
 `public.record_contact_notification(p_request_id uuid, p_status text, p_provider_id text = null, p_error_code text = null)` records `accepted` or `failed`. Acceptance requires a provider receipt and cannot be overwritten by a later failure. Return value: `{request_id, notification_status, provider_id}`. Use short non-sensitive error codes, never raw provider messages or submitted personal data. An unknown request raises `PT404`.
@@ -52,6 +68,8 @@ The server-owned version `au-launch-updates-2026-11-05` refers to the following 
 | `inquiry` | Email me Australian launch news and trip updates. (Optional; unsubscribe at any time.) |
 
 The waitlist checkbox is required; the inquiry checkbox is optional. Consent evidence stores the version, source, server timestamp, request reference, and whether it affected the subscriber's status. An opt-in submitted for a suppressed address is retained as an unapplied request.
+
+The additional server-owned version `co-travel-updates-2026-11-06` records: “Email me AVES Colombia trip news and updates. I can unsubscribe at any time.” Historical Australian wording remains unchanged.
 
 Preserve this registry when wording changes; introduce a new version rather than rewriting historical entries. `requested` records unverified submitted consent. **Do not send marketing until email ownership and opt-in have been verified through a separate approved process.** No verification or marketing workflow is implemented here. Suppression must be checked again when any future campaign is sent.
 
@@ -97,7 +115,7 @@ All privileged functions below are in `public` and executable only by `service_r
 | `record_quote_notification` | `p_request_id, p_status, p_provider_id=null, p_error_code=null` | `{request_id, notification_status}` |
 | `record_proposal_notification` | `p_proposal_id, p_status, p_provider_id=null, p_error_code=null` | `{proposal_id, notification_status}` |
 
-A plan has a separate `title` and exact `details` JSON shape `{regions: string[], travelWhen: string, partySize: string, message: string}`. A quote's snapshot is `{title, details, plan_id, plan_updated_at}`; the outer receipt's `plan_updated_at` is the frozen plan revision. The immutable `create_payload_hash` lets the application recognize an original draft-create retry even after later edits. Duplicate plan IDs with a different original creation hash must be rejected by the server.
+A plan has a separate `title` and exact `details` JSON shape `{country?: "australia" | "colombia", regions: string[], travelWhen: string, partySize: string, message: string}`. A quote's snapshot is `{title, details, plan_id, plan_updated_at}`; the outer receipt's `plan_updated_at` is the frozen plan revision. The immutable `create_payload_hash` lets the application recognize an original draft-create retry even after later edits. Duplicate plan IDs with a different original creation hash must be rejected by the server.
 
 Proposal details have the exact shape `{totalCents: integer, currency: "AUD", itinerary: string, inclusions: string, exclusions: string, validUntil: null | "YYYY-MM-DD"}`. Raw proposal rows use `total_cents`, `quote_request_id`, `issued_at`, `updated_at`, and other snake-case database fields. `sent` means issued and visible in the client account; it does not assert that email arrived. There is no payment, acceptance, or booking record.
 
@@ -117,4 +135,20 @@ On 5 November 2026 (Sydney), both migrations and both rollback suites passed loc
 
 The hosted security advisor returned no warnings or errors and four expected informational [RLS enabled with no policy](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy) findings for the three private contact tables and `private.site_admins`. Browser access to these tables is intentionally denied. No permissive policies were added. Evidence is retained under the workspace's `audit/evidence` directory.
 
-The local runner uses a minimal Auth stub, so it does not establish hosted Auth/SMTP configuration, PostgREST behavior, multi-session lock scheduling, or real email delivery. HTTP checks exercise hosted Auth and Data API behavior separately; production SMTP and provider delivery still require their own verification.
+The local runner uses a minimal Auth stub, so it does not establish hosted Auth/SMTP configuration, PostgREST behavior, multi-session lock scheduling, or real email delivery. HTTP checks exercise hosted Auth and Data API behavior separately. Production signup, recovery, quote notification, and proposal email were verified separately during the original release; those historical passes do not by themselves verify this shared-country release.
+
+### Shared-country verification
+
+[tests/shared_countries.sql](tests/shared_countries.sql) is a **local disposable-database** regression suite. It exercises real anonymous/authenticated/service roles, all 11 Colombian regions, old Australian hashes and exact freeform selections, country-preserving snapshots, direct-write rejection, cross-account isolation, and contact replay. Its historical fixture briefly disables the new trigger inside a rollback; do not use that fixture script on the hosted database.
+
+[tests/shared_countries_hosted_rollback.sql](tests/shared_countries_hosted_rollback.sql) is the dedicated administrator-run hosted verifier. It creates only synthetic `example.test` identities and records inside one transaction, does not disable triggers or change policies, exercises Colombian draft creation/editing/quote replay and account isolation, then rolls everything back. It emits only before/after aggregate counts. Run the whole file in one connection with stop-on-error enabled; never change its `ROLLBACK` to `COMMIT`. It does not send email or verify browser sessions.
+
+The coordinating agent ran this dedicated verifier successfully against the shared hosted project on 6 November 2026 (Sydney). All reported before/after totals were unchanged; aggregate-only evidence is recorded at `../audit/evidence/shared-country-hosted-rollback-verification.json`. This pass is distinct from the original account suite and from browser, email, or release verification.
+
+From the repository root, the local verification command is:
+
+```powershell
+node ../audit/tools/pglite/run-account-storage.mjs supabase/migrations supabase/tests/contact_storage.sql supabase/tests/client_trips_quotes.sql supabase/tests/account_hardening.sql supabase/tests/shared_countries.sql supabase/tests/shared_countries_hosted_rollback.sql
+```
+
+Shared-country local evidence is saved outside the published application at `../audit/evidence/shared-country-local-verification.log`; the hosted pass has its separate aggregate evidence above. Concurrent real submissions can change aggregate counts, so review any future before/after delta without exporting customer records.

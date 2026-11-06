@@ -8,6 +8,7 @@ import { accountBody, accountHandler, requestKey } from "@/lib/account-http"
 import { accountRpc } from "@/lib/account-service"
 import { notifyAccount } from "@/lib/account-notifications"
 import { canonicalUrl } from "@/lib/site-path"
+import { countryLabels, isCountryRegion, isColombiaRegion } from "@/content/trip-options"
 import { createPlanSchema, updatePlanSchema, quoteSchema, revisionSchema, createProposalSchema, updateProposalSchema, quoteStatusSchema, mapPlan, mapProposal, type PlanRow, type ProposalRow } from "@/lib/account-models"
 
 const planColumns = "id,title,details,status,updated_at,create_payload_hash"
@@ -24,7 +25,9 @@ async function ownPlan(client: SupabaseClient, userId: string, id: string): Prom
   if (!data) throw new AccountError(404, "This plan could not be found.")
   return data as PlanRow
 }
-const planValues = ({ title, regions, travelWhen, partySize, message }: z.infer<typeof updatePlanSchema> | z.infer<typeof createPlanSchema>) => ({ title, details: { regions, travelWhen, partySize, message } })
+// Keep Australia's original serialization so retries of pre-upgrade requests
+// retain their original hash. Missing stored country always means Australia.
+const planValues = ({ title, country, regions, travelWhen, partySize, message }: z.infer<typeof updatePlanSchema> | z.infer<typeof createPlanSchema>) => ({ title, details: { regions, travelWhen, partySize, message, ...(country === "colombia" ? { country } : {}) } })
 
 export const plansGet = () => accountHandler(async () => {
   const { user, client } = await requireAccountUser()
@@ -39,6 +42,17 @@ export const plansPost = (request: Request) => accountHandler(async () => {
   const body = await accountBody(request, createPlanSchema)
   if (requestKey(request) !== body.id) throw new AccountError(400, "Please retry this plan with its original request reference.")
   const values = planValues(body), payloadHash = hash(values)
+  if (!body.regions.every(region => isCountryRegion(body.country || "australia", region))) {
+    // A pre-upgrade freeform request may still be retried. It can only return
+    // that same owned, hash-matched plan; it cannot insert any new freeform row.
+    const original = await ownPlan(client, user.id, body.id).catch((error: unknown) => {
+      if (error instanceof AccountError && error.status === 404) return null
+      throw error
+    })
+    if (body.country !== "colombia" && original && (original.details.country || "australia") === "australia"
+      && original.create_payload_hash === payloadHash) return { plan: mapPlan(original) }
+    throw new AccountError(400, "Choose regions in the selected country.")
+  }
   const { data, error } = await client.from("trip_plans").insert({ id: body.id, user_id: user.id, ...values, create_payload_hash: payloadHash }).select(planColumns).single()
   if (error?.code === "23505") {
     const original = await ownPlan(client, user.id, body.id)
@@ -54,6 +68,11 @@ export const planPatch = (request: Request, id: string) => accountHandler(async 
   const { user, client } = await requireAccountUser()
   const body = await accountBody(request, updatePlanSchema)
   const plan = await ownPlan(client, user.id, id)
+  const country = body.country || "australia"
+  if (!body.regions.every(region => isCountryRegion(country, region) || (
+    country === "australia" && (plan.details.country || "australia") === "australia"
+    && plan.details.regions.includes(region) && !isColombiaRegion(region)
+  ))) throw new AccountError(400, "Choose regions in the selected country. Existing Australian locations may be kept when editing the same plan.")
   if (plan.status !== "draft" || plan.updated_at !== body.expectedUpdatedAt) throw new AccountError(409, "This plan has changed or has already been submitted. Refresh it before continuing.")
   const { data, error } = await client.from("trip_plans").update(planValues(body)).eq("id", id).eq("user_id", user.id).eq("status", "draft").eq("updated_at", body.expectedUpdatedAt).select(planColumns).maybeSingle()
   if (error) storageFailed()
@@ -84,8 +103,8 @@ export const quotePost = (request: Request, id: string) => accountHandler(async 
   })
   const plan = mapPlan({ ...receipt.plan_snapshot, id: receipt.plan_id, updated_at: receipt.plan_updated_at, status: "quote_requested" })
   if (receipt.created) {
-    await notifyAccount("quote", receipt.request_id, "mmelendro@gmail.com", `[AVES Australia] Quote request from ${receipt.contact_name}`,
-      `A client requested a quote.\n\nName: ${receipt.contact_name}\nEmail: ${receipt.contact_email}\nSubmitted: ${receipt.submitted_at}\nPlan: ${plan.title}\nRegions: ${plan.regions.join(", ")}\nTiming: ${plan.travelWhen}\nParty: ${plan.partySize}\n\n${plan.message}\n\nReview securely: ${canonicalUrl("/admin/quotes")}`).catch(() => undefined)
+    await notifyAccount("quote", receipt.request_id, "mmelendro@gmail.com", `[AVES ${countryLabels[plan.country]}] Quote request from ${receipt.contact_name}`,
+      `A client requested a quote.\n\nCountry: ${countryLabels[plan.country]}\nName: ${receipt.contact_name}\nEmail: ${receipt.contact_email}\nSubmitted: ${receipt.submitted_at}\nPlan: ${plan.title}\nRegions: ${plan.regions.join(", ")}\nTiming: ${plan.travelWhen}\nParty: ${plan.partySize}\n\n${plan.message}\n\nReview securely: ${canonicalUrl("/admin/quotes")}`).catch(() => undefined)
   }
   return { success: true, status: "stored", requestId: receipt.request_id, plan }
 })
@@ -101,7 +120,7 @@ type QuoteRow = { id: string; plan_id: string; status: string; contact_name: str
 function mapQuote(row: QuoteRow) {
   return { id: row.id, planId: row.plan_id, status: row.status, contactName: row.contact_name, contactEmail: row.contact_email,
     submittedAt: row.submitted_at, notificationStatus: row.notification_status,
-    plan: { title: row.plan_snapshot.title, ...row.plan_snapshot.details },
+    plan: { title: row.plan_snapshot.title, ...row.plan_snapshot.details, country: row.plan_snapshot.details.country || "australia" },
     proposals: (row.proposals || []).map(mapProposal), statusHistory: row.status_history || [] }
 }
 export const adminQuotesGet = () => accountHandler(async () => {
@@ -142,8 +161,8 @@ export const proposalSend = (request: Request, id: string) => accountHandler(asy
     p_payload_hash: hash({ proposalId: id, ...body }), p_expected_updated_at: body.expectedUpdatedAt,
   })
   if (result.issued) {
-    const notificationStatus = await notifyAccount("proposal", result.proposal.id, result.contact_email, "Your AVES Australia proposal is ready",
-      `Hello ${result.contact_name},\n\nYour Australian journey proposal (version ${result.proposal.version}) is ready to review in your private account.\n\nSign in to view the itinerary and price: ${canonicalUrl("/account")}\n\nThis proposal does not confirm a booking or take a payment. Reply to mmelendro@gmail.com to discuss the details.\n\nAVES Australia`).catch(() => undefined)
+    const notificationStatus = await notifyAccount("proposal", result.proposal.id, result.contact_email, "Your AVES proposal is ready",
+      `Hello ${result.contact_name},\n\nYour journey proposal (version ${result.proposal.version}) is ready to review in your private account. Prices are quoted in Australian dollars (AUD).\n\nSign in to view the itinerary and price: ${canonicalUrl("/account")}\n\nThis proposal does not confirm a booking or take a payment. Reply to mmelendro@gmail.com to discuss the details.\n\nAVES`).catch(() => undefined)
     if (notificationStatus) result.proposal.notification_status = notificationStatus
   }
   return { success: true, status: "sent", proposal: mapProposal(result.proposal) }

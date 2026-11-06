@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { AccountShell } from "@/components/account/account-shell"
 import { AuthForm } from "@/components/account/auth-form"
+import { accountNextFromSearch, type AccountSearchParams } from "@/components/account/account-navigation"
 export const metadata: Metadata = { title: "Create an Account" }
-export default function SignUpPage() {
-  return <AccountShell compact title="Keep Your Australian Ideas Together" description="Create your AVES account to save a trip plan and request a personal quote."><AuthForm mode="sign-up" /></AccountShell>
+export default async function SignUpPage({ searchParams }: { searchParams: Promise<AccountSearchParams> }) {
+  const next = accountNextFromSearch(await searchParams)
+  return <AccountShell compact title="Keep Your Travel Ideas Together" description="Create one AVES account for Colombia and Australia trip plans and personal quotes."><AuthForm mode="sign-up" next={next} /></AccountShell>
 }

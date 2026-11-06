@@ -62,7 +62,7 @@ test("draft creation derives owner from verified session, not metadata", async (
   assert.equal(insertion.user_id, ownerId)
   assert.equal(insertion.status, undefined)
   assert.match(insertion.create_payload_hash, /^[a-f0-9]{64}$/)
-  assert.deepEqual((await response.json()).plan, { id: planId, ...values, status: "draft", updatedAt: stamp })
+  assert.deepEqual((await response.json()).plan, { id: planId, ...values, country: "australia", status: "draft", updatedAt: stamp })
 })
 
 test("draft replay uses immutable creation hash even after later draft edits", async () => {
@@ -77,6 +77,56 @@ test("draft replay uses immutable creation hash even after later draft edits", a
 test("draft reuse with a different payload conflicts", async () => {
   const h = harness({ results: [{ data: null, error: { code: "23505" } }, { data: { ...planRow, create_payload_hash: "different" }, error: null }] })
   assert.equal((await h.plansPost(request({ id: planId, ...values }))).status, 409)
+})
+
+test("explicit Australia and absent country preserve the old creation hash on replay", async () => {
+  const originalHash = createHash("sha256").update(JSON.stringify({ title, details })).digest("hex")
+  for (const country of [undefined, "australia"]) {
+    const h = harness({ results: [{ data: null, error: { code: "23505" } }, { data: { ...planRow, create_payload_hash: originalHash }, error: null }] })
+    const response = await h.plansPost(request({ id: planId, ...values, country }))
+    assert.equal(response.status, 200)
+    assert.equal((await response.json()).plan.country, "australia")
+  }
+})
+
+test("all eleven Colombian regions are stored with their country", async () => {
+  const regions = loader()("content/trip-options.ts").countryRegionOptions.colombia.map(region => region.id)
+  assert.equal(regions.length, 11)
+  const h = harness({ results: [{ data: { ...planRow, details: { ...details, country: "colombia", regions } }, error: null }] })
+  const response = await h.plansPost(request({ id: planId, ...values, country: "colombia", regions }))
+  assert.equal(response.status, 200)
+  const stored = h.queries[0].operations.find(op => op[0] === "insert")[1]
+  assert.equal(stored.details.country, "colombia")
+  assert.deepEqual(stored.details.regions, regions)
+  assert.equal((await response.json()).plan.country, "colombia")
+})
+
+for (const [country, regions] of [["colombia", ["pacific", "tasmania"]], ["australia", ["queensland", "llanos"]]]) {
+  test(`${country} new plan rejects mixed-country regions before insertion`, async () => {
+    const h = harness({ results: [{ data: null, error: null }] })
+    assert.equal((await h.plansPost(request({ id: planId, ...values, country, regions }))).status, 400)
+    assert.ok(h.queries.every(query => !query.operations.some(op => op[0] === "insert")))
+  })
+}
+
+test("a legacy freeform plan can be replayed or edited without accepting new arbitrary regions", async () => {
+  const legacyDetails = { ...details, regions: ["North Queensland rainforest"] }
+  const original = { ...planRow, details: legacyDetails, create_payload_hash: createHash("sha256").update(JSON.stringify({ title, details: legacyDetails })).digest("hex") }
+  const replay = harness({ results: [{ data: original, error: null }] })
+  assert.equal((await replay.plansPost(request({ id: planId, ...values, regions: legacyDetails.regions }))).status, 200)
+  assert.ok(replay.queries[0].operations.every(op => op[0] !== "insert"))
+  const edit = harness({ results: [{ data: original, error: null }, { data: original, error: null }] })
+  assert.equal((await edit.planPatch(request({ ...values, country: "australia", regions: legacyDetails.regions, expectedUpdatedAt: stamp }), planId)).status, 200)
+  const added = harness({ results: [{ data: original, error: null }] })
+  assert.equal((await added.planPatch(request({ ...values, regions: [...legacyDetails.regions, "Another unknown place"], expectedUpdatedAt: stamp }), planId)).status, 400)
+})
+
+test("Colombia quote response and owner notification preserve the frozen country", async () => {
+  const h = harness({ rpcResult: { ...quoteReceipt, plan_snapshot: { title, details: { ...details, country: "colombia", regions: ["pacific"] } } } })
+  const response = await h.quotePost(request({ expectedUpdatedAt: stamp, contactName: "Test Client" }, quoteId), planId)
+  assert.equal((await response.json()).plan.country, "colombia")
+  assert.match(h.notices[0][3], /AVES Colombia/)
+  assert.match(h.notices[0][4], /Country: Colombia/)
 })
 
 test("draft capacity conflict explains how to free space without a misleading retry timer", async () => {

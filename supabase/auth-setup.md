@@ -1,13 +1,17 @@
-# Australian account email setup
+# Shared AVES account email setup
 
-Project: `qeyprwftrouztlqmwuzv` (AVES Australia, Sydney).
+Project: `qeyprwftrouztlqmwuzv` (shared accounts, Sydney).
+## Shared account update — 6 November 2026
+
+Colombia and Australia now use the existing project and account paths. The signup and recovery templates were saved with shared AVES branding; their token placeholders and action URLs were preserved exactly. Dashboard previews were checked. The SMTP display name is AVES, confirmed after reload; its credentials and sender address were not changed. Password-change, email-address-change, MFA-added and MFA-removed alerts are enabled, confirmed on a fresh settings page. These configuration checks do not establish delivery of a new message; the earlier recorded delivery tests remain historical evidence.
+
 
 - Active production Site URL: `https://aves.bio/australia`, restored after publication and verified after reloading the dashboard.
 - The temporary deployment Site URL is no longer active. Its three callback allowlist entries were removed and the six production/local entries below were verified.
 - Email confirmations: enabled; anonymous accounts: disabled.
 - Minimum password length: 12 characters.
 - Custom SMTP: enabled through Resend and verified after reloading the configuration; host `smtp.resend.com`, port `465`.
-- Sender: `AVES Australia <noreply@aves.bio>`, using the verified `aves.bio` domain. `mmelendro@gmail.com` is the support and owner notification mailbox, not the domain-authenticated SMTP sender.
+- Sender: `AVES <noreply@aves.bio>`, using the verified `aves.bio` domain. `mmelendro@gmail.com` is the support and owner notification mailbox, not the domain-authenticated SMTP sender.
 
 Exact production and local callback allowlist:
 

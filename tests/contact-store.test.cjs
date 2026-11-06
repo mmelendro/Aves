@@ -54,7 +54,7 @@ test("modern secret calls exact RPC with private header, bounded timeout and no 
   assert.deepEqual(await h.saveContactRequest(input), receipt)
   assert.equal(h.calls.length, 1)
   const { url, options } = h.calls[0]
-  assert.equal(url, "https://database.example.test/rest/v1/rpc/submit_contact_request")
+  assert.equal(url, "https://database.example.test/rest/v1/rpc/submit_shared_contact_request")
   assert.equal(options.method, "POST")
   assert.equal(options.cache, "no-store")
   assert.equal(options.redirect, "error")
@@ -64,11 +64,18 @@ test("modern secret calls exact RPC with private header, bounded timeout and no 
   assert.ok(options.signal instanceof AbortSignal)
   assert.deepEqual(h.deadlines, [10_000])
   assert.deepEqual(JSON.parse(options.body), {
+    p_country: "australia",
     p_idempotency_key: input.idempotencyKey, p_payload_hash: input.payloadHash,
     p_intent: input.intent, p_name: input.name, p_email: input.email, p_updates: input.updates,
     p_consent_version: input.consentVersion, p_region: input.region, p_travel_when: input.travelWhen,
     p_party_size: input.partySize, p_message: input.message,
   })
+})
+
+test("Colombia uses the same private RPC with an explicit destination country", async () => {
+  const h = harness()
+  await h.saveContactRequest({ ...input, country: "colombia", region: "pacific" })
+  assert.equal(JSON.parse(h.calls[0].options.body).p_country, "colombia")
 })
 
 test("legacy service-role JWT adds Authorization alongside apikey", async () => {
