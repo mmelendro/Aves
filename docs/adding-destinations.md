@@ -1,6 +1,6 @@
 # Adding an AVES destination
 
-**Prepared 7 November 2026 (Sydney); implementation and release verification pending.** This runbook describes the destination registry being implemented. It is not evidence that the registry has been deployed or that another country is open for inquiries.
+**Registry live and verified on 7 November 2026 (Sydney).** Shared release `9a7c03b` / deployment `dpl_6CaX82WY4M5qvChywSLuMtZNoKth` uses the applied migration `20261106203926_extensible_destination_catalogue.sql`. The catalogue matches application configuration exactly: 4 countries and 20 regions, with only Australia and Colombia enabled. Ecuador and Costa Rica are not open for inquiries. Verification passed: 210 application tests, strict type checking, production build, all 6 local SQL suites and hosted catalogue rollback checks.
 
 New countries use the existing **AVES Shared Accounts** project (`qeyprwftrouztlqmwuzv`), customer accounts and owner portal. Do not create another database or require customers to register again. Country selection describes a trip; ownership and owner-role checks continue to authorize access.
 
@@ -23,3 +23,11 @@ New countries use the existing **AVES Shared Accounts** project (`qeyprwftrouztl
 Proposal currency remains explicitly **AUD**, including future destinations, until pricing, storage, validation, emails and customer-facing terms receive a deliberate reviewed currency change. Adding a country must not silently change currency or imply instant reservations/payments.
 
 If launch verification fails, stop promotion and correct the mismatch. Preserve accounts, saved plans, issued quote snapshots and consent history; do not use catalogue deletion as rollback. Update the release handoff only after the deployed behavior is verified.
+
+## Retiring a previously launched destination
+
+Set its enabled flag to false through a reviewed configuration change and database migration; retain its stable ID, historical region definitions and consent version. Do not turn it back into an empty placeholder. Existing owned drafts can still be viewed, edited within the same country and submitted for a quote. The editor marks the saved destination explicitly; new plans and changes into that country remain blocked.
+
+Exact contact retries use the service-only, read-only `replay_shared_contact_request` RPC, matched on country, idempotency key and payload hash. They return the stored receipt without creating records, reapplying consent or resending email. Changing or deleting historical consent/region metadata can prevent that safe replay. Test retirement with existing drafts, saved receipts, cross-account denial and new-request rejection before publishing it.
+
+Migration filenames already match hosted versions, including `20261106105909`, `20261106105919` and `20261106114144`. Those earlier timestamp corrections did not change SQL hashes or hosted history; do not reapply them as new migrations.

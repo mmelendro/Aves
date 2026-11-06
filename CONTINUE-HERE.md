@@ -1,17 +1,17 @@
-# AVES Australia and shared AVES portal — live handoff, 6 November 2026
+# AVES Australia and shared AVES portal — live handoff, updated 7 November 2026 (Sydney)
 
 The shared account/backend for Colombia and Australia is now live. The two public websites retain separate applications and Git histories.
 
 Database retirement update: **7 November 2026 (Sydney)**. Both unused projects were permanently deleted with the user's explicit confirmation; the shared project is the sole remaining Supabase project.
 
-Future destinations: the shared country/region registry is being prepared; **implementation and release verification are pending**. Follow [Adding an AVES destination](docs/adding-destinations.md). Ecuador and Costa Rica are disabled placeholders, not launched offerings. New destinations will reuse the existing accounts/database and require reviewed configuration, migration and public-content releases; there is no country-management admin screen.
+Future destinations: the shared country/region registry is **live and verified on 7 November 2026 (Sydney)**. Follow [Adding an AVES destination](docs/adding-destinations.md). Ecuador and Costa Rica remain disabled placeholders, not launched offerings. New destinations reuse the existing accounts/database and require reviewed configuration, migration and public-content releases; there is no country-management admin screen.
 
 ## Current production
 
 - Repository: https://github.com/mmelendro/Aves.
 - Australia branch/project: `australia/preview` / `mmelendro-9273s-projects/aves-australia`.
-- **Live Australia/shared portal code: `caa1d01`; deployment: `dpl_275hNaQAeiofr3BsQjL6NX7P8BYo`.**
-- Public: https://aves.bio/australia. Exact deployment: https://aves-australia-oktxnqfwi-mmelendro-9273s-projects.vercel.app.
+- **Live Australia/shared portal code: `9a7c03b`; deployment: `dpl_6CaX82WY4M5qvChywSLuMtZNoKth`.**
+- Public: https://aves.bio/australia. Exact deployment: https://aves-australia-8naiv3je8-mmelendro-9273s-projects.vercel.app. Promoted on 7 November 2026 (Sydney), superseding the original shared-country release `caa1d01`.
 - **Live Colombia code: `731c871`; final deployment: `dpl_G5yHCqQ5PXfk1KVJHMvBamH6hC9k`.**
 - Public: https://aves.bio/. Exact deployment: https://v0-company-landing-page-ltdx9ntqo-mmelendro-9273s-projects.vercel.app.
 - Colombia branch and verified Vercel production branch: `webmaster/readiness-2026-11-05`; project `mmelendro-9273s-projects/v0-company-landing-page`.
@@ -29,12 +29,21 @@ The user explicitly chose one AVES account/database and abandoned old Colombian 
 - Colombia links enter `/australia/account?country=colombia&region=<canonical-slug>`. Safe auth returns use unprefixed `next=/account?country=colombia&region=...`; arbitrary external destinations remain invalid.
 - Country-aware contact validates that country's regions and records separate explicit updates consent. Colombia requires a stored receipt explicitly confirming Colombia; Australian consent compatibility is preserved.
 - The old paused **AVES-Database** project `krzmqusxxrfljjkdbklx` and unused empty **AVES Colombia** replacement `gfxirgzvbpytgfffolhj` were **permanently deleted on 7 November 2026 (Sydney)** after explicit user confirmation. The project inventory and organization dashboard show only **AVES Shared Accounts** `qeyprwftrouztlqmwuzv`, active and healthy. Do not restore the superseded separate-Colombia migration plan.
-- Post-retirement read-only checks found the shared data unchanged: **5 Auth users, 4 plans, 3 quote requests and 5 contacts**. All **8 application tables** still have row-level security enabled.
+- Post-retirement checks, before adding the catalogue, found **5 Auth users, 4 plans, 3 quote requests and 5 contacts** unchanged, with RLS on all **8 then-existing application tables**. After the catalogue migration, those customer-record counts remain unchanged; the database has **4 country rows, 20 region rows and 10 application tables, all with RLS enabled**.
+- Applied catalogue migration: `20261106203926_extensible_destination_catalogue.sql`. Australia and Colombia are enabled; Ecuador and Costa Rica are disabled. Application/database registry parity is exact. Anonymous catalogue reads and authenticated catalogue writes are denied; contact-replay RPC access is service-only.
+- Local migration filenames were aligned with the actual hosted versions `20261106105909`, `20261106105919` and `20261106114144`, with unchanged SQL hashes. Hosted migration history was not altered; do not reapply these migrations under their former filenames.
 
-## Verified release and email state
+## Current release verification — 7 November 2026 (Sydney)
+
+- Release `9a7c03b`: **210 automated tests**, strict TypeScript checks and the production build passed; **24 static pages** were generated. All **6 local SQL verification suites** and the hosted destination-catalogue rollback verifier passed.
+- Both `/` and `/australia` returned 200 after promotion. Unauthenticated plans, proposals and admin APIs returned 401 with private/no-store caching. Ecuador, Costa Rica and unknown-country contact submissions returned 400 with country validation errors; these checks created no records or emails.
+- The live browser loaded saved plans and proposals after reload, preserving the owner session and showing the updated destination-editor copy. Reserved countries are not offered for new plans. Retiring a previously launched destination preserves owned same-country draft editing and exact stored-contact replay; keep its historical regions and consent version.
+- The new deployment returned zero application-error records, with no excluded intervals, during `2026-11-06T20:32:49.855Z`–`2026-11-06T20:47:49.855Z` (7 November in Sydney). This is a bounded log check.
+
+## Earlier cutover and email evidence — 6 November 2026
 
 - **191 shared/Australia tests and 61 Colombia tests pass.** Both full strict type checks and production builds pass.
-- Both public releases, local/staged/public navigation and country-aware account entry were verified.
+- Both original public releases, local/staged/public navigation and country-aware account entry were verified. The shared service has since been superseded by the 7 November release above.
 - A controlled owner Colombia draft was saved, reloaded and verified with region `central-andes`; the exact temporary draft was deleted afterward using guarded SQL.
 - A clearly labelled internal Colombia inquiry returned stored success and reached the owner's Gmail with country Colombia, `central-andes` and updates consent false. **One labelled internal test inquiry remains stored.**
 - A probe of 34 public JavaScript bundles found only the shared Supabase host and no private-key patterns. Private APIs returned 401 without authentication, configuration probes returned 404 and security headers were verified. This is bounded evidence, not a comprehensive security guarantee.
