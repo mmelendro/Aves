@@ -58,8 +58,9 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
             Explore Colombian regions, learn about the journeys, or plan your trip.
           </Dialog.Description>
           <nav aria-label="Mobile navigation" className="space-y-1">
-            {links.map(({ href, label }) => (
-              <Link
+            {links.map(({ href, label }) => {
+              const NavigationLink = href.startsWith("/australia/") ? "a" : Link
+              return <NavigationLink
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
@@ -70,8 +71,8 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
                 )}
               >
                 {label}
-              </Link>
-            ))}
+              </NavigationLink>
+            })}
             <Link
               href="/contact"
               onClick={() => setOpen(false)}

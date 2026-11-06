@@ -30,6 +30,30 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
 
+interface EnhancedBirdImageProps {
+  src: string
+  alt: string
+  width: number
+  height: number
+  photographer: string
+  guide: string
+  guideLink: string
+  location: string
+  locationLink: string
+  species: {
+    commonName: string
+    spanishName?: string
+    scientificName: string
+    conservation?: string
+  }
+  ebirdUrl: string
+  regions: string[]
+  ecosystems: string[]
+  className?: string
+  aspectRatio?: string
+  imagePosition?: string
+}
+
 // Enhanced Image Component with Interactive Overlays
 function EnhancedBirdImage({
   src,
@@ -48,7 +72,7 @@ function EnhancedBirdImage({
   className = "",
   aspectRatio = "4/3",
   imagePosition = "center",
-}) {
+}: EnhancedBirdImageProps) {
   const [showOverlay, setShowOverlay] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
   const [showCredit, setShowCredit] = useState(false)

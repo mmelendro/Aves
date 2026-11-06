@@ -8,7 +8,7 @@ The dependency overrides replace vulnerable CSS/build-tool versions with compati
 
 1. Create a feature or repair branch from the current `main`.
 2. Install with `corepack pnpm install --frozen-lockfile`.
-3. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in an untracked `.env.local`, using a test Supabase project. Never commit credentials or reuse a service role key as a public key.
+3. Colombia's public app no longer initializes Supabase. Account links use the shared AVES portal under `/australia/account`; test account functionality in that app with test services. No database credentials are required in this checkout.
 4. Run `corepack pnpm build`, then `corepack pnpm start`.
 5. Check Region, Species and Tour Type discovery, tour comparisons, trip planning and contact pages on desktop and mobile.
 

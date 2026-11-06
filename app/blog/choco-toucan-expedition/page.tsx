@@ -86,7 +86,8 @@ export default function ChocoToucanExpeditionPage() {
             <OptimizedImage
               src="/images/yellow-throated-toucan-blog.jpg"
               alt="Yellow-throated Toucan in the Chocó rainforest canopy at dawn"
-              fill
+              width={1200}
+              height={800}
               className="object-cover"
               priority
             />

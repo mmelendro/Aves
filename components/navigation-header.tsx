@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
 import { cn } from "@/lib/utils"
+import { sharedAccountHref } from "@/lib/shared-account"
 
 interface NavigationHeaderProps {
   currentPage?: string
@@ -15,6 +16,7 @@ const navigationLinks = [
   { href: "/tours", label: "Birding Experiences" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/about", label: "About AVES" },
+  { href: sharedAccountHref(), label: "My Trips" },
 ] as const
 
 export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
@@ -53,8 +55,9 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
-            {navigationLinks.map(({ href, label }) => (
-              <Link
+            {navigationLinks.map(({ href, label }) => {
+              const NavigationLink = href.startsWith("/australia/") ? "a" : Link
+              return <NavigationLink
                 key={href}
                 href={href}
                 aria-current={isActive(href) ? "page" : undefined}
@@ -64,8 +67,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
                 )}
               >
                 {label}
-              </Link>
-            ))}
+              </NavigationLink>
+            })}
             <Link
               href="/contact"
               aria-current={isActive("/contact") ? "page" : undefined}

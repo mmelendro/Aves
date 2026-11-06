@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,6 +10,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Mail, MapPin, CheckCircle, Users, Award, Eye, ArrowRight, Globe, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { GoogleCalendarButton } from "@/components/google-calendar-button"
+import { makeColombiaInquiry } from "@/lib/colombia-inquiry"
+import { canonicalColombiaRegion, sharedAccountHref } from "@/lib/shared-account"
 
 interface ContactFormSectionProps {
   showTitle?: boolean
@@ -40,6 +42,11 @@ export function ContactFormSection({
   const [selectedRegions, setSelectedRegions] = useState<string[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [feedback, setFeedback] = useState("")
+  const [updates, setUpdates] = useState(false)
+  const [website, setWebsite] = useState("")
+  const inFlight = useRef(false)
+  const submission = useRef<{body: string; key: string} | null>(null)
 
   const tourTypes = [
     { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
@@ -66,9 +73,11 @@ export function ContactFormSection({
   useEffect(() => {
     const query = new URLSearchParams(window.location.search)
     const aliases: Record<string, string> = { "sierra-nevada-de-santa-marta": "sierra-nevada", pacific: "pacific-choco", llanos: "eastern-plains", amazonia: "amazon", "cauca-river": "cauca-valley" }
-    const raw = query.get("region") || ""
-    const selected = Object.hasOwn(aliases, raw) ? aliases[raw] : raw
-    if (bioregions.some(region => region.id === selected)) setSelectedRegions([selected])
+    const raw = (query.get("region") || query.get("regions") || "").split(",")
+    const selected = raw.map(value => canonicalColombiaRegion(value)).filter(Boolean).map(value => Object.hasOwn(aliases, value!) ? aliases[value!] : value!)
+    if (selected.length) setSelectedRegions(selected.filter(id => bioregions.some(region => region.id === id)))
+    const tour = query.get("tour") || query.get("preset")
+    if (tour && tourTypes.some(item => item.id === tour)) setSelectedTourTypes([tour])
   }, [])
 
   const handleInputChange = (field: string, value: string) => {
@@ -85,53 +94,49 @@ export function ContactFormSection({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (inFlight.current) return
+    inFlight.current = true
     setIsSubmitting(true)
     setSubmitStatus("idle")
+    setFeedback("")
     try {
-      const res = await fetch("/api/contact", {
+      const body = JSON.stringify(makeColombiaInquiry(formData, selectedRegions, selectedTourTypes, updates, website))
+      if (submission.current?.body !== body) submission.current = {body, key: crypto.randomUUID()}
+      const res = await fetch("/australia/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          travelDate: formData.travelDate,
-          groupSize: formData.groupSize,
-          duration: formData.duration,
-          experienceLevel: formData.experienceLevel,
-          tourTypes: selectedTourTypes,
-          regions: selectedRegions,
-          message: formData.specialRequests,
-        }),
+        headers: { "Content-Type": "application/json", "Idempotency-Key": submission.current.key },
+        body,
       })
-      if (res.ok) {
-        setSubmitStatus("success")
-      } else {
-        setSubmitStatus("error")
+      const result = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(result?.error || "Your inquiry could not be saved. Please try again.")
+      if (result?.success !== true || result?.status !== "stored" || result?.intent !== "inquiry" || result?.country !== "colombia") {
+        throw new Error("We couldn't confirm that your inquiry was saved. Please try again.")
       }
-    } catch {
+      setSubmitStatus("success")
+    } catch (error) {
       setSubmitStatus("error")
+      setFeedback(error instanceof Error ? error.message : "Your inquiry could not be saved. Please try again.")
     } finally {
+      inFlight.current = false
       setIsSubmitting(false)
     }
   }
 
   const faqItems = [
     {
-      question: "How far in advance should I book my tour?",
+      question: "When should I start planning?",
       answer:
-        "We recommend booking 3-6 months in advance, especially for peak birding seasons (December-March and July-August). Our small group sizes (maximum 4 guests) mean tours fill up quickly.",
+        "Share your preferred dates and how flexible you can be. Timing, access and availability depend on the itinerary and will be discussed before any booking is arranged.",
     },
     {
-      question: "What's included in your tour packages?",
+      question: "What will my proposal include?",
       answer:
-        "All tours include expert ornithologist guides, transportation, accommodation, meals, park entrance fees, and specialized birding equipment. International flights and personal items are not included.",
+        "Your proposal will set out the suggested itinerary, price in Australian dollars (AUD), inclusions, exclusions and any validity date. Guiding, transport, accommodation, meals, fees and equipment arrangements must be confirmed for your particular trip.",
     },
     {
       question: "Do I need birding experience to join a tour?",
       answer:
-        "Not at all! We welcome birders of all experience levels, from complete beginners to expert ornithologists. Our guides adapt the experience to match your skill level and interests.",
+        "Tell us your experience level, interests and preferred pace so we can discuss suitable options. Any guiding arrangements and practical requirements will be confirmed for the proposed itinerary.",
     },
     {
       question: "What makes AVES different from other tour operators?",
@@ -147,7 +152,7 @@ export function ContactFormSection({
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Plan Your Colombian Birding Adventure</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Tell us about your birding interests. We'll respond within 24 hours with personalized recommendations.
+              Tell us about your birding interests. We'll review your ideas and reply personally.
             </p>
           </div>
         )}
@@ -170,6 +175,8 @@ export function ContactFormSection({
                         <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
                         <Input
                           placeholder="Your first name"
+                          maxLength={59}
+                          aria-label="First name"
                           value={formData.firstName}
                           onChange={(e) => handleInputChange("firstName", e.target.value)}
                           required
@@ -179,6 +186,8 @@ export function ContactFormSection({
                         <label className="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
                         <Input
                           placeholder="Your last name"
+                          maxLength={59}
+                          aria-label="Last name"
                           value={formData.lastName}
                           onChange={(e) => handleInputChange("lastName", e.target.value)}
                           required
@@ -191,6 +200,8 @@ export function ContactFormSection({
                         <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                         <Input
                           type="email"
+                          maxLength={254}
+                          aria-label="Email address"
                           placeholder="your.email@example.com"
                           value={formData.email}
                           onChange={(e) => handleInputChange("email", e.target.value)}
@@ -201,6 +212,8 @@ export function ContactFormSection({
                         <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                         <Input
                           placeholder="+1 (555) 123-4567"
+                          maxLength={50}
+                          aria-label="Phone number"
                           value={formData.phone}
                           onChange={(e) => handleInputChange("phone", e.target.value)}
                         />
@@ -213,6 +226,7 @@ export function ContactFormSection({
                         <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Travel Date</label>
                         <Input
                           type="date"
+                          aria-label="Preferred travel date"
                           value={formData.travelDate}
                           onChange={(e) => handleInputChange("travelDate", e.target.value)}
                         />
@@ -346,12 +360,18 @@ export function ContactFormSection({
                         Special Interests or Requests
                       </label>
                       <Textarea
+                        maxLength={4000}
+                        aria-label="Special interests or requests"
                         placeholder="Tell us about specific birds you'd like to see, photography interests, accessibility needs, dietary restrictions, or any other special requests..."
                         rows={4}
                         value={formData.specialRequests}
                         onChange={(e) => handleInputChange("specialRequests", e.target.value)}
                       />
                     </div>
+
+                    <div className="hidden" aria-hidden="true"><label>Website<input name="website" autoComplete="off" tabIndex={-1} value={website} onChange={event => setWebsite(event.target.value)} /></label></div>
+                    <label className="flex items-start gap-3 text-sm text-gray-700"><input type="checkbox" className="mt-1 accent-emerald-600" checked={updates} onChange={event => setUpdates(event.target.checked)} /><span>Email me AVES Colombia trip news and updates. I can unsubscribe at any time.</span></label>
+                    <p className="text-sm text-gray-500">Updates are optional. We'll use your details to respond to this inquiry. <Link href="/privacy" className="text-emerald-700 underline">Read our privacy information</Link>.</p>
 
                     {/* Submit Button */}
                     <div className="pt-4">
@@ -367,13 +387,13 @@ export function ContactFormSection({
                       </Button>
 
                       {submitStatus === "success" && (
-                        <p className="text-sm text-emerald-600 text-center mt-4 font-medium">
-                          Your enquiry has been submitted to AVES. We'll reply personally.
+                        <p role="status" className="text-sm text-emerald-600 text-center mt-4 font-medium">
+                          Your inquiry has been saved for AVES to review. We'll reply personally.
                         </p>
                       )}
                       {submitStatus === "error" && (
-                        <p className="text-sm text-red-600 text-center mt-4">
-                          Something went wrong. Please email us directly at{" "}
+                        <p role="alert" className="text-sm text-red-600 text-center mt-4">
+                          {feedback} You can also email us directly at{" "}
                           <a href="mailto:mmelendro@gmail.com" className="underline">mmelendro@gmail.com</a>
                         </p>
                       )}
@@ -382,6 +402,7 @@ export function ContactFormSection({
                           We'll get back to you with personalized recommendations
                         </p>
                       )}
+                      <p className="mt-4 text-center text-sm"><a href={sharedAccountHref(selectedRegions.length === 1 ? selectedRegions[0] : undefined)} className="inline-flex min-h-11 items-center font-medium text-emerald-700 underline underline-offset-4">Save ideas and request a priced proposal in My Trips</a></p>
 
                       {/* Google Calendar Button - Fixed without empty box */}
                       <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200">
@@ -406,18 +427,18 @@ export function ContactFormSection({
                     <div className="flex items-start space-x-3">
                       <CheckCircle className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-gray-900">Expert Ornithologist Guides</div>
+                        <div className="font-semibold text-gray-900">Birding Around Your Interests</div>
                         <div className="text-sm text-gray-600">
-                          Local knowledge to help you explore Colombian birdlife
+                          Discuss the birds, habitats and pace that interest you
                         </div>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <Users className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-gray-900">Small Group Expeditions</div>
+                        <div className="font-semibold text-gray-900">Your Group, Your Plans</div>
                         <div className="text-sm text-gray-600">
-                          Maximum 4 guests per tour for personalized attention
+                          Group size and arrangements confirmed in your proposal
                         </div>
                       </div>
                     </div>
@@ -426,16 +447,16 @@ export function ContactFormSection({
                       <div>
                         <div className="font-semibold text-gray-900">Pursuing B Corp Certification</div>
                         <div className="text-sm text-gray-600">
-                          100% carbon neutral with verified conservation impact
+                          Certification is in progress; AVES is not currently certified
                         </div>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <Eye className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-gray-900">Exclusive Access</div>
+                        <div className="font-semibold text-gray-900">Places Worth Exploring</div>
                         <div className="text-sm text-gray-600">
-                          Private reserves and research stations unavailable to others
+                          Routes and access discussed for your preferred regions
                         </div>
                       </div>
                     </div>
@@ -455,7 +476,7 @@ export function ContactFormSection({
                         <a href="mailto:mmelendro@gmail.com" className="text-emerald-600 hover:text-emerald-700">
                           mmelendro@gmail.com
                         </a>
-                        <div className="text-sm text-gray-600">24-hour response guarantee</div>
+                        <div className="text-sm text-gray-600">Contact AVES about your inquiry or proposal</div>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">

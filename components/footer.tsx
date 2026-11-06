@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { sharedAccountHref } from "@/lib/shared-account"
 
 interface FooterProps {
   transparent?: boolean
@@ -71,6 +72,7 @@ export function Footer({ transparent = false }: FooterProps) {
             <h2 className="mb-3 text-base font-semibold text-emerald-300">Plan Your Trip</h2>
             <ul>
               {planningLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
+              <li><a href={sharedAccountHref()} className={linkClassName}>My Trips — Colombia & Australia</a></li>
             </ul>
           </nav>
 
