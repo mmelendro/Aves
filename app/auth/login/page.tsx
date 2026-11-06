@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic"
 
 import LoginForm from "./LoginForm"
+import { ColombiaAccountNotice } from "@/components/colombia-account-notice"
 
 export default function LoginPage() {
   return (
@@ -15,6 +16,7 @@ export default function LoginPage() {
             </a>
           </p>
         </div>
+        <ColombiaAccountNotice />
         <LoginForm />
       </div>
     </div>

@@ -1,0 +1,242 @@
+{
+  "verifiedOn": "2026-11-06",
+  "usageNote": "New recordings use commercially compatible licences verified on their source observations. Legacy recordings retain existing AVES authorization; their recordists and public reuse rights remain unverified. The old Golden-headed Quetzal sound was omitted because its URL identified a manakin.",
+  "recordings": [
+    {
+      "id": "co-green-bearded-helmetcrest",
+      "title": "Green-bearded Helmetcrest — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-rainbow-bearded-thornbill",
+      "title": "Rainbow-bearded Thornbill — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-black-billed-mountain-toucan",
+      "title": "Black-billed Mountain-Toucan — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-chestnut-crowned-antpitta",
+      "title": "Chestnut-crowned Antpitta — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-andean-motmot",
+      "title": "Andean Motmot — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-vermilion-cardinal",
+      "title": "Vermilion Cardinal — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-velvet-purple-coronet",
+      "title": "Velvet-purple Coronet — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-golden-headed-manakin",
+      "title": "Golden-headed Manakin — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-sOmUeeC5xVszFJSmeZ66Try02jkzGB.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-sOmUeeC5xVszFJSmeZ66Try02jkzGB.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-striolated-manakin",
+      "title": "Striolated Manakin — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/strman5-M7ePaDFfvKHcN4hSew56PkYN1C7B8N.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/strman5-M7ePaDFfvKHcN4hSew56PkYN1C7B8N.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-scaled-dove",
+      "title": "Scaled Dove — original AVES recording",
+      "path": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/scadov1-ZY5P1ezfAmzpRMfahJV0otL1QasgoJ.mp3",
+      "sourceUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/scadov1-ZY5P1ezfAmzpRMfahJV0otL1QasgoJ.mp3",
+      "creator": "Recordist not supplied in the original site",
+      "license": "Existing AVES asset — public reuse rights not documented",
+      "licenseUrl": "https://aves.bio/",
+      "attribution": "Recording retained from the original AVES website. The original recordist and reuse licence were not supplied; no Creative Commons licence is claimed.",
+      "modifications": "Existing hosted recording retained unchanged. Independent provenance and recording identity verification remain outstanding."
+    },
+    {
+      "id": "co-hoatzin",
+      "path": "/audio/co-hoatzin.wav",
+      "title": "Hoatzin field recording",
+      "creator": "Finni Ferni",
+      "sourceUrl": "https://www.inaturalist.org/observations/147737112",
+      "downloadUrl": "https://static.inaturalist.org/sounds/590961.wav?1675130603",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Hoatzin recorded by Finni Ferni (west_wind), via iNaturalist / CC BY 4.0",
+      "modifications": "Original WAV downloaded unchanged. No trimming, conversion or generated audio.",
+      "location": "Primavera, Ji-Paraná - RO, Brazil",
+      "recordedOn": "2023-01-30",
+      "durationSeconds": 7.04,
+      "bytes": 620972,
+      "species": {
+        "commonName": "Hoatzin",
+        "scientificName": "Opisthocomus hoazin"
+      },
+      "qualityGrade": "research"
+    },
+    {
+      "id": "co-scarlet-macaw",
+      "path": "/audio/co-scarlet-macaw.wav",
+      "title": "Scarlet Macaw field recording",
+      "creator": "Eric Knight",
+      "sourceUrl": "https://www.inaturalist.org/observations/259493557",
+      "downloadUrl": "https://static.inaturalist.org/sounds/1292400.wav?1737818837",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Scarlet Macaw recorded by Eric Knight (knightericm), via iNaturalist / CC BY 4.0",
+      "modifications": "Original WAV downloaded unchanged. No trimming, conversion or generated audio.",
+      "location": "Puntarenas, CR",
+      "recordedOn": "2025-01-20",
+      "durationSeconds": 20.48,
+      "bytes": 3612740,
+      "species": {
+        "commonName": "Scarlet Macaw",
+        "scientificName": "Ara macao"
+      },
+      "qualityGrade": "research"
+    },
+    {
+      "id": "co-sunbittern",
+      "path": "/audio/co-sunbittern.wav",
+      "title": "Sunbittern field recording",
+      "creator": "Jennifer Rycenga",
+      "sourceUrl": "https://www.inaturalist.org/observations/129744474",
+      "downloadUrl": "https://static.inaturalist.org/sounds/515859.wav?1659825760",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Sunbittern recorded by Jennifer Rycenga (gyrrlfalcon), via iNaturalist / CC BY 4.0",
+      "modifications": "Original WAV downloaded unchanged. No trimming, conversion or generated audio.",
+      "location": "Alta Floresta - State of Mato Grosso, 78580-000, Brazil",
+      "recordedOn": "2022-07-15",
+      "durationSeconds": 11.392,
+      "bytes": 1507160,
+      "species": {
+        "commonName": "Sunbittern",
+        "scientificName": "Eurypyga helias"
+      },
+      "qualityGrade": "research"
+    },
+    {
+      "id": "co-choco-toucan",
+      "path": "/audio/co-choco-toucan.m4a",
+      "title": "Chocó Toucan field recording",
+      "creator": "Fundacion ProAves",
+      "sourceUrl": "https://www.inaturalist.org/observations/404879370",
+      "downloadUrl": "https://static.inaturalist.org/sounds/2180115.m4a?1790818057",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Chocó Toucan recorded by Fundacion ProAves (fundacion_proaves), via iNaturalist / CC BY-SA 4.0",
+      "modifications": "Original M4A downloaded unchanged. No trimming, conversion or generated audio.",
+      "location": "Reserva ProAves Ranita Terribilis",
+      "recordedOn": "2026-09-04",
+      "durationSeconds": 33.877,
+      "bytes": 551665,
+      "species": {
+        "commonName": "Chocó Toucan",
+        "scientificName": "Ramphastos brevis"
+      },
+      "qualityGrade": "research"
+    }
+  ],
+  "unavailableAudio": [
+    {
+      "id": "co-yellow-throated-toucan",
+      "commonName": "Yellow-throated Toucan",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-golden-headed-quetzal",
+      "commonName": "Golden-headed Quetzal",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-santa-marta-brushfinch",
+      "commonName": "Santa Marta Brushfinch",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-santa-marta-parakeet",
+      "commonName": "Santa Marta Parakeet",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-white-tailed-starfrontlet",
+      "commonName": "White-tailed Starfrontlet",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-jabiru",
+      "commonName": "Jabiru",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-scarlet-ibis",
+      "commonName": "Scarlet Ibis",
+      "reason": "No independently verified recording is currently included."
+    },
+    {
+      "id": "co-apical-flycatcher",
+      "commonName": "Apical Flycatcher",
+      "reason": "No independently verified recording is currently included."
+    }
+  ]
+}

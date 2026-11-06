@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+import { canonicalUrl } from "@/lib/site-path"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen, Star } from "lucide-react"
@@ -55,6 +57,8 @@ const reviews = [
     role: "Birding Enthusiasts",
   },
 ]
+
+export const metadata: Metadata = { alternates: { canonical: canonicalUrl("/") } }
 
 export default function AVESLandingPage() {
   return (

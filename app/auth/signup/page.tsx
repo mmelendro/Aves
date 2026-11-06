@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic"
 
 import SignupForm from "./SignupForm"
+import { ColombiaAccountNotice } from "@/components/colombia-account-notice"
 
 export default function SignupPage() {
   return (
@@ -15,6 +16,7 @@ export default function SignupPage() {
             </a>
           </p>
         </div>
+        <ColombiaAccountNotice />
         <SignupForm />
       </div>
     </div>

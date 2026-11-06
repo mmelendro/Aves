@@ -1,9 +1,13 @@
+import type { Metadata } from "next"
+import { canonicalUrl } from "@/lib/site-path"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { ContactFormSection } from "@/components/contact-form-section"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Mail, MapPin, Clock } from "lucide-react"
+
+export const metadata: Metadata = { title: "Plan My Trip", alternates: { canonical: canonicalUrl("/contact") } }
 
 export default function ContactPage() {
   return (

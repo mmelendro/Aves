@@ -368,7 +368,7 @@ export function ContactFormSection({
 
                       {submitStatus === "success" && (
                         <p className="text-sm text-emerald-600 text-center mt-4 font-medium">
-                          Thank you — we'll be in touch within 24 hours.
+                          Your enquiry has been submitted to AVES. We'll reply personally.
                         </p>
                       )}
                       {submitStatus === "error" && (

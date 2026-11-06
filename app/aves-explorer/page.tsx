@@ -1,9 +1,11 @@
+import { canonicalUrl } from "@/lib/site-path"
 import { ColombianBirdsExplorer } from "@/components/colombian-birds-explorer"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonicalUrl("/aves-explorer") },
   title: "AVES Explorer - Discover Colombia's Incredible Bird Diversity",
   description:
     "Explore Colombia's 11 bioregions and discover over 1,900 bird species with our interactive map. Plan your birding adventure with expert guides.",

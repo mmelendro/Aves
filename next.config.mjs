@@ -1,3 +1,4 @@
+import { securityHeaders, privateHeaders } from "./security-headers.mjs"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -12,6 +13,12 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   poweredByHeader: false,
+  async headers() {
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      ...["/account/:path*", "/dashboard/:path*", "/auth/:path*", "/api/:path*", "/shopping/:path*"].map(source => ({ source, headers: privateHeaders })),
+    ]
+  },
   async redirects() {
     return [
       {

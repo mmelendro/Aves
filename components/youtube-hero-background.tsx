@@ -17,6 +17,31 @@ interface YouTubeHeroBackgroundProps {
   attributionText?: string
 }
 
+interface YouTubePlayer {
+  playVideo(): void
+  pauseVideo(): void
+  mute(): void
+  unMute(): void
+  getPlayerState(): number
+  getAvailableQualityLevels(): string[]
+  setPlaybackQuality(quality: string): void
+}
+
+interface YouTubePlayerOptions {
+  videoId: string
+  playerVars: Record<string, string | number>
+  events: {
+    onReady(event: { target: YouTubePlayer }): void
+    onStateChange(event: { target: YouTubePlayer; data: number }): void
+    onError(event: { target: YouTubePlayer; data: number }): void
+  }
+}
+
+type YouTubeWindow = Window & {
+  YT?: { Player: new (element: HTMLElement, options: YouTubePlayerOptions) => YouTubePlayer }
+  onYouTubeIframeAPIReady?: () => void
+}
+
 // Network speed detection and quality mapping
 const getOptimalQuality = (connectionSpeed: string, isMobile: boolean) => {
   if (isMobile) {
@@ -92,7 +117,7 @@ export default function YouTubeHeroBackground({
   const [player, setPlayer] = useState<any>(null)
   const [isAPIReady, setIsAPIReady] = useState(false)
   const playerRef = useRef<HTMLDivElement>(null)
-  const controlsTimeoutRef = useRef<NodeJS.Timeout>()
+  const controlsTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   // Detect mobile device
   useEffect(() => {
@@ -121,7 +146,8 @@ export default function YouTubeHeroBackground({
     if (typeof window === "undefined") return
 
     const loadYouTubeAPI = () => {
-      if (window.YT && window.YT.Player) {
+      const youtubeWindow = window as YouTubeWindow
+      if (youtubeWindow.YT && youtubeWindow.YT.Player) {
         setIsAPIReady(true)
         return
       }
@@ -133,7 +159,7 @@ export default function YouTubeHeroBackground({
         document.head.appendChild(script)
       }
 
-      window.onYouTubeIframeAPIReady = () => {
+      youtubeWindow.onYouTubeIframeAPIReady = () => {
         setIsAPIReady(true)
       }
     }
@@ -147,7 +173,7 @@ export default function YouTubeHeroBackground({
 
     const initializePlayer = () => {
       try {
-        const newPlayer = new window.YT.Player(playerRef.current, {
+        const newPlayer = new (window as YouTubeWindow).YT!.Player(playerRef.current!, {
           videoId,
           playerVars: {
             autoplay: 1,
@@ -167,7 +193,7 @@ export default function YouTubeHeroBackground({
             quality: currentQuality,
           },
           events: {
-            onReady: (event: any) => {
+            onReady: (event: { target: YouTubePlayer }) => {
               setPlayer(event.target)
               setIsLoading(false)
 
@@ -189,7 +215,7 @@ export default function YouTubeHeroBackground({
                 setIsPlaying(true)
               }, 1000)
             },
-            onStateChange: (event: any) => {
+            onStateChange: (event: { target: YouTubePlayer; data: number }) => {
               setIsPlaying(event.data === 1)
 
               // Handle quality changes and errors
@@ -203,7 +229,7 @@ export default function YouTubeHeroBackground({
                 }
               }
             },
-            onError: (event: any) => {
+            onError: (event: { target: YouTubePlayer; data: number }) => {
               console.warn("YouTube player error:", event.data)
               // Try lower quality on error
               if (player) {

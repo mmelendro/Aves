@@ -1,7 +1,9 @@
+import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import ResourcesPageClient from "./ResourcesPageClient"
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonicalUrl("/resources") },
   title: "Expert Resources Hub | AVES Tours",
   description:
     "Your comprehensive birding resource center. Expert podcasts, official guides, preparation tips, and conservation insights for your Colombian birding adventure.",

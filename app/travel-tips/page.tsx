@@ -1,3 +1,4 @@
+import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
@@ -6,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Shield, Heart, Leaf, Users, TrendingUp, MapPin, Clock, AlertTriangle, CheckCircle, Globe } from "lucide-react"
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonicalUrl("/travel-tips") },
   title: "Travel Tips for Colombia | Essential Guide for Birdwatching Tours | AVES",
   description:
     "Comprehensive travel guide for Colombia covering safety, culture, and sustainable tourism. Learn about Colombia's transformation and how birdwatching supports local communities.",

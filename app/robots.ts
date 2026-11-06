@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
+  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production") {
+    return { rules: { userAgent: "*", disallow: "/" } }
+  }
+  // This root file governs both sites on aves.bio. Crawling rules are not access control.
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/admin/", "/_next/"],
+      disallow: ["/api/", "/auth/", "/account", "/admin", "/dashboard", "/shopping", "/australia/api/", "/australia/auth/", "/australia/account", "/australia/admin"],
     },
-    sitemap: "https://aves.bio/sitemap.xml",
+    sitemap: ["https://aves.bio/sitemap.xml", "https://aves.bio/australia/sitemap.xml"],
   }
 }

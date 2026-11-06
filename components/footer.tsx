@@ -36,6 +36,7 @@ const legalLinks = [
   { href: "/terms", label: "Terms" },
   { href: "/cookies", label: "Cookies" },
   { href: "/credits", label: "Photo & Sound Credits" },
+  { href: "/site-map", label: "Site Map" },
 ]
 
 const linkClassName = "inline-flex min-h-11 items-center rounded-lg text-sm text-gray-200 transition-colors hover:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
@@ -84,7 +85,7 @@ export function Footer({ transparent = false }: FooterProps) {
 
         <div className="mt-8 flex flex-col gap-4 border-t border-gray-700/70 pt-6 lg:flex-row lg:items-center lg:justify-between">
           <p className="text-sm text-gray-300">© 2026 AVES. All rights reserved.</p>
-          <nav aria-label="Legal information and credits">
+          <nav aria-label="Website information">
             <ul className="flex flex-wrap gap-x-5 gap-y-1">
               {legalLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
             </ul>

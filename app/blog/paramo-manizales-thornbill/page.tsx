@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+import { canonicalUrl } from "@/lib/site-path"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Calendar, User, MapPin, Thermometer, Mountain, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
@@ -6,6 +8,8 @@ import AuthorBio from "@/components/author-bio"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+
+export const metadata: Metadata = { title: "Páramo & Cloud Forests", alternates: { canonical: canonicalUrl("/blog/paramo-manizales-thornbill") } }
 
 export default function ParamoManizalesThornbillPost() {
   return (

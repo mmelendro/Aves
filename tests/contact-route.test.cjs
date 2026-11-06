@@ -22,7 +22,7 @@ const validInquiry = {
 }
 const accepted = (id) => ({ data: { id }, error: null })
 
-function harness(outcomes = [accepted("primary"), accepted("confirmation")], environment = {}) {
+function harness(outcomes = [accepted("primary")], environment = {}) {
   const calls = [], logs = [], exports = {}
   class FakeResend {
     constructor(key) {
@@ -58,18 +58,18 @@ function harness(outcomes = [accepted("primary"), accepted("confirmation")], env
   }
 }
 
-test("valid inquiry is normalized and accepted before confirmation is requested", async () => {
+test("valid inquiry is normalized and accepted only for the AVES inbox", async () => {
   const h = harness()
   const response = await h.submit()
   assert.equal(response.status, 200)
   assert.equal(response.headers.get("cache-control"), "no-store")
-  assert.deepEqual(await response.json(), { success: true, status: "accepted", confirmationAccepted: true })
-  assert.equal(h.calls.length, 2)
+  assert.deepEqual(await response.json(), { success: true, status: "accepted" })
+  assert.equal(h.calls.length, 1)
   assert.equal(h.calls[0].to, "mmelendro@gmail.com")
   assert.equal(h.calls[0].replyTo, "visitor@example.com")
   assert.equal(h.calls[0].subject, "Tour Inquiry from Test Birder")
   assert.match(h.calls[0].text, /First line\nSecond line/)
-  assert.equal(h.calls[1].to, "visitor@example.com")
+  assert.ok(h.calls.every(call => call.to !== validInquiry.email))
 })
 
 test("configured inbox is respected", async () => {
@@ -128,7 +128,7 @@ for (const [label, result] of [
   ["missing acceptance ID", { data: {}, error: null }],
   ["transport failure", new Error("private transport details")],
 ]) {
-  test(`${label} fails the inquiry and skips confirmation`, async () => {
+  test(`${label} fails the inquiry without claiming success`, async () => {
     const h = harness([result])
     const response = await h.submit()
     assert.equal(response.status, 502)
@@ -138,16 +138,55 @@ for (const [label, result] of [
   })
 }
 
-for (const [label, result] of [
-  ["provider rejection", { data: null, error: { name: "rate_limit_exceeded" } }],
-  ["transport failure", new Error("confirmation timeout")],
+for (const origin of [
+  "https://attacker.test", "https://aves.bio.attacker.test", "https://aves.bio@attacker.test",
+  "http://aves.bio", "null", "", "https://aves.bio/path", "https://aves.bio/",
+  "https://user:password@aves.bio", "https://aves.bio https://attacker.test", "file://",
 ]) {
-  test(`confirmation ${label} preserves primary acceptance`, async () => {
-    const h = harness([accepted("primary"), result])
-    const response = await h.submit()
-    assert.equal(response.status, 200)
-    assert.deepEqual(await response.json(), { success: true, status: "accepted", confirmationAccepted: false })
-    assert.equal(h.calls.length, 2)
-    assert.equal(h.calls.filter((call) => call.to === "mmelendro@gmail.com").length, 1)
+  test("rejects untrusted or malformed Origin: " + JSON.stringify(origin), async () => {
+    const h = harness()
+    const response = await h.submit(validInquiry, { "Content-Type": "application/json", Origin: origin })
+    assert.equal(response.status, 403)
+    assert.equal(response.headers.get("cache-control"), "no-store")
+    assert.equal(h.calls.length, 0)
   })
 }
+
+test("accepts the request origin and the configured public origin behind a reverse proxy", async () => {
+  for (const origin of ["https://example.test", "https://aves.bio"]) {
+    const h = harness(undefined, { NEXT_PUBLIC_SITE_URL: "https://aves.bio" })
+    assert.equal((await h.submit(validInquiry, { "Content-Type": "application/json", Origin: origin, "Sec-Fetch-Site": "same-origin" })).status, 200)
+    assert.equal(h.calls.length, 1)
+  }
+})
+
+test("rejects explicit cross-site browser requests even with a missing or trusted Origin", async () => {
+  for (const headers of [{}, { Origin: "https://aves.bio" }]) {
+    const h = harness()
+    assert.equal((await h.submit(validInquiry, { "Content-Type": "application/json", "Sec-Fetch-Site": "cross-site", ...headers })).status, 403)
+    assert.equal(h.calls.length, 0)
+  }
+})
+
+test("invalid optional site configuration never permits an unrelated Origin", async () => {
+  const h = harness(undefined, { NEXT_PUBLIC_SITE_URL: "not-a-url" })
+  assert.equal((await h.submit(validInquiry, { "Content-Type": "application/json", Origin: "https://attacker.test" })).status, 403)
+  assert.equal(h.calls.length, 0)
+  assert.equal((await h.submit(validInquiry, { "Content-Type": "application/json", Origin: "https://example.test" })).status, 200)
+})
+
+test("a visitor-supplied destination cannot redirect the owner notification or trigger a visitor email", async () => {
+  const h = harness()
+  const response = await h.submit({ ...validInquiry, email: "unverified@example.test", to: "unverified@example.test", contactEmail: "unverified@example.test" })
+  assert.equal(response.status, 200)
+  assert.deepEqual(await response.json(), { success: true, status: "accepted" })
+  assert.equal(h.calls.length, 1)
+  assert.equal(h.calls[0].to, "mmelendro@gmail.com")
+  assert.equal(h.calls[0].replyTo, "unverified@example.test")
+})
+
+test("the contact form does not depend on the removed confirmation response field", () => {
+  const component = readFileSync(resolve(sourceRoot, "components/contact-form-section.tsx"), "utf8")
+  assert.doesNotMatch(component, /confirmationAccepted/)
+  assert.match(component, /Your enquiry has been submitted to AVES/)
+})

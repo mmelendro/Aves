@@ -1,3 +1,4 @@
+import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, ArrowRight } from "lucide-react"
@@ -8,6 +9,7 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonicalUrl("/blog/choco-toucan-expedition") },
   title: "Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot | AVES",
   description:
     "Join our expedition into the Chocó biogeographic region, one of the world's most biodiverse areas. Discover Yellow-throated Toucans, endemic species, and pristine rainforest ecosystems in this immersive birding adventure.",

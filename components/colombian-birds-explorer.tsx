@@ -3,276 +3,121 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { getRegionLinks } from "@/lib/region-links"
+import { regions } from "@/content/regions"
+import { birdData } from "@/content/birds"
 import { Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, ArrowRight, ChevronDown } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import YouTubeHeroBackground from "@/components/youtube-hero-background"
 
-// Complete bioregions data with corrected coordinates and accurate color mapping
-const bioregionsData = [
+// Marker positions and colors match the existing AVES map artwork.
+// Descriptions and featured species come from the shared, sourced catalogue.
+const regionMapVisuals = [
   {
     id: "Pacific",
-    name: "Pacific Coast",
-    fullName: "Pacific Coast & Chocó",
-    shortDescription: "World's most biodiverse rainforest with extraordinary rainfall and endemic species",
-    detailedDescription:
-      "The Pacific Coast bioregion encompasses the Chocó biogeographic region, recognized as having the highest biodiversity per square kilometer on Earth. With annual rainfall exceeding 10,000mm in some areas, this region supports an incredible array of endemic bird species found nowhere else on the planet.",
-    endemicCount: 67,
-    totalSpecies: 875,
-    keyBirds: ["Chocó Vireo", "Harpy Eagle", "Great Green Macaw", "Banded Ground-Cuckoo", "Beautiful Treerunner"],
     coordinates: { x: 8, y: 65 },
     color: "#228B22",
     gradient: "from-[#228B22] to-[#1F7A1F]",
     icon: TreePine,
-    habitat: "Lowland rainforest, cloud forest, mangroves",
-    elevation: "0-4,000m",
-    bestTime: "January-March, July-September",
-    threats: ["Deforestation", "Mining", "Infrastructure development"],
-    conservation: "UNESCO Biosphere Reserve status",
   },
   {
     id: "Western Andes",
-    name: "Western Andes",
-    fullName: "Cordillera Occidental",
-    shortDescription: "Highest concentration of endemic bird species with cloud forests and páramo ecosystems",
-    detailedDescription:
-      "The Western Andes represent Colombia's most endemic-rich mountain range, featuring diverse elevational zones from tropical lowlands to high-altitude páramo. This bioregion contains the highest concentration of endemic bird species per unit area in Colombia.",
-    endemicCount: 45,
-    totalSpecies: 785,
-    keyBirds: [
-      "Gorgeted Puffleg",
-      "Andean Cock-of-the-rock",
-      "Cauca Guan",
-      "Chestnut Wood-Quail",
-      "Rusty-faced Parrot",
-    ],
     coordinates: { x: 20, y: 52 },
     color: "#8B4513",
     gradient: "from-[#8B4513] to-[#7A3E11]",
     icon: Mountain,
-    habitat: "Cloud forest, montane forest, páramo",
-    elevation: "1,000-4,250m",
-    bestTime: "December-March, June-August",
-    threats: ["Coffee expansion", "Mining", "Habitat fragmentation"],
-    conservation: "Multiple protected areas covering 35% of region",
   },
   {
     id: "Central Andes",
-    name: "Central Andes",
-    fullName: "Cordillera Central",
-    shortDescription: "Coffee Triangle region with diverse montane ecosystems and Colombia's highest peaks",
-    detailedDescription:
-      "Home to Colombia's Coffee Cultural Landscape and the country's highest peaks, the Central Andes feature volcanic soils and diverse montane ecosystems. This region combines traditional coffee cultivation with important bird conservation areas.",
-    endemicCount: 34,
-    totalSpecies: 720,
-    keyBirds: [
-      "Indigo-winged Parrot",
-      "Yellow-eared Parrot",
-      "Multicolored Tanager",
-      "Tolima Dove",
-      "Brown-banded Antpitta",
-    ],
     coordinates: { x: 32, y: 48 },
     color: "#A0522D",
     gradient: "from-[#A0522D] to-[#8F4928]",
     icon: Mountain,
-    habitat: "Montane forest, coffee plantations, páramo",
-    elevation: "1,000-5,400m",
-    bestTime: "December-March, June-August",
-    threats: ["Agricultural expansion", "Urban development", "Climate change"],
-    conservation: "UNESCO World Heritage Coffee Cultural Landscape",
   },
   {
     id: "Eastern Andes",
-    name: "Eastern Andes",
-    fullName: "Cordillera Oriental",
-    shortDescription: "Bogotá's surroundings with extensive páramo and high-altitude wetlands",
-    detailedDescription:
-      "The Eastern Andes include the Bogotá plateau and extensive páramo ecosystems that serve as Colombia's water towers. This bioregion features unique high-altitude wetlands and specialized bird communities adapted to cool mountain climates.",
-    endemicCount: 23,
-    totalSpecies: 650,
-    keyBirds: ["Apolinar's Wren", "Bogotá Rail", "Andean Flamingo", "Noble Snipe", "Silvery-throated Spinetail"],
     coordinates: { x: 48, y: 42 },
     color: "#CD853F",
     gradient: "from-[#CD853F] to-[#B8763A]",
     icon: Mountain,
-    habitat: "Páramo, high-altitude wetlands, montane forest",
-    elevation: "500-5,400m",
-    bestTime: "December-March, June-August",
-    threats: ["Water extraction", "Urban expansion", "Agriculture"],
-    conservation: "Critical páramo protection for water security",
   },
   {
     id: "Cauca Valley",
-    name: "Cauca Valley",
-    fullName: "Cauca Inter-Andean Valley",
-    shortDescription: "Critically endangered dry forests between mountain ranges with unique endemic species",
-    detailedDescription:
-      "The fertile Cauca Valley between Colombia's mountain ranges once supported extensive dry forests, now among the world's most threatened ecosystems. This valley harbors unique endemic species adapted to seasonal dry conditions.",
-    endemicCount: 12,
-    totalSpecies: 420,
-    keyBirds: ["Cauca Guan", "Apical Flycatcher", "Greyish Piculet", "Sooty Ant-Tanager", "White-mantled Barbet"],
     coordinates: { x: 26, y: 40 },
     color: "#4169E1",
     gradient: "from-[#4169E1] to-[#3A5FCA]",
     icon: Leaf,
-    habitat: "Dry forest remnants, agricultural landscapes",
-    elevation: "200-2,000m",
-    bestTime: "December-March, July-August",
-    threats: ["Agricultural conversion", "Cattle ranching", "Urban development"],
-    conservation: "Habitat restoration projects underway",
   },
   {
     id: "Magdalena Valley",
-    name: "Magdalena Valley",
-    fullName: "Magdalena Inter-Andean Valley",
-    shortDescription: "Principal river valley with critically endangered dry forests and endemic species",
-    detailedDescription:
-      "The Magdalena Valley, Colombia's principal river corridor, once supported extensive dry forests now reduced to small fragments. This region is critical for endemic species conservation and serves as an important migration corridor.",
-    endemicCount: 18,
-    totalSpecies: 550,
-    keyBirds: ["Niceforo's Wren", "Magdalena Antbird", "Sooty Ant-Tanager", "Apical Flycatcher", "Greyish Piculet"],
     coordinates: { x: 40, y: 36 },
     color: "#1E90FF",
     gradient: "from-[#1E90FF] to-[#1C82E6]",
     icon: Leaf,
-    habitat: "Dry forest remnants, agricultural landscapes, river systems",
-    elevation: "200-2,000m",
-    bestTime: "December-March, July-August",
-    threats: ["Agricultural conversion", "Cattle ranching", "Urban development"],
-    conservation: "Critical corridor restoration initiatives",
   },
   {
     id: "Caribbean",
-    name: "Caribbean Coast",
-    fullName: "Caribbean Coastal Plains",
-    shortDescription: "Coastal plains with dry forests, wetlands, and the unique San Andrés archipelago",
-    detailedDescription:
-      "The Caribbean Coast features diverse ecosystems from arid deserts to coastal wetlands, including the unique San Andrés archipelago. This region supports important migratory bird populations and endemic Caribbean species.",
-    endemicCount: 12,
-    totalSpecies: 635,
-    keyBirds: [
-      "Caribbean Flamingo",
-      "Brown Pelican",
-      "Magnificent Frigatebird",
-      "Vermilion Cardinal",
-      "Chestnut-winged Chachalaca",
-    ],
     coordinates: { x: 36, y: 18 },
     color: "#FF8C00",
     gradient: "from-[#FF8C00] to-[#E67E00]",
     icon: Waves,
-    habitat: "Coastal wetlands, dry forest, mangroves",
-    elevation: "0-500m",
-    bestTime: "December-April",
-    threats: ["Coastal development", "Tourism pressure", "Sea level rise"],
-    conservation: "Marine protected areas and coastal reserves",
   },
   {
     id: "SNSM",
-    name: "Sierra Nevada de Santa Marta",
-    fullName: "Sierra Nevada de Santa Marta",
-    shortDescription: "World's highest coastal mountain with exceptional endemism per unit area",
-    detailedDescription:
-      "Rising from Caribbean beaches to snow-capped peaks in just 42km, the Sierra Nevada de Santa Marta is the world's highest coastal mountain range. This isolated massif has the highest level of endemism per unit area on Earth.",
-    endemicCount: 79,
-    totalSpecies: 635,
-    keyBirds: [
-      "Santa Marta Parakeet",
-      "White-tailed Starfrontlet",
-      "Blue-billed Curassow",
-      "Santa Marta Antbird",
-      "Santa Marta Bush-Tyrant",
-    ],
     coordinates: { x: 47, y: 10 },
     color: "#D2691E",
     gradient: "from-[#D2691E] to-[#BD5F1B]",
     icon: Mountain,
-    habitat: "All climate zones from tropical to alpine",
-    elevation: "0-5,775m",
-    bestTime: "December-March, July-August",
-    threats: ["Coffee cultivation", "Tourism development", "Climate change"],
-    conservation: "UNESCO Biosphere Reserve, indigenous territories",
   },
   {
     id: "Llanos",
-    name: "Llanos",
-    fullName: "Llanos Orientales",
-    shortDescription: "Vast tropical grasslands with seasonal wetlands supporting diverse waterbird communities",
-    detailedDescription:
-      "The Llanos are vast tropical grasslands that flood seasonally, creating one of South America's most important waterbird habitats. This region supports massive congregations of waterfowl and wading birds during the wet season.",
-    endemicCount: 8,
-    totalSpecies: 450,
-    keyBirds: ["Jabiru", "Orinoco Goose", "Scarlet Ibis", "Sunbittern", "Orinocan Saltator"],
     coordinates: { x: 70, y: 42 },
     color: "#FFD700",
     gradient: "from-[#FFD700] to-[#E6C200]",
     icon: Sun,
-    habitat: "Tropical grasslands, seasonal wetlands, gallery forests",
-    elevation: "100-500m",
-    bestTime: "December-March",
-    threats: ["Cattle ranching", "Agricultural conversion", "Oil extraction"],
-    conservation: "Sustainable ranching initiatives",
   },
   {
     id: "Amazonia",
-    name: "Amazonia",
-    fullName: "Amazon Basin",
-    shortDescription: "Colombia's portion of the world's largest rainforest with incredible biodiversity",
-    detailedDescription:
-      "Colombia's Amazon region represents the northern edge of the world's largest rainforest, featuring unique tepui formations and incredible biodiversity. This region harbors many species yet to be discovered by science.",
-    endemicCount: 45,
-    totalSpecies: 1250,
-    keyBirds: ["Harpy Eagle", "Zigzag Heron", "Amazonian Umbrellabird", "Capped Heron", "Pavonine Quetzal"],
     coordinates: { x: 56, y: 78 },
     color: "#32CD32",
     gradient: "from-[#32CD32] to-[#2DB82D]",
     icon: TreePine,
-    habitat: "Lowland rainforest, tepui formations, river systems",
-    elevation: "100-3,000m",
-    bestTime: "June-September",
-    threats: ["Deforestation", "Mining", "Infrastructure development"],
-    conservation: "Indigenous territories protecting 80% of forest",
   },
   {
     id: "Massif",
-    name: "Colombian Massif",
-    fullName: "Colombian Massif",
-    shortDescription: "Where the Andes divide into three ranges with páramo and cloud forest ecosystems",
-    detailedDescription:
-      "The Colombian Massif is where the Andes mountain system divides into three separate ranges. This region serves as a critical watershed and features unique páramo and cloud forest ecosystems.",
-    endemicCount: 15,
-    totalSpecies: 380,
-    keyBirds: [
-      "Stiles's Tapaculo",
-      "Colorful Puffleg",
-      "Golden-plumed Parakeet",
-      "Masked Mountain-Tanager",
-      "Lacrimose Mountain-Tanager",
-    ],
     coordinates: { x: 20, y: 65 },
     color: "#DEB887",
     gradient: "from-[#DEB887] to-[#C8A679]",
     icon: Mountain,
-    habitat: "Páramo, cloud forest, montane forest",
-    elevation: "1,000-4,750m",
-    bestTime: "December-March, June-August",
-    threats: ["Agricultural expansion", "Infrastructure development", "Climate change"],
-    conservation: "National parks protecting critical watersheds",
   },
 ]
 
+const bioregionsData = regionMapVisuals.map((visual) => {
+  const region = regions.find((item) => item.mapId === visual.id)
+  if (!region) throw new Error(`Unknown map region: ${visual.id}`)
+  return {
+    ...visual,
+    name: region.name,
+    description: region.description,
+    birds: region.birds.map((selection) => {
+      const bird = birdData.find((item) => item.id === selection.birdId)
+      if (!bird) throw new Error(`Unknown map bird: ${selection.birdId}`)
+      return { ...selection, commonName: bird.commonName }
+    }),
+  }
+})
+
 export function ColombianBirdsExplorer() {
-  const router = useRouter()
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
   const [screenSize, setScreenSize] = useState<"mobile" | "tablet" | "desktop">("desktop")
   const [isGettingStartedOpen, setIsGettingStartedOpen] = useState(false)
 
   const currentRegion = selectedRegion ? bioregionsData.find((r) => r.id === selectedRegion) : null
+  const currentLinks = getRegionLinks(currentRegion?.id || "")
 
   // Responsive screen size detection
   useEffect(() => {
@@ -379,7 +224,7 @@ export function ColombianBirdsExplorer() {
             >
               <Link href="/tours">
                 <Calendar className="w-4 h-4 mr-2" />
-                Book Your Adventure
+                Explore Tour Styles
               </Link>
             </Button>
           </div>
@@ -407,28 +252,28 @@ export function ColombianBirdsExplorer() {
 
                     <div className="space-y-4 text-white/90">
                       <p className="leading-relaxed">
-                        Colombia stands as the world's most biodiverse country per square kilometer. Our classification
-                        system organizes this incredible diversity into{" "}
+                        Explore Colombia through the{" "}
                         <Badge
                           variant="secondary"
                           className="bg-emerald-500/20 text-emerald-200 font-semibold border border-emerald-400/30"
                         >
-                          11 bioregions
+                          {regions.length} birding regions
                         </Badge>{" "}
-                        (major ecological areas) containing{" "}
+                        on this AVES planning map, with{" "}
                         <Badge
                           variant="secondary"
                           className="bg-blue-500/20 text-blue-200 font-semibold border border-blue-400/30"
                         >
-                          31 ecoregions
+                          {birdData.length} featured birds
                         </Badge>{" "}
-                        (specific habitat types).
+                        in our catalogue. These are starting points for an enquiry, not official ecological boundaries
+                        or a complete bird checklist.
                       </p>
 
                       <p className="leading-relaxed">
-                        This strategic location at the crossroads of North and South America, combined with three Andean
-                        mountain ranges and coastlines on both oceans, creates an unparalleled variety of ecosystems and
-                        the highest bird diversity on Earth.
+                        Follow the region guides from Pacific forest and Andean cloud forest to Caribbean wetlands,
+                        the Llanos and Amazonia. Each guide explains where its featured birds occur and links to the
+                        sources behind those habitat notes.
                       </p>
                     </div>
                   </CardContent>
@@ -449,22 +294,21 @@ export function ColombianBirdsExplorer() {
                       <CollapsibleContent className="mt-6">
                         <div className="space-y-4 text-white/80 text-sm bg-black/20 p-6 rounded-lg border border-white/20">
                           <p>
-                            Click on any region in the interactive map to discover its unique ecosystems, endemic
-                            species, and conservation status. Each bioregion offers distinct birding opportunities and
-                            specialized tour experiences.
+                            Select a region in the interactive map, open its guide and explore the featured birds.
+                            Send a regional enquiry when you are ready to discuss a possible itinerary.
                           </p>
                           <ul className="space-y-3 ml-4">
                             <li className="flex items-start gap-2">
                               <span className="text-emerald-400">•</span>
-                              <span>Expert guides with decades of local experience</span>
+                              <span>Use habitat notes to identify the places that interest you.</span>
                             </li>
                             <li className="flex items-start gap-2">
                               <span className="text-emerald-400">•</span>
-                              <span>Small groups (max 4 guests) for personalized attention</span>
+                              <span>Share your preferred dates, group size and walking pace.</span>
                             </li>
                             <li className="flex items-start gap-2">
                               <span className="text-emerald-400">•</span>
-                              <span>Specialized tour experiences available for each region</span>
+                              <span>Access, guiding, timing and availability need individual confirmation.</span>
                             </li>
                           </ul>
                         </div>
@@ -475,7 +319,7 @@ export function ColombianBirdsExplorer() {
 
                 {/* Selected Region Details - Enhanced Transparency */}
                 {currentRegion && (
-                  <Card className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20 animate-fade-in-up">
+                  <Card id="selected-region-details" className="bg-white/10 backdrop-blur-lg shadow-2xl border border-white/20 animate-fade-in-up">
                     <CardContent className="p-8">
                       {/* Navigation Breadcrumb */}
                       <div className="mb-6 flex items-center gap-2 text-sm bg-black/20 p-4 rounded-lg border border-white/20">
@@ -484,7 +328,7 @@ export function ColombianBirdsExplorer() {
                           className="hover:text-emerald-300 transition-colors font-medium flex items-center gap-2 text-white/80"
                         >
                           <ArrowRight className="w-4 h-4 rotate-180" />
-                          All Bioregions
+                          All Regions
                         </button>
                         <ChevronRight className="w-4 h-4 text-white/60" />
                         <span className="text-white font-semibold">{currentRegion.name}</span>
@@ -499,54 +343,53 @@ export function ColombianBirdsExplorer() {
                           <currentRegion.icon className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-lg font-bold text-white">{currentRegion.fullName}</h3>
+                          <h3 className="text-lg font-bold text-white">{currentRegion.name}</h3>
                           <p className="text-white/70 text-sm">
-                            {currentRegion.habitat} • {currentRegion.elevation}
+                            Regional birding inspiration
                           </p>
                         </div>
                       </div>
 
                       {/* Region Description */}
-                      <p className="text-white/80 mb-6 text-sm leading-relaxed">{currentRegion.detailedDescription}</p>
+                      <p className="text-white/80 mb-6 text-sm leading-relaxed">{currentRegion.description}</p>
 
                       {/* Key Information */}
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="bg-black/20 p-4 rounded-lg border border-white/20">
-                          <h4 className="font-semibold text-white mb-2 text-sm">Species Count</h4>
+                          <h4 className="font-semibold text-white mb-2 text-sm">Featured Birds</h4>
                           <div className="space-y-2 text-xs">
                             <div className="flex justify-between">
-                              <span className="text-white/70">Total:</span>
-                              <span className="font-medium text-white">{currentRegion.totalSpecies}</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-white/70">Endemic:</span>
-                              <span className="font-medium text-white">{currentRegion.endemicCount}</span>
+                              <span className="text-white/70">In this guide:</span>
+                              <span className="font-medium text-white">{currentRegion.birds.length}</span>
                             </div>
                           </div>
                         </div>
                         <div className="bg-black/20 p-4 rounded-lg border border-white/20">
-                          <h4 className="font-semibold text-white mb-2 text-sm">Best Time</h4>
-                          <p className="font-medium text-xs text-white/80">{currentRegion.bestTime}</p>
+                          <h4 className="font-semibold text-white mb-2 text-sm">Plan Your Visit</h4>
+                          <p className="font-medium text-xs text-white/80">Ask about timing, access and a suitable pace.</p>
                         </div>
                       </div>
 
                       {/* Key Species */}
                       <div className="mb-6">
-                        <h4 className="font-semibold text-white mb-3 text-sm">Key Species</h4>
+                        <h4 className="font-semibold text-white mb-3 text-sm">Birds to Explore</h4>
                         <div className="flex flex-wrap gap-2">
-                          {currentRegion.keyBirds.slice(0, 3).map((bird, index) => (
+                          {currentRegion.birds.map((bird) => (
                             <span
-                              key={index}
+                              key={bird.birdId}
                               className="px-3 py-1 text-xs rounded-full border border-white/30"
                               style={{
                                 color: "white",
                                 backgroundColor: `${currentRegion.color}30`,
                               }}
                             >
-                              {bird}
+                              {bird.commonName}
                             </span>
                           ))}
                         </div>
+                        <p className="mt-3 text-xs leading-relaxed text-white/70">
+                          The region guide includes local habitat notes and sources. Sightings are never guaranteed.
+                        </p>
                       </div>
 
                       {/* Action Buttons */}
@@ -560,9 +403,9 @@ export function ColombianBirdsExplorer() {
                             borderColor: currentRegion.color,
                           }}
                         >
-                          <Link href="/tours">
+                          <Link href={currentLinks.guideHref}>
                             <Bird className="w-3 h-3 mr-1" />
-                            Tours
+                            Region Guide
                           </Link>
                         </Button>
                         <Button
@@ -571,9 +414,9 @@ export function ColombianBirdsExplorer() {
                           size="sm"
                           className="flex-1 text-xs bg-transparent text-white border-white/30 hover:bg-white/10"
                         >
-                          <Link href="/contact">
+                          <Link href={currentLinks.enquiryHref}>
                             <Camera className="w-3 h-3 mr-1" />
-                            Plan Visit
+                            Plan This Region
                           </Link>
                         </Button>
                       </div>
@@ -612,15 +455,18 @@ export function ColombianBirdsExplorer() {
                             return (
                               <button
                                 key={region.id}
+                                type="button"
                                 onClick={() => handleRegionClick(region.id)}
                                 onMouseEnter={() => setHoveredRegion(region.id)}
                                 onMouseLeave={() => setHoveredRegion(null)}
-                                className={`absolute transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
+                                className={`absolute flex h-11 w-11 items-center justify-center transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
                                 style={{
                                   left: `${region.coordinates.x}%`,
                                   top: `${region.coordinates.y}%`,
                                 }}
-                                aria-label={`Explore ${region.name} bioregion`}
+                                aria-label={`Explore ${region.name} region`}
+                                aria-pressed={isSelected}
+                                aria-controls={currentRegion ? "selected-region-details" : undefined}
                               >
                                 <div
                                   className={`${iconSizes.iconSize} rounded-full ${iconSizes.shadowSize} transition-all duration-300 flex items-center justify-center ${iconSizes.borderWidth} border-white ${
@@ -660,16 +506,16 @@ export function ColombianBirdsExplorer() {
                     {/* Statistics Below Map - Enhanced Transparency */}
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div className="bg-emerald-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-emerald-400/30">
-                        <div className="text-lg sm:text-xl font-bold">1,900+</div>
-                        <div className="text-emerald-200 text-xs font-medium">Bird Species</div>
+                        <div className="text-lg sm:text-xl font-bold">{birdData.length}</div>
+                        <div className="text-emerald-200 text-xs font-medium">Featured Birds</div>
                       </div>
                       <div className="bg-blue-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-blue-400/30">
-                        <div className="text-lg sm:text-xl font-bold">78+</div>
-                        <div className="text-blue-200 text-xs font-medium">Endemic Species</div>
+                        <div className="text-lg sm:text-xl font-bold">{regions.length}</div>
+                        <div className="text-blue-200 text-xs font-medium">Region Guides</div>
                       </div>
                       <div className="bg-purple-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-purple-400/30">
-                        <div className="text-lg sm:text-xl font-bold">11</div>
-                        <div className="text-purple-200 text-xs font-medium">Bioregions</div>
+                        <div className="text-lg sm:text-xl font-bold">Your Pace</div>
+                        <div className="text-purple-200 text-xs font-medium">Personal Enquiries</div>
                       </div>
                     </div>
                   </CardContent>
@@ -687,47 +533,49 @@ export function ColombianBirdsExplorer() {
                 Ready to Experience Colombia's Avian Wonders?
               </h2>
               <p className="text-xl text-white/90 leading-relaxed max-w-3xl mx-auto text-shadow-lg">
-                Join our expert-guided birding tours and discover the incredible diversity you've just explored. From
-                endemic hummingbirds in the Andes to colorful toucans in the Amazon rainforest.
+                Tell us which regions and birds interest you. We can discuss your dates, priorities and preferred pace
+                before confirming a proposed itinerary.
               </p>
             </div>
 
             {/* CTA Buttons with Enhanced Transparency */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
-              <Link href="/tours">
                 <Button
+                  asChild
                   size="lg"
                   className="w-full bg-white/15 backdrop-blur-md text-white hover:bg-white/25 font-semibold py-4 border border-white/30 shadow-lg"
                 >
+                  <Link href="/tours">
                   <Calendar className="w-5 h-5 mr-2" />
                   View All Tours
+                  </Link>
                 </Button>
-              </Link>
-              <Link href="/contact">
                 <Button
+                  asChild
                   size="lg"
                   variant="outline"
                   className="w-full border-white/40 text-white hover:bg-white/15 font-semibold py-4 bg-transparent backdrop-blur-md shadow-lg"
                 >
+                  <Link href="/contact">
                   <Users className="w-5 h-5 mr-2" />
                   Plan Custom Tour
+                  </Link>
                 </Button>
-              </Link>
             </div>
 
             {/* Additional Information Grid with Maximum Transparency */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
               <div className="text-white/90 bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/20">
-                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Expert Guides</div>
-                <div className="text-sm text-shadow">Professional ornithologists with decades of experience</div>
+                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Regional Guides</div>
+                <div className="text-sm text-shadow">Explore featured birds with habitat notes and linked sources</div>
               </div>
               <div className="text-white/90 bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/20">
-                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Small Groups</div>
-                <div className="text-sm text-shadow">Maximum 4 guests per tour for personalized experience</div>
+                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Your Priorities</div>
+                <div className="text-sm text-shadow">Share your group size, interests and preferred walking pace</div>
               </div>
               <div className="text-white/90 bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/20">
-                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Carbon Neutral</div>
-                <div className="text-sm text-shadow">100% carbon neutral tours supporting conservation</div>
+                <div className="text-2xl font-bold text-white mb-3 text-shadow-lg">Plan Together</div>
+                <div className="text-sm text-shadow">Confirm access, guiding and availability before making a booking</div>
               </div>
             </div>
           </div>

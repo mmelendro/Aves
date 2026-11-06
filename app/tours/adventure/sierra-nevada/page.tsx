@@ -1,8 +1,12 @@
+import type { Metadata } from "next"
+import { canonicalUrl } from "@/lib/site-path"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, CheckCircle, Clock, Users } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+
+export const metadata: Metadata = { title: "Sierra Nevada Birding Experience", alternates: { canonical: canonicalUrl("/tours/adventure/sierra-nevada") } }
 
 export default function SierraNevadaTourPage() {
   return (

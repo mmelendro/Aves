@@ -2,6 +2,8 @@ import { supabase } from "./supabase-client"
 import type { Database } from "./database.types"
 
 type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"]
+export type DisplayUserProfile = Pick<UserProfile, "id" | "first_name" | "last_name" | "profile_image_url">
+const DISPLAY_PROFILE_COLUMNS = "id,first_name,last_name,profile_image_url"
 type UserProfileInsert = Database["public"]["Tables"]["user_profiles"]["Insert"]
 type UserProfileUpdate = Database["public"]["Tables"]["user_profiles"]["Update"]
 
@@ -112,7 +114,7 @@ export class AuthService {
   // Create user profile
   static async createUserProfile(profileData: UserProfileInsert) {
     try {
-      const { data, error } = await supabase.from("user_profiles").insert(profileData).select().single()
+      const { data, error } = await supabase.from("user_profiles").insert(profileData).select(DISPLAY_PROFILE_COLUMNS).single()
 
       if (error) throw error
       return { data, error: null }
@@ -122,9 +124,9 @@ export class AuthService {
   }
 
   // Get user profile
-  static async getUserProfile(userId: string): Promise<{ data: UserProfile | null; error: string | null }> {
+  static async getUserProfile(userId: string): Promise<{ data: DisplayUserProfile | null; error: string | null }> {
     try {
-      const { data, error } = await supabase.from("user_profiles").select("*").eq("id", userId).single()
+      const { data, error } = await supabase.from("user_profiles").select(DISPLAY_PROFILE_COLUMNS).eq("id", userId).single()
 
       if (error) throw error
       return { data, error: null }
@@ -136,7 +138,7 @@ export class AuthService {
   // Update user profile
   static async updateUserProfile(userId: string, updates: UserProfileUpdate) {
     try {
-      const { data, error } = await supabase.from("user_profiles").update(updates).eq("id", userId).select().single()
+      const { data, error } = await supabase.from("user_profiles").update(updates).eq("id", userId).select(DISPLAY_PROFILE_COLUMNS).single()
 
       if (error) throw error
       return { data, error: null }
