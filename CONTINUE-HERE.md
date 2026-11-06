@@ -2,6 +2,10 @@
 
 The shared account/backend for Colombia and Australia is now live. The two public websites retain separate applications and Git histories.
 
+Database retirement update: **7 November 2026 (Sydney)**. Both unused projects were permanently deleted with the user's explicit confirmation; the shared project is the sole remaining Supabase project.
+
+Future destinations: the shared country/region registry is being prepared; **implementation and release verification are pending**. Follow [Adding an AVES destination](docs/adding-destinations.md). Ecuador and Costa Rica are disabled placeholders, not launched offerings. New destinations will reuse the existing accounts/database and require reviewed configuration, migration and public-content releases; there is no country-management admin screen.
+
 ## Current production
 
 - Repository: https://github.com/mmelendro/Aves.
@@ -19,12 +23,13 @@ The shared account/backend for Colombia and Australia is now live. The two publi
 The user explicitly chose one AVES account/database and abandoned old Colombian data migration.
 
 - The retained project is **AVES Shared Accounts**, reference `qeyprwftrouztlqmwuzv`, healthy in Sydney; its display name was verified.
-- Migration `20261106113240_shared_country_plans_and_contacts.sql` is applied. Hosted rollback verification passed without altering pre-existing rows.
+- Migration `20261106114144_shared_country_plans_and_contacts.sql` is applied. Hosted rollback verification passed without altering pre-existing rows.
 - Earlier contact, accounts/quotes, draft-quota/default-privilege and client-column migrations remain applied. Preserve owner checks, immutable submitted/issued snapshots, trusted owner membership, explicit projections and least-privilege grants.
 - Signup/sign-in, saved country-specific plans, quote requests and owner-priced proposals now serve both countries. There are no instant reservations or payments.
 - Colombia links enter `/australia/account?country=colombia&region=<canonical-slug>`. Safe auth returns use unprefixed `next=/account?country=colombia&region=...`; arbitrary external destinations remain invalid.
 - Country-aware contact validates that country's regions and records separate explicit updates consent. Colombia requires a stored receipt explicitly confirming Colombia; Australian consent compatibility is preserved.
-- The old paused project `krzmqusxxrfljjkdbklx` and unused empty replacement `gfxirgzvbpytgfffolhj` **have not been deleted**. Deletion awaits the action-time user confirmation already requested. Do not restore the superseded separate-Colombia migration plan.
+- The old paused **AVES-Database** project `krzmqusxxrfljjkdbklx` and unused empty **AVES Colombia** replacement `gfxirgzvbpytgfffolhj` were **permanently deleted on 7 November 2026 (Sydney)** after explicit user confirmation. The project inventory and organization dashboard show only **AVES Shared Accounts** `qeyprwftrouztlqmwuzv`, active and healthy. Do not restore the superseded separate-Colombia migration plan.
+- Post-retirement read-only checks found the shared data unchanged: **5 Auth users, 4 plans, 3 quote requests and 5 contacts**. All **8 application tables** still have row-level security enabled.
 
 ## Verified release and email state
 
@@ -51,7 +56,6 @@ The Colombian public app has retired its old auth/profile/booking/document clien
 - Supabase Free remains selected. Paid managed backups and leaked-password checking are not enabled. Establish an available export/recovery approach; backups must not be described as configured.
 - Security-alert switches do not prove owner MFA enrollment. Complete or verify enrollment separately.
 - Durable requests/proposals can have pending or failed notifications. Provider acceptance is not final delivery. Unchanged browser retries do not resend notifications; review and retry failures operationally. No unattended email retry worker is established.
-- Await the pending action-time answer before deleting the two unused Colombian projects; verify any authorised deletion afterward. Keep `qeyprwftrouztlqmwuzv` intact.
 - Preserve verified signup/recovery links, cookie/routing behavior and country-aware permissions in future changes. Never change the real owner's password during QA.
 - Record future deployed commits/IDs only after successful public verification.
 

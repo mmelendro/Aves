@@ -78,6 +78,27 @@ test("Colombia uses the same private RPC with an explicit destination country", 
   assert.equal(JSON.parse(h.calls[0].options.body).p_country, "colombia")
 })
 
+test("retired-country replay uses only the read-only RPC and requires an existing receipt", async () => {
+  const h = harness({ fetcher: () => response({ ...receipt, created: false }) })
+  const key = { idempotencyKey: input.idempotencyKey, payloadHash: input.payloadHash, country: "colombia" }
+  assert.deepEqual(await h.replayContactRequest(key), { ...receipt, created: false })
+  assert.equal(h.calls.length, 1)
+  assert.equal(h.calls[0].url, "https://database.example.test/rest/v1/rpc/replay_shared_contact_request")
+  assert.deepEqual(JSON.parse(h.calls[0].options.body), { p_idempotency_key: key.idempotencyKey, p_payload_hash: key.payloadHash, p_country: key.country })
+  assert.equal(h.calls[0].options.headers.apikey, "sb_secret_synthetic_only")
+  assert.equal(h.calls[0].options.cache, "no-store")
+  for (const [body, status, expected] of [
+    [receipt, 200, 503],
+    [{ ...receipt, created: false, request_id: "invalid" }, 200, 503],
+    [{ code: "22023" }, 400, 400],
+    [{ code: "PT409" }, 409, 409],
+  ]) {
+    const invalid = harness({ fetcher: () => response(body, status) })
+    await assert.rejects(() => invalid.replayContactRequest(key), error => error instanceof invalid.ContactStoreError && error.status === expected)
+    assert.equal(invalid.calls.length, 1)
+  }
+})
+
 test("legacy service-role JWT adds Authorization alongside apikey", async () => {
   const key = jwt("service_role")
   const h = harness({ env: { SUPABASE_SECRET_KEY: ` ${key} `, SUPABASE_URL: " https://database.example.test/ " } })

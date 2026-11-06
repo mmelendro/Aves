@@ -8,7 +8,7 @@ import { accountBody, accountHandler, requestKey } from "@/lib/account-http"
 import { accountRpc } from "@/lib/account-service"
 import { notifyAccount } from "@/lib/account-notifications"
 import { canonicalUrl } from "@/lib/site-path"
-import { countryLabels, isCountryRegion, isColombiaRegion } from "@/content/trip-options"
+import { countryLabels, isEnabledTripCountry, isCountryRegion, isOtherCountryRegion, DEFAULT_TRIP_COUNTRY } from "@/content/trip-options"
 import { createPlanSchema, updatePlanSchema, quoteSchema, revisionSchema, createProposalSchema, updateProposalSchema, quoteStatusSchema, mapPlan, mapProposal, type PlanRow, type ProposalRow } from "@/lib/account-models"
 
 const planColumns = "id,title,details,status,updated_at,create_payload_hash"
@@ -27,7 +27,7 @@ async function ownPlan(client: SupabaseClient, userId: string, id: string): Prom
 }
 // Keep Australia's original serialization so retries of pre-upgrade requests
 // retain their original hash. Missing stored country always means Australia.
-const planValues = ({ title, country, regions, travelWhen, partySize, message }: z.infer<typeof updatePlanSchema> | z.infer<typeof createPlanSchema>) => ({ title, details: { regions, travelWhen, partySize, message, ...(country === "colombia" ? { country } : {}) } })
+const planValues = ({ title, country, regions, travelWhen, partySize, message }: z.infer<typeof updatePlanSchema> | z.infer<typeof createPlanSchema>) => ({ title, details: { regions, travelWhen, partySize, message, ...(country !== undefined && country !== DEFAULT_TRIP_COUNTRY ? { country } : {}) } })
 
 export const plansGet = () => accountHandler(async () => {
   const { user, client } = await requireAccountUser()
@@ -42,6 +42,18 @@ export const plansPost = (request: Request) => accountHandler(async () => {
   const body = await accountBody(request, createPlanSchema)
   if (requestKey(request) !== body.id) throw new AccountError(400, "Please retry this plan with its original request reference.")
   const values = planValues(body), payloadHash = hash(values)
+  const country = body.country ?? DEFAULT_TRIP_COUNTRY
+  if (!isEnabledTripCountry(country)) {
+    // Retired destinations accept only an exact replay of an owned saved plan.
+    // Do not attempt INSERT even while catalogue/app rollout states differ.
+    const original = await ownPlan(client, user.id, body.id).catch((error: unknown) => {
+      if (error instanceof AccountError && error.status === 404) return null
+      throw error
+    })
+    if (original && (original.details.country ?? DEFAULT_TRIP_COUNTRY) === country
+      && original.create_payload_hash === payloadHash) return { plan: mapPlan(original) }
+    throw new AccountError(400, "This destination is not available for new plans.")
+  }
   if (!body.regions.every(region => isCountryRegion(body.country || "australia", region))) {
     // A pre-upgrade freeform request may still be retried. It can only return
     // that same owned, hash-matched plan; it cannot insert any new freeform row.
@@ -49,7 +61,7 @@ export const plansPost = (request: Request) => accountHandler(async () => {
       if (error instanceof AccountError && error.status === 404) return null
       throw error
     })
-    if (body.country !== "colombia" && original && (original.details.country || "australia") === "australia"
+    if ((body.country ?? DEFAULT_TRIP_COUNTRY) === DEFAULT_TRIP_COUNTRY && original && (original.details.country ?? DEFAULT_TRIP_COUNTRY) === DEFAULT_TRIP_COUNTRY
       && original.create_payload_hash === payloadHash) return { plan: mapPlan(original) }
     throw new AccountError(400, "Choose regions in the selected country.")
   }
@@ -69,9 +81,12 @@ export const planPatch = (request: Request, id: string) => accountHandler(async 
   const body = await accountBody(request, updatePlanSchema)
   const plan = await ownPlan(client, user.id, id)
   const country = body.country || "australia"
+  if (!isEnabledTripCountry(country) && country !== (plan.details.country ?? DEFAULT_TRIP_COUNTRY)) {
+    throw new AccountError(400, "This destination is not available for new plans.")
+  }
   if (!body.regions.every(region => isCountryRegion(country, region) || (
     country === "australia" && (plan.details.country || "australia") === "australia"
-    && plan.details.regions.includes(region) && !isColombiaRegion(region)
+    && plan.details.regions.includes(region) && !isOtherCountryRegion(country, region)
   ))) throw new AccountError(400, "Choose regions in the selected country. Existing Australian locations may be kept when editing the same plan.")
   if (plan.status !== "draft" || plan.updated_at !== body.expectedUpdatedAt) throw new AccountError(409, "This plan has changed or has already been submitted. Refresh it before continuing.")
   const { data, error } = await client.from("trip_plans").update(planValues(body)).eq("id", id).eq("user_id", user.id).eq("status", "draft").eq("updated_at", body.expectedUpdatedAt).select(planColumns).maybeSingle()

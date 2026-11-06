@@ -106,6 +106,67 @@ test("old Australian plans keep country and region labels; Colombia labels are d
   assert.deepEqual(intent.normalizePlanRegions("australia", ["Queensland", "queensland", "Earlier custom place"]), ["queensland", "Earlier custom place"])
 })
 
+test("registered future countries stay unavailable and cannot become Australian intentions", () => {
+  assert.deepEqual(options.enabledCountries.map(country => country.id), ["australia", "colombia"])
+  for (const country of ["ecuador", "costa-rica"]) {
+    assert.equal(options.destinationRegistry[country].enabled, false)
+    assert.equal(options.destinationRegistry[country].consentVersion, null)
+    assert.deepEqual(options.countryRegionOptions[country], [])
+    assert.equal(intent.planIntentFromSearch({ country }), undefined)
+    assert.equal(api.tripCountry(country), country)
+  }
+  for (const country of ["unknown", "__proto__", "", null]) assert.throws(() => api.tripCountry(country), /Unknown destination/)
+  const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { onSaved() {}, onCancel() {} })
+  let tree = harness.render()
+  const select = find(tree, node => node.props.name === "country")
+  assert.deepEqual(nodes(select).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia"])
+  select.props.onChange({ target: { value: "ecuador" } })
+  tree = harness.render()
+  assert.equal(find(tree, node => node.props.name === "country").props.value, "australia")
+})
+
+test("a new configured destination drives labels, intents, region options and the selector", () => {
+  const destinations = require("./helpers/destination-fixture.cjs")()
+  const thirdLoad = loader({ mocks: { "@/content/trip-options": destinations } })
+  const thirdIntent = thirdLoad("components/account/plan-intent.ts")
+  const thirdApi = thirdLoad("components/account/account-api.ts")
+  const selected = { country: "test-islands", regions: ["test-cloud-forest"] }
+  assert.deepEqual(thirdIntent.planIntentFromSearch({ country: "test-islands", region: "test-cloud-forest" }), selected)
+  assert.equal(thirdIntent.accountPlanPath(selected), "/account?country=test-islands&region=test-cloud-forest")
+  assert.equal(thirdApi.tripCountry("test-islands"), "test-islands")
+  assert.equal(thirdApi.countryLabel("test-islands"), "Test Islands")
+  assert.equal(thirdApi.regionSummary(selected.regions, "test-islands"), "Test Cloud Forest")
+  const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { initial: selected, onSaved() {}, onCancel() {} }, { mocks: { "@/content/trip-options": destinations } })
+  const tree = harness.render()
+  const select = find(tree, node => node.props.name === "country")
+  assert.deepEqual(nodes(select).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia", "test-islands"])
+  assert.deepEqual(boxes(tree).filter(node => node.props.checked).map(node => node.props.value), selected.regions)
+})
+
+test("a saved retired destination remains correctly selected without becoming a new-plan choice", () => {
+  const destinations = require("./helpers/destination-fixture.cjs")({ enabled: false })
+  const plan = { id: "saved", country: "test-islands", title: "Saved journey", regions: ["test-cloud-forest"], travelWhen: "", partySize: "", message: "", status: "draft", updatedAt: "2026-11-07T00:00:00Z" }
+  const mocks = { "@/content/trip-options": destinations }
+  const editor = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { plan, onSaved() {}, onCancel() {} }, { mocks })
+  let tree = editor.render()
+  let select = find(tree, node => node.props.name === "country")
+  assert.equal(select.props.value, "test-islands")
+  assert.ok(nodes(select).some(node => node.type === "option" && node.props.value === "test-islands" && nodes(node).length > 0))
+  assert.match(JSON.stringify(nodes(select).find(node => node.props.value === "test-islands" && node.type === "option").props.children), /saved destination/)
+  assert.deepEqual(boxes(tree).filter(node => node.props.checked).map(node => node.props.value), ["test-cloud-forest"])
+  select.props.onChange({ target: { value: "australia" } })
+  tree = editor.render()
+  find(tree, node => node.props.name === "country").props.onChange({ target: { value: "test-islands" } })
+  tree = editor.render()
+  assert.equal(find(tree, node => node.props.name === "country").props.value, "test-islands")
+  assert.deepEqual(boxes(tree).filter(node => node.props.checked), [])
+  const fresh = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { onSaved() {}, onCancel() {} }, { mocks })
+  const freshSelect = find(fresh.render(), node => node.props.name === "country")
+  assert.deepEqual(nodes(freshSelect).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia"])
+  const retiredIntent = loader({ mocks })("components/account/plan-intent.ts")
+  assert.equal(retiredIntent.planIntentFromSearch({ country: "test-islands", region: "test-cloud-forest" }), undefined)
+})
+
 test("country selector clears incompatible checked regions and announces the change", () => {
   const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { initial: { country: "australia", regions: ["queensland"] }, onSaved() {}, onCancel() {} })
   let tree = harness.render()

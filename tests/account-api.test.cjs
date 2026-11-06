@@ -15,7 +15,7 @@ const proposalRow = { id: proposalId, quote_request_id: quoteId, version: 1, sta
 const proposalBody = { id: proposalId, totalCents: 123456, currency: "AUD", itinerary: proposalRow.itinerary, inclusions: "Guiding", exclusions: "Flights", validUntil: "2027-01-01" }
 const request = (body, key = planId, extra = {}) => new Request("https://aves.bio/australia/api/account/plans", { method: "POST", headers: { Origin: "https://aves.bio", "Content-Type": "application/json", "Idempotency-Key": key, ...extra }, body: JSON.stringify(body) })
 
-function harness({ results = [], rpcResult = quoteReceipt, authStatus, notificationError, user = {} } = {}) {
+function harness({ results = [], rpcResult = quoteReceipt, authStatus, notificationError, user = {}, destinations } = {}) {
   const queries = [], rpcCalls = [], notices = [], events = []
   const queue = [...results]
   const client = { from(table) {
@@ -33,6 +33,7 @@ function harness({ results = [], rpcResult = quoteReceipt, authStatus, notificat
   } }
   let AccountError
   const load = loader({ mocks: {
+    ...(destinations ? { "@/content/trip-options": destinations } : {}),
     "@/lib/account-auth": { requireAccountUser: async () => { if (authStatus) throw new AccountError(authStatus, "Access denied"); return { user: { id: ownerId, email: "client@example.test", ...user }, client } } },
     "@/lib/account-service": { accountRpc: async (name, body) => { events.push("store"); rpcCalls.push({ name, body }); if (typeof rpcResult === "function") return rpcResult(name, body, AccountError); return rpcResult } },
     "@/lib/account-notifications": { notifyAccount: async (...args) => { events.push("email"); notices.push(args); if (notificationError) throw new Error("private provider detail"); return "accepted" } },
@@ -127,6 +128,94 @@ test("Colombia quote response and owner notification preserve the frozen country
   assert.equal((await response.json()).plan.country, "colombia")
   assert.match(h.notices[0][3], /AVES Colombia/)
   assert.match(h.notices[0][4], /Country: Colombia/)
+})
+
+test("a newly enabled destination persists through create, edit, quote and owner notification", async () => {
+  const destinations = require("./helpers/destination-fixture.cjs")()
+  const thirdDetails = { ...details, regions: ["test-cloud-forest"], country: "test-islands" }
+  const row = { ...planRow, details: thirdDetails }
+  const h = harness({ destinations, results: [{ data: row, error: null }, { data: row, error: null }, { data: row, error: null }], rpcResult: { ...quoteReceipt, plan_snapshot: { title, details: thirdDetails } } })
+  const create = await h.plansPost(request({ id: planId, title, ...thirdDetails }))
+  assert.equal(create.status, 200)
+  assert.equal((await create.json()).plan.country, "test-islands")
+  assert.equal(h.queries[0].operations.find(op => op[0] === "insert")[1].details.country, "test-islands")
+  const edit = await h.planPatch(request({ title, ...thirdDetails, expectedUpdatedAt: stamp }), planId)
+  assert.equal(edit.status, 200)
+  assert.equal(h.queries[2].operations.find(op => op[0] === "update")[1].details.country, "test-islands")
+  const quote = await h.quotePost(request({ expectedUpdatedAt: stamp, contactName: "Test Client" }, quoteId), planId)
+  assert.equal((await quote.json()).plan.country, "test-islands")
+  assert.match(h.notices[0][3], /AVES Test Islands/)
+  assert.match(h.notices[0][4], /Country: Test Islands/)
+})
+
+test("unknown countries are rejected before account data access", async () => {
+  for (const country of ["unknown", "__proto__", "", null]) {
+    const h = harness()
+    assert.equal((await h.plansPost(request({ id: planId, ...values, country }))).status, 400)
+    assert.equal((await h.planPatch(request({ ...values, country, expectedUpdatedAt: stamp }), planId)).status, 400)
+    assert.equal(h.queries.length, 0)
+  }
+})
+
+test("disabled destinations cannot create a new plan or replace an existing plan country", async () => {
+  for (const country of ["ecuador", "costa-rica", "test-islands"]) {
+    const destinations = require("./helpers/destination-fixture.cjs")({ enabled: false })
+    const h = harness({ destinations, results: [{ data: null, error: null }, { data: planRow, error: null }] })
+    assert.equal((await h.plansPost(request({ id: planId, ...values, country, regions: [] }))).status, 400)
+    assert.equal((await h.planPatch(request({ ...values, country, regions: [], expectedUpdatedAt: stamp }), planId)).status, 400)
+    assert.equal(h.queries.length, 2)
+    assert.ok(h.queries.every(query => query.operations.every(op => !["insert", "update"].includes(op[0]))))
+  }
+})
+
+test("a destination disabled after launch preserves exact owned replays and same-country draft edits", async () => {
+  const destinations = require("./helpers/destination-fixture.cjs")({ enabled: false })
+  const savedDetails = { ...details, regions: ["test-cloud-forest"], country: "test-islands" }
+  const originalHash = createHash("sha256").update(JSON.stringify({ title, details: savedDetails })).digest("hex")
+  const row = { ...planRow, details: savedDetails, create_payload_hash: originalHash }
+  const h = harness({ destinations, results: [{ data: row, error: null }, { data: row, error: null }, { data: row, error: null }] })
+  const replay = await h.plansPost(request({ id: planId, title, ...savedDetails }))
+  assert.equal(replay.status, 200)
+  assert.equal((await replay.json()).plan.country, "test-islands")
+  assert.equal(h.queries[0].operations.some(op => op[0] === "insert"), false)
+  const edit = await h.planPatch(request({ title: "Refined saved trip", ...savedDetails, expectedUpdatedAt: stamp }), planId)
+  assert.equal(edit.status, 200)
+  const update = h.queries[2].operations.find(op => op[0] === "update")[1]
+  assert.equal(update.title, "Refined saved trip")
+  assert.equal(update.details.country, "test-islands")
+  for (const condition of [["eq", "user_id", ownerId], ["eq", "status", "draft"], ["eq", "updated_at", stamp]]) assert.ok(h.queries[2].operations.some(op => JSON.stringify(op) === JSON.stringify(condition)))
+
+  const changed = harness({ destinations, results: [{ data: row, error: null }] })
+  assert.equal((await changed.plansPost(request({ id: planId, title: "Changed retry", ...savedDetails }))).status, 400)
+  assert.equal(changed.queries.length, 1)
+  const wrongCountry = harness({ destinations, results: [{ data: { ...row, details: { ...savedDetails, country: "colombia" } }, error: null }] })
+  assert.equal((await wrongCountry.plansPost(request({ id: planId, title, ...savedDetails }))).status, 400)
+
+  for (const [state, body, expected] of [
+    [{ ...row, status: "quote_requested" }, { title, ...savedDetails, expectedUpdatedAt: stamp }, 409],
+    [row, { title, ...savedDetails, regions: ["pacific"], expectedUpdatedAt: stamp }, 400],
+    [row, { title, ...savedDetails, expectedUpdatedAt: "2026-11-01T00:00:00Z" }, 409],
+  ]) {
+    const rejected = harness({ destinations, results: [{ data: state, error: null }] })
+    assert.equal((await rejected.planPatch(request(body), planId)).status, expected)
+    assert.equal(rejected.queries.length, 1)
+  }
+})
+
+test("Colombian plan creation preserves the pre-registry payload hash", async () => {
+  const colombiaDetails = { regions: ["pacific"], travelWhen: values.travelWhen, partySize: values.partySize, message: values.message, country: "colombia" }
+  const expectedHash = createHash("sha256").update(JSON.stringify({ title, details: colombiaDetails })).digest("hex")
+  const h = harness({ results: [{ data: { ...planRow, details: colombiaDetails }, error: null }] })
+  assert.equal((await h.plansPost(request({ id: planId, title, ...colombiaDetails }))).status, 200)
+  assert.equal(h.queries[0].operations.find(op => op[0] === "insert")[1].create_payload_hash, expectedHash)
+})
+
+test("third-country regions cannot pass the Australian legacy edit exception", async () => {
+  const destinations = require("./helpers/destination-fixture.cjs")()
+  const legacy = { ...planRow, details: { ...details, regions: ["Test Cloud Forest"] } }
+  const h = harness({ destinations, results: [{ data: legacy, error: null }] })
+  assert.equal((await h.planPatch(request({ ...values, regions: legacy.details.regions, expectedUpdatedAt: stamp }), planId)).status, 400)
+  assert.equal(h.queries.length, 1)
 })
 
 test("draft capacity conflict explains how to free space without a misleading retry timer", async () => {

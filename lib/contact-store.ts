@@ -1,8 +1,9 @@
 import "server-only"
 import { z } from "zod"
+import type { TripCountry } from "@/content/trip-options"
 
 export type ContactRequestInput = {
-  country?: "australia" | "colombia"
+  country?: TripCountry
   idempotencyKey: string
   payloadHash: string
   intent: "inquiry" | "waitlist"
@@ -26,7 +27,7 @@ const receiptSchema = z.object({
 export type ContactReceipt = z.infer<typeof receiptSchema>
 
 export class ContactStoreError extends Error {
-  constructor(public readonly status: 409 | 429 | 503) {
+  constructor(public readonly status: 400 | 409 | 429 | 503) {
     super("Contact storage is unavailable")
     this.name = "ContactStoreError"
   }
@@ -53,7 +54,7 @@ function configuration() {
   return { origin: url.origin, headers }
 }
 
-async function rpc(name: "submit_shared_contact_request" | "record_contact_notification", body: Record<string, unknown>) {
+async function rpc(name: "submit_shared_contact_request" | "replay_shared_contact_request" | "record_contact_notification", body: Record<string, unknown>) {
   try {
     const { origin, headers } = configuration()
     const response = await fetch(`${origin}/rest/v1/rpc/${name}`, {
@@ -62,6 +63,7 @@ async function rpc(name: "submit_shared_contact_request" | "record_contact_notif
     })
     const result = await response.json().catch(() => null)
     if (!response.ok) {
+      if (result?.code === "22023") throw new ContactStoreError(400)
       if (result?.code === "PT409") throw new ContactStoreError(409)
       if (result?.code === "PT429") throw new ContactStoreError(429)
       throw new ContactStoreError(503)
@@ -94,4 +96,14 @@ export async function recordContactNotification(
   await rpc("record_contact_notification", {
     p_request_id: requestId, p_status: status, p_provider_id: providerId, p_error_code: errorCode,
   })
+}
+
+export async function replayContactRequest(input: Pick<ContactRequestInput, "country" | "idempotencyKey" | "payloadHash">): Promise<ContactReceipt> {
+  const data = await rpc("replay_shared_contact_request", {
+    p_idempotency_key: input.idempotencyKey, p_payload_hash: input.payloadHash,
+    p_country: input.country ?? "australia",
+  })
+  const parsed = receiptSchema.safeParse(data)
+  if (!parsed.success || parsed.data.created) throw new ContactStoreError(503)
+  return parsed.data
 }

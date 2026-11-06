@@ -1,12 +1,12 @@
-import { countryRegionOptions, type TripCountry } from "@/content/trip-options"
+import { countryRegionOptions, isEnabledTripCountry, DEFAULT_TRIP_COUNTRY, type TripCountry } from "@/content/trip-options"
 import type { AccountSearchParams } from "./account-navigation"
 
 export type PlanIntent = { country: TripCountry; regions: string[] }
 
 export function planIntentFromSearch(search: AccountSearchParams): PlanIntent | undefined {
   if (search.country === undefined && search.region === undefined) return undefined
-  if (search.country !== undefined && search.country !== "australia" && search.country !== "colombia") return undefined
-  const country = search.country === "colombia" ? "colombia" : "australia"
+  if (search.country !== undefined && !isEnabledTripCountry(search.country)) return undefined
+  const country = search.country ?? DEFAULT_TRIP_COUNTRY
   const region = typeof search.region === "string" && countryRegionOptions[country].some(item => item.id === search.region) ? search.region : undefined
   return { country, regions: region ? [region] : [] }
 }

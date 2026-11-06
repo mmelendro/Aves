@@ -32,8 +32,8 @@ class ContactStoreError extends Error {
   constructor(status) { super("private storage details"); this.status = status }
 }
 
-function harness(outcome = accepted, environment = {}, storage = {}, timers = { setTimeout, clearTimeout }) {
-  const calls = [], logs = [], saves = [], notifications = [], events = [], options = [], exports = {}
+function harness(outcome = accepted, environment = {}, storage = {}, timers = { setTimeout, clearTimeout }, destinations = tripOptions) {
+  const calls = [], logs = [], saves = [], replays = [], notifications = [], events = [], options = [], exports = {}
   class FakeResend {
     constructor(key) {
       assert.equal(key, "test-only-key")
@@ -53,7 +53,7 @@ function harness(outcome = accepted, environment = {}, storage = {}, timers = { 
     if (name === "next/server") return nextServer
     if (name === "zod") return zod
     if (name === "node:crypto") return crypto
-    if (name === "@/content/trip-options") return tripOptions
+    if (name === "@/content/trip-options") return destinations
     if (name === "@/lib/contact-store") return {
       ContactStoreError,
       saveContactRequest: async (input) => {
@@ -61,6 +61,12 @@ function harness(outcome = accepted, environment = {}, storage = {}, timers = { 
         saves.push(input)
         if (storage.save) return storage.save(input, saves.length)
         return { ...receipt, ...storage.receipt }
+      },
+      replayContactRequest: async (input) => {
+        events.push("replay")
+        replays.push(input)
+        if (storage.replay) return storage.replay(input)
+        return { ...receipt, created: false }
       },
       recordContactNotification: async (...args) => {
         events.push("notification")
@@ -77,7 +83,7 @@ function harness(outcome = accepted, environment = {}, storage = {}, timers = { 
     timers.setTimeout, timers.clearTimeout,
   )
   return {
-    calls, logs, saves, notifications, events, options, invoke: exports.POST,
+    calls, logs, saves, replays, notifications, events, options, invoke: exports.POST,
     submit: (body = validInquiry, headers = { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey }) =>
       exports.POST(new Request("https://example.test/api/contact", {
         method: "POST", headers, body: typeof body === "string" ? body : JSON.stringify(body),
@@ -118,6 +124,69 @@ test("Colombia enquiry stores country and exact consent scope before owner notif
   assert.deepEqual(h.events, ["save", "email", "notification"])
 })
 
+test("a newly enabled destination retains its own contact country and consent scope", async () => {
+  const destinations = require("./helpers/destination-fixture.cjs")()
+  const h = harness(accepted, {}, {}, undefined, destinations)
+  const response = await h.submit({ ...validInquiry, country: "test-islands", region: "test-cloud-forest", updates: true })
+  assert.equal(response.status, 200)
+  assert.equal((await response.json()).country, "test-islands")
+  assert.equal(h.saves[0].country, "test-islands")
+  assert.equal(h.saves[0].consentVersion, "test-islands-updates-v1")
+  assert.match(h.calls[0].subject, /AVES Test Islands/)
+  assert.match(h.calls[0].text, /Country: Test Islands/)
+  for (const [country, region] of [["australia", "test-cloud-forest"], ["australia", "Test Cloud Forest"], ["test-islands", "queensland"]]) {
+    const rejected = harness(accepted, {}, {}, undefined, destinations)
+    assert.equal((await rejected.submit({ ...validInquiry, country, region })).status, 400)
+    assert.equal(rejected.saves.length, 0)
+  }
+})
+
+test("the registry preserves exact Australian and Colombian contact hash serialization", async () => {
+  for (const country of [undefined, "australia", "colombia"]) {
+    const h = harness()
+    const region = country === "colombia" ? "pacific" : validInquiry.region
+    assert.equal((await h.submit({ ...validInquiry, country, region })).status, 200)
+    const payload = {
+      intent: "inquiry", name: "Test Birder", email: "visitor@example.com", region,
+      travelWhen: validInquiry.travelWhen, partySize: "2", message: validInquiry.message,
+      updates: false, consentVersion: country === "colombia" ? "co-travel-updates-2026-11-06" : "au-launch-updates-2026-11-05",
+      ...(country === "colombia" ? { country: "colombia" } : {}),
+    }
+    assert.equal(h.saves[0].payloadHash, crypto.createHash("sha256").update(JSON.stringify(payload)).digest("hex"))
+    assert.equal(h.saves[0].country, country === "colombia" ? "colombia" : undefined)
+  }
+})
+
+test("a retired configured destination can only replay a stored contact without writes or email", async () => {
+  const fixture = require("./helpers/destination-fixture.cjs")
+  const inquiry = { ...validInquiry, country: "test-islands", region: "test-cloud-forest", updates: true }
+  const active = harness(accepted, {}, {}, undefined, fixture())
+  assert.equal((await active.submit(inquiry)).status, 200)
+  const oldInput = active.saves[0]
+  const retired = harness(accepted, {}, { replay(input) {
+    assert.deepEqual(input, { country: oldInput.country, idempotencyKey: oldInput.idempotencyKey, payloadHash: oldInput.payloadHash })
+    return { ...receipt, created: false }
+  } }, undefined, fixture({ enabled: false }))
+  const replay = await retired.submit(inquiry)
+  assert.equal(replay.status, 200)
+  assert.deepEqual(await replay.json(), { success: true, status: "stored", intent: "inquiry", country: "test-islands" })
+  assert.deepEqual(retired.events, ["replay"])
+  assert.equal(retired.saves.length, 0)
+  assert.equal(retired.calls.length, 0)
+  assert.equal(retired.notifications.length, 0)
+
+  for (const status of [400, 409, 503]) {
+    const rejected = harness(accepted, {}, { replay() { throw new ContactStoreError(status) } }, undefined, fixture({ enabled: false }))
+    const result = await rejected.submit(inquiry)
+    assert.equal(result.status, status)
+    assert.deepEqual(rejected.events, ["replay"])
+    assert.equal(rejected.saves.length, 0)
+    assert.equal(rejected.calls.length, 0)
+    assert.equal(rejected.notifications.length, 0)
+    assert.doesNotMatch(await result.text(), /private|success|stored/)
+  }
+})
+
 test("shared contact rejects foreign origins and explicit cross-site before storage", async () => {
   for (const extra of [{ Origin: "https://attacker.test" }, { Origin: "https://aves.bio", "Sec-Fetch-Site": "cross-site" }]) {
     const h = harness()
@@ -143,6 +212,11 @@ test("local contact accepts only same-port same-scheme loopback aliases", async 
 
 for (const body of [
   { ...validInquiry, country: "peru" },
+  { ...validInquiry, country: "ecuador", region: "" },
+  { ...validInquiry, country: "costa-rica", region: "" },
+  { ...validInquiry, country: "__proto__", region: "" },
+  { ...validInquiry, country: "__proto__", region: "pacific" },
+  { ...validInquiry, country: "constructor", region: "pacific" },
   { ...validInquiry, country: "colombia", region: "tasmania" },
   { ...validInquiry, country: "australia", region: "pacific" },
   { ...validInquiry, country: "colombia", region: "unknown" },
@@ -324,7 +398,7 @@ test("an unchanged replay returns stored without repeating email or notification
   assert.deepEqual(h.events, ["save", "email", "notification", "save"])
 })
 
-for (const status of [409, 429, 503]) {
+for (const status of [400, 409, 429, 503]) {
   test(`storage ${status} prevents email and returns the matching public response`, async () => {
     const h = harness(undefined, {}, { save: () => { throw new ContactStoreError(status) } })
     const response = await h.submit()

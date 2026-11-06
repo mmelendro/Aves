@@ -2,17 +2,16 @@ import { type NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 import { z } from "zod"
 import { createHash } from "node:crypto"
-import { ContactStoreError, saveContactRequest, recordContactNotification } from "@/lib/contact-store"
-import { countryLabels, isCountryRegion, isColombiaRegion } from "@/content/trip-options"
+import { ContactStoreError, saveContactRequest, replayContactRequest, recordContactNotification } from "@/lib/contact-store"
+import { countryLabels, countryConsentVersion, isConfiguredTripCountry, isEnabledTripCountry, isContactRegion, DEFAULT_TRIP_COUNTRY, type TripCountry } from "@/content/trip-options"
 
 const MAX_REQUEST_BYTES = 32_768
-const CONSENT_VERSION = "au-launch-updates-2026-11-05"
 const singleLine = (maxLength: number) =>
   z.string().trim().max(maxLength).regex(/^[^\u0000-\u001f\u007f]*$/, "Must be a single line of text")
 const emailAddress = singleLine(254).email()
 
 const requestSchema = z.object({
-  country: z.enum(["australia", "colombia"]).optional().default("australia"),
+  country: z.custom<TripCountry>(isConfiguredTripCountry, "Choose an available destination country").optional().default(DEFAULT_TRIP_COUNTRY),
   intent: z.enum(["inquiry", "waitlist"]),
   name: singleLine(120).min(1),
   email: emailAddress,
@@ -25,9 +24,7 @@ const requestSchema = z.object({
 }).refine((value) => value.intent !== "waitlist" || value.updates, {
   message: "Please opt in to updates to join the waitlist.",
   path: ["updates"],
-}).refine(value => !value.region || (value.country === "colombia"
-  ? isCountryRegion("colombia", value.region)
-  : !isColombiaRegion(value.region)), {
+}).refine(value => isContactRegion(value.country, value.region), {
   message: "Choose a region in the selected country.", path: ["region"],
 })
 
@@ -102,21 +99,27 @@ export async function POST(req: NextRequest) {
     return reply({ error: "Please refresh the form and try again." }, 400)
   }
 
-  const consentVersion = request.data.country === "colombia" ? "co-travel-updates-2026-11-06" : CONSENT_VERSION
+  const consentVersion = countryConsentVersion(request.data.country)
   const payload = {
     intent: request.data.intent, name: request.data.name, email: request.data.email.toLowerCase(),
     region: request.data.region, travelWhen: request.data.travelWhen,
     partySize: String(request.data.partySize ?? ""), message: request.data.message,
     updates: request.data.updates, consentVersion,
-    ...(request.data.country === "colombia" ? { country: "colombia" as const } : {}),
+    ...(request.data.country !== DEFAULT_TRIP_COUNTRY ? { country: request.data.country } : {}),
   }
   let receipt
   try {
-    receipt = await saveContactRequest({
+    const input = {
       ...payload, idempotencyKey: idempotencyKey.data,
       payloadHash: createHash("sha256").update(JSON.stringify(payload)).digest("hex"),
-    })
+    }
+    receipt = isEnabledTripCountry(request.data.country)
+      ? await saveContactRequest(input)
+      : await replayContactRequest({ country: request.data.country, idempotencyKey: input.idempotencyKey, payloadHash: input.payloadHash })
   } catch (error) {
+    if (error instanceof ContactStoreError && error.status === 400) {
+      return reply({ error: "This destination is not available for a new request." }, 400)
+    }
     if (error instanceof ContactStoreError && error.status === 409) {
       return reply({ error: "This request has changed. Please refresh the form and submit your latest details." }, 409)
     }

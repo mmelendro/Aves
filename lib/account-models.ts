@@ -1,9 +1,9 @@
 import { z } from "zod"
-import type { TripCountry } from "@/content/trip-options"
+import { isKnownTripCountry, type TripCountry } from "@/content/trip-options"
 export const singleLine = (max: number) => z.string().trim().max(max).regex(/^[^\u0000-\u001f\u007f]*$/)
 export const revision = z.string().min(1).max(50).refine(value => Number.isFinite(Date.parse(value)))
 export const planFields = {
-  title: singleLine(120).min(1), country: z.enum(["australia", "colombia"]).optional(), regions: z.array(singleLine(160).min(1)).max(20),
+  title: singleLine(120).min(1), country: z.custom<TripCountry>(isKnownTripCountry, "Choose a known destination country").optional(), regions: z.array(singleLine(160).min(1)).max(20),
   travelWhen: singleLine(160), partySize: singleLine(40), message: z.string().trim().max(5000),
 }
 export const createPlanSchema = z.object({ id: z.uuid(), ...planFields }).strict()

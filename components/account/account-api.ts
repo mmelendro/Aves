@@ -1,5 +1,5 @@
 import { sitePath } from "@/lib/site-path"
-import { countryLabels, countryRegionLabels, type TripCountry } from "@/content/trip-options"
+import { countryLabels, countryRegionLabels, normalizeTripCountry, type TripCountry } from "@/content/trip-options"
 
 export type TripFields = { country?: TripCountry; title: string; regions: string[]; travelWhen: string; partySize: string; message: string }
 export type TripPlan = TripFields & { id: string; status: "draft" | "quote_requested"; updatedAt: string }
@@ -22,7 +22,7 @@ export async function accountRequest<T>(path: string, options: RequestInit = {})
   return result as T
 }
 
-export function tripCountry(country?: TripCountry): TripCountry { return country === "colombia" ? "colombia" : "australia" }
+export function tripCountry(country?: TripCountry): TripCountry { return normalizeTripCountry(country) }
 export function countryLabel(country?: TripCountry) { return countryLabels[tripCountry(country)] }
 export function regionSummary(regions: string[], country?: TripCountry) { const labels = countryRegionLabels[tripCountry(country)]; return regions.map(region => labels[region] || region).join(", ") || "Open to inspiration" }
 export function dateLabel(value: string | null | undefined) {
