@@ -4,6 +4,18 @@
 
 New countries use the existing **AVES Shared Accounts** project (`qeyprwftrouztlqmwuzv`), customer accounts and owner portal. Do not create another database or require customers to register again. Country selection describes a trip; ownership and owner-role checks continue to authorize access.
 
+## Global homepage and country websites
+
+The global homepage release gives each entry point a distinct role:
+
+- `https://aves.bio/` is the main AVES homepage and country chooser.
+- `https://aves.bio/colombia` is the Colombian homepage. Existing Colombian region, experience and information URLs remain at their current root paths; this change does not move the whole Colombian website under `/colombia`.
+- `https://aves.bio/australia` remains the Australian homepage. Its application also continues to host the shared account and owner tools under `/australia`.
+
+The global homepage belongs to the separate `source/` checkout, alongside the Colombian website, in [mmelendro/Aves](https://github.com/mmelendro/Aves/tree/webmaster/readiness-2026-11-05) on branch `webmaster/readiness-2026-11-05`. Its public destination cards are defined in `source/content/destinations.ts` (repository path `content/destinations.ts` on that branch). The Australian and shared-account checkout is `australia/`; its backend destination registry remains `content/trip-options.ts`. These are separate configurations and releases: adding a global homepage card neither enables a backend destination nor publishes its country website.
+
+Only Colombia and Australia have live destination cards. Publish and verify a reviewed country website, and enable its matching shared-account application configuration and database catalogue, **before adding its live card** to the global homepage. Reserved countries such as Ecuador and Costa Rica must not appear as available destinations until those steps are complete. The global homepage and Colombia-home routing change itself requires **no database migration or account changes**.
+
 ## Registry and launch boundary
 
 - `content/trip-options.ts` defines `destinationRegistry`: stable country IDs, display labels, enabled state, regions and the country-specific consent version.
@@ -18,7 +30,7 @@ New countries use the existing **AVES Shared Accounts** project (`qeyprwftrouztl
 3. **Prepare matching configuration and migration.** Add the approved regions and metadata to `destinationRegistry`, and prepare corresponding catalogue rows with the same country IDs, region IDs, labels and enabled state. Leave `accept_label` false for new regions unless a documented compatibility need is approved; canonical IDs are the normal input. Supply the approved consent version before enabling inquiries or updates signup.
 4. **Verify locally and in staging.** Run application tests, strict type checking, the production build and database verification. Check catalogue/configuration parity, disabled and unknown country rejection, cross-country region rejection, saving/reloading a plan, quote snapshots and contact receipts. Test two customer accounts cannot access each other's plans or proposals, that the trusted business owner retains the intended review access, and that clients cannot edit the catalogue. Preserve missing-country-as-Australia behavior, existing Australian hashes/retries and accepted legacy selections.
 5. **Apply the reviewed database migration before the application release.** Verify the catalogue, grants, RLS and existing records, then deploy the matching application version. Do not deploy code that offers a destination the database still rejects. Exercise the selected destination through browser → API → database and verify private access denial. Record the migration, commit, deployment and results; keep historical evidence rather than replacing it with a new claim.
-6. **Launch public content separately and explicitly.** Build and review country/region pages, maps, birds and recording rights, navigation, inquiry links, routing, canonical URLs and sitemaps. Test mobile navigation and account entry. Obtain the agreed launch authorization before making the new destination public; a disabled registry placeholder is not a public offering. Preserve the existing `/australia` forwarding and Colombian routes.
+6. **Launch public content separately and explicitly.** Build and review country/region pages, maps, birds and recording rights, navigation, inquiry links, routing, canonical URLs and sitemaps. Test mobile navigation and account entry. Obtain the agreed launch authorization before making the new destination public; a disabled registry placeholder is not a public offering. Publish and verify the reviewed country site after enabling its matching backend catalogue and application configuration. Only then add its live card to `content/destinations.ts` in the separate `source/` checkout and release the global homepage. Verify the card opens the correct country homepage and its trip requests reach the shared account system. Preserve the global `/` entry, Colombian `/colombia` homepage and existing deeper Colombian routes, and `/australia` forwarding.
 
 Proposal currency remains explicitly **AUD**, including future destinations, until pricing, storage, validation, emails and customer-facing terms receive a deliberate reviewed currency change. Adding a country must not silently change currency or imply instant reservations/payments.
 
