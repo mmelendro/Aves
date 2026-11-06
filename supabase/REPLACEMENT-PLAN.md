@@ -1,6 +1,6 @@
 # Colombia database replacement
 
-**Superseded on 6 November 2026:** the owner has now said legacy data does not need to be preserved and wants a single working website with a secure linked database. Do not continue the legacy migration or contact support without renewed direction. The new project has only its security baseline; selecting the final shared/separate backend and retiring unused projects remain pending. The steps below are historical contingency guidance, not the current work order.
+**Superseded on 6 November 2026; retirement verified on 7 November 2026 (Sydney):** the owner chose one shared account/database and explicitly declined preservation of legacy Colombian data. With the owner's explicit deletion confirmation, **AVES-Database** (`krzmqusxxrfljjkdbklx`) and the unused empty **AVES Colombia** replacement (`gfxirgzvbpytgfffolhj`) were permanently deleted. **AVES Shared Accounts** (`qeyprwftrouztlqmwuzv`) is the sole remaining project, active and healthy. Do not continue the legacy migration or contact support without renewed direction. The dated plan below is historical contingency guidance, not the current work order or a description of resources that still exist.
 
 Prepared 6 November 2026. Target: `gfxirgzvbpytgfffolhj`, us-east-1. Source: paused `krzmqusxxrfljjkdbklx`. The source dashboard reports retained data and downloadable backups; their completeness has not yet been verified. This plan does not authorize deletion or claim migration is complete.
 
