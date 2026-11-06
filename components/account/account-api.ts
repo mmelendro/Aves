@@ -1,4 +1,6 @@
 import { sitePath } from "@/lib/site-path"
+import { regionLabels } from "@/content/region-options"
+export { regionLabels } from "@/content/region-options"
 
 export type TripFields = { title: string; regions: string[]; travelWhen: string; partySize: string; message: string }
 export type TripPlan = TripFields & { id: string; status: "draft" | "quote_requested"; updatedAt: string }
@@ -21,7 +23,6 @@ export async function accountRequest<T>(path: string, options: RequestInit = {})
   return result as T
 }
 
-export const regionLabels: Record<string, string> = { queensland: "Queensland", "new-south-wales": "New South Wales", tasmania: "Tasmania" }
 export function regionSummary(regions: string[]) { return regions.map(region => regionLabels[region] || region).join(", ") || "Open to inspiration" }
 export function dateLabel(value: string | null | undefined) {
   if (!value) return "Not specified"

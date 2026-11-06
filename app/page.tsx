@@ -30,7 +30,7 @@ export default function AVESLandingPage() {
               </div>
               <p className="mt-4 text-sm leading-relaxed text-gray-600">Australian journeys are in development. Enquiries are open; routes, guides and pricing are agreed personally.</p>
             </div>
-            <div className="mx-auto w-full max-w-lg lg:max-w-none"><HomepageBirdCarousel className="w-full" autoPlay={false} /><p className="mt-3 text-center text-sm text-gray-600">Meet the birds. Press play to hear a field recording.</p></div>
+            <div className="mx-auto min-w-0 w-full max-w-lg lg:max-w-none"><HomepageBirdCarousel className="w-full" autoPlay={false} /><p className="mt-3 text-center text-sm text-gray-600">Meet 20 Australian birds. Explore their ranges and listen to available recordings.</p></div>
           </div>
         </div>
       </section>

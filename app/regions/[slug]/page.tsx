@@ -6,6 +6,7 @@ import { ArrowRight, Bird, CalendarDays, ChevronRight, Clock3, ExternalLink, Foo
 import { PageShell } from "@/components/page-shell"
 import { Button } from "@/components/ui/button"
 import { regions } from "@/content/regions"
+import { RegionalBirdCarousel } from "@/components/regional-bird-carousel"
 import { canonicalUrl, sitePath } from "@/lib/site-path"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -112,11 +113,13 @@ export default async function RegionPage({ params }: Props) {
             <h2 id="birds-heading" className="text-2xl sm:text-3xl font-bold text-gray-900">Birds worth getting to know</h2>
             <p className="mt-4 text-gray-600 leading-relaxed">A few birds connected with these habitats. They offer a way into the landscape, not a promised sightings list.</p>
           </div>
+          <RegionalBirdCarousel regionId={region.id} />
+          <h3 className="text-xl font-semibold text-gray-900 mb-5">More birds to ask us about</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {region.birds.map(bird => <article key={bird.name} className="rounded-2xl border border-emerald-100 p-6 sm:p-7">
               <Bird className="h-7 w-7 text-emerald-700 mb-4" aria-hidden="true" />
               <h3 className="text-xl font-semibold text-gray-900">{bird.name}</h3>
-              <p className="mt-3 text-gray-600 leading-relaxed">{bird.note}</p>
+              <p className="mt-3 text-sm font-medium text-emerald-800"><span className="font-semibold">Where to find it:</span> {bird.whereFound}</p><p className="mt-3 text-gray-600 leading-relaxed">{bird.note}</p>
             </article>)}
           </div>
           <p className="mt-6 text-sm text-gray-600">Give birds space, keep away from nests and avoid using call playback to attract them. <a href="https://birdlife.org.au/how-to/ethical-birdwatching-guidelines" className="text-emerald-800 underline underline-offset-4">Read BirdLife Australia’s ethical birdwatching guidance.</a></p>

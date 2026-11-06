@@ -1,0 +1,209 @@
+[
+  {
+    "id": "au-satin-bowerbird",
+    "commonName": "Satin Bowerbird",
+    "scientificName": "Ptilonorhynchus violaceus",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "distribution": "Eastern Australia, from Queensland through New South Wales to Victoria, including a separate northern Queensland population around the Wet Tropics.",
+    "habitat": "Wetter forests, rainforest edges and woodlands, with nearby open areas used for feeding.",
+    "sources": [
+      {
+        "title": "BirdLife Australia — Satin Bowerbird",
+        "url": "https://birdlife.org.au/bird-profiles/satin-bowerbird/"
+      },
+      {
+        "title": "NSW Environment — bowerbirds",
+        "url": "https://www.environment.nsw.gov.au/topics/animals-and-plants/native-animals/native-animal-facts/birds/bowerbirds"
+      }
+    ],
+    "image": "/images/birds/satin-bowerbird.jpg",
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Photographer · CC BY-SA 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Satin_Bowerbird_at_Bower_6533.jpg",
+      "reserve": "Cooranbong, Lake Macquarie, New South Wales, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Satin_Bowerbird_at_Bower_6533.jpg"
+    },
+    "audioFile": "/audio/satin-bowerbird.m4a"
+  },
+  {
+    "id": "au-regent-bowerbird",
+    "commonName": "Regent Bowerbird",
+    "scientificName": "Sericulus chrysocephalus",
+    "primaryRegion": "Queensland",
+    "regionSlug": "queensland",
+    "distribution": "Eastern Australia, from the Eungella Range near Mackay in Queensland south to the Illawarra escarpment in New South Wales.",
+    "habitat": "Rainforest and adjoining forest, feeding mainly among fruiting trees in the canopy.",
+    "sources": [
+      {
+        "title": "NSW Environment — bowerbirds",
+        "url": "https://www.environment.nsw.gov.au/topics/animals-and-plants/native-animals/native-animal-facts/birds/bowerbirds"
+      }
+    ],
+    "image": "/images/birds/regent-bowerbird.jpg",
+    "photoCredit": {
+      "photographer": "peterichman",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Regent_Bowerbird_(_Sericulus_chrysocephalus_)_Male_,_Queensland_,Australia_(53341845656).jpg",
+      "reserve": "Queensland, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Regent_Bowerbird_(_Sericulus_chrysocephalus_)_Male_,_Queensland_,Australia_(53341845656).jpg"
+    }
+  },
+  {
+    "id": "au-victorias-riflebird",
+    "commonName": "Victoria’s Riflebird",
+    "scientificName": "Ptiloris victoriae",
+    "primaryRegion": "Queensland",
+    "regionSlug": "queensland",
+    "distribution": "Endemic to north-eastern Queensland: the Wet Tropics from south of Cooktown to Mount Elliot, including the Atherton Tablelands.",
+    "habitat": "Lowland and upland rainforest, with some use of wet eucalypt forest and swamp woodland.",
+    "sources": [
+      {
+        "title": "Australian Museum — Victoria’s Riflebird",
+        "url": "https://australian.museum/about/history/exhibitions/birds-of-paradise/victorias-riflebird/"
+      }
+    ],
+    "image": "/images/birds/victorias-riflebird.jpg",
+    "photoCredit": {
+      "photographer": "Charles J. Sharp",
+      "title": "Photographer · CC BY-SA 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Victoria%27s_riflebird_(Ptiloris_victoriae)_male_Atherton.jpg",
+      "reserve": "Crater Lakes, Atherton Tablelands, Queensland, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Victoria%27s_riflebird_(Ptiloris_victoriae)_male_Atherton.jpg"
+    }
+  },
+  {
+    "id": "au-splendid-fairywren",
+    "commonName": "Splendid Fairywren",
+    "scientificName": "Malurus splendens",
+    "primaryRegion": "Western Australia",
+    "regionSlug": "western-australia",
+    "distribution": "Across much of the southern Australian mainland, including south-western Australia and the interior; absent from the Nullarbor Plain and many heavily cleared areas.",
+    "habitat": "Shrubby woodland, jarrah forest, mulga and mallee, with cover close to the ground.",
+    "sources": [
+      {
+        "title": "WA Department of Conservation and Land Management — Common Birds of the South-West Forests, pp. 34–35",
+        "url": "https://library.dbca.wa.gov.au/static/FullTextFiles/017032.pdf"
+      }
+    ],
+    "image": "/images/birds/splendid-fairywren.jpg",
+    "photoCredit": {
+      "photographer": "BaroBert",
+      "title": "Photographer · CC BY-SA 3.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Splendid_Blue_Wren,_Denmark_WA.jpg",
+      "reserve": "Denmark, Western Australia, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Splendid_Blue_Wren,_Denmark_WA.jpg"
+    },
+    "audioFile": "/audio/splendid-fairywren.wav",
+    "imagePosition": "50% 50%"
+  },
+  {
+    "id": "au-gouldian-finch",
+    "commonName": "Gouldian Finch",
+    "scientificName": "Chloebia gouldiae",
+    "primaryRegion": "Northern Territory",
+    "regionSlug": "northern-territory",
+    "distribution": "Patchily distributed across tropical northern Australia, from the Kimberley through the Northern Territory to northern Queensland; occurrence is especially sparse towards the eastern end of its range.",
+    "habitat": "Tropical savanna and grassy, open woodland with access to water and seeding grasses.",
+    "sources": [
+      {
+        "title": "Australian Museum — Gouldian Finch",
+        "url": "https://australian.museum/learn/animals/birds/gouldian-finch/"
+      }
+    ],
+    "image": "/images/birds/gouldian-finch.jpg",
+    "photoCredit": {
+      "photographer": "Kym Nicolson",
+      "title": "Photographer · CC BY 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Chloebia_gouldiae,_Elsey,_Northern_Territory,_Australia_1.jpg",
+      "reserve": "Elsey, Northern Territory, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Chloebia_gouldiae,_Elsey,_Northern_Territory,_Australia_1.jpg"
+    }
+  },
+  {
+    "id": "au-red-tailed-black-cockatoo",
+    "commonName": "Red-tailed Black-Cockatoo",
+    "scientificName": "Calyptorhynchus banksii",
+    "primaryRegion": "Queensland",
+    "regionSlug": "queensland",
+    "distribution": "Widespread but discontinuous across northern Australia and parts of the interior, with separate populations in south-western Western Australia and south-eastern South Australia/south-western Victoria.",
+    "habitat": "Eucalypt and casuarina forests and woodlands; habitat preferences vary between subspecies.",
+    "sources": [
+      {
+        "title": "Australian Museum — Red-tailed Black-Cockatoo",
+        "url": "https://australian.museum/learn/animals/birds/red-tailed-black-cockatoo-calyptorhynchus-banksii/"
+      }
+    ],
+    "image": "/images/birds/red-tailed-black-cockatoo.jpg",
+    "photoCredit": {
+      "photographer": "Sheba_Also 43,000 photos",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Cairns_male_Black_Cockatoo-1_(23401557432).jpg",
+      "reserve": "Cairns, Queensland, Australia (captive bird)",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Cairns_male_Black_Cockatoo-1_(23401557432).jpg"
+    },
+    "audioFile": "/audio/red-tailed-black-cockatoo.m4a",
+    "imagePosition": "25% 50%"
+  },
+  {
+    "id": "au-carnabys-black-cockatoo",
+    "commonName": "Carnaby’s Black-Cockatoo",
+    "scientificName": "Zanda latirostris",
+    "primaryRegion": "Western Australia",
+    "regionSlug": "western-australia",
+    "distribution": "Endemic to south-western Western Australia, from the Kalbarri area to around Esperance, including the Wheatbelt and Perth region.",
+    "habitat": "Eucalypt woodland, banksia woodland and heathland; large old trees provide nesting hollows.",
+    "sources": [
+      {
+        "title": "Australian Government — Carnaby’s cockatoo",
+        "url": "https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/carnabys-cockatoo"
+      }
+    ],
+    "image": "/images/birds/carnabys-black-cockatoo.jpg",
+    "photoCredit": {
+      "photographer": "Calistemon",
+      "title": "Photographer · CC BY-SA 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Carnaby%27s_black_cockatoo_(female)_at_Canning_River_Regional_Park,_September_2021_01.jpg",
+      "reserve": "Canning River Regional Park, Western Australia, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Carnaby%27s_black_cockatoo_(female)_at_Canning_River_Regional_Park,_September_2021_01.jpg"
+    },
+    "audioFile": "/audio/carnabys-black-cockatoo.m4a"
+  },
+  {
+    "id": "au-forty-spotted-pardalote",
+    "commonName": "Forty-spotted Pardalote",
+    "scientificName": "Pardalotus quadragintus",
+    "primaryRegion": "Tasmania",
+    "regionSlug": "tasmania",
+    "distribution": "Endemic to Tasmania, confined to scattered eastern and south-eastern coastal colonies, including Bruny Island and Maria Island.",
+    "habitat": "Dry forest and woodland containing white gum (Eucalyptus viminalis), an essential feeding tree.",
+    "sources": [
+      {
+        "title": "Tasmanian Government — Forty-spotted Pardalote",
+        "url": "https://www.threatenedspecieslink.tas.gov.au/Pages/Forty-spotted-Pardalote.aspx"
+      },
+      {
+        "title": "Tasmania Parks — birds and their habitats",
+        "url": "https://parks.tas.gov.au/discovery-and-learning/wildlife/birds"
+      }
+    ],
+    "image": "/images/birds/forty-spotted-pardalote.jpg",
+    "photoCredit": {
+      "photographer": "Charles J. Sharp",
+      "title": "Photographer · CC BY-SA 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Forty-spotted_pardalote_(Pardalotus_quadragintus)_South_Bruny_3.jpg",
+      "reserve": "South Bruny Island, Tasmania, Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Forty-spotted_pardalote_(Pardalotus_quadragintus)_South_Bruny_3.jpg"
+    },
+    "audioFile": "/audio/forty-spotted-pardalote.wav"
+  }
+]

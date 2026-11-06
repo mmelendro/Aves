@@ -13,6 +13,10 @@ type AustraliaRegionMapProps = {
 }
 
 const focusRegions = australiaMapStates.filter((state) => state.regionId !== null)
+const smallTerritories = [
+  { id: "australian-capital-territory", label: "ACT", x: 620, y: 493, line: "573.81,460.3 608,514 620,514" },
+  { id: "jervis-bay-territory", label: "Jervis Bay", x: 620, y: 427, line: "597.38,458.06 608,448 620,448" },
+]
 
 export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: AustraliaRegionMapProps) {
   const id = useId()
@@ -28,15 +32,16 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
             aria-describedby={`${id}-description`}
             className="mx-auto block h-auto w-full max-w-[660px]"
           >
-            <title id={`${id}-title`}>Australia: three places to begin your birding journey</title>
+            <title id={`${id}-title`}>Explore Australian states and territories</title>
             <desc id={`${id}-description`}>
-              Accurate generalised state and territory outlines. Queensland, New South Wales and Tasmania
-              are highlighted as planning focus areas. {selectedState ? `${selectedState.name} is selected.` : "All three focus areas are shown."}
-              {" "}Use Tab to reach each highlighted state, then Enter or Space to select it. State shading does not indicate statewide tour coverage.
+              Generalised outlines of all six states, the Northern Territory, the ACT and Jervis Bay Territory.
+              {selectedState ? ` ${selectedState.name} is selected.` : " Choose a region to explore."}
+              {" "}Use Tab, then Enter or Space to select. ACT and Jervis Bay have labelled callouts because they are small at this scale. External territories are not shown.
             </desc>
             {australiaMapStates.map((state) => {
               const isFocus = state.regionId !== null
               const isSelected = isFocus && selectedRegion === state.regionId
+              const hasCallout = smallTerritories.some(territory => territory.id === state.regionId)
               return (
                 <path
                   key={state.code}
@@ -47,11 +52,11 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
                   strokeLinejoin="round"
                   vectorEffect="non-scaling-stroke"
                   fillRule="evenodd"
-                  role={isFocus ? "button" : undefined}
-                  tabIndex={isFocus ? 0 : undefined}
-                  aria-label={isFocus ? `Explore ${state.name}` : undefined}
-                  aria-pressed={isFocus ? isSelected : undefined}
-                  aria-hidden={isFocus ? undefined : true}
+                  role={isFocus && !hasCallout ? "button" : undefined}
+                  tabIndex={isFocus && !hasCallout ? 0 : undefined}
+                  aria-label={isFocus && !hasCallout ? `Explore ${state.name}` : undefined}
+                  aria-pressed={isFocus && !hasCallout ? isSelected : undefined}
+                  aria-hidden={!isFocus || hasCallout ? true : undefined}
                   onClick={state.regionId ? () => onSelectRegion(state.regionId!) : undefined}
                   onKeyDown={state.regionId ? (event) => {
                     if (event.key === "Enter" || event.key === " ") {
@@ -79,13 +84,26 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
                 {state.shortName}
               </text>
             ))}
+            {smallTerritories.map(territory => {
+              const state = focusRegions.find(item => item.regionId === territory.id)
+              if (!state) return null
+              const selected = selectedRegion === territory.id
+              return <g key={territory.id}>
+                <polyline points={territory.line} fill="none" stroke="#047857" strokeWidth="1.5" aria-hidden="true" />
+                <circle cx={state.label[0]} cy={state.label[1]} r="3" fill="#047857" aria-hidden="true" />
+                <g role="button" tabIndex={0} aria-label={`Explore ${state.name}`} aria-pressed={selected} onClick={() => onSelectRegion(territory.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); if (!event.repeat) onSelectRegion(territory.id) } }} className="group cursor-pointer focus:outline-none">
+                  <rect x={territory.x} y={territory.y} width="94" height="42" rx="9" fill={selected ? "#047857" : "#ffffff"} stroke="#047857" strokeWidth="1.5" className="group-focus-visible:stroke-[4] group-hover:stroke-[3]" />
+                  <text x={territory.x + 47} y={territory.y + 22} textAnchor="middle" dominantBaseline="middle" fontSize="17" fontWeight="700" fill={selected ? "#ffffff" : "#064e3b"} className="pointer-events-none">{territory.label}</text>
+                </g>
+              </g>
+            })}
           </svg>
           <div className="mb-3 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-600">
-            <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-emerald-700/30 bg-emerald-200" aria-hidden="true" />Planning focus areas</span>
-            <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-slate-400/50 bg-[#e2e8e8]" aria-hidden="true" />Other states and territories</span>
+            <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-emerald-700/30 bg-emerald-200" aria-hidden="true" />Explore and request a trip</span>
+            <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-emerald-800 bg-emerald-700" aria-hidden="true" />Selected region</span>
           </div>
         </div>
-      <p className="px-5 py-3 text-xs leading-relaxed text-slate-600 sm:px-6">Select a highlighted state to explore. These are planning focus areas, not statewide operating coverage or confirmed departures.</p>
+      <p className="px-5 py-3 text-xs leading-relaxed text-slate-600 sm:px-6">Select any region to explore its birdlife and request a personal trip proposal. Routes, guides and availability are confirmed before booking.</p>
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-emerald-100 px-5 py-3 text-[11px] leading-relaxed text-slate-500 sm:px-6">
         <span>Generalised geographic boundaries · Mainland, Tasmania and nearby islands</span>
         <a href={australiaMapProvenance.sourceUrl} target="_blank" rel="noreferrer" className="rounded underline underline-offset-2 hover:text-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Map data: Natural Earth · Public domain<span className="sr-only"> (opens in a new tab)</span></a>

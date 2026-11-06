@@ -1,0 +1,194 @@
+[
+  {
+    "id": "au-laughing-kookaburra",
+    "commonName": "Laughing Kookaburra",
+    "scientificName": "Dacelo novaeguineae",
+    "primaryRegion": "Tasmania",
+    "regionSlug": "tasmania",
+    "distribution": "Native to eastern Australia, with introduced populations in Tasmania and south-west Western Australia.",
+    "habitat": "Woodlands and other landscapes with suitable trees.",
+    "image": "/images/birds/au-laughing-kookaburra.jpg",
+    "audioFile": "/audio/au-laughing-kookaburra.mp3",
+    "audioLabel": "Field recording · New South Wales",
+    "sources": [{ "title": "Australian Museum — Laughing Kookaburra", "url": "https://australian.museum/learn/animals/birds/laughing-kookaburra/" }],
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Laughing Kookaburra at Waterworks Reserve",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Dacelo_novaeguineae_waterworks_-_edit.jpg",
+      "reserve": "Waterworks Reserve, Hobart, Tasmania",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Dacelo_novaeguineae_waterworks_-_edit.jpg"
+    }
+  },
+  {
+    "id": "au-australian-magpie",
+    "commonName": "Australian Magpie",
+    "scientificName": "Gymnorhina tibicen",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "distribution": "Across much of Australia, including Tasmania; generally absent from dense forest and very arid deserts.",
+    "habitat": "Trees beside open ground, including parks and playing fields.",
+    "image": "/images/birds/au-australian-magpie.jpg",
+    "audioFile": "/audio/au-australian-magpie.mp3",
+    "audioLabel": "Field recording · Victoria",
+    "sources": [{ "title": "Australian Museum — Australian Magpie", "url": "https://australian.museum/learn/animals/birds/australian-magpie/" }],
+    "photoCredit": {
+      "photographer": "Charles J. Sharp",
+      "title": "Australian Magpie at Mount Annan",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Australian_magpie_(Gymnorhina_tibicen_tibicen)_male_Sydney.jpg",
+      "reserve": "Australian Botanic Garden, Mount Annan, New South Wales",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Australian_magpie_(Gymnorhina_tibicen_tibicen)_male_Sydney.jpg"
+    }
+  },
+  {
+    "id": "au-galah",
+    "commonName": "Galah",
+    "scientificName": "Eolophus roseicapilla",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "distribution": "Widespread across most of Australia, including some offshore islands.",
+    "habitat": "Treed landscapes, often near water, with open ground for feeding.",
+    "image": "/images/birds/au-galah.jpg",
+    "audioFile": "/audio/au-galah.mp3",
+    "audioLabel": "Field recording · New South Wales",
+    "sources": [{ "title": "Australian Museum — Galah", "url": "https://australian.museum/learn/animals/birds/galah/" }],
+    "photoCredit": {
+      "photographer": "Charles J. Sharp",
+      "title": "Galah in Adelaide Botanic Garden",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Galah_(Eolophus_roseicapilla_albiceps)_male_Adelaide.jpg",
+      "reserve": "Adelaide Botanic Garden, South Australia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Galah_(Eolophus_roseicapilla_albiceps)_male_Adelaide.jpg"
+    }
+  },
+  {
+    "id": "au-emu",
+    "commonName": "Emu",
+    "scientificName": "Dromaius novaehollandiae",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "distribution": "Across much of mainland Australia, from coastal country to inland woodlands; Tasmania's wild population is extinct.",
+    "habitat": "Dry forest and savanna woodland; seldom rainforest or very arid country.",
+    "image": "/images/birds/au-emu.jpg",
+    "audioFile": "/audio/au-emu.mp3",
+    "audioLabel": "Female emu call · recorded in a zoo",
+    "sources": [{ "title": "Australian Museum — Emu", "url": "https://australian.museum/learn/animals/birds/emu/" }],
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Emu at Tidbinbilla",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Emu_1_-_Tidbinbilla.jpg",
+      "reserve": "Tidbinbilla Nature Reserve, Australian Capital Territory",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Emu_1_-_Tidbinbilla.jpg"
+    }
+  },
+  {
+    "id": "au-southern-cassowary",
+    "commonName": "Southern Cassowary",
+    "scientificName": "Casuarius casuarius",
+    "primaryRegion": "Queensland",
+    "regionSlug": "queensland",
+    "distribution": "Northern Queensland in Australia; also found in New Guinea and eastern Indonesia.",
+    "habitat": "Dense tropical rainforest.",
+    "image": "/images/birds/au-southern-cassowary.jpg",
+    "audioFile": "/audio/au-southern-cassowary.mp3",
+    "audioLabel": "Cassowary chick calls · Queensland",
+    "sources": [{ "title": "Australian Museum — Southern Cassowary", "url": "https://australian.museum/learn/animals/birds/southern-cassowary/" }],
+    "photoCredit": {
+      "photographer": "Summerdrought",
+      "title": "Free-ranging Southern Cassowary at Etty Bay",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Southern_Cassowary_7071.jpg",
+      "reserve": "Etty Bay, Queensland",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Southern_Cassowary_7071.jpg"
+    }
+  },
+  {
+    "id": "au-superb-lyrebird",
+    "commonName": "Superb Lyrebird",
+    "scientificName": "Menura novaehollandiae",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "distribution": "The south-east of mainland Australia, with a population in southern Tasmania.",
+    "habitat": "Moist forests, foraging on the ground and roosting in trees.",
+    "image": "/images/birds/au-superb-lyrebird.jpg",
+    "imagePosition": "65% center",
+    "audioFile": "/audio/au-superb-lyrebird.mp3",
+    "audioLabel": "Field recording · New South Wales",
+    "sources": [{ "title": "Australian Museum — Superb Lyrebird", "url": "https://australian.museum/learn/animals/birds/superb-lyrebird/" }],
+    "photoCredit": {
+      "photographer": "Greg Tasney",
+      "title": "Superb Lyrebird in the Blue Mountains",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Menura_novaehollandiae_-_Greg_Tasney_-_600843215.jpeg",
+      "reserve": "Blue Mountains, New South Wales",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Menura_novaehollandiae_-_Greg_Tasney_-_600843215.jpeg"
+    }
+  },
+  {
+    "id": "au-crimson-rosella",
+    "commonName": "Crimson Rosella",
+    "scientificName": "Platycercus elegans",
+    "primaryRegion": "Queensland",
+    "regionSlug": "queensland",
+    "distribution": "Populations occur from northern Queensland through the south-east to South Australia, including Kangaroo Island; colour forms vary by region.",
+    "habitat": "Tall eucalypt forest and other wetter forests.",
+    "image": "/images/birds/au-crimson-rosella.jpg",
+    "imagePosition": "65% center",
+    "audioFile": "/audio/au-crimson-rosella.mp3",
+    "audioLabel": "Field recording · Australia",
+    "sources": [{ "title": "Australian Museum — Crimson Rosella", "url": "https://australian.museum/learn/animals/birds/crimson-rosella/" }],
+    "photoCredit": {
+      "photographer": "Donald Hobern",
+      "title": "Crimson Rosella in Lamington National Park",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Platycercus_elegans_(35143128502).jpg",
+      "reserve": "Lamington National Park, Queensland",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Platycercus_elegans_(35143128502).jpg"
+    }
+  },
+  {
+    "id": "au-eastern-rosella",
+    "commonName": "Eastern Rosella",
+    "scientificName": "Platycercus eximius",
+    "primaryRegion": "Tasmania",
+    "regionSlug": "tasmania",
+    "distribution": "South-eastern Australia, from Queensland through Victoria to south-eastern South Australia, and eastern Tasmania.",
+    "habitat": "Open woodland, grassland, farmland and remnant bush, including urban parks and gardens.",
+    "image": "/images/birds/au-eastern-rosella.jpg",
+    "imagePosition": "30% center",
+    "audioFile": "/audio/au-eastern-rosella.mp3",
+    "audioLabel": "Field recording · Victoria",
+    "sources": [{ "title": "Australian Museum — Eastern Rosella", "url": "https://australian.museum/learn/animals/birds/eastern-rosella/" }],
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Eastern Rosella at Queen's Domain",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Platycercus_eximius_diemenensis_male.jpg",
+      "reserve": "Queen's Domain, Hobart, Tasmania",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Platycercus_eximius_diemenensis_male.jpg"
+    }
+  },
+  {
+    "id": "au-australian-king-parrot",
+    "commonName": "Australian King-Parrot",
+    "scientificName": "Alisterus scapularis",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "distribution": "Australia's east coast and nearby ranges, from Cooktown in Queensland to Port Campbell in Victoria.",
+    "habitat": "Rainforest and wet eucalypt forest.",
+    "image": "/images/birds/au-australian-king-parrot.jpg",
+    "audioFile": "/audio/au-australian-king-parrot.mp3",
+    "audioLabel": "Field recording · Queensland",
+    "sources": [{ "title": "Australian Museum — Australian King-Parrot", "url": "https://australian.museum/learn/animals/birds/australian-king-parrot/" }],
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Australian King-Parrot at Brunkerville",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Alisterus_scapularis_-_Brunkerville.jpg",
+      "reserve": "Brunkerville, New South Wales",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Alisterus_scapularis_-_Brunkerville.jpg"
+    }
+  }
+]

@@ -1,5 +1,7 @@
 # AVES Australia
 
+**Latest working snapshot:** start with [CONTINUE-HERE.md](CONTINUE-HERE.md) for the unpublished regional carousels, test status, correct GitHub branches and remaining release checks.
+
 An isolated Australia website derived from the AVES Colombia repository. The Australian revision keeps the AVES logo, emerald palette, pale gradients, rounded cards and bird carousel while simplifying navigation and reorganising the homepage around regional discovery and trip enquiries. The original Colombia checkout and its live deployment remain separate.
 
 This application uses React, TypeScript, Tailwind CSS and the original public UI components. Its separate Australian backend provides email/password accounts, saved trip plans, quote requests and a private owner proposal dashboard. It does not share the Colombian account or booking database. Contact requests and account records use the Australian Supabase project in Sydney. Successful submission means the request was saved, not that an email was delivered or a booking confirmed.
@@ -64,6 +66,14 @@ Supabase Auth custom SMTP is configured through Resend, using `AVES Australia <n
 Quote requests notify `mmelendro@gmail.com`. Proposal notifications go to the requesting account's current confirmed address and link to the private account. The controlled quote and proposal checks both reached Gmail; the proposal's SPF, DKIM and Gmail Reply-To were verified. `sent` means issued in the account; notification `accepted` means the email provider accepted it, not proof of inbox delivery for every message. Failed or pending notifications remain visible for review; no automatic notification retry or background worker is included. Replaying an already stored quote or issued proposal does not resend its notification.
 
 ## Preview and release
+
+### Bird and regional expansion
+
+The carousel and species directory share 20 verified bird profiles in `content/birds.ts`, with visible distribution notes separate from photograph locations. Seventeen species have locally hosted licensed recordings. Regent Bowerbird, Victoria’s Riflebird and Gouldian Finch explicitly show unavailable audio; no unlicensed or substituted recordings are offered. The Emu recording is labelled as a female in a zoo, and the Southern Cassowary clip as chick calls. Images load on demand and audio loads only after Play.
+
+All six states, the Northern Territory, ACT and Jervis Bay Territory are selectable, with small-territory callouts and matching regional guides. Each of 27 birds in those guides has a `whereFound` entry. `content/region-options.ts` keeps enquiries and saved plans aligned with map IDs. External territories are outside the map; other island ideas can still be submitted through the general enquiry. A trip request or personal quote is not an instant reservation or payment. No database migration was needed because existing plan and enquiry fields already accept these region values.
+
+The expansion passed 155 automated tests, including media/credit integrity and retaining all nine regions in a saved draft. Browser checks exercised every bird selection, all 17 recordings, every keyboard map control and all nine enquiry presets. Release-specific evidence is recorded under workspace `audit/evidence/australia-expansion-*`.
 
 Keep this project separate from the live Colombia deployment. The public address is `https://aves.bio/australia`; the production value of `NEXT_PUBLIC_SITE_URL` is only `https://aves.bio`, and `next.config.mjs` supplies the fixed base path. Native requests and public assets use `sitePath`; Next Links receive unprefixed paths. The separate Vercel project is `mmelendro-9273s-projects/aves-australia`, with functions configured for Sydney. Its production code commit is `11f78d1`, and the stable alias `https://aves-australia.vercel.app` has been promoted. The scoped route on `aves.bio` was separately published at `2026-11-04T23:26:48Z`, with active routing version `299881ce-8227-482d-8a66-c1c1edd3e983`; the design revision did not change routing. Preview deployments remain noindex.
 

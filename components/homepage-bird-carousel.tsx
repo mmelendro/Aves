@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   ChevronLeft,
@@ -22,122 +21,23 @@ import Link from "next/link"
 import Image from "next/image"
 import { sitePath } from "@/lib/site-path"
 
-interface BirdData {
-  id: string
-  commonName: string
-  scientificName: string
-  spanishName: string
-  primaryRegion: string
-  secondaryRegions: string[]
-  ecoregions: string[]
-  regionSlug: string
-  status: "Endemic" | "Near Endemic" | "Spectacular"
-  difficulty: "Easy" | "Moderate" | "Challenging" | "Not assessed"
-  habitat: string
-  bestTime: string
-  elevation: string
-  image: string
-  audioFile?: string
-  photoCredit: {
-    photographer: string
-    title: string
-    teamLink?: string
-    instagramPost?: string
-    reserve?: string
-    reserveLink?: string
-  }
-}
+import { birdData as allBirds, type BirdProfile } from "@/content/birds"
 
-// Habitat and distribution: Australian Museum and BirdLife Australia; sources in content/image-credits.json.
-const birdData: BirdData[] = [
-  {
-    id: "au-fairywren",
-    commonName: "Superb Fairywren",
-    scientificName: "Malurus cyaneus",
-    spanishName: "Australian birdlife",
-    primaryRegion: "New South Wales",
-    secondaryRegions: [],
-    ecoregions: ["Eucalypt woodland", "Dense understorey", "Parks and gardens"],
-    regionSlug: "new-south-wales",
-    status: "Spectacular",
-    difficulty: "Not assessed",
-    habitat: "Open eucalypt woodland with dense understorey, parks and gardens",
-    bestTime: "Timing discussed during planning",
-    elevation: "Varies by location",
-    image: "/images/bird-encounter.jpg",
-    audioFile: "/audio/superb-fairywren.mp3",
-    photoCredit: {
-      photographer: "JJ Harrison",
-      title: "Photographer · CC BY-SA 4.0",
-      teamLink: "/credits",
-      instagramPost: "https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-_Sydney_Olympic_Park.jpg",
-      reserve: "Sydney Olympic Park, NSW",
-      reserveLink: "https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-_Sydney_Olympic_Park.jpg",
-    },
-  },
-  {
-    id: "au-lorikeet",
-    commonName: "Rainbow Lorikeet",
-    scientificName: "Trichoglossus moluccanus",
-    spanishName: "Australian birdlife",
-    primaryRegion: "Queensland",
-    secondaryRegions: [],
-    ecoregions: ["Rainforest", "Woodland", "Well-treed urban areas"],
-    regionSlug: "queensland",
-    status: "Spectacular",
-    difficulty: "Not assessed",
-    habitat: "Rainforest, woodland and well-treed urban areas",
-    bestTime: "Timing discussed during planning",
-    elevation: "Varies by location",
-    image: "/images/rainbow-lorikeet.jpg",
-    audioFile: "/audio/rainbow-lorikeet.mp3",
-    photoCredit: {
-      photographer: "JJ Harrison",
-      title: "Photographer · CC BY 3.0",
-      teamLink: "/credits",
-      instagramPost: "https://commons.wikimedia.org/wiki/File:Trichoglossus_moluccanus,_Daintree_Village.jpg",
-      reserve: "Daintree Village, Queensland",
-      reserveLink: "https://commons.wikimedia.org/wiki/File:Trichoglossus_moluccanus,_Daintree_Village.jpg",
-    },
-  },
-  {
-    id: "au-cockatoo",
-    commonName: "Sulphur-crested Cockatoo",
-    scientificName: "Cacatua galerita",
-    spanishName: "Australian birdlife",
-    primaryRegion: "Tasmania",
-    secondaryRegions: [],
-    ecoregions: ["Timbered habitats", "Areas around human settlements"],
-    regionSlug: "tasmania",
-    status: "Spectacular",
-    difficulty: "Not assessed",
-    habitat: "A variety of timbered habitats, including areas around human settlements",
-    bestTime: "Timing discussed during planning",
-    elevation: "Varies by location",
-    image: "/images/sulphur-crested-cockatoo.jpg",
-    audioFile: "/audio/sulphur-crested-cockatoo.mp3",
-    photoCredit: {
-      photographer: "JJ Harrison",
-      title: "Photographer · CC BY-SA 3.0",
-      teamLink: "/credits",
-      instagramPost: "https://commons.wikimedia.org/wiki/File:Cacatua_galerita_-_Austin%27s_Ferry.jpg",
-      reserve: "Austin's Ferry, Tasmania",
-      reserveLink: "https://commons.wikimedia.org/wiki/File:Cacatua_galerita_-_Austin%27s_Ferry.jpg",
-    },
-  },
-]
 
 interface HomepageBirdCarouselProps {
   className?: string
   autoPlay?: boolean
   autoPlayInterval?: number
+  birds?: BirdProfile[]
 }
 
 export default function HomepageBirdCarousel({
   className,
   autoPlay = true,
   autoPlayInterval = 8000,
+  birds = allBirds,
 }: HomepageBirdCarouselProps) {
+  const birdData = birds
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
@@ -158,7 +58,18 @@ export default function HomepageBirdCarousel({
 
   // Thumbnail navigation state
   const [thumbnailScrollPosition, setThumbnailScrollPosition] = useState(0)
+  const [thumbnailViewport, setThumbnailViewport] = useState(0)
   const thumbnailContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const container = thumbnailContainerRef.current
+    if (!container) return
+    const update = () => setThumbnailViewport(container.clientWidth)
+    const observer = new ResizeObserver(update)
+    observer.observe(container)
+    update()
+    return () => observer.disconnect()
+  }, [])
 
   // Audio refs and management
   const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -170,21 +81,8 @@ export default function HomepageBirdCarousel({
   // Every Australian photograph is linked to its featured region.
   const shouldShowExploreRegion = Boolean(currentBird.regionSlug)
 
-  const shouldShowBirdGuideButton = ["au-fairywren", "au-lorikeet", "au-cockatoo"].includes(currentBird.id)
-
-  // Primary bird-reference sources for the featured Australian species.
-  const getBirdGuideUrl = (birdId: string) => {
-    switch (birdId) {
-      case "au-fairywren":
-        return "https://australian.museum/learn/animals/birds/superb-fairy-wren/"
-      case "au-lorikeet":
-        return "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/"
-      case "au-cockatoo":
-        return "https://australian.museum/learn/animals/birds/sulphur-crested-cockatoo/"
-      default:
-        return ""
-    }
-  }
+  const speciesSource = currentBird.sources[0]
+  const shouldShowBirdGuideButton = Boolean(speciesSource)
 
   // Detect mobile device on mount
   useEffect(() => {
@@ -213,7 +111,7 @@ export default function HomepageBirdCarousel({
       setThumbnailScrollPosition(newPosition)
       container.scrollTo({ left: newPosition, behavior: "smooth" })
     },
-    [thumbnailScrollPosition],
+    [thumbnailScrollPosition, thumbnailViewport],
   )
 
   const canScrollThumbnails = useCallback(
@@ -227,7 +125,7 @@ export default function HomepageBirdCarousel({
         return thumbnailScrollPosition < container.scrollWidth - container.clientWidth
       }
     },
-    [thumbnailScrollPosition],
+    [thumbnailScrollPosition, thumbnailViewport],
   )
 
   // Each slide owns one audio element. Volume changes must not recreate it.
@@ -272,70 +170,21 @@ export default function HomepageBirdCarousel({
     if (audioRef.current) audioRef.current.volume = nextVolume
   }, [])
 
-  // Preload all images on component mount with proper error handling
+  // The main image and lazy thumbnails load on demand, rather than fetching
+  // twenty full-size photographs on a mobile connection.
   useEffect(() => {
-    const preloadImages = async () => {
-      try {
-        const imagePromises = birdData.map((bird, index) => {
-          return new Promise<void>((resolve) => {
-            const img = new window.Image()
+    if (autoPlay && firstImageLoaded) setIsPlaying(true)
+  }, [autoPlay, firstImageLoaded])
 
-            const handleLoad = () => {
-              setPreloadedImages((prev) => new Set(prev).add(bird.image))
-              if (index === 0) {
-                setFirstImageLoaded(true)
-                setIsLoading(false)
-                setImageLoaded(true)
-                // Start autoplay only after first image is loaded
-                if (autoPlay) {
-                  setTimeout(() => setIsPlaying(true), 1000)
-                }
-              }
-              resolve()
-            }
-
-            const handleError = () => {
-              console.warn(`Failed to load image: ${bird.image}`)
-              if (index === 0) {
-                setFirstImageLoaded(true)
-                setIsLoading(false)
-                setImageError(true)
-              }
-              resolve()
-            }
-
-            img.onload = handleLoad
-            img.onerror = handleError
-            img.src = sitePath(bird.image)
-          })
-        })
-
-        // Wait for at least the first image to load/fail
-        try {
-          await imagePromises[0]
-        } catch (error) {
-          console.warn("Error loading first image:", error)
-          setFirstImageLoaded(true)
-          setIsLoading(false)
-          setImageError(true)
-        }
-
-        // Continue loading other images in background
-        try {
-          await Promise.allSettled(imagePromises.slice(1))
-        } catch (error) {
-          console.warn("Error loading additional images:", error)
-        }
-      } catch (error) {
-        console.warn("Error in preloadImages:", error)
-        setFirstImageLoaded(true)
-        setIsLoading(false)
-        setImageError(true)
-      }
-    }
-
-    preloadImages()
-  }, [autoPlay])
+  useEffect(() => {
+    const container = thumbnailContainerRef.current
+    const selected = container?.querySelector<HTMLButtonElement>('[aria-pressed="true"]')
+    if (!container || !selected) return
+    const left = selected.offsetLeft
+    const right = left + selected.offsetWidth
+    if (left < container.scrollLeft) container.scrollTo({ left, behavior: "auto" })
+    else if (right > container.scrollLeft + container.clientWidth) container.scrollTo({ left: right - container.clientWidth, behavior: "auto" })
+  }, [currentIndex])
 
   // Enhanced slide navigation with audio completion check
   const nextSlide = useCallback(() => {
@@ -437,115 +286,23 @@ export default function HomepageBirdCarousel({
     setIsLoading(false)
     setImageLoaded(true)
     setImageError(false)
-  }, [])
+    setFirstImageLoaded(true)
+    setPreloadedImages(previous => new Set(previous).add(currentBird.image))
+  }, [currentBird.image])
 
   const handleImageError = useCallback(() => {
     console.warn(`Failed to load current image: ${currentBird.image}`)
     setIsLoading(false)
     setImageLoaded(false)
     setImageError(true)
+    setFirstImageLoaded(true)
   }, [currentBird.image])
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Endemic":
-        return "bg-red-100 text-red-800 border-red-200"
-      case "Near Endemic":
-        return "bg-orange-100 text-orange-800 border-orange-200"
-      case "Spectacular":
-        return "bg-purple-100 text-purple-800 border-purple-200"
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200"
-    }
-  }
+  const getImagePositioning = (birdId: string) => ({
+    objectPosition: birdData.find(bird => bird.id === birdId)?.imagePosition || "center center",
+    transform: "none",
+  })
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Easy":
-        return "bg-green-100 text-green-800 border-green-200"
-      case "Moderate":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200"
-      case "Challenging":
-        return "bg-red-100 text-red-800 border-red-200"
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200"
-    }
-  }
-
-  // Enhanced image positioning for perfect square framing with focus on bird's eye and wing - Updated to include Golden-headed Quetzal
-  const getImagePositioning = (birdId: string) => {
-    switch (birdId) {
-      case "1": // Green-bearded Helmetcrest
-        return {
-          objectPosition: "center 35%",
-          transform: "scale(1.2)",
-        }
-      case "2": // Rainbow-bearded Thornbill
-        return {
-          objectPosition: "center 25%",
-          transform: "scale(1.15)",
-        }
-      case "3": // Black-billed Mountain-Toucan
-        return {
-          objectPosition: "center 20%",
-          transform: "scale(1.0)",
-        }
-      case "4": // Chestnut-crowned Antpitta
-        return {
-          objectPosition: "center 40%",
-          transform: "scale(1.1)",
-        }
-      case "5": // Andean Motmot
-        return {
-          objectPosition: "center center",
-          transform: "scale(1.1)",
-        }
-      case "6": // Vermilion Cardinal
-        return {
-          objectPosition: "center 25%",
-          transform: "scale(1.1)",
-        }
-      case "7": // Velvet-purple Coronet
-        return {
-          objectPosition: "center 30%",
-          transform: "scale(1.1)",
-        }
-      case "8": // Golden-headed Manakin
-        return {
-          objectPosition: "center 30%",
-          transform: "scale(1.2)",
-        }
-      case "9": // Striped Manakin
-        return {
-          objectPosition: "center 35%",
-          transform: "scale(1.15)",
-        }
-      case "10": // Scaled Dove
-        return {
-          objectPosition: "center 40%",
-          transform: "scale(1.1)",
-        }
-      case "11": // Yellow-throated Toucan
-        return {
-          objectPosition: "center 30%",
-          transform: "scale(1.1)",
-        }
-      case "12": // Golden-headed Quetzal
-        return {
-          objectPosition: "center 25%",
-          transform: "scale(1.15)",
-        }
-      default:
-        return {
-          objectPosition: "center center",
-          transform: "scale(1.1)",
-        }
-    }
-  }
-
-  const currentImagePositioning = getImagePositioning(currentBird.id)
-
-  // Updated region colors to match Aves Explorer map exactly
   const getPrimaryRegionColor = (region: string) => {
     switch (region) {
       case "Pacific":
@@ -679,15 +436,16 @@ export default function HomepageBirdCarousel({
 
   // Get the current bird's region colors for photo credit
   const regionColors = getRegionTextColor(currentBird.primaryRegion)
+  const currentImagePositioning = getImagePositioning(currentBird.id)
 
   return (
-    <div className={cn("relative w-full max-w-md mx-auto carousel-container", className)}>
+    <div className={cn("relative min-w-0 w-full max-w-md mx-auto carousel-container", className)}>
       {currentBird.audioFile && (
         <audio
           key={currentBird.id}
           ref={audioRef}
           src={currentBird.audioFile ? sitePath(currentBird.audioFile) : undefined}
-          preload="metadata"
+          preload="none"
           aria-label={`${currentBird.commonName} recording`}
           onPlaying={() => { setIsAudioPlaying(true); setAudioLoading(false); setAudioError(false) }}
           onPause={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
@@ -702,8 +460,9 @@ export default function HomepageBirdCarousel({
           <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50 carousel-image-container">
             {!imageError ? (
               <Image
+                key={currentBird.id}
                 src={sitePath(currentBird.image || "/placeholder.svg")}
-                alt={`${currentBird.commonName} - ${currentBird.primaryRegion}`}
+                alt={currentBird.commonName}
                 fill
                 className={cn(
                   "object-cover transition-all duration-700 ease-out carousel-slide",
@@ -919,7 +678,7 @@ export default function HomepageBirdCarousel({
                     <p className="text-sm italic opacity-90 leading-tight drop-shadow-md">
                       {currentBird.scientificName}
                     </p>
-                    <p className="text-xs opacity-75 leading-tight drop-shadow-md">{currentBird.spanishName}</p>
+                    <p className="text-xs opacity-90 leading-tight drop-shadow-md">Bird {currentIndex + 1} of {birdData.length}</p>
                   </div>
 
                   {/* Primary Region Tag and Info Button Row */}
@@ -975,73 +734,14 @@ export default function HomepageBirdCarousel({
                         {currentBird.commonName}
                       </h2>
                       <p className="text-base italic text-blue-300 mb-1 leading-tight">{currentBird.scientificName}</p>
-                      <p className="text-sm text-gray-300 leading-tight">{currentBird.spanishName}</p>
                     </div>
 
-                    {/* Status Badges */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      <Badge className={cn("text-xs font-medium border shadow-sm", getStatusColor(currentBird.status))}>
-                        {currentBird.status}
-                      </Badge>
-                      <Badge
-                        className={cn(
-                          "text-xs font-medium border shadow-sm",
-                          getDifficultyColor(currentBird.difficulty),
-                        )}
-                      >
-                        {currentBird.difficulty}
-                      </Badge>
-                    </div>
-
-                    {/* Information Grid */}
-                    <div className="space-y-4 text-sm">
-                      {/* Primary Region */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Photographed In</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.primaryRegion}</p>
-                      </div>
-
-                      {/* Secondary Regions */}
-                      {currentBird.secondaryRegions.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-emerald-300 mb-1">Also Found In</h4>
-                          <p className="text-gray-300 leading-relaxed">{currentBird.secondaryRegions.join(", ")}</p>
-                        </div>
-                      )}
-
-                      {/* Habitat */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Habitat</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.habitat}</p>
-                      </div>
-
-                      {/* Elevation */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Elevation</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.elevation}</p>
-                      </div>
-
-                      {/* Best Time */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Best Time to Visit</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.bestTime}</p>
-                      </div>
-
-                      {/* Ecoregions */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-2">Habitats</h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {currentBird.ecoregions.map((ecoregion, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-xs bg-emerald-900/30 text-emerald-200 border-emerald-700/50 hover:bg-emerald-800/40 transition-colors"
-                            >
-                              {ecoregion}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
+                    <div className="space-y-5 text-sm">
+                      {currentBird.localOccurrence && <div><h4 className="font-semibold text-emerald-300 mb-1">In this region</h4><p className="text-gray-200 leading-relaxed">{currentBird.localOccurrence}</p></div>}
+                      <div><h4 className="font-semibold text-emerald-300 mb-1">Wider range</h4><p className="text-gray-200 leading-relaxed">{currentBird.distribution}</p></div>
+                      <div><h4 className="font-semibold text-emerald-300 mb-1">Habitat</h4><p className="text-gray-200 leading-relaxed">{currentBird.habitat}</p></div>
+                      {currentBird.photoCredit.reserve && <div><h4 className="font-semibold text-emerald-300 mb-1">Photograph location</h4><p className="text-gray-300 leading-relaxed">{currentBird.photoCredit.reserve}</p></div>}
+                      <p className="text-xs leading-relaxed text-gray-400">Distribution describes the species’ range, not a guaranteed sighting. Photograph and recording locations may differ.</p>
                     </div>
 
                     {/* Action Buttons */}
@@ -1049,7 +749,7 @@ export default function HomepageBirdCarousel({
                       {/* Featured Australian Region */}
                       {shouldShowExploreRegion && (
                         <Link href={`/aves-explorer?region=${currentBird.regionSlug}`} className="block">
-                          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white border-0 shadow-lg transition-all duration-200 hover:scale-[1.02]">
+                          <Button className="h-auto min-h-11 w-full whitespace-normal py-3 bg-emerald-600 hover:bg-emerald-700 text-white border-0 shadow-lg transition-all duration-200">
                             <MapPin className="w-4 h-4 mr-2" />
                             Explore {currentBird.primaryRegion}
                           </Button>
@@ -1059,7 +759,7 @@ export default function HomepageBirdCarousel({
                       {/* Species Reference */}
                       {shouldShowBirdGuideButton && (
                         <a
-                          href={getBirdGuideUrl(currentBird.id)}
+                          href={speciesSource.url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block"
@@ -1144,11 +844,11 @@ export default function HomepageBirdCarousel({
                       </div>
                     )}
 
-                    <div>
+                    {currentBird.audioFile && <div>
                       <Link href={`/credits#audio-${currentBird.id}`} className="text-white/90 text-xs underline underline-offset-2">
                         Bird recording & licence
                       </Link>
-                    </div>
+                    </div>}
 
                     {/* Photograph Source Link */}
                     {currentBird.photoCredit.instagramPost && (
@@ -1174,38 +874,44 @@ export default function HomepageBirdCarousel({
             )}
           </div>
 
+          <div className="border-t border-emerald-100 bg-white px-4 py-4 text-sm">
+            <p className="flex items-center gap-2 font-semibold text-emerald-800"><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />Where to find it</p>
+            <p className="mt-2 leading-relaxed text-gray-600">{currentBird.localOccurrence || currentBird.distribution}</p>
+            {currentBird.audioFile && <p className="mt-2 text-xs text-gray-500">Recording: {currentBird.audioLabel || "Wild bird field recording"}.</p>}
+            {!currentBird.audioFile && <p className="mt-2 text-xs text-gray-500">A recording is not yet available for this bird.</p>}
+          </div>
+          <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, bird {currentIndex + 1} of {birdData.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
           {/* Enhanced Thumbnail Navigation with Scroll Controls */}
-          <div className="relative bg-gradient-to-r from-emerald-50 to-blue-50 border-t border-emerald-100">
+          <div className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-1 px-2 bg-gradient-to-r from-emerald-50 to-blue-50 border-t border-emerald-100">
             {/* Scroll Left Button */}
-            {canScrollThumbnails("left") && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200"
+                className="col-start-1 row-start-1 h-11 w-11 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200 disabled:opacity-30"
+                disabled={!canScrollThumbnails("left")}
                 onClick={() => scrollThumbnails("left")}
                 aria-label="Scroll thumbnails left"
               >
                 <ChevronLeft className="w-4 h-4 text-emerald-700" />
               </Button>
-            )}
 
             {/* Scroll Right Button */}
-            {canScrollThumbnails("right") && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200"
+                className="col-start-3 row-start-1 h-11 w-11 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200 disabled:opacity-30"
+                disabled={!canScrollThumbnails("right")}
                 onClick={() => scrollThumbnails("right")}
                 aria-label="Scroll thumbnails right"
               >
                 <ChevronRight className="w-4 h-4 text-emerald-700" />
               </Button>
-            )}
 
             {/* Thumbnail Container */}
             <div
               ref={thumbnailContainerRef}
-              className="flex gap-2 p-3 overflow-x-auto scrollbar-hide scroll-smooth"
+              onScroll={event => setThumbnailScrollPosition(event.currentTarget.scrollLeft)}
+              className="relative col-start-2 row-start-1 min-w-0 flex gap-2 p-3 overflow-x-auto scrollbar-hide"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {birdData.map((bird, index) => (
@@ -1219,16 +925,18 @@ export default function HomepageBirdCarousel({
                   )}
                   onClick={() => goToSlide(index)}
                   aria-label={`View ${bird.commonName}`}
+                  aria-pressed={index === currentIndex}
                 >
                   <Image
                     src={sitePath(bird.image || "/placeholder.svg")}
-                    alt={bird.commonName}
+                    alt=""
+                    loading="lazy"
                     width={64}
                     height={64}
                     className="w-full h-full object-cover"
                     style={{
                       objectPosition: getImagePositioning(bird.id).objectPosition,
-                      transform: "scale(1.1)",
+                      transform: "none",
                     }}
                   />
                 </button>

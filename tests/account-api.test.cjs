@@ -41,6 +41,18 @@ function harness({ results = [], rpcResult = quoteReceipt, authStatus, notificat
   return { ...load("lib/account-handlers.ts"), queries, rpcCalls, notices, events }
 }
 
+test("a saved trip retains all newly selectable Australian regions", async () => {
+  const { regionOptions } = loader()("content/region-options.ts")
+  const selectedRegions = regionOptions.map(region => region.id)
+  const expandedValues = { ...values, regions: selectedRegions }
+  const h = harness({ results: [{ data: { ...planRow, details: { ...details, regions: selectedRegions } }, error: null }] })
+  const response = await h.plansPost(request({ id: planId, ...expandedValues }))
+  assert.equal(response.status, 200)
+  const insertion = h.queries[0].operations.find(([method]) => method === "insert")[1]
+  assert.deepEqual(insertion.details.regions, selectedRegions)
+  assert.deepEqual((await response.json()).plan.regions, selectedRegions)
+})
+
 test("draft creation derives owner from verified session, not metadata", async () => {
   const h = harness({ results: [{ data: planRow, error: null }], user: { user_metadata: { user_id: "other", role: "admin" } } })
   const response = await h.plansPost(request({ id: planId, ...values }))
