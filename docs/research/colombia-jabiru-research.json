@@ -1,0 +1,935 @@
+{
+  "scientificName": "Jabiru mycteria",
+  "images": {
+    "batchcomplete": "",
+    "continue": {
+      "gsroffset": 8,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": {
+        "169904946": {
+          "pageid": 169904946,
+          "ns": 6,
+          "title": "File:002 Jabiru feeding its babies in their nest in Encontro das Águas State Park Photo by Giles Laurent.jpg",
+          "index": 3,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1280px-002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 800,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/3840px-002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1280px-002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 800,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/3840px-002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:002_Jabiru_feeding_its_babies_in_their_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=169904946",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2025-07-13 21:28:47",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "002 Jabiru feeding its babies in their nest in Encontro das Águas State Park Photo by Giles Laurent",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Jabiru mycteria|Self-published work|Commons featured desktop backgrounds|Uploaded via Campaign:wle-br|Featured pictures of Mato Grosso|Files with coordinates missing SDC location of creation|Featured pictures by Giles Laurent|Birds in 2024|Images from Wiki Loves Earth 2025 in Brazil - Mato Grosso|Awarded pictures by Giles Laurent|Images from Wiki Loves Earth missing SDC location of creation|Photos by Giles Laurent|Images from Wiki Loves Earth 2025|Birds eating fish|Images from Wiki Loves Earth with different SDC participant in|Birds of Encontro das Águas State Park|Black, brown, cream, red|Images from Wiki Loves Earth 2025 in Brazil|Brazilian representatives at the WLE 2025 international stage|Featured pictures of birds in Brazil",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "quality|featured|valued|potd",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-17.273975",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.694682",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Jabiru feeding its babies in their nest in Parque Estadual Encontro das Águas, Brazil",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2024-08-08 19:48:12",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Attribution": {
+                  "value": "© <a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>, License CC BY-SA",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "169909737": {
+          "pageid": 169909737,
+          "ns": 6,
+          "title": "File:033 Jabiru taking off in Encontro das Águas State Park Photo by Giles Laurent.jpg",
+          "index": 7,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1280px-033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 800,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/3840px-033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1280px-033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 800,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/3840px-033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:033_Jabiru_taking_off_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=169909737",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2025-07-13 22:34:07",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "033 Jabiru taking off in Encontro das Águas State Park Photo by Giles Laurent",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Self-published work|Uploaded via Campaign:wle-br|Featured pictures of Mato Grosso|Files with coordinates missing SDC location of creation|Featured pictures by Giles Laurent|Images from Wiki Loves Earth 2025 in Brazil - Mato Grosso|Images from Wiki Loves Earth missing SDC location of creation|Photos by Giles Laurent|Images from Wiki Loves Earth 2025|Images from Wiki Loves Earth with different SDC participant in|Birds of Encontro das Águas State Park|Images from Wiki Loves Earth 2025 in Brazil|Featured pictures of birds in Brazil|Jabiru mycteria in flight|Taken with Sony ILCE-1 and Sony FE 200-600mm F5.6-6.3 G OSS",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "quality|featured|valued",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-17.273975",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.694682",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Jabiru taking off in Parque Estadual Encontro das Águas, Brazil",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2024-08-14 20:25:39",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Attribution": {
+                  "value": "© <a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>, License CC BY-SA",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "169991173": {
+          "pageid": 169991173,
+          "ns": 6,
+          "title": "File:049 Jabiru chick in its nest in Encontro das Águas State Park Photo by Giles Laurent.jpg",
+          "index": 4,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/960px-049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 960,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1920px-049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/960px-049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 960,
+                "height": 1200,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1920px-049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:049_Jabiru_chick_in_its_nest_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=169991173",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2026-07-11 13:27:55",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "049 Jabiru chick in its nest in Encontro das Águas State Park Photo by Giles Laurent",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Self-published work|Uploaded via Campaign:wle-br|Files with coordinates missing SDC location of creation|Featured pictures by Giles Laurent|Images from Wiki Loves Earth 2025 in Brazil - Mato Grosso|Images from Wiki Loves Earth missing SDC location of creation|Photos by Giles Laurent|Images from Wiki Loves Earth 2025|Files with Assessments template missing SDC Commons featured picture assessment|Images from Wiki Loves Earth with different SDC participant in|Birds of Encontro das Águas State Park|Images from Wiki Loves Earth 2025 in Brazil|Featured pictures of birds in Brazil|Jabiru mycteria (juvenile)",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "quality|featured|valued",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-17.273975",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.694682",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Jabiru chick in its nest in Parque Estadual Encontro das Águas, Brazil",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2024-08-08 19:52:55",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Attribution": {
+                  "value": "© <a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>, License CC BY-SA",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "106274242": {
+          "pageid": 106274242,
+          "ns": 6,
+          "title": "File:Cambara (Vochysia divergens Pohl) tree with Tuiuiu (Jabiru mycteria) nest in RPPN Sesc Pantanal.jpg",
+          "index": 6,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg/1280px-Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 808,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg/1280px-Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 808,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Cambara_%28Vochysia_divergens_Pohl%29_tree_with_Tuiuiu_%28Jabiru_mycteria%29_nest_in_RPPN_Sesc_Pantanal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Cambara_(Vochysia_divergens_Pohl)_tree_with_Tuiuiu_(Jabiru_mycteria)_nest_in_RPPN_Sesc_Pantanal.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=106274242",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2021-06-04 16:49:31",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Cambara (Vochysia divergens Pohl) tree with Tuiuiu (Jabiru mycteria) nest in RPPN Sesc Pantanal",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Jabiru mycteria|Vochysia divergens|Reserva Particular do Patrimônio Natural Estância Ecológica Sesc - Pantanal|Self-published work|Brazil photographs taken on 2020-11-28|Uploaded via Campaign:wle-br|Files with coordinates missing SDC location of creation|Images from Wiki Loves Earth 2021|Images from Wiki Loves Earth 2021 in Brazil|Images from Wiki Loves Earth 2021 in Brazil - Mato Grosso|Images from Wiki Loves Earth missing SDC location of creation|Images from Wiki Loves Earth with different SDC participant in|Best images from Wiki Loves Earth 2021 in Brazil - landscape",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "quality",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-16.586988",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.406316",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Nascer do sol na Reserva Particular do Patrimônio Natural Estância Ecológica Sesc - Pantanal de nível Federal, localizado (a) em Barão de Melgaço (MT)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2020-11-28 05:43:26",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Gabyschuck&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Gabyschuck (page does not exist)\">Gabyschuck</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "44037738": {
+          "pageid": 44037738,
+          "ns": 6,
+          "title": "File:Jabiru (Jabiru mycteria) 2.JPG",
+          "index": 1,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG/1280px-Jabiru_%28Jabiru_mycteria%29_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG/3840px-Jabiru_%28Jabiru_mycteria%29_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG/1280px-Jabiru_%28Jabiru_mycteria%29_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 1200,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG/3840px-Jabiru_%28Jabiru_mycteria%29_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Jabiru_(Jabiru_mycteria)_2.JPG",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=44037738",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2026-10-23 15:54:35",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Jabiru (Jabiru mycteria) 2",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Jabiru mycteria|Photographs by Charlesjsharp|Self-published work|Featured pictures on Wikipedia, English|Featured pictures by Charlesjsharp|Square photos of birds|September 2015 in Brazil|Featured pictures of Mato Grosso|Files with coordinates missing SDC location of creation|Featured pictures by Charlesjsharp/Brazil|Brazil photographs taken on 2015-09-13|Aves in left lateral aspect|Birds in September 2015|Birds standing on one leg|Featured pictures of birds by Charlesjsharp|Featured pictures on English Wikipedia by Charlesjsharp|Featured pictures of birds in Brazil|Featured pictures of Jabiru mycteria",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "quality|featured|valued",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-16.425758",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.670162",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Jabiru (<i>Jabiru mycteria</i>), the Pantanal, Brazil",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2015-09-13 16:09:01",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sharpphotography.co.uk/\">Sharp Photography, sharpphotography</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<bdi><a href=\"https://www.wikidata.org/wiki/Q54800218\" class=\"extiw\" title=\"d:Q54800218\"><span title=\"Scottish wildlife photographer\">Charles J. Sharp</span></a></bdi>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "45120610": {
+          "pageid": 45120610,
+          "ns": 6,
+          "title": "File:Jabiru Mato Grosso Pantanal Brazil-2.jpg",
+          "index": 5,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg/960px-Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 800,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg/1920px-Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg/960px-Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 800,
+                "height": 1200,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg/1920px-Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Jabiru_Mato_Grosso_Pantanal_Brazil-2.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=45120610",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2024-01-21 16:04:26",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Jabiru Mato Grosso Pantanal Brazil-2",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Jabiru mycteria|Andreas Trepte|Files with coordinates missing SDC location of creation",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-16.511992",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.749253",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<a href=\"https://en.wikipedia.org/wiki/Jabiru\" class=\"extiw\" title=\"en:Jabiru\">Jabiru</a>",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2015-07-29",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://photo-natur.de\">Andreas Trepte</a>",
+                  "source": "commons-desc-page"
+                },
+                "Permission": {
+                  "value": "<table align=\"center\" style=\"width:50%; background-color:#f8f8f8; border:2px solid #e0e0e0; padding:5px;\">\n\n\n<tbody><tr>\n<td align=\"center\"><b>This photo</b> was taken by <i><b><a rel=\"nofollow\" class=\"external text\" href=\"http://www.avi-fauna.info\">Andreas Trepte</a></b></i>.\n<p>Please credit this photo <i><b>Andreas Trepte, <a rel=\"nofollow\" class=\"external text\" href=\"http://avi-fauna.info\">www.avi-fauna.info</a></b></i>.\n</p>\n</td></tr>\n<tr>\n<td align=\"center\">I expect an email to <span style=\"color:#008B00\"><a rel=\"nofollow\" class=\"external text\" href=\"mailto:info@photo-natur.de\">info@photo-natur.de</a></span> with details of use.\n</td></tr>\n</tbody></table>\n<div style=\"clear:both; border:2px solid #cc0000; background-color:#f7f7f7; margin-top:6px;\">\n<table><tbody><tr><td style=\"padding:4px;\"><span typeof=\"mw:File\"><a href=\"//commons.wikimedia.org/wiki/File:Control_copyright_icon.svg\" class=\"mw-file-description\"><img src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Control_copyright_icon.svg/120px-Control_copyright_icon.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"64\" height=\"61\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Control_copyright_icon.svg/250px-Control_copyright_icon.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"171\" data-file-height=\"163\"></a></span>\n</td><td style=\"padding:4px;\"><div style=\"margin-top:0.5em;\">This image is <b>not <a href=\"https://en.wikipedia.org/wiki/Public_domain\" class=\"extiw\" title=\"en:Public domain\">public domain</a></b>. Please respect the copyright protection. It may only be used according to the rules mentioned here. This specifically <b>excludes use in social media</b>, if applicable terms of the licenses listed here not appropriate.</div>\n</td></tr></tbody></table></div> <div class=\"responsive-license-cc layouttemplate licensetpl\" dir=\"ltr\" lang=\"en\"><div class=\"rlicense-icons\"><span class=\"skin-invert\" typeof=\"mw:File\"><span title=\"w:en:Creative Commons\"><img alt=\"w:en:Creative Commons\" src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/CC_some_rights_reserved.svg/120px-CC_some_rights_reserved.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"90\" height=\"36\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/CC_some_rights_reserved.svg/250px-CC_some_rights_reserved.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"744\" data-file-height=\"300\"></span></span><br>\n<span class=\"skin-invert\" typeof=\"mw:File\"><span title=\"attribution\"><img alt=\"attribution\" src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Cc-by_new_white.svg/40px-Cc-by_new_white.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"24\" height=\"24\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Cc-by_new_white.svg/60px-Cc-by_new_white.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"64\" data-file-height=\"64\"></span></span> <span class=\"skin-invert\" typeof=\"mw:File\"><span title=\"share alike\"><img alt=\"share alike\" src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Cc-sa_white.svg/40px-Cc-sa_white.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"24\" height=\"24\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Cc-sa_white.svg/60px-Cc-sa_white.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"64\" data-file-height=\"64\"></span></span></div><div class=\"rlicense-text\"><div class=\"rlicense-declaration\">This file is licensed under the <a href=\"https://en.wikipedia.org/wiki/en:Creative_Commons\" class=\"extiw\" title=\"w:en:Creative Commons\">Creative Commons</a> <a href=\"//creativecommons.org/licenses/by-sa/4.0/deed.en\" class=\"extiw\" title=\"creativecommons:by-sa/4.0/deed.en\">Attribution-Share Alike 4.0 International</a> license.</div><div class=\"rlicense-desc\" style=\"text-align:start;\" lang=\"en\">\n<dl><dd>You are free:\n<ul><li><b>to share</b> – to copy, distribute and transmit the work</li>\n<li><b>to remix</b> – to adapt the work</li></ul></dd>\n<dd>Under the following conditions:\n<ul><li><b>attribution</b> – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.</li>\n<li><b>share alike</b> – If you remix, transform, or build upon the material, you must distribute your contributions under the <a href=\"https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses\" class=\"extiw\" title=\"ccorg:share-your-work/licensing-considerations/compatible-licenses\">same or compatible license</a> as the original.</li></ul></dd></dl></div><span class=\"licensetpl_link\" style=\"display:none;\">https://creativecommons.org/licenses/by-sa/4.0</span><span class=\"licensetpl_short\" style=\"display:none;\">CC BY-SA 4.0 </span><span class=\"licensetpl_long\" style=\"display:none;\">Creative Commons Attribution-Share Alike 4.0 </span><span class=\"licensetpl_link_req\" style=\"display:none;\">true</span><span class=\"licensetpl_attr_req\" style=\"display:none;\">true</span></div></div>",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "44037736": {
+          "pageid": 44037736,
+          "ns": 6,
+          "title": "File:Jabirus (Jabiru mycteria) on nest.JPG",
+          "index": 2,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Jabirus_%28Jabiru_mycteria%29_on_nest.JPG/1280px-Jabirus_%28Jabiru_mycteria%29_on_nest.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/8/86/Jabirus_%28Jabiru_mycteria%29_on_nest.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Jabirus_%28Jabiru_mycteria%29_on_nest.JPG/1280px-Jabirus_%28Jabiru_mycteria%29_on_nest.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/8/86/Jabirus_%28Jabiru_mycteria%29_on_nest.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Jabirus_%28Jabiru_mycteria%29_on_nest.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Jabirus_(Jabiru_mycteria)_on_nest.JPG",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=44037736",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2021-04-08 14:00:39",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Jabirus (Jabiru mycteria) on nest",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Jabiru mycteria|Photographs by Charlesjsharp|Self-published work|Featured pictures by Charlesjsharp|Birds in trees|Square photos of birds|2 birds|Featured pictures of Mato Grosso|Blue sky in Brazil|Files with coordinates missing SDC location of creation|Featured pictures by Charlesjsharp/Brazil|Brazil photographs taken on 2015-09-15|Aves in left lateral aspect|Featured pictures of birds by Charlesjsharp|Animals with blue sky background|Birds on branches|Featured pictures of birds in Brazil|Featured pictures of Jabiru mycteria",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "quality|featured|valued",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "-16.425758",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-56.670162",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Jabiru (<i>Jabiru mycteria</i>) on nest, the Pantanal, Brazil",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2015-09-15 07:08:49",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sharpphotography.co.uk/\">Sharp Photography, sharpphotography</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<bdi><a href=\"https://www.wikidata.org/wiki/Q54800218\" class=\"extiw\" title=\"d:Q54800218\"><span title=\"Scottish wildlife photographer\">Charles J. Sharp</span></a></bdi>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "331479": {
+          "pageid": 331479,
+          "ns": 6,
+          "title": "File:Ph-animals-jaburu-1.jpg",
+          "index": 8,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://upload.wikimedia.org/wikipedia/commons/1/19/Ph-animals-jaburu-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "thumbwidth": 1200,
+              "thumbheight": 857,
+              "thumbattribs": {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/1/19/Ph-animals-jaburu-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 857
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Ph-animals-jaburu-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Ph-animals-jaburu-1.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=331479",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2005-09-19 13:30:30",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Ph-animals-jaburu-1",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Jabiru mycteria|Files with no machine-readable author|Files with no machine-readable source|License migration completed|Birds of the Pantanal|Media missing infobox template|Birds of Mato Grosso do Sul|GFDL-en|Ciconiiformes of Brazil|Ciconiidae in flight|Files by Jorge Stolfi",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 3.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 3.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "http://creativecommons.org/licenses/by-sa/3.0/",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-3.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "observations": {
+    "total_results": 0,
+    "page": 1,
+    "per_page": 50,
+    "results": []
+  }
+}

@@ -1,0 +1,905 @@
+{
+  "scientificName": "Pyrrhura viridicata",
+  "images": {
+    "batchcomplete": "",
+    "continue": {
+      "gsroffset": 8,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": {
+        "41763705": {
+          "pageid": 41763705,
+          "ns": 6,
+          "title": "File:Annals of the Carnegie Museum (1922) (18408863182).jpg",
+          "index": 8,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg/960px-Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 551,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/7/74/Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg/960px-Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 551,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/7/74/Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Annals_of_the_Carnegie_Museum_%281922%29_%2818408863182%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Annals_of_the_Carnegie_Museum_(1922)_(18408863182).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=41763705",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2015-07-22 09:10:17",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Annals of the Carnegie Museum (1922) (18408863182)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|George Miksch Sutton|Photos uploaded from Flickr by Fæ using a script|Flickr images reviewed by FlickreviewR|Files from Internet Archive Book Images Flickr stream|Files from Flickr's 'The Commons'|Psittacidae illustrations|Annals of the Carnegie Museum (1922)",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<br>\n<p><b>Title</b>: Annals of the Carnegie Museum<br>\n<b>Identifier</b>: annalsofcarnegie14carn (<a class=\"external text\" href=\"https://commons.wikimedia.org/w/index.php?title=Special%3ASearch&amp;profile=default&amp;fulltext=Search&amp;search=insource%3A%2Fannalsofcarnegie14carn%2F\">find matches</a>)<br>\n<b>Year</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookyear1922\">1922</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookdecade1920\">1920s</a>)<br>\n<b>Authors</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookauthorCarnegie_Museum\">Carnegie Museum</a>; <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookauthorCarnegie_Museum_of_Natural_History\">Carnegie Museum of Natural History</a><br>\n<b>Subjects</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=booksubjectCarnegie_Museum\">Carnegie Museum</a>; <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=booksubjectCarnegie_Museum_of_Natural_History\">Carnegie Museum of Natural History</a>; <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=booksubjectNatural_history\">Natural history</a><br>\n<b>Publisher</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookpublisher_Pittsburgh_Published_by_authority_of_the_Board_of_Trustees_of_the_Carnegie_Institute\">[Pittsburgh</a> : Published by authority of the Board of Trustees of the Carnegie Institute]<br>\n<b>Contributing Library</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookcontributorMBLWHOI_Library\">MBLWHOI Library</a><br>\n<b>Digitizing Sponsor</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=booksponsorMBLWHOI_Library\">MBLWHOI Library</a><br>\n<br>\n<b>View Book Page</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/stream/annalsofcarnegie14carn/#page/n220/mode/1up\">Book Viewer</a><br>\n<b>About This Book</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/annalsofcarnegie14carn\">Catalog Entry</a><br>\n<b>View All Images</b>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/search/?tags=bookidannalsofcarnegie14carn\">All Images From Book</a><br>\nClick here to <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/stream/annalsofcarnegie14carn/#page/n220/mode/1up\"><b>view book online</b></a> to see this illustration in context in a browseable online version of this book.<br>\n<br>\n<b>Text Appearing Before Image: </b><br>\n<i>Annals Carnegie Museum Vol. XIV, pi. Ill</i><br>\n<b>Text Appearing After Image: </b><br>\n<i>Pyrrhura viridicata Todd, 9 (Four-fifths natural si2e)</i><br>\n<br>\n<b>Note About Images</b><br>\n</p>\n<i>Please note that these images are extracted from scanned page images that may have been digitally enhanced for readability - coloration and appearance of these illustrations may not perfectly resemble the original work.</i>",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "1922",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.flickr.com/photos/internetarchivebookimages/18408863182/\">https://www.flickr.com/photos/internetarchivebookimages/18408863182/</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/126377022@N07\">Internet Archive Book Images</a>",
+                  "source": "commons-desc-page"
+                },
+                "Permission": {
+                  "value": "At the time of upload, the image license was automatically confirmed using the Flickr <a href=\"https://en.wikipedia.org/wiki/API\" class=\"extiw\" title=\"en:API\">API</a>. For more information see <a href=\"//commons.wikimedia.org/wiki/User:F%C3%A6/Flickr_API_detail\" title=\"User:Fæ/Flickr API detail\">Flickr API detail</a>.",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseShortName": {
+                  "value": "No restrictions",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "No known copyright restrictions",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "false",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://www.flickr.com/commons/usage/",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "11089069": {
+          "pageid": 11089069,
+          "ns": 6,
+          "title": "File:Pyrrhura viridicata.jpg",
+          "index": 2,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Pyrrhura_viridicata.jpg/960px-Pyrrhura_viridicata.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 692,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/6/65/Pyrrhura_viridicata.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Pyrrhura_viridicata.jpg/960px-Pyrrhura_viridicata.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 692,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/6/65/Pyrrhura_viridicata.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Pyrrhura_viridicata.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=11089069",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2010-08-04 14:08:04",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Pyrrhura viridicata",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|George Miksch Sutton|PD US expired|PD Old auto: author died less than 50 years ago|PD-old missing SDC copyright status|PD-US missing SDC copyright status|Psittacidae illustrations",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<i>Pyrrhura viridicata</i> (<a href=\"https://en.wikipedia.org/wiki/Santa_Marta_Parakeet\" class=\"extiw\" title=\"en:Santa Marta Parakeet\">Santa Marta Parakeet</a>) - female",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "1918, published in 1922",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/stream/cu31924022518686#page/n219/mode/2up\">The birds of the Santa Marta region of Colombia: a study in altitudinal distribution</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "George Miksch Sutton (1898-1982)",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "Public domain",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Public domain",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "false",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Copyrighted": {
+                  "value": "False",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "pd",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "155695396": {
+          "pageid": 155695396,
+          "ns": 6,
+          "title": "File:Pyrrhura viridicata 285526271.jpg",
+          "index": 4,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Pyrrhura_viridicata_285526271.jpg/960px-Pyrrhura_viridicata_285526271.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 800,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/0/00/Pyrrhura_viridicata_285526271.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Pyrrhura_viridicata_285526271.jpg/960px-Pyrrhura_viridicata_285526271.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 800,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/0/00/Pyrrhura_viridicata_285526271.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Pyrrhura_viridicata_285526271.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_285526271.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=155695396",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2024-11-24 16:32:02",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Pyrrhura viridicata 285526271",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|Media from iNaturalist|INaturalist images reviewed by iNaturalistReviewBot|Files with coordinates missing SDC location of creation|Uploaded with iNaturalist2Commons|Media from GBIF|INaturalist images missing SDC depicts",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "11.058529",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-74.058895",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Santa Marta Parakeet (<i>Pyrrhura viridicata</i>)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2023-03-07",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.inaturalist.org/photos/285526271\">https://www.inaturalist.org/photos/285526271</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.inaturalist.org/users/2533480\">Christoph Moning</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "155695488": {
+          "pageid": 155695488,
+          "ns": 6,
+          "title": "File:Pyrrhura viridicata 285526349.jpg",
+          "index": 3,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Pyrrhura_viridicata_285526349.jpg/960px-Pyrrhura_viridicata_285526349.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 751,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Pyrrhura_viridicata_285526349.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Pyrrhura_viridicata_285526349.jpg/960px-Pyrrhura_viridicata_285526349.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 751,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Pyrrhura_viridicata_285526349.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Pyrrhura_viridicata_285526349.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_285526349.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=155695488",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2024-11-24 16:33:32",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Pyrrhura viridicata 285526349",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|Media from iNaturalist|INaturalist images reviewed by iNaturalistReviewBot|Files with coordinates missing SDC location of creation|Uploaded with iNaturalist2Commons|Media from GBIF|INaturalist images missing SDC depicts",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "11.058529",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-74.058895",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Santa Marta Parakeet (<i>Pyrrhura viridicata</i>)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2023-03-07",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.inaturalist.org/photos/285526349\">https://www.inaturalist.org/photos/285526349</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.inaturalist.org/users/2533480\">Christoph Moning</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "155695608": {
+          "pageid": 155695608,
+          "ns": 6,
+          "title": "File:Pyrrhura viridicata 285526565.jpg",
+          "index": 7,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Pyrrhura_viridicata_285526565.jpg/1280px-Pyrrhura_viridicata_285526565.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 801,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/1/10/Pyrrhura_viridicata_285526565.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Pyrrhura_viridicata_285526565.jpg/1280px-Pyrrhura_viridicata_285526565.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 801,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/1/10/Pyrrhura_viridicata_285526565.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Pyrrhura_viridicata_285526565.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_285526565.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=155695608",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2024-11-24 16:34:37",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Pyrrhura viridicata 285526565",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|Images with extracted images|Media from iNaturalist|INaturalist images reviewed by iNaturalistReviewBot|Files with coordinates missing SDC location of creation|Uploaded with iNaturalist2Commons|Media from GBIF|INaturalist images missing SDC depicts",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "11.190865",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-74.192157",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Santa Marta Parakeet (<i>Pyrrhura viridicata</i>)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2023-03-07",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.inaturalist.org/photos/285526565\">https://www.inaturalist.org/photos/285526565</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.inaturalist.org/users/2533480\">Christoph Moning</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "155695359": {
+          "pageid": 155695359,
+          "ns": 6,
+          "title": "File:Pyrrhura viridicata 285527203.jpg",
+          "index": 6,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Pyrrhura_viridicata_285527203.jpg/960px-Pyrrhura_viridicata_285527203.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 800,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Pyrrhura_viridicata_285527203.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Pyrrhura_viridicata_285527203.jpg/960px-Pyrrhura_viridicata_285527203.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 800,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Pyrrhura_viridicata_285527203.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Pyrrhura_viridicata_285527203.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_285527203.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=155695359",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2024-11-24 16:31:34",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Pyrrhura viridicata 285527203",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|Media from iNaturalist|INaturalist images reviewed by iNaturalistReviewBot|Files with coordinates missing SDC location of creation|Uploaded with iNaturalist2Commons|Media from GBIF",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "11.058529",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-74.058895",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Santa Marta Parakeet (<i>Pyrrhura viridicata</i>)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2023-03-07",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.inaturalist.org/photos/285527203\">https://www.inaturalist.org/photos/285527203</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.inaturalist.org/users/2533480\">Christoph Moning</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "113774164": {
+          "pageid": 113774164,
+          "ns": 6,
+          "title": "File:Pyrrhura viridicata 60458515.jpg",
+          "index": 1,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Pyrrhura_viridicata_60458515.jpg/960px-Pyrrhura_viridicata_60458515.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 900,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/6/68/Pyrrhura_viridicata_60458515.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Pyrrhura_viridicata_60458515.jpg/960px-Pyrrhura_viridicata_60458515.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 900,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/6/68/Pyrrhura_viridicata_60458515.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Pyrrhura_viridicata_60458515.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_60458515.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=113774164",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2021-12-29 08:05:16",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Pyrrhura viridicata 60458515",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|Media from iNaturalist|INaturalist images reviewed by iNaturalistReviewBot|Files with coordinates missing SDC location of creation|Birds of Magdalena Department|Uploaded with iNaturalist2Commons|Colombia photographs taken on 2018-02-07",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "11.157459",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-74.179586",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Santa Marta Parakeet (<i>Pyrrhura viridicata</i>)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2018-02-07",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.inaturalist.org/photos/60458515\">https://www.inaturalist.org/photos/60458515</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.inaturalist.org/users/2401694\">William Stephens</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "89504897": {
+          "pageid": 89504897,
+          "ns": 6,
+          "title": "File:Santa Marta Parakeet.jpg",
+          "index": 5,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Santa_Marta_Parakeet.jpg/1280px-Santa_Marta_Parakeet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 798,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Santa_Marta_Parakeet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Santa_Marta_Parakeet.jpg/1280px-Santa_Marta_Parakeet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 798,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Santa_Marta_Parakeet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Santa_Marta_Parakeet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Santa_Marta_Parakeet.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=89504897",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2020-04-26 15:47:16",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Santa Marta Parakeet",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Pyrrhura viridicata|Self-published work|Birds of the Sierra Nevada de Santa Marta",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Santa Marta Parakeet perched at El Dorado Natural Reserve Cuchilla San Lorenzo",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2020-03-02 06:19:16",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Zieger_M&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Zieger M (page does not exist)\">Zieger M</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "observations": {
+    "total_results": 0,
+    "page": 1,
+    "per_page": 50,
+    "results": []
+  }
+}

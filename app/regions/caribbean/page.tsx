@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import CaribbeanRegionPageClient from "./CaribbeanRegionPageClient"
+import { ColombiaRegionPage } from "@/components/colombia-region-page"
+import { regions } from "@/content/regions"
 
 export const metadata: Metadata = {
   title: "Caribbean Region - Coastal & Foothill Birding Tours | AVES",
@@ -10,5 +11,5 @@ export const metadata: Metadata = {
 }
 
 export default function CaribbeanRegionPage() {
-  return <CaribbeanRegionPageClient />
+  return <ColombiaRegionPage region={regions.find(region => region.id === "caribbean")!} />
 }

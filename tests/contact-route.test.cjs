@@ -65,7 +65,7 @@ test("valid inquiry is normalized and accepted before confirmation is requested"
   assert.equal(response.headers.get("cache-control"), "no-store")
   assert.deepEqual(await response.json(), { success: true, status: "accepted", confirmationAccepted: true })
   assert.equal(h.calls.length, 2)
-  assert.equal(h.calls[0].to, "info@aves.bio")
+  assert.equal(h.calls[0].to, "mmelendro@gmail.com")
   assert.equal(h.calls[0].replyTo, "visitor@example.com")
   assert.equal(h.calls[0].subject, "Tour Inquiry from Test Birder")
   assert.match(h.calls[0].text, /First line\nSecond line/)
@@ -148,6 +148,6 @@ for (const [label, result] of [
     assert.equal(response.status, 200)
     assert.deepEqual(await response.json(), { success: true, status: "accepted", confirmationAccepted: false })
     assert.equal(h.calls.length, 2)
-    assert.equal(h.calls.filter((call) => call.to === "info@aves.bio").length, 1)
+    assert.equal(h.calls.filter((call) => call.to === "mmelendro@gmail.com").length, 1)
   })
 }

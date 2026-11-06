@@ -60,10 +60,10 @@ export async function POST(req: NextRequest) {
   }
 
   const apiKey = process.env.RESEND_API_KEY?.trim()
-  const contactEmail = process.env.CONTACT_EMAIL?.trim() || "info@aves.bio"
+  const contactEmail = process.env.CONTACT_EMAIL?.trim() || "mmelendro@gmail.com"
   if (!apiKey || !emailAddress.safeParse(contactEmail).success) {
     console.error("Contact form email configuration is missing or invalid")
-    return reply({ error: "The inquiry service is temporarily unavailable. Please email info@aves.bio." }, 503)
+    return reply({ error: "The inquiry service is temporarily unavailable. Please email mmelendro@gmail.com." }, 503)
   }
 
   try {
@@ -110,7 +110,7 @@ ${message || "None"}
 
     if (primary.error || !primary.data?.id) {
       console.error("Contact inquiry was not accepted by the email provider")
-      return reply({ error: "Your inquiry could not be accepted. Please try again or email info@aves.bio." }, 502)
+      return reply({ error: "Your inquiry could not be accepted. Please try again or email mmelendro@gmail.com." }, 502)
     }
 
     // The primary inquiry is accepted. A confirmation failure must not invite
@@ -121,7 +121,7 @@ ${message || "None"}
         from: "AVES Tours <noreply@aves.bio>",
         to: email,
         subject: "Your inquiry has been submitted — AVES Tours",
-        text: `Hi ${firstName},\n\nThank you for reaching out! Your inquiry has been submitted to AVES. We aim to respond within 24 hours.\n\nBest regards,\nThe AVES Tours Team\ninfo@aves.bio`,
+        text: `Hi ${firstName},\n\nThank you for reaching out! Your inquiry has been submitted to AVES. We aim to respond within 24 hours.\n\nBest regards,\nThe AVES Tours Team\nmmelendro@gmail.com`,
       })
       confirmationAccepted = !confirmation.error && Boolean(confirmation.data?.id)
     } catch {
@@ -135,6 +135,6 @@ ${message || "None"}
     return reply({ success: true, status: "accepted", confirmationAccepted }, 200)
   } catch {
     console.error("Contact inquiry email request failed")
-    return reply({ error: "Your inquiry could not be accepted. Please try again or email info@aves.bio." }, 502)
+    return reply({ error: "Your inquiry could not be accepted. Please try again or email mmelendro@gmail.com." }, 502)
   }
 }

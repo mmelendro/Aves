@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -62,6 +62,14 @@ export function ContactFormSection({
     { id: "colombian-massif", label: "Colombian Massif", emoji: "🏕️" },
     { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
   ]
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search)
+    const aliases: Record<string, string> = { "sierra-nevada-de-santa-marta": "sierra-nevada", pacific: "pacific-choco", llanos: "eastern-plains", amazonia: "amazon", "cauca-river": "cauca-valley" }
+    const raw = query.get("region") || ""
+    const selected = Object.hasOwn(aliases, raw) ? aliases[raw] : raw
+    if (bioregions.some(region => region.id === selected)) setSelectedRegions([selected])
+  }, [])
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -128,7 +136,7 @@ export function ContactFormSection({
     {
       question: "What makes AVES different from other tour operators?",
       answer:
-        "We're pursuing B Corp certification, operate 100% carbon-neutral tours, maintain small group sizes (max 4 guests), and provide access to private reserves unavailable to other operators. Our guides are certified ornithologists, not just general nature guides.",
+        "We're pursuing B Corp certification. We shape personal birding itineraries around your interests, with guiding, access, group size and inclusions confirmed in your proposal.",
     },
   ]
 
@@ -366,7 +374,7 @@ export function ContactFormSection({
                       {submitStatus === "error" && (
                         <p className="text-sm text-red-600 text-center mt-4">
                           Something went wrong. Please email us directly at{" "}
-                          <a href="mailto:info@aves.bio" className="underline">info@aves.bio</a>
+                          <a href="mailto:mmelendro@gmail.com" className="underline">mmelendro@gmail.com</a>
                         </p>
                       )}
                       {submitStatus === "idle" && (
@@ -400,7 +408,7 @@ export function ContactFormSection({
                       <div>
                         <div className="font-semibold text-gray-900">Expert Ornithologist Guides</div>
                         <div className="text-sm text-gray-600">
-                          Certified local experts with deep knowledge of Colombian avifauna
+                          Local knowledge to help you explore Colombian birdlife
                         </div>
                       </div>
                     </div>
@@ -444,8 +452,8 @@ export function ContactFormSection({
                       <Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Email</div>
-                        <a href="mailto:info@aves.bio" className="text-emerald-600 hover:text-emerald-700">
-                          info@aves.bio
+                        <a href="mailto:mmelendro@gmail.com" className="text-emerald-600 hover:text-emerald-700">
+                          mmelendro@gmail.com
                         </a>
                         <div className="text-sm text-gray-600">24-hour response guarantee</div>
                       </div>

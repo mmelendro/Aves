@@ -1,5 +1,7 @@
 # AVES Colombia - Enhanced Interactive Birding Explorer
 
+**Current working branch:** start with [CONTINUE-HERE.md](CONTINUE-HERE.md). The regional redesign is unfinished; the latest bird/region data still needs implementation. This snapshot is saved for cloud development, not production deployment.
+
 For the current pnpm setup and branch-based preview/release process, follow [CONTRIBUTING.md](CONTRIBUTING.md). It supersedes the older setup and deployment examples below.
 
 *Automatically synced with your [v0.dev](https://v0.dev) deployments*

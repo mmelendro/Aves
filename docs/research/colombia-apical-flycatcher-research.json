@@ -1,0 +1,884 @@
+{
+  "scientificName": "Myiarchus apicalis",
+  "images": {
+    "batchcomplete": "",
+    "continue": {
+      "gsroffset": 8,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": {
+        "10724450": {
+          "pageid": 10724450,
+          "ns": 6,
+          "title": "File:Apical.Flycatcher Matthew.Gable.jpg",
+          "index": 2,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://upload.wikimedia.org/wikipedia/commons/3/38/Apical.Flycatcher_Matthew.Gable.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "thumbwidth": 1200,
+              "thumbheight": 915,
+              "thumbattribs": {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/3/38/Apical.Flycatcher_Matthew.Gable.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 915
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Apical.Flycatcher_Matthew.Gable.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Apical.Flycatcher_Matthew.Gable.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=10724450",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2010-06-25 13:43:38",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Apical.Flycatcher Matthew.Gable",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Taken with Panasonic Lumix DMC-FZ8|Self-published work",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Apical Flycatcher - endemic species from Colombia",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2009",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/wiki/User:Mateo.gable\" title=\"User:Mateo.gable\">Mateo.gable</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 3.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 3.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/3.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-3.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "44860029": {
+          "pageid": 44860029,
+          "ns": 6,
+          "title": "File:Apical Flycatcher (Myiarchus apicalis) (8079764502).jpg",
+          "index": 8,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://upload.wikimedia.org/wikipedia/commons/2/21/Apical_Flycatcher_%28Myiarchus_apicalis%29_%288079764502%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "thumbwidth": 1200,
+              "thumbheight": 799,
+              "thumbattribs": {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/2/21/Apical_Flycatcher_%28Myiarchus_apicalis%29_%288079764502%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 799
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Apical_Flycatcher_%28Myiarchus_apicalis%29_%288079764502%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Apical_Flycatcher_(Myiarchus_apicalis)_(8079764502).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=44860029",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2015-11-08 00:25:45",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Apical Flycatcher (Myiarchus apicalis) (8079764502)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Flickr images reviewed by FlickreviewR|Photographs by Ron Knight",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Drive to Libano",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2010-11-19 09:42",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/sussexbirder/8079764502/\">Apical Flycatcher (Myiarchus apicalis)</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/9919745@N03\">Ron Knight</a> from Seaford, East Sussex, United Kingdom",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "44860033": {
+          "pageid": 44860033,
+          "ns": 6,
+          "title": "File:Apical Flycatcher (Myiarchus apicalis) (8079765294).jpg",
+          "index": 5,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Apical_Flycatcher_%28Myiarchus_apicalis%29_%288079765294%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "thumbwidth": 1200,
+              "thumbheight": 799,
+              "thumbattribs": {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Apical_Flycatcher_%28Myiarchus_apicalis%29_%288079765294%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 799
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Apical_Flycatcher_%28Myiarchus_apicalis%29_%288079765294%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Apical_Flycatcher_(Myiarchus_apicalis)_(8079765294).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=44860033",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2015-11-08 00:25:57",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Apical Flycatcher (Myiarchus apicalis) (8079765294)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Flickr images reviewed by FlickreviewR|Photographs by Ron Knight",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Drive to Libano",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2010-11-19 09:42",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/sussexbirder/8079765294/\">Apical Flycatcher (Myiarchus apicalis)</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/9919745@N03\">Ron Knight</a> from Seaford, East Sussex, United Kingdom",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "44424864": {
+          "pageid": 44424864,
+          "ns": 6,
+          "title": "File:Myiarchus apicalis (Atrapamoscas apical) (17013498461).jpg",
+          "index": 3,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg/1280px-Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 876,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg/3840px-Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg/1280px-Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 876,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg/3840px-Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Myiarchus_apicalis_%28Atrapamoscas_apical%29_%2817013498461%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Myiarchus_apicalis_(Atrapamoscas_apical)_(17013498461).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=44424864",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2015-10-23 20:14:36",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Myiarchus apicalis (Atrapamoscas apical) (17013498461)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Taken with Panasonic Lumix DMC-FZ70|Flickr images reviewed by FlickreviewR|Photographs by Alejandro Bayer Tamayo|Flickr images missing SDC published in",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Myiarchus apicalis (Atrapamoscas apical)",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2015-03-02 15:36",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/alejobayer/17013498461/\">Myiarchus apicalis (Atrapamoscas apical)</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/52346729@N04\">Alejandro  Bayer Tamayo</a> from Armenia, Colombia",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "119034642": {
+          "pageid": 119034642,
+          "ns": 6,
+          "title": "File:Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (6578314421).jpg",
+          "index": 6,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg/960px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 882,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg/1280px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg/960px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 882,
+                "height": 1200,
+                "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg/1280px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286578314421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_(6578314421).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=119034642",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2022-06-07 22:20:27",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (6578314421)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Tatacoa Desert|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Félix Uribe|Birds of Villavieja, Huila",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "3.231013",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-75.195922",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<p>Villavieja, Huila, Colombia\n( Desierto de la Tatacóa - Tatacoa desert )\n</p>\nEndémico",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2011-11-27 12:05",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/24201429@N04/6578314421/\">Myiarchus apicalis / Atrapamoscas apical / Apical Flycatcher</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/24201429@N04\">Félix Uribe</a> from Rionegro, Antioquia, Colombia",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "119033658": {
+          "pageid": 119033658,
+          "ns": 6,
+          "title": "File:Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (6785250396).jpg",
+          "index": 7,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg/1280px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1138,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/4/45/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg/1280px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1138,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/4/45/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%286785250396%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_(6785250396).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=119033658",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2022-06-07 22:12:31",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (6785250396)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Tatacoa Desert|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Félix Uribe|Birds of Villavieja, Huila",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "3.231013",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-75.195922",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<p>Villavieja, Huila, Colombia\n( Desierto de la Tatacóa - Tatacoa desert )\n</p>\nEndémico",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2011-11-27 12:05",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/24201429@N04/6785250396/\">Myiarchus apicalis / Atrapamoscas apical / Apical Flycatcher</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/24201429@N04\">Félix Uribe</a> from Rionegro, Antioquia, Colombia",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "119031329": {
+          "pageid": 119031329,
+          "ns": 6,
+          "title": "File:Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (8256997019).jpg",
+          "index": 4,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg/960px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 810,
+              "thumbheight": 1200,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg/960px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 810,
+                "height": 1200,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288256997019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_(8256997019).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=119031329",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2022-06-07 21:54:18",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (8256997019)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Tatacoa Desert|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Birds in November 2011|Photographs by Félix Uribe|Birds of Villavieja, Huila",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "3.231013",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-75.195922",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<p>Villavieja, Huila, Colombia\n( Desierto de la Tatacóa - Tatacoa desert )\n</p>\nEndémico",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2011-11-27 12:08",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/24201429@N04/8256997019/\">Myiarchus apicalis / Atrapamoscas apical / Apical Flycatcher</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/24201429@N04\">Félix Uribe</a> from Rionegro, Antioquia, Colombia",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        "119040207": {
+          "pageid": 119040207,
+          "ns": 6,
+          "title": "File:Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (8937699247).jpg",
+          "index": 1,
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg/1280px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "thumbwidth": 1200,
+              "thumbheight": 900,
+              "responsiveUrls": {
+                "2": "https://upload.wikimedia.org/wikipedia/commons/2/26/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+              },
+              "thumbattribs": {
+                "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg/1280px-Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                "decoding": "async",
+                "loading": "lazy",
+                "width": 1200,
+                "height": 900,
+                "srcset": "https://upload.wikimedia.org/wikipedia/commons/2/26/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+              },
+              "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_%288937699247%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Myiarchus_apicalis_Atrapamoscas_apical_Apical_Flycatcher_(8937699247).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=119040207",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2023-06-16 20:37:10",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Myiarchus apicalis Atrapamoscas apical Apical Flycatcher (8937699247)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Myiarchus apicalis|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "6.306426",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "-72.671127",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Soatá, Boyacá, Colombia",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2013-05-20 10:25",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/24201429@N04/8937699247/\">Myiarchus apicalis / Atrapamoscas apical / Apical Flycatcher</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/24201429@N04\">Félix Uribe</a> from Rionegro, Antioquia, Colombia",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "observations": {
+    "total_results": 0,
+    "page": 1,
+    "per_page": 50,
+    "results": []
+  }
+}

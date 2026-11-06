@@ -1,11 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import "../styles/mobile-navigation.css"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
-import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
 import { AuthProvider } from "@/hooks/use-auth-enhanced"
 
 export const metadata: Metadata = {
@@ -94,7 +92,6 @@ export default function RootLayout({
             {children}
             <CookiePreferenceCenter />
             <CookieBanner />
-            <MobileNavigationOverlay />
           </CookieConsentProvider>
         </AuthProvider>
         <script
@@ -110,7 +107,7 @@ export default function RootLayout({
               logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/aves-logo.png`,
               contactPoint: {
                 "@type": "ContactPoint",
-                email: "info@aves.bio",
+                email: "mmelendro@gmail.com",
                 contactType: "customer service",
                 availableLanguage: ["English", "Spanish"],
               },

@@ -1,0 +1,373 @@
+[
+  {
+    "id": "1",
+    "commonName": "Green-bearded Helmetcrest",
+    "scientificName": "Oxypogon guerinii",
+    "spanishName": "Colibrí Crestado Verde",
+    "primaryRegion": "Eastern Andes",
+    "secondaryRegions": [
+      "Central Andes"
+    ],
+    "ecoregions": [
+      "High-altitude páramo",
+      "Cloud forest edges",
+      "Alpine scrubland"
+    ],
+    "regionSlug": "eastern-andes",
+    "status": "Endemic",
+    "difficulty": "Challenging",
+    "habitat": "High-altitude páramo and cloud forest edges above 3,000m",
+    "bestTime": "December - March (dry season)",
+    "elevation": "3,000 - 4,200m",
+    "image": "/images/green-bearded-helmetcrest.png",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
+    "photoCredit": {
+      "photographer": "Nicolás Rozo",
+      "title": "AVES Guide",
+      "teamLink": "/team#nicolas-rozo",
+      "instagramPost": "https://www.instagram.com/p/C247ZDJgXBa/",
+      "reserve": "Parque Natural Del Sumapaz",
+      "reserveLink": "/about/partners#parque-natural-del-sumapaz"
+    }
+  },
+  {
+    "id": "2",
+    "commonName": "Rainbow-bearded Thornbill",
+    "scientificName": "Chalcostigma herrani",
+    "spanishName": "Colibrí Barbudo Arcoíris",
+    "primaryRegion": "Central Andes",
+    "secondaryRegions": [
+      "Eastern Andes"
+    ],
+    "ecoregions": [
+      "Páramo grasslands",
+      "Volcanic slopes",
+      "Alpine scrub",
+      "High-altitude wetlands"
+    ],
+    "regionSlug": "central-andes",
+    "status": "Endemic",
+    "difficulty": "Challenging",
+    "habitat": "High-altitude páramo and volcanic slopes with scattered shrubs",
+    "bestTime": "December - March (clear weather)",
+    "elevation": "3,200 - 4,500m",
+    "image": "/images/rabtho1.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Termales del Ruiz",
+      "reserveLink": "/about/partners#termales-del-ruiz"
+    }
+  },
+  {
+    "id": "3",
+    "commonName": "Black-billed Mountain-Toucan",
+    "scientificName": "Andigena nigrirostris",
+    "spanishName": "Tucán Andino Piquinegro",
+    "primaryRegion": "Central Andes",
+    "secondaryRegions": [
+      "Western Andes",
+      "Eastern Andes"
+    ],
+    "ecoregions": [
+      "Montane cloud forest",
+      "Forest canopy",
+      "Secondary growth",
+      "Forest edges"
+    ],
+    "regionSlug": "central-andes",
+    "status": "Near Endemic",
+    "difficulty": "Moderate",
+    "habitat": "Montane cloud forests and forest edges with fruiting trees",
+    "bestTime": "Year-round (most active mornings)",
+    "elevation": "1,500 - 2,800m",
+    "image": "/images/bbmtou1-square.png",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Reserva Río Blanco",
+      "reserveLink": "/about/partners#reserva-rio-blanco"
+    }
+  },
+  {
+    "id": "4",
+    "commonName": "Chestnut-crowned Antpitta",
+    "scientificName": "Grallaria ruficapilla",
+    "spanishName": "Tororoi Coronirrufo",
+    "primaryRegion": "Colombian Massif",
+    "secondaryRegions": [
+      "Central Andes",
+      "Western Andes"
+    ],
+    "ecoregions": [
+      "Cloud forest understory",
+      "Dense leaf litter",
+      "Bamboo thickets",
+      "Mossy forest floor"
+    ],
+    "regionSlug": "colombian-massif",
+    "status": "Endemic",
+    "difficulty": "Moderate",
+    "habitat": "Dense cloud forest understory with thick leaf litter",
+    "bestTime": "Year-round (dawn and dusk)",
+    "elevation": "1,800 - 3,200m",
+    "image": "/images/chestnut-crowned-antpitta.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
+    "photoCredit": {
+      "photographer": "Martin Melendro",
+      "title": "AVES Guide",
+      "teamLink": "/team#martin-melendro",
+      "reserve": "Reserva Río Blanco",
+      "reserveLink": "/about/partners#reserva-rio-blanco"
+    }
+  },
+  {
+    "id": "5",
+    "commonName": "Andean Motmot",
+    "scientificName": "Momotus aequatorialis",
+    "spanishName": "Momoto Andino",
+    "primaryRegion": "Central Andes",
+    "secondaryRegions": [
+      "Western Andes",
+      "Eastern Andes",
+      "Colombian Massif"
+    ],
+    "ecoregions": [
+      "Subtropical forest midstory",
+      "Mossy cloud forest",
+      "Forest edges",
+      "Secondary growth",
+      "Foothills to subtropical zone"
+    ],
+    "regionSlug": "central-andes",
+    "status": "Near Endemic",
+    "difficulty": "Easy",
+    "habitat": "Midstory of mossy subtropical forests, forest edges from foothills into subtropical zone",
+    "bestTime": "Year-round (most active early morning)",
+    "elevation": "1,200 - 2,600m",
+    "image": "/images/blue-crowned-motmot-new.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
+    "photoCredit": {
+      "photographer": "Martin Meléndro",
+      "title": "AVES Guide",
+      "teamLink": "/team#martin-melendro",
+      "reserve": "Reserva Río Blanco",
+      "reserveLink": "/about/partners#reserva-rio-blanco"
+    }
+  },
+  {
+    "id": "6",
+    "commonName": "Vermilion Cardinal",
+    "scientificName": "Cardinalis phoeniceus",
+    "spanishName": "Cardenal Guajiro",
+    "primaryRegion": "Caribbean Coast",
+    "secondaryRegions": [],
+    "ecoregions": [
+      "Dry tropical forest",
+      "Thorny scrubland",
+      "Desert edges",
+      "Arid lowlands"
+    ],
+    "regionSlug": "caribbean",
+    "status": "Endemic",
+    "difficulty": "Moderate",
+    "habitat": "Dry scrublands and thorny forests of the Guajira Peninsula",
+    "bestTime": "December - April (dry season)",
+    "elevation": "0 - 800m",
+    "image": "/images/cardinal-guajiro.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "La Guajira",
+      "reserveLink": "/about/partners#la-guajira"
+    }
+  },
+  {
+    "id": "7",
+    "commonName": "Velvet-purple Coronet",
+    "scientificName": "Boissonneaua jardini",
+    "spanishName": "Coronita Terciopelo Púrpura",
+    "primaryRegion": "Western Andes",
+    "secondaryRegions": [
+      "Central Andes"
+    ],
+    "ecoregions": [
+      "Cloud forest",
+      "Montane forest",
+      "Forest edges",
+      "Secondary growth"
+    ],
+    "regionSlug": "western-andes",
+    "status": "Near Endemic",
+    "difficulty": "Easy",
+    "habitat": "Cloud forests and forest edges in the Western Andes",
+    "bestTime": "Year-round (most active early morning)",
+    "elevation": "1,200 - 2,400m",
+    "image": "/images/velvet-purple-coronet.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
+    "photoCredit": {
+      "photographer": "Martin Melendro",
+      "title": "AVES Lead Guide & Founder",
+      "teamLink": "/team#martin-melendro",
+      "reserve": "Jardín de Rocas",
+      "reserveLink": "/about/partners#jardin-de-rocas"
+    }
+  },
+  {
+    "id": "8",
+    "commonName": "Golden-headed Manakin",
+    "scientificName": "Ceratopipra erythrocephala",
+    "spanishName": "Saltarín Cabecidorado",
+    "primaryRegion": "Cauca River Region",
+    "secondaryRegions": [
+      "Western Andes",
+      "Central Andes"
+    ],
+    "ecoregions": [
+      "Tropical rainforest",
+      "Forest understory",
+      "Secondary growth",
+      "Forest edges"
+    ],
+    "regionSlug": "cauca-river",
+    "status": "Spectacular",
+    "difficulty": "Easy",
+    "habitat": "Understory of humid tropical forests and forest edges",
+    "bestTime": "Year-round (most active early morning)",
+    "elevation": "200 - 1,500m",
+    "image": "/images/gohman1.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-sOmUeeC5xVszFJSmeZ66Try02jkzGB.mp3",
+    "photoCredit": {
+      "photographer": "Martin Melendro",
+      "title": "AVES Lead Guide & Founder",
+      "teamLink": "/team#martin-melendro",
+      "reserve": "Refugio La Esmeralda",
+      "reserveLink": "/about/partners#refugio-la-esmeralda"
+    }
+  },
+  {
+    "id": "9",
+    "commonName": "Striped Manakin",
+    "scientificName": "Machaeropterus regulus",
+    "spanishName": "Saltarín Rayado",
+    "primaryRegion": "Cauca River Region",
+    "secondaryRegions": [
+      "Western Andes",
+      "Central Andes"
+    ],
+    "ecoregions": [
+      "Tropical rainforest",
+      "Forest understory",
+      "Secondary growth",
+      "Forest edges"
+    ],
+    "regionSlug": "cauca-river",
+    "status": "Spectacular",
+    "difficulty": "Moderate",
+    "habitat": "Understory of humid tropical forests and forest edges",
+    "bestTime": "Year-round (most active early morning)",
+    "elevation": "200 - 1,800m",
+    "image": "/images/strman5.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/strman5-M7ePaDFfvKHcN4hSew56PkYN1C7B8N.mp3",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Refugio La Esmeralda",
+      "reserveLink": "/about/partners#refugio-la-esmeralda"
+    }
+  },
+  {
+    "id": "10",
+    "commonName": "Scaled Dove",
+    "scientificName": "Columbina squammata",
+    "spanishName": "Tortolita Escamosa",
+    "primaryRegion": "Caribbean Coast",
+    "secondaryRegions": [
+      "Magdalena Valley"
+    ],
+    "ecoregions": [
+      "Dry tropical forest",
+      "Thorny scrubland",
+      "Arid lowlands",
+      "Desert edges"
+    ],
+    "regionSlug": "caribbean",
+    "status": "Spectacular",
+    "difficulty": "Easy",
+    "habitat": "Dry scrublands, thorny forests, and arid lowlands",
+    "bestTime": "Year-round (most active early morning and late afternoon)",
+    "elevation": "0 - 1,000m",
+    "image": "/images/scadov1.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/scadov1-ZY5P1ezfAmzpRMfahJV0otL1QasgoJ.mp3",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "La Guajira",
+      "reserveLink": "/about/partners#la-guajira"
+    }
+  },
+  {
+    "id": "11",
+    "commonName": "Yellow-throated Toucan",
+    "scientificName": "Ramphastos ambiguus",
+    "spanishName": "Tucán de Garganta Amarilla",
+    "primaryRegion": "Eastern Andes",
+    "secondaryRegions": [
+      "Central Andes",
+      "Western Andes"
+    ],
+    "ecoregions": [
+      "Montane cloud forest",
+      "Forest canopy",
+      "Secondary growth",
+      "Forest edges"
+    ],
+    "regionSlug": "eastern-andes",
+    "status": "Spectacular",
+    "difficulty": "Moderate",
+    "habitat": "Montane cloud forests and forest edges with fruiting trees",
+    "bestTime": "Year-round (most active early morning)",
+    "elevation": "800 - 2,400m",
+    "image": "/images/bkmtou1.jpg",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Chamicero de Perija",
+      "reserveLink": "/about/partners#proaves"
+    }
+  },
+  {
+    "id": "12",
+    "commonName": "Golden-headed Quetzal",
+    "scientificName": "Pharomachrus auriceps",
+    "spanishName": "Quetzal Cabecidorado",
+    "primaryRegion": "Eastern Andes",
+    "secondaryRegions": [
+      "Central Andes",
+      "Western Andes"
+    ],
+    "ecoregions": [
+      "Cloud forest",
+      "Montane forest",
+      "Forest canopy",
+      "Secondary growth"
+    ],
+    "regionSlug": "eastern-andes",
+    "status": "Spectacular",
+    "difficulty": "Moderate",
+    "habitat": "Cloud forests and montane forests with fruiting trees",
+    "bestTime": "Year-round (most active early morning)",
+    "elevation": "1,200 - 2,800m",
+    "image": "/images/gohque1.jpg",
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-O2SEW0cbNWsNGuBflkixHCiSmeivLj.mp3",
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Chamicero de Perija",
+      "reserveLink": "/about/partners#fundacion-proaves"
+    }
+  }
+]

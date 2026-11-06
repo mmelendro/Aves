@@ -24,7 +24,7 @@ export default function ContactPage() {
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Connect with our certified ornithologists for personalized consultation and expert birding guidance.
+              Tell us what you would love to see. We will help shape a personal birding itinerary in Colombia.
             </p>
 
             {/* Core Value Badges */}
@@ -70,10 +70,10 @@ export default function ContactPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Email Us</h3>
                   <p className="text-gray-600 mb-4">Get detailed responses from our ornithology experts</p>
                   <a
-                    href="mailto:info@aves.bio"
+                    href="mailto:mmelendro@gmail.com"
                     className="text-emerald-600 hover:text-emerald-700 font-semibold text-lg"
                   >
-                    info@aves.bio
+                    mmelendro@gmail.com
                   </a>
                 </CardContent>
               </Card>

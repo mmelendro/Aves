@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   ChevronLeft,
@@ -20,335 +19,25 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
+import { sitePath } from "@/lib/site-path"
 
-interface BirdData {
-  id: string
-  commonName: string
-  scientificName: string
-  spanishName: string
-  primaryRegion: string
-  secondaryRegions: string[]
-  ecoregions: string[]
-  regionSlug: string
-  status: "Endemic" | "Near Endemic" | "Spectacular"
-  difficulty: "Easy" | "Moderate" | "Challenging"
-  habitat: string
-  bestTime: string
-  elevation: string
-  image: string
-  audioFile?: string
-  photoCredit: {
-    photographer: string
-    title: string
-    teamLink?: string
-    instagramPost?: string
-    reserve?: string
-    reserveLink?: string
-  }
-}
+import { birdData as allBirds, type BirdProfile } from "@/content/birds"
 
-const birdData: BirdData[] = [
-  {
-    id: "1",
-    commonName: "Green-bearded Helmetcrest",
-    scientificName: "Oxypogon guerinii",
-    spanishName: "Colibrí Crestado Verde",
-    primaryRegion: "Eastern Andes",
-    secondaryRegions: ["Central Andes"],
-    ecoregions: ["High-altitude páramo", "Cloud forest edges", "Alpine scrubland"],
-    regionSlug: "eastern-andes",
-    status: "Endemic",
-    difficulty: "Challenging",
-    habitat: "High-altitude páramo and cloud forest edges above 3,000m",
-    bestTime: "December - March (dry season)",
-    elevation: "3,000 - 4,200m",
-    image: "/images/green-bearded-helmetcrest.png",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
-    photoCredit: {
-      photographer: "Nicolás Rozo",
-      title: "AVES Guide",
-      teamLink: "/team#nicolas-rozo",
-      instagramPost: "https://www.instagram.com/p/C247ZDJgXBa/",
-      reserve: "Parque Natural Del Sumapaz",
-      reserveLink: "/about/partners#parque-natural-del-sumapaz",
-    },
-  },
-  {
-    id: "2",
-    commonName: "Rainbow-bearded Thornbill",
-    scientificName: "Chalcostigma herrani",
-    spanishName: "Colibrí Barbudo Arcoíris",
-    primaryRegion: "Central Andes",
-    secondaryRegions: ["Eastern Andes"],
-    ecoregions: ["Páramo grasslands", "Volcanic slopes", "Alpine scrub", "High-altitude wetlands"],
-    regionSlug: "central-andes",
-    status: "Endemic",
-    difficulty: "Challenging",
-    habitat: "High-altitude páramo and volcanic slopes with scattered shrubs",
-    bestTime: "December - March (clear weather)",
-    elevation: "3,200 - 4,500m",
-    image: "/images/rabtho1.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "Termales del Ruiz",
-      reserveLink: "/about/partners#termales-del-ruiz",
-    },
-  },
-  {
-    id: "3",
-    commonName: "Black-billed Mountain-Toucan",
-    scientificName: "Andigena nigrirostris",
-    spanishName: "Tucán Andino Piquinegro",
-    primaryRegion: "Central Andes",
-    secondaryRegions: ["Western Andes", "Eastern Andes"],
-    ecoregions: ["Montane cloud forest", "Forest canopy", "Secondary growth", "Forest edges"],
-    regionSlug: "central-andes",
-    status: "Near Endemic",
-    difficulty: "Moderate",
-    habitat: "Montane cloud forests and forest edges with fruiting trees",
-    bestTime: "Year-round (most active mornings)",
-    elevation: "1,500 - 2,800m",
-    image: "/images/bbmtou1-square.png",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "Reserva Río Blanco",
-      reserveLink: "/about/partners#reserva-rio-blanco",
-    },
-  },
-  {
-    id: "4",
-    commonName: "Chestnut-crowned Antpitta",
-    scientificName: "Grallaria ruficapilla",
-    spanishName: "Tororoi Coronirrufo",
-    primaryRegion: "Colombian Massif",
-    secondaryRegions: ["Central Andes", "Western Andes"],
-    ecoregions: ["Cloud forest understory", "Dense leaf litter", "Bamboo thickets", "Mossy forest floor"],
-    regionSlug: "colombian-massif",
-    status: "Endemic",
-    difficulty: "Moderate",
-    habitat: "Dense cloud forest understory with thick leaf litter",
-    bestTime: "Year-round (dawn and dusk)",
-    elevation: "1,800 - 3,200m",
-    image: "/images/chestnut-crowned-antpitta.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
-    photoCredit: {
-      photographer: "Martin Melendro",
-      title: "AVES Guide",
-      teamLink: "/team#martin-melendro",
-      reserve: "Reserva Río Blanco",
-      reserveLink: "/about/partners#reserva-rio-blanco",
-    },
-  },
-  {
-    id: "5",
-    commonName: "Andean Motmot",
-    scientificName: "Momotus aequatorialis",
-    spanishName: "Momoto Andino",
-    primaryRegion: "Central Andes",
-    secondaryRegions: ["Western Andes", "Eastern Andes", "Colombian Massif"],
-    ecoregions: [
-      "Subtropical forest midstory",
-      "Mossy cloud forest",
-      "Forest edges",
-      "Secondary growth",
-      "Foothills to subtropical zone",
-    ],
-    regionSlug: "central-andes",
-    status: "Near Endemic",
-    difficulty: "Easy",
-    habitat: "Midstory of mossy subtropical forests, forest edges from foothills into subtropical zone",
-    bestTime: "Year-round (most active early morning)",
-    elevation: "1,200 - 2,600m",
-    image: "/images/blue-crowned-motmot-new.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
-    photoCredit: {
-      photographer: "Martin Meléndro",
-      title: "AVES Guide",
-      teamLink: "/team#martin-melendro",
-      reserve: "Reserva Río Blanco",
-      reserveLink: "/about/partners#reserva-rio-blanco",
-    },
-  },
-  {
-    id: "6",
-    commonName: "Vermilion Cardinal",
-    scientificName: "Cardinalis phoeniceus",
-    spanishName: "Cardenal Guajiro",
-    primaryRegion: "Caribbean Coast",
-    secondaryRegions: [],
-    ecoregions: ["Dry tropical forest", "Thorny scrubland", "Desert edges", "Arid lowlands"],
-    regionSlug: "caribbean",
-    status: "Endemic",
-    difficulty: "Moderate",
-    habitat: "Dry scrublands and thorny forests of the Guajira Peninsula",
-    bestTime: "December - April (dry season)",
-    elevation: "0 - 800m",
-    image: "/images/cardinal-guajiro.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "La Guajira",
-      reserveLink: "/about/partners#la-guajira",
-    },
-  },
-  {
-    id: "7",
-    commonName: "Velvet-purple Coronet",
-    scientificName: "Boissonneaua jardini",
-    spanishName: "Coronita Terciopelo Púrpura",
-    primaryRegion: "Western Andes",
-    secondaryRegions: ["Central Andes"],
-    ecoregions: ["Cloud forest", "Montane forest", "Forest edges", "Secondary growth"],
-    regionSlug: "western-andes",
-    status: "Near Endemic",
-    difficulty: "Easy",
-    habitat: "Cloud forests and forest edges in the Western Andes",
-    bestTime: "Year-round (most active early morning)",
-    elevation: "1,200 - 2,400m",
-    image: "/images/velvet-purple-coronet.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
-    photoCredit: {
-      photographer: "Martin Melendro",
-      title: "AVES Lead Guide & Founder",
-      teamLink: "/team#martin-melendro",
-      reserve: "Jardín de Rocas",
-      reserveLink: "/about/partners#jardin-de-rocas",
-    },
-  },
-  {
-    id: "8",
-    commonName: "Golden-headed Manakin",
-    scientificName: "Ceratopipra erythrocephala",
-    spanishName: "Saltarín Cabecidorado",
-    primaryRegion: "Cauca River Region",
-    secondaryRegions: ["Western Andes", "Central Andes"],
-    ecoregions: ["Tropical rainforest", "Forest understory", "Secondary growth", "Forest edges"],
-    regionSlug: "cauca-river",
-    status: "Spectacular",
-    difficulty: "Easy",
-    habitat: "Understory of humid tropical forests and forest edges",
-    bestTime: "Year-round (most active early morning)",
-    elevation: "200 - 1,500m",
-    image: "/images/gohman1.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-sOmUeeC5xVszFJSmeZ66Try02jkzGB.mp3",
-    photoCredit: {
-      photographer: "Martin Melendro",
-      title: "AVES Lead Guide & Founder",
-      teamLink: "/team#martin-melendro",
-      reserve: "Refugio La Esmeralda",
-      reserveLink: "/about/partners#refugio-la-esmeralda",
-    },
-  },
-  {
-    id: "9",
-    commonName: "Striped Manakin",
-    scientificName: "Machaeropterus regulus",
-    spanishName: "Saltarín Rayado",
-    primaryRegion: "Cauca River Region",
-    secondaryRegions: ["Western Andes", "Central Andes"],
-    ecoregions: ["Tropical rainforest", "Forest understory", "Secondary growth", "Forest edges"],
-    regionSlug: "cauca-river",
-    status: "Spectacular",
-    difficulty: "Moderate",
-    habitat: "Understory of humid tropical forests and forest edges",
-    bestTime: "Year-round (most active early morning)",
-    elevation: "200 - 1,800m",
-    image: "/images/strman5.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/strman5-M7ePaDFfvKHcN4hSew56PkYN1C7B8N.mp3",
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "Refugio La Esmeralda",
-      reserveLink: "/about/partners#refugio-la-esmeralda",
-    },
-  },
-  {
-    id: "10",
-    commonName: "Scaled Dove",
-    scientificName: "Columbina squammata",
-    spanishName: "Tortolita Escamosa",
-    primaryRegion: "Caribbean Coast",
-    secondaryRegions: ["Magdalena Valley"],
-    ecoregions: ["Dry tropical forest", "Thorny scrubland", "Arid lowlands", "Desert edges"],
-    regionSlug: "caribbean",
-    status: "Spectacular",
-    difficulty: "Easy",
-    habitat: "Dry scrublands, thorny forests, and arid lowlands",
-    bestTime: "Year-round (most active early morning and late afternoon)",
-    elevation: "0 - 1,000m",
-    image: "/images/scadov1.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/scadov1-ZY5P1ezfAmzpRMfahJV0otL1QasgoJ.mp3",
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "La Guajira",
-      reserveLink: "/about/partners#la-guajira",
-    },
-  },
-  {
-    id: "11",
-    commonName: "Yellow-throated Toucan",
-    scientificName: "Ramphastos ambiguus",
-    spanishName: "Tucán de Garganta Amarilla",
-    primaryRegion: "Eastern Andes",
-    secondaryRegions: ["Central Andes", "Western Andes"],
-    ecoregions: ["Montane cloud forest", "Forest canopy", "Secondary growth", "Forest edges"],
-    regionSlug: "eastern-andes",
-    status: "Spectacular",
-    difficulty: "Moderate",
-    habitat: "Montane cloud forests and forest edges with fruiting trees",
-    bestTime: "Year-round (most active early morning)",
-    elevation: "800 - 2,400m",
-    image: "/images/bkmtou1.jpg",
-    // Removed audioFile to prevent the error
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "Chamicero de Perija",
-      reserveLink: "/about/partners#proaves",
-    },
-  },
-  {
-    id: "12",
-    commonName: "Golden-headed Quetzal",
-    scientificName: "Pharomachrus auriceps",
-    spanishName: "Quetzal Cabecidorado",
-    primaryRegion: "Eastern Andes",
-    secondaryRegions: ["Central Andes", "Western Andes"],
-    ecoregions: ["Cloud forest", "Montane forest", "Forest canopy", "Secondary growth"],
-    regionSlug: "eastern-andes",
-    status: "Spectacular",
-    difficulty: "Moderate",
-    habitat: "Cloud forests and montane forests with fruiting trees",
-    bestTime: "Year-round (most active early morning)",
-    elevation: "1,200 - 2,800m",
-    image: "/images/gohque1.jpg",
-    audioFile: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-O2SEW0cbNWsNGuBflkixHCiSmeivLj.mp3",
-    photoCredit: {
-      photographer: "Royann",
-      title: "Wildlife Photographer",
-      reserve: "Chamicero de Perija",
-      reserveLink: "/about/partners#fundacion-proaves",
-    },
-  },
-]
 
 interface HomepageBirdCarouselProps {
   className?: string
   autoPlay?: boolean
   autoPlayInterval?: number
+  birds?: BirdProfile[]
 }
 
 export default function HomepageBirdCarousel({
   className,
   autoPlay = true,
   autoPlayInterval = 8000,
+  birds = allBirds,
 }: HomepageBirdCarouselProps) {
+  const birdData = birds
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
@@ -365,44 +54,35 @@ export default function HomepageBirdCarousel({
   const [showVolumeSlider, setShowVolumeSlider] = useState(false)
   const [audioError, setAudioError] = useState(false)
   const [audioLoading, setAudioLoading] = useState(false)
-  const [audioReady, setAudioReady] = useState(false)
-  const [userInteracted, setUserInteracted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [audioFileExists, setAudioFileExists] = useState<Record<string, boolean>>({})
 
   // Thumbnail navigation state
   const [thumbnailScrollPosition, setThumbnailScrollPosition] = useState(0)
+  const [thumbnailViewport, setThumbnailViewport] = useState(0)
   const thumbnailContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const container = thumbnailContainerRef.current
+    if (!container) return
+    const update = () => setThumbnailViewport(container.clientWidth)
+    const observer = new ResizeObserver(update)
+    observer.observe(container)
+    update()
+    return () => observer.disconnect()
+  }, [])
 
   // Audio refs and management
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  const audioContextRef = useRef<AudioContext | null>(null)
-  const loadTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const eventListenersRef = useRef<Array<{ event: string; handler: EventListener }>>([])
+  const volumeRef = useRef(volume)
+  const playAttemptRef = useRef(0)
 
   const currentBird = birdData[currentIndex]
 
-  // Check if current bird should show the Explore Region button (only Vermilion Cardinal)
-  const shouldShowExploreRegion = currentBird.id === "6" // Vermilion Cardinal
+  // Every featured photograph is linked to its featured region.
+  const shouldShowExploreRegion = Boolean(currentBird.regionSlug)
 
-  // Check if current bird should show eBird button - Updated to exclude Yellow-throated Toucan
-  const shouldShowEBirdButton = ["8", "9", "10", "12"].includes(currentBird.id) // Golden-headed Manakin, Striped Manakin, Scaled Dove, Golden-headed Quetzal
-
-  // Get eBird URL for current bird - Updated to exclude Yellow-throated Toucan
-  const getEBirdUrl = (birdId: string) => {
-    switch (birdId) {
-      case "8":
-        return "https://ebird.org/species/gohman1"
-      case "9":
-        return "https://ebird.org/species/strman5"
-      case "10":
-        return "https://ebird.org/species/scadov1"
-      case "12":
-        return "https://ebird.org/species/gohque1"
-      default:
-        return ""
-    }
-  }
+  const speciesSource = currentBird.sources[0]
+  const shouldShowBirdGuideButton = Boolean(speciesSource)
 
   // Detect mobile device on mount
   useEffect(() => {
@@ -431,7 +111,7 @@ export default function HomepageBirdCarousel({
       setThumbnailScrollPosition(newPosition)
       container.scrollTo({ left: newPosition, behavior: "smooth" })
     },
-    [thumbnailScrollPosition],
+    [thumbnailScrollPosition, thumbnailViewport],
   )
 
   const canScrollThumbnails = useCallback(
@@ -445,506 +125,66 @@ export default function HomepageBirdCarousel({
         return thumbnailScrollPosition < container.scrollWidth - container.clientWidth
       }
     },
-    [thumbnailScrollPosition],
+    [thumbnailScrollPosition, thumbnailViewport],
   )
 
-  // Enhanced audio file validation with better error handling
-  const checkAudioFileExists = useCallback(
-    async (audioFile: string): Promise<boolean> => {
-      if (audioFileExists[audioFile] !== undefined) {
-        return audioFileExists[audioFile]
-      }
-
-      try {
-        // First try a HEAD request
-        const response = await fetch(audioFile, { method: "HEAD" })
-        if (response.ok) {
-          setAudioFileExists((prev) => ({ ...prev, [audioFile]: true }))
-          return true
-        }
-
-        // If HEAD fails, try a GET request with range header to minimize data transfer
-        const rangeResponse = await fetch(audioFile, {
-          headers: { Range: "bytes=0-1023" }, // Just get first 1KB
-        })
-
-        if (rangeResponse.ok || rangeResponse.status === 206) {
-          setAudioFileExists((prev) => ({ ...prev, [audioFile]: true }))
-          return true
-        }
-
-        throw new Error(`HTTP ${response.status}`)
-      } catch (error) {
-        console.warn(`Audio file validation failed for ${audioFile}:`, error)
-        setAudioFileExists((prev) => ({ ...prev, [audioFile]: false }))
-        return false
-      }
-    },
-    [audioFileExists],
-  )
-
-  // Initialize AudioContext for mobile browsers
-  const initializeAudioContext = useCallback(async () => {
-    if (!isMobile || audioContextRef.current) return true
-
-    try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
-      if (AudioContextClass) {
-        audioContextRef.current = new AudioContextClass()
-
-        // Resume context if suspended (common on mobile)
-        if (audioContextRef.current.state === "suspended") {
-          await audioContextRef.current.resume()
-        }
-
-        return audioContextRef.current.state === "running"
-      }
-    } catch (error) {
-      console.warn("AudioContext initialization failed:", error)
-    }
-
-    return false
-  }, [isMobile])
-
-  // Enhanced audio cleanup function with proper event listener removal
-  const cleanupAudio = useCallback(() => {
-    // Clear timeout
-    if (loadTimeoutRef.current) {
-      clearTimeout(loadTimeoutRef.current)
-      loadTimeoutRef.current = null
-    }
-
-    // Clean up existing audio with proper event listener removal
-    if (audioRef.current) {
-      // Pause and reset audio
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
-
-      // Remove all tracked event listeners
-      eventListenersRef.current.forEach(({ event, handler }) => {
-        audioRef.current?.removeEventListener(event, handler)
-      })
-      eventListenersRef.current = []
-
-      // Only clear src after removing event listeners to prevent error events
-      try {
-        audioRef.current.src = ""
-        audioRef.current.load()
-      } catch (error) {
-        // Ignore errors during cleanup
-      }
-
-      audioRef.current = null
-    }
-
-    // Reset audio states
+  // Each slide owns one audio element. Volume changes must not recreate it.
+  useEffect(() => {
+    const audio = audioRef.current
     setIsAudioPlaying(false)
     setAudioError(false)
     setAudioLoading(false)
-    setAudioReady(false)
-  }, [])
+    setShowVolumeSlider(false)
+    if (audio) audio.volume = volumeRef.current
+    return () => { audio?.pause() }
+  }, [currentBird.audioFile])
 
-  // Enhanced audio initialization with better error handling and file validation
-  const initializeAudio = useCallback(async () => {
-    cleanupAudio()
-
-    if (!currentBird.audioFile) {
-      return
-    }
-
-    try {
-      // First check if audio file exists
-      const fileExists = await checkAudioFileExists(currentBird.audioFile)
-      if (!fileExists) {
-        console.warn(`Audio file not found: ${currentBird.audioFile}`)
-        setAudioError(true)
-        setAudioLoading(false)
-        setAudioReady(false)
-        return
-      }
-
-      setAudioLoading(true)
-      setAudioError(false)
-      setAudioReady(false)
-
-      // Initialize AudioContext for mobile
-      if (isMobile) {
-        await initializeAudioContext()
-      }
-
-      // Create new audio element with mobile-optimized settings
-      const audio = new Audio()
-      audioRef.current = audio
-
-      // Mobile-specific audio attributes
-      if (isMobile) {
-        audio.setAttribute("playsinline", "true")
-        audio.setAttribute("webkit-playsinline", "true")
-        audio.preload = "metadata" // Better for mobile
-      } else {
-        audio.preload = "metadata"
-      }
-
-      audio.crossOrigin = "anonymous"
-      audio.volume = volume
-      audio.loop = false
-
-      // Enhanced event listeners with better mobile handling
-      const addEventListenerWithTracking = (event: string, handler: EventListener) => {
-        audio.addEventListener(event, handler)
-        eventListenersRef.current.push({ event, handler })
-      }
-
-      const handleLoadStart = () => {
-        console.log(`Audio load started: ${currentBird.commonName}`)
-        setAudioLoading(true)
-        setAudioError(false)
-      }
-
-      const handleLoadedData = () => {
-        console.log(`Audio data loaded: ${currentBird.commonName}`)
-        setAudioLoading(false)
-        setAudioReady(true)
-        setAudioError(false)
-
-        if (loadTimeoutRef.current) {
-          clearTimeout(loadTimeoutRef.current)
-          loadTimeoutRef.current = null
-        }
-      }
-
-      const handleCanPlay = () => {
-        console.log(`Audio can play: ${currentBird.commonName}`)
-        setAudioLoading(false)
-        setAudioReady(true)
-        setAudioError(false)
-      }
-
-      const handleCanPlayThrough = () => {
-        console.log(`Audio can play through: ${currentBird.commonName}`)
-        setAudioLoading(false)
-        setAudioReady(true)
-        setAudioError(false)
-      }
-
-      const handleEnded = () => {
-        console.log(`Audio ended: ${currentBird.commonName}`)
-        setIsAudioPlaying(false)
-      }
-
-      const handleError = (e: Event) => {
-        // Only handle errors if this is still the current audio element
-        if (audioRef.current !== audio) {
-          return
-        }
-
-        const error = audio.error
-        let errorMessage = "Audio file not available"
-
-        if (error) {
-          switch (error.code) {
-            case MediaError.MEDIA_ERR_ABORTED:
-              errorMessage = "Audio loading was aborted"
-              break
-            case MediaError.MEDIA_ERR_NETWORK:
-              errorMessage = "Network error loading audio"
-              break
-            case MediaError.MEDIA_ERR_DECODE:
-              errorMessage = "Audio format not supported"
-              break
-            case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-              errorMessage = "Audio file not found or format not supported"
-              break
-          }
-        }
-
-        console.warn(`Audio error for ${currentBird.commonName}:`, errorMessage)
-
-        // Mark file as non-existent for future reference
-        if (currentBird.audioFile) {
-          setAudioFileExists((prev) => ({ ...prev, [currentBird.audioFile!]: false }))
-        }
-
-        setAudioError(true)
-        setIsAudioPlaying(false)
-        setAudioLoading(false)
-        setAudioReady(false)
-      }
-
-      const handleStalled = () => {
-        console.warn(`Audio stalled: ${currentBird.commonName}`)
-      }
-
-      const handleWaiting = () => {
-        console.log(`Audio waiting: ${currentBird.commonName}`)
-        setAudioLoading(true)
-      }
-
-      const handlePlaying = () => {
-        console.log(`Audio playing: ${currentBird.commonName}`)
-        setIsAudioPlaying(true)
-        setAudioLoading(false)
-        setAudioError(false)
-      }
-
-      const handlePause = () => {
-        console.log(`Audio paused: ${currentBird.commonName}`)
-        setIsAudioPlaying(false)
-      }
-
-      // Add all event listeners with tracking
-      addEventListenerWithTracking("loadstart", handleLoadStart)
-      addEventListenerWithTracking("loadeddata", handleLoadedData)
-      addEventListenerWithTracking("canplay", handleCanPlay)
-      addEventListenerWithTracking("canplaythrough", handleCanPlayThrough)
-      addEventListenerWithTracking("ended", handleEnded)
-      addEventListenerWithTracking("error", handleError)
-      addEventListenerWithTracking("stalled", handleStalled)
-      addEventListenerWithTracking("waiting", handleWaiting)
-      addEventListenerWithTracking("playing", handlePlaying)
-      addEventListenerWithTracking("pause", handlePause)
-
-      // Set timeout for loading (mobile networks can be slow)
-      loadTimeoutRef.current = setTimeout(() => {
-        if (audioRef.current === audio && !audioReady && !audioError) {
-          console.warn(`Audio load timeout: ${currentBird.commonName}`)
-          setAudioError(true)
-          setAudioLoading(false)
-          setAudioReady(false)
-        }
-      }, 10000) // 10 second timeout for mobile
-
-      // Set the source last to trigger loading
-      audio.src = currentBird.audioFile
-
-      // For mobile devices, explicitly call load()
-      if (isMobile) {
-        audio.load()
-      }
-    } catch (error) {
-      console.error(`Error initializing audio for ${currentBird.commonName}:`, error)
-      setAudioError(true)
-      setAudioLoading(false)
-      setAudioReady(false)
-    }
-  }, [
-    currentBird.audioFile,
-    currentBird.commonName,
-    volume,
-    cleanupAudio,
-    initializeAudioContext,
-    isMobile,
-    checkAudioFileExists,
-  ])
-
-  // Enhanced audio toggle with mobile-specific handling
   const toggleAudio = useCallback(async () => {
-    // Mark user interaction for mobile autoplay policies
-    if (!userInteracted) {
-      setUserInteracted(true)
-    }
-
-    if (!audioRef.current || !currentBird.audioFile) {
-      console.warn("No audio element or file available")
-      return
-    }
-
-    // Check if audio file exists before attempting to play
-    if (audioFileExists[currentBird.audioFile] === false) {
-      console.warn("Audio file does not exist, cannot play")
-      setAudioError(true)
-      return
-    }
-
-    try {
-      if (isAudioPlaying) {
-        // Pause audio
-        audioRef.current.pause()
-        setIsAudioPlaying(false)
-        console.log(`Audio paused: ${currentBird.commonName}`)
-      } else {
-        // Play audio
-        if (audioError) {
-          console.log("Audio error detected, reinitializing...")
-          await initializeAudio()
-          // Wait a bit for initialization
-          await new Promise((resolve) => setTimeout(resolve, 500))
-        }
-
-        if (!audioRef.current) {
-          console.warn("Audio element not available after initialization")
-          return
-        }
-
-        // Ensure AudioContext is running for mobile
-        if (isMobile) {
-          await initializeAudioContext()
-        }
-
-        setAudioLoading(true)
-
-        // Check if audio is ready to play
-        if (audioReady || audioRef.current.readyState >= 2) {
-          try {
-            const playPromise = audioRef.current.play()
-
-            if (playPromise !== undefined) {
-              await playPromise
-              setIsAudioPlaying(true)
-              setAudioLoading(false)
-              console.log(`Audio started playing: ${currentBird.commonName}`)
-            }
-          } catch (playError) {
-            console.error(`Error playing audio for ${currentBird.commonName}:`, playError)
-            setAudioError(true)
-            setIsAudioPlaying(false)
-            setAudioLoading(false)
-
-            // Try to reinitialize on play error (common on mobile)
-            if (isMobile) {
-              setTimeout(() => initializeAudio(), 1000)
-            }
-          }
-        } else {
-          // Audio not ready, wait for it
-          console.log("Audio not ready, waiting...")
-
-          const waitForReady = () => {
-            if (audioRef.current && (audioReady || audioRef.current.readyState >= 2)) {
-              audioRef.current
-                .play()
-                .then(() => {
-                  setIsAudioPlaying(true)
-                  setAudioLoading(false)
-                  console.log(`Audio started playing (after wait): ${currentBird.commonName}`)
-                })
-                .catch((error) => {
-                  console.error(`Error playing audio after wait: ${currentBird.commonName}:`, error)
-                  setAudioError(true)
-                  setIsAudioPlaying(false)
-                  setAudioLoading(false)
-                })
-            } else {
-              // Still not ready, set error
-              console.warn(`Audio still not ready: ${currentBird.commonName}`)
-              setAudioError(true)
-              setAudioLoading(false)
-            }
-          }
-
-          // Wait up to 3 seconds for audio to be ready
-          setTimeout(waitForReady, 3000)
-        }
-      }
-    } catch (error) {
-      console.error(`Error toggling audio for ${currentBird.commonName}:`, error)
-      setAudioError(true)
-      setIsAudioPlaying(false)
+    const audio = audioRef.current
+    if (!audio || !currentBird.audioFile) return
+    const attempt = ++playAttemptRef.current
+    if (!audio.paused) {
+      audio.pause()
       setAudioLoading(false)
+      setAudioError(false)
+      return
     }
-  }, [
-    isAudioPlaying,
-    currentBird.audioFile,
-    currentBird.commonName,
-    audioError,
-    audioReady,
-    userInteracted,
-    initializeAudio,
-    initializeAudioContext,
-    isMobile,
-    audioFileExists,
-  ])
+    setAudioError(false)
+    setAudioLoading(true)
+    try {
+      if (audio.error) audio.load()
+      // Keep play in the click handler so touch browsers retain user activation.
+      await audio.play()
+    } catch (error) {
+      if (audioRef.current !== audio || playAttemptRef.current !== attempt) return
+      setAudioError(!(error instanceof DOMException && error.name === "AbortError"))
+      setAudioLoading(false)
+      setIsAudioPlaying(false)
+    }
+  }, [currentBird.audioFile])
 
   const handleVolumeChange = useCallback((newVolume: number) => {
-    setVolume(newVolume)
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume
-    }
+    const nextVolume = Math.max(0, Math.min(1, newVolume))
+    volumeRef.current = nextVolume
+    setVolume(nextVolume)
+    if (audioRef.current) audioRef.current.volume = nextVolume
   }, [])
 
-  // Initialize audio when bird changes
+  // The main image and lazy thumbnails load on demand, rather than fetching
+  // twenty full-size photographs on a mobile connection.
   useEffect(() => {
-    initializeAudio()
+    if (autoPlay && firstImageLoaded) setIsPlaying(true)
+  }, [autoPlay, firstImageLoaded])
 
-    return () => {
-      cleanupAudio()
-    }
-  }, [initializeAudio, cleanupAudio])
-
-  // Cleanup on unmount
   useEffect(() => {
-    return () => {
-      cleanupAudio()
-      if (audioContextRef.current) {
-        audioContextRef.current.close()
-      }
-    }
-  }, [cleanupAudio])
-
-  // Preload all images on component mount with proper error handling
-  useEffect(() => {
-    const preloadImages = async () => {
-      try {
-        const imagePromises = birdData.map((bird, index) => {
-          return new Promise<void>((resolve) => {
-            const img = new window.Image()
-
-            const handleLoad = () => {
-              setPreloadedImages((prev) => new Set(prev).add(bird.image))
-              if (index === 0) {
-                setFirstImageLoaded(true)
-                setIsLoading(false)
-                setImageLoaded(true)
-                // Start autoplay only after first image is loaded
-                if (autoPlay) {
-                  setTimeout(() => setIsPlaying(true), 1000)
-                }
-              }
-              resolve()
-            }
-
-            const handleError = () => {
-              console.warn(`Failed to load image: ${bird.image}`)
-              if (index === 0) {
-                setFirstImageLoaded(true)
-                setIsLoading(false)
-                setImageError(true)
-              }
-              resolve()
-            }
-
-            img.onload = handleLoad
-            img.onerror = handleError
-            img.src = bird.image
-          })
-        })
-
-        // Wait for at least the first image to load/fail
-        try {
-          await imagePromises[0]
-        } catch (error) {
-          console.warn("Error loading first image:", error)
-          setFirstImageLoaded(true)
-          setIsLoading(false)
-          setImageError(true)
-        }
-
-        // Continue loading other images in background
-        try {
-          await Promise.allSettled(imagePromises.slice(1))
-        } catch (error) {
-          console.warn("Error loading additional images:", error)
-        }
-      } catch (error) {
-        console.warn("Error in preloadImages:", error)
-        setFirstImageLoaded(true)
-        setIsLoading(false)
-        setImageError(true)
-      }
-    }
-
-    preloadImages()
-  }, [autoPlay])
+    const container = thumbnailContainerRef.current
+    const selected = container?.querySelector<HTMLButtonElement>('[aria-pressed="true"]')
+    if (!container || !selected) return
+    const left = selected.offsetLeft
+    const right = left + selected.offsetWidth
+    if (left < container.scrollLeft) container.scrollTo({ left, behavior: "auto" })
+    else if (right > container.scrollLeft + container.clientWidth) container.scrollTo({ left: right - container.clientWidth, behavior: "auto" })
+  }, [currentIndex])
 
   // Enhanced slide navigation with audio completion check
   const nextSlide = useCallback(() => {
@@ -1033,128 +273,36 @@ export default function HomepageBirdCarousel({
   useEffect(() => {
     if (isPlaying && firstImageLoaded) {
       // If audio is playing, wait for it to complete before advancing
-      if (isAudioPlaying) {
-        return // Don't set interval while audio is playing
+      if (isAudioPlaying || audioLoading) {
+        return // Keep the selected bird visible while its recording plays or buffers
       }
 
       const interval = setInterval(nextSlide, autoPlayInterval)
       return () => clearInterval(interval)
     }
-  }, [isPlaying, nextSlide, autoPlayInterval, firstImageLoaded, isAudioPlaying])
+  }, [isPlaying, nextSlide, autoPlayInterval, firstImageLoaded, isAudioPlaying, audioLoading])
 
   const handleImageLoad = useCallback(() => {
     setIsLoading(false)
     setImageLoaded(true)
     setImageError(false)
-  }, [])
+    setFirstImageLoaded(true)
+    setPreloadedImages(previous => new Set(previous).add(currentBird.image))
+  }, [currentBird.image])
 
   const handleImageError = useCallback(() => {
     console.warn(`Failed to load current image: ${currentBird.image}`)
     setIsLoading(false)
     setImageLoaded(false)
     setImageError(true)
+    setFirstImageLoaded(true)
   }, [currentBird.image])
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Endemic":
-        return "bg-red-100 text-red-800 border-red-200"
-      case "Near Endemic":
-        return "bg-orange-100 text-orange-800 border-orange-200"
-      case "Spectacular":
-        return "bg-purple-100 text-purple-800 border-purple-200"
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200"
-    }
-  }
+  const getImagePositioning = (birdId: string) => ({
+    objectPosition: birdData.find(bird => bird.id === birdId)?.imagePosition || "center center",
+    transform: "none",
+  })
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Easy":
-        return "bg-green-100 text-green-800 border-green-200"
-      case "Moderate":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200"
-      case "Challenging":
-        return "bg-red-100 text-red-800 border-red-200"
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200"
-    }
-  }
-
-  // Enhanced image positioning for perfect square framing with focus on bird's eye and wing - Updated to include Golden-headed Quetzal
-  const getImagePositioning = (birdId: string) => {
-    switch (birdId) {
-      case "1": // Green-bearded Helmetcrest
-        return {
-          objectPosition: "center 35%",
-          transform: "scale(1.2)",
-        }
-      case "2": // Rainbow-bearded Thornbill
-        return {
-          objectPosition: "center 25%",
-          transform: "scale(1.15)",
-        }
-      case "3": // Black-billed Mountain-Toucan
-        return {
-          objectPosition: "center 20%",
-          transform: "scale(1.0)",
-        }
-      case "4": // Chestnut-crowned Antpitta
-        return {
-          objectPosition: "center 40%",
-          transform: "scale(1.1)",
-        }
-      case "5": // Andean Motmot
-        return {
-          objectPosition: "center center",
-          transform: "scale(1.1)",
-        }
-      case "6": // Vermilion Cardinal
-        return {
-          objectPosition: "center 25%",
-          transform: "scale(1.1)",
-        }
-      case "7": // Velvet-purple Coronet
-        return {
-          objectPosition: "center 30%",
-          transform: "scale(1.1)",
-        }
-      case "8": // Golden-headed Manakin
-        return {
-          objectPosition: "center 30%",
-          transform: "scale(1.2)",
-        }
-      case "9": // Striped Manakin
-        return {
-          objectPosition: "center 35%",
-          transform: "scale(1.15)",
-        }
-      case "10": // Scaled Dove
-        return {
-          objectPosition: "center 40%",
-          transform: "scale(1.1)",
-        }
-      case "11": // Yellow-throated Toucan
-        return {
-          objectPosition: "center 30%",
-          transform: "scale(1.1)",
-        }
-      case "12": // Golden-headed Quetzal
-        return {
-          objectPosition: "center 25%",
-          transform: "scale(1.15)",
-        }
-      default:
-        return {
-          objectPosition: "center center",
-          transform: "scale(1.1)",
-        }
-    }
-  }
-
-  const currentImagePositioning = getImagePositioning(currentBird.id)
-
-  // Updated region colors to match Aves Explorer map exactly
   const getPrimaryRegionColor = (region: string) => {
     switch (region) {
       case "Pacific":
@@ -1284,21 +432,37 @@ export default function HomepageBirdCarousel({
   }
 
   // Check if current bird has audio and it's available
-  const hasAvailableAudio = currentBird.audioFile && audioFileExists[currentBird.audioFile] !== false
+  const hasAvailableAudio = Boolean(currentBird.audioFile)
 
   // Get the current bird's region colors for photo credit
   const regionColors = getRegionTextColor(currentBird.primaryRegion)
+  const currentImagePositioning = getImagePositioning(currentBird.id)
 
   return (
-    <div className={cn("relative w-full max-w-md mx-auto carousel-container", className)}>
+    <div className={cn("relative min-w-0 w-full max-w-md mx-auto carousel-container", className)}>
+      {currentBird.audioFile && (
+        <audio
+          key={currentBird.id}
+          ref={audioRef}
+          src={currentBird.audioFile ? sitePath(currentBird.audioFile) : undefined}
+          preload="none"
+          aria-label={`${currentBird.commonName} recording`}
+          onPlaying={() => { setIsAudioPlaying(true); setAudioLoading(false); setAudioError(false) }}
+          onPause={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
+          onEnded={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
+          onWaiting={(event) => { if (!event.currentTarget.paused) setAudioLoading(true) }}
+          onError={() => { setAudioError(true); setIsAudioPlaying(false); setAudioLoading(false) }}
+        />
+      )}
       <Card className="overflow-hidden border-0 shadow-xl">
         <div className="relative">
           {/* Main Image - Perfect Square */}
           <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-emerald-50 to-blue-50 carousel-image-container">
             {!imageError ? (
               <Image
-                src={currentBird.image || "/placeholder.svg"}
-                alt={`${currentBird.commonName} - ${currentBird.primaryRegion}`}
+                key={currentBird.id}
+                src={sitePath(currentBird.image || "/placeholder.svg")}
+                alt={currentBird.commonName}
                 fill
                 className={cn(
                   "object-cover transition-all duration-700 ease-out carousel-slide",
@@ -1390,7 +554,7 @@ export default function HomepageBirdCarousel({
                       size="sm"
                       className={cn(
                         "text-white border-0 w-9 h-9 p-0 rounded-full transition-all duration-200 carousel-button shadow-lg",
-                        audioError && "opacity-50 cursor-not-allowed",
+                        audioError && "opacity-50",
                         isAudioPlaying && "ring-2 ring-emerald-400/50",
                         audioLoading && "animate-pulse",
                         getEnhancedButtonStyle(""),
@@ -1432,6 +596,7 @@ export default function HomepageBirdCarousel({
                       onClick={() => setShowVolumeSlider(!showVolumeSlider)}
                       disabled={audioError}
                       aria-label="Volume control"
+                      aria-expanded={showVolumeSlider}
                     >
                       {volume === 0 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                     </Button>
@@ -1443,6 +608,7 @@ export default function HomepageBirdCarousel({
                           <VolumeX className="w-3 h-3 text-white/70 flex-shrink-0" />
                           <input
                             type="range"
+                            aria-label="Bird call volume"
                             min="0"
                             max="1"
                             step="0.1"
@@ -1461,12 +627,11 @@ export default function HomepageBirdCarousel({
                       </div>
                     )}
 
-                    {/* Mobile Audio Status Indicator */}
-                    {isMobile && (audioLoading || audioError || !audioReady) && (
+                    {/* Idle audio may defer loading until Play; show only active loading or errors. */}
+                    {isMobile && (audioLoading || audioError) && (
                       <div className="absolute -bottom-8 right-0 bg-black/90 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
                         {audioLoading && "Loading..."}
                         {audioError && "Error - Tap to retry"}
-                        {!audioReady && !audioLoading && !audioError && "Preparing..."}
                       </div>
                     )}
                   </div>
@@ -1496,7 +661,7 @@ export default function HomepageBirdCarousel({
                     getEnhancedButtonStyle(""),
                   )}
                   onClick={() => setShowPhotoCredit(!showPhotoCredit)}
-                  aria-label="View photo credit"
+                  aria-label="View photo and recording credits"
                 >
                   <Camera className="w-4 h-4" />
                 </Button>
@@ -1513,7 +678,7 @@ export default function HomepageBirdCarousel({
                     <p className="text-sm italic opacity-90 leading-tight drop-shadow-md">
                       {currentBird.scientificName}
                     </p>
-                    <p className="text-xs opacity-75 leading-tight drop-shadow-md">{currentBird.spanishName}</p>
+                    <p className="text-xs opacity-90 leading-tight drop-shadow-md">Bird {currentIndex + 1} of {birdData.length}</p>
                   </div>
 
                   {/* Primary Region Tag and Info Button Row */}
@@ -1569,98 +734,39 @@ export default function HomepageBirdCarousel({
                         {currentBird.commonName}
                       </h2>
                       <p className="text-base italic text-blue-300 mb-1 leading-tight">{currentBird.scientificName}</p>
-                      <p className="text-sm text-gray-300 leading-tight">{currentBird.spanishName}</p>
                     </div>
 
-                    {/* Status Badges */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      <Badge className={cn("text-xs font-medium border shadow-sm", getStatusColor(currentBird.status))}>
-                        {currentBird.status}
-                      </Badge>
-                      <Badge
-                        className={cn(
-                          "text-xs font-medium border shadow-sm",
-                          getDifficultyColor(currentBird.difficulty),
-                        )}
-                      >
-                        {currentBird.difficulty}
-                      </Badge>
-                    </div>
-
-                    {/* Information Grid */}
-                    <div className="space-y-4 text-sm">
-                      {/* Primary Region */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Primary Region</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.primaryRegion}</p>
-                      </div>
-
-                      {/* Secondary Regions */}
-                      {currentBird.secondaryRegions.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-emerald-300 mb-1">Also Found In</h4>
-                          <p className="text-gray-300 leading-relaxed">{currentBird.secondaryRegions.join(", ")}</p>
-                        </div>
-                      )}
-
-                      {/* Habitat */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Habitat</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.habitat}</p>
-                      </div>
-
-                      {/* Elevation */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Elevation</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.elevation}</p>
-                      </div>
-
-                      {/* Best Time */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-1">Best Time to Visit</h4>
-                        <p className="text-gray-300 leading-relaxed">{currentBird.bestTime}</p>
-                      </div>
-
-                      {/* Ecoregions */}
-                      <div>
-                        <h4 className="font-semibold text-emerald-300 mb-2">Ecoregions</h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {currentBird.ecoregions.map((ecoregion, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-xs bg-emerald-900/30 text-emerald-200 border-emerald-700/50 hover:bg-emerald-800/40 transition-colors"
-                            >
-                              {ecoregion}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
+                    <div className="space-y-5 text-sm">
+                      {currentBird.localOccurrence && <div><h4 className="font-semibold text-emerald-300 mb-1">In this region</h4><p className="text-gray-200 leading-relaxed">{currentBird.localOccurrence}</p></div>}
+                      <div><h4 className="font-semibold text-emerald-300 mb-1">Wider range</h4><p className="text-gray-200 leading-relaxed">{currentBird.distribution}</p></div>
+                      <div><h4 className="font-semibold text-emerald-300 mb-1">Habitat</h4><p className="text-gray-200 leading-relaxed">{currentBird.habitat}</p></div>
+                      {currentBird.photoCredit.reserve && <div><h4 className="font-semibold text-emerald-300 mb-1">Photograph location</h4><p className="text-gray-300 leading-relaxed">{currentBird.photoCredit.reserve}</p></div>}
+                      <p className="text-xs leading-relaxed text-gray-400">Distribution describes the species’ range, not a guaranteed sighting. Photograph and recording locations may differ.</p>
                     </div>
 
                     {/* Action Buttons */}
                     <div className="mt-8 space-y-3">
-                      {/* Conditional Explore Region Button - Only for Vermilion Cardinal */}
+                      {/* Featured Australian Region */}
                       {shouldShowExploreRegion && (
-                        <Link href={`/regions/${currentBird.regionSlug}`} className="block">
-                          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white border-0 shadow-lg transition-all duration-200 hover:scale-[1.02]">
+                        <Link href={`/aves-explorer?region=${currentBird.regionSlug}`} className="block">
+                          <Button className="h-auto min-h-11 w-full whitespace-normal py-3 bg-emerald-600 hover:bg-emerald-700 text-white border-0 shadow-lg transition-all duration-200">
                             <MapPin className="w-4 h-4 mr-2" />
                             Explore {currentBird.primaryRegion}
                           </Button>
                         </Link>
                       )}
 
-                      {/* Conditional eBird Button - Updated to exclude Yellow-throated Toucan */}
-                      {shouldShowEBirdButton && (
+                      {/* Species Reference */}
+                      {shouldShowBirdGuideButton && (
                         <a
-                          href={getEBirdUrl(currentBird.id)}
+                          href={speciesSource.url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block"
                         >
                           <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg transition-all duration-200 hover:scale-[1.02]">
                             <ExternalLink className="w-4 h-4 mr-2" />
-                            View on eBird
+                            Read Species Guide
                           </Button>
                         </a>
                       )}
@@ -1672,19 +778,19 @@ export default function HomepageBirdCarousel({
 
             {/* Photo Credit Panel - Version 1 Style: Compact Popup */}
             {showPhotoCredit && !showInfo && (
-              <div className="absolute top-16 right-3 z-60">
+              <div className="absolute top-16 right-3 z-[60]">
                 <div className="bg-black/90 backdrop-blur-sm text-white px-4 py-3 rounded-lg text-sm shadow-xl transition-all duration-300 animate-in slide-in-from-top-2 min-w-[200px] max-w-[280px] border border-white/10">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Camera className="w-4 h-4 flex-shrink-0" />
-                      <span className="font-medium text-xs">Photo Credit</span>
+                      <span className="font-medium text-xs">Photo & Recording Credits</span>
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       className="w-5 h-5 p-0 rounded-full hover:bg-white/20 text-white border-0 flex-shrink-0"
                       onClick={() => setShowPhotoCredit(false)}
-                      aria-label="Close photo credit"
+                      aria-label="Close credits"
                     >
                       <X className="w-3 h-3" />
                     </Button>
@@ -1738,7 +844,13 @@ export default function HomepageBirdCarousel({
                       </div>
                     )}
 
-                    {/* Instagram Link */}
+                    {currentBird.audioFile && <div>
+                      <Link href={`/credits#audio-${currentBird.id}`} className="text-white/90 text-xs underline underline-offset-2">
+                        Bird recording & licence
+                      </Link>
+                    </div>}
+
+                    {/* Photograph Source Link */}
                     {currentBird.photoCredit.instagramPost && (
                       <div className="pt-2 border-t border-white/10">
                         <a
@@ -1752,7 +864,7 @@ export default function HomepageBirdCarousel({
                           )}
                         >
                           <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                          <span>View on Instagram</span>
+                          <span>View photograph source</span>
                         </a>
                       </div>
                     )}
@@ -1762,38 +874,44 @@ export default function HomepageBirdCarousel({
             )}
           </div>
 
+          <div className="border-t border-emerald-100 bg-white px-4 py-4 text-sm">
+            <p className="flex items-center gap-2 font-semibold text-emerald-800"><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />Where to find it</p>
+            <p className="mt-2 leading-relaxed text-gray-600">{currentBird.localOccurrence || currentBird.distribution}</p>
+            {currentBird.audioFile && <p className="mt-2 text-xs text-gray-500">Recording: {currentBird.audioLabel || "Wild bird field recording"}.</p>}
+            {!currentBird.audioFile && <p className="mt-2 text-xs text-gray-500">A recording is not yet available for this bird.</p>}
+          </div>
+          <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, bird {currentIndex + 1} of {birdData.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
           {/* Enhanced Thumbnail Navigation with Scroll Controls */}
-          <div className="relative bg-gradient-to-r from-emerald-50 to-blue-50 border-t border-emerald-100">
+          <div className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-1 px-2 bg-gradient-to-r from-emerald-50 to-blue-50 border-t border-emerald-100">
             {/* Scroll Left Button */}
-            {canScrollThumbnails("left") && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200"
+                className="col-start-1 row-start-1 h-11 w-11 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200 disabled:opacity-30"
+                disabled={!canScrollThumbnails("left")}
                 onClick={() => scrollThumbnails("left")}
                 aria-label="Scroll thumbnails left"
               >
                 <ChevronLeft className="w-4 h-4 text-emerald-700" />
               </Button>
-            )}
 
             {/* Scroll Right Button */}
-            {canScrollThumbnails("right") && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200"
+                className="col-start-3 row-start-1 h-11 w-11 p-0 rounded-full bg-white/80 hover:bg-white shadow-md border border-emerald-200 disabled:opacity-30"
+                disabled={!canScrollThumbnails("right")}
                 onClick={() => scrollThumbnails("right")}
                 aria-label="Scroll thumbnails right"
               >
                 <ChevronRight className="w-4 h-4 text-emerald-700" />
               </Button>
-            )}
 
             {/* Thumbnail Container */}
             <div
               ref={thumbnailContainerRef}
-              className="flex gap-2 p-3 overflow-x-auto scrollbar-hide scroll-smooth"
+              onScroll={event => setThumbnailScrollPosition(event.currentTarget.scrollLeft)}
+              className="relative col-start-2 row-start-1 min-w-0 flex gap-2 p-3 overflow-x-auto scrollbar-hide"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {birdData.map((bird, index) => (
@@ -1807,16 +925,18 @@ export default function HomepageBirdCarousel({
                   )}
                   onClick={() => goToSlide(index)}
                   aria-label={`View ${bird.commonName}`}
+                  aria-pressed={index === currentIndex}
                 >
                   <Image
-                    src={bird.image || "/placeholder.svg"}
-                    alt={bird.commonName}
+                    src={sitePath(bird.image || "/placeholder.svg")}
+                    alt=""
+                    loading="lazy"
                     width={64}
                     height={64}
                     className="w-full h-full object-cover"
                     style={{
                       objectPosition: getImagePositioning(bird.id).objectPosition,
-                      transform: "scale(1.1)",
+                      transform: "none",
                     }}
                   />
                 </button>

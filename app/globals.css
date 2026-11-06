@@ -582,15 +582,6 @@ html {
     position: relative !important;
   }
 
-  /* Smooth return animation when menu closes */
-  body:not(.aves-mobile-menu-open) > *:not(header),
-  html:not(.aves-mobile-menu-open) body > *:not(header) {
-    transform: translateX(0) !important;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    will-change: transform !important;
-    backface-visibility: hidden !important;
-  }
-
   /* ========================================
      RESPONSIVE BREAKPOINTS
      ======================================== */
@@ -705,9 +696,7 @@ html {
   }
 
   body.aves-mobile-menu-open > *:not(header):not([data-testid="mobile-navigation-menu"]),
-  html.aves-mobile-menu-open body > *:not(header):not([data-testid="mobile-navigation-menu"]),
-  body:not(.aves-mobile-menu-open) > *:not(header),
-  html:not(.aves-mobile-menu-open) body > *:not(header) {
+  html.aves-mobile-menu-open body > *:not(header):not([data-testid="mobile-navigation-menu"]) {
     transition: none !important;
   }
 
