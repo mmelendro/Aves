@@ -1,6 +1,6 @@
 # One AVES account for Colombia and Australia
 
-Colombia is the public website at `/`; the shared account and backend are maintained in the Australia app and publicly routed under `/australia`. Use native links across the two independently deployed Next apps. `/australia/account?country=colombia&region=<canonical-slug>` prefills a Colombian draft. Sign-in/sign-up receive a safe, unprefixed `next=/account?country=colombia` destination.
+The main AVES homepage at `/` is the global destination chooser. Colombia's homepage is `/colombia`, with its existing deeper public URLs preserved; Australia's homepage is `/australia`. The shared account and backend are maintained in the Australia app and publicly routed under `/australia`. Use native links across the two independently deployed Next apps. `/australia/account?country=colombia&region=<canonical-slug>` prefills a Colombian draft. Sign-in/sign-up receive a safe, unprefixed `next=/account?country=colombia` destination. The global My Trips link uses `/australia/account` without selecting a country.
 
 Old `/auth/login`, `/auth/signup`, `/dashboard`, `/account` and nested account routes redirect to that shared portal. Old recovery links start a fresh recovery; old project tokens and arbitrary redirect parameters are never forwarded. `/shopping` redirects to `/contact`, preserving recognised tour/region choices. The legacy Colombia authentication, profile, documents, booking and mock payment implementations have been removed. No historical data import or database deletion is performed by these redirects.
 

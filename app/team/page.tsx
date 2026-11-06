@@ -803,7 +803,7 @@ export default function TeamPage() {
                 variant="outline"
                 className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-3 bg-transparent"
               >
-                <Link href="/#contact">Contact Our Team</Link>
+                <Link href="/contact">Contact Our Team</Link>
               </Button>
             </div>
           </div>
