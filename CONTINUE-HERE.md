@@ -1,10 +1,46 @@
 # AVES Australia and shared AVES portal — handoff, updated 7 November 2026 (Sydney)
 
+## Current production — bird library and logo navigation, 7 November 2026 (Sydney)
+
+Repository: https://github.com/mmelendro/Aves. Keep the two independent branches/checkouts; do not merge them or re-enable automatic Git deployments.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `37379ca` | `dpl_8w1BMucTS94h3f6vHXZrhLXc13Ps` |
+| Australia and shared accounts | `australia/preview` | `8c13ed1` | `dpl_8FafCYo3utohyHvWjPgtMt7ydE6D` |
+
+Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-ori09kvl7-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-jfpy00jig-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
+
+- Public destinations: https://aves.bio/colombia, https://aves.bio/australia and https://aves.bio/new-zealand, selected from https://aves.bio/.
+- Brand artwork and AVES link to the main homepage; each country subtitle links to its destination. The thinner lettering, country birds, landscape contours and global peregrine mark are retained.
+- New Zealand now features **31 birds with photographs, local recordings, location/habitat notes and credits**, with particular depth for the South Island. The selector jumps to a species; the interactive map links North Island, South Island and Rakiura to their descriptions. This is a curated collection, not a complete checklist; eBird remains linked for wider records.
+- Shared compact carousels preserve whole photographs, visible sound controls, image counters, species notes and attribution. Colombia has 22 featured birds (17 recordings); Australia has 20 (19 recordings). Every Colombian/Australian regional carousel and all four Colombian article carousels include sound. Five Colombian species and Gouldian Finch still lack a recording with suitable verified reuse rights; do not invent, misidentify or reuse NC recordings commercially.
+- Public personal email has been replaced by contact links, including privacy/account/help links and error messages. Private notification delivery remains configured. Topic forms at `/australia/contact?topic=general`, `account`, `privacy`, `unsubscribe`, `partnership` and `new-zealand` use the maintained inquiry backend.
+- Earlier completed content includes truthful author biography, removal of unverified testimonials, B Corp **pursuing/not certified** wording and land acknowledgements. Preserve these corrections.
+
+### Accounts and remaining Google setup
+
+My Trips remains https://aves.bio/australia/account, sharing one Supabase backend for Colombia/Australia. Existing owned saved plans and the issued QA proposal loaded and refreshed during this release work; anonymous private APIs rejected access with 401/no-store. No new customer records or email-delivery test were created for this release.
+
+New Zealand remains public inspiration **in development**: it is not enabled in the shared booking/destination registry. Its inquiry topic sends a general message through the shared service; it must not create an Australian saved plan. Keep all private guest itinerary details out of public files and Git.
+
+Google client/provider configuration exists in testing mode, but production `AVES_OAUTH_PROVIDERS` remains unset and social buttons stay hidden. The user requires `info@aves.bio` as Google's public support email. Restoring that Google Workspace mailbox and checking an actual subscription quote are pending a Google Admin passkey verification by the user. No mailbox subscription was purchased. Google sign-in still needs business support-address eligibility/configuration and a real end-to-end account test before activation. Facebook is deferred. See `docs/social-sign-in.md` in the Australian branch.
+
+### Verification scope
+
+Australia: 229 automated tests and strict TypeScript pass. Source: full existing test suite, strict TypeScript, the expanded media inventory and production build were checked before release. New audio files were decoded and sampled through browser controls; changing birds stops playback. Logo navigation was reviewed in both applications. Earlier HTTP/privacy checks covered 13 public pages, 43 client scripts, 2 stylesheets and three anonymous private endpoints; no personal Gmail was found in public output. The historical 390px mobile check below predates this release; a fresh mobile viewport could not be verified in the available browser and must not be claimed.
+
+Application secrets stay in private provider configuration and untracked environment files. The laptop is not required to serve production. Read both branch handoffs before editing from a new chat.
+
+## Historical release notes
+
+The following sections describe earlier releases and their original verification, not the current application version.
+
 The shared account/backend for Colombia and Australia is now live. The two public websites retain separate applications and Git histories.
 
-## Current production — global homepage released 7 November 2026 (Sydney)
+## Historical global homepage release — 7 November 2026 (Sydney)
 
-Both deployments below were successfully promoted and verified publicly on 7 November 2026 (Sydney). Their application commits were also verified on GitHub. This is the current live release; the older releases retained below are historical evidence.
+Both deployments below were successfully promoted and verified publicly on 7 November 2026 (Sydney). Their application commits were also verified on GitHub. This was the original global homepage release; the newer release at the top supersedes it.
 
 | Application | Branch | Released source | Live deployment |
 | --- | --- | --- | --- |
@@ -16,7 +52,7 @@ Both deployments below were successfully promoted and verified publicly on 7 Nov
 - Preparation test results: **212 Australia/shared-account tests passed; 66 global/Colombia source tests passed**.
 - GitHub branch heads were verified as `1e9307e` for [Australia/shared accounts](https://github.com/mmelendro/Aves/tree/australia/preview) and `762c5db` for [global/Colombia](https://github.com/mmelendro/Aves/tree/webmaster/readiness-2026-11-05). Later handoff-only commits may advance those branches without changing the deployed application code.
 
-### Current public structure
+### Public structure at that release
 
 - `https://aves.bio/` is the global AVES homepage, with Colombia and Australia choices and an extensible public destination catalogue in the Colombia/root branch's `content/destinations.ts`.
 - `https://aves.bio/colombia` holds the preserved Colombian homepage. Existing Colombian deep routes remain at `/regions/...`, `/aves-explorer`, `/tours`, `/contact` and their established paths.
