@@ -2,7 +2,7 @@
 
 **Updated: 8 November 2026 (Sydney).** Improve https://aves.bio through small, tested releases. This brief and its linked change inbox preserve the agreed work between chats.
 
-**Checkpoint:** AVES-008 (speaker highlight), AVES-001a (Santa Marta editorial pilot) and AVES-009 (Google sign-in with info@aves.bio support) are published and verified. Pause after the Google increment; the broader editorial task and AVES-011/012 design requests remain queued. Preserve completed work when resuming.
+**Checkpoint:** AVES-008 (speaker highlight), AVES-001a (Santa Marta editorial pilot), AVES-009 (Google sign-in and verified AVES branding with info@aves.bio support), and AVES-011 (country-card carousels) are published and verified. Paused after AVES-011; the broader editorial task and AVES-012 design alignment remain queued. Preserve completed work when resuming.
 
 ## Working mode and project
 
@@ -43,7 +43,7 @@ Done when revised pages add distinct information, regional coverage demonstrably
 
 Create a lightweight, geographically accurate destination map driven by the existing catalogue. Highlight Colombia, Australia and New Zealand, clearly showing New Zealand's development status. Country labels and equivalent accessible text links open the correct pages. Future countries must be easy to add without implying launch or bookability. Verify desktop, narrow-phone and wide layouts.
 
-**Country-card carousels (AVES-011):** separately replace each static destination-card bird on the global homepage with that country's existing carousel. Keep the correct local collection, compact presentation, discreet photo/sound controls, credits, development status and clear destination link. Controls must work independently; audio remains opt-in and only one recording should play across the page. Keep initial loading light, respect reduced motion and coordinate with the future world map without making this depend on it.
+**Country-card carousels (AVES-011, verified):** the global homepage now uses each country’s full existing selection (Colombia 22, Australia 20, New Zealand 31) inside its own compact card viewer, with discreet controls, dynamic credits, country links and development status. Navigation is independent, audio is opt-in with one recording at a time, and card images load lazily. The existing mixed-country hero remains. This was released independently of the future world map; do not repeat the implementation. See CONTINUE-HERE.md for the release checkpoint.
 
 ### C. Bird wishlist and optional bingo
 
