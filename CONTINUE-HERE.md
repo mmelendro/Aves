@@ -1,6 +1,23 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — paired discovery headers, 8 November 2026 (Sydney)
+## Current production — subtle speaker highlight, 8 November 2026 (Sydney)
+
+**Paused at the owner's explicit request after publishing this single incremental release.** Do not start the next backlog item until the owner resumes it.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `c515cf3` | `dpl_xUegpwZqUpjMBjtaLUS1MHVtbh9d` |
+| Australia and shared accounts | `australia/preview` | `f635b97` | `dpl_BLcQrh1yCEYqmEnSVB8w7xJkjBWo` |
+
+Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-9m0aks8jb-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-pmrwsjjsl-mmelendro-9273s-projects.vercel.app). Both READY builds were reviewed and promoted. Application source is synced to GitHub; later documentation-only commits may advance the branch heads.
+
+- AVES-008 is complete: available bird recordings have a quiet emerald-tinted speaker button, pale emerald border and static soft halo. Playback uses a brighter green fill. Missing recordings keep the muted disabled control. Spoken labels, focus treatment, click-to-play behaviour and the existing carousel/map layout are preserved.
+- This is a styling-only change in each shared `homepage-bird-carousel.tsx`. No new dependencies, motion, media, database/provider changes or account work. `buttonClassName` styles the actual icon button while the existing `className` continues to position its wrapper.
+- Strict TypeScript checks and both production builds passed. Staged browser checks covered the available style, Gouldian Finch's disabled/unhighlighted missing recording, NZ mobile appearance without sideways overflow, keyboard playback reaching readyState 4 and advancing, brighter playing state, and bird navigation stopping audio/resetting time to zero. Pointer activation was also checked at desktop width. No physical touch-device or foldable-hardware test is claimed.
+- Final public HTTP checks returned 200 and highlighted available speaker markup at `/`, `/colombia`, `/new-zealand` and `/australia`. A live NZ browser check confirmed the intended background, border, halo and no animation. Evidence in the workspace: `audit/evidence/nov8-speaker-highlight-live-checks.json` and `audit/evidence/nov8-speaker-highlight-mobile-live.png`. Backend/email write tests and the broad prior test suites were not repeated for this cosmetic release.
+- All other work remains in the [living brief](docs/NEXT-WEEK-PROMPT.md) and [change inbox](docs/AVES-CHANGE-INBOX.md). Google activation, editorial cleanup, new regional pages, adjustable panels and the planning app remain pending.
+
+## Historical paired discovery-header release, 8 November 2026 (Sydney)
 
 Both final builds are published and their source is on GitHub. The two applications remain independent; automatic Git deployment remains disabled.
 

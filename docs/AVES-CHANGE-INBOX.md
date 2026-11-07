@@ -13,11 +13,15 @@
 | AVES-005 | Feature / P2 | Questionnaire, balanced itinerary options and human-reviewed sustainable supplier planning. | Implement in separately scoped stages after the required content/data foundation. | Backlog |
 | AVES-006 | UX / P2 | Resize the map/media split with a draggable divider; resize the whole pair to available width. | Bounded pointer/touch/keyboard resize; balanced height; natural narrow-phone stacking; no distorted maps or clipped controls. | Backlog |
 | AVES-007 | Content consistency / P2 | New Zealand lacks dedicated regional pages and local carousels, particularly South Island. | Island pages share the country design, verified local birds/calls and functioning map/navigation/sitemap links. | Backlog |
-| AVES-008 | UX / P2 | Keep the speaker icon, with a subtle accent to advertise available bird calls. | Owner choice preserved; available and playing states distinct; accessible contrast; no autoplay, constant flashing or highlight on missing calls. | Backlog |
+| AVES-008 | UX / P2 | Keep the speaker icon, with a subtle accent to advertise available bird calls. | Owner choice preserved; available and playing states distinct; accessible contrast; no autoplay, constant flashing or highlight on missing calls. | Verified |
 | AVES-009 | Account / P1 | Google sign-in still does not appear. Previously prepared, but not activated in production. | Business support address and provider readiness verified; real account/callback/session tests pass; only then show working Google sign-in. | Backlog |
 | AVES-010 | Cultural content / P2 | Include totemic and culturally significant birds where appropriate. | Specific community/place and sources are identified; sharing protocols and media rights respected; interpretation and endorsement are stated accurately. | Backlog |
 
 Priorities are provisional, not an owner-approved ranking between these requests. Google completion is provisionally P1 because it is an expected account entry method; existing email/password access remains available. Priorities: P0 urgent security/data loss; P1 broken essential journeys or materially misleading content; P2 usability/content/features; P3 polish. Owner priorities take precedence. States: Backlog, Ready, In progress, Verified, Deferred. These observations were supplied by the owner; this documentation update checked relevant source/setup notes but did not re-audit live provider settings or the website.
+
+## Release checkpoint — 8 November 2026 (Sydney)
+
+AVES-008 was published and verified as a separate cosmetic release; see `CONTINUE-HERE.md` for commits, deployments and evidence. Work is paused after this release at the owner's request. Other items retain their existing backlog status.
 
 ## New observation details — 8 November 2026 (Sydney)
 
