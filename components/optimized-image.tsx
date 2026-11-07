@@ -1,5 +1,11 @@
 "use client"
 
+/*
+ * Retained legacy image wrapper with filename-based logo/portrait fallbacks and styling.
+ * No current app/component imports this wrapper; active pages use next/image directly and
+ * BrandMark handles current logos. Read the caller before reviving these historical rules.
+ */
+
 import type React from "react"
 
 import Image from "next/image"

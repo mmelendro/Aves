@@ -1,3 +1,8 @@
+/*
+ * Public attribution directory for licensed photographs and bird recordings.
+ * The two JSON imports contain creator, original-source, licence and modification information.
+ * Keep recording IDs stable: carousel credit links point to the audio-ID anchors on this page.
+ */
 import type { Metadata } from "next"
 import Image from "next/image"
 import { PageShell } from "@/components/page-shell"
@@ -11,6 +16,7 @@ export default function CreditsPage() {
     <PageShell path="/credits" title="The People Behind the Photographs & Sounds" description="Thank you to the photographers and field recordists who make these glimpses of Australia possible. These photographs and recordings illustrate places and wildlife; they were not made on AVES-operated Australian tours.">
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8">
+          {/* Photo cards keep original source and licence links alongside each attribution. */}
           {credits.images.map(photo => (
             <Card key={photo.file} className="border-0 shadow-lg overflow-hidden">
               <div className="relative h-64">
@@ -34,6 +40,7 @@ export default function CreditsPage() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 id="recording-credits" className="text-3xl font-bold mb-8">Bird Recordings</h2>
           <div className="grid md:grid-cols-3 gap-8">
+            {/* audio-ID anchors are destinations for the sound credits inside every bird carousel. */}
             {audioCredits.recordings.map(recording => (
               <Card key={recording.id} id={`audio-${recording.id}`} className="border-0 shadow-lg scroll-mt-24">
                 <CardContent className="p-6">

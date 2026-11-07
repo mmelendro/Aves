@@ -1,5 +1,12 @@
 "use client"
 
+/**
+ * Owner's browser form for an editable proposal draft, priced in AUD cents.
+ * Saving only stores a draft; issuing it to the client is a separate action in the
+ * owner inbox. An older issued proposal may seed a new draft without changing the
+ * issued version. Authorization is enforced by the admin API/database.
+ */
+
 import { useId, useRef, useState } from "react"
 import { Save } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -8,6 +15,9 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { AccountRequestError, accountRequest, errorMessage, type Proposal, type ProposalFields } from "./account-api"
 
+/**
+ * Parse a decimal amount into bounded integer cents, or null when invalid; avoid floating-point money arithmetic.
+ */
 export function parseAUD(value: string): number | null {
   if (!/^\d{1,7}(?:\.\d{1,2})?$/.test(value.trim())) return null
   const [whole, fraction = ""] = value.trim().split(".")
@@ -15,8 +25,14 @@ export function parseAUD(value: string): number | null {
   return Number.isSafeInteger(cents) && cents >= 1 && cents <= 100_000_000 ? cents : null
 }
 
+/**
+ * Edit proposal, or create a new draft optionally seeded from initial; onSaved receives the confirmed draft.
+ * quoteId links the request being priced; the server checks that relationship and owner access.
+ */
 export function ProposalEditor({ quoteId, proposal, initial, onSaved, onCancel }: { quoteId: string; proposal?: Proposal; initial?: Proposal; onSaved: (proposal: Proposal) => void; onCancel: () => void }) {
   const prefix = useId()
+  // proposal edits an existing draft; initial only copies an older version
+  // into a new form and must never rewrite an issued proposal.
   const valuesFrom = proposal || initial
   const request = useRef<{ payload: string; key: string } | null>(null)
   const busyRef = useRef(false)
@@ -32,6 +48,8 @@ export function ProposalEditor({ quoteId, proposal, initial, onSaved, onCancel }
     const fields: ProposalFields = { totalCents, currency: "AUD", itinerary: String(values.get("itinerary") || "").trim(), inclusions: String(values.get("inclusions") || "").trim(), exclusions: String(values.get("exclusions") || "").trim(), validUntil: String(values.get("validUntil") || "") || null }
     busyRef.current = true; setBusy(true); setFeedback("")
     try {
+      // Reuse a creation UUID for identical retries; PATCH carries the revision
+      // so a concurrent owner edit cannot be silently overwritten.
       const payload = JSON.stringify(fields)
       if (request.current?.payload !== payload) request.current = { payload, key: crypto.randomUUID() }
       const key = request.current.key

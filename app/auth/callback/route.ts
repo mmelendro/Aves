@@ -1,7 +1,16 @@
+/**
+ * Finish a Supabase PKCE sign-in/email callback on the server.
+ * The one-time code is exchanged for cookie-backed session credentials. Redirects
+ * use an allowlisted next path, and provider errors/tokens are not echoed to users.
+ */
+
 import { NextResponse, type NextRequest } from "next/server"
 import { createClient } from "@/lib/supabase/server"
 import { safeAuthNext } from "@/lib/auth-redirect"
 
+/**
+ * Exchange a callback code for a session and issue a private, uncached redirect to the safe destination.
+ */
 export async function GET(request: NextRequest) {
   const code = request.nextUrl.searchParams.get("code")
   const isOAuth = request.nextUrl.searchParams.get("flow") === "oauth"

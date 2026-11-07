@@ -1,5 +1,12 @@
 "use client"
 
+/**
+ * Signed-in visitor's browser workspace for drafts, quote requests, and proposals.
+ * The server supplies the display email, then the component fetches private data
+ * through the account API. Local React state makes the UI responsive; only a
+ * successful server receipt confirms that a change has actually been saved.
+ */
+
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 import { SiteLink as Link } from "@/components/site-link"
 import { Bird, Edit3, LogOut, MapPin, Plus, RefreshCw, Send } from "lucide-react"
@@ -14,6 +21,9 @@ import { TripPlanEditor } from "./trip-plan-editor"
 import { accountPlanPath, type PlanIntent } from "./plan-intent"
 import { accountEntryHref } from "./account-navigation"
 
+/**
+ * Submit a saved plan's revision and contact name; call onSubmitted only for a confirmed stored receipt.
+ */
 function QuoteRequestForm({ plan, onSubmitted, onCancel }: { plan: TripPlan; onSubmitted: (plan: TripPlan) => void; onCancel: () => void }) {
   const prefix = useId()
   const request = useRef<{ payload: string; key: string } | null>(null)
@@ -27,6 +37,8 @@ function QuoteRequestForm({ plan, onSubmitted, onCancel }: { plan: TripPlan; onS
     const payload = JSON.stringify({ expectedUpdatedAt: plan.updatedAt, contactName: String(values.get("contactName") || "").trim() })
     busyRef.current = true; setBusy(true); setFeedback("")
     try {
+      // Keep the retry key until a stored receipt arrives. A lost response must
+      // not create a second quote request from the same unchanged submission.
       if (request.current?.payload !== payload) request.current = { payload, key: crypto.randomUUID() }
       const result = await accountRequest<{ success: boolean; status: string; requestId: string; plan: TripPlan }>(`/api/account/plans/${plan.id}/quote-requests`, { method: "POST", headers: { "Idempotency-Key": request.current.key }, body: payload })
       if (result.success !== true || result.status !== "stored" || !result.requestId || result.plan?.id !== plan.id || result.plan.status !== "quote_requested") throw new Error("Your quote request could not be confirmed. Please try again.")
@@ -38,6 +50,9 @@ function QuoteRequestForm({ plan, onSubmitted, onCancel }: { plan: TripPlan; onS
   return <form onSubmit={submit} className="mt-6 border-t border-gray-200 pt-6 space-y-4"><fieldset disabled={busy} className="space-y-4"><div><label htmlFor={`${prefix}-name`} className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label><Input id={`${prefix}-name`} name="contactName" autoComplete="name" maxLength={120} required /></div><p className="text-sm text-gray-600">Send this saved plan to AVES for a personal quote. These details will become a submitted record; to change them later, start another draft. This does not create a booking.</p><p className="text-sm text-gray-600">Proposals for both Colombia and Australia are currently quoted in Australian dollars (AUD).</p><div className="flex flex-wrap gap-3"><Button type="submit" className="bg-emerald-600 hover:bg-emerald-700"><Send className="w-4 h-4 mr-2" />{busy ? "Submitting…" : "Submit Quote Request"}</Button><Button type="button" variant="outline" onClick={onCancel}>Cancel</Button></div></fieldset>{feedback && <p className="text-sm text-red-700" role="alert">{feedback}</p>}</form>
 }
 
+/**
+ * Load the signed-in client's plans/proposals; optional initialPlan opens a prefilled unsaved draft.
+ */
 export function AccountDashboard({ email, initialPlan }: { email: string; initialPlan?: PlanIntent }) {
   const returnPath = accountPlanPath(initialPlan)
   const [plans, setPlans] = useState<TripPlan[]>([])
@@ -52,6 +67,8 @@ export function AccountDashboard({ email, initialPlan }: { email: string; initia
   const load = useCallback(async () => {
     setLoading(true); setError("")
     try {
+      // These independent reads can run together. Both endpoints verify the
+      // session; filtering issued proposals here is only an extra display check.
       const [saved, issued] = await Promise.all([accountRequest<{ plans: TripPlan[]; isAdmin?: boolean }>("/api/account/plans"), accountRequest<{ proposals: Proposal[] }>("/api/account/proposals")])
       if (!Array.isArray(saved.plans) || !Array.isArray(issued.proposals)) throw new Error("Your account information could not be loaded. Please try again.")
       setPlans(saved.plans); setProposals(issued.proposals.filter(proposal => proposal.status === "sent"))
@@ -63,11 +80,14 @@ export function AccountDashboard({ email, initialPlan }: { email: string; initia
     } finally { setLoading(false) }
   }, [returnPath])
   useEffect(() => { void load() }, [load])
+  // Local sign-out ends this browser's session; it does not request sign-out on
+  // every other device. The redirect removes the current workspace from view.
   async function signOut() {
     setSigningOut(true); setError("")
     try { const { error } = await createClient().auth.signOut({ scope: "local" }); if (error) throw error; window.location.replace("/account/sign-in") }
     catch (error) { setError(errorMessage(error)); setSigningOut(false) }
   }
+  // Receive a confirmed server result and update its visible card, not the database.
   function replacePlan(plan: TripPlan) { setPlans(current => [plan, ...current.filter(item => item.id !== plan.id)]) }
 
   return <div className="space-y-8">

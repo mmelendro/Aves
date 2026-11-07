@@ -1,3 +1,10 @@
+/**
+ * Public inquiry/waitlist endpoint: no account is required.
+ * The route validates a bounded JSON request, stores it first, then tries an owner
+ * notification. A stored receipt means the request is durable, not that an email
+ * arrived or a booking exists. Browser callers never receive the server keys.
+ */
+
 import { type NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 import { z } from "zod"
@@ -28,10 +35,16 @@ const requestSchema = z.object({
   message: "Choose a region in the selected country.", path: ["region"],
 })
 
+/**
+ * Return bounded public-form feedback without caching it.
+ */
 function reply(body: Record<string, unknown>, status: number) {
   return NextResponse.json(body, { status, headers: { "Cache-Control": "no-store" } })
 }
 
+/**
+ * Accept a simple email or display-name mailbox while rejecting control characters in sender configuration.
+ */
 function isValidSender(value: string) {
   if (!singleLine(320).safeParse(value).success) return false
   if (emailAddress.safeParse(value).success) return true
@@ -40,6 +53,9 @@ function isValidSender(value: string) {
 }
 
 // Stop reading at the byte limit, before decoding/parsing an unbounded JSON body.
+/**
+ * Stream at most 32 KiB and parse UTF-8 JSON; return a safe 400/413 result for invalid input.
+ */
 async function readBody(req: NextRequest): Promise<{ body: unknown } | { status: 400 | 413 }> {
   if (Number(req.headers.get("content-length")) > MAX_REQUEST_BYTES) return { status: 413 }
   const reader = req.body?.getReader()
@@ -67,7 +83,12 @@ async function readBody(req: NextRequest): Promise<{ body: unknown } | { status:
   }
 }
 
+/**
+ * Validate a public form submission, return its durable storage receipt, and attempt one owner email for new records.
+ */
 export async function POST(req: NextRequest) {
+  // This public endpoint permits absent Origin; it rejects a supplied foreign
+  // origin or explicit cross-site browser request. This is not bot authentication.
   const origin = req.headers.get("origin")
   const requestUrl = new URL(req.url)
   let localAlias = false
@@ -99,6 +120,8 @@ export async function POST(req: NextRequest) {
     return reply({ error: "Please refresh the form and try again." }, 400)
   }
 
+  // Consent wording/version is server-owned, not a value the browser can invent.
+  // Normalization is stable so unchanged retries produce the same fingerprint.
   const consentVersion = countryConsentVersion(request.data.country)
   const payload = {
     intent: request.data.intent, name: request.data.name, email: request.data.email.toLowerCase(),
@@ -113,6 +136,8 @@ export async function POST(req: NextRequest) {
       ...payload, idempotencyKey: idempotencyKey.data,
       payloadHash: createHash("sha256").update(JSON.stringify(payload)).digest("hex"),
     }
+    // A disabled destination may replay a saved receipt, but cannot create a new
+    // request. Database functions enforce the same distinction atomically.
     receipt = isEnabledTripCountry(request.data.country)
       ? await saveContactRequest(input)
       : await replayContactRequest({ country: request.data.country, idempotencyKey: input.idempotencyKey, payloadHash: input.payloadHash })
@@ -137,6 +162,8 @@ export async function POST(req: NextRequest) {
   // or sending another notification. Saving is the success boundary.
   if (!receipt.created) return storedResponse()
 
+  // Notification tracking is separate and best-effort. If this status write
+  // fails, the stored request remains valid and the provider outcome may lag.
   const recordOutcome = async (status: "accepted" | "failed", providerId: string | null, errorCode: string | null) => {
     try {
       await recordContactNotification(receipt.request_id, status, providerId, errorCode)
@@ -178,6 +205,8 @@ ${message || "None"}`
   let notificationTimeout: ReturnType<typeof setTimeout> | undefined
   try {
     const resend = new Resend(apiKey)
+    // Timeout means acceptance was not confirmed within eight seconds; this race
+    // does not cancel the provider call. Its record-based key limits duplicates.
     const result = await Promise.race([resend.emails.send({
       from: contactFrom,
       to: contactEmail,

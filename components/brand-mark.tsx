@@ -1,3 +1,8 @@
+/*
+ * Reusable AVES wordmark, country bird and decorative landscape. The large logo hit area
+ * opens the global homepage; the separate country label opens the destination homepage.
+ * Use this component for brand sizing rather than the legacy OptimizedImage logo rules.
+ */
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { sitePath } from "@/lib/site-path"
@@ -30,6 +35,8 @@ const landscapes: Record<BrandCountry | "global", string> = {
 
 // Own both links here so the country subtitle never sits inside the global home link.
 export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref }: BrandMarkProps) {
+  // Size changes the lockup as a unit; inverse supplies readable lettering on dark footers.
+  // Optional label/labelHref let shared pages override the subtitle without changing the brand art.
   const isFooter = size === "footer"
   const subtitle = label || (country ? countryLabels[country] : undefined)
   const homeHref = "https://aves.bio/"
@@ -37,6 +44,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
 
   return (
     <span className={cn("relative inline-flex shrink-0 items-center pb-4", isFooter ? "gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
+      {/* Separate sibling links avoid invalid nested anchors. The subtitle's higher layer stays clickable. */}
       <a href={homeHref} aria-label="AVES home" className={cn("absolute inset-0 z-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", inverse ? "focus-visible:outline-emerald-300" : "focus-visible:outline-emerald-700")} />
       <svg aria-hidden="true" focusable="false" viewBox="0 0 240 40" fill="none" className={cn("pointer-events-none absolute inset-x-0 bottom-0 h-6 w-full", isFooter && "h-9", inverse ? "text-emerald-200" : "text-emerald-600")}>
         <path d={landscapes[country || "global"]} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -44,6 +52,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
         {country === "australia" && <path d="M29 24V10 M22 15Q29 3 37 14 M25 10Q30 1 35 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />}
         {country === "colombia" && <path d="M116 27V18 M110 21Q116 10 122 21 M125 26V21 M120 23Q125 15 131 23" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />}
       </svg>
+        {/* Decorative image: the home link already names its purpose for assistive technology. */}
         <Image
           src={sitePath(`/images/brand/aves-${country || "global"}-bird.png`)}
           alt=""

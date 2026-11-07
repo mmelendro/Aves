@@ -1,3 +1,9 @@
+/**
+ * One-time bridge for browsers with the older /australia session cookie.
+ * The redirect carries cookie updates to the shared root account portal. The short
+ * aves-session-checked cookie prevents redirect loops; it is not an Auth credential.
+ */
+
 import { NextResponse, type NextRequest } from "next/server"
 import { safeAuthNext } from "@/lib/auth-redirect"
 import { authCookieOptions } from "@/lib/supabase/config"
@@ -5,6 +11,9 @@ import { migrateLegacySessionCookies } from "@/lib/supabase/session-migration"
 
 export const dynamic = "force-dynamic"
 
+/**
+ * Apply validated legacy-cookie migration writes and redirect without exposing tokens in the URL/body.
+ */
 export async function GET(request: NextRequest) {
   const target = safeAuthNext(request.nextUrl.searchParams.get("next"))
   const response = new NextResponse(null, { status: 303, headers: {

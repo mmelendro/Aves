@@ -1,3 +1,7 @@
+/*
+ * Reusable three-step explanation of the personal planning process. This is display content,
+ * not a booking engine. The homepage shows a learn-more link; the full process page hides that self-link.
+ */
 import Link from "next/link"
 import { ArrowRight, MessageCircle, NotebookPen, FileCheck2 } from "lucide-react"
 

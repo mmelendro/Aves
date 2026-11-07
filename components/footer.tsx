@@ -1,3 +1,8 @@
+/*
+ * Australian public footer: editable navigation groups, destination links, contact route
+ * and Acknowledgement of Country. SiteLink keeps My Trips at the shared /account address.
+ * Contact visitors through the form route rather than adding a personal email to this markup.
+ */
 import { SiteLink as Link } from "@/components/site-link"
 import { BrandMark } from "@/components/brand-mark"
 
@@ -5,6 +10,7 @@ interface FooterProps {
   transparent?: boolean
 }
 
+// Edit these arrays to change each navigation group; the rendering below stays shared and consistent.
 const exploreLinks = [
   { href: "/aves-explorer", label: "Regions" },
   { href: "/tours", label: "Birding Experiences" },
@@ -75,6 +81,7 @@ export function Footer({ transparent = false }: FooterProps) {
           </nav>
         </div>
 
+        {/* Destination-wide acknowledgement; specific experiences still need appropriate local context. */}
         <p className="mt-8 max-w-4xl border-t border-gray-700/70 pt-6 text-sm leading-relaxed text-gray-300">AVES acknowledges Aboriginal and Torres Strait Islander peoples as the Traditional Owners and Custodians of Country throughout Australia. We pay our respects to Elders past and present and recognise their continuing connections to land, waters and community.</p>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-gray-700/70 pt-6 lg:flex-row lg:items-center lg:justify-between">

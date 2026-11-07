@@ -1,5 +1,11 @@
 "use client"
 
+/**
+ * Browser form for a new or existing draft trip idea.
+ * Country/region selections are checked again on the server and in the database.
+ * Saving a draft does not request a quote, reserve dates, or make a payment.
+ */
+
 import { useId, useRef, useState } from "react"
 import { Save } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,6 +16,10 @@ import { AccountRequestError, accountRequest, errorMessage, tripCountry, type Tr
 import { countryLabels, countryRegionOptions, enabledCountries, isEnabledTripCountry, type TripCountry } from "@/content/trip-options"
 import { normalizePlanRegions, type PlanIntent } from "./plan-intent"
 
+/**
+ * Edit plan or start from initial destination hints; onSaved receives only a server-confirmed draft.
+ * onCancel discards this form view, not a previously saved database plan.
+ */
 export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: TripPlan; initial?: PlanIntent; onSaved: (plan: TripPlan) => void; onCancel: () => void }) {
   const prefix = useId()
   const busyRef = useRef(false)
@@ -22,6 +32,8 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   const options = countryRegionOptions[country]
   const olderSelections = selectedRegions.filter(value => !options.some(option => option.id === value))
 
+  // Regions belong to one country; do not carry a previous country's selected
+  // IDs into the new form. Old disabled destinations may remain on saved plans.
   function changeCountry(value: string) {
     if ((!isEnabledTripCountry(value) && value !== plan?.country) || value === country) return
     setCountry(value)
@@ -42,10 +54,14 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
     setBusy(true)
     setFeedback("")
     try {
+      // Keep the same key for an unchanged retry after an uncertain response. A
+      // changed payload gets a fresh key; edits instead carry the saved revision.
       const payload = JSON.stringify(fields)
       if (request.current?.payload !== payload) request.current = { payload, key: crypto.randomUUID() }
       const key = request.current.key
       const result = await accountRequest<{ plan: TripPlan }>(plan ? `/api/account/plans/${plan.id}` : "/api/account/plans", { method: plan ? "PATCH" : "POST", headers: plan ? {} : { "Idempotency-Key": key }, body: JSON.stringify(plan ? { ...fields, expectedUpdatedAt: plan.updatedAt } : { ...fields, id: key }) })
+      // Update the parent workspace only after checking the essential receipt.
+      // HTTP success alone is not enough to claim this particular draft saved.
       if (!result.plan || result.plan.id !== (plan?.id || key) || result.plan.status !== "draft" || !result.plan.updatedAt) throw new Error("Your saved plan could not be confirmed. Please try again; your details are still here.")
       request.current = null
       onSaved(result.plan)

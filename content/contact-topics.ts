@@ -1,3 +1,8 @@
+/**
+ * Recognized public inquiry topics, including New Zealand interest and account help.
+ * contactTopic accepts unknown URL input and returns only an explicitly listed topic.
+ * The New Zealand topic starts a conversation; it does not activate saved NZ trips.
+ */
 const contactTopics = {
   general: { title: "Contact AVES", subject: "General AVES inquiry", description: "Send us a question or idea. We will review your message and reply personally." },
   account: { title: "Help with Your AVES Account", subject: "Account or proposal support", description: "Tell us what you need help with. Please do not include passwords, payment details or identity documents." },

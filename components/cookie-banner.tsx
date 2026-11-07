@@ -1,5 +1,10 @@
 "use client"
 
+/*
+ * First-visit cookie notice. The provider persists explicit choices; this component only
+ * controls whether the banner is currently visible. Dismissing it is not accepting cookies.
+ */
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -34,12 +39,14 @@ export function CookieBanner() {
     setIsVisible(false)
   }
 
+  // Move into the detailed dialog; simply opening it does not save a preference.
   const handleCustomize = () => {
     console.log("Banner: Customize clicked") // Debug log
     setShowPreferenceCenter(true)
     setIsVisible(false)
   }
 
+  // Dismiss only this notice. No call to the provider means consent remains undecided.
   const handleClose = () => {
     setIsVisible(false)
   }

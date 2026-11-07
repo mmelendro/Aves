@@ -1,12 +1,24 @@
+/**
+ * Read-only presentation of a proposal returned by the account/admin API.
+ * The owner prop changes displayed details, not permission to fetch the record.
+ * Text is rendered as React text rather than injected HTML.
+ */
+
 import { FileText } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { dateLabel, type Proposal } from "./account-api"
 
+/**
+ * Describe provider acceptance separately from delivery; failed notification does not mean lost proposal.
+ */
 export function NotificationStatus({ status }: { status: string }) {
   return <p className="text-sm text-gray-500">{status === "accepted" ? "The email service accepted the notification. Delivery is not confirmed." : status === "failed" ? "The proposal is saved, but its email notification was not accepted. The customer can still view an issued proposal in their account." : "Email notification is pending. This is separate from the saved request or proposal."}</p>
 }
 
+/**
+ * Display an authorized proposal and optional owner-only presentation details; no data mutation occurs here.
+ */
 export function ProposalCard({ proposal, owner = false }: { proposal: Proposal; owner?: boolean }) {
   return <Card className="border-0 shadow-lg bg-white"><CardContent className="p-6 lg:p-8">
     <div className="flex flex-wrap items-center justify-between gap-3 mb-5"><div className="flex items-center gap-3"><FileText className="w-6 h-6 text-emerald-600" /><h3 className="text-xl font-bold text-gray-900">Proposal · Version {proposal.version}</h3></div><Badge className={proposal.status === "sent" ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-100" : "bg-amber-100 text-amber-800 hover:bg-amber-100"}>{proposal.status === "sent" ? "Issued" : "Draft"}</Badge></div>

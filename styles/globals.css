@@ -1,3 +1,8 @@
+/*
+ * RETAINED ALTERNATE stylesheet: the current layout imports app/globals.css, not this file.
+ * These older tokens and utility definitions have no effect unless this file is imported.
+ * Do not import both Tailwind entry stylesheets merely to change the current homepage.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

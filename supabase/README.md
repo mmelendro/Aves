@@ -1,6 +1,61 @@
 # Shared AVES inquiry and account storage
 
-This database supports both Australia and Colombia through one AVES account and owner portal. The application remains in the `australia` repository and the shared portal is served at `/australia/account`. Contact records use server-only data access; authenticated clients own their trip plans, quote requests, and issued proposals. Migrations do not create real accounts, grant an owner membership, enroll anyone in a campaign, or send email.
+This database supports both Australia and Colombia through one AVES account and owner portal. The implementation remains in the `australia` application, while visitors use the shared portal at `/account`; old `/australia/account` links redirect there. Contact records use server-only data access; authenticated clients own their trip plans, quote requests, and issued proposals. Migrations do not create real accounts, grant an owner membership, enroll anyone in a campaign, or send email.
+
+## Beginner's map of the database
+
+Start with [the backend code tour](../docs/backend-code-tour.md) for complete form → API → identity check → database → response examples. This section explains the schema declared by the migration files. The dated deployment/test notes below are historical evidence, not a fresh verification of today's hosted settings. This documentation update made no live database calls and changed no migration SQL.
+
+A **table** stores rows of a particular kind. A **schema** is a namespace such as `public`, `private`, or Supabase-managed `auth`. The name `public` does not mean anyone may read its rows: grants and row-level security still control access. An **RPC** is a database function called by the application; a **transaction** commits all its related writes together or rolls them back together.
+
+| Table | What belongs here | Access intended by the migrations |
+| --- | --- | --- |
+| `private.contact_requests` | Public inquiries/waitlist requests, retry references, country, and notification outcome. | Server-only contact functions; no browser table privileges. |
+| `private.launch_subscribers` | Normalized subscriber addresses and requested/suppressed status. | Server-only access; form submission does not verify an email address. |
+| `private.consent_events` | Evidence of opt-in wording/version and suppression. | Application can append/read evidence, not rewrite/delete it. |
+| `private.site_admins` | Explicit active owner grants tied to Auth user UUIDs. | Assigned through reviewed administration; ordinary app roles cannot grant themselves membership. |
+| `public.trip_plans` | A client's editable draft and its country/regions/interests; submitted plans become frozen. | Authenticated users read their own rows and change only their own drafts, with restricted writable columns. |
+| `public.quote_requests` | An immutable copy of the requested plan plus contact details and owner workflow state. | Clients read permitted columns of their own requests; authorized server functions create/update workflow state. |
+| `public.quote_status_events` | History of a request's workflow changes. | Clients read their own permitted history; server functions append events. |
+| `public.quote_proposals` | Versioned AUD prices, itineraries, inclusions/exclusions, and separate email status. | Clients read only their own issued proposals; owner-authorized functions manage drafts and issue versions. |
+| `public.destination_countries` | Registered countries and whether they accept new plans/requests. | Signed-in users and service role can read; browser roles cannot edit. |
+| `public.destination_regions` | Canonical regions belonging to those countries. | Same read-only catalogue access; changes require reviewed administrative SQL. |
+
+Supabase owns `auth.users`, outside this application-table list. The application uses its verified identity and limited server-side identity lookups; passwords do not belong in AVES plan/contact/proposal tables.
+
+## Read migrations in this order
+
+Migration filenames begin with an ordered version timestamp. Later files can replace earlier function definitions, so an early file alone does not describe the final schema.
+
+| Migration | Purpose |
+| --- | --- |
+| [20261104210527_australia_contact_storage.sql](migrations/20261104210527_australia_contact_storage.sql) | Private inquiries/subscribers/consent, replay-safe submission, per-email throttling, notification recording, and suppression. |
+| [20261104222434_australia_client_trips_quotes.sql](migrations/20261104222434_australia_client_trips_quotes.sql) | Owned plans, frozen quote snapshots, owner grants, proposal versions, RLS, and account workflow functions. |
+| [20261106105909_australia_draft_quota_and_default_privileges.sql](migrations/20261106105909_australia_draft_quota_and_default_privileges.sql) | Enforce the 50-draft quota under concurrent creation and restrict future default privileges. |
+| [20261106105919_australia_client_quote_column_privileges.sql](migrations/20261106105919_australia_client_quote_column_privileges.sql) | Narrow which quote/history columns authenticated clients may read. |
+| [20261106114144_shared_country_plans_and_contacts.sql](migrations/20261106114144_shared_country_plans_and_contacts.sql) | Add Colombia to the existing account/contact system, preserving historical Australian values and retries. |
+| [20261106203926_extensible_destination_catalogue.sql](migrations/20261106203926_extensible_destination_catalogue.sql) | Replace fixed country rules with a country/region catalogue and safe replay for retired destinations. |
+
+## How the protection layers fit together
+
+**Grants** decide whether a database role can perform an operation or read/write a column at all. **RLS policies** then decide which rows that role can access. **Constraints and triggers** protect valid content and state changes, such as keeping issued proposals unchanged. None of these is interchangeable with hiding a button in the website.
+
+The visitor-scoped Supabase client uses the publishable key plus the verified session; RLS ties account rows to `auth.uid()`. The private service-key client bypasses RLS. Consequently, privileged workflow functions must check the actor passed by the trusted server against confirmed Auth identity, plan ownership, or the explicit `site_admins` grant. These functions use `SECURITY INVOKER` (the caller's privileges), qualified names, and an empty search path; that does not make an unchecked service-role call safe by itself. Small validation/catalogue helpers have different grants from the privileged workflow functions: consult the actual SQL before changing any function's access.
+
+The server derives actor IDs from `getUser()` and never trusts form-submitted ownership. It also checks input, origins, size, and expected revisions. This is why changes must be reviewed across the browser, handler, and SQL layers together.
+
+Stored data and email are separate. Database functions commit requests/proposals before the server attempts notifications. `accepted` means a provider receipt, not inbox delivery; `sent` on a proposal means issued/client-visible. None of these states confirms a booking or payment. A SHA-256 request hash supports retry matching; it does not encrypt personal information.
+
+## Safe editing and test workflow
+
+1. Read the handler and the **latest** definition of its database function before changing a workflow. Search all migrations because later files may replace it.
+2. Add a new migration for changes. Do not rewrite applied migration bodies or rerun an old file under a new timestamp; historical versions and hashes are deployment records.
+3. Keep application and database destination catalogues coordinated. Preserve stored country/region references, consent wording versions, old retry hashes, and issued snapshots. See [adding-destinations.md](../docs/adding-destinations.md).
+4. Review grants as well as RLS. Keep `private` outside exposed Data API schemas. Never solve an access error by granting broad anonymous/authenticated writes or exposing a service key to the browser.
+5. Exercise database tests in a disposable local/test database first. Read each test file's setup and cleanup assumptions; a file named “rollback” is not permission to point it at production. Hosted checks require their own reviewed target and scope.
+6. Treat backups, key rotation, provider Auth settings, monitoring, and recovery as operational work, not something these comments prove is enabled. Do not copy real customer data or credential values into tests, docs, or logs.
+
+The detailed contracts and dated rollout records follow. They are retained so maintainers can understand why compatibility checks exist.
 
 The shared country/region registry is **live and verified on 7 November 2026 (Sydney)** at release `9a7c03b`, deployment `dpl_6CaX82WY4M5qvChywSLuMtZNoKth` ([exact deployment](https://aves-australia-8naiv3je8-mmelendro-9273s-projects.vercel.app)). See [Adding an AVES destination](../docs/adding-destinations.md) for the reviewed configuration/migration process, disabled Ecuador/Costa Rica placeholders and separate public launch requirements. No new database or customer accounts are needed, and there is no country-management admin screen.
 

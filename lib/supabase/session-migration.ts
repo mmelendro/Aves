@@ -1,3 +1,10 @@
+/**
+ * Compatibility bridge from Australia-only cookies to the shared AVES session.
+ * It returns cookie writes for its caller, not a session in a response body/URL.
+ * A pending PKCE verifier completes an in-progress sign-in, not an authenticated
+ * identity. Session cookies are copied only after Auth verification.
+ */
+
 import "server-only"
 import { createServerClient, type CookieOptions } from "@supabase/ssr"
 import { authCookieOptions, legacyAuthCookieOptions, publicSupabaseConfig } from "./config"

@@ -1,7 +1,16 @@
+/**
+ * Confirm an allowed email token type with Supabase Auth, then redirect.
+ * A recovery token leads to the password-reset form; other allowed types use the
+ * safe account return path. The token itself is not returned in the response.
+ */
+
 import { NextResponse, type NextRequest } from "next/server"
 import { createClient } from "@/lib/supabase/server"
 import { safeAuthNext } from "@/lib/auth-redirect"
 
+/**
+ * Verify the supplied email token/type with Auth; return a safe uncached redirect for success or failure.
+ */
 export async function GET(request: NextRequest) {
   const tokenHash = request.nextUrl.searchParams.get("token_hash")
   const type = request.nextUrl.searchParams.get("type")

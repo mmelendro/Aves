@@ -1,3 +1,8 @@
+/*
+ * Link adapter for this app, which normally lives under /australia. Next Link handles
+ * Australian routes; shared /account links must leave that base path and use a normal anchor.
+ * This changes navigation only: account authentication still happens in the account/server code.
+ */
 import Link from "next/link"
 import type { ComponentProps } from "react"
 

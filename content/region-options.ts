@@ -1,3 +1,8 @@
+/**
+ * Stable Australian region IDs and readable labels used in navigation and planning.
+ * Object.fromEntries builds a quick ID-to-label lookup; regionShortLabel chooses a
+ * short display name and falls back gracefully if an ID is unfamiliar.
+ */
 // Shared by discovery, enquiries and saved trip plans.
 export const regionOptions = [
   { id: "queensland", label: "Queensland", shortLabel: "Queensland" },

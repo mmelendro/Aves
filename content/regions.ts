@@ -1,3 +1,8 @@
+/**
+ * Public Australian region-guide content: landscapes, seasons, birds and planning notes.
+ * The Region type names the fields used by app/regions/[slug]/page.tsx.
+ * IDs connect guides, maps and inquiry presets; changing an ID can break those links.
+ */
 export type Region = {
   id: string
   state: string

@@ -1,8 +1,17 @@
+/*
+ * ACTIVE global stylesheet, imported by app/layout.tsx. Tailwind generates utilities used
+ * in component className strings; the rules below add shared tokens and custom selectors.
+ * Many historical navigation/carousel selectors remain: they affect only matching markup.
+ * Current navigation and bird carousel appearance is mainly in their TSX className values.
+ * See docs/frontend-code-tour.md before changing a broad selector such as body or button.
+ */
+/* These directives expand at build time; utility classes such as lg:grid-cols-2 live in TSX markup. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* HSL design tokens feed shared UI controls. Change a token only when the whole app should change. */
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -31,6 +40,7 @@
     --chart-5: 27 87% 67%;
   }
 
+  /* Alternate tokens apply only beneath a .dark class; these definitions do not create a theme switch. */
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;

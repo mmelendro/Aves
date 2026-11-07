@@ -1,3 +1,8 @@
+/*
+ * One reusable regional-guide template, populated by the matching record in content/regions.ts.
+ * The URL slug selects the region; this file controls the section order and layout.
+ * The featured carousel joins the separate species catalogue through RegionalBirdCarousel.
+ */
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,16 +16,19 @@ import { canonicalUrl, sitePath } from "@/lib/site-path"
 
 type Props = { params: Promise<{ slug: string }> }
 
+// Use the same lookup for metadata and visible content, so an unknown region cannot show a misleading page.
 function findRegion(slug: string) {
   const region = regions.find(item => item.id === slug)
   if (!region) notFound()
   return region
 }
 
+// Tell Next.js which region URLs can be prepared from the content catalogue during a build.
 export function generateStaticParams() {
   return regions.map(region => ({ slug: region.id }))
 }
 
+// Search/share previews use this region record and canonical public URLs.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = findRegion((await params).slug)
   const title = `Birding in ${region.state} | ${region.landscape}`
@@ -39,10 +47,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function RegionPage({ params }: Props) {
   const region = findRegion((await params).slug)
+  // Carry the region into the form as a preselection; nothing is booked by following this link.
   const inquiryHref = `/contact?region=${region.id}`
 
   return (
     <PageShell path={`/regions/${region.id}`} title={`Birding in ${region.state}`} description={region.description} eyebrow="Australian regions" media={<RegionalBirdCarousel regionId={region.id} compact />}>
+      {/* Region focus, breadcrumb and planning essentials. Edit the region record for factual copy. */}
       <section className="pb-16 lg:pb-20" aria-labelledby="region-focus">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="py-6 text-sm text-gray-600">
@@ -79,6 +89,7 @@ export default async function RegionPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Season, pace and habitats help visitors judge fit before requesting a trip. */}
       <section className="bg-gradient-to-br from-blue-50 to-emerald-50 py-16 lg:py-20" aria-labelledby="timing-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8">
           <div className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm">
@@ -99,6 +110,7 @@ export default async function RegionPage({ params }: Props) {
         </div>
       </section>
 
+      {/* These short regional bird notes complement the media carousel above. */}
       <section className="py-16 lg:py-20" aria-labelledby="birds-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-8">
@@ -116,6 +128,7 @@ export default async function RegionPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Landscape, possible places and practical caveats; these are ideas, not confirmed bookings. */}
       <section className="bg-gray-50 py-16 lg:py-20" aria-labelledby="places-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 gap-10 lg:gap-14">
           <div className="lg:col-span-3">
@@ -154,6 +167,7 @@ export default async function RegionPage({ params }: Props) {
             </Button>
           </div>
 
+          {/* Keep official sources visible so visitors can check current access and wildlife advice. */}
           <div className="mt-12 max-w-4xl" aria-labelledby="sources-heading">
             <h2 id="sources-heading" className="text-xl font-bold text-gray-900">Official information for your planning</h2>
             <p className="mt-3 text-sm text-gray-600 leading-relaxed">These park, tourism and BirdLife resources inform the regional notes above. Use their current advice for access, conditions and wildlife guidance; the places listed here are ideas to discuss, not a confirmed itinerary.</p>

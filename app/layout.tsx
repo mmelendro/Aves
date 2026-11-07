@@ -1,3 +1,8 @@
+/*
+ * The outer Next.js layout for this application. It loads the active stylesheet and wraps
+ * all routes in one cookie-preference provider. Page-specific content arrives as children.
+ * Metadata here supplies default search/share information, not the visible page heading.
+ */
 import type { Metadata } from "next"
 import "./globals.css"
 import { CookieBanner } from "@/components/cookie-banner"
@@ -7,6 +12,7 @@ import { canonicalUrl } from "@/lib/site-path"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
+// Indexing is enabled only for production with an explicit public URL, keeping previews out of search.
 export const metadata: Metadata = {
   metadataBase: new URL(new URL(canonicalUrl()).origin),
   alternates: { canonical: canonicalUrl() },
@@ -16,6 +22,7 @@ export const metadata: Metadata = {
   openGraph: { title: "AVES Australia — Follow the birds", description: "Birding. Nature. A little more wonder.", type: "website", locale: "en_AU", siteName: "AVES Australia" },
 }
 
+// The provider and cookie UI sit outside route content so every page can share the same preferences.
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en-AU"><body><CookieConsentProvider>{children}<CookiePreferenceCenter /><CookieBanner /></CookieConsentProvider></body></html>
 }

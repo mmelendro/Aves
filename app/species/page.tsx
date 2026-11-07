@@ -1,3 +1,7 @@
+/*
+ * Public species directory: the same bird catalogue powers both the featured carousel and
+ * the detailed cards below it. Edit content/birds.ts for species facts, media, sources and credits.
+ */
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,6 +13,7 @@ import { canonicalUrl, sitePath } from "@/lib/site-path"
 
 export const metadata: Metadata = { title: "Australian Birdlife & Where to Find It", description: "Explore a selection of Australian birds through real photographs, recordings and clear habitat and distribution notes. Find inspiration for a personal birding trip.", alternates: { canonical: canonicalUrl("/species") } }
 
+// Species facts are rendered from the catalogue; this page adds navigation and the educational framing.
 export default function SpeciesPage() {
   return <PageShell path="/species" title="Discover Australia's Birdlife" description="A selection of birds, many different worlds. Browse their photographs, listen to available recordings and discover where each species can be found." media={<><HomepageBirdCarousel autoPlay={false} showBirdPicker className="w-full" /><p className="mt-4 text-sm leading-relaxed text-gray-600">A selection from Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="text-emerald-800 underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a>. Sightings depend on route, habitat and season. Keep recordings for learning, not attracting birds in the field.</p></>}>
     <section className="py-14 lg:py-20" aria-labelledby="bird-directory-heading"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

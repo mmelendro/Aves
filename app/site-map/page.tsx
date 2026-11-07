@@ -1,3 +1,7 @@
+/*
+ * Human-readable navigation directory, grouped from lib/public-pages.ts.
+ * The XML sitemap uses the same public-page inventory, keeping the two lists aligned.
+ */
 import type { Metadata } from "next"
 import Link from "next/link"
 import { PageShell } from "@/components/page-shell"
@@ -10,6 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: canonicalUrl("/site-map") },
 }
 
+// Add/remove public routes in lib/public-pages.ts so this directory and the XML list stay consistent.
 export default function SiteMapPage() {
   return (
     <PageShell path="/site-map" title="Find Your Way Around AVES Australia" description="Explore a place, meet its birds, or find the information you need to start planning.">

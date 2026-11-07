@@ -52,7 +52,8 @@
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Regent_Bowerbird_(_Sericulus_chrysocephalus_)_Male_,_Queensland_,Australia_(53341845656).jpg"
     },
     "audioFile": "/audio/au-regent-bowerbird.mp3",
-    "audioLabel": "Male vocalisations · Lamington National Park"
+    "audioLabel": "Male vocalisations · Lamington National Park",
+    "imagePosition": "35% center"
   },
   {
     "id": "au-victorias-riflebird",
@@ -78,7 +79,8 @@
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Victoria%27s_riflebird_(Ptiloris_victoriae)_male_Atherton.jpg"
     },
     "audioFile": "/audio/au-victorias-riflebird.mp3",
-    "audioLabel": "Courtship sounds · Atherton Tablelands"
+    "audioLabel": "Courtship sounds · Atherton Tablelands",
+    "imagePosition": "70% center"
   },
   {
     "id": "au-splendid-fairywren",
@@ -128,7 +130,8 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Chloebia_gouldiae,_Elsey,_Northern_Territory,_Australia_1.jpg",
       "reserve": "Elsey, Northern Territory, Australia",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Chloebia_gouldiae,_Elsey,_Northern_Territory,_Australia_1.jpg"
-    }
+    },
+    "imagePosition": "70% center"
   },
   {
     "id": "au-red-tailed-black-cockatoo",
@@ -154,7 +157,7 @@
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Cairns_male_Black_Cockatoo-1_(23401557432).jpg"
     },
     "audioFile": "/audio/red-tailed-black-cockatoo.m4a",
-    "imagePosition": "25% 50%"
+    "imagePosition": "5% center"
   },
   {
     "id": "au-carnabys-black-cockatoo",
@@ -179,7 +182,8 @@
       "reserve": "Canning River Regional Park, Western Australia, Australia",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Carnaby%27s_black_cockatoo_(female)_at_Canning_River_Regional_Park,_September_2021_01.jpg"
     },
-    "audioFile": "/audio/carnabys-black-cockatoo.m4a"
+    "audioFile": "/audio/carnabys-black-cockatoo.m4a",
+    "imagePosition": "30% center"
   },
   {
     "id": "au-forty-spotted-pardalote",
@@ -208,6 +212,7 @@
       "reserve": "South Bruny Island, Tasmania, Australia",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Forty-spotted_pardalote_(Pardalotus_quadragintus)_South_Bruny_3.jpg"
     },
-    "audioFile": "/audio/forty-spotted-pardalote.wav"
+    "audioFile": "/audio/forty-spotted-pardalote.wav",
+    "imagePosition": "35% center"
   }
 ]

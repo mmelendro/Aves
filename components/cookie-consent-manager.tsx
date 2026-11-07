@@ -1,5 +1,12 @@
 "use client"
 
+/*
+ * Shared browser context for optional cookie preferences. The provider is mounted once in
+ * app/layout.tsx; the banner and preference dialog read the same state through useCookieConsent.
+ * This stores preference flags, not passwords, auth tokens or customer records. It does not
+ * install analytics/advertising scripts or replace server-side authentication.
+ */
+
 import { useState, useEffect, createContext, useContext, type ReactNode } from "react"
 import { SITE_BASE_PATH } from "@/lib/site-path"
 
@@ -23,6 +30,7 @@ interface CookieConsentContextType {
 
 const CookieConsentContext = createContext<CookieConsentContextType | undefined>(undefined)
 
+// Optional categories start off. Null provider state means no matching stored choice has loaded yet.
 const DEFAULT_PREFERENCES: CookiePreferences = {
   essential: true, // Always true, cannot be disabled
   analytics: false,
@@ -31,6 +39,7 @@ const DEFAULT_PREFERENCES: CookiePreferences = {
 }
 
 const STORAGE_KEY = "aves-australia-cookie-preferences"
+// Changing the version asks visitors to choose again instead of silently reusing an older consent record.
 const CONSENT_VERSION = "1.0"
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
@@ -91,6 +100,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     setHasConsented(false)
   }
 
+  // Save the same versioned preference record in localStorage and a cookie fallback; neither stores an account session.
   const savePreferences = (prefs: CookiePreferences) => {
     const data = {
       preferences: prefs,
@@ -117,6 +127,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // This only updates an already-present gtag and emits an event. It does not download a tracking script.
   const applyPreferences = (prefs: CookiePreferences) => {
     // Apply analytics preferences
     if (prefs.analytics) {
@@ -166,6 +177,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Merge a partial edit with defaults/current values, always retaining the essential category.
   const updatePreferences = (newPrefs: Partial<CookiePreferences>) => {
     const updatedPrefs = {
       ...DEFAULT_PREFERENCES,
@@ -206,6 +218,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     setShowPreferenceCenter(false)
   }
 
+  // Forget the preference record so the banner can ask again; this does not delete an account or sign out.
   const resetConsent = () => {
     try {
       localStorage.removeItem(STORAGE_KEY)

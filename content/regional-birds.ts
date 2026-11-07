@@ -1,3 +1,8 @@
+/**
+ * Associates catalogue bird IDs with region-specific occurrence notes and sources.
+ * A regional carousel reuses the main photograph/recording while showing these local
+ * notes. The location of a media recording can differ from the place described here.
+ */
 export type RegionalBirdSelection = {
   birdId: string
   whereFound: string

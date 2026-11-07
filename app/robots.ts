@@ -1,3 +1,8 @@
+/*
+ * Crawler instructions for this application. Preview deployments request no indexing.
+ * These rules are not security controls: private pages and APIs must enforce access on the server.
+ * The main domain also serves its own authoritative root robots.txt.
+ */
 import type { MetadataRoute } from "next"
 import { canonicalUrl, SITE_BASE_PATH } from "@/lib/site-path"
 

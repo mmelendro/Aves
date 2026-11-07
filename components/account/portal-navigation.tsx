@@ -1,5 +1,10 @@
 "use client"
 
+/**
+ * Browser navigation for the shared account portal and public destinations.
+ * Showing a link does not grant access to its destination; private APIs enforce it.
+ */
+
 import { SiteLink as Link } from "@/components/site-link"
 import { BrandMark } from "@/components/brand-mark"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
@@ -11,6 +16,9 @@ const portalLinks = [
   { href: "https://aves.bio/australia", label: "Australia" },
 ] as const
 
+/**
+ * Render shared account/country links and highlight currentPage; the overlay manages its mobile menu state.
+ */
 export function PortalNavigation({ currentPage }: { currentPage: string }) {
   return <>
     <header className="fixed inset-x-0 top-0 z-50 border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md">

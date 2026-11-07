@@ -1,3 +1,7 @@
+/*
+ * Neutral AVES header and footer for general contact topics. Unlike the usual Australian
+ * chrome, these links connect the whole venture and its destinations without implying an AU trip.
+ */
 import { SiteLink as Link } from "@/components/site-link"
 import { BrandMark } from "@/components/brand-mark"
 

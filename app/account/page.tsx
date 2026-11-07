@@ -1,3 +1,9 @@
+/**
+ * Server entry for the shared My Trips page at the public /account URL.
+ * Verify the user before rendering their email/workspace. Country/region query
+ * parameters may prefill a draft; they do not load another person's trip.
+ */
+
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { accountUrl } from "@/lib/account-path"
@@ -8,6 +14,9 @@ import { accountEntryHref, type AccountSearchParams } from "@/components/account
 import { accountPlanPath, planIntentFromSearch } from "@/components/account/plan-intent"
 
 export const metadata: Metadata = { title: "My Trip Plans" }
+/**
+ * Resolve safe plan intent, verify the visitor, then render the dashboard or redirect to sign-in.
+ */
 export default async function AccountPage({ searchParams }: { searchParams: Promise<AccountSearchParams> }) {
   const initialPlan = planIntentFromSearch(await searchParams)
   const user = await getAccountUser()

@@ -1,3 +1,8 @@
+/*
+ * RETAINED navigation stylesheet: no current app/component imports this file.
+ * The active menu is components/mobile-navigation-overlay.tsx with classes in its markup.
+ * These older .mobile-nav-* rules apply only if a future caller imports them and uses those selectors.
+ */
 /* Mobile Navigation Overlay Styles */
 
 /* Smooth scrolling for mobile menu */

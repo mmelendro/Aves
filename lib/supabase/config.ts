@@ -1,8 +1,18 @@
+/**
+ * Public connection details and shared session-cookie settings.
+ * A publishable key can be in browser code; it is not the private service key.
+ * Database grants, RLS and verified identity determine access. Root-scoped cookies
+ * allow one account across countries; legacy settings support older AU sessions.
+ */
+
 // One browser session across every AVES destination. The distinct name avoids
 // ambiguous duplicate cookies while the old /australia session is migrated.
 export const authCookieOptions = { name: "aves-auth", path: "/", sameSite: "lax" as const, secure: process.env.NODE_ENV === "production" }
 export const legacyAuthCookieOptions = { ...authCookieOptions, name: "aves-au-auth", path: "/australia" }
 
+/**
+ * Return validated public { url, key } settings, or throw if missing/invalid.
+ */
 export function publicSupabaseConfig() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()

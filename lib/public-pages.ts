@@ -1,3 +1,9 @@
+/**
+ * Hand-maintained public Australian page directory for navigation/sitemaps.
+ * Private account/admin endpoints do not belong in this discovery list. Omitting a
+ * page from a sitemap is not an access-control mechanism.
+ */
+
 // Public, canonical page paths only; exclude private tools and redirect aliases.
 // Keep paths unprefixed: framework helpers supply each site's base path.
 export type PublicPageGroup = { id: string; title: string; pages: { href: string; label: string }[] }
@@ -67,5 +73,8 @@ export const publicPageGroups: PublicPageGroup[] = [
   },
 ]
 
+/**
+ * Flatten grouped entries for consumers that need one list of public pages.
+ */
 export const publicPages = publicPageGroups.flatMap(group => group.pages)
 

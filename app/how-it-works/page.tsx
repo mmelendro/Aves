@@ -1,3 +1,7 @@
+/*
+ * Public explanation of personal trip planning and optional My Trips accounts.
+ * This page describes the process; it does not submit inquiries or create reservations.
+ */
 import type { Metadata } from "next"
 import { SiteLink as Link } from "@/components/site-link"
 import { ArrowRight } from "lucide-react"
@@ -8,6 +12,7 @@ import { canonicalUrl } from "@/lib/site-path"
 
 export const metadata: Metadata = { title: "How Trip Planning Works", description: "From an Australian birding idea to a personal proposal. Learn how enquiries, saved trip plans and quotes work with AVES.", alternates: { canonical: canonicalUrl("/how-it-works") } }
 
+// SiteLink is important here: My Trips belongs to /account, shared by all enabled destinations.
 export default function HowItWorksPage() {
   return <PageShell path="/how-it-works" title="Your ideas. A journey taking shape." description="Explore first, ask questions and take your time. Here is how to plan an Australian birding journey with AVES.">
     <PlanningSteps showLink={false} />

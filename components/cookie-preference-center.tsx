@@ -1,5 +1,11 @@
 "use client"
 
+/*
+ * Cookie settings dialog. Temporary switches let visitors review choices before Save
+ * commits them to the shared provider. Accept/reject shortcuts commit immediately.
+ * Category descriptions are presentation copy, not evidence that those services are installed.
+ */
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -21,6 +27,7 @@ export function CookiePreferenceCenter() {
     setShowPreferenceCenter,
   } = useCookieConsent()
 
+  // Draft choices remain local until Save; closing the dialog alone does not commit these switches.
   const [tempPreferences, setTempPreferences] = useState<CookiePreferences>(
     preferences || {
       essential: true,
@@ -37,6 +44,7 @@ export function CookiePreferenceCenter() {
     }
   }, [preferences])
 
+  // Commit the draft through the provider, which owns persistence and preference-change notifications.
   const handleSavePreferences = () => {
     updatePreferences(tempPreferences)
     setShowPreferenceCenter(false)
@@ -63,6 +71,7 @@ export function CookiePreferenceCenter() {
     setShowPreferenceCenter(false)
   }
 
+  // Labels/examples for the settings UI. These do not instantiate carts, language controls, analytics or adverts.
   const cookieCategories = [
     {
       key: "essential" as const,
@@ -126,6 +135,7 @@ export function CookiePreferenceCenter() {
     },
   ]
 
+  // Pure presentation helper: enabled categories use their accent; disabled ones use neutral colours.
   const getColorClasses = (color: string, enabled: boolean) => {
     const colors = {
       green: enabled ? "bg-green-50 border-green-200 text-green-800" : "bg-gray-50 border-gray-200 text-gray-600",

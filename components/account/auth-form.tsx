@@ -1,5 +1,12 @@
 "use client"
 
+/**
+ * Browser forms for Supabase Auth: sign-in, signup, password recovery, and resend.
+ * Passwords go to the Auth SDK, not AVES trip/proposal tables. Form checks improve
+ * feedback; Supabase's configured Auth policy remains authoritative. Private API
+ * requests later verify the session again rather than trusting these screens.
+ */
+
 import { useEffect, useId, useRef, useState } from "react"
 import { SiteLink as Link } from "@/components/site-link"
 import { ArrowRight, CheckCircle, LockKeyhole, Mail } from "lucide-react"
@@ -13,12 +20,18 @@ import type { OAuthProvider } from "@/lib/oauth-providers"
 
 type Mode = "sign-in" | "sign-up" | "forgot-password" | "reset-password"
 
+/**
+ * Build a same-site Auth callback URL for email flows, with one of the two supported account targets.
+ */
 function callbackUrl(next: "/account" | "/account/reset-password") {
   const url = new URL(sitePath("/auth/callback"), window.location.origin)
   url.searchParams.set("next", next)
   return url.href
 }
 
+/**
+ * Render mode-specific Auth actions. next is allowlisted again, and oauthProviders contains server-approved names.
+ */
 export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mode: Mode; next?: string; oauthProviders?: OAuthProvider[] }) {
   const destination = accountReturnPath(next)
   const prefix = useId()
@@ -41,6 +54,8 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
       if (error === "oauth") setFeedback("Social sign-in wasn't completed. It may have been cancelled or the link may have expired. Please try again, or use your email and password.")
     }
     if (mode !== "reset-password") return
+    // This check controls form readiness, not a separate authorization grant.
+    // Supabase must still authorize updateUser; ignore results after unmount.
     let active = true
     async function checkRecovery() {
       try {
@@ -56,6 +71,8 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
     return () => { active = false }
   }, [mode])
 
+  // Provider names are filtered on the server and checked again here. Request
+  // only basic profile/email scopes; provider secrets stay in provider settings.
   async function signInWithProvider(provider: OAuthProvider) {
     if (!socialMode || !oauthProviders.includes(provider) || busyRef.current) return
     busyRef.current = true
@@ -81,6 +98,8 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    // The ref closes the gap before React renders the disabled button, reducing
+    // accidental double submits. Provider/API rules remain authoritative.
     if (busyRef.current) return
     const form = event.currentTarget
     const values = new FormData(form)
@@ -106,6 +125,7 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
         if (error) throw new Error(error.message || "We couldn't create your account. Please try again later.")
         window.location.assign(accountEntryHref("/account/check-email", destination))
       } else if (mode === "forgot-password") {
+        // Generic success text avoids asserting that an address has an account.
         const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: callbackUrl("/account/reset-password") })
         if (error) throw new Error("We couldn't request a reset link right now. Please try again later.")
         setSuccess(true)
@@ -156,6 +176,9 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
   </CardContent></Card>
 }
 
+/**
+ * Offer confirmation guidance and an explicit resend request; generic success wording does not disclose account existence.
+ */
 export function CheckEmail({ next = "/account" }: { next?: string }) {
   const prefix = useId()
   const busyRef = useRef(false)

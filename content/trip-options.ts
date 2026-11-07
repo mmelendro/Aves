@@ -1,3 +1,9 @@
+/**
+ * Destination configuration shared by forms and server-side validation.
+ * Known, configured and enabled are different states: a future country may be listed
+ * without being available for new trip requests. Keep these IDs aligned with the
+ * database catalogue; adding a homepage card alone does not change storage support.
+ */
 import { regionOptions } from "./region-options"
 
 export type DestinationRegion = { id: string; label: string; acceptLabel?: boolean }
@@ -33,21 +39,26 @@ export const destinationRegistry = {
 export type TripCountry = keyof typeof destinationRegistry
 export const DEFAULT_TRIP_COUNTRY: TripCountry = "australia"
 
+// Build typed lookup tables and validators from one registry so forms and APIs agree.
 export function createCountryOptions<R extends Record<string, DestinationDefinition>>(registry: R, defaultCountry: Extract<keyof R, string>) {
   type Country = Extract<keyof R, string>
   const countryIds = Object.keys(registry) as Country[]
   const countryLabels = Object.fromEntries(countryIds.map(id => [id, registry[id].label])) as Record<Country, string>
   const countryRegionOptions = Object.fromEntries(countryIds.map(id => [id, registry[id].regions])) as Record<Country, readonly DestinationRegion[]>
   const countryRegionLabels = Object.fromEntries(countryIds.map(id => [id, Object.fromEntries(registry[id].regions.map(region => [region.id, region.label]))])) as Record<Country, Record<string, string>>
+  // Known means the ID exists; it does not mean trips can be requested yet.
   function isKnownTripCountry(value: unknown): value is Country {
     return typeof value === "string" && Object.hasOwn(registry, value)
   }
+  // Configured additionally requires versioned consent wording.
   function isConfiguredTripCountry(value: unknown): value is Country {
     return isKnownTripCountry(value) && Boolean(registry[value].consentVersion)
   }
+  // Enabled destinations are the only ones offered for new supported trips.
   function isEnabledTripCountry(value: unknown): value is Country {
     return isConfiguredTripCountry(value) && registry[value].enabled
   }
+  // Use the default only when absent; reject an explicitly unknown country.
   function normalizeTripCountry(value?: Country): Country {
     if (value === undefined) return defaultCountry
     if (!isKnownTripCountry(value)) throw new Error("Unknown destination country")
@@ -64,9 +75,11 @@ export function createCountryOptions<R extends Record<string, DestinationDefinit
   function isOtherCountryRegion(country: Country, region: string) {
     return countryIds.some(id => id !== country && countryRegionOptions[id].some(option => option.id === region || option.label === region))
   }
+  // Historical Australian inquiries may contain free-text places; reject a recognized region from another country.
   function isContactRegion(country: Country, region: string) {
     return region === "" || isCountryRegion(country, region) || (country === defaultCountry && !isOtherCountryRegion(country, region))
   }
+  // Produce the display list after the validation helpers have been defined.
   const enabledCountries = countryIds.filter(isEnabledTripCountry).map(id => ({ id, label: countryLabels[id] }))
   return { countryLabels, countryRegionOptions, countryRegionLabels, enabledCountries, isKnownTripCountry, isConfiguredTripCountry, isEnabledTripCountry, normalizeTripCountry, countryConsentVersion, isCountryRegion, isOtherCountryRegion, isContactRegion }
 }

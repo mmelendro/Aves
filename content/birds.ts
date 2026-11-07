@@ -1,3 +1,8 @@
+/**
+ * Defines the shared Australian BirdProfile shape and combines three catalogue files.
+ * The spread operator (...) appends each list in order. Optional (?) media fields
+ * let the carousel show an unavailable-call state when no recording is supplied.
+ */
 import original from "./birds-original.json"
 import expansionA from "./birds-expansion-a.json"
 import expansionB from "./birds-expansion-b.json"

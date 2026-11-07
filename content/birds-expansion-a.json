@@ -10,7 +10,12 @@
     "image": "/images/birds/au-laughing-kookaburra.jpg",
     "audioFile": "/audio/au-laughing-kookaburra.mp3",
     "audioLabel": "Field recording · New South Wales",
-    "sources": [{ "title": "Australian Museum — Laughing Kookaburra", "url": "https://australian.museum/learn/animals/birds/laughing-kookaburra/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Laughing Kookaburra",
+        "url": "https://australian.museum/learn/animals/birds/laughing-kookaburra/"
+      }
+    ],
     "photoCredit": {
       "photographer": "JJ Harrison",
       "title": "Laughing Kookaburra at Waterworks Reserve",
@@ -18,7 +23,8 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Dacelo_novaeguineae_waterworks_-_edit.jpg",
       "reserve": "Waterworks Reserve, Hobart, Tasmania",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Dacelo_novaeguineae_waterworks_-_edit.jpg"
-    }
+    },
+    "imagePosition": "45% center"
   },
   {
     "id": "au-australian-magpie",
@@ -31,7 +37,12 @@
     "image": "/images/birds/au-australian-magpie.jpg",
     "audioFile": "/audio/au-australian-magpie.mp3",
     "audioLabel": "Field recording · Victoria",
-    "sources": [{ "title": "Australian Museum — Australian Magpie", "url": "https://australian.museum/learn/animals/birds/australian-magpie/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Australian Magpie",
+        "url": "https://australian.museum/learn/animals/birds/australian-magpie/"
+      }
+    ],
     "photoCredit": {
       "photographer": "Charles J. Sharp",
       "title": "Australian Magpie at Mount Annan",
@@ -39,7 +50,8 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Australian_magpie_(Gymnorhina_tibicen_tibicen)_male_Sydney.jpg",
       "reserve": "Australian Botanic Garden, Mount Annan, New South Wales",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Australian_magpie_(Gymnorhina_tibicen_tibicen)_male_Sydney.jpg"
-    }
+    },
+    "imagePosition": "65% center"
   },
   {
     "id": "au-galah",
@@ -52,7 +64,12 @@
     "image": "/images/birds/au-galah.jpg",
     "audioFile": "/audio/au-galah.mp3",
     "audioLabel": "Field recording · New South Wales",
-    "sources": [{ "title": "Australian Museum — Galah", "url": "https://australian.museum/learn/animals/birds/galah/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Galah",
+        "url": "https://australian.museum/learn/animals/birds/galah/"
+      }
+    ],
     "photoCredit": {
       "photographer": "Charles J. Sharp",
       "title": "Galah in Adelaide Botanic Garden",
@@ -60,7 +77,8 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Galah_(Eolophus_roseicapilla_albiceps)_male_Adelaide.jpg",
       "reserve": "Adelaide Botanic Garden, South Australia",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Galah_(Eolophus_roseicapilla_albiceps)_male_Adelaide.jpg"
-    }
+    },
+    "imagePosition": "27% center"
   },
   {
     "id": "au-emu",
@@ -73,7 +91,12 @@
     "image": "/images/birds/au-emu.jpg",
     "audioFile": "/audio/au-emu.mp3",
     "audioLabel": "Female emu call · recorded in a zoo",
-    "sources": [{ "title": "Australian Museum — Emu", "url": "https://australian.museum/learn/animals/birds/emu/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Emu",
+        "url": "https://australian.museum/learn/animals/birds/emu/"
+      }
+    ],
     "photoCredit": {
       "photographer": "JJ Harrison",
       "title": "Emu at Tidbinbilla",
@@ -81,7 +104,8 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Emu_1_-_Tidbinbilla.jpg",
       "reserve": "Tidbinbilla Nature Reserve, Australian Capital Territory",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Emu_1_-_Tidbinbilla.jpg"
-    }
+    },
+    "imagePosition": "62% center"
   },
   {
     "id": "au-southern-cassowary",
@@ -94,7 +118,12 @@
     "image": "/images/birds/au-southern-cassowary.jpg",
     "audioFile": "/audio/au-southern-cassowary.mp3",
     "audioLabel": "Cassowary chick calls · Queensland",
-    "sources": [{ "title": "Australian Museum — Southern Cassowary", "url": "https://australian.museum/learn/animals/birds/southern-cassowary/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Southern Cassowary",
+        "url": "https://australian.museum/learn/animals/birds/southern-cassowary/"
+      }
+    ],
     "photoCredit": {
       "photographer": "Summerdrought",
       "title": "Free-ranging Southern Cassowary at Etty Bay",
@@ -102,7 +131,8 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Southern_Cassowary_7071.jpg",
       "reserve": "Etty Bay, Queensland",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Southern_Cassowary_7071.jpg"
-    }
+    },
+    "imagePosition": "25% center"
   },
   {
     "id": "au-superb-lyrebird",
@@ -113,10 +143,15 @@
     "distribution": "The south-east of mainland Australia, with a population in southern Tasmania.",
     "habitat": "Moist forests, foraging on the ground and roosting in trees.",
     "image": "/images/birds/au-superb-lyrebird.jpg",
-    "imagePosition": "65% center",
+    "imagePosition": "70% center",
     "audioFile": "/audio/au-superb-lyrebird.mp3",
     "audioLabel": "Field recording · New South Wales",
-    "sources": [{ "title": "Australian Museum — Superb Lyrebird", "url": "https://australian.museum/learn/animals/birds/superb-lyrebird/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Superb Lyrebird",
+        "url": "https://australian.museum/learn/animals/birds/superb-lyrebird/"
+      }
+    ],
     "photoCredit": {
       "photographer": "Greg Tasney",
       "title": "Superb Lyrebird in the Blue Mountains",
@@ -135,10 +170,15 @@
     "distribution": "Populations occur from northern Queensland through the south-east to South Australia, including Kangaroo Island; colour forms vary by region.",
     "habitat": "Tall eucalypt forest and other wetter forests.",
     "image": "/images/birds/au-crimson-rosella.jpg",
-    "imagePosition": "65% center",
+    "imagePosition": "80% center",
     "audioFile": "/audio/au-crimson-rosella.mp3",
     "audioLabel": "Field recording · Australia",
-    "sources": [{ "title": "Australian Museum — Crimson Rosella", "url": "https://australian.museum/learn/animals/birds/crimson-rosella/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Crimson Rosella",
+        "url": "https://australian.museum/learn/animals/birds/crimson-rosella/"
+      }
+    ],
     "photoCredit": {
       "photographer": "Donald Hobern",
       "title": "Crimson Rosella in Lamington National Park",
@@ -160,7 +200,12 @@
     "imagePosition": "30% center",
     "audioFile": "/audio/au-eastern-rosella.mp3",
     "audioLabel": "Field recording · Victoria",
-    "sources": [{ "title": "Australian Museum — Eastern Rosella", "url": "https://australian.museum/learn/animals/birds/eastern-rosella/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Eastern Rosella",
+        "url": "https://australian.museum/learn/animals/birds/eastern-rosella/"
+      }
+    ],
     "photoCredit": {
       "photographer": "JJ Harrison",
       "title": "Eastern Rosella at Queen's Domain",
@@ -181,7 +226,12 @@
     "image": "/images/birds/au-australian-king-parrot.jpg",
     "audioFile": "/audio/au-australian-king-parrot.mp3",
     "audioLabel": "Field recording · Queensland",
-    "sources": [{ "title": "Australian Museum — Australian King-Parrot", "url": "https://australian.museum/learn/animals/birds/australian-king-parrot/" }],
+    "sources": [
+      {
+        "title": "Australian Museum — Australian King-Parrot",
+        "url": "https://australian.museum/learn/animals/birds/australian-king-parrot/"
+      }
+    ],
     "photoCredit": {
       "photographer": "JJ Harrison",
       "title": "Australian King-Parrot at Brunkerville",

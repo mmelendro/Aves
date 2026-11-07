@@ -1,5 +1,11 @@
 "use client"
 
+/*
+ * Small-screen navigation using Radix Dialog. The dialog supplies
+ * modal focus handling and Escape dismissal; this component supplies links and open/close state.
+ * Keep desktop and mobile link lists sourced from the parent instead of duplicating destinations.
+ */
+
 import { useEffect, useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
 import { Menu, X } from "lucide-react"
@@ -15,8 +21,11 @@ interface MobileNavigationOverlayProps {
 }
 
 export function MobileNavigationOverlay({ currentPage, links, title = "AVES Australia", description = "Explore Australian regions, plan your trip, or visit your saved plans.", callToAction = { href: "/contact", label: "Plan My Trip" } }: MobileNavigationOverlayProps) {
+  // The controlled dialog keeps trigger, overlay and close button in sync.
   const [open, setOpen] = useState(false)
 
+  // A resized desktop window must not keep an invisible mobile dialog blocking the page.
+  // Remove the listener when closing/unmounting so repeated opens do not accumulate handlers.
   useEffect(() => {
     if (!open) return
     const desktop = window.matchMedia("(min-width: 1024px)")
@@ -42,6 +51,7 @@ export function MobileNavigationOverlay({ currentPage, links, title = "AVES Aust
           Menu
         </button>
       </Dialog.Trigger>
+      {/* Render outside the header's stacking context, with a scrollable panel for short screens. */}
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[70] bg-emerald-950/40 backdrop-blur-sm" />
         <Dialog.Content className="fixed inset-x-4 top-4 z-[80] mx-auto max-h-[calc(100dvh_-_2rem)] max-w-md overflow-y-auto rounded-2xl border border-emerald-100 bg-gradient-to-br from-white via-emerald-50 to-blue-50 p-5 shadow-2xl focus:outline-none sm:inset-x-auto sm:right-6 sm:w-[calc(100%_-_3rem)]">
@@ -60,6 +70,7 @@ export function MobileNavigationOverlay({ currentPage, links, title = "AVES Aust
           <Dialog.Description className="sr-only">
             {description}
           </Dialog.Description>
+          {/* Each link closes the menu before navigation; aria-current also communicates the active route. */}
           <nav aria-label="Mobile navigation" className="space-y-1">
             {links.map(({ href, label }) => (
               <Link

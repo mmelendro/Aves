@@ -1,8 +1,18 @@
+/**
+ * Session maintenance and legacy-account routing before matched requests.
+ * Cookie refresh and private cache headers do not authorize operations. Account
+ * APIs verify the user independently; database ownership/admin rules decide which
+ * records may be accessed.
+ */
+
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 import { authCookieOptions, publicSupabaseConfig } from "@/lib/supabase/config"
 import { migrateLegacySessionCookies } from "@/lib/supabase/session-migration"
 
+/**
+ * Refresh/migrate cookies and normalize old account URLs, returning the appropriate Next response.
+ */
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname.replace(/^\/australia(?=\/)/, "")
   // The bridge writes its own response. Never consume its old cookies here.
@@ -16,6 +26,8 @@ export async function middleware(request: NextRequest) {
     for (const cookie of migration.cookies) target.cookies.set(cookie.name, cookie.value, cookie.options)
     return target
   }
+  // The main-site proxy sets this routing hint. It is not an owner/authentication
+  // credential: spoofing it must not bypass the independent account API checks.
   if ((path === "/account" || path.startsWith("/account/")) && request.headers.get("x-aves-account-proxy") !== "1") {
     const target = NextResponse.redirect(new URL(path + request.nextUrl.search, process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"), 307)
     target.headers.set("Cache-Control", "private, no-store")

@@ -1,7 +1,17 @@
+/**
+ * Private database adapter for the public inquiry/waitlist form.
+ * The route validates input before these service-only database calls. Private
+ * contact tables have no browser access; the service role bypasses RLS, so grants,
+ * function checks, locks and constraints matter too. This module does not email.
+ */
+
 import "server-only"
 import { z } from "zod"
 import type { TripCountry } from "@/content/trip-options"
 
+/**
+ * Validated form fields plus server-computed hash/consent version; do not trust browser-supplied internal fields.
+ */
 export type ContactRequestInput = {
   country?: TripCountry
   idempotencyKey: string
@@ -26,6 +36,9 @@ const receiptSchema = z.object({
 })
 export type ContactReceipt = z.infer<typeof receiptSchema>
 
+/**
+ * Carry a safe failure category without exposing provider details or contact data.
+ */
 export class ContactStoreError extends Error {
   constructor(public readonly status: 400 | 409 | 429 | 503) {
     super("Contact storage is unavailable")
@@ -33,6 +46,9 @@ export class ContactStoreError extends Error {
   }
 }
 
+/**
+ * Load private transport credentials and require a bare HTTPS service origin; no visitor session is attached.
+ */
 function configuration() {
   const value = process.env.SUPABASE_URL?.trim()
   const key = process.env.SUPABASE_SECRET_KEY?.trim()
@@ -54,6 +70,9 @@ function configuration() {
   return { origin: url.origin, headers }
 }
 
+/**
+ * Call only the named contact functions and translate expected database failures into safe categories.
+ */
 async function rpc(name: "submit_shared_contact_request" | "replay_shared_contact_request" | "record_contact_notification", body: Record<string, unknown>) {
   try {
     const { origin, headers } = configuration()
@@ -76,6 +95,9 @@ async function rpc(name: "submit_shared_contact_request" | "replay_shared_contac
   }
 }
 
+/**
+ * Atomically store/replay the validated request and applicable consent evidence, then validate its receipt.
+ */
 export async function saveContactRequest(input: ContactRequestInput): Promise<ContactReceipt> {
   const data = await rpc("submit_shared_contact_request", {
     p_country: input.country || "australia",
@@ -90,6 +112,9 @@ export async function saveContactRequest(input: ContactRequestInput): Promise<Co
   return parsed.data
 }
 
+/**
+ * Record the provider outcome for a saved request; this neither creates a request nor sends email.
+ */
 export async function recordContactNotification(
   requestId: string, status: "accepted" | "failed", providerId: string | null = null, errorCode: string | null = null,
 ) {
@@ -98,6 +123,10 @@ export async function recordContactNotification(
   })
 }
 
+/**
+ * Read an exact existing country/key/hash receipt without new records or consent changes.
+ * This lets old retries finish even when a destination stops accepting new requests.
+ */
 export async function replayContactRequest(input: Pick<ContactRequestInput, "country" | "idempotencyKey" | "payloadHash">): Promise<ContactReceipt> {
   const data = await rpc("replay_shared_contact_request", {
     p_idempotency_key: input.idempotencyKey, p_payload_hash: input.payloadHash,

@@ -1,5 +1,12 @@
 "use client"
 
+/**
+ * Browser workspace for reviewing quote requests and preparing priced proposals.
+ * This UI is not the owner permission check: the admin API and database functions
+ * verify the signed-in actor against private.site_admins on each operation.
+ * Draft, issued, and email-notification states are intentionally separate.
+ */
+
 import { useCallback, useEffect, useRef, useState } from "react"
 import { CheckCircle, Edit3, FileText, Mail, RefreshCw, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -9,6 +16,9 @@ import { AccountRequestError, accountRequest, dateLabel, errorMessage, countryLa
 import { ProposalCard } from "./proposal-card"
 import { ProposalEditor } from "./proposal-editor"
 
+/**
+ * Show the reviewed proposal before issuing it; reuse one request key and report the issued receipt via onSent.
+ */
 function SendProposal({ proposal, onSent, onCancel }: { proposal: Proposal; onSent: (proposal: Proposal) => void; onCancel: () => void }) {
   const busyRef = useRef(false)
   const keyRef = useRef<string | null>(null)
@@ -18,6 +28,8 @@ function SendProposal({ proposal, onSent, onCancel }: { proposal: Proposal; onSe
     if (busyRef.current) return
     busyRef.current = true; setBusy(true); setFeedback("")
     try {
+      // Retain this key if the response is lost: retry the same issue operation,
+      // not a fresh instruction to issue/notify again.
       keyRef.current ||= crypto.randomUUID()
       const result = await accountRequest<{ success: boolean; status: string; proposal: Proposal }>(`/api/admin/proposals/${proposal.id}/send`, { method: "POST", headers: { "Idempotency-Key": keyRef.current }, body: JSON.stringify({ expectedUpdatedAt: proposal.updatedAt }) })
       if (result.success !== true || result.status !== "sent" || result.proposal?.id !== proposal.id || result.proposal.status !== "sent") throw new Error("Issuing this proposal could not be confirmed. Please try again.")
@@ -31,6 +43,9 @@ function SendProposal({ proposal, onSent, onCancel }: { proposal: Proposal; onSe
 
 const statusLabels: Record<string, string> = { new: "New Request", submitted: "New Request", pending: "New Request", reviewing: "Reviewing", responded: "Responded", closed: "Closed" }
 
+/**
+ * Fetch the authorized owner inbox and coordinate draft/edit/issue/status actions; APIs remain authoritative.
+ */
 export function OwnerQuoteInbox() {
   const [quotes, setQuotes] = useState<OwnerQuote[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -61,6 +76,8 @@ export function OwnerQuoteInbox() {
   }, [])
   useEffect(() => { void load() }, [load])
 
+  // This changes displayed state only after an API receipt; it is not a database
+  // write and cannot grant client visibility by itself.
   function replaceProposal(proposal: Proposal) {
     setQuotes(current => current.map(quote => quote.id === proposal.quoteRequestId ? { ...quote, proposals: [proposal, ...(quote.proposals || []).filter(item => item.id !== proposal.id)] } : quote))
   }
