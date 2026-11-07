@@ -1,6 +1,62 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — compact carousels and country hero maps, 8 November 2026 (Sydney)
+## Current production — portrait carousels and beginner documentation, 8 November 2026 (Sydney)
+
+**Status: GitHub synced; both exact builds READY, preview-reviewed and successfully promoted; 16 live HTTP/account/privacy checks passed.** This release supersedes application commits `73cc370` (global/Colombia/New Zealand) and `0f1a113` (Australia/shared accounts); their deployments remain in the historical section below.
+
+Repository: [mmelendro/Aves](https://github.com/mmelendro/Aves). Keep the two independent branches/checkouts; do not merge them or re-enable automatic Git deployments. A GitHub push preserves source online but does not automatically publish this site.
+
+| Application | Branch | Deployed application commit, pushed to GitHub | Production deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `43ca96d` | `dpl_J93NVgfCNAKVKXCKHR1vbtegU94Q` |
+| Australia and shared accounts | `australia/preview` | `ed19223` | `dpl_3ks99DHJcQtLUUy7G6v1S3fNtGGF` |
+
+Exact published builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-bboqohxzg-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-jrtms5bdy-mmelendro-9273s-projects.vercel.app). Both completed successfully, were reviewed in preview and were promoted to production. Later documentation-only commits may advance branch heads without changing these application builds.
+
+### What changed in this release
+
+- The shared bird viewer now uses one **9:16 portrait image, capped at 320 CSS pixels wide**, filled edge to edge with `object-cover`. Landscape photographs are intentionally cropped; per-species `imagePosition` focal points keep the important subject in view where possible. There is no duplicated blurred backdrop. Earlier whole-photo framing described in historical notes no longer describes the current release.
+- Three discreet translucent controls sit over the image: slideshow, sound, and one species-details/credits control. The single information panel includes range/habitat, source links, New Zealand's species picker when enabled, and expandable media credits. One previous/next pair and an image counter remain; extra sliders/thumbnail rails do not return. Accessible names, hover/focus labels, swipe/keyboard operation, reduced-motion handling and visitor-initiated sound are preserved.
+- The cached-image loading check now recognizes an image that finished before React's normal load callback. Moving to another bird stops the previous recording. All original factual notes and attribution remain associated with their species.
+- Country headings sit above a quieter map-and-photo composition, with the map on the left and portrait carousel on the right at desktop width. Mobile presents the heading, photo, then map. Lighter heading typography, calmer map colours, and warm journey/planning sections retain the AVES visual family while reducing visual clutter. Global/discovery/article hero layouts retain their text/media relationship.
+- All 11 Colombian regions, 9 Australian regions and 3 New Zealand islands remain accessible. A map highlight indicates the displayed bird's featured planning area, not its entire distribution or a guaranteed sighting. Map interaction and regional inquiry links remain available.
+- Beginner documentation and comments now explain module roles, public function inputs/results, significant UI sections, and less obvious state/authentication/data-flow decisions. This is meaningful coverage, not a claim that every line is commented. Repeated controls, static records, generated material and immutable migrations have companion guides rather than repetitive inline notes.
+
+### Start reading or editing here
+
+1. [README](README.md) and [beginner's guide](docs/BEGINNERS-GUIDE.md): applications, branches, folders, syntax and safe first edits.
+2. [Frontend code tour](docs/frontend-code-tour.md): which page/component creates each visible section and how photo/map interactions work.
+3. [Public content guide](content/README.md), [shared UI guide](components/ui/README.md), and [test guide](tests/README.md): bird/media records, reusable controls and verification scope.
+4. [CONTRIBUTING](CONTRIBUTING.md): local setup, checks, independent branches and deliberate deployment workflow.
+5. [Backend code tour](docs/backend-code-tour.md) and [Supabase schema/migration guide](supabase/README.md): browser/server boundaries, shared accounts, saved plans, quotes, email outcomes and database permissions.
+
+### Verification of this publication
+
+- **69 source tests and 244 Australian tests passed**, together with strict TypeScript checks and successful production builds in both applications.
+- Review of **253 changed TypeScript/JavaScript files** compared normalized syntax trees with the prior commits and compiled JSX-comment differences. Runtime changes were confined to the agreed design/carousel/map/homepage/focal-point files and source global-home test. Account/authentication/backend behavior was unchanged; migration SQL was not edited.
+- Local 390px browser review found no sideways overflow on New Zealand or Australia. New Zealand recording playback advanced and stopped when changing birds. Staged desktop New Zealand/Australia layouts were reviewed. Live Colombia at 390px also had no sideways overflow (376px content width); its photograph loaded at approximately 318 x 566px. Evidence: `audit/evidence/nov8-portrait-colombia-mobile-live.png` in the workspace. These checks do not claim a full device matrix.
+- **16 live HTTP/account/privacy checks passed** after promotion; recorded in workspace `audit/evidence/nov8-live-account-checks.json`. The live signed-in `/account` page loaded the existing owned QA plan and issued proposal. Clicking **Refresh Saved Plans** completed successfully: loading ended, the QA plan and issued proposal remained visible, and the refresh button was enabled again.
+- Documentation links were checked. No forms or emails were sent, and no database or provider configuration was changed for this release. Stored-write and email-delivery flows were not retested as part of these design/documentation changes.
+
+### Retained public structure and account constraints
+
+Public destinations remain [Colombia](https://aves.bio/colombia), [Australia](https://aves.bio/australia), and [New Zealand](https://aves.bio/new-zealand), selected from [the AVES homepage](https://aves.bio/). The bird/AVES logo area returns to the global homepage and the country subtitle returns to its country home. Thin lettering, country birds, landscape contours and the global peregrine mark remain.
+
+[My Trips](https://aves.bio/account) is the shared public account address. Root account screens forward to the maintained Australian implementation; callbacks, APIs and assets remain under `/australia`. Legacy `/australia/account` links redirect while preserving country/region intent. Root-path `aves-auth` cookies and the verified legacy-session bridge support the shared session. Preserve this routing and the independent API/database ownership checks.
+
+New Zealand remains public inspiration **in development**, not an enabled saved-trip destination. Its general inquiry topic uses the existing shared contact service; it must not silently create an Australian saved plan. Private guest itineraries stay out of public content and Git. Colombia and Australia continue to share the existing account/database system; adding a country requires the coordinated catalogue/content process, not another database.
+
+The featured collections remain Colombia 22 birds (17 recordings), Australia 20 (19 recordings), and New Zealand 31 with local recordings. Missing calls must remain unavailable until suitable verified reuse rights exist; do not substitute species or use noncommercial-only media commercially. Existing truthful biography, unverified-testimonial removals, B Corp pursuing/not-certified wording, land acknowledgements and public contact links are retained.
+
+Last recorded Google setup remains pending: the provider/client exists in testing mode, social buttons remain hidden, and the user wants `info@aves.bio` as the public support address. Workspace restoration, support-address eligibility and a real end-to-end Google sign-in test need completion before activation; Facebook is deferred. This design/documentation release does not resolve that setup or purchase a mailbox subscription. See the Australian social-sign-in guide.
+
+Application secrets remain in private provider settings and untracked environment files. A saved request is not a booking, an issued proposal is not a payment, and email-provider acceptance is not proof of delivery. No new backup/MFA/provider-security verification is claimed here. The laptop is not required to serve the published production website.
+
+## Historical release notes
+
+The following sections preserve earlier releases and their original verification. Their whole-photo/blurred-backdrop descriptions and old account URLs are historical, not instructions for the current release.
+
+## Historical compact-carousel production release — earlier 8 November 2026 (Sydney)
 
 Repository: https://github.com/mmelendro/Aves. Keep the two independent branches/checkouts; do not merge them or re-enable automatic Git deployments.
 
@@ -39,10 +95,6 @@ Google client/provider configuration exists in testing mode, but production `AVE
 8 November release: Australia 244 tests and source 69 tests pass, with strict TypeScript and both production builds passing. Browser review covered NZ, an article, the global home and an Australian region; a 390px NZ view had no horizontal overflow. Live checks covered seven public pages, both account entry URLs with preserved intent, signup/recovery/check-email screens, three anonymous private APIs (401/no-store), and a hostile redirect rejection. No forms or emails were sent. New audio files were decoded and sampled through browser controls; changing birds stops playback. Logo navigation was reviewed in both applications. Earlier HTTP/privacy checks covered 13 public pages, 43 client scripts, 2 stylesheets and three anonymous private endpoints; no personal Gmail was found in public output. The 8 November 390px browser check covers the NZ page; other historical mobile evidence below belongs to earlier releases.
 
 Application secrets stay in private provider configuration and untracked environment files. The laptop is not required to serve production. Read both branch handoffs before editing from a new chat.
-
-## Historical release notes
-
-The following sections describe earlier releases and their original verification, not the current application version.
 
 The shared account/backend for Colombia and Australia is now live. The two public websites retain separate applications and Git histories.
 
