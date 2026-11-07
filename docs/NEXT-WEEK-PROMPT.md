@@ -43,6 +43,8 @@ Done when revised pages add distinct information, regional coverage demonstrably
 
 Create a lightweight, geographically accurate destination map driven by the existing catalogue. Highlight Colombia, Australia and New Zealand, clearly showing New Zealand's development status. Country labels and equivalent accessible text links open the correct pages. Future countries must be easy to add without implying launch or bookability. Verify desktop, narrow-phone and wide layouts.
 
+**Country-card carousels (AVES-011):** separately replace each static destination-card bird on the global homepage with that country's existing carousel. Keep the correct local collection, compact presentation, discreet photo/sound controls, credits, development status and clear destination link. Controls must work independently; audio remains opt-in and only one recording should play across the page. Keep initial loading light, respect reduced motion and coordinate with the future world map without making this depend on it.
+
 ### C. Bird wishlist and optional bingo
 
 Add a discreet select/remove control while people explore birds, plus a reviewable wishlist grouped by destination/region. Keep "want to see" separate from "seen"; bingo is optional. Preserve guest selections locally, then explicitly save/merge them into the signed-in user's My Trips account without duplicates. Allow removal and explain storage clearly.

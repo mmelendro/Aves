@@ -16,6 +16,7 @@
 | AVES-008 | UX / P2 | Keep the speaker icon, with a subtle accent to advertise available bird calls. | Owner choice preserved; available and playing states distinct; accessible contrast; no autoplay, constant flashing or highlight on missing calls. | Verified |
 | AVES-009 | Account / P1 | Google sign-in still does not appear. Previously prepared, but not activated in production. | Business support address and provider readiness verified; real account/callback/session tests pass; only then show working Google sign-in. | Backlog |
 | AVES-010 | Cultural content / P2 | Include totemic and culturally significant birds where appropriate. | Specific community/place and sources are identified; sharing protocols and media rights respected; interpretation and endorsement are stated accurately. | Backlog |
+| AVES-011 | Feature / P2 | Replace the static bird on each country card of the global homepage with that country's carousel. | Each card uses the correct country collection, discreet controls/calls/credits, independent navigation and a clear destination link; loading stays proportionate. | Backlog |
 
 Priorities are provisional, not an owner-approved ranking between these requests. Google completion is provisionally P1 because it is an expected account entry method; existing email/password access remains available. Priorities: P0 urgent security/data loss; P1 broken essential journeys or materially misleading content; P2 usability/content/features; P3 polish. Owner priorities take precedence. States: Backlog, Ready, In progress, Verified, Deferred. These observations were supplied by the owner; this documentation update checked relevant source/setup notes but did not re-audit live provider settings or the website.
 
@@ -32,6 +33,8 @@ AVES-008 was published and verified as a separate cosmetic release; see `CONTINU
 
 - **AVES-010:** The owner requested totemic birds when possible. Integrate suitable cultural context into regional bird discovery and community-led experiences, with primary community sources, proper attribution and guidance/permission where needed. Totemic significance is specific to a community or tradition; national-bird status or a guest's personal symbolic connection is a separate concept. Do not invent associations, generalise across Indigenous peoples, disclose restricted stories, or imply a relationship/endorsement. Personal interpretations may be included only as clearly attributed, optional perspectives. No species-specific totemic claim has been researched or approved by this planning update.
 
+- **AVES-011:** On the main AVES homepage, each destination card should show that country's own bird carousel instead of its static photograph. Reuse the existing licensed country collections and shared viewer, with an appropriate compact card presentation. Preserve country status and the Explore link; do not embed three complete country map/hero sections. Keep each carousel's navigation, tooltips and IDs independent. Permit only one recording to play at a time across the page, keep audio opt-in, respect reduced motion and defer below-the-fold media loading. Do not nest interactive controls inside a card-wide link. Coordinate the layout with the future world map, but keep the carousel replacement independently releasable. This request is recorded for a later batch, not implemented in the Santa Marta editorial pilot.
+
 ## Adding observations over the next few days
 
 When I send a note, link or screenshot, capture it here without starting implementation. Reuse an existing ID for the same underlying issue; otherwise assign the next AVES number. Record the date, affected URL/section and device if known, observed behaviour, desired outcome, kind/priority, evidence and status. Label inferences and unknowns. Do not invent a reproduction or require every field before recording an observation. Ask only if missing information prevents understanding it. Keep private/customer information out of screenshots or repository notes.
@@ -45,4 +48,4 @@ For new observations, use this short entry format:
 - Kind / priority / status: provisional until triaged.
 - Dependencies, decisions or completion evidence: only when relevant.
 
-*The entry above is a template, not a reported issue. AVES-006 through AVES-010 are the newly captured observations; use the next unused number for future additions.*
+*The entry above is a template, not a reported issue. AVES-006 through AVES-011 are the newly captured observations; use the next unused number for future additions.*
