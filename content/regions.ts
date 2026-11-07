@@ -13,6 +13,8 @@ export type ColombiaRegion = {
   name: string
   description: string
   birds: RegionalBird[]
+  // Summarise a verified shared range once. Explicit IDs keep other/future birds' range notes visible.
+  sharedBirdRange?: { birdIds: string[]; text: string }
 }
 
 function selection(slug: string, whereFound: string, sources?: BirdSource[]): RegionalBird {
@@ -108,10 +110,14 @@ export const regions: ColombiaRegion[] = [
   {
     id: "sierra-nevada-de-santa-marta", mapId: "SNSM", name: "Sierra Nevada de Santa Marta",
     description: "An isolated mountain range above the Caribbean, with forest birds found nowhere else. Its endemic species are distinct from those of the Andean cordilleras.",
+    sharedBirdRange: {
+      birdIds: ["co-santa-marta-brushfinch", "co-santa-marta-parakeet", "co-white-tailed-starfrontlet"],
+      text: "The brushfinch, parakeet and starfrontlet featured here are found only in the Sierra Nevada de Santa Marta. Look for them in different mountain-forest habitats around El Dorado and San Lorenzo, as described below.",
+    },
     birds: [
-      selection("santa-marta-brushfinch", "Dense mountain-forest edges and thickets on the Santa Marta massif, including the El Dorado landscape."),
-      selection("santa-marta-parakeet", "Upper montane forest around the San Lorenzo ridge and El Dorado landscape. Observe from a distance and avoid disturbing nesting trees."),
-      selection("white-tailed-starfrontlet", "Flowering edges and openings in humid montane forest, including the El Dorado area."),
+      selection("santa-marta-brushfinch", "Look in dense thickets and along mountain-forest edges around El Dorado."),
+      selection("santa-marta-parakeet", "Explore upper montane forest around the San Lorenzo ridge. Keep your distance from nesting trees."),
+      selection("white-tailed-starfrontlet", "Check flowering edges and openings in the humid forest around El Dorado."),
     ],
   },
   {

@@ -40,3 +40,7 @@ Geographic path coordinates (`australia-map.ts` or `new-zealand-map.json`) are g
 5. Run the application's type check/tests and preview the page, sound and credits. Missing audio must remain visibly unavailable rather than being substituted with another species.
 
 This is a curated inspiration collection, not a complete national checklist or a guarantee of sightings, guide availability or access. Counts and dated operational information need periodic factual review.
+
+## Shared range copy in a region
+
+`regions.ts` may supply `sharedBirdRange` with an editorial `text` and explicit `birdIds`. Those birds share one range paragraph above the local habitat cards instead of repeating it in every card. Their full carousel profiles and factual sources remain intact. Other regions and newly added birds outside that list retain their individual wider-range notes. Verify the summary still matches the named species when changing the list.
