@@ -1,18 +1,55 @@
-# AVES Australia and shared AVES portal — live handoff, updated 7 November 2026 (Sydney)
+# AVES Australia and shared AVES portal — handoff, updated 7 November 2026 (Sydney)
 
 The shared account/backend for Colombia and Australia is now live. The two public websites retain separate applications and Git histories.
+
+## Current production — global homepage released 7 November 2026 (Sydney)
+
+Both deployments below were successfully promoted and verified publicly on 7 November 2026 (Sydney). Their application commits were also verified on GitHub. This is the current live release; the older releases retained below are historical evidence.
+
+| Application | Branch | Released source | Live deployment |
+| --- | --- | --- | --- |
+| Australia + shared accounts | `australia/preview` | `1e9307e` handoff head; application changes `95d870f` | `dpl_3DtQzWEbCUmx3VoPGPcrZxhLDy1V` |
+| Global AVES homepage + Colombia | `webmaster/readiness-2026-11-05` | `762c5db` | `dpl_A6t7gvcu6mUHHPQAVZYBioNhD3zk` |
+
+- [Australia/shared-account exact deployment](https://aves-australia-edosdqart-mmelendro-9273s-projects.vercel.app).
+- [Global/Colombia exact deployment](https://v0-company-landing-page-avggk27ga-mmelendro-9273s-projects.vercel.app).
+- Preparation test results: **212 Australia/shared-account tests passed; 66 global/Colombia source tests passed**.
+- GitHub branch heads were verified as `1e9307e` for [Australia/shared accounts](https://github.com/mmelendro/Aves/tree/australia/preview) and `762c5db` for [global/Colombia](https://github.com/mmelendro/Aves/tree/webmaster/readiness-2026-11-05). Later handoff-only commits may advance those branches without changing the deployed application code.
+
+### Current public structure
+
+- `https://aves.bio/` is the global AVES homepage, with Colombia and Australia choices and an extensible public destination catalogue in the Colombia/root branch's `content/destinations.ts`.
+- `https://aves.bio/colombia` holds the preserved Colombian homepage. Existing Colombian deep routes remain at `/regions/...`, `/aves-explorer`, `/tours`, `/contact` and their established paths.
+- `https://aves.bio/australia` remains the Australian homepage, with global-destination and Colombia navigation. The fixed Australian base path remains `/australia`.
+- `https://aves.bio/australia/account` remains the shared My Trips portal for both countries. Its global entry and navigation do not create a new account system or database; saved plans, quotes and proposals remain in the existing shared project.
+- Native anchors cross between public applications. Do not prefix global `/` or `/colombia` links with the Australian base path. Within Australia, Next links remain unprefixed and native assets/API calls use `sitePath`.
+- `/site-map` is the global/Colombia directory and links to `/australia/site-map`; the two native XML sitemaps remain available.
+- Adding a country needs both the shared registry/configuration work below and a reviewed public-content release. Ecuador and Costa Rica remain disabled placeholders, not launched offerings.
+
+### Verification of this publication
+
+- **13/13 public HTTP checks passed**: main homepage, Colombia, Australia and site map returned 200 with correct canonical destinations; both destination photographs returned 200. XML sitemaps contained **40 root/Colombia entries and 32 Australian entries**, unique and excluding private routes. Legacy Colombian contact links resolve to `/contact`.
+- Three anonymous private API checks returned **401** with **private, no-store** caching.
+- Live browser navigation from the global homepage to Colombia worked; Colombia's **22-bird carousel** advanced, and its My Trips link preserved `country=colombia` on entry to the shared portal.
+- Existing owned QA trip data and an issued proposal loaded; **Refresh Saved Plans** was verified. Generic account links from the global homepage and Australia worked, and **All Destinations** returned to the main homepage.
+- Australia's **20-bird carousel** advanced. Selecting Tasmania on the map opened `/australia/contact?region=tasmania` with Tasmania selected.
+- At a live **390px mobile viewport**, both country quick choices were visible above the fold, all main images loaded and document width was **376px**, with no horizontal overflow. The full desktop screenshot was also reviewed. Local workspace evidence is retained in `audit/evidence/global-home-mobile-2026-11-07.png` and `audit/evidence/global-home-desktop-2026-11-07.png`; these workspace files are outside this repository checkout.
+- No browser errors were observed during these checks. This is bounded evidence, not a comprehensive security or defect-free guarantee.
+- This publication made **no database changes** and submitted **no new drafts or emails**. The earlier controlled submission and email-delivery evidence remains below; those write/delivery flows were not repeated for this navigation release.
 
 Database retirement update: **7 November 2026 (Sydney)**. Both unused projects were permanently deleted with the user's explicit confirmation; the shared project is the sole remaining Supabase project.
 
 Future destinations: the shared country/region registry is **live and verified on 7 November 2026 (Sydney)**. Follow [Adding an AVES destination](docs/adding-destinations.md). Ecuador and Costa Rica remain disabled placeholders, not launched offerings. New destinations reuse the existing accounts/database and require reviewed configuration, migration and public-content releases; there is no country-management admin screen.
 
-## Current production
+## Last verified production before the global homepage release
+
+The releases below remain historical evidence and rollback references. The current release above supersedes them.
 
 - Repository: https://github.com/mmelendro/Aves.
 - Australia branch/project: `australia/preview` / `mmelendro-9273s-projects/aves-australia`.
-- **Live Australia/shared portal code: `9a7c03b`; deployment: `dpl_6CaX82WY4M5qvChywSLuMtZNoKth`.**
+- **Pre-global Australia/shared portal code: `9a7c03b`; deployment: `dpl_6CaX82WY4M5qvChywSLuMtZNoKth`.**
 - Public: https://aves.bio/australia. Exact deployment: https://aves-australia-8naiv3je8-mmelendro-9273s-projects.vercel.app. Promoted on 7 November 2026 (Sydney), superseding the original shared-country release `caa1d01`.
-- **Live Colombia code: `731c871`; final deployment: `dpl_G5yHCqQ5PXfk1KVJHMvBamH6hC9k`.**
+- **Pre-global Colombia code: `731c871`; final deployment: `dpl_G5yHCqQ5PXfk1KVJHMvBamH6hC9k`.**
 - Public: https://aves.bio/. Exact deployment: https://v0-company-landing-page-ltdx9ntqo-mmelendro-9273s-projects.vercel.app.
 - Colombia branch and verified Vercel production branch: `webmaster/readiness-2026-11-05`; project `mmelendro-9273s-projects/v0-company-landing-page`.
 - The final Colombia deployment was rebuilt/promoted after obsolete environment cleanup and supersedes the earlier same-code deployment, redesign release and urgent hotfix.
@@ -33,7 +70,7 @@ The user explicitly chose one AVES account/database and abandoned old Colombian 
 - Applied catalogue migration: `20261106203926_extensible_destination_catalogue.sql`. Australia and Colombia are enabled; Ecuador and Costa Rica are disabled. Application/database registry parity is exact. Anonymous catalogue reads and authenticated catalogue writes are denied; contact-replay RPC access is service-only.
 - Local migration filenames were aligned with the actual hosted versions `20261106105909`, `20261106105919` and `20261106114144`, with unchanged SQL hashes. Hosted migration history was not altered; do not reapply these migrations under their former filenames.
 
-## Current release verification — 7 November 2026 (Sydney)
+## Earlier destination-registry release verification — 7 November 2026 (Sydney)
 
 - Release `9a7c03b`: **210 automated tests**, strict TypeScript checks and the production build passed; **24 static pages** were generated. All **6 local SQL verification suites** and the hosted destination-catalogue rollback verifier passed.
 - Both `/` and `/australia` returned 200 after promotion. Unauthenticated plans, proposals and admin APIs returned 401 with private/no-store caching. Ecuador, Costa Rica and unknown-country contact submissions returned 400 with country validation errors; these checks created no records or emails.
