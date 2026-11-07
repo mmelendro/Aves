@@ -318,7 +318,7 @@ test("only account/admin/auth paths use shared AVES navigation", () => {
   for (const path of ["/", "/australia/regions/queensland", "/accountant"]) {
     const harness = componentHarness("components/navigation-header.tsx", "NavigationHeader", {}, { mocks: { "next/navigation": { usePathname: () => path } } })
     const tree = harness.render()
-    assert.ok(find(tree, node => node.props["aria-label"] === "AVES Australia home"), path)
+    assert.equal(find(tree, node => node.type?.name === "BrandMark").props.country, "australia", path)
     assert.ok(find(tree, node => node.props.href === "/aves-explorer"), path)
   }
 })
@@ -340,7 +340,13 @@ test("Australia desktop and mobile navigation can return to the global destinati
   const globalLink = find(tree, node => node.props.href === "https://aves.bio/")
   assert.equal(globalLink.props.children, "All destinations")
   assert.equal(globalLink.props["aria-current"], undefined)
-  assert.equal(find(tree, node => node.props["aria-label"] === "AVES Australia home").props.href, "/")
+  const brand = find(tree, node => node.type?.name === "BrandMark")
+  const brandTree = brand.type(brand.props)
+  const brandLinks = nodes(brandTree).filter(node => node.type === "a")
+  assert.ok(brandLinks.some(node => node.props.href === "https://aves.bio/"), "bird and wordmark return to the global home")
+  assert.ok(brandLinks.some(node => node.props.href === "/australia"), "country subtitle opens the Australian home without a doubled base path")
+  for (const link of brandLinks) assert.equal(nodes(link.props.children).some(node => node.type === "a"), false, "brand links must not nest")
+  assert.equal(nodes(brandTree).some(node => node.props["aria-hidden"] && nodes(node.props.children).some(child => child.type === "a")), false, "brand links must remain available to assistive technology")
   const mobile = find(tree, node => node.type === "MobileNavigationOverlay")
   assert.ok(mobile.props.links.some(link => link.href === "https://aves.bio/" && link.label === "All destinations"))
 })

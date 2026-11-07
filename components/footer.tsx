@@ -40,9 +40,9 @@ export function Footer({ transparent = false }: FooterProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" aria-label="AVES Australia home" className="mb-4 inline-flex min-h-11 items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900">
+            <span className="mb-4 inline-flex">
               <BrandMark country="australia" inverse size="footer" />
-            </Link>
+            </span>
             <p className="max-w-sm text-sm leading-relaxed text-gray-200">
               Birding, nature and custom trip planning across Australia.
             </p>

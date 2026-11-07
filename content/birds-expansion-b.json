@@ -50,7 +50,9 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Regent_Bowerbird_(_Sericulus_chrysocephalus_)_Male_,_Queensland_,Australia_(53341845656).jpg",
       "reserve": "Queensland, Australia",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Regent_Bowerbird_(_Sericulus_chrysocephalus_)_Male_,_Queensland_,Australia_(53341845656).jpg"
-    }
+    },
+    "audioFile": "/audio/au-regent-bowerbird.mp3",
+    "audioLabel": "Male vocalisations · Lamington National Park"
   },
   {
     "id": "au-victorias-riflebird",
@@ -74,7 +76,9 @@
       "instagramPost": "https://commons.wikimedia.org/wiki/File:Victoria%27s_riflebird_(Ptiloris_victoriae)_male_Atherton.jpg",
       "reserve": "Crater Lakes, Atherton Tablelands, Queensland, Australia",
       "reserveLink": "https://commons.wikimedia.org/wiki/File:Victoria%27s_riflebird_(Ptiloris_victoriae)_male_Atherton.jpg"
-    }
+    },
+    "audioFile": "/audio/au-victorias-riflebird.mp3",
+    "audioLabel": "Courtship sounds · Atherton Tablelands"
   },
   {
     "id": "au-splendid-fairywren",

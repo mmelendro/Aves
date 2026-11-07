@@ -1,6 +1,6 @@
 {
-  "verifiedOn": "2026-11-06",
-  "provider": "iNaturalist and Wikimedia Commons",
+  "verifiedOn": "2026-11-07",
+  "provider": "iNaturalist, Wikimedia Commons and OSF",
   "usageNote": "These are independently recorded wildlife observations, not recordings of AVES-operated tours. Field recordings may include ambient sounds or other birds. The photograph and sound accompanying a species may have been recorded in different places. Preserve the attribution and licence links on the public credits page.",
   "verificationNote": "Species identity, recording context and each sound’s own licence were checked against the original source records. Captive and juvenile recordings are labelled. Field recordings may include ambient sounds or other birds; see each recording’s context and source.",
   "licenseMappingSourceUrl": "https://github.com/inaturalist/inaturalist/blob/main/app/webpack/observations/show/components/licensing_modal.jsx",
@@ -472,6 +472,53 @@
       "durationSeconds": 15.142,
       "bytes": 2671184,
       "mimeType": "audio/x-wav"
+    },
+    {
+      "id": "au-regent-bowerbird",
+      "path": "/audio/au-regent-bowerbird.mp3",
+      "audioLabel": "Male vocalisations · Lamington National Park",
+      "title": "Regent Bowerbird vocalisations — Lamington National Park, Queensland",
+      "creator": "Aviceda",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Regent_Bowerbird_OR.ogv",
+      "metadataSourceUrl": "https://commons.wikimedia.org/w/api.php?action=query&format=json&titles=File:Regent_Bowerbird_OR.ogv&prop=imageinfo&iiprop=url%7Cextmetadata",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/Regent_Bowerbird_OR.ogv",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Regent Bowerbird recording by Aviceda, Lamington National Park, September 1996; audio from the original Wikimedia Commons video, CC BY-SA 3.0. The extracted audio is shared under the same licence.",
+      "modifications": "The complete original video soundtrack was extracted and converted to mono MP3 for browser playback. No trimming or generated audio. The original video shows the male vocalising; surrounding forest sounds remain.",
+      "species": {
+        "commonName": "Regent Bowerbird",
+        "scientificName": "Sericulus chrysocephalus"
+      },
+      "location": "Lamington National Park, south-east Queensland, Australia",
+      "recordedOn": "1996-09",
+      "durationDisplay": "0:43",
+      "bytes": 683824
+    },
+    {
+      "id": "au-victorias-riflebird",
+      "path": "/audio/au-victorias-riflebird.mp3",
+      "audioLabel": "Courtship sounds · Atherton Tablelands",
+      "title": "Victoria’s Riflebird courtship sounds — Atherton Tablelands, Queensland",
+      "creator": "Thomas MacGillavry, Yannick Jadoul and Leonida Fusani",
+      "sourceUrl": "https://osf.io/8udqr/files/osfstorage/686a3a28b4c113700e9a9e7d",
+      "metadataSourceUrl": "https://api.osf.io/v2/files/686a3a28b4c113700e9a9e7d/",
+      "downloadUrl": "https://osf.io/download/686a3a28b4c113700e9a9e7d/",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Victoria’s Riflebird field recording from Thomas MacGillavry, Yannick Jadoul and Leonida Fusani (2025), Dancing male riflebirds create a dynamic sensory trajectory that guides female choice, OSF dataset, CC BY 4.0.",
+      "modifications": "The full source WAV PtiVic_C05A_20220929_002.wav was converted to mono MP3 for browser playback. No trimming or generated audio. This is a courtship recording, including mechanical wing-clap sounds and natural background sound; it is not presented as an isolated vocal call.",
+      "species": {
+        "commonName": "Victoria’s Riflebird",
+        "scientificName": "Ptiloris victoriae"
+      },
+      "location": "Atherton Tablelands, Queensland, Australia",
+      "recordedOn": "2022-09-29",
+      "durationDisplay": "1:00",
+      "bytes": 968036,
+      "studyUrl": "https://doi.org/10.1016/j.cub.2025.09.009",
+      "repositoryUrl": "https://osf.io/8udqr/",
+      "licenseMetadataUrl": "https://api.osf.io/v2/nodes/8udqr/"
     }
   ]
 }
