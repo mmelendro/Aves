@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowRight, Bird, Camera, Leaf, MapPin } from "lucide-react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
-import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import { AustraliaHomeExplorer } from "@/components/australia-home-explorer"
 import { RegionExplorer } from "@/components/region-explorer"
 import { PlanningSteps } from "@/components/planning-steps"
 import { Button } from "@/components/ui/button"
@@ -17,21 +17,14 @@ export default function AVESLandingPage() {
   return <div className="min-h-screen bg-white">
     <NavigationHeader currentPage="/" />
     <main id="main-content" tabIndex={-1}>
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10 lg:py-12">
+      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-8 lg:py-10">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
-            <div className="mx-auto min-w-0 w-full max-w-xl"><HomepageBirdCarousel className="w-full" autoPlay={false} /><p className="mt-4 font-semibold text-emerald-900">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a></p><p className="mt-2 text-sm leading-relaxed text-gray-600">Explore their ranges and listen to available recordings. Sightings depend on your route, habitat and season.</p></div>
-            <div className="lg:pt-12">
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Australia · Custom trip enquiries</p>
-              <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl xl:text-6xl">Discover Australia’s <span className="block text-emerald-600">Extraordinary Birdlife</span></h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg lg:text-xl">From tropical rainforest to island shores. Explore the places that inspire you, then shape a personal birding journey with AVES.</p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="min-h-12 rounded-lg bg-emerald-600 px-5 shadow-md hover:bg-emerald-700"><Link href="/aves-explorer">Explore the regions <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button>
-                <Button asChild size="lg" variant="outline" className="min-h-12 rounded-lg border-emerald-600 px-5 text-emerald-700 hover:bg-emerald-50"><Link href="/contact">Plan my trip</Link></Button>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-gray-600">Australian journeys are in development. Enquiries are open; routes, guides and pricing are agreed personally.</p>
-            </div>
+          <div className="mx-auto mb-7 max-w-4xl text-center lg:mb-8">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-medium text-emerald-800 sm:text-sm"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Australia · Custom birding journeys</p>
+            <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Australia’s <span className="text-emerald-600">Extraordinary Birdlife</span></h1>
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">From tropical rainforest to island shores. Follow a bird, explore a place, and shape a journey around your curiosity.</p>
           </div>
+          <AustraliaHomeExplorer />
         </div>
       </section>
       <RegionExplorer compact />
