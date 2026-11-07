@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Bird, Compass, Heart, Utensils, Waves } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandMap from "@/components/new-zealand-map"
-import NewZealandBirdCarousel from "@/components/new-zealand-bird-carousel"
+import NewZealandBirdCarousel, { NewZealandPhotoCredits } from "@/components/new-zealand-bird-carousel"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -28,21 +27,20 @@ export default function NewZealandPage() {
     <div className="min-h-screen bg-white text-gray-900">
       <GlobalHeader country="new-zealand" />
       <main id="main-content" tabIndex={-1}>
-        <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-10 sm:py-16">
+        <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Link href="/" className="mb-7 inline-flex min-h-11 items-center rounded-lg text-sm font-medium text-emerald-800 underline underline-offset-4">All destinations</Link>
-            <div className="grid items-center gap-9 lg:grid-cols-2 lg:gap-12">
-              <div>
+            <div className="grid items-start gap-9 lg:grid-cols-2 lg:gap-12">
+              <div id="birdlife" className="min-w-0 scroll-mt-24">
+                <NewZealandBirdCarousel />
+              </div>
+              <div className="lg:pt-20">
                 <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800"><Compass className="h-4 w-4" aria-hidden="true" /> A new AVES destination · In development</p>
                 <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">Aotearoa<br /><span className="text-emerald-700">New Zealand</span></h1>
                 <p className="mt-5 text-xl font-medium leading-relaxed text-emerald-900">Follow the birds. Stay for everything around them.</p>
                 <p className="mt-4 max-w-xl text-lg leading-relaxed text-gray-600">Island birdlife, mountain landscapes and stories rooted in place. Imagine a journey with time for nature, good food, culture and the simple pleasure of being somewhere new.</p>
                 <div className="mt-7 flex flex-wrap gap-3"><a href="#regions" className={`${linkStyle} bg-emerald-700 text-white hover:bg-emerald-800`}>Explore the islands<ArrowRight className="h-5 w-5" aria-hidden="true" /></a><a href="#your-journey" className={`${linkStyle} border border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50`}>Share your ideas</a></div>
               </div>
-              <figure className="overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-xl shadow-emerald-950/10">
-                <div className="relative aspect-[4/3]"><Image src="/images/destinations/kea-new-zealand.jpg" alt="A kea perched beside a tree, showing its olive-green feathers and curved beak" fill priority sizes="(max-width: 1023px) 100vw, 600px" className="object-cover" /></div>
-                <figcaption className="flex flex-wrap justify-between gap-2 px-5 py-4 text-xs text-gray-600"><span>Kea · New Zealand</span><Link href="/credits" className="underline underline-offset-4">Piotr Zurek · CC BY-SA 2.0</Link></figcaption>
-              </figure>
             </div>
             <nav aria-label="On this page" className="mt-10 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4 text-sm font-semibold text-emerald-800">{[["regions", "The islands"], ["birdlife", "Birds & where to find them"], ["experience", "Beyond birding"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{label}</a>)}</nav>
           </div>
@@ -64,13 +62,14 @@ export default function NewZealandPage() {
           </div>
         </section>
 
-        <section id="birdlife" aria-labelledby="birdlife-heading" className="scroll-mt-24 bg-gray-50 py-14 sm:py-20">
+        <section id="birdlife-guide" aria-labelledby="birdlife-heading" className="scroll-mt-24 bg-gray-50 py-14 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-emerald-700">Meet the birdlife</p>
             <h2 id="birdlife-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">Discover New Zealand’s birds</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Explore forest song, alpine specialists, wetland birds and coastal wildlife, with a particular focus on the South Island. Each species includes a photograph, a recording and places to look.</p>
             <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm leading-7 text-gray-700"><p>Start with <a href="https://ebird.org/region/NZ" target="_blank" rel="noreferrer" className="font-semibold text-emerald-800 underline underline-offset-4">eBird’s New Zealand records</a> to explore birds by place and time of year. For conservation status, consult <a href="https://datazone.birdlife.org/about-our-science/the-iucn-red-list" target="_blank" rel="noreferrer" className="font-semibold text-emerald-800 underline underline-offset-4">BirdLife’s IUCN Red List work</a>; DOC provides local species and visitor guidance. A record is a starting point, not a promise of a sighting.</p></div>
-            <NewZealandBirdCarousel />
+            <a href="#birdlife" className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Browse the birds and listen to their calls<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+            <NewZealandPhotoCredits />
           </div>
         </section>
 

@@ -5,12 +5,17 @@ const resourceLink = "inline-flex min-h-11 items-center rounded text-sm font-sem
 
 export default function NewZealandBirdCarousel() {
   return (
-    <div className="mt-9">
-      <div className="mx-auto max-w-lg">
-          <HomepageBirdCarousel birds={newZealandCarouselBirds} autoPlay={false} showBirdPicker />
-          <p className="mx-auto mt-4 max-w-md text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. This is a selection, not a complete checklist. Open species details for range, habitat and source guides.</p>
-          <p className="mx-auto mt-3 max-w-md text-center text-xs leading-5 text-gray-600">Enjoy the recordings here for learning; avoid playing them to attract wild birds. Photographs and recordings may come from different locations.</p>
-      </div>
+    <div className="mx-auto w-full min-w-0 max-w-xl">
+      <HomepageBirdCarousel birds={newZealandCarouselBirds} autoPlay={false} showBirdPicker className="max-w-xl" />
+      <p className="mx-auto mt-4 max-w-md text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. This is a selection, not a complete checklist. Open species details for range, habitat and source guides.</p>
+    </div>
+  )
+}
+
+export function NewZealandPhotoCredits() {
+  return (
+    <div>
+      <p className="mt-5 text-sm leading-6 text-gray-600">Enjoy the recordings here for learning; avoid playing them to attract wild birds. Photographs and recordings may come from different locations.</p>
       <details id="new-zealand-photo-credits" className="mt-8 rounded-2xl border border-emerald-200 bg-white px-5 py-3 text-sm">
         <summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Photograph credits and licences</summary>
         <ul className="grid gap-5 py-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -58,10 +58,15 @@ export default function AVESLandingPage() {
     <div className="min-h-screen bg-white">
       <NavigationHeader currentPage="/colombia" />
       <main id="main-content" tabIndex={-1}>
-        <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-10 sm:py-14 lg:py-20">
+        <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10 lg:py-12">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
-              <div>
+              <div className="mx-auto min-w-0 w-full max-w-xl">
+                <p className="mb-4 text-center font-semibold text-emerald-900">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a></p>
+                <HomepageBirdCarousel className="w-full" autoPlay={false} />
+                <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A few birds to inspire your journey. Explore their ranges and listen to available recordings; what you may see depends on your route, habitat and season.</p>
+              </div>
+              <div className="lg:pt-12">
                 <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800">
                   <MapPin className="h-4 w-4" aria-hidden="true" />AVES Colombia · Birding journeys
                 </p>
@@ -81,11 +86,7 @@ export default function AVESLandingPage() {
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-gray-600">Tell us your interests, preferred dates and pace. Itinerary, availability and arrangements are confirmed personally.</p>
               </div>
-              <div className="mx-auto min-w-0 w-full max-w-lg lg:max-w-none">
-                <p className="mb-4 text-center font-semibold text-emerald-900">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a></p>
-                <HomepageBirdCarousel className="w-full" autoPlay={false} />
-                <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A few birds to inspire your journey. Explore their ranges and listen to available recordings; what you may see depends on your route, habitat and season.</p>
-              </div>
+
             </div>
           </div>
         </section>

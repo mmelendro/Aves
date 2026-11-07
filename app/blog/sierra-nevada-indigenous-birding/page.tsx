@@ -24,7 +24,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
-import ArticleBirdCarousel from "@/components/article-bird-carousel"
+import ArticleHero from "@/components/article-hero"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -320,71 +320,12 @@ export default function SierraNevadaBlogPost() {
           </div>
         </div>
 
-        {/* Video Background Title Section */}
-        <div className="relative h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Video */}
-          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
-            <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/El%20Dorado-uJoK4deoS3MdNzKIGAUTejTN6o5Bcx.mp4" type="video/mp4" />
-          </video>
-
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50"></div>
-
-          {/* Content Overlay */}
-          <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <Link
-              href="/blog"
-              className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Blog
-            </Link>
-
-            <Badge className="bg-emerald-600/80 text-white mb-6 backdrop-blur-sm">Indigenous Partnerships</Badge>
-
-            <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight drop-shadow-2xl">Guardians of the Sky</h1>
-
-            <p className="text-xl lg:text-2xl mb-8 text-white/90 drop-shadow-lg max-w-3xl mx-auto">
-              Birding with the Kogi and Wayuu in Sierra Nevada de Santa Marta
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 mb-8">
-              <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
-                <User className="w-4 h-4 mr-2" />
-                <Link href="/team#martin-melendro" className="hover:text-white transition-colors">
-                  Martin Melendro
-                </Link>
-              </div>
-              <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
-                <Calendar className="w-4 h-4 mr-2" />
-                March 15, 2025
-              </div>
-              <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
-                <MapPin className="w-4 h-4 mr-2" />
-                Sierra Nevada de Santa Marta
-              </div>
-              <div className="flex items-center backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
-                <Clock className="w-4 h-4 mr-2" />8 min read
-              </div>
-            </div>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce">
-            <div className="flex flex-col items-center">
-              <span className="text-sm mb-2">Scroll to explore</span>
-              <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
-                <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ArticleHero article="sierra" title="Guardians of the Sky" eyebrow="Indigenous Partnerships" location="Sierra Nevada de Santa Marta" date="March 15, 2025" readTime="8 min read" description="Birding with the Kogi and Wayuu in Sierra Nevada de Santa Marta" />
 
         {/* Enhanced Cardinal Feature Section */}
         <div className="relative py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <ArticleBirdCarousel article="sierra" />
+            <div className="mx-auto max-w-4xl">
 
               <div className="space-y-6">
                 <div className="inline-flex items-center bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -433,33 +374,6 @@ export default function SierraNevadaBlogPost() {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Blog
           </Link>
-
-          <div className="mb-8">
-            <Badge className="bg-emerald-100 text-emerald-800 mb-4">Indigenous Partnerships</Badge>
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Guardians of the Sky: Birding with the Kogi and Wayuu in Sierra Nevada de Santa Marta
-            </h1>
-
-            <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8">
-              <div className="flex items-center">
-                <User className="w-4 h-4 mr-2" />
-                <Link href="/team#martin-melendro" className="hover:text-emerald-600 transition-colors">
-                  Martin Melendro
-                </Link>
-              </div>
-              <div className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                March 15, 2025
-              </div>
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
-                Sierra Nevada de Santa Marta
-              </div>
-              <div className="flex items-center">
-                <Clock className="w-4 h-4 mr-2" />8 min read
-              </div>
-            </div>
-          </div>
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none">

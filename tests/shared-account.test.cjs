@@ -41,14 +41,14 @@ for (const [file, expected] of [
 test('every Colombian region has a safe shared draft link and preserved sign-in destination', () => {
   for (const {slug} of colombiaMapRegions) {
     const url = new URL(shared.sharedAccountHref(slug), 'https://aves.bio')
-    assert.equal(url.pathname, '/australia/account')
+    assert.equal(url.pathname, '/account')
     assert.equal(url.searchParams.get('country'), 'colombia')
     assert.equal(url.searchParams.get('region'), slug)
     const auth = new URL(shared.sharedSignInHref('sign-in', slug), 'https://aves.bio')
     assert.equal(auth.searchParams.get('next'), `/account?country=colombia&region=${slug}`)
   }
   for (const value of ['https://attacker.invalid', '//attacker.invalid', '__proto__', 'queensland']) {
-    assert.equal(shared.sharedAccountHref(value), '/australia/account?country=colombia')
+    assert.equal(shared.sharedAccountHref(value), '/account?country=colombia')
   }
 })
 
@@ -64,7 +64,7 @@ test('legacy shopping preserves allowed planning choices and discards arbitrary 
 test('old auth tokens are not forwarded; old recovery links start a fresh shared recovery', async () => {
   const {default: Page} = load('app/auth/[...legacy]/page.tsx', {'next/navigation': redirection})
   await assert.rejects(Page({params: Promise.resolve({legacy: ['callback']}), searchParams: {code: 'old-project-token'}}), error => error.url === shared.sharedSignInHref())
-  await assert.rejects(Page({params: Promise.resolve({legacy: ['reset-password']})}), error => error.url === '/australia/account/forgot-password')
+  await assert.rejects(Page({params: Promise.resolve({legacy: ['reset-password']})}), error => error.url === '/account/forgot-password')
 })
 
 test('Colombia runtime source contains no retired database clients, auth providers or credential reads', () => {
@@ -81,7 +81,7 @@ test('Colombia runtime source contains no retired database clients, auth provide
 
 test('desktop, mobile and regional shared-account entry points use full-page navigation', () => {
   for (const file of ['components/navigation-header.tsx', 'components/mobile-navigation-overlay.tsx']) {
-    assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /href\.startsWith\("\/australia\/"\) \? "a" : Link/)
+    assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /account.*\? "a" : Link/)
   }
   assert.match(fs.readFileSync(path.join(root, 'components/footer.tsx'), 'utf8'), /<a href=\{sharedAccountHref\(\)\}/)
   assert.match(fs.readFileSync(path.join(root, 'components/colombia-region-page.tsx'), 'utf8'), /<a href=\{sharedAccountHref\(region\.id\)\}/)

@@ -8,6 +8,7 @@ import { CheckCircle, ArrowRight, Users, Globe, Award } from "lucide-react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import TourComparison from "@/components/tour-comparison"
+import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 
 export default function ToursPage() {
   return (
@@ -16,9 +17,10 @@ export default function ToursPage() {
       <NavigationHeader currentPage="/tours" />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
+      <section className="relative py-8 lg:py-12 bg-gradient-to-br from-emerald-50 to-blue-50">
+        <div className="container mx-auto grid max-w-7xl items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
+          <HomepageBirdCarousel autoPlay={false} className="max-w-xl" />
+          <div className="lg:pt-12">
             <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-6">
               🌿 Four Unique Colombian Birding Experiences
             </Badge>

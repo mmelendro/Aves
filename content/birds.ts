@@ -7,6 +7,8 @@ export type BirdProfile = {
   scientificName: string
   primaryRegion: string
   regionSlug: string
+  regionHref?: string
+  audioCreditHref?: string
   distribution: string
   localOccurrence?: string
   habitat: string

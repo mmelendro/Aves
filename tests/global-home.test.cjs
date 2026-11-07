@@ -74,7 +74,7 @@ test("global homepage and footer offer the three public destinations with full-p
     assert.ok(countryLinks.some(link => link.text === `Explore ${destination.name}`))
     assert.ok(countryLinks.some(link => link.text === destination.name))
   }
-  const accountLinks = links.filter(link => link.href === "/australia/account")
+  const accountLinks = links.filter(link => link.href === "/account")
   assert.equal(accountLinks.length, 2)
   assert.ok(accountLinks.every(link => !link.next), "shared account entry crosses applications")
   assert.equal(load("app/page.tsx").metadata.alternates.canonical, "https://aves.bio/")

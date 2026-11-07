@@ -7,7 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { AuthorBio } from "@/components/author-bio"
-import ArticleBirdCarousel from "@/components/article-bird-carousel"
+import ArticleHero from "@/components/article-hero"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
@@ -79,62 +79,9 @@ export default function HummingbirdVisionJourneyPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-br from-purple-50 via-indigo-50 to-emerald-50 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-emerald-600/5" />
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="bg-purple-100 text-purple-800 mb-6 text-sm px-4 py-2">
-              Vision Photography Series • Part IV
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Jewels of the Andes: A Vision Journey Through Colombia's Hummingbird Sanctuaries
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              In the sacred heights of Colombia's three Andean cordilleras, where mist meets mountain and time seems to
-              pause, we embark on a spiritual pilgrimage to witness nature's most exquisite aerial dancers—the
-              hummingbirds.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-gray-600 mb-8">
-              <div className="flex items-center">
-                <User className="w-5 h-5 mr-2" />
-                <Link href="/team#martin-melendro" className="hover:text-purple-600 transition-colors">
-                  Martin Melendro
-                </Link>
-              </div>
-              <div className="flex items-center">
-                <Calendar className="w-5 h-5 mr-2" />
-                June 12, 2025
-              </div>
-              <div className="flex items-center">
-                <MapPin className="w-5 h-5 mr-2" />
-                Three Andean Cordilleras
-              </div>
-              <div className="flex items-center">
-                <Camera className="w-5 h-5 mr-2" />
-                12 min read
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/shopping?region=western-andes">
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 text-lg rounded-lg transition-colors inline-flex items-center gap-2">
-                  <Eye className="w-5 h-5" />
-                  Begin Your Vision Journey
-                </Button>
-              </Link>
-              <Link href="/tours/vision">
-                <Button
-                  variant="outline"
-                  className="border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-3 text-lg rounded-lg transition-colors inline-flex items-center gap-2"
-                >
-                  <Camera className="w-5 h-5" />
-                  Photography Expedition
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ArticleHero article="hummingbirds" title="Jewels of the Andes: A Vision Journey Through Colombia's Hummingbird Sanctuaries" eyebrow="Vision Photography Series · Part IV" location="Three Andean Cordilleras" date="June 12, 2025" readTime="12 min read" description="Explore Colombia's Andean hummingbirds, with time to watch, listen and photograph the life of the cloud forests.">
+        <Link href="/tours/vision" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-emerald-700 px-6 py-3 font-semibold text-white hover:bg-emerald-800"><Camera className="h-5 w-5" aria-hidden="true" />Explore photography journeys</Link>
+      </ArticleHero>
 
       {/* Main Content */}
       <article className="py-16">
@@ -156,11 +103,6 @@ export default function HummingbirdVisionJourneyPage() {
                 where ancient wisdom still flows, we seek not just photographs, but moments of profound connection with
                 these aerial angels.
               </p>
-            </div>
-
-            {/* Hummingbirds of the Colombian Andes */}
-            <div className="mb-12">
-              <ArticleBirdCarousel article="hummingbirds" />
             </div>
 
             {/* The Sacred Geography */}

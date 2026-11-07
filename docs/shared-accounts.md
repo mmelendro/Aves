@@ -1,8 +1,14 @@
-# One AVES account for Colombia and Australia
+# One AVES account across destinations
 
-The main AVES homepage at `/` is the global destination chooser. Colombia's homepage is `/colombia`, with its existing deeper public URLs preserved; Australia's homepage is `/australia`. The shared account and backend are maintained in the Australia app and publicly routed under `/australia`. Use native links across the two independently deployed Next apps. `/australia/account?country=colombia&region=<canonical-slug>` prefills a Colombian draft. Sign-in/sign-up receive a safe, unprefixed `next=/account?country=colombia` destination. The global My Trips link uses `/australia/account` without selecting a country.
+The main AVES homepage at `/` is the global destination chooser. Colombia lives at `/colombia`, Australia at `/australia`, and New Zealand inspiration at `/new-zealand`. **My Trips lives at `/account`**, with sign-in, sign-up and recovery screens below that path. Colombia/Australia are currently enabled for saved plans; New Zealand remains in development.
 
-Old `/auth/login`, `/auth/signup`, `/dashboard`, `/account` and nested account routes redirect to that shared portal. Old recovery links start a fresh recovery; old project tokens and arbitrary redirect parameters are never forwarded. `/shopping` redirects to `/contact`, preserving recognised tour/region choices. The legacy Colombia authentication, profile, documents, booking and mock payment implementations have been removed. No historical data import or database deletion is performed by these redirects.
+Account code, APIs, auth callbacks and assets remain in the maintained Australian app. Root middleware proxies only `/account/*` to the fixed Australian deployment; its routing marker is never authorization. Native account links avoid Next's Australian base-path prefix. Private/no-store/noindex protections and server verification remain in place.
+
+New sessions use `aves-auth`, Path=/, Secure in production and SameSite=Lax. The first root visit may pass through `/australia/auth/session` to verify and migrate legacy cookies from their original scope. Only verified sessions migrate; newer root sessions take precedence. Pending PKCE verifiers are preserved. The HttpOnly `aves-session-checked` guard prevents loops and grants no access. Existing `/australia/account` links redirect to `/account`, preserving the query. `/account?country=colombia&region=<canonical-slug>` prefills a Colombian draft. Safe nested sign-in return paths preserve country and region choices.
+
+Existing `/australia/auth/callback` and `/australia/auth/confirm` addresses remain valid and finish on root account screens. Proposal emails link to `/account`. Owner quotes remain at `/australia/admin/quotes`. No database or provider configuration change is required.
+
+Old `/auth/login`, `/auth/signup` and `/dashboard` routes redirect to the shared portal. Old Colombian recovery links start a fresh recovery; retired-project tokens and arbitrary redirects are never forwarded. `/shopping` redirects to `/contact`, preserving recognised tour/region choices. The legacy Colombia authentication, profile, documents, booking and mock payment implementations have been removed. No historical data import or database deletion is performed by these redirects.
 
 ## Inquiries
 

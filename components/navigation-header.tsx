@@ -40,7 +40,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
-              const NavigationLink = href.startsWith("/australia/") ? "a" : Link
+              const NavigationLink = (href.startsWith("/australia/") || /^\/account(?:[/?#]|$)/.test(href)) ? "a" : Link
               return <NavigationLink
                 key={href}
                 href={href}

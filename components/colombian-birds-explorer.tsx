@@ -11,7 +11,7 @@ import { Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, Arrow
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import YouTubeHeroBackground from "@/components/youtube-hero-background"
+import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 
 // Marker positions and colors match the existing AVES map artwork.
 // Descriptions and featured species come from the shared, sourced catalogue.
@@ -195,46 +195,24 @@ export function ColombianBirdsExplorer() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Full-Page YouTube Video Background - Extended to cover entire page */}
-      <div className="fixed inset-0 z-0 w-full h-full">
-        <YouTubeHeroBackground
-          videoId="QdV1BJNZQE0"
-          title=""
-          subtitle=""
-          className="w-full h-full"
-          showAttribution={false}
-          attributionText=""
-        />
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20"></div>
-      </div>
-
-      {/* Hero Section with Content */}
-      <div className="relative z-10 w-full h-[40vh] min-h-[320px] flex items-center justify-center">
-        <div className="text-center text-white px-4">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-shadow-2xl">Explore Colombia</h1>
-          <p className="text-lg sm:text-xl lg:text-2xl mb-8 text-shadow-lg max-w-3xl mx-auto">
-            Discover Colombia's incredible bird diversity with our interactive explorer
-          </p>
-          <div className="mb-4">
-            <Button
-              asChild
-              size="lg"
-              className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              <Link href="/tours">
-                <Calendar className="w-4 h-4 mr-2" />
-                Explore Tour Styles
-              </Link>
-            </Button>
+      <div className="fixed inset-0 z-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900" aria-hidden="true" />
+      <section className="relative z-10 py-8 lg:py-12">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
+          <HomepageBirdCarousel autoPlay={false} className="max-w-xl" />
+          <div className="text-white lg:pt-12">
+            <h1 className="mb-5 text-4xl font-bold sm:text-5xl lg:text-6xl">Explore Colombia</h1>
+            <p className="mb-7 text-lg leading-relaxed text-emerald-50 sm:text-xl">Start with a bird, then explore its home. Choose a region on the map to discover local birdlife and shape your journey.</p>
+            <div className="flex flex-wrap gap-3">
+              <a href="#colombia-regions" className="inline-flex min-h-12 items-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 hover:bg-emerald-50">Explore the map</a>
+              <Link href="/tours" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-emerald-300 px-6 py-3 font-semibold text-white hover:bg-emerald-800"><Calendar className="h-4 w-4" aria-hidden="true" />Explore tour styles</Link>
+            </div>
           </div>
-          <div className="text-xs text-white/70 mt-4">Drone Footage by Martín Melendro Torres</div>
         </div>
-      </div>
+      </section>
 
       {/* Main Content with Transparent Background */}
       <div className="relative z-10">
-        <section className="py-8 px-4 sm:px-6 lg:px-8">
+        <section id="colombia-regions" className="scroll-mt-24 py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               {/* Left Column - Biodiversity Info */}

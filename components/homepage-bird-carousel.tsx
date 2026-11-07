@@ -233,7 +233,7 @@ export default function HomepageBirdCarousel({
       )}
       <Card className="overflow-hidden rounded-2xl border border-emerald-100 shadow-xl">
         <div
-          className="relative aspect-[4/3] max-h-80 overflow-hidden bg-stone-100"
+          className="relative w-full aspect-[4/3] max-h-80 overflow-hidden bg-stone-100"
           style={{ touchAction: "pan-y pinch-zoom" }}
           onTouchStart={event => {
             touchStartRef.current = event.touches.length === 1
@@ -361,7 +361,7 @@ export default function HomepageBirdCarousel({
               <div><p className="font-semibold text-emerald-900">Habitat</p><p className="mt-1 leading-relaxed text-gray-700">{currentBird.habitat}</p></div>
               {currentBird.photoCredit.reserve && <div><p className="font-semibold text-emerald-900">Photograph location</p><p className="mt-1 text-gray-700">{currentBird.photoCredit.reserve}</p></div>}
               <p className="text-xs leading-relaxed text-gray-600">Distribution describes the species’ range, not a guaranteed sighting. Photograph and recording locations may differ.</p>
-              {currentBird.regionSlug && <Link href={`/aves-explorer?region=${currentBird.regionSlug}`} className={cn(linkClass, "flex min-h-11 items-center gap-2")}><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />Explore {currentBird.primaryRegion}</Link>}
+              {(currentBird.regionHref || currentBird.regionSlug) && <a href={currentBird.regionHref || `/aves-explorer?region=${currentBird.regionSlug}`} className={cn(linkClass, "flex min-h-11 items-center gap-2")}><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />Explore {currentBird.primaryRegion}</a>}
               {speciesSource && <a href={speciesSource.url} target="_blank" rel="noopener noreferrer" className={cn(linkClass, "flex min-h-11 items-center gap-2")}><ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />Read species guide</a>}
             </div>
           )}
@@ -378,7 +378,7 @@ export default function HomepageBirdCarousel({
                 <p className="text-xs font-semibold text-gray-600">Photograph location</p>
                 {currentBird.photoCredit.reserveLink ? <Link href={currentBird.photoCredit.reserveLink} className={cn(linkClass, "inline-flex min-h-11 items-center")}>{currentBird.photoCredit.reserve}</Link> : <p className="mt-1 text-gray-800">{currentBird.photoCredit.reserve}</p>}
               </div>}
-              {currentBird.audioFile && <Link href={`/credits#audio-${currentBird.id}`} className={cn(linkClass, "flex min-h-11 items-center")}>Bird recording & licence</Link>}
+              {currentBird.audioFile && <a href={currentBird.audioCreditHref || `/credits#audio-${currentBird.id}`} className={cn(linkClass, "flex min-h-11 items-center")}>Bird recording & licence</a>}
               {currentBird.photoCredit.instagramPost && <a href={currentBird.photoCredit.instagramPost} target="_blank" rel="noopener noreferrer" className={cn(linkClass, "flex min-h-11 items-center gap-2")}><ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />View photograph source</a>}
             </div>
           )}

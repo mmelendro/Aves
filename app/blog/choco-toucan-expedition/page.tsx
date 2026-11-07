@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import ArticleBirdCarousel from "@/components/article-bird-carousel"
+import ArticleHero from "@/components/article-hero"
 import AudioPlayer from "@/components/audio-player"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
@@ -46,46 +46,8 @@ export default function ChocoToucanExpeditionPage() {
         </div>
       </div>
 
-      {/* Article Header */}
-      <article className="container mx-auto px-4 py-16">
-        <header className="mb-8">
-          <div className="text-center mb-6">
-            <span className="inline-block bg-emerald-100 text-emerald-800 text-sm font-medium px-3 py-1 rounded-full mb-4">
-              Rainforest Expeditions
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Journey with us into the Chocó biogeographic region, where the haunting calls of Yellow-throated Toucans
-              echo through one of Earth's most biodiverse ecosystems.
-            </p>
-          </div>
-
-          {/* Article Meta */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 mb-8">
-            <div className="flex items-center">
-              <Calendar className="w-4 h-4 mr-2" />
-              March 15, 2024
-            </div>
-            <div className="flex items-center">
-              <Clock className="w-4 h-4 mr-2" />8 min read
-            </div>
-            <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-2" />
-              Chocó Region, Colombia
-            </div>
-            <div className="flex items-center">
-              <Users className="w-4 h-4 mr-2" />
-              Martin Melendro
-            </div>
-          </div>
-
-          {/* Birds of the Pacific forests and western foothills */}
-          <div className="mb-8">
-            <ArticleBirdCarousel article="choco" />
-          </div>
-        </header>
+      <ArticleHero article="choco" title="Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot" eyebrow="Rainforest Expeditions" location="Chocó Region, Colombia" date="March 15, 2024" readTime="8 min read" description="Journey into the Chocó biogeographic region, where the calls of toucans echo through the rainforest." />
+      <article className="container mx-auto px-4 py-10">
 
         {/* Article Content */}
         <div className="max-w-4xl mx-auto">

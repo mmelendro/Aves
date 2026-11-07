@@ -17,7 +17,7 @@ export function GlobalHeader({ country }: GlobalBrandProps = {}) {
           <nav aria-label="Main navigation" className="flex items-center gap-1 sm:gap-3">
             <a href="/#destinations" className="inline-flex min-h-11 items-center rounded-full px-2 text-[13px] font-medium text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 sm:px-3 sm:text-sm">Destinations</a>
             <a href="/#planning" className="hidden min-h-11 items-center rounded-full px-3 text-sm font-medium text-gray-700 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 sm:inline-flex">How it works</a>
-            <a href="/australia/account" className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-emerald-200 px-2 text-[13px] font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:px-5 sm:text-sm">My Trips</a>
+            <a href="/account" className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-emerald-200 px-2 text-[13px] font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:px-5 sm:text-sm">My Trips</a>
           </nav>
         </div>
       </header>

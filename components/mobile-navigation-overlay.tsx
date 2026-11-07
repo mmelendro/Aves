@@ -59,7 +59,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
           </Dialog.Description>
           <nav aria-label="Mobile navigation" className="space-y-1">
             {links.map(({ href, label }) => {
-              const NavigationLink = href.startsWith("/australia/") ? "a" : Link
+              const NavigationLink = (href.startsWith("/australia/") || /^\/account(?:[/?#]|$)/.test(href)) ? "a" : Link
               return <NavigationLink
                 key={href}
                 href={href}

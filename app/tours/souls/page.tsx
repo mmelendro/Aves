@@ -9,6 +9,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
+import ArticleBirdCarousel from "@/components/article-bird-carousel"
 
 export default function SoulsPage() {
   useEffect(() => {
@@ -21,11 +22,12 @@ export default function SoulsPage() {
       <NavigationHeader currentPage="/tours/souls" />
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
+      <section className="relative py-8 lg:py-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-pink-50" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article="hummingbirds" /></div>
+            <div className="space-y-8 lg:pt-12">
               <div className="space-y-4">
                 <Badge className="bg-red-100 text-red-800 hover:bg-red-100">
                   🍓 Cultural Immersion & Amazon Transition
@@ -74,45 +76,7 @@ export default function SoulsPage() {
               </div>
             </div>
 
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
-                <Image
-                  src="/images/vermillion-flycatcher.jpg"
-                  alt="Vermilion Flycatcher in Eastern Cordillera representing Souls Tours"
-                  width={480}
-                  height={600}
-                  className="object-cover w-full h-full"
-                  style={{ objectPosition: "center 20%" }}
-                />
 
-                {/* Photo Attribution Button */}
-                <div className="absolute bottom-4 right-4 z-50">
-                  <div className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 w-10 h-10 p-0 rounded-md flex items-center justify-center transition-colors relative group">
-                    <span className="text-lg">📷</span>
-                    <div className="absolute bottom-full right-0 mb-3 px-4 py-3 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-[70] shadow-xl whitespace-nowrap">
-                      <div className="text-center leading-relaxed">
-                        <div className="font-medium">Photo © Royann Petrell</div>
-                        <div className="text-emerald-300 text-xs mt-1">✨ Early Client</div>
-                      </div>
-                      <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/95"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-red-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Souls Tours</div>
-                    <div className="text-sm text-gray-600">Cultural Immersion</div>
-                    <div className="text-xs text-red-600">Indigenous partnerships • Amazon transition</div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

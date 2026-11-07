@@ -6,6 +6,7 @@ import { Calendar, MapPin, CheckCircle, Clock, Users } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
+import ArticleBirdCarousel from "@/components/article-bird-carousel"
 
 export const metadata: Metadata = { title: "Sierra Nevada Birding Experience", alternates: { canonical: canonicalUrl("/tours/adventure/sierra-nevada") } }
 
@@ -42,27 +43,12 @@ export default function SierraNevadaTourPage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <div className="relative h-[60vh] overflow-hidden">
-        <Image
-          src="/images/cardinal-guajiro.jpg"
-          alt="Sierra Nevada de Santa Marta landscape with endemic birds"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-          <div className="container mx-auto px-4 pb-12">
-            <Badge className="bg-emerald-500 text-white mb-4">AVES Adventure Tour</Badge>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 max-w-3xl">
-              Sierra Nevada Indigenous Birding Experience
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl">
-              An 8-day immersive journey through Colombia's most biodiverse mountain range with expert indigenous guides
-            </p>
-          </div>
+      <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 lg:py-12">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
+          <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article="sierra" /></div>
+          <div className="lg:pt-12"><Badge className="mb-4 bg-emerald-100 text-emerald-800">AVES Adventure Tour</Badge><h1 className="mb-5 text-4xl font-bold text-gray-900 md:text-5xl">Sierra Nevada Indigenous Birding Experience</h1><p className="text-xl leading-relaxed text-gray-600">An 8-day immersive journey through Colombia's most biodiverse mountain range with expert indigenous guides</p></div>
         </div>
-      </div>
+      </section>
 
       {/* Tour Overview */}
       <section className="py-12 bg-white">

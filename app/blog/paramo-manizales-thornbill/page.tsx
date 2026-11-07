@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, User, MapPin, Thermometer, Mountain, Clock, ArrowR
 import Image from "next/image"
 import Link from "next/link"
 import AuthorBio from "@/components/author-bio"
-import ArticleBirdCarousel from "@/components/article-bird-carousel"
+import ArticleHero from "@/components/article-hero"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -35,45 +35,9 @@ export default function ParamoManizalesThornbillPost() {
         </div>
       </div>
 
-      {/* Article Header */}
+      <ArticleHero article="paramo" title="Fire and Ice: From Páramo Peaks to Thermal Springs and Manakin Magic" eyebrow="High Altitude Birding" location="Manizales & Chinchiná, Caldas" date="November 8, 2024" readTime="8 min read" />
       <article className="max-w-4xl mx-auto px-4 py-8">
-        <Link href="/blog" className="inline-flex items-center text-emerald-600 hover:text-emerald-700 mb-8">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Blog
-        </Link>
-
-        <div className="mb-8">
-          <Badge className="bg-blue-100 text-blue-800 mb-4">High Altitude Birding</Badge>
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-            Fire and Ice: From Páramo Peaks to Thermal Springs and Manakin Magic
-          </h1>
-
-          <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8">
-            <div className="flex items-center">
-              <User className="w-4 h-4 mr-2" />
-              <Link href="/team#martin-melendro" className="hover:text-emerald-600 transition-colors">
-                Martin Melendro
-              </Link>
-            </div>
-            <div className="flex items-center">
-              <Calendar className="w-4 h-4 mr-2" />
-              November 8, 2024
-            </div>
-            <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-2" />
-              Manizales & Chinchiná, Caldas
-            </div>
-            <span>8 min read</span>
-          </div>
-        </div>
-
-        {/* Author Bio */}
         <AuthorBio />
-
-        {/* Birds of the Central Andes */}
-        <div className="mb-12">
-          <ArticleBirdCarousel article="paramo" />
-        </div>
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none">

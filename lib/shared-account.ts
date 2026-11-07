@@ -26,11 +26,11 @@ export function sharedAccountPath(region?: string): string {
 
 // Native links cross into the shared portal's independently deployed Next app.
 export function sharedAccountHref(region?: string): string {
-  return `/australia${sharedAccountPath(region)}`
+  return sharedAccountPath(region)
 }
 
 export function sharedSignInHref(mode: "sign-in" | "sign-up" = "sign-in", region?: string): string {
-  return `/australia/account/${mode}?${new URLSearchParams({next: sharedAccountPath(region)})}`
+  return `/account/${mode}?${new URLSearchParams({next: sharedAccountPath(region)})}`
 }
 
 export function legacyPlanningHref(query: Record<string, string | string[] | undefined>): string {
