@@ -5,9 +5,8 @@ import Link from "next/link"
 import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen } from "lucide-react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
-import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
 import { ContactFormSection } from "@/components/contact-form-section"
-import { Button } from "@/components/ui/button"
 
 const regions = [
   { slug: "pacific", name: "Pacific Coast & Chocó", description: "Rainforest, rivers and Pacific foothills" },
@@ -60,34 +59,12 @@ export default function AVESLandingPage() {
       <main id="main-content" tabIndex={-1}>
         <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10 lg:py-12">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
-              <div className="mx-auto min-w-0 w-full max-w-xl">
-                <p className="mb-4 text-center font-semibold text-emerald-900">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a></p>
-                <HomepageBirdCarousel className="w-full" autoPlay={false} />
-                <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A few birds to inspire your journey. Explore their ranges and listen to available recordings; what you may see depends on your route, habitat and season.</p>
-              </div>
-              <div className="lg:pt-12">
-                <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800">
-                  <MapPin className="h-4 w-4" aria-hidden="true" />AVES Colombia · Birding journeys
-                </p>
-                <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl xl:text-6xl">
-                  Discover Colombia’s <span className="block text-emerald-600">Extraordinary Birdlife</span>
-                </h1>
-                <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg lg:text-xl">
-                  From Caribbean foothills to Andean cloud forest and the Amazon. Explore the places that inspire you, then shape a personal birding journey with AVES.
-                </p>
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Button asChild size="lg" className="min-h-12 rounded-lg bg-emerald-600 px-5 shadow-md hover:bg-emerald-700">
-                    <Link href="/aves-explorer">Explore the regions <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="min-h-12 rounded-lg border-emerald-600 px-5 text-emerald-700 hover:bg-emerald-50">
-                    <Link href="/contact">Plan my trip</Link>
-                  </Button>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-gray-600">Tell us your interests, preferred dates and pace. Itinerary, availability and arrangements are confirmed personally.</p>
-              </div>
-
+            <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Colombia · Birding journeys</p>
+              <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Colombia’s <span className="text-emerald-700">extraordinary birdlife</span></h1>
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">From Caribbean foothills to Andean cloud forest and the Amazon. Find a bird that inspires you, then explore the place it calls home.</p>
             </div>
+            <ColombiaHeroExplorer />
           </div>
         </section>
 
@@ -165,6 +142,7 @@ export default function AVESLandingPage() {
             <div className="mb-10 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-emerald-700">From first idea to a personal journey</p>
               <h2 id="planning-heading" className="text-3xl font-bold text-gray-900 lg:text-4xl">A little planning. A lot to look forward to.</h2>
+              <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-gray-600">Tell us your interests, preferred dates and pace. Itinerary, availability and arrangements are confirmed personally.</p>
             </div>
             <ol className="grid gap-7 md:grid-cols-3">
               {planningSteps.map(({ title, icon: Icon, text }, index) => (

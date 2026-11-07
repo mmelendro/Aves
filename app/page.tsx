@@ -29,9 +29,8 @@ export default function HomePage() {
       <main id="main-content" tabIndex={-1}>
         <section id="destinations" aria-labelledby="destination-heading" className="scroll-mt-20 bg-gradient-to-br from-emerald-50 via-white to-blue-50 pb-14 pt-6 sm:pb-20 sm:pt-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
-              <GlobalBirdCarousel />
-              <div className="lg:pt-12">
+            <div className="mb-12 grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+              <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800">
                 <Bird className="h-4 w-4" aria-hidden="true" /> Birding journeys, personally planned
               </p>
@@ -45,6 +44,7 @@ export default function HomePage() {
                 {destinations.map(destination => <a key={destination.id} href={destination.href} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-2 font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">{destination.name}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>)}
               </nav>
               </div>
+              <GlobalBirdCarousel />
             </div>
             <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
               {destinations.map(destination => (

@@ -16,9 +16,8 @@ type ArticleHeroProps = {
 
 export default function ArticleHero({ article, title, eyebrow, location, date, readTime, description, children }: ArticleHeroProps) {
   return <header className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 sm:py-10">
-    <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
-      <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article={article} /></div>
-      <div className="lg:pt-12">
+    <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
+      <div>
         <p className="mb-4 inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800">{eyebrow}</p>
         <h1 className="text-balance text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">{title}</h1>
         {description && <p className="mt-5 text-lg leading-relaxed text-gray-600">{description}</p>}
@@ -30,6 +29,7 @@ export default function ArticleHero({ article, title, eyebrow, location, date, r
         </div>
         {children && <div className="mt-6">{children}</div>}
       </div>
+      <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article={article} /></div>
     </div>
   </header>
 }

@@ -3,7 +3,8 @@ import Link from "next/link"
 import { ArrowRight, Bird, Compass, Heart, Utensils, Waves } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandMap from "@/components/new-zealand-map"
-import NewZealandBirdCarousel, { NewZealandPhotoCredits } from "@/components/new-zealand-bird-carousel"
+import { NewZealandPhotoCredits } from "@/components/new-zealand-bird-carousel"
+import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -29,20 +30,14 @@ export default function NewZealandPage() {
       <main id="main-content" tabIndex={-1}>
         <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <Link href="/" className="mb-7 inline-flex min-h-11 items-center rounded-lg text-sm font-medium text-emerald-800 underline underline-offset-4">All destinations</Link>
-            <div className="grid items-start gap-9 lg:grid-cols-2 lg:gap-12">
-              <div id="birdlife" className="min-w-0 scroll-mt-24">
-                <NewZealandBirdCarousel />
-              </div>
-              <div className="lg:pt-20">
-                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800"><Compass className="h-4 w-4" aria-hidden="true" /> A new AVES destination · In development</p>
-                <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">Aotearoa<br /><span className="text-emerald-700">New Zealand</span></h1>
-                <p className="mt-5 text-xl font-medium leading-relaxed text-emerald-900">Follow the birds. Stay for everything around them.</p>
-                <p className="mt-4 max-w-xl text-lg leading-relaxed text-gray-600">Island birdlife, mountain landscapes and stories rooted in place. Imagine a journey with time for nature, good food, culture and the simple pleasure of being somewhere new.</p>
-                <div className="mt-7 flex flex-wrap gap-3"><a href="#regions" className={`${linkStyle} bg-emerald-700 text-white hover:bg-emerald-800`}>Explore the islands<ArrowRight className="h-5 w-5" aria-hidden="true" /></a><a href="#your-journey" className={`${linkStyle} border border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50`}>Share your ideas</a></div>
-              </div>
+            <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><Compass className="h-4 w-4" aria-hidden="true" />A new AVES destination · In development</p>
+              <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">Aotearoa <span className="text-emerald-700">New Zealand</span></h1>
+              <p className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Follow the birds. Stay for everything around them.</p>
+              <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-gray-600">Island birdlife, mountain landscapes and stories rooted in place. Explore at your own pace, with time for nature, good food and culture.</p>
             </div>
-            <nav aria-label="On this page" className="mt-10 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4 text-sm font-semibold text-emerald-800">{[["regions", "The islands"], ["birdlife", "Birds & where to find them"], ["experience", "Beyond birding"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{label}</a>)}</nav>
+            <NewZealandHeroExplorer />
+            <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4 text-sm font-semibold text-emerald-800"><Link href="/" className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All destinations</Link>{[["regions", "The islands"], ["birdlife", "Birds & where to find them"], ["experience", "Beyond birding"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{label}</a>)}</nav>
           </div>
         </section>
 
