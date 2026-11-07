@@ -2,6 +2,8 @@
 
 ## Current production — country-card carousels, 8 November 2026 (Sydney)
 
+**Latest planning-only update:** the owner wants the global hero’s mixed-country carousel replaced by the world destination map, retaining the three country-card carousels below. This is queued as AVES-003 and is not yet live. The living brief now includes an incremental delivery order; wait for the next explicit implementation instruction.
+
 **AVES-011 is published, tested and synced to GitHub. Paused before the next change.** On https://aves.bio each destination card now has its own country bird carousel: Colombia 22, Australia 20, New Zealand 31. The existing mixed-country hero, country links and New Zealand development status are preserved. Compact 4:5 card frames reuse the established translucent controls and speaker highlight. Photo attribution follows each slide; details retain habitat, range, species sources and media credits. Card images are lazy, recordings load on request, and one call plays at a time across all homepage viewers.
 
 | Application | Branch | Deployed application commit | Deployment |
