@@ -1,3 +1,7 @@
+/**
+ * Calendar route shell and search metadata. Event records, filters and event dialogs
+ * live in components/birding-calendar.tsx. This page does not query an events API.
+ */
 import type { Metadata } from "next"
 import { BirdingCalendar } from "@/components/birding-calendar"
 

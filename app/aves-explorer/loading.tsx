@@ -1,3 +1,7 @@
+/**
+ * Temporary route-level Explorer loading screen. It is distinct from photo/audio
+ * loading states inside the carousel and does not track their progress.
+ */
 export default function Loading() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50 flex items-center justify-center">

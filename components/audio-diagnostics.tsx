@@ -1,3 +1,8 @@
+/**
+ * Optional browser audio diagnostic panel. It probes audio support and offers
+ * explicit test playback, including an external sample recording. These checks are
+ * troubleshooting aids, not the production carousel sound controls.
+ */
 "use client"
 
 import { useState, useEffect } from "react"

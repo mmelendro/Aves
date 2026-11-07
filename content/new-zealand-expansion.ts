@@ -1,3 +1,9 @@
+/**
+ * Additional New Zealand species and local occurrence notes.
+ * The mapping at the end joins each stable bird ID to photograph/audio credits and
+ * constructs source links. Missing media credits fail loudly instead of showing an
+ * unattributed substitute. Sources are links, not live eBird API calls.
+ */
 import type { BirdProfile } from "@/content/birds"
 import credits from "@/content/new-zealand-expansion-credits.json"
 
@@ -217,6 +223,27 @@ const species: Species[] = [
   },
 ]
 
+// Portrait-view focal points reviewed against the local source photos. Only
+// off-centre subjects need an override; otherwise retain the centred framing.
+// This is presentation only: the original files, species notes and credits stay intact.
+const portraitImagePositions: Record<string, string> = {
+  bellbird: "65% center",
+  "grey-warbler": "15% center",
+  kaka: "60% center",
+  "orange-fronted-parakeet": "65% center",
+  // This very tight landscape headshot cannot fit the entire head and long bill
+  // at 9:16. Keep the eye/bill visible; a future portrait source would offer more room.
+  "paradise-shelduck": "25% center",
+  "rock-wren": "35% center",
+  "south-island-saddleback": "10% center",
+  "south-island-tomtit": "30% center",
+  "western-weka": "65% center",
+  "westland-petrel": "20% center",
+  "white-heron": "75% center",
+  "australasian-crested-grebe": "20% center",
+  "australasian-bittern": "60% center",
+}
+
 export const expansionBirds: BirdProfile[] = species.map(bird => {
   const id = `nz-${bird.slug}`
   const photo = expansionPhotoCredits.find(item => item.id === id)
@@ -233,6 +260,7 @@ export const expansionBirds: BirdProfile[] = species.map(bird => {
     localOccurrence: bird.local,
     habitat: bird.habitat,
     image: photo.image,
+    imagePosition: portraitImagePositions[bird.slug] || "center",
     audioFile: audio.path,
     audioLabel: `${audio.title} · Department of Conservation (NZ)`,
     sources: [

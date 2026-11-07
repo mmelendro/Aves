@@ -1,3 +1,9 @@
+/**
+ * Optional popup with inline privacy, terms and cookie copy selected by type.
+ * The caller controls isOpen/onClose; mounting is tracked to avoid early browser UI.
+ * Current public notices are separate app/privacy, app/terms and app/cookies pages;
+ * this duplicate text should be reviewed before mounting the popup.
+ */
 "use client"
 
 import { useState, useEffect } from "react"

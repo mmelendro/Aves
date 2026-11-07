@@ -1,3 +1,9 @@
+/**
+ * Sierra Nevada article with its own inline interactive species feature as well as
+ * the shared article hero. Local overlay state belongs to that inline feature;
+ * the long labelled JSX sections are editorial story/itinerary content.
+ * Do not treat the story or community references as a live booking/partnership database.
+ */
 "use client"
 
 import { Badge } from "@/components/ui/badge"

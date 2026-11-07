@@ -1,3 +1,7 @@
+/**
+ * Small wrapper choosing the global bird selection for the main homepage.
+ * Photo, audio, details and portrait sizing are implemented in HomepageBirdCarousel.
+ */
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { globalBirds } from "@/content/global-birds"
 

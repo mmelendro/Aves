@@ -1,10 +1,18 @@
+/**
+ * Server-only compatibility endpoint for older Colombian contact forms.
+ * Current forms use the shared /australia/api/contact endpoint. This bridge validates
+ * old payloads, translates them, and forwards to a fixed AVES address. It never
+ * connects to the retired Colombian database. HTTP errors are safe public messages.
+ */
 import { type NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { makeColombiaInquiry } from "@/lib/colombia-inquiry"
 import { canonicalColombiaRegion } from "@/lib/shared-account"
 
+// Bound request size before parsing to avoid accepting arbitrarily large payloads.
 const MAX_REQUEST_BYTES = 32_768
 const SHARED_CONTACT_URL = "https://aves.bio/australia/api/contact"
+// Zod checks runtime input: TypeScript alone cannot validate a browser request.
 const singleLine = (length: number) => z.string().trim().max(length).regex(/^[^\u0000-\u001f\u007f]*$/)
 const legacyInquiry = z.object({
   firstName: singleLine(59).min(1),
@@ -22,10 +30,12 @@ const legacyInquiry = z.object({
   website: z.string().max(0).optional().default(""),
 })
 
+/** All JSON responses disable caching, including errors containing user-facing feedback. */
 function reply(body: Record<string, unknown>, status: number, extraHeaders: Record<string, string> = {}) {
   return NextResponse.json(body, {status, headers: {"Cache-Control": "no-store", ...extraHeaders}})
 }
 
+/** Reject explicit cross-site browser submissions; this check is not user authentication. */
 function allowedOrigin(req: NextRequest) {
   if (req.headers.get("sec-fetch-site") === "cross-site") return false
   const origin = req.headers.get("origin")
@@ -37,6 +47,7 @@ function allowedOrigin(req: NextRequest) {
   }
 }
 
+/** Count actual streamed bytes as well as checking the optional Content-Length header. */
 async function readBody(req: NextRequest): Promise<{body: unknown} | {status: 400 | 413}> {
   if (Number(req.headers.get("content-length")) > MAX_REQUEST_BYTES) return {status: 413}
   const reader = req.body?.getReader()
@@ -58,6 +69,7 @@ async function readBody(req: NextRequest): Promise<{body: unknown} | {status: 40
   } catch {
     return {status: 400}
   } finally {
+    // Release the stream even if parsing or reading failed.
     reader.releaseLock()
   }
 }
@@ -72,6 +84,7 @@ export async function POST(req: NextRequest) {
   const parsed = await readBody(req)
   if ("status" in parsed) return reply({error: parsed.status === 413 ? "Your inquiry is too long." : "Your inquiry could not be read."}, parsed.status)
   const request = legacyInquiry.safeParse(parsed.body)
+  // The same idempotency key lets the shared service recognize an unchanged retry.
   const key = z.uuid().safeParse(req.headers.get("idempotency-key"))
   if (!request.success) return reply({error: "Please check your inquiry details."}, 400)
   if (!key.success) return reply({error: "Please refresh the AVES contact page before submitting your inquiry."}, 400)
@@ -81,6 +94,7 @@ export async function POST(req: NextRequest) {
     request.data.regions, request.data.tourTypes, request.data.updates, request.data.website,
   )
   try {
+    // Forward only to our fixed service, refusing redirects and limiting wait time.
     const upstream = await fetch(SHARED_CONTACT_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json", "Idempotency-Key": key.data, Origin: "https://aves.bio"},
@@ -90,6 +104,8 @@ export async function POST(req: NextRequest) {
       signal: AbortSignal.timeout(15_000),
     })
     const result = await upstream.json().catch(() => ({}))
+    // Report success only when the service explicitly confirms durable Colombia storage.
+    // This does not claim delivery to an inbox or a confirmed travel booking.
     if (upstream.ok && result?.success === true && result?.status === "stored" && result?.intent === "inquiry" && result?.country === "colombia") {
       return reply({success: true, status: "stored", intent: "inquiry", country: "colombia"}, 200)
     }

@@ -1,3 +1,8 @@
+/**
+ * Colombia bird directory. Both the hero carousel and the species cards read
+ * content/birds, keeping names, photos, range notes and source links together.
+ * Each card links to a region-prefilled inquiry rather than an instant booking.
+ */
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"

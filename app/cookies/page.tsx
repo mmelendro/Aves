@@ -1,3 +1,8 @@
+/**
+ * Cookie-policy copy plus its own legacy header/menu. CookieManagementButton opens
+ * the shared preference center provided by the root layout. Editing this prose does
+ * not change what scripts, cookies or embeds actually run.
+ */
 "use client"
 
 import { useState } from "react"

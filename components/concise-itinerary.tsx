@@ -1,3 +1,8 @@
+/**
+ * Optional compact itinerary display. The caller passes ordered itinerary steps;
+ * this component formats their locations, descriptions and highlights. It does not
+ * plan a route, contact an operator or save an account record.
+ */
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"

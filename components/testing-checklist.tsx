@@ -1,3 +1,8 @@
+/**
+ * Optional quick DOM-inspection panel for images, headings, form labels, buttons
+ * and external links. Its simple checks can miss accessibility issues; it is not
+ * a substitute for the repository tests or keyboard/screen-reader review.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

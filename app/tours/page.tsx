@@ -1,3 +1,8 @@
+/**
+ * Colombia trip-style index. Four editorial style cards lead to detail pages;
+ * TourComparison supplies the interactive comparison below them. No availability
+ * service or booking engine is queried by this page.
+ */
 "use client"
 
 import Link from "next/link"

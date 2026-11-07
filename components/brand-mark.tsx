@@ -1,3 +1,8 @@
+/**
+ * Shared AVES logo: a country bird, lightweight wordmark and landscape decoration.
+ * The large background link goes home; the independently clickable subtitle goes
+ * to its country. These are sibling links, so no link is nested inside another link.
+ */
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { sitePath } from "@/lib/site-path"

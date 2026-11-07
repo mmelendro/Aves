@@ -1,3 +1,7 @@
+/**
+ * Explicit Caribbean route and metadata. It uses the same ColombiaRegionPage
+ * template as the dynamic region routes, with the Caribbean content record.
+ */
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import { ColombiaRegionPage } from "@/components/colombia-region-page"

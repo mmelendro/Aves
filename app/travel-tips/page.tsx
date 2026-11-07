@@ -1,3 +1,8 @@
+/**
+ * Colombia travel-preparation editorial page. The labelled sections hold safety,
+ * community-impact, sustainability and practical information. Advice and statistics
+ * are static text: changing the date does not verify their accuracy or currency.
+ */
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import { NavigationHeader } from "@/components/navigation-header"

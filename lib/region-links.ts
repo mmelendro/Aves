@@ -1,3 +1,8 @@
+/**
+ * Connects labels in the original Colombian map artwork to current web addresses.
+ * Keep slugs aligned with content/regions.ts and the guides under app/regions.
+ * Changing a displayed name is safer than changing a slug that visitors may have bookmarked.
+ */
 // Legacy artwork IDs map to the canonical guides and contact-form presets.
 export const colombiaMapRegions = [
   { mapId: "Pacific", slug: "pacific" },
@@ -13,6 +18,7 @@ export const colombiaMapRegions = [
   { mapId: "Massif", slug: "colombian-massif" },
 ] as const
 
+/** Return guide and inquiry links, falling back to the general explorer if the map ID is unknown. */
 export function getRegionLinks(mapId: string) {
   const region = colombiaMapRegions.find(item => item.mapId === mapId)
   return region

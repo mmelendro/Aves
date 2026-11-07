@@ -1,3 +1,8 @@
+/**
+ * Optional expandable sample-itinerary panel. A region key selects local static
+ * days; isOpen determines whether the itinerary is visible. This is separate from
+ * a customer saved plan and does not persist any booking details.
+ */
 "use client"
 
 import { useState } from "react"

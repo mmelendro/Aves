@@ -1,3 +1,11 @@
+/**
+ * Shared visual vocabulary for Tailwind CSS.
+ * content lists where Tailwind scans for class names; theme.extend adds AVES colours,
+ * fonts, breakpoints and animation tokens without replacing the default theme.
+ * CSS variables such as --background are assigned in app/globals.css. A class like
+ * sm:text-4xl applies at the small-screen breakpoint and larger; smaller screens
+ * use the unprefixed class. See docs/BEGINNERS-GUIDE.md for styling examples.
+ */
 import type { Config } from "tailwindcss"
 
 const config: Config = {

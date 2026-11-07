@@ -1,3 +1,8 @@
+/**
+ * B Corp journey page. The arrays describe preparation priorities and planned
+ * milestones, which are rendered below. Keep plans distinct from completed achievements
+ * and preserve the explicit statement that AVES is not currently certified.
+ */
 import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"

@@ -1,3 +1,8 @@
+/**
+ * Two exports: an optional standalone New Zealand carousel, and the photo-credit
+ * section used by the New Zealand page. The current country hero uses
+ * NewZealandHeroExplorer instead of the standalone carousel below.
+ */
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { newZealandCarouselBirds, newZealandPhotoCredits } from "@/content/new-zealand-carousel"
 

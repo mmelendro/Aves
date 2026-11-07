@@ -1,3 +1,8 @@
+/**
+ * Connects an article topic to birds already in the shared Colombia catalogue.
+ * The ID lists are editorial selections, not complete regional checklists.
+ * The common carousel supplies the photo, call, controls and species details.
+ */
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { birdData, type BirdProfile } from "@/content/birds"
 
@@ -29,6 +34,8 @@ const articleBirdIds = {
 
 type ArticleBirdSelection = keyof typeof articleBirdIds
 
+// Resolve IDs once when the module loads. Missing catalogue IDs fail loudly during build/render
+// rather than silently showing an unrelated bird in an article.
 const articleBirds = Object.fromEntries(
   Object.entries(articleBirdIds).map(([article, ids]) => [
     article,

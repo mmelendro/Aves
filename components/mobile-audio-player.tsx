@@ -1,3 +1,8 @@
+/**
+ * Optional standalone audio widget with play, seek, volume, reset and error state.
+ * Its ref points to an HTML audio element; native media events update the display.
+ * Despite its name, the current phone carousel uses HomepageBirdCarousel audio instead.
+ */
 "use client"
 
 import type React from "react"

@@ -1,3 +1,8 @@
+/**
+ * Two-image comparison used on the conservation page. A percentage controls how
+ * much of the upper image is clipped away; pointer dragging changes that percentage.
+ * This is a visual comparison only, with images and labels supplied by the caller.
+ */
 "use client"
 
 import type React from "react"

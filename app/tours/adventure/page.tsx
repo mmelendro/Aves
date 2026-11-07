@@ -1,3 +1,8 @@
+/**
+ * Adventure-style editorial page. Labelled sections contain the carousel intro,
+ * features, sample itinerary, related story and price/inquiry copy. The shared carousel
+ * is selected by an article key; any commercial claims are static and need verification.
+ */
 "use client"
 
 import { useEffect } from "react"

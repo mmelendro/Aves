@@ -1,3 +1,7 @@
+/**
+ * Opens the consultation scheduling dialog from the Colombia inquiry form.
+ * Only the open/closed state lives here; the embed URL and loading UI live in the modal.
+ */
 "use client"
 
 import { useState } from "react"

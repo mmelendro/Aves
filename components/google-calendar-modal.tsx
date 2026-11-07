@@ -1,3 +1,8 @@
+/**
+ * Displays an external Google appointment page in a dialog after the visitor opens it.
+ * The alternative link opens that same scheduler in a new tab. This is an appointment
+ * embed, not Google account sign-in and not a booking written by this React component.
+ */
 "use client"
 
 import { useState, useEffect } from "react"

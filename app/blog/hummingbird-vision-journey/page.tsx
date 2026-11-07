@@ -1,3 +1,8 @@
+/**
+ * Hummingbird photography article, with a shared ArticleHero and AuthorBio.
+ * The labelled JSX sections hold the prose, place descriptions, gallery and related links.
+ * The hero carousel selection is maintained in components/article-bird-carousel.tsx.
+ */
 "use client"
 
 import { Button } from "@/components/ui/button"

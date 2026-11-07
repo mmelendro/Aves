@@ -1,3 +1,8 @@
+/**
+ * Optional video-led region hero with play/mute controls and links that scroll to
+ * fixed map/itinerary section IDs. Callers must provide those matching sections.
+ * The current destination intro uses the bird carousel, not this video component.
+ */
 "use client"
 
 import { useState, useRef, useEffect } from "react"

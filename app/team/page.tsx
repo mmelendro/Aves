@@ -1,3 +1,9 @@
+/**
+ * Team directory with inline teamMembers records and separate advisory sections.
+ * Accordion panels reveal profiles; in-page links use stable member IDs.
+ * This is public editorial biography data, not customer-account information.
+ * Only publish biographies, roles and permissions that the owner has verified.
+ */
 "use client"
 
 import { useEffect } from "react"

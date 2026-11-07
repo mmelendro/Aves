@@ -1,3 +1,9 @@
+/**
+ * Public New Zealand inspiration, island summaries, initial species and inquiry link.
+ * This is editorial content, not a private guest itinerary or confirmed tour inventory.
+ * The source URLs support the public descriptions; the expanded carousel is assembled
+ * in new-zealand-carousel.ts.
+ */
 /** Public inspiration only. Private guest plans must never be included here. */
 export const newZealandRegions = [
   {

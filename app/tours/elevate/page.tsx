@@ -1,3 +1,8 @@
+/**
+ * Elevate-style editorial page. The hero uses the common bird carousel; the sections
+ * below describe features, a sample itinerary, a related article and price/inquiry copy.
+ * These are static records, not live confirmed availability or quotes.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

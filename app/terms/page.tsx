@@ -1,3 +1,8 @@
+/**
+ * Public explanation of inquiries, saved plans and priced proposals.
+ * The sections array is rendered into the document body. These statements describe
+ * the service; the actual account/proposal workflow is implemented in the shared app.
+ */
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"

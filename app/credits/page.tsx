@@ -1,3 +1,8 @@
+/**
+ * Public attribution directory built from the media-credit JSON files.
+ * Recording IDs become audio-<id> anchors used by carousel credit links.
+ * Keep source, creator, licence and modification details with every added asset.
+ */
 import type { Metadata } from "next"
 import Image from "next/image"
 import { PageShell } from "@/components/page-shell"

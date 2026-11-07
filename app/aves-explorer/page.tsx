@@ -1,3 +1,8 @@
+/**
+ * Route wrapper for the full Colombia Explorer. Metadata belongs here; region
+ * selection, map markers and bird panels belong in ColombianBirdsExplorer.
+ * The header and footer frame that client-side explorer.
+ */
 import { canonicalUrl } from "@/lib/site-path"
 import { ColombianBirdsExplorer } from "@/components/colombian-birds-explorer"
 import { NavigationHeader } from "@/components/navigation-header"

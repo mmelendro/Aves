@@ -1,3 +1,8 @@
+/**
+ * Optional testimonial-card presentation using records provided by a caller.
+ * It does not verify authorship, collect reviews or load a review service. Any future
+ * use requires approved, authentic testimonial content and image permissions.
+ */
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"

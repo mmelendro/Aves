@@ -1,3 +1,8 @@
+/**
+ * Optional expandable target-species list selected by region. Species notes live
+ * in this file; opening the panel only changes local visibility. The active sourced
+ * country/region catalogue lives in content/birds and content/regions.
+ */
 "use client"
 
 import { useState } from "react"

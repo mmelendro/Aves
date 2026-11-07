@@ -1,3 +1,8 @@
+/**
+ * Optional regional accordion presentation backed by regionAccordionData below.
+ * The region prop chooses a static content group; the accordion primitives handle
+ * opening and closing. Current region guides use ColombiaRegionPage instead.
+ */
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"

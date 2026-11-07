@@ -1,3 +1,8 @@
+/**
+ * Optional in-page navigation for caller-supplied section IDs. Scroll position
+ * determines the highlighted section; clicks use the smooth-scroll hook.
+ * Each section ID must match a real element in the page that mounts this component.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

@@ -1,3 +1,8 @@
+/**
+ * Cookie preference openers. The button is used on /cookies; the second export is
+ * an optional link-styled button. Both change provider state instead of navigating
+ * to another page or saving consent immediately.
+ */
 "use client"
 
 import type React from "react"

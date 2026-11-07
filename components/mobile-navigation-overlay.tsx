@@ -1,3 +1,7 @@
+/**
+ * Small-screen Colombia menu. Radix Dialog handles the modal, keyboard focus and
+ * Escape key; this component supplies the links and closes the menu after a choice.
+ */
 "use client"
 
 import { useEffect, useState } from "react"
@@ -14,6 +18,7 @@ interface MobileNavigationOverlayProps {
 export function MobileNavigationOverlay({ currentPage, links }: MobileNavigationOverlayProps) {
   const [open, setOpen] = useState(false)
 
+  // Close the mobile dialog if the viewport grows into the desktop navigation layout.
   useEffect(() => {
     if (!open) return
     const desktop = window.matchMedia("(min-width: 1280px)")
@@ -59,6 +64,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
           </Dialog.Description>
           <nav aria-label="Mobile navigation" className="space-y-1">
             {links.map(({ href, label }) => {
+              // Use a full navigation for shared accounts/Australia; they are served by another app.
               const NavigationLink = (href.startsWith("/australia/") || /^\/account(?:[/?#]|$)/.test(href)) ? "a" : Link
               return <NavigationLink
                 key={href}

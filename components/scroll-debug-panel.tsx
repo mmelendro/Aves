@@ -1,3 +1,8 @@
+/**
+ * Optional diagnostic overlay that reads scroll position, viewport size and known
+ * section positions. It subscribes to browser scroll/resize events when mounted.
+ * This is a debugging view, not visitor analytics or production navigation.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

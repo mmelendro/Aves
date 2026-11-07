@@ -1,3 +1,9 @@
+/**
+ * The eleven Colombian planning regions and locally relevant bird selections.
+ * selection looks up a bird by stable ID and adds a region-specific place to look.
+ * It throws on an unknown ID so a broken content relationship is caught early.
+ * Keep wider distribution in the bird catalogue and local notes in this file.
+ */
 import { birdData, type BirdSource } from "./birds"
 
 export type RegionalBird = { birdId: string; whereFound: string; sources: BirdSource[] }

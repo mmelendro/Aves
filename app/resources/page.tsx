@@ -1,3 +1,8 @@
+/**
+ * Server route for resources metadata. Interactive tabs and the resource catalogue
+ * are rendered by ResourcesPageClient; keeping metadata here avoids putting it inside
+ * a browser-only component.
+ */
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import ResourcesPageClient from "./ResourcesPageClient"

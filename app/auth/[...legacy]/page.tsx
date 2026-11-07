@@ -1,3 +1,8 @@
+/**
+ * Catch-all for old authentication URLs. Known password-recovery paths move to
+ * the shared portal; other paths move to sign-in. Old tokens and arbitrary redirect
+ * parameters are deliberately not carried into the new account system.
+ */
 import { redirect } from "next/navigation"
 import { sharedSignInHref } from "@/lib/shared-account"
 

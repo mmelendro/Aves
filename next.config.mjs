@@ -1,3 +1,9 @@
+/**
+ * Next.js build and routing configuration, evaluated by the server/build tool.
+ * This is not page content. headers() supplies browser security/cache instructions;
+ * redirects() moves visitors to canonical routes. See docs/BEGINNERS-GUIDE.md
+ * before changing path prefixes: the two AVES applications are deployed separately.
+ */
 import { securityHeaders, privateHeaders } from "./security-headers.mjs"
 /** @type {import('next').NextConfig} */
 const nextConfig = {

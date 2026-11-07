@@ -1,3 +1,8 @@
+/**
+ * Optional older ecoregion selector. Selecting a category/region emits custom
+ * browser events for components such as InteractiveEcoregionsTable to listen to.
+ * Its local WWF-labelled data is static; the label itself does not verify the records.
+ */
 "use client"
 
 import { useState } from "react"

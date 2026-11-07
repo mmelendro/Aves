@@ -1,3 +1,9 @@
+/**
+ * Older image wrapper used by team/partner pages and some optional components.
+ * It manages loading/fallback state and includes filename/class-name styling rules.
+ * The active bird carousel uses next/image directly, so its portrait crop is not here.
+ * Fallback bird images are placeholders, not verified portraits of the named people.
+ */
 "use client"
 
 import type React from "react"

@@ -1,3 +1,8 @@
+/**
+ * Optional video player with local play, mute and fullscreen controls. It locates
+ * the video by the fixed drone-video ID, so multiple instances need review before use.
+ * It is separate from bird recording playback and is not a video catalogue.
+ */
 "use client"
 
 import { useState } from "react"

@@ -1,3 +1,8 @@
+/**
+ * Public privacy notice. The sections array supplies the editable paragraphs and
+ * optional links. This file explains data handling; enforcement belongs in the shared
+ * account API, authentication and database policies, not in these words.
+ */
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"

@@ -1,3 +1,7 @@
+/**
+ * Temporary calendar skeleton shown while the route loads. Skeleton blocks imitate
+ * the layout only; they are not event data and do not perform a network request.
+ */
 import { Skeleton } from "@/components/ui/skeleton"
 
 export default function CalendarLoading() {

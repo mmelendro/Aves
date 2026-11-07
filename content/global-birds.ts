@@ -1,3 +1,8 @@
+/**
+ * Builds a small mixed-country selection for the global homepage.
+ * map creates copies with country-aware links; spread (...) retains other fields.
+ * flatMap interleaves Colombia, Australia and New Zealand instead of grouping them.
+ */
 import { birdData, type BirdProfile } from "./birds"
 import { newZealandCarouselBirds } from "./new-zealand-carousel"
 import australianSelection from "./global-australian-birds.json"

@@ -1,3 +1,7 @@
+/**
+ * Optional presentational card group. Icons, titles, descriptions and colours come
+ * from the caller-supplied highlights array. No data fetching or trip state lives here.
+ */
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"

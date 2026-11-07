@@ -1,3 +1,8 @@
+/**
+ * Standalone recording player used within the Choco article. It owns an HTML audio
+ * element plus play, mute and seek controls. This is separate from the shared
+ * carousel sound button; changing this file does not change carousel audio.
+ */
 "use client"
 
 import type React from "react"
@@ -20,6 +25,7 @@ export default function AudioPlayer({ src, title, species, className }: AudioPla
   const [currentTime, setCurrentTime] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
 
+  // Subscribe to native media events after mount and remove listeners on unmount.
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
@@ -64,6 +70,7 @@ export default function AudioPlayer({ src, title, species, className }: AudioPla
     const audio = audioRef.current
     if (!audio) return
 
+    // Convert the range input percentage into seconds within the recording.
     const newTime = (Number.parseFloat(e.target.value) / 100) * duration
     audio.currentTime = newTime
     setCurrentTime(newTime)

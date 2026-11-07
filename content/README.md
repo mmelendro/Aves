@@ -1,13 +1,42 @@
-# Colombian bird collection
+# Editing public bird and region content
 
-`birds.ts` exports the shared `BirdProfile` type and 22 records from `birds-catalogue.json`. `regions.ts` maps all eleven original artwork IDs to the canonical regional pages. Its selections identify local habitat separately from each species’ wider range. The featured region on a profile is one starting point for a trip, not the species’ complete distribution.
+This folder contains public editorial data. Never put customer itineraries, private contact information or credentials here. TypeScript files accept comments; strict JSON files do not, so their field explanations belong in this README.
 
-The twelve original AVES photographs retain their supplied photographer attributions. Ten additional photographs were sourced from Wikimedia Commons file records under CC BY or CC BY-SA licences. They are JPEGs with a maximum 1,200-pixel edge. Source records, authors, licences and resizing/cropping notices appear in `image-credits.json`; photographs taken outside Colombia carry their actual photo location. No generative photographs are used.
+## Bird fields
 
-Four new field recordings have matching research-grade iNaturalist identifications and commercially compatible per-recording licences. Their original WAV/M4A files were retained unchanged; all are under 4 MB. The ten original hosted AVES calls remain authorized legacy assets, with provenance and public reuse rights explicitly unresolved in the credits. Eight birds have no included recording. The former quetzal call was removed because its URL identified a Golden-headed Manakin; no substitute sound is supplied.
+| Field | Meaning |
+| --- | --- |
+| `id` | Stable identifier joining the species to region selections and credits; keep existing IDs stable. |
+| `commonName`, `scientificName` | Display names; verify taxonomy and which actual species the media depicts. |
+| `primaryRegion`, `regionSlug` | A featured planning area and its URL identifier, not the whole distribution. |
+| `distribution` | Wider species range. |
+| `localOccurrence` / regional `whereFound` | Specific, sourced places/habitats relevant to this region. |
+| `habitat` | The environment where a visitor may look for the species. |
+| `image` | Public image path. The Australian app adds its base path through `sitePath`. |
+| `imagePosition` | Optional CSS focal point, such as `35% center`, for the portrait crop. |
+| `audioFile`, `audioLabel` | Optional recording path and description/attribution; omission is an unavailable call. |
+| `sources` | Factual source titles and links; these are not a live data API or a media licence. |
+| `photoCredit` | Photographer, source and related metadata displayed with the bird. |
 
-Corrections include Striolated Manakin (`Machaeropterus striolatus`) for the Colombian photograph formerly called Striped Manakin, Eastern-Andes-only occurrence for Green-bearded Helmetcrest, and removal of unsupported Colombian-endemic labels for Rainbow-bearded Thornbill, Chestnut-crowned Antpitta and Vermilion Cardinal. Regional selections distinguish dry valley habitats, wooded foothills, montane forest and páramo. Santa Marta selections use three actual massif endemics.
+Media credit JSON keeps the original source page, creator, licence URL and modification information. Do not remove credits when replacing an asset. Photo/recording locations can differ from the local occurrence described. Newly sourced media needs a licence compatible with its intended commercial use; an eBird link alone does not grant that permission.
 
-Sources are linked beside the profiles and regional notes. The 2020 Valle del Cauca inventory is used at its habitat-zone level, not as proof that every departmental record inhabits the valley floor. Lower Magdalena Scaled Dove records and Ataco toucan evidence are qualified locally. Three Massif species are documented directly by the 2024 Puracé guide rather than inferred from a neighbouring department.
+## Where the collections live
 
-Verification performed locally: all 22 identities and media paths, all 11 map/contact presets, at least three selections per region, photographer/recordist credit coverage, actual image dimensions and byte counts, and readable WAV/MP4 container durations. New square image crops were visually reviewed; Hoatzin and Sunbittern use left alignment to retain the head and beak. TypeScript checks for both catalogue modules pass. Live browser playback and expert listening verification of all calls remain separate checks; no new tour availability or sighting guarantee is asserted.
+| Application | Main collections |
+| --- | --- |
+| Global/Colombia/NZ branch | `birds-catalogue.json` -> `birds.ts`; regional selections in `regions.ts`; homepage cards in `destinations.ts`; mixed-country gallery in `global-birds.ts`. |
+| New Zealand on that branch | `new-zealand.ts`, `new-zealand-expansion.ts`, `new-zealand-supplement.ts`, assembled by `new-zealand-carousel.ts`; matching credits alongside them. |
+| Australian branch | `birds-original.json`, `birds-expansion-a.json`, `birds-expansion-b.json` -> `birds.ts`; guide content in `regions.ts`; local selections in `regional-birds.ts`. |
+| Shared trip support on Australian branch | `trip-options.ts` holds the destination registry and allowed regions; `contact-topics.ts` defines general inquiry topics. |
+
+Geographic path coordinates (`australia-map.ts` or `new-zealand-map.json`) are generated boundary data. Their long numeric paths describe outlines; edit the map component's colours or labels rather than hand-editing those coordinates. Preserve the dataset provenance.
+
+## A safe editing sequence
+
+1. Add or correct the profile and factual sources, keeping its stable ID consistent.
+2. Add the licensed local photo/audio file and its corresponding credit record.
+3. Add appropriate regional selections with locally relevant occurrence notes.
+4. Check the photo at the carousel's 9:16 portrait ratio; use `imagePosition` when needed. Landscape photographs are cropped to fill the frame.
+5. Run the application's type check/tests and preview the page, sound and credits. Missing audio must remain visibly unavailable rather than being substituted with another species.
+
+This is a curated inspiration collection, not a complete national checklist or a guarantee of sightings, guide availability or access. Counts and dated operational information need periodic factual review.

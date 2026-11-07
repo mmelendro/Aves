@@ -1,3 +1,8 @@
+/**
+ * Search title and canonical URL for the /about route subtree.
+ * This layout returns children unchanged: it adds metadata, not visible page chrome.
+ * The page component owns the actual header, sections and footer.
+ */
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import { canonicalUrl } from "@/lib/site-path"

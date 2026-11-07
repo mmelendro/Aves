@@ -1,3 +1,8 @@
+/**
+ * Optional feature-check display. Browser APIs are inspected after mount and
+ * reported as capability rows. It does not install every listed fallback and is not
+ * an automatic guarantee that the whole site works in a browser.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

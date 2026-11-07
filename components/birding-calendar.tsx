@@ -1,3 +1,9 @@
+/**
+ * Searchable display of the inline birdingEvents list. It has year tabs, filters,
+ * event details and temporary favourites, but no connection to an organizer feed or
+ * My Trips. Dates/prices here are static, including older and estimated entries;
+ * verify them with organizers before treating them as current.
+ */
 "use client"
 
 import { useState, useMemo } from "react"
@@ -282,9 +288,12 @@ export function BirdingCalendar() {
   const [selectedType, setSelectedType] = useState("All Types")
   const [selectedDifficulty, setSelectedDifficulty] = useState("All Levels")
   const [selectedYear, setSelectedYear] = useState("2025")
+  // Favourites are temporary for this mount; they are not persisted to My Trips or storage.
   const [favorites, setFavorites] = useState<string[]>([])
   const [showFilters, setShowFilters] = useState(false)
 
+  // Recompute only when filters change. The year tab chooses a date field later;
+  // it does not fetch another calendar or remove entries from this static list.
   const filteredEvents = useMemo(() => {
     return birdingEvents.filter((event) => {
       const matchesSearch =

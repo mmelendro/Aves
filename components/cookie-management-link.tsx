@@ -1,3 +1,8 @@
+/**
+ * Optional standalone link-styled cookie-preference opener. A similarly named
+ * export also exists in cookie-management-button.tsx. Check the import path before
+ * editing: neither filename alone proves a component is mounted on a page.
+ */
 "use client"
 
 import type React from "react"

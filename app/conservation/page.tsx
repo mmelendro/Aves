@@ -1,3 +1,8 @@
+/**
+ * Conservation editorial page: image comparison, conservation themes, impact copy
+ * and B Corp section. BeforeAfterSlider only reveals two images; it does not measure
+ * impact. Any statistics or commitments here require independent verification.
+ */
 "use client"
 
 import { useEffect } from "react"

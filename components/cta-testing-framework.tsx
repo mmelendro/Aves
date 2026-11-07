@@ -1,3 +1,8 @@
+/**
+ * Optional manual test panel for older comparison-section links. Its tests inspect
+ * the current DOM, scroll and change URL hashes; mounting it can affect the open page.
+ * It is not the automated test suite and is not needed by the current carousel.
+ */
 "use client"
 
 import { useState } from "react"

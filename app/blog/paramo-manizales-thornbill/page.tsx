@@ -1,3 +1,8 @@
+/**
+ * Central Andes article with a shared carousel hero and a reusable author card.
+ * The large JSX body contains the itinerary story, inline photographs and related links;
+ * editing ArticleHero changes its introductory layout, not this article prose.
+ */
 import type { Metadata } from "next"
 import { canonicalUrl } from "@/lib/site-path"
 import { Badge } from "@/components/ui/badge"

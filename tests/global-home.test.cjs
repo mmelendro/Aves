@@ -15,7 +15,7 @@ function createLoader(overrides = {}) {
     "next/link": ({ children, ...props }) => React.createElement("a", { ...props, "data-next-link": "true" }, children),
     "@/components/navigation-header": { NavigationHeader: function NavigationHeader() { return null } },
     "@/components/footer": { Footer: function Footer() { return null } },
-    "@/components/homepage-bird-carousel": function HomepageBirdCarousel() { return null },
+    "@/components/homepage-bird-carousel": function HomepageBirdCarousel() { return React.createElement("div", { "data-bird-carousel": true }) },
     "@/components/contact-form-section": { ContactFormSection: function ContactFormSection() { return null } },
     ...overrides,
   }
@@ -136,7 +136,9 @@ test("Colombia retains its country homepage, bird carousel, trip form and existi
   const page = load("app/colombia/page.tsx")
   const tree = page.default()
   const componentNames = elements(tree, node => typeof node.type === "function").map(node => node.type.name)
-  for (const component of ["NavigationHeader", "HomepageBirdCarousel", "ContactFormSection", "Footer"]) assert.ok(componentNames.includes(component), component)
+  for (const component of ["NavigationHeader", "ContactFormSection", "Footer"]) assert.ok(componentNames.includes(component), component)
+  // The gallery can be composed inside a hero without disappearing from the page.
+  assert.match(renderToStaticMarkup(React.createElement(page.default)), /data-bird-carousel="true"/)
   const header = elements(tree, node => node.type.name === "NavigationHeader")[0]
   assert.equal(header.props.currentPage, "/colombia")
   const links = elements(tree, node => typeof node.props.href === "string").map(node => node.props.href)

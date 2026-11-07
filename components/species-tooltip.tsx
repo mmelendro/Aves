@@ -1,3 +1,8 @@
+/**
+ * Optional tooltip showing the caller-supplied species name, description and eBird
+ * link. Tooltip state belongs here; it does not retrieve or validate eBird facts.
+ * The main carousel uses its own expandable species-details panel.
+ */
 "use client"
 
 import type React from "react"

@@ -1,3 +1,8 @@
+/**
+ * Adapts NZ editorial entries and licensed media credits into BirdProfile records.
+ * The shared carousel can then render NZ birds without its own UI implementation.
+ * The original selection, expansion and supplement are combined at the bottom.
+ */
 import type { BirdProfile } from "@/content/birds"
 import { newZealandBirds, newZealandEbirdLinks } from "@/content/new-zealand"
 import { expansionBirds, expansionPhotoCredits } from "@/content/new-zealand-expansion"
@@ -13,7 +18,7 @@ const originalPhotoCredits = [
     location: "New Zealand",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Kea_(Nestor_notabilis)_-side_-NZ-8a.jpg",
     license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
-    modifications: "Existing original photograph reused without cropping in this carousel. Responsive image compression may apply. Image adaptations remain under CC BY-SA 2.0.",
+    modifications: "Original photograph retained; the portrait carousel crops the displayed frame with CSS. Responsive image compression may apply. Image adaptations remain under CC BY-SA 2.0.",
   },
   {
     id: "nz-tui", scientificName: "Prosthemadera novaeseelandiae", region: "North, South & Stewart Islands",
@@ -76,6 +81,18 @@ const newZealandAudio = {
   "nz-tokoeka": { file: "/audio/nz-tokoeka.mp3", label: "Tokoeka song, Ocean Beach, Stewart Island / Rakiura · ZHANG Shen (XC389022)" },
 } as const
 
+// The 9:16 viewer crops the sides of these original photographs. Each percentage
+// positions the visible window so the bird's face/bill stays inside the frame;
+// it does not modify the photograph or change its media/credit record.
+const originalPortraitPositions: Record<(typeof originalPhotoCredits)[number]["id"], string> = {
+  "nz-kea": "85% center",
+  "nz-tui": "85% center",
+  "nz-fantail": "center",
+  "nz-takahe": "80% center",
+  "nz-little-penguin": "35% center",
+  "nz-tokoeka": "85% center",
+}
+
 const originalCarouselBirds: BirdProfile[] = newZealandBirds.map(bird => {
   const photo = originalPhotoCredits.find(entry => entry.scientificName === bird.scientific)
   if (!photo) throw new Error(`Missing New Zealand photograph: ${bird.scientific}`)
@@ -91,6 +108,7 @@ const originalCarouselBirds: BirdProfile[] = newZealandBirds.map(bird => {
     localOccurrence: bird.where,
     habitat: `${bird.habitat}. ${bird.note}`,
     image: photo.image,
+    imagePosition: originalPortraitPositions[photo.id],
     audioFile: newZealandAudio[photo.id].file,
     audioLabel: newZealandAudio[photo.id].label,
     sources: [

@@ -1,23 +1,39 @@
-# Development and preview workflow
+# Editing and releasing AVES
 
-Use the pnpm version pinned in `package.json` and commit `pnpm-lock.yaml` with dependency changes. Do not generate an npm or Yarn lockfile. Vercel already uses pnpm for this repository.
+Start with [the beginner's guide](docs/BEGINNERS-GUIDE.md) and [CONTINUE-HERE.md](CONTINUE-HERE.md). The latter identifies the current release. The two maintained branches are independent applications: `webmaster/readiness-2026-11-05` and `australia/preview`. Work from the appropriate current branch, not an assumed up-to-date `main`, and do not merge the two applications.
 
-The dependency overrides replace vulnerable CSS/build-tool versions with compatible updates. Next.js 15 pins an older PostCSS internally, so `next>postcss` shares the patched direct dependency. Recheck `corepack pnpm audit` and the production build before removing overrides or upgrading the framework. An audit with no findings covers known package advisories, not application security.
+## Local development
 
-## Local checks
+Use Node.js 22 and pnpm 10.34.5 as used by the project. Install from the committed lockfile:
 
-1. Create a feature or repair branch from the current `main`.
-2. Install with `corepack pnpm install --frozen-lockfile`.
-3. Colombia's public app no longer initializes Supabase. Account links use the shared AVES portal under `/australia/account`; test account functionality in that app with test services. No database credentials are required in this checkout.
-4. Run `corepack pnpm build`, then `corepack pnpm start`.
-5. Check Region, Species and Tour Type discovery, tour comparisons, trip planning and contact pages on desktop and mobile.
+```sh
+corepack pnpm install --frozen-lockfile --ignore-scripts
+```
 
-The existing Next.js configuration skips TypeScript and ESLint checks during builds. A successful build alone is not a complete quality or security sign-off. `corepack pnpm exec tsc --noEmit` can be used to inspect the separate TypeScript backlog.
+In the Australian checkout, `corepack pnpm dev` runs http://127.0.0.1:3000/australia. In the root/global checkout, use `corepack pnpm exec next dev --hostname 127.0.0.1 --port 3001` to preview http://127.0.0.1:3001. The root app forwards local Australian/account requests to the server on port 3000. Review each public application directly when checking its own assets.
 
-## Vercel previews and release
+The root/global application does not need database credentials for public pages. The shared Australian account backend uses private environment configuration; see its `.env.example` and backend guide. Keep actual values in an untracked `.env.local` or provider settings. Never paste private keys into code, comments, screenshots or GitHub. Use labelled test data when a test needs storage; routine styling reviews need no real form submissions.
 
-Push the branch and open a draft pull request against `main`. Review the Vercel **Preview** deployment for `v0-company-landing-page`, the project connected to `aves.bio`; another project named `aves` also builds this repository.
+## Before saving a functional change
 
-Verify the deployment is marked Preview and points to the repair branch and expected commit before testing. Use test services for any submissions; do not send real enquiries or create production records during checks.
+```sh
+corepack pnpm exec tsc --noEmit
+corepack pnpm test
+corepack pnpm build
+```
 
-Record build results, desktop/mobile checks and any remaining limitations on the pull request. Merging to `main`, promoting a deployment or running a production deployment requires Martin's separate explicit approval. Domain, DNS, payment and destructive settings also require separate approval.
+The Australian branch also offers `corepack pnpm typecheck`. Stop the development process before building in the same checkout, since both use `.next`. Both applications use TypeScript checks; the root configuration skips ESLint during the build, so a build alone is not a complete review. Tests use local doubles where documented and do not prove every live service still works.
+
+Review changed screens on desktop and mobile. Check keyboard focus, image crops, licensed media credits, sound controls and links. For account/backend changes, check ownership, validation, redirects and durable saved-state behavior. Do not send real emails merely to test a cosmetic change.
+
+## GitHub and publication are different steps
+
+Commit reviewed changes and push the correct branch. Automatic Git deployments are deliberately disabled. A GitHub push preserves the code online but does not publish it. Deploy the corresponding Vercel project, inspect its build/preview, then promote the reviewed release when publication is authorized. Update `CONTINUE-HERE.md` with the deployed application commit and exact deployment URL. Documentation-only commits may subsequently advance the branch head.
+
+Do not enable automatic deployment, change provider credentials, run database migrations or modify customer records as part of routine content/style work. Existing approved scope governs release actions; deployment approval is not permission for unrelated billing or destructive changes.
+
+## Dependency and database maintenance
+
+Keep `pnpm-lock.yaml` with dependency changes; do not introduce npm/Yarn lockfiles. Dependency overrides retain reviewed compatible security patches. Recheck known advisories and production builds before removing overrides. An advisory scan is not proof of application security.
+
+Existing SQL migrations are history, not scripts to rerun casually. Read the Australian `supabase/README.md` and use a new reviewed migration for a new schema change. The root application's old `scripts/` and replacement database files are historical material, not the current shared backend setup.

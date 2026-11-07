@@ -1,3 +1,8 @@
+/**
+ * Optional React error boundary around supplied children. It replaces a failed
+ * render subtree with an error card and reload action. It is not an API error handler
+ * and only protects a subtree where a caller actually mounts it.
+ */
 "use client"
 
 import React from "react"

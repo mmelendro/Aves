@@ -1,3 +1,8 @@
+/**
+ * Detailed Sierra Nevada sample itinerary. The shared bird carousel introduces
+ * the route, followed by day-by-day prose, species, accommodation copy and inquiry links.
+ * This page has its own header/footer markup and no booking backend call.
+ */
 import type { Metadata } from "next"
 import { canonicalUrl } from "@/lib/site-path"
 import { Button } from "@/components/ui/button"

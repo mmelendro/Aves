@@ -1,3 +1,8 @@
+/**
+ * Optional browser performance logger. If mounted, it observes timing entries and
+ * writes results to the console; it renders no dashboard or persistent analytics store.
+ * Its presence on disk does not mean production monitoring is enabled.
+ */
 "use client"
 
 import { useEffect } from "react"

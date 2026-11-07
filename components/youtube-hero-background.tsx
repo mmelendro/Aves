@@ -1,3 +1,9 @@
+/**
+ * Optional YouTube iframe-API hero. It loads the external player API, manages
+ * player/mute/quality state and estimates connection speed. Merely keeping this file
+ * in the repository does not embed YouTube on a page; mounting it introduces external
+ * requests and requires a separate consent, rights and performance review.
+ */
 "use client"
 
 import type React from "react"

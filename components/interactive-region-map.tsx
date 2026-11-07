@@ -1,3 +1,8 @@
+/**
+ * Optional older per-region location diagram with local selection state.
+ * The region prop selects its local place records. It is distinct from the active
+ * ColombiaMapArtwork and NewZealandMap components used on destination homepages.
+ */
 "use client"
 
 import { useState } from "react"

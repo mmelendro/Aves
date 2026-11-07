@@ -1,3 +1,9 @@
+/**
+ * Resource-library presentation: tabs, inline resource lists and shortcut buttons.
+ * This is a static editorial library, not a search service. The Search resources input
+ * is currently presentational (no filtering handler); tab shortcuts use browser DOM
+ * lookups and scrolling. Resource links/claims should be rechecked when editing.
+ */
 "use client"
 
 import { Button } from "@/components/ui/button"

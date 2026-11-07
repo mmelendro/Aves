@@ -1,3 +1,9 @@
+/**
+ * Optional toast-notification store. State and subscribers live at module scope,
+ * so mounted consumers share a list capped by TOAST_LIMIT. useToast subscribes a
+ * component; toast() adds an item and returns update/dismiss functions. A mounted
+ * Toaster renderer is still needed to make notifications visible.
+ */
 "use client"
 
 // Inspired by react-hot-toast library
@@ -58,6 +64,7 @@ interface State {
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
+// Dismissing hides a toast first; removal from memory happens later, once per ID.
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return
@@ -133,6 +140,7 @@ const listeners: Array<(state: State) => void> = []
 
 let memoryState: State = { toasts: [] }
 
+// Apply one action, then notify every mounted subscriber of the new shared state.
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
   listeners.forEach((listener) => {

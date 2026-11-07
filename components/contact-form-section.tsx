@@ -1,3 +1,9 @@
+/**
+ * Colombia inquiry form, shared by the country homepage and contact page.
+ * Inputs are kept in React state and submitted to the shared Australia-hosted API.
+ * This browser component never writes directly to the database and contains no secrets;
+ * the API must validate and protect every request regardless of browser checks.
+ */
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
@@ -45,6 +51,8 @@ export function ContactFormSection({
   const [feedback, setFeedback] = useState("")
   const [updates, setUpdates] = useState(false)
   const [website, setWebsite] = useState("")
+  // Refs update immediately: the lock catches double-clicks before React re-renders.
+  // An unchanged retry reuses its request key, allowing the API to avoid duplicate inquiries.
   const inFlight = useRef(false)
   const submission = useRef<{body: string; key: string} | null>(null)
 
@@ -70,6 +78,8 @@ export function ContactFormSection({
     { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
   ]
 
+  // Region/tour links can prefill the form. Only recognised values are accepted here;
+  // this convenience is not a substitute for validation by the receiving API.
   useEffect(() => {
     const query = new URLSearchParams(window.location.search)
     const aliases: Record<string, string> = { "sierra-nevada-de-santa-marta": "sierra-nevada", pacific: "pacific-choco", llanos: "eastern-plains", amazonia: "amazon", "cauca-river": "cauca-valley" }
@@ -100,6 +110,7 @@ export function ContactFormSection({
     setSubmitStatus("idle")
     setFeedback("")
     try {
+      // Convert presentation labels into the shared contact API contract. No private key is sent.
       const body = JSON.stringify(makeColombiaInquiry(formData, selectedRegions, selectedTourTypes, updates, website))
       if (submission.current?.body !== body) submission.current = {body, key: crypto.randomUUID()}
       const res = await fetch("/australia/api/contact", {
@@ -109,6 +120,7 @@ export function ContactFormSection({
       })
       const result = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(result?.error || "Your inquiry could not be saved. Please try again.")
+      // HTTP success alone is insufficient: require confirmation of the saved Colombia inquiry.
       if (result?.success !== true || result?.status !== "stored" || result?.intent !== "inquiry" || result?.country !== "colombia") {
         throw new Error("We couldn't confirm that your inquiry was saved. Please try again.")
       }
@@ -369,6 +381,7 @@ export function ContactFormSection({
                       />
                     </div>
 
+                    {/* Empty bot-trap field; real visitors skip it. Updates require a separate opt-in. */}
                     <div className="hidden" aria-hidden="true"><label>Website<input name="website" autoComplete="off" tabIndex={-1} value={website} onChange={event => setWebsite(event.target.value)} /></label></div>
                     <label className="flex items-start gap-3 text-sm text-gray-700"><input type="checkbox" className="mt-1 accent-emerald-600" checked={updates} onChange={event => setUpdates(event.target.checked)} /><span>Email me AVES Colombia trip news and updates. I can unsubscribe at any time.</span></label>
                     <p className="text-sm text-gray-500">Updates are optional. We'll use your details to respond to this inquiry. <Link href="/privacy" className="text-emerald-700 underline">Read our privacy information</Link>.</p>

@@ -1,3 +1,8 @@
+/**
+ * Colombia contact-page layout. Introductory copy and contact context are here;
+ * fields, validation feedback and request submission live in ContactFormSection.
+ * The same form is also included on the Colombia homepage.
+ */
 import type { Metadata } from "next"
 import { canonicalUrl } from "@/lib/site-path"
 import { NavigationHeader } from "@/components/navigation-header"

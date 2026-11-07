@@ -1,3 +1,7 @@
+/**
+ * Colombia footer. The four link lists below are the editable navigation groups.
+ * My Trips points to the shared account service; informational links stay in this app.
+ */
 import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { sharedAccountHref } from "@/lib/shared-account"

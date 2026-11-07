@@ -1,3 +1,8 @@
+/**
+ * Optional illustrated itinerary timeline. The caller supplies days, locations,
+ * highlights and image paths; this component formats them with OptimizedImage.
+ * It does not fetch or modify a signed-in customer itinerary.
+ */
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"

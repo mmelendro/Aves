@@ -1,4 +1,9 @@
 /**
+ * Browser-only scrolling helpers. Distances use CSS pixels and times use milliseconds.
+ * Call these after the DOM exists, not during a server render. The progress helper
+ * below measures the visible fraction, which is different from journey completion.
+ */
+/**
  * Utility functions for scroll behavior and navigation
  */
 
@@ -61,6 +66,7 @@ function easeInOutCubic(t: number): number {
 /**
  * Check if element is in viewport
  */
+// This check requires the entire rectangle to fit, allowing the supplied pixel tolerance.
 export function isElementInViewport(element: HTMLElement, threshold = 0): boolean {
   const rect = element.getBoundingClientRect()
   const windowHeight = window.innerHeight || document.documentElement.clientHeight
@@ -77,6 +83,7 @@ export function isElementInViewport(element: HTMLElement, threshold = 0): boolea
 /**
  * Get scroll progress for an element
  */
+// This name is historical: the middle case returns visible height / element height.
 export function getScrollProgress(element: HTMLElement): number {
   const rect = element.getBoundingClientRect()
   const windowHeight = window.innerHeight
@@ -93,6 +100,7 @@ export function getScrollProgress(element: HTMLElement): number {
 /**
  * Debounce function for scroll events
  */
+// Wait until calls have been quiet for wait milliseconds, then run the latest one.
 export function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null
 
@@ -105,6 +113,7 @@ export function debounce<T extends (...args: any[]) => any>(func: T, wait: numbe
 /**
  * Throttle function for scroll events
  */
+// Run the first call immediately, then ignore more calls until the time window expires.
 export function throttle<T extends (...args: any[]) => any>(func: T, limit: number): (...args: Parameters<T>) => void {
   let inThrottle = false
 

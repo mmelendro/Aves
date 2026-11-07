@@ -1,3 +1,9 @@
+/**
+ * Partner-directory presentation with inline records, category sections and anchor
+ * navigation. PartnerCard renders one record; CategorySection groups cards; PartnersPage
+ * manages open sections and URL-hash navigation. Listed relationships are editorial
+ * claims, not confirmed by the code or fetched from partner systems.
+ */
 "use client"
 
 import { useState, useEffect } from "react"

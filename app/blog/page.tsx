@@ -1,3 +1,8 @@
+/**
+ * Colombia blog index. blogPosts is the editable list of article cards and links.
+ * The shared bird carousel introduces the page; article bodies live in the
+ * corresponding app/blog/<slug>/page.tsx files, not in this list.
+ */
 "use client"
 
 import { Button } from "@/components/ui/button"

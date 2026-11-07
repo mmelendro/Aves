@@ -1,3 +1,8 @@
+/**
+ * Optional browser hook for scrolling to an element ID below a fixed header.
+ * The returned function reports whether the target was found, and updates the URL
+ * hash without asking the browser to perform a second jump.
+ */
 "use client"
 
 import { useCallback } from "react"

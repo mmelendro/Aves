@@ -1,3 +1,8 @@
+/**
+ * Next.js metadata route that becomes /robots.txt. Preview deployments discourage
+ * all crawling; production lists public sitemaps and excludes private/legacy URL paths.
+ * Robots instructions are voluntary crawler guidance, not authorization or access control.
+ */
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {

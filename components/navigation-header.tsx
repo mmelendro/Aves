@@ -1,3 +1,8 @@
+/**
+ * Colombia navigation used by its pages and PageShell. The active URL controls
+ * which link is marked as the current page; the small-screen menu is a separate dialog.
+ * Edit navigationLinks to change the main destinations shown in this header.
+ */
 "use client"
 
 import { BrandMark } from "@/components/brand-mark"
@@ -22,6 +27,7 @@ const navigationLinks = [
 
 export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const pathname = usePathname()
+  // Prefer the browser route; currentPage is only a fallback for callers supplying it.
   const activePath = pathname || currentPage || "/"
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
@@ -40,6 +46,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
+              // These URLs cross into the other AVES app: a normal anchor makes a full request.
               const NavigationLink = (href.startsWith("/australia/") || /^\/account(?:[/?#]|$)/.test(href)) ? "a" : Link
               return <NavigationLink
                 key={href}
@@ -65,6 +72,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           <MobileNavigationOverlay links={navigationLinks} currentPage={activePath} />
         </div>
       </header>
+      {/* Reserve space for the fixed header so it does not cover the page heading. */}
       <div aria-hidden="true" className="h-[72px]" />
     </>
   )

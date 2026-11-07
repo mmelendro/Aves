@@ -1,8 +1,16 @@
+/**
+ * Runs before requests to /account, as selected by the matcher at the bottom.
+ * The browser keeps a shared aves.bio/account URL while Next.js forwards account
+ * pages to the Australian application. A rewrite differs from a redirect: a
+ * rewrite changes the server destination without changing the visible URL.
+ * Cookie presence chooses a route here; authentication is verified by the shared backend.
+ */
 import { NextResponse, type NextRequest } from "next/server"
 
 // Account pages are served by the existing shared backend. Only this fixed
 // upstream receives the request; no user-supplied host or destination is used.
 export function middleware(request: NextRequest) {
+  // Include query parameters so a chosen country or region survives the handoff.
   const path = request.nextUrl.pathname + request.nextUrl.search
   const hasSharedCookie = request.cookies.getAll().some(({ name }) => /^aves-auth(?:\.\d+)?$/.test(name))
   let response: NextResponse
@@ -16,6 +24,7 @@ export function middleware(request: NextRequest) {
     const upstream = process.env.NODE_ENV === "development" ? "http://127.0.0.1:3000" : "https://aves-australia.vercel.app"
     response = NextResponse.rewrite(new URL(`/australia${path}`, upstream), { request: { headers } })
   }
+  // Account responses must not be shared through caches or advertised to search engines.
   response.headers.set("Cache-Control", "private, no-store")
   response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive")
   return response

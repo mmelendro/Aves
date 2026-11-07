@@ -1,3 +1,8 @@
+/**
+ * Vision photography-style page with the common article bird carousel.
+ * The labelled sections contain features, a sample itinerary, related story and
+ * price/inquiry copy; they are editorial descriptions rather than a booking API.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

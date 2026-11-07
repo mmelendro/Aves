@@ -1,3 +1,8 @@
+/**
+ * Colombia planning explainer. The steps array supplies the sequence of cards;
+ * the remaining sections link to inspiration and contact. This describes a personal
+ * proposal process and does not implement checkout or reservations.
+ */
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, FileCheck2, MessageCircle, NotebookPen } from "lucide-react"

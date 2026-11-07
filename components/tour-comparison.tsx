@@ -1,3 +1,8 @@
+/**
+ * Interactive comparison table used on /tours. The arrays below contain static
+ * features, group sizes and prices; they are not read from issued customer proposals.
+ * Selected columns are browser state only. Verify these commercial claims before reuse.
+ */
 "use client"
 
 import { useState } from "react"
@@ -161,6 +166,7 @@ const tours = [
 export default function TourComparison() {
   const [selectedTours, setSelectedTours] = useState<string[]>(["adventure", "vision"])
 
+  // Keep at least one comparison column visible and allow at most the four known styles.
   const toggleTour = (tourId: string) => {
     if (selectedTours.includes(tourId)) {
       if (selectedTours.length > 1) {
@@ -183,6 +189,7 @@ export default function TourComparison() {
     return colorMap[color as keyof typeof colorMap] || "bg-gray-600 text-white border-gray-600"
   }
 
+  // A feature can be yes/no or explanatory text; render each kind appropriately.
   const renderFeatureValue = (value: boolean | string, tourId: string) => {
     if (typeof value === "boolean") {
       return value ? (

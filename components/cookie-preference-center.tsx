@@ -1,3 +1,8 @@
+/**
+ * Cookie-choice dialog. Toggle changes are held in tempPreferences until Save;
+ * Accept All and Reject All call the shared provider immediately. Category descriptions
+ * are explanatory copy, not proof that those services are installed or consent-gated.
+ */
 "use client"
 
 import { useState, useEffect } from "react"
@@ -21,6 +26,7 @@ export function CookiePreferenceCenter() {
     setShowPreferenceCenter,
   } = useCookieConsent()
 
+  // This editable draft is separate from saved consent until the visitor selects Save.
   const [tempPreferences, setTempPreferences] = useState<CookiePreferences>(
     preferences || {
       essential: true,

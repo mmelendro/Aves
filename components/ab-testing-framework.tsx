@@ -1,3 +1,8 @@
+/**
+ * Optional experiment-dashboard prototype with inline test/variant records.
+ * Changing its selected test only changes this local display; it is not a deployed
+ * traffic-splitting service or evidence of measured conversions. Check imports before use.
+ */
 "use client"
 
 import { useState } from "react"

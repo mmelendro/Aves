@@ -1,3 +1,8 @@
+/**
+ * Souls-style editorial page. Edit its labelled feature, sample itinerary, related
+ * story and price/inquiry sections here. Carousel behaviour lives in the shared
+ * component; this route does not reserve accommodation or accept payments.
+ */
 "use client"
 
 import { useEffect } from "react"

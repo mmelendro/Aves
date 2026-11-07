@@ -1,3 +1,9 @@
+/**
+ * Shared browser preference store for the cookie UI, mounted by app/layout.tsx.
+ * Choices are saved locally and in a fallback cookie, not in a customer profile.
+ * It updates gtag only if another integration has already provided it; this file
+ * does not load an analytics script or guarantee that every embed observes consent.
+ */
 "use client"
 
 import { useState, useEffect, createContext, useContext, type ReactNode } from "react"
@@ -165,6 +171,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Merge partial changes with defaults/current choices and always retain essential cookies.
   const updatePreferences = (newPrefs: Partial<CookiePreferences>) => {
     const updatedPrefs = {
       ...DEFAULT_PREFERENCES,

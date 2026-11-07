@@ -1,3 +1,8 @@
+/**
+ * Human-readable site directory. Public groups come from lib/public-pages, which
+ * also feeds the machine-readable sitemap. Australia has a separately linked directory.
+ * Keep private account/admin pages out of the public-page catalogue.
+ */
 import type { Metadata } from "next"
 import Link from "next/link"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"

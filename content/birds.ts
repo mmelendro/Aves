@@ -1,3 +1,8 @@
+/**
+ * Defines the shared BirdProfile shape and imports Colombia's public bird catalogue.
+ * A ? marks an optional field. image/audioFile are media paths, sources are factual
+ * references, and photoCredit identifies the creator. Range is not a sighting promise.
+ */
 import catalogue from "./birds-catalogue.json"
 
 export type BirdSource = { title: string; url: string }

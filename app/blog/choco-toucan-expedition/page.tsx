@@ -1,3 +1,8 @@
+/**
+ * Choco editorial article. ArticleHero selects the related shared bird carousel;
+ * the prose and separate AudioPlayer below are the article body. Metadata at the top
+ * controls search/link previews. Claims and quotations require editorial verification.
+ */
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import Link from "next/link"

@@ -1,3 +1,8 @@
+/**
+ * Colombia About page. The JSX sections hold the story, values, distinguishing
+ * features and calls to action. This is editorial content, not a live business-data feed.
+ * Its small effect scrolls to the top when mounted; SEO defaults come from layout.tsx.
+ */
 "use client"
 
 import { useEffect } from "react"

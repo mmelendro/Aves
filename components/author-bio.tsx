@@ -1,3 +1,7 @@
+/**
+ * Short author card reused by selected blog articles. Keep this biography limited
+ * to verified details; it is not generated from an account profile or database.
+ */
 import Image from "next/image"
 
 function AuthorBio() {

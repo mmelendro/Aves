@@ -1,3 +1,8 @@
+/**
+ * Optional button that scrolls to an element ID using useSmoothScroll, with browser
+ * fallbacks if the target cannot be handled. isScrolling controls local feedback.
+ * This component does not submit an inquiry despite its call-to-action name.
+ */
 "use client"
 
 import type React from "react"

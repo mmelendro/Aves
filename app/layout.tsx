@@ -1,3 +1,8 @@
+/**
+ * The shared document around every route in this Next.js app. Page content arrives as children.
+ * Default search/social metadata lives here; individual routes can override it.
+ * The cookie provider shares preferences with the banner and preference dialog.
+ */
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
@@ -5,6 +10,7 @@ import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
 
+// Search-engine and link-preview information; this object is not visible page copy.
 export const metadata: Metadata = {
   title: {
     default: "AVES | Follow the birds",
@@ -87,6 +93,7 @@ export default function RootLayout({
           <CookiePreferenceCenter />
           <CookieBanner />
         </CookieConsentProvider>
+        {/* Structured organization data for search tools. Keep claims aligned with verified public copy. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

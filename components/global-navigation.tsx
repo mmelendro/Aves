@@ -1,3 +1,8 @@
+/**
+ * Header and footer for the global landing page and New Zealand pages.
+ * Passing country changes the logo subtitle, while My Trips remains one shared account.
+ * Destination links come from content/destinations rather than a second hard-coded list.
+ */
 import { BrandMark, type BrandCountry } from "@/components/brand-mark"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"

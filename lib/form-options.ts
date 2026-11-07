@@ -1,3 +1,9 @@
+/**
+ * Reusable labels and values for Colombian planning forms.
+ * The arrays are public content, not confirmed travel products. `as const` keeps
+ * their exact values in TypeScript; the derived types below avoid a second list.
+ * resolveTourTypePreset accepts recognized old labels and stable URL tour IDs.
+ */
 // Shared form options to ensure consistency across all pages
 export const DURATION_OPTIONS = [
   "4 days",

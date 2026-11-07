@@ -1,3 +1,9 @@
+/**
+ * Optional older ecoregion-detail table backed by a large inline data object.
+ * It listens for ecoregion-selected and selection-reset browser events, then displays
+ * the matching record. This is not the current Colombia map and does not fetch live
+ * scientific records; verify the static content before reviving this feature.
+ */
 "use client"
 
 import { useState, useEffect } from "react"

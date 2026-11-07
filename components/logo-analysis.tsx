@@ -1,3 +1,8 @@
+/**
+ * Optional logo sizing/measurement display built around local records and
+ * OptimizedImage. It is a design aid, not the live logo implementation. The current
+ * country birds, wordmark and home/country links are in BrandMark.
+ */
 "use client"
 
 import { useEffect, useState } from "react"

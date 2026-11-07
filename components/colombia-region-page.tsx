@@ -1,3 +1,8 @@
+/**
+ * Shared template for Colombia region pages. The route supplies one region record;
+ * this component joins its bird IDs to the bird catalogue and renders the carousel,
+ * local occurrence notes, sources and trip-request links. Edit content/regions for facts.
+ */
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
@@ -8,10 +13,12 @@ import { birdData } from "@/content/birds"
 import { sharedAccountHref } from "@/lib/shared-account"
 
 export function ColombiaRegionPage({ region }: { region: (typeof regions)[number] }) {
+  // Add this region-specific occurrence without mutating the shared catalogue record.
   const birds = region.birds.flatMap(selection => {
     const bird = birdData.find(item => item.id === selection.birdId)
     return bird ? [{ ...bird, regionSlug: region.id, localOccurrence: selection.whereFound }] : []
   })
+  // A Map keyed by URL removes repeated citations while retaining their source labels.
   const sources = [...new Map(region.birds.flatMap(b => b.sources || []).map(source => [source.url, source])).values()]
   return <PageShell path={`/regions/${region.id}`} title={`Birding in ${region.name}`} description={region.description} eyebrow="Colombian regions" media={<HomepageBirdCarousel key={region.id} birds={birds} autoPlay={false} className="max-w-xl" />}>
     <section className="py-8 lg:py-14"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

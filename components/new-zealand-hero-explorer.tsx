@@ -1,9 +1,15 @@
+/**
+ * Pairs New Zealand bird photographs and calls with the small island map.
+ * The carousel reports its current bird, and its featured-area label determines
+ * the island highlight. The enquiry link preserves the New Zealand topic.
+ */
 "use client"
 
 import { useState } from "react"
 import { ArrowRight } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import NewZealandMap from "@/components/new-zealand-map"
+import { newZealandContactHref } from "@/content/new-zealand"
 import { newZealandCarouselBirds } from "@/content/new-zealand-carousel"
 
 // Only highlight islands explicitly named in the catalogue's featured-area
@@ -21,16 +27,16 @@ export default function NewZealandHeroExplorer() {
   const [currentBird, setCurrentBird] = useState(newZealandCarouselBirds[0])
 
   return (
-    <div className="mx-auto grid max-w-6xl items-start gap-6 lg:grid-cols-[0.85fr_1.35fr] lg:gap-10">
-      <div id="birdlife" className="order-1 min-w-0 scroll-mt-24 lg:order-2">
+    <div className="mx-auto grid max-w-4xl items-center gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+      <div id="birdlife" className="order-1 mx-auto w-full min-w-0 max-w-[20rem] scroll-mt-24 lg:order-2">
         <HomepageBirdCarousel birds={newZealandCarouselBirds} className="w-full max-w-none" autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </div>
       <div className="order-2 min-w-0 lg:order-1">
         <NewZealandMap compact highlightedIslands={featuredIslands(currentBird.primaryRegion)} />
-        <div className="mt-4 flex items-center gap-4">
-          <a href="#your-journey" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Share your ideas<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
-          <span className="max-w-36 text-xs leading-5 text-gray-600">Help shape this new AVES destination.</span>
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+          <span className="text-xs leading-5 text-gray-600">In development · Begin with a personal conversation.</span>
         </div>
       </div>
     </div>

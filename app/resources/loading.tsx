@@ -1,3 +1,7 @@
+/**
+ * Temporary resource-page skeleton. Its placeholder blocks reserve a recognisable
+ * layout while the route loads; actual links and tabs are in ResourcesPageClient.
+ */
 import { Skeleton } from "@/components/ui/skeleton"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 

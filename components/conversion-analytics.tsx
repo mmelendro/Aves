@@ -1,3 +1,8 @@
+/**
+ * Optional analytics-dashboard prototype. Metrics and device statistics are
+ * initialized from inline example records, not fetched from production analytics.
+ * Selecting a time range must not be mistaken for a query of real visitor data.
+ */
 "use client"
 
 import type React from "react"

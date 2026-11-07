@@ -1,9 +1,14 @@
+/**
+ * Connects the Colombia homepage carousel to its small clickable map.
+ * A changed slide highlights a featured region; selecting a map link opens a region
+ * page. The dropdown offers the same navigation without needing to tap a tiny marker.
+ */
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { birdData } from "@/content/birds"
 import { colombiaMapRegions } from "@/lib/region-links"
@@ -30,24 +35,26 @@ const mapMarkers = [
 
 export default function ColombiaHeroExplorer() {
   const [currentBird, setCurrentBird] = useState(birdData[0])
+  // A deliberate dropdown selection stays selected even when a different bird is shown.
   const [chosenRegion, setChosenRegion] = useState("")
   const featuredRegion = mapMarkers.find(region => region.slug === currentBird.regionSlug)
+  // Before a manual choice, offer the current bird region as a useful starting point.
   const selectedRegion = chosenRegion || featuredRegion?.slug || mapMarkers[0].slug
 
   return (
-    <div className="mx-auto grid max-w-6xl items-start gap-6 lg:grid-cols-[0.85fr_1.35fr] lg:gap-10">
-      <div className="order-1 min-w-0 lg:order-2">
+    <div className="mx-auto grid max-w-4xl items-center gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+      <div className="order-1 mx-auto w-full min-w-0 max-w-[20rem] lg:order-2">
         <HomepageBirdCarousel className="w-full max-w-none" birds={birdData} autoPlay={false} onBirdChange={setCurrentBird} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a>. Sightings depend on your route, habitat and season.</p>
       </div>
       <div className="order-2 min-w-0 lg:order-1">
-        <div className="rounded-2xl border border-emerald-100 bg-white/75 p-4 shadow-sm">
+        <div className="rounded-2xl border border-emerald-100/70 bg-white/60 p-4">
           <div className="flex items-baseline justify-between gap-3">
-            <h2 className="font-semibold text-emerald-950">Explore Colombia</h2>
+            <h2 className="font-medium text-emerald-950">Explore Colombia</h2>
             <Link href="/aves-explorer" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></Link>
           </div>
           <div className="relative mx-auto my-2 h-[250px] w-[198px]" role="group" aria-label="Colombia map: choose from 11 birding regions">
-            <Image src="/images/birding-regions-colombia-final.png" alt="" fill sizes="198px" className="object-contain" />
+            <ColombiaMapArtwork alt="" fill sizes="198px" className="object-contain" />
             {mapMarkers.map((region, index) => {
               const featured = region.slug === featuredRegion?.slug
               return <Link key={region.slug} href={`/regions/${region.slug}`} aria-label={`Explore ${region.name}${featured ? "; featured for the current bird" : ""}`} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%` }} className={`group absolute z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-20 hover:bg-emerald-950 hover:text-white focus-visible:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${featured ? "border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "border-emerald-900/30 bg-white/95 text-emerald-950"}`}>

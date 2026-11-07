@@ -1,3 +1,8 @@
+/**
+ * Older exported homepage metadata object. Next.js does not automatically use a
+ * file with this name: a route must import it. The current homepage exports metadata
+ * in app/page.tsx, so edit that active export for homepage search/link previews.
+ */
 import type { Metadata } from "next"
 
 export const homePageMetadata: Metadata = {

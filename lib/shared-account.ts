@@ -1,5 +1,11 @@
+/**
+ * Builds links from Colombia into the single AVES account and inquiry system.
+ * A slug is the stable URL name, such as "eastern-andes". These helpers preserve
+ * the traveller's country/region choice; they do not sign in or grant access.
+ */
 import { colombiaMapRegions } from "./region-links"
 
+// Translate historical names so old bookmarks still select the right current region.
 const regionAliases: Record<string, string> = {
   "sierra-nevada": "sierra-nevada-de-santa-marta",
   snsm: "sierra-nevada-de-santa-marta",
@@ -10,6 +16,7 @@ const regionAliases: Record<string, string> = {
   "cauca-river": "cauca-valley",
 }
 
+/** Return a recognized current region slug, or undefined for an unknown value. */
 export function canonicalColombiaRegion(value: string | undefined): string | undefined {
   const normalized = value?.trim().toLowerCase()
   if (!normalized) return undefined
@@ -17,6 +24,7 @@ export function canonicalColombiaRegion(value: string | undefined): string | und
   return colombiaMapRegions.some(region => region.slug === slug) ? slug : undefined
 }
 
+/** URLSearchParams safely encodes the country and optional validated region. */
 export function sharedAccountPath(region?: string): string {
   const query = new URLSearchParams({country: "colombia"})
   const canonical = canonicalColombiaRegion(region)
@@ -29,10 +37,12 @@ export function sharedAccountHref(region?: string): string {
   return sharedAccountPath(region)
 }
 
+/** Carry the intended account destination through sign-in/sign-up as the next parameter. */
 export function sharedSignInHref(mode: "sign-in" | "sign-up" = "sign-in", region?: string): string {
   return `/account/${mode}?${new URLSearchParams({next: sharedAccountPath(region)})}`
 }
 
+/** Translate old planning links into the maintained contact form using allowed presets only. */
 export function legacyPlanningHref(query: Record<string, string | string[] | undefined>): string {
   const first = (value: string | string[] | undefined) => typeof value === "string" ? value : undefined
   const params = new URLSearchParams()

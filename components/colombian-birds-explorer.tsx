@@ -1,3 +1,8 @@
+/**
+ * Full Colombia Explorer. Visual marker coordinates are joined to sourced region
+ * and bird records, then a selected region drives the detail panel and planning links.
+ * The introductory carousel is independent of the map selection in this full-page view.
+ */
 "use client"
 
 import { useState, useEffect } from "react"
@@ -12,89 +17,80 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, Users } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 
-// Marker positions and colors match the existing AVES map artwork.
+// Marker positions preserve the existing AVES map artwork; colours use the shared map palette.
 // Descriptions and featured species come from the shared, sourced catalogue.
 const regionMapVisuals = [
   {
     id: "Pacific",
     coordinates: { x: 8, y: 65 },
-    color: "#228B22",
-    gradient: "from-[#228B22] to-[#1F7A1F]",
+    color: "#32634e",
     icon: TreePine,
   },
   {
     id: "Western Andes",
     coordinates: { x: 20, y: 52 },
-    color: "#8B4513",
-    gradient: "from-[#8B4513] to-[#7A3E11]",
+    color: "#406b57",
     icon: Mountain,
   },
   {
     id: "Central Andes",
     coordinates: { x: 32, y: 48 },
-    color: "#A0522D",
-    gradient: "from-[#A0522D] to-[#8F4928]",
+    color: "#517a63",
     icon: Mountain,
   },
   {
     id: "Eastern Andes",
     coordinates: { x: 48, y: 42 },
-    color: "#CD853F",
-    gradient: "from-[#CD853F] to-[#B8763A]",
+    color: "#628b73",
     icon: Mountain,
   },
   {
     id: "Cauca Valley",
     coordinates: { x: 26, y: 40 },
-    color: "#4169E1",
-    gradient: "from-[#4169E1] to-[#3A5FCA]",
+    color: "#3b705e",
     icon: Leaf,
   },
   {
     id: "Magdalena Valley",
     coordinates: { x: 40, y: 36 },
-    color: "#1E90FF",
-    gradient: "from-[#1E90FF] to-[#1C82E6]",
+    color: "#4c806c",
     icon: Leaf,
   },
   {
     id: "Caribbean",
     coordinates: { x: 36, y: 18 },
-    color: "#FF8C00",
-    gradient: "from-[#FF8C00] to-[#E67E00]",
+    color: "#6b8b67",
     icon: Waves,
   },
   {
     id: "SNSM",
     coordinates: { x: 47, y: 10 },
-    color: "#D2691E",
-    gradient: "from-[#D2691E] to-[#BD5F1B]",
+    color: "#53795d",
     icon: Mountain,
   },
   {
     id: "Llanos",
     coordinates: { x: 70, y: 42 },
-    color: "#FFD700",
-    gradient: "from-[#FFD700] to-[#E6C200]",
+    color: "#758868",
     icon: Sun,
   },
   {
     id: "Amazonia",
     coordinates: { x: 56, y: 78 },
-    color: "#32CD32",
-    gradient: "from-[#32CD32] to-[#2DB82D]",
+    color: "#3d765a",
     icon: TreePine,
   },
   {
     id: "Massif",
     coordinates: { x: 20, y: 65 },
-    color: "#DEB887",
-    gradient: "from-[#DEB887] to-[#C8A679]",
+    color: "#6a8266",
     icon: Mountain,
   },
 ]
 
+// Match map IDs with content records once. A missing ID is a content error, not an empty card.
 const bioregionsData = regionMapVisuals.map((visual) => {
   const region = regions.find((item) => item.mapId === visual.id)
   if (!region) throw new Error(`Unknown map region: ${visual.id}`)
@@ -111,6 +107,7 @@ const bioregionsData = regionMapVisuals.map((visual) => {
 })
 
 export function ColombianBirdsExplorer() {
+  // Selection persists after a click; hover only controls temporary emphasis/tooltips.
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
   const [screenSize, setScreenSize] = useState<"mobile" | "tablet" | "desktop">("desktop")
@@ -181,6 +178,7 @@ export function ColombianBirdsExplorer() {
 
   const iconSizes = getIconSizes()
 
+  // Clicking the selected marker again clears the panel rather than navigating away.
   const handleRegionClick = (regionId: string) => {
     if (selectedRegion === regionId) {
       setSelectedRegion(null)
@@ -418,9 +416,11 @@ export function ColombianBirdsExplorer() {
                     {/* Interactive Map Container - Transparent Background */}
                     <div className="relative bg-transparent rounded-lg p-6 mb-6 border border-white/20">
                       <div className="relative mx-auto">
-                        <img
-                          src="/images/birding-regions-colombia-final.png"
+                        <ColombiaMapArtwork
                           alt="Colombia Interactive Bioregions Map"
+                          width={634}
+                          height={802}
+                          sizes="(min-width: 1024px) 40vw, 90vw"
                           className="w-full h-auto rounded-md shadow-lg opacity-90"
                         />
 

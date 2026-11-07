@@ -1,4 +1,9 @@
-/** Public destination cards. Developing destinations offer inspiration and direct email, not account-based booking. */
+/**
+ * Public destination cards for the main AVES homepage. Adding a card here does
+ * not enable account-based trip saving for that country; the shared backend has a
+ * separate destination registry. Developing destinations link to an inquiry form.
+ */
+/** Public destination cards. Developing destinations offer inspiration and a contact-form conversation, not account-based booking. */
 export interface Destination {
   id: string
   name: string

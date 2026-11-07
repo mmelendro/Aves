@@ -1,3 +1,8 @@
+/**
+ * Optional photo gallery with a dialog viewer and previous/next navigation.
+ * The caller supplies the images; currentIndex and isOpen control the viewer locally.
+ * This uses OptimizedImage, whereas the live bird carousel has its own photo/audio logic.
+ */
 "use client"
 
 import { useState } from "react"

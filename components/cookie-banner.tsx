@@ -1,3 +1,7 @@
+/**
+ * First-visit cookie prompt. It reads and updates the shared consent context.
+ * Closing hides the prompt for this mount; only an explicit choice saves preferences.
+ */
 "use client"
 
 import { useState, useEffect } from "react"

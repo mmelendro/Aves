@@ -1,3 +1,7 @@
+/**
+ * A supplementary NZ bird profile, merged into the main NZ carousel collection.
+ * Keep its stable ID, local media paths and matching credits together when editing.
+ */
 import type { BirdProfile } from "@/content/birds"
 import credits from "@/content/new-zealand-supplement-credits.json"
 

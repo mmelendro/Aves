@@ -1,3 +1,7 @@
+/**
+ * Fallback page for an unknown route or an explicit notFound() call.
+ * Its links let the visitor recover by going home, exploring tours or contacting AVES.
+ */
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 

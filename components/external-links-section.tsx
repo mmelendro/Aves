@@ -1,3 +1,8 @@
+/**
+ * Optional list of regional reading links selected from local records. Clicking a
+ * resource opens its external URL in a new tab. The component does not fetch, endorse
+ * or continuously verify the linked resource content.
+ */
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"

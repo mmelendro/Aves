@@ -1,3 +1,12 @@
+/**
+ * HTTP response headers attached by next.config.mjs.
+ * nosniff prevents guessing a different content type; DENY/frame-ancestors prevent
+ * other sites framing AVES; the referrer rule limits cross-site URL detail.
+ * Permissions-Policy disables the listed device/payment features. The CSP restricts
+ * base URLs, plugins, framing and form targets, but is not a complete script policy.
+ * Private headers discourage indexing and caching; authorization still belongs in
+ * the account service and database. Headers alone cannot protect customer records.
+ */
 // Compatible with existing Next inline scripts and the site's external embeds.
 // Nonce-based script restrictions require separate implementation and testing.
 export const securityHeaders = [

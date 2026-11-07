@@ -59,6 +59,7 @@
     "distribution": "Northern Andes, including all three Colombian cordilleras and neighbouring parts of Venezuela and Ecuador.",
     "habitat": "Humid mountain forest and forest edges, especially where fruiting trees remain.",
     "image": "/images/bbmtou1-square.png",
+    "imagePosition": "35% center",
     "sources": [
       {
         "title": "Avibase / Birds Canada — Black-billed Mountain-Toucan",
@@ -256,6 +257,7 @@
     "distribution": "Open country in northern and eastern South America. In Colombia its range includes the Caribbean lowlands, Magdalena Valley and Llanos.",
     "habitat": "Dry scrub, open woodland, pastures and lightly wooded farmland; usually feeding on the ground.",
     "image": "/images/scadov1.jpg",
+    "imagePosition": "15% center",
     "sources": [
       {
         "title": "Avibase / Birds Canada — Scaled Dove",
@@ -281,6 +283,7 @@
     "distribution": "From parts of Central America into north-western South America. Colombian populations occupy suitable humid forests in the Pacific, Magdalena region and Andean foothills, including Perijá.",
     "habitat": "Tall humid forest, wooded foothills and forest edges with large fruiting trees.",
     "image": "/images/bkmtou1.jpg",
+    "imagePosition": "left center",
     "sources": [
       {
         "title": "Avibase / Birds Canada — Yellow-throated Toucan",
@@ -306,6 +309,7 @@
     "distribution": "Mountain forests from eastern Panama into the northern and central Andes. In Colombia it occurs in the Andean cordilleras.",
     "habitat": "Humid mountain forest, using fruiting canopy trees and quiet forest edges.",
     "image": "/images/gohque1.jpg",
+    "imagePosition": "30% center",
     "sources": [
       {
         "title": "Avibase / Birds Canada — Golden-headed Quetzal",
@@ -353,6 +357,7 @@
   {
     "id": "co-santa-marta-parakeet",
     "image": "/images/birds/co-santa-marta-parakeet.jpg",
+    "imagePosition": "70% center",
     "photoCredit": {
       "photographer": "Christoph Moning",
       "title": "Photographer · CC BY 4.0",
@@ -383,6 +388,7 @@
   {
     "id": "co-white-tailed-starfrontlet",
     "image": "/images/birds/co-white-tailed-starfrontlet.jpg",
+    "imagePosition": "53% center",
     "photoCredit": {
       "photographer": "Dick Culbert",
       "title": "Photographer · CC BY 2.0",
@@ -435,6 +441,7 @@
   {
     "id": "co-scarlet-ibis",
     "image": "/images/birds/co-scarlet-ibis.jpg",
+    "imagePosition": "12% center",
     "photoCredit": {
       "photographer": "Félix Uribe",
       "title": "Photographer · CC BY-SA 2.0",
@@ -497,11 +504,12 @@
         "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=7E83A1B3DC1F8644&lang=EN"
       }
     ],
-    "imagePosition": "left center"
+    "imagePosition": "10% center"
   },
   {
     "id": "co-scarlet-macaw",
     "image": "/images/birds/co-scarlet-macaw.jpg",
+    "imagePosition": "65% center",
     "photoCredit": {
       "photographer": "chuck624",
       "title": "Photographer · CC BY-SA 2.0",
@@ -563,6 +571,7 @@
   {
     "id": "co-choco-toucan",
     "image": "/images/birds/co-choco-toucan.jpg",
+    "imagePosition": "68% center",
     "photoCredit": {
       "photographer": "Patty McGann",
       "title": "Photographer · CC BY 2.0",

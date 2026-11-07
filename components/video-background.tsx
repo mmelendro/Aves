@@ -1,3 +1,8 @@
+/**
+ * Optional native video backdrop with loading/error state and optional controls.
+ * It uses an HTML video ref and media events; src/poster come from its caller.
+ * It is separate from the active bird carousel and does not add bird-video records.
+ */
 "use client"
 
 import { useState, useRef, useEffect } from "react"

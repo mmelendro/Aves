@@ -1,3 +1,8 @@
+/**
+ * Optional static ecoregion cards grouped by terrestrial, marine or freshwater
+ * category. The category prop selects local content. These older editorial records
+ * are not the current clickable country-region catalogue or a scientific data service.
+ */
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

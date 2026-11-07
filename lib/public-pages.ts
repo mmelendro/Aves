@@ -1,3 +1,9 @@
+/**
+ * The curated directory of public AVES/Colombia/NZ pages.
+ * Both the human-readable site map and search-engine sitemap use this list.
+ * Private account routes and old redirect aliases do not belong in the directory.
+ * flatMap at the end turns the grouped lists into one flat list of page entries.
+ */
 // Public, canonical page paths only; exclude private tools and redirect aliases.
 // Keep paths unprefixed: framework helpers supply each site's base path.
 export type PublicPageGroup = { id: string; title: string; pages: { href: string; label: string }[] }
