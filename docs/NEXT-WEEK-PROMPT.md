@@ -33,6 +33,8 @@ Give each section a clear purpose and remove redundant copy, stale dates, placeh
 
 Build a coverage matrix for Colombia's 11 planning regions, then expand in manageable batches with regional character, endemics, varied families and habitats. Retain shared species where their occurrence is valid. Each added bird needs stable identity/names, supported local occurrence and wider range, useful habitat/place notes, sources, suitable media, focal point and attribution. Use eBird primarily for occurrence, supported by BirdLife and relevant local authorities/reserves. Verify media rights independently: public availability on eBird/Macaulay does not grant reuse permission. Add video only with authorised embedding/reuse. Do not promise sightings or encourage attracting wildlife with playback.
 
+Where appropriate, include totemic and culturally significant birds (AVES-010), supported by community-led or community-approved sources. Name the specific people/place, use their preferred terms and confirm what may be shared. Distinguish documented cultural meaning, national emblems and personal symbolism; do not infer one from another or imply community endorsement. Keep restricted stories/private knowledge out of the site and seek guidance before commercial use where needed.
+
 Done when revised pages add distinct information, regional coverage demonstrably improves, facts/rights are traceable, and media, locations and navigation work.
 
 ### B. Homepage world map
