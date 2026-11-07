@@ -1,6 +1,25 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — subtle speaker highlight, 8 November 2026 (Sydney)
+## Current production — Santa Marta editorial pilot, 8 November 2026 (Sydney)
+
+**Paused after the completed incremental release.** The homepage country-card carousel and explorer-style requests were added to planning only; do not start another batch without the owner's next instruction.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `98bb838` | `dpl_HZhcaPwoRZP67fumjvaV4k3Ymkyq` |
+| Australia and shared accounts | `australia/preview` | `f635b97` | `dpl_BLcQrh1yCEYqmEnSVB8w7xJkjBWo` |
+
+Published source build: [Global/Colombia/New Zealand](https://v0-company-landing-page-kv1r3zmia-mmelendro-9273s-projects.vercel.app). Australia's existing speaker-highlight build remains live; its changes this increment are documentation only. Later handoff commits may advance branch heads without changing application builds.
+
+- AVES-001a is complete: [Santa Marta's regional guide](https://aves.bio/regions/sierra-nevada-de-santa-marta) presents the three featured birds' shared range once above their habitat cards. Each card has a shorter, distinct local note; the carousel retains the complete species range, recording availability and existing credits/sources.
+- `sharedBirdRange` in `content/regions.ts` identifies exactly which bird IDs the paragraph covers. Only those cards omit their repeated range paragraphs. Other regions and future birds outside that list retain their wider-range notes. The bird catalogue, photos and recordings were not replaced. See `content/README.md` for the field contract.
+- Strict TypeScript, 16 relevant sitemap/global-home tests and the source production build passed. The exact build was reviewed before promotion. Staged browser review confirmed the shared paragraph, three habitat cards, full carousel range detail and Central Andes' four individual range notes. Live browser/HTTP checks confirmed the same after promotion; a 390px view had 376px content width and no sideways overflow. The initial immediate HTTP read still showed old content during the domain switch; a fresh check passed once the new page was serving.
+- Evidence: `audit/evidence/nov8-santa-marta-editorial-live.png` and `audit/evidence/nov8-santa-marta-editorial-live-checks.json` in the workspace. Existing reserve sources were reviewed for context; this reorganised existing catalogue facts rather than adding a new species batch. The large tourism PDF could not be refetched through the web tool because of its size; its existing source link remains available.
+- The remaining whole-site editorial work is still AVES-001, not declared complete. AVES-011 queues country-specific carousels in global destination cards. AVES-012 queues visual alignment of the bird/map and map/subregion explorers using the owner's Australian reference screenshots. See the [living brief](docs/NEXT-WEEK-PROMPT.md) and [inbox](docs/AVES-CHANGE-INBOX.md).
+
+Historical sections below describe previous versions and their own verification.
+
+## Historical speaker-highlight release, 8 November 2026 (Sydney)
 
 **Paused at the owner's explicit request after publishing this single incremental release.** Do not start the next backlog item until the owner resumes it.
 
