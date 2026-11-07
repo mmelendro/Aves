@@ -93,10 +93,10 @@ export async function POST(req: NextRequest) {
     if (upstream.ok && result?.success === true && result?.status === "stored" && result?.intent === "inquiry" && result?.country === "colombia") {
       return reply({success: true, status: "stored", intent: "inquiry", country: "colombia"}, 200)
     }
-    if (upstream.status === 429) return reply({error: "Please wait 15 minutes before trying again, or email mmelendro@gmail.com."}, 429, {"Retry-After": "900"})
+    if (upstream.status === 429) return reply({error: "Please wait 15 minutes before trying again."}, 429, {"Retry-After": "900"})
     const status = [400, 409, 413, 415, 503].includes(upstream.status) ? upstream.status : 502
-    return reply({error: "Your inquiry could not be confirmed. Please refresh the contact page or email mmelendro@gmail.com."}, status)
+    return reply({error: "Your inquiry could not be confirmed. Please refresh the contact page and try again."}, status)
   } catch {
-    return reply({error: "We couldn't confirm that your inquiry was saved. Retry with the same details or email mmelendro@gmail.com."}, 503)
+    return reply({error: "We couldn't confirm that your inquiry was saved. Please retry with the same details."}, 503)
   }
 }

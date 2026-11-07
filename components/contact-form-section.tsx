@@ -393,8 +393,7 @@ export function ContactFormSection({
                       )}
                       {submitStatus === "error" && (
                         <p role="alert" className="text-sm text-red-600 text-center mt-4">
-                          {feedback} You can also email us directly at{" "}
-                          <a href="mailto:mmelendro@gmail.com" className="underline">mmelendro@gmail.com</a>
+                          {feedback} Your details are still here so you can retry.
                         </p>
                       )}
                       {submitStatus === "idle" && (
@@ -467,14 +466,14 @@ export function ContactFormSection({
               {/* Contact Information */}
               <Card className="border-0 shadow-lg bg-white">
                 <CardContent className="p-6">
-                  <h4 className="text-lg font-bold text-gray-900 mb-4">Get in Touch Directly</h4>
+                  <h4 className="text-lg font-bold text-gray-900 mb-4">Get in Touch</h4>
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
                       <Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-gray-900">Email</div>
-                        <a href="mailto:mmelendro@gmail.com" className="text-emerald-600 hover:text-emerald-700">
-                          mmelendro@gmail.com
+                        <div className="font-semibold text-gray-900">Have a question?</div>
+                        <a href="/australia/contact?topic=general#inquiry" className="inline-flex min-h-11 items-center text-emerald-600 hover:text-emerald-700 underline">
+                          Send AVES a message
                         </a>
                         <div className="text-sm text-gray-600">Contact AVES about your inquiry or proposal</div>
                       </div>

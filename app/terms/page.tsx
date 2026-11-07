@@ -37,7 +37,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Questions or Changes</h2>
             <div className="bg-emerald-50 p-6 rounded-lg">
-              <p className="text-emerald-700 mb-4">Email <a href="mailto:mmelendro@gmail.com" className="underline">mmelendro@gmail.com</a> to discuss a request, proposal or final arrangements.</p>
+              <p className="text-emerald-700 mb-4"><a href="/australia/contact?topic=general#inquiry" className="underline">Contact AVES through the form</a> to discuss a request, proposal or final arrangements.</p>
               <Link href="/privacy" className="text-emerald-700 underline">How we handle your information</Link>
             </div>
           </section>

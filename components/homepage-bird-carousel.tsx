@@ -223,7 +223,7 @@ export default function HomepageBirdCarousel({
       )}
       <Card className="overflow-hidden rounded-2xl border border-emerald-100 shadow-xl">
         <div
-          className="aspect-square relative overflow-hidden bg-stone-100"
+          className="relative aspect-[4/3] max-h-80 overflow-hidden bg-stone-100"
           style={{ touchAction: "pan-y pinch-zoom" }}
           onTouchStart={event => {
             touchStartRef.current = event.touches.length === 1
@@ -258,7 +258,7 @@ export default function HomepageBirdCarousel({
           )}
         </div>
 
-        <div className="border-y border-emerald-100 bg-emerald-50 p-3">
+        <div className="border-y border-emerald-100 bg-emerald-50 px-3 py-2">
           <div className="grid grid-cols-[44px_minmax(0,1fr)_44px_auto] items-center gap-2" data-image-navigation>
             <Button type="button" className={cn(controlClass, "h-11 w-11 rounded-full p-0")} onClick={() => goToSlide(selectedIndex - 1)} aria-label="Previous image" disabled={birds.length < 2}>
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
@@ -283,9 +283,9 @@ export default function HomepageBirdCarousel({
           </div>
         </div>
 
-        <div className="space-y-4 bg-white p-4 sm:p-5">
+        <div className="space-y-3 bg-white p-3 sm:p-4">
           <div>
-            <h3 className="text-xl font-bold leading-tight text-gray-900">{currentBird.commonName}</h3>
+            <h3 className="text-lg font-bold leading-tight text-gray-900">{currentBird.commonName}</h3>
             <p className="mt-1 text-sm italic text-gray-600">{currentBird.scientificName}</p>
           </div>
 
@@ -377,17 +377,17 @@ export default function HomepageBirdCarousel({
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
         <div className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-1 border-t border-emerald-100 bg-emerald-50 px-2" data-image-navigation>
           <Button type="button" className={cn(controlClass, "h-11 w-11 rounded-full p-0")} disabled={!thumbnailScroll.left} onClick={() => scrollThumbnails("left")} aria-label="Scroll thumbnails left"><ChevronLeft className="h-4 w-4" aria-hidden="true" /></Button>
-          <div ref={thumbnailContainerRef} onScroll={updateThumbnailScroll} className="relative flex min-w-0 gap-2 overflow-x-auto p-3">
+          <div ref={thumbnailContainerRef} onScroll={updateThumbnailScroll} className="relative flex min-w-0 gap-2 overflow-x-auto p-2">
             {birds.map((bird, index) => (
               <button
                 type="button"
                 key={bird.id}
-                className={cn("h-16 w-16 shrink-0 overflow-hidden rounded-lg border-2 bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2", index === selectedIndex ? "border-emerald-800 ring-2 ring-emerald-200" : "border-gray-300 hover:border-emerald-600")}
+                className={cn("h-14 w-14 shrink-0 overflow-hidden rounded-lg border-2 bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2", index === selectedIndex ? "border-emerald-800 ring-2 ring-emerald-200" : "border-gray-300 hover:border-emerald-600")}
                 onClick={() => goToSlide(index)}
                 aria-label={`View image ${index + 1}: ${bird.commonName}`}
                 aria-pressed={index === selectedIndex}
               >
-                <Image src={sitePath(bird.image || "/placeholder.svg")} alt="" loading="lazy" width={64} height={64} className="h-full w-full object-contain" />
+                <Image src={sitePath(bird.image || "/placeholder.svg")} alt="" loading="lazy" width={56} height={56} className="h-full w-full object-contain" />
               </button>
             ))}
           </div>

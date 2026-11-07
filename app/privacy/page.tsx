@@ -17,8 +17,8 @@ const sections = [
   { title: "Database and Sign-In", text: "Supabase provides account sign-in, confirmation, recovery and database storage. Our primary project database is in Sydney, Australia. Hosting and email providers may also process information outside Australia.", href: "https://supabase.com/privacy", link: "Supabase Privacy Policy" },
   { title: "Website Hosting", text: "Vercel hosts the website and may process technical request information, including IP addresses and device information, to operate and protect the service.", href: "https://vercel.com/legal/privacy-notice", link: "Vercel Privacy Notice" },
   { title: "Service Emails", text: "Resend sends account and proposal messages and notifications to AVES. Messages sent to AVES are received in the owner's Gmail inbox. Email providers process recipient addresses and message content. Delivery can fail or be delayed; saved proposals remain available in your account.", href: "https://resend.com/legal/privacy-policy", link: "Resend Privacy Policy" },
-  { title: "Optional Updates", text: "Trip news and launch updates are optional and separate from account or proposal messages. We record the country and wording associated with your choice. You can request to unsubscribe by emailing mmelendro@gmail.com.", href: "mailto:mmelendro@gmail.com?subject=Unsubscribe%20from%20AVES%20updates", link: "Request to Unsubscribe" },
-  { title: "Cookies and Your Information", text: "The website remembers cookie preferences and uses essential sign-in cookies for the shared account portal. You can edit or delete draft plans in your account. For access to, correction of, or deletion of other information, or a privacy question, email mmelendro@gmail.com.", href: "mailto:mmelendro@gmail.com?subject=AVES%20privacy%20request", link: "Contact AVES About Your Information" },
+  { title: "Optional Updates", text: "Trip news and launch updates are optional and separate from account or proposal messages. We record the country and wording associated with your choice. You can request to unsubscribe through our contact form.", href: "/australia/contact?topic=unsubscribe#inquiry", link: "Request to Unsubscribe" },
+  { title: "Cookies and Your Information", text: "The website remembers cookie preferences and uses essential sign-in cookies for the shared account portal. You can edit or delete draft plans in your account. For access to, correction of, or deletion of other information, or a privacy question, use our contact form.", href: "/australia/contact?topic=privacy#inquiry", link: "Contact AVES About Your Information" },
 ]
 
 export default function PrivacyPage() {
@@ -29,10 +29,10 @@ export default function PrivacyPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Notice</h1>
           <p className="text-lg text-gray-600">How AVES handles inquiries, accounts and trip planning for Colombia and Australia.</p>
-          <div className="text-sm text-gray-500 mt-4">Updated: 6 November 2026</div>
+          <div className="text-sm text-gray-500 mt-4">Updated: 7 November 2026</div>
         </div>
         <div className="prose prose-lg max-w-none">
-          <div className="bg-emerald-50 border-l-4 border-emerald-600 p-6 mb-8"><p className="text-emerald-700 mb-0">This notice describes the information used by our website and shared trip-planning service. For questions, contact <a href="mailto:mmelendro@gmail.com" className="underline">mmelendro@gmail.com</a>.</p></div>
+          <div className="bg-emerald-50 border-l-4 border-emerald-600 p-6 mb-8"><p className="text-emerald-700 mb-0">This notice describes the information used by our website and shared trip-planning service. For questions, <a href="/australia/contact?topic=privacy#inquiry" className="underline">contact AVES through the form</a>.</p></div>
           {sections.map(section => <section className="mb-8" key={section.title}>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">{section.title}</h2>
             <p className="mb-4">{section.text}</p>

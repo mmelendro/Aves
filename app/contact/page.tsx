@@ -71,13 +71,13 @@ export default function ContactPage() {
                   <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Mail className="w-8 h-8 text-emerald-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Email Us</h3>
-                  <p className="text-gray-600 mb-4">Get detailed responses from our ornithology experts</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Send a Message</h3>
+                  <p className="text-gray-600 mb-4">Contact AVES about your inquiry or proposal</p>
                   <a
-                    href="mailto:mmelendro@gmail.com"
+                    href="/australia/contact?topic=general#inquiry"
                     className="text-emerald-600 hover:text-emerald-700 font-semibold text-lg"
                   >
-                    mmelendro@gmail.com
+                    Open the contact form
                   </a>
                 </CardContent>
               </Card>

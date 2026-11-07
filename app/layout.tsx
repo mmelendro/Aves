@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "AVES",
     images: [
       {
-        url: "/images/aves-logo.png",
+        url: "/images/brand/aves-global-bird.png",
         alt: "AVES — Follow the birds",
       },
     ],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: "AVES | Follow the birds",
     description:
       "Explore Colombia and Australia, and discover our developing New Zealand destination. Follow the birds with AVES.",
-    images: ["/images/aves-logo.png"],
+    images: ["/images/brand/aves-global-bird.png"],
   },
   // TODO: Add real Google Search Console verification code
   robots: {
@@ -97,10 +97,10 @@ export default function RootLayout({
               description:
                 "Personally planned birding and nature journeys in Colombia and Australia",
               url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
-              logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/aves-logo.png`,
+              logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/brand/aves-global-bird.png`,
               contactPoint: {
                 "@type": "ContactPoint",
-                email: "mmelendro@gmail.com",
+                url: "https://aves.bio/australia/contact?topic=general#inquiry",
                 contactType: "customer service",
                 availableLanguage: ["English", "Spanish"],
               },

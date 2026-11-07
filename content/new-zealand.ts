@@ -32,7 +32,7 @@ export const newZealandBirds = [
   { name: "Tokoeka / Southern brown kiwi", scientific: "Apteryx australis", habitat: "Forest & southern landscapes", where: "Haast, Fiordland and Rakiura; viewing opportunities vary considerably between locations.", note: "A special possibility, never a promised sighting. Follow local guidance and let wildlife set the pace.", source: "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/kiwi/tokoeka/" },
 ] as const
 
-export const newZealandEmail = "mailto:mmelendro@gmail.com?subject=AVES%20New%20Zealand%20enquiry&body=Hello%20AVES%2C%0A%0AI%20am%20interested%20in%20New%20Zealand.%0AApproximate%20dates%3A%0ANumber%20of%20travellers%3A%0AInterests%20and%20preferred%20pace%3A%0ARegions%20in%20mind%3A%0AAccommodation%20preferences%3A%0A"
+export const newZealandContactHref = "/australia/contact?topic=new-zealand#inquiry"
 
 // Existing Cornell/other published links verified on 7 November 2026.
 // These are outbound resources, not a live eBird data or media integration.

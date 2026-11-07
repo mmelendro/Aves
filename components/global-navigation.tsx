@@ -42,7 +42,7 @@ export function GlobalFooter({ country }: GlobalBrandProps = {}) {
           </nav>
           <div>
             <h2 className="mb-3 font-semibold text-white">Keep in touch</h2>
-            <a href="mailto:mmelendro@gmail.com" className="inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">mmelendro@gmail.com</a>
+            <a href="/australia/contact?topic=general#inquiry" className="inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">Contact AVES</a>
             <p className="mt-2 text-sm leading-6">Have a trip in mind? Explore a destination and start a conversation with us.</p>
           </div>
         </div>

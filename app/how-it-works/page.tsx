@@ -80,7 +80,7 @@ export default function HowItWorksPage() {
             <div className="mt-9 rounded-xl border border-emerald-100 bg-white/80 p-7">
               <h2 className="text-xl font-bold text-gray-900">Leave room for nature.</h2>
               <p className="mt-3 leading-relaxed text-gray-600">The birds and habitats on this website are inspiration for planning. Wildlife sightings cannot be guaranteed, and routes and conditions need to be discussed for your travel dates.</p>
-              <p className="mt-4 leading-relaxed text-gray-600">Prefer email? <a href="mailto:mmelendro@gmail.com" className="font-medium text-emerald-700 underline underline-offset-4">Contact AVES at mmelendro@gmail.com</a>.</p>
+              <p className="mt-4 leading-relaxed text-gray-600">Have a question? <a href="/australia/contact?topic=general#inquiry" className="font-medium text-emerald-700 underline underline-offset-4">Send AVES a message</a>.</p>
               <Link href="/terms" className="mt-4 inline-flex min-h-11 items-center text-emerald-700 underline underline-offset-4">Read the booking terms</Link>
             </div>
           </div>

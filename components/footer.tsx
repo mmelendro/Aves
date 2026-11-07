@@ -55,8 +55,8 @@ export function Footer({ transparent = false }: FooterProps) {
               Birding, nature and personal journey planning across Colombia.
             </p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-gray-300">Pursuing B Corp certification. AVES is not yet certified.</p>
-            <a href="mailto:mmelendro@gmail.com" className={`mt-3 ${linkClassName}`}>
-              mmelendro@gmail.com
+            <a href="https://aves.bio/australia/contact?topic=general#inquiry" className={`mt-3 ${linkClassName}`}>
+              Contact AVES
             </a>
           </div>
 
