@@ -1,10 +1,10 @@
 # AVES Australia
 
-**Latest working snapshot:** start with [CONTINUE-HERE.md](CONTINUE-HERE.md) for the unpublished regional carousels, test status, correct GitHub branches and remaining release checks.
+**Latest published version:** start with [CONTINUE-HERE.md](CONTINUE-HERE.md) for the compact carousels and country maps, verification, exact live builds and GitHub branches.
 
 An isolated Australia website derived from the AVES Colombia repository. The Australian revision keeps the AVES logo, emerald palette, pale gradients, rounded cards and bird carousel while simplifying navigation and reorganising the homepage around regional discovery and trip enquiries. The original Colombia checkout and its live deployment remain separate.
 
-This application uses React, TypeScript, Tailwind CSS and the original public UI components. Its separate Australian backend provides email/password accounts, saved trip plans, quote requests and a private owner proposal dashboard. It does not share the Colombian account or booking database. Contact requests and account records use the Australian Supabase project in Sydney. Successful submission means the request was saved, not that an email was delivered or a booking confirmed.
+This application uses React, TypeScript, Tailwind CSS and the original public UI components. It also serves the shared AVES backend for Colombia and Australia: email/password accounts, saved trip plans, quote requests and a private owner proposal dashboard. My Trips lives at https://aves.bio/account and uses the AVES Shared Accounts Supabase project. New Zealand remains a destination in development, with inquiries but no saved-trip support yet. Successful submission means the request was saved, not that an email was delivered or a booking confirmed.
 
 ## Local development
 

@@ -1,15 +1,19 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — global account and carousel-first pages, 8 November 2026 (Sydney)
+## Current production — compact carousels and country hero maps, 8 November 2026 (Sydney)
 
 Repository: https://github.com/mmelendro/Aves. Keep the two independent branches/checkouts; do not merge them or re-enable automatic Git deployments.
 
 | Application | Branch | Deployed application commit | Deployment |
 | --- | --- | --- | --- |
-| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `8f9ccbd` | `dpl_4rQBp3MXEuSc729d1PiC1Yw3ooGM` |
-| Australia and shared accounts | `australia/preview` | `21dc0ca` | `dpl_7X3mJw3HSNe1XrUUMFQaco2DS4uM` |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `73cc370` | `dpl_EtLQaJrYkig4jPAwXXmeH8Lgh8aP` |
+| Australia and shared accounts | `australia/preview` | `0f1a113` | `dpl_6bA4V98aPdGvubMmud9LiUGgx2dS` |
 
-Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-rjoy6d0eg-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-7dv0h69iq-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
+Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-2hsa23047-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-9jrueh9s8-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
+
+- Latest refinement: centred destination headings above a smaller clickable map on the left and larger bird carousel on the right; mobile shows heading, carousel, then map. All 11 Colombian regions, 9 Australian regions and 3 NZ islands remain accessible. Map highlights follow the displayed bird's existing featured-area metadata, not a complete species range or promised sighting.
+- Carousels now use translucent icon controls over the image, one previous/next pair and a small image counter. Removed external navigation bars, thumbnail rails and volume slider. Hover/focus labels, accessible names, swipe, keyboard controls and opt-in sound remain. Details, NZ's species picker and credits open on demand. Whole photographs sit over a muted blurred version of the same image. Global home, shared discovery-page layout and article heroes put text left and photos right.
+- This refinement passed 69 source tests, 244 Australian tests, strict TypeScript and both production builds. Desktop and 390px browser review covered all three countries, map navigation, sound advancing then resetting on bird change, NZ selector retention, article credits and the global homepage. No sideways overflow on the three phone layouts. The 16 live public/account/security checks passed again after promotion. No backend, credentials, customer records or email settings changed. Evidence is in the workspace audit/evidence directory, including nov8-compact-nz-live.png.
 
 - Footer wording follow-up: the Colombian footer now says **My Trips**, matching Australia; the shared account link is unchanged. Published and visually verified, with all 12 shared-account tests passing.
 - My Trips now lives at **https://aves.bio/account**. Existing `/australia/account` links redirect with their country/region query preserved. Root account screens proxy the maintained Australian backend; callbacks/APIs/assets remain under `/australia`. Native account links avoid framework base-path conflicts. No database or hosting-provider configuration changed.
