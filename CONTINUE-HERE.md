@@ -1,17 +1,20 @@
-# AVES Australia and shared AVES portal — handoff, updated 7 November 2026 (Sydney)
+# AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — bird library and logo navigation, 7 November 2026 (Sydney)
+## Current production — global account and carousel-first pages, 8 November 2026 (Sydney)
 
 Repository: https://github.com/mmelendro/Aves. Keep the two independent branches/checkouts; do not merge them or re-enable automatic Git deployments.
 
 | Application | Branch | Deployed application commit | Deployment |
 | --- | --- | --- | --- |
-| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `8d65d02` | `dpl_CZxBLLtEks8pVBsZ87dGsJMi7GWC` |
-| Australia and shared accounts | `australia/preview` | `8c13ed1` | `dpl_8FafCYo3utohyHvWjPgtMt7ydE6D` |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `8f9ccbd` | `dpl_4rQBp3MXEuSc729d1PiC1Yw3ooGM` |
+| Australia and shared accounts | `australia/preview` | `21dc0ca` | `dpl_7X3mJw3HSNe1XrUUMFQaco2DS4uM` |
 
-Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-89gcfkvav-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-jfpy00jig-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
+Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-rjoy6d0eg-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-7dv0h69iq-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
 
 - Footer wording follow-up: the Colombian footer now says **My Trips**, matching Australia; the shared account link is unchanged. Published and visually verified, with all 12 shared-account tests passing.
+- My Trips now lives at **https://aves.bio/account**. Existing `/australia/account` links redirect with their country/region query preserved. Root account screens proxy the maintained Australian backend; callbacks/APIs/assets remain under `/australia`. Native account links avoid framework base-path conflicts. No database or hosting-provider configuration changed.
+- Shared sessions now use root-path `aves-auth` cookies. The legacy-session bridge verifies before migrating, preserves pending PKCE callbacks, never overwrites a newer shared session, and uses a non-authentication loop guard. The real existing user session carried over and saved plans/proposals refreshed at `/account` after publication. See source `docs/shared-accounts.md` and Australian session migration tests.
+- Bird carousels are now leading media across the global homepage, all three destination homepages, Colombian/Australian region guides, bird directories, experience pages and Colombian articles. NZ uses its existing 31-bird library in the hero; the global homepage has a sourced nine-bird selection across the three countries. Existing sounds, credits and compact whole-photo framing remain. Practical forms/account/legal screens remain task-focused.
 - Public destinations: https://aves.bio/colombia, https://aves.bio/australia and https://aves.bio/new-zealand, selected from https://aves.bio/.
 - Brand artwork and AVES link to the main homepage; each country subtitle links to its destination. The thinner lettering, country birds, landscape contours and global peregrine mark are retained.
 - New Zealand now features **31 birds with photographs, local recordings, location/habitat notes and credits**, with particular depth for the South Island. The selector jumps to a species; the interactive map links North Island, South Island and Rakiura to their descriptions. This is a curated collection, not a complete checklist; eBird remains linked for wider records.
@@ -21,7 +24,7 @@ Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-89gc
 
 ### Accounts and remaining Google setup
 
-My Trips remains https://aves.bio/australia/account, sharing one Supabase backend for Colombia/Australia. Existing owned saved plans and the issued QA proposal loaded and refreshed during this release work; anonymous private APIs rejected access with 401/no-store. No new customer records or email-delivery test were created for this release.
+My Trips is https://aves.bio/account, sharing one Supabase backend for Colombia/Australia. Existing owned saved plans and the issued QA proposal loaded and refreshed during this release work; anonymous private APIs rejected access with 401/no-store. No new customer records or email-delivery test were created for this release.
 
 New Zealand remains public inspiration **in development**: it is not enabled in the shared booking/destination registry. Its inquiry topic sends a general message through the shared service; it must not create an Australian saved plan. Keep all private guest itinerary details out of public files and Git.
 
@@ -29,7 +32,7 @@ Google client/provider configuration exists in testing mode, but production `AVE
 
 ### Verification scope
 
-Australia: 229 automated tests and strict TypeScript pass. Source: full existing test suite, strict TypeScript, the expanded media inventory and production build were checked before release. New audio files were decoded and sampled through browser controls; changing birds stops playback. Logo navigation was reviewed in both applications. Earlier HTTP/privacy checks covered 13 public pages, 43 client scripts, 2 stylesheets and three anonymous private endpoints; no personal Gmail was found in public output. The historical 390px mobile check below predates this release; a fresh mobile viewport could not be verified in the available browser and must not be claimed.
+8 November release: Australia 244 tests and source 69 tests pass, with strict TypeScript and both production builds passing. Browser review covered NZ, an article, the global home and an Australian region; a 390px NZ view had no horizontal overflow. Live checks covered seven public pages, both account entry URLs with preserved intent, signup/recovery/check-email screens, three anonymous private APIs (401/no-store), and a hostile redirect rejection. No forms or emails were sent. New audio files were decoded and sampled through browser controls; changing birds stops playback. Logo navigation was reviewed in both applications. Earlier HTTP/privacy checks covered 13 public pages, 43 client scripts, 2 stylesheets and three anonymous private endpoints; no personal Gmail was found in public output. The 8 November 390px browser check covers the NZ page; other historical mobile evidence below belongs to earlier releases.
 
 Application secrets stay in private provider configuration and untracked environment files. The laptop is not required to serve production. Read both branch handoffs before editing from a new chat.
 
