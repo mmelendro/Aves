@@ -2,7 +2,7 @@
 
 **Updated: 8 November 2026 (Sydney).** Improve https://aves.bio through small, tested releases. This brief and its linked change inbox preserve the agreed work between chats.
 
-**Checkpoint:** AVES-008 (speaker highlight), AVES-001a (Santa Marta editorial pilot), AVES-009 (Google sign-in and verified AVES branding with info@aves.bio support), and AVES-011 (country-card carousels) are published and verified. Paused after AVES-011; the broader editorial task and AVES-012 design alignment remain queued. Preserve completed work when resuming.
+**Checkpoint:** AVES-008 (speaker highlight), AVES-001a (Santa Marta editorial pilot), AVES-009 (Google sign-in and verified AVES branding with info@aves.bio support), and AVES-011 (country-card carousels) are published and verified. Paused after AVES-011. The latest homepage decision is to replace the mixed-country hero carousel with the world destination map, retaining the three country-card carousels below. That replacement, the broader editorial task and AVES-012 design alignment remain queued. Preserve completed work when resuming.
 
 ## Working mode and project
 
@@ -41,9 +41,26 @@ Done when revised pages add distinct information, regional coverage demonstrably
 
 ### B. Homepage world map
 
-Create a lightweight, geographically accurate destination map driven by the existing catalogue. Highlight Colombia, Australia and New Zealand, clearly showing New Zealand's development status. Country labels and equivalent accessible text links open the correct pages. Future countries must be easy to add without implying launch or bookability. Verify desktop, narrow-phone and wide layouts.
+Replace the main mixed-country carousel in the global homepage hero with a lightweight, geographically accurate world destination map driven by the existing catalogue. This supersedes retaining that carousel alongside the map: do not add a second hero media block or repeat the country-card bird experience. Keep the headline and copy on the left and map on the right on roomy screens; use a natural stacked layout on narrow phones. Retain each country’s existing carousel inside its destination card below, with the same emerald visual style.
+
+Highlight Colombia, Australia and New Zealand, clearly showing New Zealand’s development status. Country labels/targets and equivalent accessible text links open the correct pages. Keep the map useful without hover and without a heavy mapping dependency. Future countries must be easy to add without implying launch or bookability. Verify desktop, narrow-phone and wide layouts, keyboard access, labels, geography and all three links. Publish and sync only this increment when explicitly resumed, then pause.
 
 **Country-card carousels (AVES-011, verified):** the global homepage now uses each country’s full existing selection (Colombia 22, Australia 20, New Zealand 31) inside its own compact card viewer, with discreet controls, dynamic credits, country links and development status. Navigation is independent, audio is opt-in with one recording at a time, and card images load lazily. The existing mixed-country hero remains. This was released independently of the future world map; do not repeat the implementation. See CONTINUE-HERE.md for the release checkpoint.
+
+### Recommended incremental order when work resumes
+
+This is an efficient suggested sequence, not permission to execute the whole backlog. Complete only the owner-selected increment and stop. Effort is relative, not an estimate of ChatGPT quota.
+
+1. **AVES-003 — homepage hero map (small–medium):** replace the mixed-country hero carousel as described above; keep the three card carousels. One independently testable release. No itinerary or database changes.
+2. **AVES-012 — static explorer alignment (small–medium):** match the existing bird/map and map/subregion layouts without adding a divider. Pilot one shared layout and verify it across the country pages; publish separately from interaction changes.
+3. **AVES-007 — New Zealand regions (medium per page):** South Island first with existing verified birds/calls and coherent map links; North Island and Rakiura in subsequent separate releases. Do not claim exhaustive species coverage or enable bookings.
+4. **AVES-001 — editorial batches (small per page):** choose one page or region at a time, following the completed Santa Marta pilot. Correct misleading factual claims before cosmetic polish when found.
+5. **AVES-002 / AVES-010 — bird variety and cultural context:** create the regional coverage matrix, then research and add one bounded region/species batch at a time. Totemic/cultural content needs suitable community sources/permissions; do not fill gaps speculatively.
+6. **AVES-006 — adjustable duo (medium):** implement only after static layout alignment, with a keyboard/touch/pointer divider and sensible stacking/reset; release separately.
+7. **AVES-004 — wishlist in stages:** visitor-local selection/removal first; account save/merge/ownership next; optional bingo separately. Inspect the earlier itinerary tool before rebuilding.
+8. **AVES-005 — itinerary platform in stages (large overall):** questionnaire, verified supplier records, deterministic recommendations, human review, then AI assistance. Each requires its own scoped release. Private pilot inputs, current supplier prices/availability and business permissions are still inputs to obtain, not existing public facts.
+
+Deferred independently: Facebook Login, translation/localisation, authorised video expansion, and a friendlier expired-Google-session landing. The approved Google login/branding is complete. Do not revive these side projects inside the map release. If a newly found security/privacy or essential-route defect is confirmed, report it and address that boundary before unrelated enhancements.
 
 ### C. Bird wishlist and optional bingo
 
