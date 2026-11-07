@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { createClient } from "@/lib/supabase/client"
 import { sitePath } from "@/lib/site-path"
 import { accountEntryHref, accountReturnPath } from "./account-navigation"
+import type { OAuthProvider } from "@/lib/oauth-providers"
 
 type Mode = "sign-in" | "sign-up" | "forgot-password" | "reset-password"
 
@@ -18,7 +19,7 @@ function callbackUrl(next: "/account" | "/account/reset-password") {
   return url.href
 }
 
-export function AuthForm({ mode, next = "/account" }: { mode: Mode; next?: string }) {
+export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mode: Mode; next?: string; oauthProviders?: OAuthProvider[] }) {
   const destination = accountReturnPath(next)
   const prefix = useId()
   const busyRef = useRef(false)
@@ -30,10 +31,14 @@ export function AuthForm({ mode, next = "/account" }: { mode: Mode; next?: strin
   const [recoveryChecked, setRecoveryChecked] = useState(mode !== "reset-password")
   const newPassword = mode === "sign-up" || mode === "reset-password"
   const label = { "sign-in": "Sign In", "sign-up": "Create My Account", "forgot-password": "Send a Reset Link", "reset-password": "Save New Password" }[mode]
+  const socialMode = mode === "sign-in" || mode === "sign-up"
 
   useEffect(() => {
-    if (mode === "sign-in" && new URLSearchParams(window.location.search).get("error") === "confirmation") {
-      setFeedback("This account link has expired or could not be verified. Sign in if you've already confirmed your email, or request a new confirmation or password reset link below.")
+    if (mode === "sign-in") {
+      const error = new URLSearchParams(window.location.search).get("error")
+      if (error === "confirmation") setFeedback("This account link has expired or could not be verified. Sign in if you've already confirmed your email, or request a new confirmation or password reset link below.")
+      if (error === "oauth-cancelled") setFeedback("Social sign-in was cancelled. You can try again or sign in with your email and password.")
+      if (error === "oauth") setFeedback("Social sign-in wasn't completed. It may have been cancelled or the link may have expired. Please try again, or use your email and password.")
     }
     if (mode !== "reset-password") return
     let active = true
@@ -50,6 +55,29 @@ export function AuthForm({ mode, next = "/account" }: { mode: Mode; next?: strin
     void checkRecovery()
     return () => { active = false }
   }, [mode])
+
+  async function signInWithProvider(provider: OAuthProvider) {
+    if (!socialMode || !oauthProviders.includes(provider) || busyRef.current) return
+    busyRef.current = true
+    setBusy(true)
+    setFeedback("")
+    setSuccess(false)
+    try {
+      const redirectTo = new URL(sitePath("/auth/callback"), window.location.origin)
+      redirectTo.searchParams.set("flow", "oauth")
+      redirectTo.searchParams.set("next", destination)
+      const { error } = await createClient().auth.signInWithOAuth({
+        provider,
+        options: { redirectTo: redirectTo.href, scopes: provider === "facebook" ? "email" : "openid email profile" },
+      })
+      if (error) throw error
+    } catch {
+      setFeedback("We couldn't start social sign-in. Please try again or use your email and password.")
+    } finally {
+      busyRef.current = false
+      setBusy(false)
+    }
+  }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -103,6 +131,10 @@ export function AuthForm({ mode, next = "/account" }: { mode: Mode; next?: strin
     <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6"><LockKeyhole className="w-6 h-6 text-emerald-700" /></div>
     <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? "Welcome Back" : mode === "sign-up" ? "Make Room for Your Next Adventure" : mode === "forgot-password" ? "Let's Get You Back In" : "Choose a New Password"}</h2>
     <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your Colombia and Australia trip ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
+    {socialMode && oauthProviders.length > 0 ? <div className="mb-6 space-y-3">
+      {oauthProviders.map(provider => <Button key={provider} type="button" variant="outline" size="lg" className="w-full" disabled={busy} onClick={() => signInWithProvider(provider)}>Continue with {provider === "google" ? "Google" : "Facebook"}</Button>)}
+      <p className="text-center text-sm text-gray-500">Or continue with email</p>
+    </div> : null}
     <form onSubmit={submit} className="space-y-6">
       <fieldset disabled={busy || !recoveryReady || (mode === "reset-password" && success)} className="space-y-6">
         {mode !== "reset-password" && <div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">Email Address</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div>}

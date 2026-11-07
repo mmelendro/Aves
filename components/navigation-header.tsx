@@ -1,10 +1,10 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { BrandMark } from "@/components/brand-mark"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
-import { SITE_BASE_PATH, sitePath } from "@/lib/site-path"
+import { SITE_BASE_PATH } from "@/lib/site-path"
 import { cn } from "@/lib/utils"
 import { PortalNavigation } from "@/components/account/portal-navigation"
 
@@ -51,18 +51,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             aria-label="AVES Australia home"
             className="flex min-h-11 shrink-0 items-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
           >
-            <Image
-              src={sitePath("/images/aves-logo.png")}
-              alt=""
-              width={44}
-              height={44}
-              className="h-11 w-11 rounded-lg bg-white object-contain"
-              priority
-            />
-            <span className="leading-tight">
-              <span className="block text-xl font-bold tracking-wide text-emerald-900">AVES</span>
-              <span className="block text-xs font-medium tracking-wide text-emerald-700">Australia</span>
-            </span>
+            <BrandMark country="australia" priority />
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">

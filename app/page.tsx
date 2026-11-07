@@ -19,7 +19,7 @@ export default function AVESLandingPage() {
     <main id="main-content" tabIndex={-1}>
       <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-10 sm:py-14 lg:py-20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Australia · Custom trip enquiries</p>
               <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl xl:text-6xl">Discover Australia’s <span className="block text-emerald-600">Extraordinary Birdlife</span></h1>
@@ -30,7 +30,7 @@ export default function AVESLandingPage() {
               </div>
               <p className="mt-4 text-sm leading-relaxed text-gray-600">Australian journeys are in development. Enquiries are open; routes, guides and pricing are agreed personally.</p>
             </div>
-            <div className="mx-auto min-w-0 w-full max-w-lg lg:max-w-none"><HomepageBirdCarousel className="w-full" autoPlay={false} /><p className="mt-3 text-center text-sm text-gray-600">Meet 20 Australian birds. Explore their ranges and listen to available recordings.</p></div>
+            <div className="mx-auto min-w-0 w-full max-w-lg lg:max-w-none"><p className="mb-4 text-center font-semibold text-emerald-900">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a></p><HomepageBirdCarousel className="w-full" autoPlay={false} /><p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A few birds to inspire your journey. Explore their ranges and listen to available recordings; what you may see depends on your route, habitat and season.</p></div>
           </div>
         </div>
       </section>

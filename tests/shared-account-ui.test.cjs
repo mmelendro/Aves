@@ -234,6 +234,50 @@ test("signup preserves the entry link but keeps the already configured email cal
   assert.equal(new URL(destinations[0], "https://aves.bio").searchParams.get("next"), "/account?country=colombia&region=amazonia")
 })
 
+test("social sign-in buttons stay hidden by default and on password recovery screens", () => {
+  for (const props of [{ mode: "sign-in" }, { mode: "sign-up" }, { mode: "forgot-password", oauthProviders: ["google", "facebook"] }, { mode: "reset-password", oauthProviders: ["google"] }]) {
+    const tree = componentHarness("components/account/auth-form.tsx", "AuthForm", props).render()
+    assert.doesNotMatch(JSON.stringify(tree), /Continue with Google|Continue with Facebook|Or continue with email/)
+  }
+})
+
+for (const [provider, scopes] of [["google", "openid email profile"], ["facebook", "email"]]) {
+  test(`social sign-in ${provider} requests only basic scopes and keeps the safe trip return`, async () => {
+    const requests = []
+    const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-up", next: "/account?country=colombia&region=central-andes", oauthProviders: [provider] }, {
+      mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signInWithOAuth: async input => { requests.push(input); return { error: null } } } }) } },
+      window: { location: { origin: "https://aves.bio" } },
+    })
+    await find(harness.render(), node => node.type === "Button" && Array.isArray(node.props.children) && node.props.children[0] === "Continue with ").props.onClick()
+    assert.equal(requests.length, 1)
+    assert.equal(requests[0].provider, provider)
+    assert.equal(requests[0].options.scopes, scopes)
+    const callback = new URL(requests[0].options.redirectTo)
+    assert.equal(callback.origin + callback.pathname, "https://aves.bio/australia/auth/callback")
+    assert.equal(callback.searchParams.get("flow"), "oauth")
+    assert.equal(callback.searchParams.get("next"), "/account?country=colombia&region=central-andes")
+  })
+}
+
+test("social sign-in sanitizes offsite next, prevents duplicate requests and conceals provider errors", async () => {
+  const requests = []
+  let finish
+  const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-in", next: "https://attacker.test", oauthProviders: ["google"] }, {
+    mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signInWithOAuth: input => { requests.push(input); return new Promise(resolve => { finish = resolve }) } } }) } },
+    window: { location: { origin: "https://aves.bio" } },
+  })
+  const button = find(harness.render(), node => node.type === "Button" && Array.isArray(node.props.children) && node.props.children[0] === "Continue with ")
+  const pending = button.props.onClick()
+  await button.props.onClick()
+  assert.equal(requests.length, 1)
+  assert.equal(new URL(requests[0].options.redirectTo).searchParams.get("next"), "/account")
+  finish({ error: { message: "private provider configuration" } })
+  await pending
+  const text = JSON.stringify(harness.render())
+  assert.match(text, /couldn't start social sign-in/)
+  assert.doesNotMatch(text, /private provider/)
+})
+
 test("only account/admin/auth paths use shared AVES navigation", () => {
   for (const path of ["/account", "/australia/account/sign-in", "/admin/quotes", "/auth/confirm"]) {
     const harness = componentHarness("components/navigation-header.tsx", "NavigationHeader", {}, { mocks: { "next/navigation": { usePathname: () => path } } })
