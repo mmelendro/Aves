@@ -32,24 +32,22 @@ export default function ElevatePage() {
       <section className="relative py-8 lg:py-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-50 to-orange-50" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article="paramo" /></div>
-            <div className="space-y-8 lg:pt-12">
-              <div className="space-y-4">
+          <div className="flex flex-col gap-8">
+            <div className="mx-auto max-w-4xl space-y-4 text-center">
                 <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">
                   🌼 High-Altitude Páramo Expeditions
                 </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight">
                   Elevate Tours
                   <span className="text-yellow-600 block">Central Cordillera Cloud Forest Journey</span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   Immerse yourself in Colombia's mystical cloud forests and high-altitude páramo ecosystems. Experience
                   endemic hummingbirds, rare thornbills, and the world's most biodiverse mountain coffee regions.
                 </p>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="mx-auto w-full min-w-0"><ArticleBirdCarousel article="paramo" /></div>
+            <div className="mx-auto w-full max-w-3xl space-y-8"><div className="flex flex-col justify-center sm:flex-row gap-4">
                 <Link href="/shopping?preset=elevate">
                   <Button size="lg" className="bg-yellow-600 hover:bg-yellow-700 text-lg px-8 py-4">
                     Book Elevate Journey
@@ -80,8 +78,7 @@ export default function ElevatePage() {
                   <div className="text-3xl font-bold text-yellow-600">4</div>
                   <div className="text-sm text-gray-600">max guests</div>
                 </div>
-              </div>
-            </div>
+              </div></div>
 
 
           </div>

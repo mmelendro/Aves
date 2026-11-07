@@ -49,9 +49,9 @@ export default function SierraNevadaTourPage() {
       </header>
 
       <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 lg:py-12">
-        <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
-          <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article="sierra" /></div>
-          <div className="lg:pt-12"><Badge className="mb-4 bg-emerald-100 text-emerald-800">AVES Adventure Tour</Badge><h1 className="mb-5 text-4xl font-bold text-gray-900 md:text-5xl">Sierra Nevada Indigenous Birding Experience</h1><p className="text-xl leading-relaxed text-gray-600">An 8-day immersive journey through Colombia's most biodiverse mountain range with expert indigenous guides</p></div>
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
+          <div className="order-2 mx-auto w-full min-w-0"><ArticleBirdCarousel article="sierra" /></div>
+          <div className="order-1 mx-auto max-w-4xl text-center"><Badge className="mb-4 bg-emerald-100 text-emerald-800">AVES Adventure Tour</Badge><h1 className="mb-5 text-4xl font-bold text-gray-900 md:text-5xl">Sierra Nevada Indigenous Birding Experience</h1><p className="text-xl leading-relaxed text-gray-600">An 8-day immersive journey through Colombia's most biodiverse mountain range with expert indigenous guides</p></div>
         </div>
       </section>
 

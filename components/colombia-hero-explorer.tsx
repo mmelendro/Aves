@@ -6,12 +6,14 @@
 "use client"
 
 import { useState } from "react"
+import type { ReactNode } from "react"
+import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import styles from "@/components/country-hero-explorer.module.css"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
-import { birdData } from "@/content/birds"
+import { birdData, type BirdProfile } from "@/content/birds"
 import { colombiaMapRegions } from "@/lib/region-links"
 
 // The same artwork positions used by the full Colombia Explorer. These are
@@ -34,20 +36,20 @@ const mapMarkers = [
   return { ...marker, slug: region.slug }
 })
 
-export default function ColombiaHeroExplorer() {
-  const [currentBird, setCurrentBird] = useState(birdData[0])
+export default function ColombiaHeroExplorer({ media, initialRegion, initialBird }: { media?: ReactNode; initialRegion?: string; initialBird?: BirdProfile } = {}) {
+  const [currentBird, setCurrentBird] = useState(initialBird ?? birdData[0])
   // A deliberate dropdown selection stays selected even when a different bird is shown.
-  const [chosenRegion, setChosenRegion] = useState("")
+  const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
   const featuredRegion = mapMarkers.find(region => region.slug === currentBird.regionSlug)
   // Before a manual choice, offer the current bird region as a useful starting point.
   const selectedRegion = chosenRegion || featuredRegion?.slug || mapMarkers[0].slug
   const selectedRegionDetails = mapMarkers.find(region => region.slug === selectedRegion)!
 
   return (
-    <div className={styles.layout}>
+    <BirdDiscoveryContext.Provider value={setCurrentBird}><div className={styles.layout}>
       <div className={styles.mediaColumn}>
-        <HomepageBirdCarousel className="w-full max-w-none" birds={birdData} autoPlay={false} onBirdChange={setCurrentBird} />
-        <p className="mt-3 text-center text-sm leading-6 text-gray-600">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a>. Sightings depend on your route, habitat and season.</p>
+        {media ?? <HomepageBirdCarousel className="w-full max-w-none" birds={birdData} autoPlay={false} />}
+        {!media && <p className="mt-3 text-center text-sm leading-6 text-gray-600">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a>. Sightings depend on your route, habitat and season.</p>}
       </div>
       <div className={styles.mapColumn}>
         <div className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
@@ -83,6 +85,6 @@ export default function ColombiaHeroExplorer() {
           <span className="max-w-40 text-xs leading-5 text-gray-600">A personal itinerary, shaped around you.</span>
         </div>
       </div>
-    </div>
+    </div></BirdDiscoveryContext.Provider>
   )
 }

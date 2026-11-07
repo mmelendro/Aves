@@ -32,24 +32,22 @@ export default function VisionPage() {
       <section className="relative py-8 lg:py-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article="choco" /></div>
-            <div className="space-y-8 lg:pt-12">
-              <div className="space-y-4">
+          <div className="flex flex-col gap-8">
+            <div className="mx-auto max-w-4xl space-y-4 text-center">
                 <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-100">
                   🪶 Photography & Chocó Expeditions
                 </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight">
                   Vision Tours
                   <span className="text-purple-600 block">Western Cordillera Chocó Immersion</span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   Discover the world's most biodiverse rainforest through the lens. Specialized photography tours
                   focusing on Chocó endemics, with expert guidance for capturing Colombia's rarest birds.
                 </p>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="mx-auto w-full min-w-0"><ArticleBirdCarousel article="choco" /></div>
+            <div className="mx-auto w-full max-w-3xl space-y-8"><div className="flex flex-col justify-center sm:flex-row gap-4">
                 <Link href="/shopping?preset=vision">
                   <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-4">
                     Book Vision Journey
@@ -80,8 +78,7 @@ export default function VisionPage() {
                   <div className="text-3xl font-bold text-purple-600">4</div>
                   <div className="text-sm text-gray-600">max guests</div>
                 </div>
-              </div>
-            </div>
+              </div></div>
 
 
           </div>

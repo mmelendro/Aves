@@ -3,6 +3,7 @@
  * The ID lists are editorial selections, not complete regional checklists.
  * The common carousel supplies the photo, call, controls and species details.
  */
+import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { birdData, type BirdProfile } from "@/content/birds"
 
@@ -52,11 +53,11 @@ const articleBirds = Object.fromEntries(
 
 export default function ArticleBirdCarousel({ article }: { article: ArticleBirdSelection }) {
   return (
-    <div className="not-prose min-w-0">
+    <ColombiaHeroExplorer initialBird={articleBirds[article][0]} media={<div className="not-prose min-w-0">
       <HomepageBirdCarousel birds={articleBirds[article]} autoPlay={false} className="max-w-2xl" />
       <p className="mt-4 text-center text-sm text-gray-600">
         Choose a bird to explore its range and habitat. Recordings are available where shown.
       </p>
-    </div>
+    </div>} />
   )
 }

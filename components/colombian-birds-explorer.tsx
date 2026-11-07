@@ -16,7 +16,7 @@ import { Bird, TreePine, Mountain, ChevronRight, Waves, Leaf, Sun, Camera, Arrow
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
 import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 
 // Marker positions preserve the existing AVES map artwork; colours use the shared map palette.
@@ -195,9 +195,9 @@ export function ColombianBirdsExplorer() {
     <div className="min-h-screen relative">
       <div className="fixed inset-0 z-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900" aria-hidden="true" />
       <section className="relative z-10 py-8 lg:py-12">
-        <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
-          <HomepageBirdCarousel autoPlay={false} className="max-w-xl" />
-          <div className="text-white lg:pt-12">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
+          <div className="order-2 w-full"><ColombiaHeroExplorer /></div>
+          <div className="order-1 mx-auto max-w-4xl text-center text-white">
             <h1 className="mb-5 text-4xl font-bold sm:text-5xl lg:text-6xl">Explore Colombia</h1>
             <p className="mb-7 text-lg leading-relaxed text-emerald-50 sm:text-xl">Start with a bird, then explore its home. Choose a region on the map to discover local birdlife and shape your journey.</p>
             <div className="flex flex-wrap gap-3">

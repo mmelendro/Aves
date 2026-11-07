@@ -21,12 +21,12 @@ type ArticleHeroProps = {
 
 export default function ArticleHero({ article, title, eyebrow, location, date, readTime, description, children }: ArticleHeroProps) {
   return <header className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 sm:py-10">
-    <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
-      <div>
+    <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl text-center">
         <p className="mb-4 inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800">{eyebrow}</p>
         <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">{title}</h1>
         {description && <p className="mt-5 text-lg leading-relaxed text-gray-600">{description}</p>}
-        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-gray-600">
+        <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-gray-600">
           <Link href="/team#martin-melendro" className="inline-flex min-h-11 items-center gap-2 rounded hover:text-emerald-700"><User className="h-4 w-4" aria-hidden="true" />Martin Melendro</Link>
           <span className="inline-flex items-center gap-2"><Calendar className="h-4 w-4" aria-hidden="true" />{date}</span>
           <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" aria-hidden="true" />{location}</span>
@@ -34,7 +34,7 @@ export default function ArticleHero({ article, title, eyebrow, location, date, r
         </div>
         {children && <div className="mt-6">{children}</div>}
       </div>
-      <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article={article} /></div>
+      <div className="mx-auto w-full min-w-0"><ArticleBirdCarousel article={article} /></div>
     </div>
   </header>
 }

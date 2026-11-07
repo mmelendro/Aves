@@ -6,7 +6,8 @@
  */
 "use client"
 
-import { useState, useEffect, useCallback, useRef, useId, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
+import { useState, useContext, useEffect, useCallback, useRef, useId, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
+import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, Volume2, VolumeX, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -47,6 +48,7 @@ export default function HomepageBirdCarousel({
 }: HomepageBirdCarouselProps) {
   // State drives what is drawn. Refs hold browser objects or attempt IDs without re-rendering.
   // Slideshow playback and sound playback are deliberately separate controls.
+  const reportBirdToMap = useContext(BirdDiscoveryContext)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
@@ -89,8 +91,11 @@ export default function HomepageBirdCarousel({
 
   // Let the country wrapper update its map; the carousel does not own geographic data.
   useEffect(() => {
-    if (currentBird) onBirdChange?.(currentBird)
-  }, [currentBird, onBirdChange])
+    if (currentBird) {
+      onBirdChange?.(currentBird)
+      if (reportBirdToMap !== onBirdChange) reportBirdToMap?.(currentBird)
+    }
+  }, [currentBird, onBirdChange, reportBirdToMap])
 
   // Only the selected bird owns an audio element. Changing birds stops playback.
   useEffect(() => {

@@ -30,24 +30,22 @@ export default function SoulsPage() {
       <section className="relative py-8 lg:py-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-pink-50" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div className="mx-auto w-full min-w-0 max-w-xl"><ArticleBirdCarousel article="hummingbirds" /></div>
-            <div className="space-y-8 lg:pt-12">
-              <div className="space-y-4">
+          <div className="flex flex-col gap-8">
+            <div className="mx-auto max-w-4xl space-y-4 text-center">
                 <Badge className="bg-red-100 text-red-800 hover:bg-red-100">
                   🍓 Cultural Immersion & Amazon Transition
                 </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight">
                   Souls Tours
                   <span className="text-red-600 block">Eastern Cordillera Cultural Journey</span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   Connect with Colombia's indigenous communities and witness the transition from Andean peaks to Amazon
                   lowlands. Experience traditional ecological knowledge alongside world-class birding.
                 </p>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="mx-auto w-full min-w-0"><ArticleBirdCarousel article="hummingbirds" /></div>
+            <div className="mx-auto w-full max-w-3xl space-y-8"><div className="flex flex-col justify-center sm:flex-row gap-4">
                 <Link href="/shopping?preset=souls">
                   <Button size="lg" className="bg-red-600 hover:bg-red-700 text-lg px-8 py-4">
                     Book Souls Journey
@@ -78,8 +76,7 @@ export default function SoulsPage() {
                   <div className="text-3xl font-bold text-red-600">4</div>
                   <div className="text-sm text-gray-600">max guests</div>
                 </div>
-              </div>
-            </div>
+              </div></div>
 
 
           </div>
