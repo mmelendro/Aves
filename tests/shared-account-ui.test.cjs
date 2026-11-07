@@ -269,7 +269,7 @@ test("signup preserves the entry link but keeps the already configured email cal
 test("social sign-in buttons stay hidden by default and on password recovery screens", () => {
   for (const props of [{ mode: "sign-in" }, { mode: "sign-up" }, { mode: "forgot-password", oauthProviders: ["google", "facebook"] }, { mode: "reset-password", oauthProviders: ["google"] }]) {
     const tree = componentHarness("components/account/auth-form.tsx", "AuthForm", props).render()
-    assert.doesNotMatch(JSON.stringify(tree), /Continue with Google|Continue with Facebook|Or continue with email/)
+    assert.doesNotMatch(JSON.stringify(tree), /Sign in with Google|Continue with Facebook|Or continue with email/)
   }
 })
 
@@ -280,7 +280,8 @@ for (const [provider, scopes] of [["google", "openid email profile"], ["facebook
       mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signInWithOAuth: async input => { requests.push(input); return { error: null } } } }) } },
       window: { location: { origin: "https://aves.bio" } },
     })
-    await find(harness.render(), node => node.type === "Button" && Array.isArray(node.props.children) && node.props.children[0] === "Continue with ").props.onClick()
+    const label = provider === "google" ? "Sign in with Google" : "Continue with Facebook"
+    await find(harness.render(), node => node.props["aria-label"] === label).props.onClick()
     assert.equal(requests.length, 1)
     assert.equal(requests[0].provider, provider)
     assert.equal(requests[0].options.scopes, scopes)
@@ -298,7 +299,7 @@ test("social sign-in sanitizes offsite next, prevents duplicate requests and con
     mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signInWithOAuth: input => { requests.push(input); return new Promise(resolve => { finish = resolve }) } } }) } },
     window: { location: { origin: "https://aves.bio" } },
   })
-  const button = find(harness.render(), node => node.type === "Button" && Array.isArray(node.props.children) && node.props.children[0] === "Continue with ")
+  const button = find(harness.render(), node => node.props["aria-label"] === "Sign in with Google")
   const pending = button.props.onClick()
   await button.props.onClick()
   assert.equal(requests.length, 1)

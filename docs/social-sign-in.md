@@ -1,12 +1,16 @@
 # Google and Facebook sign-in
 
-## Provider setup status — 7 November 2026
+## Provider setup status — 8 November 2026 (Sydney)
 
-Google web client “AVES shared website sign-in” was created in AVES Website (`axial-coyote-514010-m2`) and its secret saved privately in the Google provider settings of AVES Shared Accounts. Provider enabled; nonce checks remain enabled and accounts without email remain disallowed. Google application remains in **Testing**. Website, privacy and terms links were saved in Google branding. No Google credentials are stored in this repository.
+Google web client “AVES shared website sign-in” belongs to AVES Website (`axial-coyote-514010-m2`) and its secret is saved privately in the Google provider settings of AVES Shared Accounts. The public Auth settings confirm that Google and email sign-in are enabled. Existing nonce/email protections have not been changed. Google application publishing status is now **In production**. Website, privacy and terms links remain in Google branding. No Google credentials are stored in this repository.
 
-The owner now requires **info@aves.bio** as the publicly visible Google support address; personal Gmail must not be exposed on the website. That managed Google Workspace mailbox requires restoration. Its prior Business Plus subscription was cancelled in November 2025; current restoration/licence status must be checked in Google Admin before any billing action. The address is not selectable in the current Cloud session. Do not publish Google sign-in using the personal Gmail support address.
+**info@aves.bio** has been saved as Google's public support address. With the owner's explicit approval, this existing business account was granted only OAuth Config Editor access to the current Google project. Its Google Workspace Business Starter mailbox was restored and its licence assignment verified: one user, CAD $11/month before applicable taxes, monthly flexible plan. The existing Canadian billing profile was retained. No annual commitment or other paid product was added. External mailbox delivery has not yet been independently tested. Personal Gmail remains private; do not replace the public support address with it.
 
-Production `AVES_OAUTH_PROVIDERS` remains unset. End-to-end Google sign-in and callback-query allowlist verification remain outstanding. Facebook is deferred at the user's request. Existing email/password login remains available.
+Controlled local acceptance passed: the owner approved the basic identity grant; a fresh Google login opened the existing account and loaded its saved test plan/proposal. A second returning-user login also succeeded. The country/valid-region prefill and sign-out were verified. A synthetic cancellation callback preserved the safe return destination. The earlier authorization left waiting for owner approval expired; restarting with fresh state resolved that expected one-time-state failure. Production activation and live verification are the remaining release steps. Facebook remains deferred. Existing email/password login remains available.
+
+Google currently displays the shared Supabase Auth hostname on its account/consent screens. Google brand verification is separate from the working OAuth configuration and is not yet complete. Do not describe AVES display-name verification as approved.
+
+The Google button uses unmodified [official light-theme artwork](https://developers.google.com/static/identity/images/signin-assets.zip), saved as `public/google-sign-in.svg`. The lettering is outlined in the asset, so the button needs no remote font or Google script. Its accessible name and disabled/focus states remain native button behaviour.
 
 The sections below describe the activation procedure once the mailbox and provider testing are complete.
 

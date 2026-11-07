@@ -152,7 +152,9 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
     <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? "Welcome Back" : mode === "sign-up" ? "Make Room for Your Next Adventure" : mode === "forgot-password" ? "Let's Get You Back In" : "Choose a New Password"}</h2>
     <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your Colombia and Australia trip ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
     {socialMode && oauthProviders.length > 0 ? <div className="mb-6 space-y-3">
-      {oauthProviders.map(provider => <Button key={provider} type="button" variant="outline" size="lg" className="w-full" disabled={busy} onClick={() => signInWithProvider(provider)}>Continue with {provider === "google" ? "Google" : "Facebook"}</Button>)}
+      {/* Google's unmodified artwork includes its current logo and lettering.
+          Keeping it local avoids loading Google's scripts or fonts before a visitor chooses to sign in. */}
+      {oauthProviders.map(provider => provider === "google" ? <button key={provider} type="button" aria-label="Sign in with Google" className="mx-auto block h-10 w-[180px] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-50" disabled={busy} onClick={() => signInWithProvider(provider)}><img src={sitePath("/google-sign-in.svg")} width={180} height={40} alt="" aria-hidden="true" /></button> : <Button key={provider} type="button" aria-label="Continue with Facebook" variant="outline" size="lg" className="w-full" disabled={busy} onClick={() => signInWithProvider(provider)}>Continue with Facebook</Button>)}
       <p className="text-center text-sm text-gray-500">Or continue with email</p>
     </div> : null}
     <form onSubmit={submit} className="space-y-6">
