@@ -126,3 +126,7 @@ The provider can update a `gtag` function if one already exists and emits a pref
 Use the package manager and versions specified in `package.json`. From this checkout, `pnpm typecheck` checks the TypeScript contracts, `pnpm test` runs the existing checks and `pnpm build` checks the production build. `pnpm dev` serves the local app at `http://127.0.0.1:3000/australia` when the port is available.
 
 Match verification to the change. For a carousel or map edit, check narrow and wide layouts, keyboard focus, one recording, stopping sound on slide change, the tiny territory callouts and the text alternatives. For a form edit, confirm the real server response and its failure/retry states; a nice-looking form alone does not prove saving or delivery. Do not commit environment files or real client submissions with screenshots or examples.
+
+## Paired discovery headers
+
+The country hero explorer can accept a `media` slot so a region or article keeps its original bird selection. `bird-discovery-context.tsx` connects that nested carousel to the map without copying its data or exposing server information. The shared carousel reports its selected bird through this optional context. `country-hero-explorer.module.css` owns the two-card arrangement and phone stacking. The map uses real country geometry; only its surrounding card becomes portrait. See the current release handoff for the supported page scope and browser checks.
