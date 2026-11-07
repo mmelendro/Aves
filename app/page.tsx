@@ -10,6 +10,7 @@ import { ArrowRight, Bird, Compass, MessageCircle, NotebookPen } from "lucide-re
 import { destinations } from "@/content/destinations"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import GlobalBirdCarousel from "@/components/global-bird-carousel"
+import DestinationCardMedia from "@/components/destination-card-media"
 import { canonicalUrl } from "@/lib/site-path"
 
 const description = "Follow the birds with AVES. Explore Colombia and Australia, discover our developing New Zealand destination, and find a journey shaped around what you love."
@@ -55,15 +56,9 @@ export default function HomePage() {
             </div>
             <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
               {destinations.map(destination => (
-                <article key={destination.id} className="flex flex-col overflow-hidden rounded-2xl border border-emerald-100/70 bg-white">
-                  <div className="relative aspect-[16/9] overflow-hidden bg-emerald-50 sm:aspect-[16/8]">
-                    <Image src={destination.image} alt={destination.imageAlt} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 600px" className="object-cover" style={{ objectPosition: destination.imagePosition, transform: `scale(${destination.imageScale ?? 1})`, transformOrigin: "top left" }} />
-                  </div>
+                <article key={destination.id} aria-label={destination.name} className="flex flex-col overflow-hidden rounded-2xl border border-emerald-100/70 bg-white">
+                  <DestinationCardMedia destination={destination} />
                   <div className="flex flex-1 flex-col p-6 sm:p-8">
-                    <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs text-gray-500">
-                      <span>{destination.bird}</span>
-                      <Link href="/credits" className="rounded underline decoration-gray-300 underline-offset-4 hover:text-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Photo: {destination.photographer}</Link>
-                    </div>
                     <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">{destination.name}</h2>
                     {destination.status && <p className="mt-3 inline-flex self-start rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-900">{destination.status}</p>}
                     <p className="mt-2 font-medium text-emerald-700">{destination.tagline}</p>

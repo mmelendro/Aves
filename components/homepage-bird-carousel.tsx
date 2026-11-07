@@ -1,7 +1,8 @@
 /**
  * Shared photo-and-sound carousel used by destination, region and editorial pages.
  * The caller chooses the birds; this file owns slide navigation, audio and details.
- * The portrait frame is 9:16 and capped at 320px wide. object-cover fills that frame,
+ * The default portrait frame is 9:16 and capped at 320px wide; homepage country
+ * cards use a shorter 4:5 frame that fills their existing card. object-cover fills it,
  * so landscape photos are cropped; each bird imagePosition controls the focal point.
  */
 "use client"
@@ -23,6 +24,9 @@ interface HomepageBirdCarouselProps {
   birds?: BirdProfile[]
   showBirdPicker?: boolean
   onBirdChange?: (bird: BirdProfile) => void
+  variant?: "default" | "destination-card"
+  label?: string
+  priority?: boolean
 }
 
 const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
@@ -45,7 +49,11 @@ export default function HomepageBirdCarousel({
   birds = allBirds,
   showBirdPicker = false,
   onBirdChange,
+  variant = "default",
+  label = "Bird photographs",
+  priority = true,
 }: HomepageBirdCarouselProps) {
+  const isDestinationCard = variant === "destination-card"
   // State drives what is drawn. Refs hold browser objects or attempt IDs without re-rendering.
   // Slideshow playback and sound playback are deliberately separate controls.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
@@ -190,23 +198,31 @@ export default function HomepageBirdCarousel({
 
   return (
     <div
-      className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, "max-w-[20rem]")}
-      role="region" aria-roledescription="carousel" aria-label="Bird photographs" tabIndex={0}
+      className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, !isDestinationCard && "max-w-[20rem]")}
+      role="region" aria-roledescription="carousel" aria-label={label} tabIndex={0}
       onKeyDown={handleKeyDown}
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
     >
       {/* Load sound only on request. Browser events, rather than a guessed timer, update playback UI. */}
       {currentBird.audioFile && <audio
-        key={currentBird.id} ref={audioRef} src={sitePath(currentBird.audioFile)} preload="none" aria-label={`${currentBird.commonName} recording`}
+        key={currentBird.id} ref={audioRef} src={sitePath(currentBird.audioFile)} preload="none" data-aves-bird-call aria-label={`${currentBird.commonName} recording`}
+        onPlay={event => {
+          // Several viewers can share a page. Starting one call stops the others,
+          // including the mixed-country hero, without a separate global listener.
+          const playing = event.currentTarget
+          document.querySelectorAll<HTMLAudioElement>("audio[data-aves-bird-call]").forEach(audio => {
+            if (audio !== playing) audio.pause()
+          })
+        }}
         onPlaying={() => { setIsAudioPlaying(true); setAudioLoading(false); setAudioError(false) }}
         onPause={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
         onEnded={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
         onWaiting={event => { if (!event.currentTarget.paused) setAudioLoading(true) }}
         onError={() => { setAudioError(true); setIsAudioPlaying(false); setAudioLoading(false) }}
       />}
-      <Card className="overflow-hidden rounded-2xl border border-emerald-100 shadow-lg">
+      <Card className={cn("overflow-hidden rounded-2xl border border-emerald-100 shadow-lg", isDestinationCard && "rounded-none border-0 shadow-none")}>
         <div
-          className="relative aspect-[9/16] w-full overflow-hidden bg-stone-100"
+          className={cn("relative w-full overflow-hidden bg-stone-100", isDestinationCard ? "aspect-[4/5]" : "aspect-[9/16]")}
           style={{ touchAction: "pan-y pinch-zoom" }}
           onTouchStart={event => { touchStartRef.current = !(event.target as HTMLElement).closest("button, a") && event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null }}
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
@@ -218,7 +234,8 @@ export default function HomepageBirdCarousel({
             style={{ objectPosition: currentBird.imagePosition || "center" }}
             onLoad={() => setImageState({ image: currentBird.image, status: "loaded" })}
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
-            priority={selectedIndex === 0} sizes="(max-width: 352px) calc(100vw - 32px), 320px"
+            priority={priority && selectedIndex === 0}
+            sizes={isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
           /> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
           {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
@@ -246,6 +263,16 @@ export default function HomepageBirdCarousel({
             <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-white/95"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span>{currentBird.primaryRegion}</span></p>
           </div>
         </div>
+        {/* The photographer follows the selected slide; never keep a static card credit. */}
+        {isDestinationCard && <div className="border-b border-emerald-100 bg-emerald-50/40 px-4 text-xs text-gray-600">
+          <a href={currentBird.photoCredit.instagramPost || currentBird.photoCredit.teamLink || "/credits"}
+            target={currentBird.photoCredit.instagramPost ? "_blank" : undefined}
+            rel={currentBird.photoCredit.instagramPost ? "noopener noreferrer" : undefined}
+            title={currentBird.photoCredit.title}
+            className={cn(linkClass, "inline-flex min-h-11 items-center py-2 leading-5")}>
+            Photo: {currentBird.photoCredit.photographer}
+          </a>
+        </div>}
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}
         {/* Details are opt-in, keeping the photo prominent while retaining facts and licences. */}
         {showInfo && <div className="bg-white p-3 sm:p-4">
