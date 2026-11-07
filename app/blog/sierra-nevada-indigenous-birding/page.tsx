@@ -24,6 +24,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
+import ArticleBirdCarousel from "@/components/article-bird-carousel"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -383,33 +384,7 @@ export default function SierraNevadaBlogPost() {
         <div className="relative py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <EnhancedBirdImage
-                src="/images/cardinal-guajiro.jpg"
-                alt="Vermilion Cardinal (Cardinalis phoeniceus) - the endemic Cardinal Guajiro showing its distinctive bright red plumage and alert facial features in Sierra Nevada de Santa Marta"
-                width={800}
-                height={600}
-                photographer="Royann, Early Guest"
-                guide="Yeferson Guale Epiayu"
-                guideLink="/team#yeferson-guale-epiayu"
-                location="Wayuu Territory"
-                locationLink="/about/partners#wayuu-community"
-                species={{
-                  commonName: "Vermilion Cardinal",
-                  spanishName: "Cardenal Guajiro",
-                  scientificName: "Cardinalis phoeniceus",
-                  conservation: "Near Threatened",
-                }}
-                ebirdUrl="https://ebird.org/species/vercar1"
-                regions={["Northern Colombia Caribbean Coast", "La Guajira Peninsula", "Magdalena Department"]}
-                ecosystems={[
-                  "Dry tropical forests",
-                  "Thorny scrublands",
-                  "Coastal desert margins",
-                  "Riparian corridors",
-                ]}
-                className="shadow-2xl"
-                imagePosition="center 10%"
-              />
+              <ArticleBirdCarousel article="sierra" />
 
               <div className="space-y-6">
                 <div className="inline-flex items-center bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -421,14 +396,14 @@ export default function SierraNevadaBlogPost() {
 
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Our journey's ultimate prize: the Vermilion Cardinal, known locally as Cardinal Guajiro. This
-                  brilliant red bird represents one of Colombia's most striking endemic species, found only in the dry
-                  forests and scrublands of the Caribbean coast.
+                  brilliant red bird inhabits dry forests and scrublands in north-eastern Colombia, including La Guajira,
+                  and northern Venezuela.
                 </p>
 
                 <div className="space-y-3">
                   <div className="flex items-center text-gray-600">
                     <MapPin className="w-5 h-5 mr-3 text-red-500" />
-                    <span>Endemic to northern Colombia's Caribbean coast</span>
+                    <span>Dry habitats of north-eastern Colombia and northern Venezuela</span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Camera className="w-5 h-5 mr-3 text-red-500" />
@@ -827,7 +802,7 @@ export default function SierraNevadaBlogPost() {
 
             <p className="mb-6">
               Our final day brought us to the coastal scrublands around Riohacha, where Yeferson's ancestral knowledge
-              of the Wayuu territory would prove essential for finding the endemic Vermilion Cardinal. The dry forests
+              of the Wayuu territory would prove essential for finding the Vermilion Cardinal. The dry forests
               and thorny scrublands of this region represent a completely different ecosystem from the cloud forests
               where we began.
             </p>
@@ -898,9 +873,9 @@ export default function SierraNevadaBlogPost() {
               </div>
               <div className="flex flex-col justify-center">
                 <p className="mb-4">
-                  The Vermilion Cardinal, known locally as Cardinal Guajiro, represents one of Colombia's most striking
-                  endemic species. Found only in the dry forests and scrublands of the Caribbean coast, this brilliant
-                  red bird has become a symbol of the region's unique biodiversity.
+                  The Vermilion Cardinal, known locally as Cardinal Guajiro, is one of the region's most striking birds.
+                  It inhabits dry forests and scrublands in north-eastern Colombia and northern Venezuela, and its
+                  brilliant red plumage has become a symbol of the region's biodiversity.
                 </p>
                 <p>
                   Our search began in the early morning hours when the cardinals are most active. Yeferson led us

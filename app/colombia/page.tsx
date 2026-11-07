@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { canonicalUrl } from "@/lib/site-path"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen, Star } from "lucide-react"
+import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen } from "lucide-react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
@@ -36,28 +36,6 @@ const planningSteps = [
   { title: "Confirm the details", icon: FileCheck2, text: "Review availability, the itinerary, price, inclusions and booking terms before making your decision." },
 ]
 
-// Existing guest statements are retained without changing their names or wording.
-const reviews = [
-  {
-    text: "Over 500 species including 40+ endemics! I photographed 330+ species across Caribbean, SNSM, and 3 Andes tours in one incredible month. This was the best experience of my life.",
-    author: "Royann",
-    location: "USA",
-    role: "Wildlife Photographer",
-  },
-  {
-    text: "Une expérience extraordinaire! Les guides connaissent chaque chant d'oiseau. J'ai vu des espèces que je n'aurais jamais imaginées. Merci AVES pour cette aventure inoubliable!",
-    author: "Sylvain",
-    location: "Quebec, Canada",
-    role: "Ornithologue Amateur",
-  },
-  {
-    text: "At 80+ years old, this was our final birding adventure, and AVES made it absolutely perfect. Professional, caring guides who understood our pace. We couldn't have asked for a better farewell trip.",
-    author: "Lisa & Peter",
-    location: "Pender Island, BC",
-    role: "Birding Enthusiasts",
-  },
-]
-
 export const metadata: Metadata = {
   title: { absolute: "AVES Colombia | Birdwatching Journeys" },
   description: "Explore Colombia's regions and birdlife, listen to bird calls and plan a personal birdwatching journey with AVES.",
@@ -82,7 +60,7 @@ export default function AVESLandingPage() {
       <main id="main-content" tabIndex={-1}>
         <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-10 sm:py-14 lg:py-20">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
               <div>
                 <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-800">
                   <MapPin className="h-4 w-4" aria-hidden="true" />AVES Colombia · Birding journeys
@@ -104,8 +82,9 @@ export default function AVESLandingPage() {
                 <p className="mt-4 text-sm leading-relaxed text-gray-600">Tell us your interests, preferred dates and pace. Itinerary, availability and arrangements are confirmed personally.</p>
               </div>
               <div className="mx-auto min-w-0 w-full max-w-lg lg:max-w-none">
+                <p className="mb-4 text-center font-semibold text-emerald-900">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a></p>
                 <HomepageBirdCarousel className="w-full" autoPlay={false} />
-                <p className="mt-3 text-center text-sm text-gray-600">Meet Colombia’s birds. Explore their ranges and listen to available recordings.</p>
+                <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A few birds to inspire your journey. Explore their ranges and listen to available recordings; what you may see depends on your route, habitat and season.</p>
               </div>
             </div>
           </div>
@@ -196,21 +175,6 @@ export default function AVESLandingPage() {
               ))}
             </ol>
             <div className="mt-7 text-center"><Link href="/how-it-works" className="inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-700 underline-offset-4 hover:underline">How planning with AVES works <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
-          </div>
-        </section>
-
-        <section className="bg-gradient-to-br from-gray-50 to-blue-50 py-14 lg:py-20" aria-labelledby="guests-heading">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-9 text-center"><h2 id="guests-heading" className="text-3xl font-bold text-gray-900 lg:text-4xl">What our guests say</h2><p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Perspectives from birding journeys in Colombia.</p></div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {reviews.map((review) => (
-                <figure key={review.author} className="flex flex-col rounded-xl border border-emerald-100 bg-white p-6 shadow-md">
-                  <div className="mb-4 flex gap-1" aria-label="5 out of 5 stars">{[0, 1, 2, 3, 4].map((star) => <Star key={star} className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />)}</div>
-                  <blockquote className="mb-6 flex-1 text-sm italic leading-relaxed text-gray-700 lg:text-base"><p lang={review.author === "Sylvain" ? "fr" : undefined}>“{review.text}”</p></blockquote>
-                  <figcaption className="text-sm"><span className="block font-semibold text-gray-900">{review.author}</span><span className="block text-gray-600">{review.location}</span><span className="block text-gray-500">{review.role}</span></figcaption>
-                </figure>
-              ))}
-            </div>
           </div>
         </section>
 

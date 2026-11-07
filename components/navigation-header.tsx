@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
@@ -41,18 +41,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             aria-label="AVES Colombia home"
             className="flex min-h-11 shrink-0 items-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
           >
-            <Image
-              src="/images/aves-logo.png"
-              alt=""
-              width={44}
-              height={44}
-              className="h-11 w-11 rounded-lg bg-white object-contain"
-              priority
-            />
-            <span className="leading-tight">
-              <span className="block text-xl font-bold tracking-wide text-emerald-900">AVES</span>
-              <span className="block text-xs font-medium tracking-wide text-emerald-700">Colombia</span>
-            </span>
+            <BrandMark country="colombia" priority />
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">

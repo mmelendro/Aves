@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { sharedAccountHref } from "@/lib/shared-account"
 
@@ -49,8 +49,7 @@ export function Footer({ transparent = false }: FooterProps) {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/colombia" aria-label="AVES Colombia home" className="mb-4 inline-flex min-h-11 items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900">
-              <Image src="/images/aves-logo.png" alt="" width={56} height={56} className="h-14 w-14 rounded-xl bg-white object-contain p-1" />
-              <span className="text-lg font-semibold text-emerald-300">AVES Colombia</span>
+              <BrandMark country="colombia" inverse size="footer" />
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-gray-200">
               Birding, nature and personal journey planning across Colombia.
@@ -85,6 +84,8 @@ export function Footer({ transparent = false }: FooterProps) {
             </ul>
           </nav>
         </div>
+
+        <p className="mt-8 max-w-4xl border-t border-gray-700/70 pt-6 text-sm leading-relaxed text-gray-300">We recognise Colombia’s Indigenous peoples and Afro-descendant communities and their enduring relationships with their territories, waters and cultural heritage. We aim to listen to local voices, respect community decisions and follow local guidance wherever we travel.</p>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-gray-700/70 pt-6 lg:flex-row lg:items-center lg:justify-between">
           <p className="text-sm text-gray-300">© 2026 AVES. All rights reserved.</p>

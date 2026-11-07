@@ -6,20 +6,15 @@ function AuthorBio() {
       <div className="flex items-start space-x-4">
         <Image
           src="/images/martin-melendro.jpg"
-          alt="Martin Melendro - AVES Expedition Leader and Ornithologist"
+          alt="Martín Melendro"
           width={80}
           height={80}
           className="rounded-full object-cover flex-shrink-0"
         />
         <div>
-          <h3 className="font-bold text-gray-900 mb-2">About Martin Melendro</h3>
+          <h3 className="font-bold text-gray-900 mb-2">About Martín Melendro</h3>
           <p className="text-gray-700 text-sm leading-relaxed">
-            Martin is AVES' lead expedition guide and ornithologist, with over 15 years of experience exploring
-            Colombia's diverse ecosystems. Fluent in Spanish, English, and basic indigenous languages, he specializes in
-            building respectful partnerships with local communities while leading transformative birding experiences.
-            Martin holds a degree in Biology from Universidad Nacional de Colombia and has contributed to numerous
-            conservation projects throughout the Neotropics. His passion lies in connecting people with nature while
-            supporting indigenous land rights and biodiversity conservation.
+            Martín Melendro is developing AVES, bringing together his interests in birdlife, nature and thoughtful travel.
           </p>
         </div>
       </div>

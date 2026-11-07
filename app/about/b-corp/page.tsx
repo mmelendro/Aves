@@ -81,7 +81,7 @@ export default function BCorpPage() {
   return (
     <div className="min-h-screen bg-white">
       <NavigationHeader currentPage="/about/b-corp" />
-
+      <main id="main-content" tabIndex={-1}>
       <section className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
         <div className="container mx-auto px-4 text-center">
           <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
@@ -176,25 +176,26 @@ export default function BCorpPage() {
             Discover our birding journeys and the values behind our ambition to become a certified B Corporation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/tours">
-              <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
+            <Button asChild size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
+              <Link href="/tours">
                 Explore Our Tours
                 <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
-              </Button>
-            </Link>
-            <Link href="/about">
-              <Button
+              </Link>
+            </Button>
+            <Button
+                asChild
                 size="lg"
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
               >
+              <Link href="/about">
                 Learn About Our Mission
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
-
+      </main>
       <Footer />
     </div>
   )

@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, User, MapPin, Thermometer, Mountain, Clock, ArrowR
 import Image from "next/image"
 import Link from "next/link"
 import AuthorBio from "@/components/author-bio"
+import ArticleBirdCarousel from "@/components/article-bird-carousel"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -69,19 +70,9 @@ export default function ParamoManizalesThornbillPost() {
         {/* Author Bio */}
         <AuthorBio />
 
-        {/* Hero Image */}
-        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-          <Image
-            src="/images/rainbow-bearded-thornbill.jpg"
-            alt="Rainbow-bearded Thornbill (Chalcostigma herrani) displaying its spectacular iridescent throat and orange-red crest in high-altitude páramo habitat"
-            width={1200}
-            height={675}
-            className="object-cover w-full h-full"
-          />
-          <div className="absolute bottom-4 left-4 bg-black/70 text-white p-3 rounded-lg">
-            <p className="text-sm font-medium">Rainbow-bearded Thornbill (Chalcostigma herrani)</p>
-            <p className="text-xs opacity-90">High-altitude hummingbird specialist of the páramo</p>
-          </div>
+        {/* Birds of the Central Andes */}
+        <div className="mb-12">
+          <ArticleBirdCarousel article="paramo" />
         </div>
 
         {/* Article Content */}

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { MapPin, Calendar, Globe, Instagram, ChevronDown } from "lucide-react"
+import { MapPin, Globe, Instagram, ChevronDown } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import { Footer } from "@/components/footer"
@@ -18,26 +18,16 @@ export default function TeamPage() {
   const teamMembers = [
     {
       id: "martin-melendro",
-      name: "Martin Melendro",
-      role: "AVES Founder & Lead Expedition Guide",
-      badge: "Founder & Lead Guide",
+      name: "Martín Melendro",
+      role: "Developing AVES",
+      badge: "AVES",
       badgeColor: "bg-emerald-100 text-emerald-800",
       roleColor: "text-emerald-600",
       image: "/images/martin-melendro.jpg",
-      alt: "Martin Melendro - AVES Founder and Lead Ornithologist",
-      bio: "Martin is AVES' founder and lead expedition guide, with over 15 years of experience exploring Colombia's diverse ecosystems. A passionate birding guide and conservation advocate, he specializes in creating transformative birding experiences that emphasize cultural exchange and conservation education.",
-      expertise: [
-        "High-altitude páramo birding",
-        "Indigenous community partnerships",
-        "Endemic species conservation",
-        "Sustainable tourism development",
-        "Bird photography and field research",
-      ],
-      details: [
-        { icon: MapPin, text: "Based in Bogotá, Colombia" },
-        { icon: Calendar, text: "15+ years experience" },
-        { icon: Globe, text: "Spanish, English" },
-      ],
+      alt: "Martín Melendro",
+      bio: "Martín Melendro is developing AVES, bringing together his interests in birdlife, nature and thoughtful travel.",
+      expertise: [],
+      details: [],
       links: [
         {
           icon: Globe,
@@ -332,7 +322,7 @@ export default function TeamPage() {
 
             {/* Guides Section */}
             <div className="mb-6">
-              <div className="text-sm font-medium text-gray-500 mb-3">Guides</div>
+              <div className="text-sm font-medium text-gray-500 mb-3">Team</div>
               <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                 {teamMembers.map((member) => (
                   <button
@@ -387,7 +377,7 @@ export default function TeamPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Expert Guides</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Team</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Our team brings together scientific expertise, traditional ecological knowledge, and deep cultural
               connections to create extraordinary birding experiences throughout Colombia.
@@ -458,14 +448,18 @@ export default function TeamPage() {
 
                         {/* Expertise and Links */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-3">Areas of Expertise</h4>
-                          <ul className="space-y-1 mb-4">
-                            {member.expertise.map((skill, index) => (
-                              <li key={index} className="text-gray-700 text-sm">
-                                • {skill}
-                              </li>
-                            ))}
-                          </ul>
+                          {member.expertise.length > 0 ? (
+                            <>
+                              <h4 className="font-semibold text-gray-900 mb-3">Areas of Expertise</h4>
+                              <ul className="space-y-1 mb-4">
+                                {member.expertise.map((skill, index) => (
+                                  <li key={index} className="text-gray-700 text-sm">
+                                    • {skill}
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          ) : null}
 
                           {/* Links */}
                           {member.links.length > 0 && (

@@ -24,7 +24,7 @@ const experiences = [
 export default function NewZealandPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <GlobalHeader />
+      <GlobalHeader country="new-zealand" />
       <main id="main-content" tabIndex={-1}>
         <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-10 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -97,7 +97,7 @@ export default function NewZealandPage() {
           </div></div>
         </section>
       </main>
-      <GlobalFooter />
+      <GlobalFooter country="new-zealand" />
     </div>
   )
 }

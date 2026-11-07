@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Menu, X, ChevronDown, Shield, Settings, Eye, Target, Users } from "lucide-react"
 import Link from "next/link"
-import OptimizedImage from "@/components/optimized-image"
+import { BrandMark } from "@/components/brand-mark"
 import { CookieManagementButton } from "@/components/cookie-management-button"
 import { Footer } from "@/components/footer"
 
@@ -19,15 +19,8 @@ export default function CookiesPage() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Link href="/">
-              <OptimizedImage
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10 object-contain"
-                priority
-              />
+            <Link href="/" aria-label="AVES home">
+              <BrandMark />
             </Link>
           </div>
 

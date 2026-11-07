@@ -1,22 +1,25 @@
-import Image from "next/image"
+import { BrandMark, type BrandCountry } from "@/components/brand-mark"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { destinations } from "@/content/destinations"
 
-export function GlobalHeader() {
+interface GlobalBrandProps {
+  country?: BrandCountry
+}
+
+export function GlobalHeader({ country }: GlobalBrandProps = {}) {
   return (
     <>
       <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] rounded-lg bg-white px-5 py-3 font-medium text-emerald-900 shadow-lg focus:not-sr-only">Skip to content</a>
       <header className="sticky top-0 z-40 border-b border-emerald-100 bg-white/95 backdrop-blur-sm">
-        <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
           <Link href="/" aria-label="AVES home" className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
-            <Image src="/images/aves-logo.png" alt="" width={44} height={44} className="rounded-full" />
-            <span className="text-2xl font-bold tracking-wide text-emerald-800">AVES</span>
+            <BrandMark country={country} priority />
           </Link>
           <nav aria-label="Main navigation" className="flex items-center gap-1 sm:gap-3">
-            <a href="/#destinations" className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Destinations</a>
+            <a href="/#destinations" className="inline-flex min-h-11 items-center rounded-full px-2 text-[13px] font-medium text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 sm:px-3 sm:text-sm">Destinations</a>
             <a href="/#planning" className="hidden min-h-11 items-center rounded-full px-3 text-sm font-medium text-gray-700 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 sm:inline-flex">How it works</a>
-            <a href="/australia/account" className="inline-flex min-h-11 items-center rounded-full border border-emerald-200 px-3 text-sm font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:px-5">My Trips</a>
+            <a href="/australia/account" className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-emerald-200 px-2 text-[13px] font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:px-5 sm:text-sm">My Trips</a>
           </nav>
         </div>
       </header>
@@ -24,14 +27,14 @@ export function GlobalHeader() {
   )
 }
 
-export function GlobalFooter() {
+export function GlobalFooter({ country }: GlobalBrandProps = {}) {
   return (
     <footer className="bg-gray-900 py-12 text-gray-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Link href="/" aria-label="AVES home" className="inline-flex items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"><Image src="/images/aves-logo.png" alt="" width={44} height={44} className="rounded-full" /><span className="text-2xl font-bold tracking-wide text-white">AVES</span></Link>
-            <p className="mt-4 max-w-xs leading-7">Follow the birds. Find your next journey.</p>
+            <Link href="/" aria-label="AVES home" className="inline-flex min-h-11 items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"><BrandMark country={country} inverse size="footer" /></Link>
+            <p className="mt-4 max-w-xs leading-7">From mountains to ocean.</p>
           </div>
           <nav aria-label="Explore destinations">
             <h2 className="mb-3 font-semibold text-white">Choose your destination</h2>

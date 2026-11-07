@@ -7,6 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { AuthorBio } from "@/components/author-bio"
+import ArticleBirdCarousel from "@/components/article-bird-carousel"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
@@ -23,7 +24,7 @@ export default function HummingbirdVisionJourneyPage() {
       commonName: "Rainbow-bearded Thornbill",
       scientificName: "Chalcostigma herrani",
       spanishName: "Colibrí Barbirrojo",
-      location: "Chingaza National Park",
+      location: "Central Andes, Colombia",
       elevation: "3,200m",
       ebirdUrl: "https://ebird.org/species/rabth1",
     },
@@ -157,22 +158,9 @@ export default function HummingbirdVisionJourneyPage() {
               </p>
             </div>
 
-            {/* Featured Image */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-              <Image
-                src="/images/rainbow-bearded-thornbill-vision.jpg"
-                alt="Rainbow-bearded Thornbill displaying its spectacular fiery throat in high-altitude páramo habitat"
-                width={1200}
-                height={675}
-                className="object-cover w-full h-full"
-                style={{ objectPosition: "center 30%" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Rainbow-bearded Thornbill</h3>
-                <p className="text-lg opacity-90">Chalcostigma herrani • Colibrí Barbirrojo</p>
-                <p className="text-sm opacity-75">Chingaza National Park, 3,200m elevation</p>
-              </div>
+            {/* Hummingbirds of the Colombian Andes */}
+            <div className="mb-12">
+              <ArticleBirdCarousel article="hummingbirds" />
             </div>
 
             {/* The Sacred Geography */}
@@ -190,13 +178,13 @@ export default function HummingbirdVisionJourneyPage() {
                 </p>
               </div>
 
-              {/* Chingaza Section */}
+              {/* Central Andes Section */}
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Chingaza: Temple of the Páramo</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Central Andes: Temple of the Páramo</h3>
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                   <div>
                     <p className="text-gray-700 leading-relaxed mb-4">
-                      At 3,200 meters above sea level, Chingaza National Park exists in a realm between earth and sky.
+                      High in Colombia's Central Andes, the páramo exists in a realm between earth and sky.
                       Here, in the high-altitude páramo ecosystem, we encounter the Rainbow-bearded Thornbill—a species
                       so perfectly adapted to these harsh conditions that it seems to embody the very spirit of
                       resilience.
@@ -227,11 +215,11 @@ export default function HummingbirdVisionJourneyPage() {
                   </div>
                   <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
                     <Image
-                      src="/images/copper-rumped-hummingbird.jpg"
-                      alt="Copper-rumped Hummingbird showing brilliant golden-green iridescence in páramo habitat"
+                      src="/images/rabtho1.jpg"
+                      alt="Rainbow-bearded Thornbill, a hummingbird of high Andean páramo and treeline habitats"
                       width={600}
                       height={450}
-                      className="object-cover w-full h-full"
+                      className="object-contain w-full h-full"
                     />
                   </div>
                 </div>

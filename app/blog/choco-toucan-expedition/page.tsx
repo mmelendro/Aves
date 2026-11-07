@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import OptimizedImage from "@/components/optimized-image"
+import ArticleBirdCarousel from "@/components/article-bird-carousel"
 import AudioPlayer from "@/components/audio-player"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
@@ -81,16 +81,9 @@ export default function ChocoToucanExpeditionPage() {
             </div>
           </div>
 
-          {/* Hero Image */}
-          <div className="relative h-96 md:h-[500px] rounded-xl overflow-hidden mb-8">
-            <OptimizedImage
-              src="/images/yellow-throated-toucan-blog.jpg"
-              alt="Yellow-throated Toucan in the Chocó rainforest canopy at dawn"
-              width={1200}
-              height={800}
-              className="object-cover"
-              priority
-            />
+          {/* Birds of the Pacific forests and western foothills */}
+          <div className="mb-8">
+            <ArticleBirdCarousel article="choco" />
           </div>
         </header>
 

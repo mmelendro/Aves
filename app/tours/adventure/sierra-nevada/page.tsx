@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, CheckCircle, Clock, Users } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { BrandMark } from "@/components/brand-mark"
 
 export const metadata: Metadata = { title: "Sierra Nevada Birding Experience", alternates: { canonical: canonicalUrl("/tours/adventure/sierra-nevada") } }
 
@@ -15,14 +16,8 @@ export default function SierraNevadaTourPage() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Link href="/colombia">
-              <Image
-                src="/images/aves-logo.png"
-                alt="AVES Birdwatching Tours Logo"
-                width={50}
-                height={50}
-                className="object-contain"
-              />
+            <Link href="/colombia" aria-label="AVES Colombia home">
+              <BrandMark country="colombia" />
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-8">
@@ -102,7 +97,7 @@ export default function SierraNevadaTourPage() {
                 <div className="bg-emerald-50 p-6 rounded-lg my-8">
                   <h3 className="text-emerald-800">Read About This Experience</h3>
                   <p>
-                    Explore our detailed blog post about this exact itinerary, written by our lead guide Martin
+                    Explore our detailed blog post about this exact itinerary, written by Martín
                     Melendro:
                   </p>
                   <Link
@@ -503,15 +498,7 @@ export default function SierraNevadaTourPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Image
-                  src="/images/aves-logo.png"
-                  alt="AVES Birdwatching Tours Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
+              <Link href="/colombia" aria-label="AVES Colombia home" className="mb-4 inline-flex"><BrandMark country="colombia" inverse size="footer" /></Link>
               <p className="text-gray-400 mb-4">
                 Premium birding tours in Colombia, committed to conservation and sustainable tourism.
               </p>
