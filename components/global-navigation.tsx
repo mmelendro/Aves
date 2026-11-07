@@ -40,10 +40,11 @@ export function GlobalFooter() {
           <div>
             <h2 className="mb-3 font-semibold text-white">Keep in touch</h2>
             <a href="mailto:mmelendro@gmail.com" className="inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">mmelendro@gmail.com</a>
-            <p className="mt-2 text-sm leading-6">Have a trip in mind? Choose a country to explore and send a personal trip request.</p>
+            <p className="mt-2 text-sm leading-6">Have a trip in mind? Explore a destination and start a conversation with us.</p>
           </div>
         </div>
-        <div className="mt-9 flex flex-col justify-between gap-5 border-t border-gray-700 pt-7 text-sm md:flex-row md:items-center">
+        <p className="mt-9 max-w-4xl border-t border-gray-700 pt-7 text-sm leading-6 text-gray-300">We recognise the Indigenous peoples of the places we visit and their continuing relationships with lands, waters and communities. We aim to travel with respect, listen to local voices and follow local guidance.</p>
+        <div className="mt-7 flex flex-col justify-between gap-5 border-t border-gray-700 pt-7 text-sm md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} AVES. All rights reserved.</p>
           <nav aria-label="Website information" className="flex flex-wrap gap-x-5 gap-y-2">
             {[["Privacy", "/privacy"], ["Terms", "/terms"], ["Cookies", "/cookies"], ["Photo & audio credits", "/credits"], ["Site map", "/site-map"]].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center underline-offset-4 hover:text-white hover:underline">{label}</Link>)}

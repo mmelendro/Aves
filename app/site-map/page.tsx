@@ -7,7 +7,7 @@ import { canonicalUrl } from "@/lib/site-path"
 
 export const metadata: Metadata = {
   title: "AVES Site Map",
-  description: "Find the main AVES homepage, Colombia's region guides and trip-planning information, and the Australia site map.",
+  description: "Find AVES destinations, Colombia's region guides, the Australia site map and our developing New Zealand destination.",
   alternates: { canonical: canonicalUrl("/site-map") },
 }
 
@@ -20,7 +20,7 @@ export default function SiteMapPage() {
           <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
             <Badge className="mb-5 bg-emerald-100 text-emerald-800 hover:bg-emerald-100">🌿 AVES</Badge>
             <h1 className="mb-5 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">AVES Site Map</h1>
-            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 lg:text-xl">Choose a country from the AVES homepage, or explore Colombia's regions, birds and trip-planning information here.</p>
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 lg:text-xl">Explore Colombia and Australia, discover our developing New Zealand destination, and find your way around AVES.</p>
           </div>
         </section>
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">

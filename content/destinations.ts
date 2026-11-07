@@ -1,4 +1,4 @@
-/** Public destination cards. Add a country only after its site and shared-account catalogue are ready. */
+/** Public destination cards. Developing destinations offer inspiration and direct email, not account-based booking. */
 export interface Destination {
   id: string
   name: string
@@ -11,6 +11,7 @@ export interface Destination {
   imageScale?: number
   bird: string
   photographer: string
+  status?: "In development"
 }
 
 export const destinations: readonly Destination[] = [
@@ -38,5 +39,18 @@ export const destinations: readonly Destination[] = [
     imagePosition: "center 48%",
     bird: "Splendid Fairywren · Western Australia",
     photographer: "BaroBert · CC BY-SA 3.0",
+  },
+  {
+    id: "new-zealand",
+    name: "New Zealand",
+    href: "/new-zealand",
+    tagline: "Island birds, mountain landscapes and time to explore",
+    description: "Get to know Aotearoa New Zealand: native birdlife, forests and coastlines, with room for food, culture and a gentler pace. Our next destination is taking shape.",
+    image: "/images/destinations/kea-new-zealand.jpg",
+    imageAlt: "A kea with olive-green feathers perched beside a tree in New Zealand",
+    imagePosition: "center 45%",
+    bird: "Kea · New Zealand",
+    photographer: "Piotr Zurek · CC BY-SA 2.0",
+    status: "In development",
   },
 ]

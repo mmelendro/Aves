@@ -60,9 +60,9 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
-test("global homepage and footer offer both countries with full-page links across deployments", () => {
+test("global homepage and footer offer the three public destinations with full-page links", () => {
   assert.deepEqual(destinations.map(({ id, href }) => ({ id, href })), [
-    { id: "colombia", href: "/colombia" }, { id: "australia", href: "/australia" },
+    { id: "colombia", href: "/colombia" }, { id: "australia", href: "/australia" }, { id: "new-zealand", href: "/new-zealand" },
   ])
   const Home = load("app/page.tsx").default
   const html = renderToStaticMarkup(React.createElement(Home))

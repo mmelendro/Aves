@@ -400,6 +400,19 @@
         "commonName": "Splendid Fairywren",
         "scientificName": "Malurus splendens"
       }
+    },
+    {
+      "file": "kea-new-zealand.jpg",
+      "path": "/images/destinations/kea-new-zealand.jpg",
+      "title": "Kea — New Zealand",
+      "creator": "Piotr Zurek",
+      "creatorUrl": "https://www.flickr.com/people/97251982@N00",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kea_(Nestor_notabilis)_-side_-NZ-8a.jpg",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "attribution": "Kea photographed by Piotr Zurek. Licensed under CC BY-SA 2.0 via Wikimedia Commons.",
+      "alt": "A kea perched beside a tree in New Zealand",
+      "modifications": "Original photograph retained. Responsive display crops the image; the displayed adaptation remains CC BY-SA 2.0. Licence verified 7 November 2026."
     }
   ]
 }

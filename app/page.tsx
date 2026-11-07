@@ -6,7 +6,7 @@ import { destinations } from "@/content/destinations"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import { canonicalUrl } from "@/lib/site-path"
 
-const description = "Follow the birds with AVES. Explore Colombia and Australia, discover their regions and birdlife, and plan a journey around what you love."
+const description = "Follow the birds with AVES. Explore Colombia and Australia, discover our developing New Zealand destination, and find a journey shaped around what you love."
 
 export const metadata: Metadata = {
   title: { absolute: "AVES | Follow the birds" },
@@ -38,11 +38,11 @@ export default function HomePage() {
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-gray-600">
                 Extraordinary birdlife. Places that stay with you. Choose a destination and start shaping your AVES journey.
               </p>
-              <nav aria-label="Choose a country" className="mt-6 flex justify-center gap-3">
+              <nav aria-label="Choose a country" className="mt-6 flex flex-wrap justify-center gap-3">
                 {destinations.map(destination => <a key={destination.id} href={destination.href} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-2 font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">{destination.name}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>)}
               </nav>
             </div>
-            <div className="grid gap-7 md:grid-cols-2">
+            <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
               {destinations.map(destination => (
                 <article key={destination.id} className="overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-lg shadow-emerald-950/5">
                   <div className="relative aspect-[16/9] overflow-hidden bg-emerald-50 sm:aspect-[16/8]">
@@ -54,6 +54,7 @@ export default function HomePage() {
                       <Link href="/credits" className="rounded underline decoration-gray-300 underline-offset-4 hover:text-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Photo: {destination.photographer}</Link>
                     </div>
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{destination.name}</h2>
+                    {destination.status && <p className="mt-3 inline-flex rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-900">{destination.status}</p>}
                     <p className="mt-2 font-medium text-emerald-700">{destination.tagline}</p>
                     <p className="mt-4 min-h-[5.25rem] leading-7 text-gray-600">{destination.description}</p>
                     {/* Full-page links cross the independently deployed country applications safely. */}
@@ -64,7 +65,7 @@ export default function HomePage() {
                 </article>
               ))}
             </div>
-            <p className="mt-8 text-center text-sm leading-6 text-gray-600">Start with Colombia or Australia. More destinations are part of the journey ahead.</p>
+            <p className="mt-8 text-center text-sm leading-6 text-gray-600">Plan a trip to Colombia or Australia, or discover what’s taking shape in New Zealand.</p>
           </div>
         </section>
         <section id="planning" aria-labelledby="planning-heading" className="scroll-mt-24 py-14 sm:py-20">
@@ -84,7 +85,7 @@ export default function HomePage() {
               ))}
             </ol>
             <div className="mt-10 flex flex-col items-start justify-between gap-6 rounded-3xl bg-emerald-900 p-7 text-white sm:p-9 md:flex-row md:items-center">
-              <div><h3 className="text-2xl font-bold">One AVES account. Every destination.</h3><p className="mt-2 max-w-xl leading-7 text-emerald-100">Keep your saved trip ideas, quote requests and proposals together, wherever you want to go.</p></div>
+              <div><h3 className="text-2xl font-bold">Your AVES journeys, together.</h3><p className="mt-2 max-w-xl leading-7 text-emerald-100">Keep your Colombia and Australia trip ideas, quote requests and proposals in one account. For New Zealand, start a conversation from its destination page.</p></div>
               <a href="/australia/account" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Open My Trips<ArrowRight className="h-5 w-5" aria-hidden="true" /></a>
             </div>
           </div>

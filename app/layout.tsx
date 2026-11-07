@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | AVES",
   },
   description:
-    "Explore Colombia and Australia with AVES. Discover remarkable birdlife, save your trip ideas and request a personally planned birding journey.",
+    "Explore Colombia and Australia with AVES, and discover our developing New Zealand destination. Birdlife, nature and journeys shaped around you.",
   keywords: [
     "Colombia bird watching",
     "Australia bird watching",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AVES | Follow the birds",
     description:
-      "Explore Colombia and Australia. Discover remarkable birdlife and plan your own AVES journey.",
+      "Explore Colombia and Australia, and discover our developing New Zealand destination. Follow the birds with AVES.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
     siteName: "AVES",
     images: [
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AVES | Follow the birds",
     description:
-      "Explore Colombia and Australia. Discover remarkable birdlife and plan your own AVES journey.",
+      "Explore Colombia and Australia, and discover our developing New Zealand destination. Follow the birds with AVES.",
     images: ["/images/aves-logo.png"],
   },
   // TODO: Add real Google Search Console verification code

@@ -4,6 +4,10 @@ export type PublicPageGroup = { id: string; title: string; pages: { href: string
 
 export const publicPageGroups: PublicPageGroup[] = [
   {
+    id: "new-zealand", title: "Discover New Zealand",
+    pages: [{ href: "/new-zealand", label: "New Zealand — In Development" }],
+  },
+  {
     id: "start", title: "AVES & Colombia",
     pages: [
       { href: "/", label: "AVES Home — All Destinations" },
