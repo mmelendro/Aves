@@ -293,7 +293,9 @@
       "reserve": "Chamicero de Perija",
       "reserveLink": "/about/partners#proaves",
       "teamLink": "/credits"
-    }
+    },
+    "audioFile": "/audio/co-yellow-throated-toucan.mp3",
+    "audioLabel": "Manuel Vargas · Costa Rica"
   },
   {
     "id": "co-golden-headed-quetzal",
@@ -316,7 +318,9 @@
       "reserve": "Chamicero de Perija",
       "reserveLink": "/about/partners#fundacion-proaves",
       "teamLink": "/credits"
-    }
+    },
+    "audioFile": "/audio/co-golden-headed-quetzal.mp3",
+    "audioLabel": "Steve Collins · Ecuador"
   },
   {
     "id": "co-santa-marta-brushfinch",
@@ -372,7 +376,9 @@
         "title": "American Bird Conservancy / Conservation Birding — El Dorado",
         "url": "https://conservationbirding.org/?reserve=el-dorado-reserve"
       }
-    ]
+    ],
+    "audioFile": "/audio/co-santa-marta-parakeet.mp3",
+    "audioLabel": "Fundacion ProAves · Colombia"
   },
   {
     "id": "co-white-tailed-starfrontlet",

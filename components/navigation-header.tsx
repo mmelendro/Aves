@@ -36,13 +36,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           Skip to content
         </a>
         <div className="container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/colombia"
-            aria-label="AVES Colombia home"
-            className="flex min-h-11 shrink-0 items-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
-          >
-            <BrandMark country="colombia" priority />
-          </Link>
+          <BrandMark country="colombia" priority />
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {

@@ -1,0 +1,50 @@
+{
+  "verifiedOn": "2026-11-07",
+  "recordings": [
+    {
+      "id": "co-yellow-throated-toucan",
+      "title": "Yellow-throated Toucan field recording",
+      "path": "/audio/co-yellow-throated-toucan.mp3",
+      "sourceUrl": "https://www.inaturalist.org/observations/18613451",
+      "downloadUrl": "https://static.inaturalist.org/sounds/27607.mp3?1543114124",
+      "creator": "Manuel Vargas",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "Yellow-throated Toucan recorded by Manuel Vargas (manuelvargas), via iNaturalist / CC0 1.0",
+      "modifications": "Full recording converted to mono MP3 for browser playback. No trimming or generated audio.",
+      "recordedOn": "2018-03-23",
+      "location": "Costa Rica",
+      "qualityGrade": "research"
+    },
+    {
+      "id": "co-golden-headed-quetzal",
+      "title": "Golden-headed Quetzal field recording",
+      "path": "/audio/co-golden-headed-quetzal.mp3",
+      "sourceUrl": "https://www.inaturalist.org/observations/221949129",
+      "downloadUrl": "https://static.inaturalist.org/sounds/1281262.wav?1736208619",
+      "creator": "Steve Collins",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Golden-headed Quetzal recorded by Steve Collins (stevecollins), via iNaturalist / CC BY 4.0",
+      "modifications": "Full recording converted to mono MP3 for browser playback. No trimming or generated audio.",
+      "recordedOn": "2024-05-30",
+      "location": "Ecuador",
+      "qualityGrade": "research"
+    },
+    {
+      "id": "co-santa-marta-parakeet",
+      "title": "Santa Marta Parakeet field recording",
+      "path": "/audio/co-santa-marta-parakeet.mp3",
+      "sourceUrl": "https://www.inaturalist.org/observations/364866561",
+      "downloadUrl": "https://static.inaturalist.org/sounds/1976675.m4a?1779665612",
+      "creator": "Fundacion ProAves",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Santa Marta Parakeet recorded by Fundacion ProAves (fundacion_proaves), via iNaturalist / CC BY-SA 4.0",
+      "modifications": "Full recording converted to mono MP3 for browser playback. No trimming or generated audio. Adapted recording remains under CC BY-SA 4.0.",
+      "recordedOn": "2026-05-24",
+      "location": "Colombia",
+      "qualityGrade": "needs_id"
+    }
+  ]
+}

@@ -67,8 +67,8 @@ export default function NewZealandPage() {
         <section id="birdlife" aria-labelledby="birdlife-heading" className="scroll-mt-24 bg-gray-50 py-14 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-emerald-700">Meet the birdlife</p>
-            <h2 id="birdlife-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">A few birds to spark your curiosity</h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Each bird belongs to a particular landscape. These are starting points for discovery; access, seasons and sightings vary.</p>
+            <h2 id="birdlife-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">Discover New Zealand’s birds</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Explore forest song, alpine specialists, wetland birds and coastal wildlife, with a particular focus on the South Island. Each species includes a photograph, a recording and places to look.</p>
             <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm leading-7 text-gray-700"><p>Start with <a href="https://ebird.org/region/NZ" target="_blank" rel="noreferrer" className="font-semibold text-emerald-800 underline underline-offset-4">eBird’s New Zealand records</a> to explore birds by place and time of year. For conservation status, consult <a href="https://datazone.birdlife.org/about-our-science/the-iucn-red-list" target="_blank" rel="noreferrer" className="font-semibold text-emerald-800 underline underline-offset-4">BirdLife’s IUCN Red List work</a>; DOC provides local species and visitor guidance. A record is a starting point, not a promise of a sighting.</p></div>
             <NewZealandBirdCarousel />
           </div>

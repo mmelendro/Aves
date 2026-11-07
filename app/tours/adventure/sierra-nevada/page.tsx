@@ -16,9 +16,7 @@ export default function SierraNevadaTourPage() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Link href="/colombia" aria-label="AVES Colombia home">
-              <BrandMark country="colombia" />
-            </Link>
+            <BrandMark country="colombia" />
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/tours" className="text-emerald-600 font-medium">
@@ -498,7 +496,7 @@ export default function SierraNevadaTourPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <Link href="/colombia" aria-label="AVES Colombia home" className="mb-4 inline-flex"><BrandMark country="colombia" inverse size="footer" /></Link>
+              <span className="mb-4 inline-flex"><BrandMark country="colombia" inverse size="footer" /></span>
               <p className="text-gray-400 mb-4">
                 Premium birding tours in Colombia, committed to conservation and sustainable tourism.
               </p>

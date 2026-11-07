@@ -15,6 +15,7 @@ interface HomepageBirdCarouselProps {
   autoPlay?: boolean
   autoPlayInterval?: number
   birds?: BirdProfile[]
+  showBirdPicker?: boolean
 }
 
 const controlClass = "min-h-11 min-w-11 bg-emerald-900 text-white hover:bg-emerald-800 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2 disabled:opacity-40 motion-reduce:transition-none"
@@ -25,6 +26,7 @@ export default function HomepageBirdCarousel({
   autoPlay = true,
   autoPlayInterval = 8000,
   birds = allBirds,
+  showBirdPicker = false,
 }: HomepageBirdCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -207,6 +209,14 @@ export default function HomepageBirdCarousel({
         if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false)
       }}
     >
+      {showBirdPicker && birds.length > 1 && (
+        <div className="mb-4">
+          <label htmlFor={`${carouselId}-bird-picker`} className="mb-2 block text-sm font-semibold text-emerald-900">Choose a bird · {birds.length} featured species</label>
+          <select id={`${carouselId}-bird-picker`} value={selectedIndex} onChange={event => goToSlide(Number(event.target.value))} className="min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-3 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+            {birds.map((bird, index) => <option key={bird.id} value={index}>{bird.commonName}</option>)}
+          </select>
+        </div>
+      )}
       {currentBird.audioFile && (
         <audio
           key={currentBird.id}

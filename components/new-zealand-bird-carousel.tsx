@@ -7,8 +7,9 @@ export default function NewZealandBirdCarousel() {
   return (
     <div className="mt-9">
       <div className="mx-auto max-w-lg">
-          <HomepageBirdCarousel birds={newZealandCarouselBirds} autoPlay={false} />
-          <p className="mx-auto mt-4 max-w-md text-center text-sm leading-6 text-gray-600">A few birds to inspire your journey. Open species details for habitat notes and eBird or DOC guidance.</p>
+          <HomepageBirdCarousel birds={newZealandCarouselBirds} autoPlay={false} showBirdPicker />
+          <p className="mx-auto mt-4 max-w-md text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. This is a selection, not a complete checklist. Open species details for range, habitat and source guides.</p>
+          <p className="mx-auto mt-3 max-w-md text-center text-xs leading-5 text-gray-600">Enjoy the recordings here for learning; avoid playing them to attract wild birds. Photographs and recordings may come from different locations.</p>
       </div>
       <details id="new-zealand-photo-credits" className="mt-8 rounded-2xl border border-emerald-200 bg-white px-5 py-3 text-sm">
         <summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Photograph credits and licences</summary>

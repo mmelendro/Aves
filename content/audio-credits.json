@@ -1,5 +1,5 @@
 {
-  "verifiedOn": "2026-11-06",
+  "verifiedOn": "2026-11-07",
   "usageNote": "New recordings use commercially compatible licences verified on their source observations. Legacy recordings retain existing AVES authorization; their recordists and public reuse rights remain unverified. The old Golden-headed Quetzal sound was omitted because its URL identified a manakin.",
   "recordings": [
     {
@@ -195,27 +195,119 @@
         "scientificName": "Ramphastos brevis"
       },
       "qualityGrade": "research"
+    },
+    {
+      "id": "nz-kea",
+      "title": "Kea — calls responding to recorded playback",
+      "path": "/audio/nz-kea.mp3",
+      "sourceUrl": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+      "downloadUrl": "https://www.doc.govt.nz/globalassets/documents/conservation/native-animals/birds/bird-song/kea-song.mp3",
+      "creator": "Department of Conservation (NZ)",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsSourceUrl": "https://www.doc.govt.nz/footer-links/copyright/",
+      "attribution": "Kea responding to recordings of their calls. Source: Department of Conservation (NZ). Crown Copyright; reused under CC BY 4.0.",
+      "modifications": "Original MP3 retained unchanged; no trimming, filtering or generative edits.",
+      "scientificName": "Nestor notabilis",
+      "durationSeconds": 62.35,
+      "bytes": 999658,
+      "sha256": "a68a4cb3154f3e04e9d4334d34fff5c375795235a7243d1f370c8d24d56a933f",
+      "verifiedOn": "2026-11-07"
+    },
+    {
+      "id": "nz-tui",
+      "title": "Tūī — communication calls",
+      "path": "/audio/nz-tui.mp3",
+      "sourceUrl": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+      "downloadUrl": "https://www.doc.govt.nz/globalassets/documents/conservation/native-animals/birds/bird-song/tui-song-42.mp3",
+      "creator": "Department of Conservation (NZ)",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsSourceUrl": "https://www.doc.govt.nz/footer-links/copyright/",
+      "attribution": "Tūī communication calls. Source: Department of Conservation (NZ). Crown Copyright; reused under CC BY 4.0.",
+      "modifications": "Original MP3 retained unchanged; no trimming, filtering or generative edits.",
+      "scientificName": "Prosthemadera novaeseelandiae",
+      "durationSeconds": 142.41,
+      "bytes": 2280705,
+      "sha256": "50f4def4d1dd9e36ad28b7b17b7e6769eec7deb55f099afe391778a4b212c7fb",
+      "verifiedOn": "2026-11-07"
+    },
+    {
+      "id": "nz-fantail",
+      "title": "Pīwakawaka / New Zealand fantail — North Island feeding calls",
+      "path": "/audio/nz-fantail.mp3",
+      "sourceUrl": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+      "downloadUrl": "https://www.doc.govt.nz/globalassets/documents/conservation/native-animals/birds/bird-song/fantail-02.mp3",
+      "creator": "Department of Conservation (NZ)",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsSourceUrl": "https://www.doc.govt.nz/footer-links/copyright/",
+      "attribution": "North Island fantail making short feeding flights and giving calls. Source: Department of Conservation (NZ). Crown Copyright; reused under CC BY 4.0.",
+      "modifications": "Original MP3 retained unchanged; no trimming, filtering or generative edits.",
+      "scientificName": "Rhipidura fuliginosa",
+      "durationSeconds": 14.57,
+      "bytes": 235215,
+      "sha256": "b4a425366bd4f802d3139a98d8670cd6ef291f0920c11b1f650ce644b3314847",
+      "verifiedOn": "2026-11-07"
+    },
+    {
+      "id": "nz-takahe",
+      "title": "Takahē — song",
+      "path": "/audio/nz-takahe.mp3",
+      "sourceUrl": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+      "downloadUrl": "https://www.doc.govt.nz/globalassets/documents/conservation/native-animals/birds/bird-song/takahe-song-10.mp3",
+      "creator": "Department of Conservation (NZ)",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsSourceUrl": "https://www.doc.govt.nz/footer-links/copyright/",
+      "attribution": "Takahē song. Source: Department of Conservation (NZ). Crown Copyright; reused under CC BY 4.0.",
+      "modifications": "Original MP3 retained unchanged; no trimming, filtering or generative edits.",
+      "scientificName": "Porphyrio hochstetteri",
+      "durationSeconds": 39.65,
+      "bytes": 636454,
+      "sha256": "f626725fcce1fa4b9eec5250a73fef9b8130c2cf9950e2c4a4a9933e18c7e62b",
+      "verifiedOn": "2026-11-07"
+    },
+    {
+      "id": "nz-little-penguin",
+      "title": "Kororā / Little penguin — calls at dusk",
+      "path": "/audio/nz-little-penguin.mp3",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Little_Penguin_(Eudyptula_minor).ogg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Little_Penguin_%28Eudyptula_minor%29.ogg",
+      "creator": "Benchill",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "attribution": "Little penguins calling at dusk in New Zealand, recorded by Benchill on 6 December 2007. CC BY 3.0 via Wikimedia Commons.",
+      "modifications": "Converted from Ogg Vorbis to MP3 for browser compatibility. No trimming, filtering or generative edits.",
+      "scientificName": "Eudyptula minor",
+      "durationSeconds": 16.52,
+      "bytes": 112475,
+      "sha256": "9f4eb7825b25f36325aa4dc6f7897cad6e9af53a7d4d71c65546a818baad779b",
+      "verifiedOn": "2026-11-07"
+    },
+    {
+      "id": "nz-tokoeka",
+      "title": "Tokoeka / Southern brown kiwi — Ocean Beach song (XC389022)",
+      "path": "/audio/nz-tokoeka.mp3",
+      "sourceUrl": "https://xeno-canto.org/389022",
+      "archiveSourceUrl": "https://commons.wikimedia.org/wiki/File:Apteryx_australis_-_Southern_Brown_Kiwi_XC389022.mp3",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/75/Apteryx_australis_-_Southern_Brown_Kiwi_XC389022.mp3",
+      "creator": "ZHANG Shen",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Southern brown kiwi song recorded by ZHANG Shen at Ocean Beach, Stewart Island / Rakiura, New Zealand, on 26 September 2017. XC389022; CC BY-SA 3.0 via Wikimedia Commons. The bird was seen; no playback was used.",
+      "modifications": "Original MP3 retained unchanged; no trimming, filtering or generative edits. Any recording adaptations remain under CC BY-SA 3.0.",
+      "scientificName": "Apteryx australis",
+      "durationSeconds": 11.99,
+      "bytes": 486745,
+      "sha256": "fdaefff35917b2655e18c7cad87c68183683b7b879fb8bdca9e7a710e996ce0c",
+      "verifiedOn": "2026-11-07"
     }
   ],
   "unavailableAudio": [
     {
-      "id": "co-yellow-throated-toucan",
-      "commonName": "Yellow-throated Toucan",
-      "reason": "No independently verified recording is currently included."
-    },
-    {
-      "id": "co-golden-headed-quetzal",
-      "commonName": "Golden-headed Quetzal",
-      "reason": "No independently verified recording is currently included."
-    },
-    {
       "id": "co-santa-marta-brushfinch",
       "commonName": "Santa Marta Brushfinch",
-      "reason": "No independently verified recording is currently included."
-    },
-    {
-      "id": "co-santa-marta-parakeet",
-      "commonName": "Santa Marta Parakeet",
       "reason": "No independently verified recording is currently included."
     },
     {

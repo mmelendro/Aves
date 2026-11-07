@@ -1,9 +1,11 @@
 import type { BirdProfile } from "@/content/birds"
 import { newZealandBirds, newZealandEbirdLinks } from "@/content/new-zealand"
+import { expansionBirds, expansionPhotoCredits } from "@/content/new-zealand-expansion"
+import { newZealandSupplementBirds, newZealandSupplementPhotoCredits } from "@/content/new-zealand-supplement"
 
 // Commercial reuse licences verified against the individual Commons file pages
 // on 7 November 2026. These are real photographs, not generated illustrations.
-export const newZealandPhotoCredits = [
+const originalPhotoCredits = [
   {
     id: "nz-kea", scientificName: "Nestor notabilis", region: "South Island",
     image: "/images/destinations/kea-new-zealand.jpg",
@@ -65,8 +67,17 @@ export const newZealandPhotoCredits = [
   },
 ] as const
 
-export const newZealandCarouselBirds: BirdProfile[] = newZealandBirds.map(bird => {
-  const photo = newZealandPhotoCredits.find(entry => entry.scientificName === bird.scientific)
+const newZealandAudio = {
+  "nz-kea": { file: "/audio/nz-kea.mp3", label: "Kea responding to recorded calls · Department of Conservation (NZ)" },
+  "nz-tui": { file: "/audio/nz-tui.mp3", label: "Tūī communication calls · Department of Conservation (NZ)" },
+  "nz-fantail": { file: "/audio/nz-fantail.mp3", label: "North Island fantail feeding calls · Department of Conservation (NZ)" },
+  "nz-takahe": { file: "/audio/nz-takahe.mp3", label: "Takahē song · Department of Conservation (NZ)" },
+  "nz-little-penguin": { file: "/audio/nz-little-penguin.mp3", label: "Little penguins calling at dusk in New Zealand · Benchill" },
+  "nz-tokoeka": { file: "/audio/nz-tokoeka.mp3", label: "Tokoeka song, Ocean Beach, Stewart Island / Rakiura · ZHANG Shen (XC389022)" },
+} as const
+
+const originalCarouselBirds: BirdProfile[] = newZealandBirds.map(bird => {
+  const photo = originalPhotoCredits.find(entry => entry.scientificName === bird.scientific)
   if (!photo) throw new Error(`Missing New Zealand photograph: ${bird.scientific}`)
   const ebirdUrl = newZealandEbirdLinks[bird.scientific]
   return {
@@ -80,6 +91,8 @@ export const newZealandCarouselBirds: BirdProfile[] = newZealandBirds.map(bird =
     localOccurrence: bird.where,
     habitat: `${bird.habitat}. ${bird.note}`,
     image: photo.image,
+    audioFile: newZealandAudio[photo.id].file,
+    audioLabel: newZealandAudio[photo.id].label,
     sources: [
       ...(ebirdUrl ? [{ title: "eBird species guide", url: ebirdUrl }] : []),
       { title: "DOC species and visitor guidance", url: bird.source },
@@ -92,3 +105,6 @@ export const newZealandCarouselBirds: BirdProfile[] = newZealandBirds.map(bird =
     },
   }
 })
+
+export const newZealandCarouselBirds: BirdProfile[] = [...originalCarouselBirds, ...expansionBirds, ...newZealandSupplementBirds]
+export const newZealandPhotoCredits = [...originalPhotoCredits, ...expansionPhotoCredits, ...newZealandSupplementPhotoCredits]
