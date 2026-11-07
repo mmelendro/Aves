@@ -7,6 +7,8 @@
  */
 
 import { useCallback, useId, useState } from "react"
+import type { ReactNode } from "react"
+import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import styles from "@/components/country-hero-explorer.module.css"
 import Link from "next/link"
 import { ArrowRight, ChevronDown } from "lucide-react"
@@ -23,19 +25,19 @@ const smallTerritories = [
   { id: "jervis-bay-territory", label: "Jervis Bay", x: 620, y: 427, line: "597.38,458.06 608,448 620,448" },
 ]
 
-export function AustraliaHomeExplorer() {
+export function AustraliaHomeExplorer({ media, initialRegion }: { media?: ReactNode; initialRegion?: string } = {}) {
   const id = useId()
   // React state remembers the displayed bird. The stable callback avoids unnecessary effect retriggers.
   const [bird, setBird] = useState<BirdProfile>(birdData[0])
   const onBirdChange = useCallback((nextBird: BirdProfile) => setBird(nextBird), [])
   // This featured region is one place to look, not a map of the species' entire distribution.
-  const highlightedRegion = regionOptions.find(region => region.id === bird.regionSlug)
+  const highlightedRegion = regionOptions.find(region => region.id === (initialRegion ?? bird.regionSlug))
 
-  return <div className={styles.layout}>
+  return <BirdDiscoveryContext.Provider value={onBirdChange}><div className={styles.layout}>
     {/* Media comes first on phones; desktop order places the map left and portrait carousel right. */}
     <div className={styles.mediaColumn}>
-      <HomepageBirdCarousel className="w-full max-w-none" autoPlay={false} onBirdChange={onBirdChange} />
-      <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a>. Sightings depend on your route and season.</p>
+      {media ?? <HomepageBirdCarousel className="w-full max-w-none" autoPlay={false} />}
+      {!media && <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a>. Sightings depend on your route and season.</p>}
     </div>
     <div className={styles.mapColumn}>
       <div className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60`}>
@@ -77,5 +79,5 @@ export function AustraliaHomeExplorer() {
       </div>
       <p className="mt-2 text-xs leading-relaxed text-gray-500">Journeys in development. Routes, guides and pricing agreed personally.</p>
     </div>
-  </div>
+  </div></BirdDiscoveryContext.Provider>
 }

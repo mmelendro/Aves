@@ -7,7 +7,8 @@
  * to keep the subject visible. Audio starts only after a visitor activates the sound control.
  */
 
-import { useState, useEffect, useCallback, useRef, useId, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
+import { useState, useContext, useEffect, useCallback, useRef, useId, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
+import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, Volume2, VolumeX, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -47,6 +48,7 @@ export default function HomepageBirdCarousel({
   onBirdChange,
 }: HomepageBirdCarouselProps) {
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
+  const reportBirdToMap = useContext(BirdDiscoveryContext)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
@@ -90,8 +92,11 @@ export default function HomepageBirdCarousel({
 
   useEffect(() => {
     // Notify a parent explorer after the selected bird changes, rather than setting parent state during render.
-    if (currentBird) onBirdChange?.(currentBird)
-  }, [currentBird, onBirdChange])
+    if (currentBird) {
+      onBirdChange?.(currentBird)
+      if (reportBirdToMap !== onBirdChange) reportBirdToMap?.(currentBird)
+    }
+  }, [currentBird, onBirdChange, reportBirdToMap])
 
   // Only the selected bird owns an audio element. Changing birds stops playback.
   useEffect(() => {

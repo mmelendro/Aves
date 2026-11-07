@@ -3,6 +3,7 @@
  */
 .layout {
   display: grid;
+  text-align: left;
   align-items: start;
   gap: 1.75rem;
   width: 100%;
