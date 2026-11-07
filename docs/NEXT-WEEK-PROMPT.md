@@ -2,7 +2,7 @@
 
 **Updated: 8 November 2026 (Sydney).** Improve https://aves.bio through small, tested releases. This brief and its linked change inbox preserve the agreed work between chats.
 
-**Checkpoint:** AVES-008 (speaker highlight) and AVES-001a (Santa Marta editorial pilot) are published and verified. Pause after this completed increment; the broader editorial task and new AVES-011/012 design requests remain queued. Preserve completed work when resuming.
+**Checkpoint:** AVES-008 (speaker highlight), AVES-001a (Santa Marta editorial pilot) and AVES-009 (Google sign-in with info@aves.bio support) are published and verified. Pause after the Google increment; the broader editorial task and AVES-011/012 design requests remain queued. Preserve completed work when resuming.
 
 ## Working mode and project
 
@@ -66,7 +66,7 @@ Use the corresponding inbox entries as the detailed acceptance criteria:
 - **Resizable duo:** a bounded, accessible draggable divider, automatically responsive panels and overall pair, useful crops and undistorted maps; retain narrow-phone stacking. Follow the [W3C splitter pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/).
 - **NZ regions:** dedicated South Island, North Island and Rakiura pages with the shared design, locally valid bird carousels/calls, source notes and coherent old/new navigation. Keep development status and backend eligibility explicit.
 - **Audio cue (AVES-008, verified):** preserve the speaker icon and published emerald availability accent, distinct playback state, accessible labels and visitor-initiated playback. Do not reimplement this completed step.
-- **Google sign-in:** verify the [recorded setup](https://github.com/mmelendro/Aves/blob/australia/preview/docs/social-sign-in.md), restore/select the required business support address, and complete real account/redirect/session tests before showing the button. Keep personal Gmail hidden and Facebook deferred. Verify current restoration options and cost before any new billing commitment.
+- **Google sign-in (AVES-009, verified):** preserve the working shared-account flow and `info@aves.bio` public support address. Read the [release/setup record](https://github.com/mmelendro/Aves/blob/australia/preview/docs/social-sign-in.md) before changing provider settings. The mailbox now has the approved CAD $11/month plus tax flexible-plan licence. Keep personal Gmail hidden and Facebook deferred. Google brand/display-name verification and a friendlier landing for provider-expired state remain separately scoped follow-ups; do not reimplement working login or start another billing change.
 
 ## Finish each batch
 

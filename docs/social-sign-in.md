@@ -6,15 +6,23 @@ Google web client “AVES shared website sign-in” belongs to AVES Website (`ax
 
 **info@aves.bio** has been saved as Google's public support address. With the owner's explicit approval, this existing business account was granted only OAuth Config Editor access to the current Google project. Its Google Workspace Business Starter mailbox was restored and its licence assignment verified: one user, CAD $11/month before applicable taxes, monthly flexible plan. The existing Canadian billing profile was retained. No annual commitment or other paid product was added. External mailbox delivery has not yet been independently tested. Personal Gmail remains private; do not replace the public support address with it.
 
-Controlled local acceptance passed: the owner approved the basic identity grant; a fresh Google login opened the existing account and loaded its saved test plan/proposal. A second returning-user login also succeeded. The country/valid-region prefill and sign-out were verified. A synthetic cancellation callback preserved the safe return destination. The earlier authorization left waiting for owner approval expired; restarting with fresh state resolved that expected one-time-state failure. Production activation and live verification are the remaining release steps. Facebook remains deferred. Existing email/password login remains available.
+**Google sign-in is live at https://aves.bio/account/sign-in and on signup.** Production `AVES_OAUTH_PROVIDERS=google` is a Vercel Config setting; the source remains disabled by default in unconfigured environments. Facebook remains deferred and hidden. Existing email/password entry and recovery remain available.
+
+Deployed application commit: `4600240` on `australia/preview`. Production deployment: `dpl_BzjBrpRJNjJCXcgx1kMMUJqyUS21` ([exact build](https://aves-australia-f4ohjtv3a-mmelendro-9273s-projects.vercel.app)). The main-site application was not redeployed; its existing `/account` proxy serves the updated shared backend.
+
+Controlled local acceptance passed: the owner approved the basic identity grant; fresh and returning Google logins opened the existing account and loaded its saved test plan/proposal. Colombia/Central Andes prefill, sign-out and a synthetic cancellation callback passed. Live Google sign-in then returned to `/account?country=australia&region=tasmania`, with Australia/Tasmania selected, the existing saved plan/proposal loaded, and the session retained after reload. Live sign-out passed. No trip, quote, proposal, booking or email was created by these checks.
+
+Validation: 68 relevant automated cases across the OAuth, shared-account UI, account-security and session-migration suites passed; the 32 affected form/OAuth cases were rerun after the button edit. Strict TypeScript and Vercel's production build passed. Public destination/privacy/terms pages returned 200. Cookie-aware checks confirmed signup shows Google while password recovery does not; Facebook stays hidden. A deployment-scoped 15-minute runtime scan returned no error/fatal entries. This does not constitute a new email/password signup/recovery delivery test or a test with a second Google identity.
+
+The earlier authorization left waiting for owner approval expired; restarting with fresh state resolved the one-time-state failure. Provider failures before the AVES callback can still use Supabase's existing Australian Site URL as a fallback; improving that expired-state landing is a separate hardening task. The Site URL/email templates were preserved. Both temporary port-3001 test callback rules were removed; the production OAuth rule and original six callback rules remain.
 
 Google currently displays the shared Supabase Auth hostname on its account/consent screens. Google brand verification is separate from the working OAuth configuration and is not yet complete. Do not describe AVES display-name verification as approved.
 
 The Google button uses unmodified [official light-theme artwork](https://developers.google.com/static/identity/images/signin-assets.zip), saved as `public/google-sign-in.svg`. The lettering is outlined in the asset, so the button needs no remote font or Google script. Its accessible name and disabled/focus states remain native button behaviour.
 
-The sections below describe the activation procedure once the mailbox and provider testing are complete.
+The sections below describe configuration and controlled future provider activation.
 
-Application support is prepared but disabled by default. Keep the server-only environment setting blank in production until provider registration and controlled end-to-end tests pass:
+The code defaults to no social providers. Use a blank value to hide all social buttons in an environment, and redeploy; the tested production value is `google`:
 
 ```dotenv
 AVES_OAUTH_PROVIDERS=
