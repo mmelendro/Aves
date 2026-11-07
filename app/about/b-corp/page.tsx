@@ -1,9 +1,17 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, ExternalLink, Leaf, Target, Users, Globe } from "lucide-react"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
+import { canonicalUrl } from "@/lib/site-path"
+
+export const metadata: Metadata = {
+  title: "Our B Corp Journey",
+  description: "AVES is pursuing B Corp certification and is not yet certified. Explore our planned preparation and review milestones.",
+  alternates: { canonical: canonicalUrl("/about/b-corp") },
+}
 
 const preparationPriorities = [
   {
