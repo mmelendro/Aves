@@ -1,6 +1,25 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — Santa Marta editorial pilot, 8 November 2026 (Sydney)
+## Current production — Google sign-in, 8 November 2026 (Sydney)
+
+**Published, verified and paused after AVES-009.** Do not start another backlog item without the owner's next instruction.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `98bb838` | `dpl_HZhcaPwoRZP67fumjvaV4k3Ymkyq` |
+| Australia and shared accounts | `australia/preview` | `4600240` | `dpl_BzjBrpRJNjJCXcgx1kMMUJqyUS21` |
+
+Google sign-in is live at [the shared account](https://aves.bio/account/sign-in) and signup. Google's public support email is `info@aves.bio`; the owner approved its limited OAuth Config Editor access and restoration of one Workspace Business Starter mailbox licence at CAD $11/month plus tax on the flexible plan. Licence assignment was verified; external mailbox delivery was not independently retested. Facebook remains deferred and hidden. Provider credentials stay only in Supabase, outside GitHub/browser code. Production `AVES_OAUTH_PROVIDERS=google` contains a provider name, not a credential.
+
+The existing owner account loaded its existing saved test plan/proposal after live Google login. Australia/Tasmania prefill, session persistence after reload and sign-out passed. Local fresh/returning login, Colombia/Central Andes and a synthetic cancellation callback also passed. The 68 relevant automated cases, strict TypeScript and the production build passed. Signup/recovery visibility and public country/privacy/terms checks passed. No error/fatal entries were returned by the new deployment's 15-minute runtime scan. No customer plans, quotes or bookings were created by these tests. The two temporary local test callback rules were removed.
+
+[Exact deployed account build](https://aves-australia-f4ohjtv3a-mmelendro-9273s-projects.vercel.app). The global application was not redeployed; its existing `/account` proxy serves the updated backend. Git auto-deployment remains disabled. Documentation-only commits may advance branch heads beyond the deployed application commits.
+
+Google still displays the Supabase Auth hostname: AVES brand/display-name verification is not complete. An expired provider state before the website callback may still land on the existing Australian fallback page; a friendlier stale-link landing is a follow-up. Fresh login is verified; do not treat these follow-ups as an unimplemented login feature. Email/password remains available, but new email delivery and a second Google identity were not independently exercised in this release. Details: [Google setup record](https://github.com/mmelendro/Aves/blob/australia/preview/docs/social-sign-in.md).
+
+The existing speaker highlight and Santa Marta editorial pilot remain published. Homepage carousels, matching explorer cards, the world map, richer region libraries and itinerary features remain queued in the living brief/change inbox. Workspace evidence: `audit/evidence/google-sign-in-live-2026-11-08.png` and `google-sign-in-release-checks-2026-11-08.json`.
+
+## Historical Santa Marta editorial pilot, 8 November 2026 (Sydney)
 
 **Paused after the completed incremental release.** The homepage country-card carousel and explorer-style requests were added to planning only; do not start another batch without the owner's next instruction.
 
