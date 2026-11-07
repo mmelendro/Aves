@@ -181,6 +181,6 @@ export function CheckEmail({ next = "/account" }: { next?: string }) {
     <p className="text-gray-600 mb-8">Already confirmed your email or have an account? You can sign in to continue.</p>
     <Button asChild size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"><Link href={accountEntryHref("/account/sign-in", next)}><CheckCircle className="w-4 h-4 mr-2" />Continue to Sign In</Link></Button>
     <form onSubmit={resend} className="mt-8 pt-6 border-t border-gray-200 space-y-4"><fieldset disabled={busy} className="space-y-4"><legend className="font-semibold text-gray-900 mb-3">Need a New Confirmation Link?</legend><div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">Account Email Address</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div><Button type="submit" variant="outline" className="w-full">{busy ? "Requesting…" : "Request a Confirmation Link"}</Button></fieldset>{feedback && <p role={failed ? "alert" : "status"} className={`text-sm ${failed ? "text-red-700" : "text-emerald-700"}`}>{feedback}</p>}</form>
-    <p className="text-sm text-gray-500 mt-6">Need help? <a href="mailto:mmelendro@gmail.com" className="text-emerald-700 underline">Contact AVES</a>.</p>
+    <p className="text-sm text-gray-500 mt-6">Need help? <Link href="/contact?topic=account#inquiry" className="text-emerald-700 underline">Contact AVES</Link>.</p>
   </CardContent></Card>
 }

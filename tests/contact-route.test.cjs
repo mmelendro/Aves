@@ -199,6 +199,18 @@ test("shared contact rejects foreign origins and explicit cross-site before stor
   }
 })
 
+test("public contact errors never expose the private notification inbox", async () => {
+  for (const status of [400, 409, 429, 503]) {
+    const h = harness(accepted, { CONTACT_EMAIL: "private-owner@example.com" }, {
+      save() { throw new ContactStoreError(status) },
+    })
+    const response = await h.submit()
+    assert.equal(response.status, status)
+    assert.doesNotMatch(await response.text(), /@|mailto:/)
+    assert.equal(h.calls.length, 0)
+  }
+})
+
 test("local contact accepts only same-port same-scheme loopback aliases", async () => {
   for (const [origin, status] of [["http://127.0.0.1:3000", 200], ["http://127.0.0.1:3001", 403], ["https://127.0.0.1:3000", 403], ["http://attacker.test:3000", 403]]) {
     const h = harness()

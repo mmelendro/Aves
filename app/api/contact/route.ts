@@ -124,12 +124,12 @@ export async function POST(req: NextRequest) {
       return reply({ error: "This request has changed. Please refresh the form and submit your latest details." }, 409)
     }
     if (error instanceof ContactStoreError && error.status === 429) {
-      return NextResponse.json({ error: "Please wait 15 minutes before sending another request, or email mmelendro@gmail.com." }, {
+      return NextResponse.json({ error: "Please wait 15 minutes before sending another request." }, {
         status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "900" },
       })
     }
     console.error("AVES contact storage did not confirm acceptance")
-    return reply({ error: "We couldn't confirm that your request was saved. Please try again or email mmelendro@gmail.com." }, 503)
+    return reply({ error: "We couldn't confirm that your request was saved. Please try again shortly." }, 503)
   }
 
   const storedResponse = () => reply({ success: true, status: "stored", intent: payload.intent, country: request.data.country }, 200)

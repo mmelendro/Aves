@@ -1,5 +1,15 @@
 # Google and Facebook sign-in
 
+## Provider setup status — 7 November 2026
+
+Google web client “AVES shared website sign-in” was created in AVES Website (`axial-coyote-514010-m2`) and its secret saved privately in the Google provider settings of AVES Shared Accounts. Provider enabled; nonce checks remain enabled and accounts without email remain disallowed. Google application remains in **Testing**. Website, privacy and terms links were saved in Google branding. No Google credentials are stored in this repository.
+
+The owner now requires **info@aves.bio** as the publicly visible Google support address; personal Gmail must not be exposed on the website. That managed Google Workspace mailbox requires restoration. Its prior Business Plus subscription was cancelled in November 2025; current restoration/licence status must be checked in Google Admin before any billing action. The address is not selectable in the current Cloud session. Do not publish Google sign-in using the personal Gmail support address.
+
+Production `AVES_OAUTH_PROVIDERS` remains unset. End-to-end Google sign-in and callback-query allowlist verification remain outstanding. Facebook is deferred at the user's request. Existing email/password login remains available.
+
+The sections below describe the activation procedure once the mailbox and provider testing are complete.
+
 Application support is prepared but disabled by default. Keep the server-only environment setting blank in production until provider registration and controlled end-to-end tests pass:
 
 ```dotenv

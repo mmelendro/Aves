@@ -46,9 +46,9 @@ export function Footer({ transparent = false }: FooterProps) {
             <p className="max-w-sm text-sm leading-relaxed text-gray-200">
               Birding, nature and custom trip planning across Australia.
             </p>
-            <a href="mailto:mmelendro@gmail.com" className={`mt-3 ${linkClassName}`}>
-              mmelendro@gmail.com
-            </a>
+            <Link href="/contact#inquiry" className={`mt-3 ${linkClassName}`}>
+              Contact AVES
+            </Link>
           </div>
 
           <nav aria-label="Explore Australia">
