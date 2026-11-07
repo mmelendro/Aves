@@ -2,6 +2,8 @@
 
 **Updated: 8 November 2026 (Sydney).** Improve https://aves.bio through small, tested releases. This brief and its linked change inbox preserve the agreed work between chats.
 
+**Checkpoint:** AVES-008 (subtle speaker availability highlight) is published and verified. Implementation is paused after this release; await the owner's next explicit instruction. Preserve this completed behaviour when resuming the remaining work.
+
 ## Working mode and project
 
 Updating this brief is planning only. Website implementation remains paused until I explicitly resume it. When resumed, complete the selected batch through verification, GitHub sync and the established release process. Ask only for missing decisions, required access or consequential actions outside existing authorisation.
@@ -60,7 +62,7 @@ Build supplier records around documented relationships, services, locations, sea
 Use AVES-006–009 in the inbox as the detailed acceptance criteria:
 - **Resizable duo:** a bounded, accessible draggable divider, automatically responsive panels and overall pair, useful crops and undistorted maps; retain narrow-phone stacking. Follow the [W3C splitter pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/).
 - **NZ regions:** dedicated South Island, North Island and Rakiura pages with the shared design, locally valid bird carousels/calls, source notes and coherent old/new navigation. Keep development status and backend eligibility explicit.
-- **Audio cue:** owner chose the speaker icon. Add a discreet emerald availability accent; distinguish playback states and preserve accessible labels, reduced-motion support and visitor-initiated playback.
+- **Audio cue (AVES-008, verified):** preserve the speaker icon and published emerald availability accent, distinct playback state, accessible labels and visitor-initiated playback. Do not reimplement this completed step.
 - **Google sign-in:** verify the [recorded setup](https://github.com/mmelendro/Aves/blob/australia/preview/docs/social-sign-in.md), restore/select the required business support address, and complete real account/redirect/session tests before showing the button. Keep personal Gmail hidden and Facebook deferred. Verify current restoration options and cost before any new billing commitment.
 
 ## Finish each batch
