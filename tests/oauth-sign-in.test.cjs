@@ -26,7 +26,7 @@ for (const next of ["/account?country=colombia&region=pacific", "/australia/acco
     const response = await route.run()
     assert.deepEqual(route.calls, ["synthetic-only"])
     assert.equal(response.status, 303)
-    assert.equal(response.headers.get("location"), next.startsWith("/australia/") ? next : `/australia${next}`)
+    assert.equal(response.headers.get("location"), next.replace(/^\/australia(?=\/account)/, ""))
     assert.equal(response.headers.get("cache-control"), "private, no-store")
     assert.doesNotMatch(response.headers.get("location"), /synthetic|proxy/)
   })
@@ -35,7 +35,7 @@ for (const next of ["/account?country=colombia&region=pacific", "/australia/acco
 test("OAuth success cannot redirect to an offsite or traversed destination", async () => {
   for (const next of ["https://attacker.test", "//attacker.test", "/%2f%2fattacker.test", "/account/../../outside"]) {
     const response = await callback({ flow: "oauth", code: "synthetic-only", next }).run()
-    assert.equal(response.headers.get("location"), "/australia/account")
+    assert.equal(response.headers.get("location"), "/account")
   }
 })
 
@@ -50,9 +50,9 @@ for (const [params, expected] of [
     const response = await route.run()
     const location = response.headers.get("location")
     const parsed = new URL(location, "https://aves.bio")
-    assert.equal(parsed.pathname, "/australia/account/sign-in")
+    assert.equal(parsed.pathname, "/account/sign-in")
     assert.equal(parsed.searchParams.get("error"), expected)
-    assert.equal(parsed.searchParams.get("next"), "/australia/account?country=colombia&region=llanos")
+    assert.equal(parsed.searchParams.get("next"), "/account?country=colombia&region=llanos")
     assert.ok(location.endsWith("#"), "clear any original provider error fragment")
     assert.doesNotMatch(location, /private-provider|must-not-exchange|error_description/)
     assert.equal(response.headers.get("cache-control"), "private, no-store")
@@ -66,12 +66,12 @@ test("OAuth code rejection and transport failure preserve only a sanitized retry
     const location = response.headers.get("location")
     const params = new URL(location, "https://aves.bio").searchParams
     assert.equal(params.get("error"), "oauth")
-    assert.equal(params.get("next"), "/australia/account")
+    assert.equal(params.get("next"), "/account")
     assert.doesNotMatch(location, /private|attacker/)
   }
 })
 
 test("email confirmation failure retains its existing message route", async () => {
   const response = await callback({ next: "/account" }).run()
-  assert.equal(response.headers.get("location"), "/australia/account/sign-in?error=confirmation")
+  assert.equal(response.headers.get("location"), "/account/sign-in?error=confirmation")
 })

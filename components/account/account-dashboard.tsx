@@ -1,14 +1,13 @@
 "use client"
 
 import { useCallback, useEffect, useId, useRef, useState } from "react"
-import Link from "next/link"
+import { SiteLink as Link } from "@/components/site-link"
 import { Bird, Edit3, LogOut, MapPin, Plus, RefreshCw, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { createClient } from "@/lib/supabase/client"
-import { sitePath } from "@/lib/site-path"
 import { AccountRequestError, accountRequest, dateLabel, errorMessage, countryLabel, regionSummary, type Proposal, type TripPlan } from "./account-api"
 import { ProposalCard } from "./proposal-card"
 import { TripPlanEditor } from "./trip-plan-editor"
@@ -59,14 +58,14 @@ export function AccountDashboard({ email, initialPlan }: { email: string; initia
       setIsAdmin(saved.isAdmin === true)
     } catch (error) {
       setIsAdmin(false)
-      if (error instanceof AccountRequestError && error.status === 401) window.location.assign(sitePath(accountEntryHref("/account/sign-in", returnPath)))
+      if (error instanceof AccountRequestError && error.status === 401) window.location.assign(accountEntryHref("/account/sign-in", returnPath))
       else setError(errorMessage(error))
     } finally { setLoading(false) }
   }, [returnPath])
   useEffect(() => { void load() }, [load])
   async function signOut() {
     setSigningOut(true); setError("")
-    try { const { error } = await createClient().auth.signOut({ scope: "local" }); if (error) throw error; window.location.replace(sitePath("/account/sign-in")) }
+    try { const { error } = await createClient().auth.signOut({ scope: "local" }); if (error) throw error; window.location.replace("/account/sign-in") }
     catch (error) { setError(errorMessage(error)); setSigningOut(false) }
   }
   function replacePlan(plan: TripPlan) { setPlans(current => [plan, ...current.filter(item => item.id !== plan.id)]) }

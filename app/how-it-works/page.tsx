@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Link from "next/link"
+import { SiteLink as Link } from "@/components/site-link"
 import { ArrowRight } from "lucide-react"
 import { PageShell } from "@/components/page-shell"
 import { PlanningSteps } from "@/components/planning-steps"

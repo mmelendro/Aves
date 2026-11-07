@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { SiteLink as Link } from "@/components/site-link"
 import { usePathname } from "next/navigation"
 import { BrandMark } from "@/components/brand-mark"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"

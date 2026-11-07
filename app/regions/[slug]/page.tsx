@@ -42,7 +42,7 @@ export default async function RegionPage({ params }: Props) {
   const inquiryHref = `/contact?region=${region.id}`
 
   return (
-    <PageShell path={`/regions/${region.id}`} title={`Birding in ${region.state}`} description={region.description} eyebrow="Australian regions">
+    <PageShell path={`/regions/${region.id}`} title={`Birding in ${region.state}`} description={region.description} eyebrow="Australian regions" media={<RegionalBirdCarousel regionId={region.id} compact />}>
       <section className="pb-16 lg:pb-20" aria-labelledby="region-focus">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="py-6 text-sm text-gray-600">
@@ -55,14 +55,7 @@ export default async function RegionPage({ params }: Props) {
             </ol>
           </nav>
 
-          <div className="grid lg:grid-cols-5 gap-8 items-stretch">
-            <figure className="lg:col-span-3 flex flex-col overflow-hidden rounded-2xl bg-emerald-50 shadow-lg">
-              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px] lg:flex-1">
-                <Image src={sitePath(region.image)} alt={region.alt} fill priority sizes="(max-width: 1023px) 100vw, 60vw" className="object-cover" />
-              </div>
-              {region.photoCaption && <figcaption className="bg-white px-5 py-4 text-sm leading-relaxed text-gray-600">{region.photoCaption} <Link href="/credits" className="text-emerald-800 underline underline-offset-4">Photography credits</Link>.</figcaption>}
-            </figure>
-            <div className="lg:col-span-2 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-6 sm:p-8 flex flex-col justify-center">
+          <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-6 sm:p-8">
               <p className="text-sm font-semibold text-emerald-800 flex items-center gap-2"><MapPin className="h-4 w-4" aria-hidden="true" />Our focus within {region.state}</p>
               <h2 id="region-focus" className="mt-3 text-2xl sm:text-3xl font-bold text-gray-900">{region.landscape}</h2>
               <p className="mt-5 text-gray-700 leading-relaxed">{region.detail}</p>
@@ -70,7 +63,6 @@ export default async function RegionPage({ params }: Props) {
                 <Link href={inquiryHref}>Discuss {region.state}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link>
               </Button>
               <p className="mt-3 text-sm text-gray-600">A planning conversation, with arrangements confirmed personally.</p>
-            </div>
           </div>
 
           <dl className="mt-8 grid md:grid-cols-2 gap-5">
@@ -113,8 +105,6 @@ export default async function RegionPage({ params }: Props) {
             <h2 id="birds-heading" className="text-2xl sm:text-3xl font-bold text-gray-900">Birds worth getting to know</h2>
             <p className="mt-4 text-gray-600 leading-relaxed">A few birds connected with these habitats. They offer a way into the landscape, not a promised sightings list.</p>
           </div>
-          <RegionalBirdCarousel regionId={region.id} />
-          <h3 className="text-xl font-semibold text-gray-900 mb-5">More birds to ask us about</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {region.birds.map(bird => <article key={bird.name} className="rounded-2xl border border-emerald-100 p-6 sm:p-7">
               <Bird className="h-7 w-7 text-emerald-700 mb-4" aria-hidden="true" />
@@ -129,6 +119,12 @@ export default async function RegionPage({ params }: Props) {
       <section className="bg-gray-50 py-16 lg:py-20" aria-labelledby="places-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 gap-10 lg:gap-14">
           <div className="lg:col-span-3">
+            <figure className="mb-8 overflow-hidden rounded-2xl bg-emerald-50 shadow-md">
+              <div className="relative aspect-[16/9]">
+                <Image src={sitePath(region.image)} alt={region.alt} fill sizes="(max-width: 1023px) 100vw, 60vw" className="object-cover" />
+              </div>
+              {region.photoCaption && <figcaption className="bg-white px-5 py-4 text-sm leading-relaxed text-gray-600">{region.photoCaption} <Link href="/credits" className="text-emerald-800 underline underline-offset-4">Photography credits</Link>.</figcaption>}
+            </figure>
             <h2 id="places-heading" className="text-2xl sm:text-3xl font-bold text-gray-900">Places to shape the conversation</h2>
             <div className="mt-8 space-y-7">
               {region.places.map(place => <article key={place.name} className="border-l-2 border-emerald-300 pl-5">

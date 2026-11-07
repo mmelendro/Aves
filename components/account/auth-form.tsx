@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useId, useRef, useState } from "react"
-import Link from "next/link"
+import { SiteLink as Link } from "@/components/site-link"
 import { ArrowRight, CheckCircle, LockKeyhole, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -100,11 +100,11 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
       if (mode === "sign-in") {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw new Error(error.code === "email_not_confirmed" ? "Please confirm your email before signing in. Check your inbox for your account confirmation link." : "We couldn't sign you in. Check your email and password, or use the password reset link.")
-        window.location.assign(sitePath(destination))
+        window.location.assign(destination)
       } else if (mode === "sign-up") {
         const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: callbackUrl("/account") } })
         if (error) throw new Error(error.message || "We couldn't create your account. Please try again later.")
-        window.location.assign(sitePath(accountEntryHref("/account/check-email", destination)))
+        window.location.assign(accountEntryHref("/account/check-email", destination))
       } else if (mode === "forgot-password") {
         const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: callbackUrl("/account/reset-password") })
         if (error) throw new Error("We couldn't request a reset link right now. Please try again later.")

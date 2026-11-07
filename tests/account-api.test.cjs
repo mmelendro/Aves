@@ -376,7 +376,7 @@ test("issuing a proposal commits before notifying only its server-returned clien
   assert.equal(issued.proposal.notificationStatus, "accepted")
   assert.deepEqual(h.events, ["store", "email"])
   assert.equal(h.notices[0][2], "verified@example.test")
-  assert.match(h.notices[0][4], /https:\/\/aves.bio\/australia\/account/)
+  assert.match(h.notices[0][4], /https:\/\/aves.bio\/account/)
   assert.doesNotMatch(h.notices[0][4], /token=|secret=|proposalId=/)
 })
 

@@ -248,14 +248,14 @@ test("successful sign-in returns to the intended Colombia plan", async () => {
   const destinations = []
   const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-in", next: "/account?country=colombia&region=llanos" }, { mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signInWithPassword: async () => ({ error: null }) } }) } }, window: { location: { assign: value => destinations.push(value) } } })
   await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { email: "test@example.test", password: "test-only-password" } } })
-  assert.deepEqual(destinations, ["/australia/account?country=colombia&region=llanos"])
+  assert.deepEqual(destinations, ["/account?country=colombia&region=llanos"])
 })
 
 test("sign-in ignores an offsite return even after successful authentication", async () => {
   const destinations = []
   const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-in", next: "https://attacker.test/collect" }, { mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signInWithPassword: async () => ({ error: null }) } }) } }, window: { location: { assign: value => destinations.push(value) } } })
   await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { email: "test@example.test", password: "test-only-password" } } })
-  assert.deepEqual(destinations, ["/australia/account"])
+  assert.deepEqual(destinations, ["/account"])
 })
 
 test("signup preserves the entry link but keeps the already configured email callback", async () => {

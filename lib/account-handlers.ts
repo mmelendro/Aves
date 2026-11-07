@@ -8,6 +8,7 @@ import { accountBody, accountHandler, requestKey } from "@/lib/account-http"
 import { accountRpc } from "@/lib/account-service"
 import { notifyAccount } from "@/lib/account-notifications"
 import { canonicalUrl } from "@/lib/site-path"
+import { accountUrl } from "@/lib/account-path"
 import { countryLabels, isEnabledTripCountry, isCountryRegion, isOtherCountryRegion, DEFAULT_TRIP_COUNTRY } from "@/content/trip-options"
 import { createPlanSchema, updatePlanSchema, quoteSchema, revisionSchema, createProposalSchema, updateProposalSchema, quoteStatusSchema, mapPlan, mapProposal, type PlanRow, type ProposalRow } from "@/lib/account-models"
 
@@ -177,7 +178,7 @@ export const proposalSend = (request: Request, id: string) => accountHandler(asy
   })
   if (result.issued) {
     const notificationStatus = await notifyAccount("proposal", result.proposal.id, result.contact_email, "Your AVES proposal is ready",
-      `Hello ${result.contact_name},\n\nYour journey proposal (version ${result.proposal.version}) is ready to review in your private account. Prices are quoted in Australian dollars (AUD).\n\nSign in to view the itinerary and price: ${canonicalUrl("/account")}\n\nThis proposal does not confirm a booking or take a payment. Reply to mmelendro@gmail.com to discuss the details.\n\nAVES`).catch(() => undefined)
+      `Hello ${result.contact_name},\n\nYour journey proposal (version ${result.proposal.version}) is ready to review in your private account. Prices are quoted in Australian dollars (AUD).\n\nSign in to view the itinerary and price: ${accountUrl()}\n\nThis proposal does not confirm a booking or take a payment. Reply to mmelendro@gmail.com to discuss the details.\n\nAVES`).catch(() => undefined)
     if (notificationStatus) result.proposal.notification_status = notificationStatus
   }
   return { success: true, status: "sent", proposal: mapProposal(result.proposal) }

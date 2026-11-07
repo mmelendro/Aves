@@ -38,11 +38,11 @@ test("auth transport/configuration errors fail closed without exposing details",
 
 test("auth redirects allow only internal account/admin destinations with a single base path", () => {
   const { safeAuthNext } = loader()("lib/auth-redirect.ts")
-  assert.equal(safeAuthNext("/account/reset-password"), "/australia/account/reset-password")
-  assert.equal(safeAuthNext("/australia/account"), "/australia/account")
+  assert.equal(safeAuthNext("/account/reset-password"), "/account/reset-password")
+  assert.equal(safeAuthNext("/australia/account"), "/account")
   assert.equal(safeAuthNext("/admin/quotes"), "/australia/admin/quotes")
   for (const input of [null, "https://attacker.test", "//attacker.test", "/\\attacker.test", "/%2f%2fattacker.test", "/account/../../outside", "/australia/accountant", "/contact", "/account\nX:bad"]) {
-    assert.equal(safeAuthNext(input), "/australia/account", String(input))
+    assert.equal(safeAuthNext(input), "/account", String(input))
   }
 })
 
@@ -52,7 +52,7 @@ test("PKCE callback strips credentials and uses a relative redirect on a proxy o
   const response = await load("app/auth/callback/route.ts").GET(new NextRequest("https://backend.example.test/australia/auth/callback?code=synthetic-code&next=/account/reset-password"))
   assert.deepEqual(calls, ["synthetic-code"])
   assert.equal(response.status, 303)
-  assert.equal(response.headers.get("location"), "/australia/account/reset-password")
+  assert.equal(response.headers.get("location"), "/account/reset-password")
   assert.equal(response.headers.get("cache-control"), "private, no-store")
 })
 
@@ -62,27 +62,65 @@ test("invalid auth confirmation neither exchanges arbitrary token types nor refl
   const route = load("app/auth/confirm/route.ts")
   const invalid = await route.GET(new NextRequest("https://aves.bio/australia/auth/confirm?token_hash=private-token&type=invite&next=//attacker.test"))
   assert.equal(calls.length, 0)
-  assert.equal(invalid.headers.get("location"), "/australia/account/sign-in?error=confirmation")
+  assert.equal(invalid.headers.get("location"), "/account/sign-in?error=confirmation")
   const recovery = await route.GET(new NextRequest("https://aves.bio/australia/auth/confirm?token_hash=synthetic-token&type=recovery&next=/admin/quotes"))
   assert.deepEqual(calls, [{ token_hash: "synthetic-token", type: "recovery" }])
-  assert.equal(recovery.headers.get("location"), "/australia/account/reset-password")
+  assert.equal(recovery.headers.get("location"), "/account/reset-password")
 })
 
-test("middleware refreshes verified sessions while preserving private cache headers and AU cookie path", async () => {
+test("forwarded shared account refreshes verified root sessions without a redirect loop", async () => {
   let options
   const load = loader({ env: { NODE_ENV: "production", NEXT_PUBLIC_SUPABASE_URL: "https://project.example.test", NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_synthetic_only" }, mocks: {
     "@supabase/ssr": { createServerClient: (_url, _key, supplied) => {
       options = supplied
-      return { auth: { getUser: async () => { supplied.cookies.setAll([{ name: "aves-au-auth", value: "synthetic", options: { path: "/" } }], { "Cache-Control": "private, no-store", Pragma: "no-cache" }); return { data: { user: verified }, error: null } } } }
+      return { auth: { getUser: async () => { supplied.cookies.setAll([{ name: "aves-auth", value: "synthetic", options: { path: "/australia" } }], { "Cache-Control": "private, no-store", Pragma: "no-cache" }); return { data: { user: verified }, error: null } } } }
     } },
   } })
-  const response = await load("middleware.ts").middleware(new NextRequest("https://aves.bio/australia/account"))
-  assert.equal(options.cookieOptions.path, "/australia")
-  assert.equal(options.cookieOptions.name, "aves-au-auth")
+  const response = await load("middleware.ts").middleware(new NextRequest("https://aves.bio/australia/account", { headers: { "x-aves-account-proxy": "1" } }))
+  assert.equal(response.status, 200)
+  assert.equal(response.headers.get("location"), null)
+  assert.equal(options.cookieOptions.path, "/")
+  assert.equal(options.cookieOptions.name, "aves-auth")
   assert.equal(options.cookieOptions.secure, true)
-  assert.equal(response.cookies.get("aves-au-auth").path, "/australia")
+  assert.equal(response.cookies.get("aves-auth").path, "/")
   assert.equal(response.headers.get("cache-control"), "private, no-store")
   assert.equal(response.headers.get("pragma"), "no-cache")
+})
+
+test("old Australian account links redirect to the shared URL with trip intent preserved", async () => {
+  const load = loader()
+  for (const suffix of ["?country=colombia&region=pacific", "/sign-in?next=%2Faccount%3Fcountry%3Dcolombia", "/reset-password"]) {
+    const response = await load("middleware.ts").middleware(new NextRequest(`https://aves.bio/australia/account${suffix}`))
+    assert.equal(response.status, 307)
+    assert.equal(response.headers.get("location"), `https://aves.bio/account${suffix}`)
+    assert.equal(response.headers.get("cache-control"), "private, no-store")
+    assert.equal(response.cookies.get("aves-session-checked").httpOnly, true)
+  }
+})
+
+test("middleware passes migrated credentials to callbacks and preserves fresher session writes", async () => {
+  let seen
+  const load = loader({ env: { NODE_ENV: "production", NEXT_PUBLIC_SUPABASE_URL: "https://project.example.test", NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_synthetic_only" }, mocks: {
+    "@/lib/supabase/session-migration": { migrateLegacySessionCookies: async () => ({ migrated: true, cookies: [
+      { name: "aves-auth", value: "migrated-session", options: { path: "/", secure: true } },
+      { name: "aves-auth-code-verifier", value: "migrated-verifier", options: { path: "/", secure: true } },
+      { name: "aves-au-auth", value: "", options: { path: "/australia", maxAge: 0 } },
+    ] }) },
+    "@supabase/ssr": { createServerClient: (_url, _key, supplied) => ({ auth: { getUser: async () => {
+      seen = supplied.cookies.getAll()
+      supplied.cookies.setAll([{ name: "aves-auth", value: "newer-session", options: { path: "/" } }], { "Cache-Control": "private, no-store" })
+      return { data: { user: verified }, error: null }
+    } } }) },
+  } })
+  const request = new NextRequest("https://aves.bio/australia/auth/callback?code=synthetic-only", { headers: { cookie: "aves-au-auth=legacy-session" } })
+  const response = await load("middleware.ts").middleware(request)
+  assert.equal(seen.find(cookie => cookie.name === "aves-auth").value, "migrated-session")
+  assert.equal(seen.find(cookie => cookie.name === "aves-auth-code-verifier").value, "migrated-verifier")
+  assert.equal(seen.some(cookie => cookie.name === "aves-au-auth"), false)
+  assert.equal(response.cookies.get("aves-auth").value, "newer-session")
+  assert.equal(response.cookies.get("aves-au-auth").maxAge, 0)
+  assert.equal(response.cookies.get("aves-au-auth").path, "/australia")
+  assert.equal(response.headers.get("location"), null)
 })
 
 test("private RPC uses only modern apikey and has no redirect/cache plus bounded timeout", async () => {

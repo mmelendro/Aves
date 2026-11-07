@@ -1,11 +1,10 @@
 import { safeAuthNext } from "@/lib/auth-redirect"
-import { SITE_BASE_PATH } from "@/lib/site-path"
 
 export type AccountSearchParams = Record<string, string | string[] | undefined>
 
-// Framework links receive unprefixed paths; native navigation uses sitePath.
+// Account navigation is native and stays on the global /account address.
 export function accountReturnPath(value?: string | null): string {
-  return safeAuthNext(value || null).slice(SITE_BASE_PATH.length)
+  return safeAuthNext(value || null)
 }
 
 export function accountEntryHref(path: string, next?: string | null): string {

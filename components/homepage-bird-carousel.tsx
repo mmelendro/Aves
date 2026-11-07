@@ -233,7 +233,7 @@ export default function HomepageBirdCarousel({
       )}
       <Card className="overflow-hidden rounded-2xl border border-emerald-100 shadow-xl">
         <div
-          className="relative aspect-[4/3] max-h-80 overflow-hidden bg-stone-100"
+          className="relative w-full aspect-[4/3] max-h-80 overflow-hidden bg-stone-100"
           style={{ touchAction: "pan-y pinch-zoom" }}
           onTouchStart={event => {
             touchStartRef.current = event.touches.length === 1
