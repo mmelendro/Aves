@@ -7,6 +7,7 @@
  */
 
 import { useCallback, useId, useState } from "react"
+import styles from "@/components/country-hero-explorer.module.css"
 import Link from "next/link"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
@@ -30,19 +31,19 @@ export function AustraliaHomeExplorer() {
   // This featured region is one place to look, not a map of the species' entire distribution.
   const highlightedRegion = regionOptions.find(region => region.id === bird.regionSlug)
 
-  return <div className="mx-auto grid max-w-4xl items-center gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+  return <div className={styles.layout}>
     {/* Media comes first on phones; desktop order places the map left and portrait carousel right. */}
-    <div className="mx-auto min-w-0 w-full max-w-[20rem] lg:order-2">
+    <div className={styles.mediaColumn}>
       <HomepageBirdCarousel className="w-full max-w-none" autoPlay={false} onBirdChange={onBirdChange} />
       <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a>. Sightings depend on your route and season.</p>
     </div>
-    <div className="mx-auto min-w-0 w-full max-w-2xl lg:order-1">
-      <div className="overflow-hidden rounded-2xl border border-emerald-100/70 bg-white/60">
+    <div className={styles.mapColumn}>
+      <div className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60`}>
         <div className="px-4 pt-3">
           <h2 className="font-medium text-emerald-950">Explore Australia</h2>
         </div>
         {/* Source geometry is reused unchanged. useId keeps title/description IDs unique on the page. */}
-        <svg viewBox={australiaMapViewBox} role="group" aria-labelledby={`${id}-map-title`} aria-describedby={`${id}-map-description`} className="mx-auto my-1 block h-[240px] w-full max-w-[370px] sm:h-[260px] lg:h-[220px] xl:h-[230px]">
+        <svg viewBox={australiaMapViewBox} role="group" aria-labelledby={`${id}-map-title`} aria-describedby={`${id}-map-description`} className={styles.auMap}>
           <title id={`${id}-map-title`}>Explore Australia’s states and territories</title>
           <desc id={`${id}-map-description`}>Select a region to open its guide. The darker region is one place to look for the bird in the carousel, not its complete range. All nine regions also have larger links below the map. Generalised boundaries; external territories are outside this map.</desc>
           {australiaMapStates.map(state => {
@@ -60,12 +61,12 @@ export function AustraliaHomeExplorer() {
             </a>
           </g>)}
         </svg>
-        <div className="px-4 pb-3">
+        <div className={`${styles.mapFooter} px-4 pb-3`}>
           <p className="min-h-10 text-sm leading-5 text-gray-600">{highlightedRegion ? <>Highlighted: <Link href={`/regions/${highlightedRegion.id}`} className="font-medium text-emerald-800 underline underline-offset-4">{highlightedRegion.label}</Link> — one region for {bird.commonName}.</> : "Explore a region to discover its birds and plan your route."}</p>
           {/* Keyboard/touch-friendly text alternatives keep all nine region guides reachable. */}
           <details className="group mt-2 rounded-lg border border-emerald-100 bg-emerald-50/50">
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-3 text-sm font-medium text-emerald-800 marker:content-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 [&::-webkit-details-marker]:hidden">Browse all 9 regions<ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" /></summary>
-            <nav aria-label="Australian region guides" className="grid gap-1 border-t border-emerald-100 p-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{regionOptions.map(region => <Link key={region.id} href={`/regions/${region.id}`} className="flex min-h-11 items-center rounded-md px-2 text-sm text-emerald-900 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{region.label}</Link>)}</nav>
+            <nav aria-label="Australian region guides" className={`${styles.regionList} grid gap-1 border-t border-emerald-100 p-2`}>{regionOptions.map(region => <Link key={region.id} href={`/regions/${region.id}`} className="flex min-h-11 items-center rounded-md px-2 text-sm text-emerald-900 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{region.label}</Link>)}</nav>
           </details>
           <p className="mt-2 text-[10px] leading-4 text-gray-500"><a href={australiaMapProvenance.sourceUrl} target="_blank" rel="noreferrer" className="rounded underline underline-offset-2 focus-visible:outline focus-visible:outline-emerald-700">Map: Natural Earth · Public domain<span className="sr-only"> (opens in a new tab)</span></a></p>
         </div>
