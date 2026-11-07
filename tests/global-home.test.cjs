@@ -23,6 +23,9 @@ function createLoader(overrides = {}) {
     file = file.replaceAll("\\", "/")
     if (cache.has(file)) return cache.get(file)
     if (file.endsWith(".json")) return JSON.parse(readFileSync(join(root, file), "utf8"))
+    // Next compiles CSS modules. This Node renderer keeps class names as tokens;
+    // real card sizing and responsive order are checked in the browser.
+    if (file.endsWith(".module.css")) return { __esModule: true, default: new Proxy({}, { get: (_target, name) => String(name) }) }
     const result = {}
     cache.set(file, result)
     const code = ts.transpileModule(readFileSync(join(root, file), "utf8"), {

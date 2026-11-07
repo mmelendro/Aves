@@ -6,6 +6,7 @@
 "use client"
 
 import { useState } from "react"
+import styles from "@/components/country-hero-explorer.module.css"
 import { ArrowRight } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import NewZealandMap from "@/components/new-zealand-map"
@@ -27,12 +28,12 @@ export default function NewZealandHeroExplorer() {
   const [currentBird, setCurrentBird] = useState(newZealandCarouselBirds[0])
 
   return (
-    <div className="mx-auto grid max-w-4xl items-center gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
-      <div id="birdlife" className="order-1 mx-auto w-full min-w-0 max-w-[20rem] scroll-mt-24 lg:order-2">
+    <div className={styles.layout}>
+      <div id="birdlife" className={`${styles.mediaColumn} scroll-mt-24`}>
         <HomepageBirdCarousel birds={newZealandCarouselBirds} className="w-full max-w-none" autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </div>
-      <div className="order-2 min-w-0 lg:order-1">
+      <div className={styles.mapColumn}>
         <NewZealandMap compact highlightedIslands={featuredIslands(currentBird.primaryRegion)} />
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
