@@ -41,6 +41,7 @@ export default function ColombiaHeroExplorer() {
   const featuredRegion = mapMarkers.find(region => region.slug === currentBird.regionSlug)
   // Before a manual choice, offer the current bird region as a useful starting point.
   const selectedRegion = chosenRegion || featuredRegion?.slug || mapMarkers[0].slug
+  const selectedRegionDetails = mapMarkers.find(region => region.slug === selectedRegion)!
 
   return (
     <div className={styles.layout}>
@@ -57,10 +58,13 @@ export default function ColombiaHeroExplorer() {
           <div className={styles.mapCanvas}><div className={styles.colombiaArtwork} role="group" aria-label="Colombia map: choose from 11 birding regions">
             <ColombiaMapArtwork alt="" fill sizes="230px" className="object-contain" />
             {mapMarkers.map((region, index) => {
-              const featured = region.slug === featuredRegion?.slug
-              return <Link key={region.slug} href={`/regions/${region.slug}`} aria-label={`Explore ${region.name}${featured ? "; featured for the current bird" : ""}`} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%` }} className={`group absolute z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-20 hover:bg-emerald-950 hover:text-white focus-visible:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${featured ? "border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "border-emerald-900/30 bg-white/95 text-emerald-950"}`}>
+              // A manual region choice takes priority over the bird's suggestion.
+              // Keep its name visible; other labels appear on hover or keyboard focus.
+              const selected = region.slug === selectedRegion
+              const labelPosition = region.x < 25 ? "left-0 after:left-2" : region.x > 65 ? "right-0 after:right-2" : "left-1/2 -translate-x-1/2 after:left-1/2 after:-translate-x-1/2"
+              return <Link key={region.slug} href={`/regions/${region.slug}`} aria-label={`Explore ${region.name}${selected ? "; selected on the map" : ""}`} aria-current={selected ? "true" : undefined} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%` }} className={`group absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-30 hover:bg-emerald-950 hover:text-white focus-visible:z-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-20 border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "z-10 border-emerald-900/30 bg-white/95 text-emerald-950"}`}>
                 <span aria-hidden="true">{index + 1}</span>
-                <span aria-hidden="true" className="pointer-events-none absolute bottom-full left-1/2 mb-2 w-max max-w-44 -translate-x-1/2 rounded-md bg-emerald-950 px-2 py-1.5 text-center text-xs font-medium leading-4 text-white opacity-0 shadow group-hover:opacity-100 group-focus-visible:opacity-100">{region.name}</span>
+                <span aria-hidden="true" className={`pointer-events-none absolute bottom-full mb-2 w-max max-w-40 rounded-md bg-emerald-950 px-2 py-1.5 text-center text-xs font-medium leading-4 text-white shadow after:absolute after:top-full after:h-2 after:w-2 after:-translate-y-1/2 after:rotate-45 after:bg-emerald-950 after:content-[''] group-hover:opacity-100 group-focus-visible:opacity-100 ${labelPosition} ${selected ? "opacity-100" : "opacity-0"}`}>{region.name}</span>
               </Link>
             })}
           </div>
@@ -72,7 +76,7 @@ export default function ColombiaHeroExplorer() {
             </select>
             <Link href={`/regions/${selectedRegion}`} className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-lg bg-emerald-50 px-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
-          <p className="mt-2 text-xs leading-4 text-gray-600">{featuredRegion ? <>Highlighted: {featuredRegion.name}, a starting point for this bird.</> : "Select a region to explore its birds and habitats."} Planning regions, not a complete species range.</p></div>
+          <p className="mt-2 text-xs leading-4 text-gray-600">Selected: {selectedRegionDetails.name}. {chosenRegion ? "Explore its birds and habitats." : featuredRegion ? "A starting point for this bird." : "Explore its birds and habitats."} Planning regions, not a complete species range.</p></div>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Plan my trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
