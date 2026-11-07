@@ -1,6 +1,21 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — Google sign-in, 8 November 2026 (Sydney)
+## Current production — verified Google AVES branding, 8 November 2026 (Sydney)
+
+**Google branding is verified, published and observed live. Paused before the next change.** Google now shows the AVES name and existing global peregrine logo. Its Developer info panel lists `info@aves.bio` as support. No additional paid feature/subscription, credential or permission grant was added. The optional new Search Console/DNS ownership question became obsolete after Google's automated check succeeded; do not act on a later answer to it.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `e2a53a4` | `dpl_JK4rqnJ851jveirHoQ46tQZt7gDU` |
+| Australia and shared accounts | `australia/preview` | `5762603` | `dpl_2AhmDWLg3FbTMExao84Fz3ywJZ1B` |
+
+Both privacy notices now describe optional Google identity data, permitted uses, service-provider processing, revocation and deletion requests. Both production builds passed; live `/privacy` and `/australia/privacy` returned 200 with the disclosure, and the homepage links to the exact configured privacy URL. Existing Google login, `/account` routing, basic scopes, database ownership protections and email/password access were preserved. No new accounts, trips, bookings or messages were created during branding verification. Google sign-in remains enabled; Facebook remains deferred.
+
+[Main-site build](https://v0-company-landing-page-k57r1yoc9-mmelendro-9273s-projects.vercel.app) · [shared-account build](https://aves-australia-dou3r6fo5-mmelendro-9273s-projects.vercel.app). Documentation commits may advance branch heads without changing application builds. Git auto-deployment stays disabled. Full setup/proof details: [social-sign-in.md](https://github.com/mmelendro/Aves/blob/australia/preview/docs/social-sign-in.md). The existing mailbox subscription remains the previously approved CAD $11/month plus tax; branding introduced no new billing change.
+
+Evidence is kept privately in workspace `audit/evidence/`. All other roadmap work remains queued. The friendlier landing for provider-expired state remains a separately scoped follow-up; do not start it until the owner resumes work.
+
+## Historical Google sign-in release, 8 November 2026 (Sydney)
 
 **Published, verified and paused after AVES-009.** Do not start another backlog item without the owner's next instruction.
 
