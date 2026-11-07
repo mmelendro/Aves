@@ -6,11 +6,12 @@ Repository: https://github.com/mmelendro/Aves. Keep the two independent branches
 
 | Application | Branch | Deployed application commit | Deployment |
 | --- | --- | --- | --- |
-| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `37379ca` | `dpl_8w1BMucTS94h3f6vHXZrhLXc13Ps` |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `8d65d02` | `dpl_CZxBLLtEks8pVBsZ87dGsJMi7GWC` |
 | Australia and shared accounts | `australia/preview` | `8c13ed1` | `dpl_8FafCYo3utohyHvWjPgtMt7ydE6D` |
 
-Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-ori09kvl7-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-jfpy00jig-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
+Exact builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-89gcfkvav-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-jfpy00jig-mmelendro-9273s-projects.vercel.app). Both production builds were reviewed and promoted. Later documentation-only commits may advance branch heads.
 
+- Footer wording follow-up: the Colombian footer now says **My Trips**, matching Australia; the shared account link is unchanged. Published and visually verified, with all 12 shared-account tests passing.
 - Public destinations: https://aves.bio/colombia, https://aves.bio/australia and https://aves.bio/new-zealand, selected from https://aves.bio/.
 - Brand artwork and AVES link to the main homepage; each country subtitle links to its destination. The thinner lettering, country birds, landscape contours and global peregrine mark are retained.
 - New Zealand now features **31 birds with photographs, local recordings, location/habitat notes and credits**, with particular depth for the South Island. The selector jumps to a species; the interactive map links North Island, South Island and Rakiura to their descriptions. This is a curated collection, not a complete checklist; eBird remains linked for wider records.
