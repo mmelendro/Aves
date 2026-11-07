@@ -2,7 +2,7 @@
 
 **Updated: 8 November 2026 (Sydney).** Improve https://aves.bio through small, tested releases. This brief and its linked change inbox preserve the agreed work between chats.
 
-**Checkpoint:** AVES-008 (subtle speaker availability highlight) is published and verified. Implementation is paused after this release; await the owner's next explicit instruction. Preserve this completed behaviour when resuming the remaining work.
+**Checkpoint:** AVES-008 (speaker highlight) and AVES-001a (Santa Marta editorial pilot) are published and verified. Pause after this completed increment; the broader editorial task and new AVES-011/012 design requests remain queued. Preserve completed work when resuming.
 
 ## Working mode and project
 
@@ -31,7 +31,7 @@ New Zealand is public inspiration in development, not yet an enabled saved-trip 
 
 ### A. Editorial quality and broader regional birdlife
 
-Give each section a clear purpose and remove redundant copy, stale dates, placeholder prices, inconsistent tone and unsupported biographies, testimonials, partnerships or sustainability claims. Preserve useful information and essential qualifications. Example: the Santa Marta bird cards repeat similar endemic-range paragraphs; move shared regional context into the introduction and make each species note distinctive and useful to a traveller.
+Give each section a clear purpose and remove redundant copy, stale dates, placeholder prices, inconsistent tone and unsupported biographies, testimonials, partnerships or sustainability claims. Preserve useful information and essential qualifications. The Santa Marta pilot (AVES-001a) already consolidates its shared range context and distinct habitat notes. Review that result before applying the pattern to another page; the broader site audit remains pending.
 
 Build a coverage matrix for Colombia's 11 planning regions, then expand in manageable batches with regional character, endemics, varied families and habitats. Retain shared species where their occurrence is valid. Each added bird needs stable identity/names, supported local occurrence and wider range, useful habitat/place notes, sources, suitable media, focal point and attribution. Use eBird primarily for occurrence, supported by BirdLife and relevant local authorities/reserves. Verify media rights independently: public availability on eBird/Macaulay does not grant reuse permission. Add video only with authorised embedding/reuse. Do not promise sightings or encourage attracting wildlife with playback.
 
@@ -61,7 +61,8 @@ Build supplier records around documented relationships, services, locations, sea
 
 ### E. Latest discovery and sign-in changes
 
-Use AVES-006–009 in the inbox as the detailed acceptance criteria:
+Use the corresponding inbox entries as the detailed acceptance criteria:
+- **Matching explorer format (AVES-012):** use the Australian map/subregion explorer as the visual reference for bird/map pairs. Align widths, column proportions, spacing, map presentation, card styling, typography, credits, badges and actions. Keep expanded bird details balanced with the map and preserve species facts, discreet media controls, portrait framing where practical, and mobile stacking. Share layout primitives while retaining each explorer's correct behaviour. Treat static alignment and the adjustable-divider feature as separate increments.
 - **Resizable duo:** a bounded, accessible draggable divider, automatically responsive panels and overall pair, useful crops and undistorted maps; retain narrow-phone stacking. Follow the [W3C splitter pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/).
 - **NZ regions:** dedicated South Island, North Island and Rakiura pages with the shared design, locally valid bird carousels/calls, source notes and coherent old/new navigation. Keep development status and backend eligibility explicit.
 - **Audio cue (AVES-008, verified):** preserve the speaker icon and published emerald availability accent, distinct playback state, accessible labels and visitor-initiated playback. Do not reimplement this completed step.
