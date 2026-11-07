@@ -30,11 +30,11 @@ interface HomepageBirdCarouselProps {
 const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
 const linkClass = "text-emerald-800 underline underline-offset-2 hover:text-emerald-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
 
-type IconControlProps = ButtonHTMLAttributes<HTMLButtonElement> & { label: string; children: ReactNode; tooltipSide?: "left" | "right" | "bottom" }
+type IconControlProps = ButtonHTMLAttributes<HTMLButtonElement> & { label: string; children: ReactNode; buttonClassName?: string; tooltipSide?: "left" | "right" | "bottom" }
 // Keep the image uncluttered: a real named button plus a tooltip visible on hover or keyboard focus.
-function IconControl({ label, children, className, tooltipSide = "bottom", ...props }: IconControlProps) {
+function IconControl({ label, children, className, buttonClassName, tooltipSide = "bottom", ...props }: IconControlProps) {
   return <span className={cn("group/control relative inline-flex", className)}>
-    <button type="button" aria-label={label} className={controlClass} {...props}>{children}</button>
+    <button type="button" aria-label={label} className={cn(controlClass, buttonClassName)} {...props}>{children}</button>
     <span aria-hidden="true" className={cn("pointer-events-none absolute z-30 w-max max-w-40 rounded-md bg-slate-950/95 px-2.5 py-1.5 text-center text-xs leading-4 text-white opacity-0 shadow-lg transition-opacity group-hover/control:opacity-100 group-focus-within/control:opacity-100 motion-reduce:transition-none", tooltipSide === "right" ? "left-full top-1/2 ml-2 -translate-y-1/2" : tooltipSide === "left" ? "right-full top-1/2 mr-2 -translate-y-1/2" : "right-0 top-full mt-2")}>{label}</span>
   </span>
 }
@@ -227,7 +227,10 @@ export default function HomepageBirdCarousel({
             <IconControl label={isPlaying ? "Pause slideshow" : "Play slideshow"} data-slideshow-control onClick={() => setIsPlaying(playing => !playing)} aria-pressed={isPlaying} disabled={birds.length < 2 || imageStatus === "loading"}>
               {isPlaying ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4" aria-hidden="true" />}
             </IconControl>
-            <IconControl label={audioButtonText} onClick={toggleAudio} aria-pressed={isAudioPlaying} disabled={!currentBird.audioFile}>
+            {/* A quiet green halo advertises a real recording; a brighter fill marks active playback.
+                buttonClassName styles the button itself, while className still positions its wrapper. */}
+            <IconControl label={audioButtonText} onClick={toggleAudio} aria-pressed={isAudioPlaying} disabled={!currentBird.audioFile}
+              buttonClassName={currentBird.audioFile ? cn("border-emerald-200/80 bg-emerald-950/80 text-emerald-50 shadow-[0_0_0_3px_rgba(167,243,208,0.14)] hover:bg-emerald-900/90", isAudioPlaying && "border-emerald-100 bg-emerald-700/95 text-white shadow-[0_0_0_3px_rgba(167,243,208,0.24)] hover:bg-emerald-700") : undefined}>
               {audioLoading ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : isAudioPlaying ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
             </IconControl>
             <IconControl label={showInfo ? "Hide species details & credits" : "Species details & credits"} aria-expanded={showInfo} aria-controls={`${carouselId}-info`} onClick={() => setShowInfo(value => !value)}><Info className="h-4 w-4" aria-hidden="true" /></IconControl>
