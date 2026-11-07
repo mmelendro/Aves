@@ -1,6 +1,25 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — portrait carousels and beginner documentation, 8 November 2026 (Sydney)
+## Current production — paired discovery headers, 8 November 2026 (Sydney)
+
+Both final builds are published and their source is on GitHub. The two applications remain independent; automatic Git deployment remains disabled.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `4dfa50e` | `dpl_6kShjStz2CLwzhkHRb2ZMrSQRCL3` |
+| Australia and shared accounts | `australia/preview` | `b2efc9e` | `dpl_7sXkLSfk5kZ4cUtBFVRsjoNLhBhX` |
+
+Exact published builds: [Global/Colombia/New Zealand](https://v0-company-landing-page-hupvo43ol-mmelendro-9273s-projects.vercel.app) and [Australia/shared accounts](https://aves-australia-g7b78u452-mmelendro-9273s-projects.vercel.app). Documentation-only commits may advance branch heads.
+
+- Matching vertical map and photo cards now share top/bottom alignment on country homepages and the selected public discovery, regional, experience and article headers. User explicitly chose this scope; contact, policy and account screens keep their practical layouts. At widths below 44rem, bird media precedes a separate naturally sized map card. Wider viewport layouts include unfolded phones when enough space is available. Real hinged/foldable hardware was not tested.
+- `components/country-hero-explorer.module.css` defines the pair. Container units derive map height from column width, including the photo card borders. Keep country geography undistorted. A shared `BirdDiscoveryContext` lets server-supplied regional/article carousels report their bird to the nearby map. Each page keeps its existing species list and local occurrence notes; regional headers start with the correct region.
+- Colombia's selected region has a persistent, named pointing callout and ring. Manual dropdown selections override the bird suggestion and remain selected; other marker titles appear on hover/focus. All 11 Colombian regions and 9 Australian region links remain accessible; Australia's expanded list scrolls inside the paired card. The three NZ island links have larger vertical targets.
+- Validation: 69 source and 244 Australian tests passed during this work, with strict TypeScript and both final production builds passing. Browser review covered all three country headers at desktop, NZ/Australia at 720px, all three at 390px, a Colombian article and region, a Colombian experience, and Tasmania's regional guide. Country card heights differed by less than one CSS pixel at tested paired widths. Narrow layouts had no sideways overflow and media preceded maps. All nine Australian text links remained available; Tasmania opened its actual guide. Colombia selection callouts were checked interactively. Sixteen live public/account/privacy HTTP checks passed again after final publication. No forms, records or emails were submitted; backend/provider/database configuration was untouched.
+- Pending work is now combined in [NEXT-WEEK-PROMPT.md](docs/NEXT-WEEK-PROMPT.md): homepage world map, editorial cleanup, wider Colombian regional bird coverage, bird wishlist/optional bingo, and a phased sustainable itinerary/supplier application. These features are planning only and were not implemented today. Keep personal pilot plans and guest/operator details private. The global homepage world map remains pending, not part of the completed country header rollout.
+
+Read the retained architecture/security and beginner guides below. Earlier release-specific verification belongs to its own version.
+
+## Historical portrait-carousel release and beginner documentation, 8 November 2026 (Sydney)
 
 **Status: GitHub synced; both exact builds READY, preview-reviewed and successfully promoted; 16 live HTTP/account/privacy checks passed.** This release supersedes application commits `73cc370` (global/Colombia/New Zealand) and `0f1a113` (Australia/shared accounts); their deployments remain in the historical section below.
 

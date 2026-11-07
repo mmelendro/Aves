@@ -135,3 +135,7 @@ Some **live** older pages also contain static editorial records: the events cale
 Read the component's callers, edit the smallest appropriate file, and keep source/credit records with new media. Check the intended route at phone and desktop widths. For interactive changes, try touch/keyboard navigation, open/close controls, audio errors and navigation to another page while audio is playing. For forms, test the complete response and saved record with appropriate test data, not just a green message in the browser.
 
 The TypeScript check in this checkout is `node node_modules/typescript/bin/tsc --noEmit --incremental false`. Tests and deployment steps are documented elsewhere in the repository. This guide covers the frontend; shared-account security, API handlers, database policies, build configuration and generated/vendor files need their own guides and checks.
+
+## Paired discovery headers
+
+The country hero explorer can accept a `media` slot so a region or article keeps its original bird selection. `bird-discovery-context.tsx` connects that nested carousel to the map without copying its data or exposing server information. The shared carousel reports its selected bird through this optional context. `country-hero-explorer.module.css` owns the two-card arrangement and phone stacking. The map uses real country geometry; only its surrounding card becomes portrait. See the current release handoff for the supported page scope and browser checks.
