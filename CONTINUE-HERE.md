@@ -1,6 +1,21 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — verified Google AVES branding, 8 November 2026 (Sydney)
+## Current production — country-card carousels, 8 November 2026 (Sydney)
+
+**AVES-011 is published, tested and synced to GitHub. Paused before the next change.** On https://aves.bio each destination card now has its own country bird carousel: Colombia 22, Australia 20, New Zealand 31. The existing mixed-country hero, country links and New Zealand development status are preserved. Compact 4:5 card frames reuse the established translucent controls and speaker highlight. Photo attribution follows each slide; details retain habitat, range, species sources and media credits. Card images are lazy, recordings load on request, and one call plays at a time across all homepage viewers.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `c0589e6` | `dpl_HXvhwoUKBqY28WPEgbLMDwWRstBG` |
+| Australia and shared accounts (unchanged build) | `australia/preview` | `5762603` | `dpl_2AhmDWLg3FbTMExao84Fz3ywJZ1B` |
+
+[Main-site build](https://v0-company-landing-page-iztcjducp-mmelendro-9273s-projects.vercel.app). The source release passed 18 homepage/sitemap checks, strict TypeScript and the Vercel production build. Local and live browser checks covered independent navigation/credits, calls for all three countries, single-call playback, keyboard navigation and narrow-phone stacking without horizontal overflow. The missing Australian recording is disabled. All 39 Australian photo/audio URLs returned 200 with correct media types. Country homepages returned 200, and a real browser visit to /account reached the existing shared sign-in page with Google available. No account, provider, database or customer data changes were made. Existing Google AVES branding and info@aves.bio support are preserved.
+
+Edit `components/destination-card-media.tsx` and `content/destination-birds.ts` in the main branch for card composition/collections; `components/homepage-bird-carousel.tsx` keeps default country-page proportions and adds the compact card variant. `content/global-australian-birds.json` is a public metadata snapshot of the Australian original/expansion catalogues; media/licences remain on /australia. Refresh that snapshot if the Australian collection changes. The shared destination catalogue remains small, and future countries without a bird library keep an attributed photo fallback.
+
+Evidence: workspace `audit/evidence/nov8-global-country-carousels-desktop.png` and `nov8-global-country-carousels-mobile.png`. Planning files are mirrored across the independent branches. Documentation commits can advance branch heads without redeploying runtime code; automatic Git deployment stays disabled. Remaining features are in the living brief and inbox. Do not start another increment until the owner resumes.
+
+## Historical production — verified Google AVES branding, 8 November 2026 (Sydney)
 
 **Google branding is verified, published and observed live. Paused before the next change.** Google now shows the AVES name and existing global peregrine logo. Its Developer info panel lists `info@aves.bio` as support. No additional paid feature/subscription, credential or permission grant was added. The optional new Search Console/DNS ownership question became obsolete after Google's automated check succeeded; do not act on a later answer to it.
 
