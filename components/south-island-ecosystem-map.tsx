@@ -106,7 +106,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
           const selected = item.id === selectedPlace
           const unit = 1 / (camera.zoom * Math.max(svgPixelsPerUnit, .25))
           return <g key={item.id} role="button" tabIndex={0} aria-label={`Show place: ${item.label}`} aria-pressed={selected} className={styles.area} onClick={() => onSelectPlace?.(item.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectPlace?.(item.id) } }}>
-            <title>{item.label} — {item.location}</title>
+            <title>{`${item.label} — ${item.location}`}</title>
             <circle cx={point.x} cy={point.y} r={22 * unit} fill="transparent" />
             <circle cx={point.x} cy={point.y} r={(selected ? 8 : 5) * unit} fill={selected ? "#065f46" : "#fff"} stroke={selected ? "white" : "#065f46"} strokeWidth="2" vectorEffect="non-scaling-stroke" />
           </g>
