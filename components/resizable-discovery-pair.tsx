@@ -35,7 +35,9 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
       setWidth(previous => previous === nextWidth ? previous : nextWidth)
       setShare(previous => clampDiscoverySplit(previous, nextWidth))
       const active = dragRef.current
-      if (active && active.width !== nextWidth) {
+      // Content-box and bounding-box readings can differ by a fraction of a
+      // pixel. A height-only observer update must not interrupt an active drag.
+      if (active && Math.abs(active.width - nextWidth) > 1) {
         dragRef.current = null
         setDragging(false)
         const separator = separatorRef.current

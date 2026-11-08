@@ -44,9 +44,11 @@ test("narrowing the container clamps the previous split; unusable geometry stays
   }
 })
 
-test("wide-screen ratios keep either panel within forty to sixty percent", () => {
+test("wide screens allow full useful travel while retaining readable controls", () => {
   for (const width of [900, 1216]) {
-    assert.equal(clampDiscoverySplit(-100, width), 40)
-    assert.equal(clampDiscoverySplit(200, width), 60)
+    const min = clampDiscoverySplit(-100, width)
+    const max = clampDiscoverySplit(200, width)
+    assert.ok(min < 35 && max > 65)
+    assert.ok(Math.abs((width - DISCOVERY_HANDLE_WIDTH) * min / 100 - DISCOVERY_MIN_PANEL_WIDTH) < 0.001)
   }
 })

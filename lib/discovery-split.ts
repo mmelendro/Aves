@@ -6,8 +6,9 @@ export const DISCOVERY_PAIR_MIN_WIDTH = 624
 export function discoverySplitBounds(width: number) {
   const available = width - DISCOVERY_HANDLE_WIDTH
   // Below the pairing breakpoint, both panels become independent stacked cards.
-  // A 40/60 limit also keeps the wide-screen pair's media upright and the map useful.
-  const min = available > 0 ? Math.min(50, Math.max(40, DISCOVERY_MIN_PANEL_WIDTH / available * 100)) : 50
+  // Use the full usable travel instead of an arbitrary percentage cap. Both
+  // panels keep enough space for their controls, even at the ends of the drag.
+  const min = available > 0 ? Math.min(50, DISCOVERY_MIN_PANEL_WIDTH / available * 100) : 50
   return { min, max: 100 - min }
 }
 

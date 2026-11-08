@@ -65,6 +65,25 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
+test("every New Zealand carousel bird has explicit valid island links, including broad labels", () => {
+  const birds = load("content/new-zealand-carousel.ts").newZealandCarouselBirds
+  const links = load("content/new-zealand-bird-islands.ts").newZealandBirdIslands
+  const regions = new Set(load("content/new-zealand.ts").newZealandRegions.map(region => region.id))
+  assert.deepEqual(Object.keys(links).sort(), birds.map(bird => bird.id).sort(), "no missing or stale species associations")
+  for (const bird of birds) {
+    assert.ok(links[bird.id].length > 0, bird.id)
+    assert.equal(new Set(links[bird.id]).size, links[bird.id].length, bird.id)
+    assert.ok(links[bird.id].every(region => regions.has(region)), bird.id)
+    assert.ok(bird.localOccurrence && bird.sources.length, `${bird.id}: retain source/location notes`)
+  }
+  assert.deepEqual(links["nz-kea"], ["south-island"])
+  assert.deepEqual(links["nz-south-island-tomtit"], ["south-island"])
+  assert.deepEqual(links["nz-fantail"], ["north-island", "south-island", "rakiura"])
+  assert.deepEqual(links["nz-tokoeka"], ["south-island", "rakiura"])
+  assert.deepEqual(links["nz-takahe"], ["north-island", "south-island"])
+  assert.deepEqual(links["nz-red-crowned-parakeet"], ["rakiura"])
+})
+
 test("global homepage and footer offer the three public destinations with full-page links", () => {
   assert.deepEqual(destinations.map(({ id, href }) => ({ id, href })), [
     { id: "colombia", href: "/colombia" }, { id: "australia", href: "/australia" }, { id: "new-zealand", href: "/new-zealand" },
