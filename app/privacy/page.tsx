@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Public privacy notice. The sections array supplies the editable paragraphs and
  * optional links. This file explains data handling; enforcement belongs in the shared
@@ -9,11 +10,11 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { canonicalUrl } from "@/lib/site-path"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: "Privacy Notice",
   description: "How AVES handles inquiries, shared accounts, saved plans and proposals for Colombia and Australia.",
   alternates: { canonical: canonicalUrl("/privacy") },
-}
+})
 
 const sections = [
   { title: "What You Share", text: "Inquiry forms collect your name, email and travel preferences, with optional details such as phone number, timing, group size, birding experience and a message. An account stores your email, saved plans, quote requests and proposal history. The optional New Zealand planning questionnaire stores your pace, birding frequency, accommodation preference, interests, desired bird species and notes in your private trip plan. Unsaved bird choices use this browser tab’s session storage for up to one day so you can carry them into a signed-in draft; only species identifiers and an expiry timestamp are stored there. Questionnaire answers and contact details are not stored in this browser basket. Saving the draft is a separate action, and signing out clears the basket. You choose when to share a submitted copy with authorized AVES staff; answers are not published. New Zealand notification emails link to the private owner inbox without including your answers. Share only the information needed for your trip conversation." },

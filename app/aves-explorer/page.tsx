@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Route wrapper for the full Colombia Explorer. Metadata belongs here; region
  * selection, map markers and bird panels belong in ColombianBirdsExplorer.
@@ -9,7 +10,7 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   alternates: { canonical: canonicalUrl("/aves-explorer") },
   title: "AVES Explorer - Discover Colombia's Incredible Bird Diversity",
   description:
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description: "Interactive exploration of Colombia's incredible avian biodiversity across 11 unique bioregions.",
     images: ["/images/aves-logo.png"],
   },
-}
+})
 
 export default function AvesExplorerPage() {
   return (

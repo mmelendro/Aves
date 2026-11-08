@@ -10,5 +10,6 @@ export const metadata: Metadata = {
     url: "/australia", siteName: "AVES", locale: "en_AU", type: "website",
     images: [{ url: "/images/brand/aves-australia-bird.png", alt: "AVES Australia" }],
   },
+  twitter: { card: "summary_large_image", title: "Australia Birding & Nature Journeys | AVES", description: "Discover Australia's birdlife and regions, then plan a personal nature journey with AVES.", images: ["/images/brand/aves-australia-bird.png"] },
 }
 export default function AustraliaLayout({ children }: { children: ReactNode }) { return children }

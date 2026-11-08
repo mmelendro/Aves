@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Colombia planning explainer. The steps array supplies the sequence of cards;
  * the remaining sections link to inspiration and contact. This describes a personal
@@ -10,11 +11,11 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: "How Trip Planning Works",
   description: "Explore Colombia's birding regions, share your interests and discuss the details of a personal journey with AVES.",
   alternates: { canonical: "https://aves.bio/how-it-works" },
-}
+})
 
 const steps = [
   {

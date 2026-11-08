@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Colombia bird directory. Both the hero carousel and the species cards read
  * content/birds, keeping names, photos, range notes and source links together.
@@ -12,7 +13,7 @@ import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { birdData } from "@/content/birds"
 import { canonicalUrl, sitePath } from "@/lib/site-path"
 
-export const metadata: Metadata = { title: "Colombian Birdlife & Where to Find It", description: "Explore a selection of Colombian birds through real photographs, recordings and clear habitat and distribution notes. Find inspiration for a personal birding trip.", alternates: { canonical: canonicalUrl("/species") } }
+export const metadata: Metadata = publicMetadata({ title: "Colombian Birdlife & Where to Find It", description: "Explore a selection of Colombian birds through real photographs, recordings and clear habitat and distribution notes. Find inspiration for a personal birding trip.", alternates: { canonical: canonicalUrl("/species") } })
 
 export default function SpeciesPage() {
   return <PageShell path="/species" title="Discover Colombia's Birdlife" description="A selection of birds, many different worlds. Browse their photographs, listen to available recordings and discover where each species can be found." media={<HomepageBirdCarousel autoPlay={false} className="max-w-xl" showBirdPicker />}>

@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * B Corp journey page. The arrays describe preparation priorities and planned
  * milestones, which are rendered below. Keep plans distinct from completed achievements
@@ -12,11 +13,11 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { canonicalUrl } from "@/lib/site-path"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: "Our B Corp Journey",
   description: "AVES is pursuing B Corp certification and is not yet certified. Explore our planned preparation and review milestones.",
   alternates: { canonical: canonicalUrl("/about/b-corp") },
-}
+})
 
 const preparationPriorities = [
   {

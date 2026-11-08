@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Detailed Sierra Nevada sample itinerary. The shared bird carousel introduces
  * the route, followed by day-by-day prose, species, accommodation copy and inquiry links.
@@ -13,7 +14,7 @@ import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
 import ArticleBirdCarousel from "@/components/article-bird-carousel"
 
-export const metadata: Metadata = { title: "Sierra Nevada Birding Experience", alternates: { canonical: canonicalUrl("/tours/adventure/sierra-nevada") } }
+export const metadata: Metadata = publicMetadata({ title: "Sierra Nevada Birding Experience", alternates: { canonical: canonicalUrl("/tours/adventure/sierra-nevada") } })
 
 export default function SierraNevadaTourPage() {
   return (

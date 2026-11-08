@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Choco editorial article. ArticleHero selects the related shared bird carousel;
  * the prose and separate AudioPlayer below are the article body. Metadata at the top
@@ -13,7 +14,7 @@ import AudioPlayer from "@/components/audio-player"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   alternates: { canonical: canonicalUrl("/blog/choco-toucan-expedition") },
   title: "Into the Heart of Chocó: A Toucan Odyssey Through Colombia's Biodiversity Hotspot | AVES",
   description:
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
       "Explore Colombia's Chocó region and discover Yellow-throated Toucans in one of the world's most biodiverse ecosystems.",
     images: ["/images/yellow-throated-toucan-blog.jpg"],
   },
-}
+})
 
 export default function ChocoToucanExpeditionPage() {
   return (

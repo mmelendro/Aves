@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Public attribution directory built from the media-credit JSON files.
  * Recording IDs become audio-<id> anchors used by carousel credit links.
@@ -13,7 +14,7 @@ import extraColombiaAudioCredits from "@/content/colombia-extra-audio-credits.js
 import newZealandExpansionCredits from "@/content/new-zealand-expansion-credits.json"
 import newZealandSupplementCredits from "@/content/new-zealand-supplement-credits.json"
 import { canonicalUrl, sitePath } from "@/lib/site-path"
-export const metadata: Metadata = { title: "Photography & Recording Credits", alternates: { canonical: canonicalUrl("/credits") } }
+export const metadata: Metadata = publicMetadata({ title: "Photography & Recording Credits", alternates: { canonical: canonicalUrl("/credits") } })
 export default function CreditsPage() {
   return (
     <PageShell path="/credits" title="The People Behind the Photographs & Sounds" description="Thank you to the photographers and field recordists who bring AVES destinations to life. Main homepage, Colombian and New Zealand recording credits are below. The New Zealand page also lists its photographs; Australia maintains its own media credits.">

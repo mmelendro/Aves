@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Server route for resources metadata. Interactive tabs and the resource catalogue
  * are rendered by ResourcesPageClient; keeping metadata here avoids putting it inside
@@ -7,7 +8,7 @@ import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import ResourcesPageClient from "./ResourcesPageClient"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   alternates: { canonical: canonicalUrl("/resources") },
   title: "Expert Resources Hub | AVES Tours",
   description:
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     "eco-tourism resources",
     "Audubon birding trails",
   ],
-}
+})
 
 export default function ResourcesPage() {
   return <ResourcesPageClient />

@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Public New Zealand destination page. Its status remains in development: calls to
  * action open a conversation, not a reservation. The hero pairs birds and island links,
@@ -16,12 +17,12 @@ import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { canonicalUrl } from "@/lib/site-path"
 
 const description = "Discover Aotearoa New Zealand with AVES: native birds, island landscapes, food and culture at your pace. Explore our developing destination and share your trip ideas."
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: { absolute: "New Zealand | Birdlife, nature & culture | AVES" }, description,
   alternates: { canonical: canonicalUrl("/new-zealand") },
   openGraph: { title: "Aotearoa New Zealand | AVES", description, url: canonicalUrl("/new-zealand"), images: [{ url: canonicalUrl("/images/destinations/kea-new-zealand.jpg"), alt: "Kea in New Zealand" }] },
   twitter: { card: "summary_large_image", title: "Aotearoa New Zealand | AVES", description, images: [canonicalUrl("/images/destinations/kea-new-zealand.jpg")] },
-}
+})
 
 const linkStyle = "inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-6 py-3 font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700"
 const experiences = [

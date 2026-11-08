@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Colombia homepage at /colombia. Reading order: hero/map/carousel, personal story,
  * region links, trip styles, planning steps, then the shared inquiry form.
@@ -42,7 +43,7 @@ const planningSteps = [
   { title: "Confirm the details", icon: FileCheck2, text: "Review availability, the itinerary, price, inclusions and booking terms before making your decision." },
 ]
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: { absolute: "AVES Colombia | Birdwatching Journeys" },
   description: "Explore Colombia's regions and birdlife, listen to bird calls and plan a personal birdwatching journey with AVES.",
   alternates: { canonical: canonicalUrl("/colombia") },
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     description: "Explore Colombia's regions and birdlife, and shape a personal birdwatching journey with AVES.",
     images: ["/images/green-bearded-helmetcrest.png"],
   },
-}
+})
 
 export default function AVESLandingPage() {
   return (

@@ -1,12 +1,7 @@
 import type { Metadata } from "next"
+import { publicMetadata } from "@/lib/public-metadata"
 
-/** Keep each country page's search title, canonical and social preview in agreement. */
+/** Use the same public identity rules while keeping Australian page context. */
 export function australiaMetadata(metadata: Metadata): Metadata {
-  const title = typeof metadata.title === "string" ? `${metadata.title} | AVES Australia` : "AVES Australia"
-  const description = typeof metadata.description === "string" ? metadata.description : "Explore Australian birds and regions, then discuss a personal nature journey with AVES."
-  const url = metadata.alternates?.canonical
-  return { ...metadata, description,
-    openGraph: { title, description, url: typeof url === "string" ? url : "/australia", siteName: "AVES", locale: "en_AU", type: "website", images: [{ url: "/images/brand/aves-australia-bird.png", alt: "AVES Australia" }], ...metadata.openGraph },
-    twitter: { card: "summary_large_image", title, description, images: ["/images/brand/aves-australia-bird.png"], ...metadata.twitter },
-  }
+  return publicMetadata(metadata, { brand: "AVES Australia", locale: "en_AU", image: "/images/brand/aves-australia-bird.png" })
 }

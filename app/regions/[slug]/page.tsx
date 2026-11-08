@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Dynamic Colombia-region route. [slug] is the URL segment after /regions/.
  * Look up a known content record, redirect the old Cauca alias, or return a 404.
@@ -21,6 +22,6 @@ export function generateStaticParams() { return regions.filter(r => r.id !== "ca
 // Use the same lookup for SEO and visible content so unknown slugs do not invent pages.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = findRegion((await params).slug)
-  return {title:`Birding in ${region.name} | AVES Colombia`,description:region.description,alternates:{canonical:canonicalUrl(`/regions/${region.id}`)}}
+  return publicMetadata({title:`Birding in ${region.name} | AVES Colombia`,description:region.description,alternates:{canonical:canonicalUrl(`/regions/${region.id}`)}})
 }
 export default async function RegionPage({params}: Props) { return <ColombiaRegionPage region={findRegion((await params).slug)} /> }

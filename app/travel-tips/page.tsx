@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Colombia travel-preparation editorial page. The labelled sections hold safety,
  * community-impact, sustainability and practical information. Advice and statistics
@@ -11,14 +12,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Shield, Heart, Leaf, Users, TrendingUp, MapPin, Clock, AlertTriangle, CheckCircle, Globe } from "lucide-react"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   alternates: { canonical: canonicalUrl("/travel-tips") },
   title: "Travel Tips for Colombia | Essential Guide for Birdwatching Tours | AVES",
   description:
     "Comprehensive travel guide for Colombia covering safety, culture, and sustainable tourism. Learn about Colombia's transformation and how birdwatching supports local communities.",
   keywords:
     "Colombia travel tips, Colombia safety, sustainable tourism, birdwatching Colombia, travel guide, responsible tourism",
-}
+})
 
 export default function TravelTipsPage() {
   return (

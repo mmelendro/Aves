@@ -1,3 +1,4 @@
+import { australiaMetadata } from "@/features/australia/lib/metadata"
 /*
  * One reusable regional-guide template, populated by the matching record in content/regions.ts.
  * The URL slug selects the region; this file controls the section order and layout.
@@ -32,7 +33,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = findRegion((await params).slug)
   const title = `Birding in ${region.state} | ${region.landscape}`
-  return {
+  return australiaMetadata({
     title,
     description: region.description,
     alternates: { canonical: canonicalUrl(`/regions/${region.id}`) },
@@ -42,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonicalUrl(`/regions/${region.id}`),
       images: [{ url: canonicalUrl(region.image), alt: region.alt }],
     },
-  }
+  })
+
 }
 
 export default async function RegionPage({ params }: Props) {

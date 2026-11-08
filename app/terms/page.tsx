@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Public explanation of inquiries, saved plans and priced proposals.
  * The sections array is rendered into the document body. These statements describe
@@ -9,11 +10,11 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { canonicalUrl } from "@/lib/site-path"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: "Inquiries and Proposals",
   description: "How AVES trip inquiries, saved plans and priced proposals work before a booking is arranged.",
   alternates: { canonical: canonicalUrl("/terms") },
-}
+})
 
 const sections = [
   { title: "Explore and Ask", text: "Destinations, bird profiles and trip styles help start a planning conversation. They do not confirm a departure, availability, access or wildlife sighting. Share your preferred country, regions, timing and interests so we can discuss the practical details." },

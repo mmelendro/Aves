@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * The public AVES homepage at /. It introduces the shared brand, shows the
  * world map, one country-switching bird carousel and personal trip planning.
@@ -15,12 +16,12 @@ import { canonicalUrl } from "@/lib/site-path"
 
 const description = "Follow the birds with AVES. Explore Colombia and Australia, discover our developing New Zealand destination, and find a journey shaped around what you love."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: { absolute: "AVES | Follow the birds" },
   description,
   alternates: { canonical: canonicalUrl() },
   openGraph: { title: "AVES | Follow the birds", description, url: canonicalUrl() },
-}
+})
 
 // The homepage explains the service in three steps; this is content, not workflow state.
 const planningSteps = [

@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Central Andes article with a shared carousel hero and a reusable author card.
  * The large JSX body contains the itinerary story, inline photographs and related links;
@@ -15,7 +16,7 @@ import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 
-export const metadata: Metadata = { title: "Páramo & Cloud Forests", alternates: { canonical: canonicalUrl("/blog/paramo-manizales-thornbill") } }
+export const metadata: Metadata = publicMetadata({ title: "Páramo & Cloud Forests", alternates: { canonical: canonicalUrl("/blog/paramo-manizales-thornbill") } })
 
 export default function ParamoManizalesThornbillPost() {
   return (

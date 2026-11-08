@@ -3,6 +3,7 @@
  * for general/support messages; ordinary visits keep the Australian destination framing.
  * ContactFormSection owns fields, browser state and submission; the server API validates and saves.
  */
+import { australiaMetadata } from "@/features/australia/lib/metadata"
 import type { Metadata } from "next"
 import { NavigationHeader } from "@/features/australia/components/navigation-header"
 import { Footer } from "@/features/australia/components/footer"
@@ -16,7 +17,7 @@ type Props = { searchParams: Promise<{ topic?: string | string[] }> }
 // Only a recognised contact-topic record supplies a title; arbitrary query text is not used as copy.
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const topic = contactTopic((await searchParams).topic)
-  return { title: topic ? { absolute: `${topic.title} | AVES` } : "Plan Your Australian Journey", alternates: { canonical: canonicalUrl("/contact") } }
+  return australiaMetadata({ title: topic ? { absolute: `${topic.title} | AVES` } : "Plan Your Australian Journey", description: topic ? "Contact AVES for planning information, account support and information requests." : "Share your Australian birding interests, preferred regions and travel ideas with AVES. Arrangements are discussed before booking.", alternates: { canonical: canonicalUrl("/contact") } })
 }
 
 // Decide the page framing on the server, then hand the selected topic to the interactive form.

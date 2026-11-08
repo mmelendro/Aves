@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Human-readable site directory. Public groups come from lib/public-pages, which
  * also feeds the machine-readable sitemap. Australia has a separately linked directory.
@@ -10,11 +11,11 @@ import { Badge } from "@/components/ui/badge"
 import { publicPageGroups } from "@/lib/public-pages"
 import { canonicalUrl } from "@/lib/site-path"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: "AVES Site Map",
   description: "Find AVES destinations, Colombia's region guides, the Australia site map and our developing New Zealand destination.",
   alternates: { canonical: canonicalUrl("/site-map") },
-}
+})
 
 export default function SiteMapPage() {
   return (
