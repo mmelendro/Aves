@@ -2,6 +2,8 @@
 
 ## Owner pause — 8 November 2026
 
+Planning-only additions AVES-030/031/032 now explicitly cover the AVES host role, the existing YouTube video library/future 8K footage with native/embed/hybrid hosting evaluation, and the English/Spanish branding discussion. See the current prompt and detailed roadmap. No website, channel, provider, hosting or branding change was made. Stay paused.
+
 **Paused at the owner's request, 8 November 2026.** Read [PAUSED-CHECKPOINT-2026-11-08.md](docs/PAUSED-CHECKPOINT-2026-11-08.md) first. South Island/regional-zoom app candidates5847eb7/6ba7fee are pushed and staged READY but NOT promoted; aves.bio still runs95c9f75/721370e. Finish source hosted/live verification after explicit resume. New pricing, credits-carousel and Equal Earth recentering requests are recorded there; pricing has a separate untested draft. This notice takes precedence over older status text.
 
 ## Current production — world-to-country zoom and focal framing, 8 November 2026 (Sydney)
