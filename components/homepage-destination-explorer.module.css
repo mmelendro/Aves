@@ -21,6 +21,8 @@
 .regionSelect { width: 100%; min-height: 44px; border: 1px solid #a7f3d0; border-radius: .5rem; padding: .5rem; background: white; color: #064e3b; font-size: .875rem; }
 .regionLink { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 44px; margin-top: .5rem; color: #065f46; font-size: .875rem; font-weight: 600; }
 .regionControl { cursor: pointer; outline: none; }
+.mapZoom { transform-origin: 0 0; transition: transform 650ms cubic-bezier(.2,.75,.25,1); }
+.pointZoom { transform-origin: center; transition: transform 650ms cubic-bezier(.2,.75,.25,1); }
 .regionText { pointer-events: none; }
 .regionControl:hover .regionLand, .regionControl:focus-visible .regionLand,
 .regionControl:hover .regionLabel, .regionControl:focus-visible .regionLabel,
@@ -33,6 +35,7 @@
    and browser pinch zoom remain native rather than captured by map gestures. */
 @container (max-width: 623.98px) { .mapStage { height: 37rem; } }
 @media (prefers-reduced-motion: reduce) {
+  .mapZoom, .pointZoom { transition: none; }
   .countryView { animation: none; }
   .worldView, .mapStage[data-map-view="country"] .worldView { transition: none; }
 }

@@ -49,7 +49,7 @@ test("world-to-country drill-down preserves each complete collection and known r
   const expected = {
     colombia: { birds: 22, regions: 11, href: id => `/regions/${id}` },
     australia: { birds: 20, regions: 9, href: id => `/australia/regions/${id}` },
-    "new-zealand": { birds: 31, regions: 3, href: id => `/new-zealand#region-${id}` },
+    "new-zealand": { birds: 31, regions: 3, href: id => load("lib/new-zealand-region-links.ts").newZealandRegionHref(id) },
   }
   assert.deepEqual(Object.keys(destinationRegions).sort(), Object.keys(expected).sort())
   for (const [country, counts] of Object.entries(expected)) {
@@ -174,6 +174,13 @@ test("regional maps preserve real geometry, direct links and equivalent named se
       const control = controls.find(item => item.props["aria-label"] === `Preview ${region.name} birds`)
       assert.ok(control, `${country}/${region.id}: named interactive map control`)
       assert.equal(control.props["aria-pressed"], selected.id === region.id, "manual region selection takes precedence over automatic photo highlights")
+      const available = selected.id === region.id
+      assert.equal(control.props["aria-hidden"], available ? undefined : true, "offscreen controls leave the accessibility tree while zoomed")
+      assert.equal(control.props.tabIndex, available ? (control.type === "g" ? 0 : undefined) : -1, "only the visible selected region remains in the map's keyboard order")
+      if (!available) {
+        assert.equal(control.props.style.pointerEvents, "none", "cropped regions cannot intercept pointer input")
+        continue
+      }
       control.props.onClick()
       assert.equal(choices.pop(), region.id)
       if (control.type === "g") {
@@ -197,6 +204,26 @@ test("regional maps preserve real geometry, direct links and equivalent named se
   for (const state of load("content/global-australian-map.ts").australiaMapStates) assert.ok(australia.includes(`d="${state.path}"`), `${state.name}: unchanged geometry`)
   const nz = renderToStaticMarkup(React.createElement(Map, { country: "new-zealand" }))
   for (const island of load("content/new-zealand-map.json").islands) for (const path of island.paths) assert.ok(nz.includes(`d="${path}"`), `${island.id}: unchanged geometry`)
+})
+
+test("selected regional maps use a real zoom transform, while country overviews keep all region controls available", () => {
+  const Map = load("components/destination-regional-map.tsx").default
+  for (const [country, regions] of Object.entries(destinationRegions)) {
+    const overview = elements(Map({ country, onSelectRegion() {} }), item => item.props["aria-label"]?.startsWith("Preview "))
+    for (const control of overview) {
+      assert.equal(control.props["aria-hidden"], undefined)
+      assert.equal(control.props.tabIndex, control.type === "g" ? 0 : undefined)
+      assert.notEqual(control.props.style?.pointerEvents, "none")
+    }
+    for (const region of regions) {
+      const tree = Map({ country, selectedRegionId: region.id, onSelectRegion() {} })
+      const transforms = elements(tree, item => typeof item.props.style?.transform === "string").map(item => item.props.style.transform)
+      assert.ok(transforms.some(value => /scale\((?!1\))/.test(value)), `${country}/${region.id}: selection receives a closer view`)
+      const controls = elements(tree, item => item.props["aria-label"]?.startsWith("Preview "))
+      assert.ok(controls.some(control => control.props["aria-pressed"] && control.props["aria-hidden"] !== true))
+      assert.ok(controls.every(control => control.props["aria-pressed"] || control.props["aria-hidden"] === true), "a clipped region cannot remain an invisible focus stop")
+    }
+  }
 })
 
 test("country map highlights follow every supported region of the displayed photograph", () => {

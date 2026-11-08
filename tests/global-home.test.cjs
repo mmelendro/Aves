@@ -146,7 +146,7 @@ test("country cards are regional maps with canonical region links and no extra c
   const states = load("content/global-australian-map.ts").australiaMapStates
   assert.equal(states.length, 9)
   for (const state of states) assert.ok(links.some(link => link.href === `/australia/regions/${state.regionId}`))
-  for (const island of load("content/new-zealand-map.json").islands) assert.ok(links.some(link => link.href === `/new-zealand#region-${island.id}`))
+  for (const island of load("content/new-zealand-map.json").islands) assert.ok(links.some(link => link.href === load("lib/new-zealand-region-links.ts").newZealandRegionHref(island.id)))
   for (const country of destinations) assert.ok(links.some(link => link.href === country.href && link.text === `Explore ${country.name}` && !link.next))
   assert.ok(links.filter(link => link.href?.startsWith("/")).every(link => !link.next), "cross-app country and region routes reload normally")
 })

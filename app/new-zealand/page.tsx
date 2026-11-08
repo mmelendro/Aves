@@ -82,6 +82,7 @@ export default function NewZealandPage() {
               <h3 id={`region-${region.id}-heading`} className="text-2xl font-medium">{region.name}</h3><p className="mt-2 font-medium text-emerald-700">{region.subtitle}</p>
               <p className="mt-5 leading-7 text-gray-600">{region.description}</p><p className="mt-5 text-sm leading-6 text-emerald-900"><strong>Birdlife:</strong> {region.birds}</p>
               <p className="mb-5 mt-4 text-sm leading-6 text-gray-600">{region.balance}</p>
+              {region.id === "south-island" && <Link href="/new-zealand/south-island" className="mb-3 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore the South Island<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
               <a href={region.source} target="_blank" rel="noreferrer" className="mt-auto inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4">Read the DOC place guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
             </article>)}</div>
           </div>

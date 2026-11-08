@@ -25,6 +25,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
   const [regionId, setRegionId] = useState("")
   const [birdId, setBirdId] = useState("")
   const backButton = useRef<HTMLButtonElement>(null)
+  const regionBackButton = useRef<HTMLButtonElement>(null)
   const countryButtons = useRef<Record<string, HTMLButtonElement | null>>({})
   const destination = destinations.find(country => country.id === selectedId) ?? destinations[0]
   const regions = destinationRegions[destination?.id] ?? []
@@ -54,8 +55,8 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
   useEffect(() => {
     // The clicked world shape becomes inert during the transition. Move focus
     // to the new view's persistent exit without scrolling a phone's page.
-    if (zoomed) backButton.current?.focus({ preventScroll: true })
-  }, [zoomed, selectedId])
+    if (zoomed) (regionId ? regionBackButton : backButton).current?.focus({ preventScroll: true })
+  }, [zoomed, selectedId, regionId])
   if (!destination) return null
 
   return (
@@ -74,14 +75,14 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
         <div id="homepage-country-preview" className="mb-5 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-3">
-              <h2 className="text-2xl font-medium tracking-tight text-emerald-950">{destination.name}</h2>
+              <h2 className="text-2xl font-medium tracking-tight text-emerald-950">{region ? <>{region.name}<span className="ml-2 text-sm font-normal text-emerald-800"> · {destination.name}</span></> : destination.name}</h2>
               {destination.status && <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900">{destination.status} · Planning beta</span>}
             </div>
-            <p className="mt-2 text-sm leading-6 text-gray-600">{destination.description}</p>
+            <p className="mt-2 text-sm leading-6 text-gray-600">{region?.description || destination.description}</p>
           </div>
           {/* Selection stays on this page; this native link opens the chosen app. */}
-          <a href={destination.href} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-3 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
-            Explore {destination.name}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+          <a href={region?.href || destination.href} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-3 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
+            Explore {region?.name || destination.name}<ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
         <div className={styles.layout}>
@@ -99,6 +100,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                 </div>
                 <div className={styles.regionalCanvas}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={selectRegion} /></div>
                 <figcaption className={styles.countryFooter}>
+                  {region && <button ref={regionBackButton} type="button" onClick={() => selectRegion("")} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to {destination.name}</button>}
                   <label htmlFor="homepage-region" className="mb-2 block text-xs font-medium text-emerald-900">Choose a region in {destination.name}</label>
                   <select id="homepage-region" value={regionId} onChange={event => selectRegion(event.target.value)} className={styles.regionSelect}>
                     <option value="">All featured {destination.name} birds</option>
@@ -106,7 +108,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                   </select>
                   {region ? <a href={region.href} className={styles.regionLink}>Explore {region.name}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a>
                     : <p className="mt-2 text-xs leading-5 text-emerald-900">Choose a region to meet its birds. Highlights show featured areas for the current bird.</p>}
-                  <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? "AVES planning regions · existing map artwork" : <><a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
+                  <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? `AVES planning ${region ? "location focus" : "regions"} · existing map artwork` : <><a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
                 </figcaption>
               </figure>}
             </div>}

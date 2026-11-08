@@ -3,7 +3,7 @@
  * Everything here is rendered on the server, with ordinary full-page links.
  * Colombia shares the exact artwork/marker positions used on its country page;
  * Australia is a public geometry snapshot of that separately deployed app.
- * NZ keeps the existing island-section links until island pages are available.
+ * NZ opens the dedicated South Island guide; other islands retain their anchors.
  */
 import { ArrowRight } from "lucide-react"
 import { destinations } from "@/content/destinations"
@@ -11,6 +11,7 @@ import { colombiaMapMarkers } from "@/content/colombia-map-markers"
 import { australiaMapStates, australiaMapProvenance } from "@/content/global-australian-map"
 import nz from "@/content/new-zealand-map.json"
 import DestinationRegionalMap from "@/components/destination-regional-map"
+import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
 
 // A future destination needs reviewed regional geometry before it gets a map card.
 const regionalMapCountries = new Set(["colombia", "australia", "new-zealand"])
@@ -24,7 +25,7 @@ export default function DestinationMapCards() {
         {destinations.filter(country => regionalMapCountries.has(country.id)).map(country => {
           const links = country.id === "colombia" ? colombiaMapMarkers.map((region, i) => ({ name: `${i + 1}. ${region.name}`, href: `/regions/${region.slug}` }))
             : country.id === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => ({ name: state.name, href: `/australia/regions/${state.regionId}` }))
-            : nz.islands.map(island => ({ name: island.label, href: `/new-zealand#region-${island.id}` }))
+            : nz.islands.map(island => ({ name: island.label, href: newZealandRegionHref(island.id) }))
           return <article key={country.id} aria-label={`${country.name} regional map`} className="overflow-hidden rounded-3xl border border-emerald-100 bg-white">
             <div className="flex flex-wrap items-center justify-between gap-2 px-5 pb-2 pt-5"><h3 className="text-xl font-medium text-emerald-950">{country.name}</h3>{country.status && <span className="text-xs text-amber-900">In development</span>}</div>
             <div className="h-80 px-4 py-4 lg:h-96"><DestinationRegionalMap country={country.id} /></div>

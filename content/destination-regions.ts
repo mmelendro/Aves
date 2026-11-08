@@ -12,13 +12,15 @@ import { australiaMapStates } from "./global-australian-map"
 import australianSelections from "./global-australian-regional-birds.json"
 import { newZealandRegions } from "./new-zealand"
 import { newZealandBirdIslands } from "./new-zealand-bird-islands"
+import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
+import australianOverviews from "./global-australian-region-overviews.json"
 
-export type DestinationRegion = { id: string; name: string; href: string }
+export type DestinationRegion = { id: string; name: string; href: string; description?: string }
 
 export const destinationRegions: Record<string, readonly DestinationRegion[] | undefined> = {
-  colombia: colombiaMapMarkers.map(region => ({ id: region.slug, name: region.name, href: `/regions/${region.slug}` })),
-  australia: australiaMapStates.flatMap(state => state.regionId ? [{ id: state.regionId, name: state.name, href: `/australia/regions/${state.regionId}` }] : []),
-  "new-zealand": newZealandRegions.map(region => ({ id: region.id, name: region.name, href: `/new-zealand#region-${region.id}` })),
+  colombia: colombiaMapMarkers.map(region => ({ id: region.slug, name: region.name, href: `/regions/${region.slug}`, description: colombianRegions.find(item => item.id === region.slug)?.description })),
+  australia: australiaMapStates.flatMap(state => state.regionId ? [{ id: state.regionId, name: state.name, href: `/australia/regions/${state.regionId}`, description: australianOverviews.regions.find(item => item.id === state.regionId)?.description }] : []),
+  "new-zealand": newZealandRegions.map(region => ({ id: region.id, name: region.name, href: newZealandRegionHref(region.id), description: region.description })),
 }
 
 type LocalSelection = { birdId: string; whereFound: string; sources: BirdSource[] }
