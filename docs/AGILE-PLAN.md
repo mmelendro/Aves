@@ -14,20 +14,20 @@ Official usage guidance: https://learn.chatgpt.com/docs/pricing (reviewed 8 Nove
 
 ## Suggested near-term sequence
 
-Latest owner steering: finish the selected Info rollout, then put South Island trip readiness first (page, practical guidance/resources and a trial of the private brief). Sydney launch-product planning is next. Apply bird/habitat-led balanced experiences and sourced stories; optional North Island extensions stay separate. Map polish/satellite layers follow later. Choose one bounded release at a time.
+Latest owner steering: the shared Info rollout is complete. Put South Island trip readiness first (page, practical guidance/resources and a trial of the private brief). Sydney launch-product planning is next. Apply bird/habitat-led balanced experiences and sourced stories; optional North Island extensions stay separate. Map zoom/polish/satellite layers follow later. Choose one bounded release at a time.
 
 Each item below is its own release/checkpoint, not all work for one week. Choose only one when conserving allowance. This recommendation does not silently replace the owner's established priority order.
 
-Delivered: NZ translucent Info overlay pilot (task 01), published and live-verified on 8 November. Pause before selecting the next release. Candidate sequence:
+Delivered: NZ pilot, matching country Info panels and the full shared-viewer rollout (tasks 01/02/02b), published and live-verified on 8 November. Pause before selecting the next release. Candidate sequence:
 
 1. South Island page with the shared map/media template — 3 units.
 2. South Island practical planning tips — 3 units.
 3. Curated NZ resources — 3 units.
-4. Three homepage map cards: shared names/callouts/style — 3 units.
+4. Private brief/bird-picker trial and demonstrated refinements — scope from actual feedback.
+5. Sydney launch-product brief — scope as a separate bounded outcome after NZ.
+6. Three homepage map cards: shared names/callouts/style — 3 units, later.
 
-Country-homepage rollout (task 02 / AVES-012d-3) is delivered for Colombia and Australia, matching NZ. Other viewer templates remain task 02b; the country frames do not establish suitability for shorter frames without further checks.
-
-AVES-012d-2 is delivered: more of the bird shows through the NZ Info sheet, with darker readable notes/links. Local and hosted desktop/phone-sized checks, builds and sync are complete. Other-viewer template rollout remains task 02b, separately selected.
+The full Info stream is delivered, including short 4:5 homepage frames and tall regional/article frames. Source 89 tests and Australia 261 tests, both builds and representative desktop/phone-sized local/staged/live checks passed. Stronger no-blur/contrast alternatives remain; physical devices and OS preference modes were not exercised. Do not redo this rollout.
 
 The map standard precedes card animation. Useful NZ content can proceed independently of ecological overlays or a whole-site map rollout. Only task selection is authorised by a later user instruction, not by a checkbox in a planning view.
 
@@ -37,8 +37,8 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 | --- | --- | --- | --- | --- | --- |
 | 01 | Delivered 8 November | NZ translucent Info overlay pilot, live f5eee01 | AVES-012d-1 | 2 (original estimate) | Complete; no remaining pilot work |
 | 02 | Delivered 8 November | Matching Info overlays on Colombia and Australia country homepages | AVES-012d-3 | 3 (original estimate) | Complete for country homepages |
-| 02b | Visual rollout remaining | Other global/regional/experience/article viewer templates | AVES-012d | Estimate per selected template | Split shorter frames and applications into tested batches |
-| 03 | Suggested first | Uniform names and styling on three map cards | AVES-012c | 3 | Medium |
+| 02b | Delivered 8 November | Shared global/regional/experience/article Info overlays, including compact short frames | AVES-012d-4 | Completed | Verified; no remaining rollout work |
+| 03 | Later map consistency | Uniform names and styling on three map cards | AVES-012c | 3 | Medium |
 | 04 | Visual rollout | Roll shared map style through page templates | AVES-012c / 012a | 5 | Higher |
 | 05 | Suggested first | Dedicated South Island page and local carousel | AVES-007 / 012a | 3 | Medium |
 | 06 | Suggested first | South Island practical travel guidance | AVES-016 | 3 | Medium |
@@ -63,18 +63,19 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 | 25 | Low priority / deferred | Friendlier expired-Google-session landing | Deferred | 2 | Lower |
 | 26 | Later / catalogue clarity | Hide extinct species from visitor-facing lists; NZ first | AVES-017 | 2 | Lower; verify counts, scope and saved-data compatibility |
 | 27 | Architecture / planned | Consolidate into one app/project, with AVES naming/branding and SEO, through an inventory, unified preview and reviewed cutover | AVES-020 | Not yet estimated | Scope separate checkpoints; production and later retirement need explicit approval |
+| 28 | Later map navigation | Homepage country selection zooms to its regional map, with connected carousel and Back to world | AVES-003a-2 | Estimate after a small transition/gesture prototype | Reuse maps/state; test accurate framing, keyboard, reduced motion and mobile scroll/pinch safety |
 
 Several entries are optional or multi-release streams, not one-session commitments. Re-estimate after the first completed pilot; do not turn every estimate into a guarantee.
 
 ## Separate draft consolidation checkpoint — AVES-020
 
-Phone-chat PR #3 contains an unmerged unified preview. Hosted gates and separately approved production cutover remain; carry later source fixes such as 8948ccb into that candidate before release. This transparency release does not merge or publish consolidation.
+Phone-chat PR #3 contains an unmerged unified preview. Hosted gates and separately approved production cutover remain; carry the latest source 7fa0624 and Australian f50eb8a behavior into that candidate before release. The Info rollout did not merge or publish consolidation.
 
 Added at the owner's request on 8 November 2026 (Sydney): consolidate the existing independent applications into one Next.js application and one production Vercel project, preserving the existing shared database and repository. Include the owner's requested naming/branding/SEO review and permission to rename projects or create a new target where useful. Start with a route/file/dependency and search-compatibility inventory, then size code integration, unified preview verification, approved cutover/rollback and later project retirement separately. Effort is not yet estimated; do not assign a credit/time guarantee or silently reprioritise the owner's current work. Recording this task does not authorise implementation or production changes. See ROADMAP-DETAILS.md for acceptance criteria.
 
 ## Unscoped / unconfirmed vision
 
-- AVES-025: a small NZ checklist-filter pilot can begin with reliable existing origin/seasonal metadata; price/scope activity-data enrichment separately. AVES-026: the single green “birds” → “AVES” heading flip is an independent cosmetic increment. Both are queued; the current Info publish must finish first.
+- AVES-025: a small NZ checklist-filter pilot can begin with reliable existing origin/seasonal metadata; scope activity-data enrichment separately. AVES-026: the single green “birds” → “AVES” heading flip is an independent cosmetic increment. Both are queued; neither was implemented in the completed Info release.
 - AVES-023 defines the itinerary principle for the South Island pilot; use a short human-reviewed options brief before AI/supplier automation. AVES-024 Sydney launch product is next after NZ readiness and needs a bounded product/operations estimate. Neither authorises advertising, outreach, booking or spend.
 - AVES-021 satellite/city layers: first assess a small city-label or imagery/projection pilot; estimate separately after provider/licence review. AVES-022 pronunciation: start with a small permissioned Māori-name audio set, then estimate expansion. Both are queued, not part of the current Info release or prerequisites for NZ trip readiness.
 - Small queued discovery follow-ups AVES-018 (discreet carousel collection titles) and AVES-019 (sourced approximate country species totals on map selection) need separate bounded estimates when selected. They do not resume implementation or alter the owner priority order.

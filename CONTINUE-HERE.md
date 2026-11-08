@@ -1,6 +1,21 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — matching country Info panels, 8 November 2026 (Sydney)
+## Current production — shared Info-overlay rollout, 8 November 2026 (Sydney)
+
+**AVES-012d-4 published, verified and paused.** All shared homepage, regional, article and experience bird viewers now use the same translucent in-photo species-details panel. The obsolete below-photo presentation branches have been removed. Both independent apps use identical panel CSS, including a short-frame adjustment that keeps the details scrollable at narrow widths. Full notes, species pickers, sources, photograph/recording rights and discreet controls remain; internal country/region links and NZ wishlist hearts are preserved. No 3D flip animation was added.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `7fa0624` | `dpl_B6EdKUThQEjBc2MA6znsa6GDicFF` |
+| Australia and shared accounts | `australia/preview` | `f50eb8a` | `dpl_3cY5zFCXvHFXt3TkDGBod8fH3rT6` |
+
+**Verification:** 89 source tests plus 261 Australian tests (350 total), strict TypeScript in both apps, and both local and remote production builds passed. Browser checks covered 13 local, nine staged and eight live representative layouts. These included 320px viewports and an actual 340px-high photo with at least 134px of scrollable information body. Info stays inside the photo without expanding its frame; live close restored focus. Rights/source links, region navigation, picker updates, calls/audio cleanup and controls were checked across representative shared templates. Physical phones/touch hardware and OS contrast preferences were not tested. No private guest data was submitted and no database, authentication, environment, provider or billing configuration changed. Temporary viewport overrides were reset, sound paused and local servers stopped.
+
+Private workspace evidence: `audit/evidence/nov8-shared-info-overlay-checks.json`, `nov8-shared-info-home-desktop-live.png` and `nov8-shared-info-home-mobile-live.png`. Both application commits are published and pushed. Documentation-only checkpoint commits may advance branch heads beyond the deployed application commits; Git automatic deployment remains disabled.
+
+**Next state:** the shared Info-overlay rollout is delivered. New enhancements AVES-021–026 and AVES-003a-2 remain queued, not implemented: the latter would transition/zoom from a selected world-map country into its regional map, like a pinch zoom, with the bird carousel connected. Keep New Zealand South Island trip readiness first, followed by a practical Sydney launch product. Existing extinct-species cleanup and other roadmap entries still require separate selection. The separate AVES-020 consolidation draft in PR #3 is unmerged; carry these latest source/Australian application fixes into that candidate before any approved cutover. Do not merge, deploy or rebuild it as part of this checkpoint. **Stay paused before any next change.**
+
+## Historical production — matching country Info panels, 8 November 2026 (Sydney)
 
 **AVES-012d-3 published, verified and paused.** Main country carousels on /colombia and /australia now match /new-zealand: 72% white backing, 2px blur, fully opaque text and darker small notes/links. Both apps use identical panel CSS, including stronger fallback/contrast treatments. Complete notes, picker, credits and discreet controls remain. Australian internal links use Next Link to retain /australia. Its duplicated inline details block is replaced by one extracted component for both presentations. Global, regional, article and other viewers retain below-photo details; wider rollout remains separately queued.
 
