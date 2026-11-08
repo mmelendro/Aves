@@ -1,5 +1,9 @@
 # AVES — agile design and implementation plan
 
+**Current checkpoint —9November:** source f941bb9 and shared accounts5659bea are published and verified. See [current prompt](NEXT-WEEK-PROMPT.md) and [release checkpoint](RELEASE-2026-11-09-PLACES-ACCOUNTS.md). Historical release notices below are superseded. Private account hierarchy now includes `/account/email-updates`; exclude it from public/XML sitemaps. Next visual priority012c; automatic private proposal research/story059 remains queued. Pause after sync.
+
+<details><summary>Historical plan and architecture evidence</summary>
+
 **Latest release — 9 November 2026: Arthur’s Pass 3D place-card pilot published; paused.** Source3ef94db / dpl_CwtAGCjuBe4XdYHw72GKxNrJYwHC. ONE card flips between a sourced local map and two credited landscape photographs, with explicit controls, retained photo choice, inert hidden face and reduced-motion CSS.118 source tests, TypeScript/hosted build and staged/live checks passed within the recorded limits; mobile screenshot capture was unreliable, no physical-phone test. AU/account runtime unchanged3f644a1. Read [the release checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md) and [the current prompt](NEXT-WEEK-PROMPT.md); they supersede older status notes. Next proposed038 map zoom/scale requires owner selection.047–052 remain queued.
 
 **Latest release —9November2026: homepage birds↔aves word flip published; paused.** Source3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3esoPPU3u. Heading “Where will birds take you?”; only the word changes, in matching borderless lowercase green italics.116 full source checks plus14 focused refinement checks (overlapping), TypeScript/build and desktop/phone-sized verification passed within the recorded limits. AU/account runtime unchanged3f644a1. See [RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). Next proposed: ONE South Island local-map/landscape3D place-card pilot015/037, Sol medium. Do not start it automatically. Background media041, sea context042, map hover preview043, paired place names044, team refresh045 and double-click navigation046 are queued.
@@ -189,3 +193,5 @@ Measure observed quality/rework and allowance movement only if visible or suppli
 
 
 **Additional queued9November:**043 world-country hover/focus recentering before click, with stable targets/projection;044 selective paired place names such as Aotearoa/New Zealand. Current word-flip typography is matching lowercase italics with no border; keyboard focus uses a subtle underline. See ROADMAP-DETAILS.md.
+
+</details>

@@ -119,3 +119,8 @@ There is no automatic notification retry worker or delivery webhook in this impl
 - For comments-only edits, run `node node_modules/typescript/bin/tsc --noEmit --incremental false` in this application and confirm that non-comment source is unchanged. For behavior changes, also run relevant automated tests and verify the complete flow in an isolated test environment. Database tests must not be aimed at production by default.
 
 These controls reduce risk; they do not make any website impossible to attack. Hosted provider settings, key rotation, backups, monitoring, and real delivery require separate operational checks, which this source tour does not claim to have performed.
+
+
+## Optional account email updates —9November2026
+
+Shared signup offers an unchecked choice before email/Google authentication. Opt-in intent routes to `/account/email-updates`; the visitor confirms with Save. The private screen reads and updates `/australia/api/account/email-updates`. That route verifies the account, validates same-origin strict boolean input, and calls service-only `account_email_updates`; the database checks confirmed identity and writes the existing subscriber/consent tables. No email address or actor ID is accepted from browser JSON. GET is read-only; duplicate saved values do not append duplicate consent events. Explicit authenticated opt-in may reactivate a prior suppression; the public contact form still cannot do so. Essential account/proposal messages are separate. See migration20261108225245 and tests/email-updates.test.cjs. This function uses SECURITY DEFINER with empty search_path and explicit service-role-only execution; keep its API identity check and database confirmation check intact. It sends no campaign mail.
