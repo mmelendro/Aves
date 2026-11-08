@@ -64,6 +64,7 @@ Several entries are optional or multi-release streams, not one-session commitmen
 
 ## Unscoped / unconfirmed vision
 
+- Small queued discovery follow-ups AVES-018 (discreet carousel collection titles) and AVES-019 (sourced approximate country species totals on map selection) need separate bounded estimates when selected. They do not resume implementation or alter the owner priority order.
 - Human-reviewed itinerary/routing assistance and a verified sustainable supplier directory need a separately bounded pilot.
 - AI recommendations, live supplier availability, reservations and payments are not yet sized or implemented; define the guest journey, data rights, operational responsibilities and acceptance criteria first.
 - Detailed local ecosystem maps remain unconfirmed (AVES-013).

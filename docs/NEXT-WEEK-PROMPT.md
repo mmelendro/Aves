@@ -32,6 +32,7 @@ These are proposed options, not automatic work or a replacement for the owner's 
 
 ## Remaining streams
 
+- **018 / 019, later discovery cues:** give every carousel a discreet collection title, such as “Birds of New Zealand”, “Birds of the South Island” or “Birds of Colombia’s Caribbean region”, updating when its actual country/region collection changes. When a country is selected on a map, show a small approximate country species total with source/date context. Keep that total separate from the number of featured photos and avoid implying sightings or comprehensive media coverage; research current totals at implementation.
 - **012b / 001 / 002 / 010:** richer regional bird viewers instead of text-only cards, preserving notes/sources/ethics and avoiding duplicate carousels. NSW is the example. Improve Colombian bird variety and copy one verified region at a time. Include cultural experiences/totemic birds only with specific community-led sources and sharing permissions.
 - **003b:** add both megadiverse-country and actual biodiversity-hotspot layers to the existing Equal Earth map, after source/licence review. Explain what/why and distinguish ecology from offered destinations. NZ belongs in the hotspot narrative. The base map alone is not the full ecological release.
 - **015:** later 3D map/region-photo cards and possible photo/details flips, with clear Back/Explore actions, verified local media, hidden-face/focus/audio handling and reduced motion. NZ/South Island pilot after the foundations; animation does not block planning.

@@ -15,8 +15,12 @@ Implementation stays paused until a specific release is selected. Relative effor
 
 ## Agreed backlog
 
+New paused follow-ups: AVES-018 adds discreet, accurate carousel collection titles; AVES-019 adds sourced approximate country species totals when selecting a country on a map. Both are planning only and must not start automatically.
+
 | ID | Kind / priority | Observation or request | Completion check | Status |
 | --- | --- | --- | --- | --- |
+| AVES-018 | Carousel context / later | Discreet titles clarify which country/region birds a viewer contains, including switching collections. | Reflect the actual collection and use consistent small typography plus an appropriate accessible name. Update on collection changes, not merely a bird-driven map highlight; preserve image space and existing controls. | Backlog |
+| AVES-019 | Country context / later | Show an approximate bird-species total when a country is selected on a map. | Verify comparable totals against current primary sources with taxonomy/geographic/status scope and source/date. Show a concise estimate distinct from featured-media counts and trip expectations; never invent counts. Desktop/mobile checks. | Backlog |
 | AVES-001 | Editorial / P2 | Broader copy/repetition and unverified-claim review. The Santa Marta pilot is tracked separately as AVES-001a. | Remaining pages are reviewed in small, verified batches. | Backlog |
 | AVES-001a | Editorial pilot / P2 | Consolidate the repeated Santa Marta bird-range paragraphs and shorten local habitat notes. | One shared introduction, three distinct habitat cards, complete carousel profiles and other regions' range notes preserved. | Verified |
 | AVES-002 | Content / P2 | Too few distinctive Colombian regional birds and excessive reuse across regions. | Coverage matrix and a verified first expansion batch demonstrate better regional variety. | Backlog |
