@@ -1,6 +1,25 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production - country dividers and complete bird-map links, 8 November 2026 (Sydney)
+## Current production - first private New Zealand questionnaire, 8 November 2026 (Sydney)
+
+**Published, live-tested and paused after the smallest useful questionnaire release.** The shared planner now accepts New Zealand and its three planning islands. The short optional questionnaire asks holiday pace, birding frequency, accommodation and interests, alongside existing timing (explicit year requested), group size and notes. Defaults are open; no private guest identities, dates or preferences were embedded in source. Guests sign in with their own account, save/reopen/edit a private draft, review its readable summary and separately choose Share with AVES. Submitted copies are immutable and visible in the authorized owner inbox. Planning beta only: no tour, price, reservation or availability is confirmed.
+
+Entry: https://aves.bio/account?country=new-zealand&region=south-island . The public NZ page has a Start a private planning brief link. Drafts are not autosaved before Save My Draft; saving before leaving and then revisiting the account preserves answers. This is individual-account planning, not shared editing between multiple guests. No invitations were sent.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `a6c807c` | `dpl_A8D7Neg5nZbQ8ipYfo9dPCNHAXoE` |
+| Australia and shared accounts | `australia/preview` | `dad0cfc` | `dpl_8W29poLmMDH1EfP5aygYDop4EZGe` |
+
+Implementation reuses existing user-scoped drafts, authorization, RLS, exact-revision editing, retry keys, immutable quote-request snapshots, private owner inbox and Resend notifications. `content/planning-questionnaire.ts` defines a version-1 structured model; optional `details.questionnaire` is strictly validated by API and database. Historical plans without it retain their serialization/retry hashes. Migration `20261108023556_new_zealand_private_planning_brief.sql` matches hosted history and adds only NZ catalogue rows plus optional JSON validation; existing grants/policies are unchanged. No new service, key, dependency or paid plan. NZ notification emails contain a private inbox link, without guest identity, answers or notes. Both privacy notices describe the questionnaire.
+
+**Verification:** all 252 AU application tests, 20 relevant source tests, strict TypeScript in both apps and both production builds passed. The dedicated local and hosted rollback tests verified valid/invalid questionnaire shapes, country-region checks, draft edits, anonymous denial, cross-account read/write isolation, frozen submission/retry and authorized owner access; all database-only synthetic fixtures rolled back. Live browser tests at 1280px and 390px found no horizontal overflow or console errors, and confirmed save, fresh visit, edit round-trip, separate sharing review, submitted edit removal and owner-readable answers. The test notification arrived in the owner's Gmail inbox without answers. Anonymous account/admin APIs returned 401 with private/no-store; signed-out entry retained NZ/South Island through sign-in. Existing Google login was used without changing credentials or permissions and the test session was signed out. One clearly labelled synthetic QA brief remains closed as an audit example; no real guest answers were collected. Physical iPhone/touch hardware and a real guest trial were not tested. The prior free-plan leaked-password warning remains; no new advisor finding was introduced by a policy change.
+
+Evidence outside GitHub: `audit/evidence/nov8-nz-questionnaire-live-checks.json`, desktop/mobile screenshots and unit-test logs. Both application commits are pushed; later documentation-only commits advance heads without changing these runtime builds. Git auto-deployment remains disabled. The country dividers/bird-region links, homepage carousels and working account/security flows are preserved.
+
+**Next state:** AVES-005a-1 (first short questionnaire) and AVES-005b-1 (NZ registration/private persistence/owner receipt) verified. Full owner priority 2 remains in progress: optional bird selection/wishlist and any further questionnaire fields/guest feedback are separate increments. No AI generation, supplier booking, world map, regional divider rollout or ecosystem map was bundled. The owner explicitly requested a pause; wait for the next selected increment. The matching regional duo layout remains queued with NZ first; detailed local ecosystem maps remain deferred/unconfirmed.
+
+## Historical production - country dividers and complete bird-map links, 8 November 2026 (Sydney)
 
 **Published, live-tested, synced and paused after AVES-006b. Priority 1 is complete.** Colombia and Australia now use the proven New Zealand country-homepage divider. Map and bird panels follow the actual page/window width, with full safe drag travel, keyboard controls and reset. Frame height is capped at 44rem; panels retain 256px minimum width. Narrow phones show bird media first, then the map, with the divider/reset hidden. The established emerald style, translucent controls, credits and available-call speaker cue remain.
 
