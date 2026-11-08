@@ -1,8 +1,10 @@
 # AVES — current execution prompt
 
+**Current release — 9 November 2026: published and paused.** South Island/regional zoom is live: source5847eb7 / dpl_GMPLFwPviWsLq73i9JJBjCNvkaja; AU6ba7fee / dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv. Desktop/mobile and live sitemap checks passed within the limits recorded in [RELEASE-2026-11-09-SOUTH-ISLAND.md](RELEASE-2026-11-09-SOUTH-ISLAND.md). A1 is complete; B1 private-brief verification is the next proposed increment, not started. Announce model/effort before resuming; Sol medium recommended. This notice overrides older staged/paused status below.
+
 Updated 9 November 2026 (Sydney). **Planning only: publishing remains on hold.** The owner stopped the resumed release to review the comprehensive plan. Wait for ONE selected increment. Read [AGILE-PLAN.md](AGILE-PLAN.md) for order/model/effort/release gates, [SITE-ARCHITECTURE.md](SITE-ARCHITECTURE.md) for the visual hierarchy, and only the relevant acceptance section in ROADMAP-DETAILS.md / AVES-CHANGE-INBOX.md.
 
-## Correct project and state
+## Historical pre-release state — superseded by current release above
 
 Repository: https://github.com/mmelendro/Aves
 

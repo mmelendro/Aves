@@ -1,5 +1,7 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
+**Current release — 9 November 2026: published and paused.** South Island/regional zoom is live: source5847eb7 / dpl_GMPLFwPviWsLq73i9JJBjCNvkaja; AU6ba7fee / dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv. Desktop/mobile and live sitemap checks passed within the limits recorded in [RELEASE-2026-11-09-SOUTH-ISLAND.md](docs/RELEASE-2026-11-09-SOUTH-ISLAND.md). A1 is complete; B1 private-brief verification is the next proposed increment, not started. Announce model/effort before resuming; Sol medium recommended. This notice overrides older staged/paused status below.
+
 **Current owner instruction — 9 November 2026 (Sydney): planning only; publishing remains on hold.** Read [AGILE-PLAN.md](docs/AGILE-PLAN.md) for the revised incremental order/model guidance and [SITE-ARCHITECTURE.md](docs/SITE-ARCHITECTURE.md) for the expandable hierarchy preview. Announce a model/effort recommendation before every increment (or say keep the current model). AVES-033 now requires sitemap review/update and stage/live verification for every deployment; the public expandable tree is queued, not implemented. Existing staged candidates and last verified live versions are unchanged by this docs session; provider state was not rechecked today. This notice overrides older resume/order instructions below.
 
 ## Owner pause — 8 November 2026
