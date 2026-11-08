@@ -1,0 +1,15 @@
+# South Island curated resources — B4 release, 9 November 2026
+
+Published, synced and paused. Recommended model Sol medium. Source app4d1c703; production dpl_GVWQfbLQdu1kZYzU3eqvj1uxoqd6. AU unchanged6ba7fee. Same tested staged production build promoted unchanged.
+
+Added six lightweight outbound resource cards at /new-zealand/south-island#resources and a Listen, watch & read on-page link. Two DOC Sounds of Science episodes (36 mohua/Fiordland research;26 ranger Tim Raemaekers), three-part Fiordland Kiwi Diaries documentary, recorded kākāpō nest highlights, NZ Birds Online kea reference and DOC Nelson Lakes reading. Publishers/types/geographic relevance visible. Offshore Whenua Hou material clearly conservation context, not normal trip access or a current live feed. No arbitrary direct video IDs, copied images, streams, embeds, third-party scripts or new dependencies.
+
+Primary publisher pages fetched/read9 November: https://www.doc.govt.nz/news/podcast/ ; https://www.doc.govt.nz/fiordland-kiwi-diaries ; https://www.doc.govt.nz/kakapocam ; https://www.nzbirdsonline.org.nz/species/kea ; https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/ . First four also opened in browser and showed intended content, no404. Podcast links intentionally open publisher episode list with explicit episode number; do not pretend deep episode links or full playback testing. RNZ robots restrictions and an NZGeo fetch failure excluded those candidates. No login/paywall bypass or downloaded media. Playback/availability remains publisher-controlled.
+
+15 targeted South Island/sitemap tests, strict TypeScript, whitespace review and hosted production build passed. Staged desktop1280 and phone390: six cards, three columns vs one, no sampled overflow, intended HTTPS links/new-tab labels/noreferrer, keyboard section navigation, existing Info/photo and private South Island brief URL retained. Live390/1280 reproduced layout/content. Screenshots inspected. No new private form submissions or provider/DB changes. Physical devices and OS preference modes untested. No claim every external media stream was played to completion.
+
+Sitemap gate: no new canonical route; source XML/human directory verified live with South Island. Existing tests cover canonical/base-path/private exclusions. Architecture snapshot updated with resources anchor, not a new XML entry. AU runtime/inventory untouched; no redundant redeploy or false lastModified. Viewport reset; no local servers started. Code/comments reviewed for reuse/clarity.
+
+Private local evidence: audit/evidence/nov9-south-island-resources-checks.json and desktop-live/mobile-live PNGs of same prefix. App commit pushed; newer doc heads do not need runtime redeploy.
+
+Next proposed B5 private balanced route options/AVES host responsibilities: Sol medium; obtain actual dates/year, arrival/departure points and guest preferences privately before a personalised itinerary. If those are unavailable, choose a separate bounded cleanup such as017 or034; do not silently start it. Marketplace business direction remains saved. Pause pending owner selection.
