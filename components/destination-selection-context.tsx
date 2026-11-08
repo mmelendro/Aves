@@ -6,6 +6,7 @@ import { createContext, useContext } from "react"
 export const DestinationSelectionContext = createContext<{
   selectedId: string
   selectDestination: (id: string) => void
+  zoomed?: boolean
 } | null>(null)
 
 export function useDestinationSelection() {

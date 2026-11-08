@@ -1,6 +1,8 @@
 /* A small visible label, a larger hit area and equivalent native text buttons.
    Container queries keep map type legible when the same map becomes narrow. */
 .map { display: flex; flex-direction: column; height: 100%; container-type: inline-size; }
+.scene { transform-origin: 0 0; transition: transform 600ms cubic-bezier(.2,.75,.25,1); }
+@media (prefers-reduced-motion: reduce) { .scene { transition: none; } }
 .destination { cursor: pointer; outline: none; }
 .country { fill: #349b7e; stroke: #ecfdf5; }
 .leader { stroke: #047857; }

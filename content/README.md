@@ -13,7 +13,7 @@ This folder contains public editorial data. Never put customer itineraries, priv
 | `localOccurrence` / regional `whereFound` | Specific, sourced places/habitats relevant to this region. |
 | `habitat` | The environment where a visitor may look for the species. |
 | `image` | Public image path. The Australian app adds its base path through `sitePath`. |
-| `imagePosition` | Optional CSS focal point, such as `35% center`, for the portrait crop. |
+| `imagePosition` | Optional focal point within the original photograph: `35% center` means 35% from its left edge and halfway down. The shared carousel keeps that point centred as its frame resizes, clamping at photo edges to avoid blank padding. |
 | `audioFile`, `audioLabel` | Optional recording path and description/attribution; omission is an unavailable call. |
 | `sources` | Factual source titles and links; these are not a live data API or a media licence. |
 | `photoCredit` | Photographer, source and related metadata displayed with the bird. |
@@ -36,7 +36,7 @@ Geographic path coordinates (`australia-map.ts` or `new-zealand-map.json`) are g
 1. Add or correct the profile and factual sources, keeping its stable ID consistent.
 2. Add the licensed local photo/audio file and its corresponding credit record.
 3. Add appropriate regional selections with locally relevant occurrence notes.
-4. Check the photo at the carousel's 9:16 portrait ratio; use `imagePosition` when needed. Landscape photographs are cropped to fill the frame.
+4. Check the photo in the carousel's portrait and shorter frames, including narrow/wide divider positions; set `imagePosition` to the bird's focal point when needed. The existing carousel uses `coverFocalPosition` with the original image dimensions and current frame size. It scales uniformly to cover the frame, centres the point where possible and clamps at the photo edges, without distorting the bird or exposing blank padding. Pages pass their bird collections to this same viewer rather than creating another carousel.
 5. Run the application's type check/tests and preview the page, sound and credits. Missing audio must remain visibly unavailable rather than being substituted with another species.
 
 This is a curated inspiration collection, not a complete national checklist or a guarantee of sightings, guide availability or access. Counts and dated operational information need periodic factual review.

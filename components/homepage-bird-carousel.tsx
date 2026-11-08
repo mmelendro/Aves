@@ -2,8 +2,8 @@
  * Shared photo-and-sound carousel used by destination, region and editorial pages.
  * The caller chooses the birds; this file owns slide navigation, audio and details.
  * The default portrait frame is 9:16 and capped at 320px wide; the global
- * homepage viewer uses a shorter 4:5 frame that fills its existing card. object-cover fills it,
- * so landscape photos are cropped; each bird imagePosition controls the focal point.
+ * homepage viewer uses a shorter 4:5 frame that fills its existing card. Photos
+ * cover either frame; imagePosition names a focal point kept centred on resize.
  */
 "use client"
 
@@ -15,6 +15,7 @@ import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, 
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { sitePath } from "@/lib/site-path"
+import { coverFocalPosition } from "@/lib/cover-focal-position"
 import { birdData as allBirds, type BirdProfile } from "@/content/birds"
 
 interface HomepageBirdCarouselProps {
@@ -83,15 +84,33 @@ export default function HomepageBirdCarousel({
     const image = imageRef.current
     const imagePath = currentBird?.image
     if (!image || imagePath === undefined) return
+    // Observe the actual photo box, so both divider drags and window changes keep
+    // the authored bird focal point centred without resizing the surrounding card.
+    const centreFocalPoint = () => {
+      const frame = image.getBoundingClientRect()
+      image.style.objectPosition = coverFocalPosition({
+        frameWidth: frame.width, frameHeight: frame.height,
+        imageWidth: image.naturalWidth, imageHeight: image.naturalHeight,
+        position: currentBird?.imagePosition || "center",
+      })
+    }
     // Cached images can finish before hydration delivers Next Image's callback.
     const markLoaded = () => {
       if (!image.complete || image.naturalWidth === 0) return
+      centreFocalPoint()
       setImageState(previous => previous.image === imagePath && previous.status === "loaded" ? previous : { image: imagePath, status: "loaded" })
     }
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(centreFocalPoint)
+    observer?.observe(image)
+    if (!observer) window.addEventListener("resize", centreFocalPoint)
     image.addEventListener("load", markLoaded)
     markLoaded()
-    return () => image.removeEventListener("load", markLoaded)
-  }, [currentBird?.id, currentBird?.image])
+    return () => {
+      observer?.disconnect()
+      window.removeEventListener("resize", centreFocalPoint)
+      image.removeEventListener("load", markLoaded)
+    }
+  }, [currentBird?.id, currentBird?.image, currentBird?.imagePosition])
 
   // Respect reduced motion on initial load and stop the slideshow if that preference changes.
   useEffect(() => {
