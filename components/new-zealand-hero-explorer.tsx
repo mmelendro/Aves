@@ -1,7 +1,7 @@
 /**
  * Pairs New Zealand bird photographs and calls with the small island map.
- * The carousel reports its current bird, and its featured-area label determines
- * the island highlight. The enquiry link preserves the New Zealand topic.
+ * The carousel reports its current bird; its stable ID selects explicit, sourced
+ * planning-island associations rather than guessing from a location label. The enquiry link preserves the New Zealand topic.
  */
 "use client"
 
