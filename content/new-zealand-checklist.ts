@@ -1,12 +1,12 @@
 /** Public factual names/status from the complete published OSNZ main checklist.
  * This is a versioned reference, not a promise of current sightings or access.
- * Historical extinct entries remain searchable but cannot become trip targets.
+ * Public browsing contains living species only; raw provenance stays archived.
  */
 import checklist from "./new-zealand-checklist.json"
 
-export const newZealandChecklist = checklist.species
+export const newZealandChecklist = checklist.species.filter(bird => !bird.extinct)
 export const newZealandChecklistSource = checklist.source
-export const nzBirdById = new Map(newZealandChecklist.map(bird => [bird.id, bird]))
+export const nzBirdById = new Map(checklist.species.map(bird => [bird.id, bird]))
 export const selectableNzBirds = newZealandChecklist.filter(bird => !bird.extinct)
 const selectableIds = new Set(selectableNzBirds.map(bird => bird.id))
 
