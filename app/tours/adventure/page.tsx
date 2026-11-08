@@ -1,6 +1,6 @@
 /**
  * Adventure-style editorial page. Labelled sections contain the carousel intro,
- * features, sample itinerary, related story and price/inquiry copy. The shared carousel
+ * features, sample itinerary, related story and personal-enquiry copy. The shared carousel
  * is selected by an article key; any commercial claims are static and need verification.
  */
 "use client"
@@ -15,6 +15,7 @@ import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import ArticleBirdCarousel from "@/components/article-bird-carousel"
+import TourQuoteSection from "@/components/tour-quote-section"
 
 export default function AdventurePage() {
   useEffect(() => {
@@ -63,11 +64,7 @@ export default function AdventurePage() {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-3 gap-8 pt-8 border-t">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600">$1,000</div>
-                  <div className="text-sm text-gray-600">per person/day</div>
-                </div>
+              <div className="grid grid-cols-2 gap-8 pt-8 border-t">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-emerald-600">7-14</div>
                   <div className="text-sm text-gray-600">days</div>
@@ -240,99 +237,7 @@ export default function AdventurePage() {
         </div>
       </section>
 
-      {/* Pricing & Booking */}
-      <section className="py-20 bg-emerald-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Adventure Tour Pricing</h2>
-            <p className="text-xl text-gray-600">
-              Transparent, per-person-per-day pricing with flexible duration options
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <Card className="p-8 border-0 shadow-xl">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="text-6xl font-bold text-emerald-600 mb-4">$1,000</div>
-                  <div className="text-xl text-gray-600 mb-6">per person per day</div>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                      <span className="text-gray-700">Professional ornithologist guide</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                      <span className="text-gray-700">Premium eco-lodge accommodation</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                      <span className="text-gray-700">All meals and transportation</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                      <span className="text-gray-700">Conservation project visits</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 mr-3" />
-                      <span className="text-gray-700">Carbon offset included</span>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-lg p-4 mb-6">
-                    <div className="text-sm text-gray-600 mb-2">Sample pricing for 2 people, 8 days:</div>
-                    <div className="text-2xl font-bold text-gray-900">$16,000 total</div>
-                    <div className="text-sm text-gray-500">($8,000 per person)</div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Flexible Duration Options</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">7 days</span>
-                        <span className="text-emerald-600 font-bold">$7,000/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-emerald-100 rounded-lg border-2 border-emerald-500">
-                        <span className="font-medium">8 days (Recommended)</span>
-                        <span className="text-emerald-600 font-bold">$8,000/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">10 days</span>
-                        <span className="text-emerald-600 font-bold">$10,000/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">14 days</span>
-                        <span className="text-emerald-600 font-bold">$14,000/person</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
-                    <Link href="/shopping?preset=adventure">
-                      <Button size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700">
-                        Book Adventure Journey
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </Button>
-                    </Link>
-                    <Link href="/contact">
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50 bg-transparent"
-                      >
-                        Ask Questions
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <TourQuoteSection tour="adventure" />
 
       {/* Global Footer */}
       <Footer />
