@@ -199,3 +199,6 @@ For new observations, use this short entry format:
 
 
 **Additional queued9November:**043 world-country hover/focus recentering before click, with stable targets/projection;044 selective paired place names such as Aotearoa/New Zealand. Current word-flip typography is matching lowercase italics with no border; keyboard focus uses a subtle underline. See ROADMAP-DETAILS.md.
+
+
+**9 November checkpoint:** 015/037 South Island map/photo flip pilot is authorized but unimplemented. New queued observations: 047 continuous call listening; 048 native/introduced filters across species lists; 049 AVES acronym/brand-wording review. See NEXT-WEEK-PROMPT.md and ROADMAP-DETAILS.md. These are recorded requests, not shipped features.

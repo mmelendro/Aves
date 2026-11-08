@@ -1,6 +1,6 @@
 # AVES — current execution prompt
 
-Updated9November2026 (Sydney). **Current release complete; paused.** Do not start another feature until the owner selects one increment. Recommend model/reasoning before each selected increment; keep Sol medium for focused implementation/release work. No actual credit-percentage estimate or automatic model switch is known.
+Updated 9 November 2026 (Sydney). **Documentation checkpoint: South Island place-card pilot selected, not implemented or published yet.** The latest request is to save this handoff to GitHub. Resume only the already-authorized pilot; do not bundle the queued follow-ups. Recommend model/reasoning before each selected increment; keep Sol medium for focused implementation/release work. No actual credit-percentage estimate or automatic model switch is known.
 
 ## Open the correct project
 
@@ -23,7 +23,7 @@ Latest release: [homepage word flip](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). 
 ## Latest owner priority — one selected release at a time
 
 **Delivered026:** the homepage now reads “Where will birds take you?” Only the word flips, birds↔aves, in matching400-weight lowercase emerald italics. No border/box; keyboard focus underline, pointer/keyboard/tap behavior and motion-free CSS fallback. Other heading words remain upright medium500. See [word-flip checkpoint](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md).
-1. **AVES-015/037:** first3D pilot is ONE **South Island place card**, local map ↔ licensed landscape photo. Owner confirmed this location. Reversible controls, source/credits, hidden-face focus/media cleanup and reduced-motion toggle. Reuse one template; expand only after pilot acceptance.
+1. **AVES-015/037 — selected, unfinished:** first3D pilot is ONE **South Island place card**, local map ↔ licensed landscape photo. Owner confirmed this location. Reversible controls, source/credits, hidden-face focus/media cleanup and reduced-motion toggle. Reuse one template; expand only after pilot acceptance.
 2. **AVES-038:** South Island map zoom/pan/reset AND a correctly calculated, responsive metric scale bar. Preserve bird/filter state, native page/browser gestures, georeferencing and source-resolution limits.
 3. Finish the **037** four-place map/photo carousel (Arthur’s Pass, Nelson Lakes, Fiordland, Otago/Catlins); prepare for future owner drone/video assets. Keep balanced place guidance and official links.
 4. **039:** checklist licensed-media previews on hover/focus/tap; start with available correctly matched assets, honest gaps and lazy loading. Future video; no automatic media rights from eBird visibility.
@@ -58,3 +58,19 @@ Sync exact code plus concise checkpoint/prompt to both relevant GitHub branches,
 
 
 **Further queued:**045 team-page refresh (one people carousel, optional field-story gallery after verified content inventory);046 homepage country/region double-click opening, preserving explicit single-activation Explore links. All later requests are in ROADMAP-DETAILS.md; none is shipped merely by being recorded.
+
+## Latest checkpoint and instructions for resuming
+
+The owner authorized Sol medium for ONE South Island 3D place card: local map on one face, correctly located licensed landscape photographs on the other. Preliminary source/research inspection began; no pilot code, tests, build or deployment has been completed. Do not confuse the published homepage word flip with this unfinished map/photo pilot. Start by checking Git status and recent commits for any intervening edits. Prefer an existing place such as Arthur's Pass after verifying public geography and image rights; retain the other place cards and existing planning guidance. Provide explicit reversible keyboard/touch controls, an inaccessible hidden face, reduced-motion fallback and image credits. Test desktop/mobile, publish the exact tested candidate, sync code/checkpoint to GitHub, then pause.
+
+Latest source inspection found the Colombia experience collection labels **Adventure, Vision, Elevate and Souls**. This is evidence of current labels, not proof of the intended full AVES acronym. The owner requested an objective acronym/brand-wording review and eventual coherent sitewide wording. That review is unfinished: inventory actual headings, descriptions, metadata and collections across both apps; distinguish the Spanish word aves, the master brand, tagline and experience names. Present the current meaning, weaknesses and a small set of coherent alternatives before selecting a new brand expansion. Do not silently rename the venture, routes or data values, invent an expansion, or replace copy wholesale before the meaning is settled. Preserve the host role, birds/habitats/balanced experiences and regenerative-tourism aspiration without claiming achieved certification.
+
+### New follow-ups, queued separately
+
+- **AVES-047: continuous bird-call listening.** Owner proposed that enabling the speaker persists across carousel changes, without another click for each bird. Recommendation: explicit opt-in per viewing session; active speaker indicator; stop old audio before next; pause when hidden; skip unavailable calls gracefully; normalize perceived loudness with headroom and gentle transitions; never overlap recordings. Automatic slides should allow a useful listening interval, while manual navigation changes the recording promptly. Browser autoplay limits and failures need honest handling. This is a proposed interaction, not implemented or fully agreed acceptance criteria. Reuse shared playback logic; respect volume, reduced motion/data preferences, attribution and cleanup. Do not start a separate audio system per page.
+- **AVES-048: native/introduced filters everywhere species are listed.** Audit every checklist and selection context across all destinations and private briefs. Offer All species / Native / Introduced consistently, alongside relevant endemic/migratory and other sourced facets. Status is specific to the selected geography and taxonomy/source version; unknown status must remain honest. Never infer introduced from migratory or non-endemic, never erase saved choices on filtering, and preserve search/accessibility/privacy. NZ already has status data/filters in some contexts: reuse and verify rather than claiming this is missing everywhere. Other destinations may need sourced status data. Extinct/historical-only entries remain excluded from trip selection.
+- **AVES-049: AVES acronym and coherent brand wording review.** See the unfinished review above. This is a discovery/decision step before a separately scoped copy implementation. No new expansion has been chosen or published.
+
+### Checkpoint verification limits
+
+Local branches were clean before this documentation update. Repository origins resolve to https://github.com/mmelendro/Aves.git. Runtime commits/deployment IDs above are the last recorded verified release, not a fresh live-site or provider audit today. No application change or deployment is part of this documentation sync. Actual credit balances and model switching cannot be verified here. Read this prompt plus the relevant acceptance section instead of replaying the whole chat; confirm the latest source before resuming.
