@@ -10,7 +10,7 @@
 import { useState, useContext, useEffect, useCallback, useRef, useId, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import { Card } from "@/components/ui/card"
-import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, Volume2, VolumeX, Loader2 } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, ExternalLink, Volume2, VolumeX, Loader2, Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
@@ -28,6 +28,7 @@ interface HomepageBirdCarouselProps {
   label?: string
   priority?: boolean
   fillPanel?: boolean
+  selection?: { isSelected: (bird: BirdProfile) => boolean; onToggle: (bird: BirdProfile) => void }
 }
 
 const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
@@ -54,6 +55,7 @@ export default function HomepageBirdCarousel({
   label = "Bird photographs",
   priority = true,
   fillPanel = false,
+  selection,
 }: HomepageBirdCarouselProps) {
   const isDestinationCard = variant === "destination-card"
   // State drives what is drawn. Refs hold browser objects or attempt IDs without re-rendering.
@@ -243,6 +245,7 @@ export default function HomepageBirdCarousel({
 
           {/* Image count describes this curated selection, not a destination species total. */}
           <p className="absolute left-3 top-3 rounded-full border border-white/30 bg-slate-950/60 px-3 py-2 text-xs font-medium tabular-nums text-white backdrop-blur-md" aria-label={`Image ${selectedIndex + 1} of ${birds.length}`}>{selectedIndex + 1} / {birds.length}</p>
+          {selection && <IconControl label={`${selection.isSelected(currentBird) ? "Remove" : "Add"} ${currentBird.commonName} ${selection.isSelected(currentBird) ? "from" : "to"} bird wish list`} aria-pressed={selection.isSelected(currentBird)} onClick={() => selection.onToggle(currentBird)} className="absolute left-3 top-16 z-20" buttonClassName={selection.isSelected(currentBird) ? "border-emerald-100 bg-emerald-700/90" : undefined}><Heart className="h-4 w-4" fill={selection.isSelected(currentBird) ? "currentColor" : "none"} aria-hidden="true" /></IconControl>}
           <div className="absolute right-2 top-2 z-20 flex gap-1 sm:right-3 sm:top-3 sm:gap-1.5">
             <IconControl label={isPlaying ? "Pause slideshow" : "Play slideshow"} data-slideshow-control onClick={() => setIsPlaying(playing => !playing)} aria-pressed={isPlaying} disabled={birds.length < 2 || imageStatus === "loading"}>
               {isPlaying ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4" aria-hidden="true" />}
