@@ -229,3 +229,12 @@ node ../audit/tools/pglite/run-account-storage.mjs supabase/migrations supabase/
 ```
 
 Shared-country local evidence is saved outside the published application at `../audit/evidence/shared-country-local-verification.log`; the hosted pass has its separate aggregate evidence above. Concurrent real submissions can change aggregate counts, so review any future before/after delta without exporting customer records.
+
+
+## New Zealand private planning questionnaire - 8 November 2026
+
+Migration `20261108023556_new_zealand_private_planning_brief.sql` adds New Zealand's planning catalogue and strict optional version-1 `details.questionnaire` validation. Its filename matches the hosted migration version. Existing user ownership policies, grants and immutable submission workflow remain. Enabling NZ means planning support, not confirmed tours or reservations. Old plans without answers remain valid and preserve retry hashes.
+
+The short form saves in the existing owned plan; Share with AVES freezes a snapshot in the existing owner request inbox. NZ notification emails contain a sign-in link, without answers/guest identity. Database/API validation agree on the bounded schema in `content/planning-questionnaire.ts` / `lib/account-models.ts`. Later selections should extend that reviewed model rather than create another guest-data store.
+
+`supabase/tests/new_zealand_planning_rollback.sql` passed locally and hosted. Run it whole: it creates synthetic identities without credentials, checks anonymous/cross-account denial, edits, malformed answers, frozen/retry submission and owner reading, then rolls back. Never change its rollback to commit. No real customer rows or answers are printed. Live synthetic UI save/share plus Gmail receipt also passed; the browser sample is retained clearly labelled and closed. No real guest trial or physical phone test is claimed.
