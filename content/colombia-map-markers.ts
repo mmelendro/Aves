@@ -20,4 +20,3 @@ export const colombiaMapMarkers = [
   if (!region) throw new Error(`Unknown Colombia map region: ${marker.mapId}`)
   return { ...marker, slug: region.slug }
 })
-
