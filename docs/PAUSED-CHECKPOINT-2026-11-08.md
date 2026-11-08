@@ -1,5 +1,7 @@
 # AVES — paused checkpoint, 8 November 2026 (Sydney)
 
+**Current owner instruction — 9 November 2026 (Sydney): planning only; publishing remains on hold.** Read [AGILE-PLAN.md](AGILE-PLAN.md) for the revised incremental order/model guidance and [SITE-ARCHITECTURE.md](SITE-ARCHITECTURE.md) for the expandable hierarchy preview. Announce a model/effort recommendation before every increment (or say keep the current model). AVES-033 now requires sitemap review/update and stage/live verification for every deployment; the public expandable tree is queued, not implemented. Existing staged candidates and last verified live versions are unchanged by this docs session; provider state was not rechecked today. This notice overrides older resume/order instructions below.
+
 The owner requested an immediate pause after saving the prompt to GitHub. Do not implement, publish or promote anything until they explicitly resume. This checkpoint takes precedence over older release narratives.
 
 ## Exact versions
