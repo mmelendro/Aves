@@ -29,7 +29,24 @@ export function ColombiaHomeLanguageToggle() {
       onClick={() => setSpanish(!spanish)}
       className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-200 bg-white text-xl hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
     >
-      <span aria-hidden="true">{spanish ? "🇨🇴" : "🇬🇧"}</span>
+      {/* Inline flags render consistently on Windows, where emoji can show letters. */}
+      <svg aria-hidden="true" width="24" height="16" viewBox="0 0 60 40" className="overflow-hidden rounded-sm">
+        {spanish ? (
+          <>
+            <path fill="#FCD116" d="M0 0h60v20H0z" />
+            <path fill="#003893" d="M0 20h60v10H0z" />
+            <path fill="#CE1126" d="M0 30h60v10H0z" />
+          </>
+        ) : (
+          <>
+            <path fill="#012169" d="M0 0h60v40H0z" />
+            <path stroke="#fff" strokeWidth="8" d="m0 0 60 40M60 0 0 40" />
+            <path stroke="#C8102E" strokeWidth="3" d="m0 0 60 40M60 0 0 40" />
+            <path stroke="#fff" strokeWidth="12" d="M30 0v40M0 20h60" />
+            <path stroke="#C8102E" strokeWidth="7" d="M30 0v40M0 20h60" />
+          </>
+        )}
+      </svg>
     </button>
   )
 }
