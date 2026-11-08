@@ -44,3 +44,40 @@ export const southIslandPlaces = [
     source: { title: "DOC — Yellow-eyed penguin / hoiho", url: "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/penguins/yellow-eyed-penguin-hoiho/" },
   },
 ] as const
+
+/** Practical prompts, not a booked route or live conditions feed.
+ * Official DOC and NZTA guidance checked 9 November 2026. Keep changing
+ * access/road information at the source rather than copying it into AVES.
+ */
+export const southIslandPlanning = [
+  {
+    title: "Choose a base, leave room to explore",
+    intro: "Start with the habitats that matter most to you, then choose a manageable area. Several nights in one base can leave more room for early outings, relaxed meals and a change of plans.",
+    points: [
+      "Compare mountain and forest time around Arthur’s Pass or Nelson Lakes with southern forest and lake outings in Fiordland, or a coastal focus around Otago and the Catlins.",
+      "These are alternative starting areas, not a suggested driving circuit. Match your arrival and departure points to the areas you choose before arranging transport.",
+      "Tell us your walking comfort, preferred stays and how much driving feels right. Access and accommodation suitability need individual confirmation.",
+    ],
+    link: { title: "Compare the habitats and places", href: "#places" },
+  },
+  {
+    title: "Prepare for the day you are planning",
+    intro: "Choose outings that suit your group and check current advice for the specific place. A scenic alternative or quieter day belongs in the plan too.",
+    points: [
+      "Review DOC’s access advice, alerts and weather guidance before heading out; conditions can change after an itinerary is drafted.",
+      "Take suitable layers, food and the equipment your outing needs. Share your intentions and plan how to get help where reception is limited.",
+      "Bird activity and viewing arrangements depend on place and season. Check local guidance, give wildlife space and keep sensitive nesting areas undisturbed.",
+    ],
+    link: { title: "DOC: prepare for an outdoor trip", href: "https://www.doc.govt.nz/parks-and-recreation/know-before-you-go/be-prepared/" },
+  },
+  {
+    title: "Check the journey, not just the distance",
+    intro: "Leave space between an arrival, a drive and an early birding start. Build the route around the pace you enjoy, rather than the number of stops you can fit in.",
+    points: [
+      "Use NZTA’s current journey information for travel times, roadworks and incidents; recheck before each travel day.",
+      "Allow for breaks, weather and time at the places along the way. A map distance alone does not tell you how a day will feel.",
+      "Keep dates, arrival and departure points, existing arrangements and your preferred pace in your private brief. Routes and reservations are confirmed separately.",
+    ],
+    link: { title: "NZTA: plan your journey", href: "https://nzta.govt.nz/travelling-on-our-roads/plan-your-journey" },
+  },
+] as const

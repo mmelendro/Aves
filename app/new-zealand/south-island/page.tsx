@@ -9,7 +9,7 @@ import { ArrowRight, Compass, Heart, MapPin } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
 import { newZealandContactHref } from "@/content/new-zealand"
-import { southIslandBriefHref, southIslandPlaces } from "@/content/south-island"
+import { southIslandBriefHref, southIslandPlaces, southIslandPlanning } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
 
 const path = "/new-zealand/south-island"
@@ -55,7 +55,7 @@ export default function SouthIslandPage() {
             <NewZealandHeroExplorer regionId="south-island" />
 
             <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4">
-              {[["birdlife", "Birds & map"], ["places", "Habitats & places"], ["your-pace", "Your pace"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className={textLinkStyle}>{label}</a>)}
+              {[["birdlife", "Birds & map"], ["places", "Habitats & places"], ["practical-planning", "Practical planning"], ["your-pace", "Your pace"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className={textLinkStyle}>{label}</a>)}
             </nav>
           </div>
         </section>
@@ -75,6 +75,25 @@ export default function SouthIslandPage() {
                 <a href={place.source.url} target="_blank" rel="noreferrer" className={`${textLinkStyle} mt-auto`}>{place.source.title}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
               </article>)}
             </div>
+          </div>
+        </section>
+
+        {/* Static planning prompts reuse the existing cards; current conditions
+            remain on official sites, avoiding an unreliable copied status feed. */}
+        <section id="practical-planning" aria-labelledby="planning-heading" className="scroll-mt-24 bg-emerald-50/50 py-12 sm:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-700">Before the route takes shape</p>
+            <h2 id="planning-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Plan for the journey, as well as the birds.</h2>
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">A few practical decisions help turn favourite birds and places into a holiday that feels like yours.</p>
+            <div className="mt-8 grid gap-6 lg:grid-cols-3">
+              {southIslandPlanning.map(item => <article key={item.title} className="flex flex-col rounded-3xl border border-emerald-100 bg-white p-6 sm:p-7">
+                <h3 className="text-xl font-medium text-emerald-950">{item.title}</h3>
+                <p className="mt-4 leading-7 text-gray-600">{item.intro}</p>
+                <ul className="mb-5 mt-4 list-disc space-y-3 pl-5 text-sm leading-6 text-gray-600">{item.points.map(point => <li key={point}>{point}</li>)}</ul>
+                <a href={item.link.href} {...(item.link.href.startsWith("https:") ? { target: "_blank", rel: "noreferrer" } : {})} className={`${textLinkStyle} mt-auto`}>{item.link.title}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />{item.link.href.startsWith("https:") && <span className="sr-only"> (opens in a new tab)</span>}</a>
+              </article>)}
+            </div>
+            <p className="mt-5 text-xs leading-5 text-gray-500">Official preparation and road-planning links checked 9 November 2026. Follow their current advice before travel; this page does not provide live conditions.</p>
           </div>
         </section>
 
