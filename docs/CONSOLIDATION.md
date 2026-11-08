@@ -2,6 +2,8 @@
 
 ## Current checkpoint
 
+**Integration and read-only preview implemented. Production cutover is pending.** Review [draft PR #3](https://github.com/mmelendro/Aves/pull/3). Runtime commit: `7137d6089619c1cabcb8245aed7b8be9f83f65c5`. Ready Preview deployment: `dpl_FjVASappbNWdF1mo93YRAtHLmQnZ`, [preview URL](https://aves-australia-pg3jzdtd0-mmelendro-9273s-projects.vercel.app). Vercel authentication remains enabled. Request a fresh temporary share link in chat if needed; never commit the share token.
+
 The owner authorized code integration and preview testing on 8 November 2026. Work is isolated to `integration/aves-unified-2026-11-08`. No production release, domain/DNS change, project rename, migration or project deletion is included in this checkpoint. The eco-tourism business plan remains to be created.
 
 ## Source inventory
@@ -36,7 +38,7 @@ Root sessions keep the existing `aves-auth` cookie at Path `/`. The one-time leg
 
 Public brand remains AVES and public domain remains `aves.bio`. Country bird/landscape marks and existing indexed country/deep URLs are preserved. Package name is `aves-web`; the retained production Vercel project should use the same neutral name at the separately reviewed cutover. Do not rename `aves-australia` yet: the currently published global app depends on its hostname.
 
-The root sitemap combines 73 unique public URLs and retains the Australian subset endpoint. Private routes remain excluded. Australia titles/canonicals and route-specific social previews identify the country without affecting root Colombia/NZ metadata. Canonicals and structured-data image URLs use `https://aves.bio`, independent of the old Australia project's environment path. Preview robots and response headers discourage indexing. Infrastructure naming is for clarity, not a promise of search ranking gains.
+The root sitemap combines 73 unique public URLs and retains the Australian subset endpoint. Private routes remain excluded. A shared public metadata helper keeps each page title, canonical and social URL aligned. It removes duplicate AVES suffixes, normalizes legacy AVES Tours metadata branding to AVES, preserves article images and gives missing descriptions page context. Country pages retain their distinct identity. Australia also keeps its country-specific social image/locale. Canonicals and structured-data image URLs use `https://aves.bio`, independent of the old Australia project's environment path. Preview robots and response headers discourage indexing. Infrastructure naming is for clarity, not a promise of search ranking gains.
 
 Keep B Corp wording as pursuing certification, not certified. Preserve community attribution, media rights, explicit consent and wildlife guidance. No new business credentials, carbon claims, supplier promises or booking availability are inferred from consolidation.
 
@@ -50,11 +52,16 @@ Git automatic deployments are disabled globally in `vercel.json`. Explicit API d
 
 ## Verification
 
-* 342 automated tests pass, covering both source applications plus local routing/session continuity and preview safeguards. Database/auth/email services are isolated test doubles; no real enquiries or emails are sent.
-* Strict TypeScript and a Node 22 production build pass, including the explicit Australian routes.
-* Local browser/HTTP checks cannot connect in this execution environment. Perform rendered desktop/mobile and route/metadata checks against the hosted protected Preview, then record the exact deployment/commit and results here.
-* Real Google/email signup/recovery, root-cookie continuity for existing users, database save/reopen/edit/submission and authorized owner actions still require a separately bounded integration check using approved synthetic/test resources. The read-only preview intentionally cannot prove those live writes.
-* Physical phone/touch hardware and real guest journeys are not claimed as tested.
+* 345 automated tests and strict TypeScript pass. Both source suites and new routing, preview and metadata cases run with isolated database/auth/email doubles. No real enquiries or emails were sent.
+* The Node 22 Vercel production build for the exact runtime commit above is READY as a **Preview** target. Git automatic deployments remain disabled.
+* The final hosted check passed 81 GET requests. All 73 public sitemap pages return 200 with unique document titles, descriptions, matching canonical/Open Graph URLs, Twitter titles and no-index meta/headers. Both robots endpoints return plain text with preview crawling disallowed; both XML sitemaps work. Anonymous root and legacy Australian account/admin APIs return JSON 401 with `private, no-store` and no-index headers. See [the sanitized report](evidence/aves-unified-preview-review.json).
+* Repeat the HTTP review with `scripts/verify-unified-preview.py`, passing the exact preview origin, temporary same-origin share link, commit and output path. It never submits forms, keeps access cookies only in memory and does not include share tokens/cookies in the report. It excludes SVG region titles when parsing document titles. The connector's fetch wrapper can mislabel an application 401 as deployment authentication; the direct authorized HTTP check verified the actual JSON response and headers.
+* Browser review covered the global homepage, Colombia, Australia and NZ at 1363px and 340 CSS px. The narrow check used browser zoom with a short 234px CSS viewport, not mobile device emulation. No horizontal overflow or broken loaded country images appeared. Australian menu/keyboard/Escape worked; narrow discovery stacked media before maps and hid the desktop divider. At desktop, the divider changed from 50 to 52 by keyboard, bird changes updated the associated region, and details/credits remained available.
+* NZ details opened as the preserved photo overlay; Escape closed it. Kea wishlist add/remove restored the original empty selection. The private-brief entry preserved NZ/South Island through the root sign-in URL. Sign-in fields were disabled for review. Audio playback state was stopped on bird change; no claim of independently hearing every recording is made.
+* Browser UI evidence was captured on `251a18e`; the only subsequent runtime change was the legacy robots rewrite/removal of its unused nested metadata file. The exact later deployment passed the complete HTTP review. [Desktop screenshot](evidence/aves-unified-preview-desktop.png): Superb Fairywren photograph by JJ Harrison, [CC BY-SA 4.0 source](https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-_Sydney_Olympic_Park.jpg); map boundaries from Natural Earth, public domain. The screenshot crops the website viewport; source media and credits remain in the application.
+* Production deployment listings still identify `dpl_BA2SbW56xbfkktQqPQw8TBHqQsje` and `dpl_4J7C7ecQeG2YovNNwYvbWHnH6QEX`. No production/domain/project rename, environment-value change, SQL migration or customer-data operation was performed.
+
+Remaining release gates: real Google/email signup/recovery, existing-user session continuity, private save/reopen/edit/submission, enquiry persistence/authorized notification delivery and owner permissions need a separately bounded integration check using approved synthetic/test resources. The read-only preview intentionally cannot prove live writes. Physical phone/touch hardware and real guest journeys were not tested. Keep the PR in draft and do not directly promote the read-only preview.
 
 ## Cutover checklist, only after separate approval
 

@@ -1,8 +1,12 @@
-# AVES-020 integration checkpoint, 8 November 2026
+# AVES-020 integration preview, 8 November 2026
 
-The owner selected implementation and preview testing in chat. Branch `integration/aves-unified-2026-11-08` combines the maintained global/Colombia/NZ application and Australian/shared backend in one Next.js root. See [docs/CONSOLIDATION.md](docs/CONSOLIDATION.md) for the inventory, exact source snapshots, test evidence and remaining cutover gates.
+The unified application is implemented in [draft PR #3](https://github.com/mmelendro/Aves/pull/3) on `integration/aves-unified-2026-11-08`. Runtime commit `7137d6089619c1cabcb8245aed7b8be9f83f65c5` built successfully as Preview `dpl_FjVASappbNWdF1mo93YRAtHLmQnZ`: https://aves-australia-pg3jzdtd0-mmelendro-9273s-projects.vercel.app. Vercel authentication is retained; obtain a fresh temporary share link through the connected tool when needed.
 
-This branch is a preview candidate. Production remains the two deployments recorded below. Do not publish, rename current project hostnames, move `aves.bio`, change DNS or retire a project until separately approved. The business plan has not yet been created. Other roadmap items remain paused.
+345 tests, strict TypeScript, the Vercel build and 81 hosted GET checks pass. All 73 public URLs retain correct canonicals/social URLs and preview no-index rules; root/legacy anonymous private APIs return uncached JSON 401. Desktop and 340 CSS px browser review covered all countries, shared entry links, menus, discovery controls and NZ overlay/wishlist. Browser UI was checked on `251a18e`; the subsequent change only repaired the old Australian robots alias. See [the inventory, evidence and cutover plan](docs/CONSOLIDATION.md).
+
+Next: complete the bounded real account/enquiry/owner integration checks listed there, then obtain separate production cutover approval. This read-only Preview cannot establish live storage or notification delivery. Keep PR #3 in draft. Do not directly promote it: a separately approved Production-target build must enable normal actions/indexing. Do not rename current project hostnames, move aves.bio, change DNS or retire either project yet.
+
+The two production deployments below remain unchanged. Documentation commits can advance the integration head beyond the built runtime commit. The business plan has not yet been created; other roadmap work remains paused.
 
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 

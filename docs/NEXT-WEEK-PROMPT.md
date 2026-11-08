@@ -1,3 +1,5 @@
+AVES-020 checkpoint: unified read-only Preview is implemented in [draft PR #3](https://github.com/mmelendro/Aves/pull/3). 345 tests, TypeScript/build and 81 hosted GET checks pass, including 73 public URLs. Read [CONSOLIDATION.md](CONSOLIDATION.md) before continuing. Real account/enquiry checks and separately approved production cutover remain. Other releases stay paused.
+
 # AVES — current execution prompt
 
 Updated 8 November 2026 (Sydney). AVES-012d-1, the New Zealand Info-overlay pilot, is published and verified. Pause before choosing another release or rolling it out elsewhere.
