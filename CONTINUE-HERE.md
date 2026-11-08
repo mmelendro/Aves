@@ -1,6 +1,25 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — shared Info-overlay rollout, 8 November 2026 (Sydney)
+## Current production — world-to-country zoom and focal framing, 8 November 2026 (Sydney)
+
+**AVES-003a-2 and AVES-006c published, verified and paused.** Selecting a country on the homepage Equal Earth map or country buttons zooms into its regional map. Regional selection changes the one connected viewer to a verified local collection; Back to world restores that country's full collection and focus. All 11 Colombian, nine Australian and three NZ regions are selectable, and all 73 featured country birds have supported map associations. The same regional renderer serves the static country cards and interactive view. No new island page or ecological layer is implied; South Island still links to its existing NZ section.
+
+Photos across both applications' existing shared carousels now scale uniformly and keep the authored intrinsic focal point centered where cropping permits. Edge clamping prevents blank padding. A small mirrored helper and the existing image-load/ResizeObserver path handle divider/window changes; no second carousel implementation, catalogue rewrite or new library was added. Pages supply birds/context to the existing viewer. One physical shared component across the eventual unified application remains part of AVES-020; that draft was not merged.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `95c9f75` | `dpl_DJzpKPbaZkSpKTXiJ9XPdT8z4iLv` |
+| Australia and shared accounts | `australia/preview` | `721370e` | `dpl_EhUG5kSNUSkW6YwhgaarDJWecJ56` |
+
+**Verification:** 101 source + 265 Australian tests (366 total), strict TypeScript and local/hosted production builds passed. Restricted local builds initially could not create generated directories; normal authorised builds succeeded without code/configuration changes. Local UI selection covered all 23 regions; 34 local state observations, six staged and 21 live observations are recorded, plus two focal-math divider checks. All three country Explore links passed live at 1280/390px (six arrivals); representative Pacific/NSW/South Island links reached their canonical guide/section. Back restored the full NZ 31-profile collection and focus. Native region-select/keyboard controls worked at 320px. Region changes stopped calls and stale Info; complete notes/rights and a bounded Info sheet in a 340px photo remained. A Colombian 68% focal point matched the clamped calculation within .001px at approximately 254px and 850px frame widths; the Australian viewer also passed phone/divider extremes. No horizontal overflow or sampled live console errors were observed.
+
+The local production source server omits Vercel's Australian hosting proxy, so Australian homepage media was verified on the staged/live hosting routes and the independent local Australian app. Native page scroll/pinch handling is unchanged; physical touch/foldable devices and OS reduced-motion/contrast modes were not exercised. No private account/guest data was submitted, and no database, authentication, environment, provider, billing or DNS configuration changed. Test audio is paused, viewport overrides reset and local servers stopped.
+
+Private evidence: `audit/evidence/nov8-world-country-zoom-checks.json`, `nov8-world-country-zoom-desktop-live.png`, `nov8-world-country-zoom-mobile-live.png`. Source architecture: `docs/WORLD-MAP.md`; image framing is explained in the content README and frontend tour of both apps. App commits are published and pushed; final documentation-only heads may be newer without a runtime redeploy. Git automatic deployment remains disabled.
+
+**Next state:** South Island page/template and practical trip-readiness work remain first, then Sydney. Preserve the existing private brief/bird-selection pilot and confirm actual dates privately. The planning mirrors retain remaining map/content/checklist/pronunciation/translation/animation work. Carry current source/Australian fixes into the separate unmerged AVES-020 candidate before any approved cutover. **Pause here; do not start another increment.**
+
+## Historical production — shared Info-overlay rollout, 8 November 2026 (Sydney)
 
 **AVES-012d-4 published, verified and paused.** All shared homepage, regional, article and experience bird viewers now use the same translucent in-photo species-details panel. The obsolete below-photo presentation branches have been removed. Both independent apps use identical panel CSS, including a short-frame adjustment that keeps the details scrollable at narrow widths. Full notes, species pickers, sources, photograph/recording rights and discreet controls remain; internal country/region links and NZ wishlist hearts are preserved. No 3D flip animation was added.
 
