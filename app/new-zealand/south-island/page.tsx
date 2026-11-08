@@ -8,6 +8,7 @@ import Link from "next/link"
 import { ArrowRight, Compass, Heart, MapPin } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
+import ArthursPassPlaceCard from "@/components/arthurs-pass-place-card"
 import { newZealandContactHref } from "@/content/new-zealand"
 import { southIslandBriefHref, southIslandPlaces, southIslandPlanning, southIslandResources } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
@@ -66,7 +67,8 @@ export default function SouthIslandPage() {
             <h2 id="places-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">A few places to build around.</h2>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">These are starting points, not stops to fit into one trip. Choose a manageable area and give the birds, weather and your own interests room to shape the days.</p>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {southIslandPlaces.map(place => <article key={place.id} className="flex flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/60 to-white p-6 sm:p-7">
+              <ArthursPassPlaceCard />
+              {southIslandPlaces.slice(1).map(place => <article key={place.id} className="flex flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/60 to-white p-6 sm:p-7">
                 <p className="mb-3 flex items-center gap-2 text-sm font-medium text-emerald-700"><MapPin className="h-4 w-4" aria-hidden="true" />{place.habitat}</p>
                 <h3 className="text-2xl font-medium">{place.name}</h3>
                 <p className="mt-3 text-sm font-medium leading-6 text-emerald-900">{place.birds}</p>

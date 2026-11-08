@@ -98,6 +98,65 @@ test("the dedicated South Island page has canonical metadata, one local explorer
   assert.match(html, /South Island/)
   assert.match(html, /(?:planning beta|in development)/i)
   assert.doesNotMatch(html, /Peter|Lisa|Royann|Sylvain|mmelendro@gmail\.com/)
+  assert.equal((html.match(/aria-label="Arthur’s Pass place card"/g) || []).length, 1)
+  for (const name of ["Nelson Lakes", "Fiordland", "Otago &amp; the Catlins"]) assert.ok(html.includes(name), name)
+})
+
+test("place card flips reversibly, keeps the hidden face inert and preserves wrapping photo selection", () => {
+  const state = [false, 0]
+  let hook = 0
+  const Card = createLoader({ react: { useId: () => "test-place", useState: initial => {
+    const index = hook++
+    return [state[index] ?? initial, next => { state[index] = typeof next === "function" ? next(state[index]) : next }]
+  } } })("components/place-flip-card.tsx").default
+  const photos = load("content/south-island-place-media.ts").arthursPassPhotos
+  function elements(node) {
+    if (!React.isValidElement(node)) return []
+    return [node, ...React.Children.toArray(node.props.children).flatMap(elements)]
+  }
+  const render = () => { hook = 0; return elements(Card({ name: "Arthur’s Pass", photos, map: "Local map", children: "Place guidance" })) }
+  let tree = render()
+  const button = label => tree.find(node => node.type === "button" && node.props["aria-label"] === label)
+  const faces = () => tree.filter(node => node.props.inert !== undefined)
+  assert.deepEqual(faces().map(node => [node.props["aria-hidden"], node.props.inert]), [[false, false], [true, true]])
+  button("Next Arthur’s Pass photograph").props.onClick(); tree = render()
+  assert.equal(state[1], 1)
+  button("Show local map of Arthur’s Pass").props.onClick(); tree = render()
+  assert.deepEqual(faces().map(node => [node.props["aria-hidden"], node.props.inert]), [[true, true], [false, false]])
+  button("Show photos of Arthur’s Pass").props.onClick(); tree = render()
+  assert.equal(state[1], 1, "flipping preserves the chosen photograph")
+  button("Next Arthur’s Pass photograph").props.onClick(); tree = render()
+  assert.equal(state[1], 0, "forward wraps")
+  button("Previous Arthur’s Pass photograph").props.onClick(); tree = render()
+  assert.equal(state[1], 1, "backward wraps")
+})
+
+test("pilot media carries local source rights and Mercator map markers use the recorded frame", () => {
+  const photos = load("content/south-island-place-media.ts").arthursPassPhotos
+  const credits = load("content/image-credits.json").images
+  assert.equal(photos.length, 2)
+  for (const photo of photos) {
+    assert.ok(existsSync(join(root, "public", photo.src)))
+    const credit = credits.find(item => item.path === photo.src)
+    assert.equal(credit.sourceUrl, photo.sourceUrl)
+    assert.equal(credit.creator, photo.creator)
+    assert.ok(photo.licence && photo.licenceUrl && photo.modifications)
+  }
+  const map = load("content/arthurs-pass-map.json")
+  assert.equal(map.projection, "EPSG:3857")
+  assert.equal(map.markers.length, 2, "public village/pass only, no wildlife locations")
+  const [left, bottom, right, top] = map.boundsMetres
+  const resolution = (right - left) / 480
+  assert.ok(Math.abs(resolution - (top - bottom) / 360) < 1e-8)
+  assert.ok(Math.abs(resolution * Math.cos(map.referenceLatitude * Math.PI / 180) - 20) < 1e-8)
+  for (const point of map.markers) {
+    const x = (6378137 * point.lon * Math.PI / 180 - left) / resolution
+    const y = (top - 6378137 * Math.log(Math.tan(Math.PI / 4 + point.lat * Math.PI / 360))) / resolution
+    assert.ok(Math.abs(point.xy[0] - x) < 1e-7 && Math.abs(point.xy[1] - y) < 1e-7)
+    assert.ok(x > 0 && x < 480 && y > 0 && y < 360)
+  }
+  assert.ok(map.paths.some(path => path.kind === "river") && map.paths.some(path => path.kind === "road"))
+  assert.equal(map.source.licence, "ODbL 1.0")
 })
 
 test("the shared New Zealand explorer renders the South Island collection with sound and existing bird-selection controls", () => {
