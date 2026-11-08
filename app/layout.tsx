@@ -6,6 +6,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import { PreviewModeProvider } from "@/components/preview-mode"
+import { isReadOnlyPreview } from "@/lib/deployment-mode"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"),
+  metadataBase: new URL("https://aves.bio"),
   alternates: {
     canonical: "/",
   },
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
     title: "AVES | Follow the birds",
     description:
       "Explore Colombia and Australia, and discover our developing New Zealand destination. Follow the birds with AVES.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
+    url: "https://aves.bio",
     siteName: "AVES",
     images: [
       {
@@ -68,11 +70,11 @@ export const metadata: Metadata = {
   },
   // TODO: Add real Google Search Console verification code
   robots: {
-    index: true,
-    follow: true,
+    index: !isReadOnlyPreview(),
+    follow: !isReadOnlyPreview(),
     googleBot: {
-      index: true,
-      follow: true,
+      index: !isReadOnlyPreview(),
+      follow: !isReadOnlyPreview(),
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
@@ -88,11 +90,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CookieConsentProvider>
+        <PreviewModeProvider readOnly={isReadOnlyPreview()}><CookieConsentProvider>
           {children}
           <CookiePreferenceCenter />
           <CookieBanner />
-        </CookieConsentProvider>
+        </CookieConsentProvider></PreviewModeProvider>
         {/* Structured organization data for search tools. Keep claims aligned with verified public copy. */}
         <script
           type="application/ld+json"
@@ -103,11 +105,11 @@ export default function RootLayout({
               name: "AVES",
               description:
                 "Personally planned birding and nature journeys in Colombia and Australia",
-              url: process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio",
-              logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aves.bio"}/images/brand/aves-global-bird.png`,
+              url: "https://aves.bio",
+              logo: "https://aves.bio/images/brand/aves-global-bird.png",
               contactPoint: {
                 "@type": "ContactPoint",
-                url: "https://aves.bio/australia/contact?topic=general#inquiry",
+                url: "https://aves.bio/contact?topic=general#inquiry",
                 contactType: "customer service",
                 availableLanguage: ["English", "Spanish"],
               },

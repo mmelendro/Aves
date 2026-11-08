@@ -1,10 +1,11 @@
 /**
  * Colombia inquiry form, shared by the country homepage and contact page.
- * Inputs are kept in React state and submitted to the shared Australia-hosted API.
+ * Inputs are kept in React state and submitted to the shared local inquiry API.
  * This browser component never writes directly to the database and contains no secrets;
  * the API must validate and protect every request regardless of browser checks.
  */
 "use client"
+import { useReadOnlyPreview } from "@/components/preview-mode"
 
 import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -32,6 +33,7 @@ export function ContactFormSection({
   variant = "homepage",
   className = "",
 }: ContactFormSectionProps) {
+  const readOnly = useReadOnlyPreview()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -104,6 +106,7 @@ export function ContactFormSection({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (readOnly) { setFeedback("Sending is disabled in this preview. Please use live AVES."); return }
     if (inFlight.current) return
     inFlight.current = true
     setIsSubmitting(true)
@@ -113,7 +116,7 @@ export function ContactFormSection({
       // Convert presentation labels into the shared contact API contract. No private key is sent.
       const body = JSON.stringify(makeColombiaInquiry(formData, selectedRegions, selectedTourTypes, updates, website))
       if (submission.current?.body !== body) submission.current = {body, key: crypto.randomUUID()}
-      const res = await fetch("/australia/api/contact", {
+      const res = await fetch("/api/inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Idempotency-Key": submission.current.key },
         body,
@@ -392,7 +395,7 @@ export function ContactFormSection({
                         type="submit"
                         size="lg"
                         className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
-                        disabled={isSubmitting}
+                        disabled={readOnly || isSubmitting}
                       >
                         <Mail className="mr-2 w-5 h-5" />
                         {isSubmitting ? "Sending..." : "Send My Inquiry"}

@@ -65,7 +65,7 @@ Several entries are optional or multi-release streams, not one-session commitmen
 
 ## Planned consolidation checkpoint — AVES-020
 
-Added at the owner's request on 8 November 2026 (Sydney): consolidate the existing independent applications into one Next.js application and one production Vercel project, preserving the existing shared database and repository. Include the owner's requested naming/branding/SEO review and permission to rename projects or create a new target where useful. Start with a route/file/dependency and search-compatibility inventory, then size code integration, unified preview verification, approved cutover/rollback and later project retirement separately. Effort is not yet estimated; do not assign a credit/time guarantee or silently reprioritise the owner's current work. Recording this task does not authorise implementation or production changes. See ROADMAP-DETAILS.md for acceptance criteria.
+Added at the owner's request on 8 November 2026 (Sydney): consolidate the existing independent applications into one Next.js application and one production Vercel project, preserving the existing shared database and repository. Include the owner's requested naming/branding/SEO review and permission to rename projects or create a new target where useful. Start with a route/file/dependency and search-compatibility inventory, then size code integration, unified preview verification, approved cutover/rollback and later project retirement separately. Effort is not yet estimated; do not assign a credit/time guarantee or silently reprioritise the owner's current work. The owner subsequently selected implementation and preview testing. Production changes still require separate approval. See ROADMAP-DETAILS.md for acceptance criteria.
 
 ## Unscoped / unconfirmed vision
 
@@ -78,3 +78,5 @@ Added at the owner's request on 8 November 2026 (Sydney): consolidate the existi
 ## Definition of done per selected release
 
 One clear outcome; no regressions to the current foundation; proportionate evidence and checks; affected app published and checked live; code and planning mirrors synced; actual limits recorded; then pause.
+
+AVES-020 implementation checkpoint: see [CONSOLIDATION.md](CONSOLIDATION.md). Work is on `integration/aves-unified-2026-11-08`; the two production branches remain separate until approved cutover.

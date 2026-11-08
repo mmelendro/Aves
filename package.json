@@ -1,5 +1,5 @@
 {
-  "name": "my-v0-project",
+  "name": "aves-web",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.34.5",
@@ -8,7 +8,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "test": "node --test tests/*.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
@@ -57,7 +58,11 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
-    "zod": "4.6.6"
+    "zod": "4.6.6",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0",
+    "resend": "6.12.3",
+    "server-only": "0.0.1"
   },
   "devDependencies": {
     "@types/node": "^22",
@@ -79,5 +84,8 @@
       "source-map-js@1.2.1": "^1.2.2",
       "browserslist@4.25.0": "^4.28.7"
     }
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

@@ -1,26 +1,18 @@
 /**
  * Country collections for the global homepage cards. Keep these out of the small
  * destination catalogue, which is also imported by navigation on other pages.
- * The Australian JSON is a metadata snapshot of australia/content/birds-original,
- * birds-expansion-a and birds-expansion-b. Its media and licences stay in that app.
+ * Australia reuses its maintained country catalogue and the same local media assets.
  */
 import { birdData, type BirdProfile } from "./birds"
 import { newZealandCarouselBirds } from "./new-zealand-carousel"
-import australianCatalogue from "./global-australian-birds.json"
+import { australianBirds } from "@/features/australia/content/carousel-birds"
 
 export const destinationBirds: Record<string, BirdProfile[] | undefined> = {
   colombia: birdData.map(bird => ({
     ...bird,
     regionHref: `/regions/${bird.regionSlug}`,
   })),
-  australia: australianCatalogue.map(bird => ({
-    ...bird,
-    image: `/australia${bird.image}`,
-    audioFile: bird.audioFile ? `/australia${bird.audioFile}` : undefined,
-    regionHref: `/australia/regions/${bird.regionSlug}`,
-    audioCreditHref: `/australia/credits#audio-${bird.id}`,
-    photoCredit: { ...bird.photoCredit, teamLink: undefined },
-  })),
+  australia: australianBirds,
   "new-zealand": newZealandCarouselBirds.map(bird => ({
     ...bird,
     regionHref: bird.regionHref || "/new-zealand#regions",

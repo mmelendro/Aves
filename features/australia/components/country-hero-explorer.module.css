@@ -1,0 +1,59 @@
+/* Country hero: two portrait cards on roomy screens; photos first on narrow phones.
+ * Only the map's frame becomes portrait: geographic outlines keep their real shape.
+ */
+.layout {
+  display: grid;
+  text-align: left;
+  align-items: start;
+  gap: 1.75rem;
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+.mediaColumn, .mapColumn {
+  width: 100%;
+  max-width: 20rem;
+  min-width: 0;
+  margin-inline: auto;
+}
+.mediaColumn { order: 1; }
+.mapColumn { order: 2; container-type: inline-size; }
+.mapCard { display: flex; flex-direction: column; }
+.mapCanvas {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  margin-block: 0.75rem;
+}
+.colombiaArtwork {
+  position: relative;
+  width: 14.375rem;
+  max-width: 100%;
+  aspect-ratio: 198 / 250;
+}
+.nzFigure { display: flex; flex: 1; min-height: 0; flex-direction: column; }
+.nzMap { display: block; width: 100%; height: 17.5rem; min-height: 0; }
+.auMap { display: block; width: 100%; height: 16rem; min-height: 0; }
+.mapFooter { flex-shrink: 0; }
+
+/* 44rem accommodates two useful panels on tablets and unfolded phones too.
+ * Both columns can shrink equally; a narrow phone keeps independent natural heights.
+ */
+@media (min-width: 44rem) {
+  .layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .mediaColumn { order: 2; }
+  .mapColumn { order: 1; }
+  .mapCard {
+    /* Fallback for browsers without container units. Include the photo card's 1px borders. */
+    height: 35.458333rem;
+  }
+  @supports (width: 1cqw) {
+    .mapCard { height: calc((100cqw - 2px) * 16 / 9 + 2px); }
+  }
+  .nzMap { flex: 1; height: auto; }
+  .auMap { flex: 1; height: auto; margin-block: 1rem; }
+  /* Keep an expanded region list usable inside its fixed portrait card. */
+  .regionList { max-height: 10rem; overflow-y: auto; overscroll-behavior: contain; }
+}

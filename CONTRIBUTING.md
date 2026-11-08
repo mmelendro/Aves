@@ -1,39 +1,31 @@
 # Editing and releasing AVES
 
-Start with [the beginner's guide](docs/BEGINNERS-GUIDE.md) and [CONTINUE-HERE.md](CONTINUE-HERE.md). The latter identifies the current release. The two maintained branches are independent applications: `webmaster/readiness-2026-11-05` and `australia/preview`. Work from the appropriate current branch, not an assumed up-to-date `main`, and do not merge the two applications.
+This integration branch runs one application with all destination routes and the shared account backend. Read [CONSOLIDATION.md](docs/CONSOLIDATION.md) and the top of [CONTINUE-HERE.md](CONTINUE-HERE.md). Do not base consolidation on stale `main` or directly merge the two old application roots.
 
-## Local development
+## Local development and verification
 
-Use Node.js 22 and pnpm 10.34.5 as used by the project. Install from the committed lockfile:
+Use Node.js 22 and `corepack pnpm` 10.34.5. Install with `corepack pnpm install --frozen-lockfile --ignore-scripts`. All routes run at one origin with `corepack pnpm dev`; `/australia` is an explicit route prefix, not a Next.js basePath.
 
-```sh
-corepack pnpm install --frozen-lockfile --ignore-scripts
-```
+Use `.env.example` for configuration names. Keep values in untracked `.env.local` or private provider configuration. Public pages do not require service secrets. `VERCEL_ENV=preview` disables sign-in, confirmation exchanges, enquiry submissions and private API writes for review. Preview indexing is disabled. Do not use real guest data or send mail merely to test a layout.
 
-In the Australian checkout, `corepack pnpm dev` runs http://127.0.0.1:3000/australia. In the root/global checkout, use `corepack pnpm exec next dev --hostname 127.0.0.1 --port 3001` to preview http://127.0.0.1:3001. The root app forwards local Australian/account requests to the server on port 3000. Review each public application directly when checking its own assets.
-
-The root/global application does not need database credentials for public pages. The shared Australian account backend uses private environment configuration; see its `.env.example` and backend guide. Keep actual values in an untracked `.env.local` or provider settings. Never paste private keys into code, comments, screenshots or GitHub. Use labelled test data when a test needs storage; routine styling reviews need no real form submissions.
-
-## Before saving a functional change
+Before a functional commit:
 
 ```sh
-corepack pnpm exec tsc --noEmit
+corepack pnpm typecheck
 corepack pnpm test
 corepack pnpm build
 ```
 
-The Australian branch also offers `corepack pnpm typecheck`. Stop the development process before building in the same checkout, since both use `.next`. Both applications use TypeScript checks; the root configuration skips ESLint during the build, so a build alone is not a complete review. Tests use local doubles where documented and do not prove every live service still works.
+Stop a local dev server before building in the same checkout. Build skips ESLint; a successful build alone is not a full review. Tests use local doubles for database/auth/email boundaries. They do not prove real provider behaviour. Review affected routes on desktop and phone-sized viewports, including links, keyboard controls, media, credits and absence of horizontal overflow.
 
-Review changed screens on desktop and mobile. Check keyboard focus, image crops, licensed media credits, sound controls and links. For account/backend changes, check ownership, validation, redirects and durable saved-state behavior. Do not send real emails merely to test a cosmetic change.
+## Publication
 
-## GitHub and publication are different steps
+Git automatic deployments stay disabled for the entire repository. Push the integration branch, build the exact commit explicitly as a Vercel **Preview**, inspect it, and record the commit/deployment and remaining limits. Neither a Git push nor merging a draft PR authorizes changing `aves.bio`.
 
-Commit reviewed changes and push the correct branch. Automatic Git deployments are deliberately disabled. A GitHub push preserves the code online but does not publish it. Deploy the corresponding Vercel project, inspect its build/preview, then promote the reviewed release when publication is authorized. Update `CONTINUE-HERE.md` with the deployed application commit and exact deployment URL. Documentation-only commits may subsequently advance the branch head.
+Use the existing `aves-australia` project's Preview environment for review, retaining its current configuration without copying service secrets to a new project. Leave its name/hostname unchanged while the current global production app still depends on it. At separately approved cutover, the one retained production project can be renamed `aves-web` after dependent hostnames/integrations are checked. Package/project names describe infrastructure; page content, established URLs and accurate metadata serve visitors and search engines.
 
-Do not enable automatic deployment, change provider credentials, run database migrations or modify customer records as part of routine content/style work. Existing approved scope governs release actions; deployment approval is not permission for unrelated billing or destructive changes.
+Production cutover, project retirement, domain/DNS changes, customer-data operations and billing changes require their applicable authorization. Record rollback before cutover and keep both previous production deployments available until sign-in, session continuity, saved plans, enquiries and owner permissions have passed approved live checks.
 
-## Dependency and database maintenance
+## Dependencies and data
 
-Keep `pnpm-lock.yaml` with dependency changes; do not introduce npm/Yarn lockfiles. Dependency overrides retain reviewed compatible security patches. Recheck known advisories and production builds before removing overrides. An advisory scan is not proof of application security.
-
-Existing SQL migrations are history, not scripts to rerun casually. Read the Australian `supabase/README.md` and use a new reviewed migration for a new schema change. The root application's old `scripts/` and replacement database files are historical material, not the current shared backend setup.
+Preserve `pnpm-lock.yaml` and the reviewed security overrides. Never introduce npm/Yarn lockfiles or expose provider credentials in source, output or screenshots. Existing migrations are history, not scripts to rerun. This consolidation adds no schema changes and must preserve the shared database, stable record IDs, RLS and immutable submissions/proposals.

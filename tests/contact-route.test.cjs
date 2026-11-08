@@ -3,7 +3,7 @@ const assert = require("node:assert/strict")
 const fs = require("node:fs")
 const path = require("node:path")
 const ts = require("typescript")
-const {NextResponse} = require("next/server")
+const {NextRequest, NextResponse} = require("next/server")
 const root = path.resolve(__dirname, "..")
 const key = "a7ab9560-735d-49f4-b55d-dda98026fac9"
 const fixture = {firstName: "Synthetic", lastName: "Visitor", email: "synthetic@example.invalid", phone: "", travelDate: "2027-03-01", groupSize: "2 people", duration: "8 days", experienceLevel: "Beginner birder", tourTypes: ["vision"], regions: ["pacific-choco"], message: "Synthetic inquiry"}
@@ -13,8 +13,9 @@ function load(file, mocks = {}) {
   }).outputText
   const mod = {exports: {}}
   new Function("require", "module", "exports", "fetch", "process", code)(name => {
-    if (name === "next/server") return {NextResponse}
+    if (name === "next/server") return {NextRequest, NextResponse}
     if (name === "zod") return require("zod")
+    if (name === "@/lib/contact-handler") return { POST: async req => mocks.fetch(req.url, { headers: Object.fromEntries(req.headers), body: await req.text() }) }
     if (name.startsWith("@/")) return load(name.slice(2) + ".ts", mocks)
     if (name.startsWith("./")) return load(path.join(path.dirname(file), name + ".ts"), mocks)
     throw new Error("Unexpected dependency: " + name)
@@ -35,17 +36,15 @@ function harness(response = () => Response.json({success: true, status: "stored"
     route,
   }
 }
-test("legacy endpoint stores through the fixed shared service without credentials or visitor confirmation email", async () => {
+test("legacy endpoint stores through the local shared handler without credentials or visitor confirmation email", async () => {
   const app = harness(), response = await app.post()
   assert.equal(response.status, 200)
   assert.deepEqual(await response.json(), {success: true, status: "stored", intent: "inquiry", country: "colombia"})
   assert.equal(response.headers.get("cache-control"), "no-store")
   assert.equal(app.calls.length, 1)
   const {url, options} = app.calls[0]
-  assert.equal(url, "https://aves.bio/australia/api/contact")
-  assert.equal(options.redirect, "error")
-  assert.equal(options.cache, "no-store")
-  assert.deepEqual(options.headers, {"Content-Type": "application/json", "Idempotency-Key": key, Origin: "https://aves.bio"})
+  assert.equal(url, "https://aves.bio/api/inquiries")
+  assert.deepEqual(options.headers, {"content-type": "application/json", "idempotency-key": key, origin: "https://aves.bio"})
   const payload = JSON.parse(options.body)
   assert.equal(payload.country, "colombia")
   assert.equal(payload.region, "pacific")
@@ -70,7 +69,7 @@ for (const [label, body, headers, expected] of [
   ["wrong content type", fixture, {"Content-Type": "text/plain"}, 415],
   ["declared oversized body", fixture, {"Content-Length": "32769"}, 413],
   ["actual oversized body", "x".repeat(32769), {}, 413],
-]) test(label + " is rejected before forwarding", async () => {
+]) test(label + " is rejected before calling the shared handler", async () => {
   const app = harness(), response = await app.post(body, headers)
   assert.equal(response.status, expected)
   assert.equal(app.calls.length, 0)
@@ -89,7 +88,7 @@ test("explicit opt-in survives mapping and multiple regions remain in the inquir
 })
 test("same caller idempotency key is forwarded unchanged on retries", async () => {
   const app = harness(); await app.post(); await app.post()
-  assert.deepEqual(app.calls.map(call => call.options.headers["Idempotency-Key"]), [key, key])
+  assert.deepEqual(app.calls.map(call => call.options.headers["idempotency-key"]), [key, key])
 })
 for (const [label, response, expected] of [
   ["unconfirmed success", () => Response.json({success: true}), 502],
@@ -112,7 +111,7 @@ for (const [label, response, expected] of [
 })
 test("new form uses the shared stored receipt contract and explicit Colombia update consent", () => {
   const source = fs.readFileSync(path.join(root, "components/contact-form-section.tsx"), "utf8")
-  assert.match(source, /fetch\("\/australia\/api\/contact"/)
+  assert.match(source, /fetch\("\/api\/inquiries"/)
   assert.match(source, /"Idempotency-Key": submission.current.key/)
   assert.match(source, /submission.current\?\.body !== body/)
   assert.match(source, /result\?\.status !== "stored"/)

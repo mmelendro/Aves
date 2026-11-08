@@ -2,7 +2,7 @@
  * Next.js build and routing configuration, evaluated by the server/build tool.
  * This is not page content. headers() supplies browser security/cache instructions;
  * redirects() moves visitors to canonical routes. See docs/BEGINNERS-GUIDE.md
- * before changing path prefixes: the two AVES applications are deployed separately.
+ * before changing legacy paths: this app preserves all existing destination URLs.
  */
 import { securityHeaders, privateHeaders } from "./security-headers.mjs"
 /** @type {import('next').NextConfig} */
@@ -17,15 +17,17 @@ const nextConfig = {
   },
   poweredByHeader: false,
   async rewrites() {
-    // Mirror the existing hosting routes when previewing both apps locally.
-    return process.env.NODE_ENV === "development" ? [
-      { source: "/australia/:path*", destination: "http://127.0.0.1:3000/australia/:path*" },
-    ] : []
+    // Legacy callback/API URLs stay valid; every destination is local to this app.
+    return [
+      { source: "/australia/api/contact", destination: "/api/inquiries" },
+      { source: "/australia/api/:path*", destination: "/api/:path*" },
+      { source: "/australia/auth/:path*", destination: "/auth/:path*" },
+    ]
   },
   async headers() {
     return [
-      { source: "/:path*", headers: securityHeaders },
-      ...["/account/:path*", "/dashboard/:path*", "/auth/:path*", "/api/:path*", "/shopping/:path*"].map(source => ({ source, headers: privateHeaders })),
+      { source: "/:path*", headers: [...securityHeaders, ...(process.env.VERCEL_ENV === "preview" ? [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }] : [])] },
+      ...["/account/:path*", "/admin/:path*", "/dashboard/:path*", "/auth/:path*", "/api/:path*", "/shopping/:path*", "/australia/account/:path*", "/australia/admin/:path*", "/australia/auth/:path*", "/australia/api/:path*"].map(source => ({ source, headers: privateHeaders })),
     ]
   },
   async redirects() {

@@ -1,17 +1,17 @@
 /**
  * Server-only compatibility endpoint for older Colombian contact forms.
- * Current forms use the shared /australia/api/contact endpoint. This bridge validates
- * old payloads, translates them, and forwards to a fixed AVES address. It never
+ * Current forms use the shared /api/inquiries endpoint. This bridge validates
+ * old payloads, translates them, and dispatches to the local shared inquiry handler. It never
  * connects to the retired Colombian database. HTTP errors are safe public messages.
  */
-import { type NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { makeColombiaInquiry } from "@/lib/colombia-inquiry"
 import { canonicalColombiaRegion } from "@/lib/shared-account"
 
 // Bound request size before parsing to avoid accepting arbitrarily large payloads.
 const MAX_REQUEST_BYTES = 32_768
-const SHARED_CONTACT_URL = "https://aves.bio/australia/api/contact"
+import { POST as acceptInquiry } from "@/lib/contact-handler"
 // Zod checks runtime input: TypeScript alone cannot validate a browser request.
 const singleLine = (length: number) => z.string().trim().max(length).regex(/^[^\u0000-\u001f\u007f]*$/)
 const legacyInquiry = z.object({
@@ -94,15 +94,12 @@ export async function POST(req: NextRequest) {
     request.data.regions, request.data.tourTypes, request.data.updates, request.data.website,
   )
   try {
-    // Forward only to our fixed service, refusing redirects and limiting wait time.
-    const upstream = await fetch(SHARED_CONTACT_URL, {
+    // Reuse validation/storage locally without a network or cross-project hop.
+    const upstream = await acceptInquiry(new NextRequest(new URL("/api/inquiries", req.url), {
       method: "POST",
       headers: {"Content-Type": "application/json", "Idempotency-Key": key.data, Origin: "https://aves.bio"},
       body: JSON.stringify(payload),
-      cache: "no-store",
-      redirect: "error",
-      signal: AbortSignal.timeout(15_000),
-    })
+    }))
     const result = await upstream.json().catch(() => ({}))
     // Report success only when the service explicitly confirms durable Colombia storage.
     // This does not claim delivery to an inbox or a confirmed travel booking.

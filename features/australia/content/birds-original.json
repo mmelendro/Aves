@@ -1,0 +1,83 @@
+[
+  {
+    "id": "au-fairywren",
+    "commonName": "Superb Fairywren",
+    "scientificName": "Malurus cyaneus",
+    "primaryRegion": "New South Wales",
+    "regionSlug": "new-south-wales",
+    "habitat": "Open eucalypt woodland with dense understorey, parks and gardens",
+    "image": "/images/bird-encounter.jpg",
+    "audioFile": "/audio/superb-fairywren.mp3",
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Photographer · CC BY-SA 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-_Sydney_Olympic_Park.jpg",
+      "reserve": "Sydney Olympic Park, NSW",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-_Sydney_Olympic_Park.jpg"
+    },
+    "distribution": "South-eastern mainland Australia and Tasmania, in scrubby woodland, gardens and parks with dense cover.",
+    "sources": [
+      {
+        "title": "Museums Victoria — Superb Fairy-wren",
+        "url": "https://collections.museumsvictoria.com.au/species/8161"
+      },
+      {
+        "title": "Australian Museum — Superb Fairy-wren",
+        "url": "https://australian.museum/learn/animals/birds/superb-fairy-wren/"
+      }
+    ],
+    "imagePosition": "60% center"
+  },
+  {
+    "id": "au-lorikeet",
+    "commonName": "Rainbow Lorikeet",
+    "scientificName": "Trichoglossus moluccanus",
+    "primaryRegion": "Queensland",
+    "regionSlug": "queensland",
+    "habitat": "Rainforest, woodland and well-treed urban areas",
+    "image": "/images/rainbow-lorikeet.jpg",
+    "audioFile": "/audio/rainbow-lorikeet.mp3",
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Photographer · CC BY 3.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Trichoglossus_moluccanus,_Daintree_Village.jpg",
+      "reserve": "Daintree Village, Queensland",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Trichoglossus_moluccanus,_Daintree_Village.jpg"
+    },
+    "distribution": "Widespread in eastern Australia, including Queensland, NSW and Victoria. Introduced populations also occur around Perth, outside its native eastern range.",
+    "sources": [
+      {
+        "title": "BirdLife Australia — Rainbow Lorikeet",
+        "url": "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/"
+      }
+    ]
+  },
+  {
+    "id": "au-cockatoo",
+    "commonName": "Sulphur-crested Cockatoo",
+    "scientificName": "Cacatua galerita",
+    "primaryRegion": "Tasmania",
+    "regionSlug": "tasmania",
+    "habitat": "A variety of timbered habitats, including areas around human settlements",
+    "image": "/images/sulphur-crested-cockatoo.jpg",
+    "audioFile": "/audio/sulphur-crested-cockatoo.mp3",
+    "photoCredit": {
+      "photographer": "JJ Harrison",
+      "title": "Photographer · CC BY-SA 3.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Cacatua_galerita_-_Austin%27s_Ferry.jpg",
+      "reserve": "Austin's Ferry, Tasmania",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Cacatua_galerita_-_Austin%27s_Ferry.jpg"
+    },
+    "distribution": "Northern and eastern mainland Australia, and Tasmania, in wooded habitats and around towns. A small introduced population also occurs around Perth.",
+    "sources": [
+      {
+        "title": "Australian Museum — Sulphur-crested Cockatoo",
+        "url": "https://australian.museum/learn/animals/birds/sulphur-crested-cockatoo/"
+      }
+    ],
+    "imagePosition": "40% center"
+  }
+]

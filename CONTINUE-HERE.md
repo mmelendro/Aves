@@ -1,3 +1,9 @@
+# AVES-020 integration checkpoint, 8 November 2026
+
+The owner selected implementation and preview testing in chat. Branch `integration/aves-unified-2026-11-08` combines the maintained global/Colombia/NZ application and Australian/shared backend in one Next.js root. See [docs/CONSOLIDATION.md](docs/CONSOLIDATION.md) for the inventory, exact source snapshots, test evidence and remaining cutover gates.
+
+This branch is a preview candidate. Production remains the two deployments recorded below. Do not publish, rename current project hostnames, move `aves.bio`, change DNS or retire a project until separately approved. The business plan has not yet been created. Other roadmap items remain paused.
+
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
 ## Current production — NZ Info-overlay pilot, 8 November 2026 (Sydney)

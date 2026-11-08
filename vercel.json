@@ -1,9 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
-    "deploymentEnabled": {
-      "webmaster/readiness-2026-11-05": false,
-      "australia/preview": false
-    }
+    "deploymentEnabled": false
   }
 }

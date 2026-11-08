@@ -1,3 +1,5 @@
+This integration branch is documented in [CONSOLIDATION.md](../docs/CONSOLIDATION.md). Older two-app paths below describe the pre-cutover production architecture.
+
 # Reading the automated checks
 
 Run `corepack pnpm test` from this application. The package script invokes Node's test runner on `tests/*.test.cjs`. A test name describes the behavior being checked. `assert` compares the actual result with the expected result; a failure stops that test and reports the difference.

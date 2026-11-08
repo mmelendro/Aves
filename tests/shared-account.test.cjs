@@ -28,7 +28,6 @@ for (const [file, expected] of [
   ['app/auth/signup/page.tsx', shared.sharedSignInHref('sign-up')],
   ['app/dashboard/page.tsx', shared.sharedAccountHref()],
   ['app/dashboard/[...legacy]/page.tsx', shared.sharedAccountHref()],
-  ['app/account/page.tsx', shared.sharedAccountHref()],
   ['app/account/settings/page.tsx', shared.sharedAccountHref()],
   ['app/account/[...legacy]/page.tsx', shared.sharedAccountHref()],
 ]) {
@@ -67,7 +66,7 @@ test('old auth tokens are not forwarded; old recovery links start a fresh shared
   await assert.rejects(Page({params: Promise.resolve({legacy: ['reset-password']})}), error => error.url === '/account/forgot-password')
 })
 
-test('Colombia runtime source contains no retired database clients, auth providers or credential reads', () => {
+test('public Colombia components contain no privileged database access or auth-provider dependencies', () => {
   const forbidden = /@supabase\/|@\/hooks\/use-auth|@\/hooks\/use-bookings|@\/lib\/(?:supabase|auth-service|database\.types)|NEXT_PUBLIC_SUPABASE|SUPABASE_SERVICE_ROLE_KEY/
   function walk(directory) {
     for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
@@ -76,7 +75,7 @@ test('Colombia runtime source contains no retired database clients, auth provide
       else if (/\.tsx?$/.test(entry.name)) assert.doesNotMatch(fs.readFileSync(filename, 'utf8'), forbidden, path.relative(root, filename))
     }
   }
-  for (const dir of ['app', 'components', 'hooks', 'lib']) walk(path.join(root, dir))
+  for (const file of ['app/colombia/page.tsx', 'features/colombia/contact-page.tsx', 'components/contact-form-section.tsx', 'components/colombia-region-page.tsx', 'components/colombian-birds-explorer.tsx']) assert.doesNotMatch(fs.readFileSync(path.join(root, file), 'utf8'), forbidden, file)
 })
 
 test('desktop, mobile and regional shared-account entry points use full-page navigation', () => {

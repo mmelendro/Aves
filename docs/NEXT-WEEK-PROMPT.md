@@ -20,7 +20,7 @@ AVES-012d-1 is delivered only on the main NZ destination hero: Info opens a boun
 
 ## Planned application consolidation — AVES-020
 
-**Backlog only; scope and select this separately before implementation.** Consolidate the global/Colombia/NZ and Australian/shared-account applications into one Next.js application and one production Vercel project, retaining the existing GitHub repository and shared account database. Reuse delivered code and content; do not rebuild the site or directly merge the independent branch heads.
+**Implementation and preview testing selected by the owner on 8 November 2026.** Consolidate the global/Colombia/NZ and Australian/shared-account applications into one Next.js application and one production Vercel project, retaining the existing GitHub repository and shared account database. Reuse delivered code and content; do not rebuild the site or directly merge the independent branch heads.
 
 First inventory route/file collisions, shared components, assets, configuration and deployment dependencies, then prepare a dedicated integration branch and unified preview. Preserve existing country/deep URLs, SEO/canonicals/redirects, Google/email sign-in and recovery, root-path sessions, private plans/wishlists/quotes, owner permissions, inquiry/notification handling, accessibility and media licences/credits. Keep the existing database, ownership policies and saved records.
 
@@ -62,3 +62,5 @@ For each selected implementation: verify proportionately, build where needed, pu
 Before completing each change, review the affected code and comments for clarity and correctness; remove redundant logic, verified-unused legacy items and stale comments, keep explanations beginner-friendly, preserve required migrations/history and working behaviour, and run proportionate checks.
 
 This checkpoint includes the published NZ Info-overlay pilot; no database, billing or provider configuration changed. Wait for the owner to select the next implementation batch.
+
+AVES-020 implementation checkpoint: see [CONSOLIDATION.md](CONSOLIDATION.md). Work is on `integration/aves-unified-2026-11-08`; the two production branches remain separate until approved cutover.

@@ -34,7 +34,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md">
+      <header className="fixed inset-x-0 top-[var(--aves-preview-offset,0px)] z-50 border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md">
         <a
           href="#main-content"
           className="absolute left-4 top-3 z-10 flex min-h-11 -translate-y-24 items-center rounded-xl bg-emerald-800 px-4 font-semibold text-white focus:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"

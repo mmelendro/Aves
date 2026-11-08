@@ -1,3 +1,5 @@
+This integration branch is documented in [CONSOLIDATION.md](CONSOLIDATION.md). Older two-app paths below describe the pre-cutover production architecture.
+
 # AVES frontend: a beginner's reading guide
 
 This guide describes the `source` application: the main AVES homepage, Colombia and New Zealand. Australia and the shared customer account service are maintained in the separate Australia application. Files here can link to those services without containing their implementation.

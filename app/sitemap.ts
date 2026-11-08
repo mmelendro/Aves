@@ -6,8 +6,11 @@
 import type { MetadataRoute } from "next"
 import { publicPages } from "@/lib/public-pages"
 import { canonicalUrl } from "@/lib/site-path"
+import { publicPages as australianPages } from "@/features/australia/lib/public-pages"
+import { sitePath as australiaPath } from "@/features/australia/lib/site-path"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Omit lastModified unless it comes from a real content revision.
-  return publicPages.map(page => ({ url: canonicalUrl(page.href) }))
+  const paths = new Set([...publicPages.map(page => page.href), ...australianPages.map(page => australiaPath(page.href))])
+  return [...paths].map(path => ({ url: canonicalUrl(path) }))
 }

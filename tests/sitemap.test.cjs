@@ -38,7 +38,10 @@ test("XML sitemap contains unique canonical public URLs without queries, aliases
   const entries = load("app/sitemap.ts").default()
   const urls = entries.map(entry => entry.url)
   assert.equal(new Set(urls).size, urls.length)
-  assert.equal(urls.length, publicPages.length)
+  const australianPages = load("features/australia/lib/public-pages.ts").publicPages
+  const australiaPath = load("features/australia/lib/site-path.ts").sitePath
+  const expected = new Set([...publicPages.map(page => page.href), ...australianPages.map(page => australiaPath(page.href))])
+  assert.deepEqual(new Set(urls.map(url => new URL(url).pathname)), expected)
   for (const entry of entries) {
     const url = new URL(entry.url)
     assert.equal(url.origin, "https://aves.bio")
@@ -75,7 +78,7 @@ test("native sitemap URLs apply the Australian base path exactly once", () => {
   for (const entry of entries) {
     const pathname = new URL(entry.url).pathname
     if (australian) assert.ok(pathname === "/australia" || pathname.startsWith("/australia/"))
-    else assert.ok(!pathname.startsWith("/australia"))
+    else assert.ok(pathname.startsWith("/"))
     assert.doesNotMatch(pathname, /australia\/australia/)
   }
   for (const page of publicPages) assert.ok(!page.href.startsWith("/australia"), "Next Link receives unprefixed paths")
@@ -146,7 +149,7 @@ test("each listed Colombia page declares its own canonical URL", () => {
     return undefined
   }
   for (const page of publicPages) {
-    const file = join(root, "app", page.href, "page.tsx")
+    const file = page.href === "/contact" ? join(root, "features/colombia/contact-page.tsx") : join(root, "app", page.href, "page.tsx")
     if (!existsSync(file)) {
       assert.ok(page.href.startsWith("/regions/"))
       const dynamic = readFileSync(join(root, "app/regions/[slug]/page.tsx"), "utf8")

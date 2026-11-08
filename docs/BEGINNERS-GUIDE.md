@@ -1,3 +1,5 @@
+This integration branch is documented in [CONSOLIDATION.md](CONSOLIDATION.md). Older two-app paths below describe the pre-cutover production architecture.
+
 # Start here: understanding the AVES code
 
 This guide is for Martín and anyone new to coding. Read it once, then follow the file links in the [frontend tour](frontend-code-tour.md). The comments in the source explain the purpose of each section and the less obvious decisions. You do not need to understand every framework implementation to edit a heading or add a sourced bird.
