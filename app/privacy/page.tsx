@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 }
 
 const sections = [
-  { title: "What You Share", text: "Inquiry forms collect your name, email and travel preferences, with optional details such as phone number, timing, group size, birding experience and a message. An account stores your email, saved plans, quote requests and proposal history. Share only the information needed for your trip conversation." },
+  { title: "What You Share", text: "Inquiry forms collect your name, email and travel preferences, with optional details such as phone number, timing, group size, birding experience and a message. An account stores your email, saved plans, quote requests and proposal history. The optional New Zealand planning questionnaire stores your pace, birding frequency, accommodation preference, interests and notes in your private trip plan. You choose when to share a submitted copy with authorized AVES staff; answers are not published. New Zealand notification emails link to the private owner inbox without including your answers. Share only the information needed for your trip conversation." },
   { title: "How AVES Uses It", text: "We use this information to respond to inquiries, manage your account, prepare proposals and keep a record of the conversation and your update preferences. A saved inquiry or quote request is not a booking or payment." },
   { title: "One Account for Both Countries", text: "Australia and Colombia use one AVES account and database. Private account records are not public; signed-in clients can access their own records. The authorised AVES owner can review submitted requests and prepare proposals. Draft plans can be edited or deleted in your account." },
   { title: "Database and Sign-In", text: "Supabase provides account sign-in, confirmation, recovery and database storage. Our primary project database is in Sydney, Australia. Hosting and email providers may also process information outside Australia.", href: "https://supabase.com/privacy", link: "Supabase Privacy Policy" },
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Notice</h1>
-          <p className="text-lg text-gray-600">How AVES handles inquiries, accounts and trip planning for Colombia and Australia.</p>
+          <p className="text-lg text-gray-600">How AVES handles inquiries, accounts and trip planning, including the New Zealand planning beta.</p>
           <div className="text-sm text-gray-500 mt-4">Updated: 8 November 2026</div>
         </div>
         <div className="prose prose-lg max-w-none">
