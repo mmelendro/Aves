@@ -1,5 +1,7 @@
 # AVES roadmap — detailed acceptance criteria
 
+**Paused at the owner's request, 8 November 2026.** Read [PAUSED-CHECKPOINT-2026-11-08.md](PAUSED-CHECKPOINT-2026-11-08.md) first. South Island/regional-zoom app candidates5847eb7/6ba7fee are pushed and staged READY but NOT promoted; aves.bio still runs95c9f75/721370e. Finish source hosted/live verification after explicit resume. New pricing, credits-carousel and Equal Earth recentering requests are recorded there; pricing has a separate untested draft. This notice takes precedence over older status text.
+
 **Updated: 8 November 2026 (Sydney).** Improve https://aves.bio in small, tested releases. The canonical execution prompt is NEXT-WEEK-PROMPT.md. This file retains detailed requirements; read only the section relevant to the chosen release. Current handoff/status takes precedence over historical release narratives.
 
 **Owner priorities:** country dividers, the first private NZ questionnaire/bird-selection pilot and the base Equal Earth homepage map are delivered. With the shared Info rollout complete, next prioritise South Island trip readiness (page, guidance/resources and pilot feedback), then the Sydney launch product. Country zoom/map polish and other enhancements follow; do not turn them into prerequisites. Updating the prompt does not resume implementation.
