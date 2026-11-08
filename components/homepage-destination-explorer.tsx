@@ -10,6 +10,7 @@ import { ArrowRight } from "lucide-react"
 import { destinations } from "@/content/destinations"
 import DestinationCardMedia from "@/components/destination-card-media"
 import { DestinationSelectionContext } from "@/components/destination-selection-context"
+import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import styles from "./homepage-destination-explorer.module.css"
 
 export default function HomepageDestinationExplorer({ map, initialCountryId }: { map: ReactNode; initialCountryId?: string }) {
@@ -43,14 +44,13 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
           </a>
         </div>
         <div className={styles.layout}>
-          <div className={styles.grid}>
-            <div className={styles.mapPanel}>{map}</div>
-            {/* Remounting on country change clears the old slide, details, timer
-                and audio through the viewer's existing cleanup effects. */}
-            <div key={destination.id} className={styles.mediaPanel}>
-              <DestinationCardMedia destination={destination} />
-            </div>
-          </div>
+          {/* Keep the divider mounted when countries change, preserving its split.
+              Only the keyed viewer resets old slides, calls, timers and details. */}
+          <ResizableDiscoveryPair mapLabel="Resize world map and bird photographs"
+            map={<div className={styles.mapPanel}>{map}</div>}
+            media={<div key={destination.id} className={styles.mediaPanel}>
+              <DestinationCardMedia destination={destination} fillPanel />
+            </div>} />
         </div>
         <p role="status" className="sr-only">{destination.name} selected. Showing its bird photographs and destination link.</p>
         <noscript><p className="mt-4 text-sm text-emerald-900">Open a destination: {destinations.map(country => <a key={country.id} href={country.href} className="mr-4 inline-flex min-h-11 items-center underline">{country.name}</a>)}</p></noscript>

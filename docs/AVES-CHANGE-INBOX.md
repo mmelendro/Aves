@@ -44,6 +44,9 @@ Implementation stays paused until a specific release is selected. Relative effor
 
 | AVES-016 | NZ content depth / owner follow-up | NZ at least as comprehensive for trip planning as Colombia, with simpler navigation and consistent visual/content/resource standards; South Island first. | Compare actual Colombian coverage, retain depth, then verified travel tips/practical guidance and curated podcasts/documentaries/YouTube/reading/resources in small batches. Check source/media rights, links, mobile/accessibility and protected guest data. | Backlog |
 
+| AVES-003a-1 | Homepage divider / selected follow-up | Reuse the country-page resize divider between the homepage world map and switching bird viewer. | Pointer/keyboard/reset, full safe travel, automatic resizing, media-first phone stacking, retained country/media state, credits/details and country links; publish/sync/pause. | In progress |
+| AVES-012b | Regional media consistency / queued | Replace text-only regional “Birds worth getting to know” cards with a richer compact bird carousel, NSW pilot example. | Preserve local notes, sources and ethical guidance; verified media/calls and discreet controls; reuse regional collection and avoid duplicate viewers. Coordinate with regional duo rollout. | Backlog |
+
 The owner order above is explicit and takes precedence over the older provisional ranking. P0/P1/P2 labels below describe severity/type, not a competing delivery sequence. Confirmed security/privacy or essential-journey failures take precedence when found. States: Backlog, Ready, In progress, Verified, Deferred. Prior release verification remains historical evidence, not a fresh audit of every queued item.
 
 ## Release checkpoint — 8 November 2026 (Sydney)

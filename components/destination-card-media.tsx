@@ -9,15 +9,15 @@ import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { destinationBirds } from "@/content/destination-birds"
 import type { Destination } from "@/content/destinations"
 
-export default function DestinationCardMedia({ destination }: { destination: Destination }) {
+export default function DestinationCardMedia({ destination, fillPanel = false }: { destination: Destination; fillPanel?: boolean }) {
   const birds = destinationBirds[destination.id]
   if (birds?.length) return <HomepageBirdCarousel
     birds={birds} variant="destination-card" label={`${destination.name} bird photographs`}
-    autoPlay={false} priority={false} showBirdPicker
+    autoPlay={false} priority={false} showBirdPicker fillPanel={fillPanel}
   />
 
   return <>
-    <div className="relative aspect-[4/5] overflow-hidden bg-emerald-50">
+    <div className="relative aspect-[4/5] overflow-hidden bg-emerald-50" style={fillPanel ? { height: "var(--discovery-media-height, auto)" } : undefined}>
       <Image src={destination.image} alt={destination.imageAlt} fill
         sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px"
         className="object-cover" style={{ objectPosition: destination.imagePosition, transform: `scale(${destination.imageScale ?? 1})`, transformOrigin: "top left" }} />
