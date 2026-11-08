@@ -71,7 +71,7 @@ export default function AVESLandingPage() {
               <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Colombia’s <span className="text-emerald-700">extraordinary birdlife</span></h1>
               <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">Personally planned journeys connecting Colombia’s birds, landscapes and local culture. Tell us what you love; we’ll help shape the route, pace and places to stay.</p>
             </div>
-            <ColombiaHeroExplorer />
+            <ColombiaHeroExplorer resizable />
           </div>
         </section>
 

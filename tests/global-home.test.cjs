@@ -65,6 +65,16 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
+test("every Colombia carousel bird links to an actual planning-map region", () => {
+  const birds = load("content/birds.ts").birdData
+  const mapRegions = new Set(load("lib/region-links.ts").colombiaMapRegions.map(region => region.slug))
+  assert.equal(birds.length, 22)
+  for (const bird of birds) {
+    assert.ok(mapRegions.has(bird.regionSlug), `${bird.id}: no map region`)
+    assert.ok(bird.distribution && bird.sources.length, `${bird.id}: missing range/source notes`)
+  }
+})
+
 test("every New Zealand carousel bird has explicit valid island links, including broad labels", () => {
   const birds = load("content/new-zealand-carousel.ts").newZealandCarouselBirds
   const links = load("content/new-zealand-bird-islands.ts").newZealandBirdIslands

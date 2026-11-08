@@ -1,11 +1,11 @@
 /**
- * Connects the Colombia homepage carousel to its small clickable map.
+ * Connects Colombia bird media to its clickable planning-region map.
  * A changed slide highlights a featured region; selecting a map link opens a region
  * page. The dropdown offers the same navigation without needing to tap a tiny marker.
  */
 "use client"
 
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import type { ReactNode } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import styles from "@/components/country-hero-explorer.module.css"
@@ -13,6 +13,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { birdData, type BirdProfile } from "@/content/birds"
 import { colombiaMapRegions } from "@/lib/region-links"
 
@@ -36,29 +37,34 @@ const mapMarkers = [
   return { ...marker, slug: region.slug }
 })
 
-export default function ColombiaHeroExplorer({ media, initialRegion, initialBird }: { media?: ReactNode; initialRegion?: string; initialBird?: BirdProfile } = {}) {
+export default function ColombiaHeroExplorer({ media, initialRegion, initialBird, resizable = false }: { media?: ReactNode; initialRegion?: string; initialBird?: BirdProfile; resizable?: boolean } = {}) {
   const [currentBird, setCurrentBird] = useState(initialBird ?? birdData[0])
-  // A deliberate dropdown selection stays selected even when a different bird is shown.
+  // Manual choices remain while viewing a bird; the resizable homepage follows
+  // the next bird, while focused regional/article pages retain their region.
   const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
+  // The homepage follows a newly chosen bird. Other page types retain their
+  // deliberate region focus; choosing a region without changing birds still works.
+  const onBirdChange = useCallback((bird: BirdProfile) => {
+    setCurrentBird(bird)
+    if (resizable) setChosenRegion("")
+  }, [resizable])
   const featuredRegion = mapMarkers.find(region => region.slug === currentBird.regionSlug)
   // Before a manual choice, offer the current bird region as a useful starting point.
   const selectedRegion = chosenRegion || featuredRegion?.slug || mapMarkers[0].slug
   const selectedRegionDetails = mapMarkers.find(region => region.slug === selectedRegion)!
 
-  return (
-    <BirdDiscoveryContext.Provider value={setCurrentBird}><div className={styles.layout}>
-      <div className={styles.mediaColumn}>
-        {media ?? <HomepageBirdCarousel className="w-full max-w-none" birds={birdData} autoPlay={false} />}
+  const mediaContent = <>
+        {media ?? <HomepageBirdCarousel className="w-full max-w-none" birds={birdData} fillPanel={resizable} showBirdPicker={resizable} autoPlay={false} />}
         {!media && <p className="mt-3 text-center text-sm leading-6 text-gray-600">A glimpse of Colombia’s <a href="https://colombia.travel/en/birdwatching" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">1,900+ bird species<span className="sr-only"> (source: Colombia Travel; opens in a new tab)</span></a>. Sightings depend on your route, habitat and season.</p>}
-      </div>
-      <div className={styles.mapColumn}>
-        <div className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
+      </>
+  const mapContent = <>
+        <div style={resizable ? { height: "var(--discovery-panel-height, auto)" } : undefined} className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
           <div className="flex items-baseline justify-between gap-3">
             <h2 className="font-medium text-emerald-950">Explore Colombia</h2>
             <Link href="/aves-explorer" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></Link>
           </div>
-          <div className={styles.mapCanvas}><div className={styles.colombiaArtwork} role="group" aria-label="Colombia map: choose from 11 birding regions">
-            <ColombiaMapArtwork alt="" fill sizes="230px" className="object-contain" />
+          <div className={styles.mapCanvas}><div className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
+            <ColombiaMapArtwork alt="" fill sizes={resizable ? "400px" : "230px"} className="object-contain" />
             {mapMarkers.map((region, index) => {
               // A manual region choice takes priority over the bird's suggestion.
               // Keep its name visible; other labels appear on hover or keyboard focus.
@@ -84,7 +90,9 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
           <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Plan my trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           <span className="max-w-40 text-xs leading-5 text-gray-600">A personal itinerary, shaped around you.</span>
         </div>
-      </div>
-    </div></BirdDiscoveryContext.Provider>
-  )
+      </>
+  return <BirdDiscoveryContext.Provider value={onBirdChange}>
+    {resizable ? <ResizableDiscoveryPair media={mediaContent} map={mapContent} mapLabel="Explore Colombia" /> :
+      <div className={styles.layout}><div className={styles.mediaColumn}>{mediaContent}</div><div className={styles.mapColumn}>{mapContent}</div></div>}
+  </BirdDiscoveryContext.Provider>
 }
