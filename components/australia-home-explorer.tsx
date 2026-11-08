@@ -1,7 +1,7 @@
 "use client"
 
 /*
- * Homepage pairing of the small clickable map and portrait bird carousel. The carousel
+ * Pairs a clickable map and bird carousel, with resizing opted into by the homepage. The carousel
  * reports its current bird to this parent; the map highlights one associated region, not the
  * bird's complete range. Geographic shapes come from content/australia-map.ts, never logo artwork.
  */
@@ -13,6 +13,7 @@ import styles from "@/components/country-hero-explorer.module.css"
 import Link from "next/link"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { Button } from "@/components/ui/button"
 import { australiaMapProvenance, australiaMapStates, australiaMapViewBox } from "@/content/australia-map"
 import { birdData, type BirdProfile } from "@/content/birds"
@@ -25,7 +26,7 @@ const smallTerritories = [
   { id: "jervis-bay-territory", label: "Jervis Bay", x: 620, y: 427, line: "597.38,458.06 608,448 620,448" },
 ]
 
-export function AustraliaHomeExplorer({ media, initialRegion }: { media?: ReactNode; initialRegion?: string } = {}) {
+export function AustraliaHomeExplorer({ media, initialRegion, resizable = false }: { media?: ReactNode; initialRegion?: string; resizable?: boolean } = {}) {
   const id = useId()
   // React state remembers the displayed bird. The stable callback avoids unnecessary effect retriggers.
   const [bird, setBird] = useState<BirdProfile>(birdData[0])
@@ -33,14 +34,12 @@ export function AustraliaHomeExplorer({ media, initialRegion }: { media?: ReactN
   // This featured region is one place to look, not a map of the species' entire distribution.
   const highlightedRegion = regionOptions.find(region => region.id === (initialRegion ?? bird.regionSlug))
 
-  return <BirdDiscoveryContext.Provider value={onBirdChange}><div className={styles.layout}>
-    {/* Media comes first on phones; desktop order places the map left and portrait carousel right. */}
-    <div className={styles.mediaColumn}>
-      {media ?? <HomepageBirdCarousel className="w-full max-w-none" autoPlay={false} />}
+  const mediaContent = <>
+      {media ?? <HomepageBirdCarousel className="w-full max-w-none" fillPanel={resizable} showBirdPicker={resizable} autoPlay={false} />}
       {!media && <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a>. Sightings depend on your route and season.</p>}
-    </div>
-    <div className={styles.mapColumn}>
-      <div className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60`}>
+    </>
+  const mapContent = <>
+      <div style={resizable ? { height: "var(--discovery-panel-height, auto)" } : undefined} className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60`}>
         <div className="px-4 pt-3">
           <h2 className="font-medium text-emerald-950">Explore Australia</h2>
         </div>
@@ -78,6 +77,9 @@ export function AustraliaHomeExplorer({ media, initialRegion }: { media?: ReactN
         <Link href="/aves-explorer" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-emerald-800 underline-offset-4 hover:underline">Explore the regions<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
       </div>
       <p className="mt-2 text-xs leading-relaxed text-gray-500">Journeys in development. Routes, guides and pricing agreed personally.</p>
-    </div>
-  </div></BirdDiscoveryContext.Provider>
+    </>
+  return <BirdDiscoveryContext.Provider value={onBirdChange}>
+    {resizable ? <ResizableDiscoveryPair media={mediaContent} map={mapContent} mapLabel="Explore Australia" /> :
+      <div className={styles.layout}><div className={styles.mediaColumn}>{mediaContent}</div><div className={styles.mapColumn}>{mapContent}</div></div>}
+  </BirdDiscoveryContext.Provider>
 }

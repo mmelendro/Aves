@@ -33,6 +33,7 @@ test('all carousel birds have distribution, a real image, a source and a working
     assert.ok(bird.habitat.length > 10, `${bird.id}: missing habitat`)
     assert.ok(bird.sources.length > 0 && bird.sources.every(s=>s.url.startsWith('https://')), `${bird.id}: missing primary sources`)
     assert.ok(regions.some(r=>r.id===bird.regionSlug), `${bird.id}: unknown region`)
+    assert.ok(australiaMapStates.some(state=>state.regionId===bird.regionSlug), `${bird.id}: no highlighted map region`)
     assert.ok(existsSync(publicFile(bird.image)), `${bird.id}: missing image`)
     const credit = photos.find(p=>p.path===bird.image)
     assert.ok(credit?.sourceUrl && credit?.licenseUrl, `${bird.id}: missing photo attribution`)

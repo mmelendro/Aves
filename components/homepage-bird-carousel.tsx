@@ -25,6 +25,7 @@ interface HomepageBirdCarouselProps {
   birds?: BirdProfile[]
   showBirdPicker?: boolean
   onBirdChange?: (bird: BirdProfile) => void
+  fillPanel?: boolean
 }
 
 const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
@@ -46,6 +47,7 @@ export default function HomepageBirdCarousel({
   birds = allBirds,
   showBirdPicker = false,
   onBirdChange,
+  fillPanel = false,
 }: HomepageBirdCarouselProps) {
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
@@ -189,7 +191,7 @@ export default function HomepageBirdCarousel({
 
   return (
     <div
-      className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, "max-w-[20rem]")}
+      className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, !fillPanel && "max-w-[20rem]")}
       role="region" aria-roledescription="carousel" aria-label="Bird photographs" tabIndex={0}
       onKeyDown={handleKeyDown}
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
@@ -207,7 +209,7 @@ export default function HomepageBirdCarousel({
       <Card className="overflow-hidden rounded-2xl border border-emerald-100 shadow-lg">
         <div
           className="relative aspect-[9/16] w-full overflow-hidden bg-stone-100"
-          style={{ touchAction: "pan-y pinch-zoom" }}
+          style={{ touchAction: "pan-y pinch-zoom", ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) }}
           onTouchStart={event => { touchStartRef.current = !(event.target as HTMLElement).closest("button, a") && event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null }}
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
@@ -217,7 +219,7 @@ export default function HomepageBirdCarousel({
             style={{ objectPosition: currentBird.imagePosition || "center" }}
             onLoad={() => setImageState({ image: currentBird.image, status: "loaded" })}
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
-            priority={selectedIndex === 0} sizes="(max-width: 352px) calc(100vw - 32px), 320px"
+            priority={selectedIndex === 0} sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
           /> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
           {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 

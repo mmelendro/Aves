@@ -33,7 +33,7 @@ export default function AVESLandingPage() {
             <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Australia’s <span className="text-emerald-700">extraordinary birdlife</span></h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">Plan a personal journey around birds, landscapes and local culture. We’ll discuss the route, stays and pace with you, from tropical rainforest to island shores.</p>
           </div>
-          <AustraliaHomeExplorer />
+          <AustraliaHomeExplorer resizable />
         </div>
       </section>
       {/* Landscape and travel-style story: keep photo attribution with its image. */}
