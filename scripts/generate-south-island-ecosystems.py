@@ -2,10 +2,10 @@
 Run from source: python scripts/generate-south-island-ecosystems.py --download
 Requires pyproj and shapely for offline GIS processing, not website dependencies.
 Raw downloaded snapshots stay outside Git in ../audit/map-data.
-The PNG is categorical WMS data, not aerial imagery; exact legend colours become
+The PNG is categorical WMS data, not aerial imagery; reviewed legend colours become
 coarse cells. No invented habitat boundaries or private wildlife locations.
 """
-import argparse, collections, hashlib, json, math, struct, urllib.parse, urllib.request, zlib
+import argparse, collections, hashlib, json, struct, urllib.parse, urllib.request, zlib
 from pathlib import Path
 from pyproj import Transformer
 from shapely.geometry import shape, box
