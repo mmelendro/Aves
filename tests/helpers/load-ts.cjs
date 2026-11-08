@@ -8,6 +8,7 @@ module.exports = function loader({ mocks = {}, globals = {}, env = {} } = {}) {
   function load(path) {
     const filename = resolve(root, path)
     if (cache.has(filename)) return cache.get(filename)
+    if (filename.endsWith(".json")) return JSON.parse(readFileSync(filename, "utf8"))
     const exports = {}
     cache.set(filename, exports)
     const code = ts.transpileModule(readFileSync(filename, "utf8"), {
@@ -16,8 +17,8 @@ module.exports = function loader({ mocks = {}, globals = {}, env = {} } = {}) {
     const isolatedRequire = (name) => {
       if (Object.hasOwn(mocks, name)) return mocks[name]
       if (name === "server-only") return {}
-      if (name.startsWith("@/")) return load(name.slice(2) + ".ts")
-      if (name.startsWith(".")) return load(resolve(dirname(filename), name + ".ts"))
+      if (name.startsWith("@/")) return load(name.slice(2) + (name.endsWith(".json") ? "" : ".ts"))
+      if (name.startsWith(".")) return load(resolve(dirname(filename), name + (name.endsWith(".json") ? "" : ".ts")))
       return require(name)
     }
     const bindings = { process: { env: { NEXT_PUBLIC_SITE_URL: "https://aves.bio", ...env } }, ...globals }

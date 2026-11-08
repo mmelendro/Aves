@@ -23,9 +23,16 @@ select pg_temp.nz_error('select id from public.trip_plans','42501');
 reset role;
 set local role authenticated;
 do $$ begin perform set_config('request.jwt.claim.sub',pg_temp.nz('a')::text,true); end; $$;
-do $$ declare fixture jsonb; bad jsonb; begin
+do $$ declare fixture jsonb; bad jsonb; allowed text[]; extinct_id text; begin
   fixture := '{"country":"new-zealand","regions":["south-island"],"travelWhen":"Year to confirm","partySize":"2 people","message":"Synthetic planning QA","questionnaire":{"version":1,"pace":"balanced","birding":"alternate","comfort":"comfortable","interests":["birds","food"]}}';
+  select planning_bird_ids into allowed from public.destination_countries where id='new-zealand';
+  assert cardinality(allowed)=377,'Complete living catalogue must be registered';
+  fixture := jsonb_set(fixture,'{questionnaire,birdIds}',to_jsonb(allowed[1:2]));
   assert public.trip_details_valid(fixture);
+  assert not public.trip_details_valid(jsonb_set(fixture,'{questionnaire,birdIds}','["nz-000000000000","nz-000000000000"]'));
+  -- Even all targets fit the established bounded JSON draft model.
+  assert public.trip_details_valid(jsonb_set(fixture,'{questionnaire,birdIds}',to_jsonb(allowed)));
+
   foreach bad in array array[
     jsonb_set(fixture,'{questionnaire}','null'),
     jsonb_set(fixture,'{questionnaire,version}','2'),
@@ -36,6 +43,8 @@ do $$ declare fixture jsonb; bad jsonb; begin
   ] loop assert not public.trip_details_valid(bad),'Malformed or wrong-country answers must fail'; end loop;
   insert into public.trip_plans(id,user_id,title,details,create_payload_hash)
     values(pg_temp.nz('plan'),pg_temp.nz('a'),'Synthetic NZ planning QA',fixture,repeat('a',64));
+  assert (select jsonb_array_length(details->'questionnaire'->'birdIds')=2 from public.trip_plans where id=pg_temp.nz('plan'));
+  perform pg_temp.nz_error($q$update public.trip_plans set details=jsonb_set(details,'{questionnaire,birdIds}','["nz-000000000000"]') where id=pg_temp.nz('plan')$q$,'23514');
   assert (select details->'questionnaire'->>'birding' = 'alternate' from public.trip_plans where id=pg_temp.nz('plan'));
   update public.trip_plans set details=jsonb_set(details,'{questionnaire,pace}','"relaxed"') where id=pg_temp.nz('plan');
   assert (select details->'questionnaire'->>'pace' = 'relaxed' from public.trip_plans where id=pg_temp.nz('plan'));
@@ -52,6 +61,7 @@ set local role service_role;
 do $$ declare receipt jsonb; replay jsonb; stamp timestamptz; begin
   select updated_at into stamp from public.trip_plans where id=pg_temp.nz('plan');
   receipt := public.submit_quote_request(pg_temp.nz('a'),pg_temp.nz('plan'),pg_temp.nz('quote'),repeat('b',64),stamp,'Synthetic QA','nz-qa+' || pg_temp.nz('a')::text || '@example.test');
+  assert jsonb_array_length(receipt->'plan_snapshot'->'details'->'questionnaire'->'birdIds')=2,'Frozen brief preserves bird targets';
   assert receipt->'plan_snapshot'->'details'->'questionnaire'->>'pace'='relaxed','Frozen submission retains reviewed answers';
   replay := public.submit_quote_request(pg_temp.nz('a'),pg_temp.nz('plan'),pg_temp.nz('quote'),repeat('b',64),stamp,'Synthetic QA','nz-qa+' || pg_temp.nz('a')::text || '@example.test');
   assert replay->>'created'='false' and replay->>'request_id'=receipt->>'request_id','Retry must not duplicate submission';

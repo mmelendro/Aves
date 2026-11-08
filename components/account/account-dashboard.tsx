@@ -19,6 +19,7 @@ import { AccountRequestError, accountRequest, dateLabel, errorMessage, countryLa
 import { PlanningAnswers } from "./planning-questions"
 import { ProposalCard } from "./proposal-card"
 import { TripPlanEditor } from "./trip-plan-editor"
+import { NZ_BIRD_BASKET_KEY } from "@/lib/nz-bird-selection"
 import { accountPlanPath, type PlanIntent } from "./plan-intent"
 import { accountEntryHref } from "./account-navigation"
 
@@ -85,7 +86,7 @@ export function AccountDashboard({ email, initialPlan }: { email: string; initia
   // every other device. The redirect removes the current workspace from view.
   async function signOut() {
     setSigningOut(true); setError("")
-    try { const { error } = await createClient().auth.signOut({ scope: "local" }); if (error) throw error; window.location.replace("/account/sign-in") }
+    try { const { error } = await createClient().auth.signOut({ scope: "local" }); if (error) throw error; try { window.sessionStorage.removeItem(NZ_BIRD_BASKET_KEY) } catch { /* Storage may be blocked. */ } window.location.replace("/account/sign-in") }
     catch (error) { setError(errorMessage(error)); setSigningOut(false) }
   }
   // Receive a confirmed server result and update its visible card, not the database.

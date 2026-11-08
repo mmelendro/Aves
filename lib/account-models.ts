@@ -7,6 +7,7 @@
 import { z } from "zod"
 import { isKnownTripCountry, type TripCountry } from "@/content/trip-options"
 import { planningChoices, type PlanningQuestionnaire } from "@/content/planning-questionnaire"
+import { selectableNzBirds, validNzBirdIds } from "@/content/new-zealand-checklist"
 
 // A small structured model can grow by version without mixing answers into prose.
 export const questionnaireSchema = z.object({
@@ -15,6 +16,7 @@ export const questionnaireSchema = z.object({
   birding: z.enum(Object.keys(planningChoices.birding) as [keyof typeof planningChoices.birding, ...Array<keyof typeof planningChoices.birding>]),
   comfort: z.enum(Object.keys(planningChoices.comfort) as [keyof typeof planningChoices.comfort, ...Array<keyof typeof planningChoices.comfort>]),
   interests: z.array(z.enum(Object.keys(planningChoices.interests) as [keyof typeof planningChoices.interests, ...Array<keyof typeof planningChoices.interests>])).max(7).refine(values => new Set(values).size === values.length),
+  birdIds: z.array(z.string().max(32)).max(selectableNzBirds.length).refine(validNzBirdIds, "Choose distinct living birds from the New Zealand checklist").optional(),
 }).strict()
 /**
  * Build a trimmed single-line text validator with a caller-selected maximum length.

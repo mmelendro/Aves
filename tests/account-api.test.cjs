@@ -444,3 +444,32 @@ test("NZ questionnaire is preserved in the authorized owner inbox response", asy
   assert.equal(response.status, 200)
   assert.deepEqual((await response.json()).quotes[0].plan.questionnaire, nzAnswers)
 })
+
+
+const nzCatalogue = loader()("content/new-zealand-checklist.ts")
+const nzBirdIds = nzCatalogue.selectableNzBirds.slice(0, 3).map(bird => bird.id)
+test("bird targets survive owned save/edit, immutable submission and owner reading", async () => {
+  const answers = { ...nzAnswers, birdIds: nzBirdIds }
+  const birdDetails = { ...nzDetails, questionnaire: answers }
+  const row = { ...planRow, details: birdDetails }
+  const h = harness({ results: [{ data: row, error: null }, { data: row, error: null }, { data: row, error: null }], rpcResult: { ...quoteReceipt, plan_snapshot: { title, details: birdDetails } } })
+  const fields = { title, ...birdDetails }
+  const saved = await h.plansPost(request({ id: planId, ...fields }))
+  assert.equal(saved.status, 200)
+  assert.deepEqual((await saved.json()).plan.questionnaire.birdIds, nzBirdIds)
+  const updated = await h.planPatch(request({ ...fields, expectedUpdatedAt: stamp }), planId)
+  assert.deepEqual((await updated.json()).plan.questionnaire.birdIds, nzBirdIds)
+  const sent = await h.quotePost(request({ expectedUpdatedAt: stamp, contactName: "Synthetic QA" }, quoteId), planId)
+  assert.deepEqual((await sent.json()).plan.questionnaire.birdIds, nzBirdIds)
+  assert.ok(nzBirdIds.every(id => !h.notices[0].join(" ").includes(id)))
+  const owner = harness({ rpcResult: [{ id: quoteId, plan_id: planId, status: "requested", plan_snapshot: { title, details: birdDetails } }] })
+  assert.deepEqual((await (await owner.adminQuotesGet()).json()).quotes[0].plan.questionnaire.birdIds, nzBirdIds)
+})
+
+test("invalid, duplicate and extinct targets fail before account writes", async () => {
+  for (const birdIds of [[nzBirdIds[0], nzBirdIds[0]], ["nz-000000000000"], [nzCatalogue.newZealandChecklist.find(bird => bird.extinct).id]]) {
+    const h = harness()
+    assert.equal((await h.plansPost(request({ id: planId, title, ...nzDetails, questionnaire: { ...nzAnswers, birdIds } }))).status, 400)
+    assert.equal(h.queries.length, 0)
+  }
+})

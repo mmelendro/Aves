@@ -1,6 +1,8 @@
 /** Versioned, nonpersonal choices shared by the form, validation and private review.
  * Answers live in the owned trip record, never in this source file or a URL.
  */
+import { nzBirdName } from "./new-zealand-checklist"
+
 export const planningChoices = {
   pace: { open: "Open to suggestions", relaxed: "Relaxed, with free time", balanced: "A balance of outings and downtime", active: "Active, with full days" },
   birding: { open: "Open to suggestions", occasional: "A few special birding outings", alternate: "Roughly every other day", daily: "Birding most days" },
@@ -14,6 +16,7 @@ export type PlanningQuestionnaire = {
   birding: keyof typeof planningChoices.birding
   comfort: keyof typeof planningChoices.comfort
   interests: (keyof typeof planningChoices.interests)[]
+  birdIds?: string[]
 }
 
 /** One readable representation is reused for the guest's review and owner inbox. */
@@ -23,5 +26,6 @@ export function planningSummary(answers: PlanningQuestionnaire) {
     { label: "Birding frequency", value: planningChoices.birding[answers.birding] },
     { label: "Accommodation", value: planningChoices.comfort[answers.comfort] },
     { label: "Interests", value: answers.interests.map(id => planningChoices.interests[id]).join(", ") || "Open to suggestions" },
+    ...(answers.birdIds?.length ? [{ label: `Birds you would love to see (${answers.birdIds.length})`, value: answers.birdIds.map(nzBirdName).join(", ") }] : []),
   ]
 }

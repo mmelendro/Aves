@@ -44,6 +44,7 @@ function componentHarness(file, name, props, overrides = {}) {
   }
   function module(filename) {
     if (cache.has(filename)) return cache.get(filename)
+    if (filename.endsWith(".json")) return JSON.parse(readFileSync(filename, "utf8"))
     const exports = {}
     cache.set(filename, exports)
     const code = ts.transpileModule(readFileSync(filename, "utf8"), { fileName: filename, compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
@@ -53,7 +54,7 @@ function componentHarness(file, name, props, overrides = {}) {
       if (id === "@/components/mobile-navigation-overlay") return { MobileNavigationOverlay: "MobileNavigationOverlay" }
       if (id.startsWith("@/") || id.startsWith(".")) {
         const base = id.startsWith("@/") ? resolve(root, id.slice(2)) : resolve(dirname(filename), id)
-        const target = [base + ".ts", base + ".tsx"].find(existsSync)
+        const target = [base, base + ".ts", base + ".tsx"].find(existsSync)
         if (!target) throw new Error("Missing test import " + id)
         return module(target)
       }
