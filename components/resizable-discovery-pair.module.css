@@ -1,8 +1,12 @@
 /* The query container lets this pair react to its own available width. */
-.container { container-type: inline-size; width: 100%; max-width: 42rem; margin-inline: auto; text-align: left; }
+.container { container-type: inline-size; width: 100%; margin-inline: auto; text-align: left; }
 .controls { display: none; }
-.pair { display: grid; align-items: start; gap: 1.75rem; }
-.mediaPanel, .mapPanel { width: 100%; max-width: 20rem; min-width: 0; margin-inline: auto; }
+.pair {
+  /* Stacked photos also follow the available width, with a sensible height limit. */
+  --discovery-media-height: min(calc((100cqw - 2px) * 16 / 9), 44rem);
+  display: grid; align-items: start; gap: 1.75rem;
+}
+.mediaPanel, .mapPanel { width: 100%; max-width: 36rem; min-width: 0; margin-inline: auto; }
 .mediaPanel { order: 1; scroll-margin-top: 6rem; }
 .mapPanel { order: 2; }
 .divider { display: none; }
@@ -11,13 +15,13 @@
 .reset:focus-visible { outline: 2px solid #047857; outline-offset: 2px; }
 
 /* 624px leaves room for two useful cards plus a 44px pointer/touch target.
- * Height follows the balanced portrait layout, not the moving divider. This keeps
- * the cards' media frames aligned while letting either panel become wider.
+ * Both panels fill the page's existing content width. Height follows the balanced
+ * portrait layout up to 44rem, rather than growing endlessly on a large window.
  */
 @container (min-width: 624px) {
   .controls { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; color: #52635b; font-size: 0.75rem; }
   .pair {
-    --discovery-panel-height: calc((100cqw - 48px) * 8 / 9 + 2px);
+    --discovery-panel-height: min(calc((100cqw - 48px) * 8 / 9 + 2px), 44rem);
     --discovery-media-height: calc(var(--discovery-panel-height) - 2px);
     grid-template-columns: var(--discovery-columns, minmax(0, 1fr) 44px minmax(0, 1fr));
     gap: 0;

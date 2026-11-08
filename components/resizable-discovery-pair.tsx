@@ -72,18 +72,24 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
         aria-valuenow={Number(effectiveShare.toFixed(1))} aria-valuetext={`Map ${Math.round(effectiveShare)}%, bird photographs ${Math.round(100 - effectiveShare)}%`}
         tabIndex={paired ? 0 : -1} className={styles.divider}
         onKeyDown={event => {
-          if (!paired) return
+          // Read current geometry in case input follows a window resize before
+          // ResizeObserver has committed its next React update.
+          const activeWidth = containerRef.current?.getBoundingClientRect().width ?? width
+          if (activeWidth < DISCOVERY_PAIR_MIN_WIDTH) return
+          const activeBounds = discoverySplitBounds(activeWidth)
+          const activeShare = clampDiscoverySplit(share, activeWidth)
           const step = event.shiftKey ? 10 : 2
-          const next = event.key === "ArrowLeft" ? effectiveShare - step : event.key === "ArrowRight" ? effectiveShare + step : event.key === "Home" ? bounds.min : event.key === "End" ? bounds.max : undefined
+          const next = event.key === "ArrowLeft" ? activeShare - step : event.key === "ArrowRight" ? activeShare + step : event.key === "Home" ? activeBounds.min : event.key === "End" ? activeBounds.max : undefined
           if (next === undefined) return
           event.preventDefault()
-          setShare(clampDiscoverySplit(next, width))
+          setShare(clampDiscoverySplit(next, activeWidth))
         }}
         onPointerDown={event => {
-          if (!paired || !event.isPrimary || event.button !== 0) return
+          const activeWidth = containerRef.current?.getBoundingClientRect().width ?? width
+          if (activeWidth < DISCOVERY_PAIR_MIN_WIDTH || !event.isPrimary || event.button !== 0) return
           event.preventDefault()
           event.currentTarget.focus({ preventScroll: true })
-          dragRef.current = { pointerId: event.pointerId, startX: event.clientX, share: effectiveShare, width }
+          dragRef.current = { pointerId: event.pointerId, startX: event.clientX, share: clampDiscoverySplit(share, activeWidth), width: activeWidth }
           event.currentTarget.setPointerCapture(event.pointerId)
           setDragging(true)
         }}

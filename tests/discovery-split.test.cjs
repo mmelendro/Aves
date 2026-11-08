@@ -12,7 +12,7 @@ new Function("exports", code)(exportsForTest)
 const { discoverySplitBounds, clampDiscoverySplit, dragDiscoverySplit, DISCOVERY_HANDLE_WIDTH, DISCOVERY_MIN_PANEL_WIDTH, DISCOVERY_PAIR_MIN_WIDTH } = exportsForTest
 
 test("drag and keyboard limits keep both panels usable at every paired width", () => {
-  for (const width of [DISCOVERY_PAIR_MIN_WIDTH, 640, 672, 900, 1200]) {
+  for (const width of [DISCOVERY_PAIR_MIN_WIDTH, 640, 672, 900, 1216]) {
     const { min, max } = discoverySplitBounds(width)
     const available = width - DISCOVERY_HANDLE_WIDTH
     for (const request of [-500, min, 50, max, 500]) {
@@ -41,5 +41,12 @@ test("narrowing the container clamps the previous split; unusable geometry stays
   for (const width of [0, 30, 44, 390]) {
     assert.ok(Number.isFinite(clampDiscoverySplit(NaN, width)))
     assert.equal(clampDiscoverySplit(NaN, width), 50)
+  }
+})
+
+test("wide-screen ratios keep either panel within forty to sixty percent", () => {
+  for (const width of [900, 1216]) {
+    assert.equal(clampDiscoverySplit(-100, width), 40)
+    assert.equal(clampDiscoverySplit(200, width), 60)
   }
 })
