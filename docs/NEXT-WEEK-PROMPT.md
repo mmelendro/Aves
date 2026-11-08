@@ -1,12 +1,12 @@
 # AVES — current execution prompt
 
-Updated 9 November 2026 (Sydney). **Documentation checkpoint: South Island place-card pilot selected, not implemented or published yet.** The latest request is to save this handoff to GitHub. Resume only the already-authorized pilot; do not bundle the queued follow-ups. Recommend model/reasoning before each selected increment; keep Sol medium for focused implementation/release work. No actual credit-percentage estimate or automatic model switch is known.
+Updated 9 November 2026 (Sydney). **South Island place-card pilot published; paused.** Do not start another feature until the owner selects one increment. Recommend model/reasoning before each selected increment; keep Sol medium for focused implementation/release work. Actual credit percentages and automatic model switching cannot be verified here.
 
 ## Open the correct project
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05` / workspace `source`: global homepage, Colombia and New Zealand. Live runtime3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3esoPPU3u.
+- `webmaster/readiness-2026-11-05` / workspace `source`: global homepage, Colombia and New Zealand. Live runtime3ef94db / dpl_CwtAGCjuBe4XdYHw72GKxNrJYwHC.
 - `australia/preview` / workspace `australia`: Australia and shared accounts/backend. Live runtime3f644a1 / dpl_FxbDazX29G5cqCnuYP8ZmGDNwy34.
 - These remain independent apps; do not merge branches, the unmerged consolidation PR or older pricing draft. Documentation heads can be newer than live runtime commits. Read CONTINUE-HERE.md and the latest release checkpoint, then only the relevant detailed acceptance section.
 
@@ -18,12 +18,12 @@ The South Island LCDB v6 land-cover pilot is now live and linked to existing bir
 
 Public/private NZ picker controls say **“Search377 species” / “All species”**.377 living reference entries remain;55 extinct entries are excluded from browsing/selection. Archived evidence and existing private records are preserved. Rare living visitors remain labelled; inclusion is not current local availability. No new private guest data or database/provider changes in the map release.
 
-Latest release: [homepage word flip](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). Map evidence and source limits remain in [South Island map checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Budget and earlier milestones retain their own checkpoints.
+Latest release: [South Island place-card pilot](RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md). The [homepage word flip](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md) remains published. Map evidence and source limits remain in [South Island map checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Budget and earlier milestones retain their own checkpoints.
 
 ## Latest owner priority — one selected release at a time
 
 **Delivered026:** the homepage now reads “Where will birds take you?” Only the word flips, birds↔aves, in matching400-weight lowercase emerald italics. No border/box; keyboard focus underline, pointer/keyboard/tap behavior and motion-free CSS fallback. Other heading words remain upright medium500. See [word-flip checkpoint](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md).
-1. **AVES-015/037 — selected, unfinished:** first3D pilot is ONE **South Island place card**, local map ↔ licensed landscape photo. Owner confirmed this location. Reversible controls, source/credits, hidden-face focus/media cleanup and reduced-motion toggle. Reuse one template; expand only after pilot acceptance.
+1. **AVES-015/037 — ONE pilot delivered:** Arthur’s Pass local map ↔ two credited landscape photographs, reversible controls, retained photo choice, hidden-face inert semantics and reduced-motion CSS. Published3ef94db; see the release checkpoint for responsive-verification limits. Other place-card rollout remains queued; pause before another increment.
 2. **AVES-038:** South Island map zoom/pan/reset AND a correctly calculated, responsive metric scale bar. Preserve bird/filter state, native page/browser gestures, georeferencing and source-resolution limits.
 3. Finish the **037** four-place map/photo carousel (Arthur’s Pass, Nelson Lakes, Fiordland, Otago/Catlins); prepare for future owner drone/video assets. Keep balanced place guidance and official links.
 4. **039:** checklist licensed-media previews on hover/focus/tap; start with available correctly matched assets, honest gaps and lazy loading. Future video; no automatic media rights from eBird visibility.
@@ -61,7 +61,7 @@ Sync exact code plus concise checkpoint/prompt to both relevant GitHub branches,
 
 ## Latest checkpoint and instructions for resuming
 
-The owner authorized Sol medium for ONE South Island 3D place card: local map on one face, correctly located licensed landscape photographs on the other. Preliminary source/research inspection began; no pilot code, tests, build or deployment has been completed. Do not confuse the published homepage word flip with this unfinished map/photo pilot. Start by checking Git status and recent commits for any intervening edits. Prefer an existing place such as Arthur's Pass after verifying public geography and image rights; retain the other place cards and existing planning guidance. Provide explicit reversible keyboard/touch controls, an inaccessible hidden face, reduced-motion fallback and image credits. Test desktop/mobile, publish the exact tested candidate, sync code/checkpoint to GitHub, then pause.
+The authorized South Island 3D place-card pilot is published and complete within the verification limits in [RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md](RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md). Code3ef94db uses the reusable PlaceFlipCard adapter with local OSM geography and licensed Arthur’s Pass landscapes. Desktop and narrow-layout interactions were checked; phone screenshot capture was unreliable, and no physical iPhone or native reduced-motion test was performed. No further increment is authorized merely by this handoff. Check Git status/recent commits before the next owner-selected task; preserve uncommitted work from other chats.
 
 Latest source inspection found the Colombia experience collection labels **Adventure, Vision, Elevate and Souls**. This is evidence of current labels, not proof of the intended full AVES acronym. The owner requested an objective acronym/brand-wording review and eventual coherent sitewide wording. That review is unfinished: inventory actual headings, descriptions, metadata and collections across both apps; distinguish the Spanish word aves, the master brand, tagline and experience names. Present the current meaning, weaknesses and a small set of coherent alternatives before selecting a new brand expansion. Do not silently rename the venture, routes or data values, invent an expansion, or replace copy wholesale before the meaning is settled. Preserve the host role, birds/habitats/balanced experiences and regenerative-tourism aspiration without claiming achieved certification.
 
@@ -73,4 +73,8 @@ Latest source inspection found the Colombia experience collection labels **Adven
 
 ### Checkpoint verification limits
 
-Local branches were clean before this documentation update. Repository origins resolve to https://github.com/mmelendro/Aves.git. Runtime commits/deployment IDs above are the last recorded verified release, not a fresh live-site or provider audit today. No application change or deployment is part of this documentation sync. Actual credit balances and model switching cannot be verified here. Read this prompt plus the relevant acceptance section instead of replaying the whole chat; confirm the latest source before resuming.
+The pilot was staged, built, tested, promoted and verified live on9November2026 as source3ef94db. Repository origins resolve to https://github.com/mmelendro/Aves.git. Runtime and documentation commits are distinct; the mirrored Australia update is documentation only. The new card release does not change accounts or databases. Actual credit balances and model switching cannot be verified here. Read this prompt plus the relevant acceptance section instead of replaying the whole chat; confirm the latest source before resuming.
+
+**Latest queued requests:** 050 flying 3D models of country-logo birds, coordinated with branding032; 051 optional high-quality photograph zoom/pinch with keyboard controls and an efficient accessible viewer. Keep both out of the selected South Island map/photo flip-card release. See ROADMAP-DETAILS.md.
+
+**AVES-052 queued:** each subregion should eventually offer a sourced map of conservation efforts and birding lodges/local stays. Start with South Island; distinguish project/operator categories, current access and verified contributions, not implied partnerships or blanket regenerative claims. See ROADMAP-DETAILS.md.
