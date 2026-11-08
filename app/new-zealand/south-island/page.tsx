@@ -9,7 +9,7 @@ import { ArrowRight, Compass, Heart, MapPin } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
 import { newZealandContactHref } from "@/content/new-zealand"
-import { southIslandBriefHref, southIslandPlaces, southIslandPlanning } from "@/content/south-island"
+import { southIslandBriefHref, southIslandPlaces, southIslandPlanning, southIslandResources } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
 
 const path = "/new-zealand/south-island"
@@ -55,7 +55,7 @@ export default function SouthIslandPage() {
             <NewZealandHeroExplorer regionId="south-island" />
 
             <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4">
-              {[["birdlife", "Birds & map"], ["places", "Habitats & places"], ["practical-planning", "Practical planning"], ["your-pace", "Your pace"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className={textLinkStyle}>{label}</a>)}
+              {[["birdlife", "Birds & map"], ["places", "Habitats & places"], ["practical-planning", "Practical planning"], ["your-pace", "Your pace"], ["resources", "Listen, watch & read"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className={textLinkStyle}>{label}</a>)}
             </nav>
           </div>
         </section>
@@ -106,6 +106,27 @@ export default function SouthIslandPage() {
               <Link href={southIslandBriefHref} className={`${buttonStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Start a private South Island brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
               <p className="mt-3 text-xs leading-5 text-gray-500">Save privately in My Trips. Sharing with AVES is a separate choice; no booking is confirmed.</p>
             </div>
+          </div>
+        </section>
+
+        {/* Text-first links keep this resource collection lightweight and leave
+            third-party audio/video loading and rights with the original publisher. */}
+        <section id="resources" aria-labelledby="resources-heading" className="scroll-mt-24 py-12 sm:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-700">Let your curiosity travel first</p>
+            <h2 id="resources-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Listen, watch and read.</h2>
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">A small collection to bring the birds and landscapes into focus, from Fiordland’s fieldwork stories to a closer look at the kea.</p>
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {southIslandResources.map(resource => <article key={resource.id} className="flex flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/60 to-white p-6 sm:p-7">
+                <p className="mb-3"><span className="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-900">{resource.kind}</span></p>
+                <h3 className="text-xl font-medium text-emerald-950">{resource.title}</h3>
+                <p className="mt-2 text-xs leading-5 text-gray-500">{resource.publisher}</p>
+                <p className="mt-3 text-sm font-medium leading-6 text-emerald-800">{resource.context}</p>
+                <p className="mb-5 mt-3 text-sm leading-6 text-gray-600">{resource.description}</p>
+                <a href={resource.href} target="_blank" rel="noreferrer" className={`${textLinkStyle} mt-auto`}>{resource.action}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
+              </article>)}
+            </div>
+            <p className="mt-5 text-xs leading-5 text-gray-500">Publisher pages checked 9 November 2026. Resources open on their original sites; availability and playback are controlled by those publishers. Historical conservation stories and offshore footage do not describe current trip access.</p>
           </div>
         </section>
 

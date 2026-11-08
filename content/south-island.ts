@@ -81,3 +81,16 @@ export const southIslandPlanning = [
     link: { title: "NZTA: plan your journey", href: "https://nzta.govt.nz/travelling-on-our-roads/plan-your-journey" },
   },
 ] as const
+
+/** Curated outbound resources, checked 9 November 2026 on publisher pages.
+ * Linking does not grant media reuse rights: keep playback with the publisher.
+ * Offshore conservation footage is labelled so it is not mistaken for trip access.
+ */
+export const southIslandResources = [
+  { id: "mohua-podcast", kind: "Podcast", title: "Bird nerding with Graeme Elliott", publisher: "DOC · Sounds of Science · Episode 36", context: "Fiordland forest birds", description: "Hear a conservation scientist discuss mohua research and the relationship between beech seed cycles and bird conservation. A useful companion to exploring the island’s forest habitats.", href: "https://www.doc.govt.nz/news/podcast/", action: "Find episode 36 on DOC" },
+  { id: "kiwi-podcast", kind: "Podcast", title: "Field yarns with Tim Raemaekers — part 2", publisher: "DOC · Sounds of Science · Episode 26", context: "Fiordland kiwi conservation", description: "A ranger’s perspective on monitoring tokoeka at Shy Lake and the challenges of protecting kiwi. Look for episode 26 in DOC’s episode list.", href: "https://www.doc.govt.nz/news/podcast/", action: "Find episode 26 on DOC" },
+  { id: "kiwi-diaries", kind: "Documentary", title: "The Fiordland Kiwi Diaries", publisher: "Department of Conservation · Three-part series", context: "Fiordland", description: "Follow the rangers working to protect tokoeka in remote Fiordland. The series adds context to the landscape; its fieldwork locations are not a suggested visitor itinerary.", href: "https://www.doc.govt.nz/fiordland-kiwi-diaries", action: "Watch the series on DOC" },
+  { id: "kakapo-highlights", kind: "Video", title: "Kākāpō Cam: Best from the nest", publisher: "Department of Conservation · Recorded highlights", context: "Whenua Hou · Offshore conservation context", description: "Watch nest-camera highlights from Whenua Hou / Codfish Island. This is recorded conservation footage, not a live feed or an ordinary South Island visitor stop.", href: "https://www.doc.govt.nz/kakapocam", action: "Watch highlights on DOC" },
+  { id: "kea-reading", kind: "Reading", title: "Get to know the kea", publisher: "New Zealand Birds Online · Species reference", context: "South Island mountain country", description: "Read about identification, behaviour and the natural history of the mountain parrot featured in our carousel. Use it to learn the bird rather than to predict a sighting.", href: "https://www.nzbirdsonline.org.nz/species/kea", action: "Read the kea reference" },
+  { id: "nelson-lakes-reading", kind: "Reading", title: "Explore Nelson Lakes on paper first", publisher: "Department of Conservation · Park guide", context: "Northern South Island", description: "Explore the park’s official visitor information and walking resources before deciding which forest-and-lake outings suit you. Recheck access advice when planning your day.", href: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/", action: "Read the Nelson Lakes guide" },
+] as const
