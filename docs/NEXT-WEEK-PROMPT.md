@@ -8,7 +8,7 @@ Continue improving aves.bio in https://github.com/mmelendro/Aves. Keep the emera
 
 - `webmaster/readiness-2026-11-05`: homepage, Colombia and NZ. Published app `f5eee01`, deployment `dpl_BA2SbW56xbfkktQqPQw8TBHqQsje`.
 - `australia/preview`: Australia and shared accounts/contact/quotes. Published app `10554a3`, deployment `dpl_4J7C7ecQeG2YovNNwYvbWHnH6QEX`.
-- Keep these independent apps/branches separate. Read the current `CONTINUE-HERE.md`, then the selected ID in [AVES-CHANGE-INBOX.md](AVES-CHANGE-INBOX.md). Read only the relevant section of [ROADMAP-DETAILS.md](ROADMAP-DETAILS.md). Use [AGILE-PLAN.md](AGILE-PLAN.md) for proposed batches and relative effort. Documentation commits may be newer than deployed code.
+- Keep these independent apps/branches separate for current releases until an explicitly selected AVES-020 migration replaces this arrangement. Do not directly merge the application branches. Read the current `CONTINUE-HERE.md`, then the selected ID in [AVES-CHANGE-INBOX.md](AVES-CHANGE-INBOX.md). Read only the relevant section of [ROADMAP-DETAILS.md](ROADMAP-DETAILS.md). Use [AGILE-PLAN.md](AGILE-PLAN.md) for proposed batches and relative effort. Documentation commits may be newer than deployed code.
 
 ## Preserve completed work
 
@@ -17,6 +17,16 @@ Shared accounts at `/account`, Google sign-in, private drafts/requests, owner pr
 The three country homepages have working dividers and featured-bird region associations (CO 22, AU 20, NZ 31). The global homepage has a centered title, Equal Earth map, one switching carousel, its divider and three regional map cards. Speaker highlighting and the Santa Marta editorial pilot are delivered. Do not redo these foundations. Biodiversity overlays remain unfinished.
 
 AVES-012d-1 is delivered only on the main NZ destination hero: Info opens a bounded translucent sheet over the photo. Complete notes, picker and credits remain; close/Escape/focus, scrolling, sound, slideshow, wishlist and responsive layouts were checked locally and live. Other viewers retain below-photo details. See INFO-OVERLAY-PILOT.md and the current handoff for evidence and rollout limits.
+
+## Planned application consolidation — AVES-020
+
+**Backlog only; scope and select this separately before implementation.** Consolidate the global/Colombia/NZ and Australian/shared-account applications into one Next.js application and one production Vercel project, retaining the existing GitHub repository and shared account database. Reuse delivered code and content; do not rebuild the site or directly merge the independent branch heads.
+
+First inventory route/file collisions, shared components, assets, configuration and deployment dependencies, then prepare a dedicated integration branch and unified preview. Preserve existing country/deep URLs, SEO/canonicals/redirects, Google/email sign-in and recovery, root-path sessions, private plans/wishlists/quotes, owner permissions, inquiry/notification handling, accessibility and media licences/credits. Keep the existing database, ownership policies and saved records.
+
+Include an AVES naming, branding and SEO review in the consolidation: consistent public page names, unique titles/descriptions, canonical/social metadata, useful URL structure, accurate structured data and complete sitemap/redirect coverage. The owner authorises renaming projects or creating a new target project where useful; choose clear AVES names after checking dependent URLs and configuration. Internal hosting names alone are not the SEO outcome. Preserve existing search value and review any public URL/brand changes in the cutover plan.
+
+Test the unified preview on desktop/mobile and verify essential public and private journeys with controlled test data. Prepare a cutover and rollback plan and obtain explicit production approval before switching routing or deployment settings. Keep both current applications available for rollback; retiring the extra project requires a separately approved, verified step. No DNS, billing, credential or customer-data changes are authorised by this planning entry. Full acceptance criteria are in ROADMAP-DETAILS.md.
 
 ## Small release options
 
