@@ -32,6 +32,11 @@ export const destinationRegistry = {
       { id: "colombian-massif", label: "Colombian Massif" },
     ],
   },
+  // Enabled for private planning briefs, not confirmed tours or reservations.
+  "new-zealand": {
+    label: "New Zealand", enabled: true, consentVersion: "nz-planning-updates-2026-11-08",
+    regions: [{ id: "north-island", label: "North Island" }, { id: "south-island", label: "South Island" }, { id: "rakiura", label: "Rakiura / Stewart Island" }],
+  },
   ecuador: { label: "Ecuador", enabled: false, consentVersion: null, regions: [] },
   "costa-rica": { label: "Costa Rica", enabled: false, consentVersion: null, regions: [] },
 } satisfies Record<string, DestinationDefinition>

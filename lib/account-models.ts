@@ -6,6 +6,16 @@
 
 import { z } from "zod"
 import { isKnownTripCountry, type TripCountry } from "@/content/trip-options"
+import { planningChoices, type PlanningQuestionnaire } from "@/content/planning-questionnaire"
+
+// A small structured model can grow by version without mixing answers into prose.
+export const questionnaireSchema = z.object({
+  version: z.literal(1),
+  pace: z.enum(Object.keys(planningChoices.pace) as [keyof typeof planningChoices.pace, ...Array<keyof typeof planningChoices.pace>]),
+  birding: z.enum(Object.keys(planningChoices.birding) as [keyof typeof planningChoices.birding, ...Array<keyof typeof planningChoices.birding>]),
+  comfort: z.enum(Object.keys(planningChoices.comfort) as [keyof typeof planningChoices.comfort, ...Array<keyof typeof planningChoices.comfort>]),
+  interests: z.array(z.enum(Object.keys(planningChoices.interests) as [keyof typeof planningChoices.interests, ...Array<keyof typeof planningChoices.interests>])).max(7).refine(values => new Set(values).size === values.length),
+}).strict()
 /**
  * Build a trimmed single-line text validator with a caller-selected maximum length.
  */
@@ -20,15 +30,16 @@ export const revision = z.string().min(1).max(50).refine(value => Number.isFinit
 export const planFields = {
   title: singleLine(120).min(1), country: z.custom<TripCountry>(isKnownTripCountry, "Choose a known destination country").optional(), regions: z.array(singleLine(160).min(1)).max(20),
   travelWhen: singleLine(160), partySize: singleLine(40), message: z.string().trim().max(5000),
+  questionnaire: questionnaireSchema.optional(),
 }
 /**
  * New drafts have a UUID reused for retries; unexpected JSON fields are rejected.
  */
-export const createPlanSchema = z.object({ id: z.uuid(), ...planFields }).strict()
+export const createPlanSchema = z.object({ id: z.uuid(), ...planFields }).strict().refine(value => !value.questionnaire || value.country === "new-zealand", "The planning questionnaire belongs to New Zealand")
 /**
  * Edits include the last seen revision so a stale tab cannot silently overwrite newer work.
  */
-export const updatePlanSchema = z.object({ ...planFields, expectedUpdatedAt: revision }).strict()
+export const updatePlanSchema = z.object({ ...planFields, expectedUpdatedAt: revision }).strict().refine(value => !value.questionnaire || value.country === "new-zealand", "The planning questionnaire belongs to New Zealand")
 /**
  * The browser supplies a name/revision, while confirmed identity/email come from verified Auth.
  */
@@ -58,7 +69,7 @@ export const updateProposalSchema = z.object({ ...proposalFields, expectedUpdate
  */
 export const quoteStatusSchema = z.object({ status: z.enum(["reviewing", "responded", "closed"]) }).strict()
 
-export type PlanRow = { id: string; title: string; details: { country?: TripCountry; regions: string[]; travelWhen: string; partySize: string; message: string }; status: "draft" | "quote_requested"; updated_at: string; create_payload_hash?: string }
+export type PlanRow = { id: string; title: string; details: { country?: TripCountry; regions: string[]; travelWhen: string; partySize: string; message: string; questionnaire?: PlanningQuestionnaire }; status: "draft" | "quote_requested"; updated_at: string; create_payload_hash?: string }
 /**
  * Translate a database row to browser fields; missing historical country means Australia.
  */

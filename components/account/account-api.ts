@@ -7,8 +7,9 @@
 
 import { sitePath } from "@/lib/site-path"
 import { countryLabels, countryRegionLabels, normalizeTripCountry, type TripCountry } from "@/content/trip-options"
+import type { PlanningQuestionnaire } from "@/content/planning-questionnaire"
 
-export type TripFields = { country?: TripCountry; title: string; regions: string[]; travelWhen: string; partySize: string; message: string }
+export type TripFields = { country?: TripCountry; title: string; regions: string[]; travelWhen: string; partySize: string; message: string; questionnaire?: PlanningQuestionnaire }
 export type TripPlan = TripFields & { id: string; status: "draft" | "quote_requested"; updatedAt: string }
 export type ProposalFields = { totalCents: number; currency: "AUD"; itinerary: string; inclusions: string; exclusions: string; validUntil: string | null }
 export type Proposal = ProposalFields & { id: string; quoteRequestId: string; version: number; status: "draft" | "sent"; issuedAt: string | null; updatedAt: string; notificationStatus: "pending" | "accepted" | "failed" }

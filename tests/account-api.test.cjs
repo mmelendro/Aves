@@ -402,3 +402,45 @@ for (const status of [403, 404, 409, 429, 503]) {
     assert.doesNotMatch(await response.text(), /success|stored/)
   })
 }
+
+
+const nzAnswers = { version: 1, pace: "balanced", birding: "alternate", comfort: "comfortable", interests: ["birds", "food"] }
+const nzDetails = { ...details, country: "new-zealand", regions: ["south-island"], questionnaire: nzAnswers }
+
+test("NZ questionnaire survives create, edit and frozen submission; email contains no answers", async () => {
+  const row = { ...planRow, details: nzDetails }
+  const h = harness({ results: [{ data: row, error: null }, { data: row, error: null }, { data: row, error: null }], rpcResult: { ...quoteReceipt, plan_snapshot: { title, details: nzDetails } } })
+  const fields = { title, ...nzDetails }
+  const created = await h.plansPost(request({ id: planId, ...fields }))
+  assert.equal(created.status, 200)
+  assert.deepEqual((await created.json()).plan.questionnaire, nzAnswers)
+  const edited = await h.planPatch(request({ ...fields, expectedUpdatedAt: stamp }), planId)
+  assert.equal(edited.status, 200)
+  assert.deepEqual((await edited.json()).plan.questionnaire, nzAnswers)
+  const submitted = await h.quotePost(request({ expectedUpdatedAt: stamp, contactName: "Synthetic Guest" }, quoteId), planId)
+  assert.equal(submitted.status, 200)
+  assert.deepEqual((await submitted.json()).plan.questionnaire, nzAnswers)
+  const notice = h.notices[0]
+  assert.match(notice[3], /New Zealand planning brief/)
+  assert.match(notice[4], /https:\/\/aves.bio\/australia\/admin\/quotes/)
+  assert.doesNotMatch(notice.join(" "), /Synthetic Guest|client@example.test|alternate|comfortable|Synthetic inquiry/)
+})
+
+test("NZ answers reject unknown fields, bad versions, duplicates and other-country association", async () => {
+  for (const bad of [{ ...nzAnswers, role: "owner" }, { ...nzAnswers, version: 2 }, { ...nzAnswers, pace: "made-up" }, { ...nzAnswers, interests: ["birds", "birds"] }, null]) {
+    const h = harness()
+    const response = await h.plansPost(request({ id: planId, title, ...nzDetails, questionnaire: bad }))
+    assert.equal(response.status, 400)
+    assert.equal(h.queries.length, 0)
+  }
+  const h = harness()
+  assert.equal((await h.plansPost(request({ id: planId, title, ...nzDetails, country: "colombia", regions: ["pacific"] }))).status, 400)
+  assert.equal(h.queries.length, 0)
+})
+
+test("NZ questionnaire is preserved in the authorized owner inbox response", async () => {
+  const h = harness({ rpcResult: [{ id: quoteId, plan_id: planId, status: "requested", plan_snapshot: { title, details: nzDetails } }] })
+  const response = await h.adminQuotesGet()
+  assert.equal(response.status, 200)
+  assert.deepEqual((await response.json()).quotes[0].plan.questionnaire, nzAnswers)
+})

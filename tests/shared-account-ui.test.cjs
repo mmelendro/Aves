@@ -139,7 +139,7 @@ test("old Australian plans keep country and region labels; Colombia labels are d
 })
 
 test("registered future countries stay unavailable and cannot become Australian intentions", () => {
-  assert.deepEqual(options.enabledCountries.map(country => country.id), ["australia", "colombia"])
+  assert.deepEqual(options.enabledCountries.map(country => country.id), ["australia", "colombia", "new-zealand"])
   for (const country of ["ecuador", "costa-rica"]) {
     assert.equal(options.destinationRegistry[country].enabled, false)
     assert.equal(options.destinationRegistry[country].consentVersion, null)
@@ -151,7 +151,7 @@ test("registered future countries stay unavailable and cannot become Australian 
   const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { onSaved() {}, onCancel() {} })
   let tree = harness.render()
   const select = find(tree, node => node.props.name === "country")
-  assert.deepEqual(nodes(select).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia"])
+  assert.deepEqual(nodes(select).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia", "new-zealand"])
   select.props.onChange({ target: { value: "ecuador" } })
   tree = harness.render()
   assert.equal(find(tree, node => node.props.name === "country").props.value, "australia")
@@ -171,7 +171,7 @@ test("a new configured destination drives labels, intents, region options and th
   const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { initial: selected, onSaved() {}, onCancel() {} }, { mocks: { "@/content/trip-options": destinations } })
   const tree = harness.render()
   const select = find(tree, node => node.props.name === "country")
-  assert.deepEqual(nodes(select).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia", "test-islands"])
+  assert.deepEqual(nodes(select).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia", "new-zealand", "test-islands"])
   assert.deepEqual(boxes(tree).filter(node => node.props.checked).map(node => node.props.value), selected.regions)
 })
 
@@ -194,7 +194,7 @@ test("a saved retired destination remains correctly selected without becoming a 
   assert.deepEqual(boxes(tree).filter(node => node.props.checked), [])
   const fresh = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { onSaved() {}, onCancel() {} }, { mocks })
   const freshSelect = find(fresh.render(), node => node.props.name === "country")
-  assert.deepEqual(nodes(freshSelect).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia"])
+  assert.deepEqual(nodes(freshSelect).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia", "new-zealand"])
   const retiredIntent = loader({ mocks })("components/account/plan-intent.ts")
   assert.equal(retiredIntent.planIntentFromSearch({ country: "test-islands", region: "test-cloud-forest" }), undefined)
 })
@@ -360,4 +360,19 @@ test("public and account footers link to Colombia separately from all destinatio
     assert.match(find(footer, node => node.props.href === "https://aves.bio/colombia").props.children, /Colombia/)
     assert.equal(nodes(footer).some(node => node.props.href === "/colombia" || node.props.href === "/australia/colombia"), false)
   }
+})
+
+
+test("NZ entry keeps South Island and saves versioned questionnaire answers without URL storage", async () => {
+  const selected = intent.planIntentFromSearch({ country: "new-zealand", region: "south-island" })
+  assert.deepEqual(selected, { country: "new-zealand", regions: ["south-island"] })
+  assert.equal(intent.accountPlanPath(selected), "/account?country=new-zealand&region=south-island")
+  const attempts = []
+  let saved
+  const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { initial: selected, onSaved(plan) { saved = plan }, onCancel() {} }, { mocks: { "./account-api": { ...api, accountRequest: async (path, options) => { attempts.push({ path, ...options }); const body = JSON.parse(options.body); return { plan: { ...body, status: "draft", updatedAt: "2026-11-08T00:00:00Z" } } } } } })
+  await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { title: "Synthetic NZ brief", regions: ["south-island"], travelWhen: "Flexible; year to confirm", partySize: "2 people", message: "Synthetic notes", pace: "balanced", birding: "alternate", comfort: "comfortable", interests: ["birds", "food"] } } })
+  assert.equal(attempts[0].path, "/api/account/plans")
+  assert.deepEqual(saved.questionnaire, { version: 1, pace: "balanced", birding: "alternate", comfort: "comfortable", interests: ["birds", "food"] })
+  assert.equal(saved.country, "new-zealand")
+  assert.equal(attempts[0].headers["Idempotency-Key"], saved.id)
 })

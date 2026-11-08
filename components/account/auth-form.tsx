@@ -150,7 +150,7 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
   return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8">
     <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6"><LockKeyhole className="w-6 h-6 text-emerald-700" /></div>
     <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? "Welcome Back" : mode === "sign-up" ? "Make Room for Your Next Adventure" : mode === "forgot-password" ? "Let's Get You Back In" : "Choose a New Password"}</h2>
-    <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your Colombia and Australia trip ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
+    <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your AVES destination ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
     {socialMode && oauthProviders.length > 0 ? <div className="mb-6 space-y-3">
       {/* Google's unmodified artwork includes its current logo and lettering.
           Keeping it local avoids loading Google's scripts or fonts before a visitor chooses to sign in. */}

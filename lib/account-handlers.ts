@@ -47,7 +47,7 @@ async function ownPlan(client: SupabaseClient, userId: string, id: string): Prom
 }
 // Keep Australia's original serialization so retries of pre-upgrade requests
 // retain their original hash. Missing stored country always means Australia.
-const planValues = ({ title, country, regions, travelWhen, partySize, message }: z.infer<typeof updatePlanSchema> | z.infer<typeof createPlanSchema>) => ({ title, details: { regions, travelWhen, partySize, message, ...(country !== undefined && country !== DEFAULT_TRIP_COUNTRY ? { country } : {}) } })
+const planValues = ({ title, country, regions, travelWhen, partySize, message, questionnaire }: z.infer<typeof updatePlanSchema> | z.infer<typeof createPlanSchema>) => ({ title, details: { regions, travelWhen, partySize, message, ...(country !== undefined && country !== DEFAULT_TRIP_COUNTRY ? { country } : {}), ...(questionnaire ? { questionnaire } : {}) } })
 
 /**
  * Return up to 100 of this visitor's plans and an owner-link hint. isAdmin is presentation only.
@@ -167,7 +167,12 @@ export const quotePost = (request: Request, id: string) => accountHandler(async 
   // A replay must not notify again. Storage is already committed; notification
   // failure does not roll back the plan snapshot or turn this into a booking.
   if (receipt.created) {
-    await notifyAccount("quote", receipt.request_id, "mmelendro@gmail.com", `[AVES ${countryLabels[plan.country]}] Quote request from ${receipt.contact_name}`,
+    if (plan.country === "new-zealand") {
+      // Keep questionnaire answers and guest identity out of notification email.
+      // The authorized owner reads the frozen snapshot in the private inbox.
+      await notifyAccount("quote", receipt.request_id, "mmelendro@gmail.com", "New AVES New Zealand planning brief",
+        `A New Zealand planning brief is saved for your review. Sign in to read the private answers: ${canonicalUrl("/admin/quotes")}\n\nPlanning only; no reservation or confirmed availability.`).catch(() => undefined)
+    } else await notifyAccount("quote", receipt.request_id, "mmelendro@gmail.com", `[AVES ${countryLabels[plan.country]}] Quote request from ${receipt.contact_name}`,
       `A client requested a quote.\n\nCountry: ${countryLabels[plan.country]}\nName: ${receipt.contact_name}\nEmail: ${receipt.contact_email}\nSubmitted: ${receipt.submitted_at}\nPlan: ${plan.title}\nRegions: ${plan.regions.join(", ")}\nTiming: ${plan.travelWhen}\nParty: ${plan.partySize}\n\n${plan.message}\n\nReview securely: ${canonicalUrl("/admin/quotes")}`).catch(() => undefined)
   }
   return { success: true, status: "stored", requestId: receipt.request_id, plan }

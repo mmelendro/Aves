@@ -1,0 +1,27 @@
+/** Versioned, nonpersonal choices shared by the form, validation and private review.
+ * Answers live in the owned trip record, never in this source file or a URL.
+ */
+export const planningChoices = {
+  pace: { open: "Open to suggestions", relaxed: "Relaxed, with free time", balanced: "A balance of outings and downtime", active: "Active, with full days" },
+  birding: { open: "Open to suggestions", occasional: "A few special birding outings", alternate: "Roughly every other day", daily: "Birding most days" },
+  comfort: { open: "Open to suggestions", simple: "Simple and comfortable", comfortable: "Comfortable hotels or lodges", special: "Special stays where they add to the experience" },
+  interests: { birds: "Birds and wildlife", scenery: "Scenery and gentle walks", photography: "Photography", food: "Food and local produce", culture: "Art, history and host-led culture", water: "Coasts and water activities", wellness: "Wellness and downtime" },
+} as const
+
+export type PlanningQuestionnaire = {
+  version: 1
+  pace: keyof typeof planningChoices.pace
+  birding: keyof typeof planningChoices.birding
+  comfort: keyof typeof planningChoices.comfort
+  interests: (keyof typeof planningChoices.interests)[]
+}
+
+/** One readable representation is reused for the guest's review and owner inbox. */
+export function planningSummary(answers: PlanningQuestionnaire) {
+  return [
+    { label: "Holiday pace", value: planningChoices.pace[answers.pace] },
+    { label: "Birding frequency", value: planningChoices.birding[answers.birding] },
+    { label: "Accommodation", value: planningChoices.comfort[answers.comfort] },
+    { label: "Interests", value: answers.interests.map(id => planningChoices.interests[id]).join(", ") || "Open to suggestions" },
+  ]
+}

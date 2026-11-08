@@ -21,5 +21,5 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
   const initialPlan = planIntentFromSearch(await searchParams)
   const user = await getAccountUser()
   if (!user) redirect(accountUrl(accountEntryHref("/account/sign-in", accountPlanPath(initialPlan))))
-  return <AccountShell title="Your AVES Journeys, Taking Shape" description="Keep Colombia and Australia ideas together, refine a trip plan and request a personal quote when you're ready."><AccountDashboard key={accountPlanPath(initialPlan)} email={user.email || ""} initialPlan={initialPlan} /></AccountShell>
+  return <AccountShell title="Your AVES Journeys, Taking Shape" description="Keep your destination ideas together. Save and review a private draft, then share it with AVES when ready. New Zealand is available for planning only."><AccountDashboard key={accountPlanPath(initialPlan)} email={user.email || ""} initialPlan={initialPlan} /></AccountShell>
 }
