@@ -48,4 +48,6 @@ Effort units in AGILE-PLAN are comparative, not credits, time guarantees or week
 
 For each selected implementation: verify proportionately, build where needed, publish the affected app, check it live, sync GitHub, update status and pause. Preserve maps, licences/credits, audio, region links, mobile stacking and private account/quote flows. Use eBird primarily for occurrence, supported by BirdLife/local authorities; public media availability does not grant reuse rights. B Corp status is pursuing, not certified. No guest data/secrets in public pages, GitHub or logs. Do not contact guests/operators or book travel without explicit instructions. Confirmed security or essential-journey failures take precedence.
 
+Before completing each change, review the affected code and comments for clarity and correctness; remove redundant logic, verified-unused legacy items and stale comments, keep explanations beginner-friendly, preserve required migrations/history and working behaviour, and run proportionate checks.
+
 This checkpoint includes the published NZ Info-overlay pilot; no database, billing or provider configuration changed. Wait for the owner to select the next implementation batch.
