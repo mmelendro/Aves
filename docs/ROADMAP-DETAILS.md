@@ -238,3 +238,7 @@ Before starting each selected increment, explicitly recommend a model AND reason
 ## AVES-034 — featured places on the map
 
 Owner request, 9 November 2026: overlay the places featured in a page onto that page's map, South Island first and on future destination/regional pages. Use verified coordinates, readable discreet labels/markers and matching place cards/links; selecting a place should indicate its map position. Preserve the broader country/region navigation, actual geography, mobile/keyboard access, attribution and reduced-motion behavior. Do not invent precise species locations or disclose sensitive nesting sites. Start with the existing South Island guide places, distinguish broad areas from exact sites, and fit geography appropriately without stretching it. Scope this as a separate map increment after the current private-brief test; not implemented by recording it.
+
+## Business-plan direction — owner confirmed 9 November 2026
+
+AVES aims to become a marketplace of sustainable tourism businesses connected by birds, habitats and places, retaining the human AVES host/coordination role. Validate the guest/partner proposition through South Island first, then Sydney. Separate later discovery covers sustainability evidence, partner benefit/consent, quality/accountability, commercial model/unit economics and booking responsibilities. No success guarantee, selected commission model or automatic platform implementation. See SOUTH-ISLAND-CONTENT-GAPS.md; B3 remains a small guidance release using current infrastructure.
