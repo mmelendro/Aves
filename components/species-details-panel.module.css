@@ -1,0 +1,26 @@
+/* Leave photo, sound/wishlist controls and navigation visible around the panel.
+   Without backdrop filtering, retain the stronger backing for readable notes. */
+.overlay {
+  position: absolute; z-index: 20; inset: 7.5rem 0.75rem 4.5rem;
+  display: flex; flex-direction: column; min-height: 0; overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.8); border-radius: 1rem;
+  background: rgb(255 255 255 / 0.92); color: #064e3b;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 0.15);
+}
+@supports ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  /* Lighter glass and less blur reveal plumage without fading the text itself. */
+  .overlay { background: rgb(255 255 255 / 0.72); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+}
+/* Darken the shared credit/caveat text and links only inside the glass sheet.
+   Below-photo viewers keep their existing colours. */
+.overlay :global(.text-gray-600) { color: #374151; }
+.overlay :global(.text-emerald-800) { color: #064e3b; }
+.header { display: flex; flex-shrink: 0; align-items: flex-start; justify-content: space-between; gap: 0.5rem; padding: 0.75rem; border-bottom: 1px solid rgb(6 95 70 / 0.15); }
+.body { min-height: 0; overflow-y: auto; overflow-wrap: anywhere; padding: 1rem; touch-action: pan-y pinch-zoom; }
+.body:focus-visible { outline: 2px solid #047857; outline-offset: -3px; }
+@media (prefers-contrast: more) {
+  .overlay { background: rgb(255 255 255 / 0.96); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  .overlay { background: Canvas; color: CanvasText; border-color: CanvasText; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}

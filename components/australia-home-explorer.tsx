@@ -35,7 +35,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const highlightedRegion = regionOptions.find(region => region.id === (initialRegion ?? bird.regionSlug))
 
   const mediaContent = <>
-      {media ?? <HomepageBirdCarousel className="w-full max-w-none" fillPanel={resizable} showBirdPicker={resizable} autoPlay={false} />}
+      {media ?? <HomepageBirdCarousel className="w-full max-w-none" infoPresentation={resizable ? "overlay" : "below"} fillPanel={resizable} showBirdPicker={resizable} autoPlay={false} />}
       {!media && <p className="mt-3 text-center text-sm leading-relaxed text-gray-600">A glimpse of Australia’s <a href="https://birdlife.org.au/about/" target="_blank" rel="noreferrer" className="font-medium text-emerald-800 underline underline-offset-4">800+ bird species<span className="sr-only"> (source: BirdLife Australia; opens in a new tab)</span></a>. Sightings depend on your route and season.</p>}
     </>
   const mapContent = <>
