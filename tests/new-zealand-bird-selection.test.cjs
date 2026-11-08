@@ -8,12 +8,12 @@ const basket = load("lib/nz-bird-selection.ts")
 const [a, b, c] = catalogue.selectableNzBirds.map(bird => bird.id)
 const storage = () => { const values = new Map(); return { getItem: key => values.get(key) || null, setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) } }
 
-test("complete published main checklist: 432 unique species, 377 living and 55 historical", () => {
-  assert.equal(catalogue.newZealandChecklist.length, 432)
+test("visitor checklist contains only the 377 living species; provenance retains 432 records", () => {
+  assert.equal(catalogue.newZealandChecklist.length, 377)
   assert.equal(catalogue.selectableNzBirds.length, 377)
-  assert.equal(catalogue.newZealandChecklist.filter(bird => bird.extinct).length, 55)
-  assert.equal(new Set(catalogue.newZealandChecklist.map(bird => bird.id)).size, 432)
-  assert.equal(new Set(catalogue.newZealandChecklist.map(bird => bird.scientificName)).size, 432)
+  assert.equal(catalogue.newZealandChecklist.filter(bird => bird.extinct).length, 0)
+  assert.equal(new Set(catalogue.newZealandChecklist.map(bird => bird.id)).size, 377)
+  assert.equal(new Set(catalogue.newZealandChecklist.map(bird => bird.scientificName)).size, 377)
   assert.equal(catalogue.newZealandChecklist.filter(bird => bird.rare).length, 138)
   assert.ok(catalogue.newZealandChecklist.every(bird => bird.commonName && bird.family && /^nz-[a-f0-9]{12}$/.test(bird.id)))
   assert.ok(catalogue.validNzBirdIds(catalogue.selectableNzBirds.map(bird => bird.id)))
@@ -21,7 +21,7 @@ test("complete published main checklist: 432 unique species, 377 living and 55 h
 })
 
 test("targets reject duplicates, unknown IDs, extinct species and malformed input", () => {
-  const extinct = catalogue.newZealandChecklist.find(bird => bird.extinct).id
+  const extinct = load("content/new-zealand-checklist.json").species.find(bird => bird.extinct).id
   for (const ids of [[a, a], ["nz-000000000000"], [extinct], null, "kea", ["<script>"]]) assert.equal(catalogue.validNzBirdIds(ids), false)
   assert.equal(catalogue.validNzBirdIds([]), true)
 })

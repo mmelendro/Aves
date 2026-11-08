@@ -112,3 +112,36 @@ test("the shared New Zealand explorer renders the South Island collection with s
   assert.match(html, /href="\/account\?country=new-zealand&amp;region=south-island"/)
   assert.match(html, /src="\/audio\/[^"<>]+"/)
 })
+
+
+test("ecosystem filtering retains only sourced South Island profiles and original media records", () => {
+  const { filterSouthIslandBirds, southIslandEcosystems, southIslandBirdEcosystems } = load("content/south-island-ecosystems.ts")
+  const { newZealandRegionBirds } = load("content/new-zealand-carousel.ts")
+  const local = newZealandRegionBirds("south-island")
+  const allowed = new Set(southIslandEcosystems.map(item => item.id))
+  assert.equal(local.length, 30)
+  assert.deepEqual(filterSouthIslandBirds(local, "all"), local)
+  assert.deepEqual(Object.keys(southIslandBirdEcosystems).sort(), local.map(bird => bird.id).sort())
+  for (const bird of local) {
+    assert.ok(southIslandBirdEcosystems[bird.id].length, bird.id)
+    assert.ok(southIslandBirdEcosystems[bird.id].every(id => allowed.has(id)), bird.id)
+    assert.ok(bird.sources.length && bird.localOccurrence && bird.audioFile, bird.id)
+  }
+  for (const habitat of allowed) {
+    const filtered = filterSouthIslandBirds(local, habitat)
+    assert.ok(filtered.length > 0 && filtered.length < local.length)
+    assert.ok(filtered.every(bird => local.includes(bird)), "rights/calls/focal data remain the original objects")
+    assert.ok(!filtered.some(bird => bird.id === "nz-red-crowned-parakeet"))
+  }
+  const ids = habitat => filterSouthIslandBirds(local, habitat).map(bird => bird.id)
+  assert.ok(ids("forest").includes("nz-kaka"))
+  assert.ok(ids("mountains").includes("nz-rock-wren"))
+  assert.ok(ids("freshwater").includes("nz-black-stilt"))
+  assert.ok(!ids("mountains").includes("nz-black-stilt"), "a high-country location alone does not imply alpine habitat")
+  assert.ok(ids("coast").includes("nz-huttons-shearwater"))
+  assert.ok(!ids("mountains").includes("nz-huttons-shearwater"), "sensitive mountain colonies are not viewing recommendations")
+  const unknown = { ...local[0], id: "unreviewed" }
+  assert.deepEqual(filterSouthIslandBirds([unknown], "forest"), [])
+  assert.deepEqual(filterSouthIslandBirds([unknown], "all"), [unknown])
+  assert.deepEqual(filterSouthIslandBirds([], "all"), [])
+})
