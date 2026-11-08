@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-11-08T09:38:41.226513+00:00",
+  "observedSydneyDate": "2026-11-08",
+  "scope": "Public hosted sign-in preflight; not completed authentication",
+  "liveEntry": "https://aves.bio/account/sign-in",
+  "checks": {
+    "googleButtonVisible": true,
+    "emailPasswordVisible": true,
+    "emailConfirmationRequired": true,
+    "googleAuthorizationStartStatus": 302,
+    "googleAuthorizationRedirectHost": "accounts.google.com",
+    "googleAuthorizationScopeSet": [
+      "email",
+      "openid",
+      "profile"
+    ]
+  },
+  "hostedAcceptanceComplete": false,
+  "pending": [
+    "Isolated hosted test setup and its cost approval",
+    "Completed Google callback and authenticated browser session",
+    "Real confirmation/recovery and authorized notification inbox delivery",
+    "Final controlled deployed-session handover"
+  ],
+  "productionChanged": false,
+  "accountsCreated": false,
+  "externalMailSent": false,
+  "paidResourcesCreated": false,
+  "limitations": [
+    "No sign-in credential was entered or exchanged",
+    "Authorization start does not prove callback allowlisting",
+    "No new hosted persistence or inbox-delivery test was completed"
+  ]
+}
