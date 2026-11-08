@@ -1,6 +1,25 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production - New Zealand divider and bird-map links, 8 November 2026 (Sydney)
+## Current production - country dividers and complete bird-map links, 8 November 2026 (Sydney)
+
+**Published, live-tested, synced and paused after AVES-006b. Priority 1 is complete.** Colombia and Australia now use the proven New Zealand country-homepage divider. Map and bird panels follow the actual page/window width, with full safe drag travel, keyboard controls and reset. Frame height is capped at 44rem; panels retain 256px minimum width. Narrow phones show bird media first, then the map, with the divider/reset hidden. The established emerald style, translucent controls, credits and available-call speaker cue remain.
+
+Every featured bird highlights a supported planning region: Colombia **22/22**, Australia **20/20**, plus the previously verified NZ **31/31**. The CO/AU catalogue already had valid region IDs; no range associations were invented. Colombia now follows a new bird after a manual map choice. Region and article explorers keep their focused layouts because resizing is explicitly enabled only on country homepages. Planning-region examples are not full range maps, recording locations or sighting guarantees.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `aaefa92` | `dpl_2PDKi355Sm54nAZtHvunsqPWENfi` |
+| Australia and shared accounts | `australia/preview` | `8429aa7` | `dpl_95t1kfScguL5X4Q9kgsWUFJEkZYs` |
+
+[Live Colombia](https://aves.bio/colombia) - [Colombia build](https://v0-company-landing-page-qit7yprmp-mmelendro-9273s-projects.vercel.app). [Live Australia](https://aves.bio/australia) - [Australia build](https://aves-australia-1srmu2033-mmelendro-9273s-projects.vercel.app). The existing NZ implementation, homepage country-card carousels, shared `/account`, Google AVES branding/info@aves.bio support and privacy/security settings are preserved.
+
+**Verification:** source passed 24 relevant automated tests, Australia 17; strict TypeScript and remote production builds passed for both. All 42 CO/AU birds were selected through the live species pickers with zero region mismatches. Native 224px pointer drags moved the split from 50% to about 69%; keyboard limits/reset passed. At 720/1600px windows, balanced media widths were about 307/586px; at 390px, about 344px, media before map and no horizontal overflow. Colombian map geometry stayed undistorted. Representative live calls reached readyState 4 with advancing playback and were stopped. Central Andes/Queensland map links opened the correct region guides without adding a divider to focused pages. No live console errors were observed. These checks used native mouse/keyboard and viewport emulation; physical iPhone/touch/foldable hardware was not independently tested.
+
+Implementation: source `app/colombia/page.tsx`, `components/colombia-hero-explorer.tsx`, and the featured-bird contract in `tests/global-home.test.cjs`; Australia `app/page.tsx`, `components/australia-home-explorer.tsx`, optional `fillPanel` in the shared carousel, copied identical splitter/CSS/math helpers and their tests. No dependency, schema, backend, auth, key or domain change. Public metadata only is recorded in private workspace evidence: `audit/evidence/nov8-colombia-australia-divider-live-checks.json`, `nov8-colombia-divider-live.png`, `nov8-colombia-divider-mobile-live.png`, `nov8-australia-divider-live.png`, `nov8-australia-divider-mobile-live.png`.
+
+**Next state:** AVES-006a, AVES-006b and parent AVES-006 verified. The next owner priority is the NZ questionnaire/selection planning pilot, then the Equal Earth world map. Neither has started in this release; wait for the owner's explicit next instruction. The planning prompt/inbox are mirrored across branches. Documentation-only commits may advance branch heads beyond the app commits above without a runtime redeploy; Git auto-deployment stays disabled.
+
+## Historical production - New Zealand divider and bird-map links, 8 November 2026 (Sydney)
 
 **Published, live-tested and paused after AVES-006a.** The owner selected New Zealand as the pilot. The map and bird carousel automatically follow the page/window width and can be resized with a pointer/keyboard divider and reset. The fixed narrow pair cap was removed, frame height is capped at 44rem, and narrow phones show the bird card first with the divider/reset hidden. The owner's later feedback led to two more corrections: full usable split travel based on 256px minimum panels (replacing the restrictive 40/60 cap), and tolerance for subpixel ResizeObserver readings so a height-only update does not cancel an active drag.
 
