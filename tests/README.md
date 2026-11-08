@@ -9,3 +9,9 @@ Tests commonly prepare a small fake request/session/database adapter, exercise t
 The root/global branch checks account forwarding/legacy links, contact compatibility, public sitemaps and page composition. The Australian branch additionally checks account APIs, contact storage, shared sessions, OAuth guards, destination validation and discovery content. Read each test title and its setup together before changing an expected value.
 
 SQL checks under `supabase/tests` are separate from this package command. See the database README before executing them. A passing local suite does not prove real email delivery, every browser layout or hosted database configuration. Verify those separately only when the change requires it.
+
+The [native integration suite](integration/README.md) adds real local PostgreSQL,
+Supabase Auth, PostgREST and application HTTP checks without Docker or hosted
+credentials. Its 19 checks passed for the unified candidate; the sanitized evidence
+and remaining hosted provider/browser gates are recorded in `docs/CONSOLIDATION.md`.
+It is separate from `pnpm test` and sends no external email.

@@ -1,4 +1,4 @@
-AVES-020 checkpoint: unified read-only Preview is implemented in [draft PR #3](https://github.com/mmelendro/Aves/pull/3). 345 tests, TypeScript/build and 81 hosted GET checks pass, including 73 public URLs. Read [CONSOLIDATION.md](CONSOLIDATION.md) before continuing. Real account/enquiry checks and separately approved production cutover remain. Other releases stay paused.
+AVES-020 checkpoint: unified read-only Preview is implemented in [draft PR #3](https://github.com/mmelendro/Aves/pull/3). 345 tests, TypeScript/build and 81 hosted GET checks pass, including 73 public URLs. Read [CONSOLIDATION.md](CONSOLIDATION.md) before continuing. All 19 local native account/enquiry checks now pass with synthetic data and captured mail. Hosted Google/email, real inbox delivery, authenticated browser checks and separately approved production cutover remain. Other releases stay paused.
 
 # AVES — proposed agile release plan
 

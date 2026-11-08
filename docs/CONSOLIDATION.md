@@ -4,7 +4,7 @@
 
 **Integration and read-only preview implemented. Production cutover is pending.** Review [draft PR #3](https://github.com/mmelendro/Aves/pull/3). Runtime commit: `7137d6089619c1cabcb8245aed7b8be9f83f65c5`. Ready Preview deployment: `dpl_FjVASappbNWdF1mo93YRAtHLmQnZ`, [preview URL](https://aves-australia-pg3jzdtd0-mmelendro-9273s-projects.vercel.app). Vercel authentication remains enabled. Request a fresh temporary share link in chat if needed; never commit the share token.
 
-The owner authorized code integration and preview testing on 8 November 2026. Work is isolated to `integration/aves-unified-2026-11-08`. No production release, domain/DNS change, project rename, migration or project deletion is included in this checkpoint. The eco-tourism business plan remains to be created.
+The owner authorized code integration and preview testing on 8 November 2026, then continuation of the bounded account/enquiry checks. All 19 local native integration checks now pass, using synthetic accounts and disposable PostgreSQL, Auth and PostgREST. Work is isolated to `integration/aves-unified-2026-11-08`. No production release, domain/DNS change, project rename, hosted migration or project deletion is included in this checkpoint. The eco-tourism business plan remains to be created.
 
 ## Source inventory
 
@@ -13,7 +13,7 @@ The owner authorized code integration and preview testing on 8 November 2026. Wo
 | Global, Colombia, NZ | `webmaster/readiness-2026-11-05` at `705fe200f8c73c13c7fef853853f77096e7f9591` | `f5eee01` | `dpl_BA2SbW56xbfkktQqPQw8TBHqQsje` |
 | Australia, shared backend | `australia/preview` at `802422c4cc731488400a4debd598fff43b63cf3a` | `10554a3` | `dpl_4J7C7ecQeG2YovNNwYvbWHnH6QEX` |
 
-The global tree has 498 tracked files and Australia 233, including 35 identical overlaps and 51 differing overlaps. Directly merging both roots would collide in app routes, catalogues, shared UI, middleware and configuration. The integration starts from the maintained global tree, adds Australia public code under a namespace, and brings the existing account/backend into the root. Stale `main` is not the base. Source migration history is preserved; no SQL is executed.
+The global tree has 498 tracked files and Australia 233, including 35 identical overlaps and 51 differing overlaps. Directly merging both roots would collide in app routes, catalogues, shared UI, middleware and configuration. The integration starts from the maintained global tree, adds Australia public code under a namespace, and brings the existing account/backend into the root. Stale `main` is not the base. Source migration history is preserved; no hosted SQL is executed. The later native integration fixture applies the eight maintained migrations only to a fresh disposable local database.
 
 ## Routing and content
 
@@ -61,12 +61,28 @@ Git automatic deployments are disabled globally in `vercel.json`. Explicit API d
 * Browser UI evidence was captured on `251a18e`; the only subsequent runtime change was the legacy robots rewrite/removal of its unused nested metadata file. The exact later deployment passed the complete HTTP review. [Desktop screenshot](evidence/aves-unified-preview-desktop.png): Superb Fairywren photograph by JJ Harrison, [CC BY-SA 4.0 source](https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-_Sydney_Olympic_Park.jpg); map boundaries from Natural Earth, public domain. The screenshot crops the website viewport; source media and credits remain in the application.
 * Production deployment listings still identify `dpl_BA2SbW56xbfkktQqPQw8TBHqQsje` and `dpl_4J7C7ecQeG2YovNNwYvbWHnH6QEX`. No production/domain/project rename, environment-value change, SQL migration or customer-data operation was performed.
 
-Remaining release gates: real Google/email signup/recovery, existing-user session continuity, private save/reopen/edit/submission, enquiry persistence/authorized notification delivery and owner permissions need a separately bounded integration check using approved synthetic/test resources. The read-only preview intentionally cannot prove live writes. Physical phone/touch hardware and real guest journeys were not tested. Keep the PR in draft and do not directly promote the read-only preview.
+### Native integration follow-up
+
+All 19 checks pass against the unchanged application on revision `f006aa107c74e417392c1fc9bd24b96e4b65eb61`. PostgreSQL 17.11 matches the hosted project's major/minor version. Supabase Auth 2.197.0 and PostgREST 16.5 are pinned native services. Four reserved-domain synthetic accounts, one fixture owner grant and fresh random local credentials are used. [Sanitized report](evidence/aves-unified-native-integration.json); [reproduction and limits](../tests/integration/README.md). This follow-up changes test tooling and documentation, not the reviewed web runtime.
+
+Verified through the real SDK, HTTP handlers and database, with row policies and grants active:
+
+* Email signup requires confirmation; locally captured SMTP confirmation completes the actual PKCE callback. Unconfirmed users are denied.
+* Australia, Colombia and New Zealand drafts save, reopen through a new password session, edit and delete. NZ answers and Kea selection persist. Unchanged retries preserve a single record; changed payloads and stale edits are rejected.
+* Another account cannot read/update the plan through the API or direct user-scoped PostgREST. Forged ownership and visitor calls to service-only owner functions are rejected.
+* The older Australian cookie migrates into a root session and preserves country/region intent. A newer root identity wins over an older different-user cookie.
+* NZ quote submission freezes the private answers, blocks later guest edits and makes one notification attempt. Only the fixture owner can draft/issue a proposal. Only the matching guest sees the issued proposal, and replay does not repeat mail.
+* All three countries' enquiries store receipts and applicable versioned consent. Both legacy enquiry URLs use the same backend. Notification rejection retains the stored request and records failure separately.
+* Password recovery completes its real email/PKCE callback, replaces the password and rejects the used link. Sign-out clears the account session and the revoked refresh token fails.
+
+SMTP and application email are captured locally without forwarding. The Resend-compatible acceptance/rejection responses exercise application status handling, not real provider acceptance or inbox delivery. The fixture database, mail, certificates and credentials are removed after the run. No hosted keys, customer data, project settings, provider allowlists or paid resources were used or changed. The read-only Preview guard remains intact.
+
+Remaining release gates: hosted Google sign-in and email confirmation/recovery on the intended callback origins; actual authorized owner/client inbox delivery; browser verification of those authenticated journeys against the intended hosted configuration; and a final controlled session-handover check with the existing deployed setup. Native services prove application integration, not equivalence of hosted credentials, allowlists, mail settings or provider behavior. Physical phone/touch hardware and real guest journeys were not tested. There is no existing isolated hosted Supabase branch; do not create a billable branch, reuse customer data or weaken Preview guards without the applicable authorization. Keep the PR in draft and do not directly promote the read-only preview.
 
 ## Cutover checklist, only after separate approval
 
 1. Review the exact PR/commit and hosted preview. Recheck both source branch heads; integrate any newer approved work deliberately before release.
-2. Complete the outstanding account/provider and persistence checks in an isolated approved test environment or controlled production-target test. Keep enquiries, consent, ownership/RLS and immutable submissions unchanged. No customer data is needed for layout review.
+2. Review the passing local native evidence, then complete the remaining hosted provider, real inbox, authenticated browser and deployed-session checks in an isolated approved test environment or controlled production-target test. Keep enquiries, consent, ownership/RLS and immutable submissions unchanged. No customer data is needed for layout review.
 3. Record current `aves.bio`/`www` aliases, dependent URLs, environment targets, OAuth/email redirect allowlists and integrations. Preserve the two deployment IDs above as rollback anchors. Do not infer aliases from a deployment's READY status.
 4. Select the one retained production project and future release branch. Reusing the Australia project preserves private integration configuration. Rename it `aves-web` only when dependent hostnames are safely replaced and the owner approves production cutover. No domain purchase or new paid service is required.
 5. Build the reviewed integration commit with Production environment after approval. Verify indexing/metadata and that normal account/inquiry behaviour is enabled. Move production domains/aliases only as explicitly approved, then verify all three countries, deep routes, assets, callbacks, cookie handover, accounts, enquiries and owner access on the live domain.
