@@ -8,6 +8,6 @@
 }
 @container (min-width: 624px) {
   /* Reserve the 44px credit link, its bottom border and the card's two borders.
-     Expanded species details stay below this frame instead of stretching the map. */
+     Species details stay inside the photo instead of stretching the map. */
   .mediaPanel { --discovery-media-height: calc(var(--discovery-panel-height) - 47px); }
 }

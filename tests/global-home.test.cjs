@@ -16,7 +16,7 @@ function createLoader(overrides = {}) {
     "@/components/navigation-header": { NavigationHeader: function NavigationHeader() { return null } },
     "@/components/footer": { Footer: function Footer() { return null } },
     "@/components/homepage-bird-carousel": function HomepageBirdCarousel(props) {
-      return React.createElement("div", { "data-bird-carousel": true, "data-count": props.birds?.length, "data-variant": props.variant, "data-autoplay": props.autoPlay, "data-priority": props.priority, "data-info-presentation": props.infoPresentation ?? "below", "aria-label": props.label })
+      return React.createElement("div", { "data-bird-carousel": true, "data-count": props.birds?.length, "data-variant": props.variant, "data-autoplay": props.autoPlay, "data-priority": props.priority, "data-info-presentation": "overlay", "aria-label": props.label })
     },
     "@/components/contact-form-section": { ContactFormSection: function ContactFormSection() { return null } },
     ...overrides,
@@ -65,40 +65,46 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
-test("species details retain notes, picker and licensed source links in both presentations", () => {
+test("transparent species details preserve every country collection, source and media credit", () => {
   const Panel = load("components/species-details-panel.tsx").default
-  const catalogues = [load("content/new-zealand-carousel.ts").newZealandCarouselBirds, load("content/birds.ts").birdData]
-  for (const birds of catalogues) for (const presentation of ["below", "overlay"]) {
-    for (const [index, bird] of birds.entries()) {
-      const html = renderToStaticMarkup(React.createElement(Panel, { id: "test-info", bird, birds, selectedIndex: index, showBirdPicker: true, presentation, onSelectBird() {}, onClose() {} }))
-      const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
-      for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), `${presentation}: ${bird.id}`)
-      if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
-      const links = anchors(html)
-      assert.ok(links.some(link => link.href === bird.sources[0].url), `${presentation}: ${bird.id} species source`)
-      if (bird.audioFile) assert.ok(links.some(link => link.href === (bird.audioCreditHref || `/credits#audio-${bird.id}`)))
-      assert.equal((html.match(/<option /g) || []).length, birds.length)
-      if (presentation === "overlay") {
-        assert.match(html, /data-species-overlay="true"/)
-        assert.match(html, /aria-label="Close species details"/)
-        assert.match(html, /aria-label="Scrollable species information"/)
-        assert.match(html, /aria-labelledby="test-info-title"/)
-      } else assert.doesNotMatch(html, /data-species-overlay|Close species details/)
-    }
+  const catalogues = Object.values(load("content/destination-birds.ts").destinationBirds)
+  assert.equal(catalogues.reduce((total, birds) => total + birds.length, 0), 73)
+  for (const birds of catalogues) for (const [index, bird] of birds.entries()) {
+    const html = renderToStaticMarkup(React.createElement(Panel, { id: "test-info", bird, birds, selectedIndex: index, showBirdPicker: true, onSelectBird() {}, onClose() {} }))
+    const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
+    for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), bird.id)
+    if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
+    const links = anchors(html)
+    assert.ok(links.some(link => link.href === bird.sources[0].url), `${bird.id}: species source`)
+    if (bird.audioFile) assert.ok(links.some(link => link.href === (bird.audioCreditHref || `/credits#audio-${bird.id}`)))
+    if (bird.regionHref || bird.regionSlug) assert.ok(links.some(link => link.href === (bird.regionHref || `/aves-explorer?region=${bird.regionSlug}`)))
+    assert.equal((html.match(/<option /g) || []).length, birds.length)
+    assert.match(html, /data-species-overlay="true"/)
+    assert.match(html, /aria-label="Close species details"/)
+    assert.match(html, /aria-label="Scrollable species information"/)
+    assert.match(html, /aria-labelledby="test-info-title"/)
+    assert.doesNotMatch(html, /<h4[^>]*>About /)
   }
 })
 
-test("NZ and Colombia country homepages opt into overlay while other viewer layouts retain their defaults", () => {
-  const hero = renderToStaticMarkup(React.createElement(load("components/new-zealand-hero-explorer.tsx").default))
-  assert.match(hero, /data-info-presentation="overlay"/)
-  assert.equal((hero.match(/data-bird-carousel="true"/g) || []).length, 1)
-  const home = renderToStaticMarkup(React.createElement(load("app/page.tsx").default))
-  const colombia = renderToStaticMarkup(React.createElement(load("app/colombia/page.tsx").default))
-  assert.match(colombia, /data-info-presentation="overlay"/)
-  const focused = renderToStaticMarkup(React.createElement(load("components/colombia-hero-explorer.tsx").default))
-  for (const html of [home, focused]) {
-    assert.match(html, /data-info-presentation="below"/)
-    assert.doesNotMatch(html, /data-info-presentation="overlay"/)
+test("homepage, country, regional and article viewers all use the same overlay contract", () => {
+  // Exercise the real shared carousel rather than assuming a default in its stub.
+  const real = createLoader({ "@/components/homepage-bird-carousel": undefined })
+  const Region = real("components/colombia-region-page.tsx").ColombiaRegionPage
+  const region = real("content/regions.ts").regions.find(region => region.id === "sierra-nevada-de-santa-marta")
+  const cases = [
+    React.createElement(real("app/page.tsx").default),
+    React.createElement(real("app/colombia/page.tsx").default),
+    React.createElement(real("components/new-zealand-hero-explorer.tsx").default),
+    React.createElement(Region, { region }),
+    React.createElement(real("components/article-bird-carousel.tsx").default, { article: "paramo" }),
+    React.createElement(real("app/species/page.tsx").default),
+    React.createElement(real("components/homepage-bird-carousel.tsx").default, { variant: "destination-card", autoPlay: false }),
+  ]
+  for (const element of cases) {
+    const html = renderToStaticMarkup(element)
+    assert.match(html, /data-info-presentation="overlay"/)
+    assert.doesNotMatch(html, /data-info-presentation="below"/)
   }
 })
 

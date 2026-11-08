@@ -14,14 +14,16 @@ Official usage guidance: https://learn.chatgpt.com/docs/pricing (reviewed 8 Nove
 
 ## Suggested near-term sequence
 
+Latest owner steering: finish the selected Info rollout, then put South Island trip readiness first (page, practical guidance/resources and a trial of the private brief). Sydney launch-product planning is next. Apply bird/habitat-led balanced experiences and sourced stories; optional North Island extensions stay separate. Map polish/satellite layers follow later. Choose one bounded release at a time.
+
 Each item below is its own release/checkpoint, not all work for one week. Choose only one when conserving allowance. This recommendation does not silently replace the owner's established priority order.
 
 Delivered: NZ translucent Info overlay pilot (task 01), published and live-verified on 8 November. Pause before selecting the next release. Candidate sequence:
 
-1. Three homepage map cards: shared names/callouts/style — 3 units.
-2. South Island page with the shared map/media template — 3 units.
-3. South Island practical planning tips — 3 units.
-4. Curated NZ resources — 3 units.
+1. South Island page with the shared map/media template — 3 units.
+2. South Island practical planning tips — 3 units.
+3. Curated NZ resources — 3 units.
+4. Three homepage map cards: shared names/callouts/style — 3 units.
 
 Country-homepage rollout (task 02 / AVES-012d-3) is delivered for Colombia and Australia, matching NZ. Other viewer templates remain task 02b; the country frames do not establish suitability for shorter frames without further checks.
 
@@ -72,6 +74,9 @@ Added at the owner's request on 8 November 2026 (Sydney): consolidate the existi
 
 ## Unscoped / unconfirmed vision
 
+- AVES-025: a small NZ checklist-filter pilot can begin with reliable existing origin/seasonal metadata; price/scope activity-data enrichment separately. AVES-026: the single green “birds” → “AVES” heading flip is an independent cosmetic increment. Both are queued; the current Info publish must finish first.
+- AVES-023 defines the itinerary principle for the South Island pilot; use a short human-reviewed options brief before AI/supplier automation. AVES-024 Sydney launch product is next after NZ readiness and needs a bounded product/operations estimate. Neither authorises advertising, outreach, booking or spend.
+- AVES-021 satellite/city layers: first assess a small city-label or imagery/projection pilot; estimate separately after provider/licence review. AVES-022 pronunciation: start with a small permissioned Māori-name audio set, then estimate expansion. Both are queued, not part of the current Info release or prerequisites for NZ trip readiness.
 - Small queued discovery follow-ups AVES-018 (discreet carousel collection titles) and AVES-019 (sourced approximate country species totals on map selection) need separate bounded estimates when selected. They do not resume implementation or alter the owner priority order.
 - Human-reviewed itinerary/routing assistance and a verified sustainable supplier directory need a separately bounded pilot.
 - AI recommendations, live supplier availability, reservations and payments are not yet sized or implemented; define the guest journey, data rights, operational responsibilities and acceptance criteria first.
