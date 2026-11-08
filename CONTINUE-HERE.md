@@ -1,6 +1,21 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — NZ Info-overlay pilot, 8 November 2026 (Sydney)
+## Current production — NZ Info transparency, 8 November 2026 (Sydney)
+
+**AVES-012d-2 published, verified and paused.** https://aves.bio/new-zealand now reveals more of the bird through the Info sheet: 72% white backing and 2px blur, with fully opaque text and darker small notes/links. The stronger 92% fallback remains; increased-contrast preference uses 96% white and forced colours use system colours. Only the existing NZ overlay changes. No carousel data, credits, accounts, database, service, credential or billing change.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `8948ccb` | `dpl_DrUYTLFZHRJ3BKZTfN6Py4pHee4X` |
+| Australia and shared accounts, unchanged runtime | `australia/preview` | `10554a3` | `dpl_4J7C7ecQeG2YovNNwYvbWHnH6QEX` |
+
+Twenty-two focused tests, strict TypeScript and local/Vercel production builds passed. Local 320/390/720/1280px checks covered bright, dark and busy photos, unchanged frame height, a 254px narrow photo, credits/scroll, close/Escape/focus and audio cleanup. Staged and live desktop/phone-sized checks confirmed the lighter style, darker text, bounded panel and no horizontal overflow; live mobile close restored focus. Calculated worst-case contrast over a black photo is 5.17:1 for body/credit text and 4.88:1 for links. Physical touch hardware and OS contrast modes were not exercised. Local servers are stopped and test sound paused. Evidence is private in `audit/evidence/nov8-nz-transparent-info-checks.json` and matching desktop/mobile live PNGs.
+
+**Phone-chat preflight:** both checkouts were clean. The current release branches had only reviewed AVES-020 planning commits (source 705fe20, Australia 802422c), which were fast-forwarded locally. Both live deployment IDs were unchanged before this release. The separate consolidation in draft PR #3 (`integration/aves-unified-2026-11-08`) is unmerged and was neither undone nor included in this deployment. This was a scoped branch/deployment review, not a full audit of that large draft. Hosted Google/email/authenticated-browser gates and separately approved cutover remain; incorporate source fix 8948ccb and any subsequent fixes into the unified candidate before release. Do not deploy a stale candidate or rebuild work already done there.
+
+**Next state:** transparency refinement delivered. Wider overlay rollout, extinct-species display cleanup (017), collection titles (018), sourced country totals (019) and other roadmap work remain separately queued. The four planning mirrors are updated; final docs-only heads can be newer than the runtime commit. **Pause here; no next implementation is selected.**
+
+## Historical production — NZ Info-overlay pilot, 8 November 2026 (Sydney)
 
 **AVES-012d-1 published, verified and paused.** On https://aves.bio/new-zealand, Info opens the existing species details in a translucent sheet inside the photo, with bounded scrolling and a persistent close control. All occurrence/range/habitat notes, the 31-featured-species picker, sources and photo/audio credits remain. Close/Escape restore focus; opening Info pauses slides, explicit Play returns to the photo, bird changes stop the previous call, and wishlist/private-brief controls remain available. The photo frame does not grow. Only the main NZ destination hero opts in; homepage, Colombia, regional viewers and the independent Australian app retain below-photo details. No animation, account/database, provider, credential, billing or guest-data changes.
 

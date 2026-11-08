@@ -25,7 +25,7 @@ Delivered: NZ translucent Info overlay pilot (task 01), published and live-verif
 
 Info-overlay rollout (task 02) is also available as a separate visual batch. The NZ pilot does not establish suitability for shorter frames without further checks.
 
-Owner follow-up AVES-012d-2 is a separate small NZ-first refinement before wider rollout: make more of the bird visible through the Info sheet while preserving readable text and controls on bright/dark/busy photos. Planning only; select and size this increment before implementing it.
+AVES-012d-2 is delivered: more of the bird shows through the NZ Info sheet, with darker readable notes/links. Local and hosted desktop/phone-sized checks, builds and sync are complete. Other-viewer rollout remains task 02, separately selected.
 
 The map standard precedes card animation. Useful NZ content can proceed independently of ecological overlays or a whole-site map rollout. Only task selection is authorised by a later user instruction, not by a checkbox in a planning view.
 
@@ -63,7 +63,9 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 
 Several entries are optional or multi-release streams, not one-session commitments. Re-estimate after the first completed pilot; do not turn every estimate into a guarantee.
 
-## Planned consolidation checkpoint — AVES-020
+## Separate draft consolidation checkpoint — AVES-020
+
+Phone-chat PR #3 contains an unmerged unified preview. Hosted gates and separately approved production cutover remain; carry later source fixes such as 8948ccb into that candidate before release. This transparency release does not merge or publish consolidation.
 
 Added at the owner's request on 8 November 2026 (Sydney): consolidate the existing independent applications into one Next.js application and one production Vercel project, preserving the existing shared database and repository. Include the owner's requested naming/branding/SEO review and permission to rename projects or create a new target where useful. Start with a route/file/dependency and search-compatibility inventory, then size code integration, unified preview verification, approved cutover/rollback and later project retirement separately. Effort is not yet estimated; do not assign a credit/time guarantee or silently reprioritise the owner's current work. Recording this task does not authorise implementation or production changes. See ROADMAP-DETAILS.md for acceptance criteria.
 
