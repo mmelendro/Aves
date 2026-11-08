@@ -1,6 +1,8 @@
 # AVES — visual site architecture
 
-Design/source snapshot: 9 November 2026 (Sydney). **Planning only; no navigation or sitemap interface has been deployed by this update.** Public registry data was inspected locally today. Provider/live status remains the 8 November checkpoint; the new South Island route is staged only. See AGILE-PLAN for sequencing and the mandatory deployment sitemap gate (033).
+**Current release — 9 November 2026: published and paused.** South Island/regional zoom is live: source5847eb7 / dpl_GMPLFwPviWsLq73i9JJBjCNvkaja; AU6ba7fee / dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv. Desktop/mobile and live sitemap checks passed within the limits recorded in [RELEASE-2026-11-09-SOUTH-ISLAND.md](RELEASE-2026-11-09-SOUTH-ISLAND.md). A1 is complete; B1 private-brief verification is the next proposed increment, not started. Announce model/effort before resuming; Sol medium recommended. This notice overrides older staged/paused status below.
+
+Design/source snapshot: 9 November 2026 (Sydney). **Planning only; no navigation or sitemap interface has been deployed by this update.** Public registry data was inspected locally today. Provider/live status remains the 8 November checkpoint; the new South Island route was published and verified live 9 November. See AGILE-PLAN for sequencing and the mandatory deployment sitemap gate (033).
 
 ## Read the two dimensions
 
@@ -168,7 +170,7 @@ The lists below are generated from the inspected lib/public-pages.ts registries,
 <summary>Aotearoa New Zealand</summary>
 
 - [New Zealand — In Development](https://aves.bio/new-zealand)
-- [South Island — Birdlife & Trip Planning](https://aves.bio/new-zealand/south-island) **Staged only; not yet verified live.**
+- [South Island — Birdlife & Trip Planning](https://aves.bio/new-zealand/south-island) **Published 9 November 2026.**
 - [North Island — current country-page section](https://aves.bio/new-zealand#region-north-island); dedicated guide **planned**, URL not assigned by this document.
 - [Rakiura — current country-page section](https://aves.bio/new-zealand#region-rakiura); dedicated guide **planned**, URL not assigned by this document.
 - South Island practical guidance/resources: **planned content expansion**; decide inline vs dedicated pages from the gap inventory, not by inventing routes now.
