@@ -1,7 +1,8 @@
 /* The two words determine one shared intrinsic width, including before JS.
  * Perspective stays on the button; only its inner word rotates. */
 .word { display:inline-grid; min-height:44px; padding:0; border:0; border-radius:.15em; background:transparent; color:#047857; font:inherit; font-weight:400; font-style:italic; vertical-align:baseline; white-space:nowrap; cursor:pointer; perspective:600px; }
-.word:focus-visible { outline:2px solid #047857; outline-offset:4px; }
+.word:focus-visible { outline:none; }
+.word:focus-visible .front, .word:focus-visible .back { text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:.13em; }
 .rotor { display:inline-grid; transform-style:preserve-3d; transition:transform 450ms cubic-bezier(.2,.75,.25,1); }
 .front, .back { grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 .back { transform:rotateX(180deg); }
