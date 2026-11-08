@@ -27,7 +27,7 @@ export default function BirdsBrandWord() {
     onKeyDown={event => { if (event.key === "Escape") setFlipped(false) }}>
     <span className={styles.rotor} aria-hidden="true">
       <span className={styles.front}>birds</span>
-      <span className={styles.back}>AVES</span>
+      <span className={styles.back}>aves</span>
     </span>
   </button>
 }

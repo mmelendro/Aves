@@ -1,10 +1,10 @@
 /* The two words determine one shared intrinsic width, including before JS.
  * Perspective stays on the button; only its inner word rotates. */
-.word { display:inline-grid; min-height:44px; padding:0; border:0; border-radius:.15em; background:transparent; color:#047857; font:inherit; vertical-align:baseline; white-space:nowrap; cursor:pointer; perspective:600px; }
+.word { display:inline-grid; min-height:44px; padding:0; border:0; border-radius:.15em; background:transparent; color:#047857; font:inherit; font-weight:400; font-style:italic; vertical-align:baseline; white-space:nowrap; cursor:pointer; perspective:600px; }
 .word:focus-visible { outline:2px solid #047857; outline-offset:4px; }
 .rotor { display:inline-grid; transform-style:preserve-3d; transition:transform 450ms cubic-bezier(.2,.75,.25,1); }
 .front, .back { grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
-.back { transform:rotateX(180deg); font-weight:400; letter-spacing:.025em; }
+.back { transform:rotateX(180deg); }
 .word[data-flipped="true"] .rotor { transform:rotateX(180deg); }
 /* Keep the translation cue available without rotational motion. Both faces
  * still reserve their width; opacity swaps immediately, without layout shift. */
