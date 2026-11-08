@@ -5,7 +5,7 @@
  */
 "use client"
 
-import { useColombiaHomeCopy } from "@/components/colombia-home-language"
+import { ColombiaHomeLanguageToggle, useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -72,7 +72,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </Link>
           </nav>
 
-          <MobileNavigationOverlay links={navigationLinks} currentPage={activePath} />
+          <div className="flex shrink-0 items-center gap-2">{activePath === "/colombia" && <ColombiaHomeLanguageToggle />}<MobileNavigationOverlay links={navigationLinks} currentPage={activePath} /></div>
         </div>
       </header>
       {/* Reserve space for the fixed header so it does not cover the page heading. */}

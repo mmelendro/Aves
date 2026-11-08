@@ -7,3 +7,5 @@ This workspace is `source` on branch `webmaster/readiness-2026-11-05` in https:/
 South Island runtime f941bb9 is published. Account runtime5659bea contains the proposal-opening/owner-page gate and optional email-update preference. Both are published; see [the release checkpoint](docs/RELEASE-2026-11-09-PLACES-ACCOUNTS.md) for validation/limits. Read Git status before touching work from another chat. Private answers/original media are not in this public repository.
 
 After the selected release is tested, published and synced, **pause**. The next visual priority is homepage map-card consistency012c; AI proposal research/story059 is queued, not already implemented. Full backlog remains in docs/ROADMAP-DETAILS.md.
+
+Latest language correction: /colombia is English by default, with an explicit flag switch to Colombian Spanish. See docs/RELEASE-2026-11-09-COLOMBIA-SPANISH.md. Site-wide language switching is queued, not implemented.

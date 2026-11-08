@@ -1,8 +1,38 @@
 "use client"
 
-import { cloneElement, isValidElement, type ReactNode } from "react"
-import { usePathname } from "next/navigation"
+import { cloneElement, createContext, isValidElement, useContext, useState, type ReactNode } from "react"
 import translations from "@/content/colombia-home-es.json"
+
+const LanguageContext = createContext({ spanish: false, setSpanish: (_value: boolean) => {} })
+
+/** English on every fresh visit; Spanish is an explicit, page-local choice. */
+export function ColombiaHomeLanguage({ children }: { children: ReactNode }) {
+  const [spanish, setSpanish] = useState(false)
+  return (
+    <LanguageContext.Provider value={{ spanish, setSpanish }}>
+      <div lang={spanish ? "es-CO" : "en"}>
+        {spanish ? translateColombiaHomeTree(children) : children}
+      </div>
+    </LanguageContext.Provider>
+  )
+}
+
+export function ColombiaHomeLanguageToggle() {
+  const { spanish, setSpanish } = useContext(LanguageContext)
+  const label = spanish ? "Switch to English" : "Cambiar a español colombiano"
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      aria-pressed={spanish}
+      onClick={() => setSpanish(!spanish)}
+      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-200 bg-white text-xl hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+    >
+      <span aria-hidden="true">{spanish ? "🇨🇴" : "🇬🇧"}</span>
+    </button>
+  )
+}
 
 /** Colombia-home copy only: preserve IDs, URLs, form values and all event handlers.
  * Other routes return their original React tree. This small dictionary keeps the
@@ -41,6 +71,6 @@ export function translateColombiaHomeTree(node: ReactNode): ReactNode {
 }
 
 export function useColombiaHomeCopy() {
-  const path = usePathname()
-  return path === "/colombia" ? translateColombiaHomeTree : (node: ReactNode) => node
+  const { spanish } = useContext(LanguageContext)
+  return spanish ? translateColombiaHomeTree : (node: ReactNode) => node
 }
