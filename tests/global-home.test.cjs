@@ -65,6 +65,25 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
+test("world map exposes native country links, readable labels and honest development status", () => {
+  const Map = load("components/world-destination-map.tsx").default
+  const html = renderToStaticMarkup(React.createElement(Map))
+  const links = anchors(html)
+  assert.equal(links.filter(link => destinations.some(d => d.href === link.href)).length, 3)
+  for (const destination of destinations) {
+    const link = links.find(link => link.href === destination.href)
+    assert.ok(link && !link.next && link.text === destination.name, destination.id)
+    const label = destination.worldMap
+    assert.ok(label && label.x >= 0 && label.x + label.width <= 1000 && label.y + 74 <= 572, "labels fit")
+    assert.ok(load("content/world-map.json").countries.some(c => c.code === label.countryCode), "real geometry exists")
+  }
+  assert.match(html, /role="group"/)
+  assert.match(html, /preserveAspectRatio="xMidYMid meet"/)
+  assert.match(html, /Explore New Zealand — in development, planning beta/)
+  assert.match(html, /Other countries provide geographic context/)
+  assert.doesNotMatch(html, /<button|tabindex="-1"|role="img"/i)
+})
+
 test("every Colombia carousel bird links to an actual planning-map region", () => {
   const birds = load("content/birds.ts").birdData
   const mapRegions = new Set(load("lib/region-links.ts").colombiaMapRegions.map(region => region.slug))
@@ -154,10 +173,9 @@ test("fallback destination photographs retain source/licence records for future 
 
 test("homepage cards use complete country collections, opt-in playback and deferred images", () => {
   const { destinationBirds } = load("content/destination-birds.ts")
-  const { globalBirds } = load("content/global-birds.ts")
   const html = renderToStaticMarkup(React.createElement(load("app/page.tsx").default))
-  assert.equal((html.match(/data-bird-carousel="true"/g) || []).length, 4, "mixed hero plus three country cards")
-  assert.equal(globalBirds.length, 9, "the existing mixed-country hero stays unchanged")
+  assert.equal((html.match(/data-bird-carousel="true"/g) || []).length, 3, "only the three country cards; the hero is now a world map")
+  assert.match(html, /AVES destinations on an Equal Earth world map/)
   assert.deepEqual(destinationBirds.colombia.map(b => b.id), load("content/birds.ts").birdData.map(b => b.id))
   assert.deepEqual(destinationBirds["new-zealand"].map(b => b.id), load("content/new-zealand-carousel.ts").newZealandCarouselBirds.map(b => b.id))
   assert.equal(destinationBirds.australia.length, 20)

@@ -1,6 +1,6 @@
 /**
  * The public AVES homepage at /. It introduces the shared brand, shows the
- * multicountry carousel, lists destinations and explains personal trip planning.
+ * world destination map, country carousels and personal trip planning.
  * Edit destination facts in content/destinations; edit this file for section order and copy.
  */
 import type { Metadata } from "next"
@@ -9,7 +9,7 @@ import Link from "next/link"
 import { ArrowRight, Bird, Compass, MessageCircle, NotebookPen } from "lucide-react"
 import { destinations } from "@/content/destinations"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
-import GlobalBirdCarousel from "@/components/global-bird-carousel"
+import WorldDestinationMap from "@/components/world-destination-map"
 import DestinationCardMedia from "@/components/destination-card-media"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -36,7 +36,7 @@ export default function HomePage() {
       <main id="main-content" tabIndex={-1}>
         <section id="destinations" aria-labelledby="destination-heading" className="scroll-mt-20 bg-gradient-to-br from-emerald-50 via-white to-blue-50 pb-14 pt-6 sm:pb-20 sm:pt-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div className="mb-12 grid items-center gap-8 lg:grid-cols-[0.85fr_1.35fr] lg:gap-10">
               <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800">
                 <Bird className="h-4 w-4" aria-hidden="true" /> Birding journeys, personally planned
@@ -52,7 +52,7 @@ export default function HomePage() {
           {destinations.map(destination => <a key={destination.id} href={destination.href} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-2 font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">{destination.name}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>)}
               </nav>
               </div>
-              <GlobalBirdCarousel />
+              <WorldDestinationMap />
             </div>
             <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
               {destinations.map(destination => (
@@ -111,7 +111,7 @@ export default function HomePage() {
               ))}
             </ol>
             <div className="mt-10 flex flex-col items-start justify-between gap-6 rounded-3xl bg-emerald-900 p-7 text-white sm:p-9 md:flex-row md:items-center">
-              <div><h3 className="text-2xl font-medium">Your AVES journeys, together.</h3><p className="mt-2 max-w-xl leading-7 text-emerald-100">Keep your Colombia and Australia trip ideas, quote requests and proposals in one account. For New Zealand, start a conversation from its destination page.</p></div>
+              <div><h3 className="text-2xl font-medium">Your AVES journeys, together.</h3><p className="mt-2 max-w-xl leading-7 text-emerald-100">Keep your trip ideas, quote requests and proposals in one account. Try our New Zealand planning beta to save your preferences and the birds you’d love to see.</p></div>
               <a href="/account" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Open My Trips<ArrowRight className="h-5 w-5" aria-hidden="true" /></a>
             </div>
           </div>

@@ -1,0 +1,21 @@
+/* All parts of a destination share one hover/focus state and one native link.
+   Styling the SVG children also makes keyboard focus clear across browsers. */
+.destination { cursor: pointer; outline: none; }
+.country { fill: #047857; stroke: #ecfdf5; }
+.leader { stroke: #047857; }
+.label { fill: #fff; stroke: #047857; }
+.text { fill: #065f46; }
+.destination:hover .country,
+.destination:focus-visible .country { fill: #064e3b; stroke: #064e3b; }
+.destination:hover .label,
+.destination:focus-visible .label { fill: #065f46; stroke: #065f46; }
+.destination:hover .text,
+.destination:focus-visible .text { fill: #fff; }
+.destination:focus-visible .label { stroke-width: 7; paint-order: stroke; stroke: #f59e0b; }
+@media (forced-colors: active) {
+  .country { fill: LinkText; stroke: Canvas; }
+  .leader { stroke: LinkText; }
+  .label { fill: Canvas; stroke: LinkText; }
+  .text { fill: LinkText; }
+  .destination:focus-visible .label { stroke: Highlight; }
+}
