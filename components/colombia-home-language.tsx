@@ -27,7 +27,7 @@ export function ColombiaHomeLanguageToggle() {
       title={label}
       aria-pressed={spanish}
       onClick={() => setSpanish(!spanish)}
-      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-200 bg-white text-xl hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+      className="inline-flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-0.5 rounded-full border border-emerald-200 bg-white hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
     >
       {/* Inline flags render consistently on Windows, where emoji can show letters. */}
       <svg aria-hidden="true" width="24" height="16" viewBox="0 0 60 40" className="overflow-hidden rounded-sm">
@@ -47,6 +47,7 @@ export function ColombiaHomeLanguageToggle() {
           </>
         )}
       </svg>
+      <span aria-hidden="true" className="text-[9px] font-medium leading-none">{spanish ? "ES" : "EN"}</span>
     </button>
   )
 }
