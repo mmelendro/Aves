@@ -27,7 +27,7 @@ export default function DestinationMapCards() {
             : country.id === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => ({ name: state.name, href: `/australia/regions/${state.regionId}` }))
             : nz.islands.map(island => ({ name: island.label, href: newZealandRegionHref(island.id) }))
           return <article key={country.id} aria-label={`${country.name} regional map`} className="overflow-hidden rounded-3xl border border-emerald-100 bg-white">
-            <div className="flex flex-wrap items-center justify-between gap-2 px-5 pb-2 pt-5"><h3 className="text-xl font-medium text-emerald-950">{country.name}</h3>{country.status && <span className="text-xs text-amber-900">In development</span>}</div>
+            <div className="flex flex-wrap items-center justify-between gap-2 px-5 pb-2 pt-5"><h3 className="text-xl font-medium text-emerald-950">{country.name}</h3></div>
             <div className="h-80 px-4 py-4 lg:h-96"><DestinationRegionalMap country={country.id} /></div>
             <p className="px-5 text-[10px] leading-4 text-gray-500">{country.id === "colombia" ? "AVES planning regions · existing map artwork" : <><a className="underline" href={country.id === "australia" ? australiaMapProvenance.sourceUrl : nz.source.url}>Natural Earth</a> · Public domain · {country.id === "australia" ? "External territories not shown" : "Main islands shown"}</>}</p>
             <details className="mx-5 mt-3 border-t border-emerald-100">

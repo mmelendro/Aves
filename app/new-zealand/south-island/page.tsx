@@ -5,12 +5,13 @@
  */
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Compass, Heart, MapPin } from "lucide-react"
+import { ArrowRight, Compass, Heart } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
-import ArthursPassPlaceCard from "@/components/arthurs-pass-place-card"
+import SouthIslandPlacesExplorer from "@/components/south-island-places-explorer"
+import SouthIslandHabitatProvider from "@/components/south-island-habitat-context"
 import { newZealandContactHref } from "@/content/new-zealand"
-import { southIslandBriefHref, southIslandPlaces, southIslandPlanning, southIslandResources } from "@/content/south-island"
+import { southIslandBriefHref, southIslandPlanning, southIslandResources } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
 
 const path = "/new-zealand/south-island"
@@ -36,7 +37,7 @@ export default function SouthIslandPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <GlobalHeader country="new-zealand" />
-      <main id="main-content" tabIndex={-1}>
+      <SouthIslandHabitatProvider><main id="main-content" tabIndex={-1}>
         <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-emerald-800">
@@ -45,7 +46,7 @@ export default function SouthIslandPage() {
               <span aria-current="page">South Island</span>
             </nav>
             <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><Compass className="h-4 w-4" aria-hidden="true" />AVES New Zealand · Planning beta</p>
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><Compass className="h-4 w-4" aria-hidden="true" />AVES New Zealand</p>
               <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl lg:text-5xl">The <span className="text-emerald-700">South Island</span></h1>
               <p className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Let the birds lead you into the landscape.</p>
               <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-gray-600">From mountain parrots to forest song and coastal wildlife, build a journey around the habitats that interest you. Leave room for good food, local stories and time to enjoy each place.</p>
@@ -66,17 +67,7 @@ export default function SouthIslandPage() {
             <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-700">Start with a habitat</p>
             <h2 id="places-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">A few places to build around.</h2>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">These are starting points, not stops to fit into one trip. Choose a manageable area and give the birds, weather and your own interests room to shape the days.</p>
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              <ArthursPassPlaceCard />
-              {southIslandPlaces.slice(1).map(place => <article key={place.id} className="flex flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/60 to-white p-6 sm:p-7">
-                <p className="mb-3 flex items-center gap-2 text-sm font-medium text-emerald-700"><MapPin className="h-4 w-4" aria-hidden="true" />{place.habitat}</p>
-                <h3 className="text-2xl font-medium">{place.name}</h3>
-                <p className="mt-3 text-sm font-medium leading-6 text-emerald-900">{place.birds}</p>
-                <p className="mt-4 leading-7 text-gray-600">{place.description}</p>
-                <p className="mb-4 mt-4 text-sm leading-6 text-gray-600">{place.balance}</p>
-                <a href={place.source.url} target="_blank" rel="noreferrer" className={`${textLinkStyle} mt-auto`}>{place.source.title}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
-              </article>)}
-            </div>
+            <div className="mt-8"><SouthIslandPlacesExplorer /></div>
           </div>
         </section>
 
@@ -88,12 +79,12 @@ export default function SouthIslandPage() {
             <h2 id="planning-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Plan for the journey, as well as the birds.</h2>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">A few practical decisions help turn favourite birds and places into a holiday that feels like yours.</p>
             <div className="mt-8 grid gap-6 lg:grid-cols-3">
-              {southIslandPlanning.map(item => <article key={item.title} className="flex flex-col rounded-3xl border border-emerald-100 bg-white p-6 sm:p-7">
-                <h3 className="text-xl font-medium text-emerald-950">{item.title}</h3>
+              {southIslandPlanning.map(item => <details key={item.title} className="rounded-3xl border border-emerald-100 bg-white p-6 sm:p-7">
+                <summary className="min-h-11 cursor-pointer rounded text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><h3 className="inline text-xl font-medium">{item.title}</h3></summary>
                 <p className="mt-4 leading-7 text-gray-600">{item.intro}</p>
                 <ul className="mb-5 mt-4 list-disc space-y-3 pl-5 text-sm leading-6 text-gray-600">{item.points.map(point => <li key={point}>{point}</li>)}</ul>
                 <a href={item.link.href} {...(item.link.href.startsWith("https:") ? { target: "_blank", rel: "noreferrer" } : {})} className={`${textLinkStyle} mt-auto`}>{item.link.title}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />{item.link.href.startsWith("https:") && <span className="sr-only"> (opens in a new tab)</span>}</a>
-              </article>)}
+              </details>)}
             </div>
             <p className="mt-5 text-xs leading-5 text-gray-500">Official preparation and road-planning links checked 9 November 2026. Follow their current advice before travel; this page does not provide live conditions.</p>
           </div>
@@ -144,10 +135,10 @@ export default function SouthIslandPage() {
             <h2 id="journey-heading" className="text-3xl font-medium tracking-tight">Make the South Island your own.</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-emerald-50">Bring your ideas, a few favourite birds and the pace you enjoy. We’ll start with the possibilities that fit together.</p>
             <div className="mt-6 flex flex-wrap gap-3"><Link href={southIslandBriefHref} className={`${buttonStyle} bg-white text-emerald-900 hover:bg-emerald-50 focus-visible:outline-white`}>Plan privately in My Trips<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><a href={newZealandContactHref} className={`${buttonStyle} border border-emerald-300 text-white hover:bg-emerald-800 focus-visible:outline-white`}>Discuss your ideas<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
-            <p className="mt-4 text-sm leading-6 text-emerald-100">AVES New Zealand is in development. Routes, guides, dates, prices and reservations require separate confirmation.</p>
+            <p className="mt-4 text-sm leading-6 text-emerald-100">Routes, guides, dates, prices and reservations require separate confirmation.</p>
           </div></div>
         </section>
-      </main>
+      </main></SouthIslandHabitatProvider>
       <GlobalFooter country="new-zealand" />
     </div>
   )

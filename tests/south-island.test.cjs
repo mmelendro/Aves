@@ -96,67 +96,83 @@ test("the dedicated South Island page has canonical metadata, one local explorer
   assert.match(html, /href="\/"/)
   assert.match(html, /href="\/account\?country=new-zealand&amp;region=south-island"/)
   assert.match(html, /South Island/)
-  assert.match(html, /(?:planning beta|in development)/i)
+  assert.doesNotMatch(html, /in development/i)
   assert.doesNotMatch(html, /Peter|Lisa|Royann|Sylvain|mmelendro@gmail\.com/)
-  assert.equal((html.match(/aria-label="Arthur’s Pass place card"/g) || []).length, 1)
+  assert.equal((html.match(/aria-label="South Island places carousel"/g) || []).length, 1)
   for (const name of ["Nelson Lakes", "Fiordland", "Otago &amp; the Catlins"]) assert.ok(html.includes(name), name)
 })
 
-test("place card flips reversibly, keeps the hidden face inert and preserves wrapping photo selection", () => {
-  const state = [false, 0]
+test("places cycle across all four areas, map selections change photos, and habitat changes remain connected", () => {
+  const state = ["all", 0, false]
   let hook = 0
-  const Card = createLoader({ react: { useId: () => "test-place", useState: initial => {
-    const index = hook++
-    return [state[index] ?? initial, next => { state[index] = typeof next === "function" ? next(state[index]) : next }]
-  } } })("components/place-flip-card.tsx").default
-  const photos = load("content/south-island-place-media.ts").arthursPassPhotos
+  const shared = { value: "all", select: value => { shared.value = value } }
+  const Explorer = createLoader({ react: { ...React, useContext: () => shared, useId: () => "places-test", useRef: () => ({ current: null }), useState: initial => {
+    const slot = hook++
+    return [state[slot] ?? initial, value => { state[slot] = typeof value === "function" ? value(state[slot]) : value }]
+  } } })("components/south-island-places-explorer.tsx").default
   function elements(node) {
     if (!React.isValidElement(node)) return []
     return [node, ...React.Children.toArray(node.props.children).flatMap(elements)]
   }
-  const render = () => { hook = 0; return elements(Card({ name: "Arthur’s Pass", photos, map: "Local map", children: "Place guidance" })) }
-  let tree = render()
-  const button = label => tree.find(node => node.type === "button" && node.props["aria-label"] === label)
-  const faces = () => tree.filter(node => node.props.inert !== undefined)
-  assert.deepEqual(faces().map(node => [node.props["aria-hidden"], node.props.inert]), [[false, false], [true, true]])
-  button("Next Arthur’s Pass photograph").props.onClick(); tree = render()
-  assert.equal(state[1], 1)
-  button("Show local map of Arthur’s Pass").props.onClick(); tree = render()
-  assert.deepEqual(faces().map(node => [node.props["aria-hidden"], node.props.inert]), [[true, true], [false, false]])
-  button("Show photos of Arthur’s Pass").props.onClick(); tree = render()
-  assert.equal(state[1], 1, "flipping preserves the chosen photograph")
-  button("Next Arthur’s Pass photograph").props.onClick(); tree = render()
-  assert.equal(state[1], 0, "forward wraps")
-  button("Previous Arthur’s Pass photograph").props.onClick(); tree = render()
-  assert.equal(state[1], 1, "backward wraps")
+  const render = () => { hook = 0; return Explorer() }
+  let pair = render()
+  const button = label => elements(pair.props.media).find(node => node.type === "button" && node.props["aria-label"] === label)
+  assert.equal(pair.props.mediaFirst, true)
+  assert.equal(pair.props.map.props.selectedPlace, "mountains")
+  button("Next landscape").props.onClick(); pair = render()
+  button("Next landscape").props.onClick(); pair = render()
+  assert.equal(pair.props.map.props.selectedPlace, "forest-and-lakes")
+  assert.equal(shared.value, "freshwater")
+  button("Place details & credits").props.onClick(); pair = render()
+  assert.ok(elements(pair.props.media).some(node => node.props["aria-label"] === "About Nelson Lakes"))
+  pair.props.map.props.onSelectPlace("coast"); pair = render()
+  assert.equal(shared.value, "coast")
+  assert.equal(state[2], false, "changing photos closes the Info panel")
+  shared.value = "forest"; pair = render()
+  assert.equal(pair.props.map.props.selectedPlace, "southern-forest", "bird-map habitat also updates the place viewer")
+  for (let i = 0; i < 5; i++) { button("Next landscape").props.onClick(); pair = render() }
+  assert.equal(pair.props.map.props.selectedPlace, "southern-forest", "full collection wraps")
 })
 
-test("pilot media carries local source rights and Mercator map markers use the recorded frame", () => {
-  const photos = load("content/south-island-place-media.ts").arthursPassPhotos
+test("all landscape assets carry credits and public reference pins fit the actual map", () => {
+  const { southIslandPlaceContexts } = load("content/south-island-place-media.ts")
   const credits = load("content/image-credits.json").images
-  assert.equal(photos.length, 2)
-  for (const photo of photos) {
-    assert.ok(existsSync(join(root, "public", photo.src)))
-    const credit = credits.find(item => item.path === photo.src)
-    assert.equal(credit.sourceUrl, photo.sourceUrl)
-    assert.equal(credit.creator, photo.creator)
-    assert.ok(photo.licence && photo.licenceUrl && photo.modifications)
+  const map = load("content/south-island-ecosystem-map.json")
+  const { ecosystemMapPoint } = load("lib/ecosystem-map-camera.ts")
+  assert.equal(southIslandPlaceContexts.length, 4)
+  for (const place of southIslandPlaceContexts) {
+    const point = ecosystemMapPoint(place.longitude, place.latitude, map.bbox)
+    assert.ok(point.x > 0 && point.x < 480 && point.y > 0 && point.y < 640)
+    assert.ok(place.source.startsWith("https://"))
+    for (const photo of place.photos) {
+      assert.ok(existsSync(join(root, "public", photo.src)))
+      const credit = credits.find(item => item.path === photo.src)
+      assert.equal(credit?.sourceUrl, photo.sourceUrl)
+      assert.equal(credit?.creator, photo.creator)
+      assert.ok(photo.licence && photo.licenceUrl && photo.modifications)
+    }
   }
-  const map = load("content/arthurs-pass-map.json")
-  assert.equal(map.projection, "EPSG:3857")
-  assert.equal(map.markers.length, 2, "public village/pass only, no wildlife locations")
-  const [left, bottom, right, top] = map.boundsMetres
-  const resolution = (right - left) / 480
-  assert.ok(Math.abs(resolution - (top - bottom) / 360) < 1e-8)
-  assert.ok(Math.abs(resolution * Math.cos(map.referenceLatitude * Math.PI / 180) - 20) < 1e-8)
-  for (const point of map.markers) {
-    const x = (6378137 * point.lon * Math.PI / 180 - left) / resolution
-    const y = (top - 6378137 * Math.log(Math.tan(Math.PI / 4 + point.lat * Math.PI / 360))) / resolution
-    assert.ok(Math.abs(point.xy[0] - x) < 1e-7 && Math.abs(point.xy[1] - y) < 1e-7)
-    assert.ok(x > 0 && x < 480 && y > 0 && y < 360)
-  }
-  assert.ok(map.paths.some(path => path.kind === "river") && map.paths.some(path => path.kind === "road"))
-  assert.equal(map.source.licence, "ODbL 1.0")
+})
+
+test("camera zoom/pan clamps to the original frame and scale tracks zoom, resizing and latitude", () => {
+  const { initialMapCamera: initial, zoomMapCamera: zoom, panMapCamera: pan, ecosystemMapScale: scale } = load("lib/ecosystem-map-camera.ts")
+  const doubled = zoom(initial, 2)
+  assert.deepEqual(doubled, { zoom: 2, x: 120, y: 160 })
+  assert.deepEqual(pan(doubled, 10000, -10000), { zoom: 2, x: 240, y: 0 })
+  assert.equal(zoom(doubled, 100).zoom, 4)
+  assert.deepEqual(zoom(doubled, .01), initial)
+  assert.equal(scale(initial, [-240,-320,240,320], 0), null)
+  const equator = scale(initial, [-240,-320,240,320], 1)
+  assert.ok(Math.abs(equator.metresPerPixel - 1) < 1e-12, "one projected metre equals one ground metre at the equator")
+  assert.ok(Math.abs(scale(doubled, [-240,-320,240,320], 1).metresPerPixel - .5) < 1e-12)
+  assert.ok(Math.abs(scale(initial, [-240,-320,240,320], 2).metresPerPixel - .5) < 1e-12)
+  const map = load("content/south-island-ecosystem-map.json")
+  const north = scale(pan(doubled, 0, -160), map.bbox, .6)
+  const south = scale(pan(doubled, 0, 160), map.bbox, .6)
+  assert.ok(north.latitude > south.latitude)
+  assert.ok(north.metresPerPixel > south.metresPerPixel)
+  assert.ok(north.widthPixels <= 110 && south.widthPixels <= 110)
+  assert.deepEqual(initial, {x:0,y:0,zoom:1}, "camera helpers never mutate the reset value")
 })
 
 test("the shared New Zealand explorer renders the South Island collection with sound and existing bird-selection controls", () => {

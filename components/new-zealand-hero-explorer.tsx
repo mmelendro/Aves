@@ -5,12 +5,14 @@
  */
 "use client"
 
-import { useEffect, useId, useState } from "react"
+import { useContext, useEffect, useId, useState } from "react"
+import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { ArrowRight } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import NewZealandMap from "@/components/new-zealand-map"
 import SouthIslandEcosystemMap from "@/components/south-island-ecosystem-map"
+import SouthIslandHabitatSelect from "./south-island-habitat-select"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { newZealandRegionBirds } from "@/content/new-zealand-carousel"
 import { newZealandBirdIslands, type NewZealandIslandId } from "@/content/new-zealand-bird-islands"
@@ -24,7 +26,9 @@ import { filterSouthIslandBirds, southIslandEcosystems, type SouthIslandEcosyste
 export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZealandIslandId } = {}) {
   const [chosenRegion, setChosenRegion] = useState<NewZealandIslandId | undefined>(regionId)
   const ecosystemId = useId()
-  const [ecosystem, setEcosystem] = useState<SouthIslandEcosystemFilter>("all")
+  const sharedHabitat = useContext(SouthIslandHabitatContext)
+  const [localEcosystem, setLocalEcosystem] = useState<SouthIslandEcosystemFilter>("all")
+  const ecosystem = regionId === "south-island" && sharedHabitat ? sharedHabitat.value : localEcosystem
   // Pilot only on the dedicated South Island page; the country overview keeps
   // its existing island navigation and full collection unchanged.
   const birds = regionId === "south-island" ? filterSouthIslandBirds(newZealandRegionBirds(chosenRegion), ecosystem) : newZealandRegionBirds(chosenRegion)
@@ -44,7 +48,8 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
   // Both the select menu and clickable map use one filter state/transition.
   // Existing carousel remount cleanup stops sound and closes old Info.
   function selectEcosystem(next: SouthIslandEcosystemFilter) {
-    setEcosystem(next)
+    if (regionId === "south-island" && sharedHabitat) sharedHabitat.select(next)
+    else setLocalEcosystem(next)
     setCurrentBird(filterSouthIslandBirds(newZealandRegionBirds("south-island"), next)[0])
   }
   function selectBirds(ids: string[]) {
@@ -66,14 +71,14 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
         <p className="mt-2 text-xs leading-5 text-gray-500">Birds are grouped by broad habitat associations. The map shows generalised land cover, not exact species ranges or promised sightings. Species details retain local range, access guidance and sources; photograph and recording locations may differ.</p>
       </section>}<ResizableDiscoveryPair mediaId="birdlife" mapLabel={regionId === "south-island" ? "Explore South Island habitats" : "Explore the islands"} media={<>
         {/* A new collection stops old playback/Info; wishes remain in this parent. */}
-        <HomepageBirdCarousel key={`${chosenRegion || "all-islands"}-${ecosystem}`} birds={birds} label={collectionLabel} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
+        <HomepageBirdCarousel key={`${chosenRegion || "all-islands"}-${ecosystem}`} birds={birds} label={collectionLabel} imageTools={regionId === "south-island" ? <SouthIslandHabitatSelect value={ecosystem} onChange={selectEcosystem} label="Habitat for bird carousel" /> : undefined} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{birds.length} featured species{chosenRegion ? ` associated with ${chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"}` : ", with a South Island focus"}. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
         {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         {chosenRegion && !regionId && <a href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>}
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
-          <span className="text-xs leading-5 text-gray-600">In development · Begin with a personal conversation.</span>
+          <span className="text-xs leading-5 text-gray-600">Begin with a personal conversation.</span>
         </div>
       </>} />
       {overview && !regionId && <section className="mt-5 rounded-2xl border border-emerald-100 bg-white p-5 sm:p-7" aria-label={`${overview.name} planning overview`}><h2 className="text-xl font-medium text-emerald-950">{overview.name}</h2><p className="mt-3 text-sm leading-7 text-gray-600">{overview.description}</p><p className="mt-2 text-sm leading-7 text-gray-600">{overview.balance}</p><a href={briefHref} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-800 underline underline-offset-4">Start a private {overview.name} brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></section>}

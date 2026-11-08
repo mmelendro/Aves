@@ -108,7 +108,7 @@ test("homepage, country, regional and article viewers all use the same overlay c
   }
 })
 
-test("world map offers all three selections with keyboard semantics and honest development status", () => {
+test("world map offers all three selections with keyboard semantics and no destination development badge", () => {
   const Map = load("components/world-destination-map.tsx").default
   const Explorer = load("components/homepage-destination-explorer.tsx").default
   const html = renderToStaticMarkup(React.createElement(Explorer, { map: React.createElement(Map) }))
@@ -121,7 +121,7 @@ test("world map offers all three selections with keyboard semantics and honest d
   assert.match(html, /role="group"/)
   assert.match(html, /preserveAspectRatio="xMidYMid meet"/)
   assert.equal((html.match(/role="button" tabindex="0"/g) || []).length, 3)
-  assert.match(html, /New Zealand is in development/)
+  assert.doesNotMatch(html, /in development/i)
   assert.match(html, /Other countries provide geographic context/)
   assert.doesNotMatch(html, /role="img"/i)
 })
@@ -265,7 +265,7 @@ test("one homepage viewer uses each complete country collection, opt-in playback
       assert.match(bird.regionHref, australian ? /^\/australia\/regions\// : /^\/(regions\/|new-zealand)/)
       if (australian && bird.audioFile) assert.equal(bird.audioCreditHref, `/australia/credits#audio-${bird.id}`)
     }
-    if (destination.status) assert.match(card, /In development · Planning beta/)
+    assert.doesNotMatch(card, /in development/i)
   }
 })
 

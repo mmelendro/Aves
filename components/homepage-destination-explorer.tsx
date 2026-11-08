@@ -76,7 +76,6 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-3">
               <h2 className="text-2xl font-medium tracking-tight text-emerald-950">{region ? <>{region.name}<span className="ml-2 text-sm font-normal text-emerald-800"> · {destination.name}</span></> : destination.name}</h2>
-              {destination.status && <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900">{destination.status} · Planning beta</span>}
             </div>
             <p className="mt-2 text-sm leading-6 text-gray-600">{region?.description || destination.description}</p>
           </div>
