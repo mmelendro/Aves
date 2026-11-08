@@ -3,8 +3,8 @@
 /*
  * Shared Australian bird photograph/recording viewer for home, regional and information pages.
  * The default catalogue comes from content/birds.ts; callers can supply a smaller verified list.
- * The frame is a narrow 9:16 portrait crop. Adjust a bird's imagePosition in its content record
- * to keep the subject visible. Audio starts only after a visitor activates the sound control.
+ * The frame is a narrow 9:16 portrait crop. A bird's imagePosition is its focal point,
+ * kept centred as the frame resizes. Audio starts only after activating the sound control.
  */
 
 import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
@@ -15,6 +15,7 @@ import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, 
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { sitePath } from "@/lib/site-path"
+import { coverFocalPosition } from "@/lib/cover-focal-position"
 import { birdData as allBirds, type BirdProfile } from "@/content/birds"
 
 // Props are the options a parent page can pass; onBirdChange lets the homepage map follow this viewer.
@@ -73,15 +74,33 @@ export default function HomepageBirdCarousel({
     const image = imageRef.current
     const imagePath = currentBird?.image
     if (!image || imagePath === undefined) return
+    // Observe the actual photo box, so both divider drags and window changes keep
+    // the authored bird focal point centred without resizing the surrounding card.
+    const centreFocalPoint = () => {
+      const frame = image.getBoundingClientRect()
+      image.style.objectPosition = coverFocalPosition({
+        frameWidth: frame.width, frameHeight: frame.height,
+        imageWidth: image.naturalWidth, imageHeight: image.naturalHeight,
+        position: currentBird?.imagePosition || "center",
+      })
+    }
     // Cached images can finish before hydration delivers Next Image's callback.
     const markLoaded = () => {
       if (!image.complete || image.naturalWidth === 0) return
+      centreFocalPoint()
       setImageState(previous => previous.image === imagePath && previous.status === "loaded" ? previous : { image: imagePath, status: "loaded" })
     }
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(centreFocalPoint)
+    observer?.observe(image)
+    if (!observer) window.addEventListener("resize", centreFocalPoint)
     image.addEventListener("load", markLoaded)
     markLoaded()
-    return () => image.removeEventListener("load", markLoaded)
-  }, [currentBird?.id, currentBird?.image])
+    return () => {
+      observer?.disconnect()
+      window.removeEventListener("resize", centreFocalPoint)
+      image.removeEventListener("load", markLoaded)
+    }
+  }, [currentBird?.id, currentBird?.image, currentBird?.imagePosition])
 
   useEffect(() => {
     // Respect reduced-motion settings. This governs automatic slides, never automatic sound.
