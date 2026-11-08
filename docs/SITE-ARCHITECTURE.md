@@ -173,7 +173,7 @@ The lists below are generated from the inspected lib/public-pages.ts registries,
 - [South Island — Birdlife & Trip Planning](https://aves.bio/new-zealand/south-island) **Published 9 November 2026.**
 - [North Island — current country-page section](https://aves.bio/new-zealand#region-north-island); dedicated guide **planned**, URL not assigned by this document.
 - [Rakiura — current country-page section](https://aves.bio/new-zealand#region-rakiura); dedicated guide **planned**, URL not assigned by this document.
-- [South Island practical planning — in-page section, published9 November](https://aves.bio/new-zealand/south-island#practical-planning). Curated resources remain a planned content expansion; no separate resource route assigned.
+- [South Island practical planning — in-page section, published9 November](https://aves.bio/new-zealand/south-island#practical-planning). [Curated listening, viewing and reading](https://aves.bio/new-zealand/south-island#resources) also published9 November; both are in-page sections, not separate canonical routes.
 
 </details>
 
