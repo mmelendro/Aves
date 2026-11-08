@@ -1,6 +1,6 @@
 # AVES — current execution prompt
 
-Updated 8 November 2026 (Sydney). Planning only until the owner selects one release.
+Updated 8 November 2026 (Sydney). Selected release: AVES-012d-1, the New Zealand Info-overlay pilot. Complete its test/publish/sync cycle, then pause before any rollout.
 
 Continue improving aves.bio in https://github.com/mmelendro/Aves. Keep the emerald style, thin AVES lettering, country bird/landscape marks and discreet media controls.
 

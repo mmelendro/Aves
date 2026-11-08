@@ -16,7 +16,7 @@ function createLoader(overrides = {}) {
     "@/components/navigation-header": { NavigationHeader: function NavigationHeader() { return null } },
     "@/components/footer": { Footer: function Footer() { return null } },
     "@/components/homepage-bird-carousel": function HomepageBirdCarousel(props) {
-      return React.createElement("div", { "data-bird-carousel": true, "data-count": props.birds?.length, "data-variant": props.variant, "data-autoplay": props.autoPlay, "data-priority": props.priority, "aria-label": props.label })
+      return React.createElement("div", { "data-bird-carousel": true, "data-count": props.birds?.length, "data-variant": props.variant, "data-autoplay": props.autoPlay, "data-priority": props.priority, "data-info-presentation": props.infoPresentation ?? "below", "aria-label": props.label })
     },
     "@/components/contact-form-section": { ContactFormSection: function ContactFormSection() { return null } },
     ...overrides,
@@ -64,6 +64,41 @@ function anchors(html) {
 
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
+
+test("species details retain notes, picker and licensed source links in both presentations", () => {
+  const Panel = load("components/species-details-panel.tsx").default
+  const birds = load("content/new-zealand-carousel.ts").newZealandCarouselBirds
+  for (const presentation of ["below", "overlay"]) {
+    for (const [index, bird] of birds.entries()) {
+      const html = renderToStaticMarkup(React.createElement(Panel, { id: "test-info", bird, birds, selectedIndex: index, showBirdPicker: true, presentation, onSelectBird() {}, onClose() {} }))
+      const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
+      for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), `${presentation}: ${bird.id}`)
+      if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
+      const links = anchors(html)
+      assert.ok(links.some(link => link.href === bird.sources[0].url))
+      if (bird.audioFile) assert.ok(links.some(link => link.href === (bird.audioCreditHref || `/credits#audio-${bird.id}`)))
+      assert.equal((html.match(/<option /g) || []).length, birds.length)
+      if (presentation === "overlay") {
+        assert.match(html, /data-species-overlay="true"/)
+        assert.match(html, /aria-label="Close species details"/)
+        assert.match(html, /aria-label="Scrollable species information"/)
+        assert.match(html, /aria-labelledby="test-info-title"/)
+      } else assert.doesNotMatch(html, /data-species-overlay|Close species details/)
+    }
+  }
+})
+
+test("only the NZ destination hero opts into the Info-overlay pilot", () => {
+  const hero = renderToStaticMarkup(React.createElement(load("components/new-zealand-hero-explorer.tsx").default))
+  assert.match(hero, /data-info-presentation="overlay"/)
+  assert.equal((hero.match(/data-bird-carousel="true"/g) || []).length, 1)
+  const home = renderToStaticMarkup(React.createElement(load("app/page.tsx").default))
+  const colombia = renderToStaticMarkup(React.createElement(load("app/colombia/page.tsx").default))
+  for (const html of [home, colombia]) {
+    assert.match(html, /data-info-presentation="below"/)
+    assert.doesNotMatch(html, /data-info-presentation="overlay"/)
+  }
+})
 
 test("world map offers all three selections with keyboard semantics and honest development status", () => {
   const Map = load("components/world-destination-map.tsx").default

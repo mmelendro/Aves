@@ -34,7 +34,7 @@ export default function NewZealandHeroExplorer() {
 
   return (
     <><ResizableDiscoveryPair mediaId="birdlife" mapLabel="Explore the islands" media={<>
-        <HomepageBirdCarousel birds={newZealandCarouselBirds} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
+        <HomepageBirdCarousel birds={newZealandCarouselBirds} infoPresentation="overlay" fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
         <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" highlightedIslands={newZealandBirdIslands[currentBird.id] ?? []} />
