@@ -9,7 +9,7 @@ Evidence is private in the workspace: `audit/evidence/nov8-nz-info-overlay-live-
 ## How it works
 
 - `HomepageBirdCarousel` owns opening/closing, bird index, sound and slideshow state. `SpeciesDetailsPanel` renders one shared set of existing facts and rights information in either presentation.
-- The overlay is positioned inside the photo frame. Its header/close control stays visible while the information body scrolls. A white 88% backing with blur, or a stronger 92% fallback, preserves readability over different photographs.
+- The overlay is positioned inside the photo frame. Its header/close control stays visible while the information body scrolls. AVES-012d-2 lightens the white backing from 88% to 72% and reduces blur from 12px to 2px so more plumage shows through. Text stays fully opaque; muted notes/credits and links use darker ink inside the sheet only. Browsers without backdrop filtering retain the 92% fallback. Increased-contrast preference uses 96% white without blur; forced colours retain system colours.
 - The frame height stays unchanged. Sound/slideshow controls, wishlist heart and image count remain above the sheet; previous/next controls move to the exposed photo edge below it. Long source/credit text can wrap at narrow panel widths.
 - Info pauses the slideshow. Requesting Play from the open overlay returns to the photo and starts the requested slideshow. Sound remains independently controlled and never autoplays.
 - Close and Escape restore focus to Info. This is a nonmodal region with a keyboard-scrollable body, not a focus trap or document-scroll lock.
