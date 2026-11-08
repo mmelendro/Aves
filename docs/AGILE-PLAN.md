@@ -78,6 +78,8 @@ Added at the owner's request on 8 November 2026 (Sydney): consolidate the existi
 
 ## Unscoped / unconfirmed vision
 
+Confirmed additions, still planning only: AVES-030 defines the human host/coordination model before AI automation; AVES-031 extends the existing YouTube library, beginning with an upload/master inventory and one shared-viewer clip before selecting hosting; AVES-032 is a separate international-brand decision. Split video inventory, player pilot, hosting/cost evaluation and expansion into distinct outcomes. Native hosting or a hybrid may be selected after comparison; no paid provider or public rebrand is selected now. Do not estimate quota percentages or let these additions delay South Island readiness/Sydney.
+
 - AVES-025: a small NZ checklist-filter pilot can begin with reliable existing origin/seasonal metadata; scope activity-data enrichment separately. AVES-026: the single green “birds” → “AVES” heading flip is an independent cosmetic increment. Both are queued; neither was implemented in the completed Info release.
 - AVES-023 defines the itinerary principle for the South Island pilot; use a short human-reviewed options brief before AI/supplier automation. AVES-024 Sydney launch product is next after NZ readiness and needs a bounded product/operations estimate. Neither authorises advertising, outreach, booking or spend.
 - AVES-021 satellite/city layers: first assess a small city-label or imagery/projection pilot; estimate separately after provider/licence review. AVES-022 pronunciation: start with a small permissioned Māori-name audio set, then estimate expansion. Both are queued, not part of the current Info release or prerequisites for NZ trip readiness.
