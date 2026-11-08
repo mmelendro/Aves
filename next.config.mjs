@@ -19,6 +19,7 @@ const nextConfig = {
   async rewrites() {
     // Legacy callback/API URLs stay valid; every destination is local to this app.
     return [
+      { source: "/australia/robots.txt", destination: "/robots.txt" },
       { source: "/australia/api/contact", destination: "/api/inquiries" },
       { source: "/australia/api/:path*", destination: "/api/:path*" },
       { source: "/australia/auth/:path*", destination: "/auth/:path*" },
