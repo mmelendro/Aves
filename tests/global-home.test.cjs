@@ -65,23 +65,22 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
-test("world map exposes native country links, readable labels and honest development status", () => {
+test("world map offers all three selections with keyboard semantics and honest development status", () => {
   const Map = load("components/world-destination-map.tsx").default
-  const html = renderToStaticMarkup(React.createElement(Map))
-  const links = anchors(html)
-  assert.equal(links.filter(link => destinations.some(d => d.href === link.href)).length, 3)
+  const Explorer = load("components/homepage-destination-explorer.tsx").default
+  const html = renderToStaticMarkup(React.createElement(Explorer, { map: React.createElement(Map) }))
   for (const destination of destinations) {
-    const link = links.find(link => link.href === destination.href)
-    assert.ok(link && !link.next && link.text === destination.name, destination.id)
+    assert.ok(html.includes(`aria-label="Show ${destination.name} birds"`))
     const label = destination.worldMap
-    assert.ok(label && label.x >= 0 && label.x + label.width <= 1000 && label.y + 74 <= 572, "labels fit")
+    assert.ok(label && label.x >= 0 && label.x + label.width <= 1000 && label.y + 68 <= 572, "labels fit")
     assert.ok(load("content/world-map.json").countries.some(c => c.code === label.countryCode), "real geometry exists")
   }
   assert.match(html, /role="group"/)
   assert.match(html, /preserveAspectRatio="xMidYMid meet"/)
-  assert.match(html, /Explore New Zealand — in development, planning beta/)
+  assert.equal((html.match(/role="button" tabindex="0"/g) || []).length, 3)
+  assert.match(html, /New Zealand is in development/)
   assert.match(html, /Other countries provide geographic context/)
-  assert.doesNotMatch(html, /<button|tabindex="-1"|role="img"/i)
+  assert.doesNotMatch(html, /role="img"/i)
 })
 
 test("every Colombia carousel bird links to an actual planning-map region", () => {
@@ -92,6 +91,21 @@ test("every Colombia carousel bird links to an actual planning-map region", () =
     assert.ok(mapRegions.has(bird.regionSlug), `${bird.id}: no map region`)
     assert.ok(bird.distribution && bird.sources.length, `${bird.id}: missing range/source notes`)
   }
+})
+
+test("country cards are regional maps with canonical region links and no extra carousels", () => {
+  const Cards = load("components/destination-map-cards.tsx").default
+  const html = renderToStaticMarkup(React.createElement(Cards))
+  const links = anchors(html)
+  assert.equal((html.match(/<article /g) || []).length, 3)
+  assert.doesNotMatch(html, /data-bird-carousel|regions\/null|regions\/undefined/)
+  for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(links.some(link => link.href === `/regions/${region.slug}`))
+  const states = load("content/global-australian-map.ts").australiaMapStates
+  assert.equal(states.length, 9)
+  for (const state of states) assert.ok(links.some(link => link.href === `/australia/regions/${state.regionId}`))
+  for (const island of load("content/new-zealand-map.json").islands) assert.ok(links.some(link => link.href === `/new-zealand#region-${island.id}`))
+  for (const country of destinations) assert.ok(links.some(link => link.href === country.href && link.text === `Explore ${country.name}` && !link.next))
+  assert.ok(links.filter(link => link.href?.startsWith("/")).every(link => !link.next), "cross-app country and region routes reload normally")
 })
 
 test("every New Zealand carousel bird has explicit valid island links, including broad labels", () => {
@@ -122,9 +136,8 @@ test("global homepage and footer offer the three public destinations with full-p
   const links = anchors(html)
   for (const destination of destinations) {
     const countryLinks = links.filter(link => link.href === destination.href)
-    assert.ok(countryLinks.length >= 2, "country is reachable from its card and footer")
+    assert.ok(countryLinks.length >= 1, "each country is reachable even before changing selection")
     assert.ok(countryLinks.every(link => !link.next), "country application links must reload the document")
-    assert.ok(countryLinks.some(link => link.text === `Explore ${destination.name}`))
     assert.ok(countryLinks.some(link => link.text === destination.name))
   }
   const accountLinks = links.filter(link => link.href === "/account")
@@ -171,20 +184,22 @@ test("fallback destination photographs retain source/licence records for future 
   }
 })
 
-test("homepage cards use complete country collections, opt-in playback and deferred images", () => {
+test("one homepage viewer uses each complete country collection, opt-in playback and deferred images", () => {
   const { destinationBirds } = load("content/destination-birds.ts")
   const html = renderToStaticMarkup(React.createElement(load("app/page.tsx").default))
-  assert.equal((html.match(/data-bird-carousel="true"/g) || []).length, 3, "only the three country cards; the hero is now a world map")
+  assert.equal((html.match(/data-bird-carousel="true"/g) || []).length, 1, "only the selected country's viewer is mounted")
   assert.match(html, /AVES destinations on an Equal Earth world map/)
   assert.deepEqual(destinationBirds.colombia.map(b => b.id), load("content/birds.ts").birdData.map(b => b.id))
   assert.deepEqual(destinationBirds["new-zealand"].map(b => b.id), load("content/new-zealand-carousel.ts").newZealandCarouselBirds.map(b => b.id))
   assert.equal(destinationBirds.australia.length, 20)
   for (const destination of destinations) {
     const birds = destinationBirds[destination.id]
-    const card = html.match(new RegExp(`<article aria-label="${destination.name}"[\\s\\S]*?<\\/article>`))?.[0]
-    assert.ok(card, destination.name)
+    const Explorer = load("components/homepage-destination-explorer.tsx").default
+    const card = renderToStaticMarkup(React.createElement(Explorer, { initialCountryId: destination.id, map: null }))
+    assert.equal((card.match(/data-bird-carousel="true"/g) || []).length, 1)
+    assert.ok(anchors(card).some(link => link.href === destination.href && link.text === `Explore ${destination.name}` && !link.next))
     for (const attribute of [`data-count="${birds.length}"`, 'data-variant="destination-card"', 'data-autoplay="false"', 'data-priority="false"', `aria-label="${destination.name} bird photographs"`]) assert.ok(card.includes(attribute), attribute)
-    assert.doesNotMatch(card, /<a\b[^>]*>[\s\S]*data-bird-carousel/, "controls must not be inside a country link")
+    for (const match of card.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)) assert.doesNotMatch(match[1], /data-bird-carousel/, "controls must not be inside a country link")
     for (const bird of birds) {
       const australian = destination.id === "australia"
       // Australia is an independent deployment, not a sibling required by this repo.
@@ -203,8 +218,8 @@ test("homepage cards use complete country collections, opt-in playback and defer
       assert.match(bird.regionHref, australian ? /^\/australia\/regions\// : /^\/(regions\/|new-zealand)/)
       if (australian && bird.audioFile) assert.equal(bird.audioCreditHref, `/australia/credits#audio-${bird.id}`)
     }
+    if (destination.status) assert.match(card, /In development · Planning beta/)
   }
-  assert.match(html, /In development/)
 })
 
 test("card viewer renders the selected bird's credit and uniquely named carousel", () => {
@@ -224,16 +239,18 @@ test("card viewer renders the selected bird's credit and uniquely named carousel
   }
 })
 
-test("adding a ready country to the catalogue supplies its card and footer without page-specific conditions", () => {
-  const fixture = { ...destinations[0], id: "fixture-country", name: "Fixture Country", href: "/fixture-country", tagline: "Test fixture" }
+test("a future country is selectable with an attributed fallback and a native footer link", () => {
+  const fixture = { ...destinations[0], id: "fixture-country", name: "Fixture Country", href: "/fixture-country", tagline: "Test fixture", worldMap: undefined }
   const extended = createLoader({ "@/content/destinations": { destinations: [...destinations, fixture] } })
   const html = renderToStaticMarkup(React.createElement(extended("app/page.tsx").default))
-  const links = anchors(html).filter(link => link.href === fixture.href)
+  const Explorer = extended("components/homepage-destination-explorer.tsx").default
+  const selected = renderToStaticMarkup(React.createElement(Explorer, { initialCountryId: fixture.id, map: null }))
+  const links = anchors(html + selected).filter(link => link.href === fixture.href)
   assert.ok(links.length >= 2, "new country appears in the main choice and global footer")
   assert.ok(links.every(link => !link.next))
   assert.ok(links.some(link => link.text === "Explore Fixture Country"))
   assert.ok(links.some(link => link.text === "Fixture Country"))
-  assert.ok(anchors(html).some(link => link.href === "/credits" && link.text === `Photo: ${fixture.photographer}`), "new country keeps an attributed static fallback until its collection is supplied")
+  assert.ok(anchors(selected).some(link => link.href === "/credits" && link.text === `Photo: ${fixture.photographer}`), "new country keeps an attributed static fallback until its collection is supplied")
 })
 
 test("Colombia retains its country homepage, bird carousel, trip form and existing regional URLs", () => {

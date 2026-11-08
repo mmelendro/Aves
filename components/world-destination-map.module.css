@@ -1,10 +1,14 @@
-/* All parts of a destination share one hover/focus state and one native link.
-   Styling the SVG children also makes keyboard focus clear across browsers. */
+/* A small visible label, a larger hit area and equivalent native text buttons.
+   Container queries keep map type legible when the same map becomes narrow. */
+.map { display: flex; flex-direction: column; height: 100%; container-type: inline-size; }
 .destination { cursor: pointer; outline: none; }
-.country { fill: #047857; stroke: #ecfdf5; }
+.country { fill: #349b7e; stroke: #ecfdf5; }
 .leader { stroke: #047857; }
-.label { fill: #fff; stroke: #047857; }
-.text { fill: #065f46; }
+.label { fill: #fff; stroke: #047857; height: 46px; }
+.text { fill: #065f46; font-size: 20px; }
+.destination[aria-pressed="true"] .country { fill: #065f46; stroke: #065f46; }
+.destination[aria-pressed="true"] .label { fill: #065f46; }
+.destination[aria-pressed="true"] .text { fill: #fff; }
 .destination:hover .country,
 .destination:focus-visible .country { fill: #064e3b; stroke: #064e3b; }
 .destination:hover .label,
@@ -12,6 +16,10 @@
 .destination:hover .text,
 .destination:focus-visible .text { fill: #fff; }
 .destination:focus-visible .label { stroke-width: 7; paint-order: stroke; stroke: #f59e0b; }
+@container (max-width: 460px) {
+  .text { font-size: 29px; transform: translateY(13px); }
+  .label { height: 68px; }
+}
 @media (forced-colors: active) {
   .country { fill: LinkText; stroke: Canvas; }
   .leader { stroke: LinkText; }

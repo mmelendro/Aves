@@ -1,6 +1,7 @@
 /**
- * A server wrapper selects a country's birds; the shared client viewer owns its
- * independent controls. A future destination without a collection keeps its photo.
+ * A small wrapper selects a country's full collection for the shared viewer.
+ * It also works inside the homepage's client-side country selector. A future
+ * destination without a collection keeps its attributed photograph.
  */
 import Image from "next/image"
 import Link from "next/link"

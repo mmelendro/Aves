@@ -1,6 +1,6 @@
 # Homepage world map — AVES-003a
 
-The homepage replaces its mixed-country hero carousel with a server-rendered Equal Earth world map. The three country-card carousels remain unchanged. This release highlights Colombia, Australia and New Zealand only; it does not claim to display biodiversity hotspots or megadiverse-country coverage. Those layers remain AVES-003b.
+The homepage centers its title above an Equal Earth world map and one country-switching carousel. This supersedes the earlier three-card-carousel layout and the unpromoted map version `27cc9bd`. This release highlights Colombia, Australia and New Zealand only; it does not claim to display biodiversity hotspots or megadiverse-country coverage. Those layers remain AVES-003b. Country destination pages retain their existing carousels and dividers.
 
 ## Source and projection
 
@@ -16,7 +16,15 @@ The homepage replaces its mixed-country hero carousel with a server-rendered Equ
 
 `content/destinations.ts` supplies the current destination names, routes, status and optional map country code/label rectangle. The component does not maintain another country availability list. Adding public metadata does not register a country in the shared private account backend.
 
-`components/world-destination-map.tsx` is a server component with native SVG links. No runtime map library, extra service, access key, visitor geolocation or client-side map state is required. Equivalent large text links beside the map support keyboard/touch navigation even at narrow widths. Hover and keyboard focus highlight both the country and its label. New Zealand is clearly in development with a planning beta; confirmed bookings are not implied.
+`components/world-destination-map.tsx` keeps neutral world geometry on the server. Three small `world-map-country.tsx` client controls share page-only selection with `homepage-destination-explorer.tsx` through `destination-selection-context.tsx`. Selecting a map country or an equivalent 44px text button changes the one mounted viewer, summary and native Explore-country link. Enter/Space work on the SVG controls; selected/hover/focus states remain distinct. A country-keyed viewer reuses existing cleanup to stop old sound/timers and reset details when countries change. No account or preference persistence is involved.
+
+Labels use smaller 20-unit SVG type on roomy maps, with a legible narrow-map adjustment and larger invisible hit areas. The world is uniformly scaled, never stretched. On narrow screens the independent media card precedes the map. On wide screens the map matches the closed portrait viewer and stays bounded when species details expand. Footer country links and a no-JavaScript link fallback still open all three destinations directly. New Zealand is clearly in development with a planning beta; confirmed bookings are not implied. No runtime map SDK, new service, access key, visitor geolocation or paid feature is needed.
+
+## Regional map cards
+
+Below the main explorer, `components/destination-map-cards.tsx` renders three server-only map cards, not three additional carousels. Colombia reuses the original artwork and `content/colombia-map-markers.ts`, also imported by its existing hero. Australia reuses a public snapshot `content/global-australian-map.ts` from the independent Australian app's `content/australia-map.ts`; the embedded Natural Earth version, source hash, licence and projection are retained. Refresh that snapshot only when the reviewed Australian map changes. New Zealand uses the existing 50m coastline JSON and the same island-label anchors as its country map. Geometry is never stretched to fill a card.
+
+All eleven Colombian planning regions, nine Australian states/territories and three NZ planning islands have native links plus readable region lists in `details` disclosures. NZ links use existing `/new-zealand#region-…` sections; dedicated island pages are not implied. A later physical-card flip to a regional carousel is queued as AVES-015. It is not implemented or claimed in this publication.
 
 ## Regenerate
 
@@ -27,4 +35,4 @@ node scripts/generate-world-map.mjs 'PATH-TO-DOWNLOADED-COUNTRIES.geojson'
 node --test tests/world-map.test.cjs tests/global-home.test.cjs
 ```
 
-The generator rejects a different input hash. Review source/licence/geography before deliberately updating that pin. Commit the generated JSON and scripts, not a new runtime dependency or a private export. Unit checks cover equal-area behaviour, symmetry, full bounds, both main NZ islands, accessible native links and retention of all three country viewers. Browser checks remain necessary for layout and real navigation.
+The generator rejects a different input hash. Review source/licence/geography before deliberately updating that pin. Commit the generated JSON and scripts, not a new runtime dependency or a private export. Unit checks cover equal-area behaviour, symmetry, full bounds, both main NZ islands, selection semantics and one viewer with each complete country collection/route. Browser checks remain necessary for actual switching, audio cleanup, layout and all three destination links.

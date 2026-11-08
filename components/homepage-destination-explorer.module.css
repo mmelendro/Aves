@@ -1,0 +1,11 @@
+/* Container units follow the actual available width, including a narrow window
+   on a large monitor. The map matches the closed 4:5 viewer plus its credit line;
+   opening species details does not stretch the map into a tall blank panel. */
+.layout { container-type: inline-size; }
+.grid { display: grid; gap: 1.5rem; align-items: start; }
+.mapPanel { min-width: 0; order: 2; }
+.mediaPanel { min-width: 0; overflow: hidden; border: 1px solid #d1fae5; border-radius: 1.5rem; background: white; }
+@media (min-width: 768px) {
+  .grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  .mapPanel { order: 0; height: calc((100cqw - 1.5rem) / 2.4 * 1.25 + 2.5rem); position: sticky; top: 6rem; }
+}

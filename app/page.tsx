@@ -1,16 +1,16 @@
 /**
  * The public AVES homepage at /. It introduces the shared brand, shows the
- * world destination map, country carousels and personal trip planning.
+ * world map, one country-switching bird carousel and personal trip planning.
  * Edit destination facts in content/destinations; edit this file for section order and copy.
  */
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Bird, Compass, MessageCircle, NotebookPen } from "lucide-react"
-import { destinations } from "@/content/destinations"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import WorldDestinationMap from "@/components/world-destination-map"
-import DestinationCardMedia from "@/components/destination-card-media"
+import HomepageDestinationExplorer from "@/components/homepage-destination-explorer"
+import DestinationMapCards from "@/components/destination-map-cards"
 import { canonicalUrl } from "@/lib/site-path"
 
 const description = "Follow the birds with AVES. Explore Colombia and Australia, discover our developing New Zealand destination, and find a journey shaped around what you love."
@@ -36,42 +36,19 @@ export default function HomePage() {
       <main id="main-content" tabIndex={-1}>
         <section id="destinations" aria-labelledby="destination-heading" className="scroll-mt-20 bg-gradient-to-br from-emerald-50 via-white to-blue-50 pb-14 pt-6 sm:pb-20 sm:pt-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 grid items-center gap-8 lg:grid-cols-[0.85fr_1.35fr] lg:gap-10">
-              <div>
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800">
+            <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-10">
+              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800">
                 <Bird className="h-4 w-4" aria-hidden="true" /> Birding journeys, personally planned
               </p>
               <h1 id="destination-heading" className="text-balance text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
                 Where will the <span className="text-emerald-700">birds</span> take you?
               </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-600">
-                Personally planned journeys connecting birds, landscapes and local culture. Choose a destination; we’ll help shape the route, stays and pace around you.
+              <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
+                Personally planned journeys connecting birds, landscapes and local culture. Choose a country, meet its birds and imagine your journey.
               </p>
-              <nav aria-label="Choose a country" className="mt-6 flex flex-wrap gap-3">
-                {/* The shared destination catalogue controls each country card and development status. */}
-          {destinations.map(destination => <a key={destination.id} href={destination.href} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-2 font-semibold text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">{destination.name}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>)}
-              </nav>
-              </div>
-              <WorldDestinationMap />
             </div>
-            <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-              {destinations.map(destination => (
-                <article key={destination.id} aria-label={destination.name} className="flex flex-col overflow-hidden rounded-2xl border border-emerald-100/70 bg-white">
-                  <DestinationCardMedia destination={destination} />
-                  <div className="flex flex-1 flex-col p-6 sm:p-8">
-                    <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">{destination.name}</h2>
-                    {destination.status && <p className="mt-3 inline-flex self-start rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-900">{destination.status}</p>}
-                    <p className="mt-2 font-medium text-emerald-700">{destination.tagline}</p>
-                    <p className="mb-6 mt-4 flex-1 leading-7 text-gray-600">{destination.description}</p>
-                    {/* Full-page links cross the independently deployed country applications safely. */}
-                    <a href={destination.href} className="mt-auto flex min-h-12 items-center justify-between gap-4 rounded-full bg-emerald-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
-                      Explore {destination.name}<ArrowRight className="h-5 w-5" aria-hidden="true" />
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <p className="mt-8 text-center text-sm leading-6 text-gray-600">Plan a trip to Colombia or Australia, or discover what’s taking shape in New Zealand.</p>
+            <HomepageDestinationExplorer map={<WorldDestinationMap />} />
+            <DestinationMapCards />
           </div>
         </section>
         <section aria-labelledby="personal-journey-heading" className="bg-stone-50/70 py-14 sm:py-20">
