@@ -1,0 +1,5 @@
+/* The existing SVG frame clips a uniformly transformed geographic layer.
+   Its source paths, outlines and projection remain unchanged. */
+.layer { transform-origin: 0 0; transition: transform 600ms cubic-bezier(.2,.75,.25,1); }
+.viewport { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .layer { transition: none; } }

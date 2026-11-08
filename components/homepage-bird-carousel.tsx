@@ -27,6 +27,7 @@ interface HomepageBirdCarouselProps {
   showBirdPicker?: boolean
   onBirdChange?: (bird: BirdProfile) => void
   fillPanel?: boolean
+  label?: string
 }
 
 const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
@@ -48,6 +49,7 @@ export default function HomepageBirdCarousel({
   showBirdPicker = false,
   onBirdChange,
   fillPanel = false,
+  label = "Bird photographs",
 }: HomepageBirdCarouselProps) {
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
@@ -224,7 +226,7 @@ export default function HomepageBirdCarousel({
   return (
     <div
       className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, !fillPanel && "max-w-[20rem]")}
-      data-info-presentation="overlay" role="region" aria-roledescription="carousel" aria-label="Bird photographs" tabIndex={0}
+      data-info-presentation="overlay" role="region" aria-roledescription="carousel" aria-label={label} tabIndex={0}
       onKeyDown={handleKeyDown}
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
     >

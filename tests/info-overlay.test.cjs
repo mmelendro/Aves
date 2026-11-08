@@ -102,11 +102,16 @@ test("regional viewers retain local occurrence, supported regional routes and or
   const Panel = createLoader()("components/species-details-panel.tsx").default
   for (const [regionId, selections] of Object.entries(regionalBirdSelections)) {
     renderToStaticMarkup(React.createElement(Regional, { regionId, compact: true }))
-    assert.equal(passedBirds.length, selections.length)
+    assert.equal(passedBirds.length, selections.length + (regionId === "queensland" ? 1 : 0))
     for (const [index, bird] of passedBirds.entries()) {
       const original = birdData.find(item => item.id === bird.id)
       const selection = selections.find(item => item.birdId === bird.id)
-      assert.equal(bird.localOccurrence, selection.whereFound)
+      if (selection) assert.equal(bird.localOccurrence, selection.whereFound)
+      else {
+        assert.equal(bird.id, "au-regent-bowerbird", "only the existing Queensland profile supplements the local list")
+        assert.equal(regionId, "queensland")
+        assert.equal(bird.localOccurrence, original.localOccurrence)
+      }
       assert.equal(bird.regionSlug, regionId)
       assert.equal(bird.image, original.image)
       assert.equal(bird.audioFile, original.audioFile)

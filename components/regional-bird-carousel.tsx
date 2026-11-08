@@ -4,16 +4,13 @@
  * wider distribution and credits. Add verified local selections in content/regional-birds.ts.
  */
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
-import { birdData } from "@/content/birds"
+import { australianRegionBirds } from "@/lib/australia-region-birds"
 import { regionalBirdSelections } from "@/content/regional-birds"
 
 export function RegionalBirdCarousel({ regionId, compact = false }: { regionId: string; compact?: boolean }) {
   const selections = regionalBirdSelections[regionId] || []
-  // Join by stable bird ID. Missing catalogue entries are skipped rather than rendering broken media.
-  const birds = selections.flatMap(selection => {
-    const bird = birdData.find(item => item.id === selection.birdId)
-    return bird ? [{ ...bird, regionSlug: regionId, localOccurrence: selection.whereFound }] : []
-  })
+  // The same verified join powers the country-map zoom and regional guides.
+  const birds = regionId ? australianRegionBirds(regionId) : []
   if (!birds.length) return null
   // Several selections may cite the same record: deduplicate links by URL without dropping citations.
   const sources = [...new Map(selections.flatMap(item => item.sources || []).map(source => [source.url, source])).values()]
