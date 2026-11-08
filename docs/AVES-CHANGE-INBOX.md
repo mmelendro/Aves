@@ -206,3 +206,5 @@ For new observations, use this short entry format:
 **9 November follow-ups:** 050 flying 3D species-logo birds (retain static/reduced-motion fallback); 051 optional photo zoom/pinch when asset resolution permits. Queued separately from the selected place-card pilot; see ROADMAP-DETAILS.md.
 
 **Release9November:** ONE015/037 Arthur’s Pass flip card is published (source3ef94db); prior unimplemented status is superseded. **052** conservation/project/lodge maps per subregion captured as queued. Read the current prompt and place-card release checkpoint. Paused.
+
+**9 November — AVES-053, queued:** optional ecosystem/region background sound, starting on South Island. OFF by default with discreet accessible toggle, mute and volume. Follow the selected habitat after opt-in; fade beneath bird calls, videos and podcasts and restore the visitor's level only when foreground audio stops. Respect mute/off, visibility, navigation, privacy, rights and missing recordings; coordinate with047 rather than duplicate playback. Detailed scope and acceptance are in ROADMAP-DETAILS.md. Documentation only; current map/place work remains unfinished and unpublished.
