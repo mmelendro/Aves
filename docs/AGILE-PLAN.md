@@ -59,8 +59,13 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 | 24 | Low priority / deferred | First authorised species-video batch | Deferred | 3 | Medium |
 | 25 | Low priority / deferred | Friendlier expired-Google-session landing | Deferred | 2 | Lower |
 | 26 | Later / catalogue clarity | Hide extinct species from visitor-facing lists; NZ first | AVES-017 | 2 | Lower; verify counts, scope and saved-data compatibility |
+| 27 | Architecture / planned | Consolidate into one app/project, with AVES naming/branding and SEO, through an inventory, unified preview and reviewed cutover | AVES-020 | Not yet estimated | Scope separate checkpoints; production and later retirement need explicit approval |
 
 Several entries are optional or multi-release streams, not one-session commitments. Re-estimate after the first completed pilot; do not turn every estimate into a guarantee.
+
+## Planned consolidation checkpoint — AVES-020
+
+Added at the owner's request on 8 November 2026 (Sydney): consolidate the existing independent applications into one Next.js application and one production Vercel project, preserving the existing shared database and repository. Include the owner's requested naming/branding/SEO review and permission to rename projects or create a new target where useful. Start with a route/file/dependency and search-compatibility inventory, then size code integration, unified preview verification, approved cutover/rollback and later project retirement separately. Effort is not yet estimated; do not assign a credit/time guarantee or silently reprioritise the owner's current work. Recording this task does not authorise implementation or production changes. See ROADMAP-DETAILS.md for acceptance criteria.
 
 ## Unscoped / unconfirmed vision
 
