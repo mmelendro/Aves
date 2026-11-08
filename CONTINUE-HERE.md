@@ -1,5 +1,7 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
+**Current owner instruction — 9 November 2026 (Sydney): planning only; publishing remains on hold.** Read [AGILE-PLAN.md](docs/AGILE-PLAN.md) for the revised incremental order/model guidance and [SITE-ARCHITECTURE.md](docs/SITE-ARCHITECTURE.md) for the expandable hierarchy preview. Announce a model/effort recommendation before every increment (or say keep the current model). AVES-033 now requires sitemap review/update and stage/live verification for every deployment; the public expandable tree is queued, not implemented. Existing staged candidates and last verified live versions are unchanged by this docs session; provider state was not rechecked today. This notice overrides older resume/order instructions below.
+
 ## Owner pause — 8 November 2026
 
 Planning-only additions AVES-030/031/032 now explicitly cover the AVES host role, the existing YouTube video library/future 8K footage with native/embed/hybrid hosting evaluation, and the English/Spanish branding discussion. See the current prompt and detailed roadmap. No website, channel, provider, hosting or branding change was made. Stay paused.
