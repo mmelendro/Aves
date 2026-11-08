@@ -1,5 +1,9 @@
 # AVES global homepage and Colombia — handoff, updated 8 November 2026 (Sydney)
 
+## Owner pause — 8 November 2026
+
+**Paused at the owner's request, 8 November 2026.** Read [PAUSED-CHECKPOINT-2026-11-08.md](docs/PAUSED-CHECKPOINT-2026-11-08.md) first. South Island/regional-zoom app candidates5847eb7/6ba7fee are pushed and staged READY but NOT promoted; aves.bio still runs95c9f75/721370e. Finish source hosted/live verification after explicit resume. New pricing, credits-carousel and Equal Earth recentering requests are recorded there; pricing has a separate untested draft. This notice takes precedence over older status text.
+
 ## Current production — world-to-country zoom and focal framing, 8 November 2026 (Sydney)
 
 **AVES-003a-2 and AVES-006c published, verified and paused.** Selecting a country on the homepage Equal Earth map or country buttons zooms into its regional map. Regional selection changes the one connected viewer to a verified local collection; Back to world restores that country's full collection and focus. All 11 Colombian, nine Australian and three NZ regions are selectable, and all 73 featured country birds have supported map associations. The same regional renderer serves the static country cards and interactive view. No new island page or ecological layer is implied; South Island still links to its existing NZ section.

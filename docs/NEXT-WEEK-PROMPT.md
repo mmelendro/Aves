@@ -1,5 +1,7 @@
 # AVES — current execution prompt
 
+**Paused at the owner's request, 8 November 2026.** Read [PAUSED-CHECKPOINT-2026-11-08.md](PAUSED-CHECKPOINT-2026-11-08.md) first. South Island/regional-zoom app candidates5847eb7/6ba7fee are pushed and staged READY but NOT promoted; aves.bio still runs95c9f75/721370e. Finish source hosted/live verification after explicit resume. New pricing, credits-carousel and Equal Earth recentering requests are recorded there; pricing has a separate untested draft. This notice takes precedence over older status text.
+
 Updated 8 November 2026 (Sydney). World-to-country regional zoom and shared photo focal framing are published and verified (AVES-003a-2 / AVES-006c). Pause after checkpoint sync before another selected release.
 
 Continue improving aves.bio in https://github.com/mmelendro/Aves. Keep the emerald style, thin AVES lettering, country bird/landscape marks and discreet media controls.
