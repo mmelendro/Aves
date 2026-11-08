@@ -6,6 +6,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useCallback, useEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
@@ -22,6 +23,8 @@ import { regions } from "@/content/regions"
 
 
 export default function ColombiaHeroExplorer({ media, initialRegion, initialBird, resizable = false }: { media?: ReactNode; initialRegion?: string; initialBird?: BirdProfile; resizable?: boolean } = {}) {
+  const localizeHome = useColombiaHomeCopy()
+
   const [currentBird, setCurrentBird] = useState(initialBird ?? birdData[0])
   // A deliberate region remains focused until Back. In the country overview,
   // each new bird can still highlight one of its sourced planning regions.
@@ -87,8 +90,8 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
         </div>
         {localOverview && !media && <div className="mt-4 rounded-xl border border-emerald-100 bg-white p-4 text-left"><h3 className="font-medium text-emerald-950">{selectedRegionDetails.name}</h3><p className="mt-2 text-sm leading-6 text-gray-600">{localOverview.description}</p><Link href={`/regions/${chosenRegion}`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-800 underline underline-offset-4">Open the region guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>}
       </>
-  return <BirdDiscoveryContext.Provider value={onBirdChange}>
+  return localizeHome(<BirdDiscoveryContext.Provider value={onBirdChange}>
     {resizable ? <ResizableDiscoveryPair media={mediaContent} map={mapContent} mapLabel="Explore Colombia" /> :
       <div className={styles.layout}><div className={styles.mediaColumn}>{mediaContent}</div><div className={styles.mapColumn}>{mapContent}</div></div>}
-  </BirdDiscoveryContext.Provider>
+  </BirdDiscoveryContext.Provider>)
 }

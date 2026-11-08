@@ -4,6 +4,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,6 +12,8 @@ import { X, Cookie, Settings } from "lucide-react"
 import { useCookieConsent } from "./cookie-consent-manager"
 
 export function CookieBanner() {
+  const localizeHome = useColombiaHomeCopy()
+
   const { hasConsented, acceptAll, rejectAll, setShowPreferenceCenter } = useCookieConsent()
   const [isVisible, setIsVisible] = useState(false)
 
@@ -51,7 +54,7 @@ export function CookieBanner() {
     return null
   }
 
-  return (
+  return localizeHome((
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/20 backdrop-blur-sm">
       <Card className="max-w-4xl mx-auto shadow-2xl border-0">
         <CardContent className="p-6">
@@ -107,5 +110,5 @@ export function CookieBanner() {
         </CardContent>
       </Card>
     </div>
-  )
+  ))
 }

@@ -1,8 +1,11 @@
+"use client"
+
 /**
  * One in-photo details panel serves destination, regional and editorial viewers.
  * Keeping these fields together preserves local notes, sources,
  * picker behavior and media rights while the presentation changes.
  */
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import Link from "next/link"
 import { ExternalLink, MapPin, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -22,6 +25,8 @@ type Props = {
 const linkClass = "text-emerald-800 underline underline-offset-2 hover:text-emerald-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
 
 export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, showBirdPicker, onSelectBird, onClose }: Props) {
+  const localizeHome = useColombiaHomeCopy()
+
   const speciesSource = bird.sources[0]
   const content = <>
     {showBirdPicker && birds.length > 1 && <div>
@@ -55,7 +60,7 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
     </details>
   </>
 
-  return <section id={id} data-species-overlay aria-labelledby={`${id}-title`} className={styles.overlay}>
+  return localizeHome(<section id={id} data-species-overlay aria-labelledby={`${id}-title`} className={styles.overlay}>
     <div className={styles.header}>
       <div className="min-w-0">
         <h3 id={`${id}-title`} className="text-base font-semibold leading-tight text-emerald-950 sm:text-lg">{bird.commonName}</h3>
@@ -66,5 +71,5 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
     {/* This nonmodal scroll area supports keyboard scrolling and ordinary Tab
         navigation. It never captures focus or locks the document scroll. */}
     <div role="group" aria-label="Scrollable species information" tabIndex={0} className={`${styles.body} space-y-4 text-sm`}>{content}</div>
-  </section>
+  </section>)
 }

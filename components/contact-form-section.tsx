@@ -6,6 +6,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -32,6 +33,8 @@ export function ContactFormSection({
   variant = "homepage",
   className = "",
 }: ContactFormSectionProps) {
+  const localizeHome = useColombiaHomeCopy()
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -157,7 +160,7 @@ export function ContactFormSection({
     },
   ]
 
-  return (
+  return localizeHome((
     <section className={`bg-gradient-to-br from-emerald-50 to-blue-50 py-16 lg:py-24 ${className}`}>
       <div className="container mx-auto px-4">
         {showTitle && (
@@ -561,5 +564,5 @@ export function ContactFormSection({
         )}
       </div>
     </section>
-  )
+  ))
 }

@@ -7,6 +7,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import SpeciesDetailsPanel from "@/components/species-details-panel"
@@ -60,6 +61,8 @@ export default function HomepageBirdCarousel({
   selection,
   imageTools,
 }: HomepageBirdCarouselProps) {
+  const localizeHome = useColombiaHomeCopy()
+
   const isDestinationCard = variant === "destination-card"
   // State drives what is drawn. Refs hold browser objects or attempt IDs without re-rendering.
   // Slideshow playback and sound playback are deliberately separate controls.
@@ -235,7 +238,7 @@ export default function HomepageBirdCarousel({
     onSelectBird={index => goToSlide(index, true)} onClose={closeInfo} /> : null
 
 
-  return (
+  return localizeHome((
     <div
       className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, !isDestinationCard && !fillPanel && "max-w-[20rem]")}
       data-info-presentation="overlay" role="region" aria-roledescription="carousel" aria-label={label} tabIndex={0}
@@ -325,5 +328,5 @@ export default function HomepageBirdCarousel({
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
       </Card>
     </div>
-  )
+  ))
 }

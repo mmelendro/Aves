@@ -1,7 +1,10 @@
+"use client"
+
 /**
  * Colombia footer. The four link lists below are the editable navigation groups.
  * My Trips points to the shared account service; informational links stay in this app.
  */
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { sharedAccountHref } from "@/lib/shared-account"
@@ -47,7 +50,9 @@ const legalLinks = [
 const linkClassName = "inline-flex min-h-11 items-center rounded-lg text-sm text-gray-200 transition-colors hover:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
 
 export function Footer({ transparent = false }: FooterProps) {
-  return (
+  const localizeHome = useColombiaHomeCopy()
+
+  return localizeHome((
     <footer className={`relative z-10 border-t border-white/10 py-12 text-white sm:py-16 ${transparent ? "bg-gray-900/90 backdrop-blur-lg" : "bg-gray-900/95 backdrop-blur-sm"}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -101,5 +106,5 @@ export function Footer({ transparent = false }: FooterProps) {
         </div>
       </div>
     </footer>
-  )
+  ))
 }

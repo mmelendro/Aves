@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react"
 import { GripVertical, RotateCcw } from "lucide-react"
 import { clampDiscoverySplit, discoverySplitBounds, dragDiscoverySplit, DISCOVERY_PAIR_MIN_WIDTH } from "@/lib/discovery-split"
@@ -14,6 +15,8 @@ type Props = { map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: str
 type Drag = { pointerId: number; startX: number; share: number; width: number }
 
 export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, mediaFirst = false, mediaLabel = "bird photographs" }: Props) {
+  const localizeHome = useColombiaHomeCopy()
+
   const id = useId()
   const containerRef = useRef<HTMLDivElement>(null)
   const separatorRef = useRef<HTMLDivElement>(null)
@@ -60,7 +63,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     if (separatorRef.current?.hasPointerCapture(pointerId)) separatorRef.current.releasePointerCapture(pointerId)
   }
 
-  return <div ref={containerRef} className={styles.container}>
+  return localizeHome(<div ref={containerRef} className={styles.container}>
     <div className={styles.controls}>
       <p id={`${id}-help`}>Drag the divider or use its arrow keys to resize.</p>
       <button type="button" onClick={() => setShare(50)} className={styles.reset}>
@@ -107,5 +110,5 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
       </div>
       <div id={`${id}-map`} className={styles.mapPanel}>{map}</div>
     </div>
-  </div>
+  </div>)
 }
