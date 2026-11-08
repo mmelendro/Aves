@@ -26,8 +26,6 @@ interface HomepageBirdCarouselProps {
   showBirdPicker?: boolean
   onBirdChange?: (bird: BirdProfile) => void
   fillPanel?: boolean
-  // Opt in the homepage; other page types retain their existing details layout.
-  infoPresentation?: "below" | "overlay"
 }
 
 const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
@@ -49,7 +47,6 @@ export default function HomepageBirdCarousel({
   showBirdPicker = false,
   onBirdChange,
   fillPanel = false,
-  infoPresentation = "below",
 }: HomepageBirdCarouselProps) {
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
@@ -61,7 +58,6 @@ export default function HomepageBirdCarousel({
   const [audioError, setAudioError] = useState(false)
   const [audioLoading, setAudioLoading] = useState(false)
   const infoButtonRef = useRef<HTMLButtonElement | null>(null)
-  const overlayDetails = infoPresentation === "overlay"
   // Refs retain browser elements and in-progress gesture/play information without causing a render.
   const imageRef = useRef<HTMLImageElement | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -164,18 +160,17 @@ export default function HomepageBirdCarousel({
 
   function closeInfo() {
     setShowInfo(false)
-    if (overlayDetails) infoButtonRef.current?.focus({ preventScroll: true })
+    infoButtonRef.current?.focus({ preventScroll: true })
   }
 
   // Do not steal arrow keys from controls such as the species select; only the viewer/nav owns these shortcuts.
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Escape") {
-      if (overlayDetails && showInfo) {
+      if (showInfo) {
         event.preventDefault()
         event.stopPropagation()
         closeInfo()
       } else {
-        setShowInfo(false)
         event.currentTarget.focus()
       }
       return
@@ -204,13 +199,13 @@ export default function HomepageBirdCarousel({
   const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : isAudioPlaying ? "Pause bird call" : "Listen to bird call"
 
   const infoPanel = showInfo ? <SpeciesDetailsPanel id={`${carouselId}-info`} bird={currentBird} birds={birds}
-    selectedIndex={selectedIndex} showBirdPicker={showBirdPicker} presentation={infoPresentation}
+    selectedIndex={selectedIndex} showBirdPicker={showBirdPicker}
     onSelectBird={index => goToSlide(index, true)} onClose={closeInfo} /> : null
 
   return (
     <div
       className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, !fillPanel && "max-w-[20rem]")}
-      data-info-presentation={infoPresentation} role="region" aria-roledescription="carousel" aria-label="Bird photographs" tabIndex={0}
+      data-info-presentation="overlay" role="region" aria-roledescription="carousel" aria-label="Bird photographs" tabIndex={0}
       onKeyDown={handleKeyDown}
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
     >
@@ -228,7 +223,7 @@ export default function HomepageBirdCarousel({
         <div
           data-carousel-image
           className="relative aspect-[9/16] w-full overflow-hidden bg-stone-100"
-          style={{ touchAction: "pan-y pinch-zoom", ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) }}
+          style={{ containerType: "size", touchAction: "pan-y pinch-zoom", ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) }}
           onTouchStart={event => { touchStartRef.current = !(event.target as HTMLElement).closest("button, a, input, select, textarea, [data-species-overlay]") && event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null }}
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
@@ -247,7 +242,7 @@ export default function HomepageBirdCarousel({
           <div className="absolute right-2 top-2 z-20 flex gap-1 sm:right-3 sm:top-3 sm:gap-1.5">
             <IconControl label={isPlaying ? "Pause slideshow" : "Play slideshow"} data-slideshow-control onClick={() => {
               // Explicit playback returns to the photo, rather than displaying a paused Info sheet.
-              if (overlayDetails && showInfo) { setShowInfo(false); setIsPlaying(true) }
+              if (showInfo) { setShowInfo(false); setIsPlaying(true) }
               else setIsPlaying(playing => !playing)
             }} aria-pressed={isPlaying} disabled={birds.length < 2 || imageStatus === "loading"}>
               {isPlaying ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4" aria-hidden="true" />}
@@ -258,22 +253,20 @@ export default function HomepageBirdCarousel({
               buttonClassName={currentBird.audioFile ? cn("border-emerald-200/80 bg-emerald-950/80 text-emerald-50 shadow-[0_0_0_3px_rgba(167,243,208,0.14)] hover:bg-emerald-900/90", isAudioPlaying && "border-emerald-100 bg-emerald-700/95 text-white shadow-[0_0_0_3px_rgba(167,243,208,0.24)] hover:bg-emerald-700") : undefined}>
               {audioLoading ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : isAudioPlaying ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
             </IconControl>
-            <IconControl buttonRef={infoButtonRef} label={showInfo ? "Hide species details & credits" : "Species details & credits"} aria-expanded={showInfo} aria-controls={`${carouselId}-info`} onClick={() => { if (showInfo) closeInfo(); else { if (overlayDetails) setIsPlaying(false); setShowInfo(true) } }}><Info className="h-4 w-4" aria-hidden="true" /></IconControl>
+            <IconControl buttonRef={infoButtonRef} label={showInfo ? "Hide species details & credits" : "Species details & credits"} aria-expanded={showInfo} aria-controls={`${carouselId}-info`} onClick={() => { if (showInfo) closeInfo(); else { setIsPlaying(false); setShowInfo(true) } }}><Info className="h-4 w-4" aria-hidden="true" /></IconControl>
           </div>
-          {overlayDetails && infoPanel}
-          {birds.length > 1 && <div data-image-navigation className={cn("pointer-events-none absolute inset-x-2 z-10 flex justify-between sm:inset-x-3", overlayDetails && showInfo ? "bottom-3" : "top-1/2 -translate-y-1/2")}>
+          {infoPanel}
+          {birds.length > 1 && <div data-image-navigation className={cn("pointer-events-none absolute inset-x-2 z-10 flex justify-between sm:inset-x-3", showInfo ? "bottom-3" : "top-1/2 -translate-y-1/2")}>
             <IconControl label="Previous image" tooltipSide="right" className="pointer-events-auto" onClick={() => goToSlide(selectedIndex - 1)}><ChevronLeft className="h-5 w-5" aria-hidden="true" /></IconControl>
             <IconControl label="Next image" tooltipSide="left" className="pointer-events-auto" onClick={() => goToSlide(selectedIndex + 1)}><ChevronRight className="h-5 w-5" aria-hidden="true" /></IconControl>
           </div>}
-          {!(overlayDetails && showInfo) && <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent px-4 pb-3 pt-12 text-white sm:px-5 sm:pb-4">
+          {!showInfo && <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent px-4 pb-3 pt-12 text-white sm:px-5 sm:pb-4">
             <h3 className="text-base font-semibold leading-tight sm:text-lg">{currentBird.commonName}</h3>
             <p className="mt-1 text-xs italic text-white/90 sm:text-sm">{currentBird.scientificName}</p>
             <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-white/95"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span>{currentBird.primaryRegion}</span></p>
           </div>}
         </div>
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}
-        {/* Existing pages keep details below the photo; the homepage opts into the glass sheet. */}
-        {!overlayDetails && infoPanel}
         {/* Announce manual changes, but avoid repeated screen-reader announcements during the slideshow. */}
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
       </Card>

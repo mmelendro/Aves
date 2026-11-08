@@ -48,15 +48,15 @@ function links(html) {
   }))
 }
 
-test("all Australian profiles retain notes, picker and attribution in both Info presentations", () => {
+test("all Australian profiles retain notes, picker and attribution in the shared Info overlay", () => {
   const load = createLoader()
   const Panel = load("components/species-details-panel.tsx").default
   const { birdData: birds } = load("content/birds.ts")
   assert.equal(birds.length, 20)
-  for (const presentation of ["below", "overlay"]) for (const [index, bird] of birds.entries()) {
-    const html = renderToStaticMarkup(React.createElement(Panel, { id: "species-info", bird, birds, selectedIndex: index, showBirdPicker: true, presentation, onSelectBird() {}, onClose() {} }))
-    const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
-    for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), `${presentation}: ${bird.id}: ${value}`)
+  for (const [index, bird] of birds.entries()) {
+    const html = renderToStaticMarkup(React.createElement(Panel, { id: "species-info", bird, birds, selectedIndex: index, showBirdPicker: true, onSelectBird() {}, onClose() {} }))
+    const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '\"')
+    for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), `${bird.id}: ${value}`)
     if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
     const anchors = links(html)
     assert.ok(anchors.some(link => link.href === bird.sources[0].url), `${bird.id}: species source`)
@@ -67,26 +67,53 @@ test("all Australian profiles retain notes, picker and attribution in both Info 
     if (bird.photoCredit.reserveLink) assert.ok(anchors.some(link => link.href === bird.photoCredit.reserveLink && link.next))
     if (bird.photoCredit.instagramPost) assert.ok(anchors.some(link => link.href === bird.photoCredit.instagramPost))
     assert.equal((html.match(/<option /g) || []).length, birds.length)
-    if (presentation === "overlay") {
-      assert.match(html, /data-species-overlay="true"/)
-      assert.match(html, /aria-label="Close species details"/)
-      assert.match(html, /aria-label="Scrollable species information"/)
-      assert.match(html, /aria-labelledby="species-info-title"/)
-    } else assert.doesNotMatch(html, /data-species-overlay|Close species details/)
+    assert.match(html, /data-species-overlay="true"/)
+    assert.match(html, /aria-label="Close species details"/)
+    assert.match(html, /aria-label="Scrollable species information"/)
+    assert.match(html, /aria-labelledby="species-info-title"/)
   }
 })
 
-test("only the resizable Australian homepage explorer opts into the glass Info panel", () => {
-  const load = createLoader({
-    "@/components/homepage-bird-carousel": props => React.createElement("div", { "data-info-presentation": props.infoPresentation ?? "below" }),
-  })
+test("default and focused Australian viewers use the same in-photo Info contract", () => {
+  const load = createLoader()
+  const Carousel = load("components/homepage-bird-carousel.tsx").default
   const Explorer = load("components/australia-home-explorer.tsx").AustraliaHomeExplorer
-  const home = renderToStaticMarkup(React.createElement(Explorer, { resizable: true }))
-  const focused = renderToStaticMarkup(React.createElement(Explorer))
-  assert.match(home, /data-info-presentation="overlay"/)
-  assert.match(focused, /data-info-presentation="below"/)
-  assert.doesNotMatch(focused, /data-info-presentation="overlay"/)
-  const Carousel = createLoader()("components/homepage-bird-carousel.tsx").default
-  const defaultViewer = renderToStaticMarkup(React.createElement(Carousel, { autoPlay: false }))
-  assert.match(defaultViewer, /data-info-presentation="below"/)
+  const Regional = load("components/regional-bird-carousel.tsx").RegionalBirdCarousel
+  for (const element of [
+    React.createElement(Carousel, { autoPlay: false }),
+    React.createElement(Explorer, { resizable: true }),
+    React.createElement(Explorer),
+    React.createElement(Regional, { regionId: "new-south-wales", compact: true }),
+  ]) {
+    const html = renderToStaticMarkup(element)
+    assert.match(html, /data-info-presentation="overlay"/)
+    assert.doesNotMatch(html, /data-info-presentation="below"/)
+  }
+})
+
+test("regional viewers retain local occurrence, supported regional routes and original media credits", () => {
+  let passedBirds
+  const load = createLoader({
+    "@/components/homepage-bird-carousel": props => { passedBirds = props.birds; return null },
+  })
+  const Regional = load("components/regional-bird-carousel.tsx").RegionalBirdCarousel
+  const { regionalBirdSelections } = load("content/regional-birds.ts")
+  const { birdData } = load("content/birds.ts")
+  const Panel = createLoader()("components/species-details-panel.tsx").default
+  for (const [regionId, selections] of Object.entries(regionalBirdSelections)) {
+    renderToStaticMarkup(React.createElement(Regional, { regionId, compact: true }))
+    assert.equal(passedBirds.length, selections.length)
+    for (const [index, bird] of passedBirds.entries()) {
+      const original = birdData.find(item => item.id === bird.id)
+      const selection = selections.find(item => item.birdId === bird.id)
+      assert.equal(bird.localOccurrence, selection.whereFound)
+      assert.equal(bird.regionSlug, regionId)
+      assert.equal(bird.image, original.image)
+      assert.equal(bird.audioFile, original.audioFile)
+      assert.deepEqual(bird.photoCredit, original.photoCredit)
+      const html = renderToStaticMarkup(React.createElement(Panel, { id: "regional-info", bird, birds: passedBirds, selectedIndex: index, showBirdPicker: false, onSelectBird() {}, onClose() {} }))
+      assert.ok(links(html).some(link => link.href === `/aves-explorer?region=${regionId}` && link.next))
+      assert.match(html, /data-species-overlay="true"/)
+    }
+  }
 })
