@@ -176,6 +176,10 @@ test("global homepage and footer offer the three public destinations with full-p
   ])
   const Home = load("app/page.tsx").default
   const html = renderToStaticMarkup(React.createElement(Home))
+  const heading = html.match(/<h1\b[\s\S]*?<\/h1>/)[0]
+  assert.match(heading, /aria-label="Where will birds take you\?"/, "one stable readable sentence")
+  assert.match(heading, /type="button"[^>]*data-flipped="false"/, "word is keyboard/touch operable before any interaction")
+  assert.match(heading, /aria-label="Switch between birds and AVES" aria-pressed="false"/)
   const links = anchors(html)
   for (const destination of destinations) {
     const countryLinks = links.filter(link => link.href === destination.href)
@@ -313,4 +317,24 @@ test("Colombia retains its country homepage, bird carousel, trip form and existi
   assert.equal(page.metadata.openGraph.url, "https://aves.bio/colombia")
   assert.match(page.metadata.title.absolute, /Colombia/)
   assert.match(page.metadata.twitter.title, /Colombia/)
+})
+
+
+test("brand word previews on mouse/keyboard and a first touch toggles once, without pointer-focus double flips", () => {
+  let state=false
+  const ref={current:false}
+  const Word=createLoader({react:{useState:()=>[state,next=>{state=typeof next==="function"?next(state):next}],useRef:()=>ref}})("components/birds-brand-word.tsx").default
+  const p=Word().props
+  p.onPointerDown(); p.onFocus(); p.onClick()
+  assert.equal(state,true,"first touch: pointer focus must not flip before click")
+  p.onPointerLeave({pointerType:"touch"})
+  assert.equal(state,true,"touch pointer leaving after a tap must not undo it")
+  p.onPointerDown(); p.onClick()
+  assert.equal(state,false,"second tap restores birds")
+  p.onFocus(); assert.equal(state,true,"keyboard focus previews AVES")
+  p.onKeyDown({key:"Escape"}); assert.equal(state,false,"Escape restores birds without navigation")
+  p.onPointerEnter({pointerType:"mouse"}); assert.equal(state,true)
+  p.onPointerLeave({pointerType:"mouse"}); assert.equal(state,false)
+  p.onPointerEnter({pointerType:"touch"}); assert.equal(state,false,"touch hover does not toggle")
+  p.onFocus();p.onBlur();assert.equal(state,false)
 })
