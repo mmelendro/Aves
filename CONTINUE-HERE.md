@@ -1,6 +1,25 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — country-card carousels, 8 November 2026 (Sydney)
+## Current production - New Zealand divider and bird-map links, 8 November 2026 (Sydney)
+
+**Published, live-tested and paused after AVES-006a.** The owner selected New Zealand as the pilot. The map and bird carousel automatically follow the page/window width and can be resized with a pointer/keyboard divider and reset. The fixed narrow pair cap was removed, frame height is capped at 44rem, and narrow phones show the bird card first with the divider/reset hidden. The owner's later feedback led to two more corrections: full usable split travel based on 256px minimum panels (replacing the restrictive 40/60 cap), and tolerance for subpixel ResizeObserver readings so a height-only update does not cancel an active drag.
+
+All **31 featured NZ birds** now have explicit supported planning-island associations in `content/new-zealand-bird-islands.ts`. The map no longer guesses from location-label strings. Previously blank cases such as fantail, managed-site takahē, little penguin and tokoeka now highlight suitable islands. These are featured planning regions backed by profile notes/range sources, not complete distributions, photograph/recording locations or guaranteed sightings. Tests require every displayed bird to have a valid mapping, preventing silent omissions on future catalogue changes.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `1d34d22` | `dpl_6saccRhXT7phHbywQNRuhZQyf9By` |
+| Australia and shared accounts (runtime unchanged) | `australia/preview` | `5762603` | `dpl_2AhmDWLg3FbTMExao84Fz3ywJZ1B` |
+
+[Live New Zealand](https://aves.bio/new-zealand) - [production build](https://v0-company-landing-page-l7huo9fr3-mmelendro-9273s-projects.vercel.app). The initial 7341818 divider build was followed by 3db781c fluid sizing and then this 1d34d22 drag/island-association correction. New Zealand alone opts into the resizable pair; Colombia and Australia remain unchanged. The shared account, privacy/security, destination eligibility and homepage country-card carousels were preserved.
+
+**Verification:** 23 relevant automated cases, strict TypeScript and the production build passed. All 31 species were exercised through the live species picker with zero blank map highlights. A real 224px pointer drag changed the split from 50% to about 69% continuously; keyboard end limits, reset, retained map/photograph alignment, mobile stacking, sound and South Island navigation were checked. At 720/1024/1600px windows, balanced carousel widths were about 307/451/586px; at 390px, cards used about 344px, media first with no horizontal overflow. No production console errors were observed. Viewport emulation is not physical iPhone/touch/foldable testing. A transient local development chunk-load error recovered after reload; fresh production checks passed.
+
+Implementation: `components/resizable-discovery-pair.tsx`, its CSS module, `lib/discovery-split.ts`, `components/new-zealand-hero-explorer.tsx`, optional shared media/map sizing props, and the explicit island-association data. No dependency was added. Private evidence: workspace `audit/evidence/nov8-nz-divider-bird-regions-live.png`, `nov8-nz-bird-island-live-checks.json` and the fluid-size desktop/mobile images.
+
+**Next state:** AVES-006a verified; AVES-006b Colombia/Australia rollout pending; full AVES-006 partially delivered. The owner requested a pause before other countries. Do not proceed to rollout, the NZ questionnaire or world map automatically. Planning mirrors are synced across branches; documentation/comment-only commits can advance heads without changing deployed behaviour. Git auto-deployment stays disabled.
+
+## Historical production — country-card carousels, 8 November 2026 (Sydney)
 
 **Latest planning-only update:** owner priorities now override the map-first order: (1) working divider on the three country homepages, (2) usable NZ questionnaire/selection pilot with private submission and verified owner receipt, (3) Equal Earth world map with both ecological categories, (4) remaining goals. Build only the minimum shared layout needed for the divider; broader styling and island pages do not block the pilot. Source registration currently omits NZ from shared trip options, so NZ planning support must be explicitly checked/added before claiming the pilot works. Full AI/supplier booking and bingo are later stages. The detailed prompt/inbox are mirrored in both branches. No website/database change or deployment was made by this planning update; remain paused until a specific implementation release is selected.
 
