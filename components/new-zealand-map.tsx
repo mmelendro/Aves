@@ -18,9 +18,10 @@ const labels = [
 type NewZealandMapProps = {
   compact?: boolean
   highlightedIslands?: readonly string[]
+  frameHeight?: string
 }
 
-export default function NewZealandMap({ compact = false, highlightedIslands = [] }: NewZealandMapProps) {
+export default function NewZealandMap({ compact = false, highlightedIslands = [], frameHeight }: NewZealandMapProps) {
   // Compact and full maps coexist on this page, so their accessible title IDs must differ.
   const idPrefix = compact ? "nz-hero-map" : "nz-map"
   const mapFigure = (
@@ -57,7 +58,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
 
   // The same SVG is reused in two wrappers; only the framing and companion links change.
   if (compact) return (
-    <div className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
+    <div style={frameHeight ? { height: frameHeight } : undefined} className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
       <div className="flex items-baseline justify-between gap-3"><h2 className="font-medium text-emerald-950">Explore the islands</h2><a href="#regions" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a></div>
       {mapFigure}
       <nav aria-label="Explore New Zealand islands" className="mt-2 grid grid-cols-1 gap-2">
