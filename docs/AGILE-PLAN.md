@@ -14,7 +14,7 @@ Official usage guidance: https://learn.chatgpt.com/docs/pricing (reviewed 8 Nove
 
 ## Suggested near-term sequence
 
-Latest owner steering: the shared Info rollout is complete. Put South Island trip readiness first (page, practical guidance/resources and a trial of the private brief). Sydney launch-product planning is next. Apply bird/habitat-led balanced experiences and sourced stories; optional North Island extensions stay separate. Map zoom/polish/satellite layers follow later. Choose one bounded release at a time.
+Latest owner steering: the shared Info rollout is complete. Put South Island trip readiness first (page, practical guidance/resources and a trial of the private brief). Sydney launch-product planning is next. Apply bird/habitat-led balanced experiences and sourced stories; optional North Island extensions stay separate. The country-zoom/focal-framing release is published and verified; finish checkpoint sync, then pause. Further map polish/satellite layers follow later. Choose one bounded release at a time.
 
 Each item below is its own release/checkpoint, not all work for one week. Choose only one when conserving allowance. This recommendation does not silently replace the owner's established priority order.
 
@@ -63,13 +63,14 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 | 25 | Low priority / deferred | Friendlier expired-Google-session landing | Deferred | 2 | Lower |
 | 26 | Later / catalogue clarity | Hide extinct species from visitor-facing lists; NZ first | AVES-017 | 2 | Lower; verify counts, scope and saved-data compatibility |
 | 27 | Architecture / planned | Consolidate into one app/project, with AVES naming/branding and SEO, through an inventory, unified preview and reviewed cutover | AVES-020 | Not yet estimated | Scope separate checkpoints; production and later retirement need explicit approval |
-| 28 | Later map navigation | Homepage country selection zooms to its regional map, with connected carousel and Back to world | AVES-003a-2 | Estimate after a small transition/gesture prototype | Reuse maps/state; test accurate framing, keyboard, reduced motion and mobile scroll/pinch safety |
+| 28 | Delivered 8 November | Homepage country-to-regional-map transition with connected regional carousel and Back to world; all 23 regions | AVES-003a-2 | Completed | Source 95c9f75; 34 local/six staged/21 live observations passed, including six country-link arrivals |
+| 29 | Delivered 8 November | Shared cover/focal framing scales with photo dimensions and clamps at edges without blank padding | AVES-006c | Completed follow-up to task 28 | Matching helpers/ResizeObservers; 366 tests, both builds and live desktop/mobile/divider checks passed; physical devices/OS preferences untested |
 
 Several entries are optional or multi-release streams, not one-session commitments. Re-estimate after the first completed pilot; do not turn every estimate into a guarantee.
 
 ## Separate draft consolidation checkpoint — AVES-020
 
-Phone-chat PR #3 contains an unmerged unified preview. Hosted gates and separately approved production cutover remain; carry the latest source 7fa0624 and Australian f50eb8a behavior into that candidate before release. The Info rollout did not merge or publish consolidation.
+Phone-chat PR #3 contains an unmerged unified preview. Hosted gates and separately approved production cutover remain; carry the latest source 95c9f75 and Australian 721370e overlay/explorer/focal behavior into that candidate before release. The Info rollout did not merge or publish consolidation.
 
 Added at the owner's request on 8 November 2026 (Sydney): consolidate the existing independent applications into one Next.js application and one production Vercel project, preserving the existing shared database and repository. Include the owner's requested naming/branding/SEO review and permission to rename projects or create a new target where useful. Start with a route/file/dependency and search-compatibility inventory, then size code integration, unified preview verification, approved cutover/rollback and later project retirement separately. Effort is not yet estimated; do not assign a credit/time guarantee or silently reprioritise the owner's current work. Recording this task does not authorise implementation or production changes. See ROADMAP-DETAILS.md for acceptance criteria.
 
