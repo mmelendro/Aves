@@ -5,7 +5,7 @@
  * buttons are visible. Private email/server credentials never belong in this file.
  */
 
-import { sitePath } from "@/features/australia/lib/site-path"
+import { sitePath } from "@/lib/site-path"
 import { countryLabels, countryRegionLabels, normalizeTripCountry, type TripCountry } from "@/content/trip-options"
 import type { PlanningQuestionnaire } from "@/content/planning-questionnaire"
 

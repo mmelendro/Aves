@@ -30,7 +30,7 @@ export function PortalNavigation({ currentPage }: { currentPage: string }) {
           {portalLinks.map(({ href, label }) => <Link key={href} href={href} aria-current={href === "/account" && currentPage === "/account" ? "page" : undefined} className="flex min-h-11 items-center rounded-xl px-4 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700">{label}</Link>)}
           <Link href="/contact?topic=account#inquiry" className="flex min-h-11 items-center rounded-xl bg-emerald-600 px-5 text-sm font-semibold text-white hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2">Contact AVES</Link>
         </nav>
-        <MobileNavigationOverlay currentPage={currentPage} links={portalLinks} title="AVES Account" description="Your shared trip plans, with links to Colombia, Australia and New Zealand." callToAction={{ href: "/contact?topic=account#inquiry", label: "Contact AVES" }} />
+        <MobileNavigationOverlay currentPage={currentPage} links={portalLinks} title="AVES Account" description="Your shared trip plans, with links to Colombia, Australia and New Zealand." callToAction={{ href: "https://aves.bio/contact?topic=account#inquiry", label: "Contact AVES" }} />
       </div>
     </header>
     <div aria-hidden="true" className="h-[72px]" />

@@ -16,7 +16,7 @@ export function GlobalHeader({ country }: GlobalBrandProps = {}) {
   return (
     <>
       <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] rounded-lg bg-white px-5 py-3 font-medium text-emerald-900 shadow-lg focus:not-sr-only">Skip to content</a>
-      <header className="sticky top-0 z-40 border-b border-emerald-100 bg-white/95 backdrop-blur-sm">
+      <header className="sticky top-[var(--aves-preview-offset,0px)] z-40 border-b border-emerald-100 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
           <BrandMark country={country} priority />
           <nav aria-label="Main navigation" className="flex items-center gap-1 sm:gap-3">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 export const metadata: Metadata = {
-  title: { default: "Australia Birding & Nature Journeys | AVES", template: "%s | AVES Australia" },
+  title: { default: "Australia Birding & Nature Journeys", template: "%s | AVES Australia" },
   description: "Explore Australian birds, regional guides and nature experiences with AVES. Shape a personal journey around your interests, comfort and pace.",
   alternates: { canonical: "/australia" },
   openGraph: {
