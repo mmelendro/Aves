@@ -6,7 +6,7 @@ Updated 9 November 2026 (Sydney). The selected release is published and tested; 
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **f941bb9**, deployment **dpl_22U8bSe868U733p3g73qXosp6zSv**.
+- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **923bbcb**, deployment **dpl_4XUQc5GCJQsSArZAmsVwBkq4TgC5** (English-default Colombia language pilot; retains the South Island release).
 - `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Account repair/subscription runtime **5659bea**; published deployment **dpl_DaNUuTUmMNmcL9ctnMSPaAD1EAvv**.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 
@@ -56,6 +56,8 @@ English remains the default on /colombia, including metadata. A compact flag but
 
 **Eventual site-wide language switching:** use the same small, accessible flag/language control on every page, including /regions/pacific, countries, regions, articles and shared accounts. Keep English as the default for now. Preserve the current page, selected country/region, filters and private trip context when switching; translate visible copy and accessible labels without changing saved values or species identifiers. Use a scalable locale system for the full rollout; the page-local pilot is not the final site-wide architecture. Track this with Colombian Spanish item 014, implemented in small reviewed batches.
 
-Pilot validation: 121 source tests and type check passed. Desktop 1280 px and phone widths 390/320 px checked: English default, flag visibility, both language directions, retained form input, map/Info/menu and mocked inquiry. No real inquiry sent; no physical iPhone test. Routes/hierarchy and sitemap are unchanged. Deployment/live verification recorded in RELEASE-2026-11-09-COLOMBIA-SPANISH.md.
+Published at https://aves.bio/colombia: runtime **923bbcb**, deployment **dpl_4XUQc5GCJQsSArZAmsVwBkq4TgC5**. The flag control uses EN/ES language codes and inline flag artwork for consistent device rendering.
+
+Pilot validation: 121 source tests and type check passed. Desktop 1280 px and phone widths 390/320 px checked: English default, flag visibility, both language directions, retained form input, map/Info/menu and mocked inquiry. The same checks passed live with no browser errors. No real inquiry sent; no physical iPhone test. Routes/hierarchy and sitemap are unchanged. Deployment/live verification recorded in RELEASE-2026-11-09-COLOMBIA-SPANISH.md.
 
 AI proposal generation remains unfinished: pinned SDK installed only in the Australian working tree. Existing local OIDC returned 401; broad production environment retrieval was rejected by automatic approval because it would include unrelated secrets. Do not retry broad retrieval or claim AI is live. Use hosted OIDC or an appropriately authorized narrowly scoped credential. No AI request with guest data or generated proposal saved yet. Do not bundle the unfinished AI task into this language release.
