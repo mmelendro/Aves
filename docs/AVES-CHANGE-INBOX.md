@@ -1,5 +1,9 @@
 # AVES change inbox
 
+**Latest release —9November2026: homepage birds↔aves word flip published; paused.** Source3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3esoPPU3u. Heading “Where will birds take you?”; only the word changes, in matching borderless lowercase green italics.116 full source checks plus14 focused refinement checks (overlapping), TypeScript/build and desktop/phone-sized verification passed within the recorded limits. AU/account runtime unchanged3f644a1. See [RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). Next proposed: ONE South Island local-map/landscape3D place-card pilot015/037, Sol medium. Do not start it automatically. Background media041, sea context042, map hover preview043, paired place names044, team refresh045 and double-click navigation046 are queued.
+
+This notice supersedes older release/next-step suggestions below; NEXT-WEEK-PROMPT.md is the clean current entrypoint.
+
 **Latest release —9November2026: South Island land-cover map and simpler species wording published; paused.** Source011de84 / dpl_BHkhR6U5U1eGgWLFdoUq4gtLk7g4; AU/shared account3f644a1 / dpl_FxbDazX29G5cqCnuYP8ZmGDNwy34. Attributed LCDB2023/24 map/filter pilot is live; public/private controls now say “Search377 species” and “All species”, with extinct entries still excluded.115 source tests,9 focused wording/catalogue checks, TypeScript/builds and desktop/mobile verification passed within the release notes’ limits. See [RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Next owner priorities:026 homepage birds→AVES word flip, then015/037 ONE South Island place-map/landscape3D card pilot. Zoom+accurate scale038 and other follow-ups remain queued. Wait for one selected increment; Sol medium recommended.
 
 **Current execution order is in NEXT-WEEK-PROMPT.md:**026 homepage word flip, then the owner-confirmed ONE South Island3D place card pilot015/037. Later map zoom+scale038, place carousel expansion, media previews039, whole-region context006c and North Island parity040 remain separate. Older status/ordering notes below are historical and do not override this checkpoint.
@@ -189,3 +193,9 @@ For new observations, use this short entry format:
 - Dependencies, decisions or completion evidence: only when relevant.
 
 *The entry above is a template, not a reported issue. AVES-006 through AVES-013 include the captured observations; use the next unused number for future additions.*
+
+
+**Queued9November refinements:**041 habitat-selected faint background photographs, later drone footage;042 subtle ocean shading/labels on the South Island map. Preserve contrast, rights, performance and geographic honesty. These do not expand the selected homepage word-flip release. See ROADMAP-DETAILS.md.
+
+
+**Additional queued9November:**043 world-country hover/focus recentering before click, with stable targets/projection;044 selective paired place names such as Aotearoa/New Zealand. Current word-flip typography is matching lowercase italics with no border; keyboard focus uses a subtle underline. See ROADMAP-DETAILS.md.

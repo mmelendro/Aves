@@ -6,7 +6,7 @@ Updated9November2026 (Sydney). **Current release complete; paused.** Do not star
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05` / workspace `source`: global homepage, Colombia and New Zealand. Live runtime011de84 / dpl_BHkhR6U5U1eGgWLFdoUq4gtLk7g4.
+- `webmaster/readiness-2026-11-05` / workspace `source`: global homepage, Colombia and New Zealand. Live runtime3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3esoPPU3u.
 - `australia/preview` / workspace `australia`: Australia and shared accounts/backend. Live runtime3f644a1 / dpl_FxbDazX29G5cqCnuYP8ZmGDNwy34.
 - These remain independent apps; do not merge branches, the unmerged consolidation PR or older pricing draft. Documentation heads can be newer than live runtime commits. Read CONTINUE-HERE.md and the latest release checkpoint, then only the relevant detailed acceptance section.
 
@@ -18,17 +18,17 @@ The South Island LCDB v6 land-cover pilot is now live and linked to existing bir
 
 Public/private NZ picker controls say **“Search377 species” / “All species”**.377 living reference entries remain;55 extinct entries are excluded from browsing/selection. Archived evidence and existing private records are preserved. Rare living visitors remain labelled; inclusion is not current local availability. No new private guest data or database/provider changes in the map release.
 
-Latest evidence, exact deployments and limits: [RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Budget and earlier milestones retain their own checkpoints.
+Latest release: [homepage word flip](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). Map evidence and source limits remain in [South Island map checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Budget and earlier milestones retain their own checkpoints.
 
 ## Latest owner priority — one selected release at a time
 
-1. **AVES-026:** homepage heading “Where will birds take you?” Only “birds” flips to green “AVES”. Stable layout, hover/focus/deliberate tap, readable semantics and reduced-motion behavior. This is the next proposed smallest increment, not implemented.
-2. **AVES-015/037:** first3D pilot is ONE **South Island place card**, local map ↔ licensed landscape photo. Owner confirmed this location. Reversible controls, source/credits, hidden-face focus/media cleanup and reduced-motion toggle. Reuse one template; expand only after pilot acceptance.
-3. **AVES-038:** South Island map zoom/pan/reset AND a correctly calculated, responsive metric scale bar. Preserve bird/filter state, native page/browser gestures, georeferencing and source-resolution limits.
-4. Finish the **037** four-place map/photo carousel (Arthur’s Pass, Nelson Lakes, Fiordland, Otago/Catlins); prepare for future owner drone/video assets. Keep balanced place guidance and official links.
-5. **039:** checklist licensed-media previews on hover/focus/tap; start with available correctly matched assets, honest gaps and lazy loading. Future video; no automatic media rights from eBird visibility.
-6. **006c:** geographic region selection changes the full appropriate guide/page context, with routes/history/accessibility/SEO, not just map/birds. Audit existing behavior first. Habitat filters stay within the current region.
-7. **040:** once South Island is ready, North Island uses the SAME finished templates, functionality and depth with its OWN verified local birds/calls/geography/places/resources. Then continue separately selected remaining destinations/Sydney work.
+**Delivered026:** the homepage now reads “Where will birds take you?” Only the word flips, birds↔aves, in matching400-weight lowercase emerald italics. No border/box; keyboard focus underline, pointer/keyboard/tap behavior and motion-free CSS fallback. Other heading words remain upright medium500. See [word-flip checkpoint](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md).
+1. **AVES-015/037:** first3D pilot is ONE **South Island place card**, local map ↔ licensed landscape photo. Owner confirmed this location. Reversible controls, source/credits, hidden-face focus/media cleanup and reduced-motion toggle. Reuse one template; expand only after pilot acceptance.
+2. **AVES-038:** South Island map zoom/pan/reset AND a correctly calculated, responsive metric scale bar. Preserve bird/filter state, native page/browser gestures, georeferencing and source-resolution limits.
+3. Finish the **037** four-place map/photo carousel (Arthur’s Pass, Nelson Lakes, Fiordland, Otago/Catlins); prepare for future owner drone/video assets. Keep balanced place guidance and official links.
+4. **039:** checklist licensed-media previews on hover/focus/tap; start with available correctly matched assets, honest gaps and lazy loading. Future video; no automatic media rights from eBird visibility.
+5. **006c:** geographic region selection changes the full appropriate guide/page context, with routes/history/accessibility/SEO, not just map/birds. Audit existing behavior first. Habitat filters stay within the current region.
+6. **040:** once South Island is ready, North Island uses the SAME finished templates, functionality and depth with its OWN verified local birds/calls/geography/places/resources. Then continue separately selected remaining destinations/Sydney work.
 
 This latest order overrides older visual-ranking tables. Confirmed security or essential-flow failures take precedence. Do not interpret the list as permission to execute all tasks together.
 
@@ -49,3 +49,12 @@ Reuse existing content/components and tests. Check touched code/comments for cla
 Test the actual changed journey, desktop/mobile/short frames as relevant, keyboard/touch alternatives, privacy/media cleanup and source/access disclosures. Run meaningful targeted checks and required build/type checks; broaden only when warranted. Stage exact candidate, verify before publishing, then verify live. On EVERY deployment review human/XML sitemap, canonicals, routes/parents/related links and private-route exclusions; update changed inventories, otherwise record checked/unchanged without invented dates.
 
 Sync exact code plus concise checkpoint/prompt to both relevant GitHub branches, state what is live versus queued and material untested limits, reset temporary QA UI/choices, then **pause**. Docs-only updates need diff/link/mirror checks, not another app build. Keep model use economical; no maximum-effort/default premium speed or parallel agents without explicit selection.
+
+
+**Queued9November refinements:**041 habitat-selected faint background photographs, later drone footage;042 subtle ocean shading/labels on the South Island map. Preserve contrast, rights, performance and geographic honesty. These do not expand the selected homepage word-flip release. See ROADMAP-DETAILS.md.
+
+
+**Additional queued9November:**043 world-country hover/focus recentering before click, with stable targets/projection;044 selective paired place names such as Aotearoa/New Zealand. Current word-flip typography is matching lowercase italics with no border; keyboard focus uses a subtle underline. See ROADMAP-DETAILS.md.
+
+
+**Further queued:**045 team-page refresh (one people carousel, optional field-story gallery after verified content inventory);046 homepage country/region double-click opening, preserving explicit single-activation Explore links. All later requests are in ROADMAP-DETAILS.md; none is shipped merely by being recorded.
