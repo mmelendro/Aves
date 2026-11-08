@@ -302,7 +302,7 @@ test("a future country is selectable with an attributed fallback and a native fo
 
 test("Colombia retains its country homepage, bird carousel, trip form and existing regional URLs", () => {
   const page = load("app/colombia/page.tsx")
-  const tree = page.default()
+  const tree = load("components/colombia-home-page.tsx").default()
   const componentNames = elements(tree, node => typeof node.type === "function").map(node => node.type.name)
   for (const component of ["NavigationHeader", "ContactFormSection", "Footer"]) assert.ok(componentNames.includes(component), component)
   // The gallery can be composed inside a hero without disappearing from the page.
