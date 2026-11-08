@@ -259,3 +259,12 @@ Current release supports private NZ budget denomination only (NZD/AUD/USD/CAD/EU
 ## AVES-036 — approved resource embeds, queued
 
 Embed curated podcasts, documentaries and videos when the publisher supports lawful embedding, matching the Colombian resource pattern and existing AVES style. Preserve original links, creator/licence credits, captions and fallback access. Prefer lazy/click-to-load approved embeds, no autoplay or media downloads to evade restrictions; review third-party privacy/performance and mobile-data use. Verify actual playback and keyboard/mobile behavior, disclose untested or blocked players. Existing South Island resource cards remain usable until this separately selected increment ships.
+
+
+## Delivered pilot — AVES-013a / AVES-017, 9 November 2026
+
+Published: dedicated South Island ecosystem selector filters the existing 30-profile carousel into forest/scrub (18), mountains/tussock (5), freshwater (7) and coast/offshore waters (5); associations overlap. All habitats resets to30. Only reviewed South Island profiles are used; rights, local occurrence, calls, eBird/DOC/NZ Birds Online sources, Info, wishlist and island navigation are retained. This is a coarse habitat filter, not an ecological polygon overlay or live sightings feed. Takahē managed viewing, marine feeding versus sensitive breeding locations and different freshwater requirements remain explicit. Unknown future associations are not guessed. See RELEASE-2026-11-09-SOUTH-ISLAND-ECOSYSTEMS.md.
+
+The public and private NZ picker now exposes only377 living records;55 extinct entries and Historical/Extinct UI are removed from browsing. Raw reference data stays archived for provenance; existing saved briefs are not rewritten. Living threatened birds, introduced species and rare visitors are not removed just because conservation status or infrequency differs. A source-version record does not guarantee current local presence. Geographic/seasonal checklist filtering and source-version updates remain separate work.
+
+Remaining034/013 work: verify place coordinates/coarse ecological geography, add actual mapped layers/place cues, extend the pilot after explicit selection and complete other-page imagery audits. Do not call the entire ecosystem-map programme complete. No need to rebuild the delivered filter, dividers or carousel.
