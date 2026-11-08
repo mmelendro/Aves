@@ -17,5 +17,5 @@ export const metadata: Metadata = { title: "Private Quote Inbox" }
 export default async function OwnerQuotePage() {
   const user = await getAccountUser()
   if (!user) redirect(accountUrl("/account/sign-in?next=/australia/admin/quotes"))
-  return <AccountShell title="Your AVES Quote Inbox" description="Review Colombia and Australia trip requests and prepare personal proposals, quoted in AUD."><OwnerQuoteInbox /></AccountShell>
+  return <AccountShell title="Your AVES Quote Inbox" description="Review requests across AVES destinations and prepare personal proposals, quoted in AUD."><OwnerQuoteInbox /></AccountShell>
 }

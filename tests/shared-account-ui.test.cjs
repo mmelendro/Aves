@@ -377,3 +377,29 @@ test("NZ entry keeps South Island and saves versioned questionnaire answers with
   assert.equal(saved.country, "new-zealand")
   assert.equal(attempts[0].headers["Idempotency-Key"], saved.id)
 })
+
+
+test("opening an owner request focuses its details even when the first request is already selected", async () => {
+  const callbacks = [], calls = [], movements = []
+  const quotes = ["first", "second"].map((id, i) => ({ id, planId: id, status: "submitted", contactName: "Synthetic visitor", contactEmail: "qa@example.invalid", submittedAt: "2026-11-09T00:00:00Z", notificationStatus: "accepted", proposals: [], plan: { title: `Synthetic brief ${i + 1}`, country: "new-zealand", regions: ["south-island"], travelWhen: "2027", partySize: "2", message: "Synthetic preference" } }))
+  const h = componentHarness("components/account/owner-quote-inbox.tsx", "OwnerQuoteInbox", {}, {
+    window: { requestAnimationFrame: callback => callbacks.push(callback), matchMedia: () => ({ matches: true }) },
+    mocks: { "./account-api": { ...api, accountRequest: async path => { calls.push(path); return { quotes } } } },
+  })
+  find(h.render(), node => node.props.children?.some?.(child => child === "Refresh Inbox")).props.onClick()
+  await new Promise(resolve => setImmediate(resolve))
+  for (const index of [0, 1]) {
+    let tree = h.render()
+    const open = nodes(tree).filter(node => node.props.children === "Open Request")[index]
+    assert.equal(open.props["aria-controls"], "quote-request-details")
+    open.props.onClick()
+    tree = h.render()
+    const details = find(tree, node => node.props.id === "quote-request-details")
+    assert.equal(details.props.tabIndex, -1)
+    details.props.ref.current = { focus: options => movements.push(["focus", options]), scrollIntoView: options => movements.push(["scroll", options]) }
+    callbacks.shift()()
+    assert.ok(JSON.stringify(details).includes(`Synthetic brief ${index + 1}`))
+  }
+  assert.deepEqual(movements, Array.from({length:2},()=>[["focus",{preventScroll:true}],["scroll",{block:"start",behavior:"instant"}]]).flat())
+  assert.deepEqual(calls, ["/api/admin/quotes"], "opening a request does not write data or send messages")
+})
