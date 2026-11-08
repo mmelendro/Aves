@@ -16,20 +16,25 @@ Official usage guidance: https://learn.chatgpt.com/docs/pricing (reviewed 8 Nove
 
 Each item below is its own release/checkpoint, not all work for one week. Choose only one when conserving allowance. This recommendation does not silently replace the owner's established priority order.
 
-1. NZ translucent Info overlay pilot — 2 units.
-2. Three homepage map cards: shared names/callouts/style — 3 units.
-3. South Island page with the shared map/media template — 3 units.
-4. South Island practical planning tips — 3 units.
-5. Curated NZ resources — 3 units.
+Delivered: NZ translucent Info overlay pilot (task 01), published and live-verified on 8 November. Pause before selecting the next release. Candidate sequence:
+
+1. Three homepage map cards: shared names/callouts/style — 3 units.
+2. South Island page with the shared map/media template — 3 units.
+3. South Island practical planning tips — 3 units.
+4. Curated NZ resources — 3 units.
+
+Info-overlay rollout (task 02) is also available as a separate visual batch. The NZ pilot does not establish suitability for shorter frames without further checks.
+
+Owner follow-up AVES-012d-2 is a separate small NZ-first refinement before wider rollout: make more of the bird visible through the Info sheet while preserving readable text and controls on bright/dark/busy photos. Planning only; select and size this increment before implementing it.
 
 The map standard precedes card animation. Useful NZ content can proceed independently of ecological overlays or a whole-site map rollout. Only task selection is authorised by a later user instruction, not by a checkbox in a planning view.
 
-## Full remaining release candidates
+## Release register — completed pilot and remaining candidates
 
 | Task | Stream | Increment | Roadmap | Effort units | Expected usage pressure |
 | --- | --- | --- | --- | --- | --- |
-| 01 | Suggested first | NZ translucent Info overlay pilot | AVES-012d | 2 | Lower |
-| 02 | Visual rollout | Info overlay across Colombia and Australia | AVES-012d | 3 | Medium |
+| 01 | Delivered 8 November | NZ translucent Info overlay pilot, live f5eee01 | AVES-012d-1 | 2 (original estimate) | Complete; no remaining pilot work |
+| 02 | Visual rollout | Info overlay across remaining source viewers and Australia | AVES-012d | 3 | Medium; split by app/template if needed |
 | 03 | Suggested first | Uniform names and styling on three map cards | AVES-012c | 3 | Medium |
 | 04 | Visual rollout | Roll shared map style through page templates | AVES-012c / 012a | 5 | Higher |
 | 05 | Suggested first | Dedicated South Island page and local carousel | AVES-007 / 012a | 3 | Medium |
@@ -53,6 +58,7 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 | 23 | Low priority / deferred | Facebook sign-in | Deferred | 3 | Medium |
 | 24 | Low priority / deferred | First authorised species-video batch | Deferred | 3 | Medium |
 | 25 | Low priority / deferred | Friendlier expired-Google-session landing | Deferred | 2 | Lower |
+| 26 | Later / catalogue clarity | Hide extinct species from visitor-facing lists; NZ first | AVES-017 | 2 | Lower; verify counts, scope and saved-data compatibility |
 
 Several entries are optional or multi-release streams, not one-session commitments. Re-estimate after the first completed pilot; do not turn every estimate into a guarantee.
 
