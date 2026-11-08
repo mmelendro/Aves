@@ -56,7 +56,7 @@ function elements(node, predicate) {
 
 function anchors(html) {
   return [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].map(match => ({
-    href: match[1].match(/\bhref="([^"]*)"/)?.[1],
+    href: match[1].match(/\bhref="([^"]*)"/)?.[1]?.replaceAll("&amp;", "&"),
     next: match[1].includes('data-next-link="true"'),
     text: match[2].replace(/<[^>]*>/g, ""),
   }))
@@ -67,15 +67,15 @@ const { destinations } = load("content/destinations.ts")
 
 test("species details retain notes, picker and licensed source links in both presentations", () => {
   const Panel = load("components/species-details-panel.tsx").default
-  const birds = load("content/new-zealand-carousel.ts").newZealandCarouselBirds
-  for (const presentation of ["below", "overlay"]) {
+  const catalogues = [load("content/new-zealand-carousel.ts").newZealandCarouselBirds, load("content/birds.ts").birdData]
+  for (const birds of catalogues) for (const presentation of ["below", "overlay"]) {
     for (const [index, bird] of birds.entries()) {
       const html = renderToStaticMarkup(React.createElement(Panel, { id: "test-info", bird, birds, selectedIndex: index, showBirdPicker: true, presentation, onSelectBird() {}, onClose() {} }))
       const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
       for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), `${presentation}: ${bird.id}`)
       if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
       const links = anchors(html)
-      assert.ok(links.some(link => link.href === bird.sources[0].url))
+      assert.ok(links.some(link => link.href === bird.sources[0].url), `${presentation}: ${bird.id} species source`)
       if (bird.audioFile) assert.ok(links.some(link => link.href === (bird.audioCreditHref || `/credits#audio-${bird.id}`)))
       assert.equal((html.match(/<option /g) || []).length, birds.length)
       if (presentation === "overlay") {
@@ -88,13 +88,15 @@ test("species details retain notes, picker and licensed source links in both pre
   }
 })
 
-test("only the NZ destination hero opts into the Info-overlay pilot", () => {
+test("NZ and Colombia country homepages opt into overlay while other viewer layouts retain their defaults", () => {
   const hero = renderToStaticMarkup(React.createElement(load("components/new-zealand-hero-explorer.tsx").default))
   assert.match(hero, /data-info-presentation="overlay"/)
   assert.equal((hero.match(/data-bird-carousel="true"/g) || []).length, 1)
   const home = renderToStaticMarkup(React.createElement(load("app/page.tsx").default))
   const colombia = renderToStaticMarkup(React.createElement(load("app/colombia/page.tsx").default))
-  for (const html of [home, colombia]) {
+  assert.match(colombia, /data-info-presentation="overlay"/)
+  const focused = renderToStaticMarkup(React.createElement(load("components/colombia-hero-explorer.tsx").default))
+  for (const html of [home, focused]) {
     assert.match(html, /data-info-presentation="below"/)
     assert.doesNotMatch(html, /data-info-presentation="overlay"/)
   }

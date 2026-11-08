@@ -1,6 +1,6 @@
 /**
  * One species-details body serves the existing below-photo layout and the opt-in
- * NZ overlay. Keeping these fields together preserves local notes, sources,
+ * country overlays. Keeping these fields together preserves local notes, sources,
  * picker behavior and media rights while the presentation changes.
  */
 import Link from "next/link"
