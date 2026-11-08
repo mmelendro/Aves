@@ -10,6 +10,7 @@ import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { ArrowRight } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import NewZealandMap from "@/components/new-zealand-map"
+import SouthIslandEcosystemMap from "@/components/south-island-ecosystem-map"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { newZealandRegionBirds } from "@/content/new-zealand-carousel"
 import { newZealandBirdIslands, type NewZealandIslandId } from "@/content/new-zealand-bird-islands"
@@ -40,6 +41,12 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
     window.addEventListener("pageshow", restore)
     return () => window.removeEventListener("pageshow", restore)
   }, [])
+  // Both the select menu and clickable map use one filter state/transition.
+  // Existing carousel remount cleanup stops sound and closes old Info.
+  function selectEcosystem(next: SouthIslandEcosystemFilter) {
+    setEcosystem(next)
+    setCurrentBird(filterSouthIslandBirds(newZealandRegionBirds("south-island"), next)[0])
+  }
   function selectBirds(ids: string[]) {
     setSelected(ids)
     try { setStorageAvailable(writeNzBirdBasket(window.sessionStorage, ids)) } catch { setStorageAvailable(false) }
@@ -49,24 +56,20 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
     <>{regionId === "south-island" && <section aria-label="Explore South Island ecosystems" className="mb-5 rounded-2xl border border-emerald-200 bg-white/80 p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <label htmlFor={ecosystemId} className="text-sm font-medium text-emerald-950">Explore by ecosystem</label>
-          <select id={ecosystemId} value={ecosystem} aria-describedby={`${ecosystemId}-context`} onChange={event => {
-            const next = event.target.value as SouthIslandEcosystemFilter
-            setEcosystem(next)
-            setCurrentBird(filterSouthIslandBirds(newZealandRegionBirds("south-island"), next)[0])
-          }} className="min-h-11 max-w-full rounded-lg border border-emerald-200 bg-white px-3 text-base text-emerald-950">
+          <select id={ecosystemId} value={ecosystem} aria-describedby={`${ecosystemId}-context`} onChange={event => selectEcosystem(event.target.value as SouthIslandEcosystemFilter)} className="min-h-11 max-w-full rounded-lg border border-emerald-200 bg-white px-3 text-base text-emerald-950">
             <option value="all">All habitats</option>
             {southIslandEcosystems.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
           </select>
           <p role="status" className="text-xs font-medium text-emerald-800">{birds.length} featured birds · {activeEcosystem?.name || "All habitats"}</p>
         </div>
         <p id={`${ecosystemId}-context`} className="mt-2 text-sm leading-6 text-gray-600">{activeEcosystem?.description || "Choose a habitat to explore its South Island birds and calls. Your saved bird wishes stay selected when you switch."}</p>
-        <p className="mt-2 text-xs leading-5 text-gray-500">Broad habitat associations, not mapped ecosystem boundaries or promised sightings. Species details retain local range, access guidance and sources; photograph and recording locations may differ.</p>
-      </section>}<ResizableDiscoveryPair mediaId="birdlife" mapLabel="Explore the islands" media={<>
+        <p className="mt-2 text-xs leading-5 text-gray-500">Birds are grouped by broad habitat associations. The map shows generalised land cover, not exact species ranges or promised sightings. Species details retain local range, access guidance and sources; photograph and recording locations may differ.</p>
+      </section>}<ResizableDiscoveryPair mediaId="birdlife" mapLabel={regionId === "south-island" ? "Explore South Island habitats" : "Explore the islands"} media={<>
         {/* A new collection stops old playback/Info; wishes remain in this parent. */}
         <HomepageBirdCarousel key={`${chosenRegion || "all-islands"}-${ecosystem}`} birds={birds} label={collectionLabel} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{birds.length} featured species{chosenRegion ? ` associated with ${chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"}` : ", with a South Island focus"}. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
-        <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />
+        {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         {chosenRegion && !regionId && <a href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>}
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>

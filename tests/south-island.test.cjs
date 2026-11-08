@@ -145,3 +145,52 @@ test("ecosystem filtering retains only sourced South Island profiles and origina
   assert.deepEqual(filterSouthIslandBirds([unknown], "all"), [unknown])
   assert.deepEqual(filterSouthIslandBirds([], "all"), [])
 })
+
+
+test("LCDB geometry shares one undistorted Mercator frame and preserves verified cover control points", () => {
+  const map = load("content/south-island-ecosystem-map.json")
+  const [left,bottom,right,top] = map.bbox
+  assert.ok(Math.abs((right-left)/480 - (top-bottom)/640) < 0.000001, "raster and coastline use square projected pixels")
+  assert.match(map.source.requestUrl, /lcdb_lcdb6/)
+  assert.match(map.source.licenceUrl, /creativecommons.org/)
+  assert.equal(map.source.imagery, "2023/24")
+  assert.equal(map.source.sha256.length, 64)
+  // Independently queried official GetFeatureInfo at these pixels: class69
+  // indigenous forest, and class40 exotic pasture. Prevent projection drift or
+  // recolouring pasture into forest/alpine habitats. Half pixel is cell centre.
+  function inside(path,x,y) {
+    let odd=false
+    for (const ring of path.split("M").filter(Boolean)) {
+      const values=ring.match(/-?\d+(?:\.\d+)?/g).map(Number)
+      for (let i=0,j=values.length-2; i<values.length; j=i,i+=2) {
+        const xi=values[i],yi=values[i+1],xj=values[j],yj=values[j+1]
+        if ((yi>y)!==(yj>y) && x<(xj-xi)*(y-yi)/(yj-yi)+xi) odd=!odd
+      }
+    }
+    return odd
+  }
+  const forest=map.layers.find(layer=>layer.id==="forest")
+  assert.ok(inside(map.outline,101.5,442.5))
+  assert.ok(inside(forest.path,101.5,442.5), "verified Fiordland indigenous forest")
+  assert.ok(inside(map.outline,330.5,308.5))
+  assert.ok(map.layers.every(layer=>!inside(layer.path,330.5,308.5)), "verified Canterbury exotic grassland stays neutral")
+  assert.deepEqual(map.layers.map(layer=>layer.id).sort(),["forest","freshwater","mountains"])
+  assert.ok(!map.layers.some(layer=>layer.id==="coast"), "do not invent marine habitat polygons from land cover")
+})
+
+test("controlled habitat map has equivalent keyboard map/legend choices, honest sources and reversible selection", () => {
+  const Map = load("components/south-island-ecosystem-map.tsx").default
+  for (const selected of ["all","forest","mountains","freshwater","coast"]) {
+    const html=renderToStaticMarkup(React.createElement(Map,{selected,onSelect:()=>{}}))
+    assert.match(html,/2023\/24/)
+    assert.match(html,/CC BY 3.0 NZ/)
+    assert.match(html,/offshore habitat is not mapped/)
+    assert.match(html,/Back to New Zealand/)
+    for (const name of ["Forest &amp; scrub","Mountains &amp; tussock","Rivers, lakes &amp; wetlands","Coasts &amp; offshore waters"]) {
+      assert.ok(html.includes(`aria-label="Filter birds: ${name}"`), name)
+      assert.ok(html.includes(`aria-label="Show ${name} birds on map"`), name)
+    }
+    assert.match(html,/role="button" tabindex="0"/)
+    assert.equal((html.match(/aria-pressed="true"/g)||[]).length,selected==="all"?1:2,"one state controls map and legend; All reset is separate")
+  }
+})

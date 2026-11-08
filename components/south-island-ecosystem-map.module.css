@@ -1,0 +1,11 @@
+.card { display:flex; flex-direction:column; min-width:0; padding:1rem; border:1px solid #d1e9db; border-radius:1rem; background:rgba(255,255,255,.7); }
+.figure { display:flex; flex-direction:column; flex:1; min-height:0; }
+.map { display:block; width:100%; height:22rem; min-height:0; }
+.area { cursor:pointer; outline:none; }
+.area:hover path:first-of-type, .area:focus-visible path:first-of-type { stroke:#052e16; stroke-width:2; vector-effect:non-scaling-stroke; }
+.sources { flex-shrink:0; }
+.sources[open] { max-height:12rem; overflow:auto; overscroll-behavior:contain; }
+@container (min-width:624px) {
+ .card { height:var(--discovery-panel-height); }
+ .map { flex:1; height:auto; }
+}
