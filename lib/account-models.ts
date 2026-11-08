@@ -6,6 +6,7 @@
 
 import { z } from "zod"
 import { isKnownTripCountry, type TripCountry } from "@/content/trip-options"
+import { budgetCurrencies } from "@/content/trip-budget"
 import { planningChoices, type PlanningQuestionnaire } from "@/content/planning-questionnaire"
 import { selectableNzBirds, validNzBirdIds } from "@/content/new-zealand-checklist"
 
@@ -16,6 +17,7 @@ export const questionnaireSchema = z.object({
   birding: z.enum(Object.keys(planningChoices.birding) as [keyof typeof planningChoices.birding, ...Array<keyof typeof planningChoices.birding>]),
   comfort: z.enum(Object.keys(planningChoices.comfort) as [keyof typeof planningChoices.comfort, ...Array<keyof typeof planningChoices.comfort>]),
   interests: z.array(z.enum(Object.keys(planningChoices.interests) as [keyof typeof planningChoices.interests, ...Array<keyof typeof planningChoices.interests>])).max(7).refine(values => new Set(values).size === values.length),
+  budget: z.object({ currency: z.enum(budgetCurrencies), accommodation: z.number().int().min(0).max(10000).optional(), food: z.number().int().min(0).max(10000).optional(), activities: z.number().int().min(0).max(10000).optional() }).strict().refine(b => b.accommodation !== undefined || b.food !== undefined || b.activities !== undefined, "Enter at least one budget amount").optional(),
   birdIds: z.array(z.string().max(32)).max(selectableNzBirds.length).refine(validNzBirdIds, "Choose distinct living birds from the New Zealand checklist").optional(),
 }).strict()
 /**

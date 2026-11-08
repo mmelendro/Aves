@@ -473,3 +473,26 @@ test("invalid, duplicate and extinct targets fail before account writes", async 
     assert.equal(h.queries.length, 0)
   }
 })
+
+
+test("NZ budgets survive save, edit, frozen sharing and owner review without email disclosure", async () => {
+  const questionnaire = {...nzAnswers, budget:{currency:"NZD",accommodation:100,food:60,activities:100}}
+  const detailsWithBudget = {...nzDetails, questionnaire}
+  const row = {...planRow,details:detailsWithBudget}
+  const h = harness({results:[{data:row,error:null},{data:row,error:null},{data:row,error:null}],rpcResult:{...quoteReceipt,plan_snapshot:{title,details:detailsWithBudget}}})
+  const fields = {title,...detailsWithBudget}
+  assert.deepEqual((await (await h.plansPost(request({id:planId,...fields}))).json()).plan.questionnaire.budget, questionnaire.budget)
+  assert.deepEqual((await (await h.planPatch(request({...fields,expectedUpdatedAt:stamp}),planId)).json()).plan.questionnaire.budget, questionnaire.budget)
+  assert.deepEqual((await (await h.quotePost(request({expectedUpdatedAt:stamp,contactName:"Budget QA"},quoteId),planId)).json()).plan.questionnaire.budget, questionnaire.budget)
+  assert.doesNotMatch(h.notices.flat().join(" "), /accommodation|activities|Budget QA/)
+  const owner = harness({rpcResult:[{...quoteReceipt,plan_snapshot:{title,details:detailsWithBudget}}]})
+  assert.deepEqual((await (await owner.adminQuotesGet()).json()).quotes[0].plan.questionnaire.budget, questionnaire.budget)
+})
+
+test("invalid budgets fail before private data access", async () => {
+  for (const budget of [null,{}, {currency:"NZD"},{currency:"XXX",food:60},{currency:"NZD",food:-1},{currency:"NZD",food:1.5},{currency:"NZD",food:10001},{currency:"NZD",food:"60"},{currency:"NZD",food:60,role:"owner"}]) {
+    const h=harness()
+    assert.equal((await h.plansPost(request({id:planId,title,...nzDetails,questionnaire:{...nzAnswers,budget}}))).status,400)
+    assert.equal(h.queries.length,0)
+  }
+})

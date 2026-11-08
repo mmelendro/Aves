@@ -9,6 +9,8 @@
 import { useEffect, useId, useRef, useState } from "react"
 import NewZealandBirdPicker from "@/components/new-zealand-bird-picker"
 import { consumeNzBirdBasket, readNzBirdBasket } from "@/lib/nz-bird-selection"
+import { BudgetQuestions } from "./budget-questions"
+import { budgetCategories, type TripBudget } from "@/content/trip-budget"
 import { PlanningQuestions } from "./planning-questions"
 import type { PlanningQuestionnaire } from "@/content/planning-questionnaire"
 import { Save } from "lucide-react"
@@ -74,6 +76,13 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       interests: values.getAll("interests").map(String) as PlanningQuestionnaire["interests"],
       ...(birdIds.length ? { birdIds } : {}),
     }
+    if (fields.questionnaire) {
+      const amounts = Object.fromEntries(budgetCategories.flatMap(({key}) => {
+        const value = String(values.get(`budget-${key}`) ?? "").trim()
+        return value === "" ? [] : [[key, Number(value)]]
+      }))
+      if (Object.keys(amounts).length) fields.questionnaire.budget = { currency: String(values.get("budgetCurrency")) as TripBudget["currency"], ...amounts }
+    }
     busyRef.current = true
     setBusy(true)
     setFeedback("")
@@ -104,6 +113,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       <fieldset><legend className="block text-sm font-medium text-gray-700 mb-3">Regions in {countryLabels[country]}</legend><div className="flex flex-wrap gap-x-4 gap-y-2">{options.map(({ id, label }) => <label key={id} className="flex min-h-11 items-center gap-2 text-sm text-gray-700"><input type="checkbox" name="regions" value={id} checked={selectedRegions.includes(id)} onChange={event => toggleRegion(id, event.target.checked)} className="accent-emerald-600" />{label}</label>)}{olderSelections.map(value => <label key={value} className="flex min-h-11 items-center gap-2 text-sm text-amber-800"><input type="checkbox" name="regions" value={value} checked onChange={event => toggleRegion(value, event.target.checked)} className="accent-emerald-600" />{value} (saved selection)</label>)}</div>{olderSelections.length > 0 && <p className="text-sm text-amber-800 mt-2">Review these older place names before saving. You can move additional places into Your Interests and Ideas.</p>}<p className="text-sm text-gray-500 mt-2">Leave these open if you're looking for inspiration. You can mention other places below.</p><p role="status" aria-live="polite" className="text-sm text-emerald-700 mt-2">{regionNotice}</p></fieldset>
       <div className="grid sm:grid-cols-2 gap-4"><div><label htmlFor={`${prefix}-when`} className="block text-sm font-medium text-gray-700 mb-2">Travel Timing</label><Input id={`${prefix}-when`} name="travelWhen" defaultValue={plan?.travelWhen || ""} maxLength={160} placeholder={country === "new-zealand" ? "Dates including year, or a flexible window" : "A month, a season, or flexible"} /></div><div><label htmlFor={`${prefix}-party`} className="block text-sm font-medium text-gray-700 mb-2">Group Size</label><select id={`${prefix}-party`} name="partySize" defaultValue={plan?.partySize || ""} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"><option value="">Still deciding</option><option>1 person</option><option>2 people</option><option>3–4 people</option><option>5+ people</option></select></div></div>
       {country === "new-zealand" && <><p className="text-sm text-gray-500">Please include the year in your timing. No dates are assumed or reserved.</p><PlanningQuestions key={country} prefix={prefix} answers={plan?.country === country ? plan.questionnaire : undefined} /></>}
+      {country === "new-zealand" && <BudgetQuestions key={`${country}-${plan?.id || "new"}`} prefix={prefix} budget={plan?.country === country ? plan.questionnaire?.budget : undefined} />}
       {country === "new-zealand" && <section aria-labelledby={`${prefix}-birds`} className="space-y-4 rounded-xl border border-emerald-200 p-5"><h3 id={`${prefix}-birds`} className="font-medium text-emerald-950">Birds you would love to see (optional)</h3><p className="text-sm leading-6 text-gray-600">These choices join this private draft only when you save. Review the full checklist here, or bring choices from this browser tab. They are wishes, not guaranteed sightings or an itinerary.</p>{plan && incomingBirds.length > 0 && <button type="button" onClick={() => { setBirdIds(current => [...new Set([...current, ...incomingBirds])]); setIncomingBirds([]) }} className="min-h-11 rounded-md border border-emerald-300 px-4 text-sm font-medium text-emerald-900">Add {incomingBirds.length} bird choices from this tab</button>}<NewZealandBirdPicker selected={birdIds} onChange={setBirdIds} /></section>}
       <div><label htmlFor={`${prefix}-message`} className="block text-sm font-medium text-gray-700 mb-2">Your Interests and Ideas</label><Textarea id={`${prefix}-message`} name="message" defaultValue={plan?.message || ""} maxLength={5000} rows={6} placeholder="Birds, landscapes, photography, your preferred pace, or anything else you'd like us to know…" /></div>
       <p className="text-sm text-gray-500">{country === "new-zealand" ? "Optional notes: already-arranged plans, arrival/departure points, budget with currency, must-haves or practical access needs. Share only what is needed, without passport, payment or medical details. Save before leaving this page; unfinished answers are not autosaved. Sharing is a separate choice after review." : "Saving a draft does not request a quote or create a booking."}</p>
