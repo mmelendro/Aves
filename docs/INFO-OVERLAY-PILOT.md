@@ -2,6 +2,10 @@
 
 The main `/new-zealand` bird viewer opts into `infoPresentation="overlay"`. Existing viewers default to `"below"`; the global homepage's NZ card, Colombia and the separate Australian application are outside this pilot.
 
+**Published and verified, 8 November 2026 (Sydney):** source `f5eee01`, Vercel `dpl_BA2SbW56xbfkktQqPQw8TBHqQsje`, live at https://aves.bio/new-zealand. Twenty-two focused tests, strict TypeScript, local production build and Vercel build passed. The live 1280px frame stayed exactly the same height when Info opened; credits scrolled and Escape restored focus. Live 390px checks retained the selected species, bounded scroll and close target without horizontal overflow. Tūī sound played; changing to White Heron stopped it. Wishlist add/remove restored the original state. Explicit slideshow Play closed Info and started playback, then was paused. Colombia still showed its below-photo details. Local checks additionally covered 320px, a 254px photo at the divider extreme, and selection/navigation across bright and dark images. Phone-sized viewports do not establish physical iPhone/touch behavior.
+
+Evidence is private in the workspace: `audit/evidence/nov8-nz-info-overlay-live-checks.json`, `nov8-nz-info-overlay-desktop-live.png` and `nov8-nz-info-overlay-mobile-live.png`. Test audio is paused, temporary selections restored and local servers stopped. No private brief was submitted. Pause after documentation sync; rollout remains queued.
+
 ## How it works
 
 - `HomepageBirdCarousel` owns opening/closing, bird index, sound and slideshow state. `SpeciesDetailsPanel` renders one shared set of existing facts and rights information in either presentation.
