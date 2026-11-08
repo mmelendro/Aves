@@ -267,6 +267,33 @@ test("signup preserves the entry link but keeps the already configured email cal
   assert.equal(new URL(destinations[0], "https://aves.bio").searchParams.get("next"), "/account?country=colombia&region=amazonia")
 })
 
+for (const provider of ["email", "google"]) test(`${provider} signup offers unchecked email updates and preserves the confirmation destination`, async () => {
+  const requests=[]
+  const h=componentHarness("components/account/auth-form.tsx","AuthForm",{mode:"sign-up",next:"/account?country=new-zealand",oauthProviders:["google"]},{
+    mocks:{"@/lib/supabase/client":{createClient:()=>({auth:{signUp:async input=>{requests.push(input);return {error:null}},signInWithOAuth:async input=>{requests.push(input);return {error:null}}}})}},
+    window:{location:{origin:"https://aves.bio",assign(){}}},
+  })
+  const checkbox=find(h.render(),n=>n.type==="input"&&n.props.type==="checkbox")
+  assert.equal(checkbox.props.checked,false)
+  checkbox.props.onChange({target:{checked:true}})
+  if(provider==="google") await find(h.render(),n=>n.props["aria-label"]==="Sign in with Google").props.onClick()
+  else await find(h.render(),n=>n.type==="form").props.onSubmit({preventDefault(){},currentTarget:{values:{email:"synthetic@example.invalid",password:"test-password-long",confirmPassword:"test-password-long"}}})
+  const url=new URL(requests[0].options.redirectTo||requests[0].options.emailRedirectTo)
+  const next=url.searchParams.get("next")
+  assert.equal(new URL(next,"https://aves.bio").pathname,"/account/email-updates")
+  assert.equal(new URL(next,"https://aves.bio").searchParams.get("next"),"/account?country=new-zealand")
+})
+
+test("owner page redirects ordinary accounts before rendering any owner workspace", async()=>{
+  const h=componentHarness("app/admin/quotes/page.tsx","default",{}, {mocks:{
+    "@/components/account/account-shell":{AccountShell:"AccountShell"},
+    "next/navigation":{redirect:url=>{throw new Error(`redirect:${url}`)}},
+    "@/lib/account-auth":{getAccountUser:async()=>({id:"ordinary-actor"})},
+    "@/lib/account-service":{accountRpc:async()=>false},
+  }})
+  await assert.rejects(()=>h.render(),/redirect:https:\/\/aves.bio\/account/)
+})
+
 test("social sign-in buttons stay hidden by default and on password recovery screens", () => {
   for (const props of [{ mode: "sign-in" }, { mode: "sign-up" }, { mode: "forgot-password", oauthProviders: ["google", "facebook"] }, { mode: "reset-password", oauthProviders: ["google"] }]) {
     const tree = componentHarness("components/account/auth-form.tsx", "AuthForm", props).render()

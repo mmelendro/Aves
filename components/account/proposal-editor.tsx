@@ -7,7 +7,7 @@
  * issued version. Authorization is enforced by the admin API/database.
  */
 
-import { useId, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { Save } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -31,6 +31,13 @@ export function parseAUD(value: string): number | null {
  */
 export function ProposalEditor({ quoteId, proposal, initial, onSaved, onCancel }: { quoteId: string; proposal?: Proposal; initial?: Proposal; onSaved: (proposal: Proposal) => void; onCancel: () => void }) {
   const prefix = useId()
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  // Reveal newly opened forms without opening the phone keyboard unexpectedly.
+  useEffect(() => {
+    const heading = headingRef.current
+    heading?.focus({ preventScroll: true })
+    heading?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" })
+  }, [])
   // proposal edits an existing draft; initial only copies an older version
   // into a new form and must never rewrite an issued proposal.
   const valuesFrom = proposal || initial
@@ -61,7 +68,7 @@ export function ProposalEditor({ quoteId, proposal, initial, onSaved, onCancel }
     finally { busyRef.current = false; setBusy(false) }
   }
 
-  return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8"><h3 className="text-2xl font-bold text-gray-900 mb-3">{proposal ? `Edit Proposal · Version ${proposal.version}` : initial ? "Prepare a New Revision" : "Prepare a Proposal"}</h3><p className="text-gray-600 mb-8">This is a private draft. Save it, review the details, then choose Send Proposal when you're ready to issue it to the customer.</p>
+  return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8"><h3 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-gray-900 mb-3 scroll-mt-32 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600">{proposal ? `Edit Proposal · Version ${proposal.version}` : initial ? "Prepare a New Revision" : "Prepare a Proposal"}</h3><p className="text-gray-600 mb-8">This is a private draft. Save it, review the details, then choose Send Proposal when you're ready to issue it to the customer.</p>
     <form onSubmit={submit} className="space-y-6"><fieldset disabled={busy} className="space-y-6">
       <div className="grid sm:grid-cols-2 gap-4"><div><label htmlFor={`${prefix}-total`} className="block text-sm font-medium text-gray-700 mb-2">Total Price in AUD *</label><Input id={`${prefix}-total`} name="total" inputMode="decimal" defaultValue={valuesFrom ? (valuesFrom.totalCents / 100).toFixed(2) : ""} placeholder="2500.00" maxLength={12} required /><p className="text-sm text-gray-500 mt-2">Use the full proposal total in Australian dollars, including for Colombia trips, with up to two decimal places.</p></div><div><label htmlFor={`${prefix}-valid`} className="block text-sm font-medium text-gray-700 mb-2">Valid Until (Optional)</label><Input id={`${prefix}-valid`} name="validUntil" type="date" defaultValue={valuesFrom?.validUntil || ""} /></div></div>
       <div><label htmlFor={`${prefix}-itinerary`} className="block text-sm font-medium text-gray-700 mb-2">Proposed Journey and Itinerary *</label><Textarea id={`${prefix}-itinerary`} name="itinerary" rows={8} maxLength={10000} defaultValue={valuesFrom?.itinerary || ""} placeholder="Describe the proposed journey, timing and arrangements clearly." required /></div>

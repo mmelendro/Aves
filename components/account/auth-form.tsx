@@ -23,7 +23,7 @@ type Mode = "sign-in" | "sign-up" | "forgot-password" | "reset-password"
 /**
  * Build a same-site Auth callback URL for email flows, with one of the two supported account targets.
  */
-function callbackUrl(next: "/account" | "/account/reset-password") {
+function callbackUrl(next: string) {
   const url = new URL(sitePath("/auth/callback"), window.location.origin)
   url.searchParams.set("next", next)
   return url.href
@@ -40,6 +40,8 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
   const [feedback, setFeedback] = useState("")
   const [success, setSuccess] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [emailUpdates, setEmailUpdates] = useState(false)
+  const signUpDestination = emailUpdates ? `/account/email-updates?next=${encodeURIComponent(destination)}` : destination
   const [recoveryReady, setRecoveryReady] = useState(mode !== "reset-password")
   const [recoveryChecked, setRecoveryChecked] = useState(mode !== "reset-password")
   const newPassword = mode === "sign-up" || mode === "reset-password"
@@ -82,7 +84,7 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
     try {
       const redirectTo = new URL(sitePath("/auth/callback"), window.location.origin)
       redirectTo.searchParams.set("flow", "oauth")
-      redirectTo.searchParams.set("next", destination)
+      redirectTo.searchParams.set("next", signUpDestination)
       const { error } = await createClient().auth.signInWithOAuth({
         provider,
         options: { redirectTo: redirectTo.href, scopes: provider === "facebook" ? "email" : "openid email profile" },
@@ -119,11 +121,11 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
       if (mode === "sign-in") {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw new Error(error.code === "email_not_confirmed" ? "Please confirm your email before signing in. Check your inbox for your account confirmation link." : "We couldn't sign you in. Check your email and password, or use the password reset link.")
-        window.location.assign(destination)
+        window.location.assign(signUpDestination)
       } else if (mode === "sign-up") {
-        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: callbackUrl("/account") } })
+        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: callbackUrl(emailUpdates ? signUpDestination : "/account") } })
         if (error) throw new Error(error.message || "We couldn't create your account. Please try again later.")
-        window.location.assign(accountEntryHref("/account/check-email", destination))
+        window.location.assign(accountEntryHref("/account/check-email", signUpDestination))
       } else if (mode === "forgot-password") {
         // Generic success text avoids asserting that an address has an account.
         const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: callbackUrl("/account/reset-password") })
@@ -151,6 +153,7 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
     <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6"><LockKeyhole className="w-6 h-6 text-emerald-700" /></div>
     <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? "Welcome Back" : mode === "sign-up" ? "Make Room for Your Next Adventure" : mode === "forgot-password" ? "Let's Get You Back In" : "Choose a New Password"}</h2>
     <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your AVES destination ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
+    {socialMode && <label className="flex items-start gap-3 mb-6 text-sm"><input type="checkbox" checked={emailUpdates} disabled={busy} onChange={event => setEmailUpdates(event.target.checked)} className="mt-1 accent-emerald-700" /><span>I'd like optional AVES email updates. After signing in, I'll confirm my subscription. This is optional and I can unsubscribe at any time.</span></label>}
     {socialMode && oauthProviders.length > 0 ? <div className="mb-6 space-y-3">
       {/* Google's unmodified artwork includes its current logo and lettering.
           Keeping it local avoids loading Google's scripts or fonts before a visitor chooses to sign in. */}
