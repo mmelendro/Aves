@@ -1,6 +1,21 @@
 # AVES Australia and shared AVES portal — handoff, updated 8 November 2026 (Sydney)
 
-## Current production — NZ Info transparency, 8 November 2026 (Sydney)
+## Current production — matching country Info panels, 8 November 2026 (Sydney)
+
+**AVES-012d-3 published, verified and paused.** Main country carousels on /colombia and /australia now match /new-zealand: 72% white backing, 2px blur, fully opaque text and darker small notes/links. Both apps use identical panel CSS, including stronger fallback/contrast treatments. Complete notes, picker, credits and discreet controls remain. Australian internal links use Next Link to retain /australia. Its duplicated inline details block is replaced by one extracted component for both presentations. Global, regional, article and other viewers retain below-photo details; wider rollout remains separately queued.
+
+| Application | Branch | Deployed application commit | Deployment |
+| --- | --- | --- | --- |
+| Global, Colombia and New Zealand | `webmaster/readiness-2026-11-05` | `b821eb6` | `dpl_7THMZBhhk9K1FWXB31Z1L8EnNiWK` |
+| Australia and shared accounts | `australia/preview` | `0389766` | `dpl_5kfdDGWWuNtBsJ6uLcpNC1TKE1bW` |
+
+**Verification:** source 22 focused tests and all 260 Australian tests, strict TypeScript and local/Vercel builds passed. A local Australian Webpack cache error was resolved by clearing generated cache; no dependency/configuration change. Tests render both presentations for all 73 featured profiles. Local 1280/390/720px checks covered unchanged frame height, bounded scroll, close/Escape/focus, picker/map updates, sound cleanup, slideshow and 254px minimum photo widths. Gouldian Finch's missing recording stays disabled. Both staged/live 1280/390px layouts passed; Australian staged recording-credit and region links arrived under the correct base path. Live mobile scrolling/close and Australian call playback passed. Physical devices and OS contrast modes were not exercised. No private data was submitted, test sound is paused and local servers stopped.
+
+Private evidence: `audit/evidence/nov8-co-au-info-overlay-checks.json`, `nov8-co-info-overlay-desktop-live.png`, `nov8-co-info-overlay-mobile-live.png`, `nov8-au-info-overlay-desktop-live.png` and `nov8-au-info-overlay-mobile-live.png`. Source architecture notes: `docs/INFO-OVERLAY-PILOT.md`. Four planning mirrors are current; documentation commits can be newer than the deployed app commits.
+
+**Next state:** all three country-homepage overlays are delivered. Other viewer templates (AGILE task 02b), extinct-species cleanup, collection titles, country totals and the remaining roadmap require separate selection. No account/database/provider/billing changes. The separate consolidation draft was not merged or deployed; carry the behavior of both current app fixes into that candidate before any future cutover. **Pause here before the next change.**
+
+## Historical production — NZ Info transparency, 8 November 2026 (Sydney)
 
 **AVES-012d-2 published, verified and paused.** https://aves.bio/new-zealand now reveals more of the bird through the Info sheet: 72% white backing and 2px blur, with fully opaque text and darker small notes/links. The stronger 92% fallback remains; increased-contrast preference uses 96% white and forced colours use system colours. Only the existing NZ overlay changes. No carousel data, credits, accounts, database, service, credential or billing change.
 

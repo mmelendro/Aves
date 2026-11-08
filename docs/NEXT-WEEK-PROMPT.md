@@ -1,13 +1,13 @@
 # AVES — current execution prompt
 
-Updated 8 November 2026 (Sydney). The NZ Info-overlay pilot and AVES-012d-2 transparency refinement are published and verified. Pause before another release or rollout.
+Updated 8 November 2026 (Sydney). Matching transparent Info panels are published and verified on all three country homepages (AVES-012d-1/2/3). Pause before another release or wider viewer rollout.
 
 Continue improving aves.bio in https://github.com/mmelendro/Aves. Keep the emerald style, thin AVES lettering, country bird/landscape marks and discreet media controls.
 
 ## Start with the correct project
 
-- `webmaster/readiness-2026-11-05`: homepage, Colombia and NZ. Published app `8948ccb`, deployment `dpl_DrUYTLFZHRJ3BKZTfN6Py4pHee4X`.
-- `australia/preview`: Australia and shared accounts/contact/quotes. Published app `10554a3`, deployment `dpl_4J7C7ecQeG2YovNNwYvbWHnH6QEX`.
+- `webmaster/readiness-2026-11-05`: homepage, Colombia and NZ. Published app `b821eb6`, deployment `dpl_7THMZBhhk9K1FWXB31Z1L8EnNiWK`.
+- `australia/preview`: Australia and shared accounts/contact/quotes. Published app `0389766`, deployment `dpl_5kfdDGWWuNtBsJ6uLcpNC1TKE1bW`.
 - Keep these independent apps/branches separate for current releases until an explicitly selected AVES-020 migration replaces this arrangement. Do not directly merge the application branches. Read the current `CONTINUE-HERE.md`, then the selected ID in [AVES-CHANGE-INBOX.md](AVES-CHANGE-INBOX.md). Read only the relevant section of [ROADMAP-DETAILS.md](ROADMAP-DETAILS.md). Use [AGILE-PLAN.md](AGILE-PLAN.md) for proposed batches and relative effort. Documentation commits may be newer than deployed code.
 
 ## Preserve completed work
@@ -16,11 +16,11 @@ Shared accounts at `/account`, Google sign-in, private drafts/requests, owner pr
 
 The three country homepages have working dividers and featured-bird region associations (CO 22, AU 20, NZ 31). The global homepage has a centered title, Equal Earth map, one switching carousel, its divider and three regional map cards. Speaker highlighting and the Santa Marta editorial pilot are delivered. Do not redo these foundations. Biodiversity overlays remain unfinished.
 
-AVES-012d-1 is delivered only on the main NZ destination hero: Info opens a bounded translucent sheet over the photo. Complete notes, picker and credits remain; close/Escape/focus, scrolling, sound, slideshow, wishlist and responsive layouts were checked locally and live. Other viewers retain below-photo details. See INFO-OVERLAY-PILOT.md and the current handoff for evidence and rollout limits.
+All three country-homepage heroes now use the same bounded translucent Info sheet (72% white, 2px blur, opaque dark text). Complete notes, picker and credits remain; close/Escape/focus, scrolling, sound, slideshow, map updates and responsive layouts were checked. NZ wishlist behavior remains delivered. Global, regional and article viewers retain their prior details layout. See INFO-OVERLAY-PILOT.md on the source branch and the current handoff for evidence and rollout limits.
 
 ## Separate draft application consolidation — AVES-020
 
-**A separate draft now exists:** PR #3, `integration/aves-unified-2026-11-08`, was prepared in the phone chat. It is not merged or live. Hosted provider/account/email checks and production cutover remain separate gates. Bring in later source fixes, including `8948ccb`, before any future unified release. Do not reimplement the draft or merge/publish it as part of a small visual change. The following consolidation requirements remain applicable: one Next.js application and one production Vercel project, retaining the existing repository/database and reusing delivered code/content.
+**A separate draft now exists:** PR #3, `integration/aves-unified-2026-11-08`, was prepared in the phone chat. It is not merged or live. Hosted provider/account/email checks and production cutover remain separate gates. Bring in later source and Australian fixes, including country-overlay behavior from `b821eb6` and `0389766`, before any future unified release. Do not reimplement the draft or merge/publish it as part of a small visual change. The following consolidation requirements remain applicable: one Next.js application and one production Vercel project, retaining the existing repository/database and reusing delivered code/content.
 
 First inventory route/file collisions, shared components, assets, configuration and deployment dependencies, then prepare a dedicated integration branch and unified preview. Preserve existing country/deep URLs, SEO/canonicals/redirects, Google/email sign-in and recovery, root-path sessions, private plans/wishlists/quotes, owner permissions, inquiry/notification handling, accessibility and media licences/credits. Keep the existing database, ownership policies and saved records.
 
@@ -30,7 +30,7 @@ Test the unified preview on desktop/mobile and verify essential public and priva
 
 ## Small release options
 
-1. **AVES-012d remainder — Info-overlay rollout:** the NZ destination pilot is complete. Apply the proven opt-in pattern to the remaining source viewers and independent Australian app in separately selected batches. Check shorter frames, bright/dark photos, phones and divider extremes; preserve complete notes/picker/credits, close/Escape/focus, sound/navigation/wishlist and country-change behavior. Do not repeat the pilot or bundle 3D animation.
+1. **AVES-012d remainder — other viewer templates:** NZ, Colombia and Australia main homepages are complete. Global, regional, experience/article and other viewers still need separately selected, frame-appropriate rollout checks. Check shorter frames, bright/dark photos, phones and divider extremes; preserve complete notes/picker/credits, close/Escape/focus, sound/navigation/wishlist and country-change behavior. Do not redo the country homepages or bundle 3D animation.
 
    **AVES-012d-2 delivered:** NZ now uses 72% white backing and 2px blur, with darker small text/links and fully opaque text. Bright/dark/busy photos, desktop/phone-sized layouts and narrow divider frames were checked. Stronger fallback/increased-contrast treatments remain. Other viewers are unchanged; do not redo this refinement.
 

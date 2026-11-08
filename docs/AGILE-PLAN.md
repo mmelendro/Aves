@@ -23,9 +23,9 @@ Delivered: NZ translucent Info overlay pilot (task 01), published and live-verif
 3. South Island practical planning tips — 3 units.
 4. Curated NZ resources — 3 units.
 
-Info-overlay rollout (task 02) is also available as a separate visual batch. The NZ pilot does not establish suitability for shorter frames without further checks.
+Country-homepage rollout (task 02 / AVES-012d-3) is delivered for Colombia and Australia, matching NZ. Other viewer templates remain task 02b; the country frames do not establish suitability for shorter frames without further checks.
 
-AVES-012d-2 is delivered: more of the bird shows through the NZ Info sheet, with darker readable notes/links. Local and hosted desktop/phone-sized checks, builds and sync are complete. Other-viewer rollout remains task 02, separately selected.
+AVES-012d-2 is delivered: more of the bird shows through the NZ Info sheet, with darker readable notes/links. Local and hosted desktop/phone-sized checks, builds and sync are complete. Other-viewer template rollout remains task 02b, separately selected.
 
 The map standard precedes card animation. Useful NZ content can proceed independently of ecological overlays or a whole-site map rollout. Only task selection is authorised by a later user instruction, not by a checkbox in a planning view.
 
@@ -34,7 +34,8 @@ The map standard precedes card animation. Useful NZ content can proceed independ
 | Task | Stream | Increment | Roadmap | Effort units | Expected usage pressure |
 | --- | --- | --- | --- | --- | --- |
 | 01 | Delivered 8 November | NZ translucent Info overlay pilot, live f5eee01 | AVES-012d-1 | 2 (original estimate) | Complete; no remaining pilot work |
-| 02 | Visual rollout | Info overlay across remaining source viewers and Australia | AVES-012d | 3 | Medium; split by app/template if needed |
+| 02 | Delivered 8 November | Matching Info overlays on Colombia and Australia country homepages | AVES-012d-3 | 3 (original estimate) | Complete for country homepages |
+| 02b | Visual rollout remaining | Other global/regional/experience/article viewer templates | AVES-012d | Estimate per selected template | Split shorter frames and applications into tested batches |
 | 03 | Suggested first | Uniform names and styling on three map cards | AVES-012c | 3 | Medium |
 | 04 | Visual rollout | Roll shared map style through page templates | AVES-012c / 012a | 5 | Higher |
 | 05 | Suggested first | Dedicated South Island page and local carousel | AVES-007 / 012a | 3 | Medium |
