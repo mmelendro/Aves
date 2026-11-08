@@ -8,8 +8,11 @@ settings require email confirmation. Google authorization start reaches Google's
 sign-in service with basic identity scopes. This does not complete sign-in, verify
 callback allowlisting or prove inbox delivery. No account or email was created.
 
-An isolated hosted test setup still needs approval. Existing production and the
-read-only unified Preview remain unchanged. No paid resource was created.
+The temporary hosted database request was declined during Supabase's cost
+confirmation workflow. No branch or paid resource was created. Do not retry
+provisioning without new user authorization. Existing production and the read-only
+unified Preview remain unchanged. Hosted acceptance is still blocked on an
+authorized test environment.
 [Sanitized preflight result](evidence/aves-unified-hosted-preflight.json).
 
 ## Proposed test setup
@@ -39,7 +42,7 @@ read-only unified Preview remain unchanged. No paid resource was created.
 
 Base branch compute is US$0.01344 per hour, about US$0.32 for 24 hours, plus
 applicable usage. This is not a total-cost cap. The branch has not been created;
-Supabase requires cost approval first.
+the cost confirmation request was declined.
 
 Sources checked on 8 November 2026:
 

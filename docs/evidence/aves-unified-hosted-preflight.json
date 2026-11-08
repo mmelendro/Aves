@@ -30,5 +30,10 @@
     "No sign-in credential was entered or exchanged",
     "Authorization start does not prove callback allowlisting",
     "No new hosted persistence or inbox-delivery test was completed"
-  ]
+  ],
+  "testEnvironmentRequest": {
+    "status": "declined",
+    "resourceCreated": false,
+    "retryRequiresNewAuthorization": true
+  }
 }
