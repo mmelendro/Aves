@@ -202,3 +202,7 @@ For new observations, use this short entry format:
 
 
 **9 November checkpoint:** 015/037 South Island map/photo flip pilot is authorized but unimplemented. New queued observations: 047 continuous call listening; 048 native/introduced filters across species lists; 049 AVES acronym/brand-wording review. See NEXT-WEEK-PROMPT.md and ROADMAP-DETAILS.md. These are recorded requests, not shipped features.
+
+**9 November follow-ups:** 050 flying 3D species-logo birds (retain static/reduced-motion fallback); 051 optional photo zoom/pinch when asset resolution permits. Queued separately from the selected place-card pilot; see ROADMAP-DETAILS.md.
+
+**Release9November:** ONE015/037 Arthur’s Pass flip card is published (source3ef94db); prior unimplemented status is superseded. **052** conservation/project/lodge maps per subregion captured as queued. Read the current prompt and place-card release checkpoint. Paused.
