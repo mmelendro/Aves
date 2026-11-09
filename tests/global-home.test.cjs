@@ -365,3 +365,13 @@ test("connected regional maps use feather cues and keep full-name selection acce
     assert.deepEqual(selected, [selectedRegionId])
   }
 })
+
+
+test("region navigation requires a deliberate preview and preserves native modified clicks", () => {
+  const { regionActivation } = load("lib/region-activation.ts")
+  const tap = { button: 0 }
+  assert.equal(regionActivation(null, "south-island", tap).preview, true, "default highlight is not a first tap")
+  assert.equal(regionActivation("south-island", "south-island", tap).native, true)
+  assert.equal(regionActivation("south-island", "north-island", tap).preview, true)
+  for (const event of [{button:1}, {button:0,ctrlKey:true}, {button:0,metaKey:true}, {button:0,shiftKey:true}, {button:0,altKey:true}]) assert.equal(regionActivation(null, "south-island", event).native, true)
+})

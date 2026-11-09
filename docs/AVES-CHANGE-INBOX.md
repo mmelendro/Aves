@@ -237,3 +237,12 @@ Owner request, 9 November 2026: integrate Google Maps with a list of main birdin
 ### AVES-012c owner correction after mobile review, 9 November 2026
 
 Owner rejected crossing connector lines and the remaining numbered/shaded connected map versus the new cards. Runtime `6f123b0` removes card leaders, puts full names in feather-accented labels above the geometry, shares a feather selection marker, and aligns the connected homepage maps' palette/markers. Region filtering, zoom, native selection and guide URLs remain. Published and verified, with precise mobile limits in [the correction checkpoint](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md). Country/subregion page rollout remains separate and queued.
+
+
+## Owner follow-up: mobile previews, layers and near-term soundscapes
+
+First tap on a subregion must immediately preview its map and paired card/media. A later tap on that same region, or an explicit Explore action, opens the existing guide. Hover/default highlights are not deliberate activation. Preserve native keyboard/modifier/Back behaviour and do not capture browser double-tap/pinch gestures.
+
+After verifying that fix, proceed automatically through relevant map filters one at a time, using South Island as the sample before a verified rollout across appropriate maps: satellite, habitats, national parks, protected/conserved areas, conservation projects, birding/ecotourism sites, public archaeological/heritage destinations, towns and relevant sourced species/seasonal facets. Data absence, licences and cost/privacy gates remain explicit.
+
+AVES-053 is promoted to the next media priority: habitat-specific South Island soundscapes soon, OFF until visitor opt-in, mute/volume, licensed and attributed recordings, fades below foreground bird calls/video/podcasts, no stale/background restart. Existing full acceptance criteria remain in ROADMAP-DETAILS.md. Prompt updated; soundscapes not yet implemented.

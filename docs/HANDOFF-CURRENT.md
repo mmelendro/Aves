@@ -6,6 +6,10 @@ Updated 9 November 2026, Sydney. This is the authoritative resumption checkpoint
 
 **AVES-012c homepage map-card pilot is published; paused after GitHub sync.** Runtime `6f123b0`, Production `dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV`. The owner rejected the diagonal leader and remaining connected-map mismatch. The [feather correction](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md) now aligns the homepage cards and connected regional map palette/markers. The [first card release](RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md) is historical. Desktop, 340px reflow, keyboard and all 23 selectors passed; exact 320/390px and physical touch remain unverified. Do not automatically execute the rest of the backlog. The owner also requested Google Maps, birding sites, intervening towns and travel times for every subregion: queued as [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md). No new purchases/subscriptions, no AI retries, and no app-branch merge.
 
+## Active owner follow-up after the pilot
+
+Continue with mobile first-tap region preview, then map filters one at a time using South Island as the selected sample, then reuse verified layers on other appropriate maps. Earlier pause instructions apply to completed releases, not a requirement to stop this newly authorized sequence. See NEXT-WEEK-PROMPT.md for exact interaction and data gates. AVES-053 habitat soundscapes is promoted to the next media priority, starting on South Island, opt-in with volume/mute, licensed provenance and foreground-audio fading. Soundscapes are queued, not shipped by this prompt update. No new spending or privacy relaxation is authorized.
+
 ## Repository, branches and deployment
 
 - Repository: https://github.com/mmelendro/Aves

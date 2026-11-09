@@ -17,6 +17,7 @@ import { DestinationSelectionContext } from "@/components/destination-selection-
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import DestinationRegionalMap from "@/components/destination-regional-map"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
+import { useRegionPreview } from "./use-region-preview"
 import styles from "./homepage-destination-explorer.module.css"
 
 export default function HomepageDestinationExplorer({ map, initialCountryId }: { map: ReactNode; initialCountryId?: string }) {
@@ -34,8 +35,10 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
   const highlightedRegions = region ? [region.id] : getBirdRegionIds(destination?.id, birdId || birds[0]?.id)
   const onBirdChange = useCallback((bird: BirdProfile) => setBirdId(bird.id), [])
 
+  const regionPreview = useRegionPreview(id => { setRegionId(id); setBirdId("") })
   const selectDestination = (id: string) => {
     if (!destinations.some(country => country.id === id)) return
+    regionPreview.clear()
     setSelectedId(id)
     setRegionId("")
     setBirdId("")
@@ -43,10 +46,10 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
   }
   const selectRegion = (id: string) => {
     if (id && !regions.some(item => item.id === id)) return
-    setRegionId(id)
-    setBirdId("")
+    regionPreview.preview(id)
   }
   const backToWorld = () => {
+    regionPreview.clear()
     setZoomed(false)
     setRegionId("")
     setBirdId("")
@@ -97,7 +100,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                   <button ref={backButton} type="button" onClick={backToWorld} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to world</button>
                   <h2 className="text-lg font-medium text-emerald-950">Explore {destination.name}</h2>
                 </div>
-                <div className={styles.regionalCanvas}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={selectRegion} /></div>
+                <div className={styles.regionalCanvas}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={id => { const item = regions.find(region => region.id === id); if (item) regionPreview.activateButton(id, item.href) }} /></div>
                 <figcaption className={styles.countryFooter}>
                   {region && <button ref={regionBackButton} type="button" onClick={() => selectRegion("")} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to {destination.name}</button>}
                   <label htmlFor="homepage-region" className="mb-2 block text-xs font-medium text-emerald-900">Choose a region in {destination.name}</label>
@@ -106,7 +109,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                     {regions.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
                   </select>
                   {region ? <a href={region.href} className={styles.regionLink}>Explore {region.name}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a>
-                    : <p className="mt-2 text-xs leading-5 text-emerald-900">Choose a region to meet its birds. Highlights show featured areas for the current bird.</p>}
+                    : <p className="mt-2 text-xs leading-5 text-emerald-900">Tap a region to preview its birds. Tap it again, or choose Explore, to open its guide. Highlights show featured areas for the current bird.</p>}
                   <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? `AVES planning ${region ? "location focus" : "regions"} · existing map artwork` : <><a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
                 </figcaption>
               </figure>}

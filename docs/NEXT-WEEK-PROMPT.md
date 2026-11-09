@@ -2,6 +2,15 @@
 
 Updated 9 November 2026. Homepage map-card pilot AVES-012c is published and corrected at runtime `6f123b0` and paused after GitHub sync. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Do not execute the backlog automatically. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
 
+
+## Latest owner direction: mobile preview, South Island filters and soundscapes
+
+This direction supersedes earlier instructions to pause after the homepage-card pilot. Finish and verify deliberate first-tap preview across subregion maps: immediately update selected map context and the paired card/media where available. Only a later tap on that same selected region opens its real guide. Keep a visible Explore link, keyboard alternatives, native modifier/new-tab links and browser pinch/scroll. A default or hover highlight does not count as the first tap. Do not require a rapid double tap.
+
+Then continue automatically with the relevant previously requested map filters, one at a time. The owner explicitly chose **South Island as the sample map**. Verify a filter there before extending it through appropriate country/subregion maps. Inventory satellite imagery, habitat/land cover, national parks, protected/conserved areas, conservation projects, ecotourism/birding places, public archaeological/heritage visitor sites, towns/transport and relevant sourced species/seasonal facets. Distinguish map layers from filters that change bird collections. Never invent coverage or hide a lack of data behind a working toggle. Source/licence/access/precision and no-new-spend gates still apply; do not expose sensitive wildlife or restricted cultural locations. Global ecological biodiversity hotspots are different from local birding sites.
+
+**AVES-053 ecosystem soundscapes is now the next media priority, not a distant optional layer.** Prepare a South Island habitat-linked pilot soon, coordinated with the map/filter work. Keep it OFF by default, require visitor playback, provide mute and volume, identify the ecosystem/recording and creator/licence, and crossfade only available appropriately located audio. Fade beneath bird calls, videos and podcasts; restore only the visitor's chosen level. Stop on off/navigation/hidden page, cancel stale loads, preserve browser audio restrictions and avoid sensitive locations. Use existing no-cost licensed sources and the current audio coordination, not a paid sound subscription. No recording or generic simulated audio may be labelled as real local wildlife without verified provenance. The owner requested this prompt priority update; audio playback is not yet implemented.
+
 ## Correct project and published state
 
 Repository: https://github.com/mmelendro/Aves

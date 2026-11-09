@@ -6,6 +6,7 @@
  */
 "use client"
 
+import { useRegionPreview } from "./use-region-preview"
 import { useEffect, useRef } from "react"
 import { ArrowDownRight, ArrowRight } from "lucide-react"
 import styles from "@/components/country-hero-explorer.module.css"
@@ -37,10 +38,10 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   const islandLinks = useRef<Record<string, HTMLAnchorElement | null>>({})
   const canReset = Boolean(onResetFocus)
   useEffect(() => { if (focusedIsland && canReset) backRef.current?.focus({ preventScroll: true }) }, [focusedIsland, canReset])
+  const preview = useRegionPreview(id => onSelectIsland?.(id as NewZealandIslandId))
   const choose = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     if (onSelectIsland && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
-      event.preventDefault()
-      onSelectIsland(id as NewZealandIslandId)
+      preview.activate(event, id)
     }
   }
   // Compact and full maps coexist on this page, so their accessible title IDs must differ.
@@ -82,7 +83,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   // The same SVG is reused in two wrappers; only the framing and companion links change.
   if (compact) return (
     <div style={frameHeight ? { height: frameHeight } : undefined} className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
-      <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 className="font-medium text-emerald-950">{focusIsland ? focusIsland.label : "Explore the islands"}</h2>{focusIsland ? onResetFocus ? <button ref={backRef} type="button" onClick={() => { onResetFocus(); if (focusedIsland) islandLinks.current[focusedIsland]?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</button> : <a href="/new-zealand#regions" className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to New Zealand</a> : <a href="#regions" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div>
+      <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 className="font-medium text-emerald-950">{focusIsland ? focusIsland.label : "Explore the islands"}</h2>{focusIsland ? onResetFocus ? <button ref={backRef} type="button" onClick={() => { preview.clear(); onResetFocus(); if (focusedIsland) islandLinks.current[focusedIsland]?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</button> : <a href="/new-zealand#regions" className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to New Zealand</a> : <a href="#regions" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div>
       {mapFigure}
       <nav aria-label="Explore New Zealand islands" className="mt-2 grid grid-cols-1 gap-2">
         {newZealandRegions.map(region => <a key={region.id} ref={node => { islandLinks.current[region.id] = node }} href={newZealandRegionHref(region.id)} onClick={event => choose(event, region.id)} aria-label={`Explore ${region.name}`} className={`inline-flex min-h-11 items-center justify-center rounded-lg border px-1 text-sm font-medium transition-colors hover:border-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${highlightedIslands.includes(region.id) ? "border-emerald-700 bg-emerald-800 text-white" : "border-emerald-200 bg-white text-emerald-900"}`}>{region.id === "north-island" ? "North Island" : region.id === "south-island" ? "South Island" : "Rakiura"}</a>)}
