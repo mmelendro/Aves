@@ -12,6 +12,7 @@ import { southIslandLandscapeSlides } from "@/lib/south-island-discovery"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { ArrowRight } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ExpandableMedia from "@/components/expandable-media"
 import NewZealandMap from "@/components/new-zealand-map"
 import SouthIslandEcosystemMap from "@/components/south-island-ecosystem-map"
 import SouthIslandHabitatSelect from "./south-island-habitat-select"
@@ -74,7 +75,9 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
         <p className="mt-2 text-xs leading-5 text-gray-500">Birds are grouped by broad habitat associations. The map shows generalised land cover, not exact species ranges or promised sightings. Species details retain local range, access guidance and sources; photograph and recording locations may differ.</p>
       </section>}<ResizableDiscoveryPair mediaId="birdlife" mapLabel={regionId === "south-island" ? "Explore South Island habitats" : "Explore the islands"} media={<>
         {/* A new collection stops old playback/Info; wishes remain in this parent. */}
+        <ExpandableMedia enabled={regionId === "south-island"} label="South Island birds">
         <HomepageBirdCarousel key={`${chosenRegion || "all-islands"}-${ecosystem}`} birds={birds} label={collectionLabel} imageTools={regionId === "south-island" ? <SouthIslandHabitatSelect value={ecosystem} onChange={selectEcosystem} label="Habitat for bird carousel" /> : undefined} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
+        </ExpandableMedia>
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{birds.length} featured species{chosenRegion ? ` associated with ${chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"}` : ", with a South Island focus"}. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
         {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem}

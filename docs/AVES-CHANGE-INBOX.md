@@ -256,3 +256,8 @@ Implementation paused at the owner's request. The authoritative consolidated acc
 ## 9 November — South Island shared discovery delivered; paused
 
 006c/055/012a foundation increment: one page-local place/photo/habitat selection connects both South Island maps and viewers, with four featured places/five licensed photos and broad sourced bird filters. Runtime d7e39e5 / dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx is published. No site-specific occurrence claims or new layers/media/data.129 tests/type/build, desktop/390/320px candidate/live checks and34 route/asset/sitemap checks passed. See RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md. Pause; full-screen is the next proposed separately selected increment, not yet delivered.
+
+
+## AVES-063 — Save places of interest with the private trip brief
+
+QUEUED, 9 November 2026. Add parks, conservation organisations/projects, birding lodges and other sourced public places alongside bird wishes. Start with South Island and the existing secure shared brief; support Add/Remove, review, save/reopen/edit and explicit owner sharing. Full acceptance and privacy/partnership limits are in NEXT-WEEK-PROMPT.md. Not shipped.

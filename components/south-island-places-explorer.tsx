@@ -11,6 +11,7 @@ import { southIslandPlaceContexts } from "@/content/south-island-place-media"
 import type { SouthIslandEcosystemFilter } from "@/content/south-island-ecosystems"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import ResizableDiscoveryPair from "./resizable-discovery-pair"
+import ExpandableMedia from "./expandable-media"
 import SouthIslandEcosystemMap from "./south-island-ecosystem-map"
 import SouthIslandHabitatSelect from "./south-island-habitat-select"
 import styles from "./south-island-places-explorer.module.css"
@@ -42,8 +43,8 @@ export default function SouthIslandPlacesExplorer() {
   return <ResizableDiscoveryPair mediaFirst mediaLabel="landscape photographs" mapLabel="Resize South Island places and map"
     map={<SouthIslandEcosystemMap selected={habitat} onSelect={filter} places={southIslandPlaceContexts}
       selectedPlace={place.id} onSelectPlace={next => showSlide(slides.findIndex(slide => slide.place.id === next))} />}
-    media={<section className={styles.card} aria-label="South Island places carousel">
-      <div className={styles.frame} tabIndex={0} onKeyDown={event => {
+    media={<ExpandableMedia label="South Island landscapes" kind="place"><section className={styles.card} aria-label="South Island places carousel">
+      <div data-place-image className={styles.frame} tabIndex={0} onKeyDown={event => {
         if (event.key === "Escape" && info) { event.preventDefault(); setInfo(false); infoButton.current?.focus() }
         if (event.target !== event.currentTarget) return
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); showSlide(active + (event.key === "ArrowRight" ? 1 : -1)) }
@@ -63,5 +64,5 @@ export default function SouthIslandPlacesExplorer() {
           <p className="mt-5 text-xs leading-5">Photo: {photo.creator}. <a href={photo.licenceUrl} target="_blank" rel="noreferrer" className="underline">{photo.licence}</a>. {photo.modifications}</p>
         </div>}
       </div>
-    </section>} />
+    </section></ExpandableMedia>} />
 }
