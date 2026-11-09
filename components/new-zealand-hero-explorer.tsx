@@ -5,6 +5,7 @@
  */
 "use client"
 
+import Link from "next/link"
 import { useContext, useEffect, useId, useState } from "react"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
@@ -84,7 +85,7 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
         {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem}
           places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         </div>
-        {chosenRegion && !regionId && <a href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>}
+        {chosenRegion && !regionId && <Link href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
           <span className="text-xs leading-5 text-gray-600">Begin with a personal conversation.</span>

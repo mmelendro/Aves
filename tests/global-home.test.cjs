@@ -11,6 +11,7 @@ const root = resolve(__dirname, "..")
 function createLoader(overrides = {}) {
   const cache = new Map()
   const adapters = {
+    "next/navigation": { useRouter: () => ({ push() {} }) },
     "next/image": ({ src, alt }) => React.createElement("img", { src, alt }),
     "next/link": ({ children, ...props }) => React.createElement("a", { ...props, "data-next-link": "true" }, children),
     "@/components/navigation-header": { NavigationHeader: function NavigationHeader() { return null } },

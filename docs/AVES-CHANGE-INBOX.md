@@ -296,3 +296,15 @@ Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6Z
 132 automated tests, TypeScript and clean hosted build passed; desktop1280, phone390 and short343px browser checks, plus nine live public-route/sitemap checks. Physical iPhone/Safari hardware remains untested. Read [release/evidence and source verification](RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCE-PLAYER.md). Previous full-screen release is checkpoint08; current recovery branch is checkpoint09. Australia/shared accounts were not changed by this release.
 
 **Pause before the next increment.** Remaining priorities:061 logo-to-menu landscape contour;053 optional habitat soundscapes/ducking;063 saving places of interest to private briefs; newly recorded064 concise biological/ecological/historical South Island orientation using authoritative and mana whenua sources. Regional bird identity and resource-to-map links are patterns to extend after verified pilots. No paid AI retry/new spending. Earlier status/order notes below are historical and superseded by this checkpoint.
+
+
+## AVES-065 — Private bird wishlist with eBird connections (queued, 9 November 2026)
+
+Extend the existing private bird selections rather than introducing a second shopping/bingo list. Visitors can save want-to-see species, review/remove them and attach them to their private trip brief. Link species and regional/seasonal research to eBird using stable species IDs and attributed data. Keep sightings/life lists separate from wishes. Explore a voluntary import of the traveller’s own eBird export to identify unseen targets, with preview, minimal retained data, deletion and explicit permission. eBird provides a public observations API and personal data downloads; direct account/OAuth or personal wishlist read/write syncing has NOT been verified. Do not request eBird passwords, scrape private accounts or promise bidirectional syncing. Check official API capabilities/terms and costs before implementation. No database change or eBird connection is shipped by this entry.
+
+Sources: https://support.ebird.org/en/support/solutions/articles/48001078113 ; https://support.ebird.org/en/support/solutions/articles/48000960317 ; https://www.birds.cornell.edu/home/ebird-api-terms-of-use/ .
+
+
+## AVES-066 — Colombia whole-region map hover (queued, owner priority)
+
+Homepage country cards: Colombia currently responds at location dots, while Australia/New Zealand respond across region shapes. Make the Colombian planning-region area itself preview/highlight the corresponding region on pointer hover and keyboard focus; retain dots as location markers and maintain first tap preview, second/Explore guide navigation, clear selected state, touch and native modifier behaviour. Inspect source geometry before mapping shapes: planning regions may overlap and must not be misrepresented as official administrative boundaries. Provide accessible equivalent region links and test all 11 destinations. Owner reported9 November2026; queued separately from the persistent-player pilot.

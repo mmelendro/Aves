@@ -14,11 +14,7 @@
 .feather:disabled { opacity:.4; }
 .play { width:64px; height:64px; margin:0 auto; color:white; background:#047857; border-color:#047857; }
 .play:hover { color:#064e3b; }
-.audioControls { padding:1.25rem 1.5rem 0; }
-.range { display:block; width:100%; min-height:44px; accent-color:#047857; }
 .link { display:inline-flex; align-items:center; min-height:44px; margin-top:1rem; color:#006b56; text-decoration:underline; text-underline-offset:4px; font-size:.875rem; }
 .mapLink { display:inline-flex; align-items:center; gap:.4rem; min-height:44px; color:#006b56; text-decoration:underline; text-underline-offset:4px; font-size:.875rem; }
 .mapLink:focus-visible { outline:2px solid #047857; outline-offset:4px; }
-.video { width:100%; min-height:200px; aspect-ratio:16/9; border:0; background:#071b17; }
-.unload { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; align-self:flex-end; min-height:44px; margin:.5rem 1rem 0; padding:0 .75rem; border-radius:1rem; color:#065f46; font-size:.875rem; }
 @media(max-width:703px) { .card { grid-template-columns:minmax(0,1fr); } .copy { padding:1.25rem; } .player { padding-top:1rem; } .select { flex-basis:100%; } .illustration { padding-top:.5rem; } }

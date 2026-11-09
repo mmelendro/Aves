@@ -5,7 +5,7 @@ import { regionActivation } from "@/lib/region-activation"
 /** First activation previews immediately. A later activation opens the guide.
  * No double-tap timer or touch gesture interception: browser zoom still works.
  */
-export function useRegionPreview(onPreview: (id: string) => void) {
+export function useRegionPreview(onPreview: (id: string) => void, navigate: (href: string) => void = href => window.location.assign(href)) {
   const armed = useRef<string | null>(null)
   function preview(id: string) { armed.current = id || null; onPreview(id) }
   function activate(event: MouseEvent, id: string) {
@@ -14,7 +14,7 @@ export function useRegionPreview(onPreview: (id: string) => void) {
     preview(id)
   }
   function activateButton(id: string, href: string) {
-    if (armed.current === id) { window.location.assign(href); return }
+    if (armed.current === id) { navigate(href); return }
     preview(id)
   }
   function activateKey(event: KeyboardEvent, id: string, href: string) {

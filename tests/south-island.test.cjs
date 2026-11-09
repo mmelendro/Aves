@@ -12,6 +12,7 @@ const root = resolve(__dirname, "..")
 function createLoader(overrides = {}) {
   const cache = new Map()
   const adapters = {
+    "next/navigation": { useRouter: () => ({ push() {} }) },
     "next/image": ({ src, alt, fill, sizes, priority, ...props }) => React.createElement("img", { src, alt, ...props }),
     "next/link": ({ children, ...props }) => React.createElement("a", props, children),
     ...overrides,
@@ -330,7 +331,7 @@ test("resource carousel retains all six sources and keeps external media unloade
   assert.equal((html.match(/<article /g) || []).length, 1)
   assert.doesNotMatch(html, /<iframe|<audio[^>]+src=|autoplay=/)
   assert.match(html, /aria-label="Play podcast"/)
-  assert.match(html, /Podcast position/)
+  assert.match(html, /Listen or watch as you explore/)
   assert.match(html, /href="https:\/\/www\.doc\.govt\.nz\/news\/podcast\/"/)
 })
 
@@ -355,4 +356,12 @@ test("field-guide purchase links go directly to the verified publishers without 
     assert.ok(guide.author && guide.note && guide.publisher)
     assert.doesNotMatch(guide.note, /\$|guaranteed|in stock/)
   }
+})
+
+
+test("persistent player stays absent until a deliberate media request", () => {
+  const { AvesMediaProvider } = load("components/aves-media-provider.tsx")
+  const html = renderToStaticMarkup(React.createElement(AvesMediaProvider, null, React.createElement("main", null, "Explore")))
+  assert.match(html, /<main>Explore<\/main>/)
+  assert.doesNotMatch(html, /<audio|<iframe|iframe_api|AVES travel media player/)
 })

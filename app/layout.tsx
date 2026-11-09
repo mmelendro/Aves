@@ -6,6 +6,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
@@ -89,7 +90,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CookieConsentProvider>
-          {children}
+          <AvesMediaProvider>{children}</AvesMediaProvider>
           <CookiePreferenceCenter />
           <CookieBanner />
         </CookieConsentProvider>

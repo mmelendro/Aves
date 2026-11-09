@@ -6,6 +6,8 @@
  */
 "use client"
 
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useRegionPreview } from "./use-region-preview"
 import { useEffect, useRef } from "react"
 import { ArrowDownRight, ArrowRight } from "lucide-react"
@@ -38,7 +40,8 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   const islandLinks = useRef<Record<string, HTMLAnchorElement | null>>({})
   const canReset = Boolean(onResetFocus)
   useEffect(() => { if (focusedIsland && canReset) backRef.current?.focus({ preventScroll: true }) }, [focusedIsland, canReset])
-  const preview = useRegionPreview(id => onSelectIsland?.(id as NewZealandIslandId))
+  const router = useRouter()
+  const preview = useRegionPreview(id => onSelectIsland?.(id as NewZealandIslandId), href => router.push(href))
   const choose = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     if (onSelectIsland && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       preview.activate(event, id)
@@ -62,14 +65,14 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
               const label = labels[index]
               const highlighted = highlightedIslands.includes(island.id)
               return (
-                <a key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${island.label}`} aria-hidden={focusIsland && focusIsland.id !== island.id ? true : undefined} tabIndex={focusIsland && focusIsland.id !== island.id ? -1 : undefined} className="group outline-none" style={focusIsland && focusIsland.id !== island.id ? { pointerEvents: "none" } : undefined}>
+                <Link key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${island.label}`} aria-hidden={focusIsland && focusIsland.id !== island.id ? true : undefined} tabIndex={focusIsland && focusIsland.id !== island.id ? -1 : undefined} className="group outline-none" style={focusIsland && focusIsland.id !== island.id ? { pointerEvents: "none" } : undefined}>
                   <g className={`${highlighted ? "fill-emerald-800" : compact ? "fill-[#c5dbd0]" : islandStyles[index]} stroke-[#6e9582] transition-colors group-hover:fill-[#9cc4af] group-focus:fill-[#9cc4af] group-focus:stroke-emerald-950`}>
                     {island.paths.map((path, pathIndex) => <path key={pathIndex} d={path} strokeWidth={highlighted ? "2" : "1.2"} vectorEffect="non-scaling-stroke" fillRule="evenodd" className="group-focus:stroke-[3]" />)}
                   </g>
                   {!focusIsland && <><path d={label.leader} fill="none" stroke="currentColor" strokeWidth="1.5" className="text-emerald-700" aria-hidden="true" />
                   <rect x={label.x - label.width / 2} y={label.y - (compact ? 28 : 18)} width={label.width} height={compact ? "56" : "36"} rx={compact ? "24" : "18"} className={`${highlighted ? "fill-emerald-800 stroke-emerald-800" : "fill-white stroke-emerald-300"} group-hover:stroke-emerald-800 group-focus:stroke-emerald-950 group-focus:stroke-[3]`} />
                   <text x={label.x} y={label.y + (compact ? 7 : 5)} textAnchor="middle" fontSize={compact ? "21" : "15"} fontWeight="600" className={highlighted ? "fill-white" : "fill-emerald-900"} aria-hidden="true">{compact && island.id === "rakiura" ? "Rakiura" : island.label}</text></>}
-                </a>
+                </Link>
               )
             })}
             </g>
@@ -83,10 +86,10 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   // The same SVG is reused in two wrappers; only the framing and companion links change.
   if (compact) return (
     <div style={frameHeight ? { height: frameHeight } : undefined} className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
-      <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 className="font-medium text-emerald-950">{focusIsland ? focusIsland.label : "Explore the islands"}</h2>{focusIsland ? onResetFocus ? <button ref={backRef} type="button" onClick={() => { preview.clear(); onResetFocus(); if (focusedIsland) islandLinks.current[focusedIsland]?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</button> : <a href="/new-zealand#regions" className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to New Zealand</a> : <a href="#regions" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div>
+      <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 className="font-medium text-emerald-950">{focusIsland ? focusIsland.label : "Explore the islands"}</h2>{focusIsland ? onResetFocus ? <button ref={backRef} type="button" onClick={() => { preview.clear(); onResetFocus(); if (focusedIsland) islandLinks.current[focusedIsland]?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</button> : <Link href="/new-zealand#regions" className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to New Zealand</Link> : <a href="#regions" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div>
       {mapFigure}
       <nav aria-label="Explore New Zealand islands" className="mt-2 grid grid-cols-1 gap-2">
-        {newZealandRegions.map(region => <a key={region.id} ref={node => { islandLinks.current[region.id] = node }} href={newZealandRegionHref(region.id)} onClick={event => choose(event, region.id)} aria-label={`Explore ${region.name}`} className={`inline-flex min-h-11 items-center justify-center rounded-lg border px-1 text-sm font-medium transition-colors hover:border-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${highlightedIslands.includes(region.id) ? "border-emerald-700 bg-emerald-800 text-white" : "border-emerald-200 bg-white text-emerald-900"}`}>{region.id === "north-island" ? "North Island" : region.id === "south-island" ? "South Island" : "Rakiura"}</a>)}
+        {newZealandRegions.map(region => <Link key={region.id} ref={node => { islandLinks.current[region.id] = node }} href={newZealandRegionHref(region.id)} onClick={event => choose(event, region.id)} aria-label={`Explore ${region.name}`} className={`inline-flex min-h-11 items-center justify-center rounded-lg border px-1 text-sm font-medium transition-colors hover:border-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${highlightedIslands.includes(region.id) ? "border-emerald-700 bg-emerald-800 text-white" : "border-emerald-200 bg-white text-emerald-900"}`}>{region.id === "north-island" ? "North Island" : region.id === "south-island" ? "South Island" : "Rakiura"}</Link>)}
       </nav>
       <p className="mt-2 text-xs leading-4 text-gray-600">{highlightedIslands.length ? "Highlighted: areas featured for this bird, not its complete range." : "Choose an island to explore its landscapes and birdlife."}</p>
     </div>
@@ -101,11 +104,11 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
           <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">Find your place on the map</h3>
           <p className="mt-4 leading-7 text-gray-600">Select an island to discover its landscapes and birdlife, then start imagining the pace of your journey.</p>
           <nav aria-label="New Zealand islands" className="mt-6 space-y-3">
-            {newZealandRegions.map((region, index) => <a key={region.id} href={newZealandRegionHref(region.id)} className="group flex min-h-16 items-center gap-4 rounded-2xl border border-emerald-200 bg-white px-5 py-4 transition-colors hover:border-emerald-600 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
+            {newZealandRegions.map((region, index) => <Link key={region.id} href={newZealandRegionHref(region.id)} className="group flex min-h-16 items-center gap-4 rounded-2xl border border-emerald-200 bg-white px-5 py-4 transition-colors hover:border-emerald-600 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
               <span className="text-sm font-bold text-emerald-600" aria-hidden="true">0{index + 1}</span>
               <span className="min-w-0 flex-1"><span className="block font-semibold text-emerald-950">{region.name}</span><span className="mt-1 block text-sm text-gray-600">{region.subtitle}</span></span>
               <ArrowRight className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </a>)}
+            </Link>)}
           </nav>
         </div>
       </div>
