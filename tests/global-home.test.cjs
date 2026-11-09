@@ -423,7 +423,8 @@ test("satellite image provenance uses exactly the habitat map's Mercator extent"
 })
 
 test("map backgrounds do not silently change the bird habitat filter", () => {
-  const state = {layers:{background:"satellite",nationalParks:false,conservation:false,park:""},update(){}}
+  const defaults = createLoader()("components/map-layer-context.tsx").initialMapLayers
+  const state = {layers:{...defaults,background:"satellite",ecosystems:false},update(){}}
   const renderer = createLoader({"./map-layer-context":{useMapLayers:()=>state}})
   const Map = renderer("components/south-island-ecosystem-map.tsx").default
   const selected = []
@@ -432,4 +433,35 @@ test("map backgrounds do not silently change the bird habitat filter", () => {
   assert.match(html,/2004/)
   assert.doesNotMatch(html,/aria-label="Show Forest &amp; scrub birds on map"/,"hidden land cover must not remain an invisible click target")
   assert.deepEqual(selected,[],"switching background is not a bird-filter action")
+  state.layers.ecosystems = true
+  state.layers.nationalParks = true
+  state.layers.conservation = true
+  state.layers.businesses = true
+  const combined = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
+  assert.match(combined,/data-map-layer="satellite"[^>]*opacity="0.55"|opacity="0.55"[^>]*data-map-layer="satellite"/)
+  assert.match(combined,/data-map-layer="ecosystems"/)
+  assert.match(combined,/aria-label="Show Forest &amp; scrub birds on map"/)
+  assert.match(combined,/Preview public place: Abel Tasman Eco Tours/)
+  assert.deepEqual(selected,[],"combined display layers preserve the chosen bird filter")
+})
+
+test("public place layers deduplicate shared projects and distinguish business evidence", () => {
+  const loader = createLoader()
+  const {visiblePublicPlaces,publicPlaceCategories,publicPlaces} = loader("lib/south-island-public-places.ts")
+  const all = Object.fromEntries(publicPlaceCategories.map(category=>[category.id,true]))
+  const points = visiblePublicPlaces(all)
+  assert.equal(points.length,10)
+  assert.equal(new Set(points.map(point=>point.id)).size,10)
+  const businesses = visiblePublicPlaces({...Object.fromEntries(publicPlaceCategories.map(category=>[category.id,false])),businesses:true})
+  assert.equal(businesses.length,2)
+  assert.ok(businesses.every(point=>/^https:\/\//.test(point.evidenceUrl)))
+  assert.match(publicPlaces.coverage,/not a complete directory/)
+  const bbox = load("content/south-island-ecosystem-map.json").bbox
+  const project = loader("lib/ecosystem-map-camera.ts").ecosystemMapPoint
+  for (const point of points) {
+    const xy = project(point.longitude,point.latitude,bbox)
+    assert.ok(xy.x>=0 && xy.x<=480 && xy.y>=0 && xy.y<=640,point.name)
+    assert.ok(point.precision && point.coordinateSource && point.checked && /^https:\/\//.test(point.url),point.name)
+  }
+  assert.equal(visiblePublicPlaces(Object.fromEntries(publicPlaceCategories.map(category=>[category.id,false]))).length,0)
 })
