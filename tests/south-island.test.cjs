@@ -344,3 +344,15 @@ test("resource map references use reviewed places and never map offshore footage
   assert.equal(resources.find(resource => resource.id === "kiwi-diaries").mapPlace.name, "Fiordland")
   assert.equal(resources.find(resource => resource.id === "kakapo-highlights").mapPlace, null)
 })
+
+
+test("field-guide purchase links go directly to the verified publishers without prices or affiliate tracking", () => {
+  const guides = load("content/south-island.ts").southIslandFieldGuides
+  assert.equal(guides.length, 2)
+  assert.deepEqual(guides.map(guide => new URL(guide.href).hostname), ["www.penguin.co.nz", "aucklanduniversitypress.co.nz"])
+  for (const guide of guides) {
+    assert.equal(new URL(guide.href).search, "")
+    assert.ok(guide.author && guide.note && guide.publisher)
+    assert.doesNotMatch(guide.note, /\$|guaranteed|in stock/)
+  }
+})

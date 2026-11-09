@@ -95,3 +95,12 @@ export const southIslandResources = [
   { id: "kea-reading", mapPlace: { id: "mountains", name: "Arthur’s Pass" }, playback: null, kind: "Reading", title: "Get to know the kea", publisher: "New Zealand Birds Online · Species reference", context: "South Island mountain country", description: "Read about identification, behaviour and the natural history of the mountain parrot featured in our carousel. Use it to learn the bird rather than to predict a sighting.", href: "https://www.nzbirdsonline.org.nz/species/kea", action: "Read the kea reference" },
   { id: "nelson-lakes-reading", mapPlace: { id: "forest-and-lakes", name: "Nelson Lakes" }, playback: null, kind: "Reading", title: "Explore Nelson Lakes on paper first", publisher: "Department of Conservation · Park guide", context: "Northern South Island", description: "Explore the park’s official visitor information and walking resources before deciding which forest-and-lake outings suit you. Recheck access advice when planning your day.", href: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/", action: "Read the Nelson Lakes guide" },
 ] as const
+
+
+/** Publisher purchase pages checked 9 November2026. No AVES pricing, affiliate
+ * tracking or stock promise; clients compare current editions/shipping there.
+ */
+export const southIslandFieldGuides = [
+  { title: "The Hand Guide to the Birds of New Zealand", author: "Barrie Heather & Hugh Robertson · illustrated by Derek Onley", note: "An illustrated paperback companion for identifying birds in the field. Compare the edition and buying options on Penguin’s page.", href: "https://www.penguin.co.nz/books/the-hand-guide-to-the-birds-of-new-zealand-9780143570936", publisher: "Penguin New Zealand", action: "Find online booksellers" },
+  { title: "Birds of New Zealand: A Photographic Guide", author: "Paul Scofield & Brent Stephenson", note: "A photographic reference for comparing plumage and learning about identification and behaviour. Check the publisher’s edition and delivery details before ordering.", href: "https://aucklanduniversitypress.co.nz/birds-of-new-zealand-a-photographic-guide/", publisher: "Auckland University Press", action: "Buy from the publisher" },
+] as const

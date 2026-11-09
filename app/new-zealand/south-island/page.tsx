@@ -12,7 +12,7 @@ import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
 import SouthIslandPlacesExplorer from "@/components/south-island-places-explorer"
 import SouthIslandHabitatProvider from "@/components/south-island-habitat-context"
 import { newZealandContactHref } from "@/content/new-zealand"
-import { southIslandBriefHref, southIslandPlanning } from "@/content/south-island"
+import { southIslandBriefHref, southIslandFieldGuides, southIslandPlanning } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
 
 const path = "/new-zealand/south-island"
@@ -110,6 +110,16 @@ export default function SouthIslandPage() {
             <h2 id="resources-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Listen, watch and read.</h2>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">A small collection to bring the birds and landscapes into focus, from Fiordland’s fieldwork stories to a closer look at the kea.</p>
             <SouthIslandResourceCarousel />
+            <details className="mt-6 rounded-2xl border border-emerald-100 bg-white p-5 sm:p-6">
+              <summary className="min-h-11 cursor-pointer py-2 font-medium text-emerald-900">Field guides to buy online</summary>
+              <div className="mt-4 grid gap-6 md:grid-cols-2">{southIslandFieldGuides.map(guide => <article key={guide.href}>
+                <h3 className="text-lg font-medium text-emerald-950">{guide.title}</h3>
+                <p className="mt-2 text-xs leading-5 text-gray-500">{guide.author}</p>
+                <p className="mt-3 text-sm leading-6 text-gray-600">{guide.note}</p>
+                <a href={guide.href} target="_blank" rel="noreferrer" className={textLinkStyle}>{guide.action} · {guide.publisher}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
+              </article>)}</div>
+              <p className="mt-4 text-xs leading-5 text-gray-500">Independent purchase links, with no AVES affiliate tracking. Prices, stock and delivery are set by the seller. These books cover New Zealand more broadly than the South Island; check the edition and range notes alongside current bird references.</p>
+            </details>
             <p className="mt-5 text-xs leading-5 text-gray-500">Publisher sources checked 9 November 2026. Podcasts stream from DOC’s public feed; videos play through YouTube after you load them. Availability is controlled by the publishers. Conservation stories and offshore footage do not describe current trip access.</p>
           </div>
         </section>
