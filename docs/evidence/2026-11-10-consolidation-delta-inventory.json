@@ -1,0 +1,2933 @@
+{
+  "reviewDate": "2026-11-10",
+  "timezone": "Australia/Sydney",
+  "scope": "C0 source assessment only; no application branch edits, deployments, provider changes, customer data, SQL or emails",
+  "heads": {
+    "main": "1f28a40d95179986f52df31c50a83c34619e9045",
+    "australia": "68711fd53bbc4882511e3d2226344828ccda208f",
+    "integration": "33fcd0e99895257a6610c36fd30f407d3e67d4b1"
+  },
+  "importBases": {
+    "main": "705fe200f8c73c13c7fef853853f77096e7f9591",
+    "australia": "802422c4cc731488400a4debd598fff43b63cf3a"
+  },
+  "counts": {
+    "mainChanged": 204,
+    "mainNonDocumentation": 122,
+    "auChanged": 107,
+    "auNonDocumentation": 60,
+    "mainBothChanged": 13,
+    "mainApplicationBothChanged": 7,
+    "mainApplicationTextualConflictFiles": 3,
+    "mainApplicationConflictBlocks": 4,
+    "publicRoutes": {
+      "main": 42,
+      "australia": 32,
+      "unified": 74
+    }
+  },
+  "treeComplete": true,
+  "draftPr": {
+    "number": 3,
+    "draft": true,
+    "mergeable": false,
+    "aheadOfMain": 69,
+    "behindMain": 91
+  },
+  "applicationMergeProbe": [
+    {
+      "path": "app/colombia/page.tsx",
+      "conflictBlocks": 1
+    },
+    {
+      "path": "app/credits/page.tsx",
+      "conflictBlocks": 0
+    },
+    {
+      "path": "app/layout.tsx",
+      "conflictBlocks": 2
+    },
+    {
+      "path": "app/new-zealand/page.tsx",
+      "conflictBlocks": 0
+    },
+    {
+      "path": "app/page.tsx",
+      "conflictBlocks": 0
+    },
+    {
+      "path": "components/contact-form-section.tsx",
+      "conflictBlocks": 1
+    },
+    {
+      "path": "components/navigation-header.tsx",
+      "conflictBlocks": 0
+    }
+  ],
+  "probeMethod": "git merge-file -p draft ancestor current-main on seven retrieved text-file triples in temporary files; documentation overlaps not probed. This is not an actual branch merge or runtime test.",
+  "sharedSourceEquality": [
+    {
+      "path": "lib/cover-focal-position.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "lib/map-zoom.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "lib/media-handoff.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "lib/media-identity.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "lib/media-navigation.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "lib/region-activation.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "components/aves-media-provider.tsx",
+      "mainAuIdentical": false
+    },
+    {
+      "path": "components/use-region-preview.ts",
+      "mainAuIdentical": false
+    },
+    {
+      "path": "components/species-details-panel.tsx",
+      "mainAuIdentical": false
+    },
+    {
+      "path": "content/new-zealand-checklist.ts",
+      "mainAuIdentical": true
+    },
+    {
+      "path": "content/travel-media.ts",
+      "mainAuIdentical": true
+    }
+  ],
+  "missingMaintainedMigrationHistory": [
+    "20261108192239_private_trip_budget_preferences.sql",
+    "20261108225245_account_email_updates.sql",
+    "20261109001033_private_ai_proposal_drafts.sql"
+  ],
+  "migrationWarning": "Draft native fixture explicitly applies eight maintained migrations and excludes the historical Colombia replacement security baseline. Do not run every SQL file or reapply existing deployed migrations. AI history does not authorise any model/provider request.",
+  "mainDelta": [
+    {
+      "path": "CONTINUE-HERE.md",
+      "kind": "documentation",
+      "baseBlob": "c83461c4bcfc3bb9a20f943f518b94a5c8158b70",
+      "sourceBlob": "6524552f650296787789d2bb290e1c409187fa07",
+      "draftBlob": "27f55cbc6a758bb4c6f02249cb8b81a5bfa669a3",
+      "size": 808,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "app/colombia/page.tsx",
+      "kind": "application-source",
+      "baseBlob": "8959de4ef54675e8fe30e99b05e8336ad7db5460",
+      "sourceBlob": "437c1099545b8f1c067112cc5b5dfde14139817b",
+      "draftBlob": "d35f8a227387dfd588769e8fe7e0b5fae0971e49",
+      "size": 1099,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "app/credits/page.tsx",
+      "kind": "application-source",
+      "baseBlob": "e98085273391f6ad93656aa9c75e040586d4b331",
+      "sourceBlob": "5addb87e0958138e56cbf00b6aad2e18d1c56831",
+      "draftBlob": "ffa1cb141735a11082b9a828dae882c1692834cc",
+      "size": 5473,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "app/layout.tsx",
+      "kind": "application-source",
+      "baseBlob": "dac9dd8fd3d7ac846babe972201565feb9375274",
+      "sourceBlob": "57d63efd1d822a9aa88328c131282813ab90dd69",
+      "draftBlob": "0b9cd3f34ac2503e5e1c2a8f6d768291df4b78fd",
+      "size": 4432,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "app/new-zealand/page.tsx",
+      "kind": "application-source",
+      "baseBlob": "379d89895d54b7c786869d23cbe562ad12c541fa",
+      "sourceBlob": "f9992fc676dda521203a22323b97fb08eb597350",
+      "draftBlob": "db1d452a7993c5c104e95641e3929e0971ad1f66",
+      "size": 15694,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "app/new-zealand/south-island/page.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "f621ed3bb71f45e7bb8ba38c06c6b3dd0edfb9f2",
+      "draftBlob": null,
+      "size": 15312,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "app/page.tsx",
+      "kind": "application-source",
+      "baseBlob": "33e22de152a1ae9b997e6a8eb0fced2722891028",
+      "sourceBlob": "7766772e6bc238f29e1145b29684a5747eb6ab6f",
+      "draftBlob": "923f4acd2bf20988f307add5f0010e4642ca60ab",
+      "size": 7822,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "components/aves-media-provider.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4357a35db74485745f78bb93a7e404dbde6146da",
+      "draftBlob": null,
+      "size": 2521,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/aves-media-provider.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "05182fbfb9ffe55c375f38bc5c65bcf78969c88b",
+      "draftBlob": null,
+      "size": 17783,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/birds-brand-word.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "2c308d214ded0a5e73215e7d0d297ea0fbf0ca28",
+      "draftBlob": null,
+      "size": 1295,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/birds-brand-word.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "327ddd99c0f484af76d3aaccf7439ad8dac8d986",
+      "draftBlob": null,
+      "size": 1614,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/brand-mark.tsx",
+      "kind": "application-source",
+      "baseBlob": "98e368c7454fd616611c46f5d9d8543df5d721f5",
+      "sourceBlob": "d99936a4850077ceb0779b22e2e464d627b96b23",
+      "draftBlob": "98e368c7454fd616611c46f5d9d8543df5d721f5",
+      "size": 4249,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/colombia-hero-explorer.tsx",
+      "kind": "application-source",
+      "baseBlob": "0c93ab641fb5dceea12c59c52239de649c0da4fc",
+      "sourceBlob": "0de5a20adb323cc78dafdf94574002881cfe2d63",
+      "draftBlob": "0c93ab641fb5dceea12c59c52239de649c0da4fc",
+      "size": 10803,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/colombia-home-language.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "373f3aca040630f540bf88918c7c9f4fdb2eefaa",
+      "draftBlob": null,
+      "size": 4502,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/colombia-home-page.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4a6328331e9b5e9b9e344fc2128900b9bcd47110",
+      "draftBlob": null,
+      "size": 14785,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/colombia-map-artwork.tsx",
+      "kind": "application-source",
+      "baseBlob": "6845dd122f1c7463dc7f4bfd44dd3a889108d1fc",
+      "sourceBlob": "5d2e134b93e500372b1a36be2a9de355a550d784",
+      "draftBlob": "6845dd122f1c7463dc7f4bfd44dd3a889108d1fc",
+      "size": 2205,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/colombia-region-page.tsx",
+      "kind": "application-source",
+      "baseBlob": "292f38dcd33f79c9e9b36458505a8c1219cbcb8b",
+      "sourceBlob": "c57cbeb66ad87eb3625d86723379c0c9d6e1d95c",
+      "draftBlob": "292f38dcd33f79c9e9b36458505a8c1219cbcb8b",
+      "size": 6767,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/contact-form-section.tsx",
+      "kind": "application-source",
+      "baseBlob": "e78acb29b1d65dbc80e381053eb668d5ae3bd8ed",
+      "sourceBlob": "1276f1b221737e61867d04073b909e54977f51ea",
+      "draftBlob": "9230fb8abc9d1540d6eb8dfd7c949b8e69cfbafe",
+      "size": 29207,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "components/cookie-banner.tsx",
+      "kind": "application-source",
+      "baseBlob": "7fd5a633cbccdaf172b448c59ae71b3d24b99a43",
+      "sourceBlob": "1bcd03085a3fef6e1f66ffea00eca0e09486d937",
+      "draftBlob": "7fd5a633cbccdaf172b448c59ae71b3d24b99a43",
+      "size": 3921,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/cookie-preference-center.tsx",
+      "kind": "application-source",
+      "baseBlob": "4c34d3712c713f0552b20ccf9619021b2c0f4783",
+      "sourceBlob": "3e959b3f084443621e7aa1fb16337bb47533541c",
+      "draftBlob": "4c34d3712c713f0552b20ccf9619021b2c0f4783",
+      "size": 11271,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/country-hero-explorer.module.css",
+      "kind": "application-source",
+      "baseBlob": "dd4fb02c28a194fd5110f51a48258f6b83fad252",
+      "sourceBlob": "76b085169c21860a81302ad00de0b3779e53764c",
+      "draftBlob": "dd4fb02c28a194fd5110f51a48258f6b83fad252",
+      "size": 2173,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/destination-card-media.tsx",
+      "kind": "application-source",
+      "baseBlob": "18a65d02acd879d51e8ece9820bf068b3b894b48",
+      "sourceBlob": "a210bf7e78ebb586fe32904da0f1005f4a3769c7",
+      "draftBlob": "18a65d02acd879d51e8ece9820bf068b3b894b48",
+      "size": 1686,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/destination-map-cards.tsx",
+      "kind": "application-source",
+      "baseBlob": "63be1702b90c1eda471048de0d8b9a63863f1304",
+      "sourceBlob": "0ab2643fcb0a01d403b4a6cbd93baa5b56cd1219",
+      "draftBlob": "63be1702b90c1eda471048de0d8b9a63863f1304",
+      "size": 1343,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/destination-regional-map.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "48c6c6faa4aa6688e6d2e65212791f3a60d14088",
+      "draftBlob": null,
+      "size": 6485,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/destination-selection-context.tsx",
+      "kind": "application-source",
+      "baseBlob": "3650e1ae3bfa47a785e9db7f94fe551e09311e98",
+      "sourceBlob": "9bdc3aa0b12436bbee7e933eb58a894a0e7331c5",
+      "draftBlob": "3650e1ae3bfa47a785e9db7f94fe551e09311e98",
+      "size": 520,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/expandable-media.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "03fce9f90d6e430dd09459a353099814bb0489db",
+      "draftBlob": null,
+      "size": 1475,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/expandable-media.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "726ffee06230a5edf311de8f8fda71f669c08e64",
+      "draftBlob": null,
+      "size": 2123,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/footer.tsx",
+      "kind": "application-source",
+      "baseBlob": "e8d99b9fd52ae590ea0899426e5c2a3caa187fa4",
+      "sourceBlob": "e46b76c8c6a7245ecd9349625fe22e7d79ab1cb6",
+      "draftBlob": "e8d99b9fd52ae590ea0899426e5c2a3caa187fa4",
+      "size": 5226,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/homepage-bird-carousel.tsx",
+      "kind": "application-source",
+      "baseBlob": "8c64f846eaae97372709d71573a755970f59276c",
+      "sourceBlob": "6b94e271e2a847473a9018268c655b574add248d",
+      "draftBlob": "8c64f846eaae97372709d71573a755970f59276c",
+      "size": 21756,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/homepage-country-map-card.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "507697a208925cfd8bd76ba3350e4e2186030eef",
+      "draftBlob": null,
+      "size": 3595,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/homepage-country-map-card.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "084d52e166fbc8d6b2c4b6286ad0ca290a2dac2a",
+      "draftBlob": null,
+      "size": 8434,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/homepage-destination-explorer.module.css",
+      "kind": "application-source",
+      "baseBlob": "892cf5848caebb9ed42a297ac7d2541fbe170dd5",
+      "sourceBlob": "c570dab85e5817d1e3615bb6b33a569c65662fd1",
+      "draftBlob": "892cf5848caebb9ed42a297ac7d2541fbe170dd5",
+      "size": 3749,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/homepage-destination-explorer.tsx",
+      "kind": "application-source",
+      "baseBlob": "a1b62bb0c5e114be0eaddb5cd3d1a125166e3e68",
+      "sourceBlob": "905a6a7e07c2133a9f9f048d4f7b69e372968af5",
+      "draftBlob": "a1b62bb0c5e114be0eaddb5cd3d1a125166e3e68",
+      "size": 9652,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/map-feather-marker.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "8e10ccb6eec426c1c6eba17ea0e3b55e890d3562",
+      "draftBlob": null,
+      "size": 505,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/map-layer-context.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "6267d60673089dca5790514606cd4f226ebac22d",
+      "draftBlob": null,
+      "size": 1349,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/mobile-navigation-overlay.tsx",
+      "kind": "application-source",
+      "baseBlob": "0a01a6bcf611c77eedb9de116333351e824a2b48",
+      "sourceBlob": "69682b52b93e5d4b3b8d30ea464607cb87edcf7d",
+      "draftBlob": "0a01a6bcf611c77eedb9de116333351e824a2b48",
+      "size": 5335,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/navigation-header.tsx",
+      "kind": "application-source",
+      "baseBlob": "d5fedba2875cffb3bc446e445a6945fe524babdc",
+      "sourceBlob": "7838dcf25e38833292049b3c354a3e8a73e150f5",
+      "draftBlob": "23358c4376734e4b537a3d6145637e68d843d16f",
+      "size": 4209,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "components/new-zealand-bird-picker.tsx",
+      "kind": "application-source",
+      "baseBlob": "1449756a50f5b36b61f4d2448a08ecd3adeda48a",
+      "sourceBlob": "efaaaab5a1b8242215a15b5c0971e937c331f6ba",
+      "draftBlob": "1449756a50f5b36b61f4d2448a08ecd3adeda48a",
+      "size": 5429,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/new-zealand-hero-explorer.tsx",
+      "kind": "application-source",
+      "baseBlob": "ef177b6074ed77b636d5f0b158d67ba9c785a96b",
+      "sourceBlob": "3b77365af02d42fc574eed38916f95bbe8a02534",
+      "draftBlob": "ef177b6074ed77b636d5f0b158d67ba9c785a96b",
+      "size": 11220,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/new-zealand-map.tsx",
+      "kind": "application-source",
+      "baseBlob": "7372d2685587e8f93db96003ce789ab82f2d0cfa",
+      "sourceBlob": "f8e9d426cb602da100cab2e8a3ab43739e1f2f3f",
+      "draftBlob": "7372d2685587e8f93db96003ce789ab82f2d0cfa",
+      "size": 10770,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/resizable-discovery-pair.module.css",
+      "kind": "application-source",
+      "baseBlob": "1e5d4b161de641040d45b61a5afa5a6a70800281",
+      "sourceBlob": "fa4d0627f769fb894fda2bba7e03de03679f8638",
+      "draftBlob": "1e5d4b161de641040d45b61a5afa5a6a70800281",
+      "size": 2684,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/resizable-discovery-pair.tsx",
+      "kind": "application-source",
+      "baseBlob": "5c17c13ad98a59b36c862be781866c02bc0d6f58",
+      "sourceBlob": "664254ca34380c314639c00dc073c9a2076b7b84",
+      "draftBlob": "5c17c13ad98a59b36c862be781866c02bc0d6f58",
+      "size": 6458,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-conservation-overlay.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "1168af03d9cb33202032ea3105c98c8eecda0316",
+      "draftBlob": null,
+      "size": 1687,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-ecosystem-map.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "2363ff3514f0a5f5aba83823cda97f608816e96c",
+      "draftBlob": null,
+      "size": 1490,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-ecosystem-map.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "c1a53600c66ce3a059e3e4b283eeacba00ac985d",
+      "draftBlob": null,
+      "size": 19881,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-habitat-context.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "c0687e880931bc755001ceb46efecf7c24e0cb36",
+      "draftBlob": null,
+      "size": 1325,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-habitat-select.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "d8f9ce29a1bba4c5f207fdc610cdc30550f88c39",
+      "draftBlob": null,
+      "size": 1112,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-map-layers.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "bf2361aef259e80a5ccfd2457875c13a3fe58f3c",
+      "draftBlob": null,
+      "size": 7187,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-places-explorer.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "c57ee62aed96bfcc3b493444ee92892c34bbdd78",
+      "draftBlob": null,
+      "size": 1651,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-places-explorer.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "50f9b457771f2a7016da356edcfdf60ff900ef79",
+      "draftBlob": null,
+      "size": 5678,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-public-place-overlay.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "9a8c351f82317eb54b0f53ab0233f78fb44da625",
+      "draftBlob": null,
+      "size": 3527,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-resource-carousel.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "2423274620d873bd780b8e9ffdbdc4fb592e58cc",
+      "draftBlob": null,
+      "size": 2299,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-resource-carousel.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "f12ae171ad9853bf194c32eb1ae92df7935ea8d3",
+      "draftBlob": null,
+      "size": 5087,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-soundscapes.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "31b2e6e6c2bd637eee9e7abe26748fc731142c13",
+      "draftBlob": null,
+      "size": 1096,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/south-island-soundscapes.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "3cf2a8c4d826eb1696e2264da4ea26129ff591a4",
+      "draftBlob": null,
+      "size": 7141,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/species-details-panel.module.css",
+      "kind": "application-source",
+      "baseBlob": "0c05c30dba6d38e3f2e605f559d69eef8b1ec56d",
+      "sourceBlob": "37502e07685cb534ea5ebd1ffb9a2621ebb9cf33",
+      "draftBlob": "0c05c30dba6d38e3f2e605f559d69eef8b1ec56d",
+      "size": 2070,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/species-details-panel.tsx",
+      "kind": "application-source",
+      "baseBlob": "dd6604899b4877f0e9148c92a41971ce667cc788",
+      "sourceBlob": "2a343911986f4b7e2cc0603010369956d7740276",
+      "draftBlob": "dd6604899b4877f0e9148c92a41971ce667cc788",
+      "size": 6041,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/use-region-preview.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "6e20563489e5c0948b17f0b30718086ed44d789e",
+      "draftBlob": null,
+      "size": 1651,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/world-destination-map.module.css",
+      "kind": "application-source",
+      "baseBlob": "3929f5c32d763a5e5402c37451960a43c330abf2",
+      "sourceBlob": "89ed9b5cba88b9d3e07ccacf91bd27a1b637a4c7",
+      "draftBlob": "3929f5c32d763a5e5402c37451960a43c330abf2",
+      "size": 1559,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/world-destination-map.tsx",
+      "kind": "application-source",
+      "baseBlob": "3ba5ffa8ca386eb2c2372c91b999deb768c7f050",
+      "sourceBlob": "cca3bfda0ddfaec10ee86d7fba431882b8ca61d9",
+      "draftBlob": "3ba5ffa8ca386eb2c2372c91b999deb768c7f050",
+      "size": 4194,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "components/world-map-scene.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "a42c51a312832bf9f07b80b7d5580ad85c776a35",
+      "draftBlob": null,
+      "size": 945,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/README.md",
+      "kind": "documentation",
+      "baseBlob": "1a5575d07550394065dfcbe78c4ec1325157ef2c",
+      "sourceBlob": "0fce02de28ebe2bd2b5ce54c2abc60bbd8339819",
+      "draftBlob": "1a5575d07550394065dfcbe78c4ec1325157ef2c",
+      "size": 4615,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/arthurs-pass-map.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4eaa1a1211f54bd601261ec8251d29be26e1aa47",
+      "draftBlob": null,
+      "size": 51751,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/arthurs-pass-osm-source.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "702130710fbdc002be165e24f8ae4183ccaeabb1",
+      "draftBlob": null,
+      "size": 244100,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/colombia-home-es.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "0668b4d45db8ab34c5c9566ce07d33a40241941e",
+      "draftBlob": null,
+      "size": 33811,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/colombia-planning-boundaries.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "6eae8ce38043a0be2ab20f0b8443b7d8846aece0",
+      "draftBlob": null,
+      "size": 52252,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/colombia-regional-birds.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "9e4ca0580f331dcad390aa6622dc0a38659fa4ae",
+      "draftBlob": null,
+      "size": 949,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/destination-regions.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4f7ca9e3892036b8352085c66a37c8949e2ebf38",
+      "draftBlob": null,
+      "size": 5476,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/destinations.ts",
+      "kind": "application-source",
+      "baseBlob": "56168cf369827a82827a5deca03b6379310681ae",
+      "sourceBlob": "4ceabe08ab7e068d8100c60f6af1e4ed8d365c40",
+      "draftBlob": "56168cf369827a82827a5deca03b6379310681ae",
+      "size": 2718,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/global-australian-region-overviews.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "9bf7676dcf8c6bb8978ee16fa881f6aa9ffb67d2",
+      "draftBlob": null,
+      "size": 5094,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/global-australian-regional-birds.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "15c13b0e0dee688524ba96a16d1dab762e575165",
+      "draftBlob": null,
+      "size": 18821,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/image-credits.json",
+      "kind": "application-source",
+      "baseBlob": "59b7c0c0adebc27adf7e88596d4656befba0d525",
+      "sourceBlob": "8e6f9c173e47f0429d6ef8e5477fe58ddcc1d52a",
+      "draftBlob": "59b7c0c0adebc27adf7e88596d4656befba0d525",
+      "size": 30744,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/new-zealand-carousel.ts",
+      "kind": "application-source",
+      "baseBlob": "499d373efa2545e76dd591523bfec3eda9901df8",
+      "sourceBlob": "d7d3c017f26205988514852152ed9220f2e79fb6",
+      "draftBlob": "499d373efa2545e76dd591523bfec3eda9901df8",
+      "size": 8343,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/new-zealand-checklist.ts",
+      "kind": "application-source",
+      "baseBlob": "de79670b5b60a91a4ccb129737726f02477b394b",
+      "sourceBlob": "9cb08a28f63f411c43d14e8d78e12915bafb0bde",
+      "draftBlob": "de79670b5b60a91a4ccb129737726f02477b394b",
+      "size": 1459,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-conservation-layers.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "a6d403e912743f5f110559173056f9599870b713",
+      "draftBlob": null,
+      "size": 641555,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-ecosystem-map.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "0d382dcdeb5d7199c97221ddc643e256adb1d5e8",
+      "draftBlob": null,
+      "size": 421332,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-ecosystems.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "f458d06f90fcef49a0bc9889ffa104448a98f9aa",
+      "draftBlob": null,
+      "size": 3227,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-layer-catalogue.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "8d5203a67e28d3206f401d108139f31a1ad2f60e",
+      "draftBlob": null,
+      "size": 1422,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-place-media.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "654f215716b63aa04cf91206ff4441b2576b1666",
+      "draftBlob": null,
+      "size": 4663,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-public-places.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "6a809e2a62c6589b737db5515e2e1e3007d63d04",
+      "draftBlob": null,
+      "size": 7363,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-satellite-source.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "45d722e4a0522f3c62d1ca8005cc48841efd17f1",
+      "draftBlob": null,
+      "size": 839,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-soundscape-provenance.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "771158112c5f7f2959016e4c93bb882f16f008ca",
+      "draftBlob": null,
+      "size": 2965,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island-soundscapes.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "0e6fd393d3fbc7fc9384ae09846d7b786fde5c65",
+      "draftBlob": null,
+      "size": 1570,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/south-island.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "ee27ee70c65c924f1fd361d98b2fb65d3698923a",
+      "draftBlob": null,
+      "size": 6914,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "content/travel-media.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "605fcae6a631533d88a5eed6b3f079a1b5e47c31",
+      "draftBlob": null,
+      "size": 4327,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/AGILE-PLAN.md",
+      "kind": "documentation",
+      "baseBlob": "ea41d1cbd3654dd4915ce83c8eca782382544611",
+      "sourceBlob": "e121bc24920139673c02ec07024ffecf7132b66c",
+      "draftBlob": "c558531a7641ceb60b6a43707d5a9c8d3dbe49f6",
+      "size": 23568,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "docs/AVES-062-SUBREGION-ROUTE-PLANNING.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "38d2af26a5a62c4fe63c98c1a6a54e6ee469dfae",
+      "draftBlob": null,
+      "size": 3504,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/AVES-CHANGE-INBOX.md",
+      "kind": "documentation",
+      "baseBlob": "6950844f675560d9b35cff0e012db8b90494c933",
+      "sourceBlob": "6f78fbed0fa2a0789f38519e39cf0ae8a73411ad",
+      "draftBlob": "e16a9c57c8b5d822f5d9dcb5b44541c85978ae2a",
+      "size": 49020,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "docs/CHECKPOINT-2026-11-09-NZ-BRIEF.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "6cf6a7db20acc644ad14ad5925636e07cee8d92a",
+      "draftBlob": null,
+      "size": 2773,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/DEVELOPMENT-STAGES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "8a121f03b6d7cf453c1c5d06bc351757408e77cb",
+      "draftBlob": null,
+      "size": 6630,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "5f66cddab8ebfda3c7b32bf139a03c0bb9790c0f",
+      "draftBlob": null,
+      "size": 16961,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/EXECUTION-PROMPT-ARCHIVE-2026-11-09.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "eecfb898018279271f640e01503bc02517629859",
+      "draftBlob": null,
+      "size": 16156,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/HANDOFF-CURRENT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ac1e1fe9031997a8bfc477b471d6a83f36418d16",
+      "draftBlob": null,
+      "size": 9044,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/INFO-OVERLAY-PILOT.md",
+      "kind": "documentation",
+      "baseBlob": "6af3bb4397c338916134f99d07b210b5eedfcc65",
+      "sourceBlob": "b4ad12cf1612e23ca22b3ebe278936438a2ddaf2",
+      "draftBlob": "6af3bb4397c338916134f99d07b210b5eedfcc65",
+      "size": 7576,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/MAP-LAYER-ROLLOUT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "c61fc5811827f9c615ee9c38c03e007aea0e2702",
+      "draftBlob": null,
+      "size": 5267,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/NEXT-WEEK-PROMPT.md",
+      "kind": "documentation",
+      "baseBlob": "750a7ddad5d5f9214c93da8740a7639d02952a72",
+      "sourceBlob": "d2e9f3b2833de86f4bcc73e9db69a56bd01e8e95",
+      "draftBlob": "25504f1f2b4ff5ebb67f3c1199a2e1c15c1f8131",
+      "size": 23446,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "docs/PAUSED-CHECKPOINT-2026-11-08.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "a9ecfd0895466009c0cb0eb7c194189f26b25de6",
+      "draftBlob": null,
+      "size": 9264,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-AI-PROPOSAL.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "beebad9bbc01b56ae939b74326ea50878a8f713b",
+      "draftBlob": null,
+      "size": 8424,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "e0b716a4b550431e86bd506bea58a257abc69d62",
+      "draftBlob": null,
+      "size": 6247,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-COLOMBIA-SPANISH.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "6ccc9cf18c5bac4685479eefafbe48d88101118e",
+      "draftBlob": null,
+      "size": 2235,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "9ba9eda4fc1330de384d24cb6e9c4a52b5f4b672",
+      "draftBlob": null,
+      "size": 4507,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "25f2c42970d62b53afcfdf3c88f35f2cb57f38cc",
+      "draftBlob": null,
+      "size": 4315,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "63920ff9ba4a7ad2fa3a44f40cf7e1d2ad2388ec",
+      "draftBlob": null,
+      "size": 5325,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-MAP-CARDS-RECHECK.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "5b7f4a5f51a3e87e657f3c957ec5cd2e23c657ac",
+      "draftBlob": null,
+      "size": 3219,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-MAP-FEATHER-REVISION.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "65f6135b9f32ceb703e250304c5d08b72a354dbd",
+      "draftBlob": null,
+      "size": 3748,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-PERSISTENT-PLAYER.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "45d30a56b6e202173a1ae420cbae08eb3bbc75f4",
+      "draftBlob": null,
+      "size": 4251,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-PLACES-ACCOUNTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "723d1815cd317403c4a8bd9fa80e02c7379783e3",
+      "draftBlob": null,
+      "size": 4848,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-PRIVATE-BUDGETS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "0c9f4b68ae6975fea9dea8536800063ee2b32f88",
+      "draftBlob": null,
+      "size": 3503,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "5894f49cab03dcffeafa1ac3b3fa796fa2e2edd9",
+      "draftBlob": null,
+      "size": 3808,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "40f1d289de2182bfac419fe0b372bf2fb3161ea2",
+      "draftBlob": null,
+      "size": 4870,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-ECOSYSTEMS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "4baf49228c17aa83b3fb8e9785be13a63ec1f223",
+      "draftBlob": null,
+      "size": 6530,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "4191dfdd9b9f2e118d750a9b9779c6bc0f5df2de",
+      "draftBlob": null,
+      "size": 3313,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "52ddc93a24cf4ed9f8b1fea77e074009020d6e89",
+      "draftBlob": null,
+      "size": 3301,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "8e08682a377c3e7e591e3605dd9157fc1febcbc9",
+      "draftBlob": null,
+      "size": 8210,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "93365fd7dc62a7732aa04e3001c9c97420dc6770",
+      "draftBlob": null,
+      "size": 4560,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-PLANNING.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "466de27b1464c43110a79e3ef35ace9d0f35e822",
+      "draftBlob": null,
+      "size": 2887,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCE-PLAYER.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "3ae01765d0f880ddb6020953e7c501f917ea5c35",
+      "draftBlob": null,
+      "size": 7295,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "bbc3c035688a7d61488ebf38c9b817806cb46662",
+      "draftBlob": null,
+      "size": 3158,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "d32363db4a9503d54761beb64e8d75e10acc47a3",
+      "draftBlob": null,
+      "size": 3475,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-10-MEDIA-CONTINUITY.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ae40a1db408aeb94347e0545e4dc374ca1f98b8d",
+      "draftBlob": null,
+      "size": 8204,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/RELEASE-2026-11-10-SOUTH-ISLAND-SOUNDSCAPES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "1554b5c376a2de321de329f507588c321a414908",
+      "draftBlob": null,
+      "size": 9843,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/ROADMAP-DETAILS.md",
+      "kind": "documentation",
+      "baseBlob": "582b3c21cb16c909922c4cb9d693c39d701835d5",
+      "sourceBlob": "16dafdf9c6dda2e21cbf0328156ffb65f04ec23b",
+      "draftBlob": "32e7b2aec0126e24528bed5e41e1d63c648b8219",
+      "size": 114611,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "docs/ROLLBACK-CHECKPOINTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "f1fab8f58d4f740bd579376bc44f435ad43dea29",
+      "draftBlob": null,
+      "size": 5217,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/SITE-ARCHITECTURE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "b383ee02e3cea40f970b4ad5009fdb7a7ba9cc11",
+      "draftBlob": null,
+      "size": 11838,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/SOUTH-ISLAND-CONTENT-GAPS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "906f23cca93d3437e9d30acc0240246ba71583d4",
+      "draftBlob": null,
+      "size": 8043,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/WORLD-MAP.md",
+      "kind": "documentation",
+      "baseBlob": "35730d80610d30bc82ce71a34085d9c8c9c3ae6c",
+      "sourceBlob": "3008ae679390c20b8e2afc033ee53ad93c66e442",
+      "draftBlob": "35730d80610d30bc82ce71a34085d9c8c9c3ae6c",
+      "size": 7011,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/AVES-CHANGE-INBOX.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "fe303154e0bc12cc94b294376375ef18dd22bf53",
+      "draftBlob": null,
+      "size": 82377,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/CONTINUE-HERE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "c2f542c59e3ce9bf91934bccbe5b99a9528c3710",
+      "draftBlob": null,
+      "size": 10479,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/HANDOFF-CURRENT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "211911e3419427ab517f3d878a630f8ea00593f8",
+      "draftBlob": null,
+      "size": 24126,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/MAP-LAYER-ROLLOUT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "9fc46e1d3ffc9a2b6d067a7629af4e79ae611c8c",
+      "draftBlob": null,
+      "size": 5350,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/NEXT-WEEK-PROMPT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "4a2a951bf539f804805012b657be03e083beeba7",
+      "draftBlob": null,
+      "size": 30138,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/README.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "5b5884186d7cc35212fb8b966b3ac6678bbdd5cb",
+      "draftBlob": null,
+      "size": 652,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-09-before-aves-066/ROADMAP-DETAILS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "aae74424203b75ea709f7b90cdf7c01d19f6475e",
+      "draftBlob": null,
+      "size": 121228,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/AVES-CHANGE-INBOX.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "2e44e88f755839cf58c9fd16daa0e47014a37590",
+      "draftBlob": null,
+      "size": 48274,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/CONTINUE-HERE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "f0d0589c99d81d68e9554974d5206d8087e921a1",
+      "draftBlob": null,
+      "size": 826,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/HANDOFF-CURRENT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "7e8c8810bd509689987f195937612be465b5d660",
+      "draftBlob": null,
+      "size": 7129,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/MAP-LAYER-ROLLOUT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "3ae0d4c91b68878ff0e4a506903f14b0a6c98b1a",
+      "draftBlob": null,
+      "size": 5207,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/NEXT-WEEK-PROMPT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "09800db3386e0aa1aa1a2adb7f85003d0ff6e7d6",
+      "draftBlob": null,
+      "size": 22790,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/README.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "f23eb4435558c2ced76ac495d01714ae03d30dc5",
+      "draftBlob": null,
+      "size": 341,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/ROADMAP-DETAILS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "900dce4b88637390cf442c8a8836f4e94ba98b18",
+      "draftBlob": null,
+      "size": 113684,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/ROLLBACK-CHECKPOINTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "4a8b4f13d90853de34c973ca04027a82c2802824",
+      "draftBlob": null,
+      "size": 4796,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-053/SITE-ARCHITECTURE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "f77d9e7add528a80a12816b6654a3f6b1643a765",
+      "draftBlob": null,
+      "size": 10776,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/AVES-CHANGE-INBOX.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "3cf55b268ebea31eaf39c81e25b55b6146c4e404",
+      "draftBlob": null,
+      "size": 47550,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/CONTINUE-HERE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "833afbf098511b5eca99a6a6b2bd1b42c8a1f076",
+      "draftBlob": null,
+      "size": 881,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/HANDOFF-CURRENT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "49aa3ec6749bd55276558755da1ce4e3480a5b7c",
+      "draftBlob": null,
+      "size": 7078,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/MAP-LAYER-ROLLOUT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "24da875e6eddfef501c506edd9aa8b46faea846b",
+      "draftBlob": null,
+      "size": 5268,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/NEXT-WEEK-PROMPT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "c9a36e72d3920c6df6dc491ab2fa68eb0ecc0625",
+      "draftBlob": null,
+      "size": 21553,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/README.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "6c202762948192cdb1acd65359564a88fbeeceb3",
+      "draftBlob": null,
+      "size": 294,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/ROADMAP-DETAILS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "99c939c19afa74fd02772efd4b21796b1e34268b",
+      "draftBlob": null,
+      "size": 113538,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/ROLLBACK-CHECKPOINTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "1379fba583e8538df98efaa9d54484b6277c0c08",
+      "draftBlob": null,
+      "size": 4221,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/SITE-ARCHITECTURE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "82da508ed782d39d28b8610fa9cf94abe2fed6c7",
+      "draftBlob": null,
+      "size": 15432,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-colombia-region-hover-checks.json",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "36d05b0c7320a7d14fa8cb9875115f92725be07a",
+      "draftBlob": null,
+      "size": 2755,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-colombia-region-hover.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "20e822911ee1a0a8f1addb414aa84f6c025b57fa",
+      "draftBlob": null,
+      "size": 114014,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-combined-ecotourism-live.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ae0c3025cdf3e333d1cc5d79238bac2ab3b7199e",
+      "draftBlob": null,
+      "size": 129699,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-feather-map-cards.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "562c0fea77d578bf66408a346cd1a3a3f5fe48ee",
+      "draftBlob": null,
+      "size": 88031,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-homepage-map-cards.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "80d0194cf40d9d54e7e75fbae1cc69957009eac8",
+      "draftBlob": null,
+      "size": 93761,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-persistent-player.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "4cd4043abd5817b3fccb239ffb1339799c6ed804",
+      "draftBlob": null,
+      "size": 89595,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-south-island-discovery.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "b319ed3c0cc699e39da85daab5b68e2e7885f373",
+      "draftBlob": null,
+      "size": 92575,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-south-island-fullscreen.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "da9c15460089e4990770c16b3d26116018f5a15b",
+      "draftBlob": null,
+      "size": 206460,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-09-south-island-resources.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ab530b5ceb9966b12ad8602b49bdbb06dc9885d0",
+      "draftBlob": null,
+      "size": 49932,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-10-media-continuity-checks.json",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "68d0f2f5469a09dfe9b9ef749827112111aa94c2",
+      "draftBlob": null,
+      "size": 3038,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-10-media-handoff-australia.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "63aff7d9f540695c17fa94e72ad3cc4fbc2f9781",
+      "draftBlob": null,
+      "size": 94586,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-10-south-island-soundscapes-checks.json",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "3bb4c575d2b1dbd49213f16ef96f58d71ce21344",
+      "draftBlob": null,
+      "size": 3380,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/evidence/2026-11-10-south-island-soundscapes.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "f61f45e2e211661aebbf45ef66dd5950c38b3117",
+      "draftBlob": null,
+      "size": 85011,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "docs/frontend-code-tour.md",
+      "kind": "documentation",
+      "baseBlob": "04b1e9f809b814b8ccbde3fa07f381ab606d2e72",
+      "sourceBlob": "0dc5f4d0ef72a326f8313172606e8b96f481c72a",
+      "draftBlob": "80114fa02ab5f8c56a6d283c0eaef1194244d743",
+      "size": 16837,
+      "relationship": "both-changed"
+    },
+    {
+      "path": "lib/ambience-controller.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "5187289f34879409b1338ed90202060788b0c417",
+      "draftBlob": null,
+      "size": 3872,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/cover-focal-position.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "b2bb52682c84b09561045c55e2d4fcd198d722be",
+      "draftBlob": null,
+      "size": 1844,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/ecosystem-map-camera.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "d977966ba9970ea326513eddc4548bae04b8fd32",
+      "draftBlob": null,
+      "size": 3332,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/map-zoom.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4f006beed68de1dd58680c506b85a815c898b3d2",
+      "draftBlob": null,
+      "size": 1701,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/media-focus.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "686b83e362bbbc984efcd90a2a4af9490fe5dddd",
+      "draftBlob": null,
+      "size": 2186,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/media-handoff.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "550c6b7a7a4dbbb2cf75cb5f8d63fdbc5db505ad",
+      "draftBlob": null,
+      "size": 1104,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/media-identity.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "7c95790bf7e86d5cd5f1c086db2e81cc56899c7e",
+      "draftBlob": null,
+      "size": 633,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/media-navigation.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "58c533f977603497c6a0f1dc6798417a931006b3",
+      "draftBlob": null,
+      "size": 830,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/new-zealand-region-links.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "5c8592c85d69df034c7ae7b30f9444364bcd9a94",
+      "draftBlob": null,
+      "size": 458,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/public-pages.ts",
+      "kind": "application-source",
+      "baseBlob": "ce28882cf16455064056745f2a658482c6daf548",
+      "sourceBlob": "93115d4c42bb1f9f6a5f3a77fcf8c2cdd7591f4c",
+      "draftBlob": "ce28882cf16455064056745f2a658482c6daf548",
+      "size": 3909,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/region-activation.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "5994b4e53191f0246880683949257c216428f5cc",
+      "draftBlob": null,
+      "size": 516,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/south-island-discovery.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "b8c5276e4a3331c2f55862fac3fc2bb6dd873176",
+      "draftBlob": null,
+      "size": 1982,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "lib/south-island-public-places.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "25b8a0b3cfdb2a82cf115f6aaff07f78de5a5764",
+      "draftBlob": null,
+      "size": 772,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/audio/soundscapes/south-island-coast.mp3",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "13f1659419a4e7281ccee22d5e3fb6830abee71e",
+      "draftBlob": null,
+      "size": 720710,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/audio/soundscapes/south-island-forest.mp3",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "5ba7a9b575550484679f2c52ee4843dfa46a18b8",
+      "draftBlob": null,
+      "size": 720710,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/audio/soundscapes/south-island-stream.mp3",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "e20b5a1614a53115b87bcfffc52a823e001a1f06",
+      "draftBlob": null,
+      "size": 720710,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/images/brand/aves-australia-bird.png",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "70c9153a32c2277a9675e04e58236884b7ac54a5",
+      "draftBlob": "70c9153a32c2277a9675e04e58236884b7ac54a5",
+      "size": 712269,
+      "relationship": "already-identical"
+    },
+    {
+      "path": "public/images/maps/south-island-satellite-2004.jpg",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "21daa9f86da67e117152cd159a6ffdb20c95f196",
+      "draftBlob": null,
+      "size": 87735,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/images/places/arthurs-pass-mountains.webp",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "0130e8e5074a862b309993134749197ada88e62c",
+      "draftBlob": null,
+      "size": 204132,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/images/places/arthurs-pass-waterfall.webp",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "14aebeab82950acc856b406920a4c3e51ef559b7",
+      "draftBlob": null,
+      "size": 334312,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/images/places/catlins-landscape.webp",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "1244ac894370d76a57b5a7c895998b9c8df19d6e",
+      "draftBlob": null,
+      "size": 144596,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/images/places/fiordland-landscape.webp",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "3ec2e4c9a35056c4c4505f20a122ce668c0efd76",
+      "draftBlob": null,
+      "size": 103328,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "public/images/places/nelson-landscape.webp",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "c85ac7b7a45e2a7c9a5794c467fcff759e1fc20b",
+      "draftBlob": null,
+      "size": 137058,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "scripts/fetch-doc-conservation-snapshot.py",
+      "kind": "source-generation",
+      "baseBlob": null,
+      "sourceBlob": "bcee23747346060d6faf93e7708fe4d594e268b1",
+      "draftBlob": null,
+      "size": 1933,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "scripts/generate-arthurs-pass-map.py",
+      "kind": "source-generation",
+      "baseBlob": null,
+      "sourceBlob": "9ca99c39cd11d3c94eebb0e2ce11ecf0a4b6511f",
+      "draftBlob": null,
+      "size": 2762,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "scripts/generate-colombia-planning-boundaries.py",
+      "kind": "source-generation",
+      "baseBlob": null,
+      "sourceBlob": "fe52b2d5676037f405f5886e20c9acea6b45e425",
+      "draftBlob": null,
+      "size": 3362,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "scripts/generate-south-island-conservation.py",
+      "kind": "source-generation",
+      "baseBlob": null,
+      "sourceBlob": "942b1985d0a0be300922a33be7015998f09db8e3",
+      "draftBlob": null,
+      "size": 3611,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "scripts/generate-south-island-ecosystems.py",
+      "kind": "source-generation",
+      "baseBlob": null,
+      "sourceBlob": "d410936ac2658fd9de8f69ecded5f5e5578fcb8e",
+      "draftBlob": null,
+      "size": 9230,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "scripts/generate-south-island-public-places.py",
+      "kind": "source-generation",
+      "baseBlob": null,
+      "sourceBlob": "6b246a98b2c70a59433901dd7725f75bc91cdfe8",
+      "draftBlob": null,
+      "size": 5755,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/colombia-home-spanish.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "4406e156b44cb6fe6583370cc747d9eb0d81e4f5",
+      "draftBlob": null,
+      "size": 1894,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/colombia-regional-view.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "d2162e03f4bbba150ad7b7416c998cde0eaecf28",
+      "draftBlob": null,
+      "size": 5280,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/cover-focal-position.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "b32e2d057009a9ffdddea6272c75bc46b7b9e813",
+      "draftBlob": null,
+      "size": 3079,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/global-home.test.cjs",
+      "kind": "tests",
+      "baseBlob": "bd28d418e23aefd1bcf4b1cdcbe8dfdf802c3337",
+      "sourceBlob": "ef745bf211a394c3b22b7b58853eb24d0efa2495",
+      "draftBlob": "bd28d418e23aefd1bcf4b1cdcbe8dfdf802c3337",
+      "size": 34734,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/homepage-drilldown.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "1340674609e7a9529e6690a36b1ce1ae8c28b997",
+      "draftBlob": null,
+      "size": 15195,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/map-zoom.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "74e31140a4b3f1858cf525156beb5c2c7559fc67",
+      "draftBlob": null,
+      "size": 4350,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/media-continuity.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "f340f540996afdbfc38c3ec37cc87907a2d9b71c",
+      "draftBlob": null,
+      "size": 8186,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/new-zealand-bird-selection.test.cjs",
+      "kind": "tests",
+      "baseBlob": "4c5c0ec819ad48be986c2ba15e478c5bd23bc43b",
+      "sourceBlob": "0608c95a9c430347f353dbe4c804bb6b402be0b1",
+      "draftBlob": "4c5c0ec819ad48be986c2ba15e478c5bd23bc43b",
+      "size": 3531,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/south-island-soundscapes.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "dfb846e88606bbf43140ef78003dfc818d0f9fda",
+      "draftBlob": null,
+      "size": 8909,
+      "relationship": "main-only-change"
+    },
+    {
+      "path": "tests/south-island.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "eb6724b26ea45c232dd5fabe4d3de9adc50c2664",
+      "draftBlob": null,
+      "size": 22522,
+      "relationship": "main-only-change"
+    }
+  ],
+  "auDelta": [
+    {
+      "path": "CONTINUE-HERE.md",
+      "kind": "documentation",
+      "baseBlob": "533faef495113e44745f12d003a77fa73d47da11",
+      "sourceBlob": "f0d0589c99d81d68e9554974d5206d8087e921a1",
+      "draftRootBlob": "27f55cbc6a758bb4c6f02249cb8b81a5bfa669a3",
+      "draftAustralianNamespaceBlob": null,
+      "size": 826
+    },
+    {
+      "path": "app/account/email-updates/page.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "fad4414594a526f04408f221aa4d8669a15704cc",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 859
+    },
+    {
+      "path": "app/admin/quotes/page.tsx",
+      "kind": "application-source",
+      "baseBlob": "dd34c90cf844007bcc1cc10cbb388b35800de572",
+      "sourceBlob": "bea523a2fe264046984e5fdf075324953a2d24f2",
+      "draftRootBlob": "dd34c90cf844007bcc1cc10cbb388b35800de572",
+      "draftAustralianNamespaceBlob": null,
+      "size": 1365
+    },
+    {
+      "path": "app/api/account/email-updates/route.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "f8b66cc50e5150b22c8646dae8fa9b4e1797ac48",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 796
+    },
+    {
+      "path": "app/api/admin/quotes/[id]/ai-draft/route.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "7456ecc029e9fd1147e5a78ca2a6658535c08915",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 580
+    },
+    {
+      "path": "app/layout.tsx",
+      "kind": "application-source",
+      "baseBlob": "10ad5d706510feef19d2fa4233e083d972df77fc",
+      "sourceBlob": "60fb83d93871b2a1272899044402237f016ba215",
+      "draftRootBlob": "0b9cd3f34ac2503e5e1c2a8f6d768291df4b78fd",
+      "draftAustralianNamespaceBlob": null,
+      "size": 2037
+    },
+    {
+      "path": "components/account/account-shell.tsx",
+      "kind": "application-source",
+      "baseBlob": "79a791e2857b1e2ee572cd268100394d042dced7",
+      "sourceBlob": "4524fccf9567ebc0e2bfbcbacd8c7e55e9e85d37",
+      "draftRootBlob": "d8c09b6da28b7c7ad0bc31c7944c13d267e04a41",
+      "draftAustralianNamespaceBlob": null,
+      "size": 1959
+    },
+    {
+      "path": "components/account/ai-proposal-draft.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "1dfb10753af5ddd6657b56dbcc7e03366144014c",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4531
+    },
+    {
+      "path": "components/account/auth-form.tsx",
+      "kind": "application-source",
+      "baseBlob": "7ca0218a512cf91705d28f2900ba2fd2bb2ce606",
+      "sourceBlob": "e213f932643b70eb9bacc6a2234bd91516e79433",
+      "draftRootBlob": "37b8d88e81194efcc9dcd3d74211327b4a33cba0",
+      "draftAustralianNamespaceBlob": null,
+      "size": 16837
+    },
+    {
+      "path": "components/account/budget-questions.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "b6fe35a7b5023f95358fff13b687dd96dbfab789",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2970
+    },
+    {
+      "path": "components/account/email-updates-preference.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "b0a443de7881110cc9c3887b6fef3a1c67b56281",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2623
+    },
+    {
+      "path": "components/account/owner-quote-inbox.tsx",
+      "kind": "application-source",
+      "baseBlob": "b08bad8d1ced87f040f16707e2c4ba4259c28396",
+      "sourceBlob": "5b76dbde168cd38d9a03f6f7e99b89a542257ad6",
+      "draftRootBlob": "b08bad8d1ced87f040f16707e2c4ba4259c28396",
+      "draftAustralianNamespaceBlob": null,
+      "size": 14660
+    },
+    {
+      "path": "components/account/proposal-editor.tsx",
+      "kind": "application-source",
+      "baseBlob": "7d27213bffa0ec9ffa2de9c85f7fc1c799392727",
+      "sourceBlob": "f08e9ae89a97f8ea143082c466a4be4478d1361a",
+      "draftRootBlob": "7d27213bffa0ec9ffa2de9c85f7fc1c799392727",
+      "draftAustralianNamespaceBlob": null,
+      "size": 7588
+    },
+    {
+      "path": "components/account/trip-plan-editor.tsx",
+      "kind": "application-source",
+      "baseBlob": "a549c04ea4489f1d28ed77540d16d53b236749b6",
+      "sourceBlob": "68cc89858e24d0e5d9ee4eb722e2f74925c25fe1",
+      "draftRootBlob": "72f5ad0549aa3b35feb6719209413282287ed2b4",
+      "draftAustralianNamespaceBlob": null,
+      "size": 13171
+    },
+    {
+      "path": "components/australia-home-explorer.tsx",
+      "kind": "application-source",
+      "baseBlob": "def3a6d31761568379a32c80cdd1134846493d9d",
+      "sourceBlob": "2609b02573fe82afd262efe6b48976b874b2cb24",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": "4750d9acfe1a60c46397441f12060424408a5a86",
+      "size": 15232
+    },
+    {
+      "path": "components/australia-regional-zoom.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "eecd2cf702d0c59aec7ac05f61c1d8b4f84edbeb",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 335
+    },
+    {
+      "path": "components/aves-media-provider.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4357a35db74485745f78bb93a7e404dbde6146da",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2521
+    },
+    {
+      "path": "components/aves-media-provider.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "d9f92ebf4efe623f86f7c10ef7e62e0ca4e28c71",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 16704
+    },
+    {
+      "path": "components/homepage-bird-carousel.tsx",
+      "kind": "application-source",
+      "baseBlob": "346266f5a49ff9d83b45f8fd9a222fb7210dbf53",
+      "sourceBlob": "faa80174c624180bdd7e7e7be17ed97e939e0f98",
+      "draftRootBlob": "8c64f846eaae97372709d71573a755970f59276c",
+      "draftAustralianNamespaceBlob": "3d53edf3deb2730cf4fc8c4afdec9d5d27fbfdd6",
+      "size": 18926
+    },
+    {
+      "path": "components/new-zealand-bird-picker.tsx",
+      "kind": "application-source",
+      "baseBlob": "1449756a50f5b36b61f4d2448a08ecd3adeda48a",
+      "sourceBlob": "efaaaab5a1b8242215a15b5c0971e937c331f6ba",
+      "draftRootBlob": "1449756a50f5b36b61f4d2448a08ecd3adeda48a",
+      "draftAustralianNamespaceBlob": "1449756a50f5b36b61f4d2448a08ecd3adeda48a",
+      "size": 5429
+    },
+    {
+      "path": "components/region-explorer.tsx",
+      "kind": "application-source",
+      "baseBlob": "649f632bac14568be112a6cd1dabf8114c1f6652",
+      "sourceBlob": "42b6edd417cf207b4ff0723a56021faf98fd0ec8",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": "9dfb314e3dd3350a0535c449f58036e6faaa075b",
+      "size": 7142
+    },
+    {
+      "path": "components/regional-bird-carousel.tsx",
+      "kind": "application-source",
+      "baseBlob": "60000a0f5d441cd0ef8c7ec327aeac25b99d45ce",
+      "sourceBlob": "73d3681f93d43f9d7abe3a5a8714c1c77bd051b9",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": "02708a9d107b2296a33cfb5a839c249adc9ed2f3",
+      "size": 2414
+    },
+    {
+      "path": "components/species-details-panel.module.css",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "37502e07685cb534ea5ebd1ffb9a2621ebb9cf33",
+      "draftRootBlob": "0c05c30dba6d38e3f2e605f559d69eef8b1ec56d",
+      "draftAustralianNamespaceBlob": null,
+      "size": 2070
+    },
+    {
+      "path": "components/species-details-panel.tsx",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "106ce860af060884d1f30d5969cf8e383220829c",
+      "draftRootBlob": "dd6604899b4877f0e9148c92a41971ce667cc788",
+      "draftAustralianNamespaceBlob": null,
+      "size": 5771
+    },
+    {
+      "path": "components/use-region-preview.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "e51799da27850897d0434fe64ce2fc2da6cda498",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 1237
+    },
+    {
+      "path": "content/README.md",
+      "kind": "documentation",
+      "baseBlob": "59534e9355b959dbe36c4c29cf75e3f183011b64",
+      "sourceBlob": "3efe748a56a5378844ead3084509f3b9591e44c2",
+      "draftRootBlob": "1a5575d07550394065dfcbe78c4ec1325157ef2c",
+      "draftAustralianNamespaceBlob": null,
+      "size": 4146
+    },
+    {
+      "path": "content/new-zealand-checklist.ts",
+      "kind": "application-source",
+      "baseBlob": "de79670b5b60a91a4ccb129737726f02477b394b",
+      "sourceBlob": "9cb08a28f63f411c43d14e8d78e12915bafb0bde",
+      "draftRootBlob": "de79670b5b60a91a4ccb129737726f02477b394b",
+      "draftAustralianNamespaceBlob": null,
+      "size": 1459
+    },
+    {
+      "path": "content/nz-proposal-sources.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "9b3bebd1578f56791ebc4293ff5f4aeee265d1be",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2437
+    },
+    {
+      "path": "content/planning-questionnaire.ts",
+      "kind": "application-source",
+      "baseBlob": "53b3d979668b6b95756d222c7374e67becde7545",
+      "sourceBlob": "4ca9b1ca94c8d6da1a6e5d7895efc2d144bffa96",
+      "draftRootBlob": "53b3d979668b6b95756d222c7374e67becde7545",
+      "draftAustralianNamespaceBlob": null,
+      "size": 2428
+    },
+    {
+      "path": "content/region-overviews.json",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "9bf7676dcf8c6bb8978ee16fa881f6aa9ffb67d2",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 5094
+    },
+    {
+      "path": "content/travel-media.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "605fcae6a631533d88a5eed6b3f079a1b5e47c31",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4327
+    },
+    {
+      "path": "content/trip-budget.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "ca3d64d3b8982a1435c47762db79464423c9036c",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 557
+    },
+    {
+      "path": "docs/AGILE-PLAN.md",
+      "kind": "documentation",
+      "baseBlob": "ea41d1cbd3654dd4915ce83c8eca782382544611",
+      "sourceBlob": "f178cf240a13a8749f7da982dda38cff797ef1b5",
+      "draftRootBlob": "c558531a7641ceb60b6a43707d5a9c8d3dbe49f6",
+      "draftAustralianNamespaceBlob": null,
+      "size": 30671
+    },
+    {
+      "path": "docs/AVES-062-SUBREGION-ROUTE-PLANNING.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "38d2af26a5a62c4fe63c98c1a6a54e6ee469dfae",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3504
+    },
+    {
+      "path": "docs/AVES-CHANGE-INBOX.md",
+      "kind": "documentation",
+      "baseBlob": "6950844f675560d9b35cff0e012db8b90494c933",
+      "sourceBlob": "ed431cc86deb5aebfd1368fa44cdb7d0894dab54",
+      "draftRootBlob": "e16a9c57c8b5d822f5d9dcb5b44541c85978ae2a",
+      "draftAustralianNamespaceBlob": null,
+      "size": 48359
+    },
+    {
+      "path": "docs/CHECKPOINT-2026-11-09-NZ-BRIEF.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "6cf6a7db20acc644ad14ad5925636e07cee8d92a",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2773
+    },
+    {
+      "path": "docs/DEVELOPMENT-STAGES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "8a121f03b6d7cf453c1c5d06bc351757408e77cb",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 6630
+    },
+    {
+      "path": "docs/EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "5f66cddab8ebfda3c7b32bf139a03c0bb9790c0f",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 16961
+    },
+    {
+      "path": "docs/EXECUTION-PROMPT-ARCHIVE-2026-11-09.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "eecfb898018279271f640e01503bc02517629859",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 16156
+    },
+    {
+      "path": "docs/HANDOFF-CURRENT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "7e8c8810bd509689987f195937612be465b5d660",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 7129
+    },
+    {
+      "path": "docs/MAP-LAYER-ROLLOUT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "83b21cf7a6a4a6a2c1e1f5fadbb7465afc551a72",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4565
+    },
+    {
+      "path": "docs/NEXT-WEEK-PROMPT.md",
+      "kind": "documentation",
+      "baseBlob": "750a7ddad5d5f9214c93da8740a7639d02952a72",
+      "sourceBlob": "09800db3386e0aa1aa1a2adb7f85003d0ff6e7d6",
+      "draftRootBlob": "25504f1f2b4ff5ebb67f3c1199a2e1c15c1f8131",
+      "draftAustralianNamespaceBlob": null,
+      "size": 22790
+    },
+    {
+      "path": "docs/PAUSED-CHECKPOINT-2026-11-08.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "a9ecfd0895466009c0cb0eb7c194189f26b25de6",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 9264
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-AI-PROPOSAL.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "beebad9bbc01b56ae939b74326ea50878a8f713b",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 8424
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-COLOMBIA-SPANISH.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "6ccc9cf18c5bac4685479eefafbe48d88101118e",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2235
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "9ba9eda4fc1330de384d24cb6e9c4a52b5f4b672",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4507
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "63920ff9ba4a7ad2fa3a44f40cf7e1d2ad2388ec",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 5325
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-MAP-FEATHER-REVISION.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "65f6135b9f32ceb703e250304c5d08b72a354dbd",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3748
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-PLACES-ACCOUNTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "723d1815cd317403c4a8bd9fa80e02c7379783e3",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4848
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-PRIVATE-BUDGETS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "0c9f4b68ae6975fea9dea8536800063ee2b32f88",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3503
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "5894f49cab03dcffeafa1ac3b3fa796fa2e2edd9",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3808
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-ECOSYSTEMS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "4baf49228c17aa83b3fb8e9785be13a63ec1f223",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 6530
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "52ddc93a24cf4ed9f8b1fea77e074009020d6e89",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3301
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "8e08682a377c3e7e591e3605dd9157fc1febcbc9",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 8210
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "93365fd7dc62a7732aa04e3001c9c97420dc6770",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4560
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-PLANNING.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "466de27b1464c43110a79e3ef35ace9d0f35e822",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2887
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCES.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "bbc3c035688a7d61488ebf38c9b817806cb46662",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3158
+    },
+    {
+      "path": "docs/RELEASE-2026-11-09-SOUTH-ISLAND.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "d32363db4a9503d54761beb64e8d75e10acc47a3",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3475
+    },
+    {
+      "path": "docs/RELEASE-2026-11-10-MEDIA-CONTINUITY.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ae40a1db408aeb94347e0545e4dc374ca1f98b8d",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 8204
+    },
+    {
+      "path": "docs/ROADMAP-DETAILS.md",
+      "kind": "documentation",
+      "baseBlob": "582b3c21cb16c909922c4cb9d693c39d701835d5",
+      "sourceBlob": "a10112b5cbb7092bd0cb77c8e4bac9819f516729",
+      "draftRootBlob": "32e7b2aec0126e24528bed5e41e1d63c648b8219",
+      "draftAustralianNamespaceBlob": null,
+      "size": 111552
+    },
+    {
+      "path": "docs/ROLLBACK-CHECKPOINTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "1cac161a751f896a024cee16797020642f31d5c8",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3715
+    },
+    {
+      "path": "docs/SITE-ARCHITECTURE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "f77d9e7add528a80a12816b6654a3f6b1643a765",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 10776
+    },
+    {
+      "path": "docs/SOUTH-ISLAND-CONTENT-GAPS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "906f23cca93d3437e9d30acc0240246ba71583d4",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 8043
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/AVES-CHANGE-INBOX.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "97beede7644fd7a967776f0c8bca4a980e452ab0",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 66131
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/CONTINUE-HERE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "a582db1e2d58342170d370a9257c560ecf1c36ef",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3619
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/HANDOFF-CURRENT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "0909da2ea9c168b47ef549e7c85575f0cf3ede3c",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 18521
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/MAP-LAYER-ROLLOUT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "c7f52e264656fcaf4f900324225ffa3f3521843d",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4708
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/NEXT-WEEK-PROMPT.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "912534df9454c0a9d52f6fb1f030f32afadf5d55",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 15087
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/README.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "6c202762948192cdb1acd65359564a88fbeeceb3",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 294
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/ROADMAP-DETAILS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ff55143dd4e9ad61406c09d845c4aae3536029ae",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 119864
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/ROLLBACK-CHECKPOINTS.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "c8f42d470a26bf8b6a139bc557a9a6f3580ae7d8",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3140
+    },
+    {
+      "path": "docs/archive/2026-11-10-before-aves-068/SITE-ARCHITECTURE.md",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "82da508ed782d39d28b8610fa9cf94abe2fed6c7",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 15432
+    },
+    {
+      "path": "docs/backend-code-tour.md",
+      "kind": "documentation",
+      "baseBlob": "3dc31d5ed2bf2191ea7e0c80ec799c2a583884b4",
+      "sourceBlob": "31c60a27b831bbced0bc63739f22dc1a4d6b1119",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 15639
+    },
+    {
+      "path": "docs/evidence/2026-11-09-combined-ecotourism-live.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "ae0c3025cdf3e333d1cc5d79238bac2ab3b7199e",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 129699
+    },
+    {
+      "path": "docs/evidence/2026-11-10-media-continuity-checks.json",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "68d0f2f5469a09dfe9b9ef749827112111aa94c2",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3038
+    },
+    {
+      "path": "docs/evidence/2026-11-10-media-handoff-australia.png",
+      "kind": "documentation",
+      "baseBlob": null,
+      "sourceBlob": "63aff7d9f540695c17fa94e72ad3cc4fbc2f9781",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 94586
+    },
+    {
+      "path": "docs/frontend-code-tour.md",
+      "kind": "documentation",
+      "baseBlob": "3cd5f7e697cd4e3b63241beddd2a365c8c0db26c",
+      "sourceBlob": "41952f1c265b6c5495e4549f1d677d2c0244eb40",
+      "draftRootBlob": "80114fa02ab5f8c56a6d283c0eaef1194244d743",
+      "draftAustralianNamespaceBlob": null,
+      "size": 17490
+    },
+    {
+      "path": "lib/account-models.ts",
+      "kind": "application-source",
+      "baseBlob": "0fca4294e1a617dc970e49009a94fc437deabc1e",
+      "sourceBlob": "efcca81fa3d8c3dd2cd7910cd2ed82b8bdbfff56",
+      "draftRootBlob": "0fca4294e1a617dc970e49009a94fc437deabc1e",
+      "draftAustralianNamespaceBlob": null,
+      "size": 6212
+    },
+    {
+      "path": "lib/account-service.ts",
+      "kind": "application-source",
+      "baseBlob": "3a70d996b8e9f823bc378580d432de5a773d306d",
+      "sourceBlob": "7383fcfae0adf2da969cf1377f64a5ffcae59a45",
+      "draftRootBlob": "3a70d996b8e9f823bc378580d432de5a773d306d",
+      "draftAustralianNamespaceBlob": null,
+      "size": 3168
+    },
+    {
+      "path": "lib/ai-proposal-generator.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "fdd552ba01d2fea1318984ad69ed991df569718c",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3185
+    },
+    {
+      "path": "lib/ai-proposal-handlers.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "8c148818439ffc830986e9b99ad2e4e89a73d36c",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2582
+    },
+    {
+      "path": "lib/ai-proposal-input.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "37d33587d85118ed8cd2bbe7f4ebf3e7b4c52067",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3451
+    },
+    {
+      "path": "lib/australia-region-birds.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "3455bdb01eb92d6fb77898866219ee79870c9a47",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 1646
+    },
+    {
+      "path": "lib/cover-focal-position.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "b2bb52682c84b09561045c55e2d4fcd198d722be",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 1844
+    },
+    {
+      "path": "lib/email-updates.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "e80b1c1568c81333cafec174d106eaaa55d17c32",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 285
+    },
+    {
+      "path": "lib/map-zoom.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "4f006beed68de1dd58680c506b85a815c898b3d2",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 1701
+    },
+    {
+      "path": "lib/media-handoff.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "550c6b7a7a4dbbb2cf75cb5f8d63fdbc5db505ad",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 1104
+    },
+    {
+      "path": "lib/media-identity.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "7c95790bf7e86d5cd5f1c086db2e81cc56899c7e",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 633
+    },
+    {
+      "path": "lib/media-navigation.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "58c533f977603497c6a0f1dc6798417a931006b3",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 830
+    },
+    {
+      "path": "lib/region-activation.ts",
+      "kind": "application-source",
+      "baseBlob": null,
+      "sourceBlob": "5994b4e53191f0246880683949257c216428f5cc",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 516
+    },
+    {
+      "path": "package.json",
+      "kind": "dependencies",
+      "baseBlob": "e84fe6f2fda607653b42908cc70b178b7ec2cd4e",
+      "sourceBlob": "591023b88a32d0e7decad67d7cb665cf13c99d68",
+      "draftRootBlob": "d8daa53d22f7a10b0901d12444b69639aa137a6f",
+      "draftAustralianNamespaceBlob": null,
+      "size": 1573
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "kind": "dependencies",
+      "baseBlob": "97c5d51c98adc2b1cd6fb4672d7ee628f61eee1a",
+      "sourceBlob": "8c484ad91a01ccae24d40d00aeccf26f9b5bef25",
+      "draftRootBlob": "f2cda66e66232d2be8100df7d556bba4dace03f5",
+      "draftAustralianNamespaceBlob": null,
+      "size": 77795
+    },
+    {
+      "path": "public/images/brand/aves-colombia-bird.png",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "e6d4a5f9bb4a104617bf7577b99e522ed28132b2",
+      "draftRootBlob": "e6d4a5f9bb4a104617bf7577b99e522ed28132b2",
+      "draftAustralianNamespaceBlob": null,
+      "size": 685475
+    },
+    {
+      "path": "public/images/brand/aves-new-zealand-bird.png",
+      "kind": "public-assets",
+      "baseBlob": null,
+      "sourceBlob": "9faaf4253d72e9bbbfd41af01d16b42f5a0c50fc",
+      "draftRootBlob": "9faaf4253d72e9bbbfd41af01d16b42f5a0c50fc",
+      "draftAustralianNamespaceBlob": null,
+      "size": 853513
+    },
+    {
+      "path": "supabase/migrations/20261108192239_private_trip_budget_preferences.sql",
+      "kind": "schema-history",
+      "baseBlob": null,
+      "sourceBlob": "303e18b5ee33b68c115107a339975b022e1f2980",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4840
+    },
+    {
+      "path": "supabase/migrations/20261108225245_account_email_updates.sql",
+      "kind": "schema-history",
+      "baseBlob": null,
+      "sourceBlob": "f3f14ab0b4546c9382e8e8d80aa3a3305b15de38",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 2764
+    },
+    {
+      "path": "supabase/migrations/20261109001033_private_ai_proposal_drafts.sql",
+      "kind": "schema-history",
+      "baseBlob": null,
+      "sourceBlob": "3f69d32316b1789395593a800081021c81932c96",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4160
+    },
+    {
+      "path": "tests/account-api.test.cjs",
+      "kind": "tests",
+      "baseBlob": "7225c666a7ca0334321663a073dc9c3ccbee716d",
+      "sourceBlob": "ff735198b9f1d38c5b03fc25d437df32cabcb4e3",
+      "draftRootBlob": "8b182abc0c2ccd1833f7690d759a7ec28d573637",
+      "draftAustralianNamespaceBlob": null,
+      "size": 32681
+    },
+    {
+      "path": "tests/ai-proposal.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "9adcdbb85c0bdec7cce85d1022d15f84cfadc40d",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 5484
+    },
+    {
+      "path": "tests/australia-regional-zoom.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "6e8d4a7f36b3ed5a2748b519fefbfae2ba360828",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 9028
+    },
+    {
+      "path": "tests/cover-focal-position.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "b32e2d057009a9ffdddea6272c75bc46b7b9e813",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 3079
+    },
+    {
+      "path": "tests/email-updates.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "6e78a784b6dd238c60abb7ff4e6f67c5e5d7c7a4",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 1827
+    },
+    {
+      "path": "tests/info-overlay.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "0604ef80f00145f8ffa0377ab4b9566b817df940",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 7137
+    },
+    {
+      "path": "tests/map-zoom.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "74e31140a4b3f1858cf525156beb5c2c7559fc67",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 4350
+    },
+    {
+      "path": "tests/media-continuity.test.cjs",
+      "kind": "tests",
+      "baseBlob": null,
+      "sourceBlob": "f340f540996afdbfc38c3ec37cc87907a2d9b71c",
+      "draftRootBlob": null,
+      "draftAustralianNamespaceBlob": null,
+      "size": 8186
+    },
+    {
+      "path": "tests/new-zealand-bird-selection.test.cjs",
+      "kind": "tests",
+      "baseBlob": "4c5c0ec819ad48be986c2ba15e478c5bd23bc43b",
+      "sourceBlob": "0608c95a9c430347f353dbe4c804bb6b402be0b1",
+      "draftRootBlob": "4c5c0ec819ad48be986c2ba15e478c5bd23bc43b",
+      "draftAustralianNamespaceBlob": null,
+      "size": 3531
+    },
+    {
+      "path": "tests/shared-account-ui.test.cjs",
+      "kind": "tests",
+      "baseBlob": "c9b19b411ef91cc300921578650e795595076ff4",
+      "sourceBlob": "f41e837c8087f6a5ac58a936613dd1823caac9a1",
+      "draftRootBlob": "8dd436bcf64f4cb9753514d79b507d922278726a",
+      "draftAustralianNamespaceBlob": null,
+      "size": 31610
+    }
+  ],
+  "deletedSinceImport": {
+    "main": [],
+    "australia": []
+  },
+  "limitations": [
+    "No live Vercel/Supabase settings inspection",
+    "No application tests/typecheck/build/browser checks for this assessment",
+    "No conclusion that hosted gates passed",
+    "No physical iPhone/Safari/audio/listening/background/telephone testing"
+  ]
+}

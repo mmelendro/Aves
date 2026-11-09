@@ -12,9 +12,14 @@ for analysis and reorganisation of all upcoming work, including consolidation.
 The revised order is in [AGILE-PLAN.md](AGILE-PLAN.md). It separates documentation,
 code checkpoints, previews, hosted acceptance, production cutover and retirement.
 No new runtime upgrade is selected; each production release needs explicit approval.
-Next recommended increment: C0, refresh AVES-020's delta inventory against both
-current branches and the existing draft PR #3. Do not begin integration or retry
-blocked hosted provisioning merely because the roadmap is prioritised.
+The owner then authorised C0 assessment, now complete. Read
+[the consolidation delta report](CONSOLIDATION-DELTA-2026-11-10.md): current main and
+Australia changes, three application conflict files, budget/consent compatibility,
+shared media/route requirements and the retained hosted-acceptance blocker.
+Next recommended increment: C1a, refresh main public behaviour in the existing
+draft with its preview/metadata safeguards retained. C1 code is not selected.
+Do not begin integration or retry blocked hosted provisioning merely because
+the roadmap is prioritised.
 AVES-066 map hover and AVES-068 safe continuity remain delivered. A truly
 uninterrupted stream across separate document roots remains deferred.
 

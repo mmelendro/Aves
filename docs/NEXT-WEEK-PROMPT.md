@@ -6,8 +6,10 @@ recordings cover forest, streams and coast; mountains/other-region rollout remai
 unimplemented. AVES-066 and AVES-068 safe continuity remain delivered. No next
 task selected. Use HANDOFF-CURRENT.md for runtime/status and precise test limits.
 Use [AGILE-PLAN.md](AGILE-PLAN.md) for the reorganised 10 November priorities.
-The owner authorised analysis and reorganisation only. The next recommendation is
-C0, the AVES-020 delta inventory; implementation requires one selected increment.
+The owner authorised analysis/reorganisation and then C0 assessment, now complete.
+Read [the consolidation delta report](CONSOLIDATION-DELTA-2026-11-10.md). Next
+recommendation: C1a, current main public fidelity in the existing draft with its
+preview/metadata safeguards retained. Implementation is not yet selected.
 All production releases require explicit approval. Older automatic-continuation
 or next-priority wording is superseded by that plan and this handoff.
 
