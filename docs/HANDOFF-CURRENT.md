@@ -7,7 +7,14 @@ Archives and older release reports record history, not current execution orders.
 ## Current instruction
 
 AVES-053 South Island soundscape pilot is published, verified, synced and paused.
-The owner explicitly authorised publication. No next upgrade is selected.
+The owner explicitly authorised that publication. On 10 November the owner asked
+for analysis and reorganisation of all upcoming work, including consolidation.
+The revised order is in [AGILE-PLAN.md](AGILE-PLAN.md). It separates documentation,
+code checkpoints, previews, hosted acceptance, production cutover and retirement.
+No new runtime upgrade is selected; each production release needs explicit approval.
+Next recommended increment: C0, refresh AVES-020's delta inventory against both
+current branches and the existing draft PR #3. Do not begin integration or retry
+blocked hosted provisioning merely because the roadmap is prioritised.
 AVES-066 map hover and AVES-068 safe continuity remain delivered. A truly
 uninterrupted stream across separate document roots remains deferred.
 
@@ -80,13 +87,17 @@ motmot, NZ kea, existing Australian bird. This does not invent programmes.
 YouTube buffered during checks; sustained video/nonzero video resume, playlist
 sub-item restoration and physical Safari/device behaviour remain unverified.
 
-## Retained backlog, not selected now
+## Prioritised backlog, implementation not selected
 
 065 private eBird-connected wishes; 067 birds/AVES invitation word flip;
 068 uninterrupted shared-shell architecture beyond paused handoff; 061 header landscape contour; 053 mountain recordings/wider soundscape rollout;
 063 private saved places; 064 ecological/historical orientation. Full criteria,
 continuous transitions, expanded maps, multi-photo collections, media-library
 work and route/travel-time request 062 remain in the execution prompt/inbox/roadmap.
+All retained requests are assigned in AGILE-PLAN.md. Consolidation is split into
+inventory, bounded code slices, public preview, gated private acceptance,
+separately approved cutover and separately approved retirement. Guest planning
+and commercial validation can proceed independently while a gate is blocked.
 Do not drop smaller requirements or silently implement the entire backlog.
 
 ## Privacy and spending gates
