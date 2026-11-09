@@ -1,3 +1,17 @@
+## Latest published increment — South Island full-screen media, 9 November 2026
+
+Runtime **4aa0939**, Production **dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz**. Bird and landscape carousels now expand to show the complete existing photograph, retaining selected slide, controls, calls, Info and credits. Close/Escape restores the inline viewer and focus.129 tests, TypeScript and hosted build passed; desktop/phone-size browser checks and nine live route/sitemap checks completed. No physical iPhone test. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md).
+
+**Pause before the next change.** Owner priorities are now the South Island embedded resource carousel/bird-inspired player036/053, then the logo-to-menu landscape contour061. New063 places-of-interest wishes for private briefs is explicitly queued; not implemented. No new spending or AI retry. This notice supersedes older status/order notes below; previous release descriptions are historical. Australia/accounts remain unchanged.
+
+## Owner priority update — South Island first, 9 November 2026
+
+After the current full-screen pilot is published and verified, pause before the next increment. The next selected planning priority is **036/053: the South Island resource carousel with embedded podcasts/compatible videos and a discreet bird-inspired player**. Use real publisher-supported embeds, with attribution, accessible controls, privacy-aware loading and link fallback where embedding is unavailable. Reuse the existing resource collection; do not invent embed URLs, remove required publisher controls, autoplay sound, or add paid services. Start with one verified working embedded item; then expand the carousel. Coordinate calls, videos and optional habitat soundscapes so they do not compete. Habitat soundscapes remain a high priority with the existing opt-in/ducking requirements, but are not a prerequisite for this smallest embedded-resource pilot.
+
+Also promote **061: the logo's landscape contour extending toward the menu/right edge**, starting with a South Island/New Zealand header pilot. Keep the existing thin wordmark and bird identity; create a restrained landscape/bird-inspired line that scales across the available width without stretching the logo or obstructing menu, focus states or touch targets. Preserve links and mobile navigation. Do not imply an accurate terrain profile unless sourced. This is a distinct small design increment, not implemented in the current full-screen release.
+
+**063: places-of-interest wishes** stays queued with full acceptance below: parks, conservation organisations/projects and birding lodges saved with the private brief. No place-saving functionality is shipped by recording it. The owner can select these increments separately; do not silently launch all three.
+
 ## New requirement — places of interest in private trip requests (AVES-063)
 
 QUEUED, 9 November 2026. Starting with South Island, let visitors add national/natural parks, conservation organisations and projects, birding lodges, and other public places of interest from maps and place carousels to their private trip brief, alongside bird wishes. Use a discreet Add/Remove control with clear selected feedback; a review list must allow removal and link back to each place. Preserve choices across habitat/region filters and full-screen viewing.

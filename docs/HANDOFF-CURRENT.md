@@ -1,3 +1,9 @@
+## Latest published increment — South Island full-screen media, 9 November 2026
+
+Runtime **4aa0939**, Production **dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz**. Bird and landscape carousels now expand to show the complete existing photograph, retaining selected slide, controls, calls, Info and credits. Close/Escape restores the inline viewer and focus.129 tests, TypeScript and hosted build passed; desktop/phone-size browser checks and nine live route/sitemap checks completed. No physical iPhone test. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md).
+
+**Pause before the next change.** Owner priorities are now the South Island embedded resource carousel/bird-inspired player036/053, then the logo-to-menu landscape contour061. New063 places-of-interest wishes for private briefs is explicitly queued; not implemented. No new spending or AI retry. This notice supersedes older status/order notes below; previous release descriptions are historical. Australia/accounts remain unchanged.
+
 ## Latest published increment — South Island shared discovery, 9 November 2026
 
 Source runtime **d7e39e5**, Production **dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx**. Both South Island maps now share the featured landscape-place selection with the photo carousel and broad bird-habitat filter. Four featured places/five photos; habitat changes choose matching imagery; All restores30 birds without losing the selected photo. This does not claim site-specific bird occurrence or connect arbitrary park/business markers to unverified photos. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md).

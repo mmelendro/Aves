@@ -13,6 +13,7 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-09-05-south-island-layers | 14798a16b4363d27bfff6b563470dc984520b057 | dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM | Main app: satellite, nine national parks and DOC conservation pilot; published and checked |
 | checkpoint/2026-11-09-06-combined-ecotourism-layers | 1aed534d5a295168cf445d3185876184425c671e | dpl_EpZR2p99nc9zy5gp8z83zpueMCKp | Main app: combined transparency/ecosystems and curated public places/businesses |
 | checkpoint/2026-11-09-07-south-island-discovery | d7e39e5 | dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx | Shared featured place/photo/habitat state in both maps;129 tests, desktop/390/320px and34 live route/asset checks |
+| checkpoint/2026-11-09-08-south-island-fullscreen | 4aa0939 | dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz | Bird/place full-screen pilot;129 tests, desktop/phone layouts, nine live routes/sitemaps |
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
