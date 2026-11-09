@@ -1,15 +1,13 @@
 # AVES continue here
 
-Read [the current handoff](docs/HANDOFF-CURRENT.md) and
-[execution prompt](docs/NEXT-WEEK-PROMPT.md).
+C1a is complete on integration/aves-unified-2026-11-08, source 058beda.
+Read [the current handoff](docs/HANDOFF-CURRENT.md),
+[C1a checkpoint](docs/CHECKPOINT-2026-11-10-UNIFIED-C1A.md) and
+[agile order](docs/AGILE-PLAN.md).
 
-AVES-053 South Island opt-in soundscape pilot is published from `d34faab`.
-Production: `dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB`. Recovery checkpoint 13.
-Forest/stream/coast use licensed representative recordings; mountains are not
-available. AVES-066 and AVES-068 safe continuity remain delivered. Pause.
-
-[Release and test limits](docs/RELEASE-2026-11-10-SOUTH-ISLAND-SOUNDSCAPES.md).
-[Recovery instructions](docs/ROLLBACK-CHECKPOINTS.md).
-Australia remains at `2ff09e9`; do not merge app roots. No further upgrade selected.
-Preserve guest privacy, no new spend and the paid-AI/ZDR deferral. Fetch current
-Git history before edits. Former current documents remain in the pre-053 archive.
+Current main public features are incorporated into the existing unified draft.
+405 tests, TypeScript and local preview-mode build passed. Browser/hosted checks
+remain incomplete; no new hosted preview or production release was made.
+Next recommendation: C1b Australian discovery, not selected. Preserve budget and
+consent gates, guest privacy, no-new-spend and paid-AI deferral. Production main
+and Australia remain independent and unchanged. Fetch current Git history first.

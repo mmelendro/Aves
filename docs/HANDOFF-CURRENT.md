@@ -6,22 +6,21 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-AVES-053 South Island soundscape pilot is published, verified, synced and paused.
-The owner explicitly authorised that publication. On 10 November the owner asked
-for analysis and reorganisation of all upcoming work, including consolidation.
-The revised order is in [AGILE-PLAN.md](AGILE-PLAN.md). It separates documentation,
-code checkpoints, previews, hosted acceptance, production cutover and retirement.
-No new runtime upgrade is selected; each production release needs explicit approval.
-The owner then authorised C0 assessment, now complete. Read
-[the consolidation delta report](CONSOLIDATION-DELTA-2026-11-10.md): current main and
-Australia changes, three application conflict files, budget/consent compatibility,
-shared media/route requirements and the retained hosted-acceptance blocker.
-Next recommended increment: C1a, refresh main public behaviour in the existing
-draft with its preview/metadata safeguards retained. C1 code is not selected.
-Do not begin integration or retry blocked hosted provisioning merely because
-the roadmap is prioritised.
-AVES-066 map hover and AVES-068 safe continuity remain delivered. A truly
-uninterrupted stream across separate document roots remains deferred.
+AVES-053, AVES-066 and AVES-068 safe continuity remain published and unchanged.
+The owner selected C1a after the C0 consolidation assessment. C1a is complete on
+integration/aves-unified-2026-11-08, source 058beda98d5c5460cdef04b4fc160517dc37afaa.
+Read [the C1a checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md): current main public
+features are incorporated with unified metadata, preview safeguards and one media
+provider. All 405 tests, TypeScript and the local preview-mode build passed.
+Generated HTML passed for 55 static public pages; 19 dynamic public routes and
+browser/hosted behaviour still need C2 review. No new hosted preview or production
+release was made. Physical-device and prior media-test limits remain explicit.
+
+The prioritised order remains in [AGILE-PLAN.md](AGILE-PLAN.md). Next recommendation:
+C1b, update Australian discovery in the existing namespaces. C1b is not selected.
+Budget/consent compatibility, hosted auth/email/session acceptance, cutover and
+retirement remain separate gates. Do not retry declined paid provisioning.
+Each production release and project retirement requires explicit approval.
 
 ## Published applications
 
@@ -92,7 +91,7 @@ motmot, NZ kea, existing Australian bird. This does not invent programmes.
 YouTube buffered during checks; sustained video/nonzero video resume, playlist
 sub-item restoration and physical Safari/device behaviour remain unverified.
 
-## Prioritised backlog, implementation not selected
+## Prioritised backlog after C1a
 
 065 private eBird-connected wishes; 067 birds/AVES invitation word flip;
 068 uninterrupted shared-shell architecture beyond paused handoff; 061 header landscape contour; 053 mountain recordings/wider soundscape rollout;
@@ -109,7 +108,7 @@ Do not drop smaller requirements or silently implement the entire backlog.
 
 No new spend, paid AI retries, billing/security changes, broad secret pulls,
 account/database policies, private-brief/request/proposal/email edits or
-application consolidation. AI drafting 059 is deferred at the owner's direction;
+production application consolidation beyond the selected draft scope. AI drafting 059 is deferred at the owner's direction;
 the previously verified blocker was ZDR entitlement on free Gateway credits.
 Do not buy credits, upgrade or relax ZDR/no-training. Manual proposals remain.
 Do not expose guest data or secrets in GitHub, logs, screenshots or URLs, and do

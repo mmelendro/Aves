@@ -22,10 +22,10 @@ implied. See the current handoff and release evidence for precise limits.
 
 AVES-053 adds the South Island opt-in forest/stream/coast pilot with licensed
 representative recordings. Mountains and other regions remain unavailable.
-The roadmap reorganisation and owner-authorised AVES-020 C0 assessment are complete.
-See CONSOLIDATION-DELTA-2026-11-10.md and AGILE-PLAN.md. C1a public-source refresh
-is recommended next; implementation remains unselected and production publication
-requires explicit approval.
+C0 and owner-selected C1a are complete; read CHECKPOINT-2026-11-10-UNIFIED-C1A.md.
+This is a draft source/build checkpoint only. C1b is recommended next, not selected.
+Budget/consent and hosted acceptance remain outstanding; no production publication
+is authorised.
 
 ## Priority 1 — working divider on the three country homepages (AVES-006)
 
