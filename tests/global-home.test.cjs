@@ -393,3 +393,43 @@ test("Colombia retains the original planning boundaries and matching marker regi
   const html = renderToStaticMarkup(React.createElement(load("components/colombia-map-artwork.tsx").default, {alt:"",flat:true}))
   assert.match(html, /data-colombia-boundaries="true"/)
 })
+
+test("South Island conservation layers share the original map projection and exclude Rakiura", () => {
+  const data = load("content/south-island-conservation-layers.json")
+  const original = load("content/south-island-ecosystem-map.json")
+  assert.deepEqual(data.bbox, original.bbox)
+  assert.equal(data.viewBox, original.viewBox)
+  assert.equal(data.parks.length, 9)
+  assert.equal(new Set(data.parks.map(park => park.id)).size, 9)
+  assert.equal(data.parks.some(park => /rakiura/i.test(park.name)), false)
+  assert.equal(data.source.licence, "CC BY 4.0")
+  assert.match(data.source.url, /^https:\/\/services1\.arcgis\.com\//)
+  for (const park of data.parks) {
+    assert.ok(park.path.length > 100, park.name)
+    assert.ok(park.point[0] >= 0 && park.point[0] <= 480 && park.point[1] >= 0 && park.point[1] <= 640, park.name)
+  }
+})
+
+test("satellite image provenance uses exactly the habitat map's Mercator extent", () => {
+  const crypto = require("node:crypto")
+  const source = load("content/south-island-satellite-source.json")
+  assert.deepEqual(source.bbox, load("content/south-island-ecosystem-map.json").bbox)
+  assert.equal(source.projection, "EPSG:3857")
+  assert.equal(source.year, 2004)
+  assert.equal(source.width / source.height, 480 / 640)
+  const bytes = readFileSync(join(root,"public",source.asset))
+  assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), source.sha256)
+  assert.equal(bytes.subarray(0,3).toString("hex"), "ffd8ff")
+})
+
+test("map backgrounds do not silently change the bird habitat filter", () => {
+  const state = {layers:{background:"satellite",nationalParks:false,conservation:false,park:""},update(){}}
+  const renderer = createLoader({"./map-layer-context":{useMapLayers:()=>state}})
+  const Map = renderer("components/south-island-ecosystem-map.tsx").default
+  const selected = []
+  const html = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
+  assert.match(html,/data-map-layer="satellite"/)
+  assert.match(html,/2004/)
+  assert.doesNotMatch(html,/aria-label="Show Forest &amp; scrub birds on map"/,"hidden land cover must not remain an invisible click target")
+  assert.deepEqual(selected,[],"switching background is not a bird-filter action")
+})

@@ -15,8 +15,8 @@ Then continue automatically with the relevant previously requested map filters, 
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **6f123b0**, deployment **dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
-- `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **d693512**, deployment **dpl_9hrh2H4xuQumccS1qiPupqZuozV7**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
+- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **da82055**, deployment **dpl_9uif85cMYtEpqv4Dy6WPtPre62jx** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
+- `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **e0c766a**, deployment **dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 
 ## Completed in this release

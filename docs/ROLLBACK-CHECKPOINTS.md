@@ -8,9 +8,11 @@ do not merge their roots or roll back both merely because one UI changed.
 | --- | --- | --- | --- |
 | checkpoint/2026-11-09-01-feather-maps | 6f123b0dcd7d6e4a9d0718a5aff4a798c4d254a5 | dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV | Prior feather presentation, verified |
 | checkpoint/2026-11-09-02-region-preview | 15c19f159cd600a7a6aa7885b00e7e1b5ea4bcad | dpl_DeyZmLZ4GRG4KoC7EaDVoFiS15Ze | First-tap preview published; mouse first/second guide flow verified live; SVG Enter follow-up included with boundaries |
+| checkpoint/2026-11-09-03-colombia-boundaries | da820552e1c4a9a5536c36904bd11f531ede0dca | dpl_9uif85cMYtEpqv4Dy6WPtPre62jx | Main app: restored boundaries, verified marker centres and SVG Enter flow; published |
+| checkpoint/2026-11-09-04-australia-preview | e0c766a80d1150c7a0c24e1ccf54adc1336530b7 | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq | AU app: first preview/second guide; published |
 
-Australia's unchanged recovery baseline: source d693512 and Production
-`dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; current documentation head c182101.
+Australia's previous recovery baseline: source d693512 and Production
+`dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
 Main Vercel project: `prj_ZKEHgaFrywRyoEo9IfSFcln9k8pv`.
 Australia project: `prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv`.
 Team: `team_Th6ddqWyWKU1mLzTbJPlduDx` under the authorized account.
