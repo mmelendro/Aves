@@ -7,10 +7,10 @@ requests and acceptance criteria; its historical priorities and automatic-next
 notices do not select implementation.
 
 AVES-053's South Island pilot, AVES-066 and AVES-068 safe continuity are delivered.
-The owner requested prioritisation and then authorised AVES-020 C0 assessment,
-now complete in [the delta report](CONSOLIDATION-DELTA-2026-11-10.md). C1a public
-source refresh is recommended next. No new runtime increment or production
-release is authorised by the assessment.
+The owner then selected C1a, completed on the existing integration branch. See
+[the checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md). No production change was made.
+C1b Australian discovery is recommended next, not selected. Budget, consent and
+hosted-acceptance requirements remain outstanding.
 The former stacked release notices are preserved verbatim in the
 [pre-066 archive](archive/2026-11-09-before-aves-066/README.md).
 

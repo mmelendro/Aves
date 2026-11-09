@@ -1,17 +1,17 @@
 # AVES current execution prompt
 
-Updated 10 November 2026. AVES-053 South Island soundscape pilot is published and
-paused after explicit owner publication approval. Three licensed representative
-recordings cover forest, streams and coast; mountains/other-region rollout remain
-unimplemented. AVES-066 and AVES-068 safe continuity remain delivered. No next
-task selected. Use HANDOFF-CURRENT.md for runtime/status and precise test limits.
-Use [AGILE-PLAN.md](AGILE-PLAN.md) for the reorganised 10 November priorities.
-The owner authorised analysis/reorganisation and then C0 assessment, now complete.
-Read [the consolidation delta report](CONSOLIDATION-DELTA-2026-11-10.md). Next
-recommendation: C1a, current main public fidelity in the existing draft with its
-preview/metadata safeguards retained. Implementation is not yet selected.
-All production releases require explicit approval. Older automatic-continuation
-or next-priority wording is superseded by that plan and this handoff.
+Updated 10 November 2026. Published AVES-053/066/068 remain unchanged. The owner
+selected C1a after C0; current main public features are now incorporated into the
+existing unified draft with preview/metadata safeguards retained. Source 058beda.
+Read [the C1a checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md) and HANDOFF-CURRENT.md.
+405 tests, TypeScript and local preview-mode build passed. Browser/hosted QA is
+not complete; no new hosted preview or production release was made.
+
+Next recommendation in AGILE-PLAN.md: C1b Australian discovery, not selected.
+Budget/consent compatibility and hosted acceptance still block cutover. No paid
+provisioning, AI retries or account/provider changes are authorised. Each production
+release requires explicit approval. Older automatic-continuation wording is
+superseded by the current handoff and plan.
 
 ## Start from the correct checkpoint
 

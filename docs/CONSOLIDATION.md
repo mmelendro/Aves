@@ -2,6 +2,14 @@
 
 ## Current checkpoint
 
+10 November: C1a public-source refresh is complete at 058beda98d5c5460cdef04b4fc160517dc37afaa.
+Read [the current checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md) and
+[shared handoff](HANDOFF-CURRENT.md). 405 tests, TypeScript and local preview-mode
+build passed; browser and hosted acceptance remain incomplete. No new hosted
+preview or production release. C1b/C1c/C1d remain separate pending slices.
+
+## Historical 8 November preview and native evidence
+
 **Integration and read-only preview implemented. Production cutover is pending.** Review [draft PR #3](https://github.com/mmelendro/Aves/pull/3). Runtime commit: `7137d6089619c1cabcb8245aed7b8be9f83f65c5`. Ready Preview deployment: `dpl_FjVASappbNWdF1mo93YRAtHLmQnZ`, [preview URL](https://aves-australia-pg3jzdtd0-mmelendro-9273s-projects.vercel.app). Vercel authentication remains enabled. Request a fresh temporary share link in chat if needed; never commit the share token.
 
 The owner authorized code integration and preview testing on 8 November 2026, then continuation of the bounded account/enquiry checks. All 19 local native integration checks now pass, using synthetic accounts and disposable PostgreSQL, Auth and PostgREST. Work is isolated to `integration/aves-unified-2026-11-08`. No production release, domain/DNS change, project rename, hosted migration or project deletion is included in this checkpoint. The eco-tourism business plan remains to be created.
