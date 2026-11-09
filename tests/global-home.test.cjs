@@ -149,7 +149,7 @@ test("country cards are regional maps with canonical region links and no extra c
   for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(html.replaceAll("&amp;", "&").includes(`>${region.name}</option>`), region.name)
   for (const state of load("content/global-australian-map.ts").australiaMapStates) assert.ok(html.includes(`>${state.name}</option>`), state.name)
   for (const island of load("content/new-zealand-map.json").islands) assert.ok(html.includes(`>${island.label}</option>`), island.label)
-  assert.match(html, /Representative planning locations, not regional boundaries/)
+  assert.match(html, /Representative locations, not official administrative or precise ecological boundaries/)
   assert.doesNotMatch(html, /<text[^>]*>(?:NSW|WA|ACT|[0-9]+)<\/text>/)
 
   assert.doesNotMatch(html, /data-bird-carousel|regions\/null|regions\/undefined/)
@@ -393,6 +393,75 @@ test("Colombia retains the original planning boundaries and matching marker regi
   }
   const html = renderToStaticMarkup(React.createElement(load("components/colombia-map-artwork.tsx").default, {alt:"",flat:true}))
   assert.match(html, /data-colombia-boundaries="true"/)
+})
+
+test("all Colombia card shapes and dots share named previews without hover arming navigation", () => {
+  let selected
+  const armed = {current:null}
+  const renderer = createLoader({react:{...React,
+    useState: initial => { selected ??= initial; return [selected,next => {selected=typeof next==="function" ? next(selected) : next}] },
+    useRef: () => armed, useId: () => "card-test",
+  }})
+  const Card = renderer("components/homepage-country-map-card.tsx").default
+  const render = () => Card({country:"colombia",name:"Colombia",href:"/colombia"})
+  const markers = load("content/colombia-map-markers.ts").colombiaMapMarkers
+  const geometry = load("content/colombia-planning-boundaries.json")
+  const find = (tree, attribute, id) => elements(tree,node=>node.props[attribute]===id)[0]
+  const shapeOrder = () => elements(render(),node=>node.props["data-region-shape"]).map(node=>node.props["data-region-shape"])
+  assert.deepEqual(shapeOrder(),markers.map(marker=>marker.slug))
+  for (const marker of markers) {
+    const path = geometry.regions.find(region=>region.name===marker.name).path
+    const shape = find(render(),"data-region-shape",marker.slug)
+    assert.equal(shape.props.children.props.d,path,"reuse exact reviewed geometry")
+    assert.equal(shape.props.children.props.fillRule,"evenodd","retain holes and separate components")
+    for (const attribute of ["data-region-shape","data-region-marker"]) {
+      armed.current=null
+      const control=find(render(),attribute,marker.slug)
+      assert.equal(control.props.href,`/regions/${marker.slug}`)
+      assert.ok(control.props["aria-label"].includes(marker.name))
+      selected="not-this-region"
+      control.props.onPointerEnter({pointerType:"touch"})
+      assert.equal(selected,"not-this-region","touch does not generate hover preview")
+      control.props.onPointerEnter({pointerType:"mouse"})
+      assert.equal(selected,marker.slug)
+      assert.equal(armed.current,null,"hover is not deliberate activation")
+      control.props.onFocus()
+      assert.equal(armed.current,null,"keyboard focus does not arm navigation")
+      const description=elements(render(),node=>node.props["aria-live"]==="polite")[0]
+      assert.equal(description.props.children,load("content/destination-regions.ts").destinationRegions.colombia.find(region=>region.id===marker.slug).description)
+      let prevented=0
+      const click={button:0,preventDefault(){prevented++}}
+      control.props.onClick(click)
+      assert.equal(prevented,1,"first activation previews")
+      control.props.onClick(click)
+      assert.equal(prevented,1,"later activation retains native guide navigation")
+      armed.current=null
+      for (const event of [{button:1},{button:0,ctrlKey:true},{button:0,metaKey:true},{button:0,shiftKey:true},{button:0,altKey:true}]) {
+        control.props.onClick({...event,preventDefault(){assert.fail("modified activation must stay native")}})
+        assert.equal(armed.current,null)
+      }
+      let keyPrevented=false
+      control.props.onKeyDown({key:"Enter",preventDefault(){keyPrevented=true}})
+      assert.equal(keyPrevented,true)
+      assert.equal(armed.current,marker.slug,"Enter deliberately previews")
+    }
+    assert.deepEqual(shapeOrder(),markers.map(marker=>marker.slug),"selection never changes overlap ownership")
+  }
+  const svg=elements(render(),node=>node.type==="svg" && node.props.viewBox===geometry.viewBox)[0]
+  assert.notEqual(svg.props["aria-hidden"],true,"region controls stay in the accessibility tree")
+})
+
+test("Australia and NZ card geometry and native region targets remain unchanged", () => {
+  const Card = load("components/homepage-country-map-card.tsx").default
+  for (const country of ["australia","new-zealand"]) {
+    const tree = React.createElement(Card,{country,name:country,href:`/${country}`})
+    const html=renderToStaticMarkup(tree)
+    assert.doesNotMatch(html,/data-region-shape=|data-region-marker=/)
+    const expected=country==="australia"
+      ? load("content/global-australian-map.ts").australiaMapStates.filter(state=>state.regionId).map(state=>`/australia/regions/${state.regionId}`)
+      : load("content/new-zealand-map.json").islands.map(island=>load("lib/new-zealand-region-links.ts").newZealandRegionHref(island.id))
+    for (const href of expected) assert.ok(anchors(html).filter(link=>link.href===href).length>=2,href)
+  }
 })
 
 test("South Island conservation layers share the original map projection and exclude Rakiura", () => {

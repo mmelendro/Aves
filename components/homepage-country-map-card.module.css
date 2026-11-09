@@ -8,6 +8,7 @@
 .callout { display:flex; align-items:center; justify-content:center; gap:.5rem; min-height:44px; margin:0 .4rem; padding:.4rem .6rem; border-radius:999px; background:#e6f2eb; color:#064e3b; text-align:center; font-size:.8125rem; line-height:1.35; font-weight:600; }
 .callout svg { flex-shrink:0; }
 .area path { fill:var(--land); stroke:var(--outline); stroke-width:1; }
+.colombiaArea path { stroke-width:.85; pointer-events:fill; }
 .area[data-active="true"] path, .area:hover path, .area:focus-visible path { fill:#065f46; stroke:var(--ink); stroke-width:1.5; }
 .area:focus-visible { outline:none; }
 .area:focus-visible path { stroke:#b45309; stroke-width:3; }
