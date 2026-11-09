@@ -1,0 +1,15 @@
+/* Inline is a normal card. The same element enters the browser top layer. */
+.viewer { position:relative; display:block; width:100%; max-width:none; margin:0; padding:0; border:0; background:transparent; color:inherit; overflow:visible; }
+.control { position:absolute; top:4rem; right:.75rem; z-index:40; display:flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid #ffffff70; border-radius:999px; color:white; background:#17382dbd; backdrop-filter:blur(6px); }
+.control[data-kind="place"] { top:.75rem; right:4rem; }
+.control:hover { background:#064e3be6; }
+.control:focus-visible { outline:2px solid #34d399; outline-offset:3px; }
+.viewer[data-expanded] { position:fixed; inset:0; width:100%; height:100dvh; max-height:none; margin:0; padding:0; overflow:auto; overscroll-behavior:contain; background:#071b17; color:white; }
+.viewer::backdrop { background:#071b17f5; }
+.viewer[data-expanded] [data-carousel-image],
+.viewer[data-expanded] [data-place-image] { height:100dvh !important; min-height:0; aspect-ratio:auto; background:#071b17; }
+/* Reveal the complete existing asset without distortion or invented detail. */
+.viewer[data-expanded] [data-carousel-image] img,
+.viewer[data-expanded] [data-place-image] img { object-fit:contain !important; object-position:center !important; }
+.viewer[data-expanded] > section { border:0; border-radius:0; }
+@media (prefers-reduced-transparency: reduce) { .control { background:#17382d; } }

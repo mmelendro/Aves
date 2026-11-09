@@ -11,12 +11,13 @@ const root = resolve(__dirname, "..")
 function createLoader(overrides = {}) {
   const cache = new Map()
   const adapters = {
+    "next/navigation": { useRouter: () => ({ push() {} }) },
     "next/image": ({ src, alt }) => React.createElement("img", { src, alt }),
     "next/link": ({ children, ...props }) => React.createElement("a", { ...props, "data-next-link": "true" }, children),
     "@/components/navigation-header": { NavigationHeader: function NavigationHeader() { return null } },
     "@/components/footer": { Footer: function Footer() { return null } },
     "@/components/homepage-bird-carousel": function HomepageBirdCarousel(props) {
-      return React.createElement("div", { "data-bird-carousel": true, "data-count": props.birds?.length, "data-variant": props.variant, "data-autoplay": props.autoPlay, "data-priority": props.priority, "data-info-presentation": props.infoPresentation ?? "below", "aria-label": props.label })
+      return React.createElement("div", { "data-bird-carousel": true, "data-count": props.birds?.length, "data-variant": props.variant, "data-autoplay": props.autoPlay, "data-priority": props.priority, "data-info-presentation": "overlay", "aria-label": props.label })
     },
     "@/components/contact-form-section": { ContactFormSection: function ContactFormSection() { return null } },
     ...overrides,
@@ -56,7 +57,7 @@ function elements(node, predicate) {
 
 function anchors(html) {
   return [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].map(match => ({
-    href: match[1].match(/\bhref="([^"]*)"/)?.[1],
+    href: match[1].match(/\bhref="([^"]*)"/)?.[1]?.replaceAll("&amp;", "&"),
     next: match[1].includes('data-next-link="true"'),
     text: match[2].replace(/<[^>]*>/g, ""),
   }))
@@ -65,42 +66,62 @@ function anchors(html) {
 const load = createLoader()
 const { destinations } = load("content/destinations.ts")
 
-test("species details retain notes, picker and licensed source links in both presentations", () => {
+test("the translated Colombian inquiry retains its disabled read-only preview state", () => {
+  const preview = createLoader({
+    "@/components/contact-form-section": undefined,
+    "@/components/preview-mode": { useReadOnlyPreview: () => true },
+  })
+  const Form = preview("components/contact-form-section.tsx").ContactFormSection
+  const html = renderToStaticMarkup(React.createElement(Form))
+  const submit = html.match(/<button\b[^>]*type="submit"[^>]*>/)?.[0]
+  assert.ok(submit, "the inquiry has a submit control")
+  assert.match(submit, /disabled=""/)
+})
+
+test("transparent species details preserve every country collection, source and media credit", () => {
   const Panel = load("components/species-details-panel.tsx").default
-  const birds = load("content/new-zealand-carousel.ts").newZealandCarouselBirds
-  for (const presentation of ["below", "overlay"]) {
-    for (const [index, bird] of birds.entries()) {
-      const html = renderToStaticMarkup(React.createElement(Panel, { id: "test-info", bird, birds, selectedIndex: index, showBirdPicker: true, presentation, onSelectBird() {}, onClose() {} }))
-      const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
-      for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), `${presentation}: ${bird.id}`)
-      if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
-      const links = anchors(html)
-      assert.ok(links.some(link => link.href === bird.sources[0].url))
-      if (bird.audioFile) assert.ok(links.some(link => link.href === (bird.audioCreditHref || `/credits#audio-${bird.id}`)))
-      assert.equal((html.match(/<option /g) || []).length, birds.length)
-      if (presentation === "overlay") {
-        assert.match(html, /data-species-overlay="true"/)
-        assert.match(html, /aria-label="Close species details"/)
-        assert.match(html, /aria-label="Scrollable species information"/)
-        assert.match(html, /aria-labelledby="test-info-title"/)
-      } else assert.doesNotMatch(html, /data-species-overlay|Close species details/)
-    }
+  const catalogues = Object.values(load("content/destination-birds.ts").destinationBirds)
+  assert.equal(catalogues.reduce((total, birds) => total + birds.length, 0), 73)
+  for (const birds of catalogues) for (const [index, bird] of birds.entries()) {
+    const html = renderToStaticMarkup(React.createElement(Panel, { id: "test-info", bird, birds, selectedIndex: index, showBirdPicker: true, onSelectBird() {}, onClose() {} }))
+    const text = html.replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
+    for (const value of [bird.commonName, bird.localOccurrence || bird.distribution, bird.habitat, bird.photoCredit.photographer]) assert.ok(text.includes(value), bird.id)
+    if (bird.localOccurrence && bird.localOccurrence !== bird.distribution) assert.ok(text.includes(bird.distribution))
+    const links = anchors(html)
+    assert.ok(links.some(link => link.href === bird.sources[0].url), `${bird.id}: species source`)
+    if (bird.audioFile) assert.ok(links.some(link => link.href === (bird.audioCreditHref || `/credits#audio-${bird.id}`)))
+    if (bird.regionHref || bird.regionSlug) assert.ok(links.some(link => link.href === (bird.regionHref || `/aves-explorer?region=${bird.regionSlug}`)))
+    assert.equal((html.match(/<option /g) || []).length, birds.length)
+    assert.match(html, /data-species-overlay="true"/)
+    assert.match(html, /aria-label="Close species details"/)
+    assert.match(html, /aria-label="Scrollable species information"/)
+    assert.match(html, /aria-labelledby="test-info-title"/)
+    assert.doesNotMatch(html, /<h4[^>]*>About /)
   }
 })
 
-test("only the NZ destination hero opts into the Info-overlay pilot", () => {
-  const hero = renderToStaticMarkup(React.createElement(load("components/new-zealand-hero-explorer.tsx").default))
-  assert.match(hero, /data-info-presentation="overlay"/)
-  assert.equal((hero.match(/data-bird-carousel="true"/g) || []).length, 1)
-  const home = renderToStaticMarkup(React.createElement(load("app/page.tsx").default))
-  const colombia = renderToStaticMarkup(React.createElement(load("app/colombia/page.tsx").default))
-  for (const html of [home, colombia]) {
-    assert.match(html, /data-info-presentation="below"/)
-    assert.doesNotMatch(html, /data-info-presentation="overlay"/)
+test("homepage, country, regional and article viewers all use the same overlay contract", () => {
+  // Exercise the real shared carousel rather than assuming a default in its stub.
+  const real = createLoader({ "@/components/homepage-bird-carousel": undefined })
+  const Region = real("components/colombia-region-page.tsx").ColombiaRegionPage
+  const region = real("content/regions.ts").regions.find(region => region.id === "sierra-nevada-de-santa-marta")
+  const cases = [
+    React.createElement(real("app/page.tsx").default),
+    React.createElement(real("app/colombia/page.tsx").default),
+    React.createElement(real("components/new-zealand-hero-explorer.tsx").default),
+    React.createElement(Region, { region }),
+    React.createElement(real("components/article-bird-carousel.tsx").default, { article: "paramo" }),
+    React.createElement(real("app/species/page.tsx").default),
+    React.createElement(real("components/homepage-bird-carousel.tsx").default, { variant: "destination-card", autoPlay: false }),
+  ]
+  for (const element of cases) {
+    const html = renderToStaticMarkup(element)
+    assert.match(html, /data-info-presentation="overlay"/)
+    assert.doesNotMatch(html, /data-info-presentation="below"/)
   }
 })
 
-test("world map offers all three selections with keyboard semantics and honest development status", () => {
+test("world map offers all three selections with keyboard semantics and no destination development badge", () => {
   const Map = load("components/world-destination-map.tsx").default
   const Explorer = load("components/homepage-destination-explorer.tsx").default
   const html = renderToStaticMarkup(React.createElement(Explorer, { map: React.createElement(Map) }))
@@ -113,7 +134,7 @@ test("world map offers all three selections with keyboard semantics and honest d
   assert.match(html, /role="group"/)
   assert.match(html, /preserveAspectRatio="xMidYMid meet"/)
   assert.equal((html.match(/role="button" tabindex="0"/g) || []).length, 3)
-  assert.match(html, /New Zealand is in development/)
+  assert.doesNotMatch(html, /in development/i)
   assert.match(html, /Other countries provide geographic context/)
   assert.doesNotMatch(html, /role="img"/i)
 })
@@ -133,12 +154,22 @@ test("country cards are regional maps with canonical region links and no extra c
   const html = renderToStaticMarkup(React.createElement(Cards))
   const links = anchors(html)
   assert.equal((html.match(/<article /g) || []).length, 3)
+  assert.equal((html.match(/<select /g) || []).length, 3, "every card has the same touch/keyboard location selector")
+  assert.equal((html.match(/<details /g) || []).length, 3, "every card retains a full-name guide list")
+  const ids = [...html.matchAll(/<select[^>]* id="([^"]+)"/g)].map(match => match[1])
+  assert.equal(new Set(ids).size, 3, "selector labels are unique across country cards")
+  for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(html.replaceAll("&amp;", "&").includes(`>${region.name}</option>`), region.name)
+  for (const state of load("content/global-australian-map.ts").australiaMapStates) assert.ok(html.includes(`>${state.name}</option>`), state.name)
+  for (const island of load("content/new-zealand-map.json").islands) assert.ok(html.includes(`>${island.label}</option>`), island.label)
+  assert.match(html, /Representative locations, not official administrative or precise ecological boundaries/)
+  assert.doesNotMatch(html, /<text[^>]*>(?:NSW|WA|ACT|[0-9]+)<\/text>/)
+
   assert.doesNotMatch(html, /data-bird-carousel|regions\/null|regions\/undefined/)
   for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(links.some(link => link.href === `/regions/${region.slug}`))
   const states = load("content/global-australian-map.ts").australiaMapStates
   assert.equal(states.length, 9)
   for (const state of states) assert.ok(links.some(link => link.href === `/australia/regions/${state.regionId}`))
-  for (const island of load("content/new-zealand-map.json").islands) assert.ok(links.some(link => link.href === `/new-zealand#region-${island.id}`))
+  for (const island of load("content/new-zealand-map.json").islands) assert.ok(links.some(link => link.href === load("lib/new-zealand-region-links.ts").newZealandRegionHref(island.id)))
   for (const country of destinations) assert.ok(links.some(link => link.href === country.href && link.text === `Explore ${country.name}` && !link.next))
   assert.ok(links.filter(link => link.href?.startsWith("/")).every(link => !link.next), "cross-app country and region routes reload normally")
 })
@@ -168,6 +199,10 @@ test("global homepage and footer offer the three public destinations with full-p
   ])
   const Home = load("app/page.tsx").default
   const html = renderToStaticMarkup(React.createElement(Home))
+  const heading = html.match(/<h1\b[\s\S]*?<\/h1>/)[0]
+  assert.match(heading, /aria-label="Where will birds take you\?"/, "one stable readable sentence")
+  assert.match(heading, /type="button"[^>]*data-flipped="false"/, "word is keyboard/touch operable before any interaction")
+  assert.match(heading, /aria-label="Switch between birds and AVES" aria-pressed="false"/)
   const links = anchors(html)
   for (const destination of destinations) {
     const countryLinks = links.filter(link => link.href === destination.href)
@@ -253,7 +288,7 @@ test("one homepage viewer uses each complete country collection, opt-in playback
       assert.match(bird.regionHref, australian ? /^\/australia\/regions\// : /^\/(regions\/|new-zealand)/)
       if (australian && bird.audioFile) assert.equal(bird.audioCreditHref, `/australia/credits#audio-${bird.id}`)
     }
-    if (destination.status) assert.match(card, /In development · Planning beta/)
+    assert.doesNotMatch(card, /in development/i)
   }
 })
 
@@ -290,7 +325,7 @@ test("a future country is selectable with an attributed fallback and a native fo
 
 test("Colombia retains its country homepage, bird carousel, trip form and existing regional URLs", () => {
   const page = load("app/colombia/page.tsx")
-  const tree = page.default()
+  const tree = load("components/colombia-home-page.tsx").default()
   const componentNames = elements(tree, node => typeof node.type === "function").map(node => node.type.name)
   for (const component of ["NavigationHeader", "ContactFormSection", "Footer"]) assert.ok(componentNames.includes(component), component)
   // The gallery can be composed inside a hero without disappearing from the page.
@@ -305,4 +340,213 @@ test("Colombia retains its country homepage, bird carousel, trip form and existi
   assert.equal(page.metadata.openGraph.url, "https://aves.bio/colombia")
   assert.match(page.metadata.title.absolute, /Colombia/)
   assert.match(page.metadata.twitter.title, /Colombia/)
+})
+
+
+test("brand word previews on mouse/keyboard and a first touch toggles once, without pointer-focus double flips", () => {
+  let state=false
+  const ref={current:false}
+  const Word=createLoader({react:{useState:()=>[state,next=>{state=typeof next==="function"?next(state):next}],useRef:()=>ref}})("components/birds-brand-word.tsx").default
+  const p=Word().props
+  p.onPointerDown(); p.onFocus(); p.onClick()
+  assert.equal(state,true,"first touch: pointer focus must not flip before click")
+  p.onPointerLeave({pointerType:"touch"})
+  assert.equal(state,true,"touch pointer leaving after a tap must not undo it")
+  p.onPointerDown(); p.onClick()
+  assert.equal(state,false,"second tap restores birds")
+  p.onFocus(); assert.equal(state,true,"keyboard focus previews AVES")
+  p.onKeyDown({key:"Escape"}); assert.equal(state,false,"Escape restores birds without navigation")
+  p.onPointerEnter({pointerType:"mouse"}); assert.equal(state,true)
+  p.onPointerLeave({pointerType:"mouse"}); assert.equal(state,false)
+  p.onPointerEnter({pointerType:"touch"}); assert.equal(state,false,"touch hover does not toggle")
+  p.onFocus();p.onBlur();assert.equal(state,false)
+})
+
+
+test("connected regional maps use feather cues and keep full-name selection accessible", () => {
+  const Map = load("components/destination-regional-map.tsx").default
+  const expected = { colombia: ["eastern-andes", "Eastern Andes"], australia: ["australian-capital-territory", "Australian Capital Territory"], "new-zealand": ["rakiura", "Stewart Island / Rakiura"] }
+  for (const [country, [selectedRegionId, name]] of Object.entries(expected)) {
+    const selected = []
+    const tree = Map({ country, selectedRegionId, onSelectRegion: id => selected.push(id) })
+    const html = renderToStaticMarkup(tree)
+    assert.match(html, /data-map-feather="true"/)
+    assert.doesNotMatch(html, /<text[^>]*>(?:NSW|WA|ACT|[0-9]+)<\/text>|<polyline|M389,184L413,122/)
+    const button = elements(tree, el => el.props["aria-label"] === `Preview ${name} birds`)[0]
+    assert.ok(button, country + ": full region name")
+    button.props.onClick()
+    assert.deepEqual(selected, [selectedRegionId])
+  }
+})
+
+
+test("region navigation requires a deliberate preview and preserves native modified clicks", () => {
+  const { regionActivation } = load("lib/region-activation.ts")
+  const tap = { button: 0 }
+  assert.equal(regionActivation(null, "south-island", tap).preview, true, "default highlight is not a first tap")
+  assert.equal(regionActivation("south-island", "south-island", tap).native, true)
+  assert.equal(regionActivation("south-island", "north-island", tap).preview, true)
+  for (const event of [{button:1}, {button:0,ctrlKey:true}, {button:0,metaKey:true}, {button:0,shiftKey:true}, {button:0,altKey:true}]) assert.equal(regionActivation(null, "south-island", event).native, true)
+})
+
+
+test("Colombia retains the original planning boundaries and matching marker regions", () => {
+  const crypto = require("node:crypto")
+  const geometry = load("content/colombia-planning-boundaries.json")
+  const markers = load("content/colombia-map-markers.ts").colombiaMapMarkers
+  assert.equal(crypto.createHash("sha256").update(readFileSync(join(root, geometry.source.path))).digest("hex"), geometry.source.sha256)
+  assert.deepEqual(geometry.regions.map(r => r.name), markers.map(r => r.name))
+  for (const [i, region] of geometry.regions.entries()) {
+    assert.equal(region.markerInsideOriginal, true)
+    assert.equal(region.markerInsideSmoothed, true)
+    assert.ok(Math.abs(region.marker.x - markers[i].x * 6.34) < .001)
+    assert.ok(Math.abs(region.marker.y - markers[i].y * 8.02) < .001)
+    assert.ok(region.path.length > 100)
+  }
+  const html = renderToStaticMarkup(React.createElement(load("components/colombia-map-artwork.tsx").default, {alt:"",flat:true}))
+  assert.match(html, /data-colombia-boundaries="true"/)
+})
+
+test("all Colombia card shapes and dots share named previews without hover arming navigation", () => {
+  let selected
+  const armed = {current:null}
+  const renderer = createLoader({react:{...React,
+    useState: initial => { selected ??= initial; return [selected,next => {selected=typeof next==="function" ? next(selected) : next}] },
+    useRef: () => armed, useId: () => "card-test",
+  }})
+  const Card = renderer("components/homepage-country-map-card.tsx").default
+  const render = () => Card({country:"colombia",name:"Colombia",href:"/colombia"})
+  const markers = load("content/colombia-map-markers.ts").colombiaMapMarkers
+  const geometry = load("content/colombia-planning-boundaries.json")
+  const find = (tree, attribute, id) => elements(tree,node=>node.props[attribute]===id)[0]
+  const shapeOrder = () => elements(render(),node=>node.props["data-region-shape"]).map(node=>node.props["data-region-shape"])
+  assert.deepEqual(shapeOrder(),markers.map(marker=>marker.slug))
+  for (const marker of markers) {
+    const path = geometry.regions.find(region=>region.name===marker.name).path
+    const shape = find(render(),"data-region-shape",marker.slug)
+    assert.equal(shape.props.children.props.d,path,"reuse exact reviewed geometry")
+    assert.equal(shape.props.children.props.fillRule,"evenodd","retain holes and separate components")
+    const dot = find(render(),"data-region-marker",marker.slug)
+    assert.equal(elements(dot,node=>node.type==="circle").length,1,"no invisible dot disk stealing adjacent shape hits")
+    assert.equal(dot.props.children.props.r,"8","retain visible marker size")
+    for (const attribute of ["data-region-shape","data-region-marker"]) {
+      armed.current=null
+      const control=find(render(),attribute,marker.slug)
+      assert.equal(control.props.href,`/regions/${marker.slug}`)
+      assert.ok(control.props["aria-label"].includes(marker.name))
+      selected="not-this-region"
+      control.props.onPointerEnter({pointerType:"touch"})
+      assert.equal(selected,"not-this-region","touch does not generate hover preview")
+      control.props.onPointerEnter({pointerType:"mouse"})
+      assert.equal(selected,marker.slug)
+      assert.equal(armed.current,null,"hover is not deliberate activation")
+      control.props.onFocus()
+      assert.equal(armed.current,null,"keyboard focus does not arm navigation")
+      const description=elements(render(),node=>node.props["aria-live"]==="polite")[0]
+      assert.equal(description.props.children,load("content/destination-regions.ts").destinationRegions.colombia.find(region=>region.id===marker.slug).description)
+      let prevented=0
+      const click={button:0,preventDefault(){prevented++}}
+      control.props.onClick(click)
+      assert.equal(prevented,1,"first activation previews")
+      control.props.onClick(click)
+      assert.equal(prevented,1,"later activation retains native guide navigation")
+      armed.current=null
+      for (const event of [{button:1},{button:0,ctrlKey:true},{button:0,metaKey:true},{button:0,shiftKey:true},{button:0,altKey:true}]) {
+        control.props.onClick({...event,preventDefault(){assert.fail("modified activation must stay native")}})
+        assert.equal(armed.current,null)
+      }
+      let keyPrevented=false
+      control.props.onKeyDown({key:"Enter",preventDefault(){keyPrevented=true}})
+      assert.equal(keyPrevented,true)
+      assert.equal(armed.current,marker.slug,"Enter deliberately previews")
+    }
+    assert.deepEqual(shapeOrder(),markers.map(marker=>marker.slug),"selection never changes overlap ownership")
+  }
+  const svg=elements(render(),node=>node.type==="svg" && node.props.viewBox===geometry.viewBox)[0]
+  assert.notEqual(svg.props["aria-hidden"],true,"region controls stay in the accessibility tree")
+})
+
+test("Australia and NZ card geometry and native region targets remain unchanged", () => {
+  const Card = load("components/homepage-country-map-card.tsx").default
+  for (const country of ["australia","new-zealand"]) {
+    const tree = React.createElement(Card,{country,name:country,href:`/${country}`})
+    const html=renderToStaticMarkup(tree)
+    assert.doesNotMatch(html,/data-region-shape=|data-region-marker=/)
+    const expected=country==="australia"
+      ? load("content/global-australian-map.ts").australiaMapStates.filter(state=>state.regionId).map(state=>`/australia/regions/${state.regionId}`)
+      : load("content/new-zealand-map.json").islands.map(island=>load("lib/new-zealand-region-links.ts").newZealandRegionHref(island.id))
+    for (const href of expected) assert.ok(anchors(html).filter(link=>link.href===href).length>=2,href)
+  }
+})
+
+test("South Island conservation layers share the original map projection and exclude Rakiura", () => {
+  const data = load("content/south-island-conservation-layers.json")
+  const original = load("content/south-island-ecosystem-map.json")
+  assert.deepEqual(data.bbox, original.bbox)
+  assert.equal(data.viewBox, original.viewBox)
+  assert.equal(data.parks.length, 9)
+  assert.equal(new Set(data.parks.map(park => park.id)).size, 9)
+  assert.equal(data.parks.some(park => /rakiura/i.test(park.name)), false)
+  assert.equal(data.source.licence, "CC BY 4.0")
+  assert.match(data.source.url, /^https:\/\/services1\.arcgis\.com\//)
+  for (const park of data.parks) {
+    assert.ok(park.path.length > 100, park.name)
+    assert.ok(park.point[0] >= 0 && park.point[0] <= 480 && park.point[1] >= 0 && park.point[1] <= 640, park.name)
+  }
+})
+
+test("satellite image provenance uses exactly the habitat map's Mercator extent", () => {
+  const crypto = require("node:crypto")
+  const source = load("content/south-island-satellite-source.json")
+  assert.deepEqual(source.bbox, load("content/south-island-ecosystem-map.json").bbox)
+  assert.equal(source.projection, "EPSG:3857")
+  assert.equal(source.year, 2004)
+  assert.equal(source.width / source.height, 480 / 640)
+  const bytes = readFileSync(join(root,"public",source.asset))
+  assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), source.sha256)
+  assert.equal(bytes.subarray(0,3).toString("hex"), "ffd8ff")
+})
+
+test("map backgrounds do not silently change the bird habitat filter", () => {
+  const defaults = createLoader()("components/map-layer-context.tsx").initialMapLayers
+  const state = {layers:{...defaults,background:"satellite",ecosystems:false},update(){}}
+  const renderer = createLoader({"./map-layer-context":{useMapLayers:()=>state}})
+  const Map = renderer("components/south-island-ecosystem-map.tsx").default
+  const selected = []
+  const html = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
+  assert.match(html,/data-map-layer="satellite"/)
+  assert.match(html,/2004/)
+  assert.doesNotMatch(html,/aria-label="Show Forest &amp; scrub birds on map"/,"hidden land cover must not remain an invisible click target")
+  assert.deepEqual(selected,[],"switching background is not a bird-filter action")
+  state.layers.ecosystems = true
+  state.layers.nationalParks = true
+  state.layers.conservation = true
+  state.layers.businesses = true
+  const combined = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
+  assert.match(combined,/data-map-layer="satellite"[^>]*opacity="0.55"|opacity="0.55"[^>]*data-map-layer="satellite"/)
+  assert.match(combined,/data-map-layer="ecosystems"/)
+  assert.match(combined,/aria-label="Show Forest &amp; scrub birds on map"/)
+  assert.match(combined,/Preview public place: Abel Tasman Eco Tours/)
+  assert.deepEqual(selected,[],"combined display layers preserve the chosen bird filter")
+})
+
+test("public place layers deduplicate shared projects and distinguish business evidence", () => {
+  const loader = createLoader()
+  const {visiblePublicPlaces,publicPlaceCategories,publicPlaces} = loader("lib/south-island-public-places.ts")
+  const all = Object.fromEntries(publicPlaceCategories.map(category=>[category.id,true]))
+  const points = visiblePublicPlaces(all)
+  assert.equal(points.length,10)
+  assert.equal(new Set(points.map(point=>point.id)).size,10)
+  const businesses = visiblePublicPlaces({...Object.fromEntries(publicPlaceCategories.map(category=>[category.id,false])),businesses:true})
+  assert.equal(businesses.length,2)
+  assert.ok(businesses.every(point=>/^https:\/\//.test(point.evidenceUrl)))
+  assert.match(publicPlaces.coverage,/not a complete directory/)
+  const bbox = load("content/south-island-ecosystem-map.json").bbox
+  const project = loader("lib/ecosystem-map-camera.ts").ecosystemMapPoint
+  for (const point of points) {
+    const xy = project(point.longitude,point.latitude,bbox)
+    assert.ok(xy.x>=0 && xy.x<=480 && xy.y>=0 && xy.y<=640,point.name)
+    assert.ok(point.precision && point.coordinateSource && point.checked && /^https:\/\//.test(point.url),point.name)
+  }
+  assert.equal(visiblePublicPlaces(Object.fromEntries(publicPlaceCategories.map(category=>[category.id,false]))).length,0)
 })

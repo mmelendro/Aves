@@ -3,6 +3,7 @@
  * The large background link goes home; the independently clickable subtitle goes
  * to its country. These are sibling links, so no link is nested inside another link.
  */
+import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { sitePath } from "@/lib/site-path"
@@ -42,7 +43,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
 
   return (
     <span className={cn("relative inline-flex shrink-0 items-center pb-4", isFooter ? "gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
-      <a href={homeHref} aria-label="AVES home" className={cn("absolute inset-0 z-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", inverse ? "focus-visible:outline-emerald-300" : "focus-visible:outline-emerald-700")} />
+      <Link href={homeHref} aria-label="AVES home" className={cn("absolute inset-0 z-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", inverse ? "focus-visible:outline-emerald-300" : "focus-visible:outline-emerald-700")} />
       <svg aria-hidden="true" focusable="false" viewBox="0 0 240 40" fill="none" className={cn("pointer-events-none absolute inset-x-0 bottom-0 h-6 w-full", isFooter && "h-9", inverse ? "text-emerald-200" : "text-emerald-600")}>
         <path d={landscapes[country || "global"]} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M131 29 Q146 22 161 28 T192 28 T223 28 L238 28 M164 36 Q180 30 195 35 T237 34" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -59,7 +60,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
         />
       <span className="pointer-events-none block leading-none">
         <span aria-hidden="true" className={cn("block font-sans font-medium tracking-[0.14em]", isFooter ? "text-[2rem]" : "text-2xl sm:text-[1.75rem]", inverse ? "text-white" : "text-emerald-950")}>AVES</span>
-        {subtitle && <a href={subtitleHref} aria-label={label || `AVES ${subtitle} home`} className={cn("pointer-events-auto relative z-10 mt-1.5 block rounded-sm font-sans font-medium tracking-[0.1em] before:absolute before:inset-x-0 before:-top-1 before:h-6 before:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", isFooter ? "text-xs" : "text-[10px] sm:text-[11px]", inverse ? "text-emerald-100 focus-visible:outline-emerald-300" : "text-emerald-800 focus-visible:outline-emerald-700")}>{subtitle}</a>}
+        {subtitle && <Link href={subtitleHref} aria-label={label || `AVES ${subtitle} home`} className={cn("pointer-events-auto relative z-10 mt-1.5 block rounded-sm font-sans font-medium tracking-[0.1em] before:absolute before:inset-x-0 before:-top-1 before:h-6 before:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", isFooter ? "text-xs" : "text-[10px] sm:text-[11px]", inverse ? "text-emerald-100 focus-visible:outline-emerald-300" : "text-emerald-800 focus-visible:outline-emerald-700")}>{subtitle}</Link>}
       </span>
     </span>
   )

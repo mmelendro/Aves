@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,6 +16,8 @@ import { Shield, BarChart3, Target, Settings, Info, CheckCircle, XCircle, Refres
 import { useCookieConsent, type CookiePreferences } from "./cookie-consent-manager"
 
 export function CookiePreferenceCenter() {
+  const localizeHome = useColombiaHomeCopy()
+
   const {
     preferences,
     hasConsented,
@@ -142,7 +145,7 @@ export function CookiePreferenceCenter() {
     return colors[color as keyof typeof colors] || colors.green
   }
 
-  return (
+  return localizeHome((
     <Dialog open={showPreferenceCenter} onOpenChange={setShowPreferenceCenter}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
@@ -291,5 +294,5 @@ export function CookiePreferenceCenter() {
         </div>
       </DialogContent>
     </Dialog>
-  )
+  ))
 }

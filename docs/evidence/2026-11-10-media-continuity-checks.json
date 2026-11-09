@@ -1,0 +1,152 @@
+{
+  "sourceMain": "5d96fa02e45fb18304fc07a97bb5084948ab4afd",
+  "sourceAustralia": "2ff09e92b25a57d89c5966352393bcdb0369db45",
+  "productionMain": "dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH",
+  "productionAustralia": "dpl_56y3bD1RTE2fngcHBr14obkGu2bx",
+  "testsMain": 139,
+  "testsAustralia": 293,
+  "results": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/australia",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/australian-capital-territory",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/jervis-bay-territory",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/new-south-wales",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/northern-territory",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/queensland",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/south-australia",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/tasmania",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/victoria",
+      "status": 200
+    },
+    {
+      "path": "/australia/regions/western-australia",
+      "status": 200
+    },
+    {
+      "path": "/colombia",
+      "status": 200
+    },
+    {
+      "path": "/new-zealand",
+      "status": 200
+    },
+    {
+      "path": "/new-zealand#region-north-island",
+      "status": 200
+    },
+    {
+      "path": "/new-zealand#region-rakiura",
+      "status": 200
+    },
+    {
+      "path": "/new-zealand/south-island",
+      "status": 200
+    },
+    {
+      "path": "/regions/amazonia",
+      "status": 200
+    },
+    {
+      "path": "/regions/caribbean",
+      "status": 200
+    },
+    {
+      "path": "/regions/cauca-valley",
+      "status": 200
+    },
+    {
+      "path": "/regions/central-andes",
+      "status": 200
+    },
+    {
+      "path": "/regions/colombian-massif",
+      "status": 200
+    },
+    {
+      "path": "/regions/eastern-andes",
+      "status": 200
+    },
+    {
+      "path": "/regions/llanos",
+      "status": 200
+    },
+    {
+      "path": "/regions/magdalena-valley",
+      "status": 200
+    },
+    {
+      "path": "/regions/pacific",
+      "status": 200
+    },
+    {
+      "path": "/regions/sierra-nevada-de-santa-marta",
+      "status": 200
+    },
+    {
+      "path": "/regions/western-andes",
+      "status": 200
+    },
+    {
+      "path": "/images/maps/south-island-satellite-2004.jpg",
+      "status": 200
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "urls": 42,
+      "unique": 42,
+      "privateExcluded": true
+    },
+    {
+      "path": "/australia/sitemap.xml",
+      "status": 200,
+      "urls": 32,
+      "unique": 32,
+      "privateExcluded": true
+    },
+    {
+      "path": "/site-map",
+      "status": 200
+    },
+    {
+      "path": "/australia/site-map",
+      "status": 200
+    },
+    {
+      "path": "/images/brand/aves-colombia-bird.png",
+      "status": 200
+    },
+    {
+      "path": "/australia/images/brand/aves-new-zealand-bird.png",
+      "status": 200
+    }
+  ]
+}

@@ -5,15 +5,18 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react"
 import { GripVertical, RotateCcw } from "lucide-react"
 import { clampDiscoverySplit, discoverySplitBounds, dragDiscoverySplit, DISCOVERY_PAIR_MIN_WIDTH } from "@/lib/discovery-split"
 import styles from "./resizable-discovery-pair.module.css"
 
-type Props = { map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string }
+type Props = { map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
 type Drag = { pointerId: number; startX: number; share: number; width: number }
 
-export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }: Props) {
+export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, mediaFirst = false, mediaLabel = "bird photographs" }: Props) {
+  const localizeHome = useColombiaHomeCopy()
+
   const id = useId()
   const containerRef = useRef<HTMLDivElement>(null)
   const separatorRef = useRef<HTMLDivElement>(null)
@@ -49,7 +52,9 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
   }, [])
 
   // CSS uses these proportions only when both cards fit. No browser storage or account setting is needed.
-  const layoutStyle = { "--discovery-columns": `minmax(0, ${effectiveShare}fr) 44px minmax(0, ${100 - effectiveShare}fr)` } as CSSProperties
+  const leftShare = mediaFirst ? 100 - effectiveShare : effectiveShare
+  const direction = mediaFirst ? -1 : 1
+  const layoutStyle = { "--discovery-columns": `minmax(0, ${leftShare}fr) 44px minmax(0, ${100 - leftShare}fr)` } as CSSProperties
 
   function finishDrag(pointerId: number) {
     if (dragRef.current?.pointerId !== pointerId) return
@@ -58,20 +63,20 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
     if (separatorRef.current?.hasPointerCapture(pointerId)) separatorRef.current.releasePointerCapture(pointerId)
   }
 
-  return <div ref={containerRef} className={styles.container}>
+  return localizeHome(<div ref={containerRef} className={styles.container}>
     <div className={styles.controls}>
       <p id={`${id}-help`}>Drag the divider or use its arrow keys to resize.</p>
       <button type="button" onClick={() => setShare(50)} className={styles.reset}>
         <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />Reset layout
       </button>
     </div>
-    <div className={styles.pair} style={layoutStyle} data-dragging={dragging}>
-      {/* DOM order matches the media-first mobile experience; CSS places the map left when paired. */}
+    <div className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst}>
+      {/* Media comes first on mobile; desktop can place it on either side. */}
       <div id={mediaId} className={styles.mediaPanel}>{media}</div>
       <div ref={separatorRef} role="separator" aria-orientation="vertical" aria-label={mapLabel}
         aria-controls={`${id}-map`} aria-describedby={`${id}-help`}
         aria-valuemin={Number(bounds.min.toFixed(1))} aria-valuemax={Number(bounds.max.toFixed(1))}
-        aria-valuenow={Number(effectiveShare.toFixed(1))} aria-valuetext={`Map ${Math.round(effectiveShare)}%, bird photographs ${Math.round(100 - effectiveShare)}%`}
+        aria-valuenow={Number(effectiveShare.toFixed(1))} aria-valuetext={`Map ${Math.round(effectiveShare)}%, ${mediaLabel} ${Math.round(100 - effectiveShare)}%`}
         tabIndex={paired ? 0 : -1} className={styles.divider}
         onKeyDown={event => {
           // Read current geometry in case input follows a window resize before
@@ -81,7 +86,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
           const activeBounds = discoverySplitBounds(activeWidth)
           const activeShare = clampDiscoverySplit(share, activeWidth)
           const step = event.shiftKey ? 10 : 2
-          const next = event.key === "ArrowLeft" ? activeShare - step : event.key === "ArrowRight" ? activeShare + step : event.key === "Home" ? activeBounds.min : event.key === "End" ? activeBounds.max : undefined
+          const next = event.key === "ArrowLeft" ? activeShare - step * direction : event.key === "ArrowRight" ? activeShare + step * direction : event.key === "Home" ? activeBounds.min : event.key === "End" ? activeBounds.max : undefined
           if (next === undefined) return
           event.preventDefault()
           setShare(clampDiscoverySplit(next, activeWidth))
@@ -97,7 +102,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
         }}
         onPointerMove={event => {
           const active = dragRef.current
-          if (active?.pointerId === event.pointerId) setShare(dragDiscoverySplit(active.share, event.clientX - active.startX, active.width))
+          if (active?.pointerId === event.pointerId) setShare(dragDiscoverySplit(active.share, (event.clientX - active.startX) * direction, active.width))
         }}
         onPointerUp={event => finishDrag(event.pointerId)} onPointerCancel={event => finishDrag(event.pointerId)}
         onLostPointerCapture={event => finishDrag(event.pointerId)}>
@@ -105,5 +110,5 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId }
       </div>
       <div id={`${id}-map`} className={styles.mapPanel}>{map}</div>
     </div>
-  </div>
+  </div>)
 }

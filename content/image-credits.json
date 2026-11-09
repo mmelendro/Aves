@@ -426,6 +426,76 @@
       "attribution": "Lake Tekapo, New Zealand, photographed by Ryancoke2020 in November 2013. CC BY-SA 4.0 via Wikimedia Commons.",
       "alt": "Turquoise Lake Tekapo beneath mountain ranges and an open sky on New Zealand’s South Island",
       "modifications": "Original photograph retained and displayed at a smaller size. Licence verified 8 November 2026. Any displayed adaptation remains CC BY-SA 4.0."
+    },
+    {
+      "file": "arthurs-pass-mountains.webp",
+      "path": "/images/places/arthurs-pass-mountains.webp",
+      "title": "Arthur’s Pass — mountain beech forest",
+      "creator": "Mike Dickison",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Mountains_from_Devils_Punchbowl_Walking_Track_MRD.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mountains_from_Devils_Punchbowl_Walking_Track_MRD.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Mountain ridges framed by beech forest from Devils Punchbowl Walking Track at Arthur’s Pass. Photograph by Mike Dickison. Rights and locality checked 9 November 2026.",
+      "alt": "Mountain ridges framed by beech forest from Devils Punchbowl Walking Track at Arthur’s Pass",
+      "modifications": "Resized and converted to WebP; cropped to fit the place card.",
+      "verifiedOn": "2026-11-09"
+    },
+    {
+      "file": "arthurs-pass-waterfall.webp",
+      "path": "/images/places/arthurs-pass-waterfall.webp",
+      "title": "Arthur’s Pass — Devils Punchbowl Falls",
+      "creator": "Alan Liefting",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Devils_Punchbowl_Waterfall,_New_Zealand.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Devils_Punchbowl_Waterfall,_New_Zealand.jpg",
+      "license": "Public domain",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Devils_Punchbowl_Waterfall,_New_Zealand.jpg#Licensing",
+      "attribution": "Devils Punchbowl Falls in Arthur’s Pass National Park. Photograph by Alan Liefting. Rights and locality checked 9 November 2026.",
+      "alt": "Devils Punchbowl Falls in Arthur’s Pass National Park",
+      "modifications": "Resized and converted to WebP; cropped to fit the place card.",
+      "verifiedOn": "2026-11-09"
+    },
+    {
+      "file": "nelson-landscape.webp",
+      "path": "/images/places/nelson-landscape.webp",
+      "title": "Lake Rotoiti · Nelson Lakes",
+      "creator": "Kris Jacques",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Lake_Rotoiti_at_Nelson_Lakes_National_Park.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Rotoiti_at_Nelson_Lakes_National_Park.jpg",
+      "license": "CC BY-SA 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "attribution": "Lake Rotoiti and surrounding forested mountains in Nelson Lakes National Park. Photograph by Kris Jacques. Rights and locality checked 9 November 2026.",
+      "alt": "Lake Rotoiti and surrounding forested mountains in Nelson Lakes National Park",
+      "modifications": "Resized and converted to WebP; cropped to fit. Web rendition retains CC BY-SA 2.5.",
+      "verifiedOn": "2026-11-09"
+    },
+    {
+      "file": "fiordland-landscape.webp",
+      "path": "/images/places/fiordland-landscape.webp",
+      "title": "Lake Te Anau · Fiordland",
+      "creator": "Krzysztof Golik",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Lake_Te_Anau_02.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Te_Anau_02.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Lake Te Anau and the mountains of Fiordland under blue sky. Photograph by Krzysztof Golik. Rights and locality checked 9 November 2026.",
+      "alt": "Lake Te Anau and the mountains of Fiordland under blue sky",
+      "modifications": "Resized and converted to WebP; cropped to fit. Web rendition retains CC BY-SA 4.0.",
+      "verifiedOn": "2026-11-09"
+    },
+    {
+      "file": "catlins-landscape.webp",
+      "path": "/images/places/catlins-landscape.webp",
+      "title": "Curio Bay · The Catlins",
+      "creator": "Karora",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Petrified_forest_at_Curio_Bay.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Petrified_forest_at_Curio_Bay.jpg",
+      "license": "Public domain",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Petrified_forest_at_Curio_Bay.jpg#Licensing",
+      "attribution": "Rocky coastal platform and ocean at Curio Bay in the Catlins. Photograph by Karora. Rights and locality checked 9 November 2026.",
+      "alt": "Rocky coastal platform and ocean at Curio Bay in the Catlins",
+      "modifications": "Resized and converted to WebP; cropped to fit. ",
+      "verifiedOn": "2026-11-09"
     }
   ]
 }

@@ -8,6 +8,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { PreviewModeProvider } from "@/components/preview-mode"
 import { isReadOnlyPreview } from "@/lib/deployment-mode"
+import { publicNavigationPaths } from "@/lib/public-navigation"
+import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
@@ -90,11 +92,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <PreviewModeProvider readOnly={isReadOnlyPreview()}><CookieConsentProvider>
-          {children}
-          <CookiePreferenceCenter />
-          <CookieBanner />
-        </CookieConsentProvider></PreviewModeProvider>
+        <PreviewModeProvider readOnly={isReadOnlyPreview()}>
+          <CookieConsentProvider>
+            <AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider>
+            <CookiePreferenceCenter />
+            <CookieBanner />
+          </CookieConsentProvider>
+        </PreviewModeProvider>
         {/* Structured organization data for search tools. Keep claims aligned with verified public copy. */}
         <script
           type="application/ld+json"

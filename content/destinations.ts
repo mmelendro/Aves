@@ -17,7 +17,6 @@ export interface Destination {
   imageScale?: number
   bird: string
   photographer: string
-  status?: "In development"
   worldMap?: { countryCode: string; x: number; y: number; width: number }
 }
 
@@ -55,12 +54,11 @@ export const destinations: readonly Destination[] = [
     href: "/new-zealand",
     worldMap: { countryCode: "NZL", x: 772, y: 492, width: 220 },
     tagline: "Island birds, mountain landscapes and time to explore",
-    description: "Get to know Aotearoa New Zealand: native birdlife, forests and coastlines, with room for food, culture and a gentler pace. Our next destination is taking shape.",
+    description: "Get to know Aotearoa New Zealand: native birdlife, forests and coastlines, with room for food, culture and a gentler pace.",
     image: "/images/destinations/kea-new-zealand.jpg",
     imageAlt: "A kea with olive-green feathers perched beside a tree in New Zealand",
     imagePosition: "center 45%",
     bird: "Kea · New Zealand",
     photographer: "Piotr Zurek · CC BY-SA 2.0",
-    status: "In development",
   },
 ]

@@ -1,0 +1,19 @@
+{
+  "creator": "NASA Earth Observatory",
+  "product": "Blue Marble Next Generation",
+  "year": 2004,
+  "url": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/",
+  "serviceRequest": "https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=BlueMarble_NextGeneration&STYLES=&SRS=EPSG%3A3857&BBOX=18456771.57352476%2C-6080094.044506128%2C19458646.99066422%2C-4744260.154986844&WIDTH=960&HEIGHT=1280&FORMAT=image%2Fjpeg",
+  "projection": "EPSG:3857",
+  "bbox": [
+    18456771.57352476,
+    -6080094.044506128,
+    19458646.99066422,
+    -4744260.154986844
+  ],
+  "asset": "/images/maps/south-island-satellite-2004.jpg",
+  "width": 960,
+  "height": 1280,
+  "sha256": "0ef058d6441715ef2e089d2647ed22f07cb33af2caaf00e9a17c2e4fbdb9650e",
+  "retrieved": "2026-11-09"
+}

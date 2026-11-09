@@ -29,6 +29,8 @@
   .mediaPanel, .mapPanel { max-width: none; }
   .mediaPanel { order: 3; }
   .mapPanel { order: 1; }
+  .pair[data-media-first="true"] .mediaPanel { order: 1; }
+  .pair[data-media-first="true"] .mapPanel { order: 3; }
   .divider { position: relative; display: flex; order: 2; width: 44px; height: var(--discovery-panel-height); align-items: center; justify-content: center; cursor: col-resize; touch-action: none; border-radius: 0.75rem; outline-offset: -4px; }
   .divider::before { position: absolute; top: 0.5rem; bottom: 0.5rem; left: calc(50% - 1px); width: 2px; border-radius: 2px; background: #bbd8ca; content: ""; }
   .grip { position: relative; display: flex; width: 28px; height: 44px; align-items: center; justify-content: center; border: 1px solid #84b59d; border-radius: 999px; color: #065f46; background: #ecfdf5; }

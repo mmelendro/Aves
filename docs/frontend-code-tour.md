@@ -51,7 +51,7 @@ The source comments explain purpose, important decisions and the flow of informa
 | Country card title, status, photo or destination URL | `content/destinations.ts` |
 | Colombia homepage sections and short region teasers | `app/colombia/page.tsx` |
 | New Zealand introduction, experience story and regional sections | `app/new-zealand/page.tsx`, then `content/new-zealand.ts` |
-| Shared carousel size, overlays, photo crop or controls | `components/homepage-bird-carousel.tsx` |
+| Shared carousel size, overlays, photo crop or controls | `components/homepage-bird-carousel.tsx`; focal-point crop maths in `lib/cover-focal-position.ts` |
 | Birds shown globally | `content/global-birds.ts` |
 | Colombia species facts, photos, audio paths and focal points | `content/birds.ts` and its referenced records |
 | New Zealand species selection and media records | `content/new-zealand-carousel.ts` and its expansion/supplement imports |
@@ -77,8 +77,8 @@ Content/configuration files in this table are editing destinations, not all fron
 
 1. The page or wrapper passes a `birds` array. Without one, the carousel uses the Colombia catalogue.
 2. `currentIndex` chooses the slide. The wrapped `selectedIndex` keeps it valid if the list becomes shorter. An empty list renders nothing.
-3. The photograph fills a **9:16 portrait frame capped at 320 CSS pixels wide**. There is one image and no side-padding backdrop. `object-cover` crops landscape photographs; the record's `imagePosition` chooses the focal point. It does not alter the original image file.
-4. The photo callbacks set loading, loaded or error state. A separate effect also handles images that finished loading from cache before React attached its callback.
+3. The default photograph fills a **9:16 portrait frame capped at 320 CSS pixels wide**; destination-card and resizable layouts supply their own frame sizes. There is one image and no side-padding backdrop. `imagePosition` names a point in the original photo, such as `35% center`. `coverFocalPosition` scales the photo uniformly to cover the current frame and places that point at its centre where possible, clamping at the photo edges to avoid empty padding. It neither stretches the bird nor changes the image file. Pages keep supplying their collections to this same carousel.
+4. The photo callbacks set loading, loaded or error state. The image-ref effect handles cached images and observes the photo box with `ResizeObserver`, recalculating the crop when a divider or window changes its size. The frame itself stays the same size; only the covered photo's position changes.
 5. Previous/next, supported arrow keys, Home/End or a mostly horizontal swipe call `goToSlide`. This stops slideshow motion and current audio before changing the bird.
 6. The sound button calls the browser's audio `play()` directly from the click. This matters on mobile, where playback generally requires visitor interaction. Media events report actual playback; an attempt counter prevents an obsolete failed play request from changing the newer slide's state.
 7. Slideshow playback is separate from sound. It pauses while audio loads/plays, while details are open, and during most focus interactions. Reduced-motion preferences turn off automatic motion. Destination wrappers currently request `autoPlay={false}`.

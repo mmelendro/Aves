@@ -12,6 +12,7 @@ import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import WorldDestinationMap from "@/components/world-destination-map"
 import HomepageDestinationExplorer from "@/components/homepage-destination-explorer"
 import DestinationMapCards from "@/components/destination-map-cards"
+import BirdsBrandWord from "@/components/birds-brand-word"
 import { canonicalUrl } from "@/lib/site-path"
 
 const description = "Follow the birds with AVES. Explore Colombia and Australia, discover our developing New Zealand destination, and find a journey shaped around what you love."
@@ -41,8 +42,8 @@ export default function HomePage() {
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800">
                 <Bird className="h-4 w-4" aria-hidden="true" /> Birding journeys, personally planned
               </p>
-              <h1 id="destination-heading" className="text-balance text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-                Where will the <span className="text-emerald-700">birds</span> take you?
+              <h1 id="destination-heading" aria-label="Where will birds take you?" className="text-balance text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+                Where will <BirdsBrandWord /> take you?
               </h1>
               <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
                 Personally planned journeys connecting birds, landscapes and local culture. Choose a country, meet its birds and imagine your journey.

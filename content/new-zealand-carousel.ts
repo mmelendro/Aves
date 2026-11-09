@@ -7,6 +7,8 @@ import type { BirdProfile } from "@/content/birds"
 import { newZealandBirds, newZealandEbirdLinks } from "@/content/new-zealand"
 import { expansionBirds, expansionPhotoCredits } from "@/content/new-zealand-expansion"
 import { newZealandSupplementBirds, newZealandSupplementPhotoCredits } from "@/content/new-zealand-supplement"
+import { newZealandBirdIslands, type NewZealandIslandId } from "@/content/new-zealand-bird-islands"
+import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
 
 // Commercial reuse licences verified against the individual Commons file pages
 // on 7 November 2026. These are real photographs, not generated illustrations.
@@ -81,8 +83,8 @@ const newZealandAudio = {
   "nz-tokoeka": { file: "/audio/nz-tokoeka.mp3", label: "Tokoeka song, Ocean Beach, Stewart Island / Rakiura · ZHANG Shen (XC389022)" },
 } as const
 
-// The 9:16 viewer crops the sides of these original photographs. Each percentage
-// positions the visible window so the bird's face/bill stays inside the frame;
+// Each percentage marks the original photograph's focal point. The shared
+// cover-framing helper keeps that point centered where the image edges allow;
 // it does not modify the photograph or change its media/credit record.
 const originalPortraitPositions: Record<(typeof originalPhotoCredits)[number]["id"], string> = {
   "nz-kea": "85% center",
@@ -125,4 +127,16 @@ const originalCarouselBirds: BirdProfile[] = newZealandBirds.map(bird => {
 })
 
 export const newZealandCarouselBirds: BirdProfile[] = [...originalCarouselBirds, ...expansionBirds, ...newZealandSupplementBirds]
+// Build local collections once: stable profile objects avoid effect loops when
+// the carousel reports a new bird to its map. Media and rights stay unchanged.
+const regionalCollections = Object.fromEntries((["north-island", "south-island", "rakiura"] as const).map(id => [id,
+  newZealandCarouselBirds.filter(bird => newZealandBirdIslands[bird.id]?.includes(id)).map(bird => ({
+    ...bird, regionSlug: id, regionHref: newZealandRegionHref(id),
+    primaryRegion: id === "south-island" ? "South Island" : id === "north-island" ? "North Island" : "Stewart Island / Rakiura",
+  })),
+])) as Record<NewZealandIslandId, BirdProfile[]>
+
+export function newZealandRegionBirds(id?: NewZealandIslandId): BirdProfile[] {
+  return id ? regionalCollections[id] : newZealandCarouselBirds
+}
 export const newZealandPhotoCredits = [...originalPhotoCredits, ...expansionPhotoCredits, ...newZealandSupplementPhotoCredits]

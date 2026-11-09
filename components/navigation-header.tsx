@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { ColombiaHomeLanguageToggle, useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -26,13 +27,15 @@ const navigationLinks = [
 ] as const
 
 export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
+  const localizeHome = useColombiaHomeCopy()
+
   const pathname = usePathname()
   // Prefer the browser route; currentPage is only a fallback for callers supplying it.
   const activePath = pathname || currentPage || "/"
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
 
-  return (
+  return localizeHome((
     <>
       <header className="fixed inset-x-0 top-[var(--aves-preview-offset,0px)] z-50 border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md">
         <a
@@ -69,11 +72,11 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </Link>
           </nav>
 
-          <MobileNavigationOverlay links={navigationLinks} currentPage={activePath} />
+          <div className="flex shrink-0 items-center gap-2">{activePath === "/colombia" && <ColombiaHomeLanguageToggle />}<MobileNavigationOverlay links={navigationLinks} currentPage={activePath} /></div>
         </div>
       </header>
       {/* Reserve space for the fixed header so it does not cover the page heading. */}
       <div aria-hidden="true" className="h-[72px]" />
     </>
-  )
+  ))
 }

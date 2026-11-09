@@ -4,6 +4,7 @@
  */
 "use client"
 
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useEffect, useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
 import { Menu, X } from "lucide-react"
@@ -16,6 +17,8 @@ interface MobileNavigationOverlayProps {
 }
 
 export function MobileNavigationOverlay({ currentPage, links }: MobileNavigationOverlayProps) {
+  const localizeHome = useColombiaHomeCopy()
+
   const [open, setOpen] = useState(false)
 
   // Close the mobile dialog if the viewport grows into the desktop navigation layout.
@@ -33,7 +36,7 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
   const isActive = (href: string) => currentPage === href || currentPage.startsWith(href + "/") ||
     (href === "/aves-explorer" && (currentPage === "/regions" || currentPage.startsWith("/regions/")))
 
-  return (
+  return localizeHome((
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button
@@ -98,5 +101,5 @@ export function MobileNavigationOverlay({ currentPage, links }: MobileNavigation
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
-  )
+  ))
 }

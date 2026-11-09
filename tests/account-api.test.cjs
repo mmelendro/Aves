@@ -467,7 +467,9 @@ test("bird targets survive owned save/edit, immutable submission and owner readi
 })
 
 test("invalid, duplicate and extinct targets fail before account writes", async () => {
-  for (const birdIds of [[nzBirdIds[0], nzBirdIds[0]], ["nz-000000000000"], [nzCatalogue.newZealandChecklist.find(bird => bird.extinct).id]]) {
+  const extinctTarget = [...nzCatalogue.nzBirdById.values()].find(bird => bird.extinct)
+  assert.ok(extinctTarget, "archived provenance retains an extinct target for validation")
+  for (const birdIds of [[nzBirdIds[0], nzBirdIds[0]], ["nz-000000000000"], [extinctTarget.id]]) {
     const h = harness()
     assert.equal((await h.plansPost(request({ id: planId, title, ...nzDetails, questionnaire: { ...nzAnswers, birdIds } }))).status, 400)
     assert.equal(h.queries.length, 0)

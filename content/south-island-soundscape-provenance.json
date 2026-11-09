@@ -1,0 +1,107 @@
+{
+  "checked": "2026-11-10",
+  "creator": "Desmond178",
+  "licence": "CC0 1.0",
+  "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sources": [
+    {
+      "id": "844342",
+      "page": "https://freesound.org/people/Desmond178/sounds/844342/",
+      "preview": "https://cdn.freesound.org/previews/844/844342_12778541-hq.mp3",
+      "bytes": 7310304,
+      "licence": "CC0 1.0"
+    },
+    {
+      "id": "845785",
+      "page": "https://freesound.org/people/Desmond178/sounds/845785/",
+      "preview": "https://cdn.freesound.org/previews/845/845785_12778541-hq.mp3",
+      "bytes": 10165440,
+      "licence": "CC0 1.0"
+    },
+    {
+      "id": "844480",
+      "page": "https://freesound.org/people/Desmond178/sounds/844480/",
+      "preview": "https://cdn.freesound.org/previews/844/844480_12778541-hq.mp3",
+      "bytes": 5582688,
+      "licence": "CC0 1.0"
+    }
+  ],
+  "processing": "Public HQ MP3 preview excerpt, 60s, loudness -24 LUFS target/-3 dBTP, 0.4s edge fades, 44.1kHz stereo 96kbps MP3. Runtime repeats the excerpt; not an unedited continuous field recording.",
+  "assets": [
+    {
+      "id": "844342",
+      "path": "/audio/soundscapes/south-island-forest.mp3",
+      "excerptStart": 15,
+      "excerptSeconds": 60,
+      "sha256": "32dbd665f62b20c9fff53797a718091cc7786ce27c7beee8862cf68d1526596f",
+      "info": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "side_data_list": [
+              {}
+            ]
+          }
+        ],
+        "format": {
+          "duration": "60.029388",
+          "size": "720710"
+        }
+      }
+    },
+    {
+      "id": "845785",
+      "path": "/audio/soundscapes/south-island-stream.mp3",
+      "excerptStart": 15,
+      "excerptSeconds": 60,
+      "sha256": "9782e4d76a06c4cdeff9004807e77a9fd87e8d159bf1f4184799c77c7829d02e",
+      "info": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "side_data_list": [
+              {}
+            ]
+          }
+        ],
+        "format": {
+          "duration": "60.029388",
+          "size": "720710"
+        }
+      }
+    },
+    {
+      "id": "844480",
+      "path": "/audio/soundscapes/south-island-coast.mp3",
+      "excerptStart": 35,
+      "excerptSeconds": 60,
+      "sha256": "559834b64ca9c10d1d6d7621e3052198ea31b13f1322a94b2ed5b945d9327d8e",
+      "info": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "side_data_list": [
+              {}
+            ]
+          }
+        ],
+        "format": {
+          "duration": "60.029388",
+          "size": "720710"
+        }
+      }
+    }
+  ]
+}

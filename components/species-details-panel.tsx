@@ -1,8 +1,11 @@
+"use client"
+
 /**
- * One species-details body serves the existing below-photo layout and the opt-in
- * NZ overlay. Keeping these fields together preserves local notes, sources,
+ * One in-photo details panel serves destination, regional and editorial viewers.
+ * Keeping these fields together preserves local notes, sources,
  * picker behavior and media rights while the presentation changes.
  */
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import Link from "next/link"
 import { ExternalLink, MapPin, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -15,18 +18,17 @@ type Props = {
   birds: BirdProfile[]
   selectedIndex: number
   showBirdPicker: boolean
-  presentation: "below" | "overlay"
   onSelectBird: (index: number) => void
   onClose: () => void
 }
 
 const linkClass = "text-emerald-800 underline underline-offset-2 hover:text-emerald-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
 
-export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, showBirdPicker, presentation, onSelectBird, onClose }: Props) {
-  const overlay = presentation === "overlay"
+export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, showBirdPicker, onSelectBird, onClose }: Props) {
+  const localizeHome = useColombiaHomeCopy()
+
   const speciesSource = bird.sources[0]
   const content = <>
-    {!overlay && <h4 className="font-bold text-emerald-950">About {bird.commonName}</h4>}
     {showBirdPicker && birds.length > 1 && <div>
       <label htmlFor={`${id}-bird-picker`} className="mb-2 block font-semibold text-emerald-900">Choose a bird · {birds.length} featured species</label>
       <select id={`${id}-bird-picker`} value={selectedIndex} onChange={event => onSelectBird(Number(event.target.value))} className="min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-3 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
@@ -58,11 +60,7 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
     </details>
   </>
 
-  if (!overlay) return <div className="bg-white p-3 sm:p-4">
-    <div id={id} className="space-y-4 rounded-xl border border-emerald-100 bg-emerald-50 p-4 text-sm">{content}</div>
-  </div>
-
-  return <section id={id} data-species-overlay aria-labelledby={`${id}-title`} className={styles.overlay}>
+  return localizeHome(<section id={id} data-species-overlay aria-labelledby={`${id}-title`} className={styles.overlay}>
     <div className={styles.header}>
       <div className="min-w-0">
         <h3 id={`${id}-title`} className="text-base font-semibold leading-tight text-emerald-950 sm:text-lg">{bird.commonName}</h3>
@@ -73,5 +71,5 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
     {/* This nonmodal scroll area supports keyboard scrolling and ordinary Tab
         navigation. It never captures focus or locks the document scroll. */}
     <div role="group" aria-label="Scrollable species information" tabIndex={0} className={`${styles.body} space-y-4 text-sm`}>{content}</div>
-  </section>
+  </section>)
 }
