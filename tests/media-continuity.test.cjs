@@ -99,3 +99,14 @@ test('restoring and returning from history require Resume, and closing removes t
   saved.delete(key); listeners.pageshow({persisted:true}); tree = render()
   assert.ok(!nodes(tree).some(node => node.type === 'aside' || node.type?.name === 'MediaDock'))
 })
+
+
+test('programme country controls its bird identity regardless of the destination being browsed', () => {
+  const { mediaIdentity } = load('lib/media-identity.ts')
+  assert.equal(mediaIdentity('colombia').bird, 'Motmot')
+  assert.equal(mediaIdentity('colombia').file, 'aves-colombia-bird.png')
+  assert.equal(mediaIdentity('australia').file, 'aves-australia-bird.png')
+  assert.equal(mediaIdentity('new-zealand').bird, 'Kea')
+  for (const item of load('content/travel-media.ts').travelMediaResources) assert.equal(mediaIdentity(item.country).bird, 'Kea')
+  assert.equal(mediaIdentity('unknown').country, 'AVES')
+})
