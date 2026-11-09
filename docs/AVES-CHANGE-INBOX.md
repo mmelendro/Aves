@@ -215,3 +215,10 @@ For new observations, use this short entry format:
 
 
 **Current 9 November checkpoint:** see NEXT-WEEK-PROMPT.md. South Island 037/038 delivered; urgent owner inbox/proposal opening and optional subscriptions tested. New queued items 055 homepage regional ecosystem context; 056 logo name/pronunciation; 057 month-first eBird observations; 058 feather controls; 059 researched private proposal/story; 060 photographic direction. Map consistency012c remains next visual priority.
+
+
+## Explicit design follow-ups — 9 November 2026
+
+- **AVES-061 — Logo landscape contour across header — QUEUED.** Extend the landscape line from the existing country/global logo across the remaining header width. Adapt to desktop, narrow phones and wide/foldable screens; preserve bird, wordmark and destination links, visible navigation, legibility and static/reduced-motion behaviour. Start with one reviewed pilot; do not invent geographic detail or stretch the logo artwork. This is not yet implemented.
+- **AVES-058 — Feather-shaped controls — QUEUED, reaffirmed.** Replace selected circular/decorative controls with a tasteful feather silhouette inspired by the relevant bird where appropriate. Pilot one control family first. Retain recognisable functional icons, hover/focus labels, contrast, keyboard operation and minimum 44px touch targets. Test light and dark photographs; no invisible or confusing controls. Related regional logos/3D birds remain separate later tasks.
+- **Recording discipline — ACTIVE.** Every concrete new request is recorded explicitly with an ID or linked existing item, intended behaviour, scope and LIVE/IN PROGRESS/QUEUED status. Include small visual details. Do not describe a roadmap entry as shipped. Each release checkpoint records what remains, tests, blockers and relevant branch/commit/deployment, without guest data or secrets.

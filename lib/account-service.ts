@@ -9,7 +9,7 @@
 import "server-only"
 import { AccountError } from "@/lib/account-errors"
 
-type AccountRpc = "account_email_updates" | "account_admin_status" | "submit_quote_request" | "record_quote_notification" | "list_admin_quotes" | "update_quote_status" |
+type AccountRpc = "admin_ai_draft" | "account_email_updates" | "account_admin_status" | "submit_quote_request" | "record_quote_notification" | "list_admin_quotes" | "update_quote_status" |
   "create_quote_proposal" | "update_quote_proposal" | "issue_quote_proposal" | "record_proposal_notification"
 
 /**
