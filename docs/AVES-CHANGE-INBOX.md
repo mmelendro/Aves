@@ -1,10 +1,14 @@
 # AVES request inbox
 
 Current implementation status and release permission live in
-[HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). This file retains owner requests and
-acceptance criteria; it does not independently select the next task.
+[HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). The reorganised delivery order is in
+[AGILE-PLAN.md](AGILE-PLAN.md), reviewed 10 November 2026. This file retains owner
+requests and acceptance criteria; its historical priorities and automatic-next
+notices do not select implementation.
 
-AVES-066 is delivered by the current release. Pause after publication and sync.
+AVES-053's South Island pilot, AVES-066 and AVES-068 safe continuity are delivered.
+The owner requested prioritisation only. AVES-020 inventory is recommended next;
+no new runtime increment or production release is authorised by that plan.
 The former stacked release notices are preserved verbatim in the
 [pre-066 archive](archive/2026-11-09-before-aves-066/README.md).
 
@@ -44,7 +48,7 @@ current handoff and the relevant release before reimplementing an older item.
 | AVES-006 | UX / P2 | Owner priority 1: working draggable map/media divider on all three country homepages, adapting both panels to available space. | NZ pilot and Colombia/Australia rollout published. All 73 featured birds across the three country homepages highlight supported regions. Responsive divider, pointer/keyboard/reset, mobile viewport stacking and navigation verified. | Verified |
 | AVES-006a | UX / owner priority 1 | New Zealand divider pilot plus automatic map/carousel sizing with window width. | Live long pointer drag/keyboard/reset, minimum-width bounds, fluid sizing and 390px media-first stack checked. All 31 birds explicitly paired to valid planning islands and exercised in the live picker; zero blank highlights. Physical touch/foldable hardware not independently tested. | Verified |
 | AVES-006b | UX / owner priority 1 | Apply the proven divider to Colombia and Australia after the NZ pilot. | Live picker checked all 22 Colombian and 20 Australian birds against expected map regions. Native drag, keyboard/reset, fluid width, media-first mobile layout, calls and map links passed; focused region/article layouts preserved. Both apps built, published and synced. Physical touch hardware not tested. | Verified |
-| AVES-007 | Content consistency / P2 | New Zealand lacks dedicated regional pages and local carousels, particularly South Island. | Island pages share the country design, verified local birds/calls and functioning map/navigation/sitemap links. | Backlog |
+| AVES-007 | Content consistency / P2 | New Zealand lacks dedicated regional pages and local carousels, particularly South Island. | Island pages share the country design, verified local birds/calls and functioning map/navigation/sitemap links. | South Island published; North Island/Rakiura remain |
 | AVES-008 | UX / P2 | Keep the speaker icon, with a subtle accent to advertise available bird calls. | Owner choice preserved; available and playing states distinct; accessible contrast; no autoplay, constant flashing or highlight on missing calls. | Verified |
 | AVES-009 | Account / P1 | Enable Google sign-in with info@aves.bio as public support address. | Live Google login returns to the existing shared account, preserves country/region, loads saved data and signs out safely. | Verified |
 | AVES-010 | Cultural content / P2 | Include totemic and culturally significant birds where appropriate. | Specific community/place and sources are identified; sharing protocols and media rights respected; interpretation and endorsement are stated accurately. | Backlog |
@@ -63,7 +67,7 @@ current handoff and the relevant release before reimplementing an older item.
 | AVES-012d-2 | Info transparency / delivered | Show more recognisable bird detail through the Info card while keeping text clearly readable; NZ only. | Live 8948ccb / dpl_DrUYTLFZHRJ3BKZTfN6Py4pHee4X; 72% backing/2px blur, darker notes/links. 22 focused tests, TypeScript/builds and local/staged/live desktop/phone-sized checks passed. Physical touch/OS contrast modes untested. | Verified |
 | AVES-012d-3 | Country-homepage rollout / delivered | Apply NZ's transparent Info panel to the main Colombia and Australia carousels. | Source b821eb6 / dpl_7THMZBhhk9K1FWXB31Z1L8EnNiWK; Australia 0389766 / dpl_5kfdDGWWuNtBsJ6uLcpNC1TKE1bW. Source 22 focused + Australia 260 tests, TypeScript/builds, desktop/phone-sized, credits/links/audio/map/close checks passed. Other viewer templates remain queued. | Verified |
 | AVES-012d-4 | Shared-viewer rollout / delivered | Matching transparent Info panels on the global homepage, regional, article and experience viewers; compact short-frame spacing. | Live source 7fa0624 / dpl_B6EdKUThQEjBc2MA6znsa6GDicFF; Australia f50eb8a / dpl_3cY5zFCXvHFXt3TkDGBod8fH3rT6. 89 source + 261 AU tests, strict TypeScript, both local/remote builds, 13 local/9 staged/8 live representative layouts. Full notes/credits, correct links, scroll/close/focus/audio/NZ heart retained; no overflow or frame growth. Physical hardware/OS contrast untested. | Verified |
-| AVES-017 | Species catalogue / owner follow-up | Remove extinct species from visitor-facing bird lists and pickers; start with NZ's 55 historical extinct checklist entries. Planning only, not part of the overlay release. | Show living species with truthful counts/scope, retain rare visitors and threatened living species. Verify taxonomy/status distinctions, including extinct in the wild. Preserve source provenance, audit history, saved brief integrity and validation; no destructive deletion of guest data. Test public/private search and selection, publish/sync as a separate release. | Backlog |
+| AVES-017 | Species catalogue / owner follow-up | Remove extinct species from visitor-facing bird lists and pickers; start with NZ's 55 historical extinct checklist entries. Planning only, not part of the overlay release. | Show living species with truthful counts/scope, retain rare visitors and threatened living species. Verify taxonomy/status distinctions, including extinct in the wild. Preserve source provenance, audit history, saved brief integrity and validation; no destructive deletion of guest data. Test public/private search and selection, publish/sync as a separate release. | NZ living-only public/private pilot published; preserve provenance and old briefs |
 
 ## New observation details — 8 November 2026 (Sydney)
 
