@@ -64,11 +64,20 @@ export function AvesMediaProvider({ children, assetBase = "", navigationPaths = 
   const [handoff, setHandoff] = useState<MediaHandoff | null>(null)
   const [resumeRequired, setResumeRequired] = useState(false)
   useEffect(() => {
-    try {
-      const saved = readMediaHandoff(sessionStorage.getItem(MEDIA_HANDOFF_KEY))
-      if (saved) { setHandoff(saved); setResourceId(saved.resourceId); setResumeRequired(true) }
-      else sessionStorage.removeItem(MEDIA_HANDOFF_KEY)
-    } catch { /* Storage can be disabled. Ordinary playback still works. */ }
+    const restore = () => {
+      try {
+        const saved = readMediaHandoff(sessionStorage.getItem(MEDIA_HANDOFF_KEY))
+        setHandoff(saved)
+        setResourceId(saved?.resourceId ?? null)
+        setResumeRequired(Boolean(saved))
+        if (!saved) sessionStorage.removeItem(MEDIA_HANDOFF_KEY)
+      } catch { /* Storage can be disabled. Ordinary playback still works. */ }
+    }
+    const returned = (event: PageTransitionEvent) => { if (event.persisted) restore() }
+    restore()
+    // A cached page must not resurrect a player closed in the other app.
+    window.addEventListener("pageshow", returned)
+    return () => window.removeEventListener("pageshow", returned)
   }, [])
   useEffect(() => {
     if (!resourceId) return
