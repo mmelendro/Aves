@@ -103,10 +103,16 @@ test("the dedicated South Island page has canonical metadata, one local explorer
 })
 
 test("places cycle across all four areas, map selections change photos, and habitat changes remain connected", () => {
-  const state = ["all", 0, false]
+  const state = [false]
   let hook = 0
-  const shared = { value: "all", select: value => { shared.value = value } }
-  const Explorer = createLoader({ react: { ...React, useContext: () => shared, useId: () => "places-test", useRef: () => ({ current: null }), useState: initial => {
+  const { southIslandDiscoveryReducer: reduce, initialSouthIslandDiscovery: initial } = load("lib/south-island-discovery.ts")
+  let discovery = initial
+  const shared = { get value() { return discovery.habitat }, get slideIndex() { return discovery.slideIndex },
+    select: habitat => { discovery = reduce(discovery, {type:"habitat", habitat}) },
+    selectSlide: index => { discovery = reduce(discovery, {type:"slide", index}) },
+    selectPlace: id => { discovery = reduce(discovery, {type:"place", id}) } }
+
+  const Explorer = createLoader({ react: { ...React, useContext: () => shared, useId: () => "places-test", useReducer: (_reducer, initial) => [initial, () => {}], useRef: () => ({ current: null }), useState: initial => {
     const slot = hook++
     return [state[slot] ?? initial, value => { state[slot] = typeof value === "function" ? value(state[slot]) : value }]
   } } })("components/south-island-places-explorer.tsx").default
@@ -127,8 +133,8 @@ test("places cycle across all four areas, map selections change photos, and habi
   assert.ok(elements(pair.props.media).some(node => node.props["aria-label"] === "About Nelson Lakes"))
   pair.props.map.props.onSelectPlace("coast"); pair = render()
   assert.equal(shared.value, "coast")
-  assert.equal(state[2], false, "changing photos closes the Info panel")
-  shared.value = "forest"; pair = render()
+  assert.equal(state[0], false, "changing photos closes the Info panel")
+  shared.select("forest"); pair = render()
   assert.equal(pair.props.map.props.selectedPlace, "southern-forest", "bird-map habitat also updates the place viewer")
   for (let i = 0; i < 5; i++) { button("Next landscape").props.onClick(); pair = render() }
   assert.equal(pair.props.map.props.selectedPlace, "southern-forest", "full collection wraps")
@@ -268,4 +274,35 @@ test("controlled habitat map has equivalent keyboard map/legend choices, honest 
     assert.match(html,/role="button" tabindex="0"/)
     assert.equal((html.match(/aria-pressed="true"/g)||[]).length,selected==="all"?1:2,"one state controls map and legend; All reset is separate")
   }
+})
+
+test("shared discovery keeps featured place, photo and habitat coherent from either viewer", () => {
+  const { southIslandDiscoveryReducer: reduce, initialSouthIslandDiscovery: initial, southIslandLandscapeSlides: slides } = load("lib/south-island-discovery.ts")
+  const { southIslandPlaceContexts: places } = load("content/south-island-place-media.ts")
+  const { southIslandEcosystems, filterSouthIslandBirds } = load("content/south-island-ecosystems.ts")
+  const { newZealandRegionBirds } = load("content/new-zealand-carousel.ts")
+  const localBirds = newZealandRegionBirds("south-island")
+  let state = initial
+  for (const place of places) {
+    state = reduce(state, { type: "place", id: place.id })
+    assert.equal(slides[state.slideIndex].place.id, place.id)
+    assert.equal(state.habitat, place.habitat)
+    assert.ok(filterSouthIslandBirds(localBirds, state.habitat).length > 0)
+    assert.equal(slides[state.slideIndex].photo, place.photos[0], "original local photo and rights retained")
+  }
+  for (const habitat of southIslandEcosystems) {
+    state = reduce(state, { type: "habitat", habitat: habitat.id })
+    assert.equal(slides[state.slideIndex].place.habitat, habitat.id)
+  }
+  state = reduce(state, { type: "slide", index: 1 })
+  assert.equal(slides[state.slideIndex].photo.src, "/images/places/arthurs-pass-waterfall.webp")
+  assert.equal(reduce(state, { type: "habitat", habitat: "mountains" }).slideIndex, 1, "matching filter preserves second photo")
+  const all = reduce(state, { type: "habitat", habitat: "all" })
+  assert.equal(all.slideIndex, 1, "All habitats preserves chosen landscape")
+  assert.equal(filterSouthIslandBirds(localBirds, all.habitat).length, 30)
+  assert.equal(reduce(state, { type: "slide", index: -1 }).slideIndex, slides.length - 1)
+  assert.equal(reduce(state, { type: "slide", index: slides.length }).slideIndex, 0)
+  assert.equal(reduce(state, { type: "place", id: "unknown" }), state)
+  assert.equal(reduce(state, { type: "slide", index: NaN }), state)
+  assert.deepEqual(initial, { habitat: "all", slideIndex: 0 }, "initial shared state is not mutated")
 })

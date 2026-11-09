@@ -71,7 +71,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
   function reset() { drag.current = null; setCamera(initialMapCamera); setPanMode(false) }
   return <section className={styles.card} aria-labelledby={`${id}-title`}>
     <div className="flex flex-wrap items-center justify-between gap-2">
-      <h2 id={`${id}-title`} className="font-medium text-emerald-950">South Island habitats</h2>
+      <h2 id={`${id}-title`} className="font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2>
       <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All habitats</button>
     </div>
     <div className={styles.controls} role="group" aria-label="Ecosystem map view controls">
@@ -152,7 +152,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
     {places && <div className="mt-2 grid grid-cols-2 gap-1" aria-label="South Island places">
       {places.map(item => <button key={item.id} type="button" aria-pressed={item.id === selectedPlace} onClick={() => onSelectPlace?.(item.id)} className={`min-h-11 rounded-lg border px-2 py-2 text-left text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 ${item.id === selectedPlace ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}>{item.label}</button>)}
     </div>}
-    {place && <p className="mt-2 text-xs leading-5 text-emerald-900"><a href={place.source} target="_blank" rel="noreferrer" className="underline">{place.location}</a> · public landscape reference, not a habitat boundary or wildlife location.</p>}
+    {place && <p className="mt-2 text-xs leading-5 text-emerald-900" role="status"><a href={place.source} target="_blank" rel="noreferrer" className="underline">{place.location}</a> · public landscape reference. Bird filters describe broad habitats across the South Island, not a checklist for this place.</p>}
     <details open={!places && !satellite} className={styles.filters}><summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800">Habitat filters</summary>
     <div aria-label="Habitat map legend" className="mt-2 grid grid-cols-1 gap-1 min-[390px]:grid-cols-2">
       {southIslandEcosystems.map(item => <button key={item.id} type="button" aria-label={`Filter birds: ${item.name}`} aria-pressed={selected === item.id} onClick={() => onSelect(item.id)} className={`flex min-h-11 items-center gap-2 rounded-lg border px-2 py-2 text-left text-xs leading-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${selected === item.id ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900 hover:border-emerald-500"}`}><span aria-hidden="true" className="h-3 w-3 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: colours[item.id] }} />{item.name}</button>)}

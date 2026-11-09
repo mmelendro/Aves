@@ -7,6 +7,8 @@
 
 import { useContext, useEffect, useId, useState } from "react"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
+import { southIslandPlaceContexts } from "@/content/south-island-place-media"
+import { southIslandLandscapeSlides } from "@/lib/south-island-discovery"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { ArrowRight } from "lucide-react"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
@@ -27,6 +29,7 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
   const [chosenRegion, setChosenRegion] = useState<NewZealandIslandId | undefined>(regionId)
   const ecosystemId = useId()
   const sharedHabitat = useContext(SouthIslandHabitatContext)
+  const selectedPlace = sharedHabitat ? southIslandLandscapeSlides[sharedHabitat.slideIndex].place : undefined
   const [localEcosystem, setLocalEcosystem] = useState<SouthIslandEcosystemFilter>("all")
   const ecosystem = regionId === "south-island" && sharedHabitat ? sharedHabitat.value : localEcosystem
   // Pilot only on the dedicated South Island page; the country overview keeps
@@ -74,7 +77,8 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
         <HomepageBirdCarousel key={`${chosenRegion || "all-islands"}-${ecosystem}`} birds={birds} label={collectionLabel} imageTools={regionId === "south-island" ? <SouthIslandHabitatSelect value={ecosystem} onChange={selectEcosystem} label="Habitat for bird carousel" /> : undefined} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{birds.length} featured species{chosenRegion ? ` associated with ${chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"}` : ", with a South Island focus"}. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
-        {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
+        {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem}
+          places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         {chosenRegion && !regionId && <a href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>}
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>

@@ -3,7 +3,7 @@
 /** Landscape media shares the page's habitat choice with the bird explorer.
  * Place pins are public reference points, never wildlife sightings or boundaries.
  */
-import { useContext, useId, useRef, useState } from "react"
+import { useContext, useId, useReducer, useRef, useState } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Info, X } from "lucide-react"
 import { southIslandPlaces } from "@/content/south-island"
@@ -14,33 +14,29 @@ import ResizableDiscoveryPair from "./resizable-discovery-pair"
 import SouthIslandEcosystemMap from "./south-island-ecosystem-map"
 import SouthIslandHabitatSelect from "./south-island-habitat-select"
 import styles from "./south-island-places-explorer.module.css"
+import { initialSouthIslandDiscovery, southIslandDiscoveryReducer, southIslandLandscapeSlides as slides } from "@/lib/south-island-discovery"
 
-const slides = southIslandPlaceContexts.flatMap(place => place.photos.map(photo => ({ place, photo })))
 
 export default function SouthIslandPlacesExplorer() {
   const shared = useContext(SouthIslandHabitatContext)
-  const [localHabitat, setLocalHabitat] = useState<SouthIslandEcosystemFilter>("all")
-  const habitat = shared?.value ?? localHabitat
-  const selectHabitat = shared?.select ?? setLocalHabitat
-  const [index, setIndex] = useState(0)
+  // The reducer fallback also supports rendering this viewer outside the page.
+  const [local, dispatch] = useReducer(southIslandDiscoveryReducer, initialSouthIslandDiscovery)
+  const habitat = shared?.value ?? local.habitat
+  const active = shared?.slideIndex ?? local.slideIndex
   const [info, setInfo] = useState(false)
   const infoButton = useRef<HTMLButtonElement>(null)
   const id = useId()
-  // Derive a matching slide immediately when the other map changes habitat;
-  // avoid an effect that briefly displays a mismatched location/photo.
-  const active = habitat === "all" || slides[index].place.habitat === habitat
-    ? index : Math.max(0, slides.findIndex(slide => slide.place.habitat === habitat))
   const { place, photo } = slides[active]
   const guidance = southIslandPlaces.find(item => item.id === place.id)!
 
   function showSlide(next: number) {
-    const safe = (next + slides.length) % slides.length
-    setIndex(safe)
-    selectHabitat(slides[safe].place.habitat)
+    if (shared) shared.selectSlide(next)
+    else dispatch({ type: "slide", index: next })
     setInfo(false)
   }
   function filter(next: SouthIslandEcosystemFilter) {
-    selectHabitat(next)
+    if (shared) shared.select(next)
+    else dispatch({ type: "habitat", habitat: next })
     setInfo(false)
   }
   return <ResizableDiscoveryPair mediaFirst mediaLabel="landscape photographs" mapLabel="Resize South Island places and map"
