@@ -25,7 +25,7 @@ function componentHarness(file, name, props, overrides = {}) {
       return [state[index], value => { state[index] = typeof value === "function" ? value(state[index]) : value }]
     },
     useRef(initial) { const index = cursor++; if (!(index in state)) state[index] = { current: initial }; return state[index] },
-    useEffect() {}, useCallback: callback => callback,
+    useEffect: overrides.useEffect || (() => {}), useCallback: callback => callback,
   }
   const jsx = (type, props) => ({ type, props: props || {} })
   class FormValues {
@@ -260,11 +260,11 @@ test("sign-in ignores an offsite return even after successful authentication", a
   assert.deepEqual(destinations, ["/account"])
 })
 
-test("signup preserves the entry link but keeps the already configured email callback", async () => {
+test("signup preserves country intent through the unified email callback", async () => {
   const requests = [], destinations = []
   const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-up", next: "/account?country=colombia&region=amazonia" }, { mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signUp: async input => { requests.push(input); return { error: null } } } }) } }, window: { location: { origin: "https://aves.bio", assign: value => destinations.push(value) } } })
   await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { email: "test@example.test", password: "test-only-password", confirmPassword: "test-only-password" } } })
-  assert.equal(requests[0].options.emailRedirectTo, "https://aves.bio/australia/auth/callback?next=%2Faccount")
+  assert.equal(requests[0].options.emailRedirectTo, "https://aves.bio/auth/callback?next=%2Faccount%3Fcountry%3Dcolombia%26region%3Damazonia")
   assert.equal(new URL(destinations[0], "https://aves.bio").searchParams.get("next"), "/account?country=colombia&region=amazonia")
 })
 
@@ -288,7 +288,7 @@ for (const [provider, scopes] of [["google", "openid email profile"], ["facebook
     assert.equal(requests[0].provider, provider)
     assert.equal(requests[0].options.scopes, scopes)
     const callback = new URL(requests[0].options.redirectTo)
-    assert.equal(callback.origin + callback.pathname, "https://aves.bio/australia/auth/callback")
+    assert.equal(callback.origin + callback.pathname, "https://aves.bio/auth/callback")
     assert.equal(callback.searchParams.get("flow"), "oauth")
     assert.equal(callback.searchParams.get("next"), "/account?country=colombia&region=central-andes")
   })
@@ -428,4 +428,68 @@ test("read-only preview disables auth buttons and submission side effects", asyn
   await button.props.onClick()
   assert.equal(find(tree, node => node.type === "fieldset").props.disabled, true)
   await find(tree, node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: {} })
+})
+
+
+test("optional updates route signup and resend to explicit verified confirmation without subscribing", async () => {
+  const requests = [], destinations = []
+  const provider = { createClient: () => ({ auth: { signUp: async input => { requests.push(input); return { error: null } }, resend: async input => { requests.push(input); return { error: null } } } }) }
+  const window = { location: { origin: "https://aves.bio", assign: value => destinations.push(value) } }
+  const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-up", next: "/account?country=new-zealand&region=south-island" }, { mocks: { "@/lib/supabase/client": provider }, window })
+  const checkbox = find(harness.render(), node => node.props.type === "checkbox")
+  assert.equal(checkbox.props.checked, false)
+  checkbox.props.onChange({ target: { checked: true } })
+  await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { email: "qa@example.test", password: "synthetic-password", confirmPassword: "synthetic-password" } } })
+  const next = new URL(requests[0].options.emailRedirectTo).searchParams.get("next")
+  assert.equal(new URL(next, "https://aves.bio").pathname, "/account/email-updates")
+  assert.equal(new URL(next, "https://aves.bio").searchParams.get("next"), "/account?country=new-zealand&region=south-island")
+  assert.equal(new URL(destinations[0], "https://aves.bio").searchParams.get("next"), next)
+  const resend = componentHarness("components/account/auth-form.tsx", "CheckEmail", { next }, { mocks: { "@/lib/supabase/client": provider }, window })
+  await find(resend.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { email: "qa@example.test" } } })
+  assert.equal(new URL(requests[1].options.emailRedirectTo).searchParams.get("next"), next)
+  assert.equal(requests.length, 2)
+})
+
+test("read-only preview prevents optional consent and authentication calls", async () => {
+  const preview = { mocks: { "@/components/preview-mode": { useReadOnlyPreview: () => true } } }
+  const form = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-up", oauthProviders: ["google"] }, preview)
+  assert.equal(find(form.render(), node => node.props.type === "checkbox").props.disabled, true)
+  await find(form.render(), node => node.type === "form").props.onSubmit({ preventDefault() {} })
+  await find(form.render(), node => node.props["aria-label"] === "Sign in with Google").props.onClick()
+  const effects = []
+  const preference = componentHarness("components/account/email-updates-preference.tsx", "EmailUpdatesPreference", {}, { ...preview, useEffect: work => effects.push(work) })
+  const tree = preference.render();effects[0]()
+  assert.equal(find(tree, node => node.type === "Button").props.disabled, true)
+  await find(tree, node => node.type === "Button").props.onClick()
+  assert.match(JSON.stringify(tree), /disabled in this website preview/)
+})
+
+test("verified preferences load without writing and require Save for subscribe and unsubscribe", async () => {
+  const effects = [], calls = []
+  const preference = componentHarness("components/account/email-updates-preference.tsx", "EmailUpdatesPreference", {}, { useEffect: work => effects.push(work), mocks: { "./account-api": { ...api, accountRequest: async (path, options) => { calls.push({ path, options }); return { subscribed: options ? JSON.parse(options.body).subscribed : false } } } } })
+  preference.render();effects.shift()();await new Promise(resolve => setImmediate(resolve))
+  let tree = preference.render()
+  assert.equal(calls.length, 1)
+  find(tree, node => node.props.type === "checkbox").props.onChange({ target: { checked: true } })
+  assert.equal(calls.length, 1)
+  await find(preference.render(), node => node.type === "Button").props.onClick()
+  assert.equal(JSON.parse(calls[1].options.body).subscribed, true)
+  tree = preference.render();find(tree, node => node.props.type === "checkbox").props.onChange({ target: { checked: false } })
+  await find(preference.render(), node => node.type === "Button").props.onClick()
+  assert.equal(JSON.parse(calls[2].options.body).subscribed, false)
+})
+
+test("owner Open Request focuses and reveals even the already selected request", async () => {
+  const effects = [], actions = []
+  const quote = { id: "quote-a", plan: { title: "QA request", country: "new-zealand", regions: ["south-island"] }, proposals: [], status: "submitted", contactName: "QA", contactEmail: "qa@example.test" }
+  const harness = componentHarness("components/account/owner-quote-inbox.tsx", "OwnerQuoteInbox", {}, { useEffect: work => effects.push(work), mocks: { "./account-api": { ...api, accountRequest: async () => ({ quotes: [quote] }) } }, window: { requestAnimationFrame: work => work(), matchMedia: () => ({ matches: true }) } })
+  harness.render();effects.shift()();await new Promise(resolve => setImmediate(resolve))
+  const tree = harness.render(), details = find(tree, node => node.props.id === "quote-request-details")
+  details.props.ref.current = { focus: options => actions.push(["focus", options]), scrollIntoView: options => actions.push(["scroll", options]) }
+  const button = find(tree, node => node.props["aria-controls"] === "quote-request-details")
+  button.props.onClick();button.props.onClick()
+  assert.equal(actions.length, 4)
+  assert.deepEqual(actions[0], ["focus", { preventScroll: true }])
+  assert.deepEqual(actions[1], ["scroll", { block: "start", behavior: "instant" }])
+  assert.equal(details.props.tabIndex, -1)
 })

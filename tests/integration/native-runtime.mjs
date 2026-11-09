@@ -182,8 +182,10 @@ try {
     await waitHttp('http://127.0.0.1:'+ports.auth+'/health',auth)
     report.auth='2.197.0'
   })
-  const migrations=['20261104210527_australia_contact_storage.sql','20261104222434_australia_client_trips_quotes.sql','20261106105909_australia_draft_quota_and_default_privileges.sql','20261106105919_australia_client_quote_column_privileges.sql','20261106114144_shared_country_plans_and_contacts.sql','20261106203926_extensible_destination_catalogue.sql','20261108023556_new_zealand_private_planning_brief.sql','20261108030916_nz_private_bird_wishlist.sql','20261108192239_private_trip_budget_preferences.sql']
-  await check('only the nine maintained application migrations apply to the fresh database',async()=>{
+  const migrations=['20261104210527_australia_contact_storage.sql','20261104222434_australia_client_trips_quotes.sql','20261106105909_australia_draft_quota_and_default_privileges.sql','20261106105919_australia_client_quote_column_privileges.sql','20261106114144_shared_country_plans_and_contacts.sql','20261106203926_extensible_destination_catalogue.sql','20261108023556_new_zealand_private_planning_brief.sql','20261108030916_nz_private_bird_wishlist.sql','20261108192239_private_trip_budget_preferences.sql',
+    '20261108225245_account_email_updates.sql',
+    '20261109001033_private_ai_proposal_drafts.sql']
+  await check('only the eleven maintained application migrations apply to the fresh database',async()=>{
     const tables=(await sql.query("select tablename from pg_tables where schemaname='public'")).rows;assert.equal(tables.length,0)
     for(const file of migrations)await sql.query(await readFile(join(repo,'supabase/migrations',file),'utf8'))
     report.applicationMigrations=migrations

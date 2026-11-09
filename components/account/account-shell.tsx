@@ -18,6 +18,7 @@ export function AccountShell({ title, description, children, compact = false }: 
         <h1 className="mb-4 text-3xl font-medium tracking-tight text-emerald-950">{title}</h1>
         <p className="mb-8 text-lg leading-relaxed text-gray-600">{description}</p>
         {children}
+        <p className="mt-8 text-sm"><Link href="/account/email-updates" className="text-emerald-800 underline">Manage optional email updates</Link></p>
       </div>
     </main>{footer}</div>
 }

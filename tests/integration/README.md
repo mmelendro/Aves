@@ -29,7 +29,7 @@ dev shares the repository's development build directory. PostgreSQL does not req
 a Unix socket or Docker. `auth migrate` runs before `auth serve`, with the standard
 authenticated default role and Auth-schema usage grants supplied explicitly.
 
-The nine maintained application migrations are listed in `native-runtime.mjs`.
+The eleven maintained application migrations are listed in `native-runtime.mjs`.
 The obsolete Colombia replacement baseline is intentionally excluded. No migration
 command targets hosted Supabase. Row policies, column permissions and service-only
 RPC grants remain active. The fixture owner grant exists only in this fresh database.

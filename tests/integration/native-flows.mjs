@@ -25,6 +25,30 @@ export async function runFlows(c) {
     await c.sql.query('insert into private.site_admins(user_id,grant_note) values($1,$2)',[owner.id,'Disposable QA owner only'])
   })
 
+  await check('verified consent is explicit, idempotent, reversible and private across real sessions',async()=>{
+    const path='/api/account/email-updates'
+    let result=await c.request(path,{jar:guest.jar});status(result);assert.equal(result.data.subscribed,false)
+    assert.equal((await c.sql.query('select count(*)::int as n from private.launch_subscribers')).rows[0].n,0)
+    result=await write(path,guest.jar,{subscribed:true},'PUT');status(result);assert.equal(result.data.subscribed,true)
+    status(await write(path,guest.jar,{subscribed:true},'PUT'))
+    const consent=(await c.sql.query('select s.email_normalized,s.email_verified_at,e.consent_version from private.launch_subscribers s join private.consent_events e on e.launch_subscriber_id=s.id')).rows
+    assert.equal(consent.length,1);assert.equal(consent[0].email_normalized,guest.email);assert(consent[0].email_verified_at);assert.equal(consent[0].consent_version,'account-email-updates-v1')
+    guest=await login(guest)
+    result=await c.request(path,{jar:guest.jar});status(result);assert.equal(result.data.subscribed,true)
+    result=await c.request(path,{jar:other.jar});status(result);assert.equal(result.data.subscribed,false)
+    status(await write(path,other.jar,{subscribed:false,userId:guest.id},'PUT'),400)
+    status(await write(path,guest.jar,{subscribed:false},'PUT'))
+    status(await write(path,guest.jar,{subscribed:false},'PUT'))
+    assert.equal((await c.sql.query('select count(*)::int as n from private.consent_events')).rows[0].n,2)
+    const subscriber=(await c.sql.query('select status,suppressed_at from private.launch_subscribers where email_normalized=$1',[guest.email])).rows[0]
+    assert.equal(subscriber.status,'suppressed');assert(subscriber.suppressed_at)
+    status(await c.request(path),401)
+    const rpc=await other.client.rpc('account_email_updates',{p_user_id:guest.id,p_subscribed:true});assert(rpc.error)
+    const anonymous=await c.authClient(new c.CookieJar()).rpc('account_email_updates',{p_user_id:guest.id,p_subscribed:true});assert(anonymous.error)
+    const pendingId=(await c.sql.query('select id from auth.users where email=$1',['unconfirmed@example.test'])).rows[0].id
+    await assert.rejects(c.sql.query('select public.account_email_updates($1,true)',[pendingId]),error=>error.code==='PT403')
+  })
+
   await check('Australia, Colombia and New Zealand drafts persist through real user-scoped HTTP and database writes',async()=>{
     const questionnaire={version:1,pace:'relaxed',birding:'alternate',comfort:'comfortable',interests:['birds','scenery'],birdIds:['nz-de1ba81fa03b']}
     for(const [country,region] of [['australia','tasmania'],['colombia','central-andes'],['new-zealand','south-island']]){
