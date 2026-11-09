@@ -3,6 +3,10 @@
 Updated 9 November 2026. Homepage map-card pilot AVES-012c is published. Active follow-up continues automatically with deliberate region previews, restored Colombia artwork boundaries, then South Island filter pilots and verified rollouts. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Continue the newly selected map/filter sequence automatically, saving small source/deployment checkpoints with rollback instructions in ROLLBACK-CHECKPOINTS.md. Unselected backlog work remains separate. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
 
 
+## Latest delivered checkpoint
+
+South Island layer pilot is live from `14798a1`, Production `dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM`. Satellite imagery is an attributed historical 2004 overview, not live tiles. Nine national parks and DOC public conservation land share the existing Mercator frame and page-local display state. Native habitat filters remain independent. Source/licence/coverage limits and verification are in RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md. Checkpoint 05 is saved. Public places/heritage/town filters are next, then appropriate country/subregion rollouts. No other map or full filter programme is claimed complete.
+
 ## Latest owner direction: mobile preview, South Island filters and soundscapes
 
 This direction supersedes earlier instructions to pause after the homepage-card pilot. Finish and verify deliberate first-tap preview across subregion maps: immediately update selected map context and the paired card/media where available. Only a later tap on that same selected region opens its real guide. Keep a visible Explore link, keyboard alternatives, native modifier/new-tab links and browser pinch/scroll. A default or hover highlight does not count as the first tap. Do not require a rapid double tap.
@@ -15,7 +19,7 @@ Then continue automatically with the relevant previously requested map filters, 
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **da82055**, deployment **dpl_9uif85cMYtEpqv4Dy6WPtPre62jx** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
+- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **14798a1**, deployment **dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
 - `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **e0c766a**, deployment **dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 
@@ -34,7 +38,7 @@ Validation: source 119 tests and responsive/live South Island checks passed. Acc
 ## Next priorities — one selected increment at a time
 
 1. **AI proposal generation059 is DEFERRED by the owner: no new spending.** Manual proposals remain available. Do not retry AI, buy credits, upgrade plans or relax privacy to bypass the entitlement blocker. Resume only with explicit authorization. Read HANDOFF-CURRENT.md for the verified cause and exact next action.
-2. **012c homepage pilot is published.** Country/subregion map consistency remains queued in scoped batches. **062** adds main birding sites, intervening cities/towns, travel times and Google Maps per subregion. Read AVES-062-SUBREGION-ROUTE-PLANNING.md before choosing a no-new-spend pilot. Neither follow-up is started automatically.
+2. **012c homepage pilot is published.** Country/subregion map consistency remains queued in scoped batches. **062** adds main birding sites, intervening cities/towns, travel times and Google Maps per subregion. Read AVES-062-SUBREGION-ROUTE-PLANNING.md before choosing a no-new-spend pilot. The owner later selected map/filter continuation automatically; route/travel-time integration remains separate.
 3. Finish South Island planning depth: **036** embedded resource carousel; **039** checklist media previews; **006c** full subregion content/context changes; **055** homepage subregion selection changes its subsequent section to the appropriate ecosystem map/landscape carousel. Reuse verified data, routes and templates.
 4. Once South Island is ready, **040** North Island reaches the same template/functionality/depth using its own verified birds, calls, habitats and resources. Sydney is the next product priority.
 5. Remaining separately selected items are in ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md. Do not bundle them into one large release.
@@ -56,7 +60,7 @@ Retain bird-bingo/private briefs, budget sliders/currency, regenerative marketpl
 
 Private trip particulars stay in owned account/private workspace, never Git. Do not contact guests/partners, send proposals/campaigns, book, spend or grant access without the relevant instruction. Avoid invented geography, local species, permissions, partnerships, prices or availability.
 
-For each increment: inspect actual code/current deployment; reuse components and evidence; keep code/comments clear and remove only verified redundant/legacy code. Test the changed flow, responsive/short screens, keyboard/touch alternatives, privacy and media cleanup. Stage exact build, verify before promotion and verify live. Every deployment checks human/XML sitemap, hierarchy/canonicals/links and private exclusions; update changed inventories without fabricated dates. Sync source plus concise checkpoint to the correct GitHub branch, identify live versus queued and verification limits, then **pause**.
+For each increment: inspect actual code/current deployment; reuse components and evidence; keep code/comments clear and remove only verified redundant/legacy code. Test the changed flow, responsive/short screens, keyboard/touch alternatives, privacy and media cleanup. Stage exact build, verify before promotion and verify live. Every deployment checks human/XML sitemap, hierarchy/canonicals/links and private exclusions; update changed inventories without fabricated dates. Sync source plus concise checkpoint to the correct GitHub branch, identify live versus queued and verification limits, then continue the currently selected map/filter sequence automatically, with a saved rollback checkpoint.
 
 
 ## Colombia homepage language pilot — 9 November 2026
@@ -74,6 +78,6 @@ AI drafting implementation is now published in the account app, but real provide
 
 ## Current authority and next increment
 
-Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for both branches/deployments, delivered versus queued features, AI diagnosis, no-new-spend order, acceptance criteria and verification limits. AVES-012c homepage map-card pilot is published and checked, with exact 320/390px and physical touch limits recorded. The new AVES-062 route-planning requirement is retained in the backlog. GitHub checkpoint is synced; pause.
+Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for both branches/deployments, delivered versus queued features, AI diagnosis, no-new-spend order, acceptance criteria and verification limits. AVES-012c homepage map-card pilot is published and checked, with exact 320/390px and physical touch limits recorded. The new AVES-062 route-planning requirement is retained in the backlog. GitHub checkpoint is synced; continue the selected map/filter sequence.
 
 AVES-061 logo landscape contour and AVES-058 feather controls remain explicitly queued; preserve all smaller details in AVES-CHANGE-INBOX.md and ROADMAP-DETAILS.md. The private AI implementation is live but unverified end to end, and deferred until eligible paid access is authorized. Vercel requires purchased credits or a paid plan for the requested ZDR; free credits do not qualify. No billing change made; retain ZDR/no-training.
