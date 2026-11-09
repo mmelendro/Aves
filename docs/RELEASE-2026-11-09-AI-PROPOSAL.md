@@ -33,3 +33,14 @@ Keep all guest answers, request identifiers and generated drafts out of reposito
 - Full stages/acceptance/dependencies and complexity: DEVELOPMENT-STAGES.md. Record every concrete new request with an ID or linked existing item, scope, status and acceptance criteria, including small visual details.
 
 Finish real generation and persistence checks, update this checkpoint and sync both relevant branches, then pause. Do not start queued visual work automatically.
+
+
+## Resumption — real-call failure confirmed; connection diagnostics published
+
+Owner manually invoked the real generator and reported the generic unavailable message. Hosted DB confirms one attempt, generation lease released, and no generated text persisted. This is a confirmed failure, not an end-to-end success. No issued proposal or notification was produced by this feature.
+
+Diagnostic runtime **d693512**, deployment **dpl_9hrh2H4xuQumccS1qiPupqZuozV7** (`aves-australia-qgncq3xj7-mmelendro-9273s-projects.vercel.app`) is now published. Owner-only Check AI connection calls the Gateway credit/authentication check without model inference or another draft attempt. Raw provider messages, prompts, headers and credentials are never returned; fixed diagnostics distinguish authentication, credit/verification, forbidden, rate limit, invalid request, output validation and timeout when supported by error metadata.
+
+289 automated tests and type check pass, including owner-only diagnostic access and safe error handling. READY candidate diagnostic endpoint denied unsigned access with 401 before promotion. Pending: owner connection-check result, fix the identified account/runtime issue within authorization, then verify one real draft and persistence/edit flow. Do not buy credits, change billing, weaken privacy routing or retrieve broad production secrets without appropriate authorization.
+
+GitHub now contains the implementation and detailed stages/contour/feather requests; keep both branches synced with the final diagnostic checkpoint. The actual draft content remains private and must never be committed.

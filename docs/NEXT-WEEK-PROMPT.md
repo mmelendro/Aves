@@ -7,7 +7,7 @@ Updated 9 November 2026 (Sydney). The selected release is published and tested; 
 Repository: https://github.com/mmelendro/Aves
 
 - `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **923bbcb**, deployment **dpl_4XUQc5GCJQsSArZAmsVwBkq4TgC5** (English-default Colombia language pilot; retains the South Island release).
-- `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Account repair/subscription runtime **5659bea**; published deployment **dpl_DaNUuTUmMNmcL9ctnMSPaAD1EAvv**.
+- `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **d693512**, deployment **dpl_9hrh2H4xuQumccS1qiPupqZuozV7**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 
 ## Completed in this release
@@ -73,3 +73,5 @@ Detailed current/future stages, dependencies, acceptance criteria and relative c
 
 
 Latest AI checkpoint: [RELEASE-2026-11-09-AI-PROPOSAL.md](RELEASE-2026-11-09-AI-PROPOSAL.md). Published implementation and passing synthetic tests are distinct from the outstanding real generation check. Pause after the selected increment; no automatic visual rollout.
+
+AI resumption: owner reported a real generation failure; no generated text saved. Diagnostic runtime d693512 is published with Check AI connection (no inference). Await that result; 289 tests/type check passed. See AI release checkpoint.
