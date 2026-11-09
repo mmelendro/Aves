@@ -1,3 +1,7 @@
+## Authoritative handoff — 9 November 2026, no-new-spend work
+
+Read [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md) and [the execution prompt](docs/NEXT-WEEK-PROMPT.md) first. This notice supersedes historical next-step/status notes below. AI proposal generation is DEFERRED at the owner's request because the required privacy entitlement needs purchased Gateway credits or a paid plan. Do not buy credits, upgrade, remove privacy protections or retry generation. Next selected implementation: AVES-012c, homepage country-map card consistency only. No map implementation has started. The owner requested documentation/GitHub handoff before code work, so stop after this sync.
+
 # AVES — continue here
 
 Updated 9 November 2026 (Sydney). Start with [the current execution prompt](docs/NEXT-WEEK-PROMPT.md), then the latest release checkpoint. It distinguishes published work, outstanding requirements and verification limits.

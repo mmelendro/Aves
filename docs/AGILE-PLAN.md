@@ -1,3 +1,5 @@
+> Current order (9 November): AI is deferred because privacy entitlement requires paid access. No new purchases/subscriptions authorized. Next:012c homepage map-card consistency; no code started. Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). This supersedes older ordering notes below.
+
 # AVES — agile design and implementation plan
 
 **Current checkpoint —9November:** source f941bb9 and shared accounts5659bea are published and verified. See [current prompt](NEXT-WEEK-PROMPT.md) and [release checkpoint](RELEASE-2026-11-09-PLACES-ACCOUNTS.md). Historical release notices below are superseded. Private account hierarchy now includes `/account/email-updates`; exclude it from public/XML sitemaps. Next visual priority012c; automatic private proposal research/story059 remains queued. Pause after sync.

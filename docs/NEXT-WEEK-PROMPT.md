@@ -1,6 +1,6 @@
 # AVES — current execution prompt
 
-Updated 9 November 2026 (Sydney). The selected release is published and tested; **pause after GitHub sync**. Do not execute the backlog automatically. Use Sol medium for a focused implementation; recommend a different model only when the task warrants it. Actual credit percentages and automatic model switching cannot be verified.
+Updated 9 November 2026 (Sydney). Latest instruction: defer paid AI, prepare this handoff, then **pause after GitHub sync**. Next code increment is homepage map consistency012c; no map edits have started. Do not execute the backlog automatically. Use Sol medium for a focused implementation; recommend a different model only when the task warrants it. Actual credit percentages and automatic model switching cannot be verified.
 
 ## Correct project and published state
 
@@ -24,7 +24,7 @@ Validation: source 119 tests and responsive/live South Island checks passed. Acc
 
 ## Next priorities — one selected increment at a time
 
-1. Essential private planning/proposal failures take precedence over visual work. Verify current behaviour before building AI generation: **Prepare a Proposal currently opens a manual draft editor**, not an automatic itinerary planner.
+1. **AI proposal generation059 is DEFERRED by the owner: no new spending.** Manual proposals remain available. Do not retry AI, buy credits, upgrade plans or relax privacy to bypass the entitlement blocker. Resume only with explicit authorization. Read HANDOFF-CURRENT.md for the verified cause and exact next action.
 2. **012c:** unify the homepage country map cards (labels/callouts, colours, boundaries, spacing and selection), then country/subregion maps in scoped batches. This is the next visual priority explicitly requested by the owner.
 3. Finish South Island planning depth: **036** embedded resource carousel; **039** checklist media previews; **006c** full subregion content/context changes; **055** homepage subregion selection changes its subsequent section to the appropriate ecosystem map/landscape carousel. Reuse verified data, routes and templates.
 4. Once South Island is ready, **040** North Island reaches the same template/functionality/depth using its own verified birds, calls, habitats and resources. Sydney is the next product priority.
@@ -63,25 +63,8 @@ Pilot validation: 121 source tests and type check passed. Desktop 1280 px and ph
 AI drafting implementation is now published in the account app, but real provider generation remains unverified. See RELEASE-2026-11-09-AI-PROPOSAL.md for exact deployment, tests and remaining checks. Earlier SDK-only status is superseded. Do not claim the end-to-end feature is complete yet.
 
 
-## Current selected increment and explicit visual details — 9 November 2026
+## Current authority and next increment
 
-IN PROGRESS: private, unpriced AI proposal draft pilot for an owner-selected New Zealand request, with owner-only save/reopen/edit and separate human-reviewed formal proposal issuance. No auto-send, bookings or payment. Live status/verification will be recorded in the AI release checkpoint; do not assume readiness from source alone.
+Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for both branches/deployments, delivered versus queued features, AI diagnosis, no-new-spend order, acceptance criteria and verification limits. AVES-012c homepage map-card consistency is next; implementation has not started. The owner requested a GitHub handoff before changing code. Sync documentation then pause.
 
-QUEUED: AVES-061 landscape contour extending from the logo across the responsive header; AVES-058 feather-shaped button pilot with clear icons, focus labels, contrast and 44px touch targets. Preserve these as distinct acceptance criteria. Record all new concrete requests explicitly in AVES-CHANGE-INBOX.md and release checkpoints, including seemingly minor design details. Never put private trip inputs into repository documentation.
-
-Detailed current/future stages, dependencies, acceptance criteria and relative complexity: [DEVELOPMENT-STAGES.md](DEVELOPMENT-STAGES.md).
-
-
-Latest AI checkpoint: [RELEASE-2026-11-09-AI-PROPOSAL.md](RELEASE-2026-11-09-AI-PROPOSAL.md). Published implementation and passing synthetic tests are distinct from the outstanding real generation check. Pause after the selected increment; no automatic visual rollout.
-
-AI resumption: owner reported a real generation failure; no generated text saved. Diagnostic runtime d693512 is published with Check AI connection (no inference). Await that result; 289 tests/type check passed. See AI release checkpoint.
-
-## AI access diagnosis — 9 November 2026
-
-Confirmed in the signed-in Vercel AI Gateway dashboard: two generation requests returned HTTP 403, zero tokens, $0 inference cost. The request detail shows ZDR enabled; no successful draft has been verified. Gateway routing rules and budgets are absent.
-
-The team's Settings page states that ZDR requires Pro/Enterprise or purchased AI Gateway credits. Current official documentation confirms this applies to per-request ZDR too; free credits do not qualify, and an ineligible Hobby request returns 403. This identifies an account entitlement blocker consistent with the live failures, rather than a database save defect. Reference: https://vercel.com/docs/ai-gateway/security-and-compliance/zdr#availability
-
-The dashboard offers a one-time $20 credit top-up (credits expire after one year); auto-reload is disabled. No purchase, billing change, new key or privacy relaxation was made. Ask for explicit spending authorization before checkout; inspect final currency/taxes/terms before payment. Do not upgrade the hosting plan unnecessarily. Keep per-request ZDR and no-training enforcement enabled.
-
-Next: after the owner authorizes/provides eligible AI access, verify one real private draft, reopen/edit/save it, and confirm that nothing is issued or emailed without owner review. Avoid consuming remaining per-request attempts until entitlement is resolved; do not silently reset attempt safeguards. Stay paused before unrelated roadmap work.
+AVES-061 logo landscape contour and AVES-058 feather controls remain explicitly queued; preserve all smaller details in AVES-CHANGE-INBOX.md and ROADMAP-DETAILS.md. The private AI implementation is live but unverified end to end, and deferred until eligible paid access is authorized. Vercel requires purchased credits or a paid plan for the requested ZDR; free credits do not qualify. No billing change made; retain ZDR/no-training.
