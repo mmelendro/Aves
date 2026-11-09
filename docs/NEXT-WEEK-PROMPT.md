@@ -1,91 +1,250 @@
-# AVES — current execution prompt
+# AVES current execution prompt
 
-Updated 9 November 2026. Homepage map-card pilot AVES-012c is published. Active follow-up continues automatically with deliberate region previews, restored Colombia artwork boundaries, then South Island filter pilots and verified rollouts. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Continue the newly selected map/filter sequence automatically, saving small source/deployment checkpoints with rollback instructions in ROLLBACK-CHECKPOINTS.md. Unselected backlog work remains separate. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
+Updated 9 November 2026. **Implementation is paused at the owner's request.**
+This update consolidates requirements only. Do not change code or deploy until
+the owner resumes work. On resumption, continue the selected programme in small
+verified increments without asking again at every step. The present pause
+supersedes earlier automatic-continuation instructions until then.
 
+## Start from the correct checkpoint
 
-## Combined map layers and ecotourism checkpoint
-
-South Island combined-layer source `1aed534`, Production `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`. Read RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md for exact verification. Satellite defaults to 55% visibility with a slider; ecosystems, parks, hatched conservation land and curated public-place/business layers combine independently. Ten public references include two ecotourism enterprises with linked evidence and clear location/claim limits. Checkpoint 06 retains recovery source and previous Production. Continue automatically using MAP-LAYER-ROLLOUT.md; other-country layers and soundscape playback are not yet delivered.
-
-## Previous delivered checkpoint
-
-The earlier South Island layer pilot was published from `14798a1`, Production `dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM`. Satellite imagery is an attributed historical 2004 overview, not live tiles. Nine national parks and DOC public conservation land share the existing Mercator frame and page-local display state. Native habitat filters remain independent. Source/licence/coverage limits and verification are in RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md. Checkpoint 05 is saved. The combined release above adds public places/heritage/town filters. Appropriate country/subregion rollouts are next. No other map or full filter programme is claimed complete.
-
-## Latest owner clarification: combined layers and businesses
-
-Satellite must act as a transparent background, not an exclusive replacement for ecosystems. Keep ecosystem colours selectable above it, provide a satellite visibility control, and retain simultaneous park, conservation and public-place layers. Include a distinct ecotourism business layer with checked public locations, linked evidence, approximate-location labels where necessary, and no implied AVES partnership or certification. Apply this requirement to future map rollouts. Preserve Colombia planning boundaries and verified marker centres.
-
-## Latest owner direction: mobile preview, South Island filters and soundscapes
-
-This direction supersedes earlier instructions to pause after the homepage-card pilot. Finish and verify deliberate first-tap preview across subregion maps: immediately update selected map context and the paired card/media where available. Only a later tap on that same selected region opens its real guide. Keep a visible Explore link, keyboard alternatives, native modifier/new-tab links and browser pinch/scroll. A default or hover highlight does not count as the first tap. Do not require a rapid double tap.
-
-Then continue automatically with the relevant previously requested map filters, one at a time. The owner explicitly chose **South Island as the sample map**. Verify a filter there before extending it through appropriate country/subregion maps. Inventory satellite imagery, habitat/land cover, national parks, protected/conserved areas, conservation projects, ecotourism/birding places, public archaeological/heritage visitor sites, towns/transport and relevant sourced species/seasonal facets. Distinguish map layers from filters that change bird collections. Never invent coverage or hide a lack of data behind a working toggle. Source/licence/access/precision and no-new-spend gates still apply; do not expose sensitive wildlife or restricted cultural locations. Global ecological biodiversity hotspots are different from local birding sites.
-
-**AVES-053 ecosystem soundscapes is now the next media priority, not a distant optional layer.** Prepare a South Island habitat-linked pilot soon, coordinated with the map/filter work. Keep it OFF by default, require visitor playback, provide mute and volume, identify the ecosystem/recording and creator/licence, and crossfade only available appropriately located audio. Fade beneath bird calls, videos and podcasts; restore only the visitor's chosen level. Stop on off/navigation/hidden page, cancel stale loads, preserve browser audio restrictions and avoid sensitive locations. Use existing no-cost licensed sources and the current audio coordination, not a paid sound subscription. No recording or generic simulated audio may be labelled as real local wildlife without verified provenance. The owner requested this prompt priority update; audio playback is not yet implemented.
-
-## Correct project and published state
+Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md), inspect current GitHub history and
+working trees, then read the linked detailed requirements before editing. Name
+one recent source edit and its commit so the owner can recognise the baseline.
+Do not overwrite another chat's work.
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **1aed534**, deployment **dpl_EpZR2p99nc9zy5gp8z83zpueMCKp** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
-- `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **e0c766a**, deployment **dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
-- Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
+| App branch | Scope | Published runtime | Production deployment |
+| --- | --- | --- | --- |
+| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 1aed534 | dpl_EpZR2p99nc9zy5gp8z83zpueMCKp |
+| australia/preview | Australia and shared accounts/backend/admin | e0c766a | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq |
 
-## Completed in this release
+Keep the app roots separate. Documentation commits are newer than these runtime
+commits; a documentation sync is not a deployment. Preserve AVES naming,
+branding, canonical URLs, search visibility and existing country/region links.
+This visual programme does not require project renaming or branch consolidation.
 
-South Island: four-place landscape carousel (Arthur’s Pass, Nelson Lakes, Fiordland, Otago/Catlins), translucent Info and licensed credits, synchronized map/place/habitat selection, compact habitat selectors on both place and bird viewers. Map zoom/pan/reset and responsive metric scale are delivered. Map respects native page gestures unless Move is enabled. Practical planning is expandable. New Zealand “In development” badges removed. The older single flip-card pilot is superseded by the connected map/carousel layout; future 3D treatments remain separate.
+## What is already live
 
-Locality and scale limits remain explicit: LCDB v6 imagery 2023/24, about 2 km generalized land cover; coast is coastline context, not mapped marine extent or sightings. No exact sensitive wildlife locations. Thirty sourced South Island bird-media profiles; 377 living NZ checklist reference entries, 55 extinct excluded. Rare visitors are not promises of local availability.
+The homepage country-card consistency pilot, feather-inspired selection cues,
+first-tap region previews and restored Colombia internal planning boundaries
+are published. Colombia's original artwork and verified marker centres remain
+the geographic baseline, not official administrative/ecological boundaries.
 
-Shared account repair: Open Request reveals/focuses details, including an already-selected request; proposal editor reveals/focuses its heading without opening the phone keyboard. Owner page and APIs independently enforce owner access. One active owner grant verified; ordinary-account database access denied. User-authorized older NZ request cleanup completed; retained request and saved plans preserved. Do not copy private identifiers/answers into public docs.
+South Island has a connected bird/habitat map and landscape carousel, four place
+contexts, zoom/pan/reset, distance scale and licensed media/credits. Thirty
+sourced bird-media profiles and a separate 377-species NZ reference checklist
+are available; national checklist inclusion is not proof of South Island range.
 
-Optional email updates: unchecked choice on email/social sign-in/signup leads to a private confirmation screen; explicit Save confirms opt-in. Existing subscribers can reopen or unsubscribe at `/account/email-updates`. Reuses private subscriber/consent tables, verified account identity and service-only RPC; no new mailing platform or campaign send. Essential account/trip email stays separate. These controls save consent; they do not constitute a newsletter campaign engine.
+Both South Island maps combine historical NASA satellite imagery at adjustable
+55% default visibility, optional visible/selectable ecosystem colours, nine
+national parks, hatched DOC conservation land and curated public-place layers.
+Ten public references cover nature/birding places, a conservation project,
+public heritage, six settlements and two ecotourism visitor enterprises, with
+overlapping categories deduplicated. This is a pilot, not complete coverage.
+Satellite imagery dates to 2004; LCDB land cover is 2023/24 and generalised to
+about 2 km. Zoom does not create new detail or guaranteed wildlife sightings.
 
-Validation: source 119 tests and responsive/live South Island checks passed. Account 281 tests and type check passed; responsive synthetic checks cover 1280/390/320 px, request/proposal opening and subscription save/reopen/unsubscribe. Database subscription transitions tested inside a rollback, synthetic records removed. No physical iPhone test or new real Google/email signup was completed in this increment. Hosted build READY, promoted, and20 live check groups passed. See [release checkpoint](RELEASE-2026-11-09-PLACES-ACCOUNTS.md).
+See [combined-layer release](RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md),
+[region preview/boundaries release](RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md)
+and [recovery checkpoints](ROLLBACK-CHECKPOINTS.md). Latest main release passed
+128 tests, type/build checks, desktop/keyboard/340px browser reflow and 31 live
+route/asset/sitemap checks. Exact 320/390px and physical phone touch remain
+unverified for this release. Do not inherit older releases' testing claims.
 
-## Next priorities — one selected increment at a time
+## Coherent experience to build next
 
-1. **AI proposal generation059 is DEFERRED by the owner: no new spending.** Manual proposals remain available. Do not retry AI, buy credits, upgrade plans or relax privacy to bypass the entitlement blocker. Resume only with explicit authorization. Read HANDOFF-CURRENT.md for the verified cause and exact next action.
-2. **012c homepage pilot is published.** Country/subregion map consistency remains queued in scoped batches. **062** adds main birding sites, intervening cities/towns, travel times and Google Maps per subregion. Read AVES-062-SUBREGION-ROUTE-PLANNING.md before choosing a no-new-spend pilot. The owner later selected map/filter continuation automatically; route/travel-time integration remains separate.
-3. Finish South Island planning depth: **036** embedded resource carousel; **039** checklist media previews; **006c** full subregion content/context changes; **055** homepage subregion selection changes its subsequent section to the appropriate ecosystem map/landscape carousel. Reuse verified data, routes and templates.
-4. Once South Island is ready, **040** North Island reaches the same template/functionality/depth using its own verified birds, calls, habitats and resources. Sydney is the next product priority.
-5. Remaining separately selected items are in ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md. Do not bundle them into one large release.
+Use **South Island as the sample**, then apply verified shared patterns across
+the appropriate Colombia, Australia and New Zealand maps and content. The aim
+is one coherent exploration experience, with content and visual style responding
+naturally to the selected geography. The following are requirements, not claims
+of completed implementation.
 
-## Latest additions and clarifications
+### 1. Continuous world, country, region and habitat exploration
 
-- **056:** logo hover/focus/tap name/pronunciation popover, verified audio where available; retain global/country navigation and static/reduced-motion fallback.
-- **057:** month-first eBird seasonality filter, with observation-year/effort/coverage disclosure. Trip year belongs in private planning; historical observations do not predict booking availability or sightings.
-- **058:** accessible feather-inspired regional button pilot, later regional logos/3D birds; preserve functional icons and usable hit areas.
-- **059:** proposal research/story workflow. Analyze guest keywords, dates/times, desired birds/habitats, conservation projects, birding lodges, pace, food/culture/downtime and budget. Produce a coherent trip narrative plus practical alternatives; source factual claims and flag access, season, availability, travel-time and price uncertainties. AVES host reviews and coordinates local people/operators before anything is sent or booked. Keep all guest inputs/output private and owner review mandatory. Current manual editor must not be described as AI generation.
-- **060:** photography direction: sharp natural feather detail, rich accurate colour, bird-in-flight movement, soft habitat background; reference screenshot supplied of Jan Wegener’s Regent Bowerbird. Treat as capture/editing aspiration, not licensed website media. Preserve originals/provenance; no invented plumage or false documentary imagery. Continue the owner’s existing YouTube/8K media library efficiently.
-- Media intake: Royann originals/ZIP are stored in the ignored local media library, not GitHub. Species/locality audit against the actual Colombia eBird trip is unfinished; no unverified captions should be published. The four supplied 3D-bird MP4s still need intake/rights/content review.
+Make moving from the world to countries, regions, subregions and habitats feel
+like zooming or pinching into a globe. Keep the map frame stable and animate the
+camera toward the actual selected area. Change the surrounding heading, summary,
+birds, landscape photos, available layers and relevant resources immediately
+with that selection. Avoid awkward full-page jumps, blank panels, stale cards,
+unnecessary loaders, scroll resets and a delayed content change after animation.
 
-## Preserve the full vision and release discipline
+Retain accurate geography. The Equal Earth world overview, Australian projection,
+Colombian artwork and geographic detail layers are different representations;
+transition between them honestly rather than stretching imagery or pretending
+they are one continuous tile projection. A globe-like experience is the desired
+interaction, not an instruction to add a heavy 3D globe or new paid provider.
 
-Stable requirements: [ROADMAP-DETAILS.md](ROADMAP-DETAILS.md). Tracking: [AVES-CHANGE-INBOX.md](AVES-CHANGE-INBOX.md). Gates: [AGILE-PLAN.md](AGILE-PLAN.md). Hierarchy: [SITE-ARCHITECTURE.md](SITE-ARCHITECTURE.md). Older prompt preserved in EXECUTION-PROMPT-ARCHIVE-2026-11-09.md; historical status notes are superseded by this prompt/checkpoint.
+Keep deliberate first-tap preview on mobile. The first tap changes the map and
+paired content immediately. A later tap on the selected region, or an explicit
+Explore action, opens its guide/detail level through the same coherent visual
+language. Do not require a rapid double tap. Hover/default highlights do not arm
+navigation. Preserve native modifier/new-tab links, shareable URLs, browser
+Back/Forward, clear breadcrumbs/zoom-out controls, focus and reduced motion.
+Preserve ordinary page scrolling and browser pinch zoom; intentional map
+gestures must not trap the page. Shared account routes remain separate/private.
 
-Retain bird-bingo/private briefs, budget sliders/currency, regenerative marketplace/community, AVES human host, conservation/lodge maps, cultural experiences, Indigenous pronunciation/totemic birds with appropriate sources, optional habitat soundscapes ducking under calls/videos, matching compact responsive map/carousels/dividers, focal image positioning/photo zoom, native/introduced/status filters, satellite/city layers where suitable, Equal Earth world map/megadiversity/hotspots, 3D pilots, branding/acronym review, thin logo typography, 8K/YouTube library, Colombian Spanish (low priority). Existing detailed entries remain authoritative acceptance criteria. B Corp is being pursued. Regenerative-tourism leadership and leaving places better are ambitions requiring evidence, not achieved certifications or guarantees.
+This extends 003a-2, 006c and 055. Existing homepage zoom is only a foundation;
+continuous transitions through all map/detail levels are not yet delivered.
 
-Private trip particulars stay in owned account/private workspace, never Git. Do not contact guests/partners, send proposals/campaigns, book, spend or grant access without the relevant instruction. Avoid invented geography, local species, permissions, partnerships, prices or availability.
+### 2. Full-screen maps, photos and complete carousels
 
-For each increment: inspect actual code/current deployment; reuse components and evidence; keep code/comments clear and remove only verified redundant/legacy code. Test the changed flow, responsive/short screens, keyboard/touch alternatives, privacy and media cleanup. Stage exact build, verify before promotion and verify live. Every deployment checks human/XML sitemap, hierarchy/canonicals/links and private exclusions; update changed inventories without fabricated dates. Sync source plus concise checkpoint to the correct GitHub branch, identify live versus queued and verification limits, then continue the currently selected map/filter sequence automatically, with a saved rollback checkpoint.
+Every map card and bird/place/habitat slider should offer a discreet, clearly
+labelled expand control. Expand the actual current map or carousel, preserving
+the selected geography, layers, photograph, filters, slide position and controls.
+The expanded view must retain previous/next, captions, credits and available
+media controls, so visitors can browse the full collection rather than one
+isolated enlarged thumbnail.
 
+Show the entire photograph in a fit/contain view, with optional deliberate
+zoom/pan where source resolution supports it. Request the highest existing
+licensed rendition on demand; do not label a small asset as full resolution or
+invent detail. Expanded maps need useful viewport space, zoom/pan/reset, accurate
+aspect ratio and readable labels/legends. Keep Close/Escape, focus containment
+and restoration, mobile/short-screen usability and native gestures. Opening and
+closing must not reset wishes, duplicate audio or restart a slideshow.
 
-## Colombia homepage language pilot — 9 November 2026
+This extends photo zoom 051 and shared map/media controls. Full-screen access
+across all cards is newly requested and is not implemented by the layer pilot.
 
-English remains the default on /colombia, including metadata. A compact flag button explicitly switches the homepage to Colombian Spanish and back, preserving current form entries and map/carousel state. A fresh visit starts in English. Inner region/article/account pages and global cookie controls remain English; bird common names retain the source English/scientific names pending a verified Colombian-name catalogue. Do not describe the whole site as translated.
+### 3. Several photographs for each location and habitat
 
-**Eventual site-wide language switching:** use the same small, accessible flag/language control on every page, including /regions/pacific, countries, regions, articles and shared accounts. Keep English as the default for now. Preserve the current page, selected country/region, filters and private trip context when switching; translate visible copy and accessible labels without changing saved values or species identifiers. Use a scalable locale system for the full rollout; the page-local pilot is not the final site-wide architecture. Track this with Colombian Spanish item 014, implemented in small reviewed batches.
+Build a small, useful multi-photo collection for each location/habitat rather
+than a single static image. Use a smooth, discreet slider with consistent
+previous/next and keyboard/touch alternatives, a subtle position indicator and
+reduced-motion support. Keep the selected place/habitat and matching map/card
+synchronised. The same collection must work inline and expanded.
 
-Published at https://aves.bio/colombia: runtime **923bbcb**, deployment **dpl_4XUQc5GCJQsSArZAmsVwBkq4TgC5**. The flag control uses EN/ES language codes and inline flag artwork for consistent device rendering.
+Every photograph needs its own accurate locality/habitat description, creator,
+source, licence and credit. Audit the current licensed collection before adding
+assets. Do not reuse another location's photograph under a misleading label,
+fabricate a photo count, or imply every location already has multiple images.
+Keep high-quality originals/provenance, load nearby slides efficiently and avoid
+layout shifts, intrusive autoplay, heavy effects or artificial wildlife detail.
 
-Pilot validation: 121 source tests and type check passed. Desktop 1280 px and phone widths 390/320 px checked: English default, flag visibility, both language directions, retained form input, map/Info/menu and mocked inquiry. The same checks passed live with no browser errors. No real inquiry sent; no physical iPhone test. Routes/hierarchy and sitemap are unchanged. Deployment/live verification recorded in RELEASE-2026-11-09-COLOMBIA-SPANISH.md.
+The existing South Island landscape carousel is a starting point. Multiple
+photos for every location/habitat remain incomplete and need source/rights work.
 
-AI drafting implementation is now published in the account app, but real provider generation remains unverified. See RELEASE-2026-11-09-AI-PROPOSAL.md for exact deployment, tests and remaining checks. Earlier SDK-only status is superseded. Do not claim the end-to-end feature is complete yet.
+### 4. Compatible map layers and relevant bird filters
 
+Satellite must remain a transparent background that works with ecosystem
+colours, parks, conservation and public-place/business markers. Keep visibility
+adjustable and all enabled layers legible, with one consistent legend and
+selection treatment. Preserve Colombia's internal subregion lines and keep
+dots over their respective regions. Smoothing may refine those lines without
+changing their meaning or moving verified markers.
 
-## Current authority and next increment
+Inventory and add relevant filters one at a time on South Island, verify them,
+then roll them across suitable maps using local data:
 
-Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for both branches/deployments, delivered versus queued features, AI diagnosis, no-new-spend order, acceptance criteria and verification limits. AVES-012c homepage map-card pilot is published and checked, with exact 320/390px and physical touch limits recorded. The new AVES-062 route-planning requirement is retained in the backlog. GitHub checkpoint is synced; continue the selected map/filter sequence.
+1. Satellite and habitat/land cover.
+2. National parks and protected/conserved areas, with honest private-land gaps.
+3. Conservation/restoration projects and initiatives.
+4. Ecotourism and birding/nature hotspots, distinct from global biodiversity hotspots.
+5. A distinct ecotourism business layer, including verified relevant birding lodges/stays.
+6. Public archaeological/heritage visitor sites, excluding restricted cultural locations.
+7. Cities, towns and useful travel gateways.
+8. Relevant sourced native/introduced/endemic/migratory and month/season facets.
 
-AVES-061 logo landscape contour and AVES-058 feather controls remain explicitly queued; preserve all smaller details in AVES-CHANGE-INBOX.md and ROADMAP-DETAILS.md. The private AI implementation is live but unverified end to end, and deferred until eligible paid access is authorized. Vercel requires purchased credits or a paid plan for the requested ZDR; free credits do not qualify. No billing change made; retain ZDR/no-training.
+Distinguish display layers from filters that change the bird collection. Never
+infer species status from migration or show a working toggle with fabricated
+coverage. Keep existing wishes/briefs intact and explain source/date/scale/access
+limits. Public place markers are not nests, access permission, AVES partnerships,
+certifications, verified impact ratings or booking guarantees.
+
+Follow [MAP-LAYER-ROLLOUT.md](MAP-LAYER-ROLLOUT.md) for DOC, CAPAD and RUNAP source,
+licence and projection gates. The current South Island pilot does not establish
+whole-country or all-subregion coverage. North Island and Rakiura need their own
+verified ecological/media records before claiming parity; Sydney remains the
+next broader product priority after the selected NZ foundation.
+
+### 5. One discreet, bird-inspired media-player family
+
+Use the same discreet player design and shared playback behaviour for ecosystem
+soundscapes, bird calls, podcasts and compatible video/documentary controls.
+The player should merge naturally with the AVES website: restrained feather/bird
+cues, thin typography, existing colours, quiet translucent controls and clear
+states. No competing player styles, intrusive chrome or decorative birds that
+hide basic controls. Keep explicit play/pause, mute, volume, progress/seek where
+appropriate, current recording/title, creator/source/credits and accessible labels.
+
+**Habitat soundscapes 053 is the next media priority, soon, beginning on South
+Island.** Playback must be OFF by default and visitor initiated. Follow the
+selected habitat with appropriately located licensed recordings and gentle
+crossfades; cancel stale loads during rapid selection. Fade ambience beneath
+bird calls, videos and podcasts, then restore only the visitor's chosen level.
+Avoid competing foreground audio, preserve mute/volume, and stop on off,
+navigation or hidden page. Handle unavailable/blocked media honestly and follow
+browser playback rules. No invented local soundscape or sensitive recording
+location. Do not autoplay third-party embeds or remove publisher controls/credits
+where embedding terms require them; make the surrounding AVES player treatment
+consistent and disclose legitimate provider limits.
+
+Coordinate the embedded resource carousel 036, checklist media previews 039 and
+audio coordination instead of building separate players per page. The prompt
+priority is recorded; habitat soundscape playback and the unified player family
+have not yet been implemented.
+
+### 6. Route planning for each subregion
+
+Retain [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md): main public birding sites,
+intervening cities/towns and estimated travel times, with Google Maps integration
+where feasible under the existing no-new-spend constraint. Distinguish driving
+time from straight-line distance; state mode, source, estimate date and access/
+weather uncertainty. No invented routes, current conditions or paid API setup.
+This request is saved, not delivered by the static map-layer pilot.
+
+## Style, business plan and stewardship
+
+Keep content and presentation connected: selected geography drives the story,
+photos, habitats and relevant learning resources. Preserve AVES's established
+visual identity and search-friendly naming without unnecessary project changes.
+The Eco-Tourism Business Plan remains work to develop/verify, not a completed
+deliverable. Link this programme to its actual current brief and business-plan
+requirements before choosing commercial features or making impact claims.
+
+Use B Lab's [ESC stewardship guidance](https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/)
+as an evidence framework for environmental impacts, biodiversity/access risks,
+supplier claims, local benefit and measurable outcomes. Record sources, unknowns
+and review dates. B Corp pursuit and regenerative ambitions are not achieved
+certifications or guarantees. Do not invent commercial partnerships or contact,
+list private guest data, book or send anything without relevant authorisation.
+
+## Release discipline and recovery
+
+After the owner resumes, implement one coherent increment at a time. Check the
+actual recent code, reuse shared components, verify desktop/mobile including
+320px where supported, keyboard/touch alternatives, reduced motion, browser
+history, map/media synchronisation, media cleanup and all existing region links.
+State exact unavailable tests. Build, stage the exact commit, check it before
+publishing and verify live routes, human/XML sitemaps and private exclusions.
+
+Save small source commits, named recovery branches, the previous/new exact
+Production deployments and quick rollback/rebuild instructions in
+[ROLLBACK-CHECKPOINTS.md](ROLLBACK-CHECKPOINTS.md). Do not overwrite a shared branch
+or assume deployment artifacts are retained forever. Sync the correct app and
+shared handoff to GitHub. Continue the selected programme automatically after
+verified checkpoints unless the owner pauses it or a specific data/access gate
+blocks safe progress. **The programme is currently paused.**
+
+No new spend, subscriptions, broad secret pulls, weaker privacy or app-root merge.
+AI proposal drafting 059 remains deferred because the account cannot satisfy the
+required zero-data-retention entitlement with its current free credits. Do not
+retry, buy credits, upgrade or relax ZDR/no-training. Manual proposals remain.
+All guest answers, wishes, requests and proposals remain private.
+
+## Preserve the rest of the project
+
+[ROADMAP-DETAILS.md](ROADMAP-DETAILS.md), [AVES-CHANGE-INBOX.md](AVES-CHANGE-INBOX.md),
+[AGILE-PLAN.md](AGILE-PLAN.md) and [SITE-ARCHITECTURE.md](SITE-ARCHITECTURE.md) retain
+the full requirements. Unselected account/community/marketplace, branding/acronym,
+logo pronunciation/3D bird, Colombian Spanish, photography/8K library, Royann media
+audit and other backlog work remain separate. Do not discard their detailed
+requirements merely because this prompt concentrates on discovery and media.
+
+The previous prompt is preserved in
+[EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md](EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md).
+Historical release notes are evidence, not current instructions to overwrite a
+newer owner decision. No implementation of the new transition/full-screen/
+multi-photo/player requirements started during this documentation pause.
