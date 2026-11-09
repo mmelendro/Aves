@@ -1,3 +1,13 @@
+## Current checkpoint — New Zealand persistent-player pilot,9November2026
+
+Published **3f3c9dc** / **dpl_FCSgEsC91SzzB63onP9Kh8pYGHFc** on aves.bio. Compact kea/feather dock for the existing South Island DOC podcasts/videos; pause, mute, expand, close and podcast seek. Playback survives connected New Zealand page navigation, resource browsing and expansion. Bird calls pause the foreground programme. Media/API loads only on explicit choice; no paid service or account/database change.
+
+133 tests, TypeScript, clean hosted build, desktop/390px/short343px checks and live podcast continuity passed; nine public routes/sitemaps200. Physical iPhone/Safari remains untested. **Full-site/cross-app continuity is still pending**: Australia/My Trips and full document navigation end playback. Do not claim the global goal complete. Recovery checkpoint10; previous runtimebf49517 remains checkpoint09. See [release/evidence](RELEASE-2026-11-09-PERSISTENT-PLAYER.md).
+
+**Pause now.** New explicit backlog:065 eBird-connected private wishlist (direct account syncing unverified);066 whole-region Colombia hover (owner priority);067 shared birds↔AVES invitation word-flip;068 truly global player with separate-app boundary review. All are recorded in this prompt/inbox, not shipped. Keep the lightweight-site standard. Earlier priorities061 landscape contour,053 soundscapes/ducking,063 saved places,064 historical/ecological context remain. No paid AI retry or new spending.
+
+Earlier checkpoint notices below are historical and superseded by this one.
+
 ## Latest published increment — South Island resources, 9 November 2026
 
 Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1**. South Island has one six-resource carousel: two on-demand DOC podcast streams with feather-shaped controls, official documentary/playlist embeds and two retained reading resources. The player uses AVES kea artwork. Fiordland/Arthur’s Pass/Nelson Lakes actions connect relevant resources to the shared map; offshore footage stays distinct. An expandable field-guide section adds two verified publisher purchase links without copied prices/stock or affiliate tracking.
@@ -313,3 +323,8 @@ Apply the existing homepage word-flip consistently to invitations such as “Let
 ## Ongoing quality standard — Lightweight first, high quality when chosen
 
 Owner reaffirmed9 November2026: aim for the lightest practical site while retaining high visual/media quality when available. Defer podcasts, video embeds and third-party player scripts until explicit intent; use responsive appropriately compressed images, lazy loading below the fold, a single active player and shared components. Preserve original/licensed high-resolution assets separately; offer higher quality or full-screen viewing without forcing large downloads. Check mobile data, slow connections, reduced motion, loading/error fallbacks and changes in production bundle/media cost for each relevant release. Do not prefetch remote media, add background autoplay or ship a 3D library merely for a small decorative effect.
+
+
+## AVES-068 — Truly global continuous media (next player increment; not complete)
+
+Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. Current root-layout pilot preserves podcasts/video through the connected New Zealand client-navigation paths; it is not full-site continuity. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. Main/Colombia/NZ and Australia/shared accounts currently have separate application roots; crossing Australia/My Trips or any full document navigation ends playback. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.

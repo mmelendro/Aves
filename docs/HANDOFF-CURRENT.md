@@ -1,3 +1,13 @@
+## Current checkpoint — New Zealand persistent-player pilot,9November2026
+
+Published **3f3c9dc** / **dpl_FCSgEsC91SzzB63onP9Kh8pYGHFc** on aves.bio. Compact kea/feather dock for the existing South Island DOC podcasts/videos; pause, mute, expand, close and podcast seek. Playback survives connected New Zealand page navigation, resource browsing and expansion. Bird calls pause the foreground programme. Media/API loads only on explicit choice; no paid service or account/database change.
+
+133 tests, TypeScript, clean hosted build, desktop/390px/short343px checks and live podcast continuity passed; nine public routes/sitemaps200. Physical iPhone/Safari remains untested. **Full-site/cross-app continuity is still pending**: Australia/My Trips and full document navigation end playback. Do not claim the global goal complete. Recovery checkpoint10; previous runtimebf49517 remains checkpoint09. See [release/evidence](RELEASE-2026-11-09-PERSISTENT-PLAYER.md).
+
+**Pause now.** New explicit backlog:065 eBird-connected private wishlist (direct account syncing unverified);066 whole-region Colombia hover (owner priority);067 shared birds↔AVES invitation word-flip;068 truly global player with separate-app boundary review. All are recorded in this prompt/inbox, not shipped. Keep the lightweight-site standard. Earlier priorities061 landscape contour,053 soundscapes/ducking,063 saved places,064 historical/ecological context remain. No paid AI retry or new spending.
+
+Earlier checkpoint notices below are historical and superseded by this one.
+
 ## Latest published increment — South Island resources, 9 November 2026
 
 Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1**. South Island has one six-resource carousel: two on-demand DOC podcast streams with feather-shaped controls, official documentary/playlist embeds and two retained reading resources. The player uses AVES kea artwork. Fiordland/Arthur’s Pass/Nelson Lakes actions connect relevant resources to the shared map; offshore footage stays distinct. An expandable field-guide section adds two verified publisher purchase links without copied prices/stock or affiliate tracking.

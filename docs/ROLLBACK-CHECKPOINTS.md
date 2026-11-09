@@ -16,6 +16,8 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-09-08-south-island-fullscreen | 4aa0939 | dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz | Bird/place full-screen pilot;129 tests, desktop/phone layouts, nine live routes/sitemaps |
 | checkpoint/2026-11-09-09-south-island-resources | bf49517 | dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1 | Kea resource carousel, embedded DOC audio/video, map actions and field-guide purchase links;132 tests and desktop/phone verification |
 
+| checkpoint/2026-11-09-10-persistent-player | 3f3c9dc | dpl_FCSgEsC91SzzB63onP9Kh8pYGHFc | Layout-owned kea dock; NZ route continuity,133 tests, desktop/phone/short-frame and live checks; global cross-app target pending |
+
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
 Main Vercel project: `prj_ZKEHgaFrywRyoEo9IfSFcln9k8pv`.
