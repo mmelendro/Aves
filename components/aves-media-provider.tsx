@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { playForegroundMedia, setEmbeddedMediaFocus } from "@/lib/media-focus"
 import { mediaIdentity } from "@/lib/media-identity"
 import { mediaClientHref } from "@/lib/media-navigation"
 import { Maximize2, Minimize2, Pause, Play, Volume2, VolumeX, X } from "lucide-react"
@@ -154,11 +155,12 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
     let active = true
     const element = audio.current
     const container = frame.current
-    const stopOthers = () => document.querySelectorAll<HTMLMediaElement>("audio,video").forEach(item => { if (item !== element) item.pause() })
+    const stopOthers = () => document.querySelectorAll<HTMLMediaElement>("audio:not([data-aves-ambience]),video").forEach(item => { if (item !== element) item.pause() })
     const anotherPlaying = (event: Event) => {
-      if (event.target !== element) { element?.pause(); video.current?.pauseVideo() }
+      if (event.target !== element && !(event.target instanceof HTMLElement && event.target.hasAttribute("data-aves-ambience"))) { element?.pause(); video.current?.pauseVideo() }
     }
     let videoStarted = false
+    let videoActive = false
     const seek = () => {
       if (element && starting.current) element.currentTime = Math.min(starting.current.position, Number.isFinite(element.duration) ? element.duration : starting.current.position)
     }
@@ -166,9 +168,10 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
       // Loading a slow publisher must not overwrite a useful saved position with zero.
       const seconds = element?.readyState ? element.currentTime : videoStarted ? video.current?.getCurrentTime() ?? 0 : starting.current?.position ?? 0
       const isMuted = element?.muted ?? (videoStarted ? video.current?.isMuted() : starting.current?.muted) ?? false
+      if (video.current) setEmbeddedMediaFocus(resource.id, videoActive && !isMuted ? "playing" : null)
       if (Number.isFinite(seconds)) remember(resource.id, seconds, isMuted)
     }
-    const leaving = () => { checkpoint(); element?.pause(); video.current?.pauseVideo() }
+    const leaving = () => { checkpoint(); element?.pause(); video.current?.pauseVideo(); setEmbeddedMediaFocus(resource.id, null) }
     window.addEventListener("pagehide", leaving)
     const timer = window.setInterval(checkpoint, 1000)
     stopOthers()
@@ -179,8 +182,10 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
       element.muted = starting.current?.muted ?? false
       element.addEventListener("loadedmetadata", seek, { once: true })
       element.src = playback.src
-      element.play().catch(() => { if (active) setError("Tap play to start the podcast.") })
+      playForegroundMedia(element).catch(() => { if (active) setError("Tap play to start the podcast.") })
     } else if (container) {
+      // Reserve foreground priority while supported controls initialise.
+      setEmbeddedMediaFocus(resource.id, "playing")
       // The API owns this iframe inside a React-owned empty wrapper. It can
       // destroy its listeners and timers without removing React-owned nodes.
       const iframe = document.createElement("iframe")
@@ -199,14 +204,24 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
       loadVideoAPI().then(api => {
         if (!active || !iframe.isConnected) return
         video.current = new api.Player(iframe, { events: {
-          onReady: () => { if (active) { if (starting.current?.muted) video.current?.mute(); setReady(true) } },
-          onStateChange: event => { if (active) { if (event.data === 1) videoStarted = true; setPlaying(event.data === 1); setMuted(video.current?.isMuted() ?? false); if (event.data === 1) stopOthers() } },
-          onError: () => { if (active) setError("This video could not play. Open the original source below.") },
+          onReady: () => { if (active) { if (starting.current?.muted) video.current?.mute(); setEmbeddedMediaFocus(resource.id, videoActive ? "playing" : null); setReady(true) } },
+          onStateChange: event => {
+            if (!active) return
+            if (event.data === 1) videoStarted = true
+            videoActive = [1, 3].includes(event.data)
+            const silent = video.current?.isMuted() ?? false
+            setEmbeddedMediaFocus(resource.id, videoActive && !silent ? "playing" : null)
+            setPlaying(event.data === 1)
+            setMuted(silent)
+            if (event.data === 1) stopOthers()
+          },
+          onError: () => { if (active) { setEmbeddedMediaFocus(resource.id, null); setError("This video could not play. Open the original source below.") } },
         } })
-      }).catch(() => { if (active) setError("Use the video's own controls, or open its original source.") })
+      }).catch(() => { if (active) { setEmbeddedMediaFocus(resource.id, "unknown"); setError("Use the video's own controls, or open its original source.") } })
     }
     return () => {
       active = false
+      setEmbeddedMediaFocus(resource.id, null)
       window.clearInterval(timer)
       window.removeEventListener("pagehide", leaving)
       document.removeEventListener("play", anotherPlaying, true)
@@ -221,12 +236,12 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
     setError("")
     if (audio.current) {
       if (audio.current.paused) {
-        document.querySelectorAll<HTMLMediaElement>("audio,video").forEach(item => { if (item !== audio.current) item.pause() })
-        audio.current.play().catch(() => setError("Unable to play. Try the original source below."))
+        document.querySelectorAll<HTMLMediaElement>("audio:not([data-aves-ambience]),video").forEach(item => { if (item !== audio.current) item.pause() })
+        playForegroundMedia(audio.current).catch(() => setError("Unable to play. Try the original source below."))
       }
       else audio.current.pause()
     } else if (playing) video.current?.pauseVideo()
-    else video.current?.playVideo()
+    else { setEmbeddedMediaFocus(resource.id, muted ? null : "playing"); video.current?.playVideo() }
   }
   function toggleMute() {
     if (audio.current) audio.current.muted = !muted

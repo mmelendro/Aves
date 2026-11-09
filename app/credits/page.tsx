@@ -3,6 +3,7 @@
  * Recording IDs become audio-<id> anchors used by carousel credit links.
  * Keep source, creator, licence and modification details with every added asset.
  */
+import { southIslandSoundscapes, soundscapeCreator, soundscapeLicence } from "@/content/south-island-soundscapes"
 import type { Metadata } from "next"
 import Image from "next/image"
 import { PageShell } from "@/components/page-shell"
@@ -36,6 +37,15 @@ export default function CreditsPage() {
               </CardContent>
             </Card>
           ))}
+        </div>
+      </section>
+      <section className="py-12 bg-emerald-50" aria-labelledby="soundscape-credits">
+        <div className="max-w-6xl mx-auto px-4"><h2 id="soundscape-credits" className="text-2xl font-medium text-emerald-950">South Island soundscapes</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600">Representative Canterbury field recordings, not live audio or a soundtrack guaranteed at any selected place. AVES uses repeated 60-second excerpts from the creator’s public HQ previews, with level adjustment and short edge fades. No recordings are loaded by this credits page. No mountain recording is included.</p>
+          <div className="mt-6 grid gap-5 md:grid-cols-3">{southIslandSoundscapes.map(recording => <article key={recording.id} id={`soundscape-${recording.id}`} className="rounded-2xl border border-emerald-200 bg-white p-5 scroll-mt-24">
+            <h3 className="font-medium text-emerald-950">{recording.title}</h3><p className="mt-2 text-sm text-gray-600">{recording.location} · {soundscapeCreator}</p>
+            <div className="mt-3 flex flex-wrap gap-4 text-sm text-emerald-800 underline underline-offset-4"><a href={recording.source} target="_blank" rel="noreferrer">Original recording</a><a href={soundscapeLicence} target="_blank" rel="noreferrer">CC0 1.0</a><a href={recording.src} download>Edited excerpt</a></div>
+          </article>)}</div>
         </div>
       </section>
       <section className="py-16 bg-white" aria-labelledby="recording-credits">

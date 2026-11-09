@@ -365,3 +365,14 @@ test("persistent player stays absent until a deliberate media request", () => {
   assert.match(html, /<main>Explore<\/main>/)
   assert.doesNotMatch(html, /<audio|<iframe|iframe_api|AVES travel media player/)
 })
+
+
+test("South Island soundscapes start off with no audio element, preload or external player", () => {
+  const Soundscapes = load("components/south-island-soundscapes.tsx").default
+  const html = renderToStaticMarkup(React.createElement(Soundscapes))
+  assert.match(html, /data-soundscape-state="Off"/)
+  assert.match(html, /Play soundscape/)
+  assert.match(html, /Kea · New Zealand soundscapes/)
+  assert.match(html, /Soundscape volume/)
+  assert.doesNotMatch(html, /<audio|<iframe|autoplay|preload=/)
+})

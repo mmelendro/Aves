@@ -7,6 +7,7 @@
  */
 "use client"
 
+import { playForegroundMedia } from "@/lib/media-focus"
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
@@ -163,7 +164,7 @@ export default function HomepageBirdCarousel({
     try {
       if (audio.error) audio.load()
       // Keep play in the click handler so mobile browser activation is retained.
-      await audio.play()
+      await playForegroundMedia(audio)
     } catch (error) {
       if (audioRef.current !== audio || playAttemptRef.current !== attempt) return
       setAudioError(!(error instanceof DOMException && error.name === "AbortError"))
