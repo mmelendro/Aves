@@ -7,11 +7,15 @@ owner-selected C1c are complete in the existing unified draft. Read
 passed. Browser/hosted acceptance remains incomplete. No new hosted preview,
 production release, hosted migration/private-data edit or external mail was made.
 
-Next recommendation: C1d consent/owner updates, not selected. Keep AI requests
+Next selected increment: C1d consent/owner updates, not yet implemented. Keep AI requests
 and connection checks deferred. C2/C3 acceptance remains pending. No paid
 provisioning or hosted provider/database changes are authorised. Production
 publication requires explicit approval. The current handoff/agile order supersedes
 older automatic-continuation wording.
+
+Owner selected completion of C, then saved places, species-origin filters,
+checklist photos, South Island context, verified places, playback, continuous bird
+calls, maps and design. Follow the owner-selected order in [AGILE-PLAN.md](AGILE-PLAN.md).
 
 ## Start from the correct checkpoint
 

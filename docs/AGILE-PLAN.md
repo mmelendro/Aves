@@ -4,7 +4,42 @@ Updated 10 November 2026, Sydney.
 
 This is the retained roadmap order, including AVES-020 consolidation. C0 and owner-selected C1a/C1b/C1c are complete; see [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). Production is unchanged. HANDOFF-CURRENT.md owns runtime/status and release permission; this plan owns sequencing; ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md retain acceptance criteria.
 
-Next recommendation: C1d, verified-account consent and owner usability with AI requests deferred, not selected. C2/C3 public/private hosted acceptance remains required before cutover. Select one increment before implementation; each production release requires explicit approval. Older next-priority/automatic-continuation passages do not override this plan or handoff.
+Next selected increment: C1d, verified-account consent and owner usability with AI requests deferred, not yet implemented. C2/C3 public/private hosted acceptance remains required before cutover. C1d is the next bounded implementation increment; each production release requires explicit approval. Older next-priority/automatic-continuation passages do not override this plan or handoff.
+
+## Owner-selected delivery order, 10 November 2026
+
+Finish the consolidation C sequence first: C1d consent/owner usability, C2 public
+preview acceptance, C3 hosted private acceptance, C4 explicitly approved production
+cutover, then C5 separately approved retirement after an observation period.
+C1a/C1b/C1c remain complete. C1d is selected next, not yet implemented. Source work
+is authorised; this order does not approve production publication, retirement,
+new spending, hosted account/database/provider changes or external messages.
+C3 retains its unresolved authorised-test-setup gate. If blocked, report the gate
+and agree the next ready slice rather than retry declined provisioning.
+
+After C, the owner selected this focus order, referring to the numbered pending
+updates shown in chat, not AVES ticket numbers:
+
+| Order | Selected focus | Existing IDs / boundary |
+| --- | --- | --- |
+| 1 | Saved places alongside private bird wishes (chat item 12) | AVES-063; South Island pilot, private save/reopen/edit and deliberate sharing |
+| 2 | Consistent species-origin filters (chat item 13) | AVES-025/048; sourced native/introduced/unknown status, separate from seasonality |
+| 3 | Checklist photo previews (chat item 14) | AVES-039; existing licensed assets, accessible preview and honest missing media |
+| 4 | South Island ecological/historical orientation (chat item 16) | AVES-064/016; authoritative and mana whenua sources, no invented endorsement |
+| 5 | Verified places, conservation projects, lodges and travel context (chat item 17) | AVES-034/052/062; one sourced locality batch, public access and sensitive-site safeguards |
+| 6 | Uninterrupted public playback | AVES-068; unified layout and route/auth/Back checks; explicit paused Resume for real document changes |
+| 7 | Continuous bird-call listening | AVES-047; explicit opt-in, pause/off/mute, shared foreground priority and device/visibility checks |
+| 8 | Map updates | Existing map programme: consistent regional pairs, layers/context, expanded maps, zoom/scale and honest geographic transitions; split into reviewed slices |
+| 9 | Design updates | Existing design programme: shared player/control styling, feather controls, header contour, backgrounds and text animations; split into reviewed slices |
+
+This order supersedes the earlier default P1/P2/P3 queue for elective work.
+Unselected guest/commercial tasks, directory, North Island, translations, eBird,
+community, wider soundscapes, 3D birds and other retained requests remain in the
+backlog. No new scope is inferred from the broad map/design headings. Preserve
+the Eco-Tourism Business Plan and sourced stewardship requirements; do not invent
+commercial assumptions or impact claims. A demonstrated essential-flow or privacy
+failure can interrupt the queue. Implement and verify one bounded increment at a
+time. Explicit production approval remains required for every release.
 
 ## Baseline and findings
 
