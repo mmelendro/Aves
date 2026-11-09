@@ -142,12 +142,12 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
       {places.map(item => <button key={item.id} type="button" aria-pressed={item.id === selectedPlace} onClick={() => onSelectPlace?.(item.id)} className={`min-h-11 rounded-lg border px-2 py-2 text-left text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 ${item.id === selectedPlace ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}>{item.label}</button>)}
     </div>}
     {place && <p className="mt-2 text-xs leading-5 text-emerald-900"><a href={place.source} target="_blank" rel="noreferrer" className="underline">{place.location}</a> · public landscape reference, not a habitat boundary or wildlife location.</p>}
-    <details open={!places} className={styles.filters}><summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800">Habitat filters</summary>
+    <details open={!places && !satellite} className={styles.filters}><summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800">Habitat filters</summary>
     <div aria-label="Habitat map legend" className="mt-2 grid grid-cols-1 gap-1 min-[390px]:grid-cols-2">
       {southIslandEcosystems.map(item => <button key={item.id} type="button" aria-label={`Filter birds: ${item.name}`} aria-pressed={selected === item.id} onClick={() => onSelect(item.id)} className={`flex min-h-11 items-center gap-2 rounded-lg border px-2 py-2 text-left text-xs leading-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${selected === item.id ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900 hover:border-emerald-500"}`}><span aria-hidden="true" className="h-3 w-3 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: colours[item.id] }} />{item.name}</button>)}
     </div>
     </details>
-    <p className="mt-2 text-[11px] leading-5 text-gray-600">Colours group land-cover classes, not exact bird ranges. Tussock also occurs below alpine country. Coastline is context; offshore habitat is not mapped.</p>
+    {!satellite && <p className="mt-2 text-[11px] leading-5 text-gray-600">Colours group land-cover classes, not exact bird ranges. Tussock also occurs below alpine country. Coastline is context; offshore habitat is not mapped.</p>}
     <details className={styles.sources}>
       <summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Map sources & limitations</summary>
       <div className="space-y-2 pb-2 text-xs leading-5 text-gray-600">
