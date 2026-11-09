@@ -1,12 +1,15 @@
 "use client"
 
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { mediaClientHref } from "@/lib/media-navigation"
 import { Maximize2, Minimize2, Pause, Play, Volume2, VolumeX, X } from "lucide-react"
-import { southIslandResources } from "@/content/south-island"
+import { travelMediaResources } from "@/content/travel-media"
+import { MEDIA_HANDOFF_KEY, readMediaHandoff, type MediaHandoff } from "@/lib/media-handoff"
 import styles from "./aves-media-provider.module.css"
 
-type Resource = typeof southIslandResources[number]
+type Resource = typeof travelMediaResources[number]
 type MediaContextValue = { resourceId: string | null; open: (id: string) => void }
 const MediaContext = createContext<MediaContextValue | null>(null)
 export const useAvesMedia = () => useContext(MediaContext)
@@ -17,6 +20,7 @@ interface VideoPlayer {
   mute(): void
   unMute(): void
   isMuted(): boolean
+  getCurrentTime(): number
   destroy(): void
 }
 type VideoAPI = { Player: new (element: HTMLIFrameElement, options: { events: {
@@ -52,25 +56,62 @@ function loadVideoAPI(): Promise<VideoAPI> {
 
 /** The shared layout owns the player, so Next navigation does not replace the
  * audio/iframe. Nothing is fetched until a visitor chooses a curated resource.
- * Playback is intentionally not restored after refresh, closing or leaving AVES. */
-export function AvesMediaProvider({ children }: { children: ReactNode }) {
+ * A document reload can only restore a paused, explicitly resumable checkpoint. */
+export function AvesMediaProvider({ children, assetBase = "", navigationPaths = [] }: { children: ReactNode; assetBase?: string; navigationPaths?: readonly string[] }) {
+  const router = useRouter()
   const [resourceId, setResourceId] = useState<string | null>(null)
   const [expanded, setExpanded] = useState(false)
+  const [handoff, setHandoff] = useState<MediaHandoff | null>(null)
+  const [resumeRequired, setResumeRequired] = useState(false)
+  useEffect(() => {
+    try {
+      const saved = readMediaHandoff(sessionStorage.getItem(MEDIA_HANDOFF_KEY))
+      if (saved) { setHandoff(saved); setResourceId(saved.resourceId); setResumeRequired(true) }
+      else sessionStorage.removeItem(MEDIA_HANDOFF_KEY)
+    } catch { /* Storage can be disabled. Ordinary playback still works. */ }
+  }, [])
+  useEffect(() => {
+    if (!resourceId) return
+    // Bubble after preview handlers. A prevented first tap stays a preview;
+    // native modifiers/new tabs, downloads and hash links stay native as well.
+    const navigate = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return
+      const anchor = event.target instanceof Element ? event.target.closest("a[href]") : null
+      if (!anchor || anchor.hasAttribute("download") || (anchor.getAttribute("target") && anchor.getAttribute("target") !== "_self") || anchor.getAttribute("rel")?.split(/\s+/).includes("external")) return
+      const href = mediaClientHref(anchor.getAttribute("href")!, window.location.href, navigationPaths, assetBase)
+      if (href !== null) { event.preventDefault(); router.push(href) }
+    }
+    document.addEventListener("click", navigate)
+    return () => document.removeEventListener("click", navigate)
+  }, [resourceId, navigationPaths, assetBase, router])
+  const remember = useCallback((id: string, position: number, muted: boolean) => {
+    try { sessionStorage.setItem(MEDIA_HANDOFF_KEY, JSON.stringify({ version: 1, resourceId: id, position, muted, savedAt: Date.now() })) } catch { /* No storage is required for playback. */ }
+  }, [])
   const opener = useRef<HTMLElement | null>(null)
   function open(id: string) {
-    if (!southIslandResources.some(item => item.id === id && item.playback)) return
+    if (!travelMediaResources.some(item => item.id === id && item.playback)) return
     opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    // Reopening the same resource preserves its stream and position.
+    if (id !== resourceId) { setHandoff(null); remember(id, 0, false) }
+    setResumeRequired(false)
     setResourceId(id)
     setExpanded(false)
   }
   function close() {
     setResourceId(null)
+    setHandoff(null)
+    setResumeRequired(false)
+    try { sessionStorage.removeItem(MEDIA_HANDOFF_KEY) } catch { /* Optional storage. */ }
     if (opener.current?.isConnected) opener.current.focus({ preventScroll: true })
   }
-  const resource = southIslandResources.find(item => item.id === resourceId)
+  const resource = travelMediaResources.find(item => item.id === resourceId)
   return <MediaContext.Provider value={{ resourceId, open }}>
     {children}
-    {resource && <MediaDock key={resource.id} resource={resource} expanded={expanded} setExpanded={setExpanded} close={close} />}
+    {resource && (resumeRequired ? <aside className={styles.dock} aria-label="AVES travel media player" onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); close() } }}>
+      <div className={styles.heading}><Image src={`${assetBase}/images/brand/aves-new-zealand-bird.png`} alt="" width={36} height={36} /><div className={styles.title}><span>Ready when you are</span><strong>{resource.title}</strong></div><button className={styles.feather} onClick={close} aria-label="Close player and stop playback"><X size={18} /></button></div>
+      <p className={styles.note}>Playback paused while the page changed. Resume from {time(handoff?.position || 0)}.</p>
+      <button className={styles.resume} onClick={() => setResumeRequired(false)}><Play size={18} aria-hidden="true" />Resume media</button>
+    </aside> : <MediaDock key={resource.id} resource={resource} expanded={expanded} setExpanded={setExpanded} close={close} initial={handoff?.resourceId === resource.id ? handoff : null} remember={remember} assetBase={assetBase} />)}
     {/* Space below the document keeps the dock from hiding the final links. */}
     {resource && <div aria-hidden="true" style={{ height: resource.playback?.type === "youtube" ? 360 : 160 }} />}
   </MediaContext.Provider>
@@ -81,17 +122,19 @@ function time(seconds: number) {
   return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, "0")}`
 }
 
-function MediaDock({ resource, expanded, setExpanded, close }: {
+function MediaDock({ resource, expanded, setExpanded, close, initial, remember, assetBase }: {
   resource: Resource; expanded: boolean; setExpanded: (value: boolean) => void; close: () => void
+  initial: MediaHandoff | null; remember: (id: string, position: number, muted: boolean) => void; assetBase: string
 }) {
   const audio = useRef<HTMLAudioElement>(null)
   const frame = useRef<HTMLDivElement>(null)
   const video = useRef<VideoPlayer | null>(null)
   const [playing, setPlaying] = useState(false)
-  const [muted, setMuted] = useState(false)
+  const [muted, setMuted] = useState(initial?.muted ?? false)
   const [ready, setReady] = useState(false)
   const [error, setError] = useState("")
-  const [position, setPosition] = useState(0)
+  const [position, setPosition] = useState(initial?.position ?? 0)
+  const starting = useRef(initial)
   const [duration, setDuration] = useState(0)
   const playback = resource.playback!
 
@@ -103,11 +146,26 @@ function MediaDock({ resource, expanded, setExpanded, close }: {
     const anotherPlaying = (event: Event) => {
       if (event.target !== element) { element?.pause(); video.current?.pauseVideo() }
     }
+    let videoStarted = false
+    const seek = () => {
+      if (element && starting.current) element.currentTime = Math.min(starting.current.position, Number.isFinite(element.duration) ? element.duration : starting.current.position)
+    }
+    const checkpoint = () => {
+      // Loading a slow publisher must not overwrite a useful saved position with zero.
+      const seconds = element?.readyState ? element.currentTime : videoStarted ? video.current?.getCurrentTime() ?? 0 : starting.current?.position ?? 0
+      const isMuted = element?.muted ?? (videoStarted ? video.current?.isMuted() : starting.current?.muted) ?? false
+      if (Number.isFinite(seconds)) remember(resource.id, seconds, isMuted)
+    }
+    const leaving = () => { checkpoint(); element?.pause(); video.current?.pauseVideo() }
+    window.addEventListener("pagehide", leaving)
+    const timer = window.setInterval(checkpoint, 1000)
     stopOthers()
     document.addEventListener("play", anotherPlaying, true)
     if (playback.type === "audio" && element) {
       // This effect only mounts following an explicit Play action. Safari may
       // still require a second tap; the dock always retains a Play control.
+      element.muted = starting.current?.muted ?? false
+      element.addEventListener("loadedmetadata", seek, { once: true })
       element.src = playback.src
       element.play().catch(() => { if (active) setError("Tap play to start the podcast.") })
     } else if (container) {
@@ -116,6 +174,7 @@ function MediaDock({ resource, expanded, setExpanded, close }: {
       const iframe = document.createElement("iframe")
       const url = new URL(playback.src)
       url.searchParams.set("enablejsapi", "1")
+      if (starting.current?.position) url.searchParams.set("start", String(Math.floor(starting.current.position)))
       url.searchParams.set("origin", window.location.origin)
       iframe.src = url.href
       iframe.title = `${resource.title} — DOC video player`
@@ -128,20 +187,23 @@ function MediaDock({ resource, expanded, setExpanded, close }: {
       loadVideoAPI().then(api => {
         if (!active || !iframe.isConnected) return
         video.current = new api.Player(iframe, { events: {
-          onReady: () => { if (active) setReady(true) },
-          onStateChange: event => { if (active) { setPlaying(event.data === 1); setMuted(video.current?.isMuted() ?? false); if (event.data === 1) stopOthers() } },
+          onReady: () => { if (active) { if (starting.current?.muted) video.current?.mute(); setReady(true) } },
+          onStateChange: event => { if (active) { if (event.data === 1) videoStarted = true; setPlaying(event.data === 1); setMuted(video.current?.isMuted() ?? false); if (event.data === 1) stopOthers() } },
           onError: () => { if (active) setError("This video could not play. Open the original source below.") },
         } })
       }).catch(() => { if (active) setError("Use the video's own controls, or open its original source.") })
     }
     return () => {
       active = false
+      window.clearInterval(timer)
+      window.removeEventListener("pagehide", leaving)
       document.removeEventListener("play", anotherPlaying, true)
+      element?.removeEventListener("loadedmetadata", seek)
       element?.pause(); element?.removeAttribute("src"); element?.load()
       video.current?.destroy(); video.current = null
       container?.replaceChildren()
     }
-  }, [playback])
+  }, [playback, remember, resource.id])
 
   function toggle() {
     setError("")
@@ -162,7 +224,7 @@ function MediaDock({ resource, expanded, setExpanded, close }: {
   }
   return <aside onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); if (expanded) setExpanded(false); else close() } }} aria-label="AVES travel media player" className={`${styles.dock} ${expanded ? styles.expanded : ""}`}>
     <div className={styles.heading}>
-      <Image src="/images/brand/aves-new-zealand-bird.png" alt="" width={36} height={36} />
+      <Image src={`${assetBase}/images/brand/aves-new-zealand-bird.png`} alt="" width={36} height={36} />
       <div className={styles.title}><span>South Island · {resource.kind}</span><strong title={resource.title}>{resource.title}</strong></div>
       <button className={styles.feather} onClick={() => setExpanded(!expanded)} aria-label={expanded ? "Compact player" : "Expand player"} title={expanded ? "Compact player" : "Expand player"}>{expanded ? <Minimize2 size={17} /> : <Maximize2 size={17} />}</button>
       <button className={styles.feather} onClick={close} aria-label="Close player and stop playback" title="Close and stop"><X size={18} /></button>
@@ -182,6 +244,6 @@ function MediaDock({ resource, expanded, setExpanded, close }: {
       <button className={styles.feather} onClick={toggleMute} disabled={playback.type === "youtube" && !ready} aria-label={muted ? "Unmute media" : "Mute media"} title={muted ? "Unmute" : "Mute"} aria-pressed={muted}>{muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
     </div>
     {error && <p className={styles.note} role="status">{error} <a href={resource.href} target="_blank" rel="noreferrer">Original source</a></p>}
-    {expanded && <div className={styles.details}><p>{resource.description}</p><a href={resource.href} target="_blank" rel="noreferrer">{resource.action} ↗</a><p>Continues during New Zealand page navigation. Refreshing, closing this tab or opening shared accounts/Australia ends playback.</p></div>}
+    {expanded && <div className={styles.details}><p>{resource.description}</p><a href={resource.href} target="_blank" rel="noreferrer">{resource.action} ↗</a><p>Continues while browsing within this app. Moving between AVES apps or reloading pauses playback; choose Resume to continue. Video may need its Play control. Closing the player clears its saved position.</p></div>}
   </aside>
 }
