@@ -308,3 +308,13 @@ Sources: https://support.ebird.org/en/support/solutions/articles/48001078113 ; h
 ## AVES-066 — Colombia whole-region map hover (queued, owner priority)
 
 Homepage country cards: Colombia currently responds at location dots, while Australia/New Zealand respond across region shapes. Make the Colombian planning-region area itself preview/highlight the corresponding region on pointer hover and keyboard focus; retain dots as location markers and maintain first tap preview, second/Explore guide navigation, clear selected state, touch and native modifier behaviour. Inspect source geometry before mapping shapes: planning regions may overlap and must not be misrepresented as official administrative boundaries. Provide accessible equivalent region links and test all 11 destinations. Owner reported9 November2026; queued separately from the persistent-player pilot.
+
+
+## AVES-067 — Reuse birds ↔ AVES invitation animation (queued,9November2026)
+
+Apply the existing homepage word-flip consistently to invitations such as “Let the birds lead you into the landscape” on South Island and matching copy across the site. Animate only the birds/AVES word, preserve surrounding wording and a stable text width; use the same borderless typography, green AVES styling, gentle 3D transition and keyboard/touch equivalent. Retain a coherent accessible sentence without duplicate announcements, and a static reduced-motion version. Audit all instances before rollout; share one component rather than copies. This is the text-word animation, separate from future 3D flying bird logo models. Queued separately from the persistent-player release.
+
+
+## Ongoing quality standard — Lightweight first, high quality when chosen
+
+Owner reaffirmed9 November2026: aim for the lightest practical site while retaining high visual/media quality when available. Defer podcasts, video embeds and third-party player scripts until explicit intent; use responsive appropriately compressed images, lazy loading below the fold, a single active player and shared components. Preserve original/licensed high-resolution assets separately; offer higher quality or full-screen viewing without forcing large downloads. Check mobile data, slow connections, reduced motion, loading/error fallbacks and changes in production bundle/media cost for each relevant release. Do not prefetch remote media, add background autoplay or ship a 3D library merely for a small decorative effect.

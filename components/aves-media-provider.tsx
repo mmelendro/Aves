@@ -119,7 +119,9 @@ function MediaDock({ resource, expanded, setExpanded, close }: {
       url.searchParams.set("origin", window.location.origin)
       iframe.src = url.href
       iframe.title = `${resource.title} — DOC video player`
-      iframe.allow = "encrypted-media; picture-in-picture; fullscreen"
+      // The permission lets a user's dock Play action reach YouTube through its
+      // API. No autoplay URL parameter or play-on-ready action is used.
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"
       iframe.allowFullscreen = true
       iframe.referrerPolicy = "strict-origin-when-cross-origin"
       container.appendChild(iframe)

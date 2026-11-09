@@ -1,4 +1,4 @@
-.dock { position:fixed; z-index:45; right:max(1rem,env(safe-area-inset-right)); bottom:max(.75rem,env(safe-area-inset-bottom)); width:min(25rem,calc(100vw - 2rem)); max-height:calc(100dvh - 6rem); overflow:auto; color:#064e3b; background:rgba(247,253,250,.97); border:1px solid #b7dbcd; border-radius:1.4rem .65rem 1.4rem .65rem; box-shadow:0 5px 28px #042f2526; backdrop-filter:blur(12px); animation:arrive .22s ease-out; }
+.dock { position:fixed; z-index:45; right:max(1rem,env(safe-area-inset-right)); bottom:max(.75rem,env(safe-area-inset-bottom)); width:25rem; max-width:calc(100% - 2rem); max-height:calc(100dvh - 6rem); overflow:auto; color:#064e3b; background:rgba(247,253,250,.97); border:1px solid #b7dbcd; border-radius:1.4rem .65rem 1.4rem .65rem; box-shadow:0 5px 28px #042f2526; backdrop-filter:blur(12px); animation:arrive .22s ease-out; }
 .heading { display:flex; align-items:center; gap:.35rem; padding:.4rem .5rem; }
 .title { flex:1; min-width:0; }
 .title span { display:block; font-size:.65rem; color:#477463; }
@@ -15,7 +15,7 @@
 .video { min-height:200px; background:#071b17; }
 .video iframe { display:block; border:0; width:100%; min-height:200px; aspect-ratio:16/9; background:#071b17; }
 .videoHint { flex:1; font-size:.7rem; }
-.expanded { width:min(42rem,calc(100vw - 2rem)); }
+.expanded { width:42rem; }
 .details { padding:.25rem 1rem 1rem; font-size:.8rem; line-height:1.6; }
 .details p:last-child { margin-top:.8rem; font-size:.7rem; color:#526e61; }
 .dock a { text-decoration:underline; text-underline-offset:3px; }
