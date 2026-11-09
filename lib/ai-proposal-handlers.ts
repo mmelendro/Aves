@@ -4,15 +4,15 @@ import { requireAccountUser } from "@/lib/account-auth"
 import { accountBody, accountHandler } from "@/lib/account-http"
 import { accountRpc } from "@/lib/account-service"
 import { AccountError } from "@/lib/account-errors"
-import { generateProposalDraft } from "@/lib/ai-proposal-generator"
+import { generateProposalDraft, checkAiConnection } from "@/lib/ai-proposal-generator"
 import type { DraftSnapshot } from "@/lib/ai-proposal-input"
 export type AiDraft={text:string;updatedAt:string;generatedAt:string;model:string}
 type State={snapshot:DraftSnapshot;draft:AiDraft|null;generationToken:string|null}
 function requestId(id:string){if(!z.uuid().safeParse(id).success)throw new AccountError(404,"This item could not be found.");return id}
-export const aiDraftGet=(id:string)=>accountHandler(async()=>{
+export const aiDraftGet=(id:string,checkConnection=false)=>accountHandler(async()=>{
  const {user}=await requireAccountUser()
  const state=await accountRpc<State>("admin_ai_draft",{p_admin_user_id:user.id,p_request_id:requestId(id)})
- return {draft:state.draft}
+ return {draft:state.draft,...(checkConnection?{connection:await checkAiConnection()}:{})}
 })
 export const aiDraftPost=(request:Request,id:string)=>accountHandler(async()=>{
  const {user}=await requireAccountUser();await accountBody(request,z.object({}).strict())

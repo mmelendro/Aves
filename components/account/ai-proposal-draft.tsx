@@ -37,6 +37,15 @@ export function AiProposalDraft({quoteId,disabled,onUse}:{quoteId:string;disable
   }catch(error){setFeedback(errorMessage(error))}
   finally{busyRef.current=false;setBusy(false)}
  }
+ async function checkConnection(){
+  if(busyRef.current)return
+  busyRef.current=true;setBusy(true);setFeedback("")
+  try{
+   const result=await accountRequest<{connection:string}>(`/api/admin/quotes/${quoteId}/ai-draft?check=1`)
+   setFeedback(result.connection||"The connection check could not be confirmed.")
+  }catch(error){setFeedback(errorMessage(error))}
+  finally{busyRef.current=false;setBusy(false)}
+ }
  return <section aria-label="Private AI working draft" className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5 sm:p-7 space-y-4">
   <h3 className="text-xl font-semibold text-gray-900">Private AI working draft</h3>
   <p className="text-sm leading-6 text-gray-600">Uses this saved New Zealand request and a small reviewed reference library. Dates, bird ranges, suppliers, availability and prices need your checks. Only the AVES owner can read these unpriced notes.</p>
@@ -51,6 +60,7 @@ export function AiProposalDraft({quoteId,disabled,onUse}:{quoteId:string;disable
    {text.length>10000&&<p className="text-sm text-amber-800">Shorten this to 10,000 characters before copying into a formal proposal.</p>}
    <p className="text-xs leading-5 text-gray-500">AI model: {draft.model}. This is not a quotation or reservation. Using it in a proposal leaves the price blank; review and sending remain separate actions.</p>
   </>}
+  <Button variant="ghost" size="sm" onClick={()=>void checkConnection()} disabled={busy||disabled}>Check AI connection</Button>
   {feedback&&<p role="status" className="text-sm text-emerald-900 break-words">{feedback}</p>}
  </section>
 }

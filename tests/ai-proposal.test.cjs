@@ -4,13 +4,13 @@ const loader=require('./helpers/load-ts.cjs')
 const id='11111111-1111-4111-8111-111111111111'
 const draft={text:'Private synthetic draft',updatedAt:'2026-11-09T00:00:00Z',generatedAt:'2026-11-09T00:00:00Z',model:'test'}
 function harness({signedIn=true,owner=true,existing=false,fail=false}={}){
- const calls=[],generated=[]
+ const calls=[],generated=[],checks=[]
  const load=loader({mocks:{
   '@/lib/account-auth':{requireAccountUser:async()=>{if(!signedIn)throw new (load('lib/account-errors.ts').AccountError)(401,'Sign in');return {user:{id:'verified-owner'}}}},
   '@/lib/account-service':{accountRpc:async(name,args)=>{calls.push(args);if(!owner)throw new (load('lib/account-errors.ts').AccountError)(403,'Owner only');return {snapshot:{details:{regions:['north-island']}},generationToken:args.p_action==='begin'?'lease':null,draft:existing||args.p_action==='complete'||args.p_action==='save'?draft:null}}},
-  '@/lib/ai-proposal-generator':{generateProposalDraft:async snapshot=>{generated.push(snapshot);if(fail)throw new Error('provider secret');return draft.text}},
+  '@/lib/ai-proposal-generator':{checkAiConnection:async()=>{checks.push(true);return 'Synthetic connection result'},generateProposalDraft:async snapshot=>{generated.push(snapshot);if(fail)throw new Error('provider secret');return draft.text}},
  }})
- return {calls,generated,handlers:load('lib/ai-proposal-handlers.ts')}
+ return {calls,generated,checks,handlers:load('lib/ai-proposal-handlers.ts')}
 }
 const req=(body={},origin='https://aves.bio')=>new Request(`https://aves.bio/australia/api/admin/quotes/${id}/ai-draft`,{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(body)})
 test('AI draft requires verified owner before any generation or data access',async()=>{
@@ -33,4 +33,15 @@ test('model input excludes contact/title/IDs, resolves bird names and redacts co
  const load=loader();const {proposalInput}=load('lib/ai-proposal-input.ts');const birds=load('content/new-zealand-checklist.ts').selectableNzBirds
  const input=proposalInput({year:2027,title:'Secret name',contactEmail:'private@example.com',id:'record-id',details:{regions:['north-island'],message:'Email me at private@example.com https://private.invalid +61 412 345 678',questionnaire:{pace:'relaxed',birding:'occasional',comfort:'special',interests:['birds'],birdIds:[birds[0].id],budget:{currency:'NZD',food:50}}}})
  const text=JSON.stringify(input);for(const forbidden of ['Secret name','private@example.com','private.invalid','record-id',birds[0].id])assert.ok(!text.includes(forbidden));assert.ok(text.includes(birds[0].scientificName));assert.equal(input.year,2027);assert.equal(input.preferences.budget.currency,'NZD')
+})
+test('connection diagnostics remain owner-only and never invoke generation',async()=>{
+ const denied=harness({owner:false});assert.equal((await denied.handlers.aiDraftGet(id,true)).status,403);assert.equal(denied.checks.length,0)
+ const owner=harness();const r=await owner.handlers.aiDraftGet(id,true);assert.equal((await r.json()).connection,'Synthetic connection result');assert.equal(owner.generated.length,0)
+})
+test('provider diagnostics expose only fixed messages, never raw error bodies',async()=>{
+ const secret='private prompt and token'
+ const load=loader({mocks:{ai:{gateway:{getCredits:async()=>{throw {statusCode:402,message:secret}}},generateText:async()=>{throw {statusCode:401,message:secret}},Output:{object:()=>({})}}}})
+ const generator=load('lib/ai-proposal-generator.ts')
+ assert.match(await generator.checkAiConnection(),/credit or account verification/)
+ await assert.rejects(()=>generator.generateProposalDraft({details:{}}),e=>e.status===503&&e.message.includes('authentication')&&!e.message.includes(secret))
 })
