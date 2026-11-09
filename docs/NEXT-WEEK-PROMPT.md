@@ -5,6 +5,11 @@ paused after explicit owner publication approval. Three licensed representative
 recordings cover forest, streams and coast; mountains/other-region rollout remain
 unimplemented. AVES-066 and AVES-068 safe continuity remain delivered. No next
 task selected. Use HANDOFF-CURRENT.md for runtime/status and precise test limits.
+Use [AGILE-PLAN.md](AGILE-PLAN.md) for the reorganised 10 November priorities.
+The owner authorised analysis and reorganisation only. The next recommendation is
+C0, the AVES-020 delta inventory; implementation requires one selected increment.
+All production releases require explicit approval. Older automatic-continuation
+or next-priority wording is superseded by that plan and this handoff.
 
 ## Start from the correct checkpoint
 
@@ -64,7 +69,7 @@ and focus do not arm navigation. Boundaries, positions and existing media are
 unchanged. See RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md for exact evidence and
 limitations. Earlier immutable release reports remain under docs/RELEASE-*.
 
-## Coherent experience to build next
+## Retained product programme
 
 Use **South Island as the sample**, then apply verified shared patterns across
 the appropriate Colombia, Australia and New Zealand maps and content. The aim
