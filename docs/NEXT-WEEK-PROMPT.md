@@ -60,4 +60,16 @@ Published at https://aves.bio/colombia: runtime **923bbcb**, deployment **dpl_4X
 
 Pilot validation: 121 source tests and type check passed. Desktop 1280 px and phone widths 390/320 px checked: English default, flag visibility, both language directions, retained form input, map/Info/menu and mocked inquiry. The same checks passed live with no browser errors. No real inquiry sent; no physical iPhone test. Routes/hierarchy and sitemap are unchanged. Deployment/live verification recorded in RELEASE-2026-11-09-COLOMBIA-SPANISH.md.
 
-AI proposal generation remains unfinished: pinned SDK installed only in the Australian working tree. Existing local OIDC returned 401; broad production environment retrieval was rejected by automatic approval because it would include unrelated secrets. Do not retry broad retrieval or claim AI is live. Use hosted OIDC or an appropriately authorized narrowly scoped credential. No AI request with guest data or generated proposal saved yet. Do not bundle the unfinished AI task into this language release.
+AI drafting implementation is now published in the account app, but real provider generation remains unverified. See RELEASE-2026-11-09-AI-PROPOSAL.md for exact deployment, tests and remaining checks. Earlier SDK-only status is superseded. Do not claim the end-to-end feature is complete yet.
+
+
+## Current selected increment and explicit visual details — 9 November 2026
+
+IN PROGRESS: private, unpriced AI proposal draft pilot for an owner-selected New Zealand request, with owner-only save/reopen/edit and separate human-reviewed formal proposal issuance. No auto-send, bookings or payment. Live status/verification will be recorded in the AI release checkpoint; do not assume readiness from source alone.
+
+QUEUED: AVES-061 landscape contour extending from the logo across the responsive header; AVES-058 feather-shaped button pilot with clear icons, focus labels, contrast and 44px touch targets. Preserve these as distinct acceptance criteria. Record all new concrete requests explicitly in AVES-CHANGE-INBOX.md and release checkpoints, including seemingly minor design details. Never put private trip inputs into repository documentation.
+
+Detailed current/future stages, dependencies, acceptance criteria and relative complexity: [DEVELOPMENT-STAGES.md](DEVELOPMENT-STAGES.md).
+
+
+Latest AI checkpoint: [RELEASE-2026-11-09-AI-PROPOSAL.md](RELEASE-2026-11-09-AI-PROPOSAL.md). Published implementation and passing synthetic tests are distinct from the outstanding real generation check. Pause after the selected increment; no automatic visual rollout.
