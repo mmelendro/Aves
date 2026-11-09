@@ -414,6 +414,9 @@ test("all Colombia card shapes and dots share named previews without hover armin
     const shape = find(render(),"data-region-shape",marker.slug)
     assert.equal(shape.props.children.props.d,path,"reuse exact reviewed geometry")
     assert.equal(shape.props.children.props.fillRule,"evenodd","retain holes and separate components")
+    const dot = find(render(),"data-region-marker",marker.slug)
+    assert.equal(elements(dot,node=>node.type==="circle").length,1,"no invisible dot disk stealing adjacent shape hits")
+    assert.equal(dot.props.children.props.r,"8","retain visible marker size")
     for (const attribute of ["data-region-shape","data-region-marker"]) {
       armed.current=null
       const control=find(render(),attribute,marker.slug)

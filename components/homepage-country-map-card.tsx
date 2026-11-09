@@ -65,7 +65,9 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
         </svg>
         {country === "colombia" && regions.map(region => {
           const x=20+(320-vw*scale)/2+(region.x-vx)*scale, y=60+(244-vh*scale)/2+(region.y-vy)*scale
-          return <a key={region.id} href={region.href} aria-label={`Explore ${region.name}`} {...focusRegion(region)} className={styles.location} data-active={activeId === region.id} data-region-marker={region.id}><circle cx={x} cy={y} r="8"/><circle cx={x} cy={y} r="15" fill="transparent" stroke="none"/></a>
+          // Whole shapes now supply the map hit areas. An oversized invisible
+          // dot disk would steal hover/taps from neighbouring narrow regions.
+          return <a key={region.id} href={region.href} aria-label={`Explore ${region.name}`} {...focusRegion(region)} className={styles.location} data-active={activeId === region.id} data-region-marker={region.id}><circle cx={x} cy={y} r="8"/></a>
         })}
         <g transform={`translate(${point.x-14},${point.y-14})`} pointerEvents="none"><MapFeatherMarker /></g>
       </svg>
