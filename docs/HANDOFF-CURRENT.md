@@ -2,13 +2,17 @@
 
 Updated 9 November 2026, Sydney. This is the authoritative resumption checkpoint. Earlier append-only release notes are historical. Read the linked detailed requirements; do not infer that every idea in the conversation has shipped.
 
-## Latest map-layer checkpoint
+## Combined map layers and ecotourism checkpoint
 
-South Island satellite, nine national parks and public conservation land are published from `14798a1`. Read RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md and checkpoint 05 in ROLLBACK-CHECKPOINTS.md. Continue automatically with verified public nature/conservation/heritage places and towns on South Island, then appropriate map rollouts. Soundscapes remain the next media priority. Do not treat every requested filter as delivered.
+South Island combined-layer source `1aed534`, Production `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`. Read RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md for exact verification. Satellite defaults to 55% visibility with a slider; ecosystems, parks, hatched conservation land and curated public-place/business layers combine independently. Ten public references include two ecotourism enterprises with linked evidence and clear location/claim limits. Checkpoint 06 retains recovery source and previous Production. Continue automatically using MAP-LAYER-ROLLOUT.md; other-country layers and soundscape playback are not yet delivered.
+
+## Previous map-layer checkpoint
+
+South Island satellite, nine national parks and public conservation land are published from `14798a1`. Read RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md and checkpoint 05 in ROLLBACK-CHECKPOINTS.md. The following combined release adds the public nature/conservation/heritage places and towns. Continue with appropriate map rollouts. Soundscapes remain the next media priority. Do not treat every requested filter as delivered.
 
 ## What to do next
 
-**Active follow-up authorized: continue through selected map fixes and filter pilots automatically.** Runtime `14798a1`, Production `dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM`. First-tap previews and restored Colombia boundaries are live; see RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md. The owner rejected the diagonal leader and remaining connected-map mismatch. The [feather correction](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md) now aligns the homepage cards and connected regional map palette/markers. The [first card release](RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md) is historical. Desktop, 340px reflow, keyboard and all 23 selectors passed; exact 320/390px and physical touch remain unverified. Save each small verified step and previous deployment in ROLLBACK-CHECKPOINTS.md. Continue the selected map/filter sequence; other backlog work remains separate. The owner also requested Google Maps, birding sites, intervening towns and travel times for every subregion: queued as [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md). No new purchases/subscriptions, no AI retries, and no app-branch merge.
+**Active follow-up authorized: continue through selected map fixes and filter pilots automatically.** Runtime `1aed534`, Production `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`. First-tap previews and restored Colombia boundaries are live; see RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md. The owner rejected the diagonal leader and remaining connected-map mismatch. The [feather correction](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md) now aligns the homepage cards and connected regional map palette/markers. The [first card release](RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md) is historical. Desktop, 340px reflow, keyboard and all 23 selectors passed; exact 320/390px and physical touch remain unverified. Save each small verified step and previous deployment in ROLLBACK-CHECKPOINTS.md. Continue the selected map/filter sequence; other backlog work remains separate. The owner also requested Google Maps, birding sites, intervening towns and travel times for every subregion: queued as [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md). No new purchases/subscriptions, no AI retries, and no app-branch merge.
 
 ## Active owner follow-up after the pilot
 
@@ -17,7 +21,7 @@ Continue with mobile first-tap region preview, then map filters one at a time us
 ## Repository, branches and deployment
 
 - Repository: https://github.com/mmelendro/Aves
-- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `14798a1`, Vercel deployment `dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM`.
+- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `1aed534`, Vercel deployment `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`.
 - `australia/preview`, local `australia/`: Australian website and shared account/admin/backend. Published runtime `e0c766a`, deployment `dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq`.
 - These are two app branches of the same repository. Keep them separate; do not merge their different app roots. GitHub documentation commits are newer than the published runtime commits. Documentation-only commits do not require a production deployment.
 - Live site: https://aves.bio/ ; country routes `/colombia`, `/australia`, `/new-zealand`; dedicated guide `/new-zealand/south-island`.

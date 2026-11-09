@@ -3,9 +3,17 @@
 Updated 9 November 2026. Homepage map-card pilot AVES-012c is published. Active follow-up continues automatically with deliberate region previews, restored Colombia artwork boundaries, then South Island filter pilots and verified rollouts. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Continue the newly selected map/filter sequence automatically, saving small source/deployment checkpoints with rollback instructions in ROLLBACK-CHECKPOINTS.md. Unselected backlog work remains separate. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
 
 
-## Latest delivered checkpoint
+## Combined map layers and ecotourism checkpoint
 
-South Island layer pilot is live from `14798a1`, Production `dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM`. Satellite imagery is an attributed historical 2004 overview, not live tiles. Nine national parks and DOC public conservation land share the existing Mercator frame and page-local display state. Native habitat filters remain independent. Source/licence/coverage limits and verification are in RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md. Checkpoint 05 is saved. Public places/heritage/town filters are next, then appropriate country/subregion rollouts. No other map or full filter programme is claimed complete.
+South Island combined-layer source `1aed534`, Production `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`. Read RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md for exact verification. Satellite defaults to 55% visibility with a slider; ecosystems, parks, hatched conservation land and curated public-place/business layers combine independently. Ten public references include two ecotourism enterprises with linked evidence and clear location/claim limits. Checkpoint 06 retains recovery source and previous Production. Continue automatically using MAP-LAYER-ROLLOUT.md; other-country layers and soundscape playback are not yet delivered.
+
+## Previous delivered checkpoint
+
+The earlier South Island layer pilot was published from `14798a1`, Production `dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM`. Satellite imagery is an attributed historical 2004 overview, not live tiles. Nine national parks and DOC public conservation land share the existing Mercator frame and page-local display state. Native habitat filters remain independent. Source/licence/coverage limits and verification are in RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md. Checkpoint 05 is saved. The combined release above adds public places/heritage/town filters. Appropriate country/subregion rollouts are next. No other map or full filter programme is claimed complete.
+
+## Latest owner clarification: combined layers and businesses
+
+Satellite must act as a transparent background, not an exclusive replacement for ecosystems. Keep ecosystem colours selectable above it, provide a satellite visibility control, and retain simultaneous park, conservation and public-place layers. Include a distinct ecotourism business layer with checked public locations, linked evidence, approximate-location labels where necessary, and no implied AVES partnership or certification. Apply this requirement to future map rollouts. Preserve Colombia planning boundaries and verified marker centres.
 
 ## Latest owner direction: mobile preview, South Island filters and soundscapes
 
@@ -19,7 +27,7 @@ Then continue automatically with the relevant previously requested map filters, 
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **14798a1**, deployment **dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
+- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **1aed534**, deployment **dpl_EpZR2p99nc9zy5gp8z83zpueMCKp** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
 - `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **e0c766a**, deployment **dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 

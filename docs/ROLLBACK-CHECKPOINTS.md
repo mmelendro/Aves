@@ -11,6 +11,7 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-09-03-colombia-boundaries | da820552e1c4a9a5536c36904bd11f531ede0dca | dpl_9uif85cMYtEpqv4Dy6WPtPre62jx | Main app: restored boundaries, verified marker centres and SVG Enter flow; published |
 | checkpoint/2026-11-09-04-australia-preview | e0c766a80d1150c7a0c24e1ccf54adc1336530b7 | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq | AU app: first preview/second guide; published |
 | checkpoint/2026-11-09-05-south-island-layers | 14798a16b4363d27bfff6b563470dc984520b057 | dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM | Main app: satellite, nine national parks and DOC conservation pilot; published and checked |
+| checkpoint/2026-11-09-06-combined-ecotourism-layers | 1aed534d5a295168cf445d3185876184425c671e | dpl_EpZR2p99nc9zy5gp8z83zpueMCKp | Main app: combined transparency/ecosystems and curated public places/businesses |
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
