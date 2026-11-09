@@ -1,0 +1,51 @@
+{
+  "scope": "C1c source and isolated native budget compatibility; not hosted/browser verification",
+  "sourceCommit": "ebccaf22412719813fe4ab10a861feda89931185",
+  "reviewDate": "2026-11-10",
+  "tests": {
+    "passed": 414,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativeChecks": {
+    "passed": 21,
+    "failed": 0,
+    "fixtureDataRemoved": true,
+    "servicesStopped": true,
+    "sourceFingerprint": "61c7f13dda8ed50dc22d2448d0e96bbd5d0b9d516d02249c2127147ccc0a6639"
+  },
+  "typecheck": "passed",
+  "build": "local VERCEL_ENV=preview Next.js 15.5.29 build passed",
+  "runtime": {
+    "node": "22.23.4",
+    "pnpm": "10.34.5"
+  },
+  "publicRoutes": 74,
+  "generatedStaticMetadataChecked": 55,
+  "dynamicRoutesNotChecked": [
+    "/contact",
+    "/australia/aves-explorer",
+    "/australia/contact",
+    "/australia/tours",
+    "/australia/tours/adventure",
+    "/australia/tours/vision",
+    "/australia/tours/elevate",
+    "/australia/tours/souls",
+    "/australia/about",
+    "/australia/team",
+    "/australia/about/partners",
+    "/australia/about/b-corp",
+    "/australia/conservation",
+    "/australia/blog",
+    "/australia/resources",
+    "/australia/travel-tips",
+    "/australia/privacy",
+    "/australia/terms",
+    "/australia/cookies"
+  ],
+  "browser": "not performed; C2 still needs supported browser verification",
+  "hostedDeployment": "none",
+  "hostedSqlOrDataChanges": false,
+  "productionChanges": false,
+  "externalMailSent": false
+}
