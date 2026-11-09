@@ -1,12 +1,12 @@
 # AVES — current execution prompt
 
-Updated 9 November 2026. Homepage map-card pilot AVES-012c is published at runtime `c3d911d` and paused after GitHub sync. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Do not execute the backlog automatically. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
+Updated 9 November 2026. Homepage map-card pilot AVES-012c is published and corrected at runtime `6f123b0` and paused after GitHub sync. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Do not execute the backlog automatically. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
 
 ## Correct project and published state
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **c3d911d**, deployment **dpl_BDLchEMBuMcTAkyiifguNG7ahjB5** (homepage map cards, retaining Colombia language and South Island releases).
+- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **6f123b0**, deployment **dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV** (feather map correction including connected homepage maps, retaining Colombia language and South Island releases).
 - `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **d693512**, deployment **dpl_9hrh2H4xuQumccS1qiPupqZuozV7**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 

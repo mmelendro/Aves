@@ -4,12 +4,12 @@ Updated 9 November 2026, Sydney. This is the authoritative resumption checkpoint
 
 ## What to do next
 
-**AVES-012c homepage map-card pilot is published; paused after GitHub sync.** Runtime `c3d911d`, Production `dpl_BDLchEMBuMcTAkyiifguNG7ahjB5`. Read [the release evidence and testing limits](RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md). Desktop, 340px reflow, keyboard and all 23 selectors passed; exact 320/390px and physical touch remain unverified. Do not automatically execute the rest of the backlog. The owner also requested Google Maps, birding sites, intervening towns and travel times for every subregion: queued as [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md). No new purchases/subscriptions, no AI retries, and no app-branch merge.
+**AVES-012c homepage map-card pilot is published; paused after GitHub sync.** Runtime `6f123b0`, Production `dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV`. The owner rejected the diagonal leader and remaining connected-map mismatch. The [feather correction](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md) now aligns the homepage cards and connected regional map palette/markers. The [first card release](RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md) is historical. Desktop, 340px reflow, keyboard and all 23 selectors passed; exact 320/390px and physical touch remain unverified. Do not automatically execute the rest of the backlog. The owner also requested Google Maps, birding sites, intervening towns and travel times for every subregion: queued as [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md). No new purchases/subscriptions, no AI retries, and no app-branch merge.
 
 ## Repository, branches and deployment
 
 - Repository: https://github.com/mmelendro/Aves
-- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `c3d911d`, Vercel deployment `dpl_BDLchEMBuMcTAkyiifguNG7ahjB5`.
+- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `6f123b0`, Vercel deployment `dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV`.
 - `australia/preview`, local `australia/`: Australian website and shared account/admin/backend. Published runtime `d693512`, deployment `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`.
 - These are two app branches of the same repository. Keep them separate; do not merge their different app roots. GitHub documentation commits are newer than the published runtime commits. Documentation-only commits do not require a production deployment.
 - Live site: https://aves.bio/ ; country routes `/colombia`, `/australia`, `/new-zealand`; dedicated guide `/new-zealand/south-island`.
