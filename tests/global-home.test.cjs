@@ -141,6 +141,16 @@ test("country cards are regional maps with canonical region links and no extra c
   const html = renderToStaticMarkup(React.createElement(Cards))
   const links = anchors(html)
   assert.equal((html.match(/<article /g) || []).length, 3)
+  assert.equal((html.match(/<select /g) || []).length, 3, "every card has the same touch/keyboard location selector")
+  assert.equal((html.match(/<details /g) || []).length, 3, "every card retains a full-name guide list")
+  const ids = [...html.matchAll(/<select[^>]* id="([^"]+)"/g)].map(match => match[1])
+  assert.equal(new Set(ids).size, 3, "selector labels are unique across country cards")
+  for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(html.replaceAll("&amp;", "&").includes(`>${region.name}</option>`), region.name)
+  for (const state of load("content/global-australian-map.ts").australiaMapStates) assert.ok(html.includes(`>${state.name}</option>`), state.name)
+  for (const island of load("content/new-zealand-map.json").islands) assert.ok(html.includes(`>${island.label}</option>`), island.label)
+  assert.match(html, /Representative planning locations, not regional boundaries/)
+  assert.doesNotMatch(html, /<text[^>]*>(?:NSW|WA|ACT|[0-9]+)<\/text>/)
+
   assert.doesNotMatch(html, /data-bird-carousel|regions\/null|regions\/undefined/)
   for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(links.some(link => link.href === `/regions/${region.slug}`))
   const states = load("content/global-australian-map.ts").australiaMapStates
