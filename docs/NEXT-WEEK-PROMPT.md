@@ -1,58 +1,10 @@
-## Current checkpoint — New Zealand persistent-player pilot,9November2026
-
-Published **3f3c9dc** / **dpl_FCSgEsC91SzzB63onP9Kh8pYGHFc** on aves.bio. Compact kea/feather dock for the existing South Island DOC podcasts/videos; pause, mute, expand, close and podcast seek. Playback survives connected New Zealand page navigation, resource browsing and expansion. Bird calls pause the foreground programme. Media/API loads only on explicit choice; no paid service or account/database change.
-
-133 tests, TypeScript, clean hosted build, desktop/390px/short343px checks and live podcast continuity passed; nine public routes/sitemaps200. Physical iPhone/Safari remains untested. **Full-site/cross-app continuity is still pending**: Australia/My Trips and full document navigation end playback. Do not claim the global goal complete. Recovery checkpoint10; previous runtimebf49517 remains checkpoint09. See [release/evidence](RELEASE-2026-11-09-PERSISTENT-PLAYER.md).
-
-**Pause now.** New explicit backlog:065 eBird-connected private wishlist (direct account syncing unverified);066 whole-region Colombia hover (owner priority);067 shared birds↔AVES invitation word-flip;068 truly global player with separate-app boundary review. All are recorded in this prompt/inbox, not shipped. Keep the lightweight-site standard. Earlier priorities061 landscape contour,053 soundscapes/ducking,063 saved places,064 historical/ecological context remain. No paid AI retry or new spending.
-
-Earlier checkpoint notices below are historical and superseded by this one.
-
-## Latest published increment — South Island resources, 9 November 2026
-
-Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1**. South Island has one six-resource carousel: two on-demand DOC podcast streams with feather-shaped controls, official documentary/playlist embeds and two retained reading resources. The player uses AVES kea artwork. Fiordland/Arthur’s Pass/Nelson Lakes actions connect relevant resources to the shared map; offshore footage stays distinct. An expandable field-guide section adds two verified publisher purchase links without copied prices/stock or affiliate tracking.
-
-132 automated tests, TypeScript and clean hosted build passed; desktop1280, phone390 and short343px browser checks, plus nine live public-route/sitemap checks. Physical iPhone/Safari hardware remains untested. Read [release/evidence and source verification](RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCE-PLAYER.md). Previous full-screen release is checkpoint08; current recovery branch is checkpoint09. Australia/shared accounts were not changed by this release.
-
-**Pause before the next increment.** Remaining priorities:061 logo-to-menu landscape contour;053 optional habitat soundscapes/ducking;063 saving places of interest to private briefs; newly recorded064 concise biological/ecological/historical South Island orientation using authoritative and mana whenua sources. Regional bird identity and resource-to-map links are patterns to extend after verified pilots. No paid AI retry/new spending. Earlier status/order notes below are historical and superseded by this checkpoint.
-
-## Latest published increment — South Island full-screen media, 9 November 2026
-
-Runtime **4aa0939**, Production **dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz**. Bird and landscape carousels now expand to show the complete existing photograph, retaining selected slide, controls, calls, Info and credits. Close/Escape restores the inline viewer and focus.129 tests, TypeScript and hosted build passed; desktop/phone-size browser checks and nine live route/sitemap checks completed. No physical iPhone test. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md).
-
-**Pause before the next change.** Owner priorities are now the South Island embedded resource carousel/bird-inspired player036/053, then the logo-to-menu landscape contour061. New063 places-of-interest wishes for private briefs is explicitly queued; not implemented. No new spending or AI retry. This notice supersedes older status/order notes below; previous release descriptions are historical. Australia/accounts remain unchanged.
-
-## Owner priority update — South Island first, 9 November 2026
-
-After the current full-screen pilot is published and verified, pause before the next increment. The next selected planning priority is **036/053: the South Island resource carousel with embedded podcasts/compatible videos and a discreet bird-inspired player**. Use real publisher-supported embeds, with attribution, accessible controls, privacy-aware loading and link fallback where embedding is unavailable. Reuse the existing resource collection; do not invent embed URLs, remove required publisher controls, autoplay sound, or add paid services. Start with one verified working embedded item; then expand the carousel. Coordinate calls, videos and optional habitat soundscapes so they do not compete. Habitat soundscapes remain a high priority with the existing opt-in/ducking requirements, but are not a prerequisite for this smallest embedded-resource pilot.
-
-Also promote **061: the logo's landscape contour extending toward the menu/right edge**, starting with a South Island/New Zealand header pilot. Keep the existing thin wordmark and bird identity; create a restrained landscape/bird-inspired line that scales across the available width without stretching the logo or obstructing menu, focus states or touch targets. Preserve links and mobile navigation. Do not imply an accurate terrain profile unless sourced. This is a distinct small design increment, not implemented in the current full-screen release.
-
-**063: places-of-interest wishes** stays queued with full acceptance below: parks, conservation organisations/projects and birding lodges saved with the private brief. No place-saving functionality is shipped by recording it. The owner can select these increments separately; do not silently launch all three.
-
-## New requirement — places of interest in private trip requests (AVES-063)
-
-QUEUED, 9 November 2026. Starting with South Island, let visitors add national/natural parks, conservation organisations and projects, birding lodges, and other public places of interest from maps and place carousels to their private trip brief, alongside bird wishes. Use a discreet Add/Remove control with clear selected feedback; a review list must allow removal and link back to each place. Preserve choices across habitat/region filters and full-screen viewing.
-
-Reuse the shared account/brief system. Store stable place IDs, country/region, category and source links; validate IDs on the server and keep database access restricted to the brief owner and authorised AVES owner after explicit sharing. Do not store client-provided HTML or expose private travel preferences in public URLs. Anonymous choices may be temporary, with the same explicit sign-in/save handoff as birds. Reopening/editing must retain places; sharing must include them in the owner request and future reviewed proposal input. Do not contact organisations, make reservations or imply partnerships, accreditation, availability or guaranteed conservation benefit just because a place is listed. Verify public locations, permissions, attribution and current source data; protect sensitive wildlife sites. Custom suggestions may be added as unverified notes, not automatically published map data.
-
-Smallest increment: one existing verified South Island place added, saved, reopened, removed and shared successfully, plus a second-account privacy check. Expand categories only after that passes. This is recorded, not implemented; the already authorised full-screen bird/landscape viewer pilot remains the current release. No new paid service or AI retry.
-
-## Latest published increment — South Island shared discovery, 9 November 2026
-
-Source runtime **d7e39e5**, Production **dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx**. Both South Island maps now share the featured landscape-place selection with the photo carousel and broad bird-habitat filter. Four featured places/five photos; habitat changes choose matching imagery; All restores30 birds without losing the selected photo. This does not claim site-specific bird occurrence or connect arbitrary park/business markers to unverified photos. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md).
-
-Verification:129 tests, TypeScript, successful hosted build, all four place transitions at desktop1280/390/320px on the exact protected candidate; live desktop/phone checks with no browser errors and34 live route/asset/sitemap checks. No physical iPhone touch test. Australia/accounts are unchanged. Previous main deployment is checkpoint06; new recovery source is checkpoint07.
-
-**Pause now**, as requested for this increment. Next proposed small release is South Island full-screen viewing with selection/controls/credits preserved, Escape/Close and focus restoration. Full-screen, multi-photo expansion beyond the existing collection, global continuous transitions and habitat soundscapes remain queued. No new paid service or AI retry is authorized. This notice supersedes older runtime/order/pause notes below.
-
 # AVES current execution prompt
 
-Updated 9 November 2026. **Implementation is paused at the owner's request.**
-This update consolidates requirements only. Do not change code or deploy until
-the owner resumes work. On resumption, continue the selected programme in small
-verified increments without asking again at every step. The present pause
-supersedes earlier automatic-continuation instructions until then.
+Updated 9 November 2026. AVES-066 is the only selected increment: whole-region
+Colombia hover on the main homepage country card, verification, publication,
+GitHub sync and then pause. The release/status authority is HANDOFF-CURRENT.md.
+Do not start another upgrade automatically. Broader requirements below remain
+retained scope, not instructions to redo published pilots.
 
 ## Start from the correct checkpoint
 
@@ -65,7 +17,7 @@ Repository: https://github.com/mmelendro/Aves
 
 | App branch | Scope | Published runtime | Production deployment |
 | --- | --- | --- | --- |
-| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | d7e39e5 | dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx |
+| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 6856389 | dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw |
 | australia/preview | Australia and shared accounts/backend/admin | e0c766a | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq |
 
 Keep the app roots separate. Documentation commits are newer than these runtime
@@ -94,12 +46,17 @@ overlapping categories deduplicated. This is a pilot, not complete coverage.
 Satellite imagery dates to 2004; LCDB land cover is 2023/24 and generalised to
 about 2 km. Zoom does not create new detail or guaranteed wildlife sightings.
 
-See [combined-layer release](RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md),
-[region preview/boundaries release](RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md)
-and [recovery checkpoints](ROLLBACK-CHECKPOINTS.md). Latest main release passed
-128 tests, type/build checks, desktop/keyboard/340px browser reflow and 31 live
-route/asset/sitemap checks. Exact 320/390px and physical phone touch remain
-unverified for this release. Do not inherit older releases' testing claims.
+The newer South Island releases also deliver shared featured-place/photo/habitat
+selection, bird/place full-screen pilots, a six-resource carousel, field-guide
+links and a layout-owned kea podcast/video dock. The dock persists through
+connected New Zealand navigation only. Full-site/Australia/My Trips continuity
+is still AVES-068, not delivered. Habitat soundscapes remain unimplemented.
+
+AVES-066 uses the existing eleven Colombia paths, full-name keyboard controls
+and existing guide URLs. Shapes and visible dots preview the same region; hover
+and focus do not arm navigation. Boundaries, positions and existing media are
+unchanged. See RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md for exact evidence and
+limitations. Earlier immutable release reports remain under docs/RELEASE-*.
 
 ## Coherent experience to build next
 
@@ -134,7 +91,7 @@ Preserve ordinary page scrolling and browser pinch zoom; intentional map
 gestures must not trap the page. Shared account routes remain separate/private.
 
 This extends 003a-2, 006c and 055. Existing homepage zoom is only a foundation;
-continuous transitions through all map/detail levels are not yet delivered.
+continuous transitions through every map/detail level remain incomplete. South Island already has the connected discovery pilot; do not rebuild it.
 
 ### 2. Full-screen maps, photos and complete carousels
 
@@ -153,8 +110,9 @@ aspect ratio and readable labels/legends. Keep Close/Escape, focus containment
 and restoration, mobile/short-screen usability and native gestures. Opening and
 closing must not reset wishes, duplicate audio or restart a slideshow.
 
-This extends photo zoom 051 and shared map/media controls. Full-screen access
-across all cards is newly requested and is not implemented by the layer pilot.
+This extends photo zoom 051 and shared map/media controls. South Island bird/place full-screen access is published. Full-screen maps and
+full-site coverage remain incomplete; extend the working pilot rather than
+replacing it.
 
 ### 3. Several photographs for each location and habitat
 
@@ -232,7 +190,8 @@ consistent and disclose legitimate provider limits.
 Coordinate the embedded resource carousel 036, checklist media previews 039 and
 audio coordination instead of building separate players per page. The prompt
 priority is recorded; habitat soundscape playback and the unified player family
-have not yet been implemented.
+are incomplete: the NZ podcast/video dock and resource carousel are published,
+but habitat soundscapes and a fully global player are not.
 
 ### 6. Route planning for each subregion
 
@@ -272,9 +231,8 @@ Save small source commits, named recovery branches, the previous/new exact
 Production deployments and quick rollback/rebuild instructions in
 [ROLLBACK-CHECKPOINTS.md](ROLLBACK-CHECKPOINTS.md). Do not overwrite a shared branch
 or assume deployment artifacts are retained forever. Sync the correct app and
-shared handoff to GitHub. Continue the selected programme automatically after
-verified checkpoints unless the owner pauses it or a specific data/access gate
-blocks safe progress. **The programme is currently paused.**
+shared handoff to GitHub. After the selected AVES-066 release is verified and synced, pause. The owner
+chooses the next increment. Do not revive older automatic-continuation orders.
 
 No new spend, subscriptions, broad secret pulls, weaker privacy or app-root merge.
 AI proposal drafting 059 remains deferred because the account cannot satisfy the
@@ -294,8 +252,8 @@ requirements merely because this prompt concentrates on discovery and media.
 The previous prompt is preserved in
 [EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md](EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md).
 Historical release notes are evidence, not current instructions to overwrite a
-newer owner decision. No implementation of the new transition/full-screen/
-multi-photo/player requirements started during this documentation pause.
+newer owner decision. This older consolidation originally preceded the later South Island discovery,
+full-screen and player pilots. Current delivered scope is in HANDOFF-CURRENT.md.
 
 
 ### Retained owner refinement — contextual history064
@@ -310,9 +268,9 @@ Extend the existing private bird selections rather than introducing a second sho
 Sources: https://support.ebird.org/en/support/solutions/articles/48001078113 ; https://support.ebird.org/en/support/solutions/articles/48000960317 ; https://www.birds.cornell.edu/home/ebird-api-terms-of-use/ .
 
 
-## AVES-066 — Colombia whole-region map hover (queued, owner priority)
+## AVES-066 — Colombia whole-region map hover (delivered in this increment)
 
-Homepage country cards: Colombia currently responds at location dots, while Australia/New Zealand respond across region shapes. Make the Colombian planning-region area itself preview/highlight the corresponding region on pointer hover and keyboard focus; retain dots as location markers and maintain first tap preview, second/Explore guide navigation, clear selected state, touch and native modifier behaviour. Inspect source geometry before mapping shapes: planning regions may overlap and must not be misrepresented as official administrative boundaries. Provide accessible equivalent region links and test all 11 destinations. Owner reported9 November2026; queued separately from the persistent-player pilot.
+Homepage country cards: Colombia currently responds at location dots, while Australia/New Zealand respond across region shapes. Make the Colombian planning-region area itself preview/highlight the corresponding region on pointer hover and keyboard focus; retain dots as location markers and maintain first tap preview, second/Explore guide navigation, clear selected state, touch and native modifier behaviour. Inspect source geometry before mapping shapes: planning regions may overlap and must not be misrepresented as official administrative boundaries. Provide accessible equivalent region links and test all 11 destinations. Owner reported 9 November 2026. Delivered in this increment; see RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md. Remains scoped to homepage country cards.
 
 
 ## AVES-067 — Reuse birds ↔ AVES invitation animation (queued,9November2026)

@@ -15,8 +15,8 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-09-07-south-island-discovery | d7e39e5 | dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx | Shared featured place/photo/habitat state in both maps;129 tests, desktop/390/320px and34 live route/asset checks |
 | checkpoint/2026-11-09-08-south-island-fullscreen | 4aa0939 | dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz | Bird/place full-screen pilot;129 tests, desktop/phone layouts, nine live routes/sitemaps |
 | checkpoint/2026-11-09-09-south-island-resources | bf49517 | dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1 | Kea resource carousel, embedded DOC audio/video, map actions and field-guide purchase links;132 tests and desktop/phone verification |
-
 | checkpoint/2026-11-09-10-persistent-player | 3f3c9dc | dpl_FCSgEsC91SzzB63onP9Kh8pYGHFc | Layout-owned kea dock; NZ route continuity,133 tests, desktop/phone/short-frame and live checks; global cross-app target pending |
+| checkpoint/2026-11-09-11-colombia-region-hover | 685638984d721f16ee9cc2e7a035a148cfee709e | dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw | Main homepage Colombia whole-region hover/focus; prior runtime 3f3c9dc remains checkpoint 10 |
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.

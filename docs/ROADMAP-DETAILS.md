@@ -1,44 +1,22 @@
-# AVES roadmap — detailed acceptance criteria
+# AVES detailed acceptance criteria
 
-**Current release — 9 November 2026: published and paused.** South Island/regional zoom is live: source5847eb7 / dpl_GMPLFwPviWsLq73i9JJBjCNvkaja; AU6ba7fee / dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv. Desktop/mobile and live sitemap checks passed within the limits recorded in [RELEASE-2026-11-09-SOUTH-ISLAND.md](RELEASE-2026-11-09-SOUTH-ISLAND.md). A1 is complete; B1 private-brief verification is the next proposed increment, not started. Announce model/effort before resuming; Sol medium recommended. This notice overrides older staged/paused status below.
+Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for current delivered scope, runtime
+and permission to proceed. This document retains the full product requirements.
+The dated priority headings below describe the original planning sequence, not
+a command to repeat completed releases. Historical state/order notices were
+archived in [the pre-066 snapshot](archive/2026-11-09-before-aves-066/README.md).
 
-**Current owner instruction — 9 November 2026 (Sydney): planning only; publishing remains on hold.** Read [AGILE-PLAN.md](AGILE-PLAN.md) for the revised incremental order/model guidance and [SITE-ARCHITECTURE.md](SITE-ARCHITECTURE.md) for the expandable hierarchy preview. Announce a model/effort recommendation before every increment (or say keep the current model). AVES-033 now requires sitemap review/update and stage/live verification for every deployment; the public expandable tree is queued, not implemented. Existing staged candidates and last verified live versions are unchanged by this docs session; provider state was not rechecked today. This notice overrides older resume/order instructions below.
+## Verified pilot status, 9 November 2026
 
-**Paused at the owner's request, 8 November 2026.** Read [PAUSED-CHECKPOINT-2026-11-08.md](PAUSED-CHECKPOINT-2026-11-08.md) first. South Island/regional-zoom app candidates5847eb7/6ba7fee are pushed and staged READY but NOT promoted; aves.bio still runs95c9f75/721370e. Finish source hosted/live verification after explicit resume. New pricing, credits-carousel and Equal Earth recentering requests are recorded there; pricing has a separate untested draft. This notice takes precedence over older status text.
+Delivered: country dividers and base Equal Earth discovery; homepage country-card
+consistency and first-tap previews; Colombia planning boundaries; South Island
+habitat/place/photo connection, map controls/scale, bird/place full-screen pilot,
+resource carousel/field-guide links and NZ persistent kea media dock. AVES-066
+adds full Colombia shape hover/focus on homepage cards. Broader rollouts, richer
+photo collections, habitat soundscapes and cross-app media continuity are not
+implied. See the current handoff and release evidence for precise limits.
 
-**Updated: 8 November 2026 (Sydney).** Improve https://aves.bio in small, tested releases. The canonical execution prompt is NEXT-WEEK-PROMPT.md. This file retains detailed requirements; read only the section relevant to the chosen release. Current handoff/status takes precedence over historical release narratives.
-
-**Owner priorities:** country dividers, the first private NZ questionnaire/bird-selection pilot and the base Equal Earth homepage map are delivered. With the shared Info rollout complete, next prioritise South Island trip readiness (page, guidance/resources and pilot feedback), then the Sydney launch product. Country zoom/map polish and other enhancements follow; do not turn them into prerequisites. Updating the prompt does not resume implementation.
-
-## Project, current state and working mode
-
-Repository: https://github.com/mmelendro/Aves
-- `webmaster/readiness-2026-11-05`: global homepage, Colombia and New Zealand.
-- `australia/preview`: Australia and the shared account/contact/quote backend.
-
-These are currently independent applications. Keep branches separate, publish only affected apps and keep planning mirrors current until a separately selected AVES-020 consolidation safely replaces this arrangement. Do not directly merge the current application branches. Read the current sections of both `CONTINUE-HERE.md` files and `docs/AVES-CHANGE-INBOX.md`; older history only as needed. Inspect the selected feature before changing it and distinguish live, GitHub and laptop-only work.
-
-**Completed:** AVES-008 speaker availability cue, AVES-001a Santa Marta editorial pilot, AVES-009 Google login and verified AVES branding with info@aves.bio support, and AVES-006 country dividers across all three destinations. Every featured bird highlights a supported region (Colombia 22, Australia 20, NZ 31). The usable private NZ questionnaire + bird-selection + guest-to-owner pilot is published (AVES-005a-1 / AVES-005b-1 / AVES-004a-1): 432 published checklist entries, 377 living selectable, 55 historical extinct; 31 licensed media profiles. Real guest feedback remains pending. **AVES-003a is now published and verified** in source commit `15886fa`, deployment `dpl_E3LUQzFAS4ZfXKW4yNiHufSQXpb2`: centered homepage title, smaller world-map labels, one switching country carousel and three regional-map cards below. All three country routes passed live desktop/phone-sized checks; representative photos/calls/credits and map-to-region links passed. **AVES-003a-1 is now verified and published** in source `c465a09`, deployment `dpl_G3kfnLQ9aF6mWpA4zcH4Qnih2Jai`: the homepage reuses the country-page drag/keyboard/reset divider, keeps the split across country switches and preserves bird/details/audio across viewport resizing. Narrow screens stack media before the map and hide the divider. The historical AVES-011 three-card-carousel presentation is superseded on the global homepage only. AVES-003b ecological layers, AVES-015 card flip and AVES-016 NZ resource/depth expansion remain queued. Preserve completed work; do not reimplement it. Paused before the next explicitly selected increment.
-
-**Implementation remains paused** until the owner selects a release. Then complete that selected release through testing, publication, GitHub sync and checkpoint updates, and pause before the next one. Do not execute this entire roadmap automatically. Use relative effort, not invented ChatGPT quota estimates. Reuse current components, source data and working accounts; avoid whole-site audits, speculative rewrites, new services and repeated research. Address a confirmed security/privacy failure, broken essential journey or materially misleading claim when encountered, without expanding a small task into an unrelated audit.
-
-Keep the emerald style, thin AVES lettering, country bird/landscape marks, discreet media controls, licences/credits, shared `/account` and working quote/security flows. Keep newcomer-friendly explanations in changed code. Narrow phones retain bird media first, then the map on country discovery pages. Public B Corp status remains pursuing, not certified. Private guest details and trip plans never belong in GitHub or public pages.
-
-## Remaining work at a glance — planning review, 8 November 2026
-
-The country/homepage dividers, usable private NZ questionnaire/bird-selection pilot, Google login/branding and base world-map homepage are delivered. Do not rebuild those foundations. A real guest/physical-device trial remains unverified. The full ecological-map parent is still incomplete. This review adds requirements and dependencies, not permission to execute the whole backlog or a replacement for the owner's priority order.
-
-| Remaining stream | Scope and sensible next batch | Dependencies / limits |
-| --- | --- | --- |
-| Map language and layout consistency — AVES-012c / AVES-012a | Standardise the three homepage country-map cards first; reuse the agreed map presentation on country heroes, region/subregion, experience and article maps in small batches. | Format/style/interaction consistency; geographic detail and correct boundaries remain destination-specific. Complete the map-card foundation before animating it. |
-| NZ trip-planning depth — AVES-007 / AVES-016 | South Island page and useful travel/planning guidance first; then North Island/Rakiura and curated learning resources, at least Colombia's depth with simpler navigation. | Use the existing private brief/wishlist. Essential NZ content can progress independently of map overlays, animation or a whole-site visual overhaul. Real guest feedback is pending. |
-| Regional media and editorial quality — AVES-012b / AVES-001 / AVES-002 / AVES-010 | Rich locally relevant bird viewers, less repeated copy, greater Colombian regional variety and properly sourced cultural experiences/bird significance. | Reuse licensed media and one useful viewer per section; preserve notes/sources/depth. Combine research and copy work for the same small regional batch. |
-| Ecological world-map layers — AVES-003b | Megadiverse-country and actual biodiversity-hotspot layers, with accessible what/why explanations and a distinction from available destinations. | Existing base map is done; this is a separate source/licence/geometry increment, not a reason to redo it. |
-| Regional map-to-bird card flip — AVES-015 | A selected region reveals its local bird carousel on the reverse; start with NZ/South Island. | Depends on the shared map language, stable region IDs and locally valid media. Reduced motion, focus and audio cleanup are part of this feature; animation does not block trip planning. |
-| Broader planning platform — AVES-004 / AVES-005 remainder | Refine the questionnaire after feedback; extend wishlists, guest/account merge, optional bingo/collaboration; human-reviewed routes and verified supplier records, then AI assistance. | First usable private pilot is already delivered. Do not add a second preference model, database or booking flow merely to expand it. |
-| Low-priority / deferred items | Full Colombian Spanish (`es-CO`, AVES-014); broader localisation, Facebook login, authorised video expansion and friendlier expired-Google-session handling. | Preserve the working Google/account setup; implement only a selected small release. Detailed local ecosystem maps (AVES-013) remain unconfirmed/deferred. |
-
-Suggested next *visual* increment: AVES-012c on the three homepage map cards, before a 3D flip. For NZ trip readiness, AVES-007 and AVES-016 remain a parallel, independently useful stream; do not turn map standardisation into a large prerequisite. The detailed requirements below remain the acceptance criteria. Pause until the owner chooses an implementation batch.
+Pause after AVES-066. No other upgrade is selected by this cleanup.
 
 ## Priority 1 — working divider on the three country homepages (AVES-006)
 
@@ -256,7 +234,7 @@ Existing evidence: four South Island source tests rerun successfully on 9 Novemb
 
 Current release supports private NZ budget denomination only (NZD/AUD/USD/CAD/EUR/GBP); changing a code keeps entered numbers and explicitly does not convert them. In a separate increment, consider one reusable discreet currency control wherever monetary values appear. Use verified dated exchange rates, clear estimated-conversion disclosure, appropriate rounding/formatting, safe caching/provider limits and original contract/proposal currency retained. Separate accommodation per-person/night, food/activities per-person/day and transport/flights; do not invent conversion rates or imply estimates are bookable prices. Booking/car/transfer choices remain future private questionnaire refinements; no actual arrangements are assumed.
 
-## AVES-036 — approved resource embeds, queued
+## AVES-036 — resource embed criteria (South Island pilot published)
 
 Embed curated podcasts, documentaries and videos when the publisher supports lawful embedding, matching the Colombian resource pattern and existing AVES style. Preserve original links, creator/licence credits, captions and fallback access. Prefer lazy/click-to-load approved embeds, no autoplay or media downloads to evade restrictions; review third-party privacy/performance and mobile-data use. Verify actual playback and keyboard/mobile behavior, disclose untested or blocked players. Existing South Island resource cards remain usable until this separately selected increment ships.
 
@@ -279,7 +257,7 @@ The map is explicitly a roughly2km land-cover proxy, NOT a precise ecosystem sur
 Remaining034/013: featured place/city overlays, richer ecological or marine data only if justified and verified, other-region imagery audits and separately selected rollouts. Actual satellite imagery remains021. Do not reimplement the delivered filter/map; do not treat the whole map programme as complete.
 
 
-## AVES-037 — South Island places carousel, next proposed increment
+## AVES-037 — place carousel criteria (South Island pilot published)
 
 Owner follow-up,9November2026: replace the four text-only Habitats & places cards with a place-focused map/photo carousel in the established AVES duo style. Start with the existing Arthur’s Pass, Nelson Lakes, Fiordland and Otago/Catlins entries; show real photographs of the places, not another bird-only collection. Keep concise place/habitat notes, practical balance suggestions, original official links, clear collection/place titles and source/licence credits. Connect the selected place to a truthful local map cue or appropriately framed map view using verified geography, without invented regional boundaries, precise wildlife/nest pins or implied trip reservations. Preserve broader South Island/country navigation and the separate bird-habitat filter.
 
@@ -290,7 +268,7 @@ Prepare the content model for later owner-created drone/location videos, continu
 Suggested smallest next release after owner selection: verify a licensed image and map location for each existing place, implement one shared place explorer for South Island, test desktop/mobile/short frames and official links, publish/sync/pause. Keep Sol medium. The current LCDB map release is complete; this037 carousel is queued, not implemented, and does not revoke the requested pause.
 
 
-## AVES-038 — South Island map zoom, independent small increment
+## AVES-038 — map zoom criteria (South Island controls/scale published)
 
 Owner request,9November: add discreet Zoom in, Zoom out and Reset controls to the South Island habitat map. Preserve selected habitat, linked birds/wishlist, actual projection/aspect ratio, source attribution and Back to country. Use bounded zoom and sensible pan only when useful; keep keyboard/touch controls and visible focus. Consider optional deliberate touch pinch, preserving ordinary page scrolling and browser accessibility zoom; do not capture all wheel/touch events. Fit/reset must recover the full island and prevent getting lost outside the map. Test narrow widths, divider extremes and reduced-motion behavior. Clearly retain the roughly2km source resolution: zoom enlarges the overview, not ecological precision, street/satellite detail or sensitive species locations. No new map provider/charge by default. Smaller separate candidate than037; select one release, test/publish/sync/pause. Queued, not yet implemented.
 
@@ -359,7 +337,7 @@ Use matching lowercase italic faces, “birds” ↔ “aves”, in the SAME inh
 
 Owner follow-up,9November: refresh the team page, possibly one or two carousels. First inventory verified people, portraits, roles, biographies and available licensed/owner media. One people/roles carousel could be complemented by an optional field-stories/behind-AVES gallery if genuine material makes that useful; do not force two sliders or invent a larger staff/partner team. Verify every qualification, employment/guide role, language, experience claim and contributor relationship before publication. Retain readable essential names/roles/bios, existing person anchors (including #martin-melendro), direct links and clear contributor/media credit distinctions. Reuse accessible media/layout patterns, keep touch/keyboard/reduced-motion controls and meaningful non-carousel access. Lower-priority proposal, not implemented in the word-flip release.
 
-## AVES-046 — homepage country/region double-click navigation, queued
+## AVES-046 — deliberate region preview/navigation (published; no rapid double tap)
 
 Owner follow-up,9November: double-clicking a country name on the main homepage should open its country page; the same shortcut should work for geographical region/subregion controls. Single-click retains existing preview behavior where applicable. Keep explicit Explore links and single-activation keyboard/touch alternatives; never require double taps on phones or hijack native browser zoom. Audit controls first: preserve direct region links that already navigate rather than turning every link into a two-click interaction. Resolve only real published URLs/current anchors; do not invent North Island or other unpublished routes. Avoid duplicate navigation/races after the first click's map transition, maintain browser Back/Forward, modifier/new-tab native link behavior and selected context. Coordinate with006c/043 while keeping habitat filters separate from geographical navigation. Not part of the word flip.
 
@@ -380,7 +358,7 @@ Homepage word animation published in source3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3eso
 
 Owner requested on 9 November 2026 that the country-logo birds eventually become flying 3D models of their actual species. Continue the established motmot / Superb Fairywren / kea family and master-brand discussion032; verify the current species and logo choices before implementation. First prepare one restrained motion pilot with an accurate silhouette, land connection and the thin AVES wordmark, preserving separate global/country logo links. Compare a lightweight pre-rendered transparent animation with an interactive model before choosing a delivery format: no heavy WebGL dependency across every header by default. Retain an accessible static SVG/image fallback, reduced-motion support, mobile/data/battery performance and licensed/owner-owned assets. Treat this as a later branding decision, not part of the South Island place-card release.
 
-## AVES-051 — optional high-quality photograph zoom, queued
+## AVES-051 — photograph zoom criteria (South Island fit/full-screen pilot published; deeper zoom remains scoped)
 
 Owner requested zoom-in and pinch interaction where source quality supports it. Audit originals and rights before offering magnification; do not fabricate detail or imply 8K quality. Start with one shared media-viewer pilot, with explicit zoom in/out/reset/close buttons, keyboard equivalents, focus restoration and touch pinch support; retain native browser/page zoom and scrolling outside an intentional viewer. Keep captions/credits, sensible maximum magnification and low-resolution fallback, and load larger authorized renditions only on demand. Shared bird and place viewers should reuse the eventual solution rather than inventing page-specific gestures. This is separate from map zoom038 and is not implemented in the flip-card pilot.
 
@@ -450,3 +428,8 @@ Owner request, 9 November 2026: integrate Google Maps with a list of main birdin
 ### AVES-012c owner correction after mobile review, 9 November 2026
 
 Owner rejected crossing connector lines and the remaining numbered/shaded connected map versus the new cards. Runtime `6f123b0` removes card leaders, puts full names in feather-accented labels above the geometry, shares a feather selection marker, and aligns the connected homepage maps' palette/markers. Region filtering, zoom, native selection and guide URLs remain. Published and verified, with precise mobile limits in [the correction checkpoint](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md). Country/subregion page rollout remains separate and queued.
+
+
+## AVES-066 — Colombia whole-region hover, delivered
+
+Homepage country-card region shapes and location dots share the existing preview/navigation logic, full region names and canonical guide links. Preserve original planning artwork, boundaries and marker positions. Hover/focus must not arm navigation; first deliberate activation previews, later activation or Explore opens the guide. Fixed paint order resolves tiny source smoothing overlaps; oversized invisible marker disks must not steal neighbouring shape hits. Full acceptance and actual verification are in RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md. No country-hero or Australia app redesign is included.
