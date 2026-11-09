@@ -1,0 +1,24 @@
+.carousel { margin-top:2rem; }
+.toolbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; }
+.select { min-height:44px; min-width:0; width:min(100%,34rem); border:1px solid #a7f3d0; border-radius:.75rem; background:#fff; color:#064e3b; padding:.65rem; font-size:1rem; text-overflow:ellipsis; }
+.card { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); overflow:hidden; border:1px solid #a7f3d0; border-radius:1.5rem; background:#fff; }
+.player { display:flex; flex-direction:column; min-width:0; background:linear-gradient(145deg,#ecfdf5,#f7fcfa 65%,#e4f0eb); padding-top:1.5rem; }
+.copy { min-width:0; padding:2rem; align-self:center; }
+.illustration { color:#007a60; text-align:center; padding:1rem 1.5rem; }
+.illustration > svg:first-child { margin:auto; }
+.contour { display:block; width:100%; max-width:26rem; height:60px; margin:.5rem auto 0; fill:none; stroke:currentColor; stroke-width:1; opacity:.45; }
+/* A feather-like outline frames familiar icons; the hit area stays at least44px. */
+.feather { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; min-width:44px; min-height:44px; border:1px solid #87c5b0; border-radius:70% 30% 65% 35%; color:#065f46; background:#effaf5; }
+.feather:hover { background:#d1fae5; border-color:#047857; }
+.feather:focus-visible,.select:focus-visible,.range:focus-visible,.unload:focus-visible,.link:focus-visible { outline:2px solid #047857; outline-offset:4px; }
+.feather:disabled { opacity:.4; }
+.play { width:64px; height:64px; margin:0 auto; color:white; background:#047857; border-color:#047857; }
+.play:hover { color:#064e3b; }
+.audioControls { padding:1.25rem 1.5rem 0; }
+.range { display:block; width:100%; min-height:44px; accent-color:#047857; }
+.link { display:inline-flex; align-items:center; min-height:44px; margin-top:1rem; color:#006b56; text-decoration:underline; text-underline-offset:4px; font-size:.875rem; }
+.mapLink { display:inline-flex; align-items:center; gap:.4rem; min-height:44px; color:#006b56; text-decoration:underline; text-underline-offset:4px; font-size:.875rem; }
+.mapLink:focus-visible { outline:2px solid #047857; outline-offset:4px; }
+.video { width:100%; min-height:200px; aspect-ratio:16/9; border:0; background:#071b17; }
+.unload { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; align-self:flex-end; min-height:44px; margin:.5rem 1rem 0; padding:0 .75rem; border-radius:1rem; color:#065f46; font-size:.875rem; }
+@media(max-width:703px) { .card { grid-template-columns:minmax(0,1fr); } .copy { padding:1.25rem; } .player { padding-top:1rem; } .select { flex-basis:100%; } .illustration { padding-top:.5rem; } }

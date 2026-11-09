@@ -306,3 +306,41 @@ test("shared discovery keeps featured place, photo and habitat coherent from eit
   assert.equal(reduce(state, { type: "slide", index: NaN }), state)
   assert.deepEqual(initial, { habitat: "all", slideIndex: 0 }, "initial shared state is not mutated")
 })
+
+
+test("resource carousel retains all six sources and keeps external media unloaded before consent", () => {
+  const resources = load("content/south-island.ts").southIslandResources
+  assert.equal(resources.length, 6)
+  assert.equal(new Set(resources.map(item => item.id)).size, 6)
+  assert.equal(resources.filter(item => item.playback?.type === "audio").length, 2)
+  assert.equal(resources.filter(item => item.playback?.type === "youtube").length, 2)
+  for (const item of resources) {
+    assert.ok(item.description && item.context && item.publisher && item.href.startsWith("https://"))
+    if (item.playback?.type === "audio") assert.match(item.playback.src, /^https:\/\/media\.blubrry\.com\/doc_sounds_of_science\/content\.blubrry\.com\/doc_sounds_of_science\/[^?]+\.mp3$/)
+    if (item.playback?.type === "youtube") {
+      assert.equal(new URL(item.playback.src).origin, "https://www.youtube-nocookie.com")
+      assert.ok(!new URL(item.playback.src).searchParams.has("autoplay"))
+    }
+  }
+  const Carousel = load("components/south-island-resource-carousel.tsx").default
+  const html = renderToStaticMarkup(React.createElement(Carousel))
+  assert.match(html, /aria-roledescription="carousel"/)
+  assert.match(html, /Choose a South Island resource/)
+  assert.equal((html.match(/<option /g) || []).length, 6)
+  assert.equal((html.match(/<article /g) || []).length, 1)
+  assert.doesNotMatch(html, /<iframe|<audio[^>]+src=|autoplay=/)
+  assert.match(html, /aria-label="Play podcast"/)
+  assert.match(html, /Podcast position/)
+  assert.match(html, /href="https:\/\/www\.doc\.govt\.nz\/news\/podcast\/"/)
+})
+
+
+test("resource map references use reviewed places and never map offshore footage onto the mainland", () => {
+  const resources = load("content/south-island.ts").southIslandResources
+  const places = load("content/south-island-place-media.ts").southIslandPlaceContexts
+  for (const resource of resources) {
+    if (resource.mapPlace) assert.ok(places.some(place => place.id === resource.mapPlace.id && place.label === resource.mapPlace.name))
+  }
+  assert.equal(resources.find(resource => resource.id === "kiwi-diaries").mapPlace.name, "Fiordland")
+  assert.equal(resources.find(resource => resource.id === "kakapo-highlights").mapPlace, null)
+})
