@@ -475,3 +475,31 @@ test("invalid, duplicate and extinct targets fail before account writes", async 
     assert.equal(h.queries.length, 0)
   }
 })
+
+test("private budgets preserve currency, zero and upper bounds through validation and summaries", () => {
+  const load = require("./helpers/load-ts.cjs")()
+  const { questionnaireSchema } = load("lib/account-models.ts")
+  const { planningSummary } = load("content/planning-questionnaire.ts")
+  const { budgetCurrencies } = load("content/trip-budget.ts")
+  assert.deepEqual(questionnaireSchema.parse(nzAnswers), nzAnswers)
+  for (const currency of budgetCurrencies) {
+    const budget = { currency, accommodation: 0, food: 10000 }
+    const parsed = questionnaireSchema.parse({ ...nzAnswers, budget })
+    assert.deepEqual(parsed.budget, budget)
+    const lines = planningSummary(parsed)
+    assert.match(lines.find(line => line.label === "Accommodation budget").value, new RegExp(currency + ".*0"))
+    assert.match(lines.find(line => line.label === "Food budget").value, /10,000/)
+    assert.ok(!lines.some(line => line.label === "Activities budget"), "blank categories stay undecided")
+  }
+})
+
+test("malformed private budgets fail before any account write", async () => {
+  for (const budget of [null, [], {}, { currency: "AUD" }, { currency: "XXX", food: 20 },
+    { currency: "AUD", food: -1 }, { currency: "AUD", food: 10001 }, { currency: "AUD", food: 0.5 },
+    { currency: "AUD", food: "20" }, { currency: "AUD", food: null }, { currency: "AUD", food: 20, role: "owner" }]) {
+    const h = harness()
+    const response = await h.plansPost(request({ id: planId, title, ...nzDetails, questionnaire: { ...nzAnswers, budget } }))
+    assert.equal(response.status, 400, JSON.stringify(budget))
+    assert.equal(h.queries.length, 0)
+  }
+})

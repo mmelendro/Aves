@@ -34,6 +34,12 @@ let phase = 'bootstrap', db, sql, mailFailure = false
 const report = {scope:'isolated local native services; synthetic data only',testedAt:new Date().toISOString(),applicationRevision:execFileSync('git',['rev-parse','HEAD'],{cwd:repo,encoding:'utf8'}).trim(),productionChanged:false,externalMailSent:false,findings,
   limitations:['No browser automation or physical phone run against this local stack','No hosted Google OAuth, provider redirect allowlist or real inbox delivery is verified','Fresh native PostgreSQL/Auth/PostgREST are representative services, not the hosted Supabase configuration','SMTP mail and Resend-compatible responses are captured locally; provider acceptance is simulated']}
 report.harnessSha256=Object.fromEntries(await Promise.all(['native-runtime.mjs','native-flows.mjs','run-native.py'].map(async file=>[file,createHash('sha256').update(await readFile(join(repo,'tests/integration',file))).digest('hex')])))
+// Fingerprint actual local source without reading ignored env/runtime data.
+const sourceFiles=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{cwd:repo,encoding:'utf8'}).split('\0')
+  .filter(file=>file && !file.startsWith('docs/') && /\.(?:ts|tsx|mjs|cjs|css|json|yaml|sql|py)$/.test(file)).sort()
+const sourceHashes=await Promise.all([...new Set(sourceFiles)].map(async file=>file+'\0'+createHash('sha256').update(await readFile(join(repo,file))).digest('hex')))
+report.applicationSourceFingerprint=createHash('sha256').update(sourceHashes.join('\n')).digest('hex')
+report.applicationWorkingTreeDirty=Boolean(execFileSync('git',['status','--porcelain'],{cwd:repo,encoding:'utf8'}).trim())
 const pause = ms => new Promise(done=>setTimeout(done,ms))
 const jwt = role => {
   const header = Buffer.from(JSON.stringify({alg:'HS256',typ:'JWT'})).toString('base64url')
@@ -125,8 +131,11 @@ async function signup(email,{legacy=false,confirm=true}={}) {
 
 try {
   await check('matching PostgreSQL 17.11 starts without Docker',async()=>{
-    const linkage=JSON.parse(await readFile(join(repo,'.vercel/project.json'),'utf8'))
-    assert.equal(linkage.projectId,'prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv')
+    // These fixtures use no hosted project. The HTTP helper separately rejects
+    // every off-target origin, including during callback redirects.
+    assert(!resolve(qa).startsWith(repo+'/') && !resolve(runtime).startsWith(repo+'/'),'Use disposable fixture directories outside the checkout')
+    assert.equal(new URL(appUrl).hostname,'127.0.0.1')
+    assert.equal(new URL(supabaseUrl).hostname,'127.0.0.1')
     db=new EmbeddedPostgres({databaseDir:join(qa,'postgres'),port:ports.postgres,user:'postgres',password:pgPassword,persistent:false,autoRehydrateSymlinks:true,postgresFlags:['-c','unix_socket_directories=','-c','listen_addresses=127.0.0.1'],onLog:()=>{},onError:()=>{}})
     await db.initialise();await db.start();sql=db.getPgClient();await sql.connect()
     const version=(await sql.query('show server_version')).rows[0].server_version;assert(version.startsWith('17.11'));report.postgres=version
@@ -173,8 +182,8 @@ try {
     await waitHttp('http://127.0.0.1:'+ports.auth+'/health',auth)
     report.auth='2.197.0'
   })
-  const migrations=['20261104210527_australia_contact_storage.sql','20261104222434_australia_client_trips_quotes.sql','20261106105909_australia_draft_quota_and_default_privileges.sql','20261106105919_australia_client_quote_column_privileges.sql','20261106114144_shared_country_plans_and_contacts.sql','20261106203926_extensible_destination_catalogue.sql','20261108023556_new_zealand_private_planning_brief.sql','20261108030916_nz_private_bird_wishlist.sql']
-  await check('only the eight maintained application migrations apply to the fresh database',async()=>{
+  const migrations=['20261104210527_australia_contact_storage.sql','20261104222434_australia_client_trips_quotes.sql','20261106105909_australia_draft_quota_and_default_privileges.sql','20261106105919_australia_client_quote_column_privileges.sql','20261106114144_shared_country_plans_and_contacts.sql','20261106203926_extensible_destination_catalogue.sql','20261108023556_new_zealand_private_planning_brief.sql','20261108030916_nz_private_bird_wishlist.sql','20261108192239_private_trip_budget_preferences.sql']
+  await check('only the nine maintained application migrations apply to the fresh database',async()=>{
     const tables=(await sql.query("select tablename from pg_tables where schemaname='public'")).rows;assert.equal(tables.length,0)
     for(const file of migrations)await sql.query(await readFile(join(repo,'supabase/migrations',file),'utf8'))
     report.applicationMigrations=migrations
@@ -193,7 +202,7 @@ try {
       upstream.on('error',()=>{res.writeHead(502);res.end()});req.pipe(upstream)
     });await listen(gateway,ports.supabase);report.postgrest='16.5'
   })
-  await check('the unchanged AVES application starts against local-only services',async()=>{
+  await check('the AVES application starts against local-only services',async()=>{
     const environment={NODE_ENV:'development',VERCEL_ENV:'development',NEXT_PUBLIC_SITE_URL:appUrl,NEXT_PUBLIC_SUPABASE_URL:supabaseUrl,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:pubKey,SUPABASE_URL:supabaseUrl,SUPABASE_SECRET_KEY:serviceKey,AVES_OAUTH_PROVIDERS:'',RESEND_API_KEY:'re_local_fixture_only',RESEND_BASE_URL:'http://127.0.0.1:'+ports.mail,CONTACT_EMAIL:'owner@example.test',CONTACT_FROM:'AVES QA <noreply@example.test>'}
     const required=(await readFile(join(repo,'.env.example'),'utf8')).split('\n').filter(x=>/^[A-Z_]+=/.test(x)).map(x=>x.split('=')[0]);assert(required.every(key=>key in environment),'Every configured key is supplied by the isolated fixture')
     const app=launch('next',process.execPath,[join(repo,'node_modules/next/dist/bin/next'),'dev','--hostname','127.0.0.1','--port',String(ports.app)],environment);await waitHttp(appUrl+'/account/sign-in',app)

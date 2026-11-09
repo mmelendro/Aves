@@ -1,6 +1,6 @@
 # Native account and enquiry integration checks
 
-These checks exercise the unchanged AVES application through real HTTP, the pinned
+These checks exercise the current AVES application through real HTTP, the pinned
 Supabase SDK, native Supabase Auth, PostgREST and PostgreSQL. Four synthetic accounts
 are created in a fresh disposable database. No hosted project, production key or
 customer record is used. No provider or project configuration is changed.
@@ -29,7 +29,7 @@ dev shares the repository's development build directory. PostgreSQL does not req
 a Unix socket or Docker. `auth migrate` runs before `auth serve`, with the standard
 authenticated default role and Auth-schema usage grants supplied explicitly.
 
-The eight maintained application migrations are listed in `native-runtime.mjs`.
+The nine maintained application migrations are listed in `native-runtime.mjs`.
 The obsolete Colombia replacement baseline is intentionally excluded. No migration
 command targets hosted Supabase. Row policies, column permissions and service-only
 RPC grants remain active. The fixture owner grant exists only in this fresh database.
@@ -51,16 +51,16 @@ separate notification-status handling; they do not prove real Resend acceptance,
 inbox delivery or Google/provider configuration. Raw mail and credentials remain
 inside the private fixture directory or memory and are not written into the report.
 
-The 19 checks cover service setup plus confirmed/unconfirmed signup, PKCE callbacks,
+The checks cover service setup plus confirmed/unconfirmed signup, PKCE callbacks,
 three-country save/reopen/edit/delete, same-key retries, revision conflicts,
 cross-account API and direct RLS denial, service-only RPC denial, old-cookie handover,
-immutable NZ submissions, owner-only proposals, correct proposal visibility,
+budget-free and budget-bearing NZ round trips, currency/zero/blank boundaries, immutable NZ submissions, owner-only proposals, correct proposal visibility,
 enquiry consent/idempotency, both legacy enquiry adapters, notification failure,
 one-time password recovery and refresh-token revocation after sign-out.
 
 Normal completion stops the native services and removes the database, fixture mail,
 certificates, keys and private logs. The launcher records cleanup only after the
 temporary directory is removed. The output report contains check names, versions,
-the application revision, harness hashes and explicit verification limits. Keep
+the application base revision, actual source fingerprint, harness hashes and explicit verification limits. No .vercel project link is required; all fixture HTTP requests stay on the exact local origins. Keep
 PR #3 in draft until the hosted provider, browser and final cutover gates in
 `docs/CONSOLIDATION.md` are resolved. Do not promote the read-only Preview artifact.

@@ -380,6 +380,43 @@ test("NZ entry keeps South Island and saves versioned questionnaire answers with
   assert.equal(attempts[0].headers["Idempotency-Key"], saved.id)
 })
 
+test("budget controls reopen zero values, preserve numbers on currency changes and clear to undecided", () => {
+  const h = componentHarness("components/account/budget-questions.tsx", "BudgetQuestions", {
+    prefix: "budget-test", budget: { currency: "NZD", accommodation: 0, food: 450 },
+  })
+  let tree = h.render()
+  assert.equal(find(tree, node => node.props.name === "budget-accommodation").props.value, "0")
+  assert.equal(find(tree, node => node.props.name === "budget-activities").props.value, "")
+  find(tree, node => node.props.name === "budgetCurrency").props.onChange({ target: { value: "GBP" } })
+  tree = h.render()
+  assert.equal(find(tree, node => node.props.name === "budget-food").props.value, "450")
+  assert.equal(find(tree, node => node.props.name === "budget-accommodation").props.value, "0")
+  find(tree, node => node.type === "button" && node.props.children.join?.("") === "Leave accommodation open").props.onClick()
+  tree = h.render()
+  assert.equal(find(tree, node => node.props.name === "budget-accommodation").props.value, "")
+  assert.equal(find(tree, node => node.props.name === "budgetCurrency").props.value, "GBP")
+})
+
+test("editing a saved NZ brief carries optional budgets into the private PATCH receipt", async () => {
+  const budget = { currency: "CAD", accommodation: 0, activities: 10000 }
+  const plan = { id: "saved-budget", country: "new-zealand", regions: ["south-island"], title: "Synthetic NZ", status: "draft", updatedAt: "2026-11-10T00:00:00Z", questionnaire: { version: 1, pace: "open", birding: "open", comfort: "open", interests: [], budget } }
+  const requests = []; let saved
+  const h = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { plan, onSaved(value) { saved = value }, onCancel() {} }, {
+    mocks: { "./account-api": { ...api, accountRequest: async (path, options) => { requests.push({ path, ...options }); return { plan: { ...plan, ...JSON.parse(options.body), updatedAt: "2026-11-10T00:01:00Z" } } } } },
+  })
+  const tree = h.render()
+  assert.deepEqual(find(tree, node => node.type?.name === "BudgetQuestions").props.budget, budget)
+  await find(tree, node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: {
+    title: plan.title, regions: plan.regions, pace: "open", birding: "open", comfort: "open", interests: [],
+    budgetCurrency: "CAD", "budget-accommodation": "0", "budget-food": "", "budget-activities": "10000",
+  } } })
+  assert.equal(requests[0].path, "/api/account/plans/saved-budget")
+  assert.equal(requests[0].method, "PATCH")
+  assert.equal(JSON.parse(requests[0].body).expectedUpdatedAt, plan.updatedAt)
+  assert.deepEqual(saved.questionnaire.budget, budget)
+  assert.deepEqual(plan.questionnaire.budget, budget)
+})
+
 
 test("read-only preview disables auth buttons and submission side effects", async () => {
   const h = componentHarness("components/account/auth-form.tsx", "AuthForm", {mode: "sign-in", oauthProviders: ["google"]}, {

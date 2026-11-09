@@ -1,6 +1,7 @@
 /** Versioned, nonpersonal choices shared by the form, validation and private review.
  * Answers live in the owned trip record, never in this source file or a URL.
  */
+import { budgetCategories, type TripBudget } from "./trip-budget"
 import { nzBirdName } from "./new-zealand-checklist"
 
 export const planningChoices = {
@@ -17,6 +18,7 @@ export type PlanningQuestionnaire = {
   comfort: keyof typeof planningChoices.comfort
   interests: (keyof typeof planningChoices.interests)[]
   birdIds?: string[]
+  budget?: TripBudget
 }
 
 /** One readable representation is reused for the guest's review and owner inbox. */
@@ -26,6 +28,7 @@ export function planningSummary(answers: PlanningQuestionnaire) {
     { label: "Birding frequency", value: planningChoices.birding[answers.birding] },
     { label: "Accommodation", value: planningChoices.comfort[answers.comfort] },
     { label: "Interests", value: answers.interests.map(id => planningChoices.interests[id]).join(", ") || "Open to suggestions" },
+    ...(answers.budget ? budgetCategories.filter(({key}) => answers.budget?.[key] !== undefined).map(({key,label,unit}) => ({ label: `${label} budget`, value: `${new Intl.NumberFormat("en-NZ", {style:"currency",currency:answers.budget!.currency,currencyDisplay:"code",maximumFractionDigits:0}).format(answers.budget![key]!)} ${unit}` })) : []),
     ...(answers.birdIds?.length ? [{ label: `Birds you would love to see (${answers.birdIds.length})`, value: answers.birdIds.map(nzBirdName).join(", ") }] : []),
   ]
 }

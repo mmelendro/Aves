@@ -58,6 +58,38 @@ export async function runFlows(c) {
     assert.equal((await c.sql.query('select title from public.trip_plans where id=$1',[id])).rows[0].title,'Edited Colombia plan')
   })
 
+  await check('existing NZ briefs accept bounded budgets and retain them after reopen and edits without currency conversion',async()=>{
+    const entry=plans['new-zealand'],id=entry.plan.id
+    for(const currency of ['NZD','AUD','USD','CAD','EUR','GBP']){
+      const budget={currency,accommodation:0,food:450,activities:10000}
+      const {id:ignored,...fields}=entry.body
+      const questionnaire={...fields.questionnaire,budget}
+      const saved=await write('/api/account/plans/'+id,guest.jar,{...fields,questionnaire,expectedUpdatedAt:entry.plan.updatedAt},'PATCH');status(saved)
+      assert.deepEqual(saved.data.plan.questionnaire.budget,budget)
+      entry.body={...entry.body,questionnaire};entry.plan=saved.data.plan
+      const row=(await c.sql.query('select details from public.trip_plans where id=$1',[id])).rows[0]
+      assert.deepEqual(row.details.questionnaire.budget,budget)
+    }
+    guest=await login(guest)
+    const reopened=await c.request('/api/account/plans',{jar:guest.jar});status(reopened)
+    assert.deepEqual(reopened.data.plans.find(plan=>plan.id===id).questionnaire,entry.body.questionnaire)
+    const hidden=await other.client.from('trip_plans').select('details').eq('id',id)
+    assert.equal(hidden.error,null);assert.deepEqual(hidden.data,[])
+    const {id:ignored,...fields}=entry.body
+    status(await write('/api/account/plans/'+id,other.jar,{...fields,expectedUpdatedAt:entry.plan.updatedAt},'PATCH'),404)
+  })
+
+  await check('the database budget validator rejects malformed amounts and preserves an undecided category',async()=>{
+    const valid=plans['new-zealand'].body
+    const {id,title,...details}=valid
+    for(const budget of [null,{}, {currency:'XXX',food:20}, {currency:'AUD',food:-1}, {currency:'AUD',food:10001}, {currency:'AUD',food:0.5}, {currency:'AUD',food:'20'}, {currency:'AUD',food:null}, {currency:'AUD',food:20,role:'owner'}]){
+      const payload={...details,questionnaire:{...details.questionnaire,budget}}
+      assert.equal((await c.sql.query('select public.trip_details_valid($1::jsonb) as valid',[JSON.stringify(payload)])).rows[0].valid,false)
+    }
+    const partial={...details,questionnaire:{...details.questionnaire,budget:{currency:'NZD',accommodation:0}}}
+    assert.equal((await c.sql.query('select public.trip_details_valid($1::jsonb) as valid',[JSON.stringify(partial)])).rows[0].valid,true)
+  })
+
   await check('another account cannot read or edit plans, become an owner or bypass database row permissions',async()=>{
     const id=plans.australia.plan.id
     const list=await c.request('/api/account/plans',{jar:other.jar});status(list);assert.deepEqual(list.data.plans,[])
@@ -110,6 +142,7 @@ export async function runFlows(c) {
     const path='/api/admin/quotes/'+quoteId+'/proposals'
     status(await write(path,other.jar,details,'POST',id),403)
     const inbox=await c.request('/api/admin/quotes',{jar:owner.jar});status(inbox);assert.equal(inbox.data.quotes.length,1)
+    assert.deepEqual(inbox.data.quotes[0].plan.questionnaire.budget,plans['new-zealand'].body.questionnaire.budget)
     const response=await write(path,owner.jar,details,'POST',id);status(response)
     status(await write(path,owner.jar,details,'POST',id))
     const hidden=await c.request('/api/account/proposals',{jar:guest.jar});status(hidden);assert.deepEqual(hidden.data.proposals,[])
