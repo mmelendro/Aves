@@ -9,3 +9,5 @@ South Island runtime f941bb9 is published. Account runtime5659bea contains the p
 After the selected release is tested, published and synced, **pause**. The next visual priority is homepage map-card consistency012c; AI proposal research/story059 is queued, not already implemented. Full backlog remains in docs/ROADMAP-DETAILS.md.
 
 Latest language correction: /colombia is English by default, with an explicit flag switch to Colombian Spanish. See docs/RELEASE-2026-11-09-COLOMBIA-SPANISH.md. Site-wide language switching is queued, not implemented.
+
+AI pilot checkpoint: docs/RELEASE-2026-11-09-AI-PROPOSAL.md. Account runtime d693512 is published; owner reported real generation failure. Connection diagnostics are available; no real draft is saved yet. Full stages: docs/DEVELOPMENT-STAGES.md. Contour061 and feather058 explicitly queued.
