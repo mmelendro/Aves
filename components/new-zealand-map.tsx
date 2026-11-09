@@ -62,7 +62,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
               const label = labels[index]
               const highlighted = highlightedIslands.includes(island.id)
               return (
-                <a key={island.id} href={newZealandRegionHref(island.id)} onClick={event => choose(event, island.id)} aria-label={`Explore ${island.label}`} aria-hidden={focusIsland && focusIsland.id !== island.id ? true : undefined} tabIndex={focusIsland && focusIsland.id !== island.id ? -1 : undefined} className="group outline-none" style={focusIsland && focusIsland.id !== island.id ? { pointerEvents: "none" } : undefined}>
+                <a key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${island.label}`} aria-hidden={focusIsland && focusIsland.id !== island.id ? true : undefined} tabIndex={focusIsland && focusIsland.id !== island.id ? -1 : undefined} className="group outline-none" style={focusIsland && focusIsland.id !== island.id ? { pointerEvents: "none" } : undefined}>
                   <g className={`${highlighted ? "fill-emerald-800" : compact ? "fill-[#c5dbd0]" : islandStyles[index]} stroke-[#6e9582] transition-colors group-hover:fill-[#9cc4af] group-focus:fill-[#9cc4af] group-focus:stroke-emerald-950`}>
                     {island.paths.map((path, pathIndex) => <path key={pathIndex} d={path} strokeWidth={highlighted ? "2" : "1.2"} vectorEffect="non-scaling-stroke" fillRule="evenodd" className="group-focus:stroke-[3]" />)}
                   </g>

@@ -8,6 +8,7 @@ import { useId, useState } from "react"
 import { ArrowRight, Feather } from "lucide-react"
 import { colombiaMapMarkers } from "@/content/colombia-map-markers"
 import { australiaMapStates, australiaMapViewBox, australiaMapProvenance } from "@/content/global-australian-map"
+import colombiaBoundaries from "@/content/colombia-planning-boundaries.json"
 import nz from "@/content/new-zealand-map.json"
 import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
 import { useRegionPreview } from "./use-region-preview"
@@ -36,7 +37,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
   // Uniform fit into the same inner frame. Never stretch the original geometry.
   const scale = Math.min(320 / vw, 244 / vh)
   const point = { x: 20 + (320-vw*scale)/2 + (active.x-vx)*scale, y: 60 + (244-vh*scale)/2 + (active.y-vy)*scale }
-  const focusRegion = (region: Region) => ({ onClick: (event: React.MouseEvent) => preview.activate(event, region.id), onFocus: () => setActiveId(region.id), onPointerEnter: (event: React.PointerEvent) => { if (event.pointerType !== "touch") setActiveId(region.id) } })
+  const focusRegion = (region: Region) => ({ onKeyDown: (event: React.KeyboardEvent) => preview.activateKey(event, region.id, region.href), onClick: (event: React.MouseEvent) => preview.activate(event, region.id), onFocus: () => setActiveId(region.id), onPointerEnter: (event: React.PointerEvent) => { if (event.pointerType !== "touch") setActiveId(region.id) } })
   return <article className={styles.card} aria-label={`${name} regional map`} data-country-map-card={country}>
     <header className={styles.header}><h3>{name}</h3><p>{geography[country]} · {regions.length} destinations</p></header>
     <div className={styles.canvas}>
@@ -44,7 +45,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
       <svg viewBox="0 45 360 275" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
         <defs><filter id={`land-${id}`} colorInterpolationFilters="sRGB"><feFlood floodColor="#c5dbd0"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs>
         <svg x="20" y="60" width="320" height="244" viewBox={viewBox} preserveAspectRatio="xMidYMid meet" aria-hidden={country === "colombia" ? true : undefined}>
-          {country === "colombia" ? <image href="/images/birding-regions-colombia-final.png" width="634" height="802" filter={`url(#land-${id})`} />
+          {country === "colombia" ? <g><image href="/images/birding-regions-colombia-final.png" width="634" height="802" filter={`url(#land-${id})`} />{colombiaBoundaries.regions.map(region => <path key={region.name} d={region.path} fill="none" stroke="#6e9582" strokeWidth=".85" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />)}</g>
             : country === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => <a key={state.regionId} href={`/australia/regions/${state.regionId}`} aria-label={`Explore ${state.name}`} {...focusRegion(regions.find(region => region.id === state.regionId)!)} className={styles.area} data-active={activeId === state.regionId}><path d={state.path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/></a>)
             : nz.islands.map(island => <a key={island.id} href={newZealandRegionHref(island.id)} aria-label={`Explore ${island.label}`} {...focusRegion(regions.find(region => region.id === island.id)!)} className={styles.area} data-active={activeId === island.id}>{island.paths.map((path,index) => <path key={index} d={path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/>)}</a>)}
         </svg>

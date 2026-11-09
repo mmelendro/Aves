@@ -1,5 +1,5 @@
 "use client"
-import { useRef, type MouseEvent } from "react"
+import { useRef, type MouseEvent, type KeyboardEvent } from "react"
 import { regionActivation } from "@/lib/region-activation"
 
 /** First activation previews immediately. A later activation opens the guide.
@@ -17,5 +17,11 @@ export function useRegionPreview(onPreview: (id: string) => void) {
     if (armed.current === id) { window.location.assign(href); return }
     preview(id)
   }
-  return { preview, activate, activateButton, clear: () => { armed.current = null } }
+  function activateKey(event: KeyboardEvent, id: string, href: string) {
+    // SVG anchors do not activate consistently with Enter in every browser.
+    if (event.key !== "Enter" || event.repeat || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return
+    event.preventDefault()
+    activateButton(id, href)
+  }
+  return { preview, activate, activateButton, activateKey, clear: () => { armed.current = null } }
 }

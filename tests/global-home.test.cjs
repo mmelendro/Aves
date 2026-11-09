@@ -375,3 +375,21 @@ test("region navigation requires a deliberate preview and preserves native modif
   assert.equal(regionActivation("south-island", "north-island", tap).preview, true)
   for (const event of [{button:1}, {button:0,ctrlKey:true}, {button:0,metaKey:true}, {button:0,shiftKey:true}, {button:0,altKey:true}]) assert.equal(regionActivation(null, "south-island", event).native, true)
 })
+
+
+test("Colombia retains the original planning boundaries and matching marker regions", () => {
+  const crypto = require("node:crypto")
+  const geometry = load("content/colombia-planning-boundaries.json")
+  const markers = load("content/colombia-map-markers.ts").colombiaMapMarkers
+  assert.equal(crypto.createHash("sha256").update(readFileSync(join(root, geometry.source.path))).digest("hex"), geometry.source.sha256)
+  assert.deepEqual(geometry.regions.map(r => r.name), markers.map(r => r.name))
+  for (const [i, region] of geometry.regions.entries()) {
+    assert.equal(region.markerInsideOriginal, true)
+    assert.equal(region.markerInsideSmoothed, true)
+    assert.ok(Math.abs(region.marker.x - markers[i].x * 6.34) < .001)
+    assert.ok(Math.abs(region.marker.y - markers[i].y * 8.02) < .001)
+    assert.ok(region.path.length > 100)
+  }
+  const html = renderToStaticMarkup(React.createElement(load("components/colombia-map-artwork.tsx").default, {alt:"",flat:true}))
+  assert.match(html, /data-colombia-boundaries="true"/)
+})

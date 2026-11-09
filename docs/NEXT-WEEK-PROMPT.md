@@ -1,6 +1,6 @@
 # AVES — current execution prompt
 
-Updated 9 November 2026. Homepage map-card pilot AVES-012c is published and corrected at runtime `6f123b0` and paused after GitHub sync. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Do not execute the backlog automatically. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
+Updated 9 November 2026. Homepage map-card pilot AVES-012c is published. Active follow-up continues automatically with deliberate region previews, restored Colombia artwork boundaries, then South Island filter pilots and verified rollouts. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-MAP-FEATHER-REVISION.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Continue the newly selected map/filter sequence automatically, saving small source/deployment checkpoints with rollback instructions in ROLLBACK-CHECKPOINTS.md. Unselected backlog work remains separate. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
 
 
 ## Latest owner direction: mobile preview, South Island filters and soundscapes
