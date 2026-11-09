@@ -1,18 +1,15 @@
 # AVES continue here
 
-Read [the current handoff](docs/HANDOFF-CURRENT.md) and
-[execution prompt](docs/NEXT-WEEK-PROMPT.md). They are the current status and
-selected-scope authority; do not infer next work from older release reports.
+Read [the current handoff](docs/HANDOFF-CURRENT.md), then
+[the detailed execution prompt](docs/NEXT-WEEK-PROMPT.md).
 
-AVES-066 is delivered from `6856389`, Production
-`dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw`. Recovery checkpoint 11. **Pause.**
-No other upgrade is selected. See
-[the release](docs/RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md) and
-[recovery instructions](docs/ROLLBACK-CHECKPOINTS.md).
+AVES-068 safe continuity is published: main runtime `5d96fa0`, Australia/shared
+portal `2ff09e9`. Checkpoint 12 provides recovery for both apps. Same-app browsing
+retains playback; separate documents require explicit paused Resume. Truly
+uninterrupted shared-shell playback remains deferred. AVES-066 is complete. Pause.
 
-Work on `webmaster/readiness-2026-11-05` for global/Colombia/NZ; preserve the
-separately deployed `australia/preview` app. Fetch actual branch history before
-editing. Keep guest information private and no-new-spend/AI deferral intact.
-
-The former stacked entry-point notices are preserved in
-[the historical archive](docs/archive/2026-11-09-before-aves-066/README.md).
+See [the release](docs/RELEASE-2026-11-10-MEDIA-CONTINUITY.md) and
+[recovery instructions](docs/ROLLBACK-CHECKPOINTS.md). No next upgrade selected.
+Keep the app branches separate, guest information private, no new spend and
+paid-AI/ZDR deferral intact. Inspect current Git history before editing.
+Former branch-specific entry points remain in the pre-068 archive.

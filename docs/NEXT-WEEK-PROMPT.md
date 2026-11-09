@@ -1,10 +1,11 @@
 # AVES current execution prompt
 
-Updated 9 November 2026. AVES-066 is the only selected increment: whole-region
-Colombia hover on the main homepage country card, verification, publication,
-GitHub sync and then pause. The release/status authority is HANDOFF-CURRENT.md.
-Do not start another upgrade automatically. Broader requirements below remain
-retained scope, not instructions to redo published pilots.
+Updated 10 November 2026. AVES-068's safe continuity increment is published:
+same-app public browsing keeps the player, and app/reload boundaries offer an
+explicit paused Resume. Uninterrupted playback across separate documents remains
+an architecture backlog, not delivered. AVES-066 remains complete. Pause after
+this release, verification, GitHub sync and document cleanup. No next task selected.
+The release/status authority is HANDOFF-CURRENT.md.
 
 ## Start from the correct checkpoint
 
@@ -17,8 +18,8 @@ Repository: https://github.com/mmelendro/Aves
 
 | App branch | Scope | Published runtime | Production deployment |
 | --- | --- | --- | --- |
-| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 6856389 | dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw |
-| australia/preview | Australia and shared accounts/backend/admin | e0c766a | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq |
+| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 5d96fa0 | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH |
+| australia/preview | Australia and shared accounts/backend/admin | 2ff09e9 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx |
 
 Keep the app roots separate. Documentation commits are newer than these runtime
 commits; a documentation sync is not a deployment. Preserve AVES naming,
@@ -48,9 +49,14 @@ about 2 km. Zoom does not create new detail or guaranteed wildlife sightings.
 
 The newer South Island releases also deliver shared featured-place/photo/habitat
 selection, bird/place full-screen pilots, a six-resource carousel, field-guide
-links and a layout-owned kea podcast/video dock. The dock persists through
-connected New Zealand navigation only. Full-site/Australia/My Trips continuity
-is still AVES-068, not delivered. Habitat soundscapes remain unimplemented.
+links and a layout-owned bird-themed podcast/video dock. AVES-068 now preserves
+playback through known public same-app routes, including Colombia. Across the
+separate main/Australia/My Trips documents or a reload, it offers Resume from a
+validated tab-scoped checkpoint without loading external media first. This is
+not an uninterrupted stream across a document change. The bird follows the
+programme country, not the current page: Colombia motmot, NZ kea and the existing
+Australian bird. All currently curated programmes are New Zealand resources.
+Habitat soundscapes remain unimplemented.
 
 AVES-066 uses the existing eleven Colombia paths, full-name keyboard controls
 and existing guide URLs. Shapes and visible dots preview the same region; hover
@@ -191,7 +197,7 @@ Coordinate the embedded resource carousel 036, checklist media previews 039 and
 audio coordination instead of building separate players per page. The prompt
 priority is recorded; habitat soundscape playback and the unified player family
 are incomplete: the NZ podcast/video dock and resource carousel are published,
-but habitat soundscapes and a fully global player are not.
+but habitat soundscapes and an uninterrupted shared-shell player are not. Safe cross-app paused Resume is published.
 
 ### 6. Route planning for each subregion
 
@@ -231,7 +237,7 @@ Save small source commits, named recovery branches, the previous/new exact
 Production deployments and quick rollback/rebuild instructions in
 [ROLLBACK-CHECKPOINTS.md](ROLLBACK-CHECKPOINTS.md). Do not overwrite a shared branch
 or assume deployment artifacts are retained forever. Sync the correct app and
-shared handoff to GitHub. After the selected AVES-066 release is verified and synced, pause. The owner
+shared handoff to GitHub. After the selected AVES-068 safe continuity release is verified and synced, pause. The owner
 chooses the next increment. Do not revive older automatic-continuation orders.
 
 No new spend, subscriptions, broad secret pulls, weaker privacy or app-root merge.
@@ -283,6 +289,17 @@ Apply the existing homepage word-flip consistently to invitations such as “Let
 Owner reaffirmed9 November2026: aim for the lightest practical site while retaining high visual/media quality when available. Defer podcasts, video embeds and third-party player scripts until explicit intent; use responsive appropriately compressed images, lazy loading below the fold, a single active player and shared components. Preserve original/licensed high-resolution assets separately; offer higher quality or full-screen viewing without forcing large downloads. Check mobile data, slow connections, reduced motion, loading/error fallbacks and changes in production bundle/media cost for each relevant release. Do not prefetch remote media, add background autoplay or ship a 3D library merely for a small decorative effect.
 
 
-## AVES-068 — Truly global continuous media (next player increment; not complete)
+## AVES-068 — Safe continuity and paused handoff published; uninterrupted cross-document stream deferred
 
-Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. Current root-layout pilot preserves podcasts/video through the connected New Zealand client-navigation paths; it is not full-site continuity. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. Main/Colombia/NZ and Australia/shared accounts currently have separate application roots; crossing Australia/My Trips or any full document navigation ends playback. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.
+10 November release: same-app public client navigation retains the player;
+main/Australia/My Trips/reload boundaries restore only a paused public-resource
+checkpoint. Close clears it; cached history respects that closure. No audio,
+iframe or publisher API is loaded by restoration before explicit Resume. Programme
+metadata controls the bird identity independently of the page. See
+[the release](RELEASE-2026-11-10-MEDIA-CONTINUITY.md) for exact scope and limits.
+A truly uninterrupted cross-document stream still requires a shared-shell
+architecture decision. No app consolidation is authorised by this release.
+
+Retained full target, with the older NZ-only pilot description superseded above:
+
+Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. The original NZ-only pilot has been superseded by the safe continuity release above. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. Main/Colombia/NZ and Australia/shared accounts currently have separate application roots; crossing Australia/My Trips or any full document navigation pauses playback and offers an explicit Resume on the next same-origin app. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.

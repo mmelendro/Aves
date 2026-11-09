@@ -6,17 +6,19 @@ The dated priority headings below describe the original planning sequence, not
 a command to repeat completed releases. Historical state/order notices were
 archived in [the pre-066 snapshot](archive/2026-11-09-before-aves-066/README.md).
 
-## Verified pilot status, 9 November 2026
+## Verified pilot status, 10 November 2026
 
 Delivered: country dividers and base Equal Earth discovery; homepage country-card
 consistency and first-tap previews; Colombia planning boundaries; South Island
 habitat/place/photo connection, map controls/scale, bird/place full-screen pilot,
-resource carousel/field-guide links and NZ persistent kea media dock. AVES-066
+resource carousel/field-guide links and a country-matched media dock. AVES-068
+adds public same-app continuity and explicit paused app/reload Resume. Truly
+uninterrupted cross-document playback remains deferred. AVES-066
 adds full Colombia shape hover/focus on homepage cards. Broader rollouts, richer
-photo collections, habitat soundscapes and cross-app media continuity are not
+photo collections, habitat soundscapes and uninterrupted cross-app media are not
 implied. See the current handoff and release evidence for precise limits.
 
-Pause after AVES-066. No other upgrade is selected by this cleanup.
+Pause after AVES-068 safe continuity. No other upgrade is selected.
 
 ## Priority 1 — working divider on the three country homepages (AVES-006)
 

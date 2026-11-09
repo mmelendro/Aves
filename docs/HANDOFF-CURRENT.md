@@ -1,54 +1,49 @@
 # AVES current handoff
 
-Updated 9 November 2026. This is the single current release/status entry point.
-Detailed requirements live in NEXT-WEEK-PROMPT.md, ROADMAP-DETAILS.md and
-AVES-CHANGE-INBOX.md. Historical release reports record what was true then.
+Updated 10 November 2026, Sydney. This is the single current release/status entry
+point. Detailed criteria and smaller requests remain in the linked prompt/inbox.
+Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-AVES-066, Colombia whole-region homepage-card hover, is delivered. **Pause.**
-The owner requested only this increment, verification, publication, GitHub sync
-and document cleanup. No other upgrade is selected. Older automatic-continuation
-text is not permission to start the remaining backlog.
+AVES-068 safe continuity increment is published, verified, synced and paused.
+The owner approved public same-app playback continuity plus a deliberate paused
+app handoff. A truly uninterrupted stream across separate document roots remains
+deferred. AVES-066 Colombia whole-region hover remains complete. No next task selected.
 
-## Published main app
+## Published applications
 
-- Source: `685638984d721f16ee9cc2e7a035a148cfee709e`.
-- Production: `dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw`, https://aves.bio .
-- Branch: `webmaster/readiness-2026-11-05`. Global homepage, Colombia and NZ.
-- Recovery: `checkpoint/2026-11-09-11-colombia-region-hover`.
-- Previous runtime: `3f3c9dc`, Production `dpl_FCSgEsC91SzzB63onP9Kh8pYGHFc`.
-- Previous recovery: `checkpoint/2026-11-09-10-persistent-player`.
-- See [AVES-066 release](RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md) and
-  [recovery instructions](ROLLBACK-CHECKPOINTS.md) for verification and rollback.
+| App | Branch | Runtime | Production | Recovery |
+| --- | --- | --- | --- | --- |
+| Global/Colombia/NZ | webmaster/readiness-2026-11-05 | 5d96fa02e45fb18304fc07a97bb5084948ab4afd | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH | checkpoint/2026-11-10-12-media-handoff-main |
+| Australia/shared portal | australia/preview | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | checkpoint/2026-11-10-12-media-handoff-australia |
 
-The two applications remain separate. `australia/preview` serves Australia and
-shared accounts/backend/admin; it was not edited, deployed or synced by AVES-066.
-Its last recorded runtime in this handoff is `e0c766a`, Production
-`dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq`; do not assume that historical record replaces
-a fresh inspection before future Australia work. No app-root merge.
+Previous main: 6856389 / dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw, checkpoint 11.
+Previous AU: e0c766a / dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq, checkpoint 04.
+These are independent app roots. This release changes both layouts and adds the
+same public dock/catalogue to AU, without merging apps or changing account logic.
+Inspect fresh Git history before edits. Documentation heads may be newer than
+runtime commits. See [the release](RELEASE-2026-11-10-MEDIA-CONTINUITY.md) and
+[recovery instructions](ROLLBACK-CHECKPOINTS.md).
 
-## AVES-066 change and limits
+## AVES-068 change and verification limits
 
-All eleven existing Colombia planning-region paths on the main homepage country
-card now respond across their shapes to hover, keyboard focus and deliberate
-activation. Shape and location dot use the same region identity, description
-and guide URL. Hover/focus does not arm navigation. First activation previews;
-a later activation or the explicit Explore link opens the guide. Native
-modified/new-tab links and browser history remain.
+Public same-app routes retain the mounted player, including Colombian guides.
+Preview handlers run first; native modifiers/new tabs, browser history, hash links,
+account/auth/API and other-app requests retain their boundaries. App/reload
+boundaries restore only a paused, validated tab-scoped public media checkpoint.
+No audio/iframe/API loads until explicit Resume. Close clears it and cached history
+respects closure. Slow loading does not erase saved seconds. No private data,
+URLs or credentials are stored. Foreground HTML audio pauses the programme.
 
-The reviewed path geometry, holes, marker centres and visible dot sizes are
-unchanged. Fixed artwork paint order resolves tiny smoothing overlaps. Removed
-invisible oversized dot disks that could steal neighbouring narrow-region hits.
-The artwork describes AVES planning/birding regions, not official administrative
-or precise ecological boundaries. No species or habitat coverage was invented.
-
-135 tests and TypeScript passed; local production build and exact final Vercel
-Preview passed. Browser checks covered all 11 shapes and dots, all 22 keyboard
-controls/first activations, repeat guide navigation, Back/Forward, 340 CSS-pixel
-reflow and all 12 AU/NZ homepage-card region controls. Physical iPhone/Safari
-and exact 320/390px viewport tests were unavailable in this environment. See
-the release for actual live checks and evidence; do not borrow older results.
+139 main and 293 AU tests passed; both TypeScript checks and exact final hosted
+builds passed. Browser audio continuity, reload/Resume, bird-call interruption,
+content-matched identity and 340 CSS-pixel reflow were checked. Live same-origin
+Australia/Regions/My Trips signed-out/return/close-through-Back behaviour passed.
+No private account operation was tested. Physical phone/Safari, exact 320/390px,
+telephone interruptions and native pinch/background behaviour remain unverified.
+See the release and public route/sitemap evidence for actual limits. Do not
+inherit older releases' test claims.
 
 ## Foundation to preserve
 
@@ -59,7 +54,7 @@ the release for actual live checks and evidence; do not borrow older results.
 | South Island discovery | Shared four-place/five-photo landscape carousel, thirty sourced bird-media profiles, habitat/map/photo connection, zoom/pan/reset/scale | Several photos for every place/habitat and North Island parity |
 | South Island layers | Adjustable historical satellite plus ecosystem colours, nine parks, DOC conservation and curated public-place/business references | Full geographic coverage and country/subregion rollout |
 | Full-screen media | South Island bird/place complete-photo pilot, controls and credits preserved | Every map/card and deeper source-supported photo zoom |
-| Resources/player | Six-resource carousel, field-guide publisher links, opt-in kea podcast/video dock persisting through connected NZ navigation | AVES-068 full-site/Australia/My Trips continuity and AVES-053 habitat soundscapes |
+| Resources/player | Six-resource carousel, field-guide links, content-matched dock, public same-app continuity and explicit paused main/AU/My Trips handoff | Truly uninterrupted cross-document shell, more country programmes, AVES-053 habitat soundscapes |
 | Private planning | Existing Google sign-in, private briefs/wishes, budgets, explicit sharing, manual proposals and email-update consent | eBird-connected wishlist, saved places, broader community/marketplace and successful paid AI generation |
 
 Source detail remains explicit: NASA satellite is a historical 2004 overview;
@@ -68,14 +63,17 @@ approximate references, not nests, access rights, certifications, AVES partners
 or promised sightings. NZ national checklist has 377 extant species; it does
 not establish local South Island occurrence. Keep licensed credits/provenance.
 
-The NZ media dock introduced in `3f3c9dc` remains scoped to connected NZ
-navigation. Refresh, plain document navigation and crossing applications can
-end playback. No claim of global continuity or physical-device playback support.
+The two app layouts now share the public media catalogue and player. Document
+changes pause; Resume is explicit. All current programmes are NZ content and keep
+the kea when browsing elsewhere. Programme country determines the bird: Colombia
+motmot, NZ kea, existing Australian bird. This does not invent programmes.
+YouTube buffered during checks; sustained video/nonzero video resume, playlist
+sub-item restoration and physical Safari/device behaviour remain unverified.
 
 ## Retained backlog, not selected now
 
 065 private eBird-connected wishes; 067 birds/AVES invitation word flip;
-068 truly global player; 061 header landscape contour; 053 soundscapes/ducking;
+068 uninterrupted shared-shell architecture beyond paused handoff; 061 header landscape contour; 053 soundscapes/ducking;
 063 private saved places; 064 ecological/historical orientation. Full criteria,
 continuous transitions, expanded maps, multi-photo collections, media-library
 work and route/travel-time request 062 remain in the execution prompt/inbox/roadmap.
@@ -95,13 +93,10 @@ not contact people, send proposals or book without relevant authorisation.
 
 - [NEXT-WEEK-PROMPT.md](NEXT-WEEK-PROMPT.md): execution rules and retained programme.
 - [AVES-CHANGE-INBOX.md](AVES-CHANGE-INBOX.md): owner requests/acceptance.
-- [ROADMAP-DETAILS.md](ROADMAP-DETAILS.md): detailed product criteria.
-- [MAP-LAYER-ROLLOUT.md](MAP-LAYER-ROLLOUT.md): source/projection gates.
-- AGILE-PLAN.md, DEVELOPMENT-STAGES.md and SITE-ARCHITECTURE.md: planning criteria.
-- [Pre-066 archive](archive/2026-11-09-before-aves-066/README.md): verbatim former
-  entry points, including their older repeated checkpoints and AI diagnosis.
+- [ROADMAP-DETAILS.md](ROADMAP-DETAILS.md): detailed criteria, not runtime authority.
+- [SITE-ARCHITECTURE.md](SITE-ARCHITECTURE.md): app boundaries and paused-handoff decision.
+- [MAP-LAYER-ROLLOUT.md](MAP-LAYER-ROLLOUT.md): source/projection gates, no automatic rollout.
+- [Pre-068 archive](archive/2026-11-10-before-aves-068/README.md): branch-specific former entry points.
 
-The current files no longer stack competing latest-release notices. Archives
-and immutable release reports preserve evidence, not active execution orders.
-Future updates should reconcile these current sections instead of prepending
-another contradictory checkpoint. Inspect current GitHub history before edits.
+Reconcile current sections instead of stacking another competing latest notice.
+Pause before soundscapes, new content or another upgrade.

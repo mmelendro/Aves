@@ -1,9 +1,8 @@
 # Map-layer rollout criteria
 
-AVES-066 is delivered and the project is paused. This file retains eligibility
-and source/projection gates for a future selected layer rollout; it is not an
-instruction to start one. Read HANDOFF-CURRENT.md and NEXT-WEEK-PROMPT.md for
-current scope, delivered pilots and permission to proceed.
+AVES-068 safe continuity is published and paused. This file retains source and
+projection criteria, not an automatic rollout instruction. Read HANDOFF-CURRENT.md
+and NEXT-WEEK-PROMPT.md for delivered scope and permission to proceed.
 
 ## South Island sample
 
