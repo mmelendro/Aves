@@ -5,11 +5,12 @@
  * Map links still navigate directly; focus/hover only identifies their location.
  */
 import { useId, useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Feather } from "lucide-react"
 import { colombiaMapMarkers } from "@/content/colombia-map-markers"
 import { australiaMapStates, australiaMapViewBox, australiaMapProvenance } from "@/content/global-australian-map"
 import nz from "@/content/new-zealand-map.json"
 import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
+import MapFeatherMarker from "./map-feather-marker"
 import styles from "./homepage-country-map-card.module.css"
 
 type Region = { id: string; name: string; href: string; x: number; y: number }
@@ -35,22 +36,20 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
   return <article className={styles.card} aria-label={`${name} regional map`} data-country-map-card={country}>
     <header className={styles.header}><h3>{name}</h3><p>{geography[country]} · {regions.length} destinations</p></header>
     <div className={styles.canvas}>
-      <svg viewBox="0 0 360 320" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
+      <p className={styles.callout}><Feather size={16} aria-hidden="true"/>{active.name}</p>
+      <svg viewBox="0 45 360 275" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
         <defs><filter id={`land-${id}`} colorInterpolationFilters="sRGB"><feFlood floodColor="#c5dbd0"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs>
         <svg x="20" y="60" width="320" height="244" viewBox={viewBox} preserveAspectRatio="xMidYMid meet" aria-hidden={country === "colombia" ? true : undefined}>
           {country === "colombia" ? <image href="/images/birding-regions-colombia-final.png" width="634" height="802" filter={`url(#land-${id})`} />
             : country === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => <a key={state.regionId} href={`/australia/regions/${state.regionId}`} aria-label={`Explore ${state.name}`} {...focusRegion(regions.find(region => region.id === state.regionId)!)} className={styles.area} data-active={activeId === state.regionId}><path d={state.path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/></a>)
             : nz.islands.map(island => <a key={island.id} href={newZealandRegionHref(island.id)} aria-label={`Explore ${island.label}`} {...focusRegion(regions.find(region => region.id === island.id)!)} className={styles.area} data-active={activeId === island.id}>{island.paths.map((path,index) => <path key={index} d={path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/>)}</a>)}
         </svg>
-        <path d={`M180,47 L180,52 L${point.x},${point.y}`} className={styles.leader} />
         {country === "colombia" && regions.map(region => {
           const x=20+(320-vw*scale)/2+(region.x-vx)*scale, y=60+(244-vh*scale)/2+(region.y-vy)*scale
           return <a key={region.id} href={region.href} aria-label={`Explore ${region.name}`} {...focusRegion(region)} className={styles.location} data-active={activeId === region.id}><circle cx={x} cy={y} r="8"/><circle cx={x} cy={y} r="15" fill="transparent" stroke="none"/></a>
         })}
-        <circle cx={point.x} cy={point.y} r="9" className={styles.selectedPoint} />
-        <circle cx={point.x} cy={point.y} r="3" fill="white" pointerEvents="none" />
+        <g transform={`translate(${point.x-14},${point.y-14})`} pointerEvents="none"><MapFeatherMarker /></g>
       </svg>
-      <p className={styles.callout}>{active.name}</p>
     </div>
     <div className={styles.controls}>
       <label htmlFor={`region-${id}`}>Locate a {country === "new-zealand" ? "main island" : country === "australia" ? "state or territory" : "planning region"}</label>

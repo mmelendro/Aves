@@ -348,3 +348,20 @@ test("brand word previews on mouse/keyboard and a first touch toggles once, with
   p.onPointerEnter({pointerType:"touch"}); assert.equal(state,false,"touch hover does not toggle")
   p.onFocus();p.onBlur();assert.equal(state,false)
 })
+
+
+test("connected regional maps use feather cues and keep full-name selection accessible", () => {
+  const Map = load("components/destination-regional-map.tsx").default
+  const expected = { colombia: ["eastern-andes", "Eastern Andes"], australia: ["australian-capital-territory", "Australian Capital Territory"], "new-zealand": ["rakiura", "Stewart Island / Rakiura"] }
+  for (const [country, [selectedRegionId, name]] of Object.entries(expected)) {
+    const selected = []
+    const tree = Map({ country, selectedRegionId, onSelectRegion: id => selected.push(id) })
+    const html = renderToStaticMarkup(tree)
+    assert.match(html, /data-map-feather="true"/)
+    assert.doesNotMatch(html, /<text[^>]*>(?:NSW|WA|ACT|[0-9]+)<\/text>|<polyline|M389,184L413,122/)
+    const button = elements(tree, el => el.props["aria-label"] === `Preview ${name} birds`)[0]
+    assert.ok(button, country + ": full region name")
+    button.props.onClick()
+    assert.deepEqual(selected, [selectedRegionId])
+  }
+})

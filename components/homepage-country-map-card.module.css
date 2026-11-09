@@ -3,19 +3,18 @@
 .header { padding:1.25rem 1.25rem .5rem; }
 .header h3 { font-size:1.25rem; font-weight:500; }
 .header p { margin-top:.25rem; font-size:.75rem; color:#52665b; }
-.canvas { position:relative; margin:.5rem .75rem; aspect-ratio:360/320; background:#f5f9f6; border:1px solid #e1ece4; border-radius:1rem; }
-.canvas > svg { width:100%; height:100%; }
-.callout { position:absolute; top:2.5%; left:4%; width:92%; min-height:2.75rem; display:flex; align-items:center; justify-content:center; padding:.35rem .7rem; border:1px solid var(--outline); border-radius:.75rem; background:white; text-align:center; font-size:.8125rem; line-height:1.25; font-weight:600; pointer-events:none; }
+.canvas { display:flex; flex-direction:column; margin:.5rem .75rem; padding:.65rem .35rem .25rem; background:#f5f9f6; border:1px solid #e1ece4; border-radius:1rem; }
+.canvas > svg { display:block; width:100%; height:auto; aspect-ratio:360/275; }
+.callout { display:flex; align-items:center; justify-content:center; gap:.5rem; min-height:44px; margin:0 .4rem; padding:.4rem .6rem; border-radius:999px; background:#e6f2eb; color:#064e3b; text-align:center; font-size:.8125rem; line-height:1.35; font-weight:600; }
+.callout svg { flex-shrink:0; }
 .area path { fill:var(--land); stroke:var(--outline); stroke-width:1; }
 .area[data-active="true"] path, .area:hover path, .area:focus-visible path { fill:#065f46; stroke:var(--ink); stroke-width:1.5; }
 .area:focus-visible { outline:none; }
 .area:focus-visible path { stroke:#b45309; stroke-width:3; }
-.leader { fill:none; stroke:#047857; stroke-width:1.2; pointer-events:none; }
 .location > circle:first-child { fill:white; stroke:#047857; stroke-width:1.5; }
 .location[data-active="true"] > circle:first-child, .location:hover > circle:first-child { fill:#065f46; }
 .location:focus-visible { outline:none; }
 .location:focus-visible > circle:first-child { stroke:#b45309; stroke-width:3; }
-.selectedPoint { fill:#065f46; stroke:white; stroke-width:2; pointer-events:none; }
 .controls { padding:0 1.25rem; }
 .controls label { display:block; margin:.25rem 0 .4rem; font-size:.75rem; font-weight:500; }
 .controls select { width:100%; min-width:0; min-height:44px; padding:.5rem; border:1px solid #a7c8b6; border-radius:.5rem; background:white; color:var(--ink); font-size:.8125rem; }
