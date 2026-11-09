@@ -49,6 +49,21 @@ export async function runFlows(c) {
     await assert.rejects(c.sql.query('select public.account_email_updates($1,true)',[pendingId]),error=>error.code==='PT403')
   })
 
+  await check('signed-out consent routing stays on the current app and preserves the nested trip destination',async()=>{
+    const next='/account?country=new-zealand&region=south-island'
+    const jar=new c.CookieJar();jar.setAll([{name:'aves-session-checked',value:'1',options:{path:'/'}}])
+    const result=await c.request('/account/email-updates?'+new URLSearchParams({next}),{jar})
+    status(result,307)
+    const signIn=new URL(result.headers.get('location'),c.appUrl)
+    assert(['localhost','127.0.0.1'].includes(signIn.hostname))
+    assert.equal(signIn.protocol,new URL(c.appUrl).protocol)
+    assert.equal(signIn.port,new URL(c.appUrl).port)
+    assert.equal(signIn.pathname,'/account/sign-in')
+    const preference=new URL(signIn.searchParams.get('next'),signIn.origin)
+    assert.equal(preference.pathname,'/account/email-updates')
+    assert.equal(preference.searchParams.get('next'),next)
+  })
+
   await check('Australia, Colombia and New Zealand drafts persist through real user-scoped HTTP and database writes',async()=>{
     const questionnaire={version:1,pace:'relaxed',birding:'alternate',comfort:'comfortable',interests:['birds','scenery'],birdIds:['nz-de1ba81fa03b']}
     for(const [country,region] of [['australia','tasmania'],['colombia','central-andes'],['new-zealand','south-island']]){

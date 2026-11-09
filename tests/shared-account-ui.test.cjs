@@ -493,3 +493,31 @@ test("owner Open Request focuses and reveals even the already selected request",
   assert.deepEqual(actions[1], ["scroll", { block: "start", behavior: "instant" }])
   assert.equal(details.props.tabIndex, -1)
 })
+
+
+test("signed-out consent entry stays on its deployment and retains safe nested intent", async () => {
+  const targets = []
+  for (const [next, expected] of [["/account?country=new-zealand&region=south-island", "/account?country=new-zealand&region=south-island"], ["https://attacker.test/", "/account"], [["/admin", "/account"], "/account"]]) {
+    const harness = componentHarness("app/account/email-updates/page.tsx", "default", { searchParams: Promise.resolve({ next }) }, { mocks: {
+      "next/navigation": { redirect: path => { targets.push(path); throw Error("Redirect") } },
+      "@/lib/account-auth": { getAccountUser: async () => null },
+      "@/lib/deployment-mode": { isReadOnlyPreview: () => false },
+    } })
+    await assert.rejects(harness.render(), /Redirect/)
+    const signIn = new URL(targets.at(-1), "https://preview.example.test")
+    assert.equal(signIn.origin, "https://preview.example.test")
+    assert.equal(signIn.pathname, "/account/sign-in")
+    const preference = new URL(signIn.searchParams.get("next"), signIn.origin)
+    assert.equal(preference.pathname, "/account/email-updates")
+    assert.equal(preference.searchParams.get("next"), expected)
+  }
+})
+
+test("consent preview renders disabled presentation without consulting hosted Auth", async () => {
+  const harness = componentHarness("app/account/email-updates/page.tsx", "default", { searchParams: Promise.resolve({}) }, { mocks: {
+    "@/lib/account-auth": { getAccountUser: async () => { throw Error("Unexpected hosted Auth") } },
+    "@/lib/deployment-mode": { isReadOnlyPreview: () => true },
+  } })
+  const tree = await harness.render()
+  assert.equal(find(tree, node => node.type?.name === "EmailUpdatesPreference").props.next, "/account")
+})
