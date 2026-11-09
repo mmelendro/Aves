@@ -1,9 +1,11 @@
 # AVES detailed acceptance criteria
 
 Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for current delivered scope, runtime
-and permission to proceed. This document retains the full product requirements.
-The dated priority headings below describe the original planning sequence, not
-a command to repeat completed releases. Historical state/order notices were
+and permission to proceed. [AGILE-PLAN.md](AGILE-PLAN.md) contains the reorganised
+10 November priority order, including separate AVES-020 integration, acceptance,
+cutover and retirement gates. This document retains the full product requirements.
+The dated priority headings and historical next-step notices below describe the
+original sequence; they do not order implementation or repeat completed releases. Historical state/order notices were
 archived in [the pre-066 snapshot](archive/2026-11-09-before-aves-066/README.md).
 
 ## Verified pilot status, 10 November 2026
@@ -20,7 +22,9 @@ implied. See the current handoff and release evidence for precise limits.
 
 AVES-053 adds the South Island opt-in forest/stream/coast pilot with licensed
 representative recordings. Mountains and other regions remain unavailable.
-Pause after this release. No next upgrade selected.
+The owner has requested a roadmap reorganisation only. The next recommended
+increment is the AVES-020 delta inventory in AGILE-PLAN.md; implementation remains
+unselected and production publication requires explicit approval.
 
 ## Priority 1 — working divider on the three country homepages (AVES-006)
 
