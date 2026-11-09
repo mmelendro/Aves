@@ -22,8 +22,8 @@ implied. See the current handoff and release evidence for precise limits.
 
 AVES-053 adds the South Island opt-in forest/stream/coast pilot with licensed
 representative recordings. Mountains and other regions remain unavailable.
-C0 and owner-selected C1a are complete; read CHECKPOINT-2026-11-10-UNIFIED-C1A.md.
-This is a draft source/build checkpoint only. C1b is recommended next, not selected.
+C0 and owner-selected C1a/C1b are complete; read CHECKPOINT-2026-11-10-UNIFIED-C1B.md.
+These are draft source/build checkpoints only. C1c is recommended next, not selected.
 Budget/consent and hosted acceptance remain outstanding; no production publication
 is authorised.
 
@@ -140,9 +140,7 @@ For birds, use eBird primarily for occurrence, supported by BirdLife and local a
 
 ## AVES-020 — consolidate AVES into one application and Vercel project
 
-**Current status:** a separate unmerged draft exists in PR #3 on `integration/aves-unified-2026-11-08`, created during the phone chat. Carry the latest overlay, world/country/region explorer and shared focal-framing behavior from source `95c9f75` and Australia `721370e`, plus subsequent fixes, into the unified candidate before cutover. Hosted provider/email/authenticated-browser gates and separately approved production cutover remain. Older planning wording below records the original scope, not a request to rebuild the draft.
-
-**Owner-requested planning entry, 8 November 2026 (Sydney). Backlog only.** Target one Next.js application, one production Vercel project and one maintained application history in the existing GitHub repository, retaining the existing shared Supabase account database. Countries remain distinct routes/content within the application; future destinations should reuse shared templates and services where practical. Adding this task does not start migration, alter the owner's priority order or change the currently published applications.
+**Current status:** PR #3 remains an unmerged draft on integration/aves-unified-2026-11-08. C0 assessment and C1a/C1b public-source refreshes are complete; see CHECKPOINT-2026-11-10-UNIFIED-C1B.md. Newer private budget/consent compatibility and current public/private hosted acceptance remain pending. Production cutover and project retirement each require separate approval. Older planning wording below retains the original scope, not a request to rebuild completed draft work.
 
 1. **Inventory and migration plan:** compare both current application branches and document route/file collisions, duplicated UI/content, asset paths, base paths, proxy rules, middleware, security/cache headers, dependencies, private environment requirements and release configuration. Select the existing or new target Vercel project and maintained release branch explicitly; the owner permits renaming projects or creating a new target as needed. Prefer clear, durable AVES identifiers for the unified package, project and documentation, with country names in appropriate routes/content rather than the shared application's name. Inspect dependent deployment URLs, rewrites, aliases, integrations and provider configuration before a rename; do not assume the stale main branch is current. Separate the code integration, verified preview, production cutover and later retirement into reviewable checkpoints. Estimate effort after this inventory.
 2. **Reuse working code in a dedicated integration branch:** preserve the public global/Colombia/NZ application and the maintained Australian/account/contact backend. Reconcile overlapping files deliberately rather than directly merging unrelated application roots. Consolidate shared navigation, design primitives and country templates where useful. Retain the existing database, stable IDs, ownership/RLS and immutable submission/proposal behavior. No replacement account system, database, destructive customer-data migration or speculative rewrite is needed for this goal. Keep secrets in private provider configuration, never in Git, public output or documentation.

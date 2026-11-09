@@ -1,0 +1,507 @@
+{
+  "scope": "local preview-mode generated HTML and asset paths, not hosted HTTP/browser verification",
+  "routes": 74,
+  "prerenderedChecked": 55,
+  "dynamicNotChecked": [
+    "/contact",
+    "/australia/aves-explorer",
+    "/australia/contact",
+    "/australia/tours",
+    "/australia/tours/adventure",
+    "/australia/tours/vision",
+    "/australia/tours/elevate",
+    "/australia/tours/souls",
+    "/australia/about",
+    "/australia/team",
+    "/australia/about/partners",
+    "/australia/about/b-corp",
+    "/australia/conservation",
+    "/australia/blog",
+    "/australia/resources",
+    "/australia/travel-tips",
+    "/australia/privacy",
+    "/australia/terms",
+    "/australia/cookies"
+  ],
+  "australianBirdAssetsChecked": 20,
+  "results": [
+    {
+      "route": "/new-zealand",
+      "prerendered": true,
+      "title": "New Zealand | Birdlife, nature & culture | AVESExplore New Zealand\u2019s main islandsExplore New Zealand\u2019s main islands",
+      "canonical": "https://aves.bio/new-zealand",
+      "noindex": true
+    },
+    {
+      "route": "/new-zealand/south-island",
+      "prerendered": true,
+      "title": "South Island birding, nature & travel | AVES New ZealandSouth Island land cover and coastlineForest & scrubMountains & tussockRivers, lakes & wetlandsCoasts & offshore waters \u2014 coastline context onlyArthur\u2019s Pass \u2014 Arthur\u2019s Pass villageNelson Lakes \u2014 Lake RotoitiFiordland \u2014 Lake Te AnauOtago & the Catlins \u2014 Curio BaySouth Island land cover and coastlineForest & scrubMountains & tussockRivers, lakes & wetlandsCoasts & offshore waters \u2014 coastline context onlyArthur\u2019s Pass \u2014 Arthur\u2019s Pass villageNelson Lakes \u2014 Lake RotoitiFiordland \u2014 Lake Te AnauOtago & the Catlins \u2014 Curio Bay",
+      "canonical": "https://aves.bio/new-zealand/south-island",
+      "noindex": true
+    },
+    {
+      "route": "/",
+      "prerendered": true,
+      "title": "AVES | Follow the birdsAVES destinations on an Equal Earth world map",
+      "canonical": "https://aves.bio",
+      "noindex": true
+    },
+    {
+      "route": "/colombia",
+      "prerendered": true,
+      "title": "AVES Colombia | Birdwatching Journeys",
+      "canonical": "https://aves.bio/colombia",
+      "noindex": true
+    },
+    {
+      "route": "/aves-explorer",
+      "prerendered": true,
+      "title": "AVES Explorer - Discover Colombia's Incredible Bird Diversity",
+      "canonical": "https://aves.bio/aves-explorer",
+      "noindex": true
+    },
+    {
+      "route": "/species",
+      "prerendered": true,
+      "title": "Colombian Birdlife & Where to Find It | AVES",
+      "canonical": "https://aves.bio/species",
+      "noindex": true
+    },
+    {
+      "route": "/how-it-works",
+      "prerendered": true,
+      "title": "How Trip Planning Works | AVES",
+      "canonical": "https://aves.bio/how-it-works",
+      "noindex": true
+    },
+    {
+      "route": "/contact",
+      "prerendered": false
+    },
+    {
+      "route": "/regions/pacific",
+      "prerendered": true,
+      "title": "Birding in Pacific | AVES Colombia",
+      "canonical": "https://aves.bio/regions/pacific",
+      "noindex": true
+    },
+    {
+      "route": "/regions/western-andes",
+      "prerendered": true,
+      "title": "Birding in Western Andes | AVES Colombia",
+      "canonical": "https://aves.bio/regions/western-andes",
+      "noindex": true
+    },
+    {
+      "route": "/regions/central-andes",
+      "prerendered": true,
+      "title": "Birding in Central Andes | AVES Colombia",
+      "canonical": "https://aves.bio/regions/central-andes",
+      "noindex": true
+    },
+    {
+      "route": "/regions/eastern-andes",
+      "prerendered": true,
+      "title": "Birding in Eastern Andes | AVES Colombia",
+      "canonical": "https://aves.bio/regions/eastern-andes",
+      "noindex": true
+    },
+    {
+      "route": "/regions/cauca-valley",
+      "prerendered": true,
+      "title": "Birding in Cauca Valley | AVES Colombia",
+      "canonical": "https://aves.bio/regions/cauca-valley",
+      "noindex": true
+    },
+    {
+      "route": "/regions/magdalena-valley",
+      "prerendered": true,
+      "title": "Birding in Magdalena Valley | AVES Colombia",
+      "canonical": "https://aves.bio/regions/magdalena-valley",
+      "noindex": true
+    },
+    {
+      "route": "/regions/caribbean",
+      "prerendered": true,
+      "title": "Caribbean Region - Coastal & Foothill Birding Tours | AVES",
+      "canonical": "https://aves.bio/regions/caribbean",
+      "noindex": true
+    },
+    {
+      "route": "/regions/sierra-nevada-de-santa-marta",
+      "prerendered": true,
+      "title": "Birding in Sierra Nevada de Santa Marta | AVES Colombia",
+      "canonical": "https://aves.bio/regions/sierra-nevada-de-santa-marta",
+      "noindex": true
+    },
+    {
+      "route": "/regions/llanos",
+      "prerendered": true,
+      "title": "Birding in Llanos | AVES Colombia",
+      "canonical": "https://aves.bio/regions/llanos",
+      "noindex": true
+    },
+    {
+      "route": "/regions/amazonia",
+      "prerendered": true,
+      "title": "Birding in Amazonia | AVES Colombia",
+      "canonical": "https://aves.bio/regions/amazonia",
+      "noindex": true
+    },
+    {
+      "route": "/regions/colombian-massif",
+      "prerendered": true,
+      "title": "Birding in Colombian Massif | AVES Colombia",
+      "canonical": "https://aves.bio/regions/colombian-massif",
+      "noindex": true
+    },
+    {
+      "route": "/tours",
+      "prerendered": true,
+      "title": "Birding Experiences | AVES",
+      "canonical": "https://aves.bio/tours",
+      "noindex": true
+    },
+    {
+      "route": "/tours/adventure",
+      "prerendered": true,
+      "title": "Adventure Tours | AVES",
+      "canonical": "https://aves.bio/tours/adventure",
+      "noindex": true
+    },
+    {
+      "route": "/tours/vision",
+      "prerendered": true,
+      "title": "Vision Tours | AVES",
+      "canonical": "https://aves.bio/tours/vision",
+      "noindex": true
+    },
+    {
+      "route": "/tours/elevate",
+      "prerendered": true,
+      "title": "Elevate Tours | AVES",
+      "canonical": "https://aves.bio/tours/elevate",
+      "noindex": true
+    },
+    {
+      "route": "/tours/souls",
+      "prerendered": true,
+      "title": "Souls Tours | AVES",
+      "canonical": "https://aves.bio/tours/souls",
+      "noindex": true
+    },
+    {
+      "route": "/tours/adventure/sierra-nevada",
+      "prerendered": true,
+      "title": "Sierra Nevada Birding Experience | AVES",
+      "canonical": "https://aves.bio/tours/adventure/sierra-nevada",
+      "noindex": true
+    },
+    {
+      "route": "/about",
+      "prerendered": true,
+      "title": "About AVES Colombia",
+      "canonical": "https://aves.bio/about",
+      "noindex": true
+    },
+    {
+      "route": "/team",
+      "prerendered": true,
+      "title": "Our Team | AVES",
+      "canonical": "https://aves.bio/team",
+      "noindex": true
+    },
+    {
+      "route": "/about/partners",
+      "prerendered": true,
+      "title": "Our Partners | AVES",
+      "canonical": "https://aves.bio/about/partners",
+      "noindex": true
+    },
+    {
+      "route": "/about/b-corp",
+      "prerendered": true,
+      "title": "Our B Corp Journey | AVES",
+      "canonical": "https://aves.bio/about/b-corp",
+      "noindex": true
+    },
+    {
+      "route": "/conservation",
+      "prerendered": true,
+      "title": "Responsible Birding | AVES",
+      "canonical": "https://aves.bio/conservation",
+      "noindex": true
+    },
+    {
+      "route": "/blog",
+      "prerendered": true,
+      "title": "Birding Blog | AVES",
+      "canonical": "https://aves.bio/blog",
+      "noindex": true
+    },
+    {
+      "route": "/blog/hummingbird-vision-journey",
+      "prerendered": true,
+      "title": "Hummingbird Sanctuaries | AVES",
+      "canonical": "https://aves.bio/blog/hummingbird-vision-journey",
+      "noindex": true
+    },
+    {
+      "route": "/blog/sierra-nevada-indigenous-birding",
+      "prerendered": true,
+      "title": "Sierra Nevada Birding | AVES",
+      "canonical": "https://aves.bio/blog/sierra-nevada-indigenous-birding",
+      "noindex": true
+    },
+    {
+      "route": "/blog/paramo-manizales-thornbill",
+      "prerendered": true,
+      "title": "P\u00e1ramo & Cloud Forests | AVES",
+      "canonical": "https://aves.bio/blog/paramo-manizales-thornbill",
+      "noindex": true
+    },
+    {
+      "route": "/blog/choco-toucan-expedition",
+      "prerendered": true,
+      "title": "Into the Heart of Choc\u00f3: A Toucan Odyssey Through Colombia's Biodiversity Hotspot | AVES",
+      "canonical": "https://aves.bio/blog/choco-toucan-expedition",
+      "noindex": true
+    },
+    {
+      "route": "/resources",
+      "prerendered": true,
+      "title": "Expert Resources Hub | AVES",
+      "canonical": "https://aves.bio/resources",
+      "noindex": true
+    },
+    {
+      "route": "/travel-tips",
+      "prerendered": true,
+      "title": "Travel Tips for Colombia | Essential Guide for Birdwatching Tours | AVES",
+      "canonical": "https://aves.bio/travel-tips",
+      "noindex": true
+    },
+    {
+      "route": "/privacy",
+      "prerendered": true,
+      "title": "Privacy Notice | AVES",
+      "canonical": "https://aves.bio/privacy",
+      "noindex": true
+    },
+    {
+      "route": "/terms",
+      "prerendered": true,
+      "title": "Inquiries and Proposals | AVES",
+      "canonical": "https://aves.bio/terms",
+      "noindex": true
+    },
+    {
+      "route": "/cookies",
+      "prerendered": true,
+      "title": "Cookies | AVES",
+      "canonical": "https://aves.bio/cookies",
+      "noindex": true
+    },
+    {
+      "route": "/credits",
+      "prerendered": true,
+      "title": "Photography & Recording Credits | AVES",
+      "canonical": "https://aves.bio/credits",
+      "noindex": true
+    },
+    {
+      "route": "/site-map",
+      "prerendered": true,
+      "title": "AVES Site Map",
+      "canonical": "https://aves.bio/site-map",
+      "noindex": true
+    },
+    {
+      "route": "/australia",
+      "prerendered": true,
+      "title": "Australia Birding & Nature Journeys | AVESExplore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritoryExplore Australian states and territories",
+      "canonical": "https://aves.bio/australia",
+      "noindex": true
+    },
+    {
+      "route": "/australia/aves-explorer",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/species",
+      "prerendered": true,
+      "title": "Australian Birdlife & Where to Find It | AVES AustraliaExplore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay Territory",
+      "canonical": "https://aves.bio/australia/species",
+      "noindex": true
+    },
+    {
+      "route": "/australia/how-it-works",
+      "prerendered": true,
+      "title": "How Trip Planning Works | AVES Australia",
+      "canonical": "https://aves.bio/australia/how-it-works",
+      "noindex": true
+    },
+    {
+      "route": "/australia/contact",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/regions/queensland",
+      "prerendered": true,
+      "title": "Birding in Queensland | Cairns & the Atherton Tablelands | AVES AustraliaExplore Australia\u2019s states and territoriesQueensland",
+      "canonical": "https://aves.bio/australia/regions/queensland",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/new-south-wales",
+      "prerendered": true,
+      "title": "Birding in New South Wales | Sydney coast & woodland | AVES AustraliaExplore Australia\u2019s states and territoriesNew South Wales",
+      "canonical": "https://aves.bio/australia/regions/new-south-wales",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/tasmania",
+      "prerendered": true,
+      "title": "Birding in Tasmania | Hobart & Bruny Island | AVES AustraliaExplore Australia\u2019s states and territoriesTasmania",
+      "canonical": "https://aves.bio/australia/regions/tasmania",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/victoria",
+      "prerendered": true,
+      "title": "Birding in Victoria | Melbourne & Serendip Sanctuary | AVES AustraliaExplore Australia\u2019s states and territoriesVictoria",
+      "canonical": "https://aves.bio/australia/regions/victoria",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/south-australia",
+      "prerendered": true,
+      "title": "Birding in South Australia | Adelaide & the Coorong | AVES AustraliaExplore Australia\u2019s states and territoriesSouth Australia",
+      "canonical": "https://aves.bio/australia/regions/south-australia",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/western-australia",
+      "prerendered": true,
+      "title": "Birding in Western Australia | Perth & Yanchep woodland | AVES AustraliaExplore Australia\u2019s states and territoriesWestern Australia",
+      "canonical": "https://aves.bio/australia/regions/western-australia",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/northern-territory",
+      "prerendered": true,
+      "title": "Birding in Northern Territory | Darwin, Fogg Dam & Kakadu | AVES AustraliaExplore Australia\u2019s states and territoriesNorthern Territory",
+      "canonical": "https://aves.bio/australia/regions/northern-territory",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/australian-capital-territory",
+      "prerendered": true,
+      "title": "Birding in Australian Capital Territory | Canberra wetlands & forest | AVES AustraliaExplore Australia\u2019s states and territoriesAustralian Capital Territory",
+      "canonical": "https://aves.bio/australia/regions/australian-capital-territory",
+      "noindex": true
+    },
+    {
+      "route": "/australia/regions/jervis-bay-territory",
+      "prerendered": true,
+      "title": "Birding in Jervis Bay Territory | Booderee coast, heath & forest | AVES AustraliaExplore Australia\u2019s states and territoriesJervis Bay Territory",
+      "canonical": "https://aves.bio/australia/regions/jervis-bay-territory",
+      "noindex": true
+    },
+    {
+      "route": "/australia/tours",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/tours/adventure",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/tours/vision",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/tours/elevate",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/tours/souls",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/about",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/team",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/about/partners",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/about/b-corp",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/conservation",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/blog",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/resources",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/travel-tips",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/privacy",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/terms",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/cookies",
+      "prerendered": false
+    },
+    {
+      "route": "/australia/credits",
+      "prerendered": true,
+      "title": "Photography & Recording Credits | AVES Australia",
+      "canonical": "https://aves.bio/australia/credits",
+      "noindex": true
+    },
+    {
+      "route": "/australia/site-map",
+      "prerendered": true,
+      "title": "Site Map | AVES Australia",
+      "canonical": "https://aves.bio/australia/site-map",
+      "noindex": true
+    }
+  ],
+  "sourceCommit": "25e932a3ae83aee97c373b04c37cc4536d19de08",
+  "reviewDate": "2026-11-10",
+  "tests": {
+    "passed": 410,
+    "failed": 0,
+    "skipped": 0
+  },
+  "typecheck": "passed; also checked by final build",
+  "build": "local VERCEL_ENV=preview Next.js build passed",
+  "runtime": {
+    "node": "22.23.4",
+    "pnpm": "10.34.5"
+  },
+  "browser": "not performed; prior managed-launcher Next.js incompatibility remains a C2 limit",
+  "hostedDeployment": "none",
+  "productionChanges": false,
+  "privateOperations": false
+}
