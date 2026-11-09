@@ -7,10 +7,11 @@ requests and acceptance criteria; its historical priorities and automatic-next
 notices do not select implementation.
 
 AVES-053's South Island pilot, AVES-066 and AVES-068 safe continuity are delivered.
-Owner-selected C1a/C1b/C1c are complete in the integration draft; see
-[the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). No production change.
-Next selected increment: C1d consent/owner updates, not yet implemented. Hosted acceptance,
-production cutover and project retirement remain separate gates.
+C1a/C1b/C1c/C1d are complete; C2 read-only preview review passed within recorded
+limits. C3 is partial: authorised live fixtures passed scoped checks and were
+cleaned up. Exact unified hosted private acceptance remains gated on a safe
+staging action; automatic review rejected dashboard Redeploy. No C4 release or
+C5 retirement is approved. See [the current checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md).
 The former stacked release notices are preserved verbatim in the
 [pre-066 archive](archive/2026-11-09-before-aves-066/README.md).
 

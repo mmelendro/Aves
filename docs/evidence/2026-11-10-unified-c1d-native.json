@@ -1,0 +1,132 @@
+{
+  "scope": "isolated local native services; synthetic data only",
+  "testedAt": "2026-11-09T23:30:12.528Z",
+  "applicationRevision": "6c7cb0bba913ed4c1a0315c5fa89f690519d792b",
+  "productionChanged": false,
+  "externalMailSent": false,
+  "findings": [
+    {
+      "check": "matching PostgreSQL 17.11 starts without Docker",
+      "passed": true
+    },
+    {
+      "check": "Auth SMTP restricts fixture recipients and application mail is captured without forwarding",
+      "passed": true
+    },
+    {
+      "check": "real Supabase Auth migrates its isolated schema and starts",
+      "passed": true
+    },
+    {
+      "check": "only the eleven maintained application migrations apply to the fresh database",
+      "passed": true
+    },
+    {
+      "check": "real PostgREST and the local TLS API gateway start with separate client and service roles",
+      "passed": true
+    },
+    {
+      "check": "the AVES application starts against local-only services",
+      "passed": true
+    },
+    {
+      "check": "email signup requires confirmation, and SMTP confirmation plus PKCE establish the root account session",
+      "passed": true
+    },
+    {
+      "check": "verified consent is explicit, idempotent, reversible and private across real sessions",
+      "passed": true
+    },
+    {
+      "check": "Australia, Colombia and New Zealand drafts persist through real user-scoped HTTP and database writes",
+      "passed": true
+    },
+    {
+      "check": "same-key retries preserve one saved plan and reject changed payloads",
+      "passed": true
+    },
+    {
+      "check": "a new password session reopens all countries, saves an edit and rejects a stale tab",
+      "passed": true
+    },
+    {
+      "check": "existing NZ briefs accept bounded budgets and retain them after reopen and edits without currency conversion",
+      "passed": true
+    },
+    {
+      "check": "the database budget validator rejects malformed amounts and preserves an undecided category",
+      "passed": true
+    },
+    {
+      "check": "another account cannot read or edit plans, become an owner or bypass database row permissions",
+      "passed": true
+    },
+    {
+      "check": "legacy Australian cookies migrate to root without losing the country query or overwriting a newer user",
+      "passed": true
+    },
+    {
+      "check": "New Zealand quote submission freezes the private brief, notifies once and prevents guest edits",
+      "passed": true
+    },
+    {
+      "check": "only the owner can draft and issue a proposal, which becomes visible only to its guest",
+      "passed": true
+    },
+    {
+      "check": "country enquiries save durable receipts, versioned consent and one notification despite retries",
+      "passed": true
+    },
+    {
+      "check": "legacy Colombian and Australian enquiry URLs store in the same shared backend",
+      "passed": true
+    },
+    {
+      "check": "notification rejection preserves the stored enquiry and records a distinct failure",
+      "passed": true
+    },
+    {
+      "check": "password recovery uses a one-time email callback, changes credentials and sign-out revokes refresh",
+      "passed": true
+    },
+    {
+      "check": "an owned draft deletes through the real API with revision protection",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "No browser automation or physical phone run against this local stack",
+    "No hosted Google OAuth, provider redirect allowlist or real inbox delivery is verified",
+    "Fresh native PostgreSQL/Auth/PostgREST are representative services, not the hosted Supabase configuration",
+    "SMTP mail and Resend-compatible responses are captured locally; provider acceptance is simulated"
+  ],
+  "harnessSha256": {
+    "native-runtime.mjs": "02b658198a49a83e5402a1293a372b201274c06c084f7e875c7f47ec282efe48",
+    "native-flows.mjs": "eb9952f28195d65cca2ca0297e88f22c84668bee024d0cb372d54b97d3215baf",
+    "run-native.py": "71e2900d3fb26b64cdb47ac1a8f82b683a20c06161800036a46cbd5af5d81302"
+  },
+  "applicationSourceFingerprint": "708e26eb5ff8fc4b756f1e58acb98c386e169079a5a4d6441f76b909cf4815cc",
+  "applicationWorkingTreeDirty": true,
+  "postgres": "17.11",
+  "auth": "2.197.0",
+  "applicationMigrations": [
+    "20261104210527_australia_contact_storage.sql",
+    "20261104222434_australia_client_trips_quotes.sql",
+    "20261106105909_australia_draft_quota_and_default_privileges.sql",
+    "20261106105919_australia_client_quote_column_privileges.sql",
+    "20261106114144_shared_country_plans_and_contacts.sql",
+    "20261106203926_extensible_destination_catalogue.sql",
+    "20261108023556_new_zealand_private_planning_brief.sql",
+    "20261108030916_nz_private_bird_wishlist.sql",
+    "20261108192239_private_trip_budget_preferences.sql",
+    "20261108225245_account_email_updates.sql",
+    "20261109001033_private_ai_proposal_drafts.sql"
+  ],
+  "postgrest": "16.5",
+  "passed": true,
+  "nativeServicesStopped": true,
+  "fixtureDataRemoved": true,
+  "testedSourceCommit": "1e0fbfefd7672ed09961c856b8d4732d37861b70",
+  "testedRuntimeCommit": "6c7cb0bba913ed4c1a0315c5fa89f690519d792b",
+  "sourceNote": "Application runtime equals 6c7cb0b; 1e0fbfe removes an unsupported streamed-page-redirect assertion from native tooling. The redirect is covered by component tests and the hosted browser."
+}

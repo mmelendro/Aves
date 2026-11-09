@@ -2,13 +2,31 @@
 
 ## Current checkpoint
 
-C1a/C1b/C1c are complete. Current C1c source: ebccaf22412719813fe4ab10a861feda89931185.
-Read [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md) and the shared
-handoff. 414 tests, 21 isolated native checks, TypeScript and local preview-mode
-build passed. No new hosted preview or production release. C1d consent/owner work
-and C2/C3 current public/private hosted acceptance remain pending. The local
-fixture uses nine maintained histories and no hosted credentials; it does not
-resolve the previously declined hosted test-setup gate.
+C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
+6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
+https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app (dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn).
+423 tests, 22 isolated native checks, TypeScript and final local/hosted builds
+passed. All 74 public pages passed the 82-request hosted matrix; 16 additional
+asset/redirect checks passed. Desktop/keyboard and 340 CSS-pixel zoom reflow were
+reviewed, with physical Safari, exact 320/390px and real background/telephone
+behaviour still unverified. See [CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md).
+
+C3 is partial. The owner authorised live synthetic test accounts/records and
+confirmed the test email. Ten live database transaction check groups passed and
+rolled back. One real account received confirmation mail in the owner's inbox,
+signed in and passed five live private-service check groups. Its three destination
+drafts and account were removed; sessions revoked; zero fixtures remain. No
+customer records, hosted schema/policies/provider settings or production code
+changed. Native results are not hosted unified private acceptance.
+
+The exact unified candidate still needs a protected production-mode staging
+build and hosted authenticated browser/provider/owner-delivery/session checks.
+The connector lacks an explicit skip-domain staging control. Automatic approval
+review rejected clicking the dashboard's Redeploy action because it may start a
+build immediately. Do not retry that action without the required approval or
+silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
+C4 production cutover and C5 retirement remain separately unapproved. Preserve
+both production apps and rollback anchors. No paid provisioning or AI requests.
 
 ## Historical 8 November preview and native evidence
 

@@ -49,3 +49,13 @@ or being performed now. Add the next verified source/deployment before continuin
 AVES-068 previous main: 6856389 / dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw. Previous AU: e0c766a / dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq. Revert only the affected app, or main then AU if both need recovery. No database rollback.
 
 AVES-053 recovery: main only, to runtime 5d96fa0 / dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH, checkpoint 12. Australia is unchanged and needs no rollback. This is a public UI/audio increment with no database changes.
+
+
+## Unified C1d/C2 preview checkpoint, 10 November 2026
+
+No production release. Runtime 6c7cb0bba913ed4c1a0315c5fa89f690519d792b;
+protected read-only preview dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn. Native harness
+checkpoint 1e0fbfefd7672ed09961c856b8d4732d37861b70. See the C1d/C2 checkpoint.
+Production anchors remain main dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB and Australia
+ dpl_56y3bD1RTE2fngcHBr14obkGu2bx. No rollback is being performed. Scoped C3
+synthetic fixtures were fully removed; no schema or customer-data rollback applies.

@@ -1,0 +1,29 @@
+{
+  "runtimeCommit": "6c7cb0bba913ed4c1a0315c5fa89f690519d792b",
+  "sourceAndNativeHarnessCommit": "1e0fbfefd7672ed09961c856b8d4732d37861b70",
+  "unitTests": {
+    "passed": 423,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativeChecks": {
+    "passed": 22,
+    "sourceFingerprint": "708e26eb5ff8fc4b756f1e58acb98c386e169079a5a4d6441f76b909cf4815cc",
+    "fixturesRemoved": true,
+    "servicesStopped": true
+  },
+  "typecheck": "passed",
+  "localPreviewBuild": "passed",
+  "hostedPreviewBuild": "READY",
+  "hostedRequests": 82,
+  "publicPages": 74,
+  "additionalAssetAndRedirectChecks": 16,
+  "productionCodeChanged": false,
+  "hostedSchemaOrPoliciesChanged": false,
+  "newResourcesOrSpending": false,
+  "realTestConfirmationEmails": 1,
+  "customerRecordsReadOrChanged": false,
+  "c3Status": "partial; safe staging blocked by automatic review",
+  "c4ReleaseApproved": false,
+  "c5RetirementApproved": false
+}

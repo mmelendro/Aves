@@ -1,21 +1,36 @@
 # AVES current execution prompt
 
-Updated 10 November 2026. Published AVES-053/066/068 remain unchanged. C1a/C1b and
-owner-selected C1c are complete in the existing unified draft. Read
-[the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md) and HANDOFF-CURRENT.md.
-414 tests, 21 isolated native checks, TypeScript and local preview-mode build
-passed. Browser/hosted acceptance remains incomplete. No new hosted preview,
-production release, hosted migration/private-data edit or external mail was made.
+Updated 10 November 2026, Sydney.
 
-Next selected increment: C1d consent/owner updates, not yet implemented. Keep AI requests
-and connection checks deferred. C2/C3 acceptance remains pending. No paid
-provisioning or hosted provider/database changes are authorised. Production
-publication requires explicit approval. The current handoff/agile order supersedes
-older automatic-continuation wording.
+C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
+6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
+https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app (dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn).
+423 tests, 22 isolated native checks, TypeScript and final local/hosted builds
+passed. All 74 public pages passed the 82-request hosted matrix; 16 additional
+asset/redirect checks passed. Desktop/keyboard and 340 CSS-pixel zoom reflow were
+reviewed, with physical Safari, exact 320/390px and real background/telephone
+behaviour still unverified. See [CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md).
 
-Owner selected completion of C, then saved places, species-origin filters,
-checklist photos, South Island context, verified places, playback, continuous bird
-calls, maps and design. Follow the owner-selected order in [AGILE-PLAN.md](AGILE-PLAN.md).
+C3 is partial. The owner authorised live synthetic test accounts/records and
+confirmed the test email. Ten live database transaction check groups passed and
+rolled back. One real account received confirmation mail in the owner's inbox,
+signed in and passed five live private-service check groups. Its three destination
+drafts and account were removed; sessions revoked; zero fixtures remain. No
+customer records, hosted schema/policies/provider settings or production code
+changed. Native results are not hosted unified private acceptance.
+
+The exact unified candidate still needs a protected production-mode staging
+build and hosted authenticated browser/provider/owner-delivery/session checks.
+The connector lacks an explicit skip-domain staging control. Automatic approval
+review rejected clicking the dashboard's Redeploy action because it may start a
+build immediately. Do not retry that action without the required approval or
+silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
+C4 production cutover and C5 retirement remain separately unapproved. Preserve
+both production apps and rollback anchors. No paid provisioning or AI requests.
+
+Owner-selected order after C: saved places, species-origin filters, checklist
+photos, South Island context, verified places, playback, continuous bird calls,
+maps and design. Follow [AGILE-PLAN.md](AGILE-PLAN.md).
 
 ## Start from the correct checkpoint
 
@@ -31,7 +46,8 @@ Repository: https://github.com/mmelendro/Aves
 | webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | d34faab | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB |
 | australia/preview | Australia and shared accounts/backend/admin | 2ff09e9 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx |
 
-Keep the app roots separate. Documentation commits are newer than these runtime
+Keep both published apps separate until C4; the selected integration draft is
+unified. Documentation commits are newer than these runtime
 commits; a documentation sync is not a deployment. Preserve AVES naming,
 branding, canonical URLs, search visibility and existing country/region links.
 This visual programme does not require project renaming or branch consolidation.
@@ -253,7 +269,9 @@ or assume deployment artifacts are retained forever. Sync the correct app and
 shared handoff to GitHub. After the selected AVES-053 South Island release is verified and synced, pause. The owner
 chooses the next increment. Do not revive older automatic-continuation orders.
 
-No new spend, subscriptions, broad secret pulls, weaker privacy or app-root merge.
+No new spend, subscriptions, broad secret pulls, weaker privacy or unapproved
+production cutover. Necessary synthetic live fixtures are authorised for C3, with
+scoped cleanup. Preserve customer records, policies and provider settings.
 AI proposal drafting 059 remains deferred because the account cannot satisfy the
 required zero-data-retention entitlement with its current free credits. Do not
 retry, buy credits, upgrade or relax ZDR/no-training. Manual proposals remain.
