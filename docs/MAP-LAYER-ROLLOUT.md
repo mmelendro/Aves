@@ -74,3 +74,8 @@ Type/build checks, actual layered selection flow, desktop/narrow/keyboard
 verification, source links, human/XML sitemaps and private-route exclusions.
 Save the exact previous and new runtime, named recovery branch and deployment.
 No free-credit AI retry, new spend, protection bypass or broad secret pull.
+
+
+## 9 November — South Island shared discovery delivered; paused
+
+006c/055/012a foundation increment: one page-local place/photo/habitat selection connects both South Island maps and viewers, with four featured places/five licensed photos and broad sourced bird filters. Runtime d7e39e5 / dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx is published. No site-specific occurrence claims or new layers/media/data.129 tests/type/build, desktop/390/320px candidate/live checks and34 route/asset/sitemap checks passed. See RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md. Pause; full-screen is the next proposed separately selected increment, not yet delivered.

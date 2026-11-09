@@ -1,3 +1,11 @@
+## Latest published increment — South Island shared discovery, 9 November 2026
+
+Source runtime **d7e39e5**, Production **dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx**. Both South Island maps now share the featured landscape-place selection with the photo carousel and broad bird-habitat filter. Four featured places/five photos; habitat changes choose matching imagery; All restores30 birds without losing the selected photo. This does not claim site-specific bird occurrence or connect arbitrary park/business markers to unverified photos. See [release and evidence](docs/RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md).
+
+Verification:129 tests, TypeScript, successful hosted build, all four place transitions at desktop1280/390/320px on the exact protected candidate; live desktop/phone checks with no browser errors and34 live route/asset/sitemap checks. No physical iPhone touch test. Australia/accounts are unchanged. Previous main deployment is checkpoint06; new recovery source is checkpoint07.
+
+**Pause now**, as requested for this increment. Next proposed small release is South Island full-screen viewing with selection/controls/credits preserved, Escape/Close and focus restoration. Full-screen, multi-photo expansion beyond the existing collection, global continuous transitions and habitat soundscapes remain queued. No new paid service or AI retry is authorized. This notice supersedes older runtime/order/pause notes below.
+
 ## Latest owner-selected verification — 9 November 2026
 
 Homepage country-map consistency is already published from the newer work pulled from GitHub (baseline 0dde307; live runtime 1aed534 / dpl_EpZR2p99nc9zy5gp8z83zpueMCKp). No application edits or redundant deployment were made in this resumption. Fresh live checks passed all 23 selectors at desktop/390/320px, keyboard preview/guide navigation for each country, and 29 public routes with NZ anchors and private sitemap exclusions. Automated tests:128 passed; TypeScript passed. Physical phone touch was not tested. See [verification checkpoint](docs/RELEASE-2026-11-09-MAP-CARDS-RECHECK.md).

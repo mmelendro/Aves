@@ -251,3 +251,8 @@ AVES-053 is promoted to the next media priority: habitat-specific South Island s
 ## 9 November 2026: consolidated connected discovery and media request
 
 Implementation paused at the owner's request. The authoritative consolidated acceptance criteria and current delivered/pending distinction are in [NEXT-WEEK-PROMPT.md](NEXT-WEEK-PROMPT.md). Preserve continuous world/country/region/subregion/habitat zoom and synchronised surrounding content; full-screen maps and complete bird/place carousels; several licensed photos for each location/habitat; simultaneous transparent satellite/ecosystem/conservation/place/business layers; and one discreet bird-inspired player family for soundscapes, calls, podcasts and compatible video. Soundscapes remains the next media priority. Retain Google Maps/subregion route-and-travel-time request 062 and small named recovery checkpoints. No code or deployment change in this documentation update. Resume only on owner instruction.
+
+
+## 9 November — South Island shared discovery delivered; paused
+
+006c/055/012a foundation increment: one page-local place/photo/habitat selection connects both South Island maps and viewers, with four featured places/five licensed photos and broad sourced bird filters. Runtime d7e39e5 / dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx is published. No site-specific occurrence claims or new layers/media/data.129 tests/type/build, desktop/390/320px candidate/live checks and34 route/asset/sitemap checks passed. See RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md. Pause; full-screen is the next proposed separately selected increment, not yet delivered.

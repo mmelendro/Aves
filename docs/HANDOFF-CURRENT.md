@@ -1,8 +1,10 @@
-## Latest owner-selected verification — 9 November 2026
+## Latest published increment — South Island shared discovery, 9 November 2026
 
-Homepage country-map consistency is already published from the newer work pulled from GitHub (baseline 0dde307; live runtime 1aed534 / dpl_EpZR2p99nc9zy5gp8z83zpueMCKp). No application edits or redundant deployment were made in this resumption. Fresh live checks passed all 23 selectors at desktop/390/320px, keyboard preview/guide navigation for each country, and 29 public routes with NZ anchors and private sitemap exclusions. Automated tests:128 passed; TypeScript passed. Physical phone touch was not tested. See [verification checkpoint](RELEASE-2026-11-09-MAP-CARDS-RECHECK.md).
+Source runtime **d7e39e5**, Production **dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx**. Both South Island maps now share the featured landscape-place selection with the photo carousel and broad bird-habitat filter. Four featured places/five photos; habitat changes choose matching imagery; All restores30 birds without losing the selected photo. This does not claim site-specific bird occurrence or connect arbitrary park/business markers to unverified photos. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-DISCOVERY.md).
 
-The latest specific owner instruction was homepage cards, test/publish/sync, **then pause**. This takes precedence over the pasted general programme's automatic continuation. Stay paused after this documentation sync; do not start the next discovery/media increment automatically. Paid AI remains deferred and all no-new-spend/privacy guardrails remain.
+Verification:129 tests, TypeScript, successful hosted build, all four place transitions at desktop1280/390/320px on the exact protected candidate; live desktop/phone checks with no browser errors and34 live route/asset/sitemap checks. No physical iPhone touch test. Australia/accounts are unchanged. Previous main deployment is checkpoint06; new recovery source is checkpoint07.
+
+**Pause now**, as requested for this increment. Next proposed small release is South Island full-screen viewing with selection/controls/credits preserved, Escape/Close and focus restoration. Full-screen, multi-photo expansion beyond the existing collection, global continuous transitions and habitat soundscapes remain queued. No new paid service or AI retry is authorized. This notice supersedes older runtime/order/pause notes below.
 
 # AVES — current handoff and next action
 
@@ -31,7 +33,7 @@ Continue with mobile first-tap region preview, then map filters one at a time us
 ## Repository, branches and deployment
 
 - Repository: https://github.com/mmelendro/Aves
-- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `1aed534`, Vercel deployment `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`.
+- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `d7e39e5`, Vercel deployment `dpl_EmKES8YcrhCjWVz7J3kRmBX3JUgx`.
 - `australia/preview`, local `australia/`: Australian website and shared account/admin/backend. Published runtime `e0c766a`, deployment `dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq`.
 - These are two app branches of the same repository. Keep them separate; do not merge their different app roots. GitHub documentation commits are newer than the published runtime commits. Documentation-only commits do not require a production deployment.
 - Live site: https://aves.bio/ ; country routes `/colombia`, `/australia`, `/new-zealand`; dedicated guide `/new-zealand/south-island`.
