@@ -440,3 +440,8 @@ Owner’s goal.jpeg screenshot references Jan Wegener’s Regent Bowerbird banki
 
 ### Intake and subscription checkpoint
 Royann photo/ZIP originals are in the ignored local media library and are NOT available in GitHub. Audit species and locality against the actual 2025 eBird trip report; filenames are not proof, and identification remains unfinished. Four 3D MP4s need review. Optional signup email updates now use a separate verified-account consent confirmation and private registry; consent storage does not implement campaign sending. Marketing remains separate from essential messages and community participation.
+
+
+## AVES-062 — birding sites, towns and travel times for each subregion
+
+Owner request, 9 November 2026: integrate Google Maps with a list of main birding sites, cities/towns between them, and estimated travel time per leg and for a suggested journey, for each subregion. See [the complete acceptance criteria](AVES-062-SUBREGION-ROUTE-PLANNING.md). Queued after the current homepage-card release. Evaluate one subregion first, use verified public access points and dated estimates, preserve sensitive wildlife/guest privacy, and respect the no-new-spend instruction. External Maps links are a possible pilot, not completion of the requested embedded map/in-page estimates. No paid integration or Google billing change is authorized.

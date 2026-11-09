@@ -227,3 +227,8 @@ For new observations, use this short entry format:
 ## 9 November — owner no-new-spend reprioritization
 
 AVES-059 AI: DEFERRED, explicit owner choice after verified Gateway ZDR paid-entitlement blocker. No purchase/upgrade/privacy relaxation/retry authorized. Manual proposal workflow remains. AVES-012c homepage map cards: NEXT SELECTED, no implementation begun; first sync complete handoff to GitHub and pause for continuation in another chat. Other backlog items stay queued and must be checked for external costs before selected implementation. See HANDOFF-CURRENT.md for precise acceptance and branch/runtime states.
+
+
+## AVES-062 — birding sites, towns and travel times for each subregion
+
+Owner request, 9 November 2026: integrate Google Maps with a list of main birding sites, cities/towns between them, and estimated travel time per leg and for a suggested journey, for each subregion. See [the complete acceptance criteria](AVES-062-SUBREGION-ROUTE-PLANNING.md). Queued after the current homepage-card release. Evaluate one subregion first, use verified public access points and dated estimates, preserve sensitive wildlife/guest privacy, and respect the no-new-spend instruction. External Maps links are a possible pilot, not completion of the requested embedded map/in-page estimates. No paid integration or Google billing change is authorized.

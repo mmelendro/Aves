@@ -1,12 +1,12 @@
 # AVES — current execution prompt
 
-Updated 9 November 2026 (Sydney). Latest instruction: defer paid AI, prepare this handoff, then **pause after GitHub sync**. Next code increment is homepage map consistency012c; no map edits have started. Do not execute the backlog automatically. Use Sol medium for a focused implementation; recommend a different model only when the task warrants it. Actual credit percentages and automatic model switching cannot be verified.
+Updated 9 November 2026. Homepage map-card pilot AVES-012c is published at runtime `c3d911d` and paused after GitHub sync. Read HANDOFF-CURRENT.md and RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md for results and exact testing limits. AVES-062 records the new Google Maps/subregion birding route and travel-time request, queued rather than implemented. Do not execute the backlog automatically. Paid AI remains deferred, privacy safeguards stay intact and the app branches stay separate.
 
 ## Correct project and published state
 
 Repository: https://github.com/mmelendro/Aves
 
-- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **923bbcb**, deployment **dpl_4XUQc5GCJQsSArZAmsVwBkq4TgC5** (English-default Colombia language pilot; retains the South Island release).
+- `webmaster/readiness-2026-11-05`, workspace `source`: homepage, Colombia, New Zealand. Published runtime **c3d911d**, deployment **dpl_BDLchEMBuMcTAkyiifguNG7ahjB5** (homepage map cards, retaining Colombia language and South Island releases).
 - `australia/preview`, workspace `australia`: Australia and shared accounts/backend. Published account runtime **d693512**, deployment **dpl_9hrh2H4xuQumccS1qiPupqZuozV7**; retains account/subscription repairs and adds the AI pilot/connection diagnostics. Real draft generation is currently failing and must be resolved before declaring completion.
 - Keep the apps/branches separate. Do not merge the older consolidation/pricing work. Check working trees and recent commits before edits from another chat are changed.
 
@@ -25,7 +25,7 @@ Validation: source 119 tests and responsive/live South Island checks passed. Acc
 ## Next priorities — one selected increment at a time
 
 1. **AI proposal generation059 is DEFERRED by the owner: no new spending.** Manual proposals remain available. Do not retry AI, buy credits, upgrade plans or relax privacy to bypass the entitlement blocker. Resume only with explicit authorization. Read HANDOFF-CURRENT.md for the verified cause and exact next action.
-2. **012c:** unify the homepage country map cards (labels/callouts, colours, boundaries, spacing and selection), then country/subregion maps in scoped batches. This is the next visual priority explicitly requested by the owner.
+2. **012c homepage pilot is published.** Country/subregion map consistency remains queued in scoped batches. **062** adds main birding sites, intervening cities/towns, travel times and Google Maps per subregion. Read AVES-062-SUBREGION-ROUTE-PLANNING.md before choosing a no-new-spend pilot. Neither follow-up is started automatically.
 3. Finish South Island planning depth: **036** embedded resource carousel; **039** checklist media previews; **006c** full subregion content/context changes; **055** homepage subregion selection changes its subsequent section to the appropriate ecosystem map/landscape carousel. Reuse verified data, routes and templates.
 4. Once South Island is ready, **040** North Island reaches the same template/functionality/depth using its own verified birds, calls, habitats and resources. Sydney is the next product priority.
 5. Remaining separately selected items are in ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md. Do not bundle them into one large release.
@@ -65,6 +65,6 @@ AI drafting implementation is now published in the account app, but real provide
 
 ## Current authority and next increment
 
-Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for both branches/deployments, delivered versus queued features, AI diagnosis, no-new-spend order, acceptance criteria and verification limits. AVES-012c homepage map-card consistency is next; implementation has not started. The owner requested a GitHub handoff before changing code. Sync documentation then pause.
+Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for both branches/deployments, delivered versus queued features, AI diagnosis, no-new-spend order, acceptance criteria and verification limits. AVES-012c homepage map-card pilot is published and checked, with exact 320/390px and physical touch limits recorded. The new AVES-062 route-planning requirement is retained in the backlog. GitHub checkpoint is synced; pause.
 
 AVES-061 logo landscape contour and AVES-058 feather controls remain explicitly queued; preserve all smaller details in AVES-CHANGE-INBOX.md and ROADMAP-DETAILS.md. The private AI implementation is live but unverified end to end, and deferred until eligible paid access is authorized. Vercel requires purchased credits or a paid plan for the requested ZDR; free credits do not qualify. No billing change made; retain ZDR/no-training.
