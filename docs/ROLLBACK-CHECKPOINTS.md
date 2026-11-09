@@ -4,7 +4,7 @@ Use one checkpoint per small verified increment. Check the current GitHub heads
 and Vercel project before any recovery. Main and Australian apps are independent;
 do not merge their roots or roll back both merely because one UI changed.
 
-| Checkpoint branch | Source commit | Main Production deployment | State |
+| Checkpoint branch | Source commit | Production deployment for named app | State |
 | --- | --- | --- | --- |
 | checkpoint/2026-11-09-01-feather-maps | 6f123b0dcd7d6e4a9d0718a5aff4a798c4d254a5 | dpl_9bzZ17LFvxTSR8Dr5c2gYPPAfPYV | Prior feather presentation, verified |
 | checkpoint/2026-11-09-02-region-preview | 15c19f159cd600a7a6aa7885b00e7e1b5ea4bcad | dpl_DeyZmLZ4GRG4KoC7EaDVoFiS15Ze | First-tap preview published; mouse first/second guide flow verified live; SVG Enter follow-up included with boundaries |
@@ -12,6 +12,8 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-09-04-australia-preview | e0c766a80d1150c7a0c24e1ccf54adc1336530b7 | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq | AU app: first preview/second guide; published |
 | checkpoint/2026-11-09-05-south-island-layers | 14798a16b4363d27bfff6b563470dc984520b057 | dpl_DBHMyn8kGx78oNg7oikUkWEwz3mM | Main app: satellite, nine national parks and DOC conservation pilot; published and checked |
 | checkpoint/2026-11-09-06-combined-ecotourism-layers | 1aed534d5a295168cf445d3185876184425c671e | dpl_EpZR2p99nc9zy5gp8z83zpueMCKp | Main app: combined transparency/ecosystems and curated public places/businesses |
+| checkpoint/2026-11-10-12-media-handoff-main | 5d96fa02e45fb18304fc07a97bb5084948ab4afd | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH | Main safe media continuity/paused handoff |
+| checkpoint/2026-11-10-12-media-handoff-australia | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | AU/shared portal public player/paused handoff |
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
@@ -37,3 +39,5 @@ These UI increments contain no database migrations or destructive data edits.
 A hosting rollback restores application routing, not database contents, third-party
 account settings or subsequently issued communications. No recovery is needed
 or being performed now. Add the next verified source/deployment before continuing.
+
+AVES-068 previous main: 6856389 / dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw. Previous AU: e0c766a / dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq. Revert only the affected app, or main then AU if both need recovery. No database rollback.

@@ -1,8 +1,8 @@
-# Selected map-layer continuation
+# Map-layer rollout criteria
 
-Updated 9 November 2026. Implementation is currently paused at the owner's request. On resumption, continue in small verified increments. Read NEXT-WEEK-PROMPT.md for the consolidated discovery/full-screen/media requirements.
-Preserve the source/deployment checkpoints. This is implementation state, not a
-claim that every filter is already present on every destination.
+AVES-068 safe continuity is published and paused. This file retains source and
+projection criteria, not an automatic rollout instruction. Read HANDOFF-CURRENT.md
+and NEXT-WEEK-PROMPT.md for delivered scope and permission to proceed.
 
 ## South Island sample
 

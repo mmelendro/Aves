@@ -1,10 +1,11 @@
 # AVES current execution prompt
 
-Updated 9 November 2026. **Implementation is paused at the owner's request.**
-This update consolidates requirements only. Do not change code or deploy until
-the owner resumes work. On resumption, continue the selected programme in small
-verified increments without asking again at every step. The present pause
-supersedes earlier automatic-continuation instructions until then.
+Updated 10 November 2026. AVES-068's safe continuity increment is published:
+same-app public browsing keeps the player, and app/reload boundaries offer an
+explicit paused Resume. Uninterrupted playback across separate documents remains
+an architecture backlog, not delivered. AVES-066 remains complete. Pause after
+this release, verification, GitHub sync and document cleanup. No next task selected.
+The release/status authority is HANDOFF-CURRENT.md.
 
 ## Start from the correct checkpoint
 
@@ -17,8 +18,8 @@ Repository: https://github.com/mmelendro/Aves
 
 | App branch | Scope | Published runtime | Production deployment |
 | --- | --- | --- | --- |
-| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 1aed534 | dpl_EpZR2p99nc9zy5gp8z83zpueMCKp |
-| australia/preview | Australia and shared accounts/backend/admin | e0c766a | dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq |
+| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 5d96fa0 | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH |
+| australia/preview | Australia and shared accounts/backend/admin | 2ff09e9 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx |
 
 Keep the app roots separate. Documentation commits are newer than these runtime
 commits; a documentation sync is not a deployment. Preserve AVES naming,
@@ -46,12 +47,22 @@ overlapping categories deduplicated. This is a pilot, not complete coverage.
 Satellite imagery dates to 2004; LCDB land cover is 2023/24 and generalised to
 about 2 km. Zoom does not create new detail or guaranteed wildlife sightings.
 
-See [combined-layer release](RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md),
-[region preview/boundaries release](RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md)
-and [recovery checkpoints](ROLLBACK-CHECKPOINTS.md). Latest main release passed
-128 tests, type/build checks, desktop/keyboard/340px browser reflow and 31 live
-route/asset/sitemap checks. Exact 320/390px and physical phone touch remain
-unverified for this release. Do not inherit older releases' testing claims.
+The newer South Island releases also deliver shared featured-place/photo/habitat
+selection, bird/place full-screen pilots, a six-resource carousel, field-guide
+links and a layout-owned bird-themed podcast/video dock. AVES-068 now preserves
+playback through known public same-app routes, including Colombia. Across the
+separate main/Australia/My Trips documents or a reload, it offers Resume from a
+validated tab-scoped checkpoint without loading external media first. This is
+not an uninterrupted stream across a document change. The bird follows the
+programme country, not the current page: Colombia motmot, NZ kea and the existing
+Australian bird. All currently curated programmes are New Zealand resources.
+Habitat soundscapes remain unimplemented.
+
+AVES-066 uses the existing eleven Colombia paths, full-name keyboard controls
+and existing guide URLs. Shapes and visible dots preview the same region; hover
+and focus do not arm navigation. Boundaries, positions and existing media are
+unchanged. See RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md for exact evidence and
+limitations. Earlier immutable release reports remain under docs/RELEASE-*.
 
 ## Coherent experience to build next
 
@@ -86,7 +97,7 @@ Preserve ordinary page scrolling and browser pinch zoom; intentional map
 gestures must not trap the page. Shared account routes remain separate/private.
 
 This extends 003a-2, 006c and 055. Existing homepage zoom is only a foundation;
-continuous transitions through all map/detail levels are not yet delivered.
+continuous transitions through every map/detail level remain incomplete. South Island already has the connected discovery pilot; do not rebuild it.
 
 ### 2. Full-screen maps, photos and complete carousels
 
@@ -105,8 +116,9 @@ aspect ratio and readable labels/legends. Keep Close/Escape, focus containment
 and restoration, mobile/short-screen usability and native gestures. Opening and
 closing must not reset wishes, duplicate audio or restart a slideshow.
 
-This extends photo zoom 051 and shared map/media controls. Full-screen access
-across all cards is newly requested and is not implemented by the layer pilot.
+This extends photo zoom 051 and shared map/media controls. South Island bird/place full-screen access is published. Full-screen maps and
+full-site coverage remain incomplete; extend the working pilot rather than
+replacing it.
 
 ### 3. Several photographs for each location and habitat
 
@@ -184,7 +196,8 @@ consistent and disclose legitimate provider limits.
 Coordinate the embedded resource carousel 036, checklist media previews 039 and
 audio coordination instead of building separate players per page. The prompt
 priority is recorded; habitat soundscape playback and the unified player family
-have not yet been implemented.
+are incomplete: the NZ podcast/video dock and resource carousel are published,
+but habitat soundscapes and an uninterrupted shared-shell player are not. Safe cross-app paused Resume is published.
 
 ### 6. Route planning for each subregion
 
@@ -224,9 +237,8 @@ Save small source commits, named recovery branches, the previous/new exact
 Production deployments and quick rollback/rebuild instructions in
 [ROLLBACK-CHECKPOINTS.md](ROLLBACK-CHECKPOINTS.md). Do not overwrite a shared branch
 or assume deployment artifacts are retained forever. Sync the correct app and
-shared handoff to GitHub. Continue the selected programme automatically after
-verified checkpoints unless the owner pauses it or a specific data/access gate
-blocks safe progress. **The programme is currently paused.**
+shared handoff to GitHub. After the selected AVES-068 safe continuity release is verified and synced, pause. The owner
+chooses the next increment. Do not revive older automatic-continuation orders.
 
 No new spend, subscriptions, broad secret pulls, weaker privacy or app-root merge.
 AI proposal drafting 059 remains deferred because the account cannot satisfy the
@@ -246,5 +258,48 @@ requirements merely because this prompt concentrates on discovery and media.
 The previous prompt is preserved in
 [EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md](EXECUTION-PROMPT-ARCHIVE-2026-11-09-BEFORE-CONNECTED-DISCOVERY.md).
 Historical release notes are evidence, not current instructions to overwrite a
-newer owner decision. No implementation of the new transition/full-screen/
-multi-photo/player requirements started during this documentation pause.
+newer owner decision. This older consolidation originally preceded the later South Island discovery,
+full-screen and player pilots. Current delivered scope is in HANDOFF-CURRENT.md.
+
+
+### Retained owner refinement — contextual history064
+
+Queued after the currently selected release: a concise South Island/New Zealand biological, ecological and historical orientation, with expandable detail and authoritative/mana whenua sources. Landscape origins, settlement and continuing Māori relationships with place, European settlement/land-use change, and conservation today. Start South Island; use Ngāi Tahu primary voices without invented endorsement, cultural stories or guaranteed regenerative claims. Full acceptance is in AVES-CHANGE-INBOX.md. This is separate from current-species selection rules; no new historical/extinct species are added to the trip checklist. Future regional players should reuse each region’s representative bird, and guidebook purchase links should follow the verified publisher-page pattern without stale prices or stock promises.
+
+
+## AVES-065 — Private bird wishlist with eBird connections (queued, 9 November 2026)
+
+Extend the existing private bird selections rather than introducing a second shopping/bingo list. Visitors can save want-to-see species, review/remove them and attach them to their private trip brief. Link species and regional/seasonal research to eBird using stable species IDs and attributed data. Keep sightings/life lists separate from wishes. Explore a voluntary import of the traveller’s own eBird export to identify unseen targets, with preview, minimal retained data, deletion and explicit permission. eBird provides a public observations API and personal data downloads; direct account/OAuth or personal wishlist read/write syncing has NOT been verified. Do not request eBird passwords, scrape private accounts or promise bidirectional syncing. Check official API capabilities/terms and costs before implementation. No database change or eBird connection is shipped by this entry.
+
+Sources: https://support.ebird.org/en/support/solutions/articles/48001078113 ; https://support.ebird.org/en/support/solutions/articles/48000960317 ; https://www.birds.cornell.edu/home/ebird-api-terms-of-use/ .
+
+
+## AVES-066 — Colombia whole-region map hover (delivered in this increment)
+
+Homepage country cards: Colombia currently responds at location dots, while Australia/New Zealand respond across region shapes. Make the Colombian planning-region area itself preview/highlight the corresponding region on pointer hover and keyboard focus; retain dots as location markers and maintain first tap preview, second/Explore guide navigation, clear selected state, touch and native modifier behaviour. Inspect source geometry before mapping shapes: planning regions may overlap and must not be misrepresented as official administrative boundaries. Provide accessible equivalent region links and test all 11 destinations. Owner reported 9 November 2026. Delivered in this increment; see RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md. Remains scoped to homepage country cards.
+
+
+## AVES-067 — Reuse birds ↔ AVES invitation animation (queued,9November2026)
+
+Apply the existing homepage word-flip consistently to invitations such as “Let the birds lead you into the landscape” on South Island and matching copy across the site. Animate only the birds/AVES word, preserve surrounding wording and a stable text width; use the same borderless typography, green AVES styling, gentle 3D transition and keyboard/touch equivalent. Retain a coherent accessible sentence without duplicate announcements, and a static reduced-motion version. Audit all instances before rollout; share one component rather than copies. This is the text-word animation, separate from future 3D flying bird logo models. Queued separately from the persistent-player release.
+
+
+## Ongoing quality standard — Lightweight first, high quality when chosen
+
+Owner reaffirmed9 November2026: aim for the lightest practical site while retaining high visual/media quality when available. Defer podcasts, video embeds and third-party player scripts until explicit intent; use responsive appropriately compressed images, lazy loading below the fold, a single active player and shared components. Preserve original/licensed high-resolution assets separately; offer higher quality or full-screen viewing without forcing large downloads. Check mobile data, slow connections, reduced motion, loading/error fallbacks and changes in production bundle/media cost for each relevant release. Do not prefetch remote media, add background autoplay or ship a 3D library merely for a small decorative effect.
+
+
+## AVES-068 — Safe continuity and paused handoff published; uninterrupted cross-document stream deferred
+
+10 November release: same-app public client navigation retains the player;
+main/Australia/My Trips/reload boundaries restore only a paused public-resource
+checkpoint. Close clears it; cached history respects that closure. No audio,
+iframe or publisher API is loaded by restoration before explicit Resume. Programme
+metadata controls the bird identity independently of the page. See
+[the release](RELEASE-2026-11-10-MEDIA-CONTINUITY.md) for exact scope and limits.
+A truly uninterrupted cross-document stream still requires a shared-shell
+architecture decision. No app consolidation is authorised by this release.
+
+Retained full target, with the older NZ-only pilot description superseded above:
+
+Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. The original NZ-only pilot has been superseded by the safe continuity release above. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. Main/Colombia/NZ and Australia/shared accounts currently have separate application roots; crossing Australia/My Trips or any full document navigation pauses playback and offers an explicit Resume on the next same-origin app. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.

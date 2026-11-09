@@ -1,26 +1,27 @@
-# AVES — visual site architecture
+# AVES site architecture
 
-**Current checkpoint —9November:** source f941bb9 and shared accounts5659bea are published and verified. See [current prompt](NEXT-WEEK-PROMPT.md) and [release checkpoint](RELEASE-2026-11-09-PLACES-ACCOUNTS.md). Historical release notices below are superseded. Private account hierarchy now includes `/account/email-updates`; exclude it from public/XML sitemaps. Next visual priority012c; automatic private proposal research/story059 remains queued. Pause after sync.
+Current runtime/status: [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). Historical release
+notices formerly stacked here are archived under
+archive/2026-11-10-before-aves-068/SITE-ARCHITECTURE.md.
 
-<details><summary>Historical plan and architecture evidence</summary>
+## Media continuity decision, 10 November 2026
 
-**Latest release — 9 November 2026: Arthur’s Pass 3D place-card pilot published; paused.** Source3ef94db / dpl_CwtAGCjuBe4XdYHw72GKxNrJYwHC. ONE card flips between a sourced local map and two credited landscape photographs, with explicit controls, retained photo choice, inert hidden face and reduced-motion CSS.118 source tests, TypeScript/hosted build and staged/live checks passed within the recorded limits; mobile screenshot capture was unreliable, no physical-phone test. AU/account runtime unchanged3f644a1. Read [the release checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md) and [the current prompt](NEXT-WEEK-PROMPT.md); they supersede older status notes. Next proposed038 map zoom/scale requires owner selection.047–052 remain queued.
-
-**Latest release —9November2026: homepage birds↔aves word flip published; paused.** Source3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3esoPPU3u. Heading “Where will birds take you?”; only the word changes, in matching borderless lowercase green italics.116 full source checks plus14 focused refinement checks (overlapping), TypeScript/build and desktop/phone-sized verification passed within the recorded limits. AU/account runtime unchanged3f644a1. See [RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). Next proposed: ONE South Island local-map/landscape3D place-card pilot015/037, Sol medium. Do not start it automatically. Background media041, sea context042, map hover preview043, paired place names044, team refresh045 and double-click navigation046 are queued.
-
-This notice supersedes older release/next-step suggestions below; NEXT-WEEK-PROMPT.md is the clean current entrypoint.
-
-**Latest release —9November2026: South Island land-cover map and simpler species wording published; paused.** Source011de84 / dpl_BHkhR6U5U1eGgWLFdoUq4gtLk7g4; AU/shared account3f644a1 / dpl_FxbDazX29G5cqCnuYP8ZmGDNwy34. Attributed LCDB2023/24 map/filter pilot is live; public/private controls now say “Search377 species” and “All species”, with extinct entries still excluded.115 source tests,9 focused wording/catalogue checks, TypeScript/builds and desktop/mobile verification passed within the release notes’ limits. See [RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Next owner priorities:026 homepage birds→AVES word flip, then015/037 ONE South Island place-map/landscape3D card pilot. Zoom+accurate scale038 and other follow-ups remain queued. Wait for one selected increment; Sol medium recommended.
-
-**Current execution order is in NEXT-WEEK-PROMPT.md:**026 homepage word flip, then the owner-confirmed ONE South Island3D place card pilot015/037. Later map zoom+scale038, place carousel expansion, media previews039, whole-region context006c and North Island parity040 remain separate. Older status/ordering notes below are historical and do not override this checkpoint.
-
-**Latest release — 9 November 2026: South Island ecosystem filter and living-only NZ checklist published; paused.** Four coarse habitat filters reuse 30 sourced South Island profiles and the shared carousel; Info/calls/wishes remain connected. Public and private pickers show 377 living entries; 55 extinct records remain archived, not browsable/selectable. Source df46c45 / dpl_7VQUbcr1NuTAWxFx3BAaQE4E3Ri2; account app c0a31ec / dpl_CEczrT3zECEYVLwS7WKSa19Fryag. Desktop/mobile,113 source +275 account tests, TypeScript, hosted builds and live sitemap checks passed. See [ecosystem release checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-ECOSYSTEMS.md). Detailed ecosystem polygons/place overlays and other-region rollout remain queued; this pilot does not claim mapped habitat boundaries. Keep Sol medium for the next selected code increment; wait for selection. This supersedes older next-step/status notes.
-
-**Latest checkpoint — 9 November 2026: private NZ budget controls published; paused.** Optional accommodation/food/activities sliders and editable whole-unit amounts, six currency codes, save/edit/reopen and frozen owner review verified live. Currency selection labels entered numbers; automatic conversion is NOT implemented. Source app remains 4d1c703; account app e8656ad / dpl_HWRbDEFKZXJdhfuwbURNWsjJ7xHf. See [private-budget release checkpoint](RELEASE-2026-11-09-PRIVATE-BUDGETS.md). Latest follow-ups: embedded resources036; featured places/ecosystem map and verified local bird filtering034/013; dated sitewide currency conversion035. Keep Sol medium for the next selected coding increment; wait for selection. This notice supersedes older next-step/state notes.
-
-**Current release — 9 November 2026: published and paused.** South Island/regional zoom is live: source5847eb7 / dpl_GMPLFwPviWsLq73i9JJBjCNvkaja; AU6ba7fee / dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv. Desktop/mobile and live sitemap checks passed within the limits recorded in [RELEASE-2026-11-09-SOUTH-ISLAND.md](RELEASE-2026-11-09-SOUTH-ISLAND.md). A1 is complete; B1 private-brief verification is the next proposed increment, not started. Announce model/effort before resuming; Sol medium recommended. This notice overrides older staged/paused status below.
-
-Design/source snapshot: 9 November 2026 (Sydney). **Planning only; no navigation or sitemap interface has been deployed by this update.** Public registry data was inspected locally today. Provider/live status remains the 8 November checkpoint; the new South Island route was published and verified live 9 November. See AGILE-PLAN for sequencing and the mandatory deployment sitemap gate (033).
+The two independently deployed Next app roots stay separate. Their layouts own
+the same small player implementation and public programme catalogue. Public
+same-app links use the existing Next router while media is open; account/auth/API,
+unknown, external, modified/new-tab, download and hash-only links stay native.
+A known public resource ID, finite bounded position, mute flag and timestamp can
+cross same-origin document changes through sessionStorage. Validation accepts
+only the curated catalogue and expires after six hours. It stores no URLs,
+credentials, guest answers, tracking identifiers or private account state.
+Restoration is paused and creates no audio/iframe/API until explicit Resume.
+Closing clears the checkpoint; cached Back/Forward pages re-read it.
+No popup, autoplay background resume, iframe shell, app merge, authentication
+change or new paid service. sessionStorage failure degrades to ordinary playback.
+Different origins do not share the checkpoint. Video provider/playlist and device
+limitations are recorded in RELEASE-2026-11-10-MEDIA-CONTINUITY.md.
+True uninterrupted playback across a document boundary needs a future shared
+shell review and is not claimed by this handoff increment.
 
 ## Read the two dimensions
 
