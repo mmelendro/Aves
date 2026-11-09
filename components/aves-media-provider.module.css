@@ -22,7 +22,6 @@
 .note { padding:0 1rem .75rem; font-size:.75rem; }
 @keyframes arrive { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:translateY(0) } }
 @media(prefers-reduced-motion:reduce) { .dock { animation:none; } .feather { transition:none; } }
-@media(max-height:540px) { .dock { max-height:calc(100dvh - 1.5rem); } }
 
 .resume { display:flex; align-items:center; gap:.5rem; margin:0 1rem 1rem; min-height:44px; padding:.5rem 1rem; border:1px solid #b7dbcd; border-radius:1rem; background:#e8f7ef; color:#065f46; font-size:.85rem; }
 .resume:focus-visible { outline:2px solid #047857; outline-offset:2px; }
