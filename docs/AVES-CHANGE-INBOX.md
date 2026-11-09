@@ -278,3 +278,21 @@ Also promote **061: the logo's landscape contour extending toward the menu/right
 Runtime **4aa0939**, Production **dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz**. Bird and landscape carousels now expand to show the complete existing photograph, retaining selected slide, controls, calls, Info and credits. Close/Escape restores the inline viewer and focus.129 tests, TypeScript and hosted build passed; desktop/phone-size browser checks and nine live route/sitemap checks completed. No physical iPhone test. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md).
 
 **Pause before the next change.** Owner priorities are now the South Island embedded resource carousel/bird-inspired player036/053, then the logo-to-menu landscape contour061. New063 places-of-interest wishes for private briefs is explicitly queued; not implemented. No new spending or AI retry. This notice supersedes older status/order notes below; previous release descriptions are historical. Australia/accounts remain unchanged.
+
+
+## AVES-064 — Understand the South Island / New Zealand (queued,9November2026)
+
+Owner proposes concise biological, ecological and historical orientation for travellers. Add an expandable, sourced context section: landscape/geological origins and ecosystems; Māori history and ongoing relationships with place, drawing on mana whenua and Ngāi Tahu primary voices for South Island; European settlement and resulting ecological/social change; conservation today and responsible visitor participation. Avoid presenting a single universal Māori narrative, inventing legends or claiming endorsement/consultation. Explain different perspectives and regional variation, preserve macrons, distinguish sourced history from itinerary storytelling, and link to museums/official learning resources. No content shipped by this planning entry. Scope a South Island pilot before a broader NZ overview; the current resource-player/field-guide release finishes first, then pause.
+
+## Resource-player owner refinements (036,9November2026)
+
+Use the bird associated with the region/subregion, not the generic bird icon: current South Island pilot reuses the AVES kea brand artwork. Documentary/podcast locations must be discoverable on the map: Fiordland actions select the existing shared place and scroll to the map; Arthur’s Pass/Nelson Lakes actions where appropriate; never locate Whenua Hou footage on mainland South Island. Include verified bird-guide purchase links: two publisher pages, no copied prices/stock or affiliate tracking. See current resource release for delivered versus pending details; future regional player identities stay queued.
+
+
+## Latest published increment — South Island resources, 9 November 2026
+
+Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1**. South Island has one six-resource carousel: two on-demand DOC podcast streams with feather-shaped controls, official documentary/playlist embeds and two retained reading resources. The player uses AVES kea artwork. Fiordland/Arthur’s Pass/Nelson Lakes actions connect relevant resources to the shared map; offshore footage stays distinct. An expandable field-guide section adds two verified publisher purchase links without copied prices/stock or affiliate tracking.
+
+132 automated tests, TypeScript and clean hosted build passed; desktop1280, phone390 and short343px browser checks, plus nine live public-route/sitemap checks. Physical iPhone/Safari hardware remains untested. Read [release/evidence and source verification](RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCE-PLAYER.md). Previous full-screen release is checkpoint08; current recovery branch is checkpoint09. Australia/shared accounts were not changed by this release.
+
+**Pause before the next increment.** Remaining priorities:061 logo-to-menu landscape contour;053 optional habitat soundscapes/ducking;063 saving places of interest to private briefs; newly recorded064 concise biological/ecological/historical South Island orientation using authoritative and mana whenua sources. Regional bird identity and resource-to-map links are patterns to extend after verified pilots. No paid AI retry/new spending. Earlier status/order notes below are historical and superseded by this checkpoint.

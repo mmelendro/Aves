@@ -1,3 +1,11 @@
+## Latest published increment — South Island resources, 9 November 2026
+
+Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1**. South Island has one six-resource carousel: two on-demand DOC podcast streams with feather-shaped controls, official documentary/playlist embeds and two retained reading resources. The player uses AVES kea artwork. Fiordland/Arthur’s Pass/Nelson Lakes actions connect relevant resources to the shared map; offshore footage stays distinct. An expandable field-guide section adds two verified publisher purchase links without copied prices/stock or affiliate tracking.
+
+132 automated tests, TypeScript and clean hosted build passed; desktop1280, phone390 and short343px browser checks, plus nine live public-route/sitemap checks. Physical iPhone/Safari hardware remains untested. Read [release/evidence and source verification](docs/RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCE-PLAYER.md). Previous full-screen release is checkpoint08; current recovery branch is checkpoint09. Australia/shared accounts were not changed by this release.
+
+**Pause before the next increment.** Remaining priorities:061 logo-to-menu landscape contour;053 optional habitat soundscapes/ducking;063 saving places of interest to private briefs; newly recorded064 concise biological/ecological/historical South Island orientation using authoritative and mana whenua sources. Regional bird identity and resource-to-map links are patterns to extend after verified pilots. No paid AI retry/new spending. Earlier status/order notes below are historical and superseded by this checkpoint.
+
 ## Latest published increment — South Island full-screen media, 9 November 2026
 
 Runtime **4aa0939**, Production **dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz**. Bird and landscape carousels now expand to show the complete existing photograph, retaining selected slide, controls, calls, Info and credits. Close/Escape restores the inline viewer and focus.129 tests, TypeScript and hosted build passed; desktop/phone-size browser checks and nine live route/sitemap checks completed. No physical iPhone test. See [release and evidence](docs/RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md).

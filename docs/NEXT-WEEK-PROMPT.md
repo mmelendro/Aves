@@ -1,3 +1,11 @@
+## Latest published increment — South Island resources, 9 November 2026
+
+Runtime **bf49517** (player foundationad9f263), Production **dpl_CD46PdiKxApLx6ZvQhcJiFVd11Q1**. South Island has one six-resource carousel: two on-demand DOC podcast streams with feather-shaped controls, official documentary/playlist embeds and two retained reading resources. The player uses AVES kea artwork. Fiordland/Arthur’s Pass/Nelson Lakes actions connect relevant resources to the shared map; offshore footage stays distinct. An expandable field-guide section adds two verified publisher purchase links without copied prices/stock or affiliate tracking.
+
+132 automated tests, TypeScript and clean hosted build passed; desktop1280, phone390 and short343px browser checks, plus nine live public-route/sitemap checks. Physical iPhone/Safari hardware remains untested. Read [release/evidence and source verification](RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCE-PLAYER.md). Previous full-screen release is checkpoint08; current recovery branch is checkpoint09. Australia/shared accounts were not changed by this release.
+
+**Pause before the next increment.** Remaining priorities:061 logo-to-menu landscape contour;053 optional habitat soundscapes/ducking;063 saving places of interest to private briefs; newly recorded064 concise biological/ecological/historical South Island orientation using authoritative and mana whenua sources. Regional bird identity and resource-to-map links are patterns to extend after verified pilots. No paid AI retry/new spending. Earlier status/order notes below are historical and superseded by this checkpoint.
+
 ## Latest published increment — South Island full-screen media, 9 November 2026
 
 Runtime **4aa0939**, Production **dpl_31oP6mrnBhN8MW5CbTZCXXaVNLQz**. Bird and landscape carousels now expand to show the complete existing photograph, retaining selected slide, controls, calls, Info and credits. Close/Escape restores the inline viewer and focus.129 tests, TypeScript and hosted build passed; desktop/phone-size browser checks and nine live route/sitemap checks completed. No physical iPhone test. See [release and evidence](RELEASE-2026-11-09-SOUTH-ISLAND-FULLSCREEN.md).
@@ -278,3 +286,8 @@ The previous prompt is preserved in
 Historical release notes are evidence, not current instructions to overwrite a
 newer owner decision. No implementation of the new transition/full-screen/
 multi-photo/player requirements started during this documentation pause.
+
+
+### Retained owner refinement — contextual history064
+
+Queued after the currently selected release: a concise South Island/New Zealand biological, ecological and historical orientation, with expandable detail and authoritative/mana whenua sources. Landscape origins, settlement and continuing Māori relationships with place, European settlement/land-use change, and conservation today. Start South Island; use Ngāi Tahu primary voices without invented endorsement, cultural stories or guaranteed regenerative claims. Full acceptance is in AVES-CHANGE-INBOX.md. This is separate from current-species selection rules; no new historical/extinct species are added to the trip checklist. Future regional players should reuse each region’s representative bird, and guidebook purchase links should follow the verified publisher-page pattern without stale prices or stock promises.
