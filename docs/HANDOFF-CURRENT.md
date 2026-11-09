@@ -6,21 +6,21 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-AVES-053, AVES-066 and AVES-068 safe continuity remain published and unchanged.
-The owner selected C1a after the C0 consolidation assessment. C1a is complete on
-integration/aves-unified-2026-11-08, source 058beda98d5c5460cdef04b4fc160517dc37afaa.
-Read [the C1a checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md): current main public
-features are incorporated with unified metadata, preview safeguards and one media
-provider. All 405 tests, TypeScript and the local preview-mode build passed.
-Generated HTML passed for 55 static public pages; 19 dynamic public routes and
-browser/hosted behaviour still need C2 review. No new hosted preview or production
-release was made. Physical-device and prior media-test limits remain explicit.
+Published AVES-053/066/068 remain unchanged. C1a and owner-selected C1b are complete
+on integration/aves-unified-2026-11-08. Current source: 25e932a3ae83aee97c373b04c37cc4536d19de08.
+Read [the C1b checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1B.md). Australian discovery
+now uses current regional preview/zoom/introduction and shared bird data/viewers.
+All 410 tests, TypeScript and the local preview-mode build passed. The 74-route
+public registry remains unchanged; all 55 generated static pages passed metadata
+checks. Nineteen dynamic public routes and browser/hosted behaviour still need C2.
+No new hosted preview or production release was made.
 
-The prioritised order remains in [AGILE-PLAN.md](AGILE-PLAN.md). Next recommendation:
-C1b, update Australian discovery in the existing namespaces. C1b is not selected.
-Budget/consent compatibility, hosted auth/email/session acceptance, cutover and
-retirement remain separate gates. Do not retry declined paid provisioning.
-Each production release and project retirement requires explicit approval.
+Next recommendation in [AGILE-PLAN.md](AGILE-PLAN.md): C1c, private budget
+compatibility, not selected. C1d consent/owner work and hosted auth/email/session
+acceptance remain separate cutover gates. No declined paid provisioning retries,
+AI requests or provider/database changes. Each production release and later
+project retirement requires explicit approval. Preserve all prior physical-device
+and media verification limits.
 
 ## Published applications
 

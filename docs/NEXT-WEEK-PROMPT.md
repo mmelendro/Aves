@@ -1,17 +1,16 @@
 # AVES current execution prompt
 
-Updated 10 November 2026. Published AVES-053/066/068 remain unchanged. The owner
-selected C1a after C0; current main public features are now incorporated into the
-existing unified draft with preview/metadata safeguards retained. Source 058beda.
-Read [the C1a checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md) and HANDOFF-CURRENT.md.
-405 tests, TypeScript and local preview-mode build passed. Browser/hosted QA is
-not complete; no new hosted preview or production release was made.
+Updated 10 November 2026. Published AVES-053/066/068 remain unchanged. C1a and
+owner-selected C1b are complete in the existing unified draft. Read
+[the C1b checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1B.md) and HANDOFF-CURRENT.md.
+410 tests, TypeScript and local preview-mode build passed. Browser/hosted QA is
+incomplete; no new hosted preview or production release was made.
 
-Next recommendation in AGILE-PLAN.md: C1b Australian discovery, not selected.
-Budget/consent compatibility and hosted acceptance still block cutover. No paid
-provisioning, AI retries or account/provider changes are authorised. Each production
-release requires explicit approval. Older automatic-continuation wording is
-superseded by the current handoff and plan.
+Next recommendation: C1c private budget compatibility, not selected. C1d consent/
+owner work and C2/C3 acceptance remain pending. No paid provisioning, AI retries
+or provider/database changes are authorised. Each production release needs explicit
+approval. Older automatic-continuation wording is superseded by the current
+handoff and agile order.
 
 ## Start from the correct checkpoint
 

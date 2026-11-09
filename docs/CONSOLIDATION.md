@@ -2,11 +2,12 @@
 
 ## Current checkpoint
 
-10 November: C1a public-source refresh is complete at 058beda98d5c5460cdef04b4fc160517dc37afaa.
-Read [the current checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1A.md) and
-[shared handoff](HANDOFF-CURRENT.md). 405 tests, TypeScript and local preview-mode
-build passed; browser and hosted acceptance remain incomplete. No new hosted
-preview or production release. C1b/C1c/C1d remain separate pending slices.
+C1a and C1b are complete. Current C1b source: 25e932a3ae83aee97c373b04c37cc4536d19de08.
+Read [the C1b checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1B.md) and the shared
+handoff. 410 tests, TypeScript and local preview-mode build passed; generated
+HTML passed for 55 static public pages. Nineteen dynamic public routes and
+browser/hosted acceptance remain unverified. No new hosted preview or production
+release. C1c budget and C1d consent/owner work remain separate pending slices.
 
 ## Historical 8 November preview and native evidence
 
