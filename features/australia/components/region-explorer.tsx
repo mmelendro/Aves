@@ -6,6 +6,7 @@
  * The compact variant hides the extra directory cards, not any selectable regions.
  */
 
+import { useRegionPreview } from "@/components/use-region-preview"
 import { useId, useState } from "react"
 import Image from "next/image"
 import { SiteLink as Link } from "@/features/australia/components/site-link"
@@ -19,6 +20,8 @@ import { sitePath } from "@/features/australia/lib/site-path"
 export function RegionExplorer({ compact = false, initialRegion = "queensland" }: { compact?: boolean; initialRegion?: string }) {
   // A single state value keeps map clicks, text buttons and the information card in sync.
   const [selectedRegion, setSelectedRegion] = useState(regions.some(region => region.id === initialRegion) ? initialRegion : "queensland")
+  const preview = useRegionPreview(setSelectedRegion)
+  const activate = (id: string) => preview.activateButton(id, sitePath(`/regions/${id}`))
   const region = regions.find(item => item.id === selectedRegion) || regions[0]
   // Unique IDs let multiple explorer instances coexist without colliding accessible labels.
   const prefix = useId()
@@ -28,13 +31,13 @@ export function RegionExplorer({ compact = false, initialRegion = "queensland" }
       <div className="mb-8 max-w-3xl">
         <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-emerald-700">Across Australia. A whole world of birdlife.</p>
         <h2 id={`${prefix}-heading`} className="text-3xl font-bold text-gray-900 lg:text-4xl">{compact ? "Where will your curiosity take you?" : "Find your place on the map"}</h2>
-        <p className="mt-4 text-lg leading-relaxed text-gray-600">Choose any state or territory on the map, or use the region buttons. Discover its birds and habitats, then request a trip and personal quote.</p>
+        <p className="mt-4 text-lg leading-relaxed text-gray-600">Tap a state or territory to preview its birds, places and planning notes. Tap it again, or choose Explore, to open the guide.</p>
       </div>
       {/* Large text buttons offer the same choices as the map, including the smallest territories. */}
-      <div className="mb-6 flex flex-wrap gap-3" role="group" aria-label="Choose Australian region">{regions.map(item => <Button key={item.id} type="button" variant={item.id === selectedRegion ? "default" : "outline"} aria-pressed={item.id === selectedRegion} aria-controls={`${prefix}-detail`} onClick={() => setSelectedRegion(item.id)} className={`min-h-11 rounded-lg px-4 ${item.id === selectedRegion ? "bg-emerald-600 text-white hover:bg-emerald-700" : "border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50"}`}>{regionShortLabel(item.id)}</Button>)}</div>
+      <div className="mb-6 flex flex-wrap gap-3" role="group" aria-label="Choose Australian region">{regions.map(item => <Button key={item.id} type="button" variant={item.id === selectedRegion ? "default" : "outline"} aria-pressed={item.id === selectedRegion} aria-controls={`${prefix}-detail`} onClick={() => activate(item.id)} className={`min-h-11 rounded-lg px-4 ${item.id === selectedRegion ? "bg-emerald-600 text-white hover:bg-emerald-700" : "border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50"}`}>{regionShortLabel(item.id)}</Button>)}</div>
       <p className="sr-only" role="status" aria-live="polite">Showing {region.state}: {region.landscape}.</p>
       <div className="grid items-start gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-7"><AustraliaRegionMap selectedRegion={selectedRegion} onSelectRegion={setSelectedRegion} /></div>
+        <div className="lg:col-span-7"><AustraliaRegionMap selectedRegion={selectedRegion} onSelectRegion={activate} /></div>
         {/* The selected region card reads one content record; its request link prefills the contact form. */}
         <article id={`${prefix}-detail`} aria-labelledby={`${prefix}-region-name`} className="overflow-hidden rounded-xl border border-emerald-100 bg-white shadow-lg lg:col-span-5">
           <figure><div className="relative aspect-[16/7]"><Image key={region.id} src={sitePath(region.image)} alt={region.alt} fill sizes="(max-width: 1023px) 100vw, 480px" className="object-cover" /></div>{region.photoCaption && <figcaption className="border-b border-emerald-100 bg-emerald-50/50 px-6 py-3 text-xs leading-relaxed text-gray-600">{region.photoCaption} <Link href="/credits" className="font-medium text-emerald-800 underline underline-offset-2">Photo credits</Link></figcaption>}</figure>

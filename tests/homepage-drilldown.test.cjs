@@ -71,7 +71,7 @@ test("all Colombian and Australian regional photographs use explicit sourced loc
   const before = JSON.stringify(destinationBirds)
   const selections = {
     colombia: Object.fromEntries(load("content/regions.ts").regions.map(region => [region.id, region.birds])),
-    australia: load("content/global-australian-regional-birds.json").regions,
+    australia: load("features/australia/content/regional-birds.ts").regionalBirdSelections,
   }
   for (const [country, localRegions] of Object.entries(selections)) for (const region of destinationRegions[country]) {
     // This country profile has a sourced Queensland association but predates
@@ -139,13 +139,12 @@ test("unknown or cross-country identifiers cannot expose a misleading fallback r
   assert.deepEqual(getBirdRegionIds("colombia", "nonexistent"), [])
 })
 
-test("Australian regional snapshot records provenance and cannot depend on another checkout at runtime", () => {
-  const snapshot = load("content/global-australian-regional-birds.json")
-  assert.equal(snapshot.provenance.sourceBranch, "australia/preview")
-  assert.equal(snapshot.provenance.sourceFile, "content/regional-birds.ts")
-  assert.match(snapshot.provenance.scope, /not complete distributions/i)
-  assert.deepEqual(Object.keys(snapshot.regions).sort(), destinationRegions.australia.map(region => region.id).sort())
-  for (const selections of Object.values(snapshot.regions)) for (const selection of selections) {
+test("global and Australian explorers share one sourced regional collection", () => {
+  const { regionalBirdSelections } = load("features/australia/content/regional-birds.ts")
+  const { australianRegionBirds } = load("features/australia/lib/australia-region-birds.ts")
+  assert.deepEqual(Object.keys(regionalBirdSelections).sort(), destinationRegions.australia.map(region => region.id).sort())
+  for (const region of destinationRegions.australia) assert.equal(getDestinationRegionBirds("australia", region.id), australianRegionBirds(region.id))
+  for (const selections of Object.values(regionalBirdSelections)) for (const selection of selections) {
     assert.ok(selection.whereFound.trim() && selection.sources.length)
     assert.ok(selection.sources.every(source => source.title && /^https:\/\//.test(source.url)))
   }
