@@ -1,3 +1,5 @@
+> Current order (9 November): AI is deferred because privacy entitlement requires paid access. No new purchases/subscriptions authorized. Next:012c homepage map-card consistency; no code started. Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). This supersedes older ordering notes below.
+
 # AVES development stages and relative complexity
 
 Updated 9 November 2026. This is a direction and acceptance framework, not a promise that queued features are implemented. Complexity 1–5 is comparative engineering/research effort, not a credit estimate. Usage allowance and automatic model switching are not available to this agent.
@@ -8,7 +10,7 @@ Discover birds and places → save interests → private trip brief → research
 
 | Stage | Deliverable | Acceptance / dependencies | Complexity |
 |---|---|---|---|
-| 1 — current increment | Private AI draft from a frozen NZ request: story, route options, source references and missing details | Owner-only generate/save/reopen/edit. Unpriced notes separate from issued proposals. No auto-send or booking. Verify real model access, authentication, persistence and phone layout. | 3/5 |
+| 1 — deferred paid AI | Private AI draft from a frozen NZ request: story, route options, source references and missing details | Owner-only generate/save/reopen/edit. Unpriced notes separate from issued proposals. No auto-send or booking. Verify real model access, authentication, persistence and phone layout. | 3/5 |
 | 2 | Coherent NZ brief and separate solo/shared legs | Explicit year, dates, gateways, party size, transport, food/access requirements, existing arrangements and must-haves. Flag conflicts; never merge different people's preferences silently. | 2–3/5 |
 | 3 | Reliable bird-led recommendations | Wishlist → verified island/region/habitat/season/access. Native/introduced/endemic filters where supported. Separate national checklist from local, seasonally realistic visitor opportunities. | 4/5 |
 | 4 | Compare flexible itineraries | Two/three distinct routes and trade-offs; sensible bases, travel/weather buffers, food/culture/wellness, birding frequency and alternatives. Explain changes when preferences change. | 4/5 |
