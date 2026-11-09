@@ -8,6 +8,6 @@ Read [the current handoff](docs/HANDOFF-CURRENT.md),
 
 414 tests, 21 isolated native checks, TypeScript and local preview-mode build
 passed. Browser/hosted acceptance remains incomplete; no new hosted preview or
-production release. Next recommendation: C1d consent/owner updates, not selected.
+production release. Next selected increment: C1d consent/owner updates, not yet implemented.
 Keep AI checks deferred, guest data private and no-new-spend/hosted-change gates.
 Published apps remain independent and unchanged. Fetch current Git history first.

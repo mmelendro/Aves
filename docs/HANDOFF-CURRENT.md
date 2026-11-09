@@ -16,8 +16,8 @@ is unchanged; 55 static public pages passed generated metadata checks. Nineteen
 dynamic routes and browser/hosted behaviour remain unverified. No hosted preview,
 production release, hosted SQL/data change or external message was made.
 
-Next recommendation in [AGILE-PLAN.md](AGILE-PLAN.md): C1d consent/owner updates,
-not selected. Keep AI generation/connection checks deferred. C2/C3 public/private
+Next selected increment in [AGILE-PLAN.md](AGILE-PLAN.md): C1d consent/owner
+updates, not yet implemented. Keep AI generation/connection checks deferred. C2/C3 public/private
 hosted acceptance still gates cutover. Do not retry declined paid provisioning.
 Production release and later project retirement each require explicit approval.
 Preserve physical-device/media verification limits and existing privacy boundaries.
@@ -91,18 +91,15 @@ motmot, NZ kea, existing Australian bird. This does not invent programmes.
 YouTube buffered during checks; sustained video/nonzero video resume, playlist
 sub-item restoration and physical Safari/device behaviour remain unverified.
 
-## Prioritised backlog after C1a
+## Owner-selected backlog after consolidation
 
-065 private eBird-connected wishes; 067 birds/AVES invitation word flip;
-068 uninterrupted shared-shell architecture beyond paused handoff; 061 header landscape contour; 053 mountain recordings/wider soundscape rollout;
-063 private saved places; 064 ecological/historical orientation. Full criteria,
-continuous transitions, expanded maps, multi-photo collections, media-library
-work and route/travel-time request 062 remain in the execution prompt/inbox/roadmap.
-All retained requests are assigned in AGILE-PLAN.md. Consolidation is split into
-inventory, bounded code slices, public preview, gated private acceptance,
-separately approved cutover and separately approved retirement. Guest planning
-and commercial validation can proceed independently while a gate is blocked.
-Do not drop smaller requirements or silently implement the entire backlog.
+Finish C1d through C5 in their existing gated sequence. Then prioritise private
+saved places, species-origin filters, checklist photos, South Island orientation,
+verified places/conservation/lodges/travel context, uninterrupted public playback,
+continuous bird calls, map updates and design updates, in that order. See the
+owner-selected table in [AGILE-PLAN.md](AGILE-PLAN.md) for IDs and boundaries.
+Other retained requests remain queued. Each broad map/design area must be split
+into bounded increments; this selection does not approve a production release.
 
 ## Privacy and spending gates
 

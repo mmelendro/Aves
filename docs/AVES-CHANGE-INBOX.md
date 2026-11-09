@@ -9,7 +9,7 @@ notices do not select implementation.
 AVES-053's South Island pilot, AVES-066 and AVES-068 safe continuity are delivered.
 Owner-selected C1a/C1b/C1c are complete in the integration draft; see
 [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). No production change.
-Next recommendation: C1d consent/owner updates, not selected. Hosted acceptance,
+Next selected increment: C1d consent/owner updates, not yet implemented. Hosted acceptance,
 production cutover and project retirement remain separate gates.
 The former stacked release notices are preserved verbatim in the
 [pre-066 archive](archive/2026-11-09-before-aves-066/README.md).
