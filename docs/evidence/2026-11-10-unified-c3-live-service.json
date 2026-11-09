@@ -1,0 +1,27 @@
+{
+  "scope": "existing two-application live service and hosted Auth/backend, not the unified read-only preview",
+  "passed": true,
+  "findings": [
+    "Confirmed fixture session reaches the live private legacy API with no-store responses",
+    "Three destination drafts persist and idempotent retries create no duplicate; NZ wishes and zero/max budgets reopen unchanged",
+    "Owned draft edits succeed and stale revisions are rejected",
+    "Anonymous access and non-owner inbox access are denied",
+    "All three synthetic drafts are removed through their owned API and the fixture workspace is empty"
+  ],
+  "confirmationMailDeliveredToOwnerInbox": true,
+  "confirmedByOwner": true,
+  "syntheticPlansCreated": 3,
+  "syntheticPlansRemoved": 3,
+  "customerRecordsReadOrChanged": false,
+  "productionCodeChanged": false,
+  "emailsTriggered": 1,
+  "limitations": [
+    "Unified candidate private browser acceptance remains pending",
+    "Google OAuth, recovery, owner proposal delivery and unified-session handover are not proved by these checks"
+  ],
+  "fixtureSessionsRevoked": true,
+  "syntheticAccountsCreated": 1,
+  "syntheticAccountsRemoved": 1,
+  "syntheticFixtureCleanupVerified": true,
+  "unifiedCandidateHostedPrivateAcceptance": "incomplete; staging control blocked by automatic approval review"
+}

@@ -1,0 +1,36 @@
+{
+  "candidateRuntimeCommit": "6c7cb0bba913ed4c1a0315c5fa89f690519d792b",
+  "initialUiReviewCommit": "d296165eaafa9fd511011f099503e86f3d63308d",
+  "finalPreferenceRetestCommit": "6c7cb0bba913ed4c1a0315c5fa89f690519d792b",
+  "publicUiUnchangedBetweenReviewedCommits": true,
+  "previewUrl": "https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app",
+  "desktopViewport": [
+    1363,
+    936
+  ],
+  "narrowZoomViewport": [
+    340,
+    234
+  ],
+  "checks": [
+    "No horizontal overflow on global, Colombia, Australia and South Island at tested widths",
+    "Homepage keyboard divider moved 50 to 52",
+    "First South Island activation previews; second opens guide",
+    "Habitat selection synchronizes birds/map/place carousel",
+    "Ambience explicit Play, mute, stream/coast selection, unavailable mountains and Off",
+    "Bird full-screen Escape restores expand-button focus",
+    "DOC podcast plays and remains active into Australia with NZ kea identity",
+    "Australian foreground bird call pauses podcast",
+    "Narrow menu Escape restores Menu focus",
+    "Colombia local Spanish toggle",
+    "Preview auth/consent controls disabled",
+    "Final preference page remains on preview origin without consulting hosted Auth"
+  ],
+  "limitations": [
+    "Exact 320/390px and touch emulation unavailable: browser organisation policy blocks DevTools",
+    "340 CSS px is browser zoom reflow, not a physical mobile-device test",
+    "Physical iPhone/Safari, background/telephone, perceived listening quality and sustained YouTube remain unverified",
+    "Authenticated owner UI/Google/recovery/delivery on the exact unified candidate remain C3"
+  ],
+  "fixedIssue": "Signed-out email preferences originally escaped to live canonical sign-in; final route uses deployment-local sign-in and a disabled preview presentation"
+}

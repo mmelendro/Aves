@@ -1,0 +1,20 @@
+{
+  "scope": "live hosted database using synthetic-only transaction; no hosted schema or policy change",
+  "passed": true,
+  "checkGroups": 10,
+  "transactionRolledBack": true,
+  "syntheticAuthRowsCommitted": 0,
+  "remainingSyntheticAuth": 0,
+  "remainingSyntheticPlans": 0,
+  "remainingSyntheticConsent": 0,
+  "customerRecordsReadOrChanged": false,
+  "emailsSentBySql": false,
+  "providerOrBillingChanges": false,
+  "bodyComparisons": {
+    "account_email_updates": "exact match",
+    "admin_ai_draft": "exact match; not invoked",
+    "trip_details_valid": "matches after CRLF and outer-whitespace normalization"
+  },
+  "migrationTimestampDifferencesRecorded": true,
+  "authNetworkOrGoogleOrInboxVerifiedByThisSql": false
+}

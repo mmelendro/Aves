@@ -1,0 +1,136 @@
+{
+  "commit": "6c7cb0bba913ed4c1a0315c5fa89f690519d792b",
+  "previewUrl": "https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app",
+  "passed": true,
+  "checks": 16,
+  "responses": [
+    {
+      "path": "/account/email-updates",
+      "status": 307,
+      "bytes": 15,
+      "contentType": "text/plain",
+      "location": "/australia/auth/session?next=%2Faccount%2Femail-updates",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/api/account/email-updates",
+      "status": 503,
+      "bytes": 67,
+      "contentType": "application/json",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/avifauna-explorer",
+      "status": 308,
+      "bytes": 15,
+      "contentType": "text/plain",
+      "location": "/aves-explorer",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/account/settings",
+      "status": 307,
+      "bytes": 15,
+      "contentType": "text/plain",
+      "location": "/account",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/australia/account/sign-in",
+      "status": 307,
+      "bytes": 15,
+      "contentType": "text/plain",
+      "location": "/account/sign-in",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/australia/auth/callback?code=synthetic",
+      "status": 303,
+      "bytes": 0,
+      "contentType": null,
+      "location": "/account/sign-in",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/auth/confirm?token_hash=synthetic&type=signup",
+      "status": 303,
+      "bytes": 0,
+      "contentType": null,
+      "location": "/account/sign-in",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/audio/soundscapes/south-island-forest.mp3",
+      "status": 200,
+      "bytes": 720710,
+      "contentType": "audio/mpeg",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/audio/soundscapes/south-island-stream.mp3",
+      "status": 200,
+      "bytes": 720710,
+      "contentType": "audio/mpeg",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/audio/soundscapes/south-island-coast.mp3",
+      "status": 200,
+      "bytes": 720710,
+      "contentType": "audio/mpeg",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/images/maps/south-island-satellite-2004.jpg",
+      "status": 200,
+      "bytes": 87735,
+      "contentType": "image/jpeg",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/images/new-zealand/south-island-tomtit.webp",
+      "status": 200,
+      "bytes": 43186,
+      "contentType": "image/webp",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/images/new-zealand/south-island-robin.webp",
+      "status": 200,
+      "bytes": 26504,
+      "contentType": "image/webp",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/images/new-zealand/south-island-saddleback.webp",
+      "status": 200,
+      "bytes": 177310,
+      "contentType": "image/webp",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/australia/audio/superb-fairywren.mp3",
+      "status": 200,
+      "bytes": 2969252,
+      "contentType": "audio/mpeg",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/google-sign-in.svg",
+      "status": 200,
+      "bytes": 23965,
+      "contentType": "image/svg+xml",
+      "location": null,
+      "robots": "noindex, nofollow, noarchive"
+    }
+  ]
+}

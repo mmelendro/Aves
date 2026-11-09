@@ -2,20 +2,27 @@
 
 Updated 10 November 2026, Sydney.
 
-This is the retained roadmap order, including AVES-020 consolidation. C0 and owner-selected C1a/C1b/C1c are complete; see [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). Production is unchanged. HANDOFF-CURRENT.md owns runtime/status and release permission; this plan owns sequencing; ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md retain acceptance criteria.
+This is the retained roadmap order, including AVES-020 consolidation. C0 and owner-selected C1a/C1b/C1c/C1d are complete; see [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). Production is unchanged. HANDOFF-CURRENT.md owns runtime/status and release permission; this plan owns sequencing; ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md retain acceptance criteria.
 
-Next selected increment: C1d, verified-account consent and owner usability with AI requests deferred, not yet implemented. C2/C3 public/private hosted acceptance remains required before cutover. C1d is the next bounded implementation increment; each production release requires explicit approval. Older next-priority/automatic-continuation passages do not override this plan or handoff.
+C1a/C1b/C1c/C1d are complete. C2 public preview review passed within documented
+limits. C3 is partial: live synthetic fixtures are authorised, scoped live checks
+passed and all fixtures were removed. The exact unified hosted private candidate
+still needs a protected production-mode staging build; dashboard Redeploy was
+rejected by automatic approval review. C4 release and C5 retirement need separate
+approval. See [the C1d/C2 checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md) and
+[the C3 gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
 
 ## Owner-selected delivery order, 10 November 2026
 
 Finish the consolidation C sequence first: C1d consent/owner usability, C2 public
 preview acceptance, C3 hosted private acceptance, C4 explicitly approved production
 cutover, then C5 separately approved retirement after an observation period.
-C1a/C1b/C1c remain complete. C1d is selected next, not yet implemented. Source work
-is authorised; this order does not approve production publication, retirement,
-new spending, hosted account/database/provider changes or external messages.
-C3 retains its unresolved authorised-test-setup gate. If blocked, report the gate
-and agree the next ready slice rather than retry declined provisioning.
+C1a/C1b/C1c/C1d are complete. C2 public preview evidence and device limits are
+recorded. The owner authorised necessary live synthetic test accounts/records
+and confirmed the test email. This does not authorise customer-data edits,
+production publication, retirement, new spending or hosted schema/provider changes.
+C3 remains incomplete until the exact candidate passes protected hosted private
+acceptance. Do not retry the rejected Redeploy action or declined paid provisioning.
 
 After C, the owner selected this focus order, referring to the numbered pending
 updates shown in chat, not AVES ticket numbers:
@@ -79,9 +86,9 @@ Each row is a candidate increment. A sequence can span several sessions; it is n
 | Order / card | Outcome / IDs | Why now | Dependency and completion gate | Effort / deliverable |
 | --- | --- | --- | --- | --- |
 | 1 C0 complete | Refresh consolidation delta inventory, AVES-020 | Avoid integrating an obsolete draft or losing recent releases | Compare exact current heads with PR #3; identify route/config/component collisions, backend/session dependencies and all post-draft features. Record port order, test matrix, target project options and blockers. No source merge or provider changes | 2, completed assessment; see [C0 findings](CONSOLIDATION-DELTA-2026-11-10.md) |
-| 2 C1 | Update one bounded integration slice, AVES-020 | Reuse the existing draft rather than rebuild AVES | C0 and C1a/C1b/C1c complete. Remaining source slice: C1d consent/owner usability/deferred AI (3). Reconcile deliberately on the existing integration branch; retain current accounts/database/URLs and preview guards | Up to 5 per slice, code checkpoint |
-| 3 C2 | Verify refreshed unified public preview, AVES-020/033 | Establish that one application preserves the site | C1. Exact candidate passes targeted suites, TypeScript/build, desktop/narrow/keyboard, route/assets/canonicals/sitemaps/redirects/private exclusions and preview protection/no-index. Preview remains read-only. Record physical-device/media limits | 3, preview only |
-| 4 C3 | Complete hosted private acceptance, AVES-020 | Account, private planning and inquiry regressions are cutover blockers | C2 plus an explicitly authorised test setup. Verify Google/email callbacks, confirmation/recovery/sign-out, deployed-session compatibility, private save/reopen/edit, NZ answers/wishes/budgets, share/owner/proposal, isolation and authorised inbox delivery. Synthetic data only. Current setup gate remains unresolved | Up to 5, acceptance checkpoint; blocked until setup is resolved |
+| 2 C1 | Update one bounded integration slice, AVES-020 | Reuse the existing draft rather than rebuild AVES | C0 and C1a/C1b/C1c/C1d complete. Consent/owner repairs and deferred-AI boundaries preserved. Reconcile deliberately on the existing integration branch; retain current accounts/database/URLs and preview guards | Up to 5 per slice, code checkpoint |
+| 3 C2 checkpoint complete within recorded limits | Verify refreshed unified public preview, AVES-020/033 | Establish that one application preserves the site | C1. Exact candidate passes targeted suites, TypeScript/build, desktop/narrow/keyboard, route/assets/canonicals/sitemaps/redirects/private exclusions and preview protection/no-index. Preview remains read-only. Record physical-device/media limits | 3, preview only |
+| 4 C3 | Complete hosted private acceptance, AVES-020 | Account, private planning and inquiry regressions are cutover blockers | C2 plus an explicitly authorised test setup. Verify Google/email callbacks, confirmation/recovery/sign-out, deployed-session compatibility, private save/reopen/edit, NZ answers/wishes/budgets, share/owner/proposal, isolation and authorised inbox delivery. Synthetic data only. Live synthetic records are now authorised and cleaned up after scoped checks; exact unified staging/browser/provider gate remains unresolved | Up to 5, partial acceptance checkpoint; no cutover |
 | 5 C4 | Unified production cutover, AVES-020 | Deliver one maintained AVES application | C2/C3 pass on current candidate; owner explicitly approves exact release and required provider/config changes. Review target production project, indexing/env behaviour, callbacks, aliases and rollback. Build correct production target, verify live public/private journeys. Do not promote read-only preview artifact | 3, separately approved production release |
 | 6 C5 | Retire redundant deployment dependencies, AVES-020 | Finish simplification without breaking legacy paths | C4 plus an agreed observation period and live checks showing no remaining proxy, hostname, callback, asset or integration dependence. Explicit separate approval before project retirement/deletion. Keep source and recovery evidence | 1–2, operations checkpoint; no feature deployment required |
 | 7 G0 | Confirm the existing South Island guest journey and capture trial feedback, 004/005/023/030 | Existing software needs a usable planning outcome | Reuse published brief/owner tests. Recheck only changed or unverified journeys; trial with the owner's actual guest workflow when authorised. Confirm dates/year, access and preferences privately. Do not silently contact guests or send notifications | 2, QA/private review; deploy only a demonstrated fix |
@@ -134,7 +141,7 @@ A low-effort P3 item can be selected deliberately, but small size alone does not
 
 | Item | Blocker / next decision | What remains usable |
 | --- | --- | --- |
-| 020 hosted acceptance/cutover | Authorised test setup, current candidate and explicit production approval; no retry of declined paid provisioning | Existing two apps and read-only integration review |
+| 020 hosted acceptance/cutover | Live fixtures authorised; exact candidate staging/private acceptance and explicit production approval still required; no retry of declined paid provisioning | Existing two apps and read-only integration review |
 | 059 paid AI proposal generation | Previously recorded zero-data-retention entitlement blocker; no paid retries, upgrades or weaker privacy | Existing manual private proposal editor and human-reviewed research |
 | 054 community/connections | Clear audience/age policy, field consent, blocking/reporting/rate limits, moderation owner and workload | Existing private accounts; no automatic directory or invitations |
 | Marketplace / automated itinerary / reservations / payments, 023/024/030 direction | Proven service demand, supplier benefit/consent, evidence, unit economics and operating responsibilities | Manual host coordination and inquiry/quote product |

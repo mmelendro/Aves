@@ -6,21 +6,31 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-Published AVES-053/066/068 remain unchanged. C1a/C1b and owner-selected C1c are
-complete on integration/aves-unified-2026-11-08. Current source: ebccaf22412719813fe4ab10a861feda89931185.
-Read [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). Optional private
-budgets now survive form/validation/summary and saved/submitted-brief round trips.
-All 414 tests and 21 isolated native checks passed, including ownership and frozen
-snapshots. TypeScript and local preview-mode build passed. The 74-route registry
-is unchanged; 55 static public pages passed generated metadata checks. Nineteen
-dynamic routes and browser/hosted behaviour remain unverified. No hosted preview,
-production release, hosted SQL/data change or external message was made.
+C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
+6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
+https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app (dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn).
+423 tests, 22 isolated native checks, TypeScript and final local/hosted builds
+passed. All 74 public pages passed the 82-request hosted matrix; 16 additional
+asset/redirect checks passed. Desktop/keyboard and 340 CSS-pixel zoom reflow were
+reviewed, with physical Safari, exact 320/390px and real background/telephone
+behaviour still unverified. See [CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md).
 
-Next selected increment in [AGILE-PLAN.md](AGILE-PLAN.md): C1d consent/owner
-updates, not yet implemented. Keep AI generation/connection checks deferred. C2/C3 public/private
-hosted acceptance still gates cutover. Do not retry declined paid provisioning.
-Production release and later project retirement each require explicit approval.
-Preserve physical-device/media verification limits and existing privacy boundaries.
+C3 is partial. The owner authorised live synthetic test accounts/records and
+confirmed the test email. Ten live database transaction check groups passed and
+rolled back. One real account received confirmation mail in the owner's inbox,
+signed in and passed five live private-service check groups. Its three destination
+drafts and account were removed; sessions revoked; zero fixtures remain. No
+customer records, hosted schema/policies/provider settings or production code
+changed. Native results are not hosted unified private acceptance.
+
+The exact unified candidate still needs a protected production-mode staging
+build and hosted authenticated browser/provider/owner-delivery/session checks.
+The connector lacks an explicit skip-domain staging control. Automatic approval
+review rejected clicking the dashboard's Redeploy action because it may start a
+build immediately. Do not retry that action without the required approval or
+silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
+C4 production cutover and C5 retirement remain separately unapproved. Preserve
+both production apps and rollback anchors. No paid provisioning or AI requests.
 
 ## Published applications
 
@@ -93,7 +103,7 @@ sub-item restoration and physical Safari/device behaviour remain unverified.
 
 ## Owner-selected backlog after consolidation
 
-Finish C1d through C5 in their existing gated sequence. Then prioritise private
+C1d is complete; finish C3 acceptance, separately approved C4 and gated C5. C2 public preview evidence and device limits are recorded. Then prioritise private
 saved places, species-origin filters, checklist photos, South Island orientation,
 verified places/conservation/lodges/travel context, uninterrupted public playback,
 continuous bird calls, map updates and design updates, in that order. See the
@@ -104,8 +114,11 @@ into bounded increments; this selection does not approve a production release.
 ## Privacy and spending gates
 
 No new spend, paid AI retries, billing/security changes, broad secret pulls,
-hosted account/database policy changes, hosted private-record edits or production
-cutover. Source-only work must remain within the owner-selected draft increment. AI drafting 059 is deferred at the owner's direction;
+hosted account/database policy changes, customer-record edits or production
+cutover. The owner authorised controlled synthetic live test accounts/records;
+that authorisation persists for necessary C3 fixtures and their scoped cleanup.
+Do not infer permission to edit customer records or weaken preview protections.
+Source work must remain within the owner-selected consolidation sequence. AI drafting 059 is deferred at the owner's direction;
 the previously verified blocker was ZDR entitlement on free Gateway credits.
 Do not buy credits, upgrade or relax ZDR/no-training. Manual proposals remain.
 Do not expose guest data or secrets in GitHub, logs, screenshots or URLs, and do
@@ -122,4 +135,4 @@ not contact people, send proposals or book without relevant authorisation.
 - [Pre-068 archive](archive/2026-11-10-before-aves-068/README.md): branch-specific former entry points.
 
 Reconcile current sections instead of stacking another competing latest notice.
-Pause before wider soundscapes, new content or another upgrade.
+Continue the selected C sequence within its gates before the owner-selected feature queue.
