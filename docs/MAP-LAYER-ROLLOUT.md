@@ -1,6 +1,6 @@
 # Selected map-layer continuation
 
-Updated 9 November 2026. Continue automatically in small verified increments.
+Updated 9 November 2026. Implementation is currently paused at the owner's request. On resumption, continue in small verified increments. Read NEXT-WEEK-PROMPT.md for the consolidated discovery/full-screen/media requirements.
 Preserve the source/deployment checkpoints. This is implementation state, not a
 claim that every filter is already present on every destination.
 

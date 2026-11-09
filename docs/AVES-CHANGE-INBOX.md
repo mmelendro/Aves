@@ -227,3 +227,8 @@ For new observations, use this short entry format:
 ## 9 November — owner no-new-spend reprioritization
 
 AVES-059 AI: DEFERRED, explicit owner choice after verified Gateway ZDR paid-entitlement blocker. No purchase/upgrade/privacy relaxation/retry authorized. Manual proposal workflow remains. AVES-012c homepage map cards: NEXT SELECTED, no implementation begun; first sync complete handoff to GitHub and pause for continuation in another chat. Other backlog items stay queued and must be checked for external costs before selected implementation. See HANDOFF-CURRENT.md for precise acceptance and branch/runtime states.
+
+
+## 9 November 2026: consolidated connected discovery and media request
+
+Implementation paused at the owner's request. The authoritative consolidated acceptance criteria and current delivered/pending distinction are in [NEXT-WEEK-PROMPT.md](NEXT-WEEK-PROMPT.md). Preserve continuous world/country/region/subregion/habitat zoom and synchronised surrounding content; full-screen maps and complete bird/place carousels; several licensed photos for each location/habitat; simultaneous transparent satellite/ecosystem/conservation/place/business layers; and one discreet bird-inspired player family for soundscapes, calls, podcasts and compatible video. Soundscapes remains the next media priority. Retain Google Maps/subregion route-and-travel-time request 062 and small named recovery checkpoints. No code or deployment change in this documentation update. Resume only on owner instruction.
