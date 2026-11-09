@@ -44,3 +44,13 @@ Diagnostic runtime **d693512**, deployment **dpl_9hrh2H4xuQumccS1qiPupqZuozV7** 
 289 automated tests and type check pass, including owner-only diagnostic access and safe error handling. READY candidate diagnostic endpoint denied unsigned access with 401 before promotion. Pending: owner connection-check result, fix the identified account/runtime issue within authorization, then verify one real draft and persistence/edit flow. Do not buy credits, change billing, weaken privacy routing or retrieve broad production secrets without appropriate authorization.
 
 GitHub now contains the implementation and detailed stages/contour/feather requests; keep both branches synced with the final diagnostic checkpoint. The actual draft content remains private and must never be committed.
+
+## AI access diagnosis — 9 November 2026
+
+Confirmed in the signed-in Vercel AI Gateway dashboard: two generation requests returned HTTP 403, zero tokens, $0 inference cost. The request detail shows ZDR enabled; no successful draft has been verified. Gateway routing rules and budgets are absent.
+
+The team's Settings page states that ZDR requires Pro/Enterprise or purchased AI Gateway credits. Current official documentation confirms this applies to per-request ZDR too; free credits do not qualify, and an ineligible Hobby request returns 403. This identifies an account entitlement blocker consistent with the live failures, rather than a database save defect. Reference: https://vercel.com/docs/ai-gateway/security-and-compliance/zdr#availability
+
+The dashboard offers a one-time $20 credit top-up (credits expire after one year); auto-reload is disabled. No purchase, billing change, new key or privacy relaxation was made. Ask for explicit spending authorization before checkout; inspect final currency/taxes/terms before payment. Do not upgrade the hosting plan unnecessarily. Keep per-request ZDR and no-training enforcement enabled.
+
+Next: after the owner authorizes/provides eligible AI access, verify one real private draft, reopen/edit/save it, and confirm that nothing is issued or emailed without owner review. Avoid consuming remaining per-request attempts until entitlement is resolved; do not silently reset attempt safeguards. Stay paused before unrelated roadmap work.
