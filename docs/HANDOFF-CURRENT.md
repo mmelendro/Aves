@@ -2,15 +2,27 @@
 
 Updated 9 November 2026, Sydney. This is the authoritative resumption checkpoint. Earlier append-only release notes are historical. Read the linked detailed requirements; do not infer that every idea in the conversation has shipped.
 
+## Combined map layers and ecotourism checkpoint
+
+South Island combined-layer source `1aed534`, Production `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`. Read RELEASE-2026-11-09-COMBINED-ECOTOURISM-LAYERS.md for exact verification. Satellite defaults to 55% visibility with a slider; ecosystems, parks, hatched conservation land and curated public-place/business layers combine independently. Ten public references include two ecotourism enterprises with linked evidence and clear location/claim limits. Checkpoint 06 retains recovery source and previous Production. Continue automatically using MAP-LAYER-ROLLOUT.md; other-country layers and soundscape playback are not yet delivered.
+
+## Previous map-layer checkpoint
+
+South Island satellite, nine national parks and public conservation land are published from `14798a1`. Read RELEASE-2026-11-09-SOUTH-ISLAND-LAYERS.md and checkpoint 05 in ROLLBACK-CHECKPOINTS.md. The following combined release adds the public nature/conservation/heritage places and towns. Continue with appropriate map rollouts. Soundscapes remain the next media priority. Do not treat every requested filter as delivered.
+
 ## What to do next
 
-**Documentation is ready; no map edits have started.** The owner deferred paid AI access and asked to continue with work that uses existing services, without new purchases or subscriptions. The next selected implementation is **AVES-012c: consistent homepage country-map cards**, in one small tested release. Review the actual source before editing. Finish and pause; do not automatically execute the rest of the backlog.
+**Active follow-up authorized: continue through selected map fixes and filter pilots automatically.** Runtime `1aed534`, Production `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`. First-tap previews and restored Colombia boundaries are live; see RELEASE-2026-11-09-REGION-PREVIEW-BOUNDARIES.md. The owner rejected the diagonal leader and remaining connected-map mismatch. The [feather correction](RELEASE-2026-11-09-MAP-FEATHER-REVISION.md) now aligns the homepage cards and connected regional map palette/markers. The [first card release](RELEASE-2026-11-09-HOMEPAGE-MAP-CARDS.md) is historical. Desktop, 340px reflow, keyboard and all 23 selectors passed; exact 320/390px and physical touch remain unverified. Save each small verified step and previous deployment in ROLLBACK-CHECKPOINTS.md. Continue the selected map/filter sequence; other backlog work remains separate. The owner also requested Google Maps, birding sites, intervening towns and travel times for every subregion: queued as [AVES-062](AVES-062-SUBREGION-ROUTE-PLANNING.md). No new purchases/subscriptions, no AI retries, and no app-branch merge.
+
+## Active owner follow-up after the pilot
+
+Continue with mobile first-tap region preview, then map filters one at a time using South Island as the selected sample, then reuse verified layers on other appropriate maps. Earlier pause instructions apply to completed releases, not a requirement to stop this newly authorized sequence. See NEXT-WEEK-PROMPT.md for exact interaction and data gates. AVES-053 habitat soundscapes is promoted to the next media priority, starting on South Island, opt-in with volume/mute, licensed provenance and foreground-audio fading. Soundscapes are queued, not shipped by this prompt update. No new spending or privacy relaxation is authorized.
 
 ## Repository, branches and deployment
 
 - Repository: https://github.com/mmelendro/Aves
-- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `923bbcb`, Vercel deployment `dpl_4XUQc5GCJQsSArZAmsVwBkq4TgC5`.
-- `australia/preview`, local `australia/`: Australian website and shared account/admin/backend. Published runtime `d693512`, deployment `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`.
+- `webmaster/readiness-2026-11-05`, local `source/`: global homepage, Colombia, New Zealand. Published runtime `1aed534`, Vercel deployment `dpl_EpZR2p99nc9zy5gp8z83zpueMCKp`.
+- `australia/preview`, local `australia/`: Australian website and shared account/admin/backend. Published runtime `e0c766a`, deployment `dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq`.
 - These are two app branches of the same repository. Keep them separate; do not merge their different app roots. GitHub documentation commits are newer than the published runtime commits. Documentation-only commits do not require a production deployment.
 - Live site: https://aves.bio/ ; country routes `/colombia`, `/australia`, `/new-zealand`; dedicated guide `/new-zealand/south-island`.
 - Shared customer account: `/account`. Owner inbox currently `/australia/admin/quotes`. Account implementation still lives in the Australian app; the route name does not restrict accounts to Australia.
@@ -44,9 +56,9 @@ Vercel's current Settings and official documentation say **per-request ZDR requi
 - When payment is explicitly authorized in a future increment: verify real generation, persistence, reopen/edit/save and separate human-review issuance. Nothing is sent without owner instruction.
 - A broad production environment pull was previously rejected because it included unrelated secrets. Do not retry it indirectly. Use existing hosted OIDC and narrow authorized tooling.
 
-## Next no-new-spend release — AVES-012c
+## AVES-012c acceptance criteria (homepage pilot now published)
 
-Problem: the three homepage country cards mix Colombian numbered points and varied green shading, Australian abbreviations, and NZ full-name callouts. The owner finds this jarring.
+Historical problem, resolved for homepage cards in the linked release: the three homepage country cards mixed Colombian numbered points and varied green shading, Australian abbreviations, and NZ full-name callouts. The owner finds this jarring.
 
 1. Inventory the existing shared renderer and country-card layout once. Relevant files in source: `components/destination-map-cards.tsx`, `destination-regional-map.tsx`, `colombia-map-artwork.tsx`, `content/colombia-map-markers.ts`, `content/global-australian-map.ts`, `content/new-zealand-map.json` and associated styles.
 2. Create one names-first map presentation system: consistent sage/emerald palette, outline weights, marker/label/callout treatment, hover/focus/selected states, spacing, map frames, credits and action hierarchy. Use full region names in equivalent accessible navigation. Avoid overlapping labels on phones or forcing meaningless identical geographic divisions.
@@ -61,7 +73,8 @@ Complexity is comparative (1 easiest–5 hardest), not an estimate of remaining 
 
 | Order | Work | Relative effort / notes |
 |---|---|---|
-| Now | 012c homepage map-card consistency | 2–3; existing geometry, small pilot |
+| Delivered | 012c homepage map-card consistency | Published; see release evidence and testing limits |
+| New queued request | 062 subregion birding route planner | Sites, towns, travel times and Google Maps; verify data, privacy, licensing and no-new-spend approach first |
 | Next selected batches | Shared map/carousel consistency across country/subregion templates (012a/b/c), accessible habitat controls near viewers | 3; reuse tested layout, preserve state |
 | South Island depth | 036 embedded podcast/video/resource carousel; 039 checklist media hover/focus/tap previews | 2–3 each; licensed native embeds, lazy load, no autoplay |
 | South Island context | 006c complete subregion content changes; 055 homepage region selection drives ecosystem/place section | 3–4; avoid duplicate state/routes, source real geography |
