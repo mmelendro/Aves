@@ -1,3 +1,9 @@
+## Latest owner-selected verification — 9 November 2026
+
+Homepage country-map consistency is already published from the newer work pulled from GitHub (baseline 0dde307; live runtime 1aed534 / dpl_EpZR2p99nc9zy5gp8z83zpueMCKp). No application edits or redundant deployment were made in this resumption. Fresh live checks passed all 23 selectors at desktop/390/320px, keyboard preview/guide navigation for each country, and 29 public routes with NZ anchors and private sitemap exclusions. Automated tests:128 passed; TypeScript passed. Physical phone touch was not tested. See [verification checkpoint](docs/RELEASE-2026-11-09-MAP-CARDS-RECHECK.md).
+
+The latest specific owner instruction was homepage cards, test/publish/sync, **then pause**. This takes precedence over the pasted general programme's automatic continuation. Stay paused after this documentation sync; do not start the next discovery/media increment automatically. Paid AI remains deferred and all no-new-spend/privacy guardrails remain.
+
 ## Authoritative handoff — 9 November 2026, no-new-spend work
 
 Read [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md) and [the execution prompt](docs/NEXT-WEEK-PROMPT.md) first. This notice supersedes historical next-step/status notes below. AI proposal generation is DEFERRED at the owner's request because the required privacy entitlement needs purchased Gateway credits or a paid plan. Do not buy credits, upgrade, remove privacy protections or retry generation. Next selected implementation: AVES-012c, homepage country-map card consistency only. No map implementation has started. The owner requested documentation/GitHub handoff before code work, so stop after this sync.

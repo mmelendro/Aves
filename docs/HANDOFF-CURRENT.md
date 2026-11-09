@@ -1,3 +1,9 @@
+## Latest owner-selected verification — 9 November 2026
+
+Homepage country-map consistency is already published from the newer work pulled from GitHub (baseline 0dde307; live runtime 1aed534 / dpl_EpZR2p99nc9zy5gp8z83zpueMCKp). No application edits or redundant deployment were made in this resumption. Fresh live checks passed all 23 selectors at desktop/390/320px, keyboard preview/guide navigation for each country, and 29 public routes with NZ anchors and private sitemap exclusions. Automated tests:128 passed; TypeScript passed. Physical phone touch was not tested. See [verification checkpoint](RELEASE-2026-11-09-MAP-CARDS-RECHECK.md).
+
+The latest specific owner instruction was homepage cards, test/publish/sync, **then pause**. This takes precedence over the pasted general programme's automatic continuation. Stay paused after this documentation sync; do not start the next discovery/media increment automatically. Paid AI remains deferred and all no-new-spend/privacy guardrails remain.
+
 # AVES — current handoff and next action
 
 Updated 9 November 2026, Sydney. This is the authoritative resumption checkpoint. Earlier append-only release notes are historical. Read the linked detailed requirements; do not infer that every idea in the conversation has shipped.
