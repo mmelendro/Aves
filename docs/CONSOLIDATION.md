@@ -2,12 +2,13 @@
 
 ## Current checkpoint
 
-C1a and C1b are complete. Current C1b source: 25e932a3ae83aee97c373b04c37cc4536d19de08.
-Read [the C1b checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1B.md) and the shared
-handoff. 410 tests, TypeScript and local preview-mode build passed; generated
-HTML passed for 55 static public pages. Nineteen dynamic public routes and
-browser/hosted acceptance remain unverified. No new hosted preview or production
-release. C1c budget and C1d consent/owner work remain separate pending slices.
+C1a/C1b/C1c are complete. Current C1c source: ebccaf22412719813fe4ab10a861feda89931185.
+Read [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md) and the shared
+handoff. 414 tests, 21 isolated native checks, TypeScript and local preview-mode
+build passed. No new hosted preview or production release. C1d consent/owner work
+and C2/C3 current public/private hosted acceptance remain pending. The local
+fixture uses nine maintained histories and no hosted credentials; it does not
+resolve the previously declined hosted test-setup gate.
 
 ## Historical 8 November preview and native evidence
 

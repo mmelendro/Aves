@@ -6,21 +6,21 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-Published AVES-053/066/068 remain unchanged. C1a and owner-selected C1b are complete
-on integration/aves-unified-2026-11-08. Current source: 25e932a3ae83aee97c373b04c37cc4536d19de08.
-Read [the C1b checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1B.md). Australian discovery
-now uses current regional preview/zoom/introduction and shared bird data/viewers.
-All 410 tests, TypeScript and the local preview-mode build passed. The 74-route
-public registry remains unchanged; all 55 generated static pages passed metadata
-checks. Nineteen dynamic public routes and browser/hosted behaviour still need C2.
-No new hosted preview or production release was made.
+Published AVES-053/066/068 remain unchanged. C1a/C1b and owner-selected C1c are
+complete on integration/aves-unified-2026-11-08. Current source: ebccaf22412719813fe4ab10a861feda89931185.
+Read [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). Optional private
+budgets now survive form/validation/summary and saved/submitted-brief round trips.
+All 414 tests and 21 isolated native checks passed, including ownership and frozen
+snapshots. TypeScript and local preview-mode build passed. The 74-route registry
+is unchanged; 55 static public pages passed generated metadata checks. Nineteen
+dynamic routes and browser/hosted behaviour remain unverified. No hosted preview,
+production release, hosted SQL/data change or external message was made.
 
-Next recommendation in [AGILE-PLAN.md](AGILE-PLAN.md): C1c, private budget
-compatibility, not selected. C1d consent/owner work and hosted auth/email/session
-acceptance remain separate cutover gates. No declined paid provisioning retries,
-AI requests or provider/database changes. Each production release and later
-project retirement requires explicit approval. Preserve all prior physical-device
-and media verification limits.
+Next recommendation in [AGILE-PLAN.md](AGILE-PLAN.md): C1d consent/owner updates,
+not selected. Keep AI generation/connection checks deferred. C2/C3 public/private
+hosted acceptance still gates cutover. Do not retry declined paid provisioning.
+Production release and later project retirement each require explicit approval.
+Preserve physical-device/media verification limits and existing privacy boundaries.
 
 ## Published applications
 
@@ -107,8 +107,8 @@ Do not drop smaller requirements or silently implement the entire backlog.
 ## Privacy and spending gates
 
 No new spend, paid AI retries, billing/security changes, broad secret pulls,
-account/database policies, private-brief/request/proposal/email edits or
-production application consolidation beyond the selected draft scope. AI drafting 059 is deferred at the owner's direction;
+hosted account/database policy changes, hosted private-record edits or production
+cutover. Source-only work must remain within the owner-selected draft increment. AI drafting 059 is deferred at the owner's direction;
 the previously verified blocker was ZDR entitlement on free Gateway credits.
 Do not buy credits, upgrade or relax ZDR/no-training. Manual proposals remain.
 Do not expose guest data or secrets in GitHub, logs, screenshots or URLs, and do
