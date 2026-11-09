@@ -23,7 +23,11 @@ export function panMapCamera(camera: MapCamera, dx: number, dy: number): MapCame
 
 export function ecosystemMapPoint(longitude: number, latitude: number, bbox: readonly number[]) {
   const resolution = (bbox[2] - bbox[0]) / 480
-  return { x: (6378137 * longitude * Math.PI / 180 - bbox[0]) / resolution, y: (bbox[3] - 6378137 * Math.log(Math.tan(Math.PI / 4 + latitude * Math.PI / 360))) / resolution }
+  // Server/browser trig implementations can differ at their last decimal.
+  // Six SVG decimals are far below source resolution and keep hydration stable.
+  const x = (6378137 * longitude * Math.PI / 180 - bbox[0]) / resolution
+  const y = (bbox[3] - 6378137 * Math.log(Math.tan(Math.PI / 4 + latitude * Math.PI / 360))) / resolution
+  return { x: Number(x.toFixed(6)), y: Number(y.toFixed(6)) }
 }
 
 export function focusEcosystemMapPoint(camera: MapCamera, point: { x: number; y: number }) {
