@@ -75,3 +75,13 @@ Detailed current/future stages, dependencies, acceptance criteria and relative c
 Latest AI checkpoint: [RELEASE-2026-11-09-AI-PROPOSAL.md](RELEASE-2026-11-09-AI-PROPOSAL.md). Published implementation and passing synthetic tests are distinct from the outstanding real generation check. Pause after the selected increment; no automatic visual rollout.
 
 AI resumption: owner reported a real generation failure; no generated text saved. Diagnostic runtime d693512 is published with Check AI connection (no inference). Await that result; 289 tests/type check passed. See AI release checkpoint.
+
+## AI access diagnosis — 9 November 2026
+
+Confirmed in the signed-in Vercel AI Gateway dashboard: two generation requests returned HTTP 403, zero tokens, $0 inference cost. The request detail shows ZDR enabled; no successful draft has been verified. Gateway routing rules and budgets are absent.
+
+The team's Settings page states that ZDR requires Pro/Enterprise or purchased AI Gateway credits. Current official documentation confirms this applies to per-request ZDR too; free credits do not qualify, and an ineligible Hobby request returns 403. This identifies an account entitlement blocker consistent with the live failures, rather than a database save defect. Reference: https://vercel.com/docs/ai-gateway/security-and-compliance/zdr#availability
+
+The dashboard offers a one-time $20 credit top-up (credits expire after one year); auto-reload is disabled. No purchase, billing change, new key or privacy relaxation was made. Ask for explicit spending authorization before checkout; inspect final currency/taxes/terms before payment. Do not upgrade the hosting plan unnecessarily. Keep per-request ZDR and no-training enforcement enabled.
+
+Next: after the owner authorizes/provides eligible AI access, verify one real private draft, reopen/edit/save it, and confirm that nothing is issued or emailed without owner review. Avoid consuming remaining per-request attempts until entitlement is resolved; do not silently reset attempt safeguards. Stay paused before unrelated roadmap work.
