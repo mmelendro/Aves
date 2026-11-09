@@ -7,6 +7,7 @@
 import dynamic from "next/dynamic"
 import { useMapLayers } from "./map-layer-context"
 import SouthIslandMapLayers from "./south-island-map-layers"
+import satelliteSource from "@/content/south-island-satellite-source.json"
 import catalogue from "@/content/south-island-layer-catalogue.json"
 import { useEffect, useId, useRef, useState } from "react"
 import { Hand, Minus, Plus, RotateCcw } from "lucide-react"
@@ -132,7 +133,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
         </g>
         <g aria-hidden="true" fill="#065f46"><text x="38" y="55" textAnchor="middle" fontSize="15" fontWeight="600">N</text><path d="M38 64L32 82L38 78L44 82Z" /></g>
       </svg>
-      <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · NASA Earth Observatory · 2004 composite · Historical overview" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}</figcaption>
+      <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · NASA Earth Observatory · 2004 composite · Historical overview" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
     </figure>
     <div className={styles.scale} aria-label="Map distance scale">
       {scale ? <><div style={{ width: scale.widthPixels }} className={styles.scaleBar} /><p>{scale.distanceMetres / 1000} km at {Math.abs(scale.latitude).toFixed(1)}° S · map centre</p></> : <p>Distance scale appears when the map is measured.</p>}
@@ -150,6 +151,8 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
     <details className={styles.sources}>
       <summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Map sources & limitations</summary>
       <div className="space-y-2 pb-2 text-xs leading-5 text-gray-600">
+        <p><a href={satelliteSource.url} target="_blank" rel="noreferrer" className="underline">NASA Earth Observatory — Blue Marble Next Generation</a>. Historical 2004 satellite composite, downloaded through GIBS and served by AVES. Uses the same Mercator extent as the habitat geometry. Broad context, not live imagery or a road map. Land-cover colours hide in satellite view; bird filters stay active.</p>
+        <p><a href={catalogue.source.url} target="_blank" rel="noreferrer" className="underline">DOC Public Conservation Land</a>. {catalogue.source.copyright}. <a href={catalogue.source.licenceUrl} target="_blank" rel="noreferrer" className="underline">CC BY 4.0</a>. Retrieved 9 November 2026, clipped to the main South Island and generalised to about 2 km. Nine national parks are a subset of the conservation layer. Small parcels and nearby islands may be omitted; privately conserved land is not comprehensively mapped. Boundaries do not establish visitor access, track safety or the birds in a park; consult DOC's current guidance.</p>
         <p><a href={map.source.url} target="_blank" rel="noreferrer" className="underline">Manaaki Whenua — LCDB v6.0</a> · <a href={map.source.licenceUrl} target="_blank" rel="noreferrer" className="underline">CC BY 3.0 NZ, WMS service</a>. Imagery: 2023/24; reviewed 9 November 2026. Generalised, grouped and recoloured by AVES.</p>
         <p>Forest/scrub: indigenous forest, broadleaved indigenous hardwoods, fernland, mānuka/kānuka and matagouri/grey scrub. Mountains/tussock: alpine vegetation, tall tussock and subalpine shrubland. Freshwater: mapped lakes, rivers and herbaceous freshwater vegetation. Other, small or mixed areas may remain neutral.</p>
         <p>Coastline: <a href={map.source.coastlineUrl} target="_blank" rel="noreferrer" className="underline">Natural Earth, public domain</a>. Main South Island only; nearby islands omitted. Simplified coastlines and land cover may not coincide precisely. Not for navigation or locating birds. Check local access, habitat and season.</p>
