@@ -26,13 +26,15 @@ export function PublicPlaceDetails() {
   const { layers, update } = useMapLayers()
   const point = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   if (!point) return null
-  return <section aria-label="Selected public place" className="my-2 rounded-lg border border-emerald-200 bg-white p-2 text-xs leading-5">
+  return <section aria-label="Selected public place" className="my-2 shrink-0 rounded-lg border border-emerald-200 bg-white p-2 text-xs leading-5">
     <div className="flex items-center justify-between gap-2"><p role="status" className="font-semibold text-emerald-950">{point.name}</p><button type="button" className="min-h-11 shrink-0 rounded px-2 text-emerald-800 underline" onClick={() => update({point:""})}>Clear place</button></div>
+    <p className="mt-1 text-[11px] text-gray-600">{point.precision} · checked {point.checked}</p>
+    <details className="max-h-48 overflow-auto"><summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-800 underline">About this place & sources</summary>
     <p>{point.description}</p>
     <p className="mt-1 text-[11px] text-emerald-800">{publicPlaceCategories.filter(category=>point.categories.includes(category.id)).map(category=>category.name).join(" · ")}</p>
-    <p className="mt-1 text-[11px] text-gray-600">{point.precision} · checked {point.checked}</p>
     <a href={point.url} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded font-semibold text-emerald-800 underline">{point.categories.includes("towns") ? "View settlement data source" : "Visitor information at source"}<span className="sr-only"> (opens in a new tab)</span></a>
     {point.evidenceUrl && <p><a href={point.evidenceUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded text-emerald-800 underline">Operator's published conservation information<span className="sr-only"> (opens in a new tab)</span></a></p>}
     {point.categories.includes("businesses") && <p className="text-[11px] text-gray-600">Public listing, not an AVES partner, certification, sustainability rating or confirmed booking.</p>}
+    </details>
   </section>
 }

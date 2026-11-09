@@ -107,9 +107,10 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
         onPointerCancel={() => { drag.current = null }} onLostPointerCapture={() => { drag.current = null }}
         onClickCapture={event => { if (panMode && camera.zoom > 1) { event.preventDefault(); event.stopPropagation() } }}>
         <title id={`${id}-map-title`}>{satellite ? "South Island satellite overview and conservation layers" : "South Island land cover and coastline"}</title>
+        <defs><clipPath id={`${id}-island-clip`}><path d={map.outline} fillRule="evenodd" clipRule="evenodd"/></clipPath></defs>
         <desc id={`${id}-map-description`}>{satellite ? "Transparent historical NASA satellite composite from 2004 in the same Mercator frame. Ecosystem colours can remain visible above it; parks, conservation and public places are independent overlays. " : ""}North-up Mercator overview. Select a visible coloured ecosystem area or a labelled habitat button to filter the birds. Land cover is generalised from 2023/24 LCDB data, not current sightings or a complete ecosystem survey. Coastline is context only; offshore habitat is not mapped. Place markers show public references, not wildlife locations or permission to enter.</desc>
         <g transform={`translate(${-camera.x * camera.zoom} ${-camera.y * camera.zoom}) scale(${camera.zoom})`} data-map-camera={`${camera.x},${camera.y},${camera.zoom}`}>
-        {satellite && <image href="/images/maps/south-island-satellite-2004.jpg" x="0" y="0" width="480" height="640" preserveAspectRatio="xMidYMid meet" opacity={layers.satelliteOpacity} onError={() => setSatelliteFailed(true)} data-map-layer="satellite"/>}
+        {satellite && <image href="/images/maps/south-island-satellite-2004.jpg" x="0" y="0" width="480" height="640" preserveAspectRatio="xMidYMid meet" opacity={layers.satelliteOpacity} clipPath={`url(#${id}-island-clip)`} onError={() => setSatelliteFailed(true)} data-map-layer="satellite"/>}
         <path d={map.outline} fill={satellite ? "none" : "#e7ede8"} stroke="#829c8c" strokeWidth="1" vectorEffect="non-scaling-stroke" fillRule="evenodd" />
         {showEcosystems && map.layers.map(layer => {
           const habitat = layer.id as SouthIslandEcosystem
