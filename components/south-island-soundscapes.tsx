@@ -21,6 +21,7 @@ export default function SouthIslandSoundscapes() {
   const [volume, setVolume] = useState(25)
   const [muted, setMuted] = useState(false)
   const [foreground, setForeground] = useState(false)
+  const mix = useRef({ volume: .25, muted: false })
   const [status, setStatus] = useState<"loading" | "playing" | "unavailable" | "error">("unavailable")
   const [note, setNote] = useState("")
 
@@ -54,6 +55,8 @@ export default function SouthIslandSoundscapes() {
       engine.current.level(volume / 100, muted, focus.busy)
       engine.current.select(track)
     } catch {
+      intent.current = { enabled: false, paused: false }
+      setEnabled(false); setPaused(false)
       engine.current?.dispose(); engine.current = null
       setStatus("error")
       setNote("Soundscapes could not start in this browser. The original recording remains available in credits.")
@@ -69,6 +72,9 @@ export default function SouthIslandSoundscapes() {
   useEffect(() => {
     const unsubscribe = subscribeForegroundMedia(() => {
       const focus = readForegroundMedia()
+      // Apply gain immediately during the foreground intent event, before its
+      // play() call. React state below is only the visible status.
+      engine.current?.level(mix.current.volume, mix.current.muted, focus.busy)
       setForeground(previous => previous === focus.busy ? previous : focus.busy)
       if (focus.uncertain && intent.current.enabled && !intent.current.paused) pause("Video playback cannot be tracked. Close that video, then explicitly resume soundscapes.")
     })
@@ -79,12 +85,15 @@ export default function SouthIslandSoundscapes() {
     return () => { unsubscribe(); document.removeEventListener("visibilitychange", hidden); engine.current?.dispose(); engine.current = null }
   }, [])
 
-  useEffect(() => { engine.current?.level(volume / 100, muted, foreground) }, [volume, muted, foreground])
+  useEffect(() => {
+    mix.current = { volume: volume / 100, muted }
+    engine.current?.level(volume / 100, muted, readForegroundMedia().busy)
+  }, [volume, muted])
   useEffect(() => {
     if (intent.current.enabled && !intent.current.paused) engine.current?.select(track)
   }, [track])
 
-  const state = !enabled ? "Off" : paused ? "Paused" : !track ? "Unavailable" : status === "loading" ? "Loading" : foreground ? "Quiet beneath foreground audio" : status === "playing" ? "Playing" : "Unavailable"
+  const state = !enabled ? "Off" : paused ? "Paused" : !track ? "Unavailable" : status === "loading" ? "Loading" : muted || volume === 0 ? "Muted" : foreground ? "Quiet beneath foreground audio" : status === "playing" ? "Playing" : "Unavailable"
   return <section className={styles.panel} aria-label="South Island soundscapes" data-soundscape-state={state}>
     <div className={styles.row}>
       <Image src="/images/brand/aves-new-zealand-bird.png" alt="Kea · New Zealand soundscapes" width={36} height={36} />
