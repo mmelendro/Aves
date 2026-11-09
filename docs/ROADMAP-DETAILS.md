@@ -18,7 +18,9 @@ adds full Colombia shape hover/focus on homepage cards. Broader rollouts, richer
 photo collections, habitat soundscapes and uninterrupted cross-app media are not
 implied. See the current handoff and release evidence for precise limits.
 
-Pause after AVES-068 safe continuity. No other upgrade is selected.
+AVES-053 adds the South Island opt-in forest/stream/coast pilot with licensed
+representative recordings. Mountains and other regions remain unavailable.
+Pause after this release. No next upgrade selected.
 
 ## Priority 1 — working divider on the three country homepages (AVES-006)
 
@@ -372,7 +374,13 @@ Owner requested a conservation map for each subregion, particularly birding lodg
 
 Arthur’s Pass local-map/two-landscape3D card published in source3ef94db / dpl_CwtAGCjuBe4XdYHw72GKxNrJYwHC. Read RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md for scope, rights, verification and limitations. It does not implement all four place cards, photo pinch051, map zoom038 or conservation locations052. Pause before a new selected increment.
 
-## AVES-053 — optional regional/habitat soundscapes, queued
+## AVES-053 — South Island pilot published; wider soundscapes pending
+
+10 November: three representative Canterbury CC0 excerpts with opt-in, mute/volume,
+crossfade, shared foreground ducking and safety cleanup. No mountain recording.
+Read RELEASE-2026-11-10-SOUTH-ISLAND-SOUNDSCAPES.md for exact verification limits.
+All further regional coverage needs a separately selected increment. Original
+full requirements remain below; do not treat them as claims of universal delivery.
 
 Owner-selected direction, 9 November 2026: start with South Island, then reuse the pattern across destinations. Offer a discreet, keyboard/touch-accessible ambience toggle with clear state, mute and adjustable volume. OFF by default; explicit visitor activation is required. While enabled, follow the existing selected habitat and gently crossfade available soundscapes. Keep a single controlled ambience stream/transition; cancel stale loads during rapid changes, preserve the visitor's chosen volume/mute and never restart or unmute against their choice.
 
@@ -380,7 +388,7 @@ Foreground media takes priority: smoothly duck ambience before a bird call, vide
 
 Pause on document hiding; keep it paused on return until explicit resume for the pilot. Release media/listeners on unmount/navigation. Load recordings only on demand, with lightweight playback, honest autoplay/load-error handling and no unnecessary background transfers. Use authentic recordings with verified reuse rights, creator/source/licence attribution and reasonable perceived levels/headroom. Clearly distinguish exact-location recordings from representative habitat ambience. Unavailable habitat audio must be indicated honestly; do not invent recordings, claim a guaranteed wildlife soundtrack or expose sensitive recording locations. Owner field recordings can be reviewed for this library.
 
-Acceptance: desktop/mobile opt-in, off/mute/volume, habitat transition, missing recordings, rapid switching, bird-call/video/podcast ducking, overlapping foreground-player recovery, tab visibility, route cleanup, blocked playback, keyboard labels/state and network loading checks. Start small, verify and release the South Island pilot before wider rollout. This is a queued enhancement, not part of the currently unfinished map/place release and not implemented merely by this documentation update.
+Acceptance: desktop/mobile opt-in, off/mute/volume, habitat transition, missing recordings, rapid switching, bird-call/video/podcast ducking, overlapping foreground-player recovery, tab visibility, route cleanup, blocked playback, keyboard labels/state and network loading checks. Start small, verify and release the South Island pilot before wider rollout. The South Island pilot implements the recorded first increment; broader coverage and physical-device verification remain pending.
 
 ## AVES-054 — voluntary community and member connections, queued
 

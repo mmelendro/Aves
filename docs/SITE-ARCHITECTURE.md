@@ -6,8 +6,8 @@ archive/2026-11-10-before-aves-068/SITE-ARCHITECTURE.md.
 
 ## Media continuity decision, 10 November 2026
 
-The two independently deployed Next app roots stay separate. Their layouts own
-the same small player implementation and public programme catalogue. Public
+The two independently deployed Next app roots stay separate. Their layouts own a public-player foundation and programme catalogue; the main
+app adds the South Island foreground/ambience adapter described below. Public
 same-app links use the existing Next router while media is open; account/auth/API,
 unknown, external, modified/new-tab, download and hash-only links stay native.
 A known public resource ID, finite bounded position, mute flag and timestamp can
@@ -22,6 +22,21 @@ Different origins do not share the checkpoint. Video provider/playlist and devic
 limitations are recorded in RELEASE-2026-11-10-MEDIA-CONTINUITY.md.
 True uninterrupted playback across a document boundary needs a future shared
 shell review and is not claimed by this handoff increment.
+
+## South Island ambience, 10 November 2026
+
+The main app's page-local habitat context feeds one opt-in ambience controller.
+Its Web Audio master gain keeps mute/volume and foreground ducking independent
+of crossfades. At most two native audio voices exist during a transition; stale
+loads are released. Foreground HTML media is tracked collectively. Shared Play
+intent starts ducking before native Play, and supported YouTube API events join
+the same coordinator. Untracked embeds pause ambience until explicit Resume.
+Hidden documents and page teardown release voices; returning does not auto-play.
+No stored soundscape opt-in, account field, SDK or provider. Static CC0 excerpts
+and provenance are checked in; original public sources remain credited. Australia
+retains its existing player implementation because ambience is South Island only.
+The shared main player now recognises ambience elements so they never pause the
+foreground programme. Its public handoff format/routes remain unchanged.
 
 ## Read the two dimensions
 

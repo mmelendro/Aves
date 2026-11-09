@@ -1,11 +1,10 @@
 # AVES current execution prompt
 
-Updated 10 November 2026. AVES-068's safe continuity increment is published:
-same-app public browsing keeps the player, and app/reload boundaries offer an
-explicit paused Resume. Uninterrupted playback across separate documents remains
-an architecture backlog, not delivered. AVES-066 remains complete. Pause after
-this release, verification, GitHub sync and document cleanup. No next task selected.
-The release/status authority is HANDOFF-CURRENT.md.
+Updated 10 November 2026. AVES-053 South Island soundscape pilot is published and
+paused after explicit owner publication approval. Three licensed representative
+recordings cover forest, streams and coast; mountains/other-region rollout remain
+unimplemented. AVES-066 and AVES-068 safe continuity remain delivered. No next
+task selected. Use HANDOFF-CURRENT.md for runtime/status and precise test limits.
 
 ## Start from the correct checkpoint
 
@@ -18,7 +17,7 @@ Repository: https://github.com/mmelendro/Aves
 
 | App branch | Scope | Published runtime | Production deployment |
 | --- | --- | --- | --- |
-| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 5d96fa0 | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH |
+| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | d34faab | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB |
 | australia/preview | Australia and shared accounts/backend/admin | 2ff09e9 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx |
 
 Keep the app roots separate. Documentation commits are newer than these runtime
@@ -56,7 +55,8 @@ validated tab-scoped checkpoint without loading external media first. This is
 not an uninterrupted stream across a document change. The bird follows the
 programme country, not the current page: Colombia motmot, NZ kea and the existing
 Australian bird. All currently curated programmes are New Zealand resources.
-Habitat soundscapes remain unimplemented.
+South Island soundscapes now have an opt-in forest/stream/coast pilot. No alpine
+recording or other-region rollout is claimed. See RELEASE-2026-11-10-SOUTH-ISLAND-SOUNDSCAPES.md.
 
 AVES-066 uses the existing eleven Colombia paths, full-name keyboard controls
 and existing guide URLs. Shapes and visible dots preview the same region; hover
@@ -181,8 +181,10 @@ states. No competing player styles, intrusive chrome or decorative birds that
 hide basic controls. Keep explicit play/pause, mute, volume, progress/seek where
 appropriate, current recording/title, creator/source/credits and accessible labels.
 
-**Habitat soundscapes 053 is the next media priority, soon, beginning on South
-Island.** Playback must be OFF by default and visitor initiated. Follow the
+**Habitat soundscapes 053: South Island pilot published.** Three representative
+Canterbury CC0 excerpts follow existing habitat selection. Mountains are honestly
+unavailable; the All habitats view labels its forest sampler. Wider recordings
+require a separately selected increment. Retained quality requirements: Playback must be OFF by default and visitor initiated. Follow the
 selected habitat with appropriately located licensed recordings and gentle
 crossfades; cancel stale loads during rapid selection. Fade ambience beneath
 bird calls, videos and podcasts, then restore only the visitor's chosen level.
@@ -195,9 +197,9 @@ consistent and disclose legitimate provider limits.
 
 Coordinate the embedded resource carousel 036, checklist media previews 039 and
 audio coordination instead of building separate players per page. The prompt
-priority is recorded; habitat soundscape playback and the unified player family
-are incomplete: the NZ podcast/video dock and resource carousel are published,
-but habitat soundscapes and an uninterrupted shared-shell player are not. Safe cross-app paused Resume is published.
+South Island pilot, NZ podcast/video dock and resource carousel are published.
+Wider soundscape coverage, full player-family rollout and uninterrupted shared-shell
+playback remain incomplete. Safe cross-app paused Resume is published.
 
 ### 6. Route planning for each subregion
 
@@ -237,7 +239,7 @@ Save small source commits, named recovery branches, the previous/new exact
 Production deployments and quick rollback/rebuild instructions in
 [ROLLBACK-CHECKPOINTS.md](ROLLBACK-CHECKPOINTS.md). Do not overwrite a shared branch
 or assume deployment artifacts are retained forever. Sync the correct app and
-shared handoff to GitHub. After the selected AVES-068 safe continuity release is verified and synced, pause. The owner
+shared handoff to GitHub. After the selected AVES-053 South Island release is verified and synced, pause. The owner
 chooses the next increment. Do not revive older automatic-continuation orders.
 
 No new spend, subscriptions, broad secret pulls, weaker privacy or app-root merge.

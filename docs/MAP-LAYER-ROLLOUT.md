@@ -1,6 +1,6 @@
 # Map-layer rollout criteria
 
-AVES-068 safe continuity is published and paused. This file retains source and
+AVES-053 South Island soundscapes is published and paused. This file retains source and
 projection criteria, not an automatic rollout instruction. Read HANDOFF-CURRENT.md
 and NEXT-WEEK-PROMPT.md for delivered scope and permission to proceed.
 
@@ -53,7 +53,8 @@ licence, date, projection, geometry and visitor-access limitations before use.
 Keep attribution and derived-data licence with each output. Do not include
 private owners, sensitive wildlife points or restricted cultural sites.
 
-Soundscapes AVES-053 remains the next media priority, with licensed provenance,
+The AVES-053 three-recording South Island soundscape pilot is published. Wider
+coverage remains pending, with licensed provenance,
 visitor opt-in, volume/mute and coordinated fading. Google routes/travel times
 AVES-062 is retained separately; no paid mapping key/service is authorised.
 No database work or app-root merge is required for these map layers.

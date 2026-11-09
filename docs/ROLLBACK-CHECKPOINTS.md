@@ -19,6 +19,7 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-09-11-colombia-region-hover | 685638984d721f16ee9cc2e7a035a148cfee709e | dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw | Main homepage Colombia whole-region hover/focus; prior runtime 3f3c9dc remains checkpoint 10 |
 | checkpoint/2026-11-10-12-media-handoff-main | 5d96fa02e45fb18304fc07a97bb5084948ab4afd | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH | Main safe media continuity/paused handoff |
 | checkpoint/2026-11-10-12-media-handoff-australia | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | AU/shared portal public player/paused handoff |
+| checkpoint/2026-11-10-13-south-island-soundscapes | d34faabc3d09bee8b671b618998606ed06994bea | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB | Main app: opt-in three-track South Island habitat ambience and shared ducking |
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
@@ -46,3 +47,5 @@ account settings or subsequently issued communications. No recovery is needed
 or being performed now. Add the next verified source/deployment before continuing.
 
 AVES-068 previous main: 6856389 / dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw. Previous AU: e0c766a / dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq. Revert only the affected app, or main then AU if both need recovery. No database rollback.
+
+AVES-053 recovery: main only, to runtime 5d96fa0 / dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH, checkpoint 12. Australia is unchanged and needs no rollback. This is a public UI/audio increment with no database changes.
