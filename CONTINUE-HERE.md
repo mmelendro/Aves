@@ -1,5 +1,12 @@
 # AVES continue here
 
+Comprehensive backlog reconciled on10 November2026: read docs/AGILE-PLAN.md for
+current live/preview/queued status, remaining acceptance and recommended execution
+order. docs/AVES-CHANGE-INBOX.md retains all50 original ledger entries. Archived
+pre-reconciliation plan retains sprint history; stale pending notices do not reopen
+completed checks. No runtime or production change accompanied the list update.
+
+
 Latest update, 10 November 2026. Read docs/AVES-069-DIRECTORY-SOURCING.md first
 for the owner's B Corp sourcing correction. Use the global directory's industry,
 keyword and country discovery for travel/accommodation/restaurants; the earlier

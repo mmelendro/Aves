@@ -1,5 +1,13 @@
 # AVES detailed acceptance criteria
 
+Status reconciliation, 10 November 2026: use AGILE-PLAN.md for current completion,
+preview evidence and priority. This file preserves the full acceptance contracts;
+dated queued/pending notices below are historical where superseded by that index.
+B Corp directory research and a guarded source pilot are prepared, with no eligible
+pins or visible layer. New private changes have synthetic UI evidence, not verified
+hosted persistence. The earlier live NZ planning pilot remains delivered.
+
+
 Latest release, 10 November 2026: selection-linked headers/local flocks are live in
 both applications. Main South Island satellite shading and 362/377 public checklist
 references are live; PRs #10/#9 are merged. Private-picker port is prepared in draft
@@ -55,7 +63,9 @@ Primary references, checked 10 November 2026:
 [B Lab directory](https://www.bcorporation.net/en-us/find-a-b-corp/),
 [B Lab regional directory guidance](https://bcorporation.com.au/find-b-corps/),
 [B Lab ESC stewardship guidance](https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/).
-The directory landing page is dynamic; no business records have been collected.
+The directory landing page is dynamic. A guarded source pilot and directory-led
+examples are documented in AVES-069-DIRECTORY-SOURCING.md; no eligible map pins or
+bulk import have been delivered.
 No new spending, accounts, provider/database changes or contact are authorised by
 this backlog entry. Prepare a sourced pilot preview and seek release approval.
 

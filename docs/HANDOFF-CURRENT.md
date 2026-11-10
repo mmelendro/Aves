@@ -1,5 +1,16 @@
 # AVES current handoff
 
+Status reconciliation, 10 November 2026: AGILE-PLAN.md now owns the comprehensive
+current task index and next execution order. The live baseline below is retained.
+New source/preview refinements are not released: see CONTINUE-HERE.md for current
+stacks, public hosted checks and the separate synthetic private-planner fixture.
+Earlier private-port/B Corp next-step paragraphs below describe the last release
+checkpoint. PR23 now includes private origin parity/place notes (307 checks).
+The synthetic fixture passed309 checks and hosted UI save/reopen in memory only.
+Real candidate account persistence, physical-device checks and production approval
+remain open. Read-only private entry approval has been resolved.
+
+
 Updated 10 November 2026 after the approved release. Fetch current GitHub history
 before editing. Historical pending paragraphs do not reopen completed work.
 
