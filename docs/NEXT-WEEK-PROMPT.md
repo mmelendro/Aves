@@ -35,10 +35,13 @@ australia/preview from feature/private-checklist-thumbnails, source 6e802f0. Rea
 docs/PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. It uses existing Dialog UI and 362 safe
 local references, stable saved IDs and per-file credits. 299 tests, strict TypeScript
 and local build passed. The real editor's submit/reopen handlers were tested with
-mocked account API transport only. Actual signed-in save/reopen/edit, private dialog
-keyboard/focus and small-screen reflow remain pending. Local browser rehearsal was
-blocked by browser access policy. Do not weaken auth or publish a demonstration
-editor. Finish acceptance with an authorised synthetic session and obtain explicit
+mocked account API transport only. The exact picker now passes isolated protected
+public-data component checks: thumbnails/credits, keyboard/focus, Escape,
+search/filtering, pending-image selection and 340px native-zoom short-frame reflow.
+Source 84e47f9 / dpl_7BduHZXZqKffSv1boGWGwFAGxLDw is a test-only preview branch,
+not PR #11 and not a release candidate. No account/save operations exist in it.
+Actual signed-in save/reopen/edit and the surrounding private shell remain pending.
+Do not weaken auth or publish a demonstration editor. Finish acceptance with an authorised synthetic session and obtain explicit
 production approval. Preview requested on the Australia/shared-portal project:
 dpl_3jMXJjr97LPpHwig2T6X3VwTWA36. Do not mistake automatic main-project previews for
 this shared-portal candidate. No schema/provider/account changes were made.

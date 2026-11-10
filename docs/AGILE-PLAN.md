@@ -23,8 +23,10 @@ The prior long plan is archived in archive/2026-11-10-before-selection-thumbnail
    live-verified. Preserve RELEASE-2026-11-10-SELECTION-THUMBNAILS.md; do not redeploy them.
 2. Finish private PR #11 acceptance, source 6e802f0. The 362-reference port passes
    299 tests, strict TypeScript and local build. Actual signed-in save/reopen,
-   private dialog focus and small-screen checks remain pending; mock transport
-   coverage is not a hosted save. No account/schema/provider changes or release yet.
+   private-shell checks remain pending; isolated component focus, Escape, credits,
+   search/selection and native-zoom 340px reflow now pass. Mock transport and the
+   public-data component check are not a hosted save. No account/schema/provider
+   changes or release yet.
 3. Continue safe source verification for the remaining public checklist entries.
    Never substitute another taxon or reuse a rejected payload through a workaround.
 4. Port map enlargement/controls to the separate Australia app as its own slice.

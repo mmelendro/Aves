@@ -48,8 +48,11 @@ major dependency overrides or present that audit as certification.
 Private picker port is prepared in draft PR #11, source 6e802f0 on
 feature/private-checklist-thumbnails, targeting australia/preview. 299 tests, strict
 TypeScript and local build passed. Mocked editor save/reopen preserves stable IDs;
-actual signed-in save/reopen, dialog keyboard/focus and small-screen acceptance
-remain pending. Local browser rehearsal was blocked by access policy. Read the
+actual signed-in save/reopen/edit and surrounding private-shell acceptance remain
+pending. The exact unchanged picker passed an isolated, protected public-data
+component check: thumbnail/credit independence, keyboard/focus, Escape, search,
+filters, pending-image selection and 340px native-zoom short-frame reflow. This
+check has no account or save controls and is not a persistence test. Read the
 feature branch's docs/PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. Do not redo the port.
 Finish its private preview acceptance before explicit production approval.
 Continue remaining image-source verification independently. Retain owner focus on
