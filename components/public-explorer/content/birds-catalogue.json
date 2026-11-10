@@ -1,0 +1,624 @@
+[
+  {
+    "id": "co-green-bearded-helmetcrest",
+    "commonName": "Green-bearded Helmetcrest",
+    "scientificName": "Oxypogon guerinii",
+    "primaryRegion": "Eastern Andes",
+    "regionSlug": "eastern-andes",
+    "distribution": "Endemic to Colombia’s Eastern Andes. Its high páramo range is separate from the other helmetcrest species in Colombia and Venezuela.",
+    "habitat": "Open high-elevation páramo with flowering shrubs and frailejones.",
+    "image": "https://aves.bio/images/green-bearded-helmetcrest.png",
+    "sources": [
+      {
+        "title": "CAR — Bogotá bird guide, Green-bearded Helmetcrest",
+        "url": "https://sigci.car.gov.co/wp-content/uploads/2023/10/BogotaGuiadeAves2019_compressed.pdf"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Nicolás Rozo",
+      "title": "AVES Guide",
+      "teamLink": "/credits",
+      "instagramPost": "https://www.instagram.com/p/C247ZDJgXBa/",
+      "reserve": "Parque Natural Del Sumapaz",
+      "reserveLink": "/about/partners#parque-natural-del-sumapaz"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-rainbow-bearded-thornbill",
+    "commonName": "Rainbow-bearded Thornbill",
+    "scientificName": "Chalcostigma herrani",
+    "primaryRegion": "Central Andes",
+    "regionSlug": "central-andes",
+    "distribution": "High Andes of Colombia, Ecuador and northern Peru. In Colombia, associated with high mountains in the Central and Western cordilleras and the southern Andes.",
+    "habitat": "Páramo, shrubby treeline and high mountain grassland with scattered flowering plants.",
+    "image": "https://aves.bio/images/rabtho1.jpg",
+    "sources": [
+      {
+        "title": "Corpoamazonia — Aves de Sibundoy",
+        "url": "https://www.corpoamazonia.gov.co/images/Publicaciones/2.%202013_Aves_Sibundoy/Aves%20de%20sibundoy%202014.pdf"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Termales del Ruiz",
+      "reserveLink": "/about/partners#termales-del-ruiz",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-black-billed-mountain-toucan",
+    "commonName": "Black-billed Mountain-Toucan",
+    "scientificName": "Andigena nigrirostris",
+    "primaryRegion": "Central Andes",
+    "regionSlug": "central-andes",
+    "distribution": "Northern Andes, including all three Colombian cordilleras and neighbouring parts of Venezuela and Ecuador.",
+    "habitat": "Humid mountain forest and forest edges, especially where fruiting trees remain.",
+    "image": "https://aves.bio/images/bbmtou1-square.png",
+    "imagePosition": "35% center",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Black-billed Mountain-Toucan",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=64516AE0ACD1E341&lang=EN"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Reserva Río Blanco",
+      "reserveLink": "/about/partners#reserva-rio-blanco",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-chestnut-crowned-antpitta",
+    "commonName": "Chestnut-crowned Antpitta",
+    "scientificName": "Grallaria ruficapilla",
+    "primaryRegion": "Central Andes",
+    "regionSlug": "central-andes",
+    "distribution": "Andean forests from Venezuela through Colombia and Ecuador to Peru, including all three Colombian cordilleras.",
+    "habitat": "Dense mountain-forest undergrowth, damp ravines and wooded edges; often heard before it is seen.",
+    "image": "https://aves.bio/images/chestnut-crowned-antpitta.jpg",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Chestnut-crowned Antpitta",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=F46A4E196B6CC4F5&lang=EN"
+      },
+      {
+        "title": "Corpoamazonia — Aves de Sibundoy",
+        "url": "https://www.corpoamazonia.gov.co/images/Publicaciones/2.%202013_Aves_Sibundoy/Aves%20de%20sibundoy%202014.pdf"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Martin Melendro",
+      "title": "AVES Guide",
+      "teamLink": "/credits",
+      "reserve": "Reserva Río Blanco",
+      "reserveLink": "/about/partners#reserva-rio-blanco"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-andean-motmot",
+    "commonName": "Andean Motmot",
+    "scientificName": "Momotus aequatorialis",
+    "primaryRegion": "Central Andes",
+    "regionSlug": "central-andes",
+    "distribution": "Andean foothills and mountains from Colombia through Ecuador and Peru to Bolivia. In Colombia it occurs in all three cordilleras.",
+    "habitat": "Wooded slopes, humid forest edges, shaded gardens and ravines with substantial tree cover.",
+    "image": "https://aves.bio/images/blue-crowned-motmot-new.jpg",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Andean Motmot",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=6CAC15FB&lang=EN"
+      },
+      {
+        "title": "Cali / Universidad Icesi — bird guide",
+        "url": "https://repository.icesi.edu.co/server/api/core/bitstreams/913b8df2-faad-4846-b10b-d988dbfe77c4/content"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Martin Meléndro",
+      "title": "AVES Guide",
+      "teamLink": "/credits",
+      "reserve": "Reserva Río Blanco",
+      "reserveLink": "/about/partners#reserva-rio-blanco"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-vermilion-cardinal",
+    "commonName": "Vermilion Cardinal",
+    "scientificName": "Cardinalis phoeniceus",
+    "primaryRegion": "Caribbean",
+    "regionSlug": "caribbean",
+    "distribution": "Dry northern South America: north-eastern Colombia, including La Guajira, and northern Venezuela.",
+    "habitat": "Dry thorn scrub, cactus country and low, open woodland.",
+    "image": "https://aves.bio/images/cardinal-guajiro.jpg",
+    "sources": [
+      {
+        "title": "Colombia National Parks — Los Flamencos",
+        "url": "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "La Guajira",
+      "reserveLink": "/about/partners#la-guajira",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-velvet-purple-coronet",
+    "commonName": "Velvet-purple Coronet",
+    "scientificName": "Boissonneaua jardini",
+    "primaryRegion": "Western Andes",
+    "regionSlug": "western-andes",
+    "distribution": "The humid western Andes and Pacific-facing foothills of western Colombia and north-western Ecuador.",
+    "habitat": "Wet foothill and cloud forest, flowering forest edges and clearings beside intact vegetation.",
+    "image": "https://aves.bio/images/velvet-purple-coronet.jpg",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Velvet-purple Coronet",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=1A8C5D443D0CACEB&lang=EN"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Martin Melendro",
+      "title": "AVES Lead Guide & Founder",
+      "teamLink": "/credits",
+      "reserve": "Jardín de Rocas",
+      "reserveLink": "/about/partners#jardin-de-rocas"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-golden-headed-manakin",
+    "commonName": "Golden-headed Manakin",
+    "scientificName": "Ceratopipra erythrocephala",
+    "primaryRegion": "Amazonia",
+    "regionSlug": "amazonia",
+    "distribution": "Northern tropical South America and eastern Panama. Colombian records include northern and eastern forests and the Cauca Valley.",
+    "habitat": "Humid lowland and foothill forest, fruiting understorey trees and mature secondary growth.",
+    "image": "https://aves.bio/images/gohman1.jpg",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Golden-headed Manakin",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=1C713394C9EE96CF&lang=EN"
+      },
+      {
+        "title": "Instituto SINCHI — Vaupés bird catalogue",
+        "url": "https://sinchi.org.co/files/publicaciones/recursos%20graficos/PDF/Catalogo%20Aves%20Vaupes.pdf"
+      },
+      {
+        "title": "Instituto Humboldt — Birds of Valle del Cauca (2020)",
+        "url": "https://revistas.humboldt.org.co/index.php/biota/article/download/738/915/3688"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Martin Melendro",
+      "title": "AVES Lead Guide & Founder",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-sOmUeeC5xVszFJSmeZ66Try02jkzGB.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-striolated-manakin",
+    "commonName": "Striolated Manakin",
+    "scientificName": "Machaeropterus striolatus",
+    "primaryRegion": "Cauca Valley",
+    "regionSlug": "cauca-valley",
+    "distribution": "North-western South America, including Colombia’s Cauca region and eastern lowlands. Colombian populations are Striolated Manakin, distinct from the Brazilian Striped Manakin.",
+    "habitat": "Humid lowland and foothill forest with dense undergrowth and small fruiting trees.",
+    "image": "https://aves.bio/images/strman5.jpg",
+    "sources": [
+      {
+        "title": "Cornell Lab of Ornithology — Striolated Manakin",
+        "url": "https://ebird.org/species/strman5"
+      },
+      {
+        "title": "Avibase / Birds Canada — Striolated Manakin",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=B4FFD3993307F7E7&lang=EN"
+      },
+      {
+        "title": "Cali / Universidad Icesi — bird guide",
+        "url": "https://repository.icesi.edu.co/server/api/core/bitstreams/913b8df2-faad-4846-b10b-d988dbfe77c4/content"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Refugio La Esmeralda",
+      "reserveLink": "/about/partners#refugio-la-esmeralda",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/strman5-M7ePaDFfvKHcN4hSew56PkYN1C7B8N.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-scaled-dove",
+    "commonName": "Scaled Dove",
+    "scientificName": "Columbina squammata",
+    "primaryRegion": "Caribbean",
+    "regionSlug": "caribbean",
+    "distribution": "Open country in northern and eastern South America. In Colombia its range includes the Caribbean lowlands, Magdalena Valley and Llanos.",
+    "habitat": "Dry scrub, open woodland, pastures and lightly wooded farmland; usually feeding on the ground.",
+    "image": "https://aves.bio/images/scadov1.jpg",
+    "imagePosition": "15% center",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Scaled Dove",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=26085D755AE75E42&lang=EN"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "La Guajira",
+      "reserveLink": "/about/partners#la-guajira",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/scadov1-ZY5P1ezfAmzpRMfahJV0otL1QasgoJ.mp3",
+    "audioLabel": "Recording retained from the original AVES collection"
+  },
+  {
+    "id": "co-yellow-throated-toucan",
+    "commonName": "Yellow-throated Toucan",
+    "scientificName": "Ramphastos ambiguus",
+    "primaryRegion": "Eastern Andes",
+    "regionSlug": "eastern-andes",
+    "distribution": "From parts of Central America into north-western South America. Colombian populations occupy suitable humid forests in the Pacific, Magdalena region and Andean foothills, including Perijá.",
+    "habitat": "Tall humid forest, wooded foothills and forest edges with large fruiting trees.",
+    "image": "https://aves.bio/images/bkmtou1.jpg",
+    "imagePosition": "left center",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Yellow-throated Toucan",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=7C99DFAB4A79DD0F&lang=EN"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Chamicero de Perija",
+      "reserveLink": "/about/partners#proaves",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://aves.bio/audio/co-yellow-throated-toucan.mp3",
+    "audioLabel": "Manuel Vargas · Costa Rica"
+  },
+  {
+    "id": "co-golden-headed-quetzal",
+    "commonName": "Golden-headed Quetzal",
+    "scientificName": "Pharomachrus auriceps",
+    "primaryRegion": "Eastern Andes",
+    "regionSlug": "eastern-andes",
+    "distribution": "Mountain forests from eastern Panama into the northern and central Andes. In Colombia it occurs in the Andean cordilleras.",
+    "habitat": "Humid mountain forest, using fruiting canopy trees and quiet forest edges.",
+    "image": "https://aves.bio/images/gohque1.jpg",
+    "imagePosition": "30% center",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Golden-headed Quetzal",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=AFD12F595A2DADFF&lang=EN"
+      }
+    ],
+    "photoCredit": {
+      "photographer": "Royann",
+      "title": "Wildlife Photographer",
+      "reserve": "Chamicero de Perija",
+      "reserveLink": "/about/partners#fundacion-proaves",
+      "teamLink": "/credits"
+    },
+    "audioFile": "https://aves.bio/audio/co-golden-headed-quetzal.mp3",
+    "audioLabel": "Steve Collins · Ecuador"
+  },
+  {
+    "id": "co-santa-marta-brushfinch",
+    "image": "https://aves.bio/images/birds/co-santa-marta-brushfinch.jpg",
+    "photoCredit": {
+      "photographer": "Félix Uribe",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Atlapetes_melanocephalus_Gorri%C3%B3n_mont%C3%A9s_de_Santa_Marta_Santa_Marta_Brush-Finch_(6842134898).jpg",
+      "reserve": "Photographed in Minca, Santa Marta, Colombia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Atlapetes_melanocephalus_Gorri%C3%B3n_mont%C3%A9s_de_Santa_Marta_Santa_Marta_Brush-Finch_(6842134898).jpg"
+    },
+    "commonName": "Santa Marta Brushfinch",
+    "scientificName": "Atlapetes melanocephalus",
+    "primaryRegion": "Sierra Nevada de Santa Marta",
+    "regionSlug": "sierra-nevada-de-santa-marta",
+    "distribution": "Endemic to the Sierra Nevada de Santa Marta in northern Colombia, a mountain range isolated from the Andes.",
+    "habitat": "Mountain-forest undergrowth, thickets and wooded edges on the Santa Marta massif.",
+    "sources": [
+      {
+        "title": "American Bird Conservancy / Conservation Birding — El Dorado",
+        "url": "https://conservationbirding.org/?reserve=el-dorado-reserve"
+      },
+      {
+        "title": "Fundación ProAves — El Dorado Reserve",
+        "url": "https://proaves.org/en/proaves-el-dorado-reserve/"
+      }
+    ]
+  },
+  {
+    "id": "co-santa-marta-parakeet",
+    "image": "https://aves.bio/images/birds/co-santa-marta-parakeet.jpg",
+    "imagePosition": "70% center",
+    "photoCredit": {
+      "photographer": "Christoph Moning",
+      "title": "Photographer · CC BY 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_285526565.jpg",
+      "reserve": "Photographed in Colombia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Pyrrhura_viridicata_285526565.jpg"
+    },
+    "commonName": "Santa Marta Parakeet",
+    "scientificName": "Pyrrhura viridicata",
+    "primaryRegion": "Sierra Nevada de Santa Marta",
+    "regionSlug": "sierra-nevada-de-santa-marta",
+    "distribution": "Endemic to the Sierra Nevada de Santa Marta in Colombia. Its mountain-forest range is small and separate from the Andean cordilleras.",
+    "habitat": "Humid montane forest and forest edges, with mature trees needed for nesting.",
+    "sources": [
+      {
+        "title": "Fundación ProAves — El Dorado Reserve",
+        "url": "https://proaves.org/en/proaves-el-dorado-reserve/"
+      },
+      {
+        "title": "American Bird Conservancy / Conservation Birding — El Dorado",
+        "url": "https://conservationbirding.org/?reserve=el-dorado-reserve"
+      }
+    ],
+    "audioFile": "https://aves.bio/audio/co-santa-marta-parakeet.mp3",
+    "audioLabel": "Fundacion ProAves · Colombia"
+  },
+  {
+    "id": "co-white-tailed-starfrontlet",
+    "image": "https://aves.bio/images/birds/co-white-tailed-starfrontlet.jpg",
+    "imagePosition": "53% center",
+    "photoCredit": {
+      "photographer": "Dick Culbert",
+      "title": "Photographer · CC BY 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Coeligena_phalerata,_male_(12711468004).jpg",
+      "reserve": "Photographed in El Dorado Reserve, Colombia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Coeligena_phalerata,_male_(12711468004).jpg"
+    },
+    "commonName": "White-tailed Starfrontlet",
+    "scientificName": "Coeligena phalerata",
+    "primaryRegion": "Sierra Nevada de Santa Marta",
+    "regionSlug": "sierra-nevada-de-santa-marta",
+    "distribution": "Endemic to the Sierra Nevada de Santa Marta in northern Colombia.",
+    "habitat": "Humid mountain forest, flowering forest edges and shrubby openings on the Santa Marta massif.",
+    "sources": [
+      {
+        "title": "Santa Marta tourism authority — Birds of the Sierra Nevada",
+        "url": "https://www.discoversantamarta.travel/wp-content/uploads/2024/02/GUIA-DIGITAL-BIRDS-OF-THE-SIERRA-NEVADA.pdf"
+      }
+    ]
+  },
+  {
+    "id": "co-jabiru",
+    "image": "https://aves.bio/images/birds/co-jabiru.jpg",
+    "photoCredit": {
+      "photographer": "Charles J. Sharp",
+      "title": "Photographer · CC BY-SA 4.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Jabiru_(Jabiru_mycteria)_2.JPG",
+      "reserve": "Photographed in Pantanal, Brazil",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Jabiru_(Jabiru_mycteria)_2.JPG"
+    },
+    "commonName": "Jabiru",
+    "scientificName": "Jabiru mycteria",
+    "primaryRegion": "Llanos",
+    "regionSlug": "llanos",
+    "distribution": "Large wetlands from parts of Mexico and Central America through tropical South America. Colombia’s flooded eastern savannas support this wide-ranging stork.",
+    "habitat": "Shallow freshwater marshes, flooded grassland and open river margins, with large trees used for nesting.",
+    "sources": [
+      {
+        "title": "Colombia National Parks — Paz de Ariporo, Casanare bird inventory",
+        "url": "https://old.parquesnacionales.gov.co/portal/wp-content/uploads/2019/09/Resol_165_260919_sgm.pdf"
+      },
+      {
+        "title": "Avibase / Birds Canada — Jabiru",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=49BD1F795F1F8A5C&lang=EN"
+      }
+    ]
+  },
+  {
+    "id": "co-scarlet-ibis",
+    "image": "https://aves.bio/images/birds/co-scarlet-ibis.jpg",
+    "imagePosition": "12% center",
+    "photoCredit": {
+      "photographer": "Félix Uribe",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Eudocimus_ruber_Corocora_Scarlet_Ibis_(6264848783).jpg",
+      "reserve": "Photographed in Arauca, Colombia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Eudocimus_ruber_Corocora_Scarlet_Ibis_(6264848783).jpg"
+    },
+    "commonName": "Scarlet Ibis",
+    "scientificName": "Eudocimus ruber",
+    "primaryRegion": "Llanos",
+    "regionSlug": "llanos",
+    "distribution": "Wetlands of northern South America and parts of the Brazilian coast. In Colombia it occurs in eastern savanna wetlands and locally along the Caribbean coast.",
+    "habitat": "Marshes, shallow flooded grassland, mudflats and mangrove-fringed wetlands.",
+    "sources": [
+      {
+        "title": "Colombia National Parks — Los Flamencos",
+        "url": "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/"
+      },
+      {
+        "title": "Colombia National Parks — Paz de Ariporo, Casanare bird inventory",
+        "url": "https://old.parquesnacionales.gov.co/portal/wp-content/uploads/2019/09/Resol_165_260919_sgm.pdf"
+      },
+      {
+        "title": "Avibase / Birds Canada — Scarlet Ibis",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=45039A43F7F8A9CF&lang=EN"
+      }
+    ]
+  },
+  {
+    "id": "co-hoatzin",
+    "image": "https://aves.bio/images/birds/co-hoatzin.jpg",
+    "photoCredit": {
+      "photographer": "Murray Foubister",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:4_day_trip_to_La_Selva_Lodge_on_the_Napo_River_in_the_Amazon_jungle_of_E._Ecuador_-_Hoatzin_(Opisthocomus_hoazin)_-_(26592958760).jpg",
+      "reserve": "Photographed in Napo River, Ecuador",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:4_day_trip_to_La_Selva_Lodge_on_the_Napo_River_in_the_Amazon_jungle_of_E._Ecuador_-_Hoatzin_(Opisthocomus_hoazin)_-_(26592958760).jpg"
+    },
+    "audioFile": "https://aves.bio/audio/co-hoatzin.wav",
+    "audioLabel": "Field recording · Primavera, Ji-Paraná - RO, Brazil",
+    "commonName": "Hoatzin",
+    "scientificName": "Opisthocomus hoazin",
+    "primaryRegion": "Amazonia",
+    "regionSlug": "amazonia",
+    "distribution": "Tropical South America, chiefly the Amazon and Orinoco basins. In Colombia, look in suitable river and lake habitats east of the Andes.",
+    "habitat": "Dense waterside shrubs, oxbow lakes, swamp forest and slow river margins.",
+    "sources": [
+      {
+        "title": "Instituto SINCHI — bird communities in Caquetá",
+        "url": "https://www.sinchi.org.co/files/publicaciones/revista/pdf/7/5%20estructura%20de%20comunidad%20de%20aves%20en%20diferentes%20sistemas%20de%20produccin%20de%20caucho.pdf"
+      },
+      {
+        "title": "Colombia National Parks — Paz de Ariporo, Casanare bird inventory",
+        "url": "https://old.parquesnacionales.gov.co/portal/wp-content/uploads/2019/09/Resol_165_260919_sgm.pdf"
+      },
+      {
+        "title": "Avibase / Birds Canada — Hoatzin",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=7E83A1B3DC1F8644&lang=EN"
+      }
+    ],
+    "imagePosition": "10% center"
+  },
+  {
+    "id": "co-scarlet-macaw",
+    "image": "https://aves.bio/images/birds/co-scarlet-macaw.jpg",
+    "imagePosition": "65% center",
+    "photoCredit": {
+      "photographer": "chuck624",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Ara_macao_-Puntarenas_Province,_Costa_Rica-8.jpg",
+      "reserve": "Photographed in Puntarenas Province, Costa Rica",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Ara_macao_-Puntarenas_Province,_Costa_Rica-8.jpg"
+    },
+    "audioFile": "https://aves.bio/audio/co-scarlet-macaw.wav",
+    "audioLabel": "Field recording · Puntarenas, CR",
+    "commonName": "Scarlet Macaw",
+    "scientificName": "Ara macao",
+    "primaryRegion": "Amazonia",
+    "regionSlug": "amazonia",
+    "distribution": "Tropical forests from parts of Mexico and Central America into South America. Colombia’s Amazon and Orinoco forest landscapes are part of its range; local occurrence is patchy.",
+    "habitat": "Lowland tropical forest, wooded river corridors and large forest trees used for feeding and nesting.",
+    "sources": [
+      {
+        "title": "Colombia Ministry of Environment — Scarlet Macaw range",
+        "url": "https://www.minambiente.gov.co/colombia-un-espectaculo-de-vida/"
+      },
+      {
+        "title": "Colombia National Parks — El Tuparro management plan, bird inventory",
+        "url": "https://www.parquesnacionales.gov.co/wp-content/uploads/2020/10/plan-de-manejo-pnn-el-tuparro.pdf"
+      }
+    ]
+  },
+  {
+    "id": "co-sunbittern",
+    "image": "https://aves.bio/images/birds/co-sunbittern.jpg",
+    "photoCredit": {
+      "photographer": "Félix Uribe",
+      "title": "Photographer · CC BY-SA 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Eurypyga_helias_Garza_del_sol_Sunbittern_(6262055923).jpg",
+      "reserve": "Photographed in Arauca, Colombia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Eurypyga_helias_Garza_del_sol_Sunbittern_(6262055923).jpg"
+    },
+    "audioFile": "https://aves.bio/audio/co-sunbittern.wav",
+    "audioLabel": "Field recording · Alta Floresta - State of Mato Grosso, 78580-000, Brazil",
+    "commonName": "Sunbittern",
+    "scientificName": "Eurypyga helias",
+    "primaryRegion": "Llanos",
+    "regionSlug": "llanos",
+    "distribution": "Tropical Central and South America. In Colombia it occurs beside suitable forested waterways, including the eastern plains and Amazon basin.",
+    "habitat": "Shaded streams, muddy river edges and small wetlands beside forest, walking slowly as it searches for prey.",
+    "sources": [
+      {
+        "title": "Colombia National Parks — El Tuparro management plan, bird inventory",
+        "url": "https://www.parquesnacionales.gov.co/wp-content/uploads/2020/10/plan-de-manejo-pnn-el-tuparro.pdf"
+      },
+      {
+        "title": "Avibase / Birds Canada — Sunbittern",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=900C590B5EEE5157&lang=EN"
+      }
+    ],
+    "imagePosition": "left center"
+  },
+  {
+    "id": "co-choco-toucan",
+    "image": "https://aves.bio/images/birds/co-choco-toucan.jpg",
+    "imagePosition": "68% center",
+    "photoCredit": {
+      "photographer": "Patty McGann",
+      "title": "Photographer · CC BY 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Choco_toucan.jpg"
+    },
+    "audioFile": "https://aves.bio/audio/co-choco-toucan.m4a",
+    "audioLabel": "Field recording · Reserva ProAves Ranita Terribilis",
+    "commonName": "Chocó Toucan",
+    "scientificName": "Ramphastos brevis",
+    "primaryRegion": "Pacific",
+    "regionSlug": "pacific",
+    "distribution": "The Chocó region of western Colombia and western Ecuador, following humid Pacific forests and foothills.",
+    "habitat": "Wet lowland and foothill forest, especially canopy and forest edges with fruiting trees.",
+    "sources": [
+      {
+        "title": "Avibase / Birds Canada — Chocó Toucan",
+        "url": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=D1E1AF7F198E884A&lang=EN"
+      }
+    ]
+  },
+  {
+    "id": "co-apical-flycatcher",
+    "image": "https://aves.bio/images/birds/co-apical-flycatcher.jpg",
+    "photoCredit": {
+      "photographer": "Ron Knight",
+      "title": "Photographer · CC BY 2.0",
+      "teamLink": "/credits",
+      "instagramPost": "https://commons.wikimedia.org/wiki/File:Apical_Flycatcher_(Myiarchus_apicalis)_(8079764502).jpg",
+      "reserve": "Photographed in On the road to Líbano, Colombia",
+      "reserveLink": "https://commons.wikimedia.org/wiki/File:Apical_Flycatcher_(Myiarchus_apicalis)_(8079764502).jpg"
+    },
+    "commonName": "Apical Flycatcher",
+    "scientificName": "Myiarchus apicalis",
+    "primaryRegion": "Cauca Valley",
+    "regionSlug": "cauca-valley",
+    "distribution": "Endemic to Colombia, especially the Cauca and Magdalena valleys and other dry interior valleys in the west and south-west.",
+    "habitat": "Dry woodland, scrub, scattered trees in open country and wooded river edges.",
+    "sources": [
+      {
+        "title": "Universidad Icesi — Apical Flycatcher nesting biology in the Cauca Valley",
+        "url": "https://repository.icesi.edu.co/server/api/core/bitstreams/998064cb-3dcf-4e10-9f34-7c06b2c382c6/content"
+      },
+      {
+        "title": "Cali / Universidad Icesi — bird guide",
+        "url": "https://repository.icesi.edu.co/server/api/core/bitstreams/913b8df2-faad-4846-b10b-d988dbfe77c4/content"
+      }
+    ]
+  }
+]

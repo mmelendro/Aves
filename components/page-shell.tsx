@@ -3,13 +3,16 @@
  * title, description, optional hero media and the page body as children. The homepage has
  * its own section composition in app/page.tsx. Discovery media uses the shared country map/photo pair; original route content stays below.
  */
+import { AustraliaUnifiedExplorer } from "./australia-unified-explorer"
+import { ExplorerHeader, ExplorerFooter } from "./explorer-navigation"
 import type { ReactNode } from "react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { AustraliaHomeExplorer } from "@/components/australia-home-explorer"
 import { Badge } from "@/components/ui/badge"
 
-export function PageShell({ title, description, children, path = "", eyebrow = "AVES Australia", footer, media }: { title: string; description: string; children: ReactNode; path?: string; eyebrow?: string; footer?: ReactNode; media?: ReactNode }) {
+export function PageShell({ title, description, children, path = "", eyebrow = "AVES Australia", footer, media, explorerRegion }: { title: string; description: string; children: ReactNode; path?: string; eyebrow?: string; footer?: ReactNode; media?: ReactNode; explorerRegion?: string }) {
+  if(explorerRegion)return <div className="min-h-screen bg-white"><ExplorerHeader/><main id="main-content" tabIndex={-1}><AustraliaUnifiedExplorer initialRegion={explorerRegion} titleStyle="birding">{children}</AustraliaUnifiedExplorer></main>{footer ?? <ExplorerFooter/>}</div>
   return <div className="min-h-screen bg-white">
     <NavigationHeader currentPage={path} />
     <main id="main-content" tabIndex={-1}>

@@ -6,9 +6,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Bird, Camera, Leaf, MapPin } from "lucide-react"
-import { NavigationHeader } from "@/components/navigation-header"
-import { Footer } from "@/components/footer"
-import { AustraliaHomeExplorer } from "@/components/australia-home-explorer"
+import { ExplorerHeader, ExplorerFooter } from "@/components/explorer-navigation"
+import { AustraliaUnifiedExplorer } from "@/components/australia-unified-explorer"
 import { PlanningSteps } from "@/components/planning-steps"
 import { Button } from "@/components/ui/button"
 import { sitePath } from "@/lib/site-path"
@@ -22,19 +21,9 @@ const interests = [
 
 export default function AVESLandingPage() {
   return <div className="min-h-screen bg-white">
-    <NavigationHeader currentPage="/" />
+    <ExplorerHeader/>
     <main id="main-content" tabIndex={-1}>
-      {/* First impression: headline above the linked map and bird media. */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-8 lg:py-10">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto mb-7 max-w-4xl text-center lg:mb-8">
-            <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-medium text-emerald-800 sm:text-sm"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Australia · Custom birding journeys</p>
-            <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Australia’s <span className="text-emerald-700">extraordinary birdlife</span></h1>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">Plan your journey around birds, landscapes and local culture. We’ll discuss the route, stays and pace with you, from tropical rainforest to island shores.</p>
-          </div>
-          <AustraliaHomeExplorer resizable />
-        </div>
-      </section>
+      <AustraliaUnifiedExplorer>
       {/* Landscape and travel-style story: keep photo attribution with its image. */}
       <section aria-labelledby="whole-journey-heading" className="bg-stone-50/70 py-14 lg:py-20">
         <div className="container mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
@@ -69,7 +58,8 @@ export default function AVESLandingPage() {
       {/* Explain the personal planning process before the final invitation to contact AVES. */}
       <PlanningSteps />
       <section className="bg-gradient-to-br from-emerald-50 to-blue-50 py-14 lg:py-20" aria-labelledby="plan-heading"><div className="container mx-auto max-w-4xl px-4 text-center sm:px-6"><h2 id="plan-heading" className="text-3xl font-medium tracking-tight text-gray-900 lg:text-4xl">A bird, a place, an idea. Start there.</h2><p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">You do not need a finished itinerary. Tell us what interests you, when you might travel and how you like to explore.</p><Button asChild size="lg" className="mt-7 min-h-12 rounded-lg bg-emerald-600 shadow-md hover:bg-emerald-700"><Link href="/contact">Plan my Australian trip <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button><p className="mt-4 text-sm text-gray-600">Just following along? <Link href="/contact?intent=waitlist" className="inline-flex min-h-11 items-center font-medium text-emerald-700 underline underline-offset-4">Join the Australian launch list</Link>.</p></div></section>
+      </AustraliaUnifiedExplorer>
     </main>
-    <Footer />
+    <ExplorerFooter/>
   </div>
 }

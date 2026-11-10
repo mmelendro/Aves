@@ -1,0 +1,125 @@
+{
+  "provenance": {
+    "sourceFile": "australia/content/regions.ts",
+    "purpose": "Reviewed public region descriptions reused by the AVES country and homepage explorer previews; refresh when the source descriptions change."
+  },
+  "regions": [
+    {
+      "id": "queensland",
+      "name": "Queensland",
+      "description": "Begin around Cairns and the Atherton Tablelands, where rainforest, crater lakes and open wetlands invite very different ways of watching birds.",
+      "gateway": "Cairns, with time based on the Atherton Tablelands",
+      "habitats": [
+        "Upland rainforest",
+        "Crater-lake margins",
+        "Seasonal freshwater wetlands",
+        "Woodland edges"
+      ],
+      "source": "https://www.birdlifenq.org/birding"
+    },
+    {
+      "id": "new-south-wales",
+      "name": "New South Wales",
+      "description": "Look beyond the city to Royal National Park’s forest and coast, then inland to the woodland and wetlands of the Hawkesbury area.",
+      "gateway": "Sydney, with separate outings south and north-west",
+      "habitats": [
+        "Coastal heath",
+        "Sheltered rainforest",
+        "Eucalypt and ironbark woodland",
+        "Creek margins and wetlands"
+      ],
+      "source": "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/royal-national-park"
+    },
+    {
+      "id": "tasmania",
+      "name": "Tasmania",
+      "description": "Start from Hobart and give Bruny Island room in your plans: quiet woodland, coastal heath and birds found nowhere beyond Tasmania.",
+      "gateway": "Hobart, then Kettering for the Bruny Island ferry",
+      "habitats": [
+        "Dry eucalypt woodland",
+        "Taller eucalypt forest",
+        "Coastal heath and scrub",
+        "Beaches and sheltered shorelines"
+      ],
+      "source": "https://parks.tas.gov.au/explore-our-parks/south-bruny-national-park"
+    },
+    {
+      "id": "victoria",
+      "name": "Victoria",
+      "description": "Begin near Melbourne and Geelong, where Serendip Sanctuary brings grassland, woodland and changing wetlands into a compact landscape.",
+      "gateway": "Melbourne or Geelong, with Serendip near Lara",
+      "habitats": [
+        "Seasonal freshwater wetlands",
+        "Permanent open water",
+        "Open grassland",
+        "Woodland"
+      ],
+      "source": "https://www.parks.vic.gov.au/places-to-see/parks/serendip-sanctuary"
+    },
+    {
+      "id": "south-australia",
+      "name": "South Australia",
+      "description": "Travel from Adelaide towards the Coorong for long lagoon views, pelicans and shorebirds shaped by changing water conditions.",
+      "gateway": "Adelaide, travelling towards Meningie and the Coorong",
+      "habitats": [
+        "Coastal lagoons",
+        "Shallow shorebird feeding areas",
+        "Dunes",
+        "Mallee and ephemeral lakes"
+      ],
+      "source": "https://www.parks.sa.gov.au/parks/coorong-national-park"
+    },
+    {
+      "id": "western-australia",
+      "name": "Western Australia",
+      "description": "Start with Perth’s northern wetlands and Yanchep’s woodland, where western parrots and fairywrens give familiar habitats a different character.",
+      "gateway": "Perth, with outings north to Yanchep and Yellagonga",
+      "habitats": [
+        "Banksia and eucalypt woodland",
+        "Paperbark wetland margins",
+        "Open lakes",
+        "Bushland"
+      ],
+      "source": "https://www.destinationperth.com.au/blog/post/perths-birds-and-where-to-find-them/"
+    },
+    {
+      "id": "northern-territory",
+      "name": "Northern Territory",
+      "description": "Begin around Darwin’s wetlands, then allow time for Kakadu’s billabongs and floodplains, where water and season set the rhythm.",
+      "gateway": "Darwin, with separate time for Fogg Dam and Kakadu",
+      "habitats": [
+        "Seasonal floodplains",
+        "Billabongs",
+        "Freshwater wetlands",
+        "Monsoon forest edges"
+      ],
+      "source": "https://nt.gov.au/parks/find-a-park/fogg-dam-conservation-area"
+    },
+    {
+      "id": "australian-capital-territory",
+      "name": "Australian Capital Territory",
+      "description": "Use Canberra as a base for quiet wetlands, Tidbinbilla’s sheltered habitats and the wetter forests of Namadgi.",
+      "gateway": "Canberra, with outings to Tidbinbilla and Namadgi",
+      "habitats": [
+        "Protected wetlands",
+        "Wet eucalypt forest",
+        "River corridors",
+        "Woodland"
+      ],
+      "source": "https://www.parks.act.gov.au/things-to-do/birdwatching"
+    },
+    {
+      "id": "jervis-bay-territory",
+      "name": "Jervis Bay Territory",
+      "description": "Explore the separate Jervis Bay Territory through Booderee’s coastal forest and heath, with time for birds between the beach views.",
+      "gateway": "Sydney or Canberra, travelling by road to Jervis Bay",
+      "habitats": [
+        "Coastal blackbutt forest",
+        "Flowering heath",
+        "Botanic garden habitats",
+        "Ocean-facing headlands"
+      ],
+      "source": "https://booderee.gov.au/discover/nature/birds/"
+    }
+  ]
+}

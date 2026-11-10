@@ -1,0 +1,84 @@
+"use client"
+
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { contextualHeaderGeometry, newZealandHeaderGeometry, type ContextualHeaderProfile } from "@/components/public-explorer/lib/header-landscape.mjs"
+
+import flockCatalogue from "@/components/public-explorer/content/header-flocks.json"
+import { selectHeaderFlock, headerFlockGeometry, birdOutline } from "@/components/public-explorer/lib/header-flock.mjs"
+import styles from "./header-contour.module.css"
+
+type Geometry = ReturnType<typeof newZealandHeaderGeometry>
+
+/** Decorative vectors; links and focus indicators stay above this layer. */
+type Drawing = { width: number; geometry: Geometry; key: string; family: string }
+
+export function HeaderContour({ profile, country = "colombia", regionId, placeId }: { profile?: ContextualHeaderProfile; country?: string; regionId?: string; placeId?: string }) {
+  const ref = useRef<SVGSVGElement>(null)
+  const [drawing, setDrawing] = useState<Drawing | null>(null)
+  const [previous, setPrevious] = useState<Drawing | null>(null)
+  const latest = useRef<Drawing | null>(null)
+  const flock = selectHeaderFlock(flockCatalogue.flocks,country,regionId,placeId)
+  const sceneKey = profile ? `${country}-${profile.terrain}-${profile.water}-${flock.name}` : `new-zealand-${flock.name}`
+  useLayoutEffect(() => {
+    const svg = ref.current, header = svg?.closest("header")
+    const word = header?.querySelector<HTMLElement>("[data-brand-wordmark]")
+    const nav = header?.querySelector<HTMLElement>("[data-contour-navigation]")
+    if (!svg || !header || !word || !nav) return
+    function measure() {
+      const h = header!.getBoundingClientRect(), b = word!.getBoundingClientRect(), n = Array.from(header!.querySelectorAll<HTMLElement>("[data-contour-navigation]")).map(node=>node.getBoundingClientRect()).sort((a,b)=>b.width-a.width)[0]
+      const next = { family: flock.family, key: sceneKey, width: h.width, geometry: profile ? contextualHeaderGeometry({ width: h.width, wordCenter: b.left - h.left + b.width / 2, navLeft: n.left - h.left, navRight: n.right - h.left }, profile) : newZealandHeaderGeometry({ width: h.width, wordCenter: b.left - h.left + b.width / 2, navLeft: n.left - h.left, navRight: n.right - h.left }) }
+      next.geometry.birds = headerFlockGeometry({width:h.width,wordCenter:b.left-h.left+b.width/2,navLeft:n.left-h.left,navRight:n.right-h.left},flock.family)
+      if (latest.current && latest.current.key !== sceneKey) setPrevious(latest.current)
+      latest.current = next
+      setDrawing(next)
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(header); observer.observe(word); observer.observe(nav)
+    let active = true
+    document.fonts.ready.then(() => { if (active) measure() })
+    return () => { active = false; observer.disconnect() }
+  }, [profile, sceneKey, flock.family])
+  useEffect(() => {
+    const svg = ref.current
+    if (!svg) return
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
+    let frame = 0
+    function draw() {
+      frame = 0
+      const y = Math.max(0, window.scrollY)
+      svg!.style.setProperty("--flock-x", `${Math.sin(y / 220) * 6}px`)
+      svg!.style.setProperty("--flock-y", `${Math.sin(y / 310) * 2}px`)
+    }
+    function onScroll() { if (!frame && !reduced.matches) frame = requestAnimationFrame(draw) }
+    function sync() {
+      cancelAnimationFrame(frame); frame = 0
+      window.removeEventListener("scroll", onScroll)
+      if (reduced.matches) {
+        svg!.style.removeProperty("--flock-x"); svg!.style.removeProperty("--flock-y")
+      } else { draw(); window.addEventListener("scroll", onScroll, { passive: true }) }
+    }
+    sync(); reduced.addEventListener("change", sync)
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); reduced.removeEventListener("change", sync) }
+  }, [])
+  const g = drawing?.geometry
+  return <svg ref={ref} data-header-contour={profile ? `${country}-${profile.terrain}` : "new-zealand"} data-header-flock-species={flock.scientificName || flock.name} aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
+    {previous && <g key={`old-${previous.key}`} className={styles.leave}><ContourScene g={previous.geometry} width={previous.width} family={previous.family} /></g>}
+    {g ? <g key={drawing!.key} className={previous ? styles.enter : undefined}><ContourScene g={g} width={drawing!.width} family={drawing!.family} /></g> : <path d="M0 108H1440V0H0Z" fill="white" />}
+
+  </svg>
+}
+
+function ContourScene({g,width,family}:{g:Geometry;width:number;family:string}){ return <>
+    <path d={`${g.boundary} L${width} 0 H0 Z`} fill="white" />
+    <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <path data-landscape-boundary="true" d={g.boundary} strokeWidth="1.35" />
+      {[...g.ridges, ...g.water].map((d, i) => <path key={i} d={d} strokeWidth=".65" />)}
+      <g data-header-wildlife="true" strokeWidth=".7">
+        {g.whales.map((d, i) => <path key={i} d={d} />)}
+        <g className={styles.flock}>{g.birds.map((bird, i) => <g key={i} transform={`translate(${bird.x} ${bird.y}) rotate(${bird.rotation}) scale(${bird.size})`}>
+          <path d={birdOutline(family,i)} strokeWidth={.7 / bird.size} />
+        </g>)}</g>
+      </g>
+    </g>
+</> }

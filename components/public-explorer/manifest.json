@@ -1,0 +1,686 @@
+{
+  "sourceRepository": "mmelendro/Aves",
+  "sourceCommit": "b891afdf6304d4e958a11fddbfe0713da074b4d6",
+  "purpose": "Pinned public explorer; Australian backend remains independent",
+  "mediaOrigin": "https://aves.bio",
+  "files": [
+    {
+      "path": "components/aves-media-provider.tsx",
+      "sourceSha256": "9cf1b9ef4ca58be367b94cdefd3ca2664023a61872f453d0cd068ea7c3f7e4bc",
+      "sha256": "7746c8d50dcab0ac801ef4e466ba702f2ef4205f0880b14ac3449f68b6610a02",
+      "adapter": true
+    },
+    {
+      "path": "components/bird-discovery-context.tsx",
+      "sourceSha256": "641f4df3eb91921e47907ce9a8d3b1e70b1220e92276e3763183daea280b43ce",
+      "sha256": "ac17852db6ea08ac6f127b4f638a79145a8338bc7e5e872dbefe331ae77b1715",
+      "adapter": true
+    },
+    {
+      "path": "components/colombia-home-language.tsx",
+      "sourceSha256": "f3267622e6e393b3b29d59e03e8a63349411de15f8bf50487bd2a08244dfb34b",
+      "sha256": "3659d9267f4554f928649a7adbe7fdd609849d49d2d2dc3c2db947e45b28ba24",
+      "adapter": false
+    },
+    {
+      "path": "components/colombia-map-artwork.tsx",
+      "sourceSha256": "029b629ddc9097cdaae8ebd819c4001b5e4002e0e8f5e43c00905d89ed82110d",
+      "sha256": "e06c46acd68a399689b33c6b2202d5d4886d92e9220427a9354fbae95bb114ae",
+      "adapter": false
+    },
+    {
+      "path": "components/colombia-region-targets.tsx",
+      "sourceSha256": "a57e46e4d61ec134c3fee232c69e8eccc01f98cb743a9bff06887d3a0c286bd3",
+      "sha256": "66d925afcee4d92abd9b15ffc4f40f5ddda72d3bd43889caf42fb6222d0c2802",
+      "adapter": false
+    },
+    {
+      "path": "components/destination-card-media.tsx",
+      "sourceSha256": "f23af5f92138aded7eb2fc4137c73c93c387af583f7c42f2d2b075b903f9d2c6",
+      "sha256": "eb2aacb701beb7c0e5fd7c05879bc9838b81558ca51016d63b9f1e8c603c0f01",
+      "adapter": false
+    },
+    {
+      "path": "components/destination-explorer-page.tsx",
+      "sourceSha256": "4b542c43c3b38d8bb23c5f531655fe1f59a82d378f98071ae0f145a525937410",
+      "sha256": "cde2901d64b80b38287cc96166c9a616ffd16c319d0540b364d3f2ccb6bc243c",
+      "adapter": false
+    },
+    {
+      "path": "components/destination-regional-map.tsx",
+      "sourceSha256": "5da2bd61ee6b06cdebcab8efa2ef4e8b34936688b96aec68912e1adc605044a9",
+      "sha256": "6e59322dafaa1a3db20425710bf8bc4306eed4a927603abf3ac66372ca128bba",
+      "adapter": false
+    },
+    {
+      "path": "components/destination-selection-context.tsx",
+      "sourceSha256": "08f52b318df982a21d021421bffb2cddafa5a2f690efc9a5814277976cc29dfa",
+      "sha256": "08f52b318df982a21d021421bffb2cddafa5a2f690efc9a5814277976cc29dfa",
+      "adapter": false
+    },
+    {
+      "path": "components/expandable-media.module.css",
+      "sourceSha256": "336dfe2fd510ec0346df505ad27bc65505772905c8f4483136a7190b213001b9",
+      "sha256": "336dfe2fd510ec0346df505ad27bc65505772905c8f4483136a7190b213001b9",
+      "adapter": false
+    },
+    {
+      "path": "components/expandable-media.tsx",
+      "sourceSha256": "1bd5c7787bbeeb67d7034487da5070ce5e698642f1d6b64ba26e7cd3fd9f65d3",
+      "sha256": "1bd5c7787bbeeb67d7034487da5070ce5e698642f1d6b64ba26e7cd3fd9f65d3",
+      "adapter": false
+    },
+    {
+      "path": "components/header-contour.module.css",
+      "sourceSha256": "9140570a308b16b849ff9bb1227a54f1894314fe18b133406cde26bf7626417a",
+      "sha256": "9140570a308b16b849ff9bb1227a54f1894314fe18b133406cde26bf7626417a",
+      "adapter": false
+    },
+    {
+      "path": "components/header-contour.tsx",
+      "sourceSha256": "95b144169967e5f7386ff854d280437bd9241ff77dd2bb5006b46ea6bc1a0a37",
+      "sha256": "5bb93427b8db4173f93cda43e8241fe2125e14b651d56639ee61a62311bea6b6",
+      "adapter": false
+    },
+    {
+      "path": "components/header-landscape-context.tsx",
+      "sourceSha256": "df230f9a8541edd7dfffe47580a63d64898b5c6f5036130450cb6f5d22c87d5d",
+      "sha256": "10ea8aece133fa61fd9fe171edaee1ecb16acb0e1471011f6531275f7676abb8",
+      "adapter": true
+    },
+    {
+      "path": "components/homepage-bird-carousel.tsx",
+      "sourceSha256": "fdead0ad6e2e9f4e799b2439aa03bbf29687b8371a895aaea52aad62ba1514de",
+      "sha256": "4251d7c9a2f1f2ea6fc0cb13749ccf367eff12eff0f55153e88fa9f8fa6473d8",
+      "adapter": false
+    },
+    {
+      "path": "components/homepage-destination-explorer.module.css",
+      "sourceSha256": "cfe95a92e2360fba4c55f3092ed36372b74dc0102f50446fc3f070c6cefd3137",
+      "sha256": "cfe95a92e2360fba4c55f3092ed36372b74dc0102f50446fc3f070c6cefd3137",
+      "adapter": false
+    },
+    {
+      "path": "components/homepage-destination-explorer.tsx",
+      "sourceSha256": "eaabf5a79c6e4d8950bd2f07f007bb94195ba943b5c1deb829598fd6e0e11b34",
+      "sha256": "09c6ef2e6132f53099f96de647233a1716ad6bda244e112c68140c8020fa5cbc",
+      "adapter": false
+    },
+    {
+      "path": "components/map-feather-marker.tsx",
+      "sourceSha256": "e07958e15cf80938095e681fa60864f63630625df54d6bd29f0e37deace36670",
+      "sha256": "e07958e15cf80938095e681fa60864f63630625df54d6bd29f0e37deace36670",
+      "adapter": false
+    },
+    {
+      "path": "components/map-layer-context.tsx",
+      "sourceSha256": "e3be110a5002ee876dc7ce50c9353c48b1b59a9a5bde50bccd6f351bfa160061",
+      "sha256": "e3be110a5002ee876dc7ce50c9353c48b1b59a9a5bde50bccd6f351bfa160061",
+      "adapter": false
+    },
+    {
+      "path": "components/map-viewer.module.css",
+      "sourceSha256": "9676bc6278a75e44e2c1e8ca76ddebbc42a681a21ca5455f9551f0bae3e12b87",
+      "sha256": "9676bc6278a75e44e2c1e8ca76ddebbc42a681a21ca5455f9551f0bae3e12b87",
+      "adapter": false
+    },
+    {
+      "path": "components/map-viewer.tsx",
+      "sourceSha256": "871c229104a7bc3be2bde43b9c1932c88037e1a98218435291f7d40fe1f486ad",
+      "sha256": "2ae6b50a7df16a4bb10e1c2978036656e9190003a167ecbf54351daee26455d3",
+      "adapter": false
+    },
+    {
+      "path": "components/new-zealand-bird-picker.tsx",
+      "sourceSha256": "ec8a8f2918ef0d8adc52b2fd219ae11055c92f9df4e2714cf84cb6fcf5e54a66",
+      "sha256": "4edbb8b51cb96245166a245091c29232bc12d3d2603aa49d24e4549e1ca4c00e",
+      "adapter": false
+    },
+    {
+      "path": "components/new-zealand-checklist-photo.tsx",
+      "sourceSha256": "e0c3db2dbdbd65d303ad7084e456485d3dbd8623be5d8d824b414800b2ebeb1b",
+      "sha256": "51895f494889e2199822bea59d41ef02ad325ea8a40b5fe1af53b8d27202c2af",
+      "adapter": true
+    },
+    {
+      "path": "components/nz-place-ideas.tsx",
+      "sourceSha256": "77b7d60a9ca1778f342a773b4d32f7138232bf7a4ef263f416068ba8ad45affa",
+      "sha256": "7e4e97191051763bdefad55c3d856755c3809d163d3c79f19f8a31ce63226494",
+      "adapter": false
+    },
+    {
+      "path": "components/photo-zoom.module.css",
+      "sourceSha256": "7ab3990d0fd8323ce93dc8d20593ccfe0ec6d47d9deff1be533dcf364323b7db",
+      "sha256": "7ab3990d0fd8323ce93dc8d20593ccfe0ec6d47d9deff1be533dcf364323b7db",
+      "adapter": false
+    },
+    {
+      "path": "components/photo-zoom.tsx",
+      "sourceSha256": "ce2a9da5c637e76b2ef1294a5df9f49e2aa6bebb1ca4afd501543ab9293756f0",
+      "sha256": "10f894a81d86e7fabeb24c831d44d14ba1e8cfd02d970bbe4dec8c91ba11bf06",
+      "adapter": false
+    },
+    {
+      "path": "components/resizable-discovery-pair.module.css",
+      "sourceSha256": "41ee89e0178b78ab97038823deeb501009944ac5813878583a5c0b0c9c6d13f9",
+      "sha256": "41ee89e0178b78ab97038823deeb501009944ac5813878583a5c0b0c9c6d13f9",
+      "adapter": false
+    },
+    {
+      "path": "components/resizable-discovery-pair.tsx",
+      "sourceSha256": "b650b2e4b006ce3d5c69f11bb31f7a3dd38a48d52ed066b39b9b244045d0269f",
+      "sha256": "7ab01e0a90ebfe7acba38267220fbd16f848cb855f1f700ede97e6bd2b95b977",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-conservation-overlay.tsx",
+      "sourceSha256": "962308f17df680be5c64d970d2a982ed3fbbddf71d406df73e95edfba55c0d93",
+      "sha256": "2b9195b9a51f7db9d2c1f4dd05e9b56dfc0125a49a24e744a4264a94bb2d4e22",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-ecosystem-map.module.css",
+      "sourceSha256": "baeadd56a9c797a0d3352dec4dc56bd90ef49340c6951f0d6847606336e2f230",
+      "sha256": "baeadd56a9c797a0d3352dec4dc56bd90ef49340c6951f0d6847606336e2f230",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-ecosystem-map.tsx",
+      "sourceSha256": "e12d9c37ad40df4ddee85003153017da0cf4b0ab8b12ce8e0cf60225c9170a13",
+      "sha256": "562465dd06b6c74b2b25047760984862db97975ee706d13f147161d1bab618fd",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-habitat-context.tsx",
+      "sourceSha256": "eded3c3ccfc7a133112da106198968f6ee1a5ef5f644fb0d283e31aff87f11e9",
+      "sha256": "0c79c1ca46f314b66add5c8e39c370d05d8a49b01d0e8eebe5c8df5f1f0ab2c7",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-habitat-select.tsx",
+      "sourceSha256": "8426cc584d40ce7051e0f6bad47774233b61ad5d1eb51c7211abc0a88b8367e3",
+      "sha256": "d95d11f36894b3a373ee5789393887ca021e19fc3a7230debaed19f76fc1865d",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-map-layers.tsx",
+      "sourceSha256": "764d75eb565e1fe4438590a813171ae6c117b10902f8d7f9778106298c6c8dcd",
+      "sha256": "3940bf1d6f1da965e05489229f3727dd6ba3276f9638ed059db08a321557ad7e",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-places-explorer.module.css",
+      "sourceSha256": "0031e06257116199e21a48c081af596ea3a94f8c5693450ff7e3e86ff52336e3",
+      "sha256": "0031e06257116199e21a48c081af596ea3a94f8c5693450ff7e3e86ff52336e3",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-places-explorer.tsx",
+      "sourceSha256": "dd1e5533c8557589ef32b4f16a970cc0da6076793dfd35f15ed92f52bae4f9e7",
+      "sha256": "4d00b11702d3faffd797dc04e2f875f74307380451aaa6a81ae1afc6e86b836c",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-public-place-overlay.tsx",
+      "sourceSha256": "fea7813e9d76643935d9093e37d2c25156e0e41bb86b1b28219e936d500ea1cd",
+      "sha256": "9be2786700d0ce9fbe203e5f855e0623a5cf5a5f2f0c929f7bb3a7a7dbada13e",
+      "adapter": false
+    },
+    {
+      "path": "components/south-island-soundscapes.tsx",
+      "sourceSha256": "822d36188162c4d1db756e4b77dd9c0731710f9548c7bafd3b7065068971ce99",
+      "sha256": "ceac55a9d03d3a7a2b77735bde47771b961fbf9676478f2b16b15ed972f5176a",
+      "adapter": false
+    },
+    {
+      "path": "components/species-details-panel.module.css",
+      "sourceSha256": "1dc37c5bbcb64d32e5f9cafeedd4b428b5c106c9a97cabc69d0b1de2f572fed1",
+      "sha256": "1dc37c5bbcb64d32e5f9cafeedd4b428b5c106c9a97cabc69d0b1de2f572fed1",
+      "adapter": false
+    },
+    {
+      "path": "components/species-details-panel.tsx",
+      "sourceSha256": "ff7813f9b48c73a73ee046aa64fc4066568f30d8ddbd5a4493edbf546ef2cdd1",
+      "sha256": "a9ce1bbf67810ef4e54aac65e1fb9d8a59619e6a556d4c1352be4b1216eb62f8",
+      "adapter": false
+    },
+    {
+      "path": "components/ui/card.tsx",
+      "sourceSha256": "b16e1d45d39159aa549f9e831d6fad0d534c20daddf1be0c1da0fc74acafe723",
+      "sha256": "e9792b8f51dd6666bfb71eaa80dbeaf312685ca37ddd995a459f7580cfb9dbc6",
+      "adapter": true
+    },
+    {
+      "path": "components/use-shared-bird-audio.ts",
+      "sourceSha256": "9dba71a9e9279a7026a63ebd760dca0b230be84d154694ea8244931ffd22b1b0",
+      "sha256": "5904600b5b116c26a20cc3b64671ec99dbd81e51028301d97ecf781bedee7bed",
+      "adapter": false
+    },
+    {
+      "path": "components/world-destination-map.module.css",
+      "sourceSha256": "69dc65d4a8f048d334db9eae8920eb558479c4ec9adf922f1944319835a8e559",
+      "sha256": "69dc65d4a8f048d334db9eae8920eb558479c4ec9adf922f1944319835a8e559",
+      "adapter": false
+    },
+    {
+      "path": "components/world-destination-map.tsx",
+      "sourceSha256": "1de61ef5e6bc059d08ef939678d850bfbb8dccc94a910d9752512db8fd7d2db8",
+      "sha256": "03f5266bc24924cec2f358b5eeb4fd22ef713d858ec39c4871b008b2c261fd20",
+      "adapter": false
+    },
+    {
+      "path": "components/world-map-country.tsx",
+      "sourceSha256": "894d7bfc51499f1cb8a0daf8fd260e37c26294946ede1bce8741d8a064cb1636",
+      "sha256": "35b7bcfd6dc356b6b2400aba1a25e397158ed1039ae91d2395c71277278ce95f",
+      "adapter": false
+    },
+    {
+      "path": "components/world-map-scene.tsx",
+      "sourceSha256": "f6e0bea70533055c3c992dc41fc32e4cad761c23192c0f4b67dbba61f2a4a603",
+      "sha256": "f6e0bea70533055c3c992dc41fc32e4cad761c23192c0f4b67dbba61f2a4a603",
+      "adapter": false
+    },
+    {
+      "path": "content/birds-catalogue.json",
+      "sourceSha256": "2b20c97811873abf6073fc220d45e3ed722a06fb3002b83592ce21bd9662408f",
+      "sha256": "3e46fe8409077529c4454b71dc38b6a0f537e448b3b126e14ae062adcb601ae5",
+      "adapter": false
+    },
+    {
+      "path": "content/birds.ts",
+      "sourceSha256": "bd2e6b78a43d5192e1bf782b92dab46a33cf2c1b3b6ca839d1d70f9116bf75f7",
+      "sha256": "bd2e6b78a43d5192e1bf782b92dab46a33cf2c1b3b6ca839d1d70f9116bf75f7",
+      "adapter": false
+    },
+    {
+      "path": "content/colombia-home-es.json",
+      "sourceSha256": "fe151cb890a34d314a874bfe809ac5a809762b76d214e82b366c608f466f271d",
+      "sha256": "fe151cb890a34d314a874bfe809ac5a809762b76d214e82b366c608f466f271d",
+      "adapter": false
+    },
+    {
+      "path": "content/colombia-map-markers.ts",
+      "sourceSha256": "8ed0245fbd1d6530707c195d80a80867d78508249df6f6091be6fe1fc11406f6",
+      "sha256": "43a26e1ae499afb4e7efc8b3f4784002441322671fca370771c46e0926a6701a",
+      "adapter": false
+    },
+    {
+      "path": "content/colombia-planning-boundaries.json",
+      "sourceSha256": "4cba646a298c260dc9c659775d660f9653877c26c119ca6e58f42db3f162d480",
+      "sha256": "4cba646a298c260dc9c659775d660f9653877c26c119ca6e58f42db3f162d480",
+      "adapter": false
+    },
+    {
+      "path": "content/destination-birds.ts",
+      "sourceSha256": "d029f7b24ce9eb19898c6122f6799ad8db67f5c6888be655b366fd4773953777",
+      "sha256": "96640bc3fe0299a5b96ccd9e50338f519a54a281793e4beb507dcc0a98cb640c",
+      "adapter": false
+    },
+    {
+      "path": "content/destination-regions.ts",
+      "sourceSha256": "50be9340650b408e5bdfcb1e449f455b3298adaafb75f6c9b6eb2da9112d156a",
+      "sha256": "9a66c7da2cdfe6d24f192b98d3036fb50f6875983fba517977aa0e2b8d830e30",
+      "adapter": false
+    },
+    {
+      "path": "content/destinations.ts",
+      "sourceSha256": "e0afaec7b2b74f78661992042f17926beb6b905b995c565d7c0495e89acedbb2",
+      "sha256": "26380253f0723094b42a9a265a062b10eab849489bda06bd9cd75694a69a9075",
+      "adapter": false
+    },
+    {
+      "path": "content/global-australian-birds.json",
+      "sourceSha256": "5a680d04e76ba1e67f1a4a1d7374035d8565692c74c03a95e31804c42b848af4",
+      "sha256": "5a680d04e76ba1e67f1a4a1d7374035d8565692c74c03a95e31804c42b848af4",
+      "adapter": false
+    },
+    {
+      "path": "content/global-australian-map.ts",
+      "sourceSha256": "4ee45cbff845f5de0c9e9eac787ee730c0fa52cbbcaa4d4fef9c70cb6ed929c9",
+      "sha256": "4ee45cbff845f5de0c9e9eac787ee730c0fa52cbbcaa4d4fef9c70cb6ed929c9",
+      "adapter": false
+    },
+    {
+      "path": "content/global-australian-region-overviews.json",
+      "sourceSha256": "6c3d4dd4930274d2237d6b25c899147e6de32ea90dfd6a60a95db2ba497d0e85",
+      "sha256": "6c3d4dd4930274d2237d6b25c899147e6de32ea90dfd6a60a95db2ba497d0e85",
+      "adapter": false
+    },
+    {
+      "path": "content/global-australian-regional-birds.json",
+      "sourceSha256": "a5302ca2474306c97fb62afbc8975727f42b828fb3811bda64ebbfc73282cc44",
+      "sha256": "a5302ca2474306c97fb62afbc8975727f42b828fb3811bda64ebbfc73282cc44",
+      "adapter": false
+    },
+    {
+      "path": "content/header-flocks.json",
+      "sourceSha256": "92efeb3e6bfdb6bb5de84d70b278b6aee2dcbe71fdcacef642ab0bdc30155c26",
+      "sha256": "92efeb3e6bfdb6bb5de84d70b278b6aee2dcbe71fdcacef642ab0bdc30155c26",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-bird-islands.ts",
+      "sourceSha256": "1c0f298337c00cda7c06d1a8cb4d7c547f2e0320ddd3b17259d2525305c213c6",
+      "sha256": "1c0f298337c00cda7c06d1a8cb4d7c547f2e0320ddd3b17259d2525305c213c6",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-carousel.ts",
+      "sourceSha256": "f35e272303206bc584d3195c264458c786bf1aed174a2ad433f92aacc183423d",
+      "sha256": "443278deb1dd7c9f233b82072c21c2771eafd03b515886667942e1ef900bfd51",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-checklist-media.ts",
+      "sourceSha256": "fc3375757186c2984fe8bdad04e83956d73440033dbf42ffb1bc49dbd3493008",
+      "sha256": "fc3375757186c2984fe8bdad04e83956d73440033dbf42ffb1bc49dbd3493008",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-checklist-photos.ts",
+      "sourceSha256": "e16db8f66cb1ef3521939780e9f55d944441fa1583a76759bf4dada72afe655c",
+      "sha256": "e16db8f66cb1ef3521939780e9f55d944441fa1583a76759bf4dada72afe655c",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-checklist-thumbnails.json",
+      "sourceSha256": "a35c1ee1aa8c6f1fc446992253db0317d91fa59da7eecbe35fbf0f1deaea038a",
+      "sha256": "c2fa021b260c703b9b0007c3ec9c652f7a4a703981379047bef4ae4eb620eca3",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-checklist.json",
+      "sourceSha256": "72f6b74b6eec298308f5f3b8150778949b921e2e50a7991f2434bd751cd8b680",
+      "sha256": "72f6b74b6eec298308f5f3b8150778949b921e2e50a7991f2434bd751cd8b680",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-checklist.ts",
+      "sourceSha256": "583624aa2e7838abdf604ffa947154306eef1124d9556a909a8c6a864c132766",
+      "sha256": "583624aa2e7838abdf604ffa947154306eef1124d9556a909a8c6a864c132766",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-expansion-credits.json",
+      "sourceSha256": "2909efd17f9e24bad4ec4eeec3c784295c87756b9e87b0e04b47de6e82ab81a2",
+      "sha256": "09fb18b0eab7d3b35f69e9dc887a09883064de396cda262b4d90d4d4551a2f35",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-expansion.ts",
+      "sourceSha256": "4c6ecff5648f6a1d65818b484ea1a2e0ad08a8c915bdceb77b5715b5152624a9",
+      "sha256": "fe362ec3c01051c96d2329196c1a8210c0ef6f7ac1352fc5dd01e9afc69d2d48",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-map.json",
+      "sourceSha256": "61e2dcbf8b331da5260a58974f1fa9fde32cd31a16806c1665fa1ebca6f397f3",
+      "sha256": "61e2dcbf8b331da5260a58974f1fa9fde32cd31a16806c1665fa1ebca6f397f3",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-supplement-credits.json",
+      "sourceSha256": "6535fb1cd3f097cb7be4ed57c22a753d4832989155d322ffe15f11edaaa2a9c8",
+      "sha256": "e64304839b37bcf5cc55e6ff95b96796f6601f8d3b5db3d8bacfec11e4aae288",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand-supplement.ts",
+      "sourceSha256": "c42f5fc12873bba72211335faf6bfc0251f59fe0bc0124062d0e89a9b3013b0e",
+      "sha256": "45831b3973ed4337354b9daa0b23968d9c84b0eef3130f70425f3e4cd9d5a703",
+      "adapter": false
+    },
+    {
+      "path": "content/new-zealand.ts",
+      "sourceSha256": "aa01d9e44a986a26c8d17109a5525afdede5a555ba07417bc78cab4835a76b11",
+      "sha256": "aa01d9e44a986a26c8d17109a5525afdede5a555ba07417bc78cab4835a76b11",
+      "adapter": false
+    },
+    {
+      "path": "content/regions.ts",
+      "sourceSha256": "0b77e4414b991ff85f0623508e77b5e18a5fe9a54f0ae45e081980c6494a8828",
+      "sha256": "5aec4578689aa2df2abccc64cd95738ce88513cefc4ac62bbe65fcb334a25b8a",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-conservation-layers.json",
+      "sourceSha256": "051ef29c10a4b496694e9cb70394ebbf6c315ac548ebc690d9ec8d29339dfba1",
+      "sha256": "051ef29c10a4b496694e9cb70394ebbf6c315ac548ebc690d9ec8d29339dfba1",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-ecosystem-map.json",
+      "sourceSha256": "d39e0eba6dc417456a1056616e8d793270fd40badcd19fdea0d75ab7411a8ce7",
+      "sha256": "d39e0eba6dc417456a1056616e8d793270fd40badcd19fdea0d75ab7411a8ce7",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-ecosystems.ts",
+      "sourceSha256": "6674695f475cd2a7e46471263048c8060ee8bd9192173651d0121bf68b9fdd01",
+      "sha256": "bda89f04a6e678a58d4b502babc931b9b59de55bcca357d4902986d61c5032b7",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-layer-catalogue.json",
+      "sourceSha256": "dd90348b32f24ad8a1a76f3cfa967976b12418e52f38c5d16ebab436b7a52fa8",
+      "sha256": "dd90348b32f24ad8a1a76f3cfa967976b12418e52f38c5d16ebab436b7a52fa8",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-place-media.ts",
+      "sourceSha256": "cf95d016af18fc88237de951645f709217cc2dadd08d509ea5913524d9c0a04c",
+      "sha256": "eec38e3c2fcd78966a77a81f0521d72794056b883ea55276945c642b278b51f7",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-public-places.json",
+      "sourceSha256": "6336dd293242c82cb93eac6793a4a8456cbd11e7a1029514679ee943875a4f02",
+      "sha256": "6336dd293242c82cb93eac6793a4a8456cbd11e7a1029514679ee943875a4f02",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-satellite-source.json",
+      "sourceSha256": "943c623d390dd5a4347dd70d05aa3f1806a514afa75ea212a420606c90f12f14",
+      "sha256": "97c2b68e0be3f7565f7b3a72e019410024a0a26c1f8b994e55490afe0e40eaa9",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island-soundscapes.ts",
+      "sourceSha256": "b17fb699d3d1d6089ea94a290fa0667278e29f314e9dbdce50df8a7ff4d17453",
+      "sha256": "62efebb28a473eed6f51941bf6513a6040cbf3a5a1d42ea8033e9c6ccb5a1376",
+      "adapter": false
+    },
+    {
+      "path": "content/south-island.ts",
+      "sourceSha256": "621ac62b52a43c89f80b786a84b40f13da8a668fd401fb531ae0f5cfb026416f",
+      "sha256": "621ac62b52a43c89f80b786a84b40f13da8a668fd401fb531ae0f5cfb026416f",
+      "adapter": false
+    },
+    {
+      "path": "content/travel-media.ts",
+      "sourceSha256": "add94ae05e5ce0a25ee334756cc2a9ffc8ad3ca4d10242f0d485681a8ebd6875",
+      "sha256": "add94ae05e5ce0a25ee334756cc2a9ffc8ad3ca4d10242f0d485681a8ebd6875",
+      "adapter": false
+    },
+    {
+      "path": "content/world-map.json",
+      "sourceSha256": "5a9782709ee8f94ba7c127c04464e006eea2c555d8617bf8a5b3d4688345cdca",
+      "sha256": "5a9782709ee8f94ba7c127c04464e006eea2c555d8617bf8a5b3d4688345cdca",
+      "adapter": false
+    },
+    {
+      "path": "lib/cover-focal-position.ts",
+      "sourceSha256": "087fa52dbed9f7b26abaccc5eb856c90c3852b5cf06ed81b4068bfcee9c8b1ef",
+      "sha256": "087fa52dbed9f7b26abaccc5eb856c90c3852b5cf06ed81b4068bfcee9c8b1ef",
+      "adapter": false
+    },
+    {
+      "path": "lib/discovery-split.ts",
+      "sourceSha256": "eb8e8a27891b3fcee951782ef6c60dcd5f5d3d9694b52297b396904fb6bdad9e",
+      "sha256": "eb8e8a27891b3fcee951782ef6c60dcd5f5d3d9694b52297b396904fb6bdad9e",
+      "adapter": false
+    },
+    {
+      "path": "lib/ecosystem-map-camera.ts",
+      "sourceSha256": "31636c46c3f4006c11fbe205f069666b75e326e2fde7785857d6f58368586e89",
+      "sha256": "31636c46c3f4006c11fbe205f069666b75e326e2fde7785857d6f58368586e89",
+      "adapter": false
+    },
+    {
+      "path": "lib/explorer-location.ts",
+      "sourceSha256": "7b67e274f10186abfa0140c900593b66ed77fd9b4a68c505e97410cfb8fc4070",
+      "sha256": "b989d22f613effeb241b884b325d4872b176435ad6a73bf94d5ab8f5f8ccbb7f",
+      "adapter": false
+    },
+    {
+      "path": "lib/follow-bird-calls.ts",
+      "sourceSha256": "7509e00c982ba0a2855bb025f82eafd821ea5a11b8d172ec3c3e04389187f77f",
+      "sha256": "7509e00c982ba0a2855bb025f82eafd821ea5a11b8d172ec3c3e04389187f77f",
+      "adapter": false
+    },
+    {
+      "path": "lib/header-flock.d.mts",
+      "sourceSha256": "2a13be1175baea62337a02318e41485b62684e5d26baa855a7ac6703ebdab18e",
+      "sha256": "2a13be1175baea62337a02318e41485b62684e5d26baa855a7ac6703ebdab18e",
+      "adapter": false
+    },
+    {
+      "path": "lib/header-flock.mjs",
+      "sourceSha256": "eaa9daf67f04ea41a8181da7114de8f02eacb29455bcfacf512dafc5c3e9cc0f",
+      "sha256": "eaa9daf67f04ea41a8181da7114de8f02eacb29455bcfacf512dafc5c3e9cc0f",
+      "adapter": false
+    },
+    {
+      "path": "lib/header-landscape.d.mts",
+      "sourceSha256": "d287445b0b35e2a54f8c6b9b52144549e4d7c02b74c4b303a7e78643fb48b7d1",
+      "sha256": "d287445b0b35e2a54f8c6b9b52144549e4d7c02b74c4b303a7e78643fb48b7d1",
+      "adapter": false
+    },
+    {
+      "path": "lib/header-landscape.mjs",
+      "sourceSha256": "8c70b2e1cab0aeeaf58af0c65acf6089dabe489bdaade9fad5d20d8337a7cc8e",
+      "sha256": "8c70b2e1cab0aeeaf58af0c65acf6089dabe489bdaade9fad5d20d8337a7cc8e",
+      "adapter": false
+    },
+    {
+      "path": "lib/landscape-study.d.mts",
+      "sourceSha256": "d37e608ff32b97543addb77e958a2fa53ab1eb39838fa2770790cab65fa19db9",
+      "sha256": "d37e608ff32b97543addb77e958a2fa53ab1eb39838fa2770790cab65fa19db9",
+      "adapter": false
+    },
+    {
+      "path": "lib/landscape-study.mjs",
+      "sourceSha256": "7f09572a7c82ad275c23e2232d56403f88b94da99283698c02a0d526b0703b5b",
+      "sha256": "7f09572a7c82ad275c23e2232d56403f88b94da99283698c02a0d526b0703b5b",
+      "adapter": false
+    },
+    {
+      "path": "lib/map-gestures.d.mts",
+      "sourceSha256": "83b171a04273a20e385ccfdb00957153e3645c3f8b88d2d4fdae72e365713771",
+      "sha256": "83b171a04273a20e385ccfdb00957153e3645c3f8b88d2d4fdae72e365713771",
+      "adapter": false
+    },
+    {
+      "path": "lib/map-gestures.mjs",
+      "sourceSha256": "6cd68be96eabf05db56626ea1c1ca3bd6cd00e5ca52b7ad6c5cafe1dbf97dcd7",
+      "sha256": "6cd68be96eabf05db56626ea1c1ca3bd6cd00e5ca52b7ad6c5cafe1dbf97dcd7",
+      "adapter": false
+    },
+    {
+      "path": "lib/map-zoom.ts",
+      "sourceSha256": "01f60c1ea288892bd1930b046dc6a6b3204f4dd5467df42ebbe74e75687d6be7",
+      "sha256": "01f60c1ea288892bd1930b046dc6a6b3204f4dd5467df42ebbe74e75687d6be7",
+      "adapter": false
+    },
+    {
+      "path": "lib/media-focus.ts",
+      "sourceSha256": "aea6f0aa254a9f6460b53e0387b8f2351e8d110b7e17b9e1d2c92a033c37fa2a",
+      "sha256": "aea6f0aa254a9f6460b53e0387b8f2351e8d110b7e17b9e1d2c92a033c37fa2a",
+      "adapter": false
+    },
+    {
+      "path": "lib/media-resource.ts",
+      "sourceSha256": "8deda405db6c6ce8392b2b0318d97764dccb4ebbef8519c4d988ad64cb242a6c",
+      "sha256": "3f8e0685f315bf4bc75fdd2449d95bf55f3125dd522af09e445e74c20c59535c",
+      "adapter": false
+    },
+    {
+      "path": "lib/new-zealand-region-links.ts",
+      "sourceSha256": "a350e028f2f6a47f1f86212f88baa692d07bdcf8497160bc11e1e595446683c9",
+      "sha256": "a350e028f2f6a47f1f86212f88baa692d07bdcf8497160bc11e1e595446683c9",
+      "adapter": false
+    },
+    {
+      "path": "lib/nz-bird-filters.ts",
+      "sourceSha256": "9164d61aeb58b27c3100ef7555dc33a080929615954ab26763d1d7e5667f377d",
+      "sha256": "9164d61aeb58b27c3100ef7555dc33a080929615954ab26763d1d7e5667f377d",
+      "adapter": false
+    },
+    {
+      "path": "lib/nz-bird-selection.ts",
+      "sourceSha256": "8ba68c8cd8d0079c294cb36070b284874ee1846953d9b1feee70f831480d3eab",
+      "sha256": "cbcc1c92248469029df0f9db1c89afd97710ff9a64dab9479cb37f271b0b4b92",
+      "adapter": false
+    },
+    {
+      "path": "lib/nz-place-ideas.ts",
+      "sourceSha256": "cd8a7ac63928103d527608da47244db65e265630fa0f2ec58894f958b7bf8447",
+      "sha256": "cd8a7ac63928103d527608da47244db65e265630fa0f2ec58894f958b7bf8447",
+      "adapter": false
+    },
+    {
+      "path": "lib/photo-zoom.mjs",
+      "sourceSha256": "5e1de5e1f434fe496f83378ecba4fdbbc564098e6540d02dcabeedd79cc99854",
+      "sha256": "5e1de5e1f434fe496f83378ecba4fdbbc564098e6540d02dcabeedd79cc99854",
+      "adapter": false
+    },
+    {
+      "path": "lib/place-language.ts",
+      "sourceSha256": "fd4e88572be6117a669741558bc26aec975ff3bf19001526477050425dc6899b",
+      "sha256": "fd4e88572be6117a669741558bc26aec975ff3bf19001526477050425dc6899b",
+      "adapter": false
+    },
+    {
+      "path": "lib/region-links.ts",
+      "sourceSha256": "ec1d8a9993f45b5846968ecf0dfeea57cc5c6fbf3d94c76ed6d3716fd319d7b9",
+      "sha256": "ec1d8a9993f45b5846968ecf0dfeea57cc5c6fbf3d94c76ed6d3716fd319d7b9",
+      "adapter": false
+    },
+    {
+      "path": "lib/satellite-overlay.d.mts",
+      "sourceSha256": "b9b03e48fe7af95e3af95147f42377a76461618bcc705b0e65d13b30db9fde96",
+      "sha256": "b9b03e48fe7af95e3af95147f42377a76461618bcc705b0e65d13b30db9fde96",
+      "adapter": false
+    },
+    {
+      "path": "lib/satellite-overlay.mjs",
+      "sourceSha256": "03f4dbe2c7990f020d18a48141ef4a262f8075cdb94d4193e42ec547b3e62ae5",
+      "sha256": "03f4dbe2c7990f020d18a48141ef4a262f8075cdb94d4193e42ec547b3e62ae5",
+      "adapter": false
+    },
+    {
+      "path": "lib/site-path.ts",
+      "sourceSha256": "82dd4d7e4f07589e2a764c8a90e4b46689b936472d1d7cadf0be80fa01531215",
+      "sha256": "82dd4d7e4f07589e2a764c8a90e4b46689b936472d1d7cadf0be80fa01531215",
+      "adapter": false
+    },
+    {
+      "path": "lib/south-island-discovery.ts",
+      "sourceSha256": "598dbc73a3632d61663f31b3c44bd0f32dec014365fa2e0fe8d1a78779ef37d8",
+      "sha256": "90954bccad098ffc363c3ce02d57426d92d82fdc44513cbf7045b0ef498aaa2e",
+      "adapter": false
+    },
+    {
+      "path": "lib/south-island-public-places.ts",
+      "sourceSha256": "55c5ed11a951a9f035fb4ab2a153655cbacde12f28ac8a5d660875f395479e1d",
+      "sha256": "57011b21a13ca0268756e55dc46ce9a3401dda0cef0ee4c0ee052c1194bb800a",
+      "adapter": false
+    },
+    {
+      "path": "lib/utils.ts",
+      "sourceSha256": "751c804666b3eb275c0c1413fc0137384351776bfa6e097e94d373c07662759d",
+      "sha256": "8346b283f095e05982776d5ed058f383bf4f689b00e5fe4d9325a0ff1e019faa",
+      "adapter": true
+    }
+  ]
+}

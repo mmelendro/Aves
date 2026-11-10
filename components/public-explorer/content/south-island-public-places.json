@@ -1,0 +1,172 @@
+{
+  "coverage": "Curated pilot, not a complete directory. Public reference points only; no nesting or restricted cultural locations. Listings do not imply an AVES partnership, certification, booking or permission to enter.",
+  "sources": [
+    {
+      "name": "DOC Public Conservation Land",
+      "licence": "CC BY 4.0",
+      "copyright": "Crown Copyright: Department of Conservation Te Papa Atawhai 2026",
+      "url": "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Public_Conservation_Land/FeatureServer/0",
+      "sha256": "b0c617965f548509413963cca69b6a6952e04e2c5a1dde5965bef9816b2ca1d7"
+    },
+    {
+      "name": "Natural Earth populated places 5.1.2",
+      "licence": "Public domain",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "sha256": "2963ee08f7743f13f37d5243acd77a2f7a510e26a36c7e04b920f1b381f2b251"
+    }
+  ],
+  "points": [
+    {
+      "id": "orokonui",
+      "name": "Orokonui Ecosanctuary",
+      "categories": [
+        "nature",
+        "projects",
+        "businesses"
+      ],
+      "longitude": 170.58034,
+      "latitude": -45.74972,
+      "description": "Conservation sanctuary near Dunedin with public visitor information and guided experiences. This marker represents the reserve area, not its entrance or a bird location.",
+      "url": "https://orokonui.nz/visit/",
+      "coordinateSource": "DOC Public Conservation Land",
+      "precision": "Approximate reserve reference",
+      "checked": "2026-11-09",
+      "evidenceUrl": "https://orokonui.nz/visit/"
+    },
+    {
+      "id": "abel-tasman-eco-tours",
+      "name": "Abel Tasman Eco Tours",
+      "categories": [
+        "businesses"
+      ],
+      "longitude": 172.898462,
+      "latitude": -40.979632,
+      "description": "Nature-tour operator departing from Mārahau. The operator describes support for local conservation projects. This is an approximate departure-area reference, not an office or confirmed meeting point. Check arrangements with the operator.",
+      "url": "https://www.abeltasmanecotours.co.nz/contact/",
+      "coordinateSource": "Mārahau area shown on the operator contact map",
+      "precision": "Approximate Mārahau departure area",
+      "checked": "2026-11-09",
+      "evidenceUrl": "https://www.abeltasmanecotours.co.nz/conservation-projects/"
+    },
+    {
+      "id": "arrowtown-chinese-settlement",
+      "name": "Arrowtown Chinese Settlement",
+      "categories": [
+        "heritage"
+      ],
+      "longitude": 168.82648,
+      "latitude": -44.93822,
+      "description": "A publicly interpreted historic settlement, partly restored after archaeological excavation. Follow DOC visitor guidance and stay on public paths.",
+      "url": "https://www.doc.govt.nz/chinese-settlement?region=otago",
+      "coordinateSource": "DOC Public Conservation Land",
+      "precision": "Approximate public heritage area",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "lake-rotoiti",
+      "name": "Lake Rotoiti · Nelson Lakes",
+      "categories": [
+        "nature"
+      ],
+      "longitude": 172.844331,
+      "latitude": -41.811469,
+      "description": "Forest and lake landscape reference for planning a nature outing. Check DOC for current tracks, access and biosecurity guidance. No sightings are promised.",
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+      "coordinateSource": "Existing AVES credited landscape reference",
+      "precision": "Public landscape reference",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "nelson",
+      "name": "Nelson",
+      "categories": [
+        "towns"
+      ],
+      "longitude": 173.247448,
+      "latitude": -41.2925917,
+      "description": "Selected city or town for geographic context. This is a settlement reference, not an airport, driving route or travel-time estimate.",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public domain",
+      "precision": "Generalised settlement centre",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "queenstown",
+      "name": "Queenstown",
+      "categories": [
+        "towns"
+      ],
+      "longitude": 168.7250813,
+      "latitude": -45.0226715,
+      "description": "Selected city or town for geographic context. This is a settlement reference, not an airport, driving route or travel-time estimate.",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public domain",
+      "precision": "Generalised settlement centre",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "invercargill",
+      "name": "Invercargill",
+      "categories": [
+        "towns"
+      ],
+      "longitude": 168.3650058,
+      "latitude": -46.4094366,
+      "description": "Selected city or town for geographic context. This is a settlement reference, not an airport, driving route or travel-time estimate.",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public domain",
+      "precision": "Generalised settlement centre",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "blenheim",
+      "name": "Blenheim",
+      "categories": [
+        "towns"
+      ],
+      "longitude": 173.9549575,
+      "latitude": -41.5135172,
+      "description": "Selected city or town for geographic context. This is a settlement reference, not an airport, driving route or travel-time estimate.",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public domain",
+      "precision": "Generalised settlement centre",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "dunedin",
+      "name": "Dunedin",
+      "categories": [
+        "towns"
+      ],
+      "longitude": 170.4910157,
+      "latitude": -45.8854231,
+      "description": "Selected city or town for geographic context. This is a settlement reference, not an airport, driving route or travel-time estimate.",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public domain",
+      "precision": "Generalised settlement centre",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    },
+    {
+      "id": "christchurch",
+      "name": "Christchurch",
+      "categories": [
+        "towns"
+      ],
+      "longitude": 172.6300232,
+      "latitude": -43.5350216,
+      "description": "Selected city or town for geographic context. This is a settlement reference, not an airport, driving route or travel-time estimate.",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public domain",
+      "precision": "Generalised settlement centre",
+      "checked": "2026-11-09",
+      "evidenceUrl": ""
+    }
+  ]
+}

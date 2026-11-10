@@ -1,0 +1,43 @@
+{
+  "verifiedOn": "2026-11-07",
+  "images": [
+    {
+      "id": "nz-extra-rifleman",
+      "path": "https://aves.bio/images/new-zealand/nz-extra-rifleman.webp",
+      "title": "Acanthisitta chloris chloris 112601837.jpg",
+      "creator": "Christopher Stephens",
+      "creatorUrl": "https://www.inaturalist.org/users/138207",
+      "location": "South Island, New Zealand",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthisitta_chloris_chloris_112601837.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/Acanthisitta_chloris_chloris_112601837.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "South Island rifleman photographed by Christopher Stephens, 8 February 2021. CC BY-SA 4.0 via Wikimedia Commons and iNaturalist.",
+      "modifications": "Wikimedia thumbnail resized and converted to WebP without cropping or generative edits. Image adaptations remain under CC BY-SA 4.0.",
+      "bytes": 59252,
+      "sha256": "3262ed68e94e9ec544c40fa3a48de618512c450f2b091564e7689f07280ff9ee"
+    }
+  ],
+  "recordings": [
+    {
+      "id": "nz-extra-rifleman",
+      "path": "https://aves.bio/audio/nz-extra-rifleman.mp3",
+      "title": "Tītipounamu / Rifleman — Akaroa field recording",
+      "creator": "Connor Sydney (Squid)",
+      "sourceUrl": "https://www.inaturalist.org/observations/326755583",
+      "downloadUrl": "https://static.inaturalist.org/sounds/1695411.wav?1763282175",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "Rifleman recorded by Connor Sydney (Squid), Akaroa, South Island, New Zealand, on 16 November 2025. The sound is dedicated to the public domain under CC0 1.0 via iNaturalist.",
+      "modifications": "Full WAV recording converted to MP3 for browser compatibility. No trimming, filtering or generated audio.",
+      "scientificName": "Acanthisitta chloris",
+      "location": "Akaroa, South Island, New Zealand",
+      "recordedOn": "2025-11-16",
+      "qualityGrade": "research",
+      "verifiedOn": "2026-11-07",
+      "durationSeconds": 36.64,
+      "bytes": 383072,
+      "sha256": "c2d6f84f7559cdbea8f1f908a96ae79b6ab1799d81a290e0ed1c3a14e4ff614b"
+    }
+  ]
+}

@@ -3,6 +3,7 @@
  * The URL slug selects the region; this file controls the section order and layout.
  * The featured carousel joins the separate species catalogue through RegionalBirdCarousel.
  */
+import { placeInSentence } from "@/components/public-explorer/lib/place-language"
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,7 +12,6 @@ import { ArrowRight, Bird, CalendarDays, ChevronRight, Clock3, ExternalLink, Foo
 import { PageShell } from "@/components/page-shell"
 import { Button } from "@/components/ui/button"
 import { regions } from "@/content/regions"
-import { RegionalBirdCarousel } from "@/components/regional-bird-carousel"
 import { canonicalUrl, sitePath } from "@/lib/site-path"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -31,7 +31,7 @@ export function generateStaticParams() {
 // Search/share previews use this region record and canonical public URLs.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = findRegion((await params).slug)
-  const title = `Birding in ${region.state} | ${region.landscape}`
+  const title = `Birding in ${placeInSentence(region.state)} | ${region.landscape}`
   return {
     title,
     description: region.description,
@@ -51,7 +51,7 @@ export default async function RegionPage({ params }: Props) {
   const inquiryHref = `/contact?region=${region.id}`
 
   return (
-    <PageShell path={`/regions/${region.id}`} title={`Birding in ${region.state}`} description={region.description} eyebrow="Australian regions" media={<RegionalBirdCarousel regionId={region.id} compact />}>
+    <PageShell path={`/regions/${region.id}`} title={`Birding in ${placeInSentence(region.state)}`} description={region.description} eyebrow="Australian regions" explorerRegion={region.id}>
       {/* Region focus, breadcrumb and planning essentials. Edit the region record for factual copy. */}
       <section className="pb-16 lg:pb-20" aria-labelledby="region-focus">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

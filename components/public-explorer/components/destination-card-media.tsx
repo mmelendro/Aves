@@ -1,0 +1,28 @@
+/**
+ * A small wrapper selects a country's full collection for the shared viewer.
+ * It also works inside the homepage's client-side country selector. A future
+ * destination without a collection keeps its attributed photograph.
+ */
+import Image from "@/components/public-explorer/adapters/image"
+import Link from "@/components/public-explorer/adapters/link"
+import HomepageBirdCarousel from "@/components/public-explorer/components/homepage-bird-carousel"
+import { destinationBirds } from "@/components/public-explorer/content/destination-birds"
+import type { Destination } from "@/components/public-explorer/content/destinations"
+import type { ComponentProps } from "react"
+import type { BirdProfile } from "@/components/public-explorer/content/birds"
+
+export default function DestinationCardMedia({ destination, fillPanel = false, birds = destinationBirds[destination.id], label, selection }: { destination: Destination; fillPanel?: boolean; birds?: BirdProfile[]; label?: string; selection?: ComponentProps<typeof HomepageBirdCarousel>["selection"] }) {
+  if (birds?.length) return <HomepageBirdCarousel
+    birds={birds} variant="destination-card" label={label ?? `${destination.name} bird photographs`}
+    selection={selection} autoPlay={false} priority={false} showBirdPicker fillPanel={fillPanel}
+  />
+
+  return <>
+    <div className="relative aspect-[4/5] overflow-hidden bg-emerald-50" style={fillPanel ? { height: "var(--discovery-media-height, auto)" } : undefined}>
+      <Image src={destination.image} alt={destination.imageAlt} fill
+        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px"
+        className="object-cover" style={{ objectPosition: destination.imagePosition, transform: `scale(${destination.imageScale ?? 1})`, transformOrigin: "top left" }} />
+    </div>
+    <p className="px-4 py-2 text-xs text-gray-500"><span>{destination.bird} · </span><Link href="/credits" className="underline underline-offset-2">Photo: {destination.photographer}</Link></p>
+  </>
+}

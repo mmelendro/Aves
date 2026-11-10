@@ -190,3 +190,36 @@ test("every Australian regional guide renders one resizable bird/map pair", asyn
     assert.match(html,/role="separator"/)
   }
 })
+
+test("Australian country and legacy explorer entries render one connected world-capable map",async()=>{
+ const load=loader({"next/navigation":{useRouter:()=>({push(){}}),usePathname:()=>"/"}})
+ const Home=load("app/page.tsx").default
+ const Directory=load("app/aves-explorer/page.tsx").default
+ for(const tree of [React.createElement(Home),await Directory({searchParams:Promise.resolve({})})]){
+  const html=renderToStaticMarkup(tree)
+  assert.equal((html.match(/data-aves-map="true"/g)||[]).length,1)
+  assert.equal((html.match(/aria-roledescription="carousel"/g)||[]).length,1)
+  assert.match(html,/Choose a country to preview/)
+  assert.match(html,/Back to world/)
+  assert.match(html,/Explore Australia/)
+  assert.match(html,/href="\/account\?country=australia"/)
+  assert.doesNotMatch(html,/\/australia\/australia\//)
+  assert.match(html,/src="https:\/\/aves.bio\/australia\/images\//)
+ }
+})
+
+test("public explorer uses the host player and header contexts with pinned source rights",()=>{
+ const {createHash}=require("node:crypto")
+ const manifest=JSON.parse(readFileSync(join(root,"components/public-explorer/manifest.json"),"utf8"))
+ assert.equal(manifest.sourceCommit,"b891afdf6304d4e958a11fddbfe0713da074b4d6")
+ for(const record of manifest.files){
+  const path=join(root,"components/public-explorer",record.path)
+  assert.equal(createHash('sha256').update(readFileSync(path)).digest('hex'),record.sha256,record.path)
+  assert.doesNotMatch(record.path,/supabase|account\/|api\//)
+ }
+ const player=readFileSync(join(root,"components/public-explorer/components/aves-media-provider.tsx"),"utf8")
+ assert.match(player,/export \{ useAvesMedia \} from "@\/components\/aves-media-provider"/)
+ assert.doesNotMatch(player,/createContext|<audio|<iframe/)
+ const context=readFileSync(join(root,"components/public-explorer/components/header-landscape-context.tsx"),"utf8")
+ assert.match(context,/from "@\/components\/header-landscape-context"/)
+})

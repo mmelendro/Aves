@@ -1,0 +1,58 @@
+/* The existing country-page wrapper owns drag, keyboard, reset and breakpoints.
+   These rules only fit the homepage map and its credited 4:5 viewer inside it. */
+.layout { width: 100%; }
+.mapPanel { display: flex; min-width: 0; height: var(--discovery-panel-height, auto); }
+/* World and country occupy the same frame. The real world geometry zooms first,
+   then the existing regional geography appears; no projection is stretched. */
+.mapStage { position: relative; isolation: isolate; height: 100%; min-height: 20rem; }
+.worldView { height: 100%; transition: opacity 240ms ease; }
+.mapStage[data-map-view="country"] .worldView { opacity: 0; pointer-events: none; transition-delay: 260ms; }
+.countryView {
+  position: absolute; inset: 0; display: flex; flex-direction: column; min-width: 0; overflow: hidden;
+  border: 1px solid #a7f3d0; border-radius: 1.5rem; background: rgba(255,255,255,.95);
+  animation: countryReveal 600ms both cubic-bezier(.2,.75,.25,1);
+}
+.countryHeader { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: .75rem 1rem 0; }
+.backButton { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; border-radius: .5rem; padding: 0 .5rem; font-size: .75rem; color: #065f46; }
+.backButton:hover { background: #ecfdf5; }
+.backButton:focus-visible, .regionSelect:focus-visible, .regionLink:focus-visible { outline: 2px solid #047857; outline-offset: 2px; }
+.regionalCanvas { display: flex; justify-content: center; flex: 1; min-height: 0; padding: .75rem 1rem; }
+.countryFooter { border-top: 1px solid #d1fae5; padding: .75rem 1rem; }
+.regionSelect { width: 100%; min-height: 44px; border: 1px solid #a7f3d0; border-radius: .5rem; padding: .5rem; background: white; color: #064e3b; font-size: .875rem; }
+.regionLink { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 44px; margin-top: .5rem; color: #065f46; font-size: .875rem; font-weight: 600; }
+.regionControl { cursor: pointer; outline: none; }
+.mapZoom { transform-origin: 0 0; transition: transform 650ms cubic-bezier(.2,.75,.25,1); }
+.pointZoom { transform-origin: center; transition: transform 650ms cubic-bezier(.2,.75,.25,1); }
+.regionText { pointer-events: none; }
+.regionControl:hover .regionLand, .regionControl:focus-visible .regionLand,
+.regionControl:hover .regionLabel, .regionControl:focus-visible .regionLabel,
+.regionControl[aria-pressed="true"] .regionLand, .regionControl[aria-pressed="true"] .regionLabel { fill: #065f46; stroke: #064e3b; }
+.regionControl:hover .regionText, .regionControl:focus-visible .regionText,
+.regionControl[aria-pressed="true"] .regionText { fill: white; }
+.regionControl:focus-visible .regionLand, .regionControl:focus-visible .regionLabel { stroke: #b45309; stroke-width: 4; }
+@keyframes countryReveal { 0%, 25% { opacity: 0; transform: scale(.88); } 100% { opacity: 1; transform: scale(1); } }
+/* Independent phone cards keep media first and map second; normal page scroll
+   and browser pinch zoom remain native rather than captured by map gestures. */
+@container (max-width: 623.98px) { .mapStage { height: 37rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .mapZoom, .pointZoom { transition: none; }
+  .countryView { animation: none; }
+  .worldView, .mapStage[data-map-view="country"] .worldView { transition: none; }
+}
+.mediaPanel {
+  --discovery-media-height: auto;
+  min-width: 0; overflow: hidden; border: 1px solid #d1fae5; border-radius: 1.5rem; background: white;
+}
+@container (min-width: 624px) {
+  /* Reserve the 44px credit link, its bottom border and the card's two borders.
+     Species details stay inside the photo instead of stretching the map. */
+  .mediaPanel { --discovery-media-height: calc(var(--discovery-panel-height) - 47px); }
+}
+
+/* The layer map has a toolbar and island controls above its own scroll area.
+   Size that area inside the pair, so it cannot cover the planning content. */
+@container (min-width: 624px) {
+  .layeredPanel > div { display:flex; flex-direction:column; height:100%; min-height:0; }
+  .layeredPanel dialog:not([data-expanded]) { height:0; min-height:0; }
+  .layeredPanel dialog:not([data-expanded]) > div:last-child > div > section { height:100%; }
+}
