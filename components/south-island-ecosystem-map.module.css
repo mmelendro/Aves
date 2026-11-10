@@ -21,7 +21,7 @@
 
 .seaLabels { fill:#315b67; font-style:italic; letter-spacing:.025em; }
 
-.mapToolbar { position:static; z-index:auto; flex-shrink:0; background:#f7fdf9ed; backdrop-filter:blur(12px); }
+.mapToolbar { position:static; z-index:auto; flex-shrink:0; background:#f7fdf9ed; }
 
 .mapHeading { flex-shrink:0; min-height:24px; padding:0 .25rem; }
 .mapDetails { flex-shrink:0; }
