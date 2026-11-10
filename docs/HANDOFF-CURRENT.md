@@ -1,93 +1,42 @@
 # AVES current handoff
 
-Status reconciliation, 10 November 2026: AGILE-PLAN.md now owns the comprehensive
-current task index and next execution order. The live baseline below is retained.
-New source/preview refinements are not released: see CONTINUE-HERE.md for current
-stacks, public hosted checks and the separate synthetic private-planner fixture.
-Earlier private-port/B Corp next-step paragraphs below describe the last release
-checkpoint. PR23 now includes private origin parity/place notes (307 checks).
-The synthetic fixture passed309 checks and hosted UI save/reopen in memory only.
-Real candidate account persistence, physical-device checks and production approval
-remain open. Read-only private entry approval has been resolved.
+Published10 November2026 with the owner's explicit instruction to publish all
+prepared refinements. This record supersedes older preview/publishing gates for
+this batch only.
 
-
-Updated 10 November 2026 after the approved release. Fetch current GitHub history
-before editing. Historical pending paragraphs do not reopen completed work.
-
-## Live baseline
-
-| Application | Runtime | Production | Recovery |
+| Application | Maintained branch | Live runtime | Production |
 | --- | --- | --- | --- |
-| Global / Colombia / NZ | a3445b7fd6e4ee1e454f0da0778845e7df5be5b2 | dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi | checkpoint/2026-11-10-20-selection-thumbnails |
-| Australia / shared portal | 34037f09990ea354bc4c53c6127b205f576f6477 | dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg | checkpoint/2026-11-10-19-australia-selection |
+| Global / Colombia / NZ |webmaster/readiness-2026-11-05|4e4e7f3f03f3f8b4982d37884c03173d9bea9086|dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP|
+| Australia / shared portal |australia/preview|48722c870a6f804ef964280e41e5ddc985658f1c|dpl_FYT3WsL52euwC46SYq2tFRsKtqDB|
 
-Maintained branches remain separate: webmaster/readiness-2026-11-05 and
-australia/preview. Use Vercel mmelendro@gmail.com. Documentation heads may be newer
-than these runtime commits. Git-triggered deploys are disabled for maintained branches.
+Both READY, production targets, source hashes confirmed; aves.bio and the Australia
+stable production alias resolve to these exact deployments. Hosted Australia map
+selection/enlargement and regional identity, live NZ origin/place/photograph
+controls, global navigation and account sign-in handover were checked. The next
+parameter retains NZ/South Island. No real account saves or guest data were used.
 
-PRs #10 and #9 are merged and live. Map selections automatically update contextual
-headers and small, sourced local flocks. Family silhouettes are shorthand, not field
-identification plates. Inland contexts do not inherit marine wildlife. South Island
-satellite shading is selected-habitat only, with a zero-capable slider and retained
-outline; imagery is the registered historical NASA 2004 composite. Habitat classes
-are not administrative subregions. Broader satellite rollout needs aligned geometry.
+183 main and315 combined Australia tests, TypeScript and final builds passed.
+Error/fatal runtime scans for both deployments returned no matching entries in
+15-minute windows ending12:55 UTC. Browser console samples contained extension
+metadata errors from chrome-extension URLs; these were not application errors.
 
-The public NZ checklist now has reference images for 362/377 living entries; fifteen
-remain pending. It reuses 31 curated photos and adds 331 local assets, with complete
-credits and labelled illustrations. Viewing does not select a bird. Rejected metadata/
-licence candidates are excluded. Personal prompts use “your”. The separate private
-picker has a prepared 362-reference port in draft PR #11; it is not live. Australia still lacks the main-app map enlargement port.
+Read RELEASE-2026-11-10-REFINEMENTS.md for included scope, evidence and limits.
+AGILE-PLAN.md is the comprehensive current backlog. No API/schema/auth/provider/
+dependency/billing change was included. Existing media credits and native routes
+remain. The B Corp source guard is deployed but has no eligible pins or visible
+layer. Neither synthetic test fixture nor unified app was published.
 
-162 main integration and 296 AU tests, strict TypeScript, local and exact production
-builds passed. All 363 live route/metadata/asset checks passed, including SHA-256 for
-the 331 new assets. Live browser verified selection/header changes in both apps,
-shading endpoints, thumbnail/credit independence, Escape focus and 340 CSS-pixel
-native zoom reflow. No matching error/fatal logs returned for the new deployments in
-the scoped 15-minute queries. Physical Safari/true touch, exact 320/390px and real
-telephone/background behaviour remain unverified. No private save was exercised.
-See RELEASE-2026-11-10-SELECTION-THUMBNAILS.md and its evidence file.
+Rollback: main dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi / a3445b7; Australia
+dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg /34037f0. Git checkpoints:
+checkpoint/2026-11-10-before-refinements-main and
+checkpoint/2026-11-10-before-refinements-au. Preserve the two applications,
+production routing and deployment protection. Documentation heads can be newer
+than runtime hashes without a new release.
 
-Preserve the earlier delivered regional contours, main map controls, one-person
-team carousel, AVES-053 opt-in soundscapes, AVES-066 hover and AVES-068 safe continuity/
-paused cross-app Resume. Truly uninterrupted cross-document playback remains deferred.
-The bounded code cleanup is included; prior dependency audit found no high/critical
-findings, two moderate main Tailwind build-chain findings and zero AU. Do not force
-major dependency overrides or present that audit as certification.
-
-## Next work and gates
-
-Private picker port is prepared in draft PR #11, source 6e802f0 on
-feature/private-checklist-thumbnails, targeting australia/preview. 299 tests, strict
-TypeScript and local build passed. Mocked editor save/reopen preserves stable IDs;
-actual signed-in save/reopen/edit and surrounding private-shell acceptance remain
-pending. The exact unchanged picker passed an isolated, protected public-data
-component check: thumbnail/credit independence, keyboard/focus, Escape, search,
-filters, pending-image selection and 340px native-zoom short-frame reflow. This
-check has no account or save controls and is not a persistence test. Read the
-feature branch's docs/PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. Do not redo the port.
-Finish its private preview acceptance before explicit production approval.
-Continue remaining image-source verification independently. Retain owner focus on
-saved places, origin filters, ecological/historical context, verified places, playback,
-continuous calls, maps and natural-context design. Follow AGILE-PLAN.md and the
-UX-DELIVERY-PROCESS.md, including media metadata preflight and personal language.
-
-Owner also requested AVES-069, an optional Certified B Corp business map layer.
-It is recorded in the roadmap/inbox, with a sourced South Island pilot before
-broader regional reuse. Certification scope, real public locations, dates and
-source rights must be verified. No layer/import/release has been implemented.
-
-South Island eBird readiness is assessed in NEXT-EBIRD-SOUTH-ISLAND.md. Written
-commercial API permission is required. Its enquiry is unsent; no API request/key,
-new account or data import was made. Do not scrape or bypass those conditions.
-Keep provider adaptation, public place records and rendering separate for app reuse.
-
-No spending, paid AI retries, weakened privacy, account/database/provider changes or
-app consolidation. Preserve private guest data, original artwork, native links,
-first-activation previews, browser zoom and country bird identity. This release was
-explicitly approved; obtain approval for any further production increment.
-
-Unified C1a–C1d/C2 remain complete within recorded limits. C3 exact hosted private
-acceptance remains blocked on safe staging; prior automatic review rejected a
-Redeploy that assigned a live domain. C4 cutover/C5 retirement are unapproved. Do not
-retry provisioning/spending or deploy the unified draft. Preserve its separate
-checkpoint and C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md. Earlier prompts are archived.
+Remaining: suitable real test-account acceptance of the new private delta,
+physical Safari/touch and some reduced-motion/audio cases,15 missing checklist
+images, B Corp tourism location/reuse verification, and eBird written commercial
+permission. The already delivered private NZ planning pilot remains available.
+No further provider/accounts/spending or C3/C4/C5 unified cutover/retirement is
+implied. Keep the previously verified US$1 automatic-pausing safeguard; Pro fees
+are separate.

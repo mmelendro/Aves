@@ -5,33 +5,26 @@ priority and status index. ROADMAP-DETAILS.md retains full acceptance requiremen
 AVES-CHANGE-INBOX.md retains original requests, and HANDOFF-CURRENT.md records the
 last approved live release. Historical sprint notes do not override this index.
 
-## Latest owner increment: regional logos
+## Published refinement release
 
-Prepared on feature/regional-brand-logos and independent feature/regional-brand-logos-au.
-All23 planning regions and four South Island place contexts have a sourced representative
-bird;25 new transparent illustrations, shared right-facing renderer and matching miniature
-landscapes.183 main and310 Australia checks, TypeScript and builds passed. Hosted preview
-acceptance pending. Owner accepts preview changes; production publication is now explicitly approved.
-See PREVIEW-2026-11-10-REGIONAL-LOGOS.md. Finish this increment, then resume the ordered list.
+The owner approved production publication on10 November2026. Both releases are
+READY and their production aliases were verified after publication.
 
-## Where we are
+| Application | Runtime | Production deployment |
+| --- | --- | --- |
+| Global / Colombia / New Zealand |4e4e7f3f03f3f8b4982d37884c03173d9bea9086|dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP|
+| Australia / shared portal |48722c870a6f804ef964280e41e5ddc985658f1c|dpl_FYT3WsL52euwC46SYq2tFRsKtqDB|
 
-The usable NZ planning pilot is already live: questionnaire, bird wishes, private
-draft/review/share and owner receipt were verified in its earlier release.
-Recent refinements below are separate draft/preview work, not new live releases.
-Do not describe the whole existing planner as untested because these new deltas
-still need acceptance. The owner explicitly approved publishing the prepared refinements on10 November2026. Follow RELEASE-2026-11-10-REFINEMENTS.md and its live verification record.
+183 main and315 combined Australia tests, strict TypeScript and both complete
+builds passed. No API, auth, database, dependencies, provider or billing changes.
+Production error/fatal scans for both exact deployments returned no matching logs
+in the15-minute windows ending12:55 UTC. This is a short observation window, not
+ongoing monitoring or a guarantee against all errors.
 
-Main candidate: feature/bcorp-source-pilot, runtime6abc13cd, PR #25, 180 tests,
-strict TypeScript and full build passed. Private candidate: feature/private-place-notes,
-runtime425fa33e, PR #23, 307 tests, TypeScript and full25-page build passed.
-Separate synthetic UI branch: test/private-place-notes-ui, runtime44b8ac2d,
-test/docs439018d4, 309 checks, TypeScript and full build passed.
-Test counts apply to separate trees and must not be added together.
-
-US$1 Vercel on-demand budget and automatic pausing were verified earlier.
-Subscription fees are separate. No new billing change or fresh verification is
-claimed by this documentation update. Keep the two maintained applications separate.
+The US$1 on-demand budget and automatic pausing remain as previously verified.
+No billing setting changed; Pro subscription fees are separate. The synthetic
+planner fixture and unified app remain outside this production release.
+See RELEASE-2026-11-10-REFINEMENTS.md and HANDOFF-CURRENT.md for evidence and rollback.
 
 ## Already live: preserve these
 
@@ -47,43 +40,47 @@ claimed by this documentation update. Keep the two maintained applications separ
 | Sound, AVES-008/053/068 | Available-call cues, opt-in South Island soundscapes, safe same-app continuity and paused cross-app Resume | Continuous cross-document audio is deferred |
 | Editorial/team/cleanup | Santa Marta copy pilot, one-person team, bounded cleanup and preserved media credits | Wider editorial/source review |
 
-## Prepared changes: finish, then seek release approval
+## Published refinements and remaining verification
 
-Public stack: PR13 →14 →15 →16 →17 →18 →20 →21 →22 →24 →25.
-Private stack: PR11 →19 →23. Australia map PR12 remains separate.
-These are dependent stacks, not independent changes to merge in any order.
+All prepared runtime changes in PRs11–27 are integrated in the two maintained
+applications. The map/control and private stacks were combined for Australia.
+Older preview-only wording in dated records is historical.
 
-| Priority | Task | Evidence/state | Next action |
-| --- | --- | --- | --- |
-| 1 | Close visual acceptance and prepare one bounded release | PR12 Australia enlargement/controls and PR13 map style prepared; Australia control checks passed, wider style acceptance incomplete | Review exact candidates, narrow layout and keyboard/focus; define release scope/rollback |
-| 1 | Photo zoom and short-screen controls, AVES-051, PR14/21 | Hosted zoom/reset/slide/focus checks passed; toolbar fix passed340×234 reflow without overlap | Physical touch/pinch/Safari and exact320/390px remain unverified |
-| 1 | Invitation birds/AVES transition, AVES-067, PR15 | Fixed-width reduced-motion implementation prepared | Finish exact-candidate visual/reduced-motion checks |
-| 1 | Scroll-responsive regional flock, PR16 | Hosted scroll and return-to-top movement passed with regional species retained | Check changed OS reduced-motion preference and physical phone scrolling |
-| 1 | Manual bird-call following, AVES-047, PR17 | Explicit session opt-in; hosted carousel handover to fantail recording played | Finish missing/rejected recording, interruption and background cases; no autoplay |
-| 1 | NZ origin filters, AVES-025/048, PR18/19 | Public introduced/search/empty results checked; private synthetic picker showed35 introduced entries; choices preserved by tests | Complete real private-shell acceptance; seasonal/activity filters are separate |
-| 1 | South Island sea context, AVES-042, PR20 | Hosted sea labels, habitat readability and reset/focus checked | Finish remaining narrow-layout review |
-| 2 | Public place ideas, AVES-063, PR22/24 | Add/remove, landscape changes, same-tab reload and copyable notes passed hosted checks | Clipboard-denied fallback unverified; cross-host handover is not certified |
-| 2 | Private thumbnails and place-note import, PR11/23 |307 candidate tests; synthetic hosted import, failed save, retry and reopen passed on separate fixture; credits dialog checked | Test exact authenticated candidate with suitable test records, real save/reopen/edit, ownership and owner receipt as affected |
-| 2 | B Corp business discovery, AVES-069, PR25 | Official directory-led sourcing documented; eligibility guard tested; layer remains off with no eligible pins | Curate tourism/accommodation/restaurant candidates by country, verify entity/location scope, coordinates, dates and reuse terms |
-| 2 | Remaining checklist images, AVES-039 |362/377 public references live;15 pending | Verify exact taxon, source rights, credit and visual match; retain honest missing states |
+| Work | Live scope | Remaining verification / work |
+| --- | --- | --- |
+| Maps, PR12/13 | Australia enlargement/zoom/reset, sage/green style, named alternatives and feather markers; Colombia/NZ style parity | Physical Safari/touch and wider device review |
+| Photo zoom, PR14/21 | Resolution-aware zoom/reset and short-screen toolbar spacing | Physical pinch/Safari; native-pixel limits remain deliberate |
+| Invitations, PR15 | Shared fixed-width birds/AVES transition | OS reduced-motion preference checks |
+| Scroll flock, PR16 | Bounded reversible motion with regional species | Physical phone and dynamic preference tests |
+| Call following, PR17 | Session opt-in follows manual bird choices | Broader autoplay-rejection, missing recording and interruption cases |
+| Origin filters, PR18/19 | Sourced NZ origin controls in public checklist and private picker | Seasonal/activity filters remain separate |
+| Sea context, PR20 | Sourced South Island sea labels and quiet water treatment | Wider device review |
+| Place ideas, PR22/24 | Tab-only public choices and copyable notes | Clipboard-denied fallback needs browser coverage |
+| Private media/notes, PR11/23 | Checklist photographs and explicit append into existing draft notes | New delta has automated and synthetic UI evidence; real authenticated persistence still needs suitable test-account coverage |
+| B Corp preparation, PR25 | Eligibility/source guard deployed with no eligible pins | Visible layer remains off; verify tourism shortlist, locations, coordinates and reuse terms |
+| Regional logos, PR26/27 | All23 regions and four place contexts,25 new illustrations, right-facing marks and matching contours | Not every region individually browser-reviewed; physical/narrow checks remain |
+| Remaining checklist images |362/377 public and private references | Verify15 pending sources; retain missing states |
 
-## Immediate execution order
+Live browser checks covered Australia region selection/enlargement and regional
+logo context; South Island place context,35 introduced entries, place-note controls,
+photo dialog and return to the global homepage. The account handover reached
+sign-in with NZ/South Island next preserved. No credentials, guest records, hosted
+draft save, email, booking or payment was used. Public test place choices were
+removed. Preview acceptance still supplies the broader documented interaction
+checks, not a claim that every flow was independently exercised live.
 
-1. Finish exact-candidate visual/accessibility gaps in the existing public stack
-   and the independent Australia map-control change. Fix any confirmed defect.
-2. Prepare a short, reviewable release packet naming included changes, remaining
-   device limits, rollback and sitemap checks. Production approval is still needed.
-3. Build a small directory-led B Corp tourism shortlist using official certification
-   profiles plus business-owned public-location evidence. Do not enable map pins
-   until location/coordinate and scope checks pass. No bulk scraping or logo use.
-4. Resolve exact private candidate staging and test-account/data scope, then verify
-   real save/reopen. Keep the existing public copy-notes handover available.
-5. Continue sourced South Island route/content work and remaining image verification.
+## Next execution order
 
-Read-only account entry approval is resolved. The account link reached the
-maintained live sign-in page, not the new candidate. No credentials or real guest
-records were used. Ask only for a specific missing prerequisite when one is known.
-Safe source/public work can continue without waiting for private acceptance.
+1. Build a small directory-led B Corp tourism/accommodation/restaurant shortlist,
+   with dated official certification plus business-location evidence. Enable no
+   pins until scope, coordinates and source/reuse checks pass.
+2. Complete suitable test-account acceptance of the new private notes/media delta.
+   Preserve the existing working private planning flow and minimise test data.
+3. Close remaining mobile/Safari, reduced-motion and audio-failure checks. Fix
+   confirmed defects in bounded releases.
+4. Verify remaining15 checklist image references and sourced South Island
+   routes/conservation/lodge context.
+5. Continue the retained product backlog below, one selected increment at a time.
 
 ## Retained product backlog
 
@@ -136,7 +133,7 @@ Physical Safari/touch, OS preference changes, some audio interruptions and actua
 private candidate persistence remain unverified. Do not turn source tests into
 claims of hosted delivery.
 
-Production release of these prepared refinements is approved. No new spend/provider/accounts, weakened privacy or app
-consolidation under this list update. Do not send supplier/permission enquiries
+This production refinement release is approved and complete. New spend/provider/accounts,
+weakened privacy or app consolidation are not part of that approval. Do not send supplier/permission enquiries
 without explicit sending instructions. Keep source/credits, rollback points and
 private guest data intact. Essential-flow/privacy defects take priority.

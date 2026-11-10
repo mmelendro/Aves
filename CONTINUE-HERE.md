@@ -1,13 +1,18 @@
 # AVES continue here
 
-The owner has explicitly approved publishing all prepared refinements live.
-Release preparation is in docs/RELEASE-2026-11-10-REFINEMENTS.md. Current source
-includes the logo increment and the full independent main/private source stacks.
-Australia also combines map controls/style PR12.183 main and315 combined Australia
-checks, TypeScript and builds pass. Do not deploy the synthetic fixture or unified
-app. Preserve both independent applications and the US$1 automatic pause safeguard.
+The prepared refinements are now LIVE with explicit owner approval.
+Main runtime4e4e7f3 / dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP.
+Australia runtime48722c8 / dpl_FYT3WsL52euwC46SYq2tFRsKtqDB.
+Both production aliases were verified.183 main /315 Australia tests, TypeScript
+and builds pass. Scoped error/fatal scans returned no matching logs.
 
-After release, update this file and HANDOFF-CURRENT.md with exact live runtime and
-deployment IDs, actual browser/error results and remaining physical/private test
-limits. docs/AGILE-PLAN.md remains the comprehensive backlog. Earlier paragraphs
-saying production is unapproved are superseded by this explicit owner instruction.
+Read docs/HANDOFF-CURRENT.md and docs/RELEASE-2026-11-10-REFINEMENTS.md for precise
+scope, rollback and test limits. docs/AGILE-PLAN.md is the updated comprehensive
+list. Close/supersede only PRs whose heads are confirmed ancestors of the release.
+No further production rebuild is needed for documentation-only checkpoints.
+
+Next: directory-led B Corp tourism shortlist, suitable private-delta test-account
+coverage, remaining physical/audio checks and sourced content work. B Corp pins
+stay off until verified. Unified cutover and synthetic test fixtures remain separate.
+Do not reopen old preview/publishing approval questions for this completed batch.
+Keep the previously verified US$1 budget/automatic pausing and separate app boundaries.
