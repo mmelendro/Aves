@@ -1,8 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import { createContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { Maximize2, Minimize2 } from "lucide-react"
 import styles from "./expandable-media.module.css"
+
+export const ExpandedMediaContext = createContext(false)
 
 /** Enlarge the same viewer: slide, audio, Info and wish-list state survive.
  * Native modal positioning escapes the resizable panel's containing block and
@@ -38,7 +40,7 @@ export default function ExpandableMedia({ children, label, enabled = true, kind 
   return <dialog ref={dialog} open className={styles.viewer} data-expanded={expanded || undefined}
     role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label}
     onCancel={event => { event.preventDefault(); resize(false) }}>
-    {children}
+    <ExpandedMediaContext.Provider value={expanded}>{children}</ExpandedMediaContext.Provider>
     <button ref={trigger} type="button" className={styles.control} data-kind={kind}
       aria-label={expanded ? `Close full-screen ${label}` : `Expand ${label}`}
       title={expanded ? "Close full-screen (Escape)" : "View full photograph"}

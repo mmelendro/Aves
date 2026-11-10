@@ -5,6 +5,7 @@
  */
 import { useContext, useId, useReducer, useRef, useState } from "react"
 import Image from "next/image"
+import PhotoZoom from "./photo-zoom"
 import { ChevronLeft, ChevronRight, Info, X } from "lucide-react"
 import { southIslandPlaces } from "@/content/south-island"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
@@ -49,7 +50,7 @@ export default function SouthIslandPlacesExplorer() {
         if (event.target !== event.currentTarget) return
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); showSlide(active + (event.key === "ArrowRight" ? 1 : -1)) }
       }}>
-        <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 55vw" className={styles.image} />
+        <PhotoZoom key={photo.src} label={place.label}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 55vw" className={styles.image} /></PhotoZoom>
         <div className={styles.top}><span className={styles.counter}>{active + 1} / {slides.length}</span>
           <button ref={infoButton} type="button" className={styles.control} title="Place details & credits" aria-label="Place details & credits" aria-expanded={info} aria-controls={`${id}-info`} onClick={() => setInfo(open => !open)}><Info size={19} aria-hidden="true" /></button>
         </div>

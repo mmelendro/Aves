@@ -24,8 +24,8 @@ Owner updated priorities on 10 November 2026: show a selectable task list, favou
 visible style and working interactions, and keep useful work available while
 started acceptance/source work is unresolved. This order supersedes older automatic
 next-task instructions. The owner subsequently selected all nine increments, one at a time. Execution
-order is choices 1, 3, 2, 4, 5, 6, 7, 8, 9. Australia map controls are in progress
-on feature/au-map-controls. Complete and verify each increment before the next.
+order is choices 1, 3, 2, 4, 5, 6, 7, 8, 9. Australia map controls and the map-style batch are prepared in PRs #12/#13.
+Photo zoom source is on feature/photo-zoom-pilot; exact-candidate browser acceptance remains pending. Complete and verify each increment before the next.
 Production approval remains a separate gate. Do not claim background commands or parallel agents are running.
 
 ### Started work to finish
@@ -39,9 +39,9 @@ Production approval remains a separate gate. Do not claim background commands or
 
 | Choice | Task | First useful slice | Readiness |
 | --- | --- | --- | --- |
-| 1 | Australia map enlargement and controls, AVES-038 | Reuse the existing enlarge/close, zoom/reset and drag pattern in the separate Australia app; preserve selection, focus and attribution | Recommended next; inspect current AU components first; physical pinch needs device verification |
-| 2 | Photo zoom, AVES-051 | One shared bird/place viewer with zoom/reset, keyboard controls and intentional touch gestures, using existing image resolution | Ready for a bounded source-quality and interaction audit; do not invent image detail |
-| 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Ready for audit; homepage work is complete and must not be repeated |
+| 1 | Australia map enlargement and controls, AVES-038 | Reuse the existing enlarge/close, zoom/reset and drag pattern in the separate Australia app; preserve selection, focus and attribution | Prepared PR #12; control-only hosted checks passed, styling acceptance pending |
+| 2 | Photo zoom, AVES-051 | One shared bird/place viewer with zoom/reset, keyboard controls and intentional touch gestures, using existing image resolution | Shared bird/place pilot prepared on feature/photo-zoom-pilot; native-pixel limit, 163 checks and TypeScript pass; browser acceptance pending |
+| 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Prepared PRs #12/#13; NZ existing-preview modal/zoom/reset/Escape checked; other acceptance pending |
 | 4 | Birds / AVES invitation animation, AVES-067 | Reuse the existing restrained word transition in matching invitations, with stable text width and a still reduced-motion version | Small visual candidate; audit remaining instances before implementation |
 | 5 | Continuous bird-call listening, AVES-047 | Explicit session opt-in for calls to follow manual carousel changes, with one player and clear stop/mute states | Functional candidate; reuse playback coordination and handle missing/blocked calls |
 | 6 | Species-origin filters, AVES-025/048 | Make existing NZ native/introduced/unknown controls consistent across checklist and private picker; preserve chosen birds | Ready for a current-coverage audit; use existing sourced NZ data first |
