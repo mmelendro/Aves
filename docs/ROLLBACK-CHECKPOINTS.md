@@ -2,7 +2,15 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
-## Current reciprocal guide cues · 11 November 2026
+## Current direct preview expansion · 11 November 2026
+
+Runtime 79bba2f209555250414a21cb277946a893e9c208; tree 988ca6468114a1a04bcb222a117f616a28844261.
+Production dpl_EP7mSzuuNicjtRg9srnLqPFuif8x in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Recovery branch checkpoint/2026-11-11-direct-guide-previews.
+Immediate previous source b9722f2c016cacb1fa979b7e8e3c824d5d87e5dd / deployment dpl_9aocQLEW3ex2EHyE4Ve9Api6ZWtP.
+For rollback, inspect that deployment's READY status and pinned source, assign BOTH aves.bio/www aliases to it, then verify destinations, accounts and HTTPS. If needed, rebuild its pinned source in the same surviving project. Preserve Git history and domain registration.
+
+## Previous reciprocal guide cues · 11 November 2026
 
 Runtime b9722f2c016cacb1fa979b7e8e3c824d5d87e5dd; tree 24d99a81d20bdb0ac886ef6dd6b4ff053a7eb760.
 Production dpl_9aocQLEW3ex2EHyE4Ve9Api6ZWtP in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.

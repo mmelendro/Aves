@@ -6,16 +6,18 @@ Updated 11 November 2026, Sydney. Read this status and HANDOFF-CURRENT.md before
 
 One consolidated application serves the global homepage, Colombia, Australia, New Zealand, accounts and APIs. The owner explicitly approved publication and continued improvements. Preserve the one-site architecture and established URLs.
 
-Current map-first guide runtime: b9722f2c016cacb1fa979b7e8e3c824d5d87e5dd.
-Production deployment: dpl_9aocQLEW3ex2EHyE4Ve9Api6ZWtP in project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Current map-first guide runtime: 79bba2f209555250414a21cb277946a893e9c208.
+Production deployment: dpl_EP7mSzuuNicjtRg9srnLqPFuif8x in project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
 Publication verification is recorded in RECIPROCAL-GUIDE-CUES-2026-11-11.md.
 Use release/aves-global or feature/field-guide-card as the maintained source, after checking fresh GitHub heads. The historical country branches now contain the same consolidated source, not separate current applications.
 
 Delivered: one shared two-sided map/bird guide, selected-region/current-bird thumbnail on the map and expanded map, explicit turning button, retained resizable comparison, reduced motion and inactive-face keyboard isolation. The global homepage opens on the world map before introductory copy. Explorer pages open on the map. The map precedes the compact bird-cue footer; turning reveals the card without resetting its camera or chosen geography. Viewport-based map/photo sizing, contained photographs and persistent guide/map controls support the responsive frame. Selection still changes bird collections and surrounding planning content. Existing map layers remain available.
 
-Validation: 487 automated checks, strict TypeScript, hosted builds and browser acceptance. Exact phone viewport, physical Safari/touch and background playback remain unverified; desktop acceptance is not a claim of perfect mobile fit or an unbreakable site. No backend, database, auth, billing or provider configuration changed. The US$1 safeguard was unchanged, not freshly inspected.
+Validation: 490 automated checks, strict TypeScript, hosted builds and browser acceptance. Exact phone viewport, physical Safari/touch and background playback remain unverified; desktop acceptance is not a claim of perfect mobile fit or an unbreakable site. No backend, database, auth, billing or provider configuration changed. The US$1 safeguard was unchanged, not freshly inspected.
 
 Reciprocal cues now make both faces one card: Birds on the map side, a selected-region map thumbnail on the bird side. Both use the same compact footer and turn the mounted guide with focus restoration. The map thumbnail uses existing reviewed geography, highlights the selected region and remains unchanged when carousel slides change. Cropped photos keep authored focal points; fitted guide photos stay centred and fully visible, so cover offsets cannot clip their heads. Hidden reverse-face controls are visually excluded after the midpoint of the turn. No automatic bird-face detection or complete per-photo eye-anchor audit is claimed. See RECIPROCAL-GUIDE-CUES-2026-11-11.md.
+
+The small map and bird cues now open the actual mounted map or full bird carousel directly in native full-screen dialogs. Close/Escape restores the originating card face and focus, with a fallback when a full-screen switching control has disappeared. Both expanded viewers keep the opposite preview available; the selected region, current slide, layers and camera are retained. The explicit turning button and comparison mode remain. Full-screen bird zoom controls sit below the head area. See GUIDE-PREVIEW-EXPANSION-2026-11-11.md.
 
 ## Prioritised remaining work
 
