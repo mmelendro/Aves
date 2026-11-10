@@ -5,11 +5,11 @@
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import { ColombiaRegionPage } from "@/components/colombia-region-page"
-import { regions } from "@/content/regions"
+import { regions, colombiaBirdingTitle } from "@/content/regions"
 
 export const metadata: Metadata = {
   alternates: { canonical: canonicalUrl("/regions/caribbean") },
-  title: "Caribbean Region - Coastal & Foothill Birding Tours | AVES",
+  title: `${colombiaBirdingTitle(regions.find(region => region.id === "caribbean")!)} | AVES Colombia`,
   description:
     "Discover coastal & Sierra Nevada foothills birding in Colombia. Explore Riohacha, Las Gaviotas, mangroves & dry forest with expert guides.",
   keywords:

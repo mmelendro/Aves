@@ -5,7 +5,7 @@
  */
 import type { Metadata } from "next"
 import { notFound, permanentRedirect } from "next/navigation"
-import { regions } from "@/content/regions"
+import { regions, colombiaBirdingTitle } from "@/content/regions"
 import { ColombiaRegionPage } from "@/components/colombia-region-page"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -21,6 +21,6 @@ export function generateStaticParams() { return regions.filter(r => r.id !== "ca
 // Use the same lookup for SEO and visible content so unknown slugs do not invent pages.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = findRegion((await params).slug)
-  return {title:`Birding in ${region.name} | AVES Colombia`,description:region.description,alternates:{canonical:canonicalUrl(`/regions/${region.id}`)}}
+  return {title:`${colombiaBirdingTitle(region)} | AVES Colombia`,description:region.description,alternates:{canonical:canonicalUrl(`/regions/${region.id}`)}}
 }
 export default async function RegionPage({params}: Props) { return <ColombiaRegionPage region={findRegion((await params).slug)} /> }

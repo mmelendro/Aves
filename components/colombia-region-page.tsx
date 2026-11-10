@@ -9,7 +9,7 @@ import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
 import { PageShell } from "@/components/page-shell"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
-import { regions } from "@/content/regions"
+import { regions, colombiaBirdingTitle } from "@/content/regions"
 import { colombiaRegionBirds } from "@/content/colombia-regional-birds"
 import { sharedAccountHref } from "@/lib/shared-account"
 
@@ -18,7 +18,7 @@ export function ColombiaRegionPage({ region }: { region: (typeof regions)[number
   const birds = colombiaRegionBirds(region.id)
   // A Map keyed by URL removes repeated citations while retaining their source labels.
   const sources = [...new Map(region.birds.flatMap(b => b.sources || []).map(source => [source.url, source])).values()]
-  return <PageShell path={`/regions/${region.id}`} title={`Birding in ${region.name}`} description={region.description} eyebrow="Colombian regions" media={<HomepageBirdCarousel key={region.id} birds={birds} autoPlay={false} fillPanel className="w-full max-w-none" />}>
+  return <PageShell path={`/regions/${region.id}`} title={colombiaBirdingTitle(region)} description={region.description} eyebrow="Colombian regions" media={<HomepageBirdCarousel key={region.id} birds={birds} autoPlay={false} fillPanel className="w-full max-w-none" />}>
     <section className="py-8 lg:py-14"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-3 text-sm text-gray-600 mb-8"><Link href="/colombia" className="underline underline-offset-4">Colombia</Link><span aria-hidden="true">/</span><Link href="/aves-explorer" className="underline underline-offset-4">Regions</Link><span aria-hidden="true">/</span><span aria-current="page">{region.name}</span></nav>
       <div className="mx-auto max-w-4xl">

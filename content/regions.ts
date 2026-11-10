@@ -149,3 +149,8 @@ export const regions: ColombiaRegion[] = [
     ],
   },
 ]
+
+/** Natural regional wording shared by visible headings and search titles. */
+export function colombiaBirdingTitle(region: Pick<ColombiaRegion, "id" | "name">): string {
+  return `Birding in ${region.id === "amazonia" ? "" : "the "}${region.name}`
+}
