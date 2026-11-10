@@ -26,3 +26,6 @@
 .mapPreview:focus-visible { outline:2px solid #34d399; outline-offset:3px; }
 
 .viewer[data-expanded] > .control { position:fixed; }
+
+/* Keep zoom controls below the face instead of across the centre of the photo. */
+.viewer[data-expanded] [data-photo-zoom-controls] { top:auto; bottom:7rem; left:.75rem; transform:none; }

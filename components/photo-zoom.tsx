@@ -87,7 +87,7 @@ export default function PhotoZoom({ children, label }: { children: ReactNode; la
       onTouchEnd={event => { if (active) event.stopPropagation() }}>
       <div className={styles.image} style={{ transform: expanded ? `translate(${view.x}px,${view.y}px) scale(${view.zoom})` : undefined }}>{children}</div>
     </div>
-    {expanded && <div className={styles.tools} role="group" aria-label={`${label} photograph controls`}>
+    {expanded && <div data-photo-zoom-controls="true" className={styles.tools} role="group" aria-label={`${label} photograph controls`}>
       <button type="button" aria-label="Zoom photograph in" disabled={view.zoom >= limit - .001} onClick={() => zoom(1.25)}><Plus size={18} aria-hidden="true" /></button>
       <button type="button" aria-label="Zoom photograph out" disabled={view.zoom <= 1} onClick={() => zoom(1 / 1.25)}><Minus size={18} aria-hidden="true" /></button>
       <button type="button" aria-label="Reset photograph zoom" onClick={reset}><RotateCcw size={18} aria-hidden="true" /></button>
