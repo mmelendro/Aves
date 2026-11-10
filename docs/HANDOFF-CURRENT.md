@@ -1,3 +1,15 @@
+# Colombia explorer and navigation checkpoint
+
+Main production `60e94a4a992aafb80ddacd47ea5a9d19f332d81c / `dpl_BbUks6FmNboPV1DTmnrRxZ1pRS9J is READY on aves.bio. The homepage, New Zealand, South Island, Colombia, eleven Colombian guides and legacy explorer now use the same one-map shell. Public geographic URL state survives refresh, Back and Forward. Scope drives headings, bird photos, planning context and country/region links; matching editorial content hides when you explore elsewhere. Colombia's page-local Spanish control remains available. The duplicate legacy maps and roughly 600 lines of obsolete explorer implementation are removed.
+
+191 tests, strict TypeScript and final hosted build pass. Preview and live checks cover map count, regional choices, guide headings, divider, enlargement/restore, refresh/history, cross-country access to the existing South Island layers, and the Spanish control. A 337 CSS-pixel desktop zoom check had no horizontal overflow; real mobile Safari/touch remains unverified. See docs/RELEASE-2026-11-11-COLOMBIA-EXPLORER.md.
+
+Next: Australian native entry-page convergence, preserving its separate application and shared backend. Its production remains `5bdd33bae0d55f5a202fe4963f692ab27e118cc4` / `dpl_99qgUavb9ArbDhyL5PGRz42MBuPo`. Do not merge app branches. Pending public form/glass work is preserved on `wip/unified-contact-glass-main` and `wip/unified-contact-glass-au`. Complete endemic coverage and the photographed AU/NZ range audit remain required. The earlier verified US$1 safeguard was neither changed nor freshly inspected in this increment.
+
+Read CONTINUE-HERE.md and docs/AGILE-PLAN.md for the active owner queue.
+
+## Previous checkpoint
+
 # Current unified explorer checkpoint
 
 Main runtime `2c0deea666e7350e6b2e51fc08b65916c36881f4`, deployment `dpl_9i3f5PKdu6DCWUxeASvJysX64sHE`, READY on aves.bio. The South Island and New Zealand entry pages and homepage share one explorer. One rendered map per view, retained existing South Island layers, contextual birds/places/planning, in-place region and world navigation, and private NZ bird basket are preserved. 187 exact-release tests pass; strict TypeScript, full local and hosted builds pass. Desktop browser acceptance and screenshot are in docs/RELEASE-2026-11-11-UNIFIED-EXPLORER.md. Phone-specific acceptance and other country-entry rollout remain next.
