@@ -43,6 +43,10 @@ test('each country and region selection updates the same in-place map, photo col
    assert.ok(pair(h).props.media.props.children.props.birds.length>0)
    const panel=find(h.render(),n=>n.props['data-explorer-content'])
    assert.ok(panel.props['data-explorer-content'].endsWith(':'+option.props.value))
+   const contact=find(panel,n=>n.type==='a'&&n.props.href?.includes('/contact?'))
+   assert.equal(contact.props.href.startsWith('/australia/contact?'),country!=='Colombia')
+   if(country==='New Zealand')assert.match(contact.props.href,/topic=new-zealand/)
+   assert.ok(contact.props.href.includes('region='+option.props.value))
    // Select again never navigates away from the interactive explorer.
    if(maps(h)[0].type==='MapViewer'){
     const map=find(pair(h).props.map,n=>n.type==='RegionalMap')
