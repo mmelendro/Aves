@@ -6,6 +6,11 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
+The owner selected AVES-039 checklist photo previews while C3 is blocked.
+Work is isolated on feature/aves-039-checklist-photos, based on the maintained
+main app, with draft PR #4. See [the photo checkpoint](CHECKPOINT-2026-11-10-CHECKLIST-PHOTOS.md).
+This is a preview-only increment. Production release still needs explicit approval.
+
 C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
 6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
 https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app (dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn).
@@ -25,10 +30,13 @@ changed. Native results are not hosted unified private acceptance.
 
 The exact unified candidate still needs a protected production-mode staging
 build and hosted authenticated browser/provider/owner-delivery/session checks.
-The connector lacks an explicit skip-domain staging control. Automatic approval
-review rejected clicking the dashboard's Redeploy action because it may start a
-build immediately. Do not retry that action without the required approval or
-silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
+The connector lacks an explicit skip-domain staging control. The owner approved
+inspecting Redeploy; its Production dialog assigned the live Australia domain and
+had no skip-domain option, so it was cancelled. The owner then authorised CLI
+sign-in and Vercel showed Authorization Successful, but workspace network policy
+blocked the CLI connection to api.vercel.com before token exchange completed.
+This is a network blocker, not missing owner approval. Do not repeat approval
+requests, weaken network controls or silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
 C4 production cutover and C5 retirement remain separately unapproved. Preserve
 both production apps and rollback anchors. No paid provisioning or AI requests.
 

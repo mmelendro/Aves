@@ -50,12 +50,15 @@ would require wider permissions or deleting retained legal/audit evidence.
 
 ## Current staging limitation
 
-No production-mode staged candidate was created. The connector request schema
-lacks an explicit skip-domain/auto-alias control. The dashboard Deployment Actions
-menu offers Redeploy and Promote to Production, but automatic approval review
-rejected the Redeploy click because it may start a build immediately. Do not retry
-or route around that rejection without approval. Obtain the exact environment and
-alias choices before staging; stop if live assignment cannot be excluded.
+The connector lacks an explicit skip-domain staging control. The owner approved
+inspecting Redeploy; its Production dialog assigned the live Australia domain and
+had no skip-domain option, so it was cancelled. The owner then authorised CLI
+sign-in and Vercel showed Authorization Successful, but workspace network policy
+blocked the CLI connection to api.vercel.com before token exchange completed.
+This is a network blocker, not missing owner approval. Do not repeat approval
+requests, weaken network controls or silently assign live domains.
+No production-mode staged unified candidate was created. Existing C3 approvals
+remain valid within their original scope.
 
 ## C4 and C5 remain separate
 

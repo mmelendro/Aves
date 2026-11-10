@@ -7,14 +7,18 @@ This is the retained roadmap order, including AVES-020 consolidation. C0 and own
 C1a/C1b/C1c/C1d are complete. C2 public preview review passed within documented
 limits. C3 is partial: live synthetic fixtures are authorised, scoped live checks
 passed and all fixtures were removed. The exact unified hosted private candidate
-still needs a protected production-mode staging build; dashboard Redeploy was
-rejected by automatic approval review. C4 release and C5 retirement need separate
+still needs a protected production-mode staging build; Redeploy inspection was authorised and cancelled because it assigned a live
+domain. CLI sign-in was authorised, but workspace policy blocked api.vercel.com. C4 release and C5 retirement need separate
 approval. See [the C1d/C2 checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md) and
 [the C3 gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
 
 ## Owner-selected delivery order, 10 November 2026
 
-Finish the consolidation C sequence first: C1d consent/owner usability, C2 public
+The owner subsequently selected the independent AVES-039 checklist photo pilot
+while C3 is blocked. PR #4 is preview only. Resume the retained sequence after this
+bounded card; the other selected priorities remain unchanged.
+
+Retained consolidation sequence: C1d consent/owner usability, C2 public
 preview acceptance, C3 hosted private acceptance, C4 explicitly approved production
 cutover, then C5 separately approved retirement after an observation period.
 C1a/C1b/C1c/C1d are complete. C2 public preview evidence and device limits are
@@ -22,7 +26,7 @@ recorded. The owner authorised necessary live synthetic test accounts/records
 and confirmed the test email. This does not authorise customer-data edits,
 production publication, retirement, new spending or hosted schema/provider changes.
 C3 remains incomplete until the exact candidate passes protected hosted private
-acceptance. Do not retry the rejected Redeploy action or declined paid provisioning.
+acceptance. Do not assign live domains during C3 staging or retry declined paid provisioning.
 
 After C, the owner selected this focus order, referring to the numbered pending
 updates shown in chat, not AVES ticket numbers:
