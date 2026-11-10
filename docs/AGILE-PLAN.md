@@ -5,6 +5,15 @@ priority and status index. ROADMAP-DETAILS.md retains full acceptance requiremen
 AVES-CHANGE-INBOX.md retains original requests, and HANDOFF-CURRENT.md records the
 last approved live release. Historical sprint notes do not override this index.
 
+## Latest owner increment: regional logos
+
+Prepared on feature/regional-brand-logos and independent feature/regional-brand-logos-au.
+All23 planning regions and four South Island place contexts have a sourced representative
+bird;25 new transparent illustrations, shared right-facing renderer and matching miniature
+landscapes.183 main and310 Australia checks, TypeScript and builds passed. Hosted preview
+acceptance pending. Owner accepts preview changes; production remains separately gated.
+See PREVIEW-2026-11-10-REGIONAL-LOGOS.md. Finish this increment, then resume the ordered list.
+
 ## Where we are
 
 The usable NZ planning pilot is already live: questionnaire, bird wishes, private

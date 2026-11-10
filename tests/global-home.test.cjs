@@ -13,7 +13,7 @@ function createLoader(overrides = {}) {
   const adapters = {
     "./header-landscape-context": {useHeaderLandscape:()=>({selection:null,publish(){}})},
     "@/components/header-landscape-context": {useHeaderLandscape:()=>({selection:null,publish(){}})},
-    "next/navigation": { useRouter: () => ({ push() {} }) },
+    "next/navigation": { usePathname: () => "/", useRouter: () => ({ push() {} }) },
     "next/image": ({ src, alt }) => React.createElement("img", { src, alt }),
     "next/link": ({ children, ...props }) => React.createElement("a", { ...props, "data-next-link": "true" }, children),
     "@/components/navigation-header": { NavigationHeader: function NavigationHeader() { return null } },

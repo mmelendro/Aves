@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useEffect, useRef, useState } from "react"
-import Image from "next/image"
+import { BrandBird } from "@/components/brand-bird"
 import { Pause, Play, Volume2, VolumeX, X } from "lucide-react"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import { southIslandSoundscape, soundscapeCreator, soundscapeLicence } from "@/content/south-island-soundscapes"
@@ -96,7 +96,7 @@ export default function SouthIslandSoundscapes() {
   const state = !enabled ? "Off" : paused ? "Paused" : !track ? "Unavailable" : status === "loading" ? "Loading" : muted || volume === 0 ? "Muted" : foreground ? "Quiet beneath foreground audio" : status === "playing" ? "Playing" : "Unavailable"
   return <section className={styles.panel} aria-label="South Island soundscapes" data-soundscape-state={state}>
     <div className={styles.row}>
-      <Image src="/images/brand/aves-new-zealand-bird.png" alt="Kea · New Zealand soundscapes" width={36} height={36} />
+      <BrandBird country="new-zealand" regionId="south-island" size={36} alt="Kea · New Zealand soundscapes" />
       <div className={styles.title}><span>South Island soundscapes · {state}</span><strong>{track?.title ?? "No verified mountain recording yet"}</strong></div>
       <button type="button" className={player.feather} onClick={enabled && !paused ? () => pause("Paused by you.") : start} disabled={!track && !enabled} aria-label={enabled && !paused ? "Pause soundscape" : paused ? "Resume soundscape" : "Play soundscape"} aria-pressed={enabled && !paused}>{enabled && !paused ? <Pause size={18} /> : <Play size={18} />}</button>
       <button type="button" className={player.feather} onClick={() => setMuted(!muted)} aria-label={muted ? "Unmute soundscape" : "Mute soundscape"} aria-pressed={muted}>{muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>

@@ -12,7 +12,7 @@ const root = resolve(__dirname, "..")
 function createLoader(overrides = {}) {
   const cache = new Map()
   const adapters = {
-    "next/navigation": { useRouter: () => ({ push() {} }) },
+    "next/navigation": { usePathname: () => "/", useRouter: () => ({ push() {} }) },
     "next/image": ({ src, alt, fill, sizes, priority, ...props }) => React.createElement("img", { src, alt, ...props }),
     "next/link": ({ children, ...props }) => React.createElement("a", props, children),
     ...overrides,

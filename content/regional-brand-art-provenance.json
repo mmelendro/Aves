@@ -1,0 +1,231 @@
+{
+  "created": "2026-11-10",
+  "method": "Built-in image generation, owner requested regional artwork. Brand illustrations, not documentary photographs. Existing originals retained. Web delivery uses 320px transparent WebP renditions, no subject alteration.",
+  "entries": [
+    {
+      "id": "kaka",
+      "sourceFile": "exec-f33ba0e2-154d-4caa-9caf-359494d72cc0.png",
+      "file": "kaka-right.webp",
+      "sha256": "4f479daeaa7302622b8588b81cf4bb48908f68fa9dbac0155a9ddb7efc14838c",
+      "bytes": 20974,
+      "hasAlpha": true,
+      "prompt": "AVES layered feather illustration, accurate named New Zealand species, entire bird facing right, transparent background. Existing kea artwork used only as brand style reference."
+    },
+    {
+      "id": "kokako",
+      "sourceFile": "exec-34706dcf-334d-418d-bfe2-a644ad2efa37.png",
+      "file": "kokako-right.webp",
+      "sha256": "84b528cc157428440114d27f0231887cc4a7806535f09da61681b559de4c5bed",
+      "bytes": 17688,
+      "hasAlpha": true,
+      "prompt": "AVES layered feather illustration, accurate named New Zealand species, entire bird facing right, transparent background. Existing kea artwork used only as brand style reference."
+    },
+    {
+      "id": "tokoeka",
+      "sourceFile": "exec-9e6d6eaf-4bac-4c95-9713-827934a40cd6.png",
+      "file": "tokoeka-right.webp",
+      "sha256": "88b14394f8926d6aea9e595715a5c732fe2a0fd322e919108309e763ae4a295e",
+      "bytes": 20430,
+      "hasAlpha": true,
+      "prompt": "AVES layered feather illustration, accurate named New Zealand species, entire bird facing right, transparent background. Existing kea artwork used only as brand style reference."
+    },
+    {
+      "id": "mohua",
+      "sourceFile": "exec-2689d202-decd-4135-9a49-9443be7f6f7f.png",
+      "file": "mohua-right.webp",
+      "sha256": "1a9a1584311a0e7f430105e379345e54f77904bd096692bcd1e26229edb00c3c",
+      "bytes": 18754,
+      "hasAlpha": true,
+      "prompt": "AVES layered feather illustration, accurate named New Zealand species, entire bird facing right, transparent background. Existing kea artwork used only as brand style reference."
+    },
+    {
+      "id": "hoiho",
+      "sourceFile": "exec-809be696-c12a-4ea4-99ea-0b4318fc21f6.png",
+      "file": "hoiho-right.webp",
+      "sha256": "028c404656183b6c47029d089e05460711553c6d90edba1b1edd91cfea7f9a9a",
+      "bytes": 14886,
+      "hasAlpha": true,
+      "prompt": "AVES layered feather illustration, accurate named New Zealand species, entire bird facing right, transparent background. Existing kea artwork used only as brand style reference."
+    },
+    {
+      "id": "choco-toucan",
+      "sourceFile": "exec-22c3edd1-6008-402d-bedd-82b6d17a0e18.png",
+      "file": "choco-toucan-right.webp",
+      "sha256": "df31ed8a83c3142a4360aaecd622e96153282cfa60eb00e01c9c1255fb42f4cd",
+      "bytes": 15826,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. Create ONE NEW AVES regional bird artwork. Subject: Chocó Toucan, Ramphastos brevis. Black body, lemon-yellow face/throat/breast, long mostly black bill with conspicuous pale yellow upper ridge, black eye surround, blue bare skin around eye. Side profile with bill facing RIGHT, wings raised in flight. Use attached bird ONLY as brand STYLE reference: polished layered feather shapes, natural accurate colours, subtle restrained gradients, crisp silhouette, not photorealistic. Square genuinely transparent cutout, ENTIRE bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Bird MUST face RIGHT. Preserve named species anatomy rather than the reference anatomy."
+    },
+    {
+      "id": "multicolored-tanager",
+      "sourceFile": "exec-4c6e6499-e2d9-42c6-952b-b721fa95539c.png",
+      "file": "multicolored-tanager-right.webp",
+      "sha256": "ed12df78ead951074f67b0851c9ac52462ec21041bf11e1bd22a1abeb2114c7f",
+      "bytes": 17026,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. Create ONE NEW AVES regional bird artwork. Subject: Adult male Multicolored Tanager, Chlorochrysa nitidissima. Small compact songbird with green back, bright yellow crown/head and throat, contrasting black face/ear patches, chestnut-orange nape patch, vivid turquoise-blue breast and belly, green flanks, short dark conical bill. Facing RIGHT in graceful flight, wings raised. Use attached bird ONLY as brand STYLE reference: polished layered feather shapes, natural accurate colours, subtle restrained gradients, crisp silhouette, not photorealistic. Square genuinely transparent cutout, ENTIRE bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Bird MUST face RIGHT. Preserve named species anatomy rather than the reference anatomy."
+    },
+    {
+      "id": "yellow-eared-parrot",
+      "sourceFile": "exec-135fcaf0-93e8-4ca6-822c-91753363db03.png",
+      "file": "yellow-eared-parrot-right.webp",
+      "sha256": "fda748ee30c8ab5bd48802b19e444a329eba8793c35735ab53ccc72b8a0832fc",
+      "bytes": 16216,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. Create ONE NEW AVES regional bird artwork. Subject: Yellow-eared Parrot, Ognorhynchus icterotis. Green body/wings, yellow forecrown and distinctive yellow ear patches extending down the sides of its face, dark stout hooked bill, long green tail. No red forehead, no orange kea underwings. Whole bird flying RIGHT. Use attached bird ONLY as brand STYLE reference: polished layered feather shapes, natural accurate colours, subtle restrained gradients, crisp silhouette, not photorealistic. Square genuinely transparent cutout, ENTIRE bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Bird MUST face RIGHT. Preserve named species anatomy rather than the reference anatomy."
+    },
+    {
+      "id": "helmetcrest",
+      "sourceFile": "exec-8721bd7e-a584-4dd6-8805-c167cef32216.png",
+      "file": "helmetcrest-right.webp",
+      "sha256": "612381247d8de483f1a753d704b0505240ba628502d745d011e49c338ec11112",
+      "bytes": 18090,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. Create ONE NEW AVES regional bird artwork. Subject: Adult male Green-bearded Helmetcrest hummingbird, Oxypogon guerinii. Tiny high-Andean hummingbird with erect black and white pointed head crest, white facial collar and beard framing an emerald-green central gorget stripe, olive-brown wings/back, white breast with darker central stripe, short straight black bill. Hovering side profile facing RIGHT, wings lifted back, tiny accurate hummingbird anatomy. Use attached bird ONLY as brand STYLE reference: polished layered feather shapes, natural accurate colours, subtle restrained gradients, crisp silhouette, not photorealistic. Square genuinely transparent cutout, ENTIRE bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Bird MUST face RIGHT. Preserve named species anatomy rather than the reference anatomy."
+    },
+    {
+      "id": "apical-flycatcher",
+      "sourceFile": "exec-4c65e71b-b7b3-45d7-a921-14ba1d9eeb2c.png",
+      "file": "apical-flycatcher-right.webp",
+      "sha256": "196d53c5a152574b87c55efa11f5216f7c0e75d3d1eb12fa2eff29bea72bcdba",
+      "bytes": 16920,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Apical Flycatcher, Myiarchus apicalis. Slender songbird, grey head with slight crest, pale grey throat/chest, pale yellow belly, brown-olive wings with subtle pale wingbars, long brown/rufous tail, short fairly wide bill with noticeably pale horn tip. Whole bird side profile facing RIGHT, wings naturally half-raised. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "blue-billed-curassow",
+      "sourceFile": "exec-148a3dea-900f-4ac4-8f3c-cefc6f68f0b2.png",
+      "file": "blue-billed-curassow-right.webp",
+      "sha256": "271533a342ea4326ed4ae55fc22019eac69562d7362e6a8f5af778abeb345a87",
+      "bytes": 15218,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Blue-billed Curassow, Crax alberti. Large ground bird with glossy black body, curled black feather crest, WHITE lower belly/undertail, bright sky-blue cere and bulbous bill base, pale blue bill with darker tip, dark legs, long black tail. Standing whole body side profile RIGHT, wings folded, realistic cracid proportions, not flying. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "vermilion-cardinal",
+      "sourceFile": "exec-9fd3cd86-bf1a-4b03-b628-7f4911c2ad49.png",
+      "file": "vermilion-cardinal-right.webp",
+      "sha256": "876241bdf285cb6a00b5e39fdc5819e6386c02a112496f689343b979ee8e6ca7",
+      "bytes": 18962,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Vermilion Cardinal, Cardinalis phoeniceus. Entire rich scarlet-red plumage, extremely tall pointed red crest, stout pale ivory conical bill, narrow dark eye line. Whole songbird side profile flying toward RIGHT with crest and bill clearly RIGHT. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "santa-marta-parakeet",
+      "sourceFile": "exec-27d6cd47-dfe3-4e65-862e-41c9800af23e.png",
+      "file": "santa-marta-parakeet-right.webp",
+      "sha256": "1ee336acb5c9b1efc5bd303e21c96820b05d91ee5829f9dd85176e9388cfc101",
+      "bytes": 22212,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Santa Marta Parakeet, Pyrrhura viridicata. Small green parakeet, red forehead patch, grey-brown face with pale feather edging, red shoulder/carpal patch, green breast with pale scalloping, blue primary flight feathers, long maroon-red tail, grey hooked bill. Whole bird flying RIGHT, bill RIGHT, no yellow-eared parrot yellow face. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "scarlet-ibis",
+      "sourceFile": "exec-e7c7d9d7-545b-46a4-9d64-6c148431f1fc.png",
+      "file": "scarlet-ibis-right.webp",
+      "sha256": "a18156815a0a4e16d4b017346663c14c650f386d66918840e6395f3a0573aa9e",
+      "bytes": 18358,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Scarlet Ibis, Eudocimus ruber. Entire vivid scarlet/coral body and wings, long slender curved-down red bill, red legs trailing LEFT, small black tips only on outer primary flight feathers. Whole bird flying RIGHT, long neck extended forward, elegant ibis anatomy. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "hoatzin",
+      "sourceFile": "exec-f8644cb8-25aa-46d4-9e54-195e8ba47b91.png",
+      "file": "hoatzin-right.webp",
+      "sha256": "8107a4d79ecee723ebcb65c78c53fd913478eba50321c5d12b6417ae75fb7ee2",
+      "bytes": 25474,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Hoatzin, Opisthocomus hoazin. Long loose spiky rusty crest, cobalt-blue bare facial skin around red eye, small dark bill, cream/buff neck and breast with brown streaking, chestnut belly, dark brown wings edged cream, long brown tail. Whole bird standing side profile RIGHT with wings folded, natural hoatzin proportions. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "andean-condor",
+      "sourceFile": "exec-cd855dfb-4d42-4094-b5bd-1265ea733e8a.png",
+      "file": "andean-condor-right.webp",
+      "sha256": "4bac618ac8dfba2cd1f349b00d623226461d978a45dc0af48f11f0565c134559",
+      "bytes": 21606,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Andean Condor, Vultur gryphus. Huge black vulture in soaring flight with broad WHITE panels on upper wings, distinct WHITE fluffy neck ruff, bare grey/pinkish head and male fleshy comb, stout hooked ivory-tipped bill. Whole bird flying toward RIGHT with wing fingers spread, head and bill to RIGHT, no eagle feathers on head. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "cassowary",
+      "sourceFile": "exec-844adf1a-ca9e-4947-928a-b493e868c4fb.png",
+      "file": "cassowary-right.webp",
+      "sha256": "c009e47713480d5b643a833e8f45203c15705e36347b4168ea86e7338fc4d173",
+      "bytes": 20788,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Southern Cassowary, Casuarius casuarius. Flightless adult bird with tall brown helmet/casque, blue bare head and neck, two long red wattles, shaggy black body, powerful grey three-toed legs with long inner claw. Standing full body in side profile facing RIGHT, wings invisible, no flying. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square transparent cutout, whole bird, ample margin, no clipped bill/wings/tail/feet, no text, no labels, no extra birds, no scene or badge. All faces and bills must point to RIGHT. Follow the named species anatomy, not the reference bird anatomy."
+    },
+    {
+      "id": "lyrebird",
+      "sourceFile": "exec-73cba7e2-8e0f-4e08-a81e-eed088ac8171.png",
+      "file": "lyrebird-right.webp",
+      "sha256": "8f92f68ac73fdb3edb4d122dfea5ea6a38a9cf840cf87abc9add98b918ed3d1d",
+      "bytes": 34756,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Superb Lyrebird, Menura novaehollandiae. Brown terrestrial songbird with grey-brown head/chest, long strong legs, short dark bill, magnificent long lyre-shaped tail arcing upward behind it to the LEFT with two broad outer curved barred feathers and fine silvery filamentous feathers. Whole bird standing side profile facing RIGHT. Display tail held clearly behind bird, not peacock fan, no flying. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "pardalote",
+      "sourceFile": "exec-e87b26d7-f93b-4123-84a0-7f3145becd13.png",
+      "file": "pardalote-right.webp",
+      "sha256": "55515f5d260aa650e51a0ed36af8027d57ee7c7ebf26f4313852d4c996a486ac",
+      "bytes": 16384,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Forty-spotted Pardalote, Pardalotus quadragintus. Tiny compact Australian songbird, olive-green crown and back, pale buff/cream face and yellowish throat/cheek wash, grey underside, short tail, tiny black bill. BLACK folded wings with many discrete WHITE spots, no black head cap and no bright red rump. Whole bird side profile facing RIGHT, wings partly lifted enough to show spotted pattern. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "helmeted-honeyeater",
+      "sourceFile": "exec-118cea34-dc67-49e6-a854-a096bd8f8349.png",
+      "file": "helmeted-honeyeater-right.webp",
+      "sha256": "8d9e950013cfbce6f5fcc69d7d4750c6def822650430ceeb1624dd51c58bed29",
+      "bytes": 18848,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Helmeted Honeyeater, Lichenostomus melanops cassidix. Small olive-brown songbird, prominent golden-yellow helmet/crown tuft and cheek/ear plume, broad black facial mask, yellow throat, olive-grey belly, slender slightly curved dark bill. Whole bird flying RIGHT, natural anatomy. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "magpie",
+      "sourceFile": "exec-4d2a70cf-053f-40bd-82f0-526e8c922542.png",
+      "file": "magpie-right.webp",
+      "sha256": "0c2ac168536f8016b8a54e55c46059b501118d7957b2f8bb6a94ec2b5959988e",
+      "bytes": 19230,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male white-backed Australian Magpie, Gymnorhina tibicen. Crisp black body/chest/head, WHITE nape and broad white back/saddle, black wings with white shoulder patches, grey-white pointed bill with black tip, dark legs, red-brown eye. Whole bird flying RIGHT with head/bill to RIGHT. Original bird artwork only, NO government badge/flag, no symbols, no circle. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "carnabys-cockatoo",
+      "sourceFile": "exec-6726f50e-2eb7-466c-a27c-8c775fc10ead.png",
+      "file": "carnabys-cockatoo-right.webp",
+      "sha256": "f3ad0f6ba2fd7d099e615f140d62994b3d7a4b14004d18dfb137dec378339438",
+      "bytes": 20028,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Carnaby's Black-Cockatoo, Zanda latirostris. Black/charcoal large cockatoo with pale feather scalloping, conspicuous cream-white cheek patch, broad WHITE tail band with black terminal tips, short broad dark hooked bill, short crest, pink eye ring. Whole bird flying RIGHT. No red tail feathers, no long slender Baudin's bill. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "gouldian-finch",
+      "sourceFile": "exec-23041e77-4164-4e74-a477-1450947d03d1.png",
+      "file": "gouldian-finch-right.webp",
+      "sha256": "b6081d5ea70640f7c79d202ba3f96833adb457bace1ffb71d511c92e1b5b404f",
+      "bytes": 15898,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Gouldian Finch, Chloebia gouldiae. Red-headed morph: scarlet face surrounded by narrow black border, turquoise-blue nape band, bright green back/wings, rich purple breast, bright yellow belly, pale horn short conical bill, small long black central tail pins. Whole bird flying RIGHT, compact finch anatomy. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "gang-gang",
+      "sourceFile": "exec-bebd34be-c3b3-4829-bb2d-7488cb5b16f9.png",
+      "file": "gang-gang-right.webp",
+      "sha256": "e64f6167c72e72f5b980fa4865c8d2a19f0fe986673e92abfdf88c9159d19482",
+      "bytes": 21784,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Adult male Gang-gang Cockatoo, Callocephalon fimbriatum. Rich red head and distinctive wispy forward-curled red crest, charcoal-grey body and wings with pale grey feather scallops, short broad tail, pale horn hooked bill. Whole bird flying RIGHT. No yellow crest, no green feathers. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    },
+    {
+      "id": "bristlebird",
+      "sourceFile": "exec-b1e0918c-ebfd-4cf2-a22d-099a700d620e.png",
+      "file": "bristlebird-right.webp",
+      "sha256": "3903ccc937a36b7467221fa2a5883c21ab8508d1fbf46b04491173ff98125174",
+      "bytes": 14804,
+      "hasAlpha": true,
+      "prompt": "Use case: logo-brand. ONE NEW AVES regional bird logo artwork. Subject: Eastern Bristlebird, Dasyornis brachypterus. Unassuming medium-sized brown songbird, cinnamon-brown upperparts, pale grey/buff throat and belly, conspicuous reddish-brown iris, long rounded brown tail, short black slender bill and small stiff bristles at bill base. Whole bird standing side profile facing RIGHT with folded short wings, no showy colours. Attached bird is STYLE reference ONLY: polished layered feather shapes, accurate natural species colours, subtle gradients, crisp strong silhouette, not photo. Square genuinely transparent cutout, entire bird with generous padding, no clipping, no text, no labels, no extra bird, no badge or scene. Face and bill must point RIGHT. Use named species anatomy, never copy the reference's anatomy."
+    }
+  ]
+}
