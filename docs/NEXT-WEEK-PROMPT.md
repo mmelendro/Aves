@@ -36,8 +36,11 @@ Prioritise visible style and useful interaction in small slices. Recommend Austr
 map controls, then remaining country/region map-style parity; a smaller alternative
 is the existing birds/AVES invitation animation. Other selectable items are photo
 zoom, opt-in continuous calls, sourced origin filters, surrounding sea context,
-saved places and the data-dependent B Corp pilot. These are choices, not an order
-to implement all of them. Wait for the owner's selection of elective work.
+saved places and the data-dependent B Corp pilot. The owner has now selected all nine increments, one by one: Australia map
+controls, remaining map-style parity, photo zoom, invitation animation, continuous
+calls, origin filters, sea context, saved places, then the B Corp pilot. The first
+is in progress on feature/au-map-controls. Finish and verify each before advancing;
+record dependencies honestly and preserve separate production approval.
 Keep PR #11 private acceptance and the 15 unresolved image sources explicit. Do
 not report either as completed or assume a background process is running. Preserve
 published headers, flocks, selection, satellite shading and the one-person team
