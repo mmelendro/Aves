@@ -86,8 +86,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
             <label htmlFor="colombia-hero-region" className="sr-only">Choose a Colombia region</label>
             <select ref={selectRef} id="colombia-hero-region" value={focused ? chosenRegion : ""} onChange={event => { const id = event.target.value; if (media && id) window.location.assign(`/regions/${id}`); else preview.preview(id) }} className="min-h-11 min-w-0 flex-1 rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
               <option value="">Choose a Colombian region</option>
-              <ColombiaRegionTargets onActivate={media ? undefined : (event, id) => preview.activate(event, id)} onActivateKey={media ? undefined : (event, id, href) => preview.activateKey(event, id, href)} />
-            {mapMarkers.map(region => <option key={region.slug} value={region.slug}>{region.name}</option>)}
+              {mapMarkers.map(region => <option key={region.slug} value={region.slug}>{region.name}</option>)}
             </select>
             <Link href={`/regions/${selectedRegion}`} className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-lg bg-emerald-50 px-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>

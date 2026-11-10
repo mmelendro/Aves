@@ -44,7 +44,7 @@ export function MapViewer({ children, label, gestures = true, credits, listenCon
     observer.observe(element)
     return () => { observer.disconnect(); cancelAnimationFrame(frame.current) }
   }, [])
-  return <dialog ref={dialog} open data-expanded={expanded || undefined} className={styles.viewer} role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label} onCancel={e=>{e.preventDefault();resize(false)}}>
+  return <dialog data-aves-map="true" ref={dialog} open data-expanded={expanded || undefined} className={styles.viewer} role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label} onCancel={e=>{e.preventDefault();resize(false)}}>
     <div className={styles.toolbar} role="group" aria-label={`${label} view controls`}>
       {gestures && <>
         <button className={styles.control} type="button" aria-label={`Zoom ${label} in`} disabled={view.zoom >= 4} onClick={()=>zoom(1.3)}><Plus size={18} aria-hidden="true"/></button>

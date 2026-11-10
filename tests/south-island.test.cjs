@@ -104,7 +104,7 @@ test("the dedicated South Island page has canonical metadata, one local explorer
 })
 
 test("places cycle across all four areas, map selections change photos, and habitat changes remain connected", () => {
-  const state = [false]
+  const state = [null]
   let hook = 0
   const { southIslandDiscoveryReducer: reduce, initialSouthIslandDiscovery: initial } = load("lib/south-island-discovery.ts")
   let discovery = initial
@@ -123,22 +123,22 @@ test("places cycle across all four areas, map selections change photos, and habi
   }
   const render = () => { hook = 0; return Explorer() }
   let pair = render()
-  const button = label => elements(pair.props.media).find(node => node.type === "button" && node.props["aria-label"] === label)
-  assert.equal(pair.props.mediaFirst, true)
-  assert.equal(pair.props.map.props.selectedPlace, "mountains")
+  const button = label => elements(pair).find(node => node.type === "button" && node.props["aria-label"] === label)
+  const selectedPlace = () => load("lib/south-island-discovery.ts").southIslandLandscapeSlides[shared.slideIndex].place.id
+  assert.equal(selectedPlace(), "mountains")
   button("Next landscape").props.onClick(); pair = render()
   button("Next landscape").props.onClick(); pair = render()
-  assert.equal(pair.props.map.props.selectedPlace, "forest-and-lakes")
+  assert.equal(selectedPlace(), "forest-and-lakes")
   assert.equal(shared.value, "freshwater")
   button("Place details & credits").props.onClick(); pair = render()
-  assert.ok(elements(pair.props.media).some(node => node.props["aria-label"] === "About Nelson Lakes"))
-  pair.props.map.props.onSelectPlace("coast"); pair = render()
+  assert.ok(elements(pair).some(node => node.props["aria-label"] === "About Nelson Lakes"))
+  shared.selectPlace("coast"); pair = render()
   assert.equal(shared.value, "coast")
-  assert.equal(state[0], false, "changing photos closes the Info panel")
+  assert.ok(!elements(pair).some(node => node.props["aria-label"]?.startsWith("About ")), "map-driven photo changes close stale Info")
   shared.select("forest"); pair = render()
-  assert.equal(pair.props.map.props.selectedPlace, "southern-forest", "bird-map habitat also updates the place viewer")
+  assert.equal(selectedPlace(), "southern-forest", "bird-map habitat also updates the place viewer")
   for (let i = 0; i < 5; i++) { button("Next landscape").props.onClick(); pair = render() }
-  assert.equal(pair.props.map.props.selectedPlace, "southern-forest", "full collection wraps")
+  assert.equal(selectedPlace(), "southern-forest", "full collection wraps")
 })
 
 test("all landscape assets carry credits and public reference pins fit the actual map", () => {
@@ -375,4 +375,27 @@ test("South Island soundscapes start off with no audio element, preload or exter
   assert.match(html, /Peel Forest, Canterbury/)
   assert.doesNotMatch(html, /Soundscape volume|<section|<audio/)
   assert.doesNotMatch(html, /<audio|<iframe|autoplay|preload=/)
+})
+
+
+test("South Island has one map combining conservation layers, bird filters and place choices", () => {
+ const Page = load("app/new-zealand/south-island/page.tsx").default
+ const html = renderToStaticMarkup(React.createElement(Page))
+ assert.equal((html.match(/data-aves-map="true"/g)||[]).length, 1)
+ assert.match(html, /South Island explorer map/)
+ assert.match(html, /Map layers/)
+ assert.match(html, /Show Forest &amp; scrub birds on map/)
+ assert.match(html, /Show place: Nelson Lakes/)
+ assert.equal((html.match(/aria-label="South Island places carousel"/g)||[]).length,1)
+})
+
+test("every Colombian regional guide has one map and a resizable bird pair", () => {
+ const Page = load("components/colombia-region-page.tsx").ColombiaRegionPage
+ const { regions } = load("content/regions.ts")
+ for (const region of regions) {
+  const html = renderToStaticMarkup(React.createElement(Page,{region}))
+  assert.equal((html.match(/data-aves-map="true"/g)||[]).length,1,region.id)
+  assert.match(html,/role="separator"/)
+  for(const select of html.matchAll(/<select[^>]*>([\s\S]*?)<\/select>/g)) assert.doesNotMatch(select[1],/<svg/,"native region selects contain options only")
+ }
 })
