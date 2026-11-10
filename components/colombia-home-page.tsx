@@ -91,7 +91,9 @@ export default function AVESLandingPage() {
             </div>
             <div className="grid items-start gap-7 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
               <Link href="/aves-explorer" className="group block rounded-2xl border border-emerald-100 bg-white p-5 shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700 sm:p-7">
-                <ColombiaMapArtwork alt="Map of Colombia showing its birding regions" width={634} height={802} sizes="(min-width: 1024px) 40vw, 90vw" className="mx-auto h-auto max-h-[580px] w-full object-contain" />
+                <div className="relative mx-auto w-full max-w-[458px]">
+                <ColombiaMapArtwork alt="Map of Colombia showing its birding regions" width={634} height={802} sizes="(min-width: 1024px) 40vw, 90vw" className="mx-auto h-auto w-full object-contain" />
+                </div>
                 <span className="mt-5 flex min-h-11 items-center justify-center gap-2 rounded-lg bg-emerald-50 px-3 text-center font-semibold text-emerald-800 group-hover:bg-emerald-100">
                   Open the interactive map <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </span>
