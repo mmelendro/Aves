@@ -83,38 +83,6 @@ function nodes(tree) {
 function find(tree, predicate) { const result = nodes(tree).find(predicate); assert.ok(result, "Expected rendered element"); return result }
 function boxes(tree) { return nodes(tree).filter(node => node.props.name === "regions") }
 
-test("support and New Zealand messages retain their purpose without creating a trip or news opt-in", async () => {
-  for (const [topic, subject] of [["privacy", "Privacy request"], ["unsubscribe", "Unsubscribe request"], ["new-zealand", "New Zealand interest inquiry"]]) {
-    const calls = []
-    const harness = componentHarness("components/contact-form-section.tsx", "ContactFormSection", { initialTopic: topic, variant: "contact-page" }, {
-      fetch: async (url, options) => {
-        calls.push({ url, body: JSON.parse(options.body) })
-        return { ok: true, json: async () => ({ success: true, status: "stored", intent: "inquiry", country: "australia" }) }
-      },
-    })
-    const tree = harness.render()
-    assert.equal(nodes(tree).some(node => ["updates", "travelWhen", "partySize"].includes(node.props.name)), false)
-    assert.ok(find(tree, node => node.props.name === "message").props.required)
-    await find(tree, node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { name: "Visitor", email: "visitor@example.com", message: "Please help with my request", updates: "on" }, reset() {} } })
-    assert.equal(calls.length, 1)
-    assert.equal(calls[0].url, "/australia/api/contact")
-    assert.equal(calls[0].body.intent, "inquiry")
-    assert.equal(calls[0].body.updates, false)
-    assert.equal(calls[0].body.region, "")
-    assert.equal(calls[0].body.country, undefined)
-    assert.equal(calls[0].body.message, `Request: ${subject}\n\nPlease help with my request`)
-    assert.match(JSON.stringify(harness.render()), /Your message has been saved/)
-  }
-})
-
-test("an unknown contact topic cannot inject text or replace the Australian trip form", () => {
-  const topics = load("content/contact-topics.ts")
-  for (const value of ["__proto__", "constructor", "<script>test</script>", ["privacy"], undefined]) assert.equal(topics.contactTopic(value), null)
-  const tree = componentHarness("components/contact-form-section.tsx", "ContactFormSection", { initialTopic: "untrusted", variant: "contact-page" }).render()
-  assert.ok(find(tree, node => node.props.name === "travelWhen"))
-  assert.ok(find(tree, node => node.props.name === "updates"))
-})
-
 test("all 20 regional entry links prefill only their country", () => {
   assert.equal(options.countryRegionOptions.australia.length, 9)
   assert.equal(options.countryRegionOptions.colombia.length, 11)

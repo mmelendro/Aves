@@ -6,6 +6,7 @@
  * The compact variant hides the extra directory cards, not any selectable regions.
  */
 
+import { placeInSentence } from "@/lib/place-language"
 import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { useId, useState } from "react"
@@ -48,7 +49,7 @@ export function RegionExplorer({ compact = false, initialRegion = "queensland" }
             <h3 id={`${prefix}-region-name`} className="text-2xl font-bold text-gray-900">{region.landscape}</h3>
             <p className="mt-3 leading-relaxed text-gray-600">{region.description}</p>
             <dl className="mt-5 space-y-3 text-sm"><div><dt className="font-semibold text-gray-900">Start your planning</dt><dd className="mt-1 leading-relaxed text-gray-600">{region.gateway}</dd></div><div><dt className="flex items-center gap-2 font-semibold text-gray-900"><CalendarDays className="h-4 w-4 text-emerald-700" aria-hidden="true" />Seasonal perspective</dt><dd className="mt-1 leading-relaxed text-gray-600">{region.season.summary}</dd></div></dl>
-            <div className="mt-5 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row"><Button asChild className="h-auto min-h-11 whitespace-normal rounded-lg bg-emerald-600 px-4 py-3 text-center hover:bg-emerald-700"><Link href={`/regions/${region.id}`}>Explore {regionShortLabel(region.id)}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button><Button asChild variant="outline" className="h-auto min-h-11 whitespace-normal rounded-lg border-emerald-200 px-4 py-3 text-center text-emerald-700"><Link href={`/contact?region=${region.id}`}>Discuss your trip</Link></Button></div>
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row"><Button asChild className="h-auto min-h-11 whitespace-normal rounded-lg bg-emerald-600 px-4 py-3 text-center hover:bg-emerald-700"><Link href={`/regions/${region.id}`}>Explore {placeInSentence(regionShortLabel(region.id))}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button><Button asChild variant="outline" className="h-auto min-h-11 whitespace-normal rounded-lg border-emerald-200 px-4 py-3 text-center text-emerald-700"><Link href={`/contact?region=${region.id}`}>Discuss your trip</Link></Button></div>
           </div>
         </article>
       </div>

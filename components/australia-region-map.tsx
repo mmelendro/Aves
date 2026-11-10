@@ -6,6 +6,7 @@
  * geometry and attribution are imported from content/australia-map.ts rather than drawn here.
  */
 
+import { placeInSentence } from "@/lib/place-language"
 import MapFeatherMarker from "./map-feather-marker"
 import { Feather } from "lucide-react"
 import { MapViewer } from "./map-viewer"
@@ -60,7 +61,7 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
                   fillRule="evenodd"
                   role={isFocus ? "button" : undefined}
                   tabIndex={isFocus ? 0 : undefined}
-                  aria-label={isFocus ? `Explore ${state.name}` : undefined}
+                  aria-label={isFocus ? `Explore ${placeInSentence(state.name)}` : undefined}
                   aria-pressed={isFocus ? isSelected : undefined}
                   aria-hidden={!isFocus ? true : undefined}
                   onClick={state.regionId ? () => onSelectRegion(state.regionId!) : undefined}

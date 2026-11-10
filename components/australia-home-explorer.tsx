@@ -6,6 +6,7 @@
  * bird's complete range. Geographic shapes come from content/australia-map.ts, never logo artwork.
  */
 
+import { placeInSentence } from "@/lib/place-language"
 import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
@@ -33,6 +34,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const { publish } = useHeaderLandscape()
   const id = useId()
   const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
+  const [showBirdArea,setShowBirdArea]=useState(false)
   const backButton = useRef<HTMLButtonElement>(null)
   const regionSelect = useRef<HTMLSelectElement>(null)
   const focusedRegion = regionOptions.find(region => region.id === chosenRegion)
@@ -42,7 +44,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const [bird, setBird] = useState<BirdProfile>(birds[0] ?? birdData[0])
   const onBirdChange = useCallback((nextBird: BirdProfile) => setBird(nextBird), [])
   // This featured region is one place to look, not a map of the species' entire distribution.
-  const highlightedRegion = focusedRegion ?? regionOptions.find(region => region.id === bird.regionSlug)
+  const highlightedRegion = focusedRegion ?? (showBirdArea ? regionOptions.find(region => region.id === bird.regionSlug) : undefined)
   const focusedShape = australiaMapStates.find(state => state.regionId === focusedRegion?.id)
   const mapTransform = mapZoomTransform(australiaMapViewBox, focusedShape ? [focusedShape.path] : [], 12)
   const highlightedShape = australiaMapStates.find(state => state.regionId === highlightedRegion?.id)
@@ -87,16 +89,17 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           {australiaMapStates.map(state => {
             const selected = state.regionId === highlightedRegion?.id
             const outline = <path d={state.path} fill={selected ? "#065f46" : "#c5dbd0"} stroke="#6e9582" strokeWidth="1" strokeLinejoin="round" vectorEffect="non-scaling-stroke" fillRule="evenodd" className={`transition-colors group-focus-visible:stroke-emerald-950 group-focus-visible:[stroke-width:3] motion-reduce:transition-none ${selected ? "group-hover:fill-emerald-700 group-focus-visible:fill-emerald-700" : "group-hover:fill-[#9cc4af] group-focus-visible:fill-[#9cc4af]"}`} />
-            return state.regionId ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => { if (!media) preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`)) }} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
+            return state.regionId ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => { if (!media) preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`)) }} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${placeInSentence(state.name)}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
           })}
           {highlightedShape && <svg x={highlightedShape.label[0]-markerSize/2} y={highlightedShape.label[1]-markerSize/2} width={markerSize} height={markerSize} pointerEvents="none"><MapFeatherMarker size={markerSize}/></svg>}
           </g>
         </svg>
         </MapViewer>
+        {!focusedRegion && <button type="button" aria-pressed={showBirdArea} onClick={()=>setShowBirdArea(value=>!value)} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">{showBirdArea ? "Hide bird area" : "Show area for this bird"}</button>}
         <div className={`${styles.mapFooter} px-4 pb-3`}>
           {!media && <><label htmlFor={`${id}-region`} className="sr-only">Choose an Australian region</label><select ref={regionSelect} id={`${id}-region`} aria-label="Choose an Australian region" value={focusedRegion?.id ?? ""} onChange={event => preview.preview(event.target.value)} className="mb-3 min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><option value="">All featured Australia birds</option>{regionOptions.map(region => <option key={region.id} value={region.id}>{region.label}</option>)}</select></>}
-          {focusedRegion && <Link href={`/regions/${focusedRegion.id}`} className="mb-2 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore {focusedRegion.label}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
-          <p className="mb-2 text-xs leading-5 text-gray-600">Tap a region to preview. Tap it again, or choose Explore, to open its guide.</p>
+          {focusedRegion && <Link href={`/regions/${focusedRegion.id}`} className="mb-2 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore {placeInSentence(focusedRegion.label)}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
+          <p className="mb-2 text-xs leading-5 text-gray-600">Choose a region to drop your feather and preview its birds. Choose it again, or Explore, to open its guide.</p>
           <p className="min-h-10 text-sm leading-5 text-gray-600">{highlightedRegion ? <>Highlighted: <Link href={`/regions/${highlightedRegion.id}`} className="font-medium text-emerald-800 underline underline-offset-4">{highlightedRegion.label}</Link> — one region for {bird.commonName}.</> : "Explore a region to discover its birds and plan your route."}</p>
           {/* Keyboard/touch-friendly text alternatives keep all nine region guides reachable. */}
           <details className="group mt-2 rounded-lg border border-emerald-100 bg-emerald-50/50">

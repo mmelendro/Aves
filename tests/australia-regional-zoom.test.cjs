@@ -190,3 +190,11 @@ test("every Australian regional guide renders one resizable bird/map pair", asyn
     assert.match(html,/role="separator"/)
   }
 })
+
+test("Australia opens with neutral geography and feathers appear only after a choice",()=>{
+ const h=explorerHarness();let tree=h.render()
+ const marks=()=>nodes(tree).filter(node=>node.type?.name==='MapFeatherMarker')
+ assert.equal(marks().length,0)
+ nodes(tree).find(node=>node.type==='a'&&node.props['aria-label']==='Explore Queensland').props.onClick(clickEvent())
+ tree=h.render();assert.equal(marks().length,1)
+})

@@ -1,0 +1,109 @@
+{
+  "australia": {
+    "label": "Australia",
+    "regions": [
+      {
+        "id": "queensland",
+        "label": "Queensland"
+      },
+      {
+        "id": "new-south-wales",
+        "label": "New South Wales"
+      },
+      {
+        "id": "tasmania",
+        "label": "Tasmania"
+      },
+      {
+        "id": "victoria",
+        "label": "Victoria"
+      },
+      {
+        "id": "south-australia",
+        "label": "South Australia"
+      },
+      {
+        "id": "western-australia",
+        "label": "Western Australia"
+      },
+      {
+        "id": "northern-territory",
+        "label": "Northern Territory"
+      },
+      {
+        "id": "australian-capital-territory",
+        "label": "Australian Capital Territory"
+      },
+      {
+        "id": "jervis-bay-territory",
+        "label": "Jervis Bay Territory"
+      }
+    ]
+  },
+  "colombia": {
+    "label": "Colombia",
+    "regions": [
+      {
+        "id": "pacific",
+        "label": "Pacific"
+      },
+      {
+        "id": "western-andes",
+        "label": "Western Andes"
+      },
+      {
+        "id": "central-andes",
+        "label": "Central Andes"
+      },
+      {
+        "id": "eastern-andes",
+        "label": "Eastern Andes"
+      },
+      {
+        "id": "cauca-valley",
+        "label": "Cauca Valley"
+      },
+      {
+        "id": "magdalena-valley",
+        "label": "Magdalena Valley"
+      },
+      {
+        "id": "caribbean",
+        "label": "Caribbean"
+      },
+      {
+        "id": "sierra-nevada-de-santa-marta",
+        "label": "Sierra Nevada de Santa Marta"
+      },
+      {
+        "id": "llanos",
+        "label": "Llanos"
+      },
+      {
+        "id": "amazonia",
+        "label": "Amazonia"
+      },
+      {
+        "id": "colombian-massif",
+        "label": "Colombian Massif"
+      }
+    ]
+  },
+  "new-zealand": {
+    "label": "New Zealand",
+    "regions": [
+      {
+        "id": "north-island",
+        "label": "North Island"
+      },
+      {
+        "id": "south-island",
+        "label": "South Island"
+      },
+      {
+        "id": "rakiura",
+        "label": "Rakiura / Stewart Island"
+      }
+    ]
+  }
+}
