@@ -21,7 +21,11 @@ export function HeaderContour({ country }: { country?: BrandCountry }) {
       const x = l.left - h.left + (l.width - 240 * scale) / 2
       const y = l.top - h.top + (l.height - 40 * scale) / 2
       let index = 0
-      const landscape = landscapes[country || "global"].replace(/-?\d+(?:\.\d+)?/g, value => String((index++ % 2 ? y : x) + Number(value) * scale))
+      // Rounded shoulders retain the NZ peaks while sharing the waves' flowing style.
+      const sourceLandscape = country === "new-zealand"
+        ? "M2 31 Q15 29 25 25 Q34 21 41 13 Q44 9 47 13 L52 18 Q55 22 58 16 L69 5 Q72 0 75 5 L81 18 Q84 24 87 19 L91 15 Q93 11 96 16 L107 27 Q110 31 115 29 Q131 24 150 28"
+        : landscapes[country || "global"]
+      const landscape = sourceLandscape.replace(/-?\d+(?:\.\d+)?/g, value => String((index++ % 2 ? y : x) + Number(value) * scale))
       const numbers = landscape.match(/-?\d+(?:\.\d+)?/g)!.map(Number)
       const endX = numbers[numbers.length - 2], endY = numbers[numbers.length - 1]
       const firstY = numbers[1], remaining = h.width - endX
@@ -50,6 +54,6 @@ export function HeaderContour({ country }: { country?: BrandCountry }) {
   }, [country])
   return <svg ref={ref} aria-hidden="true" focusable="false" viewBox={`0 0 ${width} 92`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[92px] w-full text-emerald-600" fill="none">
     <path d={`${edge} L${width} 0 H0 Z`} fill="white" fillOpacity=".98" />
-    <path d={edge} stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" opacity=".65" />
+    <path d={edge} stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" opacity=".65" />
   </svg>
 }
