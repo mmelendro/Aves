@@ -1,3 +1,15 @@
+# Current unified explorer checkpoint
+
+Main runtime `2c0deea666e7350e6b2e51fc08b65916c36881f4`, deployment `dpl_9i3f5PKdu6DCWUxeASvJysX64sHE`, READY on aves.bio. The South Island and New Zealand entry pages and homepage share one explorer. One rendered map per view, retained existing South Island layers, contextual birds/places/planning, in-place region and world navigation, and private NZ bird basket are preserved. 187 exact-release tests pass; strict TypeScript, full local and hosted builds pass. Desktop browser acceptance and screenshot are in docs/RELEASE-2026-11-11-UNIFIED-EXPLORER.md. Phone-specific acceptance and other country-entry rollout remain next.
+
+The owner made this the urgent priority over contact/glass and the full bird-range/endemic audit. Both pending form/glass source sets are saved on WIP branches listed in that release file. All endemics must be included beyond photographed birds, with authoritative taxonomy and geographic coverage. Do not claim the all-country endemic/range audit complete.
+
+Australia production remains `5bdd33bae0d55f5a202fe4963f692ab27e118cc4` / `dpl_99qgUavb9ArbDhyL5PGRz42MBuPo`. Preserve the separate app. The prior US$1 safeguard was not changed; not freshly inspected in this increment.
+
+Read CONTINUE-HERE.md and docs/AGILE-PLAN.md for the active owner queue.
+
+## Earlier checkpoint
+
 # AVES current handoff
 
 Published 11 November 2026 (Sydney), following the owner's explicit production instruction and subsequent map/listening refinements. Both applications are READY and the exact source hashes below are confirmed.
