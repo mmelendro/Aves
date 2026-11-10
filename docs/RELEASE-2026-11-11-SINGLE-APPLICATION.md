@@ -42,3 +42,5 @@ After the tested source was pinned, local display/copy edits passed the 478 chec
 ## Recovery and retirement
 
 Previous global deployment: dpl_9hhMSyF5PKxzDeCUCQ78RNr3MN5o, runtime b891afdf6304d4e958a11fddbfe0713da074b4d6. Previous Australia deployment: dpl_E3HiaAgnJTHmjHRHnocVTiQEy1k7, runtime fa159442125b17f83da0f41a8a37452d5250c88b. Keep these until actual domain-registration transfer and live acceptance are complete. An alias-only cutover must not be described as completed project retirement.
+
+Verified update: the public South Island page and consolidated human sitemap were retrieved after publication. The final production error/fatal scan had no matching entries in the 10-minute window ending 2026-11-10T21:35:38.315Z. Unpublished display/cookie polish is preserved at wip/single-app-style-polish, commit 27883a8e8204d015d30907eaac4de3e2327a662a. It is not part of the production runtime. The remaining full-site shared header/footer/map/title pass is the user's next explicit priority.

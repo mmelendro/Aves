@@ -16,3 +16,5 @@ Also review older project prj_0cUcHh3lkewUHSqiObAzhux88Dpn, named aves. It has n
 
 Queued after the all-page design pass: shared guided contact form and frosted headers; full photographed AU/NZ range/habitat ledger; all country/regional endemics beyond photographed birds; source-verified B Corp tourism layers. Keep the existing contact/glass WIP branches and private planning/quote confirmation behavior. VIDA remains a future umbrella, not a current rename.
 
+
+Verified update: the public South Island page and consolidated human sitemap were retrieved after publication. The final production error/fatal scan had no matching entries in the 10-minute window ending 2026-11-10T21:35:38.315Z. Unpublished display/cookie polish is preserved at wip/single-app-style-polish, commit 27883a8e8204d015d30907eaac4de3e2327a662a. It is not part of the production runtime. The remaining full-site shared header/footer/map/title pass is the user's next explicit priority.

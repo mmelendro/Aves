@@ -167,3 +167,5 @@ This production refinement release is approved and complete. New spend/provider/
 weakened privacy or app consolidation are not part of that approval. Do not send supplier/permission enquiries
 without explicit sending instructions. Keep source/credits, rollback points and
 private guest data intact. Essential-flow/privacy defects take priority.
+
+Verified update: the public South Island page and consolidated human sitemap were retrieved after publication. The final production error/fatal scan had no matching entries in the 10-minute window ending 2026-11-10T21:35:38.315Z. Unpublished display/cookie polish is preserved at wip/single-app-style-polish, commit 27883a8e8204d015d30907eaac4de3e2327a662a. It is not part of the production runtime. The remaining full-site shared header/footer/map/title pass is the user's next explicit priority.
