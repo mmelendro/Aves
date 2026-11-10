@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
-import Image from "next/image"
+import { BrandBird } from "@/components/brand-bird"
 import { useRouter } from "next/navigation"
 import { mediaIdentity } from "@/lib/media-identity"
 import { mediaClientHref } from "@/lib/media-navigation"
@@ -115,11 +115,10 @@ export function AvesMediaProvider({ children, assetBase = "", navigationPaths = 
     if (opener.current?.isConnected) opener.current.focus({ preventScroll: true })
   }
   const resource = travelMediaResources.find(item => item.id === resourceId)
-  const identity = mediaIdentity(resource?.country || "global")
   return <MediaContext.Provider value={{ resourceId, open }}>
     {children}
     {resource && (resumeRequired ? <aside className={styles.dock} aria-label="AVES travel media player" onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); close() } }}>
-      <div className={styles.heading}><Image src={`${assetBase}/images/brand/${identity.file}`} alt={`${identity.bird} · ${identity.country} programme`} width={36} height={36} /><div className={styles.title}><span>Ready when you are</span><strong>{resource.title}</strong></div><button className={styles.feather} onClick={close} aria-label="Close player and stop playback"><X size={18} /></button></div>
+      <div className={styles.heading}><BrandBird country={resource.country} regionId={resource.country === "new-zealand" ? "south-island" : undefined} placeId={resource.mapPlace?.id} size={36} /><div className={styles.title}><span>Ready when you are</span><strong>{resource.title}</strong></div><button className={styles.feather} onClick={close} aria-label="Close player and stop playback"><X size={18} /></button></div>
       <p className={styles.note}>Playback paused while the page changed. Resume from {time(handoff?.position || 0)}.</p>
       <button className={styles.resume} onClick={() => setResumeRequired(false)}><Play size={18} aria-hidden="true" />Resume media</button>
     </aside> : <MediaDock key={resource.id} resource={resource} expanded={expanded} setExpanded={setExpanded} close={close} initial={handoff?.resourceId === resource.id ? handoff : null} remember={remember} assetBase={assetBase} />)}
@@ -236,7 +235,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
   }
   return <aside onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); if (expanded) setExpanded(false); else close() } }} aria-label="AVES travel media player" className={`${styles.dock} ${expanded ? styles.expanded : ""}`}>
     <div className={styles.heading}>
-      <Image src={`${assetBase}/images/brand/${identity.file}`} alt={`${identity.bird} · ${identity.country} programme`} width={36} height={36} />
+      <BrandBird country={resource.country} regionId={resource.country === "new-zealand" ? "south-island" : undefined} placeId={resource.mapPlace?.id} size={36} />
       <div className={styles.title}><span>{identity.country} · {resource.kind}</span><strong title={resource.title}>{resource.title}</strong></div>
       <button className={styles.feather} onClick={() => setExpanded(!expanded)} aria-label={expanded ? "Compact player" : "Expand player"} title={expanded ? "Compact player" : "Expand player"}>{expanded ? <Minimize2 size={17} /> : <Maximize2 size={17} />}</button>
       <button className={styles.feather} onClick={close} aria-label="Close player and stop playback" title="Close and stop"><X size={18} /></button>
