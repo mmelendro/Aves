@@ -1,18 +1,14 @@
 # AVES continue here
 
-The prepared refinements are now LIVE with explicit owner approval.
-Main runtime4e4e7f3 / dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP.
-Australia runtime48722c8 / dpl_FYT3WsL52euwC46SYq2tFRsKtqDB.
-Both production aliases were verified.183 main /315 Australia tests, TypeScript
-and builds pass. Scoped error/fatal scans returned no matching logs.
+The unified-map and shared-player refinements are LIVE and verified.
 
-Read docs/HANDOFF-CURRENT.md and docs/RELEASE-2026-11-10-REFINEMENTS.md for precise
-scope, rollback and test limits. docs/AGILE-PLAN.md is the updated comprehensive
-list. Close/supersede only PRs whose heads are confirmed ancestors of the release.
-No further production rebuild is needed for documentation-only checkpoints.
+Main runtime `094a4e0c255f43dce83da1ac1c69550a892f91cd`, deployment `dpl_AQRa1CBwc6tfAPXFp5nKBF5m6F92`.
+Australia runtime `cc1a45d471def6367d4758ad54f820a3a4046adf`, deployment `dpl_7neXSNAYigyDfQgQi4xnAPXuN5iG`.
 
-Next: directory-led B Corp tourism shortlist, suitable private-delta test-account
-coverage, remaining physical/audio checks and sourced content work. B Corp pins
-stay off until verified. Unified cutover and synthetic test fixtures remain separate.
-Do not reopen old preview/publishing approval questions for this completed batch.
-Keep the previously verified US$1 budget/automatic pausing and separate app boundaries.
+182 main / 316 Australia tests, strict TypeScript and complete builds pass. Live region/Australia playback and map full-size/restore were checked. Scoped production error/fatal scans returned no matching logs. No real account save, message, booking, payment, database/auth, dependency, billing or paid-provider change.
+
+Read docs/HANDOFF-CURRENT.md, docs/RELEASE-2026-11-11-MAPS.md and docs/RELEASE-2026-11-11-SHARED-PLAYER.md. docs/AGILE-PLAN.md is the comprehensive list. docs/VIDA-FUTURE-DIRECTION.md records the long-term umbrella idea without renaming AVES now.
+
+Keep one map viewer per page. Region listening belongs on the map as a counterpart to bird listening, with one shared player for calls, soundscapes, podcasts/videos. Keep verified recording locality and missing-recording states honest. Preserve paused curated handoff and the existing private planning flow.
+
+Next tasks are in the agile list. No further increment started after the owner asked to finish. Keep the previously verified US$1 cap/automatic pausing, separate app boundaries, deployment protection and all media/source rights. B Corp pins stay off until verified. Unified cutover and synthetic fixtures remain separate. Documentation-only checkpoints do not need production rebuilds.
