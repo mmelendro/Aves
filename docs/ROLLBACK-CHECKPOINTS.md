@@ -41,3 +41,8 @@ account settings or subsequently issued communications. No recovery is needed
 or being performed now. Add the next verified source/deployment before continuing.
 
 AVES-068 previous main: 6856389 / dpl_DQVWzUrsUbzd4Lqg57niLDMikYVw. Previous AU: e0c766a / dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq. Revert only the affected app, or main then AU if both need recovery. No database rollback.
+
+AU contour checkpoint 17: runtime 59a8f65 / dpl_FNrh2YBNHFjamZk3gPu1WcL5Cb9Z.
+Previous AU runtime 2ff09e9 / dpl_56y3bD1RTE2fngcHBr14obkGu2bx (checkpoint 12 Australia).
+Main current contour checkpoint 18 is 33189e9 / dpl_HdwbDsUDSkfQcK8c2mxgVRe9j6zK.
+Rollback only the affected application. No database migration/rollback applies.

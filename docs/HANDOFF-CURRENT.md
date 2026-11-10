@@ -6,10 +6,23 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-AVES-068 safe continuity increment is published, verified, synced and paused.
-The owner approved public same-app playback continuity plus a deliberate paused
-app handoff. A truly uninterrupted stream across separate document roots remains
-deferred. AVES-066 Colombia whole-region hover remains complete. No next task selected.
+All nine Australian regional contour headers and the Australian country header
+are live at 59a8f65207d17c6c1ec5af3e3a11868f44cd832f /
+dpl_FNrh2YBNHFjamZk3gPu1WcL5Cb9Z. Ten live public header checks passed.
+294 tests, TypeScript/builds, desktop and 340 CSS-pixel menu/reflow checks passed.
+See RELEASE-2026-11-10-AU-CONTOURS.md. Physical Safari/touch remains unverified.
+
+The owner next requested a code/UX audit and cleanup, then the selected satellite
+map task. Seventeen unreachable terrain definitions are removed in source only,
+newer than live runtime. Strict unused-local/parameter checks pass. Dependency
+audit reports zero AU findings. No account/admin/auth/backend behaviour changed.
+Main is now 33189e9 / dpl_HdwbDsUDSkfQcK8c2mxgVRe9j6zK, all eleven Colombia region
+headers and country, main map controls and one-person team carousel published.
+Follow the main branch HANDOFF-CURRENT.md and UX-first NEXT-WEEK-PROMPT.md for
+current execution. Do not deploy the separate unified draft or reopen completed
+safe playback continuity from old pending prose.
+
+The following older table is historical for AVES-068, not the current runtime.
 
 ## Published applications
 
