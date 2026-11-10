@@ -28,7 +28,22 @@ keyboard/focus, thumbnails and selection/header/shading flows were checked. Phys
 Safari/true touch, exact 320/390px and phone/background behaviour remain unverified.
 No private save was tested by this public release. Further releases need explicit approval.
 
-## Next useful slice
+## Latest owner priority: choose style and functionality
+
+Read the selectable task table in AGILE-PLAN.md first. The owner requested an
+updated list to choose additional tasks while started work remains unfinished.
+Prioritise visible style and useful interaction in small slices. Recommend Australia
+map controls, then remaining country/region map-style parity; a smaller alternative
+is the existing birds/AVES invitation animation. Other selectable items are photo
+zoom, opt-in continuous calls, sourced origin filters, surrounding sea context,
+saved places and the data-dependent B Corp pilot. These are choices, not an order
+to implement all of them. Wait for the owner's selection of elective work.
+Keep PR #11 private acceptance and the 15 unresolved image sources explicit. Do
+not report either as completed or assume a background process is running. Preserve
+published headers, flocks, selection, satellite shading and the one-person team
+carousel. Do not repeat delivered work or turn a polish slice into a redesign.
+
+## Started work and acceptance gates
 
 The private reference-image port is prepared, not live: draft PR #11 targets
 australia/preview from feature/private-checklist-thumbnails, source 6e802f0. Read its
