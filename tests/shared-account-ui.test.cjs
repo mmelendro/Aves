@@ -432,3 +432,25 @@ test("opening an owner request focuses its details even when the first request i
   assert.deepEqual(movements, Array.from({length:2},()=>[["focus",{preventScroll:true}],["scroll",{block:"start",behavior:"instant"}]]).flat())
   assert.deepEqual(calls, ["/api/admin/quotes"], "opening a request does not write data or send messages")
 })
+
+test("NZ image references leave saved bird IDs and editor reopen semantics unchanged", async () => {
+  const {selectableNzBirds}=load("content/new-zealand-checklist.ts")
+  const picked=selectableNzBirds.slice(0,2).map(b=>b.id)
+  const calls=[]
+  let saved
+  const h=componentHarness("components/account/trip-plan-editor.tsx","TripPlanEditor",{initial:{country:"new-zealand",regions:["south-island"]},onSaved(plan){saved=plan},onCancel(){}},{mocks:{"./account-api":{...api,accountRequest:async(path,options)=>{
+    const body=JSON.parse(options.body);calls.push({path,body});return {plan:{...body,status:"draft",updatedAt:"2026-11-10T00:00:00Z"}}
+  }}}})
+  let picker=find(h.render(),node=>typeof node.type==="function"&&node.type.name==="NewZealandBirdPicker")
+  picker.props.onChange(picked)
+  picker=find(h.render(),node=>typeof node.type==="function"&&node.type.name==="NewZealandBirdPicker")
+  assert.deepEqual(picker.props.selected,picked)
+  assert.equal(calls.length,0,"selection remains unsaved until explicit form submission")
+  await find(h.render(),node=>node.type==="form").props.onSubmit({preventDefault(){},currentTarget:{values:{title:"Synthetic image selection",regions:["south-island"],travelWhen:"Year to confirm",pace:"balanced",birding:"alternate",comfort:"comfortable",interests:["birds"]}}})
+  assert.equal(calls.length,1)
+  assert.deepEqual(calls[0].body.questionnaire.birdIds,picked)
+  assert.doesNotMatch(JSON.stringify(calls[0].body),/images\/|license|creator|sourceUrl|sha256/)
+  const reopened=componentHarness("components/account/trip-plan-editor.tsx","TripPlanEditor",{plan:saved,onSaved(){},onCancel(){}})
+  const restored=find(reopened.render(),node=>typeof node.type==="function"&&node.type.name==="NewZealandBirdPicker")
+  assert.deepEqual(restored.props.selected,picked)
+})
