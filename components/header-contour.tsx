@@ -26,7 +26,22 @@ export function HeaderContour({ country }: { country?: BrandCountry }) {
       const endX = numbers[numbers.length - 2], endY = numbers[numbers.length - 1]
       const firstY = numbers[1], remaining = h.width - endX
       setWidth(h.width)
-      setEdge(`M0 ${firstY} ${landscape.replace(/^M/, "L")} C${endX + remaining * .18} ${endY} ${endX + remaining * .2} ${endY + 3} ${endX + remaining * .4} ${endY + 1} S${endX + remaining * .72} ${endY - 2} ${h.width} ${endY}`)
+      // Low swells lead into two curling crests beneath the right-hand menu.
+      // Each crest doubles back within the SAME outline; no parallel water strokes.
+      const amplitude = Math.min(1, Math.max(.45, remaining / 650))
+      const point = (fraction: number, depth: number) => `${endX + remaining * fraction} ${endY + depth * amplitude}`
+      const ocean = [
+        `C${point(.08, 3)} ${point(.17, -2)} ${point(.28, 3)}`,
+        `S${point(.45, 11)} ${point(.58, 8)}`,
+        `C${point(.63, 7)} ${point(.66, -1)} ${point(.69, 0)}`,
+        `C${point(.725, 1)} ${point(.715, 11)} ${point(.683, 9)}`,
+        `C${point(.701, 5)} ${point(.729, 9)} ${point(.75, 15)}`,
+        `C${point(.78, 19)} ${point(.805, 2)} ${point(.836, 3)}`,
+        `C${point(.862, 4)} ${point(.856, 12)} ${point(.832, 10)}`,
+        `C${point(.846, 7)} ${point(.871, 12)} ${point(.892, 15)}`,
+        `C${point(.93, 19)} ${point(.962, 6)} ${point(1, 8)}`,
+      ].join(" ")
+      setEdge(`M0 ${firstY} ${landscape.replace(/^M/, "L")} ${ocean}`)
     }
     measure()
     const observer = new ResizeObserver(measure)
