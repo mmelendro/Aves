@@ -7,6 +7,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import { publicPages } from "@/lib/public-pages"
+import { HeaderLandscapeProvider } from "@/components/header-landscape-context"
 import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
@@ -91,7 +92,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CookieConsentProvider>
-          <AvesMediaProvider navigationPaths={publicPages.map(page => page.href)}>{children}</AvesMediaProvider>
+          <HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicPages.map(page => page.href)}>{children}</AvesMediaProvider></HeaderLandscapeProvider>
           <CookiePreferenceCenter />
           <CookieBanner />
         </CookieConsentProvider>

@@ -6,6 +6,7 @@
 "use client"
 
 import { ColombiaHomeLanguageToggle, useColombiaHomeCopy } from "@/components/colombia-home-language"
+import { useHeaderLandscape } from "@/components/header-landscape-context"
 import { HeaderContour } from "@/components/header-contour"
 import { releasedColombiaHeaders } from "@/lib/header-landscape.mjs"
 import { BrandMark } from "@/components/brand-mark"
@@ -34,14 +35,15 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const pathname = usePathname()
   // Prefer the browser route; currentPage is only a fallback for callers supplying it.
   const activePath = pathname || currentPage || "/"
-  const landscape = releasedColombiaHeaders[activePath]
+  const { selection } = useHeaderLandscape()
+  const landscape = selection?.country === "colombia" ? releasedColombiaHeaders[selection.regionId ? `/regions/${selection.regionId}` : "/colombia"] : releasedColombiaHeaders[activePath] || (activePath === "/aves-explorer" || activePath === "/regions" ? releasedColombiaHeaders["/colombia"] : undefined)
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
 
   return localizeHome((
     <>
       <header className={cn("fixed inset-x-0 top-0 z-50", landscape ? "isolate h-[108px]" : "border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md")}>
-        {landscape && <HeaderContour key={activePath} profile={landscape} />}
+        {landscape && <HeaderContour key={activePath} profile={landscape} regionId={selection?.country === "colombia" ? selection.regionId : activePath.startsWith("/regions/") ? activePath.split("/").pop() : undefined} />}
         <a
           href="#main-content"
           className="absolute left-4 top-3 z-10 flex min-h-11 -translate-y-24 items-center rounded-xl bg-emerald-800 px-4 font-semibold text-white focus:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
@@ -51,7 +53,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         <div className="container relative mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <BrandMark country="colombia" priority unifiedHeaderContour={!!landscape} />
 
-          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
+          <nav data-contour-navigation="true" aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
               // These URLs cross into the other AVES app: a normal anchor makes a full request.
               const NavigationLink = (href.startsWith("/australia/") || /^\/account(?:[/?#]|$)/.test(href)) ? "a" : Link

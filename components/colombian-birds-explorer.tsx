@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { useHeaderLandscape } from "./header-landscape-context"
 import { MapViewer } from "./map-viewer"
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -108,6 +109,7 @@ const bioregionsData = regionMapVisuals.map((visual) => {
 })
 
 export function ColombianBirdsExplorer() {
+  const { publish } = useHeaderLandscape()
   // Selection persists after a click; hover only controls temporary emphasis/tooltips.
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
@@ -181,6 +183,8 @@ export function ColombianBirdsExplorer() {
 
   // Clicking the selected marker again clears the panel rather than navigating away.
   const handleRegionClick = (regionId: string) => {
+    const next = selectedRegion === regionId ? undefined : regions.find(region=>region.mapId === regionId)?.id
+    publish({country:"colombia",regionId:next})
     if (selectedRegion === regionId) {
       setSelectedRegion(null)
     } else {
@@ -189,6 +193,7 @@ export function ColombianBirdsExplorer() {
   }
 
   const resetSelection = () => {
+    publish({country:"colombia"})
     setSelectedRegion(null)
   }
 
@@ -272,7 +277,7 @@ export function ColombianBirdsExplorer() {
                         <div className="space-y-4 text-white/80 text-sm bg-black/20 p-6 rounded-lg border border-white/20">
                           <p>
                             Select a region in the interactive map, open its guide and explore the featured birds.
-                            Send a regional enquiry when you are ready to discuss a possible itinerary.
+                            Send a regional enquiry when you are ready to discuss your itinerary.
                           </p>
                           <ul className="space-y-3 ml-4">
                             <li className="flex items-start gap-2">

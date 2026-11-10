@@ -13,11 +13,18 @@ import audioCredits from "@/content/audio-credits.json"
 import extraColombiaAudioCredits from "@/content/colombia-extra-audio-credits.json"
 import newZealandExpansionCredits from "@/content/new-zealand-expansion-credits.json"
 import newZealandSupplementCredits from "@/content/new-zealand-supplement-credits.json"
+import checklistImages from "@/content/new-zealand-checklist-thumbnails.json"
 import { canonicalUrl, sitePath } from "@/lib/site-path"
 export const metadata: Metadata = { title: "Photography & Recording Credits", alternates: { canonical: canonicalUrl("/credits") } }
 export default function CreditsPage() {
   return (
     <PageShell path="/credits" title="The People Behind the Photographs & Sounds" description="Thank you to the photographers and field recordists who bring AVES destinations to life. Main homepage, Colombian and New Zealand recording credits are below. The New Zealand page also lists its photographs; Australia maintains its own media credits.">
+      <section className="bg-white py-12" aria-labelledby="checklist-image-credits">
+        <div className="mx-auto max-w-6xl px-4"><h2 id="checklist-image-credits" className="text-2xl font-medium text-emerald-950">New Zealand checklist reference images</h2>
+          <p className="mt-3 text-sm text-gray-600">Small reference images help you recognise birds while planning. Original source labels, licences and creators are retained. Illustrations are labelled in the checklist. A reference image does not establish local presence or trip availability.</p>
+          <details className="mt-5 rounded-xl border border-emerald-100 p-4"><summary className="min-h-11 cursor-pointer font-medium text-emerald-950">Sources and licences for {checklistImages.images.length} checklist images</summary><ul className="mt-4 space-y-4 text-sm">{checklistImages.images.map(image => <li key={image.id} id={`checklist-${image.id}`} className="break-words border-t border-emerald-100 pt-3"><p className="font-medium">{image.commonName} · <i>{image.scientificName}</i></p><p className="mt-1">{image.creator} · <a href={image.licenseUrl} className="underline">{image.license}</a> · <a href={image.sourceUrl} className="underline">Original image and source</a></p><p className="mt-1 text-gray-600">{image.modifications}</p></li>)}</ul></details>
+        </div>
+      </section>
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8">
           {credits.images.map(photo => (

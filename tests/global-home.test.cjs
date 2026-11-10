@@ -11,6 +11,8 @@ const root = resolve(__dirname, "..")
 function createLoader(overrides = {}) {
   const cache = new Map()
   const adapters = {
+    "./header-landscape-context": {useHeaderLandscape:()=>({selection:null,publish(){}})},
+    "@/components/header-landscape-context": {useHeaderLandscape:()=>({selection:null,publish(){}})},
     "next/navigation": { useRouter: () => ({ push() {} }) },
     "next/image": ({ src, alt }) => React.createElement("img", { src, alt }),
     "next/link": ({ children, ...props }) => React.createElement("a", { ...props, "data-next-link": "true" }, children),
@@ -497,22 +499,24 @@ test("satellite image provenance uses exactly the habitat map's Mercator extent"
 
 test("map backgrounds do not silently change the bird habitat filter", () => {
   const defaults = createLoader()("components/map-layer-context.tsx").initialMapLayers
-  const state = {layers:{...defaults,background:"satellite",ecosystems:false},update(){}}
+  const state = {layers:{...defaults,background:"satellite",overlayOpacity:0},update(){}}
   const renderer = createLoader({"./map-layer-context":{useMapLayers:()=>state}})
   const Map = renderer("components/south-island-ecosystem-map.tsx").default
   const selected = []
-  const html = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
+  const html = renderToStaticMarkup(React.createElement(Map,{selected:"all",onSelect:id=>selected.push(id)}))
   assert.match(html,/data-map-layer="satellite"/)
   assert.match(html,/2004/)
   assert.doesNotMatch(html,/aria-label="Show Forest &amp; scrub birds on map"/,"hidden land cover must not remain an invisible click target")
   assert.deepEqual(selected,[],"switching background is not a bird-filter action")
-  state.layers.ecosystems = true
+  state.layers.overlayOpacity = .5
   state.layers.nationalParks = true
   state.layers.conservation = true
   state.layers.businesses = true
   const combined = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
-  assert.match(combined,/data-map-layer="satellite"[^>]*opacity="0.55"|opacity="0.55"[^>]*data-map-layer="satellite"/)
+  assert.match(combined,/data-map-layer="satellite"[^>]*opacity="1"|opacity="1"[^>]*data-map-layer="satellite"/)
+  assert.match(combined,/fill-opacity="0.5"/)
   assert.match(combined,/data-map-layer="ecosystems"/)
+  assert.doesNotMatch(combined,/aria-label="Show Mountains &amp; alpine birds on map"/,"unselected invisible habitat must not remain clickable")
   assert.match(combined,/aria-label="Show Forest &amp; scrub birds on map"/)
   assert.match(combined,/Preview public place: Abel Tasman Eco Tours/)
   assert.deepEqual(selected,[],"combined display layers preserve the chosen bird filter")

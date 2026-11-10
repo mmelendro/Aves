@@ -25,12 +25,12 @@ export default function SouthIslandMapLayers() {
       </fieldset>
       <button ref={button} type="button" className="min-h-11 rounded-full border border-emerald-200 bg-white px-3 text-xs font-semibold text-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700" aria-expanded={open} aria-controls={`${id}-layers`} onClick={() => setOpen(value => !value)}>Map layers{count ? ` · ${count}` : ""}</button>
     </div>
+    {layers.background === "satellite" && <div className="mt-2 rounded-xl border border-emerald-100 bg-white/90 px-3 py-2">
+      <label htmlFor={`${id}-opacity`} className="flex flex-wrap justify-between gap-1 text-xs font-medium text-emerald-950"><span>Selected habitat shading</span><span>{Math.round(layers.overlayOpacity * 100)}%</span></label>
+      <input id={`${id}-opacity`} type="range" min="0" max="1" step=".05" value={layers.overlayOpacity} onChange={event => update({overlayOpacity:Number(event.target.value)})} className="min-h-11 w-full accent-emerald-700" aria-describedby={`${id}-opacity-help`} />
+      <p id={`${id}-opacity-help`} className="text-[11px] leading-5 text-gray-600">Choose a habitat to shade its mapped areas. At 0%, only its outline remains. All habitats shows the imagery without shading. Coast uses the shoreline only.</p>
+    </div>}
     {open && <section id={`${id}-layers`} aria-label="South Island layer choices" className="absolute inset-x-0 top-full z-30 mt-1 max-h-[min(18rem,60vh)] overflow-auto overscroll-contain rounded-xl border border-emerald-200 bg-white p-3 text-xs leading-5 shadow-lg">
-      {layers.background === "satellite" && <fieldset className="mb-2 border-b border-emerald-100 pb-2"><legend className="font-semibold text-emerald-950">Satellite and ecosystems together</legend>
-        <label className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers.ecosystems} onChange={event => update({ecosystems:event.target.checked})}/>Show ecosystem colours over satellite</label>
-        <label htmlFor={`${id}-opacity`} className="block">Satellite visibility · {Math.round(layers.satelliteOpacity*100)}%</label><input id={`${id}-opacity`} type="range" min=".2" max=".8" step=".05" value={layers.satelliteOpacity} onChange={event => update({satelliteOpacity:Number(event.target.value)})} className="min-h-11 w-full accent-emerald-700"/>
-        <p className="text-[11px] text-gray-600">Make the imagery fainter or stronger beneath the ecosystem colours. Park boundaries and place markers stay above both.</p>
-      </fieldset>}
       <fieldset><legend className="font-semibold text-emerald-950">Conservation layers</legend>
         <label className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers.nationalParks} onChange={event => { update({nationalParks:event.target.checked}); close() }}/><span className="h-2 w-3 border-2 border-amber-700" aria-hidden="true"/>National parks · 9</label>
         <label className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers.conservation} onChange={event => { update({conservation:event.target.checked}); close() }}/><span className="h-2 w-3 border border-lime-700" style={{backgroundImage:"repeating-linear-gradient(135deg,transparent,transparent 2px,#4d7c0f 2px,#4d7c0f 3px)"}} aria-hidden="true"/>Public conservation land · DOC</label>

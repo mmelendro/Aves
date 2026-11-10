@@ -10,6 +10,7 @@ import { mapGestureView } from "@/lib/map-gestures.mjs"
 import dynamic from "next/dynamic"
 import { useMapLayers } from "./map-layer-context"
 import SouthIslandMapLayers from "./south-island-map-layers"
+import { satelliteHabitatStyle } from "@/lib/satellite-overlay.mjs"
 import satelliteSource from "@/content/south-island-satellite-source.json"
 import catalogue from "@/content/south-island-layer-catalogue.json"
 import PublicPlaceOverlay, { PublicPlaceDetails } from "./south-island-public-place-overlay"
@@ -34,7 +35,6 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
   const satellite = layers.background === "satellite" && !satelliteFailed
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
-  const showEcosystems = !satellite || layers.ecosystems
   const id = useId()
   const svgRef = useRef<SVGSVGElement>(null)
   const pointers = useRef(new Map<number, { x: number; y: number }>())
@@ -124,16 +124,17 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
         onClickCapture={event => { if (panMode) { event.preventDefault(); event.stopPropagation() } }}>
         <title id={`${id}-map-title`}>{satellite ? "South Island satellite overview and conservation layers" : "South Island land cover and coastline"}</title>
         <defs><clipPath id={`${id}-island-clip`}><path d={map.outline} fillRule="evenodd" clipRule="evenodd"/></clipPath></defs>
-        <desc id={`${id}-map-description`}>{satellite ? "Transparent historical NASA satellite composite from 2004 in the same Mercator frame. Ecosystem colours can remain visible above it; parks, conservation and public places are independent overlays. " : ""}North-up Mercator overview. Select a visible coloured ecosystem area or a labelled habitat button to filter the birds. Land cover is generalised from 2023/24 LCDB data, not current sightings or a complete ecosystem survey. Coastline is context only; offshore habitat is not mapped. Place markers show public references, not wildlife locations or permission to enter.</desc>
+        <desc id={`${id}-map-description`}>{satellite ? "Historical NASA satellite composite from 2004 in the same Mercator frame. Only the selected habitat areas are shaded; opacity controls the shading, not the imagery. Parks, conservation and public places are independent overlays. " : ""}North-up Mercator overview. Select a visible coloured ecosystem area or a labelled habitat button to filter the birds. Land cover is generalised from 2023/24 LCDB data, not current sightings or a complete ecosystem survey. Coastline is context only; offshore habitat is not mapped. Place markers show public references, not wildlife locations or permission to enter.</desc>
         <g transform={`translate(${-camera.x * camera.zoom} ${-camera.y * camera.zoom}) scale(${camera.zoom})`} data-map-camera={`${camera.x},${camera.y},${camera.zoom}`}>
-        {satellite && <image href="/images/maps/south-island-satellite-2004.jpg" x="0" y="0" width="480" height="640" preserveAspectRatio="xMidYMid meet" opacity={layers.satelliteOpacity} clipPath={`url(#${id}-island-clip)`} onError={() => setSatelliteFailed(true)} data-map-layer="satellite"/>}
+        {satellite && <image href="/images/maps/south-island-satellite-2004.jpg" x="0" y="0" width="480" height="640" preserveAspectRatio="xMidYMid meet" opacity="1" clipPath={`url(#${id}-island-clip)`} onError={() => setSatelliteFailed(true)} data-map-layer="satellite"/>}
         <path d={map.outline} fill={satellite ? "none" : "#e7ede8"} stroke="#829c8c" strokeWidth="1" vectorEffect="non-scaling-stroke" fillRule="evenodd" />
-        {showEcosystems && map.layers.map(layer => {
+        {map.layers.filter(layer => !satellite || layer.id === selected).map(layer => {
           const habitat = layer.id as SouthIslandEcosystem
           const name = southIslandEcosystems.find(item => item.id === habitat)!.name
+          const paint = satelliteHabitatStyle({ satellite, selected, habitat, opacity: layers.overlayOpacity })
           return <g key={habitat} role="button" tabIndex={0} aria-label={`Show ${name} birds on map`} aria-pressed={selected === habitat} className={styles.area} onClick={() => onSelect(habitat)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelect(habitat) } }}>
             <title>{name}</title>
-            <path d={layer.path} fill={colours[habitat]} opacity={(selected === "all" || selected === habitat ? 1 : 0.18) * (satellite ? .55 : 1)} fillRule="evenodd" data-map-layer="ecosystems" />
+            <path d={layer.path} fill={colours[habitat]} fillOpacity={paint.fillOpacity} stroke={satellite ? colours[habitat] : "none"} strokeOpacity={paint.strokeOpacity} strokeWidth={paint.strokeWidth} vectorEffect="non-scaling-stroke" fillRule="evenodd" data-map-layer="ecosystems" />
           </g>
         })}
         {(layers.nationalParks || layers.conservation) && <ConservationOverlay />}
@@ -142,7 +143,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
             full-size keyboard/touch buttons for every small inland patch too. */}
         <g role="button" tabIndex={0} aria-label="Show Coasts & offshore waters birds on map" aria-pressed={selected === "coast"} className={styles.area} onClick={() => onSelect("coast")} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelect("coast") } }}>
           <title>Coasts & offshore waters — coastline context only</title>
-          <path d={map.outline} fill="none" stroke={colours.coast} strokeWidth={selected === "coast" ? 4 : 1.5} strokeDasharray="4 3" opacity={selected === "all" || selected === "coast" ? 1 : 0.25} vectorEffect="non-scaling-stroke" />
+          <path d={map.outline} fill="none" stroke={colours.coast} strokeWidth={selected === "coast" ? 4 : 1.5} strokeDasharray="4 3" opacity={satellite ? (selected === "coast" ? 1 : 0) : (selected === "all" || selected === "coast" ? 1 : 0.25)} vectorEffect="non-scaling-stroke" />
           <path d={map.outline} fill="none" stroke="transparent" strokeWidth="10" vectorEffect="non-scaling-stroke" />
         </g>
         {places?.map(item => {
@@ -159,7 +160,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
         </g>
         <g aria-hidden="true" fill="#065f46"><text x="38" y="55" textAnchor="middle" fontSize="15" fontWeight="600">N</text><path d="M38 64L32 82L38 78L44 82Z" /></g>
       </svg>
-      <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · NASA Earth Observatory · 2004 composite · Historical overview" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && showEcosystems && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
+      <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · NASA Earth Observatory · 2004 composite · Historical overview" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && selected !== "all" && selected !== "coast" && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
     </figure>
     <PublicPlaceDetails />
     <div className={styles.scale} aria-label="Map distance scale">

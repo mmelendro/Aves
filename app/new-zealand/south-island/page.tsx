@@ -99,7 +99,7 @@ export default function SouthIslandPage() {
             <div className="rounded-2xl border border-emerald-200 bg-white p-6 sm:p-7">
               <h3 className="text-xl font-medium text-emerald-950">Start with three choices</h3>
               <ul className="mt-4 list-disc space-y-3 pl-5 leading-7 text-gray-600"><li>The birds or habitats you would most like to explore.</li><li>How often you want a birding morning, and how much driving feels right.</li><li>The comfort, food, culture and other experiences that make a trip yours.</li></ul>
-              <Link href={southIslandBriefHref} className={`${buttonStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Start a private South Island brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+              <Link href={southIslandBriefHref} className={`${buttonStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Start your private South Island brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
               <p className="mt-3 text-xs leading-5 text-gray-500">Save privately in My Trips. Sharing with AVES is a separate choice; no booking is confirmed.</p>
             </div>
           </div>
