@@ -1,5 +1,45 @@
 # AVES continue here
 
+Latest update, 10 November 2026. Read docs/AVES-069-DIRECTORY-SOURCING.md first
+for the owner's B Corp sourcing correction. Use the global directory's industry,
+keyword and country discovery for travel/accommodation/restaurants; the earlier
+single retail record is only a provenance test. The former data.world public feed
+closed on13 July2026; no replacement supported bulk feed/reuse permission is yet
+verified. Native official profile examples are recorded; none are ready map pins.
+
+Latest main source:6abc13cd on feature/bcorp-source-pilot, draft PR #25, stacked
+on copy-place-notes PR #24 (88c2191).180 tests, TypeScript and full production build
+pass. The B Corp guard/data has no visible layer: one real candidate remains
+unmapped without verified coordinates; the optional layer stays off. No bulk
+import, logo use, new provider or certification/impact claim.
+
+Copy notes source88c2191/dpl_9auytXdr5GCCg5knCLASMtjW7ySq is READY and passed
+hosted public UI review: field is read-only, selected public labels are correct,
+Copy resolves with a success notice, added ideas update the text and clear old
+notices, and removing both test choices removes the field.177 checks and build
+pass. Clipboard-denied browser behavior remains unverified. Synthetic tab choices
+were cleared. No hosted private save or account writes were performed.
+
+Private account gate: automatic review rejected opening the private account flow
+because it could expose signed-in content. Public main-project preview approval
+does not cover this new scope. Do not retry via another path/header/cookie/tool.
+The actual private-place-notes branch also has no preview under the Australia
+project; current account middleware routes to the maintained shared app. Safe exact
+private staging plus scoped private-account/test-record authorization are needed
+before hosted save/reopen. The notes-copy fallback helps manual handover but does
+not certify automatic cross-host basket transfer. Private source425fa33e retains
+307 tests/full build and remains independently stacked in PR #23.
+
+Owner asked about removing automatic review. Official docs say website Always
+Allow, where available, removes interactive website-access review; other safety/
+confirmation requirements still apply. No permissions or review settings were
+changed. Do not claim that iPhone exposes that option or that all safeguards can
+be disabled. Continue public/source work within authorised scope; no production
+publishing is approved. GitHub continuation docs can be newer than runtime code.
+
+Earlier checkpoint below retains source-stack history; the current notes above
+supersede its next-task/blocked-access status where they differ.
+
 Latest checkpoint, 10 November 2026. Fetch current GitHub refs before editing.
 Read docs/ACCEPTANCE-2026-11-10-PHOTO-PLACE-IDEAS.md and docs/AGILE-PLAN.md.
 All work remains preview/draft source. Production is unchanged and publishing is
