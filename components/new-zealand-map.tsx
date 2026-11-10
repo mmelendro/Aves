@@ -19,11 +19,10 @@ import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
 import { mapZoomTransform } from "@/lib/map-zoom"
 import type { NewZealandIslandId } from "@/content/new-zealand-bird-islands"
 
-const islandStyles = ["fill-[#d6e5dc]", "fill-[#b8d2c2]", "fill-[#8fb49c]"]
 const labels = [
-  { x: 432, y: 107, width: 142, leader: "M389,184L413,122" },
-  { x: 355, y: 446, width: 142, leader: "M235,419L278,446" },
-  { x: 318, y: 578, width: 230, leader: "M135,572L197,578" },
+  { x: 432, y: 107, width: 142 },
+  { x: 355, y: 446, width: 142 },
+  { x: 318, y: 578, width: 230 },
 ]
 
 type NewZealandMapProps = {
@@ -67,10 +66,10 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
               const highlighted = highlightedIslands.includes(island.id)
               return (
                 <Link key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${island.label}`} aria-hidden={focusIsland && focusIsland.id !== island.id ? true : undefined} tabIndex={focusIsland && focusIsland.id !== island.id ? -1 : undefined} className="group outline-none" style={focusIsland && focusIsland.id !== island.id ? { pointerEvents: "none" } : undefined}>
-                  <g className={`${highlighted ? "fill-emerald-800" : compact ? "fill-[#c5dbd0]" : islandStyles[index]} stroke-[#6e9582] transition-colors group-hover:fill-[#9cc4af] group-focus:fill-[#9cc4af] group-focus:stroke-emerald-950`}>
+                  <g className={`${highlighted ? "fill-emerald-800" : "fill-[#c5dbd0]"} stroke-[#6e9582] transition-colors group-hover:fill-[#9cc4af] group-focus:fill-[#9cc4af] group-focus:stroke-emerald-950`}>
                     {island.paths.map((path, pathIndex) => <path key={pathIndex} d={path} strokeWidth={highlighted ? "2" : "1.2"} vectorEffect="non-scaling-stroke" fillRule="evenodd" className="group-focus:stroke-[3]" />)}
                   </g>
-                  {!focusIsland && <><path d={label.leader} fill="none" stroke="currentColor" strokeWidth="1.5" className="text-emerald-700" aria-hidden="true" />
+                  {!focusIsland && <>
                   <rect x={label.x - label.width / 2} y={label.y - (compact ? 28 : 18)} width={label.width} height={compact ? "56" : "36"} rx={compact ? "24" : "18"} className={`${highlighted ? "fill-emerald-800 stroke-emerald-800" : "fill-white stroke-emerald-300"} group-hover:stroke-emerald-800 group-focus:stroke-emerald-950 group-focus:stroke-[3]`} />
                   <text x={label.x} y={label.y + (compact ? 7 : 5)} textAnchor="middle" fontSize={compact ? "21" : "15"} fontWeight="600" className={highlighted ? "fill-white" : "fill-emerald-900"} aria-hidden="true">{compact && island.id === "rakiura" ? "Rakiura" : island.label}</text></>}
                 </Link>
