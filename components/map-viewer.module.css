@@ -11,6 +11,7 @@
 @media(prefers-reduced-motion:reduce) { .content { transition:none; } }
 .viewer[data-expanded] { position:fixed; inset:1rem; width:calc(100% - 2rem); height:calc(100dvh - 2rem); max-height:none; margin:0; padding:.5rem; background:#f7fdf9; border:1px solid #c5dfd1; border-radius:1rem; overflow:auto; overscroll-behavior:contain; z-index:100; }
 .viewer[data-expanded]::backdrop { background:#052e16bd; }
+.viewer[data-expanded] .toolbar { position:sticky; top:0; z-index:3; background:#f7fdf9; }
 .viewer[data-expanded] .surface { min-height:14rem; }
 .viewer[data-expanded] .content > figure { height:100%; }
 .viewer[data-expanded] .content > section { height:100%; }
@@ -18,3 +19,5 @@
 
 .viewer[data-expanded] .content svg[role=group] { width:100%; height:100%; max-width:none; max-height:calc(100dvh - 10rem); }
 .viewer[data-expanded] .content [data-zoom-artwork] { width:min(70vw,calc(70dvh * 198 / 250)) !important; margin:auto; }
+
+.viewer[data-expanded] .content > section figure { flex:0 0 auto; height:60dvh; min-height:24rem; }

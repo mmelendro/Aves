@@ -1,0 +1,44 @@
+{
+  "reviewedRuntime": "6a296c2e18c4a3c06039c598820b2efd93aa240e",
+  "preview": "dpl_j9y7cMtnqFs4vxrVQCsQJWMjRA2S",
+  "studies": 30,
+  "galleryRobots": "noindex, nofollow",
+  "desktopWidth": 1363,
+  "compactWidth": 340,
+  "horizontalOverflow": false,
+  "worldMap": {
+    "zoom": true,
+    "realMouseDrag": true,
+    "keyboardPan": true,
+    "reset": true,
+    "escapeFocusRestore": true,
+    "compactControlsCssPx": 44
+  },
+  "southIsland": {
+    "zoomFrom": 2,
+    "zoomTo": 3,
+    "cameraAndScaleRetained": true,
+    "moveTouchAction": "none"
+  },
+  "colombia": {
+    "expandedNativeLinks": 11
+  },
+  "team": {
+    "members": 9,
+    "desktopNext": "Showing from 2 of 9",
+    "profileAccordionOpened": true,
+    "compactLayoutFits": true
+  },
+  "followup": [
+    "in-modal source credit",
+    "circle portraits and honest missing-photo fallback",
+    "sticky close toolbar",
+    "larger South Island map",
+    "native dialog style before showing"
+  ],
+  "unverified": [
+    "physical iPhone/Safari touch pinch and swipe",
+    "exact 320/390 CSS-pixel browser views",
+    "Australia separate-app map controls unchanged"
+  ]
+}

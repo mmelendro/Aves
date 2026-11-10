@@ -34,7 +34,7 @@ export default function WorldDestinationMap() {
       </div>
       <div className="flex min-h-0 flex-1 items-center">
       {/* A group, rather than role=img, keeps the three SVG buttons accessible. */}
-      <MapViewer label="World destination map"><svg viewBox={world.viewBox} role="group" aria-labelledby="world-map-title world-map-description" className="block h-auto w-full" preserveAspectRatio="xMidYMid meet">
+      <MapViewer label="World destination map" credits={<span>Equal Earth · <a href="https://www.naturalearthdata.com/about/terms-of-use/" className="underline">Natural Earth · public domain</a></span>}><svg viewBox={world.viewBox} role="group" aria-labelledby="world-map-title world-map-description" className="block h-auto w-full" preserveAspectRatio="xMidYMid meet">
         <title id="world-map-title">AVES destinations on an Equal Earth world map</title>
         <desc id="world-map-description">Select Colombia, Australia or New Zealand to zoom into its regional map and change the bird carousel. Back to world returns here. Use Explore to open the selected country's page. Other countries provide geographic context. Large text selection buttons are above; direct destination links are in the footer.</desc>
         <WorldMapScene targets={targets}>

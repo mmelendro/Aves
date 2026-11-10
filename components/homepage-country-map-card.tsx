@@ -49,7 +49,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
     <header className={styles.header}><h3>{name}</h3><p>{geography[country]} · {regions.length} destinations</p></header>
     <div className={styles.canvas}>
       <p className={styles.callout}><Feather size={16} aria-hidden="true"/>{active.name}</p>
-      <MapViewer label={`${name} regional map`}><svg className="block aspect-[360/275] w-full" viewBox="0 45 360 275" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
+      <MapViewer label={`${name} regional map`} credits={country === "colombia" ? "AVES planning-region artwork · Representative locations, not official administrative or precise ecological boundaries." : <a href={country === "australia" ? australiaMapProvenance.sourceUrl : nz.source.url} className="underline">Natural Earth · public domain</a>}><svg className="block aspect-[360/275] w-full" viewBox="0 45 360 275" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
         <defs><filter id={`land-${id}`} colorInterpolationFilters="sRGB"><feFlood floodColor="#c5dbd0"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs>
         <svg x="20" y="60" width="320" height="244" viewBox={viewBox} preserveAspectRatio="xMidYMid meet">
           {country === "colombia" ? <g>

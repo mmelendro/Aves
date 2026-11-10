@@ -9,7 +9,7 @@ import styles from "./map-viewer.module.css"
  * Inline touch gestures require explicit Move; page/browser zoom remains native
  * elsewhere. Expanded maps own their gesture surface, not the whole document.
  */
-export function MapViewer({ children, label, gestures = true }: { children: ReactNode; label: string; gestures?: boolean }) {
+export function MapViewer({ children, label, gestures = true, credits }: { children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode }) {
   const dialog = useRef<HTMLDialogElement>(null), surface = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null)
   const [expanded, setExpanded] = useState(false), [move, setMove] = useState(false), [view, setView] = useState<MapView>(fitMapView), [gesturing, setGesturing] = useState(false)
   const viewRef = useRef(view), points = useRef(new Map<number,{x:number;y:number}>())
@@ -23,6 +23,7 @@ export function MapViewer({ children, label, gestures = true }: { children: Reac
   function resize(open: boolean) {
     const element = dialog.current
     if (!element) return
+    element.toggleAttribute("data-expanded", open)
     element.close()
     if (open) element.showModal(); else element.show()
     points.current.clear(); start.current = null
@@ -56,7 +57,7 @@ export function MapViewer({ children, label, gestures = true }: { children: Reac
     {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Home to reset" : "Use the controls to zoom, or turn on Move for dragging and pinching. Page scrolling stays available."}</p>}
     <div ref={surface} data-gesturing={gesturing || undefined} className={styles.surface} tabIndex={gestures ? 0 : undefined} role={gestures ? "group" : undefined} aria-label={gestures ? `${label} gesture surface` : undefined} style={{touchAction: active ? "none" : "pan-y pinch-zoom",cursor:active ? "grab" : undefined}}
       onKeyDown={e=>{if(!gestures || e.target!==e.currentTarget)return;const step=35; const keys:Record<string,[number,number]>={ArrowLeft:[step,0],ArrowRight:[-step,0],ArrowUp:[0,step],ArrowDown:[0,-step]};if(keys[e.key]){e.preventDefault();const [x,y]=keys[e.key];commit(constrainMapView({...viewRef.current,x:viewRef.current.x+x,y:viewRef.current.y+y},box()))}else if(['+','=','-','Home'].includes(e.key)){e.preventDefault();if(e.key==='Home')reset();else zoom(e.key==='-'?1/1.3:1.3)}}}
-      onPointerDown={e=>{if(!active || (e.pointerType==='mouse' && e.button!==0))return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});if(points.current.size>2){points.current.delete(e.pointerId);return}setGesturing(true);dragged.current=false;suppress.current=false;start.current={view:viewRef.current,points:[...points.current.values()]}}}
+      onPointerDown={e=>{if(!active || (e.pointerType==='mouse' && e.button!==0))return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});if(points.current.size>2){points.current.delete(e.pointerId);return}setGesturing(true);dragged.current=false;suppress.current=points.current.size>1;start.current={view:viewRef.current,points:[...points.current.values()]}}}
       onPointerMove={e=>{if(!active || !points.current.has(e.pointerId) || !start.current)return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});const current=[...points.current.values()];const moved=current.some((p,i)=>Math.hypot(p.x-start.current!.points[i].x,p.y-start.current!.points[i].y)>5);if(!dragged.current && !moved)return;dragged.current=true;suppress.current=true;e.preventDefault();if(!e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.setPointerCapture(e.pointerId);commit(mapGestureView(start.current.view,start.current.points,current,box()))}}
       onPointerUp={e=>{points.current.delete(e.pointerId);if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}
       onPointerLeave={e=>{if(!e.currentTarget.hasPointerCapture(e.pointerId)){points.current.delete(e.pointerId);start.current=null}}}
@@ -65,5 +66,6 @@ export function MapViewer({ children, label, gestures = true }: { children: Reac
       onClickCapture={e=>{if(suppress.current){e.preventDefault();e.stopPropagation();suppress.current=false}}}>
       <div className={styles.content} style={gestures ? {transform:`translate(${view.x}px,${view.y}px) scale(${view.zoom})`} : undefined}>{children}</div>
     </div>
+    {expanded && credits && <div className="shrink-0 px-2 py-2 text-xs leading-5 text-emerald-900">{credits}</div>}
   </dialog>
 }

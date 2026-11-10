@@ -51,7 +51,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   // Compact and full maps coexist on this page, so their accessible title IDs must differ.
   const idPrefix = compact ? "nz-hero-map" : "nz-map"
   const mapFigure = (
-    <MapViewer label="New Zealand island map"><figure className={compact ? styles.nzFigure : "min-w-0"}>
+    <MapViewer label="New Zealand island map" credits={<a href={map.source.url} className="underline">Natural Earth · public domain · main islands shown</a>}><figure className={compact ? styles.nzFigure : "min-w-0"}>
           <svg viewBox={map.viewBox} className={compact ? styles.nzMap : "mx-auto block w-full max-w-xl"} role="group" aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}>
             <title id={`${idPrefix}-title`}>Explore New Zealand’s main islands</title>
             <desc id={`${idPrefix}-description`}>North-up map. Select North Island, South Island or Stewart Island / Rakiura to read about that island. The same links appear alongside the map. Highlighted islands are featured areas, not a complete species range.</desc>

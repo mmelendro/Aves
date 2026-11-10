@@ -303,6 +303,7 @@ export default function TeamPage() {
     if (teamMembers.some(member => member.id === memberId)) setOpenMembers(current => current.includes(memberId) ? current : [...current, memberId])
     const element = document.getElementById(memberId)
     if (element) {
+      if (teamMembers.some(member => member.id === memberId)) requestAnimationFrame(() => element.querySelector<HTMLButtonElement>("button")?.focus({ preventScroll: true }))
       element.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" })
     }
   }

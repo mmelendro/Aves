@@ -63,3 +63,34 @@ records without inventing credentials or relationships. View profile opens the
 existing team accordion and scrolls to its stable ID, respecting reduced motion.
 Advisory sections remain intact. No backend, accounts, consent, bookings or map data
 change. Further ecosystem-specific headers are retained for later, after this work.
+
+## Browser review and refinements
+
+First hosted runtime: 6a296c2e18c4a3c06039c598820b2efd93aa240e,
+protected build dpl_j9y7cMtnqFs4vxrVQCsQJWMjRA2S. Hosted build passed.
+All thirty studies render and the gallery declares noindex/nofollow, with no
+horizontal overflow. World-map enlargement, 1.3/1.69x zoom, real mouse drag,
+keyboard panning, reset and Escape/focus restoration passed. Desktop Colombia
+viewer retained all eleven native map links. South Island enlargement retained
+camera and scale, zoom changed from 2x to 3x, and Move enabled touch-action:none.
+Physical two-finger input was not exercised; its anchor/clamping maths is tested.
+
+At native 400% browser zoom (340 CSS pixels), the team page and enlarged world map
+had no horizontal overflow. Map controls measured 44px square and the expanded
+viewer fit the viewport width. Team desktop Next advanced to 2 of 9, and View
+profile opened the correct existing accordion at its stable ID. Compact carousel
+layout fit; physical swipe is not claimed. Browser zoom was restored to 100%.
+
+Review found two polish issues: attribution outside some expanded viewers, and
+existing circular portrait sources producing awkward rectangular corners. The
+follow-up carries credits inside enlarged views, uses circular portraits with an
+honest initials fallback if a real portrait fails, restores focus to an opened
+team profile, increases South Island map space and keeps the close toolbar sticky.
+A native-dialog attribute update prevents a transient unstyled expansion frame.
+Final hosted verification of these refinements is recorded in the PR when complete.
+
+154 automated tests, TypeScript and local production build passed before the
+browser pass; five targeted geometry/gesture checks, TypeScript and a production
+build passed again after the behavioural/portrait fixes. The final sticky-toolbar
+CSS refinement is covered by the final hosted build/browser check. No dependency
+change, database fixture, private record or production promotion occurred.

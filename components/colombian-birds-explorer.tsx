@@ -415,7 +415,7 @@ export function ColombianBirdsExplorer() {
                     </div>
 
                     {/* Interactive Map Container - Transparent Background */}
-                    <MapViewer label="Colombia full explorer map"><div className="relative bg-transparent rounded-lg p-6 mb-6 border border-white/20">
+                    <MapViewer label="Colombia full explorer map" credits="AVES planning-region artwork · representative locations, not official ecological boundaries."><div className="relative bg-transparent rounded-lg p-6 mb-6 border border-white/20">
                       <div className="relative mx-auto">
                         <ColombiaMapArtwork
                           alt="Colombia Interactive Bioregions Map"
