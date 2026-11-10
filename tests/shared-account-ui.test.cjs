@@ -17,6 +17,7 @@ function componentHarness(file, name, props, overrides = {}) {
   const root = resolve(__dirname, "..")
   const state = [], cache = new Map()
   let cursor = 0
+  const pendingEffects = [], effectDeps = new Map()
   const react = {
     useId: () => "test-id",
     useState(initial) {
@@ -25,7 +26,11 @@ function componentHarness(file, name, props, overrides = {}) {
       return [state[index], value => { state[index] = typeof value === "function" ? value(state[index]) : value }]
     },
     useRef(initial) { const index = cursor++; if (!(index in state)) state[index] = { current: initial }; return state[index] },
-    useEffect() {}, useCallback: callback => callback,
+    useEffect(callback, deps) {
+      if (!overrides.runEffects) return
+      const index = cursor++, previous = effectDeps.get(index)
+      if (!previous || deps.some((value,i) => value !== previous[i])) { effectDeps.set(index,deps); pendingEffects.push(callback) }
+    }, useCallback: callback => callback,
   }
   const jsx = (type, props) => ({ type, props: props || {} })
   class FormValues {
@@ -66,7 +71,7 @@ function componentHarness(file, name, props, overrides = {}) {
     return exports
   }
   const Component = module(resolve(root, file))[name]
-  return { render() { cursor = 0; return Component(props) } }
+  return { render() { cursor = 0; const tree=Component(props); while(pendingEffects.length) pendingEffects.shift()(); return tree } }
 }
 
 function nodes(tree) {
@@ -453,4 +458,33 @@ test("NZ image references leave saved bird IDs and editor reopen semantics uncha
   const reopened=componentHarness("components/account/trip-plan-editor.tsx","TripPlanEditor",{plan:saved,onSaved(){},onCancel(){}})
   const restored=find(reopened.render(),node=>typeof node.type==="function"&&node.type.name==="NewZealandBirdPicker")
   assert.deepEqual(restored.props.selected,picked)
+})
+
+test('place-note import requires an explicit action, survives failed save and reopens from confirmed notes', async () => {
+ const placeIdeas=load('lib/nz-place-ideas.ts'), values=new Map()
+ const storage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)}
+ placeIdeas.writeNzPlaceIdeas(storage,['mountains','coast'])
+ const plan={id:'00000000-0000-4000-8000-000000000123',country:'new-zealand',title:'Synthetic place-note brief',regions:['south-island'],message:'Existing guest notes.',status:'draft',updatedAt:'2026-11-10T00:00:00Z'}
+ let fail=true,saved;const calls=[]
+ const h=componentHarness('components/account/trip-plan-editor.tsx','TripPlanEditor',{plan,onSaved(p){saved=p},onCancel(){}},{runEffects:true,window:{sessionStorage:storage},mocks:{'./account-api':{...api,accountRequest:async(path,options)=>{
+  calls.push({path,body:JSON.parse(options.body)})
+  if(fail)throw new Error('Synthetic uncertain response')
+  return {plan:{id:plan.id,...JSON.parse(options.body),status:'draft',updatedAt:'2026-11-10T01:00:00Z'}}
+ }}}})
+ h.render();let tree=h.render()
+ assert.equal(find(tree,n=>n.props.name==='message').props.value,plan.message)
+ assert.equal(calls.length,0)
+ find(tree,n=>n.props.children==='Add Place Ideas to Notes').props.onClick()
+ tree=h.render();const message=find(tree,n=>n.props.name==='message').props.value
+ assert.ok(message.startsWith(plan.message));assert.match(message,/Place idea: Arthur’s Pass/);assert.match(message,/Place idea: Otago & the Catlins/)
+ assert.equal(calls.length,0,'Appending notes is not a network save')
+ const event={preventDefault(){},currentTarget:{values:{title:plan.title,regions:['south-island'],message,pace:'open',birding:'open',comfort:'open',interests:[]}}}
+ await find(tree,n=>n.type==='form').props.onSubmit(event)
+ assert.deepEqual(placeIdeas.readNzPlaceIdeas(storage),['mountains','coast'])
+ assert.equal(find(h.render(),n=>n.props.name==='message').props.value,message)
+ fail=false;await find(h.render(),n=>n.type==='form').props.onSubmit(event)
+ assert.deepEqual(placeIdeas.readNzPlaceIdeas(storage),[])
+ assert.equal(saved.message,message);assert.equal(calls[1].body.expectedUpdatedAt,plan.updatedAt)
+ const reopened=componentHarness('components/account/trip-plan-editor.tsx','TripPlanEditor',{plan:saved,onSaved(){},onCancel(){}})
+ assert.equal(find(reopened.render(),n=>n.props.name==='message').props.value,message)
 })
