@@ -14,10 +14,10 @@ export function useSharedBirdAudio(bird: BirdProfile | undefined) {
   current.current = resource
   const id = resource?.id
   const play = media?.play, stop = media?.stop
+  useEffect(() => () => { if (id) stop?.(id) }, [id, stop])
   useEffect(() => {
     if (following && resource) play?.(resource)
-    return () => { if (id) stop?.(id) }
-  }, [id, following, play, stop])
+  }, [id, following, play])
   useEffect(() => {
     const hidden = () => { if (document.hidden) { setFollowing(false); if (current.current) stop?.(current.current.id) } }
     const request = (event: Event) => { if ((event as CustomEvent<string>).detail !== current.current?.id) setFollowing(false) }
@@ -28,7 +28,7 @@ export function useSharedBirdAudio(bird: BirdProfile | undefined) {
   const playing = Boolean(media && id === media.resourceId && media.playing)
   return {
     available: Boolean(media), following, playing,
-    toggle() { if (!media || !resource) return; if (following) { setFollowing(false); return } if (playing) media.pause(); else media.play(resource) },
-    toggleFollow() { setFollowing(value => !value) },
+    toggle() { if (!media || !resource) return; if (following) { setFollowing(false); media.pause(); return } if (playing) media.pause(); else media.play(resource) },
+    toggleFollow() { if (following) media?.pause(); setFollowing(value => !value) },
   }
 }
