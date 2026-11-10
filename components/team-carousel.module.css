@@ -1,0 +1,7 @@
+.track { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding:2px; padding:4px 2px 14px; overscroll-behavior-x:contain; scrollbar-width:thin; scrollbar-color:#86bca3 #ecfdf5; }
+.card { display:flex; flex:0 0 84%; min-width:0; flex-direction:column; overflow:hidden; scroll-snap-align:start; border:1px solid #d1e9db; border-radius:1.25rem; background:white; box-shadow:0 4px 14px #064e3b08; }
+.control { display:grid; place-items:center; width:44px; height:44px; border:1px solid #c5dfd1; border-radius:999px; color:#065f46; background:white; }
+.control:hover { background:#ecfdf5; }
+.control:focus-visible { outline:2px solid #047857; outline-offset:3px; }
+@media(min-width:640px) { .card { flex-basis:calc((100% - 20px)/2.2); } }
+@media(min-width:1024px) { .card { flex-basis:calc((100% - 40px)/3.2); } }

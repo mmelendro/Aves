@@ -4,6 +4,7 @@
  * The select and full-name list provide 44px alternatives to small map locations.
  * First map activation previews; a later activation opens its real guide URL.
  */
+import { MapViewer } from "./map-viewer"
 import { useId, useState } from "react"
 import { ArrowRight, Feather } from "lucide-react"
 import { colombiaMapMarkers } from "@/content/colombia-map-markers"
@@ -48,7 +49,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
     <header className={styles.header}><h3>{name}</h3><p>{geography[country]} · {regions.length} destinations</p></header>
     <div className={styles.canvas}>
       <p className={styles.callout}><Feather size={16} aria-hidden="true"/>{active.name}</p>
-      <svg viewBox="0 45 360 275" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
+      <MapViewer label={`${name} regional map`}><svg className="block aspect-[360/275] w-full" viewBox="0 45 360 275" role="group" aria-label={`${name}: ${geography[country].toLowerCase()}`} preserveAspectRatio="xMidYMid meet">
         <defs><filter id={`land-${id}`} colorInterpolationFilters="sRGB"><feFlood floodColor="#c5dbd0"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs>
         <svg x="20" y="60" width="320" height="244" viewBox={viewBox} preserveAspectRatio="xMidYMid meet">
           {country === "colombia" ? <g>
@@ -70,7 +71,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
           return <a key={region.id} href={region.href} aria-label={`Explore ${region.name}`} {...focusRegion(region)} className={styles.location} data-active={activeId === region.id} data-region-marker={region.id}><circle cx={x} cy={y} r="8"/></a>
         })}
         <g transform={`translate(${point.x-14},${point.y-14})`} pointerEvents="none"><MapFeatherMarker /></g>
-      </svg>
+      </svg></MapViewer>
     </div>
     <div className={styles.controls}>
       <p className="mb-2 text-xs leading-5 text-gray-600">Tap a region to preview. Tap it again, or choose Explore, to open its guide.</p>

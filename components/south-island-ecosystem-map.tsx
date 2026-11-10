@@ -1,5 +1,7 @@
 "use client"
 import Link from "next/link"
+import { MapViewer } from "./map-viewer"
+import { mapGestureView } from "@/lib/map-gestures.mjs"
 
 /** Attributed land-cover overview, controlled by the existing explorer.
  * SVG geometry is generated offline from official LCDB data; the browser sends
@@ -35,7 +37,8 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
   const showEcosystems = !satellite || layers.ecosystems
   const id = useId()
   const svgRef = useRef<SVGSVGElement>(null)
-  const drag = useRef<{ pointer: number; clientX: number; clientY: number; camera: MapCamera; pixelsPerUnit: number } | null>(null)
+  const pointers = useRef(new Map<number, { x: number; y: number }>())
+  const drag = useRef<{ points: { x: number; y: number }[]; camera: MapCamera; pixelsPerUnit: number } | null>(null)
   const [camera, setCamera] = useState(initialMapCamera)
   const [panMode, setPanMode] = useState(false)
   const [svgPixelsPerUnit, setSvgPixelsPerUnit] = useState(0)
@@ -69,8 +72,8 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
   const scale = ecosystemMapScale(camera, map.bbox, svgPixelsPerUnit)
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
-  function reset() { drag.current = null; setCamera(initialMapCamera); setPanMode(false) }
-  return <section className={styles.card} aria-labelledby={`${id}-title`}>
+  function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(false) }
+  return <MapViewer label="South Island habitat map" gestures={false}><section className={styles.card} aria-labelledby={`${id}-title`}>
     <div className="flex flex-wrap items-center justify-between gap-2">
       <h2 id={`${id}-title`} className="font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2>
       <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All habitats</button>
@@ -79,14 +82,14 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1} onClick={() => zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode && camera.zoom > 1} disabled={camera.zoom <= 1} onClick={() => setPanMode(value => !value)}><Hand size={17} aria-hidden="true" /></button>
+      <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
       <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>
     </div>
-    <p id={`${id}-gestures`} className="mb-2 text-[11px] leading-5 text-gray-600">{panMode && camera.zoom > 1 ? "Move is on: drag to pan. Turn Move off to select habitats." : "Zoom, then use Move to drag. Focus the map for arrow-key panning; Home resets."}</p>
+    <p id={`${id}-gestures`} className="mb-2 text-[11px] leading-5 text-gray-600">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
     <SouthIslandMapLayers />
     {satelliteFailed && layers.background === "satellite" && <p role="status" className="text-xs text-amber-900">Satellite image unavailable. The habitat map is shown instead.</p>}
     <figure className={styles.figure}>
-      <svg ref={svgRef} viewBox={map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode && camera.zoom > 1 ? "none" : "auto", cursor: panMode && camera.zoom > 1 ? "grab" : undefined }}
+      <svg ref={svgRef} viewBox={map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
         onKeyDown={event => {
           if (event.target !== event.currentTarget) return
           const moves: Record<string, [number, number]> = { ArrowLeft: [-.15, 0], ArrowRight: [.15, 0], ArrowUp: [0, -.15], ArrowDown: [0, .15] }
@@ -94,19 +97,31 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
           else if (["+", "=", "-", "Home"].includes(event.key)) { event.preventDefault(); if (event.key === "Home") reset(); else zoom(event.key === "-" ? 1 / 1.5 : 1.5) }
         }}
         onPointerDown={event => {
-          if (!panMode || camera.zoom <= 1 || !event.isPrimary || event.button !== 0) return
+          if (!panMode || (event.pointerType === "mouse" && event.button !== 0) || pointers.current.size >= 2 || !(svgPixelsPerUnit > 0)) return
           event.preventDefault()
+          const rect = event.currentTarget.getBoundingClientRect()
+          const offsetX = (rect.width - 480 * svgPixelsPerUnit) / 2
+          const offsetY = (rect.height - 640 * svgPixelsPerUnit) / 2
+          pointers.current.set(event.pointerId, { x: event.clientX - rect.left - offsetX, y: event.clientY - rect.top - offsetY })
           event.currentTarget.setPointerCapture(event.pointerId)
-          drag.current = { pointer: event.pointerId, clientX: event.clientX, clientY: event.clientY, camera, pixelsPerUnit: svgPixelsPerUnit }
+          drag.current = { points: [...pointers.current.values()], camera, pixelsPerUnit: svgPixelsPerUnit }
         }}
         onPointerMove={event => {
           const start = drag.current
-          if (!start || event.pointerId !== start.pointer || !(start.pixelsPerUnit > 0)) return
-          setCamera(panMapCamera(start.camera, -(event.clientX - start.clientX) / (start.pixelsPerUnit * start.camera.zoom), -(event.clientY - start.clientY) / (start.pixelsPerUnit * start.camera.zoom)))
+          if (!start || !pointers.current.has(event.pointerId)) return
+          event.preventDefault()
+          const rect = event.currentTarget.getBoundingClientRect(), ppu = start.pixelsPerUnit
+          pointers.current.set(event.pointerId, { x: event.clientX - rect.left - (rect.width - 480 * ppu) / 2, y: event.clientY - rect.top - (rect.height - 640 * ppu) / 2 })
+          const view = mapGestureView({ x: -start.camera.x * start.camera.zoom * ppu, y: -start.camera.y * start.camera.zoom * ppu, zoom: start.camera.zoom }, start.points, [...pointers.current.values()], { width: 480 * ppu, height: 640 * ppu })
+          setCamera({ x: -view.x / (view.zoom * ppu), y: -view.y / (view.zoom * ppu), zoom: view.zoom })
         }}
-        onPointerUp={event => { if (drag.current?.pointer === event.pointerId) { drag.current = null; event.currentTarget.releasePointerCapture(event.pointerId) } }}
-        onPointerCancel={() => { drag.current = null }} onLostPointerCapture={() => { drag.current = null }}
-        onClickCapture={event => { if (panMode && camera.zoom > 1) { event.preventDefault(); event.stopPropagation() } }}>
+        onPointerUp={event => {
+          pointers.current.delete(event.pointerId)
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId)
+          drag.current = pointers.current.size ? { points: [...pointers.current.values()], camera, pixelsPerUnit: svgPixelsPerUnit } : null
+        }}
+        onPointerCancel={() => { pointers.current.clear(); drag.current = null }} onLostPointerCapture={event => { if (pointers.current.delete(event.pointerId)) drag.current = null }}
+        onClickCapture={event => { if (panMode) { event.preventDefault(); event.stopPropagation() } }}>
         <title id={`${id}-map-title`}>{satellite ? "South Island satellite overview and conservation layers" : "South Island land cover and coastline"}</title>
         <defs><clipPath id={`${id}-island-clip`}><path d={map.outline} fillRule="evenodd" clipRule="evenodd"/></clipPath></defs>
         <desc id={`${id}-map-description`}>{satellite ? "Transparent historical NASA satellite composite from 2004 in the same Mercator frame. Ecosystem colours can remain visible above it; parks, conservation and public places are independent overlays. " : ""}North-up Mercator overview. Select a visible coloured ecosystem area or a labelled habitat button to filter the birds. Land cover is generalised from 2023/24 LCDB data, not current sightings or a complete ecosystem survey. Coastline is context only; offshore habitat is not mapped. Place markers show public references, not wildlife locations or permission to enter.</desc>
@@ -173,5 +188,5 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
       </div>
     </details>
     <Link href="/new-zealand#regions" className="mt-1 inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</Link>
-  </section>
+  </section></MapViewer>
 }

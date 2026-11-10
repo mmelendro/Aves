@@ -6,7 +6,8 @@
  */
 "use client"
 
-import { useEffect } from "react"
+import { TeamCarousel } from "@/components/team-carousel"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -297,10 +298,12 @@ export default function TeamPage() {
     },
   ]
 
+  const [openMembers, setOpenMembers] = useState<string[]>([])
   const scrollToMember = (memberId: string) => {
+    if (teamMembers.some(member => member.id === memberId)) setOpenMembers(current => current.includes(memberId) ? current : [...current, memberId])
     const element = document.getElementById(memberId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" })
+      element.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" })
     }
   }
 
@@ -329,17 +332,7 @@ export default function TeamPage() {
             {/* Guides Section */}
             <div className="mb-6">
               <div className="text-sm font-medium text-gray-500 mb-3">Team</div>
-              <div className="flex flex-wrap justify-center gap-2 md:gap-3">
-                {teamMembers.map((member) => (
-                  <button
-                    key={member.id}
-                    onClick={() => scrollToMember(member.id)}
-                    className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                  >
-                    {member.name}
-                  </button>
-                ))}
-              </div>
+              <TeamCarousel members={teamMembers} onSelect={scrollToMember} />
             </div>
 
             {/* Divider */}
@@ -391,13 +384,13 @@ export default function TeamPage() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <Accordion type="multiple" className="space-y-4">
+            <Accordion type="multiple" value={openMembers} onValueChange={setOpenMembers} className="space-y-4">
               {teamMembers.map((member) => (
                 <AccordionItem
                   key={member.id}
                   value={member.id}
                   id={member.id}
-                  className="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
+                  className="scroll-mt-36 bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
                 >
                   <AccordionTrigger className="hover:no-underline p-6 hover:bg-gray-100 transition-colors duration-200">
                     <div className="flex items-center gap-6 w-full">
@@ -511,7 +504,7 @@ export default function TeamPage() {
                 <AccordionItem
                   value="royann-petrell"
                   id="royann-petrell"
-                  className="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
+                  className="scroll-mt-36 bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
                 >
                   <AccordionTrigger className="hover:no-underline p-6 hover:bg-gray-100 transition-colors duration-200">
                     <div className="flex items-center gap-6 w-full">
@@ -580,7 +573,7 @@ export default function TeamPage() {
                 <AccordionItem
                   value="sylvain-alie"
                   id="sylvain-alie"
-                  className="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
+                  className="scroll-mt-36 bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
                 >
                   <AccordionTrigger className="hover:no-underline p-6 hover:bg-gray-100 transition-colors duration-200">
                     <div className="flex items-center gap-6 w-full">
@@ -650,7 +643,7 @@ export default function TeamPage() {
                 <AccordionItem
                   value="lisa-baile"
                   id="lisa-baile"
-                  className="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
+                  className="scroll-mt-36 bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
                 >
                   <AccordionTrigger className="hover:no-underline p-6 hover:bg-gray-100 transition-colors duration-200">
                     <div className="flex items-center gap-6 w-full">
@@ -719,7 +712,7 @@ export default function TeamPage() {
                 <AccordionItem
                   value="peter"
                   id="peter"
-                  className="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
+                  className="scroll-mt-36 bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden"
                 >
                   <AccordionTrigger className="hover:no-underline p-6 hover:bg-gray-100 transition-colors duration-200">
                     <div className="flex items-center gap-6 w-full">

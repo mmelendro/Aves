@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { MapViewer } from "./map-viewer"
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -414,7 +415,7 @@ export function ColombianBirdsExplorer() {
                     </div>
 
                     {/* Interactive Map Container - Transparent Background */}
-                    <div className="relative bg-transparent rounded-lg p-6 mb-6 border border-white/20">
+                    <MapViewer label="Colombia full explorer map"><div className="relative bg-transparent rounded-lg p-6 mb-6 border border-white/20">
                       <div className="relative mx-auto">
                         <ColombiaMapArtwork
                           alt="Colombia Interactive Bioregions Map"
@@ -481,7 +482,7 @@ export function ColombianBirdsExplorer() {
                       </div>
                     </div>
 
-                    {/* Statistics Below Map - Enhanced Transparency */}
+                    </MapViewer>{/* Statistics Below Map - Enhanced Transparency */}
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div className="bg-emerald-500/20 backdrop-blur-sm text-white rounded-lg p-4 shadow-lg border border-emerald-400/30">
                         <div className="text-lg sm:text-xl font-bold">{birdData.length}</div>

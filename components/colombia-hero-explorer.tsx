@@ -14,6 +14,7 @@ import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import styles from "@/components/country-hero-explorer.module.css"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { MapViewer } from "./map-viewer"
 import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
@@ -59,7 +60,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
             {focused && (media ? <Link href="/colombia" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to Colombia</Link> : <button ref={backRef} type="button" onClick={() => { preview.clear(); setChosenRegion(""); setCurrentBird(birdData[0]); selectRef.current?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to Colombia</button>)}
             <Link href="/aves-explorer" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></Link>
           </div>
-          <div className={`${styles.mapCanvas} ${styles.mapViewport}`}><div className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
+          <MapViewer label="Colombia planning map"><div className={`${styles.mapCanvas} ${styles.mapViewport}`}><div data-zoom-artwork="true" className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
             <div className={`absolute inset-0 ${styles.pointZoom}`} style={focused ? { transform: `scale(2.4) translate(${50 - selectedRegionDetails.x}%, ${50 - selectedRegionDetails.y}%)` } : undefined}>
             <ColombiaMapArtwork alt="" fill sizes={resizable ? "400px" : "230px"} className="object-contain" />
             {mapMarkers.map((region, index) => {
@@ -75,7 +76,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
             </div>
           </div>
           </div>
-          <div className={styles.mapFooter}><div className="flex gap-2">
+          </MapViewer><div className={styles.mapFooter}><div className="flex gap-2">
             <label htmlFor="colombia-hero-region" className="sr-only">Choose a Colombia region</label>
             <select ref={selectRef} id="colombia-hero-region" value={focused ? chosenRegion : ""} onChange={event => preview.preview(event.target.value)} className="min-h-11 min-w-0 flex-1 rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
               <option value="">Choose a Colombian region</option>

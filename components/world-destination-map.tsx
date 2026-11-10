@@ -4,6 +4,7 @@
  * Geometry is preprojected; optional catalogue metadata chooses which countries
  * AVES currently offers. Neutral land is context, not an available destination.
  */
+import { MapViewer } from "./map-viewer"
 import { destinations } from "@/content/destinations"
 import world from "@/content/world-map.json"
 import styles from "./world-destination-map.module.css"
@@ -33,7 +34,7 @@ export default function WorldDestinationMap() {
       </div>
       <div className="flex min-h-0 flex-1 items-center">
       {/* A group, rather than role=img, keeps the three SVG buttons accessible. */}
-      <svg viewBox={world.viewBox} role="group" aria-labelledby="world-map-title world-map-description" className="block h-auto w-full" preserveAspectRatio="xMidYMid meet">
+      <MapViewer label="World destination map"><svg viewBox={world.viewBox} role="group" aria-labelledby="world-map-title world-map-description" className="block h-auto w-full" preserveAspectRatio="xMidYMid meet">
         <title id="world-map-title">AVES destinations on an Equal Earth world map</title>
         <desc id="world-map-description">Select Colombia, Australia or New Zealand to zoom into its regional map and change the bird carousel. Back to world returns here. Use Explore to open the selected country's page. Other countries provide geographic context. Large text selection buttons are above; direct destination links are in the footer.</desc>
         <WorldMapScene targets={targets}>
@@ -46,7 +47,7 @@ export default function WorldDestinationMap() {
         </g>
         {mapped.map(({ destination, country, label }) => <WorldMapCountry key={destination.id} id={destination.id} name={destination.name} path={country.path} anchor={country.anchor} label={label} />)}
         </WorldMapScene>
-      </svg>
+      </svg></MapViewer>
       </div>
       <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-emerald-100 px-5 py-4 text-xs leading-5 text-emerald-900 sm:px-6">
         <span className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-emerald-700" />AVES destinations</span>

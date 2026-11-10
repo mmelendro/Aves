@@ -1,0 +1,139 @@
+{
+  "https://booderee.gov.au/discover/nature/birds/": {
+    "httpStatus": 200,
+    "url": "https://booderee.gov.au/discover/nature/birds/",
+    "title": null
+  },
+  "https://nt.gov.au/parks/find-a-park/fogg-dam-conservation-area": {
+    "httpStatus": 200,
+    "url": "https://nt.gov.au/parks/find-a-park/fogg-dam-conservation-area",
+    "title": "Fogg Dam Conservation Reserve | NT.GOV.AU"
+  },
+  "https://parks.tas.gov.au/explore-our-parks/south-bruny-national-park": {
+    "httpStatus": 200,
+    "url": "https://parks.tas.gov.au/explore-our-parks/south-bruny-national-park",
+    "title": "South Bruny National Park | Parks &amp; Wildlife Service Tasmania"
+  },
+  "https://teara.govt.nz/en/mountains/page-1": {
+    "httpStatus": 200,
+    "url": "https://teara.govt.nz/en/mountains/page-1",
+    "title": "South Island mountains | Te Ara Encyclopedia of New Zealand"
+  },
+  "https://www.birdlifenq.org/birding": {
+    "httpStatus": 200,
+    "url": "https://www.birdlifenq.org/birding",
+    "title": "Birding | BirdLife Northern Queensland"
+  },
+  "https://www.destinationperth.com.au/blog/post/perths-birds-and-where-to-find-them/": {
+    "httpStatus": 200,
+    "url": "https://www.destinationperth.com.au/blog/post/perths-birds-and-where-to-find-them/",
+    "title": "Best Birdwatching Spots in Perth | Destination Perth"
+  },
+  "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/arthurs-pass-national-park/": {
+    "httpStatus": 200,
+    "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/arthurs-pass-national-park/",
+    "title": "Arthur&#39;s Pass National Park: Places to go in Canterbury"
+  },
+  "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/about-tongariro-national-park/central-north-island-volcanoes/": {
+    "httpStatus": 200,
+    "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/about-tongariro-national-park/central-north-island-volcanoes/",
+    "title": "Central North Island volcanoes: Tongariro National Park"
+  },
+  "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/": {
+    "httpStatus": 200,
+    "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/",
+    "title": "Fiordland National Park: Places to go in Fiordland"
+  },
+  "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/": {
+    "httpStatus": 200,
+    "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+    "title": "Nelson Lakes National Park: Places to go in Nelson/Tasman"
+  },
+  "https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/catlins-conservation-park/": {
+    "error": "HTTP Error 404: Not Found"
+  },
+  "https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/stewart-island-rakiura/ulva-island-te-wharawhara": {
+    "httpStatus": 200,
+    "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/stewart-island-rakiura/ulva-island-te-wharawhara",
+    "title": "Ulva Island/Te Wharawhara: Places to go in Southland"
+  },
+  "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/royal-national-park": {
+    "httpStatus": 200,
+    "url": "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/royal-national-park",
+    "title": "Royal National Park | NSW National Parks"
+  },
+  "https://www.parks.act.gov.au/things-to-do/birdwatching": {
+    "httpStatus": 200,
+    "url": "https://www.parks.act.gov.au/things-to-do/birdwatching",
+    "title": "Birdwatching - Parks ACT"
+  },
+  "https://www.parks.sa.gov.au/parks/coorong-national-park": {
+    "httpStatus": 200,
+    "url": "https://www.parks.sa.gov.au/parks/coorong-national-park",
+    "title": "Coorong… - National Parks and Wildlife Service South Australia"
+  },
+  "https://www.parks.vic.gov.au/places-to-see/parks/serendip-sanctuary": {
+    "httpStatus": 200,
+    "url": "https://www.parks.vic.gov.au/places-to-see/parks/serendip-sanctuary",
+    "title": "Serendip Sanctuary"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-amacayacu/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-amacayacu/",
+    "title": "Parque Nacional Natural Amacayacu &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-chingaza/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-chingaza/",
+    "title": "Parque Nacional Natural Chingaza &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-el-tuparro/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-el-tuparro/",
+    "title": "Parque Nacional Natural El Tuparro &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-farallones-de-cali/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-farallones-de-cali/",
+    "title": "Parque Nacional Natural Farallones de Cali &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-los-nevados/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/",
+    "title": "Parques Nacionales Naturales de Colombia &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-purace/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-purace/",
+    "title": "Parque Nacional Natural Puracé &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-serrania-de-los-yariguies/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-serrania-de-los-yariguies/",
+    "title": "Parque Nacional Natural Serranía de Los Yariguíes &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-sierra-nevada-de-santa-marta/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-sierra-nevada-de-santa-marta/",
+    "title": "Parque Nacional Natural Sierra Nevada de Santa Marta &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-tatama/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-tatama/",
+    "title": "Parque Nacional Natural Tatamá &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-utria/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-utria/",
+    "title": "Parque Nacional Natural Utría &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/": {
+    "httpStatus": 200,
+    "url": "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/",
+    "title": "Santuario de Fauna y Flora Los Flamencos &#8226; Parques Nacionales Naturales de Colombia"
+  },
+  "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/penguins/yellow-eyed-penguin-hoiho/": {
+    "reference": "Existing reviewed South Island source; replaces unavailable Catlins park URL",
+    "status": "existing source, not freshly HTTP checked in this pass"
+  }
+}

@@ -6,6 +6,7 @@
  */
 "use client"
 
+import { MapViewer } from "./map-viewer"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useRegionPreview } from "./use-region-preview"
@@ -50,7 +51,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   // Compact and full maps coexist on this page, so their accessible title IDs must differ.
   const idPrefix = compact ? "nz-hero-map" : "nz-map"
   const mapFigure = (
-    <figure className={compact ? styles.nzFigure : "min-w-0"}>
+    <MapViewer label="New Zealand island map"><figure className={compact ? styles.nzFigure : "min-w-0"}>
           <svg viewBox={map.viewBox} className={compact ? styles.nzMap : "mx-auto block w-full max-w-xl"} role="group" aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}>
             <title id={`${idPrefix}-title`}>Explore New Zealand’s main islands</title>
             <desc id={`${idPrefix}-description`}>North-up map. Select North Island, South Island or Stewart Island / Rakiura to read about that island. The same links appear alongside the map. Highlighted islands are featured areas, not a complete species range.</desc>
@@ -80,7 +81,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
           <figcaption className={compact ? "px-3 pb-1 text-center text-[10px] leading-4 text-gray-500" : "px-3 pb-2 text-center text-xs leading-5 text-gray-500"}>
             {focusIsland ? `${focusIsland.label} view · ` : compact ? "Main islands · " : "Main islands shown; outlying islands omitted. Coastline from "}<a href={map.source.url} target="_blank" rel="noreferrer" className="rounded underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Natural Earth</a>{compact ? " coastline" : " (public domain)."}
           </figcaption>
-        </figure>
+        </figure></MapViewer>
   )
 
   // The same SVG is reused in two wrappers; only the framing and companion links change.

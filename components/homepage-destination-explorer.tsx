@@ -15,6 +15,7 @@ import nzMap from "@/content/new-zealand-map.json"
 import DestinationCardMedia from "@/components/destination-card-media"
 import { DestinationSelectionContext } from "@/components/destination-selection-context"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
+import { MapViewer } from "./map-viewer"
 import DestinationRegionalMap from "@/components/destination-regional-map"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { useRegionPreview } from "./use-region-preview"
@@ -100,7 +101,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                   <button ref={backButton} type="button" onClick={backToWorld} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to world</button>
                   <h2 className="text-lg font-medium text-emerald-950">Explore {destination.name}</h2>
                 </div>
-                <div className={styles.regionalCanvas}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={id => { const item = regions.find(region => region.id === id); if (item) regionPreview.activateButton(id, item.href) }} /></div>
+                <div className={styles.regionalCanvas}><MapViewer label={`${destination.name} explorer map`}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={id => { const item = regions.find(region => region.id === id); if (item) regionPreview.activateButton(id, item.href) }} /></MapViewer></div>
                 <figcaption className={styles.countryFooter}>
                   {region && <button ref={regionBackButton} type="button" onClick={() => selectRegion("")} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to {destination.name}</button>}
                   <label htmlFor="homepage-region" className="mb-2 block text-xs font-medium text-emerald-900">Choose a region in {destination.name}</label>
