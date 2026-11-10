@@ -30,7 +30,7 @@ export function NewZealandHeader({country = "new-zealand"}:{country?:BrandCountr
   }, [])
   return <>
     <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] rounded-lg bg-white px-5 py-3 font-medium text-emerald-900 shadow-lg focus:not-sr-only">Skip to content</a>
-    <header className="sticky top-0 z-40 -mb-8 h-[128px] isolate">
+    <header className="sticky top-0 z-40 h-[132px] isolate">
       <HeaderContour profile={profile} country={activeCountry ?? "global"} regionId={selected?.regionId} placeId={selected?.placeId} />
       <div className="relative mx-auto flex max-w-7xl items-start justify-between gap-4 px-3 pt-2 sm:px-6 lg:px-8">
         <BrandMark country={activeCountry} priority unifiedHeaderContour nativeCountryLink={country === "global"} />

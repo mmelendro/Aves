@@ -58,4 +58,4 @@
 .islandScope { display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
 .islandScope select { flex:1; min-width:0; width:auto; }
 
-.layeredPanel > div { scroll-margin-top:calc(var(--guide-header-offset,7rem) + 4rem); }
+.layeredPanel > div { scroll-margin-top:calc(var(--guide-header-offset,8.25rem) + 4rem); }

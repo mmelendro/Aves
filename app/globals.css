@@ -1151,4 +1151,4 @@ body {
 /* Keep fixed navigation visible beneath the protected-review notice. */
 .aves-preview-content[data-read-only-preview="true"] header { top: 64px; }
 
-.aves-preview-content[data-read-only-preview="true"] { --guide-header-offset:11rem; }
+.aves-preview-content[data-read-only-preview="true"] { --guide-header-offset:12.25rem; }
