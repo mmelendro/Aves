@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "checked": "2026-11-10",
+  "meaning": "Editorial representative identities, chosen for distinctive appearance and local association. Not a scientific ranking of recognisability, a range map or a sighting guarantee. Generated illustrations, not documentary identification plates.",
+  "birds": {
+    "global": {
+      "name": "Peregrine Falcon",
+      "scientificName": "Falco peregrinus",
+      "file": "aves-global-bird.png",
+      "facing": "left",
+      "source": "content/image-credits.json",
+      "rationale": "Existing global AVES artwork."
+    },
+    "colombia/country": {
+      "name": "Andean Motmot",
+      "scientificName": "Momotus aequatorialis",
+      "file": "aves-colombia-bird.png",
+      "facing": "left",
+      "source": "content/regions.ts",
+      "rationale": "Existing Colombian brand bird."
+    },
+    "australia/country": {
+      "name": "Superb Fairywren",
+      "scientificName": "Malurus cyaneus",
+      "file": "aves-australia-bird.png",
+      "facing": "left",
+      "source": "content/global-australian-regional-birds.json",
+      "rationale": "Existing Australian brand bird."
+    },
+    "new-zealand/country": {
+      "name": "Kea",
+      "scientificName": "Nestor notabilis",
+      "file": "aves-new-zealand-bird.png",
+      "facing": "left",
+      "source": "https://www.nzbirdsonline.org.nz/species/kea",
+      "rationale": "Existing New Zealand brand bird, not a countrywide distribution claim."
+    },
+    "colombia/pacific": {
+      "name": "Chocó Toucan",
+      "scientificName": "Ramphastos brevis",
+      "file": "choco-toucan-right.webp",
+      "facing": "right",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=D1E1AF7F198E884A&lang=EN",
+      "rationale": "Distinctive Chocó forest toucan already sourced in the regional collection."
+    },
+    "colombia/western-andes": {
+      "name": "Multicolored Tanager",
+      "scientificName": "Chlorochrysa nitidissima",
+      "file": "multicolored-tanager-right.webp",
+      "facing": "right",
+      "source": "https://ecopedia.cvc.gov.co/sites/default/files/archivosAdjuntos/pm_vertebrados_amenazados_2007.pdf",
+      "rationale": "Colourful Colombian endemic associated with western Andean forest."
+    },
+    "colombia/central-andes": {
+      "name": "Yellow-eared Parrot",
+      "scientificName": "Ognorhynchus icterotis",
+      "file": "yellow-eared-parrot-right.webp",
+      "facing": "right",
+      "source": "https://proaves.org/en/loros-andinos-proaves-reserve/",
+      "rationale": "Distinctive wax-palm conservation bird of the Central Andes."
+    },
+    "colombia/eastern-andes": {
+      "name": "Green-bearded Helmetcrest",
+      "scientificName": "Oxypogon guerinii",
+      "file": "helmetcrest-right.webp",
+      "facing": "right",
+      "source": "https://sigci.car.gov.co/wp-content/uploads/2023/10/BogotaGuiadeAves2019_compressed.pdf",
+      "rationale": "Distinctive high-paramo endemic already sourced for the Eastern Cordillera."
+    },
+    "colombia/cauca-valley": {
+      "name": "Apical Flycatcher",
+      "scientificName": "Myiarchus apicalis",
+      "file": "apical-flycatcher-right.webp",
+      "facing": "right",
+      "source": "https://repository.icesi.edu.co/server/api/core/bitstreams/998064cb-3dcf-4e10-9f34-7c06b2c382c6/content",
+      "rationale": "Characteristic dry-valley endemic with local nesting research."
+    },
+    "colombia/magdalena-valley": {
+      "name": "Blue-billed Curassow",
+      "scientificName": "Crax alberti",
+      "file": "blue-billed-curassow-right.webp",
+      "facing": "right",
+      "source": "https://proaves.org/en/blog/estas-son-las-mujeres-que-por-medio-de-la-investigacion-aportaran-a-la-conservacion-del-crax-alberti-y-primates-en-la-reserva-proaves-el-paujil/",
+      "rationale": "Highly distinctive conservation flagship of the middle Magdalena forest."
+    },
+    "colombia/caribbean": {
+      "name": "Vermilion Cardinal",
+      "scientificName": "Cardinalis phoeniceus",
+      "file": "vermilion-cardinal-right.webp",
+      "facing": "right",
+      "source": "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/",
+      "rationale": "Distinctive red-crested bird of Guajira thorn scrub, not all Caribbean habitats."
+    },
+    "colombia/sierra-nevada-de-santa-marta": {
+      "name": "Santa Marta Parakeet",
+      "scientificName": "Pyrrhura viridicata",
+      "file": "santa-marta-parakeet-right.webp",
+      "facing": "right",
+      "source": "https://proaves.org/en/proaves-el-dorado-reserve/",
+      "rationale": "Namesake endemic tied to the Santa Marta massif."
+    },
+    "colombia/llanos": {
+      "name": "Scarlet Ibis",
+      "scientificName": "Eudocimus ruber",
+      "file": "scarlet-ibis-right.webp",
+      "facing": "right",
+      "source": "https://old.parquesnacionales.gov.co/portal/wp-content/uploads/2019/09/Resol_165_260919_sgm.pdf",
+      "rationale": "Unmistakable colour and wetland association, documented in Casanare."
+    },
+    "colombia/amazonia": {
+      "name": "Hoatzin",
+      "scientificName": "Opisthocomus hoazin",
+      "file": "hoatzin-right.webp",
+      "facing": "right",
+      "source": "https://www.sinchi.org.co/files/publicaciones/revista/pdf/7/5%20estructura%20de%20comunidad%20de%20aves%20en%20diferentes%20sistemas%20de%20produccin%20de%20caucho.pdf",
+      "rationale": "Distinctive river-margin bird documented in Colombian Amazon research."
+    },
+    "colombia/colombian-massif": {
+      "name": "Andean Condor",
+      "scientificName": "Vultur gryphus",
+      "file": "andean-condor-right.webp",
+      "facing": "right",
+      "source": "https://www.parquesnacionales.gov.co/wp-content/uploads/2020/10/plan-de-manejo-pnn-purace.pdf",
+      "rationale": "Locally recognised Purace emblem and high-Andean conservation bird."
+    },
+    "new-zealand/north-island": {
+      "name": "North Island Kōkako",
+      "scientificName": "Callaeas wilsoni",
+      "file": "kokako-right.webp",
+      "facing": "right",
+      "source": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/kokako/",
+      "rationale": "Distinctive endemic wattlebird tied to North Island forest."
+    },
+    "new-zealand/rakiura": {
+      "name": "Rakiura Tokoeka",
+      "scientificName": "Apteryx australis",
+      "file": "tokoeka-right.webp",
+      "facing": "right",
+      "source": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/kiwi/tokoeka/",
+      "rationale": "The Rakiura form of southern brown kiwi, illustrated as flightless."
+    },
+    "new-zealand/coast": {
+      "name": "Hoiho / Yellow-eyed Penguin",
+      "scientificName": "Megadyptes antipodes",
+      "file": "hoiho-right.webp",
+      "facing": "right",
+      "source": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/penguins/yellow-eyed-penguin-hoiho/",
+      "rationale": "Distinctive Otago/Catlins coastal conservation bird; no viewing guarantee."
+    },
+    "new-zealand/forest-and-lakes": {
+      "name": "Kākā",
+      "scientificName": "Nestor meridionalis",
+      "file": "kaka-right.webp",
+      "facing": "right",
+      "source": "https://blog.doc.govt.nz/2019/11/01/behind-the-scenes-kaka-return-to-the-abel-tasman-coast/",
+      "rationale": "Locally documented forest parrot at Nelson Lakes."
+    },
+    "new-zealand/southern-forest": {
+      "name": "Mohua / Yellowhead",
+      "scientificName": "Mohoua ochrocephala",
+      "file": "mohua-right.webp",
+      "facing": "right",
+      "source": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/yellowhead-mohua/",
+      "rationale": "Distinctive yellow forest bird with documented Fiordland populations."
+    },
+    "australia/queensland": {
+      "name": "Southern Cassowary",
+      "scientificName": "Casuarius casuarius",
+      "file": "cassowary-right.webp",
+      "facing": "right",
+      "source": "https://parks.qld.gov.au/parks/kuranda-mowbray/about/culture",
+      "rationale": "Unmistakable Wet Tropics rainforest bird, illustrated as flightless."
+    },
+    "australia/new-south-wales": {
+      "name": "Superb Lyrebird",
+      "scientificName": "Menura novaehollandiae",
+      "file": "lyrebird-right.webp",
+      "facing": "right",
+      "source": "https://www.nationalparks.nsw.gov.au/plants-and-animals/superb-lyrebird",
+      "rationale": "Distinctive forest bird and display tail with NSW Parks documentation."
+    },
+    "australia/tasmania": {
+      "name": "Forty-spotted Pardalote",
+      "scientificName": "Pardalotus quadragintus",
+      "file": "pardalote-right.webp",
+      "facing": "right",
+      "source": "https://www.threatenedspecieslink.tas.gov.au/Pages/Forty-spotted-Pardalote.aspx",
+      "rationale": "Distinctive Tasmanian endemic conservation bird."
+    },
+    "australia/victoria": {
+      "name": "Helmeted Honeyeater",
+      "scientificName": "Lichenostomus melanops cassidix",
+      "file": "helmeted-honeyeater-right.webp",
+      "facing": "right",
+      "source": "https://www.dcceew.gov.au/environment/biodiversity/threatened/species/20-birds-by-2020/helmeted-honeyeater",
+      "rationale": "Distinctive Victorian endemic subspecies, not distributed throughout the state."
+    },
+    "australia/south-australia": {
+      "name": "Australian Magpie (white-backed)",
+      "scientificName": "Gymnorhina tibicen",
+      "file": "magpie-right.webp",
+      "facing": "right",
+      "source": "https://dpc.sa.gov.au/responsibilities/state-protocols-acknowledgements/using-the-state-insignia-and-emblems",
+      "rationale": "Species associated with the piping shrike; original bird art, not official insignia."
+    },
+    "australia/western-australia": {
+      "name": "Carnaby’s Black-Cockatoo",
+      "scientificName": "Zanda latirostris",
+      "file": "carnabys-cockatoo-right.webp",
+      "facing": "right",
+      "source": "https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/carnabys-cockatoo",
+      "rationale": "Distinctive endemic of south-western WA, not all-state occurrence."
+    },
+    "australia/northern-territory": {
+      "name": "Gouldian Finch",
+      "scientificName": "Chloebia gouldiae",
+      "file": "gouldian-finch-right.webp",
+      "facing": "right",
+      "source": "https://cmsexternal.nt.gov.au/__data/assets/pdf_file/0019/206353/gouldian-finch.pdf",
+      "rationale": "Distinctive colourful savanna finch supported by NT distribution evidence."
+    },
+    "australia/australian-capital-territory": {
+      "name": "Gang-gang Cockatoo",
+      "scientificName": "Callocephalon fimbriatum",
+      "file": "gang-gang-right.webp",
+      "facing": "right",
+      "source": "https://www.act.gov.au/living-in-the-act/flags-and-emblems-of-the-australian-capital-territory-act",
+      "rationale": "Locally recognised ACT faunal emblem; original bird art rather than insignia."
+    },
+    "australia/jervis-bay-territory": {
+      "name": "Eastern Bristlebird",
+      "scientificName": "Dasyornis brachypterus",
+      "file": "bristlebird-right.webp",
+      "facing": "right",
+      "source": "https://booderee.gov.au/discover/nature/conservation/",
+      "rationale": "Conservation flagship with a protected population at Booderee."
+    },
+    "new-zealand/south-island": {
+      "name": "Kea",
+      "scientificName": "Nestor notabilis",
+      "file": "aves-new-zealand-bird.png",
+      "facing": "left",
+      "source": "https://www.nzbirdsonline.org.nz/species/kea",
+      "rationale": "Distinctive South Island alpine parrot; not a lowland/coastal presence claim."
+    },
+    "new-zealand/mountains": {
+      "name": "Kea",
+      "scientificName": "Nestor notabilis",
+      "file": "aves-new-zealand-bird.png",
+      "facing": "left",
+      "source": "https://www.nzbirdsonline.org.nz/species/kea",
+      "rationale": "Distinctive South Island alpine parrot; not a lowland/coastal presence claim."
+    }
+  }
+}

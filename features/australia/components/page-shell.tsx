@@ -3,13 +3,16 @@
  * title, description, optional hero media and the page body as children. The homepage has
  * its own section composition in app/page.tsx. Discovery media uses the shared country map/photo pair; original route content stays below.
  */
+import { AustraliaUnifiedExplorer } from "./australia-unified-explorer"
+import { ExplorerHeader, ExplorerFooter } from "./explorer-navigation"
 import type { ReactNode } from "react"
 import { NavigationHeader } from "@/features/australia/components/navigation-header"
 import { Footer } from "@/features/australia/components/footer"
 import { AustraliaHomeExplorer } from "@/features/australia/components/australia-home-explorer"
 import { Badge } from "@/components/ui/badge"
 
-export function PageShell({ title, description, children, path = "", eyebrow = "AVES Australia", footer, media }: { title: string; description: string; children: ReactNode; path?: string; eyebrow?: string; footer?: ReactNode; media?: ReactNode }) {
+export function PageShell({ title, description, children, path = "", eyebrow = "AVES Australia", footer, media, explorerRegion }: { title: string; description: string; children: ReactNode; path?: string; eyebrow?: string; footer?: ReactNode; media?: ReactNode; explorerRegion?: string }) {
+  if(explorerRegion)return <div className="min-h-screen bg-white"><ExplorerHeader/><main id="main-content" tabIndex={-1}><AustraliaUnifiedExplorer initialRegion={explorerRegion} titleStyle="birding">{children}</AustraliaUnifiedExplorer></main>{footer ?? <ExplorerFooter/>}</div>
   return <div className="min-h-screen bg-white">
     <NavigationHeader currentPage={path} />
     <main id="main-content" tabIndex={-1}>
@@ -21,7 +24,7 @@ export function PageShell({ title, description, children, path = "", eyebrow = "
             <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">{description}</p>
           </div>
           {/* Media owns its internal sizing; for example, the bird carousel keeps its narrow portrait cap. */}
-          {(media || path === "/aves-explorer") && <div className="mt-8"><AustraliaHomeExplorer key={path} initialRegion={path.startsWith("/regions/") ? path.split("/")[2] : undefined} media={media} /></div>}
+          {media && <div className="mt-8"><AustraliaHomeExplorer resizable key={path} initialRegion={path.startsWith("/regions/") ? path.split("/")[2] : undefined} media={media} /></div>}
         </div>
       </section>
       {/* The calling route supplies editable page sections here, below the common hero. */}

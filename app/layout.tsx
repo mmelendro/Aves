@@ -8,6 +8,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { PreviewModeProvider } from "@/components/preview-mode"
 import { isReadOnlyPreview } from "@/lib/deployment-mode"
+import { HeaderLandscapeProvider } from "@/components/header-landscape-context"
 import { publicNavigationPaths } from "@/lib/public-navigation"
 import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { CookieBanner } from "@/components/cookie-banner"
@@ -94,7 +95,7 @@ export default function RootLayout({
       <body>
         <PreviewModeProvider readOnly={isReadOnlyPreview()}>
           <CookieConsentProvider>
-            <AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider>
+            <HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider>
             <CookiePreferenceCenter />
             <CookieBanner />
           </CookieConsentProvider>

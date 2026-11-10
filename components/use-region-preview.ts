@@ -1,7 +1,7 @@
 "use client"
 import { useRef, type MouseEvent, type KeyboardEvent } from "react"
 import { useRouter } from "next/navigation"
-import { publicNavigationPaths } from "@/lib/public-navigation"
+import { publicPages } from "@/lib/public-pages"
 import { mediaClientHref } from "@/lib/media-navigation"
 import { regionActivation } from "@/lib/region-activation"
 
@@ -11,7 +11,7 @@ import { regionActivation } from "@/lib/region-activation"
 export function useRegionPreview(onPreview: (id: string) => void, navigate?: (href: string) => void) {
   const router = useRouter()
   const go = navigate ?? (href => {
-    const local = mediaClientHref(href, window.location.href, publicNavigationPaths)
+    const local = mediaClientHref(href, window.location.href, publicPages.map(page => page.href))
     if (local !== null) router.push(local)
     else window.location.assign(href)
   })

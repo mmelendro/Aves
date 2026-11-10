@@ -7,6 +7,8 @@
  */
 "use client"
 
+import { useSharedBirdAudio } from "./use-shared-bird-audio"
+import { FollowBirdCalls, type FollowCallStatus } from "@/lib/follow-bird-calls"
 import { playForegroundMedia } from "@/lib/media-focus"
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
@@ -16,6 +18,7 @@ import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, VolumeX, Loader2, Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import PhotoZoom from "./photo-zoom"
 import { sitePath } from "@/lib/site-path"
 import { coverFocalPosition } from "@/lib/cover-focal-position"
 import { birdData as allBirds, type BirdProfile } from "@/content/birds"
@@ -75,6 +78,9 @@ export default function HomepageBirdCarousel({
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
   const [audioError, setAudioError] = useState(false)
   const [audioLoading, setAudioLoading] = useState(false)
+  const [followStatus, setFollowStatus] = useState<FollowCallStatus>("off")
+  const follow = useRef<FollowBirdCalls | null>(null)
+  if (!follow.current) follow.current = new FollowBirdCalls(audio => playForegroundMedia(audio as HTMLAudioElement), setFollowStatus)
   const infoButtonRef = useRef<HTMLButtonElement | null>(null)
   const imageRef = useRef<HTMLImageElement | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -84,6 +90,9 @@ export default function HomepageBirdCarousel({
   // Wrap a stale index safely if a caller replaces the bird list with a shorter one.
   const selectedIndex = birds.length ? currentIndex % birds.length : 0
   const currentBird = birds[selectedIndex]
+  const sharedAudio = useSharedBirdAudio(currentBird)
+  const callPlaying = sharedAudio.available ? sharedAudio.playing : isAudioPlaying
+  const callsFollow = sharedAudio.available ? sharedAudio.following : follow.current.enabled
   const imageStatus = imageState.image === currentBird?.image ? imageState.status : "loading"
 
   useEffect(() => {
@@ -147,7 +156,27 @@ export default function HomepageBirdCarousel({
     }
   }, [currentBird?.id, currentBird?.audioFile])
 
+  useEffect(() => {
+    follow.current?.select(audioRef.current)
+  }, [currentBird?.id, currentBird?.audioFile])
+  useEffect(() => {
+    const stopWhenHidden = () => { if (document.hidden) follow.current?.stop() }
+    const stopForOtherMedia = (event: Event) => {
+      const target = event.target
+      if (target instanceof HTMLMediaElement && target !== audioRef.current && !target.hasAttribute("data-aves-ambience")) follow.current?.stop()
+    }
+    document.addEventListener("visibilitychange", stopWhenHidden)
+    document.addEventListener("play", stopForOtherMedia, true)
+    return () => {
+      document.removeEventListener("visibilitychange", stopWhenHidden)
+      document.removeEventListener("play", stopForOtherMedia, true)
+      follow.current?.dispose()
+    }
+  }, [])
+
   const toggleAudio = useCallback(async () => {
+    if (sharedAudio.available) { setIsPlaying(false); sharedAudio.toggle(); return }
+    if (follow.current?.enabled) { follow.current.stop(); return }
     const audio = audioRef.current
     if (!audio || !currentBird?.audioFile) return
     // A sequence number prevents a rejected, older play request changing a newer slide.
@@ -171,7 +200,7 @@ export default function HomepageBirdCarousel({
       setAudioLoading(false)
       setIsAudioPlaying(false)
     }
-  }, [currentBird?.audioFile, audioLoading])
+  }, [currentBird?.audioFile, audioLoading, sharedAudio])
 
   // Every manual navigation stops motion/audio. The picker can keep details open
   // so keyboard focus stays on the same select element after a bird is chosen.
@@ -189,10 +218,10 @@ export default function HomepageBirdCarousel({
   // Schedule one slide at a time; do not advance while loading, listening or reading.
   // Cleanup cancels the old timeout whenever any relevant state changes.
   useEffect(() => {
-    if (!isPlaying || birds.length < 2 || imageStatus === "loading" || isAudioPlaying || audioLoading || showInfo) return
+    if (!isPlaying || birds.length < 2 || imageStatus === "loading" || callPlaying || audioLoading || showInfo) return
     const timer = window.setTimeout(() => setCurrentIndex(index => (index + 1) % birds.length), autoPlayInterval)
     return () => window.clearTimeout(timer)
-  }, [isPlaying, birds.length, currentIndex, imageStatus, autoPlayInterval, isAudioPlaying, audioLoading, showInfo])
+  }, [isPlaying, birds.length, currentIndex, imageStatus, autoPlayInterval, callPlaying, audioLoading, showInfo])
 
   function closeInfo() {
     setShowInfo(false)
@@ -233,7 +262,7 @@ export default function HomepageBirdCarousel({
   }
 
   if (!currentBird) return null
-  const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : isAudioPlaying ? "Pause bird call" : "Listen to bird call"
+  const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : callPlaying ? "Pause bird call" : "Listen to bird call"
   const infoPanel = showInfo ? <SpeciesDetailsPanel id={`${carouselId}-info`} bird={currentBird} birds={birds}
     selectedIndex={selectedIndex} showBirdPicker={showBirdPicker}
     onSelectBird={index => goToSlide(index, true)} onClose={closeInfo} /> : null
@@ -247,21 +276,21 @@ export default function HomepageBirdCarousel({
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
     >
       {/* Load sound only on request. Browser events, rather than a guessed timer, update playback UI. */}
-      {currentBird.audioFile && <audio
+      {!sharedAudio.available && currentBird.audioFile && <audio
         key={currentBird.id} ref={audioRef} src={sitePath(currentBird.audioFile)} preload="none" data-aves-bird-call aria-label={`${currentBird.commonName} recording`}
         onPlay={event => {
           // Several viewers can share a page. Starting one call stops the others
           // without a separate global listener.
           const playing = event.currentTarget
-          document.querySelectorAll<HTMLAudioElement>("audio[data-aves-bird-call]").forEach(audio => {
+          document.querySelectorAll<HTMLMediaElement>("audio:not([data-aves-ambience]),video").forEach(audio => {
             if (audio !== playing) audio.pause()
           })
         }}
         onPlaying={() => { setIsAudioPlaying(true); setAudioLoading(false); setAudioError(false) }}
         onPause={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
-        onEnded={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
+        onEnded={() => { setIsAudioPlaying(false); setAudioLoading(false); follow.current?.ended() }}
         onWaiting={event => { if (!event.currentTarget.paused) setAudioLoading(true) }}
-        onError={() => { setAudioError(true); setIsAudioPlaying(false); setAudioLoading(false) }}
+        onError={() => { follow.current?.stop(); setAudioError(true); setIsAudioPlaying(false); setAudioLoading(false) }}
       />}
       <Card className={cn("overflow-hidden rounded-2xl border border-emerald-100 shadow-lg", isDestinationCard && "rounded-none border-0 shadow-none")}>
         <div data-carousel-image data-has-bird-selection={selection ? "true" : undefined}
@@ -271,7 +300,7 @@ export default function HomepageBirdCarousel({
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
           {/* One edge-to-edge photo, with a per-species focal point for the portrait crop. */}
-          {imageStatus !== "error" ? <Image
+          {imageStatus !== "error" ? <PhotoZoom key={currentBird.id} label={currentBird.commonName}><Image
             key={currentBird.id} ref={imageRef} src={sitePath(currentBird.image || "/placeholder.svg")} alt={currentBird.commonName} fill
             className={cn("object-cover transition-opacity duration-300 motion-reduce:transition-none", imageStatus === "loaded" ? "opacity-100" : "opacity-0")}
             style={{ objectPosition: currentBird.imagePosition || "center" }}
@@ -279,7 +308,7 @@ export default function HomepageBirdCarousel({
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
             priority={priority && selectedIndex === 0}
             sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
-          /> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
+          /></PhotoZoom> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
           {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
           {/* Image count describes this curated selection, not a destination species total. */}
@@ -296,9 +325,9 @@ export default function HomepageBirdCarousel({
             </IconControl>
             {/* A quiet green halo advertises a real recording; a brighter fill marks active playback.
                 buttonClassName styles the button itself, while className still positions its wrapper. */}
-            <IconControl label={audioButtonText} onClick={toggleAudio} aria-pressed={isAudioPlaying} disabled={!currentBird.audioFile}
-              buttonClassName={currentBird.audioFile ? cn("border-emerald-200/80 bg-emerald-950/80 text-emerald-50 shadow-[0_0_0_3px_rgba(167,243,208,0.14)] hover:bg-emerald-900/90", isAudioPlaying && "border-emerald-100 bg-emerald-700/95 text-white shadow-[0_0_0_3px_rgba(167,243,208,0.24)] hover:bg-emerald-700") : undefined}>
-              {audioLoading ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : isAudioPlaying ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
+            <IconControl label={audioButtonText} onClick={toggleAudio} aria-pressed={callPlaying} disabled={!currentBird.audioFile}
+              buttonClassName={currentBird.audioFile ? cn("border-emerald-200/80 bg-emerald-950/80 text-emerald-50 shadow-[0_0_0_3px_rgba(167,243,208,0.14)] hover:bg-emerald-900/90", callPlaying && "border-emerald-100 bg-emerald-700/95 text-white shadow-[0_0_0_3px_rgba(167,243,208,0.24)] hover:bg-emerald-700") : undefined}>
+              {audioLoading ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : callPlaying ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
             </IconControl>
             <IconControl buttonRef={infoButtonRef} label={showInfo ? "Hide species details & credits" : "Species details & credits"} aria-expanded={showInfo} aria-controls={`${carouselId}-info`} onClick={() => { if (showInfo) closeInfo(); else { setIsPlaying(false); setShowInfo(true) } }}><Info className="h-4 w-4" aria-hidden="true" /></IconControl>
           </div>
@@ -324,6 +353,16 @@ export default function HomepageBirdCarousel({
             Photo: {currentBird.photoCredit.photographer}
           </a>
         </div>}
+        <div className="flex flex-wrap items-center gap-2 border-t border-emerald-100 bg-white px-3 py-2 text-emerald-950">
+          <button type="button" className="min-h-11 rounded-lg border border-emerald-200 px-3 text-xs font-medium hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"
+            aria-pressed={callsFollow} onClick={() => {
+              setIsPlaying(false); playAttemptRef.current += 1
+              if (sharedAudio.available) { sharedAudio.toggleFollow(); return }
+              if (follow.current?.enabled) follow.current.stop()
+              else follow.current?.start(audioRef.current)
+            }}>Listen as you change birds: {callsFollow ? "On" : "Off"}</button>
+          <p className="text-xs leading-5" role="status">{sharedAudio.available ? callsFollow ? (currentBird.audioFile ? "Listening follows your bird choices in the shared player." : "No recording for this bird. Choose another to continue.") : "Optional for this viewer. Stops when you leave or hide this page." : followStatus === "blocked" ? "Playback stopped. Press Listen again to resume." : followStatus === "missing" ? "No recording for this bird. Choose another to continue." : followStatus === "loading" ? "Loading this bird’s call…" : followStatus === "playing" ? "Listening follows your bird choices. Pause to stop." : followStatus === "ready" ? "Choose another bird to hear its call." : "Optional for this viewer. Stops when you leave or hide this page."}</p>
+        </div>
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}
         {/* Announce manual changes politely; automatic playback must not repeatedly interrupt speech. */}
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>

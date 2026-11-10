@@ -5,6 +5,7 @@
  * Keep wider distribution in the bird catalogue and local notes in this file.
  */
 import { birdData, type BirdSource } from "./birds"
+import { placeInSentence } from "@/lib/place-language"
 
 export type RegionalBird = { birdId: string; whereFound: string; sources: BirdSource[] }
 export type ColombiaRegion = {
@@ -149,3 +150,8 @@ export const regions: ColombiaRegion[] = [
     ],
   },
 ]
+
+/** Natural regional wording shared by visible headings and search titles. */
+export function colombiaBirdingTitle(region: Pick<ColombiaRegion, "id" | "name">): string {
+  return `Birding in ${placeInSentence(region.name)}`
+}

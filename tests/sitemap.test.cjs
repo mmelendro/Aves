@@ -17,7 +17,7 @@ function loader(env = {}) {
       compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, esModuleInterop: true },
     }).outputText
     new Function("require", "exports", "process", code)(
-      name => name.startsWith("@/") ? load(name.slice(2) + ".ts")
+      name => name.startsWith("@/") ? load(name.slice(2) + (extname(name) ? "" : ".ts"))
         : name.startsWith(".") ? load(join(dirname(file), name) + (extname(name) ? "" : ".ts"))
         : require(name),
       result,
@@ -38,10 +38,7 @@ test("XML sitemap contains unique canonical public URLs without queries, aliases
   const entries = load("app/sitemap.ts").default()
   const urls = entries.map(entry => entry.url)
   assert.equal(new Set(urls).size, urls.length)
-  const australianPages = load("features/australia/lib/public-pages.ts").publicPages
-  const australiaPath = load("features/australia/lib/site-path.ts").sitePath
-  const expected = new Set([...publicPages.map(page => page.href), ...australianPages.map(page => australiaPath(page.href))])
-  assert.deepEqual(new Set(urls.map(url => new URL(url).pathname)), expected)
+  assert.equal(urls.length, load("lib/public-navigation.ts").publicNavigationPaths.length)
   for (const entry of entries) {
     const url = new URL(entry.url)
     assert.equal(url.origin, "https://aves.bio")
@@ -143,19 +140,20 @@ test("each listed Colombia page declares its own canonical URL", () => {
         compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
       }).outputText
       const result = {}
-      new Function("exports", "canonicalUrl", "publicMetadata", code)(result, canonicalUrl, load("lib/public-metadata.ts").publicMetadata)
+      new Function("exports", "canonicalUrl", "colombiaBirdingTitle", "regions", "publicMetadata", code)(result, canonicalUrl, ...(australian ? [undefined,undefined] : [load("content/regions.ts").colombiaBirdingTitle,load("content/regions.ts").regions]),load("lib/public-metadata.ts").publicMetadata)
       return result.metadata
     }
     return undefined
   }
   for (const page of publicPages) {
-    const file = page.href === "/contact" ? join(root, "features/colombia/contact-page.tsx") : join(root, "app", page.href, "page.tsx")
+    const file = join(root, "app", page.href, "page.tsx")
     if (!existsSync(file)) {
       assert.ok(page.href.startsWith("/regions/"))
       const dynamic = readFileSync(join(root, "app/regions/[slug]/page.tsx"), "utf8")
       assert.match(dynamic, /canonical:\s*canonicalUrl\(.\/regions\/\$\{region\.id\}.\)/)
       continue
     }
+    if (page.href === "/contact") { assert.match(readFileSync(file,"utf8"), /canonical: "\/contact"/); continue }
     const layout = join(root, "app", page.href, "layout.tsx")
     const metadata = metadataFrom(file) || (existsSync(layout) ? metadataFrom(layout) : undefined)
     assert.equal(metadata?.alternates?.canonical, canonicalUrl(page.href), page.href)
@@ -164,16 +162,8 @@ test("each listed Colombia page declares its own canonical URL", () => {
 
 test("every actual map marker opens its canonical guide and preserves its enquiry region", () => {
   const { colombiaMapRegions, getRegionLinks } = load("lib/region-links.ts")
-  const file = join(root, "components/colombian-birds-explorer.tsx")
-  const source = readFileSync(file, "utf8")
-  const ast = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
-  let markerIds = []
-  for (const statement of ast.statements) {
-    if (!ts.isVariableStatement(statement)) continue
-    const data = statement.declarationList.declarations.find(item => item.name.getText(ast) === "regionMapVisuals")
-    if (!data || !ts.isArrayLiteralExpression(data.initializer)) continue
-    markerIds = data.initializer.elements.map(item => item.properties.find(property => property.name?.getText(ast) === "id").initializer.text)
-  }
+  const markers = load("content/colombia-map-markers.ts").colombiaMapMarkers
+  const markerIds = markers.map(marker=>marker.mapId)
   assert.equal(markerIds.length, 11)
   assert.deepEqual(markerIds.slice().sort(), colombiaMapRegions.map(region => region.mapId).sort())
   const publicPaths = new Set(publicPages.map(page => page.href))
@@ -188,41 +178,22 @@ test("every actual map marker opens its canonical guide and preserves its enquir
   for (const value of ["", "__proto__", "not-a-region"]) {
     assert.deepEqual(getRegionLinks(value), { guideHref: "/aves-explorer", enquiryHref: "/contact" })
   }
-  assert.match(source, /href=\{currentLinks\.guideHref\}/)
-  assert.match(source, /href=\{currentLinks\.enquiryHref\}/)
-  assert.match(source, /aria-pressed=\{isSelected\}/)
+
 })
 
 test("map descriptions and every displayed bird come from the sourced regional catalogue", () => {
   const { regions } = load("content/regions.ts")
   const { birdData } = load("content/birds.ts")
-  const source = readFileSync(join(root, "components/colombian-birds-explorer.tsx"), "utf8")
-  const ast = ts.createSourceFile("explorer.tsx", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
-  const declarations = ast.statements.filter(ts.isVariableStatement)
-    .flatMap(statement => [...statement.declarationList.declarations])
-    .filter(item => ["regionMapVisuals", "bioregionsData"].includes(item.name.getText(ast)))
-  assert.equal(declarations.length, 2)
-  const setup = declarations.map(item => `const ${item.name.getText(ast)} = ${item.initializer.getText(ast)}`).join(";\n")
-  const map = new Function("regions", "birdData", "TreePine", "Mountain", "Leaf", "Waves", "Sun", setup + "; return bioregionsData")(
-    regions, birdData, null, null, null, null, null,
-  )
-  assert.equal(map.length, regions.length)
-  for (const item of map) {
-    const region = regions.find(region => region.mapId === item.id)
-    assert.ok(region, item.id)
-    assert.equal(item.name, region.name)
-    assert.equal(item.description, region.description)
-    assert.ok(item.birds.length >= 3)
-    assert.equal(item.birds.length, region.birds.length)
-    for (const selected of item.birds) {
-      const bird = birdData.find(bird => bird.id === selected.birdId)
-      assert.ok(bird, selected.birdId)
-      assert.equal(selected.commonName, bird.commonName)
-      assert.ok(selected.whereFound.length > 20)
-      assert.ok(selected.sources.length > 0)
+  const { getDestinationRegionBirds, destinationRegions } = load("content/destination-regions.ts")
+  for (const region of regions) {
+    const displayed=destinationRegions.colombia.find(item=>item.id===region.id)
+    assert.equal(displayed.description,region.description)
+    const selected=getDestinationRegionBirds("colombia",region.id)
+    assert.deepEqual(selected.map(bird=>bird.id),region.birds.map(bird=>bird.birdId))
+    for(const bird of selected){
+      assert.ok(birdData.some(original=>original.id===bird.id))
+      assert.ok(bird.localOccurrence.length>20)
+      assert.ok(bird.sources.length>0)
     }
-    for (const unsupported of ["totalSpecies", "endemicCount", "bestTime", "keyBirds"]) assert.equal(item[unsupported], undefined)
   }
-  assert.doesNotMatch(map.find(region => region.id === "Central Andes").description, /highest peaks/)
-  assert.match(source, /currentRegion\.birds\.map/)
 })

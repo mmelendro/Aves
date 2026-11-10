@@ -16,7 +16,7 @@ export function RegionalBirdCarousel({ regionId, compact = false }: { regionId: 
   const sources = [...new Map(selections.flatMap(item => item.sources || []).map(source => [source.url, source])).values()]
   return <div className={compact ? "min-w-0" : "grid lg:grid-cols-2 gap-8 lg:gap-14 items-center mb-10"}>
     {/* A region change remounts the carousel, resetting its selected slide and audio. */}
-    <div className="min-w-0"><HomepageBirdCarousel key={regionId} birds={birds} autoPlay={false} className="w-full max-w-xl" /></div>
+    <div className="min-w-0"><HomepageBirdCarousel key={regionId} birds={birds} autoPlay={false} fillPanel={compact} className={compact ? "w-full max-w-none" : "w-full max-w-xl"} /></div>
     {!compact && <div>
       <h3 className="text-2xl font-semibold text-gray-900">Meet the local birdlife</h3>
       <p className="mt-4 text-gray-600 leading-relaxed">Explore a few of the birds recorded in this region. Each photograph includes a local place to look, with the wider range and habitat in the bird information panel. Listen to a call where a credited recording is available.</p>

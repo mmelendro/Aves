@@ -27,7 +27,7 @@ export default function SpeciesPage() {
           <h4 className="mt-5 flex items-center gap-2 text-sm font-semibold text-emerald-800"><MapPin className="h-4 w-4" aria-hidden="true" />Where to find it</h4><p className="mt-2 text-sm leading-relaxed text-gray-600">{bird.distribution}</p>
           <h4 className="mt-4 text-sm font-semibold text-gray-900">Habitat</h4><p className="mt-2 text-sm leading-relaxed text-gray-600">{bird.habitat}</p>
           <ul className="mt-4 space-y-2 text-xs text-emerald-800">{bird.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer" className="underline underline-offset-4">{source.title}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul>
-          <Link href={`/contact?region=${bird.regionSlug}`} className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-700">Plan a birding trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+          <Link href={`/contact?region=${bird.regionSlug}`} className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-700">Plan your birding trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
       </article>)}</div>
       <p className="mt-8 text-sm text-gray-600"><Link href="/credits" className="text-emerald-800 underline underline-offset-4">Photography and recording credits</Link></p>

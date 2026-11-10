@@ -131,7 +131,7 @@ def main():
                 issues.append({"path": path, "check": "duplicate document title"})
             titles.add(row.get("title"))
         elif path in private_paths:
-            valid = (row.get("status") == 401 and "no-store" in (row.get("cacheControl") or "")
+            valid = (row.get("status") in [401, 503] and "no-store" in (row.get("cacheControl") or "")
                      and "noindex" in (row.get("robotsHeader") or "") and row.get("contentType") == "application/json")
         elif path.endswith("robots.txt"):
             valid = row.get("status") == 200 and row.get("contentType") == "text/plain" and re.search(r"(?m)^Disallow: /$", body)

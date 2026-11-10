@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
   if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production") {
     return { rules: { userAgent: "*", disallow: "/" } }
   }
-  // This root file governs both sites on aves.bio. Crawling rules are not access control.
+  // This root file governs every country in the AVES application. Crawling rules are not access control.
   return {
     rules: {
       userAgent: "*",

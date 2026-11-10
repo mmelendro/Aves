@@ -1,7 +1,8 @@
 "use client"
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
-import Image from "next/image"
+import { createPortal } from "react-dom"
+import { BrandBird } from "@/components/brand-bird"
 import { useRouter } from "next/navigation"
 import { playForegroundMedia, setEmbeddedMediaFocus } from "@/lib/media-focus"
 import { mediaIdentity } from "@/lib/media-identity"
@@ -11,8 +12,8 @@ import { travelMediaResources } from "@/content/travel-media"
 import { MEDIA_HANDOFF_KEY, readMediaHandoff, type MediaHandoff } from "@/lib/media-handoff"
 import styles from "./aves-media-provider.module.css"
 
-type Resource = typeof travelMediaResources[number]
-type MediaContextValue = { resourceId: string | null; open: (id: string) => void }
+import type { MediaResource as Resource } from "@/lib/media-resource"
+type MediaContextValue = { resourceId: string | null; open: (id: string) => void; play: (resource: Resource) => void; stop: (id: string) => void; pause: () => void; playing: boolean }
 const MediaContext = createContext<MediaContextValue | null>(null)
 export const useAvesMedia = () => useContext(MediaContext)
 
@@ -61,7 +62,22 @@ function loadVideoAPI(): Promise<VideoAPI> {
  * A document reload can only restore a paused, explicitly resumable checkpoint. */
 export function AvesMediaProvider({ children, assetBase = "", navigationPaths = [] }: { children: ReactNode; assetBase?: string; navigationPaths?: readonly string[] }) {
   const router = useRouter()
+  const [dockHost, setDockHost] = useState<HTMLDivElement | null>(null)
+  useEffect(() => {
+    const host = document.createElement("div")
+    host.dataset.avesPlayerHost = "true"
+    // Move one stable portal container into a full-size map's top layer. The
+    // mounted audio/video survives both enlarging and restoring the map.
+    const place = () => { (document.querySelector("dialog[data-expanded]") || document.body).appendChild(host) }
+    place(); setDockHost(host)
+    document.addEventListener("aves:map-resize", place)
+    return () => { document.removeEventListener("aves:map-resize", place); host.remove() }
+  }, [])
   const [resourceId, setResourceId] = useState<string | null>(null)
+  const [requested, setRequested] = useState<Resource | null>(null)
+  const [playing, setPlaying] = useState(false)
+  const currentId = useRef(resourceId)
+  currentId.current = resourceId
   const [expanded, setExpanded] = useState(false)
   const [handoff, setHandoff] = useState<MediaHandoff | null>(null)
   const [resumeRequired, setResumeRequired] = useState(false)
@@ -96,11 +112,33 @@ export function AvesMediaProvider({ children, assetBase = "", navigationPaths = 
     return () => document.removeEventListener("click", navigate)
   }, [resourceId, navigationPaths, assetBase, router])
   const remember = useCallback((id: string, position: number, muted: boolean) => {
+    if (!travelMediaResources.some(item => item.id === id)) return
     try { sessionStorage.setItem(MEDIA_HANDOFF_KEY, JSON.stringify({ version: 1, resourceId: id, position, muted, savedAt: Date.now() })) } catch { /* No storage is required for playback. */ }
   }, [])
   const opener = useRef<HTMLElement | null>(null)
+  const play = useCallback((resource: Resource) => {
+    if (!resource.playback) return
+    document.dispatchEvent(new CustomEvent("aves:media-request", { detail: resource.id }))
+    if (currentId.current === resource.id && document.querySelector("audio[data-aves-resource-audio]")) {
+      document.dispatchEvent(new CustomEvent("aves:resume-media", { detail: resource.id }))
+      return
+    }
+    setRequested(resource); setResourceId(resource.id); setPlaying(false)
+    setHandoff(null); setResumeRequired(false); setExpanded(false)
+    try { sessionStorage.removeItem(MEDIA_HANDOFF_KEY) } catch { /* Optional storage. */ }
+  }, [])
+  const stop = useCallback((id: string) => {
+    if (currentId.current !== id) return
+    setResourceId(null); setRequested(null); setPlaying(false)
+  }, [])
+  const pause = useCallback(() => {
+    document.dispatchEvent(new CustomEvent("aves:media-request", { detail: "" }))
+    document.querySelector<HTMLAudioElement>("audio[data-aves-resource-audio]")?.pause()
+  }, [])
   function open(id: string) {
     if (!travelMediaResources.some(item => item.id === id && item.playback)) return
+    document.dispatchEvent(new CustomEvent("aves:media-request", { detail: id }))
+    setRequested(null)
     opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
     // Reopening the same resource preserves its stream and position.
     if (id !== resourceId) { setHandoff(null); remember(id, 0, false) }
@@ -109,21 +147,23 @@ export function AvesMediaProvider({ children, assetBase = "", navigationPaths = 
     setExpanded(false)
   }
   function close() {
+    document.dispatchEvent(new CustomEvent("aves:media-request", { detail: "" }))
     setResourceId(null)
+    setRequested(null)
+    setPlaying(false)
     setHandoff(null)
     setResumeRequired(false)
     try { sessionStorage.removeItem(MEDIA_HANDOFF_KEY) } catch { /* Optional storage. */ }
     if (opener.current?.isConnected) opener.current.focus({ preventScroll: true })
   }
-  const resource = travelMediaResources.find(item => item.id === resourceId)
-  const identity = mediaIdentity(resource?.country || "global")
-  return <MediaContext.Provider value={{ resourceId, open }}>
+  const resource: Resource | undefined = requested?.id === resourceId ? requested : travelMediaResources.find(item => item.id === resourceId)
+  return <MediaContext.Provider value={{ resourceId, open, play, stop, pause, playing }}>
     {children}
-    {resource && (resumeRequired ? <aside className={styles.dock} aria-label="AVES travel media player" onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); close() } }}>
-      <div className={styles.heading}><Image src={`${assetBase}/images/brand/${identity.file}`} alt={`${identity.bird} · ${identity.country} programme`} width={36} height={36} /><div className={styles.title}><span>Ready when you are</span><strong>{resource.title}</strong></div><button className={styles.feather} onClick={close} aria-label="Close player and stop playback"><X size={18} /></button></div>
+    {resource && dockHost && createPortal((resumeRequired ? <aside className={styles.dock} aria-label="AVES travel media player" onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); close() } }}>
+      <div className={styles.heading}><BrandBird country={resource.country} regionId={resource.regionId ?? (resource.country === "new-zealand" ? "south-island" : undefined)} placeId={resource.mapPlace?.id} size={36} /><div className={styles.title}><span>Ready when you are</span><strong>{resource.title}</strong></div><button className={styles.feather} onClick={close} aria-label="Close player and stop playback"><X size={18} /></button></div>
       <p className={styles.note}>Playback paused while the page changed. Resume from {time(handoff?.position || 0)}.</p>
       <button className={styles.resume} onClick={() => setResumeRequired(false)}><Play size={18} aria-hidden="true" />Resume media</button>
-    </aside> : <MediaDock key={resource.id} resource={resource} expanded={expanded} setExpanded={setExpanded} close={close} initial={handoff?.resourceId === resource.id ? handoff : null} remember={remember} assetBase={assetBase} />)}
+    </aside> : <MediaDock key={resource.id} resource={resource} expanded={expanded} setExpanded={setExpanded} close={close} initial={handoff?.resourceId === resource.id ? handoff : null} remember={remember} reportPlaying={setPlaying} />), dockHost)}
     {/* Space below the document keeps the dock from hiding the final links. */}
     {resource && <div aria-hidden="true" style={{ height: resource.playback?.type === "youtube" ? 360 : 160 }} />}
   </MediaContext.Provider>
@@ -134,9 +174,9 @@ function time(seconds: number) {
   return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, "0")}`
 }
 
-function MediaDock({ resource, expanded, setExpanded, close, initial, remember, assetBase }: {
+function MediaDock({ resource, expanded, setExpanded, close, initial, remember, reportPlaying }: {
   resource: Resource; expanded: boolean; setExpanded: (value: boolean) => void; close: () => void
-  initial: MediaHandoff | null; remember: (id: string, position: number, muted: boolean) => void; assetBase: string
+  reportPlaying: (playing: boolean) => void; initial: MediaHandoff | null; remember: (id: string, position: number, muted: boolean) => void
 }) {
   const audio = useRef<HTMLAudioElement>(null)
   const frame = useRef<HTMLDivElement>(null)
@@ -148,6 +188,9 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
   const [position, setPosition] = useState(initial?.position ?? 0)
   const starting = useRef(initial)
   const [duration, setDuration] = useState(0)
+  const [volume, setVolume] = useState(resource.kind === "Soundscape" ? 25 : 75)
+  useEffect(() => { if (audio.current) audio.current.volume = volume / 100 }, [volume])
+  useEffect(() => { reportPlaying(playing) }, [playing, reportPlaying])
   const playback = resource.playback!
   const identity = mediaIdentity(resource.country)
 
@@ -159,6 +202,13 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
     const anotherPlaying = (event: Event) => {
       if (event.target !== element && !(event.target instanceof HTMLElement && event.target.hasAttribute("data-aves-ambience"))) { element?.pause(); video.current?.pauseVideo() }
     }
+    const resume = (event: Event) => {
+      if ((event as CustomEvent<string>).detail === resource.id && element) {
+        setError("")
+        playForegroundMedia(element).catch(() => { if (active) setError("Tap Play to resume this recording.") })
+      }
+    }
+    document.addEventListener("aves:resume-media", resume)
     let videoStarted = false
     let videoActive = false
     const seek = () => {
@@ -182,7 +232,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
       element.muted = starting.current?.muted ?? false
       element.addEventListener("loadedmetadata", seek, { once: true })
       element.src = playback.src
-      playForegroundMedia(element).catch(() => { if (active) setError("Tap play to start the podcast.") })
+      playForegroundMedia(element).catch(() => { if (active) setError("Tap play to start this recording.") })
     } else if (container) {
       // Reserve foreground priority while supported controls initialise.
       setEmbeddedMediaFocus(resource.id, "playing")
@@ -221,6 +271,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
     }
     return () => {
       active = false
+      document.removeEventListener("aves:resume-media", resume)
       setEmbeddedMediaFocus(resource.id, null)
       window.clearInterval(timer)
       window.removeEventListener("pagehide", leaving)
@@ -239,7 +290,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
         document.querySelectorAll<HTMLMediaElement>("audio:not([data-aves-ambience]),video").forEach(item => { if (item !== audio.current) item.pause() })
         playForegroundMedia(audio.current).catch(() => setError("Unable to play. Try the original source below."))
       }
-      else audio.current.pause()
+      else { document.dispatchEvent(new CustomEvent("aves:media-request", { detail: "" })); audio.current.pause() }
     } else if (playing) video.current?.pauseVideo()
     else { setEmbeddedMediaFocus(resource.id, muted ? null : "playing"); video.current?.playVideo() }
   }
@@ -251,7 +302,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
   }
   return <aside onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); if (expanded) setExpanded(false); else close() } }} aria-label="AVES travel media player" className={`${styles.dock} ${expanded ? styles.expanded : ""}`}>
     <div className={styles.heading}>
-      <Image src={`${assetBase}/images/brand/${identity.file}`} alt={`${identity.bird} · ${identity.country} programme`} width={36} height={36} />
+      <BrandBird country={resource.country} regionId={resource.regionId ?? (resource.country === "new-zealand" ? "south-island" : undefined)} placeId={resource.mapPlace?.id} size={36} />
       <div className={styles.title}><span>{identity.country} · {resource.kind}</span><strong title={resource.title}>{resource.title}</strong></div>
       <button className={styles.feather} onClick={() => setExpanded(!expanded)} aria-label={expanded ? "Compact player" : "Expand player"} title={expanded ? "Compact player" : "Expand player"}>{expanded ? <Minimize2 size={17} /> : <Maximize2 size={17} />}</button>
       <button className={styles.feather} onClick={close} aria-label="Close player and stop playback" title="Close and stop"><X size={18} /></button>
@@ -259,18 +310,19 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
     {/* This iframe stays in the same tree position when docking/expanding or
         navigating. CSS changes its size without restarting the programme. */}
     {playback.type === "youtube" && <div ref={frame} className={styles.video} />}
-    {playback.type === "audio" && <audio ref={audio} preload="none" data-aves-resource-audio aria-label={`${resource.title} podcast`}
+    {playback.type === "audio" && <audio ref={audio} preload="none" loop={resource.kind === "Soundscape"} data-aves-resource-audio aria-label={`${resource.title} ${resource.kind}`}
       onPlaying={() => { setPlaying(true); setError("") }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)}
       onTimeUpdate={event => setPosition(event.currentTarget.currentTime)}
       onDurationChange={event => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
       onError={() => { setPlaying(false); setError("Unable to load the recording. Try the original source below.") }} />}
     <div className={styles.controls}>
       <button className={styles.feather} onClick={toggle} disabled={playback.type === "youtube" && !ready} aria-label={playing ? "Pause media" : "Play media"} title={playing ? "Pause" : "Play"}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
-      {playback.type === "audio" && <div className={styles.seek}><label htmlFor="aves-media-seek" className="sr-only">Podcast position</label><input id="aves-media-seek" type="range" min={0} max={duration || 1} value={position} step={1} disabled={!duration} aria-valuetext={`${time(position)} of ${time(duration)}`} onChange={event => { if (audio.current) audio.current.currentTime = Number(event.target.value); setPosition(Number(event.target.value)) }} /><span>{time(position)} / {time(duration)}</span></div>}
+      {playback.type === "audio" && <div className={styles.seek}><label htmlFor="aves-media-seek" className="sr-only">Media position</label><input id="aves-media-seek" type="range" min={0} max={duration || 1} value={position} step={1} disabled={!duration} aria-valuetext={`${time(position)} of ${time(duration)}`} onChange={event => { if (audio.current) audio.current.currentTime = Number(event.target.value); setPosition(Number(event.target.value)) }} /><span>{time(position)} / {time(duration)}</span></div>}
       {playback.type === "youtube" && <span className={styles.videoHint}>DOC · YouTube</span>}
       <button className={styles.feather} onClick={toggleMute} disabled={playback.type === "youtube" && !ready} aria-label={muted ? "Unmute media" : "Mute media"} title={muted ? "Unmute" : "Mute"} aria-pressed={muted}>{muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
     </div>
+    {playback.type === "audio" && <label className={styles.volume}>Volume<input type="range" aria-label="Media volume" min={0} max={100} step={5} value={volume} onChange={event => setVolume(Number(event.target.value))} /><span>{volume}%</span></label>}
     {error && <p className={styles.note} role="status">{error} <a href={resource.href} target="_blank" rel="noreferrer">Original source</a></p>}
-    {expanded && <div className={styles.details}><p>{resource.description}</p><a href={resource.href} target="_blank" rel="noreferrer">{resource.action} ↗</a><p>Continues on supported public AVES pages. Account, sign-in and document reloads pause playback; choose Resume to continue. Video may need its Play control. Closing the player clears its saved position.</p></div>}
+    {expanded && <div className={styles.details}><p>{resource.description}</p><a href={resource.href} target="_blank" rel="noreferrer">{resource.action} ↗</a><p>{travelMediaResources.some(item => item.id === resource.id) ? "Continues while browsing within this app. Moving between AVES apps or reloading pauses playback; choose Resume to continue. Video may need its Play control. Closing the player clears its saved position." : "Continues while browsing within this app. Reloading or moving to another AVES app stops this recording. Choose a recording to listen again."}</p></div>}
   </aside>
 }

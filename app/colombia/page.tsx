@@ -1,4 +1,5 @@
 import { publicMetadata } from "@/lib/public-metadata"
+import WorldDestinationMap from "@/components/world-destination-map"
 import type { Metadata } from "next"
 import { canonicalUrl } from "@/lib/site-path"
 import ColombiaHomePage from "@/components/colombia-home-page"
@@ -22,5 +23,5 @@ export const metadata: Metadata = publicMetadata({
 
 /** Keep metadata server-rendered; build the translated copy tree in one client boundary. */
 export default function ColombiaPage() {
-  return <ColombiaHomePage />
+  return <ColombiaHomePage map={<WorldDestinationMap/>} />
 }

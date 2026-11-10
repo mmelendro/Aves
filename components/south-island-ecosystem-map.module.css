@@ -18,3 +18,5 @@
  .card { height:var(--discovery-panel-height); }
  .map { flex:1; height:auto; }
 }
+
+.seaLabels { fill:#315b67; font-style:italic; letter-spacing:.025em; }

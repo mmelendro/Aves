@@ -11,7 +11,6 @@ import { ArrowRight, Bird, Compass, MessageCircle, NotebookPen } from "lucide-re
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import WorldDestinationMap from "@/components/world-destination-map"
 import HomepageDestinationExplorer from "@/components/homepage-destination-explorer"
-import DestinationMapCards from "@/components/destination-map-cards"
 import BirdsBrandWord from "@/components/birds-brand-word"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -50,7 +49,6 @@ export default function HomePage() {
               </p>
             </div>
             <HomepageDestinationExplorer map={<WorldDestinationMap />} />
-            <DestinationMapCards />
           </div>
         </section>
         <section aria-labelledby="personal-journey-heading" className="bg-stone-50/70 py-14 sm:py-20">

@@ -8,12 +8,12 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import { Badge } from "@/components/ui/badge"
-import { publicPageGroups } from "@/lib/public-pages"
+import { publicNavigationGroups as publicPageGroups } from "@/lib/public-navigation"
 import { canonicalUrl } from "@/lib/site-path"
 
 export const metadata: Metadata = publicMetadata({
   title: "AVES Site Map",
-  description: "Find AVES destinations, Colombia's region guides, the Australia site map and our developing New Zealand destination.",
+  description: "Find AVES destinations, Colombia's region guides, Australian regional guides and New Zealand trip planning.",
   alternates: { canonical: canonicalUrl("/site-map") },
 })
 
@@ -46,7 +46,7 @@ export default function SiteMapPage() {
         </div>
         <section aria-labelledby="australia-directory" className="mt-10 rounded-2xl border border-emerald-100 bg-emerald-50/50 p-6">
           <h2 id="australia-directory" className="text-xl font-semibold text-emerald-950">Explore Australia</h2>
-          <p className="mt-2 text-gray-600">Discover Australia's regions, birdlife and journey planning on our Australian website.</p>
+          <p className="mt-2 text-gray-600">Discover Australia's regions, birdlife and journey planning on the Australia section of AVES.</p>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1">
             <li><a href="https://aves.bio/australia" className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">Australia Home</a></li>
             <li><a href="https://aves.bio/australia/site-map" className="inline-flex min-h-11 items-center rounded-lg font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4">Australia Site Map</a></li>

@@ -58,6 +58,10 @@ export default function CreditsPage() {
           </div>
         </div>
       </section>
+    <section id="regional-brand-art" className="mx-auto max-w-6xl px-4 py-8">
+        <h2 className="text-2xl font-medium text-emerald-950">Regional bird artwork</h2>
+        <p className="mt-3 text-sm leading-6 text-gray-600">The regional bird marks are AI-generated illustrations created for AVES. Each represents a species associated with its region or place. They are brand illustrations, not photographs, identification plates, range maps or promised sightings.</p>
+      </section>
     </PageShell>
   )
 }

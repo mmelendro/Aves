@@ -7,6 +7,7 @@
 
 import Link from "next/link"
 import { useContext, useEffect, useId, useState } from "react"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
 import { southIslandLandscapeSlides } from "@/lib/south-island-discovery"
@@ -28,6 +29,7 @@ import { readNzBirdBasket, writeNzBirdBasket } from "@/lib/nz-bird-selection"
 import { filterSouthIslandBirds, southIslandEcosystems, type SouthIslandEcosystemFilter } from "@/content/south-island-ecosystems"
 
 export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZealandIslandId } = {}) {
+  const { publish } = useHeaderLandscape()
   const [chosenRegion, setChosenRegion] = useState<NewZealandIslandId | undefined>(regionId)
   const ecosystemId = useId()
   const sharedHabitat = useContext(SouthIslandHabitatContext)
@@ -63,7 +65,7 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
   }
 
   return (
-    <>{regionId === "south-island" && <section aria-label="Explore South Island ecosystems" className="mb-5 rounded-2xl border border-emerald-200 bg-white/80 p-4 sm:p-5">
+    <>{regionId === "south-island" && <section aria-label="Explore the South Island ecosystems" className="mb-5 rounded-2xl border border-emerald-200 bg-white/80 p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <label htmlFor={ecosystemId} className="text-sm font-medium text-emerald-950">Explore by ecosystem</label>
           <select id={ecosystemId} value={ecosystem} aria-describedby={`${ecosystemId}-context`} onChange={event => selectEcosystem(event.target.value as SouthIslandEcosystemFilter)} className="min-h-11 max-w-full rounded-lg border border-emerald-200 bg-white px-3 text-base text-emerald-950">
@@ -74,24 +76,24 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
         </div>
         <p id={`${ecosystemId}-context`} className="mt-2 text-sm leading-6 text-gray-600">{activeEcosystem?.description || "Choose a habitat to explore its South Island birds and calls. Your saved bird wishes stay selected when you switch."}</p>
         <p className="mt-2 text-xs leading-5 text-gray-500">Birds are grouped by broad habitat associations. The map shows generalised land cover, not exact species ranges or promised sightings. Species details retain local range, access guidance and sources; photograph and recording locations may differ.</p>
-      </section>}<ResizableDiscoveryPair mediaId="birdlife" mapLabel={regionId === "south-island" ? "Explore South Island habitats" : "Explore the islands"} media={<>
+      </section>}<ResizableDiscoveryPair mediaId="birdlife" mapLabel={regionId === "south-island" ? "Explore the South Island habitats" : "Explore the islands"} media={<>
         {/* A new collection stops old playback/Info; wishes remain in this parent. */}
         <ExpandableMedia enabled={regionId === "south-island"} label="South Island birds">
         <HomepageBirdCarousel key={`${chosenRegion || "all-islands"}-${ecosystem}`} birds={birds} label={collectionLabel} imageTools={regionId === "south-island" ? <SouthIslandHabitatSelect value={ecosystem} onChange={selectEcosystem} label="Habitat for bird carousel" /> : undefined} fillPanel autoPlay={false} showBirdPicker onBirdChange={setCurrentBird} selection={{ isSelected: bird => selected.includes(featuredNzBirdId(bird.scientificName) || ""), onToggle: bird => { const id = featuredNzBirdId(bird.scientificName); if (id) selectBirds(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) } }} />
         </ExpandableMedia>
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{birds.length} featured species{chosenRegion ? ` associated with ${chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"}` : ", with a South Island focus"}. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
-        <div id={regionId === "south-island" ? "south-island-bird-map" : undefined} className="scroll-mt-24">
+        <div id={regionId === "south-island" ? "south-island-bird-map" : "nz-discovery-map"} className="scroll-mt-24">
         {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem}
-          places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
+          places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { publish({country:"new-zealand",regionId:id}); setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { publish({country:"new-zealand"}); setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         </div>
         {chosenRegion && !regionId && <Link href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+          <a href={newZealandContactHref} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Discuss your New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
           <span className="text-xs leading-5 text-gray-600">Begin with a personal conversation.</span>
         </div>
       </>} />
-      {overview && !regionId && <section className="mt-5 rounded-2xl border border-emerald-100 bg-white p-5 sm:p-7" aria-label={`${overview.name} planning overview`}><h2 className="text-xl font-medium text-emerald-950">{overview.name}</h2><p className="mt-3 text-sm leading-7 text-gray-600">{overview.description}</p><p className="mt-2 text-sm leading-7 text-gray-600">{overview.balance}</p><a href={briefHref} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-800 underline underline-offset-4">Start a private {overview.name} brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></section>}
+      {overview && !regionId && <section className="mt-5 rounded-2xl border border-emerald-100 bg-white p-5 sm:p-7" aria-label={`${overview.name} planning overview`}><h2 className="text-xl font-medium text-emerald-950">{overview.name}</h2><p className="mt-3 text-sm leading-7 text-gray-600">{overview.description}</p><p className="mt-2 text-sm leading-7 text-gray-600">{overview.balance}</p><a href={briefHref} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-800 underline underline-offset-4">Start your private {overview.name} brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></section>}
       <section aria-labelledby="nz-bird-wishlist-title" className="mt-7 rounded-2xl border border-emerald-200 bg-white p-5 sm:p-7">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-4"><div><h2 id="nz-bird-wishlist-title" className="text-xl font-medium text-emerald-950">Birds you would love to see</h2><p className="mt-2 text-sm leading-6 text-gray-600">Tap the heart on a photograph, or search the New Zealand checklist below. The checklist includes other New Zealand islands and rare visitors; inclusion does not mean a bird occurs on the South Island. Want-to-see choices are separate from birds you have already seen.</p></div><a href={briefHref} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-emerald-700 px-5 py-3 font-semibold text-white hover:bg-emerald-800">Save {selected.length || "your"} bird choice{selected.length === 1 ? "" : "s"} in a private brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
         <NewZealandBirdPicker selected={selected} onChange={selectBirds} />

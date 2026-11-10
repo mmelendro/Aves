@@ -71,7 +71,7 @@ test("all Colombian and Australian regional photographs use explicit sourced loc
   const before = JSON.stringify(destinationBirds)
   const selections = {
     colombia: Object.fromEntries(load("content/regions.ts").regions.map(region => [region.id, region.birds])),
-    australia: load("features/australia/content/regional-birds.ts").regionalBirdSelections,
+    australia: load("content/global-australian-regional-birds.json").regions,
   }
   for (const [country, localRegions] of Object.entries(selections)) for (const region of destinationRegions[country]) {
     // This country profile has a sourced Queensland association but predates
@@ -139,12 +139,13 @@ test("unknown or cross-country identifiers cannot expose a misleading fallback r
   assert.deepEqual(getBirdRegionIds("colombia", "nonexistent"), [])
 })
 
-test("global and Australian explorers share one sourced regional collection", () => {
-  const { regionalBirdSelections } = load("features/australia/content/regional-birds.ts")
-  const { australianRegionBirds } = load("features/australia/lib/australia-region-birds.ts")
-  assert.deepEqual(Object.keys(regionalBirdSelections).sort(), destinationRegions.australia.map(region => region.id).sort())
-  for (const region of destinationRegions.australia) assert.equal(getDestinationRegionBirds("australia", region.id), australianRegionBirds(region.id))
-  for (const selections of Object.values(regionalBirdSelections)) for (const selection of selections) {
+test("Australian regional snapshot records provenance and cannot depend on another checkout at runtime", () => {
+  const snapshot = load("content/global-australian-regional-birds.json")
+  assert.equal(snapshot.provenance.sourceBranch, "australia/preview")
+  assert.equal(snapshot.provenance.sourceFile, "content/regional-birds.ts")
+  assert.match(snapshot.provenance.scope, /not complete distributions/i)
+  assert.deepEqual(Object.keys(snapshot.regions).sort(), destinationRegions.australia.map(region => region.id).sort())
+  for (const selections of Object.values(snapshot.regions)) for (const selection of selections) {
     assert.ok(selection.whereFound.trim() && selection.sources.length)
     assert.ok(selection.sources.every(source => source.title && /^https:\/\//.test(source.url)))
   }
@@ -162,7 +163,7 @@ test("regional maps preserve real geometry, direct links and equivalent named se
     const html = renderToStaticMarkup(React.createElement(Map, { country }))
     const staticLinks = elements(Map({ country }), item => item.type === "a")
     for (const region of regions) {
-      assert.ok(staticLinks.some(link => link.props.href === region.href && link.props["aria-label"] === `Explore ${region.name}`), `${country}/${region.id}: named static Explore link retained`)
+      assert.ok(staticLinks.some(link => link.props.href === region.href && link.props["aria-label"] === `Explore ${load("lib/place-language.ts").placeInSentence(region.name)}`), `${country}/${region.id}: named static Explore link retained`)
     }
     if (country !== "colombia") assert.match(html, /preserveAspectRatio="xMidYMid meet"/)
     const selected = regions[regions.length - 1]
@@ -173,13 +174,9 @@ test("regional maps preserve real geometry, direct links and equivalent named se
       const control = controls.find(item => item.props["aria-label"] === `Preview ${region.name} birds`)
       assert.ok(control, `${country}/${region.id}: named interactive map control`)
       assert.equal(control.props["aria-pressed"], selected.id === region.id, "manual region selection takes precedence over automatic photo highlights")
-      const available = selected.id === region.id
-      assert.equal(control.props["aria-hidden"], available ? undefined : true, "offscreen controls leave the accessibility tree while zoomed")
-      assert.equal(control.props.tabIndex, available ? (control.type === "g" ? 0 : undefined) : -1, "only the visible selected region remains in the map's keyboard order")
-      if (!available) {
-        assert.equal(control.props.style.pointerEvents, "none", "cropped regions cannot intercept pointer input")
-        continue
-      }
+      assert.equal(control.props["aria-hidden"], undefined, "neighbouring regions remain available while focused")
+      assert.notEqual(control.props.tabIndex, -1)
+      assert.notEqual(control.props.style?.pointerEvents, "none")
       control.props.onClick()
       assert.equal(choices.pop(), region.id)
       if (control.type === "g") {
@@ -220,7 +217,7 @@ test("selected regional maps use a real zoom transform, while country overviews 
       assert.ok(transforms.some(value => /scale\((?!1\))/.test(value)), `${country}/${region.id}: selection receives a closer view`)
       const controls = elements(tree, item => item.props["aria-label"]?.startsWith("Preview "))
       assert.ok(controls.some(control => control.props["aria-pressed"] && control.props["aria-hidden"] !== true))
-      assert.ok(controls.every(control => control.props["aria-pressed"] || control.props["aria-hidden"] === true), "a clipped region cannot remain an invisible focus stop")
+      assert.ok(controls.every(control => control.props["aria-hidden"] !== true && control.props.style?.pointerEvents !== "none"), "zooming must not disable visible neighbouring regions")
     }
   }
 })
@@ -235,5 +232,26 @@ test("country map highlights follow every supported region of the displayed phot
       const control = controls.find(item => item.props["aria-label"] === `Preview ${region.name} birds`)
       assert.equal(control.props["aria-pressed"], highlighted.includes(region.id), `${country}/${bird.id}/${region.id}`)
     }
+  }
+})
+
+
+test("whole Colombian shapes keep the reviewed geography and native neighbouring guide links", () => {
+  const Targets = load("components/colombia-region-targets.tsx").default
+  const boundaries = load("content/colombia-planning-boundaries.json")
+  const choices = []
+  const tree = Targets({ onSelect: id => choices.push(id) })
+  const links = elements(tree, item => item.type === "a")
+  assert.equal(links.length, 11)
+  for (const link of links) {
+    const path = elements(link, item => item.type === "path")[0]
+    assert.ok(boundaries.regions.some(region => region.path === path.props.d))
+    let prevented = false
+    link.props.onClick({button:0, preventDefault(){prevented=true}})
+    assert.equal(prevented, true)
+    assert.equal(link.props.href, `/regions/${choices.pop()}`)
+    let modifiedPrevented = false
+    link.props.onClick({button:0, ctrlKey:true, preventDefault(){modifiedPrevented=true}})
+    assert.equal(modifiedPrevented, false, "modified click keeps the native guide link")
   }
 })

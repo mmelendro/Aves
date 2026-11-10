@@ -1,0 +1,71 @@
+{
+  "meaning": "Representative locally supported species, rendered as small illustrative family silhouettes, not field-identification plates, live sightings or precise seasonal behaviour. Range context also follows existing sourced regional bird records.",
+  "flocks": {
+    "global": {
+      "name": "Representative migrating birds",
+      "scientificName": "",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "australia/country": {
+      "name": "Galah",
+      "scientificName": "Eolophus roseicapilla",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/galah/"
+    },
+    "australia/victoria": {
+      "name": "Galah",
+      "scientificName": "Eolophus roseicapilla",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/galah/"
+    },
+    "australia/south-australia": {
+      "name": "Galah",
+      "scientificName": "Eolophus roseicapilla",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/galah/"
+    },
+    "australia/queensland": {
+      "name": "Rainbow Lorikeet",
+      "scientificName": "Trichoglossus moluccanus",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/"
+    },
+    "australia/new-south-wales": {
+      "name": "Rainbow Lorikeet",
+      "scientificName": "Trichoglossus moluccanus",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/"
+    },
+    "australia/tasmania": {
+      "name": "Eastern Rosella",
+      "scientificName": "Platycercus eximius",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/eastern-rosella/"
+    },
+    "australia/western-australia": {
+      "name": "Carnaby’s Black-Cockatoo",
+      "scientificName": "Zanda latirostris",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/carnabys-black-cockatoo/"
+    },
+    "australia/northern-territory": {
+      "name": "Red-tailed Black-Cockatoo",
+      "scientificName": "Calyptorhynchus banksii",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/red-tailed-black-cockatoo/"
+    },
+    "australia/australian-capital-territory": {
+      "name": "Sulphur-crested Cockatoo",
+      "scientificName": "Cacatua galerita",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/sulphur-crested-cockatoo/"
+    },
+    "australia/jervis-bay-territory": {
+      "name": "Crimson Rosella",
+      "scientificName": "Platycercus elegans",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/crimson-rosella/"
+    }
+  }
+}

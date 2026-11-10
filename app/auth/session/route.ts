@@ -4,6 +4,7 @@
  * aves-session-checked cookie prevents redirect loops; it is not an Auth credential.
  */
 
+import { isReadOnlyPreview } from "@/lib/deployment-mode"
 import { NextResponse, type NextRequest } from "next/server"
 import { safeAuthNext } from "@/lib/auth-redirect"
 import { authCookieOptions } from "@/lib/supabase/config"
@@ -15,6 +16,7 @@ export const dynamic = "force-dynamic"
  * Apply validated legacy-cookie migration writes and redirect without exposing tokens in the URL/body.
  */
 export async function GET(request: NextRequest) {
+  if (isReadOnlyPreview()) return new NextResponse(null, {status:303,headers:{Location:"/account/sign-in","Cache-Control":"private, no-store","X-Robots-Tag":"noindex, nofollow, noarchive"}})
   const target = safeAuthNext(request.nextUrl.searchParams.get("next"))
   const response = new NextResponse(null, { status: 303, headers: {
     Location: target, "Cache-Control": "private, no-store", Pragma: "no-cache",

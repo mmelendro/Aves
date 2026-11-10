@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useId, useState } from "react"
-import Image from "next/image"
+import { BrandBird } from "@/components/brand-bird"
 import { BookOpen, ChevronLeft, ChevronRight, Feather, MapPin, Play } from "lucide-react"
 import { southIslandResources } from "@/content/south-island"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
@@ -50,7 +50,7 @@ function ResourcePlayer({ resource }: { resource: typeof southIslandResources[nu
   const media = useAvesMedia()
   const playback = resource.playback
   return <div className={styles.player}>
-    <div className={styles.illustration}><Image src="/images/brand/aves-new-zealand-bird.png" alt="AVES kea, the South Island player’s regional bird" width={88} height={88} className="mx-auto h-[88px] w-[88px] object-contain" /><svg aria-hidden="true" viewBox="0 0 420 60" className={styles.contour}><path d="M0 52 65 35 94 49 145 9 192 44 229 24 267 50 Q300 33 335 48 T420 45" /></svg></div>
+    <div className={styles.illustration}><BrandBird country="new-zealand" regionId="south-island" placeId={resource.mapPlace?.id} size={88} className="mx-auto h-[88px] w-[88px] object-contain" /><svg aria-hidden="true" viewBox="0 0 420 60" className={styles.contour}><path d="M0 52 65 35 94 49 145 9 192 44 229 24 267 50 Q300 33 335 48 T420 45" /></svg></div>
     {!playback ? <BookOpen className="mx-auto text-emerald-700" size={24} aria-hidden="true" /> : <button type="button" className={`${styles.feather} ${styles.play}`} aria-label={playback.type === "audio" ? "Play podcast" : "Load DOC video"}
       title={playback.type === "audio" ? "Play podcast" : "Load DOC video"} onClick={() => media?.open(resource.id)}><Play size={24} aria-hidden="true" /></button>}
     <p className="mt-4 px-5 text-center text-xs leading-5 text-emerald-800">{playback ? media?.resourceId === resource.id ? "Open in your travel player" : "Listen or watch as you explore" : "Read at the original source"}</p>

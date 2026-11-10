@@ -44,7 +44,7 @@ test("Australian zoom collections preserve sourced local notes, original media a
   const load = loader()
   const { australianRegionBirds } = load("features/australia/lib/australia-region-birds.ts")
   const { regionalBirdSelections } = load("features/australia/content/regional-birds.ts")
-  const birdData = load("features/australia/content/carousel-birds.ts").australianBirds
+  const birdData = load("features/australia/content/birds.ts").birdData
   const original = JSON.stringify(birdData)
   assert.equal(australianRegionBirds().length, 20)
   assert.deepEqual(australianRegionBirds("constructor"), [])
@@ -68,7 +68,7 @@ test("Australian zoom collections preserve sourced local notes, original media a
       } else {
         assert.equal(bird.id, "au-regent-bowerbird")
         assert.equal(regionId, source.regionSlug)
-        assert.equal(bird.localOccurrence, source.localOccurrence || source.distribution)
+        assert.equal(bird.localOccurrence, source.localOccurrence)
       }
     }
   }
@@ -107,6 +107,7 @@ function explorerHarness(props = {}) {
   const load = loader({ react: {
     ...React,
     useId: () => "test-au-map",
+    useContext: () => ({ selection: null, publish() {} }),
     useState(initial) { const index = stateIndex++; if (!(index in states)) states[index] = typeof initial === "function" ? initial() : initial; return [states[index], value => { states[index] = typeof value === "function" ? value(states[index]) : value }] },
     useRef(initial) { const index = refIndex++; return refs[index] ??= { current: initial } },
     useCallback: value => value,
@@ -162,7 +163,7 @@ test("custom regional media previews on first tap and retains native guide navig
   const event = clickEvent()
   link.props.onClick(event)
   tree = harness.render()
-  assert.equal(event.prevented, true, "default highlight is not a deliberate first tap")
+  assert.equal(event.prevented, undefined, "an explicitly opened region already has its direct guide exit")
   const second = clickEvent()
   nodes(tree).find(node => node.type === "a" && node.props["aria-label"] === "Explore Victoria").props.onClick(second)
   assert.equal(second.prevented, undefined, "second activation follows the native guide href")
@@ -171,13 +172,13 @@ test("custom regional media previews on first tap and retains native guide navig
   assert.equal(nodes(tree).some(node => node.type === "select"), false)
 })
 
-test("Australian keyboard previews use the unified public router and keep account navigation native", () => {
+test("Legacy embedded Australian controls preserve explicit native guide and account navigation", () => {
   const pushed = [], native = [], previews = []
   const load = loader({
     react: { ...React, useRef: value => ({ current: value }) },
     "next/navigation": { useRouter: () => ({ push: href => pushed.push(href) }) },
   }, { location: { href: "https://aves.bio/australia", assign: href => native.push(href) } })
-  const { useRegionPreview } = load("components/use-region-preview.ts")
+  const { useRegionPreview } = load("features/australia/components/use-region-preview.ts")
   const preview = useRegionPreview(id => previews.push(id))
   const event = () => ({ key: "Enter", preventDefault() {} })
   const href = "/australia/regions/new-south-wales"
@@ -185,9 +186,9 @@ test("Australian keyboard previews use the unified public router and keep accoun
   assert.deepEqual(previews, ["new-south-wales"])
   assert.deepEqual(pushed, [])
   preview.activateKey(event(), "new-south-wales", href)
-  assert.deepEqual(pushed, [href])
+  assert.deepEqual(pushed, [])
   preview.activateButton("account", "/account")
   preview.activateButton("account", "/account")
-  assert.deepEqual(native, ["/account"])
-  assert.deepEqual(pushed, [href])
+  assert.deepEqual(native, [href, "/account"])
+  assert.deepEqual(pushed, [])
 })

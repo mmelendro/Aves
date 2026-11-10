@@ -79,7 +79,7 @@ export default function ConciseItinerary({ itinerary }: ConciseItineraryProps) {
 
       {/* Desktop: Grid Layout */}
       <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-        {itinerary.map((step, index) => (
+        {itinerary.map((step) => (
           <Card
             key={step.step}
             className="relative hover:shadow-lg transition-all duration-300 border-l-4 border-l-orange-500"

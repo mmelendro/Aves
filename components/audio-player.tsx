@@ -1,152 +1,19 @@
-/**
- * Standalone recording player used within the Choco article. It owns an HTML audio
- * element plus play, mute and seek controls. This is separate from the shared
- * carousel sound button; changing this file does not change carousel audio.
- */
 "use client"
 
-import type React from "react"
+import { Play, Pause } from "lucide-react"
+import { useAvesMedia } from "./aves-media-provider"
 
-import { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Play, Pause, Volume2, VolumeX } from "lucide-react"
+type Props = { src: string; title: string; species: string; className?: string }
 
-interface AudioPlayerProps {
-  src: string
-  title: string
-  species: string
-  className?: string
-}
-
-export default function AudioPlayer({ src, title, species, className }: AudioPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(false)
-  const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState(0)
-  const audioRef = useRef<HTMLAudioElement>(null)
-
-  // Subscribe to native media events after mount and remove listeners on unmount.
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const setAudioData = () => {
-      setDuration(audio.duration)
-      setCurrentTime(audio.currentTime)
-    }
-
-    const setAudioTime = () => setCurrentTime(audio.currentTime)
-
-    audio.addEventListener("loadeddata", setAudioData)
-    audio.addEventListener("timeupdate", setAudioTime)
-
-    return () => {
-      audio.removeEventListener("loadeddata", setAudioData)
-      audio.removeEventListener("timeupdate", setAudioTime)
-    }
-  }, [])
-
-  const togglePlayPause = () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    if (isPlaying) {
-      audio.pause()
-    } else {
-      audio.play()
-    }
-    setIsPlaying(!isPlaying)
-  }
-
-  const toggleMute = () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    audio.muted = !isMuted
-    setIsMuted(!isMuted)
-  }
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    // Convert the range input percentage into seconds within the recording.
-    const newTime = (Number.parseFloat(e.target.value) / 100) * duration
-    audio.currentTime = newTime
-    setCurrentTime(newTime)
-  }
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60)
-    const seconds = Math.floor(time % 60)
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`
-  }
-
-  const progress = duration ? (currentTime / duration) * 100 : 0
-
-  return (
-    <div className={`bg-emerald-50 rounded-lg p-4 border border-emerald-200 ${className}`}>
-      <audio ref={audioRef} src={src} onEnded={() => setIsPlaying(false)} preload="metadata" />
-
-      <div className="flex items-center space-x-3">
-        <Button variant="outline" size="sm" onClick={togglePlayPause} className="flex-shrink-0">
-          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-        </Button>
-
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between text-sm mb-1">
-            <div className="truncate">
-              <span className="font-medium text-gray-900">{title}</span>
-              <span className="text-gray-600 ml-2">({species})</span>
-            </div>
-            <div className="text-gray-500 text-xs">
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </div>
-          </div>
-
-          <div className="relative">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={progress}
-              onChange={handleSeek}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-            />
-            <div
-              className="absolute top-0 left-0 h-2 bg-emerald-500 rounded-lg pointer-events-none"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-
-        <Button variant="ghost" size="sm" onClick={toggleMute} className="flex-shrink-0">
-          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-        </Button>
-      </div>
-
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: #059669;
-          cursor: pointer;
-          border: 2px solid white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .slider::-moz-range-thumb {
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: #059669;
-          cursor: pointer;
-          border: 2px solid white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-      `}</style>
-    </div>
-  )
+export default function AudioPlayer({ src, title, species, className }: Props) {
+  const media = useAvesMedia()
+  const id = `article:${species}`
+  const playing = media?.resourceId === id && media.playing
+  return <div className={className}>
+    <button type="button" disabled={!media} aria-pressed={playing} aria-label={playing ? "Pause bird call" : "Listen to this bird"}
+      className="inline-flex min-h-11 items-center gap-3 rounded-full bg-emerald-800 px-5 py-3 font-semibold text-white hover:bg-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-800"
+      onClick={() => { if (playing) media?.pause(); else media?.play({id,country:"colombia",regionId:"pacific",title,kind:"Bird call",playback:{type:"audio",src},description:species,href:src,action:"Original recording"}) }}>
+      {playing ? <Pause size={18} aria-hidden="true" /> : <Play size={18} aria-hidden="true" />}<span>{playing ? "Pause" : "Listen to this bird"}</span>
+    </button><p className="mt-2 text-sm text-emerald-900">{title} · {species}</p>
+  </div>
 }

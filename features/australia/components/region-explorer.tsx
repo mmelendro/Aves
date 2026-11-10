@@ -6,7 +6,8 @@
  * The compact variant hides the extra directory cards, not any selectable regions.
  */
 
-import { useRegionPreview } from "@/components/use-region-preview"
+import { useHeaderLandscape } from "./header-landscape-context"
+import { useRegionPreview } from "./use-region-preview"
 import { useId, useState } from "react"
 import Image from "next/image"
 import { SiteLink as Link } from "@/features/australia/components/site-link"
@@ -14,13 +15,14 @@ import { ArrowRight, CalendarDays, MapPin } from "lucide-react"
 import { AustraliaRegionMap } from "@/features/australia/components/australia-region-map"
 import { Button } from "@/components/ui/button"
 import { regions } from "@/features/australia/content/regions"
-import { regionShortLabel } from "@/content/region-options"
+import { regionShortLabel } from "@/features/australia/content/region-options"
 import { sitePath } from "@/features/australia/lib/site-path"
 
 export function RegionExplorer({ compact = false, initialRegion = "queensland" }: { compact?: boolean; initialRegion?: string }) {
   // A single state value keeps map clicks, text buttons and the information card in sync.
   const [selectedRegion, setSelectedRegion] = useState(regions.some(region => region.id === initialRegion) ? initialRegion : "queensland")
-  const preview = useRegionPreview(setSelectedRegion)
+  const { publish } = useHeaderLandscape()
+  const preview = useRegionPreview(id=>{setSelectedRegion(id);publish({country:"australia",regionId:id})})
   const activate = (id: string) => preview.activateButton(id, sitePath(`/regions/${id}`))
   const region = regions.find(item => item.id === selectedRegion) || regions[0]
   // Unique IDs let multiple explorer instances coexist without colliding accessible labels.
@@ -34,7 +36,7 @@ export function RegionExplorer({ compact = false, initialRegion = "queensland" }
         <p className="mt-4 text-lg leading-relaxed text-gray-600">Tap a state or territory to preview its birds, places and planning notes. Tap it again, or choose Explore, to open the guide.</p>
       </div>
       {/* Large text buttons offer the same choices as the map, including the smallest territories. */}
-      <div className="mb-6 flex flex-wrap gap-3" role="group" aria-label="Choose Australian region">{regions.map(item => <Button key={item.id} type="button" variant={item.id === selectedRegion ? "default" : "outline"} aria-pressed={item.id === selectedRegion} aria-controls={`${prefix}-detail`} onClick={() => activate(item.id)} className={`min-h-11 rounded-lg px-4 ${item.id === selectedRegion ? "bg-emerald-600 text-white hover:bg-emerald-700" : "border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50"}`}>{regionShortLabel(item.id)}</Button>)}</div>
+      <div className="mb-6 flex flex-wrap gap-3" role="group" aria-label="Choose Australian region">{regions.map(item => <Button key={item.id} type="button" variant={item.id === selectedRegion ? "default" : "outline"} aria-pressed={item.id === selectedRegion} aria-controls={`${prefix}-detail`} onClick={() => activate(item.id)} className={`min-h-11 rounded-lg px-4 ${item.id === selectedRegion ? "bg-emerald-600 text-white hover:bg-emerald-700" : "border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-50"}`}>{item.state}</Button>)}</div>
       <p className="sr-only" role="status" aria-live="polite">Showing {region.state}: {region.landscape}.</p>
       <div className="grid items-start gap-6 lg:grid-cols-12">
         <div className="lg:col-span-7"><AustraliaRegionMap selectedRegion={selectedRegion} onSelectRegion={activate} /></div>
@@ -46,7 +48,7 @@ export function RegionExplorer({ compact = false, initialRegion = "queensland" }
             <h3 id={`${prefix}-region-name`} className="text-2xl font-bold text-gray-900">{region.landscape}</h3>
             <p className="mt-3 leading-relaxed text-gray-600">{region.description}</p>
             <dl className="mt-5 space-y-3 text-sm"><div><dt className="font-semibold text-gray-900">Start your planning</dt><dd className="mt-1 leading-relaxed text-gray-600">{region.gateway}</dd></div><div><dt className="flex items-center gap-2 font-semibold text-gray-900"><CalendarDays className="h-4 w-4 text-emerald-700" aria-hidden="true" />Seasonal perspective</dt><dd className="mt-1 leading-relaxed text-gray-600">{region.season.summary}</dd></div></dl>
-            <div className="mt-5 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row"><Button asChild className="h-auto min-h-11 whitespace-normal rounded-lg bg-emerald-600 px-4 py-3 text-center hover:bg-emerald-700"><Link href={`/regions/${region.id}`}>Explore {regionShortLabel(region.id)}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button><Button asChild variant="outline" className="h-auto min-h-11 whitespace-normal rounded-lg border-emerald-200 px-4 py-3 text-center text-emerald-700"><Link href={`/contact?region=${region.id}`}>Request a trip</Link></Button></div>
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row"><Button asChild className="h-auto min-h-11 whitespace-normal rounded-lg bg-emerald-600 px-4 py-3 text-center hover:bg-emerald-700"><Link href={`/regions/${region.id}`}>Explore {regionShortLabel(region.id)}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Button><Button asChild variant="outline" className="h-auto min-h-11 whitespace-normal rounded-lg border-emerald-200 px-4 py-3 text-center text-emerald-700"><Link href={`/contact?region=${region.id}`}>Discuss your trip</Link></Button></div>
           </div>
         </article>
       </div>

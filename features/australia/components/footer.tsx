@@ -4,7 +4,7 @@
  * Contact visitors through the form route rather than adding a personal email to this markup.
  */
 import { SiteLink as Link } from "@/features/australia/components/site-link"
-import { BrandMark } from "@/features/australia/components/brand-mark"
+import { BrandMark } from "@/components/brand-mark"
 
 interface FooterProps {
   transparent?: boolean
@@ -75,8 +75,8 @@ export function Footer({ transparent = false }: FooterProps) {
             <h2 className="mb-3 text-base font-semibold text-emerald-300">About AVES</h2>
             <ul>
               {aboutLinks.map(({ href, label }) => <li key={href}><Link href={href} className={linkClassName}>{label}</Link></li>)}
-              <li><a href="/colombia" className={linkClassName}>Visit AVES Colombia</a></li>
-              <li><a href="/" className={linkClassName}>All destinations</a></li>
+              <li><a href="https://aves.bio/colombia" className={linkClassName}>Visit AVES Colombia</a></li>
+              <li><a href="https://aves.bio/" className={linkClassName}>All destinations</a></li>
             </ul>
           </nav>
         </div>

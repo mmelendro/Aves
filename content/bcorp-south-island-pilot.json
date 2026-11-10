@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "coverage": "Manually reviewed first candidate; incomplete coverage, not a directory import or AVES supplier list.",
+  "records": [
+    {
+      "id": "untouched-world-roydvale",
+      "name": "Untouched World — Roydvale store",
+      "company": "Untouched World",
+      "country": "new-zealand",
+      "region": "south-island",
+      "category": "retail",
+      "certification": {
+        "review": "verified-profile",
+        "profileUrl": "https://www.bcorporation.net/en-us/find-a-b-corp/company/untouched-world/",
+        "listedSince": "2021-05",
+        "checkedAt": "2026-11-10",
+        "scopeNote": "B Lab names Untouched World and lists apparel/manufacturing. This is company-profile evidence, not a separately certified outlet or cafe."
+      },
+      "location": {
+        "review": "verified-owner-page",
+        "address": "155 Roydvale Avenue, Burnside, Christchurch, New Zealand",
+        "sourceUrl": "https://www.untouchedworld.com/en-int/pages/stores/christchurch-roydvale-avenue",
+        "checkedAt": "2026-11-10",
+        "coordinates": null,
+        "coordinateReview": "pending",
+        "coordinateSourceUrl": null
+      },
+      "website": "https://www.untouchedworld.com/",
+      "limitations": "Exact public entrance coordinates and reuse/source precision remain unverified. No map pin is eligible. No AVES partnership, endorsement, availability, booking or uniform environmental-impact claim. Nearby Untouched World Kitchen is not independently represented as certified."
+    }
+  ],
+  "accessReview": {
+    "method": "Individual manual review of public profile and business-owned location page; minimal factual fields with native source links.",
+    "bulkAccess": "Not assessed or authorised; no scrape, bulk download, API request, credential or automated directory importer.",
+    "logoUse": false,
+    "mapLayerEnabled": false,
+    "pending": ["Verified public coordinates and source precision", "Additional visitor-relevant accommodation, food, transport or guiding candidates", "Directory access/reuse review before scaling", "Candidate UI and accessibility acceptance"]
+  },
+  "stewardshipReference": "https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/"
+}

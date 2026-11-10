@@ -6,6 +6,7 @@
  */
 
 import "server-only"
+import { isReadOnlyPreview } from "@/lib/deployment-mode"
 import { createClient } from "@/lib/supabase/server"
 import { AccountError } from "@/lib/account-errors"
 
@@ -14,6 +15,7 @@ import { AccountError } from "@/lib/account-errors"
  * The confirmed, non-anonymous user ID is the trusted actor for subsequent operations.
  */
 export async function requireAccountUser() {
+  if (isReadOnlyPreview()) throw new AccountError(503, "Account access is disabled in this website preview.")
   let client
   try { client = await createClient() } catch { throw new AccountError(503, "Account access is temporarily unavailable.") }
   let result

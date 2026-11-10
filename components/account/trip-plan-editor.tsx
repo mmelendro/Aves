@@ -7,11 +7,12 @@
  */
 
 import { useEffect, useId, useRef, useState } from "react"
-import NewZealandBirdPicker from "@/features/australia/components/new-zealand-bird-picker"
+import { nzPlanningPlaces, readNzPlaceIdeas, mergeNzPlaceNotes, consumeSavedNzPlaceIdeas } from "@/lib/nz-place-ideas"
+import NewZealandBirdPicker from "@/components/new-zealand-bird-picker"
 import { consumeNzBirdBasket, readNzBirdBasket } from "@/lib/nz-bird-selection"
-import { PlanningQuestions } from "./planning-questions"
 import { BudgetQuestions } from "./budget-questions"
 import { budgetCategories, type TripBudget } from "@/content/trip-budget"
+import { PlanningQuestions } from "./planning-questions"
 import type { PlanningQuestionnaire } from "@/content/planning-questionnaire"
 import { Save } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -37,11 +38,15 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   const [regionNotice, setRegionNotice] = useState("")
   const [birdIds, setBirdIds] = useState<string[]>(plan?.questionnaire?.birdIds || [])
   const [incomingBirds, setIncomingBirds] = useState<string[]>([])
+  const [incomingPlaces, setIncomingPlaces] = useState<string[]>([])
+  const [message, setMessage] = useState(plan?.message || "")
+  const [placeNotice, setPlaceNotice] = useState("")
   // Guest choices prefill a new form. Existing saved answers are never silently
   // overwritten: explicitly merge, review and save to modify an owned plan.
   useEffect(() => {
     if (country !== "new-zealand") return
     try {
+      setIncomingPlaces(readNzPlaceIdeas(window.sessionStorage))
       const incoming = readNzBirdBasket(window.sessionStorage)
       setIncomingBirds(incoming)
       if (!plan) setBirdIds(incoming)
@@ -98,6 +103,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       if (!result.plan || result.plan.id !== (plan?.id || key) || result.plan.status !== "draft" || !result.plan.updatedAt) throw new Error("Your saved plan could not be confirmed. Please try again; your details are still here.")
       request.current = null
       if (country === "new-zealand") {
+        try { consumeSavedNzPlaceIdeas(window.sessionStorage, result.plan.message || "") } catch { /* Confirmed private save remains successful if browser storage is blocked. */ }
         try { consumeNzBirdBasket(window.sessionStorage, fields.questionnaire?.birdIds || []) } catch { /* Server save is already confirmed. */ }
       }
       onSaved(result.plan)
@@ -115,7 +121,18 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       {country === "new-zealand" && <><p className="text-sm text-gray-500">Please include the year in your timing. No dates are assumed or reserved.</p><PlanningQuestions key={country} prefix={prefix} answers={plan?.country === country ? plan.questionnaire : undefined} /></>}
       {country === "new-zealand" && <BudgetQuestions key={`${country}-${plan?.id || "new"}`} prefix={prefix} budget={plan?.country === country ? plan.questionnaire?.budget : undefined} />}
       {country === "new-zealand" && <section aria-labelledby={`${prefix}-birds`} className="space-y-4 rounded-xl border border-emerald-200 p-5"><h3 id={`${prefix}-birds`} className="font-medium text-emerald-950">Birds you would love to see (optional)</h3><p className="text-sm leading-6 text-gray-600">These choices join this private draft only when you save. Review the full checklist here, or bring choices from this browser tab. They are wishes, not guaranteed sightings or an itinerary.</p>{plan && incomingBirds.length > 0 && <button type="button" onClick={() => { setBirdIds(current => [...new Set([...current, ...incomingBirds])]); setIncomingBirds([]) }} className="min-h-11 rounded-md border border-emerald-300 px-4 text-sm font-medium text-emerald-900">Add {incomingBirds.length} bird choices from this tab</button>}<NewZealandBirdPicker selected={birdIds} onChange={setBirdIds} /></section>}
-      <div><label htmlFor={`${prefix}-message`} className="block text-sm font-medium text-gray-700 mb-2">Your Interests and Ideas</label><Textarea id={`${prefix}-message`} name="message" defaultValue={plan?.message || ""} maxLength={5000} rows={6} placeholder="Birds, landscapes, photography, your preferred pace, or anything else you'd like us to know…" /></div>
+      {country === "new-zealand" && incomingPlaces.length > 0 && <section className="rounded-lg border border-emerald-200 bg-emerald-50 p-4" aria-label="Place ideas from this browser tab">
+        <h3 className="font-medium text-emerald-950">Your place ideas</h3>
+        <p className="mt-2 text-sm">{nzPlanningPlaces.filter(place => incomingPlaces.includes(place.id)).map(place => place.label).join(", ")}</p>
+        <button type="button" disabled={busy} className="mt-3 min-h-11 rounded-md border border-emerald-300 bg-white px-4 text-sm font-medium text-emerald-950" onClick={() => {
+          const merged = mergeNzPlaceNotes(message, incomingPlaces)
+          if (merged.error) { setPlaceNotice(merged.error); return }
+          setMessage(merged.message); setPlaceNotice("Place ideas added to your notes below. Review them, then Save My Draft to save privately.")
+        }}>Add Place Ideas to Notes</button>
+        <p className="mt-2 text-xs leading-6">Adding notes does not save or share your plan. Existing notes stay intact. These are ideas to discuss, not confirmed visits or bookings.</p>
+      </section>}
+      <p role="status" className="text-sm text-emerald-800">{placeNotice}</p>
+      <div><label htmlFor={`${prefix}-message`} className="block text-sm font-medium text-gray-700 mb-2">Your Interests and Ideas</label><Textarea id={`${prefix}-message`} name="message" value={message} onChange={event => setMessage(event.target.value)} maxLength={5000} rows={6} placeholder="Birds, landscapes, photography, your preferred pace, or anything else you'd like us to know…" /></div>
       <p className="text-sm text-gray-500">{country === "new-zealand" ? "Optional notes: already-arranged plans, arrival/departure points, budget with currency, must-haves or practical access needs. Share only what is needed, without passport, payment or medical details. Save before leaving this page; unfinished answers are not autosaved. Sharing is a separate choice after review." : "Saving a draft does not request a quote or create a booking."}</p>
       <div className="flex flex-wrap gap-3"><Button type="submit" className="bg-emerald-600 hover:bg-emerald-700"><Save className="w-4 h-4 mr-2" />{busy ? "Saving…" : "Save My Draft"}</Button><Button type="button" variant="outline" onClick={onCancel}>Cancel</Button></div>
     </fieldset>{feedback && <p role="alert" className="text-sm text-red-700">{feedback}</p>}</form>

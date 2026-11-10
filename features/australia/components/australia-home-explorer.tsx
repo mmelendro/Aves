@@ -6,7 +6,8 @@
  * bird's complete range. Geographic shapes come from content/australia-map.ts, never logo artwork.
  */
 
-import { useRegionPreview } from "@/components/use-region-preview"
+import { useHeaderLandscape } from "./header-landscape-context"
+import { useRegionPreview } from "./use-region-preview"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 import type { MouseEvent, ReactNode } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
@@ -15,23 +16,21 @@ import zoomStyles from "@/features/australia/components/australia-regional-zoom.
 import { SiteLink as Link } from "@/features/australia/components/site-link"
 import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react"
 import HomepageBirdCarousel from "@/features/australia/components/homepage-bird-carousel"
-import ResizableDiscoveryPair from "@/features/australia/components/resizable-discovery-pair"
+import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import { Button } from "@/components/ui/button"
 import { australiaMapProvenance, australiaMapStates, australiaMapViewBox } from "@/features/australia/content/australia-map"
 import { birdData, type BirdProfile } from "@/features/australia/content/birds"
-import { regionOptions } from "@/content/region-options"
+import { regionOptions } from "@/features/australia/content/region-options"
 import { sitePath } from "@/features/australia/lib/site-path"
-import { mapZoomTransform } from "@/lib/map-zoom"
+import MapFeatherMarker from "./map-feather-marker"
+import { Feather } from "lucide-react"
+import { MapViewer } from "./map-viewer"
+import { mapZoomTransform } from "@/features/australia/lib/map-zoom"
 import { australianRegionBirds } from "@/features/australia/lib/australia-region-birds"
 import regionOverviews from "@/features/australia/content/region-overviews.json"
 
-// Label callouts make tiny territories usable; these positions do not alter their geographic boundaries.
-const smallTerritories = [
-  { id: "australian-capital-territory", label: "ACT", x: 620, y: 493, line: "573.81,460.3 608,514 620,514" },
-  { id: "jervis-bay-territory", label: "Jervis Bay", x: 620, y: 427, line: "597.38,458.06 608,448 620,448" },
-]
-
 export function AustraliaHomeExplorer({ media, initialRegion, resizable = false }: { media?: ReactNode; initialRegion?: string; resizable?: boolean } = {}) {
+  const { publish } = useHeaderLandscape()
   const id = useId()
   const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
   const backButton = useRef<HTMLButtonElement>(null)
@@ -46,15 +45,18 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const highlightedRegion = focusedRegion ?? regionOptions.find(region => region.id === bird.regionSlug)
   const focusedShape = australiaMapStates.find(state => state.regionId === focusedRegion?.id)
   const mapTransform = mapZoomTransform(australiaMapViewBox, focusedShape ? [focusedShape.path] : [], 12)
+  const highlightedShape = australiaMapStates.find(state => state.regionId === highlightedRegion?.id)
+  const markerSize = 44 / Number(mapTransform.match(/scale\(([^)]+)/)?.[1] || 1)
 
   function selectRegion(regionId: string) {
     if (regionId && !regionOptions.some(region => region.id === regionId)) return
+    publish({country:"australia",regionId:regionId || undefined})
     setChosenRegion(regionId)
     setBird(australianRegionBirds(regionId)[0] ?? birdData[0])
   }
   const preview = useRegionPreview(selectRegion)
   function previewRegion(event: MouseEvent<SVGAElement | HTMLAnchorElement>, regionId: string) {
-    preview.activate(event, regionId)
+    if (!media) preview.activate(event, regionId)
   }
   function backToAustralia() {
     preview.clear()
@@ -75,7 +77,9 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           {focusedRegion && (media ? <Link href="/" className="inline-flex min-h-11 items-center gap-1 rounded text-xs font-medium text-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Australia</Link> : <button ref={backButton} type="button" onClick={backToAustralia} className="inline-flex min-h-11 items-center gap-1 rounded text-xs font-medium text-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Australia</button>)}
           <h2 className="font-medium text-emerald-950">{focusedRegion?.label ?? "Explore Australia"}</h2>
         </div>
+        {highlightedRegion && <p className="mx-4 my-2 flex items-center justify-center gap-2 text-center text-sm font-medium text-emerald-900"><Feather size={16} aria-hidden="true" />{highlightedRegion.label}</p>}
         {/* Source geometry is reused unchanged. useId keeps title/description IDs unique on the page. */}
+        <MapViewer label="Australian regional map" credits={<a href={australiaMapProvenance.sourceUrl} className="underline">Natural Earth · Public domain · Generalised boundaries; external territories not shown</a>}>
         <svg viewBox={australiaMapViewBox} role="group" aria-labelledby={`${id}-map-title`} aria-describedby={`${id}-map-description`} className={`${styles.auMap} ${zoomStyles.viewport}`}>
           <title id={`${id}-map-title`}>Explore Australia’s states and territories</title>
           <desc id={`${id}-map-description`}>{focusedRegion ? `Closer view of ${focusedRegion.label}. Use Back to Australia for the whole country.` : "Select a region to zoom into it and preview its birds; Explore opens its guide."} The darker region is one place to look for the bird in the carousel, not its complete range. All nine regions also have larger links below the map. Generalised boundaries; external territories are outside this map.</desc>
@@ -83,19 +87,12 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           {australiaMapStates.map(state => {
             const selected = state.regionId === highlightedRegion?.id
             const outline = <path d={state.path} fill={selected ? "#065f46" : "#c5dbd0"} stroke="#6e9582" strokeWidth="1" strokeLinejoin="round" vectorEffect="non-scaling-stroke" fillRule="evenodd" className={`transition-colors group-focus-visible:stroke-emerald-950 group-focus-visible:[stroke-width:3] motion-reduce:transition-none ${selected ? "group-hover:fill-emerald-700 group-focus-visible:fill-emerald-700" : "group-hover:fill-[#9cc4af] group-focus-visible:fill-[#9cc4af]"}`} />
-            return state.regionId && (!focusedRegion || selected) ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`))} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
+            return state.regionId ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => { if (!media) preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`)) }} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
           })}
-          {!focusedRegion && australiaMapStates.filter(state => state.shortName).map(state => <text key={state.code} x={state.label[0]} y={state.label[1]} textAnchor="middle" dominantBaseline="middle" fontSize="27" fontWeight="600" fill={state.regionId === highlightedRegion?.id ? "#ffffff" : "#064e3b"} className="pointer-events-none select-none" aria-hidden="true">{state.shortName}</text>)}
-          {/* ACT and Jervis Bay receive separate labelled targets because their outlines are very small. */}
-          {!focusedRegion && smallTerritories.map(territory => <g key={territory.id}>
-            <polyline points={territory.line} fill="none" stroke="#047857" strokeWidth="1.5" aria-hidden="true" />
-            <a href={sitePath(`/regions/${territory.id}`)} onKeyDown={event => preview.activateKey(event, territory.id, sitePath(`/regions/${territory.id}`))} onClick={event => previewRegion(event, territory.id)} aria-label={`Explore ${regionOptions.find(region => region.id === territory.id)?.label}`} className="group outline-none">
-              <rect x={territory.x} y={territory.y} width="94" height="42" rx="9" fill={highlightedRegion?.id === territory.id ? "#065f46" : "#ffffff"} stroke="#6e9582" strokeWidth="1.5" className="group-hover:stroke-[3] group-focus-visible:stroke-[4]" />
-              <text x={territory.x + 47} y={territory.y + 22} textAnchor="middle" dominantBaseline="middle" fontSize="17" fontWeight="600" fill={highlightedRegion?.id === territory.id ? "#ffffff" : "#064e3b"} className="pointer-events-none">{territory.label}</text>
-            </a>
-          </g>)}
+          {highlightedShape && <svg x={highlightedShape.label[0]-markerSize/2} y={highlightedShape.label[1]-markerSize/2} width={markerSize} height={markerSize} pointerEvents="none"><MapFeatherMarker size={markerSize}/></svg>}
           </g>
         </svg>
+        </MapViewer>
         <div className={`${styles.mapFooter} px-4 pb-3`}>
           {!media && <><label htmlFor={`${id}-region`} className="sr-only">Choose an Australian region</label><select ref={regionSelect} id={`${id}-region`} aria-label="Choose an Australian region" value={focusedRegion?.id ?? ""} onChange={event => preview.preview(event.target.value)} className="mb-3 min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><option value="">All featured Australia birds</option>{regionOptions.map(region => <option key={region.id} value={region.id}>{region.label}</option>)}</select></>}
           {focusedRegion && <Link href={`/regions/${focusedRegion.id}`} className="mb-2 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore {focusedRegion.label}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
@@ -122,7 +119,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
       <h2 id={`${id}-preview-heading`} className="text-2xl font-medium tracking-tight text-emerald-950">Birding in {focusedRegion.label}</h2>
       <p className="mt-3 text-sm leading-7 text-gray-600">{focusedOverview.description}</p>
       <p className="mt-2 text-xs leading-6 text-emerald-900"><span className="font-semibold">A starting point: </span>{focusedOverview.gateway}</p>
-      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2"><Link href={`/regions/${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Read the regional guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link href={`/contact?region=${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Plan a {focusedRegion.label} trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
+      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2"><Link href={`/regions/${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Read the regional guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link href={`/contact?region=${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Plan your {focusedRegion.label} trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
       <p role="status" className="sr-only">{focusedRegion.label} selected. Showing its regional introduction, {birds.length} featured birds and trip-planning link.</p>
     </section>}
     {resizable ? <ResizableDiscoveryPair media={mediaContent} map={mapContent} mapLabel="Explore Australia" /> :

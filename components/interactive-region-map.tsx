@@ -100,7 +100,7 @@ function InteractiveRegionMap({ region, className }: InteractiveRegionMapProps) 
 
             {/* Location Markers */}
             <div className="relative z-10 grid grid-cols-2 gap-4 h-full">
-              {data.locations.map((location, index) => (
+              {data.locations.map((location) => (
                 <Button
                   key={location.id}
                   variant={selectedLocation === location.id ? "default" : "outline"}

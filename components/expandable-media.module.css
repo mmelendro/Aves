@@ -13,3 +13,10 @@
 .viewer[data-expanded] [data-place-image] img { object-fit:contain !important; object-position:center !important; }
 .viewer[data-expanded] > section { border:0; border-radius:0; }
 @media (prefers-reduced-transparency: reduce) { .control { background:#17382d; } }
+
+/* A short landscape window must not collapse the image's controls together.
+ * Reserve distinct rows; the native modal provides ordinary vertical scrolling. */
+@media (max-height:500px) {
+ .viewer[data-expanded] [data-carousel-image],
+ .viewer[data-expanded] [data-place-image] { height:max(100dvh,32rem) !important; }
+}

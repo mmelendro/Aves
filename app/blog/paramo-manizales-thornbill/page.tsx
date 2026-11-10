@@ -6,8 +6,8 @@ import { publicMetadata } from "@/lib/public-metadata"
  */
 import type { Metadata } from "next"
 import { canonicalUrl } from "@/lib/site-path"
-import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Calendar, User, MapPin, Thermometer, Mountain, Clock, ArrowRight } from "lucide-react"
+
+import { Thermometer, Mountain, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import AuthorBio from "@/components/author-bio"

@@ -1,3 +1,4 @@
+import { publicMetadata } from "@/lib/public-metadata"
 /**
  * Calendar route shell and search metadata. Event records, filters and event dialogs
  * live in components/birding-calendar.tsx. This page does not query an events API.
@@ -5,7 +6,7 @@
 import type { Metadata } from "next"
 import { BirdingCalendar } from "@/components/birding-calendar"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
   title: "Birding Events Calendar | AVES Tours",
   description:
     "Discover major birding festivals, ornithological congresses, and citizen science events across Colombia. Plan your birding adventures with our comprehensive events calendar.",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     "birding festivals 2025",
     "birding festivals 2026",
   ],
-}
+})
 
 export default function CalendarPage() {
   return (

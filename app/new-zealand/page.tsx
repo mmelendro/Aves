@@ -8,11 +8,11 @@ import { publicMetadata } from "@/lib/public-metadata"
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Bird, Compass, Heart, Utensils, Waves } from "lucide-react"
+import { ArrowRight, Bird, Heart, Utensils, Waves } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
-import NewZealandMap from "@/components/new-zealand-map"
 import { NewZealandPhotoCredits } from "@/components/new-zealand-bird-carousel"
-import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
+import DestinationExplorerPage from "@/components/destination-explorer-page"
+import WorldDestinationMap from "@/components/world-destination-map"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -34,22 +34,9 @@ const experiences = [
 export default function NewZealandPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <GlobalHeader country="new-zealand" />
+      <GlobalHeader />
       <main id="main-content" tabIndex={-1}>
-        <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><Compass className="h-4 w-4" aria-hidden="true" />AVES New Zealand</p>
-              <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl lg:text-5xl">Aotearoa <span className="text-emerald-700">New Zealand</span></h1>
-              <p className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Follow the birds. Stay for everything around them.</p>
-              <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-gray-600">We’re developing personally planned journeys connecting birds, landscapes and local culture. Tell us the pace, comforts and experiences you would love to build a trip around.</p>
-            </div>
-            <div className="mb-7 text-center"><Link href="/account?country=new-zealand&region=south-island" className={`${linkStyle} bg-emerald-700 text-white hover:bg-emerald-800`}>Start a private planning brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><p className="mt-3 text-sm text-gray-600">A short questionnaire in My Trips. Save privately, then choose whether to share with AVES. No booking is confirmed.</p></div>
-            <NewZealandHeroExplorer />
-            <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4 text-sm font-semibold text-emerald-800"><Link href="/" className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All destinations</Link>{[["regions", "The islands"], ["birdlife", "Birds & where to find them"], ["experience", "Beyond birding"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{label}</a>)}</nav>
-          </div>
-        </section>
-
+        <DestinationExplorerPage map={<WorldDestinationMap/>}>
         {/* Broaden the invitation beyond birding; retain the nearby source and licence for this photo. */}
         <section id="experience" aria-labelledby="experience-heading" className="scroll-mt-24 bg-stone-50/70 py-12 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -63,7 +50,7 @@ export default function NewZealandPage() {
                 <h2 id="experience-heading" className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl">Make room for the whole journey.</h2>
                 <p className="mt-5 text-lg leading-relaxed text-gray-600">A birding morning can lead into a lakeside walk, a gallery visit or a long lunch. Tell us what makes a trip memorable for you.</p>
                 <p className="mt-4 leading-7 text-gray-600">As we develop AVES New Zealand, your interests will help shape the conversation: how far you want to travel, where you feel comfortable staying and how much time to leave unplanned.</p>
-                <a href={newZealandContactHref} className={`${linkStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+                <a href={newZealandContactHref} className={`${linkStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Discuss your New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
                 <p className="mt-3 text-xs leading-5 text-gray-500">A personal planning conversation; arrangements are confirmed separately.</p>
               </div>
             </div>
@@ -77,7 +64,7 @@ export default function NewZealandPage() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-emerald-700">Find your starting point</p>
             <h2 id="regions-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Three islands. Many ways to explore.</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Choose the landscapes that speak to you. A rewarding trip can focus on one part of the country, with time to settle in.</p>
-            <NewZealandMap />
+            <a href="#nz-discovery-map" className="mt-4 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Explore these islands on the map above</a>
             <div className="mt-9 grid gap-6 lg:grid-cols-3">{newZealandRegions.map((region, index) => <article key={region.id} id={`region-${region.id}`} tabIndex={-1} aria-labelledby={`region-${region.id}-heading`} className="flex scroll-mt-28 flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 to-white p-6 sm:p-7 target:border-emerald-600 target:ring-2 target:ring-emerald-100 focus:outline focus:outline-2 focus:outline-emerald-700">
               <span className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-sm font-medium text-emerald-800">0{index + 1}</span>
               <h3 id={`region-${region.id}-heading`} className="text-2xl font-medium">{region.name}</h3><p className="mt-2 font-medium text-emerald-700">{region.subtitle}</p>
@@ -113,11 +100,12 @@ export default function NewZealandPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><div className="rounded-3xl bg-emerald-900 p-7 text-white sm:p-12">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-emerald-200">Help shape what comes next</p><h2 id="journey-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">What would your New Zealand journey look like?</h2><p className="mt-5 max-w-2xl text-lg leading-relaxed text-emerald-50">We’re developing AVES New Zealand. Share your interests, approximate dates, preferred pace and the kind of places you’d love to stay.</p>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-emerald-100">You can save a private brief and the birds you would love to see, then choose to share it with AVES. Planning does not confirm tours, guides, dates, prices or reservations; arrangements are discussed separately.</p>
-            <a href={newZealandContactHref} className={`${linkStyle} mt-7 bg-white text-emerald-900 hover:bg-emerald-50 focus-visible:outline-white`}>Discuss a New Zealand trip<ArrowRight className="h-5 w-5" aria-hidden="true" /></a><p className="mt-4 text-sm text-emerald-100">Send a message through our contact form. We’ll reply personally.</p>
+            <a href={newZealandContactHref} className={`${linkStyle} mt-7 bg-white text-emerald-900 hover:bg-emerald-50 focus-visible:outline-white`}>Discuss your New Zealand trip<ArrowRight className="h-5 w-5" aria-hidden="true" /></a><p className="mt-4 text-sm text-emerald-100">Send a message through our contact form. We’ll reply personally.</p>
           </div></div>
         </section>
+        </DestinationExplorerPage>
       </main>
-      <GlobalFooter country="new-zealand" />
+      <GlobalFooter />
     </div>
   )
 }

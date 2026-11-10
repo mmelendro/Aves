@@ -16,6 +16,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.json({ error: "Saving is disabled in this website preview. Please use live AVES." },
       { status: 503, headers: { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow, noarchive" } })
   }
+  // A review deployment must not refresh real Auth sessions or consume legacy cookies.
+  if (isReadOnlyPreview()) {
+    const target = request.nextUrl.clone()
+    target.pathname = path
+    const response = /^\/australia\/(?:account|admin)(?:\/|$)/.test(originalPath)
+      ? NextResponse.redirect(target, 307) : NextResponse.next({ request })
+    response.headers.set("Cache-Control", "private, no-store")
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive")
+    return response
+  }
   if (path === "/auth/session") return NextResponse.next({ request })
   let localRewrite: URL | undefined
   if (/^\/australia\/(?:account|admin)(?:\/|$)/.test(originalPath)) {

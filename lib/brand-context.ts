@@ -1,0 +1,10 @@
+export interface BrandSelection { country: string; regionId?: string; placeId?: string }
+
+/** Same public selection for every page logo, with direct-route fallback. */
+export function brandContext(path: string, country?: string, selection?: BrandSelection | null): BrandSelection {
+  const activeCountry = country || (path === "/australia" || path.startsWith("/australia/") ? "australia" : undefined) || (path === "/" || path === "/colombia" || path === "/aves-explorer" || path.startsWith("/regions/") || path === "/new-zealand" || path === "/new-zealand/south-island" ? selection?.country : undefined) || "global"
+  const parts = path.split("/").filter(Boolean)
+  const regionId = parts[0] === "australia" && parts[1] === "regions" ? parts[2] : parts[0] === "regions" ? parts[1]
+    : parts[0] === activeCountry && parts.length > 1 ? parts[1] : undefined
+  return selection?.country === activeCountry ? selection : { country: activeCountry, regionId }
+}

@@ -179,7 +179,7 @@ export default function YouTubeHeroBackground({
 
     const initializePlayer = () => {
       try {
-        const newPlayer = new (window as YouTubeWindow).YT!.Player(playerRef.current!, {
+        new (window as YouTubeWindow).YT!.Player(playerRef.current!, {
           videoId,
           playerVars: {
             autoplay: 1,

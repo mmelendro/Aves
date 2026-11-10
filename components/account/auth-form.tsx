@@ -24,7 +24,7 @@ type Mode = "sign-in" | "sign-up" | "forgot-password" | "reset-password"
  * Build a same-site Auth callback URL for email flows, with one of the two supported account targets.
  */
 function callbackUrl(next: string) {
-  const url = new URL("/auth/callback", window.location.origin)
+  const url = new URL("/australia/auth/callback", window.location.origin)
   url.searchParams.set("next", next)
   return url.href
 }
@@ -83,7 +83,7 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
     setFeedback("")
     setSuccess(false)
     try {
-      const redirectTo = new URL("/auth/callback", window.location.origin)
+      const redirectTo = new URL("/australia/auth/callback", window.location.origin)
       redirectTo.searchParams.set("flow", "oauth")
       redirectTo.searchParams.set("next", signUpDestination)
       const { error } = await createClient().auth.signInWithOAuth({

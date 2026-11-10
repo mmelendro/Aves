@@ -8,12 +8,13 @@ import Link from "next/link"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { destinationBirds } from "@/content/destination-birds"
 import type { Destination } from "@/content/destinations"
+import type { ComponentProps } from "react"
 import type { BirdProfile } from "@/content/birds"
 
-export default function DestinationCardMedia({ destination, fillPanel = false, birds = destinationBirds[destination.id], label }: { destination: Destination; fillPanel?: boolean; birds?: BirdProfile[]; label?: string }) {
+export default function DestinationCardMedia({ destination, fillPanel = false, birds = destinationBirds[destination.id], label, selection }: { destination: Destination; fillPanel?: boolean; birds?: BirdProfile[]; label?: string; selection?: ComponentProps<typeof HomepageBirdCarousel>["selection"] }) {
   if (birds?.length) return <HomepageBirdCarousel
     birds={birds} variant="destination-card" label={label ?? `${destination.name} bird photographs`}
-    autoPlay={false} priority={false} showBirdPicker fillPanel={fillPanel}
+    selection={selection} autoPlay={false} priority={false} showBirdPicker fillPanel={fillPanel}
   />
 
   return <>

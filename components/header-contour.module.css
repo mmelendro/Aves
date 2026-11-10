@@ -1,0 +1,9 @@
+.enter { animation:contour-in 360ms ease-out both; }
+.leave { animation:contour-out 360ms ease-out both; }
+@keyframes contour-in { from { opacity:0; } to { opacity:1; } }
+@keyframes contour-out { from { opacity:1; } to { opacity:0; } }
+@media(prefers-reduced-motion:reduce) { .enter { animation:none; } .leave { display:none; } }
+
+/* Scroll distance drives only this small flock; terrain and whales stay fixed. */
+.flock { transform:translate(var(--flock-x, 0px), var(--flock-y, 0px)); }
+@media (prefers-reduced-motion:reduce) { .flock { transform:none; } }

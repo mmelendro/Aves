@@ -19,6 +19,7 @@ function componentHarness(file, name, props, overrides = {}) {
   let cursor = 0
   const react = {
     useId: () => "test-id",
+    createContext: value => ({ _default: value }), useContext: context => context._default,
     useState(initial) {
       const index = cursor++
       if (!(index in state)) state[index] = typeof initial === "function" ? initial() : initial
@@ -36,6 +37,7 @@ function componentHarness(file, name, props, overrides = {}) {
   const mocks = {
     react,
     "@/components/preview-mode": { useReadOnlyPreview: () => false },
+    "@/features/australia/components/mobile-navigation-overlay": { MobileNavigationOverlay: "MobileNavigationOverlay" },
     "react/jsx-runtime": { jsx, jsxs: jsx, Fragment: "Fragment" },
     "next/link": { __esModule: true, default: "Link" },
     "next/image": { __esModule: true, default: "Image" },
@@ -45,10 +47,11 @@ function componentHarness(file, name, props, overrides = {}) {
   }
   function module(filename) {
     if (cache.has(filename)) return cache.get(filename)
+    if (filename.endsWith(".module.css")) return { __esModule:true, default:new Proxy({}, {get:(_,key)=>String(key)}) }
     if (filename.endsWith(".json")) return JSON.parse(readFileSync(filename, "utf8"))
     const exports = {}
     cache.set(filename, exports)
-    const code = ts.transpileModule(readFileSync(filename, "utf8"), { fileName: filename, compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
+    const code = ts.transpileModule(readFileSync(filename, "utf8"), { fileName: filename.replace(/\.mjs$/, ".ts"), compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
     const requireModule = id => {
       if (Object.hasOwn(mocks, id)) return mocks[id]
       if (id === "lucide-react" || id.startsWith("@/components/ui/")) return new Proxy({}, { get: (_, key) => String(key) })
@@ -71,7 +74,7 @@ function componentHarness(file, name, props, overrides = {}) {
 function nodes(tree) {
   if (!tree || typeof tree !== "object") return []
   if (Array.isArray(tree)) return tree.flatMap(nodes)
-  return [tree, ...nodes(tree.props?.children)]
+  return [tree, ...nodes(tree.props?.children), ...nodes(tree.props?.footer)]
 }
 function find(tree, predicate) { const result = nodes(tree).find(predicate); assert.ok(result, "Expected rendered element"); return result }
 function boxes(tree) { return nodes(tree).filter(node => node.props.name === "regions") }
@@ -264,7 +267,7 @@ test("signup preserves country intent through the unified email callback", async
   const requests = [], destinations = []
   const harness = componentHarness("components/account/auth-form.tsx", "AuthForm", { mode: "sign-up", next: "/account?country=colombia&region=amazonia" }, { mocks: { "@/lib/supabase/client": { createClient: () => ({ auth: { signUp: async input => { requests.push(input); return { error: null } } } }) } }, window: { location: { origin: "https://aves.bio", assign: value => destinations.push(value) } } })
   await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { email: "test@example.test", password: "test-only-password", confirmPassword: "test-only-password" } } })
-  assert.equal(requests[0].options.emailRedirectTo, "https://aves.bio/auth/callback?next=%2Faccount%3Fcountry%3Dcolombia%26region%3Damazonia")
+  assert.equal(requests[0].options.emailRedirectTo, "https://aves.bio/australia/auth/callback?next=%2Faccount%3Fcountry%3Dcolombia%26region%3Damazonia")
   assert.equal(new URL(destinations[0], "https://aves.bio").searchParams.get("next"), "/account?country=colombia&region=amazonia")
 })
 
@@ -288,7 +291,7 @@ for (const [provider, scopes] of [["google", "openid email profile"], ["facebook
     assert.equal(requests[0].provider, provider)
     assert.equal(requests[0].options.scopes, scopes)
     const callback = new URL(requests[0].options.redirectTo)
-    assert.equal(callback.origin + callback.pathname, "https://aves.bio/auth/callback")
+    assert.equal(callback.origin + callback.pathname, "https://aves.bio/australia/auth/callback")
     assert.equal(callback.searchParams.get("flow"), "oauth")
     assert.equal(callback.searchParams.get("next"), "/account?country=colombia&region=central-andes")
   })
@@ -357,7 +360,7 @@ test("Australia desktop and mobile navigation can return to the global destinati
 
 test("public and account footers link to Colombia separately from all destinations", () => {
   const publicFooter = componentHarness("features/australia/components/footer.tsx", "Footer", {}).render()
-  const accountShell = componentHarness("components/account/account-shell.tsx", "AccountShell", { title: "Account", description: "Trips" }, { mocks: { "@/components/page-shell": { PageShell: "PageShell" } } }).render()
+  const accountShell = componentHarness("components/account/account-shell.tsx", "AccountShell", { title: "Account", description: "Trips" }, { mocks: { "@/components/page-shell": { PageShell: "PageShell" }, "@/features/australia/components/page-shell": { PageShell: "PageShell" } } }).render()
   for (const footer of [publicFooter, accountShell]) {
     assert.equal(find(footer, node => ["https://aves.bio/", "/"].includes(node.props.href)).props.children, "All destinations")
     assert.match(find(footer, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children, /Colombia/)

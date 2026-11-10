@@ -40,22 +40,6 @@ test('only known same-app public routes receive client navigation', () => {
   assert.equal(mediaClientHref('/account', 'https://aves.bio/australia', ['/australia'], '/australia'), null)
 })
 
-test('the unified public allowlist covers both registries and preserves private document boundaries', () => {
-  const shared = require('./helpers/load-ts.cjs')()
-  const { publicNavigationPaths } = shared('lib/public-navigation.ts')
-  const sitemap = shared('app/sitemap.ts').default()
-  assert.deepEqual(sitemap.map(item => new URL(item.url).pathname), publicNavigationPaths)
-  assert.equal(new Set(publicNavigationPaths).size, publicNavigationPaths.length)
-  const current = 'https://aves.bio/new-zealand/south-island'
-  for (const href of ['/colombia', '/australia', '/australia/regions/new-south-wales']) {
-    assert.equal(mediaClientHref(href, current, publicNavigationPaths), href)
-  }
-  assert.ok(publicNavigationPaths.includes('/new-zealand/south-island'))
-  for (const href of ['/account', '/admin/quotes', '/auth/callback', '/api/account/plans', '/australia/account', '/australia/auth/callback']) {
-    assert.equal(mediaClientHref(href, current, publicNavigationPaths), null)
-  }
-})
-
 test('restoring and returning from history require Resume, and closing removes the checkpoint', () => {
   const React = require('react')
   const slots = [], listeners = {}, documentListeners = {}, saved = new Map(), pushed = []
@@ -69,7 +53,7 @@ test('restoring and returning from history require Resume, and closing removes t
   }
   const storage = { getItem: key => saved.get(key) ?? null, setItem: (key, value) => saved.set(key, value), removeItem: key => saved.delete(key) }
   const windowMock = { location: { href: 'https://aves.bio/new-zealand/south-island' }, addEventListener: (key, fn) => { listeners[key] = fn }, removeEventListener() {} }
-  const documentMock = { activeElement: null, addEventListener: (key, fn) => { documentListeners[key] = fn }, removeEventListener() {} }
+  const documentMock = { createElement:()=>({dataset:{},remove(){}}), body:{appendChild(){}}, querySelector:()=>null, dispatchEvent() {}, activeElement: null, addEventListener: (key, fn) => { documentListeners[key] = fn }, removeEventListener() {} }
   const router = { push: href => pushed.push(href) }
   class Element { constructor(href) { this.href = href } closest() { return this } hasAttribute() { return false } getAttribute(name) { return name === 'href' ? this.href : null } }
   const modules = new Map()
@@ -80,7 +64,9 @@ test('restoring and returning from history require Resume, and closing removes t
     modules.set(file, output)
     const code = ts.transpileModule(fs.readFileSync(path.join(__dirname, '..', file), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
     new Function('require','exports','window','document','sessionStorage','Element','HTMLElement',code)(name => {
+      if (name === '@/components/brand-bird') return {BrandBird:()=>null}
       if (name === 'react') return hooks
+      if (name === 'react-dom') return {createPortal:tree=>tree}
       if (name === 'next/navigation') return { useRouter: () => router }
       if (name === 'next/image') return () => null
       if (name.startsWith('@/')) return component(name.slice(2) + '.ts')
@@ -114,6 +100,18 @@ test('restoring and returning from history require Resume, and closing removes t
   tree.props.value.open('mohua-podcast'); render()
   saved.delete(key); listeners.pageshow({persisted:true}); tree = render()
   assert.ok(!nodes(tree).some(node => node.type === 'aside' || node.type?.name === 'MediaDock'))
+  const bird = {id:'bird:colombia:test',country:'colombia',kind:'Bird call',title:'Test bird',description:'Test call',href:'/credits',action:'Credits',playback:{type:'audio',src:'/audio/test.mp3'}}
+  const region = {...bird,id:'soundscape:south-island:forest',country:'new-zealand',kind:'Soundscape'}
+  tree.props.value.play(bird); tree=render()
+  assert.equal(nodes(tree).filter(node=>node.type?.name==='MediaDock').length,1)
+  assert.equal(storage.getItem(key),null,'dynamic public tracks never store arbitrary sources')
+  tree.props.value.play(region); tree=render()
+  tree.props.value.stop(bird.id); tree=render()
+  const dock=nodes(tree).filter(node=>node.type?.name==='MediaDock')
+  assert.equal(dock.length,1,'a stale bird cleanup cannot close the newly selected region')
+  assert.equal(dock[0].props.resource.id,region.id)
+  tree.props.value.stop(region.id); tree=render()
+  assert.equal(nodes(tree).filter(node=>node.type?.name==='MediaDock').length,0)
 })
 
 

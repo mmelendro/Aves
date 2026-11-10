@@ -8,11 +8,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen } from "lucide-react"
-import { NavigationHeader } from "@/components/navigation-header"
-import { Footer } from "@/components/footer"
-import { ColombiaHomeLanguage } from "@/components/colombia-home-language"
-import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
-import ColombiaMapArtwork from "@/components/colombia-map-artwork"
+import { ColombiaHomeLanguage, ColombiaHomeLanguageToggle } from "@/components/colombia-home-language"
+import type { ReactNode } from "react"
+import DestinationExplorerPage from "./destination-explorer-page"
+import { GlobalHeader, GlobalFooter } from "./global-navigation"
 import { ContactFormSection } from "@/components/contact-form-section"
 
 // Homepage teaser text and URL slugs. Keep slugs aligned with the full region catalogue.
@@ -44,22 +43,13 @@ const planningSteps = [
 ]
 
 
-export default function AVESLandingPage() {
+export default function AVESLandingPage({ map }: { map?: ReactNode } = {}) {
   return (
     <ColombiaHomeLanguage><div className="min-h-screen bg-white">
-      <NavigationHeader currentPage="/colombia" />
+      <GlobalHeader />
       <main id="main-content" tabIndex={-1}>
-        <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10 lg:py-12">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Colombia · Birding journeys</p>
-              <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Colombia’s <span className="text-emerald-700">extraordinary birdlife</span></h1>
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">Personally planned journeys connecting Colombia’s birds, landscapes and local culture. Tell us what you love; we’ll help shape the route, pace and places to stay.</p>
-            </div>
-            <ColombiaHeroExplorer resizable />
-          </div>
-        </section>
-
+        <div className="mx-auto flex max-w-7xl justify-end px-4 pt-4 sm:px-6 lg:px-8"><ColombiaHomeLanguageToggle/></div>
+        <DestinationExplorerPage initialCountryId="colombia" map={map}>
         <section className="bg-stone-50/70 py-12 sm:py-16" aria-labelledby="story-heading">
           <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-8">
             <figure className="min-w-0">
@@ -87,15 +77,9 @@ export default function AVESLandingPage() {
             <div className="mb-9 max-w-2xl">
               <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-emerald-700">A country of different habitats</p>
               <h2 id="regions-heading" className="text-3xl font-medium text-gray-900 lg:text-4xl">Find your corner of Colombia.</h2>
-              <p className="mt-4 text-lg leading-relaxed text-gray-600">Start with a landscape. Explore the map or choose a region to discover its birds and possibilities for your journey.</p>
+              <p className="mt-4 text-lg leading-relaxed text-gray-600">Start with a landscape. Explore the map above or choose a region to discover its birds and possibilities for your journey.</p>
             </div>
-            <div className="grid items-start gap-7 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
-              <Link href="/aves-explorer" className="group block rounded-2xl border border-emerald-100 bg-white p-5 shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700 sm:p-7">
-                <ColombiaMapArtwork alt="Map of Colombia showing its birding regions" width={634} height={802} sizes="(min-width: 1024px) 40vw, 90vw" className="mx-auto h-auto max-h-[580px] w-full object-contain" />
-                <span className="mt-5 flex min-h-11 items-center justify-center gap-2 rounded-lg bg-emerald-50 px-3 text-center font-semibold text-emerald-800 group-hover:bg-emerald-100">
-                  Open the interactive map <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                </span>
-              </Link>
+            <div className="items-start">
               <nav aria-label="Colombia birding regions" className="grid gap-3 sm:grid-cols-2">
                 {regions.map((region) => (
                   <Link key={region.slug} href={"/regions/" + region.slug} className="group flex min-h-24 items-start justify-between gap-3 rounded-xl border border-emerald-100 bg-white p-4 shadow-sm transition-colors hover:border-emerald-300 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
@@ -158,8 +142,9 @@ export default function AVESLandingPage() {
         <div id="contact" className="scroll-mt-24">
           <ContactFormSection showTitle={true} showFAQ={false} variant="homepage" />
         </div>
+        </DestinationExplorerPage>
       </main>
-      <Footer />
+      <GlobalFooter />
     </div></ColombiaHomeLanguage>
   )
 }
