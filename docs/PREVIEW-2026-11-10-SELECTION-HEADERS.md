@@ -43,4 +43,3 @@ Local flock geometry tests cover 320–2560px; actual native 400% browser zoom g
 also passed 340 CSS-pixel reflow and menu Escape/focus checks. True touch, physical
 Safari and exact 320/390px remain unverified. No production release.
 Main remains 33189e9 and Australia 59a8f65.
-

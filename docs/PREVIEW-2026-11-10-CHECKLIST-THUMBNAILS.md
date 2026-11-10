@@ -44,3 +44,27 @@ unverified.
 Five further candidates were withheld after automatic review identified embedded
 non-commercial/all-rights-reserved claims or personal metadata. No rejected asset
 is included. Existing curated sources remain separate and unchanged.
+
+## Final hosted acceptance
+
+Combined runtime source: 1b795eb15583e2ee98a6fc0fa5260b6e2af78f06.
+Deployment: dpl_61sAL591eVz1czja6qo5yyYp2n38, READY.
+https://v0-company-landing-page-k46nvktfq-mmelendro-9273s-projects.vercel.app/new-zealand/south-island
+
+162 combined tests, strict TypeScript and a local build passed. The final change
+replaced only one image and its provenance; the media integrity tests passed again
+and its final hosted build passed. Browser verified loaded 64px controls, five
+Apteryx references, search and selected-only filtering, viewing without selection,
+labelled illustration, unidentified-crane pending state, full credits and Escape
+focus return. The public directory has 331 new source rows and 662 licence/source
+links. The final kiwi reference shows the bird clearly and retains CC BY 3.0/source.
+
+Native 400% browser zoom gave 340 CSS pixels with no horizontal overflow and loaded
+thumbnail controls. Integrated Arthur’s Pass selection showed the kea/alpine header;
+explicit Satellite worked in both existing map instances. Earlier constituent
+checks cover 0/50/100% opacity and unchanged camera. No private save was exercised.
+Physical Safari and true pinch/swipe remain unverified.
+
+Proof images: aves-checklist-thumbnails-preview.png and
+aves-checklist-thumbnails-340px.png. These are actual browser screenshots.
+Production remains at the recorded 33189e9 / 59a8f65 baselines.
