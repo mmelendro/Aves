@@ -1,5 +1,8 @@
 # South Island satellite outline pilot
 
+Published later after explicit approval; current status and production evidence are
+in RELEASE-2026-11-10-SELECTION-THUMBNAILS.md. The preview record below is historical.
+
 Preview only, following the owner-selected satellite map direction and source audit.
 Existing registered NASA Earth Observatory 2004 imagery is shown at full opacity.
 Only the selected LCDB habitat class receives shading. The visible selected-habitat

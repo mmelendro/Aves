@@ -9,17 +9,17 @@ The prior long plan is archived in archive/2026-11-10-before-selection-thumbnail
 | Increment | State | Next action |
 | --- | --- | --- |
 | Australian and Colombian regional contours, main map controls, one-person team | Live | Preserve verified baseline |
-| Selection-linked headers, small local flocks, personal planning copy | Preview verified | Main combined PR #10, separate AU PR #9 |
-| South Island selected-habitat satellite shading, zero-capable slider | Preview verified | Included in main PR #10 |
-| Public NZ checklist thumbnails | 362/377 references, 15 pending | Hosted acceptance in preview document; source verification continues |
-| Audit/cleanup | Source complete, newer than live | Include audited source in an approved release |
+| Selection-linked headers, small local flocks, personal planning copy | Live | Preserve merged PR #10 / AU PR #9 |
+| South Island selected-habitat satellite shading, zero-capable slider | Live | Preserve published main increment |
+| Public NZ checklist thumbnails | Live: 362/377 references, 15 pending | Safe source verification continues |
+| Audit/cleanup | Published with this increment | Preserve confirmed cleanup |
 | South Island eBird layer | Readiness assessment complete | Written commercial-use permission before API work; enquiry unsent |
 | Unified C3 private acceptance | Blocked on safe staging | Preserve gate; no provisioning retry or C4/C5 cutover |
 
 ## Next bounded work
 
-1. Finish the combined preview acceptance and reconcile documents. Ask for explicit
-   production approval only with the concrete candidate ready for review.
+1. The combined candidate and separate AU candidate are approved, published and
+   live-verified. Preserve RELEASE-2026-11-10-SELECTION-THUMBNAILS.md; do not redeploy them.
 2. Port the same reference-image UX to the separate private NZ picker, preserving
    IDs/storage and verifying private save/reopen. No account/schema/provider changes.
 3. Continue safe source verification for the remaining public checklist entries.

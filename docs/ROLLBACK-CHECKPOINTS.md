@@ -1,5 +1,17 @@
 # AVES verified release checkpoints
 
+## Approved selection / reference-image release, 10 November 2026
+
+Main: a3445b7 / dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi, recovery
+checkpoint/2026-11-10-20-selection-thumbnails. Australia: 34037f0 /
+dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg, recovery
+checkpoint/2026-11-10-19-australia-selection. Both production builds are READY and
+363 live checks passed. Previous main 33189e9 / dpl_HdwbDsUDSkfQcK8c2mxgVRe9j6zK,
+previous AU 59a8f65 / dpl_FNrh2YBNHFjamZk3gPu1WcL5Cb9Z remain independent rollback
+options at checkpoints 18 and 17. Restore each application independently.
+
+The following notices are retained historical checkpoints.
+
 Current preview work has not changed production. Main recovery remains
 checkpoint/2026-11-10-18-colombia-contours (33189e9), AU recovery remains
 checkpoint/2026-11-10-17-australia-contours (59a8f65). Main PR #10 and AU PR #9

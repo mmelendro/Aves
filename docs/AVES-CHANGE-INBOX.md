@@ -1,5 +1,12 @@
 # AVES request inbox
 
+Latest release, 10 November 2026: selection-linked headers/local flocks are live in
+both apps. South Island satellite shading and the public 362/377 checklist references
+are live in main. PRs #10/#9 merged after explicit approval. All 363 live checks passed.
+See RELEASE-2026-11-10-SELECTION-THUMBNAILS.md and HANDOFF-CURRENT.md. Prior preview
+wording below describes earlier checkpoints, not pending implementation. Private-picker
+port and fifteen remaining images are still pending; eBird permission enquiry is unsent.
+
 Current 10 November status: established contours, main map controls and one-person
 team are live. Selection-linked headers/local flocks, satellite shading and public
 checklist thumbnails are source-complete in main PR #10 and separate AU PR #9,

@@ -1,5 +1,8 @@
 # New Zealand checklist thumbnails
 
+Published later after explicit approval; current status and production evidence are
+in RELEASE-2026-11-10-SELECTION-THUMBNAILS.md. The preview record below is historical.
+
 Preview only. The public picker renders a visible 64px reference thumbnail next to
 its independent checkbox. Opening the image shows source, creator, licence and
 modifications without selecting a bird. The existing larger curated photos remain

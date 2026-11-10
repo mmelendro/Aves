@@ -1,5 +1,8 @@
 # Selection-linked contour headers
 
+Published later after explicit approval; current status and production evidence are
+in RELEASE-2026-11-10-SELECTION-THUMBNAILS.md. The preview record below is historical.
+
 Preview only. The owner asked the header to follow map selection immediately,
 without opening a guide, and to keep future mobile-app reuse in mind.
 

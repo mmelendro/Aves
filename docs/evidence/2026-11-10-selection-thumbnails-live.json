@@ -1,0 +1,2189 @@
+{
+  "date": "2026-11-10",
+  "mainRuntime": "a3445b7fd6e4ee1e454f0da0778845e7df5be5b2",
+  "mainDeployment": "dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi",
+  "auRuntime": "34037f09990ea354bc4c53c6127b205f576f6477",
+  "auDeployment": "dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg",
+  "checks": 363,
+  "passed": 363,
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 621483,
+      "passed": true
+    },
+    {
+      "path": "/colombia",
+      "status": 200,
+      "bytes": 230644,
+      "passed": true
+    },
+    {
+      "path": "/aves-explorer",
+      "status": 200,
+      "bytes": 195698,
+      "passed": true
+    },
+    {
+      "path": "/new-zealand",
+      "status": 200,
+      "bytes": 217626,
+      "passed": true
+    },
+    {
+      "path": "/new-zealand/south-island",
+      "status": 200,
+      "bytes": 1022546,
+      "passed": true
+    },
+    {
+      "path": "/credits",
+      "status": 200,
+      "bytes": 759670,
+      "passed": true
+    },
+    {
+      "path": "/team",
+      "status": 200,
+      "bytes": 99804,
+      "passed": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "bytes": 2502,
+      "passed": true
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "bytes": 329,
+      "passed": true
+    },
+    {
+      "path": "/site-map",
+      "status": 200,
+      "bytes": 74789,
+      "passed": true
+    },
+    {
+      "path": "/australia",
+      "status": 200,
+      "bytes": 180271,
+      "passed": true
+    },
+    {
+      "path": "/australia/aves-explorer",
+      "status": 200,
+      "bytes": 155043,
+      "passed": true
+    },
+    {
+      "path": "/regions/pacific",
+      "status": 200,
+      "bytes": 149660,
+      "passed": true
+    },
+    {
+      "path": "/regions/western-andes",
+      "status": 200,
+      "bytes": 154412,
+      "passed": true
+    },
+    {
+      "path": "/regions/central-andes",
+      "status": 200,
+      "bytes": 154857,
+      "passed": true
+    },
+    {
+      "path": "/regions/eastern-andes",
+      "status": 200,
+      "bytes": 154136,
+      "passed": true
+    },
+    {
+      "path": "/regions/cauca-valley",
+      "status": 200,
+      "bytes": 150895,
+      "passed": true
+    },
+    {
+      "path": "/regions/magdalena-valley",
+      "status": 200,
+      "bytes": 151444,
+      "passed": true
+    },
+    {
+      "path": "/regions/caribbean",
+      "status": 200,
+      "bytes": 150391,
+      "passed": true
+    },
+    {
+      "path": "/regions/llanos",
+      "status": 200,
+      "bytes": 153321,
+      "passed": true
+    },
+    {
+      "path": "/regions/amazonia",
+      "status": 200,
+      "bytes": 154372,
+      "passed": true
+    },
+    {
+      "path": "/regions/sierra-nevada-de-santa-marta",
+      "status": 200,
+      "bytes": 149014,
+      "passed": true
+    },
+    {
+      "path": "/regions/colombian-massif",
+      "status": 200,
+      "bytes": 149440,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/victoria",
+      "status": 200,
+      "bytes": 146427,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/south-australia",
+      "status": 200,
+      "bytes": 146694,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/queensland",
+      "status": 200,
+      "bytes": 155843,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/new-south-wales",
+      "status": 200,
+      "bytes": 158332,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/tasmania",
+      "status": 200,
+      "bytes": 157000,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/western-australia",
+      "status": 200,
+      "bytes": 147085,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/northern-territory",
+      "status": 200,
+      "bytes": 153172,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/australian-capital-territory",
+      "status": 200,
+      "bytes": 152469,
+      "passed": true
+    },
+    {
+      "path": "/australia/regions/jervis-bay-territory",
+      "status": 200,
+      "bytes": 158256,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2cbbd7bc5b9c.jpg",
+      "status": 200,
+      "bytes": 4845,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0b4a874a73ac.jpg",
+      "status": 200,
+      "bytes": 9259,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-be94efcb6b52.jpg",
+      "status": 200,
+      "bytes": 5927,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a30edf463d87.jpg",
+      "status": 200,
+      "bytes": 11008,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4d0c16a33cb9.jpg",
+      "status": 200,
+      "bytes": 3747,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-48a73f65c167.jpg",
+      "status": 200,
+      "bytes": 7157,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d759ffbf501e.jpg",
+      "status": 200,
+      "bytes": 4984,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e96d7dae476a.jpg",
+      "status": 200,
+      "bytes": 7412,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-74cc213fb161.jpg",
+      "status": 200,
+      "bytes": 2454,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4d1ca90747fe.jpg",
+      "status": 200,
+      "bytes": 5455,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e36f33e8464a.jpg",
+      "status": 200,
+      "bytes": 3855,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-54d0cc8e024e.jpg",
+      "status": 200,
+      "bytes": 4889,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c0b25643f702.jpg",
+      "status": 200,
+      "bytes": 5825,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-63677d8f9dc0.jpg",
+      "status": 200,
+      "bytes": 5364,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-bfaea2ffd133.jpg",
+      "status": 200,
+      "bytes": 4281,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4844df029555.jpg",
+      "status": 200,
+      "bytes": 7813,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-78bfd53676f0.jpg",
+      "status": 200,
+      "bytes": 5337,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9a3c49ac92f1.jpg",
+      "status": 200,
+      "bytes": 3072,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-10938006ad53.jpg",
+      "status": 200,
+      "bytes": 5404,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-29369fe7e708.jpg",
+      "status": 200,
+      "bytes": 3847,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-98e659f02230.jpg",
+      "status": 200,
+      "bytes": 4597,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6eed0d4f621a.jpg",
+      "status": 200,
+      "bytes": 5574,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1f6971e99e34.jpg",
+      "status": 200,
+      "bytes": 4615,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-071bfd722f6b.jpg",
+      "status": 200,
+      "bytes": 7075,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3397bf6e01de.jpg",
+      "status": 200,
+      "bytes": 12601,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-81daad0169dc.jpg",
+      "status": 200,
+      "bytes": 6259,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-bdc3cc58830c.jpg",
+      "status": 200,
+      "bytes": 5337,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-afb86196818d.jpg",
+      "status": 200,
+      "bytes": 4492,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-80f716276d30.jpg",
+      "status": 200,
+      "bytes": 2560,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5ed6d9a8b74e.jpg",
+      "status": 200,
+      "bytes": 3119,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f377a91e2543.jpg",
+      "status": 200,
+      "bytes": 6403,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-93054f7fe38b.jpg",
+      "status": 200,
+      "bytes": 7887,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9dca6530418f.jpg",
+      "status": 200,
+      "bytes": 4258,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5eaca8506683.jpg",
+      "status": 200,
+      "bytes": 4985,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1c75aa734471.jpg",
+      "status": 200,
+      "bytes": 4320,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6ca8a5f73292.jpg",
+      "status": 200,
+      "bytes": 5662,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-409b26df0719.jpg",
+      "status": 200,
+      "bytes": 6032,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-004585537e2d.jpg",
+      "status": 200,
+      "bytes": 1981,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a5347e8d26fd.jpg",
+      "status": 200,
+      "bytes": 3826,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f05467666459.jpg",
+      "status": 200,
+      "bytes": 5995,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a4855ce63dfb.jpg",
+      "status": 200,
+      "bytes": 4709,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7b31b705dd8b.jpg",
+      "status": 200,
+      "bytes": 4558,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5f158d80b061.jpg",
+      "status": 200,
+      "bytes": 4140,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4184dd59f8a1.jpg",
+      "status": 200,
+      "bytes": 4017,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-00d83b975bfd.jpg",
+      "status": 200,
+      "bytes": 4124,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cc63a81018aa.jpg",
+      "status": 200,
+      "bytes": 4460,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a72f238f9cc0.jpg",
+      "status": 200,
+      "bytes": 4770,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-711f3312588b.jpg",
+      "status": 200,
+      "bytes": 6889,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ccdf3d0f5a5f.jpg",
+      "status": 200,
+      "bytes": 3966,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1ddb34fef712.jpg",
+      "status": 200,
+      "bytes": 3767,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cac2f90e83c0.jpg",
+      "status": 200,
+      "bytes": 4451,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ed47c41f3a54.jpg",
+      "status": 200,
+      "bytes": 3878,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c27fce8a1352.jpg",
+      "status": 200,
+      "bytes": 3286,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e54a0921704e.png",
+      "status": 200,
+      "bytes": 19340,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3df5e0297157.jpg",
+      "status": 200,
+      "bytes": 4975,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e1752a72b986.jpg",
+      "status": 200,
+      "bytes": 4141,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-31073c73650f.jpg",
+      "status": 200,
+      "bytes": 7226,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-04403bc2d367.jpg",
+      "status": 200,
+      "bytes": 6988,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1d44e6d2f13d.jpg",
+      "status": 200,
+      "bytes": 3066,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a29cd2abae43.jpg",
+      "status": 200,
+      "bytes": 6726,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-deedf3262b51.jpg",
+      "status": 200,
+      "bytes": 5434,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-07b33bdba842.jpg",
+      "status": 200,
+      "bytes": 4772,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9c99847ae50e.jpg",
+      "status": 200,
+      "bytes": 4601,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5732c693ca31.jpg",
+      "status": 200,
+      "bytes": 4560,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d4a3ff3d64cd.jpg",
+      "status": 200,
+      "bytes": 3694,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a3d079fe22b3.jpg",
+      "status": 200,
+      "bytes": 5411,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-03c83fe36a9d.jpg",
+      "status": 200,
+      "bytes": 5552,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-afcfb5bb4b38.jpg",
+      "status": 200,
+      "bytes": 5754,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-493972d35157.jpg",
+      "status": 200,
+      "bytes": 6504,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-da961b29572a.jpg",
+      "status": 200,
+      "bytes": 6581,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ee72f3e954fe.jpg",
+      "status": 200,
+      "bytes": 3563,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0a2ae4f3e559.jpg",
+      "status": 200,
+      "bytes": 3970,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-bf7a95e72a7e.jpg",
+      "status": 200,
+      "bytes": 4613,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2054decb4e3e.jpg",
+      "status": 200,
+      "bytes": 7204,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-59ca15ed82bb.jpg",
+      "status": 200,
+      "bytes": 5471,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5494111fec2a.jpg",
+      "status": 200,
+      "bytes": 4298,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9f212ea5bb58.jpg",
+      "status": 200,
+      "bytes": 7308,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0775f7bfd422.jpg",
+      "status": 200,
+      "bytes": 1540,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9d76478fbdbd.jpg",
+      "status": 200,
+      "bytes": 6020,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cd6c2378d213.jpg",
+      "status": 200,
+      "bytes": 5098,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e5ef8120d210.jpg",
+      "status": 200,
+      "bytes": 3266,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-773aae845f6a.jpg",
+      "status": 200,
+      "bytes": 3838,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7b9e6856fe53.png",
+      "status": 200,
+      "bytes": 16027,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-63e06c00dd29.jpg",
+      "status": 200,
+      "bytes": 4881,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c1923772ddd3.jpg",
+      "status": 200,
+      "bytes": 3260,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c76b7b9f867e.png",
+      "status": 200,
+      "bytes": 24887,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-774d12fbaef8.jpg",
+      "status": 200,
+      "bytes": 6660,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-efb91d790d51.jpg",
+      "status": 200,
+      "bytes": 8744,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f954b745e886.jpg",
+      "status": 200,
+      "bytes": 4646,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-dc692b771800.png",
+      "status": 200,
+      "bytes": 21212,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-bd5d50162a34.jpg",
+      "status": 200,
+      "bytes": 4935,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-90acb05c636d.jpg",
+      "status": 200,
+      "bytes": 3289,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3b0ef6abf6b2.jpg",
+      "status": 200,
+      "bytes": 7178,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e62987e27668.jpg",
+      "status": 200,
+      "bytes": 6155,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3f48369cae57.jpg",
+      "status": 200,
+      "bytes": 6021,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-45952ec59843.jpg",
+      "status": 200,
+      "bytes": 6004,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-13fc1c593f7b.jpg",
+      "status": 200,
+      "bytes": 5743,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7c627af043be.jpg",
+      "status": 200,
+      "bytes": 4979,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9be51337f5ee.jpg",
+      "status": 200,
+      "bytes": 4062,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8d07c81f3eac.jpg",
+      "status": 200,
+      "bytes": 5023,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-54694022a3e6.jpg",
+      "status": 200,
+      "bytes": 2901,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e2e64f8c3ded.jpg",
+      "status": 200,
+      "bytes": 4698,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-153ba9a4ccc8.jpg",
+      "status": 200,
+      "bytes": 4680,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6e83e61f2918.jpg",
+      "status": 200,
+      "bytes": 4058,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-82f78d4249d5.jpg",
+      "status": 200,
+      "bytes": 5493,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-da72cac81f25.jpg",
+      "status": 200,
+      "bytes": 3677,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d9a5ea9baf32.jpg",
+      "status": 200,
+      "bytes": 3636,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-dd1a94a43213.jpg",
+      "status": 200,
+      "bytes": 6570,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-09758e8b2bee.jpg",
+      "status": 200,
+      "bytes": 6420,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a53cda9d5db8.jpg",
+      "status": 200,
+      "bytes": 4069,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-95390d592cb1.jpg",
+      "status": 200,
+      "bytes": 5752,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-25846d1da875.jpg",
+      "status": 200,
+      "bytes": 6106,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-28788f30da86.jpg",
+      "status": 200,
+      "bytes": 6611,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-295f08000c5d.jpg",
+      "status": 200,
+      "bytes": 6914,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-94ca9e1775c9.jpg",
+      "status": 200,
+      "bytes": 2458,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-83b3f5588686.jpg",
+      "status": 200,
+      "bytes": 2396,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7926adbfcc32.jpg",
+      "status": 200,
+      "bytes": 6089,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a10ed93ed2a6.jpg",
+      "status": 200,
+      "bytes": 6153,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-855d32cd11bd.jpg",
+      "status": 200,
+      "bytes": 4592,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c2d939095e61.jpg",
+      "status": 200,
+      "bytes": 4133,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-933bdd82ce1e.jpg",
+      "status": 200,
+      "bytes": 6418,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-21bbb3fed451.jpg",
+      "status": 200,
+      "bytes": 4084,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1c5cc0917da9.jpg",
+      "status": 200,
+      "bytes": 6784,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-34b76f80404e.jpg",
+      "status": 200,
+      "bytes": 2587,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1e5b9faf5be1.jpg",
+      "status": 200,
+      "bytes": 3840,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-57c14d0f4fae.jpg",
+      "status": 200,
+      "bytes": 2824,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-56fc238eee28.jpg",
+      "status": 200,
+      "bytes": 4990,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f99bb68bea50.jpg",
+      "status": 200,
+      "bytes": 4507,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-aa98e6a33723.jpg",
+      "status": 200,
+      "bytes": 2252,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-bf78a66e29a7.jpg",
+      "status": 200,
+      "bytes": 3389,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c007993ab924.jpg",
+      "status": 200,
+      "bytes": 4059,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4b7f4c8a1099.jpg",
+      "status": 200,
+      "bytes": 6187,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9a7cfcdd2dc5.jpg",
+      "status": 200,
+      "bytes": 3365,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3490304b7f2e.jpg",
+      "status": 200,
+      "bytes": 5646,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-133b22472eb4.jpg",
+      "status": 200,
+      "bytes": 4704,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7c6afa97c450.jpg",
+      "status": 200,
+      "bytes": 4097,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e6ef844b4827.jpg",
+      "status": 200,
+      "bytes": 2488,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-129795c2c5dd.jpg",
+      "status": 200,
+      "bytes": 7986,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-25a366e32852.jpg",
+      "status": 200,
+      "bytes": 10007,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f0d66728a499.jpg",
+      "status": 200,
+      "bytes": 9274,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d823b54c1f66.jpg",
+      "status": 200,
+      "bytes": 7062,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-96fa3776f7c1.jpg",
+      "status": 200,
+      "bytes": 9264,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-27979ad1baed.jpg",
+      "status": 200,
+      "bytes": 6756,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cac92d96959a.jpg",
+      "status": 200,
+      "bytes": 7387,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7a7c9d6eeeb8.jpg",
+      "status": 200,
+      "bytes": 5093,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0c167bd89bec.jpg",
+      "status": 200,
+      "bytes": 10770,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5bfe6502e1a7.jpg",
+      "status": 200,
+      "bytes": 11023,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6a34503aa939.jpg",
+      "status": 200,
+      "bytes": 5759,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a53ffeba3961.jpg",
+      "status": 200,
+      "bytes": 4541,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2978cc1f815a.jpg",
+      "status": 200,
+      "bytes": 4045,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-04fca3e0a60d.jpg",
+      "status": 200,
+      "bytes": 4773,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ff896bda56ee.jpg",
+      "status": 200,
+      "bytes": 2673,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1da20e516b8c.jpg",
+      "status": 200,
+      "bytes": 19366,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7194c09f7e4c.jpg",
+      "status": 200,
+      "bytes": 4808,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f67ac1a2187a.png",
+      "status": 200,
+      "bytes": 56197,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a38a9f498401.jpg",
+      "status": 200,
+      "bytes": 4360,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-df7d00bec4ee.jpg",
+      "status": 200,
+      "bytes": 4972,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2470eaa555ed.jpg",
+      "status": 200,
+      "bytes": 4993,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b315bec1cc6c.jpg",
+      "status": 200,
+      "bytes": 5247,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e7fb0a0f6cc5.jpg",
+      "status": 200,
+      "bytes": 3660,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d9f91c79d7ee.jpg",
+      "status": 200,
+      "bytes": 5106,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-74048cb6e046.jpg",
+      "status": 200,
+      "bytes": 3884,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-071863cca036.jpg",
+      "status": 200,
+      "bytes": 5411,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-77e3e1715595.jpg",
+      "status": 200,
+      "bytes": 3432,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3eea49ef2a26.jpg",
+      "status": 200,
+      "bytes": 3140,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3e91623e21b7.jpg",
+      "status": 200,
+      "bytes": 3139,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f324a5770ce5.jpg",
+      "status": 200,
+      "bytes": 4254,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9bb614fc02ee.jpg",
+      "status": 200,
+      "bytes": 3727,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ce276af6fe84.jpg",
+      "status": 200,
+      "bytes": 6655,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c28aea7f00dc.jpg",
+      "status": 200,
+      "bytes": 3939,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3d7456eb7dc2.jpg",
+      "status": 200,
+      "bytes": 5045,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-79307e3f013c.jpg",
+      "status": 200,
+      "bytes": 4398,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5ae7aa466295.jpg",
+      "status": 200,
+      "bytes": 5194,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-79c9028bf49e.jpg",
+      "status": 200,
+      "bytes": 3657,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b5a5c9188b55.jpg",
+      "status": 200,
+      "bytes": 1974,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-eab08f4511a9.jpg",
+      "status": 200,
+      "bytes": 4626,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5c7c285905c1.jpg",
+      "status": 200,
+      "bytes": 2875,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d3858ab9df2d.jpg",
+      "status": 200,
+      "bytes": 5465,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ae1411b72a06.jpg",
+      "status": 200,
+      "bytes": 3787,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2c4feba0f64a.jpg",
+      "status": 200,
+      "bytes": 4956,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-027019cc720f.jpg",
+      "status": 200,
+      "bytes": 8079,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-19e223417b7b.jpg",
+      "status": 200,
+      "bytes": 5962,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-78e9f64c7d67.jpg",
+      "status": 200,
+      "bytes": 2824,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9ad8cf789bc9.jpeg",
+      "status": 200,
+      "bytes": 1956,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9134a26aeaa8.jpg",
+      "status": 200,
+      "bytes": 1939,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-29d603d1322e.jpg",
+      "status": 200,
+      "bytes": 3780,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-df4365466152.jpg",
+      "status": 200,
+      "bytes": 1944,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-882cbc45780c.jpg",
+      "status": 200,
+      "bytes": 2677,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7db85b6a1468.jpg",
+      "status": 200,
+      "bytes": 2678,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1fb3e18f9dba.jpg",
+      "status": 200,
+      "bytes": 5071,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-1a40568b2a41.jpeg",
+      "status": 200,
+      "bytes": 4084,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5a3704c12f99.jpg",
+      "status": 200,
+      "bytes": 5054,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3731a96e20b6.jpg",
+      "status": 200,
+      "bytes": 2960,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a1c7c5bd3de2.jpg",
+      "status": 200,
+      "bytes": 1411,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-93ee9c9a6ea8.jpg",
+      "status": 200,
+      "bytes": 5841,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8b2adc1fbf08.jpg",
+      "status": 200,
+      "bytes": 6148,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e2a8dffd288c.jpg",
+      "status": 200,
+      "bytes": 3545,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5dd3e9539462.jpg",
+      "status": 200,
+      "bytes": 7035,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0c34297197e3.jpg",
+      "status": 200,
+      "bytes": 3408,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8bd6a7af638d.jpg",
+      "status": 200,
+      "bytes": 6891,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6a261dd13567.jpg",
+      "status": 200,
+      "bytes": 5261,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b1cd88583514.jpg",
+      "status": 200,
+      "bytes": 5003,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f45c134794d5.jpg",
+      "status": 200,
+      "bytes": 12906,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9b6313dce07b.jpg",
+      "status": 200,
+      "bytes": 5527,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-dbb61544654c.jpg",
+      "status": 200,
+      "bytes": 4918,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e670e545504d.jpg",
+      "status": 200,
+      "bytes": 4269,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-097b454f997f.jpg",
+      "status": 200,
+      "bytes": 2268,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-84cce7d81249.jpg",
+      "status": 200,
+      "bytes": 2618,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-865b39b0ae7a.jpg",
+      "status": 200,
+      "bytes": 3588,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-aee1d68dc79d.jpg",
+      "status": 200,
+      "bytes": 4525,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5d051be423a0.jpg",
+      "status": 200,
+      "bytes": 6307,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8c9884218647.jpg",
+      "status": 200,
+      "bytes": 2318,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-adec605c02fa.jpg",
+      "status": 200,
+      "bytes": 3146,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ffc91403e98b.jpg",
+      "status": 200,
+      "bytes": 3222,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cd06aa8a12fa.jpg",
+      "status": 200,
+      "bytes": 4365,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7837bf48d63b.jpg",
+      "status": 200,
+      "bytes": 4280,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cf820d810475.jpg",
+      "status": 200,
+      "bytes": 3529,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2be9b543944a.jpg",
+      "status": 200,
+      "bytes": 6099,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-494ffa589f69.jpg",
+      "status": 200,
+      "bytes": 6394,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f84d457f709e.jpg",
+      "status": 200,
+      "bytes": 5506,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-00aa9c1debdd.jpg",
+      "status": 200,
+      "bytes": 4824,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-38c69c550b27.jpg",
+      "status": 200,
+      "bytes": 5021,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-667ccb13a83a.jpg",
+      "status": 200,
+      "bytes": 6326,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-823ca6a805bc.jpg",
+      "status": 200,
+      "bytes": 6256,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cdf5baf54d29.jpg",
+      "status": 200,
+      "bytes": 1358,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c683f76f0dc9.jpg",
+      "status": 200,
+      "bytes": 5563,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b83c0fcf389e.jpg",
+      "status": 200,
+      "bytes": 5851,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-957492b4a012.jpg",
+      "status": 200,
+      "bytes": 7015,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7418d959b6d6.jpg",
+      "status": 200,
+      "bytes": 3069,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b3fd60037966.jpg",
+      "status": 200,
+      "bytes": 5259,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cbacad6a8efc.jpg",
+      "status": 200,
+      "bytes": 5923,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b11dbb6ef8d3.jpg",
+      "status": 200,
+      "bytes": 7822,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b5872cf79799.jpg",
+      "status": 200,
+      "bytes": 5755,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e109b98f7374.jpg",
+      "status": 200,
+      "bytes": 11966,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f359420f3943.jpg",
+      "status": 200,
+      "bytes": 5463,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-41fdaa611b5a.jpg",
+      "status": 200,
+      "bytes": 3639,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0fbbc5f8aee1.jpg",
+      "status": 200,
+      "bytes": 5140,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b189c4ffeb29.jpg",
+      "status": 200,
+      "bytes": 5308,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-95efdbf9b030.jpg",
+      "status": 200,
+      "bytes": 5116,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-052953968a1c.jpg",
+      "status": 200,
+      "bytes": 5928,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c12f1d910f27.jpg",
+      "status": 200,
+      "bytes": 7952,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e2a98f996ce0.jpg",
+      "status": 200,
+      "bytes": 2886,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6dc3dc9f50ca.jpg",
+      "status": 200,
+      "bytes": 8969,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b1be19cc18b3.jpg",
+      "status": 200,
+      "bytes": 8082,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-55cdde8a9fe0.jpg",
+      "status": 200,
+      "bytes": 6724,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e7ecb90f7e0b.jpg",
+      "status": 200,
+      "bytes": 7632,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e1984eda2769.jpg",
+      "status": 200,
+      "bytes": 13479,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-36a95870b6df.jpg",
+      "status": 200,
+      "bytes": 4551,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c8a17b3fe55a.jpg",
+      "status": 200,
+      "bytes": 4432,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5350bf2661b4.jpg",
+      "status": 200,
+      "bytes": 3864,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b8d499002f71.jpg",
+      "status": 200,
+      "bytes": 4725,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5166cc280b32.jpg",
+      "status": 200,
+      "bytes": 12511,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4c9c0ec9940f.png",
+      "status": 200,
+      "bytes": 56116,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-93eb36265e3b.jpg",
+      "status": 200,
+      "bytes": 12938,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-50d8c56f3329.jpg",
+      "status": 200,
+      "bytes": 5575,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a7eab1eaf614.jpg",
+      "status": 200,
+      "bytes": 3735,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5a95f900d6f8.jpg",
+      "status": 200,
+      "bytes": 5248,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2fa4a85bbf74.jpg",
+      "status": 200,
+      "bytes": 11254,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4a6566c9525d.jpg",
+      "status": 200,
+      "bytes": 3455,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-fc00165124f6.jpg",
+      "status": 200,
+      "bytes": 4069,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-75e0446c2b4c.jpg",
+      "status": 200,
+      "bytes": 3571,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-748eaf98a791.jpg",
+      "status": 200,
+      "bytes": 4054,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-726c442241f8.jpg",
+      "status": 200,
+      "bytes": 6483,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b69e26461436.jpg",
+      "status": 200,
+      "bytes": 2150,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-373e1a0317d9.jpg",
+      "status": 200,
+      "bytes": 12364,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e6ed647b8a25.jpg",
+      "status": 200,
+      "bytes": 13355,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5e06dc6edd48.jpg",
+      "status": 200,
+      "bytes": 5028,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3fa9882f9196.jpg",
+      "status": 200,
+      "bytes": 4320,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-84e6b9c4a063.jpg",
+      "status": 200,
+      "bytes": 11330,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4b1e0baee4fb.jpg",
+      "status": 200,
+      "bytes": 4419,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-372a50f96b9b.jpg",
+      "status": 200,
+      "bytes": 4048,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-64a9f5d808b9.jpg",
+      "status": 200,
+      "bytes": 5059,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8569938600cc.jpg",
+      "status": 200,
+      "bytes": 9225,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9ea8215c6441.jpg",
+      "status": 200,
+      "bytes": 4761,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-fdf0b45c7612.jpg",
+      "status": 200,
+      "bytes": 3980,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-9a0fe42a38e2.jpg",
+      "status": 200,
+      "bytes": 8866,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d875fa8090cb.jpg",
+      "status": 200,
+      "bytes": 6464,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d01acc39aed4.jpg",
+      "status": 200,
+      "bytes": 8585,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-75e7bd199b48.jpg",
+      "status": 200,
+      "bytes": 6291,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a247cde2fc55.jpg",
+      "status": 200,
+      "bytes": 4122,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-79203b786da3.jpg",
+      "status": 200,
+      "bytes": 6175,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7d5066d0fd53.jpg",
+      "status": 200,
+      "bytes": 3099,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-37d450cfc394.jpg",
+      "status": 200,
+      "bytes": 6749,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8796ebc34462.jpg",
+      "status": 200,
+      "bytes": 6315,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b13a09b3c1a6.jpg",
+      "status": 200,
+      "bytes": 3805,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-48bb4b796e64.jpg",
+      "status": 200,
+      "bytes": 11130,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8b5e395cefa2.jpg",
+      "status": 200,
+      "bytes": 2702,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-e9193e903f10.jpg",
+      "status": 200,
+      "bytes": 11778,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-197a9a4577b4.jpg",
+      "status": 200,
+      "bytes": 5712,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-4ed3aa18564b.jpg",
+      "status": 200,
+      "bytes": 9122,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-66e9b0160934.jpg",
+      "status": 200,
+      "bytes": 5729,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-cd73f78332c7.jpg",
+      "status": 200,
+      "bytes": 3984,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b8115ba326a8.jpg",
+      "status": 200,
+      "bytes": 7093,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f1aea8fd8e7f.jpg",
+      "status": 200,
+      "bytes": 3492,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-13f36b65d011.jpg",
+      "status": 200,
+      "bytes": 6268,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-390ceeea78b3.jpg",
+      "status": 200,
+      "bytes": 2738,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-a04791cc46e1.jpg",
+      "status": 200,
+      "bytes": 5984,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-26ddd6b47007.jpg",
+      "status": 200,
+      "bytes": 6184,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-daddd7569928.jpg",
+      "status": 200,
+      "bytes": 3974,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-304815816656.jpg",
+      "status": 200,
+      "bytes": 29100,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3dcda42b95df.jpg",
+      "status": 200,
+      "bytes": 5208,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-8c2f2e6bc03b.jpg",
+      "status": 200,
+      "bytes": 4038,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-f2b146e85b00.jpg",
+      "status": 200,
+      "bytes": 7485,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ac90ad39fe88.jpg",
+      "status": 200,
+      "bytes": 5057,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c97f74615334.jpg",
+      "status": 200,
+      "bytes": 13329,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-ba26cecd7090.jpg",
+      "status": 200,
+      "bytes": 4317,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-24bca5a7fa81.jpg",
+      "status": 200,
+      "bytes": 3405,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3660a8ada213.jpg",
+      "status": 200,
+      "bytes": 4662,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-656616f11323.jpg",
+      "status": 200,
+      "bytes": 5776,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6198f02c84b1.jpg",
+      "status": 200,
+      "bytes": 3308,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-b379e6a27126.jpg",
+      "status": 200,
+      "bytes": 11530,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2f99e382a17a.jpg",
+      "status": 200,
+      "bytes": 8976,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-0f3476865769.jpg",
+      "status": 200,
+      "bytes": 4085,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-64953577a418.jpg",
+      "status": 200,
+      "bytes": 6026,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d80597e4ae2d.jpg",
+      "status": 200,
+      "bytes": 6162,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2803702e51ce.jpg",
+      "status": 200,
+      "bytes": 5069,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-c71ffab9b8f7.jpg",
+      "status": 200,
+      "bytes": 9483,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-017427d5aaf8.jpg",
+      "status": 200,
+      "bytes": 4305,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3fa144c104bb.jpg",
+      "status": 200,
+      "bytes": 4006,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-65d76be88552.jpg",
+      "status": 200,
+      "bytes": 4708,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-6f5e33401a57.jpg",
+      "status": 200,
+      "bytes": 4218,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-7d2862d196ab.jpg",
+      "status": 200,
+      "bytes": 5959,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-be9c76a3270e.jpg",
+      "status": 200,
+      "bytes": 3457,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-3e4a073fcd86.jpg",
+      "status": 200,
+      "bytes": 6799,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-5615df529950.jpg",
+      "status": 200,
+      "bytes": 3849,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-99a3bf8cb67e.jpg",
+      "status": 200,
+      "bytes": 5290,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-73a5f66965e6.jpg",
+      "status": 200,
+      "bytes": 3669,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-d22a846295d2.jpg",
+      "status": 200,
+      "bytes": 5021,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-2d20edfe005b.jpg",
+      "status": 200,
+      "bytes": 5145,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-70b4a90a57af.jpg",
+      "status": 200,
+      "bytes": 4573,
+      "passed": true
+    },
+    {
+      "path": "/images/checklist/nz-fc10dabc3059.jpg",
+      "status": 200,
+      "bytes": 5139,
+      "passed": true
+    }
+  ]
+}
