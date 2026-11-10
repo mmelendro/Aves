@@ -100,6 +100,18 @@ test('restoring and returning from history require Resume, and closing removes t
   tree.props.value.open('mohua-podcast'); render()
   saved.delete(key); listeners.pageshow({persisted:true}); tree = render()
   assert.ok(!nodes(tree).some(node => node.type === 'aside' || node.type?.name === 'MediaDock'))
+  const bird = {id:'bird:colombia:test',country:'colombia',kind:'Bird call',title:'Test bird',description:'Test call',href:'/credits',action:'Credits',playback:{type:'audio',src:'/audio/test.mp3'}}
+  const region = {...bird,id:'soundscape:south-island:forest',country:'new-zealand',kind:'Soundscape'}
+  tree.props.value.play(bird); tree=render()
+  assert.equal(nodes(tree).filter(node=>node.type?.name==='MediaDock').length,1)
+  assert.equal(storage.getItem(key),null,'dynamic public tracks never store arbitrary sources')
+  tree.props.value.play(region); tree=render()
+  tree.props.value.stop(bird.id); tree=render()
+  const dock=nodes(tree).filter(node=>node.type?.name==='MediaDock')
+  assert.equal(dock.length,1,'a stale bird cleanup cannot close the newly selected region')
+  assert.equal(dock[0].props.resource.id,region.id)
+  tree.props.value.stop(region.id); tree=render()
+  assert.equal(nodes(tree).filter(node=>node.type?.name==='MediaDock').length,0)
 })
 
 
