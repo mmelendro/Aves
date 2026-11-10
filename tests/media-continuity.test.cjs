@@ -64,6 +64,7 @@ test('restoring and returning from history require Resume, and closing removes t
     modules.set(file, output)
     const code = ts.transpileModule(fs.readFileSync(path.join(__dirname, '..', file), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
     new Function('require','exports','window','document','sessionStorage','Element','HTMLElement',code)(name => {
+      if (name === '@/components/brand-bird') return {BrandBird:()=>null}
       if (name === 'react') return hooks
       if (name === 'next/navigation') return { useRouter: () => router }
       if (name === 'next/image') return () => null
