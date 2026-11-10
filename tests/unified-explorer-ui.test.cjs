@@ -2,6 +2,7 @@ const { test } = require('node:test')
 const assert = require('node:assert/strict')
 const {componentHarness,nodes,find}=require('./helpers/component-harness.cjs')
 const mocks={
+ './colombia-home-language':{useColombiaHomeCopy:()=>tree=>tree},
  './south-island-places-explorer':{__esModule:true,default:'PlacesMedia'},
  './south-island-habitat-context':{__esModule:true,default:'HabitatProvider',SouthIslandHabitatContext:'Habitat'},
  './south-island-ecosystem-map':{__esModule:true,default:'SouthIslandMap'},

@@ -8,7 +8,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen } from "lucide-react"
-import { ColombiaHomeLanguage } from "@/components/colombia-home-language"
+import { ColombiaHomeLanguage, ColombiaHomeLanguageToggle } from "@/components/colombia-home-language"
 import type { ReactNode } from "react"
 import DestinationExplorerPage from "./destination-explorer-page"
 import { GlobalHeader, GlobalFooter } from "./global-navigation"
@@ -48,6 +48,7 @@ export default function AVESLandingPage({ map }: { map?: ReactNode } = {}) {
     <ColombiaHomeLanguage><div className="min-h-screen bg-white">
       <GlobalHeader />
       <main id="main-content" tabIndex={-1}>
+        <div className="mx-auto flex max-w-7xl justify-end px-4 pt-4 sm:px-6 lg:px-8"><ColombiaHomeLanguageToggle/></div>
         <DestinationExplorerPage initialCountryId="colombia" map={map}>
         <section className="bg-stone-50/70 py-12 sm:py-16" aria-labelledby="story-heading">
           <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-8">

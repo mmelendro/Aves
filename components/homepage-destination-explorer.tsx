@@ -6,6 +6,7 @@
 "use client"
 
 import { explorerLocation, readExplorerLocation, explorerLocationHref, type ExplorerLocation } from "@/lib/explorer-location"
+import { useColombiaHomeCopy } from "./colombia-home-language"
 import { placeInSentence } from "@/lib/place-language"
 import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
@@ -38,6 +39,7 @@ export default function HomepageDestinationExplorer(props: ExplorerProps) {
 }
 
 export function HomepageDestinationExplorerCore({ map, initialCountryId, initialRegionId, onScopeChange }: ExplorerProps) {
+  const localizeHome=useColombiaHomeCopy()
   const { publish } = useHeaderLandscape()
   const [scope,setScope]=useState(()=>explorerLocation(initialCountryId,initialRegionId))
   const selectedId=scope.country,regionId=scope.region,zoomed=Boolean(scope.country)
@@ -105,7 +107,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   }, [zoomed, selectedId, regionId])
   if (!destination) return null
 
-  return (
+  return localizeHome(
     <DestinationSelectionContext.Provider value={{ selectedId: zoomed ? destination.id : "", selectDestination, zoomed }}>
     <BirdDiscoveryContext.Provider value={onBirdChange}>
       <div className="mx-auto max-w-6xl">
