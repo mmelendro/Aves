@@ -2,7 +2,15 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
-## Current consolidated guide release · 11 November 2026
+## Current reciprocal guide cues · 11 November 2026
+
+Runtime b9722f2c016cacb1fa979b7e8e3c824d5d87e5dd; tree 24d99a81d20bdb0ac886ef6dd6b4ff053a7eb760.
+Production dpl_9aocQLEW3ex2EHyE4Ve9Api6ZWtP in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Recovery branch checkpoint/2026-11-11-reciprocal-guide-cues.
+Previous published runtime d091314c0764448f6f1367115b1184bd95914ac7 and production dpl_CrYVdpeTESBACZcnkp7zi311skMz remain the immediate rollback.
+Inspect the previous deployment's READY/source status, then reassign BOTH aves.bio and www.aves.bio aliases and verify public/account routes. Rebuild its pinned source in the same surviving project if needed. Keep Git history and domain registration intact. Do not publish an old separate-app root.
+
+## Previous map-first guide release · 11 November 2026
 
 - Runtime: d091314c0764448f6f1367115b1184bd95914ac7.
 - Tree: b191aa83489e0e3c4e793c6a90f891a6aa66083c.
