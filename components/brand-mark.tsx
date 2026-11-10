@@ -16,6 +16,7 @@ interface BrandMarkProps {
   size?: "header" | "footer"
   priority?: boolean
   label?: string
+  unifiedHeaderContour?: boolean
   labelHref?: string
 }
 
@@ -27,7 +28,7 @@ const countryLabels: Record<BrandCountry, string> = {
 
 // Landscape-inspired contours, not geographic outlines. The shared coast line
 // connects each destination to the original “From mountains to ocean” identity.
-const landscapes: Record<BrandCountry | "global", string> = {
+export const landscapes: Record<BrandCountry | "global", string> = {
   colombia: "M2 30 23 22 41 9 52 17 66 3 83 21 96 13 113 28 Q127 22 138 27 T163 28",
   australia: "M2 30 Q16 28 29 22 T53 20 Q64 10 78 16 L91 25 Q106 19 120 25 T153 28",
   "new-zealand": "M2 31 25 25 44 10 55 19 72 2 84 21 93 13 110 30 Q129 23 150 28",
@@ -35,7 +36,7 @@ const landscapes: Record<BrandCountry | "global", string> = {
 }
 
 // Own both links here so the country subtitle never sits inside the global home link.
-export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref }: BrandMarkProps) {
+export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref, unifiedHeaderContour = false }: BrandMarkProps) {
   const isFooter = size === "footer"
   const subtitle = label || (country ? countryLabels[country] : undefined)
   const homeHref = "/"
@@ -44,7 +45,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
   return (
     <span className={cn("relative inline-flex shrink-0 items-center pb-4", isFooter ? "gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
       <Link href={homeHref} aria-label="AVES home" className={cn("absolute inset-0 z-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", inverse ? "focus-visible:outline-emerald-300" : "focus-visible:outline-emerald-700")} />
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 240 40" fill="none" className={cn("pointer-events-none absolute inset-x-0 bottom-0 h-6 w-full", isFooter && "h-9", inverse ? "text-emerald-200" : "text-emerald-600")}>
+      <svg data-brand-landscape="true" aria-hidden="true" focusable="false" viewBox="0 0 240 40" fill="none" className={cn("pointer-events-none absolute inset-x-0 bottom-0 h-6 w-full", isFooter && "h-9", unifiedHeaderContour && "invisible", inverse ? "text-emerald-200" : "text-emerald-600")}>
         <path d={landscapes[country || "global"]} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M131 29 Q146 22 161 28 T192 28 T223 28 L238 28 M164 36 Q180 30 195 35 T237 34" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         {country === "australia" && <path d="M29 24V10 M22 15Q29 3 37 14 M25 10Q30 1 35 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />}

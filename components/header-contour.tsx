@@ -1,15 +1,40 @@
-/** The header ends in a landscape silhouette. Transparent space below the
- * white shape reveals the actual page background rather than a coloured strip.
- * Decoration never receives input or changes the logo/navigation geometry.
+"use client"
+
+import { useLayoutEffect, useRef, useState } from "react"
+import { landscapes, type BrandCountry } from "@/components/brand-mark"
+
+/** One visible outline replaces the logo contour AND header divider. Measure
+ * the reserved logo SVG so its country landscape retains its exact proportions.
  */
-export function HeaderContour() {
-  return <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[52px] h-10 text-emerald-600">
-    <svg focusable="false" viewBox="0 0 1440 40" preserveAspectRatio="none" className="h-full w-full" fill="none">
-      <path d="M0 0 H1440 V27 C1370 33 1320 20 1250 26 S1130 35 1055 27 S920 21 850 27 S710 34 650 26 L610 19 L582 23 L550 11 L529 20 L502 15 L465 29 L420 25 L391 16 L371 22 L342 8 L322 18 L300 12 L267 28 L225 24 L200 30 L169 19 L145 27 L117 14 L90 26 L60 21 L30 30 L0 26 Z" fill="white" fillOpacity=".98" />
-      <path d="M0 26 L30 30 L60 21 L90 26 L117 14 L145 27 L169 19 L200 30 L225 24 L267 28 L300 12 L322 18 L342 8 L371 22 L391 16 L420 25 L465 29 L502 15 L529 20 L550 11 L582 23 L610 19 L650 26 C710 34 780 34 850 27 S980 19 1055 27 S1180 34 1250 26 S1370 33 1440 27" stroke="currentColor" strokeWidth=".8" vectorEffect="non-scaling-stroke" opacity=".45" />
-    </svg>
-    <svg focusable="false" viewBox="0 0 64 18" fill="none" className="absolute left-[68%] top-2 hidden h-[13px] w-12 md:block">
-      <path d="M2 8 Q8 3 13 11 Q17 4 24 5 M28 3 Q33 0 38 7 Q43 1 49 2 M46 12 Q51 8 55 15 Q58 10 62 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity=".65" />
-    </svg>
-  </span>
+export function HeaderContour({ country }: { country?: BrandCountry }) {
+  const ref = useRef<SVGSVGElement>(null)
+  const [edge, setEdge] = useState("M0 68 L1440 68")
+  const [width, setWidth] = useState(1440)
+  useLayoutEffect(() => {
+    const svg = ref.current
+    const header = svg?.closest("header")
+    const logo = header?.querySelector<SVGSVGElement>("[data-brand-landscape]")
+    if (!svg || !header || !logo) return
+    function measure() {
+      const h = header!.getBoundingClientRect(), l = logo!.getBoundingClientRect()
+      const scale = Math.min(l.width / 240, l.height / 40)
+      const x = l.left - h.left + (l.width - 240 * scale) / 2
+      const y = l.top - h.top + (l.height - 40 * scale) / 2
+      let index = 0
+      const landscape = landscapes[country || "global"].replace(/-?\d+(?:\.\d+)?/g, value => String((index++ % 2 ? y : x) + Number(value) * scale))
+      const numbers = landscape.match(/-?\d+(?:\.\d+)?/g)!.map(Number)
+      const endX = numbers[numbers.length - 2], endY = numbers[numbers.length - 1]
+      const firstY = numbers[1], remaining = h.width - endX
+      setWidth(h.width)
+      setEdge(`M0 ${firstY} ${landscape.replace(/^M/, "L")} C${endX + remaining * .18} ${endY} ${endX + remaining * .2} ${endY + 3} ${endX + remaining * .4} ${endY + 1} S${endX + remaining * .72} ${endY - 2} ${h.width} ${endY}`)
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(header); observer.observe(logo)
+    return () => observer.disconnect()
+  }, [country])
+  return <svg ref={ref} aria-hidden="true" focusable="false" viewBox={`0 0 ${width} 92`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[92px] w-full text-emerald-600" fill="none">
+    <path d={`${edge} L${width} 0 H0 Z`} fill="white" fillOpacity=".98" />
+    <path d={edge} stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" opacity=".65" />
+  </svg>
 }
