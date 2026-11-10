@@ -21,6 +21,26 @@ interactions. The global brand matches selected country; neutral pages remain
 neutral before any selection. Full country explorers reserve header space to
 avoid a height jump when the first region is selected.
 
-Local tests, TypeScript and production builds were checked during implementation.
-Hosted browser checks and exact final source IDs follow with acceptance. No
-production release. Main remains 33189e9 and Australia 59a8f65.
+## Verified preview
+
+Main source 37605e98450381ff9c3863fa54bbee9e4875a5d2.
+Deployment dpl_5BngKMXUouUFSnNbGLkYBVERuHxB, READY:
+https://v0-company-landing-page-re7zl4zme-mmelendro-9273s-projects.vercel.app
+
+159 tests, strict TypeScript and local/hosted builds passed. Actual browser checks:
+global Australia and ACT selection; global Colombian Massif selection; Colombia
+Caribbean first map activation; South Island Arthur’s Pass and Fiordland selection.
+Headers changed before navigation. ACT uses cockatoos, Massif condors, Caribbean
+ibises, Arthur’s Pass kea and Fiordland kākā. An inland selection's visible drawing
+has no whales; the departing coastal drawing fades to opacity zero. Family outlines
+are illustrative shorthand, not exact species identification plates or live sightings.
+
+Always retain a small, loose horizon flock with source-backed local species. Eight
+wing/bill/tail family outlines share the lighter animal line weight. Bird count and
+placement respond to header/menu width. Sources are in content/header-flocks.json.
+Local flock geometry tests cover 320–2560px; actual native 400% browser zoom gave
+340 CSS pixels without horizontal overflow on Colombia. Separate Australia preview
+also passed 340 CSS-pixel reflow and menu Escape/focus checks. True touch, physical
+Safari and exact 320/390px remain unverified. No production release.
+Main remains 33189e9 and Australia 59a8f65.
+
