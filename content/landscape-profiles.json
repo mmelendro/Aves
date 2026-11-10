@@ -15,7 +15,8 @@
       "source": "content/regions.ts",
       "context": "",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "colombia"
     },
     {
       "id": "australia/country",
@@ -29,7 +30,8 @@
       "source": "content/global-australian-region-overviews.json",
       "context": "",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "australia"
     },
     {
       "id": "new-zealand/country",
@@ -43,7 +45,8 @@
       "source": "https://teara.govt.nz/en/mountains/page-1",
       "context": "",
       "status": "design-review",
-      "whales": true
+      "whales": true,
+      "selectionId": "new-zealand"
     },
     {
       "id": "colombia/pacific",
@@ -57,7 +60,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-utria/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "pacific"
     },
     {
       "id": "colombia/western-andes",
@@ -71,7 +75,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-tatama/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "western-andes"
     },
     {
       "id": "colombia/central-andes",
@@ -85,7 +90,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-los-nevados/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "central-andes"
     },
     {
       "id": "colombia/eastern-andes",
@@ -99,7 +105,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-chingaza/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "eastern-andes"
     },
     {
       "id": "colombia/cauca-valley",
@@ -113,7 +120,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-farallones-de-cali/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "cauca-valley"
     },
     {
       "id": "colombia/magdalena-valley",
@@ -127,7 +135,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-serrania-de-los-yariguies/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "magdalena-valley"
     },
     {
       "id": "colombia/caribbean",
@@ -141,7 +150,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "caribbean"
     },
     {
       "id": "colombia/sierra-nevada-de-santa-marta",
@@ -155,7 +165,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-sierra-nevada-de-santa-marta/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "sierra-nevada-de-santa-marta"
     },
     {
       "id": "colombia/llanos",
@@ -169,7 +180,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-el-tuparro/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "llanos"
     },
     {
       "id": "colombia/amazonia",
@@ -183,7 +195,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-amacayacu/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "amazonia"
     },
     {
       "id": "colombia/colombian-massif",
@@ -197,7 +210,8 @@
       "source": "https://www.parquesnacionales.gov.co/nuestros-parques/pnn-purace/",
       "context": "content/regions.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "colombian-massif"
     },
     {
       "id": "australia/queensland",
@@ -211,7 +225,8 @@
       "source": "https://www.birdlifenq.org/birding",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "queensland"
     },
     {
       "id": "australia/new-south-wales",
@@ -225,7 +240,8 @@
       "source": "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/royal-national-park",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "new-south-wales"
     },
     {
       "id": "australia/tasmania",
@@ -239,7 +255,8 @@
       "source": "https://parks.tas.gov.au/explore-our-parks/south-bruny-national-park",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "tasmania"
     },
     {
       "id": "australia/victoria",
@@ -253,7 +270,8 @@
       "source": "https://www.parks.vic.gov.au/places-to-see/parks/serendip-sanctuary",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "victoria"
     },
     {
       "id": "australia/south-australia",
@@ -267,7 +285,8 @@
       "source": "https://www.parks.sa.gov.au/parks/coorong-national-park",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "south-australia"
     },
     {
       "id": "australia/western-australia",
@@ -281,7 +300,8 @@
       "source": "https://www.destinationperth.com.au/blog/post/perths-birds-and-where-to-find-them/",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "western-australia"
     },
     {
       "id": "australia/northern-territory",
@@ -295,7 +315,8 @@
       "source": "https://nt.gov.au/parks/find-a-park/fogg-dam-conservation-area",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "northern-territory"
     },
     {
       "id": "australia/australian-capital-territory",
@@ -309,7 +330,8 @@
       "source": "https://www.parks.act.gov.au/things-to-do/birdwatching",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "australian-capital-territory"
     },
     {
       "id": "australia/jervis-bay-territory",
@@ -323,7 +345,8 @@
       "source": "https://booderee.gov.au/discover/nature/birds/",
       "context": "content/global-australian-region-overviews.json",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "jervis-bay-territory"
     },
     {
       "id": "new-zealand/north-island",
@@ -337,7 +360,8 @@
       "source": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/about-tongariro-national-park/central-north-island-volcanoes/",
       "context": "content/new-zealand.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "north-island"
     },
     {
       "id": "new-zealand/south-island",
@@ -351,7 +375,8 @@
       "source": "https://teara.govt.nz/en/mountains/page-1",
       "context": "content/new-zealand.ts",
       "status": "design-review",
-      "whales": true
+      "whales": true,
+      "selectionId": "south-island"
     },
     {
       "id": "new-zealand/rakiura",
@@ -365,7 +390,8 @@
       "source": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/stewart-island-rakiura/ulva-island-te-wharawhara",
       "context": "content/new-zealand.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "rakiura"
     },
     {
       "id": "new-zealand/arthurs-pass",
@@ -377,9 +403,10 @@
       "flock": "forest",
       "note": "Mountain beech forest and alpine pass. No ocean, whale, or coastal feeding flock.",
       "source": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/arthurs-pass-national-park/",
-      "context": "content/south-island.ts",
+      "context": "content/south-island-place-media.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "mountains"
     },
     {
       "id": "new-zealand/nelson-lakes",
@@ -391,9 +418,10 @@
       "flock": "forest",
       "note": "Beech-forested mountains descend to Lake Rotoiti; quiet lake contours, no surf.",
       "source": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
-      "context": "content/south-island.ts",
+      "context": "content/south-island-place-media.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "forest-and-lakes"
     },
     {
       "id": "new-zealand/fiordland",
@@ -405,9 +433,10 @@
       "flock": "forest",
       "note": "Use the current Te Anau/base-and-lakes context; this does not deny Fiordland has coastal fiords. No marine whale in a lake.",
       "source": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/",
-      "context": "content/south-island.ts",
+      "context": "content/south-island-place-media.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "southern-forest"
     },
     {
       "id": "new-zealand/otago-catlins",
@@ -419,9 +448,10 @@
       "flock": "terns",
       "note": "Low coastal headlands and open sea. No mountain chain or flying penguins.",
       "source": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/penguins/yellow-eyed-penguin-hoiho/",
-      "context": "content/south-island.ts",
+      "context": "content/south-island-place-media.ts",
       "status": "design-review",
-      "whales": false
+      "whales": false,
+      "selectionId": "coast"
     }
   ]
 }

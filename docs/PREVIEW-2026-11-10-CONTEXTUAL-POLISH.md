@@ -94,3 +94,10 @@ browser pass; five targeted geometry/gesture checks, TypeScript and a production
 build passed again after the behavioural/portrait fixes. The final sticky-toolbar
 CSS refinement is covered by the final hosted build/browser check. No dependency
 change, database fixture, private record or production promotion occurred.
+
+The final catalogue includes explicit existing map selection IDs (`mountains`,
+`forest-and-lakes`, `southern-forest`, `coast`) separately from human-readable asset
+IDs. Its resolver fails closed for unknown region/place selections; a contract test
+checks those selections against the actual public place source. This remains a
+prepared integration seam, not an assertion that selecting every place already
+changes a production header. Further ecosystem variants remain queued.

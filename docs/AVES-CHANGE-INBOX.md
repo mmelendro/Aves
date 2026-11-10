@@ -217,3 +217,19 @@ See RELEASE-2026-11-10-MEDIA-CONTINUITY.md. Pause, no further task selected.
 Original full target, interpreted with the published scope above:
 
 Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. The original NZ-only pilot has been superseded by the safe continuity release above. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. Main/Colombia/NZ and Australia/shared accounts currently have separate application roots; crossing Australia/My Trips or any full document navigation pauses playback and offers an explicit Resume on the next same-origin app. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.
+
+## Owner continuation, 10 November 2026: contextual contours, maps and team
+
+The NZ header is live. Thirty country/region/place vector studies and the documented
+natural-context process are in draft PR #6. Assets explicitly distinguish ocean,
+river, lake, lagoon, wetland and no-water scenes. Existing map selection IDs are
+mapped separately from asset IDs; unknown contexts fail closed instead of falling
+back to a marine scene. Wider runtime header rollout and exact species artwork
+remain review work, not published completion.
+
+Next selected order: enlargeable maps with smooth mobile drag/pinch/zoom, then team
+carousel, then light polish without major changes. The main-app review branch adds
+these controls and reuses existing team records/portraits, with no autoplay. No
+Australia app release, customer data, provider or account changes are authorised by
+this entry. Ecosystem-specific header variants are retained for a later increment.
+Physical mobile gesture acceptance and a separate production approval remain gates.

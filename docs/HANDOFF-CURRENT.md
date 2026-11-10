@@ -15,10 +15,19 @@ logo links and nine live route/asset/indexing checks passed. Physical Safari/tou
 and exact 320/390px browser views remain unverified.
 
 The owner selected a natural-context contour/flock collection for all existing
-countries, planning regions and South Island place contexts next. Prepare reviewed
-terrain/water/wildlife variants; do not publish them without their own review.
-The approved pilot changes public NZ headers only; global/Colombia/Australia,
-private accounts and foreground media behaviour remain unchanged.
+countries, planning regions and South Island place contexts. Thirty original SVG
+studies and the repeatable design process are prepared in draft PR #6:
+https://github.com/mmelendro/Aves/pull/6 (feature/aves-contextual-headers).
+These are review assets, not thirty installed production headers. Local species
+silhouettes and final page-level compositions remain review work.
+
+The owner's next order is map enlargement and smooth mobile drag/pinch/zoom,
+then a team-page carousel and small visual refinements, with no major architecture
+change. Draft PR #6 implements the main-app map controls and team carousel; hosted
+acceptance and physical Safari/touch limits are recorded with the preview. It is
+not approved for a new production release. The separate Australia app is unchanged.
+Further ecosystem-specific headers are queued for later. The NZ pilot remains the
+only header rollout live. No account/database, geographic artwork or media change.
 
 AVES-039 checklist photos remain published: 31 credited images and existing
 selection/preview behaviour are preserved. Previous runtime 8c7f297,
@@ -142,7 +151,7 @@ hosted account/database policy changes, customer-record edits or production
 cutover. The owner authorised controlled synthetic live test accounts/records;
 that authorisation persists for necessary C3 fixtures and their scoped cleanup.
 Do not infer permission to edit customer records or weaken preview protections.
-Source work must remain within the owner-selected consolidation sequence. AI drafting 059 is deferred at the owner's direction;
+Follow the latest owner-selected bounded increments; consolidation cutover remains gated. AI drafting 059 is deferred at the owner's direction;
 the previously verified blocker was ZDR entitlement on free Gateway credits.
 Do not buy credits, upgrade or relax ZDR/no-training. Manual proposals remain.
 Do not expose guest data or secrets in GitHub, logs, screenshots or URLs, and do

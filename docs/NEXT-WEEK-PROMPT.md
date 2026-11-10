@@ -11,10 +11,19 @@ logo links and nine live route/asset/indexing checks passed. Physical Safari/tou
 and exact 320/390px browser views remain unverified.
 
 The owner selected a natural-context contour/flock collection for all existing
-countries, planning regions and South Island place contexts next. Prepare reviewed
-terrain/water/wildlife variants; do not publish them without their own review.
-The approved pilot changes public NZ headers only; global/Colombia/Australia,
-private accounts and foreground media behaviour remain unchanged.
+countries, planning regions and South Island place contexts. Thirty original SVG
+studies and the repeatable design process are prepared in draft PR #6:
+https://github.com/mmelendro/Aves/pull/6 (feature/aves-contextual-headers).
+These are review assets, not thirty installed production headers. Local species
+silhouettes and final page-level compositions remain review work.
+
+The owner's next order is map enlargement and smooth mobile drag/pinch/zoom,
+then a team-page carousel and small visual refinements, with no major architecture
+change. Draft PR #6 implements the main-app map controls and team carousel; hosted
+acceptance and physical Safari/touch limits are recorded with the preview. It is
+not approved for a new production release. The separate Australia app is unchanged.
+Further ecosystem-specific headers are queued for later. The NZ pilot remains the
+only header rollout live. No account/database, geographic artwork or media change.
 
 AVES-039 checklist photos remain published: 31 credited images and existing
 selection/preview behaviour are preserved. Previous runtime 8c7f297,

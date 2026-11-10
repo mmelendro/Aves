@@ -21,3 +21,16 @@ test('all configured countries, planning regions and South Island place contexts
   }
   for (const id of ['new-zealand/arthurs-pass','australia/australian-capital-territory','colombia/amazonia','colombia/llanos']) assert.notEqual(catalogue.profiles.find(p=>p.id===id).water,'ocean')
 })
+
+test('actual South Island place selection IDs resolve inland artwork and unknown contexts fail closed', async () => {
+  const {selectLandscapeProfile}=await import('../lib/landscape-study.mjs')
+  const source=require('node:fs').readFileSync(require('node:path').join(__dirname,'../content/south-island-place-media.ts'),'utf8')
+  for(const id of ['mountains','forest-and-lakes','southern-forest','coast']) {
+    assert.ok(source.includes(`id: "${id}"`))
+    const profile=selectLandscapeProfile(catalogue.profiles,'new-zealand','south-island',id)
+    assert.ok(profile)
+    if(id!=='coast') { assert.notEqual(profile.water,'ocean'); assert.equal(profile.whales,false) }
+  }
+  assert.equal(selectLandscapeProfile(catalogue.profiles,'new-zealand','unknown'),undefined)
+  assert.equal(selectLandscapeProfile(catalogue.profiles,'new-zealand','south-island','unknown'),undefined)
+})
