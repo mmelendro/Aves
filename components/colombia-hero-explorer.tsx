@@ -6,6 +6,8 @@
  */
 "use client"
 
+import ColombiaRegionTargets from "./colombia-region-targets"
+
 import { useRegionPreview } from "./use-region-preview"
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useCallback, useEffect, useRef, useState } from "react"
@@ -68,11 +70,12 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
           <MapViewer label="Colombia planning map" credits="AVES planning-region artwork · representative locations, not official ecological boundaries."><div className={`${styles.mapCanvas} ${styles.mapViewport}`}><div data-zoom-artwork="true" className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
             <div className={`absolute inset-0 ${styles.pointZoom}`} style={focused ? { transform: `scale(2.4) translate(${50 - selectedRegionDetails.x}%, ${50 - selectedRegionDetails.y}%)` } : undefined}>
             <ColombiaMapArtwork flat selectedRegion={selectedRegionDetails.name} alt="" fill sizes={resizable ? "400px" : "230px"} className="object-contain" />
+            <ColombiaRegionTargets onActivate={media ? undefined : (event, id) => preview.activate(event, id)} onActivateKey={media ? undefined : (event, id, href) => preview.activateKey(event, id, href)} />
             {mapMarkers.map(region => {
               // A manual region choice takes priority over the bird's suggestion.
               // Keep its name visible; other labels appear on hover or keyboard focus.
               const selected = region.slug === selectedRegion
-              return <Link key={region.slug} href={`/regions/${region.slug}`} onKeyDown={event => preview.activateKey(event, region.slug, `/regions/${region.slug}`)} onClick={event => preview.activate(event, region.slug)} aria-label={`Explore ${region.name}${selected ? "; selected on the map" : ""}`} aria-current={selected ? "true" : undefined} tabIndex={focused && !selected ? -1 : undefined} aria-hidden={focused && !selected ? true : undefined} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%`, ...(focused && !selected ? { pointerEvents: "none", opacity: 0 } : {}) }} className={`group absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-30 hover:bg-emerald-950 hover:text-white focus-visible:z-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-20 border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "z-10 border-emerald-900/30 bg-white/95 text-emerald-950"}`}>
+              return <Link key={region.slug} href={`/regions/${region.slug}`} onKeyDown={event => { if (!media) preview.activateKey(event, region.slug, `/regions/${region.slug}`) }} onClick={event => { if (!media) preview.activate(event, region.slug) }} aria-label={`Explore ${region.name}${selected ? "; selected on the map" : ""}`} aria-current={selected ? "true" : undefined} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%` }} className={`group absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-30 hover:bg-emerald-950 hover:text-white focus-visible:z-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-20 border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "z-10 border-emerald-900/30 bg-white/95 text-emerald-950"}`}>
                 {selected ? <MapFeatherMarker /> : <span className="h-2 w-2 rounded-full bg-emerald-700" aria-hidden="true"/>}
               </Link>
             })}
@@ -83,7 +86,8 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
             <label htmlFor="colombia-hero-region" className="sr-only">Choose a Colombia region</label>
             <select ref={selectRef} id="colombia-hero-region" value={focused ? chosenRegion : ""} onChange={event => preview.preview(event.target.value)} className="min-h-11 min-w-0 flex-1 rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
               <option value="">Choose a Colombian region</option>
-              {mapMarkers.map(region => <option key={region.slug} value={region.slug}>{region.name}</option>)}
+              <ColombiaRegionTargets onActivate={media ? undefined : (event, id) => preview.activate(event, id)} onActivateKey={media ? undefined : (event, id, href) => preview.activateKey(event, id, href)} />
+            {mapMarkers.map(region => <option key={region.slug} value={region.slug}>{region.name}</option>)}
             </select>
             <Link href={`/regions/${selectedRegion}`} className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-lg bg-emerald-50 px-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>

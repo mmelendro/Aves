@@ -6,6 +6,7 @@
 "use client"
 
 import { useHeaderLandscape } from "./header-landscape-context"
+import ColombiaRegionTargets from "./colombia-region-targets"
 import { MapViewer } from "./map-viewer"
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -430,8 +431,9 @@ export function ColombianBirdsExplorer() {
                           className="w-full h-auto rounded-md shadow-lg opacity-90"
                         />
 
+                        <ColombiaRegionTargets onSelect={slug => { const region = regions.find(region => region.id === slug); if (region) handleRegionClick(region.mapId) }} />
                         {/* Interactive Overlay */}
-                        <div className="absolute inset-0">
+                        <div className="pointer-events-none absolute inset-0">
                           {bioregionsData.map((region) => {
                             const IconComponent = region.icon
                             const isSelected = selectedRegion === region.id
@@ -443,7 +445,7 @@ export function ColombianBirdsExplorer() {
                                 onClick={() => handleRegionClick(region.id)}
                                 onMouseEnter={() => setHoveredRegion(region.id)}
                                 onMouseLeave={() => setHoveredRegion(null)}
-                                className={`absolute flex h-11 w-11 items-center justify-center transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
+                                className={`pointer-events-auto absolute flex h-11 w-11 items-center justify-center transform -translate-x-1/2 -translate-y-1/2 group z-10 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-full transition-all duration-300 ${iconSizes.hoverScale}`}
                                 style={{
                                   left: `${region.coordinates.x}%`,
                                   top: `${region.coordinates.y}%`,

@@ -10,7 +10,6 @@ import Image from "next/image"
 import BirdsBrandWord from "@/components/birds-brand-word"
 import { ArrowRight, Bird, Compass, Heart, Utensils, Waves } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
-import NewZealandMap from "@/components/new-zealand-map"
 import { NewZealandPhotoCredits } from "@/components/new-zealand-bird-carousel"
 import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
@@ -77,7 +76,7 @@ export default function NewZealandPage() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-emerald-700">Find your starting point</p>
             <h2 id="regions-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Three islands. Many ways to explore.</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Choose the landscapes that speak to you. A rewarding trip can focus on one part of the country, with time to settle in.</p>
-            <NewZealandMap />
+            <a href="#nz-discovery-map" className="mt-4 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Explore these islands on the map above</a>
             <div className="mt-9 grid gap-6 lg:grid-cols-3">{newZealandRegions.map((region, index) => <article key={region.id} id={`region-${region.id}`} tabIndex={-1} aria-labelledby={`region-${region.id}-heading`} className="flex scroll-mt-28 flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 to-white p-6 sm:p-7 target:border-emerald-600 target:ring-2 target:ring-emerald-100 focus:outline focus:outline-2 focus:outline-emerald-700">
               <span className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-sm font-medium text-emerald-800">0{index + 1}</span>
               <h3 id={`region-${region.id}-heading`} className="text-2xl font-medium">{region.name}</h3><p className="mt-2 font-medium text-emerald-700">{region.subtitle}</p>

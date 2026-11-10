@@ -20,7 +20,7 @@ import styles from "./south-island-places-explorer.module.css"
 import { initialSouthIslandDiscovery, southIslandDiscoveryReducer, southIslandLandscapeSlides as slides } from "@/lib/south-island-discovery"
 
 
-export default function SouthIslandPlacesExplorer() {
+export default function SouthIslandPlacesExplorer({ mediaOnly = false }: { mediaOnly?: boolean } = {}) {
   const shared = useContext(SouthIslandHabitatContext)
   // The reducer fallback also supports rendering this viewer outside the page.
   const [local, dispatch] = useReducer(southIslandDiscoveryReducer, initialSouthIslandDiscovery)
@@ -42,10 +42,7 @@ export default function SouthIslandPlacesExplorer() {
     else dispatch({ type: "habitat", habitat: next })
     setInfo(false)
   }
-  return <ResizableDiscoveryPair mediaFirst mediaLabel="landscape photographs" mapLabel="Resize South Island places and map"
-    map={<SouthIslandEcosystemMap selected={habitat} onSelect={filter} places={southIslandPlaceContexts}
-      selectedPlace={place.id} onSelectPlace={next => showSlide(slides.findIndex(slide => slide.place.id === next))} />}
-    media={<><ExpandableMedia label="South Island landscapes" kind="place"><section className={styles.card} aria-label="South Island places carousel">
+  const media = <><ExpandableMedia label="South Island landscapes" kind="place"><section className={styles.card} aria-label="South Island places carousel">
       <div data-place-image className={styles.frame} tabIndex={0} onKeyDown={event => {
         if (event.key === "Escape" && info) { event.preventDefault(); setInfo(false); infoButton.current?.focus() }
         if (event.target !== event.currentTarget) return
@@ -66,5 +63,7 @@ export default function SouthIslandPlacesExplorer() {
           <p className="mt-5 text-xs leading-5">Photo: {photo.creator}. <a href={photo.licenceUrl} target="_blank" rel="noreferrer" className="underline">{photo.licence}</a>. {photo.modifications}</p>
         </div>}
       </div>
-    </section></ExpandableMedia><NzPlaceIdeas placeId={place.id} /></>} />
+    </section></ExpandableMedia><NzPlaceIdeas placeId={place.id} /></>
+  if (mediaOnly) return <div className="mx-auto max-w-4xl">{media}<nav aria-label="Choose a South Island landscape" className="mt-4 flex flex-wrap gap-3">{southIslandPlaceContexts.map(item => <button key={item.id} type="button" aria-pressed={place.id === item.id} className="min-h-11 rounded-full border border-emerald-200 px-4 text-sm font-semibold text-emerald-800 aria-pressed:bg-emerald-100" onClick={() => showSlide(slides.findIndex(slide => slide.place.id === item.id))}>{item.label}</button>)}</nav><a href="#south-island-bird-map" className="mt-4 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Show these places on the map above</a></div>
+  return <ResizableDiscoveryPair mediaFirst mediaLabel="landscape photographs" mapLabel="Resize South Island places and map" media={media} map={<SouthIslandEcosystemMap selected={habitat} onSelect={filter} places={southIslandPlaceContexts} selectedPlace={place.id} onSelectPlace={next => showSlide(slides.findIndex(slide => slide.place.id === next))} />} />
 }

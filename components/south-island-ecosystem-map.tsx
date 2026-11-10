@@ -194,6 +194,6 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
         <p>Scale measures horizontal ground distance at the displayed map-centre latitude, corrected for WGS84/Web Mercator. It updates on zoom, north/south pan and panel resize; scale varies elsewhere on the map. Native page scrolling and pinch zoom remain available when Move is off. Source detail remains about 2 km, even when enlarged.</p>
       </div>
     </details>
-    <Link href="/new-zealand#regions" className="mt-1 inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</Link>
+    <Link href="/new-zealand#regions" className="mt-1 inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</Link><nav aria-label="Neighbouring New Zealand islands" className="flex flex-wrap gap-4"><Link href="/new-zealand#region-north-island" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">North Island guide</Link><Link href="/new-zealand#region-rakiura" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">Rakiura guide</Link></nav>
   </section></MapViewer>
 }

@@ -95,7 +95,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
           {/* Keep the divider mounted when countries change, preserving its split.
               Only the keyed viewer resets old slides, calls, timers and details. */}
           <ResizableDiscoveryPair mapLabel="Resize world map and bird photographs"
-            map={<div className={`${styles.mapPanel} ${styles.mapStage}`} data-map-view={zoomed ? "country" : "world"}>
+            map={<div className={styles.mapPanel}><MapViewer label="Destination explorer map" credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
               {/* Both views share one footprint. Inert also removes the hidden
                   world's SVG buttons from keyboard and assistive navigation. */}
               <div className={styles.worldView} inert={zoomed} aria-hidden={zoomed}>{map}</div>
@@ -104,7 +104,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                   <button ref={backButton} type="button" onClick={backToWorld} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to world</button>
                   <h2 className="text-lg font-medium text-emerald-950">Explore {destination.name}</h2>
                 </div>
-                <div className={styles.regionalCanvas}><MapViewer label={`${destination.name} explorer map`} credits={destination.id === "colombia" ? "AVES planning-location artwork, not official ecological boundaries." : <a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth · public domain</a>}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={id => { const item = regions.find(region => region.id === id); if (item) regionPreview.activateButton(id, item.href) }} /></MapViewer></div>
+                <div className={styles.regionalCanvas}><DestinationRegionalMap country={destination.id} selectedRegionId={region?.id} highlightedRegionIds={highlightedRegions} onSelectRegion={id => { const item = regions.find(region => region.id === id); if (item) regionPreview.activateButton(id, item.href) }} /></div>
                 <figcaption className={styles.countryFooter}>
                   {region && <button ref={regionBackButton} type="button" onClick={() => selectRegion("")} className={styles.backButton}><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to {destination.name}</button>}
                   <label htmlFor="homepage-region" className="mb-2 block text-xs font-medium text-emerald-900">Choose a region in {destination.name}</label>
@@ -117,7 +117,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
                   <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? `AVES planning ${region ? "location focus" : "regions"} · existing map artwork` : <><a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
                 </figcaption>
               </figure>}
-            </div>}
+            </div></MapViewer></div>}
             media={<div key={`${destination.id}:${regionId}`} className={styles.mediaPanel}>
               <DestinationCardMedia destination={destination} birds={birds} label={`${region?.name ?? destination.name} bird photographs`} fillPanel />
             </div>} />

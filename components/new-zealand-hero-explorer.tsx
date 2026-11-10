@@ -83,7 +83,7 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
         </ExpandableMedia>
         <p className="mt-3 text-center text-sm leading-6 text-gray-600">{birds.length} featured species{chosenRegion ? ` associated with ${chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"}` : ", with a South Island focus"}. A selection, not a complete checklist. Open species details for range, habitat and sources.</p>
       </>} map={<>
-        <div id={regionId === "south-island" ? "south-island-bird-map" : undefined} className="scroll-mt-24">
+        <div id={regionId === "south-island" ? "south-island-bird-map" : "nz-discovery-map"} className="scroll-mt-24">
         {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem}
           places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { publish({country:"new-zealand",regionId:id}); setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { publish({country:"new-zealand"}); setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         </div>

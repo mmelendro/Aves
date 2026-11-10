@@ -70,7 +70,7 @@ export default function SouthIslandPage() {
             <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-700">Start with a habitat</p>
             <h2 id="places-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">A few places to build around.</h2>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">These are starting points, not stops to fit into one trip. Choose a manageable area and give the birds, weather and your own interests room to shape the days.</p>
-            <div className="mt-8"><SouthIslandPlacesExplorer /></div>
+            <div className="mt-8"><SouthIslandPlacesExplorer mediaOnly /></div>
           </div>
         </section>
 
