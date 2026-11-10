@@ -1,3 +1,15 @@
+# Current unified explorer checkpoint
+
+Australian production remains `5bdd33bae0d55f5a202fe4963f692ab27e118cc4` / `dpl_99qgUavb9ArbDhyL5PGRz42MBuPo`, READY on its stable alias. Main now runs `2c0deea666e7350e6b2e51fc08b65916c36881f4` / `dpl_9i3f5PKdu6DCWUxeASvJysX64sHE`: one shared South Island, NZ and world explorer. See docs/RELEASE-2026-11-11-UNIFIED-EXPLORER.md.
+
+Urgent next priority: extend this same map/content shell through the remaining country/regional entry pages, preserving app boundaries, every sourced existing layer, one rendered map per view and private planning. Phone acceptance and public navigation state remain. Complete all endemic species and AU/NZ range auditing, without confusing featured places with entire species ranges.
+
+Pending Australian public form, glass header, opening-map defaults and geographic article fixes are preserved on `wip/unified-contact-glass-au` at `919a4e5228c90ff46ee1b529384a34740c9792d2`. They have local tests but are not production changes. Main pending source is on `wip/unified-contact-glass-main` at `3679648b7723d35d9d9c4192e74f904a666bc4ab`.
+
+Read CONTINUE-HERE.md and docs/AGILE-PLAN.md for the active queue. The earlier verified US$1 safeguard was not changed or freshly inspected in this increment.
+
+## Earlier checkpoint
+
 # AVES current handoff
 
 Published 11 November 2026 (Sydney), following the owner's explicit production instruction and subsequent map/listening refinements. Both applications are READY and the exact source hashes below are confirmed.
