@@ -11,8 +11,12 @@ Current work: draft PR #11 (feature/private-checklist-thumbnails), source 6e802f
 adds 362 credited references to the private NZ picker. It is not live. Read
 PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. 299 tests, strict TypeScript and local build
 passed; editor save/reopen was checked with mocked API transport only. Finish
-actual private keyboard/dialog focus, small-screen and signed-in synthetic
-save/reopen/edit acceptance. Local browser rehearsal was blocked by access policy.
+signed-in synthetic save/reopen/edit and surrounding private-shell acceptance.
+The exact picker passed separate protected public-data component checks at desktop
+and 340 CSS-pixel native zoom: thumbnails, credits, keyboard/focus, Escape,
+search/filtering and pending-image selection. Read the evidence record. That
+component route has no account/save operations and is not part of PR #11.
+Do not redo those component checks or treat them as real saved-account evidence.
 Do not weaken auth or expose a demo editor. Preview deployment:
 dpl_3jMXJjr97LPpHwig2T6X3VwTWA36, correct Australia/shared-portal project.
 Hosted build READY; signed-out redirect preserves NZ/South Island intent but
