@@ -1,8 +1,19 @@
 # AVES verified release checkpoints
 
-Use one checkpoint per small verified increment. Check the current GitHub heads
-and Vercel project before any recovery. Main and Australian apps are independent;
-do not merge their roots or roll back both merely because one UI changed.
+The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
+
+## Current consolidated guide release · 11 November 2026
+
+- Runtime: d091314c0764448f6f1367115b1184bd95914ac7.
+- Tree: b191aa83489e0e3c4e793c6a90f891a6aa66083c.
+- Deployment: dpl_CrYVdpeTESBACZcnkp7zi311skMz.
+- Recovery branch: checkpoint/2026-11-11-map-first-guide.
+- Surviving project: prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+- Both aves.bio and www.aves.bio aliases verified on this deployment.
+- Previous guide: b21a6bdee6194453f8d486146b35b3aa57a20971 / dpl_GAbL3pKQskTEFWTwL4mVBnMDQyNB.
+- Previous consolidated core: 047d2a6edaa6850a881cc1ff4faf3be93d48c21c / dpl_38Df6sJcXUseU5ZyDWh3R8mWCRes.
+
+For a guide-only rollback, first inspect the previous deployment's READY status and source. Reassign both custom-domain aliases to dpl_GAbL3pKQskTEFWTwL4mVBnMDQyNB, then verify global, Colombia, Australia, South Island and account routes. If the old artifact is unavailable, rebuild the pinned previous source in the surviving project before alias assignment. Do not reset GitHub history or republish an old separate application. Domain registration still needs transfer before old-project deletion.
 
 | Checkpoint branch | Source commit | Production deployment for named app | State |
 | --- | --- | --- | --- |

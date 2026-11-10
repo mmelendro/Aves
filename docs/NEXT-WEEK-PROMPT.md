@@ -1,110 +1,35 @@
 # AVES current execution prompt
 
-Updated 10 November 2026, Sydney.
+Updated 11 November 2026, Sydney. Read this status and HANDOFF-CURRENT.md before historical release notes.
 
-AVES-039 public NZ checklist photo previews were explicitly approved, published
-and live-verified on 10 November 2026. Main runtime: 8c7f297b15b70678a3b4bc087a98939b37d8460e;
-Production: dpl_AuSANAJzDMdddtHb53rArqvJqM1B. See [the release](RELEASE-2026-11-10-CHECKLIST-PHOTOS.md).
-31 existing credited photos, 149 tests, TypeScript, local/hosted builds and all
-38 live page/asset/sitemap checks passed. Live keyboard photo activation,
-credits, Escape/focus restoration and unchanged selection passed. Physical
-Safari/touch and exact 320/390px remain unverified.
+## Current source and release
 
-The unified draft still lacks the four AVES-039 source/test files. Port this
-published delta deliberately before any future consolidation cutover. Australia
-and private portal are unchanged. No further feature or release is selected.
+One consolidated application serves the global homepage, Colombia, Australia, New Zealand, accounts and APIs. The owner explicitly approved publication and continued improvements. Preserve the one-site architecture and established URLs.
 
-C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
-6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
-https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app (dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn).
-423 tests, 22 isolated native checks, TypeScript and final local/hosted builds
-passed. All 74 public pages passed the 82-request hosted matrix; 16 additional
-asset/redirect checks passed. Desktop/keyboard and 340 CSS-pixel zoom reflow were
-reviewed, with physical Safari, exact 320/390px and real background/telephone
-behaviour still unverified. See [CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md).
+Current map-first guide runtime: d091314c0764448f6f1367115b1184bd95914ac7.
+Production deployment: dpl_CrYVdpeTESBACZcnkp7zi311skMz in project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Publication verification is recorded in FIELD-GUIDE-2026-11-11.md.
+Use release/aves-global or feature/field-guide-card as the maintained source, after checking fresh GitHub heads. The historical country branches now contain the same consolidated source, not separate current applications.
 
-C3 is partial. The owner authorised live synthetic test accounts/records and
-confirmed the test email. Ten live database transaction check groups passed and
-rolled back. One real account received confirmation mail in the owner's inbox,
-signed in and passed five live private-service check groups. Its three destination
-drafts and account were removed; sessions revoked; zero fixtures remain. No
-customer records, hosted schema/policies/provider settings or production code
-changed. Native results are not hosted unified private acceptance.
+Delivered: one shared two-sided map/bird guide, selected-region/current-bird thumbnail on the map and expanded map, explicit turning button, retained resizable comparison, reduced motion and inactive-face keyboard isolation. The global homepage opens on the world map before introductory copy. Explorer pages open on the map. The map precedes the compact bird-cue footer; turning reveals the card without resetting its camera or chosen geography. Viewport-based map/photo sizing, contained photographs and persistent guide/map controls support the responsive frame. Selection still changes bird collections and surrounding planning content. Existing map layers remain available.
 
-The exact unified candidate still needs a protected production-mode staging
-build and hosted authenticated browser/provider/owner-delivery/session checks.
-The connector lacks an explicit skip-domain staging control. The owner approved
-inspecting Redeploy; its Production dialog assigned the live Australia domain and
-had no skip-domain option, so it was cancelled. The owner then authorised CLI
-sign-in and Vercel showed Authorization Successful, but workspace network policy
-blocked the CLI connection to api.vercel.com before token exchange completed.
-This is a network blocker, not missing owner approval. Do not repeat approval
-requests, weaken network controls or silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
-C4 production cutover and C5 retirement remain separately unapproved. Preserve
-both production apps and rollback anchors. No paid provisioning or AI requests.
+Validation: 484 automated checks, strict TypeScript, hosted builds and browser acceptance. Exact phone viewport, physical Safari/touch and background playback remain unverified; desktop acceptance is not a claim of perfect mobile fit or an unbreakable site. No backend, database, auth, billing or provider configuration changed. The US$1 safeguard was unchanged, not freshly inspected.
 
-Owner-selected order after C: saved places, species-origin filters, checklist
-photos, South Island context, verified places, playback, continuous bird calls,
-maps and design. Follow [AGILE-PLAN.md](AGILE-PLAN.md).
+## Prioritised remaining work
 
-## Start from the correct checkpoint
+1. Complete the all-page visual/style audit: shared headers, regional right-facing birds and contours, footers, typography, titles, focus, maps and responsive controls. Review actual 320/390px phone layouts and touch/Safari. Keep the map as the main entry and surrounding content synchronised with selection. Extend the existing working pattern rather than adding duplicate maps.
+2. Finish the actual Vercel project-domain registration transfer, then retire extra projects after HTTPS, redirects, account/callback routes and recovery records pass. Aliases are consolidated, but aves.bio/www registration remains on the old global project. Do not delete it first. Its autoAssignCustomDomains is disabled. Connector capability limits remain, not missing owner authorisation.
+3. Finish the unified interactive contact form and frosted landscape/header treatment. Preserve existing WIP. Remaining style/cookie copy is preserved at wip/single-app-style-polish (27883a8); only its preview header offset has shipped.
+4. Audit all photographed Australia/NZ birds against their complete supported ranges/habitats, including NSW examples reported by the owner. Include all national/regional endemics in the sourced checklists. Photographed selections are not complete regional checklists.
+5. Source-verified B Corp tourism/business map layers, further conservation/habitat layers, public places, routes, media and context in the retained programme below. Never label an unverified operator as certified or invent a commercial relationship.
 
-Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md), inspect current GitHub history and
-working trees, then read the linked detailed requirements before editing. Name
-one recent source edit and its commit so the owner can recognise the baseline.
-Do not overwrite another chat's work.
+VIDA remains a future umbrella, not the current brand. The Eco-Tourism Business Plan and B Lab stewardship framework inform commercial/impact work; certifications and regenerative outcomes require evidence. Keep all private briefs and guest data private. No paid AI requests, upgrades or new subscriptions.
 
-Repository: https://github.com/mmelendro/Aves
+## Baseline and recovery
 
-| App branch | Scope | Published runtime | Production deployment |
-| --- | --- | --- | --- |
-| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 8c7f297 | dpl_AuSANAJzDMdddtHb53rArqvJqM1B |
-| australia/preview | Australia and shared accounts/backend/admin | 2ff09e9 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx |
-
-Keep both published apps separate until C4; the selected integration draft is
-unified. Documentation commits are newer than these runtime
-commits; a documentation sync is not a deployment. Preserve AVES naming,
-branding, canonical URLs, search visibility and existing country/region links.
-This visual programme does not require project renaming or branch consolidation.
-
-## What is already live
-
-The homepage country-card consistency pilot, feather-inspired selection cues,
-first-tap region previews and restored Colombia internal planning boundaries
-are published. Colombia's original artwork and verified marker centres remain
-the geographic baseline, not official administrative/ecological boundaries.
-
-South Island has a connected bird/habitat map and landscape carousel, four place
-contexts, zoom/pan/reset, distance scale and licensed media/credits. Thirty
-sourced bird-media profiles and a separate 377-species NZ reference checklist
-are available; national checklist inclusion is not proof of South Island range.
-
-Both South Island maps combine historical NASA satellite imagery at adjustable
-55% default visibility, optional visible/selectable ecosystem colours, nine
-national parks, hatched DOC conservation land and curated public-place layers.
-Ten public references cover nature/birding places, a conservation project,
-public heritage, six settlements and two ecotourism visitor enterprises, with
-overlapping categories deduplicated. This is a pilot, not complete coverage.
-Satellite imagery dates to 2004; LCDB land cover is 2023/24 and generalised to
-about 2 km. Zoom does not create new detail or guaranteed wildlife sightings.
-
-The newer South Island releases also deliver shared featured-place/photo/habitat
-selection, bird/place full-screen pilots, a six-resource carousel, field-guide
-links and a layout-owned bird-themed podcast/video dock. AVES-068 now preserves
-playback through known public same-app routes, including Colombia. Across the
-separate main/Australia/My Trips documents or a reload, it offers Resume from a
-validated tab-scoped checkpoint without loading external media first. This is
-not an uninterrupted stream across a document change. The bird follows the
-programme country, not the current page: Colombia motmot, NZ kea and the existing
-Australian bird. All currently curated programmes are New Zealand resources.
-South Island soundscapes now have an opt-in forest/stream/coast pilot. No alpine
-recording or other-region rollout is claimed. See RELEASE-2026-11-10-SOUTH-ISLAND-SOUNDSCAPES.md.
-
-AVES-066 uses the existing eleven Colombia paths, full-name keyboard controls
-and existing guide URLs. Shapes and visible dots preview the same region; hover
-and focus do not arm navigation. Boundaries, positions and existing media are
-unchanged. See RELEASE-2026-11-09-COLOMBIA-REGION-HOVER.md for exact evidence and
-limitations. Earlier immutable release reports remain under docs/RELEASE-*.
+Previous consolidated core: 047d2a6edaa6850a881cc1ff4faf3be93d48c21c, deployment dpl_38Df6sJcXUseU5ZyDWh3R8mWCRes.
+First published guide: b21a6bdee6194453f8d486146b35b3aa57a20971, deployment dpl_GAbL3pKQskTEFWTwL4mVBnMDQyNB.
+The former split-app runtimes and C-stage proposals are historical evidence. Do not redeploy those independent roots over the consolidated site. See ROLLBACK-CHECKPOINTS.md.
 
 ## Retained product programme
 
@@ -136,7 +61,7 @@ language. Do not require a rapid double tap. Hover/default highlights do not arm
 navigation. Preserve native modifier/new-tab links, shareable URLs, browser
 Back/Forward, clear breadcrumbs/zoom-out controls, focus and reduced motion.
 Preserve ordinary page scrolling and browser pinch zoom; intentional map
-gestures must not trap the page. Shared account routes remain separate/private.
+gestures must not trap the page. Account routes remain private within the consolidated application.
 
 This extends 003a-2, 006c and 055. Existing homepage zoom is only a foundation;
 continuous transitions through every map/detail level remain incomplete. South Island already has the connected discovery pilot; do not rebuild it.
@@ -281,11 +206,9 @@ Save small source commits, named recovery branches, the previous/new exact
 Production deployments and quick rollback/rebuild instructions in
 [ROLLBACK-CHECKPOINTS.md](ROLLBACK-CHECKPOINTS.md). Do not overwrite a shared branch
 or assume deployment artifacts are retained forever. Sync the correct app and
-shared handoff to GitHub. After the selected AVES-053 South Island release is verified and synced, pause. The owner
-chooses the next increment. Do not revive older automatic-continuation orders.
+shared handoff to GitHub. After the selected increment is verified and synced, pause. Continue from the owner's latest priority, not historical release instructions.
 
-No new spend, subscriptions, broad secret pulls, weaker privacy or unapproved
-production cutover. Necessary synthetic live fixtures are authorised for C3, with
+No new spend, subscriptions, broad secret pulls or weaker privacy. The owner has authorised production publishing; preserve the previous deployment for recovery. Necessary synthetic live fixtures are authorised for C3, with
 scoped cleanup. Preserve customer records, policies and provider settings.
 AI proposal drafting 059 remains deferred because the account cannot satisfy the
 required zero-data-retention entitlement with its current free credits. Do not
@@ -344,8 +267,8 @@ iframe or publisher API is loaded by restoration before explicit Resume. Program
 metadata controls the bird identity independently of the page. See
 [the release](RELEASE-2026-11-10-MEDIA-CONTINUITY.md) for exact scope and limits.
 A truly uninterrupted cross-document stream still requires a shared-shell
-architecture decision. No app consolidation is authorised by this release.
+architecture decision. This historical release preceded the owner-authorised consolidation now published.
 
 Retained full target, with the older NZ-only pilot description superseded above:
 
-Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. The original NZ-only pilot has been superseded by the safe continuity release above. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. Main/Colombia/NZ and Australia/shared accounts currently have separate application roots; crossing Australia/My Trips or any full document navigation pauses playback and offers an explicit Resume on the next same-origin app. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.
+Owner reaffirmed9 November2026: one discreet player continues everywhere on AVES until the visitor closes/pauses it or another media item takes priority. The original NZ-only pilot has been superseded by the safe continuity release above. Audit and convert appropriate same-app navigation without breaking native links, modifiers, Back, maps or language paths. The earlier split-app limitation is historical: all destinations and accounts now share one application. Full document navigation still pauses playback and offers an explicit Resume; uninterrupted playback across every route still needs acceptance testing. A shared persistent shell or deliberate user-controlled cross-app handoff requires a separate architecture/effort review; never claim a seamless DOM stream across a reload. Do not use popup windows, hidden autoplay, private data in URLs, automatic background resumes or weakened account boundaries as shortcuts. Other foreground audio pauses the main resource; starting a different resource replaces it. Preserve position while merely browsing previews. Test podcasts/video, calls, all destinations, accounts/auth, Back/Forward, mobile Safari, close/reopen, slow networks and publisher failures. No new paid services. This supersedes earlier ideas that unmounting every page should always stop the selected travel programme.
