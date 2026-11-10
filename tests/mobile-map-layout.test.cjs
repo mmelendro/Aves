@@ -1,0 +1,24 @@
+const {test}=require('node:test')
+const assert=require('node:assert/strict')
+const {componentHarness,nodes,find}=require('./helpers/component-harness.cjs')
+const initial={background:'habitats',overlayOpacity:.45,nationalParks:false,conservation:false,park:'',nature:false,projects:false,heritage:false,towns:false,businesses:false,point:''}
+test('mobile map options stay collapsed until requested and selections close the drawer',()=>{
+ let layers={...initial}
+ const h=componentHarness('components/south-island-map-layers.tsx','default',{}, {mocks:{'./map-layer-context':{initialMapLayers:initial,useMapLayers:()=>({layers,update:next=>{layers={...layers,...next}}})}}})
+ let tree=h.render()
+ assert.equal(nodes(tree).filter(n=>n.type==='input').length,0)
+ find(tree,n=>n.props['aria-label']==='Map layers').props.onClick();tree=h.render()
+ assert.equal(nodes(tree).filter(n=>n.type==='input'&&n.props.type==='radio').length,2)
+ find(tree,n=>n.props['aria-label']==='Satellite overview · 2004').props.onChange();tree=h.render()
+ assert.equal(layers.background,'satellite')
+ assert.equal(nodes(tree).filter(n=>n.props['aria-label']==='South Island layer choices').length,0)
+ find(tree,n=>n.props['aria-label']==='Map layers').props.onClick();tree=h.render()
+ assert.ok(nodes(tree).some(n=>n.props.type==='range'),'satellite opacity remains available inside options')
+})
+test('the actual map precedes controls and long details start collapsed',()=>{
+ const h=componentHarness('components/south-island-ecosystem-map.tsx','default',{selected:'all',onSelect(){}},{mocks:{'next/dynamic':()=> 'ConservationOverlay','./south-island-soundscapes':{__esModule:true,default:'Sounds'},'./map-viewer':{MapViewer:'MapViewer'},'./south-island-map-layers':{__esModule:true,default:'Layers'},'./south-island-public-place-overlay':{__esModule:true,default:'Places',PublicPlaceDetails:'PlaceDetails'},'./map-layer-context':{useMapLayers:()=>({layers:initial})},'./south-island-ecosystem-map.module.css':{__esModule:true,default:{}}}})
+ const tree=h.render(),all=nodes(tree)
+ assert.ok(all.indexOf(find(tree,n=>n.type==='figure'))<all.indexOf(find(tree,n=>n.props['aria-label']==='Ecosystem map view controls')))
+ const details=find(tree,n=>n.type==='details'&&nodes(n).some(child=>child.type==='summary'&&child.props.children==='Places, habitats & map details'))
+ assert.equal(details.props.open,undefined)
+})
