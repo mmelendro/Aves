@@ -1,3 +1,9 @@
+# Current continuation pointer
+
+The current source of truth is CONTINUE-HERE.md, docs/AGILE-PLAN.md, docs/HANDOFF-CURRENT.md and docs/RELEASE-2026-11-11-GLOBAL-EXPLORER.md. Read those before the historical prompt below. The global/Australian country and regional rollout is live; do not redo it or restore older source trees. Complete the remaining embedded-map/mobile work, then contact/glass and source-backed bird-range/endemic coverage in that order.
+
+## Historical prompt, superseded where dates or priorities conflict
+
 # AVES Australia continuation prompt
 
 Read HANDOFF-CURRENT.md, RELEASE-2026-11-10-AU-SELECTION.md and the canonical main
