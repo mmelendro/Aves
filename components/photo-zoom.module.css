@@ -1,0 +1,12 @@
+.surface, .image { position:absolute; inset:0; }
+.surface { overflow:hidden; }
+.image { transform-origin:0 0; pointer-events:none; }
+.surface:focus-visible { outline:2px solid #6ee7b7; outline-offset:-3px; }
+.tools { position:absolute; z-index:35; top:10rem; left:50%; transform:translateX(-50%); display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:4px; width:max-content; max-width:calc(100% - 24px); padding:6px; border-radius:16px; background:#071b17ed; color:white; }
+.tools button { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid #ffffff70; border-radius:50%; }
+.tools button:disabled { opacity:.4; }
+.tools button[aria-pressed="true"] { background:#047857; }
+.tools button:focus-visible { outline:2px solid #6ee7b7; outline-offset:2px; }
+.tools span { min-width:40px; text-align:center; font-size:12px; font-variant-numeric:tabular-nums; }
+.tools p { flex-basis:100%; margin:0; max-width:260px; text-align:center; font-size:11px; line-height:1.5; }
+@media (max-height:500px) { .tools { top:auto; bottom:8rem; } .tools p { display:none; } }

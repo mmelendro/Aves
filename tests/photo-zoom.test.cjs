@@ -1,0 +1,11 @@
+const test = require('node:test')
+const assert = require('node:assert/strict')
+test('photo zoom respects native pixels in portrait and landscape fits', async () => {
+  const { photoZoomLimit } = await import('../lib/photo-zoom.mjs')
+  assert.equal(photoZoomLimit(800, 600, 1600, 1200), 1)
+  assert.equal(photoZoomLimit(1200, 800, 800, 800), 1.5)
+  assert.equal(photoZoomLimit(800, 1200, 800, 800), 1.5)
+  assert.equal(photoZoomLimit(4000, 3000, 800, 600), 2)
+  assert.equal(photoZoomLimit(0, 600, 800, 600), 1)
+  assert.equal(photoZoomLimit(Infinity, 600, 800, 600), 1)
+})

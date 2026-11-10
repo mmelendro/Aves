@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, VolumeX, Loader2, Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import PhotoZoom from "./photo-zoom"
 import { sitePath } from "@/lib/site-path"
 import { coverFocalPosition } from "@/lib/cover-focal-position"
 import { birdData as allBirds, type BirdProfile } from "@/content/birds"
@@ -271,7 +272,7 @@ export default function HomepageBirdCarousel({
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
           {/* One edge-to-edge photo, with a per-species focal point for the portrait crop. */}
-          {imageStatus !== "error" ? <Image
+          {imageStatus !== "error" ? <PhotoZoom key={currentBird.id} label={currentBird.commonName}><Image
             key={currentBird.id} ref={imageRef} src={sitePath(currentBird.image || "/placeholder.svg")} alt={currentBird.commonName} fill
             className={cn("object-cover transition-opacity duration-300 motion-reduce:transition-none", imageStatus === "loaded" ? "opacity-100" : "opacity-0")}
             style={{ objectPosition: currentBird.imagePosition || "center" }}
@@ -279,7 +280,7 @@ export default function HomepageBirdCarousel({
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
             priority={priority && selectedIndex === 0}
             sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
-          /> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
+          /></PhotoZoom> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
           {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
           {/* Image count describes this curated selection, not a destination species total. */}
