@@ -1,5 +1,19 @@
 # AVES continue here
 
+Latest logo increment: feature/regional-brand-logos (PR26), runtime f2c867af;
+independent feature/regional-brand-logos-au (PR27), runtime df4840cc. Both exact
+previews READY with target null.183 main and310 Australia tests, strict TypeScript
+and final builds pass.25 generated transparent bird artworks cover all23 planning
+regions and four South Island place contexts using sourced editorial assignments.
+All page marks share regional selection and right-facing orientation; original
+country assets remain unchanged. Hosted South Island place switches and direct
+Santa Marta/NSW header/footer checks passed. Read
+ docs/PREVIEW-2026-11-10-REGIONAL-LOGOS.md for exact limits and screenshot.
+Owner accepts preview changes. No production publishing occurred. Resume the
+ordered public/Australia map-style acceptance list; private persistence and broad
+physical-device checks remain separate.
+
+
 Comprehensive backlog reconciled on10 November2026: read docs/AGILE-PLAN.md for
 current live/preview/queued status, remaining acceptance and recommended execution
 order. docs/AVES-CHANGE-INBOX.md retains all50 original ledger entries. Archived

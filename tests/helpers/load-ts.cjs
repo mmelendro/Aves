@@ -1,4 +1,4 @@
-const { readFileSync } = require("node:fs")
+const { readFileSync, existsSync } = require("node:fs")
 const { resolve, dirname } = require("node:path")
 const ts = require("typescript")
 const root = resolve(__dirname, "../..")
@@ -6,13 +6,14 @@ const root = resolve(__dirname, "../..")
 module.exports = function loader({ mocks = {}, globals = {}, env = {} } = {}) {
   const cache = new Map()
   function load(path) {
-    const filename = resolve(root, path)
+    const requested = resolve(root, path)
+    const filename = existsSync(requested) ? requested : requested.replace(/\.ts$/, ".tsx")
     if (cache.has(filename)) return cache.get(filename)
     if (filename.endsWith(".json")) return JSON.parse(readFileSync(filename, "utf8"))
     const exports = {}
     cache.set(filename, exports)
     const code = ts.transpileModule(readFileSync(filename, "utf8"), {
-      compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, esModuleInterop: true },
+      fileName: filename, compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, esModuleInterop: true },
     }).outputText
     const isolatedRequire = (name) => {
       if (Object.hasOwn(mocks, name)) return mocks[name]

@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import Image from "next/image"
+import { BrandBird } from "@/components/brand-bird"
 import {
   BookOpen,
   Headphones,
@@ -935,13 +936,7 @@ export default function ResourcesPageClient() {
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <div className="w-16 h-20 bg-white rounded-lg flex items-center justify-center flex-shrink-0 p-2 border">
-                          <Image
-                            src="/images/logos/aves-logo.png"
-                            alt="AVES Colombia"
-                            width={48}
-                            height={48}
-                            className="object-contain"
-                          />
+                          <BrandBird country="colombia" size={48} className="object-contain" />
                         </div>
                         <div className="flex-1">
                           <h3 className="font-semibold mb-2">AVES Conservation Impact</h3>
