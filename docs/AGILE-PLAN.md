@@ -85,3 +85,21 @@ respect for wildlife/communities and light assets. Do not claim certification.
 No spending, paid AI retries, weakened privacy, account/database/provider changes or
 app consolidation. Preserve the two application boundaries and their recovery points.
 An approval for a preview, documentation or a test account does not authorise release.
+
+## Owner refinement, 10 November: scroll-responsive regional flock
+
+Prepared on feature/scroll-responsive-flock after PRs #14/#15. Scrolling moves
+the existing local flock by at most 6px horizontally and 2px vertically, reversibly
+as the visitor scrolls back. Species selection, terrain and whales are unchanged.
+One passive listener schedules at most one frame per scroll event batch; no timer
+or repeated React render. Reduced motion removes the listener and all movement,
+including when the preference changes. Browser acceptance remains pending.
+
+Sprint checkpoint: PR #14 photo zoom and PR #15 invitation wording both pass 163
+automated checks, TypeScript and complete production builds. Git shell push was
+blocked by network 403; connected GitHub saved matching source trees instead.
+Photo candidate 769109d / dpl_89TB3WoVRGeGXUqAtg5wbbaqz29j built READY automatically.
+Automatic review rejected opening that preview over project identity/preview scope;
+no alternate browser route was attempted. Existing NZ map preview zoom/reset/Escape
+was checked, but candidate mobile/photo/pinch acceptance remains pending.
+Production approval remains separate. No release, provider or private-data changes.
