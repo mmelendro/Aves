@@ -22,6 +22,14 @@ export function readExplorerLocation(search:string, fallback:ExplorerLocation):E
 export function explorerLocationHref(href:string,location:ExplorerLocation):string {
   const url=new URL(href,"https://aves.bio")
   const known=explorerLocation(location.country,location.region)
+  // The public site has one hierarchy. Independent preview deployments keep
+  // their current pathname because the other app's routes are unavailable there.
+  if (["aves.bio","www.aves.bio"].includes(url.hostname)) {
+    url.pathname=!known.country ? "/" : known.country==="colombia" && known.region ? `/regions/${known.region}`
+      : known.country==="australia" && known.region ? `/australia/regions/${known.region}`
+      : known.country==="new-zealand" && known.region==="south-island" ? "/new-zealand/south-island"
+      : `/${known.country}`
+  }
   url.searchParams.set("explore",known.country || "world")
   if(known.region)url.searchParams.set("region",known.region);else url.searchParams.delete("region")
   return `${url.pathname}${url.search}${url.hash}`

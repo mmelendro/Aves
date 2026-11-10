@@ -29,5 +29,14 @@ test('unknown or cross-country regions never turn into a false selected place',(
  for(const country of ['missing','constructor','__proto__'])assert.deepEqual(readExplorerLocation('?explore='+country+'&region=south-island',fallback),fallback)
  assert.deepEqual(readExplorerLocation('?explore=colombia&region=south-island',fallback),explorerLocation('colombia'))
  assert.deepEqual(readExplorerLocation('?explore=world&region=caribbean',fallback),explorerLocation())
- assert.equal(explorerLocationHref('/regions/caribbean?explore=colombia&region=caribbean',explorerLocation()),'/regions/caribbean?explore=world')
+ assert.equal(explorerLocationHref('/regions/caribbean?explore=colombia&region=caribbean',explorerLocation()),'/?explore=world')
+})
+
+test('the public country hierarchy stays canonical while isolated previews keep reloadable app paths',()=>{
+ const choices=[['australia','new-south-wales','/australia/regions/new-south-wales'],['colombia','caribbean','/regions/caribbean'],['new-zealand','south-island','/new-zealand/south-island'],['new-zealand','north-island','/new-zealand']]
+ for(const [country,region,path]of choices){
+  const scope=explorerLocation(country,region)
+  assert.equal(new URL(explorerLocationHref('https://aves.bio/australia',scope),'https://aves.bio').pathname,path)
+  assert.equal(new URL(explorerLocationHref('https://preview.vercel.app/australia',scope),'https://preview.vercel.app').pathname,'/australia')
+ }
 })
