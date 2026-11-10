@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import { useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { Hand, Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react"
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, type MapView } from "@/lib/map-gestures.mjs"
+import { FieldGuideContext } from "./field-guide-context"
 import styles from "./map-viewer.module.css"
 
 /** Enlarge the same mounted map, preserving selection, credits and native links.
@@ -10,6 +11,7 @@ import styles from "./map-viewer.module.css"
  * elsewhere. Expanded maps own their gesture surface, not the whole document.
  */
 export function MapViewer({ children, label, gestures = true, credits, listenControl, viewKey, onZoomOutAtMinimum }: { viewKey?: string; onZoomOutAtMinimum?: () => void; children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode }) {
+  const guide = useContext(FieldGuideContext)
   const dialog = useRef<HTMLDialogElement>(null), surface = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null)
   const [expanded, setExpanded] = useState(false), [move, setMove] = useState(false), [view, setView] = useState<MapView>(fitMapView), [gesturing, setGesturing] = useState(false)
   const viewRef = useRef(view), points = useRef(new Map<number,{x:number;y:number}>())
@@ -54,7 +56,7 @@ export function MapViewer({ children, label, gestures = true, credits, listenCon
         {!expanded && <button className={styles.control} type="button" aria-label={`Use touch gestures on ${label}`} aria-pressed={move} onClick={()=>{setMove(!move);points.current.clear();start.current=null}}><Hand size={18} aria-hidden="true"/></button>}
         <span className="text-xs tabular-nums text-emerald-900" aria-live="off">{view.zoom.toFixed(1)}×</span>
       </>}
-      <div className="ml-auto flex items-center gap-1">{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
+      <div className="ml-auto flex items-center gap-1">{expanded && guide?.bird && <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 text-sm text-emerald-950" onClick={()=>{resize(false);guide.showBirds()}} aria-label={`View ${guide.bird.commonName} in the bird guide`}><img src={guide.bird.image} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover" style={{objectPosition:guide.bird.imagePosition}}/><span>{guide.bird.commonName}</span></button>}{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
     </div>
     {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Home to reset" : "Use the controls to zoom, or turn on Move for dragging and pinching. Page scrolling stays available."}</p>}
     <div ref={surface} data-gesturing={gesturing || undefined} className={styles.surface} tabIndex={gestures ? 0 : undefined} role={gestures ? "group" : undefined} aria-label={gestures ? `${label} gesture surface` : undefined} style={{touchAction: active ? "none" : "pan-y pinch-zoom",cursor:active ? "grab" : undefined}}

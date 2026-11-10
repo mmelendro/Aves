@@ -42,6 +42,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const [bird, setBird] = useState<BirdProfile>(birds[0] ?? birdData[0])
   const onBirdChange = useCallback((nextBird: BirdProfile) => setBird(nextBird), [])
   // This featured region is one place to look, not a map of the species' entire distribution.
+  const cueBird = birds.find(item=>item.id===bird.id) ?? birds[0]
   const highlightedRegion = focusedRegion ?? regionOptions.find(region => region.id === bird.regionSlug)
   const focusedShape = australiaMapStates.find(state => state.regionId === focusedRegion?.id)
   const mapTransform = mapZoomTransform(australiaMapViewBox, focusedShape ? [focusedShape.path] : [], 12)
@@ -122,7 +123,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
       <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2"><Link href={`/regions/${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Read the regional guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link href={`/contact?region=${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Plan your {focusedRegion.label} trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
       <p role="status" className="sr-only">{focusedRegion.label} selected. Showing its regional introduction, {birds.length} featured birds and trip-planning link.</p>
     </section>}
-    {resizable ? <ResizableDiscoveryPair media={mediaContent} map={mapContent} mapLabel="Explore Australia" /> :
+    {resizable ? <ResizableDiscoveryPair birdCue={cueBird ? {...cueBird,image:sitePath(cueBird.image)} : undefined} media={mediaContent} map={mapContent} mapLabel="Explore Australia" /> :
       <div className={styles.layout}><div className={styles.mediaColumn}>{mediaContent}</div><div className={styles.mapColumn}>{mapContent}</div></div>}
   </BirdDiscoveryContext.Provider>
 }

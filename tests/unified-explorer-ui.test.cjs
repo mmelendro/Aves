@@ -79,3 +79,20 @@ test('deep links and browser history restore the map scope without dropping Next
  assert.equal(entries.length,3)
  assert.equal(listeners.size,2)
 })
+
+test('map thumbnails follow every selected region and the current carousel bird',()=>{
+ const h=harness({})
+ for(const country of ['Colombia','Australia','New Zealand']){
+  button(h,country).props.onClick()
+  const options=nodes(find(pair(h).props.map,n=>n.type==='select')).filter(n=>n.type==='option'&&n.props.value)
+  for(const option of options){
+   find(pair(h).props.map,n=>n.type==='select').props.onChange({target:{value:option.props.value}})
+   const birds=pair(h).props.media.props.children.props.birds
+   assert.equal(pair(h).props.birdCue.id,birds[0].id)
+   const last=birds.at(-1)
+   find(h.render(),n=>n.type==='BirdProvider').props.value(last)
+   assert.equal(pair(h).props.birdCue.id,last.id)
+   assert.equal(pair(h).props.birdCue.image,last.image)
+  }
+ }
+})

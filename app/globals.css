@@ -1147,3 +1147,6 @@ body {
   will-change: transform, opacity;
   transform: translateZ(0);
 }
+
+/* Keep fixed navigation visible beneath the protected-review notice. */
+.aves-preview-content[data-read-only-preview="true"] header { top: 64px; }

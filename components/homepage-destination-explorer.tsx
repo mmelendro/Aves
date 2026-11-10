@@ -135,7 +135,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
         <div className={styles.layout}>
           {/* Keep the divider mounted when countries change, preserving its split.
               Only the keyed viewer resets old slides, calls, timers and details. */}
-          <ResizableDiscoveryPair mapLabel="Resize world map and bird photographs"
+          <ResizableDiscoveryPair birdCue={birds.find(bird=>bird.id===birdId) ?? birds[0]} mapLabel="Resize world map and bird photographs"
             map={<div className={`${styles.mapPanel} ${southIsland ? styles.layeredPanel : ""}`}>{southIsland ? <div id="south-island-bird-map" className="scroll-mt-24 space-y-3">
               <nav aria-label="Map zoom level" className="flex flex-wrap gap-2">
                 <button type="button" className={styles.backButton} onClick={backToWorld}>World</button>
