@@ -9,4 +9,6 @@
 .tools button:focus-visible { outline:2px solid #6ee7b7; outline-offset:2px; }
 .tools span { min-width:40px; text-align:center; font-size:12px; font-variant-numeric:tabular-nums; }
 .tools p { flex-basis:100%; margin:0; max-width:260px; text-align:center; font-size:11px; line-height:1.5; }
-@media (max-height:500px) { .tools { top:auto; bottom:8rem; } .tools p { display:none; } }
+/* Keep the zoom row below the existing top controls, even on short screens.
+ * The expanded viewer scrolls rather than stacking competing touch targets. */
+@media (max-height:500px) { .tools p { display:none; } }
