@@ -43,7 +43,7 @@ Production approval remains a separate gate. Do not claim background commands or
 | 2 | Photo zoom, AVES-051 | One shared bird/place viewer with zoom/reset, keyboard controls and intentional touch gestures, using existing image resolution | Shared bird/place pilot prepared on feature/photo-zoom-pilot; native-pixel limit, 163 checks and TypeScript pass; browser acceptance pending |
 | 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Prepared PRs #12/#13; NZ existing-preview modal/zoom/reset/Escape checked; other acceptance pending |
 | 4 | Birds / AVES invitation animation, AVES-067 | Reuse the existing restrained word transition in matching invitations, with stable text width and a still reduced-motion version | NZ invitation and all Colombia region invitations reuse the existing fixed-width, reduced-motion control; source prepared, candidate browser acceptance pending |
-| 5 | Continuous bird-call listening, AVES-047 | Explicit session opt-in for calls to follow manual carousel changes, with one player and clear stop/mute states | Functional candidate; reuse playback coordination and handle missing/blocked calls |
+| 5 | Continuous bird-call listening, AVES-047 | Explicit session opt-in for calls to follow manual carousel changes, with one player and clear stop/mute states | Source pilot on feature/follow-bird-calls; 169 tests and TypeScript pass; exact browser/audio acceptance pending |
 | 6 | Species-origin filters, AVES-025/048 | Make existing NZ native/introduced/unknown controls consistent across checklist and private picker; preserve chosen birds | Ready for a current-coverage audit; use existing sourced NZ data first |
 | 7 | South Island sea context, AVES-042 | Subtle surrounding-water treatment and sourced sea labels, retaining scale and readable habitat colours | Small map-style candidate; inspect existing coverage before adding anything |
 | 8 | Save places to your trip, AVES-063 | Carry one chosen South Island place into the existing private brief and verify explicit save/reopen | Useful functionality; account acceptance and existing storage audit required |
@@ -103,3 +103,12 @@ Automatic review rejected opening that preview over project identity/preview sco
 no alternate browser route was attempted. Existing NZ map preview zoom/reset/Escape
 was checked, but candidate mobile/photo/pinch acceptance remains pending.
 Production approval remains separate. No release, provider or private-data changes.
+
+## Second sprint: manual bird-call following
+
+AVES-047 adds an explicit session-only opt-in to main-app carousels. It follows
+manual choices, handles missing/rejected recordings, preserves volume/mute and
+stops on hidden pages, other native foreground playback and unmount. 169 checks
+and TypeScript pass; exact browser acceptance remains pending. See
+PREVIEW-2026-11-10-FOLLOW-CALLS.md. Next selected source audit: NZ origin filters,
+using existing provenance; private-app parity remains a separate branch increment.
