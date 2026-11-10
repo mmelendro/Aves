@@ -1,30 +1,19 @@
 # AVES comprehensive delivery list
 
-Updated 10 November 2026 after hosted synthetic-planner checks. This is the current
-priority and status index. ROADMAP-DETAILS.md retains full acceptance requirements,
-AVES-CHANGE-INBOX.md retains original requests, and HANDOFF-CURRENT.md records the
-last approved live release. Historical sprint notes do not override this index.
+Updated 11 November 2026 after the unified-map and shared-player increments. This is the current priority and status index. ROADMAP-DETAILS.md retains full acceptance requirements; AVES-CHANGE-INBOX.md retains original requests; HANDOFF-CURRENT.md records exact production evidence. Dated sprint notes are historical.
 
-## Published refinement release
-
-The owner approved production publication on10 November2026. Both releases are
-READY and their production aliases were verified after publication.
+## Latest discovery and media release
 
 | Application | Runtime | Production deployment |
 | --- | --- | --- |
-| Global / Colombia / New Zealand |4e4e7f3f03f3f8b4982d37884c03173d9bea9086|dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP|
-| Australia / shared portal |48722c870a6f804ef964280e41e5ddc985658f1c|dpl_FYT3WsL52euwC46SYq2tFRsKtqDB|
+| Global / Colombia / New Zealand | `094a4e0c255f43dce83da1ac1c69550a892f91cd` | `dpl_AQRa1CBwc6tfAPXFp5nKBF5m6F92` |
+| Australia / shared portal | `cc1a45d471def6367d4758ad54f820a3a4046adf` | `dpl_7neXSNAYigyDfQgQi4xnAPXuN5iG` |
 
-183 main and315 combined Australia tests, strict TypeScript and both complete
-builds passed. No API, auth, database, dependencies, provider or billing changes.
-Production error/fatal scans for both exact deployments returned no matching logs
-in the15-minute windows ending12:55 UTC. This is a short observation window, not
-ongoing monitoring or a guarantee against all errors.
+One map viewer per page; visible neighbouring regions stay selectable; full-size and restore controls retain selection. South Island landscapes use the single hero map. Map-side region listening and bird listening share the player with podcasts/videos. The old soundscape panel and separate mixing engine are removed.
 
-The US$1 on-demand budget and automatic pausing remain as previously verified.
-No billing setting changed; Pro subscription fees are separate. The synthetic
-planner fixture and unified app remain outside this production release.
-See RELEASE-2026-11-10-REFINEMENTS.md and HANDOFF-CURRENT.md for evidence and rollback.
+182 main / 316 Australia tests, strict TypeScript and both complete builds passed. See RELEASE-2026-11-11-MAPS.md, RELEASE-2026-11-11-SHARED-PLAYER.md and HANDOFF-CURRENT.md for precise scope, deployment evidence, rollback and limits. No auth/database, dependency, paid-provider or billing change. Preserve the previously verified US$1 cap/automatic pausing; Pro subscription charges are separate.
+
+The earlier refinement release remains included. The synthetic planner fixture and unified-app cutover remain separate. VIDA is a long-term umbrella direction, documented in VIDA-FUTURE-DIRECTION.md; AVES remains the current brand.
 
 ## Already live: preserve these
 
@@ -32,12 +21,12 @@ See RELEASE-2026-11-10-REFINEMENTS.md and HANDOFF-CURRENT.md for evidence and ro
 | --- | --- | --- |
 | Discovery map, AVES-003a | Equal Earth overview, one country-switching bird viewer, regional selection, return/reset and direct links | Ecological overlays are003b |
 | Dividers/framing, AVES-006 | Responsive map/media split on three country homepages, keyboard/reset and media-first narrow layout | Physical touch/foldable testing |
-| Maps and regional previews, AVES-012c/046/066 | Names-first homepage maps, real regional contours, deliberate preview/navigation, Colombia whole-shape hover | Broader page/app consistency |
-| Contextual birds and language, AVES-006c | Selection-linked headers, locally sourced horizon flocks and personal planning prompts | Scroll movement is preview-only |
+| Maps and regional previews, AVES-012c/046/066 | Names-first homepage maps, real regional contours, deliberate preview/navigation, Colombia whole-shape hover | Single-map layout and neighbour navigation live; physical touch review remains |
+| Contextual birds and language, AVES-006c | Selection-linked headers, locally sourced horizon flocks and personal planning prompts | Scroll movement live; physical-device checks remain |
 | NZ planning, AVES-004a/005 | Questionnaire, living-species wishes, private draft/review/share, owner receipt and Google sign-in | Real guest feedback and later refinements |
 | South Island page, AVES-007/013/017/034/036/037/038 | Habitat/place/photo pilot, living-only selection, land-cover/satellite shading, place/resource carousel, map controls and scale | North Island/Rakiura and wider rollout |
 | Photos and Info, AVES-012d/039/051 | Shared transparent Info, fit/full-screen pilot, 362 of377 living checklist image references | 15 references pending; deeper zoom is preview-only |
-| Sound, AVES-008/053/068 | Available-call cues, opt-in South Island soundscapes, safe same-app continuity and paused cross-app Resume | Continuous cross-document audio is deferred |
+| Sound, AVES-008/053/068 | One dock for bird calls, map-side region soundscapes and travel media; opt-in following; curated paused handoff | Dynamic call/soundscape reload restore and physical-browser checks remain |
 | Editorial/team/cleanup | Santa Marta copy pilot, one-person team, bounded cleanup and preserved media credits | Wider editorial/source review |
 
 ## Published refinements and remaining verification
@@ -90,17 +79,17 @@ checks, not a claim that every flow was independently exercised live.
 | Routes and practical context, AVES-034/052/062 | One subregion's public birding sites, towns, conservation/lodges and dated travel estimates | Queued; no paid Maps/billing setup |
 | NZ depth and orientation, AVES-016/064 | Practical and ecological/historical guidance with authoritative and mana whenua sources | Pilot resources live; wider depth queued |
 | Ecological discovery, AVES-003b/019/055 | Megadiverse countries, actual hotspot boundaries, comparable species counts and sourced ecosystem context | Queued; rights, geometry and scope checks |
-| Wider map language, AVES-012/012a/012b/012c/018 | Consistent regional duos, bird carousels and collection titles | Partial pilots delivered; broader rollout queued |
+| Wider map language, AVES-012/012a/012b/012c/018 | Consistent regional duos, bird carousels and collection titles | Single-map explorer layout live; broader data rollout queued |
 | Satellite/city layers, AVES-021 | Accurately aligned, licensed region imagery and useful transport/city labels | South Island pilot live; wider coverage queued |
 | Bird diversity and copy, AVES-001/002 | One sourced Colombian bird/content batch without repetitive or unsupported claims | Santa Marta copy pilot complete; expansion queued |
-| Origin beyond NZ, AVES-025/048 | Apply reliable sourced classification elsewhere; separate origin from migration/activity | NZ origin prepared; broader categories queued |
+| Origin beyond NZ, AVES-025/048 | Apply reliable sourced classification elsewhere; separate origin from migration/activity | NZ origin live; broader categories queued |
 | Seasonal observations, AVES-057 | Dated, licensed observation layer with honest season/location uncertainty | eBird commercial permission required; enquiry unsent |
 | Pronunciation/cultural content, AVES-010/022/056 | Permissioned bird/place-name audio, Māori pilot, logo-species name/pronunciation | Queued; native-speaker/community source and rights |
 | Place-name/hover motion, AVES-043/044 | One restrained world-map preview or paired-name animation | Queued; reduced-motion and navigation checks |
 | Regional card flips, AVES-015/037 | Extend the delivered South Island pilot while preserving accessible alternatives | Wider rollout queued |
 | Atmospheric media, AVES-041/053 | Habitat-led background/soundscapes with licensed, lightweight assets | Forest/stream/coast pilot live; mountains/wider regions pending |
 | Owner video library, AVES-031/060 | Inventory verified uploads/masters, efficient web renditions and adaptive playback | Queued; originals, rights and cost review; no raw8K default |
-| Bird logos/3D/feather controls, AVES-050/058 | Review supplied references, one lightweight region/species pilot | Queued; original artwork and rights preserved |
+| Bird logos/3D/feather controls, AVES-050/058 | Regional artwork delivered; later lightweight 3D/species-control pilot | 3D queued; original artwork and rights preserved |
 | Navigation/sitemap, AVES-033 | Expandable country/region/page hierarchy and discreet journey links | Tree UI queued; sitemap review required for every release |
 | Currency, AVES-035 | Discreet optional conversion with source/date and explicit currency | Queued; no misleading live-rate claims |
 | Team/host role, AVES-030/045 | Explain real host review, coordination and current team accurately | One-person page live; operational expansion queued |
@@ -108,7 +97,7 @@ checks, not a claim that every flow was independently exercised live.
 | Sydney launch product, AVES-024 | One validated itinerary with operators, costs, pacing and sustainability evidence | Queued before advertising/bookings |
 | Community/wishlist, AVES-004/054 | Optional account wishes, community connections and later bingo | Existing pilot selection live; broader social features queued |
 | Colombian Spanish, AVES-014 | Natural es-CO translation with retained English, locale metadata and tested layouts | Lower priority |
-| International branding, AVES-032 | Evaluate pronunciation/identity and optional landscape-contour direction | Decision backlog; retain AVES pending owner decision |
+| International branding, AVES-032 | Evaluate pronunciation/identity and optional landscape-contour direction | VIDA umbrella recorded for the long term; retain AVES now |
 | Unified app, AVES-020 | C1a–C1d/C2 draft work complete within recorded limits; finish C3 safely | Exact hosted private acceptance unresolved; C4 cutover/C5 retirement need separate approval |
 | Regenerative-tourism ambition | Evidence-based supplier/community/wildlife practice and human review | Business direction, not achieved certification or an impact score |
 
