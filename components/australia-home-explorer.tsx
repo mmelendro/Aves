@@ -22,16 +22,12 @@ import { australiaMapProvenance, australiaMapStates, australiaMapViewBox } from 
 import { birdData, type BirdProfile } from "@/content/birds"
 import { regionOptions } from "@/content/region-options"
 import { sitePath } from "@/lib/site-path"
+import MapFeatherMarker from "./map-feather-marker"
+import { Feather } from "lucide-react"
 import { MapViewer } from "./map-viewer"
 import { mapZoomTransform } from "@/lib/map-zoom"
 import { australianRegionBirds } from "@/lib/australia-region-birds"
 import regionOverviews from "@/content/region-overviews.json"
-
-// Label callouts make tiny territories usable; these positions do not alter their geographic boundaries.
-const smallTerritories = [
-  { id: "australian-capital-territory", label: "ACT", x: 620, y: 493, line: "573.81,460.3 608,514 620,514" },
-  { id: "jervis-bay-territory", label: "Jervis Bay", x: 620, y: 427, line: "597.38,458.06 608,448 620,448" },
-]
 
 export function AustraliaHomeExplorer({ media, initialRegion, resizable = false }: { media?: ReactNode; initialRegion?: string; resizable?: boolean } = {}) {
   const { publish } = useHeaderLandscape()
@@ -49,6 +45,8 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const highlightedRegion = focusedRegion ?? regionOptions.find(region => region.id === bird.regionSlug)
   const focusedShape = australiaMapStates.find(state => state.regionId === focusedRegion?.id)
   const mapTransform = mapZoomTransform(australiaMapViewBox, focusedShape ? [focusedShape.path] : [], 12)
+  const highlightedShape = australiaMapStates.find(state => state.regionId === highlightedRegion?.id)
+  const markerSize = 44 / Number(mapTransform.match(/scale\(([^)]+)/)?.[1] || 1)
 
   function selectRegion(regionId: string) {
     if (regionId && !regionOptions.some(region => region.id === regionId)) return
@@ -79,6 +77,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           {focusedRegion && (media ? <Link href="/" className="inline-flex min-h-11 items-center gap-1 rounded text-xs font-medium text-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Australia</Link> : <button ref={backButton} type="button" onClick={backToAustralia} className="inline-flex min-h-11 items-center gap-1 rounded text-xs font-medium text-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Australia</button>)}
           <h2 className="font-medium text-emerald-950">{focusedRegion?.label ?? "Explore Australia"}</h2>
         </div>
+        {highlightedRegion && <p className="mx-4 my-2 flex items-center justify-center gap-2 text-center text-sm font-medium text-emerald-900"><Feather size={16} aria-hidden="true" />{highlightedRegion.label}</p>}
         {/* Source geometry is reused unchanged. useId keeps title/description IDs unique on the page. */}
         <MapViewer label="Australian regional map" credits={<a href={australiaMapProvenance.sourceUrl} className="underline">Natural Earth · Public domain · Generalised boundaries; external territories not shown</a>}>
         <svg viewBox={australiaMapViewBox} role="group" aria-labelledby={`${id}-map-title`} aria-describedby={`${id}-map-description`} className={`${styles.auMap} ${zoomStyles.viewport}`}>
@@ -90,15 +89,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
             const outline = <path d={state.path} fill={selected ? "#065f46" : "#c5dbd0"} stroke="#6e9582" strokeWidth="1" strokeLinejoin="round" vectorEffect="non-scaling-stroke" fillRule="evenodd" className={`transition-colors group-focus-visible:stroke-emerald-950 group-focus-visible:[stroke-width:3] motion-reduce:transition-none ${selected ? "group-hover:fill-emerald-700 group-focus-visible:fill-emerald-700" : "group-hover:fill-[#9cc4af] group-focus-visible:fill-[#9cc4af]"}`} />
             return state.regionId && (!focusedRegion || selected) ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`))} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
           })}
-          {!focusedRegion && australiaMapStates.filter(state => state.shortName).map(state => <text key={state.code} x={state.label[0]} y={state.label[1]} textAnchor="middle" dominantBaseline="middle" fontSize="27" fontWeight="600" fill={state.regionId === highlightedRegion?.id ? "#ffffff" : "#064e3b"} className="pointer-events-none select-none" aria-hidden="true">{state.shortName}</text>)}
-          {/* ACT and Jervis Bay receive separate labelled targets because their outlines are very small. */}
-          {!focusedRegion && smallTerritories.map(territory => <g key={territory.id}>
-            <polyline points={territory.line} fill="none" stroke="#047857" strokeWidth="1.5" aria-hidden="true" />
-            <a href={sitePath(`/regions/${territory.id}`)} onKeyDown={event => preview.activateKey(event, territory.id, sitePath(`/regions/${territory.id}`))} onClick={event => previewRegion(event, territory.id)} aria-label={`Explore ${regionOptions.find(region => region.id === territory.id)?.label}`} className="group outline-none">
-              <rect x={territory.x} y={territory.y} width="94" height="42" rx="9" fill={highlightedRegion?.id === territory.id ? "#065f46" : "#ffffff"} stroke="#6e9582" strokeWidth="1.5" className="group-hover:stroke-[3] group-focus-visible:stroke-[4]" />
-              <text x={territory.x + 47} y={territory.y + 22} textAnchor="middle" dominantBaseline="middle" fontSize="17" fontWeight="600" fill={highlightedRegion?.id === territory.id ? "#ffffff" : "#064e3b"} className="pointer-events-none">{territory.label}</text>
-            </a>
-          </g>)}
+          {highlightedShape && <svg x={highlightedShape.label[0]-markerSize/2} y={highlightedShape.label[1]-markerSize/2} width={markerSize} height={markerSize} pointerEvents="none"><MapFeatherMarker size={markerSize}/></svg>}
           </g>
         </svg>
         </MapViewer>
