@@ -1,5 +1,20 @@
 # AVES continue here
 
+Latest acceptance update, 10 November 2026: owner explicitly approved read-only
+browser testing of AVES Vercel previews in project prj_ZKEHgaFrywRyoEo9IfSFcln9k8pv.
+Access now works. Do not repeat the old permission question. Production publishing
+remains unapproved. Read docs/ACCEPTANCE-2026-11-10-APPROVED-PUBLIC-PREVIEW.md.
+
+Desktop photo/reset/slide/focus, actual call handover/playback progress, origin
+filter/search/empty state, reversible regional flock scrolling, 340px native-zoom
+reflow, and latest sea-label/map reset/focus checks passed within recorded limits.
+Next fix: short-height 340x234 photo toolbar crowds wish-list/close controls. Keep
+release gated until spacing is corrected and retested. No actual private save,
+physical touch, exact 320/390px or full audio/ambience acceptance is claimed.
+
+The historical block paragraphs below are retained only as recovery context and
+are superseded by the approval and evidence above.
+
 Second sprint checkpoint, 10 November 2026. Fetch current GitHub refs and read
 AGILE-PLAN.md before editing. All work below is draft source, not a release.
 
