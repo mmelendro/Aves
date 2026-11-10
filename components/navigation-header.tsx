@@ -43,7 +43,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   return localizeHome((
     <>
       <header className={cn("fixed inset-x-0 top-0 z-50", landscape ? "isolate h-[108px]" : "border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md")}>
-        {landscape && <HeaderContour key={activePath} profile={landscape} />}
+        {landscape && <HeaderContour key={activePath} profile={landscape} regionId={selection?.country === "colombia" ? selection.regionId : activePath.startsWith("/regions/") ? activePath.split("/").pop() : undefined} />}
         <a
           href="#main-content"
           className="absolute left-4 top-3 z-10 flex min-h-11 -translate-y-24 items-center rounded-xl bg-emerald-800 px-4 font-semibold text-white focus:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
@@ -53,7 +53,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         <div className="container relative mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <BrandMark country="colombia" priority unifiedHeaderContour={!!landscape} />
 
-          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
+          <nav data-contour-navigation="true" aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
               // These URLs cross into the other AVES app: a normal anchor makes a full request.
               const NavigationLink = (href.startsWith("/australia/") || /^\/account(?:[/?#]|$)/.test(href)) ? "a" : Link

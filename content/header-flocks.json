@@ -1,0 +1,191 @@
+{
+  "meaning": "Representative locally supported species, rendered as small illustrative family silhouettes, not field-identification plates, live sightings or precise seasonal behaviour. Range context also follows existing sourced regional bird records.",
+  "flocks": {
+    "global": {
+      "name": "Representative migrating birds",
+      "scientificName": "",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "colombia/country": {
+      "name": "Scarlet Macaw",
+      "scientificName": "Ara macao",
+      "family": "macaw",
+      "source": "https://www.minambiente.gov.co/colombia-un-espectaculo-de-vida/"
+    },
+    "colombia/pacific": {
+      "name": "Chocó Toucan",
+      "scientificName": "Ramphastos brevis",
+      "family": "toucan",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=D1E1AF7F198E884A&lang=EN"
+    },
+    "colombia/western-andes": {
+      "name": "Black-billed Mountain-Toucan",
+      "scientificName": "Andigena nigrirostris",
+      "family": "toucan",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=64516AE0ACD1E341&lang=EN"
+    },
+    "colombia/central-andes": {
+      "name": "Black-billed Mountain-Toucan",
+      "scientificName": "Andigena nigrirostris",
+      "family": "toucan",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=64516AE0ACD1E341&lang=EN"
+    },
+    "colombia/eastern-andes": {
+      "name": "Black-billed Mountain-Toucan",
+      "scientificName": "Andigena nigrirostris",
+      "family": "toucan",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=64516AE0ACD1E341&lang=EN"
+    },
+    "colombia/cauca-valley": {
+      "name": "Scaled Dove",
+      "scientificName": "Columbina squammata",
+      "family": "dove",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=26085D755AE75E42&lang=EN"
+    },
+    "colombia/magdalena-valley": {
+      "name": "Scaled Dove",
+      "scientificName": "Columbina squammata",
+      "family": "dove",
+      "source": "https://avibase.bsc-eoc.org/species.jsp?avibaseid=26085D755AE75E42&lang=EN"
+    },
+    "colombia/caribbean": {
+      "name": "Scarlet Ibis",
+      "scientificName": "Eudocimus ruber",
+      "family": "ibis",
+      "source": "https://www.parquesnacionales.gov.co/nuestros-parques/sff-los-flamencos/"
+    },
+    "colombia/llanos": {
+      "name": "Scarlet Ibis",
+      "scientificName": "Eudocimus ruber",
+      "family": "ibis",
+      "source": "https://old.parquesnacionales.gov.co/portal/wp-content/uploads/2019/09/Resol_165_260919_sgm.pdf"
+    },
+    "colombia/amazonia": {
+      "name": "Scarlet Macaw",
+      "scientificName": "Ara macao",
+      "family": "macaw",
+      "source": "https://www.minambiente.gov.co/colombia-un-espectaculo-de-vida/"
+    },
+    "colombia/sierra-nevada-de-santa-marta": {
+      "name": "Santa Marta Parakeet",
+      "scientificName": "Pyrrhura viridicata",
+      "family": "parrot",
+      "source": "https://proaves.org/en/proaves-el-dorado-reserve/"
+    },
+    "colombia/colombian-massif": {
+      "name": "Andean Condor",
+      "scientificName": "Vultur gryphus",
+      "family": "condor",
+      "source": "https://old.parquesnacionales.gov.co/portal/en/ecotourism/andean-region/purace-national-natural-park/fauna/"
+    },
+    "australia/country": {
+      "name": "Galah",
+      "scientificName": "Eolophus roseicapilla",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/galah/"
+    },
+    "australia/victoria": {
+      "name": "Galah",
+      "scientificName": "Eolophus roseicapilla",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/galah/"
+    },
+    "australia/south-australia": {
+      "name": "Galah",
+      "scientificName": "Eolophus roseicapilla",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/galah/"
+    },
+    "australia/queensland": {
+      "name": "Rainbow Lorikeet",
+      "scientificName": "Trichoglossus moluccanus",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/"
+    },
+    "australia/new-south-wales": {
+      "name": "Rainbow Lorikeet",
+      "scientificName": "Trichoglossus moluccanus",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/"
+    },
+    "australia/tasmania": {
+      "name": "Eastern Rosella",
+      "scientificName": "Platycercus eximius",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/eastern-rosella/"
+    },
+    "australia/western-australia": {
+      "name": "Carnaby’s Black-Cockatoo",
+      "scientificName": "Zanda latirostris",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/carnabys-black-cockatoo/"
+    },
+    "australia/northern-territory": {
+      "name": "Red-tailed Black-Cockatoo",
+      "scientificName": "Calyptorhynchus banksii",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/red-tailed-black-cockatoo/"
+    },
+    "australia/australian-capital-territory": {
+      "name": "Sulphur-crested Cockatoo",
+      "scientificName": "Cacatua galerita",
+      "family": "cockatoo",
+      "source": "https://birdlife.org.au/bird-profiles/sulphur-crested-cockatoo/"
+    },
+    "australia/jervis-bay-territory": {
+      "name": "Crimson Rosella",
+      "scientificName": "Platycercus elegans",
+      "family": "parrot",
+      "source": "https://birdlife.org.au/bird-profiles/crimson-rosella/"
+    },
+    "new-zealand/country": {
+      "name": "White-fronted Tern",
+      "scientificName": "Sterna striata",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "new-zealand/north-island": {
+      "name": "White-fronted Tern",
+      "scientificName": "Sterna striata",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "new-zealand/south-island": {
+      "name": "White-fronted Tern",
+      "scientificName": "Sterna striata",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "new-zealand/rakiura": {
+      "name": "White-fronted Tern",
+      "scientificName": "Sterna striata",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "new-zealand/coast": {
+      "name": "White-fronted Tern",
+      "scientificName": "Sterna striata",
+      "family": "tern",
+      "source": "https://www.nzbirdsonline.org.nz/species/white-fronted-tern"
+    },
+    "new-zealand/mountains": {
+      "name": "Kea",
+      "scientificName": "Nestor notabilis",
+      "family": "parrot",
+      "source": "https://www.nzbirdsonline.org.nz/species/kea"
+    },
+    "new-zealand/forest-and-lakes": {
+      "name": "Kākā",
+      "scientificName": "Nestor meridionalis",
+      "family": "parrot",
+      "source": "https://www.nzbirdsonline.org.nz/species/kaka"
+    },
+    "new-zealand/southern-forest": {
+      "name": "Kākā",
+      "scientificName": "Nestor meridionalis",
+      "family": "parrot",
+      "source": "https://www.nzbirdsonline.org.nz/species/kaka"
+    }
+  }
+}
