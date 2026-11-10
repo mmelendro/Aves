@@ -1,10 +1,10 @@
 /* The existing country-page wrapper owns drag, keyboard, reset and breakpoints.
    These rules only fit the homepage map and its credited 4:5 viewer inside it. */
 .layout { width: 100%; }
-.mapPanel { display: flex; min-width: 0; height: var(--discovery-panel-height, auto); }
+.mapPanel { display: flex; min-width: 0; min-height:0; height: var(--discovery-panel-height, auto); }
 /* World and country occupy the same frame. The real world geometry zooms first,
    then the existing regional geography appears; no projection is stretched. */
-.mapStage { position: relative; isolation: isolate; height: 100%; min-height: 20rem; }
+.mapStage { position: relative; isolation: isolate; height: 100%; min-height: 0; }
 .worldView { height: 100%; transition: opacity 240ms ease; }
 .mapStage[data-map-view="country"] .worldView { opacity: 0; pointer-events: none; transition-delay: 260ms; }
 .countryView {
@@ -17,7 +17,7 @@
 .backButton:hover { background: #ecfdf5; }
 .backButton:focus-visible, .regionSelect:focus-visible, .regionLink:focus-visible { outline: 2px solid #047857; outline-offset: 2px; }
 .regionalCanvas { display: flex; justify-content: center; flex: 1; min-height: 0; padding: .75rem 1rem; }
-.countryFooter { border-top: 1px solid #d1fae5; padding: .75rem 1rem; }
+.countryFooter { flex-shrink:0; max-height:40%; overflow:auto; border-top: 1px solid #d1fae5; padding: .75rem 1rem; }
 .regionSelect { width: 100%; min-height: 44px; border: 1px solid #a7f3d0; border-radius: .5rem; padding: .5rem; background: white; color: #064e3b; font-size: .875rem; }
 .regionLink { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 44px; margin-top: .5rem; color: #065f46; font-size: .875rem; font-weight: 600; }
 .regionControl { cursor: pointer; outline: none; }
@@ -33,7 +33,7 @@
 @keyframes countryReveal { 0%, 25% { opacity: 0; transform: scale(.88); } 100% { opacity: 1; transform: scale(1); } }
 /* Independent phone cards keep media first and map second; normal page scroll
    and browser pinch zoom remain native rather than captured by map gestures. */
-@container (max-width: 623.98px) { .mapStage { height: 37rem; } }
+@container (max-width: 623.98px) { .mapStage { height:var(--discovery-panel-height,37rem); } }
 @media (prefers-reduced-motion: reduce) {
   .mapZoom, .pointZoom { transition: none; }
   .countryView { animation: none; }
@@ -51,8 +51,6 @@
 
 /* The layer map has a toolbar and island controls above its own scroll area.
    Size that area inside the pair, so it cannot cover the planning content. */
-@container (min-width: 624px) {
-  .layeredPanel > div { display:flex; flex-direction:column; height:100%; min-height:0; }
+.layeredPanel > div { display:flex; flex-direction:column; height:100%; min-height:0; }
   .layeredPanel dialog:not([data-expanded]) { height:0; min-height:0; }
   .layeredPanel dialog:not([data-expanded]) > div:last-child > div > section { height:100%; }
-}

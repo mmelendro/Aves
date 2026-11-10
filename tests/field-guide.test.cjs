@@ -45,3 +45,22 @@ test('existing map-fragment links reveal the map without cancelling native navig
   assert.equal(event.defaultPrevented,undefined)
  }finally{global.document=previousDocument;global.Element=previousElement}
 })
+test('map-first entry and later turns put the map before its bird cue and reveal the fitted frame',()=>{
+ const previousDocument=global.document
+ global.document={getElementById:()=>null,addEventListener(){},removeEventListener(){}}
+ try {
+  const map={type:'Map',props:{camera:'preserved'}}
+  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map,media:'birds',initialFace:'map',mapLabel:'Map and birds',birdCue:{commonName:'Kea',image:'/kea.jpg'}},{runEffects:true,window:{location:{hash:''},addEventListener(){},removeEventListener(){}},mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
+  let tree=h.render()
+  assert.equal(find(tree,n=>n.props['data-face']).props['data-face'],'map')
+  const all=nodes(tree)
+  assert.ok(all.indexOf(map)<all.indexOf(find(tree,n=>n.props['aria-label']==='View Kea in the bird guide')))
+  const panel=find(tree,n=>n.props.id==='test-id-map')
+  const scroll={scrollTop:120};panel.props.ref.current=scroll
+  const reveals=[];find(tree,n=>n.props['data-face']).props.ref.current={scrollIntoView:options=>reveals.push(options)}
+  button(tree,'Turn to the birds').props.onClick();tree=h.render()
+  button(tree,'Turn to the map').props.onClick();tree=h.render()
+  assert.equal(scroll.scrollTop,0);assert.equal(reveals.at(-1).block,'start')
+  assert.ok(nodes(tree).includes(map));assert.equal(map.props.camera,'preserved')
+ } finally {global.document=previousDocument}
+})

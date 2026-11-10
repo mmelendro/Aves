@@ -41,30 +41,42 @@
 
 /* A two-sided field guide keeps the same mounted map and carousel. Turning is
    visual only; inert removes the reverse face from keyboard and screen readers. */
-.guideToolbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem; margin-bottom:.5rem; }
+.guideToolbar { position:sticky; top:var(--guide-header-offset,7rem); z-index:20; background:#f7fdf9ed; backdrop-filter:blur(12px); border-radius:1rem; padding:.35rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem; margin-bottom:.5rem; }
 .guideTitle { display:flex; align-items:center; gap:.5rem; color:#064e3b; font-weight:600; }
 .pageLabel { border:1px solid #b7dccc; border-radius:999px; padding:.2rem .6rem; font-size:.75rem; font-weight:400; }
 .guideActions { display:flex; flex-wrap:wrap; gap:.5rem; }
 .turnButton { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; border:1px solid #065f46; border-radius:999px; background:#065f46; color:white; padding:.65rem 1.1rem; font-weight:600; box-shadow:0 4px 12px #052e161a; }
 .turnButton:hover { background:#064e3b; }
 .turnButton:focus-visible,.birdCue:focus-visible { outline:3px solid #b45309; outline-offset:3px; }
-.guideHelp { font-size:.8rem; line-height:1.6; color:#52635b; margin:0 0 .75rem; }
+.guideHelp { display:none; font-size:.8rem; line-height:1.6; color:#52635b; margin:0 0 .75rem; }
 .controls[hidden] { display:none; }
-.pair[data-layout="guide"] { display:block; position:relative; perspective:1500px; height:min(44rem,max(25rem,calc(100svh - 15rem))); --discovery-panel-height:min(44rem,max(25rem,calc(100svh - 15rem))); --discovery-media-height:calc(var(--discovery-panel-height) - 47px); }
+.pair[data-layout="guide"] { display:block; position:relative; perspective:1500px; height:min(44rem,max(15rem,calc(100svh - 12rem))); scroll-margin-top:calc(var(--guide-header-offset,7rem) + 4rem); --discovery-panel-height:min(44rem,max(15rem,calc(100svh - 12rem))); --discovery-media-height:calc(var(--discovery-panel-height) - 47px); }
 .pair[data-layout="guide"] > .mediaPanel,.pair[data-layout="guide"] > .mapPanel { position:absolute; inset:0; max-width:none; height:100%; overflow:auto; border:1px solid #c5dfd1; border-radius:1.5rem; background:#f7fdf9; backface-visibility:hidden; transform-style:preserve-3d; transition:transform 650ms cubic-bezier(.2,.75,.25,1),box-shadow 650ms; box-shadow:0 12px 32px #064e3b14; }
 .pair[data-layout="guide"] > .mediaPanel { transform:rotateY(0deg); }
-.pair[data-layout="guide"] > .mapPanel { transform:rotateY(180deg); padding:.5rem; }
+.pair[data-layout="guide"] > .mapPanel { transform:rotateY(180deg); padding:.5rem; display:flex; flex-direction:column; overflow:hidden; }
 .pair[data-layout="guide"][data-face="map"] > .mediaPanel { transform:rotateY(-180deg); }
 .pair[data-layout="guide"][data-face="map"] > .mapPanel { transform:rotateY(0deg); }
 .pair[data-layout="guide"] > [aria-hidden="true"] { pointer-events:none; }
 .pair[data-layout="guide"] .divider { display:none; }
-.birdCue { display:flex; align-items:center; gap:.7rem; min-height:60px; width:100%; border:1px solid #b7dccc; border-radius:1rem; background:white; padding:.35rem .65rem; text-align:left; color:#064e3b; margin-bottom:.5rem; }
-.birdCue img { width:48px; height:48px; border-radius:.75rem; object-fit:cover; }
+.birdCue { display:flex; align-items:center; gap:.7rem; min-height:48px; flex-shrink:0; width:100%; border:1px solid #b7dccc; border-radius:1rem; background:white; padding:.35rem .65rem; text-align:left; color:#064e3b; margin-top:.4rem; }
+.birdCue img { width:36px; height:36px; border-radius:.75rem; object-fit:cover; }
 .birdCue > span { flex:1; min-width:0; }
 .cueCaption { display:block; font-size:.7rem; color:#52635b; }
 .cueName { display:block; font-weight:600; line-height:1.4; }
-/* Leave room for the thumbnail without squashing the map's own toolbar. */
-.pair[data-layout="guide"] > .mapPanel > :last-child { min-height:22rem; height:calc(100% - 70px); }
+/* The map owns the frame; its bird cue stays in a compact footer. */
+.mapBody { min-width:0; }
+.pair[data-layout="guide"] .mapBody { flex:1; min-height:0; overflow:auto; --discovery-panel-height:100%; }
+.pair[data-layout="guide"] .mapBody > div { height:100%; min-height:0; }
+.pair[data-layout="guide"] .mapBody :global(dialog[data-aves-map]:not([data-expanded])) { min-height:0; overflow:hidden; }
+.pair[data-layout="guide"] .mapBody :global([data-map-surface]) { min-height:0; }
+@container (max-width:623.98px) {
+  .guideTitle { display:none; }
+  .guideActions { width:100%; flex-wrap:nowrap; }
+  .guideActions > button { flex:1; font-size:.75rem; padding:.4rem; }
+  .pair[data-layout="guide"] { --discovery-media-height:calc(var(--discovery-panel-height) - 47px); }
+}
 @media (prefers-reduced-motion:reduce) { .pair[data-layout="guide"] > .mediaPanel,.pair[data-layout="guide"] > .mapPanel { transition:none; } }
 
-.pair[data-layout="guide"] { max-width:42rem; margin-inline:auto; }
+.pair[data-layout="guide"] { max-width:60rem; margin-inline:auto; }
+
+.pair[data-layout="guide"] > .mediaPanel :global(img) { object-fit:contain; }

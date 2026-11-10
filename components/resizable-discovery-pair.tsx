@@ -13,19 +13,22 @@ import { FieldGuideContext } from "./field-guide-context"
 import styles from "./resizable-discovery-pair.module.css"
 
 type BirdCue = { commonName: string; image: string; imagePosition?: string }
-type Props = { birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
+type Props = { initialFace?: "birds" | "map"; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
 type Drag = { pointerId: number; startX: number; share: number; width: number }
 
-export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mediaFirst = false, mediaLabel = "bird photographs" }: Props) {
+export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds" }: Props) {
   const localizeHome = useColombiaHomeCopy()
 
   const id = useId()
   const containerRef = useRef<HTMLDivElement>(null)
   const turnRef = useRef<HTMLButtonElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const mapPanelRef = useRef<HTMLDivElement>(null)
+  const revealAfterTurn = useRef(false)
   const separatorRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<Drag | null>(null)
   const [layout, setLayout] = useState<"guide" | "paired">("guide")
-  const [face, setFace] = useState<"birds" | "map">("birds")
+  const [face, setFace] = useState<"birds" | "map">(initialFace)
   const [width, setWidth] = useState(0)
   const [share, setShare] = useState(50)
   const [dragging, setDragging] = useState(false)
@@ -77,6 +80,14 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     return () => { window.removeEventListener("hashchange", followHash); document.removeEventListener("click", followLink) }
   }, [id])
 
+  useEffect(() => {
+    if (!revealAfterTurn.current || layout !== "guide") return
+    revealAfterTurn.current = false
+    // Reset only the card's scroll position, preserving map camera and selection.
+    if (face === "map" && mapPanelRef.current) mapPanelRef.current.scrollTop = 0
+    cardRef.current?.scrollIntoView({ block: "start", behavior: "instant" })
+  }, [face, layout])
+
   // CSS uses these proportions only when both cards fit. No browser storage or account setting is needed.
   const leftShare = mediaFirst ? 100 - effectiveShare : effectiveShare
   const direction = mediaFirst ? -1 : 1
@@ -95,7 +106,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     <div className={styles.guideToolbar}>
       <div className={styles.guideTitle}><BookOpen size={20} aria-hidden="true"/><span>Your bird guide</span><span className={styles.pageLabel}>{layout === "paired" ? "Map & birds" : face === "birds" ? "Birds" : "Map"}</span></div>
       <div className={styles.guideActions}>
-        <button type="button" ref={turnRef} className={styles.turnButton} aria-controls={`${id}-birds ${id}-map`} onClick={() => { setLayout("guide"); setFace(face === "birds" ? "map" : "birds") }}>
+        <button type="button" ref={turnRef} className={styles.turnButton} aria-controls={`${id}-birds ${id}-map`} onClick={() => { revealAfterTurn.current = true; setLayout("guide"); setFace(face === "birds" ? "map" : "birds") }}>
           <FlipHorizontal2 size={19} aria-hidden="true"/>{face === "birds" ? "Turn to the map" : "Turn to the birds"}
         </button>
         <button type="button" className={styles.reset} aria-pressed={layout === "paired"} onClick={() => setLayout(layout === "paired" ? "guide" : "paired")}><Columns2 size={17} aria-hidden="true"/>{layout === "paired" ? "Return to the guide" : "Show map & birds together"}</button>
@@ -109,7 +120,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />Reset layout
       </button>
     </div>
-    <div className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face}>
+    <div ref={cardRef} className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face}>
       {/* Media comes first on mobile; desktop can place it on either side. */}
       <div id={`${id}-birds`} className={styles.mediaPanel} inert={layout === "guide" && face !== "birds"} aria-hidden={layout === "guide" && face !== "birds"}><div id={mediaId}>{media}</div></div>
       <div ref={separatorRef} role="separator" aria-orientation="vertical" aria-label={mapLabel}
@@ -147,12 +158,12 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         onLostPointerCapture={event => finishDrag(event.pointerId)}>
         <span className={styles.grip}><GripVertical className="h-5 w-5" aria-hidden="true" /></span>
       </div>
-      <div id={`${id}-map`} className={styles.mapPanel} inert={layout === "guide" && face !== "map"} aria-hidden={layout === "guide" && face !== "map"}>
+      <div ref={mapPanelRef} id={`${id}-map`} className={styles.mapPanel} inert={layout === "guide" && face !== "map"} aria-hidden={layout === "guide" && face !== "map"}>
+        <div className={styles.mapBody}><FieldGuideContext.Provider value={{bird:birdCue,showBirds}}>{map}</FieldGuideContext.Provider></div>
         {birdCue && <button type="button" className={styles.birdCue} onClick={showBirds} aria-label={`View ${birdCue.commonName} in the bird guide`}>
           <img src={birdCue.image} alt="" width={48} height={48} loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
           <span><span className={styles.cueCaption}>On the bird side</span><span className={styles.cueName}>{birdCue.commonName}</span></span><BookOpen size={18} aria-hidden="true"/>
         </button>}
-        <FieldGuideContext.Provider value={{bird:birdCue,showBirds}}>{map}</FieldGuideContext.Provider>
       </div>
     </div>
   </div>)

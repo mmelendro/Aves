@@ -1,5 +1,5 @@
 .viewer { display:flex; flex-direction:column; position:relative; width:100%; min-width:0; height:auto; flex:1; max-width:none; margin:0; padding:0; border:0; background:transparent; color:inherit; overflow:visible; }
-.toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:.3rem; padding:.35rem; flex-shrink:0; background:#ffffffd9; border-radius:.75rem; }
+.toolbar { position:sticky; top:0; z-index:3; backdrop-filter:blur(12px); display:flex; align-items:center; flex-wrap:wrap; gap:.3rem; padding:.35rem; flex-shrink:0; background:#ffffffd9; border-radius:.75rem; }
 .control { display:inline-flex; align-items:center; justify-content:center; min-width:44px; min-height:44px; border:1px solid #c5dfd1; border-radius:999px; background:white; color:#065f46; }
 .control:hover,.control[aria-pressed=true] { background:#ecfdf5; }
 .control:focus-visible,.surface:focus-visible { outline:2px solid #047857; outline-offset:3px; }

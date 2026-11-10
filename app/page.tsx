@@ -35,9 +35,10 @@ export default function HomePage() {
     <div className="min-h-screen bg-white text-gray-900">
       <GlobalHeader />
       <main id="main-content" tabIndex={-1}>
-        <section id="destinations" aria-labelledby="destination-heading" className="scroll-mt-20 bg-gradient-to-br from-emerald-50 via-white to-blue-50 pb-14 pt-6 sm:pb-20 sm:pt-10">
+        <section id="destinations" aria-labelledby="destination-heading" className="scroll-mt-20 bg-gradient-to-br from-emerald-50 via-white to-blue-50 pb-14 pt-2 sm:pb-20 sm:pt-3">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-10">
+            <HomepageDestinationExplorer map={<WorldDestinationMap />} />
+            <div className="mx-auto mt-8 max-w-3xl text-center sm:mt-10">
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800">
                 <Bird className="h-4 w-4" aria-hidden="true" /> Birding journeys, personally planned
               </p>
@@ -48,7 +49,6 @@ export default function HomePage() {
                 Personally planned journeys connecting birds, landscapes and local culture. Choose a country, meet its birds and imagine your journey.
               </p>
             </div>
-            <HomepageDestinationExplorer map={<WorldDestinationMap />} />
           </div>
         </section>
         <section aria-labelledby="personal-journey-heading" className="bg-stone-50/70 py-14 sm:py-20">
