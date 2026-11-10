@@ -1,5 +1,6 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
+const {readFileSync}=require('node:fs')
 const {componentHarness,nodes,find}=require('./helpers/component-harness.cjs')
 const mocks={
  './colombia-home-language':{useColombiaHomeCopy:()=>tree=>tree},
@@ -80,19 +81,34 @@ test('deep links and browser history restore the map scope without dropping Next
  assert.equal(listeners.size,2)
 })
 
-test('map thumbnails follow every selected region and the current carousel bird',()=>{
+test('reciprocal map and bird thumbnails follow every selected region and carousel bird',()=>{
  const h=harness({})
  for(const country of ['Colombia','Australia','New Zealand']){
   button(h,country).props.onClick()
   const options=nodes(find(pair(h).props.map,n=>n.type==='select')).filter(n=>n.type==='option'&&n.props.value)
   for(const option of options){
    find(pair(h).props.map,n=>n.type==='select').props.onChange({target:{value:option.props.value}})
+   const cue=pair(h).props.mapCue
+   assert.equal(cue.label,option.props.children)
+   assert.ok(cue.selectedPath?.startsWith('M'))
+   assert.match(readFileSync('public'+cue.image,'utf8'),/^<svg/)
    const birds=pair(h).props.media.props.children.props.birds
    assert.equal(pair(h).props.birdCue.id,birds[0].id)
    const last=birds.at(-1)
    find(h.render(),n=>n.type==='BirdProvider').props.value(last)
    assert.equal(pair(h).props.birdCue.id,last.id)
    assert.equal(pair(h).props.birdCue.image,last.image)
+   assert.equal(pair(h).props.mapCue.selectedPath,cue.selectedPath,'carousel changes retain chosen map scope')
   }
  }
+})
+
+test('world entry uses a world map thumbnail without selecting a country',()=>{
+ const cue=pair(harness({})).props.mapCue
+ assert.equal(cue.label,'World map')
+ assert.equal(cue.image,'/images/map-cues/world.svg')
+ assert.equal(cue.selectedPath,undefined)
+ const asset=readFileSync('public'+cue.image,'utf8')
+ assert.match(asset,/Natural Earth public-domain world overview/)
+ assert.doesNotMatch(asset,/<script|https?:\/\/(?!www.w3.org)/)
 })

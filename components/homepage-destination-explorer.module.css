@@ -46,7 +46,7 @@
 @container (min-width: 624px) {
   /* Reserve the 44px credit link, its bottom border and the card's two borders.
      Species details stay inside the photo instead of stretching the map. */
-  .mediaPanel { --discovery-media-height: calc(var(--discovery-panel-height) - 47px); }
+  .mediaPanel { --discovery-media-height: calc(var(--discovery-panel-height) - 47px - var(--discovery-cue-space,0px)); }
 }
 
 /* The layer map has a toolbar and island controls above its own scroll area.

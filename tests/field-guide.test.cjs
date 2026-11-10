@@ -3,7 +3,7 @@ const assert=require('node:assert/strict')
 const {readFileSync}=require('node:fs')
 const {componentHarness,nodes,find}=require('./helpers/component-harness.cjs')
 const css=readFileSync('components/resizable-discovery-pair.module.css','utf8')
-function guide(){const media={type:'Bird photographs',props:{}},map={type:'Map',props:{}};return {media,map,h:componentHarness('components/resizable-discovery-pair.tsx','default',{map,media,mapLabel:'Map and birds',birdCue:{commonName:'Kea',image:'/images/kea.jpg'}},{mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})}}
+function guide(){const media={type:'Bird photographs',props:{}},map={type:'Map',props:{}};return {media,map,h:componentHarness('components/resizable-discovery-pair.tsx','default',{map,media,mapLabel:'Map and birds',mapCue:{label:'South Island',image:'/images/map-cues/new-zealand.svg',viewBox:'0 0 560 640'},birdCue:{commonName:'Kea',image:'/images/kea.jpg'}},{mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})}}
 const button=(tree,text)=>find(tree,n=>n.type==='button'&&nodes(n).some(x=>x.props.children===text||Array.isArray(x.props.children)&&x.props.children.includes(text)))
 test('turning the field guide keeps both media instances mounted and only the visible face interactive',()=>{
  const {h,media,map}=guide();let tree=h.render()
@@ -63,4 +63,15 @@ test('map-first entry and later turns put the map before its bird cue and reveal
   assert.equal(scroll.scrollTop,0);assert.equal(reveals.at(-1).block,'start')
   assert.ok(nodes(tree).includes(map));assert.equal(map.props.camera,'preserved')
  } finally {global.document=previousDocument}
+})
+
+test('the bird face has a reciprocal map thumbnail that turns the same mounted card',()=>{
+ const {h,map,media}=guide();let tree=h.render()
+ const cue=find(tree,n=>n.props['aria-label']==='View South Island on the map')
+ assert.ok(nodes(cue).some(n=>n.type==='img'&&n.props.src==='/images/map-cues/new-zealand.svg'))
+ cue.props.onClick();tree=h.render()
+ assert.equal(find(tree,n=>n.props['data-face']).props['data-face'],'map')
+ assert.ok(nodes(tree).includes(map));assert.ok(nodes(tree).includes(media))
+ find(tree,n=>n.props['aria-label']==='View Kea in the bird guide').props.onClick()
+ assert.equal(find(h.render(),n=>n.props['data-face']).props['data-face'],'birds')
 })

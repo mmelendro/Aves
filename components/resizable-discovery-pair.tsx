@@ -7,16 +7,17 @@
 
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react"
-import { GripVertical, RotateCcw, BookOpen, FlipHorizontal2, Columns2 } from "lucide-react"
+import { GripVertical, RotateCcw, BookOpen, FlipHorizontal2, Columns2, Map as MapIcon } from "lucide-react"
 import { clampDiscoverySplit, discoverySplitBounds, dragDiscoverySplit, DISCOVERY_PAIR_MIN_WIDTH } from "@/lib/discovery-split"
+import type { GuideMapCue } from "@/lib/guide-map-cue"
 import { FieldGuideContext } from "./field-guide-context"
 import styles from "./resizable-discovery-pair.module.css"
 
 type BirdCue = { commonName: string; image: string; imagePosition?: string }
-type Props = { initialFace?: "birds" | "map"; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
+type Props = { initialFace?: "birds" | "map"; mapCue?: GuideMapCue; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
 type Drag = { pointerId: number; startX: number; share: number; width: number }
 
-export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds" }: Props) {
+export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mapCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds" }: Props) {
   const localizeHome = useColombiaHomeCopy()
 
   const id = useId()
@@ -93,7 +94,13 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   const direction = mediaFirst ? -1 : 1
   const layoutStyle = { "--discovery-columns": `minmax(0, ${leftShare}fr) 44px minmax(0, ${100 - leftShare}fr)` } as CSSProperties
 
-  function showBirds() { setFace("birds"); setLayout("guide"); turnRef.current?.focus({preventScroll:true}) }
+  function showFace(next: "birds" | "map") {
+    revealAfterTurn.current = true
+    setFace(next)
+    setLayout("guide")
+    turnRef.current?.focus({preventScroll:true})
+  }
+  const showBirds = () => showFace("birds")
 
   function finishDrag(pointerId: number) {
     if (dragRef.current?.pointerId !== pointerId) return
@@ -122,7 +129,15 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     </div>
     <div ref={cardRef} className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face}>
       {/* Media comes first on mobile; desktop can place it on either side. */}
-      <div id={`${id}-birds`} className={styles.mediaPanel} inert={layout === "guide" && face !== "birds"} aria-hidden={layout === "guide" && face !== "birds"}><div id={mediaId}>{media}</div></div>
+      <div id={`${id}-birds`} className={styles.mediaPanel} inert={layout === "guide" && face !== "birds"} aria-hidden={layout === "guide" && face !== "birds"}>
+        <div className={styles.mediaBody}><div id={mediaId}>{media}</div></div>
+        <button type="button" className={styles.birdCue} onClick={() => showFace("map")} aria-label={`View ${mapCue?.label || "this region"} on the map`}>
+          <span className={styles.mapThumbnail} aria-hidden="true">
+            {mapCue ? <><img src={mapCue.image} alt="" width={36} height={36} loading="lazy"/>{mapCue.selectedPath && <svg viewBox={mapCue.viewBox} focusable="false"><path d={mapCue.selectedPath} fill="#065f46"/>{mapCue.point && <circle cx={mapCue.point[0]} cy={mapCue.point[1]} r="15" fill="#065f46"/>}</svg>}</> : <MapIcon size={28}/>}
+          </span>
+          <span><span className={styles.cueCaption}>Map</span><span className={styles.cueName}>{mapCue?.label || "Your selected region"}</span></span><FlipHorizontal2 size={16} aria-hidden="true"/>
+        </button>
+      </div>
       <div ref={separatorRef} role="separator" aria-orientation="vertical" aria-label={mapLabel}
         aria-controls={`${id}-map`} aria-describedby={`${id}-help`}
         aria-valuemin={Number(bounds.min.toFixed(1))} aria-valuemax={Number(bounds.max.toFixed(1))}
@@ -161,8 +176,8 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
       <div ref={mapPanelRef} id={`${id}-map`} className={styles.mapPanel} inert={layout === "guide" && face !== "map"} aria-hidden={layout === "guide" && face !== "map"}>
         <div className={styles.mapBody}><FieldGuideContext.Provider value={{bird:birdCue,showBirds}}>{map}</FieldGuideContext.Provider></div>
         {birdCue && <button type="button" className={styles.birdCue} onClick={showBirds} aria-label={`View ${birdCue.commonName} in the bird guide`}>
-          <img src={birdCue.image} alt="" width={48} height={48} loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
-          <span><span className={styles.cueCaption}>On the bird side</span><span className={styles.cueName}>{birdCue.commonName}</span></span><BookOpen size={18} aria-hidden="true"/>
+          <img src={birdCue.image} alt="" width={36} height={36} loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
+          <span><span className={styles.cueCaption}>Birds</span><span className={styles.cueName}>{birdCue.commonName}</span></span><FlipHorizontal2 size={16} aria-hidden="true"/>
         </button>}
       </div>
     </div>

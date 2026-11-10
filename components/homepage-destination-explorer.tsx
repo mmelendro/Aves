@@ -5,6 +5,8 @@
  */
 "use client"
 
+import { guideMapCue } from "@/lib/guide-map-cue"
+
 import { explorerLocation, readExplorerLocation, explorerLocationHref, type ExplorerLocation } from "@/lib/explorer-location"
 import { useColombiaHomeCopy } from "./colombia-home-language"
 import { placeInSentence } from "@/lib/place-language"
@@ -114,7 +116,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
         <div className={styles.layout}>
           {/* Keep the divider mounted when countries change, preserving its split.
               Only the keyed viewer resets old slides, calls, timers and details. */}
-          <ResizableDiscoveryPair initialFace="map" birdCue={birds.find(bird=>bird.id===birdId) ?? birds[0]} mapLabel="Resize world map and bird photographs"
+          <ResizableDiscoveryPair initialFace="map" mapCue={guideMapCue(zoomed ? destination.id : undefined,regionId,region?.name)} birdCue={birds.find(bird=>bird.id===birdId) ?? birds[0]} mapLabel="Resize world map and bird photographs"
             map={<div className={`${styles.mapPanel} ${southIsland ? styles.layeredPanel : ""}`}>{southIsland ? <div id="south-island-bird-map" className="scroll-mt-24 gap-2">
               <SouthIslandEcosystemMap selected={sharedHabitat?.value ?? "all"} onSelect={value=>sharedHabitat?.select(value)} places={southIslandPlaceContexts} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} onZoomOutAtMinimum={()=>selectRegion("")} onSelectIsland={selectRegion}/>
               <nav aria-label="Map zoom level" className="flex flex-wrap gap-2">
