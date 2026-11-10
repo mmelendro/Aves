@@ -7,6 +7,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
+import BirdsBrandWord from "@/components/birds-brand-word"
 import { ArrowRight, Bird, Compass, Heart, Utensils, Waves } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import NewZealandMap from "@/components/new-zealand-map"
@@ -40,7 +41,7 @@ export default function NewZealandPage() {
             <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
               <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><Compass className="h-4 w-4" aria-hidden="true" />AVES New Zealand</p>
               <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl lg:text-5xl">Aotearoa <span className="text-emerald-700">New Zealand</span></h1>
-              <p className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Follow the birds. Stay for everything around them.</p>
+              <p aria-label="Follow the birds. Stay for everything around them." className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Follow the <BirdsBrandWord />. Stay for everything around them.</p>
               <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-gray-600">We’re developing personally planned journeys connecting birds, landscapes and local culture. Tell us the pace, comforts and experiences you would love to build a trip around.</p>
             </div>
             <div className="mb-7 text-center"><Link href="/account?country=new-zealand&region=south-island" className={`${linkStyle} bg-emerald-700 text-white hover:bg-emerald-800`}>Start your private planning brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><p className="mt-3 text-sm text-gray-600">A short questionnaire in My Trips. Save privately, then choose whether to share with AVES. No booking is confirmed.</p></div>
