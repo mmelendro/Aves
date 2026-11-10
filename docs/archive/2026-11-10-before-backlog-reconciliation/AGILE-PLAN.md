@@ -1,0 +1,150 @@
+# AVES agile priorities
+
+Updated 10 November 2026. HANDOFF-CURRENT.md owns current runtime and release
+permission. Detailed acceptance remains in ROADMAP-DETAILS.md and the request inbox.
+The prior long plan is archived in archive/2026-11-10-before-selection-thumbnails/.
+
+## Current delivery state
+
+| Increment | State | Next action |
+| --- | --- | --- |
+| Australian and Colombian regional contours, main map controls, one-person team | Live | Preserve verified baseline |
+| Selection-linked headers, small local flocks, personal planning copy | Live | Preserve merged PR #10 / AU PR #9 |
+| South Island selected-habitat satellite shading, zero-capable slider | Live | Preserve published main increment |
+| Public NZ checklist thumbnails | Live: 362/377 references, 15 pending | Safe source verification continues |
+| Private NZ checklist thumbnails | Draft PR #11: 362/377, not live | Finish actual private acceptance, then explicit release approval |
+| Audit/cleanup | Published with this increment | Preserve confirmed cleanup |
+| Certified B Corp map layer (AVES-069) | Owner request recorded, backlog | Verify directory access/rights and a small South Island public-location batch before UI implementation |
+| South Island eBird layer | Readiness assessment complete | Written commercial-use permission before API work; enquiry unsent |
+| Unified C3 private acceptance | Blocked on safe staging | Preserve gate; no provisioning retry or C4/C5 cutover |
+
+## Current owner priority: style and functionality
+
+Owner updated priorities on 10 November 2026: show a selectable task list, favour
+visible style and working interactions, and keep useful work available while
+started acceptance/source work is unresolved. This order supersedes older automatic
+next-task instructions. The owner subsequently selected all nine increments, one at a time. Execution
+order is choices 1, 3, 2, 4, 5, 6, 7, 8, 9. Australia map controls and the map-style batch are prepared in PRs #12/#13.
+Photo zoom source is on feature/photo-zoom-pilot; exact-candidate browser acceptance remains pending. Complete and verify each increment before the next.
+Production approval remains a separate gate. Do not claim background commands or parallel agents are running.
+
+### Started work to finish
+
+| Work | Current state | Remaining step |
+| --- | --- | --- |
+| Private planner thumbnails, PR #11 / AVES-039 | Prepared, not live; 299 tests and isolated picker browser checks pass | Safe signed-in candidate save/reopen/edit and private-shell acceptance, then release approval |
+| Remaining public checklist images, AVES-039 | Verification started; 362/377 live references | Resolve 15 pending entries with exact taxon, rights, credits and visual checks; keep unsupported records pending |
+
+### Selected work, reference choice numbers
+
+| Choice | Task | First useful slice | Readiness |
+| --- | --- | --- | --- |
+| 1 | Australia map enlargement and controls, AVES-038 | Reuse the existing enlarge/close, zoom/reset and drag pattern in the separate Australia app; preserve selection, focus and attribution | Prepared PR #12; control-only hosted checks passed, styling acceptance pending |
+| 2 | Photo zoom, AVES-051 | One shared bird/place viewer with zoom/reset, keyboard controls and intentional touch gestures, using existing image resolution | Shared bird/place pilot prepared on feature/photo-zoom-pilot; native-pixel limit, 163 checks and TypeScript pass; browser acceptance pending |
+| 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Prepared PRs #12/#13; NZ existing-preview modal/zoom/reset/Escape checked; other acceptance pending |
+| 4 | Birds / AVES invitation animation, AVES-067 | Reuse the existing restrained word transition in matching invitations, with stable text width and a still reduced-motion version | NZ invitation and all Colombia region invitations reuse the existing fixed-width, reduced-motion control; source prepared, candidate browser acceptance pending |
+| 5 | Continuous bird-call listening, AVES-047 | Explicit session opt-in for calls to follow manual carousel changes, with one player and clear stop/mute states | Source pilot on feature/follow-bird-calls; 169 tests and TypeScript pass; exact browser/audio acceptance pending |
+| 6 | Species-origin filters, AVES-025/048 | Make existing NZ native/introduced/unknown controls consistent across checklist and private picker; preserve chosen birds | Main source pilot on feature/nz-origin-filters: combined search/selection/origin, 172 checks and TypeScript pass; private parity prepared with 302 checks; visual acceptance pending |
+| 7 | South Island sea context, AVES-042 | Subtle surrounding-water treatment and sourced sea labels, retaining scale and readable habitat colours | Source pilot on feature/south-island-sea-context; surrounding-water tint and sourced labels, 172 checks/TypeScript pass; visual acceptance pending |
+| 8 | Save places to your trip, AVES-063 | Carry one chosen South Island place into the existing private brief and verify explicit save/reopen | Useful functionality; account acceptance and existing storage audit required |
+| 9 | B Corp map layer, AVES-069 | Source/access assessment, then a small verified South Island business list and optional layer preview | Data-dependent; certification and actual public locations need verification first |
+
+Recommend choice 1 for immediate usability, then choice 3 for visual consistency.
+Choice 4 is a smaller decorative slice. Work through the approved sequence one increment at a time and
+check mobile layout, keyboard/focus, reduced motion and existing navigation as
+relevant. Keep controls legible, asset cost modest and forms grounded in each
+place's actual geography and wildlife, following Utzon's natural-context direction.
+
+### Deferred dependencies
+
+The eBird layer remains behind written commercial-use permission; its enquiry is
+unsent. Wider satellite coverage needs aligned geometry and image rights. Exact 3D
+bird logos, ecosystem-wide artwork, provider changes and application consolidation
+remain separate larger decisions. Do not reopen C3 staging or C4/C5 cutover under a
+style/functionality task. Essential-flow or privacy defects still take precedence.
+
+## Retained owner focus after these selected refinements
+
+| Chat item | Focus | Existing scope |
+| --- | --- | --- |
+| 12 | Saved places | AVES-063, South Island private save/reopen and deliberate sharing |
+| 13 | Species-origin filters | AVES-025/048, sourced native/introduced/unknown; separate from seasonality |
+| 14 | Checklist media | AVES-039, public references extended; private port and later illustration/3D remain |
+| 16 | Ecological/historical orientation | AVES-064/016, authoritative and mana whenua sources |
+| 17 | Verified place and travel context | AVES-034/052/062, one sourced locality batch |
+| Later | Playback and continuous calls | AVES-068 safe continuity delivered; true cross-document continuity deferred; AVES-047 opt-in listening |
+| Later | Maps and design | Small reviewed increments with actual terrain, water and local species |
+
+Confirmed essential-flow/privacy failures interrupt elective work. Otherwise use
+visitor value, evidence confidence, accessibility and effort. Follow Utzon's natural
+context where useful: one boundary, lighter interior/animal lines, natural scale,
+quiet hierarchy, source-backed local representation and reduced motion. Apply the
+ecotourism brief and stewardship through truthful context, lawful attribution,
+respect for wildlife/communities and light assets. Do not claim certification.
+
+No spending, paid AI retries, weakened privacy, account/database/provider changes or
+app consolidation. Preserve the two application boundaries and their recovery points.
+An approval for a preview, documentation or a test account does not authorise release.
+
+## Owner refinement, 10 November: scroll-responsive regional flock
+
+Prepared on feature/scroll-responsive-flock after PRs #14/#15. Scrolling moves
+the existing local flock by at most 6px horizontally and 2px vertically, reversibly
+as the visitor scrolls back. Species selection, terrain and whales are unchanged.
+One passive listener schedules at most one frame per scroll event batch; no timer
+or repeated React render. Reduced motion removes the listener and all movement,
+including when the preference changes. Browser acceptance remains pending.
+
+Sprint checkpoint: PR #14 photo zoom and PR #15 invitation wording both pass 163
+automated checks, TypeScript and complete production builds. Git shell push was
+blocked by network 403; connected GitHub saved matching source trees instead.
+Photo candidate 769109d / dpl_89TB3WoVRGeGXUqAtg5wbbaqz29j built READY automatically.
+Automatic review rejected opening that preview over project identity/preview scope;
+no alternate browser route was attempted. Existing NZ map preview zoom/reset/Escape
+was checked, but candidate mobile/photo/pinch acceptance remains pending.
+Production approval remains separate. No release, provider or private-data changes.
+
+## Second sprint: manual bird-call following
+
+AVES-047 adds an explicit session-only opt-in to main-app carousels. It follows
+manual choices, handles missing/rejected recordings, preserves volume/mute and
+stops on hidden pages, other native foreground playback and unmount. 169 checks
+and TypeScript pass; exact browser acceptance remains pending. See
+PREVIEW-2026-11-10-FOLLOW-CALLS.md. Next selected source audit: NZ origin filters,
+using existing provenance; private-app parity remains a separate branch increment.
+
+## Second sprint: NZ species-origin filters
+
+Main-app source pilot combines all/selected birds, name search and published
+origin without changing chosen IDs. Native includes endemic; unknown values never
+default to native. Source counts: 342 native (93 endemic), 35 introduced, zero
+unknown. 172 checks and TypeScript pass. See PREVIEW-2026-11-10-NZ-ORIGIN.md.
+
+## Second sprint: private parity and sea context
+
+Private origin-filter parity is prepared on feature/private-nz-origin-filters,
+based on PR #11 only. 302 checks, TypeScript and a complete private-app production
+build passed. Mocked editor save/reopen remains intact; no actual guest account
+or hosted persistence was exercised.
+
+AVES-042 adds pale surrounding water and sourced Tasman Sea / South Pacific Ocean
+labels to the main South Island map. 172 checks and TypeScript pass. Label/narrow
+visual acceptance is pending. Map geometry, habitats, scale and overlays remain.
+
+Next selected item is saved places (AVES-063), but it requires the existing private
+brief storage audit and safe candidate save/reopen before release. Prioritise the
+accumulated candidate browser gates before adding another account-linked feature.
+
+## Third sprint: photo spacing and place-note pilot
+
+PR #21 fixes the short-screen photograph toolbar. Exact hosted340x234 zoom/focus
+retest passed without target overlap. PR #22 adds public tab-only place ideas;
+176 tests, TypeScript and full build pass, plus hosted add/remove/reload checks.
+Private counterpart PR #23 explicitly imports ideas into existing notes, without
+silent edits or automatic save.307 checks, TypeScript and full build pass, including
+actual editor handlers with mocked failed/successful save and reopen. No live
+private save is claimed. Read ACCEPTANCE-2026-11-10-PHOTO-PLACE-IDEAS.md.
+
+Next: actual same-origin public/private handover and private candidate save/reopen.
+Do not start a second saved-place schema. Source/public preview acceptance does
+not complete hosted private acceptance or authorise production publishing.
