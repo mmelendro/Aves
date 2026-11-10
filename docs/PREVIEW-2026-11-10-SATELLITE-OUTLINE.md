@@ -20,9 +20,18 @@ labelled habitat buttons remain the accessible selection alternative. Existing
 conservation/public-place overlays, credits, image registration, scale and map
 camera are preserved. Image failure retains the existing habitat-map fallback.
 
-157 tests and strict TypeScript passed. A local production build passed. Hosted
-build/browser evidence will be recorded after review. Physical Safari and true
-pinch/swipe are not claimed. No paid provider, new imagery, account/data changes,
+157 tests, strict TypeScript and local/hosted production builds passed.
+Source 3dd3cbd2c51241e14fb3df2deed185bde7303bcc, deployment
+ dpl_FzC33G1fJ511jgyQonBb7jvgvkEF, READY:
+https://v0-company-landing-page-cth3p7t04-mmelendro-9273s-projects.vercel.app/new-zealand/south-island
+
+Actual browser review: explicit Satellite updates both map instances. All habitats
+shows two satellite images and zero habitat fills. Selecting Forest shades only
+its path. Home/End/arrow keys reached 0/100/50%; selected outline and fully opaque
+imagery remained. Opacity changes left camera coordinates unchanged. Expanded map
+at native 400% browser zoom gave 340 CSS pixels with no overflow and a 44px slider;
+Escape returned focus to Enlarge. Screenshot: aves-satellite-shading-preview.png.
+Physical Safari and true pinch/swipe are not claimed. No paid provider, new imagery, account/data changes,
 location tracking, wildlife coordinates or production release.
 
 Base/source audit checkpoint: 670060dd9e377b23fc307855fe21011bb9b25f14.
