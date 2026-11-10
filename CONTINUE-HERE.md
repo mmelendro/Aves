@@ -20,15 +20,26 @@ notices, and removing both test choices removes the field.177 checks and build
 pass. Clipboard-denied browser behavior remains unverified. Synthetic tab choices
 were cleared. No hosted private save or account writes were performed.
 
-Private account gate: automatic review rejected opening the private account flow
-because it could expose signed-in content. Public main-project preview approval
-does not cover this new scope. Do not retry via another path/header/cookie/tool.
-The actual private-place-notes branch also has no preview under the Australia
-project; current account middleware routes to the maintained shared app. Safe exact
-private staging plus scoped private-account/test-record authorization are needed
-before hosted save/reopen. The notes-copy fallback helps manual handover but does
-not certify automatic cross-host basket transfer. Private source425fa33e retains
-307 tests/full build and remains independently stacked in PR #23.
+Private account gate update: the owner approved read-only opening of the private
+flow, then safe necessary work. The native account link opened the maintained live
+sign-in page with NZ/South Island context preserved. No credentials, account
+records or real saves were used. Do not repeat the earlier approval question.
+
+A synthetic candidate UI is now staged in the actual Australia project on test
+branch test/private-place-notes-ui. Hosted runtime44b8ac2d, deployment
+dpl_HmbPCgMV9Xs8Uz8i3wFsvySGNypX. Test/docs head439018d4 adds isolation verification.
+309 checks, strict TypeScript and full25-page build pass. Browser import,
+deliberate failed-save retention, retry, synthetic reopen, consumed basket, origin
+filter and photo-credit dialog checks passed. The fixture was cleared afterward.
+It uses React memory and injected transport, with no account API/database/email
+writes. It does not certify hosted persistence or cross-host basket handover.
+The route is limited by server environment to this exact preview branch and is
+disabled in production. Never merge the fixture into maintained branches.
+See docs/PREVIEW-2026-11-10-SYNTHETIC-PLANNER.md on that test branch.
+
+Real candidate account persistence and safe same-origin handover remain the next
+private acceptance work. Private production-source PR #23 remains425fa33e with307
+checks and full build. The test fixture is separate from that release candidate.
 
 Owner asked about removing automatic review. Official docs say website Always
 Allow, where available, removes interactive website-access review; other safety/
@@ -89,7 +100,7 @@ readable ideas to the existing message field; no structured placeIds/schema or
 migration was added. Never silently overwrite notes or claim cross-host transfer.
 Broader media interruption, physical Safari/pinch and private-shell tests remain.
 
-B Corp map-layer source/access assessment remains queued; eBird awaits written
+B Corp directory sourcing is documented; coordinates/reuse assessment remains open; eBird awaits written
 commercial permission. C3 safe staging/C4 cutover/C5 retirement remain separate.
 Preserve independent maintained apps, rollback sources, original artwork/credits
 and private guest data. No paid AI, new providers/accounts, imports or billing
