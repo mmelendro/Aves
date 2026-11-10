@@ -17,6 +17,7 @@ interface BrandMarkProps {
   priority?: boolean
   label?: string
   labelHref?: string
+  nativeCountryLink?: boolean
   unifiedHeaderContour?: boolean
 }
 
@@ -36,7 +37,8 @@ const landscapes: Record<BrandCountry | "global", string> = {
 }
 
 // Own both links here so the country subtitle never sits inside the global home link.
-export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref, unifiedHeaderContour = false }: BrandMarkProps) {
+export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref, unifiedHeaderContour = false, nativeCountryLink = false }: BrandMarkProps) {
+  const CountryLink = nativeCountryLink ? "a" : Link
   const isFooter = size === "footer"
   const subtitle = label || (country ? countryLabels[country] : undefined)
   const homeHref = "/"
@@ -61,7 +63,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
         />
       <span className="pointer-events-none block leading-none">
         <span data-brand-wordmark="true" aria-hidden="true" className={cn("block w-fit font-sans font-medium tracking-[0.14em]", isFooter ? "text-[2rem]" : "text-2xl sm:text-[1.75rem]", inverse ? "text-white" : "text-emerald-950")}>AVES</span>
-        {subtitle && <Link href={subtitleHref} aria-label={label || `AVES ${subtitle} home`} className={cn("pointer-events-auto relative z-10 mt-1.5 block rounded-sm font-sans font-medium tracking-[0.1em] before:absolute before:inset-x-0 before:-top-1 before:h-6 before:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", isFooter ? "text-xs" : "text-[10px] sm:text-[11px]", inverse ? "text-emerald-100 focus-visible:outline-emerald-300" : "text-emerald-800 focus-visible:outline-emerald-700")}>{subtitle}</Link>}
+        {subtitle && <CountryLink href={subtitleHref} aria-label={label || `AVES ${subtitle} home`} className={cn("pointer-events-auto relative z-10 mt-1.5 block rounded-sm font-sans font-medium tracking-[0.1em] before:absolute before:inset-x-0 before:-top-1 before:h-6 before:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", isFooter ? "text-xs" : "text-[10px] sm:text-[11px]", inverse ? "text-emerald-100 focus-visible:outline-emerald-300" : "text-emerald-800 focus-visible:outline-emerald-700")}>{subtitle}</CountryLink>}
       </span>
     </span>
   )

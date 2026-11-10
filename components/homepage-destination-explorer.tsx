@@ -15,6 +15,7 @@ import nzMap from "@/content/new-zealand-map.json"
 import DestinationCardMedia from "@/components/destination-card-media"
 import { DestinationSelectionContext } from "@/components/destination-selection-context"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { MapViewer } from "./map-viewer"
 import DestinationRegionalMap from "@/components/destination-regional-map"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
@@ -22,6 +23,7 @@ import { useRegionPreview } from "./use-region-preview"
 import styles from "./homepage-destination-explorer.module.css"
 
 export default function HomepageDestinationExplorer({ map, initialCountryId }: { map: ReactNode; initialCountryId?: string }) {
+  const { publish } = useHeaderLandscape()
   const [selectedId, setSelectedId] = useState(initialCountryId ?? destinations[0]?.id)
   const [zoomed, setZoomed] = useState(false)
   const [regionId, setRegionId] = useState("")
@@ -34,6 +36,7 @@ export default function HomepageDestinationExplorer({ map, initialCountryId }: {
   const region = regions.find(item => item.id === regionId)
   const birds = getDestinationRegionBirds(destination?.id, region?.id)
   const highlightedRegions = region ? [region.id] : getBirdRegionIds(destination?.id, birdId || birds[0]?.id)
+  useEffect(()=>{ if(destination) publish({country:destination.id,regionId:region?.id}) },[destination,region,publish])
   const onBirdChange = useCallback((bird: BirdProfile) => setBirdId(bird.id), [])
 
   const regionPreview = useRegionPreview(id => { setRegionId(id); setBirdId("") })

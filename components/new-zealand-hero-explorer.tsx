@@ -7,6 +7,7 @@
 
 import Link from "next/link"
 import { useContext, useEffect, useId, useState } from "react"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
 import { southIslandLandscapeSlides } from "@/lib/south-island-discovery"
@@ -28,6 +29,7 @@ import { readNzBirdBasket, writeNzBirdBasket } from "@/lib/nz-bird-selection"
 import { filterSouthIslandBirds, southIslandEcosystems, type SouthIslandEcosystemFilter } from "@/content/south-island-ecosystems"
 
 export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZealandIslandId } = {}) {
+  const { publish } = useHeaderLandscape()
   const [chosenRegion, setChosenRegion] = useState<NewZealandIslandId | undefined>(regionId)
   const ecosystemId = useId()
   const sharedHabitat = useContext(SouthIslandHabitatContext)
@@ -83,7 +85,7 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
       </>} map={<>
         <div id={regionId === "south-island" ? "south-island-bird-map" : undefined} className="scroll-mt-24">
         {regionId === "south-island" ? <SouthIslandEcosystemMap selected={ecosystem} onSelect={selectEcosystem}
-          places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
+          places={sharedHabitat ? southIslandPlaceContexts : undefined} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} /> : <NewZealandMap compact frameHeight="var(--discovery-panel-height, auto)" focusedIsland={chosenRegion} onSelectIsland={regionId ? undefined : id => { publish({country:"new-zealand",regionId:id}); setChosenRegion(id); setCurrentBird(newZealandRegionBirds(id)[0]) }} onResetFocus={regionId ? undefined : () => { publish({country:"new-zealand"}); setChosenRegion(undefined); setCurrentBird(newZealandRegionBirds()[0]) }} highlightedIslands={chosenRegion ? [chosenRegion] : newZealandBirdIslands[currentBird.id] ?? []} />}
         </div>
         {chosenRegion && !regionId && <Link href={newZealandRegionHref(chosenRegion)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-emerald-800 underline underline-offset-4">Open the {chosenRegion === "south-island" ? "South Island" : chosenRegion === "north-island" ? "North Island" : "Rakiura"} guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">

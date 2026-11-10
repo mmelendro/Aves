@@ -8,3 +8,5 @@ export function newZealandHeaderGeometry(input: HeaderGeometryInput): {
 export interface ContextualHeaderProfile { terrain: string; water: string }
 export const releasedColombiaHeaders: Record<string, ContextualHeaderProfile | undefined>
 export function contextualHeaderGeometry(input: HeaderGeometryInput, profile: ContextualHeaderProfile): ReturnType<typeof newZealandHeaderGeometry>
+
+export function selectedHeaderProfile(country: string, regionId?: string, placeId?: string): ContextualHeaderProfile | undefined

@@ -12,6 +12,7 @@ import { australiaMapStates, australiaMapViewBox, australiaMapProvenance } from 
 import colombiaBoundaries from "@/content/colombia-planning-boundaries.json"
 import nz from "@/content/new-zealand-map.json"
 import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { destinationRegions } from "@/content/destination-regions"
 import MapFeatherMarker from "./map-feather-marker"
@@ -35,7 +36,9 @@ const colombiaShapes = regionsByCountry.colombia.map(region => {
 export default function HomepageCountryMapCard({ country, name, href }: { country: string; name: string; href: string }) {
   const regions = regionsByCountry[country]
   const [activeId, setActiveId] = useState(regions[0].id)
-  const preview = useRegionPreview(setActiveId)
+  const { publish } = useHeaderLandscape()
+  function choose(id:string){ setActiveId(id); publish({country,regionId:id}) }
+  const preview = useRegionPreview(choose)
   const description = destinationRegions[country]?.find(region => region.id === activeId)?.description
   const active = regions.find(region => region.id === activeId) || regions[0]
   const id = useId().replace(/:/g, "")
@@ -44,7 +47,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
   // Uniform fit into the same inner frame. Never stretch the original geometry.
   const scale = Math.min(320 / vw, 244 / vh)
   const point = { x: 20 + (320-vw*scale)/2 + (active.x-vx)*scale, y: 60 + (244-vh*scale)/2 + (active.y-vy)*scale }
-  const focusRegion = (region: Region) => ({ onKeyDown: (event: React.KeyboardEvent) => preview.activateKey(event, region.id, region.href), onClick: (event: React.MouseEvent) => preview.activate(event, region.id), onFocus: () => setActiveId(region.id), onPointerEnter: (event: React.PointerEvent) => { if (event.pointerType !== "touch") setActiveId(region.id) } })
+  const focusRegion = (region: Region) => ({ onKeyDown: (event: React.KeyboardEvent) => preview.activateKey(event, region.id, region.href), onClick: (event: React.MouseEvent) => preview.activate(event, region.id), onFocus: () => choose(region.id), onPointerEnter: (event: React.PointerEvent) => { if (event.pointerType !== "touch") choose(region.id) } })
   return <article className={styles.card} aria-label={`${name} regional map`} data-country-map-card={country}>
     <header className={styles.header}><h3>{name}</h3><p>{geography[country]} · {regions.length} destinations</p></header>
     <div className={styles.canvas}>

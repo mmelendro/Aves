@@ -6,6 +6,7 @@
 "use client"
 
 import { ColombiaHomeLanguageToggle, useColombiaHomeCopy } from "@/components/colombia-home-language"
+import { useHeaderLandscape } from "@/components/header-landscape-context"
 import { HeaderContour } from "@/components/header-contour"
 import { releasedColombiaHeaders } from "@/lib/header-landscape.mjs"
 import { BrandMark } from "@/components/brand-mark"
@@ -34,7 +35,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   const pathname = usePathname()
   // Prefer the browser route; currentPage is only a fallback for callers supplying it.
   const activePath = pathname || currentPage || "/"
-  const landscape = releasedColombiaHeaders[activePath]
+  const { selection } = useHeaderLandscape()
+  const landscape = selection?.country === "colombia" ? releasedColombiaHeaders[selection.regionId ? `/regions/${selection.regionId}` : "/colombia"] : releasedColombiaHeaders[activePath] || (activePath === "/aves-explorer" || activePath === "/regions" ? releasedColombiaHeaders["/colombia"] : undefined)
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
 

@@ -14,6 +14,7 @@ import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import styles from "@/components/country-hero-explorer.module.css"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { MapViewer } from "./map-viewer"
 import ColombiaMapArtwork from "@/components/colombia-map-artwork"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
@@ -25,6 +26,7 @@ import { regions } from "@/content/regions"
 
 
 export default function ColombiaHeroExplorer({ media, initialRegion, initialBird, resizable = false }: { media?: ReactNode; initialRegion?: string; initialBird?: BirdProfile; resizable?: boolean } = {}) {
+  const { publish } = useHeaderLandscape()
   const localizeHome = useColombiaHomeCopy()
 
   const [currentBird, setCurrentBird] = useState(initialBird ?? birdData[0])
@@ -38,6 +40,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
   const birds = chosenRegion ? colombiaRegionBirds(chosenRegion) : birdData
   const chooseRegion = (id: string) => {
     if (!mapMarkers.some(region => region.slug === id)) return
+    publish({country:"colombia",regionId:id})
     setChosenRegion(id)
     setCurrentBird(colombiaRegionBirds(id)[0])
   }
@@ -57,7 +60,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
         <div style={resizable ? { height: "var(--discovery-panel-height, auto)" } : undefined} className={`${styles.mapCard} rounded-2xl border border-emerald-100/70 bg-white/60 p-4`}>
           <div className="flex items-baseline justify-between gap-3">
             <h2 className="font-medium text-emerald-950">{focused ? selectedRegionDetails.name : "Explore Colombia"}</h2>
-            {focused && (media ? <Link href="/colombia" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to Colombia</Link> : <button ref={backRef} type="button" onClick={() => { preview.clear(); setChosenRegion(""); setCurrentBird(birdData[0]); selectRef.current?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to Colombia</button>)}
+            {focused && (media ? <Link href="/colombia" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to Colombia</Link> : <button ref={backRef} type="button" onClick={() => { preview.clear(); publish({country:"colombia"}); setChosenRegion(""); setCurrentBird(birdData[0]); selectRef.current?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to Colombia</button>)}
             <Link href="/aves-explorer" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></Link>
           </div>
           <MapViewer label="Colombia planning map" credits="AVES planning-region artwork · representative locations, not official ecological boundaries."><div className={`${styles.mapCanvas} ${styles.mapViewport}`}><div data-zoom-artwork="true" className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
