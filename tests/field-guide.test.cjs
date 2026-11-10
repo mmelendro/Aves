@@ -3,7 +3,7 @@ const assert=require('node:assert/strict')
 const {readFileSync}=require('node:fs')
 const {componentHarness,nodes,find}=require('./helpers/component-harness.cjs')
 const css=readFileSync('components/resizable-discovery-pair.module.css','utf8')
-function guide(){const media={type:'Bird photographs',props:{}},map={type:'Map',props:{}};return {media,map,h:componentHarness('components/resizable-discovery-pair.tsx','default',{map,media,mapLabel:'Map and birds',mapCue:{label:'South Island',image:'/images/map-cues/new-zealand.svg',viewBox:'0 0 560 640'},birdCue:{commonName:'Kea',image:'/images/kea.jpg'}},{mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})}}
+function guide(){const media={type:'Bird photographs',props:{}},map={type:'Map',props:{}};return {media,map,h:componentHarness('components/resizable-discovery-pair.tsx','default',{map,media,mapLabel:'Map and birds',mapCue:{label:'South Island',image:'/images/map-cues/new-zealand.svg',viewBox:'0 0 560 640'},birdCue:{commonName:'Kea',image:'/images/kea.jpg'}},{mocks:{'./expandable-media':{__esModule:true,default:'ExpandableMedia'},'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})}}
 const button=(tree,text)=>find(tree,n=>n.type==='button'&&nodes(n).some(x=>x.props.children===text||Array.isArray(x.props.children)&&x.props.children.includes(text)))
 test('turning the field guide keeps both media instances mounted and only the visible face interactive',()=>{
  const {h,media,map}=guide();let tree=h.render()
@@ -37,7 +37,7 @@ test('existing map-fragment links reveal the map without cancelling native navig
  global.document={getElementById:id=>id==='test-id-map'?{contains:target=>target===place}:id==='map-place'?place:outside,addEventListener:(name,fn)=>{listeners[name]=fn},removeEventListener(){}}
  const win={location:{hash:''},addEventListener:(name,fn)=>{listeners[name]=fn},removeEventListener(){}}
  try{
-  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map:'map',media:'birds',mapLabel:'Map and birds'},{runEffects:true,window:win,mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
+  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map:'map',media:'birds',mapLabel:'Map and birds'},{runEffects:true,window:win,mocks:{'./expandable-media':{__esModule:true,default:'ExpandableMedia'},'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
   h.render();listeners.click({button:0,target:new LinkElement('#outside')})
   assert.equal(find(h.render(),n=>n.props['data-face']).props['data-face'],'birds')
   const event={button:0,target:new LinkElement('#map-place')};listeners.click(event)
@@ -50,7 +50,7 @@ test('map-first entry and later turns put the map before its bird cue and reveal
  global.document={getElementById:()=>null,addEventListener(){},removeEventListener(){}}
  try {
   const map={type:'Map',props:{camera:'preserved'}}
-  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map,media:'birds',initialFace:'map',mapLabel:'Map and birds',birdCue:{commonName:'Kea',image:'/kea.jpg'}},{runEffects:true,window:{location:{hash:''},addEventListener(){},removeEventListener(){}},mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
+  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map,media:'birds',initialFace:'map',mapLabel:'Map and birds',birdCue:{commonName:'Kea',image:'/kea.jpg'}},{runEffects:true,window:{location:{hash:''},addEventListener(){},removeEventListener(){}},mocks:{'./expandable-media':{__esModule:true,default:'ExpandableMedia'},'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
   let tree=h.render()
   assert.equal(find(tree,n=>n.props['data-face']).props['data-face'],'map')
   const all=nodes(tree)
@@ -68,10 +68,27 @@ test('map-first entry and later turns put the map before its bird cue and reveal
 test('the bird face has a reciprocal map thumbnail that turns the same mounted card',()=>{
  const {h,map,media}=guide();let tree=h.render()
  const cue=find(tree,n=>n.props['aria-label']==='View South Island on the map')
- assert.ok(nodes(cue).some(n=>n.type==='img'&&n.props.src==='/images/map-cues/new-zealand.svg'))
+ assert.ok(nodes(cue).some(n=>n.props.map?.image==='/images/map-cues/new-zealand.svg'))
  cue.props.onClick();tree=h.render()
  assert.equal(find(tree,n=>n.props['data-face']).props['data-face'],'map')
  assert.ok(nodes(tree).includes(map));assert.ok(nodes(tree).includes(media))
  find(tree,n=>n.props['aria-label']==='View Kea in the bird guide').props.onClick()
  assert.equal(find(h.render(),n=>n.props['data-face']).props['data-face'],'birds')
+})
+
+test('opposite previews open registered viewers and return to their originating face',()=>{
+ const previousDocument=global.document,previousRaf=global.requestAnimationFrame
+ global.document={getElementById:()=>null,addEventListener(){},removeEventListener(){}}
+ global.requestAnimationFrame=callback=>{callback();return 1}
+ try{
+  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map:'map',media:'birds',mapLabel:'Map and birds',birdCue:{commonName:'Kea',image:'/kea.jpg'}},{runEffects:true,window:{location:{hash:''},addEventListener(){},removeEventListener(){}},mocks:{'./expandable-media':{__esModule:true,default:'ExpandableMedia'},'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
+  let tree=h.render(),restore,focused=false
+  const context=find(tree,n=>n.type==='FieldGuideProvider').props.value
+  const unregister=context.registerMap(onClose=>{restore=onClose})
+  find(tree,n=>n.props['aria-label']==='View this region on the map').props.onClick({currentTarget:{focus(){focused=true}}})
+  h.render();assert.equal(typeof restore,'function')
+  restore();tree=h.render();assert.equal(find(tree,n=>n.props['data-face']).props['data-face'],'birds');assert.equal(focused,true)
+  unregister();restore=undefined
+  find(tree,n=>n.props['aria-label']==='View this region on the map').props.onClick();h.render();assert.equal(restore,undefined)
+ }finally{global.document=previousDocument;global.requestAnimationFrame=previousRaf}
 })

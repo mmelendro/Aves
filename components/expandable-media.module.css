@@ -20,3 +20,9 @@
  .viewer[data-expanded] [data-carousel-image],
  .viewer[data-expanded] [data-place-image] { height:max(100dvh,32rem) !important; }
 }
+
+.mapPreview { position:fixed; top:4rem; left:4.25rem; z-index:40; display:flex; align-items:center; gap:.5rem; max-width:calc(100% - 9rem); min-height:44px; border:1px solid #ffffff70; border-radius:.8rem; background:#f7fdf9f2; padding:.25rem .5rem; color:#064e3b; text-align:left; }
+.mapPreview > span:last-child { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.75rem; }
+.mapPreview:focus-visible { outline:2px solid #34d399; outline-offset:3px; }
+
+.viewer[data-expanded] > .control { position:fixed; }

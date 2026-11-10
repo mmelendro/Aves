@@ -1,7 +1,9 @@
 "use client"
 
-import { createContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { Maximize2, Minimize2 } from "lucide-react"
+import { FieldGuideContext } from "./field-guide-context"
+import GuideMapThumbnail from "./guide-map-thumbnail"
 import styles from "./expandable-media.module.css"
 
 export const ExpandedMediaContext = createContext(false)
@@ -13,6 +15,8 @@ export const ExpandedMediaContext = createContext(false)
 export default function ExpandableMedia({ children, label, enabled = true, kind = "bird" }: {
   children: ReactNode; label: string; enabled?: boolean; kind?: "bird" | "place"
 }) {
+  const guide=useContext(FieldGuideContext)
+  const closePreview=useRef<(()=>void)|null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const [expanded, setExpanded] = useState(false)
@@ -33,13 +37,16 @@ export default function ExpandableMedia({ children, label, enabled = true, kind 
     if (open) element.showModal()
     else element.show()
     setExpanded(open)
-    if (!open) trigger.current?.focus({ preventScroll: true })
+    if (!open) {const restore=closePreview.current;closePreview.current=null;if(restore)restore();else trigger.current?.focus({ preventScroll: true })}
   }
+
+  useEffect(()=>{if(enabled&&kind==="bird")return guide?.registerBirds?.(restore=>{closePreview.current=restore;resize(true)})},[enabled,kind,guide?.registerBirds])
 
   if (!enabled) return children
   return <dialog ref={dialog} open className={styles.viewer} data-expanded={expanded || undefined}
     role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label}
     onCancel={event => { event.preventDefault(); resize(false) }}>
+    {expanded && kind === "bird" && guide?.mapCue && guide.openMap && <button type="button" className={styles.mapPreview} aria-label={`View ${guide.mapCue.label} on the map`} onClick={()=>{resize(false);guide.openMap?.()}}><GuideMapThumbnail map={guide.mapCue}/><span>{guide.mapCue.label}</span></button>}
     <ExpandedMediaContext.Provider value={expanded}>{children}</ExpandedMediaContext.Provider>
     <button ref={trigger} type="button" className={styles.control} data-kind={kind}
       aria-label={expanded ? `Close full-screen ${label}` : `Expand ${label}`}
