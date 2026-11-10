@@ -1,0 +1,53 @@
+"use client"
+
+import { useState } from "react"
+import { Portal as HoverCardPortal } from "@radix-ui/react-hover-card"
+import { ImageIcon } from "lucide-react"
+import type { NzChecklistPhoto } from "@/content/new-zealand-checklist-photos"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+
+function Photograph({ photo }: { photo: NzChecklistPhoto }) {
+  const [failed, setFailed] = useState(false)
+  return failed
+    ? <p role="status" className="rounded-lg bg-emerald-50 p-6 text-sm text-emerald-950">Photograph unavailable. You can still select this bird.</p>
+    : <img src={photo.bird.image} alt={`${photo.bird.commonName} (${photo.bird.scientificName}), photographed in ${photo.credit.location}`} loading="lazy" decoding="async" onError={() => setFailed(true)} className="max-h-[45dvh] w-full rounded-lg object-contain" />
+}
+
+/** Hover/focus is a quick look; the independent button opens a keyboard/touch
+ * dialog with complete provenance. Neither path receives a selection callback.
+ */
+export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChecklistPhoto; name: string }) {
+  const [quickLook, setQuickLook] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  return <Dialog open={expanded} onOpenChange={setExpanded}>
+    <HoverCard open={quickLook && !expanded} onOpenChange={setQuickLook} openDelay={250} closeDelay={200}>
+      <HoverCardTrigger asChild>
+        <DialogTrigger asChild>
+          <button type="button" onClick={() => setQuickLook(false)} aria-label={`View photograph of ${name}`} className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-md border border-emerald-200 px-2 text-xs font-medium text-emerald-900 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+            <ImageIcon className="h-4 w-4" aria-hidden="true" /><span>Photo</span>
+          </button>
+        </DialogTrigger>
+      </HoverCardTrigger>
+      <HoverCardPortal>
+        <HoverCardContent side="top" align="end" collisionPadding={12} className="w-72 max-w-[calc(100vw_-_1.5rem)] max-h-[var(--radix-hover-card-content-available-height)] overflow-y-auto bg-white text-emerald-950 motion-reduce:animate-none" onEscapeKeyDown={() => setQuickLook(false)}>
+          <Photograph photo={photo} />
+          <p className="mt-2 text-sm font-medium">{photo.bird.commonName}</p>
+          <p className="mt-1 text-xs">Photo: {photo.credit.creator} · {photo.credit.license}</p>
+          <p className="mt-1 text-xs text-gray-600">Open Photo for location, source and full credits.</p>
+        </HoverCardContent>
+      </HoverCardPortal>
+    </HoverCard>
+    <DialogContent className="max-h-[90dvh] w-[calc(100vw_-_1.5rem)] overflow-y-auto rounded-xl bg-white text-emerald-950 motion-reduce:animate-none [&>button]:min-h-11 [&>button]:min-w-11 [&>button]:grid [&>button]:place-items-center">
+      <DialogTitle className="pr-8 leading-6">{name}</DialogTitle>
+      <DialogDescription>Reference photograph of {photo.bird.commonName} ({photo.bird.scientificName}). It does not establish local presence or a guaranteed sighting.</DialogDescription>
+      <Photograph photo={photo} />
+      <div className="space-y-2 break-words text-xs leading-5 text-gray-700">
+        <p>Photographer: {photo.credit.creator}. Location: {photo.credit.location}.</p>
+        <p><a href={photo.credit.sourceUrl} target="_blank" rel="noreferrer" className="underline underline-offset-2">{photo.credit.title}<span className="sr-only"> (source, opens in a new tab)</span></a> · <a href={photo.credit.licenseUrl} target="_blank" rel="noreferrer" className="underline underline-offset-2">{photo.credit.license}<span className="sr-only"> (licence, opens in a new tab)</span></a></p>
+        <p>{photo.credit.modifications}</p>
+        <p>Checklist selection applies to the parent species. The photograph retains its named species or subspecies.</p>
+      </div>
+    </DialogContent>
+  </Dialog>
+}
