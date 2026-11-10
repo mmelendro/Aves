@@ -20,20 +20,18 @@ function Photograph({ photo }: { photo: NzChecklistPhoto }) {
 export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChecklistPhoto; name: string }) {
   const [quickLook, setQuickLook] = useState(false)
   const [expanded, setExpanded] = useState(false)
-  const returningFocus = useRef(false)
+  const dismissUntilExit = useRef(false)
   return <Dialog open={expanded} onOpenChange={setExpanded}>
-    <HoverCard open={quickLook && !expanded} onOpenChange={setQuickLook} openDelay={250} closeDelay={200}>
-      <HoverCardTrigger asChild onFocus={event => {
-        if (returningFocus.current) { event.preventDefault(); returningFocus.current = false }
-      }}>
+    <HoverCard open={quickLook && !expanded} onOpenChange={open => { if (!open || !dismissUntilExit.current) setQuickLook(open) }} openDelay={250} closeDelay={200}>
+      <HoverCardTrigger asChild>
         <DialogTrigger asChild>
-          <button type="button" onClick={() => setQuickLook(false)} aria-label={`View photograph of ${name}`} className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-md border border-emerald-200 px-2 text-xs font-medium text-emerald-900 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          <button type="button" onBlur={() => { dismissUntilExit.current = false }} onPointerLeave={() => { dismissUntilExit.current = false }} onClick={() => setQuickLook(false)} aria-label={`View photograph of ${name}`} className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-md border border-emerald-200 px-2 text-xs font-medium text-emerald-900 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
             <ImageIcon className="h-4 w-4" aria-hidden="true" /><span>Photo</span>
           </button>
         </DialogTrigger>
       </HoverCardTrigger>
       <HoverCardPortal>
-        <HoverCardContent side="top" align="end" collisionPadding={12} className="w-72 max-w-[calc(100vw_-_1.5rem)] max-h-[var(--radix-hover-card-content-available-height)] overflow-y-auto bg-white text-emerald-950 motion-reduce:animate-none" onEscapeKeyDown={() => setQuickLook(false)}>
+        <HoverCardContent side="top" align="end" collisionPadding={12} className="w-72 max-w-[calc(100vw_-_1.5rem)] max-h-[var(--radix-hover-card-content-available-height)] overflow-y-auto bg-white text-emerald-950 motion-reduce:animate-none" onEscapeKeyDown={() => { dismissUntilExit.current = true; setQuickLook(false) }}>
           <Photograph photo={photo} />
           <p className="mt-2 text-sm font-medium">{photo.bird.commonName}</p>
           <p className="mt-1 text-xs">Photo: {photo.credit.creator} · {photo.credit.license}</p>
@@ -41,7 +39,7 @@ export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChe
         </HoverCardContent>
       </HoverCardPortal>
     </HoverCard>
-    <DialogContent onCloseAutoFocus={() => { returningFocus.current = true }} className="max-h-[90dvh] w-[calc(100vw_-_1.5rem)] overflow-y-auto rounded-xl bg-white text-emerald-950 motion-reduce:animate-none [&>button]:min-h-11 [&>button]:min-w-11 [&>button]:grid [&>button]:place-items-center">
+    <DialogContent onCloseAutoFocus={() => { dismissUntilExit.current = true; setQuickLook(false) }} className="max-h-[90dvh] w-[calc(100vw_-_1.5rem)] overflow-y-auto rounded-xl bg-white text-emerald-950 motion-reduce:animate-none [&>button]:min-h-11 [&>button]:min-w-11 [&>button]:grid [&>button]:place-items-center">
       <DialogTitle className="pr-8 leading-6">{name}</DialogTitle>
       <DialogDescription>Reference photograph of {photo.bird.commonName} ({photo.bird.scientificName}). It does not establish local presence or a guaranteed sighting.</DialogDescription>
       <Photograph photo={photo} />
