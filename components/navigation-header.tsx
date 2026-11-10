@@ -8,6 +8,8 @@
 
 import { SiteLink as Link } from "@/components/site-link"
 import { usePathname } from "next/navigation"
+import { HeaderContour } from "@/components/header-contour"
+import { releasedAustraliaHeaders } from "@/lib/header-landscape.mjs"
 import { BrandMark } from "@/components/brand-mark"
 import { MobileNavigationOverlay } from "@/components/mobile-navigation-overlay"
 import { SITE_BASE_PATH } from "@/lib/site-path"
@@ -37,6 +39,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     : rawPath.startsWith(SITE_BASE_PATH + "/")
       ? rawPath.slice(SITE_BASE_PATH.length)
       : rawPath
+  const landscape = releasedAustraliaHeaders[activePath]
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
 
@@ -46,7 +49,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md">
+      <header className={cn("fixed inset-x-0 top-0 z-50", landscape ? "isolate h-[108px]" : "border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md")}>
+        {landscape && <HeaderContour key={activePath} profile={landscape} />}
         {/* First keyboard stop: skip repeated navigation and focus the page's main-content target. */}
         <a
           href="#main-content"
@@ -54,8 +58,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         >
           Skip to content
         </a>
-        <div className="container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <BrandMark country="australia" priority />
+        <div className="container relative mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          <BrandMark country="australia" priority unifiedHeaderContour={!!landscape} />
 
           {/* Desktop links and primary inquiry action; the mobile dialog takes over below lg. */}
           <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
@@ -81,11 +85,11 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
             </Link>
           </nav>
 
-          <MobileNavigationOverlay links={navigationLinks} currentPage={activePath} />
+          <div data-contour-navigation="true"><MobileNavigationOverlay links={navigationLinks} currentPage={activePath} /></div>
         </div>
       </header>
       {/* Match the fixed header height so the first page section does not slide underneath it. */}
-      <div aria-hidden="true" className="h-[72px]" />
+      <div aria-hidden="true" className={landscape ? "h-[108px]" : "h-[72px]"} />
     </>
   )
 }

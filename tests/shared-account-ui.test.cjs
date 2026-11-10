@@ -47,7 +47,7 @@ function componentHarness(file, name, props, overrides = {}) {
     if (filename.endsWith(".json")) return JSON.parse(readFileSync(filename, "utf8"))
     const exports = {}
     cache.set(filename, exports)
-    const code = ts.transpileModule(readFileSync(filename, "utf8"), { fileName: filename, compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
+    const code = ts.transpileModule(readFileSync(filename, "utf8"), { fileName: filename.replace(/\.mjs$/, ".ts"), compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
     const requireModule = id => {
       if (Object.hasOwn(mocks, id)) return mocks[id]
       if (id === "lucide-react" || id.startsWith("@/components/ui/")) return new Proxy({}, { get: (_, key) => String(key) })
