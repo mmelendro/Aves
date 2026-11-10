@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Portal as HoverCardPortal } from "@radix-ui/react-hover-card"
 import { ImageIcon } from "lucide-react"
 import type { NzChecklistPhoto } from "@/content/new-zealand-checklist-photos"
@@ -20,9 +20,12 @@ function Photograph({ photo }: { photo: NzChecklistPhoto }) {
 export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChecklistPhoto; name: string }) {
   const [quickLook, setQuickLook] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const returningFocus = useRef(false)
   return <Dialog open={expanded} onOpenChange={setExpanded}>
     <HoverCard open={quickLook && !expanded} onOpenChange={setQuickLook} openDelay={250} closeDelay={200}>
-      <HoverCardTrigger asChild>
+      <HoverCardTrigger asChild onFocus={event => {
+        if (returningFocus.current) { event.preventDefault(); returningFocus.current = false }
+      }}>
         <DialogTrigger asChild>
           <button type="button" onClick={() => setQuickLook(false)} aria-label={`View photograph of ${name}`} className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-md border border-emerald-200 px-2 text-xs font-medium text-emerald-900 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
             <ImageIcon className="h-4 w-4" aria-hidden="true" /><span>Photo</span>
@@ -38,7 +41,7 @@ export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChe
         </HoverCardContent>
       </HoverCardPortal>
     </HoverCard>
-    <DialogContent className="max-h-[90dvh] w-[calc(100vw_-_1.5rem)] overflow-y-auto rounded-xl bg-white text-emerald-950 motion-reduce:animate-none [&>button]:min-h-11 [&>button]:min-w-11 [&>button]:grid [&>button]:place-items-center">
+    <DialogContent onCloseAutoFocus={() => { returningFocus.current = true }} className="max-h-[90dvh] w-[calc(100vw_-_1.5rem)] overflow-y-auto rounded-xl bg-white text-emerald-950 motion-reduce:animate-none [&>button]:min-h-11 [&>button]:min-w-11 [&>button]:grid [&>button]:place-items-center">
       <DialogTitle className="pr-8 leading-6">{name}</DialogTitle>
       <DialogDescription>Reference photograph of {photo.bird.commonName} ({photo.bird.scientificName}). It does not establish local presence or a guaranteed sighting.</DialogDescription>
       <Photograph photo={photo} />
