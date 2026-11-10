@@ -176,3 +176,17 @@ test("custom regional guides retain direct navigation to every neighbouring regi
   assert.ok(nodes(tree).some(node => node.props?.["data-map-zoom"] === "victoria"))
   assert.equal(nodes(tree).some(node => node.type === "select"), false)
 })
+
+test("every Australian regional guide renders one resizable bird/map pair", async () => {
+  const load = loader({
+    "@/components/navigation-header": { NavigationHeader: () => null },
+    "@/components/footer": { Footer: () => null },
+    "next/navigation": { useRouter: () => ({push(){}}), usePathname: () => "/", notFound(){throw Error("Unexpected missing region")} },
+  })
+  const Page = load("app/regions/[slug]/page.tsx").default
+  for (const region of load("content/regions.ts").regions) {
+    const html = renderToStaticMarkup(await Page({params:Promise.resolve({slug:region.id})}))
+    assert.equal((html.match(/data-aves-map="true"/g)||[]).length,1,region.id)
+    assert.match(html,/role="separator"/)
+  }
+})
