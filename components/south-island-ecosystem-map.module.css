@@ -1,4 +1,4 @@
-.card { display:flex; flex-direction:column; min-width:0; padding:1rem; border:1px solid #d1e9db; border-radius:1rem; background:rgba(255,255,255,.7); overflow:auto; }
+.card { height:var(--discovery-panel-height,auto); display:flex; flex-direction:column; min-width:0; padding:1rem; border:1px solid #d1e9db; border-radius:1rem; background:rgba(255,255,255,.7); overflow:auto; }
 .figure { display:flex; flex-direction:column; flex:1; min-height:10rem; flex-shrink:0; }
 .map { display:block; width:100%; height:22rem; min-height:8rem; overflow:hidden; }
 .map:focus-visible { outline:2px solid #047857; outline-offset:2px; border-radius:.5rem; }

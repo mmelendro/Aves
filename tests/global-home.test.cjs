@@ -189,6 +189,8 @@ test("global homepage and footer offer the three public destinations with full-p
   ])
   const Home = load("app/page.tsx").default
   const html = renderToStaticMarkup(React.createElement(Home))
+  assert.match(html, /data-face="map"/, "world map is the opening guide face")
+  assert.ok(html.indexOf('aria-labelledby="world-map-heading"') < html.indexOf('id="destination-heading"'), "map precedes introductory copy")
   const heading = html.match(/<h1\b[\s\S]*?<\/h1>/)[0]
   assert.match(heading, /aria-label="Where will birds take you\?"/, "one stable readable sentence")
   assert.match(heading, /type="button"[^>]*data-flipped="false"/, "word is keyboard/touch operable before any interaction")
