@@ -29,6 +29,10 @@ export function writeNzPlaceIdeas(storage: Pick<Storage,"setItem" | "removeItem"
   } catch { return false }
 }
 const lineFor = (id: string) => `Place idea: ${names.get(id)}`
+/** Plain public labels can be copied when a browser cannot carry the tab basket. */
+export function nzPlaceIdeaText(ids: string[]) {
+  return validNzPlaceIdeas(ids) ? ids.map(lineFor).join("\n") : ""
+}
 /** The guest deliberately appends readable ideas to the existing private notes. */
 export function mergeNzPlaceNotes(message: string, ids: string[]): {message:string; error?:string} {
   if (!validNzPlaceIdeas(ids)) return {message,error:"These place choices could not be verified. Please choose them again."}
