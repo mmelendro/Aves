@@ -64,9 +64,8 @@ export function CookieBanner() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">We Value Your Privacy</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  We use cookies to enhance your browsing experience, serve personalized content, and analyze our
-                  traffic. By clicking "Accept All", you consent to our use of cookies. You can customize your
-                  preferences or learn more in our{" "}
+                  AVES remembers your privacy choices and uses essential cookies for sign-in. No analytics or
+                  advertising service is active in this version. Choose your preferences or read our{" "}
                   <a href="/cookies" className="text-emerald-600 hover:text-emerald-700 underline">
                     Cookie Policy
                   </a>

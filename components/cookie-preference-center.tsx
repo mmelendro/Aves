@@ -82,7 +82,7 @@ export function CookiePreferenceCenter() {
       required: true,
       details: [
         "Authentication and login sessions",
-        "Shopping cart functionality",
+        "Shared AVES account access",
         "Security and fraud prevention",
         "Cookie consent preferences",
         "Form submission and validation",
@@ -97,7 +97,7 @@ export function CookiePreferenceCenter() {
       required: false,
       details: [
         "Language and region preferences",
-        "Tour comparison selections",
+        "Destination preferences",
         "Accessibility settings",
         "Previously viewed content",
         "User interface customizations",
@@ -106,7 +106,7 @@ export function CookiePreferenceCenter() {
     {
       key: "analytics" as const,
       title: "Analytics Cookies",
-      description: "Help us understand how visitors use our website to improve user experience.",
+      description: "Save your analytics preference. No analytics service is active in this version.",
       icon: BarChart3,
       color: "purple",
       required: false,
@@ -121,12 +121,12 @@ export function CookiePreferenceCenter() {
     {
       key: "marketing" as const,
       title: "Marketing Cookies",
-      description: "Used to deliver relevant advertisements and measure campaign effectiveness.",
+      description: "Save your advertising preference. No advertising service is active in this version.",
       icon: Target,
       color: "orange",
       required: false,
       details: [
-        "Personalized tour recommendations",
+        "Future advertising preference",
         "Social media integration",
         "Email campaign tracking",
         "Retargeting advertisements",

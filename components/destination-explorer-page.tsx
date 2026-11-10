@@ -19,7 +19,7 @@ export default function DestinationExplorerPage({ map, children, initialRegionId
   const showEditorial=scope.country===initialCountryId&&scope.region===(initialRegionId ?? "")
   const region=destinationRegions[scope.country]?.find(item=>item.id===scope.region)
   const country=destinations.find(item=>item.id===scope.country)
-  const title=country ? `${titleStyle==="birding" && region ? "Birding in" : "Explore"} ${placeInSentence(region?.name || country.name)}` : "Explore the world"
+  const title=country ? `${titleStyle==="birding" && region && scope.country!=="new-zealand" ? "Birding in" : "Explore"} ${placeInSentence(region?.name || country.name)}` : "Explore the world"
   return localizeHome(<SouthIslandHabitatProvider>
     <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
