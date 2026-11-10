@@ -85,7 +85,7 @@ test('opposite previews open registered viewers and return to their originating 
   let tree=h.render(),restore,focused=false
   const context=find(tree,n=>n.type==='FieldGuideProvider').props.value
   const unregister=context.registerMap(onClose=>{restore=onClose})
-  find(tree,n=>n.props['aria-label']==='View this region on the map').props.onClick({currentTarget:{focus(){focused=true}}})
+  find(tree,n=>n.props['aria-label']==='View this region on the map').props.onClick({currentTarget:{isConnected:true,focus(){focused=true}}})
   h.render();assert.equal(typeof restore,'function')
   restore();tree=h.render();assert.equal(find(tree,n=>n.props['data-face']).props['data-face'],'birds');assert.equal(focused,true)
   unregister();restore=undefined

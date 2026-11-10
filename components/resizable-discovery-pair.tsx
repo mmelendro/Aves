@@ -103,7 +103,10 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     const open = pending.target === "map" ? mapOpener.current : birdOpener.current
     open?.(()=>{
       setFace(pending.origin)
-      requestAnimationFrame(()=>pending.trigger?.focus({preventScroll:true}))
+      requestAnimationFrame(()=>{
+        const target=pending.trigger?.isConnected ? pending.trigger : turnRef.current
+        target?.focus({preventScroll:true})
+      })
     })
   },[face,layout])
 
