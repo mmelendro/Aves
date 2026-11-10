@@ -2,7 +2,15 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
-## Current direct preview expansion · 11 November 2026
+## Current mobile map and heading glass · 11 November 2026
+
+Runtime ab66589b433eaaa185b4d05eed11a9c49f3f5f2b; tree aca0c1c3239dff37b52e2f822f6547e928290607.
+Production dpl_4K28GQMoq7mMSxVStynGMRtTd9jj in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Recovery branch checkpoint/2026-11-11-mobile-map-glass.
+Previous runtime 79bba2f209555250414a21cb277946a893e9c208 / deployment dpl_EP7mSzuuNicjtRg9srnLqPFuif8x.
+Inspect the previous deployment's READY state/source, then assign BOTH aves.bio/www aliases and verify public/account routes and HTTPS. Rebuild the pinned source in the same surviving project only if needed. Preserve project-domain registration and Git history.
+
+## Previous direct preview expansion · 11 November 2026
 
 Runtime 79bba2f209555250414a21cb277946a893e9c208; tree 988ca6468114a1a04bcb222a117f616a28844261.
 Production dpl_EP7mSzuuNicjtRg9srnLqPFuif8x in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.

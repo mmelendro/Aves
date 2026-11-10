@@ -6,24 +6,26 @@ Updated 11 November 2026, Sydney. Read this status and HANDOFF-CURRENT.md before
 
 One consolidated application serves the global homepage, Colombia, Australia, New Zealand, accounts and APIs. The owner explicitly approved publication and continued improvements. Preserve the one-site architecture and established URLs.
 
-Current map-first guide runtime: 79bba2f209555250414a21cb277946a893e9c208.
-Production deployment: dpl_EP7mSzuuNicjtRg9srnLqPFuif8x in project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
-Publication verification is recorded in RECIPROCAL-GUIDE-CUES-2026-11-11.md.
+Current map-first guide runtime: ab66589b433eaaa185b4d05eed11a9c49f3f5f2b.
+Production deployment: dpl_4K28GQMoq7mMSxVStynGMRtTd9jj in project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Publication verification is recorded in MOBILE-MAP-GLASS-2026-11-11.md.
 Use release/aves-global or feature/field-guide-card as the maintained source, after checking fresh GitHub heads. The historical country branches now contain the same consolidated source, not separate current applications.
 
 Delivered: one shared two-sided map/bird guide, selected-region/current-bird thumbnail on the map and expanded map, explicit turning button, retained resizable comparison, reduced motion and inactive-face keyboard isolation. The global homepage opens on the world map before introductory copy. Explorer pages open on the map. The map precedes the compact bird-cue footer; turning reveals the card without resetting its camera or chosen geography. Viewport-based map/photo sizing, contained photographs and persistent guide/map controls support the responsive frame. Selection still changes bird collections and surrounding planning content. Existing map layers remain available.
 
-Validation: 490 automated checks, strict TypeScript, hosted builds and browser acceptance. Exact phone viewport, physical Safari/touch and background playback remain unverified; desktop acceptance is not a claim of perfect mobile fit or an unbreakable site. No backend, database, auth, billing or provider configuration changed. The US$1 safeguard was unchanged, not freshly inspected.
+Validation: 492 automated checks, strict TypeScript, hosted builds and browser acceptance. Exact phone viewport, physical Safari/touch and background playback remain unverified; desktop acceptance is not a claim of perfect mobile fit or an unbreakable site. No backend, database, auth, billing or provider configuration changed. The US$1 safeguard was unchanged, not freshly inspected.
 
 Reciprocal cues now make both faces one card: Birds on the map side, a selected-region map thumbnail on the bird side. Both use the same compact footer and turn the mounted guide with focus restoration. The map thumbnail uses existing reviewed geography, highlights the selected region and remains unchanged when carousel slides change. Cropped photos keep authored focal points; fitted guide photos stay centred and fully visible, so cover offsets cannot clip their heads. Hidden reverse-face controls are visually excluded after the midpoint of the turn. No automatic bird-face detection or complete per-photo eye-anchor audit is claimed. See RECIPROCAL-GUIDE-CUES-2026-11-11.md.
 
 The small map and bird cues now open the actual mounted map or full bird carousel directly in native full-screen dialogs. Close/Escape restores the originating card face and focus, with a fallback when a full-screen switching control has disappeared. Both expanded viewers keep the opposite preview available; the selected region, current slide, layers and camera are retained. The explicit turning button and comparison mode remain. Full-screen bird zoom controls sit below the head area. See GUIDE-PREVIEW-EXPANSION-2026-11-11.md.
 
+South Island mobile layout fix is published: the map precedes one 44px toolbar; layers/background choices and long place/habitat details open only on request. Island navigation uses one row. The shared heading contour has a small frosted backing with WebKit and reduced-transparency fallbacks. Native browser zoom measured a 340 CSS px layout with a 269 × 44px toolbar, five 44px buttons and no horizontal overflow. This is not a physical phone/Safari test. A proposed iframe review harness was blocked by existing framing protection and removed, with that protection preserved. See MOBILE-MAP-GLASS-2026-11-11.md.
+
 ## Prioritised remaining work
 
 1. Complete the all-page visual/style audit: shared headers, regional right-facing birds and contours, footers, typography, titles, focus, maps and responsive controls. Review actual 320/390px phone layouts and touch/Safari. Audit individual photographed eye/head anchors, beginning with images without authored focal points; do not invent face-detection coverage. Keep the map as the main entry and surrounding content synchronised with selection. Extend the existing working pattern rather than adding duplicate maps.
 2. Finish the actual Vercel project-domain registration transfer, then retire extra projects after HTTPS, redirects, account/callback routes and recovery records pass. Aliases are consolidated, but aves.bio/www registration remains on the old global project. Do not delete it first. Its autoAssignCustomDomains is disabled. Connector capability limits remain, not missing owner authorisation.
-3. Finish the unified interactive contact form and frosted landscape/header treatment. Preserve existing WIP. Remaining style/cookie copy is preserved at wip/single-app-style-polish (27883a8); only its preview header offset has shipped.
+3. Finish the unified interactive contact form. The shared frosted landscape/header treatment has shipped; review its appearance across remaining routes. Preserve existing WIP. Remaining style/cookie copy is preserved at wip/single-app-style-polish (27883a8); only its preview header offset has shipped.
 4. Audit all photographed Australia/NZ birds against their complete supported ranges/habitats, including NSW examples reported by the owner. Include all national/regional endemics in the sourced checklists. Photographed selections are not complete regional checklists.
 5. Source-verified B Corp tourism/business map layers, further conservation/habitat layers, public places, routes, media and context in the retained programme below. Never label an unverified operator as certified or invent a commercial relationship.
 
