@@ -40,7 +40,7 @@
   .worldView, .mapStage[data-map-view="country"] .worldView { transition: none; }
 }
 .mediaPanel {
-  --discovery-media-height: auto;
+  --discovery-media-height:var(--guide-photo-height,auto);
   min-width: 0; overflow: hidden; border: 1px solid #d1fae5; border-radius: 1.5rem; background: white;
 }
 @container (min-width: 624px) {
