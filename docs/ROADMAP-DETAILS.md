@@ -1,19 +1,12 @@
 # AVES detailed acceptance criteria
 
 Latest release, 10 November 2026: selection-linked headers/local flocks are live in
-both apps. South Island satellite shading and the public 362/377 checklist references
-are live in main. PRs #10/#9 merged after explicit approval. All 363 live checks passed.
-See RELEASE-2026-11-10-SELECTION-THUMBNAILS.md and HANDOFF-CURRENT.md. Prior preview
-wording below describes earlier checkpoints, not pending implementation. Private-picker
-port and fifteen remaining images are still pending; eBird permission enquiry is unsent.
-
-Current 10 November status: established contours, main map controls and one-person
-team are live. Selection-linked headers/local flocks, satellite shading and public
-checklist thumbnails are source-complete in main PR #10 and separate AU PR #9,
-with preview evidence in the named PREVIEW documents. Public checklist reference
-coverage is 362/377; fifteen await verified safe sources. Private-picker port remains
-next UI work. South Island eBird readiness is assessed, with written commercial-use
-permission required and its enquiry unsent. HANDOFF-CURRENT.md owns exact status.
+both applications. Main South Island satellite shading and 362/377 public checklist
+references are live; PRs #10/#9 are merged. Private-picker port is prepared in draft
+PR #11, with 299 tests, builds and isolated component browser checks. Real signed-in
+candidate save/reopen and the private shell remain unverified. It is not live.
+Fifteen public image sources remain pending; the eBird enquiry is unsent.
+HANDOFF-CURRENT.md owns exact runtime, preview evidence and release permission.
 
 
 Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for current delivered scope, runtime
@@ -23,6 +16,48 @@ cutover and retirement gates. This document retains the full product requirement
 The dated priority headings and historical next-step notices below describe the
 original sequence; they do not order implementation or repeat completed releases. Historical state/order notices were
 archived in [the pre-066 snapshot](archive/2026-11-09-before-aves-066/README.md).
+
+## AVES-069: optional Certified B Corp business map layer
+
+Owner request recorded 10 November 2026. Backlog / planning only, alongside the
+future eBird layer; neither displaces the current private-picker acceptance gate.
+Start with a small South Island batch, then reuse the approach for other countries
+and selected regions. No implementation, import or production release is implied.
+
+Acceptance:
+
+- Optional, independently toggleable business layer, off by default. Filter the
+  curated records to the selected country/region and preserve map selection,
+  enlargement, drag/zoom, satellite transparency, native links and other layers.
+  Use small, legible markers, clustering where needed, and an accessible list.
+- Verify current certification through B Lab's official directory and a matching
+  business-owned source for each public location. Distinguish certified legal
+  entity/brand scope from an individual branch, outlet or headquarters. Do not
+  imply that a retailer is certified because it stocks a certified brand.
+- Prefer visitor-relevant accommodation, food, transport, guiding and experiences
+  for the pilot. Store stable ID, public name, verified coordinates and precision,
+  country/region, category, official profile URL, business/location source URL,
+  certification/scope as published, and last checked date. Show unknowns honestly.
+- Popovers show name, category, certification source and last checked date, with
+  native links to the official profile and business. Explain curated coverage and
+  empty results. Certification does not establish availability, AVES partnership,
+  endorsement, booking readiness or uniformly low environmental impact.
+- Keep public source records, provider adaptation and rendering separate for future
+  app reuse. Review access/reuse rights before any bulk retrieval; do not assume
+  a public API or scrape/import the directory under this planning instruction.
+  Use plain text until any certification-logo usage rights are verified.
+- Apply the ecotourism brief and environmental stewardship principles through
+  transparent evidence, wildlife/community care, modest assets and responsible
+  supplier discovery. Do not turn certification into an invented impact score or
+  claim that AVES is certified. Supplier relationships and bookings stay separate.
+
+Primary references, checked 10 November 2026:
+[B Lab directory](https://www.bcorporation.net/en-us/find-a-b-corp/),
+[B Lab regional directory guidance](https://bcorporation.com.au/find-b-corps/),
+[B Lab ESC stewardship guidance](https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/).
+The directory landing page is dynamic; no business records have been collected.
+No new spending, accounts, provider/database changes or contact are authorised by
+this backlog entry. Prepare a sourced pilot preview and seek release approval.
 
 ## Verified pilot status, 10 November 2026
 

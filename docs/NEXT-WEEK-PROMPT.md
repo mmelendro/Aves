@@ -49,6 +49,13 @@ Continue unresolved image verification independently, without guessed taxon subs
 Australia map enlargement/controls remain a later separate port; broader satellite
 rollout requires registered geometry and rights. Do not infer completion from main.
 
+Retained map request AVES-069: optional Certified B Corp business layer, South
+Island first, then countries/regions. Acceptance is in ROADMAP-DETAILS.md and the
+inbox. Verify current certification/entity scope and actual public locations,
+retain official profile/source/date, show curated coverage honestly and avoid
+implied endorsement. Source rights/access assessment precedes retrieval. This is
+backlog only; no import, account/provider change or production layer was selected.
+
 The eBird follow-up is assessed and its enquiry drafted, not sent. Written commercial
 API permission is a dependency. Do not fetch data, create accounts, retrieve keys,
 scrape or send the enquiry without the applicable explicit instruction. Keep API

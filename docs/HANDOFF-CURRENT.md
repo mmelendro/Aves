@@ -60,6 +60,11 @@ saved places, origin filters, ecological/historical context, verified places, pl
 continuous calls, maps and natural-context design. Follow AGILE-PLAN.md and the
 UX-DELIVERY-PROCESS.md, including media metadata preflight and personal language.
 
+Owner also requested AVES-069, an optional Certified B Corp business map layer.
+It is recorded in the roadmap/inbox, with a sourced South Island pilot before
+broader regional reuse. Certification scope, real public locations, dates and
+source rights must be verified. No layer/import/release has been implemented.
+
 South Island eBird readiness is assessed in NEXT-EBIRD-SOUTH-ISLAND.md. Written
 commercial API permission is required. Its enquiry is unsent; no API request/key,
 new account or data import was made. Do not scrape or bypass those conditions.

@@ -14,6 +14,7 @@ The prior long plan is archived in archive/2026-11-10-before-selection-thumbnail
 | Public NZ checklist thumbnails | Live: 362/377 references, 15 pending | Safe source verification continues |
 | Private NZ checklist thumbnails | Draft PR #11: 362/377, not live | Finish actual private acceptance, then explicit release approval |
 | Audit/cleanup | Published with this increment | Preserve confirmed cleanup |
+| Certified B Corp map layer (AVES-069) | Owner request recorded, backlog | Verify directory access/rights and a small South Island public-location batch before UI implementation |
 | South Island eBird layer | Readiness assessment complete | Written commercial-use permission before API work; enquiry unsent |
 | Unified C3 private acceptance | Blocked on safe staging | Preserve gate; no provisioning retry or C4/C5 cutover |
 
