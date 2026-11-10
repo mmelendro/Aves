@@ -9,6 +9,7 @@ function componentHarness(file, name, props, overrides = {}) {
   let cursor = 0
   const pendingEffects = [], effectDeps = new Map()
   const react = {
+    createContext: value => ({Provider:"ContextProvider",defaultValue:value}),
     useId: () => "test-id",
     useContext: context => overrides.context?.(context) ?? null,
     useState(initial) {
