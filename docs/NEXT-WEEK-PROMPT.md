@@ -1,6 +1,6 @@
 # AVES UX-first continuation prompt
 
-Read HANDOFF-CURRENT.md, RELEASE-2026-11-10-SELECTION-THUMBNAILS.md, AGILE-PLAN.md,
+Read STYLE-FUNCTIONALITY-CHECKPOINT-2026-11-10.md, HANDOFF-CURRENT.md, RELEASE-2026-11-10-SELECTION-THUMBNAILS.md, AGILE-PLAN.md,
 AVES-CHANGE-INBOX.md, ROADMAP-DETAILS.md, ROLLBACK-CHECKPOINTS.md,
 UX-DELIVERY-PROCESS.md and NEXT-EBIRD-SOUTH-ISLAND.md. Fetch fresh GitHub history and
 inspect worktrees. Another chat may have advanced work. Do not use an old pending
@@ -38,8 +38,13 @@ is the existing birds/AVES invitation animation. Other selectable items are phot
 zoom, opt-in continuous calls, sourced origin filters, surrounding sea context,
 saved places and the data-dependent B Corp pilot. The owner has now selected all nine increments, one by one: Australia map
 controls, remaining map-style parity, photo zoom, invitation animation, continuous
-calls, origin filters, sea context, saved places, then the B Corp pilot. The first
-is in progress on feature/au-map-controls. Finish and verify each before advancing;
+calls, origin filters, sea context, saved places, then the B Corp pilot. Australia map controls are hosted-verified at 7e2d7ab, not live. Map-style parity
+is source-complete in main PR #13 (4ddab4a) and AU PR #12 (2b623db), with local
+checks passed but hosted styling acceptance pending. The older AU preview does
+not contain those styling changes. Both new preview requests hit Vercel’s free
+daily deployment cap (api-deployments-free-per-day, retry after 24 hours). Do not
+retry until capacity returns or change billing/protection. Use one batched commit
+and ref update per increment to avoid intermediate builds. Finish and verify each before advancing;
 record dependencies honestly and preserve separate production approval.
 Keep PR #11 private acceptance and the 15 unresolved image sources explicit. Do
 not report either as completed or assume a background process is running. Preserve
@@ -64,8 +69,9 @@ production approval. Preview requested on the Australia/shared-portal project:
 dpl_3jMXJjr97LPpHwig2T6X3VwTWA36. Do not mistake automatic main-project previews for
 this shared-portal candidate. No schema/provider/account changes were made.
 Continue unresolved image verification independently, without guessed taxon substitutes.
-Australia map enlargement/controls remain a later separate port; broader satellite
-rollout requires registered geometry and rights. Do not infer completion from main.
+Australia map controls have a separate verified preview in PR #12; its subsequent
+styling changes await hosted acceptance. Broader satellite rollout still requires
+registered geometry and rights. Do not infer production completion from a preview.
 
 Retained map request AVES-069: optional Certified B Corp business layer, South
 Island first, then countries/regions. Acceptance is in ROADMAP-DETAILS.md and the

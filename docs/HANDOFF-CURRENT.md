@@ -1,5 +1,20 @@
 # AVES current handoff
 
+## Latest style/functionality checkpoint
+
+Owner selected all nine tasks one by one. Australia map controls are implemented
+and hosted-verified as a preview (7e2d7ab / dpl_BYQfL3MYBM6vsbPEJpDQpKHTxZfc).
+The next map-style increment is prepared in main draft PR #13 (4ddab4a) and AU
+draft PR #12 (2b623db). It passes 162 main / 301 AU tests, strict TypeScript and
+both local production builds. Hosted styling acceptance remains pending because
+Vercel rejected new deployments at its free daily cap. No production, billing,
+account, protection, API or database changes were made. The tested control-only
+preview does not include the new styling. Read
+STYLE-FUNCTIONALITY-CHECKPOINT-2026-11-10.md and AGILE-PLAN.md before continuing.
+Finish styling browser acceptance when capacity returns, then start photo zoom.
+Preserve PR #11's signed-in gate, fifteen pending images and existing release rules.
+
+
 Updated 10 November 2026 after the approved release. Fetch current GitHub history
 before editing. Historical pending paragraphs do not reopen completed work.
 

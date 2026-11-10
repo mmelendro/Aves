@@ -4,6 +4,30 @@ Updated 10 November 2026. HANDOFF-CURRENT.md owns current runtime and release
 permission. Detailed acceptance remains in ROADMAP-DETAILS.md and the request inbox.
 The prior long plan is archived in archive/2026-11-10-before-selection-thumbnails/.
 
+## Current execution checkpoint
+
+The owner selected all nine increments, in order: Australia map controls, remaining
+map-style parity, photo zoom, invitation animation, continuous calls, origin filters,
+sea context, saved places, then the B Corp pilot. Keep each verified before moving on.
+
+1. Australia map controls: implemented and hosted-verified at runtime 7e2d7ab,
+   preview dpl_BYQfL3MYBM6vsbPEJpDQpKHTxZfc. Not live. PR #12 also now contains
+   the subsequent Australia style changes, which are not in that tested preview.
+2. Map-style parity: source prepared in main PR #13 (4ddab4a) and AU PR #12
+   (2b623db). 162 main / 301 AU tests, strict TypeScript and both local builds pass.
+   Hosted styling acceptance is pending, not completed.
+3. Vercel rejected both new styling preview requests at the free daily deployment
+   cap: api-deployments-free-per-day, more than 100, retryAfter 86400 seconds.
+   No mapped CLI is installed; no billing, plan, account or protection changes made.
+   Stop deployment retries until capacity returns. Do not create more preview
+   deployments from per-file intermediate commits. Batch each increment's reviewed
+   files into one commit/ref update; preserve both existing projects.
+4. Next action is hosted styling acceptance, then photo zoom. PR #11 signed-in
+   acceptance and fifteen missing image references remain independent unfinished
+   work. No further selected implementation has started. Production unchanged.
+
+Full evidence and limits: STYLE-FUNCTIONALITY-CHECKPOINT-2026-11-10.md.
+
 ## Current delivery state
 
 | Increment | State | Next action |
@@ -24,8 +48,8 @@ Owner updated priorities on 10 November 2026: show a selectable task list, favou
 visible style and working interactions, and keep useful work available while
 started acceptance/source work is unresolved. This order supersedes older automatic
 next-task instructions. The owner subsequently selected all nine increments, one at a time. Execution
-order is choices 1, 3, 2, 4, 5, 6, 7, 8, 9. Australia map controls are in progress
-on feature/au-map-controls. Complete and verify each increment before the next.
+order is choices 1, 3, 2, 4, 5, 6, 7, 8, 9. Australia map controls have a verified preview
+on feature/au-map-controls; the following styling increment awaits hosted checks. Complete and verify each increment before the next.
 Production approval remains a separate gate. Do not claim background commands or parallel agents are running.
 
 ### Started work to finish
@@ -39,9 +63,9 @@ Production approval remains a separate gate. Do not claim background commands or
 
 | Choice | Task | First useful slice | Readiness |
 | --- | --- | --- | --- |
-| 1 | Australia map enlargement and controls, AVES-038 | Reuse the existing enlarge/close, zoom/reset and drag pattern in the separate Australia app; preserve selection, focus and attribution | Recommended next; inspect current AU components first; physical pinch needs device verification |
+| 1 | Australia map enlargement and controls, AVES-038 | Reuse the existing enlarge/close, zoom/reset and drag pattern in the separate Australia app; preserve selection, focus and attribution | Verified control-only preview, not live; physical pinch remains unverified |
 | 2 | Photo zoom, AVES-051 | One shared bird/place viewer with zoom/reset, keyboard controls and intentional touch gestures, using existing image resolution | Ready for a bounded source-quality and interaction audit; do not invent image detail |
-| 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Ready for audit; homepage work is complete and must not be repeated |
+| 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Source prepared in PRs #12/#13; hosted acceptance blocked by deployment quota |
 | 4 | Birds / AVES invitation animation, AVES-067 | Reuse the existing restrained word transition in matching invitations, with stable text width and a still reduced-motion version | Small visual candidate; audit remaining instances before implementation |
 | 5 | Continuous bird-call listening, AVES-047 | Explicit session opt-in for calls to follow manual carousel changes, with one player and clear stop/mute states | Functional candidate; reuse playback coordination and handle missing/blocked calls |
 | 6 | Species-origin filters, AVES-025/048 | Make existing NZ native/introduced/unknown controls consistent across checklist and private picker; preserve chosen birds | Ready for a current-coverage audit; use existing sourced NZ data first |
