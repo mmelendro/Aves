@@ -6,6 +6,7 @@
  */
 "use client"
 
+import { placeInSentence } from "@/lib/place-language"
 import ColombiaRegionTargets from "./colombia-region-targets"
 
 import { useRegionPreview } from "./use-region-preview"
@@ -75,7 +76,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
               // A manual region choice takes priority over the bird's suggestion.
               // Keep its name visible; other labels appear on hover or keyboard focus.
               const selected = region.slug === selectedRegion
-              return <Link key={region.slug} href={`/regions/${region.slug}`} onKeyDown={event => { if (!media) preview.activateKey(event, region.slug, `/regions/${region.slug}`) }} onClick={event => { if (!media) preview.activate(event, region.slug) }} aria-label={`Explore ${region.name}${selected ? "; selected on the map" : ""}`} aria-current={selected ? "true" : undefined} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%` }} className={`group absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-30 hover:bg-emerald-950 hover:text-white focus-visible:z-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-20 border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "z-10 border-emerald-900/30 bg-white/95 text-emerald-950"}`}>
+              return <Link key={region.slug} href={`/regions/${region.slug}`} onKeyDown={event => { if (!media) preview.activateKey(event, region.slug, `/regions/${region.slug}`) }} onClick={event => { if (!media) preview.activate(event, region.slug) }} aria-label={`Explore ${placeInSentence(region.name)}${selected ? "; selected on the map" : ""}`} aria-current={selected ? "true" : undefined} title={region.name} style={{ left: `${region.x}%`, top: `${region.y}%` }} className={`group absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-bold shadow-sm transition-colors hover:z-30 hover:bg-emerald-950 hover:text-white focus-visible:z-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-20 border-white bg-emerald-950 text-white ring-2 ring-emerald-700 ring-offset-2" : "z-10 border-emerald-900/30 bg-white/95 text-emerald-950"}`}>
                 {selected ? <MapFeatherMarker /> : <span className="h-2 w-2 rounded-full bg-emerald-700" aria-hidden="true"/>}
               </Link>
             })}

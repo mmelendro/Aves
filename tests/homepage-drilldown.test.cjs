@@ -163,7 +163,7 @@ test("regional maps preserve real geometry, direct links and equivalent named se
     const html = renderToStaticMarkup(React.createElement(Map, { country }))
     const staticLinks = elements(Map({ country }), item => item.type === "a")
     for (const region of regions) {
-      assert.ok(staticLinks.some(link => link.props.href === region.href && link.props["aria-label"] === `Explore ${region.name}`), `${country}/${region.id}: named static Explore link retained`)
+      assert.ok(staticLinks.some(link => link.props.href === region.href && link.props["aria-label"] === `Explore ${load("lib/place-language.ts").placeInSentence(region.name)}`), `${country}/${region.id}: named static Explore link retained`)
     }
     if (country !== "colombia") assert.match(html, /preserveAspectRatio="xMidYMid meet"/)
     const selected = regions[regions.length - 1]

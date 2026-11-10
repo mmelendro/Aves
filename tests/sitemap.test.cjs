@@ -140,7 +140,7 @@ test("each listed Colombia page declares its own canonical URL", () => {
         compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
       }).outputText
       const result = {}
-      new Function("exports", "canonicalUrl", code)(result, canonicalUrl)
+      new Function("exports", "canonicalUrl", "colombiaBirdingTitle", "regions", code)(result, canonicalUrl, ...(australian ? [undefined,undefined] : [load("content/regions.ts").colombiaBirdingTitle,load("content/regions.ts").regions]))
       return result.metadata
     }
     return undefined

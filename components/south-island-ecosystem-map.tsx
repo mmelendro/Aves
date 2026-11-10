@@ -28,9 +28,9 @@ const ConservationOverlay = dynamic(() => import("./south-island-conservation-ov
 const colours: Record<SouthIslandEcosystem, string> = { forest: "#537b5d", mountains: "#ae9761", freshwater: "#438eac", coast: "#008477" }
 
 type MapPlace = { id: string; label: string; latitude: number; longitude: number; location: string; source: string }
-type Props = { selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
+type Props = { onZoomOutAtMinimum?: () => void; selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
 
-export default function SouthIslandEcosystemMap({ selected, onSelect, places, selectedPlace, onSelectPlace }: Props) {
+export default function SouthIslandEcosystemMap({ selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum }: Props) {
   const { layers } = useMapLayers()
   const [satelliteFailed, setSatelliteFailed] = useState(false)
   const satellite = layers.background === "satellite" && !satelliteFailed
@@ -81,7 +81,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
     </div>
     <div className={styles.controls} role="group" aria-label="Ecosystem map view controls">
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1} onClick={() => zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
+      <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1 && !onZoomOutAtMinimum} onClick={() => camera.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
       <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>

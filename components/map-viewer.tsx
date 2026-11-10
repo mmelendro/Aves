@@ -9,7 +9,7 @@ import styles from "./map-viewer.module.css"
  * Inline touch gestures require explicit Move; page/browser zoom remains native
  * elsewhere. Expanded maps own their gesture surface, not the whole document.
  */
-export function MapViewer({ children, label, gestures = true, credits, listenControl }: { children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode }) {
+export function MapViewer({ children, label, gestures = true, credits, listenControl, viewKey, onZoomOutAtMinimum }: { viewKey?: string; onZoomOutAtMinimum?: () => void; children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode }) {
   const dialog = useRef<HTMLDialogElement>(null), surface = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null)
   const [expanded, setExpanded] = useState(false), [move, setMove] = useState(false), [view, setView] = useState<MapView>(fitMapView), [gesturing, setGesturing] = useState(false)
   const viewRef = useRef(view), points = useRef(new Map<number,{x:number;y:number}>())
@@ -19,6 +19,7 @@ export function MapViewer({ children, label, gestures = true, credits, listenCon
   const box = () => ({ width: surface.current?.clientWidth || 1, height: surface.current?.clientHeight || 1 })
   function commit(next: MapView) { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) }
   function reset() { points.current.clear(); start.current = null; setGesturing(false); commit(fitMapView) }
+  useEffect(()=>{ reset() },[viewKey])
   function zoom(factor: number) { const b = box(); commit(zoomMapAt(viewRef.current, factor, {x:b.width/2,y:b.height/2}, b)) }
   function resize(open: boolean) {
     const element = dialog.current
@@ -48,7 +49,7 @@ export function MapViewer({ children, label, gestures = true, credits, listenCon
     <div className={styles.toolbar} role="group" aria-label={`${label} view controls`}>
       {gestures && <>
         <button className={styles.control} type="button" aria-label={`Zoom ${label} in`} disabled={view.zoom >= 4} onClick={()=>zoom(1.3)}><Plus size={18} aria-hidden="true"/></button>
-        <button className={styles.control} type="button" aria-label={`Zoom ${label} out`} disabled={view.zoom <= 1} onClick={()=>zoom(1/1.3)}><Minus size={18} aria-hidden="true"/></button>
+        <button className={styles.control} type="button" aria-label={`Zoom ${label} out`} disabled={view.zoom <= 1 && !onZoomOutAtMinimum} onClick={()=>view.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1/1.3)}><Minus size={18} aria-hidden="true"/></button>
         <button className={styles.control} type="button" aria-label={`Reset ${label} view`} onClick={reset}><RotateCcw size={18} aria-hidden="true"/></button>
         {!expanded && <button className={styles.control} type="button" aria-label={`Use touch gestures on ${label}`} aria-pressed={move} onClick={()=>{setMove(!move);points.current.clear();start.current=null}}><Hand size={18} aria-hidden="true"/></button>}
         <span className="text-xs tabular-nums text-emerald-900" aria-live="off">{view.zoom.toFixed(1)}×</span>

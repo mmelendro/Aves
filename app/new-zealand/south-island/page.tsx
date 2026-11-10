@@ -6,11 +6,11 @@ import SouthIslandResourceCarousel from "@/components/south-island-resource-caro
  */
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Compass, Heart } from "lucide-react"
+import { ArrowRight, Heart } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
-import NewZealandHeroExplorer from "@/components/new-zealand-hero-explorer"
+import SouthIslandUnifiedExplorer from "@/components/south-island-unified-explorer"
+import WorldDestinationMap from "@/components/world-destination-map"
 import SouthIslandPlacesExplorer from "@/components/south-island-places-explorer"
-import SouthIslandHabitatProvider from "@/components/south-island-habitat-context"
 import { newZealandContactHref } from "@/content/new-zealand"
 import { southIslandBriefHref, southIslandFieldGuides, southIslandPlanning } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
@@ -37,32 +37,8 @@ const textLinkStyle = "inline-flex min-h-11 items-center gap-2 rounded text-sm f
 export default function SouthIslandPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <GlobalHeader country="new-zealand" />
-      <SouthIslandHabitatProvider><main id="main-content" tabIndex={-1}>
-        <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-emerald-800">
-              <Link href="/" className={textLinkStyle}>All destinations</Link><span aria-hidden="true">/</span>
-              <Link href="/new-zealand" className={textLinkStyle}>New Zealand</Link><span aria-hidden="true">/</span>
-              <span aria-current="page">South Island</span>
-            </nav>
-            <div className="mx-auto mb-7 max-w-3xl text-center sm:mb-9">
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-medium text-emerald-800 sm:text-sm"><Compass className="h-4 w-4" aria-hidden="true" />AVES New Zealand</p>
-              <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl lg:text-5xl">The <span className="text-emerald-700">South Island</span></h1>
-              <p className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Let the birds lead you into the landscape.</p>
-              <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-gray-600">From mountain parrots to forest song and coastal wildlife, build a journey around the habitats that interest you. Leave room for good food, local stories and time to enjoy each place.</p>
-            </div>
-
-            {/* One content-driven explorer keeps this regional page consistent
-                with the country page, including calls, rights and saved picks. */}
-            <NewZealandHeroExplorer regionId="south-island" />
-
-            <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4">
-              {[["birdlife", "Birds & map"], ["places", "Habitats & places"], ["practical-planning", "Practical planning"], ["your-pace", "Your pace"], ["resources", "Listen, watch & read"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className={textLinkStyle}>{label}</a>)}
-            </nav>
-          </div>
-        </section>
-
+      <GlobalHeader />
+      <main id="main-content" tabIndex={-1}><SouthIslandUnifiedExplorer map={<WorldDestinationMap/>}>
         <section id="places" aria-labelledby="places-heading" className="scroll-mt-24 py-12 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-700">Start with a habitat</p>
@@ -139,8 +115,8 @@ export default function SouthIslandPage() {
             <p className="mt-4 text-sm leading-6 text-emerald-100">Routes, guides, dates, prices and reservations require separate confirmation.</p>
           </div></div>
         </section>
-      </main></SouthIslandHabitatProvider>
-      <GlobalFooter country="new-zealand" />
+      </SouthIslandUnifiedExplorer></main>
+      <GlobalFooter />
     </div>
   )
 }

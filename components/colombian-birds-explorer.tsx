@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { placeInSentence } from "@/lib/place-language"
 import { useHeaderLandscape } from "./header-landscape-context"
 import ColombiaRegionTargets from "./colombia-region-targets"
 import { MapViewer } from "./map-viewer"
@@ -450,7 +451,7 @@ export function ColombianBirdsExplorer() {
                                   left: `${region.coordinates.x}%`,
                                   top: `${region.coordinates.y}%`,
                                 }}
-                                aria-label={`Explore ${region.name} region`}
+                                aria-label={`Explore ${placeInSentence(region.name)} region`}
                                 aria-pressed={isSelected}
                                 aria-controls={currentRegion ? "selected-region-details" : undefined}
                               >

@@ -4,6 +4,7 @@
  * The select and full-name list provide 44px alternatives to small map locations.
  * First map activation previews; a later activation opens its real guide URL.
  */
+import { placeInSentence } from "@/lib/place-language"
 import { MapViewer } from "./map-viewer"
 import { useId, useState } from "react"
 import { ArrowRight, Feather } from "lucide-react"
@@ -60,18 +61,18 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
             {/* Preserve the reviewed paths, holes and fixed artwork order. Tiny
                 smoothing overlaps belong to the later painted path; selection
                 never reorders shapes, and borders do not enlarge hit regions. */}
-            {colombiaShapes.map(region => <a key={region.id} href={region.href} aria-label={`Explore ${region.name} planning region`} {...focusRegion(region)} className={`${styles.area} ${styles.colombiaArea}`} data-active={activeId === region.id} data-region-shape={region.id}>
+            {colombiaShapes.map(region => <a key={region.id} href={region.href} aria-label={`Explore ${placeInSentence(region.name)} planning region`} {...focusRegion(region)} className={`${styles.area} ${styles.colombiaArea}`} data-active={activeId === region.id} data-region-shape={region.id}>
               <path d={region.path} fillRule="evenodd" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
             </a>)}
           </g>
             : country === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => <a key={state.regionId} href={`/australia/regions/${state.regionId}`} aria-label={`Explore ${state.name}`} {...focusRegion(regions.find(region => region.id === state.regionId)!)} className={styles.area} data-active={activeId === state.regionId}><path d={state.path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/></a>)
-            : nz.islands.map(island => <a key={island.id} href={newZealandRegionHref(island.id)} aria-label={`Explore ${island.label}`} {...focusRegion(regions.find(region => region.id === island.id)!)} className={styles.area} data-active={activeId === island.id}>{island.paths.map((path,index) => <path key={index} d={path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/>)}</a>)}
+            : nz.islands.map(island => <a key={island.id} href={newZealandRegionHref(island.id)} aria-label={`Explore ${placeInSentence(island.label)}`} {...focusRegion(regions.find(region => region.id === island.id)!)} className={styles.area} data-active={activeId === island.id}>{island.paths.map((path,index) => <path key={index} d={path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/>)}</a>)}
         </svg>
         {country === "colombia" && regions.map(region => {
           const x=20+(320-vw*scale)/2+(region.x-vx)*scale, y=60+(244-vh*scale)/2+(region.y-vy)*scale
           // Whole shapes now supply the map hit areas. An oversized invisible
           // dot disk would steal hover/taps from neighbouring narrow regions.
-          return <a key={region.id} href={region.href} aria-label={`Explore ${region.name}`} {...focusRegion(region)} className={styles.location} data-active={activeId === region.id} data-region-marker={region.id}><circle cx={x} cy={y} r="8"/></a>
+          return <a key={region.id} href={region.href} aria-label={`Explore ${placeInSentence(region.name)}`} {...focusRegion(region)} className={styles.location} data-active={activeId === region.id} data-region-marker={region.id}><circle cx={x} cy={y} r="8"/></a>
         })}
         <g transform={`translate(${point.x-14},${point.y-14})`} pointerEvents="none"><MapFeatherMarker /></g>
       </svg></MapViewer>
@@ -81,10 +82,10 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
       {description && <p className="mb-2 text-xs leading-5 text-emerald-900" aria-live="polite">{description}</p>}
       <label htmlFor={`region-${id}`}>Locate a {country === "new-zealand" ? "main island" : country === "australia" ? "state or territory" : "planning region"}</label>
       <select id={`region-${id}`} value={active.id} onChange={event => preview.preview(event.target.value)}>{regions.map(region => <option key={region.id} value={region.id}>{region.name}</option>)}</select>
-      <a className={styles.regionAction} href={active.href}>Explore {active.name}<ArrowRight aria-hidden="true" size={16}/></a>
+      <a className={styles.regionAction} href={active.href}>Explore {placeInSentence(active.name)}<ArrowRight aria-hidden="true" size={16}/></a>
     </div>
     <p className={styles.credit}>{country === "colombia" ? "AVES planning-region artwork · Representative locations, not official administrative or precise ecological boundaries." : <><a href={country === "australia" ? australiaMapProvenance.sourceUrl : nz.source.url}>Natural Earth</a> · Public domain · {country === "australia" ? "External territories not shown." : "Main islands shown."}</>}</p>
     <details className={styles.details}><summary>Browse all {regions.length} {country === "new-zealand" ? "islands" : country === "australia" ? "states and territories" : "regions"}</summary><ul>{regions.map(region => <li key={region.id}><a href={region.href} onFocus={() => setActiveId(region.id)} data-active={activeId === region.id}>{region.name}</a></li>)}</ul></details>
-    <a href={href} className={styles.countryAction}>Explore {name}<ArrowRight aria-hidden="true" size={16}/></a>
+    <a href={href} className={styles.countryAction}>Explore {placeInSentence(name)}<ArrowRight aria-hidden="true" size={16}/></a>
   </article>
 }

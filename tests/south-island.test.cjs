@@ -82,9 +82,9 @@ test("South Island media keeps its exact sourced island membership, licensed pho
 test("the dedicated South Island page has canonical metadata, one local explorer and private planning entry", () => {
   const explorerCalls = []
   const pageLoad = createLoader({
-    "@/components/new-zealand-hero-explorer": function Explorer(props) {
+    "@/components/south-island-unified-explorer": function Explorer(props) {
       explorerCalls.push(props)
-      return React.createElement("div", { "data-south-island-explorer": props.regionId })
+      return React.createElement("div", { "data-south-island-explorer": true },props.children)
     },
   })
   const page = pageLoad("app/new-zealand/south-island/page.tsx")
@@ -92,7 +92,6 @@ test("the dedicated South Island page has canonical metadata, one local explorer
   assert.equal(page.metadata.openGraph.url, "https://aves.bio/new-zealand/south-island")
   const html = renderToStaticMarkup(React.createElement(page.default))
   assert.equal(explorerCalls.length, 1, "one shared map/carousel rather than duplicate regional viewers")
-  assert.equal(explorerCalls[0].regionId, "south-island")
   assert.match(html, /href="\/new-zealand"/)
   assert.match(html, /href="\/"/)
   assert.match(html, /href="\/account\?country=new-zealand&amp;region=south-island"/)

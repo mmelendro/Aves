@@ -6,6 +6,7 @@
  */
 "use client"
 
+import { placeInSentence } from "@/lib/place-language"
 import { MapViewer } from "./map-viewer"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -65,7 +66,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
               const label = labels[index]
               const highlighted = highlightedIslands.includes(island.id)
               return (
-                <Link key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${island.label}`} className="group outline-none">
+                <Link key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${placeInSentence(island.label)}`} className="group outline-none">
                   <g className={`${highlighted ? "fill-emerald-800" : "fill-[#c5dbd0]"} stroke-[#6e9582] transition-colors group-hover:fill-[#9cc4af] group-focus:fill-[#9cc4af] group-focus:stroke-emerald-950`}>
                     {island.paths.map((path, pathIndex) => <path key={pathIndex} d={path} strokeWidth={highlighted ? "2" : "1.2"} vectorEffect="non-scaling-stroke" fillRule="evenodd" className="group-focus:stroke-[3]" />)}
                   </g>
@@ -89,7 +90,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
       <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 className="font-medium text-emerald-950">{focusIsland ? focusIsland.label : "Explore the islands"}</h2>{focusIsland ? onResetFocus ? <button ref={backRef} type="button" onClick={() => { preview.clear(); onResetFocus(); if (focusedIsland) islandLinks.current[focusedIsland]?.focus({ preventScroll: true }) }} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</button> : <Link href="/new-zealand#regions" className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4">Back to New Zealand</Link> : <a href="#regions" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Island guides<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div>
       {mapFigure}
       <nav aria-label="Explore New Zealand islands" className="mt-2 grid grid-cols-1 gap-2">
-        {newZealandRegions.map(region => <Link key={region.id} ref={node => { islandLinks.current[region.id] = node }} href={newZealandRegionHref(region.id)} onClick={event => choose(event, region.id)} aria-label={`Explore ${region.name}`} className={`inline-flex min-h-11 items-center justify-center rounded-lg border px-1 text-sm font-medium transition-colors hover:border-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${highlightedIslands.includes(region.id) ? "border-emerald-700 bg-emerald-800 text-white" : "border-emerald-200 bg-white text-emerald-900"}`}>{region.id === "north-island" ? "North Island" : region.id === "south-island" ? "South Island" : "Rakiura"}</Link>)}
+        {newZealandRegions.map(region => <Link key={region.id} ref={node => { islandLinks.current[region.id] = node }} href={newZealandRegionHref(region.id)} onClick={event => choose(event, region.id)} aria-label={`Explore ${placeInSentence(region.name)}`} className={`inline-flex min-h-11 items-center justify-center rounded-lg border px-1 text-sm font-medium transition-colors hover:border-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 ${highlightedIslands.includes(region.id) ? "border-emerald-700 bg-emerald-800 text-white" : "border-emerald-200 bg-white text-emerald-900"}`}>{region.id === "north-island" ? "North Island" : region.id === "south-island" ? "South Island" : "Rakiura"}</Link>)}
       </nav>
       <p className="mt-2 text-xs leading-4 text-gray-600">{highlightedIslands.length ? "Highlighted: areas featured for this bird, not its complete range." : "Choose an island to explore its landscapes and birdlife."}</p>
     </div>

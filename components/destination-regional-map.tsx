@@ -1,3 +1,4 @@
+import { placeInSentence } from "@/lib/place-language"
 import ColombiaRegionTargets from "./colombia-region-targets"
 /**
  * Connected homepage map: selection filters the birds and retains regional zoom.
@@ -38,7 +39,7 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
       onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectRegion(id) } }}>
       {children}
     </g>
-  ) : <a key={id} href={href} aria-label={`Explore ${name}`} className={styles.regionControl}>{children}</a>
+  ) : <a key={id} href={href} aria-label={`Explore ${placeInSentence(name)}`} className={styles.regionControl}>{children}</a>
 
   if (country === "colombia") return (
     <div className="h-full w-full overflow-hidden" style={{ containerType: "size" }}>
@@ -51,7 +52,7 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
         const className = `absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-800/40 text-[10px] font-semibold hover:z-10 hover:bg-emerald-800 hover:text-white focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-10 border-transparent" : "bg-white text-emerald-950"}`
         const props = { style: { left: `${region.x}%`, top: `${region.y}%` }, className, title: region.name }
         return onSelectRegion ? <button key={region.slug} type="button" {...props} aria-label={`Preview ${region.name} birds`} aria-pressed={selected} onClick={() => onSelectRegion(region.slug)}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</button>
-          : <a key={region.slug} {...props} href={`/regions/${region.slug}`} aria-label={`Explore ${region.name}`}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</a>
+          : <a key={region.slug} {...props} href={`/regions/${region.slug}`} aria-label={`Explore ${placeInSentence(region.name)}`}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</a>
       })}
       </div>
     </div>

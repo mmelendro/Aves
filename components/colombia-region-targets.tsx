@@ -1,5 +1,6 @@
 "use client"
 
+import { placeInSentence } from "@/lib/place-language"
 import type { MouseEvent, KeyboardEvent } from "react"
 import boundaries from "@/content/colombia-planning-boundaries.json"
 import { colombiaMapMarkers } from "@/content/colombia-map-markers"
@@ -17,7 +18,7 @@ export default function ColombiaRegionTargets({ onSelect, onActivate, onActivate
       const region = colombiaMapMarkers.find(region => region.name === boundary.name)
       if (!region) return null
       const href = `/regions/${region.slug}`
-      return <a key={region.slug} href={href} aria-label={`Explore ${region.name} region`} className="group outline-none"
+      return <a key={region.slug} href={href} aria-label={`Explore ${placeInSentence(region.name)} region`} className="group outline-none"
         onClick={event => { if (onSelect && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) { event.preventDefault(); onSelect(region.slug) } else onActivate?.(event, region.slug) }}
         onKeyDown={event => onActivateKey?.(event, region.slug, href)}>
         <path d={boundary.path} fill="transparent" stroke="transparent" vectorEffect="non-scaling-stroke" className="cursor-pointer group-hover:fill-emerald-800/25 group-focus:fill-emerald-800/25 group-focus:stroke-emerald-950" />
