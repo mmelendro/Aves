@@ -119,11 +119,11 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
           <ResizableDiscoveryPair initialFace="map" mapCue={guideMapCue(zoomed ? destination.id : undefined,regionId,region?.name)} birdCue={birds.find(bird=>bird.id===birdId) ?? birds[0]} mapLabel="Resize world map and bird photographs"
             map={<div className={`${styles.mapPanel} ${southIsland ? styles.layeredPanel : ""}`}>{southIsland ? <div id="south-island-bird-map" className="scroll-mt-24 gap-2">
               <SouthIslandEcosystemMap selected={sharedHabitat?.value ?? "all"} onSelect={value=>sharedHabitat?.select(value)} places={southIslandPlaceContexts} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} onZoomOutAtMinimum={()=>selectRegion("")} onSelectIsland={selectRegion}/>
-              <nav aria-label="Map zoom level" className="flex flex-wrap gap-2">
+              <div className={styles.islandScope}>
                 <button type="button" className={styles.backButton} onClick={backToWorld}>World</button>
-                <span aria-hidden="true">/</span><button type="button" className={styles.backButton} onClick={()=>selectRegion("")}>Back to New Zealand</button>
-              </nav>
-              <label className="block text-sm font-medium text-emerald-950">Explore an island<select aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
+                <label className="sr-only" htmlFor="explorer-island">Explore an island</label>
+                <select id="explorer-island" aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select>
+              </div>
             </div> : <MapViewer label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
               {/* Both views share one footprint. Inert also removes the hidden
                   world's SVG buttons from keyboard and assistive navigation. */}

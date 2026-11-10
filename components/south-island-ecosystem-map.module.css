@@ -1,8 +1,8 @@
-.card { height:var(--discovery-panel-height,auto); display:flex; flex-direction:column; min-width:0; padding:1rem; border:1px solid #d1e9db; border-radius:1rem; background:rgba(255,255,255,.7); overflow:auto; }
-.figure { display:flex; flex-direction:column; flex:1; min-height:10rem; flex-shrink:0; }
-.map { display:block; width:100%; height:22rem; min-height:8rem; overflow:hidden; }
+.card { height:var(--discovery-panel-height,auto); display:flex; flex-direction:column; min-width:0; padding:.5rem; border:1px solid #d1e9db; border-radius:1rem; background:rgba(255,255,255,.7); position:relative; min-height:0; overflow:hidden; }
+.figure { overflow:hidden; display:flex; flex-direction:column; flex:1; min-height:8rem; flex-shrink:1; }
+.map { display:block; width:100%; height:100%; flex:1; min-height:0; overflow:hidden; }
 .map:focus-visible { outline:2px solid #047857; outline-offset:2px; border-radius:.5rem; }
-.controls { display:flex; flex-wrap:wrap; gap:.25rem; align-items:center; margin:.4rem 0; }
+.controls { display:grid; grid-template-columns:repeat(4,44px) minmax(0,1fr) 44px; gap:0; align-items:center; margin:0; width:100%; }
 .control { display:grid; place-items:center; min-width:44px; min-height:44px; border:1px solid #d1e9db; border-radius:999px; background:#fff; color:#065f46; }
 .control:hover,.control[aria-pressed="true"] { background:#d1fae5; }
 .control:focus-visible { outline:2px solid #047857; outline-offset:2px; }
@@ -21,4 +21,10 @@
 
 .seaLabels { fill:#315b67; font-style:italic; letter-spacing:.025em; }
 
-.mapToolbar { position:sticky; top:0; z-index:4; flex-shrink:0; background:#f7fdf9ed; backdrop-filter:blur(12px); }
+.mapToolbar { position:static; z-index:auto; flex-shrink:0; background:#f7fdf9ed; backdrop-filter:blur(12px); }
+
+.mapHeading { flex-shrink:0; min-height:24px; padding:0 .25rem; }
+.mapDetails { flex-shrink:0; }
+.mapDetails > summary { display:flex; align-items:center; min-height:44px; cursor:pointer; border-top:1px solid #d1e9db; padding-inline:.25rem; color:#065f46; font-size:.75rem; }
+.detailsPanel { position:absolute; z-index:20; inset-inline:.5rem; bottom:44px; max-height:75%; overflow:auto; overscroll-behavior:contain; padding:.75rem; border:1px solid #b7dccc; border-radius:1rem; background:#f7fdf9f5; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:0 8px 24px #064e3b1a; }
+.mapDetails > summary:focus-visible { outline:2px solid #047857; outline-offset:-2px; }

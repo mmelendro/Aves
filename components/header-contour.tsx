@@ -62,11 +62,11 @@ export function HeaderContour({ profile, country = "colombia", regionId, placeId
     return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); reduced.removeEventListener("change", sync) }
   }, [])
   const g = drawing?.geometry
-  return <svg ref={ref} data-header-contour={profile ? `${country}-${profile.terrain}` : "new-zealand"} data-header-flock-species={flock.scientificName || flock.name} aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
+  return <><div className={styles.glass} data-header-glass="true" aria-hidden="true"/><svg ref={ref} data-header-contour={profile ? `${country}-${profile.terrain}` : "new-zealand"} data-header-flock-species={flock.scientificName || flock.name} aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
     {previous && <g key={`old-${previous.key}`} className={styles.leave}><ContourScene g={previous.geometry} width={previous.width} family={previous.family} /></g>}
     {g ? <g key={drawing!.key} className={previous ? styles.enter : undefined}><ContourScene g={g} width={drawing!.width} family={drawing!.family} /></g> : <path d="M0 108H1440V0H0Z" fill="white" />}
 
-  </svg>
+  </svg></>
 }
 
 function ContourScene({g,width,family}:{g:Geometry;width:number;family:string}){ return <>

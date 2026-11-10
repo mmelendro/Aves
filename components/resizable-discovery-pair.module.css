@@ -92,3 +92,6 @@
 
 /* Reserve the existing credit and bird-call row, including its narrow-screen wrap. */
 @container (max-width:767px) { .pair[data-layout="guide"] { --discovery-cue-space:180px; } }
+
+/* Short phone windows scroll the page rather than collapsing the real map. */
+.pair[data-layout="guide"]:has([data-ecosystem-card]) { --discovery-panel-height:clamp(28rem,calc(100svh - var(--guide-header-offset,7rem) - 5rem),44rem); height:var(--discovery-panel-height); }

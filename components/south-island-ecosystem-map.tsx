@@ -74,22 +74,9 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
   function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(false) }
-  return <MapViewer label="South Island explorer map" gestures={false} listenControl={<SouthIslandSoundscapes />}><section className={styles.card} aria-labelledby={`${id}-title`}>
-    <div className={styles.mapToolbar}>
-    <div className="flex flex-wrap items-center justify-between gap-2">
-      <h2 id={`${id}-title`} className="font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2>
-      <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All habitats</button>
-    </div>
-    <div className={styles.controls} role="group" aria-label="Ecosystem map view controls">
-      <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1 && !onZoomOutAtMinimum} onClick={() => camera.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
-      <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>
-    </div>
-    <p id={`${id}-gestures`} className="mb-2 text-[11px] leading-5 text-gray-600">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
-    <SouthIslandMapLayers />
-    </div>
+  return <MapViewer label="South Island explorer map" gestures={false} listenControl={<SouthIslandSoundscapes />}><section data-ecosystem-card="true" className={styles.card} aria-labelledby={`${id}-title`}>
+    <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2></div>
+    <p id={`${id}-gestures`} className="sr-only">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
     {satelliteFailed && layers.background === "satellite" && <p role="status" className="text-xs text-amber-900">Satellite image unavailable. The habitat map is shown instead.</p>}
     <figure className={styles.figure}>
       <svg ref={svgRef} viewBox={map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
@@ -170,6 +157,21 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
       </svg>
       <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · NASA Earth Observatory · 2004 composite · Historical overview" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && selected !== "all" && selected !== "coast" && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
     </figure>
+    <div className={styles.mapToolbar}>
+    <div className={styles.controls} role="group" aria-label="Ecosystem map view controls">
+      <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
+      <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1 && !onZoomOutAtMinimum} onClick={() => camera.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
+      <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
+      <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
+      <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>
+      <SouthIslandMapLayers />
+    </div>
+    </div>
+    <details className={styles.mapDetails}>
+      <summary>Places, habitats &amp; map details</summary>
+      <div className={styles.detailsPanel}>
+        <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>
+        <p className="mb-2 text-xs leading-5 text-gray-600">Use Move to drag or pinch the map. Turn it off to select habitats. Keyboard: + / −, arrow keys and Home.</p>
     <PublicPlaceDetails />
     <div className={styles.scale} aria-label="Map distance scale">
       {scale ? <><div style={{ width: scale.widthPixels }} className={styles.scaleBar} /><p>{scale.distanceMetres / 1000} km at {Math.abs(scale.latitude).toFixed(1)}° S · map centre</p></> : <p>Distance scale appears when the map is measured.</p>}
@@ -198,5 +200,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
       </div>
     </details>
     {onSelectIsland ? <nav aria-label="Neighbouring New Zealand islands" className="flex flex-wrap gap-4">{[["", "Back to New Zealand"],["north-island","Explore the North Island"],["rakiura","Explore Rakiura"]].map(([id,label])=><button type="button" key={id} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline focus-visible:outline focus-visible:outline-2" onClick={()=>onSelectIsland(id)}>{label}</button>)}</nav> : <><Link href="/new-zealand#regions" className="mt-1 inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</Link><nav aria-label="Neighbouring New Zealand islands" className="flex flex-wrap gap-4"><Link href="/new-zealand#region-north-island" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">North Island guide</Link><Link href="/new-zealand#region-rakiura" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">Rakiura guide</Link></nav></>}
+      </div>
+    </details>
   </section></MapViewer>
 }
