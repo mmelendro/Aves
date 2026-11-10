@@ -6,6 +6,8 @@
  * geometry and attribution are imported from content/australia-map.ts rather than drawn here.
  */
 
+import MapFeatherMarker from "./map-feather-marker"
+import { Feather } from "lucide-react"
 import { MapViewer } from "./map-viewer"
 import { useId } from "react"
 import {
@@ -20,12 +22,6 @@ type AustraliaRegionMapProps = {
 }
 
 const focusRegions = australiaMapStates.filter((state) => state.regionId !== null)
-// Callouts enlarge the click targets for small territories without inventing or enlarging map boundaries.
-const smallTerritories = [
-  { id: "australian-capital-territory", label: "ACT", x: 620, y: 493, line: "573.81,460.3 608,514 620,514" },
-  { id: "jervis-bay-territory", label: "Jervis Bay", x: 620, y: 427, line: "597.38,458.06 608,448 620,448" },
-]
-
 // This is a controlled component: its parent receives selection events and passes the new selection back.
 export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: AustraliaRegionMapProps) {
   const id = useId()
@@ -34,6 +30,7 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
   return (
     <div className="overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-sm">
         <div className="relative bg-gradient-to-br from-stone-50 via-emerald-50/40 to-white px-3 pb-2 pt-4 sm:px-6">
+          <p className="mb-2 flex items-center justify-center gap-2 text-center text-sm font-medium text-emerald-900"><Feather size={16} aria-hidden="true" />{selectedState?.name || "Choose a region"}</p>
           <MapViewer label="Australian states and territories map" credits={<a href={australiaMapProvenance.sourceUrl} className="underline">Natural Earth · Public domain · Generalised boundaries; external territories not shown</a>}>
           <svg
             viewBox={australiaMapViewBox}
@@ -46,12 +43,11 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
             <desc id={`${id}-description`}>
               Generalised outlines of all six states, the Northern Territory, the ACT and Jervis Bay Territory.
               {selectedState ? ` ${selectedState.name} is selected.` : " Choose a region to explore."}
-              {" "}Use Tab, then Enter or Space to select. ACT and Jervis Bay have labelled callouts because they are small at this scale. External territories are not shown.
+              {" "}Use Tab, then Enter or Space to select. All regions also have named controls outside the map. External territories are not shown.
             </desc>
             {australiaMapStates.map((state) => {
               const isFocus = state.regionId !== null
               const isSelected = isFocus && selectedRegion === state.regionId
-              const hasCallout = smallTerritories.some(territory => territory.id === state.regionId)
               return (
                 <path
                   key={state.code}
@@ -62,11 +58,11 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
                   strokeLinejoin="round"
                   vectorEffect="non-scaling-stroke"
                   fillRule="evenodd"
-                  role={isFocus && !hasCallout ? "button" : undefined}
-                  tabIndex={isFocus && !hasCallout ? 0 : undefined}
-                  aria-label={isFocus && !hasCallout ? `Explore ${state.name}` : undefined}
-                  aria-pressed={isFocus && !hasCallout ? isSelected : undefined}
-                  aria-hidden={!isFocus || hasCallout ? true : undefined}
+                  role={isFocus ? "button" : undefined}
+                  tabIndex={isFocus ? 0 : undefined}
+                  aria-label={isFocus ? `Explore ${state.name}` : undefined}
+                  aria-pressed={isFocus ? isSelected : undefined}
+                  aria-hidden={!isFocus ? true : undefined}
                   onClick={state.regionId ? () => onSelectRegion(state.regionId!) : undefined}
                   onKeyDown={state.regionId ? (event) => {
                     if (event.key === "Enter" || event.key === " ") {
@@ -78,37 +74,7 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
                 />
               )
             })}
-            {/* Text labels are decorative; interactive outlines/callouts already have accessible names. */}
-            {australiaMapStates.filter((state) => state.shortName).map((state) => (
-              <text
-                key={state.code}
-                x={state.label[0]}
-                y={state.label[1]}
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fill={selectedRegion === state.regionId ? "#ffffff" : state.regionId ? "#064e3b" : "#526b64"}
-                fontSize={state.regionId ? 26 : 23}
-                fontWeight={state.regionId ? 600 : 500}
-                className="pointer-events-none select-none"
-                aria-hidden="true"
-              >
-                {state.shortName}
-              </text>
-            ))}
-            {/* Tiny territories use one keyboard-accessible callout instead of duplicate focus targets. */}
-            {smallTerritories.map(territory => {
-              const state = focusRegions.find(item => item.regionId === territory.id)
-              if (!state) return null
-              const selected = selectedRegion === territory.id
-              return <g key={territory.id}>
-                <polyline points={territory.line} fill="none" stroke="#047857" strokeWidth="1.5" aria-hidden="true" />
-                <circle cx={state.label[0]} cy={state.label[1]} r="3" fill="#047857" aria-hidden="true" />
-                <g role="button" tabIndex={0} aria-label={`Explore ${state.name}`} aria-pressed={selected} onClick={() => onSelectRegion(territory.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); if (!event.repeat) onSelectRegion(territory.id) } }} className="group cursor-pointer focus:outline-none">
-                  <rect x={territory.x} y={territory.y} width="94" height="42" rx="9" fill={selected ? "#065f46" : "#ffffff"} stroke="#6e9582" strokeWidth="1.5" className="group-focus-visible:stroke-[4] group-hover:stroke-[3]" />
-                  <text x={territory.x + 47} y={territory.y + 22} textAnchor="middle" dominantBaseline="middle" fontSize="17" fontWeight="600" fill={selected ? "#ffffff" : "#064e3b"} className="pointer-events-none">{territory.label}</text>
-                </g>
-              </g>
-            })}
+            {selectedState && <svg x={selectedState.label[0]-22} y={selectedState.label[1]-22} width="44" height="44" pointerEvents="none"><MapFeatherMarker size={44}/></svg>}
           </svg>
           </MapViewer>
           <div className="mb-3 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-600">
