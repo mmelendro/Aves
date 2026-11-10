@@ -5,8 +5,7 @@
  */
 import { canonicalUrl } from "@/lib/site-path"
 import { ColombianBirdsExplorer } from "@/components/colombian-birds-explorer"
-import { NavigationHeader } from "@/components/navigation-header"
-import { Footer } from "@/components/footer"
+import { GlobalHeader, GlobalFooter } from "@/components/global-navigation"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -25,11 +24,11 @@ export const metadata: Metadata = {
 export default function AvesExplorerPage() {
   return (
     <div className="relative min-h-screen">
-      <NavigationHeader currentPage="/aves-explorer" />
-      <main className="relative">
+      <GlobalHeader/>
+      <main id="main-content" tabIndex={-1} className="relative">
         <ColombianBirdsExplorer />
       </main>
-      <Footer transparent={true} />
+      <GlobalFooter/>
     </div>
   )
 }

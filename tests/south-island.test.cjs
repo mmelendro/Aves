@@ -398,3 +398,12 @@ test("every Colombian regional guide has one map and a resizable bird pair", () 
   for(const select of html.matchAll(/<select[^>]*>([\s\S]*?)<\/select>/g)) assert.doesNotMatch(select[1],/<svg/,"native region selects contain options only")
  }
 })
+
+test("the legacy Colombian explorer URL renders the same single map and sourced guide directory",()=>{
+ const Page=load("app/aves-explorer/page.tsx").default
+ const html=renderToStaticMarkup(React.createElement(Page))
+ assert.equal((html.match(/data-aves-map="true"/g)||[]).length,1)
+ assert.equal((html.match(/aria-roledescription="carousel"/g)||[]).length,1)
+ assert.match(html,/aria-label="Colombian regional guides"/)
+ for(const region of load("content/regions.ts").regions)assert.ok(html.includes(`href="/regions/${region.id}"`))
+})
