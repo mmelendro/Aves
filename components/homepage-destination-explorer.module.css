@@ -48,3 +48,11 @@
      Species details stay inside the photo instead of stretching the map. */
   .mediaPanel { --discovery-media-height: calc(var(--discovery-panel-height) - 47px); }
 }
+
+/* The layer map has a toolbar and island controls above its own scroll area.
+   Size that area inside the pair, so it cannot cover the planning content. */
+@container (min-width: 624px) {
+  .layeredPanel > div { display:flex; flex-direction:column; height:100%; min-height:0; }
+  .layeredPanel dialog:not([data-expanded]) { height:0; min-height:0; }
+  .layeredPanel dialog:not([data-expanded]) > div:last-child > div > section { height:100%; }
+}
