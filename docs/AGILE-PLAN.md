@@ -12,6 +12,7 @@ The prior long plan is archived in archive/2026-11-10-before-selection-thumbnail
 | Selection-linked headers, small local flocks, personal planning copy | Live | Preserve merged PR #10 / AU PR #9 |
 | South Island selected-habitat satellite shading, zero-capable slider | Live | Preserve published main increment |
 | Public NZ checklist thumbnails | Live: 362/377 references, 15 pending | Safe source verification continues |
+| Private NZ checklist thumbnails | Draft PR #11: 362/377, not live | Finish actual private acceptance, then explicit release approval |
 | Audit/cleanup | Published with this increment | Preserve confirmed cleanup |
 | South Island eBird layer | Readiness assessment complete | Written commercial-use permission before API work; enquiry unsent |
 | Unified C3 private acceptance | Blocked on safe staging | Preserve gate; no provisioning retry or C4/C5 cutover |
@@ -20,8 +21,10 @@ The prior long plan is archived in archive/2026-11-10-before-selection-thumbnail
 
 1. The combined candidate and separate AU candidate are approved, published and
    live-verified. Preserve RELEASE-2026-11-10-SELECTION-THUMBNAILS.md; do not redeploy them.
-2. Port the same reference-image UX to the separate private NZ picker, preserving
-   IDs/storage and verifying private save/reopen. No account/schema/provider changes.
+2. Finish private PR #11 acceptance, source 6e802f0. The 362-reference port passes
+   299 tests, strict TypeScript and local build. Actual signed-in save/reopen,
+   private dialog focus and small-screen checks remain pending; mock transport
+   coverage is not a hosted save. No account/schema/provider changes or release yet.
 3. Continue safe source verification for the remaining public checklist entries.
    Never substitute another taxon or reuse a rejected payload through a workaround.
 4. Port map enlargement/controls to the separate Australia app as its own slice.

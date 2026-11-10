@@ -25,7 +25,7 @@ The public NZ checklist now has reference images for 362/377 living entries; fif
 remain pending. It reuses 31 curated photos and adds 331 local assets, with complete
 credits and labelled illustrations. Viewing does not select a bird. Rejected metadata/
 licence candidates are excluded. Personal prompts use “your”. The separate private
-picker has not been ported. Australia still lacks the main-app map enlargement port.
+picker has a prepared 362-reference port in draft PR #11; it is not live. Australia still lacks the main-app map enlargement port.
 
 162 main integration and 296 AU tests, strict TypeScript, local and exact production
 builds passed. All 363 live route/metadata/asset checks passed, including SHA-256 for
@@ -45,8 +45,13 @@ major dependency overrides or present that audit as certification.
 
 ## Next work and gates
 
-Next bounded UI slice: port reference images to the existing private NZ picker,
-preserving saved IDs/storage and verifying private save/reopen/keyboard/credits.
+Private picker port is prepared in draft PR #11, source 6e802f0 on
+feature/private-checklist-thumbnails, targeting australia/preview. 299 tests, strict
+TypeScript and local build passed. Mocked editor save/reopen preserves stable IDs;
+actual signed-in save/reopen, dialog keyboard/focus and small-screen acceptance
+remain pending. Local browser rehearsal was blocked by access policy. Read the
+feature branch's docs/PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. Do not redo the port.
+Finish its private preview acceptance before explicit production approval.
 Continue remaining image-source verification independently. Retain owner focus on
 saved places, origin filters, ecological/historical context, verified places, playback,
 continuous calls, maps and natural-context design. Follow AGILE-PLAN.md and the

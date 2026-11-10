@@ -30,12 +30,18 @@ No private save was tested by this public release. Further releases need explici
 
 ## Next useful slice
 
-Port the reference-image experience to the separate private NZ picker. Inspect its
-existing files first: main gallery/photo-map and HoverCard modules are absent there.
-Prefer existing UI packages, preserve saved IDs/storage, keep per-file provenance
-and preflight metadata. Do not add schema/provider/account changes. Verify viewing
-without selecting, keyboard/dialog focus, save/reopen/edit and private access using
-authorised synthetic fixtures only. Prepare a hosted preview before release approval.
+The private reference-image port is prepared, not live: draft PR #11 targets
+australia/preview from feature/private-checklist-thumbnails, source 6e802f0. Read its
+docs/PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. It uses existing Dialog UI and 362 safe
+local references, stable saved IDs and per-file credits. 299 tests, strict TypeScript
+and local build passed. The real editor's submit/reopen handlers were tested with
+mocked account API transport only. Actual signed-in save/reopen/edit, private dialog
+keyboard/focus and small-screen reflow remain pending. Local browser rehearsal was
+blocked by browser access policy. Do not weaken auth or publish a demonstration
+editor. Finish acceptance with an authorised synthetic session and obtain explicit
+production approval. Preview requested on the Australia/shared-portal project:
+dpl_3jMXJjr97LPpHwig2T6X3VwTWA36. Do not mistake automatic main-project previews for
+this shared-portal candidate. No schema/provider/account changes were made.
 Continue unresolved image verification independently, without guessed taxon substitutes.
 Australia map enlargement/controls remain a later separate port; broader satellite
 rollout requires registered geometry and rights. Do not infer completion from main.

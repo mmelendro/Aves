@@ -57,6 +57,11 @@ it is georeferenced. South Island already has a registered NASA composite and is
 the strongest first pilot. Broader map rollout needs aligned regional geometry.
 No paid provider, location tracking or new account is authorized by this design.
 
+Private checklist follow-up: draft PR #11 prepares 362 credited local references
+for the separate shared-portal NZ picker. Source 6e802f0 passes 299 tests, strict
+TypeScript and local build; actual private browser/save acceptance is pending.
+It is not a production release. Follow HANDOFF-CURRENT.md before continuing.
+
 ## Retained request ledger
 
 Status cells below distinguish scoped pilots from broader requests. Consult the
