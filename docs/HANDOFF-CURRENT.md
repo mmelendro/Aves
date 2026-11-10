@@ -20,12 +20,16 @@ was exercised by this public release. See RELEASE-2026-11-10-AU-SELECTION.md.
 
 Main is separately published at a3445b7 / dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi, with
 selection headers, selected-habitat satellite shading and public checklist references.
-Its 362/377 reference images have not been ported to this private picker. Australia
+A private 362/377 reference-image port is now prepared in draft PR #11, not live. Australia
 map enlargement is also a separate later port. Follow the main maintained branch's
 HANDOFF-CURRENT.md / NEXT-WEEK-PROMPT.md for the canonical cross-app queue.
 
-Next: port verified references to the private NZ picker, preserving IDs/provenance
-and checking view-without-select, keyboard/focus, save/reopen/edit and private access.
+Next: finish PR #11 private preview acceptance. Source 6e802f0 passes 299 tests,
+strict TypeScript and local build; mocked editor save/reopen preserves bird IDs.
+Hosted build is READY. Signed-out access redirects to canonical live sign-in,
+preserving NZ/South Island intent; this is not a candidate save test. Actual
+hosted signed-in save, keyboard/focus and reflow are not yet verified.
+Read PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. Do not reimplement the prepared port.
 Keep existing UI packages where practical. eBird readiness is assessed and its
 permission enquiry is unsent; written commercial API permission is required before use.
 

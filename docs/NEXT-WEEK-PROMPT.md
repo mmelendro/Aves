@@ -7,12 +7,19 @@ PR #9 is merged and published; do not redo selection headers/flocks/personal cop
 296 tests, strict TypeScript/builds, ten AU public routes and 340 CSS-pixel live
 reflow passed. Physical Safari/touch and private flows were not verified here.
 
-Next bounded UI slice: port verified reference images to the existing private NZ
-picker. This branch has the controlled picker/checklist, but not main's carousel/
-photo-map or HoverCard module. Reuse available UI, preserve stable IDs/storage,
-per-image provenance and safe local assets. Verify viewing without selection,
-keyboard/focus, save/reopen/edit and privacy with authorised synthetic fixtures only.
-No schema/provider/account change. Prepare a preview and obtain production approval.
+Current work: draft PR #11 (feature/private-checklist-thumbnails), source 6e802f0,
+adds 362 credited references to the private NZ picker. It is not live. Read
+PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. 299 tests, strict TypeScript and local build
+passed; editor save/reopen was checked with mocked API transport only. Finish
+actual private keyboard/dialog focus, small-screen and signed-in synthetic
+save/reopen/edit acceptance. Local browser rehearsal was blocked by access policy.
+Do not weaken auth or expose a demo editor. Preview deployment:
+dpl_3jMXJjr97LPpHwig2T6X3VwTWA36, correct Australia/shared-portal project.
+Hosted build READY; signed-out redirect preserves NZ/South Island intent but
+uses canonical live sign-in. Ordinary login cannot verify this private preview. No release approval has been given for #11.
+After acceptance, obtain explicit production approval. Fifteen image sources remain
+pending; continue those or Australia map controls as a separate bounded increment.
+No schema/provider/account changes.
 
 Australia map enlargement and wider registered satellite coverage remain separate.
 Do not infer them from main. eBird API needs written commercial permission; do not
