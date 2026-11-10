@@ -1,199 +1,139 @@
-> Current order (9 November): AI is deferred because privacy entitlement requires paid access. No new purchases/subscriptions authorized. Next:012c homepage map-card consistency; no code started. Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). This supersedes older ordering notes below.
+# AVES comprehensive delivery list
 
-# AVES — agile design and implementation plan
+Updated 10 November 2026 after hosted synthetic-planner checks. This is the current
+priority and status index. ROADMAP-DETAILS.md retains full acceptance requirements,
+AVES-CHANGE-INBOX.md retains original requests, and HANDOFF-CURRENT.md records the
+last approved live release. Historical sprint notes do not override this index.
 
-**Current checkpoint —9November:** source f941bb9 and shared accounts5659bea are published and verified. See [current prompt](NEXT-WEEK-PROMPT.md) and [release checkpoint](RELEASE-2026-11-09-PLACES-ACCOUNTS.md). Historical release notices below are superseded. Private account hierarchy now includes `/account/email-updates`; exclude it from public/XML sitemaps. Next visual priority012c; automatic private proposal research/story059 remains queued. Pause after sync.
+## Published refinement release
 
-<details><summary>Historical plan and architecture evidence</summary>
+The owner approved production publication on10 November2026. Both releases are
+READY and their production aliases were verified after publication.
 
-**Latest release — 9 November 2026: Arthur’s Pass 3D place-card pilot published; paused.** Source3ef94db / dpl_CwtAGCjuBe4XdYHw72GKxNrJYwHC. ONE card flips between a sourced local map and two credited landscape photographs, with explicit controls, retained photo choice, inert hidden face and reduced-motion CSS.118 source tests, TypeScript/hosted build and staged/live checks passed within the recorded limits; mobile screenshot capture was unreliable, no physical-phone test. AU/account runtime unchanged3f644a1. Read [the release checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-PLACE-CARD.md) and [the current prompt](NEXT-WEEK-PROMPT.md); they supersede older status notes. Next proposed038 map zoom/scale requires owner selection.047–052 remain queued.
-
-**Latest release —9November2026: homepage birds↔aves word flip published; paused.** Source3528885 / dpl_By1hgiuQgM1pKQ3G3Tr3esoPPU3u. Heading “Where will birds take you?”; only the word changes, in matching borderless lowercase green italics.116 full source checks plus14 focused refinement checks (overlapping), TypeScript/build and desktop/phone-sized verification passed within the recorded limits. AU/account runtime unchanged3f644a1. See [RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md](RELEASE-2026-11-09-HOMEPAGE-WORD-FLIP.md). Next proposed: ONE South Island local-map/landscape3D place-card pilot015/037, Sol medium. Do not start it automatically. Background media041, sea context042, map hover preview043, paired place names044, team refresh045 and double-click navigation046 are queued.
-
-This notice supersedes older release/next-step suggestions below; NEXT-WEEK-PROMPT.md is the clean current entrypoint.
-
-**Latest release —9November2026: South Island land-cover map and simpler species wording published; paused.** Source011de84 / dpl_BHkhR6U5U1eGgWLFdoUq4gtLk7g4; AU/shared account3f644a1 / dpl_FxbDazX29G5cqCnuYP8ZmGDNwy34. Attributed LCDB2023/24 map/filter pilot is live; public/private controls now say “Search377 species” and “All species”, with extinct entries still excluded.115 source tests,9 focused wording/catalogue checks, TypeScript/builds and desktop/mobile verification passed within the release notes’ limits. See [RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md](RELEASE-2026-11-09-SOUTH-ISLAND-MAP-LAYER.md). Next owner priorities:026 homepage birds→AVES word flip, then015/037 ONE South Island place-map/landscape3D card pilot. Zoom+accurate scale038 and other follow-ups remain queued. Wait for one selected increment; Sol medium recommended.
-
-**Current execution order is in NEXT-WEEK-PROMPT.md:**026 homepage word flip, then the owner-confirmed ONE South Island3D place card pilot015/037. Later map zoom+scale038, place carousel expansion, media previews039, whole-region context006c and North Island parity040 remain separate. Older status/ordering notes below are historical and do not override this checkpoint.
-
-**Owner checkpoint additions —9November:** next small map candidate038 includes zoom AND a georeferenced metric scale bar.037 places map/photo carousel (future drone footage) and039 checklist hover/focus/tap media previews remain separate.040 North Island reaches the same finished template/feature depth after South Island readiness, with its own verified local content. Keep published/queued states distinct; no automatic rollout. Full criteria remain in ROADMAP-DETAILS.md.
-
-**Additional queued refinements — AVES-038/039:** accessible South Island map zoom/reset; checklist photo previews on hover/focus/tap, later video, using verified licensed media first.037 remains the place-map/photo carousel with future drone footage. Pick one small next release; remain paused after the current sync. Visible picker wording is shortened to “species” while extinct entries stay excluded.
-
-**Next proposed — AVES-037, recorded9November:** replace South Island’s text-only Habitats & places cards with a matching place-map/photo carousel, later supporting drone footage. Preserve verified local imagery, concise notes, official links and credits. See ROADMAP-DETAILS.md037. Planning only; finish the current release sync and remain paused.
-
-**Latest release — 9 November 2026: South Island ecosystem filter and living-only NZ checklist published; paused.** Four coarse habitat filters reuse 30 sourced South Island profiles and the shared carousel; Info/calls/wishes remain connected. Public and private pickers show 377 living entries; 55 extinct records remain archived, not browsable/selectable. Source df46c45 / dpl_7VQUbcr1NuTAWxFx3BAaQE4E3Ri2; account app c0a31ec / dpl_CEczrT3zECEYVLwS7WKSa19Fryag. Desktop/mobile,113 source +275 account tests, TypeScript, hosted builds and live sitemap checks passed. See [ecosystem release checkpoint](RELEASE-2026-11-09-SOUTH-ISLAND-ECOSYSTEMS.md). Detailed ecosystem polygons/place overlays and other-region rollout remain queued; this pilot does not claim mapped habitat boundaries. Keep Sol medium for the next selected code increment; wait for selection. This supersedes older next-step/status notes.
-
-**Latest checkpoint — 9 November 2026: private NZ budget controls published; paused.** Optional accommodation/food/activities sliders and editable whole-unit amounts, six currency codes, save/edit/reopen and frozen owner review verified live. Currency selection labels entered numbers; automatic conversion is NOT implemented. Source app remains 4d1c703; account app e8656ad / dpl_HWRbDEFKZXJdhfuwbURNWsjJ7xHf. See [private-budget release checkpoint](RELEASE-2026-11-09-PRIVATE-BUDGETS.md). Latest follow-ups: embedded resources036; featured places/ecosystem map and verified local bird filtering034/013; dated sitewide currency conversion035. Keep Sol medium for the next selected coding increment; wait for selection. This notice supersedes older next-step/state notes.
-
-**Latest release — 9 November 2026: B4 South Island resources published and paused.** Six curated podcast/documentary/video/reading cards, desktop/phone verification,15 targeted tests, TypeScript/build and live human/XML sitemap checks passed. Source4d1c703 / dpl_GVWQfbLQdu1kZYzU3eqvj1uxoqd6; AU unchanged6ba7fee. See [RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCES.md](RELEASE-2026-11-09-SOUTH-ISLAND-RESOURCES.md). Next proposed B5 private trip options needs actual private dates/gateways/preferences; Sol medium recommended. Wait for selection. This overrides older next-step notes.
-
-**Latest release — 9 November 2026: B3 practical South Island planning published and paused.** Source8f6146e / dpl_3NuUMATbo9HWAbQHGQ4pLx7QncDf; AU unchanged6ba7fee. Desktop/phone,15 targeted tests, TypeScript/build and live human/XML sitemap checks passed. See [RELEASE-2026-11-09-SOUTH-ISLAND-PLANNING.md](RELEASE-2026-11-09-SOUTH-ISLAND-PLANNING.md). Next proposed B4 curated resources: Sol medium recommended; wait for selection. This overrides older next-step/state notes.
-
-**Latest checkpoint — 9 November 2026: B2 content-gap inventory complete; paused.** See [SOUTH-ISLAND-CONTENT-GAPS.md](SOUTH-ISLAND-CONTENT-GAPS.md). Next proposed B3 is a compact practical South Island guidance section, Sol medium recommended; do not begin automatically. Business direction confirmed: a sustainable-tourism marketplace connecting birds/habitats/places to verified local experiences, with AVES human coordination. Validate through South Island then Sydney; marketplace infrastructure remains separate later discovery. This supersedes older next-step instructions.
-
-**Latest checkpoint — 9 November 2026: B1 private NZ brief passed live and is paused.** Save/reopen/edit, retained bird choices, explicit sharing and owner receipt verified with synthetic data;103 targeted tests passed. Email service accepted notification; Gmail delivery not independently verified. No app fix/deployment needed. See [CHECKPOINT-2026-11-09-NZ-BRIEF.md](CHECKPOINT-2026-11-09-NZ-BRIEF.md). Next proposed B2 content-gap inventory: Luna low recommended, wait for owner. Featured-place map overlays034 and relevant historical/extinct display cleanup017 remain queued. This overrides older next-step instructions below.
-
-**Current release — 9 November 2026: published and paused.** South Island/regional zoom is live: source5847eb7 / dpl_GMPLFwPviWsLq73i9JJBjCNvkaja; AU6ba7fee / dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv. Desktop/mobile and live sitemap checks passed within the limits recorded in [RELEASE-2026-11-09-SOUTH-ISLAND.md](RELEASE-2026-11-09-SOUTH-ISLAND.md). A1 is complete; B1 private-brief verification is the next proposed increment, not started. Announce model/effort before resuming; Sol medium recommended. This notice overrides older staged/paused status below.
-
-Updated 9 November 2026 (Sydney). **Planning-only checkpoint: publishing is on hold.** The owner interrupted the resumed release to review this plan. Wait for one selected increment; do not execute this whole backlog. This replaces earlier sequencing/effort tables, not the detailed requirements in ROADMAP-DETAILS.md or stable IDs in AVES-CHANGE-INBOX.md.
-
-## Baseline and historical planning context
-
-| State | Global / Colombia / NZ | Australia / shared accounts |
+| Application | Runtime | Production deployment |
 | --- | --- | --- |
-| Branch | `webmaster/readiness-2026-11-05` | `australia/preview` |
-| Published app | `5847eb7` | `6ba7fee` |
-| Published source commit | `5847eb7` | `6ba7fee` |
-| Published deployment | `dpl_GMPLFwPviWsLq73i9JJBjCNvkaja` | `dpl_9ZrHC1jyd3SGzMeVn248kcFBwmcv` |
+| Global / Colombia / New Zealand |4e4e7f3f03f3f8b4982d37884c03173d9bea9086|dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP|
+| Australia / shared portal |48722c870a6f804ef964280e41e5ddc985658f1c|dpl_FYT3WsL52euwC46SYq2tFRsKtqDB|
 
-Provider/live state was last verified 8 November, not rechecked during this documentation-only session. Documentation heads may be newer. PAUSED-CHECKPOINT-2026-11-08.md holds exact stage URLs, remaining checks and the isolated untested pricing draft. Both working trees were clean before this update.
+183 main and315 combined Australia tests, strict TypeScript and both complete
+builds passed. No API, auth, database, dependencies, provider or billing changes.
+Production error/fatal scans for both exact deployments returned no matching logs
+in the15-minute windows ending12:55 UTC. This is a short observation window, not
+ongoing monitoring or a guarantee against all errors.
 
-Delivered: shared accounts/Google login, private plans/requests/owner proposals, NZ brief/bird selection, country dividers, Equal Earth homepage explorer/cards, speaker cue, transparent Info and adaptive focal framing. Do not rebuild them. Dedicated South Island and deeper regional zoom are built/pushed/staged, not yet live. A real guest trial remains pending. The former 40–60% remaining figure was subjective; do not present it as measured progress or quota. The future platform is unsized.
+The US$1 on-demand budget and automatic pausing remain as previously verified.
+No billing setting changed; Pro subscription fees are separate. The synthetic
+planner fixture and unified app remain outside this production release.
+See RELEASE-2026-11-10-REFINEMENTS.md and HANDOFF-CURRENT.md for evidence and rollback.
 
-## Outcome order
+## Already live: preserve these
 
-```mermaid
-flowchart TD
-  A[Finish staged South Island and regional zoom] --> B[Validate existing private trip journey]
-  B --> C[South Island practical guidance and resources]
-  C --> D[Human-reviewed trip options and AVES host role]
-  D --> E[One Sydney launch product]
-  E --> F[Broader regional design and content consistency]
-  F --> G[Optional maps and media polish]
-  D --> H[Later recommendation and supplier platform]
-  A --> S[Sitemap review on every deployment]
-  S -. separate early option .-> T[Expandable visual directory]
-```
-
-Security or essential-journey failures take priority. Sitemap accuracy is a release gate immediately; its tree interface is an independent release, not a reason to rebuild the ready candidates. NZ trip usefulness precedes decoration, then Sydney. Arrows indicate dependencies/proposed order, not permission to implement everything.
-
-## Design contract
-
-- Keep emerald/mint, airy white space, thin AVES lettering and bird/landscape country marks. Branding/name choices remain separate (032).
-- Reuse one content-driven explorer pattern: map, local collection, discreet over-image controls and translucent Info. Content changes by page; avoid separate carousel state machines. One physical shared component belongs to gated app consolidation, not each small visual release.
-- Wide screens pair map/media with coordinated heights, responsive width and the existing divider; narrow screens stack media first, map second. Choose breakpoints by usable card width. Test intermediate widths; do not claim physical foldable/phone tests unless performed.
-- Preserve existing focal-point cover scaling, edge clamping, no blank side padding and short-frame Info scrolling. Test regressions rather than recreating these delivered behaviors.
-- Use real geography, local birds/calls/rights, clear collection context and Back controls. Country-to-region selection updates previews; complete guides retain canonical URLs. Keep country navigation maps until optional local ecosystem views demonstrate value.
-- Vertical hierarchy: world → country → region → relevant guides/experiences/resources. Horizontal journeys connect birds, habitats, activities and the private brief/My Trips. Logical nesting does not require changing established URLs or making every content item a new page.
-
-## Model recommendations and usage discipline
-
-**Before EVERY increment, tell the owner which model and reasoning setting to use, or explicitly say to keep the current one.** Give one short reason. When escalation is needed, explain it at a checkpoint before recommending the switch. Record chosen/recommended settings in the checkpoint. The owner selects the model in the app where no switch tool exists; never claim a switch happened automatically. Avoid unnecessary switches within a small release.
-
-| Work | AVES starting recommendation | Escalation |
+| Work | Delivered scope | Remaining scope |
 | --- | --- | --- |
-| Bounded documentation, inventory, supplied-source copy | Luna, low | Sol medium if ambiguity affects correctness |
-| React/layout/data wiring and normal release work | GPT-6.1 Sol, medium | High effort or Astra for an evidenced difficult defect |
-| Defined desktop/mobile browser QA | Keep Sol medium; Terra medium is an option if offered and QA becomes a separate checkpoint | Preserve findings if code analysis is needed |
-| Privacy/auth/data-model design, consolidation or conflicting evidence | Astra, medium, for the bounded decision/review | Higher effort only for an unresolved issue |
-| After diagnosis | Return to the normal task model | No default extra-high/max/Ultra or premium speed |
+| Discovery map, AVES-003a | Equal Earth overview, one country-switching bird viewer, regional selection, return/reset and direct links | Ecological overlays are003b |
+| Dividers/framing, AVES-006 | Responsive map/media split on three country homepages, keyboard/reset and media-first narrow layout | Physical touch/foldable testing |
+| Maps and regional previews, AVES-012c/046/066 | Names-first homepage maps, real regional contours, deliberate preview/navigation, Colombia whole-shape hover | Broader page/app consistency |
+| Contextual birds and language, AVES-006c | Selection-linked headers, locally sourced horizon flocks and personal planning prompts | Scroll movement is preview-only |
+| NZ planning, AVES-004a/005 | Questionnaire, living-species wishes, private draft/review/share, owner receipt and Google sign-in | Real guest feedback and later refinements |
+| South Island page, AVES-007/013/017/034/036/037/038 | Habitat/place/photo pilot, living-only selection, land-cover/satellite shading, place/resource carousel, map controls and scale | North Island/Rakiura and wider rollout |
+| Photos and Info, AVES-012d/039/051 | Shared transparent Info, fit/full-screen pilot, 362 of377 living checklist image references | 15 references pending; deeper zoom is preview-only |
+| Sound, AVES-008/053/068 | Available-call cues, opt-in South Island soundscapes, safe same-app continuity and paused cross-app Resume | Continuous cross-document audio is deferred |
+| Editorial/team/cleanup | Santa Marta copy pilot, one-person team, bounded cleanup and preserved media credits | Wider editorial/source review |
 
-These are project recommendations based on [official model guidance](https://developers.openai.com/api/docs/guides/model-selection), reviewed 9 November. [Official allowance guidance](https://learn.chatgpt.com/docs/pricing) says usage depends on model/context/reasoning/tools/retrieval/caching. API prices do not convert to weekly ChatGPT allowance. No exact quota percentage, multiplier or guaranteed saving is known. Use settings actually offered; do not buy credits, enable premium speed or add an API automatically.
+## Published refinements and remaining verification
 
-Efficiency rules:
+All prepared runtime changes in PRs11–27 are integrated in the two maintained
+applications. The map/control and private stacks were combined for Australia.
+Older preview-only wording in dated records is historical.
 
-1. One selected outcome in progress. Read the short execution prompt/current checkpoint, relevant files and selected acceptance criteria only; do not reread the whole conversation or rediscover delivered features.
-2. Open with a task card: outcome, exclusions, branch/baseline, dependencies, effort, recommended model/setting, checks, publish/rollback target and pause point. Keep new ideas in the inbox.
-3. Reuse ready builds and recorded evidence. Do not rebuild unchanged code because a docs head is newer. If a real fix changes the candidate, test/build that revision and record its exact target.
-4. Batch independent reads/searches, keep edits/deployments/adaptive checks sequential. Research changing facts once per content batch; save source/date/licence. No parallel agents unless explicitly requested or required.
-5. Targeted checks while editing; required app checks once at release; broaden only for changes, failure or unresolved risk. Docs-only sync needs diff/link/mirror checks, not app builds/browser repeats.
-6. Review touched code/comments for clarity, redundancy and verified-unused legacy logic; explain intent for a beginner. Preserve necessary migrations/history. Do not comment every syntax token or add a repository-wide cleanup to a small task.
-7. Checkpoint/sync/pause after each selected increment and before switching models/devices/chats. If the owner reports low allowance, choose a smaller outcome; do not pretend to see their meter.
+| Work | Live scope | Remaining verification / work |
+| --- | --- | --- |
+| Maps, PR12/13 | Australia enlargement/zoom/reset, sage/green style, named alternatives and feather markers; Colombia/NZ style parity | Physical Safari/touch and wider device review |
+| Photo zoom, PR14/21 | Resolution-aware zoom/reset and short-screen toolbar spacing | Physical pinch/Safari; native-pixel limits remain deliberate |
+| Invitations, PR15 | Shared fixed-width birds/AVES transition | OS reduced-motion preference checks |
+| Scroll flock, PR16 | Bounded reversible motion with regional species | Physical phone and dynamic preference tests |
+| Call following, PR17 | Session opt-in follows manual bird choices | Broader autoplay-rejection, missing recording and interruption cases |
+| Origin filters, PR18/19 | Sourced NZ origin controls in public checklist and private picker | Seasonal/activity filters remain separate |
+| Sea context, PR20 | Sourced South Island sea labels and quiet water treatment | Wider device review |
+| Place ideas, PR22/24 | Tab-only public choices and copyable notes | Clipboard-denied fallback needs browser coverage |
+| Private media/notes, PR11/23 | Checklist photographs and explicit append into existing draft notes | New delta has automated and synthetic UI evidence; real authenticated persistence still needs suitable test-account coverage |
+| B Corp preparation, PR25 | Eligibility/source guard deployed with no eligible pins | Visible layer remains off; verify tourism shortlist, locations, coordinates and reuse terms |
+| Regional logos, PR26/27 | All23 regions and four place contexts,25 new illustrations, right-facing marks and matching contours | Not every region individually browser-reviewed; physical/narrow checks remain |
+| Remaining checklist images |362/377 public and private references | Verify15 pending sources; retain missing states |
 
-## Small release cards
+Live browser checks covered Australia region selection/enlargement and regional
+logo context; South Island place context,35 introduced entries, place-note controls,
+photo dialog and return to the global homepage. The account handover reached
+sign-in with NZ/South Island next preserved. No credentials, guest records, hosted
+draft save, email, booking or payment was used. Public test place choices were
+removed. Preview acceptance still supplies the broader documented interaction
+checks, not a claim that every flow was independently exercised live.
 
-Effort: **1 very small; 2 small; 3 medium; 5 substantial; 8+ split before starting.** These compare scope including proportionate checks, publication/live QA when applicable, GitHub sync and pause. They are not credits, hours, percentages or linear cost ratios. Re-estimate after discovery.
+## Next execution order
 
-### A. Finish the staged release
+1. Build a small directory-led B Corp tourism/accommodation/restaurant shortlist,
+   with dated official certification plus business-location evidence. Enable no
+   pins until scope, coordinates and source/reuse checks pass.
+2. Complete suitable test-account acceptance of the new private notes/media delta.
+   Preserve the existing working private planning flow and minimise test data.
+3. Close remaining mobile/Safari, reduced-motion and audio-failure checks. Fix
+   confirmed defects in bounded releases.
+4. Verify remaining15 checklist image references and sourced South Island
+   routes/conservation/lodge context.
+5. Continue the retained product backlog below, one selected increment at a time.
 
-| Card / IDs | Outcome and dependency | Effort / model | Acceptance and stop |
-| --- | --- | --- | --- |
-| A1 — 007 / 012a and regional zoom | Finish exact candidates above; no new feature | 2 remaining / Sol medium | Source stage desktop/390/320px and short Info frames; NZ Back focus, CO marker hiding, heading separator, South guide/canonical/old anchor/sitemap, calls/Info/wishlist/divider and country/region links. Reuse completed all-23-region local/AU-stage evidence. Recheck targets, promote AU then source, verify live, sync and pause. |
+## Retained product backlog
 
-Already passed: 112 source + 273 AU tests (385 total), final 32 focused source checks, TypeScript and both builds. Source hosted QA and all post-promotion live checks remain. Do not repeat completed checks without a changed revision or concern. Physical-device/OS-preference testing remains unverified unless actually performed.
+| Area / references | Next useful increment | State / dependency |
+| --- | --- | --- |
+| NZ regional expansion, AVES-007/040 | North Island parity after South Island readiness, then Rakiura | Queued; locality/media verification |
+| Routes and practical context, AVES-034/052/062 | One subregion's public birding sites, towns, conservation/lodges and dated travel estimates | Queued; no paid Maps/billing setup |
+| NZ depth and orientation, AVES-016/064 | Practical and ecological/historical guidance with authoritative and mana whenua sources | Pilot resources live; wider depth queued |
+| Ecological discovery, AVES-003b/019/055 | Megadiverse countries, actual hotspot boundaries, comparable species counts and sourced ecosystem context | Queued; rights, geometry and scope checks |
+| Wider map language, AVES-012/012a/012b/012c/018 | Consistent regional duos, bird carousels and collection titles | Partial pilots delivered; broader rollout queued |
+| Satellite/city layers, AVES-021 | Accurately aligned, licensed region imagery and useful transport/city labels | South Island pilot live; wider coverage queued |
+| Bird diversity and copy, AVES-001/002 | One sourced Colombian bird/content batch without repetitive or unsupported claims | Santa Marta copy pilot complete; expansion queued |
+| Origin beyond NZ, AVES-025/048 | Apply reliable sourced classification elsewhere; separate origin from migration/activity | NZ origin prepared; broader categories queued |
+| Seasonal observations, AVES-057 | Dated, licensed observation layer with honest season/location uncertainty | eBird commercial permission required; enquiry unsent |
+| Pronunciation/cultural content, AVES-010/022/056 | Permissioned bird/place-name audio, Māori pilot, logo-species name/pronunciation | Queued; native-speaker/community source and rights |
+| Place-name/hover motion, AVES-043/044 | One restrained world-map preview or paired-name animation | Queued; reduced-motion and navigation checks |
+| Regional card flips, AVES-015/037 | Extend the delivered South Island pilot while preserving accessible alternatives | Wider rollout queued |
+| Atmospheric media, AVES-041/053 | Habitat-led background/soundscapes with licensed, lightweight assets | Forest/stream/coast pilot live; mountains/wider regions pending |
+| Owner video library, AVES-031/060 | Inventory verified uploads/masters, efficient web renditions and adaptive playback | Queued; originals, rights and cost review; no raw8K default |
+| Bird logos/3D/feather controls, AVES-050/058 | Review supplied references, one lightweight region/species pilot | Queued; original artwork and rights preserved |
+| Navigation/sitemap, AVES-033 | Expandable country/region/page hierarchy and discreet journey links | Tree UI queued; sitemap review required for every release |
+| Currency, AVES-035 | Discreet optional conversion with source/date and explicit currency | Queued; no misleading live-rate claims |
+| Team/host role, AVES-030/045 | Explain real host review, coordination and current team accurately | One-person page live; operational expansion queued |
+| Human-reviewed proposals, AVES-023/059 | Reuse private brief for sourced, realistic itinerary/options and short trip story | Manual editor exists; generation/provider/evaluation separately scoped |
+| Sydney launch product, AVES-024 | One validated itinerary with operators, costs, pacing and sustainability evidence | Queued before advertising/bookings |
+| Community/wishlist, AVES-004/054 | Optional account wishes, community connections and later bingo | Existing pilot selection live; broader social features queued |
+| Colombian Spanish, AVES-014 | Natural es-CO translation with retained English, locale metadata and tested layouts | Lower priority |
+| International branding, AVES-032 | Evaluate pronunciation/identity and optional landscape-contour direction | Decision backlog; retain AVES pending owner decision |
+| Unified app, AVES-020 | C1a–C1d/C2 draft work complete within recorded limits; finish C3 safely | Exact hosted private acceptance unresolved; C4 cutover/C5 retirement need separate approval |
+| Regenerative-tourism ambition | Evidence-based supplier/community/wildlife practice and human review | Business direction, not achieved certification or an impact score |
 
-### B. Make South Island useful for the trip
+## Evidence, gates and working rules
 
-| Card / IDs | Smallest useful outcome | Depends on | Effort / model | Acceptance |
-| --- | --- | --- | --- | --- |
-| B1 — 004 / 005 | Recheck existing private brief with labelled synthetic data | A1 | 2 / Sol medium | Save/reopen/edit, stable bird IDs, explicit share, owner access/notification, anonymous/cross-account isolation. No second planner. A QA pass is not Peter/Lisa's guest trial. |
-| B2 — 016 discovery | One content-gap/source inventory against Colombia | A1; reuse B1 findings | 1 / Luna low | Rank trip-blocking gaps; reuse current content. Confirm actual dates/year/preferences privately before personalised options. Docs only. |
-| B3 — 016 guidance | One practical South Island content batch | B2 | 3 / Sol medium | Gateways, realistic travel/rest, season/access/weather, comfort/accessibility, food/culture, wildlife/biosecurity and official links; changing facts checked, no fictional availability/prices. |
-| B4 — 016 resources | A small curated resource collection | B2; independent of B3 | 2 / Sol medium | Useful reading/conservation plus podcasts/documentaries/YouTube, working links, lawful embeds, concise purpose; no scrape/download library. |
-| B5 — 023 / 030 | Private balanced trip options and host responsibilities | B1, relevant B3 facts, private preferences | 3 / Sol medium; Astra only for a bounded review | Birds → habitats → nearby rest/food/culture/adventure, feasible pacing and alternatives. Host reviews AI drafts and coordinates/accompanies/storytelling where agreed. No outreach/bookings/invented legends. Guest trial is a user handoff. |
-| B6 — 017 | Hide extinct NZ entries while preserving old briefs | B1 baseline | 2 / Sol medium | Keep living threatened/rare species, stable IDs/provenance and compatible validation; update scope/counts, no destructive deletion. |
-| B7 — 025 | One reliable checklist facet at a time | B6 or explicit compatibility plan | 2 each / Sol medium | Origin first; distinguish introduced/invasive, migration/breeding/feeding; source place/season and unknowns, preserve filtered-out selections. Data enrichment separately. |
+Use the ecotourism business-plan direction: balanced nature travel, human hosting,
+real local relationships and truthful guest expectations. Stewardship means dated,
+traceable evidence, community/wildlife care and honest uncertainty. B Corp status
+does not prove AVES partnership, bookability or uniformly low environmental impact.
+The old data.world community feed retired13 July2026; no supported replacement bulk
+feed or commercial reuse permission has been verified.
 
-B3/B4 are independent publishable batches. Filters, a large resource library or full NZ coverage do not block using the existing private tool. Sydney can begin after minimum useful guidance and a reviewed planning journey.
+The synthetic planner fixture checks UI only. It is not persistent, makes no account
+API/database/email write, and is disabled outside its exact preview branch.
+Never merge it into maintained branches. Details are on the test branch in
+PREVIEW-2026-11-10-SYNTHETIC-PLANNER.md. Test choices were cleared.
 
-### C. Sydney is the next commercial focus
+Evidence: ACCEPTANCE-2026-11-10-APPROVED-PUBLIC-PREVIEW.md,
+ACCEPTANCE-2026-11-10-PHOTO-PLACE-IDEAS.md, AVES-069-DIRECTORY-SOURCING.md,
+AVES-069-SOURCE-PILOT-2026-11-10.md and the test-branch fixture record.
+Physical Safari/touch, OS preference changes, some audio interruptions and actual
+private candidate persistence remain unverified. Do not turn source tests into
+claims of hosted delivery.
 
-| Card / IDs | Outcome | Depends on | Effort / model | Acceptance |
-| --- | --- | --- | --- | --- |
-| C1 — 024 / 023 | One Sydney itinerary outline and alternatives | Minimum useful B1–B5 | 2 / Sol medium | Reuse NSW/planning/quote foundations. Kayak/birding/Blue Mountains/Royal NP/food/culture/Opera House/wellness/whales are ideas, not confirmed inclusions. |
-| C2 — 024 / 030 | Provider, route and operations validation | C1 | 3 / Sol medium | Actual relationships, season/dates, costs/capacity, transport, accessibility and sustainability evidence; private supplier details and clear host role. No contact unless instructed. |
-| C3 — 024 | Reviewed inquiry/quote product | C2 and owner-reviewed scope | 3 / Sol medium | Honest inclusions/exclusions, working private request/receipt and responsive/accessibility checks; no instant-booking claim. Ads/spend/commitments separate. |
-
-### D. Design/navigation consistency — separate pilots
-
-| Card / IDs | Outcome | Dependency / acceptance | Effort / model |
-| --- | --- | --- | --- |
-| D1 — 033 | Sitemap gate now; expandable public tree separately | Section below; after A1 when selected. Can be an early independent release, not a South Island prerequisite | Gate in every release; tree 3 / Sol medium |
-| D2 — 012c | Align all three homepage map cards | Full names/callouts, matching palette/borders/framing/focus/credits, true shapes and planning-region/state/island distinctions; no invented boundaries | 3 / Sol medium |
-| D3 — 007 / 012a / 012b | One region/template pilot, South Island then NSW | Same duo/divider/Info/local calls; eligible text-only bird grids reuse carousel without duplicate hero media. North/Rakiura separately; reuse D2 decisions | 3 per template; re-estimate rollout / Sol medium |
-| D4 — 018 / 019 | Collection title, then species-total cue | Actual collection context; sourced dated comparable totals, distinct from photo count or expected sightings. Accessible labels alone do not imply visible title complete | 1–2 each / Luna copy, Sol wiring |
-| D5 — 027 | Remove public experience-price teasers | Review isolated draft5979b8b; retain private priced proposals/data, remove public metadata teasers, reuse AU quote-only pattern | 2 / Sol medium |
-| D6 — 028 | Carousel-based credits page | Reuse viewer; full author/licence/modification info, recording anchors and accessible non-photo directory; no new state machine | 3 / Sol medium |
-
-### E. Retained content/media/map work — after readiness
-
-| IDs | Independently bounded outcome | Dependencies and limits | Effort / model |
-| --- | --- | --- | --- |
-| 001 / 002 | One editorial or Colombian bird-variety batch | Shared coverage/source matrix; less repetition and unsupported claims, more region-specific birds, complete rights/ranges | 3 per batch / Sol medium |
-| 010 / 022 | One cultural/totemic or Māori-name pronunciation pilot | Community/native-speaker evidence/permission, diacritics, acknowledgement/credits, coordinated audio; no invented endorsement | 2–3 / Sol medium |
-| 003b | Ecology definitions/legend, then each real layer | Megadiverse countries AND biodiversity hotspots, authoritative licensed geometry, NZ hotspot context, distinguish ecology from offerings, Equal Earth | 2 discovery; 3–5 per layer / Sol medium |
-| 029 | Selected-country recentering/rotation pilot | Genuine Equal Earth central-meridian/antimeridian handling, not spinning/stretching SVG; Back/reduced motion | 2 discovery, implementation re-estimated / Sol or Astra medium |
-| 021 / 013 | City-label pilot; optional satellite/ecosystem discovery | Preserve navigation; licence/date/projection/privacy/cost/performance, disclose different local tile projection; no forced ecosystem replacement | 2 discovery, implementation unsized / Sol medium |
-| 031 inventory | Identify AVES YouTube uploads/rights/masters | Start old page backgrounds; exact owner channel not yet identified; resource embeds not assumed owned or 8K | 1–2 / Luna low |
-| 031 player | One authorised clip in existing viewer | Inventory first; poster/click-to-play, context/credits, accessibility, loading/audio cleanup and phone performance | 3 / Sol medium |
-| 031 hosting | Compare embeds/native adaptive/hybrid | Use pilot evidence, retain YouTube discovery; secure masters/web renditions, actual cost/privacy, no raw 8K default/Git binaries/new spend | 2 comparison; migration separately sized / Sol medium |
-| 015 | One map/photo flip, then optional photo/Info flip | Uniform foundations/local media first, hidden-face focus/audio, touch and reduced-motion fallback; never block planning | 3 per pilot / Sol medium |
-| 026 | Only green birds flips to AVES | Stable heading, accessible text/touch/reduced motion; no navigation change | 1–2 / Sol medium |
-| 014 | es-CO foundation, then page/form batches | Natural Colombian Spanish, retain English/URLs/metadata/forms/help/accessibility/privacy; low priority | 2 discovery, 3 per batch / Sol medium |
-| Deferred | Facebook or expired-Google-session landing separately | Preserve working Google/email/info@aves.bio; recheck provider requirements | 2–3 pilot, re-estimate / Sol medium |
-| 032 | International brand decision brief | AVES English/Spanish appeal, thin marks/land connection, motmot/fairywren/kea/global peregrine; no automatic rename/domain purchase | 2 discovery / Astra medium only if needed |
-
-### F. Platform work — discovery before promises
-
-- **020:** unmerged PR3 is a starting draft. Inventory post-base changes; incorporate staged fixes if accepted, then unified preview → public/private/SEO/provider gates → owner-approved cutover/rollback → separately approved retirement. Size each gate. Keep shared database and established URLs/search value; never directly merge independent app branches. Astra medium for bounded architecture/privacy review; Sol medium for implementation. No cutover now.
-- **004 / 005:** cross-country wishlist and safe guest/account merge before optional seen/want-to-see bingo/collaboration. Stable IDs/consent/isolation and useful questionnaire feedback first. Pilot 3–5, split again before execution.
-- **023 / 030:** human-reviewed itinerary suggestions from private bird/habitat preferences before AI automation. Then verified supplier records/sustainability evidence, recommendation quality, feasibility, owner approval and auditability. Live inventory/reservations/payments are separate unsized products. No automatic booking, second database/preference model or new API by default.
-
-## Sitemap contract — AVES-033
-
-**Every future deployment reviews/verifies the sitemap.** If routes/hierarchy change, update the registry/tree before building; otherwise record checked/unchanged, without a cosmetic commit or false modification date. Docs-only sync is not a website deployment.
-
-1. **Search engines:** existing `/sitemap.xml` and `/australia/sitemap.xml`, from canonical public-page registries. Exclude account/admin/API/auth/preview URLs, personal records, query variants and redirect aliases. Never set every lastModified to deployment time. A sitemap is discovery, not access control.
-2. **Visitors:** `/site-map` becomes an expandable world → country → region → related-guide directory, with discreet relevant cross-links and connection to the AU directory while apps remain separate. Reuse registry data; extend parent/relationship metadata only as necessary, no third manual route catalogue.
-3. **Planning:** SITE-ARCHITECTURE.md previews logical hierarchy and horizontal journeys, marking staged/planned nodes honestly. Private My Trips is a generic navigation entry outside SEO inventory; no public trip or owner-tool enumeration.
-
-Tree acceptance: nested semantic lists/details/summary or equally simple accessible disclosure, clear country headings/full names, expand/collapse, current-page cue, keyboard/touch focus and no phone overflow. Avoid a diagram library or complex ARIA-tree behavior without need. Logical hierarchy does not force URL migration.
-
-Release check: public-route/registry diff, unique existing canonical pages, removed/redirected routes, valid parents/cross-links, no orphan discovery pages, correct AU base path and no private indexing. Check staged/live human and XML views. Until tree ships, verify existing grouped directory and mark tree queued. A lightweight route/registry drift check can enforce the gate during D1; not implemented by this plan.
-
-## Definition of done and handoff
-
-Select scope/baseline/model → inspect/reuse → edit/review code/comments → targeted/required checks → sitemap/canonical/redirect review → candidate build when needed → staged desktop/mobile QA → publish tested revision → live essential journeys/sitemap → GitHub/checkpoint → pause.
-
-Record outcome/ID, recommended and actual model if known, branch/files, exact tested/published app commit/deployment, evidence/limits, sitemap updated or checked unchanged, GitHub state and next step. Required private tests scale to the risk; do not submit real guest answers or trigger unrelated emails for cosmetic work. Do not promise impossible-to-hack security, but preserve isolation and fix confirmed weaknesses.
-
-Measure observed quality/rework and allowance movement only if visible or supplied by the owner. Keep the lightest setting that meets acceptance criteria, and a compact checkpoint before any model/device/chat handoff. No guest/operator outreach, ads, bookings, paid services or provider changes without instruction. B Corp remains pursuing, not certified. This checkpoint changes documentation only; stay paused.
-
-
-**Queued9November refinements:**041 habitat-selected faint background photographs, later drone footage;042 subtle ocean shading/labels on the South Island map. Preserve contrast, rights, performance and geographic honesty. These do not expand the selected homepage word-flip release. See ROADMAP-DETAILS.md.
-
-
-**Additional queued9November:**043 world-country hover/focus recentering before click, with stable targets/projection;044 selective paired place names such as Aotearoa/New Zealand. Current word-flip typography is matching lowercase italics with no border; keyboard focus uses a subtle underline. See ROADMAP-DETAILS.md.
-
-</details>
+This production refinement release is approved and complete. New spend/provider/accounts,
+weakened privacy or app consolidation are not part of that approval. Do not send supplier/permission enquiries
+without explicit sending instructions. Keep source/credits, rollback points and
+private guest data intact. Essential-flow/privacy defects take priority.

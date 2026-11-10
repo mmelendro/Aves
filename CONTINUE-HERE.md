@@ -1,15 +1,18 @@
 # AVES continue here
 
-Read [the current handoff](docs/HANDOFF-CURRENT.md), then
-[the detailed execution prompt](docs/NEXT-WEEK-PROMPT.md).
+The prepared refinements are now LIVE with explicit owner approval.
+Main runtime4e4e7f3 / dpl_87fCw4BSLvttUrdzUK2AFKTsr1xP.
+Australia runtime48722c8 / dpl_FYT3WsL52euwC46SYq2tFRsKtqDB.
+Both production aliases were verified.183 main /315 Australia tests, TypeScript
+and builds pass. Scoped error/fatal scans returned no matching logs.
 
-AVES-068 safe continuity is published: main runtime `5d96fa0`, Australia/shared
-portal `2ff09e9`. Checkpoint 12 provides recovery for both apps. Same-app browsing
-retains playback; separate documents require explicit paused Resume. Truly
-uninterrupted shared-shell playback remains deferred. AVES-066 is complete. Pause.
+Read docs/HANDOFF-CURRENT.md and docs/RELEASE-2026-11-10-REFINEMENTS.md for precise
+scope, rollback and test limits. docs/AGILE-PLAN.md is the updated comprehensive
+list. Close/supersede only PRs whose heads are confirmed ancestors of the release.
+No further production rebuild is needed for documentation-only checkpoints.
 
-See [the release](docs/RELEASE-2026-11-10-MEDIA-CONTINUITY.md) and
-[recovery instructions](docs/ROLLBACK-CHECKPOINTS.md). No next upgrade selected.
-Keep the app branches separate, guest information private, no new spend and
-paid-AI/ZDR deferral intact. Inspect current Git history before editing.
-Former branch-specific entry points remain in the pre-068 archive.
+Next: directory-led B Corp tourism shortlist, suitable private-delta test-account
+coverage, remaining physical/audio checks and sourced content work. B Corp pins
+stay off until verified. Unified cutover and synthetic test fixtures remain separate.
+Do not reopen old preview/publishing approval questions for this completed batch.
+Keep the previously verified US$1 budget/automatic pausing and separate app boundaries.
