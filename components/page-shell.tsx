@@ -3,13 +3,17 @@
  * children is the route-specific content rendered below the introduction.
  * Passing media pairs its original birds with the map below a centred heading.
  */
+import DestinationExplorerPage from "./destination-explorer-page"
+import WorldDestinationMap from "./world-destination-map"
+import { GlobalHeader, GlobalFooter } from "./global-navigation"
 import type { ReactNode } from "react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
 import { Badge } from "@/components/ui/badge"
 
-export function PageShell({ title, description, children, path = "", eyebrow = "AVES Colombia", media }: { title: string; description: string; children: ReactNode; path?: string; eyebrow?: string; media?: ReactNode }) {
+export function PageShell({ title, description, children, path = "", eyebrow = "AVES Colombia", media, explorerRegion }: { title: string; description: string; children: ReactNode; path?: string; eyebrow?: string; media?: ReactNode; explorerRegion?: string }) {
+  if(explorerRegion) return <div className="min-h-screen bg-white"><GlobalHeader/><main id="main-content" tabIndex={-1}><DestinationExplorerPage initialCountryId="colombia" initialRegionId={explorerRegion} titleStyle="birding" map={<WorldDestinationMap/>}>{children}</DestinationExplorerPage></main><GlobalFooter/></div>
   return <div className="min-h-screen bg-white"><NavigationHeader currentPage={path} /><main id="main-content" tabIndex={-1}>
     <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 lg:py-12">
       <div className={`container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center`}>

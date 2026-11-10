@@ -317,11 +317,11 @@ test("Colombia retains its country homepage, bird carousel, trip form and existi
   const page = load("app/colombia/page.tsx")
   const tree = load("components/colombia-home-page.tsx").default()
   const componentNames = elements(tree, node => typeof node.type === "function").map(node => node.type.name)
-  for (const component of ["NavigationHeader", "ContactFormSection", "Footer"]) assert.ok(componentNames.includes(component), component)
+  for (const component of ["GlobalHeader", "ContactFormSection", "GlobalFooter"]) assert.ok(componentNames.includes(component), component)
   // The gallery can be composed inside a hero without disappearing from the page.
   assert.match(renderToStaticMarkup(React.createElement(page.default)), /data-bird-carousel="true"/)
-  const header = elements(tree, node => node.type.name === "NavigationHeader")[0]
-  assert.equal(header.props.currentPage, "/colombia")
+  const explorer = elements(tree, node => node.type.name === "DestinationExplorerPage")[0]
+  assert.equal(explorer.props.initialCountryId, "colombia")
   const links = elements(tree, node => typeof node.props.href === "string").map(node => node.props.href)
   for (const region of load("content/regions.ts").regions) assert.ok(links.includes(`/regions/${region.id}`), region.id)
   for (const experience of ["adventure", "vision", "elevate", "souls"]) assert.ok(links.includes(`/tours/${experience}`))

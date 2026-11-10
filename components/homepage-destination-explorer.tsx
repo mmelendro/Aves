@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { explorerLocation, readExplorerLocation, explorerLocationHref, type ExplorerLocation } from "@/lib/explorer-location"
 import { placeInSentence } from "@/lib/place-language"
 import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
@@ -38,9 +39,23 @@ export default function HomepageDestinationExplorer(props: ExplorerProps) {
 
 export function HomepageDestinationExplorerCore({ map, initialCountryId, initialRegionId, onScopeChange }: ExplorerProps) {
   const { publish } = useHeaderLandscape()
-  const [selectedId, setSelectedId] = useState(initialCountryId ?? "")
-  const [zoomed, setZoomed] = useState(Boolean(initialCountryId))
-  const [regionId, setRegionId] = useState(initialRegionId ?? "")
+  const [scope,setScope]=useState(()=>explorerLocation(initialCountryId,initialRegionId))
+  const selectedId=scope.country,regionId=scope.region,zoomed=Boolean(scope.country)
+  const [navigationAvailable,setNavigationAvailable]=useState(true)
+  useEffect(()=>{
+    const fallback=explorerLocation(initialCountryId,initialRegionId)
+    function restore(){setScope(readExplorerLocation(window.location.search,fallback));setBirdId("");setShowBirdAreas(false)}
+    restore();window.addEventListener("popstate",restore)
+    return ()=>window.removeEventListener("popstate",restore)
+  },[initialCountryId,initialRegionId])
+  function navigate(next:ExplorerLocation){
+    setScope(next)
+    try{
+      const href=explorerLocationHref(window.location.href,next)
+      if(`${window.location.pathname}${window.location.search}${window.location.hash}`!==href)window.history.pushState(window.history.state,"",href)
+      setNavigationAvailable(true)
+    }catch{setNavigationAvailable(false)}
+  }
   const [birdId, setBirdId] = useState("")
   const [showBirdAreas,setShowBirdAreas]=useState(false)
   const [wishIds,setWishIds]=useState<string[]>([])
@@ -71,20 +86,15 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const selectDestination = (id: string) => {
     if (!destinations.some(country => country.id === id)) return
     setShowBirdAreas(false)
-    setSelectedId(id)
-    setRegionId("")
-    setBirdId("")
-    setZoomed(true)
+    navigate(explorerLocation(id));setBirdId("")
   }
   const selectRegion = (id: string) => {
     if (id && !regions.some(item => item.id === id)) return
-    setRegionId(id); setBirdId("")
+    navigate(explorerLocation(selectedId,id)); setBirdId("")
   }
   const backToWorld = () => {
     setShowBirdAreas(false)
-    setSelectedId("")
-    setZoomed(false)
-    setRegionId("")
+    navigate(explorerLocation())
     setBirdId("")
     countryButtons.current[destination.id]?.focus({ preventScroll: true })
   }
@@ -167,6 +177,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
         </section>}
         {southIsland && <section id="places" aria-label="A few places to build around." className="mt-7"><h2 className="text-2xl font-medium text-emerald-950">A few places to build around.</h2><p className="mt-3 mb-5 text-sm leading-7 text-gray-600">These public landscape references share the habitat and place selections of the map above. They are planning ideas, not a promise of access or sightings.</p><SouthIslandPlacesExplorer/></section>}
         {zoomed && destination.id==="new-zealand" && <section aria-label="New Zealand bird wishes" className="mt-6 rounded-3xl border border-emerald-100 bg-white p-5 sm:p-7"><h3 className="text-xl font-medium text-emerald-950">Birds you would love to see</h3><p className="mt-2 text-sm leading-7 text-gray-600">Tap a photograph’s heart, or search the complete published New Zealand checklist, including endemics. This country checklist includes other islands and rare visitors. Inclusion does not mean a bird occurs in the selected region.</p><div className="mt-5"><NewZealandBirdPicker selected={wishIds} onChange={chooseBirds}/></div><a className={styles.regionLink} href={`/account?country=new-zealand${region ? `&region=${region.id}` : ""}`}>Save {wishIds.length || "your"} bird choices in a private brief</a><p className="mt-2 text-xs leading-6 text-gray-500">{storageAvailable ? "Unsaved choices stay in this browser tab for up to a day. Sign in, review and save your private draft. Sharing with AVES remains a separate step." : "This browser cannot carry your choices between pages. Choose birds in the private brief before saving."}</p></section>}
+        {!navigationAvailable && <p role="status" className="mt-3 text-xs text-gray-600">Your map works here, but this browser could not update its address. Refresh may return to this page’s starting place.</p>}
         <p role="status" className="sr-only">{zoomed ? `${destination.name}${region ? `, ${region.name}` : ""} selected. Showing ${birds.length} featured bird photographs and its regional map. Back to world returns to the overview.` : `World overview. No destination selected. Showing ${birds.length} birds across AVES destinations.`}</p>
         <noscript><p className="mt-4 text-sm text-emerald-900">Open a destination: {destinations.map(country => <a key={country.id} href={country.href} className="mr-4 inline-flex min-h-11 items-center underline">{country.name}</a>)}</p></noscript>
       </div>

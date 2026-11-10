@@ -13,7 +13,7 @@ const mocks={
  '@/components/destination-regional-map':{__esModule:true,default:'RegionalMap'},
  './homepage-destination-explorer.module.css':{__esModule:true,default:{}},
 }
-function harness(props){return componentHarness('components/homepage-destination-explorer.tsx','HomepageDestinationExplorerCore',{map:'World geometry',...props},{mocks})}
+function harness(props,overrides={}){return componentHarness('components/homepage-destination-explorer.tsx','HomepageDestinationExplorerCore',{map:'World geometry',...props},{mocks,...overrides})}
 function pair(h){return find(h.render(),n=>n.type==='Pair')}
 function maps(h){return nodes(pair(h).props.map).filter(n=>['MapViewer','SouthIslandMap'].includes(n.type))}
 function button(h,label){return find(h.render(),n=>n.type==='button'&&n.props.children===label)}
@@ -55,4 +55,26 @@ test('each country and region selection updates the same in-place map, photo col
    }
   }
  }
+})
+
+test('deep links and browser history restore the map scope without dropping Next history state',()=>{
+ const listeners=new Map(),entries=['https://aves.bio/colombia?explore=colombia&region=caribbean'],state={__NA:true,tree:'existing-router-state'}
+ let index=0
+ const window={location:new URL(entries[0]),sessionStorage:{getItem:()=>null,removeItem(){}},addEventListener:(name,handler)=>listeners.set(name,handler),removeEventListener:name=>listeners.delete(name)}
+ window.history={state,pushState(nextState,_title,href){assert.equal(nextState,state);entries.splice(index+1);entries.push(new URL(href,window.location).href);index++;window.location=new URL(entries[index])}}
+ const h=harness({initialCountryId:'colombia'},{window,runEffects:true})
+ h.render()
+ assert.equal(find(h.render(),n=>n.props['data-explorer-content']).props['data-explorer-content'],'colombia:caribbean')
+ button(h,'New Zealand').props.onClick()
+ find(pair(h).props.map,n=>n.type==='select').props.onChange({target:{value:'south-island'}})
+ assert.equal(maps(h)[0].type,'SouthIslandMap')
+ assert.match(window.location.search,/explore=new-zealand&region=south-island/)
+ index--;window.location=new URL(entries[index]);listeners.get('popstate')()
+ assert.equal(find(h.render(),n=>n.props['data-explorer-content']).props['data-explorer-content'],'new-zealand:')
+ index--;window.location=new URL(entries[index]);listeners.get('popstate')()
+ assert.equal(find(h.render(),n=>n.props['data-explorer-content']).props['data-explorer-content'],'colombia:caribbean')
+ index++;window.location=new URL(entries[index]);listeners.get('popstate')()
+ assert.equal(find(h.render(),n=>n.props['data-explorer-content']).props['data-explorer-content'],'new-zealand:')
+ assert.equal(entries.length,3)
+ assert.equal(listeners.size,2)
 })
