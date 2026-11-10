@@ -32,3 +32,11 @@ test('only ideas in the confirmed saved notes are consumed; new choices survive'
  p.consumeSavedNzPlaceIdeas(s,'Place idea: Otago & the Catlins (maybe)')
  assert.deepEqual(p.readNzPlaceIdeas(s),['coast'])
 })
+test('copyable place notes contain only reviewed public labels in the merge format',()=>{
+ assert.equal(p.nzPlaceIdeaText(['mountains','coast']), 'Place idea: Arthur’s Pass\nPlace idea: Otago & the Catlins')
+ assert.equal(p.nzPlaceIdeaText([]),'')
+ assert.equal(p.nzPlaceIdeaText(['https://example.invalid/private']),'')
+ assert.equal(p.nzPlaceIdeaText(['mountains','mountains']),'')
+ const copied=p.nzPlaceIdeaText(['mountains'])
+ assert.equal(p.mergeNzPlaceNotes(copied,['mountains']).message,copied)
+})
