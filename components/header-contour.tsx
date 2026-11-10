@@ -1,12 +1,12 @@
 "use client"
 
 import { useLayoutEffect, useRef, useState } from "react"
-import { newZealandHeaderGeometry } from "@/lib/header-landscape.mjs"
+import { contextualHeaderGeometry, newZealandHeaderGeometry, type ContextualHeaderProfile } from "@/lib/header-landscape.mjs"
 
 type Geometry = ReturnType<typeof newZealandHeaderGeometry>
 
 /** Static decorative vectors; links and focus indicators stay above this layer. */
-export function HeaderContour() {
+export function HeaderContour({ profile }: { profile?: ContextualHeaderProfile }) {
   const ref = useRef<SVGSVGElement>(null)
   const [drawing, setDrawing] = useState<{ width: number; geometry: Geometry } | null>(null)
   useLayoutEffect(() => {
@@ -16,7 +16,7 @@ export function HeaderContour() {
     if (!svg || !header || !word || !nav) return
     function measure() {
       const h = header!.getBoundingClientRect(), b = word!.getBoundingClientRect(), n = nav!.getBoundingClientRect()
-      setDrawing({ width: h.width, geometry: newZealandHeaderGeometry({ width: h.width, wordCenter: b.left - h.left + b.width / 2, navLeft: n.left - h.left, navRight: n.right - h.left }) })
+      setDrawing({ width: h.width, geometry: profile ? contextualHeaderGeometry({ width: h.width, wordCenter: b.left - h.left + b.width / 2, navLeft: n.left - h.left, navRight: n.right - h.left }, profile) : newZealandHeaderGeometry({ width: h.width, wordCenter: b.left - h.left + b.width / 2, navLeft: n.left - h.left, navRight: n.right - h.left }) })
     }
     measure()
     const observer = new ResizeObserver(measure)
@@ -24,9 +24,9 @@ export function HeaderContour() {
     let active = true
     document.fonts.ready.then(() => { if (active) measure() })
     return () => { active = false; observer.disconnect() }
-  }, [])
+  }, [profile])
   const g = drawing?.geometry
-  return <svg ref={ref} data-header-contour="new-zealand" aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
+  return <svg ref={ref} data-header-contour={profile ? `colombia-${profile.terrain}` : "new-zealand"} aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
     <path d={g ? `${g.boundary} L${drawing!.width} 0 H0 Z` : "M0 108H1440V0H0Z"} fill="white" />
     {g && <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
       <path data-landscape-boundary="true" d={g.boundary} strokeWidth="1.35" />

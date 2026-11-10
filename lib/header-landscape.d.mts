@@ -4,3 +4,7 @@ export function newZealandHeaderGeometry(input: HeaderGeometryInput): {
   birds: { x: number; y: number; size: number; rotation: number }[];
   baseline: number; compact: boolean;
 }
+
+export interface ContextualHeaderProfile { terrain: string; water: string }
+export const releasedColombiaHeaders: Record<string, ContextualHeaderProfile | undefined>
+export function contextualHeaderGeometry(input: HeaderGeometryInput, profile: ContextualHeaderProfile): ReturnType<typeof newZealandHeaderGeometry>

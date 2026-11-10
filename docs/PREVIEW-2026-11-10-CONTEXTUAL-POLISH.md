@@ -101,3 +101,19 @@ IDs. Its resolver fails closed for unknown region/place selections; a contract t
 checks those selections against the actual public place source. This remains a
 prepared integration seam, not an assertion that selecting every place already
 changes a production header. Further ecosystem variants remain queued.
+
+## Authorized release subset
+
+The owner authorized publication of headers supported with confidence after the
+latest map/carousel refinements. The explicit production allowlist is Colombia
+country plus Western Andes, Central Andes, Cauca Valley, Magdalena Valley,
+Sierra Nevada de Santa Marta, Llanos, Amazonia and Colombian Massif.
+These illustrative terrain/water composites use existing geographic context.
+No uncertain new wildlife silhouettes or whales are installed. Inland contexts
+use no water, river or wetland as appropriate. Eastern Andes, Pacific, Caribbean,
+new Australian and additional NZ variants remain studies pending closer review.
+The already published NZ country/South Island composition is preserved.
+
+The main-app map and team improvements described above accompany this subset.
+156 tests and TypeScript passed. True touch input and physical Safari remain
+unverified. Release identifiers and final hosted checks follow in the handoff.
