@@ -6,6 +6,7 @@
 "use client"
 
 import { ColombiaHomeLanguageToggle, useColombiaHomeCopy } from "@/components/colombia-home-language"
+import { HeaderContour } from "@/components/header-contour"
 import { BrandMark } from "@/components/brand-mark"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -37,15 +38,16 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
 
   return localizeHome((
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 isolate before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-[52px] before:bg-white/95">
         <a
           href="#main-content"
           className="absolute left-4 top-3 z-10 flex min-h-11 -translate-y-24 items-center rounded-xl bg-emerald-800 px-4 font-semibold text-white focus:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
         >
           Skip to content
         </a>
-        <div className="container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 [container-type:inline-size] sm:px-6 lg:px-8">
-          <BrandMark country="colombia" priority extendContour />
+        <HeaderContour />
+        <div className="relative container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          <BrandMark country="colombia" priority />
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
@@ -76,7 +78,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         </div>
       </header>
       {/* Reserve space for the fixed header so it does not cover the page heading. */}
-      <div aria-hidden="true" className="h-[72px]" />
+      <div aria-hidden="true" className="h-[52px]" />
     </>
   ))
 }

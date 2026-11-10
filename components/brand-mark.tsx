@@ -7,7 +7,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { sitePath } from "@/lib/site-path"
-import { HeaderContour } from "@/components/header-contour"
 
 export type BrandCountry = "colombia" | "australia" | "new-zealand"
 
@@ -18,7 +17,6 @@ interface BrandMarkProps {
   priority?: boolean
   label?: string
   labelHref?: string
-  extendContour?: boolean
 }
 
 const countryLabels: Record<BrandCountry, string> = {
@@ -37,7 +35,7 @@ const landscapes: Record<BrandCountry | "global", string> = {
 }
 
 // Own both links here so the country subtitle never sits inside the global home link.
-export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref, extendContour = false }: BrandMarkProps) {
+export function BrandMark({ country, inverse = false, size = "header", priority = false, label, labelHref }: BrandMarkProps) {
   const isFooter = size === "footer"
   const subtitle = label || (country ? countryLabels[country] : undefined)
   const homeHref = "/"
@@ -52,7 +50,6 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
         {country === "australia" && <path d="M29 24V10 M22 15Q29 3 37 14 M25 10Q30 1 35 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />}
         {country === "colombia" && <path d="M116 27V18 M110 21Q116 10 122 21 M125 26V21 M120 23Q125 15 131 23" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />}
       </svg>
-      {extendContour && !isFooter && <HeaderContour />}
         <Image
           src={sitePath(`/images/brand/aves-${country || "global"}-bird.png`)}
           alt=""
