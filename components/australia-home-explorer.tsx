@@ -6,6 +6,7 @@
  * bird's complete range. Geographic shapes come from content/australia-map.ts, never logo artwork.
  */
 
+import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 import type { MouseEvent, ReactNode } from "react"
@@ -32,6 +33,7 @@ const smallTerritories = [
 ]
 
 export function AustraliaHomeExplorer({ media, initialRegion, resizable = false }: { media?: ReactNode; initialRegion?: string; resizable?: boolean } = {}) {
+  const { publish } = useHeaderLandscape()
   const id = useId()
   const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
   const backButton = useRef<HTMLButtonElement>(null)
@@ -49,6 +51,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
 
   function selectRegion(regionId: string) {
     if (regionId && !regionOptions.some(region => region.id === regionId)) return
+    publish({country:"australia",regionId:regionId || undefined})
     setChosenRegion(regionId)
     setBird(australianRegionBirds(regionId)[0] ?? birdData[0])
   }

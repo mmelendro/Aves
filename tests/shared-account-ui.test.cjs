@@ -35,6 +35,8 @@ function componentHarness(file, name, props, overrides = {}) {
   }
   const mocks = {
     react,
+    "@/components/header-contour": { HeaderContour: "HeaderContour" },
+    "./header-landscape-context": { useHeaderLandscape: () => ({selection:null,publish(){}}) },
     "react/jsx-runtime": { jsx, jsxs: jsx, Fragment: "Fragment" },
     "next/link": { __esModule: true, default: "Link" },
     "next/image": { __esModule: true, default: "Image" },

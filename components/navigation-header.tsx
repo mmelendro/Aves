@@ -8,6 +8,7 @@
 
 import { SiteLink as Link } from "@/components/site-link"
 import { usePathname } from "next/navigation"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { HeaderContour } from "@/components/header-contour"
 import { releasedAustraliaHeaders } from "@/lib/header-landscape.mjs"
 import { BrandMark } from "@/components/brand-mark"
@@ -39,7 +40,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     : rawPath.startsWith(SITE_BASE_PATH + "/")
       ? rawPath.slice(SITE_BASE_PATH.length)
       : rawPath
-  const landscape = releasedAustraliaHeaders[activePath]
+  const { selection } = useHeaderLandscape()
+  const landscape = selection?.country === "australia" ? releasedAustraliaHeaders[selection.regionId ? `/regions/${selection.regionId}` : "/"] : releasedAustraliaHeaders[activePath] || (activePath === "/aves-explorer" ? releasedAustraliaHeaders["/"] : undefined)
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
 

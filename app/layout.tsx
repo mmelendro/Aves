@@ -3,6 +3,7 @@
  * all routes in one cookie-preference provider. Page-specific content arrives as children.
  * Metadata here supplies default search/share information, not the visible page heading.
  */
+import { HeaderLandscapeProvider } from "@/components/header-landscape-context"
 import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { publicPages } from "@/lib/public-pages"
 import { sitePath } from "@/lib/site-path"
@@ -27,5 +28,5 @@ export const metadata: Metadata = {
 
 // The provider and cookie UI sit outside route content so every page can share the same preferences.
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en-AU"><body><CookieConsentProvider><AvesMediaProvider assetBase="/australia" navigationPaths={publicPages.map(page => sitePath(page.href))}>{children}</AvesMediaProvider><CookiePreferenceCenter /><CookieBanner /></CookieConsentProvider></body></html>
+  return <html lang="en-AU"><body><CookieConsentProvider><HeaderLandscapeProvider><AvesMediaProvider assetBase="/australia" navigationPaths={publicPages.map(page => sitePath(page.href))}>{children}</AvesMediaProvider></HeaderLandscapeProvider><CookiePreferenceCenter /><CookieBanner /></CookieConsentProvider></body></html>
 }

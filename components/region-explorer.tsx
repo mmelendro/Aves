@@ -6,6 +6,7 @@
  * The compact variant hides the extra directory cards, not any selectable regions.
  */
 
+import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { useId, useState } from "react"
 import Image from "next/image"
@@ -20,7 +21,8 @@ import { sitePath } from "@/lib/site-path"
 export function RegionExplorer({ compact = false, initialRegion = "queensland" }: { compact?: boolean; initialRegion?: string }) {
   // A single state value keeps map clicks, text buttons and the information card in sync.
   const [selectedRegion, setSelectedRegion] = useState(regions.some(region => region.id === initialRegion) ? initialRegion : "queensland")
-  const preview = useRegionPreview(setSelectedRegion)
+  const { publish } = useHeaderLandscape()
+  const preview = useRegionPreview(id=>{setSelectedRegion(id);publish({country:"australia",regionId:id})})
   const activate = (id: string) => preview.activateButton(id, sitePath(`/regions/${id}`))
   const region = regions.find(item => item.id === selectedRegion) || regions[0]
   // Unique IDs let multiple explorer instances coexist without colliding accessible labels.
