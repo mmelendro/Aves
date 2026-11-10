@@ -21,7 +21,7 @@ export function PageShell({ title, description, children, path = "", eyebrow = "
             <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">{description}</p>
           </div>
           {/* Media owns its internal sizing; for example, the bird carousel keeps its narrow portrait cap. */}
-          {(media || path === "/aves-explorer") && <div className="mt-8"><AustraliaHomeExplorer key={path} initialRegion={path.startsWith("/regions/") ? path.split("/")[2] : undefined} media={media} /></div>}
+          {media && <div className="mt-8"><AustraliaHomeExplorer key={path} initialRegion={path.startsWith("/regions/") ? path.split("/")[2] : undefined} media={media} /></div>}
         </div>
       </section>
       {/* The calling route supplies editable page sections here, below the common hero. */}

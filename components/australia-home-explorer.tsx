@@ -56,7 +56,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   }
   const preview = useRegionPreview(selectRegion)
   function previewRegion(event: MouseEvent<SVGAElement | HTMLAnchorElement>, regionId: string) {
-    preview.activate(event, regionId)
+    if (!media) preview.activate(event, regionId)
   }
   function backToAustralia() {
     preview.clear()
@@ -87,7 +87,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           {australiaMapStates.map(state => {
             const selected = state.regionId === highlightedRegion?.id
             const outline = <path d={state.path} fill={selected ? "#065f46" : "#c5dbd0"} stroke="#6e9582" strokeWidth="1" strokeLinejoin="round" vectorEffect="non-scaling-stroke" fillRule="evenodd" className={`transition-colors group-focus-visible:stroke-emerald-950 group-focus-visible:[stroke-width:3] motion-reduce:transition-none ${selected ? "group-hover:fill-emerald-700 group-focus-visible:fill-emerald-700" : "group-hover:fill-[#9cc4af] group-focus-visible:fill-[#9cc4af]"}`} />
-            return state.regionId && (!focusedRegion || selected) ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`))} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
+            return state.regionId ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => { if (!media) preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`)) }} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
           })}
           {highlightedShape && <svg x={highlightedShape.label[0]-markerSize/2} y={highlightedShape.label[1]-markerSize/2} width={markerSize} height={markerSize} pointerEvents="none"><MapFeatherMarker size={markerSize}/></svg>}
           </g>

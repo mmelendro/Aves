@@ -9,7 +9,6 @@ import { ArrowRight, Bird, Camera, Leaf, MapPin } from "lucide-react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { AustraliaHomeExplorer } from "@/components/australia-home-explorer"
-import { RegionExplorer } from "@/components/region-explorer"
 import { PlanningSteps } from "@/components/planning-steps"
 import { Button } from "@/components/ui/button"
 import { sitePath } from "@/lib/site-path"
@@ -59,7 +58,7 @@ export default function AVESLandingPage() {
         </div>
       </section>
       {/* A fuller regional chooser below the hero; compact still includes all nine regions. */}
-      <RegionExplorer compact />
+      <div className="mx-auto max-w-7xl px-4 py-6"><Link href="/aves-explorer" className="inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Read all Australian regional guides</Link></div>
       {/* Interest cards are generated from the interests array above. */}
       <section className="bg-white py-14 lg:py-20" aria-labelledby="experiences-heading">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

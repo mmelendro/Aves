@@ -152,7 +152,7 @@ test("country map previews only normal clicks, changes the local collection and 
   assert.equal(restoredFocus, true)
 })
 
-test("custom regional media previews on first tap and retains native guide navigation on the second", () => {
+test("custom regional guides retain direct navigation to every neighbouring region", () => {
   const custom = React.createElement("span", { "data-custom-media": "true" }, "Regional collection")
   const harness = explorerHarness({ initialRegion: "victoria", media: custom })
   let tree = harness.render()
@@ -160,10 +160,18 @@ test("custom regional media previews on first tap and retains native guide navig
   const event = clickEvent()
   link.props.onClick(event)
   tree = harness.render()
-  assert.equal(event.prevented, true, "default highlight is not a deliberate first tap")
+  assert.equal(event.prevented, undefined, "a guide follows native links immediately")
   const second = clickEvent()
   nodes(tree).find(node => node.type === "a" && node.props["aria-label"] === "Explore Victoria").props.onClick(second)
   assert.equal(second.prevented, undefined, "second activation follows the native guide href")
+  const neighbours = nodes(tree).filter(node => node.type === "a" && node.props["aria-label"]?.startsWith("Explore "))
+  assert.equal(neighbours.length, 9)
+  for (const neighbour of neighbours) {
+    const click = clickEvent()
+    neighbour.props.onClick(click)
+    assert.equal(click.prevented, undefined, neighbour.props["aria-label"])
+    assert.equal(neighbour.props["aria-hidden"], undefined)
+  }
   assert.ok(nodes(tree).includes(custom))
   assert.ok(nodes(tree).some(node => node.props?.["data-map-zoom"] === "victoria"))
   assert.equal(nodes(tree).some(node => node.type === "select"), false)
