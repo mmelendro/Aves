@@ -44,8 +44,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
         >
           Skip to content
         </a>
-        <div className="container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <BrandMark country="colombia" priority />
+        <div className="container mx-auto flex h-[72px] items-center justify-between gap-4 px-4 [container-type:inline-size] sm:px-6 lg:px-8">
+          <BrandMark country="colombia" priority extendContour />
 
           <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => {
