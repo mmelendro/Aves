@@ -488,3 +488,14 @@ test('place-note import requires an explicit action, survives failed save and re
  const reopened=componentHarness('components/account/trip-plan-editor.tsx','TripPlanEditor',{plan:saved,onSaved(){},onCancel(){}})
  assert.equal(find(reopened.render(),n=>n.props.name==='message').props.value,message)
 })
+
+test('synthetic editor transport never falls through to the real account request helper', async () => {
+ let realCalls=0,fixtureCalls=0,saved
+ const transport=async(path,options)=>{
+  fixtureCalls++;assert.equal(path,'/api/account/plans')
+  return {plan:{...JSON.parse(options.body),status:'draft',updatedAt:'2026-11-10T12:00:00Z'}}
+ }
+ const h=componentHarness('components/account/trip-plan-editor.tsx','TripPlanEditor',{initial:{country:'new-zealand',regions:['south-island']},transport,onSaved(plan){saved=plan},onCancel(){}},{mocks:{'./account-api':{...api,accountRequest(){realCalls++;throw new Error('Real account request forbidden in fixture')}}}})
+ await find(h.render(),node=>node.type==='form').props.onSubmit({preventDefault(){},currentTarget:{values:{title:'Synthetic no-network editor',regions:['south-island'],message:'Synthetic notes only.',pace:'open',birding:'open',comfort:'open',interests:[]}}})
+ assert.equal(fixtureCalls,1);assert.equal(realCalls,0);assert.equal(saved.message,'Synthetic notes only.')
+})

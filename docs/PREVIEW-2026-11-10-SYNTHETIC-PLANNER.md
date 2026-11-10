@@ -26,14 +26,29 @@ headers/query/cookies cannot enable it. It is noindex. Tests confirm it is disab
 in production, development, missing-env and other preview branches. No production
 routing, auth protection, callback, hosted environment variable or schema changed.
 
-308 automated checks and strict TypeScript pass. Full production build completion
+309 automated checks and strict TypeScript pass. Full production build completion
 is recorded with staging evidence. Stage only in verified Vercel aves-australia
 project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv, team_Th6ddqWyWKU1mLzTbJPlduDx, default
 preview target, preserving its existing deployment protection and live aliases.
 
-Next browser checks: import place notes without a transport call; edit synthetic
-notes; deliberate failed synthetic save retains notes/basket; retry and synthetic
-reopen retain data; real picker origin filters/credits remain; narrow layout and
-keyboard/focus; clear fixture. None of these certify actual hosted account/API/RLS
-save/reopen. Exact candidate private staging and scoped test-account/data work
-remain separate before production approval.
+Hosted UI checks passed on deployment dpl_HmbPCgMV9Xs8Uz8i3wFsvySGNypX,
+runtime44b8ac2d, in the actual Australia project. Preview target only:
+https://aves-australia-a1ia3hpqu-mmelendro-9273s-projects.vercel.app/australia/preview/planner
+
+Import appended Arthur's Pass and Otago & the Catlins to existing synthetic notes
+without calling the transport. A deliberate failed save retained the appended
+notes. Retry succeeded in memory, and reopening preserved the exact notes. The
+consumed place-ideas region was absent after successful save. The real bird picker
+reported35 introduced entries; the Helmeted Guineafowl image dialog exposed creator,
+original Wikimedia source and CC BY-SA4.0 licence. Closing the dialog and clearing
+the fixture returned to the idle screen with transport count0. No real account,
+database, email or provider writes were performed.
+
+Narrow layout and keyboard/focus checks remain unverified for this fixture. None
+of these checks certify hosted account/API/RLS persistence or cross-host handover.
+Exact candidate private staging and scoped test-account/data work remain separate
+before production approval.
+
+The additional handler test proves the injected synthetic transport is used and
+the real accountRequest helper is never called. The full local production build
+passed with25 static pages and the separate dynamic fixture route.
