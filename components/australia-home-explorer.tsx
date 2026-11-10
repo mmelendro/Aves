@@ -22,6 +22,7 @@ import { australiaMapProvenance, australiaMapStates, australiaMapViewBox } from 
 import { birdData, type BirdProfile } from "@/content/birds"
 import { regionOptions } from "@/content/region-options"
 import { sitePath } from "@/lib/site-path"
+import { MapViewer } from "./map-viewer"
 import { mapZoomTransform } from "@/lib/map-zoom"
 import { australianRegionBirds } from "@/lib/australia-region-birds"
 import regionOverviews from "@/content/region-overviews.json"
@@ -79,6 +80,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           <h2 className="font-medium text-emerald-950">{focusedRegion?.label ?? "Explore Australia"}</h2>
         </div>
         {/* Source geometry is reused unchanged. useId keeps title/description IDs unique on the page. */}
+        <MapViewer label="Australian regional map" credits={<a href={australiaMapProvenance.sourceUrl} className="underline">Natural Earth · Public domain · Generalised boundaries; external territories not shown</a>}>
         <svg viewBox={australiaMapViewBox} role="group" aria-labelledby={`${id}-map-title`} aria-describedby={`${id}-map-description`} className={`${styles.auMap} ${zoomStyles.viewport}`}>
           <title id={`${id}-map-title`}>Explore Australia’s states and territories</title>
           <desc id={`${id}-map-description`}>{focusedRegion ? `Closer view of ${focusedRegion.label}. Use Back to Australia for the whole country.` : "Select a region to zoom into it and preview its birds; Explore opens its guide."} The darker region is one place to look for the bird in the carousel, not its complete range. All nine regions also have larger links below the map. Generalised boundaries; external territories are outside this map.</desc>
@@ -99,6 +101,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           </g>)}
           </g>
         </svg>
+        </MapViewer>
         <div className={`${styles.mapFooter} px-4 pb-3`}>
           {!media && <><label htmlFor={`${id}-region`} className="sr-only">Choose an Australian region</label><select ref={regionSelect} id={`${id}-region`} aria-label="Choose an Australian region" value={focusedRegion?.id ?? ""} onChange={event => preview.preview(event.target.value)} className="mb-3 min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"><option value="">All featured Australia birds</option>{regionOptions.map(region => <option key={region.id} value={region.id}>{region.label}</option>)}</select></>}
           {focusedRegion && <Link href={`/regions/${focusedRegion.id}`} className="mb-2 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore {focusedRegion.label}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
