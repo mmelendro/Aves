@@ -37,12 +37,44 @@ transport: choice changes make no request until explicit submit, only bird IDs a
 serialized, and reopening a returned draft restores those IDs. This is contract
 coverage, not an actual hosted account/database save/reopen test.
 
-Local browser component rehearsal was blocked by browser access policy. Actual
-private dialog keyboard/focus, 340px reflow, signed-in save/reopen/edit and physical
-Safari/touch remain unverified. Do not inherit the public checklist's browser
-acceptance as private acceptance. Complete these checks with an authorised synthetic
-session before release; do not weaken auth, publish an editor fixture, or inspect
-customer plans to obtain that evidence.
+The initial local browser rehearsal was blocked. A separate protected, preview-only
+public component check subsequently verified the exact unchanged picker and photo
+components from this candidate. It uses in-memory choices only, with no account,
+plan editor, save controls, API calls or private data. Its route is fenced to
+VERCEL_ENV=preview and is on test/private-picker-ui-check, not PR #11. Do not merge
+that test-only branch or use it as a production release candidate.
+
+Component check source: 84e47f998f3685a44175bd9ebd533714624d3739.
+Hosted build READY: dpl_7BduHZXZqKffSv1boGWGwFAGxLDw.
+URL: https://aves-australia-qatqe1red-mmelendro-9273s-projects.vercel.app/australia/ui-checks/bird-picker
+Its strict TypeScript check passed. Git comparison confirmed the production
+candidate's components are identical and account/API/auth/Supabase files unchanged.
+
+| Browser check | Observed result |
+| --- | --- |
+| Desktop list | Five Apteryx references loaded; photo/illustration labels retained |
+| View without select | Opening and closing Kiwi/Kea/Tokoeka references did not add choices |
+| Credits | Real source/licence/creator/modification text visible for photos and illustration |
+| Keyboard | Tab and Shift+Tab remained in dialog; Escape closed it and restored thumbnail focus |
+| Search and filtering | Kea and scientific-name search worked; selected-only returned the two chosen IDs |
+| Missing image | California Quail remained selectable with Image pending; removal chips worked |
+| 340 CSS-pixel native zoom | Active tab width 340, height 234; no horizontal overflow in the page/list/dialog |
+| Short dialog scrolling | PageDown reached credits; dialog scrollTop 291 of 553px content with 209px client height |
+
+Desktop width was 1363 CSS pixels. At 340, list-row client/scroll widths matched
+at 265px; dialog client/scroll widths matched at 311px, outer width about 317px.
+This is native-zoom reflow and short-frame coverage, not a physical phone test.
+Exact 320/390 viewport emulation was unavailable because the browser organisation
+blocks DevTools. No workaround was attempted. Physical Safari/touch remain unverified.
+Sampled error entries originated in the browser extension's metadata messaging.
+
+Evidence: [desktop](evidence/private-picker/desktop.png),
+[340px scrolling dialog](evidence/private-picker/dialog-340.png).
+
+Actual signed-in private-shell save/reopen/edit remains unverified. The in-memory
+component check does not establish server persistence, account permissions or the
+private editor's surrounding layout. Existing editor transport tests remain mocked.
+Do not weaken auth, publish an editor fixture or inspect customer plans for evidence.
 
 ## Hosting and release
 
@@ -68,6 +100,6 @@ dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg, recovery checkpoint 19. Main is unchanged at
 a3445b7 / dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi, recovery checkpoint 20.
 Further production release needs explicit approval. PR #11 remains draft.
 
-Next: finish private preview acceptance, then continue the fifteen unresolved image
+Next: resolve the signed-in candidate acceptance gate, then continue the fifteen unresolved image
 sources or port Australia map enlargement as its own bounded increment. Cornell
 commercial permission still gates eBird. No infrastructure/C3 retry or consolidation.

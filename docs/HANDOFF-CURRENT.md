@@ -28,7 +28,10 @@ Next: finish PR #11 private preview acceptance. Source 6e802f0 passes 299 tests,
 strict TypeScript and local build; mocked editor save/reopen preserves bird IDs.
 Hosted build is READY. Signed-out access redirects to canonical live sign-in,
 preserving NZ/South Island intent; this is not a candidate save test. Actual
-hosted signed-in save, keyboard/focus and reflow are not yet verified.
+hosted signed-in save/reopen/edit and the private shell remain unverified.
+The exact unchanged picker passed a separate protected public-data component
+check: thumbnails/credits, independent selection, search/filtering, keyboard focus,
+Escape and native-zoom 340px short-frame reflow. This is not an actual account save.
 Read PREVIEW-2026-11-10-PRIVATE-THUMBNAILS.md. Do not reimplement the prepared port.
 Keep existing UI packages where practical. eBird readiness is assessed and its
 permission enquiry is unsent; written commercial API permission is required before use.
