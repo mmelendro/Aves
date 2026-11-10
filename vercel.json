@@ -3,7 +3,8 @@
   "git": {
     "deploymentEnabled": {
       "webmaster/readiness-2026-11-05": false,
-      "australia/preview": false
+      "australia/preview": false,
+      "test/private-picker-ui-check": false
     }
   }
 }
