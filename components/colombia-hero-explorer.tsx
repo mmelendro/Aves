@@ -84,14 +84,14 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
           </div>
           </MapViewer><div className={styles.mapFooter}><div className="flex gap-2">
             <label htmlFor="colombia-hero-region" className="sr-only">Choose a Colombia region</label>
-            <select ref={selectRef} id="colombia-hero-region" value={focused ? chosenRegion : ""} onChange={event => preview.preview(event.target.value)} className="min-h-11 min-w-0 flex-1 rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
+            <select ref={selectRef} id="colombia-hero-region" value={focused ? chosenRegion : ""} onChange={event => { const id = event.target.value; if (media && id) window.location.assign(`/regions/${id}`); else preview.preview(id) }} className="min-h-11 min-w-0 flex-1 rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
               <option value="">Choose a Colombian region</option>
               <ColombiaRegionTargets onActivate={media ? undefined : (event, id) => preview.activate(event, id)} onActivateKey={media ? undefined : (event, id, href) => preview.activateKey(event, id, href)} />
             {mapMarkers.map(region => <option key={region.slug} value={region.slug}>{region.name}</option>)}
             </select>
             <Link href={`/regions/${selectedRegion}`} className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-lg bg-emerald-50 px-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
-          <p className="mt-2 text-xs leading-4 text-gray-600">Tap to preview; tap the same region again or choose Explore to open its guide. {focused ? "Focused planning location: " : "Highlighted: "}{selectedRegionDetails.name}. {focused ? "Location marker, not a precise regional boundary." : "A starting point for this bird."} Not a complete species range.</p></div>
+          <p className="mt-2 text-xs leading-4 text-gray-600">{media ? "Choose a neighbouring region to open its guide." : "Tap to preview; tap the same region again or choose Explore to open its guide."} {focused ? "Focused planning location: " : "Highlighted: "}{selectedRegionDetails.name}. {focused ? "Location marker, not a precise regional boundary." : "A starting point for this bird."} Not a complete species range.</p></div>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href={chosenRegion ? `/contact?region=${chosenRegion}` : "/contact"} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 font-semibold text-white shadow-sm hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Plan my trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
