@@ -370,9 +370,9 @@ test("persistent player stays absent until a deliberate media request", () => {
 test("South Island soundscapes start off with no audio element, preload or external player", () => {
   const Soundscapes = load("components/south-island-soundscapes.tsx").default
   const html = renderToStaticMarkup(React.createElement(Soundscapes))
-  assert.match(html, /data-soundscape-state="Off"/)
-  assert.match(html, /Play soundscape/)
-  assert.match(html, /Kea · New Zealand soundscapes/)
-  assert.match(html, /Soundscape volume/)
+  assert.match(html, /data-region-listen="south-island"/)
+  assert.match(html, /Listen to this region/)
+  assert.match(html, /Peel Forest, Canterbury/)
+  assert.doesNotMatch(html, /Soundscape volume|<section|<audio/)
   assert.doesNotMatch(html, /<audio|<iframe|autoplay|preload=/)
 })

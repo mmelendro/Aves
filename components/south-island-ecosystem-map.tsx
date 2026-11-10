@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import SouthIslandSoundscapes from "./south-island-soundscapes"
 import { MapViewer } from "./map-viewer"
 import { mapGestureView } from "@/lib/map-gestures.mjs"
 
@@ -73,7 +74,7 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
   function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(false) }
-  return <MapViewer label="South Island habitat map" gestures={false}><section className={styles.card} aria-labelledby={`${id}-title`}>
+  return <MapViewer label="South Island habitat map" gestures={false} listenControl={<SouthIslandSoundscapes />}><section className={styles.card} aria-labelledby={`${id}-title`}>
     <div className="flex flex-wrap items-center justify-between gap-2">
       <h2 id={`${id}-title`} className="font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2>
       <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All habitats</button>

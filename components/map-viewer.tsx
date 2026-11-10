@@ -9,7 +9,7 @@ import styles from "./map-viewer.module.css"
  * Inline touch gestures require explicit Move; page/browser zoom remains native
  * elsewhere. Expanded maps own their gesture surface, not the whole document.
  */
-export function MapViewer({ children, label, gestures = true, credits }: { children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode }) {
+export function MapViewer({ children, label, gestures = true, credits, listenControl }: { children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode }) {
   const dialog = useRef<HTMLDialogElement>(null), surface = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null)
   const [expanded, setExpanded] = useState(false), [move, setMove] = useState(false), [view, setView] = useState<MapView>(fitMapView), [gesturing, setGesturing] = useState(false)
   const viewRef = useRef(view), points = useRef(new Map<number,{x:number;y:number}>())
@@ -28,6 +28,7 @@ export function MapViewer({ children, label, gestures = true, credits }: { child
     if (open) element.showModal(); else element.show()
     points.current.clear(); start.current = null; setGesturing(false)
     setExpanded(open)
+    document.dispatchEvent(new Event("aves:map-resize"))
     if (!open) trigger.current?.focus({ preventScroll: true })
   }
   useEffect(() => {
@@ -52,7 +53,7 @@ export function MapViewer({ children, label, gestures = true, credits }: { child
         {!expanded && <button className={styles.control} type="button" aria-label={`Use touch gestures on ${label}`} aria-pressed={move} onClick={()=>{setMove(!move);points.current.clear();start.current=null}}><Hand size={18} aria-hidden="true"/></button>}
         <span className="text-xs tabular-nums text-emerald-900" aria-live="off">{view.zoom.toFixed(1)}×</span>
       </>}
-      <button ref={trigger} className={`${styles.control} ml-auto`} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button>
+      <div className="ml-auto flex items-center gap-1">{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
     </div>
     {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Home to reset" : "Use the controls to zoom, or turn on Move for dragging and pinching. Page scrolling stays available."}</p>}
     <div ref={surface} data-gesturing={gesturing || undefined} className={styles.surface} tabIndex={gestures ? 0 : undefined} role={gestures ? "group" : undefined} aria-label={gestures ? `${label} gesture surface` : undefined} style={{touchAction: active ? "none" : "pan-y pinch-zoom",cursor:active ? "grab" : undefined}}

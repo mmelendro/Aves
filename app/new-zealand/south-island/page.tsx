@@ -1,4 +1,3 @@
-import SouthIslandSoundscapes from "@/components/south-island-soundscapes"
 import SouthIslandResourceCarousel from "@/components/south-island-resource-carousel"
 /**
  * The first dedicated NZ regional page. The shared explorer receives one island
@@ -56,7 +55,6 @@ export default function SouthIslandPage() {
 
             {/* One content-driven explorer keeps this regional page consistent
                 with the country page, including calls, rights and saved picks. */}
-            <SouthIslandSoundscapes />
             <NewZealandHeroExplorer regionId="south-island" />
 
             <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4">
