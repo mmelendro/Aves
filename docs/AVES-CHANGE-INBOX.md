@@ -1,9 +1,15 @@
 # AVES request inbox
 
-Current AVES-039 status: the public NZ checklist photo pilot is published in
-8c7f297 / dpl_AuSANAJzDMdddtHb53rArqvJqM1B. Reuses 31 credited photographs;
-149 tests and 38 live route/asset/sitemap checks passed. Private-picker port,
-videos and additional media remain separate. See RELEASE-2026-11-10-CHECKLIST-PHOTOS.md.
+Current 10 November status: established contours, main map controls and one-person
+team are live. Selection-linked headers/local flocks, satellite shading and public
+checklist thumbnails are source-complete in main PR #10 and separate AU PR #9,
+with preview evidence in the named PREVIEW documents. Public checklist reference
+coverage is 362/377; fifteen await verified safe sources. Private-picker port remains
+next UI work. South Island eBird readiness is assessed, with written commercial-use
+permission required and its enquiry unsent. HANDOFF-CURRENT.md owns exact status.
+
+The earlier 31-photo pilot remains live; this broader thumbnail/reference update
+is preview-only until explicitly approved. Existing release evidence is preserved.
 
 
 Current implementation status and release permission live in
@@ -27,7 +33,8 @@ All nine configured Australian regional headers plus its country header were
 published before the final Colombian additions. All eleven Colombian regions
 plus its country header are live. Main map controls/enlargement and the one-person
 team carousel are live. See HANDOFF-CURRENT.md for runtime/checkpoint details.
-Unverified wildlife silhouettes and additional NZ local variants remain studies.
+Selection-linked NZ variants and local family silhouettes are now preview work,
+with locally supported species sources; exact species illustrations remain later.
 Source audit/cleanup is newer than runtime; see AUDIT-2026-11-10-CODE-UX.md.
 
 ## Latest owner map direction, 10 November 2026
@@ -255,3 +262,21 @@ these controls and reuses existing team records/portraits, with no autoplay. No
 Australia app release, customer data, provider or account changes are authorised by
 this entry. Ecosystem-specific header variants are retained for a later increment.
 Physical mobile gesture acceptance and a separate production approval remain gates.
+
+## Latest owner continuation: maps, local flocks, thumbnails and wording
+
+Map selection must smoothly update the header before navigation: countries on the
+global map, regions/islands/places on country maps. Always retain a small horizon
+flock with appropriate local species/family. Future app reuse should inform data/
+rendering boundaries without a new framework or consolidation. These requests are
+in main PR #10 and AU PR #9. Use personal wording such as “Discuss your New Zealand
+trip” across comparable prompts.
+
+The owner requested actual bird thumbnails ASAP, later illustrations/logo-style or
+3D references. The public preview now covers 362/377 living entries, with fifteen
+explicit pending slots. Existing curated sources are reused. No rejected contact/
+licence payload is included. The private picker is the next separate UI port.
+
+The eventual eBird hotspot layer should begin with South Island. Readiness and an
+unsent permission enquiry are in NEXT-EBIRD-SOUTH-ISLAND.md. Do not import commercial
+API data before written permission or expose keys, private sightings or observer data.

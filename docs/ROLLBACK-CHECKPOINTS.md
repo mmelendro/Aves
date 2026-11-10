@@ -1,5 +1,10 @@
 # AVES verified release checkpoints
 
+Current preview work has not changed production. Main recovery remains
+checkpoint/2026-11-10-18-colombia-contours (33189e9), AU recovery remains
+checkpoint/2026-11-10-17-australia-contours (59a8f65). Main PR #10 and AU PR #9
+are review candidates, not rollback targets for an unperformed release.
+
 Use one checkpoint per small verified increment. Check the current GitHub heads
 and Vercel project before any recovery. Main and Australian apps are independent;
 do not merge their roots or roll back both merely because one UI changed.

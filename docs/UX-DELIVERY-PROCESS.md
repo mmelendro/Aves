@@ -38,3 +38,19 @@ Separate proved dead code from historical documents, rollback evidence, retained
 roadmap items and deferred integration work. Remove confirmed local clutter and
 unused code, fix discovered defects, preserve archives, and avoid unrelated broad
 rewrites. Do not describe a bounded review as a complete security audit.
+
+## Visitor-facing wording
+
+Address the visitor directly in planning prompts: “Discuss your New Zealand trip”,
+“Plan your birding trip” and “Start your private planning brief”. Apply the same
+personal language across countries and regions. Keep inquiry wording clear about
+personal planning without implying confirmed availability or a booking.
+
+## Media preflight
+
+Check scientific identity, actual rendered image, per-file reuse rights, creator
+and modifications. Review embedded metadata for contact details and GPS before
+uploading. Withhold rejected candidates and use a separately verified source; do
+not re-encode or route a rejected payload around approval review. Keep provenance
+with each reference asset and label illustrations. Show an honest pending slot
+when identity, reuse rights or an appropriate safe source remain unresolved.
