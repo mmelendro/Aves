@@ -43,7 +43,7 @@ export default function NewZealandPage() {
               <p className="mt-4 text-base font-medium leading-relaxed text-emerald-900 sm:text-lg">Follow the birds. Stay for everything around them.</p>
               <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-gray-600">We’re developing personally planned journeys connecting birds, landscapes and local culture. Tell us the pace, comforts and experiences you would love to build a trip around.</p>
             </div>
-            <div className="mb-7 text-center"><Link href="/account?country=new-zealand&region=south-island" className={`${linkStyle} bg-emerald-700 text-white hover:bg-emerald-800`}>Start a private planning brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><p className="mt-3 text-sm text-gray-600">A short questionnaire in My Trips. Save privately, then choose whether to share with AVES. No booking is confirmed.</p></div>
+            <div className="mb-7 text-center"><Link href="/account?country=new-zealand&region=south-island" className={`${linkStyle} bg-emerald-700 text-white hover:bg-emerald-800`}>Start your private planning brief<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><p className="mt-3 text-sm text-gray-600">A short questionnaire in My Trips. Save privately, then choose whether to share with AVES. No booking is confirmed.</p></div>
             <NewZealandHeroExplorer />
             <nav aria-label="On this page" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-200 pt-4 text-sm font-semibold text-emerald-800"><Link href="/" className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">All destinations</Link>{[["regions", "The islands"], ["birdlife", "Birds & where to find them"], ["experience", "Beyond birding"], ["travel-with-care", "Travel with care"]].map(([id, label]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">{label}</a>)}</nav>
           </div>
@@ -62,7 +62,7 @@ export default function NewZealandPage() {
                 <h2 id="experience-heading" className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl">Make room for the whole journey.</h2>
                 <p className="mt-5 text-lg leading-relaxed text-gray-600">A birding morning can lead into a lakeside walk, a gallery visit or a long lunch. Tell us what makes a trip memorable for you.</p>
                 <p className="mt-4 leading-7 text-gray-600">As we develop AVES New Zealand, your interests will help shape the conversation: how far you want to travel, where you feel comfortable staying and how much time to leave unplanned.</p>
-                <a href={newZealandContactHref} className={`${linkStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Discuss a New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+                <a href={newZealandContactHref} className={`${linkStyle} mt-6 bg-emerald-700 text-white hover:bg-emerald-800`}>Discuss your New Zealand trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
                 <p className="mt-3 text-xs leading-5 text-gray-500">A personal planning conversation; arrangements are confirmed separately.</p>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function NewZealandPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><div className="rounded-3xl bg-emerald-900 p-7 text-white sm:p-12">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-emerald-200">Help shape what comes next</p><h2 id="journey-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">What would your New Zealand journey look like?</h2><p className="mt-5 max-w-2xl text-lg leading-relaxed text-emerald-50">We’re developing AVES New Zealand. Share your interests, approximate dates, preferred pace and the kind of places you’d love to stay.</p>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-emerald-100">You can save a private brief and the birds you would love to see, then choose to share it with AVES. Planning does not confirm tours, guides, dates, prices or reservations; arrangements are discussed separately.</p>
-            <a href={newZealandContactHref} className={`${linkStyle} mt-7 bg-white text-emerald-900 hover:bg-emerald-50 focus-visible:outline-white`}>Discuss a New Zealand trip<ArrowRight className="h-5 w-5" aria-hidden="true" /></a><p className="mt-4 text-sm text-emerald-100">Send a message through our contact form. We’ll reply personally.</p>
+            <a href={newZealandContactHref} className={`${linkStyle} mt-7 bg-white text-emerald-900 hover:bg-emerald-50 focus-visible:outline-white`}>Discuss your New Zealand trip<ArrowRight className="h-5 w-5" aria-hidden="true" /></a><p className="mt-4 text-sm text-emerald-100">Send a message through our contact form. We’ll reply personally.</p>
           </div></div>
         </section>
       </main>
