@@ -44,7 +44,7 @@ Production approval remains a separate gate. Do not claim background commands or
 | 3 | Consistent country/region map styling, AVES-012c | Audit remaining pages, then align one batch's labels, selected colours, controls and spacing with the delivered homepage style | Prepared PRs #12/#13; NZ existing-preview modal/zoom/reset/Escape checked; other acceptance pending |
 | 4 | Birds / AVES invitation animation, AVES-067 | Reuse the existing restrained word transition in matching invitations, with stable text width and a still reduced-motion version | NZ invitation and all Colombia region invitations reuse the existing fixed-width, reduced-motion control; source prepared, candidate browser acceptance pending |
 | 5 | Continuous bird-call listening, AVES-047 | Explicit session opt-in for calls to follow manual carousel changes, with one player and clear stop/mute states | Source pilot on feature/follow-bird-calls; 169 tests and TypeScript pass; exact browser/audio acceptance pending |
-| 6 | Species-origin filters, AVES-025/048 | Make existing NZ native/introduced/unknown controls consistent across checklist and private picker; preserve chosen birds | Ready for a current-coverage audit; use existing sourced NZ data first |
+| 6 | Species-origin filters, AVES-025/048 | Make existing NZ native/introduced/unknown controls consistent across checklist and private picker; preserve chosen birds | Main source pilot on feature/nz-origin-filters: combined search/selection/origin, 172 checks and TypeScript pass; private parity/visual acceptance pending |
 | 7 | South Island sea context, AVES-042 | Subtle surrounding-water treatment and sourced sea labels, retaining scale and readable habitat colours | Small map-style candidate; inspect existing coverage before adding anything |
 | 8 | Save places to your trip, AVES-063 | Carry one chosen South Island place into the existing private brief and verify explicit save/reopen | Useful functionality; account acceptance and existing storage audit required |
 | 9 | B Corp map layer, AVES-069 | Source/access assessment, then a small verified South Island business list and optional layer preview | Data-dependent; certification and actual public locations need verification first |
@@ -112,3 +112,10 @@ stops on hidden pages, other native foreground playback and unmount. 169 checks
 and TypeScript pass; exact browser acceptance remains pending. See
 PREVIEW-2026-11-10-FOLLOW-CALLS.md. Next selected source audit: NZ origin filters,
 using existing provenance; private-app parity remains a separate branch increment.
+
+## Second sprint: NZ species-origin filters
+
+Main-app source pilot combines all/selected birds, name search and published
+origin without changing chosen IDs. Native includes endemic; unknown values never
+default to native. Source counts: 342 native (93 endemic), 35 introduced, zero
+unknown. 172 checks and TypeScript pass. See PREVIEW-2026-11-10-NZ-ORIGIN.md.
