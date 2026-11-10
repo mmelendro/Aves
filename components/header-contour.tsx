@@ -1,59 +1,42 @@
 "use client"
 
 import { useLayoutEffect, useRef, useState } from "react"
-import { landscapes, type BrandCountry } from "@/components/brand-mark"
+import { newZealandHeaderGeometry } from "@/lib/header-landscape.mjs"
 
-/** One visible outline replaces the logo contour AND header divider. Measure
- * the reserved logo SVG so its country landscape retains its exact proportions.
- */
-export function HeaderContour({ country }: { country?: BrandCountry }) {
+type Geometry = ReturnType<typeof newZealandHeaderGeometry>
+
+/** Static decorative vectors; links and focus indicators stay above this layer. */
+export function HeaderContour() {
   const ref = useRef<SVGSVGElement>(null)
-  const [edge, setEdge] = useState("M0 68 L1440 68")
-  const [width, setWidth] = useState(1440)
+  const [drawing, setDrawing] = useState<{ width: number; geometry: Geometry } | null>(null)
   useLayoutEffect(() => {
-    const svg = ref.current
-    const header = svg?.closest("header")
-    const logo = header?.querySelector<SVGSVGElement>("[data-brand-landscape]")
-    if (!svg || !header || !logo) return
+    const svg = ref.current, header = svg?.closest("header")
+    const word = header?.querySelector<HTMLElement>("[data-brand-wordmark]")
+    const nav = header?.querySelector<HTMLElement>("[data-contour-navigation]")
+    if (!svg || !header || !word || !nav) return
     function measure() {
-      const h = header!.getBoundingClientRect(), l = logo!.getBoundingClientRect()
-      const scale = Math.min(l.width / 240, l.height / 40)
-      const x = l.left - h.left + (l.width - 240 * scale) / 2
-      const y = l.top - h.top + (l.height - 40 * scale) / 2
-      let index = 0
-      // Rounded shoulders retain the NZ peaks while sharing the waves' flowing style.
-      const sourceLandscape = country === "new-zealand"
-        ? "M2 31 Q15 29 25 25 Q34 21 41 13 Q44 9 47 13 L52 18 Q55 22 58 16 L69 5 Q72 0 75 5 L81 18 Q84 24 87 19 L91 15 Q93 11 96 16 L107 27 Q110 31 115 29 Q131 24 150 28"
-        : landscapes[country || "global"]
-      const landscape = sourceLandscape.replace(/-?\d+(?:\.\d+)?/g, value => String((index++ % 2 ? y : x) + Number(value) * scale))
-      const numbers = landscape.match(/-?\d+(?:\.\d+)?/g)!.map(Number)
-      const endX = numbers[numbers.length - 2], endY = numbers[numbers.length - 1]
-      const firstY = numbers[1], remaining = h.width - endX
-      setWidth(h.width)
-      // Low swells lead into two curling crests beneath the right-hand menu.
-      // Each crest doubles back within the SAME outline; no parallel water strokes.
-      const amplitude = Math.min(1, Math.max(.45, remaining / 650))
-      const point = (fraction: number, depth: number) => `${endX + remaining * fraction} ${endY + depth * amplitude}`
-      const ocean = [
-        `C${point(.08, 3)} ${point(.17, -2)} ${point(.28, 3)}`,
-        `S${point(.45, 11)} ${point(.58, 8)}`,
-        `C${point(.63, 7)} ${point(.66, -1)} ${point(.69, 0)}`,
-        `C${point(.725, 1)} ${point(.715, 11)} ${point(.683, 9)}`,
-        `C${point(.701, 5)} ${point(.729, 9)} ${point(.75, 15)}`,
-        `C${point(.78, 19)} ${point(.805, 2)} ${point(.836, 3)}`,
-        `C${point(.862, 4)} ${point(.856, 12)} ${point(.832, 10)}`,
-        `C${point(.846, 7)} ${point(.871, 12)} ${point(.892, 15)}`,
-        `C${point(.93, 19)} ${point(.962, 6)} ${point(1, 8)}`,
-      ].join(" ")
-      setEdge(`M0 ${firstY} ${landscape.replace(/^M/, "L")} ${ocean}`)
+      const h = header!.getBoundingClientRect(), b = word!.getBoundingClientRect(), n = nav!.getBoundingClientRect()
+      setDrawing({ width: h.width, geometry: newZealandHeaderGeometry({ width: h.width, wordCenter: b.left - h.left + b.width / 2, navLeft: n.left - h.left, navRight: n.right - h.left }) })
     }
     measure()
     const observer = new ResizeObserver(measure)
-    observer.observe(header); observer.observe(logo)
-    return () => observer.disconnect()
-  }, [country])
-  return <svg ref={ref} aria-hidden="true" focusable="false" viewBox={`0 0 ${width} 92`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[92px] w-full text-emerald-600" fill="none">
-    <path d={`${edge} L${width} 0 H0 Z`} fill="white" fillOpacity=".98" />
-    <path d={edge} stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" opacity=".65" />
+    observer.observe(header); observer.observe(word); observer.observe(nav)
+    let active = true
+    document.fonts.ready.then(() => { if (active) measure() })
+    return () => { active = false; observer.disconnect() }
+  }, [])
+  const g = drawing?.geometry
+  return <svg ref={ref} data-header-contour="new-zealand" aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
+    <path d={g ? `${g.boundary} L${drawing!.width} 0 H0 Z` : "M0 108H1440V0H0Z"} fill="white" />
+    {g && <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <path data-landscape-boundary="true" d={g.boundary} strokeWidth="1.35" />
+      {[...g.ridges, ...g.water].map((d, i) => <path key={i} d={d} strokeWidth=".65" />)}
+      <g data-header-wildlife="true" strokeWidth=".7">
+        {g.whales.map((d, i) => <path key={i} d={d} />)}
+        {g.birds.map((bird, i) => <g key={i} transform={`translate(${bird.x} ${bird.y}) rotate(${bird.rotation}) scale(${bird.size})`}>
+          <path d={i % 3 === 0 ? "M-1 -.2 Q-.5 -.52 0 0 Q.28 -.34 .9 -.52 M0 0 L.08 .2 L.2 .09" : "M-1 -.2 Q-.48 -.34 0 0 Q.48 -.34 1 -.2 M0 0 L.06 .2 L.15 .08"} strokeWidth={.7 / bird.size} />
+        </g>)}
+      </g>
+    </g>}
   </svg>
 }

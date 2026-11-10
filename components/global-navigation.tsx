@@ -1,4 +1,3 @@
-import { HeaderContour } from "@/components/header-contour"
 /**
  * Header and footer for the global landing page and New Zealand pages.
  * Passing country changes the logo subtitle, while My Trips remains one shared account.
@@ -8,19 +7,20 @@ import { BrandMark, type BrandCountry } from "@/components/brand-mark"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { destinations } from "@/content/destinations"
+import { NewZealandHeader } from "@/components/new-zealand-header"
 
 interface GlobalBrandProps {
   country?: BrandCountry
 }
 
 export function GlobalHeader({ country }: GlobalBrandProps = {}) {
+  if (country === "new-zealand") return <NewZealandHeader />
   return (
     <>
       <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] rounded-lg bg-white px-5 py-3 font-medium text-emerald-900 shadow-lg focus:not-sr-only">Skip to content</a>
-      <header className="sticky top-0 z-40 -mb-7 isolate">
-        <HeaderContour country={country} />
-        <div className="relative mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
-          <BrandMark country={country} priority unifiedHeaderContour />
+      <header className="sticky top-0 z-40 border-b border-emerald-100 bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
+          <BrandMark country={country} priority />
           <nav aria-label="Main navigation" className="flex items-center gap-1 sm:gap-3">
             <a href="/#destinations" className="inline-flex min-h-11 items-center rounded-full px-2 text-[13px] font-medium text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 sm:px-3 sm:text-sm">Destinations</a>
             <a href="/#planning" className="hidden min-h-11 items-center rounded-full px-3 text-sm font-medium text-gray-700 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 sm:inline-flex">How it works</a>
