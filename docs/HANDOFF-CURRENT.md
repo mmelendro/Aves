@@ -1,60 +1,26 @@
-# Colombia explorer and navigation checkpoint
+# Current global explorer handoff
 
-Main production `60e94a4a992aafb80ddacd47ea5a9d19f332d81c / `dpl_BbUks6FmNboPV1DTmnrRxZ1pRS9J is READY on aves.bio. The homepage, New Zealand, South Island, Colombia, eleven Colombian guides and legacy explorer now use the same one-map shell. Public geographic URL state survives refresh, Back and Forward. Scope drives headings, bird photos, planning context and country/region links; matching editorial content hides when you explore elsewhere. Colombia's page-local Spanish control remains available. The duplicate legacy maps and roughly 600 lines of obsolete explorer implementation are removed.
+## Active owner queue · 11 November 2026
 
-191 tests, strict TypeScript and final hosted build pass. Preview and live checks cover map count, regional choices, guide headings, divider, enlargement/restore, refresh/history, cross-country access to the existing South Island layers, and the Spanish control. A 337 CSS-pixel desktop zoom check had no horizontal overflow; real mobile Safari/touch remains unverified. See docs/RELEASE-2026-11-11-COLOMBIA-EXPLORER.md.
+The global country explorer is LIVE. AVES is the global site, with Australia, Colombia and New Zealand beneath it. Country and regional choices update the same explorer in place, including headings, birds, planning links and existing sourced layers. Public paths follow the selected country/region and survive refresh, Back and Forward. One map, a resizable bird panel, enlargement/restore and the shared media player remain. This covers the homepage, NZ/South Island, Colombia and eleven guides, Australian homepage and nine guides, and both legacy explorer directories.
 
-Next: Australian native entry-page convergence, preserving its separate application and shared backend. Its production remains `5bdd33bae0d55f5a202fe4963f692ab27e118cc4` / `dpl_99qgUavb9ArbDhyL5PGRz42MBuPo`. Do not merge app branches. Pending public form/glass work is preserved on `wip/unified-contact-glass-main` and `wip/unified-contact-glass-au`. Complete endemic coverage and the photographed AU/NZ range audit remain required. The earlier verified US$1 safeguard was neither changed nor freshly inspected in this increment.
+Main runtime `b891afdf6304d4e958a11fddbfe0713da074b4d6`, deployment `dpl_9hhMSyF5PKxzDeCUCQ78RNr3MN5o`. Australia runtime `fa159442125b17f83da0f41a8a37452d5250c88b`, deployment `dpl_E3HiaAgnJTHmjHRHnocVTiQEy1k7`. Both READY. 192 main and 322 Australia tests pass. See docs/RELEASE-2026-11-11-GLOBAL-EXPLORER.md for exact evidence and limits. Maintained branches remain separate; never merge their backend/app trees.
 
-Read CONTINUE-HERE.md and docs/AGILE-PLAN.md for the active owner queue.
+My Trips is the existing shared private planning and quote/confirmation flow for the configured countries. Country/region context follows its links. No instant checkout or single multi-country itinerary cart was introduced. No real account save, inquiry, email, booking or payment was made during acceptance.
 
-## Previous checkpoint
+Next priorities, in order:
 
-# Current unified explorer checkpoint
+1. Finish embedded information/article map convergence and physical mobile/touch acceptance. Primary country and regional entry pages are unified; older AU PageShell media embeds and the main article bird carousel still use earlier explorers. Preserve every sourced layer, accessible controls, NZ bird wishes, and original recording/photo rights. The earlier narrow desktop zoom check is not a physical phone test.
+2. Finish the shared guided public contact form. Preserve country/multiple-region choices, dates/duration/group, interests and target wildlife, pace/access/comfort, indicative budget/currency, language/reply preferences, optional updates, review/back/edit and clear receipt/error states. Keep authenticated private planning and explicit sharing separate. Pending source is preserved on `wip/unified-contact-glass-main` (`3679648b7723d35d9d9c4192e74f904a666bc4ab`) and `wip/unified-contact-glass-au` (`919a4e5228c90ff46ee1b529384a34740c9792d2`). Inspect before adapting; do not overwrite current explorer changes with old WIP trees.
+3. Finish frosted landscape headers, including scroll/narrow-screen checks, focus, reduced motion and opaque fallback. Source remains on those WIP branches.
+4. Complete the photographed AU/NZ bird range and habitat audit, including crimson rosella, king-parrot and splendid/superb fairywrens. Separate photographed locality, featured planning region, established range and habitat. Publish a dated per-species source ledger. Never present planning markers as complete ranges.
+5. Include all endemics in source-backed country/regional checklists, beyond photographed birds. Distinguish country and regional endemics, retain missing-image states, verify taxonomy/coverage before claiming completeness. Preserve the existing NZ checklist and wishes.
+6. Continue source-verified map layers and responsible travel resources. B Corp pins stay off until certification, location and reuse checks pass. Preserve the Eco-Tourism Business Plan's costs, margins, local benefits and measurable conservation outcomes. The current business plan was not reread or changed in this code release.
 
-Main runtime `2c0deea666e7350e6b2e51fc08b65916c36881f4`, deployment `dpl_9i3f5PKdu6DCWUxeASvJysX64sHE`, READY on aves.bio. The South Island and New Zealand entry pages and homepage share one explorer. One rendered map per view, retained existing South Island layers, contextual birds/places/planning, in-place region and world navigation, and private NZ bird basket are preserved. 187 exact-release tests pass; strict TypeScript, full local and hosted builds pass. Desktop browser acceptance and screenshot are in docs/RELEASE-2026-11-11-UNIFIED-EXPLORER.md. Phone-specific acceptance and other country-entry rollout remain next.
+Neutral world/Australia opening and natural regional headings are live in the shared explorer. Global home retains peregrine identity. VIDA remains a future umbrella, not the current brand. The owner authorized implementation, testing, GitHub sync and production publication in this scope. Preserve deployment protection and the previously verified US$1 safeguard; billing was unchanged and the safeguard was not freshly inspected. Update these records after each tested increment. Do not call the entire backlog complete.
 
-The owner made this the urgent priority over contact/glass and the full bird-range/endemic audit. Both pending form/glass source sets are saved on WIP branches listed in that release file. All endemics must be included beyond photographed birds, with authoritative taxonomy and geographic coverage. Do not claim the all-country endemic/range audit complete.
+## Release evidence
 
-Australia production remains `5bdd33bae0d55f5a202fe4963f692ab27e118cc4` / `dpl_99qgUavb9ArbDhyL5PGRz42MBuPo`. Preserve the separate app. The prior US$1 safeguard was not changed; not freshly inspected in this increment.
+Read RELEASE-2026-11-11-GLOBAL-EXPLORER.md. Preview/live acceptance confirms country switching, canonical public paths, refresh/history, selected planning context and retained one-map/shared-player behavior. Error/fatal scans on both exact deployments had no matching entries in the 15-minute windows ending 2026-11-10 20:32:38 UTC. This is a bounded check.
 
-Read CONTINUE-HERE.md and docs/AGILE-PLAN.md for the active owner queue.
-
-## Earlier checkpoint
-
-# AVES current handoff
-
-Published 11 November 2026 (Sydney), following the owner's explicit production instruction and subsequent map/listening refinements. Both applications are READY and the exact source hashes below are confirmed.
-
-| Application | Maintained branch | Live runtime | Production deployment |
-| --- | --- | --- | --- |
-| Global / Colombia / NZ | `webmaster/readiness-2026-11-05` | `094a4e0c255f43dce83da1ac1c69550a892f91cd` | `dpl_AQRa1CBwc6tfAPXFp5nKBF5m6F92` |
-| Australia / shared portal | `australia/preview` | `cc1a45d471def6367d4758ad54f820a3a4046adf` | `dpl_7neXSNAYigyDfQgQi4xnAPXuN5iG` |
-
-## Current behavior
-
-One active map viewer per page. The homepage shares its viewer between world, country and region; visible neighbouring regions stay selectable. Dedicated guides navigate to neighbouring guides directly. All map viewers retain full-size/restore controls. South Island places/landscapes connect to the single hero map rather than a second rendered map.
-
-The South Island map has a region-listen button corresponding to bird listening on the photo panel. Bird calls, regional soundscapes, podcasts and videos use one shared player. Region locality and recording credits remain explicit; mountains have no substitute recording. The separate soundscape panel and mixing engine are removed. A stable player host moves into an expanded map and back without restarting audio. Closing/pausing cancels optional bird-follow, and pause/resume retains position.
-
-Curated travel-resource handoff remains paused across reload/app boundaries. Dynamic bird/soundscape sources are never stored and do not restore after reload/app boundary. No media loads before a deliberate request.
-
-## Evidence and limits
-
-182 main tests and 316 Australia tests, strict TypeScript and both complete builds passed. Browser previews checked the complete one-dock audio handoffs, source identity, follow/close behavior, pause/resume, expanded-map controls, regional neighbour navigation, and shared South Island place/landscape state. A 340 CSS-pixel viewport check found no horizontal document overflow; physical Safari/touch checks remain.
-
-Live https://aves.bio/new-zealand/south-island showed no audio before request, then played the verified regional recording in the shared dock. The dock remained in the expanded map, kept its position on restore and paused correctly. Live https://aves.bio/australia played Superb Fairywren through the same player with the correct /australia audio path. Playback was stopped/paused after checking. No visitor/account write, email, booking or payment was made.
-
-Error/fatal scans scoped to both exact deployments returned no matching logs in the 15-minute windows ending 10 November 2026 at 13:49:49 UTC. This is a short observation window, not ongoing monitoring.
-
-Evidence: `evidence/2026-11-11-shared-player-live.png`. Details: RELEASE-2026-11-11-MAPS.md and RELEASE-2026-11-11-SHARED-PLAYER.md. AGILE-PLAN.md is the comprehensive current backlog. VIDA-FUTURE-DIRECTION.md records the long-term umbrella idea; AVES is still the current brand.
-
-## Preserve
-
-No schema/auth, dependency, paid provider or billing setting changed. Keep the two applications, production routing, deployment protection, private planning and original media provenance. B Corp eligibility/source guard remains live with zero eligible pins and no visible B Corp layer. Synthetic test fixtures and unified-app cutover were not published. The previously verified US$1 on-demand cap/automatic pausing remains unchanged; subscription fees are separate.
-
-Rollback to maps-only: main `dpl_2RD7uJy1KWAxviTziF1WwuNRRx9J`, Australia `dpl_3tnYnxUNdyp4yEY3ms73ivuEeCCw`. The preceding regional-artwork release is retained in RELEASE-2026-11-10-REFINEMENTS.md. Documentation heads may be newer than runtime hashes without another rebuild.
-
-## Next
-
-Follow AGILE-PLAN.md: source-backed B Corp tourism shortlist with business-location/reuse checks, suitable test-account acceptance of the new private delta, physical browser/audio-failure checks, remaining 15 checklist references and sourced regional content. No fabricated certification/impact claims. Launch-itinerary costs, margins and measurable local/conservation outcomes remain explicit business work before broader sales expansion. No further increment was started after the owner's request to finish.
+Historical release records remain separate. Do not treat their runtime hashes or old next-step paragraphs as current execution instructions.
