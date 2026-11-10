@@ -7,17 +7,15 @@ See RELEASE-2026-11-10-SELECTION-THUMBNAILS.md and HANDOFF-CURRENT.md. Prior pre
 wording below describes earlier checkpoints, not pending implementation. Private-picker
 port and fifteen remaining images are still pending; eBird permission enquiry is unsent.
 
-Current 10 November status: established contours, main map controls and one-person
-team are live. Selection-linked headers/local flocks, satellite shading and public
-checklist thumbnails are source-complete in main PR #10 and separate AU PR #9,
-with preview evidence in the named PREVIEW documents. Public checklist reference
-coverage is 362/377; fifteen await verified safe sources. Private-picker port remains
-next UI work. South Island eBird readiness is assessed, with written commercial-use
-permission required and its enquiry unsent. HANDOFF-CURRENT.md owns exact status.
+## Owner priority update, 10 November 2026
 
-The earlier 31-photo pilot remains live; this broader thumbnail/reference update
-is preview-only until explicitly approved. Existing release evidence is preserved.
-
+Prioritise style and functionality. Provide a selectable, current task list while
+private-picker acceptance and remaining image verification are unresolved. The
+ranked choices and readiness are in AGILE-PLAN.md: Australia map controls, photo
+zoom, remaining map-style parity, invitation word animation, opt-in continuous
+calls, origin filters, sea context, saved places and the B Corp layer. No elective
+implementation or release was selected by this list update. Published headers,
+flocks, satellite shading, public references and one-person team remain complete.
 
 Current implementation status and release permission live in
 [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). The reorganised delivery order is in
