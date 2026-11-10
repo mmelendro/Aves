@@ -6,6 +6,18 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
+AVES-039 public NZ checklist photo previews were explicitly approved, published
+and live-verified on 10 November 2026. Main runtime: 8c7f297b15b70678a3b4bc087a98939b37d8460e;
+Production: dpl_AuSANAJzDMdddtHb53rArqvJqM1B. See [the release](RELEASE-2026-11-10-CHECKLIST-PHOTOS.md).
+31 existing credited photos, 149 tests, TypeScript, local/hosted builds and all
+38 live page/asset/sitemap checks passed. Live keyboard photo activation,
+credits, Escape/focus restoration and unchanged selection passed. Physical
+Safari/touch and exact 320/390px remain unverified.
+
+The unified draft still lacks the four AVES-039 source/test files. Port this
+published delta deliberately before any future consolidation cutover. Australia
+and private portal are unchanged. No further feature or release is selected.
+
 C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
 6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
 https://aves-australia-eqy20tn17-mmelendro-9273s-projects.vercel.app (dpl_4VBHrNqq7XYUCb8Da9bc9oUuHaqn).
@@ -25,10 +37,13 @@ changed. Native results are not hosted unified private acceptance.
 
 The exact unified candidate still needs a protected production-mode staging
 build and hosted authenticated browser/provider/owner-delivery/session checks.
-The connector lacks an explicit skip-domain staging control. Automatic approval
-review rejected clicking the dashboard's Redeploy action because it may start a
-build immediately. Do not retry that action without the required approval or
-silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
+The connector lacks an explicit skip-domain staging control. The owner approved
+inspecting Redeploy; its Production dialog assigned the live Australia domain and
+had no skip-domain option, so it was cancelled. The owner then authorised CLI
+sign-in and Vercel showed Authorization Successful, but workspace network policy
+blocked the CLI connection to api.vercel.com before token exchange completed.
+This is a network blocker, not missing owner approval. Do not repeat approval
+requests, weaken network controls or silently assign live domains. [C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
 C4 production cutover and C5 retirement remain separately unapproved. Preserve
 both production apps and rollback anchors. No paid provisioning or AI requests.
 
@@ -36,10 +51,10 @@ both production apps and rollback anchors. No paid provisioning or AI requests.
 
 | App | Branch | Runtime | Production | Recovery |
 | --- | --- | --- | --- | --- |
-| Global/Colombia/NZ | webmaster/readiness-2026-11-05 | d34faabc3d09bee8b671b618998606ed06994bea | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB | checkpoint/2026-11-10-13-south-island-soundscapes |
+| Global/Colombia/NZ | webmaster/readiness-2026-11-05 | 8c7f297b15b70678a3b4bc087a98939b37d8460e | dpl_AuSANAJzDMdddtHb53rArqvJqM1B | checkpoint/2026-11-10-14-checklist-photos |
 | Australia/shared portal | australia/preview | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | checkpoint/2026-11-10-12-media-handoff-australia |
 
-Previous main: 5d96fa0 / dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH, checkpoint 12.
+Previous main: d34faab / dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB, checkpoint 13.
 Previous AU: e0c766a / dpl_67GnFTnfkgrjN2scQL7QWBqvo1zq, checkpoint 04.
 These are independent app roots. This soundscape release changes only the main app. Australia/shared portal
 code, deployment and documents are unchanged. No app merge or account change.

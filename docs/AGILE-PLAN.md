@@ -2,19 +2,24 @@
 
 Updated 10 November 2026, Sydney.
 
-This is the retained roadmap order, including AVES-020 consolidation. C0 and owner-selected C1a/C1b/C1c/C1d are complete; see [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). Production is unchanged. HANDOFF-CURRENT.md owns runtime/status and release permission; this plan owns sequencing; ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md retain acceptance criteria.
+This is the retained roadmap order, including AVES-020 consolidation. C0 and owner-selected C1a/C1b/C1c/C1d are complete; see [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). AVES-039 public photo previews are now published separately. HANDOFF-CURRENT.md owns runtime/status and release permission; this plan owns sequencing; ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md retain acceptance criteria.
 
 C1a/C1b/C1c/C1d are complete. C2 public preview review passed within documented
 limits. C3 is partial: live synthetic fixtures are authorised, scoped live checks
 passed and all fixtures were removed. The exact unified hosted private candidate
-still needs a protected production-mode staging build; dashboard Redeploy was
-rejected by automatic approval review. C4 release and C5 retirement need separate
+still needs a protected production-mode staging build; Redeploy inspection was authorised and cancelled because it assigned a live
+domain. CLI sign-in was authorised, but workspace policy blocked api.vercel.com. C4 release and C5 retirement need separate
 approval. See [the C1d/C2 checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md) and
 [the C3 gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
 
 ## Owner-selected delivery order, 10 November 2026
 
-Finish the consolidation C sequence first: C1d consent/owner usability, C2 public
+The owner subsequently selected the independent AVES-039 checklist photo pilot
+while C3 is blocked. PR #4 is published and live-verified in runtime 8c7f297.
+Private-picker port/video/wider media remain separate; do not redo the public pilot. Resume the retained sequence after this
+bounded card; the other selected priorities remain unchanged.
+
+Retained consolidation sequence: C1d consent/owner usability, C2 public
 preview acceptance, C3 hosted private acceptance, C4 explicitly approved production
 cutover, then C5 separately approved retirement after an observation period.
 C1a/C1b/C1c/C1d are complete. C2 public preview evidence and device limits are
@@ -22,7 +27,7 @@ recorded. The owner authorised necessary live synthetic test accounts/records
 and confirmed the test email. This does not authorise customer-data edits,
 production publication, retirement, new spending or hosted schema/provider changes.
 C3 remains incomplete until the exact candidate passes protected hosted private
-acceptance. Do not retry the rejected Redeploy action or declined paid provisioning.
+acceptance. Do not assign live domains during C3 staging or retry declined paid provisioning.
 
 After C, the owner selected this focus order, referring to the numbered pending
 updates shown in chat, not AVES ticket numbers:
@@ -31,7 +36,7 @@ updates shown in chat, not AVES ticket numbers:
 | --- | --- | --- |
 | 1 | Saved places alongside private bird wishes (chat item 12) | AVES-063; South Island pilot, private save/reopen/edit and deliberate sharing |
 | 2 | Consistent species-origin filters (chat item 13) | AVES-025/048; sourced native/introduced/unknown status, separate from seasonality |
-| 3 | Checklist photo previews (chat item 14) | AVES-039; existing licensed assets, accessible preview and honest missing media |
+| 3 | Checklist photo previews (chat item 14) | AVES-039 public NZ pilot published; private-picker port, video and wider media remain |
 | 4 | South Island ecological/historical orientation (chat item 16) | AVES-064/016; authoritative and mana whenua sources, no invented endorsement |
 | 5 | Verified places, conservation projects, lodges and travel context (chat item 17) | AVES-034/052/062; one sourced locality batch, public access and sensitive-site safeguards |
 | 6 | Uninterrupted public playback | AVES-068; unified layout and route/auth/Back checks; explicit paused Resume for real document changes |
@@ -53,7 +58,7 @@ time. Explicit production approval remains required for every release.
 | Item | Verified repository baseline |
 | --- | --- |
 | Main branch | webmaster/readiness-2026-11-05 at b726f4342dd6bcd4cd64d69f4211536198b9e09c before this documentation change |
-| Main runtime | d34faabc3d09bee8b671b618998606ed06994bea; Production dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB, as recorded in the current handoff |
+| Main runtime | 8c7f297b15b70678a3b4bc087a98939b37d8460e; Production dpl_AuSANAJzDMdddtHb53rArqvJqM1B |
 | Australia branch | australia/preview at 68711fd53bbc4882511e3d2226344828ccda208f |
 | Australia runtime | 2ff09e92b25a57d89c5966352393bcdb0369db45; Production dpl_56y3bD1RTE2fngcHBr14obkGu2bx, as recorded in the current handoff |
 | Consolidation | Open draft PR #3, integration/aves-unified-2026-11-08 at 33fcd0e99895257a6610c36fd30f407d3e67d4b1; GitHub reports not mergeable |
@@ -110,7 +115,7 @@ The order below is the proposed order after the P1 service baseline. Each rollou
 | --- | --- | --- | --- | --- |
 | 13 | 063 / 004 / 005 | Private saved-place pilot alongside existing bird wishes | Stable place IDs, add/remove/reopen/edit, deliberate sharing, owner visibility and isolation; needs separate account/data authorisation. No second planner | 3–5 |
 | 14 | 025 / 048 | Consistent sourced species-origin facet, NZ first | Audit existing filters before adding any. Native/introduced/unknown by geography; preserve selected IDs and separate origin from seasonal activity | 2–3 per context |
-| 15 | 039 | Checklist photo previews using existing licensed assets | Independent selection/preview, keyboard/tap/Escape, provenance and honest missing media; no assumption that all 377 species have photos | 3 |
+| 15 | 039 | Public NZ photo pilot published; private-picker port and later media remain | Independent selection/preview, keyboard/tap/Escape, provenance and honest missing media; no assumption that all 377 species have photos | 3 |
 | 16 | 033 | Expandable public directory | Reuse current route registries; useful country/region hierarchy and related links, no private records, mobile/keyboard support. Sitemap accuracy remains a gate now | 3 |
 | 17 | 064 / 016 | Concise South Island ecological/historical orientation | Authoritative and Ngāi Tahu/mana whenua sources; expandable detail, macrons, clear perspectives, no invented legends/endorsement | 3 |
 | 18 | 034 / 052 / 062 | Extend verified public places, conservation and travel context | One locality/data batch; current access, sensitive-site protection, distinguish public references from partners/certified suppliers/bookable stock | 3 per batch |

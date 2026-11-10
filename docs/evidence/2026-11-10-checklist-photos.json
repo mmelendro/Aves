@@ -1,0 +1,56 @@
+{
+  "increment": "AVES-039",
+  "runtime": "8c7f297b15b70678a3b4bc087a98939b37d8460e",
+  "branch": "feature/aves-039-checklist-photos",
+  "deployment": "dpl_5wb1awhMmWXm6g5auHBoX2Yh7ZoX",
+  "target": "preview",
+  "hostedState": "READY",
+  "tests": {
+    "passed": 149,
+    "failed": 0,
+    "skipped": 0
+  },
+  "typecheck": "passed",
+  "localProductionBuild": "passed",
+  "photos": 31,
+  "livingChecklistSpecies": 377,
+  "speciesWithoutPhoto": 346,
+  "browserPassed": [
+    "pointer hover",
+    "hover persists inside preview",
+    "keyboard focus preview",
+    "Enter and click dialog activation",
+    "creator/location/source/licence/modifications",
+    "Escape closes both preview modes",
+    "focus returns to Photo without reopening",
+    "independent wish selection",
+    "scientific-name search",
+    "Maori-name search without macrons",
+    "missing-media row selectable",
+    "selection retained across filters",
+    "340x234 CSS-pixel 400% reflow",
+    "modal bounded and internally scrollable",
+    "no horizontal overflow"
+  ],
+  "limits": [
+    "physical iPhone/Safari",
+    "touch",
+    "exact 320/390 CSS-pixel layout",
+    "forced hosted image error"
+  ],
+  "noProductionChange": false,
+  "noAccountDatabaseProviderChange": true,
+  "temporaryPublicTestChoiceRemoved": true,
+  "consolidation": "C3 blocked on workspace CLI network access; owner approvals persist; C4/C5 separate",
+  "productionPublished": true,
+  "productionDeployment": "dpl_AuSANAJzDMdddtHb53rArqvJqM1B",
+  "liveHttpPassed": 38,
+  "liveBrowserPassed": [
+    "keyboard quick look",
+    "Enter/click dialog",
+    "full credits",
+    "Escape without reopening",
+    "focus restoration",
+    "wish selection unchanged"
+  ]
+}

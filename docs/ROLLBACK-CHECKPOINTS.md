@@ -20,6 +20,7 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-10-12-media-handoff-main | 5d96fa02e45fb18304fc07a97bb5084948ab4afd | dpl_EY3YBYBfbPWZ79yoDN1wcxC4m5DH | Main safe media continuity/paused handoff |
 | checkpoint/2026-11-10-12-media-handoff-australia | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | AU/shared portal public player/paused handoff |
 | checkpoint/2026-11-10-13-south-island-soundscapes | d34faabc3d09bee8b671b618998606ed06994bea | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB | Main app: opt-in three-track South Island habitat ambience and shared ducking |
+| checkpoint/2026-11-10-14-checklist-photos | 8c7f297b15b70678a3b4bc087a98939b37d8460e | dpl_AuSANAJzDMdddtHb53rArqvJqM1B | Main public NZ checklist photos; approved, published and live-verified |
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
@@ -59,3 +60,6 @@ checkpoint 1e0fbfefd7672ed09961c856b8d4732d37861b70. See the C1d/C2 checkpoint.
 Production anchors remain main dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB and Australia
  dpl_56y3bD1RTE2fngcHBr14obkGu2bx. No rollback is being performed. Scoped C3
 synthetic fixtures were fully removed; no schema or customer-data rollback applies.
+
+AVES-039 recovery: main only, to d34faabc3d09bee8b671b618998606ed06994bea /
+dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB, checkpoint 13. Australia is unchanged.
