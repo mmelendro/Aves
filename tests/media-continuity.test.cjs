@@ -53,7 +53,7 @@ test('restoring and returning from history require Resume, and closing removes t
   }
   const storage = { getItem: key => saved.get(key) ?? null, setItem: (key, value) => saved.set(key, value), removeItem: key => saved.delete(key) }
   const windowMock = { location: { href: 'https://aves.bio/new-zealand/south-island' }, addEventListener: (key, fn) => { listeners[key] = fn }, removeEventListener() {} }
-  const documentMock = { activeElement: null, addEventListener: (key, fn) => { documentListeners[key] = fn }, removeEventListener() {} }
+  const documentMock = { createElement:()=>({dataset:{},remove(){}}), body:{appendChild(){}}, querySelector:()=>null, dispatchEvent() {}, activeElement: null, addEventListener: (key, fn) => { documentListeners[key] = fn }, removeEventListener() {} }
   const router = { push: href => pushed.push(href) }
   class Element { constructor(href) { this.href = href } closest() { return this } hasAttribute() { return false } getAttribute(name) { return name === 'href' ? this.href : null } }
   const modules = new Map()
@@ -66,6 +66,7 @@ test('restoring and returning from history require Resume, and closing removes t
     new Function('require','exports','window','document','sessionStorage','Element','HTMLElement',code)(name => {
       if (name === '@/components/brand-bird') return {BrandBird:()=>null}
       if (name === 'react') return hooks
+      if (name === 'react-dom') return {createPortal:tree=>tree}
       if (name === 'next/navigation') return { useRouter: () => router }
       if (name === 'next/image') return () => null
       if (name.startsWith('@/')) return component(name.slice(2) + '.ts')

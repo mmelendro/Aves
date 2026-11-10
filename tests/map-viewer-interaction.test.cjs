@@ -11,7 +11,7 @@ async function harness() {
   const hooks={...React,useEffect(){},useRef(value){const i=ri++;return refs[i]??={current:value}},useState(value){const i=si++;if(!(i in states))states[i]=value;return [states[i],next=>{states[i]=typeof next==='function'?next(states[i]):next}]}}
   const exports={}
   const code=ts.transpileModule(readFileSync('components/map-viewer.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText
-  new Function('require','exports','requestAnimationFrame','cancelAnimationFrame',code)(name=>name==='react'?hooks:name==='@/lib/map-gestures.mjs'?gestures:name.endsWith('.css')?{default:{}}:require(name),exports,fn=>{fn();return 1},()=>{})
+  new Function('require','exports','requestAnimationFrame','cancelAnimationFrame','document',code)(name=>name==='react'?hooks:name==='@/lib/map-gestures.mjs'?gestures:name.endsWith('.css')?{default:{}}:require(name),exports,fn=>{fn();return 1},()=>{},{dispatchEvent(){}})
   const capture=new Set()
   const surface={clientWidth:400,clientHeight:300,getBoundingClientRect:()=>({left:0,top:0}),hasPointerCapture:id=>capture.has(id),setPointerCapture:id=>capture.add(id),releasePointerCapture:id=>capture.delete(id)}
   function render(){si=0;ri=0;const tree=exports.MapViewer({label:'Test map',children:React.createElement('a',{href:'/guide'},'Guide')});refs[1].current=surface;return tree}

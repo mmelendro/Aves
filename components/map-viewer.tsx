@@ -28,6 +28,7 @@ export function MapViewer({ children, label, gestures = true, credits }: { child
     if (open) element.showModal(); else element.show()
     points.current.clear(); start.current = null; setGesturing(false)
     setExpanded(open)
+    document.dispatchEvent(new Event("aves:map-resize"))
     if (!open) trigger.current?.focus({ preventScroll: true })
   }
   useEffect(() => {

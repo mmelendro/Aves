@@ -1,5 +1,7 @@
 "use client"
 
+import { useSharedBirdAudio } from "./use-shared-bird-audio"
+
 /*
  * Shared Australian bird photograph/recording viewer for home, regional and information pages.
  * The default catalogue comes from content/birds.ts; callers can supply a smaller verified list.
@@ -70,6 +72,8 @@ export default function HomepageBirdCarousel({
   // Bound the index if a caller supplies a shorter list; keep loading status tied to the correct image.
   const selectedIndex = birds.length ? currentIndex % birds.length : 0
   const currentBird = birds[selectedIndex]
+  const sharedAudio = useSharedBirdAudio(currentBird)
+  const callPlaying = sharedAudio.available ? sharedAudio.playing : isAudioPlaying
   const imageStatus = imageState.image === currentBird?.image ? imageState.status : "loading"
 
   useEffect(() => {
@@ -135,6 +139,7 @@ export default function HomepageBirdCarousel({
 
   // A numbered attempt prevents an old rejected play() promise from overwriting the newer bird's state.
   const toggleAudio = useCallback(async () => {
+    if (sharedAudio.available) { setIsPlaying(false); sharedAudio.toggle(); return }
     const audio = audioRef.current
     if (!audio || !currentBird?.audioFile) return
     const attempt = ++playAttemptRef.current
@@ -157,7 +162,7 @@ export default function HomepageBirdCarousel({
       setAudioLoading(false)
       setIsAudioPlaying(false)
     }
-  }, [currentBird?.audioFile, audioLoading])
+  }, [currentBird?.audioFile, audioLoading, sharedAudio])
 
   // All manual navigation shares one path: stop sound, stop the timer, wrap the index and close details.
   // The optional flag keeps details open when the visitor chooses from the species dropdown.
@@ -174,10 +179,10 @@ export default function HomepageBirdCarousel({
 
   useEffect(() => {
     // Schedule only the next slide; wait while media loads, audio plays or the visitor reads details.
-    if (!isPlaying || birds.length < 2 || imageStatus === "loading" || isAudioPlaying || audioLoading || showInfo) return
+    if (!isPlaying || birds.length < 2 || imageStatus === "loading" || callPlaying || audioLoading || showInfo) return
     const timer = window.setTimeout(() => setCurrentIndex(index => (index + 1) % birds.length), autoPlayInterval)
     return () => window.clearTimeout(timer)
-  }, [isPlaying, birds.length, currentIndex, imageStatus, autoPlayInterval, isAudioPlaying, audioLoading, showInfo])
+  }, [isPlaying, birds.length, currentIndex, imageStatus, autoPlayInterval, callPlaying, audioLoading, showInfo])
 
   function closeInfo() {
     setShowInfo(false)
@@ -217,7 +222,7 @@ export default function HomepageBirdCarousel({
   }
 
   if (!currentBird) return null
-  const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : isAudioPlaying ? "Pause bird call" : "Listen to bird call"
+  const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : callPlaying ? "Pause bird call" : "Listen to bird call"
 
   const infoPanel = showInfo ? <SpeciesDetailsPanel id={`${carouselId}-info`} bird={currentBird} birds={birds}
     selectedIndex={selectedIndex} showBirdPicker={showBirdPicker}
@@ -231,7 +236,7 @@ export default function HomepageBirdCarousel({
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
     >
       {/* One keyed recording per slide, fetched on demand. Native media events drive the sound icon. */}
-      {currentBird.audioFile && <audio
+      {!sharedAudio.available && currentBird.audioFile && <audio
         key={currentBird.id} ref={audioRef} src={sitePath(currentBird.audioFile)} preload="none" aria-label={`${currentBird.commonName} recording`}
         onPlaying={() => { setIsAudioPlaying(true); setAudioLoading(false); setAudioError(false) }}
         onPause={() => { setIsAudioPlaying(false); setAudioLoading(false) }}
@@ -270,9 +275,9 @@ export default function HomepageBirdCarousel({
             </IconControl>
             {/* A quiet green halo advertises a real recording; a brighter fill marks active playback.
                 buttonClassName styles the button itself, while className still positions its wrapper. */}
-            <IconControl label={audioButtonText} onClick={toggleAudio} aria-pressed={isAudioPlaying} disabled={!currentBird.audioFile}
-              buttonClassName={currentBird.audioFile ? cn("border-emerald-200/80 bg-emerald-950/80 text-emerald-50 shadow-[0_0_0_3px_rgba(167,243,208,0.14)] hover:bg-emerald-900/90", isAudioPlaying && "border-emerald-100 bg-emerald-700/95 text-white shadow-[0_0_0_3px_rgba(167,243,208,0.24)] hover:bg-emerald-700") : undefined}>
-              {audioLoading ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : isAudioPlaying ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
+            <IconControl label={audioButtonText} onClick={toggleAudio} aria-pressed={callPlaying} disabled={!currentBird.audioFile}
+              buttonClassName={currentBird.audioFile ? cn("border-emerald-200/80 bg-emerald-950/80 text-emerald-50 shadow-[0_0_0_3px_rgba(167,243,208,0.14)] hover:bg-emerald-900/90", callPlaying && "border-emerald-100 bg-emerald-700/95 text-white shadow-[0_0_0_3px_rgba(167,243,208,0.24)] hover:bg-emerald-700") : undefined}>
+              {audioLoading ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : callPlaying ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
             </IconControl>
             <IconControl buttonRef={infoButtonRef} label={showInfo ? "Hide species details & credits" : "Species details & credits"} aria-expanded={showInfo} aria-controls={`${carouselId}-info`} onClick={() => { if (showInfo) closeInfo(); else { setIsPlaying(false); setShowInfo(true) } }}><Info className="h-4 w-4" aria-hidden="true" /></IconControl>
           </div>
