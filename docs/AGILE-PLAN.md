@@ -23,8 +23,10 @@ The prior long plan is archived in archive/2026-11-10-before-selection-thumbnail
 Owner updated priorities on 10 November 2026: show a selectable task list, favour
 visible style and working interactions, and keep useful work available while
 started acceptance/source work is unresolved. This order supersedes older automatic
-next-task instructions. This is a planning update, not selection of every item or
-production approval. Do not claim background commands or parallel agents are running.
+next-task instructions. The owner subsequently selected all nine increments, one at a time. Execution
+order is choices 1, 3, 2, 4, 5, 6, 7, 8, 9. Australia map controls are in progress
+on feature/au-map-controls. Complete and verify each increment before the next.
+Production approval remains a separate gate. Do not claim background commands or parallel agents are running.
 
 ### Started work to finish
 
@@ -33,7 +35,7 @@ production approval. Do not claim background commands or parallel agents are run
 | Private planner thumbnails, PR #11 / AVES-039 | Prepared, not live; 299 tests and isolated picker browser checks pass | Safe signed-in candidate save/reopen/edit and private-shell acceptance, then release approval |
 | Remaining public checklist images, AVES-039 | Verification started; 362/377 live references | Resolve 15 pending entries with exact taxon, rights, credits and visual checks; keep unsupported records pending |
 
-### Selectable next tasks, ranked for style and functionality
+### Selected work, reference choice numbers
 
 | Choice | Task | First useful slice | Readiness |
 | --- | --- | --- | --- |
@@ -48,7 +50,7 @@ production approval. Do not claim background commands or parallel agents are run
 | 9 | B Corp map layer, AVES-069 | Source/access assessment, then a small verified South Island business list and optional layer preview | Data-dependent; certification and actual public locations need verification first |
 
 Recommend choice 1 for immediate usability, then choice 3 for visual consistency.
-Choice 4 is a smaller decorative slice. Prepare only the selected increment and
+Choice 4 is a smaller decorative slice. Work through the approved sequence one increment at a time and
 check mobile layout, keyboard/focus, reduced motion and existing navigation as
 relevant. Keep controls legible, asset cost modest and forms grounded in each
 place's actual geography and wildlife, following Utzon's natural-context direction.
