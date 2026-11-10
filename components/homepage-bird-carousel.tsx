@@ -107,6 +107,7 @@ export default function HomepageBirdCarousel({
         frameWidth: frame.width, frameHeight: frame.height,
         imageWidth: image.naturalWidth, imageHeight: image.naturalHeight,
         position: currentBird?.imagePosition || "center",
+        fit: getComputedStyle(image).objectFit === "contain" ? "contain" : "cover",
       })
     }
     // Cached images can finish before hydration delivers Next Image's callback.

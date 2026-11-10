@@ -52,3 +52,18 @@ test("keyword ordering is preserved and incomplete or unsupported measurements k
   for (const imageWidth of [0, NaN, Infinity]) assert.equal(coverFocalPosition({ ...dimensions, imageWidth, position: "35% center" }), "35% center")
   assert.equal(coverFocalPosition({ ...dimensions, position: "12px center" }), "12px center")
 })
+
+test("fitted card photos keep the entire bird visible instead of applying crop offsets",()=>{
+ for(const [frameWidth,frameHeight] of [[358,500],[925,561],[300,200]]){
+  for(const [imageWidth,imageHeight] of [[800,1200],[1600,900]]){
+   for(const position of ['center 20%','35% center','left top']){
+    assert.equal(coverFocalPosition({frameWidth,frameHeight,imageWidth,imageHeight,position,fit:'contain'}),'50% 50%')
+    const scale=Math.min(frameWidth/imageWidth,frameHeight/imageHeight)
+    const left=(frameWidth-imageWidth*scale)/2,top=(frameHeight-imageHeight*scale)/2
+    assert.ok(left>=0&&top>=0)
+    assert.ok(top+imageHeight*scale<=frameHeight+.00001)
+    assert.ok(left+imageWidth*scale<=frameWidth+.00001)
+   }
+  }
+ }
+})

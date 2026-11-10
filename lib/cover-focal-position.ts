@@ -4,10 +4,13 @@
  * image; that is not the same as centring a bird as the frame changes shape.
  */
 export function coverFocalPosition({
-  frameWidth, frameHeight, imageWidth, imageHeight, position = "center",
+  frameWidth, frameHeight, imageWidth, imageHeight, position = "center", fit = "cover",
 }: {
-  frameWidth: number; frameHeight: number; imageWidth: number; imageHeight: number; position?: string
+  frameWidth: number; frameHeight: number; imageWidth: number; imageHeight: number; position?: string; fit?: "cover" | "contain"
 }): string {
+  // A fitted photograph must keep all of the bird visible. Cover offsets can
+  // otherwise move its head outside the smaller, contained rendition.
+  if (fit === "contain") return "50% 50%"
   // Retain the authored CSS while the image/frame is unmeasured or unsupported.
   if (![frameWidth, frameHeight, imageWidth, imageHeight].every(value => Number.isFinite(value) && value > 0)) return position
   const words = position.trim().toLowerCase().split(/\s+/)
