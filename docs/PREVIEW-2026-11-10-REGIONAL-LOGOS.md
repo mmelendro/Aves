@@ -74,3 +74,29 @@ is not implied. Sitemap route registry is unchanged; credits is an existing rout
 Finish exact hosted preview checks, retain the independent main/Australia source
 branches, update AGILE-PLAN and continue its acceptance list one increment at a time.
 The owner accepts preview changes; production publishing remains separate.
+
+## Hosted acceptance completed
+
+Main runtime f2c867af / dpl_6AFfs2hcfW19A6qQeENJpBKNKgZS and Australia runtime
+df4840cc / dpl_GXqo1YVhQDHEwubANmDwCfuum1xP are READY, both preview target null.
+Both final local builds passed including the credits disclosure.
+
+Main browser checks: all four South Island place selections update both header
+and footer to the same species: Arthur's Pass→kea, Nelson Lakes→kākā,
+Fiordland→mohua, Otago/Catlins→hoiho. Loaded right-facing header/footer art and
+matching low coastal contours were visually checked for Otago/Catlins. Direct
+Santa Marta route shows Pyrrhura viridicata in both header and footer, loaded and
+right-facing. Direct Australia New South Wales route shows Menura novaehollandiae
+in both placements; the footer image loaded when scrolled into view. Main screenshot
+is retained in docs/evidence/2026-11-10-regional-logo-check.png. Exact native links
+and existing route context were retained. No sign-in or account write occurred.
+
+All other configured context assignments and packaged assets pass automated
+coverage checks. Not every individual region received a separate hosted visual
+check. Physical phone, narrow viewport and Safari checks for this increment remain
+unverified. Preview acceptance does not certify real private persistence.
+
+PR26 main and PR27 Australia retain the independent stacks. Owner instructed
+accepting preview changes and continuing the ordered list. Production remains
+unchanged. Next: finish the independent Australia map/style acceptance and remaining
+public visual/accessibility checks from AGILE-PLAN.

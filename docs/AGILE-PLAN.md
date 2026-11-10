@@ -11,7 +11,8 @@ Prepared on feature/regional-brand-logos and independent feature/regional-brand-
 All23 planning regions and four South Island place contexts have a sourced representative
 bird;25 new transparent illustrations, shared right-facing renderer and matching miniature
 landscapes.183 main and310 Australia checks, TypeScript and builds passed. Hosted preview
-acceptance pending. Owner accepts preview changes; production remains separately gated.
+checks passed for all four South Island places, Santa Marta and New South Wales.
+Other contexts have source/asset coverage checks; physical/narrow device checks remain. Owner accepts preview changes; production remains separately gated.
 See PREVIEW-2026-11-10-REGIONAL-LOGOS.md. Finish this increment, then resume the ordered list.
 
 ## Where we are
