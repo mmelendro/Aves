@@ -1,5 +1,11 @@
 # AVES verified release checkpoints
 
+Current AU recovery: checkpoint/2026-11-10-19-australia-selection, runtime 34037f0,
+production dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg. Previous 59a8f65 /
+dpl_FNrh2YBNHFjamZk3gPu1WcL5Cb9Z at checkpoint 17 remains the AU-only rollback.
+Current main is a3445b7 / dpl_8TFWkxR8BVDmgTzDmHRpxcypMTpi, checkpoint 20; restore
+applications independently. Earlier notices below are historical.
+
 Use one checkpoint per small verified increment. Check the current GitHub heads
 and Vercel project before any recovery. Main and Australian apps are independent;
 do not merge their roots or roll back both merely because one UI changed.

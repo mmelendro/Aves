@@ -1,5 +1,8 @@
 # Australian selection-linked headers
 
+Published after explicit approval; current production details are in
+RELEASE-2026-11-10-AU-SELECTION.md. The preview evidence below is historical.
+
 Preview only, from audited source ee9f9ed. Existing first-activation regional map
 previews on the Australian country/region explorer now publish their stable region
 ID to a public route-scoped display context. The header changes before navigating.

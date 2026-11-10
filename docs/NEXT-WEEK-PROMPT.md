@@ -1,28 +1,22 @@
 # AVES Australia continuation prompt
 
-Read HANDOFF-CURRENT.md, PREVIEW-2026-11-10-SELECTION-HEADERS.md and the canonical
-main branch HANDOFF-CURRENT.md / NEXT-WEEK-PROMPT.md before editing. Fetch fresh
-GitHub history and inspect worktrees. Keep this application on australia/preview.
+Read HANDOFF-CURRENT.md, RELEASE-2026-11-10-AU-SELECTION.md and the canonical main
+HANDOFF-CURRENT.md / NEXT-WEEK-PROMPT.md. Fetch fresh GitHub history and inspect worktrees.
+Production is 34037f0 / dpl_DX5Rx141ExqZsMRE4PBfVg9jEZDg, recovery checkpoint 19.
+PR #9 is merged and published; do not redo selection headers/flocks/personal copy.
+296 tests, strict TypeScript/builds, ten AU public routes and 340 CSS-pixel live
+reflow passed. Physical Safari/touch and private flows were not verified here.
 
-Production remains 59a8f65 / dpl_FNrh2YBNHFjamZk3gPu1WcL5Cb9Z. Selection-linked
-headers/local flocks/personal copy are complete in preview PR #9, runtime b1809d5.
-296 tests, strict TypeScript/builds and hosted 340 CSS-pixel/menu acceptance passed.
-Obtain explicit approval before production. Do not redo source-complete features.
+Next bounded UI slice: port verified reference images to the existing private NZ
+picker. This branch has the controlled picker/checklist, but not main's carousel/
+photo-map or HoverCard module. Reuse available UI, preserve stable IDs/storage,
+per-image provenance and safe local assets. Verify viewing without selection,
+keyboard/focus, save/reopen/edit and privacy with authorised synthetic fixtures only.
+No schema/provider/account change. Prepare a preview and obtain production approval.
 
-Next bounded UI slice: port verified reference thumbnails to the existing private
-NZ picker. Inspect available modules: this branch has the checklist and controlled
-picker, but not main's NZ carousel/photo map or HoverCard module. Reuse the existing
-Dialog and stable saved IDs. Preserve per-image provenance and local safe assets.
-Do not assume a main-app import exists here or add a database/provider change.
-Verify image viewing without selection, keyboard/focus, save/reopen/edit and private
-access using authorised synthetic fixtures only. Prepare a preview for approval.
-
-Australia map enlargement/gesture controls remain a separate later port. The main
-satellite pilot does not imply geographic imagery registration here. eBird data use
-needs written commercial permission; do not create an account, retrieve keys, scrape
-or send the prepared enquiry without explicit instruction.
-
-No spending, paid AI retries, weakened privacy or app consolidation. Preserve private
-data, native links, first-activation previews, original artwork and browser zoom.
-Use Vercel mmelendro@gmail.com. C3 staging remains blocked and C4/C5 unapproved.
-Record actual device limits; physical Safari and true touch have not been verified.
+Australia map enlargement and wider registered satellite coverage remain separate.
+Do not infer them from main. eBird API needs written commercial permission; do not
+create accounts, retrieve keys, scrape or send the unsent enquiry without instruction.
+Use Vercel mmelendro@gmail.com. No spending, paid AI retries, weakened privacy or
+consolidation. Preserve private data, native links, first-activation previews,
+source artwork and browser zoom. C3 stays blocked, C4/C5 unapproved.
