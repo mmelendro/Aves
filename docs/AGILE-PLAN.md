@@ -11,8 +11,7 @@ Prepared on feature/regional-brand-logos and independent feature/regional-brand-
 All23 planning regions and four South Island place contexts have a sourced representative
 bird;25 new transparent illustrations, shared right-facing renderer and matching miniature
 landscapes.183 main and310 Australia checks, TypeScript and builds passed. Hosted preview
-checks passed for all four South Island places, Santa Marta and New South Wales.
-Other contexts have source/asset coverage checks; physical/narrow device checks remain. Owner accepts preview changes; production remains separately gated.
+acceptance pending. Owner accepts preview changes; production publication is now explicitly approved.
 See PREVIEW-2026-11-10-REGIONAL-LOGOS.md. Finish this increment, then resume the ordered list.
 
 ## Where we are
@@ -21,7 +20,7 @@ The usable NZ planning pilot is already live: questionnaire, bird wishes, privat
 draft/review/share and owner receipt were verified in its earlier release.
 Recent refinements below are separate draft/preview work, not new live releases.
 Do not describe the whole existing planner as untested because these new deltas
-still need acceptance. No production publishing is currently approved.
+still need acceptance. The owner explicitly approved publishing the prepared refinements on10 November2026. Follow RELEASE-2026-11-10-REFINEMENTS.md and its live verification record.
 
 Main candidate: feature/bcorp-source-pilot, runtime6abc13cd, PR #25, 180 tests,
 strict TypeScript and full build passed. Private candidate: feature/private-place-notes,
@@ -137,7 +136,7 @@ Physical Safari/touch, OS preference changes, some audio interruptions and actua
 private candidate persistence remain unverified. Do not turn source tests into
 claims of hosted delivery.
 
-No production publishing, new spend/provider/accounts, weakened privacy or app
+Production release of these prepared refinements is approved. No new spend/provider/accounts, weakened privacy or app
 consolidation under this list update. Do not send supplier/permission enquiries
 without explicit sending instructions. Keep source/credits, rollback points and
 private guest data intact. Essential-flow/privacy defects take priority.
