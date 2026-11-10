@@ -6,6 +6,7 @@
  * bird's complete range. Geographic shapes come from content/australia-map.ts, never logo artwork.
  */
 
+import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 import type { MouseEvent, ReactNode } from "react"
@@ -32,6 +33,7 @@ const smallTerritories = [
 ]
 
 export function AustraliaHomeExplorer({ media, initialRegion, resizable = false }: { media?: ReactNode; initialRegion?: string; resizable?: boolean } = {}) {
+  const { publish } = useHeaderLandscape()
   const id = useId()
   const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
   const backButton = useRef<HTMLButtonElement>(null)
@@ -49,6 +51,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
 
   function selectRegion(regionId: string) {
     if (regionId && !regionOptions.some(region => region.id === regionId)) return
+    publish({country:"australia",regionId:regionId || undefined})
     setChosenRegion(regionId)
     setBird(australianRegionBirds(regionId)[0] ?? birdData[0])
   }
@@ -122,7 +125,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
       <h2 id={`${id}-preview-heading`} className="text-2xl font-medium tracking-tight text-emerald-950">Birding in {focusedRegion.label}</h2>
       <p className="mt-3 text-sm leading-7 text-gray-600">{focusedOverview.description}</p>
       <p className="mt-2 text-xs leading-6 text-emerald-900"><span className="font-semibold">A starting point: </span>{focusedOverview.gateway}</p>
-      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2"><Link href={`/regions/${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Read the regional guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link href={`/contact?region=${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Plan a {focusedRegion.label} trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
+      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2"><Link href={`/regions/${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Read the regional guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link href={`/contact?region=${focusedRegion.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Plan your {focusedRegion.label} trip<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
       <p role="status" className="sr-only">{focusedRegion.label} selected. Showing its regional introduction, {birds.length} featured birds and trip-planning link.</p>
     </section>}
     {resizable ? <ResizableDiscoveryPair media={mediaContent} map={mapContent} mapLabel="Explore Australia" /> :

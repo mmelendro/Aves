@@ -8,6 +8,7 @@
 
 import { SiteLink as Link } from "@/components/site-link"
 import { usePathname } from "next/navigation"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { HeaderContour } from "@/components/header-contour"
 import { releasedAustraliaHeaders } from "@/lib/header-landscape.mjs"
 import { BrandMark } from "@/components/brand-mark"
@@ -39,7 +40,8 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
     : rawPath.startsWith(SITE_BASE_PATH + "/")
       ? rawPath.slice(SITE_BASE_PATH.length)
       : rawPath
-  const landscape = releasedAustraliaHeaders[activePath]
+  const { selection } = useHeaderLandscape()
+  const landscape = selection?.country === "australia" ? releasedAustraliaHeaders[selection.regionId ? `/regions/${selection.regionId}` : "/"] : releasedAustraliaHeaders[activePath] || (activePath === "/aves-explorer" ? releasedAustraliaHeaders["/"] : undefined)
   const isActive = (href: string) => activePath === href || activePath.startsWith(href + "/") ||
     (href === "/aves-explorer" && (activePath === "/regions" || activePath.startsWith("/regions/")))
 
@@ -50,7 +52,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
   return (
     <>
       <header className={cn("fixed inset-x-0 top-0 z-50", landscape ? "isolate h-[108px]" : "border-b border-emerald-100 bg-white/95 shadow-sm backdrop-blur-md")}>
-        {landscape && <HeaderContour key={activePath} profile={landscape} />}
+        {landscape && <HeaderContour key={activePath} profile={landscape} regionId={selection?.country === "australia" ? selection.regionId : activePath.startsWith("/regions/") ? activePath.split("/").pop() : undefined} />}
         {/* First keyboard stop: skip repeated navigation and focus the page's main-content target. */}
         <a
           href="#main-content"
@@ -62,7 +64,7 @@ export function NavigationHeader({ currentPage }: NavigationHeaderProps) {
           <BrandMark country="australia" priority unifiedHeaderContour={!!landscape} />
 
           {/* Desktop links and primary inquiry action; the mobile dialog takes over below lg. */}
-          <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
+          <nav data-contour-navigation="true" aria-label="Main navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
             {navigationLinks.map(({ href, label }) => (
               <Link
                 key={href}

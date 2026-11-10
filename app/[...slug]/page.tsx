@@ -18,7 +18,7 @@ type Props = { params: Promise<{slug:string[]}> }
 // Trip-style copy lives here; these are inquiry starting points rather than dates/prices from inventory.
 const styles = [
   {slug:"adventure",name:"Adventure Tours",icon:"🍃",description:"Explore birdlife and natural habitats with a journey shaped around curiosity, your interests and your preferred pace."},
-  {slug:"vision",name:"Vision Tours",icon:"🪶",description:"Discuss a birding and photography-focused journey, with time to observe and enjoy the details."},
+  {slug:"vision",name:"Vision Tours",icon:"🪶",description:"Discuss your birding and photography-focused journey, with time to observe and enjoy the details."},
   {slug:"elevate",name:"Elevate Tours",icon:"🌼",description:"Imagine a nature-focused journey with room to slow down, learn and reconnect with the outdoors."},
   {slug:"souls",name:"Souls Tours",icon:"🍓",description:"Share your ideas for a personal journey centred on connection, meaningful experiences and the natural world."},
 ]

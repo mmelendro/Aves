@@ -10,6 +10,7 @@ const root = resolve(__dirname, "..")
 function loader(overrides = {}) {
   const cache = new Map()
   const adapters = {
+    "./header-landscape-context": {useHeaderLandscape:()=>({selection:null,publish(){}})},
     "next/image": ({ src, alt }) => React.createElement("img", { src, alt }),
     "next/link": ({ children, ...props }) => React.createElement("a", props, children),
     ...overrides,

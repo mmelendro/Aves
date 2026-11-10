@@ -16,9 +16,9 @@ import { sitePath } from "@/lib/site-path"
 
 // Editable trip-interest cards. Their query parameters prefill the inquiry context; they do not reserve a tour.
 const interests = [
-  { title: "Follow the birds", icon: Bird, description: "A first birding adventure or a wish list years in the making. Share the birds and habitats you are curious about, and the pace you enjoy.", label: "Discuss a birding journey", href: "/contact?tour=adventure" },
-  { title: "Take time for photography", icon: Camera, description: "Make room to watch the light, understand behaviour and wait for a moment. Tell us about your photography interests and preferred conditions.", label: "Discuss a photography journey", href: "/contact?tour=vision" },
-  { title: "Explore at your own pace", icon: Leaf, description: "Time outdoors, interesting places and space to notice the details. Start with how you want your days to feel, including any walking preferences.", label: "Discuss a slower journey", href: "/contact?tour=elevate" },
+  { title: "Follow the birds", icon: Bird, description: "A first birding adventure or a wish list years in the making. Share the birds and habitats you are curious about, and the pace you enjoy.", label: "Discuss your birding journey", href: "/contact?tour=adventure" },
+  { title: "Take time for photography", icon: Camera, description: "Make room to watch the light, understand behaviour and wait for a moment. Tell us about your photography interests and preferred conditions.", label: "Discuss your photography journey", href: "/contact?tour=vision" },
+  { title: "Explore at your own pace", icon: Leaf, description: "Time outdoors, interesting places and space to notice the details. Start with how you want your days to feel, including any walking preferences.", label: "Discuss your slower journey", href: "/contact?tour=elevate" },
 ]
 
 export default function AVESLandingPage() {
@@ -31,7 +31,7 @@ export default function AVESLandingPage() {
           <div className="mx-auto mb-7 max-w-4xl text-center lg:mb-8">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-medium text-emerald-800 sm:text-sm"><MapPin className="h-4 w-4" aria-hidden="true" />AVES Australia · Custom birding journeys</p>
             <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">Discover Australia’s <span className="text-emerald-700">extraordinary birdlife</span></h1>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">Plan a personal journey around birds, landscapes and local culture. We’ll discuss the route, stays and pace with you, from tropical rainforest to island shores.</p>
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">Plan your journey around birds, landscapes and local culture. We’ll discuss the route, stays and pace with you, from tropical rainforest to island shores.</p>
           </div>
           <AustraliaHomeExplorer resizable />
         </div>
