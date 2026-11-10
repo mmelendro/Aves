@@ -82,9 +82,9 @@ test("South Island media keeps its exact sourced island membership, licensed pho
 test("the dedicated South Island page has canonical metadata, one local explorer and private planning entry", () => {
   const explorerCalls = []
   const pageLoad = createLoader({
-    "@/components/south-island-unified-explorer": function Explorer(props) {
+    "@/components/destination-explorer-page": function Explorer(props) {
       explorerCalls.push(props)
-      return React.createElement("div", { "data-south-island-explorer": true },props.children)
+      return React.createElement(load("components/destination-explorer-page.tsx").default,props)
     },
   })
   const page = pageLoad("app/new-zealand/south-island/page.tsx")

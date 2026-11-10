@@ -13,6 +13,9 @@ import { destinationRegions, getBirdRegionIds, getDestinationRegionBirds } from 
 import type { BirdProfile } from "@/content/birds"
 import { australiaMapProvenance } from "@/content/global-australian-map"
 import nzMap from "@/content/new-zealand-map.json"
+import NewZealandBirdPicker from "./new-zealand-bird-picker"
+import { featuredNzBirdId } from "@/content/new-zealand-checklist"
+import { readNzBirdBasket, writeNzBirdBasket } from "@/lib/nz-bird-selection"
 import DestinationCardMedia from "@/components/destination-card-media"
 import { DestinationSelectionContext } from "@/components/destination-selection-context"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
@@ -21,6 +24,7 @@ import { MapViewer } from "./map-viewer"
 import DestinationRegionalMap from "@/components/destination-regional-map"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import SouthIslandHabitatProvider, { SouthIslandHabitatContext } from "./south-island-habitat-context"
+import SouthIslandPlacesExplorer from "./south-island-places-explorer"
 import SouthIslandEcosystemMap from "./south-island-ecosystem-map"
 import { filterSouthIslandBirds, southIslandEcosystems } from "@/content/south-island-ecosystems"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
@@ -39,6 +43,14 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const [regionId, setRegionId] = useState(initialRegionId ?? "")
   const [birdId, setBirdId] = useState("")
   const [showBirdAreas,setShowBirdAreas]=useState(false)
+  const [wishIds,setWishIds]=useState<string[]>([])
+  const [storageAvailable,setStorageAvailable]=useState(true)
+  useEffect(()=>{
+    function restore(){try{setWishIds(readNzBirdBasket(window.sessionStorage))}catch{setStorageAvailable(false)}}
+    restore();window.addEventListener("pageshow",restore)
+    return ()=>window.removeEventListener("pageshow",restore)
+  },[])
+  function chooseBirds(ids:string[]){setWishIds(ids);try{setStorageAvailable(writeNzBirdBasket(window.sessionStorage,ids))}catch{setStorageAvailable(false)}}
   const backButton = useRef<HTMLButtonElement>(null)
   const regionBackButton = useRef<HTMLButtonElement>(null)
   const countryButtons = useRef<Record<string, HTMLButtonElement | null>>({})
@@ -111,13 +123,13 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
           {/* Keep the divider mounted when countries change, preserving its split.
               Only the keyed viewer resets old slides, calls, timers and details. */}
           <ResizableDiscoveryPair mapLabel="Resize world map and bird photographs"
-            map={<div className={styles.mapPanel}>{southIsland ? <div className="space-y-3">
+            map={<div className={styles.mapPanel}>{southIsland ? <div id="south-island-bird-map" className="scroll-mt-24 space-y-3">
               <nav aria-label="Map zoom level" className="flex flex-wrap gap-2">
                 <button type="button" className={styles.backButton} onClick={backToWorld}>World</button>
                 <span aria-hidden="true">/</span><button type="button" className={styles.backButton} onClick={()=>selectRegion("")}>Back to New Zealand</button>
               </nav>
               <label className="block text-sm font-medium text-emerald-950">Explore an island<select aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
-              <SouthIslandEcosystemMap selected={sharedHabitat?.value ?? "all"} onSelect={value=>sharedHabitat?.select(value)} places={southIslandPlaceContexts} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} onZoomOutAtMinimum={()=>selectRegion("")}/>
+              <SouthIslandEcosystemMap selected={sharedHabitat?.value ?? "all"} onSelect={value=>sharedHabitat?.select(value)} places={southIslandPlaceContexts} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} onZoomOutAtMinimum={()=>selectRegion("")} onSelectIsland={selectRegion}/>
             </div> : <MapViewer label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
               {/* Both views share one footprint. Inert also removes the hidden
                   world's SVG buttons from keyboard and assistive navigation. */}
@@ -143,7 +155,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
               </figure>}
             </div></MapViewer>}</div>}
             media={<div key={zoomed ? `${destination.id}:${regionId}:${southIsland ? sharedHabitat?.value : ""}` : "world"} className={styles.mediaPanel}>
-              <DestinationCardMedia destination={destination} birds={birds} label={zoomed ? `${region?.name ?? destination.name} bird photographs` : "Birds across AVES destinations"} fillPanel />
+              <DestinationCardMedia destination={destination} birds={birds} label={zoomed ? `${region?.name ?? destination.name} bird photographs` : "Birds across AVES destinations"} fillPanel selection={zoomed && destination.id==="new-zealand" ? {isSelected:bird=>wishIds.includes(featuredNzBirdId(bird.scientificName)||""),onToggle:bird=>{const id=featuredNzBirdId(bird.scientificName);if(id)chooseBirds(wishIds.includes(id)?wishIds.filter(value=>value!==id):[...wishIds,id])}} : undefined} />
             </div>} />
         </div>
         {zoomed && <section aria-label="Selected place planning" data-explorer-content={`${destination.id}:${region?.id ?? ""}`} className="mt-6 grid gap-5 rounded-3xl border border-emerald-100 bg-white p-5 sm:p-7 md:grid-cols-2">
@@ -152,6 +164,8 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
           <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2"><a className={styles.regionLink} href={`/contact?country=${destination.id}${region ? `&region=${region.id}` : ""}`}>Discuss your {region?.name || destination.name} trip</a><a className={styles.regionLink} href={`/account?country=${destination.id}${region ? `&region=${region.id}` : ""}`}>Save a private trip brief</a></div></div>
           <div><h3 className="font-semibold text-emerald-950">Birdlife and habitats</h3><p className="mt-2 text-sm leading-7 text-gray-600">{birds.length} photographed species in this view. Open a bird’s information for its habitat, wider range and sources. These photographs are a selection, not a complete checklist.</p><ul className="mt-3 space-y-2 text-sm leading-6 text-gray-700">{birds.slice(0,3).map(bird=><li key={bird.id}><span className="font-semibold">{bird.commonName}</span>: {bird.localOccurrence || bird.habitat}</li>)}</ul>{southIsland && <p className="mt-3 text-xs leading-6 text-gray-500">Map layers include the existing DOC conservation land, national parks, satellite background and curated public places. Your layer choices stay selected when you zoom out and return.</p>}</div>
         </section>}
+        {southIsland && <section id="places" aria-label="A few places to build around." className="mt-7"><h2 className="text-2xl font-medium text-emerald-950">A few places to build around.</h2><p className="mt-3 mb-5 text-sm leading-7 text-gray-600">These public landscape references share the habitat and place selections of the map above. They are planning ideas, not a promise of access or sightings.</p><SouthIslandPlacesExplorer/></section>}
+        {zoomed && destination.id==="new-zealand" && <section aria-label="New Zealand bird wishes" className="mt-6 rounded-3xl border border-emerald-100 bg-white p-5 sm:p-7"><h3 className="text-xl font-medium text-emerald-950">Birds you would love to see</h3><p className="mt-2 text-sm leading-7 text-gray-600">Tap a photograph’s heart, or search the complete published New Zealand checklist, including endemics. This country checklist includes other islands and rare visitors. Inclusion does not mean a bird occurs in the selected region.</p><div className="mt-5"><NewZealandBirdPicker selected={wishIds} onChange={chooseBirds}/></div><a className={styles.regionLink} href={`/account?country=new-zealand${region ? `&region=${region.id}` : ""}`}>Save {wishIds.length || "your"} bird choices in a private brief</a><p className="mt-2 text-xs leading-6 text-gray-500">{storageAvailable ? "Unsaved choices stay in this browser tab for up to a day. Sign in, review and save your private draft. Sharing with AVES remains a separate step." : "This browser cannot carry your choices between pages. Choose birds in the private brief before saving."}</p></section>}
         <p role="status" className="sr-only">{zoomed ? `${destination.name}${region ? `, ${region.name}` : ""} selected. Showing ${birds.length} featured bird photographs and its regional map. Back to world returns to the overview.` : `World overview. No destination selected. Showing ${birds.length} birds across AVES destinations.`}</p>
         <noscript><p className="mt-4 text-sm text-emerald-900">Open a destination: {destinations.map(country => <a key={country.id} href={country.href} className="mr-4 inline-flex min-h-11 items-center underline">{country.name}</a>)}</p></noscript>
       </div>

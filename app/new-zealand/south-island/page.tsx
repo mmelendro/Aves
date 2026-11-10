@@ -8,9 +8,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, Heart } from "lucide-react"
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
-import SouthIslandUnifiedExplorer from "@/components/south-island-unified-explorer"
+import DestinationExplorerPage from "@/components/destination-explorer-page"
 import WorldDestinationMap from "@/components/world-destination-map"
-import SouthIslandPlacesExplorer from "@/components/south-island-places-explorer"
 import { newZealandContactHref } from "@/content/new-zealand"
 import { southIslandBriefHref, southIslandFieldGuides, southIslandPlanning } from "@/content/south-island"
 import { canonicalUrl } from "@/lib/site-path"
@@ -38,16 +37,7 @@ export default function SouthIslandPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <GlobalHeader />
-      <main id="main-content" tabIndex={-1}><SouthIslandUnifiedExplorer map={<WorldDestinationMap/>}>
-        <section id="places" aria-labelledby="places-heading" className="scroll-mt-24 py-12 sm:py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-700">Start with a habitat</p>
-            <h2 id="places-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">A few places to build around.</h2>
-            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">These are starting points, not stops to fit into one trip. Choose a manageable area and give the birds, weather and your own interests room to shape the days.</p>
-            <div className="mt-8"><SouthIslandPlacesExplorer /></div>
-          </div>
-        </section>
-
+      <main id="main-content" tabIndex={-1}><DestinationExplorerPage map={<WorldDestinationMap/>} initialRegionId="south-island">
         {/* Static planning prompts reuse the existing cards; current conditions
             remain on official sites, avoiding an unreliable copied status feed. */}
         <section id="practical-planning" aria-labelledby="planning-heading" className="scroll-mt-24 bg-emerald-50/50 py-12 sm:py-16">
@@ -115,7 +105,7 @@ export default function SouthIslandPage() {
             <p className="mt-4 text-sm leading-6 text-emerald-100">Routes, guides, dates, prices and reservations require separate confirmation.</p>
           </div></div>
         </section>
-      </SouthIslandUnifiedExplorer></main>
+      </DestinationExplorerPage></main>
       <GlobalFooter />
     </div>
   )

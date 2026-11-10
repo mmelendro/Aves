@@ -28,9 +28,9 @@ const ConservationOverlay = dynamic(() => import("./south-island-conservation-ov
 const colours: Record<SouthIslandEcosystem, string> = { forest: "#537b5d", mountains: "#ae9761", freshwater: "#438eac", coast: "#008477" }
 
 type MapPlace = { id: string; label: string; latitude: number; longitude: number; location: string; source: string }
-type Props = { onZoomOutAtMinimum?: () => void; selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
+type Props = { onSelectIsland?: (id:string) => void; onZoomOutAtMinimum?: () => void; selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
 
-export default function SouthIslandEcosystemMap({ selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum }: Props) {
+export default function SouthIslandEcosystemMap({ selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum, onSelectIsland }: Props) {
   const { layers } = useMapLayers()
   const [satelliteFailed, setSatelliteFailed] = useState(false)
   const satellite = layers.background === "satellite" && !satelliteFailed
@@ -195,6 +195,6 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
         <p>Scale measures horizontal ground distance at the displayed map-centre latitude, corrected for WGS84/Web Mercator. It updates on zoom, north/south pan and panel resize; scale varies elsewhere on the map. Native page scrolling and pinch zoom remain available when Move is off. Source detail remains about 2 km, even when enlarged.</p>
       </div>
     </details>
-    <Link href="/new-zealand#regions" className="mt-1 inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</Link><nav aria-label="Neighbouring New Zealand islands" className="flex flex-wrap gap-4"><Link href="/new-zealand#region-north-island" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">North Island guide</Link><Link href="/new-zealand#region-rakiura" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">Rakiura guide</Link></nav>
+    {onSelectIsland ? <nav aria-label="Neighbouring New Zealand islands" className="flex flex-wrap gap-4">{[["", "Back to New Zealand"],["north-island","Explore the North Island"],["rakiura","Explore Rakiura"]].map(([id,label])=><button type="button" key={id} className="inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline focus-visible:outline focus-visible:outline-2" onClick={()=>onSelectIsland(id)}>{label}</button>)}</nav> : <><Link href="/new-zealand#regions" className="mt-1 inline-flex min-h-11 items-center rounded text-xs font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Back to New Zealand</Link><nav aria-label="Neighbouring New Zealand islands" className="flex flex-wrap gap-4"><Link href="/new-zealand#region-north-island" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">North Island guide</Link><Link href="/new-zealand#region-rakiura" className="inline-flex min-h-11 items-center text-xs font-semibold text-emerald-800 underline">Rakiura guide</Link></nav></>}
   </section></MapViewer>
 }
