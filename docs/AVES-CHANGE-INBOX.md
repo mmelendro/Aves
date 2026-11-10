@@ -21,6 +21,28 @@ C5 retirement is approved. See [the current checkpoint](CHECKPOINT-2026-11-10-UN
 The former stacked release notices are preserved verbatim in the
 [pre-066 archive](archive/2026-11-09-before-aves-066/README.md).
 
+## Latest delivered contour/map/team scope, 10 November 2026
+
+All nine configured Australian regional headers plus its country header were
+published before the final Colombian additions. All eleven Colombian regions
+plus its country header are live. Main map controls/enlargement and the one-person
+team carousel are live. See HANDOFF-CURRENT.md for runtime/checkpoint details.
+Unverified wildlife silhouettes and additional NZ local variants remain studies.
+Source audit/cleanup is newer than runtime; see AUDIT-2026-11-10-CODE-UX.md.
+
+## Latest owner map direction, 10 November 2026
+
+After the authorized contextual-header/maps/team release, prepare a satellite
+map treatment with a country outline and only the selected subregion shaded.
+Provide a clearly labelled selected-region opacity slider reaching zero so the
+satellite image is fully visible. Preserve selection, native links, enlargement,
+keyboard use, mobile gestures, browser zoom and credits. Use accurate registration,
+verified imagery rights and honest historical imagery dates. Do not stretch the
+existing Colombia raster planning artwork over satellite imagery and imply that
+it is georeferenced. South Island already has a registered NASA composite and is
+the strongest first pilot. Broader map rollout needs aligned regional geometry.
+No paid provider, location tracking or new account is authorized by this design.
+
 ## Retained request ledger
 
 Status cells below distinguish scoped pilots from broader requests. Consult the

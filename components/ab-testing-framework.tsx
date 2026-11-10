@@ -34,7 +34,7 @@ interface ABTest {
 }
 
 export function ABTestingFramework() {
-  const [tests, setTests] = useState<ABTest[]>([
+  const [tests] = useState<ABTest[]>([
     {
       id: "hero-cta-test",
       name: "Hero Section CTA Optimization",
@@ -149,9 +149,7 @@ export function ABTestingFramework() {
     }
   }
 
-  const getWinningVariant = (variants: ABTestVariant[]) => {
-    return variants.reduce((prev, current) => (prev.conversionRate > current.conversionRate ? prev : current))
-  }
+
 
   return (
     <div className="space-y-6">

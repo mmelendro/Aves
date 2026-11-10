@@ -18,7 +18,7 @@ export function MapViewer({ children, label, gestures = true, credits }: { child
   const active = gestures && (move || expanded)
   const box = () => ({ width: surface.current?.clientWidth || 1, height: surface.current?.clientHeight || 1 })
   function commit(next: MapView) { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) }
-  function reset() { points.current.clear(); start.current = null; commit(fitMapView) }
+  function reset() { points.current.clear(); start.current = null; setGesturing(false); commit(fitMapView) }
   function zoom(factor: number) { const b = box(); commit(zoomMapAt(viewRef.current, factor, {x:b.width/2,y:b.height/2}, b)) }
   function resize(open: boolean) {
     const element = dialog.current
@@ -26,7 +26,7 @@ export function MapViewer({ children, label, gestures = true, credits }: { child
     element.toggleAttribute("data-expanded", open)
     element.close()
     if (open) element.showModal(); else element.show()
-    points.current.clear(); start.current = null
+    points.current.clear(); start.current = null; setGesturing(false)
     setExpanded(open)
     if (!open) trigger.current?.focus({ preventScroll: true })
   }
@@ -60,9 +60,9 @@ export function MapViewer({ children, label, gestures = true, credits }: { child
       onPointerDown={e=>{if(!active || (e.pointerType==='mouse' && e.button!==0))return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});if(points.current.size>2){points.current.delete(e.pointerId);return}setGesturing(true);dragged.current=false;suppress.current=points.current.size>1;start.current={view:viewRef.current,points:[...points.current.values()]}}}
       onPointerMove={e=>{if(!active || !points.current.has(e.pointerId) || !start.current)return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});const current=[...points.current.values()];const moved=current.some((p,i)=>Math.hypot(p.x-start.current!.points[i].x,p.y-start.current!.points[i].y)>5);if(!dragged.current && !moved)return;dragged.current=true;suppress.current=true;e.preventDefault();if(!e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.setPointerCapture(e.pointerId);commit(mapGestureView(start.current.view,start.current.points,current,box()))}}
       onPointerUp={e=>{points.current.delete(e.pointerId);if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}
-      onPointerLeave={e=>{if(!e.currentTarget.hasPointerCapture(e.pointerId)){points.current.delete(e.pointerId);start.current=null}}}
+      onPointerLeave={e=>{if(!e.currentTarget.hasPointerCapture(e.pointerId)){points.current.delete(e.pointerId);start.current=null;setGesturing(points.current.size>0)}}}
       onPointerCancel={()=>{points.current.clear();start.current=null;setGesturing(false)}}
-      onLostPointerCapture={e=>{points.current.delete(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null}}
+      onLostPointerCapture={e=>{points.current.delete(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}
       onClickCapture={e=>{if(suppress.current){e.preventDefault();e.stopPropagation();suppress.current=false}}}>
       <div className={styles.content} style={gestures ? {transform:`translate(${view.x}px,${view.y}px) scale(${view.zoom})`} : undefined}>{children}</div>
     </div>

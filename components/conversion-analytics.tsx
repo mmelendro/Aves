@@ -42,7 +42,7 @@ interface DeviceMetrics {
 
 export function ConversionAnalytics() {
   const [timeRange, setTimeRange] = useState("7d")
-  const [metrics, setMetrics] = useState<ConversionMetric[]>([
+  const [metrics] = useState<ConversionMetric[]>([
     {
       name: "Overall Conversion Rate",
       value: 5.8,
@@ -87,7 +87,7 @@ export function ConversionAnalytics() {
     },
   ])
 
-  const [deviceMetrics, setDeviceMetrics] = useState<DeviceMetrics[]>([
+  const [deviceMetrics] = useState<DeviceMetrics[]>([
     {
       device: "Desktop",
       visitors: 3247,
@@ -124,7 +124,7 @@ export function ConversionAnalytics() {
     }
   }
 
-  const getTrendIcon = (trend: ConversionMetric["trend"], change: number) => {
+  const getTrendIcon = (trend: ConversionMetric["trend"]) => {
     if (trend === "up") {
       return <TrendingUp className="w-4 h-4 text-green-600" />
     } else if (trend === "down") {
@@ -180,7 +180,7 @@ export function ConversionAnalytics() {
                 </div>
                 <div className="text-right">
                   <div className={`flex items-center ${getTrendColor(metric.trend)}`}>
-                    {getTrendIcon(metric.trend, metric.change)}
+                    {getTrendIcon(metric.trend)}
                     <span className="ml-1 text-sm font-medium">{Math.abs(metric.change).toFixed(1)}%</span>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">vs last period</p>

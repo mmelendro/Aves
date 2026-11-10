@@ -67,3 +67,20 @@ AVES-039 recovery: main only, to d34faabc3d09bee8b671b618998606ed06994bea /
 dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB, checkpoint 13. Australia is unchanged.
 
 AVES-061 rollback: main app only to 8c7f297 / dpl_AuSANAJzDMdddtHb53rArqvJqM1B (checkpoint 14). No database or Australia rollback.
+
+## Contextual polish recovery, 10 November 2026
+
+Current main runtime 2663c20f8946c16fe08901dd441f556c106ed6f0,
+production dpl_GDmhyX5qm3wpexXKRxnuPWgEuaYh.
+Recovery branch checkpoint/2026-11-10-16-contextual-polish preserves this source.
+Roll back the main app only to 01337b2c29ce472365ff92d6a4903bd93f5bda94 /
+dpl_FVbcCBTXsgAnXVhZtiQ83PCxcDSd, checkpoint 15. No Australia or database rollback.
+
+## Final Australian and Colombian contours
+
+Main current runtime 33189e9 / dpl_HdwbDsUDSkfQcK8c2mxgVRe9j6zK, checkpoint 18.
+Prior main 2663c20 / dpl_GDmhyX5qm3wpexXKRxnuPWgEuaYh, checkpoint 16.
+AU current runtime 59a8f65 / dpl_FNrh2YBNHFjamZk3gPu1WcL5Cb9Z, checkpoint 17.
+Prior AU 2ff09e9 / dpl_56y3bD1RTE2fngcHBr14obkGu2bx, checkpoint 12 Australia.
+Roll back only the affected app. No database migration or rollback applies.
+Audit/source cleanup and the next satellite pilot may be newer than live runtime.

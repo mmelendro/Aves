@@ -1,5 +1,15 @@
 # AVES detailed acceptance criteria
 
+Current 10 November continuation: all nine Australian and eleven Colombian
+regional contour headers are live, along with their country headers. Main map
+controls and the one-person team carousel are live. Audit/cleanup source is newer
+than runtime. Follow HANDOFF-CURRENT.md, AUDIT-2026-11-10-CODE-UX.md and the UX-first
+NEXT-WEEK-PROMPT.md. Next: registered South Island satellite imagery with only the
+selected habitat shaded and a zero-capable overlay opacity slider, preview first.
+Additional wildlife/ecosystem variants and broader georeferenced map rollout are
+retained work, not permission for a consolidation cutover.
+
+
 Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for current delivered scope, runtime
 and permission to proceed. [AGILE-PLAN.md](AGILE-PLAN.md) contains the reorganised
 10 November priority order, including separate AVES-020 integration, acceptance,

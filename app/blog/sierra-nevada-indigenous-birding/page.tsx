@@ -7,25 +7,7 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
-import {
-  ArrowLeft,
-  Calendar,
-  User,
-  MapPin,
-  Camera,
-  Heart,
-  ArrowRight,
-  Info,
-  Eye,
-  Clock,
-  Users,
-  Instagram,
-  ExternalLink,
-  Globe,
-  TreePine,
-  Shield,
-  Home,
-} from "lucide-react"
+import { ArrowLeft, User, MapPin, Camera, Heart, ArrowRight, Info, Eye, Users, Instagram, ExternalLink, Globe, TreePine, Shield, Home } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { NavigationHeader } from "@/components/navigation-header"

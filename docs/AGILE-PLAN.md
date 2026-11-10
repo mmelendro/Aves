@@ -1,5 +1,15 @@
 # AVES agile priorities and release plan
 
+Current 10 November continuation: all nine Australian and eleven Colombian
+regional contour headers are live, along with their country headers. Main map
+controls and the one-person team carousel are live. Audit/cleanup source is newer
+than runtime. Follow HANDOFF-CURRENT.md, AUDIT-2026-11-10-CODE-UX.md and the UX-first
+NEXT-WEEK-PROMPT.md. Next: registered South Island satellite imagery with only the
+selected habitat shaded and a zero-capable overlay opacity slider, preview first.
+Additional wildlife/ecosystem variants and broader georeferenced map rollout are
+retained work, not permission for a consolidation cutover.
+
+
 Updated 10 November 2026, Sydney.
 
 This is the retained roadmap order, including AVES-020 consolidation. C0 and owner-selected C1a/C1b/C1c/C1d are complete; see [the C1c checkpoint](CHECKPOINT-2026-11-10-UNIFIED-C1C.md). AVES-039 public photo previews are now published separately. HANDOFF-CURRENT.md owns runtime/status and release permission; this plan owns sequencing; ROADMAP-DETAILS.md and AVES-CHANGE-INBOX.md retain acceptance criteria.

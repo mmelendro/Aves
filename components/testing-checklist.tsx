@@ -44,7 +44,7 @@ export function TestingChecklist() {
     })
 
     // Test 2: Check for proper heading hierarchy
-    const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6")
+
     const h1Count = document.querySelectorAll("h1").length
     testResults.push({
       name: "Heading Hierarchy",

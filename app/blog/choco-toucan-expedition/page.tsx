@@ -6,7 +6,7 @@
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Calendar, Clock, MapPin, Users, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import ArticleHero from "@/components/article-hero"
 import AudioPlayer from "@/components/audio-player"

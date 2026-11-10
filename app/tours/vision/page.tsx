@@ -5,7 +5,7 @@
  */
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -17,7 +17,6 @@ import { Footer } from "@/components/footer"
 import ArticleBirdCarousel from "@/components/article-bird-carousel"
 
 export default function VisionPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)

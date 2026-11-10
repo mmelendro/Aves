@@ -1,7 +1,8 @@
 # Place-specific contours, map controls and team carousel
 
 Owner-selected continuation after the published NZ header. 10 November 2026.
-Review branch: feature/aves-contextual-headers. No new production release.
+Historical preview record. Reviewed adaptations and map/team improvements are now
+published; see RELEASE-2026-11-10-CONTEXTUAL-POLISH.md and HANDOFF-CURRENT.md.
 
 ## Thirty contour studies
 
@@ -117,3 +118,7 @@ The already published NZ country/South Island composition is preserved.
 The main-app map and team improvements described above accompany this subset.
 156 tests and TypeScript passed. True touch input and physical Safari remain
 unverified. Release identifiers and final hosted checks follow in the handoff.
+
+Final owner direction completed nine Australian, then all eleven Colombian regional
+terrain/water headers and one-person team display. Wildlife study silhouettes remain
+unverified and were not automatically installed.

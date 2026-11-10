@@ -1,0 +1,108 @@
+{
+  "runtime": "2663c20f8946c16fe08901dd441f556c106ed6f0",
+  "deployment": "dpl_GDmhyX5qm3wpexXKRxnuPWgEuaYh",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "contour": null,
+      "bytes": 622852
+    },
+    {
+      "path": "/colombia",
+      "status": 200,
+      "contour": true,
+      "bytes": 230457
+    },
+    {
+      "path": "/regions/western-andes",
+      "status": 200,
+      "contour": null,
+      "bytes": 154201
+    },
+    {
+      "path": "/regions/central-andes",
+      "status": 200,
+      "contour": null,
+      "bytes": 154646
+    },
+    {
+      "path": "/regions/cauca-valley",
+      "status": 200,
+      "contour": null,
+      "bytes": 150685
+    },
+    {
+      "path": "/regions/magdalena-valley",
+      "status": 200,
+      "contour": null,
+      "bytes": 151235
+    },
+    {
+      "path": "/regions/sierra-nevada-de-santa-marta",
+      "status": 200,
+      "contour": null,
+      "bytes": 148805
+    },
+    {
+      "path": "/regions/llanos",
+      "status": 200,
+      "contour": null,
+      "bytes": 153113
+    },
+    {
+      "path": "/regions/amazonia",
+      "status": 200,
+      "contour": null,
+      "bytes": 154173
+    },
+    {
+      "path": "/regions/colombian-massif",
+      "status": 200,
+      "contour": null,
+      "bytes": 149234
+    },
+    {
+      "path": "/regions/eastern-andes",
+      "status": 200,
+      "contour": null,
+      "bytes": 153650
+    },
+    {
+      "path": "/new-zealand",
+      "status": 200,
+      "contour": null,
+      "bytes": 217774
+    },
+    {
+      "path": "/new-zealand/south-island",
+      "status": 200,
+      "contour": null,
+      "bytes": 1022166
+    },
+    {
+      "path": "/team",
+      "status": 200,
+      "contour": null,
+      "bytes": 99263
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "contour": null,
+      "bytes": 2502
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "contour": null,
+      "bytes": 329
+    },
+    {
+      "path": "/images/birding-regions-colombia-final.png",
+      "status": 200,
+      "contour": null,
+      "bytes": 26189
+    }
+  ]
+}

@@ -7,60 +7,22 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, User, MapPin, Camera, Heart, Eye, ArrowRight } from "lucide-react"
+import { Camera, Heart, Eye, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { AuthorBio } from "@/components/author-bio"
 import ArticleHero from "@/components/article-hero"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 
 export default function HummingbirdVisionJourneyPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const hummingbirdSpecies = [
-    {
-      image: "/images/rainbow-bearded-thornbill-vision.jpg",
-      commonName: "Rainbow-bearded Thornbill",
-      scientificName: "Chalcostigma herrani",
-      spanishName: "Colibrí Barbirrojo",
-      location: "Central Andes, Colombia",
-      elevation: "3,200m",
-      ebirdUrl: "https://ebird.org/species/rabth1",
-    },
-    {
-      image: "/images/violet-tailed-sylph.jpg",
-      commonName: "Violet-tailed Sylph",
-      scientificName: "Aglaiocercus coelestis",
-      spanishName: "Silfo Colivioleta",
-      location: "Tatamá National Park",
-      elevation: "2,400m",
-      ebirdUrl: "https://ebird.org/species/vitsy1",
-    },
-    {
-      image: "/images/collared-inca.jpg",
-      commonName: "Collared Inca",
-      scientificName: "Coeligena torquata",
-      spanishName: "Inca Acollarado",
-      location: "Jardín, Antioquia",
-      elevation: "1,800m",
-      ebirdUrl: "https://ebird.org/species/colin1",
-    },
-    {
-      image: "/images/long-tailed-sylph.jpg",
-      commonName: "Long-tailed Sylph",
-      scientificName: "Aglaiocercus kingii",
-      spanishName: "Silfo Colilargo",
-      location: "Eastern Cordillera",
-      elevation: "2,100m",
-      ebirdUrl: "https://ebird.org/species/lotsy1",
-    },
-  ]
+
 
   return (
     <div className="min-h-screen bg-white">

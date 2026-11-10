@@ -30,7 +30,6 @@ interface ContactFormSectionProps {
 export function ContactFormSection({
   showTitle = true,
   showFAQ = false,
-  variant = "homepage",
   className = "",
 }: ContactFormSectionProps) {
   const localizeHome = useColombiaHomeCopy()

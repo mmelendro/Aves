@@ -10,13 +10,12 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, User, MapPin, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
 
 export default function BlogPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const blogPosts = [
     {
@@ -107,7 +106,7 @@ export default function BlogPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
-            {blogPosts.map((post, index) => (
+            {blogPosts.map((post) => (
               <article key={post.id} className="group">
                 <Link href={`/blog/${post.id}`}>
                   <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-6 shadow-lg group-hover:shadow-xl transition-shadow">

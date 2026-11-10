@@ -1,0 +1,96 @@
+{
+  "runtime": "33189e9f6e2d36824721e31c033c6c96e0a23879",
+  "deployment": "dpl_HdwbDsUDSkfQcK8c2mxgVRe9j6zK",
+  "checks": [
+    {
+      "path": "/colombia",
+      "status": 200,
+      "header": "colombia-three-cordilleras",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/pacific",
+      "status": 200,
+      "header": "colombia-rainforest",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/western-andes",
+      "status": 200,
+      "header": "colombia-cloud-forest",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/central-andes",
+      "status": 200,
+      "header": "colombia-high-andes",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/eastern-andes",
+      "status": 200,
+      "header": "colombia-paramo",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/cauca-valley",
+      "status": 200,
+      "header": "colombia-valley",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/magdalena-valley",
+      "status": 200,
+      "header": "colombia-long-valley",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/caribbean",
+      "status": 200,
+      "header": "colombia-dry-coast",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/sierra-nevada-de-santa-marta",
+      "status": 200,
+      "header": "colombia-isolated-massif",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/llanos",
+      "status": 200,
+      "header": "colombia-savanna",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/amazonia",
+      "status": 200,
+      "header": "colombia-rainforest",
+      "onePerson": null
+    },
+    {
+      "path": "/regions/colombian-massif",
+      "status": 200,
+      "header": "colombia-headwaters",
+      "onePerson": null
+    },
+    {
+      "path": "/team",
+      "status": 200,
+      "header": null,
+      "onePerson": true
+    },
+    {
+      "path": "/new-zealand/south-island",
+      "status": 200,
+      "header": "new-zealand",
+      "onePerson": null
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "header": null,
+      "onePerson": null
+    }
+  ]
+}
