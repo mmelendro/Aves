@@ -1,0 +1,277 @@
+{
+  "runtime": "8c7f297b15b70678a3b4bc087a98939b37d8460e",
+  "production": "dpl_AuSANAJzDMdddtHb53rArqvJqM1B",
+  "checks": 38,
+  "passed": 38,
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 608392,
+      "contentType": "text/html; charset=utf-8",
+      "passed": true
+    },
+    {
+      "path": "/new-zealand",
+      "status": 200,
+      "bytes": 212452,
+      "contentType": "text/html; charset=utf-8",
+      "canonical": true,
+      "passed": true
+    },
+    {
+      "path": "/new-zealand/south-island",
+      "status": 200,
+      "bytes": 1020981,
+      "contentType": "text/html; charset=utf-8",
+      "canonical": true,
+      "passed": true
+    },
+    {
+      "path": "/credits",
+      "status": 200,
+      "bytes": 243110,
+      "contentType": "text/html; charset=utf-8",
+      "passed": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "bytes": 2502,
+      "contentType": "application/xml",
+      "southIslandIncluded": true,
+      "passed": true
+    },
+    {
+      "path": "/site-map",
+      "status": 200,
+      "bytes": 75061,
+      "contentType": "text/html; charset=utf-8",
+      "passed": true
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "bytes": 329,
+      "contentType": "text/plain",
+      "passed": true
+    },
+    {
+      "path": "/images/destinations/kea-new-zealand.jpg",
+      "status": 200,
+      "bytes": 1267937,
+      "contentType": "image/jpeg",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/australasian-bittern.webp",
+      "status": 200,
+      "bytes": 244582,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/australasian-crested-grebe.webp",
+      "status": 200,
+      "bytes": 111758,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/bellbird.webp",
+      "status": 200,
+      "bytes": 77078,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/black-stilt.webp",
+      "status": 200,
+      "bytes": 43434,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/blue-duck.webp",
+      "status": 200,
+      "bytes": 130460,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/fantail.webp",
+      "status": 200,
+      "bytes": 94296,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/grey-warbler.webp",
+      "status": 200,
+      "bytes": 137398,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/huttons-shearwater.webp",
+      "status": 200,
+      "bytes": 33302,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/kaka.webp",
+      "status": 200,
+      "bytes": 103212,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/kereru.webp",
+      "status": 200,
+      "bytes": 107716,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/little-penguin.webp",
+      "status": 200,
+      "bytes": 111122,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/morepork.webp",
+      "status": 200,
+      "bytes": 215246,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/new-zealand-falcon.webp",
+      "status": 200,
+      "bytes": 53756,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/nz-extra-rifleman.webp",
+      "status": 200,
+      "bytes": 59252,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/orange-fronted-parakeet.webp",
+      "status": 200,
+      "bytes": 111796,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/paradise-shelduck.webp",
+      "status": 200,
+      "bytes": 132804,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/red-crowned-parakeet.webp",
+      "status": 200,
+      "bytes": 118868,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/rock-wren.webp",
+      "status": 200,
+      "bytes": 133896,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/silvereye.webp",
+      "status": 200,
+      "bytes": 135226,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/south-island-robin.webp",
+      "status": 200,
+      "bytes": 26504,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/south-island-saddleback.webp",
+      "status": 200,
+      "bytes": 177310,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/south-island-tomtit.webp",
+      "status": 200,
+      "bytes": 43186,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/takahe.webp",
+      "status": 200,
+      "bytes": 310364,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/tokoeka.webp",
+      "status": 200,
+      "bytes": 252024,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/tui.webp",
+      "status": 200,
+      "bytes": 156564,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/western-weka.webp",
+      "status": 200,
+      "bytes": 216304,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/westland-petrel.webp",
+      "status": 200,
+      "bytes": 57208,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/white-heron.webp",
+      "status": 200,
+      "bytes": 188622,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/yellow-eyed-penguin.webp",
+      "status": 200,
+      "bytes": 69906,
+      "contentType": "image/webp",
+      "passed": true
+    },
+    {
+      "path": "/images/new-zealand/yellowhead.webp",
+      "status": 200,
+      "bytes": 51160,
+      "contentType": "image/webp",
+      "passed": true
+    }
+  ]
+}

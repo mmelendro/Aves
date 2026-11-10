@@ -2,10 +2,17 @@
 
 Updated 10 November 2026, Sydney.
 
-The owner selected AVES-039 checklist photo previews while C3 is blocked.
-Work is isolated on feature/aves-039-checklist-photos, based on the maintained
-main app, with draft PR #4. See [the photo checkpoint](CHECKPOINT-2026-11-10-CHECKLIST-PHOTOS.md).
-This is a preview-only increment. Production release still needs explicit approval.
+AVES-039 public NZ checklist photo previews were explicitly approved, published
+and live-verified on 10 November 2026. Main runtime: 8c7f297b15b70678a3b4bc087a98939b37d8460e;
+Production: dpl_AuSANAJzDMdddtHb53rArqvJqM1B. See [the release](RELEASE-2026-11-10-CHECKLIST-PHOTOS.md).
+31 existing credited photos, 149 tests, TypeScript, local/hosted builds and all
+38 live page/asset/sitemap checks passed. Live keyboard photo activation,
+credits, Escape/focus restoration and unchanged selection passed. Physical
+Safari/touch and exact 320/390px remain unverified.
+
+The unified draft still lacks the four AVES-039 source/test files. Port this
+published delta deliberately before any future consolidation cutover. Australia
+and private portal are unchanged. No further feature or release is selected.
 
 C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
 6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
@@ -51,7 +58,7 @@ Repository: https://github.com/mmelendro/Aves
 
 | App branch | Scope | Published runtime | Production deployment |
 | --- | --- | --- | --- |
-| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | d34faab | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB |
+| webmaster/readiness-2026-11-05 | Global homepage, Colombia, New Zealand | 8c7f297 | dpl_AuSANAJzDMdddtHb53rArqvJqM1B |
 | australia/preview | Australia and shared accounts/backend/admin | 2ff09e9 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx |
 
 Keep both published apps separate until C4; the selected integration draft is

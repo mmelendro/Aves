@@ -38,8 +38,19 @@
     "exact 320/390 CSS-pixel layout",
     "forced hosted image error"
   ],
-  "noProductionChange": true,
+  "noProductionChange": false,
   "noAccountDatabaseProviderChange": true,
   "temporaryPublicTestChoiceRemoved": true,
-  "consolidation": "C3 blocked on workspace CLI network access; owner approvals persist; C4/C5 separate"
+  "consolidation": "C3 blocked on workspace CLI network access; owner approvals persist; C4/C5 separate",
+  "productionPublished": true,
+  "productionDeployment": "dpl_AuSANAJzDMdddtHb53rArqvJqM1B",
+  "liveHttpPassed": 38,
+  "liveBrowserPassed": [
+    "keyboard quick look",
+    "Enter/click dialog",
+    "full credits",
+    "Escape without reopening",
+    "focus restoration",
+    "wish selection unchanged"
+  ]
 }

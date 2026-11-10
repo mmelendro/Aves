@@ -1,6 +1,6 @@
 # AVES-039 checklist photo preview checkpoint
 
-10 November 2026, Sydney. Preview only, not a production release.
+10 November 2026, Sydney. Preview acceptance followed by approved production publication.
 
 ## Source and scope
 
@@ -20,7 +20,7 @@ No sound or video starts. Images mount only when requested, with lazy loading.
 Checkboxes and wish-list callbacks stay independent from preview controls.
 
 Australia/private portal, hosted database, providers, geography, account sessions
-and production are unchanged. This branch is not merged into the unified draft.
+are unchanged. Production publication is recorded below. This branch is not merged into the unified draft.
 Any later port must preserve both candidates' changes and repeat affected checks.
 Videos and additional media sourcing remain separate work.
 
@@ -53,12 +53,16 @@ Vite CLI flags; hosted QA is used instead. Physical iPhone/Safari, touch and exa
 
 ## Release and recovery
 
-Production approval remains pending. No release has occurred. Existing main production remains runtime
-d34faabc3d09bee8b671b618998606ed06994bea / dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB.
-Australia remains 2ff09e92b25a57d89c5966352393bcdb0369db45 /
-dpl_56y3bD1RTE2fngcHBr14obkGu2bx. Existing recovery branches remain valid.
-Do not promote this Preview artifact or move aliases. Stage/build the explicitly
-approved production source and verify the affected public checklist before release.
+The owner explicitly approved publication. Production dpl_AuSANAJzDMdddtHb53rArqvJqM1B is READY
+and serves aves.bio/www.aves.bio from exact reviewed runtime 8c7f297b15b70678a3b4bc087a98939b37d8460e.
+All 38 live checks passed: seven pages/sitemaps/robots plus 31 credited image
+assets. Live keyboard quick look, Enter/click dialog, full credits, Escape/focus
+restoration without reopening and unchanged wish selection passed. No private
+fixtures or account changes. See RELEASE-2026-11-10-CHECKLIST-PHOTOS.md.
+
+Previous main recovery: d34faabc3d09bee8b671b618998606ed06994bea /
+dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB. New checkpoint:
+checkpoint/2026-11-10-14-checklist-photos. Australia remains unchanged.
 
 C3 approval state is reconciled in HANDOFF-CURRENT.md. Owner approvals persist;
 workspace network access is the remaining CLI blocker. C4/C5 remain separate.

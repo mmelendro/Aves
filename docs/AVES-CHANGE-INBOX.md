@@ -1,5 +1,11 @@
 # AVES request inbox
 
+Current AVES-039 status: the public NZ checklist photo pilot is published in
+8c7f297 / dpl_AuSANAJzDMdddtHb53rArqvJqM1B. Reuses 31 credited photographs;
+149 tests and 38 live route/asset/sitemap checks passed. Private-picker port,
+videos and additional media remain separate. See RELEASE-2026-11-10-CHECKLIST-PHOTOS.md.
+
+
 Current implementation status and release permission live in
 [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). The reorganised delivery order is in
 [AGILE-PLAN.md](AGILE-PLAN.md), reviewed 10 November 2026. This file retains owner
