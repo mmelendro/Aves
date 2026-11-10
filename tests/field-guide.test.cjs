@@ -29,3 +29,19 @@ test('3D has reduced-motion support and the guide never captures swipe or page-s
  assert.doesNotMatch(src,/onTouchStart|onWheel/)
  assert.match(src,/aria-hidden=\{layout === "guide"/)
 })
+test('existing map-fragment links reveal the map without cancelling native navigation',()=>{
+ const previousDocument=global.document,previousElement=global.Element
+ const listeners={},place={},outside={}
+ class LinkElement {constructor(hash){this.hash=hash}closest(){return this}getAttribute(){return this.hash}}
+ global.Element=LinkElement
+ global.document={getElementById:id=>id==='test-id-map'?{contains:target=>target===place}:id==='map-place'?place:outside,addEventListener:(name,fn)=>{listeners[name]=fn},removeEventListener(){}}
+ const win={location:{hash:''},addEventListener:(name,fn)=>{listeners[name]=fn},removeEventListener(){}}
+ try{
+  const h=componentHarness('components/resizable-discovery-pair.tsx','default',{map:'map',media:'birds',mapLabel:'Map and birds'},{runEffects:true,window:win,mocks:{'./field-guide-context':{FieldGuideContext:{Provider:'FieldGuideProvider'}},'@/components/colombia-home-language':{useColombiaHomeCopy:()=>x=>x},'./resizable-discovery-pair.module.css':{__esModule:true,default:{}}}})
+  h.render();listeners.click({button:0,target:new LinkElement('#outside')})
+  assert.equal(find(h.render(),n=>n.props['data-face']).props['data-face'],'birds')
+  const event={button:0,target:new LinkElement('#map-place')};listeners.click(event)
+  assert.equal(find(h.render(),n=>n.props['data-face']).props['data-face'],'map')
+  assert.equal(event.defaultPrevented,undefined)
+ }finally{global.document=previousDocument;global.Element=previousElement}
+})

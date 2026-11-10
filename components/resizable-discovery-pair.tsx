@@ -56,6 +56,27 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    // Existing place/resource links must reveal the map face before native scrolling.
+    function revealMap(hash: string) {
+      if (!hash.startsWith("#")) return
+      try {
+        const target = document.getElementById(decodeURIComponent(hash.slice(1)))
+        if (target && document.getElementById(`${id}-map`)?.contains(target)) setFace("map")
+      } catch { /* An invalid fragment keeps native navigation unchanged. */ }
+    }
+    const followHash = () => revealMap(window.location.hash)
+    const followLink = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return
+      const link = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null
+      if (link) revealMap(link.getAttribute("href") || "")
+    }
+    followHash()
+    window.addEventListener("hashchange", followHash)
+    document.addEventListener("click", followLink)
+    return () => { window.removeEventListener("hashchange", followHash); document.removeEventListener("click", followLink) }
+  }, [id])
+
   // CSS uses these proportions only when both cards fit. No browser storage or account setting is needed.
   const leftShare = mediaFirst ? 100 - effectiveShare : effectiveShare
   const direction = mediaFirst ? -1 : 1
