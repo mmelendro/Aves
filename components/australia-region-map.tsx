@@ -6,6 +6,7 @@
  * geometry and attribution are imported from content/australia-map.ts rather than drawn here.
  */
 
+import { MapViewer } from "./map-viewer"
 import { useId } from "react"
 import {
   australiaMapProvenance,
@@ -33,6 +34,7 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
   return (
     <div className="overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-sm">
         <div className="relative bg-gradient-to-br from-stone-50 via-emerald-50/40 to-white px-3 pb-2 pt-4 sm:px-6">
+          <MapViewer label="Australian states and territories map" credits={<a href={australiaMapProvenance.sourceUrl} className="underline">Natural Earth · Public domain · Generalised boundaries; external territories not shown</a>}>
           <svg
             viewBox={australiaMapViewBox}
             role="group"
@@ -108,6 +110,7 @@ export function AustraliaRegionMap({ selectedRegion, onSelectRegion }: Australia
               </g>
             })}
           </svg>
+          </MapViewer>
           <div className="mb-3 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-600">
             <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-emerald-700/30 bg-[#c5dbd0]" aria-hidden="true" />Explore and request a trip</span>
             <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-emerald-800 bg-emerald-800" aria-hidden="true" />Selected region</span>
