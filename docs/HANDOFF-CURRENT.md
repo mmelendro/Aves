@@ -6,17 +6,26 @@ Archives and older release reports record history, not current execution orders.
 
 ## Current instruction
 
-AVES-039 public NZ checklist photo previews were explicitly approved, published
-and live-verified on 10 November 2026. Main runtime: 8c7f297b15b70678a3b4bc087a98939b37d8460e;
-Production: dpl_AuSANAJzDMdddtHb53rArqvJqM1B. See [the release](RELEASE-2026-11-10-CHECKLIST-PHOTOS.md).
-31 existing credited photos, 149 tests, TypeScript, local/hosted builds and all
-38 live page/asset/sitemap checks passed. Live keyboard photo activation,
-credits, Escape/focus restoration and unchanged selection passed. Physical
-Safari/touch and exact 320/390px remain unverified.
+AVES-061 New Zealand alpine/coastal header was explicitly approved, published
+and live-verified on 10 November 2026. Main runtime: 01337b2c29ce472365ff92d6a4903bd93f5bda94;
+Production: dpl_FVbcCBTXsgAnXVhZtiQ83PCxcDSd. See [the release](RELEASE-2026-11-10-NZ-HEADER.md).
+151 tests (149 existing plus two responsive geometry checks), TypeScript and local/
+hosted builds passed. Desktop, 340 CSS-pixel reflow, keyboard menu/focus restoration,
+logo links and nine live route/asset/indexing checks passed. Physical Safari/touch
+and exact 320/390px browser views remain unverified.
 
-The unified draft still lacks the four AVES-039 source/test files. Port this
-published delta deliberately before any future consolidation cutover. Australia
-and private portal are unchanged. No further feature or release is selected.
+The owner selected a natural-context contour/flock collection for all existing
+countries, planning regions and South Island place contexts next. Prepare reviewed
+terrain/water/wildlife variants; do not publish them without their own review.
+The approved pilot changes public NZ headers only; global/Colombia/Australia,
+private accounts and foreground media behaviour remain unchanged.
+
+AVES-039 checklist photos remain published: 31 credited images and existing
+selection/preview behaviour are preserved. Previous runtime 8c7f297,
+Production dpl_AuSANAJzDMdddtHb53rArqvJqM1B.
+
+The unified draft still needs the AVES-039 and AVES-061 deltas ported deliberately
+before any future consolidation cutover. Its C3 network/acceptance gates remain.
 
 C1a/C1b/C1c/C1d are complete in the unified draft. Candidate runtime:
 6c7cb0bba913ed4c1a0315c5fa89f690519d792b. C2 protected read-only preview:
@@ -51,7 +60,7 @@ both production apps and rollback anchors. No paid provisioning or AI requests.
 
 | App | Branch | Runtime | Production | Recovery |
 | --- | --- | --- | --- | --- |
-| Global/Colombia/NZ | webmaster/readiness-2026-11-05 | 8c7f297b15b70678a3b4bc087a98939b37d8460e | dpl_AuSANAJzDMdddtHb53rArqvJqM1B | checkpoint/2026-11-10-14-checklist-photos |
+| Global/Colombia/NZ | webmaster/readiness-2026-11-05 | 01337b2c29ce472365ff92d6a4903bd93f5bda94 | dpl_FVbcCBTXsgAnXVhZtiQ83PCxcDSd | checkpoint/2026-11-10-15-nz-header |
 | Australia/shared portal | australia/preview | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | checkpoint/2026-11-10-12-media-handoff-australia |
 
 Previous main: d34faab / dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB, checkpoint 13.

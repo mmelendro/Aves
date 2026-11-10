@@ -1,0 +1,73 @@
+{
+  "runtime": "01337b2c29ce472365ff92d6a4903bd93f5bda94",
+  "production": "dpl_FVbcCBTXsgAnXVhZtiQ83PCxcDSd",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 609385
+    },
+    {
+      "route": "/colombia",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 226593
+    },
+    {
+      "route": "/regions/central-andes",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 150881
+    },
+    {
+      "route": "/new-zealand",
+      "status": 200,
+      "newHeader": true,
+      "bytes": 210839
+    },
+    {
+      "route": "/new-zealand/south-island",
+      "status": 200,
+      "newHeader": true,
+      "bytes": 1019675
+    },
+    {
+      "route": "/sitemap.xml",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 2502
+    },
+    {
+      "route": "/robots.txt",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 329
+    },
+    {
+      "route": "/images/brand/aves-new-zealand-bird.png",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 853513
+    },
+    {
+      "route": "/australia",
+      "status": 200,
+      "newHeader": false,
+      "bytes": 180224
+    }
+  ],
+  "browser": {
+    "desktopWidth": 1363,
+    "compactWidth": 340,
+    "overflow": false,
+    "menuKeyboard": "Tab then Escape restores trigger",
+    "liveBirds": 9,
+    "mainBoundaries": 1
+  },
+  "unverified": [
+    "physical Safari/touch",
+    "exact 320/390 CSS-pixel browser screenshots",
+    "native background/telephone behaviour not relevant to static header"
+  ]
+}

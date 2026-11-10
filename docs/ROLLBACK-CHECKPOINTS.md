@@ -21,6 +21,8 @@ do not merge their roots or roll back both merely because one UI changed.
 | checkpoint/2026-11-10-12-media-handoff-australia | 2ff09e92b25a57d89c5966352393bcdb0369db45 | dpl_56y3bD1RTE2fngcHBr14obkGu2bx | AU/shared portal public player/paused handoff |
 | checkpoint/2026-11-10-13-south-island-soundscapes | d34faabc3d09bee8b671b618998606ed06994bea | dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB | Main app: opt-in three-track South Island habitat ambience and shared ducking |
 | checkpoint/2026-11-10-14-checklist-photos | 8c7f297b15b70678a3b4bc087a98939b37d8460e | dpl_AuSANAJzDMdddtHb53rArqvJqM1B | Main public NZ checklist photos; approved, published and live-verified |
+| checkpoint/2026-11-10-15-nz-header | 01337b2c29ce472365ff92d6a4903bd93f5bda94 | dpl_FVbcCBTXsgAnXVhZtiQ83PCxcDSd | Main app NZ header: 151 tests, TS/builds, desktop/340px keyboard and nine live HTTP checks |
+
 
 Australia's previous recovery baseline: source d693512 and Production
 `dpl_9hrh2H4xuQumccS1qiPupqZuozV7`; the later first-tap release is checkpoint 04 above.
@@ -63,3 +65,5 @@ synthetic fixtures were fully removed; no schema or customer-data rollback appli
 
 AVES-039 recovery: main only, to d34faabc3d09bee8b671b618998606ed06994bea /
 dpl_3WU7VC5jQjiN5TWBEGBGxVB82gWB, checkpoint 13. Australia is unchanged.
+
+AVES-061 rollback: main app only to 8c7f297 / dpl_AuSANAJzDMdddtHb53rArqvJqM1B (checkpoint 14). No database or Australia rollback.
