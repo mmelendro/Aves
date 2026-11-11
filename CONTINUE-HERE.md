@@ -1,6 +1,6 @@
 # AVES: one numbered pathway
 
-Updated 11 November 2026, Sydney. This is the only active to-do list and resume prompt. Follow the next unfinished step, one useful, tested release at a time. The owner's latest instruction takes precedence.
+Updated 12 November 2026, Sydney. This is the only active to-do list and resume prompt. Follow the next unfinished step, one useful, tested release at a time. The owner's latest instruction takes precedence.
 
 ## The outcome
 
@@ -12,7 +12,7 @@ Already delivered: the shared map/bird guide, continuous 2D satellite navigation
 
 ## The pathway
 
-1. Add verified parks and reserves. Colombia pilot delivered: 109 national RUNAP records on the shared satellite map, with category/source details and explicit regional/private/provisional omissions. NEXT: Australia, then remaining New Zealand coverage. Deliver each country in a separate bounded release on the existing satellite map. Verify source, licence, date, geographic fit, omissions and access limits. A clearly labelled useful pilot is acceptable; fabricated completeness is not. References: MAP-04a/b/c.
+1. Add verified parks and reserves. Colombia pilot delivered: 109 national RUNAP records on the shared satellite map, with category/source details and explicit regional/private/provisional omissions. Australia pilot delivered: 13 selected CAPAD national parks across nine jurisdictions. NEXT: remaining New Zealand coverage. Deliver each country in a separate bounded release on the existing satellite map. Verify source, licence, date, geographic fit, omissions and access limits. A clearly labelled useful pilot is acceptable; fabricated completeness is not. References: MAP-04a/b/c.
 
 2. Unify map controls. Include expanded-map scrolling at very short viewport heights. Use one consistent layer picker, selection treatment, legend and source display across the maintained map families. Preserve camera, geography and bird choice through toggling, expansion and navigation. Distinguish display layers from bird filters. Load detail only when needed. Reference: MAP-05.
 

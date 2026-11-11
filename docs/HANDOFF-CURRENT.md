@@ -1,6 +1,18 @@
 # AVES current handoff
 
-Runtime: a4661e63b0594fa6a4bea5cca177a2f3d854a3c3. Deployment: dpl_HFWoiGc5Zm2FqHTB6CYoiPcBHzmJ, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: 72833361432435f794c873f490d3bff44e19a6bc / dpl_BRGYgKK45we79VMg8wv9z5Bw1bin. Branch: feature/field-guide-card.
+Runtime: 347a10f4e057f787d2fe0a8d7c94c9a6277ad43a. Deployment: dpl_EFg18vbzoQAHLT9YkTmELtqk6F1Q, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned after explicit owner approval on 12 November, Sydney. Rollback: a4661e63b0594fa6a4bea5cca177a2f3d854a3c3 / dpl_HFWoiGc5Zm2FqHTB6CYoiPcBHzmJ. Branch: feature/field-guide-card.
+
+## Australia park pilot and short-screen acceptance
+
+Published 13 selected national parks across all nine Australian planning jurisdictions, using official CAPAD 2024 records. This is a labelled pilot, not complete Australian reserve coverage. One shared ProtectedAreaExplorer supplies separate lazy Colombia/Australia catalogues, source credits, category details, selectors and geometry. Australian payload: 438,272 bytes. Every union island/hole survives, with at most 2% symmetric area change. Daintree’s small standard NP residual is deliberately omitted pending review of the separate National Park Aboriginal estate. See AUSTRALIA-PROTECTED-AREAS-2026-11-12.md.
+
+All 576 tests, strict TypeScript, source audit (355 modules, no unreachable) and local/exact-SHA hosted 75-page builds passed. Candidate acceptance checked 13 polygons, nine planning regions, Royal selection, Space activation, Escape/close focus restoration, layer off/on, expanded-map selection/camera retention, one map and unchanged NSW/Superb Lyrebird context. Colombia retained 109 separate records, Los Nevados and no Australian IDs after switching countries. At 340 CSS pixels, document width was 337px, map height 320px and detail panel width 267.25px. A 340×234 CSS-pixel expanded dialog scrolled 450px while its close control remained visible. This is real browser zoom testing, not physical touch/Safari acceptance.
+
+Observed clipping and sticky header obstruction were fixed before release. Geographic guide cards reserve at least 44rem, the canvas keeps 20rem, intrinsic controls scroll, short expanded dialogs scroll, and the site header/guide actions stop sticking below 480px viewport height. Shared layer-picker parity is still MAP-05 work. No map remount is needed for resizing.
+
+Canonical live proof: https://aves.bio/?explore=australia&region=new-south-wales . Select Satellite, enable National parks · pilot, Explore 13 areas, choose Royal. Park choice is page-local. Screenshot: docs/evidence/2026-11-12-australia-park-pilot.jpg. Both canonical aliases were confirmed on the prior release before approved assignment to this candidate. Deployment-scoped error/fatal scan 19:10:00–19:20:00 UTC on 11 November found no matching logs. No private data, schema, keys, access, spend, mail or booking changed.
+
+Next: remaining New Zealand national-park coverage. Official DOC Esri JSON for four North Island/Rakiura park units has been downloaded and reviewed; do not use its invalid GeoJSON conversion, which emits nested shells. Reconstruct correctly oriented Esri rings and preserve holes. Research inputs remain preparatory until integrated, tested and released.
 
 ## Colombia protected-area acceptance
 
@@ -28,7 +40,7 @@ Live evidence: /workspace/shared/aves-colombia-joined-regions.png, https://aves.
 
 The satellite foundation remains lazy-loaded Leaflet with EOX 2016 historical tiles, native zoom cap 14 and a background choice retained across routes/reloads in a tab. Overlay choices are page-local. Country/region camera moves finish without animation so expansion cannot interrupt them. 3D globe/elevation, current aerial imagery, complete bird ranges and whole-site layer parity remain unclaimed. See CONTINUOUS-SATELLITE-2026-11-11.md for the prior foundation evidence.
 
-Next: step 1 of CONTINUE-HERE.md, the only active numbered pathway: Colombia pilot delivered; bounded protected-area releases for Australia and remaining NZ coverage come next. Then shared controls, island-aware planning and the North Island pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
+Next: step 1 of CONTINUE-HERE.md, the only active numbered pathway: Colombia and the bounded Australia park pilot delivered; remaining NZ coverage comes next. Then shared controls, island-aware planning and the North Island pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
 
 ## Editing and privacy boundaries
 

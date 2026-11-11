@@ -1,6 +1,6 @@
 # Australia national park pilot
 
-Status: candidate source, awaiting hosted acceptance. Production remains the Colombia release recorded in HANDOFF-CURRENT.md until that acceptance succeeds.
+Status: published after candidate acceptance and explicit owner approval. Runtime 347a10f4e057f787d2fe0a8d7c94c9a6277ad43a, deployment dpl_EFg18vbzoQAHLT9YkTmELtqk6F1Q. Both canonical aliases assigned.
 
 ## Scope and provenance
 
@@ -37,3 +37,5 @@ At a real browser zoom width of 340 CSS pixels, the existing guide face shrank t
 The correction gives geographic guide faces at least 44rem, allows the inline surface to scroll all intrinsic controls/map content, keeps the canvas at least 20rem, and lets very short expanded dialogs scroll vertically. Park detail headers remain sticky inside their own scroll panel. The map is never remounted for resize. Recheck exact hosted source before publication. This addresses observed clipping within MAP-05; shared layer-picker parity is still pending.
 
 The corrected map frame exposed a second existing short-window obstruction: the 132px sticky site header plus sticky guide actions consumed almost all of a 340×234 CSS-pixel zoom viewport. Below 480px viewport height those two page elements now scroll normally. The modal map keeps its own close toolbar. This targets landscape/high-zoom usability, not a claim of physical Safari testing.
+
+Final acceptance: 576 tests, strict TypeScript, 355 reachable modules, zero unreachable, local and hosted 75-page builds. Browser accepted Royal selection, Space, Escape/focus, toggling, expansion, separate Colombia/109 records, 340px containment, 320px map height and short expanded scrolling with visible close controls. Screenshot: evidence/2026-11-12-australia-park-pilot.jpg. Physical touch/Safari remains unverified. Candidate runtime error/fatal scan returned no matches. Automatic review initially blocked alias assignment; the owner explicitly approved, and both aliases were assigned successfully. No new permission is pending for this release.
