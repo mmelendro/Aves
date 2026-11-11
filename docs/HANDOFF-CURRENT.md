@@ -1,8 +1,14 @@
 # AVES current handoff
 
-Runtime: d16c36f881eef0183faad86566f0d8f0d80f49dc. Deployment: dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: a3aa3ea8b58efc9aa1fcf9663d63d3dc86f5e093 / dpl_AL7v9skSFaUCwHVdPsaYkTHJvxkV. Branch: feature/field-guide-card.
+Runtime: a0278216ee93537c5afc3ce1e1ee6a904f0af415. Deployment: dpl_6r8i8AdJJCTaV2gkymugf1stzt4r, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: d16c36f881eef0183faad86566f0d8f0d80f49dc / dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2. Branch: feature/field-guide-card.
 
-## Current journey-reference evidence
+## Current price-reference evidence
+
+Seven published product/property price references, six eligible for arithmetic when conditions match. Party and room counts preserve per-person allowances. Room rates split by adults and units; adult entry rates do not. Unknown products, capacity, currency, review age and access/date conflicts stay unpriced. Sources and conditions appear in catalogue/day cards and copied notes. These are partial published references, not dated quotes, availability or complete trip costs. Food and transport remain unpriced. See docs/SOUTH-ISLAND-PRICE-REFERENCES-2026-11-11.md.
+
+553 tests, TypeScript and local/hosted 75-page builds passed. Source audit: 343 modules, zero unreachable application modules. Hosted browser verified legacy draft restoration, Arthur's Pass two-adult shared-room NZD 67.50–82.50, currency mismatch blocking, Hanmer adult NZD 43 against a NZD 30 allowance without party division, Orokonui Tuesday 2027-01-19 access warning and blocked arithmetic, and copied price provenance. At 340px viewport, document width was 337px. Canonical live shared-room comparison and both aliases verified. Deployment-scoped error/fatal scan for 07:54:39–08:04:39 UTC returned no matches. No private record writes. Physical Safari/touch, availability, child pricing and complete priced itinerary acceptance remain untested.
+
+## Earlier journey-reference evidence
 
 546 tests, TypeScript, local and hosted 75-page builds passed. Source audit: 340 modules, zero unreachable application modules. Hosted browser verified the mixed Christchurch–Arthur’s Pass–Queenstown draft, published versus unknown counts, copied source notes, the long Christchurch–Queenstown reference, Wānaka–Te Anau remaining unknown and Queenstown–Te Anau using its own reference. At 340px, document width was 337px. The canonical live Queenstown–Te Anau card and both aliases were verified. The deployment-scoped error/fatal scan for 07:14:39–07:24:39 UTC found no matches. This is scoped evidence, not proof about all traffic or current road conditions.
 
@@ -22,7 +28,7 @@ The existing unsent synthetic QA draft retained its itinerary/date/allowances/Ai
 
 ## Next work
 
-Sourced road connections and travel-time references; dated prices/availability and actual budget matching; broader reviewed catalogue coverage; physical Safari/touch; independent guest/provider and owner proposal/email acceptance within the approved synthetic scope. AVES-062 remains partial for automatic in-page road times and other countries.
+Season/access constraints; expanded dated prices/availability, food/transport costs and actual budget matching; broader reviewed catalogue coverage; physical Safari/touch; independent guest/provider and owner proposal/email acceptance within the approved synthetic scope. AVES-062 remains partial for automatic in-page road times and other countries.
 
 ## Old project retirement
 

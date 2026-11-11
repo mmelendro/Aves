@@ -1,6 +1,6 @@
 # AVES current delivery list
 
-Runtime: d16c36f881eef0183faad86566f0d8f0d80f49dc. Deployment: dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: a3aa3ea8b58efc9aa1fcf9663d63d3dc86f5e093 / dpl_AL7v9skSFaUCwHVdPsaYkTHJvxkV. Branch: feature/field-guide-card.
+Runtime: a0278216ee93537c5afc3ce1e1ee6a904f0af415. Deployment: dpl_6r8i8AdJJCTaV2gkymugf1stzt4r, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: d16c36f881eef0183faad86566f0d8f0d80f49dc / dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2. Branch: feature/field-guide-card.
 
 ## Completed
 
@@ -12,11 +12,13 @@ Runtime: d16c36f881eef0183faad86566f0d8f0d80f49dc. Deployment: dpl_Gg1GZRddP2nsB
 
 6. Fifteen published journey references, explicit unknowns, long-drive labels, exact endpoint overrides and source provenance in copied notes. 546 tests and local/hosted/live checks pass.
 
+7. Published price references and partial unit-aware allowance comparisons. 553 tests, local/hosted builds and browser/live checks pass. See SOUTH-ISLAND-PRICE-REFERENCES-2026-11-11.md.
+
 ## Next, in order
 
-1. Expand reviewed journey coverage and actual routing while retaining explicit unknowns, separate travel days and fixed departure constraints.
+1. Add season, access and mobility/fitness constraints while preserving managed versus wild distinctions and unmatched bird wishes.
 2. Source dated stay/activity/food costs with currency, per-person versus per-room units, party size and inclusions. Match actual options to allowances without pretending a reference price is live availability.
-3. Add season, access, mobility/fitness and bird opportunity constraints. Preserve managed versus wild distinctions and unmatched wishes.
+3. Expand reviewed journey coverage and actual routing, retaining unknowns, separate travel days and fixed departure constraints.
 4. Improve side-by-side itinerary comparison, saved itinerary editing, singular/plural counter copy and mobile usability using the existing private model where possible.
 5. Expand region coverage only after the South Island flow works as a useful complete journey.
 6. Complete physical Safari/touch, independent guest/provider and owner proposal/email acceptance within approved synthetic scope.

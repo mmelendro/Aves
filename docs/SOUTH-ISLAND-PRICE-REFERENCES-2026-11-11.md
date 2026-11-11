@@ -28,4 +28,4 @@ No paid API, new dependency, booking, enquiry, email, new access or database sch
 
 ## Verification
 
-Pending final suite, build, hosted browser and live alias verification. Physical Safari/touch, dated accommodation quotes and availability, child pricing, food and transport costs, full route feasibility and actual bookable budget matching remain future work.
+553 tests, TypeScript, local and hosted 75-page builds passed. Source audit checks 343 modules with zero unreachable application modules. Hosted browser checked shared rooms, adult admission, currency mismatch, dated closed-day warnings, copied sources and 340px containment (337px document). Both live aliases point to a027821 / dpl_6r8i8AdJJCTaV2gkymugf1stzt4r. Canonical shared-room comparison verified. Error/fatal scan 07:54:39–08:04:39 UTC returned no matches. Physical Safari/touch, dated accommodation quotes and availability, child pricing, food and transport costs, full route feasibility and actual bookable budget matching remain future work.
