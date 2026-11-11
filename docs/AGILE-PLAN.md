@@ -1,5 +1,10 @@
 # AVES comprehensive delivery list
 
+## Latest verified article/account preview · 11 November 2026
+
+Source 0a3ff81 / dpl_HDBRFKGEkiyUie4hDxHpLkG8YPa1 passed 524 tests, TypeScript, local/hosted builds and scoped desktop/340px browser acceptance. Four articles now have shared headings/main targets; six account entry screens use shared global header/footer. Real signed-in dashboard/owner acceptance remains pending. Production unchanged. Next: remaining custom/special-route layout inventory and guided contact work. Evidence: ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md.
+
+
 ## Current article/account increment · 11 November 2026
 
 Four article landmarks/headings and shared account header/footer are implemented. 524 checks and TypeScript pass. Finish hosted desktop/narrow acceptance for article and account entry screens, then continue remaining custom/private-shell coverage. No authenticated provider/save acceptance is claimed. Details: ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md.

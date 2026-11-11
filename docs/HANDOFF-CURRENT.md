@@ -62,3 +62,7 @@ Eight editorial/legal routes and Spanish shared-shell copy are complete in sourc
 ## Article/account parity continuation · 11 November 2026
 
 Four birding articles now share heading styles and main-content targets. Account chrome delegates to the shared header/footer with neutral global identity and retained account links. 524 tests and TypeScript passed; exact hosted/browser acceptance pending. Read ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md. Authentication and private workflow logic unchanged; production unchanged.
+
+## Article/account preview verified · 11 November 2026
+
+Source 0a3ff81 / preview dpl_HDBRFKGEkiyUie4hDxHpLkG8YPa1 passed local/hosted builds, 524 tests, TypeScript and desktop/340px checks for four articles plus six account entry screens. Account global bird, shared header/footer, mobile menu and Escape focus verified. Authenticated dashboard/owner-inbox browser acceptance remains pending. Production unchanged. See ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md.
