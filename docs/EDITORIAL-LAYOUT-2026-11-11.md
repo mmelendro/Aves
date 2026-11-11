@@ -19,3 +19,13 @@ No database, private account workflow, provider, billing, outreach or business-p
 ## Next
 
 Verify the exact hosted candidate, including Spanish mobile controls and cookie preference centre. Continue remaining custom/article routes and private-shell design acceptance. Existing editorial sustainability, health, travel and commercial claims require a separate source/content review; layout checks do not validate those claims. Physical Safari/touch remains unverified.
+
+## Hosted acceptance complete
+
+Source d022cd0 passed local build (75 pages), generated-HTML landmark checks for all eight routes and hosted preview dpl_Hz5mks9JUEw7MpRZzFn79gEzRs4c. Desktop Chromium (1363px) confirmed one h1, shared emerald title, one main-content target and no overflow on all eight pages. Native zoom produced 340 x 234 CSS pixels. Six routes passed without further changes. Cookies preference CTA and Conservation booking CTA overflowed; source 589ff9c8cd4b97b86f8aa66504c584820d1b5b51 fixes those buttons with container widths, wrapping text and adaptive height.
+
+Final protected preview: dpl_2i8HiiMx9Ht1JZERqfzTtS9CQwjB, READY, Node 22 project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. URL: https://aves-australia-eol9g9lhd-mmelendro-9273s-projects.vercel.app/cookies . Final full suite 518/518 passed; strict TypeScript and focused route/translation checks passed after the fixes. The exact hosted build passed.
+
+Final narrow retest: Cookies no horizontal overflow, preference CTA 189 x 64px; Conservation no horizontal overflow, primary CTA 305 x 72px, both at 340px viewport width. Cookie preference centre opened through the retained button on the initial candidate; its behavior component was unchanged in the two-class correction. Final Colombia Spanish menu renders Destinos, Cómo funciona, Mis viajes and Mapa del sitio; translated open/close labels work, Escape restores Abrir menú de navegación focus and the page has no horizontal overflow. Menu links were 44px tall in the equivalent initial candidate. Cookie banner was dismissed with Reject Non-Essential before menu checks. This is Chromium zoom/reflow, not physical phone/Safari testing.
+
+Production unchanged at 3562ba2 / dpl_5MtafKNyQ2uxi3Em7hcBtt7rWzb5. No promotion, domain move, provider action or private-data change. Continue remaining article/custom and private-shell design checks, deeper Spanish explorer copy and separate factual-content review.

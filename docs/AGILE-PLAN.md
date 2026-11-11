@@ -1,5 +1,10 @@
 # AVES comprehensive delivery list
 
+## Latest verified editorial preview · 11 November 2026
+
+Source 589ff9c / dpl_2i8HiiMx9Ht1JZERqfzTtS9CQwjB is READY. Eight routes share headings/main targets, Cookies uses shared navigation, Spanish menu labels work, and two observed narrow-button overflow issues are fixed. 518 tests, TypeScript, local/hosted builds and scoped Chromium desktop/340px acceptance passed. Production unchanged. Continue remaining article/custom and private-shell style coverage; deeper Spanish explorer copy and factual-content review remain. Details: EDITORIAL-LAYOUT-2026-11-11.md.
+
+
 ## Current editorial increment · 11 November 2026
 
 Eight editorial/legal routes now use shared headings and main-content targets, including Cookies shared navigation. Shared-shell Spanish labels and acknowledgement updated. 518 checks and TypeScript passed. Finish exact hosted preview acceptance, then continue remaining article/custom and private-shell design coverage. Production unchanged. See EDITORIAL-LAYOUT-2026-11-11.md.

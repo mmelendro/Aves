@@ -54,3 +54,7 @@ Next: fix the identified shared-navigation Spanish strings, then continue custom
 ## Editorial layout continuation · 11 November 2026
 
 Eight Colombian editorial/legal routes now share title typography and main-content targets. Cookies delegates its legacy menu to shared navigation. Spanish homepage navigation/control copy is completed within the bounded shared-shell scope. 518 checks and TypeScript passed; local/hosted build and browser acceptance pending. See EDITORIAL-LAYOUT-2026-11-11.md. Production unchanged; unrelated dependency overrides remain excluded.
+
+## Editorial preview verified · 11 November 2026
+
+Eight editorial/legal routes and Spanish shared-shell copy are complete in source 589ff9c, preview dpl_2i8HiiMx9Ht1JZERqfzTtS9CQwjB (READY). 518 tests, TypeScript, local/hosted builds and desktop/narrow browser checks passed within documented limits. Narrow checks caught and fixed overflowing Cookie/Conservation CTAs. Cookie preference centre and Spanish menu/Escape focus verified. Production remains unchanged. Read EDITORIAL-LAYOUT-2026-11-11.md for exact evidence. Continue remaining article/custom/private-shell design audit and deeper Spanish explorer copy.
