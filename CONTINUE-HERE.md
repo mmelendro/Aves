@@ -8,7 +8,7 @@ A visitor explores one map, selects birds and interests, enters starting/departu
 
 Latest correction: Colombia’s eleven approximate planning regions now share exact edges with no area overlaps or uncovered country land. A single mesh draws the borders; region selection and continuous satellite imagery remain shared.
 
-Already delivered: the shared map/bird guide, continuous 2D satellite navigation and selectable planning-region outlines. South Island has the operational planner. North Island does not yet have a complete planning flow. Exact runtime, limits and rollback live in [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md); do not rebuild completed work from old prompts.
+Already delivered: the shared map/bird guide, continuous 2D satellite navigation and selectable planning-region outlines. South Island has the operational planner. North Island now has a bounded Auckland, Hamilton and Rotorua pilot. Exact runtime, limits and rollback live in [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md); do not rebuild completed work from old prompts.
 
 ## The pathway
 
@@ -18,9 +18,9 @@ Already delivered: the shared map/bird guide, continuous 2D satellite navigation
 
 3. Finish the shared island planner. Delivered. Keep the delivered island configuration; finish sharing route rules, road/price references, draft storage and account handoff. Preserve old drafts and keep each island's inputs and saved plans isolated. Do not copy the planner or infer a road between islands. Reference: NZ-01b.
 
-4. Publish a usable North Island pilot. NEXT. Research one coherent corridor and deliver its canonical guide, map, locally supported birds, trip options, catalogue and site-directory links together. A visitor must complete a credible 3 to 7 day trip with fixed endpoints. Preserve the working South Island flow. Reference: NZ-02.
+4. Publish a usable North Island pilot. Delivered for Auckland, Hamilton and Rotorua. Research one coherent corridor and deliver its canonical guide, map, locally supported birds, trip options, catalogue and site-directory links together. A visitor must complete a credible 3 to 7 day trip with fixed endpoints. Preserve the working South Island flow. Reference: NZ-02.
 
-5. Make both islands' plans practical and comparable. Improve travel time, pace, season/opening constraints, weather alternatives, cost units and allowance comparisons. Offer genuinely different options where feasible; explain missing prices or limited choices. Keep editing and save/reopen reliable. References: NZ-03/04/06.
+5. Make both islands' plans practical and comparable. NEXT. Improve travel time, pace, season/opening constraints, weather alternatives, cost units and allowance comparisons. Offer genuinely different options where feasible; explain missing prices or limited choices. Keep editing and save/reopen reliable. References: NZ-03/04/06.
 
 6. Fill useful content gaps along those routes. Add sourced birding sites, stays, individually reviewed Airbnb options where possible, food, organic/farm-to-table evidence, markets, hot springs, hikes, adventures, ecotourism, community-led culture, wellness and transport. Audit local bird memberships and national/global conservation status. B Corp evidence stays optional and separate. Extend the verified pattern to Colombia and Australia. Expand by usefulness, not pin counts. References: NZ-05/07 and map/place coverage.
 
@@ -43,3 +43,9 @@ Protect private traveller records and sensitive wildlife locations. Source envir
 3D terrain/globe, offline/installable access, optional eBird import, wider media, marketplace tools and automatic booking remain future requirements. Old Vercel project retirement is separate. No new spend, weaker access, private-data changes or external outreach is implied.
 
 [Map coverage](docs/MAP-LAYER-COVERAGE.md) and [source criteria](docs/MAP-LAYER-ROLLOUT.md) are technical references, not queues. Wider requirements remain in [ROADMAP-DETAILS.md](docs/ROADMAP-DETAILS.md), [AVES-CHANGE-INBOX.md](docs/AVES-CHANGE-INBOX.md) and the [archived prompts](docs/archive/2026-11-11-before-agile-reset/README.md). Only this numbered pathway sets delivery order.
+
+## Launch evidence still needed
+
+The updated owner business plan is a separate private deliverable. It contains proposed commercial choices and clearly labelled illustrative finances; actual cash, costs, pay, capacity and paid demand remain owner inputs. Do not publish financial assumptions as actual results. The original plan still needs reconciliation.
+
+Legacy conservation claims discovered 12 November require a bounded correction before further launch claims. Physical mobile Safari/touch, independent visitors, current source/rights coverage, imagery reliability and the complete private save/reopen/edit journey remain unclaimed. Do not replace these checks with test counts.

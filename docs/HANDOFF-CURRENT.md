@@ -1,6 +1,20 @@
 # AVES current handoff
 
-Runtime: c7697c6c7a9342ce5d7a322800082a42ba332a48. Deployment: dpl_5ntsqf5icEpDeo4poShatMJPP3pX, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: 9b6a7e1a43ba3f112c9b3bba8931070800097e5e / dpl_HmP69mf8Ye3NhAJTmPLfcg8a6RKf. Branch: feature/field-guide-card.
+Runtime: 1eb6947db550c10721ed4738c0d8588e75efe26d. Deployment: dpl_G22URh5bCqUUS563PY2oqZv9Tdyv, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: c7697c6c7a9342ce5d7a322800082a42ba332a48 / dpl_5ntsqf5icEpDeo4poShatMJPP3pX. Branch: feature/field-guide-card.
+
+## North Island corridor acceptance
+
+Published /new-zealand/north-island with an Auckland → Hamilton → Rotorua pilot, eighteen references, three broad public bases, four adult admission references and two named-town road estimates. The guide, shared planner, one geographic map, public directory and private handoff are connected. This is a 3–7 day corridor, not whole-island coverage. See NORTH-ISLAND-PILOT-2026-11-12.md.
+
+All 595 tests, strict TypeScript, source audit (367 modules, zero unreachable), local and exact-SHA hosted 76-page builds passed. Tests exercise every supported length and explicit endpoint/route rejection, short arrival capacity, managed exclusions, dated ferry/falconry, whole-day excursions and cross-island data isolation. Existing South Island generation and ownership/API checks remain.
+
+Hosted acceptance generated three and seven days with fixed Auckland/ Rotorua endpoints, exactly two reviewed arrivals, two nights on the three-day version and separate local choices. Choosing Redwoods on the Rotorua arrival cleared the other outing. Published comparisons showed NZD27.50 for Hamilton Gardens and explicit unknown costs for unpriced stays/activities, not a complete total. Copy used the North Island block. Handoff reached sign-in with encoded North Island account intent; back restored seven days. South Island separately restored its seven-day Christchurch/ Queenstown inputs with no North Island places. Directory linked its canonical North Island guide.
+
+The existing geographic surface rendered three base buttons and one straight route path. Explicit fit showed a 50km scale; Hamilton selection showed 20km, marked the selected button and filtered the catalogue to four Hamilton references. Hiding the route removed its path without changing scale. Planning/Satellite switches retained Hamilton, scale and the hidden route, with one map. At 337 CSS px document width was 337px, map 283.25×320px and day card 305px. Satellite tile delivery was inconsistent (one check loaded 1/10 visible tiles); this remains an external imagery limitation, not a successful full-imagery acceptance. Planning map remains selectable and functional. Physical touch/Safari and real provider save/reopen were not newly tested.
+
+Canonical proof: https://aves.bio/new-zealand/north-island#trip-planner rendered Auckland, Hamilton and Rotorua day cards. Both aliases assigned to the exact accepted deployment. Screenshot: docs/evidence/2026-11-12-north-island-planner.jpg. Deployment-scoped error/fatal scan 20:41:13–20:51:13 UTC on 11 November found no matching logs. No schema, private record, keys, access, spend, mail or booking changed.
+
+NEXT: pathway step 5. A bounded legacy-claims correction is being completed before further launch claims: /conservation still had unsupported carbon-neutral/trust/ranking statements, and /resources had an unattributed podcast endorsement. Do not claim a full launch audit from this discovery.
 
 ## Shared island planner acceptance
 
@@ -10,7 +24,7 @@ All 590 tests passed, including disjoint catalogue/reference/storage fixtures, l
 
 Hosted acceptance generated seven days from Christchurch to Queenstown, edited the first stay, compared two distinct plans, copied the correctly labelled complete text and carried it to sign-in with encoded South Island account intent. Returning restored the seven-day tab draft. At a 337px viewport the document was 337px, day card 305px and selects 263×44px. Canonical verification rendered seven days and one map. No provider authentication/private save was performed; existing local API/ownership tests do not certify provider delivery anew. Screenshot: docs/evidence/2026-11-12-shared-island-planner.jpg. Public proof: https://aves.bio/new-zealand/south-island#trip-planner . Both canonical aliases assigned to the accepted deployment. No schema, private record, access, spend, keys, mail or booking changed.
 
-NEXT: pathway step 4, researched North Island corridor and canonical guide/map/planner/directory together.
+The subsequent North Island release above completes pathway step 4.
 
 ## Shared map controls acceptance
 
@@ -72,7 +86,7 @@ Live evidence: /workspace/shared/aves-colombia-joined-regions.png, https://aves.
 
 The satellite foundation remains lazy-loaded Leaflet with EOX 2016 historical tiles, native zoom cap 14 and a background choice retained across routes/reloads in a tab. Overlay choices are page-local. Country/region camera moves finish without animation so expansion cannot interrupt them. 3D globe/elevation, current aerial imagery, complete bird ranges and whole-site layer parity remain unclaimed. See CONTINUOUS-SATELLITE-2026-11-11.md for the prior foundation evidence.
 
-Next: step 4 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots and shared controls delivered. Island-aware planning precedes the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
+Next: step 5 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots and shared controls delivered. Island-aware planning precedes the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
 
 ## Editing and privacy boundaries
 

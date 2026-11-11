@@ -62,10 +62,10 @@ export default function TripDayCard({
       {day.transferFrom && (
         <>
           <p className="text-sm leading-6">
-            Transfer from {tripAreaById.get(day.transferFrom)?.name}. Keep this
+            Transfer from {tripAreaById.get(day.transferFrom)?.name}.{" "}
             {context.corridor
-              ? "for travel, breaks and one optional short outing."
-              : "day for travel, breaks and checking in."}
+              ? "Keep time for travel, breaks and one optional short outing."
+              : "Keep this day for travel, breaks and checking in."}
           </p>
           {journey && (
             <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-3 text-sm leading-6">

@@ -133,11 +133,8 @@ export default function ResourcesPageClient() {
             <div className="flex justify-center mb-4">
               <Star className="w-8 h-8 text-emerald-600" />
             </div>
-            <blockquote className="text-2xl md:text-3xl font-light text-gray-800 mb-4 italic">
-              "Colombia is not just a birding destination—it's THE birding destination. With over 1,900 species, it
-              offers experiences you simply cannot find anywhere else on Earth."
-            </blockquote>
-            <p className="text-gray-600 font-medium">— Featured in American Birding Podcast</p>
+            <p className="text-2xl md:text-3xl font-light text-gray-800 mb-4">Explore Colombia through its birds, places and the people who study them.</p>
+            <p className="text-gray-600">Independent resources to inform your reading and trip ideas. Follow each publisher's original link for context.</p>
           </div>
         </div>
       </section>

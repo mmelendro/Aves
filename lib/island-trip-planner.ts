@@ -630,7 +630,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       budget.rows.length
         ? `Per-person allowances (${draft.input.currency}, not quoted prices): ${budget.rows.map((r) => `${r.label} ${r.amount} × ${r.units} = ${r.total}`).join("; ")}. Entered allowance total ${budget.total}.`
         : "Budget allowances still open; prices not checked.",
-      `Cost sharing: ${draft.input.adults ?? 1} adults, ${draft.input.rooms ?? 1} rooms/units. Adult references only; dates and availability are not quoted.`,
+      `Cost sharing: ${draft.input.adults ?? 1} ${(draft.input.adults ?? 1) === 1 ? "adult" : "adults"}, ${draft.input.rooms ?? 1} ${(draft.input.rooms ?? 1) === 1 ? "room/unit" : "rooms/units"}. Adult references only; dates and availability are not quoted.`,
       `Bird wishes: ${draft.input.birdIds.map(nzBirdName).join(", ") || "Open to suggestions"}.`,
       ...draft.days.map(
         (d, i) =>

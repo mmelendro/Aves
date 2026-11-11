@@ -41,7 +41,7 @@ test('new adult/unit fields validate without discarding old tab drafts and survi
  const old=input();delete old.adults;delete old.rooms;assert.equal(p.validTripInput(old),true)
  for(const bad of [{adults:0},{adults:13},{adults:2,rooms:3},{rooms:0}])assert.equal(p.validTripInput(input(bad)),false)
  const draft=p.buildSouthIslandTrip(input({adults:2,rooms:1,areaId:'arthurs-pass',days:3}))
- assert.match(p.tripDraftText(draft),/Cost sharing: 2 adults, 1 rooms\/units/)
+ assert.match(p.tripDraftText(draft),/Cost sharing: 2 adults, 1 room\/unit/)
  assert.match(p.tripDraftText(draft),/Cabin starting-price band for two guests/)
  const saved=new Map(),storage={getItem:k=>saved.get(k)||null,setItem:(k,v)=>saved.set(k,v),removeItem:k=>saved.delete(k)}
  p.writeTripDraft(storage,draft,now);assert.equal(p.readTripDraft(storage,now).input.adults,2)

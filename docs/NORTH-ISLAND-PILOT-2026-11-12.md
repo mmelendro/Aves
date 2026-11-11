@@ -1,6 +1,6 @@
 # North Island corridor pilot
 
-Status: candidate, exact-SHA hosted acceptance pending.
+Status: published runtime 1eb6947db550c10721ed4738c0d8588e75efe26d, deployment dpl_G22URh5bCqUUS563PY2oqZv9Tdyv, both canonical aliases.
 
 The canonical North Island guide adds an Auckland → Hamilton → Rotorua pilot to the shared island engine. This is three broad planning bases and eighteen references, not whole-island coverage. Fixed endpoints and a 3–7 day range are explicit. No Auckland return transfer or flight connection is included. The shared generator accepts an explicit ordered corridor configuration rather than duplicating the South Island planner.
 
@@ -26,4 +26,4 @@ The existing geographic map receives optional three-base markers and straight it
 
 North Island uses its own pending draft key, title block and account region. The same private editor accepts its explicit import. Place ideas include both islands' stable IDs; existing ideas and South Island drafts stay compatible. Canonical guide links, the public directory and XML inventory arrive together. No schema, private record, authentication, provider access, spend, mail or bookings changed.
 
-Automated and hosted evidence to be recorded after acceptance. Physical touch/Safari and independent visitor review remain launch checks.
+Acceptance: 595 tests, strict TypeScript, 367 reachable modules/none unreachable, local and hosted 76-page builds. Browser evidence and rollback are recorded in HANDOFF-CURRENT.md. External satellite delivery was inconsistent; planning map fallback remains available. Physical touch/Safari and independent visitor review remain launch checks.
