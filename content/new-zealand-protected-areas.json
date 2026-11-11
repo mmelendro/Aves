@@ -1,0 +1,132 @@
+{
+  "publisher": "Department of Conservation Te Papa Atawhai",
+  "sourceUrl": "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Public_Conservation_Land/FeatureServer/0",
+  "sourceDate": "2026-11-12",
+  "reviewedAt": "2026-11-12",
+  "dateScope": "Retrieval date, not a new legal gazettal date. Service last edited 10 November 2026 UTC.",
+  "licence": "CC BY 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "licenceEvidence": "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Public_Conservation_Land/FeatureServer/0",
+  "attribution": "Crown Copyright: Department of Conservation Te Papa Atawhai 2026. Selected and generalised by AVES.",
+  "inputSha256": "ba50d1bafed8bca4fe148a0529f737a9a0541ad0e8a99ca5d4f687b4c024b03a",
+  "downloadUrl": "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Public_Conservation_Land/FeatureServer/0/query?where=NaPALIS_ID+IN+%282801496%2C2793719%2C2792897%2C2792901%29&outFields=OBJECTID%2CNaPALIS_ID%2CName%2CType%2CLegislation&returnGeometry=true&outSR=4326&f=json&orderByFields=NaPALIS_ID&resultRecordCount=1000",
+  "sourceCrs": "NZTM2000 / EPSG:2193; official service outSR=4326",
+  "outputCrs": "OGC:CRS84, longitude/latitude WGS84",
+  "modifications": "Four selected NaPALIS units. Esri clockwise shells/counterclockwise holes reconstructed without repair. Topology-preserving simplification at at most 0.0005 degrees, 8-decimal coordinates, all islands/holes retained and at most 2% symmetric area change.",
+  "limitations": "North Island and Rakiura national park pilot, not complete conservation-land coverage. Other reserves, marine areas, Te Urewera and offshore conservation islands omitted. South Island retains its separately reviewed existing nine-park/DOC layer. Boundaries do not establish current access, track conditions, bird occurrence or certification. Respect closures, permits and cultural guidance.",
+  "count": 4,
+  "geometryPath": "/data/new-zealand-north-rakiura-parks.geojson",
+  "geometrySha256": "8dce972f67eb9590f1967c3d7dc8410d2623242faf5d74a1a9c069bae31168f8",
+  "geometryChecks": [
+    {
+      "id": "2792897",
+      "polygons": 15,
+      "holes": 1,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.0035989119223404247
+    },
+    {
+      "id": "2792901",
+      "polygons": 155,
+      "holes": 6,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.017033088868818082
+    },
+    {
+      "id": "2793719",
+      "polygons": 23,
+      "holes": 1,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.0032668944238881887
+    },
+    {
+      "id": "2801496",
+      "polygons": 131,
+      "holes": 4,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.004084572988984591
+    }
+  ],
+  "areas": [
+    {
+      "id": "2801496",
+      "name": "Rakiura National Park",
+      "sourceName": "Rakiura National Park",
+      "category": "National Park",
+      "sourceType": "NATIONAL_PARK",
+      "legislationCode": "NATIONAL_PARK_ACT",
+      "sourceUrl": "https://www.doc.govt.nz/rakiura",
+      "island": "rakiura",
+      "labelPoint": [
+        167.88189534,
+        -46.98744926
+      ],
+      "bounds": [
+        167.44724217,
+        -47.28981862,
+        168.1628324,
+        -46.68350786
+      ]
+    },
+    {
+      "id": "2792897",
+      "name": "Te Papa-Kura-o-Taranaki",
+      "sourceName": "Te Papa-Kura-o-Taranaki (formerly Egmont National Park)",
+      "category": "National Park",
+      "sourceType": "NATIONAL_PARK",
+      "legislationCode": "NATIONAL_PARK_ACT",
+      "sourceUrl": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/taranaki/places/te-papa-kura-o-taranaki/",
+      "island": "north-island",
+      "labelPoint": [
+        174.06380834,
+        -39.28840311
+      ],
+      "bounds": [
+        173.9287569,
+        -39.40066905,
+        174.19089737,
+        -39.13329817
+      ]
+    },
+    {
+      "id": "2793719",
+      "name": "Tongariro National Park",
+      "sourceName": "Tongariro National Park",
+      "category": "National Park",
+      "sourceType": "NATIONAL_PARK",
+      "legislationCode": "NATIONAL_PARK_ACT",
+      "sourceUrl": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/",
+      "island": "north-island",
+      "labelPoint": [
+        175.54015241,
+        -39.23542581
+      ],
+      "bounds": [
+        175.35889998,
+        -39.4109124,
+        175.81872348,
+        -38.97597808
+      ]
+    },
+    {
+      "id": "2792901",
+      "name": "Whanganui National Park",
+      "sourceName": "Whanganui National Park",
+      "category": "National Park",
+      "sourceType": "NATIONAL_PARK",
+      "legislationCode": "NATIONAL_PARK_ACT",
+      "sourceUrl": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/manawatu-whanganui/places/whanganui-national-park/",
+      "island": "north-island",
+      "labelPoint": [
+        174.88274305,
+        -39.38082185
+      ],
+      "bounds": [
+        174.76207808,
+        -39.73478212,
+        175.2449492,
+        -38.92615315
+      ]
+    }
+  ]
+}

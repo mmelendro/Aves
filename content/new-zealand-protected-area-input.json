@@ -1,0 +1,27 @@
+{
+  "serviceUrl": "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Public_Conservation_Land/FeatureServer/0",
+  "downloadUrl": "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Public_Conservation_Land/FeatureServer/0/query?where=NaPALIS_ID+IN+%282801496%2C2793719%2C2792897%2C2792901%29&outFields=OBJECTID%2CNaPALIS_ID%2CName%2CType%2CLegislation&returnGeometry=true&outSR=4326&f=json&orderByFields=NaPALIS_ID&resultRecordCount=1000",
+  "sha256": "ba50d1bafed8bca4fe148a0529f737a9a0541ad0e8a99ca5d4f687b4c024b03a",
+  "parks": {
+    "2792897": {
+      "name": "Te Papa-Kura-o-Taranaki",
+      "island": "north-island",
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/taranaki/places/te-papa-kura-o-taranaki/"
+    },
+    "2792901": {
+      "name": "Whanganui National Park",
+      "island": "north-island",
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/manawatu-whanganui/places/whanganui-national-park/"
+    },
+    "2793719": {
+      "name": "Tongariro National Park",
+      "island": "north-island",
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/"
+    },
+    "2801496": {
+      "name": "Rakiura National Park",
+      "island": "rakiura",
+      "url": "https://www.doc.govt.nz/rakiura"
+    }
+  }
+}
