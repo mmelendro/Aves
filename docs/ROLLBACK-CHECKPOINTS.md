@@ -2,7 +2,15 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
-## Current expandable site tree · 11 November 2026
+## Current shared public layout · 11 November 2026
+
+Runtime 3562ba23849b47218bf5138687446164b88b4d77; tree 1d6dbccd1dc342316b6f9fb368907e0c22ec3680.
+Production dpl_5MtafKNyQ2uxi3Em7hcBtt7rWzb5 in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Recovery branch checkpoint/2026-11-11-shared-public-chrome.
+Previous runtime cd08c9bd6e5b5bd7633b26a8af5f2d4555cd6b5f / deployment dpl_WJvcQbohCNThhodNVeJmJPfJqwyr.
+Verify READY and source before reassigning BOTH custom aliases; check HTTPS, public/account routes and the selected-country header identity. Preserve project-domain registration and Git history. 506 checks, strict TypeScript, hosted and live layout acceptance passed.
+
+## Previous expandable site tree · 11 November 2026
 
 Runtime cd08c9bd6e5b5bd7633b26a8af5f2d4555cd6b5f; tree a89e188104c2a3ed3034ff9ce92db09be1ce793e.
 Production dpl_WJvcQbohCNThhodNVeJmJPfJqwyr in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
