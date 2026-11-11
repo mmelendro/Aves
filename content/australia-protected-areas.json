@@ -1,0 +1,427 @@
+{
+  "publisher": "Australian Government Department of Climate Change, Energy, the Environment and Water",
+  "sourceUrl": "https://www.dcceew.gov.au/environment/land/nrs/science/capad/2024",
+  "sourceDate": "2024-06-30",
+  "reviewedAt": "2026-11-12",
+  "licence": "CC BY 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "licenceEvidence": "https://www.dcceew.gov.au/sites/default/files/documents/capad-2024-tech-spec.pdf",
+  "attribution": "Collaborative Australian Protected Areas Database (CAPAD) 2024, Commonwealth of Australia 2025. Australian Government DCCEEW. Selected and generalised by AVES.",
+  "sourceCrs": "GDA94 / EPSG:4283, transformed by official ArcGIS service outSR=4326",
+  "outputCrs": "OGC:CRS84, longitude/latitude WGS84",
+  "modifications": "13 selected NP/NPC records, NRS_PA=Y, environment T/B. Parcels dissolved by PA_ID. Topology-preserving simplification at at most 0.0005 degrees, rounded to 8 decimals, islands and holes retained, symmetric area change at most 2%.",
+  "limitations": "Selected pilot, not national coverage. Other national parks, separate marine parks, interim areas, Indigenous Protected Areas and other reserve categories are omitted. T/B park records retain their coastal geometry. Boundaries are not entrances, current access permissions, bird occurrence or certification. Check current closures, permits and cultural restrictions with park managers.",
+  "inputSources": [
+    {
+      "filename": "capad-pilot-source.geojson",
+      "sha256": "d970ba27e9e602fcf728b6124bc1934165945117a0ff71af164175fabd41124f",
+      "url": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID+IN+%28%27NSW_N0030%27%2C%27NSW_N0004%27%2C%27NSW_N0018%27%2C%27QLD_0116DNT001%27%2C%27QLD_0007LAM001%27%2C%27TAS_50251%27%2C%27TAS_50238%27%2C%27VIC_3308%27%2C%27SA_0012%27%2C%27WA_30082%27%2C%27WA_09868%27%2C%27ACT_39%27%2C%27CWTH_06%27%29&outFields=PA_ID%2CPA_PID%2CNAME%2CTYPE%2CTYPE_ABBR%2CSTATE%2CNRS_PA%2CENVIRON%2CIUCN%2CAUTHORITY%2CGOVERNANCE&outSR=4326&f=geojson&orderByFields=OBJECTID&resultRecordCount=3000"
+    },
+    {
+      "filename": "capad-booderee-source.geojson",
+      "sha256": "95938bde5e68cf0d2348cd28d863e8cb1c8e2e18bcdefd650c21d68c94f74f62",
+      "url": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID+%3D+%27CWTH_03%27&outFields=PA_ID%2CPA_PID%2CNAME%2CTYPE%2CTYPE_ABBR%2CSTATE%2CNRS_PA%2CENVIRON%2CIUCN%2CAUTHORITY%2CGOVERNANCE&outSR=4326&f=geojson&orderByFields=OBJECTID&resultRecordCount=3000"
+    }
+  ],
+  "omittedSourceIds": [
+    "QLD_0116DNT001"
+  ],
+  "omissionReason": "The selected Daintree NP record is only a small residual parcel. A separate National Park Aboriginal record (QLD_0017DAB001) needs a combined-category review before mapping the named park.",
+  "geometryPath": "/data/australia-national-parks-pilot.geojson",
+  "geometrySha256": "f5aac8acee7ff0db5da00f0b4cc3cb6d512a893dc5d4be7422997c1de57e8b14",
+  "count": 13,
+  "geometryChecks": [
+    {
+      "id": "ACT_39",
+      "sourceParcels": 13,
+      "polygons": 2,
+      "holes": 4,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.003333045709318257
+    },
+    {
+      "id": "CWTH_03",
+      "sourceParcels": 1,
+      "polygons": 7,
+      "holes": 3,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.015177242111379337
+    },
+    {
+      "id": "CWTH_06",
+      "sourceParcels": 1,
+      "polygons": 3,
+      "holes": 7,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.0003691087924647299
+    },
+    {
+      "id": "NSW_N0004",
+      "sourceParcels": 1,
+      "polygons": 68,
+      "holes": 24,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.004385432628815772
+    },
+    {
+      "id": "NSW_N0018",
+      "sourceParcels": 1,
+      "polygons": 75,
+      "holes": 9,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.0022875860352711812
+    },
+    {
+      "id": "NSW_N0030",
+      "sourceParcels": 1,
+      "polygons": 16,
+      "holes": 1,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.012639486642344414
+    },
+    {
+      "id": "QLD_0007LAM001",
+      "sourceParcels": 1,
+      "polygons": 14,
+      "holes": 0,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.007243614939961692
+    },
+    {
+      "id": "SA_0012",
+      "sourceParcels": 1,
+      "polygons": 6,
+      "holes": 4,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.003718150815065435
+    },
+    {
+      "id": "TAS_50238",
+      "sourceParcels": 1,
+      "polygons": 1,
+      "holes": 7,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.0022223910672750907
+    },
+    {
+      "id": "TAS_50251",
+      "sourceParcels": 92,
+      "polygons": 92,
+      "holes": 0,
+      "toleranceDegrees": 0.00025,
+      "symmetricAreaChange": 0.01898804477555585
+    },
+    {
+      "id": "VIC_3308",
+      "sourceParcels": 1,
+      "polygons": 31,
+      "holes": 0,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.00493249632197732
+    },
+    {
+      "id": "WA_09868",
+      "sourceParcels": 1,
+      "polygons": 6,
+      "holes": 1,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.011962940377064576
+    },
+    {
+      "id": "WA_30082",
+      "sourceParcels": 1,
+      "polygons": 8,
+      "holes": 0,
+      "toleranceDegrees": 0.0005,
+      "symmetricAreaChange": 0.0006571259420849442
+    }
+  ],
+  "areas": [
+    {
+      "id": "NSW_N0004",
+      "name": "Blue Mountains",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27NSW_N0004%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "NSW",
+      "iucn": "II",
+      "authority": "NSW_DCCEEW",
+      "governance": "J",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        150.48762998,
+        -33.61934922
+      ],
+      "bounds": [
+        149.84387077,
+        -34.30728296,
+        150.66206184,
+        -33.34173255
+      ]
+    },
+    {
+      "id": "CWTH_03",
+      "name": "Booderee",
+      "category": "National Park (Commonwealth)",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27CWTH_03%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "JBT",
+      "iucn": "II",
+      "authority": "DCCEEW",
+      "governance": "J",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        150.6394807,
+        -35.15095455
+      ],
+      "bounds": [
+        150.59237564,
+        -35.2004374,
+        150.77229357,
+        -35.11225104
+      ]
+    },
+    {
+      "id": "TAS_50238",
+      "name": "Cradle Mountain-Lake St Clair",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27TAS_50238%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "TAS",
+      "iucn": "II",
+      "authority": "NRE_TAS",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        145.94730892,
+        -41.8670035
+      ],
+      "bounds": [
+        145.66934997,
+        -42.15866946,
+        146.25255356,
+        -41.57539587
+      ]
+    },
+    {
+      "id": "SA_0012",
+      "name": "Ikara-Flinders Ranges",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27SA_0012%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "SA",
+      "iucn": "II",
+      "authority": "SA_DEW",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        138.80708756,
+        -31.29759314
+      ],
+      "bounds": [
+        138.48029918,
+        -31.62305925,
+        138.93162727,
+        -31.20855031
+      ]
+    },
+    {
+      "id": "CWTH_06",
+      "name": "Kakadu",
+      "category": "National Park (Commonwealth)",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27CWTH_06%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "NT",
+      "iucn": "II",
+      "authority": "DCCEEW",
+      "governance": "J",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        132.53618031,
+        -13.06938992
+      ],
+      "bounds": [
+        131.87892649,
+        -13.99869187,
+        132.99923961,
+        -12.07280313
+      ]
+    },
+    {
+      "id": "WA_30082",
+      "name": "Karijini",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27WA_30082%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "WA",
+      "iucn": "II",
+      "authority": "WA_DBCA",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        118.47565255,
+        -22.40683115
+      ],
+      "bounds": [
+        117.90022746,
+        -23.22065504,
+        118.75848288,
+        -22.22205589
+      ]
+    },
+    {
+      "id": "NSW_N0018",
+      "name": "Kosciuszko",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27NSW_N0018%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "NSW",
+      "iucn": "II",
+      "authority": "NSW_DCCEEW",
+      "governance": "J",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        148.37342524,
+        -36.0566446
+      ],
+      "bounds": [
+        148.03764296,
+        -37.02580372,
+        148.8448301,
+        -35.33609984
+      ]
+    },
+    {
+      "id": "QLD_0007LAM001",
+      "name": "Lamington",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27QLD_0007LAM001%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "QLD",
+      "iucn": "II",
+      "authority": "QLD_DES",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        153.15731701,
+        -28.24424238
+      ],
+      "bounds": [
+        153.00791109,
+        -28.35848146,
+        153.2267997,
+        -28.12998299
+      ]
+    },
+    {
+      "id": "ACT_39",
+      "name": "Namadgi",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27ACT_39%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "ACT",
+      "iucn": "II",
+      "authority": "ACT_EPSDD",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        148.94669656,
+        -35.60363524
+      ],
+      "bounds": [
+        148.76281558,
+        -35.92051234,
+        149.10942215,
+        -35.28284142
+      ]
+    },
+    {
+      "id": "NSW_N0030",
+      "name": "Royal",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27NSW_N0030%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "NSW",
+      "iucn": "II",
+      "authority": "NSW_DCCEEW",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        151.02682006,
+        -34.11129021
+      ],
+      "bounds": [
+        150.99163938,
+        -34.22645411,
+        151.17178748,
+        -34.04004522
+      ]
+    },
+    {
+      "id": "TAS_50251",
+      "name": "South Bruny",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27TAS_50251%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "TAS",
+      "iucn": "II",
+      "authority": "NRE_TAS",
+      "governance": "G",
+      "environment": "B",
+      "status": "Y",
+      "labelPoint": [
+        147.14220101,
+        -43.45510939
+      ],
+      "bounds": [
+        147.09167289,
+        -43.53504359,
+        147.38261222,
+        -43.34887022
+      ]
+    },
+    {
+      "id": "VIC_3308",
+      "name": "Wilsons Promontory",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27VIC_3308%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "VIC",
+      "iucn": "II",
+      "authority": "VIC_DEECA",
+      "governance": "G",
+      "environment": "B",
+      "status": "Y",
+      "labelPoint": [
+        146.35186405,
+        -38.95939664
+      ],
+      "bounds": [
+        146.17037336,
+        -39.15917515,
+        146.51399078,
+        -38.77094417
+      ]
+    },
+    {
+      "id": "WA_09868",
+      "name": "Yanchep",
+      "category": "National Park",
+      "sourceUrl": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID%3D%27WA_09868%27&outFields=*&returnGeometry=false&f=pjson",
+      "state": "WA",
+      "iucn": "II",
+      "authority": "WA_DBCA",
+      "governance": "G",
+      "environment": "T",
+      "status": "Y",
+      "labelPoint": [
+        115.68038834,
+        -31.54630884
+      ],
+      "bounds": [
+        115.6446091,
+        -31.59095264,
+        115.70919671,
+        -31.50617576
+      ]
+    }
+  ]
+}

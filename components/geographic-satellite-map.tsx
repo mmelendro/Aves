@@ -9,6 +9,7 @@ import {useMapLayers} from "./map-layer-context";
 
 export type GeographicScope={country:string;region?:string;selectCountry?:(id:string)=>void;selectRegion?:(id:string)=>void;onMapReady?:(map:GeographicMap|null)=>void};
 const GeographicProtectedAreas=dynamic(()=>import("./geographic-protected-areas"),{ssr:false});
+const AustraliaProtectedAreas=dynamic(()=>import("./australia-protected-areas"),{ssr:false});
 const GeographicPlanningLayer=dynamic(()=>import("./geographic-planning-layer"),{ssr:false});
 type Focus={bounds:number[];regions:Record<string,number[]>};
 const countries=focus as unknown as Record<string,Focus>;
@@ -76,6 +77,7 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
       <button type="button" className="min-h-11 px-2 text-xs underline" onClick={()=>update({background:"habitats"})}>Planning map</button>
     </div>
     {ready&&map.current&&country==="colombia"&&<GeographicProtectedAreas map={map.current}/>}
+    {ready&&map.current&&country==="australia"&&<AustraliaProtectedAreas map={map.current}/>}
     <div ref={container} className="geographic-map-canvas"/>
     {ready&&map.current&&showPlanning&&<GeographicPlanningLayer map={map.current} country={country} region={region} onSelect={activateRegion}/>}
     {country&&<p className="px-2 py-1 text-[10px] leading-4 text-emerald-950">{country==="colombia"?"Planning regions: adjoining AVES areas with shared edges. Approximate planning boundaries, not official boundaries or bird ranges.":country==="australia"?"Planning regions follow generalised state and territory boundaries.":"Planning regions follow the three main island groups; outlying islands are omitted."} <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer" className="underline">Natural Earth geography</a>{country==="colombia"?" · Areas authored by AVES":" · Public domain"}.</p>}

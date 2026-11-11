@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "filename": "capad-pilot-source.geojson",
+      "sha256": "d970ba27e9e602fcf728b6124bc1934165945117a0ff71af164175fabd41124f",
+      "url": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID+IN+%28%27NSW_N0030%27%2C%27NSW_N0004%27%2C%27NSW_N0018%27%2C%27QLD_0116DNT001%27%2C%27QLD_0007LAM001%27%2C%27TAS_50251%27%2C%27TAS_50238%27%2C%27VIC_3308%27%2C%27SA_0012%27%2C%27WA_30082%27%2C%27WA_09868%27%2C%27ACT_39%27%2C%27CWTH_06%27%29&outFields=PA_ID%2CPA_PID%2CNAME%2CTYPE%2CTYPE_ABBR%2CSTATE%2CNRS_PA%2CENVIRON%2CIUCN%2CAUTHORITY%2CGOVERNANCE&outSR=4326&f=geojson&orderByFields=OBJECTID&resultRecordCount=3000"
+    },
+    {
+      "filename": "capad-booderee-source.geojson",
+      "sha256": "95938bde5e68cf0d2348cd28d863e8cb1c8e2e18bcdefd650c21d68c94f74f62",
+      "url": "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/CAPAD/FeatureServer/0/query?where=PA_ID+%3D+%27CWTH_03%27&outFields=PA_ID%2CPA_PID%2CNAME%2CTYPE%2CTYPE_ABBR%2CSTATE%2CNRS_PA%2CENVIRON%2CIUCN%2CAUTHORITY%2CGOVERNANCE&outSR=4326&f=geojson&orderByFields=OBJECTID&resultRecordCount=3000"
+    }
+  ],
+  "omitIds": [
+    "QLD_0116DNT001"
+  ],
+  "omissionReason": "The selected Daintree NP record is only a small residual parcel. A separate National Park Aboriginal record (QLD_0017DAB001) needs a combined-category review before mapping the named park."
+}
