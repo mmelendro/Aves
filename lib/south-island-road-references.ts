@@ -1,4 +1,5 @@
-import data from "@/content/south-island-road-references.json";
+import { southIslandPlanning } from "@/content/new-zealand-planning-context";
+const data = southIslandPlanning.roads;
 
 /** Published town-to-town corridor references. Never live routing, exact lodging
  * travel, a guaranteed arrival time, or a substitute for checking road conditions. */

@@ -3,7 +3,8 @@ import {
   roadReference,
   roadTimeLabel,
 } from "@/lib/south-island-road-references";
-import data from "@/content/south-island-trip-catalogue.json";
+import { southIslandPlanning } from "@/content/new-zealand-planning-context";
+const data = southIslandPlanning.catalogue;
 import { validNzBirdIds, nzBirdName } from "@/content/new-zealand-checklist";
 
 export const tripCategories = [
@@ -42,28 +43,7 @@ export const tripAreas: TripArea[] = data.areas;
 export const tripPlaces = data.places as TripPlace[];
 export const tripPlaceById = new Map(tripPlaces.map((p) => [p.id, p]));
 export const tripAreaById = new Map(tripAreas.map((a) => [a.id, a]));
-export const tripGateways = [
-  { id: "christchurch", name: "Christchurch", baseId: "christchurch" },
-  { id: "queenstown", name: "Queenstown", baseId: "lakes" },
-  { id: "wanaka", name: "Wānaka", baseId: "lakes" },
-  { id: "glenorchy", name: "Glenorchy", baseId: "lakes" },
-  { id: "dunedin", name: "Dunedin", baseId: "otago" },
-  { id: "oamaru", name: "Ōamaru", baseId: "otago" },
-  { id: "nelson", name: "Nelson", baseId: "tasman" },
-  { id: "motueka", name: "Motueka", baseId: "tasman" },
-  { id: "marahau", name: "Mārahau", baseId: "tasman" },
-  { id: "kaikoura", name: "Kaikōura", baseId: "kaikoura" },
-  { id: "te-anau", name: "Te Anau", baseId: "fiordland" },
-  { id: "arthurs-pass", name: "Arthur’s Pass", baseId: "arthurs-pass" },
-  { id: "st-arnaud", name: "St Arnaud", baseId: "nelson-lakes" },
-  { id: "hanmer", name: "Hanmer Springs", baseId: "hanmer" },
-  { id: "maruia", name: "Maruia Springs", baseId: "maruia" },
-  { id: "franz-josef", name: "Franz Josef", baseId: "west-coast" },
-  { id: "curio-bay", name: "Curio Bay", baseId: "catlins" },
-  { id: "invercargill", name: "Invercargill", baseId: "invercargill" },
-  { id: "greymouth", name: "Greymouth", baseId: "greymouth" },
-  { id: "picton", name: "Picton", baseId: "picton" },
-] as const;
+export const tripGateways = southIslandPlanning.gateways;
 export const gatewayById = new Map<string, (typeof tripGateways)[number]>(
   tripGateways.map((g) => [g.id, g]),
 );
@@ -85,6 +65,7 @@ export type TripAllowances = Partial<
   Record<(typeof allowanceCategories)[number]["id"], number>
 >;
 export type TripPlannerInput = {
+  islandId?: string;
   days: number;
   areaId: string;
   birdIds: string[];
@@ -114,6 +95,7 @@ export type TripDraft = {
   style?: TripStyle;
 };
 export const defaultTripInput: TripPlannerInput = {
+  islandId: southIslandPlanning.id,
   days: 5,
   areaId: "all",
   birdIds: [],
@@ -128,7 +110,7 @@ export const defaultTripInput: TripPlannerInput = {
   adults: 1,
   rooms: 1,
 };
-export const TRIP_DRAFT_KEY = "aves:south-island-itinerary:v1";
+export const TRIP_DRAFT_KEY = southIslandPlanning.draftKey;
 export const categoryName = (id: string) =>
   tripCategories.find((c) => c.id === id)?.label || id;
 export const placesAt = (base: string) =>
@@ -165,6 +147,7 @@ export function validTripInput(value: unknown): value is TripPlannerInput {
   if (!value || typeof value !== "object") return false;
   const v = value as TripPlannerInput;
   return (
+    (v.islandId === undefined || v.islandId === southIslandPlanning.id) &&
     (v.adults === undefined ||
       (Number.isInteger(v.adults) && v.adults >= 1 && v.adults <= 12)) &&
     (v.rooms === undefined ||
@@ -684,7 +667,7 @@ export function writeTripDraft(
 ) {
   if (!validTripDraft(draft)) return false;
   try {
-    storage.setItem(TRIP_DRAFT_KEY, JSON.stringify({ at: now, draft }));
+    storage.setItem(TRIP_DRAFT_KEY, JSON.stringify({ at: now, islandId: southIslandPlanning.id, draft }));
     return true;
   } catch {
     return false;
@@ -696,6 +679,10 @@ export function readTripDraft(
 ): TripDraft | null {
   try {
     const v = JSON.parse(storage.getItem(TRIP_DRAFT_KEY) || "null");
+    // An explicitly different island belongs to another planner. Never import or
+    // delete it. Untagged historical envelopes are South Island only.
+    if (v?.islandId !== undefined && v.islandId !== southIslandPlanning.id) return null;
+    if (v?.draft?.input?.islandId !== undefined && v.draft.input.islandId !== southIslandPlanning.id) return null;
     if (
       Number.isFinite(v?.at) &&
       now >= v.at &&

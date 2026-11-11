@@ -1,5 +1,6 @@
 "use client";
 
+import { southIslandPlanning } from "@/content/new-zealand-planning-context";
 import { useEffect, useId, useRef, useState } from "react";
 import NewZealandBirdPicker from "./new-zealand-bird-picker";
 import {
@@ -141,7 +142,7 @@ export default function SouthIslandTripPlanner() {
       if (!writeNzBirdBasket(window.sessionStorage, draft.input.birdIds))
         throw Error();
       window.location.assign(
-        "/account?country=new-zealand&region=south-island",
+        southIslandPlanning.accountHref,
       );
     } catch {
       setNotice(
@@ -181,7 +182,7 @@ export default function SouthIslandTripPlanner() {
           id={`${id}-heading`}
           className="mt-3 text-3xl font-medium tracking-tight text-emerald-950 sm:text-4xl"
         >
-          Your birds. Your days. Your South Island.
+          Your birds. Your days. Your {southIslandPlanning.name}.
         </h2>
         <p className="mt-4 max-w-3xl leading-7 text-gray-600">
           Choose your birds and trip length, then shape a day by day draft with
@@ -206,7 +207,7 @@ export default function SouthIslandTripPlanner() {
                   className={`${field} mt-2`}
                 >
                   <option value="all">
-                    South Island · suggest bases for my birds
+                    {southIslandPlanning.name} · suggest bases for my birds
                   </option>
                   {tripAreas.map((a) => (
                     <option key={a.id} value={a.id}>

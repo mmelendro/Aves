@@ -1,5 +1,6 @@
-import data from "@/content/south-island-price-references.json";
-import catalogue from "@/content/south-island-trip-catalogue.json";
+import { southIslandPlanning } from "@/content/new-zealand-planning-context";
+const data = southIslandPlanning.prices;
+const catalogue = southIslandPlanning.catalogue;
 import type {
   TripDraft,
   TripPlannerInput,
