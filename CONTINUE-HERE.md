@@ -1,25 +1,43 @@
-# Continue AVES development
+# AVES: one numbered pathway
 
-Read docs/AGILE-PLAN.md for the single active delivery queue, docs/ARCHITECTURE.md for current code boundaries and docs/HANDOFF-CURRENT.md for validation and infrastructure limits. Dated reports supply evidence, not competing task lists.
+Updated 11 November 2026, Sydney. This is the only active to-do list and resume prompt. Follow the next unfinished step, one useful, tested release at a time. The owner's latest instruction takes precedence.
 
-## Current production checkpoint
+## The outcome
 
-Runtime: 7d56276d7b719e96b55cd0f7546d3ae2668345e9. Deployment: dpl_Hj89cqBWoQ4wZDkHmwWEMhZz3eLg, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: c4cdf8a7d8206f96e94db8ca0b35cecc312bf693 / dpl_35he3Ds2giC92xDWwx5yoqEGrj2P. Branch: feature/field-guide-card.
+A visitor explores one map, selects birds and interests, enters starting/departure cities, dates or trip length, pace and daily allowances for accommodation, food, transport and activities, then compares credible itineraries and saves a private plan. Make this useful on both New Zealand islands while preserving Colombia and Australia.
 
-## Goal and next increment
+Already delivered: the shared map/bird guide, continuous 2D satellite navigation and selectable planning-region outlines. South Island has the operational planner. North Island does not yet have a complete planning flow. Exact runtime, limits and rollback live in [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md); do not rebuild completed work from old prompts.
 
-Make North Island and South Island useful through one consistent planning experience: island/area, starting town, duration/dates and departure town, birds, activities, pace, allowances, editable suggestions and explicit private save. Preserve all requested travel categories and distinguish source evidence from certification.
+## The pathway
 
-MAP-01/02 implemented: the existing regional explorer owns the South Island itinerary overlay and public place selection; the duplicate planner map is removed. Google directions/search links use public place names without an SDK or Places feed. Supported map data remains region-specific, with broad planning bases rather than fabricated property coordinates.
+1. Add verified parks and reserves. NEXT. Start with Colombia, then Australia, then remaining New Zealand coverage. Deliver each country in a separate bounded release on the existing satellite map. Verify source, licence, date, geographic fit, omissions and access limits. A clearly labelled useful pilot is acceptable; fabricated completeness is not. References: MAP-04a/b/c.
 
-Next: MAP-04, then remaining MAP-05 in docs/MAP-LAYER-COVERAGE.md. The Planning regions satellite layer is published across the existing 23 country/region selectors. Colombia masks are labelled AVES approximations, not official boundaries or bird ranges. See PLANNING-REGIONS-LAYER-2026-11-11.md. The shared continuous satellite map is now published across the maintained world/country/region families, including older hero explorers. Colombia regional selections focus geographic camera extents; source imagery is the dated EOX 2016 composite. This is 2D tiled navigation; 3D globe/elevation remain future work. Source and verify national park/protected-area datasets and remaining applicable layers before claiming whole-site layer parity. Keep the deterministic scope camera so resize/expansion cannot interrupt regional focus. Do not use unreviewed licences, present OSM classification as an official register, or add empty switches.
+2. Unify map controls. Use one consistent layer picker, selection treatment, legend and source display across the maintained map families. Preserve camera, geography and bird choice through toggling, expansion and navigation. Distinguish display layers from bird filters. Load detail only when needed. Reference: MAP-05.
 
-After layer parity: NZ-01b in docs/AGILE-PLAN.md. NZ-01a centralized configuration and added explicit island identity while preserving untagged South Island drafts. Parameterize the working route generator, price/road lookup and shared presentation using the context. Add separate island draft slots and an explicit private import selection. Preserve current South Island routes, stable IDs, legacy note markers and drafts. Test both contexts for isolation before adding the North Island pilot; only South Island is operational today. Do not create a copied planner or publish an empty North Island page.
+3. Finish the shared island planner. Keep the delivered island configuration; finish sharing route rules, road/price references, draft storage and account handoff. Preserve old drafts and keep each island's inputs and saved plans isolated. Do not copy the planner or infer a road between islands. Reference: NZ-01b.
 
-Then deliver NZ-02: a sourced North Island corridor with a dedicated canonical guide and a usable complete itinerary flow. Do not defer this until the South Island is perfect. Continue in bounded tested releases using the shared acceptance/design rules in the backlog.
+4. Publish a usable North Island pilot. Research one coherent corridor and deliver its canonical guide, map, locally supported birds, trip options, catalogue and site-directory links together. A visitor must complete a credible 3 to 7 day trip with fixed endpoints. Preserve the working South Island flow. Reference: NZ-02.
 
-## Working rules
+5. Make both islands' plans practical and comparable. Improve travel time, pace, season/opening constraints, weather alternatives, cost units and allowance comparisons. Offer genuinely different options where feasible; explain missing prices or limited choices. Keep editing and save/reopen reliable. References: NZ-03/04/06.
 
-Preserve existing private records and immutable submissions. No unsolicited enquiry, email, booking, payment, new access, paid API or schema change. Current price references are partial tariffs, not date-specific quotes or availability. Featured bird memberships are local examples, not full island distributions. Original Eco-Tourism Business Plan file remains unavailable; do not invent financial assumptions or commercial terms.
+6. Fill useful content gaps along those routes. Add sourced birding sites, stays, individually reviewed Airbnb options where possible, food, organic/farm-to-table evidence, markets, hot springs, hikes, adventures, ecotourism, community-led culture, wellness and transport. Audit local bird memberships and national/global conservation status. B Corp evidence stays optional and separate. Extend the verified pattern to Colombia and Australia. Expand by usefulness, not pin counts. References: NZ-05/07 and map/place coverage.
 
-Keep one combined app and the retained production project. Never deploy old standalone roots over it. Follow CONTRIBUTING.md for exact-SHA hosted verification, both-domain publication and rollback. Keep release evidence in HANDOFF-CURRENT.md and update only the completed row/next concrete increment here. Do not repeat historical validation logs or recreate competing queues.
+7. Complete the journey from discovery to a private trip brief. Keep map, birds, wishes, itinerary and the shared contact flow connected. Make explicit save, sign-in, reopen, edit and voluntary inquiry clear. Separate planning estimates from confirmed availability and a human quote. No automatic booking or unsolicited sending.
+
+8. Validate and refine for launch. Test complete visitor tasks on both islands and representative Colombia/Australia routes. Fix actual friction in mobile layout, Safari/touch where available, keyboard/focus, typography, images, loading, media and performance. Validate with independent visitors before claiming launch readiness. Then choose further corridors or advanced features from demonstrated needs.
+
+Steps 1 and 2 cover the core map expansion, not every optional layer or business worldwide. Do not let unlimited layer/catalogue expansion postpone steps 3 and 4. Physical-device checks, evidence quality and useful design apply throughout, not only at step 8.
+
+## Run each round
+
+Read [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md), [ARCHITECTURE.md](docs/ARCHITECTURE.md) and [CONTRIBUTING.md](CONTRIBUTING.md), then inspect current source/GitHub head. Deliver the smallest useful increment in the next unfinished step. Reuse shared modules and one regional map. Explain non-obvious code; remove superseded implementations while preserving provenance, compatibility and drafts.
+
+For functional changes, follow the required tests/build and hosted acceptance, publish the exact tested source under existing authorization, verify both domains, and sync source plus concise evidence/rollback to GitHub. Documentation-only changes need link/diff checks, not an application deployment. Update this pathway when milestones change; keep detailed release logs in the handoff.
+
+## Keep these boundaries
+
+Protect private traveller records and sensitive wildlife locations. Source environmental, bird and supplier claims, with locality and review dates. Approximate planning areas are not official boundaries or bird ranges; historical imagery and public land do not establish current conditions or access. Apply [B Lab's stewardship guidance](https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/) as an evidence framework, not certification. The original Eco-Tourism Business Plan is unavailable here; preserve its nature-travel direction without invented financial assumptions.
+
+3D terrain/globe, offline/installable access, optional eBird import, wider media, marketplace tools and automatic booking remain future requirements. Old Vercel project retirement is separate. No new spend, weaker access, private-data changes or external outreach is implied.
+
+[Map coverage](docs/MAP-LAYER-COVERAGE.md) and [source criteria](docs/MAP-LAYER-ROLLOUT.md) are technical references, not queues. Wider requirements remain in [ROADMAP-DETAILS.md](docs/ROADMAP-DETAILS.md), [AVES-CHANGE-INBOX.md](docs/AVES-CHANGE-INBOX.md) and the [archived prompts](docs/archive/2026-11-11-before-agile-reset/README.md). Only this numbered pathway sets delivery order.
