@@ -21,6 +21,8 @@ The owner's established Eco-Tourism Business Plan direction is broader nature tr
 
 ## Immediate priority: site-wide layer coverage
 
+Delivered: shared optional Planning regions on the satellite map, with 23 existing selector areas and explicit approximate-geometry meaning for Colombia. MAP-05 remains partial: this does not deliver every protected-area, species/site or business layer. Source/acceptance: PLANNING-REGIONS-LAYER-2026-11-11.md and HANDOFF-CURRENT.md.
+
 The owner's broader satellite/national-park/layer request supersedes the next NZ-01b increment. MAP-LAYER-COVERAGE.md is the detailed acceptance/coverage register for this work, not a second general backlog. The continuous 2D satellite map supersedes the MAP-03a/b/c static overview renderers, including the older hero explorers. A shared background preference retains geographic tiles through country/region selection. 3D globe/elevation remain future work. Finish MAP-04/05 across country/regional and legacy consumers before resuming NZ-01b. No blanket layer-parity claim is justified by the South Island or world overview alone.
 
 ## One regional map requirement

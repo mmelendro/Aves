@@ -4,7 +4,7 @@ Read docs/AGILE-PLAN.md for the single active delivery queue, docs/ARCHITECTURE.
 
 ## Current production checkpoint
 
-Runtime: c4cdf8a7d8206f96e94db8ca0b35cecc312bf693. Deployment: dpl_35he3Ds2giC92xDWwx5yoqEGrj2P, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: a47ac96b3c18fd04993d4569edc7c58edc7dc009 / dpl_7KVkvDizXKegXh3RBpDmFzqCoZYe. Branch: feature/field-guide-card.
+Runtime: 7d56276d7b719e96b55cd0f7546d3ae2668345e9. Deployment: dpl_Hj89cqBWoQ4wZDkHmwWEMhZz3eLg, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: c4cdf8a7d8206f96e94db8ca0b35cecc312bf693 / dpl_35he3Ds2giC92xDWwx5yoqEGrj2P. Branch: feature/field-guide-card.
 
 ## Goal and next increment
 
@@ -12,7 +12,7 @@ Make North Island and South Island useful through one consistent planning experi
 
 MAP-01/02 implemented: the existing regional explorer owns the South Island itinerary overlay and public place selection; the duplicate planner map is removed. Google directions/search links use public place names without an SDK or Places feed. Supported map data remains region-specific, with broad planning bases rather than fabricated property coordinates.
 
-Next: MAP-04, then MAP-05 in docs/MAP-LAYER-COVERAGE.md. The shared continuous satellite map is now published across the maintained world/country/region families, including older hero explorers. Colombia regional selections focus geographic camera extents; source imagery is the dated EOX 2016 composite. This is 2D tiled navigation; 3D globe/elevation remain future work. Source and verify national park/protected-area datasets and remaining applicable layers before claiming whole-site layer parity. Keep the deterministic scope camera so resize/expansion cannot interrupt regional focus. Do not use unreviewed licences, present OSM classification as an official register, or add empty switches.
+Next: MAP-04, then remaining MAP-05 in docs/MAP-LAYER-COVERAGE.md. The Planning regions satellite layer is published across the existing 23 country/region selectors. Colombia masks are labelled AVES approximations, not official boundaries or bird ranges. See PLANNING-REGIONS-LAYER-2026-11-11.md. The shared continuous satellite map is now published across the maintained world/country/region families, including older hero explorers. Colombia regional selections focus geographic camera extents; source imagery is the dated EOX 2016 composite. This is 2D tiled navigation; 3D globe/elevation remain future work. Source and verify national park/protected-area datasets and remaining applicable layers before claiming whole-site layer parity. Keep the deterministic scope camera so resize/expansion cannot interrupt regional focus. Do not use unreviewed licences, present OSM classification as an official register, or add empty switches.
 
 After layer parity: NZ-01b in docs/AGILE-PLAN.md. NZ-01a centralized configuration and added explicit island identity while preserving untagged South Island drafts. Parameterize the working route generator, price/road lookup and shared presentation using the context. Add separate island draft slots and an explicit private import selection. Preserve current South Island routes, stable IDs, legacy note markers and drafts. Test both contexts for isolation before adding the North Island pilot; only South Island is operational today. Do not create a copied planner or publish an empty North Island page.
 

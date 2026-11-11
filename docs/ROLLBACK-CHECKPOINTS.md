@@ -2,13 +2,18 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
+## Planning regions on satellite · 11 November 2026
+
+Runtime 7d56276d7b719e96b55cd0f7546d3ae2668345e9; tree f14f2b072987281a91b5da0cd1e314bca158f309.
+Production dpl_Hj89cqBWoQ4wZDkHmwWEMhZz3eLg in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both custom aliases verified. Previous verified runtime c4cdf8a7d8206f96e94db8ca0b35cecc312bf693 / dpl_35he3Ds2giC92xDWwx5yoqEGrj2P retains continuous satellite without planning polygons. Confirm READY/source before reassigning both aliases. No migration or private-data change is involved.
+
 ## Continuous satellite navigation · 11 November 2026
 
 Runtime c4cdf8a7d8206f96e94db8ca0b35cecc312bf693; tree 2f2d1c4d7f674d094e12b03d5aea4266b696ba91.
 Production dpl_35he3Ds2giC92xDWwx5yoqEGrj2P in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
 Both custom aliases verified. Previous verified static-imagery runtime a47ac96b3c18fd04993d4569edc7c58edc7dc009 / dpl_7KVkvDizXKegXh3RBpDmFzqCoZYe is available for recovery. Verify exact source and READY state, then reassign both aliases. The unpromoted WebGL candidate and interrupted-camera intermediate are not preferred rollback targets. No schema migration is involved.
 
-## Current shared public layout · 11 November 2026
+## Previous shared public layout · 11 November 2026
 
 Runtime 3562ba23849b47218bf5138687446164b88b4d77; tree 1d6dbccd1dc342316b6f9fb368907e0c22ec3680.
 Production dpl_5MtafKNyQ2uxi3Em7hcBtt7rWzb5 in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
