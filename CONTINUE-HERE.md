@@ -1,15 +1,19 @@
 # AVES continue here
 
-## B Corp pilot live · 11 November 2026
+## Visitor B Corp expansion and real account acceptance · 11 November 2026
 
-Runtime b63243c56af3991aa7ff5c5131446239e25a24c6 is live on aves.bio and www.aves.bio, deployment dpl_ei4Zo75XJkbEnKyccUe6LCoca8sw, combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aliases verified. Immediate rollback: c0ac3b23a464184d58802096abbcd240b7631df4 / dpl_4TidxhEacYS6YDymtCw6Ss7HMy1G.
+Live runtime: b366ccf05e9d0258bedf12483da84a02534e0c3d. Production: dpl_BKrjPUxDHLJPWeD8HS2KBjJxfD1P, READY. Both aves.bio and www.aves.bio aliases verified on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Rollback: b63243c56af3991aa7ff5c5131446239e25a24c6 / dpl_ei4Zo75XJkbEnKyccUe6LCoca8sw.
 
-Completed: optional South Island Certified B Corp layer with three public address references from two companies, dated certification and location sources, explicit company scope, OpenStreetMap attribution, place idea add/remove and mixed landscape/public place basket, private notes handoff and immutable enquiry retention. Historical statements that the B Corp layer remains off are superseded for this pilot only. Other regions and business categories remain unsourced.
+Completed: five public location references from four certified companies. Added Coffee Supreme’s Supreme Supreme café and Wild Kiwi’s Christchurch departure reference, with named company scope and explicit food/drink and guided tour categories. Unknown categories fail display eligibility. Accommodation, food/drink, tour transport and retail references are distinguishable; no standalone passenger transport coverage is claimed.
 
-Validated: 527 automated checks, TypeScript, 75-page local and hosted production builds, public deployment and live business selection, source details, basket synchronization/add/remove/reload, keyboard fullscreen and layer reset at 340px, no horizontal overflow, correct account/sign-in destination handoff. No error/fatal logs in the scoped ten-minute deployment check ending 03:53:49 UTC. See docs/BCORP-SOUTH-ISLAND-2026-11-11.md for scope and limits.
+Verified: 529 automated checks, TypeScript, local 75-page build, hosted Node 22 build, public deployment and live picker/source/category/basket checks. Real owner Google sign-in succeeded through the secure browser flow. A newly labelled synthetic QA draft retained South Island, kea, Arthur’s Pass, Lake Hāwea Station and original notes through save, navigation away, reopen and enquiry review. On the new live runtime, the café was appended to this same QA draft without losing prior notes, saved, reloaded and confirmed in the enquiry review. The review was cancelled without submission. One labelled private QA draft is retained for the owner to inspect; existing plans were not edited. No new enquiry, booking, payment, outreach or email was submitted.
 
-Next: real authenticated save/reopen/share acceptance using an authorized test record, physical Safari/touch checks, then expand verified accommodation/food/transport/guiding coverage. Existing automated account tests verify notes survive private save and frozen NZ enquiry without selected places leaking into notification emails. No real enquiry or account record was changed during this release.
+No error/fatal logs found in the scoped ten-minute check ending 2026-11-11T05:33:57.772Z. This does not establish complete error-free traffic or email delivery. See docs/BCORP-SOUTH-ISLAND-EXPANSION-2026-11-11.md and docs/HOSTED-ACCEPTANCE.md.
 
-Previous layout release evidence: docs/RELEASE-2026-11-11-TESTED-LAYOUTS-LIVE.md. Preserve the combined branch feature/field-guide-card. Do not deploy the older separate applications over it. Preserve source rights, private data and spending safeguards.
+Next: physical Safari/touch and pointer expansion checks, additional verified accommodation and standalone passenger transport sourcing, then owner inbox/manual proposal and delivery acceptance using approved synthetic scope. Real private save/reopen and enquiry review are now verified; final enquiry submission/email delivery for this B Corp scenario remain untested. Preserve the unsent QA draft and all pre-existing records unless cleanup is explicitly requested.
 
-Old project retirement still requires the project-domain registration move and Vercel deletion confirmation recorded in the handoff.
+Current source: feature/field-guide-card. Preserve the combined application. Do not deploy either older separate application over it. Keep source rights, private data and spending safeguards.
+
+Prior release evidence: docs/BCORP-SOUTH-ISLAND-2026-11-11.md and docs/RELEASE-2026-11-11-TESTED-LAYOUTS-LIVE.md. Historical pending-save/reopen notes are superseded by this acceptance check.
+
+Old project retirement still requires the project-domain registration move and deletion confirmation recorded in the handoff. No unrelated resources should be removed.

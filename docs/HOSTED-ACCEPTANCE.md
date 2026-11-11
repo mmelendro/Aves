@@ -1,47 +1,23 @@
 # AVES hosted acceptance
 
-Updated 10 November 2026. C3 remains partial, not a production release gate pass.
+Updated 11 November 2026. The combined site is live. Earlier notes describing unified production writes as unavailable or cutover as unapproved are historical and superseded by the authorized releases recorded in CONTINUE-HERE.md. Broader account/provider acceptance remains partial.
 
-The owner explicitly allowed necessary synthetic test accounts/records in the
-live backend and confirmed the dedicated test email. This supersedes the prior
-blanket fixture restriction, while retaining no-new-spend, privacy, no schema/
-provider change, and explicit production-release/retirement gates.
+## Current verified browser flow
 
-## Verified
+On the canonical live AVES origin, secure Google sign-in returned successfully with New Zealand / South Island destination intent. Kea and landscape/B Corp place ideas arrived intact in the private editor. One clearly labelled new synthetic QA draft was saved, left, reopened for editing and displayed correctly in the enquiry review. The new café choice was then appended to the same QA notes on the current runtime, saved and reloaded; all earlier selections and notes remained. Both reviews were cancelled before submission.
 
-1. Live database: ten check groups inside a rolled-back transaction. Three
-   transient synthetic Auth rows, owned plans, strict budgets, consent/revocation,
-   ownership RLS, service-only grants and immutable quote snapshots. No fixtures
-   committed, schema altered, owner grant added or email sent by this SQL check.
-2. Actual live service: one owner-inbox-alias account received the AVES confirmation
-   email, was confirmed by the owner and signed in. Three destination drafts were
-   created/reopened, NZ budgets/wishes retained, retries deduplicated, stale edits
-   rejected, anonymous/non-owner access denied, and drafts deleted through their
-   owned API. Fixture sessions were revoked and its Auth row removed only after
-   checking it had no plans, quotes, admin grant or subscription. Zero fixtures
-   remain. The existing live API uses /australia/api; this is not proof that the
-   unified root API or unified hosted browser flow has passed.
-3. Maintained source consent and private-draft function bodies match hosted
-   definitions. Budget validation matches after CRLF/outer-whitespace normalization.
-   The last three deployed migration timestamps differ from source filenames;
-   see the mapping in the checkpoint. Do not replay them or alter migration history.
+This validates the owner browser's actual private save/reopen and enquiry review flow, including the new place ID. It does not validate independent guest permissions, every login provider, recovery, physical Safari, final B Corp enquiry submission or email delivery. A labelled unsent private QA draft is retained for the owner. Existing plans, account permissions and subscriptions were unchanged.
 
-## Remaining gate
+Runtime: b366ccf05e9d0258bedf12483da84a02534e0c3d. Deployment: dpl_BKrjPUxDHLJPWeD8HS2KBjJxfD1P. Automated source checks: 529 passing, plus TypeScript and local/hosted builds.
 
-The read-only unified preview intentionally cannot perform account writes. The
-exact unified candidate needs protected production-mode staging without moving
-live aliases, then authenticated browser, Google/email callbacks, recovery,
-owner/manual-proposal receipt delivery and deployed-session handover checks.
+## Earlier hosted evidence
 
-The Vercel connector has no explicit skip-domain staging control. The dashboard
-Deployment Actions menu was inspected; automatic approval review rejected the
-Redeploy click because it may immediately start a build. It was not retried.
-Approval is required before retrying that action; inspect its exact environment
-and alias controls before any production-mode deployment. No live alias, domain,
-provider configuration or production code was changed.
+The 10 November checks included ten SQL groups inside a rolled-back transaction and a disposable owner-inbox-alias account. That fixture account was confirmed by the owner, signed in and fully cleaned up after destination draft/API checks. RLS, stale-edit rejection, deduplicated retries and snapshot tests were recorded in docs/evidence/2026-11-10-unified-c3-database.json and docs/evidence/2026-11-10-unified-c3-live-service.json. Those earlier API results alone did not prove the unified browser flow; the 11 November owner browser checks provide the scoped evidence above.
 
-[Current evidence and limits](CHECKPOINT-2026-11-10-UNIFIED-C1D-C2.md).
-[Controlled C3 scope and remaining gate](C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md).
-The older paid-branch proposal was declined. No branch/resource was created or
-retried. Historical preflight remains in evidence/aves-unified-hosted-preflight.json.
-Keep PR #3 in draft. C3 success would still not approve C4 cutover or C5 retirement.
+## Remaining acceptance
+
+Physical Safari/touch and phone pointer expansion; recovery and every provider/callback flow; independent guest and owner-role browser checks; owner manual proposal issue and matching guest visibility; final enquiry/proposal receipts and actual authorized inbox arrival. Use the existing approved synthetic scope in C3-CONTROLLED-HOSTED-ACCEPTANCE-PROPOSAL.md. Do not create paid branches, alter providers, grant owner access, change passwords or broaden credentials to complete testing. Keep private identifiers and unrelated customer information out of public evidence.
+
+Production cutover is complete, but old project retirement remains a separate unfinished task. Do not delete resources based on acceptance history.
+
+See BCORP-SOUTH-ISLAND-EXPANSION-2026-11-11.md for this increment and CONTINUE-HERE.md for current release/rollback.
