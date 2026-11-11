@@ -32,7 +32,8 @@ import {
   type TripPlannerInput,
   type TripStyle,
 } from "@/lib/south-island-trip-planner";
-import TripBaseMap from "./trip-planner/trip-base-map";
+import { useMapLayers } from "./map-layer-context";
+import { useTripMap } from "./trip-planner/trip-map-context";
 import TripDayCard from "./trip-planner/trip-day-card";
 import TripCatalogue from "./trip-planner/trip-catalogue";
 import TripPriceReview from "./trip-planner/trip-price-review";
@@ -41,6 +42,8 @@ import { button, field } from "./trip-planner/presentation";
 
 /** Owns trip inputs, suggestions and explicit private handoff. Child modules own display and browsing. */
 export default function SouthIslandTripPlanner() {
+  const tripMap = useTripMap();
+  const { update: updateMapLayers } = useMapLayers();
   const id = useId(),
     output = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState<TripPlannerInput>(defaultTripInput);
@@ -168,6 +171,16 @@ export default function SouthIslandTripPlanner() {
         .filter((d, i) => i === 0 || d.baseId !== draft.days[i - 1].baseId)
         .map((d) => d.baseId)
     : [];
+  const routeKey = activeBases.join("|");
+  const setMapBases = tripMap?.setBases;
+  const selectedMapBase = tripMap?.selectedBase;
+  useEffect(() => { setMapBases?.(routeKey ? routeKey.split("|") : []); return () => setMapBases?.([]); }, [routeKey, setMapBases]);
+  useEffect(() => {
+    if (selectedMapBase && tripAreaById.has(selectedMapBase.id)) setInput(current => ({ ...current, areaId: selectedMapBase.id }));
+  }, [selectedMapBase]);
+  useEffect(() => {
+    if (tripAreaById.has(input.areaId)) updateMapLayers({ planning: true, point: `planning-base-${input.areaId}`, park: "" });
+  }, [input.areaId, updateMapLayers]);
   return (
     <section
       id="trip-planner"
@@ -501,13 +514,11 @@ export default function SouthIslandTripPlanner() {
               checking. Longer outings may replace that day’s birding.
             </p>
           </div>
-          <TripBaseMap
-            areaId={input.areaId}
-            activeBases={activeBases}
-            onSelect={(areaId) =>
-              setInput((current) => ({ ...current, areaId }))
-            }
-          />
+          <div className="rounded-3xl border border-emerald-200 bg-white p-5 text-sm leading-6">
+            <h3 className="font-semibold text-emerald-950">Your route on the map</h3>
+            <p className="mt-2">Planning bases and your itinerary share the explorer above. The itinerary layer shows base order, not roads or confirmed travel times.</p>
+            <a href="#south-island-bird-map" className="mt-3 inline-flex min-h-11 items-center rounded font-semibold text-emerald-800 underline">View your itinerary on the map</a>
+          </div>
         </div>
         <p role="status" className="mt-5 text-sm leading-6 text-emerald-900">
           {notice}

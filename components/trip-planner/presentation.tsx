@@ -1,3 +1,5 @@
+import GoogleMapsActions from "../google-maps-actions";
+import { southIslandPlanning } from "@/content/new-zealand-planning-context";
 import type { TripPlace } from "@/lib/south-island-trip-planner";
 
 /** Shared field, button and source-link presentation for the regional planner. */
@@ -8,13 +10,13 @@ export const button =
 export const external = { target: "_blank", rel: "noreferrer" } as const;
 export function SourceLink({ place }: { place: TripPlace }) {
   return (
-    <a
+    <div><a
       href={place.url}
       {...external}
       className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4"
     >
       Visitor information & source
       <span className="sr-only"> (opens in a new tab)</span>
-    </a>
+    </a><details><summary className="min-h-11 cursor-pointer content-center rounded text-xs font-semibold text-emerald-800 underline">Directions & business lookup</summary><GoogleMapsActions query={`${place.name}, ${southIslandPlanning.catalogue.areas.find(area => area.id === place.base)?.name || "South Island"}, New Zealand`} /></details></div>
   );
 }

@@ -17,7 +17,7 @@ export default function SouthIslandMapLayers() {
   const id = useId()
   const selected = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const points = visiblePublicPlaces(layers)
-  const count = Number(layers.nationalParks) + Number(layers.conservation) + publicPlaceCategories.filter(category => layers[category.id]).length
+  const count = Number(layers.itinerary) + Number(layers.nationalParks) + Number(layers.conservation) + publicPlaceCategories.filter(category => layers[category.id]).length
   function close() { setOpen(false); button.current?.focus({preventScroll:true}) }
   return <div className="static shrink-0" data-map-layer-panel="south-island" onKeyDown={event => { if (event.key === "Escape" && open) { event.preventDefault(); close() } }}>
     <div className="flex">
@@ -32,6 +32,7 @@ export default function SouthIslandMapLayers() {
       <input id={`${id}-opacity`} type="range" min="0" max="1" step=".05" value={layers.overlayOpacity} onChange={event => update({overlayOpacity:Number(event.target.value)})} className="min-h-11 w-full accent-emerald-700" aria-describedby={`${id}-opacity-help`} />
       <p id={`${id}-opacity-help`} className="text-[11px] leading-5 text-gray-600">Choose a habitat to shade its mapped areas. At 0%, only its outline remains. All habitats shows the imagery without shading. Coast uses the shoreline only.</p>
     </div>}
+      <label className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers.itinerary} onChange={event => { update({itinerary:event.target.checked}); close() }}/>My itinerary · base order, not roads</label>
       <fieldset><legend className="font-semibold text-emerald-950">Conservation layers</legend>
         <label className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers.nationalParks} onChange={event => { update({nationalParks:event.target.checked}); close() }}/><span className="h-2 w-3 border-2 border-amber-700" aria-hidden="true"/>National parks · 9</label>
         <label className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers.conservation} onChange={event => { update({conservation:event.target.checked}); close() }}/><span className="h-2 w-3 border border-lime-700" style={{backgroundImage:"repeating-linear-gradient(135deg,transparent,transparent 2px,#4d7c0f 2px,#4d7c0f 3px)"}} aria-hidden="true"/>Public conservation land · DOC</label>

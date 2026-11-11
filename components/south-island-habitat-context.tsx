@@ -4,6 +4,7 @@
  * bird viewer. Guest bird wishes remain in their existing private/session flow.
  */
 import { createContext, useReducer, type ReactNode } from "react"
+import { TripMapProvider } from "./trip-planner/trip-map-context"
 import { MapLayerProvider } from "./map-layer-context"
 import { useHeaderLandscape } from "./header-landscape-context"
 import type { SouthIslandEcosystemFilter } from "@/content/south-island-ecosystems"
@@ -31,5 +32,5 @@ export default function SouthIslandHabitatProvider({ children }: { children: Rea
     select: habitat => select({ type: "habitat", habitat }),
     selectSlide: index => select({ type: "slide", index }),
     selectPlace: id => select({ type: "place", id }),
-  }}><MapLayerProvider>{children}</MapLayerProvider></SouthIslandHabitatContext.Provider>
+  }}><TripMapProvider><MapLayerProvider>{children}</MapLayerProvider></TripMapProvider></SouthIslandHabitatContext.Provider>
 }

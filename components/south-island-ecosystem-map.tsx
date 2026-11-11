@@ -14,6 +14,7 @@ import SouthIslandMapLayers from "./south-island-map-layers"
 import { satelliteHabitatStyle } from "@/lib/satellite-overlay.mjs"
 import satelliteSource from "@/content/south-island-satellite-source.json"
 import catalogue from "@/content/south-island-layer-catalogue.json"
+import TripRouteOverlay from "./trip-planner/trip-route-overlay"
 import PublicPlaceOverlay, { PublicPlaceDetails } from "./south-island-public-place-overlay"
 import { publicPlaces, visiblePublicPlaces } from "@/lib/south-island-public-places"
 import { useEffect, useId, useRef, useState } from "react"
@@ -159,6 +160,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
             <circle cx={point.x} cy={point.y} r={(selected ? 8 : 5) * unit} fill={selected ? "#065f46" : "#fff"} stroke={selected ? "white" : "#065f46"} strokeWidth="2" vectorEffect="non-scaling-stroke" />
           </g>
         })}
+        <TripRouteOverlay />
         <PublicPlaceOverlay unit={1 / (camera.zoom * Math.max(svgPixelsPerUnit,.25))} />
         </g>
         <g aria-hidden="true" fill="#065f46"><text x="38" y="55" textAnchor="middle" fontSize="15" fontWeight="600">N</text><path d="M38 64L32 82L38 78L44 82Z" /></g>

@@ -1,5 +1,7 @@
 "use client"
 
+import GoogleMapsActions from "./google-maps-actions"
+import { useTripMap } from "./trip-planner/trip-map-context"
 import NzPlaceIdeas from "./nz-place-ideas"
 import { bcorpCategoryLabel } from "@/lib/bcorp-pilot"
 import { useMapLayers } from "./map-layer-context"
@@ -25,6 +27,7 @@ export default function SouthIslandPublicPlaceOverlay({ unit }: { unit: number }
 }
 
 export function PublicPlaceDetails() {
+  const trip = useTripMap()
   const { layers, update } = useMapLayers()
   const point = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   if (!point) return null
@@ -45,6 +48,7 @@ export function PublicPlaceDetails() {
       <p><a href={point.bcorp.location.coordinateSourceUrl!} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline">Address point source<span className="sr-only"> (opens in a new tab)</span></a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>
     </div>}
     </details>
-    {point.tripAreaId ? <a href={point.url} className="inline-flex min-h-11 items-center rounded-lg bg-emerald-800 px-3 text-sm font-semibold text-white">Plan days, birds & stays around this base</a> : <details className="max-h-48 overflow-auto"><summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-800 underline">Add to your trip ideas</summary><NzPlaceIdeas key={point.id} placeId={point.id}/></details>}
+    <GoogleMapsActions query={`${point.bcorp?.location.address || point.name.split(" · ")[0]}, New Zealand`} area={!!point.tripAreaId || point.categories.includes("towns")} />
+    {point.tripAreaId ? <a href="#trip-planner" onClick={() => trip?.selectBase(point.tripAreaId!)} className="inline-flex min-h-11 items-center rounded-lg bg-emerald-800 px-3 text-sm font-semibold text-white">Plan days, birds & stays around this base</a> : <details className="max-h-48 overflow-auto"><summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-800 underline">Add to your trip ideas</summary><NzPlaceIdeas key={point.id} placeId={point.id}/></details>}
   </section>
 }
