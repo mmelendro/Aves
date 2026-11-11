@@ -2,7 +2,15 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
-## Current mobile map and heading glass · 11 November 2026
+## Current bird conservation filters · 11 November 2026
+
+Runtime 82066da84515189b5c21b2ea8903d98f33dd378b; tree e58066679057027dbdcb50d66c44da61c757f238.
+Production dpl_XtMVBAiXzncf3YkZoMCyU84sMbbp in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Recovery branch checkpoint/2026-11-11-bird-conservation-filters.
+Previous runtime ab66589b433eaaa185b4d05eed11a9c49f3f5f2b / deployment dpl_4K28GQMoq7mMSxVStynGMRtTd9jj.
+Inspect the previous deployment's READY/source state, then assign BOTH custom-domain aliases and verify HTTPS and public/account routes. Rebuild the pinned source in the same consolidated project if necessary. Preserve project-domain registration and Git history.
+
+## Previous mobile map and heading glass · 11 November 2026
 
 Runtime ab66589b433eaaa185b4d05eed11a9c49f3f5f2b; tree aca0c1c3239dff37b52e2f822f6547e928290607.
 Production dpl_4K28GQMoq7mMSxVStynGMRtTd9jj in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
