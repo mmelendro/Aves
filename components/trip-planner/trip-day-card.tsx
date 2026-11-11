@@ -19,6 +19,8 @@ export default function TripDayCard({
   onChange: (patch: Partial<TripDay>) => void;
 }) {
   const {
+    context,
+    canScheduleDay,
     airbnbAreaUrl,
     gatewayById,
     marketFitsDay,
@@ -38,9 +40,12 @@ export default function TripDayCard({
     stop = tripPlaceById.get(day.birdingId),
     extra = tripPlaceById.get(day.extraId),
     stay = tripPlaceById.get(day.stayId);
+  const arrival = Boolean(context.corridor && day.transferFrom);
   const birdStops = local.filter(
     (p) =>
       p.categories.includes("birding") &&
+      (!arrival || p.shortTransferStop) &&
+      marketFitsDay(p, draft.input, index) &&
       (draft.input.includeManaged || p.encounter === "wild"),
   );
   return (
@@ -54,11 +59,13 @@ export default function TripDayCard({
           ? ` · ${tripDayDate(draft.input, index)}`
           : ""}
       </h4>
-      {day.transferFrom ? (
+      {day.transferFrom && (
         <>
           <p className="text-sm leading-6">
             Transfer from {tripAreaById.get(day.transferFrom)?.name}. Keep this
-            day for travel, breaks and checking in.
+            {context.corridor
+              ? "for travel, breaks and one optional short outing."
+              : "day for travel, breaks and checking in."}
           </p>
           {journey && (
             <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-3 text-sm leading-6">
@@ -121,15 +128,24 @@ export default function TripDayCard({
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </>
-      ) : index === draft.days.length - 1 &&
-        draft.input.endCity !== "flexible" ? (
-        <p className="text-sm leading-6">
-          Departure day in {gatewayById.get(draft.input.endCity)?.name}. Keep
-          time for local travel and your departure arrangements; flight, ferry
-          and check-in times must be checked separately.
-        </p>
+      )}
+      {!canScheduleDay(draft, index) ? (
+        !day.transferFrom && (
+          <p className="text-sm leading-6">
+            Departure day in {gatewayById.get(draft.input.endCity)?.name}. Keep
+            time for local travel and your departure arrangements; flight, ferry
+            and check-in times must be checked separately.
+          </p>
+        )
       ) : (
         <>
+          {arrival && (
+            <p className="text-sm leading-6">
+              Choose at most one short local outing after travel, breaks and
+              checking in. Local travel is additional. Keep your onward
+              departure time free.
+            </p>
+          )}
           <label
             className="block text-sm font-medium"
             htmlFor={`${id}-bird-${index}`}
@@ -142,7 +158,12 @@ export default function TripDayCard({
               onChange={(e) =>
                 onChange({
                   birdingId: e.target.value,
-                  extraId: day.extraId === e.target.value ? "" : day.extraId,
+                  extraId:
+                    arrival ||
+                    tripPlaceById.get(e.target.value)?.separateDay ||
+                    day.extraId === e.target.value
+                      ? ""
+                      : day.extraId,
                 })
               }
             >
@@ -158,7 +179,11 @@ export default function TripDayCard({
             <div className="text-sm leading-6">
               <p>{stop.description}</p>
               <p className="mt-1 font-medium text-emerald-800">
-                {stop.encounter !== "wild" ? "Conservation encounter · " : ""}
+                {stop.encounter === "restored-sanctuary"
+                  ? "Free living restoration sanctuary · "
+                  : stop.encounter === "managed"
+                    ? "Managed or captive encounter · "
+                    : "Wild outing · "}
                 {stop.birdIds
                   .filter((id) => draft.input.birdIds.includes(id))
                   .map(nzBirdName)
@@ -183,12 +208,19 @@ export default function TripDayCard({
               className={`${field} mt-1`}
               id={`${id}-extra-${index}`}
               value={day.extraId}
-              onChange={(e) => onChange({ extraId: e.target.value })}
+              onChange={(e) =>
+                onChange({
+                  extraId: e.target.value,
+                  ...(arrival ? { birdingId: "" } : {}),
+                })
+              }
             >
               <option value="">Keep time free</option>
               {local
                 .filter(
                   (p) =>
+                    !stop?.separateDay &&
+                    (!arrival || p.shortTransferStop) &&
                     !p.categories.includes("stays") &&
                     !p.categories.includes("birding"),
                 )

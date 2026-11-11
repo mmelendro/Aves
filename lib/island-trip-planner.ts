@@ -34,8 +34,8 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     birdIds: [],
     interests: ["food", "hikes", "ecotourism"],
     includeManaged: true,
-    startCity: "flexible",
-    endCity: "flexible",
+    startCity: context.corridor?.startCity ?? "flexible",
+    endCity: context.corridor?.endCity ?? "flexible",
     departureDate: "",
     currency: "NZD",
     allowances: {},
@@ -67,7 +67,12 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     input: TripPlannerInput,
     index: number,
   ) {
-    if (!place.categories.includes("markets")) return true;
+    if (context.corridor && place.separateDay && input.days < 5) return false;
+    if (
+      !place.categories.includes("markets") &&
+      !(context.corridor && (place.weekdays || place.months))
+    )
+      return true;
     const date = tripDayDate(input, index);
     if (!date) return false;
     const at = new Date(`${date}T12:00:00Z`);
@@ -91,6 +96,12 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       Number.isInteger(v.days) &&
       v.days >= 1 &&
       v.days <= 30 &&
+      (!context.corridor ||
+        (v.days >= context.corridor.minDays &&
+          v.days <= context.corridor.maxDays &&
+          v.startCity === context.corridor.startCity &&
+          v.endCity === context.corridor.endCity &&
+          v.areaId === "all")) &&
       (v.areaId === "all" || tripAreaById.has(v.areaId)) &&
       typeof v.startCity === "string" &&
       (v.startCity === "flexible" || gatewayById.has(v.startCity)) &&
@@ -182,74 +193,78 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         eligibleBirdStop(p, input) &&
         (input.areaId === "all" || p.base === input.areaId),
     );
-    const remaining = new Set(input.birdIds);
-    const bases: string[] = start ? [start.baseId] : [];
-    for (const p of pool.filter(
-      (p) => p.base === start?.baseId || p.base === finish?.baseId,
-    ))
-      for (const id of p.birdIds) remaining.delete(id);
-    const hasEndpoints = Boolean(start || finish);
-    const capacity = hasEndpoints
-      ? Math.min(5, Math.max(1, Math.floor((input.days + 2) / 2)))
-      : Math.min(
-          style === "slower" ? 1 : 4,
-          Math.max(1, Math.floor((input.days + 1) / 3)),
-        );
-    const endpointSlots = finish ? 1 : 0;
-    const extraLimit = style === "slower" ? (hasEndpoints ? 1 : 1) : capacity;
-    let added = 0;
-    while (bases.length + endpointSlots < capacity && added < extraLimit) {
-      const ranked = tripAreas
-        .filter(
-          (a) =>
-            !bases.includes(a.id) &&
-            a.id !== finish?.baseId &&
-            (input.areaId === "all" || a.id === input.areaId),
-        )
-        .map((a) => {
-          const birds = new Set(
-            pool
-              .filter((p) => p.base === a.id)
-              .flatMap((p) => matched(p, [...remaining])),
-          ).size;
-          const variety =
-            style === "variety"
-              ? new Set(
-                  placesAt(a.id).flatMap((p) =>
-                    p.categories.filter((c) => input.interests.includes(c)),
-                  ),
-                ).size
-              : 0;
-          const previous = tripAreaById.get(bases.at(-1) || "");
-          const distance = previous
-            ? Math.hypot(
-                a.latitude - previous.latitude,
-                a.longitude - previous.longitude,
-              )
-            : 0;
-          return {
-            id: a.id,
-            score: birds * 20 + variety / (1 + distance),
-            birds,
-          };
-        })
-        .sort((a, b) => b.score - a.score);
-      if (!ranked[0]?.score) break;
-      bases.push(ranked[0].id);
-      added++;
-      for (const p of pool.filter((p) => p.base === ranked[0].id))
+    const bases: string[] = [];
+    if (context.corridor) bases.push(...context.corridor.bases);
+    else {
+      const remaining = new Set(input.birdIds);
+      if (start) bases.push(start.baseId);
+      for (const p of pool.filter(
+        (p) => p.base === start?.baseId || p.base === finish?.baseId,
+      ))
         for (const id of p.birdIds) remaining.delete(id);
-      if (input.areaId !== "all") break;
+      const hasEndpoints = Boolean(start || finish);
+      const capacity = hasEndpoints
+        ? Math.min(5, Math.max(1, Math.floor((input.days + 2) / 2)))
+        : Math.min(
+            style === "slower" ? 1 : 4,
+            Math.max(1, Math.floor((input.days + 1) / 3)),
+          );
+      const endpointSlots = finish ? 1 : 0;
+      const extraLimit = style === "slower" ? (hasEndpoints ? 1 : 1) : capacity;
+      let added = 0;
+      while (bases.length + endpointSlots < capacity && added < extraLimit) {
+        const ranked = tripAreas
+          .filter(
+            (a) =>
+              !bases.includes(a.id) &&
+              a.id !== finish?.baseId &&
+              (input.areaId === "all" || a.id === input.areaId),
+          )
+          .map((a) => {
+            const birds = new Set(
+              pool
+                .filter((p) => p.base === a.id)
+                .flatMap((p) => matched(p, [...remaining])),
+            ).size;
+            const variety =
+              style === "variety"
+                ? new Set(
+                    placesAt(a.id).flatMap((p) =>
+                      p.categories.filter((c) => input.interests.includes(c)),
+                    ),
+                  ).size
+                : 0;
+            const previous = tripAreaById.get(bases.at(-1) || "");
+            const distance = previous
+              ? Math.hypot(
+                  a.latitude - previous.latitude,
+                  a.longitude - previous.longitude,
+                )
+              : 0;
+            return {
+              id: a.id,
+              score: birds * 20 + variety / (1 + distance),
+              birds,
+            };
+          })
+          .sort((a, b) => b.score - a.score);
+        if (!ranked[0]?.score) break;
+        bases.push(ranked[0].id);
+        added++;
+        for (const p of pool.filter((p) => p.base === ranked[0].id))
+          for (const id of p.birdIds) remaining.delete(id);
+        if (input.areaId !== "all") break;
+      }
+      if (!bases.length)
+        bases.push(
+          finish?.baseId ||
+            (input.areaId === "all" ? context.defaultBaseId : input.areaId),
+        );
+      if (finish && bases.at(-1) !== finish.baseId) bases.push(finish.baseId);
+      orderTripBases(bases, Boolean(finish));
     }
-    if (!bases.length)
-      bases.push(
-        finish?.baseId ||
-          (input.areaId === "all" ? context.defaultBaseId : input.areaId),
-      );
-    if (finish && bases.at(-1) !== finish.baseId) bases.push(finish.baseId);
-    orderTripBases(bases, Boolean(finish));
     const days: TripDay[] = [],
-      visitDays = input.days - (bases.length - 1);
+      visitDays = input.days - (context.corridor ? 0 : bases.length - 1);
     if (visitDays < 1)
       throw new Error(
         "Add days or simplify the start, finish and base choices.",
@@ -296,7 +311,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       const stayId =
         (style === "variety" && stays[1] ? stays[1].id : stays[0]?.id) ||
         `airbnb:${baseId}`;
-      if (b > 0)
+      if (b > 0 && !context.corridor)
         days.push({
           baseId,
           transferFrom: bases[b - 1],
@@ -308,7 +323,12 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         usedStops = new Set<string>();
       for (let d = 0; d < count; d++) {
         const ordered = pool
-          .filter((p) => p.base === baseId)
+          .filter(
+            (p) =>
+              p.base === baseId &&
+              marketFitsDay(p, input, days.length) &&
+              (!(context.corridor && b > 0 && d === 0) || p.shortTransferStop),
+          )
           .sort(
             (a, z) =>
               matched(
@@ -328,6 +348,9 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         }
         const extras = placesAt(baseId).filter(
           (p) =>
+            !stop?.separateDay &&
+            (!(context.corridor && b > 0 && d === 0) ||
+              (!stop && p.shortTransferStop)) &&
             p.id !== stop?.id &&
             !usedExtras.has(p.id) &&
             !p.categories.includes("stays") &&
@@ -339,6 +362,9 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         if (extra) usedExtras.add(extra.id);
         days.push({
           baseId,
+          ...(context.corridor && b > 0 && d === 0
+            ? { transferFrom: bases[b - 1] }
+            : {}),
           birdingId: stop?.id || "",
           extraId: extra?.id || "",
           stayId,
@@ -346,7 +372,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       }
     }
     days[days.length - 1].stayId = "";
-    if (finish) {
+    if (finish && !context.corridor) {
       days[days.length - 1].birdingId = "";
       days[days.length - 1].extraId = "";
     }
@@ -442,6 +468,26 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       (finish && v.days.at(-1)?.baseId !== finish.baseId)
     )
       return false;
+    if (context.corridor) {
+      if (!v.days.every((d) => d && typeof d === "object")) return false;
+      const sequence = v.days
+        .filter((d, i) => i === 0 || d.baseId !== v.days[i - 1].baseId)
+        .map((d) => d.baseId);
+      if (JSON.stringify(sequence) !== JSON.stringify(context.corridor.bases))
+        return false;
+      for (const [i, d] of v.days.entries())
+        if (d.transferFrom) {
+          const reference = tripTransferContext(v, i)?.reference;
+          const chosen = [d.birdingId, d.extraId].filter(Boolean);
+          if (
+            !reference ||
+            reference.minutes > context.corridor.maxTransferMinutes ||
+            chosen.length > 1 ||
+            chosen.some((id) => !tripPlaceById.get(id)?.shortTransferStop)
+          )
+            return false;
+        }
+    }
     return v.days.every(
       (d, i) =>
         d &&
@@ -450,13 +496,17 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
           d.baseId === v.input.areaId ||
           d.baseId === start?.baseId ||
           d.baseId === finish?.baseId) &&
-        (!(finish && i === v.days.length - 1) ||
+        (!(finish && !context.corridor && i === v.days.length - 1) ||
           (!d.birdingId && !d.extraId)) &&
         typeof d.birdingId === "string" &&
         validPlaceAt(d.birdingId, d.baseId, "birding") &&
         (!d.birdingId ||
-          eligibleBirdStop(tripPlaceById.get(d.birdingId)!, v.input)) &&
+          (eligibleBirdStop(tripPlaceById.get(d.birdingId)!, v.input) &&
+            marketFitsDay(tripPlaceById.get(d.birdingId)!, v.input, i))) &&
         typeof d.extraId === "string" &&
+        (!context.corridor ||
+          !tripPlaceById.get(d.birdingId)?.separateDay ||
+          !d.extraId) &&
         validPlaceAt(d.extraId, d.baseId) &&
         (!d.extraId ||
           (!tripPlaceById.get(d.extraId)!.categories.includes("stays") &&
@@ -474,7 +524,18 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
           : d.baseId === v.days[i - 1].baseId
             ? !d.transferFrom
             : d.transferFrom === v.days[i - 1].baseId) &&
-        (!d.transferFrom || (!d.birdingId && !d.extraId)),
+        (!d.transferFrom ||
+          Boolean(context.corridor) ||
+          (!d.birdingId && !d.extraId)),
+    );
+  }
+  function canScheduleDay(draft: TripDraft, index: number) {
+    return (
+      Boolean(context.corridor) ||
+      (!draft.days[index]?.transferFrom &&
+        !(
+          index === draft.days.length - 1 && draft.input.endCity !== "flexible"
+        ))
     );
   }
   function tripCoverage(draft: TripDraft) {
@@ -681,6 +742,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     buildPlans,
     tripAllowanceSummary,
     validTripDraft,
+    canScheduleDay,
     tripCoverage,
     airbnbAreaUrl,
     tripDirectionsUrl,

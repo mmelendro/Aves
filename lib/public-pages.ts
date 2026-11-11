@@ -25,6 +25,7 @@ export const publicPageGroups: PublicPageGroup[] = [
     title: "Discover New Zealand",
     pages: [
       { href: "/new-zealand", label: "New Zealand — In Development" },
+      {href:"/new-zealand/north-island",label:"North Island Birdlife and Trip Planning",sections:[{id:"north-island-bird-map",label:"Map and bird guide"},{id:"trip-planner",label:"Plan your itinerary"},{id:"corridor",label:"Auckland Hamilton Rotorua"},{id:"travel-with-care",label:"Responsible travel"}]},
       {
         href: "/new-zealand/south-island",
         label: "South Island — Birdlife & Trip Planning",

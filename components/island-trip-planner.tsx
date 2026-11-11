@@ -82,7 +82,7 @@ function IslandPlannerForm() {
         });
       } else setInput((current) => ({ ...current, birdIds: birds }));
       const base = new URLSearchParams(window.location.search).get("base");
-      if (base && tripAreaById.has(base))
+      if (!context.corridor && base && tripAreaById.has(base))
         setInput((current) => ({ ...current, areaId: base }));
     } catch {
       setNotice(
@@ -97,7 +97,11 @@ function IslandPlannerForm() {
     };
     const selectBase = (event: Event) => {
       const base = (event as CustomEvent).detail;
-      if (typeof base === "string" && tripAreaById.has(base))
+      if (
+        !context.corridor &&
+        typeof base === "string" &&
+        tripAreaById.has(base)
+      )
         setInput((current) => ({ ...current, areaId: base }));
     };
     window.addEventListener(NZ_BIRD_BASKET_EVENT, restoreBirds);
@@ -195,7 +199,11 @@ function IslandPlannerForm() {
     return () => setMapBases?.([]);
   }, [routeKey, setMapBases]);
   useEffect(() => {
-    if (selectedMapBase && tripAreaById.has(selectedMapBase.id))
+    if (
+      !context.corridor &&
+      selectedMapBase &&
+      tripAreaById.has(selectedMapBase.id)
+    )
       setInput((current) => ({ ...current, areaId: selectedMapBase.id }));
   }, [selectedMapBase]);
   useEffect(() => {
@@ -236,6 +244,7 @@ function IslandPlannerForm() {
                 <select
                   id={`${id}-area`}
                   value={input.areaId}
+                  disabled={Boolean(context.corridor)}
                   onChange={(e) => {
                     setInput((current) => ({
                       ...current,
@@ -245,7 +254,10 @@ function IslandPlannerForm() {
                   className={`${field} mt-2`}
                 >
                   <option value="all">
-                    {context.name} · suggest bases for my birds
+                    {context.name} ·{" "}
+                    {context.corridor
+                      ? "Auckland to Rotorua pilot"
+                      : "suggest bases for my birds"}
                   </option>
                   {tripAreas.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -260,8 +272,8 @@ function IslandPlannerForm() {
                   id={`${id}-days`}
                   className={`${field} mt-2`}
                   type="number"
-                  min={1}
-                  max={30}
+                  min={context.corridor?.minDays ?? 1}
+                  max={context.corridor?.maxDays ?? 30}
                   step={1}
                   value={input.days || ""}
                   onChange={(e) =>
@@ -280,6 +292,7 @@ function IslandPlannerForm() {
                   id={`${id}-start`}
                   className={`${field} mt-2`}
                   value={input.startCity}
+                  disabled={Boolean(context.corridor)}
                   onChange={(e) =>
                     setInput((current) => ({
                       ...current,
@@ -301,6 +314,7 @@ function IslandPlannerForm() {
                   id={`${id}-finish`}
                   className={`${field} mt-2`}
                   value={input.endCity}
+                  disabled={Boolean(context.corridor)}
                   onChange={(e) =>
                     setInput((current) => ({
                       ...current,
@@ -534,9 +548,13 @@ function IslandPlannerForm() {
             </button>
             <p className="text-xs leading-6 text-gray-600">
               A planning draft built from documented bird/site links, not live
-              sightings. Transfers get their own day. Road times, within-base
-              travel, track access, season, prices and availability need
-              checking. Longer outings may replace that day’s birding.
+              sightings.{" "}
+              {context.corridor
+                ? "This pilot runs Auckland to Hamilton to Rotorua in 3 to 7 days. Short transfers allow one reviewed local outing on arrival. Final city is not a confirmed flight connection."
+                : "Transfers get their own day."}{" "}
+              Road times, within-base travel, track access, season, prices and
+              availability need checking. Longer outings may replace that day’s
+              birding.
             </p>
           </div>
           <div className="rounded-3xl border border-emerald-200 bg-white p-5 text-sm leading-6">
@@ -549,6 +567,14 @@ function IslandPlannerForm() {
               times.
             </p>
             <a
+              onClick={() => {
+                if (context.corridor)
+                  updateMapLayers({
+                    background: "satellite",
+                    itinerary: true,
+                    planning: true,
+                  });
+              }}
               href={context.mapAnchor}
               className="mt-3 inline-flex min-h-11 items-center rounded font-semibold text-emerald-800 underline"
             >
@@ -724,7 +750,14 @@ function IslandPlannerForm() {
             </div>
           )}
         </div>
-        <TripCatalogue key={input.areaId} areaId={input.areaId} />
+        <TripCatalogue
+          key={context.corridor ? selectedMapBase?.id : input.areaId}
+          areaId={
+            context.corridor && tripAreaById.has(selectedMapBase?.id || "")
+              ? selectedMapBase!.id
+              : input.areaId
+          }
+        />
       </div>
     </section>
   );

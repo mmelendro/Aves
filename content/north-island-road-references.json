@@ -1,0 +1,26 @@
+{
+  "reviewedAt": "2026-11-11",
+  "conditionsUrl": "https://www.journeys.nzta.govt.nz/",
+  "sources": {
+    "go-rentals": {
+      "publisher": "GO Rentals",
+      "url": "https://www.gorentals.co.nz/explore/trip-planner/auckland-to-napier-drive/",
+      "kind": "named-city approximate driving reference",
+      "stopPolicy": "Driving estimate only. Local outing, detours, breaks and current traffic are additional."
+    }
+  },
+  "corridors": [
+    {
+      "fromId": "auckland",
+      "toId": "hamilton",
+      "minutes": 95,
+      "sourceId": "go-rentals"
+    },
+    {
+      "fromId": "hamilton",
+      "toId": "rotorua",
+      "minutes": 103,
+      "sourceId": "go-rentals"
+    }
+  ]
+}

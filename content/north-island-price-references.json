@@ -1,0 +1,68 @@
+{
+  "references": [
+    {
+      "placeId": "trip-ni-hamilton-gardens",
+      "product": "Enclosed Gardens entry only, non-resident adult 16+",
+      "category": "activities",
+      "basis": "adult-entry",
+      "low": 27.5,
+      "high": 27.5,
+      "fromPrice": false,
+      "publisher": "Direct operator",
+      "url": "https://hamiltongardens.co.nz/plan-your-visit-to-hamilton-gardens/tickets-and-pricing",
+      "currency": "NZD",
+      "reviewedAt": "2026-11-11",
+      "availability": "not-checked",
+      "conditions": "Published adult admission reference only; confirm dates and current booking terms.",
+      "maxAdultsPerUnit": 0
+    },
+    {
+      "placeId": "trip-ni-maungatautari",
+      "product": "Ancient Forest Guided Tour adult, approx 90 minutes including day pass",
+      "category": "activities",
+      "basis": "adult-entry",
+      "low": 72,
+      "high": 72,
+      "fromPrice": true,
+      "publisher": "Direct operator",
+      "url": "https://www.sanctuarymountain.co.nz/ancient-forest-guided-walk/",
+      "currency": "NZD",
+      "reviewedAt": "2026-11-11",
+      "availability": "not-checked",
+      "conditions": "Published adult admission reference only; confirm dates and current booking terms.",
+      "maxAdultsPerUnit": 0
+    },
+    {
+      "placeId": "trip-ni-wingspan",
+      "product": "Flight of the Falcon adult age 16+",
+      "category": "activities",
+      "basis": "adult-entry",
+      "low": 45,
+      "high": 45,
+      "fromPrice": false,
+      "publisher": "Direct operator",
+      "url": "https://www.wingspan.co.nz/wingspan-bird-of-prey-centre-visits",
+      "currency": "NZD",
+      "reviewedAt": "2026-11-11",
+      "availability": "not-checked",
+      "conditions": "Published adult admission reference only; confirm dates and current booking terms.",
+      "maxAdultsPerUnit": 0
+    },
+    {
+      "placeId": "trip-ni-polynesian",
+      "product": "Deluxe Lake Spa adult entry",
+      "category": "activities",
+      "basis": "adult-entry",
+      "low": 85,
+      "high": 85,
+      "fromPrice": false,
+      "publisher": "Direct operator",
+      "url": "https://www.polynesianspa.co.nz/bathing/deluxe-lake-spa/",
+      "currency": "NZD",
+      "reviewedAt": "2026-11-11",
+      "availability": "not-checked",
+      "conditions": "Published adult admission reference only; confirm dates and current booking terms.",
+      "maxAdultsPerUnit": 0
+    }
+  ]
+}

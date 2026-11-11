@@ -1,0 +1,451 @@
+{
+  "version": 1,
+  "region": "north-island",
+  "checkedAt": "2026-11-11",
+  "coverage": "Auckland, Hamilton and Rotorua corridor pilot, not a complete North Island directory. Public references do not imply partnerships or booking availability.",
+  "coordinateProvenance": {
+    "dataset": "Natural Earth populated places simple 5.1.2",
+    "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_populated_places_simple.zip",
+    "sha256": "2963ee08f7743f13f37d5243acd77a2f7a510e26a36c7e04b920f1b381f2b251"
+  },
+  "areas": [
+    {
+      "id": "auckland",
+      "name": "Auckland",
+      "longitude": 174.763027,
+      "latitude": -36.8480549,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Auckland, New Zealand",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public-domain generalized settlement reference",
+      "precision": "Broad planning base, not an entrance or wildlife location",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "hamilton",
+      "name": "Hamilton",
+      "longitude": 175.2895781,
+      "latitude": -37.7782694,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Hamilton, New Zealand",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public-domain generalized settlement reference",
+      "precision": "Broad planning base, not an entrance or wildlife location",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "rotorua",
+      "name": "Rotorua",
+      "longitude": 176.2482631,
+      "latitude": -38.1317379,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Rotorua, New Zealand",
+      "coordinateSource": "Natural Earth populated places 5.1.2, public-domain generalized settlement reference",
+      "precision": "Broad planning base, not an entrance or wildlife location",
+      "checkedAt": "2026-11-11"
+    }
+  ],
+  "places": [
+    {
+      "id": "trip-ni-totara",
+      "name": "Tōtara Park native forest",
+      "base": "auckland",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.aucklandcouncil.govt.nz/en/parks-recreation/get-outdoors/aklpaths/path-detail/208.html",
+      "description": "Council locally lists kererū, fantail, grey warbler, tūī and kākā. Adjacent Botanic Gardens native-forest route offers a 4 km, about 2-hour loop.",
+      "access": "Use designated public forest paths. The adjoining native forest loop has roots and steps and is not accessible. Check current council and Botanic Gardens track advice.",
+      "birdIds": [
+        "nz-131add6ace38",
+        "nz-06bff047759b",
+        "nz-0847d9dc75fc",
+        "nz-8012499b5e08",
+        "nz-71e9c390d5e3"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.aucklandcouncil.govt.nz/en/parks-recreation/get-outdoors/aklpaths/path-detail/208.html",
+        "https://www.aucklandbotanicgardens.co.nz/our-gardens/native-forest/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-botanic-gardens",
+      "name": "Auckland Botanic Gardens",
+      "base": "auckland",
+      "categories": [
+        "hikes"
+      ],
+      "url": "https://www.aucklandbotanicgardens.co.nz/visit-us/",
+      "description": "Free gardens and parking at 102 Hill Road, Manurewa, about 25 km south of central Auckland.",
+      "access": "Official pages disagree on gate opening time (06:30 versus 08:00); avoid hardcoding early access. Visitor centre 08:00–16:30, closed Christmas Day; gardens remain open.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.aucklandbotanicgardens.co.nz/visit-us/",
+        "https://www.aucklandbotanicgardens.co.nz/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-miko",
+      "name": "Miko Café",
+      "base": "auckland",
+      "categories": [
+        "food"
+      ],
+      "url": "https://www.mikocafe.nz/",
+      "description": "Operating café within Auckland Botanic Gardens; suitable linked food option.",
+      "access": "Check current café opening and menu directly. Do not use indexed 2024 menu prices.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.mikocafe.nz/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-tiritiri",
+      "name": "Tiritiri Matangi Island",
+      "base": "auckland",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/tiritirimatangi",
+      "description": "DOC describes a restored open island sanctuary with translocated, free-living birds. Separate ferry day, best reserved for 5–7-day variants.",
+      "access": "Ferry published Wednesday–Sunday, popular November–April, book early and confirm exact sailing/weather. Bring food. Biosecurity checks; stay on tracks, no feeding or call playback. Commercial guiding needs a permit. Optional full day only. A reviewed calendar date is required in this draft; confirm dated ferry and weather. No transfer-day scheduling.",
+      "birdIds": [
+        "nz-8012499b5e08",
+        "nz-9ea8215c6441",
+        "nz-fdf0b45c7612",
+        "nz-9a0fe42a38e2",
+        "nz-4ed3aa18564b",
+        "nz-8569938600cc",
+        "nz-a93c483d98c5"
+      ],
+      "encounter": "restored-sanctuary",
+      "tags": [
+        "Optional full day",
+        "Restored free-living population"
+      ],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.doc.govt.nz/tiritirimatangi",
+        "https://tiritirimatangi.org.nz/walks-activities/"
+      ],
+      "shortTransferStop": false,
+      "weekdays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "separateDay": true
+    },
+    {
+      "id": "trip-ni-hamilton-gardens",
+      "name": "Hamilton Gardens",
+      "base": "hamilton",
+      "categories": [
+        "hikes",
+        "culture"
+      ],
+      "url": "https://hamiltongardens.co.nz/plan-your-visit-to-hamilton-gardens/tickets-and-pricing",
+      "description": "Themed Enclosed Gardens include Te Parapara. Outer grounds are a separate free-area option.",
+      "access": "Current page shows enclosed entry 10:00–18:00, last entry 17:30, closed Christmas Day. Under-16s free but require ticket. Confirm seasonal hours.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://hamiltongardens.co.nz/plan-your-visit-to-hamilton-gardens/tickets-and-pricing",
+        "https://hamiltongardens.co.nz/plan-your-visit-to-hamilton-gardens"
+      ],
+      "shortTransferStop": true
+    },
+    {
+      "id": "trip-ni-waiwhakareke",
+      "name": "Waiwhakareke Natural Heritage Park",
+      "base": "hamilton",
+      "categories": [
+        "hikes"
+      ],
+      "url": "https://hamilton.govt.nz/community-spaces/parks/detail/waiwhakareke-natural-heritage-park",
+      "description": "Council public restoration park across from Hamilton Zoo. A useful optional local walk, without inventing a local bird checklist.",
+      "access": "Use designated public tracks and check council park information. No indexed species attached.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://hamilton.govt.nz/community-spaces/parks/detail/waiwhakareke-natural-heritage-park",
+        "https://hamilton.govt.nz/environment-and-sustainability/biodiversity-and-natural-areas/waiwhakareke-natural-heritage-park"
+      ],
+      "shortTransferStop": true
+    },
+    {
+      "id": "trip-ni-maungatautari",
+      "name": "Sanctuary Mountain Maungatautari forest visit",
+      "base": "hamilton",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.sanctuarymountain.co.nz/ancient-forest-guided-walk/",
+      "description": "Restored pest-fenced forest with free-flying birds; operator explicitly lists North Island robin, tomtit, kākā, tūī, hihi, tīeke, fantail and kererū.",
+      "access": "Separate excursion from Hamilton. Guided tour approx 90 minutes, arrive 10 minutes early at 99 Tari Road, Pukeatua. Includes day pass. Sightings not guaranteed; omit kiwi/takahē promises. Separate Hamilton-based excursion, with extra travel to Pukeatua. Not a stop on the town-to-town reference. Reserve its own day.",
+      "birdIds": [
+        "nz-4ed3aa18564b",
+        "nz-3b863bdeaac2",
+        "nz-71e9c390d5e3",
+        "nz-8012499b5e08",
+        "nz-fdf0b45c7612",
+        "nz-9ea8215c6441",
+        "nz-06bff047759b",
+        "nz-131add6ace38"
+      ],
+      "encounter": "restored-sanctuary",
+      "tags": [
+        "Optional half/full day",
+        "Restored free-living population"
+      ],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.sanctuarymountain.co.nz/ancient-forest-guided-walk/",
+        "https://www.sanctuarymountain.co.nz/faqs/"
+      ],
+      "shortTransferStop": false,
+      "separateDay": true
+    },
+    {
+      "id": "trip-ni-sulphur-bay",
+      "name": "Sulphur Bay Wildlife Refuge",
+      "base": "rotorua",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/bay-of-plenty/places/sulphur-bay-wildlife-refuge/",
+      "description": "DOC locally supports New Zealand dabchick, banded dotterel and black-billed gull. Free wild-bird lakefront outing accessible from Rotorua CBD.",
+      "access": "Stay on designated paths. Do not approach breeding birds or mark nests. Dogs prohibited. Geothermal ground and wildlife restrictions apply; check current access. Tourism board describes about 2 hours for full path.",
+      "birdIds": [
+        "nz-afb86196818d",
+        "nz-c71ffab9b8f7",
+        "nz-83b3f5588686"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.doc.govt.nz/parks-and-recreation/places-to-go/bay-of-plenty/places/sulphur-bay-wildlife-refuge/",
+        "https://www.rotoruanz.com/visit/things-to-do/sulphur-point"
+      ],
+      "shortTransferStop": true
+    },
+    {
+      "id": "trip-ni-wingspan",
+      "name": "Wingspan National Bird of Prey Centre",
+      "base": "rotorua",
+      "categories": [
+        "birding"
+      ],
+      "url": "https://www.wingspan.co.nz/wingspan-bird-of-prey-centre-visits",
+      "description": "Flight of the Falcon is a falconry and conservation demonstration featuring managed kārearea, not a wild sighting.",
+      "access": "Tuesday–Sunday 11:00–13:00; 11:30 show, arrive by 11:00 recommended. 1334 Paradise Valley Road. Advance booking and current biosecurity notices should be checked.",
+      "birdIds": [
+        "nz-48e06e699338"
+      ],
+      "encounter": "managed",
+      "tags": [
+        "Captive/falconry"
+      ],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.wingspan.co.nz/wingspan-bird-of-prey-centre-visits",
+        "https://www.wingspan.co.nz/"
+      ],
+      "shortTransferStop": false,
+      "weekdays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "trip-ni-te-puia",
+      "name": "Te Puia",
+      "base": "rotorua",
+      "categories": [
+        "culture"
+      ],
+      "url": "https://www.tepuia.com/faqs/",
+      "description": "Guided daytime Māori arts, crafts and geothermal visit at 20 Hemo Road. Kiwi Conservation Centre is managed, and is not included in wild-bird matches.",
+      "access": "Open 08:45–17:00 daily; last tour 16:00. Check in 15 minutes before tour. Day visits guided. Ticket required; accessible routes and wheelchairs described by operator.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.tepuia.com/faqs/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-pataka-kai",
+      "name": "Pātaka Kai Restaurant, Bar & Café",
+      "base": "rotorua",
+      "categories": [
+        "food",
+        "culture"
+      ],
+      "url": "https://www.tepuia.com/food/",
+      "description": "Te Puia operator lists daily public lunch/dinner and hāngī buffet options, including labelled vegetarian/vegan menu choices.",
+      "access": "Use main Te Puia entrance. Reserve current sitting and confirm dietary needs; no current price asserted.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.tepuia.com/food/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-polynesian",
+      "name": "Polynesian Spa Deluxe Lake Spa",
+      "base": "rotorua",
+      "categories": [
+        "wellness",
+        "hot-springs"
+      ],
+      "url": "https://www.polynesianspa.co.nz/bathing/deluxe-lake-spa/",
+      "description": "Lakefront hot-mineral-pool bathing, with towels and lockers included; seated immersion rather than swimming.",
+      "access": "Recommended visit about 2 hours. Under-8s need in-water adult supervision. Check exact admission/booking hours directly. No medical-benefit claims.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.polynesianspa.co.nz/bathing/deluxe-lake-spa/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-redwoods",
+      "name": "The Redwoods / Tītokorangi & Whakarewarewa Forest",
+      "base": "rotorua",
+      "categories": [
+        "hikes"
+      ],
+      "url": "https://www.rotorualakescouncil.nz/parks-lakes-recreation/the-redwoods-titokorangi-whakarewarewa-forest",
+      "description": "Public forest ground tracks are free; paid Redwoods Treewalk is a distinct product.",
+      "access": "Choose a signposted track appropriate to ability; check current forest closures and gate times. No locally verified bird list attached.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.rotorualakescouncil.nz/parks-lakes-recreation/the-redwoods-titokorangi-whakarewarewa-forest",
+        "https://redwoods.co.nz/walk/",
+        "https://redwoods.co.nz/info/opening-hours/"
+      ],
+      "shortTransferStop": true
+    },
+    {
+      "id": "trip-ni-ibis-airport",
+      "name": "ibis budget Auckland Airport",
+      "base": "auckland",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://all.accor.com/hotel/7865/index.en.shtml",
+      "description": "Airport-area hotel option for arrival buffer before the fixed Auckland-to-Rotorua corridor.",
+      "access": "Dates, occupancy, room type and cancellation terms require live quote. No price, carbon or B Corp claim.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://all.accor.com/hotel/7865/index.en.shtml"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-hamilton-holiday",
+      "name": "Hamilton City Holiday Park",
+      "base": "hamilton",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.hamiltoncityholidaypark.co.nz/accommodation-hamilton.html",
+      "description": "14 Ruakura Road; self-contained double cabin sleeps up to two and includes linen. Other cabins and camping exist.",
+      "access": "Official page directs to Book Now for live prices and availability. Unknown dynamic price remains unknown.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://www.hamiltoncityholidaypark.co.nz/accommodation-hamilton.html"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-rotorua-thermal",
+      "name": "Rotorua Thermal Holiday Park",
+      "base": "rotorua",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://rotoruathermal.co.nz/accommodation/",
+      "description": "Direct operator offers self-contained units, cabins, dorms and campsites. Complimentary hot pools are described as fresh chlorinated water.",
+      "access": "Live quote needed for date/occupancy/unit. Full payment on arrival; operator states no refunds for shortened stays or weather-related changes. Do not repeat conflicting mineral-pool guest review as operator fact.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "sources": [
+        "https://rotoruathermal.co.nz/accommodation/"
+      ],
+      "shortTransferStop": false
+    },
+    {
+      "id": "trip-ni-intercity-auckland",
+      "name": "InterCity Auckland to Hamilton",
+      "base": "auckland",
+      "categories": [
+        "transport"
+      ],
+      "url": "https://www.intercity.co.nz/north-island-buses/bus-auckland-to-hamilton",
+      "description": "Published coach connection. Check exact stops, dated timetable, fares and luggage. This does not establish transport to birding sites.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-ni-intercity-rotorua",
+      "name": "InterCity Rotorua services",
+      "base": "rotorua",
+      "categories": [
+        "transport"
+      ],
+      "url": "https://www.intercity.co.nz/north-island-buses/bus-to-rotorua",
+      "description": "Published Rotorua coach services from Auckland and Hamilton. Check current timetable, fares and local onward transport.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    }
+  ]
+}

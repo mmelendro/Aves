@@ -45,14 +45,15 @@ function createLoader(overrides = {}) {
 const load = createLoader()
 const { newZealandRegionHref } = load("lib/new-zealand-region-links.ts")
 
-test("New Zealand regional links publish only the dedicated South Island route and retain other island anchors", () => {
+test("New Zealand regional links publish both island guides and retain the Rakiura anchor", () => {
   assert.equal(newZealandRegionHref("south-island"), "/new-zealand/south-island")
-  assert.equal(newZealandRegionHref("north-island"), "/new-zealand#region-north-island")
+  assert.equal(newZealandRegionHref("north-island"), "/new-zealand/north-island")
   assert.equal(newZealandRegionHref("rakiura"), "/new-zealand#region-rakiura")
   for (const id of ["", "missing", "__proto__", "constructor", "new-south-wales"]) assert.equal(newZealandRegionHref(id), "/new-zealand#regions")
   const pages = load("lib/public-pages.ts").publicPages
   assert.equal(pages.filter(page => page.href === "/new-zealand/south-island").length, 1)
-  assert.ok(!pages.some(page => /\/new-zealand\/(north-island|rakiura)$/.test(page.href)), "unpublished guides are not advertised as pages")
+  assert.equal(pages.filter(page=>page.href==="/new-zealand/north-island").length,1)
+  assert.ok(!pages.some(page=>page.href==="/new-zealand/rakiura"),"unpublished Rakiura guide is not advertised as a page")
   const regions = load("content/destination-regions.ts").destinationRegions["new-zealand"]
   for (const region of regions) assert.equal(region.href, newZealandRegionHref(region.id))
 })

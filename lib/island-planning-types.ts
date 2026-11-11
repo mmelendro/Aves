@@ -31,6 +31,8 @@ export type TripPlace = {
   encounter: string;
   tags: string[];
   checkedAt: string;
+  separateDay?: boolean;
+  shortTransferStop?: boolean;
   weekdays?: number[];
   months?: number[];
   eco?: { kind: string; note: string; url: string };
@@ -93,6 +95,14 @@ export type IslandPlanningContext = {
   mapAnchor: string;
   defaultBaseId: string;
   legacyUntagged?: boolean;
+  corridor?: {
+    bases: readonly string[];
+    startCity: string;
+    endCity: string;
+    minDays: number;
+    maxDays: number;
+    maxTransferMinutes: number;
+  };
   catalogue: {
     areas: TripArea[];
     places: readonly (Omit<TripPlace, "categories"> & {

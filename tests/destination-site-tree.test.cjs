@@ -23,7 +23,7 @@ test('every canonical public navigation URL is retained exactly once and no priv
  const {publicNavigationPaths}=load('lib/public-navigation.ts')
  for(const path of publicNavigationPaths)assert.ok(actual.has(path),path)
  assert.ok(links.every(path=>!/^\/(account|admin|api|auth)(\/|$)/.test(path)))
- assert.ok(actual.has('/new-zealand#region-north-island'),'unpublished island guides retain their existing live country anchors')
+ assert.ok(actual.has('/new-zealand/north-island'),'the published North Island guide uses its canonical route')
 })
 test('native branch controls expand/collapse only the directory and keep links available',()=>{
  const h=componentHarness('components/destination-site-tree.tsx','default',{tree,initialCountry:'australia'})

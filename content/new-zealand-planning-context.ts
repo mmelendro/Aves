@@ -1,3 +1,6 @@
+import northCatalogue from "./north-island-trip-catalogue.json";
+import northRoads from "./north-island-road-references.json";
+import northPrices from "./north-island-price-references.json";
 import catalogue from "./south-island-trip-catalogue.json";
 import roads from "./south-island-road-references.json";
 import prices from "./south-island-price-references.json";
@@ -34,8 +37,39 @@ export const southIslandPlanning = {
   legacyUntagged: true,
   draftKey: "aves:south-island-itinerary:v1",
   accountHref: "/account?country=new-zealand&region=south-island",
-  catalogue, roads, prices, gateways,
+  catalogue,
+  roads,
+  prices,
+  gateways,
+} as const;
+export const northIslandPlanning = {
+  id: "north-island",
+  name: "North Island",
+  draftKey: "aves:north-island-itinerary:v1",
+  accountHref: "/account?country=new-zealand&region=north-island",
+  mapAnchor: "#north-island-bird-map",
+  defaultBaseId: "auckland",
+  catalogue: northCatalogue,
+  roads: northRoads,
+  prices: northPrices,
+  gateways: [
+    { id: "auckland", name: "Auckland", baseId: "auckland" },
+    { id: "hamilton", name: "Hamilton", baseId: "hamilton" },
+    { id: "rotorua", name: "Rotorua", baseId: "rotorua" },
+  ],
+  corridor: {
+    bases: ["auckland", "hamilton", "rotorua"],
+    startCity: "auckland",
+    endCity: "rotorua",
+    minDays: 3,
+    maxDays: 7,
+    maxTransferMinutes: 120,
+  },
 } as const;
 export function planningContext(id: string) {
-  return id === southIslandPlanning.id ? southIslandPlanning : null;
+  return id === southIslandPlanning.id
+    ? southIslandPlanning
+    : id === northIslandPlanning.id
+      ? northIslandPlanning
+      : null;
 }

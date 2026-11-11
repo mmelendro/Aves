@@ -5,8 +5,8 @@ const p=load('lib/south-island-trip-planner.ts');
 const {planningContext,southIslandPlanning:c}=load('content/new-zealand-planning-context.ts');
 function storage(){const m=new Map();return {getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)}}
 test('only an operational island resolves to a planning context',()=>{
- assert.equal(planningContext('south-island'),c);
- for(const id of ['north-island','rakiura','unknown','__proto__'])assert.equal(planningContext(id),null);
+ assert.equal(planningContext('south-island'),c);assert.equal(planningContext('north-island').id,'north-island');
+ for(const id of ['rakiura','unknown','__proto__'])assert.equal(planningContext(id),null);
  assert.equal(p.TRIP_DRAFT_KEY,c.draftKey);assert.equal(p.tripGateways,c.gateways);
  assert.ok(c.accountHref.endsWith('region='+c.id));
 });
