@@ -52,8 +52,8 @@
 /* The layer map has a toolbar and island controls above its own scroll area.
    Size that area inside the pair, so it cannot cover the planning content. */
 .layeredPanel > div { width:100%; display:flex; flex-direction:column; height:100%; min-height:0; }
-  .layeredPanel dialog:not([data-expanded]) { height:0; min-height:0; }
-  .layeredPanel dialog:not([data-expanded]) > div:last-child > div > section { height:100%; }
+  .layeredPanel dialog[data-aves-map]:not([data-expanded]) { height:0; min-height:0; }
+  .layeredPanel dialog[data-aves-map]:not([data-expanded]) > div:last-child > div > section { height:100%; }
 
 .islandScope { display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
 .islandScope select { flex:1; min-width:0; width:auto; }

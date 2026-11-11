@@ -25,3 +25,5 @@ Automated checks: 584 tests passed, strict TypeScript passed and the source audi
 Browser acceptance must check background/camera/park retention, scope switching, reset, nested Escape, one active map, all maintained countries, South Island park/conservation controls, and narrow/short viewports. Native desktop/high-zoom checks do not certify physical iPhone/Safari. Complete optional layer/content parity, 3D terrain and wider reserve coverage remain separate future scope. The next numbered pathway milestone after accepted controls is the shared island planner.
 
 No private traveller records, location permission, schema, account access, provider keys, new spend, mail or bookings are changed.
+
+Hosted testing caught an older homepage rule targeting every dialog under the South Island panel. It reduced the new native layer dialog to zero content height. The selector is now scoped explicitly to dialog[data-aves-map], preserving its intended map-frame layout without matching the layer picker. Recheck the exact corrected source on the hosted candidate before publication.
