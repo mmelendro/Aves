@@ -1,6 +1,11 @@
 # AVES hosted acceptance
 
-Runtime: a0278216ee93537c5afc3ce1e1ee6a904f0af415. Deployment: dpl_6r8i8AdJJCTaV2gkymugf1stzt4r, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: d16c36f881eef0183faad86566f0d8f0d80f49dc / dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2. Branch: feature/field-guide-card.
+Runtime: 0984fc3cd3df89c8878e0c0a5a98b1ce9cee82f7. Deployment: dpl_F4c2rMAGB5dKvqym4LwMfRpAgeHb, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: a0278216ee93537c5afc3ce1e1ee6a904f0af415 / dpl_6r8i8AdJJCTaV2gkymugf1stzt4r. Branch: feature/field-guide-card.
+
+## Current island-context evidence
+
+NZ-01a centralized configuration and explicit draft island identity, with untagged legacy South Island compatibility. Route generation remains South Island-specific; NZ-01b is next. 556 tests, TypeScript, local and hosted 75-page builds passed. Source audit: 344 modules, zero unreachable. Domain tests reject foreign/unknown island input and preserve foreign stored envelopes through read, failed write and consume. Hosted browser checked legacy seven-day restoration, regeneration to three days and the configured South Island account intent. Canonical live five-day local generation and published prices verified. Both aliases verified. Error/fatal scan 08:26:59–08:36:59 UTC returned no matches. This release adds no private record writes or North Island planner. No new physical-device or private save/reopen acceptance claimed. Storage on this path still carries the draft at explicit account handoff; do not claim every local edit autosaves.
+
 
 ## Current price-reference evidence
 

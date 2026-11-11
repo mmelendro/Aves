@@ -19,6 +19,12 @@ The owner's established Eco-Tourism Business Plan direction is broader nature tr
 | Scientific coverage | Featured island memberships are curated examples, not complete distributions. National checklist inclusion cannot establish local opportunity. | Source local bird/site links separately for each island, with managed/wild distinctions. |
 | Design confidence | Previous hosted checks cover desktop and 340px containment; physical Safari/touch and usability with independent visitors remain open. | Treat keyboard, touch, focus, small screens and independent task completion as release criteria, not final polish. |
 
+## Current increment
+
+NZ-01a centralizes the operational South Island configuration and adds explicit island identity to new draft envelopes and default inputs. Untagged historical South Island drafts remain valid. Explicit foreign/unknown island inputs are rejected without consuming their stored data. Only South Island is registered as operational. This is the first bounded part of NZ-01, not a reusable North Island route generator yet.
+
+Next, NZ-01b: parameterize route generation, price/road lookup and shared presentation around the context; make private import selection and storage independent per island. Keep existing copied note markers compatible. Then deliver NZ-02. Do not mark NZ-01 complete until both contexts can be isolated in meaningful tests.
+
 ## Delivery order
 
 Each row is a sequence of small releases, not one large merge. Finish and verify one increment before starting the next. Reassess after each completed visitor task; do not add a framework, taxonomy or form field without a clear use.

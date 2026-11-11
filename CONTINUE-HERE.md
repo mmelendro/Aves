@@ -4,13 +4,13 @@ Read docs/AGILE-PLAN.md for the single active delivery queue, docs/ARCHITECTURE.
 
 ## Current production checkpoint
 
-Branch: feature/field-guide-card. Runtime: a0278216ee93537c5afc3ce1e1ee6a904f0af415. Combined Vercel project: prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Deployment: dpl_6r8i8AdJJCTaV2gkymugf1stzt4r. Both aves.bio and www.aves.bio verified. Rollback: d16c36f881eef0183faad86566f0d8f0d80f49dc / dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2. Latest functional evidence: 553 passing tests, TypeScript, local/hosted 75-page builds, source audit 343 modules with zero unreachable modules. Documentation commits do not change this runtime.
+Branch: feature/field-guide-card. Runtime: 0984fc3cd3df89c8878e0c0a5a98b1ce9cee82f7. Combined Vercel project: prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Deployment: dpl_F4c2rMAGB5dKvqym4LwMfRpAgeHb. Both aves.bio and www.aves.bio verified. Rollback: a0278216ee93537c5afc3ce1e1ee6a904f0af415 / dpl_6r8i8AdJJCTaV2gkymugf1stzt4r. Latest functional evidence: 556 passing tests, TypeScript, local/hosted 75-page builds, source audit 344 modules with zero unreachable modules. Documentation commits do not change this runtime.
 
 ## Goal and next increment
 
 Make North Island and South Island useful through one consistent planning experience: island/area, starting town, duration/dates and departure town, birds, activities, pace, allowances, editable suggestions and explicit private save. Preserve all requested travel categories and distinguish source evidence from certification.
 
-Next: NZ-01 in docs/AGILE-PLAN.md. Extract only the island context needed to reuse the working planner: records, gateways, references, labels, storage and private handoff. Preserve the current South Island route, stable IDs and legacy drafts. Add island-aware validation; prevent silent cross-island draft mixing. Test the South Island migration before adding North Island records. Do not create a copied planner or publish an empty North Island page.
+Next: NZ-01b in docs/AGILE-PLAN.md. NZ-01a centralized configuration and added explicit island identity while preserving untagged South Island drafts. Parameterize the working route generator, price/road lookup and shared presentation using the context. Add separate island draft slots and an explicit private import selection. Preserve current South Island routes, stable IDs, legacy note markers and drafts. Test both contexts for isolation before adding the North Island pilot; only South Island is operational today. Do not create a copied planner or publish an empty North Island page.
 
 Then deliver NZ-02: a sourced North Island corridor with a dedicated canonical guide and a usable complete itinerary flow. Do not defer this until the South Island is perfect. Continue in bounded tested releases using the shared acceptance/design rules in the backlog.
 
