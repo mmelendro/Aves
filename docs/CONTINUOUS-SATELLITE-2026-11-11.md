@@ -2,7 +2,7 @@
 
 Owner direction: a Google Earth experience for birders. A shared geographic map replaces separate static country satellite images. The same background preference follows country/region selection, client navigation and reloads within the browser tab. Private trip data is not stored by this preference.
 
-Implementation uses Leaflet 1.9.4, loaded only for satellite mode. Global EPSG:3857 imagery comes directly from EOX's `s2cloudless_3857` 2016 tile layer, native zooms capped at 14. Country/region choices move the camera within one global tile surface. This increment is a continuous 2D map; rotating-globe and elevation rendering remain future work. Native selectors remain alternatives to map labels. Reduced-motion preferences remove camera animation. Map or tile failures explain the issue and retain the Planning map control.
+Implementation uses Leaflet 1.9.4, loaded only for satellite mode. Global EPSG:3857 imagery comes directly from EOX's `s2cloudless_3857` 2016 tile layer, native zooms capped at 14. Country/region choices move the camera within one global tile surface. This increment is a continuous 2D map; rotating-globe and elevation rendering remain future work. Native selectors remain alternatives to map labels. Scope selection sets the geographic camera without animation so expansion and resize cannot interrupt regional focus. Native dragging/pinching and zoom controls remain available. Map or tile failures explain the issue and retain the Planning map control.
 
 Primary source and terms checked 11 November 2026:
 

@@ -41,9 +41,10 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
   useEffect(()=>{
     const current=map.current;if(!current||!ready)return;
     const bounds=countries[country]?.regions[region]??countries[country]?.bounds;
-    const animate=!window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if(bounds)current.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[28,28],maxZoom:11,animate,duration:.6});
-    else current.setView([12,-45],1,{animate});
+    // A scope selection must finish even if expansion/resizing interrupts a zoom animation.
+    // Native drag/pinch/zoom remains available after this deterministic camera move.
+    if(bounds)current.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[28,28],maxZoom:11,animate:false});
+    else current.setView([12,-45],1,{animate:false});
   },[country,region,ready]);
   useEffect(()=>{
     const current=map.current;if(!current||!ready)return;
