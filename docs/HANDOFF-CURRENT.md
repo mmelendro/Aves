@@ -40,3 +40,13 @@ Prepared the remaining Colombia shared header/footer and custom About/Travel Tip
 ## GitHub synchronization confirmed · 11 November 2026
 
 The owner explicitly authorised the push. The connected GitHub app synced the reviewed source and validation notes to mmelendro/Aves, feature/field-guide-card, runtime source 811fe4a21c2484158f0e819c0d56ac016c629473. Its source tree 44dfb07d646ecd93db9a4366432d8ca579c082a1 exactly matches reviewed local commits c9be99e/da816b3. This supersedes the blocked-push status above. Hosted build/browser acceptance and production publication remain pending. Unrelated local dependency edits were excluded.
+
+## Hosted preview acceptance · 11 November 2026
+
+The exact pushed source 3c8ef84eebbaff078831018076541fbcfc840641 built successfully in the combined aves-australia project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv, configured for Node 22. Protected preview deployment: dpl_C9wTac1b9KDmfQ5jtXrKXxdVo3gK. URL: https://aves-australia-2nihkbkjf-mmelendro-9273s-projects.vercel.app/travel-tips . Production remains at 3562ba2 / dpl_5MtafKNyQ2uxi3Em7hcBtt7rWzb5. No domain reassignment or promotion was performed.
+
+Browser acceptance: /colombia English-to-Spanish toggling updates the rendered heading, header navigation and footer copy with lang=es-CO. Header height remains 132px. Native Chromium zoom yielded a 340 x 234 CSS-pixel viewport with no horizontal page overflow. Mobile menu links measured 44px tall; Escape closed the dialog and restored Open navigation menu focus. /about and /travel-tips each retain one h1 and the main-content skip target with shared emerald title colour. Both passed narrow overflow checks; Travel Tips also passed 1363px desktop overflow/header/heading placement review. Colombian editorial footer retains account?country=colombia, the acknowledgement and explicit not-certified statement.
+
+Existing translation gaps remain: How it works, open/close mobile navigation labels, some newer explorer instructions and the general homepage acknowledgement remain English. Do not describe this as a fully translated site. Browser extension metadata errors appeared in captured console output; no application error was observed in the inspected entries. This is not a complete runtime error audit. Physical Safari/touch and exact 320/390px remain unverified.
+
+Next: fix the identified shared-navigation Spanish strings, then continue custom-route heading/main-landmark consistency on blog, tours, team, how-it-works, conservation and legal pages. Broader content/source review remains separate from these layout checks. The current layout preview is ready for review, not published to production.

@@ -1,5 +1,10 @@
 # AVES comprehensive delivery list
 
+## Latest hosted acceptance · 11 November 2026
+
+Layout source 3c8ef84 passed hosted build and browser acceptance in protected preview dpl_C9wTac1b9KDmfQ5jtXrKXxdVo3gK. Colombia Spanish toggle, 132px shared header, 340px no-overflow reflow, 44px menu links, Escape focus, About/Travel Tips headings and country-aware footer were checked. Production unchanged. Fix the recorded remaining shared-navigation Spanish strings next, then continue custom editorial/legal heading and landmark coverage. See COLOMBIA-SHARED-LAYOUT-2026-11-11.md for evidence and exact limits.
+
+
 ## Latest local continuation · 11 November 2026
 
 Colombia shared header/footer, homepage Spanish switch and About/Travel Tips heading/skip-target improvements are committed locally at c9be99e. 508 tests, strict TypeScript and a 75-page local production build passed. Automatic review blocked the GitHub push to mmelendro/Aves, feature/field-guide-card over destination authorization. No deployment was made. Finish GitHub sync, hosted Node 22 build and browser acceptance before publication. See COLOMBIA-SHARED-LAYOUT-2026-11-11.md. Wider route audit remains open.
