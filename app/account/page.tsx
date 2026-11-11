@@ -6,7 +6,6 @@
 
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { accountUrl } from "@/lib/account-path"
 import { AccountShell } from "@/components/account/account-shell"
 import { AccountDashboard } from "@/components/account/account-dashboard"
 import { getAccountUser } from "@/lib/account-auth"

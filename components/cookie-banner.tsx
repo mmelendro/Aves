@@ -29,19 +29,16 @@ export function CookieBanner() {
   }, [hasConsented])
 
   const handleAcceptAll = () => {
-    console.log("Banner: Accept All clicked") // Debug log
     acceptAll()
     setIsVisible(false)
   }
 
   const handleRejectAll = () => {
-    console.log("Banner: Reject All clicked") // Debug log
     rejectAll()
     setIsVisible(false)
   }
 
   const handleCustomize = () => {
-    console.log("Banner: Customize clicked") // Debug log
     setShowPreferenceCenter(true)
     setIsVisible(false)
   }

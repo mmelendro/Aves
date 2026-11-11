@@ -24,14 +24,12 @@ import { canonicalColombiaRegion, sharedAccountHref } from "@/lib/shared-account
 interface ContactFormSectionProps {
   showTitle?: boolean
   showFAQ?: boolean
-  variant?: "homepage" | "contact-page"
   className?: string
 }
 
 export function ContactFormSection({
   showTitle = true,
   showFAQ = false,
-  variant = "homepage",
   className = "",
 }: ContactFormSectionProps) {
   const readOnly = useReadOnlyPreview()

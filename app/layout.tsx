@@ -72,7 +72,6 @@ export const metadata: Metadata = {
       "Explore Colombia and Australia, and discover our developing New Zealand destination. Follow the birds with AVES.",
     images: ["/images/brand/aves-global-bird.png"],
   },
-  // TODO: Add real Google Search Console verification code
   robots: {
     index: !isReadOnlyPreview(),
     follow: !isReadOnlyPreview(),

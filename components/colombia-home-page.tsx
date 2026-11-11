@@ -7,7 +7,7 @@
  */
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MapPin, MessageCircle, NotebookPen } from "lucide-react"
+import { ArrowRight, Bird, Camera, FileCheck2, Heart, Leaf, MessageCircle, NotebookPen } from "lucide-react"
 import { ColombiaHomeLanguage } from "@/components/colombia-home-language"
 import type { ReactNode } from "react"
 import DestinationExplorerPage from "./destination-explorer-page"
@@ -139,7 +139,7 @@ export default function AVESLandingPage({ map }: { map?: ReactNode } = {}) {
         <p className="mx-auto max-w-7xl px-4 pb-8 text-center text-sm text-gray-600">AVES is pursuing B Corp certification and is not yet certified. <Link href="/about/b-corp" className="inline-flex min-h-11 items-center font-medium text-emerald-800 underline underline-offset-4">Our B Corp journey</Link></p>
 
         <div id="contact" className="scroll-mt-24">
-          <ContactFormSection showTitle={true} showFAQ={false} variant="homepage" />
+          <ContactFormSection showTitle={true} showFAQ={false} />
         </div>
         </DestinationExplorerPage>
       </main>

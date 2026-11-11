@@ -6,18 +6,42 @@
  */
 // Public, canonical page paths only; exclude private tools and redirect aliases.
 // Keep paths unprefixed: framework helpers supply each site's base path.
-export type PublicPageGroup = { id: string; title: string; pages: { href: string; label: string }[] }
+export type PublicPage = {
+  href: string;
+  label: string;
+  sections?: { id: string; label: string }[];
+};
+export type PublicPageGroup = {
+  id: string;
+  title: string;
+  country: "colombia" | "new-zealand" | null;
+  pages: PublicPage[];
+};
 
 export const publicPageGroups: PublicPageGroup[] = [
   {
-    id: "new-zealand", title: "Discover New Zealand",
+    id: "new-zealand",
+    country: "new-zealand",
+    title: "Discover New Zealand",
     pages: [
       { href: "/new-zealand", label: "New Zealand — In Development" },
-      { href: "/new-zealand/south-island", label: "South Island — Birdlife & Trip Planning" },
+      {
+        href: "/new-zealand/south-island",
+        label: "South Island — Birdlife & Trip Planning",
+        sections: [
+          { id: "south-island-bird-map", label: "Map & bird guide" },
+          { id: "trip-planner", label: "Plan your itinerary" },
+          { id: "places", label: "Explore landscapes" },
+          { id: "resources", label: "Listen, watch & read" },
+          { id: "travel-with-care", label: "Responsible travel" },
+        ],
+      },
     ],
   },
   {
-    id: "start", title: "AVES & Colombia",
+    id: "start",
+    country: "colombia",
+    title: "AVES & Colombia",
     pages: [
       { href: "/", label: "AVES Home — All Destinations" },
       { href: "/colombia", label: "Colombia Home" },
@@ -28,7 +52,9 @@ export const publicPageGroups: PublicPageGroup[] = [
     ],
   },
   {
-    id: "regions", title: "Colombian Regions",
+    id: "regions",
+    country: "colombia",
+    title: "Colombian Regions",
     pages: [
       { href: "/regions/pacific", label: "Pacific" },
       { href: "/regions/western-andes", label: "Western Andes" },
@@ -37,25 +63,35 @@ export const publicPageGroups: PublicPageGroup[] = [
       { href: "/regions/cauca-valley", label: "Cauca Valley" },
       { href: "/regions/magdalena-valley", label: "Magdalena Valley" },
       { href: "/regions/caribbean", label: "Caribbean" },
-      { href: "/regions/sierra-nevada-de-santa-marta", label: "Sierra Nevada de Santa Marta" },
+      {
+        href: "/regions/sierra-nevada-de-santa-marta",
+        label: "Sierra Nevada de Santa Marta",
+      },
       { href: "/regions/llanos", label: "Llanos" },
       { href: "/regions/amazonia", label: "Amazonia" },
       { href: "/regions/colombian-massif", label: "Colombian Massif" },
     ],
   },
   {
-    id: "experiences", title: "Colombia Birding Experiences",
+    id: "experiences",
+    country: "colombia",
+    title: "Colombia Birding Experiences",
     pages: [
       { href: "/tours", label: "Birding Experiences" },
       { href: "/tours/adventure", label: "Adventure Tours" },
       { href: "/tours/vision", label: "Vision Tours" },
       { href: "/tours/elevate", label: "Elevate Tours" },
       { href: "/tours/souls", label: "Souls Tours" },
-      { href: "/tours/adventure/sierra-nevada", label: "Sierra Nevada Birding Experience" },
+      {
+        href: "/tours/adventure/sierra-nevada",
+        label: "Sierra Nevada Birding Experience",
+      },
     ],
   },
   {
-    id: "about", title: "About AVES Colombia",
+    id: "about",
+    country: "colombia",
+    title: "About AVES Colombia",
     pages: [
       { href: "/about", label: "About AVES Colombia" },
       { href: "/team", label: "Our Team" },
@@ -65,19 +101,32 @@ export const publicPageGroups: PublicPageGroup[] = [
     ],
   },
   {
-    id: "planning", title: "Colombia Reading & Planning",
+    id: "planning",
+    country: "colombia",
+    title: "Colombia Reading & Planning",
     pages: [
       { href: "/blog", label: "Birding Blog" },
-      { href: "/blog/hummingbird-vision-journey", label: "Hummingbird Sanctuaries" },
-      { href: "/blog/sierra-nevada-indigenous-birding", label: "Sierra Nevada Birding" },
-      { href: "/blog/paramo-manizales-thornbill", label: "Páramo & Cloud Forests" },
+      {
+        href: "/blog/hummingbird-vision-journey",
+        label: "Hummingbird Sanctuaries",
+      },
+      {
+        href: "/blog/sierra-nevada-indigenous-birding",
+        label: "Sierra Nevada Birding",
+      },
+      {
+        href: "/blog/paramo-manizales-thornbill",
+        label: "Páramo & Cloud Forests",
+      },
       { href: "/blog/choco-toucan-expedition", label: "Chocó Birding" },
       { href: "/resources", label: "Birding Resources" },
       { href: "/travel-tips", label: "Travel Tips" },
     ],
   },
   {
-    id: "information", title: "Website Information",
+    id: "information",
+    country: null,
+    title: "Website Information",
     pages: [
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
@@ -86,6 +135,6 @@ export const publicPageGroups: PublicPageGroup[] = [
       { href: "/site-map", label: "Site Map" },
     ],
   },
-]
+];
 
-export const publicPages = publicPageGroups.flatMap(group => group.pages)
+export const publicPages = publicPageGroups.flatMap((group) => group.pages);

@@ -40,3 +40,15 @@ test('native branch controls expand/collapse only the directory and keep links a
  assert.ok(elements.every(n=>!n.open))
  assert.ok(nodes(rendered).some(n=>n.type==='Link'&&n.props.href==='/australia/regions/new-south-wales'&&n.props.prefetch===false))
 })
+
+test('country ownership survives editorial group renames and South Island tools are directly discoverable',()=>{
+ const {publicNavigationGroups}=load('lib/public-navigation.ts')
+ const groups=publicNavigationGroups.map(group=>({...group,id:group.country==='new-zealand'?'travel-tools':group.id}))
+ const next=load('lib/destination-site-tree.ts').buildDestinationSiteTree(groups)
+ const nz=next.children.find(n=>n.id==='new-zealand')
+ const south=nz.children.find(n=>n.href==='/new-zealand/south-island')
+ assert.ok(south.children.some(n=>n.href==='/new-zealand/south-island#trip-planner'))
+ assert.ok(south.children.some(n=>n.href==='/new-zealand/south-island#south-island-bird-map'))
+ assert.ok(!next.children.find(n=>n.id==='colombia').children.some(n=>n.id==='travel-tools'))
+ for(const group of groups)assert.ok([null,'colombia','australia','new-zealand'].includes(group.country))
+})

@@ -5,7 +5,7 @@
  */
 import { SiteLink as Link } from "@/features/australia/components/site-link"
 import Image from "next/image"
-import { ArrowRight, Bird, Camera, Leaf, MapPin } from "lucide-react"
+import { ArrowRight, Bird, Camera, Leaf } from "lucide-react"
 import { ExplorerHeader, ExplorerFooter } from "@/features/australia/components/explorer-navigation"
 import { AustraliaUnifiedExplorer } from "@/features/australia/components/australia-unified-explorer"
 import { PlanningSteps } from "@/features/australia/components/planning-steps"

@@ -56,7 +56,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section with FAQ */}
-      <ContactFormSection showTitle={true} showFAQ={true} variant="contact-page" className="bg-white" />
+      <ContactFormSection showTitle={true} showFAQ={true} className="bg-white" />
 
       {/* Get in Touch - Contact Information Cards */}
       <section className="py-16 bg-white border-t border-gray-100">

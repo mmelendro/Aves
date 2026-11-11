@@ -57,17 +57,14 @@ export function CookiePreferenceCenter() {
   }
 
   const handleAcceptAll = () => {
-    console.log("Accept All clicked") // Debug log
     acceptAll()
   }
 
   const handleRejectAll = () => {
-    console.log("Reject All clicked") // Debug log
     rejectAll()
   }
 
   const handleResetConsent = () => {
-    console.log("Reset consent clicked") // Debug log
     resetConsent()
     setShowPreferenceCenter(false)
   }

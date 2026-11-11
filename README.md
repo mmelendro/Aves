@@ -2,7 +2,7 @@
 
 One Next.js application for the global homepage, Colombia, Australia, New Zealand and the shared AVES account portal. Public brand: AVES. Public domain: [aves.bio](https://aves.bio). Package: `aves-web`.
 
-This is the **AVES-020 integration branch**, `integration/aves-unified-2026-11-08`. It is a review candidate, not the currently published production architecture. Read [CONSOLIDATION.md](docs/CONSOLIDATION.md) before releasing. Production still uses the two deployments recorded in [CONTINUE-HERE.md](CONTINUE-HERE.md).
+The combined application is live on aves.bio. Current source branch: `feature/field-guide-card`. Read [CONTINUE-HERE.md](CONTINUE-HERE.md) for the verified runtime and rollback, and [ARCHITECTURE.md](docs/ARCHITECTURE.md) before editing. Earlier consolidation plans are historical.
 
 ## Development
 
@@ -34,11 +34,12 @@ Country discovery, map dividers, licensed photographs/recordings, attribution, N
 ## Checks and handoff
 
 ```sh
+corepack pnpm check:architecture
 corepack pnpm typecheck
 corepack pnpm test
 corepack pnpm build
 ```
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for verification/release boundaries and [CONSOLIDATION.md](docs/CONSOLIDATION.md) for source snapshots, routing, preview safeguards and cutover/rollback steps. Earlier beginner/frontend guides describe the two-app production arrangement and are historical where they differ from this branch.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for verification/release boundaries and [CONSOLIDATION.md](docs/CONSOLIDATION.md) for source snapshots, routing, preview safeguards and cutover/rollback steps. Use the architecture guide as the current code map. Earlier beginner/frontend guides and consolidation snapshots are historical where they differ from it.
 
-The eco-tourism business plan is still to be created. AVES is pursuing B Corp certification and is not certified. Preserve factual claims, community attribution, privacy choices, media licences and responsible wildlife guidance.
+The owner has an Eco-Tourism Business Plan, but its original file has not been located in this checkout. Do not invent or overwrite its assumptions. AVES is pursuing B Corp certification and is not certified. Preserve factual claims, community attribution, privacy choices, media licences and responsible wildlife guidance.

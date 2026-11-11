@@ -1,132 +1,622 @@
-"use client"
+"use client";
 
-import {useEffect,useId,useRef,useState} from "react"
-import NewZealandBirdPicker from "./new-zealand-bird-picker"
-import {readNzBirdBasket,writeNzBirdBasket,NZ_BIRD_BASKET_EVENT} from "@/lib/nz-bird-selection"
-import {nzBirdName} from "@/content/new-zealand-checklist"
-import {readNzPlaceIdeas,writeNzPlaceIdeas,NZ_PLACE_IDEAS_EVENT} from "@/lib/nz-place-ideas"
-import {airbnbAreaUrl,buildSouthIslandPlans,tripGateways,gatewayById,tripCurrencies,allowanceCategories,tripAllowanceSummary,tripDayDate,tripTransferUrl,marketFitsDay,categoryName,defaultTripInput,placesAt,readTripDraft,tripAreaById,tripAreas,tripCategories,tripCoverage,tripDraftText,tripPlaceById,tripPlaces,validTripInput,writeTripDraft,type TripCategory,type TripDay,type TripDraft,type TripPlannerInput,type TripPlace,type TripStyle} from "@/lib/south-island-trip-planner"
-import {ecosystemMapPoint} from "@/lib/ecosystem-map-camera"
-import geography from "@/content/south-island-ecosystem-map.json"
+import { useEffect, useId, useRef, useState } from "react";
+import NewZealandBirdPicker from "./new-zealand-bird-picker";
+import {
+  readNzBirdBasket,
+  writeNzBirdBasket,
+  NZ_BIRD_BASKET_EVENT,
+} from "@/lib/nz-bird-selection";
+import { nzBirdName } from "@/content/new-zealand-checklist";
+import {
+  buildSouthIslandPlans,
+  tripGateways,
+  gatewayById,
+  tripCurrencies,
+  allowanceCategories,
+  tripDayDate,
+  defaultTripInput,
+  readTripDraft,
+  tripAreaById,
+  tripAreas,
+  tripPlaces,
+  tripCategories,
+  tripCoverage,
+  tripDraftText,
+  validTripInput,
+  writeTripDraft,
+  type TripDay,
+  type TripDraft,
+  type TripPlannerInput,
+  type TripStyle,
+} from "@/lib/south-island-trip-planner";
+import TripBaseMap from "./trip-planner/trip-base-map";
+import TripDayCard from "./trip-planner/trip-day-card";
+import TripCatalogue from "./trip-planner/trip-catalogue";
+import TripAllowanceSummary from "./trip-planner/trip-allowance-summary";
+import { button, field } from "./trip-planner/presentation";
 
-const field="min-h-11 w-full min-w-0 rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"
-const button="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-300 px-4 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:opacity-50"
-const external={target:"_blank",rel:"noreferrer"} as const
-function SourceLink({place}:{place:TripPlace}){return <a href={place.url} {...external} className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4">Visitor information & source<span className="sr-only"> (opens in a new tab)</span></a>}
-
-export default function SouthIslandTripPlanner(){
-  const id=useId(), output=useRef<HTMLDivElement>(null)
-  const [input,setInput]=useState<TripPlannerInput>(defaultTripInput)
-  const [draft,setDraft]=useState<TripDraft|null>(null)
-  const [alternatives,setAlternatives]=useState<{id:TripStyle;label:string;draft:TripDraft}[]>([])
-  const [category,setCategory]=useState("all"),[query,setQuery]=useState(""),[claim,setClaim]=useState("all"),[limit,setLimit]=useState(12)
-  const [ideas,setIdeas]=useState<string[]>([]),[notice,setNotice]=useState("")
-  useEffect(()=>{
-    try{
-      const saved=readTripDraft(window.sessionStorage),birds=readNzBirdBasket(window.sessionStorage)
-      if(saved){setDraft(saved);setInput({...saved.input,...(birds.length?{birdIds:birds}:{})})}else setInput(current=>({...current,birdIds:birds}))
-      const base=new URLSearchParams(window.location.search).get("base")
-      if(base&&tripAreaById.has(base))setInput(current=>({...current,areaId:base}))
-      setIdeas(readNzPlaceIdeas(window.sessionStorage))
-    }catch{setNotice("Your choices work here, but this browser may not carry them between pages. Use Copy itinerary if needed.")}
-    const restoreBirds=()=>{try{const birds=readNzBirdBasket(window.sessionStorage);setInput(current=>({...current,birdIds:birds}))}catch{}}
-    const restoreIdeas=()=>{try{setIdeas(readNzPlaceIdeas(window.sessionStorage))}catch{}}
-    const selectBase=(event:Event)=>{const base=(event as CustomEvent).detail;if(typeof base==="string"&&tripAreaById.has(base))setInput(current=>({...current,areaId:base}))}
-    window.addEventListener(NZ_BIRD_BASKET_EVENT,restoreBirds);window.addEventListener(NZ_PLACE_IDEAS_EVENT,restoreIdeas);window.addEventListener("aves:trip-base",selectBase)
-    return ()=>{window.removeEventListener(NZ_BIRD_BASKET_EVENT,restoreBirds);window.removeEventListener(NZ_PLACE_IDEAS_EVENT,restoreIdeas);window.removeEventListener("aves:trip-base",selectBase)}
-  },[])
-  function chooseBirds(ids:string[]){setInput(current=>({...current,birdIds:ids}));try{if(!writeNzBirdBasket(window.sessionStorage,ids))setNotice("Bird choices are in this page only. Copy the itinerary before leaving.")}catch{setNotice("Copy the itinerary before leaving; browser storage is unavailable.")}}
-  function generate(){try{const choices=buildSouthIslandPlans(input);setAlternatives(choices);setDraft(choices[0].draft);setNotice(`${choices.length} distinct draft${choices.length===1?"":"s"} ready below. Compare them, then adjust outings and stays.`);output.current?.scrollIntoView({behavior:"smooth",block:"start"})}catch(error){setNotice(error instanceof Error?error.message:"Review your choices.")}}
-  function changeDay(index:number,patch:Partial<TripDay>){
-    if(!draft)return
-    const next={...draft,days:draft.days.map((day,i)=>i===index?{...day,...patch}:day)}
-    setDraft(next);setAlternatives(current=>current.map(option=>option.id===next.style?{...option,draft:next}:option))
-    setNotice("Itinerary updated on this page. Carry it to your private brief when ready.")
+/** Owns trip inputs, suggestions and explicit private handoff. Child modules own display and browsing. */
+export default function SouthIslandTripPlanner() {
+  const id = useId(),
+    output = useRef<HTMLDivElement>(null);
+  const [input, setInput] = useState<TripPlannerInput>(defaultTripInput);
+  const [draft, setDraft] = useState<TripDraft | null>(null);
+  const [alternatives, setAlternatives] = useState<
+    { id: TripStyle; label: string; draft: TripDraft }[]
+  >([]);
+  const [notice, setNotice] = useState("");
+  useEffect(() => {
+    try {
+      const saved = readTripDraft(window.sessionStorage),
+        birds = readNzBirdBasket(window.sessionStorage);
+      if (saved) {
+        setDraft(saved);
+        setInput({
+          ...saved.input,
+          ...(birds.length ? { birdIds: birds } : {}),
+        });
+      } else setInput((current) => ({ ...current, birdIds: birds }));
+      const base = new URLSearchParams(window.location.search).get("base");
+      if (base && tripAreaById.has(base))
+        setInput((current) => ({ ...current, areaId: base }));
+    } catch {
+      setNotice(
+        "Your choices work here, but this browser may not carry them between pages. Use Copy itinerary if needed.",
+      );
+    }
+    const restoreBirds = () => {
+      try {
+        const birds = readNzBirdBasket(window.sessionStorage);
+        setInput((current) => ({ ...current, birdIds: birds }));
+      } catch {}
+    };
+    const selectBase = (event: Event) => {
+      const base = (event as CustomEvent).detail;
+      if (typeof base === "string" && tripAreaById.has(base))
+        setInput((current) => ({ ...current, areaId: base }));
+    };
+    window.addEventListener(NZ_BIRD_BASKET_EVENT, restoreBirds);
+    window.addEventListener("aves:trip-base", selectBase);
+    return () => {
+      window.removeEventListener(NZ_BIRD_BASKET_EVENT, restoreBirds);
+      window.removeEventListener("aves:trip-base", selectBase);
+    };
+  }, []);
+  function chooseBirds(ids: string[]) {
+    setInput((current) => ({ ...current, birdIds: ids }));
+    try {
+      if (!writeNzBirdBasket(window.sessionStorage, ids))
+        setNotice(
+          "Bird choices are in this page only. Copy the itinerary before leaving.",
+        );
+    } catch {
+      setNotice(
+        "Copy the itinerary before leaving; browser storage is unavailable.",
+      );
+    }
   }
-  function toggleIdea(place:TripPlace){const next=ideas.includes(place.id)?ideas.filter(x=>x!==place.id):[...ideas,place.id];setIdeas(next);try{if(!writeNzPlaceIdeas(window.sessionStorage,next))throw Error();window.dispatchEvent(new Event(NZ_PLACE_IDEAS_EVENT));setNotice("Place ideas updated in this tab. Import and save them in your private brief.")}catch{setNotice("Place ideas are in this page only. Copy their names before leaving.")}}
-  const dirty=Boolean(draft&&JSON.stringify(input)!==JSON.stringify(draft.input))
-  function carry(){if(!draft||dirty)return;try{if(!writeTripDraft(window.sessionStorage,draft))throw Error();if(!writeNzBirdBasket(window.sessionStorage,draft.input.birdIds))throw Error();window.location.assign("/account?country=new-zealand&region=south-island")}catch{setNotice("This browser could not carry the itinerary. Copy it below and paste it into your private brief’s notes.")}}
-  async function copy(){if(!draft)return;try{await navigator.clipboard.writeText(tripDraftText(draft));setNotice("Itinerary copied. Paste it into your private brief’s notes, review, then save.")}catch{setNotice("Select the itinerary text below and copy it manually.")}}
-  const coverage=draft?tripCoverage(draft):null
-  const results=tripPlaces.filter(p=>(input.areaId==="all"||p.base===input.areaId)&&(category==="all"||p.categories.includes(category as TripCategory))&&(claim==="all"||claim==="eco"&&p.eco||p.tags.includes(claim))&&`${p.name} ${p.description}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()))
-  const activeBases=draft?draft.days.filter((d,i)=>i===0||d.baseId!==draft.days[i-1].baseId).map(d=>d.baseId):[]
-  const budget=draft?tripAllowanceSummary(draft):null
-  const money=(n:number)=>new Intl.NumberFormat("en",{style:"currency",currency:draft?.input.currency||input.currency,maximumFractionDigits:2}).format(n)
-  return <section id="trip-planner" aria-labelledby={`${id}-heading`} className="scroll-mt-28 bg-emerald-50/50 py-10 sm:py-16">
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <p className="text-sm font-medium uppercase tracking-widest text-emerald-700">Make room for the whole trip</p>
-      <h2 id={`${id}-heading`} className="mt-3 text-3xl font-medium tracking-tight text-emerald-950 sm:text-4xl">Your birds. Your days. Your South Island.</h2>
-      <p className="mt-4 max-w-3xl leading-7 text-gray-600">Choose your birds and trip length, then shape a day by day draft with stays, local food, markets, walks, hot pools and experiences. {tripPlaces.length} source-linked places and experiences across {tripAreas.length} planning bases. B Corp certification is optional.</p>
-      <div className="mt-7 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,.6fr)]">
-        <div className="min-w-0 space-y-5 rounded-3xl border border-emerald-200 bg-white p-5 sm:p-7">
-          <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_8rem]">
-            <label className="text-sm font-medium" htmlFor={`${id}-area`}>Plan around<select id={`${id}-area`} value={input.areaId} onChange={e=>{setInput(current=>({...current,areaId:e.target.value}));setLimit(12)}} className={`${field} mt-2`}><option value="all">South Island · suggest bases for my birds</option>{tripAreas.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></label>
-            <label className="text-sm font-medium" htmlFor={`${id}-days`}>Number of days<input id={`${id}-days`} className={`${field} mt-2`} type="number" min={1} max={30} step={1} value={input.days||""} onChange={e=>setInput(current=>({...current,days:Number(e.target.value)}))}/></label>
+  function generate() {
+    try {
+      const choices = buildSouthIslandPlans(input);
+      setAlternatives(choices);
+      setDraft(choices[0].draft);
+      setNotice(
+        `${choices.length} distinct draft${choices.length === 1 ? "" : "s"} ready below. Compare them, then adjust outings and stays.`,
+      );
+      output.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      setNotice(
+        error instanceof Error ? error.message : "Review your choices.",
+      );
+    }
+  }
+  function changeDay(index: number, patch: Partial<TripDay>) {
+    if (!draft) return;
+    const next = {
+      ...draft,
+      days: draft.days.map((day, i) =>
+        i === index ? { ...day, ...patch } : day,
+      ),
+    };
+    setDraft(next);
+    setAlternatives((current) =>
+      current.map((option) =>
+        option.id === next.style ? { ...option, draft: next } : option,
+      ),
+    );
+    setNotice(
+      "Itinerary updated on this page. Carry it to your private brief when ready.",
+    );
+  }
+  const dirty = Boolean(
+    draft && JSON.stringify(input) !== JSON.stringify(draft.input),
+  );
+  function carry() {
+    if (!draft || dirty) return;
+    try {
+      if (!writeTripDraft(window.sessionStorage, draft)) throw Error();
+      if (!writeNzBirdBasket(window.sessionStorage, draft.input.birdIds))
+        throw Error();
+      window.location.assign(
+        "/account?country=new-zealand&region=south-island",
+      );
+    } catch {
+      setNotice(
+        "This browser could not carry the itinerary. Copy it below and paste it into your private brief’s notes.",
+      );
+    }
+  }
+  async function copy() {
+    if (!draft) return;
+    try {
+      await navigator.clipboard.writeText(tripDraftText(draft));
+      setNotice(
+        "Itinerary copied. Paste it into your private brief’s notes, review, then save.",
+      );
+    } catch {
+      setNotice("Select the itinerary text below and copy it manually.");
+    }
+  }
+  const coverage = draft ? tripCoverage(draft) : null;
+  const activeBases = draft
+    ? draft.days
+        .filter((d, i) => i === 0 || d.baseId !== draft.days[i - 1].baseId)
+        .map((d) => d.baseId)
+    : [];
+  return (
+    <section
+      id="trip-planner"
+      aria-labelledby={`${id}-heading`}
+      className="scroll-mt-28 bg-emerald-50/50 py-10 sm:py-16"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="text-sm font-medium uppercase tracking-widest text-emerald-700">
+          Make room for the whole trip
+        </p>
+        <h2
+          id={`${id}-heading`}
+          className="mt-3 text-3xl font-medium tracking-tight text-emerald-950 sm:text-4xl"
+        >
+          Your birds. Your days. Your South Island.
+        </h2>
+        <p className="mt-4 max-w-3xl leading-7 text-gray-600">
+          Choose your birds and trip length, then shape a day by day draft with
+          stays, local food, markets, walks, hot pools and experiences.{" "}
+          {tripPlaces.length} source-linked places and experiences across{" "}
+          {tripAreas.length} planning bases. B Corp certification is optional.
+        </p>
+        <div className="mt-7 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,.6fr)]">
+          <div className="min-w-0 space-y-5 rounded-3xl border border-emerald-200 bg-white p-5 sm:p-7">
+            <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_8rem]">
+              <label className="text-sm font-medium" htmlFor={`${id}-area`}>
+                Plan around
+                <select
+                  id={`${id}-area`}
+                  value={input.areaId}
+                  onChange={(e) => {
+                    setInput((current) => ({
+                      ...current,
+                      areaId: e.target.value,
+                    }));
+                  }}
+                  className={`${field} mt-2`}
+                >
+                  <option value="all">
+                    South Island · suggest bases for my birds
+                  </option>
+                  {tripAreas.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {a.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-sm font-medium" htmlFor={`${id}-days`}>
+                Number of days
+                <input
+                  id={`${id}-days`}
+                  className={`${field} mt-2`}
+                  type="number"
+                  min={1}
+                  max={30}
+                  step={1}
+                  value={input.days || ""}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      days: Number(e.target.value),
+                    }))
+                  }
+                />
+              </label>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="text-sm font-medium" htmlFor={`${id}-start`}>
+                Starting city / town
+                <select
+                  id={`${id}-start`}
+                  className={`${field} mt-2`}
+                  value={input.startCity}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      startCity: e.target.value,
+                    }))
+                  }
+                >
+                  <option value="flexible">Open to suggestions</option>
+                  {tripGateways.map((g) => (
+                    <option key={g.id} value={g.id}>
+                      {g.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-sm font-medium" htmlFor={`${id}-finish`}>
+                Departure city / town
+                <select
+                  id={`${id}-finish`}
+                  className={`${field} mt-2`}
+                  value={input.endCity}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      endCity: e.target.value,
+                    }))
+                  }
+                >
+                  <option value="flexible">Open to suggestions</option>
+                  {tripGateways.map((g) => (
+                    <option key={g.id} value={g.id}>
+                      {g.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label
+              className="block text-sm font-medium"
+              htmlFor={`${id}-departure`}
+            >
+              Departure / final day (optional)
+              <input
+                id={`${id}-departure`}
+                type="date"
+                className={`${field} mt-2`}
+                value={input.departureDate}
+                onChange={(e) => {
+                  if (e.target.validity.badInput) return;
+                  const departureDate = e.target.value;
+                  setInput((current) => ({ ...current, departureDate }));
+                }}
+              />
+            </label>
+            {input.departureDate && validTripInput(input) && (
+              <p className="text-sm text-emerald-800">
+                First day: {tripDayDate(input, 0)} · Last day:{" "}
+                {input.departureDate}. Add flight and check-in times in your
+                private brief.
+              </p>
+            )}
+            <details className="rounded-2xl border border-emerald-100 p-4">
+              <summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">
+                Your daily allowances · {input.currency}
+              </summary>
+              <p className="mt-2 text-xs leading-6 text-gray-600">
+                Per person. Accommodation is per night; food and transport per
+                day. Leave any amount open. These are your allowances, not
+                checked room or activity prices.
+              </p>
+              <label className="mt-3 block text-sm" htmlFor={`${id}-currency`}>
+                Currency
+                <select
+                  id={`${id}-currency`}
+                  className={`${field} mt-1`}
+                  value={input.currency}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      currency: e.target.value as TripPlannerInput["currency"],
+                    }))
+                  }
+                >
+                  {tripCurrencies.map((c) => (
+                    <option key={c}>{c}</option>
+                  ))}
+                </select>
+              </label>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {allowanceCategories.map((c) => (
+                  <label
+                    key={c.id}
+                    className="text-sm"
+                    htmlFor={`${id}-allowance-${c.id}`}
+                  >
+                    {c.label} allowance ({input.currency})
+                    <input
+                      id={`${id}-allowance-${c.id}`}
+                      type="number"
+                      min={0}
+                      max={10000}
+                      step={1}
+                      className={`${field} mt-1`}
+                      placeholder="Open"
+                      value={input.allowances[c.id] ?? ""}
+                      onChange={(e) =>
+                        setInput((current) => {
+                          const allowances = { ...current.allowances };
+                          if (e.target.value === "") delete allowances[c.id];
+                          else allowances[c.id] = Number(e.target.value);
+                          return { ...current, allowances };
+                        })
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+              <label
+                className="mt-3 block text-sm"
+                htmlFor={`${id}-activity-basis`}
+              >
+                Activities allowance is
+                <select
+                  id={`${id}-activity-basis`}
+                  className={`${field} mt-1`}
+                  value={input.activityBasis}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      activityBasis: e.target.value as "day" | "experience",
+                    }))
+                  }
+                >
+                  <option value="day">Per day, across all activities</option>
+                  <option value="experience">Per planned experience</option>
+                </select>
+              </label>
+              <p className="mt-2 text-xs leading-6 text-gray-600">
+                Changing currency keeps the numbers; it does not convert them.
+                Per-experience allowances reserve for each planned outing,
+                including walks that may have no entry charge. Check actual
+                prices separately.
+              </p>
+            </details>
+            <details className="rounded-2xl border border-emerald-100 p-4">
+              <summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">
+                Your bird choices · {input.birdIds.length}
+              </summary>
+              <div className="mt-3">
+                <NewZealandBirdPicker
+                  selected={input.birdIds}
+                  onChange={chooseBirds}
+                />
+              </div>
+            </details>
+            <fieldset>
+              <legend className="text-sm font-semibold text-emerald-950">
+                What else belongs in your trip?
+              </legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {tripCategories
+                  .filter(
+                    (c) => !["birding", "stays", "transport"].includes(c.id),
+                  )
+                  .map((c) => (
+                    <label
+                      key={c.id}
+                      className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-emerald-200 px-3 text-sm"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={input.interests.includes(c.id)}
+                        onChange={(e) =>
+                          setInput((current) => ({
+                            ...current,
+                            interests: e.target.checked
+                              ? [...current.interests, c.id]
+                              : current.interests.filter((x) => x !== c.id),
+                          }))
+                        }
+                      />
+                      {c.label}
+                    </label>
+                  ))}
+              </div>
+            </fieldset>
+            <label className="flex min-h-11 items-start gap-2 text-sm leading-6">
+              <input
+                className="mt-1.5"
+                type="checkbox"
+                checked={input.includeManaged}
+                onChange={(e) =>
+                  setInput((current) => ({
+                    ...current,
+                    includeManaged: e.target.checked,
+                  }))
+                }
+              />
+              Include sanctuary and managed conservation encounters, labelled
+              separately from wild outings
+            </label>
+            <button
+              type="button"
+              className={`${button} bg-emerald-800 text-white hover:bg-emerald-900`}
+              disabled={!validTripInput(input)}
+              onClick={generate}
+            >
+              {draft ? "Update my suggestions" : "Suggest my itineraries"}
+            </button>
+            <p className="text-xs leading-6 text-gray-600">
+              A planning draft built from documented bird/site links, not live
+              sightings. Transfers get their own day. Road times, within-base
+              travel, track access, season, prices and availability need
+              checking. Longer outings may replace that day’s birding.
+            </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="text-sm font-medium" htmlFor={`${id}-start`}>Starting city / town<select id={`${id}-start`} className={`${field} mt-2`} value={input.startCity} onChange={e=>setInput(current=>({...current,startCity:e.target.value}))}><option value="flexible">Open to suggestions</option>{tripGateways.map(g=><option key={g.id} value={g.id}>{g.name}</option>)}</select></label>
-            <label className="text-sm font-medium" htmlFor={`${id}-finish`}>Departure city / town<select id={`${id}-finish`} className={`${field} mt-2`} value={input.endCity} onChange={e=>setInput(current=>({...current,endCity:e.target.value}))}><option value="flexible">Open to suggestions</option>{tripGateways.map(g=><option key={g.id} value={g.id}>{g.name}</option>)}</select></label>
-          </div>
-          <label className="block text-sm font-medium" htmlFor={`${id}-departure`}>Departure / final day (optional)<input id={`${id}-departure`} type="date" className={`${field} mt-2`} value={input.departureDate} onChange={e=>{if(e.target.validity.badInput)return;const departureDate=e.target.value;setInput(current=>({...current,departureDate}))}}/></label>
-          {input.departureDate&&validTripInput(input)&&<p className="text-sm text-emerald-800">First day: {tripDayDate(input,0)} · Last day: {input.departureDate}. Add flight and check-in times in your private brief.</p>}
-          <details className="rounded-2xl border border-emerald-100 p-4"><summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">Your daily allowances · {input.currency}</summary><p className="mt-2 text-xs leading-6 text-gray-600">Per person. Accommodation is per night; food and transport per day. Leave any amount open. These are your allowances, not checked room or activity prices.</p>
-            <label className="mt-3 block text-sm" htmlFor={`${id}-currency`}>Currency<select id={`${id}-currency`} className={`${field} mt-1`} value={input.currency} onChange={e=>setInput(current=>({...current,currency:e.target.value as TripPlannerInput["currency"]}))}>{tripCurrencies.map(c=><option key={c}>{c}</option>)}</select></label>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">{allowanceCategories.map(c=><label key={c.id} className="text-sm" htmlFor={`${id}-allowance-${c.id}`}>{c.label} allowance ({input.currency})<input id={`${id}-allowance-${c.id}`} type="number" min={0} max={10000} step={1} className={`${field} mt-1`} placeholder="Open" value={input.allowances[c.id]??""} onChange={e=>setInput(current=>{const allowances={...current.allowances};if(e.target.value==="")delete allowances[c.id];else allowances[c.id]=Number(e.target.value);return {...current,allowances}})}/></label>)}</div>
-            <label className="mt-3 block text-sm" htmlFor={`${id}-activity-basis`}>Activities allowance is<select id={`${id}-activity-basis`} className={`${field} mt-1`} value={input.activityBasis} onChange={e=>setInput(current=>({...current,activityBasis:e.target.value as "day"|"experience"}))}><option value="day">Per day, across all activities</option><option value="experience">Per planned experience</option></select></label>
-            <p className="mt-2 text-xs leading-6 text-gray-600">Changing currency keeps the numbers; it does not convert them. Per-experience allowances reserve for each planned outing, including walks that may have no entry charge. Check actual prices separately.</p>
-          </details>
-          <details className="rounded-2xl border border-emerald-100 p-4"><summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">Your bird choices · {input.birdIds.length}</summary><div className="mt-3"><NewZealandBirdPicker selected={input.birdIds} onChange={chooseBirds}/></div></details>
-          <fieldset><legend className="text-sm font-semibold text-emerald-950">What else belongs in your trip?</legend><div className="mt-2 flex flex-wrap gap-2">{tripCategories.filter(c=>!["birding","stays","transport"].includes(c.id)).map(c=><label key={c.id} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-emerald-200 px-3 text-sm"><input type="checkbox" checked={input.interests.includes(c.id)} onChange={e=>setInput(current=>({...current,interests:e.target.checked?[...current.interests,c.id]:current.interests.filter(x=>x!==c.id)}))}/>{c.label}</label>)}</div></fieldset>
-          <label className="flex min-h-11 items-start gap-2 text-sm leading-6"><input className="mt-1.5" type="checkbox" checked={input.includeManaged} onChange={e=>setInput(current=>({...current,includeManaged:e.target.checked}))}/>Include sanctuary and managed conservation encounters, labelled separately from wild outings</label>
-          <button type="button" className={`${button} bg-emerald-800 text-white hover:bg-emerald-900`} disabled={!validTripInput(input)} onClick={generate}>{draft?"Update my suggestions":"Suggest my itineraries"}</button>
-          <p className="text-xs leading-6 text-gray-600">A planning draft built from documented bird/site links, not live sightings. Transfers get their own day. Road times, within-base travel, track access, season, prices and availability need checking. Longer outings may replace that day’s birding.</p>
+          <TripBaseMap
+            areaId={input.areaId}
+            activeBases={activeBases}
+            onSelect={(areaId) =>
+              setInput((current) => ({ ...current, areaId }))
+            }
+          />
         </div>
-        <div className="min-w-0 rounded-3xl border border-emerald-200 bg-white p-4">
-          <h3 className="font-semibold text-emerald-950">Choose a planning base</h3><p className="mt-2 text-xs leading-6 text-gray-600">Markers represent broad areas, not property entrances. Route lines show the order of bases, not roads.</p>
-          <svg viewBox="0 0 480 640" role="group" aria-label="South Island planning bases" className="mx-auto block max-h-[29rem] w-full"><path d={geography.outline} fill="#ecf4ed" stroke="#9bb8a7"/>{activeBases.length>1&&<polyline points={activeBases.map(base=>{const a=tripAreaById.get(base)!,p=ecosystemMapPoint(a.longitude,a.latitude,geography.bbox);return `${p.x},${p.y}`}).join(" ")} fill="none" stroke="#0369a1" strokeDasharray="7 5" strokeWidth="3"/>}{tripAreas.map((a,i)=>{const p=ecosystemMapPoint(a.longitude,a.latitude,geography.bbox),selected=input.areaId===a.id||activeBases.includes(a.id);return <g key={a.id} role="button" tabIndex={0} aria-label={`Plan around ${a.name}`} aria-pressed={input.areaId===a.id} onClick={()=>setInput(current=>({...current,areaId:a.id}))} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setInput(current=>({...current,areaId:a.id}))}}} className="cursor-pointer outline-none [&:focus-visible>circle]:stroke-blue-700"><circle cx={p.x} cy={p.y} r="21" fill={selected?"#065f46":"white"} stroke="#047857" strokeWidth="2"/><text x={p.x} y={p.y+5} textAnchor="middle" fontSize="14" fontWeight="600" fill={selected?"white":"#065f46"} pointerEvents="none">{i+1}</text><title>{a.name}: {placesAt(a.id).length} references</title></g>})}</svg>
-          <div className="grid grid-cols-2 gap-1 text-xs">{tripAreas.map((a,i)=><button type="button" key={a.id} className="min-h-11 rounded-lg px-2 text-left text-emerald-900 hover:bg-emerald-50" onClick={()=>setInput(current=>({...current,areaId:a.id}))}>{i+1}. {a.name}</button>)}</div>
-          <p className="mt-2 text-[10px] leading-5 text-gray-600">Outline: <a className="underline" href={geography.source.coastlineUrl} {...external}>Natural Earth (public domain)</a>. Area reference sources are linked with the accommodation searches below. © OpenStreetMap contributors where used; <a href="https://www.openstreetmap.org/copyright" {...external} className="underline">ODbL</a>.</p>
+        <p role="status" className="mt-5 text-sm leading-6 text-emerald-900">
+          {notice}
+        </p>
+        <div ref={output} className="scroll-mt-28">
+          {draft && (
+            <div className="mt-8 space-y-5">
+              {alternatives.length > 0 && (
+                <div
+                  aria-label="Compare itinerary suggestions"
+                  className="grid gap-3 md:grid-cols-3"
+                >
+                  {alternatives.map((option) => {
+                    const c = tripCoverage(option.draft);
+                    return (
+                      <button
+                        key={option.id}
+                        type="button"
+                        aria-pressed={draft.style === option.id}
+                        disabled={dirty}
+                        className="min-h-24 rounded-2xl border border-emerald-200 bg-white p-4 text-left text-emerald-950 aria-pressed:border-emerald-800 aria-pressed:bg-emerald-100 disabled:opacity-50"
+                        onClick={() => {
+                          setDraft(option.draft);
+                          setNotice(
+                            "Suggestion selected. Daily changes apply to this draft.",
+                          );
+                        }}
+                      >
+                        <span className="block font-semibold">
+                          {option.label}
+                        </span>
+                        <span className="mt-2 block text-xs leading-6">
+                          {new Set(option.draft.days.map((d) => d.baseId)).size}{" "}
+                          bases ·{" "}
+                          {
+                            option.draft.days.filter((d) => d.transferFrom)
+                              .length
+                          }{" "}
+                          transfer days · {c.covered.length}/
+                          {option.draft.input.birdIds.length} bird wishes linked
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {alternatives.length === 1 && (
+                <p className="text-sm text-gray-600">
+                  One distinct route fits this set of choices. More days, a
+                  wider area or different interests may produce more
+                  alternatives.
+                </p>
+              )}
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h3 className="text-2xl font-medium text-emerald-950">
+                    Your {draft.input.days} day draft
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600">
+                    {draft.input.days - 1} overnight
+                    {draft.input.days === 2 ? "" : "s"} ·{" "}
+                    {activeBases
+                      .map((id) => tripAreaById.get(id)?.name)
+                      .join(" → ")}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className={button}
+                  disabled={dirty}
+                  onClick={carry}
+                >
+                  Review and save in My Trips
+                </button>
+              </div>
+              <p className="text-sm leading-6 text-emerald-900">
+                Start:{" "}
+                {gatewayById.get(draft.input.startCity)?.name ||
+                  "Open to suggestions"}{" "}
+                · Finish:{" "}
+                {gatewayById.get(draft.input.endCity)?.name ||
+                  "Open to suggestions"}
+                {draft.input.departureDate
+                  ? ` · Depart ${draft.input.departureDate}`
+                  : ""}
+                .
+              </p>
+              <TripAllowanceSummary draft={draft} />
+              {dirty && (
+                <p
+                  role="alert"
+                  className="rounded-xl bg-amber-50 p-4 text-sm text-amber-950"
+                >
+                  Your choices changed. Rebuild before carrying this itinerary
+                  to your private brief.
+                </p>
+              )}
+              <p className="text-sm leading-6 text-emerald-900">
+                {coverage!.covered.length} of {draft.input.birdIds.length} bird
+                wishes linked to scheduled, sourced opportunities. This is
+                coverage of your choices, not the chance of a sighting.
+              </p>
+              {coverage!.unmatched.length > 0 && (
+                <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                  <h4 className="font-semibold text-amber-950">
+                    Still needs a suitable site or more days
+                  </h4>
+                  <p className="mt-2 text-sm leading-6">
+                    {coverage!.unmatched.map(nzBirdName).join(", ")}. These
+                    birds have no scheduled sourced stop in this draft. They may
+                    need another region, season, guide or more catalogue
+                    research.
+                  </p>
+                </div>
+              )}
+              <div className="grid items-start gap-4 xl:grid-cols-2">
+                {draft.days.map((_, index) => (
+                  <TripDayCard
+                    key={index}
+                    id={id}
+                    draft={draft}
+                    index={index}
+                    onChange={(patch) => changeDay(index, patch)}
+                  />
+                ))}
+              </div>
+              <details className="rounded-2xl border border-emerald-200 bg-white p-4">
+                <summary className="min-h-11 cursor-pointer font-medium text-emerald-900">
+                  Copy or review the complete itinerary text
+                </summary>
+                <textarea
+                  aria-label="Itinerary text to copy"
+                  readOnly
+                  value={tripDraftText(draft)}
+                  rows={10}
+                  className={`${field} mt-3 font-mono text-xs`}
+                />
+                <button
+                  type="button"
+                  className={`${button} mt-3`}
+                  onClick={copy}
+                >
+                  Copy itinerary
+                </button>
+              </details>
+              <p className="text-xs leading-6 text-gray-600">
+                Your choices, date and allowances use this tab for up to one
+                day; they are not sent to booking platforms. In My Trips, choose
+                Add Itinerary to Notes, review and Save My Draft. Saving and
+                sharing are separate steps. This does not book travel.
+              </p>
+            </div>
+          )}
         </div>
+        <TripCatalogue key={input.areaId} areaId={input.areaId} />
       </div>
-      <p role="status" className="mt-5 text-sm leading-6 text-emerald-900">{notice}</p>
-      <div ref={output} className="scroll-mt-28">
-        {draft&&<div className="mt-8 space-y-5">
-          {alternatives.length>0&&<div aria-label="Compare itinerary suggestions" className="grid gap-3 md:grid-cols-3">{alternatives.map(option=>{const c=tripCoverage(option.draft);return <button key={option.id} type="button" aria-pressed={draft.style===option.id} disabled={dirty} className="min-h-24 rounded-2xl border border-emerald-200 bg-white p-4 text-left text-emerald-950 aria-pressed:border-emerald-800 aria-pressed:bg-emerald-100 disabled:opacity-50" onClick={()=>{setDraft(option.draft);setNotice("Suggestion selected. Daily changes apply to this draft.")}}><span className="block font-semibold">{option.label}</span><span className="mt-2 block text-xs leading-6">{new Set(option.draft.days.map(d=>d.baseId)).size} bases · {option.draft.days.filter(d=>d.transferFrom).length} transfer days · {c.covered.length}/{option.draft.input.birdIds.length} bird wishes linked</span></button>})}</div>}
-          {alternatives.length===1&&<p className="text-sm text-gray-600">One distinct route fits this set of choices. More days, a wider area or different interests may produce more alternatives.</p>}
-          <div className="flex flex-wrap items-start justify-between gap-4"><div><h3 className="text-2xl font-medium text-emerald-950">Your {draft.input.days} day draft</h3><p className="mt-2 text-sm text-gray-600">{draft.input.days-1} overnight{draft.input.days===2?"":"s"} · {activeBases.map(id=>tripAreaById.get(id)?.name).join(" → ")}</p></div><button type="button" className={button} disabled={dirty} onClick={carry}>Review and save in My Trips</button></div>
-          <p className="text-sm leading-6 text-emerald-900">Start: {gatewayById.get(draft.input.startCity)?.name||"Open to suggestions"} · Finish: {gatewayById.get(draft.input.endCity)?.name||"Open to suggestions"}{draft.input.departureDate?` · Depart ${draft.input.departureDate}`:""}.</p>
-          {budget&&budget.rows.length>0&&<div className="rounded-2xl border border-emerald-200 bg-white p-5"><h4 className="font-semibold text-emerald-950">Your allowance envelope · {money(budget.total)} per person</h4><div className="mt-3 overflow-x-auto"><table className="w-full text-left text-sm"><caption className="sr-only">User-entered category allowances, not verified travel prices</caption><thead><tr><th className="p-2">Category</th><th className="p-2">Allowance</th><th className="p-2">Units</th><th className="p-2">Subtotal</th></tr></thead><tbody>{budget.rows.map(r=><tr key={r.id}><th className="p-2 font-medium">{r.label}</th><td className="p-2">{money(r.amount)}</td><td className="p-2">{r.units} {r.id==="accommodation"?"nights":r.id==="activities"&&draft.input.activityBasis==="experience"?"outings":"days"}</td><td className="p-2">{money(r.total)}</td></tr>)}</tbody></table></div><p className="mt-3 text-xs leading-6 text-gray-600">{budget.complete?"All four category allowances are entered.":"This total includes entered categories only; other costs remain open."} This is a spending envelope, not a priced proposal. Accommodation, meals, activity charges, transport and connections have not been checked against live prices.</p></div>}
-          {dirty&&<p role="alert" className="rounded-xl bg-amber-50 p-4 text-sm text-amber-950">Your choices changed. Rebuild before carrying this itinerary to your private brief.</p>}
-          <p className="text-sm leading-6 text-emerald-900">{coverage!.covered.length} of {draft.input.birdIds.length} bird wishes linked to scheduled, sourced opportunities. This is coverage of your choices, not the chance of a sighting.</p>
-          {coverage!.unmatched.length>0&&<div className="rounded-2xl border border-amber-200 bg-amber-50 p-4"><h4 className="font-semibold text-amber-950">Still needs a suitable site or more days</h4><p className="mt-2 text-sm leading-6">{coverage!.unmatched.map(nzBirdName).join(", ")}. These birds have no scheduled sourced stop in this draft. They may need another region, season, guide or more catalogue research.</p></div>}
-          <div className="grid items-start gap-4 xl:grid-cols-2">{draft.days.map((day,index)=>{
-            const base=tripAreaById.get(day.baseId)!, local=placesAt(day.baseId),stop=tripPlaceById.get(day.birdingId),extra=tripPlaceById.get(day.extraId),stay=tripPlaceById.get(day.stayId)
-            const birdStops=local.filter(p=>p.categories.includes("birding")&&(draft.input.includeManaged||p.encounter==="wild"))
-            return <article key={index} aria-label={`Itinerary day ${index+1}`} className="min-w-0 space-y-3 rounded-2xl border border-emerald-200 bg-white p-5">
-              <h4 className="text-lg font-semibold text-emerald-950">Day {index+1} · {base.name}{tripDayDate(draft.input,index)?` · ${tripDayDate(draft.input,index)}`:""}</h4>
-              {day.transferFrom?<><p className="text-sm leading-6">Transfer from {tripAreaById.get(day.transferFrom)?.name}. Keep this day for travel, breaks and checking in.</p><a className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline" href={tripTransferUrl(draft,index)} {...external}>Check this transfer in Google Maps<span className="sr-only"> (opens in a new tab)</span></a></>:index===draft.days.length-1&&draft.input.endCity!=="flexible"?<p className="text-sm leading-6">Departure day in {gatewayById.get(draft.input.endCity)?.name}. Keep time for local travel and your departure arrangements; flight, ferry and check-in times must be checked separately.</p>:<>
-                <label className="block text-sm font-medium" htmlFor={`${id}-bird-${index}`}>Birding or nature outing<select className={`${field} mt-1`} id={`${id}-bird-${index}`} value={day.birdingId} onChange={e=>changeDay(index,{birdingId:e.target.value,extraId:day.extraId===e.target.value?"":day.extraId})}><option value="">Leave open / local research day</option>{birdStops.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select></label>
-                {stop&&<div className="text-sm leading-6"><p>{stop.description}</p><p className="mt-1 font-medium text-emerald-800">{stop.encounter!=="wild"?"Conservation encounter · ":""}{stop.birdIds.filter(id=>draft.input.birdIds.includes(id)).map(nzBirdName).join(", ")||"Documented local bird opportunities"}</p>{stop.access&&<p className="mt-1 text-xs text-gray-600">{stop.access}</p>}<SourceLink place={stop}/></div>}
-                <label className="block text-sm font-medium" htmlFor={`${id}-extra-${index}`}>Food, market or optional alternative<select className={`${field} mt-1`} id={`${id}-extra-${index}`} value={day.extraId} onChange={e=>changeDay(index,{extraId:e.target.value})}><option value="">Keep time free</option>{local.filter(p=>!p.categories.includes("stays")&&!p.categories.includes("birding")).map(p=><option key={p.id} value={p.id} disabled={!marketFitsDay(p,draft.input,index)}>{p.name}{p.categories.includes("markets")&&!marketFitsDay(p,draft.input,index)?" · needs a matching date":""}</option>)}</select></label>
-                {extra&&<div className="text-sm leading-6"><p>{extra.description}</p>{extra.when&&<p className="mt-1 text-xs font-medium text-amber-900">Date dependent: {extra.when}</p>}{extra.access&&<p className="mt-1 text-xs text-gray-600">{extra.access}</p>}{extra.categories.some(c=>["adventures","ecotourism","hikes"].includes(c))&&<p className="mt-1 text-xs text-gray-600">Consider this instead of the main outing if travel or activity time requires a full day.</p>}<SourceLink place={extra}/></div>}
-              </>}
-              {index<draft.days.length-1?<><label className="block text-sm font-medium" htmlFor={`${id}-stay-${index}`}>Stay after day {index+1}<select className={`${field} mt-1`} id={`${id}-stay-${index}`} value={day.stayId} onChange={e=>changeDay(index,{stayId:e.target.value})}><option value="">Choose accommodation later</option><option value={`airbnb:${base.id}`}>Airbnb home near {base.name} · listing to choose</option>{local.filter(p=>p.categories.includes("stays")).map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select></label>{stay&&<div className="text-sm leading-6"><p>{stay.description}</p>{stay.eco&&<p className="mt-1 text-xs text-emerald-900">Operator evidence: {stay.eco.note}</p>}<SourceLink place={stay}/></div>}<a href={airbnbAreaUrl(base.id)} {...external} className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline">Find Airbnb homes near this base<span className="sr-only"> (opens in a new tab)</span></a><p className="text-xs leading-5 text-gray-600">A location search, not a reviewed listing or eco filter. Choose a property and add its link in your private brief. Check exact location, total cost, host claims and availability.</p></>:<p className="text-sm text-gray-600">Final day · no overnight included.</p>}
-            </article>
-          })}</div>
-          <details className="rounded-2xl border border-emerald-200 bg-white p-4"><summary className="min-h-11 cursor-pointer font-medium text-emerald-900">Copy or review the complete itinerary text</summary><textarea aria-label="Itinerary text to copy" readOnly value={tripDraftText(draft)} rows={10} className={`${field} mt-3 font-mono text-xs`}/><button type="button" className={`${button} mt-3`} onClick={copy}>Copy itinerary</button></details>
-          <p className="text-xs leading-6 text-gray-600">Your choices, date and allowances use this tab for up to one day; they are not sent to booking platforms. In My Trips, choose Add Itinerary to Notes, review and Save My Draft. Saving and sharing are separate steps. This does not book travel.</p>
-        </div>}
-      </div>
-      <section className="mt-12" aria-labelledby={`${id}-browse`}>
-        <h3 id={`${id}-browse`} className="text-2xl font-medium text-emerald-950">Build in the things you enjoy</h3>
-        <p className="mt-3 text-sm leading-6 text-gray-600">Browse all categories, save individual ideas, or choose them in your daily draft. Organic and farm to table tags describe sourced operator statements, not a blanket certification.</p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3"><label className="text-sm" htmlFor={`${id}-search`}>Find a place<input className={`${field} mt-1`} id={`${id}-search`} type="search" value={query} onChange={e=>{setQuery(e.target.value);setLimit(12)}} placeholder="Name or experience"/></label><label className="text-sm" htmlFor={`${id}-category`}>Category<select id={`${id}-category`} className={`${field} mt-1`} value={category} onChange={e=>{setCategory(e.target.value);setLimit(12)}}><option value="all">All categories</option>{tripCategories.map(c=><option key={c.id} value={c.id}>{c.label}</option>)}</select></label><label className="text-sm" htmlFor={`${id}-evidence`}>Food & eco evidence<select className={`${field} mt-1`} id={`${id}-evidence`} value={claim} onChange={e=>{setClaim(e.target.value);setLimit(12)}}><option value="all">All reviewed references</option><option value="eco">Published operator evidence</option><option value="organic-ingredients">Organic ingredient statements</option><option value="farm-to-table">Farm / garden to table statements</option><option value="local-produce">Local produce</option><option value="natural-thermal">Natural thermal pools</option></select></label></div>
-        <p role="status" className="mt-4 text-sm text-gray-600">{results.length} references in this view{input.areaId!=="all"?` · ${tripAreaById.get(input.areaId)?.name}`:""}.</p>
-        <div className="mt-4 grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">{results.slice(0,limit).map(place=><article key={place.id} aria-label={place.name} className="min-w-0 rounded-2xl border border-emerald-200 bg-white p-5"><p className="text-xs font-medium text-emerald-700">{tripAreaById.get(place.base)?.name} · {place.categories.map(categoryName).join(" · ")}</p><h4 className="mt-2 text-lg font-semibold text-emerald-950">{place.name}</h4><p className="mt-3 text-sm leading-6 text-gray-600">{place.description}</p>{place.eco&&<details className="mt-3 text-xs leading-6 text-emerald-900"><summary className="min-h-11 cursor-pointer font-semibold">Operator evidence & scope</summary>{place.eco.note}</details>}{place.when&&<p className="mt-3 text-xs leading-6 text-amber-900">{place.when}</p>}{place.access&&<details className="mt-2 text-xs leading-6 text-gray-600"><summary className="min-h-11 cursor-pointer font-semibold">Access & planning</summary>{place.access}</details>}<p className="mt-2 text-[11px] text-gray-500">Source reviewed {place.checkedAt}. Check current access and arrangements.</p><SourceLink place={place}/><div><button type="button" className={button} aria-pressed={ideas.includes(place.id)} onClick={()=>toggleIdea(place)}>{ideas.includes(place.id)?"Remove place idea":"Add place idea"}<span className="sr-only">: {place.name}</span></button></div></article>)}</div>
-        {results.length===0&&<p className="mt-5 text-sm text-gray-600">No reviewed matches here yet. Change the category, evidence filter or planning base.</p>}
-        {results.length>limit&&<button type="button" className={`${button} mt-5`} onClick={()=>setLimit(n=>n+12)}>Show more places and experiences</button>}
-        <details className="mt-6 rounded-2xl border border-emerald-200 bg-white p-4"><summary className="min-h-11 cursor-pointer font-semibold text-emerald-950">Airbnb searches & area reference sources</summary><p className="mt-3 text-xs leading-6 text-gray-600">These are public area searches. AVES has not checked individual homes, host eco claims, prices or availability. Broad bases can span long drives; verify exact locations before choosing.</p><div className="mt-3 grid gap-3 sm:grid-cols-2">{tripAreas.filter(a=>input.areaId==="all"||a.id===input.areaId).map(a=><div key={a.id} className="rounded-xl border border-emerald-100 p-3"><a href={airbnbAreaUrl(a.id)} {...external} className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline">Airbnb homes · {a.name}<span className="sr-only"> (opens in a new tab)</span></a><br/><a href={a.sourceUrl} {...external} className="inline-flex min-h-11 items-center text-xs text-gray-600 underline">Area map reference<span className="sr-only"> (opens in a new tab)</span></a></div>)}</div></details>
-      </section>
-    </div>
-  </section>
+    </section>
+  );
 }

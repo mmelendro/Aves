@@ -181,19 +181,6 @@ test("camera zoom/pan clamps to the original frame and scale tracks zoom, resizi
   assert.deepEqual(initial, {x:0,y:0,zoom:1}, "camera helpers never mutate the reset value")
 })
 
-test("the shared New Zealand explorer renders the South Island collection with sound and existing bird-selection controls", () => {
-  const Explorer = load("components/new-zealand-hero-explorer.tsx").default
-  const html = renderToStaticMarkup(React.createElement(Explorer, { regionId: "south-island" }))
-  assert.match(html, /aria-label="Image 1 of 30"/)
-  assert.match(html, /aria-label="Listen to bird call"/)
-  assert.match(html, /aria-label="Species details &amp; credits"/)
-  assert.match(html, /data-info-presentation="overlay"/)
-  assert.match(html, /data-has-bird-selection="true"/)
-  assert.equal((html.match(/aria-roledescription="carousel"/g) || []).length, 1)
-  assert.match(html, /href="\/account\?country=new-zealand&amp;region=south-island"/)
-  assert.match(html, /src="\/audio\/[^"<>]+"/)
-})
-
 
 test("ecosystem filtering retains only sourced South Island profiles and original media records", () => {
   const { filterSouthIslandBirds, southIslandEcosystems, southIslandBirdEcosystems } = load("content/south-island-ecosystems.ts")

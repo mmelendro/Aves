@@ -1,0 +1,56 @@
+# AVES editing and source map
+
+One Next.js application serves World, Colombia, Australia, New Zealand and the shared account. The current release and rollback belong in CONTINUE-HERE.md. An old route redirect is a compatibility boundary for existing visitors and callbacks, not a second implementation. Do not remove working redirects merely because their paths are old.
+
+## Public navigation
+
+The visitor hierarchy is World → Country → Region → useful tools. `/site-map` and `/sitemap.xml` reuse the public inventories. Section anchors appear in the human tree, never as extra XML pages. Account, admin, auth and APIs stay outside the public discovery inventory.
+
+| Edit | Source |
+| --- | --- |
+| Country names and overview URLs | `content/destinations.ts` |
+| Regions, islands and their existing guide URLs | `content/destination-regions.ts` |
+| Global/Colombia/NZ public pages, section links and explicit country ownership | `lib/public-pages.ts` |
+| Australian public pages | `features/australia/lib/public-pages.ts` |
+| Combine inventories and prefix Australian paths once | `lib/public-navigation.ts` |
+| Build the human hierarchy | `lib/destination-site-tree.ts` |
+| Render native expandable branches | `components/destination-site-tree.tsx` |
+
+Group ownership is explicit metadata. Renaming an editorial group cannot move its pages into Colombia accidentally. The South Island branch links directly to its map, itinerary planner, landscapes, resources and responsible travel guidance. Unpublished island guides retain working overview anchors.
+
+## UI and data boundaries
+
+| Responsibility | Source |
+| --- | --- |
+| Shared country/region explorer | `components/destination-explorer-page.tsx`, `components/homepage-destination-explorer.tsx` |
+| South Island input state, alternatives and explicit handoff | `components/south-island-trip-planner.tsx` |
+| Broad base map and schematic route | `components/trip-planner/trip-base-map.tsx` |
+| One editable day | `components/trip-planner/trip-day-card.tsx` |
+| Entered allowance totals | `components/trip-planner/trip-allowance-summary.tsx` |
+| Reference finder, filters and public place basket | `components/trip-planner/trip-catalogue.tsx` |
+| Shared planner controls and source links | `components/trip-planner/presentation.tsx` |
+| Route generation, validation, dates, budget arithmetic and session draft format | `lib/south-island-trip-planner.ts` |
+| Sourced places, access limits and scoped operator claims | `content/south-island-trip-catalogue.json` |
+| NZ species names, stable IDs and checklist provenance | `content/new-zealand-checklist.ts`, `content/new-zealand-checklist.json` |
+| Shared private editor | `components/account/trip-plan-editor.tsx` |
+| Authenticated handlers and ownership checks | `app/api/`, `lib/account-*`, `lib/supabase/` |
+
+Country-specific presentation belongs in its feature folder. Shared checklist/media/account logic belongs at the root. Do not copy shared modules into a country folder. The planner remains one client boundary with small directly imported children. No new dependency, analytics call, public preference URL or database schema is needed for this structure.
+
+## Scientific and environmental editing
+
+Use primary sources for taxonomy, distribution, conservation status, habitats and access. Keep the publisher, source URL, scope and review date with the record. A checklist entry is not proof of occurrence in a selected region. A park-level source is not a sighting or nest location. Managed populations, sanctuary encounters and wild opportunities remain distinct. Keep unknown or unmatched wishes visible.
+
+Never convert opportunity coverage into sighting probability. Do not silently equate national threat status with global IUCN status. Review taxonomic changes against the stated checklist edition and preserve ID/media mappings deliberately. Photographs and audio require species identification, rights and attribution. Automated structural checks support editorial review; they cannot certify every biological statement.
+
+Environmental evidence remains separate from certification: organic ingredients do not certify a menu, an operator's published environmental practice does not certify a property, and a company's B Corp status does not automatically cover every listed entity. The B Lab ESC reference supports measured impacts, biodiversity risk review and transparent supplier evidence: https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/ . No invented environmental score or compliance claim.
+
+The 11 November source spot check reconfirmed DOC's Devils Punchbowl guidance: 400+ steps, Wardens Creek flood risk, named forest birds and kea. This does not certify all 48 catalogue references or all country content anew. Prices, routes and sightings retain their existing limits. The original Eco-Tourism Business Plan was not available for a financial review.
+
+## Maintenance checks
+
+Run `corepack pnpm check:architecture`, `typecheck`, `test`, then `build`. The read-only source audit starts at native Next entry points and resolves local imports with the project's TypeScript settings, including runtime `.mjs` pairs. It reports unreachable application modules and never deletes anything. Computed runtime imports need explicit review. Content/provenance JSON, SQL, tests, media and historical release evidence are not garbage just because a runtime import graph cannot reach them.
+
+TypeScript rejects unused variables, parameters and imports. Comments explain module responsibilities and non-obvious constraints; obvious JSX does not need a comment on each line. Delete an unused implementation and its obsolete tests together. Keep tests for the active journey and useful domain behavior. Do not remove live source/licence records or private data during code cleanup.
+
+Historical documentation remains evidence. Use this guide, README and CONTINUE-HERE for current structure. Keep deployment identifiers out of reusable UI/content modules. Test the actual hosted candidate before assigning both production domains.

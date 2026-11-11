@@ -16,7 +16,7 @@ export default function DestinationSiteTree({tree,initialCountry}:{tree:SiteTree
   return <li key={node.id}>
    <details open={node.id==="world"||node.id===initialCountry} data-site-tree-branch={node.id}>
     <summary className={styles.summary}><ChevronRight size={17} className={styles.chevron} aria-hidden="true"/>{node.id==="world"&&<Globe2 size={20} aria-hidden="true"/>}<span className={styles.name}>{node.label}</span>{node.hint&&<span className={styles.hint}>{node.hint}</span>}</summary>
-    {node.href&&<Link prefetch={false} href={node.href} className={`${styles.link} ${styles.overview}`}>{node.id==="world" ? "World · All Destinations" : `${node.label} Home`}</Link>}
+    {node.href&&<Link prefetch={false} href={node.href} className={`${styles.link} ${styles.overview}`}>{node.id==="world" ? "World · All Destinations" : depth>1 ? `${node.label} guide` : `${node.label} Home`}</Link>}
     <ul className={styles.children} data-depth={depth+1}>{node.children.map(child=>branch(child,depth+1))}</ul>
    </details>
   </li>
