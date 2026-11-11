@@ -1,0 +1,21 @@
+{
+  "creator": "AVES",
+  "checkedAt": "2026-11-11",
+  "kind": "editorial-planning-areas",
+  "limitations": "Approximate AVES planning areas, authored in geographic coordinates and clipped to the generalised country outline. Areas may overlap or leave gaps. Not official boundaries, exact landforms, species ranges, current habitat or access permissions. Corridor widths are display choices in degrees, not ecological buffer distances.",
+  "contextSource": "https://colombia.travel/en/your-essential-guide-bird-watching-and-bird-sites-colombia",
+  "contextSourceRole": "Supports the broad travel-region descriptions only. It does not supply these authored polygons.",
+  "areas": [
+    {"id":"pacific","name":"Pacific Coast & Chocó","outline":[[-79.2,1],[-77.3,1],[-77.05,2.4],[-76.8,3.4],[-76.7,4.5],[-76.4,5.4],[-76.3,6.4],[-76.6,7.2],[-77,8.4],[-79.2,8.4]]},
+    {"id":"western-andes","name":"Western Andes","corridor":[[-77.35,1.3],[-76.95,2.6],[-76.6,3.5],[-76.35,4.3],[-76.15,5.2],[-76.1,6.2],[-76.1,7.4]],"widthDegrees":0.28},
+    {"id":"central-andes","name":"Central Andes","corridor":[[-76.55,1.9],[-76.15,2.9],[-75.6,4],[-75.37,4.8],[-75.3,5.5],[-75.1,6.6]],"widthDegrees":0.28},
+    {"id":"eastern-andes","name":"Eastern Andes","corridor":[[-75.9,1.5],[-75.6,2.5],[-74.5,3.5],[-73.8,4.7],[-73,5.7],[-72.9,6.5],[-72.7,7.5],[-72.6,8.4]],"widthDegrees":0.4},
+    {"id":"cauca-valley","name":"Cauca Valley","corridor":[[-76.6,2.6],[-76.5,3.45],[-76.3,3.9],[-75.95,4.7],[-75.75,5.2]],"widthDegrees":0.17},
+    {"id":"magdalena-valley","name":"Magdalena Valley","corridor":[[-75.55,2.5],[-75.2,3.4],[-74.8,4.2],[-74.5,5.2],[-74.7,6.5],[-74.4,8],[-74.8,9.2]],"widthDegrees":0.25},
+    {"id":"caribbean","name":"Caribbean","outline":[[-77.5,8.2],[-76.4,8],[-75.2,8.4],[-74.3,8.6],[-73,9.2],[-71,10.7],[-71,12.6],[-77.5,12.6]]},
+    {"id":"sierra-nevada-de-santa-marta","name":"Sierra Nevada de Santa Marta","outline":[[-74.25,10.45],[-74,11.25],[-73.4,11.3],[-72.65,10.7],[-73.2,10.05],[-73.9,10.1]]},
+    {"id":"llanos","name":"Llanos","outline":[[-75,2],[-73.7,3],[-72.8,5],[-72,6.5],[-72.3,7],[-67,7],[-67,2],[-69,2],[-72,2.1]]},
+    {"id":"amazonia","name":"Amazonia","outline":[[-76,1.3],[-75.4,2],[-73,2.5],[-66,2.5],[-66,-4.5],[-79,-4.5],[-77,0]]},
+    {"id":"colombian-massif","name":"Colombian Massif","outline":[[-77.4,1],[-77.5,2.2],[-76.6,3],[-75.8,2.8],[-75.8,1.4],[-76.3,0.8]]}
+  ]
+}
