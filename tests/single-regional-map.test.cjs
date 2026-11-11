@@ -19,6 +19,8 @@ test('regional templates delegate to one explorer and the planner cannot mount a
  assert.equal((source('app/new-zealand/south-island/page.tsx').match(/<DestinationExplorerPage\b/g)||[]).length,1);
  assert.doesNotMatch(source('components/south-island-trip-planner.tsx'),/<svg|TripBaseMap|<iframe/);
  assert.equal(existsSync('components/trip-planner/trip-base-map.tsx'),false);
+ const map=source('components/south-island-ecosystem-map.tsx');
+ assert.ok(map.indexOf('<TripRouteOverlay />')>map.indexOf('<PublicPlaceOverlay unit='),'route numbers paint above clickable public markers');
  assert.equal((source('components/homepage-destination-explorer.tsx').match(/<SouthIslandEcosystemMap\b/g)||[]).length,1);
 });
 test('itinerary overlay retains order and ignores unknown geography without capturing map gestures',()=>{

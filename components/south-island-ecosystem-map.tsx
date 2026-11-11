@@ -160,8 +160,8 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
             <circle cx={point.x} cy={point.y} r={(selected ? 8 : 5) * unit} fill={selected ? "#065f46" : "#fff"} stroke={selected ? "white" : "#065f46"} strokeWidth="2" vectorEffect="non-scaling-stroke" />
           </g>
         })}
-        <TripRouteOverlay />
         <PublicPlaceOverlay unit={1 / (camera.zoom * Math.max(svgPixelsPerUnit,.25))} />
+        <TripRouteOverlay />
         </g>
         <g aria-hidden="true" fill="#065f46"><text x="38" y="55" textAnchor="middle" fontSize="15" fontWeight="600">N</text><path d="M38 64L32 82L38 78L44 82Z" /></g>
       </svg>
