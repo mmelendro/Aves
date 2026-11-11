@@ -26,9 +26,9 @@ Use docs/ARCHITECTURE.md as the current route/component/data map. One Next.js se
 
 The existing unsent synthetic QA draft retained its itinerary/date/allowances/Airbnb choice and original notes in the prior release's real owner save/reopen/review check. This cleanup did not change private data. Preserve all existing plans. No final enquiry, email, booking or payment was sent. Do not print account identifiers or customer plan contents in public evidence.
 
-## Next work
+## Active priorities
 
-Season/access constraints; expanded dated prices/availability, food/transport costs and actual budget matching; broader reviewed catalogue coverage; physical Safari/touch; independent guest/provider and owner proposal/email acceptance within the approved synthetic scope. AVES-062 remains partial for automatic in-page road times and other countries.
+The 11 November reassessment makes both North and South Island planning the next product objective. docs/AGILE-PLAN.md is the single active queue; CONTINUE-HERE.md defines the next bounded increment, NZ-01. Shared island context and safe draft handling come first, followed promptly by a sourced North Island corridor. Further South Island detail no longer blocks North Island usefulness. This documentation reassessment does not change the live runtime or make North Island planning available yet.
 
 ## Old project retirement
 

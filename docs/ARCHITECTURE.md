@@ -56,3 +56,7 @@ Run `corepack pnpm check:architecture`, `typecheck`, `test`, then `build`. The r
 TypeScript rejects unused variables, parameters and imports. Comments explain module responsibilities and non-obvious constraints; obvious JSX does not need a comment on each line. Delete an unused implementation and its obsolete tests together. Keep tests for the active journey and useful domain behavior. Do not remove live source/licence records or private data during code cleanup.
 
 Historical documentation remains evidence. Use this guide, README and CONTINUE-HERE for current structure. Keep deployment identifiers out of reusable UI/content modules. Test the actual hosted candidate before assigning both production domains.
+
+## Planned two-island extension
+
+This is a target boundary, not implemented functionality. The active sequence is NZ-01 onward in AGILE-PLAN.md. Extract an explicit island configuration for data, gateways, references and labels, reusing the existing planner children and private editor. Carry island identity through validation, draft storage, copied notes and account intent; preserve legacy South Island drafts and stable IDs. Do not add a second copied planner, infer North Island opportunities from the national checklist or build a general plugin framework. Add the North Island public route and inventories together only when its researched pilot is usable. The existing newZealandRegionHref fallback remains correct until then.

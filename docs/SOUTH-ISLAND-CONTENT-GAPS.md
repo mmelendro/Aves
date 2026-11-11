@@ -1,5 +1,7 @@
 # South Island content-gap inventory — B2, 9 November 2026
 
+Historical inventory. Active priorities and execution authority now live in AGILE-PLAN.md and ../CONTINUE-HERE.md. The old B2/B3 pause, model recommendations and South-Island-first sequencing below describe their original checkpoint, not current instructions.
+
 Completed source review; documentation only. No website deployment or new route. Recommended model for this bounded inventory: Luna low; actual selected app model not independently observable. B1 live private-brief verification is complete. Next proposed implementation: B3 practical guidance, Sol medium; pause until selected.
 
 ## Business direction
