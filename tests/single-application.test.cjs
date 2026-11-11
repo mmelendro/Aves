@@ -17,7 +17,9 @@ test('the human directory and XML sitemap contain the exact same unique public p
  assert.equal(new Set(paths).size,paths.length)
  assert.deepEqual([...paths].sort(),[...publicNavigationPaths].sort())
  for(const path of paths)assert.doesNotMatch(path,/\/(?:api|auth|admin|account)(?:\/|$)/)
- assert.match(read('app/site-map/page.tsx'),/publicNavigationGroups as publicPageGroups/)
+ const collect=node=>[...(node.href&&!node.href.includes('#')?[node.href]:[]),...(node.children??[]).flatMap(collect)]
+ const treePaths=collect(load('lib/destination-site-tree.ts').destinationSiteTree)
+ assert.deepEqual([...treePaths].sort(),[...publicNavigationPaths].sort())
 })
 test('Australian route context resolves the regional bird before client selection exists',()=>{
  const {brandContext}=loader()('lib/brand-context.ts')
