@@ -134,3 +134,17 @@ visual acceptance is pending. Map geometry, habitats, scale and overlays remain.
 Next selected item is saved places (AVES-063), but it requires the existing private
 brief storage audit and safe candidate save/reopen before release. Prioritise the
 accumulated candidate browser gates before adding another account-linked feature.
+
+## Third sprint: photo spacing and place-note pilot
+
+PR #21 fixes the short-screen photograph toolbar. Exact hosted340x234 zoom/focus
+retest passed without target overlap. PR #22 adds public tab-only place ideas;
+176 tests, TypeScript and full build pass, plus hosted add/remove/reload checks.
+Private counterpart PR #23 explicitly imports ideas into existing notes, without
+silent edits or automatic save.307 checks, TypeScript and full build pass, including
+actual editor handlers with mocked failed/successful save and reopen. No live
+private save is claimed. Read ACCEPTANCE-2026-11-10-PHOTO-PLACE-IDEAS.md.
+
+Next: actual same-origin public/private handover and private candidate save/reopen.
+Do not start a second saved-place schema. Source/public preview acceptance does
+not complete hosted private acceptance or authorise production publishing.
