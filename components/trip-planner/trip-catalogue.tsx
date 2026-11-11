@@ -1,6 +1,6 @@
 "use client";
+import { useIslandPlanner } from "./island-planner-context";
 
-import { priceByPlace } from "@/lib/south-island-price-references";
 import TripPriceReference from "./trip-price-reference";
 
 import { useEffect, useId, useState } from "react";
@@ -9,20 +9,22 @@ import {
   writeNzPlaceIdeas,
   NZ_PLACE_IDEAS_EVENT,
 } from "@/lib/nz-place-ideas";
-import {
-  airbnbAreaUrl,
-  categoryName,
-  tripAreas,
-  tripAreaById,
-  tripCategories,
-  tripPlaces,
-  type TripCategory,
-  type TripPlace,
-} from "@/lib/south-island-trip-planner";
+import { type TripCategory, type TripPlace } from "@/lib/island-planning-types";
+
 import { button, external, field, SourceLink } from "./presentation";
 
 /** Browsing and place ideas are independent of generated route and private save state. */
 export default function TripCatalogue({ areaId }: { areaId: string }) {
+  const {
+    airbnbAreaUrl,
+    categoryName,
+    tripAreas,
+    tripAreaById,
+    tripCategories,
+    tripPlaces,
+    prices,
+  } = useIslandPlanner();
+  const { priceByPlace } = prices;
   const id = useId();
   const [category, setCategory] = useState("all"),
     [query, setQuery] = useState(""),

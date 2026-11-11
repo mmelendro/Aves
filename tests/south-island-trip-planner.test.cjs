@@ -199,20 +199,20 @@ test('the modular day editor limits transfer and fixed departure days while reta
  const draft=p.buildSouthIslandTrip(input({startCity:'christchurch',endCity:'queenstown',days:7}))
  const index=draft.days.findIndex(day=>day.transferFrom)
  let patch
- const h=componentHarness('components/trip-planner/trip-day-card.tsx','default',{id:'day-test',draft,index,onChange:value=>{patch=value}})
+ const h=componentHarness('components/trip-planner/trip-day-card.tsx','default',{id:'day-test',draft,index,onChange:value=>{patch=value}},{context:()=>p.southIslandPlanner})
  const tree=h.render(),selects=nodes(tree).filter(n=>n.type==='select')
  assert.equal(selects.length,1,'a transfer day edits its overnight, not an impossible extra outing')
  const stay=selects[0],value=`airbnb:${draft.days[index].baseId}`
  stay.props.onChange({target:{value}})
  assert.deepEqual(patch,{stayId:value})
  assert.ok(nodes(tree).some(n=>n.type==='a'&&n.props.href?.includes('google.com/maps/dir/')))
- const last=componentHarness('components/trip-planner/trip-day-card.tsx','default',{id:'day-test',draft,index:draft.days.length-1,onChange(){assert.fail('departure is unscheduled')}}).render()
+ const last=componentHarness('components/trip-planner/trip-day-card.tsx','default',{id:'day-test',draft,index:draft.days.length-1,onChange(){assert.fail('departure is unscheduled')}},{context:()=>p.southIslandPlanner}).render()
  assert.equal(nodes(last).filter(n=>n.type==='select').length,0)
 })
 test('the modular budget summary preserves per-person nights and explicit zero without inventing prices',()=>{
  const {componentHarness,nodes}=require('./helpers/component-harness.cjs')
  const draft=p.buildSouthIslandTrip(input({days:7,allowances:{accommodation:100,food:0}}))
- const tree=componentHarness('components/trip-planner/trip-allowance-summary.tsx','default',{draft}).render()
+ const tree=componentHarness('components/trip-planner/trip-allowance-summary.tsx','default',{draft},{context:()=>p.southIslandPlanner}).render()
  const text=JSON.stringify(tree)
  assert.match(text,/600/);assert.match(text,/nights/);assert.match(text,/other costs remain open/)
  assert.ok(nodes(tree).some(n=>n.type==='td'&&n.props.children==='NZ$0.00'))

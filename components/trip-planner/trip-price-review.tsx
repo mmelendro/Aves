@@ -1,11 +1,12 @@
-import {
-  priceReviewRows,
-  comparisonLabel,
-} from "@/lib/south-island-price-references";
+"use client";
+import { useIslandPlanner } from "./island-planner-context";
+
 import type { TripDraft } from "@/lib/south-island-trip-planner";
 
 /** Partial comparisons never turn a published starting rate into a priced trip. */
 export default function TripPriceReview({ draft }: { draft: TripDraft }) {
+  const { prices } = useIslandPlanner();
+  const { priceReviewRows, comparisonLabel } = prices;
   const result = priceReviewRows(draft),
     money = (n: number) =>
       new Intl.NumberFormat("en", {

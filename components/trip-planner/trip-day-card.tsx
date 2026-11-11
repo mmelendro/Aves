@@ -1,21 +1,8 @@
+"use client";
+import { useIslandPlanner } from "./island-planner-context";
 import TripPriceReference from "./trip-price-reference";
-import {
-  airbnbAreaUrl,
-  gatewayById,
-  marketFitsDay,
-  placesAt,
-  tripAreaById,
-  tripDayDate,
-  tripPlaceById,
-  tripTransferUrl,
-  tripTransferContext,
-  type TripDay,
-  type TripDraft,
-} from "@/lib/south-island-trip-planner";
-import {
-  roadReferenceData,
-  roadTimeLabel,
-} from "@/lib/south-island-road-references";
+import { type TripDay, type TripDraft } from "@/lib/island-planning-types";
+
 import { nzBirdName } from "@/content/new-zealand-checklist";
 import { external, field, SourceLink } from "./presentation";
 
@@ -31,6 +18,19 @@ export default function TripDayCard({
   index: number;
   onChange: (patch: Partial<TripDay>) => void;
 }) {
+  const {
+    airbnbAreaUrl,
+    gatewayById,
+    marketFitsDay,
+    placesAt,
+    tripAreaById,
+    tripDayDate,
+    tripPlaceById,
+    tripTransferUrl,
+    tripTransferContext,
+    roads,
+  } = useIslandPlanner();
+  const { roadReferenceData, roadTimeLabel } = roads;
   const day = draft.days[index];
   const journey = tripTransferContext(draft, index);
   const base = tripAreaById.get(day.baseId)!,

@@ -23,15 +23,15 @@ Group ownership is explicit metadata. Renaming an editorial group cannot move it
 | Responsibility | Source |
 | --- | --- |
 | Shared country/region explorer | `components/destination-explorer-page.tsx`, `components/homepage-destination-explorer.tsx` |
-| South Island input state, alternatives and explicit handoff | `components/south-island-trip-planner.tsx` |
+| Shared island input state, alternatives and explicit handoff | `components/island-trip-planner.tsx`, `components/trip-planner/island-planner-context.tsx`; South Island page compatibility wrapper retained |
 | Itinerary layer on the regional explorer | `components/trip-planner/trip-route-overlay.tsx`, `trip-map-context.tsx` |
 | One editable day | `components/trip-planner/trip-day-card.tsx` |
 | Entered allowance totals | `components/trip-planner/trip-allowance-summary.tsx` |
 | Reference finder, filters and public place basket | `components/trip-planner/trip-catalogue.tsx` |
 | Shared planner controls and source links | `components/trip-planner/presentation.tsx` |
-| Route generation, validation, dates, budget arithmetic and session draft format | `lib/south-island-trip-planner.ts` |
-| Product price units and partial comparisons | `content/south-island-price-references.json`, `lib/south-island-price-references.ts`, `components/trip-planner/trip-price-*` |
-| Published road references and lookup | `content/south-island-road-references.json`, `lib/south-island-road-references.ts` |
+| Route generation, validation, dates, budget arithmetic and session draft format | `lib/island-trip-planner.ts`, `lib/island-planning-types.ts`; stable South Island adapter retained |
+| Product price units and partial comparisons | `content/south-island-price-references.json`, `lib/island-price-references.ts`, `components/trip-planner/trip-price-*` |
+| Published road references and lookup | `content/south-island-road-references.json`, `lib/island-road-references.ts` |
 | Sourced places, access limits and scoped operator claims | `content/south-island-trip-catalogue.json` |
 | NZ species names, stable IDs and checklist provenance | `content/new-zealand-checklist.ts`, `content/new-zealand-checklist.json` |
 | Shared private editor | `components/account/trip-plan-editor.tsx` |
@@ -59,9 +59,9 @@ Historical documentation remains evidence. Use this guide, README and CONTINUE-H
 
 ## Planned two-island extension
 
-This is a target boundary, not implemented functionality. The active sequence is the numbered pathway in CONTINUE-HERE.md; the shared-island foundation is its step 3. Extract an explicit island configuration for data, gateways, references and labels, reusing the existing planner children and private editor. Carry island identity through validation, draft storage, copied notes and account intent; preserve legacy South Island drafts and stable IDs. Do not add a second copied planner, infer North Island opportunities from the national checklist or build a general plugin framework. Add the North Island public route and inventories together only when its researched pilot is usable. The existing newZealandRegionHref fallback remains correct until then.
+The shared foundation is implemented in candidate source, pending exact-SHA hosted acceptance. `content/new-zealand-planning-context.ts` provides explicit data/labels/gateways. `lib/island-trip-planner.ts` and shared road/price factories consume one context. `lib/island-planners.ts` registers only operational planners. The shared form and child displays use a required `IslandPlannerProvider`; the South Island wrapper preserves page imports. See SHARED-ISLAND-PLANNER-2026-11-12.md.
 
-NZ-01a implemented boundary: content/new-zealand-planning-context.ts owns South Island labels, gateways, catalogue, road/price data and private account URL. Existing South Island adapters consume it. New envelopes carry islandId; untagged historical envelopes remain South Island. Explicit foreign island envelopes/inputs are rejected without deleting their stored value. Route generation and the account importer still use the South Island adapter; per-island slots and generalized generation remain NZ-01b. Only South Island resolves through planningContext; no North Island runtime claim.
+Per-island keys and explicit generated identity isolate pending drafts. Untagged historical envelopes remain South Island only. The account editor offers labelled imports from the operational registry, respects explicit island intent, appends reviewed text and consumes only a server-confirmed exact import. No schema or private-record migration is needed. North Island is not yet registered; its guide and inventories must arrive with a usable researched pilot. No road between islands is inferred.
 
 ## One-map requirement
 
@@ -84,6 +84,6 @@ Planning regions: `GeographicPlanningLayer` owns only the optional Leaflet GeoJS
 
 Colombia protected areas: `GeographicProtectedAreas` owns an independent optional `protectedAreas` choice, a native area picker, source details and the shared Leaflet overlay. Its 109-area catalogue is lazy with Colombia controls; the geometry under `public/data/colombia-national-protected-areas.geojson` fetches only after enabling. Abort stale requests; retain completed data through toggles. `protectedAreasPane` sits above planning/habitat panes and below itinerary markers. Park selection changes only the map camera, leaving the bird/planning-region choice intact. Geometry and catalogue are CC BY-SA 4.0 adaptations with explicit attribution; no code-wide licence change is implied. `scripts/generate-colombia-protected-areas.py` requires the reviewed RUNAP ZIP hash, uses its PRJ through GDAL and validates each generalisation. Do not replace the archive coordinates with record-specific area-calculation WKIDs. Regional/private areas and CONSTRUCCION records remain out of scope. See COLOMBIA-PROTECTED-AREAS-2026-11-11.md.
 
-Australia protected areas: the lazy AustraliaProtectedAreas wrapper reuses ProtectedAreaExplorer, with 13 selected CAPAD 2024 NP/NPC records. National-park legal type and IUCN management category remain distinct source fields. The offline generator dissolves by PA_ID, retains islands/holes and checks area change. Its separate catalogue, source terms and omitted Daintree residual are documented in AUSTRALIA-PROTECTED-AREAS-2026-11-12.md. Colombia data/licence remain unchanged. MapViewer data-geographic controls intrinsic scrolling; short page headers/guide actions scroll below 480px height. Whole-site layer picker parity remains pending.
+Australia protected areas: the lazy AustraliaProtectedAreas wrapper reuses ProtectedAreaExplorer, with 13 selected CAPAD 2024 NP/NPC records. National-park legal type and IUCN management category remain distinct source fields. The offline generator dissolves by PA_ID, retains islands/holes and checks area change. Its separate catalogue, source terms and omitted Daintree residual are documented in AUSTRALIA-PROTECTED-AREAS-2026-11-12.md. Colombia data/licence remain unchanged. MapViewer data-geographic controls intrinsic scrolling; short page headers/guide actions scroll below 480px height. Shared layer picker treatment is delivered across maintained families; physical touch/Safari remains unverified.
 
 North Island/Rakiura parks: NewZealandProtectedAreas reuses ProtectedAreaExplorer only outside the South Island adapter. Four NaPALIS units use correctly reconstructed Esri ring orientation, not the service's invalid GeoJSON conversion. Keep stable unit IDs and current/raw source names. The generator preserves every island/hole and validates the rounded result. Data/terms/date scope and DOC visitor guides are in content/new-zealand-protected-areas.json; transformation evidence is NEW-ZEALAND-PARKS-2026-11-12.md. South Island’s existing separate data is unchanged.

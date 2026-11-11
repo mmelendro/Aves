@@ -1,7 +1,7 @@
 const {test}=require('node:test')
 const assert=require('node:assert/strict')
 const load=require('./helpers/load-ts.cjs')()
-const p=load('lib/south-island-trip-planner.ts'),r=load('lib/south-island-price-references.ts')
+const p=load('lib/south-island-trip-planner.ts'),r=p.southIslandPlanner.prices
 const now=Date.parse('2026-11-11T12:00:00Z')
 const input=overrides=>({...p.defaultTripInput,...overrides})
 test('published price records retain product, unit, currency, reviewed source and unknown inventory',()=>{
@@ -49,6 +49,6 @@ test('new adult/unit fields validate without discarding old tab drafts and survi
 
 test('a dated access conflict stays visible beside its selected reference',()=>{
  const {componentHarness,nodes}=require('./helpers/component-harness.cjs')
- const tree=componentHarness('components/trip-planner/trip-price-reference.tsx','default',{placeId:'trip-orokonui',date:'2027-01-19'}).render()
+ const tree=componentHarness('components/trip-planner/trip-price-reference.tsx','default',{placeId:'trip-orokonui',date:'2027-01-19'},{context:()=>p.southIslandPlanner}).render()
  assert.ok(nodes(tree).some(n=>n.type==='p'&&JSON.stringify(n).includes('Date does not match published opening days')))
 })

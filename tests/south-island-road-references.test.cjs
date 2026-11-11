@@ -2,7 +2,7 @@ const {test}=require('node:test')
 const assert=require('node:assert/strict')
 const load=require('./helpers/load-ts.cjs')()
 const p=load('lib/south-island-trip-planner.ts')
-const r=load('lib/south-island-road-references.ts')
+const r=p.southIslandPlanner.roads
 const {componentHarness,nodes}=require('./helpers/component-harness.cjs')
 const draft=overrides=>p.buildSouthIslandTrip({...p.defaultTripInput,days:2,startCity:'christchurch',endCity:'queenstown',...overrides})
 
@@ -51,7 +51,7 @@ test('mixed reviewed and unknown transfers remain explicit and copied notes reta
 })
 test('the day card exposes source and current-condition links, flags long references and never prices a trip',()=>{
  const d=draft()
- const tree=componentHarness('components/trip-planner/trip-day-card.tsx','default',{id:'road-qa',draft:d,index:1,onChange(){}}).render()
+ const tree=componentHarness('components/trip-planner/trip-day-card.tsx','default',{id:'road-qa',draft:d,index:1,onChange(){}},{context:()=>p.southIslandPlanner}).render()
  const text=JSON.stringify(tree)
  assert.match(text,/7 h 15 min/);assert.match(text,/Long driving reference/)
  assert.ok(nodes(tree).some(n=>n.type==='a'&&n.props.href===r.roadReferenceData.conditionsUrl))

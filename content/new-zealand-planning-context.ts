@@ -29,6 +29,9 @@ const gateways = [
 export const southIslandPlanning = {
   id: "south-island",
   name: "South Island",
+  mapAnchor: "#south-island-bird-map",
+  defaultBaseId: "arthurs-pass",
+  legacyUntagged: true,
   draftKey: "aves:south-island-itinerary:v1",
   accountHref: "/account?country=new-zealand&region=south-island",
   catalogue, roads, prices, gateways,

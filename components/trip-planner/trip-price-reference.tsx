@@ -1,7 +1,6 @@
-import {
-  priceByPlace,
-  priceDateIssue,
-} from "@/lib/south-island-price-references";
+"use client";
+import { useIslandPlanner } from "./island-planner-context";
+
 import { external } from "./presentation";
 
 /** Shows the named product and original unit before any budget arithmetic. */
@@ -12,6 +11,8 @@ export default function TripPriceReference({
   placeId: string;
   date?: string;
 }) {
+  const { prices } = useIslandPlanner();
+  const { priceByPlace, priceDateIssue } = prices;
   const ref = priceByPlace.get(placeId);
   if (!ref) return null;
   const unit =

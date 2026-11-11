@@ -1,10 +1,10 @@
-import {
-  tripAllowanceSummary,
-  type TripDraft,
-} from "@/lib/south-island-trip-planner";
+"use client";
+import { useIslandPlanner } from "./island-planner-context";
+import { type TripDraft } from "@/lib/island-planning-types";
 
 /** Shows entered allowances, never inferred room rates or affordability claims. */
 export default function TripAllowanceSummary({ draft }: { draft: TripDraft }) {
+  const { tripAllowanceSummary } = useIslandPlanner();
   const budget = tripAllowanceSummary(draft);
   if (!budget.rows.length) return null;
   const money = (n: number) =>
