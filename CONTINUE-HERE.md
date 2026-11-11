@@ -12,9 +12,9 @@ Already delivered: the shared map/bird guide, continuous 2D satellite navigation
 
 ## The pathway
 
-1. Add verified parks and reserves. NEXT. Start with Colombia, then Australia, then remaining New Zealand coverage. Deliver each country in a separate bounded release on the existing satellite map. Verify source, licence, date, geographic fit, omissions and access limits. A clearly labelled useful pilot is acceptable; fabricated completeness is not. References: MAP-04a/b/c.
+1. Add verified parks and reserves. Colombia pilot delivered: 109 national RUNAP records on the shared satellite map, with category/source details and explicit regional/private/provisional omissions. NEXT: Australia, then remaining New Zealand coverage. Deliver each country in a separate bounded release on the existing satellite map. Verify source, licence, date, geographic fit, omissions and access limits. A clearly labelled useful pilot is acceptable; fabricated completeness is not. References: MAP-04a/b/c.
 
-2. Unify map controls. Use one consistent layer picker, selection treatment, legend and source display across the maintained map families. Preserve camera, geography and bird choice through toggling, expansion and navigation. Distinguish display layers from bird filters. Load detail only when needed. Reference: MAP-05.
+2. Unify map controls. Include expanded-map scrolling at very short viewport heights. Use one consistent layer picker, selection treatment, legend and source display across the maintained map families. Preserve camera, geography and bird choice through toggling, expansion and navigation. Distinguish display layers from bird filters. Load detail only when needed. Reference: MAP-05.
 
 3. Finish the shared island planner. Keep the delivered island configuration; finish sharing route rules, road/price references, draft storage and account handoff. Preserve old drafts and keep each island's inputs and saved plans isolated. Do not copy the planner or infer a road between islands. Reference: NZ-01b.
 

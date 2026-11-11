@@ -1,6 +1,18 @@
 # AVES current handoff
 
-Runtime: 72833361432435f794c873f490d3bff44e19a6bc. Deployment: dpl_BRGYgKK45we79VMg8wv9z5Bw1bin, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: 7d56276d7b719e96b55cd0f7546d3ae2668345e9 / dpl_Hj89cqBWoQ4wZDkHmwWEMhZz3eLg. Branch: feature/field-guide-card.
+Runtime: a4661e63b0594fa6a4bea5cca177a2f3d854a3c3. Deployment: dpl_HFWoiGc5Zm2FqHTB6CYoiPcBHzmJ, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: 72833361432435f794c873f490d3bff44e19a6bc / dpl_BRGYgKK45we79VMg8wv9z5Bw1bin. Branch: feature/field-guide-card.
+
+## Colombia protected-area acceptance
+
+The independent National protected areas checkbox adds 109 national RUNAP records to the same geographic satellite map. Explore 109 areas provides a native picker, official category/record link, date, omissions, access limits, licence and data download. The snapshot is from 6 November 2026: 124 national records in the archive, with fifteen CONSTRUCCION records omitted; 109 retain INSCRITA/REGISTRADA status, including 43 national parks. Regional/private records remain out of scope. An omitted provisional record can still describe a legally protected place. This is not complete SINAP coverage. See COLOMBIA-PROTECTED-AREAS-2026-11-11.md for source/hash, transformation and CC BY-SA 4.0 evidence.
+
+All 572 tests, strict TypeScript, source audit (353 modules, zero unreachable), local 75-page build and exact-SHA hosted build passed. Generator validation checks source/output validity, retained holes/islands and at most 2% symmetric area change. Automated tests check all 109 record IDs/statuses, manifest/data integrity, geometry structure/bounds, label containment, URLs and known Tayrona/Los Nevados/Chingaza positions. Geometry fetches only on enable; no runtime GIS dependencies or external feature API.
+
+Candidate browser verified 109 protected polygons alongside eleven planning regions on one map; native Los Nevados selection, direct polygon click, Space activation, Escape/Close focus restoration, official record href and unchanged Central Andes bird/region choice. Off/on retained the selected-region choice, 10 km scale and exact 634.8125 px map height, with 0/109 protected controls. Australia/nine and New Zealand/three planning regions remain isolated from the Colombian layer. At 340 CSS px browser width the document remained 340 px, map 322.75 px and panel 306.75 px; this does not validate a full-height physical phone. Extremely short expanded viewports still need scroll/usability review under pathway step 2. Physical touch/Safari and every older hero entry were not individually tested.
+
+Canonical live proof: 109 protected polygons, eleven planning regions, one map, selected Los Nevados, Central Andes bird context and 21/21 loaded satellite tiles with no tile warning. Public URL: https://aves.bio/?explore=colombia&region=central-andes . Enable National protected areas, open Explore 109 areas, choose Los Nevados; park selection itself is page-local. Evidence: /workspace/shared/aves-colombia-national-protected-areas.png. Candidate testing encountered intermittent external imagery tile failures with the existing fallback message; final canonical proof loaded all visible tiles. Both domains point to dpl_HFWoiGc5Zm2FqHTB6CYoiPcBHzmJ. Deployment-scoped error/fatal scan, 2026-11-11 13:02:02–13:12:02 UTC, returned no matching logs. No private records, provider keys, spend, schema, access settings, mail or bookings changed.
+
+Earlier joined-boundary evidence below describes the preceding release; its runtime is now the rollback.
 
 ## Planning-region layer acceptance
 
@@ -16,7 +28,7 @@ Live evidence: /workspace/shared/aves-colombia-joined-regions.png, https://aves.
 
 The satellite foundation remains lazy-loaded Leaflet with EOX 2016 historical tiles, native zoom cap 14 and a background choice retained across routes/reloads in a tab. Overlay choices are page-local. Country/region camera moves finish without animation so expansion cannot interrupt them. 3D globe/elevation, current aerial imagery, complete bird ranges and whole-site layer parity remain unclaimed. See CONTINUOUS-SATELLITE-2026-11-11.md for the prior foundation evidence.
 
-Next: step 1 of CONTINUE-HERE.md, the only active numbered pathway: bounded protected-area releases for Colombia, Australia and remaining NZ coverage. Then shared controls, island-aware planning and the North Island pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
+Next: step 1 of CONTINUE-HERE.md, the only active numbered pathway: Colombia pilot delivered; bounded protected-area releases for Australia and remaining NZ coverage come next. Then shared controls, island-aware planning and the North Island pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
 
 ## Editing and privacy boundaries
 
