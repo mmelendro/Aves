@@ -1,9 +1,9 @@
 /** Eligibility is a display guard, never proof of certification or impact. */
 import pilot from "@/content/bcorp-south-island-pilot.json"
 export type BcorpPilotRecord = {
-  id: string; country: string; region: string
-  certification: { review: string; profileUrl: string; checkedAt: string }
-  location: { review: string; sourceUrl: string; checkedAt: string; coordinates: {latitude:number;longitude:number} | null; coordinateReview: string; coordinateSourceUrl: string | null }
+  id: string; name: string; company: string; category: string; country: string; region: string; limitations: string
+  certification: { review: string; profileUrl: string; checkedAt: string; scopeNote: string }
+  location: { review: string; address: string; precision: string; sourceUrl: string; checkedAt: string; coordinates: {latitude:number;longitude:number} | null; coordinateReview: string; coordinateSourceUrl: string | null }
 }
 function https(value: string | null) {
   try { return value !== null && new URL(value).protocol === "https:" } catch { return false }
@@ -28,5 +28,5 @@ export function bcorpPinEligible(record: BcorpPilotRecord, now=Date.now(), maxAg
     && Number.isFinite(point.longitude) && Math.abs(point.longitude)<=180
 }
 export function eligibleBcorpPilotPins(country: string, region: string, now=Date.now()) {
-  return (pilot.records as BcorpPilotRecord[]).filter(record=>record.country===country && record.region===region && bcorpPinEligible(record,now))
+  return pilot.accessReview.mapLayerEnabled ? (pilot.records as BcorpPilotRecord[]).filter(record=>record.country===country && record.region===region && bcorpPinEligible(record,now)) : []
 }

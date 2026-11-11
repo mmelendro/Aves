@@ -1,3 +1,6 @@
+import pilot from "@/content/bcorp-south-island-pilot.json"
+import { publicPlaces } from "@/lib/south-island-public-places"
+
 /** Public place IDs only. This tab basket is never a private-save receipt. */
 export const nzPlanningPlaces = [
   { id: "mountains", label: "Arthur’s Pass" },
@@ -5,7 +8,9 @@ export const nzPlanningPlaces = [
   { id: "southern-forest", label: "Fiordland" },
   { id: "coast", label: "Otago & the Catlins" },
 ] as const
-const names = new Map<string, string>(nzPlanningPlaces.map(place => [place.id, place.label]))
+export const nzPublicPlanningPlaces = [...nzPlanningPlaces, ...publicPlaces.points.map(({id,name})=>({id,label:name})), ...pilot.records.map(({id,name})=>({id,label:name}))]
+const names = new Map<string, string>(nzPublicPlanningPlaces.map(place => [place.id, place.label]))
+export const NZ_PLACE_IDEAS_EVENT = "aves:nz-place-ideas-changed"
 export const NZ_PLACE_IDEAS_KEY = "aves:nz-place-ideas:v1"
 const lifetime = 86400000
 export function validNzPlaceIdeas(ids: unknown): ids is string[] {

@@ -43,6 +43,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   const id = useId()
+  const detailsRef = useRef<HTMLDetailsElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const pointers = useRef(new Map<number, { x: number; y: number }>())
   const drag = useRef<{ points: { x: number; y: number }[]; camera: MapCamera; pixelsPerUnit: number } | null>(null)
@@ -75,7 +76,8 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   useEffect(() => {
     if (!focusedPoint) return
     setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(focusedPoint.longitude,focusedPoint.latitude,map.bbox)))
-  }, [focusedPoint])
+  }, [focusedPoint?.id, focusedPoint?.longitude, focusedPoint?.latitude])
+  useEffect(()=>{if(focusedPoint && detailsRef.current)detailsRef.current.open=true},[focusedPoint?.id])
   const scale = ecosystemMapScale(camera, map.bbox, svgPixelsPerUnit)
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
@@ -173,7 +175,8 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <SouthIslandMapLayers />
     </div>
     </div>
-    <details className={styles.mapDetails}>
+    {layers.bcorps && <p className="shrink-0 text-[10px] leading-4 text-emerald-900"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>}
+    <details ref={detailsRef} className={styles.mapDetails}>
       <summary>Places, habitats &amp; map details</summary>
       <div className={styles.detailsPanel}>
         <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>

@@ -7,7 +7,7 @@
  */
 
 import { useEffect, useId, useRef, useState } from "react"
-import { nzPlanningPlaces, readNzPlaceIdeas, mergeNzPlaceNotes, consumeSavedNzPlaceIdeas } from "@/lib/nz-place-ideas"
+import { nzPublicPlanningPlaces, readNzPlaceIdeas, mergeNzPlaceNotes, consumeSavedNzPlaceIdeas } from "@/lib/nz-place-ideas"
 import NewZealandBirdPicker from "@/components/new-zealand-bird-picker"
 import { consumeNzBirdBasket, readNzBirdBasket } from "@/lib/nz-bird-selection"
 import { BudgetQuestions } from "./budget-questions"
@@ -123,7 +123,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       {country === "new-zealand" && <section aria-labelledby={`${prefix}-birds`} className="space-y-4 rounded-xl border border-emerald-200 p-5"><h3 id={`${prefix}-birds`} className="font-medium text-emerald-950">Birds you would love to see (optional)</h3><p className="text-sm leading-6 text-gray-600">These choices join this private draft only when you save. Review the full checklist here, or bring choices from this browser tab. They are wishes, not guaranteed sightings or an itinerary.</p>{plan && incomingBirds.length > 0 && <button type="button" onClick={() => { setBirdIds(current => [...new Set([...current, ...incomingBirds])]); setIncomingBirds([]) }} className="min-h-11 rounded-md border border-emerald-300 px-4 text-sm font-medium text-emerald-900">Add {incomingBirds.length} bird choices from this tab</button>}<NewZealandBirdPicker selected={birdIds} onChange={setBirdIds} /></section>}
       {country === "new-zealand" && incomingPlaces.length > 0 && <section className="rounded-lg border border-emerald-200 bg-emerald-50 p-4" aria-label="Place ideas from this browser tab">
         <h3 className="font-medium text-emerald-950">Your place ideas</h3>
-        <p className="mt-2 text-sm">{nzPlanningPlaces.filter(place => incomingPlaces.includes(place.id)).map(place => place.label).join(", ")}</p>
+        <p className="mt-2 text-sm">{nzPublicPlanningPlaces.filter(place => incomingPlaces.includes(place.id)).map(place => place.label).join(", ")}</p>
         <button type="button" disabled={busy} className="mt-3 min-h-11 rounded-md border border-emerald-300 bg-white px-4 text-sm font-medium text-emerald-950" onClick={() => {
           const merged = mergeNzPlaceNotes(message, incomingPlaces)
           if (merged.error) { setPlaceNotice(merged.error); return }

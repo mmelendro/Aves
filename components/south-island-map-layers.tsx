@@ -4,7 +4,7 @@ import { useId, useRef, useState } from "react"
 import { SlidersHorizontal } from "lucide-react"
 import catalogue from "@/content/south-island-layer-catalogue.json"
 import { initialMapLayers, useMapLayers } from "./map-layer-context"
-import { publicPlaceCategories, publicPlaces, visiblePublicPlaces } from "@/lib/south-island-public-places"
+import { publicPlaceCategories, publicPlaces, reviewedPublicPlaces, visiblePublicPlaces } from "@/lib/south-island-public-places"
 
 /** A compact picker overlays the map instead of pushing it out of its frame.
  * Each choice closes the picker, revealing its effect. Native controls and a
@@ -38,9 +38,10 @@ export default function SouthIslandMapLayers() {
       </fieldset>
       {layers.nationalParks && <div className="mt-1"><label htmlFor={`${id}-park`} className="block font-medium text-emerald-950">Preview a national park</label><select id={`${id}-park`} className="mt-1 min-h-11 w-full min-w-0 rounded-lg border border-emerald-200 bg-white px-2" value={layers.park} onChange={event => { update({park:event.target.value,point:""}); close() }}><option value="">All national parks</option>{catalogue.parks.map(park => <option key={park.id} value={park.id}>{park.name}</option>)}</select></div>}
       <fieldset className="mt-2 border-t border-emerald-100 pt-2"><legend className="font-semibold text-emerald-950">Public places · curated pilot</legend>
-        {publicPlaceCategories.map(category => <label key={category.id} className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers[category.id]} onChange={event => { update({[category.id]:event.target.checked}); close() }}/><span className="h-2 w-2 shrink-0 rounded-full" style={{background:category.colour}} aria-hidden="true"/>{category.name} · {publicPlaces.points.filter(point => point.categories.includes(category.id)).length}</label>)}
+        {publicPlaceCategories.map(category => <label key={category.id} className="flex min-h-11 cursor-pointer items-center gap-2"><input type="checkbox" checked={layers[category.id]} onChange={event => { update({[category.id]:event.target.checked}); close() }}/><span className="h-2 w-2 shrink-0 rounded-full" style={{background:category.colour}} aria-hidden="true"/>{category.name} · {reviewedPublicPlaces().filter(point => point.categories.includes(category.id)).length}</label>)}
       </fieldset>
       {points.length>0 && <div className="mt-1"><label htmlFor={`${id}-place`} className="block font-medium text-emerald-950">Preview a public place</label><select id={`${id}-place`} className="mt-1 min-h-11 w-full min-w-0 rounded-lg border border-emerald-200 bg-white px-2" value={points.some(point=>point.id===layers.point) ? layers.point : ""} onChange={event => { update({point:event.target.value,park:""}); close() }}><option value="">Choose a place</option>{points.map(point => <option key={point.id} value={point.id}>{point.name}</option>)}</select></div>}
+      {layers.bcorps && <p className="mt-2 text-[11px] text-gray-600">B Corp pilot: accommodation and retail. Company certification, not a rating of each visit. Source dates and scope appear with each place.</p>}
       <p className="mt-2 text-[11px] text-gray-600">Map context, not bird-range filters or permission to enter. DOC land includes national parks; other privately conserved areas may be absent.</p>
       <p className="mt-1 text-[11px] text-gray-600">{publicPlaces.coverage}</p>
       <div className="mt-1 flex flex-wrap justify-between gap-1"><button type="button" className="min-h-11 rounded px-2 font-semibold text-emerald-800 underline" onClick={() => { update(initialMapLayers); close() }}>Reset map layers</button><button type="button" className="min-h-11 rounded px-2 font-semibold text-emerald-800 underline" onClick={close}>Close layers</button></div>

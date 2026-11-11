@@ -503,3 +503,19 @@ test("malformed private budgets fail before any account write", async () => {
     assert.equal(h.queries.length, 0)
   }
 })
+
+test('reviewed B Corp and landscape notes survive private save and frozen NZ enquiry without leaking into email',async()=>{
+ const {mergeNzPlaceNotes}=loader()('lib/nz-place-ideas.ts')
+ const message=mergeNzPlaceNotes('Keep my original ideas.',['mountains','lake-hawea-station']).message
+ const selectedDetails={...nzDetails,message}
+ const row={...planRow,details:selectedDetails}
+ const h=harness({results:[{data:row,error:null},{data:row,error:null}],rpcResult:{...quoteReceipt,plan_snapshot:{title,details:selectedDetails}}})
+ const created=await h.plansPost(request({id:planId,title,...selectedDetails}))
+ assert.equal(created.status,200);assert.equal((await created.json()).plan.message,message)
+ const submitted=await h.quotePost(request({expectedUpdatedAt:stamp,contactName:'Synthetic Guest'},quoteId),planId)
+ assert.equal(submitted.status,200);assert.equal((await submitted.json()).plan.message,message)
+ assert.doesNotMatch(h.notices.flat().join(' '),/Lake Hāwea|Arthur’s Pass|original ideas/)
+ const owner=harness({rpcResult:[{id:quoteId,plan_id:planId,status:'requested',plan_snapshot:{title,details:selectedDetails}}]})
+ const inbox=await owner.adminQuotesGet();assert.equal(inbox.status,200)
+ assert.equal((await inbox.json()).quotes[0].plan.message,message)
+})

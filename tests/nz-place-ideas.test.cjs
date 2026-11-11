@@ -40,3 +40,15 @@ test('copyable place notes contain only reviewed public labels in the merge form
  const copied=p.nzPlaceIdeaText(['mountains'])
  assert.equal(p.mergeNzPlaceNotes(copied,['mountains']).message,copied)
 })
+
+test('public place and B Corp ideas join landscapes without duplicates or certification promises',()=>{
+ const ids=['mountains','orokonui','lake-hawea-station','untouched-world-roydvale']
+ assert.equal(p.validNzPlaceIdeas(ids),true)
+ const note=p.mergeNzPlaceNotes('My own notes',ids)
+ assert.equal(note.error,undefined)
+ assert.match(note.message,/Place idea: Lake Hāwea Station/)
+ assert.match(note.message,/Place idea: Untouched World Roydvale store/)
+ assert.doesNotMatch(note.message,/certified|confirmed|booking/i)
+ assert.equal(p.mergeNzPlaceNotes(note.message,ids).message,note.message)
+ assert.equal(new Set(p.nzPublicPlanningPlaces.map(p=>p.id)).size,p.nzPublicPlanningPlaces.length)
+})

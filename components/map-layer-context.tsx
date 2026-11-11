@@ -2,8 +2,8 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 
-export type MapLayers = { background: "habitats" | "satellite"; overlayOpacity: number; nationalParks: boolean; conservation: boolean; park: string; nature: boolean; projects: boolean; heritage: boolean; towns: boolean; businesses: boolean; point: string }
-export const initialMapLayers: MapLayers = { background: "habitats", overlayOpacity: .45, nationalParks: false, conservation: false, park: "", nature: false, projects: false, heritage: false, towns: false, businesses: false, point: "" }
+export type MapLayers = { background: "habitats" | "satellite"; overlayOpacity: number; nationalParks: boolean; conservation: boolean; park: string; nature: boolean; projects: boolean; heritage: boolean; towns: boolean; businesses: boolean; bcorps: boolean; point: string }
+export const initialMapLayers: MapLayers = { background: "habitats", overlayOpacity: .45, nationalParks: false, conservation: false, park: "", nature: false, projects: false, heritage: false, towns: false, businesses: false, bcorps: false, point: "" }
 const Context = createContext<{ layers: MapLayers; update: (next: Partial<MapLayers>) => void } | null>(null)
 
 /** Public, page-local display choices. No location, account or trip data is sent. */

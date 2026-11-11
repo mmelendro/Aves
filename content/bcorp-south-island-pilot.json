@@ -1,10 +1,40 @@
 {
   "version": 1,
-  "coverage": "Manually reviewed first candidate; incomplete coverage, not a directory import or AVES supplier list.",
+  "coverage": "Three manually reviewed public locations from two Certified B Corp businesses. South Island pilot, not a complete directory or AVES supplier list.",
   "records": [
     {
+      "id": "lake-hawea-station",
+      "name": "Lake Hāwea Station",
+      "company": "Lake Hawea Station",
+      "country": "new-zealand",
+      "region": "south-island",
+      "category": "accommodation",
+      "certification": {
+        "review": "verified-profile",
+        "profileUrl": "https://www.bcorporation.net/en-us/find-a-b-corp/company/lake-hawea-station/",
+        "listedSince": "2023-11",
+        "checkedAt": "2026-11-11",
+        "scopeNote": "B Lab lists Lake Hawea Station under mixed farming. Company certification does not separately certify each stay or farm experience."
+      },
+      "location": {
+        "review": "verified-owner-page",
+        "address": "22 Timaru Creek Road, Lake Hāwea, New Zealand",
+        "sourceUrl": "https://www.lakehaweastation.com/contact",
+        "checkedAt": "2026-11-11",
+        "coordinates": {
+          "latitude": -44.599781,
+          "longitude": 169.3148702
+        },
+        "coordinateReview": "verified-public-location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/node/5691853167",
+        "precision": "Public contact address reference, not accommodation entrance"
+      },
+      "website": "https://www.lakehaweastation.com/",
+      "limitations": "Arrange visits with the operator. Tourism New Zealand lists accommodation at 62 Timaru Creek Road; this pin represents the operator’s published contact address at 22, not an arrival point. Company certification does not confirm availability or certify each experience. No AVES partnership."
+    },
+    {
       "id": "untouched-world-roydvale",
-      "name": "Untouched World — Roydvale store",
+      "name": "Untouched World Roydvale store",
       "company": "Untouched World",
       "country": "new-zealand",
       "region": "south-island",
@@ -13,28 +43,72 @@
         "review": "verified-profile",
         "profileUrl": "https://www.bcorporation.net/en-us/find-a-b-corp/company/untouched-world/",
         "listedSince": "2021-05",
-        "checkedAt": "2026-11-10",
+        "checkedAt": "2026-11-11",
         "scopeNote": "B Lab names Untouched World and lists apparel/manufacturing. This is company-profile evidence, not a separately certified outlet or cafe."
       },
       "location": {
         "review": "verified-owner-page",
         "address": "155 Roydvale Avenue, Burnside, Christchurch, New Zealand",
         "sourceUrl": "https://www.untouchedworld.com/en-int/pages/stores/christchurch-roydvale-avenue",
-        "checkedAt": "2026-11-10",
-        "coordinates": null,
-        "coordinateReview": "pending",
-        "coordinateSourceUrl": null
+        "checkedAt": "2026-11-11",
+        "coordinates": {
+          "latitude": -43.4913668,
+          "longitude": 172.5650389
+        },
+        "coordinateReview": "verified-public-location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/node/5256868509",
+        "precision": "Public street address reference, not entrance navigation"
       },
       "website": "https://www.untouchedworld.com/",
-      "limitations": "Exact public entrance coordinates and reuse/source precision remain unverified. No map pin is eligible. No AVES partnership, endorsement, availability, booking or uniform environmental-impact claim. Nearby Untouched World Kitchen is not independently represented as certified."
+      "limitations": "Company certification applies to Untouched World. This outlet and the nearby cafe are not separately represented as certified. Check opening and access with the business. No AVES partnership or confirmed booking."
+    },
+    {
+      "id": "untouched-world-wanaka",
+      "name": "Untouched World Wānaka store",
+      "company": "Untouched World",
+      "country": "new-zealand",
+      "region": "south-island",
+      "category": "retail",
+      "certification": {
+        "review": "verified-profile",
+        "profileUrl": "https://www.bcorporation.net/en-us/find-a-b-corp/company/untouched-world/",
+        "listedSince": "2021-05",
+        "checkedAt": "2026-11-11",
+        "scopeNote": "B Lab names Untouched World and lists apparel/manufacturing. This is company-profile evidence, not a separately certified outlet or cafe."
+      },
+      "location": {
+        "review": "verified-owner-page",
+        "address": "35 Helwick Street, Wānaka, New Zealand",
+        "sourceUrl": "https://www.untouchedworld.com/en-us/pages/stores",
+        "checkedAt": "2026-11-11",
+        "coordinates": {
+          "latitude": -44.6960311,
+          "longitude": 169.1356463
+        },
+        "coordinateReview": "verified-public-location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/node/5479043830",
+        "precision": "Public street address reference, not entrance navigation"
+      },
+      "website": "https://www.untouchedworld.com/",
+      "limitations": "Company certification applies to Untouched World, not a separately certified outlet. Check opening and access with the business. No AVES partnership or confirmed booking."
     }
   ],
   "accessReview": {
-    "method": "Individual manual review of public profile and business-owned location page; minimal factual fields with native source links.",
+    "method": "Individual public profile and owner-page review. Minimal factual names, addresses and source links only; no copied descriptions or logos. Three individual OpenStreetMap address lookups, with attribution.",
     "bulkAccess": "Not assessed or authorised; no scrape, bulk download, API request, credential or automated directory importer.",
     "logoUse": false,
-    "mapLayerEnabled": false,
-    "pending": ["Verified public coordinates and source precision", "Additional visitor-relevant accommodation, food, transport or guiding candidates", "Directory access/reuse review before scaling", "Candidate UI and accessibility acceptance"]
+    "mapLayerEnabled": true,
+    "pending": [
+      "Expand accommodation, food, transport and guiding coverage after verification",
+      "Recheck profiles and locations within 90 days",
+      "Assess directory access and reuse before any bulk expansion"
+    ]
   },
-  "stewardshipReference": "https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/"
+  "stewardshipReference": "https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/",
+  "coordinateAttribution": {
+    "name": "OpenStreetMap contributors",
+    "url": "https://www.openstreetmap.org/copyright",
+    "licence": "ODbL 1.0",
+    "method": "Individual public address reference points, not routing or entrance coordinates."
+  }
 }
