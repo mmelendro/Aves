@@ -1,6 +1,12 @@
 # AVES hosted acceptance
 
-Runtime: 0984fc3cd3df89c8878e0c0a5a98b1ce9cee82f7. Deployment: dpl_F4c2rMAGB5dKvqym4LwMfRpAgeHb, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: a0278216ee93537c5afc3ce1e1ee6a904f0af415 / dpl_6r8i8AdJJCTaV2gkymugf1stzt4r. Branch: feature/field-guide-card.
+Runtime: bae9953d4d03324f5fb73f988955ec00388f8a72. Deployment: dpl_EJ827uaf2AXa5Qhm9Wgg5VUMpCTs, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback before map changes: 0984fc3cd3df89c8878e0c0a5a98b1ce9cee82f7 / dpl_F4c2rMAGB5dKvqym4LwMfRpAgeHb. Branch: feature/field-guide-card.
+
+## Current single-map acceptance
+
+MAP-01/02 remove the duplicate South Island planner map and render itinerary base order within the existing explorer. Numbered schematic connectors are not road geometry. Base changes focus a broad area; map base CTA updates planner input without reloading or discarding the existing draft. Regeneration remains explicit. The same map/layers/selection persist in fullscreen. Google Maps public search/directions actions appear in public place details and planner listing disclosures, with no SDK, Places feed, private origin or automatic Google requests. Queries require matching-listing/entrance confirmation. Existing catalogue categories stay available through base previews; individual property coordinates have not been invented.
+
+559 tests passed, TypeScript passed, local/hosted 75-page builds passed, architecture audit 347 modules with zero unreachable. The final marker stacking correction passed the three affected tests and local/hosted builds (which include type validation); route numbers paint above public markers without capturing gestures. Hosted checks covered South Island legacy restoration, endpoint regeneration, no duplicate base map, route toggle, Hanmer map-to-planner input handoff with retained draft, public Google directions URL, fullscreen continuity, and one explorer on Pacific Colombia, explicit Caribbean and New South Wales templates. At 340px, South Island document width was 337px and fullscreen kept one route overlay. Shared-template checks cover map ownership; this is not exhaustive manual acceptance of every regional URL or equal layer coverage everywhere. The canonical final build's numbered route and both aliases were verified. Error/fatal scan 08:46:26–08:56:26 UTC returned no matches. No private writes, mail, bookings, spend, schema or access changes. Physical Safari/touch and Google listing accuracy/live business hours remain unverified.
 
 ## Current island-context evidence
 

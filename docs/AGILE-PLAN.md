@@ -31,7 +31,7 @@ Google Maps is a provider/base-map option, not a raster layer to paste over the 
 
 Acceptance across regional templates: one active map renderer, no duplicate planner map; fullscreen preserves camera/selection/layers; opening a bird/place does not create another map; route/base edits synchronize in both directions; keyboard and 340px layout remain usable; existing South Island draft/private handoff works; Colombia/Australia regional navigation retains its own scope. Add meaningful regression checks at shared template boundaries and verify representative hosted routes for every regional template. Do not claim all pages comply from a South Island-only screenshot. Record supported layers by region, not a blanket claim of identical data coverage.
 
-Then resume NZ-01b and North Island pilot. This priority changes sequencing, not the product goal. Documentation/source audit only so far; MAP-01/02 are not implemented or deployed yet.
+Then resume NZ-01b and North Island pilot. This priority changes sequencing, not the product goal. MAP-01/02 implementation removes the duplicate planner map, adds the route-order overlay and map-to-planner handoff, and adds external Google actions. No embedded Google renderer or expanded point-level catalogue coverage is claimed. See current hosted acceptance for release evidence.
 
 Official references reviewed 11 November 2026: https://developers.google.com/maps/documentation/urls/get-started ; https://developers.google.com/maps/documentation/places/web-service/policies ; https://developers.google.com/maps/documentation/embed/quickstart .
 

@@ -24,7 +24,7 @@ Group ownership is explicit metadata. Renaming an editorial group cannot move it
 | --- | --- |
 | Shared country/region explorer | `components/destination-explorer-page.tsx`, `components/homepage-destination-explorer.tsx` |
 | South Island input state, alternatives and explicit handoff | `components/south-island-trip-planner.tsx` |
-| Broad base map and schematic route | `components/trip-planner/trip-base-map.tsx` |
+| Itinerary layer on the regional explorer | `components/trip-planner/trip-route-overlay.tsx`, `trip-map-context.tsx` |
 | One editable day | `components/trip-planner/trip-day-card.tsx` |
 | Entered allowance totals | `components/trip-planner/trip-allowance-summary.tsx` |
 | Reference finder, filters and public place basket | `components/trip-planner/trip-catalogue.tsx` |
@@ -65,4 +65,6 @@ NZ-01a implemented boundary: content/new-zealand-planning-context.ts owns South 
 
 ## One-map requirement
 
-All regional pages must have one map surface, with supported information as selectable overlays. Fullscreen is the expanded form of that map, preserving state. The current South Island TripBaseMap is a known duplicate pending MAP-01; merge its route/base behavior into the existing explorer before removing it. Colombia/Australia use shared regional explorer shells. Audit shared renderer mounts and fullscreen lifecycle, not merely SVG element counts (icons are not maps). Google Maps directions/business search should begin as outbound Maps URLs. An embedded Google provider is separate future work with its own data/licence and billing constraints; never treat Google Places results as an unrestricted layer on another provider. See AGILE-PLAN.md for sequence and acceptance.
+All regional pages must have one map surface, with supported information as selectable overlays. Fullscreen is the expanded form of that map, preserving state. MAP-01 removes TripBaseMap. The South Island explorer now renders the schematic itinerary overlay through shared page-local TripMapProvider state. Planner input changes focus a broad base; the selected map base CTA updates planner input without reloading. Colombia/Australia use shared regional explorer shells. Audit shared renderer mounts and fullscreen lifecycle, not merely SVG element counts (icons are not maps). Google Maps directions/business search should begin as outbound Maps URLs. An embedded Google provider is separate future work with its own data/licence and billing constraints; never treat Google Places results as an unrestricted layer on another provider. See AGILE-PLAN.md for sequence and acceptance.
+
+MAP-02 uses components/google-maps-actions.tsx and lib/google-maps-links.ts. Public map details and planner source disclosures link to Google search/directions with public place names and broad localities. These are search queries, not verified Google Place IDs, live inventory or exact entrances. No SDK, Google tiles, Places content copies, private origin or automatic network requests. Existing independent source and certification records remain authoritative for their specific claims.
