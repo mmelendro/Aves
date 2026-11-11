@@ -1,0 +1,35 @@
+{
+  "size": [
+    720,
+    620
+  ],
+  "fit": [
+    951.5453237085952,
+    371.9127828770495,
+    273.0269332854938
+  ],
+  "bbox": [
+    110,
+    -46,
+    156,
+    -8
+  ],
+  "projection": "Spherical Albers, central meridian 134 E, origin 25 S, standard parallels 18 S and 36 S",
+  "geometrySha256": "61f79e6705e62a55d6bcf698394295a589af5e24a4b2684c6519dd35c1300bf6",
+  "maxVertexResidual": 0.009,
+  "publisher": "NASA Earth Observatory / GIBS",
+  "product": "Blue Marble Next Generation",
+  "year": 2004,
+  "reviewedAt": "2026-11-11",
+  "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/",
+  "serviceUrl": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi",
+  "serviceLayer": "BlueMarble_NextGeneration",
+  "sourceImageSize": [
+    1200,
+    1000
+  ],
+  "sourceSha256": "95324d4d72fbe367ed5e6419de0e8fa748196273a99309bc06d715b719789040",
+  "asset": "/images/maps/australia-satellite-2004.webp",
+  "sha256": "936108c2896943d9eaa1c783f49c7ed30fe64e81f071d9739de9ab2aca01a910",
+  "limitations": "Historical composite; overview only, not current conditions. Zoom adds no source detail. Country/island scope follows the existing generalised geometry."
+}

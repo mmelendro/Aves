@@ -1,0 +1,35 @@
+{
+  "size": [
+    560,
+    640
+  ],
+  "fit": [
+    1787.494797512577,
+    -5101.6143113960325,
+    -1092.8742967608048
+  ],
+  "bbox": [
+    165,
+    -48,
+    180,
+    -33
+  ],
+  "projection": "Spherical Mercator, fitted to the existing main island SVG",
+  "geometrySha256": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb",
+  "maxVertexResidual": 0.094,
+  "publisher": "NASA Earth Observatory / GIBS",
+  "product": "Blue Marble Next Generation",
+  "year": 2004,
+  "reviewedAt": "2026-11-11",
+  "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/",
+  "serviceUrl": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi",
+  "serviceLayer": "BlueMarble_NextGeneration",
+  "sourceImageSize": [
+    1000,
+    1000
+  ],
+  "sourceSha256": "a8f543fbe8788b7fcbee42352352ddabb4af1445b73979e3e8104380b6f309af",
+  "asset": "/images/maps/new-zealand-satellite-2004.webp",
+  "sha256": "9f088468703dbc165be32056111da660613af6ea5ad9cd841aaec72f4b2fbdc6",
+  "limitations": "Historical composite; overview only, not current conditions. Zoom adds no source detail. Country/island scope follows the existing generalised geometry."
+}
