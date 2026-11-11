@@ -323,9 +323,12 @@ test("only account/admin/auth paths use shared AVES navigation", () => {
   }
   for (const path of ["/", "/australia/regions/queensland", "/accountant"]) {
     const harness = componentHarness("features/australia/components/navigation-header.tsx", "NavigationHeader", {}, { mocks: { "next/navigation": { usePathname: () => path } } })
-    const tree = harness.render()
+    const delegate = harness.render()
+    assert.equal(delegate.type.name, "NewZealandHeader", path)
+    assert.equal(delegate.props.country, "australia", path)
+    const tree = delegate.type(delegate.props)
     assert.equal(find(tree, node => node.type?.name === "BrandMark").props.country, "australia", path)
-    assert.ok(find(tree, node => node.props.href === "/aves-explorer"), path)
+    assert.ok(find(tree, node => node.props.href === "/australia/aves-explorer"), path)
   }
 })
 
@@ -342,7 +345,8 @@ test("shared desktop and mobile navigation distinguishes all destinations from t
 
 test("Australia desktop and mobile navigation can return to the global destination chooser", () => {
   const harness = componentHarness("features/australia/components/navigation-header.tsx", "NavigationHeader", {}, { mocks: { "next/navigation": { usePathname: () => "/australia" } } })
-  const tree = harness.render()
+  const delegate = harness.render()
+  const tree = delegate.type(delegate.props)
   const globalLink = find(tree, node => ["https://aves.bio/", "/"].includes(node.props.href))
   assert.equal(globalLink.props.children, "All destinations")
   assert.equal(globalLink.props["aria-current"], undefined)
@@ -354,16 +358,23 @@ test("Australia desktop and mobile navigation can return to the global destinati
   assert.ok(brandLinks.some(node => node.props.href === "/australia"), "country subtitle opens the Australian home without a doubled base path")
   for (const link of brandLinks) assert.equal(nodes(link.props.children).some(isAnchor), false, "brand links must not nest")
   assert.equal(nodes(brandTree).some(node => node.props["aria-hidden"] && nodes(node.props.children).some(isAnchor)), false, "brand links must remain available to assistive technology")
-  const mobile = find(tree, node => node.type === "MobileNavigationOverlay")
-  assert.ok(mobile.props.links.some(link => link.href === "https://aves.bio/" && link.label === "All destinations"))
+  const mobile = find(tree, node => node.type === "nav" && node.props["aria-label"] === "Mobile navigation")
+  assert.ok(find(mobile, node => node.props.href === "/" && node.props.children === "All destinations"))
+  assert.ok(find(mobile, node => node.props.href === "/site-map"))
 })
 
 test("public and account footers link to Colombia separately from all destinations", () => {
-  const publicFooter = componentHarness("features/australia/components/footer.tsx", "Footer", {}).render()
+  const footerDelegate = componentHarness("features/australia/components/footer.tsx", "Footer", {}).render()
+  assert.equal(footerDelegate.type.name, "GlobalFooter")
+  const publicFooter = footerDelegate.type(footerDelegate.props)
+  assert.match(JSON.stringify(publicFooter), /Aboriginal and Torres Strait Islander/)
+  assert.ok(find(publicFooter, node => node.props.href === "/australia/species"))
+  assert.ok(find(publicFooter, node => node.props.href === "/australia/contact?intent=waitlist"))
+  assert.ok(find(publicFooter, node => node.props.href === "/account"))
   const accountShell = componentHarness("components/account/account-shell.tsx", "AccountShell", { title: "Account", description: "Trips" }, { mocks: { "@/components/page-shell": { PageShell: "PageShell" }, "@/features/australia/components/page-shell": { PageShell: "PageShell" } } }).render()
   for (const footer of [publicFooter, accountShell]) {
     assert.equal(find(footer, node => ["https://aves.bio/", "/"].includes(node.props.href)).props.children, "All destinations")
-    assert.match(find(footer, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children, /Colombia/)
+    assert.match(JSON.stringify(find(footer, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children), /Colombia/)
     assert.equal(nodes(footer).some(node => node.props.href === "/australia/colombia"), false)
   }
 })

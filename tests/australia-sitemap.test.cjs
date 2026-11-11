@@ -105,8 +105,9 @@ test("header and footer destinations exist; their native links do not double-pre
     const source = readFileSync(join(root, file), "utf8")
     for (const match of source.matchAll(/href(?:=|:\s*)["'](\/[^"']*)["']/g)) {
       const pathname = new URL(match[1], "https://aves.bio").pathname
-      assert.ok(known.has(pathname) || (australian && ["/", "/account", "/colombia", "/australia", "/new-zealand"].includes(pathname)), file + ": " + pathname)
-      assert.ok(!pathname.startsWith("/australia/"))
+      const localPath = pathname.startsWith("/australia/") ? pathname.slice("/australia".length) : pathname
+      assert.ok(known.has(localPath) || ["/", "/account", "/colombia", "/australia", "/new-zealand", "/site-map"].includes(pathname), file + ": " + pathname)
+      assert.ok(!pathname.includes("/australia/australia"))
     }
   }
 })
@@ -119,5 +120,6 @@ test("human site map shares the XML directory and is discoverable from the foote
   const treeComponent = readFileSync(join(root, "components/destination-site-tree.tsx"), "utf8")
   assert.match(treeComponent, /aria-label="AVES destination tree"/)
   assert.match(treeComponent, /<ul/)
-  assert.match(readFileSync(join(root, "features/australia/components/footer.tsx"), "utf8"), /href:\s*"\/site-map"/)
+  assert.match(readFileSync(join(root, "features/australia/components/footer.tsx"), "utf8"), /<GlobalFooter/)
+  assert.match(readFileSync(join(root, "components/global-navigation.tsx"), "utf8"), /"\/site-map"/)
 })
