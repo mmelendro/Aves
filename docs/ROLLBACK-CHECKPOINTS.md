@@ -2,7 +2,15 @@
 
 The current site is one consolidated application. Check current GitHub heads and Vercel project before recovery. Historical separate-app checkpoints below are recovery evidence, not current deployment targets.
 
-## Current bird conservation filters · 11 November 2026
+## Current expandable site tree · 11 November 2026
+
+Runtime cd08c9bd6e5b5bd7633b26a8af5f2d4555cd6b5f; tree a89e188104c2a3ed3034ff9ce92db09be1ce793e.
+Production dpl_WJvcQbohCNThhodNVeJmJPfJqwyr in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
+Recovery branch checkpoint/2026-11-11-expandable-site-tree.
+Previous runtime 82066da84515189b5c21b2ea8903d98f33dd378b / deployment dpl_XtMVBAiXzncf3YkZoMCyU84sMbbp.
+Verify the prior deployment's READY/source state, reassign BOTH custom aliases and check HTTPS and public/account routes. Rebuild the pinned source in the consolidated project if required. Preserve domain registration and Git history.
+
+## Previous bird conservation filters · 11 November 2026
 
 Runtime 82066da84515189b5c21b2ea8903d98f33dd378b; tree e58066679057027dbdcb50d66c44da61c757f238.
 Production dpl_XtMVBAiXzncf3YkZoMCyU84sMbbp in prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv.
