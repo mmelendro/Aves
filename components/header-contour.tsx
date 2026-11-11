@@ -1,6 +1,6 @@
 "use client"
 
-import { useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { contextualHeaderGeometry, newZealandHeaderGeometry, type ContextualHeaderProfile } from "@/lib/header-landscape.mjs"
 
 import flockCatalogue from "@/content/header-flocks.json"
@@ -9,7 +9,7 @@ import styles from "./header-contour.module.css"
 
 type Geometry = ReturnType<typeof newZealandHeaderGeometry>
 
-/** Static decorative vectors; links and focus indicators stay above this layer. */
+/** Decorative vectors; links and focus indicators stay above this layer. */
 type Drawing = { width: number; geometry: Geometry; key: string; family: string }
 
 export function HeaderContour({ profile, country = "colombia", regionId, placeId }: { profile?: ContextualHeaderProfile; country?: string; regionId?: string; placeId?: string }) {
@@ -39,6 +39,28 @@ export function HeaderContour({ profile, country = "colombia", regionId, placeId
     document.fonts.ready.then(() => { if (active) measure() })
     return () => { active = false; observer.disconnect() }
   }, [profile, sceneKey, flock.family])
+  useEffect(() => {
+    const svg = ref.current
+    if (!svg) return
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
+    let frame = 0
+    function draw() {
+      frame = 0
+      const y = Math.max(0, window.scrollY)
+      svg!.style.setProperty("--flock-x", `${Math.sin(y / 220) * 6}px`)
+      svg!.style.setProperty("--flock-y", `${Math.sin(y / 310) * 2}px`)
+    }
+    function onScroll() { if (!frame && !reduced.matches) frame = requestAnimationFrame(draw) }
+    function sync() {
+      cancelAnimationFrame(frame); frame = 0
+      window.removeEventListener("scroll", onScroll)
+      if (reduced.matches) {
+        svg!.style.removeProperty("--flock-x"); svg!.style.removeProperty("--flock-y")
+      } else { draw(); window.addEventListener("scroll", onScroll, { passive: true }) }
+    }
+    sync(); reduced.addEventListener("change", sync)
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); reduced.removeEventListener("change", sync) }
+  }, [])
   const g = drawing?.geometry
   return <svg ref={ref} data-header-contour={profile ? `${country}-${profile.terrain}` : "new-zealand"} data-header-flock-species={flock.scientificName || flock.name} aria-hidden="true" focusable="false" viewBox={`0 0 ${drawing?.width || 1440} 132`} preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-[132px] w-full text-emerald-700" fill="none">
     {previous && <g key={`old-${previous.key}`} className={styles.leave}><ContourScene g={previous.geometry} width={previous.width} family={previous.family} /></g>}
@@ -54,9 +76,9 @@ function ContourScene({g,width,family}:{g:Geometry;width:number;family:string}){
       {[...g.ridges, ...g.water].map((d, i) => <path key={i} d={d} strokeWidth=".65" />)}
       <g data-header-wildlife="true" strokeWidth=".7">
         {g.whales.map((d, i) => <path key={i} d={d} />)}
-        {g.birds.map((bird, i) => <g key={i} transform={`translate(${bird.x} ${bird.y}) rotate(${bird.rotation}) scale(${bird.size})`}>
+        <g className={styles.flock}>{g.birds.map((bird, i) => <g key={i} transform={`translate(${bird.x} ${bird.y}) rotate(${bird.rotation}) scale(${bird.size})`}>
           <path d={birdOutline(family,i)} strokeWidth={.7 / bird.size} />
-        </g>)}
+        </g>)}</g>
       </g>
     </g>
 </> }
