@@ -1,6 +1,6 @@
 # North Island and Rakiura national park pilot
 
-Status: candidate source, awaiting exact-commit hosted acceptance. Australia remains the live runtime in HANDOFF-CURRENT.md until this candidate is accepted and published.
+Status: published. Runtime f5d66f7c0a80a597b87fdd25a63d73cd82d070b4, deployment dpl_7caDwrFuRsue4PukCcgGoCBeD6Jq. Both canonical aliases assigned within the approved continuation. Rollback: 347a10f4e057f787d2fe0a8d7c94c9a6277ad43a / dpl_EFg18vbzoQAHLT9YkTmELtqk6F1Q.
 
 ## Source and scope
 
@@ -32,3 +32,5 @@ A country-scoped lazy wrapper reuses ProtectedAreaExplorer on the existing satel
 Data tests check four units, island identity, legal-type source codes, current/raw names, original hash, date scope, licence, exact geometry/catalogue correspondence, all preserved islands/holes, ring closure, interior labels/bounds and independent Taranaki/Tongariro/Rakiura control points. South Island’s nine named parks remain unchanged.
 
 Hosted acceptance and release IDs are recorded below when completed. Physical iPhone/Safari is not claimed. No schema, keys, access settings, new spend, private records, mail or booking changed.
+
+Final acceptance: all 580 tests, TypeScript, 356 source modules with zero unreachable and local/hosted 75-page builds passed. Browser checked four park controls, Tongariro/Rakiura, Enter/Escape, zero/four layer toggling, expansion and unchanged island context. South Island retained nine named park markers, one existing image overlay and no new protected-area controls. 340px viewport: document 337px, canvas 283.25×320px, panel 267.25px. Canonical live proof is in evidence/2026-11-12-new-zealand-parks.jpg. Error/fatal scan 19:25:37–19:35:37 UTC found no matching logs. Physical touch/Safari remains unverified.

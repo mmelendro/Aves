@@ -1,6 +1,18 @@
 # AVES current handoff
 
-Runtime: 347a10f4e057f787d2fe0a8d7c94c9a6277ad43a. Deployment: dpl_EFg18vbzoQAHLT9YkTmELtqk6F1Q, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned after explicit owner approval on 12 November, Sydney. Rollback: a4661e63b0594fa6a4bea5cca177a2f3d854a3c3 / dpl_HFWoiGc5Zm2FqHTB6CYoiPcBHzmJ. Branch: feature/field-guide-card.
+Runtime: f5d66f7c0a80a597b87fdd25a63d73cd82d070b4. Deployment: dpl_7caDwrFuRsue4PukCcgGoCBeD6Jq, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: 347a10f4e057f787d2fe0a8d7c94c9a6277ad43a / dpl_EFg18vbzoQAHLT9YkTmELtqk6F1Q. Branch: feature/field-guide-card.
+
+## North Island and Rakiura park acceptance
+
+Published four DOC national park units: Te Papa-Kura-o-Taranaki, Tongariro, Whanganui and Rakiura. This completes the bounded country park pilots in pathway step 1, not worldwide reserve or public-land completeness. North Island/Rakiura use the same ProtectedAreaExplorer as Australia/Colombia, on one geographic map. The existing South Island nine-park/conservation layer is unchanged and the new wrapper is excluded from that adapter. See NEW-ZEALAND-PARKS-2026-11-12.md.
+
+The official GeoJSON converter emitted nested exterior shells. The reviewed generator instead reconstructs Esri ring orientation and holes without repair, preserving 324 polygon parts and 12 holes. Validity, interior labels, coordinate bounds and at most 2% symmetric area change are checked. The optional geometry payload is 234,645 bytes. DOC CC BY 4.0/Crown attribution, exact query/hash, retrieval-date scope, raw/current names and visitor guides are retained.
+
+All 580 tests, strict TypeScript, source audit (356 modules, zero unreachable), local and exact-SHA hosted 75-page builds passed. Hosted acceptance checked four paths, Tongariro and Rakiura selection, Enter activation, Escape/focus, off/on with zero/four controls, expanded camera/selection retention, unchanged North Island bird context and actual Rakiura region selection. South Island still rendered its nine named park markers and one existing image overlay, with zero new protected-area controls, on one map. At 340 CSS pixels the document was 337px, canvas 283.25×320px and detail panel 267.25px wide. Physical touch/Safari remains unverified.
+
+Canonical live proof: https://aves.bio/?explore=new-zealand&region=north-island . Select Satellite, enable North Island & Rakiura parks, Explore 4 areas, choose Tongariro. Selection is page-local. Screenshot: docs/evidence/2026-11-12-new-zealand-parks.jpg. Both aliases assigned to the exact accepted deployment. Scoped error/fatal scan 19:25:37–19:35:37 UTC on 11 November found no matching logs. No schema, keys, access, spend, private records, mail or booking changed.
+
+NEXT: pathway step 2, one shared layer picker/control treatment across the maintained map families. Short-screen clipping/scrolling fixes already delivered are part of that work; do not rebuild them or reopen optional worldwide coverage before the two-island planner.
 
 ## Australia park pilot and short-screen acceptance
 
@@ -12,7 +24,7 @@ Observed clipping and sticky header obstruction were fixed before release. Geogr
 
 Canonical live proof: https://aves.bio/?explore=australia&region=new-south-wales . Select Satellite, enable National parks · pilot, Explore 13 areas, choose Royal. Park choice is page-local. Screenshot: docs/evidence/2026-11-12-australia-park-pilot.jpg. Both canonical aliases were confirmed on the prior release before approved assignment to this candidate. Deployment-scoped error/fatal scan 19:10:00–19:20:00 UTC on 11 November found no matching logs. No private data, schema, keys, access, spend, mail or booking changed.
 
-Next: remaining New Zealand national-park coverage. Official DOC Esri JSON for four North Island/Rakiura park units has been downloaded and reviewed; do not use its invalid GeoJSON conversion, which emits nested shells. Reconstruct correctly oriented Esri rings and preserve holes. Research inputs remain preparatory until integrated, tested and released.
+The subsequent NZ release above completes the four reviewed North Island/Rakiura park units. Its Esri ring reconstruction preserves holes; the invalid service GeoJSON conversion remains excluded.
 
 ## Colombia protected-area acceptance
 
@@ -40,7 +52,7 @@ Live evidence: /workspace/shared/aves-colombia-joined-regions.png, https://aves.
 
 The satellite foundation remains lazy-loaded Leaflet with EOX 2016 historical tiles, native zoom cap 14 and a background choice retained across routes/reloads in a tab. Overlay choices are page-local. Country/region camera moves finish without animation so expansion cannot interrupt them. 3D globe/elevation, current aerial imagery, complete bird ranges and whole-site layer parity remain unclaimed. See CONTINUOUS-SATELLITE-2026-11-11.md for the prior foundation evidence.
 
-Next: step 1 of CONTINUE-HERE.md, the only active numbered pathway: Colombia and the bounded Australia park pilot delivered; remaining NZ coverage comes next. Then shared controls, island-aware planning and the North Island pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
+Next: step 2 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots delivered. Shared controls precede island-aware planning and the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
 
 ## Editing and privacy boundaries
 
