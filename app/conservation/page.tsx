@@ -323,7 +323,7 @@ export default function ConservationPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/shopping">
-              <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
+              <Button size="lg" className="h-auto min-h-11 w-full whitespace-normal bg-white px-4 py-3 text-base text-emerald-600 hover:bg-gray-100 sm:w-auto sm:px-8 sm:text-lg">
                 Book Your Conservation Journey
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -332,7 +332,7 @@ export default function ConservationPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-emerald-600 text-lg px-8 py-4 bg-transparent"
+                className="h-auto min-h-11 w-full whitespace-normal border-white bg-transparent px-4 py-3 text-base text-white hover:bg-white hover:text-emerald-600 sm:w-auto sm:px-8 sm:text-lg"
               >
                 Learn More About Our Impact
               </Button>

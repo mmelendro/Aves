@@ -142,7 +142,7 @@ export default function CookiesPage() {
                   <CookieManagementButton
                     variant="default"
                     size="lg"
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                    className="h-auto min-h-11 w-full whitespace-normal bg-emerald-600 px-4 py-3 text-white hover:bg-emerald-700 sm:w-auto sm:px-8"
                   >
                     Open Cookie Preference Center
                   </CookieManagementButton>
