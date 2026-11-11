@@ -6,6 +6,7 @@ import { publicMetadata } from "@/lib/public-metadata"
  */
 import type { Metadata } from "next"
 import Link from "next/link"
+import { PageIntroduction } from "@/components/page-introduction"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { canonicalUrl } from "@/lib/site-path"
@@ -31,13 +32,11 @@ const sections = [
 export default function PrivacyPage() {
   return <div className="min-h-screen bg-white">
     <NavigationHeader currentPage="/privacy" />
-    <main id="main-content" tabIndex={-1} className="py-20">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Notice</h1>
-          <p className="text-lg text-gray-600">How AVES handles inquiries, accounts and trip planning, including the New Zealand planning beta.</p>
-          <div className="text-sm text-gray-500 mt-4">Updated: 8 November 2026</div>
-        </div>
+    <main id="main-content" tabIndex={-1}>
+      <PageIntroduction title="Privacy Notice" eyebrow="AVES" description="How AVES handles inquiries, accounts and trip planning, including the New Zealand planning beta.">
+        <p className="text-sm text-gray-500">Updated: 8 November 2026</p>
+      </PageIntroduction>
+      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="prose prose-lg max-w-none">
           <div className="bg-emerald-50 border-l-4 border-emerald-600 p-6 mb-8"><p className="text-emerald-700 mb-0">This notice describes the information used by our website and shared trip-planning service. For questions, <a href="/australia/contact?topic=privacy#inquiry" className="underline">contact AVES through the form</a>.</p></div>
           {sections.map(section => <section className="mb-8" key={section.title}>

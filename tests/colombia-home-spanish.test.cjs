@@ -47,3 +47,11 @@ test('shared Colombia navigation and footer translate their rendered copy and ke
  assert.match(footer,/href="\/site-map"/)
  assert.match(footer,/certificad/)
 })
+
+test('shared navigation labels and destinations have complete Spanish copy',()=>{
+ for (const [english,spanish] of Object.entries({
+  'How it works':'Cómo funciona','Open navigation menu':'Abrir menú de navegación',
+  'Close navigation menu':'Cerrar menú de navegación','Mobile navigation':'Navegación móvil',
+  'Explore destinations':'Explorar destinos','New Zealand':'Nueva Zelanda',
+ })) assert.equal(exported.colombiaHomeText(english),spanish)
+})

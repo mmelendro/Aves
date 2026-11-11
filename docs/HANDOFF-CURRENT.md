@@ -50,3 +50,7 @@ Browser acceptance: /colombia English-to-Spanish toggling updates the rendered h
 Existing translation gaps remain: How it works, open/close mobile navigation labels, some newer explorer instructions and the general homepage acknowledgement remain English. Do not describe this as a fully translated site. Browser extension metadata errors appeared in captured console output; no application error was observed in the inspected entries. This is not a complete runtime error audit. Physical Safari/touch and exact 320/390px remain unverified.
 
 Next: fix the identified shared-navigation Spanish strings, then continue custom-route heading/main-landmark consistency on blog, tours, team, how-it-works, conservation and legal pages. Broader content/source review remains separate from these layout checks. The current layout preview is ready for review, not published to production.
+
+## Editorial layout continuation · 11 November 2026
+
+Eight Colombian editorial/legal routes now share title typography and main-content targets. Cookies delegates its legacy menu to shared navigation. Spanish homepage navigation/control copy is completed within the bounded shared-shell scope. 518 checks and TypeScript passed; local/hosted build and browser acceptance pending. See EDITORIAL-LAYOUT-2026-11-11.md. Production unchanged; unrelated dependency overrides remain excluded.

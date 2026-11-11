@@ -11,6 +11,7 @@ import { Calendar, User, MapPin, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect } from "react"
+import { PageHeading } from "@/components/page-introduction"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
@@ -87,17 +88,14 @@ export default function BlogPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/blog" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
-      <section className="py-8 lg:py-12 bg-gradient-to-br from-emerald-50 to-blue-50">
+      <section className="py-8 sm:py-10 lg:py-12 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         <div className="container mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
           <div className="order-2 w-full"><ColombiaHeroExplorer /></div>
           <div className="order-1 mx-auto max-w-4xl text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">AVES Blog</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Discover the extraordinary world of Colombian birds through field reports, conservation stories, and expert
-            insights from the most biodiverse country on Earth.
-          </p>
+          <PageHeading title="AVES Blog" description="Discover the extraordinary world of Colombian birds through field reports, conservation stories, and expert insights from the most biodiverse country on Earth." />
           </div>
         </div>
       </section>
@@ -195,6 +193,7 @@ export default function BlogPage() {
       </section>
 
       {/* Footer */}
+      </main>
       <Footer />
     </div>
   )

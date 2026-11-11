@@ -15,6 +15,7 @@ import { MapPin, Globe, Instagram, ChevronDown } from "lucide-react"
 import Link from "next/link"
 import OptimizedImage from "@/components/optimized-image"
 import { Footer } from "@/components/footer"
+import { PageIntroduction } from "@/components/page-introduction"
 import { NavigationHeader } from "@/components/navigation-header"
 
 export default function TeamPage() {
@@ -311,18 +312,10 @@ export default function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
       <NavigationHeader currentPage="/team" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Our Team</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Meet the passionate ornithologists, indigenous guides, and conservation experts who make AVES expeditions
-            extraordinary. Our team combines scientific expertise with deep cultural knowledge and unwavering commitment
-            to sustainable birding tourism.
-          </p>
-        </div>
-      </section>
+      <PageIntroduction title="Our Team" eyebrow="AVES Colombia" description="Meet the passionate ornithologists, indigenous guides, and conservation experts who make AVES expeditions extraordinary. Our team combines scientific expertise with deep cultural knowledge and unwavering commitment to sustainable birding tourism." />
 
       {/* Quick Navigation */}
       <section className="py-8 bg-white border-b border-gray-100">
@@ -805,6 +798,7 @@ export default function TeamPage() {
       </section>
 
       {/* Footer */}
+      </main>
       <Footer />
     </div>
   )

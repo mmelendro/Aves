@@ -1,5 +1,10 @@
 # AVES comprehensive delivery list
 
+## Current editorial increment · 11 November 2026
+
+Eight editorial/legal routes now use shared headings and main-content targets, including Cookies shared navigation. Shared-shell Spanish labels and acknowledgement updated. 518 checks and TypeScript passed. Finish exact hosted preview acceptance, then continue remaining article/custom and private-shell design coverage. Production unchanged. See EDITORIAL-LAYOUT-2026-11-11.md.
+
+
 ## Latest hosted acceptance · 11 November 2026
 
 Layout source 3c8ef84 passed hosted build and browser acceptance in protected preview dpl_C9wTac1b9KDmfQ5jtXrKXxdVo3gK. Colombia Spanish toggle, 132px shared header, 340px no-overflow reflow, 44px menu links, Escape focus, About/Travel Tips headings and country-aware footer were checked. Production unchanged. Fix the recorded remaining shared-navigation Spanish strings next, then continue custom editorial/legal heading and landmark coverage. See COLOMBIA-SHARED-LAYOUT-2026-11-11.md for evidence and exact limits.

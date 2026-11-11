@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, ArrowRight, Users, Globe, Award } from "lucide-react"
+import { PageHeading } from "@/components/page-introduction"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import TourComparison from "@/components/tour-comparison"
@@ -18,23 +19,17 @@ import ColombiaHeroExplorer from "@/components/colombia-hero-explorer"
 export default function ToursPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Replace the existing header with: */}
+      {/* Shared public navigation */}
       <NavigationHeader currentPage="/tours" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
-      <section className="relative py-8 lg:py-12 bg-gradient-to-br from-emerald-50 to-blue-50">
+      <section className="relative py-8 sm:py-10 lg:py-12 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         <div className="container mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
           <div className="order-2 w-full"><ColombiaHeroExplorer /></div>
           <div className="order-1 mx-auto max-w-4xl text-center">
-            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-6">
-              🌿 Four Unique Colombian Birding Experiences
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">Explore Our Tours</h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              From adventure expeditions to luxury experiences, discover Colombia's incredible avian diversity through
-              our carefully crafted tour offerings. Each journey supports conservation and local communities.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+            <PageHeading eyebrow="AVES Colombia" title="Explore Our Tours" description="From adventure expeditions to luxury experiences, discover Colombia's incredible avian diversity through our carefully crafted tour offerings. Each journey supports conservation and local communities." />
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-2xl font-bold text-emerald-600">1,900+</div>
                 <div className="text-sm text-gray-600">Bird Species</div>
@@ -316,6 +311,7 @@ export default function ToursPage() {
       </section>
 
       {/* Use the centralized Footer component */}
+      </main>
       <Footer />
     </div>
   )

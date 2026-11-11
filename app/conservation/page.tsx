@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { CheckCircle, ArrowRight, Users, Leaf, Globe, TrendingUp, AlertTriangle } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { PageIntroduction } from "@/components/page-introduction"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { BeforeAfterSlider } from "@/components/before-after-slider"
@@ -25,18 +26,10 @@ export default function ConservationPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/conservation" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌱 Conservation Impact</Badge>
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">Travel That Makes a Difference</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Every AVES tour directly supports habitat conservation and local communities. We're committed to becoming
-            the first B Corp certified birding company in Colombia.
-          </p>
-        </div>
-      </section>
+      <PageIntroduction title="Travel That Makes a Difference" eyebrow="AVES Colombia" description="Every AVES tour directly supports habitat conservation and local communities. We're committed to becoming the first B Corp certified birding company in Colombia." />
 
       {/* Habitat Conservation Impact */}
       <section className="py-20 bg-white">
@@ -348,6 +341,7 @@ export default function ConservationPage() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   )

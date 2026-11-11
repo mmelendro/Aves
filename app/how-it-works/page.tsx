@@ -7,6 +7,7 @@ import { publicMetadata } from "@/lib/public-metadata"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, FileCheck2, MessageCircle, NotebookPen } from "lucide-react"
+import { PageIntroduction } from "@/components/page-introduction"
 import { NavigationHeader } from "@/components/navigation-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -40,13 +41,7 @@ export default function HowItWorksPage() {
     <div className="min-h-screen bg-white">
       <NavigationHeader currentPage="/how-it-works" />
       <main id="main-content" tabIndex={-1}>
-        <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-12 sm:py-16 lg:py-20">
-          <div className="container mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-emerald-700">Planning with AVES Colombia</p>
-            <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">Your ideas. A journey taking shape.</h1>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-gray-600">Explore first, ask questions and take your time. Here is how to start planning a Colombian birding journey with AVES.</p>
-          </div>
-        </section>
+        <PageIntroduction title="Your ideas. A journey taking shape." eyebrow="AVES Colombia" description="Explore first, ask questions and take your time. Here is how to start planning a Colombian birding journey with AVES." />
 
         <section className="bg-white py-14 lg:py-20" aria-label="Trip planning steps">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
