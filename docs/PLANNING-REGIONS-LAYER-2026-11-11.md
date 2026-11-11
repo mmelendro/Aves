@@ -1,6 +1,6 @@
 # Planning regions on satellite
 
-Adds one optional Planning regions checkbox to the retained satellite map. The layer defaults on, follows the active country and uses the same region IDs and selection callbacks as the bird guide. Toggling it never resets the satellite engine or refits the camera. With outlines enabled, a single selected-region name replaces the crowded overview pills; names remain available on hover/focus and in the persistent native dropdown. Polygons support click, Enter and Space.
+Adds one optional Planning regions checkbox to the retained satellite map. The layer defaults on, follows the active country and uses the same region IDs and selection callbacks as the bird guide. Toggling it never resets the satellite engine or refits the camera. The geographic scope note remains visible with the layer off, avoiding a map-height/camera shift when outlines are toggled. With outlines enabled, a single selected-region name replaces the crowded overview pills; names remain available on hover/focus and in the persistent native dropdown. Polygons support click, Enter and Space.
 
 Coverage: Colombia 11 approximate planning areas, Australia nine generalised states/territories, New Zealand three main island groups. This is the existing selector taxonomy, not 15 fabricated South Island district boundaries. The existing planning-base, DOC, habitat and itinerary layers remain separate. World-level destination buttons remain available before choosing a country.
 
