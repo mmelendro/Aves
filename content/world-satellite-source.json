@@ -1,0 +1,13 @@
+{
+  "publisher": "NASA Earth Observatory / GIBS",
+  "product": "Blue Marble Next Generation",
+  "year": 2004,
+  "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/",
+  "retrieved": "2026-11-11",
+  "projection": "Equal Earth, matching scripts/equal-earth.mjs; x=500+176*x, y=270-176*y",
+  "viewBox": "0 0 1000 572",
+  "sourceSha256": "7f1b66f435c3a21a3dce6a537818997a28c5a820dd218c45308054daf2eddabd",
+  "asset": "/images/maps/world-satellite-2004.webp",
+  "sha256": "9f572a4400e5f7ff7f127d982e42d48edc0327ad5ad603870832adf853e19021",
+  "limitations": "Historical global composite; overview only, not current conditions. Zooming adds no source detail. Source raster 2048 by 1024, nearest-neighbour resampling to existing projection."
+}

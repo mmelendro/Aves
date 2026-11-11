@@ -32,3 +32,8 @@
 
 .destination[data-bird-filter-match="true"] .country { stroke:#b45309; stroke-width:4; }
 .destination[data-bird-filter-match="false"] .country { opacity:.3; }
+
+/* Keep country hit targets and labels above the projected reference image. */
+:global([data-world-satellite]) .country { fill: transparent; stroke: #fff; }
+:global([data-world-satellite]) .destination:hover .country,
+:global([data-world-satellite]) .destination:focus-visible .country { fill: #065f46; fill-opacity: .35; }
