@@ -1,6 +1,6 @@
 # Editing and releasing AVES
 
-This integration branch runs one application with all destination routes and the shared account backend. Read [CONSOLIDATION.md](docs/CONSOLIDATION.md) and the top of [CONTINUE-HERE.md](CONTINUE-HERE.md). Do not base consolidation on stale `main` or directly merge the two old application roots.
+The live combined application serves all destinations and the shared account. Read [ARCHITECTURE.md](docs/ARCHITECTURE.md) and [CONTINUE-HERE.md](CONTINUE-HERE.md). Do not base consolidation on stale `main` or directly merge the two old application roots.
 
 ## Local development and verification
 
@@ -11,6 +11,7 @@ Use `.env.example` for configuration names. Keep values in untracked `.env.local
 Before a functional commit:
 
 ```sh
+corepack pnpm check:architecture
 corepack pnpm typecheck
 corepack pnpm test
 corepack pnpm build
@@ -20,11 +21,9 @@ Stop a local dev server before building in the same checkout. Build skips ESLint
 
 ## Publication
 
-Git automatic deployments stay disabled for the entire repository. Push the integration branch, build the exact commit explicitly as a Vercel **Preview**, inspect it, and record the commit/deployment and remaining limits. Neither a Git push nor merging a draft PR authorizes changing `aves.bio`.
+Git automatic deployments remain disabled. Within the owner's existing publication authorization, push the reviewed feature/field-guide-card commit and build that exact SHA on the retained aves-australia project. Test a production-mode candidate through the existing public project alias before assigning aves.bio and www.aves.bio. Do not create temporary access links or weaken deployment protection. Verify both aliases and record rollback, runtime and scoped error checks. Names describe infrastructure, not a separate public brand.
 
-Use the existing `aves-australia` project's Preview environment for review, retaining its current configuration without copying service secrets to a new project. Leave its name/hostname unchanged while the current global production app still depends on it. At separately approved cutover, the one retained production project can be renamed `aves-web` after dependent hostnames/integrations are checked. Package/project names describe infrastructure; page content, established URLs and accurate metadata serve visitors and search engines.
-
-Production cutover, project retirement, domain/DNS changes, customer-data operations and billing changes require their applicable authorization. Record rollback before cutover and keep both previous production deployments available until sign-in, session continuity, saved plans, enquiries and owner permissions have passed approved live checks.
+The combined production cutover is complete. Do not deploy either old standalone application over it. Old domain-registration moves/project retirement, customer-data operations, new spend and billing/access changes are separate tasks with their own scope. Existing authorization persists; do not invent a new approval gate for routine tested releases.
 
 ## Dependencies and data
 
