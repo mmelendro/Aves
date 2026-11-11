@@ -1,6 +1,14 @@
 # AVES current handoff
 
-Runtime: a3aa3ea8b58efc9aa1fcf9663d63d3dc86f5e093. Deployment: dpl_AL7v9skSFaUCwHVdPsaYkTHJvxkV, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: a348a12ef183ffd37565c4967f25f55b80564b83 / dpl_9ea2EGnbjpK58KcThngCAkXAStSA. Branch: feature/field-guide-card.
+Runtime: d16c36f881eef0183faad86566f0d8f0d80f49dc. Deployment: dpl_Gg1GZRddP2nsBmfcesuvLV31Cgo2, READY on the combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Rollback: a3aa3ea8b58efc9aa1fcf9663d63d3dc86f5e093 / dpl_AL7v9skSFaUCwHVdPsaYkTHJvxkV. Branch: feature/field-guide-card.
+
+## Current journey-reference evidence
+
+546 tests, TypeScript, local and hosted 75-page builds passed. Source audit: 340 modules, zero unreachable application modules. Hosted browser verified the mixed Christchurch–Arthur’s Pass–Queenstown draft, published versus unknown counts, copied source notes, the long Christchurch–Queenstown reference, Wānaka–Te Anau remaining unknown and Queenstown–Te Anau using its own reference. At 340px, document width was 337px. The canonical live Queenstown–Te Anau card and both aliases were verified. The deployment-scoped error/fatal scan for 07:14:39–07:24:39 UTC found no matches. This is scoped evidence, not proof about all traffic or current road conditions.
+
+Fifteen sourced corridor references and their unknown/long/town-scope handling are detailed in SOUTH-ISLAND-ROAD-REFERENCES-2026-11-11.md. No private data was changed.
+
+## Earlier source-cleanup evidence
 
 Removed 101 unreachable application modules, copied NZ data and unused styles, and 27 unreferenced direct dependencies. The refreshed lockfile and frozen install pass. Split planner map, daily editor, allowance summary, catalogue and presentation primitives into components/trip-planner/. Public navigation now has explicit country ownership and South Island tool anchors. README and docs/ARCHITECTURE.md describe the actual live single application. Added a read-only source reachability check; TypeScript now rejects unused locals/parameters. Compatibility redirects remain necessary live entry points, not duplicate implementations.
 
