@@ -33,3 +33,6 @@
 .countryAction:hover { background:#ecfdf5; }
 .controls select:focus-visible, .card a:focus-visible, .details summary:focus-visible { outline:2px solid #047857; outline-offset:3px; }
 @media (min-width:768px) and (max-width:1023px) { .header,.controls { padding-left:.875rem; padding-right:.875rem; } .credit { padding-left:.875rem; padding-right:.875rem; } .canvas { margin-left:.5rem; margin-right:.5rem; } }
+
+.area[data-bird-filter-match="true"] path { stroke:#b45309; stroke-width:3; }
+.area[data-bird-filter-match="false"] { opacity:.3; }

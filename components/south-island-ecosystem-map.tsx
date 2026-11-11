@@ -17,6 +17,10 @@ import catalogue from "@/content/south-island-layer-catalogue.json"
 import PublicPlaceOverlay, { PublicPlaceDetails } from "./south-island-public-place-overlay"
 import { publicPlaces, visiblePublicPlaces } from "@/lib/south-island-public-places"
 import { useEffect, useId, useRef, useState } from "react"
+import {useBirdFilters} from "./bird-filter-context"
+import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
+import {newZealandRegionBirds} from "@/content/new-zealand-carousel"
+import {filterSouthIslandBirds} from "@/content/south-island-ecosystems"
 import { Hand, Minus, Plus, RotateCcw } from "lucide-react"
 import map from "@/content/south-island-ecosystem-map.json"
 import { southIslandEcosystems, type SouthIslandEcosystemFilter, type SouthIslandEcosystem } from "@/content/south-island-ecosystems"
@@ -28,10 +32,12 @@ const ConservationOverlay = dynamic(() => import("./south-island-conservation-ov
 const colours: Record<SouthIslandEcosystem, string> = { forest: "#537b5d", mountains: "#ae9761", freshwater: "#438eac", coast: "#008477" }
 
 type MapPlace = { id: string; label: string; latitude: number; longitude: number; location: string; source: string }
-type Props = { onSelectIsland?: (id:string) => void; onZoomOutAtMinimum?: () => void; selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
+type Props = { matchingHabitats?:readonly string[]; onSelectIsland?: (id:string) => void; onZoomOutAtMinimum?: () => void; selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
 
-export default function SouthIslandEcosystemMap({ selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum, onSelectIsland }: Props) {
+export default function SouthIslandEcosystemMap({ matchingHabitats, selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum, onSelectIsland }: Props) {
   const { layers } = useMapLayers()
+  const {filters}=useBirdFilters()
+  const matches=matchingHabitats ?? (birdFiltersActive(filters) ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(filterConservationBirds(newZealandRegionBirds("south-island"),filters),item.id).length>0).map(item=>item.id) : undefined)
   const [satelliteFailed, setSatelliteFailed] = useState(false)
   const satellite = layers.background === "satellite" && !satelliteFailed
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
@@ -128,8 +134,8 @@ export default function SouthIslandEcosystemMap({ selected, onSelect, places, se
           const name = southIslandEcosystems.find(item => item.id === habitat)!.name
           const paint = satelliteHabitatStyle({ satellite, selected, habitat, opacity: layers.overlayOpacity })
           return <g key={habitat} role="button" tabIndex={0} aria-label={`Show ${name} birds on map`} aria-pressed={selected === habitat} className={styles.area} onClick={() => onSelect(habitat)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelect(habitat) } }}>
-            <title>{name}</title>
-            <path d={layer.path} fill={colours[habitat]} fillOpacity={paint.fillOpacity} stroke={satellite ? colours[habitat] : "none"} strokeOpacity={paint.strokeOpacity} strokeWidth={paint.strokeWidth} vectorEffect="non-scaling-stroke" fillRule="evenodd" data-map-layer="ecosystems" />
+            <title>{name}{matches ? matches.includes(habitat) ? " · matching featured birds" : " · no matching featured birds" : ""}</title>
+            <path d={layer.path} fill={colours[habitat]} fillOpacity={matches && !matches.includes(habitat) ? paint.fillOpacity * .2 : paint.fillOpacity} stroke={satellite ? colours[habitat] : "none"} strokeOpacity={paint.strokeOpacity} strokeWidth={paint.strokeWidth} vectorEffect="non-scaling-stroke" fillRule="evenodd" data-map-layer="ecosystems" />
           </g>
         })}
         {(layers.nationalParks || layers.conservation) && <ConservationOverlay />}

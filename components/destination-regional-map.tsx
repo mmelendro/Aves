@@ -19,10 +19,11 @@ type Props = {
   country: string
   selectedRegionId?: string
   highlightedRegionIds?: readonly string[]
+  matchingRegionIds?: readonly string[]
   onSelectRegion?: (id: string) => void
 }
 
-export default function DestinationRegionalMap({ country, selectedRegionId, highlightedRegionIds = [], onSelectRegion }: Props) {
+export default function DestinationRegionalMap({ country, selectedRegionId, highlightedRegionIds = [], matchingRegionIds, onSelectRegion }: Props) {
   const highlighted = (id: string) => selectedRegionId ? selectedRegionId === id : highlightedRegionIds.includes(id)
   const zoomTransform = country === "australia"
     ? mapZoomTransform(australiaMapViewBox, australiaMapStates.filter(state => state.regionId === selectedRegionId).map(state => state.path))
@@ -34,7 +35,7 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
   // SVG buttons need explicit Enter/Space handling; full-size text controls in
   // the explorer provide an equivalent choice for small or clustered shapes.
   const control = (id: string, name: string, href: string, children: ReactNode) => onSelectRegion ? (
-    <g key={id} role="button" tabIndex={0} aria-label={`Preview ${name} birds`} aria-pressed={highlighted(id)}
+    <g key={id} data-bird-filter-match={matchingRegionIds ? matchingRegionIds.includes(id) : undefined} role="button" tabIndex={0} aria-label={`Preview ${name} birds`} aria-pressed={highlighted(id)}
       className={styles.regionControl} onClick={() => onSelectRegion(id)}
       onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectRegion(id) } }}>
       {children}
@@ -46,7 +47,7 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
     <div className="relative top-1/2 mx-auto aspect-[198/250] -translate-y-1/2" style={{ width: "min(100cqw, calc(100cqh * 198 / 250))" }} role="group" aria-label="Colombia planning-region map">
       <div className={`absolute inset-0 ${styles.pointZoom}`} style={selectedRegionId ? { transform: `scale(2.4) translate(${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.x ?? 50)}%, ${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.y ?? 50)}%)` } : undefined}>
       <ColombiaMapArtwork flat alt="" fill sizes="(max-width: 703px) 90vw, 560px" className="object-contain" />
-            <ColombiaRegionTargets onSelect={onSelectRegion} />
+            <ColombiaRegionTargets onSelect={onSelectRegion} matchingRegionIds={matchingRegionIds}/>
       {colombiaMapMarkers.map(region => {
         const selected = highlighted(region.slug)
         const className = `absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-800/40 text-[10px] font-semibold hover:z-10 hover:bg-emerald-800 hover:text-white focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-10 border-transparent" : "bg-white text-emerald-950"}`

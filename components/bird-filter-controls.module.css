@@ -1,0 +1,8 @@
+.control { position:relative; flex-shrink:0; color:#064e3b; text-align:left; }
+.trigger { display:grid; place-items:center; width:44px; height:44px; list-style:none; cursor:pointer; border:1px solid #c5dfd1; border-radius:999px; background:#fff; position:relative; }
+.trigger::-webkit-details-marker { display:none; }
+.trigger:focus-visible { outline:2px solid #047857; outline-offset:2px; }
+.active { position:absolute; right:1px; top:1px; width:9px; height:9px; border-radius:50%; background:#b45309; border:1px solid white; }
+.panel { position:fixed; inset:auto auto 1rem 50%; margin:0; transform:translateX(-50%); z-index:60; width:min(20rem,calc(100vw - 3rem)); max-height:min(30rem,65svh); overflow:auto; overscroll-behavior:contain; border:1px solid #b7dccc; border-radius:1rem; background:#f7fdf9; padding:1rem; box-shadow:0 10px 30px #064e3b26; font-size:.8rem; line-height:1.6; }
+
+.select { width:100%; min-height:44px; margin-top:.25rem; padding:.4rem; background:white; border:1px solid #b7dccc; border-radius:.5rem; color:#064e3b; }

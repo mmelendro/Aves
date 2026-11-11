@@ -2,6 +2,7 @@
  * Every Australian viewer uses this in-photo details sheet, preserving the
  * caller's local notes, sources, picker behaviour and media rights.
  */
+import BirdConservationLabel from "@/components/bird-conservation-label"
 import { SiteLink as Link } from "@/features/australia/components/site-link"
 import { ExternalLink, MapPin, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -23,6 +24,7 @@ const linkClass = "text-emerald-800 underline underline-offset-2 hover:text-emer
 export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, showBirdPicker, onSelectBird, onClose }: Props) {
   const speciesSource = bird.sources[0]
   const content = <>
+    <BirdConservationLabel bird={bird} sources/>
     {showBirdPicker && birds.length > 1 && <div>
       <label htmlFor={`${id}-bird-picker`} className="mb-2 block font-semibold text-emerald-900">Choose a bird · {birds.length} featured species</label>
       <select id={`${id}-bird-picker`} value={selectedIndex} onChange={event => onSelectBird(Number(event.target.value))} className="min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-3 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">

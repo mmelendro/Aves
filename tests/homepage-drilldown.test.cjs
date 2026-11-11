@@ -237,7 +237,7 @@ test("country map highlights follow every supported region of the displayed phot
 
 
 test("whole Colombian shapes keep the reviewed geography and native neighbouring guide links", () => {
-  const Targets = load("components/colombia-region-targets.tsx").default
+  const Targets = createLoader({react:{...React,useContext:()=>null}})("components/colombia-region-targets.tsx").default
   const boundaries = load("content/colombia-planning-boundaries.json")
   const choices = []
   const tree = Targets({ onSelect: id => choices.push(id) })

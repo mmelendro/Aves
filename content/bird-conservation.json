@@ -1,0 +1,2623 @@
+{
+  "checkedAt": "2026-11-11",
+  "scope": "Global species-level status for 73 photographed species concepts. Additional living New Zealand checklist entries retain unknown global status unless verified. Endemic flags refer to native country range, not regional occurrence. National records are a separately labelled, incomplete verified selection.",
+  "statusDefinitionSource": "https://datazone.birdlife.org/about-our-science/the-iucn-red-list",
+  "species": [
+    {
+      "scientificName": "Acanthis flammea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Acanthisitta chloris",
+      "gbifKey": 5229954,
+      "matchedName": "Acanthisitta chloris",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5229954/iucnRedListCategory",
+      "iucnTaxonId": "22698577",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Acridotheres tristis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Acrocephalus australis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Actitis hypoleucos",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Alauda arvensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Alectoris chukar",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Alisterus scapularis",
+      "gbifKey": 2479925,
+      "matchedName": "Alisterus scapularis",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2479925/iucnRedListCategory",
+      "iucnTaxonId": "22685046",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Anarhynchus atrifrons",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anarhynchus bicinctus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anarhynchus frontalis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anarhynchus leschenaultii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anarhynchus mongolus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anarhynchus obscurus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anarhynchus ruficapillus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anarhynchus veredus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anas acuta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anas aucklandica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anas castanea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anas chlorotis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anas gracilis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anas nesiotis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anas platyrhynchos",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anas superciliosa",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Andigena nigrirostris",
+      "gbifKey": 2478854,
+      "matchedName": "Andigena nigrirostris",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2478854/iucnRedListCategory",
+      "iucnTaxonId": "22682066",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anhinga melanogaster",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anous albivittus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anous minutus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anous stolidus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anser anser",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anthochaera carunculata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Anthornis melanura",
+      "gbifKey": 2487200,
+      "matchedName": "Anthornis melanura",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2487200/iucnRedListCategory",
+      "iucnTaxonId": "22704447",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Anthus novaeseelandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Aptenodytes forsteri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Aptenodytes patagonicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Apteryx australis",
+      "gbifKey": 2495145,
+      "matchedName": "Apteryx australis",
+      "globalStatus": "VU",
+      "statusSource": "https://api.gbif.org/v1/species/2495145/iucnRedListCategory",
+      "iucnTaxonId": "22678122",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Apteryx mantelli",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Apteryx maxima",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Apteryx owenii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Apteryx rowi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Apus pacificus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ara macao",
+      "gbifKey": 5959227,
+      "matchedName": "Ara macao",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5959227/iucnRedListCategory",
+      "iucnTaxonId": "22685563",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardea alba",
+      "gbifKey": 9752617,
+      "matchedName": "Ardea alba",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/9752617/iucnRedListCategory",
+      "iucnTaxonId": "22697043",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardea cinerea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardea intermedia",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardea pacifica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardenna bulleri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Ardenna carneipes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardenna creatopus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardenna gravis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardenna grisea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardenna pacifica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ardenna tenuirostris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Arenaria interpres",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Artamus cyanopterus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Artamus personatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Artamus superciliosus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Athene noctua",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Atlapetes melanocephalus",
+      "gbifKey": 2491466,
+      "matchedName": "Atlapetes melanocephalus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2491466/iucnRedListCategory",
+      "iucnTaxonId": "22721434",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Colombia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&list=ioc&region=co"
+    },
+    {
+      "scientificName": "Aythya australis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Aythya novaeseelandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Bartramia longicauda",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Boissonneaua jardini",
+      "gbifKey": 2476786,
+      "matchedName": "Boissonneaua jardini",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2476786/iucnRedListCategory",
+      "iucnTaxonId": "22687874",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Botaurus poiciloptilus",
+      "gbifKey": 2480912,
+      "matchedName": "Botaurus poiciloptilus",
+      "globalStatus": "VU",
+      "statusSource": "https://api.gbif.org/v1/species/2480912/iucnRedListCategory",
+      "iucnTaxonId": "22697353",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Branta canadensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Bubulcus ibis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Bulweria bulwerii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cacatua galerita",
+      "gbifKey": 2479888,
+      "matchedName": "Cacatua galerita",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2479888/iucnRedListCategory",
+      "iucnTaxonId": "22684781",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cacomantis flabelliformis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cacomantis pallidus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris acuminata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris alba",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris alpina",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris bairdii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris canutus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris falcinellus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris ferruginea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris fuscicollis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris himantopus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris mauri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris melanotos",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris minuta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris minutilla",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris pugnax",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris pusilla",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris ruficollis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris subminuta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris subruficollis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calidris tenuirostris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Callaeas wilsoni",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Callipepla californica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calonectris borealis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calonectris leucomelas",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Calyptorhynchus banksii",
+      "gbifKey": 2480108,
+      "matchedName": "Calyptorhynchus banksii",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2480108/iucnRedListCategory",
+      "iucnTaxonId": "22684744",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Cardinalis phoeniceus",
+      "gbifKey": 2490404,
+      "matchedName": "Cardinalis phoeniceus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2490404/iucnRedListCategory",
+      "iucnTaxonId": "22723822",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Carduelis carduelis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Casuarius casuarius",
+      "gbifKey": 5231783,
+      "matchedName": "Casuarius casuarius",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5231783/iucnRedListCategory",
+      "iucnTaxonId": "22678108",
+      "checkedAt": "2026-11-11",
+      "nationalStatus": {
+        "label": "Endangered · Australian subspecies C. c. johnsonii",
+        "code": "EN",
+        "system": "Australia EPBC",
+        "source": "https://www.dcceew.gov.au/environment/biodiversity/threatened/species/20-birds-by-2020/southern-cassowary"
+      }
+    },
+    {
+      "scientificName": "Ceratopipra erythrocephala",
+      "gbifKey": 2487629,
+      "matchedName": "Ceratopipra erythrocephala",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2487629/iucnRedListCategory",
+      "iucnTaxonId": "22700997_1",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cereopsis novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chalcostigma herrani",
+      "gbifKey": 2476805,
+      "matchedName": "Chalcostigma herrani",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2476805/iucnRedListCategory",
+      "iucnTaxonId": "22688036",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Charadrius melanops",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Charadrius novaeseelandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Charadrius semipalmatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chenonetta jubata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chlidonias albostriatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Chlidonias hybridus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chlidonias leucopterus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chlidonias niger",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chloebia gouldiae",
+      "gbifKey": 5789080,
+      "matchedName": "Chloebia gouldiae",
+      "globalStatus": "LC",
+      "statusSource": "https://doi.org/10.2305/IUCN.UK.2022-1.RLTS.T22719744A211561819.en",
+      "iucnTaxonId": "22719744_3",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au",
+      "assessmentYear": 2022,
+      "taxonomicNote": "GBIF uses the synonym Erythrura gouldiae. Direct global IUCN assessment confirms LC; national EPBC status is separate.",
+      "nationalStatus": {
+        "label": "Endangered",
+        "code": "EN",
+        "system": "Australia EPBC",
+        "source": "https://www.dcceew.gov.au/environment/biodiversity/threatened/recovery-plans/national-recovery-plan-gouldian-finch-erythrura-gouldiae"
+      }
+    },
+    {
+      "scientificName": "Chloris chloris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chroicocephalus bulleri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Chroicocephalus novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Chrysococcyx lucidus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Circus approximans",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Coeligena phalerata",
+      "gbifKey": 2477041,
+      "matchedName": "Coeligena phalerata",
+      "globalStatus": "NT",
+      "statusSource": "https://api.gbif.org/v1/species/2477041/iucnRedListCategory",
+      "iucnTaxonId": "22687825",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Colombia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&list=ioc&region=co"
+    },
+    {
+      "scientificName": "Coenocorypha aucklandica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Coenocorypha huegeli",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Coenocorypha pusilla",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Columba livia",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Columbina squammata",
+      "gbifKey": 2495888,
+      "matchedName": "Columbina squammata",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2495888/iucnRedListCategory",
+      "iucnTaxonId": "22690768",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Coracina novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Corvus frugilegus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Crex crex",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cuculus optatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cyanoramphus auriceps",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Cyanoramphus forbesi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Cyanoramphus hochstetteri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Cyanoramphus malherbi",
+      "gbifKey": 5229101,
+      "matchedName": "Cyanoramphus malherbi",
+      "globalStatus": "CR",
+      "statusSource": "https://api.gbif.org/v1/species/5229101/iucnRedListCategory",
+      "iucnTaxonId": "22724562",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Cyanoramphus novaezelandiae",
+      "gbifKey": 5229110,
+      "matchedName": "Cyanoramphus novaezelandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5229110/iucnRedListCategory",
+      "iucnTaxonId": "22727981",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cyanoramphus unicolor",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Cygnus atratus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Cygnus olor",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Dacelo novaeguineae",
+      "gbifKey": 2475648,
+      "matchedName": "Dacelo novaeguineae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2475648/iucnRedListCategory",
+      "iucnTaxonId": "22683189",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Daption capense",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Dendrocygna eytoni",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Diomedea antipodensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Diomedea epomophora",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Diomedea exulans",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Diomedea sanfordi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Dromaius novaehollandiae",
+      "gbifKey": 2495134,
+      "matchedName": "Dromaius novaehollandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2495134/iucnRedListCategory",
+      "iucnTaxonId": "22678117",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Egretta garzetta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Egretta novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Egretta sacra",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Emberiza cirlus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Emberiza citrinella",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eolophus roseicapilla",
+      "gbifKey": 2479598,
+      "matchedName": "Eolophus roseicapilla",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2479598/iucnRedListCategory",
+      "iucnTaxonId": "22684758",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Erythrogonys cinctus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eudocimus ruber",
+      "gbifKey": 5229204,
+      "matchedName": "Eudocimus ruber",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5229204/iucnRedListCategory",
+      "iucnTaxonId": "22697415",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eudynamys taitensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Eudyptes chrysocome",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eudyptes chrysolophus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eudyptes filholi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eudyptes moseleyi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eudyptes pachyrhynchus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Eudyptes robustus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Eudyptes sclateri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Eudyptula minor",
+      "gbifKey": 2481646,
+      "matchedName": "Eudyptula minor",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2481646/iucnRedListCategory",
+      "iucnTaxonId": "22697805",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eurypyga helias",
+      "gbifKey": 2474332,
+      "matchedName": "Eurypyga helias",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2474332/iucnRedListCategory",
+      "iucnTaxonId": "22691893",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Eurystomus orientalis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Falco cenchroides",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Falco novaeseelandiae",
+      "gbifKey": 2481003,
+      "matchedName": "Falco novaeseelandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2481003/iucnRedListCategory",
+      "iucnTaxonId": "22696476",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Fregata ariel",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fregata minor",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fregetta grallaria",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fregetta maoriana",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Fregetta tropica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fringilla coelebs",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fulica atra",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fulmarus glacialis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Fulmarus glacialoides",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gallinago hardwickii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gallinula chloropus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gallinula tenebrosa",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gallirallus australis",
+      "gbifKey": 2474535,
+      "matchedName": "Gallirallus australis",
+      "globalStatus": "VU",
+      "statusSource": "https://api.gbif.org/v1/species/2474535/iucnRedListCategory",
+      "iucnTaxonId": "22692384",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Garrodia nereis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gelochelidon nilotica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gerygone albofrontata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Gerygone igata",
+      "gbifKey": 2486551,
+      "matchedName": "Gerygone igata",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2486551/iucnRedListCategory",
+      "iucnTaxonId": "22704735",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Glareola maldivarum",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Grallaria ruficapilla",
+      "gbifKey": 2490523,
+      "matchedName": "Grallaria ruficapilla",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2490523/iucnRedListCategory",
+      "iucnTaxonId": "22703274",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Grallina cyanoleuca",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Grus sp. indet.",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gygis alba",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Gymnorhina tibicen",
+      "gbifKey": 2489450,
+      "matchedName": "Gymnorhina tibicen",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2489450/iucnRedListCategory",
+      "iucnTaxonId": "22706288",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Haematopus chathamensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Haematopus finschi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Haematopus unicolor",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Haliaeetus leucogaster",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Halobaena caerulea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Hemiphaga chathamensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Hemiphaga novaeseelandiae",
+      "gbifKey": 2495905,
+      "matchedName": "Hemiphaga novaeseelandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2495905/iucnRedListCategory",
+      "iucnTaxonId": "22727557",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Himantopus himantopus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Himantopus novaezelandiae",
+      "gbifKey": 5229125,
+      "matchedName": "Himantopus novaezelandiae",
+      "globalStatus": "CR",
+      "statusSource": "https://api.gbif.org/v1/species/5229125/iucnRedListCategory",
+      "iucnTaxonId": "22693690",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Hirundapus caudacutus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Hirundo neoxena",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Hydrobates leucorhous",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Hydrobates matsudairae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Hydroprogne caspia",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Hymenolaimus malacorhynchos",
+      "gbifKey": 2498332,
+      "matchedName": "Hymenolaimus malacorhynchos",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2498332/iucnRedListCategory",
+      "iucnTaxonId": "22680121",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Hypotaenidia philippensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ixobrychus minutus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Jabiru mycteria",
+      "gbifKey": 2481953,
+      "matchedName": "Jabiru mycteria",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2481953/iucnRedListCategory",
+      "iucnTaxonId": "22697710",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Lalage tricolor",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Larus dominicanus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Leucocarbo campbelli",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucocarbo carunculatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucocarbo chalconotus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucocarbo colensoi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucocarbo onslowi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucocarbo purpurascens",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Leucocarbo ranfurlyi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucocarbo stewarti",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Leucophaeus atricilla",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Leucophaeus pipixcan",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Lewinia muelleri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Limnodromus semipalmatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Limosa haemastica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Limosa lapponica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Limosa limosa",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Lugensa brevirostris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Machaeropterus striolatus",
+      "gbifKey": 6101077,
+      "matchedName": "Machaeropterus striolatus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/6101077/iucnRedListCategory",
+      "iucnTaxonId": "103676114",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Macronectes giganteus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Macronectes halli",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Malacorhynchus membranaceus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Malurus cyaneus",
+      "gbifKey": 2487516,
+      "matchedName": "Malurus cyaneus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2487516/iucnRedListCategory",
+      "iucnTaxonId": "22703736",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Malurus splendens",
+      "gbifKey": 2487511,
+      "matchedName": "Malurus splendens",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2487511/iucnRedListCategory",
+      "iucnTaxonId": "22703740",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Megadyptes antipodes",
+      "gbifKey": 2481632,
+      "matchedName": "Megadyptes antipodes",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2481632/iucnRedListCategory",
+      "iucnTaxonId": "22697800",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Meleagris gallopavo",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Menura novaehollandiae",
+      "gbifKey": 2488980,
+      "matchedName": "Menura novaehollandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2488980/iucnRedListCategory",
+      "iucnTaxonId": "22703605",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Microcarbo melanoleucos",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Milvus migrans",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Mohoua albicilla",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Mohoua novaeseelandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Mohoua ochrocephala",
+      "gbifKey": 2482622,
+      "matchedName": "Mohoua ochrocephala",
+      "globalStatus": "NT",
+      "statusSource": "https://api.gbif.org/v1/species/2482622/iucnRedListCategory",
+      "iucnTaxonId": "22705397",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Momotus aequatorialis",
+      "gbifKey": 2475311,
+      "matchedName": "Momotus aequatorialis",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2475311/iucnRedListCategory",
+      "iucnTaxonId": "22729189",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Monarcha melanopsis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Morus capensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Morus serrator",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Myiagra cyanoleuca",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Myiarchus apicalis",
+      "gbifKey": 2483558,
+      "matchedName": "Myiarchus apicalis",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2483558/iucnRedListCategory",
+      "iucnTaxonId": "22700424",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Colombia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&list=ioc&region=co"
+    },
+    {
+      "scientificName": "Nestor meridionalis",
+      "gbifKey": 2479594,
+      "matchedName": "Nestor meridionalis",
+      "globalStatus": "VU",
+      "statusSource": "https://api.gbif.org/v1/species/2479594/iucnRedListCategory",
+      "iucnTaxonId": "22684840",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Nestor notabilis",
+      "gbifKey": 2479593,
+      "matchedName": "Nestor notabilis",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2479593/iucnRedListCategory",
+      "iucnTaxonId": "22684831",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/",
+      "nationalStatus": {
+        "label": "Nationally Endangered",
+        "code": "EN",
+        "system": "New Zealand threat classification",
+        "source": "https://www.nzbirdsonline.org.nz/species/kea"
+      }
+    },
+    {
+      "scientificName": "Ninox novaeseelandiae",
+      "gbifKey": 2497817,
+      "matchedName": "Ninox novaeseelandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2497817/iucnRedListCategory",
+      "iucnTaxonId": "62023843",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Notiomystis cincta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Numenius hudsonicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Numenius madagascariensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Numenius minutus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Numenius phaeopus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Numenius tahitiensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Numida meleagris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Nycticorax caledonicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Oceanites oceanicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Onychoprion anaethetus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Onychoprion fuscatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Onychoprion lunatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Opisthocomus hoazin",
+      "gbifKey": 2496202,
+      "matchedName": "Opisthocomus hoazin",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2496202/iucnRedListCategory",
+      "iucnTaxonId": "22684428",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Oxypogon guerinii",
+      "gbifKey": 5228550,
+      "matchedName": "Oxypogon guerinii",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5228550/iucnRedListCategory",
+      "iucnTaxonId": "22726790",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Colombia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&list=ioc&region=co"
+    },
+    {
+      "scientificName": "Pachyptila belcheri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pachyptila crassirostris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pachyptila desolata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pachyptila pyramidalis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pachyptila salvini",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pachyptila turtur",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pachyptila vittata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pardalotus quadragintus",
+      "gbifKey": 2486620,
+      "matchedName": "Pardalotus quadragintus",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2486620/iucnRedListCategory",
+      "iucnTaxonId": "22704493",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Passer domesticus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pavo cristatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pelagodroma albiclunis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pelagodroma marina",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pelecanoides georgicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pelecanoides urinatrix",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pelecanus conspicillatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Petrochelidon ariel",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Petrochelidon nigricans",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Petroica australis",
+      "gbifKey": 2489323,
+      "matchedName": "Petroica australis",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2489323/iucnRedListCategory",
+      "iucnTaxonId": "103734942",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Petroica longipes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Petroica macrocephala",
+      "gbifKey": 2489318,
+      "matchedName": "Petroica macrocephala",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2489318/iucnRedListCategory",
+      "iucnTaxonId": "103734876",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Petroica traversi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Phaethon lepturus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phaethon rubricauda",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phalacrocorax carbo",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phalacrocorax featherstoni",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Phalacrocorax punctatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Phalacrocorax sulcirostris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phalacrocorax varius",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phalaropus fulicarius",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phalaropus lobatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phalaropus tricolor",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pharomachrus auriceps",
+      "gbifKey": 2496720,
+      "matchedName": "Pharomachrus auriceps",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2496720/iucnRedListCategory",
+      "iucnTaxonId": "22682738",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phasianus colchicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Philesturnus carunculatus",
+      "gbifKey": 2484494,
+      "matchedName": "Philesturnus carunculatus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2484494/iucnRedListCategory",
+      "iucnTaxonId": "103730490",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Philesturnus rufusater",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Phoebastria immutabilis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phoebastria nigripes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phoebetria fusca",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Phoebetria palpebrata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Platalea flavipes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Platalea regia",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Platycercus elegans",
+      "gbifKey": 2479311,
+      "matchedName": "Platycercus elegans",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2479311/iucnRedListCategory",
+      "iucnTaxonId": "22733483",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Platycercus eximius",
+      "gbifKey": 2479329,
+      "matchedName": "Platycercus eximius",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2479329/iucnRedListCategory",
+      "iucnTaxonId": "22685126",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Plegadis falcinellus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pluvialis dominicus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pluvialis fulva",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pluvialis squatarola",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Podiceps cristatus",
+      "gbifKey": 2482054,
+      "matchedName": "Podiceps cristatus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2482054/iucnRedListCategory",
+      "iucnTaxonId": "22696602",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Poliocephalus poliocephalus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Poliocephalus rufopectus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Poodytes punctatus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Porphyrio hochstetteri",
+      "gbifKey": 5228153,
+      "matchedName": "Porphyrio hochstetteri",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/5228153/iucnRedListCategory",
+      "iucnTaxonId": "22692808",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Porphyrio melanotus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Porzana fluminea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Procellaria aequinoctialis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Procellaria cinerea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Procellaria parkinsoni",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Procellaria westlandica",
+      "gbifKey": 2481494,
+      "matchedName": "Procellaria westlandica",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2481494/iucnRedListCategory",
+      "iucnTaxonId": "22698155",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Prosthemadera novaeseelandiae",
+      "gbifKey": 2487029,
+      "matchedName": "Prosthemadera novaeseelandiae",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2487029/iucnRedListCategory",
+      "iucnTaxonId": "22704472",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Prunella modularis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pseudobulweria rostrata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma alba",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma axillaris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pterodroma brevipes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma cervicalis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma cookii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pterodroma externa",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma gouldi",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pterodroma heraldica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma inexpectata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pterodroma lessonii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma leucoptera",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma longirostris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma magentae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pterodroma mollis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma neglecta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma nigripennis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pterodroma pycrofti",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Pterodroma solandri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ptilinopus regina",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ptilonorhynchus violaceus",
+      "gbifKey": 5231665,
+      "matchedName": "Ptilonorhynchus violaceus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5231665/iucnRedListCategory",
+      "iucnTaxonId": "22703679",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Ptiloris victoriae",
+      "gbifKey": 2494896,
+      "matchedName": "Ptiloris victoriae",
+      "globalStatus": "VU",
+      "statusSource": "https://api.gbif.org/v1/species/2494896/iucnRedListCategory",
+      "iucnTaxonId": "22706193_1",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Puffinus assimilis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Puffinus auricularis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Puffinus elegans",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Puffinus gavia",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Puffinus huttoni",
+      "gbifKey": 9564755,
+      "matchedName": "Puffinus huttoni",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/9564755/iucnRedListCategory",
+      "iucnTaxonId": "22698252",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Puffinus nativitatis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Puffinus puffinus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pygoscelis adeliae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pygoscelis antarcticus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pygoscelis papua",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Pyrrhura viridicata",
+      "gbifKey": 2479854,
+      "matchedName": "Pyrrhura viridicata",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2479854/iucnRedListCategory",
+      "iucnTaxonId": "22685836",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Colombia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&list=ioc&region=co"
+    },
+    {
+      "scientificName": "Ramphastos ambiguus",
+      "gbifKey": 2478779,
+      "matchedName": "Ramphastos ambiguus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2478779/iucnRedListCategory",
+      "iucnTaxonId": "22727999",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Ramphastos brevis",
+      "gbifKey": 2478769,
+      "matchedName": "Ramphastos brevis",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2478769/iucnRedListCategory",
+      "iucnTaxonId": "22682105",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Recurvirostra novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Rhipidura fuliginosa",
+      "gbifKey": 5231730,
+      "matchedName": "Rhipidura fuliginosa",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/5231730/iucnRedListCategory",
+      "iucnTaxonId": "22735745",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Rhipidura leucophrys",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Rostratula australis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Scythrops novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sericulus chrysocephalus",
+      "gbifKey": 2494814,
+      "matchedName": "Sericulus chrysocephalus",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2494814/iucnRedListCategory",
+      "iucnTaxonId": "22703676",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au"
+    },
+    {
+      "scientificName": "Spatula clypeata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Spatula rhynchotis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Stercorarius antarcticus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Stercorarius longicaudus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Stercorarius maccormicki",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Stercorarius parasiticus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Stercorarius pomarinus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sterna hirundo",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sterna paradisaea",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sterna striata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sterna sumatrana",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sterna vittata",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sternula albifrons",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sternula nereis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Streptopelia chinensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Streptopelia risoria",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Strigops habroptilus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Sturnus vulgaris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sula dactylatra",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sula leucogaster",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Sula sula",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Synoicus ypsilophorus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tachybaptus novaehollandiae",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tadorna tadornoides",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tadorna variegata",
+      "gbifKey": 2498011,
+      "matchedName": "Tadorna variegata",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2498011/iucnRedListCategory",
+      "iucnTaxonId": "22680015",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Thalassarche bulleri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Thalassarche carteri",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalassarche cauta",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalassarche chlororhynchos",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalassarche chrysostoma",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalassarche eremita",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Thalassarche impavida",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Thalassarche melanophris",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalassarche salvini",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalasseus bergii",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Thalassoica antarctica",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Threskiornis molucca",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Threskiornis spinicollis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Todiramphus sanctus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tribonyx ventralis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Trichoglossus moluccanus",
+      "globalStatus": "LC",
+      "checkedAt": "2026-11-11",
+      "statusSource": "https://birdlife.org.au/bird-profiles/rainbow-lorikeet/",
+      "endemicTo": "Australia",
+      "endemicSource": "https://datazone.birdlife.org/species/factsheet/rainbow-lorikeet-trichoglossus-moluccanus",
+      "taxonomicNote": "GBIF synonym match lumps this species; status and native-range endemic flag use the current BirdLife species concept instead."
+    },
+    {
+      "scientificName": "Tringa brevipes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tringa flavipes",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tringa incana",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tringa nebularia",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tringa stagnatilis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Turdus merula",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Turdus philomelos",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Tyto alba",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Vanellus miles",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Xenicus gilviventris",
+      "gbifKey": 2484583,
+      "matchedName": "Xenicus gilviventris",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/2484583/iucnRedListCategory",
+      "iucnTaxonId": "22698585",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "New Zealand",
+      "endemicSource": "https://www.birdsnz.org.nz/society-publications/checklist/"
+    },
+    {
+      "scientificName": "Xenus cinereus",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Zanda latirostris",
+      "gbifKey": 10755463,
+      "matchedName": "Zanda latirostris",
+      "globalStatus": "EN",
+      "statusSource": "https://api.gbif.org/v1/species/10755463/iucnRedListCategory",
+      "iucnTaxonId": "22684733",
+      "checkedAt": "2026-11-11",
+      "endemicTo": "Australia",
+      "endemicSource": "https://avibase.bsc-eoc.org/checklist.jsp?format=1&lang=EN&list=ioc&region=au",
+      "nationalStatus": {
+        "label": "Endangered",
+        "code": "EN",
+        "system": "Australia EPBC",
+        "source": "https://birdlife.org.au/bird-profiles/carnabys-black-cockatoo/"
+      }
+    },
+    {
+      "scientificName": "Zapornia pusilla",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Zapornia tabuensis",
+      "globalStatus": "unknown",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "scientificName": "Zosterops lateralis",
+      "gbifKey": 2489396,
+      "matchedName": "Zosterops lateralis",
+      "globalStatus": "LC",
+      "statusSource": "https://api.gbif.org/v1/species/2489396/iucnRedListCategory",
+      "iucnTaxonId": "22714212",
+      "checkedAt": "2026-11-11"
+    }
+  ]
+}

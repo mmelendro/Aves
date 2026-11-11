@@ -7,6 +7,10 @@
  */
 "use client"
 
+import BirdFilterControls from "@/components/bird-filter-controls"
+import BirdConservationLabel from "@/components/bird-conservation-label"
+import {useBirdFilters} from "@/components/bird-filter-context"
+import {filterConservationBirds} from "@/lib/bird-conservation"
 import { useSharedBirdAudio } from "./use-shared-bird-audio"
 import { FollowBirdCalls, type FollowCallStatus } from "@/lib/follow-bird-calls"
 import { playForegroundMedia } from "@/lib/media-focus"
@@ -55,7 +59,7 @@ export default function HomepageBirdCarousel({
   className,
   autoPlay = true,
   autoPlayInterval = 8000,
-  birds = allBirds,
+  birds: suppliedBirds = allBirds,
   showBirdPicker = false,
   onBirdChange,
   variant = "default",
@@ -65,6 +69,8 @@ export default function HomepageBirdCarousel({
   selection,
   imageTools,
 }: HomepageBirdCarouselProps) {
+  const {filters}=useBirdFilters()
+  const birds=filterConservationBirds(suppliedBirds,filters)
   const localizeHome = useColombiaHomeCopy()
 
   const isDestinationCard = variant === "destination-card"
@@ -262,7 +268,9 @@ export default function HomepageBirdCarousel({
     if (Math.abs(horizontal) > 50 && Math.abs(horizontal) > Math.abs(vertical) * 1.5) goToSlide(selectedIndex + (horizontal < 0 ? 1 : -1))
   }
 
-  if (!currentBird) return null
+  if (!currentBird) return <div className="min-h-48 rounded-2xl border border-emerald-100 bg-white p-4 text-emerald-950" role="region" aria-label={label}>
+    <BirdFilterControls align="left"/><p className="mt-4" role="status">No featured birds match these filters in this view.</p><p className="mt-2 text-sm">Change your bird filters, habitat or region. This selection is not a complete checklist.</p>
+  </div>
   const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : callPlaying ? "Pause bird call" : "Listen to bird call"
   const infoPanel = showInfo ? <SpeciesDetailsPanel id={`${carouselId}-info`} bird={currentBird} birds={birds}
     selectedIndex={selectedIndex} showBirdPicker={showBirdPicker}
@@ -342,6 +350,7 @@ export default function HomepageBirdCarousel({
             <h3 className="text-base font-semibold leading-tight sm:text-lg">{currentBird.commonName}</h3>
             <p className="mt-1 text-xs italic text-white/90 sm:text-sm">{currentBird.scientificName}</p>
             <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-white/95"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span>{currentBird.primaryRegion}</span></p>
+            <BirdConservationLabel bird={currentBird}/>
           </div>}
         </div>
         {/* The photographer follows the selected slide; never keep a static card credit. */}
@@ -361,7 +370,7 @@ export default function HomepageBirdCarousel({
               if (sharedAudio.available) { sharedAudio.toggleFollow(); return }
               if (follow.current?.enabled) follow.current.stop()
               else follow.current?.start(audioRef.current)
-            }}>Listen as you change birds: {callsFollow ? "On" : "Off"}</button>
+            }}>Listen as you change birds: {callsFollow ? "On" : "Off"}</button><BirdFilterControls/>
           <p className="text-xs leading-5" role="status">{sharedAudio.available ? callsFollow ? (currentBird.audioFile ? "Listening follows your bird choices in the shared player." : "No recording for this bird. Choose another to continue.") : "Optional for this viewer. Stops when you leave or hide this page." : followStatus === "blocked" ? "Playback stopped. Press Listen again to resume." : followStatus === "missing" ? "No recording for this bird. Choose another to continue." : followStatus === "loading" ? "Loading this bird’s call…" : followStatus === "playing" ? "Listening follows your bird choices. Pause to stop." : followStatus === "ready" ? "Choose another bird to hear its call." : "Optional for this viewer. Stops when you leave or hide this page."}</p>
         </div>
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}

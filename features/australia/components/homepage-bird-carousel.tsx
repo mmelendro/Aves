@@ -1,5 +1,9 @@
 "use client"
 
+import BirdFilterControls from "@/components/bird-filter-controls"
+import BirdConservationLabel from "@/components/bird-conservation-label"
+import {useBirdFilters} from "@/components/bird-filter-context"
+import {filterConservationBirds} from "@/lib/bird-conservation"
 import { useSharedBirdAudio } from "./use-shared-bird-audio"
 
 /*
@@ -47,12 +51,14 @@ export default function HomepageBirdCarousel({
   className,
   autoPlay = true,
   autoPlayInterval = 8000,
-  birds = allBirds,
+  birds: suppliedBirds = allBirds,
   showBirdPicker = false,
   onBirdChange,
   fillPanel = false,
   label = "Bird photographs",
 }: HomepageBirdCarouselProps) {
+  const {filters}=useBirdFilters()
+  const birds=filterConservationBirds(suppliedBirds,filters)
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -221,7 +227,9 @@ export default function HomepageBirdCarousel({
     if (Math.abs(horizontal) > 50 && Math.abs(horizontal) > Math.abs(vertical) * 1.5) goToSlide(selectedIndex + (horizontal < 0 ? 1 : -1))
   }
 
-  if (!currentBird) return null
+  if (!currentBird) return <div className="min-h-48 rounded-2xl border border-emerald-100 bg-white p-4 text-emerald-950" role="region" aria-label={label}>
+    <BirdFilterControls align="left"/><p className="mt-4" role="status">No featured birds match these filters in this view.</p><p className="mt-2 text-sm">Change your bird filters, habitat or region. This selection is not a complete checklist.</p>
+  </div>
   const audioButtonText = !currentBird.audioFile ? "Recording not yet available" : audioLoading ? "Loading bird call..." : audioError ? "Retry bird call" : callPlaying ? "Pause bird call" : "Listen to bird call"
 
   const infoPanel = showInfo ? <SpeciesDetailsPanel id={`${carouselId}-info`} bird={currentBird} birds={birds}
@@ -295,6 +303,7 @@ export default function HomepageBirdCarousel({
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}
         {/* Announce manual changes, but avoid repeated screen-reader announcements during the slideshow. */}
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
+        <div className="relative z-30 flex items-center justify-between gap-2 border-t border-emerald-100 bg-white px-3 py-1 text-emerald-950"><BirdConservationLabel bird={currentBird}/><BirdFilterControls/></div>
       </Card>
     </div>
   )

@@ -59,3 +59,6 @@
 .islandScope select { flex:1; min-width:0; width:auto; }
 
 .layeredPanel > div { scroll-margin-top:calc(var(--guide-header-offset,8.25rem) + 4rem); }
+
+.regionControl[data-bird-filter-match="true"] .regionLand { stroke:#b45309; stroke-width:3; }
+.regionControl[data-bird-filter-match="false"] .regionLand { opacity:.3; }

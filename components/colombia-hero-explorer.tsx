@@ -6,6 +6,8 @@
  */
 "use client"
 
+import {useBirdFilters} from "@/components/bird-filter-context"
+import {filterConservationBirds} from "@/lib/bird-conservation"
 import { guideMapCue } from "@/lib/guide-map-cue"
 
 import { placeInSentence } from "@/lib/place-language"
@@ -33,6 +35,7 @@ import { regions } from "@/content/regions"
 
 export default function ColombiaHeroExplorer({ media, initialRegion, initialBird, resizable = false }: { media?: ReactNode; initialRegion?: string; initialBird?: BirdProfile; resizable?: boolean } = {}) {
   const { publish } = useHeaderLandscape()
+  const {filters}=useBirdFilters()
   const localizeHome = useColombiaHomeCopy()
 
   const [currentBird, setCurrentBird] = useState(initialBird ?? birdData[0])
@@ -43,7 +46,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
   const backRef = useRef<HTMLButtonElement>(null)
   const selectRef = useRef<HTMLSelectElement>(null)
   useEffect(() => { if (chosenRegion && !media) backRef.current?.focus({ preventScroll: true }) }, [chosenRegion, media])
-  const birds = chosenRegion ? colombiaRegionBirds(chosenRegion) : birdData
+  const birds = filterConservationBirds(chosenRegion ? colombiaRegionBirds(chosenRegion) : birdData,filters)
   const chooseRegion = (id: string) => {
     if (!mapMarkers.some(region => region.slug === id)) return
     publish({country:"colombia",regionId:id})

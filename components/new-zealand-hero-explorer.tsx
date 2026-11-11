@@ -7,6 +7,8 @@
 
 import Link from "next/link"
 import { useContext, useEffect, useId, useState } from "react"
+import {useBirdFilters} from "@/components/bird-filter-context"
+import {filterConservationBirds} from "@/lib/bird-conservation"
 import { useHeaderLandscape } from "./header-landscape-context"
 import { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
@@ -30,6 +32,7 @@ import { filterSouthIslandBirds, southIslandEcosystems, type SouthIslandEcosyste
 
 export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZealandIslandId } = {}) {
   const { publish } = useHeaderLandscape()
+  const {filters}=useBirdFilters()
   const [chosenRegion, setChosenRegion] = useState<NewZealandIslandId | undefined>(regionId)
   const ecosystemId = useId()
   const sharedHabitat = useContext(SouthIslandHabitatContext)
@@ -38,10 +41,11 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
   const ecosystem = regionId === "south-island" && sharedHabitat ? sharedHabitat.value : localEcosystem
   // Pilot only on the dedicated South Island page; the country overview keeps
   // its existing island navigation and full collection unchanged.
-  const birds = regionId === "south-island" ? filterSouthIslandBirds(newZealandRegionBirds(chosenRegion), ecosystem) : newZealandRegionBirds(chosenRegion)
+  const regionBirds = regionId === "south-island" ? filterSouthIslandBirds(newZealandRegionBirds(chosenRegion), ecosystem) : newZealandRegionBirds(chosenRegion)
+  const birds=filterConservationBirds(regionBirds,filters)
   const activeEcosystem = southIslandEcosystems.find(item => item.id === ecosystem)
   const collectionLabel = activeEcosystem ? `South Island birds · ${activeEcosystem.name}` : chosenRegion === "south-island" ? "South Island bird photographs" : chosenRegion === "north-island" ? "North Island bird photographs" : chosenRegion === "rakiura" ? "Rakiura bird photographs" : "New Zealand bird photographs"
-  const [currentBird, setCurrentBird] = useState(birds[0])
+  const [currentBird, setCurrentBird] = useState(newZealandRegionBirds()[0])
   const briefHref = `/account?country=new-zealand&region=${chosenRegion || "south-island"}`
   const overview = newZealandRegions.find(region => region.id === chosenRegion)
   const [selected, setSelected] = useState<string[]>([])

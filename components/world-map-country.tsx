@@ -13,9 +13,9 @@ interface WorldMapCountryProps {
 }
 
 export default function WorldMapCountry({ id, name, path, anchor, label }: WorldMapCountryProps) {
-  const { selectedId, selectDestination } = useDestinationSelection()
+  const { selectedId, selectDestination, matchingCountryIds } = useDestinationSelection()
   return (
-    <g role="button" tabIndex={0} aria-label={`Show ${name} birds`} aria-pressed={selectedId === id} aria-controls="homepage-country-preview" className={styles.destination}
+    <g data-bird-filter-match={matchingCountryIds ? matchingCountryIds.includes(id) : undefined} role="button" tabIndex={0} aria-label={`Show ${name} birds`} aria-pressed={selectedId === id} aria-controls="homepage-country-preview" className={styles.destination}
       onClick={() => selectDestination(id)}
       onKeyDown={event => {
         if (event.key === "Enter" || event.key === " ") {

@@ -6,6 +6,9 @@
  */
 "use client"
 
+import {useBirdFilters} from "./bird-filter-context"
+import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
+import {newZealandRegionBirds} from "@/content/new-zealand-carousel"
 import { placeInSentence } from "@/lib/place-language"
 import { MapViewer } from "./map-viewer"
 import Link from "next/link"
@@ -42,6 +45,8 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
   const canReset = Boolean(onResetFocus)
   useEffect(() => { if (focusedIsland && canReset) backRef.current?.focus({ preventScroll: true }) }, [focusedIsland, canReset])
   const router = useRouter()
+  const {filters}=useBirdFilters()
+  const matching=(id:NewZealandIslandId)=>!birdFiltersActive(filters)||filterConservationBirds(newZealandRegionBirds(id),filters).length>0
   const preview = useRegionPreview(id => onSelectIsland?.(id as NewZealandIslandId), href => router.push(href))
   const choose = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     if (onSelectIsland && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
@@ -68,7 +73,7 @@ export default function NewZealandMap({ compact = false, highlightedIslands = []
               return (
                 <Link key={island.id} href={newZealandRegionHref(island.id)} onKeyDown={event => { if (onSelectIsland) preview.activateKey(event, island.id, newZealandRegionHref(island.id)) }} onClick={event => choose(event, island.id)} aria-label={`Explore ${placeInSentence(island.label)}`} className="group outline-none">
                   <g className={`${highlighted ? "fill-emerald-800" : "fill-[#c5dbd0]"} stroke-[#6e9582] transition-colors group-hover:fill-[#9cc4af] group-focus:fill-[#9cc4af] group-focus:stroke-emerald-950`}>
-                    {island.paths.map((path, pathIndex) => <path key={pathIndex} d={path} strokeWidth={highlighted ? "2" : "1.2"} vectorEffect="non-scaling-stroke" fillRule="evenodd" className="group-focus:stroke-[3]" />)}
+                    {island.paths.map((path, pathIndex) => <path key={pathIndex} opacity={matching(island.id as NewZealandIslandId) ? 1 : .25} d={path} strokeWidth={highlighted ? "2" : "1.2"} vectorEffect="non-scaling-stroke" fillRule="evenodd" className="group-focus:stroke-[3]" />)}
                   </g>
                   {!focusIsland && <>
                   <rect x={label.x - label.width / 2} y={label.y - (compact ? 28 : 18)} width={label.width} height={compact ? "56" : "36"} rx={compact ? "24" : "18"} className={`${highlighted ? "fill-emerald-800 stroke-emerald-800" : "fill-white stroke-emerald-300"} group-hover:stroke-emerald-800 group-focus:stroke-emerald-950 group-focus:stroke-[3]`} />

@@ -7,6 +7,7 @@ export const DestinationSelectionContext = createContext<{
   selectedId: string
   selectDestination: (id: string) => void
   zoomed?: boolean
+  matchingCountryIds?: readonly string[]
 } | null>(null)
 
 export function useDestinationSelection() {

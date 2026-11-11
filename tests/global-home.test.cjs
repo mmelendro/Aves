@@ -144,10 +144,10 @@ test("country cards are regional maps with canonical region links and no extra c
   const html = renderToStaticMarkup(React.createElement(Cards))
   const links = anchors(html)
   assert.equal((html.match(/<article /g) || []).length, 3)
-  assert.equal((html.match(/<select /g) || []).length, 3, "every card has the same touch/keyboard location selector")
+  assert.equal((html.match(/<select[^>]*id="region-[^"]*"/g) || []).length, 3, "every card has the same touch/keyboard location selector")
   assert.equal((html.match(/<details /g) || []).length, 3, "every card retains a full-name guide list")
   const ids = [...html.matchAll(/<select[^>]* id="([^"]+)"/g)].map(match => match[1])
-  assert.equal(new Set(ids).size, 3, "selector labels are unique across country cards")
+  assert.equal(new Set(ids).size, ids.length, "selector labels are unique across country cards")
   for (const region of load("content/colombia-map-markers.ts").colombiaMapMarkers) assert.ok(html.replaceAll("&amp;", "&").includes(`>${region.name}</option>`), region.name)
   for (const state of load("content/global-australian-map.ts").australiaMapStates) assert.ok(html.includes(`>${state.name}</option>`), state.name)
   for (const island of load("content/new-zealand-map.json").islands) assert.ok(html.includes(`>${island.label}</option>`), island.label)
@@ -402,7 +402,7 @@ test("Colombia retains the original planning boundaries and matching marker regi
 test("all Colombia card shapes and dots share named previews without hover arming navigation", () => {
   let selected
   const armed = {current:null}
-  const renderer = createLoader({react:{...React,
+  const renderer = createLoader({react:{...React,useContext:()=>null,
     useState: initial => { selected ??= initial; return [selected,next => {selected=typeof next==="function" ? next(selected) : next}] },
     useRef: () => armed, useId: () => "card-test",
   }})

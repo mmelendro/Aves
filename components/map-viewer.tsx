@@ -3,6 +3,7 @@
 import { useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { Hand, Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react"
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, type MapView } from "@/lib/map-gestures.mjs"
+import BirdFilterControls from "./bird-filter-controls"
 import { FieldGuideContext } from "./field-guide-context"
 import styles from "./map-viewer.module.css"
 
@@ -58,7 +59,7 @@ export function MapViewer({ children, label, gestures = true, credits, listenCon
         {!expanded && <button className={styles.control} type="button" aria-label={`Use touch gestures on ${label}`} aria-pressed={move} onClick={()=>{setMove(!move);points.current.clear();start.current=null}}><Hand size={18} aria-hidden="true"/></button>}
         <span className="text-xs tabular-nums text-emerald-900" aria-live="off">{view.zoom.toFixed(1)}×</span>
       </>}
-      <div className="ml-auto flex items-center gap-1">{expanded && guide?.bird && <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 text-sm text-emerald-950" onClick={()=>{resize(false);if(guide.openBirds)guide.openBirds();else guide.showBirds()}} aria-label={`View ${guide.bird.commonName} in the bird guide`}><img src={guide.bird.image} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover" style={{objectPosition:guide.bird.imagePosition}}/><span>{guide.bird.commonName}</span></button>}{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
+      <div className="ml-auto flex items-center gap-1">{expanded && guide?.bird && <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 text-sm text-emerald-950" onClick={()=>{resize(false);if(guide.openBirds)guide.openBirds();else guide.showBirds()}} aria-label={`View ${guide.bird.commonName} in the bird guide`}><img src={guide.bird.image} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover" style={{objectPosition:guide.bird.imagePosition}}/><span>{guide.bird.commonName}</span></button>}<BirdFilterControls/>{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
     </div>
     {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Home to reset" : "Use the controls to zoom, or turn on Move for dragging and pinching. Page scrolling stays available."}</p>}
     <div ref={surface} data-map-surface="true" data-gesturing={gesturing || undefined} className={styles.surface} tabIndex={gestures ? 0 : undefined} role={gestures ? "group" : undefined} aria-label={gestures ? `${label} gesture surface` : undefined} style={{touchAction: active ? "none" : "pan-y pinch-zoom",cursor:active ? "grab" : undefined}}

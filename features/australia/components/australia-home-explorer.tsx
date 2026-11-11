@@ -8,6 +8,8 @@ import { guideMapCue } from "@/lib/guide-map-cue"
  * bird's complete range. Geographic shapes come from content/australia-map.ts, never logo artwork.
  */
 
+import {useBirdFilters} from "@/components/bird-filter-context"
+import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
 import { useHeaderLandscape } from "./header-landscape-context"
 import { useRegionPreview } from "./use-region-preview"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
@@ -33,13 +35,14 @@ import regionOverviews from "@/features/australia/content/region-overviews.json"
 
 export function AustraliaHomeExplorer({ media, initialRegion, resizable = false }: { media?: ReactNode; initialRegion?: string; resizable?: boolean } = {}) {
   const { publish } = useHeaderLandscape()
+  const {filters}=useBirdFilters()
   const id = useId()
   const [chosenRegion, setChosenRegion] = useState(initialRegion ?? "")
   const backButton = useRef<HTMLButtonElement>(null)
   const regionSelect = useRef<HTMLSelectElement>(null)
   const focusedRegion = regionOptions.find(region => region.id === chosenRegion)
   const focusedOverview = regionOverviews.regions.find(region => region.id === focusedRegion?.id)
-  const birds = australianRegionBirds(focusedRegion?.id)
+  const birds = filterConservationBirds(australianRegionBirds(focusedRegion?.id),filters)
   // React state remembers the displayed bird. The stable callback avoids unnecessary effect retriggers.
   const [bird, setBird] = useState<BirdProfile>(birds[0] ?? birdData[0])
   const onBirdChange = useCallback((nextBird: BirdProfile) => setBird(nextBird), [])
@@ -89,7 +92,7 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
           <g className={zoomStyles.layer} style={{ transform: mapTransform }} data-map-zoom={focusedRegion?.id ?? "country"}>
           {australiaMapStates.map(state => {
             const selected = state.regionId === highlightedRegion?.id
-            const outline = <path d={state.path} fill={selected ? "#065f46" : "#c5dbd0"} stroke="#6e9582" strokeWidth="1" strokeLinejoin="round" vectorEffect="non-scaling-stroke" fillRule="evenodd" className={`transition-colors group-focus-visible:stroke-emerald-950 group-focus-visible:[stroke-width:3] motion-reduce:transition-none ${selected ? "group-hover:fill-emerald-700 group-focus-visible:fill-emerald-700" : "group-hover:fill-[#9cc4af] group-focus-visible:fill-[#9cc4af]"}`} />
+            const outline = <path opacity={birdFiltersActive(filters) && state.regionId && !filterConservationBirds(australianRegionBirds(state.regionId),filters).length ? .25 : 1} d={state.path} fill={selected ? "#065f46" : "#c5dbd0"} stroke="#6e9582" strokeWidth="1" strokeLinejoin="round" vectorEffect="non-scaling-stroke" fillRule="evenodd" className={`transition-colors group-focus-visible:stroke-emerald-950 group-focus-visible:[stroke-width:3] motion-reduce:transition-none ${selected ? "group-hover:fill-emerald-700 group-focus-visible:fill-emerald-700" : "group-hover:fill-[#9cc4af] group-focus-visible:fill-[#9cc4af]"}`} />
             return state.regionId ? <a key={state.code} href={sitePath(`/regions/${state.regionId}`)} onKeyDown={event => { if (!media) preview.activateKey(event, state.regionId!, sitePath(`/regions/${state.regionId}`)) }} onClick={event => previewRegion(event, state.regionId!)} aria-label={`Explore ${state.name}`} className="group outline-none"><title>{state.name}</title>{outline}</a> : <g key={state.code} aria-hidden="true">{outline}</g>
           })}
           {highlightedShape && <svg x={highlightedShape.label[0]-markerSize/2} y={highlightedShape.label[1]-markerSize/2} width={markerSize} height={markerSize} pointerEvents="none"><MapFeatherMarker size={markerSize}/></svg>}

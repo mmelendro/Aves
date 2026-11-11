@@ -6,6 +6,7 @@
  * picker behavior and media rights while the presentation changes.
  */
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
+import BirdConservationLabel from "@/components/bird-conservation-label"
 import Link from "next/link"
 import { ExternalLink, MapPin, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -29,6 +30,7 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
 
   const speciesSource = bird.sources[0]
   const content = <>
+    <BirdConservationLabel bird={bird} sources/>
     {showBirdPicker && birds.length > 1 && <div>
       <label htmlFor={`${id}-bird-picker`} className="mb-2 block font-semibold text-emerald-900">Choose a bird · {birds.length} featured species</label>
       <select id={`${id}-bird-picker`} value={selectedIndex} onChange={event => onSelectBird(Number(event.target.value))} className="min-h-11 w-full rounded-lg border border-emerald-200 bg-white px-3 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">

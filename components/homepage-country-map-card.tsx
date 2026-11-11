@@ -4,6 +4,9 @@
  * The select and full-name list provide 44px alternatives to small map locations.
  * First map activation previews; a later activation opens its real guide URL.
  */
+import {useBirdFilters} from "./bird-filter-context"
+import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
+import {getDestinationRegionBirds} from "@/content/destination-regions"
 import { placeInSentence } from "@/lib/place-language"
 import { MapViewer } from "./map-viewer"
 import { useId, useState } from "react"
@@ -35,6 +38,9 @@ const colombiaShapes = regionsByCountry.colombia.map(region => {
 })
 
 export default function HomepageCountryMapCard({ country, name, href }: { country: string; name: string; href: string }) {
+  const {filters}=useBirdFilters()
+  const filtering=birdFiltersActive(filters)
+  const matches=(id:string)=>filterConservationBirds(getDestinationRegionBirds(country,id),filters).length
   const regions = regionsByCountry[country]
   const [activeId, setActiveId] = useState(regions[0].id)
   const { publish } = useHeaderLandscape()
@@ -61,12 +67,12 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
             {/* Preserve the reviewed paths, holes and fixed artwork order. Tiny
                 smoothing overlaps belong to the later painted path; selection
                 never reorders shapes, and borders do not enlarge hit regions. */}
-            {colombiaShapes.map(region => <a key={region.id} href={region.href} aria-label={`Explore ${placeInSentence(region.name)} planning region`} {...focusRegion(region)} className={`${styles.area} ${styles.colombiaArea}`} data-active={activeId === region.id} data-region-shape={region.id}>
+            {colombiaShapes.map(region => <a key={region.id} href={region.href} aria-label={`Explore ${placeInSentence(region.name)} planning region`} {...focusRegion(region)} className={`${styles.area} ${styles.colombiaArea}`} data-active={activeId === region.id} data-region-shape={region.id} data-bird-filter-match={filtering ? matches(region.id)>0 : undefined}>
               <path d={region.path} fillRule="evenodd" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
             </a>)}
           </g>
-            : country === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => <a key={state.regionId} href={`/australia/regions/${state.regionId}`} aria-label={`Explore ${state.name}`} {...focusRegion(regions.find(region => region.id === state.regionId)!)} className={styles.area} data-active={activeId === state.regionId}><path d={state.path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/></a>)
-            : nz.islands.map(island => <a key={island.id} href={newZealandRegionHref(island.id)} aria-label={`Explore ${placeInSentence(island.label)}`} {...focusRegion(regions.find(region => region.id === island.id)!)} className={styles.area} data-active={activeId === island.id}>{island.paths.map((path,index) => <path key={index} d={path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/>)}</a>)}
+            : country === "australia" ? australiaMapStates.filter(state => state.regionId).map(state => <a key={state.regionId} href={`/australia/regions/${state.regionId}`} aria-label={`Explore ${state.name}`} {...focusRegion(regions.find(region => region.id === state.regionId)!)} className={styles.area} data-active={activeId === state.regionId} data-bird-filter-match={filtering ? matches(state.regionId!)>0 : undefined}><path d={state.path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/></a>)
+            : nz.islands.map(island => <a key={island.id} href={newZealandRegionHref(island.id)} aria-label={`Explore ${placeInSentence(island.label)}`} {...focusRegion(regions.find(region => region.id === island.id)!)} className={styles.area} data-active={activeId === island.id} data-bird-filter-match={filtering ? matches(island.id)>0 : undefined}>{island.paths.map((path,index) => <path key={index} d={path} fillRule="evenodd" vectorEffect="non-scaling-stroke"/>)}</a>)}
         </svg>
         {country === "colombia" && regions.map(region => {
           const x=20+(320-vw*scale)/2+(region.x-vx)*scale, y=60+(244-vh*scale)/2+(region.y-vy)*scale
@@ -81,7 +87,7 @@ export default function HomepageCountryMapCard({ country, name, href }: { countr
       <p className="mb-2 text-xs leading-5 text-gray-600">Tap a region to preview. Tap it again, or choose Explore, to open its guide.</p>
       {description && <p className="mb-2 text-xs leading-5 text-emerald-900" aria-live="polite">{description}</p>}
       <label htmlFor={`region-${id}`}>Locate a {country === "new-zealand" ? "main island" : country === "australia" ? "state or territory" : "planning region"}</label>
-      <select id={`region-${id}`} value={active.id} onChange={event => preview.preview(event.target.value)}>{regions.map(region => <option key={region.id} value={region.id}>{region.name}</option>)}</select>
+      <select id={`region-${id}`} value={active.id} onChange={event => preview.preview(event.target.value)}>{regions.map(region => <option key={region.id} value={region.id}>{region.name}{filtering ? ` · ${matches(region.id)} matches` : ""}</option>)}</select>
       <a className={styles.regionAction} href={active.href}>Explore {placeInSentence(active.name)}<ArrowRight aria-hidden="true" size={16}/></a>
     </div>
     <p className={styles.credit}>{country === "colombia" ? "AVES planning-region artwork · Representative locations, not official administrative or precise ecological boundaries." : <><a href={country === "australia" ? australiaMapProvenance.sourceUrl : nz.source.url}>Natural Earth</a> · Public domain · {country === "australia" ? "External territories not shown." : "Main islands shown."}</>}</p>

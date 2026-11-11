@@ -50,6 +50,7 @@ function componentHarness(file, name, props, overrides = {}) {
     const code = ts.transpileModule(readFileSync(filename, "utf8"), { fileName: filename.replace(/\.mjs$/, ".ts"), compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText
     const requireModule = id => {
       if (Object.hasOwn(mocks, id)) return mocks[id]
+      if (id.endsWith(".module.css")) return {__esModule:true,default:new Proxy({}, {get:(_,key)=>String(key)})}
       if (id === "lucide-react" || id.startsWith("@/components/ui/")) return new Proxy({}, { get: (_, key) => String(key) })
       if (id === "@/components/mobile-navigation-overlay") return { MobileNavigationOverlay: "MobileNavigationOverlay" }
       if (id.startsWith("@/") || id.startsWith(".")) {

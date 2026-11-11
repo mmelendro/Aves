@@ -10,6 +10,7 @@ import { PreviewModeProvider } from "@/components/preview-mode"
 import { isReadOnlyPreview } from "@/lib/deployment-mode"
 import { HeaderLandscapeProvider } from "@/components/header-landscape-context"
 import { publicNavigationPaths } from "@/lib/public-navigation"
+import { BirdFilterProvider } from "@/components/bird-filter-context"
 import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
@@ -95,7 +96,7 @@ export default function RootLayout({
       <body>
         <PreviewModeProvider readOnly={isReadOnlyPreview()}>
           <CookieConsentProvider>
-            <HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider>
+            <BirdFilterProvider><HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider></BirdFilterProvider>
             <CookiePreferenceCenter />
             <CookieBanner />
           </CookieConsentProvider>

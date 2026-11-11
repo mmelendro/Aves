@@ -29,3 +29,6 @@
   .text { fill: LinkText; }
   .destination:focus-visible .label { stroke: Highlight; }
 }
+
+.destination[data-bird-filter-match="true"] .country { stroke:#b45309; stroke-width:4; }
+.destination[data-bird-filter-match="false"] .country { opacity:.3; }
