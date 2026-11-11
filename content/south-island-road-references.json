@@ -1,0 +1,128 @@
+{
+  "reviewedAt": "2026-11-11",
+  "conditionsUrl": "https://www.journeys.nzta.govt.nz/journey-planner",
+  "sources": {
+    "doc-punchbowl": {
+      "publisher": "Department of Conservation",
+      "kind": "public-agency",
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/arthurs-pass-national-park/things-to-do/tracks/devils-punchbowl-walking-track/",
+      "stopPolicy": "not specified"
+    },
+    "kaikoura": {
+      "publisher": "Destination Kaikōura",
+      "kind": "regional-tourism",
+      "url": "https://www.kaikoura.co.nz/about-kaikoura",
+      "stopPolicy": "not specified"
+    },
+    "hanmer": {
+      "publisher": "Hanmer Springs Thermal Pools & Spa",
+      "kind": "operator",
+      "url": "https://hanmersprings.co.nz/visiting-the-region",
+      "stopPolicy": "not specified"
+    },
+    "realnz": {
+      "publisher": "RealNZ",
+      "kind": "operator",
+      "url": "https://www.realnz.com/en/plan/driving-times/",
+      "stopPolicy": "not specified"
+    },
+    "fiordland": {
+      "publisher": "Visit Fiordland",
+      "kind": "regional-tourism",
+      "url": "https://www.fiordland.org.nz/plan/getting-to-fiordland/",
+      "stopPolicy": "rest stops included; sightseeing excluded"
+    }
+  },
+  "corridors": [
+    {
+      "fromId": "christchurch",
+      "toId": "arthurs-pass",
+      "minutes": 150,
+      "sourceId": "doc-punchbowl"
+    },
+    {
+      "fromId": "greymouth",
+      "toId": "arthurs-pass",
+      "minutes": 90,
+      "sourceId": "doc-punchbowl"
+    },
+    {
+      "fromId": "christchurch",
+      "toId": "kaikoura",
+      "minutes": 150,
+      "sourceId": "kaikoura"
+    },
+    {
+      "fromId": "picton",
+      "toId": "kaikoura",
+      "minutes": 120,
+      "sourceId": "kaikoura"
+    },
+    {
+      "fromId": "christchurch",
+      "toId": "hanmer",
+      "minutes": 90,
+      "sourceId": "hanmer"
+    },
+    {
+      "fromId": "christchurch",
+      "toId": "dunedin",
+      "minutes": 300,
+      "sourceId": "realnz"
+    },
+    {
+      "fromId": "christchurch",
+      "toId": "queenstown",
+      "minutes": 435,
+      "sourceId": "realnz"
+    },
+    {
+      "fromId": "dunedin",
+      "toId": "queenstown",
+      "minutes": 265,
+      "sourceId": "realnz"
+    },
+    {
+      "fromId": "queenstown",
+      "toId": "invercargill",
+      "minutes": 180,
+      "sourceId": "realnz"
+    },
+    {
+      "fromId": "dunedin",
+      "toId": "invercargill",
+      "minutes": 190,
+      "sourceId": "realnz"
+    },
+    {
+      "fromId": "christchurch",
+      "toId": "invercargill",
+      "minutes": 490,
+      "sourceId": "realnz"
+    },
+    {
+      "fromId": "queenstown",
+      "toId": "te-anau",
+      "minutes": 120,
+      "sourceId": "fiordland"
+    },
+    {
+      "fromId": "invercargill",
+      "toId": "te-anau",
+      "minutes": 120,
+      "sourceId": "fiordland"
+    },
+    {
+      "fromId": "dunedin",
+      "toId": "te-anau",
+      "minutes": 240,
+      "sourceId": "fiordland"
+    },
+    {
+      "fromId": "christchurch",
+      "toId": "te-anau",
+      "minutes": 480,
+      "sourceId": "fiordland"
+    }
+  ]
+}

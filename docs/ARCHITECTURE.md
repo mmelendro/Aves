@@ -30,6 +30,7 @@ Group ownership is explicit metadata. Renaming an editorial group cannot move it
 | Reference finder, filters and public place basket | `components/trip-planner/trip-catalogue.tsx` |
 | Shared planner controls and source links | `components/trip-planner/presentation.tsx` |
 | Route generation, validation, dates, budget arithmetic and session draft format | `lib/south-island-trip-planner.ts` |
+| Published road references and lookup | `content/south-island-road-references.json`, `lib/south-island-road-references.ts` |
 | Sourced places, access limits and scoped operator claims | `content/south-island-trip-catalogue.json` |
 | NZ species names, stable IDs and checklist provenance | `content/new-zealand-checklist.ts`, `content/new-zealand-checklist.json` |
 | Shared private editor | `components/account/trip-plan-editor.tsx` |

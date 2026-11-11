@@ -22,6 +22,7 @@ import {
   tripPlaces,
   tripCategories,
   tripCoverage,
+  tripRoadSummary,
   tripDraftText,
   validTripInput,
   writeTripDraft,
@@ -159,6 +160,7 @@ export default function SouthIslandTripPlanner() {
     }
   }
   const coverage = draft ? tripCoverage(draft) : null;
+  const roads = draft ? tripRoadSummary(draft) : null;
   const activeBases = draft
     ? draft.days
         .filter((d, i) => i === 0 || d.baseId !== draft.days[i - 1].baseId)
@@ -549,6 +551,14 @@ export default function SouthIslandTripPlanner() {
                 .
               </p>
               <TripAllowanceSummary draft={draft} />
+              {roads && roads.total > 0 && (
+                <p className="text-sm leading-6 text-emerald-900">
+                  {roads.total} transfer days · {roads.reviewed} with published
+                  road references · {roads.unknown} still need road-time review
+                  {roads.long ? ` · ${roads.long} long driving references` : ""}
+                  . References do not confirm an entire route's feasibility.
+                </p>
+              )}
               {dirty && (
                 <p
                   role="alert"

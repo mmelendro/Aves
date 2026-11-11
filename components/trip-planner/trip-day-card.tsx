@@ -7,9 +7,14 @@ import {
   tripDayDate,
   tripPlaceById,
   tripTransferUrl,
+  tripTransferContext,
   type TripDay,
   type TripDraft,
 } from "@/lib/south-island-trip-planner";
+import {
+  roadReferenceData,
+  roadTimeLabel,
+} from "@/lib/south-island-road-references";
 import { nzBirdName } from "@/content/new-zealand-checklist";
 import { external, field, SourceLink } from "./presentation";
 
@@ -26,6 +31,7 @@ export default function TripDayCard({
   onChange: (patch: Partial<TripDay>) => void;
 }) {
   const day = draft.days[index];
+  const journey = tripTransferContext(draft, index);
   const base = tripAreaById.get(day.baseId)!,
     local = placesAt(day.baseId),
     stop = tripPlaceById.get(day.birdingId),
@@ -53,6 +59,58 @@ export default function TripDayCard({
             Transfer from {tripAreaById.get(day.transferFrom)?.name}. Keep this
             day for travel, breaks and checking in.
           </p>
+          {journey && (
+            <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-3 text-sm leading-6">
+              <p className="font-medium text-emerald-950">
+                {journey.reference
+                  ? `Published road reference · about ${roadTimeLabel(journey.reference.minutes)}`
+                  : "Road time still needs review"}
+              </p>
+              <p>
+                {journey.from.name} ↔ {journey.to.name}
+              </p>
+              {journey.reference ? (
+                <>
+                  <p className="mt-1 text-xs text-gray-600">
+                    {journey.reference.publisher} · reviewed{" "}
+                    {journey.reference.reviewedAt}. Stops:{" "}
+                    {journey.reference.stopPolicy}.
+                  </p>
+                  <a
+                    className="inline-flex min-h-11 items-center font-semibold text-emerald-800 underline"
+                    href={journey.reference.url}
+                    {...external}
+                  >
+                    Read journey source
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                  {journey.reference.minutes >= 300 && (
+                    <p className="font-medium text-amber-900">
+                      Long driving reference. Consider breaking the journey
+                      overnight or choosing fewer bases.
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p className="mt-1 text-xs text-gray-600">
+                  No reviewed time for these towns yet. Do not assume a direct
+                  or short connection.
+                </p>
+              )}
+              <p className="mt-1 text-xs text-gray-600">
+                Town references, not exact stay addresses or live traffic.
+                Direction, weather, stops and local travel can change the time.
+              </p>
+              <a
+                className="inline-flex min-h-11 items-center font-semibold text-emerald-800 underline"
+                href={roadReferenceData.conditionsUrl}
+                {...external}
+              >
+                Check NZTA road conditions
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          )}
           <a
             className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline"
             href={tripTransferUrl(draft, index)}
