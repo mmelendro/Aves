@@ -1,5 +1,12 @@
 # AVES comprehensive delivery list
 
+## Current live release · 11 November 2026
+
+All tested layout/account/article and dependency changes are LIVE on aves.bio and www.aves.bio. Runtime c0ac3b23a464184d58802096abbcd240b7631df4; production dpl_4TidxhEacYS6YDymtCw6Ss7HMy1G (READY), project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. 524 tests, TypeScript, frozen install, local/production builds and scoped live desktop/340px checks passed. Preview restrictions are absent on the live site. No error/fatal runtime logs matched the post-release scan.
+
+Read RELEASE-2026-11-11-TESTED-LAYOUTS-LIVE.md for exact scope, validation, limits and rollback. Physical Safari and real signed-in/provider/email acceptance remain pending. Continue on feature/field-guide-card. The records below are historical checkpoints; earlier statements that these changes are preview-only or production is unchanged are superseded by this release.
+
+
 ## Pending source cleanup · 11 November 2026
 
 All requested pending source is ready for GitHub sync, including reconciled minimatch 11.0.6 overrides and lockfile. Project-pinned pnpm frozen install, 524 tests, TypeScript and 75-page local build passed. No new production publication. Remaining feature/acceptance queue is unchanged; earlier references to locally excluded dependency edits are historical.
