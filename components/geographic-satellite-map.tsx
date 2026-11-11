@@ -4,6 +4,7 @@ import {useEffect,useRef,useState} from "react";
 import {map as createMap,tileLayer,marker,divIcon,control,type Map as GeographicMap} from "leaflet";
 import "leaflet/dist/leaflet.css";
 import focus from "@/content/geographic-map-focus.json";
+import {createMapCameraMemory,mapCameraKey} from "@/lib/map-camera-memory";
 import {destinationRegions} from "@/content/destination-regions";
 import {useMapLayers} from "./map-layer-context";
 
@@ -14,6 +15,7 @@ const NewZealandProtectedAreas=dynamic(()=>import("./new-zealand-protected-areas
 const GeographicPlanningLayer=dynamic(()=>import("./geographic-planning-layer"),{ssr:false});
 type Focus={bounds:number[];regions:Record<string,number[]>};
 const countries=focus as unknown as Record<string,Focus>;
+const cameraMemory=createMapCameraMemory();
 const tiles="https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg";
 const credit='EOxCloudless <a href="https://cloudless.eox.at">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016) · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://maps.eox.at">EOX::Maps</a>';
 
@@ -23,17 +25,26 @@ const credit='EOxCloudless <a href="https://cloudless.eox.at">EOX IT Services Gm
 export default function GeographicSatelliteMap({country,region="",selectCountry,selectRegion,onMapReady}:GeographicScope){
   const container=useRef<HTMLDivElement>(null),map=useRef<GeographicMap|null>(null);
   const [ready,setReady]=useState(false),[failed,setFailed]=useState(false),[tileFailed,setTileFailed]=useState(false),[move,setMove]=useState(false);
-  const {layers,update}=useMapLayers();
+  const {layers}=useMapLayers();
   const regionPicker=useRef<HTMLSelectElement>(null);
+  const cameraScope=useRef(mapCameraKey(country,region));
   const showPlanning=Boolean(country&&layers.planningRegions);
   const activateRegion=(id:string)=>{callbacks.current.selectRegion?.(id);regionPicker.current?.focus({preventScroll:true});};
   const callbacks=useRef({selectCountry,selectRegion});callbacks.current={selectCountry,selectRegion};
+  const resetCamera=()=>{
+    const current=map.current;if(!current)return;
+    current.stop();
+    const bounds=countries[country]?.regions[region]??countries[country]?.bounds;
+    if(bounds)current.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[28,28],maxZoom:11,animate:false});
+    else current.setView([12,-45],1,{animate:false});
+  };
   useEffect(()=>{
     if(!container.current)return;
     let current:GeographicMap;
     try{
       current=createMap(container.current,{center:[12,-45],zoom:1,minZoom:1,maxZoom:14,scrollWheelZoom:false,dragging:false,zoomControl:false,attributionControl:true,worldCopyJump:true});
       map.current=current;
+      current.on("moveend",()=>{const centre=current.getCenter();cameraMemory.remember(cameraScope.current,{centre:[centre.lat,centre.lng],zoom:current.getZoom()});});
       tileLayer(tiles,{tileSize:256,maxNativeZoom:14,maxZoom:14,attribution:credit,keepBuffer:1,updateWhenIdle:true}).on("tileerror",()=>setTileFailed(true)).addTo(current);
       current.createPane("habitatPane").style.zIndex="350";
       current.createPane("protectedAreasPane").style.zIndex="360";
@@ -50,11 +61,12 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
   },[]);
   useEffect(()=>{
     const current=map.current;if(!current||!ready)return;
-    const bounds=countries[country]?.regions[region]??countries[country]?.bounds;
     // A scope selection must finish even if expansion/resizing interrupts a zoom animation.
     // Native drag/pinch/zoom remains available after this deterministic camera move.
-    if(bounds)current.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[28,28],maxZoom:11,animate:false});
-    else current.setView([12,-45],1,{animate:false});
+    const key=mapCameraKey(country,region),remembered=cameraMemory.recall(key);
+    current.stop();cameraScope.current=key;
+    if(remembered)current.setView(remembered.centre,remembered.zoom,{animate:false});
+    else resetCamera();
   },[country,region,ready]);
   useEffect(()=>{
     const current=map.current;if(!current||!ready)return;
@@ -73,9 +85,8 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
     <div className="flex flex-wrap items-center gap-2 px-2 py-1">
       {selectCountry&&<label className="text-xs">Destination <select aria-label="Satellite destination" value={country} onChange={e=>selectCountry(e.target.value)} className="min-h-11 max-w-full rounded-lg border bg-white px-2"><option value="">World</option><option value="colombia">Colombia</option><option value="australia">Australia</option><option value="new-zealand">New Zealand</option></select></label>}
       {country&&selectRegion&&<label className="text-xs">Region <select ref={regionPicker} aria-label="Satellite region" value={region} onChange={e=>selectRegion(e.target.value)} className="min-h-11 max-w-full rounded-lg border bg-white px-2"><option value="">All regions</option>{(destinationRegions[country]??[]).map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select></label>}
-      {country&&<label className="inline-flex min-h-11 cursor-pointer items-center gap-2 px-2 text-xs font-medium text-emerald-950"><input type="checkbox" checked={Boolean(layers.planningRegions)} onChange={e=>update({planningRegions:e.target.checked})}/>Planning regions</label>}
+      <button type="button" className="min-h-11 px-2 text-xs underline" onClick={resetCamera}>Reset satellite view</button>
       <button type="button" className="min-h-11 px-2 text-xs underline" aria-pressed={move} onClick={()=>{const next=!move;setMove(next);if(next)map.current?.dragging.enable();else map.current?.dragging.disable();}}>Move map</button>
-      <button type="button" className="min-h-11 px-2 text-xs underline" onClick={()=>update({background:"habitats"})}>Planning map</button>
     </div>
     {ready&&map.current&&country==="colombia"&&<GeographicProtectedAreas map={map.current}/>}
     {ready&&map.current&&country==="australia"&&<AustraliaProtectedAreas map={map.current}/>}

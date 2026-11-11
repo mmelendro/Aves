@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useState} from "react";
 import {marker,divIcon,imageOverlay,polyline,type Map as GeographicMap} from "leaflet";
+import {protectedAreaPalette as palette} from "@/lib/protected-area-palette";
 import GeographicSatelliteMap from "./geographic-satellite-map";
 import {useMapLayers} from "./map-layer-context";
 import {useTripMap} from "./trip-planner/trip-map-context";
@@ -33,7 +34,7 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     if(selected!=="all"&&selected!=="coast")for(const layer of habitat.layers.filter(l=>l.id===selected))paint(layer.path,colours[layer.id],layers.overlayOpacity,colours[layer.id]);
     if(selected==="coast")paint(habitat.outline,"none",0,colours.coast);
     if(layers.conservation)paint(conservation.conservationPath,"#84a23c",.25,"#4d7c0f");
-    if(layers.nationalParks)for(const park of conservation.parks)paint(park.path,"#f59e0b",layers.park===park.id ? .28 : .1,"#b45309");
+    if(layers.nationalParks)for(const park of conservation.parks)paint(park.path,palette.colour,layers.park===park.id ? palette.selectedFillOpacity : palette.fillOpacity,palette.colour);
     const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" width="960" height="1280">${paths.join("")}</svg>`;
     const overlay=imageOverlay(`data:image/svg+xml,${encodeURIComponent(svg)}`,[geographicPoint(0,640),geographicPoint(480,0)],{pane:"habitatPane",interactive:false}).addTo(map);
     return()=>{overlay.remove();};
@@ -48,8 +49,9 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     if(!map)return;
     const place=visiblePublicPlaces(layers).find(p=>p.id===layers.point),park=parks.parks.find(p=>layers.nationalParks&&p.id===layers.park);
     const centre=place?[place.latitude,place.longitude] as[number,number]:park?geographicPoint(park.point[0],park.point[1]):longitude!==undefined&&latitude!==undefined?[latitude,longitude] as[number,number]:null;
+    // Visibility toggles must not move a camera the visitor has already panned.
     if(centre)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
-  },[map,layers.point,layers.park,layers.nationalParks,latitude,longitude]);
+  },[map,layers.point,layers.park,latitude,longitude]);
   const bases=trip?.bases.join("|")??"";
   useEffect(()=>{
     if(!map)return;
