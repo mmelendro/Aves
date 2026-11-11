@@ -21,7 +21,7 @@ The owner's established Eco-Tourism Business Plan direction is broader nature tr
 
 ## Immediate priority: site-wide layer coverage
 
-The owner's broader satellite/national-park/layer request supersedes the next NZ-01b increment. MAP-LAYER-COVERAGE.md is the detailed acceptance/coverage register for this work, not a second general backlog. MAP-03a adds world satellite only; finish MAP-03b/c and MAP-04/05 across country/regional and legacy consumers before resuming NZ-01b. No blanket layer-parity claim is justified by the South Island or world overview alone.
+The owner's broader satellite/national-park/layer request supersedes the next NZ-01b increment. MAP-LAYER-COVERAGE.md is the detailed acceptance/coverage register for this work, not a second general backlog. MAP-03a/b/c provide world/country satellite views, including the older hero explorers. Finish MAP-04/05 across country/regional and legacy consumers before resuming NZ-01b. No blanket layer-parity claim is justified by the South Island or world overview alone.
 
 ## One regional map requirement
 
