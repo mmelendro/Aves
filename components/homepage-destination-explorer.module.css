@@ -62,5 +62,3 @@
 
 .regionControl[data-bird-filter-match="true"] .regionLand { stroke:#b45309; stroke-width:3; }
 .regionControl[data-bird-filter-match="false"] .regionLand { opacity:.3; }
-
-:global([data-country-satellite]) .regionLand { fill-opacity: 0; }

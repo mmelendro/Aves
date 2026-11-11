@@ -1159,6 +1159,9 @@ body {
 .geographic-map-target { min-height:44px; max-width:12rem; padding:.4rem .7rem; border:1px solid #c5dfd1; border-radius:1rem; background:#ffffffeb; color:#064e3b; font:600 11px/1.3 system-ui; box-shadow:0 2px 8px #052e1630; }
 .geographic-map-target[aria-pressed=true] { background:#064e3b; color:white; }
 .geographic-map-target:focus-visible { outline:3px solid #fbbf24; outline-offset:2px; }
-.geographic-map-canvas .maplibregl-ctrl-attrib { max-width:100%; font-size:9px; line-height:1.3; }
-.geographic-map-canvas .maplibregl-ctrl-group button { width:44px; height:44px; }
+.geographic-map-canvas .leaflet-control-attribution { max-width:100%; font-size:9px; line-height:1.3; }
+.geographic-map-canvas .leaflet-control-zoom a { width:44px; height:44px; }
 @media(max-width:639px) { .geographic-map-shell {min-height:22rem;} .geographic-map-shell select {max-width:15rem;} }
+
+.geographic-map-canvas { isolation:isolate; z-index:0; }
+.geographic-map-marker .geographic-map-target { display:block; width:max-content; transform:translate(-50%,-50%); }

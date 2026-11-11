@@ -57,5 +57,3 @@
   /* Keep an expanded region list usable inside its fixed portrait card. */
   .regionList { max-height: 10rem; overflow-y: auto; overscroll-behavior: contain; }
 }
-
-:global([data-country-satellite]) .auMap :global([data-satellite-land]) { fill-opacity: 0; }

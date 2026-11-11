@@ -29,7 +29,7 @@ Shared Australian public chrome is published: legacy public NavigationHeader and
 
 ## Active map direction
 
-The owner clarified that AVES should feel like Google Earth for birders. Static overview rasters are superseded by the shared geographic satellite globe. Prioritise continuous world/country/region navigation and retained satellite choice before new map decorations. See CONTINUOUS-SATELLITE-2026-11-11.md for implementation, imagery age/rights, scope and outstanding acceptance. Source-verified bird/habitat/park/place/route overlays belong on this same geographic surface. Do not infer occurrences from imagery or planning markers. Elevation terrain and 3D buildings remain future work.
+The owner clarified that AVES should feel like Google Earth for birders. Static overview rasters are superseded by the shared geographic satellite map. Prioritise continuous world/country/region navigation and retained satellite choice before new map decorations. See CONTINUOUS-SATELLITE-2026-11-11.md for implementation, imagery age/rights, scope and outstanding acceptance. Source-verified bird/habitat/park/place/route overlays belong on this same geographic surface. Do not infer occurrences from imagery or planning markers. Elevation terrain and 3D buildings remain future work.
 
 ## Prioritised remaining work
 

@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import dynamic from "next/dynamic"
 import { useMapLayers } from "./map-layer-context"
 import type { GeographicScope } from "./geographic-satellite-map"
-const GeographicSatelliteMap = dynamic(()=>import("./geographic-satellite-map"),{ssr:false,loading:()=> <p role="status" className="p-4 text-xs">Opening satellite globe…</p>})
+const GeographicSatelliteMap = dynamic(()=>import("./geographic-satellite-map"),{ssr:false,loading:()=> <p role="status" className="p-4 text-xs">Opening satellite map…</p>})
 
 import { Hand, Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react"
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, type MapView } from "@/lib/map-gestures.mjs"
