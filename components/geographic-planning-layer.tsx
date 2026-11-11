@@ -1,10 +1,10 @@
 "use client";
 import {useEffect,useRef,useState} from "react";
 import {geoJSON,layerGroup,tooltip,type Map as GeographicMap,type Path,type PathOptions} from "leaflet";
-import type {FeatureCollection,Geometry} from "geojson";
+import type {Feature,FeatureCollection,Geometry,MultiLineString} from "geojson";
 
 type RegionProperties={id:string;name:string;kind:string;colour:string;labelPoint:number[]};
-type Regions=FeatureCollection<Geometry,RegionProperties>;
+type Regions=FeatureCollection<Geometry,RegionProperties>&{boundaries?:Feature<MultiLineString>};
 const loadRegions=(country:string)=>country==="colombia"?import("@/content/geographic-planning-regions/colombia.json"):country==="australia"?import("@/content/geographic-planning-regions/australia.json"):country==="new-zealand"?import("@/content/geographic-planning-regions/new-zealand.json"):Promise.reject(new Error("Unsupported planning country"));
 
 /** Reviewed geography loads only for the visible country and enabled overlay.
@@ -21,9 +21,9 @@ export default function GeographicPlanningLayer({map,country,region,onSelect}:{m
       if(!active)return;
       const data=module.default as Regions;
       const style=(properties:RegionProperties,hover=false):PathOptions=>({
-        color:properties.colour,weight:properties.id===region?2.5:hover?2:1.3,
+        color:properties.colour,weight:properties.id===region?2.5:hover?2:data.boundaries?0:1.3,
         fillColor:properties.colour,fillOpacity:properties.id===region?.13:hover?.09:.045,
-        opacity:properties.id===region?1:.8,dashArray:properties.kind==="approximate-planning-area"?"6 4":undefined,
+        opacity:properties.id===region?1:.8,dashArray:properties.kind==="approximate-planning-area"&&!data.boundaries?"6 4":undefined,
       });
       geoJSON(data,{pane:"planningRegionsPane",style:feature=>style(feature!.properties),onEachFeature:(feature,layer)=>{
         const properties=feature.properties as RegionProperties;
@@ -47,6 +47,10 @@ export default function GeographicPlanningLayer({map,country,region,onSelect}:{m
           element.addEventListener("blur",()=>{path.setStyle(style(properties));layer.closeTooltip();});
         });
       }}).addTo(group);
+      // Draw joined edges once so neighbours never produce double strokes.
+      if(data.boundaries)geoJSON(data.boundaries,{pane:"planningRegionsPane",interactive:false,
+        style:{color:"#e2e8f0",weight:1.3,opacity:.9,fill:false},
+      }).addTo(group);
       const selected=data.features.find(f=>f.properties.id===region);
       if(selected){
         const label=document.createElement("span");label.textContent=selected.properties.name;

@@ -6,6 +6,8 @@ Updated 11 November 2026, Sydney. This is the only active to-do list and resume 
 
 A visitor explores one map, selects birds and interests, enters starting/departure cities, dates or trip length, pace and daily allowances for accommodation, food, transport and activities, then compares credible itineraries and saves a private plan. Make this useful on both New Zealand islands while preserving Colombia and Australia.
 
+Latest correction: Colombia’s eleven approximate planning regions now share exact edges with no area overlaps or uncovered country land. A single mesh draws the borders; region selection and continuous satellite imagery remain shared.
+
 Already delivered: the shared map/bird guide, continuous 2D satellite navigation and selectable planning-region outlines. South Island has the operational planner. North Island does not yet have a complete planning flow. Exact runtime, limits and rollback live in [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md); do not rebuild completed work from old prompts.
 
 ## The pathway

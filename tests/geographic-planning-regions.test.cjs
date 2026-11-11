@@ -36,7 +36,7 @@ test('Colombian editorial areas preserve distinct valleys and Andes without clai
  assert.equal(contains(features['cauca-valley'],[-74.73,4.3]),false);
  assert.equal(contains(features['magdalena-valley'],[-76.52,3.45]),false);
  assert.ok(data.features.every(f=>f.properties.kind==='approximate-planning-area'));
- assert.match(data.provenance.limitations,/may overlap or leave gaps/);assert.match(data.provenance.contextSourceRole,/does not supply/);
+ assert.match(data.provenance.limitations,/no area overlaps or uncovered land/);assert.match(data.provenance.contextSourceRole,/does not supply/);
 });
 test('administrative and island outlines do not masquerade as the Colombian editorial classification',()=>{
  assert.ok(collection('australia').features.every(f=>f.properties.kind==='generalised-state-or-territory'));
@@ -49,4 +49,36 @@ test('New Zealand groups assign each source island only once, including Cook Str
  assert.equal(contains(islands['south-island'],[173.87,-40.83]),true);
  assert.equal(contains(islands['north-island'],[173.87,-40.83]),false);
  assert.deepEqual(Object.values(islands).map(f=>f.geometry.type==='Polygon'?1:f.geometry.coordinates.length),[2,4,1]);
+});
+
+// Exact edge incidence catches cracks, overlapping edges and independently
+// simplified neighbours without adding a GIS dependency to the website.
+test('Colombia regions share exact edges and cover the reviewed country outline',()=>{
+ const data=collection('colombia');
+ const segments=geometry=>{
+  const lines=geometry.type==='MultiLineString'?geometry.coordinates:
+   (geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates).flat();
+  return lines.flatMap(line=>line.slice(1).map((point,i)=>[line[i],point].map(p=>JSON.stringify(p)).sort().join('|')));
+ };
+ const counts=new Map();
+ for(const f of data.features)for(const edge of segments(f.geometry))counts.set(edge,(counts.get(edge)||0)+1);
+ const coast=new Set(segments(data.provenance.countryOutline));
+ // Cuts can insert vertices into a coastline segment. Compare perimeter and
+ // area too, instead of assuming the coastline's original segment indexing.
+ const length=edge=>{const [a,b]=edge.split('|').map(JSON.parse);return Math.hypot(a[0]-b[0],a[1]-b[1]);};
+ let exterior=0;
+ for(const [edge,count] of counts){assert.ok(count===1||count===2,edge);if(count===1)exterior+=length(edge);}
+ assert.ok(Math.abs(exterior-[...coast].reduce((sum,e)=>sum+length(e),0))<1e-8,'no unmatched internal edges');
+ const mesh=segments(data.boundaries.geometry);
+ assert.equal(new Set(mesh).size,mesh.length,'draw every border once');
+ assert.deepEqual(new Set(mesh),new Set(counts.keys()),'mesh follows polygon edges exactly');
+ const area=geometry=>(geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates).reduce((sum,rings)=>sum+rings.reduce((subtotal,ring,i)=>{
+  const signed=ring.slice(1).reduce((a,p,j)=>a+ring[j][0]*p[1]-p[0]*ring[j][1],0)/2;
+  return subtotal+(i===0?1:-1)*Math.abs(signed);
+ },0),0);
+ assert.ok(Math.abs(data.features.reduce((sum,f)=>sum+area(f.geometry),0)-area(data.provenance.countryOutline))<1e-8,'country area covered exactly');
+ for(let lon=-79.95;lon<-66;lon+=.1)for(let lat=-4.95;lat<13.5;lat+=.1){
+  const point=[lon,lat];
+  assert.equal(data.features.filter(f=>contains(f,point)).length,Number(contains({geometry:data.provenance.countryOutline},point)),`single owner at ${point}`);
+ }
 });
