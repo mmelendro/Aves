@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils"
 export type BrandCountry = "colombia" | "australia" | "new-zealand"
 
 interface BrandMarkProps {
-  country?: BrandCountry
+  country?: BrandCountry | "global"
   inverse?: boolean
   size?: "header" | "footer"
   priority?: boolean

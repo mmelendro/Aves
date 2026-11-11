@@ -19,6 +19,8 @@ test("public chrome uses direct-route geography and follows cross-country explor
   assert.equal(selectedContour.props.country, "new-zealand")
   assert.equal(selectedContour.props.placeId, "mountains")
   assert.equal(find(selected, node => node.type?.name === "BrandMark").props.country, "new-zealand")
+  const world = header("/australia", "global", { country: "global" })
+  assert.equal(find(world, node => node.type?.name === "BrandMark").props.country, "global")
   const editorial = header("/australia/about", "australia", { country: "colombia", regionId: "caribbean" })
   assert.equal(find(editorial, node => node.type === "HeaderContour").props.country, "australia")
 })
@@ -40,6 +42,6 @@ test("Australian explorer delegates to shared public header and country-aware fo
       "./header-landscape-context": { useHeaderLandscape: () => ({ selection: { country } }) },
     } }).render()
     assert.equal(footer.type.name, country === "australia" ? "Footer" : "GlobalFooter")
-    if (country !== "australia") assert.equal(footer.props.country, country === "global" ? undefined : country)
+    if (country !== "australia") assert.equal(footer.props.country, country)
   }
 })

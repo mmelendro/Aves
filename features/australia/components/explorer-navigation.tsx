@@ -14,5 +14,5 @@ export function ExplorerHeader() {
 export function ExplorerFooter() {
   const { selection } = useHeaderLandscape()
   const country = selection?.country ?? "australia"
-  return country === "australia" ? <Footer /> : <GlobalFooter country={country === "global" ? undefined : country as BrandCountry} />
+  return country === "australia" ? <Footer /> : <GlobalFooter country={country as BrandCountry | "global"} />
 }

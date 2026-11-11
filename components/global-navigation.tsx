@@ -10,7 +10,7 @@ import { destinations } from "@/content/destinations"
 import { NewZealandHeader } from "@/components/new-zealand-header"
 
 interface GlobalBrandProps {
-  country?: BrandCountry
+  country?: BrandCountry | "global"
 }
 
 export function GlobalHeader({ country }: GlobalBrandProps = {}) {

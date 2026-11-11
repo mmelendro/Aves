@@ -45,7 +45,7 @@ export function NewZealandHeader({country = "new-zealand", navigationLinks}:{cou
     <header className="sticky top-0 z-40 h-[132px] isolate">
       <HeaderContour profile={profile} country={activeCountry ?? "global"} regionId={selected?.regionId} placeId={selected?.placeId} />
       <div className="relative mx-auto flex max-w-7xl items-start justify-between gap-4 px-3 pt-2 sm:px-6 lg:px-8">
-        <BrandMark country={activeCountry} priority unifiedHeaderContour nativeCountryLink={country === "global"} />
+        <BrandMark country={activeCountry ?? "global"} priority unifiedHeaderContour nativeCountryLink={country === "global"} />
         <div data-contour-navigation="true" className="mt-1 shrink-0">
           <nav aria-label="Main navigation" className={`hidden items-center gap-1 ${desktopClass}`}>
             {desktopLinks.map(({ href, label }) => <a key={href} href={href} aria-current={pathname === href ? "page" : undefined} className={`${linkClass} ${label === "My Trips" ? "border border-emerald-200 px-5 font-semibold" : ""}`}>{label}</a>)}
