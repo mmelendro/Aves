@@ -1,18 +1,15 @@
 # AVES continue here
 
-## Live release · 11 November 2026
+## B Corp pilot live · 11 November 2026
 
-All tested changes are live on https://aves.bio and https://www.aves.bio.
+Runtime b63243c56af3991aa7ff5c5131446239e25a24c6 is live on aves.bio and www.aves.bio, deployment dpl_ei4Zo75XJkbEnKyccUe6LCoca8sw, combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aliases verified. Immediate rollback: c0ac3b23a464184d58802096abbcd240b7631df4 / dpl_4TidxhEacYS6YDymtCw6Ss7HMy1G.
 
-- Runtime: c0ac3b23a464184d58802096abbcd240b7631df4
-- Production: dpl_4TidxhEacYS6YDymtCw6Ss7HMy1G, READY
-- Project: prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv, aves-australia, Node 22
-- Current combined source: feature/field-guide-card
-- Validation: 524 checks, TypeScript, frozen install, local/production builds and scoped live desktop/340px checks
-- Rollback: 3562ba23849b47218bf5138687446164b88b4d77 / dpl_5MtafKNyQ2uxi3Em7hcBtt7rWzb5
+Completed: optional South Island Certified B Corp layer with three public address references from two companies, dated certification and location sources, explicit company scope, OpenStreetMap attribution, place idea add/remove and mixed landscape/public place basket, private notes handoff and immutable enquiry retention. Historical statements that the B Corp layer remains off are superseded for this pilot only. Other regions and business categories remain unsourced.
 
-Read docs/RELEASE-2026-11-11-TESTED-LAYOUTS-LIVE.md, docs/HANDOFF-CURRENT.md and docs/AGILE-PLAN.md before continuing. Fetch current GitHub history. Historical preview-only notices are superseded by this production release. Do not deploy either older separate app over the combined source.
+Validated: 527 automated checks, TypeScript, 75-page local and hosted production builds, public deployment and live business selection, source details, basket synchronization/add/remove/reload, keyboard fullscreen and layer reset at 340px, no horizontal overflow, correct account/sign-in destination handoff. No error/fatal logs in the scoped ten-minute deployment check ending 03:53:49 UTC. See docs/BCORP-SOUTH-ISLAND-2026-11-11.md for scope and limits.
 
-Next: remaining custom/special-route and authenticated visual coverage, shared guided public contact, deeper Spanish explorer copy, then source-backed range/endemic/operator layers. Physical Safari/touch, real provider login, private save/reopen and email delivery remain unverified in this release. Preserve private data, source rights and existing spending safeguards.
+Next: real authenticated save/reopen/share acceptance using an authorized test record, physical Safari/touch checks, then expand verified accommodation/food/transport/guiding coverage. Existing automated account tests verify notes survive private save and frozen NZ enquiry without selected places leaking into notification emails. No real enquiry or account record was changed during this release.
 
-Old project retirement still requires the actual project-domain registration move and Vercel deletion confirmation recorded in the handoff. No database or unrelated resources should be removed.
+Previous layout release evidence: docs/RELEASE-2026-11-11-TESTED-LAYOUTS-LIVE.md. Preserve the combined branch feature/field-guide-card. Do not deploy the older separate applications over it. Preserve source rights, private data and spending safeguards.
+
+Old project retirement still requires the project-domain registration move and Vercel deletion confirmation recorded in the handoff.

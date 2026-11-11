@@ -19,6 +19,14 @@ Existing public places and verified B Corp address references join landscape ide
 
 ## Validation
 
-527 automated checks passed, including mixed place/B Corp note import, no duplicates, expiry, invalid coordinates, exact certification host, category separation, mocked account save/submission and authorized owner review without email disclosure. TypeScript passed. Local and hosted production build and UI evidence will be recorded below before publication.
+527 automated checks passed, including mixed place/B Corp note import, no duplicates, expiry, invalid coordinates, exact certification host, category separation, mocked account save/submission and authorized owner review without email disclosure. TypeScript passed. The local 75-page build and hosted Node 22 production build passed.
 
-Browser coverage must include selection, sources, add/remove ideas, persistence on reload, layer reset, narrow layout, fullscreen map and account handoff. Actual authenticated save/reopen and email delivery remain unverified by a real account session; automated account tests cover payload retention.
+Browser checks passed for selection, sources, add/remove ideas, mounted basket synchronization, mixed landscape and business notes, persistence on reload, layer reset, keyboard fullscreen and account handoff. The artificial 340 × 234 CSS viewport had no horizontal overflow; keyboard controls worked inside the fullscreen map. Pointer expansion at this artificial viewport was inconclusive, and physical Safari/touch was not tested. Actual authenticated save/reopen and email delivery remain unverified by a real account session; automated account tests cover payload retention.
+
+## Published result
+
+Runtime b63243c56af3991aa7ff5c5131446239e25a24c6. Production deployment dpl_ei4Zo75XJkbEnKyccUe6LCoca8sw, READY, project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio aliases verified. Live South Island picker shows Certified B Corp businesses · 3; selected Roydvale details show address, scope, review date and certification link.
+
+Existing public project alias was verified against this deployment before the custom domains were switched. South Island, account sign-in and robots.txt returned 200. Account DOM confirms data-read-only-preview=false, enabled Sign In, no preview notice. A temporary protected-deployment share link was rejected by automatic review because it would expand access for up to 23 hours. No share link or protection change was used; the existing public deployment alias provided the required checks.
+
+No error/fatal logs found for this production deployment in the ten minutes ending 2026-11-11T03:53:49.185Z. This is a scoped observation, not a guarantee about all traffic. Immediate rollback: c0ac3b23a464184d58802096abbcd240b7631df4 / dpl_4TidxhEacYS6YDymtCw6Ss7HMy1G.
