@@ -34,11 +34,12 @@ export default function ChocoToucanExpeditionPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/blog" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Breadcrumb */}
       <div className="bg-gray-50 py-4">
         <div className="container mx-auto px-4">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-600">
             <Link href="/colombia" className="hover:text-emerald-600 transition-colors">
               Home
             </Link>
@@ -209,6 +210,7 @@ export default function ChocoToucanExpeditionPage() {
       </article>
 
       {/* Footer */}
+      </main>
       <Footer />
     </div>
   )

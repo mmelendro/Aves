@@ -21,11 +21,16 @@ const linkClass = "inline-flex min-h-11 items-center rounded-full px-3 text-sm f
 
 export interface PublicNavigationLink { href: string; label: string }
 
-export function NewZealandHeader({country = "new-zealand", navigationLinks}:{country?:BrandCountry|"global"; navigationLinks?: readonly PublicNavigationLink[]}) {
+export function NewZealandHeader({ country = "new-zealand", navigationLinks, surface = "public", currentPage }: {
+  country?: BrandCountry | "global"
+  navigationLinks?: readonly PublicNavigationLink[]
+  surface?: "public" | "account"
+  currentPage?: string
+}) {
   const localizeHome = useColombiaHomeCopy()
-  const pathname = usePathname() || "/"
+  const pathname = usePathname() || currentPage || "/"
   const { selection } = useHeaderLandscape()
-  const context = brandContext(pathname, country === "global" ? selection?.country : country, selection)
+  const context = surface === "account" ? brandContext(pathname, "global") : brandContext(pathname, country === "global" ? selection?.country : country, selection)
   const activeCountry = context.country === "global" ? undefined : context.country as BrandCountry
   const selected = context
   const isActive = (href: string) => {
@@ -39,7 +44,7 @@ export function NewZealandHeader({country = "new-zealand", navigationLinks}:{cou
   const desktopClass = hasCountryNavigation ? "xl:flex" : "sm:flex"
   const mobileClass = hasCountryNavigation ? "xl:hidden" : "sm:hidden"
   const profile = activeCountry ? selectedHeaderProfile(activeCountry,selected?.regionId,selected?.placeId) : {terrain:"wooded-ranges",water:"none"}
-  const title = activeCountry === "new-zealand" ? "New Zealand" : activeCountry === "australia" ? "Australia" : activeCountry === "colombia" ? "Colombia" : "Explore the world"
+  const title = surface === "account" ? "Account" : activeCountry === "new-zealand" ? "New Zealand" : activeCountry === "australia" ? "Australia" : activeCountry === "colombia" ? "Colombia" : "Explore the world"
   const [open, setOpen] = useState(false)
   useEffect(() => {
     const desktop = window.matchMedia(hasCountryNavigation ? "(min-width: 1280px)" : "(min-width: 640px)")
@@ -52,10 +57,10 @@ export function NewZealandHeader({country = "new-zealand", navigationLinks}:{cou
     <header className="sticky top-0 z-40 h-[132px] isolate">
       <HeaderContour profile={profile} country={activeCountry ?? "global"} regionId={selected?.regionId} placeId={selected?.placeId} />
       <div className="relative mx-auto flex max-w-7xl items-start justify-between gap-4 px-3 pt-2 sm:px-6 lg:px-8">
-        <BrandMark country={activeCountry ?? "global"} priority unifiedHeaderContour nativeCountryLink={country === "global"} />
+        <BrandMark country={activeCountry ?? "global"} priority unifiedHeaderContour nativeCountryLink={country === "global"} label={surface === "account" ? "Your Account" : undefined} labelHref={surface === "account" ? "/account" : undefined} />
         <div data-contour-navigation="true" className="mt-1 flex shrink-0 items-start gap-2">
           {pathname === "/colombia" && <ColombiaHomeLanguageToggle />}
-          <nav aria-label="Main navigation" className={`hidden items-center gap-1 ${desktopClass}`}>
+          <nav aria-label={surface === "account" ? "Account and country navigation" : "Main navigation"} className={`hidden items-center gap-1 ${desktopClass}`}>
             {desktopLinks.map(({ href, label }) => <a key={href} href={href} aria-current={isActive(href) ? "page" : undefined} className={`${linkClass} ${label === "My Trips" ? "border border-emerald-200 px-5 font-semibold" : ""}`}>{label}</a>)}
           </nav>
           <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -64,7 +69,7 @@ export function NewZealandHeader({country = "new-zealand", navigationLinks}:{cou
               <Dialog.Overlay className="fixed inset-0 z-[70] bg-emerald-950/40" />
               <Dialog.Content className="fixed inset-x-4 top-4 z-[80] mx-auto max-h-[calc(100dvh-2rem)] max-w-md overflow-y-auto rounded-2xl border border-emerald-100 bg-white p-5 shadow-xl">
                 <div className="flex items-center justify-between gap-3"><Dialog.Title className="font-semibold text-emerald-900">AVES {title}</Dialog.Title><Dialog.Close asChild><button type="button" aria-label="Close navigation menu" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-emerald-800 focus-visible:outline focus-visible:outline-2"><X aria-hidden="true" className="h-5 w-5" /></button></Dialog.Close></div>
-                <Dialog.Description className="sr-only">Choose a destination, learn how AVES works, or open My Trips.</Dialog.Description>
+                <Dialog.Description className="sr-only">{surface === "account" ? "Your shared trip plans and all AVES destinations." : "Choose a destination, learn how AVES works, or open My Trips."}</Dialog.Description>
                 <nav aria-label="Mobile navigation" className="mt-3 flex flex-col items-start gap-2">{menuLinks.map(({ href, label }) => <a key={href} href={href} aria-current={isActive(href) ? "page" : undefined} onClick={() => setOpen(false)} className={linkClass}>{label}</a>)}</nav>
               </Dialog.Content>
             </Dialog.Portal>

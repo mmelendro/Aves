@@ -334,13 +334,15 @@ test("only account/admin/auth paths use shared AVES navigation", () => {
 
 test("shared desktop and mobile navigation distinguishes all destinations from the Colombia home", () => {
   const harness = componentHarness("components/account/portal-navigation.tsx", "PortalNavigation", { currentPage: "/account" })
-  const tree = harness.render()
+  const delegate = harness.render()
+  assert.equal(delegate.type.name, "NewZealandHeader")
+  assert.equal(delegate.props.surface, "account")
+  const tree = delegate.type(delegate.props)
   assert.equal(find(tree, node => ["https://aves.bio/", "/"].includes(node.props.href)).props.children, "All destinations")
   assert.equal(find(tree, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children, "Colombia")
   assert.ok(find(tree, node => node.props.href === "https://aves.bio/australia"))
-  const mobile = find(tree, node => node.type === "MobileNavigationOverlay")
-  assert.equal(mobile.props.title, "AVES Account")
-  assert.deepEqual(mobile.props.links.map(link => link.href), ["/account", "https://aves.bio/", "https://aves.bio/colombia", "https://aves.bio/australia", "https://aves.bio/new-zealand"])
+  const mobile = find(tree, node => node.type === "nav" && node.props["aria-label"] === "Mobile navigation")
+  assert.deepEqual(nodes(mobile).filter(node => node.type === "a").map(node => node.props.href), ["/account", "https://aves.bio/", "https://aves.bio/colombia", "https://aves.bio/australia", "https://aves.bio/new-zealand", "/contact?topic=account#inquiry"])
 })
 
 test("Australia desktop and mobile navigation can return to the global destination chooser", () => {
@@ -372,7 +374,8 @@ test("public and account footers link to Colombia separately from all destinatio
   assert.ok(find(publicFooter, node => node.props.href === "/australia/contact?intent=waitlist"))
   assert.ok(find(publicFooter, node => node.props.href === "/account"))
   const accountShell = componentHarness("components/account/account-shell.tsx", "AccountShell", { title: "Account", description: "Trips" }, { mocks: { "@/components/page-shell": { PageShell: "PageShell" }, "@/features/australia/components/page-shell": { PageShell: "PageShell" } } }).render()
-  for (const footer of [publicFooter, accountShell]) {
+  const accountFooter = accountShell.props.footer.type(accountShell.props.footer.props)
+  for (const footer of [publicFooter, accountFooter]) {
     assert.equal(find(footer, node => ["https://aves.bio/", "/"].includes(node.props.href)).props.children, "All destinations")
     assert.match(JSON.stringify(find(footer, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children), /Colombia/)
     assert.equal(nodes(footer).some(node => node.props.href === "/australia/colombia"), false)

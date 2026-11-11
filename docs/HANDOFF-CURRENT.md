@@ -58,3 +58,7 @@ Eight Colombian editorial/legal routes now share title typography and main-conte
 ## Editorial preview verified · 11 November 2026
 
 Eight editorial/legal routes and Spanish shared-shell copy are complete in source 589ff9c, preview dpl_2i8HiiMx9Ht1JZERqfzTtS9CQwjB (READY). 518 tests, TypeScript, local/hosted builds and desktop/narrow browser checks passed within documented limits. Narrow checks caught and fixed overflowing Cookie/Conservation CTAs. Cookie preference centre and Spanish menu/Escape focus verified. Production remains unchanged. Read EDITORIAL-LAYOUT-2026-11-11.md for exact evidence. Continue remaining article/custom/private-shell design audit and deeper Spanish explorer copy.
+
+## Article/account parity continuation · 11 November 2026
+
+Four birding articles now share heading styles and main-content targets. Account chrome delegates to the shared header/footer with neutral global identity and retained account links. 524 tests and TypeScript passed; exact hosted/browser acceptance pending. Read ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md. Authentication and private workflow logic unchanged; production unchanged.

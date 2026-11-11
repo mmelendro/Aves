@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 
 interface PageHeadingProps {
   title: string
-  description: string
+  description?: string
   eyebrow?: string
   children?: ReactNode
 }
@@ -13,7 +13,7 @@ export function PageHeading({ title, description, eyebrow }: PageHeadingProps) {
   return <div className="mx-auto max-w-4xl text-center">
     {eyebrow && <Badge className="mb-5 bg-emerald-100 text-emerald-800 hover:bg-emerald-100">{eyebrow}</Badge>}
     <h1 className="mb-5 text-3xl font-medium tracking-tight text-emerald-950 md:text-4xl lg:text-5xl">{title}</h1>
-    <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 lg:text-xl">{description}</p>
+    {description && <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 lg:text-xl">{description}</p>}
   </div>
 }
 
