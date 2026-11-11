@@ -1,6 +1,6 @@
 # Shared map controls and camera retention
 
-Status: candidate source. The live New Zealand park release stays recorded in HANDOFF-CURRENT.md until exact-commit hosted acceptance completes.
+Status: published runtime 9b6a7e1a43ba3f112c9b3bba8931070800097e5e, deployment dpl_HmP69mf8Ye3NhAJTmPLfcg8a6RKf on both canonical aliases. Exact acceptance and rollback are recorded in HANDOFF-CURRENT.md.
 
 ## One picker across maintained map families
 
@@ -20,10 +20,10 @@ South Island park visibility no longer triggers a camera recentre just because a
 
 ## Validation and remaining limits
 
-Automated checks: 584 tests passed, strict TypeScript passed and the source audit found 359 reachable modules with none unreachable. Tests cover scope-isolated camera recovery, invalid/mutable camera rejection, supported overlays, background/park-choice retention, native cancel propagation/focus, and existing South Island options. Existing provider/ownership checks still pass. Local production build and hosted browser acceptance follow below when complete.
+Automated checks: 584 tests passed, strict TypeScript passed and the source audit found 359 reachable modules with none unreachable. Tests cover scope-isolated camera recovery, invalid/mutable camera rejection, supported overlays, background/park-choice retention, native cancel propagation/focus, and existing South Island options. Existing provider/ownership checks still pass. Local and exact-SHA hosted 75-page builds passed.
 
-Browser acceptance must check background/camera/park retention, scope switching, reset, nested Escape, one active map, all maintained countries, South Island park/conservation controls, and narrow/short viewports. Native desktop/high-zoom checks do not certify physical iPhone/Safari. Complete optional layer/content parity, 3D terrain and wider reserve coverage remain separate future scope. The next numbered pathway milestone after accepted controls is the shared island planner.
+Browser acceptance checked background/camera/park retention, scope switching, reset, nested Escape, one active map, all maintained countries, South Island park/conservation controls, and narrow/short viewports. Native desktop/high-zoom checks do not certify physical iPhone/Safari. Complete optional layer/content parity, 3D terrain and wider reserve coverage remain separate future scope. The next numbered pathway milestone after accepted controls is the shared island planner.
 
 No private traveller records, location permission, schema, account access, provider keys, new spend, mail or bookings are changed.
 
-Hosted testing caught an older homepage rule targeting every dialog under the South Island panel. It reduced the new native layer dialog to zero content height. The selector is now scoped explicitly to dialog[data-aves-map], preserving its intended map-frame layout without matching the layer picker. Recheck the exact corrected source on the hosted candidate before publication.
+Hosted testing caught an older homepage rule targeting every dialog under the South Island panel. It reduced the new native layer dialog to zero content height. The selector is now scoped explicitly to dialog[data-aves-map], preserving its intended map-frame layout without matching the layer picker. The corrected exact-SHA deployment passed hosted and canonical acceptance before this checkpoint.

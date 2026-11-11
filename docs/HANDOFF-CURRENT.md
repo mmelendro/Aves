@@ -1,6 +1,16 @@
 # AVES current handoff
 
-Runtime: f5d66f7c0a80a597b87fdd25a63d73cd82d070b4. Deployment: dpl_7caDwrFuRsue4PukCcgGoCBeD6Jq, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: 347a10f4e057f787d2fe0a8d7c94c9a6277ad43a / dpl_EFg18vbzoQAHLT9YkTmELtqk6F1Q. Branch: feature/field-guide-card.
+Runtime: 9b6a7e1a43ba3f112c9b3bba8931070800097e5e. Deployment: dpl_HmP69mf8Ye3NhAJTmPLfcg8a6RKf, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: f5d66f7c0a80a597b87fdd25a63d73cd82d070b4 / dpl_7caDwrFuRsue4PukCcgGoCBeD6Jq. Branch: feature/field-guide-card.
+
+## Shared map controls acceptance
+
+Published one shared native layer picker across World, Colombia, Australia, New Zealand and South Island, retaining each renderer's supported overlays. Camera memory is bounded and scoped by country/region; park selections are scoped by catalogue geometry. Reset explicitly restores scope bounds. South Island park visibility changes no longer recenter the camera. No account/schema/storage envelope changed. See SHARED-MAP-CONTROLS-2026-11-12.md.
+
+All 584 tests, strict TypeScript, source audit (359 modules, zero unreachable), local and exact-SHA hosted 75-page builds passed. Hosted acceptance verified AU Royal selection and exact geographic path/5 km scale across backgrounds, explicit reset, CO 109 isolated records/Explore auto-enable, NZ four supported parks, World background-only controls, and one map. South Island retained its nine parks and DOC controls with 20 km camera scale across visibility toggles. A hosted CSS defect that collapsed its new layer dialog was fixed before publication by scoping map-frame rules to dialog[data-aves-map]. Corrected picker height was 902px, scroll height 1085px. At 340 CSS px, document width was 340px and picker 308.75px wide, 200px high with 1177px scroll content. End scrolled 955px with close still at top 21px. Escape returned focus to Map layers while preserving the expanded underlying map. Physical touch/Safari remains unverified.
+
+Canonical live proof: https://aves.bio/new-zealand/south-island?explore=new-zealand&region=south-island . Both aliases assigned to the exact accepted deployment. Screenshot: docs/evidence/2026-11-12-shared-map-controls.jpg. Deployment-scoped error/fatal scan 20:01:19–20:11:19 UTC on 11 November found no matching logs. No new spend, private records, access, schema, keys, mail or bookings changed.
+
+NEXT: pathway step 3, shared island planner foundation. North Island corridor research is prepared but is not yet an operational planner.
 
 ## North Island and Rakiura park acceptance
 
@@ -12,7 +22,7 @@ All 580 tests, strict TypeScript, source audit (356 modules, zero unreachable), 
 
 Canonical live proof: https://aves.bio/?explore=new-zealand&region=north-island . Select Satellite, enable North Island & Rakiura parks, Explore 4 areas, choose Tongariro. Selection is page-local. Screenshot: docs/evidence/2026-11-12-new-zealand-parks.jpg. Both aliases assigned to the exact accepted deployment. Scoped error/fatal scan 19:25:37–19:35:37 UTC on 11 November found no matching logs. No schema, keys, access, spend, private records, mail or booking changed.
 
-NEXT: pathway step 2, one shared layer picker/control treatment across the maintained map families. Short-screen clipping/scrolling fixes already delivered are part of that work; do not rebuild them or reopen optional worldwide coverage before the two-island planner.
+The subsequent shared-controls release above completes pathway step 2.
 
 ## Australia park pilot and short-screen acceptance
 
@@ -52,7 +62,7 @@ Live evidence: /workspace/shared/aves-colombia-joined-regions.png, https://aves.
 
 The satellite foundation remains lazy-loaded Leaflet with EOX 2016 historical tiles, native zoom cap 14 and a background choice retained across routes/reloads in a tab. Overlay choices are page-local. Country/region camera moves finish without animation so expansion cannot interrupt them. 3D globe/elevation, current aerial imagery, complete bird ranges and whole-site layer parity remain unclaimed. See CONTINUOUS-SATELLITE-2026-11-11.md for the prior foundation evidence.
 
-Next: step 2 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots delivered. Shared controls precede island-aware planning and the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
+Next: step 3 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots and shared controls delivered. Island-aware planning precedes the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
 
 ## Editing and privacy boundaries
 
