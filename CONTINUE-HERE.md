@@ -48,4 +48,4 @@ Protect private traveller records and sensitive wildlife locations. Source envir
 
 The updated owner business plan is a separate private deliverable. It contains proposed commercial choices and clearly labelled illustrative finances; actual cash, costs, pay, capacity and paid demand remain owner inputs. Do not publish financial assumptions as actual results. The original plan still needs reconciliation.
 
-Legacy conservation claims discovered 12 November require a bounded correction before further launch claims. Physical mobile Safari/touch, independent visitors, current source/rights coverage, imagery reliability and the complete private save/reopen/edit journey remain unclaimed. Do not replace these checks with test counts.
+The bounded conservation/resources claim correction discovered 12 November is published. Wider historical content and media rights still need review. Physical mobile Safari/touch, independent visitors, current source/rights coverage, imagery reliability and the complete private save/reopen/edit journey remain unclaimed. Do not replace these checks with test counts.

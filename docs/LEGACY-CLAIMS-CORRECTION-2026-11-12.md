@@ -1,6 +1,6 @@
 # Legacy public claim correction
 
-Status: candidate, hosted acceptance pending.
+Status: published runtime a30fd48234d0d3cbcc0a115a5d39cdc7e6f97e9b, deployment dpl_HaYXPQDmiWvA1fLADwasevCy9UC3 on both canonical aliases.
 
 The conservation page still presented all tours as carbon neutral, a 10% net-profit payment to an AVES Conservation Endowment Trust, claimed impact metrics, a before/after habitat outcome and a first/second birding B Corp ranking. No supporting verified records were available in the maintained project. These are removed as current public claims. This does not establish that their opposite is true or change an actual documented fund: any future policy requires owner confirmation, funding, clear terms and supporting records.
 
@@ -10,4 +10,4 @@ The resources page also had an exact quotation credited only to Featured in Amer
 
 Two observed planner copy issues are corrected: the North Island transfer sentence no longer joins thisfor, and copied cost sharing uses singular adult and room/unit where applicable. No route rule, draft format, private API, schema, source geometry, account access, spend, mail or booking is changed.
 
-Exact checks, hosted evidence, canonical deployment and rollback are recorded in HANDOFF-CURRENT.md after acceptance. Physical touch/Safari, imagery reliability, real private save/reopen and independent visitor validation remain unclaimed.
+Exact checks, hosted evidence, canonical deployment and rollback are recorded in HANDOFF-CURRENT.md after acceptance. Checks passed: 595 tests, strict build TypeScript, 366 reachable modules and none unreachable, local and hosted 76-page builds. Physical touch/Safari, imagery reliability, real private save/reopen and independent visitor validation remain unclaimed.

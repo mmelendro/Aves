@@ -1,6 +1,18 @@
 # AVES current handoff
 
-Runtime: 1eb6947db550c10721ed4738c0d8588e75efe26d. Deployment: dpl_G22URh5bCqUUS563PY2oqZv9Tdyv, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: c7697c6c7a9342ce5d7a322800082a42ba332a48 / dpl_5ntsqf5icEpDeo4poShatMJPP3pX. Branch: feature/field-guide-card.
+Runtime: a30fd48234d0d3cbcc0a115a5d39cdc7e6f97e9b. Deployment: dpl_HaYXPQDmiWvA1fLADwasevCy9UC3, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: 1eb6947db550c10721ed4738c0d8588e75efe26d / dpl_G22URh5bCqUUS563PY2oqZv9Tdyv. Branch: feature/field-guide-card.
+
+## Legacy claims and final round acceptance
+
+Published the bounded conservation/resources correction described in LEGACY-CLAIMS-CORRECTION-2026-11-12.md. Unsupported current carbon-neutral, trust/donation, measured before/after and B Corp ranking claims are removed. Proposed stewardship, evidence requirements and explicit non-certification replace them. The unsupported podcast quotation is replaced with AVES editorial text; independent resources remain. The unused image comparison component was removed. This is not a full historical content/rights audit. Two planner copy defects are also corrected without changing route rules, schema or data format.
+
+All 595 tests, strict build-time TypeScript, source audit (366 reachable modules, zero unreachable), local and exact-SHA hosted 76-page builds passed. Hosted conservation had six priorities, no old percentage/trust/ranking claims and explicit non-certification, with the owner's B Lab source link. Resources showed the new introduction and no former podcast endorsement. At 337 CSS px the conservation page stayed 337px, with 305px cards. North Island kept its separate restored draft, corrected transfer sentence and copied singular adult/room units.
+
+Canonical checks confirmed the new conservation page and a three-day Auckland/Hamilton/Rotorua draft with corrected transfer text. Both aliases resolve to the accepted deployment. Deployment-scoped error/fatal scan 20:47:48–20:57:48 UTC on 11 November found no matching logs. Final public proof: https://aves.bio/new-zealand/north-island#trip-planner . Screenshot: docs/evidence/2026-11-12-final-north-island.jpg. No private record, schema, access, keys, spend, mail or booking changed.
+
+The separate owner business plan was completed and saved privately: eleven visually checked PDF pages covering the human service/app/album direction, commercial structures, stewardship, operations, labelled illustrative cash/contribution/capacity cases, founder pay from month one and a 90-day validation sequence. Financial viability is not verified. Actual founder pay, cash, costs, hours, legal/commercial role, supplier agreements and paid demand still require owner evidence. The original historical plan was not available for reconciliation. Do not copy private financial inputs into this public repository.
+
+NEXT: pathway step 5. Steps 1–4 are delivered at their explicit pilot scope. Step 5 has the North Island short-transfer rule but needs wider practical comparisons/pace/access improvements. Steps 6–8 remain incomplete: content and existing-photo/rights review, real private save/reopen/edit, physical mobile Safari/touch, independent visitor validation and imagery reliability. Existing 22 Colombian catalogue birds already feed the shared guide; do not claim every additional archive/Library photograph was audited or added. Do not call the whole site launch-ready from this round's test count.
 
 ## North Island corridor acceptance
 
@@ -14,7 +26,7 @@ The existing geographic surface rendered three base buttons and one straight rou
 
 Canonical proof: https://aves.bio/new-zealand/north-island#trip-planner rendered Auckland, Hamilton and Rotorua day cards. Both aliases assigned to the exact accepted deployment. Screenshot: docs/evidence/2026-11-12-north-island-planner.jpg. Deployment-scoped error/fatal scan 20:41:13–20:51:13 UTC on 11 November found no matching logs. No schema, private record, keys, access, spend, mail or booking changed.
 
-NEXT: pathway step 5. A bounded legacy-claims correction is being completed before further launch claims: /conservation still had unsupported carbon-neutral/trust/ranking statements, and /resources had an unattributed podcast endorsement. Do not claim a full launch audit from this discovery.
+NEXT: pathway step 5. The bounded legacy-claims correction is completed in the subsequent release above. Do not claim a full launch audit from it.
 
 ## Shared island planner acceptance
 

@@ -47,7 +47,7 @@ Never convert opportunity coverage into sighting probability. Do not silently eq
 
 Environmental evidence remains separate from certification: organic ingredients do not certify a menu, an operator's published environmental practice does not certify a property, and a company's B Corp status does not automatically cover every listed entity. The B Lab ESC reference supports measured impacts, biodiversity risk review and transparent supplier evidence: https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/ . No invented environmental score or compliance claim.
 
-The 11 November source spot check reconfirmed DOC's Devils Punchbowl guidance: 400+ steps, Wardens Creek flood risk, named forest birds and kea. This does not certify all 48 catalogue references or all country content anew. Prices, routes and sightings retain their existing limits. The original Eco-Tourism Business Plan was not available for a financial review.
+The 11 November source spot check reconfirmed DOC's Devils Punchbowl guidance: 400+ steps, Wardens Creek flood risk, named forest birds and kea. This does not certify all 48 catalogue references or all country content anew. Prices, routes and sightings retain their existing limits. The original Eco-Tourism Business Plan was unavailable. A separate private owner edition now provides labelled illustrative economics; it does not establish actual financial viability.
 
 ## Maintenance checks
 
@@ -57,11 +57,11 @@ TypeScript rejects unused variables, parameters and imports. Comments explain mo
 
 Historical documentation remains evidence. Use this guide, README and CONTINUE-HERE for current structure. Keep deployment identifiers out of reusable UI/content modules. Test the actual hosted candidate before assigning both production domains.
 
-## Planned two-island extension
+## Shared two-island planning
 
 The shared foundation is implemented and published after exact-SHA hosted acceptance. `content/new-zealand-planning-context.ts` provides explicit data/labels/gateways. `lib/island-trip-planner.ts` and shared road/price factories consume one context. `lib/island-planners.ts` registers only operational planners. The shared form and child displays use a required `IslandPlannerProvider`; the South Island wrapper preserves page imports. See SHARED-ISLAND-PLANNER-2026-11-12.md.
 
-Per-island keys and explicit generated identity isolate pending drafts. Untagged historical envelopes remain South Island only. The account editor offers labelled imports from the operational registry, respects explicit island intent, appends reviewed text and consumes only a server-confirmed exact import. No schema or private-record migration is needed. North Island is not yet registered; its guide and inventories must arrive with a usable researched pilot. No road between islands is inferred.
+Per-island keys and explicit generated identity isolate pending drafts. Untagged historical envelopes remain South Island only. The account editor offers labelled imports from the operational registry, respects explicit island intent, appends reviewed text and consumes only a server-confirmed exact import. No schema or private-record migration is needed. North Island is registered with the researched Auckland/Hamilton/Rotorua corridor. Its canonical guide, public inventories, eighteen references and separate draft slot ship together. The shared engine accepts explicit ordered-corridor and short-arrival rules while retaining South Island dedicated travel days. See NORTH-ISLAND-PILOT-2026-11-12.md. No road between islands is inferred.
 
 ## One-map requirement
 
@@ -87,3 +87,7 @@ Colombia protected areas: `GeographicProtectedAreas` owns an independent optiona
 Australia protected areas: the lazy AustraliaProtectedAreas wrapper reuses ProtectedAreaExplorer, with 13 selected CAPAD 2024 NP/NPC records. National-park legal type and IUCN management category remain distinct source fields. The offline generator dissolves by PA_ID, retains islands/holes and checks area change. Its separate catalogue, source terms and omitted Daintree residual are documented in AUSTRALIA-PROTECTED-AREAS-2026-11-12.md. Colombia data/licence remain unchanged. MapViewer data-geographic controls intrinsic scrolling; short page headers/guide actions scroll below 480px height. Shared layer picker treatment is delivered across maintained families; physical touch/Safari remains unverified.
 
 North Island/Rakiura parks: NewZealandProtectedAreas reuses ProtectedAreaExplorer only outside the South Island adapter. Four NaPALIS units use correctly reconstructed Esri ring orientation, not the service's invalid GeoJSON conversion. Keep stable unit IDs and current/raw source names. The generator preserves every island/hole and validates the rounded result. Data/terms/date scope and DOC visitor guides are in content/new-zealand-protected-areas.json; transformation evidence is NEW-ZEALAND-PARKS-2026-11-12.md. South Island’s existing separate data is unchanged.
+
+North Island map: `NorthIslandPlanningLayer` adds broad settlement references and itinerary order to the existing geographic surface. It never adds a second map. An explicit fit control uses the three reviewed coordinates. Only a new preview request focuses a base, preserving restored camera state on remounts. Selection filters the shared catalogue without breaking the fixed corridor. The shared layer picker exposes only supported NI bases/itinerary choices.
+
+Legacy conservation/resources correction: results need source/method/period records; the public page describes proposed actions and explicit non-certification. Unsupported current carbon-neutral/trust/ranking and podcast-endorsement claims were removed. Unused BeforeAfterSlider was retired. Do not restore the old comparison as evidence of an AVES impact result.
