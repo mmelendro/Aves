@@ -21,7 +21,7 @@ import { australiaMapProvenance } from "@/content/global-australian-map"
 import nzMap from "@/content/new-zealand-map.json"
 import NewZealandBirdPicker from "./new-zealand-bird-picker"
 import { featuredNzBirdId } from "@/content/new-zealand-checklist"
-import { readNzBirdBasket, writeNzBirdBasket } from "@/lib/nz-bird-selection"
+import { readNzBirdBasket, writeNzBirdBasket, NZ_BIRD_BASKET_EVENT } from "@/lib/nz-bird-selection"
 import DestinationCardMedia from "@/components/destination-card-media"
 import { DestinationSelectionContext } from "@/components/destination-selection-context"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
@@ -69,8 +69,8 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const [storageAvailable,setStorageAvailable]=useState(true)
   useEffect(()=>{
     function restore(){try{setWishIds(readNzBirdBasket(window.sessionStorage))}catch{setStorageAvailable(false)}}
-    restore();window.addEventListener("pageshow",restore)
-    return ()=>window.removeEventListener("pageshow",restore)
+    restore();window.addEventListener("pageshow",restore);window.addEventListener(NZ_BIRD_BASKET_EVENT,restore)
+    return ()=>{window.removeEventListener("pageshow",restore);window.removeEventListener(NZ_BIRD_BASKET_EVENT,restore)}
   },[])
   function chooseBirds(ids:string[]){setWishIds(ids);try{setStorageAvailable(writeNzBirdBasket(window.sessionStorage,ids))}catch{setStorageAvailable(false)}}
   const backButton = useRef<HTMLButtonElement>(null)

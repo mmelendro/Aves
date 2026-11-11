@@ -519,3 +519,18 @@ test('reviewed B Corp and landscape notes survive private save and frozen NZ enq
  const inbox=await owner.adminQuotesGet();assert.equal(inbox.status,200)
  assert.equal((await inbox.json()).quotes[0].plan.message,message)
 })
+
+test('generated itinerary notes and bird choices survive private save and immutable enquiry snapshot',async()=>{
+ const planner=loader()('lib/south-island-trip-planner.ts')
+ const draft=planner.buildSouthIslandTrip({...planner.defaultTripInput,days:5,birdIds:['nz-de1ba81fa03b'],areaId:'arthurs-pass'})
+ const message=planner.mergeTripNotes('Original synthetic notes.',draft).message
+ const routeDetails={...nzDetails,message,questionnaire:{...nzAnswers,birdIds:draft.input.birdIds}}
+ const row={...planRow,details:routeDetails}
+ const h=harness({results:[{data:row,error:null}],rpcResult:{...quoteReceipt,plan_snapshot:{title,details:routeDetails}}})
+ const created=await h.plansPost(request({id:planId,title,...routeDetails}))
+ assert.equal(created.status,200);assert.equal((await created.json()).plan.message,message)
+ const shared=await h.quotePost(request({expectedUpdatedAt:stamp,contactName:'Synthetic Guest'},quoteId),planId)
+ assert.equal(shared.status,200);const saved=(await shared.json()).plan
+ assert.equal(saved.message,message);assert.deepEqual(saved.questionnaire.birdIds,draft.input.birdIds)
+ assert.doesNotMatch(h.notices.flat().join(' '),/Day 1:|Original synthetic notes|Arthur’s Pass/)
+})

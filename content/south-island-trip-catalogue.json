@@ -1,0 +1,998 @@
+{
+  "version": 1,
+  "region": "south-island",
+  "checkedAt": "2026-11-11",
+  "coverage": "Manually reviewed South Island planning references. No live room inventory, prices, road times, wildlife sightings or general eco rating.",
+  "areas": [
+    {
+      "id": "christchurch",
+      "name": "Christchurch",
+      "latitude": -43.5350216,
+      "longitude": 172.6300232,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Christchurch, New Zealand"
+    },
+    {
+      "id": "arthurs-pass",
+      "name": "Arthur’s Pass",
+      "latitude": -42.9409528,
+      "longitude": 171.5628387,
+      "sourceUrl": "https://www.openstreetmap.org/node/165076707",
+      "search": "Arthurs Pass, New Zealand"
+    },
+    {
+      "id": "nelson-lakes",
+      "name": "Nelson Lakes / St Arnaud",
+      "latitude": -41.811469,
+      "longitude": 172.844331,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:St_Arnaud_(New_Zealand)_banner_Lake_Rotoiti.jpg",
+      "search": "Saint Arnaud, New Zealand"
+    },
+    {
+      "id": "tasman",
+      "name": "Nelson & Abel Tasman",
+      "latitude": -41.2925917,
+      "longitude": 173.247448,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Marahau, New Zealand"
+    },
+    {
+      "id": "kaikoura",
+      "name": "Kaikōura",
+      "latitude": -42.4005999,
+      "longitude": 173.6811428,
+      "sourceUrl": "https://www.openstreetmap.org/node/205039578",
+      "search": "Kaikoura, New Zealand"
+    },
+    {
+      "id": "maruia",
+      "name": "Maruia Springs",
+      "latitude": -42.3792281,
+      "longitude": 172.3332276,
+      "sourceUrl": "https://www.openstreetmap.org/node/7747779983",
+      "search": "Maruia Springs, New Zealand"
+    },
+    {
+      "id": "hanmer",
+      "name": "Hanmer Springs",
+      "latitude": -42.5217947,
+      "longitude": 172.8302995,
+      "sourceUrl": "https://www.openstreetmap.org/node/294472598",
+      "search": "Hanmer Springs, New Zealand"
+    },
+    {
+      "id": "west-coast",
+      "name": "Franz Josef / West Coast",
+      "latitude": -43.3873823,
+      "longitude": 170.1819321,
+      "sourceUrl": "https://www.openstreetmap.org/node/176971775",
+      "search": "Franz Josef, New Zealand"
+    },
+    {
+      "id": "lakes",
+      "name": "Queenstown, Glenorchy & Wānaka",
+      "latitude": -45.0226715,
+      "longitude": 168.7250813,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Queenstown, New Zealand"
+    },
+    {
+      "id": "otago",
+      "name": "Dunedin & Otago Peninsula",
+      "latitude": -45.8854231,
+      "longitude": 170.4910157,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Dunedin, New Zealand"
+    },
+    {
+      "id": "fiordland",
+      "name": "Te Anau & Fiordland",
+      "latitude": -45.231059,
+      "longitude": 167.811456,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Te_Anau_02.jpg",
+      "search": "Te Anau, New Zealand"
+    },
+    {
+      "id": "catlins",
+      "name": "The Catlins / Curio Bay",
+      "latitude": -46.662119,
+      "longitude": 169.0981,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Petrified_forest_at_Curio_Bay.jpg",
+      "search": "Curio Bay, New Zealand"
+    },
+    {
+      "id": "invercargill",
+      "name": "Invercargill",
+      "latitude": -46.4094366,
+      "longitude": 168.3650058,
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "search": "Invercargill, New Zealand",
+      "gateway": true
+    },
+    {
+      "id": "greymouth",
+      "name": "Greymouth",
+      "latitude": -42.4499469,
+      "longitude": 171.2079875,
+      "sourceUrl": "https://www.openstreetmap.org/node/174590403",
+      "search": "Greymouth, New Zealand",
+      "gateway": true
+    },
+    {
+      "id": "picton",
+      "name": "Picton",
+      "latitude": -41.290916,
+      "longitude": 174.006908,
+      "sourceUrl": "https://www.openstreetmap.org/node/53442053",
+      "search": "Picton, New Zealand",
+      "gateway": true
+    }
+  ],
+  "places": [
+    {
+      "id": "trip-arthurs-birds",
+      "name": "Arthur’s Pass village & park birding",
+      "base": "arthurs-pass",
+      "categories": [
+        "birding"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/arthurs-pass-national-park",
+      "description": "Public village and forest outings for alpine and forest birds. Ask the visitor centre about suitable current walks.",
+      "birdIds": [
+        "nz-de1ba81fa03b",
+        "nz-d994d2df02c5",
+        "nz-06bff047759b"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Never feed kea; park-wide bird evidence is not a sighting at a particular car park."
+    },
+    {
+      "id": "trip-devils-punchbowl",
+      "name": "Devils Punchbowl Walking Track",
+      "base": "arthurs-pass",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/arthurs-pass-national-park/things-to-do/tracks/devils-punchbowl-walking-track/",
+      "description": "Beech forest and waterfall walk with a steep climb and more than 400 steps.",
+      "birdIds": [
+        "nz-de1ba81fa03b",
+        "nz-a93c483d98c5",
+        "nz-d994d2df02c5",
+        "nz-06bff047759b",
+        "nz-3b863bdeaac2",
+        "nz-0847d9dc75fc"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "An unbridged stream can flood. Follow current DOC alerts, fitness guidance and weather advice."
+    },
+    {
+      "id": "trip-apam",
+      "name": "Arthur’s Pass Alpine Motel",
+      "base": "arthurs-pass",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://apam.co.nz/",
+      "description": "Self-contained village accommodation with kitchens. Eco credentials have not been reviewed.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-tranzalpine",
+      "name": "TranzAlpine / Arthur’s Pass rail connection",
+      "base": "arthurs-pass",
+      "categories": [
+        "transport"
+      ],
+      "url": "https://www.greatjourneysnz.com/destinations/arthurs-pass/arthurs-pass-railway-station/",
+      "description": "Rail connection for Christchurch and Arthur’s Pass. Arrange local transport separately.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Check current timetables and service updates; road replacement services may apply."
+    },
+    {
+      "id": "trip-nelson-forest",
+      "name": "Nelson Lakes forest birding",
+      "base": "nelson-lakes",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park",
+      "description": "Forest outings around the lake-side recovery area; choose current public walks with DOC.",
+      "birdIds": [
+        "nz-71e9c390d5e3",
+        "nz-d994d2df02c5",
+        "nz-06bff047759b",
+        "nz-a93c483d98c5",
+        "nz-d89d30d6e59b"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Evidence describes the national park’s forest habitats, not a guaranteed checklist for one track."
+    },
+    {
+      "id": "trip-alpine-lodge",
+      "name": "Alpine Lodge, St Arnaud",
+      "base": "nelson-lakes",
+      "categories": [
+        "stays",
+        "food"
+      ],
+      "url": "https://www.alpinelodge.co.nz/",
+      "description": "Rooms, apartments, backpacker accommodation and a restaurant near Nelson Lakes.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The lodge describes locally sourced restaurant produce; this is an operator statement, not organic certification.",
+        "url": "https://www.alpinelodge.co.nz/"
+      }
+    },
+    {
+      "id": "trip-abel-lodge",
+      "name": "Abel Tasman Lodge",
+      "base": "tasman",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.abeltasmanlodge.co.nz/keeping-the-beautiful-beautiful/",
+      "description": "Chalet accommodation in Mārahau, with a published environmental practices page.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The operator publishes resource-use and waste-reduction practices. No B Corp or independent property certification is asserted.",
+        "url": "https://www.abeltasmanlodge.co.nz/keeping-the-beautiful-beautiful/"
+      }
+    },
+    {
+      "id": "trip-riverside",
+      "name": "Komitimiti / Riverside Café",
+      "base": "tasman",
+      "categories": [
+        "food"
+      ],
+      "url": "https://www.riverside.org.nz/riverside-cafe",
+      "description": "Community café in Lower Moutere. Check its current opening days and menu.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "community"
+      ],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-nelson-market",
+      "name": "Nelson Farmers Market",
+      "base": "tasman",
+      "categories": [
+        "markets",
+        "food"
+      ],
+      "url": "https://www.nelsonfarmersmarket.org.nz/",
+      "description": "Seasonal local food and produce market in Nelson.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "when": "Wednesdays; check the organiser’s current hours and dates. Nelson is a separate drive from Mārahau.",
+      "weekdays": [
+        3
+      ]
+    },
+    {
+      "id": "trip-abel-kayaks",
+      "name": "Abel Tasman Kayaks",
+      "base": "tasman",
+      "categories": [
+        "adventures",
+        "transport"
+      ],
+      "url": "https://www.abeltasmankayaks.co.nz/",
+      "description": "Guided sea kayaking, walking combinations and water taxi options from the Mārahau area.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Weather, sea conditions, fitness, booking and departure location require operator confirmation."
+    },
+    {
+      "id": "trip-abel-eco",
+      "name": "Abel Tasman Eco Tours",
+      "base": "tasman",
+      "categories": [
+        "ecotourism"
+      ],
+      "url": "https://www.abeltasmanecotours.co.nz/conservation-projects/",
+      "description": "Guided nature experiences with published conservation project information.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The operator describes conservation projects. This is operator evidence, not B Corp certification.",
+        "url": "https://www.abeltasmanecotours.co.nz/conservation-projects/"
+      },
+      "access": "Check tour format, availability and the agreed meeting location directly."
+    },
+    {
+      "id": "trip-hapuku",
+      "name": "Hapuku Lodge + Tree Houses",
+      "base": "kaikoura",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.hapukulodge.com/",
+      "description": "Lodge and tree-house accommodation north of Kaikōura. Dining access should be checked directly.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-hapuku-dining",
+      "name": "Hapuku Lodge dining",
+      "base": "kaikoura",
+      "categories": [
+        "food"
+      ],
+      "url": "https://www.hapukulodge.com/dine/",
+      "description": "Garden and regional produce dining at the lodge; check whether non-resident dining is offered.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "organic-ingredients",
+        "farm-to-table",
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The operator describes ingredients from its organic kitchen garden and neighbouring farms. This does not certify the whole menu as organic.",
+        "url": "https://www.hapukulodge.com/dine/"
+      }
+    },
+    {
+      "id": "trip-sudima-kaikoura",
+      "name": "Sudima Kaikōura",
+      "base": "kaikoura",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.sudimahotels.com/en/hotels/kaikoura/",
+      "description": "Coastal hotel accommodation. Review room types and the operator’s current ESG information separately.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-kaikoura-walk",
+      "name": "Kaikōura Peninsula Walkway",
+      "base": "kaikoura",
+      "categories": [
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/marlborough/places/kaikoura-area/things-to-do/tracks/kaikoura-peninsula-walkway/",
+      "description": "Coastal walking with seabirds, marine wildlife and interpretation.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Choose a suitable section, check tide and access advice, and keep the required distance from wildlife."
+    },
+    {
+      "id": "trip-albatross-encounter",
+      "name": "Albatross Encounter, Kaikōura",
+      "base": "kaikoura",
+      "categories": [
+        "ecotourism",
+        "adventures"
+      ],
+      "url": "https://www.albatrossencounter.co.nz/",
+      "description": "Guided offshore seabird watching. Sea conditions and the bird species encountered vary.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "No species is assigned from a generic tour page; confirm seasonal targets and sailing with the operator."
+    },
+    {
+      "id": "trip-whale-watch",
+      "name": "Whale Watch Kaikōura",
+      "base": "kaikoura",
+      "categories": [
+        "ecotourism"
+      ],
+      "url": "https://whalewatch.co.nz/kia-ora/",
+      "description": "Guided marine wildlife cruises. Check the operator’s current sailing status and visitor guidance.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Weather-dependent; wildlife, departure and availability are not confirmed by this itinerary."
+    },
+    {
+      "id": "trip-maruia",
+      "name": "Maruia Hot Springs",
+      "base": "maruia",
+      "categories": [
+        "hot-springs",
+        "stays",
+        "wellness"
+      ],
+      "url": "https://www.maruiahotsprings.nz/",
+      "description": "Natural thermal bathing, spa and accommodation options in Lewis Pass.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "natural-thermal"
+      ],
+      "checkedAt": "2026-11-11",
+      "access": "Maruia is a separate overnight base, not a nearby add-on to Nelson Lakes or Hanmer. Check operator access and road conditions."
+    },
+    {
+      "id": "trip-hanmer",
+      "name": "Hanmer Springs Thermal Pools & Spa",
+      "base": "hanmer",
+      "categories": [
+        "hot-springs",
+        "wellness"
+      ],
+      "url": "https://hanmersprings.co.nz/",
+      "description": "Thermal pool and spa complex in Hanmer Springs.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "natural-thermal"
+      ],
+      "checkedAt": "2026-11-11",
+      "access": "Some pools may be closed for works. Confirm current facilities and opening with the operator."
+    },
+    {
+      "id": "trip-rainforest",
+      "name": "Rainforest Retreat, Franz Josef",
+      "base": "west-coast",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://rainforest.nz/",
+      "description": "Accommodation in Franz Josef village, ranging across different room and stay types.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-sherwood-stay",
+      "name": "Sherwood Queenstown",
+      "base": "lakes",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.sherwoodqueenstown.nz/",
+      "description": "Queenstown accommodation with restaurant and wellbeing options.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-sherwood-food",
+      "name": "Sherwood restaurant",
+      "base": "lakes",
+      "categories": [
+        "food"
+      ],
+      "url": "https://www.sherwoodqueenstown.nz/restaurant/",
+      "description": "Seasonal dining using its garden and regional ingredients.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "organic-ingredients",
+        "farm-to-table",
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The restaurant describes its organic vegetable garden and seasonal sourcing. This is an operator statement, not independent organic certification.",
+        "url": "https://www.sherwoodqueenstown.nz/restaurant/"
+      }
+    },
+    {
+      "id": "trip-headwaters",
+      "name": "The Headwaters Eco Lodge",
+      "base": "lakes",
+      "categories": [
+        "stays",
+        "food"
+      ],
+      "url": "https://theheadwatersecolodge.com/",
+      "description": "Accommodation and dining in Glenorchy, a separate drive from Queenstown.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The operator presents an eco-lodge model. Check its published environmental information; no B Corp status is claimed here.",
+        "url": "https://theheadwatersecolodge.com/"
+      }
+    },
+    {
+      "id": "trip-onsen",
+      "name": "Onsen Hot Pools",
+      "base": "lakes",
+      "categories": [
+        "hot-springs",
+        "wellness"
+      ],
+      "url": "https://www.onsen.co.nz/",
+      "description": "Commercial heated hot pools and spa near Queenstown.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "heated-pools"
+      ],
+      "checkedAt": "2026-11-11",
+      "access": "Hot pool experience, not listed here as a natural geothermal spring. Advance reservations may be needed."
+    },
+    {
+      "id": "trip-dart",
+      "name": "Dart River Adventures",
+      "base": "lakes",
+      "categories": [
+        "adventures"
+      ],
+      "url": "https://www.dartriver.co.nz/",
+      "description": "Glenorchy-based jet boat and inflatable kayak experiences.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Check fitness, age, conditions, transport and meeting arrangements with the operator."
+    },
+    {
+      "id": "trip-bungy",
+      "name": "AJ Hackett Bungy, Queenstown",
+      "base": "lakes",
+      "categories": [
+        "adventures"
+      ],
+      "url": "https://www.bungy.co.nz/",
+      "description": "Queenstown adventure options. Select the specific site and activity with the operator.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Operator eligibility and safety requirements apply. No adventure activity is presumed suitable for every traveller."
+    },
+    {
+      "id": "trip-remarkables-market",
+      "name": "Remarkables Market",
+      "base": "lakes",
+      "categories": [
+        "markets",
+        "food"
+      ],
+      "url": "https://remarkablesmarket.com/",
+      "description": "Seasonal produce, prepared food and local makers market in Queenstown.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The organiser describes waste reduction, recycling and composting practices; this does not certify each vendor or product.",
+        "url": "https://remarkablesmarket.com/"
+      },
+      "when": "Seasonal Saturdays; confirm the current season and dates.",
+      "weekdays": [
+        6
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "trip-hawea-stay",
+      "name": "Lake Hāwea Station stay ideas",
+      "base": "lakes",
+      "categories": [
+        "stays",
+        "ecotourism"
+      ],
+      "url": "https://www.lakehaweastation.com/",
+      "description": "Station accommodation and farm experiences near Lake Hāwea, separate from Queenstown.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The company’s B Lab profile is linked in the optional B Corp layer; certification does not certify each stay.",
+        "url": "https://www.lakehaweastation.com/"
+      },
+      "access": "Arrange visits and confirm the accommodation arrival address with the operator."
+    },
+    {
+      "id": "trip-orokonui",
+      "name": "Orokonui Ecosanctuary",
+      "base": "otago",
+      "categories": [
+        "birding",
+        "ecotourism"
+      ],
+      "url": "https://orokonui.nz/orokonuibirds/",
+      "description": "Public sanctuary forest outings; book a guide if wanted. No daytime kiwi sightings are suggested.",
+      "birdIds": [
+        "nz-71e9c390d5e3",
+        "nz-2992f65f2684",
+        "nz-d994d2df02c5",
+        "nz-dcdf1e102a0c",
+        "nz-131add6ace38",
+        "nz-d89d30d6e59b",
+        "nz-8012499b5e08",
+        "nz-b8115ba326a8"
+      ],
+      "encounter": "sanctuary",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Conservation sanctuary populations. Check opening, tickets and current visitor arrangements."
+    },
+    {
+      "id": "trip-taiaroa",
+      "name": "Pukekura / Taiaroa Head",
+      "base": "otago",
+      "categories": [
+        "birding",
+        "ecotourism"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/otago-peninsula-area/taiaroa-head-nature-reserve/",
+      "description": "Public visitor arrangements for viewing northern royal albatross.",
+      "birdIds": [
+        "nz-ff896bda56ee"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Use authorised public viewing arrangements; reserve access and breeding-season restrictions apply."
+    },
+    {
+      "id": "trip-bushy-beach",
+      "name": "Bushy Beach Scenic Reserve",
+      "base": "otago",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/bushy-beach-scenic-reserve/",
+      "description": "Public viewing hide near Ōamaru for a chance to observe hoiho.",
+      "birdIds": [
+        "nz-fb34f295c5f7"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Ōamaru is a separate excursion north of Dunedin. Check DOC access rules; do not enter penguin areas or approach nests."
+    },
+    {
+      "id": "trip-larnach",
+      "name": "Larnach Castle & accommodation",
+      "base": "otago",
+      "categories": [
+        "stays",
+        "culture"
+      ],
+      "url": "https://www.larnachcastle.co.nz/",
+      "description": "Castle, gardens and associated accommodation on Otago Peninsula. Check which property and room you are booking.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-otago-market",
+      "name": "Otago Farmers Market",
+      "base": "otago",
+      "categories": [
+        "markets",
+        "food"
+      ],
+      "url": "https://otagofarmersmarket.org.nz/",
+      "description": "Local produce and food market in Dunedin.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "when": "Check current market dates and hours with the organiser; vendors and produce vary.",
+      "weekdays": [
+        6
+      ]
+    },
+    {
+      "id": "trip-toitu",
+      "name": "Toitū Otago Settlers Museum",
+      "base": "otago",
+      "categories": [
+        "culture"
+      ],
+      "url": "https://www.toituosm.com/",
+      "description": "Dunedin museum option for a quieter day, with regional social history and exhibitions.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-te-anau-birds",
+      "name": "Punanga Manu o Te Anau / Bird Sanctuary",
+      "base": "fiordland",
+      "categories": [
+        "birding"
+      ],
+      "url": "https://www.doc.govt.nz/teanaubirdsanctuary",
+      "description": "A managed conservation encounter with takahē near Te Anau.",
+      "birdIds": [
+        "nz-dcdf1e102a0c"
+      ],
+      "encounter": "managed",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Takahē here are part of a managed recovery programme. Other captive species have been relocated; check the current visitor page."
+    },
+    {
+      "id": "trip-lake-gunn",
+      "name": "Lake Gunn Nature Walk",
+      "base": "fiordland",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/lake-gunn-nature-walk/",
+      "description": "A short forest loop from the public Cascade Creek car park.",
+      "birdIds": [
+        "nz-3b863bdeaac2",
+        "nz-a93c483d98c5"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Around 78 km from Te Anau: plan a dedicated Milford Road outing and check road, track and weather alerts."
+    },
+    {
+      "id": "trip-fiordland-lodge",
+      "name": "Fiordland Lodge",
+      "base": "fiordland",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.fiordlandlodge.co.nz/",
+      "description": "Lodge accommodation near Te Anau. Compare rooms, inclusions and access with the operator.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-teanau-top10",
+      "name": "Te Anau TOP 10 Holiday Park",
+      "base": "fiordland",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://teanautop10.co.nz/",
+      "description": "Holiday park accommodation in Te Anau. Select the room, cabin or camping option suited to your group.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-milford-cruise",
+      "name": "RealNZ Milford Sound cruise",
+      "base": "fiordland",
+      "categories": [
+        "ecotourism",
+        "adventures"
+      ],
+      "url": "https://www.realnz.com/en/experiences/day-cruises/milford-sound-signature-cruise/",
+      "description": "A Milford Sound cruise option with operator information and transport choices.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "A full excursion from Te Anau, not a quick afternoon stop. Confirm coach/self-drive arrangements and sailing separately."
+    },
+    {
+      "id": "trip-curio-walk",
+      "name": "Curio Bay public penguin viewing walk",
+      "base": "catlins",
+      "categories": [
+        "birding",
+        "hikes"
+      ],
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/curio-bay-porpoise-bay/things-to-do/penguin-walk/",
+      "description": "Use the designated public viewing path and current DOC guidance.",
+      "birdIds": [
+        "nz-fb34f295c5f7"
+      ],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "access": "Curio Scape’s campground, café and visitor facilities publish a temporary closure from April 2026. Verify current path access and facilities before travel."
+    },
+    {
+      "id": "trip-sudima-chch",
+      "name": "Sudima Christchurch City",
+      "base": "christchurch",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.sudimahotels.com/en/hotels/christchurch-city/",
+      "description": "City hotel rooms and apartments. Review the operator’s current environmental information separately.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-uw-kitchen",
+      "name": "Untouched World Kitchen",
+      "base": "christchurch",
+      "categories": [
+        "food"
+      ],
+      "url": "https://www.untouchedworldkitchen.com/location",
+      "description": "Christchurch café with seasonal produce and a published ingredient FAQ.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "organic-ingredients",
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The café says many ingredients are organic and sourced from local farms. This is an ingredient claim, not separate B Corp or organic café certification.",
+        "url": "https://www.untouchedworldkitchen.com/location"
+      }
+    },
+    {
+      "id": "trip-supreme",
+      "name": "Supreme Supreme café",
+      "base": "christchurch",
+      "categories": [
+        "food"
+      ],
+      "url": "https://coffeesupreme.com/blogs/locations/supreme-supreme",
+      "description": "Coffee and food stop at the operator-listed Welles Street café. Company certification scope is available in the B Corp layer.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-chch-market",
+      "name": "Christchurch Farmers’ Market",
+      "base": "christchurch",
+      "categories": [
+        "markets",
+        "food"
+      ],
+      "url": "https://www.christchurchfarmersmarket.co.nz/",
+      "description": "Produce and food market in the grounds of Riccarton House and Bush.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "local-produce"
+      ],
+      "checkedAt": "2026-11-11",
+      "when": "Weekly market; check the organiser’s current dates, opening and vendor list.",
+      "weekdays": [
+        6
+      ]
+    },
+    {
+      "id": "trip-riccarton-market",
+      "name": "Riccarton Sunday Market",
+      "base": "christchurch",
+      "categories": [
+        "markets"
+      ],
+      "url": "https://www.riccartonmarket.co.nz/market-info",
+      "description": "Outdoor market with food and mixed stalls at Riccarton Racecourse.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "when": "Sundays; check current operation with the organiser. This is separate from Christchurch Farmers’ Market.",
+      "weekdays": [
+        0
+      ]
+    },
+    {
+      "id": "trip-waka",
+      "name": "Waka on Avon",
+      "base": "christchurch",
+      "categories": [
+        "culture",
+        "adventures"
+      ],
+      "url": "https://wakaonavon.co.nz/",
+      "description": "Host-led Māori waka and walking experiences in Christchurch. Choose a published experience and confirm arrangements.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-mohua-park",
+      "name": "Mohua Park Catlins Eco Accommodation",
+      "base": "catlins",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.catlinsmohuapark.co.nz/",
+      "description": "Self-contained cottages at Tawanui in the Catlins, with private forest walks for guests.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-11",
+      "eco": {
+        "kind": "operator",
+        "note": "The operator describes eco cottages and a private protected bush sanctuary. This is operator evidence, not a B Corp or independent property certification claim.",
+        "url": "https://www.catlinsmohuapark.co.nz/"
+      },
+      "access": "Private guest accommodation, not a public sanctuary entrance. Confirm the property location and arrival arrangements; Curio Bay is a separate drive."
+    },
+    {
+      "id": "trip-hanmer-camp",
+      "name": "Hanmer Springs Forest Camp",
+      "base": "hanmer",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://www.hanmerforestcamp.co.nz/accommodation/",
+      "description": "Cabins, lodge rooms and campsites, including options with shared kitchens and facilities.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [
+        "self-catering"
+      ],
+      "checkedAt": "2026-11-11"
+    }
+  ]
+}

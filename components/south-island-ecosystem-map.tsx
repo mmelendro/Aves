@@ -175,7 +175,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <SouthIslandMapLayers />
     </div>
     </div>
-    {layers.bcorps && <p className="shrink-0 text-[10px] leading-4 text-emerald-900"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>}
+    {(layers.bcorps || layers.planning) && <p className="shrink-0 text-[10px] leading-4 text-emerald-900"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>}
     <details ref={detailsRef} className={styles.mapDetails}>
       <summary>Places, habitats &amp; map details</summary>
       <div className={styles.detailsPanel}>

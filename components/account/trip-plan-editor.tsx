@@ -8,6 +8,7 @@
 
 import { useEffect, useId, useRef, useState } from "react"
 import { nzPublicPlanningPlaces, readNzPlaceIdeas, mergeNzPlaceNotes, consumeSavedNzPlaceIdeas } from "@/lib/nz-place-ideas"
+import { readTripDraft, mergeTripNotes, consumeTripDraft, type TripDraft } from "@/lib/south-island-trip-planner"
 import NewZealandBirdPicker from "@/components/new-zealand-bird-picker"
 import { consumeNzBirdBasket, readNzBirdBasket } from "@/lib/nz-bird-selection"
 import { BudgetQuestions } from "./budget-questions"
@@ -39,6 +40,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   const [birdIds, setBirdIds] = useState<string[]>(plan?.questionnaire?.birdIds || [])
   const [incomingBirds, setIncomingBirds] = useState<string[]>([])
   const [incomingPlaces, setIncomingPlaces] = useState<string[]>([])
+  const [incomingItinerary, setIncomingItinerary] = useState<TripDraft|null>(null)
   const [message, setMessage] = useState(plan?.message || "")
   const [placeNotice, setPlaceNotice] = useState("")
   // Guest choices prefill a new form. Existing saved answers are never silently
@@ -47,6 +49,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
     if (country !== "new-zealand") return
     try {
       setIncomingPlaces(readNzPlaceIdeas(window.sessionStorage))
+      setIncomingItinerary(readTripDraft(window.sessionStorage))
       const incoming = readNzBirdBasket(window.sessionStorage)
       setIncomingBirds(incoming)
       if (!plan) setBirdIds(incoming)
@@ -103,6 +106,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       if (!result.plan || result.plan.id !== (plan?.id || key) || result.plan.status !== "draft" || !result.plan.updatedAt) throw new Error("Your saved plan could not be confirmed. Please try again; your details are still here.")
       request.current = null
       if (country === "new-zealand") {
+        try { consumeTripDraft(window.sessionStorage, result.plan.message || "") } catch { /* Confirmed save remains successful if storage is blocked. */ }
         try { consumeSavedNzPlaceIdeas(window.sessionStorage, result.plan.message || "") } catch { /* Confirmed private save remains successful if browser storage is blocked. */ }
         try { consumeNzBirdBasket(window.sessionStorage, fields.questionnaire?.birdIds || []) } catch { /* Server save is already confirmed. */ }
       }
@@ -121,6 +125,17 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       {country === "new-zealand" && <><p className="text-sm text-gray-500">Please include the year in your timing. No dates are assumed or reserved.</p><PlanningQuestions key={country} prefix={prefix} answers={plan?.country === country ? plan.questionnaire : undefined} /></>}
       {country === "new-zealand" && <BudgetQuestions key={`${country}-${plan?.id || "new"}`} prefix={prefix} budget={plan?.country === country ? plan.questionnaire?.budget : undefined} />}
       {country === "new-zealand" && <section aria-labelledby={`${prefix}-birds`} className="space-y-4 rounded-xl border border-emerald-200 p-5"><h3 id={`${prefix}-birds`} className="font-medium text-emerald-950">Birds you would love to see (optional)</h3><p className="text-sm leading-6 text-gray-600">These choices join this private draft only when you save. Review the full checklist here, or bring choices from this browser tab. They are wishes, not guaranteed sightings or an itinerary.</p>{plan && incomingBirds.length > 0 && <button type="button" onClick={() => { setBirdIds(current => [...new Set([...current, ...incomingBirds])]); setIncomingBirds([]) }} className="min-h-11 rounded-md border border-emerald-300 px-4 text-sm font-medium text-emerald-900">Add {incomingBirds.length} bird choices from this tab</button>}<NewZealandBirdPicker selected={birdIds} onChange={setBirdIds} /></section>}
+      {country === "new-zealand" && incomingItinerary && <section aria-label="Itinerary from this browser tab" className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+        <h3 className="font-medium text-emerald-950">Your {incomingItinerary.input.days} day South Island itinerary</h3>
+        <p className="mt-2 text-sm leading-6">Bring the daily draft, bird wishes and South Island region into this private brief. Existing notes stay intact. Review the full itinerary in your notes before saving.</p>
+        <button type="button" className="mt-3 min-h-11 rounded-lg border border-emerald-300 bg-white px-4 text-sm font-medium text-emerald-950" onClick={()=>{
+          const merged=mergeTripNotes(message,incomingItinerary)
+          if(merged.error){setPlaceNotice(merged.error);return}
+          setMessage(merged.message);setBirdIds(current=>[...new Set([...current,...incomingItinerary.input.birdIds])]);setSelectedRegions(current=>[...new Set([...current,"south-island"])])
+          setPlaceNotice("Itinerary added to your notes. Review, then Save My Draft to save privately.")
+        }}>Add Itinerary to Notes</button>
+        <p className="mt-2 text-xs leading-6">A draft route only. Access, road times, dates, rooms and bookings require confirmation. Importing does not save or share it.</p>
+      </section>}
       {country === "new-zealand" && incomingPlaces.length > 0 && <section className="rounded-lg border border-emerald-200 bg-emerald-50 p-4" aria-label="Place ideas from this browser tab">
         <h3 className="font-medium text-emerald-950">Your place ideas</h3>
         <p className="mt-2 text-sm">{nzPublicPlanningPlaces.filter(place => incomingPlaces.includes(place.id)).map(place => place.label).join(", ")}</p>

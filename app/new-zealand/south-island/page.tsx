@@ -1,4 +1,5 @@
 import { publicMetadata } from "@/lib/public-metadata"
+import SouthIslandTripPlanner from "@/components/south-island-trip-planner"
 import SouthIslandResourceCarousel from "@/components/south-island-resource-carousel"
 /**
  * The first dedicated NZ regional page. The shared explorer receives one island
@@ -39,6 +40,7 @@ export default function SouthIslandPage() {
     <div className="min-h-screen bg-white text-gray-900">
       <GlobalHeader />
       <main id="main-content" tabIndex={-1}><DestinationExplorerPage map={<WorldDestinationMap/>} initialRegionId="south-island">
+        <SouthIslandTripPlanner/>
         {/* Static planning prompts reuse the existing cards; current conditions
             remain on official sites, avoiding an unreliable copied status feed. */}
         <section id="practical-planning" aria-labelledby="planning-heading" className="scroll-mt-24 bg-emerald-50/50 py-12 sm:py-16">

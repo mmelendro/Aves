@@ -5,6 +5,7 @@
  */
 import { validNzBirdIds } from "@/content/new-zealand-checklist"
 
+export const NZ_BIRD_BASKET_EVENT = "aves:nz-bird-basket-changed"
 export const NZ_BIRD_BASKET_KEY = "aves:nz-bird-basket:v1"
 const lifetime = 24 * 60 * 60 * 1000
 
@@ -22,6 +23,7 @@ export function writeNzBirdBasket(storage: Pick<Storage, "setItem" | "removeItem
   try {
     if (ids.length) storage.setItem(NZ_BIRD_BASKET_KEY, JSON.stringify({ version: 1, at: now, ids }))
     else storage.removeItem(NZ_BIRD_BASKET_KEY)
+    if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") window.dispatchEvent(new Event(NZ_BIRD_BASKET_EVENT))
     return true
   } catch { return false }
 }

@@ -45,6 +45,6 @@ export function PublicPlaceDetails() {
       <p><a href={point.bcorp.location.coordinateSourceUrl!} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline">Address point source<span className="sr-only"> (opens in a new tab)</span></a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>
     </div>}
     </details>
-    <details className="max-h-48 overflow-auto"><summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-800 underline">Add to your trip ideas</summary><NzPlaceIdeas key={point.id} placeId={point.id}/></details>
+    {point.tripAreaId ? <a href={point.url} className="inline-flex min-h-11 items-center rounded-lg bg-emerald-800 px-3 text-sm font-semibold text-white">Plan days, birds & stays around this base</a> : <details className="max-h-48 overflow-auto"><summary className="min-h-11 cursor-pointer content-center rounded font-semibold text-emerald-800 underline">Add to your trip ideas</summary><NzPlaceIdeas key={point.id} placeId={point.id}/></details>}
   </section>
 }

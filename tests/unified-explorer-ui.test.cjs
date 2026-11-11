@@ -78,7 +78,7 @@ test('deep links and browser history restore the map scope without dropping Next
  index++;window.location=new URL(entries[index]);listeners.get('popstate')()
  assert.equal(find(h.render(),n=>n.props['data-explorer-content']).props['data-explorer-content'],'new-zealand:')
  assert.equal(entries.length,3)
- assert.equal(listeners.size,2)
+ assert.deepEqual([...listeners.keys()].sort(),["aves:nz-bird-basket-changed","pageshow","popstate"].sort())
 })
 
 test('reciprocal map and bird thumbnails follow every selected region and carousel bird',()=>{

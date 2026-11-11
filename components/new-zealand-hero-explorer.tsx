@@ -26,7 +26,7 @@ import { newZealandBirdIslands, type NewZealandIslandId } from "@/content/new-ze
 import { newZealandRegionHref } from "@/lib/new-zealand-region-links"
 import NewZealandBirdPicker from "@/components/new-zealand-bird-picker"
 import { featuredNzBirdId } from "@/content/new-zealand-checklist"
-import { readNzBirdBasket, writeNzBirdBasket } from "@/lib/nz-bird-selection"
+import { readNzBirdBasket, writeNzBirdBasket, NZ_BIRD_BASKET_EVENT } from "@/lib/nz-bird-selection"
 
 import { filterSouthIslandBirds, southIslandEcosystems, type SouthIslandEcosystemFilter } from "@/content/south-island-ecosystems"
 
@@ -53,8 +53,8 @@ export default function NewZealandHeroExplorer({ regionId }: { regionId?: NewZea
   useEffect(() => {
     function restore() { try { setSelected(readNzBirdBasket(window.sessionStorage)) } catch { setStorageAvailable(false) } }
     restore()
-    window.addEventListener("pageshow", restore)
-    return () => window.removeEventListener("pageshow", restore)
+    window.addEventListener("pageshow", restore);window.addEventListener(NZ_BIRD_BASKET_EVENT, restore)
+    return () => {window.removeEventListener("pageshow", restore);window.removeEventListener(NZ_BIRD_BASKET_EVENT, restore)}
   }, [])
   // Both the select menu and clickable map use one filter state/transition.
   // Existing carousel remount cleanup stops sound and closes old Info.

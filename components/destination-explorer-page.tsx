@@ -23,7 +23,7 @@ export default function DestinationExplorerPage({ map, children, initialRegionId
   return localizeHome(<SouthIslandHabitatProvider>
     <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-7 max-w-3xl text-center"><h1 className="text-balance text-3xl font-medium tracking-tight text-emerald-950 sm:text-4xl">{title}</h1><p className="mt-4 leading-7 text-gray-600">Follow the birds, habitats and places. Zoom out to explore the country and the world, then choose your next region.</p></div>
+        <div className="mx-auto mb-7 max-w-3xl text-center"><h1 className="text-balance text-3xl font-medium tracking-tight text-emerald-950 sm:text-4xl">{title}</h1><p className="mt-4 leading-7 text-gray-600">Follow the birds, habitats and places. Zoom out to explore the country and the world, then choose your next region.</p>{scope.country === "new-zealand" && scope.region === "south-island" && <a className="mt-3 inline-flex min-h-11 items-center rounded-full border border-emerald-300 bg-white px-5 text-sm font-semibold text-emerald-900 underline underline-offset-4" href="/new-zealand/south-island#trip-planner">Plan days, birds, stays & experiences</a>}</div>
         <HomepageDestinationExplorerCore map={map} initialCountryId={initialCountryId} initialRegionId={initialRegionId} onScopeChange={change}/>
       </div>
     </section>
