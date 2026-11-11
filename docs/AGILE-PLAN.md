@@ -19,7 +19,11 @@ The owner's established Eco-Tourism Business Plan direction is broader nature tr
 | Scientific coverage | Featured island memberships are curated examples, not complete distributions. National checklist inclusion cannot establish local opportunity. | Source local bird/site links separately for each island, with managed/wild distinctions. |
 | Design confidence | Previous hosted checks cover desktop and 340px containment; physical Safari/touch and usability with independent visitors remain open. | Treat keyboard, touch, focus, small screens and independent task completion as release criteria, not final polish. |
 
-## Immediate priority: one regional map
+## Immediate priority: site-wide layer coverage
+
+The owner's broader satellite/national-park/layer request supersedes the next NZ-01b increment. MAP-LAYER-COVERAGE.md is the detailed acceptance/coverage register for this work, not a second general backlog. MAP-03a adds world satellite only; finish MAP-03b/c and MAP-04/05 across country/regional and legacy consumers before resuming NZ-01b. No blanket layer-parity claim is justified by the South Island or world overview alone.
+
+## One regional map requirement
 
 Owner direction, 11 November 2026: each regional page has exactly one map surface. All supported geography, birds, habitat/conservation layers, places, business categories and itinerary overlays belong on that surface. A compact view expands the same map with the same selection and layers; do not mount a second independent map. Existing Colombia and Australia regional templates use their shared explorer shell. South Island currently also mounts TripBaseMap in the planner: this duplicate is the first correction. North Island must reuse the consolidated structure.
 

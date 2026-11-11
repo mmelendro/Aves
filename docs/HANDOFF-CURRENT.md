@@ -1,6 +1,14 @@
 # AVES current handoff
 
-Runtime: bae9953d4d03324f5fb73f988955ec00388f8a72. Deployment: dpl_EJ827uaf2AXa5Qhm9Wgg5VUMpCTs, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback before map changes: 0984fc3cd3df89c8878e0c0a5a98b1ce9cee82f7 / dpl_F4c2rMAGB5dKvqym4LwMfRpAgeHb. Branch: feature/field-guide-card.
+Runtime: e44de4e25f9f6782515e37d56f01730ad9ab158f. Deployment: dpl_DrTb2rnEcFWLUpD7DzwFbuKA6f84, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: bae9953d4d03324f5fb73f988955ec00388f8a72 / dpl_EJ827uaf2AXa5Qhm9Wgg5VUMpCTs. Branch: feature/field-guide-card.
+
+## Current world-satellite evidence
+
+MAP-03a only: the world overview has an optional NASA Blue Marble 2004 background, reprojected to the existing Equal Earth SVG. The 133,490-byte packaged WebP is requested only on selection; country controls remain above it. Date/source/overview limits are visible, with an image-load fallback. A reproduction script and asset/source hashes are retained. This does not add satellite or park layers to country maps.
+
+562 tests, TypeScript, local/hosted 75-page builds passed; architecture audit 348 modules, zero unreachable. Hosted browser verified default image absence, switch-on, visual coastline/control alignment, country navigation, world return retaining the choice, same-map fullscreen and 340px containment (337px document). Canonical live view and both aliases verified. Scoped error/fatal scan 09:07:26–09:17:26 UTC returned no matches. Actual image-failure behavior has domain code coverage only; no forced hosted asset failure test. No paid service, schema, private writes, access changes or outreach. Physical Safari/touch remains untested.
+
+The whole-site layer request is still open. MAP-LAYER-COVERAGE.md records country, regional, legacy explorer and thumbnail gaps. Finish that sequence before NZ-01b. Do not equate a world raster with satellite support inside Australia's regional renderer or Colombia's artwork.
 
 ## Current single-map acceptance
 
