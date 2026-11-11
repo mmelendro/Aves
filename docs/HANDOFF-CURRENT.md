@@ -1,6 +1,16 @@
 # AVES current handoff
 
-Runtime: 9b6a7e1a43ba3f112c9b3bba8931070800097e5e. Deployment: dpl_HmP69mf8Ye3NhAJTmPLfcg8a6RKf, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: f5d66f7c0a80a597b87fdd25a63d73cd82d070b4 / dpl_7caDwrFuRsue4PukCcgGoCBeD6Jq. Branch: feature/field-guide-card.
+Runtime: c7697c6c7a9342ce5d7a322800082a42ba332a48. Deployment: dpl_5ntsqf5icEpDeo4poShatMJPP3pX, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: 9b6a7e1a43ba3f112c9b3bba8931070800097e5e / dpl_HmP69mf8Ye3NhAJTmPLfcg8a6RKf. Branch: feature/field-guide-card.
+
+## Shared island planner acceptance
+
+Published a single island-aware route/reference/draft engine and one shared form plus child presentation. South Island keeps the stable page adapter and historical draft key. Generated identity, catalogue/gateway validation, separate storage slots and explicit labelled account imports prevent cross-island contamination. Only operational South Island is registered in this release. See SHARED-ISLAND-PLANNER-2026-11-12.md.
+
+All 590 tests passed, including disjoint catalogue/reference/storage fixtures, legacy handling, exact confirmed consumption, and explicit North Island intent rejecting a pending South Island import. Strict TypeScript, source audit (364 modules, zero unreachable), local and exact-SHA hosted 75-page builds passed. Obsolete road/price wrappers were removed and tests now use the operational engine.
+
+Hosted acceptance generated seven days from Christchurch to Queenstown, edited the first stay, compared two distinct plans, copied the correctly labelled complete text and carried it to sign-in with encoded South Island account intent. Returning restored the seven-day tab draft. At a 337px viewport the document was 337px, day card 305px and selects 263×44px. Canonical verification rendered seven days and one map. No provider authentication/private save was performed; existing local API/ownership tests do not certify provider delivery anew. Screenshot: docs/evidence/2026-11-12-shared-island-planner.jpg. Public proof: https://aves.bio/new-zealand/south-island#trip-planner . Both canonical aliases assigned to the accepted deployment. No schema, private record, access, spend, keys, mail or booking changed.
+
+NEXT: pathway step 4, researched North Island corridor and canonical guide/map/planner/directory together.
 
 ## Shared map controls acceptance
 
@@ -10,7 +20,7 @@ All 584 tests, strict TypeScript, source audit (359 modules, zero unreachable), 
 
 Canonical live proof: https://aves.bio/new-zealand/south-island?explore=new-zealand&region=south-island . Both aliases assigned to the exact accepted deployment. Screenshot: docs/evidence/2026-11-12-shared-map-controls.jpg. Deployment-scoped error/fatal scan 20:01:19–20:11:19 UTC on 11 November found no matching logs. No new spend, private records, access, schema, keys, mail or bookings changed.
 
-NEXT: pathway step 3, shared island planner foundation. North Island corridor research is prepared but is not yet an operational planner.
+The subsequent shared-island release above completes pathway step 3. North Island research is prepared but not published.
 
 ## North Island and Rakiura park acceptance
 
@@ -62,7 +72,7 @@ Live evidence: /workspace/shared/aves-colombia-joined-regions.png, https://aves.
 
 The satellite foundation remains lazy-loaded Leaflet with EOX 2016 historical tiles, native zoom cap 14 and a background choice retained across routes/reloads in a tab. Overlay choices are page-local. Country/region camera moves finish without animation so expansion cannot interrupt them. 3D globe/elevation, current aerial imagery, complete bird ranges and whole-site layer parity remain unclaimed. See CONTINUOUS-SATELLITE-2026-11-11.md for the prior foundation evidence.
 
-Next: step 3 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots and shared controls delivered. Island-aware planning precedes the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
+Next: step 4 of CONTINUE-HERE.md, the only active numbered pathway: country park pilots and shared controls delivered. Island-aware planning precedes the North Island planner pilot. Complete optional-layer/catalogue parity is not a gate to the planner. Keep sensitive nest locations out of public overlays.
 
 ## Editing and privacy boundaries
 

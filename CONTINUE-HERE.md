@@ -16,9 +16,9 @@ Already delivered: the shared map/bird guide, continuous 2D satellite navigation
 
 2. Unify map controls. Delivered for maintained map families. Include expanded-map scrolling at very short viewport heights. Use one consistent layer picker, selection treatment, legend and source display across the maintained map families. Preserve camera, geography and bird choice through toggling, expansion and navigation. Distinguish display layers from bird filters. Load detail only when needed. Reference: MAP-05.
 
-3. Finish the shared island planner. NEXT. Keep the delivered island configuration; finish sharing route rules, road/price references, draft storage and account handoff. Preserve old drafts and keep each island's inputs and saved plans isolated. Do not copy the planner or infer a road between islands. Reference: NZ-01b.
+3. Finish the shared island planner. Delivered. Keep the delivered island configuration; finish sharing route rules, road/price references, draft storage and account handoff. Preserve old drafts and keep each island's inputs and saved plans isolated. Do not copy the planner or infer a road between islands. Reference: NZ-01b.
 
-4. Publish a usable North Island pilot. Research one coherent corridor and deliver its canonical guide, map, locally supported birds, trip options, catalogue and site-directory links together. A visitor must complete a credible 3 to 7 day trip with fixed endpoints. Preserve the working South Island flow. Reference: NZ-02.
+4. Publish a usable North Island pilot. NEXT. Research one coherent corridor and deliver its canonical guide, map, locally supported birds, trip options, catalogue and site-directory links together. A visitor must complete a credible 3 to 7 day trip with fixed endpoints. Preserve the working South Island flow. Reference: NZ-02.
 
 5. Make both islands' plans practical and comparable. Improve travel time, pace, season/opening constraints, weather alternatives, cost units and allowance comparisons. Offer genuinely different options where feasible; explain missing prices or limited choices. Keep editing and save/reopen reliable. References: NZ-03/04/06.
 

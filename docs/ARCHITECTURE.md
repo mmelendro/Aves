@@ -59,7 +59,7 @@ Historical documentation remains evidence. Use this guide, README and CONTINUE-H
 
 ## Planned two-island extension
 
-The shared foundation is implemented in candidate source, pending exact-SHA hosted acceptance. `content/new-zealand-planning-context.ts` provides explicit data/labels/gateways. `lib/island-trip-planner.ts` and shared road/price factories consume one context. `lib/island-planners.ts` registers only operational planners. The shared form and child displays use a required `IslandPlannerProvider`; the South Island wrapper preserves page imports. See SHARED-ISLAND-PLANNER-2026-11-12.md.
+The shared foundation is implemented and published after exact-SHA hosted acceptance. `content/new-zealand-planning-context.ts` provides explicit data/labels/gateways. `lib/island-trip-planner.ts` and shared road/price factories consume one context. `lib/island-planners.ts` registers only operational planners. The shared form and child displays use a required `IslandPlannerProvider`; the South Island wrapper preserves page imports. See SHARED-ISLAND-PLANNER-2026-11-12.md.
 
 Per-island keys and explicit generated identity isolate pending drafts. Untagged historical envelopes remain South Island only. The account editor offers labelled imports from the operational registry, respects explicit island intent, appends reviewed text and consumes only a server-confirmed exact import. No schema or private-record migration is needed. North Island is not yet registered; its guide and inventories must arrive with a usable researched pilot. No road between islands is inferred.
 

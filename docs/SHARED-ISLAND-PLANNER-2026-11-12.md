@@ -1,6 +1,6 @@
 # Shared island planner foundation
 
-Status: candidate, hosted acceptance pending. No North Island planner is published by this increment.
+Status: published runtime c7697c6c7a9342ce5d7a322800082a42ba332a48, deployment dpl_5ntsqf5icEpDeo4poShatMJPP3pX on both canonical aliases. No North Island planner is published by this increment.
 
 One createIslandTripPlanner factory owns validation, routing, dates, wishes, allowance arithmetic, copied notes, draft persistence and confirmed consumption. It accepts an explicit IslandPlanningContext with its own catalogue, gateways, default base, map anchor, road/price references, labels, account URL and storage key. Road and price arithmetic are shared factories. The South Island compatibility adapter retains existing exports and the original session key. Superseded standalone road/price wrappers were removed after all active consumers moved to their explicit engine.
 
@@ -10,4 +10,6 @@ Newly generated drafts carry explicit island identity. Untagged historical envel
 
 The registry contains only the operational South Island planner. A disjoint test fixture exercises the same engine without making an unpublished island available. Tests cover separate catalogues, gateway rejection, reference isolation, copied labels, pending draft slots, exact consumption, foreign preservation, legacy handling and expiry. Existing South Island behavioral and account API tests remain.
 
-Hosted acceptance must verify the delivered South Island generation/edit/allowance/catalogue controls and handoff presentation on the exact source. A new private save is not required to validate a refactor that preserves the API, but live provider save behavior is not newly certified by local tests. North Island content, route/map directory and pilot acceptance remain the next increment.
+Hosted acceptance verified the delivered South Island generation/edit/allowance/catalogue controls and handoff presentation on the exact source. A new private save is not required to validate a refactor that preserves the API, but live provider save behavior is not newly certified by local tests. North Island content, route/map directory and pilot acceptance remain the next increment.
+
+Validation: 590 tests, strict TypeScript, 364 reachable modules with none unreachable, local and hosted 75-page builds. Browser details and rollback are in HANDOFF-CURRENT.md.
