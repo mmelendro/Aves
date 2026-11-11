@@ -185,3 +185,11 @@ test('route suggestions are distinct, budget and endpoint choices survive tab st
  const d=options[0].draft,i=d.days.findIndex(x=>x.transferFrom),u=new URL(p.tripTransferUrl(d,i))
  assert.equal(u.searchParams.get('origin'),'Wānaka, New Zealand');assert.ok(!u.href.includes(value.departureDate))
 })
+
+test('varied fixed-endpoint routes avoid the reviewed north-south backtrack',()=>{
+ const d=p.buildSouthIslandTrip(input({days:10,startCity:'christchurch',endCity:'queenstown',interests:['food','hikes','ecotourism','markets','hot-springs']}),'variety')
+ const bases=d.days.filter((day,i)=>i===0||day.baseId!==d.days[i-1].baseId).map(d=>d.baseId)
+ assert.equal(bases[0],'christchurch');assert.equal(bases.at(-1),'lakes')
+ assert.ok(bases.indexOf('kaikoura')<bases.indexOf('otago'),bases.join(' > '))
+ assert.deepEqual(p.tripCoverage(d).unmatched,[])
+})

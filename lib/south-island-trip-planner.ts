@@ -72,6 +72,20 @@ export function validTripInput(value:unknown): value is TripPlannerInput {
 }
 const eligibleBirdStop=(p:TripPlace,input:TripPlannerInput)=>p.categories.includes("birding")&&(input.includeManaged||p.encounter==="wild")
 const matched=(p:TripPlace,ids:readonly string[])=>p.birdIds.filter(id=>ids.includes(id))
+/** Bound is five bases. Compare geographic order only, never road distance or duration. */
+function orderTripBases(bases:string[],fixedFinish:boolean){
+  if(bases.length<3)return
+  const first=bases[0],end=fixedFinish?bases.at(-1):undefined
+  const middle=bases.slice(1,end?-1:undefined)
+  const leg=(a:string,b:string)=>{const x=tripAreaById.get(a)!,y=tripAreaById.get(b)!;return Math.hypot(x.latitude-y.latitude,(x.longitude-y.longitude)*Math.cos((x.latitude+y.latitude)*Math.PI/360))}
+  const cost=(route:string[])=>route.slice(1).reduce((n,b,i)=>n+leg(route[i],b),0)
+  let best=[...bases],bestCost=cost(best)
+  const visit=(prefix:string[],remaining:string[])=>{
+    if(!remaining.length){const route=[first,...prefix,...(end?[end]:[])],score=cost(route);if(score<bestCost){best=route;bestCost=score}return}
+    remaining.forEach((b,i)=>visit([...prefix,b],remaining.filter((_,j)=>j!==i)))
+  }
+  visit([],middle);bases.splice(0,bases.length,...best)
+}
 /** Coverage is sourced opportunity, never sightings, driving optimisation or access. */
 export function buildSouthIslandTrip(input:TripPlannerInput,style:TripStyle="birds"):TripDraft {
   if(!validTripInput(input))throw new Error("Review the trip length, cities, date, birds and allowances.")
@@ -101,6 +115,7 @@ export function buildSouthIslandTrip(input:TripPlannerInput,style:TripStyle="bir
   }
   if(!bases.length)bases.push(finish?.baseId||(input.areaId==="all"?"arthurs-pass":input.areaId))
   if(finish&&bases.at(-1)!==finish.baseId)bases.push(finish.baseId)
+  orderTripBases(bases,Boolean(finish))
   const days:TripDay[]=[],visitDays=input.days-(bases.length-1)
   if(visitDays<1)throw new Error("Add days or simplify the start, finish and base choices.")
   const counts=bases.map(()=>0)
