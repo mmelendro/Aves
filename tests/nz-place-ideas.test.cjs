@@ -52,3 +52,12 @@ test('public place and B Corp ideas join landscapes without duplicates or certif
  assert.equal(p.mergeNzPlaceNotes(note.message,ids).message,note.message)
  assert.equal(new Set(p.nzPublicPlanningPlaces.map(p=>p.id)).size,p.nzPublicPlanningPlaces.length)
 })
+
+test('café and guided tour ideas preserve their public names through note import and retry',()=>{
+ const ids=['coffee-supreme-christchurch','wild-kiwi-christchurch']
+ const result=p.mergeNzPlaceNotes('Original travel notes.',ids)
+ assert.equal(result.error,undefined)
+ assert.match(result.message,/Place idea: Coffee Supreme: Supreme Supreme café/)
+ assert.match(result.message,/Place idea: Wild Kiwi Christchurch departure/)
+ assert.equal(p.mergeNzPlaceNotes(result.message,ids).message,result.message)
+})

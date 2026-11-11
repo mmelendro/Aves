@@ -1,6 +1,7 @@
 "use client"
 
 import NzPlaceIdeas from "./nz-place-ideas"
+import { bcorpCategoryLabel } from "@/lib/bcorp-pilot"
 import { useMapLayers } from "./map-layer-context"
 import { publicPlaceCategories, visiblePublicPlaces } from "@/lib/south-island-public-places"
 import { ecosystemMapPoint } from "@/lib/ecosystem-map-camera"
@@ -37,7 +38,7 @@ export function PublicPlaceDetails() {
     {point.evidenceUrl && <p><a href={point.evidenceUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded text-emerald-800 underline">Operator's published conservation information<span className="sr-only"> (opens in a new tab)</span></a></p>}
     {point.categories.includes("businesses") && <p className="text-[11px] text-gray-600">Public listing, not an AVES partner, certification, sustainability rating or confirmed booking.</p>}
     {point.bcorp && <div className="space-y-1">
-      <p className="font-medium">{point.bcorp.category === "accommodation" ? "Accommodation & farm experiences" : "Retail"} · Certified company: {point.bcorp.company}</p>
+      <p className="font-medium">{bcorpCategoryLabel(point.bcorp.category)} · Certified company: {point.bcorp.company}</p>
       <p>{point.bcorp.location.address}</p>
       <p>{point.bcorp.certification.scopeNote} Profile checked {point.bcorp.certification.checkedAt}.</p>
       <p><a href={point.bcorp.certification.profileUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline">View B Lab certification profile<span className="sr-only"> (opens in a new tab)</span></a></p>

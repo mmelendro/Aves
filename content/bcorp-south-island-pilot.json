@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "coverage": "Three manually reviewed public locations from two Certified B Corp businesses. South Island pilot, not a complete directory or AVES supplier list.",
+  "coverage": "Five manually reviewed public location references from four Certified B Corp companies. South Island pilot covering accommodation, food and drink, guided tours and retail; not a complete directory or AVES supplier list.",
   "records": [
     {
       "id": "lake-hawea-station",
@@ -91,15 +91,75 @@
       },
       "website": "https://www.untouchedworld.com/",
       "limitations": "Company certification applies to Untouched World, not a separately certified outlet. Check opening and access with the business. No AVES partnership or confirmed booking."
+    },
+    {
+      "id": "coffee-supreme-christchurch",
+      "name": "Coffee Supreme: Supreme Supreme café",
+      "company": "Coffee Supreme Group Holdings Ltd",
+      "country": "new-zealand",
+      "region": "south-island",
+      "category": "food-and-drink",
+      "certification": {
+        "review": "verified-profile",
+        "profileUrl": "https://www.bcorporation.net/en-us/find-a-b-corp/company/kereru-bean-holdings-limited/",
+        "listedSince": "2024-11",
+        "checkedAt": "2026-11-11",
+        "scopeNote": "B Lab lists Coffee Supreme Group Holdings Ltd under beverages/manufacturing. Coffee Supreme publishes this café in its location list; the café is not represented as separately certified."
+      },
+      "location": {
+        "review": "verified-owner-page",
+        "address": "10 Welles Street, Christchurch, New Zealand",
+        "sourceUrl": "https://coffeesupreme.com/blogs/locations/supreme-supreme",
+        "checkedAt": "2026-11-11",
+        "coordinates": {
+          "latitude": -43.5371126,
+          "longitude": 172.6373579
+        },
+        "coordinateReview": "verified-public-location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/101512963",
+        "precision": "Public building address reference, not entrance navigation"
+      },
+      "website": "https://coffeesupreme.com/",
+      "limitations": "Coffee stop listed on Coffee Supreme’s own location page. Check current opening and access with the business. Certification evidence is for the named company, not every café stocking its coffee. No AVES partnership, availability or booking is confirmed."
+    },
+    {
+      "id": "wild-kiwi-christchurch",
+      "name": "Wild Kiwi Christchurch departure",
+      "company": "Danai Ltd",
+      "country": "new-zealand",
+      "region": "south-island",
+      "category": "guiding",
+      "certification": {
+        "review": "verified-profile",
+        "profileUrl": "https://www.bcorporation.net/en-us/find-a-b-corp/company/wild-kiwi-tours/",
+        "listedSince": "2026-01",
+        "checkedAt": "2026-11-11",
+        "scopeNote": "B Lab names Danai Ltd and links Wild Kiwi. This is company certification, not certification of the departure hotel, each vehicle, guide or included activity."
+      },
+      "location": {
+        "review": "verified-owner-page",
+        "address": "Wyndham Garden, 64 Kilmore Street, Christchurch, New Zealand",
+        "sourceUrl": "https://www.wildkiwi.com/new-zealand-tour-guides/new-zealand-highlights",
+        "checkedAt": "2026-11-11",
+        "coordinates": {
+          "latitude": -43.5269317,
+          "longitude": 172.632785
+        },
+        "coordinateReview": "verified-public-location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/516591922",
+        "precision": "Published tour departure address reference, not an office or confirmed pickup"
+      },
+      "website": "https://www.wildkiwi.com/",
+      "limitations": "Wild Kiwi publishes this hotel as the Christchurch meeting location for selected premium tours. Confirm the meeting place and time for your booked tour directly with Wild Kiwi. This marker does not certify Wyndham Garden or offer a standalone transport service. No AVES partnership or booking is confirmed."
     }
   ],
   "accessReview": {
-    "method": "Individual public profile and owner-page review. Minimal factual names, addresses and source links only; no copied descriptions or logos. Three individual OpenStreetMap address lookups, with attribution.",
+    "method": "Individual public profile and owner-page review. Minimal factual names, addresses and source links only; no copied descriptions or logos. Individual OpenStreetMap address lookups, with attribution.",
     "bulkAccess": "Not assessed or authorised; no scrape, bulk download, API request, credential or automated directory importer.",
     "logoUse": false,
     "mapLayerEnabled": true,
     "pending": [
-      "Expand accommodation, food, transport and guiding coverage after verification",
+      "More verified accommodation and standalone passenger transport candidates",
       "Recheck profiles and locations within 90 days",
       "Assess directory access and reuse before any bulk expansion"
     ]
