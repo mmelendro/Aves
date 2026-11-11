@@ -1,5 +1,10 @@
 # AVES comprehensive delivery list
 
+## Pending source cleanup · 11 November 2026
+
+All requested pending source is ready for GitHub sync, including reconciled minimatch 11.0.6 overrides and lockfile. Project-pinned pnpm frozen install, 524 tests, TypeScript and 75-page local build passed. No new production publication. Remaining feature/acceptance queue is unchanged; earlier references to locally excluded dependency edits are historical.
+
+
 ## Latest verified article/account preview · 11 November 2026
 
 Source 0a3ff81 / dpl_HDBRFKGEkiyUie4hDxHpLkG8YPa1 passed 524 tests, TypeScript, local/hosted builds and scoped desktop/340px browser acceptance. Four articles now have shared headings/main targets; six account entry screens use shared global header/footer. Real signed-in dashboard/owner acceptance remains pending. Production unchanged. Next: remaining custom/special-route layout inventory and guided contact work. Evidence: ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md.

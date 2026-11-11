@@ -66,3 +66,7 @@ Four birding articles now share heading styles and main-content targets. Account
 ## Article/account preview verified · 11 November 2026
 
 Source 0a3ff81 / preview dpl_HDBRFKGEkiyUie4hDxHpLkG8YPa1 passed local/hosted builds, 524 tests, TypeScript and desktop/340px checks for four articles plus six account entry screens. Account global bird, shared header/footer, mobile menu and Escape focus verified. Authenticated dashboard/owner-inbox browser acceptance remains pending. Production unchanged. See ARTICLE-ACCOUNT-LAYOUT-2026-11-11.md.
+
+## All pending changes reconciled · 11 November 2026
+
+Owner explicitly requested all pending changes be pushed. Existing layout/source checkpoints were already synced through 31111ee. The remaining package/lockfile edits are now reconciled: global minimatch override and the existing version-specific selector both pin 11.0.6, retaining the previously committed 11.0.6 dependency snapshot instead of the pending 11.0.1 downgrade. Frozen lockfile validation and install passed using project-pinned pnpm 10.34.5. All 524 tests, strict TypeScript and the local production build (75 pages, Node 24) passed with the reconciled dependencies. The standalone type check was rerun after Next regenerated its types. No new hosted deployment, production promotion, domain change, provider action or private-data change was performed. Previous protected preview acceptance remains as recorded above.
