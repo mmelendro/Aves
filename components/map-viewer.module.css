@@ -21,3 +21,9 @@
 .viewer[data-expanded] .content [data-zoom-artwork] { width:min(70vw,calc(70dvh * 198 / 250)) !important; margin:auto; }
 
 .viewer[data-expanded] .content > section figure { flex:1; height:auto; min-height:12rem; }
+
+/* Geographic controls can wrap. Scroll their full intrinsic content rather than
+   letting a fixed guide face clip the canvas or scroll a hidden focus target. */
+.viewer[data-geographic] .surface { overflow-y:auto; overscroll-behavior-y:contain; }
+.viewer[data-geographic] .content { height:auto; min-height:100%; }
+.viewer[data-geographic][data-expanded] .surface { flex:1 0 auto; min-height:24rem; overflow:visible; }

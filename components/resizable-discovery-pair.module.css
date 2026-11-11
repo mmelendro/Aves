@@ -95,3 +95,7 @@
 
 /* Short phone windows scroll the page rather than collapsing the real map. */
 .pair[data-layout="guide"]:has([data-ecosystem-card]) { --discovery-panel-height:clamp(28rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem),44rem); height:var(--discovery-panel-height); }
+
+/* Keep a real map canvas below wrapped native controls on narrow/short screens.
+   The page may grow beyond the viewport; the mounted map and camera stay put. */
+.pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:clamp(44rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem),52rem); height:var(--discovery-panel-height); }

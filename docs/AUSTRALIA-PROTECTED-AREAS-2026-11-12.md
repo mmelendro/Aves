@@ -29,3 +29,9 @@ The preview daemon cannot start this existing Next.js application: it injects un
 ## Release evidence
 
 Before commit: 576 tests passed, strict TypeScript passed, source audit reported 355 modules and zero unreachable. Local production build and hosted acceptance are recorded below when complete. Rollback remains a4661e63b0594fa6a4bea5cca177a2f3d854a3c3 / dpl_HFWoiGc5Zm2FqHTB6CYoiPcBHzmJ. No schema, provider keys, spend, access, private records, mail or booking changed.
+
+## Narrow-screen defect found in candidate acceptance
+
+At a real browser zoom width of 340 CSS pixels, the existing guide face shrank to 240px and its overflow-hidden map surface clipped the satellite canvas below wrapped controls. A keyboard focus could scroll the hidden surface while pointer targets stayed obscured. This is a blocker to publication, not a passed mobile check.
+
+The correction gives geographic guide faces at least 44rem, allows the inline surface to scroll all intrinsic controls/map content, keeps the canvas at least 20rem, and lets very short expanded dialogs scroll vertically. Park detail headers remain sticky inside their own scroll panel. The map is never remounted for resize. Recheck exact hosted source before publication. This addresses observed clipping within MAP-05; shared layer-picker parity is still pending.
