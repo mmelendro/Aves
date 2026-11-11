@@ -1,3 +1,4 @@
+import { tripPriceNotes } from "@/lib/south-island-price-references";
 import {
   roadReference,
   roadTimeLabel,
@@ -95,6 +96,8 @@ export type TripPlannerInput = {
   currency: (typeof tripCurrencies)[number];
   allowances: TripAllowances;
   activityBasis: "day" | "experience";
+  adults?: number;
+  rooms?: number;
 };
 export type TripDay = {
   baseId: string;
@@ -122,6 +125,8 @@ export const defaultTripInput: TripPlannerInput = {
   currency: "NZD",
   allowances: {},
   activityBasis: "day",
+  adults: 1,
+  rooms: 1,
 };
 export const TRIP_DRAFT_KEY = "aves:south-island-itinerary:v1";
 export const categoryName = (id: string) =>
@@ -160,6 +165,12 @@ export function validTripInput(value: unknown): value is TripPlannerInput {
   if (!value || typeof value !== "object") return false;
   const v = value as TripPlannerInput;
   return (
+    (v.adults === undefined ||
+      (Number.isInteger(v.adults) && v.adults >= 1 && v.adults <= 12)) &&
+    (v.rooms === undefined ||
+      (Number.isInteger(v.rooms) &&
+        v.rooms >= 1 &&
+        v.rooms <= (v.adults ?? 1))) &&
     Number.isInteger(v.days) &&
     v.days >= 1 &&
     v.days <= 30 &&
@@ -633,11 +644,13 @@ export function tripDraftText(draft: TripDraft) {
     budget.rows.length
       ? `Per-person allowances (${draft.input.currency}, not quoted prices): ${budget.rows.map((r) => `${r.label} ${r.amount} × ${r.units} = ${r.total}`).join("; ")}. Entered allowance total ${budget.total}.`
       : "Budget allowances still open; prices not checked.",
+    `Cost sharing: ${draft.input.adults ?? 1} adults, ${draft.input.rooms ?? 1} rooms/units. Adult references only; dates and availability are not quoted.`,
     `Bird wishes: ${draft.input.birdIds.map(nzBirdName).join(", ") || "Open to suggestions"}.`,
     ...draft.days.map(
       (d, i) =>
         `Day ${i + 1}${tripDayDate(draft.input, i) ? ` (${tripDayDate(draft.input, i)})` : ""}: ${d.transferFrom ? `Transfer ${tripAreaById.get(d.transferFrom)?.name} to ` : ""}${tripAreaById.get(d.baseId)?.name}. ${[tripPlaceById.get(d.birdingId)?.name, d.extraId ? `Optional: ${tripPlaceById.get(d.extraId)?.name}` : "", d.stayId ? `Night: ${stayName(d.stayId)}` : "Final day, no overnight included"].filter(Boolean).join("; ")}.${d.transferFrom ? `\n${tripRoadNote(draft, i)}` : ""}`,
     ),
+    ...tripPriceNotes(draft),
     coverage.unmatched.length
       ? `No scheduled sourced stop yet: ${coverage.unmatched.map(nzBirdName).join(", ")}.`
       : "",

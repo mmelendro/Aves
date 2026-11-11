@@ -34,6 +34,7 @@ import {
 import TripBaseMap from "./trip-planner/trip-base-map";
 import TripDayCard from "./trip-planner/trip-day-card";
 import TripCatalogue from "./trip-planner/trip-catalogue";
+import TripPriceReview from "./trip-planner/trip-price-review";
 import TripAllowanceSummary from "./trip-planner/trip-allowance-summary";
 import { button, field } from "./trip-planner/presentation";
 
@@ -301,6 +302,49 @@ export default function SouthIslandTripPlanner() {
                 private brief.
               </p>
             )}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="text-sm font-medium" htmlFor={`${id}-adults`}>
+                Adults sharing costs
+                <input
+                  id={`${id}-adults`}
+                  className={`${field} mt-2`}
+                  type="number"
+                  min={1}
+                  max={12}
+                  step={1}
+                  value={input.adults ?? 1}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      adults: Number(e.target.value),
+                    }))
+                  }
+                />
+              </label>
+              <label className="text-sm font-medium" htmlFor={`${id}-rooms`}>
+                Rooms / units per night
+                <input
+                  id={`${id}-rooms`}
+                  className={`${field} mt-2`}
+                  type="number"
+                  min={1}
+                  max={input.adults ?? 1}
+                  step={1}
+                  value={input.rooms ?? 1}
+                  onChange={(e) =>
+                    setInput((current) => ({
+                      ...current,
+                      rooms: Number(e.target.value),
+                    }))
+                  }
+                />
+              </label>
+            </div>
+            <p className="text-xs leading-6 text-gray-600">
+              Allowances stay per person. Room references divide across the
+              adults and units above. Child rates and exact room availability
+              need a quote.
+            </p>
             <details className="rounded-2xl border border-emerald-100 p-4">
               <summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">
                 Your daily allowances · {input.currency}
@@ -501,7 +545,12 @@ export default function SouthIslandTripPlanner() {
                             option.draft.days.filter((d) => d.transferFrom)
                               .length
                           }{" "}
-                          transfer days · {c.covered.length}/
+                          transfer{" "}
+                          {option.draft.days.filter((d) => d.transferFrom)
+                            .length === 1
+                            ? "day"
+                            : "days"}{" "}
+                          · {c.covered.length}/
                           {option.draft.input.birdIds.length} bird wishes linked
                         </span>
                       </button>
@@ -551,10 +600,12 @@ export default function SouthIslandTripPlanner() {
                 .
               </p>
               <TripAllowanceSummary draft={draft} />
+              <TripPriceReview draft={draft} />
               {roads && roads.total > 0 && (
                 <p className="text-sm leading-6 text-emerald-900">
-                  {roads.total} transfer days · {roads.reviewed} with published
-                  road references · {roads.unknown} still need road-time review
+                  {roads.total} transfer {roads.total === 1 ? "day" : "days"} ·{" "}
+                  {roads.reviewed} with published road references ·{" "}
+                  {roads.unknown} awaiting road-time review
                   {roads.long ? ` · ${roads.long} long driving references` : ""}
                   . References do not confirm an entire route's feasibility.
                 </p>

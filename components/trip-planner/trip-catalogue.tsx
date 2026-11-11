@@ -1,4 +1,8 @@
 "use client";
+
+import { priceByPlace } from "@/lib/south-island-price-references";
+import TripPriceReference from "./trip-price-reference";
+
 import { useEffect, useId, useState } from "react";
 import {
   readNzPlaceIdeas,
@@ -62,6 +66,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
       (areaId === "all" || p.base === areaId) &&
       (category === "all" || p.categories.includes(category as TripCategory)) &&
       (claim === "all" ||
+        (claim === "priced" && priceByPlace.has(p.id)) ||
         (claim === "eco" && p.eco) ||
         p.tags.includes(claim)) &&
       `${p.name} ${p.description}`
@@ -125,6 +130,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
           >
             <option value="all">All reviewed references</option>
             <option value="eco">Published operator evidence</option>
+            <option value="priced">Published price reference</option>
             <option value="organic-ingredients">
               Organic ingredient statements
             </option>
@@ -183,6 +189,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
               arrangements.
             </p>
             <SourceLink place={place} />
+            <TripPriceReference placeId={place.id} />
             <div>
               <button
                 type="button"

@@ -1,3 +1,4 @@
+import TripPriceReference from "./trip-price-reference";
 import {
   airbnbAreaUrl,
   gatewayById,
@@ -167,6 +168,10 @@ export default function TripDayCard({
                 <p className="mt-1 text-xs text-gray-600">{stop.access}</p>
               )}
               <SourceLink place={stop} />
+              <TripPriceReference
+                placeId={stop.id}
+                date={tripDayDate(draft.input, index)}
+              />
             </div>
           )}
           <label
@@ -222,6 +227,10 @@ export default function TripDayCard({
                 </p>
               )}
               <SourceLink place={extra} />
+              <TripPriceReference
+                placeId={extra.id}
+                date={tripDayDate(draft.input, index)}
+              />
             </div>
           )}
         </>
@@ -261,6 +270,10 @@ export default function TripDayCard({
                 </p>
               )}
               <SourceLink place={stay} />
+              <TripPriceReference
+                placeId={stay.id}
+                date={tripDayDate(draft.input, index)}
+              />
             </div>
           )}
           <a
