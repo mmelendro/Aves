@@ -32,3 +32,7 @@ Queued after the all-page design pass: shared guided contact form and remaining 
 
 
 Verified update: the public South Island page and consolidated human sitemap were retrieved after publication. The final production error/fatal scan had no matching entries in the 10-minute window ending 2026-11-10T21:35:38.315Z. Unpublished display/cookie polish is preserved at wip/single-app-style-polish, commit 27883a8e8204d015d30907eaac4de3e2327a662a. Its preview-header-offset change has shipped with the guide; the remaining polish is not part of this runtime. The remaining full-site shared header/footer/map/title pass is the user's next explicit priority.
+
+## Colombia shared layout continuation · 11 November 2026
+
+Prepared the remaining Colombia shared header/footer and custom About/Travel Tips heading pass. 508 checks and strict TypeScript passed. Local production build also passed with 75 pages under Node 24; hosted Node 22 acceptance remains pending. Automatic review rejected GitHub push authorization for mmelendro/Aves, feature/field-guide-card. Source commit c9be99e is local; no publication occurred. Read COLOMBIA-SHARED-LAYOUT-2026-11-11.md. Unrelated existing dependency override changes remain local and excluded. Continue from this combined source, not the superseded photo-zoom branch.

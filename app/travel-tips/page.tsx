@@ -7,6 +7,7 @@ import { publicMetadata } from "@/lib/public-metadata"
 import { canonicalUrl } from "@/lib/site-path"
 import type { Metadata } from "next"
 import { NavigationHeader } from "@/components/navigation-header"
+import { PageIntroduction } from "@/components/page-introduction"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -25,15 +26,10 @@ export default function TravelTipsPage() {
   return (
     <div className="min-h-screen bg-white">
       <NavigationHeader />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Travel Tips for Colombia</h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Your comprehensive guide to visiting Colombia safely and responsibly, while supporting sustainable tourism
-            and local communities.
-          </p>
+      <PageIntroduction title="Travel Tips for Colombia" eyebrow="AVES Colombia" description="Your guide to visiting Colombia responsibly, respecting local communities and preparing for your trip.">
           <div className="flex flex-wrap justify-center gap-4">
             <Badge variant="secondary" className="text-lg px-4 py-2">
               <Shield className="w-5 h-5 mr-2" />
@@ -48,8 +44,7 @@ export default function TravelTipsPage() {
               Sustainable Tourism
             </Badge>
           </div>
-        </div>
-      </section>
+      </PageIntroduction>
 
       <div className="container mx-auto px-4 py-16">
         {/* Introduction */}
@@ -479,6 +474,7 @@ export default function TravelTipsPage() {
         </section>
       </div>
 
+      </main>
       <Footer />
     </div>
   )

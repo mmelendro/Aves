@@ -1,5 +1,10 @@
 # AVES comprehensive delivery list
 
+## Latest local continuation · 11 November 2026
+
+Colombia shared header/footer, homepage Spanish switch and About/Travel Tips heading/skip-target improvements are committed locally at c9be99e. 508 tests, strict TypeScript and a 75-page local production build passed. Automatic review blocked the GitHub push to mmelendro/Aves, feature/field-guide-card over destination authorization. No deployment was made. Finish GitHub sync, hosted Node 22 build and browser acceptance before publication. See COLOMBIA-SHARED-LAYOUT-2026-11-11.md. Wider route audit remains open.
+
+
 ## Current release · 11 November 2026
 
 The user approved publishing the consolidated candidate as-is. Production runtime: `047d2a6edaa6850a881cc1ff4faf3be93d48c21c`; source tree `dc3e536e741a773149891a6d61dd41c3074cf26c`; production deployment `dpl_38Df6sJcXUseU5ZyDWh3R8mWCRes`, READY in project `prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv` (currently named aves-australia). Both aves.bio and www.aves.bio aliases point to that deployment. It contains the global homepage, Colombia, Australia, NZ, shared accounts, APIs and legacy URL handlers in one application. Do not rebuild or publish either older separate application over it.

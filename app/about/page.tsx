@@ -37,14 +37,15 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/about" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="container mx-auto px-4">
+      <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 sm:py-10 lg:py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌿 About AVES</Badge>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Connecting Hearts to Colombia's Avian Wonders</h1>
+              <h1 className="mb-5 text-3xl font-medium tracking-tight text-emerald-950 md:text-4xl lg:text-5xl">Connecting Hearts to Colombia's Avian Wonders</h1>
               <p className="text-xl text-gray-600 mb-8">
                 We're more than a birding company—we're conservation partners, cultural bridges, and guardians of
                 Colombia's extraordinary biodiversity. Every journey creates lasting impact for birds, communities, and
@@ -355,6 +356,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   )

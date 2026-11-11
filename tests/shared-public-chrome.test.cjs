@@ -45,3 +45,16 @@ test("Australian explorer delegates to shared public header and country-aware fo
     if (country !== "australia") assert.equal(footer.props.country, country)
   }
 })
+
+
+test("Colombian regional navigation retains active Regions cues in both menus", () => {
+  const navigationLinks = [{ href: "/", label: "Destinations" }, { href: "/aves-explorer", label: "Regions" }, { href: "/account?country=colombia", label: "My Trips" }]
+  const tree = componentHarness("components/new-zealand-header.tsx", "NewZealandHeader", { country: "colombia", navigationLinks }, { mocks: {
+    "next/navigation": { usePathname: () => "/regions/central-andes" },
+  } }).render()
+  const regions = nodes(tree).filter(node => node.type === "a" && node.props.href === "/aves-explorer")
+  assert.equal(regions.length, 2)
+  assert.ok(regions.every(node => node.props["aria-current"] === "page"))
+  assert.ok(nodes(tree).filter(node => node.type === "a" && node.props.href === "/").every(node => node.props["aria-current"] === undefined))
+  assert.equal(find(tree, node => node.type === "HeaderContour").props.regionId, "central-andes")
+})

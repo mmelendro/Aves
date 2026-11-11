@@ -25,3 +25,25 @@ test('homepage defaults to English and provides an explicit language switch',()=
  assert.ok(html.includes('Cambiar a español colombiano'))
  assert.ok(!html.includes('Explora Colombia'))
 })
+
+test('shared Colombia navigation and footer translate their rendered copy and keep account intent',()=>{
+ const {renderToStaticMarkup}=require('react-dom/server')
+ const load=require('./helpers/load-ts.cjs')({mocks:{
+  '@/components/colombia-home-language':{useColombiaHomeCopy:()=>exported.translateColombiaHomeTree,ColombiaHomeLanguageToggle:()=>React.createElement('button',{},'Language')},
+  '@/lib/header-landscape.mjs':{selectedHeaderProfile:()=>undefined},
+  'next/navigation':{usePathname:()=>'/colombia'},
+  '@/components/header-landscape-context':{useHeaderLandscape:()=>({selection:{country:'colombia'}})},
+  '@/components/header-contour':{HeaderContour:()=>null},
+  '@/components/brand-mark':{BrandMark:()=>null},
+  'next/link':({children,...props})=>React.createElement('a',props,children),
+ }})
+ const header=renderToStaticMarkup(React.createElement(load('components/navigation-header.tsx').NavigationHeader))
+ assert.match(header,/Mis viajes/)
+ assert.match(header,/href="\/account\?country=colombia"/)
+ assert.match(header,/href="\/aves-explorer"/)
+ const footer=renderToStaticMarkup(React.createElement(load('components/footer.tsx').Footer))
+ assert.match(footer,/Elige tu destino/)
+ assert.match(footer,/href="\/account\?country=colombia"/)
+ assert.match(footer,/href="\/site-map"/)
+ assert.match(footer,/certificad/)
+})

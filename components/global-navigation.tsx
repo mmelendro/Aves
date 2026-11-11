@@ -1,3 +1,6 @@
+"use client"
+
+import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 /**
  * Header and footer for the global landing page and New Zealand pages.
  * Passing country changes the logo subtitle, while My Trips remains one shared account.
@@ -22,14 +25,16 @@ export interface FooterNavigationGroup {
   links: readonly { href: string; label: string }[]
 }
 
-export function GlobalFooter({ country, navigationGroups = [], transparent = false }: GlobalBrandProps & { navigationGroups?: readonly FooterNavigationGroup[]; transparent?: boolean } = {}) {
-  return (
+export function GlobalFooter({ country, navigationGroups = [], transparent = false, accountHref = "/account" }: GlobalBrandProps & { navigationGroups?: readonly FooterNavigationGroup[]; transparent?: boolean; accountHref?: string } = {}) {
+  const localizeHome = useColombiaHomeCopy()
+  const tree = (
     <footer className={`${transparent ? "bg-gray-900/90 backdrop-blur-lg" : "bg-gray-900"} py-12 text-gray-300`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <BrandMark country={country} inverse size="footer" />
             <p className="mt-4 max-w-xs leading-7">From mountains to ocean.</p>
+            {country === "colombia" && <p className="mt-3 max-w-xs text-sm leading-6">Pursuing B Corp certification. AVES is not yet certified.</p>}
           </div>
           <nav aria-label="Explore destinations">
             <h2 className="mb-3 font-semibold text-white">Choose your destination</h2>
@@ -39,7 +44,7 @@ export function GlobalFooter({ country, navigationGroups = [], transparent = fal
           <div>
             <h2 className="mb-3 font-semibold text-white">Keep in touch</h2>
             <a href="/australia/contact?topic=general#inquiry" className="inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">Contact AVES</a>
-            <a href="/account" className="ml-5 inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">My Trips</a>
+            <a href={accountHref} className="ml-5 inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">My Trips</a>
             <p className="mt-2 text-sm leading-6">Have a trip in mind? Explore a destination and start a conversation with us.</p>
           </div>
         </div>
@@ -49,7 +54,7 @@ export function GlobalFooter({ country, navigationGroups = [], transparent = fal
             <ul>{group.links.map(link => <li key={link.href}><a href={link.href} className="inline-flex min-h-11 items-center text-sm text-emerald-300 underline-offset-4 hover:underline">{link.label}</a></li>)}</ul>
           </nav>)}
         </div>}
-        <p className="mt-9 max-w-4xl border-t border-gray-700 pt-7 text-sm leading-6 text-gray-300">{country === "australia" ? "AVES acknowledges Aboriginal and Torres Strait Islander peoples as the Traditional Owners and Custodians of Country throughout Australia. We pay our respects to Elders past and present and recognise their continuing connections to land, waters and community." : "We recognise the Indigenous peoples of the places we visit and their continuing relationships with lands, waters and communities. We aim to travel with respect, listen to local voices and follow local guidance."}</p>
+        <p className="mt-9 max-w-4xl border-t border-gray-700 pt-7 text-sm leading-6 text-gray-300">{country === "australia" ? "AVES acknowledges Aboriginal and Torres Strait Islander peoples as the Traditional Owners and Custodians of Country throughout Australia. We pay our respects to Elders past and present and recognise their continuing connections to land, waters and community." : country === "colombia" ? "We recognise Colombia’s Indigenous peoples and Afro-descendant communities and their enduring relationships with their territories, waters and cultural heritage. We aim to listen to local voices, respect community decisions and follow local guidance wherever we travel." : "We recognise the Indigenous peoples of the places we visit and their continuing relationships with lands, waters and communities. We aim to travel with respect, listen to local voices and follow local guidance."}</p>
         <div className="mt-7 flex flex-col justify-between gap-5 border-t border-gray-700 pt-7 text-sm md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} AVES. All rights reserved.</p>
           <nav aria-label="Website information" className="flex flex-wrap gap-x-5 gap-y-2">
@@ -59,4 +64,5 @@ export function GlobalFooter({ country, navigationGroups = [], transparent = fal
       </div>
     </footer>
   )
+  return localizeHome(tree)
 }

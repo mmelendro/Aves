@@ -79,9 +79,10 @@ test('public Colombia components contain no privileged database access or auth-p
 })
 
 test('desktop, mobile and regional shared-account entry points use full-page navigation', () => {
-  for (const file of ['components/navigation-header.tsx', 'components/mobile-navigation-overlay.tsx']) {
+  for (const file of ['components/mobile-navigation-overlay.tsx']) {
     assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /account.*\? "a" : Link/)
   }
-  assert.match(fs.readFileSync(path.join(root, 'components/footer.tsx'), 'utf8'), /<a href=\{sharedAccountHref\(\)\}/)
+  assert.match(fs.readFileSync(path.join(root, 'components/footer.tsx'), 'utf8'), /accountHref=\{sharedAccountHref\(\)\}/)
+  assert.match(fs.readFileSync(path.join(root, 'components/new-zealand-header.tsx'), 'utf8'), /<a key=\{href\} href=\{href\}/)
   assert.match(fs.readFileSync(path.join(root, 'components/colombia-region-page.tsx'), 'utf8'), /<a href=\{sharedAccountHref\(region\.id\)\}/)
 })

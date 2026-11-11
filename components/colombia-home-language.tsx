@@ -1,6 +1,6 @@
 "use client"
 
-import { cloneElement, createContext, isValidElement, useContext, useState, type ReactNode } from "react"
+import { Children, cloneElement, createContext, isValidElement, useContext, useState, type ReactNode } from "react"
 import translations from "@/content/colombia-home-es.json"
 
 const LanguageContext = createContext({ spanish: false, setSpanish: (_value: boolean) => {} })
@@ -79,7 +79,7 @@ const copyProps = ["aria-label", "aria-description", "title", "alt", "placeholde
 export function translateColombiaHomeTree(node: ReactNode): ReactNode {
     if (typeof node === "string") return colombiaHomeText(node)
     // Preserve single-child shape: Radix asChild requires an element, not an array.
-    if (Array.isArray(node)) return node.map(translateColombiaHomeTree)
+    if (Array.isArray(node)) return Children.map(node, translateColombiaHomeTree)
     if (!isValidElement<Record<string, unknown>>(node)) return node
     const child = node
     const props: Record<string, unknown> = {}

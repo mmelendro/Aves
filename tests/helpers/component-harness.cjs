@@ -32,6 +32,7 @@ function componentHarness(file, name, props, overrides = {}) {
   }
   const mocks = {
     react,
+    "@/components/colombia-home-language": { useColombiaHomeCopy: () => node => node, ColombiaHomeLanguageToggle: "ColombiaHomeLanguageToggle" },
     "@/components/header-contour": { HeaderContour: "HeaderContour" },
     "@/components/header-landscape-context": { useHeaderLandscape: () => ({selection:null,publish(){}}) },
     "./header-landscape-context": { useHeaderLandscape: () => ({selection:null,publish(){}}) },
