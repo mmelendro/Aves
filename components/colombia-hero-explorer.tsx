@@ -6,7 +6,7 @@
  */
 "use client"
 
-import { CountrySatelliteControl, CountrySatelliteCredit, ColombiaSatelliteReplacement, CountrySatelliteScope } from "./country-satellite-layer"
+import { CountrySatelliteControl, CountrySatelliteScope } from "./country-satellite-layer"
 import {useBirdFilters} from "@/components/bird-filter-context"
 import {filterConservationBirds} from "@/lib/bird-conservation"
 import { guideMapCue } from "@/lib/guide-map-cue"
@@ -74,7 +74,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
             <Link href="/aves-explorer" className="inline-flex min-h-9 items-center gap-1 rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Full map<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></Link>
           </div>
           <p className="my-2 flex items-center justify-center gap-2 text-center text-sm font-medium text-emerald-900"><Feather size={16} aria-hidden="true" />{selectedRegionDetails.name}</p>
-          <MapViewer layerControl={<CountrySatelliteControl country="colombia"/>} label="Colombia planning map" credits="AVES planning-region selections; satellite uses geographic country outlines. Neither confirms access or official ecological boundaries."><ColombiaSatelliteReplacement><div className={`${styles.mapCanvas} ${styles.mapViewport}`}><div data-zoom-artwork="true" className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
+          <MapViewer geographicScope={{country:"colombia",region:chosenRegion,selectRegion:chooseRegion}} layerControl={<CountrySatelliteControl country="colombia"/>} label="Colombia planning map" credits="AVES planning-region selections; satellite uses geographic country outlines. Neither confirms access or official ecological boundaries."><div className={`${styles.mapCanvas} ${styles.mapViewport}`}><div data-zoom-artwork="true" className={styles.colombiaArtwork} style={resizable ? { width: "min(100%, calc((var(--discovery-panel-height, 35rem) - 14rem) * 198 / 250))" } : undefined} role="group" aria-label="Colombia map: choose from 11 birding regions">
             <div className={`absolute inset-0 ${styles.pointZoom}`} style={focused ? { transform: `scale(2.4) translate(${50 - selectedRegionDetails.x}%, ${50 - selectedRegionDetails.y}%)` } : undefined}>
             <ColombiaMapArtwork flat selectedRegion={selectedRegionDetails.name} alt="" fill sizes={resizable ? "400px" : "230px"} className="object-contain" />
             <ColombiaRegionTargets onActivate={media ? undefined : (event, id) => preview.activate(event, id)} onActivateKey={media ? undefined : (event, id, href) => preview.activateKey(event, id, href)} />
@@ -89,7 +89,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
             </div>
           </div>
           </div>
-          </ColombiaSatelliteReplacement></MapViewer><CountrySatelliteCredit country="colombia"/><div className={styles.mapFooter}><div className="flex gap-2">
+          </MapViewer><div className={styles.mapFooter}><div className="flex gap-2">
             <label htmlFor="colombia-hero-region" className="sr-only">Choose a Colombia region</label>
             <select ref={selectRef} id="colombia-hero-region" value={focused ? chosenRegion : ""} onChange={event => { const id = event.target.value; if (media && id) window.location.assign(`/regions/${id}`); else preview.preview(id) }} className="min-h-11 min-w-0 flex-1 rounded-lg border border-emerald-200 bg-white px-2 text-sm text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">
               <option value="">Choose a Colombian region</option>

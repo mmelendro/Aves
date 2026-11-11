@@ -11,7 +11,7 @@ import { guideMapCue } from "@/lib/guide-map-cue"
 
 import { explorerLocation, readExplorerLocation, explorerLocationHref, type ExplorerLocation } from "@/lib/explorer-location"
 import { useColombiaHomeCopy } from "./colombia-home-language"
-import { CountrySatelliteControl, CountrySatelliteCredit } from "./country-satellite-layer"
+import { CountrySatelliteControl } from "./country-satellite-layer"
 import { placeInSentence } from "@/lib/place-language"
 import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
@@ -132,7 +132,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
                 <label className="sr-only" htmlFor="explorer-island">Explore an island</label>
                 <select id="explorer-island" aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}{filtering ? ` · ${filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters).length} matches` : ""}</option>)}</select>
               </div>
-            </div> : <MapViewer layerControl={<CountrySatelliteControl country={zoomed ? destination.id : ""}/>} label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
+            </div> : <MapViewer geographicScope={{country:zoomed?destination.id:"",region:regionId,selectCountry:id=>id?selectDestination(id):backToWorld(),selectRegion}} layerControl={<CountrySatelliteControl country={zoomed ? destination.id : ""}/>} label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
               {/* Both views share one footprint. Inert also removes the hidden
                   world's SVG buttons from keyboard and assistive navigation. */}
               <div className={styles.worldView} inert={zoomed} aria-hidden={zoomed}>{map}</div>
@@ -153,7 +153,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
                   {region ? <a href={region.href} className={styles.regionLink}>Explore {placeInSentence(region.name)}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a>
                     : <p className="mt-2 text-xs leading-5 text-emerald-900">Choose a region to zoom in and update the birds and planning notes here. Use Back to zoom out. Open its guide for more detail.</p>}
                   <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? `AVES planning-region selector · artwork in planning view; country geography in satellite view` : <><a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
-                  <CountrySatelliteCredit country={destination.id}/>
+
                 </figcaption>
               </figure>}
             </div></MapViewer>}</div>}

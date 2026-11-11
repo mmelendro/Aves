@@ -7,7 +7,6 @@ import ColombiaRegionTargets from "./colombia-region-targets"
  */
 import MapFeatherMarker from "./map-feather-marker"
 import type { ReactNode } from "react"
-import { CountrySatelliteImage, CountrySatelliteGeometry, ColombiaSatelliteReplacement } from "./country-satellite-layer"
 import { colombiaMapMarkers } from "@/content/colombia-map-markers"
 import { australiaMapStates, australiaMapViewBox } from "@/content/global-australian-map"
 import nz from "@/content/new-zealand-map.json"
@@ -25,7 +24,6 @@ type Props = {
 }
 
 export default function DestinationRegionalMap({ country, selectedRegionId, highlightedRegionIds = [], matchingRegionIds, onSelectRegion }: Props) {
-  const clipId = `country-satellite-${country}`
   const highlighted = (id: string) => selectedRegionId ? selectedRegionId === id : highlightedRegionIds.includes(id)
   const zoomTransform = country === "australia"
     ? mapZoomTransform(australiaMapViewBox, australiaMapStates.filter(state => state.regionId === selectedRegionId).map(state => state.path))
@@ -45,7 +43,7 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
   ) : <a key={id} href={href} aria-label={`Explore ${placeInSentence(name)}`} className={styles.regionControl}>{children}</a>
 
   if (country === "colombia") return (
-    <ColombiaSatelliteReplacement><div className="h-full w-full overflow-hidden" style={{ containerType: "size" }}>
+    <div className="h-full w-full overflow-hidden" style={{ containerType: "size" }}>
     <div className="relative top-1/2 mx-auto aspect-[198/250] -translate-y-1/2" style={{ width: "min(100cqw, calc(100cqh * 198 / 250))" }} role="group" aria-label="Colombia planning-region map">
       <div className={`absolute inset-0 ${styles.pointZoom}`} style={selectedRegionId ? { transform: `scale(2.4) translate(${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.x ?? 50)}%, ${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.y ?? 50)}%)` } : undefined}>
       <ColombiaMapArtwork flat alt="" fill sizes="(max-width: 703px) 90vw, 560px" className="object-contain" />
@@ -59,25 +57,21 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
       })}
       </div>
     </div>
-    </div></ColombiaSatelliteReplacement>
+    </div>
   )
   if (country === "australia") return (
     <svg viewBox={australiaMapViewBox} role="group" aria-label="Australian states and territories" className="h-full w-full" preserveAspectRatio="xMidYMid meet">
-      <defs><clipPath id={clipId}>{australiaMapStates.map(state=><path key={state.code} d={state.path} fillRule="evenodd"/>)}</clipPath></defs>
-      <CountrySatelliteGeometry className={styles.mapZoom} style={{ transform: zoomTransform }}>
-      <CountrySatelliteImage country={country} clip={`url(#${clipId})`}/>
+      <g className={styles.mapZoom} style={{ transform: zoomTransform }}>
       {australiaMapStates.filter(state => state.regionId).map(state => control(state.regionId!, state.name, `/australia/regions/${state.regionId}`, <>
         <path d={state.path} className={styles.regionLand} fill="#c5dbd0" stroke="#6e9582" strokeWidth="1" fillRule="evenodd" />
         {highlighted(state.regionId!) && <svg x={state.label[0]-markerSize/2} y={state.label[1]-markerSize/2} width={markerSize} height={markerSize} overflow="visible"><MapFeatherMarker size={markerSize}/></svg>}
       </>))}
-      </CountrySatelliteGeometry>
+      </g>
     </svg>
   )
   if (country === "new-zealand") return (
     <svg viewBox={nz.viewBox} role="group" aria-label="New Zealand main islands" className="h-full w-full" preserveAspectRatio="xMidYMid meet">
-      <defs><clipPath id={clipId}>{nz.islands.flatMap(island=>island.paths.map((path,i)=><path key={`${island.id}-${i}`} d={path} fillRule="evenodd"/>))}</clipPath></defs>
-      <CountrySatelliteGeometry className={styles.mapZoom} style={{ transform: zoomTransform }}>
-      <CountrySatelliteImage country={country} clip={`url(#${clipId})`}/>
+      <g className={styles.mapZoom} style={{ transform: zoomTransform }}>
       {nz.islands.map((island, index) => {
         const point = [[389,184], [235,419], [135,572]][index]
         return control(island.id, island.label, newZealandRegionHref(island.id), <>
@@ -85,7 +79,7 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
           {highlighted(island.id) && <svg x={point[0]-markerSize/2} y={point[1]-markerSize/2} width={markerSize} height={markerSize} overflow="visible"><MapFeatherMarker size={markerSize}/></svg>}
         </>)
       })}
-      </CountrySatelliteGeometry>
+      </g>
     </svg>
   )
   return null

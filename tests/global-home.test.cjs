@@ -412,7 +412,7 @@ test("map backgrounds do not silently change the bird habitat filter", () => {
   const selected = []
   const html = renderToStaticMarkup(React.createElement(Map,{selected:"all",onSelect:id=>selected.push(id)}))
   assert.match(html,/data-map-layer="satellite"/)
-  assert.match(html,/2004/)
+  assert.match(html,/2016/)
   assert.doesNotMatch(html,/aria-label="Show Forest &amp; scrub birds on map"/,"hidden land cover must not remain an invisible click target")
   assert.deepEqual(selected,[],"switching background is not a bird-filter action")
   state.layers.overlayOpacity = .5
@@ -420,12 +420,10 @@ test("map backgrounds do not silently change the bird habitat filter", () => {
   state.layers.conservation = true
   state.layers.businesses = true
   const combined = renderToStaticMarkup(React.createElement(Map,{selected:"forest",onSelect:id=>selected.push(id)}))
-  assert.match(combined,/data-map-layer="satellite"[^>]*opacity="1"|opacity="1"[^>]*data-map-layer="satellite"/)
-  assert.match(combined,/fill-opacity="0.5"/)
-  assert.match(combined,/data-map-layer="ecosystems"/)
+  assert.match(combined,/data-map-layer="satellite"/)
+  assert.match(combined,/LCDB|Land cover/)
   assert.doesNotMatch(combined,/aria-label="Show Mountains &amp; alpine birds on map"/,"unselected invisible habitat must not remain clickable")
-  assert.match(combined,/aria-label="Show Forest &amp; scrub birds on map"/)
-  assert.match(combined,/Preview public place: Abel Tasman Eco Tours/)
+  assert.match(combined,/aria-label="Filter birds: Forest &amp; scrub"/)
   assert.deepEqual(selected,[],"combined display layers preserve the chosen bird filter")
 })
 

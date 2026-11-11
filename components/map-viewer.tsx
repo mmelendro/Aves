@@ -1,6 +1,11 @@
 "use client"
 
 import { useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import dynamic from "next/dynamic"
+import { useMapLayers } from "./map-layer-context"
+import type { GeographicScope } from "./geographic-satellite-map"
+const GeographicSatelliteMap = dynamic(()=>import("./geographic-satellite-map"),{ssr:false,loading:()=> <p role="status" className="p-4 text-xs">Opening satellite globe…</p>})
+
 import { Hand, Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react"
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, type MapView } from "@/lib/map-gestures.mjs"
 import BirdFilterControls from "./bird-filter-controls"
@@ -11,7 +16,10 @@ import styles from "./map-viewer.module.css"
  * Inline touch gestures require explicit Move; page/browser zoom remains native
  * elsewhere. Expanded maps own their gesture surface, not the whole document.
  */
-export function MapViewer({ children, label, gestures = true, credits, listenControl, layerControl, viewKey, onZoomOutAtMinimum }: { viewKey?: string; onZoomOutAtMinimum?: () => void; children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode; layerControl?: ReactNode }) {
+export function MapViewer({ geographicScope, children, label, gestures = true, credits, listenControl, layerControl, viewKey, onZoomOutAtMinimum }: { geographicScope?: GeographicScope; viewKey?: string; onZoomOutAtMinimum?: () => void; children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode; layerControl?: ReactNode }) {
+  const {layers}=useMapLayers()
+  const geographic=layers.background === "satellite" && Boolean(geographicScope)
+  gestures=gestures && !geographic
   const guide = useContext(FieldGuideContext)
   const closePreview = useRef<(()=>void)|null>(null)
   const dialog = useRef<HTMLDialogElement>(null), surface = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null)
@@ -72,7 +80,7 @@ export function MapViewer({ children, label, gestures = true, credits, listenCon
       onPointerCancel={()=>{points.current.clear();start.current=null;setGesturing(false)}}
       onLostPointerCapture={e=>{points.current.delete(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}
       onClickCapture={e=>{if(suppress.current){e.preventDefault();e.stopPropagation();suppress.current=false}}}>
-      <div className={styles.content} style={gestures ? {transform:`translate(${view.x}px,${view.y}px) scale(${view.zoom})`} : undefined}>{children}</div>
+      <div className={styles.content} style={gestures ? {transform:`translate(${view.x}px,${view.y}px) scale(${view.zoom})`} : undefined}>{geographic && geographicScope ? <GeographicSatelliteMap {...geographicScope}/> : children}</div>
     </div>
     {expanded && credits && <div className="shrink-0 px-2 py-2 text-xs leading-5 text-emerald-900">{credits}</div>}
   </dialog>

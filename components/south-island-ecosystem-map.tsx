@@ -6,13 +6,12 @@ import { mapGestureView } from "@/lib/map-gestures.mjs"
 
 /** Attributed land-cover overview, controlled by the existing explorer.
  * SVG geometry is generated offline from official LCDB data; the browser sends
- * no location/guest data to a map provider and needs no key or mapping SDK.
+ * no private guest data. Satellite navigation loads its shared geographic engine on demand.
  */
 import dynamic from "next/dynamic"
 import { useMapLayers } from "./map-layer-context"
 import SouthIslandMapLayers from "./south-island-map-layers"
 import { satelliteHabitatStyle } from "@/lib/satellite-overlay.mjs"
-import satelliteSource from "@/content/south-island-satellite-source.json"
 import catalogue from "@/content/south-island-layer-catalogue.json"
 import TripRouteOverlay from "./trip-planner/trip-route-overlay"
 import PublicPlaceOverlay, { PublicPlaceDetails } from "./south-island-public-place-overlay"
@@ -28,6 +27,7 @@ import { southIslandEcosystems, type SouthIslandEcosystemFilter, type SouthIslan
 import styles from "./south-island-ecosystem-map.module.css"
 import { ecosystemMapPoint, ecosystemMapScale, focusEcosystemMapPoint, initialMapCamera, panMapCamera, zoomMapCamera, type MapCamera } from "@/lib/ecosystem-map-camera"
 
+const SouthIslandSatelliteMap = dynamic(() => import("./south-island-satellite-map"), { ssr: false })
 const ConservationOverlay = dynamic(() => import("./south-island-conservation-overlay"), { ssr: false })
 
 const colours: Record<SouthIslandEcosystem, string> = { forest: "#537b5d", mountains: "#ae9761", freshwater: "#438eac", coast: "#008477" }
@@ -39,8 +39,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const { layers } = useMapLayers()
   const {filters}=useBirdFilters()
   const matches=matchingHabitats ?? (birdFiltersActive(filters) ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(filterConservationBirds(newZealandRegionBirds("south-island"),filters),item.id).length>0).map(item=>item.id) : undefined)
-  const [satelliteFailed, setSatelliteFailed] = useState(false)
-  const satellite = layers.background === "satellite" && !satelliteFailed
+  const satellite = layers.background === "satellite"
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   const id = useId()
@@ -86,8 +85,8 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   return <MapViewer label="South Island explorer map" gestures={false} listenControl={<SouthIslandSoundscapes />}><section data-ecosystem-card="true" className={styles.card} aria-labelledby={`${id}-title`}>
     <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2></div>
     <p id={`${id}-gestures`} className="sr-only">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
-    {satelliteFailed && layers.background === "satellite" && <p role="status" className="text-xs text-amber-900">Satellite image unavailable. The habitat map is shown instead.</p>}
-    <figure className={styles.figure}>
+    <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
+      {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
       <svg ref={svgRef} viewBox={map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
         onKeyDown={event => {
           if (event.target !== event.currentTarget) return
@@ -130,7 +129,6 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
           <text x="94" y="180" textAnchor="middle">Tasman Sea</text>
           <text x="362" y="460" textAnchor="middle"><tspan x="362">South Pacific</tspan><tspan x="362" dy="1.25em">Ocean</tspan></text>
         </g>
-        {satellite && <image href="/images/maps/south-island-satellite-2004.jpg" x="0" y="0" width="480" height="640" preserveAspectRatio="xMidYMid meet" opacity="1" clipPath={`url(#${id}-island-clip)`} onError={() => setSatelliteFailed(true)} data-map-layer="satellite"/>}
         <path d={map.outline} fill={satellite ? "none" : "#e7ede8"} stroke="#829c8c" strokeWidth="1" vectorEffect="non-scaling-stroke" fillRule="evenodd" />
         {map.layers.filter(layer => !satellite || layer.id === selected).map(layer => {
           const habitat = layer.id as SouthIslandEcosystem
@@ -164,16 +162,18 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
         <TripRouteOverlay />
         </g>
         <g aria-hidden="true" fill="#065f46"><text x="38" y="55" textAnchor="middle" fontSize="15" fontWeight="600">N</text><path d="M38 64L32 82L38 78L44 82Z" /></g>
-      </svg>
-      <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · NASA Earth Observatory · 2004 composite · Historical overview" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && selected !== "all" && selected !== "coast" && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
+      </svg></>}
+      <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · EOxCloudless · 2016 composite · Historical landscape" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && selected !== "all" && selected !== "coast" && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
     </figure>
     <div className={styles.mapToolbar}>
     <div className={styles.controls} role="group" aria-label="Ecosystem map view controls">
+      {!satellite && <>
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1 && !onZoomOutAtMinimum} onClick={() => camera.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
       <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>
+      </>}
       <SouthIslandMapLayers />
     </div>
     </div>
@@ -182,7 +182,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <summary>Places, habitats &amp; map details</summary>
       <div className={styles.detailsPanel}>
         <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>
-        <p className="mb-2 text-xs leading-5 text-gray-600">Use Move to drag or pinch the map. Turn it off to select habitats. Keyboard: + / −, arrow keys and Home.</p>
+        <p className="mb-2 text-xs leading-5 text-gray-600">{satellite ? "Drag to explore. Use two fingers to move on touch screens. Use the habitat filters below to change the birds." : "Use Move to drag or pinch the map. Turn it off to select habitats. Keyboard: + / −, arrow keys and Home."}</p>
     <PublicPlaceDetails />
     <div className={styles.scale} aria-label="Map distance scale">
       {scale ? <><div style={{ width: scale.widthPixels }} className={styles.scaleBar} /><p>{scale.distanceMetres / 1000} km at {Math.abs(scale.latitude).toFixed(1)}° S · map centre</p></> : <p>Distance scale appears when the map is measured.</p>}
@@ -200,7 +200,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     <details className={styles.sources}>
       <summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Map sources & limitations</summary>
       <div className="space-y-2 pb-2 text-xs leading-5 text-gray-600">
-        <p><a href={satelliteSource.url} target="_blank" rel="noreferrer" className="underline">NASA Earth Observatory — Blue Marble Next Generation</a>. Historical 2004 satellite composite, downloaded through GIBS and served by AVES. Uses the same Mercator extent as the habitat geometry. Broad context, not live imagery or a road map. Satellite visibility defaults to 55%; optional ecosystem colours remain visible above it and bird filters stay active. Parks, conservation and public-place layers combine independently.</p>
+        <p><a href="https://cloudless.eox.at/documentation/faq" target="_blank" rel="noreferrer" className="underline">EOxCloudless by EOX IT Services GmbH</a>. Contains modified Copernicus Sentinel data 2016, CC BY 4.0. Historical imagery loads as geographic tiles as you zoom. Public tile availability and detail vary. Selected habitat shading uses the separate LCDB 2023/24 data. DOC land, public places and itinerary order remain independent layers.</p>
         <p>{publicPlaces.coverage} Settlement references: <a href={publicPlaces.sources[1].url} target="_blank" rel="noreferrer" className="underline">Natural Earth 5.1.2, public domain</a>. Reserve reference coordinates: {publicPlaces.sources[0].copyright}, CC BY 4.0. Public visitor and business descriptions link to their checked primary sources; operator conservation statements are not independently audited impact or certification.</p>
         <p><a href={catalogue.source.url} target="_blank" rel="noreferrer" className="underline">DOC Public Conservation Land</a>. {catalogue.source.copyright}. <a href={catalogue.source.licenceUrl} target="_blank" rel="noreferrer" className="underline">CC BY 4.0</a>. Retrieved 9 November 2026, clipped to the main South Island and generalised to about 2 km. Nine national parks are a subset of the conservation layer. Small parcels and nearby islands may be omitted; privately conserved land is not comprehensively mapped. Boundaries do not establish visitor access, track safety or the birds in a park; consult DOC's current guidance.</p>
         <p><a href={map.source.url} target="_blank" rel="noreferrer" className="underline">Manaaki Whenua — LCDB v6.0</a> · <a href={map.source.licenceUrl} target="_blank" rel="noreferrer" className="underline">CC BY 3.0 NZ, WMS service</a>. Imagery: 2023/24; reviewed 9 November 2026. Generalised, grouped and recoloured by AVES.</p>

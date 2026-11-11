@@ -6,6 +6,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import { MapBackgroundProvider } from "@/components/map-background-context"
 import { PreviewModeProvider } from "@/components/preview-mode"
 import { isReadOnlyPreview } from "@/lib/deployment-mode"
 import { HeaderLandscapeProvider } from "@/components/header-landscape-context"
@@ -95,7 +96,7 @@ export default function RootLayout({
       <body>
         <PreviewModeProvider readOnly={isReadOnlyPreview()}>
           <CookieConsentProvider>
-            <BirdFilterProvider><HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider></BirdFilterProvider>
+            <MapBackgroundProvider><BirdFilterProvider><HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider></BirdFilterProvider></MapBackgroundProvider>
             <CookiePreferenceCenter />
             <CookieBanner />
           </CookieConsentProvider>

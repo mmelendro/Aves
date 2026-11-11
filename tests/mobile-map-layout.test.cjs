@@ -9,7 +9,7 @@ test('mobile map options stay collapsed until requested and selections close the
  assert.equal(nodes(tree).filter(n=>n.type==='input').length,0)
  find(tree,n=>n.props['aria-label']==='Map layers').props.onClick();tree=h.render()
  assert.equal(nodes(tree).filter(n=>n.type==='input'&&n.props.type==='radio').length,2)
- find(tree,n=>n.props['aria-label']==='Satellite overview · 2004').props.onChange();tree=h.render()
+ find(tree,n=>n.props['aria-label']==='Satellite').props.onChange();tree=h.render()
  assert.equal(layers.background,'satellite')
  assert.equal(nodes(tree).filter(n=>n.props['aria-label']==='South Island layer choices').length,0)
  find(tree,n=>n.props['aria-label']==='Map layers').props.onClick();tree=h.render()
