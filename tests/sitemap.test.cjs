@@ -117,9 +117,11 @@ test("header and footer destinations exist; their native links do not double-pre
 test("human site map shares the XML directory and is discoverable from the footer", () => {
   assert.equal(new Set(publicPageGroups.map(group => group.id)).size, publicPageGroups.length)
   const page = readFileSync(join(root, "app/site-map/page.tsx"), "utf8")
-  assert.match(page, /publicPageGroups\.map/)
-  assert.match(page, /aria-labelledby/)
-  assert.match(page, /<ul/)
+  assert.match(page, /DestinationSiteTree/)
+  assert.match(page, /destinationSiteTree/)
+  const treeComponent = readFileSync(join(root, "components/destination-site-tree.tsx"), "utf8")
+  assert.match(treeComponent, /aria-label="AVES destination tree"/)
+  assert.match(treeComponent, /<ul/)
   assert.match(readFileSync(join(root, "components/footer.tsx"), "utf8"), /href:\s*"\/site-map"/)
 })
 

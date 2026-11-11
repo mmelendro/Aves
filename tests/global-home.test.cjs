@@ -225,7 +225,7 @@ test("global navigation works from the site map and targets existing homepage se
   const links = anchors(html)
   assert.ok(links.some(link => link.href === "/" && link.text.includes("All Destinations")))
   assert.ok(links.some(link => link.href === "/colombia" && link.text === "Colombia Home"))
-  assert.ok(links.some(link => link.href === "https://aves.bio/australia/site-map"))
+  assert.ok(links.some(link => link.href === "/australia/site-map"))
   assert.ok(links.some(link => link.href === "/#destinations"))
   assert.doesNotMatch(html, /aria-label="AVES Colombia home"/)
 })
