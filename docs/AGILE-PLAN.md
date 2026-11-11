@@ -174,3 +174,7 @@ without explicit sending instructions. Keep source/credits, rollback points and
 private guest data intact. Essential-flow/privacy defects take priority.
 
 Verified update: the public South Island page and consolidated human sitemap were retrieved after publication. The final production error/fatal scan had no matching entries in the 10-minute window ending 2026-11-10T21:35:38.315Z. Unpublished display/cookie polish is preserved at wip/single-app-style-polish, commit 27883a8e8204d015d30907eaac4de3e2327a662a. It is not part of the production runtime. The remaining full-site shared header/footer/map/title pass is the user's next explicit priority.
+
+## GitHub synchronization confirmed · 11 November 2026
+
+The owner explicitly authorised the push. The connected GitHub app synced the reviewed source and validation notes to mmelendro/Aves, feature/field-guide-card, runtime source 811fe4a21c2484158f0e819c0d56ac016c629473. Its source tree 44dfb07d646ecd93db9a4366432d8ca579c082a1 exactly matches reviewed local commits c9be99e/da816b3. This supersedes the blocked-push status above. Hosted build/browser acceptance and production publication remain pending. Unrelated local dependency edits were excluded.

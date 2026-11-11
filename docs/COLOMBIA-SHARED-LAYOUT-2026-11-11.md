@@ -19,3 +19,7 @@ Unrelated existing package.json/pnpm-lock.yaml dependency overrides are preserve
 ## Next
 
 Local source commit: c9be99e. Automatic approval review rejected the attempted push to mmelendro/Aves, branch feature/field-guide-card, because it did not recognise explicit authorization for that destination. The push was not retried through another path. GitHub sync, hosted build/browser acceptance and publication remain pending explicit destination authorization. Continue the route-by-route public/private design audit. Guided contact flow, source-backed range/endemic coverage and verified B Corp locations remain queued.
+
+## GitHub synchronization confirmed · 11 November 2026
+
+The owner explicitly authorised the push. The connected GitHub app synced the reviewed source and validation notes to mmelendro/Aves, feature/field-guide-card, runtime source 811fe4a21c2484158f0e819c0d56ac016c629473. Its source tree 44dfb07d646ecd93db9a4366432d8ca579c082a1 exactly matches reviewed local commits c9be99e/da816b3. This supersedes the blocked-push status above. Hosted build/browser acceptance and production publication remain pending. Unrelated local dependency edits were excluded.

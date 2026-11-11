@@ -36,3 +36,7 @@ Verified update: the public South Island page and consolidated human sitemap wer
 ## Colombia shared layout continuation · 11 November 2026
 
 Prepared the remaining Colombia shared header/footer and custom About/Travel Tips heading pass. 508 checks and strict TypeScript passed. Local production build also passed with 75 pages under Node 24; hosted Node 22 acceptance remains pending. Automatic review rejected GitHub push authorization for mmelendro/Aves, feature/field-guide-card. Source commit c9be99e is local; no publication occurred. Read COLOMBIA-SHARED-LAYOUT-2026-11-11.md. Unrelated existing dependency override changes remain local and excluded. Continue from this combined source, not the superseded photo-zoom branch.
+
+## GitHub synchronization confirmed · 11 November 2026
+
+The owner explicitly authorised the push. The connected GitHub app synced the reviewed source and validation notes to mmelendro/Aves, feature/field-guide-card, runtime source 811fe4a21c2484158f0e819c0d56ac016c629473. Its source tree 44dfb07d646ecd93db9a4366432d8ca579c082a1 exactly matches reviewed local commits c9be99e/da816b3. This supersedes the blocked-push status above. Hosted build/browser acceptance and production publication remain pending. Unrelated local dependency edits were excluded.
