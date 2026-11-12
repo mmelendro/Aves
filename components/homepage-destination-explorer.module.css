@@ -62,3 +62,11 @@
 
 .regionControl[data-bird-filter-match="true"] .regionLand { stroke:#b45309; stroke-width:3; }
 .regionControl[data-bird-filter-match="false"] .regionLand { opacity:.3; }
+
+/* One map beside the current step on wide screens. Narrow screens retain the
+   full-width map and use the shared guide toolbar's compact step navigation. */
+.journeyLayout [id$="-bird-map"] { scroll-margin-top:calc(var(--guide-header-offset,8.25rem) + 7rem); }
+@media(min-width:1024px) {
+ .journeyLayout { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(20rem,.85fr); gap:1rem; align-items:start; }
+ .journeyLayout > section { max-height:calc(100svh - var(--guide-header-offset,8.25rem) - 2rem); overflow:auto; overscroll-behavior:contain; }
+}

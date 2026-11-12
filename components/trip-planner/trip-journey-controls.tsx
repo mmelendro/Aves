@@ -52,7 +52,7 @@ export default function TripJourneyControls({
       <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
         {step.note}
       </p>
-      <div className="mt-3 grid grid-cols-2 sm:grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2">
+      <div className="mt-3 grid grid-cols-2 items-center gap-2">
         <button
           type="button"
           className={button}
@@ -61,7 +61,7 @@ export default function TripJourneyControls({
         >
           Previous step
         </button>
-        <label className="order-first col-span-2 min-w-0 text-xs sm:order-none sm:col-span-1">
+        <label className="order-first col-span-2 min-w-0 text-xs">
           <span className="sr-only">Journey step</span>
           <select
             className={field}
@@ -126,5 +126,48 @@ export default function TripJourneyControls({
         Return to your editable days
       </a>
     </section>
+  );
+}
+
+/** Compact navigation lives in the shared guide toolbar on narrow layouts. */
+export function TripJourneyMapNavigation({ islandId }: { islandId: string }) {
+  const trip = useTripMap();
+  const journey = trip?.journey?.islandId === islandId ? trip.journey : null;
+  if (!journey) return null;
+  const step = journey.steps[journey.index];
+  function go(index: number) {
+    trip?.goToStep(index);
+    document
+      .getElementById(`${islandId}-bird-map`)
+      ?.scrollIntoView({ block: "start", behavior: "instant" });
+  }
+  return (
+    <div
+      role="group"
+      aria-label="Map journey navigation"
+      className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 lg:hidden"
+    >
+      <button
+        type="button"
+        className={button}
+        aria-label="Previous map step"
+        disabled={journey.index === 0}
+        onClick={() => go(journey.index - 1)}
+      >
+        Previous
+      </button>
+      <p className="min-w-0 truncate text-center text-xs font-semibold text-emerald-950">
+        {journey.index + 1}/{journey.steps.length} · {step.title}
+      </p>
+      <button
+        type="button"
+        className={button}
+        aria-label="Next map step"
+        disabled={journey.index === journey.steps.length - 1}
+        onClick={() => go(journey.index + 1)}
+      >
+        Next
+      </button>
+    </div>
   );
 }

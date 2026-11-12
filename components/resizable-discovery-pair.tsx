@@ -16,10 +16,10 @@ import { FieldGuideContext, type GuidePreviewOpener } from "./field-guide-contex
 import styles from "./resizable-discovery-pair.module.css"
 
 type BirdCue = { commonName: string; image: string; imagePosition?: string }
-type Props = { guidedJourney?: boolean; initialFace?: "birds" | "map"; mapCue?: GuideMapCue; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
+type Props = { journeyNavigation?: ReactNode; guidedJourney?: boolean; initialFace?: "birds" | "map"; mapCue?: GuideMapCue; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
 type Drag = { pointerId: number; startX: number; share: number; width: number }
 
-export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mapCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds", guidedJourney = false }: Props) {
+export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mapCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds", guidedJourney = false, journeyNavigation }: Props) {
   const localizeHome = useColombiaHomeCopy()
 
   const id = useId()
@@ -143,6 +143,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         </button>
         <button type="button" className={styles.reset} aria-pressed={layout === "paired"} onClick={() => setLayout(layout === "paired" ? "guide" : "paired")}><Columns2 size={17} aria-hidden="true"/>{layout === "paired" ? "Return to the guide" : "Show map & birds together"}</button>
       </div>
+      {journeyNavigation}
     </div>
     <p className={styles.guideHelp}>Turn the card to explore the map and meet its birds. Your place and bird stay selected.</p>
     <span className="sr-only" role="status">{layout === "paired" ? "Map and birds shown together." : face === "birds" ? "Bird photographs side of the guide." : "Map side of the guide."}</span>

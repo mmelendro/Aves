@@ -7,7 +7,7 @@
 
 import {useTripMap} from "./trip-planner/trip-map-context"
 import {journeyBirdProfiles} from "@/lib/trip-journey"
-import TripJourneyControls from "./trip-planner/trip-journey-controls"
+import TripJourneyControls, {TripJourneyMapNavigation} from "./trip-planner/trip-journey-controls"
 import {useBirdFilters} from "./bird-filter-context"
 import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
 import { guideMapCue } from "@/lib/guide-map-cue"
@@ -126,10 +126,10 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
     <DestinationSelectionContext.Provider value={{ selectedId: zoomed ? destination.id : "", selectDestination, zoomed, matchingCountryIds:filtering ? matchingCountryIds : undefined }}>
     <BirdDiscoveryContext.Provider value={onBirdChange}>
       <div className="mx-auto max-w-6xl">
-        <div className={styles.layout}>
+        <div className={`${styles.layout} ${journeyStep ? styles.journeyLayout : ""}`}>
           {/* Keep the divider mounted when countries change, preserving its split.
               Only the keyed viewer resets old slides, calls, timers and details. */}
-          <ResizableDiscoveryPair guidedJourney={Boolean(journeyStep)} initialFace="map" mapCue={guideMapCue(zoomed ? destination.id : undefined,regionId,region?.name)} birdCue={birds.find(bird=>bird.id===birdId) ?? birds[0]} mapLabel="Resize world map and bird photographs"
+          <ResizableDiscoveryPair journeyNavigation={journeyStep?<TripJourneyMapNavigation islandId={regionId}/>:undefined} guidedJourney={Boolean(journeyStep)} initialFace="map" mapCue={guideMapCue(zoomed ? destination.id : undefined,regionId,region?.name)} birdCue={birds.find(bird=>bird.id===birdId) ?? birds[0]} mapLabel="Resize world map and bird photographs"
             map={<div className={`${styles.mapPanel} ${southIsland ? styles.layeredPanel : ""}`} id={!southIsland&&destination.id==="new-zealand"&&regionId==="north-island"?"north-island-bird-map":undefined}>{southIsland ? <div id="south-island-bird-map" className="scroll-mt-24 gap-2">
               <SouthIslandEcosystemMap matchingHabitats={filtering ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(conservationBirds,item.id).length>0).map(item=>item.id) : undefined} selected={sharedHabitat?.value ?? "all"} onSelect={value=>sharedHabitat?.select(value)} places={southIslandPlaceContexts} selectedPlace={selectedPlace?.id} onSelectPlace={sharedHabitat?.selectPlace} onZoomOutAtMinimum={()=>selectRegion("")} onSelectIsland={selectRegion}/>
               <div className={styles.islandScope}>
@@ -165,8 +165,8 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
             media={<div key={zoomed ? `${destination.id}:${regionId}:${journeyStep?.baseId || (southIsland ? sharedHabitat?.value : "")}` : "world"} className={styles.mediaPanel}>
               <DestinationCardMedia destination={destination} birds={birds} label={zoomed ? `${region?.name ?? destination.name} bird photographs` : "Birds across AVES destinations"} fillPanel selection={zoomed && destination.id==="new-zealand" ? {isSelected:bird=>wishIds.includes(featuredNzBirdId(bird.scientificName)||""),onToggle:bird=>{const id=featuredNzBirdId(bird.scientificName);if(id)chooseBirds(wishIds.includes(id)?wishIds.filter(value=>value!==id):[...wishIds,id])}} : undefined} />
             </div>} />
-        </div>
         {zoomed&&destination.id==="new-zealand"&&<TripJourneyControls islandId={regionId}/>}
+        </div>
         <div role="group" aria-label="Choose a country to preview" className="mb-6 flex flex-wrap justify-center gap-2 sm:gap-3">
           {destinations.map(country => (
             <button key={country.id} ref={node => { countryButtons.current[country.id] = node }} type="button" aria-pressed={zoomed && destination.id === country.id} aria-controls="homepage-country-preview"
