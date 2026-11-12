@@ -24,6 +24,8 @@ test('keyboard skip link reaches main and map dismissal restores focus',async({p
   await expect(skip).toBeFocused()
   await page.keyboard.press('Enter')
   await expect(page.locator('#main-content')).toBeFocused()
+  const consent=page.getByRole('button',{name:'Reject Non-Essential',exact:true})
+  if(await consent.isVisible()) await consent.click()
   const enlarge=page.getByRole('button',{name:/^Enlarge Destination explorer map$/})
   await enlarge.click()
   const map=page.locator('dialog[data-aves-map][data-expanded]')

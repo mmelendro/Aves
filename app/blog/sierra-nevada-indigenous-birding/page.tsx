@@ -96,6 +96,7 @@ function EnhancedBirdImage({
           variant="ghost"
           size="sm"
           className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border-0 rounded-full p-2 transition-all duration-200 hover:scale-110"
+          aria-label="Toggle photo credit"
           onClick={() => setShowCredit(!showCredit)}
         >
           <Camera className="w-4 h-4" />
@@ -106,6 +107,7 @@ function EnhancedBirdImage({
           variant="ghost"
           size="sm"
           className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border-0 rounded-full p-2 transition-all duration-200 hover:scale-110"
+          aria-label="Toggle photo information"
           onClick={() => setShowInfo(!showInfo)}
         >
           <Info className="w-4 h-4" />
@@ -423,7 +425,7 @@ export default function SierraNevadaBlogPost() {
                           - El Dorado cloud forest expert
                           <Link
                             href="https://instagram.com/davidjara20"
-                            target="_blank"
+                            aria-label="Instagram: davidjara20" target="_blank"
                             className="ml-1 text-emerald-600 hover:text-emerald-700"
                           >
                             <Instagram className="w-3 h-3 inline" />
@@ -441,7 +443,7 @@ export default function SierraNevadaBlogPost() {
                           - Minca transitional zone specialist
                           <Link
                             href="https://instagram.com/faunal_observatorioavesminca"
-                            target="_blank"
+                            aria-label="Instagram: faunal_observatorioavesminca" target="_blank"
                             className="ml-1 text-emerald-600 hover:text-emerald-700"
                           >
                             <Instagram className="w-3 h-3 inline" />
@@ -459,7 +461,7 @@ export default function SierraNevadaBlogPost() {
                           - Tayrona National Park specialist
                           <Link
                             href="https://instagram.com/dago_rdg"
-                            target="_blank"
+                            aria-label="Instagram: dago_rdg" target="_blank"
                             className="ml-1 text-emerald-600 hover:text-emerald-700"
                           >
                             <Instagram className="w-3 h-3 inline" />
@@ -491,7 +493,7 @@ export default function SierraNevadaBlogPost() {
                           - Wayuu community guide
                           <Link
                             href="https://instagram.com/kalekalemana1921"
-                            target="_blank"
+                            aria-label="Instagram: kalekalemana1921" target="_blank"
                             className="ml-1 text-emerald-600 hover:text-emerald-700"
                           >
                             <Instagram className="w-3 h-3 inline" />
@@ -507,7 +509,7 @@ export default function SierraNevadaBlogPost() {
             <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6 flex items-center gap-3">
               Day 1-3: El Dorado Cloud Forest Immersion
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger aria-label="More information">
                   <Info className="w-5 h-5 text-gray-500" />
                 </TooltipTrigger>
                 <TooltipContent>
@@ -770,7 +772,7 @@ export default function SierraNevadaBlogPost() {
                     imagePosition="center 25%"
                   />
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5 italic font-light opacity-80 leading-tight">
+                <p className="text-xs text-gray-600 mt-0.5 italic font-light leading-tight">
                   Scarlet-fronted Parakeets in El Dorado Reserve
                 </p>
               </div>
@@ -805,7 +807,7 @@ export default function SierraNevadaBlogPost() {
                     Photography in sacred territories requires permission, respect, and understanding that some areas
                     and species hold special cultural significance that transcends their biological importance. For
                     photographers interested in this approach, our{" "}
-                    <Link href="/tours/vision" className="text-purple-600 hover:text-purple-700">
+                    <Link href="/tours/vision" className="text-purple-600 hover:text-purple-700 underline">
                       AVES Vision photography workshops
                     </Link>{" "}
                     emphasize these ethical practices.
@@ -871,7 +873,7 @@ export default function SierraNevadaBlogPost() {
                     imagePosition="center 45%"
                   />
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5 italic font-light opacity-80 leading-tight">
+                <p className="text-xs text-gray-600 mt-0.5 italic font-light leading-tight">
                   Blue-headed Parrot in Tayrona forest canopy
                 </p>
               </div>
@@ -901,7 +903,7 @@ export default function SierraNevadaBlogPost() {
                 <h3 className="font-bold text-blue-900 mb-4 flex items-center gap-2">
                   Species Highlights from Our Expedition
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger aria-label="More information">
                       <Info className="w-4 h-4 text-blue-600" />
                     </TooltipTrigger>
                     <TooltipContent>

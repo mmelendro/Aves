@@ -787,6 +787,7 @@ export default function TeamPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-3">Book Your Adventure</Button>
               <Button
+                asChild
                 variant="outline"
                 className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-lg px-8 py-3 bg-transparent"
               >

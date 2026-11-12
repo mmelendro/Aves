@@ -252,7 +252,7 @@ export function ContactFormSection({
                           value={formData.groupSize}
                           onValueChange={(value) => handleInputChange("groupSize", value)}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger aria-label="Group size">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -272,7 +272,7 @@ export function ContactFormSection({
                           value={formData.duration}
                           onValueChange={(value) => handleInputChange("duration", value)}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger aria-label="Desired duration">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -290,7 +290,7 @@ export function ContactFormSection({
                           value={formData.experienceLevel}
                           onValueChange={(value) => handleInputChange("experienceLevel", value)}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger aria-label="Experience level">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>

@@ -32,6 +32,12 @@ const config: Config = {
         xs: "475px",
       },
       colors: {
+        // Body-size text and white button labels must remain readable on light surfaces.
+        teal: { 600: "#0f766e" },
+        yellow: { 500: "#a16207", 600: "#854d0e" },
+        orange: { 600: "#c2410c" },
+        green: { 600: "#15803d" },
+        red: { 500: "#b91c1c", 600: "#b91c1c" },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -72,7 +78,7 @@ const config: Config = {
           300: "#6ee7b7",
           400: "#34d399",
           500: "#10b981",
-          600: "#059669",
+          600: "#047857",
           700: "#047857",
           800: "#065f46",
           900: "#064e3b",

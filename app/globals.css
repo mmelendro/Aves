@@ -1203,3 +1203,7 @@ body {
     outline-offset: 3px;
   }
 }
+
+/* Sticky navigation and the consent panel must not cover scrolled controls. */
+html { scroll-padding-block: 10rem 14rem; }
+:where(button, a, input, select, textarea) { scroll-margin-block: 10rem 14rem; }
