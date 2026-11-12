@@ -1,9 +1,11 @@
-# AVES current handoff
+# AVES current product increment
 
-The ten private travel-record fixes are published. See [PRIVATE-TRAVEL-RECORDS-2026-11-12.md](PRIVATE-TRAVEL-RECORDS-2026-11-12.md) for the product scope and validation. Detailed operational notes are kept in the owner's private development checkpoint.
+The current sequence follows Colombia galleries, Australia galleries, gallery consistency, route references, conservation and B Corp directories, bird filters, seasonal planning, private albums, image rights, launch checks and the updated business plan.
 
-669 tests, strict TypeScript, production build, ownership/revision checks, hosted synthetic save/reopen, PDF download integrity, signed-out access denial, export checks and cleanup passed. Both public domains serve the release. Physical Safari, narrow authenticated layouts, independent visitor feedback and launch economics remain pending.
+Completed here: five Central Andes and five Eastern Andes landscape photographs, with reviewed locality, photographer attribution and reuse terms. Colombia’s country preview balances both reviewed regions. Unavailable regional galleries retain return controls.
 
-The next numbered task is37:reconstruct the Colombia route from actual trip records. Preserve the independent evidence gates9–11 and22. Never invent visits, receipts, consent, sightings or financial viability. No automatic sharing, imports, messages, payments or bookings were added.
+Names and pronunciation are now a shared display for place and bird records. The first sourced examples are Kumanday and kea. Te Aka’s pronunciation reference opens at its publisher. Preserve spelling and diacritics, distinguish historical attribution, and never invent language, translation or pronunciation.
 
-Keep existing traveller records, private storage, access policies, submitted briefs and old drafts intact. Application rollback must not delete stored data. Read ARCHITECTURE.md and CONTRIBUTING.md before editing. Earlier release history remains in Git and dated notes.
+Next: continue the remaining Colombian regional galleries, then the sequence above. Names and pronunciation continue throughout. See RELEASE-2026-11-12-CULTURAL-NAMES.md for this increment. Later items remain pending. Physical-device and independent visitor checks require actual evidence.
+
+Validation: 674 tests, strict TypeScript, architecture check and production build passed.

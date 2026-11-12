@@ -9,3 +9,9 @@ This increment adds five distinct Central Andes landscapes with source, licence 
 Two name examples begin the shared place and bird display: Kumanday, historically attributed to the Quimbaya by Colombia’s national parks authority, and kea, with a pronunciation reference at Te Aka Māori Dictionary. No audio is copied or generated.
 
 Validation: 673 tests passed, strict TypeScript, architecture check and production build passed. Remaining regions and later sequence items are pending.
+
+## Eastern Andes increment
+
+Five distinct landscapes add Chingaza, El Cocuy, Lake Tota, Sumapaz and Lake Guatavita. Photographer credit, commercial-compatible licence, original file hash, rendition hash and review date are retained for every image. The Colombia preview includes two photographs from each reviewed region. Other regions remain pending.
+
+Validation: 674 tests, strict TypeScript, architecture check and production build passed.
