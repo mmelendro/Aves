@@ -1186,3 +1186,11 @@ body {
 /* Ordinals sit above the place label, retaining the actual geographic anchor. */
 .geographic-map-marker .geographic-map-target.aves-route-ordinal { min-height:28px; min-width:28px; padding:4px; border-radius:50%; background:#0369a1; color:white; border:2px solid white; transform:translate(-50%,calc(-50% - 3rem)); text-align:center; }
 .geographic-map-target.aves-route-ordinal::after { content:""; position:absolute; top:100%; left:calc(50% - 1px); width:2px; height:14px; background:#0369a1; pointer-events:none; }
+
+/* The same map shows a single, bounded transition. Static use stays complete. */
+.aves-journey-location { outline:3px solid #0e7490; outline-offset:3px; }
+.aves-journey-night { background:#16362f!important; color:#fff!important; animation:aves-night-arrive 1.2s ease-out 1; }
+.aves-journey-bead { display:block;width:14px;height:14px;margin:-7px;border:3px solid white;border-radius:50%;background:#0e7490;box-shadow:0 0 0 3px #0e749033; }
+@keyframes aves-night-arrive { from { box-shadow:0 0 0 14px #0e749000; opacity:.45; } to { box-shadow:0 0 0 3px #0e749044; opacity:1; } }
+[data-journey-animation="off"] .aves-journey-target,[data-journey-animation="off"] .aves-journey-night { animation:none; }
+@media(prefers-reduced-motion:reduce) { .aves-journey-night { animation:none; } }

@@ -1,7 +1,10 @@
+import {planningContext} from "@/content/new-zealand-planning-context";
+import {createRoadReferences} from "./island-road-references";
 import {journeyReferenceForStay,type JourneyReferencePoint} from "./journey-reference-points";
 import type { BirdProfile } from "@/content/birds";
 import type { TripDraft, TripArea, TripPlace } from "./island-planning-types";
 export type TripJourneyStep = {
+  transfer?: {from:TripArea;to:TripArea;minutes:number;sourceUrl:string;publisher:string};
   mapPoint?: JourneyReferencePoint;
   id: string;
   day: number;
@@ -68,12 +71,16 @@ export function buildTripJourney(
         `Begin in ${area.name}`,
         "Confirm your arrival point and time. The map highlights the broad planning base, not an airport.",
       );
-    if (day.transferFrom)
+    if (day.transferFrom) {
       add(
         "transfer",
         `Travel from ${areaById.get(day.transferFrom)?.name || "the previous base"} to ${area.name}`,
         "Town-to-town planning sequence. Connectors are not roads; check driving references, local travel and breaks in your daily draft.",
       );
+      const from=areaById.get(day.transferFrom),context=planningContext(draft.input.islandId??"south-island");
+      const road=from&&context?createRoadReferences(context.roads).roadReference(from.id,area.id):null;
+      if(from&&road)steps[steps.length-1].transfer={from,to:area,minutes:road.minutes,sourceUrl:road.url,publisher:road.publisher};
+    }
     const chosen = [day.birdingId, day.extraId].flatMap((id) => {
       const p = placeById.get(id);
       return p ? [p] : [];

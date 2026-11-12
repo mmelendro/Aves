@@ -1,4 +1,5 @@
 "use client";
+import {useJourneyMapMotion} from "@/lib/use-journey-map-motion";
 import {useEffect,useRef,useState} from "react";
 import {marker,divIcon,imageOverlay,polyline,type Map as GeographicMap} from "leaflet";
 import {protectedAreaPalette as palette} from "@/lib/protected-area-palette";
@@ -57,18 +58,11 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     previousLocation.current={latitude,longitude};
     const centre=place?[place.latitude,place.longitude] as[number,number]:park?geographicPoint(park.point[0],park.point[1]):changed&&longitude!==undefined&&latitude!==undefined?[latitude,longitude] as[number,number]:null;
     // Visibility toggles must not move a camera the visitor has already panned.
-    if(centre)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
+    if(centre&&!trip?.journey)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
   },[map,layers.point,layers.park,latitude,longitude]);
   const bases=trip?.bases.join("|")??"";
   const journeyStep=trip?.journey?.islandId==="south-island" ? trip.journey.steps[trip.journey.index] : undefined;
-  const reference=journeyStep?.mapPoint;
-  useEffect(()=>{
-    if(!map||!reference)return;
-    const pin=labelMarker(map,[reference.latitude,reference.longitude],reference.name,undefined,false,"routePane");
-    pin.getElement()?.querySelector("span")?.classList.add("aves-journey-target");
-    map.setView([reference.latitude,reference.longitude],12,{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
-    return()=>{pin.remove()};
-  },[map,reference]);
+
   useEffect(()=>{
     if(!map)return;
     const areas=layers.itinerary?bases.split("|").flatMap(id=>{const a=tripCatalogue.areas.find(a=>a.id===id);return a?[a]:[]}):[];
@@ -83,5 +77,6 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     });
     return()=>{line.remove();markers.forEach(m=>m.remove());};
   },[map,bases,layers.itinerary,journeyStep]);
+  useJourneyMapMotion(map,"south-island");
   return <><GeographicSatelliteMap country="new-zealand" region="south-island" selectRegion={onSelectIsland} onMapReady={setMap}/><p className="px-2 text-[10px] leading-4">Habitat shading: LCDB 2023/24, generalised to about 2 km · DOC conservation 9 November 2026 · Route connectors show base order, not roads.</p></>;
 }

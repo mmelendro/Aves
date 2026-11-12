@@ -11,7 +11,7 @@ export default function TripJourneyControls({
   islandId: string;
 }) {
   const trip = useTripMap(),
-    { update } = useMapLayers();
+    { update,layers } = useMapLayers();
   const journey = trip?.journey?.islandId === islandId ? trip.journey : null;
   const step = journey?.steps[journey.index];
   useEffect(() => {
@@ -53,6 +53,10 @@ export default function TripJourneyControls({
       <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
         {step.mapPoint && (step.kind==="arrival" || step.kind==="departure") ? "Confirm your flight details and timing. The map highlights the selected airport area." : step.note}
       </p>
+      <label className="mt-3 flex min-h-11 items-center gap-2 text-sm text-emerald-950"><input type="checkbox" checked={trip?.journeyMotion??true} onChange={e=>trip?.setJourneyMotion(e.target.checked)}/>Animate journey transitions</label>
+      <p className="text-xs leading-5 text-gray-500">Reduced motion uses static highlights. Steps advance only when you choose. {layers.background!=="satellite"&&"Choose Satellite for geographic location and transfer highlights."}</p>
+      {step.kind==="overnight"&&<p role="status" className="mt-2 text-sm text-emerald-900">Rest overnight, then choose Next step when you are ready. No automatic advance.</p>}
+      {step.transfer&&<p className="mt-2 text-xs leading-5 text-gray-600">Illustrated town-to-town sequence, not a road or live location. About {step.transfer.minutes} minutes driving reference from {step.transfer.publisher}; breaks and local travel are additional. <a href={step.transfer.sourceUrl} {...external} className="underline">Transfer source</a></p>}
       {arrivalReferences(step.baseId,step.kind).length>0&&<label className="mt-3 block text-sm text-emerald-950">Arrival / departure map reference
         <select className={field} value={step.mapPoint?.id??""} onChange={e=>trip?.selectArrivalReference(e.target.value)}>
           <option value="">Town reference · arrival still to choose</option>

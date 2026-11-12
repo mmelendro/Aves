@@ -15,6 +15,8 @@ export type TripJourney = {
 };
 /** Public page-local preview only. It never changes route inputs or private notes. */
 const Context = createContext<{
+  journeyMotion:boolean;
+  setJourneyMotion:(enabled:boolean)=>void;
   bases: string[];
   setBases: (bases: string[]) => void;
   selectedBase: { id: string } | null;
@@ -26,6 +28,7 @@ const Context = createContext<{
   selectArrivalReference:(id:string)=>void;
 } | null>(null);
 export function TripMapProvider({ children }: { children: ReactNode }) {
+  const [journeyMotion,setJourneyMotion]=useState(true);
   const [bases, setBases] = useState<string[]>([]),
     [selectedBase, setSelectedBase] = useState<{ id: string } | null>(null),
     [journey, setJourney] = useState<TripJourney | null>(null);
@@ -60,6 +63,7 @@ export function TripMapProvider({ children }: { children: ReactNode }) {
   return (
     <Context.Provider
       value={{
+        journeyMotion,setJourneyMotion,
         bases,
         setBases,
         selectedBase,

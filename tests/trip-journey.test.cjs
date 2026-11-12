@@ -41,6 +41,14 @@ test('airport references are limited by base and step kind with explicit provena
  assert.equal(arrivalReferences('christchurch','arrival')[0].id,'chc-airport');
  assert.equal(arrivalReferences('christchurch','departure').length,1);
  assert.equal(arrivalReferences('christchurch','overnight').length,0);
- assert.equal(arrivalReferences('auckland','arrival').length,0);
+ assert.equal(arrivalReferences('auckland','arrival')[0].id,'akl-airport');
  const point=arrivalReferences('christchurch','arrival')[0];assert.match(point.scope,/not a terminal door/);assert.ok(point.sourceUrl&&point.coordinateSourceUrl&&point.reviewedAt);
+});
+
+test('North Island property and transfer references retain their bounded source',()=>{
+ const d=n.buildTrip({...n.defaultTripInput,days:3});d.days[0].stayId='trip-ni-ibis-airport';
+ const before=JSON.stringify(d),steps=buildTripJourney(d,n.tripAreas,n.tripPlaces);
+ assert.equal(steps.find(s=>s.kind==='overnight').mapPoint.id,'ibis-akl');
+ const transfer=steps.find(s=>s.kind==='transfer');assert.equal(transfer.transfer.minutes,95);assert.equal(transfer.transfer.from.id,'auckland');assert.equal(transfer.transfer.to.id,'hamilton');assert.match(transfer.transfer.sourceUrl,/gorentals/);
+ assert.equal(steps[0].mapPoint,undefined);assert.equal(JSON.stringify(d),before);
 });

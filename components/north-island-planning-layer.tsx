@@ -1,4 +1,5 @@
 "use client";
+import {useJourneyMapMotion} from "@/lib/use-journey-map-motion";
 import { useEffect, useRef } from "react";
 import { marker, divIcon, polyline, type Map as GeographicMap } from "leaflet";
 import { northIslandPlanner as planner } from "@/lib/island-planners";
@@ -91,13 +92,14 @@ export default function NorthIslandPlanningLayer({
     const a = planner.tripAreaById.get(
       journeyStep?.baseId || selection?.id || "",
     );
-    if (a)
+    if (a && !journeyStep)
       map.setView([a.latitude, a.longitude], 9, {
         animate:
           Boolean(journeyStep) &&
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
       });
   }, [map, selection]);
+  useJourneyMapMotion(map,"north-island");
   return (
     <div className="px-2 py-1 text-xs leading-5 text-emerald-950">
       <button
