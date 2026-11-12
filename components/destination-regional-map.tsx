@@ -50,10 +50,10 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
             <ColombiaRegionTargets onSelect={onSelectRegion} matchingRegionIds={matchingRegionIds}/>
       {colombiaMapMarkers.map(region => {
         const selected = highlighted(region.slug)
-        const className = `absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-800/40 text-[10px] font-semibold hover:z-10 hover:bg-emerald-800 hover:text-white focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-10 border-transparent" : "bg-white text-emerald-950"}`
+        const className = `absolute flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-800/40 text-[10px] font-semibold hover:z-10 hover:bg-emerald-800 hover:text-white focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-10 border-transparent" : "bg-white text-emerald-950"}`
         const props = { style: { left: `${region.x}%`, top: `${region.y}%` }, className, title: region.name }
-        // Whole-region links above own activation; pins are visual labels only.
-        return <span key={region.slug} {...props} aria-hidden="true" className={`${className} pointer-events-none`}>{selected ? <MapFeatherMarker size={28}/> : <span className="h-2 w-2 rounded-full bg-emerald-700"/>}</span>
+        return onSelectRegion ? <button key={region.slug} type="button" {...props} aria-label={`Preview ${region.name} birds`} aria-pressed={selected} onClick={() => onSelectRegion(region.slug)}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</button>
+          : <a key={region.slug} {...props} href={`/regions/${region.slug}`} aria-label={`Explore ${placeInSentence(region.name)}`}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</a>
       })}
       </div>
     </div>

@@ -15,7 +15,7 @@ for(const path of pages) test(`public accessibility and reflow: ${path}`, async 
   await expect(page.getByRole("heading",{level:1})).toHaveCount(1)
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1)
   const scan=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa","wcag22aa"]).analyze()
-  expect(scan.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))).toEqual([])
+  expect(scan.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,detail:n.failureSummary}))}))).toEqual([])
 })
 test('keyboard skip link reaches main and map dismissal restores focus',async({page})=>{
   await page.goto('/')
@@ -66,7 +66,7 @@ test('desktop accessibility audit covers every public sitemap route',async({page
   for(const path of routes){
     await page.goto(path)
     const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()
-    findings.push(...result.violations.map(v=>({path,id:v.id,impact:v.impact,targets:v.nodes.slice(0,10).map(n=>n.target)})))
+    findings.push(...result.violations.map(v=>({path,id:v.id,impact:v.impact,targets:v.nodes.slice(0,10).map(n=>({target:n.target,detail:n.failureSummary}))})))
   }
   expect(findings).toEqual([])
 })
