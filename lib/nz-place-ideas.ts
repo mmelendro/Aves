@@ -1,3 +1,4 @@
+import {placeGalleryPhotos} from "@/lib/place-gallery"
 import northCatalogue from "@/content/north-island-trip-catalogue.json"
 import catalogue from "@/content/south-island-trip-catalogue.json"
 import pilot from "@/content/bcorp-south-island-pilot.json"
@@ -10,7 +11,9 @@ export const nzPlanningPlaces = [
   { id: "southern-forest", label: "Fiordland" },
   { id: "coast", label: "Otago & the Catlins" },
 ] as const
-export const nzPublicPlanningPlaces = [...nzPlanningPlaces, ...publicPlaces.points.map(({id,name})=>({id,label:name})), ...pilot.records.map(({id,name})=>({id,label:name})), ...catalogue.places.map(({id,name})=>({id,label:name})), ...northCatalogue.places.map(({id,name})=>({id,label:name}))]
+export const nzLandscapeIdeas = placeGalleryPhotos.filter(photo=>photo.countryId==="new-zealand").map(photo=>({id:`landscape:${photo.id}`,label:photo.caption,regionId:photo.regionId,sourceUrl:photo.sourceUrl,creator:photo.creator,licence:photo.licence}))
+const landscapes=new Map(nzLandscapeIdeas.map(photo=>[photo.id,photo]))
+export const nzPublicPlanningPlaces = [...nzLandscapeIdeas,...nzPlanningPlaces, ...publicPlaces.points.map(({id,name})=>({id,label:name})), ...pilot.records.map(({id,name})=>({id,label:name})), ...catalogue.places.map(({id,name})=>({id,label:name})), ...northCatalogue.places.map(({id,name})=>({id,label:name}))]
 const names = new Map<string, string>(nzPublicPlanningPlaces.map(place => [place.id, place.label]))
 export const NZ_PLACE_IDEAS_EVENT = "aves:nz-place-ideas-changed"
 export const NZ_PLACE_IDEAS_KEY = "aves:nz-place-ideas:v1"
@@ -35,7 +38,10 @@ export function writeNzPlaceIdeas(storage: Pick<Storage,"setItem" | "removeItem"
     return true
   } catch { return false }
 }
-const lineFor = (id: string) => `Place idea: ${names.get(id)}`
+const lineFor = (id: string) => {
+  const photo=landscapes.get(id)
+  return photo ? `Landscape idea: ${photo.label}. Photo: ${photo.creator}; ${photo.licence}. Source: ${photo.sourceUrl}` : `Place idea: ${names.get(id)}`
+}
 /** Plain public labels can be copied when a browser cannot carry the tab basket. */
 export function nzPlaceIdeaText(ids: string[]) {
   return validNzPlaceIdeas(ids) ? ids.map(lineFor).join("\n") : ""

@@ -61,6 +61,12 @@ export default function TripDayCard({
           ? ` · ${tripDayDate(draft.input, index)}`
           : ""}
       </h4>
+      {(index === 0 || index === draft.days.length - 1) && (
+        <div className="space-y-2 rounded-xl border border-amber-100 bg-amber-50/50 p-3 text-sm leading-6 text-emerald-950">
+          {index === 0 && <p>Arrival timing is open. Check your actual arrival, local travel and rest before committing to this day’s outings.</p>}
+          {index === draft.days.length - 1 && <p>Departure timing is open. Allow for onward travel, check-in and returning transport before keeping this day’s outing.</p>}
+        </div>
+      )}
       <details className="rounded-xl border border-emerald-100 p-3">
         <summary className="min-h-11 cursor-pointer font-medium text-emerald-950">
           Daily pace review · {workload.label}

@@ -52,3 +52,11 @@ test('North Island property and transfer references retain their bounded source'
  const transfer=steps.find(s=>s.kind==='transfer');assert.equal(transfer.transfer.minutes,95);assert.equal(transfer.transfer.from.id,'auckland');assert.equal(transfer.transfer.to.id,'hamilton');assert.match(transfer.transfer.sourceUrl,/gorentals/);
  assert.equal(steps[0].mapPoint,undefined);assert.equal(JSON.stringify(d),before);
 });
+
+for(const planner of [n,islandPlanner('south-island')])test(`${planner.context.name} retains arrival and departure uncertainty in the private handoff`,()=>{
+ const d=planner.buildTrip({...planner.defaultTripInput,days:5}),before=JSON.stringify(d);
+ assert.ok(planner.tripDayWorkload(d,0).notes.some(note=>note.startsWith('Arrival day:')));
+ assert.ok(planner.tripDayWorkload(d,d.days.length-1).notes.some(note=>note.startsWith('Departure day:')));
+ assert.ok(!planner.tripDayWorkload(d,1).notes.some(note=>note.startsWith('Arrival day:')));
+ const text=planner.tripDraftText(d);assert.match(text,/Arrival day:/);assert.match(text,/Departure day:/);assert.equal(JSON.stringify(d),before);
+});

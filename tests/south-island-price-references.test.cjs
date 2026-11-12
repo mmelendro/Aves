@@ -52,3 +52,13 @@ test('a dated access conflict stays visible beside its selected reference',()=>{
  const tree=componentHarness('components/trip-planner/trip-price-reference.tsx','default',{placeId:'trip-orokonui',date:'2027-01-19'},{context:()=>p.southIslandPlanner}).render()
  assert.ok(nodes(tree).some(n=>n.type==='p'&&JSON.stringify(n).includes('Date does not match published opening days')))
 })
+
+test('mixed room sharing keeps per-person units and unsupported transport units remain unknown',()=>{
+ assert.equal(r.referenceAmounts('trip-apam',input({adults:3,rooms:2}),'',now).low,90);
+ assert.equal(r.referenceAmounts('trip-hanmer',input({adults:3,rooms:2}),'',now).low,43);
+ const {createPriceReferences}=load('lib/island-price-references.ts');
+ const context=p.southIslandPlanner.context,existing=r.priceReferences[0];
+ const unsupported=createPriceReferences({...context,prices:{references:[{...existing,basis:'vehicle-day',category:'transport'}]}}).referenceAmounts(existing.placeId,input(),'',now);
+ assert.equal(unsupported.low,null);assert.match(unsupported.reason,/unit needs a quote/);
+ assert.equal(r.referenceAmounts('trip-tranzalpine',input(),'',now).low,null,'an unpriced rail connection is not free');
+});

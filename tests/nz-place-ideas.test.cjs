@@ -61,3 +61,17 @@ test('café and guided tour ideas preserve their public names through note impor
  assert.match(result.message,/Place idea: Wild Kiwi Christchurch departure/)
  assert.equal(p.mergeNzPlaceNotes(result.message,ids).message,result.message)
 })
+
+test('selected gallery references carry creator, licence and source into private notes without replacing existing text',()=>{
+ assert.equal(p.nzLandscapeIdeas.length,30);
+ const photo=p.nzLandscapeIdeas.find(p=>p.regionId==='north-island'),original='My existing private travel notes.';
+ const result=p.mergeNzPlaceNotes(original,[photo.id]);assert.equal(result.error,undefined);assert.ok(result.message.startsWith(original));assert.ok(result.message.includes(photo.creator));assert.ok(result.message.includes(photo.licence));assert.ok(result.message.includes(photo.sourceUrl));
+ assert.equal(p.mergeNzPlaceNotes(result.message,[photo.id]).message,result.message);
+ assert.equal(p.validNzPlaceIdeas(['landscape:/images/private-receipt.jpg']),false);
+});
+test('landscape ideas are consumed only from exact server-confirmed note text',()=>{
+ const s=storage(),photo=p.nzLandscapeIdeas[0];p.writeNzPlaceIdeas(s,[photo.id,'coast']);
+ p.consumeSavedNzPlaceIdeas(s,'Unrelated saved notes');assert.ok(p.readNzPlaceIdeas(s).includes(photo.id));
+ p.consumeSavedNzPlaceIdeas(s,p.nzPlaceIdeaText([photo.id]));assert.deepEqual(p.readNzPlaceIdeas(s),['coast']);
+ const full='x'.repeat(4995);assert.equal(p.mergeNzPlaceNotes(full,[photo.id]).message,full);
+});

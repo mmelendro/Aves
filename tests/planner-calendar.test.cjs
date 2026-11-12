@@ -6,7 +6,7 @@ test('Orokonui is offered only for a reviewed matching day; old guest selections
  assert.equal(s.placeFitsCalendar(place,input,0),false);
  assert.equal(s.buildTrip(input).days[0].birdingId==='trip-orokonui',false);
  const legacy=s.buildTrip(input);legacy.days[0].birdingId=place.id;legacy.days[0].extraId='';
- assert.equal(s.validTripDraft(legacy),true);assert.match(s.tripDraftText(legacy),/Day 1 calendar review/);assert.match(s.tripDayWorkload(legacy,0).notes.join(' '),/selected date conflicts/);
+ assert.equal(s.validTripDraft(legacy),true);assert.match(s.tripDraftText(legacy),/Day 1 timing\/calendar review/);assert.match(s.tripDayWorkload(legacy,0).notes.join(' '),/selected date conflicts/);
  const m=new Map(),storage={setItem:(k,v)=>m.set(k,v),getItem:k=>m.get(k)||null,removeItem:k=>m.delete(k)};
  assert.equal(s.writeTripDraft(storage,legacy),true);assert.equal(s.readTripDraft(storage).days[0].birdingId,place.id);
  assert.equal(s.placeFitsCalendar(place,{...input,departureDate:'2026-11-19'},0),true);

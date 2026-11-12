@@ -64,6 +64,6 @@ export default function SouthIslandPlacesExplorer() {
           <p className="mt-5 text-xs leading-5">Photo: {photo.creator}. <a href={photo.licenceUrl} target="_blank" rel="noreferrer" className="underline">{photo.licence}</a>. {photo.modifications}</p>
         </div>}
       </div>
-    </section></ExpandableMedia><NzPlaceIdeas placeId={place.id} /></>
+    </section></ExpandableMedia><NzPlaceIdeas placeId={`landscape:${photo.src}`} /></>
   return <div className="mx-auto max-w-4xl">{media}<nav aria-label="Choose a South Island landscape" className="mt-4 flex flex-wrap gap-3">{southIslandPlaceContexts.map(item => <button key={item.id} type="button" aria-pressed={place.id === item.id} className="min-h-11 rounded-full border border-emerald-200 px-4 text-sm font-semibold text-emerald-800 aria-pressed:bg-emerald-100" onClick={() => showSlide(slides.findIndex(slide => slide.place.id === item.id))}>{item.label}</button>)}</nav><a href="#south-island-bird-map" className="mt-4 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Show these places on the map above</a></div>
 }

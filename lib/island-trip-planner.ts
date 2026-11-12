@@ -648,6 +648,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       draft.input.maxDrivingMinutes !== undefined &&
       minutes > draft.input.maxDrivingMinutes;
     const notes: string[] = [];
+    if(index===0)notes.push("Arrival day: actual arrival time is open. Allow for arrival formalities, collecting transport, local travel and rest before choosing an outing. A full available day is not assumed.");
     if (day.transferFrom)
       notes.push(
         minutes === null
@@ -697,9 +698,9 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       notes.push(
         "Activity duration, local travel and weather suitability still need review.",
       );
-    if (index === draft.days.length - 1 && draft.input.endCity !== "flexible")
+    if (index === draft.days.length - 1)
       notes.push(
-        "Allow for your actual departure time and check-in. This draft does not confirm a flight or ferry connection.",
+        "Departure day: allow for actual departure time, check-in, local travel and returning transport. This draft does not confirm a flight or ferry connection.",
       );
     return { label, minutes, abovePreference, notes };
   }
@@ -754,9 +755,9 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
           .notes.filter(
             (note) =>
               note.includes("selected date conflicts") ||
-              note.includes("choose a date to check"),
+              note.includes("choose a date to check") || note.startsWith("Arrival day:") || note.startsWith("Departure day:"),
           )
-          .map((note) => `Day ${i + 1} calendar review: ${note}`),
+          .map((note) => `Day ${i + 1} timing/calendar review: ${note}`),
       ),
       ...tripPriceNotes(draft),
       coverage.unmatched.length

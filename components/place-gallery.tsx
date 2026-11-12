@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { galleryPhotos, type GalleryPhoto } from "@/lib/place-gallery";
 import type { DestinationRegion } from "@/content/destination-regions";
 import { CarouselButton, CarouselCount } from "./carousel-controls";
+import NzPlaceIdeas from "./nz-place-ideas";
 import PhotoCredit from "./photo-credit";
 import PhotoZoom from "./photo-zoom";
 import ExpandableMedia from "./expandable-media";
@@ -42,6 +43,7 @@ export default function PlaceGallery({countryId, countryName, regionId, regions,
         <div className={styles.caption} aria-live="polite"><p className="text-xs">{region?.name ?? photo.regionId}</p><h3 className="text-xl font-medium">{photo.placeName}</h3><p className="mt-1 text-xs">{photo.caption}</p><PhotoCredit key={photo.src} creator={photo.creator} sourceUrl={photo.sourceUrl} licence={photo.licence} licenceUrl={photo.licenceUrl} modifications={photo.modifications}/></div>
       </div>
     </section></ExpandableMedia>
+    {countryId==="new-zealand"&&<NzPlaceIdeas placeId={`landscape:${photo.id}`} regionId={photo.regionId}/>}
     <p className="mt-3 text-xs leading-6 text-gray-600">{regionId ? `${photos.length} reviewed ${photos.length === 1 ? "photograph" : "photographs"} in this regional collection.` : "A balanced preview from each island’s reviewed collection. More regional photographs are being added."} Map preview: {region?.name}. <a href={mapHref} className="ml-2 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Show on the map above</a> <button type="button" className="ml-2 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange("")}>All regions</button>{region && !regionId && <button type="button" className="ml-4 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange(photo.regionId)}>Explore {region.name}</button>}</p>
   </section>;
 }

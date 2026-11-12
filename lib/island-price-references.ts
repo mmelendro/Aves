@@ -49,6 +49,8 @@ export function createPriceReferences(context: IslandPlanningContext) {
     });
     if (ref.basis === "quote-required")
       return blocked("Named room or product needs a quote");
+    if (!["room-night","adult-entry"].includes(ref.basis))
+      return blocked("Reference unit needs a quote; no per-person conversion applied");
     if (input.currency !== ref.currency)
       return blocked("Currency differs; no conversion applied");
     if (now - Date.parse(ref.reviewedAt + "T00:00:00Z") > 90 * 86400000)
