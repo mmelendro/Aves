@@ -161,7 +161,7 @@ export function ContactFormSection({
   ]
 
   return localizeHome((
-    <section className={`bg-gradient-to-br from-emerald-50 to-blue-50 py-16 lg:py-24 ${className}`}>
+    <section id="inquiry" className={`bg-gradient-to-br from-emerald-50 to-blue-50 py-16 lg:py-24 ${className}`}>
       <div className="container mx-auto px-4">
         {showTitle && (
           <div className="text-center mb-12">

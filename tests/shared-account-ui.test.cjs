@@ -85,7 +85,7 @@ test("support and New Zealand messages retain their purpose without creating a t
     const harness = componentHarness("features/australia/components/contact-form-section.tsx", "ContactFormSection", { initialTopic: topic, variant: "contact-page" }, {
       fetch: async (url, options) => {
         calls.push({ url, body: JSON.parse(options.body) })
-        return { ok: true, json: async () => ({ success: true, status: "stored", intent: "inquiry", country: "australia" }) }
+        return { ok: true, json: async () => ({ success: true, status: "stored", intent: "inquiry", country: topic === "new-zealand" ? "new-zealand" : "australia" }) }
       },
     })
     const tree = harness.render()
@@ -97,9 +97,27 @@ test("support and New Zealand messages retain their purpose without creating a t
     assert.equal(calls[0].body.intent, "inquiry")
     assert.equal(calls[0].body.updates, false)
     assert.equal(calls[0].body.region, "")
-    assert.equal(calls[0].body.country, undefined)
+    assert.equal(calls[0].body.country, topic === "new-zealand" ? "new-zealand" : "australia")
     assert.equal(calls[0].body.message, `Request: ${subject}\n\nPlease help with my request`)
     assert.match(JSON.stringify(harness.render()), /Your message has been saved/)
+  }
+})
+
+test("New Zealand context survives submission and a foreign-country receipt cannot clear the message", async () => {
+  for (const receiptCountry of [undefined, "australia", "new-zealand"]) {
+    let payload, reset = false
+    const harness = componentHarness("features/australia/components/contact-form-section.tsx", "ContactFormSection", { initialTopic: "new-zealand", initialRegion: "north-island" }, {
+      fetch: async (_url, options) => {
+        payload = JSON.parse(options.body)
+        return { ok: true, json: async () => ({ success: true, status: "stored", intent: "inquiry", country: receiptCountry }) }
+      },
+    })
+    await find(harness.render(), node => node.type === "form").props.onSubmit({ preventDefault() {}, currentTarget: { values: { name: "Visitor", email: "visitor@example.com", message: "My North Island idea" }, reset() { reset = true } } })
+    assert.equal(payload.country, "new-zealand")
+    assert.equal(payload.region, "north-island")
+    assert.equal(payload.updates, false)
+    assert.equal(reset, receiptCountry === "new-zealand")
+    if (!reset) assert.match(JSON.stringify(harness.render()), /could not be confirmed/)
   }
 })
 

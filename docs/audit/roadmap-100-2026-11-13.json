@@ -279,7 +279,7 @@
       "previous": [
         2
       ],
-      "status": "Open",
+      "status": "Published; 704 unit/component tests and 61 browser checks passed",
       "id": 26
     },
     {
@@ -289,7 +289,7 @@
       "previous": [
         4
       ],
-      "status": "Open",
+      "status": "Published; 704 unit/component tests and 61 browser checks passed",
       "id": 27
     },
     {
@@ -299,7 +299,7 @@
       "previous": [
         5
       ],
-      "status": "Open",
+      "status": "Published; 704 unit/component tests and 61 browser checks passed",
       "id": 28
     },
     {
@@ -309,7 +309,7 @@
       "previous": [
         6
       ],
-      "status": "Open",
+      "status": "Implemented; cross-country browser verification pending",
       "id": 29
     },
     {
@@ -319,7 +319,7 @@
       "previous": [
         7
       ],
-      "status": "Open",
+      "status": "Implemented; redundant pin targets removed, shared-selection browser verification pending",
       "id": 30
     },
     {
@@ -329,7 +329,7 @@
       "previous": [
         8
       ],
-      "status": "Open",
+      "status": "Implemented; enquiry context and receipt tests passed, browser verification pending",
       "id": 31
     },
     {
@@ -1038,5 +1038,30 @@
     "tests": 704,
     "publicRoutesPassed": 78,
     "date": "2026-11-13"
+  },
+  "activeScope": {
+    "from": 26,
+    "through": 78,
+    "requested": "2026-11-12",
+    "currentBatch": [
+      29,
+      30,
+      31
+    ],
+    "publishedThrough": 28
+  },
+  "accessibilityRelease": {
+    "runtime": "edffc49aa462045693a5839d8ef08859764f4a28",
+    "deployment": "dpl_HZwyZT4z835C9eNxEvo4pgWvhrNM",
+    "ci": "https://github.com/mmelendro/Aves/actions/runs/43278342669",
+    "unitTests": 704,
+    "browserPassed": 61,
+    "browserSkipped": 5,
+    "sitemapAccessibilityRoutes": 78,
+    "domains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "rollback": "dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3"
   }
 }

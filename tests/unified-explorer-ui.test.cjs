@@ -46,7 +46,9 @@ test('each country and region selection updates the same in-place map, photo col
    const panel=find(h.render(),n=>n.props['data-explorer-content'])
    assert.ok(panel.props['data-explorer-content'].endsWith(':'+option.props.value))
    const contact=find(panel,n=>n.type==='a'&&n.props.href?.includes('/contact?'))
-   assert.equal(contact.props.href.startsWith('/australia/contact?'),country!=='Colombia')
+   const enquiry=new URL(contact.props.href,'https://aves.bio')
+   assert.equal(enquiry.pathname,'/contact')
+   assert.equal(enquiry.searchParams.get('country'),({'Colombia':'colombia','Australia':'australia','New Zealand':'new-zealand'})[country])
    if(country==='New Zealand')assert.match(contact.props.href,/topic=new-zealand/)
    assert.ok(contact.props.href.includes('region='+option.props.value))
    // Select again never navigates away from the interactive explorer.

@@ -5,6 +5,8 @@
  */
 "use client"
 
+import { enquiryHref } from "@/lib/enquiry-entry"
+
 import {useTripMap} from "./trip-planner/trip-map-context"
 import {journeyBirdProfiles} from "@/lib/trip-journey"
 import TripJourneyControls, {TripJourneyMapNavigation} from "./trip-planner/trip-journey-controls"
@@ -98,7 +100,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const matchingRegionIds=regions.filter(item=>filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters).length>0).map(item=>item.id)
   const matchingCountryIds=destinations.filter(item=>filterConservationBirds(getDestinationRegionBirds(item.id),filters).length>0).map(item=>item.id)
   useEffect(()=>{onScopeChange?.(zoomed ? destination.id : "",region?.id ?? "")},[zoomed,destination.id,region?.id,onScopeChange])
-  const contactHref = destination.id === "new-zealand" ? `/australia/contact?topic=new-zealand${region ? `&region=${region.id}` : ""}#inquiry` : `${destination.id === "australia" ? "/australia" : ""}/contact?country=${destination.id}${region ? `&region=${region.id}` : ""}`
+  const contactHref = enquiryHref(destination.id, region?.id)
   const galleryRegion = zoomed && !southIsland ? (galleryPhoto?.countryId === destination.id ? galleryPhoto.regionId : galleryPhotos(destination.id,regionId)[0]?.regionId ?? "") : ""
   const highlightedRegions = region ? [region.id] : showBirdAreas ? getBirdRegionIds(destination?.id, birdId || birds[0]?.id) : galleryRegion ? [galleryRegion] : []
   useEffect(()=>{ if(destination) publish(zoomed ? {country:destination.id,regionId:region?.id} : {country:"global"}) },[destination,region,zoomed,publish])

@@ -141,27 +141,27 @@ These are not invented requests for approval. Much of this work can continue aut
 
 26. Audit accessibility throughout
 
-   Acceptance: Review keyboard journeys, contrast, zoom and screen-reader names beyond the landmark repairs in this release. Previous audit IDs: 2. Status: Open.
+   Acceptance: Review keyboard journeys, contrast, zoom and screen-reader names beyond the landmark repairs in this release. Previous audit IDs: 2. Status: Published; 704 unit/component tests and 61 browser checks passed.
 
 27. Automate responsive browser checks
 
-   Acceptance: Cover narrow phones, tablets, desktop, Firefox and Chromium without treating emulation as physical iPhone evidence. Previous audit IDs: 4. Status: Open.
+   Acceptance: Cover narrow phones, tablets, desktop, Firefox and Chromium without treating emulation as physical iPhone evidence. Previous audit IDs: 4. Status: Published; 704 unit/component tests and 61 browser checks passed.
 
 28. Protect mobile map space
 
-   Acceptance: Keep maps usable, controls reachable and the return path visible when text, credits or images open. Previous audit IDs: 5. Status: Open.
+   Acceptance: Keep maps usable, controls reachable and the return path visible when text, credits or images open. Previous audit IDs: 5. Status: Published; 704 unit/component tests and 61 browser checks passed.
 
 29. Complete deep-link, refresh and Back/Forward journey coverage
 
-   Acceptance: Mounted-route history is repaired. Add cross-country browser journey coverage and verify restored titles, copy, selection and return paths. Previous audit IDs: 6. Status: Open.
+   Acceptance: Mounted-route history is repaired. Add cross-country browser journey coverage and verify restored titles, copy, selection and return paths. Previous audit IDs: 6. Status: Implemented; cross-country browser verification pending.
 
 30. Simplify overlapping navigation controls
 
-   Acceptance: Reduce competing region, habitat and gallery controls while preserving their shared selection. Previous audit IDs: 7. Status: Open.
+   Acceptance: Reduce competing region, habitat and gallery controls while preserving their shared selection. Previous audit IDs: 7. Status: Implemented; redundant pin targets removed, shared-selection browser verification pending.
 
 31. Unify enquiry entry points
 
-   Acceptance: Preserve destination, region and intent through global, Colombian, Australian and New Zealand contact journeys. Previous audit IDs: 8. Status: Open.
+   Acceptance: Preserve destination, region and intent through global, Colombian, Australian and New Zealand contact journeys. Previous audit IDs: 8. Status: Implemented; enquiry context and receipt tests passed, browser verification pending.
 
 32. Simplify saving and importing choices
 
@@ -476,3 +476,11 @@ The 25 immediate, input-free improvements in the 100-item roadmap are published 
 704 tests pass on declared Node 22.23.5 (and the local Node 24 runner). TypeScript, production build, zero-error lint and catalogue split checks pass. There are 34 pre-existing lint warnings. The live read-only public HTTP audit passes all 78 routes with no failures in its status, main/H1 landmark, missing-alt, local-anchor or duplicate-ID checks. The browser confirms `offset=99999` now shows Colombia entries 1921 to 1945 rather than an empty page. Production HTTP evidence: `docs/audit/public-http-production-2026-11-13.json`.
 
 Rollback for both domains: `dpl_AZhmj9YyGNkoFqQwXc8fLUjRL5dd`, runtime `fd1c588b40f55b36f086382f769737517428028d`. No database changes, private fixture cleanup, customer writes or outbound messages were made. Physical Safari, signed-in save acceptance and financial validation remain open. The roadmap retains 75 further improvements; publication of category A is not completion of the whole queue.
+
+## Accessibility release and continued scope, 13 November 2026 Sydney
+
+The owner extended the active instruction to items 26 through 78. Items 26 to 28 are published on both custom domains from `edffc49aa462045693a5839d8ef08859764f4a28`, deployment `dpl_HZwyZT4z835C9eNxEvo4pgWvhrNM`. [CI evidence](https://github.com/mmelendro/Aves/actions/runs/43278342669): 704 unit/component tests, lint, TypeScript, production build and 61 executed browser checks pass; five duplicate sitemap scans are deliberately skipped. The desktop scan covers all 78 public sitemap routes. Keyboard, modal dismissal, focus return, narrow/landscape layouts and 200% CSS text reflow pass across the declared projects. This is automated coverage, not physical Safari or screen-reader certification.
+
+The source fixes shared contrast, named form/photo controls, underlines, target size and obstruction. Colombian map shapes now own each region's named activation area; pins are decorative, avoiding overlapping duplicate focus stops while retaining preview, direct links, selection, filters and geometry. Rollback for both domains is `dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3`. No database or customer records were changed.
+
+Items 29 to 31 are in verification: cross-country refresh/history journeys, connected map/gallery state and a common enquiry context. New Zealand enquiry regions now survive through the receiving form and country-specific receipt validation. Do not treat their implementation as publication before the expanded browser run and release checks pass.
