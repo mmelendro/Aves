@@ -51,7 +51,7 @@ export default function TripJourneyControls({
         </button>
       </div>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-        {step.note}
+        {step.mapPoint && (step.kind==="arrival" || step.kind==="departure") ? "Confirm your flight details and timing. The map highlights the selected airport area." : step.note}
       </p>
       {arrivalReferences(step.baseId,step.kind).length>0&&<label className="mt-3 block text-sm text-emerald-950">Arrival / departure map reference
         <select className={field} value={step.mapPoint?.id??""} onChange={e=>trip?.selectArrivalReference(e.target.value)}>
