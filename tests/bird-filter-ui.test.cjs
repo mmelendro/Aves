@@ -25,7 +25,7 @@ test('the unified explorer uses the filtered set for map areas, bird cue, carous
  '@/components/bird-discovery-context':{BirdDiscoveryContext:{Provider:'BirdProvider'}},
  '@/components/resizable-discovery-pair':{__esModule:true,default:'Pair'},
  '@/components/destination-card-media':{__esModule:true,default:'Media'},
- '@/components/destination-regional-map':{__esModule:true,default:'RegionalMap'},
+ '@/components/deferred-country-map':{__esModule:true,default:'RegionalMap'},
  }
  const h=componentHarness('components/homepage-destination-explorer.tsx','HomepageDestinationExplorerCore',{map:'World',initialCountryId:'australia'},{mocks})
  const tree=h.render(),pair=find(tree,n=>n.type==='Pair'),media=pair.props.media.props.children

@@ -6,13 +6,13 @@ const mocks={
  './colombia-home-language':{useColombiaHomeCopy:()=>tree=>tree},
  './south-island-places-explorer':{__esModule:true,default:'PlacesMedia'},
  './south-island-habitat-context':{__esModule:true,default:'HabitatProvider',SouthIslandHabitatContext:'Habitat'},
- './south-island-ecosystem-map':{__esModule:true,default:'SouthIslandMap'},
+ './deferred-south-island-map':{__esModule:true,default:'SouthIslandMap'},
  './map-viewer':{MapViewer:'MapViewer'},
  '@/components/destination-selection-context':{DestinationSelectionContext:{Provider:'DestinationProvider'}},
  '@/components/bird-discovery-context':{BirdDiscoveryContext:{Provider:'BirdProvider'}},
  '@/components/resizable-discovery-pair':{__esModule:true,default:'Pair'},
  '@/components/destination-card-media':{__esModule:true,default:'Media'},
- '@/components/destination-regional-map':{__esModule:true,default:'RegionalMap'},
+ '@/components/deferred-country-map':{__esModule:true,default:'RegionalMap'},
  './homepage-destination-explorer.module.css':{__esModule:true,default:{}},
 }
 function harness(props,overrides={}){return componentHarness('components/homepage-destination-explorer.tsx','HomepageDestinationExplorerCore',{map:'World geometry',...props},{mocks,...overrides})}
@@ -92,7 +92,7 @@ test('reciprocal map and bird thumbnails follow every selected region and carous
    find(pair(h).props.map,n=>n.type==='select').props.onChange({target:{value:option.props.value}})
    const cue=pair(h).props.mapCue
    assert.equal(cue.label,option.props.children)
-   assert.ok(cue.selectedPath?.startsWith('M'))
+   assert.match(readFileSync('public'+cue.image,'utf8'),new RegExp('data-selected-region="'+option.props.value+'"'))
    assert.match(readFileSync('public'+cue.image,'utf8'),/^<svg/)
    const birds=pair(h).props.media.props.children.props.birds
    assert.equal(pair(h).props.birdCue.id,birds[0].id)
@@ -100,7 +100,7 @@ test('reciprocal map and bird thumbnails follow every selected region and carous
    find(h.render(),n=>n.type==='BirdProvider').props.value(last)
    assert.equal(pair(h).props.birdCue.id,last.id)
    assert.equal(pair(h).props.birdCue.image,last.image)
-   assert.equal(pair(h).props.mapCue.selectedPath,cue.selectedPath,'carousel changes retain chosen map scope')
+   assert.equal(pair(h).props.mapCue.image,cue.image,'carousel changes retain chosen map scope')
   }
  }
 })

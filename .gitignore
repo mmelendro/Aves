@@ -34,3 +34,7 @@ __pycache__/
 # Isolated browser test outputs
 /test-results/
 /playwright-report/
+
+# Reproducible public renditions are emitted by the checked build recipes.
+/public/images/renditions/
+/public/images/map-cues/*-*.svg

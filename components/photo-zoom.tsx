@@ -57,6 +57,7 @@ export default function PhotoZoom({ children, label }: { children: ReactNode; la
         else if (["+", "=", "-", "Home"].includes(event.key)) { event.preventDefault(); event.stopPropagation(); if (event.key === "Home") reset(); else zoom(event.key === "-" ? 1 / 1.25 : 1.25) }
       }}
       onPointerDown={event => {
+        if ((event.target as HTMLElement).closest("button, a, input, select, textarea")) return
         if (!active || (event.pointerType === "mouse" && event.button !== 0) || pointers.current.size >= 2) return
         event.stopPropagation()
         const rect = event.currentTarget.getBoundingClientRect()

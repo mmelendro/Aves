@@ -1,22 +1,15 @@
-/** Small map-side previews reuse the same reviewed geometry as the explorer. */
-import { australiaMapStates, australiaMapViewBox } from "@/content/global-australian-map"
-import nz from "@/content/new-zealand-map.json"
-import boundaries from "@/content/colombia-planning-boundaries.json"
-import { colombiaMapMarkers } from "@/content/colombia-map-markers"
+import data from "@/content/guide-map-cues.json"
 
-export type GuideMapCue = { label: string; image: string; viewBox: string; selectedPath?: string; point?: readonly [number, number] }
+export type GuideMapCue = { label: string; image: string; viewBox: string }
+export const mapCueSources = data.sources
+const cues: Record<string, GuideMapCue> = data.cues
+
+/** Small pre-generated SVGs retain the exact reviewed regional highlight.
+ * Importing a thumbnail must never import every country's interactive geometry.
+ * Regenerate with scripts/generate-guide-map-cues.cjs after geometry changes. */
 export function guideMapCue(country?: string, regionId?: string, regionLabel?: string): GuideMapCue {
-  if (country === "australia") {
-    const selected = australiaMapStates.find(state => state.regionId === regionId)
-    return { label: regionLabel || selected?.name || "Australia", image:"/images/map-cues/australia.svg", viewBox:australiaMapViewBox, selectedPath:selected?.path, point:selected?.label }
-  }
-  if (country === "new-zealand") {
-    const selected = nz.islands.find(island => island.id === regionId)
-    return { label:regionLabel || selected?.label || "New Zealand", image:"/images/map-cues/new-zealand.svg", viewBox:nz.viewBox, selectedPath:selected?.paths.join(" ") }
-  }
-  if (country === "colombia") {
-    const marker = colombiaMapMarkers.find(region => region.slug === regionId)
-    return { label:regionLabel || marker?.name || "Colombia", image:"/images/map-cues/colombia.svg", viewBox:boundaries.viewBox, selectedPath:boundaries.regions.find(region => region.name === marker?.name)?.path }
-  }
-  return {label:"World map",image:"/images/map-cues/world.svg",viewBox:"0 0 1000 572"}
+  const key = `${country}/${regionId}`
+  const cue = Object.hasOwn(cues, key) ? cues[key]
+    : country && Object.hasOwn(cues, country) ? cues[country] : cues.world
+  return { ...cue, label: regionLabel || cue.label }
 }

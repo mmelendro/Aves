@@ -3,7 +3,7 @@
  * It also works inside the homepage's client-side country selector. A future
  * destination without a collection keeps its attributed photograph.
  */
-import Image from "next/image"
+import Image from "./responsive-photo"
 import Link from "next/link"
 import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
 import { destinationBirds } from "@/content/destination-birds"

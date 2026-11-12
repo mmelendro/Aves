@@ -25,6 +25,7 @@ const nextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: [...securityHeaders, ...(process.env.VERCEL_ENV === "preview" ? [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }] : [])] },
+      { source: "/images/renditions/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       ...["/account/:path*", "/admin/:path*", "/dashboard/:path*", "/auth/:path*", "/api/:path*", "/shopping/:path*", "/australia/account/:path*", "/australia/admin/:path*", "/australia/auth/:path*", "/australia/api/:path*"].map(source => ({ source, headers: privateHeaders })),
     ]
   },

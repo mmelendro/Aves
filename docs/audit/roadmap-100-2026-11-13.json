@@ -379,7 +379,7 @@
       "previous": [
         15
       ],
-      "status": "Open",
+      "status": "Implemented; 710 tests and production build passed, final browser release checks pending",
       "id": 36
     },
     {
@@ -389,7 +389,7 @@
       "previous": [
         16
       ],
-      "status": "Open",
+      "status": "Implemented; 710 tests and production build passed, final browser release checks pending",
       "id": 37
     },
     {
@@ -399,7 +399,7 @@
       "previous": [
         17
       ],
-      "status": "Open",
+      "status": "Implemented; 710 tests and production build passed, final browser release checks pending",
       "id": 38
     },
     {

@@ -15,6 +15,8 @@ test("country and region history restores selection, copy and return paths", asy
   ]) {
     await choices.getByRole("button", { name: country, exact: true }).click()
     await expect(selected(`${id}:`)).toBeVisible()
+    const mapName = country === "Colombia" ? "Choose a Colombian planning region" : country === "Australia" ? "Australian states and territories" : "New Zealand main islands"
+    await expect(page.getByRole("group", { name: mapName, exact: true })).toBeVisible()
     await page.locator("#homepage-region").selectOption(region)
     await expect(selected(`${id}:${region}`)).toContainText(label)
     await expect(page.getByLabel("Landscape region", { exact: true })).toHaveValue(region)

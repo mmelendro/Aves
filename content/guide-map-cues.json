@@ -1,0 +1,151 @@
+{
+  "sources": {
+    "australia": "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-1-states-provinces/",
+    "new-zealand": "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/"
+  },
+  "sourceDigests": {
+    "content/global-australian-map.ts": "4ee45cbff845f5de0c9e9eac787ee730c0fa52cbbcaa4d4fef9c70cb6ed929c9",
+    "content/new-zealand-map.json": "61e2dcbf8b331da5260a58974f1fa9fde32cd31a16806c1665fa1ebca6f397f3",
+    "content/colombia-planning-boundaries.json": "4cba646a298c260dc9c659775d660f9653877c26c119ca6e58f42db3f162d480",
+    "content/colombia-map-markers.ts": "8ed0245fbd1d6530707c195d80a80867d78508249df6f6091be6fe1fc11406f6",
+    "lib/region-links.ts": "ec1d8a9993f45b5846968ecf0dfeea57cc5c6fbf3d94c76ed6d3716fd319d7b9",
+    "scripts/generate-guide-map-cues.cjs": "c172772b512f4b2fc3e4f74561eb56cf689393506e92e1f2ffb689d7eb449547"
+  },
+  "cues": {
+    "world": {
+      "label": "World map",
+      "image": "/images/map-cues/world.svg",
+      "viewBox": "0 0 1000 572"
+    },
+    "australia": {
+      "label": "Australia",
+      "image": "/images/map-cues/australia.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "new-zealand": {
+      "label": "New Zealand",
+      "image": "/images/map-cues/new-zealand.svg",
+      "viewBox": "0 0 560 640"
+    },
+    "colombia": {
+      "label": "Colombia",
+      "image": "/images/map-cues/colombia.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "australia/western-australia": {
+      "label": "Western Australia",
+      "image": "/images/map-cues/australia-western-australia.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/northern-territory": {
+      "label": "Northern Territory",
+      "image": "/images/map-cues/australia-northern-territory.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/south-australia": {
+      "label": "South Australia",
+      "image": "/images/map-cues/australia-south-australia.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/queensland": {
+      "label": "Queensland",
+      "image": "/images/map-cues/australia-queensland.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/new-south-wales": {
+      "label": "New South Wales",
+      "image": "/images/map-cues/australia-new-south-wales.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/victoria": {
+      "label": "Victoria",
+      "image": "/images/map-cues/australia-victoria.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/tasmania": {
+      "label": "Tasmania",
+      "image": "/images/map-cues/australia-tasmania.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/australian-capital-territory": {
+      "label": "Australian Capital Territory",
+      "image": "/images/map-cues/australia-australian-capital-territory.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "australia/jervis-bay-territory": {
+      "label": "Jervis Bay Territory",
+      "image": "/images/map-cues/australia-jervis-bay-territory.svg",
+      "viewBox": "0 0 720 620"
+    },
+    "new-zealand/north-island": {
+      "label": "North Island",
+      "image": "/images/map-cues/new-zealand-north-island.svg",
+      "viewBox": "0 0 560 640"
+    },
+    "new-zealand/south-island": {
+      "label": "South Island",
+      "image": "/images/map-cues/new-zealand-south-island.svg",
+      "viewBox": "0 0 560 640"
+    },
+    "new-zealand/rakiura": {
+      "label": "Stewart Island / Rakiura",
+      "image": "/images/map-cues/new-zealand-rakiura.svg",
+      "viewBox": "0 0 560 640"
+    },
+    "colombia/pacific": {
+      "label": "Pacific Coast & Chocó",
+      "image": "/images/map-cues/colombia-pacific.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/western-andes": {
+      "label": "Western Andes",
+      "image": "/images/map-cues/colombia-western-andes.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/central-andes": {
+      "label": "Central Andes",
+      "image": "/images/map-cues/colombia-central-andes.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/eastern-andes": {
+      "label": "Eastern Andes",
+      "image": "/images/map-cues/colombia-eastern-andes.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/cauca-valley": {
+      "label": "Cauca Valley",
+      "image": "/images/map-cues/colombia-cauca-valley.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/magdalena-valley": {
+      "label": "Magdalena Valley",
+      "image": "/images/map-cues/colombia-magdalena-valley.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/caribbean": {
+      "label": "Caribbean",
+      "image": "/images/map-cues/colombia-caribbean.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/sierra-nevada-de-santa-marta": {
+      "label": "Sierra Nevada de Santa Marta",
+      "image": "/images/map-cues/colombia-sierra-nevada-de-santa-marta.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/llanos": {
+      "label": "Llanos",
+      "image": "/images/map-cues/colombia-llanos.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/amazonia": {
+      "label": "Amazonia",
+      "image": "/images/map-cues/colombia-amazonia.svg",
+      "viewBox": "0 0 634 802"
+    },
+    "colombia/colombian-massif": {
+      "label": "Colombian Massif",
+      "image": "/images/map-cues/colombia-colombian-massif.svg",
+      "viewBox": "0 0 634 802"
+    }
+  }
+}

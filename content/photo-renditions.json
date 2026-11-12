@@ -1,0 +1,3116 @@
+{
+  "version": 1,
+  "format": "webp",
+  "images": {
+    "/australia/images/bird-encounter.jpg": {
+      "width": 1920,
+      "height": 1920,
+      "variants": [
+        {
+          "src": "/images/renditions/45376bbab04dd56a0524-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a7330e35dcbd184a95c7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/01dc26675bdaa778cb33-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/australia/images/birds/au-australian-king-parrot.jpg": {
+      "width": 1200,
+      "height": 1008,
+      "variants": [
+        {
+          "src": "/images/renditions/48424787ebdc3f9b36cc-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a9059806911f9a02c9e2-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e981e7b38426f37c7bf8-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-australian-magpie.jpg": {
+      "width": 1200,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/8ea551042606e8636bb4-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a370299aa84b9695c2ab-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/454fa101c3ab6bc0395e-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-crimson-rosella.jpg": {
+      "width": 1200,
+      "height": 821,
+      "variants": [
+        {
+          "src": "/images/renditions/b4bbb3ffa018b9d53a8f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/641572b596b7589501b3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8ab357b214d62c10cbee-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-eastern-rosella.jpg": {
+      "width": 1200,
+      "height": 801,
+      "variants": [
+        {
+          "src": "/images/renditions/212000d0500a2ab83eaf-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a0969d560506f094753b-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e614393fa823224b5eec-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-emu.jpg": {
+      "width": 1200,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/73100b1d08707aecae01-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9f54c0eb252e0f102741-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e8b23bc0ef0a7faedca2-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-galah.jpg": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/993120f084ff12303a1c-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/da943f1cd3177e23d938-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ec2425e3b1e23a5a8bec-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-laughing-kookaburra.jpg": {
+      "width": 1200,
+      "height": 804,
+      "variants": [
+        {
+          "src": "/images/renditions/5addf9adf4f27742ba70-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/18316477f1a36cc1b986-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e429ed80255cdb9d7aed-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-southern-cassowary.jpg": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/414e4b4fddd5d35e1335-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/04e7e9f5cb98317e2c16-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e85fa9175911c4f50586-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/au-superb-lyrebird.jpg": {
+      "width": 1200,
+      "height": 690,
+      "variants": [
+        {
+          "src": "/images/renditions/0067174c0f418ebf9d3a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/6caa13786d5ffcf169fd-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/96516306bc7b88303a46-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/carnabys-black-cockatoo.jpg": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/eb9ad0c78bee058500d5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/eb09e5c440edbf7bc59e-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c923c0b8edfa6d178c84-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/forty-spotted-pardalote.jpg": {
+      "width": 1200,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/f5a5ee3db7bb0d21c78e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/ed9b3f3b16d312d92f27-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f855f6005a1d07bfb3c0-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/gouldian-finch.jpg": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/43a2932e71ddfc576932-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9c4a18e14263fdeab389-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/058ab279717caa5c63f0-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/red-tailed-black-cockatoo.jpg": {
+      "width": 1200,
+      "height": 934,
+      "variants": [
+        {
+          "src": "/images/renditions/cc25e0274009670d7c1c-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/011865cf78c3a5f437eb-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b921c1d32d9d79e2970e-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/regent-bowerbird.jpg": {
+      "width": 1200,
+      "height": 720,
+      "variants": [
+        {
+          "src": "/images/renditions/4f42b87a48c3e90c1258-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/051740da9d9e46ce9871-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/63954b0d6e4fdf23af9f-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/satin-bowerbird.jpg": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/e0700dd92bd0ed8607c1-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/65afd655290b01d40d65-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/448c6b3f416ec82761c3-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/birds/splendid-fairywren.jpg": {
+      "width": 800,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/dde6babd76fa498b9df8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b9d80f8c90c6d95cc5f7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8cf5e7a3d24c81fac1e4-800.webp",
+          "width": 800
+        }
+      ]
+    },
+    "/australia/images/birds/victorias-riflebird.jpg": {
+      "width": 1200,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/57923ead36bb4db8b9d7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e483bca64196ef1fc9e3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/3eb91961a3a2d62bbd83-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/australia/images/rainbow-lorikeet.jpg": {
+      "width": 1467,
+      "height": 2200,
+      "variants": [
+        {
+          "src": "/images/renditions/aa27e5528328110758d6-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/d74b6c1bfa16a6a9e3ed-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f80bc99fbed4d4391a47-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/australia/images/sulphur-crested-cockatoo.jpg": {
+      "width": 1920,
+      "height": 1587,
+      "variants": [
+        {
+          "src": "/images/renditions/70e5682b1e031e679236-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e4d70a1c34bd5f4154de-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/684c69205e71bbc47895-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/bbmtou1-square.png": {
+      "width": 538,
+      "height": 547,
+      "variants": [
+        {
+          "src": "/images/renditions/9c04eb3564979c4dc1c8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4613a1ea76714217e933-538.webp",
+          "width": 538
+        }
+      ]
+    },
+    "/images/birds/co-apical-flycatcher.jpg": {
+      "width": 960,
+      "height": 639,
+      "variants": [
+        {
+          "src": "/images/renditions/38409bb8e3fa7c4824ef-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/292041dd11722f2595b8-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/db1dd7394f4c923a3b08-960.webp",
+          "width": 960
+        }
+      ]
+    },
+    "/images/birds/co-choco-toucan.jpg": {
+      "width": 1200,
+      "height": 857,
+      "variants": [
+        {
+          "src": "/images/renditions/3665576c4e45a8820724-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8c69e9ab87e5422553fc-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/efbf9d74722d5d1d563b-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-hoatzin.jpg": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/adbd67519c4a96fd4c4b-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/be1d556dc267961fbc72-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/3d135789ef83dca110be-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-jabiru.jpg": {
+      "width": 1200,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/73dc2e05c9237a508358-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/f7918d453d9b0f360a83-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/4cbf67a579a74fc07eb6-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-santa-marta-brushfinch.jpg": {
+      "width": 1200,
+      "height": 1110,
+      "variants": [
+        {
+          "src": "/images/renditions/ded39d4ce837ca387fa5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5038429c302ba2be817e-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/a6ede36b68ff693df9fd-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-santa-marta-parakeet.jpg": {
+      "width": 1200,
+      "height": 801,
+      "variants": [
+        {
+          "src": "/images/renditions/bf9c0d2cc95323fe3a58-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/1095629c2b5016fa8db0-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/dae97c0b23a0186ad54c-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-scarlet-ibis.jpg": {
+      "width": 1200,
+      "height": 1007,
+      "variants": [
+        {
+          "src": "/images/renditions/8940de704da8824cafdb-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/ea969fb7671c678e5aa3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c7b37b7226ca6a0b93d3-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-scarlet-macaw.jpg": {
+      "width": 1129,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/953bf13ec0419c6c559d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/093ea9a8236e4e7ffdba-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/da9e5dd751c780f69f89-1129.webp",
+          "width": 1129
+        }
+      ]
+    },
+    "/images/birds/co-sunbittern.jpg": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/9f75717fd6bd9e5f4d12-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c895b5e0149ebac7bc4b-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/0dc62934782b50a9353b-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/birds/co-white-tailed-starfrontlet.jpg": {
+      "width": 900,
+      "height": 848,
+      "variants": [
+        {
+          "src": "/images/renditions/00ba6f73edee13dfb0c9-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/aac7298bc1b8af261086-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/fc803de0742a9b69744a-900.webp",
+          "width": 900
+        }
+      ]
+    },
+    "/images/bkmtou1.jpg": {
+      "width": 1038,
+      "height": 1036,
+      "variants": [
+        {
+          "src": "/images/renditions/7c32233694e867f03ca6-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/216ec1c94ddbe10ba716-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/deac1d430b650cb603c8-1038.webp",
+          "width": 1038
+        }
+      ]
+    },
+    "/images/blue-crowned-motmot-new.jpg": {
+      "width": 6000,
+      "height": 4000,
+      "variants": [
+        {
+          "src": "/images/renditions/8f2d2da40f373317a8d7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/af8b8c92527284592df6-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/335f2f48bf1f1806622c-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/cardinal-guajiro.jpg": {
+      "width": 1671,
+      "height": 2152,
+      "variants": [
+        {
+          "src": "/images/renditions/919ba9695ea8cc52098a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4a3f44c5a21f60668179-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b8fb24647ceab7f1244c-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/chestnut-crowned-antpitta.jpg": {
+      "width": 5184,
+      "height": 2920,
+      "variants": [
+        {
+          "src": "/images/renditions/08797a0c0a5a43d17fb5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/f26ff50b313bb81d104d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/43d540ee20fb1a44d67b-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/destinations/kea-new-zealand.jpg": {
+      "width": 1936,
+      "height": 1296,
+      "variants": [
+        {
+          "src": "/images/renditions/e583dc01b8a5fc06fb51-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0fdbfb02d074c9855fa8-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c1b1bd493dd1f7443a24-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/gohman1.jpg": {
+      "width": 2346,
+      "height": 2337,
+      "variants": [
+        {
+          "src": "/images/renditions/efbce9306d612d606419-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/d7b7064dc81d5540ad52-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/15b5b182b78816ce3e28-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/gohque1.jpg": {
+      "width": 1018,
+      "height": 1015,
+      "variants": [
+        {
+          "src": "/images/renditions/f4992976f7b79db57b0e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/cf97e95796d4e9a87ff5-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d493922e0f1777d6e7cd-1018.webp",
+          "width": 1018
+        }
+      ]
+    },
+    "/images/green-bearded-helmetcrest.png": {
+      "width": 1072,
+      "height": 931,
+      "variants": [
+        {
+          "src": "/images/renditions/065c3d1e4f4a9f9dc0f8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9a79ea3a45b616a2cae5-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/862c3b26c0a3764811a0-1072.webp",
+          "width": 1072
+        }
+      ]
+    },
+    "/images/new-zealand/australasian-bittern.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/4c3bc5c870805d3b632c-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e755f740441c0eafd61c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/683fe35f21951181d22e-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/australasian-crested-grebe.webp": {
+      "width": 1200,
+      "height": 843,
+      "variants": [
+        {
+          "src": "/images/renditions/3fd69ba3326ed0376c97-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5e93e090b53b2fb44b31-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d71b6e30c704f5edef96-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/bellbird.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/24b57cdb7288a3cf5b43-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2256ca6795cbde5b8063-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/731a9a5b24c5f977a9b2-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/black-stilt.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/b6f1384aa0be7c33b39c-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b7c7e9c0c52bca66c0e4-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8cbc3bdcd31ae46c80cc-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/blue-duck.webp": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/13a84c4f955485e78296-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/23d38c791aaa08507d29-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/64464b826223c10ed0c7-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/fantail.webp": {
+      "width": 1168,
+      "height": 1000,
+      "variants": [
+        {
+          "src": "/images/renditions/3b08f18143d82ed90504-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/ab6dd5a0b07f2bf59335-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/da2faac81625fd1320c4-1168.webp",
+          "width": 1168
+        }
+      ]
+    },
+    "/images/new-zealand/grey-warbler.webp": {
+      "width": 1200,
+      "height": 1161,
+      "variants": [
+        {
+          "src": "/images/renditions/fff0370fdf1a47706210-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/3c781d060d108fc7b99e-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8c565119c930d8ac6cd4-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/huttons-shearwater.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/4f1681e7b9979a23858e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c5cb52323f9757ade6df-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/6bdcbe48fbd89aa8a50f-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/kaka.webp": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/d19e0d5fa2ce3187a530-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4948334f526cb1119a7c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/04a84ac6e1ebd85312d6-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/kereru.webp": {
+      "width": 900,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/1e1b5481a7b09b709d9a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/3b177aff885c5d4b7990-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/bd80ca4beae1fb5e6ed0-900.webp",
+          "width": 900
+        }
+      ]
+    },
+    "/images/new-zealand/little-penguin.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/6ba9425b97f4a274cd88-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2e6be311f64197aa2ff1-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d555b83654900543e69e-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/morepork.webp": {
+      "width": 783,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/b12190bc9ec73c26ade5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/32fbf16a7b5b5b3c843a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b7460e13929a9055cf99-783.webp",
+          "width": 783
+        }
+      ]
+    },
+    "/images/new-zealand/new-zealand-falcon.webp": {
+      "width": 801,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/624ac78043dcde926cf2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/7f2c3582d20cd5167249-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/74373fd160735fc2605c-801.webp",
+          "width": 801
+        }
+      ]
+    },
+    "/images/new-zealand/nz-extra-rifleman.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/5085adbab6407d0d71e8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/770e1a9a97a2b4d6aeca-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b67a0e228d7e44f09f22-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/orange-fronted-parakeet.webp": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/20e92e2d3e292374b895-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/bf671f94bbde2308a2d9-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/50083a567689d8e35a67-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/paradise-shelduck.webp": {
+      "width": 1200,
+      "height": 798,
+      "variants": [
+        {
+          "src": "/images/renditions/74aa8dab7c6445117061-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/50ce7c8a2ccefede2e4a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/9c7839b773e06f9dbec8-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/red-crowned-parakeet.webp": {
+      "width": 1200,
+      "height": 801,
+      "variants": [
+        {
+          "src": "/images/renditions/e53300c3c3029376f876-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/f9af9c794bcfe733b3a4-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/344d7d06b18867408903-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/rock-wren.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/1c5e313b41fbe4123939-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8a74213a9b92320468ee-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d956a6f11fbcddcaf264-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/silvereye.webp": {
+      "width": 1200,
+      "height": 887,
+      "variants": [
+        {
+          "src": "/images/renditions/1944e5bbe91159d322d2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b383a49f5637ffcbdcfb-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f02d8d54cd019fc732c7-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/south-island-robin.webp": {
+      "width": 804,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/303798973b077e0207c3-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/87c5cb4a2a6e1f50f7ec-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/256782780281387274bb-804.webp",
+          "width": 804
+        }
+      ]
+    },
+    "/images/new-zealand/south-island-saddleback.webp": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/7dc07cff7de33915f864-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/d9c7733909fa2b3f04cd-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/fa2592446780bb984bbb-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/south-island-tomtit.webp": {
+      "width": 1200,
+      "height": 840,
+      "variants": [
+        {
+          "src": "/images/renditions/d99a575464f204fbaa2f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c2c5fca56d8b19f04463-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8504c66ecfd155d31fcc-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/takahe.webp": {
+      "width": 1200,
+      "height": 800,
+      "variants": [
+        {
+          "src": "/images/renditions/f824a3b90cd77dd6f08d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/032af3c998918b9722b8-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/37c5a492d5b2b6f619eb-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/tokoeka.webp": {
+      "width": 1200,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/b67a6de36eeaa38f53a8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8ef5cd71f45d84208777-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/34bcc1db9ba7f0455bbc-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/tui.webp": {
+      "width": 1200,
+      "height": 906,
+      "variants": [
+        {
+          "src": "/images/renditions/573bd1b9673f2a907aa8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a553326e09ea0cc8dc6e-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e0828dc344095c248c0a-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/western-weka.webp": {
+      "width": 900,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/a51ac8ebc9952030c1ed-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/202f6123e6538fcadb27-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/961c71375d124bad3b2c-900.webp",
+          "width": 900
+        }
+      ]
+    },
+    "/images/new-zealand/westland-petrel.webp": {
+      "width": 1200,
+      "height": 835,
+      "variants": [
+        {
+          "src": "/images/renditions/ce73132e2a62bb5ff05f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0c5eba6338b3a056b89f-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f54ac470fbecfc594cdb-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/white-heron.webp": {
+      "width": 1200,
+      "height": 820,
+      "variants": [
+        {
+          "src": "/images/renditions/49e01b882246d0f72003-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a91e0c77444dadb31200-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/1cefd193585bab64fab6-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/new-zealand/yellow-eyed-penguin.webp": {
+      "width": 800,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/295a699cf85ca4ab818f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e003b99fbf3eb1f54943-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/93169302936e0d355bb0-800.webp",
+          "width": 800
+        }
+      ]
+    },
+    "/images/new-zealand/yellowhead.webp": {
+      "width": 782,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/6ae0b20cccb8cf250d23-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8a6fc4fbf40cf9f9e390-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c27bbe37e214f07bbaac-782.webp",
+          "width": 782
+        }
+      ]
+    },
+    "/images/places/arthurs-pass-bealey-river.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/b37b79c004dcc3f31388-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/dd3e8395cd2f489da8ae-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/bd05e022d306c8d7f6bc-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/arthurs-pass-mountains.webp": {
+      "width": 1000,
+      "height": 750,
+      "variants": [
+        {
+          "src": "/images/renditions/f5de56852c7af820ba13-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5813290c2f7c115381fc-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d092e20d917c8628ef24-1000.webp",
+          "width": 1000
+        }
+      ]
+    },
+    "/images/places/arthurs-pass-station.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/eed6054300c7fa411dd1-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2410aa39c5fc8b8f5acd-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/72ddf12defd210071534-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/arthurs-pass-village.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/09fed0be55455a4b8333-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e5d8b7cc3e04b8486b46-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/409fca30dbf378c2d6f7-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/arthurs-pass-waterfall.webp": {
+      "width": 1000,
+      "height": 1333,
+      "variants": [
+        {
+          "src": "/images/renditions/4078199f7a4cb31617e5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a131cdbe6c0efcc072ce-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/31fd177309f93098f3c3-1000.webp",
+          "width": 1000
+        }
+      ]
+    },
+    "/images/places/auckland-rangitoto.webp": {
+      "width": 1280,
+      "height": 591,
+      "variants": [
+        {
+          "src": "/images/renditions/225ee9433a4f048e538e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/84bf26ec86d1691a2edc-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/fc0b00204cf59fa8f89b-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-big-drift.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/9371e58d0516814f3dc0-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e9229c78acedd5bffde5-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/a353299607f70923278f-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-carnarvon.webp": {
+      "width": 900,
+      "height": 675,
+      "variants": [
+        {
+          "src": "/images/renditions/14a37062250bf445eafe-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2ae521a22e3eea6c1333-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/a35b45133d9fb036dbf2-900.webp",
+          "width": 900
+        }
+      ]
+    },
+    "/images/places/australia-daintree.webp": {
+      "width": 1400,
+      "height": 945,
+      "variants": [
+        {
+          "src": "/images/renditions/15f66ff9f3f2eaf3296c-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5064eac0545ddafafff2-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/00134f0173f6fb98fd70-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-dangar.webp": {
+      "width": 1024,
+      "height": 768,
+      "variants": [
+        {
+          "src": "/images/renditions/218e37f157b1eddeb895-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/fbb057061decdc9d84c0-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b7444c519c8e788e637b-1024.webp",
+          "width": 1024
+        }
+      ]
+    },
+    "/images/places/australia-eacham.webp": {
+      "width": 1050,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/70b55298c1be44e77962-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/d50e6d0b039e904b0ca1-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/92b88b265d1030d5c5b2-1050.webp",
+          "width": 1050
+        }
+      ]
+    },
+    "/images/places/australia-eubenangee.webp": {
+      "width": 1400,
+      "height": 788,
+      "variants": [
+        {
+          "src": "/images/renditions/181a6cebbe0052c26c3d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/270d9c7b8924adb7762a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/133f2b2e1cf2227dab67-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-girraween.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/44a75989dc531cf3ae9a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9458369b61e67bded60c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/65b78d2affba2c5855c8-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-grampians.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/514814ee3ab6bc6e5aa7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e02e2f2a250222400fcb-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f3188254c605cef8398f-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-hawkesbury.webp": {
+      "width": 933,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/85a93ebde458718c4b5a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b864a17cc0a6e5682f29-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ce07bc3ff873d18904bf-933.webp",
+          "width": 933
+        }
+      ]
+    },
+    "/images/places/australia-kosciuszko.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/a3c5779c765b31732992-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/ccbffae2b84adeb15315-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d10241d121cb06afb21d-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-lake-tyrrell.webp": {
+      "width": 1400,
+      "height": 936,
+      "variants": [
+        {
+          "src": "/images/renditions/126ccf11e4ab0bd106e9-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/7bf5a657ca71eb9052f6-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/16e5abd81f4caef19160-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-tarra-falls.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/4e3e11e3d1831f43f7df-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/de1849b62530da04cd1d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/abc4dbedae2531c1299d-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-three-sisters.webp": {
+      "width": 1351,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/ae7262b624ef41ff5744-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/f8e8b45eb908af912a5f-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/7031b86e43b5b52a482e-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-twelve-apostles.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/f54e163ecc32b26546c8-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c3a1d02f455d5f94d1ad-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/3f94357f3bbebf2f4ef5-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/australia-wattamolla.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/4f2a0d54028416326f55-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/f50643bf0518fec17913-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/6dabba6472eba9ae81c0-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/catlins-curio-bay-coast.webp": {
+      "width": 1280,
+      "height": 783,
+      "variants": [
+        {
+          "src": "/images/renditions/1bb58de63dc76ace9d4d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b9b76e78a16b1b5c379b-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d55ce9674fb5dd8b2a04-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/catlins-curio-fossil-wood.webp": {
+      "width": 720,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "/images/renditions/0b239a5a5cece0529009-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/3afee8744169fe0ba4fc-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/0832da34bcac35a411b2-720.webp",
+          "width": 720
+        }
+      ]
+    },
+    "/images/places/catlins-landscape.webp": {
+      "width": 1000,
+      "height": 670,
+      "variants": [
+        {
+          "src": "/images/renditions/11c42595c50a998e5211-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/927c9d6532cd3da7a398-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/9115db01379244cdf6ec-1000.webp",
+          "width": 1000
+        }
+      ]
+    },
+    "/images/places/catlins-nugget-point.webp": {
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "/images/renditions/ab410966ac7d22ecba3b-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5b04c11493ca2516c9c9-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/6257ba3b142fd4631465-810.webp",
+          "width": 810
+        }
+      ]
+    },
+    "/images/places/catlins-purakaunui-falls.webp": {
+      "width": 1280,
+      "height": 853,
+      "variants": [
+        {
+          "src": "/images/renditions/53e42902b43d5fb1cb2f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4f40dbc1bc5bc65f3779-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b5938150c8b9561b8e10-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-amazon-river.webp": {
+      "width": 1400,
+      "height": 927,
+      "variants": [
+        {
+          "src": "/images/renditions/47e6032ecbdaf2ca8da7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/ed51ddb37a027b78410d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/6dc96ad82f464246c21d-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-amazon-water.webp": {
+      "width": 1400,
+      "height": 700,
+      "variants": [
+        {
+          "src": "/images/renditions/dee3ce23133a1b0840a2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8c56e261cd66f43d9d31-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/cd1d3fda7c237d1d98bf-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-cabo-shore.webp": {
+      "width": 1206,
+      "height": 661,
+      "variants": [
+        {
+          "src": "/images/renditions/148bcaf35b51a4a5f811-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8f1d1cd1169afcd27ae8-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/9cc647f569ae3ff8414d-1206.webp",
+          "width": 1206
+        }
+      ]
+    },
+    "/images/places/colombia-cabo-vela.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/29b216cfb51a34f806ed-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/cd53dc12859b8f34d26c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/4b86fc1f43dca00298c0-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-cano-cristales.webp": {
+      "width": 932,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/488f69abbe8330983eb0-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/572c839ae6cb2dc3dc71-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ef88d781649b928d34d1-932.webp",
+          "width": 932
+        }
+      ]
+    },
+    "/images/places/colombia-casanare.webp": {
+      "width": 1080,
+      "height": 720,
+      "variants": [
+        {
+          "src": "/images/renditions/61a8982a48349a7589e4-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/3e2ee6ad2eef66fd876c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/5eea65877035ada6a0e5-1080.webp",
+          "width": 1080
+        }
+      ]
+    },
+    "/images/places/colombia-cauca-sonso-lake.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/0bf34589bd7494b849cc-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0aa0861a4e1e6b47dae4-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/943c9768260a140e885b-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-cauca-sonso-oxbow.webp": {
+      "width": 1080,
+      "height": 659,
+      "variants": [
+        {
+          "src": "/images/renditions/743be5faf7a18aba5e72-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/3281072cfb59700a4809-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/5c6d74942a7a8edfad0f-1080.webp",
+          "width": 1080
+        }
+      ]
+    },
+    "/images/places/colombia-cauca-sonso-water.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/ec3b4f29663be894f30b-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/93eef273a05ae05b209a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ea1cbeb090a320818bf9-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-cauca-videles-water.webp": {
+      "width": 788,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/569cae55b84e6ebd4622-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5ff7704c64c15328794b-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8dbb6c12aa5ad79ef038-788.webp",
+          "width": 788
+        }
+      ]
+    },
+    "/images/places/colombia-cauca-videles.webp": {
+      "width": 788,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/5004af2c7ece6c6da8d3-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b398bb15878a8dd14168-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/a5caa6dc22213ce2ef09-788.webp",
+          "width": 788
+        }
+      ]
+    },
+    "/images/places/colombia-central-cocora.webp": {
+      "width": 1600,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/93e1e912a88061e854b9-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2b2632fa6e30e700b1b7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f958f58fd9ff7fc93f5a-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-central-navarco.webp": {
+      "width": 1600,
+      "height": 1019,
+      "variants": [
+        {
+          "src": "/images/renditions/85bf4ed11ccae85dab2e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8fd9ab7229404da71886-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/2eeaa8fd81d801f6ac96-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-central-otun.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/d348360a10dffc4b6885-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a17d4ece2da80e4ba96d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/a762004d8d5cc6aedb0c-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-central-ruiz.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/67d1be5fbd4b9815fba7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/54923d54882ded94f24c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f4414bda7e0cc4c8a423-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-central-santa-rosa.webp": {
+      "width": 1200,
+      "height": 1600,
+      "variants": [
+        {
+          "src": "/images/renditions/ce9311ae6563388785f7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/7d71f777f23b65b38a95-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ae1385b274453a5b8417-1200.webp",
+          "width": 1200
+        }
+      ]
+    },
+    "/images/places/colombia-cienaga-grande.webp": {
+      "width": 1400,
+      "height": 258,
+      "variants": [
+        {
+          "src": "/images/renditions/ef2986b6bf4453c0ee9a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/230c5d374d953433f0bf-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d8214a1cc561cd1e4b8e-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-cienaga-village.webp": {
+      "width": 1167,
+      "height": 764,
+      "variants": [
+        {
+          "src": "/images/renditions/8fde114aa2663a6c3359-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/01ecdf241b799b0f9473-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/da7ad6d91e611801ae12-1167.webp",
+          "width": 1167
+        }
+      ]
+    },
+    "/images/places/colombia-cristales-cascada.webp": {
+      "width": 1400,
+      "height": 927,
+      "variants": [
+        {
+          "src": "/images/renditions/7a259fab842bdb4d2902-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a8b2d3a8e57baa075649-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/6ba32d2fb6a9a4f95411-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-eastern-chingaza.webp": {
+      "width": 1280,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/9f24a06fad935fa473dd-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/fa4ca8236e25e44ebd69-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/f95694eb382101cb9d77-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-eastern-cocuy.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/cdc45db2581167549a08-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9a86529a7eaa05d03818-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e77d87187ff09eb696b7-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-eastern-guatavita.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/c255a3833790ddaf6edb-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/158e2b9ba19bd18abfb9-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/3b6c4a8ce8bd5c7c9583-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-eastern-sumapaz.webp": {
+      "width": 1400,
+      "height": 788,
+      "variants": [
+        {
+          "src": "/images/renditions/a697135dd7dcb8788604-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/1d8b65a556142b5cfe19-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/964f1a6aa9b798c51459-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-eastern-tota.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/1c293563e7f387a012e5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/193e940d3fc7beda3afa-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/7e5a9bff4430ce1f42d6-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-gorgona.webp": {
+      "width": 1400,
+      "height": 486,
+      "variants": [
+        {
+          "src": "/images/renditions/a2de9a0dc16b9909be9f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/6127a653d57182702091-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b8d21abd00b3defad2b7-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-guajira-dunes.webp": {
+      "width": 1050,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/963f4d30f060c5bddaa2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/057c40b3649bbf20ff34-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/de6b1d945afc12c709bf-1050.webp",
+          "width": 1050
+        }
+      ]
+    },
+    "/images/places/colombia-magdalena-guarinocito.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/c0d2a0408a92cf61b10a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4333fac854cde02c72f3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/45138bd41ea33c95a593-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-magdalena-honda.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/700baafd6d11fcb40fa7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/054e3bd53b2c282bdc5a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d9b294046b8f77b0f91c-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-magdalena-prado.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/e1172bd0dfda6cb57be2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e294152e723e4b8f1ce7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ce52121880e8d6f6a74f-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-magdalena-tatacoa-grey.webp": {
+      "width": 1400,
+      "height": 646,
+      "variants": [
+        {
+          "src": "/images/renditions/71baa1637adee4afe7b9-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/fa8f33f333996c87c104-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/83d85e162a1295850a95-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-magdalena-tatacoa-hills.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/6d293780fe1b6ae28c03-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/eb961a15b142c1f40fb1-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/006ce4250f9bb3b60203-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-mecana.webp": {
+      "width": 720,
+      "height": 1280,
+      "variants": [
+        {
+          "src": "/images/renditions/02b0ab2f5bd0a65c6a46-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9bbd97a40379d83cb63d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/43025997faf9c0bd2dcd-720.webp",
+          "width": 720
+        }
+      ]
+    },
+    "/images/places/colombia-nuqui.webp": {
+      "width": 1400,
+      "height": 1012,
+      "variants": [
+        {
+          "src": "/images/renditions/1d3fb9833e778519d4bc-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c8707a3ed5193ac1e249-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/cf3f2e22ebbc53ab8fcb-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-orocue.webp": {
+      "width": 1400,
+      "height": 538,
+      "variants": [
+        {
+          "src": "/images/renditions/3d280d9cb2c343218bee-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2e14c2613c5c23535509-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e2c66d323551a5facc4a-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-papas-path.webp": {
+      "width": 1050,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/73070c4c9b1a2523707f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/eccc9b42502a5346fa27-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/4fa256762aedd335f5f4-1050.webp",
+          "width": 1050
+        }
+      ]
+    },
+    "/images/places/colombia-paramo-papas.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/2a8348cd8cd60be12cc0-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/62888068bd784f4173fe-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/202625db4bbb9de6b04f-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-puerto-narino.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/68f2ae6069b6f7e94495-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c51ced6066bbed7f204b-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/eab520ecb61e83838634-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-purace-crater.webp": {
+      "width": 1280,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/d8edd92160e3ea050398-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/99c5deb84f89be128a0c-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/83391d43f699e13805bb-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-purace-landscape.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/aaf3b04271af2a231211-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4eb8c97fb268b49b75b3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b96774c4a311bd01c4ba-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-putumayo.webp": {
+      "width": 1400,
+      "height": 375,
+      "variants": [
+        {
+          "src": "/images/renditions/50af902e56499e473a62-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9ffb7f388227030dd46a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/50cbf4d480f0d63768d4-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-rio-meta-cabuyaro.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/b16fdfd947f4273539bb-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/2e0a1779d4c84ccc9c72-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/3f189c51ed18c67eb436-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-sierra-coast-sierra.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/4598246ef8f3d856a9aa-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e9c519d4f3f9e87ccbca-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/5c77763eae59ff3bbcdb-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-sierra-kennedy.webp": {
+      "width": 927,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/c45f7f7ca6630e80bca9-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c3922bb160816a9e1797-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/59e7c474257afa3613ec-927.webp",
+          "width": 927
+        }
+      ]
+    },
+    "/images/places/colombia-sierra-pozo-azul.webp": {
+      "width": 1400,
+      "height": 935,
+      "variants": [
+        {
+          "src": "/images/renditions/fe1cb99c91c03633cd60-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/5225ff81ff3c6ef61be0-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/68f76c26d75070a03181-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-sierra-san-lorenzo-panorama.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/d97efb7e557047574b58-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/becbf2fc5bc6710fcad1-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/3063b403db18da26a4b2-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-sierra-san-lorenzo.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/147788282b51e67c872a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/33295e8fc64fb3f4e7e3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/1425dc886d65b5437fd0-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-solano-sunset.webp": {
+      "width": 1400,
+      "height": 630,
+      "variants": [
+        {
+          "src": "/images/renditions/3ebe2e3d7b06126e2727-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/801c97b8feb216ba178d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d4291339072f928d4f2a-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-sotara.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/26285a911ecb479a8332-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/dc6f8f2ecd8c31105b51-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/28adc8d1f9f86c8ca608-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-tarapoto.webp": {
+      "width": 1400,
+      "height": 933,
+      "variants": [
+        {
+          "src": "/images/renditions/a039af9cce732522a22f-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e3da6886da925a3a5664-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/ea87afb8debd362026de-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-utria.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/055d31d44eaf0dd92f31-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/042d128e11cbddc1dc79-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/a6d4d677125fae6142a5-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-western-cloud-forest.webp": {
+      "width": 787,
+      "height": 1400,
+      "variants": [
+        {
+          "src": "/images/renditions/cc9e9f93700ea8b752bc-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9d0e76d39d2d1beebdb3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/4fef142ed3828cfd95b7-787.webp",
+          "width": 787
+        }
+      ]
+    },
+    "/images/places/colombia-western-farallones.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/5866c053298882816b89-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4fc09307f45c135bdf80-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c4de68e63c2eac6fe09e-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-western-pico-loro.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/554f4eb4736211fed735-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/51c0f8a10de434b63eca-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/7276c3af95211ad4f629-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-western-tatama-forest.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/412c2e55d1f2a50155a4-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e2668d687a1494fbfcc1-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/96b848e9d6f4f72591da-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/colombia-western-tatama-ridge.webp": {
+      "width": 1400,
+      "height": 1050,
+      "variants": [
+        {
+          "src": "/images/renditions/e49384ba71bd74c2ec51-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/bc95dff2a75bbc98b8a5-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e062bf77c22cfb5140d4-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/fiordland-lake-gunn-tree.webp": {
+      "width": 1280,
+      "height": 853,
+      "variants": [
+        {
+          "src": "/images/renditions/6eb744cc3683bdba9147-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e953b2cdf4cc81da3512-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/7c3c5e6367f3196ec6d6-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/fiordland-lake-gunn.webp": {
+      "width": 1440,
+      "height": 921,
+      "variants": [
+        {
+          "src": "/images/renditions/21099964e2b615fb78a2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/098c60146bbdd85959a2-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/86116596cbb16b5d8dbb-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/fiordland-landscape.webp": {
+      "width": 1000,
+      "height": 544,
+      "variants": [
+        {
+          "src": "/images/renditions/eabea3a1a294cd68a883-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/97a760eb907a808765dd-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/736f1d048f0ea5a86377-1000.webp",
+          "width": 1000
+        }
+      ]
+    },
+    "/images/places/fiordland-milford-sound.webp": {
+      "width": 1440,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/69a00e04f95f810c5cd5-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c32cb234abc278765baa-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/52017eafd0aa041804f1-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/fiordland-te-anau-shore.webp": {
+      "width": 1440,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/5a70fa19926a4db5b68e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/7d0ecc71233d2b5df0ec-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c4b72ce1e369a7cf2643-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/hamilton-gardens.webp": {
+      "width": 1280,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/04b2defc2c19a92802c0-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0aa26d9b7db0a96c6839-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/13750284b9451d6c6ebe-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/nelson-lake-rotoroa.webp": {
+      "width": 1440,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/0f72ba7c4b989ed2a5f7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9d5569bf30d003628f6d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/0976bbb02bdaf290a886-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/nelson-landscape.webp": {
+      "width": 1000,
+      "height": 719,
+      "variants": [
+        {
+          "src": "/images/renditions/b7375e2958becf45a9b0-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/f3024f44bfd16178d24d-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/da2ceaa0235b3a31024c-1000.webp",
+          "width": 1000
+        }
+      ]
+    },
+    "/images/places/nelson-mount-robert.webp": {
+      "width": 1024,
+      "height": 683,
+      "variants": [
+        {
+          "src": "/images/renditions/da03dc23144c921ac7d2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/7c8cdb9aa6fb2c5d4996-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/603fcfa43cb35bf40d08-1024.webp",
+          "width": 1024
+        }
+      ]
+    },
+    "/images/places/nelson-rotoiti-kerr-bay.webp": {
+      "width": 1280,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/022bb3f4fadefc5b2018-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/303f42a849333b7f1ffb-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/fd17f242466292d09ba7-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/nelson-silver-beech.webp": {
+      "width": 1280,
+      "height": 853,
+      "variants": [
+        {
+          "src": "/images/renditions/e1a300e7e5c02f50cb0a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/34b77b17f4f7d0730285-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/236b50b250214eb1ab77-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rakiura-forest.webp": {
+      "width": 1280,
+      "height": 935,
+      "variants": [
+        {
+          "src": "/images/renditions/27b773bf37c4cb7e3ebc-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0ca1d4955d5a28a08995-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/0c9dcf34b81aa6d91c5c-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rakiura-golden-bay.webp": {
+      "width": 1280,
+      "height": 826,
+      "variants": [
+        {
+          "src": "/images/renditions/13a1b57e30e999946a12-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/49c743bd621a1a684923-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/4419d858bbcca53831b8-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rakiura-lee-bay.webp": {
+      "width": 1280,
+      "height": 720,
+      "variants": [
+        {
+          "src": "/images/renditions/8fa0a3005ae45a8883d9-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/221e03c38fbc557a0fe7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d1199dd521f80d274d40-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rakiura-maori-beach.webp": {
+      "width": 1280,
+      "height": 788,
+      "variants": [
+        {
+          "src": "/images/renditions/ce51965c2177c4cd01fc-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/aeb0eccd5c6e8a05b460-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/70351355e3c5a224f65e-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rakiura-oban-bay.webp": {
+      "width": 1600,
+      "height": 900,
+      "variants": [
+        {
+          "src": "/images/renditions/91e9a9f251de1fb4eb67-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/a66aa5f63aae110ba746-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8c529d111bbaaadb0054-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rotorua-kuirau.webp": {
+      "width": 1280,
+      "height": 853,
+      "variants": [
+        {
+          "src": "/images/renditions/e3a8e6f71643b3f1deff-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/d13ef5268b5db451d077-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/b93089fd6c511e6da5d8-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rotorua-lakefront.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/e899382c786ee558c440-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/945b35c67a2041760814-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/fd669b1fd90620c6853e-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/rotorua-redwoods.webp": {
+      "width": 1280,
+      "height": 960,
+      "variants": [
+        {
+          "src": "/images/renditions/852ed76ed0b5e8bfee9a-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/307b9ec57023a34c3593-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/879170a315c1849bddd1-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/rabtho1.jpg": {
+      "width": 2026,
+      "height": 2020,
+      "variants": [
+        {
+          "src": "/images/renditions/9f39455f59f9c56a6287-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/be1a4dfa609fe1f53bc8-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/87dad6151bb3b12a4c80-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/scadov1.jpg": {
+      "width": 1303,
+      "height": 1225,
+      "variants": [
+        {
+          "src": "/images/renditions/4f3bdff0562ecd1398b7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c8021128d2ae2d4183c7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/87bb946529d2eefe4d4f-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/strman5.jpg": {
+      "width": 1893,
+      "height": 1893,
+      "variants": [
+        {
+          "src": "/images/renditions/61a89a7fdcbe403b7feb-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/1f490c057c6bbe2abb21-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/997bb928c5576c4fe16a-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/velvet-purple-coronet.jpg": {
+      "width": 2116,
+      "height": 1940,
+      "variants": [
+        {
+          "src": "/images/renditions/d468448b0e1dd51c4f10-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/fd8f62e589a61cef6f1b-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8e57bab8f9fb985dc51c-1280.webp",
+          "width": 1280
+        }
+      ]
+    }
+  }
+}

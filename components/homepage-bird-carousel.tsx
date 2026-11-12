@@ -18,13 +18,14 @@ import { useSharedBirdAudio } from "./use-shared-bird-audio"
 import { FollowBirdCalls, type FollowCallStatus } from "@/lib/follow-bird-calls"
 import { playForegroundMedia } from "@/lib/media-focus"
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
+import { FieldGuideContext } from "./field-guide-context"
 import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import SpeciesDetailsPanel from "@/components/species-details-panel"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, VolumeX, Loader2, Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
+import Image from "./responsive-photo"
 import PhotoZoom from "./photo-zoom"
 import { sitePath } from "@/lib/site-path"
 import { coverFocalPosition } from "@/lib/cover-focal-position"
@@ -78,6 +79,7 @@ export default function HomepageBirdCarousel({
   const isDestinationCard = variant === "destination-card"
   // State drives what is drawn. Refs hold browser objects or attempt IDs without re-rendering.
   // Slideshow playback and sound playback are deliberately separate controls.
+  const mediaVisible = useContext(FieldGuideContext)?.mediaVisible !== false
   const reportBirdToMap = useContext(BirdDiscoveryContext)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -101,6 +103,7 @@ export default function HomepageBirdCarousel({
   const sharedAudio = useSharedBirdAudio(currentBird)
   const callPlaying = sharedAudio.available ? sharedAudio.playing : isAudioPlaying
   const callsFollow = sharedAudio.available ? sharedAudio.following : follow.current.enabled
+  const renderPhoto = mediaVisible || imageState.image === currentBird?.image
   const imageStatus = imageState.image === currentBird?.image ? imageState.status : "loading"
 
   useEffect(() => {
@@ -134,7 +137,7 @@ export default function HomepageBirdCarousel({
       window.removeEventListener("resize", centreFocalPoint)
       image.removeEventListener("load", markLoaded)
     }
-  }, [currentBird?.id, currentBird?.image, currentBird?.imagePosition])
+  }, [currentBird?.id, currentBird?.image, currentBird?.imagePosition, renderPhoto])
 
   // Respect reduced motion on initial load and stop the slideshow if that preference changes.
   useEffect(() => {
@@ -311,7 +314,7 @@ export default function HomepageBirdCarousel({
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
           {/* One edge-to-edge photo, with a per-species focal point for the portrait crop. */}
-          {imageStatus !== "error" ? <PhotoZoom key={currentBird.id} label={currentBird.commonName}><Image
+          {renderPhoto && imageStatus !== "error" ? <PhotoZoom key={currentBird.id} label={currentBird.commonName}><Image
             key={currentBird.id} ref={imageRef} src={sitePath(currentBird.image || "/placeholder.svg")} alt={currentBird.commonName} fill
             className={cn("object-cover transition-opacity duration-300 motion-reduce:transition-none", imageStatus === "loaded" ? "opacity-100" : "opacity-0")}
             style={{ objectPosition: currentBird.imagePosition || "center" }}
@@ -319,8 +322,8 @@ export default function HomepageBirdCarousel({
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
             priority={priority && selectedIndex === 0}
             sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
-          /></PhotoZoom> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
-          {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
+          /></PhotoZoom> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>{renderPhoto ? "Image unavailable" : "Turn to the birds to load this photograph."}</p></div>}
+          {renderPhoto && imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
           {/* Image count describes this curated selection, not a destination species total. */}
           <p className="absolute left-3 top-3 rounded-full border border-white/30 bg-slate-950/60 px-3 py-2 text-xs font-medium tabular-nums text-white backdrop-blur-md" aria-label={`Image ${selectedIndex + 1} of ${birds.length}`}><CarouselCount index={selectedIndex+1} total={birds.length}/></p>

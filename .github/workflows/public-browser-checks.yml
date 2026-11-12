@@ -26,5 +26,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+      - run: pnpm check:catalogue-loading
+      - run: node scripts/profile-route-bundles.mjs --check-deferred-geometry
       - run: pnpm exec playwright install --with-deps chromium firefox
       - run: pnpm test:browser

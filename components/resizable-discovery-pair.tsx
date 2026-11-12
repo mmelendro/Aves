@@ -11,6 +11,7 @@ import { GripVertical, RotateCcw, BookOpen, FlipHorizontal2, Columns2, Maximize2
 import { clampDiscoverySplit, discoverySplitBounds, dragDiscoverySplit, DISCOVERY_PAIR_MIN_WIDTH } from "@/lib/discovery-split"
 import type { GuideMapCue } from "@/lib/guide-map-cue"
 import ExpandableMedia from "./expandable-media"
+import ResponsivePhoto from "./responsive-photo"
 import GuideMapThumbnail from "./guide-map-thumbnail"
 import { FieldGuideContext, type GuidePreviewOpener } from "./field-guide-context"
 import styles from "./resizable-discovery-pair.module.css"
@@ -134,7 +135,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     if (separatorRef.current?.hasPointerCapture(pointerId)) separatorRef.current.releasePointerCapture(pointerId)
   }
 
-  return localizeHome(<FieldGuideContext.Provider value={{bird:birdCue,mapCue,showBirds,openMap:()=>openPreview("map"),openBirds:()=>openPreview("birds"),registerMap,registerBirds}}><div ref={containerRef} className={styles.container} data-field-guide="true">
+  return localizeHome(<FieldGuideContext.Provider value={{mediaVisible:layout === "paired" || face === "birds",bird:birdCue,mapCue,showBirds,openMap:()=>openPreview("map"),openBirds:()=>openPreview("birds"),registerMap,registerBirds}}><div ref={containerRef} className={styles.container} data-field-guide="true">
     <div className={styles.guideToolbar}>
       <div className={styles.guideTitle}><BookOpen size={20} aria-hidden="true"/><span>Your bird guide</span><span className={styles.pageLabel}>{layout === "paired" ? "Map & birds" : face === "birds" ? "Birds" : "Map"}</span></div>
       <div className={styles.guideActions}>
@@ -200,7 +201,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
       <div ref={mapPanelRef} id={`${id}-map`} className={styles.mapPanel} inert={layout === "guide" && face !== "map"} aria-hidden={layout === "guide" && face !== "map"}>
         <div className={styles.mapBody}>{map}</div>
         {birdCue && <button type="button" className={styles.birdCue} aria-haspopup="dialog" onClick={event => openPreview("birds",event?.currentTarget)} aria-label={`View ${birdCue.commonName} in the bird guide`}>
-          <img src={birdCue.image} alt="" width={36} height={36} loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
+          <ResponsivePhoto src={birdCue.image} alt="" width={36} height={36} sizes="36px" loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
           <span><span className={styles.cueCaption}>Birds</span><span className={styles.cueName}>{birdCue.commonName}</span></span><Maximize2 size={16} aria-hidden="true"/>
         </button>}
       </div>

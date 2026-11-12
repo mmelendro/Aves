@@ -12,7 +12,7 @@ import {journeyBirdProfiles} from "@/lib/trip-journey"
 import TripJourneyControls, {TripJourneyMapNavigation} from "./trip-planner/trip-journey-controls"
 import {useBirdFilters} from "./bird-filter-context"
 import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
-import { guideMapCue } from "@/lib/guide-map-cue"
+import { guideMapCue, mapCueSources } from "@/lib/guide-map-cue"
 
 import { explorerLocation, readExplorerLocation, explorerLocationHref, type ExplorerLocation } from "@/lib/explorer-location"
 import { useColombiaHomeCopy } from "./colombia-home-language"
@@ -23,8 +23,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { destinations } from "@/content/destinations"
 import { destinationRegions, getBirdRegionIds, getDestinationRegionBirds } from "@/content/destination-regions"
 import type { BirdProfile } from "@/content/birds"
-import { australiaMapProvenance } from "@/content/global-australian-map"
-import nzMap from "@/content/new-zealand-map.json"
 import NewZealandBirdPicker from "./new-zealand-bird-picker"
 import { featuredNzBirdId } from "@/content/new-zealand-checklist"
 import { readNzBirdBasket, writeNzBirdBasket, NZ_BIRD_BASKET_EVENT } from "@/lib/nz-bird-selection"
@@ -33,11 +31,11 @@ import { DestinationSelectionContext } from "@/components/destination-selection-
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import { useHeaderLandscape } from "./header-landscape-context"
 import { MapViewer } from "./map-viewer"
-import DestinationRegionalMap from "@/components/destination-regional-map"
+import DestinationRegionalMap from "@/components/deferred-country-map"
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair"
 import SouthIslandHabitatProvider, { SouthIslandHabitatContext } from "./south-island-habitat-context"
 import SouthIslandPlacesExplorer from "./south-island-places-explorer"
-import SouthIslandEcosystemMap from "./south-island-ecosystem-map"
+import SouthIslandEcosystemMap from "./deferred-south-island-map"
 import { filterSouthIslandBirds, southIslandEcosystems } from "@/content/south-island-ecosystems"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
 import { southIslandLandscapeSlides } from "@/lib/south-island-discovery"
@@ -163,7 +161,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
                   {!region && <button type="button" aria-pressed={showBirdAreas} className={styles.backButton} onClick={()=>setShowBirdAreas(value=>!value)}>{showBirdAreas ? "Hide bird areas" : "Show areas for this bird"}</button>}
                   {region ? <a href={region.href} className={styles.regionLink}>Explore {placeInSentence(region.name)}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a>
                     : <p className="mt-2 text-xs leading-5 text-emerald-900">Choose a region to zoom in and update the birds and planning notes here. Use Back to zoom out. Open its guide for more detail.</p>}
-                  <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? `AVES planning-region selector · artwork in planning view; country geography in satellite view` : <><a className="underline" href={destination.id === "australia" ? australiaMapProvenance.sourceUrl : nzMap.source.url}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
+                  <p className="mt-2 text-[10px] leading-4 text-gray-500">{destination.id === "colombia" ? `AVES planning-region selector · artwork in planning view; country geography in satellite view` : <><a className="underline" href={destination.id === "australia" ? mapCueSources.australia : mapCueSources["new-zealand"]}>Natural Earth</a> · {destination.id === "australia" ? "States and territories · external territories omitted" : "Main islands shown"}</>}. Featured regions, not complete species ranges.</p>
 
                 </figcaption>
               </figure>}

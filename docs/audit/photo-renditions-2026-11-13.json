@@ -1,0 +1,4854 @@
+{
+  "generator": "scripts/generate-responsive-photos.mjs",
+  "recipeSha256": "9bcedc2c4918620fce289592c790af8cb6de8fe35773e81f0ec85405aa18ca3e",
+  "sharp": "0.35.5",
+  "policy": {
+    "widths": [
+      160,
+      640,
+      1280
+    ],
+    "quality": 82,
+    "crop": false,
+    "enlarge": false
+  },
+  "images": [
+    {
+      "source": "/australia/images/bird-encounter.jpg",
+      "sourceSha256": "81c95dad16adf88e7468a5173e643b9ab9379b2e170f04cd9a9318d967ac6362",
+      "sourceBytes": 359078,
+      "variants": [
+        {
+          "src": "/images/renditions/45376bbab04dd56a0524-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 2014,
+          "sha256": "45376bbab04dd56a0524b27916f639f8c1abb134d7ae7b94752b6de3cd71ee41"
+        },
+        {
+          "src": "/images/renditions/a7330e35dcbd184a95c7-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 13714,
+          "sha256": "a7330e35dcbd184a95c792ab142e9bbb2fe5d0e95cf61683c8d27261234b8975"
+        },
+        {
+          "src": "/images/renditions/01dc26675bdaa778cb33-1280.webp",
+          "width": 1280,
+          "height": 1280,
+          "bytes": 45450,
+          "sha256": "01dc26675bdaa778cb334a2b8569a170557bd7c8cc02e60107131ab782170c7c"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-australian-king-parrot.jpg",
+      "sourceSha256": "dfa9ea3b2874211e017e22b1c1b4439394e5d77a7f26067fc8fd6139fba33699",
+      "sourceBytes": 87477,
+      "variants": [
+        {
+          "src": "/images/renditions/48424787ebdc3f9b36cc-160.webp",
+          "width": 160,
+          "height": 134,
+          "bytes": 2156,
+          "sha256": "48424787ebdc3f9b36cca77651ff6f27394c7c94c74d12ff2607e52c6de82dd0"
+        },
+        {
+          "src": "/images/renditions/a9059806911f9a02c9e2-640.webp",
+          "width": 640,
+          "height": 538,
+          "bytes": 15688,
+          "sha256": "a9059806911f9a02c9e2148cd9875c483e00332b4369a42b4189fc9377d6a28c"
+        },
+        {
+          "src": "/images/renditions/e981e7b38426f37c7bf8-1200.webp",
+          "width": 1200,
+          "height": 1008,
+          "bytes": 50040,
+          "sha256": "e981e7b38426f37c7bf8d2da7cbd82a7e6a4e59211e8b9d2e73067aba40b8125"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-australian-magpie.jpg",
+      "sourceSha256": "7104d1becb1fa3b1e1c7964055962034e75249c8c68a2f74f26f9d5a96fee5fe",
+      "sourceBytes": 279236,
+      "variants": [
+        {
+          "src": "/images/renditions/8ea551042606e8636bb4-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 6324,
+          "sha256": "8ea551042606e8636bb4e294cc4421714bcddd79fce378c43fa19e8820335d28"
+        },
+        {
+          "src": "/images/renditions/a370299aa84b9695c2ab-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 74430,
+          "sha256": "a370299aa84b9695c2ab09885fa4753688f3afd32ceb12bd5d407c107b97aea3"
+        },
+        {
+          "src": "/images/renditions/454fa101c3ab6bc0395e-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 221206,
+          "sha256": "454fa101c3ab6bc0395ec8981fa27c654e8ae106007af44ed656a971f4da9d37"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-crimson-rosella.jpg",
+      "sourceSha256": "9719c14eb6330028eb401e06398c4ee51cb9a048e2ca93752dead6bf1cf6e49c",
+      "sourceBytes": 314196,
+      "variants": [
+        {
+          "src": "/images/renditions/b4bbb3ffa018b9d53a8f-160.webp",
+          "width": 160,
+          "height": 109,
+          "bytes": 7790,
+          "sha256": "b4bbb3ffa018b9d53a8fb208a8a9c3724bb9741319e82d954970b63662f4da5a"
+        },
+        {
+          "src": "/images/renditions/641572b596b7589501b3-640.webp",
+          "width": 640,
+          "height": 438,
+          "bytes": 103280,
+          "sha256": "641572b596b7589501b36568c3e9e2010a404284cb66bdac502cffcbb948327f"
+        },
+        {
+          "src": "/images/renditions/8ab357b214d62c10cbee-1200.webp",
+          "width": 1200,
+          "height": 821,
+          "bytes": 280614,
+          "sha256": "8ab357b214d62c10cbeeaa605a79d3256515934e4430f4ef83abb606df248d91"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-eastern-rosella.jpg",
+      "sourceSha256": "feeade8a7a37ece94288ebd5a838ed55909f89dabcffeeab3202723b97e26ebf",
+      "sourceBytes": 213588,
+      "variants": [
+        {
+          "src": "/images/renditions/212000d0500a2ab83eaf-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4788,
+          "sha256": "212000d0500a2ab83eafd7c84ff830e7a09ea3286fe933033192d987fbb78db8"
+        },
+        {
+          "src": "/images/renditions/a0969d560506f094753b-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 54902,
+          "sha256": "a0969d560506f094753b70b297c9916a71751ba18ac159c2cd5baaf55f8f6b64"
+        },
+        {
+          "src": "/images/renditions/e614393fa823224b5eec-1200.webp",
+          "width": 1200,
+          "height": 801,
+          "bytes": 173978,
+          "sha256": "e614393fa823224b5eec4c5de0c8801415f7647958e411c205bcd7c67340dc33"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-emu.jpg",
+      "sourceSha256": "dc696cebf95e99bbac017ef67521d97a2e52ce9198f3b660a443800221070973",
+      "sourceBytes": 235440,
+      "variants": [
+        {
+          "src": "/images/renditions/73100b1d08707aecae01-160.webp",
+          "width": 160,
+          "height": 128,
+          "bytes": 4556,
+          "sha256": "73100b1d08707aecae012161af0991ac7b2dd028635616a740dede13503d9e3e"
+        },
+        {
+          "src": "/images/renditions/9f54c0eb252e0f102741-640.webp",
+          "width": 640,
+          "height": 512,
+          "bytes": 57014,
+          "sha256": "9f54c0eb252e0f10274178311e380b529f05e72d2c7f94da9d51a94dbe7acdf8"
+        },
+        {
+          "src": "/images/renditions/e8b23bc0ef0a7faedca2-1200.webp",
+          "width": 1200,
+          "height": 960,
+          "bytes": 186288,
+          "sha256": "e8b23bc0ef0a7faedca2fcc9ea4e9fa1c9d1c04ce0355e5a0d710c763d23e510"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-galah.jpg",
+      "sourceSha256": "b1f30d9f74ddf05631637ccaf6e55491ef2dc098c1cc676ad15374994a60cdf6",
+      "sourceBytes": 251322,
+      "variants": [
+        {
+          "src": "/images/renditions/993120f084ff12303a1c-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5722,
+          "sha256": "993120f084ff12303a1ca61aa34a1d8393570bbcd00c5e482ecb37d9fe768918"
+        },
+        {
+          "src": "/images/renditions/da943f1cd3177e23d938-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 72834,
+          "sha256": "da943f1cd3177e23d938a41662eaca236c328459acb99560ee84c7ebd8312eee"
+        },
+        {
+          "src": "/images/renditions/ec2425e3b1e23a5a8bec-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 209920,
+          "sha256": "ec2425e3b1e23a5a8bec744616c07075a8123bb24fcb28c36626dffda670416e"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-laughing-kookaburra.jpg",
+      "sourceSha256": "1f39ad09ffcb6c17cf8b7e4b55e90b94d4f08cbb5b932b9ca84d77f98492c26d",
+      "sourceBytes": 169505,
+      "variants": [
+        {
+          "src": "/images/renditions/5addf9adf4f27742ba70-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4944,
+          "sha256": "5addf9adf4f27742ba70157d7e57f15c262a9dba983c14e5fe82366b67f54aa6"
+        },
+        {
+          "src": "/images/renditions/18316477f1a36cc1b986-640.webp",
+          "width": 640,
+          "height": 429,
+          "bytes": 40508,
+          "sha256": "18316477f1a36cc1b98608f2fc546b307d976d3bfd478124796ad4f8e669c53d"
+        },
+        {
+          "src": "/images/renditions/e429ed80255cdb9d7aed-1200.webp",
+          "width": 1200,
+          "height": 804,
+          "bytes": 117818,
+          "sha256": "e429ed80255cdb9d7aed8dd59aa25667b467d99b334861aa54a74bbcdb226931"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-southern-cassowary.jpg",
+      "sourceSha256": "7ca0e63496052c7a1c442d043dd55e858e9f13d1f86c815b57b00d4266bdb7a4",
+      "sourceBytes": 312070,
+      "variants": [
+        {
+          "src": "/images/renditions/414e4b4fddd5d35e1335-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 5474,
+          "sha256": "414e4b4fddd5d35e133533f0d82d5e43bdc121d5a70bae7b8fee4868230315dd"
+        },
+        {
+          "src": "/images/renditions/04e7e9f5cb98317e2c16-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 88192,
+          "sha256": "04e7e9f5cb98317e2c168830141432308366741c3e819f633c49407a580ab33d"
+        },
+        {
+          "src": "/images/renditions/e85fa9175911c4f50586-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 278074,
+          "sha256": "e85fa9175911c4f50586d6f6c501879075fcb3d8468768274d4116ed5f0f2acd"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/au-superb-lyrebird.jpg",
+      "sourceSha256": "4ced69eed1054a9f537910e1dbbf42ac24475f5c2900d55e55644d839b6d3550",
+      "sourceBytes": 225453,
+      "variants": [
+        {
+          "src": "/images/renditions/0067174c0f418ebf9d3a-160.webp",
+          "width": 160,
+          "height": 92,
+          "bytes": 5360,
+          "sha256": "0067174c0f418ebf9d3a329e50a50f616b603c96e647fc9ada4f9e4bd9a50dce"
+        },
+        {
+          "src": "/images/renditions/6caa13786d5ffcf169fd-640.webp",
+          "width": 640,
+          "height": 368,
+          "bytes": 65346,
+          "sha256": "6caa13786d5ffcf169fd9f30a35f83f139f6157367ecb9ef5bfc03bb0bd62ec6"
+        },
+        {
+          "src": "/images/renditions/96516306bc7b88303a46-1200.webp",
+          "width": 1200,
+          "height": 690,
+          "bytes": 182230,
+          "sha256": "96516306bc7b88303a467b32196f7508808c1f942afe5e7a13245e9cfa0812f8"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/carnabys-black-cockatoo.jpg",
+      "sourceSha256": "f3f1400461a519dcdce5f859c850c9c9833b1204d482d870ac2c4865c8b71b59",
+      "sourceBytes": 463626,
+      "variants": [
+        {
+          "src": "/images/renditions/eb9ad0c78bee058500d5-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 8378,
+          "sha256": "eb9ad0c78bee058500d513b957db6d75e35224e5bc6f662fb27e7af37c609a4a"
+        },
+        {
+          "src": "/images/renditions/eb09e5c440edbf7bc59e-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 126800,
+          "sha256": "eb09e5c440edbf7bc59e2ea34e8b091110dbb1c2ba1312f53ebe9e0d8635b3c0"
+        },
+        {
+          "src": "/images/renditions/c923c0b8edfa6d178c84-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 367864,
+          "sha256": "c923c0b8edfa6d178c8440320517d88e89a5493b8489764e247eb89777c7b36a"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/forty-spotted-pardalote.jpg",
+      "sourceSha256": "343dd28dd8617b10f300f72ef5ebc90ea15d61713c00b370653df34b387256e4",
+      "sourceBytes": 204195,
+      "variants": [
+        {
+          "src": "/images/renditions/f5a5ee3db7bb0d21c78e-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 3126,
+          "sha256": "f5a5ee3db7bb0d21c78ea366a55c95edaa99952422ba4742ac85f545a3154d35"
+        },
+        {
+          "src": "/images/renditions/ed9b3f3b16d312d92f27-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 37786,
+          "sha256": "ed9b3f3b16d312d92f27b9a6168db5dcfb54464a86731daf07ddb6724c4822ca"
+        },
+        {
+          "src": "/images/renditions/f855f6005a1d07bfb3c0-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 123562,
+          "sha256": "f855f6005a1d07bfb3c00216110d743ee8fdaf2abf314370228ac47d857535a4"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/gouldian-finch.jpg",
+      "sourceSha256": "7383f85cffda021ccd81eb291fe8144dc565b55e9764170346f294686d88b96c",
+      "sourceBytes": 210646,
+      "variants": [
+        {
+          "src": "/images/renditions/43a2932e71ddfc576932-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 5756,
+          "sha256": "43a2932e71ddfc5769323d1186f7c375a15cb33d1f13bee0307e9fcecf37f246"
+        },
+        {
+          "src": "/images/renditions/9c4a18e14263fdeab389-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 37154,
+          "sha256": "9c4a18e14263fdeab389c981fe85466a82f6698b1a13b88e96972d9f107e79e3"
+        },
+        {
+          "src": "/images/renditions/058ab279717caa5c63f0-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 105008,
+          "sha256": "058ab279717caa5c63f0667cdf85736ab4b7ceb5a9b667c82a5152db26e3d7c7"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/red-tailed-black-cockatoo.jpg",
+      "sourceSha256": "7e54bdea2a1bf3d386ddeec53678ac4e3af5bb31543aa7e0e7719cbc2cfd0590",
+      "sourceBytes": 272388,
+      "variants": [
+        {
+          "src": "/images/renditions/cc25e0274009670d7c1c-160.webp",
+          "width": 160,
+          "height": 124,
+          "bytes": 6680,
+          "sha256": "cc25e0274009670d7c1c2b81b5b9fd62c3cac97a385ce873e6cce391bcaba6bb"
+        },
+        {
+          "src": "/images/renditions/011865cf78c3a5f437eb-640.webp",
+          "width": 640,
+          "height": 498,
+          "bytes": 60734,
+          "sha256": "011865cf78c3a5f437eb0905dd8ec3272dbbeaf5c2b83635a21b7cf95793585c"
+        },
+        {
+          "src": "/images/renditions/b921c1d32d9d79e2970e-1200.webp",
+          "width": 1200,
+          "height": 934,
+          "bytes": 181110,
+          "sha256": "b921c1d32d9d79e2970e8f3c4612389e2581dd6d620c32b6f5b954be3abd16ec"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/regent-bowerbird.jpg",
+      "sourceSha256": "351ff50aba16465a1ad7170a875554475a799b994bd39651eeba79460a0b362f",
+      "sourceBytes": 136881,
+      "variants": [
+        {
+          "src": "/images/renditions/4f42b87a48c3e90c1258-160.webp",
+          "width": 160,
+          "height": 96,
+          "bytes": 3980,
+          "sha256": "4f42b87a48c3e90c125819ea555b44459e0edee9a59b564fe7f7065137aefa5e"
+        },
+        {
+          "src": "/images/renditions/051740da9d9e46ce9871-640.webp",
+          "width": 640,
+          "height": 384,
+          "bytes": 29230,
+          "sha256": "051740da9d9e46ce9871490ed2a12a131cc6594609111e62a40bc76e7410d3c9"
+        },
+        {
+          "src": "/images/renditions/63954b0d6e4fdf23af9f-1200.webp",
+          "width": 1200,
+          "height": 720,
+          "bytes": 78142,
+          "sha256": "63954b0d6e4fdf23af9f136b3f41e740a304a4306d826185d2fb262a8bb1d3f1"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/satin-bowerbird.jpg",
+      "sourceSha256": "a135ae2af4019edc02afce0b5225bb9a6a48bcb96c5b1881c00b16a5d7b194df",
+      "sourceBytes": 352348,
+      "variants": [
+        {
+          "src": "/images/renditions/e0700dd92bd0ed8607c1-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 8672,
+          "sha256": "e0700dd92bd0ed8607c1dcda6b9317df58c7d1288646a324a442008dab006ac9"
+        },
+        {
+          "src": "/images/renditions/65afd655290b01d40d65-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 100694,
+          "sha256": "65afd655290b01d40d6543443b03a3d504cbb488ef6256ff05d9afd5f09ac68d"
+        },
+        {
+          "src": "/images/renditions/448c6b3f416ec82761c3-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 262964,
+          "sha256": "448c6b3f416ec82761c36cb4743377465835241b0b6991b43bddf7089aea67a0"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/splendid-fairywren.jpg",
+      "sourceSha256": "9141b3bf774a70adaa69d415d3e85348153daf3e47c9e2bb57e40a9c2551cad3",
+      "sourceBytes": 154373,
+      "variants": [
+        {
+          "src": "/images/renditions/dde6babd76fa498b9df8-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 5486,
+          "sha256": "dde6babd76fa498b9df837fad415f8f7eaf457b4bc6f4b50ae9931f467e786a4"
+        },
+        {
+          "src": "/images/renditions/b9d80f8c90c6d95cc5f7-640.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 55322,
+          "sha256": "b9d80f8c90c6d95cc5f7e50c31e6e57080e8f1aacbc0522da39c445a17c47ef8"
+        },
+        {
+          "src": "/images/renditions/8cf5e7a3d24c81fac1e4-800.webp",
+          "width": 800,
+          "height": 1200,
+          "bytes": 78096,
+          "sha256": "8cf5e7a3d24c81fac1e4a94ff5e92f7ba405de6961d26d52c1f20d5a95bd4405"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/birds/victorias-riflebird.jpg",
+      "sourceSha256": "e42735dd34791f525027d8c66fb9d704415858b8340c05650c527341f8580179",
+      "sourceBytes": 197427,
+      "variants": [
+        {
+          "src": "/images/renditions/57923ead36bb4db8b9d7-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 4076,
+          "sha256": "57923ead36bb4db8b9d7c5c072c0821d5e1c45ab15c1361790dc1d297b02e015"
+        },
+        {
+          "src": "/images/renditions/e483bca64196ef1fc9e3-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 40244,
+          "sha256": "e483bca64196ef1fc9e3cf92b972b73b8c552a576fa7f8e7722459ede551056d"
+        },
+        {
+          "src": "/images/renditions/3eb91961a3a2d62bbd83-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 114080,
+          "sha256": "3eb91961a3a2d62bbd83ec645c1983562c4407fc313d1dc40906660532bec479"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/rainbow-lorikeet.jpg",
+      "sourceSha256": "0d306e87cf463c89b4f127379f12b2efe43e7cd3c88f12059d11dfbed3e44403",
+      "sourceBytes": 1503188,
+      "variants": [
+        {
+          "src": "/images/renditions/aa27e5528328110758d6-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 6588,
+          "sha256": "aa27e5528328110758d67620ef8652e9d804fee4fe0f66578c3473275952d277"
+        },
+        {
+          "src": "/images/renditions/d74b6c1bfa16a6a9e3ed-640.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 54858,
+          "sha256": "d74b6c1bfa16a6a9e3edbd1154e22037dcce81a3ee434dc5606ca4c389b2c9cf"
+        },
+        {
+          "src": "/images/renditions/f80bc99fbed4d4391a47-1280.webp",
+          "width": 1280,
+          "height": 1920,
+          "bytes": 183336,
+          "sha256": "f80bc99fbed4d4391a4777344f6ecde59cb31de597f530f60fac9838179ef376"
+        }
+      ]
+    },
+    {
+      "source": "/australia/images/sulphur-crested-cockatoo.jpg",
+      "sourceSha256": "b2c398b4e78898fad9c31287c97c8c91f5a7a7db788de2a7cebc1cde8a7083c4",
+      "sourceBytes": 361602,
+      "variants": [
+        {
+          "src": "/images/renditions/70e5682b1e031e679236-160.webp",
+          "width": 160,
+          "height": 132,
+          "bytes": 4788,
+          "sha256": "70e5682b1e031e679236e0fe05fceffd7d45fe0fe95ccc630935447a82dce8f7"
+        },
+        {
+          "src": "/images/renditions/e4d70a1c34bd5f4154de-640.webp",
+          "width": 640,
+          "height": 529,
+          "bytes": 33510,
+          "sha256": "e4d70a1c34bd5f4154de939558730308945ac7df04d269756846a51494ef1f90"
+        },
+        {
+          "src": "/images/renditions/684c69205e71bbc47895-1280.webp",
+          "width": 1280,
+          "height": 1058,
+          "bytes": 91248,
+          "sha256": "684c69205e71bbc478951e49f80570d21e739feea57b0dc0d6e264db05ccb7d2"
+        }
+      ]
+    },
+    {
+      "source": "/images/bbmtou1-square.png",
+      "sourceSha256": "47526463c2d847717a0e23292370801dc1721deaa5f0b084e99a17d015293c6f",
+      "sourceBytes": 297909,
+      "variants": [
+        {
+          "src": "/images/renditions/9c04eb3564979c4dc1c8-160.webp",
+          "width": 160,
+          "height": 163,
+          "bytes": 5180,
+          "sha256": "9c04eb3564979c4dc1c83a519fedb7e8e486743041516bbdd4b7b9022f8f0c1d"
+        },
+        {
+          "src": "/images/renditions/4613a1ea76714217e933-538.webp",
+          "width": 538,
+          "height": 547,
+          "bytes": 29816,
+          "sha256": "4613a1ea76714217e933e32a22b9e62d4c3beab17da114873314ecfc266a8458"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-apical-flycatcher.jpg",
+      "sourceSha256": "1fd957c13326d6281d208b1bbdc8bb9954d6f14d2592c421d1580803ddf04855",
+      "sourceBytes": 138519,
+      "variants": [
+        {
+          "src": "/images/renditions/38409bb8e3fa7c4824ef-160.webp",
+          "width": 160,
+          "height": 106,
+          "bytes": 7126,
+          "sha256": "38409bb8e3fa7c4824efedede520d5e460737781f4b33161faae241364f35b52"
+        },
+        {
+          "src": "/images/renditions/292041dd11722f2595b8-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 42646,
+          "sha256": "292041dd11722f2595b8e5d3c8c39e5d4aa45280a587c9b2d5dfabc9a6941216"
+        },
+        {
+          "src": "/images/renditions/db1dd7394f4c923a3b08-960.webp",
+          "width": 960,
+          "height": 639,
+          "bytes": 78804,
+          "sha256": "db1dd7394f4c923a3b0831c65ddfd31f73188ca2e3759ac0b06aa03bca35f510"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-choco-toucan.jpg",
+      "sourceSha256": "ba7d2ce4a552c1423775e544c7564f5918a178106182ce76ed1c42b730095076",
+      "sourceBytes": 257531,
+      "variants": [
+        {
+          "src": "/images/renditions/3665576c4e45a8820724-160.webp",
+          "width": 160,
+          "height": 114,
+          "bytes": 6440,
+          "sha256": "3665576c4e45a8820724c2298e3ff0e97fe148850a82eb77465df7213d12cb8f"
+        },
+        {
+          "src": "/images/renditions/8c69e9ab87e5422553fc-640.webp",
+          "width": 640,
+          "height": 457,
+          "bytes": 61080,
+          "sha256": "8c69e9ab87e5422553fc0f272ba70531e431ee95d11af03a73d7520278ba2316"
+        },
+        {
+          "src": "/images/renditions/efbf9d74722d5d1d563b-1200.webp",
+          "width": 1200,
+          "height": 857,
+          "bytes": 169026,
+          "sha256": "efbf9d74722d5d1d563bd9cfb487e05d55d4e3884a65b80d80f8591224929e8f"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-hoatzin.jpg",
+      "sourceSha256": "e47b5145425a17f1701a8d33608a800e2fffe64bf750e17d5a334321457bff4c",
+      "sourceBytes": 288137,
+      "variants": [
+        {
+          "src": "/images/renditions/adbd67519c4a96fd4c4b-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5234,
+          "sha256": "adbd67519c4a96fd4c4b547b681c6f8e825c779e70af4fae208d651f9f9c03fa"
+        },
+        {
+          "src": "/images/renditions/be1d556dc267961fbc72-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 62786,
+          "sha256": "be1d556dc267961fbc7294461638918716a2a93da51d73dc716cc8547ff2632e"
+        },
+        {
+          "src": "/images/renditions/3d135789ef83dca110be-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 205430,
+          "sha256": "3d135789ef83dca110be47bcf35b4a8e16b2f381c631ebd9683697615a1dd4d8"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-jabiru.jpg",
+      "sourceSha256": "6bb1388fb03834b49c1170858aadee160957d18f27433f195a5b84bbd3cbe807",
+      "sourceBytes": 368131,
+      "variants": [
+        {
+          "src": "/images/renditions/73dc2e05c9237a508358-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 7364,
+          "sha256": "73dc2e05c9237a50835830ac59e5d96b02365a1d8af4210a4fb6ebb6edad58de"
+        },
+        {
+          "src": "/images/renditions/f7918d453d9b0f360a83-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 89810,
+          "sha256": "f7918d453d9b0f360a83cf589f1b5a33705d643aaca2634beaa8bf57d67581c3"
+        },
+        {
+          "src": "/images/renditions/4cbf67a579a74fc07eb6-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 258722,
+          "sha256": "4cbf67a579a74fc07eb66dca0210e622b1587f691ad7e5b665f3ba959b3cece8"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-santa-marta-brushfinch.jpg",
+      "sourceSha256": "6dec36aaa63ec6dc9bcedcb30ec3fb1193907b40962b1487e9b82685c451a65b",
+      "sourceBytes": 208700,
+      "variants": [
+        {
+          "src": "/images/renditions/ded39d4ce837ca387fa5-160.webp",
+          "width": 160,
+          "height": 148,
+          "bytes": 5016,
+          "sha256": "ded39d4ce837ca387fa5388d78e2cf813d76f9932a3f65e5c8ef1c242bf5d310"
+        },
+        {
+          "src": "/images/renditions/5038429c302ba2be817e-640.webp",
+          "width": 640,
+          "height": 592,
+          "bytes": 32838,
+          "sha256": "5038429c302ba2be817eaf1356e34fe912baaf19ff4e812140aecdb587d82b8f"
+        },
+        {
+          "src": "/images/renditions/a6ede36b68ff693df9fd-1200.webp",
+          "width": 1200,
+          "height": 1110,
+          "bytes": 91566,
+          "sha256": "a6ede36b68ff693df9fdf61f70924f2ed92f80311ac2cc570163970c238c5592"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-santa-marta-parakeet.jpg",
+      "sourceSha256": "725d28df1c735f89ae55155ba2124d03ce52d889dd71f3c60dd3e6187d0c64b7",
+      "sourceBytes": 162357,
+      "variants": [
+        {
+          "src": "/images/renditions/bf9c0d2cc95323fe3a58-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4970,
+          "sha256": "bf9c0d2cc95323fe3a58ba1cf8fd4fea3d6ae8449f6bd1d6811934f7933c3cd5"
+        },
+        {
+          "src": "/images/renditions/1095629c2b5016fa8db0-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 34468,
+          "sha256": "1095629c2b5016fa8db0bfceb1ee8f78538a90609f7c1506da201adb913de45f"
+        },
+        {
+          "src": "/images/renditions/dae97c0b23a0186ad54c-1200.webp",
+          "width": 1200,
+          "height": 801,
+          "bytes": 91032,
+          "sha256": "dae97c0b23a0186ad54c354cc55c7ff4d1bf899c778525e5fda696760376fdcd"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-scarlet-ibis.jpg",
+      "sourceSha256": "d95db4523f56669c08f7e8edfae6aa8550d47df82f51afb0b060d55362a64339",
+      "sourceBytes": 284370,
+      "variants": [
+        {
+          "src": "/images/renditions/8940de704da8824cafdb-160.webp",
+          "width": 160,
+          "height": 134,
+          "bytes": 6922,
+          "sha256": "8940de704da8824cafdb47d740bd16556beb2eb79f3c491206c3d3cbbe8cd285"
+        },
+        {
+          "src": "/images/renditions/ea969fb7671c678e5aa3-640.webp",
+          "width": 640,
+          "height": 537,
+          "bytes": 69790,
+          "sha256": "ea969fb7671c678e5aa3e33a5919d79e8c54b9c8c41273b5cb4281ddec4554c7"
+        },
+        {
+          "src": "/images/renditions/c7b37b7226ca6a0b93d3-1200.webp",
+          "width": 1200,
+          "height": 1007,
+          "bytes": 168406,
+          "sha256": "c7b37b7226ca6a0b93d3bde7f3bc60347fc87f0a7f9eb2da08cccdedc1f42e97"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-scarlet-macaw.jpg",
+      "sourceSha256": "950b553b27609c97c815ddced786c2d333c8b55940588f941b18cecfe5f0543e",
+      "sourceBytes": 249328,
+      "variants": [
+        {
+          "src": "/images/renditions/953bf13ec0419c6c559d-160.webp",
+          "width": 160,
+          "height": 170,
+          "bytes": 6326,
+          "sha256": "953bf13ec0419c6c559d9f876bbb9204f0e04ad045969c1cf3d66800b3bc931a"
+        },
+        {
+          "src": "/images/renditions/093ea9a8236e4e7ffdba-640.webp",
+          "width": 640,
+          "height": 680,
+          "bytes": 49178,
+          "sha256": "093ea9a8236e4e7ffdba3dd477e1700b04c064421c74675a0199d0ad938fe10c"
+        },
+        {
+          "src": "/images/renditions/da9e5dd751c780f69f89-1129.webp",
+          "width": 1129,
+          "height": 1200,
+          "bytes": 117900,
+          "sha256": "da9e5dd751c780f69f8912482b63cd98330637e3dd767323b2d2f98c948b3c83"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-sunbittern.jpg",
+      "sourceSha256": "e614b0f98d694494017e3fb54bf0f2d193219c9b4c4b86f479ea7873e476903d",
+      "sourceBytes": 185121,
+      "variants": [
+        {
+          "src": "/images/renditions/9f75717fd6bd9e5f4d12-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3322,
+          "sha256": "9f75717fd6bd9e5f4d120f2a9678641c281c2ce75a2474d235912296272b8485"
+        },
+        {
+          "src": "/images/renditions/c895b5e0149ebac7bc4b-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 29916,
+          "sha256": "c895b5e0149ebac7bc4bb40afcc27434608e7368ce4b514be1eb8e8405ca9898"
+        },
+        {
+          "src": "/images/renditions/0dc62934782b50a9353b-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 91604,
+          "sha256": "0dc62934782b50a9353be606399cf1761708c64c0a917cb3eecc2827b8bbd9d4"
+        }
+      ]
+    },
+    {
+      "source": "/images/birds/co-white-tailed-starfrontlet.jpg",
+      "sourceSha256": "17f388e8fc500fc3c08ae4edd7d6ff2cc44a99297f4c339c9b03aa072d974068",
+      "sourceBytes": 154366,
+      "variants": [
+        {
+          "src": "/images/renditions/00ba6f73edee13dfb0c9-160.webp",
+          "width": 160,
+          "height": 151,
+          "bytes": 6644,
+          "sha256": "00ba6f73edee13dfb0c9dc2cee117243d10538c6fb6806a2293db97cdad93ae1"
+        },
+        {
+          "src": "/images/renditions/aac7298bc1b8af261086-640.webp",
+          "width": 640,
+          "height": 603,
+          "bytes": 47420,
+          "sha256": "aac7298bc1b8af26108648aac9a1870513ba028c433a23203ce3a0a6cdbe26ff"
+        },
+        {
+          "src": "/images/renditions/fc803de0742a9b69744a-900.webp",
+          "width": 900,
+          "height": 848,
+          "bytes": 87440,
+          "sha256": "fc803de0742a9b69744a65ce3adaed86ea7a14f9f5ea94f67fc808a73460f848"
+        }
+      ]
+    },
+    {
+      "source": "/images/bkmtou1.jpg",
+      "sourceSha256": "22de58e825042a3001a43c010b26e496d2e6f8cd2fca2ed98182183812ba1937",
+      "sourceBytes": 128124,
+      "variants": [
+        {
+          "src": "/images/renditions/7c32233694e867f03ca6-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 2036,
+          "sha256": "7c32233694e867f03ca692d49a15e6b4bd3c340d6880e2f72b7c81d985364b51"
+        },
+        {
+          "src": "/images/renditions/216ec1c94ddbe10ba716-640.webp",
+          "width": 640,
+          "height": 639,
+          "bytes": 14756,
+          "sha256": "216ec1c94ddbe10ba71639a5f8f1550d8500ae6410c3999926eccd8b28b983f8"
+        },
+        {
+          "src": "/images/renditions/deac1d430b650cb603c8-1038.webp",
+          "width": 1038,
+          "height": 1036,
+          "bytes": 31798,
+          "sha256": "deac1d430b650cb603c810ff318669b6750bf2234011622dcba59abf960f54fc"
+        }
+      ]
+    },
+    {
+      "source": "/images/blue-crowned-motmot-new.jpg",
+      "sourceSha256": "e01bd8dce3c08138eacf73575593f0ee1d9ea7e079675d120f2365a2d90379cb",
+      "sourceBytes": 895794,
+      "variants": [
+        {
+          "src": "/images/renditions/8f2d2da40f373317a8d7-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5274,
+          "sha256": "8f2d2da40f373317a8d7ab0df3ca02553938c526f77513749956f77408f98799"
+        },
+        {
+          "src": "/images/renditions/af8b8c92527284592df6-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 29634,
+          "sha256": "af8b8c92527284592df6d4a8f199f2980185376d56eb5e636b21d35b70308843"
+        },
+        {
+          "src": "/images/renditions/335f2f48bf1f1806622c-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 79998,
+          "sha256": "335f2f48bf1f1806622cbd7d97648eca936845fde78ad29ef52ca762f61035df"
+        }
+      ]
+    },
+    {
+      "source": "/images/cardinal-guajiro.jpg",
+      "sourceSha256": "4d6b14cc5d77ebeb73db033b3ba53a17cbb5c1736a31236783b25a4897ab9352",
+      "sourceBytes": 609093,
+      "variants": [
+        {
+          "src": "/images/renditions/919ba9695ea8cc52098a-160.webp",
+          "width": 160,
+          "height": 207,
+          "bytes": 10104,
+          "sha256": "919ba9695ea8cc52098ac39ed3af50a674ee531a148d7810f05e2405e241efc5"
+        },
+        {
+          "src": "/images/renditions/4a3f44c5a21f60668179-640.webp",
+          "width": 640,
+          "height": 824,
+          "bytes": 91016,
+          "sha256": "4a3f44c5a21f6066817919d75d47262166b7930781d0eaec34ee74294e7f7117"
+        },
+        {
+          "src": "/images/renditions/b8fb24647ceab7f1244c-1280.webp",
+          "width": 1280,
+          "height": 1648,
+          "bytes": 234606,
+          "sha256": "b8fb24647ceab7f1244ce8f653ba7154ce73b0ba44f5d34a67190bcaac095772"
+        }
+      ]
+    },
+    {
+      "source": "/images/chestnut-crowned-antpitta.jpg",
+      "sourceSha256": "6d095d032a0ea8e00771a157dc69d58f2dc6f5877bde96709ecec210f45d2c35",
+      "sourceBytes": 1707523,
+      "variants": [
+        {
+          "src": "/images/renditions/08797a0c0a5a43d17fb5-160.webp",
+          "width": 160,
+          "height": 90,
+          "bytes": 2562,
+          "sha256": "08797a0c0a5a43d17fb59fc7981fdf45a0c4ae02bf05a976b0840c998f9c8b22"
+        },
+        {
+          "src": "/images/renditions/f26ff50b313bb81d104d-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 19316,
+          "sha256": "f26ff50b313bb81d104dbca13284324f4f44678152729256c3ab2108c305ee46"
+        },
+        {
+          "src": "/images/renditions/43d540ee20fb1a44d67b-1280.webp",
+          "width": 1280,
+          "height": 721,
+          "bytes": 53088,
+          "sha256": "43d540ee20fb1a44d67b00b3f6b7ea1fc5ce258f1d4b781f2f3df07f7a39a49b"
+        }
+      ]
+    },
+    {
+      "source": "/images/destinations/kea-new-zealand.jpg",
+      "sourceSha256": "4df3ee2cbb3d9f5d794e28c77f0040f9f751cade18a84e9a88df606533a2c4fc",
+      "sourceBytes": 1267937,
+      "variants": [
+        {
+          "src": "/images/renditions/e583dc01b8a5fc06fb51-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5590,
+          "sha256": "e583dc01b8a5fc06fb513e407166bd2bfd2e85c91e180bf02a2646667aa40115"
+        },
+        {
+          "src": "/images/renditions/0fdbfb02d074c9855fa8-640.webp",
+          "width": 640,
+          "height": 428,
+          "bytes": 49434,
+          "sha256": "0fdbfb02d074c9855fa884f5568520446efa4bd7ee955b0608355258755c5db1"
+        },
+        {
+          "src": "/images/renditions/c1b1bd493dd1f7443a24-1280.webp",
+          "width": 1280,
+          "height": 857,
+          "bytes": 143380,
+          "sha256": "c1b1bd493dd1f7443a240f15029dbe8be2e37e9c46eb1b415283969ee30f96b0"
+        }
+      ]
+    },
+    {
+      "source": "/images/gohman1.jpg",
+      "sourceSha256": "717993b562c2b45c22a31c1a49a0be3edfa461bec392d0187b1a23b36eb864c7",
+      "sourceBytes": 2547587,
+      "variants": [
+        {
+          "src": "/images/renditions/efbce9306d612d606419-160.webp",
+          "width": 160,
+          "height": 159,
+          "bytes": 2714,
+          "sha256": "efbce9306d612d606419ad7a28b8bfc8d738d01d57cca0b20ee52f0282256612"
+        },
+        {
+          "src": "/images/renditions/d7b7064dc81d5540ad52-640.webp",
+          "width": 640,
+          "height": 637,
+          "bytes": 20430,
+          "sha256": "d7b7064dc81d5540ad52e8087c232813f2c102072c9ab28664f1234935630b95"
+        },
+        {
+          "src": "/images/renditions/15b5b182b78816ce3e28-1280.webp",
+          "width": 1280,
+          "height": 1275,
+          "bytes": 95096,
+          "sha256": "15b5b182b78816ce3e28c41d07dd77339a2afbf6a3eec8f0c222df0342b0ea63"
+        }
+      ]
+    },
+    {
+      "source": "/images/gohque1.jpg",
+      "sourceSha256": "a101cf7b6843aa6a0eb29381ae429d5d8cf7ee5ba5c6a943de0b033ffbe39615",
+      "sourceBytes": 435877,
+      "variants": [
+        {
+          "src": "/images/renditions/f4992976f7b79db57b0e-160.webp",
+          "width": 160,
+          "height": 159,
+          "bytes": 6592,
+          "sha256": "f4992976f7b79db57b0efec9f839afc77d9c1f60dd4ac25bd1e3c2841e59c3bc"
+        },
+        {
+          "src": "/images/renditions/cf97e95796d4e9a87ff5-640.webp",
+          "width": 640,
+          "height": 638,
+          "bytes": 57776,
+          "sha256": "cf97e95796d4e9a87ff543f78845a5809a5ed58e0ecfaa13e156c8c30e2e5f77"
+        },
+        {
+          "src": "/images/renditions/d493922e0f1777d6e7cd-1018.webp",
+          "width": 1018,
+          "height": 1015,
+          "bytes": 111182,
+          "sha256": "d493922e0f1777d6e7cdea088b08c476497abecea67675c39facf81d78b0f949"
+        }
+      ]
+    },
+    {
+      "source": "/images/green-bearded-helmetcrest.png",
+      "sourceSha256": "e43e12f652c30c5768919a339509466d5b65915fc6eaa1223d4e549f64a1cd7a",
+      "sourceBytes": 748730,
+      "variants": [
+        {
+          "src": "/images/renditions/065c3d1e4f4a9f9dc0f8-160.webp",
+          "width": 160,
+          "height": 139,
+          "bytes": 3654,
+          "sha256": "065c3d1e4f4a9f9dc0f81cc555f2df8d6087f0dbf463f0ec5d3258fbf0a0d573"
+        },
+        {
+          "src": "/images/renditions/9a79ea3a45b616a2cae5-640.webp",
+          "width": 640,
+          "height": 556,
+          "bytes": 26490,
+          "sha256": "9a79ea3a45b616a2cae5f52e9692bac6768167e6e0c23859d4ac6d4530e721cb"
+        },
+        {
+          "src": "/images/renditions/862c3b26c0a3764811a0-1072.webp",
+          "width": 1072,
+          "height": 931,
+          "bytes": 52830,
+          "sha256": "862c3b26c0a3764811a0391fe5d897cb879459c1c54d8f9f55564d723644cf50"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/australasian-bittern.webp",
+      "sourceSha256": "f7b222f772fdb1b4a8cb37750d583675d06a700e6c5a3db059c8b91a3d576234",
+      "sourceBytes": 244582,
+      "variants": [
+        {
+          "src": "/images/renditions/4c3bc5c870805d3b632c-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5900,
+          "sha256": "4c3bc5c870805d3b632c70ad8fb9b056da9173a9cd7d6dcc230ec084a6f69ad0"
+        },
+        {
+          "src": "/images/renditions/e755f740441c0eafd61c-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 81654,
+          "sha256": "e755f740441c0eafd61c8b349d97818ce0b064aa7f05039595a46573b8fa568d"
+        },
+        {
+          "src": "/images/renditions/683fe35f21951181d22e-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 238218,
+          "sha256": "683fe35f21951181d22ef80b28484b0dee45a52508792ca3375fd1b1d6b43d52"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/australasian-crested-grebe.webp",
+      "sourceSha256": "cd274cde6a08346b3cc39f5482ce55315bdd1341b0a3e91092f7aa9e0b4f95ec",
+      "sourceBytes": 111758,
+      "variants": [
+        {
+          "src": "/images/renditions/3fd69ba3326ed0376c97-160.webp",
+          "width": 160,
+          "height": 112,
+          "bytes": 2398,
+          "sha256": "3fd69ba3326ed0376c9797ec1287c0877691e18452ac6334a5d5753901199788"
+        },
+        {
+          "src": "/images/renditions/5e93e090b53b2fb44b31-640.webp",
+          "width": 640,
+          "height": 450,
+          "bytes": 25906,
+          "sha256": "5e93e090b53b2fb44b3163967482f85484ec9f621ebef3f7218e0898f5643225"
+        },
+        {
+          "src": "/images/renditions/d71b6e30c704f5edef96-1200.webp",
+          "width": 1200,
+          "height": 843,
+          "bytes": 99398,
+          "sha256": "d71b6e30c704f5edef96d7772479102a6220029b45b92e102db815ff64cbad9e"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/bellbird.webp",
+      "sourceSha256": "ac3601a703ede95d5e8ba3f89e10b04ac048d8e45cd7300d1f5ba8402820477f",
+      "sourceBytes": 77078,
+      "variants": [
+        {
+          "src": "/images/renditions/24b57cdb7288a3cf5b43-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2304,
+          "sha256": "24b57cdb7288a3cf5b43c6615fa97cc63f65221946c860e5ad63558444e8c6be"
+        },
+        {
+          "src": "/images/renditions/2256ca6795cbde5b8063-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 19404,
+          "sha256": "2256ca6795cbde5b8063d4afbfec457e4ecbad696dfb98490523b0a739ee18c4"
+        },
+        {
+          "src": "/images/renditions/731a9a5b24c5f977a9b2-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 72136,
+          "sha256": "731a9a5b24c5f977a9b25fd2c2b41209d894608671d3807f3a064bc246b7b073"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/black-stilt.webp",
+      "sourceSha256": "ec7f63e471287c2e29caa3b99905063444cb99bb19a395df056c45185fe4c4e3",
+      "sourceBytes": 43434,
+      "variants": [
+        {
+          "src": "/images/renditions/b6f1384aa0be7c33b39c-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2176,
+          "sha256": "b6f1384aa0be7c33b39c3c721316147fd1b1d1913e00beb9ba7c52b7270fc6fc"
+        },
+        {
+          "src": "/images/renditions/b7c7e9c0c52bca66c0e4-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 15556,
+          "sha256": "b7c7e9c0c52bca66c0e43234a7788a3050c7a134d7c121dd7a93e1158409c820"
+        },
+        {
+          "src": "/images/renditions/8cbc3bdcd31ae46c80cc-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 37898,
+          "sha256": "8cbc3bdcd31ae46c80cc4992016f9c5632546787c79b89db5476cd4c010a6ff4"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/blue-duck.webp",
+      "sourceSha256": "e1e866f89d235e10e78613a05472081c0f9f03e0af82e4066eac417cb035fc1d",
+      "sourceBytes": 130460,
+      "variants": [
+        {
+          "src": "/images/renditions/13a84c4f955485e78296-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3410,
+          "sha256": "13a84c4f955485e782961840766b9dfa5082554a05d3f2badbe4c2dad5e13fe3"
+        },
+        {
+          "src": "/images/renditions/23d38c791aaa08507d29-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 35878,
+          "sha256": "23d38c791aaa08507d29ecc8c072b42ae8735155336c7c02a0006d306ed7b210"
+        },
+        {
+          "src": "/images/renditions/64464b826223c10ed0c7-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 124264,
+          "sha256": "64464b826223c10ed0c7a77c91f9600d19b9cb43aaf1d5c84544c327cc8843cb"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/fantail.webp",
+      "sourceSha256": "9e9d88629b44d0f8c839561d948af7a4216957d91683ca4958761d00c8627007",
+      "sourceBytes": 94296,
+      "variants": [
+        {
+          "src": "/images/renditions/3b08f18143d82ed90504-160.webp",
+          "width": 160,
+          "height": 137,
+          "bytes": 3746,
+          "sha256": "3b08f18143d82ed90504848f23f139b24a5c42c44cecacb2f7588b6bf8fd9d40"
+        },
+        {
+          "src": "/images/renditions/ab6dd5a0b07f2bf59335-640.webp",
+          "width": 640,
+          "height": 548,
+          "bytes": 26004,
+          "sha256": "ab6dd5a0b07f2bf59335f8e522b9ea9353b24e18331e8294d71478212377c3c7"
+        },
+        {
+          "src": "/images/renditions/da2faac81625fd1320c4-1168.webp",
+          "width": 1168,
+          "height": 1000,
+          "bytes": 76470,
+          "sha256": "da2faac81625fd1320c412055cf07748714b8fbcf4eed5d4903576af370dc334"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/grey-warbler.webp",
+      "sourceSha256": "5f8ac39b0fa66055abf89a96e6200e99d40f0ee4320f0f2cd188928cf816e051",
+      "sourceBytes": 137398,
+      "variants": [
+        {
+          "src": "/images/renditions/fff0370fdf1a47706210-160.webp",
+          "width": 160,
+          "height": 155,
+          "bytes": 6692,
+          "sha256": "fff0370fdf1a47706210e56e09ff8b37c05187f22694df5d57172c1f69e34e7a"
+        },
+        {
+          "src": "/images/renditions/3c781d060d108fc7b99e-640.webp",
+          "width": 640,
+          "height": 619,
+          "bytes": 48234,
+          "sha256": "3c781d060d108fc7b99e713f2a6a7acb6cd6c47c5dd199aba29ed3406dfdcb4f"
+        },
+        {
+          "src": "/images/renditions/8c565119c930d8ac6cd4-1200.webp",
+          "width": 1200,
+          "height": 1161,
+          "bytes": 127014,
+          "sha256": "8c565119c930d8ac6cd4207dbcd3b93c1bb64a3f5403bac54d791739d50eb238"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/huttons-shearwater.webp",
+      "sourceSha256": "7c2b0853415a9aa5e33c9ad8bd4d2aee71419af14532ed7ed7e1df6df0994421",
+      "sourceBytes": 33302,
+      "variants": [
+        {
+          "src": "/images/renditions/4f1681e7b9979a23858e-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2432,
+          "sha256": "4f1681e7b9979a23858e6ac957cd2a9deaeadb5413b01b91db4eb497996ce60d"
+        },
+        {
+          "src": "/images/renditions/c5cb52323f9757ade6df-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 14518,
+          "sha256": "c5cb52323f9757ade6df57f014007e012085e13e1b0620c51ba2c5c914b40580"
+        },
+        {
+          "src": "/images/renditions/6bdcbe48fbd89aa8a50f-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 30644,
+          "sha256": "6bdcbe48fbd89aa8a50f93e0afa69a22784d0548f38c0a589fd98e85fe49c1ab"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/kaka.webp",
+      "sourceSha256": "2884e69cacbb3434fd22e61bc074c3cba753c27ea0fcf4e90571354c7aafda0d",
+      "sourceBytes": 103212,
+      "variants": [
+        {
+          "src": "/images/renditions/d19e0d5fa2ce3187a530-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4606,
+          "sha256": "d19e0d5fa2ce3187a5308b7c1fdd20417a576974a434e925f6308116a4a6506b"
+        },
+        {
+          "src": "/images/renditions/4948334f526cb1119a7c-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 33076,
+          "sha256": "4948334f526cb1119a7c6246ce28d450da6c9fd6987dca8b2e8305c370e95eb3"
+        },
+        {
+          "src": "/images/renditions/04a84ac6e1ebd85312d6-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 93564,
+          "sha256": "04a84ac6e1ebd85312d6b6664dd5595a05d07d64af9b7cc529e95c332a816a9c"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/kereru.webp",
+      "sourceSha256": "40ae80331c6badb518c070c7d7569c2e9c8ed29feac3e6ae852bd810ebaa90c4",
+      "sourceBytes": 107716,
+      "variants": [
+        {
+          "src": "/images/renditions/1e1b5481a7b09b709d9a-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 5854,
+          "sha256": "1e1b5481a7b09b709d9a9be0e36963e3a137820b8c5d3fa7b7e6d857425cef74"
+        },
+        {
+          "src": "/images/renditions/3b177aff885c5d4b7990-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 49452,
+          "sha256": "3b177aff885c5d4b7990ec4db9dc7ec96c45ecf31d5642d738bc0fe10c4387d0"
+        },
+        {
+          "src": "/images/renditions/bd80ca4beae1fb5e6ed0-900.webp",
+          "width": 900,
+          "height": 1200,
+          "bytes": 98514,
+          "sha256": "bd80ca4beae1fb5e6ed0293fe6a1639f0f211d35ad2908d6836e51ce6cd89a15"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/little-penguin.webp",
+      "sourceSha256": "e035ce43bd5979a3aa285e8fad813feb4b360759e001cd0bfbe4700fa1a84471",
+      "sourceBytes": 111122,
+      "variants": [
+        {
+          "src": "/images/renditions/6ba9425b97f4a274cd88-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2936,
+          "sha256": "6ba9425b97f4a274cd88eec210fa26103ab5074fe05079348a1748e2d3314805"
+        },
+        {
+          "src": "/images/renditions/2e6be311f64197aa2ff1-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 30722,
+          "sha256": "2e6be311f64197aa2ff19de9fbc65b77fe8d1e54076b8a64d959a47e6c65cb68"
+        },
+        {
+          "src": "/images/renditions/d555b83654900543e69e-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 92736,
+          "sha256": "d555b83654900543e69ec06a1f888185625341deace60b3b3f6cebee00c3dfa1"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/morepork.webp",
+      "sourceSha256": "c9e56ce28de6fdf4bbdb19ec5a0ba8d92f56a6c777c6ad0dd4f8b86dd432c47c",
+      "sourceBytes": 215246,
+      "variants": [
+        {
+          "src": "/images/renditions/b12190bc9ec73c26ade5-160.webp",
+          "width": 160,
+          "height": 245,
+          "bytes": 16030,
+          "sha256": "b12190bc9ec73c26ade5b7378d0dab9926cdbe0cbbb367308f89234e4b48c99e"
+        },
+        {
+          "src": "/images/renditions/32fbf16a7b5b5b3c843a-640.webp",
+          "width": 640,
+          "height": 981,
+          "bytes": 139108,
+          "sha256": "32fbf16a7b5b5b3c843a83a72cd74570c988f6074d3a2430e3f609802de9941a"
+        },
+        {
+          "src": "/images/renditions/b7460e13929a9055cf99-783.webp",
+          "width": 783,
+          "height": 1200,
+          "bytes": 210786,
+          "sha256": "b7460e13929a9055cf994377436db70d11e22b82e1b497314b8c8f52f527842b"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/new-zealand-falcon.webp",
+      "sourceSha256": "0da50dcb21fa73deb3e6ca18c6ac3194fe460e234c213dca849c8a94559ac498",
+      "sourceBytes": 53756,
+      "variants": [
+        {
+          "src": "/images/renditions/624ac78043dcde926cf2-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 4802,
+          "sha256": "624ac78043dcde926cf2bf8b9b1d31670f96692ead356417497a969be9b0ed7f"
+        },
+        {
+          "src": "/images/renditions/7f2c3582d20cd5167249-640.webp",
+          "width": 640,
+          "height": 959,
+          "bytes": 31782,
+          "sha256": "7f2c3582d20cd51672498f06d2da085ceefc691e7309b45b5504e5b8f7648d7c"
+        },
+        {
+          "src": "/images/renditions/74373fd160735fc2605c-801.webp",
+          "width": 801,
+          "height": 1200,
+          "bytes": 49408,
+          "sha256": "74373fd160735fc2605c210212c97972180e173cd797ec95b34ed5ef67613778"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/nz-extra-rifleman.webp",
+      "sourceSha256": "3262ed68e94e9ec544c40fa3a48de618512c450f2b091564e7689f07280ff9ee",
+      "sourceBytes": 59252,
+      "variants": [
+        {
+          "src": "/images/renditions/5085adbab6407d0d71e8-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3692,
+          "sha256": "5085adbab6407d0d71e864174967436a7edb000231e78eeca6a0ad71df324b9c"
+        },
+        {
+          "src": "/images/renditions/770e1a9a97a2b4d6aeca-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 20134,
+          "sha256": "770e1a9a97a2b4d6aeca9961bc0c045b98c9478a6eb756f409075c3d6813ac5e"
+        },
+        {
+          "src": "/images/renditions/b67a0e228d7e44f09f22-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 48020,
+          "sha256": "b67a0e228d7e44f09f22d79b3e8d082c5b2d4327203b776f03c4e46083148c52"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/orange-fronted-parakeet.webp",
+      "sourceSha256": "b50ec30057e4745e7fba5729e0ff3c713638502497f5300e2fe023cece4abd37",
+      "sourceBytes": 111796,
+      "variants": [
+        {
+          "src": "/images/renditions/20e92e2d3e292374b895-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 6710,
+          "sha256": "20e92e2d3e292374b895f0a97cc5b871d5c74bcbd4e7df81e242a20ba148c2d7"
+        },
+        {
+          "src": "/images/renditions/bf671f94bbde2308a2d9-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 48692,
+          "sha256": "bf671f94bbde2308a2d917a80eadb66ac513e0063cf2b3f5fb7f3a42f29bb39e"
+        },
+        {
+          "src": "/images/renditions/50083a567689d8e35a67-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 107386,
+          "sha256": "50083a567689d8e35a67ad351d59daef882aea37bc4d63ac3d6f83e4dd9b05f2"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/paradise-shelduck.webp",
+      "sourceSha256": "b96294e2d3fab7f12589d7430e3e66d05dec42e72a49cff1584231c06e28ff86",
+      "sourceBytes": 132804,
+      "variants": [
+        {
+          "src": "/images/renditions/74aa8dab7c6445117061-160.webp",
+          "width": 160,
+          "height": 106,
+          "bytes": 2624,
+          "sha256": "74aa8dab7c6445117061b3b04ae305792490e3a49e2a809184ff97ea7813ebdd"
+        },
+        {
+          "src": "/images/renditions/50ce7c8a2ccefede2e4a-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 35044,
+          "sha256": "50ce7c8a2ccefede2e4a42b5badb9326fec7e0bf1bd7ca4c3690711dd681d252"
+        },
+        {
+          "src": "/images/renditions/9c7839b773e06f9dbec8-1200.webp",
+          "width": 1200,
+          "height": 798,
+          "bytes": 128426,
+          "sha256": "9c7839b773e06f9dbec8599517680bae70279f86b4e79d5f7261d42b1a43d1d0"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/red-crowned-parakeet.webp",
+      "sourceSha256": "7ba5844060eec66791320f0b26e49e4f33c64988b0870db5e1147fc36f865366",
+      "sourceBytes": 118868,
+      "variants": [
+        {
+          "src": "/images/renditions/e53300c3c3029376f876-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 6964,
+          "sha256": "e53300c3c3029376f87682fc54328e91d47183d2b631fde6b0695fce803b0fe9"
+        },
+        {
+          "src": "/images/renditions/f9af9c794bcfe733b3a4-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 47696,
+          "sha256": "f9af9c794bcfe733b3a44d2bd34f817fd79ecb7b3bf6e2b08c9258315502fb8a"
+        },
+        {
+          "src": "/images/renditions/344d7d06b18867408903-1200.webp",
+          "width": 1200,
+          "height": 801,
+          "bytes": 113334,
+          "sha256": "344d7d06b188674089033fdad0896fc538fd3525da516ef163f68ef3ff2efb03"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/rock-wren.webp",
+      "sourceSha256": "19f79821afca66ca0bb72bff01bf23e05a32b8661a3435c07de70e57faa73df8",
+      "sourceBytes": 133896,
+      "variants": [
+        {
+          "src": "/images/renditions/1c5e313b41fbe4123939-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 6582,
+          "sha256": "1c5e313b41fbe4123939158253cc68e3346a1c8603217b35bed607360f9cf8aa"
+        },
+        {
+          "src": "/images/renditions/8a74213a9b92320468ee-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 54256,
+          "sha256": "8a74213a9b92320468ee41f9438723c3148cc100faacf2d736e0dbad5bf116ac"
+        },
+        {
+          "src": "/images/renditions/d956a6f11fbcddcaf264-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 130106,
+          "sha256": "d956a6f11fbcddcaf264559e5d21433874f30716ec40386c613c88cecd382197"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/silvereye.webp",
+      "sourceSha256": "c81a978b69dbcc305d6f9bd673421cc71d38a60b1616ae7039f61bdf11f37448",
+      "sourceBytes": 135226,
+      "variants": [
+        {
+          "src": "/images/renditions/1944e5bbe91159d322d2-160.webp",
+          "width": 160,
+          "height": 118,
+          "bytes": 3674,
+          "sha256": "1944e5bbe91159d322d2ae4530457de685ee12378765ec7b1dd7548d19673091"
+        },
+        {
+          "src": "/images/renditions/b383a49f5637ffcbdcfb-640.webp",
+          "width": 640,
+          "height": 473,
+          "bytes": 32770,
+          "sha256": "b383a49f5637ffcbdcfb387543b99f269c68bf71a0a418c7cce689c28d000489"
+        },
+        {
+          "src": "/images/renditions/f02d8d54cd019fc732c7-1200.webp",
+          "width": 1200,
+          "height": 887,
+          "bytes": 119700,
+          "sha256": "f02d8d54cd019fc732c757eb93c031cbfb0598cb9fc9898e4a25adfb102f9054"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/south-island-robin.webp",
+      "sourceSha256": "e624fc013d989afa78642b4cc76a7160b10cd2a9d11ddea02d64c6bcfea1254a",
+      "sourceBytes": 26504,
+      "variants": [
+        {
+          "src": "/images/renditions/303798973b077e0207c3-160.webp",
+          "width": 160,
+          "height": 239,
+          "bytes": 3700,
+          "sha256": "303798973b077e0207c3a6b3bf623a6d4bab8f9c262dca3c084e5ae8a5c88292"
+        },
+        {
+          "src": "/images/renditions/87c5cb4a2a6e1f50f7ec-640.webp",
+          "width": 640,
+          "height": 955,
+          "bytes": 18098,
+          "sha256": "87c5cb4a2a6e1f50f7ec5c5105587c25b5aabd6f898fcad71a8a266865cd668d"
+        },
+        {
+          "src": "/images/renditions/256782780281387274bb-804.webp",
+          "width": 804,
+          "height": 1200,
+          "bytes": 24464,
+          "sha256": "256782780281387274bb8dab57501e2d9c0f562a3aa1ed79764d29344c261444"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/south-island-saddleback.webp",
+      "sourceSha256": "24e2d022910e71b50904cffb2dc8f66ae9be15930bee10029005b4aa0605e59b",
+      "sourceBytes": 177310,
+      "variants": [
+        {
+          "src": "/images/renditions/7dc07cff7de33915f864-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 6114,
+          "sha256": "7dc07cff7de33915f86445a39142640e96d5a79b52cae1db945223c68b763ad8"
+        },
+        {
+          "src": "/images/renditions/d9c7733909fa2b3f04cd-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 59890,
+          "sha256": "d9c7733909fa2b3f04cd00efc55184e0cdbb8434a5dc77c000b06daa5439f5d6"
+        },
+        {
+          "src": "/images/renditions/fa2592446780bb984bbb-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 168514,
+          "sha256": "fa2592446780bb984bbb1a835e1b589306c8968149aa0dcca2f2bb707d0c3bba"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/south-island-tomtit.webp",
+      "sourceSha256": "bbc89c7bef1e59a05ea721723cc3d96afd2eafe83b62dbdeb27cd44ba3cf1aac",
+      "sourceBytes": 43186,
+      "variants": [
+        {
+          "src": "/images/renditions/d99a575464f204fbaa2f-160.webp",
+          "width": 160,
+          "height": 112,
+          "bytes": 2648,
+          "sha256": "d99a575464f204fbaa2f2bcc998869544b0e1a749844ea420148eaa6cf5f6701"
+        },
+        {
+          "src": "/images/renditions/c2c5fca56d8b19f04463-640.webp",
+          "width": 640,
+          "height": 448,
+          "bytes": 16542,
+          "sha256": "c2c5fca56d8b19f04463c93fc8619339753f9c928f48b7eea22f10a133088066"
+        },
+        {
+          "src": "/images/renditions/8504c66ecfd155d31fcc-1200.webp",
+          "width": 1200,
+          "height": 840,
+          "bytes": 38314,
+          "sha256": "8504c66ecfd155d31fccb87ca6b36ded0ce8c8e7535b52cd98f530fa03eda8fa"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/takahe.webp",
+      "sourceSha256": "f1c6f2e823d62db120d8f41a5ace4c1e02db215b0dd28b7811a873aa0854b4f9",
+      "sourceBytes": 310364,
+      "variants": [
+        {
+          "src": "/images/renditions/f824a3b90cd77dd6f08d-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 6696,
+          "sha256": "f824a3b90cd77dd6f08d8b0fcd2ed0ceeea1cd634283e9b706abf6b39d2f53f4"
+        },
+        {
+          "src": "/images/renditions/032af3c998918b9722b8-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 83154,
+          "sha256": "032af3c998918b9722b8d58febd1a16a1a2b9077048ea3d46522229bbe68829d"
+        },
+        {
+          "src": "/images/renditions/37c5a492d5b2b6f619eb-1200.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 260230,
+          "sha256": "37c5a492d5b2b6f619eb77f9ed1098b8112e6710e576a98e7c11ee723be79131"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/tokoeka.webp",
+      "sourceSha256": "9ecf766ebe021f27b772ff858cabfa18e4c29dd2d9539003b33ded89a15072a0",
+      "sourceBytes": 252024,
+      "variants": [
+        {
+          "src": "/images/renditions/b67a6de36eeaa38f53a8-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 7170,
+          "sha256": "b67a6de36eeaa38f53a82ca9b5c6d2c48c9fa46af099f8987ac084ed8267c484"
+        },
+        {
+          "src": "/images/renditions/8ef5cd71f45d84208777-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 74434,
+          "sha256": "8ef5cd71f45d842087778d2f4afe907f3294bce6503143bea5e59dab9898b6ad"
+        },
+        {
+          "src": "/images/renditions/34bcc1db9ba7f0455bbc-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 220088,
+          "sha256": "34bcc1db9ba7f0455bbc376d6d50f44df7c4eb0f826d86450b8eb8b36ff4f92b"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/tui.webp",
+      "sourceSha256": "145abe00e03757b6eb7238d5cfd1ffe9890def6d96b390e13e9b028eea64d474",
+      "sourceBytes": 156564,
+      "variants": [
+        {
+          "src": "/images/renditions/573bd1b9673f2a907aa8-160.webp",
+          "width": 160,
+          "height": 121,
+          "bytes": 6250,
+          "sha256": "573bd1b9673f2a907aa838813c46e9529afc81c67513995bfd01971d61b0d852"
+        },
+        {
+          "src": "/images/renditions/a553326e09ea0cc8dc6e-640.webp",
+          "width": 640,
+          "height": 483,
+          "bytes": 47652,
+          "sha256": "a553326e09ea0cc8dc6e7762d0a80a91cbe04f58df5ed0fbfa8bdd941236bbd3"
+        },
+        {
+          "src": "/images/renditions/e0828dc344095c248c0a-1200.webp",
+          "width": 1200,
+          "height": 906,
+          "bytes": 130638,
+          "sha256": "e0828dc344095c248c0ab712604ae021f13c29e998821f9586eb6399e7b51e3a"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/western-weka.webp",
+      "sourceSha256": "8eb7b8a94cf71c1b119798b663a552f3355b4ac125b3201a02b71b09b3a89ac0",
+      "sourceBytes": 216304,
+      "variants": [
+        {
+          "src": "/images/renditions/a51ac8ebc9952030c1ed-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 11950,
+          "sha256": "a51ac8ebc9952030c1edaf4deffc88bd715776e5a0c3a5279b08ee3b3514c8ec"
+        },
+        {
+          "src": "/images/renditions/202f6123e6538fcadb27-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 112294,
+          "sha256": "202f6123e6538fcadb27e74e9e5e4851efeb63ad5957873977b4890c60a1f47b"
+        },
+        {
+          "src": "/images/renditions/961c71375d124bad3b2c-900.webp",
+          "width": 900,
+          "height": 1200,
+          "bytes": 209716,
+          "sha256": "961c71375d124bad3b2ced474add816233386018f5eb53a31e83c4301291231a"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/westland-petrel.webp",
+      "sourceSha256": "43aed7a78c95c6664acb392c76e3641f030b0bff1831802bac72f2dca378ca3f",
+      "sourceBytes": 57208,
+      "variants": [
+        {
+          "src": "/images/renditions/ce73132e2a62bb5ff05f-160.webp",
+          "width": 160,
+          "height": 111,
+          "bytes": 3194,
+          "sha256": "ce73132e2a62bb5ff05f9e078166d65dff093831a9745f750fbdc2962e17c7a9"
+        },
+        {
+          "src": "/images/renditions/0c5eba6338b3a056b89f-640.webp",
+          "width": 640,
+          "height": 445,
+          "bytes": 22590,
+          "sha256": "0c5eba6338b3a056b89f99e1e6838c895f799beca9e9c0afafa79489023dda29"
+        },
+        {
+          "src": "/images/renditions/f54ac470fbecfc594cdb-1200.webp",
+          "width": 1200,
+          "height": 835,
+          "bytes": 49594,
+          "sha256": "f54ac470fbecfc594cdb015cd0b1ba3bd3c8f47c392a6e6f5ff53c80ead6a423"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/white-heron.webp",
+      "sourceSha256": "fa1c2c8ef55834fdba05be28f6be54e680787022d14cb748e63f8bc3a2113486",
+      "sourceBytes": 188622,
+      "variants": [
+        {
+          "src": "/images/renditions/49e01b882246d0f72003-160.webp",
+          "width": 160,
+          "height": 109,
+          "bytes": 5664,
+          "sha256": "49e01b882246d0f720037d944d303a68987e23673cfacceb0ecece6655b66441"
+        },
+        {
+          "src": "/images/renditions/a91e0c77444dadb31200-640.webp",
+          "width": 640,
+          "height": 437,
+          "bytes": 56900,
+          "sha256": "a91e0c77444dadb312009ea57cbe153eb6885379fec4e42a3215838011175be4"
+        },
+        {
+          "src": "/images/renditions/1cefd193585bab64fab6-1200.webp",
+          "width": 1200,
+          "height": 820,
+          "bytes": 178220,
+          "sha256": "1cefd193585bab64fab69021e25f72e2076da401338cf84a8bba921d369c29cd"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/yellow-eyed-penguin.webp",
+      "sourceSha256": "c84eac6e634353e904f08b9d62640b7d34139aee291ad03e6df7d83efe780b5c",
+      "sourceBytes": 69906,
+      "variants": [
+        {
+          "src": "/images/renditions/295a699cf85ca4ab818f-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 6508,
+          "sha256": "295a699cf85ca4ab818f626190ae0ad53c3a06317f93b6142b449d65bbf28b14"
+        },
+        {
+          "src": "/images/renditions/e003b99fbf3eb1f54943-640.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 42762,
+          "sha256": "e003b99fbf3eb1f5494309c79889d78b2d49b79f3ef7e51973b94c97ba65fd94"
+        },
+        {
+          "src": "/images/renditions/93169302936e0d355bb0-800.webp",
+          "width": 800,
+          "height": 1200,
+          "bytes": 65466,
+          "sha256": "93169302936e0d355bb01c412ff057b0f7de3ea4d9d6ea19dc9e615119eef0fb"
+        }
+      ]
+    },
+    {
+      "source": "/images/new-zealand/yellowhead.webp",
+      "sourceSha256": "8f421202361d3beb32862dfcc563b5f1468dcbf5e213bcf88632c4dfea9c2ebb",
+      "sourceBytes": 51160,
+      "variants": [
+        {
+          "src": "/images/renditions/6ae0b20cccb8cf250d23-160.webp",
+          "width": 160,
+          "height": 246,
+          "bytes": 7114,
+          "sha256": "6ae0b20cccb8cf250d239c2d37278bf2c6f05d1c16cd9a54273845277c4d55ac"
+        },
+        {
+          "src": "/images/renditions/8a6fc4fbf40cf9f9e390-640.webp",
+          "width": 640,
+          "height": 982,
+          "bytes": 36344,
+          "sha256": "8a6fc4fbf40cf9f9e390097822e7b08c432f9af8cb07a1489813381db8a65bce"
+        },
+        {
+          "src": "/images/renditions/c27bbe37e214f07bbaac-782.webp",
+          "width": 782,
+          "height": 1200,
+          "bytes": 47862,
+          "sha256": "c27bbe37e214f07bbaac3e8bff97c1643b13ab2578ef263d4cc115efe6cc5bff"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/arthurs-pass-bealey-river.webp",
+      "sourceSha256": "30f41bb1d24ac531052627d9e242ad5fa95fbc3b78cc81e6aed31c524528040f",
+      "sourceBytes": 224460,
+      "variants": [
+        {
+          "src": "/images/renditions/b37b79c004dcc3f31388-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3134,
+          "sha256": "b37b79c004dcc3f31388c005e262285a84832163c0dffc5abf0a990c455837de"
+        },
+        {
+          "src": "/images/renditions/dd3e8395cd2f489da8ae-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 37218,
+          "sha256": "dd3e8395cd2f489da8aeed13d050e24e68734ee862710f7a68a63007825bf067"
+        },
+        {
+          "src": "/images/renditions/bd05e022d306c8d7f6bc-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 115108,
+          "sha256": "bd05e022d306c8d7f6bc23c02c11090d12d0684eccea8c7746e3fd2845999086"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/arthurs-pass-mountains.webp",
+      "sourceSha256": "5e2411a1b1738ba1e1d1b10a2372cf5206d5b38b56816256bae7f4046808ab30",
+      "sourceBytes": 204132,
+      "variants": [
+        {
+          "src": "/images/renditions/f5de56852c7af820ba13-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 7454,
+          "sha256": "f5de56852c7af820ba13e85e7c6dd65c5930e334086d78a0e699298228592416"
+        },
+        {
+          "src": "/images/renditions/5813290c2f7c115381fc-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 99908,
+          "sha256": "5813290c2f7c115381fc70c10a0cb297960de20afe707649eb8f7acc4c63aaac"
+        },
+        {
+          "src": "/images/renditions/d092e20d917c8628ef24-1000.webp",
+          "width": 1000,
+          "height": 750,
+          "bytes": 234940,
+          "sha256": "d092e20d917c8628ef244b04b380b741d981314d2248bcf9f574a5b2feae3dce"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/arthurs-pass-station.webp",
+      "sourceSha256": "c1b7e1d800f7a3a9bf0cea17155695817d972d9010b2a57d4b4bb4ce3d74c3ef",
+      "sourceBytes": 368562,
+      "variants": [
+        {
+          "src": "/images/renditions/eed6054300c7fa411dd1-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4434,
+          "sha256": "eed6054300c7fa411dd1b9c08189e42c31120bb4d3f11185d29385f3ae231475"
+        },
+        {
+          "src": "/images/renditions/2410aa39c5fc8b8f5acd-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 58132,
+          "sha256": "2410aa39c5fc8b8f5acdf176ca9143de5398820e96d5f0f3886e5179502e15ab"
+        },
+        {
+          "src": "/images/renditions/72ddf12defd210071534-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 197364,
+          "sha256": "72ddf12defd210071534e8370bc6bc36887d784a9e28e2dd95b00fc4281b7193"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/arthurs-pass-village.webp",
+      "sourceSha256": "1448a79114938014f2c4c283376973ab274a33acac0af4d34176bd2a5387012d",
+      "sourceBytes": 292690,
+      "variants": [
+        {
+          "src": "/images/renditions/09fed0be55455a4b8333-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4844,
+          "sha256": "09fed0be55455a4b8333016dc9b8fbfc45bbb505c95eff04828bb70ed7ad16ea"
+        },
+        {
+          "src": "/images/renditions/e5d8b7cc3e04b8486b46-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 56528,
+          "sha256": "e5d8b7cc3e04b8486b46442109bcc566c084cce98ed93427c810103334b35f0b"
+        },
+        {
+          "src": "/images/renditions/409fca30dbf378c2d6f7-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 167858,
+          "sha256": "409fca30dbf378c2d6f7b184a8cd815e4e3eef04956c6caa26173c6b11e00d0d"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/arthurs-pass-waterfall.webp",
+      "sourceSha256": "09091283021f18d62f69f2dae052e7eda0f18462ddfbecd2a071eb7cef822251",
+      "sourceBytes": 334312,
+      "variants": [
+        {
+          "src": "/images/renditions/4078199f7a4cb31617e5-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 11136,
+          "sha256": "4078199f7a4cb31617e5426e8e4730d3ab6499dd9721d8e4bdda6343ccf6f08b"
+        },
+        {
+          "src": "/images/renditions/a131cdbe6c0efcc072ce-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 162618,
+          "sha256": "a131cdbe6c0efcc072ce1cbfbbce562bddf68f3eb1977177b13e47faa8ab8f62"
+        },
+        {
+          "src": "/images/renditions/31fd177309f93098f3c3-1000.webp",
+          "width": 1000,
+          "height": 1333,
+          "bytes": 383164,
+          "sha256": "31fd177309f93098f3c37bf3f7503567536a2036e5291067ab99ec87cdbe37f3"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/auckland-rangitoto.webp",
+      "sourceSha256": "95e334a18214d553715158c56253a6cb1343a15959e9466405758522eb612c01",
+      "sourceBytes": 106298,
+      "variants": [
+        {
+          "src": "/images/renditions/225ee9433a4f048e538e-160.webp",
+          "width": 160,
+          "height": 74,
+          "bytes": 2584,
+          "sha256": "225ee9433a4f048e538e7f334ac733734b8e7753a6f31db5b6ecc5ef3829b27b"
+        },
+        {
+          "src": "/images/renditions/84bf26ec86d1691a2edc-640.webp",
+          "width": 640,
+          "height": 296,
+          "bytes": 35644,
+          "sha256": "84bf26ec86d1691a2edcc41390a186b603b385a93c8b23da0ea0ff4e8dcf3add"
+        },
+        {
+          "src": "/images/renditions/fc0b00204cf59fa8f89b-1280.webp",
+          "width": 1280,
+          "height": 591,
+          "bytes": 113944,
+          "sha256": "fc0b00204cf59fa8f89bd6059bf38b9db513a4bf7dfe20fb63b61f74a783ed1b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-big-drift.webp",
+      "sourceSha256": "b52a0d8cdd98cc5f0e5721046e05d1bf2cf58e29ba864e1a8e52e54a4631acf1",
+      "sourceBytes": 78762,
+      "variants": [
+        {
+          "src": "/images/renditions/9371e58d0516814f3dc0-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2558,
+          "sha256": "9371e58d0516814f3dc06a8ac1ac91c9ba9d8ddfbf3916fb3cd855ec4ca2972f"
+        },
+        {
+          "src": "/images/renditions/e9229c78acedd5bffde5-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 23764,
+          "sha256": "e9229c78acedd5bffde5e914607dc5398dae452a5ca681dfdfe7a1688f99ed35"
+        },
+        {
+          "src": "/images/renditions/a353299607f70923278f-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 63370,
+          "sha256": "a353299607f70923278f50d45af2d1485693978c983300047235f619050de7fb"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-carnarvon.webp",
+      "sourceSha256": "af7a3fda9a610ca6a32cb5104c98f963d20b30dad33f82bce9da88dcd7bf2fb4",
+      "sourceBytes": 157914,
+      "variants": [
+        {
+          "src": "/images/renditions/14a37062250bf445eafe-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 7768,
+          "sha256": "14a37062250bf445eafef9268062f83d4cfaf65cece6d82f23b94fe3003905cf"
+        },
+        {
+          "src": "/images/renditions/2ae521a22e3eea6c1333-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 96812,
+          "sha256": "2ae521a22e3eea6c1333d1ca4df8f07ad2019535db12a35a6377d0527ecda6ff"
+        },
+        {
+          "src": "/images/renditions/a35b45133d9fb036dbf2-900.webp",
+          "width": 900,
+          "height": 675,
+          "bytes": 165596,
+          "sha256": "a35b45133d9fb036dbf2cf8f5bbff2ad18166a90c6e6e4a1595df865ba5d4442"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-daintree.webp",
+      "sourceSha256": "714845b97b58022a2b1c0712ff03c87b6448cfbb86a847be43c7ae962d217c08",
+      "sourceBytes": 123962,
+      "variants": [
+        {
+          "src": "/images/renditions/15f66ff9f3f2eaf3296c-160.webp",
+          "width": 160,
+          "height": 108,
+          "bytes": 2876,
+          "sha256": "15f66ff9f3f2eaf3296c727b9c4de1927a425af1c87e000f1a5f3e1409925e4e"
+        },
+        {
+          "src": "/images/renditions/5064eac0545ddafafff2-640.webp",
+          "width": 640,
+          "height": 432,
+          "bytes": 35718,
+          "sha256": "5064eac0545ddafafff2b86f822df8f7b28927bcd94833a73b5fb32eecf2e265"
+        },
+        {
+          "src": "/images/renditions/00134f0173f6fb98fd70-1280.webp",
+          "width": 1280,
+          "height": 864,
+          "bytes": 100808,
+          "sha256": "00134f0173f6fb98fd70c8b1bf18d9b8e26a0a7086740a812f177bf0afb92676"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-dangar.webp",
+      "sourceSha256": "0642b4ba4f962934bb49e6309513f06889b23c407dfeaf9de6dc7f68f0f1f91c",
+      "sourceBytes": 147086,
+      "variants": [
+        {
+          "src": "/images/renditions/218e37f157b1eddeb895-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 5938,
+          "sha256": "218e37f157b1eddeb895d635bd39695eca84d7a7cd5ba326e812d3a26ccbcdd9"
+        },
+        {
+          "src": "/images/renditions/fbb057061decdc9d84c0-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 75982,
+          "sha256": "fbb057061decdc9d84c098710c1ee4cc472240a754a5e2e66d5618c682cb435f"
+        },
+        {
+          "src": "/images/renditions/b7444c519c8e788e637b-1024.webp",
+          "width": 1024,
+          "height": 768,
+          "bytes": 152344,
+          "sha256": "b7444c519c8e788e637b5c6e4a34c863cabad9ecd134b632000a14591f9c0b46"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-eacham.webp",
+      "sourceSha256": "67a43613661032c01600da0c700b57cdffcabdf13ec6d0f7e5bd3d6eb9cadcf6",
+      "sourceBytes": 307870,
+      "variants": [
+        {
+          "src": "/images/renditions/70b55298c1be44e77962-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 9150,
+          "sha256": "70b55298c1be44e77962d2802025c347c2a1e380a46c366571c093122f450bc5"
+        },
+        {
+          "src": "/images/renditions/d50e6d0b039e904b0ca1-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 129740,
+          "sha256": "d50e6d0b039e904b0ca17871255f53bf9f157930b1562fd117303de1b31c59a4"
+        },
+        {
+          "src": "/images/renditions/92b88b265d1030d5c5b2-1050.webp",
+          "width": 1050,
+          "height": 1400,
+          "bytes": 316144,
+          "sha256": "92b88b265d1030d5c5b298ce39ea1866b70528a64a964c8ee1851e1e01b4468a"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-eubenangee.webp",
+      "sourceSha256": "aa7e5675e2fe40f9ffef2f7c4e54e687f673372b3ea949c9639a45c68718cba9",
+      "sourceBytes": 285802,
+      "variants": [
+        {
+          "src": "/images/renditions/181a6cebbe0052c26c3d-160.webp",
+          "width": 160,
+          "height": 90,
+          "bytes": 5486,
+          "sha256": "181a6cebbe0052c26c3d2973158e98075b75541651d7c4d284a2060021d0154c"
+        },
+        {
+          "src": "/images/renditions/270d9c7b8924adb7762a-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 77420,
+          "sha256": "270d9c7b8924adb7762afc60dde3746c6f57342a631cfdd5325ab793b77db88b"
+        },
+        {
+          "src": "/images/renditions/133f2b2e1cf2227dab67-1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 242574,
+          "sha256": "133f2b2e1cf2227dab6773d89e9322ccf56179c7c6ede819b3ea0c1e1f22829e"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-girraween.webp",
+      "sourceSha256": "b9c1e7fdd4a5b8d8c0db1faa80b61fbd2265a2324b4342a260b6c5f326d5d8f4",
+      "sourceBytes": 155786,
+      "variants": [
+        {
+          "src": "/images/renditions/44a75989dc531cf3ae9a-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4888,
+          "sha256": "44a75989dc531cf3ae9a82f6d184b6c39319a21fea4b6d77a683ccec3aa97d64"
+        },
+        {
+          "src": "/images/renditions/9458369b61e67bded60c-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 51934,
+          "sha256": "9458369b61e67bded60c8cfe7791a304c09366e9b9b876f6fe0939d890e73121"
+        },
+        {
+          "src": "/images/renditions/65b78d2affba2c5855c8-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 135252,
+          "sha256": "65b78d2affba2c5855c83fc3c98097c2f90a66f191be5285dbd35d2a92130e4d"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-grampians.webp",
+      "sourceSha256": "69844e9b820bedfcc13707c08ce02426a686fd10e36d9486ea140e64fbe2f5cb",
+      "sourceBytes": 199006,
+      "variants": [
+        {
+          "src": "/images/renditions/514814ee3ab6bc6e5aa7-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4396,
+          "sha256": "514814ee3ab6bc6e5aa71001f7b5bb19ab527b004b7bd9908d5eb2a69401ad91"
+        },
+        {
+          "src": "/images/renditions/e02e2f2a250222400fcb-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 54126,
+          "sha256": "e02e2f2a250222400fcb1a492b4c670adb524badd11e55dbf9e7ee4465b59da4"
+        },
+        {
+          "src": "/images/renditions/f3188254c605cef8398f-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 161328,
+          "sha256": "f3188254c605cef8398f919457bbf18f35f3304091f2617468083ae0b7eebec0"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-hawkesbury.webp",
+      "sourceSha256": "bbd74204540a6a525636b300939a02da43e403b99c5d6697b99deb057b74d03e",
+      "sourceBytes": 257940,
+      "variants": [
+        {
+          "src": "/images/renditions/85a93ebde458718c4b5a-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 12706,
+          "sha256": "85a93ebde458718c4b5a25e0476271a2e09ce1a7c94a42b02849b32d3433d03e"
+        },
+        {
+          "src": "/images/renditions/b864a17cc0a6e5682f29-640.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 149498,
+          "sha256": "b864a17cc0a6e5682f29830d44706bbd493bd17aef9ddcd651c59ae776a9fddf"
+        },
+        {
+          "src": "/images/renditions/ce07bc3ff873d18904bf-933.webp",
+          "width": 933,
+          "height": 1400,
+          "bytes": 267118,
+          "sha256": "ce07bc3ff873d18904bff0107115dc374dc521f9dccfb176d27c7bd33073d769"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-kosciuszko.webp",
+      "sourceSha256": "191d715667767b3c8b43d36728a316c010cc46ab9f865f226f5d089304463c2b",
+      "sourceBytes": 115676,
+      "variants": [
+        {
+          "src": "/images/renditions/a3c5779c765b31732992-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3578,
+          "sha256": "a3c5779c765b31732992241223cb0296ac2a6565e59e1ee64a788ae32bb829cc"
+        },
+        {
+          "src": "/images/renditions/ccbffae2b84adeb15315-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 37348,
+          "sha256": "ccbffae2b84adeb153153b7b64acebf9d743c8a101157d6b237c452336340bed"
+        },
+        {
+          "src": "/images/renditions/d10241d121cb06afb21d-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 98084,
+          "sha256": "d10241d121cb06afb21d53990efa1ddb3d3c1f7df03e63e1a0eb869c73191927"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-lake-tyrrell.webp",
+      "sourceSha256": "8c70508b91c84785a63f618f6a90fffab8dc197b68cd03a1ee4b59d1c4977da4",
+      "sourceBytes": 14106,
+      "variants": [
+        {
+          "src": "/images/renditions/126ccf11e4ab0bd106e9-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 718,
+          "sha256": "126ccf11e4ab0bd106e9d2d16198088c534535a1357b2660a9f03f60b5328927"
+        },
+        {
+          "src": "/images/renditions/7bf5a657ca71eb9052f6-640.webp",
+          "width": 640,
+          "height": 428,
+          "bytes": 4682,
+          "sha256": "7bf5a657ca71eb9052f6f1fe59d536c590b1df1f5e960f5f835265837a76fc5c"
+        },
+        {
+          "src": "/images/renditions/16e5abd81f4caef19160-1280.webp",
+          "width": 1280,
+          "height": 856,
+          "bytes": 12408,
+          "sha256": "16e5abd81f4caef191609914f674cb5ea8286dcbd9e68eb7ed45f10df4284e81"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-tarra-falls.webp",
+      "sourceSha256": "305fd3ec5a66e2a790bc9b1119277de03ed4e5bb357e0b3c406878e57c719422",
+      "sourceBytes": 387242,
+      "variants": [
+        {
+          "src": "/images/renditions/4e3e11e3d1831f43f7df-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 7112,
+          "sha256": "4e3e11e3d1831f43f7dfe27d7fc3b680b359c0586e49b8e2d3a27d3b25b757bb"
+        },
+        {
+          "src": "/images/renditions/de1849b62530da04cd1d-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 100286,
+          "sha256": "de1849b62530da04cd1d8108b6c83d50bad547b54f612ab49ff4e36d5100ea46"
+        },
+        {
+          "src": "/images/renditions/abc4dbedae2531c1299d-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 323332,
+          "sha256": "abc4dbedae2531c1299d3f50735a6a7a2828a961f8399763439fa4a2909119d5"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-three-sisters.webp",
+      "sourceSha256": "0198f75447dd6fbd9e8aa77cfd3fe4a502709da2cd7620f9c78a0c7b8bdecac4",
+      "sourceBytes": 499550,
+      "variants": [
+        {
+          "src": "/images/renditions/ae7262b624ef41ff5744-160.webp",
+          "width": 160,
+          "height": 166,
+          "bytes": 8710,
+          "sha256": "ae7262b624ef41ff5744d33dc512fecc49d8d94757a932e444dca2f58a8b83ed"
+        },
+        {
+          "src": "/images/renditions/f8e8b45eb908af912a5f-640.webp",
+          "width": 640,
+          "height": 663,
+          "bytes": 129934,
+          "sha256": "f8e8b45eb908af912a5f3ff91442f9eaabd964bd10934e10dc227abff4ad10e6"
+        },
+        {
+          "src": "/images/renditions/7031b86e43b5b52a482e-1280.webp",
+          "width": 1280,
+          "height": 1326,
+          "bytes": 427368,
+          "sha256": "7031b86e43b5b52a482e415853bf2ed3911c6378f17c5c360a100edf34ac22d6"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-twelve-apostles.webp",
+      "sourceSha256": "ff8892a11b7231d60cc36089e5d658dae737efd1c8eed955a26b8ae6743fb6d8",
+      "sourceBytes": 143998,
+      "variants": [
+        {
+          "src": "/images/renditions/f54e163ecc32b26546c8-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4244,
+          "sha256": "f54e163ecc32b26546c87dffb4118fb4584059fc10a3cb8f4bd511ab4b0741b1"
+        },
+        {
+          "src": "/images/renditions/c3a1d02f455d5f94d1ad-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 43160,
+          "sha256": "c3a1d02f455d5f94d1ad40c20c4a67686f0b1587cb00c5279f7d464e16df8eca"
+        },
+        {
+          "src": "/images/renditions/3f94357f3bbebf2f4ef5-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 117052,
+          "sha256": "3f94357f3bbebf2f4ef52c6004bc6ad3a26e3d8d0ddb59ccf659878a44024ee8"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/australia-wattamolla.webp",
+      "sourceSha256": "a74e5646a242452c9d529e7f217725de799c0ef5b4be03b86a53620881c3aeb8",
+      "sourceBytes": 150232,
+      "variants": [
+        {
+          "src": "/images/renditions/4f2a0d54028416326f55-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3382,
+          "sha256": "4f2a0d54028416326f550a510527fe6e49048cb1448e2493c2e9e119938d0071"
+        },
+        {
+          "src": "/images/renditions/f50643bf0518fec17913-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 39576,
+          "sha256": "f50643bf0518fec179131d02201787268fc1a5a2071927c05f590cee50466b60"
+        },
+        {
+          "src": "/images/renditions/6dabba6472eba9ae81c0-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 117370,
+          "sha256": "6dabba6472eba9ae81c029e21d21cf6bb266cbf12bbfe6defe600da51f9742a6"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/catlins-curio-bay-coast.webp",
+      "sourceSha256": "c97d00d1d8506704ac912a700e6c03c73a4c4a9fb4a996499b8f36e5079ffbd6",
+      "sourceBytes": 295500,
+      "variants": [
+        {
+          "src": "/images/renditions/1bb58de63dc76ace9d4d-160.webp",
+          "width": 160,
+          "height": 98,
+          "bytes": 5124,
+          "sha256": "1bb58de63dc76ace9d4de3c46b4bbde839cd98953af12fd7a726c3c168babeca"
+        },
+        {
+          "src": "/images/renditions/b9b76e78a16b1b5c379b-640.webp",
+          "width": 640,
+          "height": 392,
+          "bytes": 66500,
+          "sha256": "b9b76e78a16b1b5c379b17e19396824be6f621e4d6a823007d8163dc39b20c50"
+        },
+        {
+          "src": "/images/renditions/d55ce9674fb5dd8b2a04-1280.webp",
+          "width": 1280,
+          "height": 783,
+          "bytes": 281324,
+          "sha256": "d55ce9674fb5dd8b2a047ce759415bae7069319dfb0a2cbfc65648e7d7c4f0b9"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/catlins-curio-fossil-wood.webp",
+      "sourceSha256": "1b86ca1327541b6fa7afb7f9148611132ca5a0606737dd7ca9ee413810036fce",
+      "sourceBytes": 150044,
+      "variants": [
+        {
+          "src": "/images/renditions/0b239a5a5cece0529009-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 12412,
+          "sha256": "0b239a5a5cece0529009abb54547b813d2f74709b7df47f5768169271b973774"
+        },
+        {
+          "src": "/images/renditions/3afee8744169fe0ba4fc-640.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 119950,
+          "sha256": "3afee8744169fe0ba4fc953a1deb17a8de9bebc66035f503a0f693a8cd3c0cc4"
+        },
+        {
+          "src": "/images/renditions/0832da34bcac35a411b2-720.webp",
+          "width": 720,
+          "height": 1080,
+          "bytes": 153510,
+          "sha256": "0832da34bcac35a411b20c26e66a4d92dda70f1164a265ba689ec28fd92986f8"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/catlins-landscape.webp",
+      "sourceSha256": "c752b7874758f3eef134ec64ecb46599597da0040f414d518e05f2ee6613f3e7",
+      "sourceBytes": 144596,
+      "variants": [
+        {
+          "src": "/images/renditions/11c42595c50a998e5211-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5282,
+          "sha256": "11c42595c50a998e52113b91e10b71f6f725027d621547fa7077fc863b2e2e92"
+        },
+        {
+          "src": "/images/renditions/927c9d6532cd3da7a398-640.webp",
+          "width": 640,
+          "height": 429,
+          "bytes": 66982,
+          "sha256": "927c9d6532cd3da7a3988f5f1523bff2ebf0b77a5cbf67b157dfe1b379d62498"
+        },
+        {
+          "src": "/images/renditions/9115db01379244cdf6ec-1000.webp",
+          "width": 1000,
+          "height": 670,
+          "bytes": 165164,
+          "sha256": "9115db01379244cdf6ec206c7e286691880c21c62a65616a45f932e05e407c81"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/catlins-nugget-point.webp",
+      "sourceSha256": "5c70e7962c8683d50f0f892c5b81c7bc32eb2d23a2a6a05434fe30b12b1e40cc",
+      "sourceBytes": 131496,
+      "variants": [
+        {
+          "src": "/images/renditions/ab410966ac7d22ecba3b-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 7242,
+          "sha256": "ab410966ac7d22ecba3b09120ee16b0e37417e36c75bcd01bad0e94a67578d52"
+        },
+        {
+          "src": "/images/renditions/5b04c11493ca2516c9c9-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 82722,
+          "sha256": "5b04c11493ca2516c9c9c6238ea29e0c259c67ca9e7c9a76270135171ff37258"
+        },
+        {
+          "src": "/images/renditions/6257ba3b142fd4631465-810.webp",
+          "width": 810,
+          "height": 1080,
+          "bytes": 135416,
+          "sha256": "6257ba3b142fd4631465137c9ce73df1d87ba3094678296d1815d14796d061be"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/catlins-purakaunui-falls.webp",
+      "sourceSha256": "9ca6734b102d443a37fde17c0d1205596d2adbe55f47a6fc9ed9f31fff658959",
+      "sourceBytes": 276022,
+      "variants": [
+        {
+          "src": "/images/renditions/53e42902b43d5fb1cb2f-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 7804,
+          "sha256": "53e42902b43d5fb1cb2f8e74f4c96fccd143a3fcd595831d4c7fdd486a29cd35"
+        },
+        {
+          "src": "/images/renditions/4f40dbc1bc5bc65f3779-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 109764,
+          "sha256": "4f40dbc1bc5bc65f37795c8bfe46f16f692b01ccce33b3c69f0d854b72721a42"
+        },
+        {
+          "src": "/images/renditions/b5938150c8b9561b8e10-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 318654,
+          "sha256": "b5938150c8b9561b8e10b4ae9b8e914e5733c637588231f9a04876d7f77469cc"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-amazon-river.webp",
+      "sourceSha256": "acbac28a8d56327192fab5553ace20a8ae6d458e0bff2b042f56d177c7fe5e9b",
+      "sourceBytes": 197778,
+      "variants": [
+        {
+          "src": "/images/renditions/47e6032ecbdaf2ca8da7-160.webp",
+          "width": 160,
+          "height": 106,
+          "bytes": 4160,
+          "sha256": "47e6032ecbdaf2ca8da74f0fd09e2cf2e138dd0e25ca8a9142adaf73241f8f18"
+        },
+        {
+          "src": "/images/renditions/ed51ddb37a027b78410d-640.webp",
+          "width": 640,
+          "height": 424,
+          "bytes": 56964,
+          "sha256": "ed51ddb37a027b78410d6b2fe6ca992d5c3b52de7f524b211f7ceb0adfba4739"
+        },
+        {
+          "src": "/images/renditions/6dc96ad82f464246c21d-1280.webp",
+          "width": 1280,
+          "height": 848,
+          "bytes": 164590,
+          "sha256": "6dc96ad82f464246c21d3db059de9103d57863406a4b61226ea56f3cb8e48a5f"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-amazon-water.webp",
+      "sourceSha256": "b5aa6f53f0350ed013d04069bfdc86d69ef2bf13ad497a49e2fe5c0c97a3c419",
+      "sourceBytes": 48676,
+      "variants": [
+        {
+          "src": "/images/renditions/dee3ce23133a1b0840a2-160.webp",
+          "width": 160,
+          "height": 80,
+          "bytes": 2244,
+          "sha256": "dee3ce23133a1b0840a2d0882ed5c9b8fd34d23b40188c15146b2a2c4da006b6"
+        },
+        {
+          "src": "/images/renditions/8c56e261cd66f43d9d31-640.webp",
+          "width": 640,
+          "height": 320,
+          "bytes": 18372,
+          "sha256": "8c56e261cd66f43d9d31dea4b6373b9b4885da2c3843fbae5839ad93832de2a0"
+        },
+        {
+          "src": "/images/renditions/cd1d3fda7c237d1d98bf-1280.webp",
+          "width": 1280,
+          "height": 640,
+          "bytes": 41568,
+          "sha256": "cd1d3fda7c237d1d98bf6080959e7a524f3d46d4cdd46ff54986cf81c39bf165"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cabo-shore.webp",
+      "sourceSha256": "c05aa60acfc878481b94b98bd4f9ccab124444b7e689bd16ddbfc9e1cff06cef",
+      "sourceBytes": 95404,
+      "variants": [
+        {
+          "src": "/images/renditions/148bcaf35b51a4a5f811-160.webp",
+          "width": 160,
+          "height": 88,
+          "bytes": 2500,
+          "sha256": "148bcaf35b51a4a5f811d8610c78ba3ed9feadbedc886d6697c2d62f6957a45d"
+        },
+        {
+          "src": "/images/renditions/8f1d1cd1169afcd27ae8-640.webp",
+          "width": 640,
+          "height": 351,
+          "bytes": 28584,
+          "sha256": "8f1d1cd1169afcd27ae8a6574cb07e6e02a5f499e6de87c676d6ca1fdd83c9ab"
+        },
+        {
+          "src": "/images/renditions/9cc647f569ae3ff8414d-1206.webp",
+          "width": 1206,
+          "height": 661,
+          "bytes": 97194,
+          "sha256": "9cc647f569ae3ff8414ded7bdec9dd8fea93a82fc8d89fb4fd3ea0d14735b60e"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cabo-vela.webp",
+      "sourceSha256": "f50f0836679535d192a11ec0bb604ebe1a2fc06e80240cc9741538041120d8e1",
+      "sourceBytes": 204290,
+      "variants": [
+        {
+          "src": "/images/renditions/29b216cfb51a34f806ed-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3424,
+          "sha256": "29b216cfb51a34f806ed2156b47b385e7b8886eff820963c893d18cd4984e8b4"
+        },
+        {
+          "src": "/images/renditions/cd53dc12859b8f34d26c-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 42854,
+          "sha256": "cd53dc12859b8f34d26c53e7be653f497e742723fa1bb4cce00675db4dcd46a6"
+        },
+        {
+          "src": "/images/renditions/4b86fc1f43dca00298c0-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 155832,
+          "sha256": "4b86fc1f43dca00298c00bdffddb34226f6571d230f83f4bc9cf4d280ca2f692"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cano-cristales.webp",
+      "sourceSha256": "67f1cc4e0d465ee861f7521201326a496fb2afdbc7f061a381edaddbaa3dd2dc",
+      "sourceBytes": 341422,
+      "variants": [
+        {
+          "src": "/images/renditions/488f69abbe8330983eb0-160.webp",
+          "width": 160,
+          "height": 240,
+          "bytes": 12658,
+          "sha256": "488f69abbe8330983eb0e47537ff23a6fe33100c6c46988df7b328ac9504d8bd"
+        },
+        {
+          "src": "/images/renditions/572c839ae6cb2dc3dc71-640.webp",
+          "width": 640,
+          "height": 961,
+          "bytes": 175706,
+          "sha256": "572c839ae6cb2dc3dc71d69bafdfa3d8bebdf84a6477ba29deb352cce3b0fb99"
+        },
+        {
+          "src": "/images/renditions/ef88d781649b928d34d1-932.webp",
+          "width": 932,
+          "height": 1400,
+          "bytes": 356636,
+          "sha256": "ef88d781649b928d34d1af63acc547fe5d8b4bd148b17a4894b313a580cf73dc"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-casanare.webp",
+      "sourceSha256": "75a9bd914e0ddebff15d3deac8689e9178d321d18c7320c8363a475e439f3700",
+      "sourceBytes": 127976,
+      "variants": [
+        {
+          "src": "/images/renditions/61a8982a48349a7589e4-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5070,
+          "sha256": "61a8982a48349a7589e4af0bb9ec7ebb85a8c9a2061f28d6774ad72d9fab5cd5"
+        },
+        {
+          "src": "/images/renditions/3e2ee6ad2eef66fd876c-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 59900,
+          "sha256": "3e2ee6ad2eef66fd876cbec137157cf57ec7bc453d893bba337ff7afa7788d90"
+        },
+        {
+          "src": "/images/renditions/5eea65877035ada6a0e5-1080.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 129792,
+          "sha256": "5eea65877035ada6a0e5f88d008dd8aad14990aee734ee5aa1cea1b5815c9be5"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cauca-sonso-lake.webp",
+      "sourceSha256": "326f850e96f3f085c4714e7d2aef0888c48d31e08356d741543147040426d325",
+      "sourceBytes": 44040,
+      "variants": [
+        {
+          "src": "/images/renditions/0bf34589bd7494b849cc-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 2006,
+          "sha256": "0bf34589bd7494b849cc4156f42c24fffcf0b3d25c1710daf656015ffbe873e1"
+        },
+        {
+          "src": "/images/renditions/0aa0861a4e1e6b47dae4-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 13478,
+          "sha256": "0aa0861a4e1e6b47dae4638dc897571b7a329e01b83cbc1a8f27e7e3dc6c2469"
+        },
+        {
+          "src": "/images/renditions/943c9768260a140e885b-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 33582,
+          "sha256": "943c9768260a140e885b424e4e7bba12e58dfeeaddf31e13fa2ef6bf470de921"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cauca-sonso-oxbow.webp",
+      "sourceSha256": "ffa53d9968c8f647b36f32c133728ebb4657feaa54d049808e08755ce23ebdf9",
+      "sourceBytes": 76502,
+      "variants": [
+        {
+          "src": "/images/renditions/743be5faf7a18aba5e72-160.webp",
+          "width": 160,
+          "height": 98,
+          "bytes": 5108,
+          "sha256": "743be5faf7a18aba5e728084c11bd17abb15c51f36480203088d698974c74bf2"
+        },
+        {
+          "src": "/images/renditions/3281072cfb59700a4809-640.webp",
+          "width": 640,
+          "height": 391,
+          "bytes": 42526,
+          "sha256": "3281072cfb59700a4809a77c318c8afb3bfe6eaa2e82f85cb2faedd3350df2d7"
+        },
+        {
+          "src": "/images/renditions/5c6d74942a7a8edfad0f-1080.webp",
+          "width": 1080,
+          "height": 659,
+          "bytes": 78020,
+          "sha256": "5c6d74942a7a8edfad0f4f1d088066dbef62d60630ee73ce9f86b6de53672b09"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cauca-sonso-water.webp",
+      "sourceSha256": "44c082ef9b6b98ce7843b507189ea1ecdd6088f7f7c26907da551257b8dc9724",
+      "sourceBytes": 433194,
+      "variants": [
+        {
+          "src": "/images/renditions/ec3b4f29663be894f30b-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 7206,
+          "sha256": "ec3b4f29663be894f30b40ad11550c9f29d3b256e01dc594e13af056e3af0519"
+        },
+        {
+          "src": "/images/renditions/93eef273a05ae05b209a-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 105802,
+          "sha256": "93eef273a05ae05b209a5a036a3c56d417064a265c04812846fe556dbc8d5412"
+        },
+        {
+          "src": "/images/renditions/ea1cbeb090a320818bf9-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 353026,
+          "sha256": "ea1cbeb090a320818bf9a1f4af144f586d4b1b9c6d69587cabaec59ac93411b1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cauca-videles-water.webp",
+      "sourceSha256": "3e86e0a7dedfc5cc2c90c8757c8f8ddf9d6f64f12f02381ef17dd40b571a46af",
+      "sourceBytes": 335028,
+      "variants": [
+        {
+          "src": "/images/renditions/569cae55b84e6ebd4622-160.webp",
+          "width": 160,
+          "height": 284,
+          "bytes": 15580,
+          "sha256": "569cae55b84e6ebd46222cc9d38176b92d1b4ca4607fd568dec0f0d9d71f4781"
+        },
+        {
+          "src": "/images/renditions/5ff7704c64c15328794b-640.webp",
+          "width": 640,
+          "height": 1137,
+          "bytes": 221650,
+          "sha256": "5ff7704c64c15328794b55e016dde24654cd2fc66b4a2ccf06e5669663e3dceb"
+        },
+        {
+          "src": "/images/renditions/8dbb6c12aa5ad79ef038-788.webp",
+          "width": 788,
+          "height": 1400,
+          "bytes": 350870,
+          "sha256": "8dbb6c12aa5ad79ef038cb3029fc58fcc73df0f655e6740d4c0dbe7f26a77876"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cauca-videles.webp",
+      "sourceSha256": "91ac675edd64f5e2ad5ad9a4789b602b451a7a70869f9e8c3d36f20258fa7c26",
+      "sourceBytes": 397224,
+      "variants": [
+        {
+          "src": "/images/renditions/5004af2c7ece6c6da8d3-160.webp",
+          "width": 160,
+          "height": 284,
+          "bytes": 17080,
+          "sha256": "5004af2c7ece6c6da8d33cd73a2afbf63d0e5e50a6e8911a1b1597bd5f238403"
+        },
+        {
+          "src": "/images/renditions/b398bb15878a8dd14168-640.webp",
+          "width": 640,
+          "height": 1137,
+          "bytes": 253292,
+          "sha256": "b398bb15878a8dd1416819d03488322feb7ee90ac9f93b5f065d74f4f4f5e62c"
+        },
+        {
+          "src": "/images/renditions/a5caa6dc22213ce2ef09-788.webp",
+          "width": 788,
+          "height": 1400,
+          "bytes": 421632,
+          "sha256": "a5caa6dc22213ce2ef095ac0dc8e6888b94a82bd600fe5b4fde88821a0c83996"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-central-cocora.webp",
+      "sourceSha256": "7fb69c677c5c204d2496bd14d9e9012e16923f65a722274581e334a7a9608649",
+      "sourceBytes": 255178,
+      "variants": [
+        {
+          "src": "/images/renditions/93e1e912a88061e854b9-160.webp",
+          "width": 160,
+          "height": 90,
+          "bytes": 3510,
+          "sha256": "93e1e912a88061e854b9a880a0a03b828d48805302238dc0963d4215c0e290d8"
+        },
+        {
+          "src": "/images/renditions/2b2632fa6e30e700b1b7-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 43478,
+          "sha256": "2b2632fa6e30e700b1b73335ef2cfb3c9d35204a809b4905b3da8817cfb8cbed"
+        },
+        {
+          "src": "/images/renditions/f958f58fd9ff7fc93f5a-1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 130748,
+          "sha256": "f958f58fd9ff7fc93f5addb6bcd9556d538bae0f1c6678ce7f753f70f919ea72"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-central-navarco.webp",
+      "sourceSha256": "3f9883ff2e78d4c827dfb8f5bf61dbae4dcac204bfdf7934a50fc1e20743761e",
+      "sourceBytes": 443692,
+      "variants": [
+        {
+          "src": "/images/renditions/85bf4ed11ccae85dab2e-160.webp",
+          "width": 160,
+          "height": 102,
+          "bytes": 5070,
+          "sha256": "85bf4ed11ccae85dab2e07a2d4168bad3b0df9a91553428fc373c288003fef0b"
+        },
+        {
+          "src": "/images/renditions/8fd9ab7229404da71886-640.webp",
+          "width": 640,
+          "height": 408,
+          "bytes": 67656,
+          "sha256": "8fd9ab7229404da71886c8dc2e1bd77ae30898c5923e084d28ede77abb6b55d8"
+        },
+        {
+          "src": "/images/renditions/2eeaa8fd81d801f6ac96-1280.webp",
+          "width": 1280,
+          "height": 815,
+          "bytes": 229962,
+          "sha256": "2eeaa8fd81d801f6ac968788349ec2586945baa564a54610a76f31fc1ad508cd"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-central-otun.webp",
+      "sourceSha256": "b088218a5c050db235c986980d75061e3cc756794b0240ad3862eb9fe189abfb",
+      "sourceBytes": 366862,
+      "variants": [
+        {
+          "src": "/images/renditions/d348360a10dffc4b6885-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4876,
+          "sha256": "d348360a10dffc4b6885233013e72bce54a11d44f74e3d2d2531bbaa42be309f"
+        },
+        {
+          "src": "/images/renditions/a17d4ece2da80e4ba96d-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 59110,
+          "sha256": "a17d4ece2da80e4ba96dac72912b486dc3470db68987c0cc6c429e84c2f0965d"
+        },
+        {
+          "src": "/images/renditions/a762004d8d5cc6aedb0c-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 197546,
+          "sha256": "a762004d8d5cc6aedb0c133c858f56f0ddf1e33fd9d416955f80aab93f569497"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-central-ruiz.webp",
+      "sourceSha256": "0b2547efee42d5b3a4f3cbc1bc3506e5ac5d46990a674feadb91fcf050cfcfb6",
+      "sourceBytes": 566010,
+      "variants": [
+        {
+          "src": "/images/renditions/67d1be5fbd4b9815fba7-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 6460,
+          "sha256": "67d1be5fbd4b9815fba76731993f1ed4143441e97c6146ac0649e63403243da4"
+        },
+        {
+          "src": "/images/renditions/54923d54882ded94f24c-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 84416,
+          "sha256": "54923d54882ded94f24c607799441c96ca22acb46c94d2b2f0a11729f8ea2e31"
+        },
+        {
+          "src": "/images/renditions/f4414bda7e0cc4c8a423-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 296270,
+          "sha256": "f4414bda7e0cc4c8a42376c19823447ad8204f4c25388d893dacd3722f57d835"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-central-santa-rosa.webp",
+      "sourceSha256": "6ccb1d3d5fab2fcbb94587b75e1c7a6c7137fa72d266396c36804ce94b1ec505",
+      "sourceBytes": 650076,
+      "variants": [
+        {
+          "src": "/images/renditions/ce9311ae6563388785f7-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 11622,
+          "sha256": "ce9311ae6563388785f733dec2b9101bf94be1aee1aa6884623d80778351a406"
+        },
+        {
+          "src": "/images/renditions/7d71f777f23b65b38a95-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 174570,
+          "sha256": "7d71f777f23b65b38a95b326f6ac5e1c9aba825f882d41fe69ff84b1b3726f91"
+        },
+        {
+          "src": "/images/renditions/ae1385b274453a5b8417-1200.webp",
+          "width": 1200,
+          "height": 1600,
+          "bytes": 612562,
+          "sha256": "ae1385b274453a5b8417c8c59d8c649e9bb5bd730b9a31d7e604ca9cec970141"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cienaga-grande.webp",
+      "sourceSha256": "9c0c1dc30538f52c485e525c0a1631fe18bde64784c2efa6ee6ee269a27d4daf",
+      "sourceBytes": 13160,
+      "variants": [
+        {
+          "src": "/images/renditions/ef2986b6bf4453c0ee9a-160.webp",
+          "width": 160,
+          "height": 29,
+          "bytes": 688,
+          "sha256": "ef2986b6bf4453c0ee9ad2274a10b58f9c84a492d5d7dac297895439ea4c7bd1"
+        },
+        {
+          "src": "/images/renditions/230c5d374d953433f0bf-640.webp",
+          "width": 640,
+          "height": 118,
+          "bytes": 4692,
+          "sha256": "230c5d374d953433f0bfbe24604969c08b1644c2ef693dd9dd128ef9efbcdfa2"
+        },
+        {
+          "src": "/images/renditions/d8214a1cc561cd1e4b8e-1280.webp",
+          "width": 1280,
+          "height": 236,
+          "bytes": 10622,
+          "sha256": "d8214a1cc561cd1e4b8e13d6f50daa4f14952bd09bdf483f47ab9c781f310ffe"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cienaga-village.webp",
+      "sourceSha256": "fd6d0d82c6f940a6dac6e41099e730a0f6629817ff73bb19385463892dbcc599",
+      "sourceBytes": 46292,
+      "variants": [
+        {
+          "src": "/images/renditions/8fde114aa2663a6c3359-160.webp",
+          "width": 160,
+          "height": 105,
+          "bytes": 2038,
+          "sha256": "8fde114aa2663a6c3359c7bacfd60180c04aeb9980f597bd940504f68bbaac74"
+        },
+        {
+          "src": "/images/renditions/01ecdf241b799b0f9473-640.webp",
+          "width": 640,
+          "height": 419,
+          "bytes": 20218,
+          "sha256": "01ecdf241b799b0f94730b0e267c1a9f078eb19c6f4e4f05a58409a8680889d1"
+        },
+        {
+          "src": "/images/renditions/da7ad6d91e611801ae12-1167.webp",
+          "width": 1167,
+          "height": 764,
+          "bytes": 46382,
+          "sha256": "da7ad6d91e611801ae12646dd13d633fc99ac010149f1bcd0b10c16ac066be9b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-cristales-cascada.webp",
+      "sourceSha256": "f564fd161cd724edc341f192eea67c21a401e6745d3eb92422d796d506512b25",
+      "sourceBytes": 199738,
+      "variants": [
+        {
+          "src": "/images/renditions/7a259fab842bdb4d2902-160.webp",
+          "width": 160,
+          "height": 106,
+          "bytes": 5274,
+          "sha256": "7a259fab842bdb4d2902a2f6fca47d5c3138f158d906d2e4a2ecf2ae95e4fa6c"
+        },
+        {
+          "src": "/images/renditions/a8b2d3a8e57baa075649-640.webp",
+          "width": 640,
+          "height": 424,
+          "bytes": 58084,
+          "sha256": "a8b2d3a8e57baa075649a0ac73a6d95938e1c3cea6866d2d2b500cf8288cfa0b"
+        },
+        {
+          "src": "/images/renditions/6ba32d2fb6a9a4f95411-1280.webp",
+          "width": 1280,
+          "height": 848,
+          "bytes": 168560,
+          "sha256": "6ba32d2fb6a9a4f95411a6665f9ce481d3969f2b1eca3c076cb31b77e45050db"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-eastern-chingaza.webp",
+      "sourceSha256": "3e558cdd6f56ab58ab213d2a027d1f860f753bd92c8686622596e7f23c031902",
+      "sourceBytes": 142906,
+      "variants": [
+        {
+          "src": "/images/renditions/9f24a06fad935fa473dd-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4512,
+          "sha256": "9f24a06fad935fa473ddb0127468501dd952290ff885ea9e620dae0cc645ed17"
+        },
+        {
+          "src": "/images/renditions/fa4ca8236e25e44ebd69-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 54546,
+          "sha256": "fa4ca8236e25e44ebd69dac375a4583c2f63fa8bc0047bfb4dad25745bea1536"
+        },
+        {
+          "src": "/images/renditions/f95694eb382101cb9d77-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 146468,
+          "sha256": "f95694eb382101cb9d770ba13bd193acc67de6abc103921d0f44a34701edf602"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-eastern-cocuy.webp",
+      "sourceSha256": "066e600629156325f116f10332ed21bb203b3da063dbb0f65974e4b4acda05a1",
+      "sourceBytes": 222506,
+      "variants": [
+        {
+          "src": "/images/renditions/cdc45db2581167549a08-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4782,
+          "sha256": "cdc45db2581167549a0840b2f66bc0be2d7b6bf8811c5f5800a863d467413972"
+        },
+        {
+          "src": "/images/renditions/9a86529a7eaa05d03818-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 55552,
+          "sha256": "9a86529a7eaa05d03818214123466554ab3d4519266b0dfa9d8a8c488b0ce433"
+        },
+        {
+          "src": "/images/renditions/e77d87187ff09eb696b7-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 182118,
+          "sha256": "e77d87187ff09eb696b7827df21b634603d79dfc3ea9cf519160b57964598851"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-eastern-guatavita.webp",
+      "sourceSha256": "7598b0f3abbb0ea7fea036f689e6be0a3759722d29d371afefc15b8966241165",
+      "sourceBytes": 178044,
+      "variants": [
+        {
+          "src": "/images/renditions/c255a3833790ddaf6edb-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4000,
+          "sha256": "c255a3833790ddaf6edb3f8be95b288e625e82b841e9b87a437f4ca23d218bf5"
+        },
+        {
+          "src": "/images/renditions/158e2b9ba19bd18abfb9-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 49804,
+          "sha256": "158e2b9ba19bd18abfb9d79248cd733c77591d411948cf3950c7afde1817a2df"
+        },
+        {
+          "src": "/images/renditions/3b6c4a8ce8bd5c7c9583-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 147024,
+          "sha256": "3b6c4a8ce8bd5c7c9583a868c563cb07c65fbeee3d9b6104a6da8fb2373e9bc4"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-eastern-sumapaz.webp",
+      "sourceSha256": "fedf932b9f6891ac8b99ea72773aa2ffe1f66f174f79b5762ef4dad12b65a1b3",
+      "sourceBytes": 188872,
+      "variants": [
+        {
+          "src": "/images/renditions/a697135dd7dcb8788604-160.webp",
+          "width": 160,
+          "height": 90,
+          "bytes": 3800,
+          "sha256": "a697135dd7dcb87886043c3d1594f5de386a8560ea0738a0ae04ca843af23c37"
+        },
+        {
+          "src": "/images/renditions/1d8b65a556142b5cfe19-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 47464,
+          "sha256": "1d8b65a556142b5cfe190af0f3206cd705b7f5f132059e9e433644c7c7b06ede"
+        },
+        {
+          "src": "/images/renditions/964f1a6aa9b798c51459-1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 154782,
+          "sha256": "964f1a6aa9b798c51459a5f42fbb8d589d18e9779a846d78d286b704241fa3c6"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-eastern-tota.webp",
+      "sourceSha256": "d90ed3ae0f2c605666398e75d8368bbb43f3fbc556062de641285475a36b4300",
+      "sourceBytes": 216300,
+      "variants": [
+        {
+          "src": "/images/renditions/1c293563e7f387a012e5-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4822,
+          "sha256": "1c293563e7f387a012e56e9d184a9cbc01a79bd39881ad69a79f363776f4e5c3"
+        },
+        {
+          "src": "/images/renditions/193e940d3fc7beda3afa-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 53774,
+          "sha256": "193e940d3fc7beda3afa1d2e5af9b12a714bb566405f69b24ca7378fc0e72e4c"
+        },
+        {
+          "src": "/images/renditions/7e5a9bff4430ce1f42d6-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 171812,
+          "sha256": "7e5a9bff4430ce1f42d667c195c47949417d4163d83dca128a751b4a14ca712e"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-gorgona.webp",
+      "sourceSha256": "c74b8a9c764ff237699fce2a4b63bf47ec1fb87a5ccf0ca0ac1dcd6c0979c96e",
+      "sourceBytes": 102652,
+      "variants": [
+        {
+          "src": "/images/renditions/a2de9a0dc16b9909be9f-160.webp",
+          "width": 160,
+          "height": 56,
+          "bytes": 1966,
+          "sha256": "a2de9a0dc16b9909be9f60c99db89e930715b03718aa26fdabd7cc38e7fe4402"
+        },
+        {
+          "src": "/images/renditions/6127a653d57182702091-640.webp",
+          "width": 640,
+          "height": 222,
+          "bytes": 25484,
+          "sha256": "6127a653d571827020918bfcd646ea60c34e4220be3c9fe4a495368428711727"
+        },
+        {
+          "src": "/images/renditions/b8d21abd00b3defad2b7-1280.webp",
+          "width": 1280,
+          "height": 444,
+          "bytes": 81124,
+          "sha256": "b8d21abd00b3defad2b7dfff139f277f93ded579e2419ba0a1d127d91555dcbf"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-guajira-dunes.webp",
+      "sourceSha256": "aafe85e2ee4728e0ed43c3879e40600072c19020525e1a7d0dcad8495e7e30d3",
+      "sourceBytes": 39968,
+      "variants": [
+        {
+          "src": "/images/renditions/963f4d30f060c5bddaa2-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 3200,
+          "sha256": "963f4d30f060c5bddaa237ab29aff6b56530a5cdac6d9adfe7731f3b9d365444"
+        },
+        {
+          "src": "/images/renditions/057c40b3649bbf20ff34-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 21612,
+          "sha256": "057c40b3649bbf20ff3404151402ecb7958328c16d9504c1f6ec245e34217851"
+        },
+        {
+          "src": "/images/renditions/de6b1d945afc12c709bf-1050.webp",
+          "width": 1050,
+          "height": 1400,
+          "bytes": 38956,
+          "sha256": "de6b1d945afc12c709bf94d360125eaafa5090de0d02dc5c8131234cdd692552"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-magdalena-guarinocito.webp",
+      "sourceSha256": "b1dd853252988d4233d7587e7ca9875f19ca478003f1df042b21d5860f5af7ed",
+      "sourceBytes": 570060,
+      "variants": [
+        {
+          "src": "/images/renditions/c0d2a0408a92cf61b10a-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 8192,
+          "sha256": "c0d2a0408a92cf61b10ab29ccf315a8af2745cbb7f08b375b0d8123aeb6fce5b"
+        },
+        {
+          "src": "/images/renditions/4333fac854cde02c72f3-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 128708,
+          "sha256": "4333fac854cde02c72f32b9acce171dc59990e647df24dea7d52ef8371025725"
+        },
+        {
+          "src": "/images/renditions/45138bd41ea33c95a593-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 452078,
+          "sha256": "45138bd41ea33c95a593086b111d8ea3f0682431b7e1db51959201fe982f7bb1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-magdalena-honda.webp",
+      "sourceSha256": "e37e2fd20ab81ef509bcea3519c620a688c996cf2ad4f9afa82cc6985942b2eb",
+      "sourceBytes": 130766,
+      "variants": [
+        {
+          "src": "/images/renditions/700baafd6d11fcb40fa7-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3130,
+          "sha256": "700baafd6d11fcb40fa7027d66149257e9afb896d9fd4b1f9975ded964f78853"
+        },
+        {
+          "src": "/images/renditions/054e3bd53b2c282bdc5a-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 35522,
+          "sha256": "054e3bd53b2c282bdc5a4b2caeb47125d14e962f34bdabc2c0a162a7dbaa01b1"
+        },
+        {
+          "src": "/images/renditions/d9b294046b8f77b0f91c-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 107384,
+          "sha256": "d9b294046b8f77b0f91c858fab565714c2260f54a5a36667e7f4c965f5a3dbc5"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-magdalena-prado.webp",
+      "sourceSha256": "2fb3681a1abb0a676c68f19c11da4dbd9da6f593b9e6ee560cca966b977ebc90",
+      "sourceBytes": 180294,
+      "variants": [
+        {
+          "src": "/images/renditions/e1172bd0dfda6cb57be2-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4240,
+          "sha256": "e1172bd0dfda6cb57be2773a43566b7fc78b6e0e67fd0396eddb58c6cf4d4ebd"
+        },
+        {
+          "src": "/images/renditions/e294152e723e4b8f1ce7-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 49572,
+          "sha256": "e294152e723e4b8f1ce7b1b1426c28c8ea4cea9446c1212f2ec4deb515db2eda"
+        },
+        {
+          "src": "/images/renditions/ce52121880e8d6f6a74f-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 147948,
+          "sha256": "ce52121880e8d6f6a74f2bfe336862ed2f59ffc84bf41fe67a95af3dcde545aa"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-magdalena-tatacoa-grey.webp",
+      "sourceSha256": "5166e45499510fa31ec80f1a3e8bffc254eebd54c4344bac6f1827b320757a7b",
+      "sourceBytes": 116086,
+      "variants": [
+        {
+          "src": "/images/renditions/71baa1637adee4afe7b9-160.webp",
+          "width": 160,
+          "height": 74,
+          "bytes": 3070,
+          "sha256": "71baa1637adee4afe7b9afc21cb20321b63345be71ea7aad84fc7250cf12cfc6"
+        },
+        {
+          "src": "/images/renditions/fa8f33f333996c87c104-640.webp",
+          "width": 640,
+          "height": 295,
+          "bytes": 32752,
+          "sha256": "fa8f33f333996c87c1049b2237150fe33628f44b7618b4f1bcf003d1de5e24c7"
+        },
+        {
+          "src": "/images/renditions/83d85e162a1295850a95-1280.webp",
+          "width": 1280,
+          "height": 591,
+          "bytes": 95048,
+          "sha256": "83d85e162a1295850a95f429ded162e27b2c8f0f19c009c30fbcbbeb53e191d1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-magdalena-tatacoa-hills.webp",
+      "sourceSha256": "3a61f5b557e98dd57efc3b906f377e957b1f524a9764200272dfdcfb1bfd82c5",
+      "sourceBytes": 109734,
+      "variants": [
+        {
+          "src": "/images/renditions/6d293780fe1b6ae28c03-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3166,
+          "sha256": "6d293780fe1b6ae28c0381446baf1691f03848fb0cf296fdc538d8204f3a1b2e"
+        },
+        {
+          "src": "/images/renditions/eb961a15b142c1f40fb1-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 36474,
+          "sha256": "eb961a15b142c1f40fb15dbfe6c9cdb61900c9b88c8c21b1ed3e139e09126c97"
+        },
+        {
+          "src": "/images/renditions/006ce4250f9bb3b60203-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 95322,
+          "sha256": "006ce4250f9bb3b6020346125a07806340305f8a096d9021c2549450c5607c09"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-mecana.webp",
+      "sourceSha256": "8c5464127c9eb9e672f2d66de7d6f7c58bbf572dd2e4d3f6f7ef57df0c2362f5",
+      "sourceBytes": 70606,
+      "variants": [
+        {
+          "src": "/images/renditions/02b0ab2f5bd0a65c6a46-160.webp",
+          "width": 160,
+          "height": 284,
+          "bytes": 6096,
+          "sha256": "02b0ab2f5bd0a65c6a46a640404b0210ea3244ca0488ed4ee197de86bfa3253b"
+        },
+        {
+          "src": "/images/renditions/9bbd97a40379d83cb63d-640.webp",
+          "width": 640,
+          "height": 1138,
+          "bytes": 59096,
+          "sha256": "9bbd97a40379d83cb63dc9f05e6becf7e1678ff37cc92a60adf66c05e98ed6a0"
+        },
+        {
+          "src": "/images/renditions/43025997faf9c0bd2dcd-720.webp",
+          "width": 720,
+          "height": 1280,
+          "bytes": 72142,
+          "sha256": "43025997faf9c0bd2dcd91b19d041742eb004db31a2e0e85e63e82936734040d"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-nuqui.webp",
+      "sourceSha256": "39a2e9e0fbedb5024ef6c21ab78715535090492c1e83134feafdd246e1acb04b",
+      "sourceBytes": 74404,
+      "variants": [
+        {
+          "src": "/images/renditions/1d3fb9833e778519d4bc-160.webp",
+          "width": 160,
+          "height": 116,
+          "bytes": 3310,
+          "sha256": "1d3fb9833e778519d4bce78ea35aa62dc90e8b13b2dd99b1cc07ae2ca766cb9e"
+        },
+        {
+          "src": "/images/renditions/c8707a3ed5193ac1e249-640.webp",
+          "width": 640,
+          "height": 463,
+          "bytes": 26776,
+          "sha256": "c8707a3ed5193ac1e249eb39b7d21a6a1352399c628266819fc12c8183063f70"
+        },
+        {
+          "src": "/images/renditions/cf3f2e22ebbc53ab8fcb-1280.webp",
+          "width": 1280,
+          "height": 925,
+          "bytes": 63766,
+          "sha256": "cf3f2e22ebbc53ab8fcb1683876a5c5bb7fd1790e9ccb8df5263a4cedfb116da"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-orocue.webp",
+      "sourceSha256": "721259c8e2c0be4f8910628725bbb192661e07ad177bb2c3c2835c95c047166f",
+      "sourceBytes": 93018,
+      "variants": [
+        {
+          "src": "/images/renditions/3d280d9cb2c343218bee-160.webp",
+          "width": 160,
+          "height": 61,
+          "bytes": 2418,
+          "sha256": "3d280d9cb2c343218beef8b35af4f4b45cdc159913c9621ae7fd4db6552d4056"
+        },
+        {
+          "src": "/images/renditions/2e14c2613c5c23535509-640.webp",
+          "width": 640,
+          "height": 246,
+          "bytes": 25974,
+          "sha256": "2e14c2613c5c235355091d9d4b6c3898cee09c86080c0bfe56a1f903f07e903f"
+        },
+        {
+          "src": "/images/renditions/e2c66d323551a5facc4a-1280.webp",
+          "width": 1280,
+          "height": 492,
+          "bytes": 73048,
+          "sha256": "e2c66d323551a5facc4aa2b767a37c098c2ee81044693d8e0a88a9c517c770cf"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-papas-path.webp",
+      "sourceSha256": "59410478204a60b3dd1c36bc5249d7d88d68c4cf676d6d53acc855bc0859d5ad",
+      "sourceBytes": 238300,
+      "variants": [
+        {
+          "src": "/images/renditions/73070c4c9b1a2523707f-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 12950,
+          "sha256": "73070c4c9b1a2523707fbca8bea58de7a4552df2858fc6fa88b05c73423f5b41"
+        },
+        {
+          "src": "/images/renditions/eccc9b42502a5346fa27-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 133260,
+          "sha256": "eccc9b42502a5346fa27ff649b3c72732b19df8de99d173bc23e4b521eb60da6"
+        },
+        {
+          "src": "/images/renditions/4fa256762aedd335f5f4-1050.webp",
+          "width": 1050,
+          "height": 1400,
+          "bytes": 243534,
+          "sha256": "4fa256762aedd335f5f481d69f0defa41b1e78306b603e0c37d8cfe298bf0a5b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-paramo-papas.webp",
+      "sourceSha256": "2c02f2f8570d41a1bd70e83cf89103115295775d89fadb65673906129cab64b2",
+      "sourceBytes": 60294,
+      "variants": [
+        {
+          "src": "/images/renditions/2a8348cd8cd60be12cc0-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 1676,
+          "sha256": "2a8348cd8cd60be12cc01b409be77fac29e6dc4b981506ab868f75c73b13e297"
+        },
+        {
+          "src": "/images/renditions/62888068bd784f4173fe-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 19576,
+          "sha256": "62888068bd784f4173fe079bbc8041f8841abd8658ceedc2f0bba500bf4c6eeb"
+        },
+        {
+          "src": "/images/renditions/202625db4bbb9de6b04f-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 48612,
+          "sha256": "202625db4bbb9de6b04f5a6a95b3b42dbd1c204e5c521c0fe2218c45c8531c24"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-puerto-narino.webp",
+      "sourceSha256": "85d445f23c34a20b617f71e3c91a18e4b74a0c1c1668e79524888f855d972da5",
+      "sourceBytes": 238586,
+      "variants": [
+        {
+          "src": "/images/renditions/68f2ae6069b6f7e94495-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4174,
+          "sha256": "68f2ae6069b6f7e9449536b620a247e5b26f3120d8a1cb16a9e8e14b2f51ce2a"
+        },
+        {
+          "src": "/images/renditions/c51ced6066bbed7f204b-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 68388,
+          "sha256": "c51ced6066bbed7f204b855f95e0f654864a0b004b552d889f8eadaf195e682e"
+        },
+        {
+          "src": "/images/renditions/eab520ecb61e83838634-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 206584,
+          "sha256": "eab520ecb61e838386343abc740d866d5f44aeb965ae731bd48762d15346fe39"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-purace-crater.webp",
+      "sourceSha256": "4d15c796590710e5281cb491a1d7f1e4e6494c19a49784c996f536ebfca3a5f8",
+      "sourceBytes": 244706,
+      "variants": [
+        {
+          "src": "/images/renditions/d8edd92160e3ea050398-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4944,
+          "sha256": "d8edd92160e3ea050398587d7ec26fd8fb842dc1e96719072812fd9456042147"
+        },
+        {
+          "src": "/images/renditions/99c5deb84f89be128a0c-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 73994,
+          "sha256": "99c5deb84f89be128a0c5037f72dd5aa1a909e3c960d36cbdb2e9239e4b712df"
+        },
+        {
+          "src": "/images/renditions/83391d43f699e13805bb-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 258806,
+          "sha256": "83391d43f699e13805bb09585a6a863d512c94caf729ca32db2d3a42717f95b7"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-purace-landscape.webp",
+      "sourceSha256": "50e79a88cbb650b18fb6795dca6ea20c9f31d0e097e13210b4633eb7c33f7b8d",
+      "sourceBytes": 100154,
+      "variants": [
+        {
+          "src": "/images/renditions/aaf3b04271af2a231211-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2658,
+          "sha256": "aaf3b04271af2a231211c11592cf35dbf8b9a5baeedea6079927079f72ec5deb"
+        },
+        {
+          "src": "/images/renditions/4eb8c97fb268b49b75b3-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 29862,
+          "sha256": "4eb8c97fb268b49b75b3655d9acd0a920364184626f04c8b4c329315ebd48cff"
+        },
+        {
+          "src": "/images/renditions/b96774c4a311bd01c4ba-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 84900,
+          "sha256": "b96774c4a311bd01c4bab174fa3e6cb5bb93723acd3f65f17895660187d27bf2"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-putumayo.webp",
+      "sourceSha256": "89968791449b83057ae11180ce87a1f9c456ebd171649c10c8b3750ac59a3c6b",
+      "sourceBytes": 35862,
+      "variants": [
+        {
+          "src": "/images/renditions/50af902e56499e473a62-160.webp",
+          "width": 160,
+          "height": 43,
+          "bytes": 1410,
+          "sha256": "50af902e56499e473a622daf5da7928d2cd6c369299685f9a9384c67348c8bac"
+        },
+        {
+          "src": "/images/renditions/9ffb7f388227030dd46a-640.webp",
+          "width": 640,
+          "height": 171,
+          "bytes": 11464,
+          "sha256": "9ffb7f388227030dd46af42fd821bd457fc6964371c1b82b5f1e8fb64d6163e9"
+        },
+        {
+          "src": "/images/renditions/50cbf4d480f0d63768d4-1280.webp",
+          "width": 1280,
+          "height": 343,
+          "bytes": 28702,
+          "sha256": "50cbf4d480f0d63768d440d6e9d906a70b476fba938dbd799f724a1feed98835"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-rio-meta-cabuyaro.webp",
+      "sourceSha256": "a98e9b59f8bd809421e54d845aa576de9ded4d68c8f057c25aa7474378dde3a0",
+      "sourceBytes": 133320,
+      "variants": [
+        {
+          "src": "/images/renditions/b16fdfd947f4273539bb-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3724,
+          "sha256": "b16fdfd947f4273539bb0cb47a3e2a32d5f93e614767623a18dec6340beda9e3"
+        },
+        {
+          "src": "/images/renditions/2e0a1779d4c84ccc9c72-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 39258,
+          "sha256": "2e0a1779d4c84ccc9c7243f9f5d788477fc3b17f46450b639664c33b1f7706ef"
+        },
+        {
+          "src": "/images/renditions/3f189c51ed18c67eb436-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 110644,
+          "sha256": "3f189c51ed18c67eb436b2607f8b5bf161fa4906114b05f61a94af32fe0c1256"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-sierra-coast-sierra.webp",
+      "sourceSha256": "2024e3bf867e91bbc3701e506b892119319d5fae4083b0e989803ad42e631d6c",
+      "sourceBytes": 165284,
+      "variants": [
+        {
+          "src": "/images/renditions/4598246ef8f3d856a9aa-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3820,
+          "sha256": "4598246ef8f3d856a9aaf821a3e963b742fd33c328dbc64c7d573e4d1bb80b74"
+        },
+        {
+          "src": "/images/renditions/e9c519d4f3f9e87ccbca-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 54252,
+          "sha256": "e9c519d4f3f9e87ccbca2ca30ab8569b3a76d5b0124ed8c35318be7fcfb59754"
+        },
+        {
+          "src": "/images/renditions/5c77763eae59ff3bbcdb-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 148796,
+          "sha256": "5c77763eae59ff3bbcdb0f9551838d838d26589d171ad330d40ed2b6ad560a17"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-sierra-kennedy.webp",
+      "sourceSha256": "e2aee767f5f26e31418f052b0a3b6df14aae953d218f1b6fa46b55bc1db57174",
+      "sourceBytes": 25188,
+      "variants": [
+        {
+          "src": "/images/renditions/c45f7f7ca6630e80bca9-160.webp",
+          "width": 160,
+          "height": 242,
+          "bytes": 3056,
+          "sha256": "c45f7f7ca6630e80bca90f86655fd9e467fe45d7545e032619ce5535cc35ddd0"
+        },
+        {
+          "src": "/images/renditions/c3922bb160816a9e1797-640.webp",
+          "width": 640,
+          "height": 967,
+          "bytes": 17794,
+          "sha256": "c3922bb160816a9e17970f6d6b118d1b8821109b9527da4d6989e7b9425da54b"
+        },
+        {
+          "src": "/images/renditions/59e7c474257afa3613ec-927.webp",
+          "width": 927,
+          "height": 1400,
+          "bytes": 25702,
+          "sha256": "59e7c474257afa3613ec501aaec4f2c95ebd3fd443974a93ec4d5861a136a267"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-sierra-pozo-azul.webp",
+      "sourceSha256": "f337f3916400b162c1f2437c67b6ee1b8d0aa6671705701cbdab45cc51fad4d5",
+      "sourceBytes": 339558,
+      "variants": [
+        {
+          "src": "/images/renditions/fe1cb99c91c03633cd60-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5870,
+          "sha256": "fe1cb99c91c03633cd601745ba610b444c2a5d0eaa8473f74d9d39fccc671f6b"
+        },
+        {
+          "src": "/images/renditions/5225ff81ff3c6ef61be0-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 80550,
+          "sha256": "5225ff81ff3c6ef61be044ed9998a6cc6712c7f2146bc96f23040aa2f50e54aa"
+        },
+        {
+          "src": "/images/renditions/68f76c26d75070a03181-1280.webp",
+          "width": 1280,
+          "height": 855,
+          "bytes": 274430,
+          "sha256": "68f76c26d75070a0318136e8ae6e32ab972c53e29d07b52b9513449ba91bc1fd"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-sierra-san-lorenzo-panorama.webp",
+      "sourceSha256": "94fa2c96b205e4fc30b4657322b1773e49d7ba0432f52f4d4588c3d7ac9ed11e",
+      "sourceBytes": 164278,
+      "variants": [
+        {
+          "src": "/images/renditions/d97efb7e557047574b58-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4646,
+          "sha256": "d97efb7e557047574b58c344672818d9c8de6b16ac7a6d3273140497d4872010"
+        },
+        {
+          "src": "/images/renditions/becbf2fc5bc6710fcad1-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 51930,
+          "sha256": "becbf2fc5bc6710fcad1d6dead7f3b786de84c44cfeda9dce32a6e1981ecae5f"
+        },
+        {
+          "src": "/images/renditions/3063b403db18da26a4b2-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 140964,
+          "sha256": "3063b403db18da26a4b23e6a0e34732cb87d507dee9217216b30866e7afdde7b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-sierra-san-lorenzo.webp",
+      "sourceSha256": "9c0078645c6d6cd4a715dc87819f6c6f05058522ca3e083e4d3cc4f1b1a96ef8",
+      "sourceBytes": 98212,
+      "variants": [
+        {
+          "src": "/images/renditions/147788282b51e67c872a-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3336,
+          "sha256": "147788282b51e67c872acb22e92b3cca963a13e7fa8fe27a88fa36cfc9faab7d"
+        },
+        {
+          "src": "/images/renditions/33295e8fc64fb3f4e7e3-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 31010,
+          "sha256": "33295e8fc64fb3f4e7e3ea372674f5c0b236cbc050d6d4d31c5fe4865ce4a468"
+        },
+        {
+          "src": "/images/renditions/1425dc886d65b5437fd0-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 84228,
+          "sha256": "1425dc886d65b5437fd02925ddd8e3d102b93b95a4062b619bad4ae5e6210d9b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-solano-sunset.webp",
+      "sourceSha256": "8eca1f3cf9aad4a1f7b81808e6d7b0b1d9670b2f05cba0a95239df1c583a3072",
+      "sourceBytes": 68630,
+      "variants": [
+        {
+          "src": "/images/renditions/3ebe2e3d7b06126e2727-160.webp",
+          "width": 160,
+          "height": 72,
+          "bytes": 2020,
+          "sha256": "3ebe2e3d7b06126e27274dad2e087f9dded5c891349166d07cc782fd10b3a575"
+        },
+        {
+          "src": "/images/renditions/801c97b8feb216ba178d-640.webp",
+          "width": 640,
+          "height": 288,
+          "bytes": 20044,
+          "sha256": "801c97b8feb216ba178d5b8adf194d2324ba29eedee7ba77fd14900c4f4f76c1"
+        },
+        {
+          "src": "/images/renditions/d4291339072f928d4f2a-1280.webp",
+          "width": 1280,
+          "height": 576,
+          "bytes": 56674,
+          "sha256": "d4291339072f928d4f2abd7ff0f4831fa6400f24530a076db6ae986043f5448e"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-sotara.webp",
+      "sourceSha256": "06edcaa9b41f2ace55a430d9996f1e14873aad75fecc8687db895d24f2087464",
+      "sourceBytes": 35258,
+      "variants": [
+        {
+          "src": "/images/renditions/26285a911ecb479a8332-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 1820,
+          "sha256": "26285a911ecb479a83324c6d910eabfc5367cb374006b5315f728601ff62eb93"
+        },
+        {
+          "src": "/images/renditions/dc6f8f2ecd8c31105b51-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 12402,
+          "sha256": "dc6f8f2ecd8c31105b5129f6491858e9cb296ec6ae8013c638a968ffab0c27e8"
+        },
+        {
+          "src": "/images/renditions/28adc8d1f9f86c8ca608-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 29218,
+          "sha256": "28adc8d1f9f86c8ca608a89e3708ae843675faefd3209a9fe531b0b53cafbae7"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-tarapoto.webp",
+      "sourceSha256": "c2d8ef9c74c2656b1b474ac813396ad2df5902d42720e94132fbd10877a0e4cf",
+      "sourceBytes": 87954,
+      "variants": [
+        {
+          "src": "/images/renditions/a039af9cce732522a22f-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4042,
+          "sha256": "a039af9cce732522a22fada2c4a321092b29b1070a0631faf5f34c0b0b9307f6"
+        },
+        {
+          "src": "/images/renditions/e3da6886da925a3a5664-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 31240,
+          "sha256": "e3da6886da925a3a566471a7640f08f54c0ed8a4b15eb9d811da2a88a005a94b"
+        },
+        {
+          "src": "/images/renditions/ea87afb8debd362026de-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 73288,
+          "sha256": "ea87afb8debd362026de52a0627213083c3258aba6b045204ee1d4d53a2d5c2c"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-utria.webp",
+      "sourceSha256": "f9cea242580bb083d0439259d4ac16cf809db2d64da35dbf613e657a62493235",
+      "sourceBytes": 86928,
+      "variants": [
+        {
+          "src": "/images/renditions/055d31d44eaf0dd92f31-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 2930,
+          "sha256": "055d31d44eaf0dd92f312ae268196013879ea0968a0ae0c5a00a74dbdc4920ce"
+        },
+        {
+          "src": "/images/renditions/042d128e11cbddc1dc79-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 28840,
+          "sha256": "042d128e11cbddc1dc796469b5eeaf846f50b2d0a7198dcbb6ff70f0b94e9fac"
+        },
+        {
+          "src": "/images/renditions/a6d4d677125fae6142a5-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 74630,
+          "sha256": "a6d4d677125fae6142a5d3939384489eee47d8733f51867469373871bafeb431"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-western-cloud-forest.webp",
+      "sourceSha256": "ae73bcec8bf4b22a4ad7baff4b8486eee33723daa572f6ffa91c289899cee329",
+      "sourceBytes": 118508,
+      "variants": [
+        {
+          "src": "/images/renditions/cc9e9f93700ea8b752bc-160.webp",
+          "width": 160,
+          "height": 285,
+          "bytes": 10352,
+          "sha256": "cc9e9f93700ea8b752bca3512dc2e762499114da286311e952fe49f1c625cb55"
+        },
+        {
+          "src": "/images/renditions/9d0e76d39d2d1beebdb3-640.webp",
+          "width": 640,
+          "height": 1139,
+          "bytes": 90638,
+          "sha256": "9d0e76d39d2d1beebdb37a76b0d8bc1d6b9238c2fd06dae4930f0c59d27355ec"
+        },
+        {
+          "src": "/images/renditions/4fef142ed3828cfd95b7-787.webp",
+          "width": 787,
+          "height": 1400,
+          "bytes": 121680,
+          "sha256": "4fef142ed3828cfd95b782182ecfb7acc1aaecd5dae2827079cff2d36eadb7bf"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-western-farallones.webp",
+      "sourceSha256": "5a1b00b1a366d1a73d20f2d61031f53dcf008f085c5fe112e91b31fb5bf9d517",
+      "sourceBytes": 231206,
+      "variants": [
+        {
+          "src": "/images/renditions/5866c053298882816b89-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 5218,
+          "sha256": "5866c053298882816b893ee38cc6e12b1b492e852c74be7e4b5735f2609b2e60"
+        },
+        {
+          "src": "/images/renditions/4fc09307f45c135bdf80-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 64978,
+          "sha256": "4fc09307f45c135bdf80f3c5377f88e9dedc203206dcfe0e5fe5b57dc2cc1f69"
+        },
+        {
+          "src": "/images/renditions/c4de68e63c2eac6fe09e-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 193350,
+          "sha256": "c4de68e63c2eac6fe09e4517b474fce3ed3e10d4234680a91d4bc7b6b886c48a"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-western-pico-loro.webp",
+      "sourceSha256": "902aa372ff8166384bb0c49139661d89a973c2b0aa52bc61726ae1da9f53034b",
+      "sourceBytes": 103590,
+      "variants": [
+        {
+          "src": "/images/renditions/554f4eb4736211fed735-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3344,
+          "sha256": "554f4eb4736211fed7357154a58d0b81dbaf75cadf1490c934e5ceb00b773363"
+        },
+        {
+          "src": "/images/renditions/51c0f8a10de434b63eca-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 33138,
+          "sha256": "51c0f8a10de434b63eca7b7829f26196c8db906113269ffa2b9618aebcf79cb8"
+        },
+        {
+          "src": "/images/renditions/7276c3af95211ad4f629-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 85754,
+          "sha256": "7276c3af95211ad4f6298b45bfb015694caded60f0c09767e73bf21f7ad56e0b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-western-tatama-forest.webp",
+      "sourceSha256": "2bea9ada137c5e7a3dc8d9a66b225527b9959272fb4a87701f58b92496874622",
+      "sourceBytes": 27706,
+      "variants": [
+        {
+          "src": "/images/renditions/412c2e55d1f2a50155a4-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 914,
+          "sha256": "412c2e55d1f2a50155a47ff285139b4c5f190ee2bb8c31afc168642bcea08dad"
+        },
+        {
+          "src": "/images/renditions/e2668d687a1494fbfcc1-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 7596,
+          "sha256": "e2668d687a1494fbfcc135a4985c977a3246e53237972ced8a8bdce2ea7175b6"
+        },
+        {
+          "src": "/images/renditions/96b848e9d6f4f72591da-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 19916,
+          "sha256": "96b848e9d6f4f72591dab421919369c99f2c989008bc10d1d939df011943f76c"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/colombia-western-tatama-ridge.webp",
+      "sourceSha256": "c607db96a696a77f36ce12791f81457e00d080386fbf5626e4d9933b2d0f0aae",
+      "sourceBytes": 158702,
+      "variants": [
+        {
+          "src": "/images/renditions/e49384ba71bd74c2ec51-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4716,
+          "sha256": "e49384ba71bd74c2ec51bf39c3115cc492e1a4a78da91588728503d36abc7108"
+        },
+        {
+          "src": "/images/renditions/bc95dff2a75bbc98b8a5-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 52414,
+          "sha256": "bc95dff2a75bbc98b8a57b4aaf4ab1307054a598326c07c6db127bd156ed2da7"
+        },
+        {
+          "src": "/images/renditions/e062bf77c22cfb5140d4-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 139096,
+          "sha256": "e062bf77c22cfb5140d483eb0be79e9dbf3a7e0961fc5f79ceac6b9a593d9b69"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/fiordland-lake-gunn-tree.webp",
+      "sourceSha256": "4c11a988d3c24c08b15f6d38faa9aa027aa62be58bdff90a149a47c9614b0c04",
+      "sourceBytes": 269534,
+      "variants": [
+        {
+          "src": "/images/renditions/6eb744cc3683bdba9147-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 6864,
+          "sha256": "6eb744cc3683bdba91472dcf6935762ca902eb82d4cdbdc8ce245e2facdec0a8"
+        },
+        {
+          "src": "/images/renditions/e953b2cdf4cc81da3512-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 102730,
+          "sha256": "e953b2cdf4cc81da351248133a54c7aec82d7d934e4df71acb369379c4d62755"
+        },
+        {
+          "src": "/images/renditions/7c3c5e6367f3196ec6d6-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 313492,
+          "sha256": "7c3c5e6367f3196ec6d6db66d2ad1cd4813c77a6a254b3f80edda6656492cd1b"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/fiordland-lake-gunn.webp",
+      "sourceSha256": "6885443d171aeb6f678af7e93f6b7b19629b64b5e47d4876fa33c63bb77619da",
+      "sourceBytes": 213180,
+      "variants": [
+        {
+          "src": "/images/renditions/21099964e2b615fb78a2-160.webp",
+          "width": 160,
+          "height": 102,
+          "bytes": 4456,
+          "sha256": "21099964e2b615fb78a249a7039eafe7aa3c94f951f53b3ce492a3044307fcfa"
+        },
+        {
+          "src": "/images/renditions/098c60146bbdd85959a2-640.webp",
+          "width": 640,
+          "height": 409,
+          "bytes": 56780,
+          "sha256": "098c60146bbdd85959a20eccfef25fd173d44a3f62dd83c29670a4f132ce65c7"
+        },
+        {
+          "src": "/images/renditions/86116596cbb16b5d8dbb-1280.webp",
+          "width": 1280,
+          "height": 819,
+          "bytes": 166320,
+          "sha256": "86116596cbb16b5d8dbbf4612afa3db85585bf47dd8aad83cc77ac6610ff1bd5"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/fiordland-landscape.webp",
+      "sourceSha256": "505b541c6355797820034a6e5271494cc09e06e90e144a969bc8e47a2ee09996",
+      "sourceBytes": 103328,
+      "variants": [
+        {
+          "src": "/images/renditions/eabea3a1a294cd68a883-160.webp",
+          "width": 160,
+          "height": 87,
+          "bytes": 2280,
+          "sha256": "eabea3a1a294cd68a883db81d6e8ea4a54e04613684b426f66af258d8eefbb4a"
+        },
+        {
+          "src": "/images/renditions/97a760eb907a808765dd-640.webp",
+          "width": 640,
+          "height": 348,
+          "bytes": 43530,
+          "sha256": "97a760eb907a808765dddfbdc248179a615b5445cec2479ba8bc42aecc386a3f"
+        },
+        {
+          "src": "/images/renditions/736f1d048f0ea5a86377-1000.webp",
+          "width": 1000,
+          "height": 544,
+          "bytes": 119370,
+          "sha256": "736f1d048f0ea5a86377cdc2b86cda26594838a1ed5835f68fe784f3ea3861c1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/fiordland-milford-sound.webp",
+      "sourceSha256": "328b17e11a4833c8095b97ef037cbf2c9f12aa8dcffe98360e9e0ab9c6807388",
+      "sourceBytes": 204248,
+      "variants": [
+        {
+          "src": "/images/renditions/69a00e04f95f810c5cd5-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3550,
+          "sha256": "69a00e04f95f810c5cd5963e0671a355d3973576838a9c6cd5fc9ccb876a2e8b"
+        },
+        {
+          "src": "/images/renditions/c32cb234abc278765baa-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 47862,
+          "sha256": "c32cb234abc278765baa26a19034d87ca3c67bc43225b15c5cf10dfb43a9c59f"
+        },
+        {
+          "src": "/images/renditions/52017eafd0aa041804f1-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 155712,
+          "sha256": "52017eafd0aa041804f18c027915f94078f1e0575c62a147b21e176765af9c50"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/fiordland-te-anau-shore.webp",
+      "sourceSha256": "7210d2853412081a81797b3ec1edcb2941afed8b2c8e94ccfa86a9be95f3b79d",
+      "sourceBytes": 111260,
+      "variants": [
+        {
+          "src": "/images/renditions/5a70fa19926a4db5b68e-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2032,
+          "sha256": "5a70fa19926a4db5b68e6f3108a401fadf67f6be8cbe8da4cb35fb8e8cab9ed6"
+        },
+        {
+          "src": "/images/renditions/7d0ecc71233d2b5df0ec-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 19436,
+          "sha256": "7d0ecc71233d2b5df0ec9bb2d8668b0d3255cefaf641a70751cd2fd9ed9638f1"
+        },
+        {
+          "src": "/images/renditions/c4b72ce1e369a7cf2643-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 58022,
+          "sha256": "c4b72ce1e369a7cf2643a709d33e7adb7c1e30162bf20acf97e5ab501c61c749"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/hamilton-gardens.webp",
+      "sourceSha256": "75d41faa4c8562ac6a61fc6b10c79d6eef8a55bdabeb6b951b21aca5cfbc85d8",
+      "sourceBytes": 253606,
+      "variants": [
+        {
+          "src": "/images/renditions/04b2defc2c19a92802c0-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 7294,
+          "sha256": "04b2defc2c19a92802c064f355425de3737e82517d1c576ce72c35da76fa5427"
+        },
+        {
+          "src": "/images/renditions/0aa26d9b7db0a96c6839-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 90708,
+          "sha256": "0aa26d9b7db0a96c6839b161686a5b7e072f25d39379e6127c15601f84b87c61"
+        },
+        {
+          "src": "/images/renditions/13750284b9451d6c6ebe-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 276228,
+          "sha256": "13750284b9451d6c6ebebb427e3b904c9a5dfe3ca8a59bde46c284d7d233d4f1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/nelson-lake-rotoroa.webp",
+      "sourceSha256": "a2691cef50e66c05a113f812a12d239ddee7b0ef97f056f2cfddd0799f2a00bd",
+      "sourceBytes": 249132,
+      "variants": [
+        {
+          "src": "/images/renditions/0f72ba7c4b989ed2a5f7-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5056,
+          "sha256": "0f72ba7c4b989ed2a5f7f6e820b8557af3a469f913cca3f903c633ea4af493ba"
+        },
+        {
+          "src": "/images/renditions/9d5569bf30d003628f6d-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 60678,
+          "sha256": "9d5569bf30d003628f6d800b11512be37bee158ec631742bf51bffea47e69b8a"
+        },
+        {
+          "src": "/images/renditions/0976bbb02bdaf290a886-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 186872,
+          "sha256": "0976bbb02bdaf290a886fe21bb3e468df26f48ec5956fd8862d5bb7f46352ff3"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/nelson-landscape.webp",
+      "sourceSha256": "bde6e63b540831c8bf6d6ba8fe8963bbb252bcd9f92fe7220a151a0692ea6287",
+      "sourceBytes": 137058,
+      "variants": [
+        {
+          "src": "/images/renditions/b7375e2958becf45a9b0-160.webp",
+          "width": 160,
+          "height": 115,
+          "bytes": 3676,
+          "sha256": "b7375e2958becf45a9b04871bd05256d2a0087fa355fdb4fa0be7874a3470d46"
+        },
+        {
+          "src": "/images/renditions/f3024f44bfd16178d24d-640.webp",
+          "width": 640,
+          "height": 460,
+          "bytes": 61680,
+          "sha256": "f3024f44bfd16178d24dd781cf6c8c0e1fc9db69422b278683eccabb3e9232a5"
+        },
+        {
+          "src": "/images/renditions/da2ceaa0235b3a31024c-1000.webp",
+          "width": 1000,
+          "height": 719,
+          "bytes": 155190,
+          "sha256": "da2ceaa0235b3a31024cbaa57dc9dfa752f0c1a3b2b2c5b444e446f8aec13100"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/nelson-mount-robert.webp",
+      "sourceSha256": "53b92ca9d1d8913658f252f50a7c62fb13de53ebaf614476a18cf3993ade0cf1",
+      "sourceBytes": 54886,
+      "variants": [
+        {
+          "src": "/images/renditions/da03dc23144c921ac7d2-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3238,
+          "sha256": "da03dc23144c921ac7d2e8e427638829a15680e9d78b699e9ea886c1e2091b9d"
+        },
+        {
+          "src": "/images/renditions/7c8cdb9aa6fb2c5d4996-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 26284,
+          "sha256": "7c8cdb9aa6fb2c5d49965ab08d4ab84de9749df0633dc732fec78046ea178e8c"
+        },
+        {
+          "src": "/images/renditions/603fcfa43cb35bf40d08-1024.webp",
+          "width": 1024,
+          "height": 683,
+          "bytes": 53198,
+          "sha256": "603fcfa43cb35bf40d08a62b41b8e0e8a3acee5a29ae7fa281cd38e82bd04004"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/nelson-rotoiti-kerr-bay.webp",
+      "sourceSha256": "bbcf26778b807cd8dd278807895153a62a6f6fe6a1ff26cd915f455d6826720f",
+      "sourceBytes": 157086,
+      "variants": [
+        {
+          "src": "/images/renditions/022bb3f4fadefc5b2018-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3240,
+          "sha256": "022bb3f4fadefc5b20180cd0507bf8a74f0a672862741488a026fb972312727b"
+        },
+        {
+          "src": "/images/renditions/303f42a849333b7f1ffb-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 40132,
+          "sha256": "303f42a849333b7f1ffb28a4b1a198fa2be7bb3623e4b03f27d6574321c73c52"
+        },
+        {
+          "src": "/images/renditions/fd17f242466292d09ba7-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 142926,
+          "sha256": "fd17f242466292d09ba7ad468a93cc3a9a50b70f7b216d8a066cbc2ec33d452d"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/nelson-silver-beech.webp",
+      "sourceSha256": "31aa7143db4201f351f1034406220cebebd4c9feadb787597f3240769d91ef9d",
+      "sourceBytes": 354386,
+      "variants": [
+        {
+          "src": "/images/renditions/e1a300e7e5c02f50cb0a-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 8222,
+          "sha256": "e1a300e7e5c02f50cb0aedc0e438ab97e28bf1784b4aaed7b55da4d1f21485b0"
+        },
+        {
+          "src": "/images/renditions/34b77b17f4f7d0730285-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 126866,
+          "sha256": "34b77b17f4f7d0730285b5e6065582d9b7d752a5e646f6869b4424f666ff8ea3"
+        },
+        {
+          "src": "/images/renditions/236b50b250214eb1ab77-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 408586,
+          "sha256": "236b50b250214eb1ab773ebc11d89288bd10bb75a216194f2cf52a210fc2b570"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rakiura-forest.webp",
+      "sourceSha256": "aeb2c0a2ee1dff2ad7dd0c9f126ba25bcb66a1075a7b8f3783bb2b2c73af711d",
+      "sourceBytes": 226654,
+      "variants": [
+        {
+          "src": "/images/renditions/27b773bf37c4cb7e3ebc-160.webp",
+          "width": 160,
+          "height": 117,
+          "bytes": 6068,
+          "sha256": "27b773bf37c4cb7e3ebc75b1c314e4319265dc4389f4c6c7395ca585be780cc3"
+        },
+        {
+          "src": "/images/renditions/0ca1d4955d5a28a08995-640.webp",
+          "width": 640,
+          "height": 468,
+          "bytes": 83316,
+          "sha256": "0ca1d4955d5a28a08995d7ffba206d3a0a843a49050e452e15b0117df4f88749"
+        },
+        {
+          "src": "/images/renditions/0c9dcf34b81aa6d91c5c-1280.webp",
+          "width": 1280,
+          "height": 935,
+          "bytes": 246526,
+          "sha256": "0c9dcf34b81aa6d91c5cf1c22a8c0693b151a38ca495349fa480d87d3cf1b93a"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rakiura-golden-bay.webp",
+      "sourceSha256": "e689712e9c695dde5561a2accedcf1f423665dcfd8a1d4ebafb5f2d0f8da8147",
+      "sourceBytes": 159890,
+      "variants": [
+        {
+          "src": "/images/renditions/13a1b57e30e999946a12-160.webp",
+          "width": 160,
+          "height": 103,
+          "bytes": 4012,
+          "sha256": "13a1b57e30e999946a12e4a4696cf808ab3783d27b59f6bde659289179b593e6"
+        },
+        {
+          "src": "/images/renditions/49c743bd621a1a684923-640.webp",
+          "width": 640,
+          "height": 413,
+          "bytes": 54658,
+          "sha256": "49c743bd621a1a684923c8f49c7429959d240cccca723ca9de03b9e1c1137e9e"
+        },
+        {
+          "src": "/images/renditions/4419d858bbcca53831b8-1280.webp",
+          "width": 1280,
+          "height": 826,
+          "bytes": 174412,
+          "sha256": "4419d858bbcca53831b858283e8f783ca2bf34f3590ba5ddbeb074d5157ba087"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rakiura-lee-bay.webp",
+      "sourceSha256": "131b4178546bd2e157cb995db39358c59bb6b1134031e8b205c0439d744b7252",
+      "sourceBytes": 69136,
+      "variants": [
+        {
+          "src": "/images/renditions/8fa0a3005ae45a8883d9-160.webp",
+          "width": 160,
+          "height": 90,
+          "bytes": 2436,
+          "sha256": "8fa0a3005ae45a8883d9401e4ab8cff0bc7d0476fc1357316f1b52de8474c1a9"
+        },
+        {
+          "src": "/images/renditions/221e03c38fbc557a0fe7-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 26390,
+          "sha256": "221e03c38fbc557a0fe76e1e90d9892864e8d37539737ae74e4a6117d59c36df"
+        },
+        {
+          "src": "/images/renditions/d1199dd521f80d274d40-1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 73430,
+          "sha256": "d1199dd521f80d274d40d60a089e566d38ebd4eef567cf4ef63bb692a214750a"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rakiura-maori-beach.webp",
+      "sourceSha256": "3932cbbdcc40997ba08a301024e3f10411d181e8dd0184b5674c3b1d9c0bed4f",
+      "sourceBytes": 125752,
+      "variants": [
+        {
+          "src": "/images/renditions/ce51965c2177c4cd01fc-160.webp",
+          "width": 160,
+          "height": 98,
+          "bytes": 2700,
+          "sha256": "ce51965c2177c4cd01fc6f52a0afb43fc790b131de73d2ba57dc08424f46814e"
+        },
+        {
+          "src": "/images/renditions/aeb0eccd5c6e8a05b460-640.webp",
+          "width": 640,
+          "height": 394,
+          "bytes": 42306,
+          "sha256": "aeb0eccd5c6e8a05b46043927bf9082bf626af4e2ff0280451aff926d55644ec"
+        },
+        {
+          "src": "/images/renditions/70351355e3c5a224f65e-1280.webp",
+          "width": 1280,
+          "height": 788,
+          "bytes": 133720,
+          "sha256": "70351355e3c5a224f65e1ecf592d888741d844f8c67bc9253b484960d753477f"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rakiura-oban-bay.webp",
+      "sourceSha256": "927925f02b12e12016e5cc245efb38a66a7053499569dd6b124d75281f999b90",
+      "sourceBytes": 277396,
+      "variants": [
+        {
+          "src": "/images/renditions/91e9a9f251de1fb4eb67-160.webp",
+          "width": 160,
+          "height": 90,
+          "bytes": 3456,
+          "sha256": "91e9a9f251de1fb4eb678a861691a57d8079fa04f80b8b5095ab767661e2220c"
+        },
+        {
+          "src": "/images/renditions/a66aa5f63aae110ba746-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 44862,
+          "sha256": "a66aa5f63aae110ba746a592109b5250ec87799a76d8e6b775c0fad33efe11b2"
+        },
+        {
+          "src": "/images/renditions/8c529d111bbaaadb0054-1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 139990,
+          "sha256": "8c529d111bbaaadb0054eea3f3fdf8559153aed17bb3bde5cfb2d68fcdd39e48"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rotorua-kuirau.webp",
+      "sourceSha256": "6bab1479c05b41e65f20a7a1f9955975bcd9f185f18a8044d0f8215736f3f878",
+      "sourceBytes": 109086,
+      "variants": [
+        {
+          "src": "/images/renditions/e3a8e6f71643b3f1deff-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 3640,
+          "sha256": "e3a8e6f71643b3f1deff4328444930af575195c3f614940cc2aca8dea698c166"
+        },
+        {
+          "src": "/images/renditions/d13ef5268b5db451d077-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 41920,
+          "sha256": "d13ef5268b5db451d077be981754a42405208adf7ece498195a2d819292976e2"
+        },
+        {
+          "src": "/images/renditions/b93089fd6c511e6da5d8-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 115960,
+          "sha256": "b93089fd6c511e6da5d8f58638fcb01f59d20269040c0ab40b2c2225d80f4d7c"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rotorua-lakefront.webp",
+      "sourceSha256": "27969af5cfb56be84e612ba6e5a48c4c752d2977bf7c3aa48ad42a1c526e00b3",
+      "sourceBytes": 223364,
+      "variants": [
+        {
+          "src": "/images/renditions/e899382c786ee558c440-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4206,
+          "sha256": "e899382c786ee558c4405d6ee35148cf9ddcf62ea2b566af1916324a3e0b432f"
+        },
+        {
+          "src": "/images/renditions/945b35c67a2041760814-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 41670,
+          "sha256": "945b35c67a204176081459512ff784d46a11db608977124960b50a8f9b694081"
+        },
+        {
+          "src": "/images/renditions/fd669b1fd90620c6853e-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 117076,
+          "sha256": "fd669b1fd90620c6853e867ecef0d7b2d8a3f996193ca848b2b82e201bcfd8a4"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/rotorua-redwoods.webp",
+      "sourceSha256": "0cb2c26b8bf6314bff54ca7a5df40e9f2767cc09845491b1d7de4e12f1be30dc",
+      "sourceBytes": 324556,
+      "variants": [
+        {
+          "src": "/images/renditions/852ed76ed0b5e8bfee9a-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 9124,
+          "sha256": "852ed76ed0b5e8bfee9a99ae2c6a9572cbd6130b906640b404dbd30dbbe7d408"
+        },
+        {
+          "src": "/images/renditions/307b9ec57023a34c3593-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 126884,
+          "sha256": "307b9ec57023a34c35935af48b0dc3ae723fb8c400e7af9db8121b597ed89180"
+        },
+        {
+          "src": "/images/renditions/879170a315c1849bddd1-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 371518,
+          "sha256": "879170a315c1849bddd15f7056fdb755a445e88c90bcda03c8afbe9b8521a0ae"
+        }
+      ]
+    },
+    {
+      "source": "/images/rabtho1.jpg",
+      "sourceSha256": "5107c5e2cf3da4304b2e8b11dcd797444cd6772ec007a84896329471383517f9",
+      "sourceBytes": 3681398,
+      "variants": [
+        {
+          "src": "/images/renditions/9f39455f59f9c56a6287-160.webp",
+          "width": 160,
+          "height": 159,
+          "bytes": 5880,
+          "sha256": "9f39455f59f9c56a6287ff54af859f43801cb1f0a7b1767f5a6d7db4560397ec"
+        },
+        {
+          "src": "/images/renditions/be1a4dfa609fe1f53bc8-640.webp",
+          "width": 640,
+          "height": 638,
+          "bytes": 53140,
+          "sha256": "be1a4dfa609fe1f53bc844b3b774f4eea2c4cc96b1b4e475fd5808e68b305961"
+        },
+        {
+          "src": "/images/renditions/87dad6151bb3b12a4c80-1280.webp",
+          "width": 1280,
+          "height": 1276,
+          "bytes": 163810,
+          "sha256": "87dad6151bb3b12a4c80b56e0a2eea6ee0140775a92a98719db898c7e05cb7a8"
+        }
+      ]
+    },
+    {
+      "source": "/images/scadov1.jpg",
+      "sourceSha256": "055b40fcecb6cdeb6a78c18e9c63e0c86e0609470e2b1ffb660a138d08b4fd20",
+      "sourceBytes": 470963,
+      "variants": [
+        {
+          "src": "/images/renditions/4f3bdff0562ecd1398b7-160.webp",
+          "width": 160,
+          "height": 151,
+          "bytes": 4420,
+          "sha256": "4f3bdff0562ecd1398b734d1bf97309dca68dc4c535c6432c6f05c04453cd892"
+        },
+        {
+          "src": "/images/renditions/c8021128d2ae2d4183c7-640.webp",
+          "width": 640,
+          "height": 602,
+          "bytes": 41180,
+          "sha256": "c8021128d2ae2d4183c7771903128471960773b43dcfc09b2ada2d505f21158e"
+        },
+        {
+          "src": "/images/renditions/87bb946529d2eefe4d4f-1280.webp",
+          "width": 1280,
+          "height": 1203,
+          "bytes": 101054,
+          "sha256": "87bb946529d2eefe4d4fc947df75c542929dc6954e4ce78e923a3ce585b4e65e"
+        }
+      ]
+    },
+    {
+      "source": "/images/strman5.jpg",
+      "sourceSha256": "b9405ccae09942bce69de253cbae049e3be3b5b426cb1d8c4be132e9114fa5df",
+      "sourceBytes": 2180483,
+      "variants": [
+        {
+          "src": "/images/renditions/61a89a7fdcbe403b7feb-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 3986,
+          "sha256": "61a89a7fdcbe403b7feba19a5459e62766be59394e5446ad8d2073ccc3bac792"
+        },
+        {
+          "src": "/images/renditions/1f490c057c6bbe2abb21-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 34572,
+          "sha256": "1f490c057c6bbe2abb21ab89a69a152cb59e475de9baff326bf24d7e57b6ac43"
+        },
+        {
+          "src": "/images/renditions/997bb928c5576c4fe16a-1280.webp",
+          "width": 1280,
+          "height": 1280,
+          "bytes": 202048,
+          "sha256": "997bb928c5576c4fe16a2aa6ce770e8235a48d649f3b906facfe472cb07057ba"
+        }
+      ]
+    },
+    {
+      "source": "/images/velvet-purple-coronet.jpg",
+      "sourceSha256": "bfe527c52a2cf5467f3b0286c2f6bcae3a6c27dbb71b5cf69b7cdf18e963d681",
+      "sourceBytes": 3462238,
+      "variants": [
+        {
+          "src": "/images/renditions/d468448b0e1dd51c4f10-160.webp",
+          "width": 160,
+          "height": 147,
+          "bytes": 6698,
+          "sha256": "d468448b0e1dd51c4f106f57cec7cf01694f6deb5692ffa22e554e1822495cdc"
+        },
+        {
+          "src": "/images/renditions/fd8f62e589a61cef6f1b-640.webp",
+          "width": 640,
+          "height": 587,
+          "bytes": 63646,
+          "sha256": "fd8f62e589a61cef6f1b428b0c7bb34da7a4ecdc76827d167dab72376af4bbae"
+        },
+        {
+          "src": "/images/renditions/8e57bab8f9fb985dc51c-1280.webp",
+          "width": 1280,
+          "height": 1174,
+          "bytes": 256004,
+          "sha256": "8e57bab8f9fb985dc51c52aca29cd01a94dce97a869b90faf6f29cad767e5316"
+        }
+      ]
+    }
+  ]
+}
