@@ -1,22 +1,20 @@
-# Private travel records and document copies
+# Private travel records: published release
 
-This bounded ten-fix release implements the next practical workspace scope in roadmap33–36. It does not complete ten later roadmap milestones or add sharing, automatic imports or bookings.
+Published on aves.bio and www.aves.bio on12 November2026. Ten concrete fixes implement the bounded practical-record scope in roadmap33–36:
 
-1. Add explicitly saved owner-only expense records.
-2. Associate receipt records with the correct saved journal entry and its files.
-3. Keep integer money units, currency-separated totals and estimated/paid/refunded amounts distinct.
-4. Add provider, ticket/reference, date and arrangement state to private booking records.
-5. Support bounded private PDF copies alongside existing photo/audio formats.
-6. Keep PDF titles, creator/date/order/notes private and deliver PDFs as downloads without embedded previews.
-7. Offer authenticated downloads for individual photos, recordings and documents.
-8. Bound upload confirmation waits and retain the same selected copy/reference after a timeout.
-9. Export saved trip, workspace, practical records and attachment metadata as owner-only JSON.
-10. Support recoverable removal/restoration of practical records, preserving identities and conflicting edits.
+1. Private expense records.
+2. Receipt links to saved journal entries.
+3. Exact money units and separate currency/payment totals.
+4. Provider, ticket/reference and arrangement status for bookings.
+5. Bounded private PDF uploads.
+6. Private document details and download-only PDF handling.
+7. Authenticated individual file downloads.
+8. Upload timeout recovery retaining the original retry reference.
+9. Saved private trip JSON export.
+10. Recoverable practical-record removal and restoration.
 
-The existing private bucket and quotas remain:3MiB/file,20 files/account and250/project. Incomplete files count towards capacity. Practical records have a separate revisioned document, at most50 records/trip and24KB of validated application JSON. Existing workspace JSON and submitted briefs are unchanged. Each record amount is a total for that record, separate from planner per-person allowances. No exchange conversion, payment verification, environmental certification, live inventory or confirmed booking is inferred.
+669 tests, strict TypeScript, production build, database ownership/revision checks, hosted synthetic save/reopen/conflict, PDF download integrity, anonymous denial, owner export and cleanup passed. Both domains verified. No real traveller data was imported or shared. Physical Safari, narrow authenticated layout and independent visitor checks remain pending.
 
-PDF header/end checks identify a supported copy; they are not a malware scan. PDFs are not rendered in an embedded viewer. Download responses use authenticated ownership checks, private/no-store caching, attachment disposition, nosniff and a sandbox policy. Metadata exports include private references and removed records, exclude unsaved edits and file bytes, and label independently saved section revisions. Individual file downloads are separate. This is an owner export, not a shareable journal edition or restoration/import format.
+JSON exports include saved private references and removed records, excluding unsaved edits and file bytes. PDFs download without an embedded preview. Format checks do not scan for malware. The current file-size and quota limits remain. Larger resumable uploads, file bundles, inbox imports and sharing remain future work.
 
-Validation and publication details belong in HANDOFF-CURRENT.md. Physical Safari, independent visitor feedback and launch economics retain their separate evidence gates. Larger resumable uploads, encrypted/offline exports, archive bundles, inbox imports, selective sharing and community publication remain future work.
-
-The earlier Eco-Tourism Business Plan remains private and requires actual founder/cash/capacity inputs. These features support practical record keeping; they do not establish business viability or stewardship outcomes. B Lab's ESC guidance remains an evidence framework rather than an AVES certification claim: https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/ .
+Next numbered task:37, reconstruct the Colombia route from actual records. Preserve evidence gates9–11 and22. These ten fixes do not claim completion of ten later roadmap milestones or establish launch readiness.
