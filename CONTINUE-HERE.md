@@ -16,27 +16,197 @@ Keep the shared map controls discreet: a globe button toggles satellite on/off d
 
 Extend each saved trip into a conscious-traveller workspace. Add a per-trip checklist with completion and optional due dates, then private references and documents for flight tickets, hotel confirmations/conversations, accommodation and activity bookings, car rentals and gear. Plan the work in small releases: checklist first, then record links, then secure attachments and explicit imports. Keep planning, requested and confirmed arrangements distinct; no automatic booking, inbox reading or sharing. Full criteria: docs/TRAVELLER-WORKSPACE-ROADMAP.md. Use official birding/ecotourism guides for route planning, with dated first-hand blogs and trip reports as attributed context. Retain backend provenance and surface compact route-specific reading links where useful.
 
-The direct satellite toggle is implemented beside the shared layers picker. The current map refinement retains faded New Zealand context around South Island, prevents the default place from forcing a close-up, declutters satellite labels at country scale and increases the unexpanded phone canvas. Conservation/environmental organisation directory and an optional sourced layer are captured in docs/TRAVELLER-WORKSPACE-ROADMAP.md. Hosted acceptance and canonical publication passed. Itinerary ordinal/place-label separation is published in daeda011. The reviewed Christchurch airport/property pilot is now published. Latest owner direction adds a private day-and-place journal with photos, recordings, receipts and selected trip records. Next bounded increment: private journal entries attached to the existing trip/day, followed by secure attachments and selective sharing. Keep private records isolated and preserve existing drafts.
+The direct satellite toggle is implemented beside the shared layers picker. The current map refinement retains faded New Zealand context around South Island, prevents the default place from forcing a close-up, declutters satellite labels at country scale and increases the unexpanded phone canvas. Conservation/environmental organisation directory and an optional sourced layer are captured in docs/TRAVELLER-WORKSPACE-ROADMAP.md. Hosted acceptance and canonical publication passed. Itinerary ordinal/place-label separation is published in daeda011. The reviewed Christchurch airport/property pilot is now published. Latest owner direction adds a private day-and-place journal with photos, recordings, receipts and selected trip records. The owner has now prioritised five-photo regional galleries and connected country galleries first; the ranked queue below supersedes the previous journal-first order. Keep private records isolated and preserve existing drafts.
 
-## The pathway
+## The pathway: next 90 ranked increments
 
-1. Add verified parks and reserves. Core country pilots delivered. Colombia pilot delivered: 109 national RUNAP records on the shared satellite map, with category/source details and explicit regional/private/provisional omissions. Australia pilot delivered: 13 selected CAPAD national parks across nine jurisdictions. New Zealand pilot delivered: three North Island parks plus Rakiura, alongside the existing South Island nine-park/DOC layer. Wider reserve coverage stays optional and scoped. Deliver each country in a separate bounded release on the existing satellite map. Verify source, licence, date, geographic fit, omissions and access limits. A clearly labelled useful pilot is acceptable; fabricated completeness is not. References: MAP-04a/b/c.
+Owner reprioritised galleries on 12 November 2026: the previous items 9 and 10 now come first. The completed Christchurch reference pilot stays delivered. Journal work remains planned and private. This is the only active queue; the former eight-stage sequence is historical context in the handoff, not a competing list.
 
-2. Unify map controls. Delivered for maintained map families. Include expanded-map scrolling at very short viewport heights. Use one consistent layer picker, selection treatment, legend and source display across the maintained map families. Preserve camera, geography and bird choice through toggling, expansion and navigation. Distinguish display layers from bird filters. Load detail only when needed. Reference: MAP-05.
+Work in progress limit: one release. Validate, publish the exact accepted source and record evidence before beginning the next release. Combine adjacent items only when they form one reviewable outcome; never batch all country assets into an unreviewed release. An item is complete only when its stated outcome and relevant checks pass. Do not wait for all 90 items to open a bounded pilot.
 
-3. Finish the shared island planner. Delivered. Keep the delivered island configuration; finish sharing route rules, road/price references, draft storage and account handoff. Preserve old drafts and keep each island's inputs and saved plans isolated. Do not copy the planner or infer a road between islands. Reference: NZ-01b.
+Priority bands: items 1–8 are the next gallery releases. Items 9–22 protect the New Zealand visitor journey and pilot economics. Items 23–45 extend the private trip workspace after the gallery and pilot checks. Items 46–90 are a ranked, dependency-aware candidate backlog, not a fixed delivery promise. Reassess after every release and after visitor feedback; a privacy defect, broken map or failed save moves ahead of content expansion. Reach a go/no-go at item 22 before investing in community features or completing every country gallery.
 
-4. Publish a usable North Island pilot. Delivered for Auckland, Hamilton and Rotorua. Research one coherent corridor and deliver its canonical guide, map, locally supported birds, trip options, catalogue and site-directory links together. A visitor must complete a credible 3 to 7 day trip with fixed endpoints. Preserve the working South Island flow. Reference: NZ-02.
+Photo completion requires distinct real photographs with checked locality, rights, creator, source, alt text and compact accessible credits. Country views curate the regional records; no copied asset libraries, duplicate crops, illustrative bird portraits or invented counts. All pages retain the shared map, carousel controls, enlargement and navigation.
 
-5. Make both islands' plans practical and comparable. Bounded pilot delivered: optional driving preferences, partial known road subtotals, daily pace disclosures, reviewed calendars, scoped walk times and one indoor alternative. Wider live weather, complete pricing and exact addresses remain limitations. Improve travel time, pace, season/opening constraints, weather alternatives, cost units and allowance comparisons. Offer genuinely different options where feasible; explain missing prices or limited choices. Keep editing and save/reopen reliable. References: NZ-03/04/06.
+1. Bring Nelson Lakes to five distinct, credited photographs.
 
-6. Fill useful content gaps along those routes. In progress: scoped walk/access improvements and one indoor Hamilton alternative delivered. Current Colombian media inventory has 22 credited catalogue images plus 40 additional bird-named repository candidates requiring taxon, source and rights review. Include useful dated first-hand trip reports, birding itineraries and blogs as attributed references, separate from current official access and operator information. Add sourced birding sites, stays, individually reviewed Airbnb options where possible, food, organic/farm-to-table evidence, markets, hot springs, hikes, adventures, ecotourism, community-led culture, wellness and transport. Audit local bird memberships and national/global conservation status. B Corp evidence stays optional and separate. Extend the verified pattern to Colombia and Australia. Expand by usefulness, not pin counts. References: NZ-05/07 and map/place coverage.
+2. Bring Fiordland to five distinct, credited photographs.
 
-7. Complete the journey from discovery to a private trip brief. Town-base visual journey foundation delivered on both islands, with previous/next steps, the existing map, local bird context, nearby activity cards and free exploration. Reviewed Christchurch Airport and Novotel property references are delivered in the existing viewer, with explicit airport selection and full ordinal accessible labels. Other steps remain town references. NEXT: private trip/day journal foundation, then secure uploads and selective sharing as scoped in TRAVELLER-WORKSPACE-ROADMAP.md. Arrival, transfer, hotel/overnight and outing steps should highlight the current verified place and update sourced local bird/activity carousel content. Start with labelled planning bases where exact airport/property points are not yet reviewed. Never invent precise points or road paths. Preserve free exploration, static/reduced-motion use and a useful mobile map. Keep map, birds, wishes, itinerary and the shared contact flow connected. Make explicit save, sign-in, reopen, edit and voluntary inquiry clear. Separate planning estimates from confirmed availability and a human quote. No automatic booking or unsolicited sending.
+3. Bring Otago and the Catlins to five distinct, credited photographs.
 
-8. Validate and refine for launch. Desktop guided journeys and representative Colombia/Australia shared-shell checks passed. Physical Safari/touch, independent visitors, precise-place and wider content/rights review remain incomplete. Test complete visitor tasks on both islands and representative Colombia/Australia routes. Fix actual friction in mobile layout, Safari/touch where available, keyboard/focus, typography, images, loading, media and performance. Validate with independent visitors before claiming launch readiness. Then choose further corridors or advanced features from demonstrated needs.
+4. Bring the North Island collection to five distinct, credited photographs.
 
-Steps 1 and 2 cover the core map expansion, not every optional layer or business worldwide. Do not let unlimited layer/catalogue expansion postpone steps 3 and 4. Physical-device checks, evidence quality and useful design apply throughout, not only at step 8.
+5. Bring the Rakiura collection to five distinct, credited photographs.
+
+6. Check regional gallery counts and filtering against the shared photo library.
+
+7. Reuse reviewed regional photos in New Zealand overview cards.
+
+8. Recheck narrow layouts, keyboard navigation, enlargement and credit return.
+
+9. Validate the shared map and galleries on physical iPhone/Safari.
+
+10. Run an independent visitor through a complete New Zealand planning task.
+
+11. Fix the highest-impact friction found in that visitor test.
+
+12. Add a reviewed Auckland airport reference to the existing journey viewer.
+
+13. Add one reviewed North Island accommodation reference.
+
+14. Animate one sourced transfer within the existing map.
+
+15. Add a restrained overnight transition between journey steps.
+
+16. Verify reduced motion, free exploration and return to the map.
+
+17. Review arrival/departure time constraints in daily plans.
+
+18. Carry selected landscape references into the private trip brief.
+
+19. Check accommodation, activity and transport cost units in the pilot.
+
+20. Review the business model, founder pay, costs and viable pilot scope privately.
+
+21. Prepare a small New Zealand pilot invitation and feedback task.
+
+22. Make an evidence-based decision on opening the limited New Zealand pilot.
+
+23. Add a private per-trip preparation checklist.
+
+24. Add optional checklist due dates and completion state.
+
+25. Attach private reference links to checklist items.
+
+26. Create private journal entries within an existing trip.
+
+27. Support journal editing and recoverable deletion.
+
+28. Link journal entries to the correct day and public place.
+
+29. Add secure owner-only photo uploads.
+
+30. Add photo captions, ordering, creator details and dates.
+
+31. Add secure owner-only audio uploads.
+
+32. Add recording playback and recording notes.
+
+33. Add private receipts and expense records.
+
+34. Add private tickets, confirmations and booking documents.
+
+35. Handle interrupted uploads, size limits and storage quotas clearly.
+
+36. Provide owner export and attachment deletion controls.
+
+37. Reconstruct the Colombia route from actual trip records.
+
+38. Confirm contributor credits, permissions and participant consent.
+
+39. Populate the private Colombia journal with reviewed trip material.
+
+40. Preview a shareable journal edition with private fields excluded.
+
+41. Add revocable private journal share links.
+
+42. Enforce audience and owner access on every shared item.
+
+43. Prepare Peter’s selected Colombia edition and New Zealand invitation for review.
+
+44. Incorporate Peter’s feedback into the trip planner and journal.
+
+45. Define consent, reporting and moderation rules before community publication.
+
+46. Inventory Colombia landscape candidates and reuse permissions.
+
+47. Build a five-photo Central Andes gallery.
+
+48. Build a five-photo Eastern Andes gallery.
+
+49. Build a five-photo Western Andes gallery.
+
+50. Build a five-photo Cauca Valley gallery.
+
+51. Build a five-photo Magdalena Valley gallery.
+
+52. Build a five-photo Sierra Nevada de Santa Marta gallery.
+
+53. Build a five-photo Caribbean gallery.
+
+54. Build a five-photo Pacific Coast and Chocó gallery.
+
+55. Build a five-photo Llanos gallery.
+
+56. Build a five-photo Amazonia gallery.
+
+57. Build a five-photo Colombian Massif gallery.
+
+58. Connect the Colombian country overview to those shared regional records.
+
+59. Inventory Australian landscape candidates and reuse permissions.
+
+60. Build a five-photo New South Wales gallery.
+
+61. Build a five-photo Queensland gallery.
+
+62. Build a five-photo Victoria gallery.
+
+63. Build a five-photo Tasmania gallery.
+
+64. Build a five-photo South Australia gallery.
+
+65. Build a five-photo Western Australia gallery.
+
+66. Build a five-photo Northern Territory gallery.
+
+67. Build a five-photo Australian Capital Territory gallery.
+
+68. Build a five-photo Jervis Bay Territory gallery.
+
+69. Connect the Australian country overview to those shared regional records.
+
+70. Check country/region gallery parity across all three destinations.
+
+71. Add compact official birding and ecotourism route references for the NZ pilot.
+
+72. Add dated first-hand trip reports and blogs, clearly separated from official guidance.
+
+73. Track source review dates and flag stale access or supplier claims.
+
+74. Publish a sourced New Zealand conservation organisation directory pilot.
+
+75. Show the reviewed organisations as an optional existing-map layer.
+
+76. Verify a bounded B Corp supplier directory against entity-level evidence.
+
+77. Add a discreet B Corp layer without implying place-wide certification.
+
+78. Extend the conservation organisation directory to one Colombian corridor.
+
+79. Extend the conservation organisation directory to one Australian corridor.
+
+80. Audit habitat, endemic and conservation filters across shared maps and carousels.
+
+81. Extend reviewed seasonal and opening-day planning rules.
+
+82. Add one useful weather or access alternative to each pilot corridor.
+
+83. Improve partial price comparisons without fabricating missing costs.
+
+84. Clarify the transition from a planning estimate to a human quote.
+
+85. Create the private bird-album observation foundation.
+
+86. Keep wished-for, observed and independently verified birds distinct.
+
+87. Review the next bounded batch of Colombian bird-image candidates for identity and rights.
+
+88. Complete privacy, accessibility and performance release checks on the actual visitor flows.
+
+89. Update the private professional business plan using pilot evidence and revised cash-flow assumptions.
+
+90. Review public-launch readiness, outstanding risks, rollback and the feedback-led next backlog.
 
 ## Run each round
 

@@ -538,6 +538,71 @@
       "alt": "Waves breaking across the rocky coastline at Curio Bay in the Catlins",
       "modifications": "Resized and converted to WebP; cropped to fit.",
       "verifiedOn": "2026-11-12"
+    },
+    {
+      "file": "arthurs-pass-bealey-river.webp",
+      "path": "/images/places/arthurs-pass-bealey-river.webp",
+      "title": "Bealey River valley · Arthur’s Pass",
+      "creator": "Maksym Kozlenko",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:2008-06-07_Arthur's_Pass.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2008-06-07_Arthur's_Pass.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Bealey River valley · Arthur’s Pass. Photo: Maksym Kozlenko. CC BY-SA 4.0.",
+      "alt": "Bealey River valley and forested slopes at Arthur’s Pass",
+      "modifications": "Resized and converted to WebP; cropped to fit the card. Web rendition retains CC BY-SA 4.0."
+    },
+    {
+      "file": "arthurs-pass-station.webp",
+      "path": "/images/places/arthurs-pass-station.webp",
+      "title": "Railway station · Arthur’s Pass",
+      "creator": "Mike Dickison",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Arthur's_Pass_Station_MRD_02.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arthur's_Pass_Station_MRD_02.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "attribution": "Railway station · Arthur’s Pass. Photo: Mike Dickison. CC BY 4.0.",
+      "alt": "Arthur’s Pass railway station with mountains behind its platform",
+      "modifications": "Resized and converted to WebP; cropped to fit the card. Historical photograph, not current access or service information."
+    },
+    {
+      "file": "arthurs-pass-village.webp",
+      "path": "/images/places/arthurs-pass-village.webp",
+      "title": "Village chapel · Arthur’s Pass",
+      "creator": "Francis Vallance (Heritage Warrior)",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Arthurs_Pass_Village_(20295490610).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arthurs_Pass_Village_(20295490610).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "attribution": "Village chapel · Arthur’s Pass. Photo: Francis Vallance (Heritage Warrior). CC BY 2.0.",
+      "alt": "Snow beside the stone chapel in Arthur’s Pass village, with mountains behind",
+      "modifications": "Resized and converted to WebP; cropped to fit the card. Historical photograph, not current access or service information."
+    },
+    {
+      "file": "rotorua-lakefront.webp",
+      "path": "/images/places/rotorua-lakefront.webp",
+      "title": "Lake Rotorua waterfront · North Island",
+      "creator": "Kiwiz1338",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Lake_Rotorua_lake_front.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Rotorua_lake_front.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Lake Rotorua waterfront · North Island. Photo: Kiwiz1338. CC BY-SA 4.0.",
+      "alt": "Lake Rotorua waterfront beneath an open sky",
+      "modifications": "Resized and converted to WebP; cropped to fit the card. Web rendition retains CC BY-SA 4.0."
+    },
+    {
+      "file": "rakiura-oban-bay.webp",
+      "path": "/images/places/rakiura-oban-bay.webp",
+      "title": "Oban from Halfmoon Bay · Stewart Island / Rakiura",
+      "creator": "Pseudopanax",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Oban_from_Halfmoon_Bay.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oban_from_Halfmoon_Bay.jpg",
+      "license": "Public domain",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Oban_from_Halfmoon_Bay.jpg#Licensing",
+      "attribution": "Oban from Halfmoon Bay · Stewart Island / Rakiura. Photo: Pseudopanax. Public domain.",
+      "alt": "Oban settlement on the wooded shore of Halfmoon Bay, viewed from the water",
+      "modifications": "Resized and converted to WebP; cropped to fit the card. Historical photograph, not current access or service information."
     }
   ]
 }

@@ -66,3 +66,7 @@ Extend the trip workspace into a day-and-place journal for photographs, audio re
 Prepare a shareable edition separately: travellers choose entries, audiences and visibility, preview the result and can revoke access. Public community sharing and invitations are later, explicit actions; do not silently publish private records or send invitations. Community content remains attributed and distinct from current official access guidance or verified environmental claims.
 
 First example: prepare an owner-reviewed Colombia pilot journal from actual supplied trip materials, with unresolved dates/locations marked for confirmation. Draft an accompanying invitation for Peter to try the New Zealand planner. Confirm the recipient and selected journal contents before sharing. Do not fabricate a completed journal, memories, sightings, quotations, receipts or permissions from the product brief alone.
+
+## Gallery priority update · 12 November 2026
+
+The owner prioritised five-photo regional galleries and country/subregion gallery connections before journal implementation. CONTINUE-HERE.md contains the sole ranked 90-item queue. Keep the journal example private and its feature work queued after gallery and New Zealand pilot checks. Country curation must remain balanced across available regions, label incomplete collections honestly and use the same reviewed photo records as detailed galleries. Reassess the candidate backlog after each release and pilot feedback; new defects and privacy risks outrank optional expansion.

@@ -126,8 +126,8 @@ test("places cycle across all four areas, map selections change photos, and habi
   const button = label => elements(pair).find(node => node.props["aria-label"] === label)
   const selectedPlace = () => load("lib/south-island-discovery.ts").southIslandLandscapeSlides[shared.slideIndex].place.id
   assert.equal(selectedPlace(), "mountains")
-  button("Next landscape").props.onClick(); pair = render()
-  button("Next landscape").props.onClick(); pair = render()
+  const firstPlacePhotos = load("content/south-island-place-media.ts").southIslandPlaceContexts[0].photos.length
+  for (let i = 0; i < firstPlacePhotos; i++) { button("Next landscape").props.onClick(); pair = render() }
   assert.equal(selectedPlace(), "forest-and-lakes")
   assert.equal(shared.value, "freshwater")
   button("Place details & credits").props.onClick(); pair = render()

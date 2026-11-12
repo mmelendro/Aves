@@ -1,3 +1,4 @@
+import galleryAdditions from "./place-gallery-additions.json"
 export type PlacePhoto = {
   src: string; alt: string; caption: string; creator: string
   sourceUrl: string; licence: string; licenceUrl: string; modifications: string
@@ -24,6 +25,7 @@ export const arthursPassPhotos: readonly PlacePhoto[] = [
     licence: "Public domain", licenceUrl: "https://commons.wikimedia.org/wiki/File:Devils_Punchbowl_Waterfall,_New_Zealand.jpg#Licensing",
     modifications: "Resized and converted to WebP; cropped to fit the card.",
   },
+  ...galleryAdditions.photos.filter(photo => photo.regionId === "south-island" && photo.placeId === "mountains"),
 ]
 
 /** Licensed, correctly located additions for the four-place discovery pair. */

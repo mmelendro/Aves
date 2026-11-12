@@ -39,6 +39,8 @@ import SouthIslandEcosystemMap from "./south-island-ecosystem-map"
 import { filterSouthIslandBirds, southIslandEcosystems } from "@/content/south-island-ecosystems"
 import { southIslandPlaceContexts } from "@/content/south-island-place-media"
 import { southIslandLandscapeSlides } from "@/lib/south-island-discovery"
+import PlaceGallery from "./place-gallery"
+import {galleryPhotos, type GalleryPhoto} from "@/lib/place-gallery"
 import styles from "./homepage-destination-explorer.module.css"
 
 type ExplorerProps = { map: ReactNode; initialCountryId?: string; initialRegionId?: string; onScopeChange?: (country:string,region:string)=>void }
@@ -69,6 +71,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   }
   const [birdId, setBirdId] = useState("")
   const [showBirdAreas,setShowBirdAreas]=useState(false)
+  const [galleryPhoto,setGalleryPhoto]=useState<GalleryPhoto|null>(null)
   const [wishIds,setWishIds]=useState<string[]>([])
   const [storageAvailable,setStorageAvailable]=useState(true)
   useEffect(()=>{
@@ -96,7 +99,8 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const matchingCountryIds=destinations.filter(item=>filterConservationBirds(getDestinationRegionBirds(item.id),filters).length>0).map(item=>item.id)
   useEffect(()=>{onScopeChange?.(zoomed ? destination.id : "",region?.id ?? "")},[zoomed,destination.id,region?.id,onScopeChange])
   const contactHref = destination.id === "new-zealand" ? `/australia/contact?topic=new-zealand${region ? `&region=${region.id}` : ""}#inquiry` : `${destination.id === "australia" ? "/australia" : ""}/contact?country=${destination.id}${region ? `&region=${region.id}` : ""}`
-  const highlightedRegions = region ? [region.id] : showBirdAreas ? getBirdRegionIds(destination?.id, birdId || birds[0]?.id) : []
+  const galleryRegion = zoomed && destination.id === "new-zealand" && !southIsland ? (galleryPhoto?.countryId === destination.id ? galleryPhoto.regionId : galleryPhotos(destination.id,regionId)[0]?.regionId ?? "") : ""
+  const highlightedRegions = region ? [region.id] : showBirdAreas ? getBirdRegionIds(destination?.id, birdId || birds[0]?.id) : galleryRegion ? [galleryRegion] : []
   useEffect(()=>{ if(destination) publish(zoomed ? {country:destination.id,regionId:region?.id} : {country:"global"}) },[destination,region,zoomed,publish])
   const onBirdChange = useCallback((bird: BirdProfile) => setBirdId(bird.id), [])
 
@@ -137,7 +141,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
                 <label className="sr-only" htmlFor="explorer-island">Explore an island</label>
                 <select id="explorer-island" aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}{filtering ? ` · ${filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters).length} matches` : ""}</option>)}</select>
               </div>
-            </div> : <MapViewer geographicScope={{country:zoomed?destination.id:"",region:regionId,selectCountry:id=>id?selectDestination(id):backToWorld(),selectRegion}} layerControl={<CountrySatelliteControl country={zoomed ? destination.id : ""} region={regionId}/>} label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
+            </div> : <MapViewer geographicScope={{country:zoomed?destination.id:"",region:regionId,highlightRegion:!regionId&&!showBirdAreas?galleryRegion:undefined,selectCountry:id=>id?selectDestination(id):backToWorld(),selectRegion}} layerControl={<CountrySatelliteControl country={zoomed ? destination.id : ""} region={regionId}/>} label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
               {/* Both views share one footprint. Inert also removes the hidden
                   world's SVG buttons from keyboard and assistive navigation. */}
               <div className={styles.worldView} inert={zoomed} aria-hidden={zoomed}>{map}</div>
@@ -194,6 +198,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
           <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2"><a className={styles.regionLink} href={contactHref}>Discuss your {region?.name || destination.name} trip</a><a className={styles.regionLink} href={`/account?country=${destination.id}${region ? `&region=${region.id}` : ""}`}>Save a private trip brief</a></div></div>
           <div><h3 className="font-semibold text-emerald-950">Birdlife and habitats</h3><p className="mt-2 text-sm leading-7 text-gray-600">{birds.length} photographed species {filtering ? "match your bird filters" : "in this view"}. Open a bird’s information for its habitat, wider range and sources. These photographs are a selection, not a complete checklist.</p><ul className="mt-3 space-y-2 text-sm leading-6 text-gray-700">{birds.slice(0,3).map(bird=><li key={bird.id}><span className="font-semibold">{bird.commonName}</span>: {bird.localOccurrence || bird.habitat}</li>)}</ul>{southIsland && <p className="mt-3 text-xs leading-6 text-gray-500">Map layers include the existing DOC conservation land, national parks, satellite background and curated public places. Your layer choices stay selected when you zoom out and return.</p>}</div>
         </section>}
+        {zoomed && destination.id === "new-zealand" && !southIsland && <PlaceGallery countryId={destination.id} countryName={destination.name} regionId={regionId} regions={regions} selectedPhotoId={galleryPhoto?.countryId===destination.id?galleryPhoto.id:undefined} onPhotoChange={photo=>{setGalleryPhoto(photo);setShowBirdAreas(false)}} onRegionChange={selectRegion}/>}
         {southIsland && <section id="places" aria-label="A few places to build around." className="mt-7"><h2 className="text-2xl font-medium text-emerald-950">A few places to build around.</h2><p className="mt-3 mb-5 text-sm leading-7 text-gray-600">These public landscape references share the habitat and place selections of the map above. They are planning ideas, not a promise of access or sightings.</p><SouthIslandPlacesExplorer/></section>}
         {zoomed && destination.id==="new-zealand" && <section aria-label="New Zealand bird wishes" className="mt-6 rounded-3xl border border-emerald-100 bg-white p-5 sm:p-7"><h3 className="text-xl font-medium text-emerald-950">Birds you would love to see</h3><p className="mt-2 text-sm leading-7 text-gray-600">Tap a photograph’s heart, or search the complete published New Zealand checklist, including endemics. This country checklist includes other islands and rare visitors. Inclusion does not mean a bird occurs in the selected region.</p><div className="mt-5"><NewZealandBirdPicker selected={wishIds} onChange={chooseBirds}/></div><a className={styles.regionLink} href={`/account?country=new-zealand${region ? `&region=${region.id}` : ""}`}>Save {wishIds.length || "your"} bird choices in a private brief</a><p className="mt-2 text-xs leading-6 text-gray-500">{storageAvailable ? "Unsaved choices stay in this browser tab for up to a day. Sign in, review and save your private draft. Sharing with AVES remains a separate step." : "This browser cannot carry your choices between pages. Choose birds in the private brief before saving."}</p></section>}
         {!navigationAvailable && <p role="status" className="mt-3 text-xs text-gray-600">Your map works here, but this browser could not update its address. Refresh may return to this page’s starting place.</p>}

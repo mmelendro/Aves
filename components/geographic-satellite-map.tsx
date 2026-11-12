@@ -8,7 +8,7 @@ import {createMapCameraMemory,mapCameraKey} from "@/lib/map-camera-memory";
 import {destinationRegions} from "@/content/destination-regions";
 import {useMapLayers} from "./map-layer-context";
 
-export type GeographicScope={country:string;region?:string;selectCountry?:(id:string)=>void;selectRegion?:(id:string)=>void;onMapReady?:(map:GeographicMap|null)=>void};
+export type GeographicScope={country:string;region?:string;highlightRegion?:string;selectCountry?:(id:string)=>void;selectRegion?:(id:string)=>void;onMapReady?:(map:GeographicMap|null)=>void};
 const GeographicProtectedAreas=dynamic(()=>import("./geographic-protected-areas"),{ssr:false});
 const AustraliaProtectedAreas=dynamic(()=>import("./australia-protected-areas"),{ssr:false});
 const NewZealandProtectedAreas=dynamic(()=>import("./new-zealand-protected-areas"),{ssr:false});
@@ -23,7 +23,7 @@ const credit='EOxCloudless <a href="https://cloudless.eox.at">EOX IT Services Gm
 /** A single geographic tile engine remains mounted through country/region choices.
  * Only a public display preference is stored; no location permission or private trip data is sent.
  */
-export default function GeographicSatelliteMap({country,region="",selectCountry,selectRegion,onMapReady}:GeographicScope){
+export default function GeographicSatelliteMap({country,region="",highlightRegion="",selectCountry,selectRegion,onMapReady}:GeographicScope){
   const container=useRef<HTMLDivElement>(null),map=useRef<GeographicMap|null>(null);
   const [ready,setReady]=useState(false),[failed,setFailed]=useState(false),[tileFailed,setTileFailed]=useState(false),[move,setMove]=useState(false);
   const {layers}=useMapLayers();
@@ -77,11 +77,11 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
     const markers=(showPlanning?[]:targets).flatMap(target=>{
       if(!target.bounds)return[];
       const b=target.bounds,button=document.createElement("button");button.type="button";button.textContent=target.name;button.className="geographic-map-target";
-      button.setAttribute("aria-label",`Explore ${target.name}`);button.setAttribute("aria-pressed",String(region===target.id));
+      button.setAttribute("aria-label",`Explore ${target.name}`);button.setAttribute("aria-pressed",String((region||highlightRegion)===target.id));
       button.onclick=()=>country?callbacks.current.selectRegion?.(target.id):callbacks.current.selectCountry?.(target.id);
       return[marker([(b[1]+b[3])/2,(b[0]+b[2])/2],{icon:divIcon({html:button,className:"geographic-map-marker",iconSize:[0,0]}),keyboard:false}).addTo(current)];
     });return()=>markers.forEach(m=>m.remove());
-  },[country,region,ready,showPlanning]);
+  },[country,region,highlightRegion,ready,showPlanning]);
   return <section data-geographic-satellite="true" className="geographic-map-shell" aria-label="Continuous satellite exploration">
     <div className="flex flex-wrap items-center gap-2 px-2 py-1">
       {selectCountry&&<label className="text-xs">Destination <select aria-label="Satellite destination" value={country} onChange={e=>selectCountry(e.target.value)} className="min-h-11 max-w-full rounded-lg border bg-white px-2"><option value="">World</option><option value="colombia">Colombia</option><option value="australia">Australia</option><option value="new-zealand">New Zealand</option></select></label>}
@@ -94,7 +94,7 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
     {ready&&map.current&&country==="new-zealand"&&region!=="south-island"&&<NewZealandProtectedAreas map={map.current}/>}
     {ready&&map.current&&country==="new-zealand"&&region==="north-island"&&<NorthIslandPlanningLayer map={map.current}/>}
     <div ref={container} className="geographic-map-canvas"/>
-    {ready&&map.current&&showPlanning&&<GeographicPlanningLayer map={map.current} country={country} region={region} onSelect={activateRegion}/>}
+    {ready&&map.current&&showPlanning&&<GeographicPlanningLayer map={map.current} country={country} region={region||highlightRegion} onSelect={activateRegion}/>}
     {country&&<p className="px-2 py-1 text-[10px] leading-4 text-emerald-950">{country==="colombia"?"Planning regions: adjoining AVES areas with shared edges. Approximate planning boundaries, not official boundaries or bird ranges.":country==="australia"?"Planning regions follow generalised state and territory boundaries.":"Planning regions follow the three main island groups; outlying islands are omitted."} <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer" className="underline">Natural Earth geography</a>{country==="colombia"?" · Areas authored by AVES":" · Public domain"}.</p>}
     {(failed||tileFailed)&&<p role="status" className="px-2 text-xs">{failed?"The satellite map could not open. The planning map remains available.":"Some satellite tiles could not load. Try another area or return to the planning map."}</p>}
     <p className="px-2 py-1 text-[10px] leading-4 text-gray-600">Satellite · 2016 composite · Historical landscape, not current conditions. Regional labels mark broad planning areas, not bird locations or ecological boundaries. Use Move for dragging; pinch or use + / − for detail.</p>
