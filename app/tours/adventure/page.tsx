@@ -25,6 +25,7 @@ export default function AdventurePage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/tours/adventure" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
       <section className="relative py-8 lg:py-12 overflow-hidden">
@@ -335,6 +336,7 @@ export default function AdventurePage() {
       </section>
 
       {/* Global Footer */}
+      </main>
       <Footer />
     </div>
   )

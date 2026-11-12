@@ -22,3 +22,9 @@ The source reachability check does not prove that every route is useful. Unit an
 For a release, retain the tested commit, exact built deployment, browser acceptance and previous deployment. A code rollback does not reverse database or stored-file changes. Keep business finances, private traveller records and authentication material out of source and public release notes.
 
 `check:catalogue-loading` inspects emitted route chunks after a production build. It confirms the NZ checklist media is present in an async chunk and absent from initial homepage, account and island-planner JavaScript. It is a bounded payload regression check, not a browser or touch test.
+
+## Public route audit and current queue
+
+The current prioritisation is [the 100-item audit roadmap](AUDIT-ROADMAP-100-2026-11-13.md). Previous IDs and completed work are reconciled there. The existing data/feature design documents remain references, not competing active queues.
+
+After starting a production build locally, run `python scripts/audit-public-http.py --base-url http://127.0.0.1:3000 --output public-http-audit.json`. This bounded, same-origin check reads public sitemap pages without cookies or private account access. Browser layout, real touch and authenticated acceptance remain separate.

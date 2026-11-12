@@ -13,6 +13,7 @@ import { sitePath as australiaPath } from "@/features/australia/lib/site-path";
 
 export const publicNavigationPaths = [
   ...new Set([
+    ...["colombia", "australia", "new-zealand"].map(country => `/species/reference?country=${country}`),
     ...publicPages.map((page) => page.href),
     ...australianPages.map((page) => australiaPath(page.href)),
   ]),
@@ -22,6 +23,7 @@ export const publicNavigationPaths = [
 export const publicNavigationGroups: (Omit<PublicPageGroup, "country"> & {
   country: "colombia" | "australia" | "new-zealand" | null;
 })[] = [
+  { id: "species-inventories", title: "Country species inventories", country: null, pages: ["colombia", "australia", "new-zealand"].map(country => ({ href: `/species/reference?country=${country}`, label: `${country === "new-zealand" ? "New Zealand" : country === "colombia" ? "Colombia" : "Australia"} national bird inventory` })) },
   ...publicPageGroups,
   ...australianGroups.map((group) => ({
     ...group,

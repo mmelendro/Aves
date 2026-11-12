@@ -45,9 +45,10 @@ export default function SierraNevadaTourPage() {
               Contact
             </Link>
           </nav>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">Book Your Journey</Button>
+          <Button asChild className="bg-emerald-600 hover:bg-emerald-700"><Link href="/contact?region=sierra-nevada-de-santa-marta">Discuss your journey</Link></Button>
         </div>
       </header>
+      <main id="main-content" tabIndex={-1}>
 
       <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-8 lg:py-12">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
@@ -136,16 +137,12 @@ export default function SierraNevadaTourPage() {
 
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <div className="flex justify-between items-end mb-2">
-                    <p className="text-gray-600">Starting from</p>
-                    <p className="text-3xl font-bold text-emerald-600">$8,000</p>
+                    <p className="text-gray-600">Your journey, personally quoted</p>
+                    <p className="text-xl font-bold text-emerald-600">Request a quote</p>
                   </div>
-                  <p className="text-sm text-gray-500 mb-4">per person, based on double occupancy</p>
-                  <Link href="/shopping?preset=sierra-nevada">
-                    <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Book This Journey</Button>
-                  </Link>
-                  <Button variant="outline" className="w-full mt-3">
-                    Request Custom Dates
-                  </Button>
+                  <p className="text-sm text-gray-500 mb-4">Price, dates, availability and inclusions are confirmed in your personal quote.</p>
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700" asChild><Link href="/contact?region=sierra-nevada-de-santa-marta">Request your personal quote</Link></Button>
+                  <Button asChild variant="outline" className="w-full mt-3"><Link href="/contact?region=sierra-nevada-de-santa-marta">Discuss your dates</Link></Button>
                 </div>
               </div>
             </div>
@@ -344,11 +341,9 @@ export default function SierraNevadaTourPage() {
               </li>
             </ul>
             <div className="mt-6">
-              <Link href="/contact">
-                <Button variant="outline" className="bg-white">
+              <Button variant="outline" className="bg-white" asChild><Link href="/contact">
                   Discuss Customization Options
-                </Button>
-              </Link>
+                </Link></Button>
             </div>
           </div>
         </div>
@@ -465,24 +460,21 @@ export default function SierraNevadaTourPage() {
             indigenous guides.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/shopping?preset=sierra-nevada">
-              <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100">
-                Book This Journey
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
+            <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100" asChild><Link href="/contact?region=sierra-nevada-de-santa-marta">
+                Request your personal quote
+              </Link></Button>
+            <Button
                 size="lg"
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-emerald-600"
-              >
+               asChild><Link href="/contact">
                 Contact Us
-              </Button>
-            </Link>
+              </Link></Button>
           </div>
         </div>
       </section>
 
+      </main>
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16">
         <div className="container mx-auto px-4">

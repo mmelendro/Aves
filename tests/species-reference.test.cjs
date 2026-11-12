@@ -86,3 +86,23 @@ test('species/place edges retain explicit encounter and access context without i
  }
  assert.equal(query('colombia',{q:'Momotus aequatorialis'}).results[0].places.length,0)
 })
+
+test('stale and malformed pagination stays aligned inside the filtered result set',()=>{
+ for(const country of ['colombia','australia','new-zealand']){
+  const last=query(country,{offset:'99999'})
+  assert.ok(last.results.length>0);assert.equal(last.offset%40,0)
+  assert.equal(query(country,{offset:'41'}).offset,40)
+  for(const offset of ['-1','1.5','Infinity','garbage'])assert.equal(query(country,{offset}).offset,0)
+  const one=query(country,{q:last.results[0].scientificName,offset:'99999'})
+  assert.equal(one.offset,0);assert.ok(one.results.length>0)
+ }
+ assert.equal(query('colombia',{q:'not-a-real-bird-xxxx',offset:'99999'}).offset,0)
+})
+test('query contract rejects duplicate/unsupported filters and strips non-search tracking',()=>{
+ const {readSpeciesQuery,normalizeSpeciesQuery}=load('lib/species-reference-query.ts')
+ assert.equal(readSpeciesQuery({country:['colombia','australia']}),null)
+ assert.equal(normalizeSpeciesQuery(new URLSearchParams('origin=native&origin=endemic')),null)
+ for(const bad of [{origin:'made-up'},{occurrence:'sometimes'},{reference:'yes'},{country:'constructor'}])assert.equal(readSpeciesQuery(bad),null)
+ assert.equal(readSpeciesQuery({country:'australia',q:'   ',origin:'all',occurrence:'all',reference:'0',offset:'0',utm_source:'test'}).toString(),'country=australia')
+ assert.equal(readSpeciesQuery({q:' x '.repeat(200)}).get('q').length,120)
+})

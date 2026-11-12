@@ -34,7 +34,7 @@ const expectedRegions = australian
   ? ["queensland", "new-south-wales", "tasmania", "victoria", "south-australia", "western-australia", "northern-territory", "australian-capital-territory", "jervis-bay-territory"]
   : ["pacific", "western-andes", "central-andes", "eastern-andes", "cauca-valley", "magdalena-valley", "caribbean", "sierra-nevada-de-santa-marta", "llanos", "amazonia", "colombian-massif"]
 
-test("XML sitemap contains unique canonical public URLs without queries, aliases or private tools", () => {
+test("XML sitemap contains unique canonical public URLs with only canonical country queries and no private tools", () => {
   const entries = load("app/sitemap.ts").default()
   const urls = entries.map(entry => entry.url)
   assert.equal(new Set(urls).size, urls.length)
@@ -42,7 +42,10 @@ test("XML sitemap contains unique canonical public URLs without queries, aliases
   for (const entry of entries) {
     const url = new URL(entry.url)
     assert.equal(url.origin, "https://aves.bio")
-    assert.equal(url.search, "")
+    if (url.pathname === "/species/reference") {
+      assert.deepEqual([...url.searchParams.keys()], ["country"])
+      assert.ok(["colombia", "australia", "new-zealand"].includes(url.searchParams.get("country")))
+    } else assert.equal(url.search, "")
     assert.equal(url.hash, "")
     assert.doesNotMatch(url.pathname, /\/(?:account|admin|api|auth|dashboard|shopping|calendar)(?:\/|$)/)
     assert.doesNotMatch(url.pathname, /cauca-river|australia\/australia/)

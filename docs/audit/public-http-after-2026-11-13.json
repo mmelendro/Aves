@@ -1,0 +1,1718 @@
+[
+  {
+    "url": "http://127.0.0.1:3004/species/reference?country=colombia",
+    "status": 200,
+    "title": "Colombia Bird Species Inventory | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 185216,
+    "transferBytes": 48000,
+    "canonical": [
+      "https://aves.bio/species/reference?country=colombia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/species/reference?country=australia",
+    "status": 200,
+    "title": "Australia Bird Species Inventory | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 190680,
+    "transferBytes": 49315,
+    "canonical": [
+      "https://aves.bio/species/reference?country=australia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/species/reference?country=new-zealand",
+    "status": 200,
+    "title": "New Zealand Bird Species Inventory | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 220697,
+    "transferBytes": 60374,
+    "canonical": [
+      "https://aves.bio/species/reference?country=new-zealand"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/new-zealand",
+    "status": 200,
+    "title": "New Zealand | Birdlife, nature & culture | AVESAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 660160,
+    "transferBytes": 181009,
+    "canonical": [
+      "https://aves.bio/new-zealand"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/new-zealand/north-island",
+    "status": 200,
+    "title": "North Island birding and trip planning | AVES New ZealandAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 592350,
+    "transferBytes": 176416,
+    "canonical": [
+      "https://aves.bio/new-zealand/north-island"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/new-zealand/south-island",
+    "status": 200,
+    "title": "South Island birding, nature & travel | AVES New ZealandSouth Island land cover and coastlineCoasts & offshore waters \u2014 coastline context onlyArthur\u2019s Pass \u2014 Arthur\u2019s Pass villageNelson Lakes \u2014 Lake RotoitiFiordland \u2014 Lake Te AnauOtago & the Catlins \u2014 Curio Bay",
+    "h1": 1,
+    "main": 1,
+    "bytes": 886601,
+    "transferBytes": 198697,
+    "canonical": [
+      "https://aves.bio/new-zealand/south-island"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/",
+    "status": 200,
+    "title": "AVES | Follow the birdsAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 514985,
+    "transferBytes": 161003,
+    "canonical": [
+      "https://aves.bio"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/colombia",
+    "status": 200,
+    "title": "AVES Colombia | Birdwatching JourneysAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 676109,
+    "transferBytes": 192076,
+    "canonical": [
+      "https://aves.bio/colombia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/aves-explorer",
+    "status": 200,
+    "title": "AVES Explorer - Discover Colombia's Incredible Bird DiversityAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 634310,
+    "transferBytes": 187795,
+    "canonical": [
+      "https://aves.bio/aves-explorer"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/species",
+    "status": 200,
+    "title": "Colombian Birdlife & Where to Find It | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 332420,
+    "transferBytes": 55660,
+    "canonical": [
+      "https://aves.bio/species"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/how-it-works",
+    "status": 200,
+    "title": "How Trip Planning Works | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 53241,
+    "transferBytes": 10208,
+    "canonical": [
+      "https://aves.bio/how-it-works"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/contact",
+    "status": 200,
+    "title": "Plan a Colombia Birding Journey | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 84607,
+    "transferBytes": 18669,
+    "canonical": [
+      "https://aves.bio/contact"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/pacific",
+    "status": 200,
+    "title": "Birding in the Pacific | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 650120,
+    "transferBytes": 190502,
+    "canonical": [
+      "https://aves.bio/regions/pacific"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/western-andes",
+    "status": 200,
+    "title": "Birding in the Western Andes | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 668514,
+    "transferBytes": 194812,
+    "canonical": [
+      "https://aves.bio/regions/western-andes"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/central-andes",
+    "status": 200,
+    "title": "Birding in the Central Andes | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 653437,
+    "transferBytes": 191115,
+    "canonical": [
+      "https://aves.bio/regions/central-andes"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/eastern-andes",
+    "status": 200,
+    "title": "Birding in the Eastern Andes | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 661803,
+    "transferBytes": 193566,
+    "canonical": [
+      "https://aves.bio/regions/eastern-andes"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/cauca-valley",
+    "status": 200,
+    "title": "Birding in the Cauca Valley | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 649633,
+    "transferBytes": 190616,
+    "canonical": [
+      "https://aves.bio/regions/cauca-valley"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/magdalena-valley",
+    "status": 200,
+    "title": "Birding in the Magdalena Valley | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 651298,
+    "transferBytes": 191118,
+    "canonical": [
+      "https://aves.bio/regions/magdalena-valley"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/caribbean",
+    "status": 200,
+    "title": "Birding in the Caribbean | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 651174,
+    "transferBytes": 190911,
+    "canonical": [
+      "https://aves.bio/regions/caribbean"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/sierra-nevada-de-santa-marta",
+    "status": 200,
+    "title": "Birding in the Sierra Nevada de Santa Marta | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 649453,
+    "transferBytes": 190455,
+    "canonical": [
+      "https://aves.bio/regions/sierra-nevada-de-santa-marta"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/llanos",
+    "status": 200,
+    "title": "Birding in the Llanos | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 650332,
+    "transferBytes": 190554,
+    "canonical": [
+      "https://aves.bio/regions/llanos"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/amazonia",
+    "status": 200,
+    "title": "Birding in Amazonia | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 656052,
+    "transferBytes": 192472,
+    "canonical": [
+      "https://aves.bio/regions/amazonia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/regions/colombian-massif",
+    "status": 200,
+    "title": "Birding in the Colombian Massif | AVES ColombiaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 647924,
+    "transferBytes": 190038,
+    "canonical": [
+      "https://aves.bio/regions/colombian-massif"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/tours",
+    "status": 200,
+    "title": "Birding Experiences | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 215623,
+    "transferBytes": 44801,
+    "canonical": [
+      "https://aves.bio/tours"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/tours/adventure",
+    "status": 200,
+    "title": "Adventure Tours",
+    "h1": 1,
+    "main": 1,
+    "bytes": 195535,
+    "transferBytes": 43612,
+    "canonical": [
+      "https://aves.bio/tours/adventure"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/tours/vision",
+    "status": 200,
+    "title": "Vision Tours",
+    "h1": 1,
+    "main": 1,
+    "bytes": 195593,
+    "transferBytes": 43660,
+    "canonical": [
+      "https://aves.bio/tours/vision"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/tours/elevate",
+    "status": 200,
+    "title": "Elevate Tours",
+    "h1": 1,
+    "main": 1,
+    "bytes": 195560,
+    "transferBytes": 43634,
+    "canonical": [
+      "https://aves.bio/tours/elevate"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/tours/souls",
+    "status": 200,
+    "title": "Souls Tours",
+    "h1": 1,
+    "main": 1,
+    "bytes": 195420,
+    "transferBytes": 43673,
+    "canonical": [
+      "https://aves.bio/tours/souls"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/tours/adventure/sierra-nevada",
+    "status": 200,
+    "title": "Sierra Nevada Birding Experience | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 242506,
+    "transferBytes": 50115,
+    "canonical": [
+      "https://aves.bio/tours/adventure/sierra-nevada"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/about",
+    "status": 200,
+    "title": "About AVES Colombia | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 56554,
+    "transferBytes": 12480,
+    "canonical": [
+      "https://aves.bio/about"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/team",
+    "status": 200,
+    "title": "Our Team | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 102248,
+    "transferBytes": 13969,
+    "canonical": [
+      "https://aves.bio/team"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/about/partners",
+    "status": 200,
+    "title": "Our Partners",
+    "h1": 1,
+    "main": 1,
+    "bytes": 142894,
+    "transferBytes": 16646,
+    "canonical": [
+      "https://aves.bio/about/partners"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/about/b-corp",
+    "status": 200,
+    "title": "Our B Corp Journey | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 64332,
+    "transferBytes": 12953,
+    "canonical": [
+      "https://aves.bio/about/b-corp"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/conservation",
+    "status": 200,
+    "title": "Conservation and responsible travel | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 49204,
+    "transferBytes": 9964,
+    "canonical": [
+      "https://aves.bio/conservation"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/blog",
+    "status": 200,
+    "title": "Birding Blog | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 193524,
+    "transferBytes": 43029,
+    "canonical": [
+      "https://aves.bio/blog"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/blog/hummingbird-vision-journey",
+    "status": 200,
+    "title": "Hummingbird Sanctuaries",
+    "h1": 1,
+    "main": 1,
+    "bytes": 202711,
+    "transferBytes": 46544,
+    "canonical": [
+      "https://aves.bio/blog/hummingbird-vision-journey"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/blog/sierra-nevada-indigenous-birding",
+    "status": 200,
+    "title": "Sierra Nevada Birding",
+    "h1": 1,
+    "main": 1,
+    "bytes": 252044,
+    "transferBytes": 53155,
+    "canonical": [
+      "https://aves.bio/blog/sierra-nevada-indigenous-birding"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/blog/paramo-manizales-thornbill",
+    "status": 200,
+    "title": "P\u00e1ramo & Cloud Forests | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 239378,
+    "transferBytes": 55024,
+    "canonical": [
+      "https://aves.bio/blog/paramo-manizales-thornbill"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/blog/choco-toucan-expedition",
+    "status": 200,
+    "title": "Into the Heart of Choc\u00f3: A Toucan Odyssey Through Colombia's Biodiversity Hotspot | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 211054,
+    "transferBytes": 49169,
+    "canonical": [
+      "https://aves.bio/blog/choco-toucan-expedition"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/resources",
+    "status": 200,
+    "title": "Expert Resources Hub | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 88901,
+    "transferBytes": 14188,
+    "canonical": [
+      "https://aves.bio/resources"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/travel-tips",
+    "status": 200,
+    "title": "Travel Tips for Colombia | Essential Guide for Birdwatching Tours | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 103718,
+    "transferBytes": 17791,
+    "canonical": [
+      "https://aves.bio/travel-tips"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/privacy",
+    "status": 200,
+    "title": "Privacy Notice | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 53749,
+    "transferBytes": 11081,
+    "canonical": [
+      "https://aves.bio/privacy"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/terms",
+    "status": 200,
+    "title": "Inquiries and Proposals | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 44213,
+    "transferBytes": 9358,
+    "canonical": [
+      "https://aves.bio/terms"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/cookies",
+    "status": 200,
+    "title": "Cookies | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 46485,
+    "transferBytes": 10340,
+    "canonical": [
+      "https://aves.bio/cookies"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/credits",
+    "status": 200,
+    "title": "Photography & Recording Credits | AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 1054846,
+    "transferBytes": 97502,
+    "canonical": [
+      "https://aves.bio/credits"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/site-map",
+    "status": 200,
+    "title": "AVES Site Map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 64149,
+    "transferBytes": 11613,
+    "canonical": [
+      "https://aves.bio/site-map"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia",
+    "status": 200,
+    "title": "Australia Birding & Nature Journeys | AVESAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 576212,
+    "transferBytes": 179412,
+    "canonical": [
+      "https://aves.bio/australia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/aves-explorer",
+    "status": 200,
+    "title": "AVES destinations on an Equal Earth world mapExplore Australian Regions | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 551423,
+    "transferBytes": 203135,
+    "canonical": [
+      "https://aves.bio/australia/aves-explorer"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/species",
+    "status": 200,
+    "title": "Australian Birdlife & Where to Find It | AVES AustraliaExplore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay Territory",
+    "h1": 1,
+    "main": 1,
+    "bytes": 229528,
+    "transferBytes": 39369,
+    "canonical": [
+      "https://aves.bio/australia/species"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/how-it-works",
+    "status": 200,
+    "title": "How Trip Planning Works | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 57579,
+    "transferBytes": 11331,
+    "canonical": [
+      "https://aves.bio/australia/how-it-works"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/contact",
+    "status": 200,
+    "title": "Plan Your Australian Journey | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 51731,
+    "transferBytes": 12984,
+    "canonical": [
+      "https://aves.bio/australia/contact"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/queensland",
+    "status": 200,
+    "title": "Birding in Queensland | Cairns & the Atherton Tablelands | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 621191,
+    "transferBytes": 188231,
+    "canonical": [
+      "https://aves.bio/australia/regions/queensland"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/new-south-wales",
+    "status": 200,
+    "title": "Birding in New South Wales | Sydney coast & woodland | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 620908,
+    "transferBytes": 187668,
+    "canonical": [
+      "https://aves.bio/australia/regions/new-south-wales"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/tasmania",
+    "status": 200,
+    "title": "Birding in Tasmania | Hobart & Bruny Island | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 612832,
+    "transferBytes": 186713,
+    "canonical": [
+      "https://aves.bio/australia/regions/tasmania"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/victoria",
+    "status": 200,
+    "title": "Birding in Victoria | Melbourne & Serendip Sanctuary | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 609234,
+    "transferBytes": 185928,
+    "canonical": [
+      "https://aves.bio/australia/regions/victoria"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/south-australia",
+    "status": 200,
+    "title": "Birding in South Australia | Adelaide & the Coorong | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 603670,
+    "transferBytes": 185485,
+    "canonical": [
+      "https://aves.bio/australia/regions/south-australia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/western-australia",
+    "status": 200,
+    "title": "Birding in Western Australia | Perth & Yanchep woodland | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 607050,
+    "transferBytes": 186856,
+    "canonical": [
+      "https://aves.bio/australia/regions/western-australia"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/northern-territory",
+    "status": 200,
+    "title": "Birding in the Northern Territory | Darwin, Fogg Dam & Kakadu | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 611349,
+    "transferBytes": 187076,
+    "canonical": [
+      "https://aves.bio/australia/regions/northern-territory"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/australian-capital-territory",
+    "status": 200,
+    "title": "Birding in the Australian Capital Territory | Canberra wetlands & forest | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 606758,
+    "transferBytes": 184811,
+    "canonical": [
+      "https://aves.bio/australia/regions/australian-capital-territory"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/regions/jervis-bay-territory",
+    "status": 200,
+    "title": "Birding in Jervis Bay Territory | Booderee coast, heath & forest | AVES AustraliaAVES destinations on an Equal Earth world map",
+    "h1": 1,
+    "main": 1,
+    "bytes": 611052,
+    "transferBytes": 184908,
+    "canonical": [
+      "https://aves.bio/australia/regions/jervis-bay-territory"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/tours",
+    "status": 200,
+    "title": "Explore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritoryAustralian Trip Styles | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 124898,
+    "transferBytes": 37834,
+    "canonical": [
+      "https://aves.bio/australia/tours"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/tours/adventure",
+    "status": 200,
+    "title": "Explore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritoryAdventure Tours | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 114169,
+    "transferBytes": 34754,
+    "canonical": [
+      "https://aves.bio/australia/tours/adventure"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/tours/vision",
+    "status": 200,
+    "title": "Explore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritoryVision Tours | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 114045,
+    "transferBytes": 34727,
+    "canonical": [
+      "https://aves.bio/australia/tours/vision"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/tours/elevate",
+    "status": 200,
+    "title": "Explore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritoryElevate Tours | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 114069,
+    "transferBytes": 34743,
+    "canonical": [
+      "https://aves.bio/australia/tours/elevate"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/tours/souls",
+    "status": 200,
+    "title": "Explore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritorySouls Tours | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 114039,
+    "transferBytes": 34736,
+    "canonical": [
+      "https://aves.bio/australia/tours/souls"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/about",
+    "status": 200,
+    "title": "A New Australian Chapter for AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 52277,
+    "transferBytes": 15310,
+    "canonical": [
+      "https://aves.bio/australia/about"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/team",
+    "status": 200,
+    "title": "The People Behind AVES",
+    "h1": 1,
+    "main": 1,
+    "bytes": 48252,
+    "transferBytes": 14137,
+    "canonical": [
+      "https://aves.bio/australia/team"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/about/partners",
+    "status": 200,
+    "title": "Growing Our Australian Connections | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 47628,
+    "transferBytes": 13996,
+    "canonical": [
+      "https://aves.bio/australia/about/partners"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/about/b-corp",
+    "status": 200,
+    "title": "Our B Corp Journey | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 47316,
+    "transferBytes": 13779,
+    "canonical": [
+      "https://aves.bio/australia/about/b-corp"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/conservation",
+    "status": 200,
+    "title": "Respect for the Places We Explore | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 50229,
+    "transferBytes": 14798,
+    "canonical": [
+      "https://aves.bio/australia/conservation"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/blog",
+    "status": 200,
+    "title": "Explore Australia\u2019s states and territoriesWestern AustraliaNorthern TerritorySouth AustraliaQueenslandNew South WalesVictoriaTasmaniaAustralian Capital TerritoryJervis Bay TerritoryNotes from Our Australian Beginning | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 121319,
+    "transferBytes": 36448,
+    "canonical": [
+      "https://aves.bio/australia/blog"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/resources",
+    "status": 200,
+    "title": "Birding in Australia | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 55132,
+    "transferBytes": 15735,
+    "canonical": [
+      "https://aves.bio/australia/resources"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/travel-tips",
+    "status": 200,
+    "title": "Preparing for Your Australian Journey | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 51176,
+    "transferBytes": 14968,
+    "canonical": [
+      "https://aves.bio/australia/travel-tips"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/privacy",
+    "status": 200,
+    "title": "Privacy Notice | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 74651,
+    "transferBytes": 22417,
+    "canonical": [
+      "https://aves.bio/australia/privacy"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/terms",
+    "status": 200,
+    "title": "About Inquiries and Proposals | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 58518,
+    "transferBytes": 17394,
+    "canonical": [
+      "https://aves.bio/australia/terms"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/cookies",
+    "status": 200,
+    "title": "Your Cookie Preferences | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 52710,
+    "transferBytes": 15412,
+    "canonical": [
+      "https://aves.bio/australia/cookies"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/credits",
+    "status": 200,
+    "title": "Photography & Recording Credits | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 183592,
+    "transferBytes": 24320,
+    "canonical": [
+      "https://aves.bio/australia/credits"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:3004/australia/site-map",
+    "status": 200,
+    "title": "Site Map | AVES Australia",
+    "h1": 1,
+    "main": 1,
+    "bytes": 73059,
+    "transferBytes": 12685,
+    "canonical": [
+      "https://aves.bio/australia/site-map"
+    ],
+    "missingAlt": 0,
+    "brokenLocalAnchors": [],
+    "duplicateIds": 0,
+    "headers": {
+      "Content-Security-Policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": null,
+      "Cache-Control": "s-maxage=31536000"
+    }
+  }
+]

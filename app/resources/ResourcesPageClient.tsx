@@ -44,6 +44,7 @@ export default function ResourcesPageClient() {
   return (
     <div className="min-h-screen bg-white">
       <NavigationHeader currentPage="/resources" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-12">
@@ -1127,6 +1128,7 @@ export default function ResourcesPageClient() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   )

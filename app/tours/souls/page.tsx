@@ -25,6 +25,7 @@ export default function SoulsPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/tours/souls" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
       <section className="relative py-8 lg:py-12 overflow-hidden">
@@ -336,6 +337,7 @@ export default function SoulsPage() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   )

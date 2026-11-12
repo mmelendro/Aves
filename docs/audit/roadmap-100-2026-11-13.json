@@ -1,0 +1,1030 @@
+{
+  "date": "2026-11-13",
+  "baselineRuntime": "fd1c588b40f55b36f086382f769737517428028d",
+  "retiredCompletedPreviousIds": [
+    1,
+    3,
+    13,
+    14,
+    27
+  ],
+  "items": [
+    {
+      "group": "A",
+      "title": "Repair Sierra Nevada quote and date enquiries",
+      "acceptance": "Every CTA reaches the region-prefilled enquiry, nested controls are removed, and the unverified $8,000 booking implication is replaced by a personal quote.",
+      "previous": [
+        8,
+        49,
+        48
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 1
+    },
+    {
+      "group": "A",
+      "title": "Validate inventory query inputs consistently",
+      "acceptance": "One contract handles country, repeated keys, filter enums, query length and defaults for the form, metadata and server search.",
+      "previous": [
+        6,
+        10,
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 2
+    },
+    {
+      "group": "A",
+      "title": "Recover stale inventory page links",
+      "acceptance": "An offset beyond the filtered results resolves to the last populated page instead of a false empty page.",
+      "previous": [
+        10,
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 3
+    },
+    {
+      "group": "A",
+      "title": "Keep inventory pagination aligned",
+      "acceptance": "Offsets align to 40-row boundaries and malformed offsets safely reset.",
+      "previous": [
+        10,
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 4
+    },
+    {
+      "group": "A",
+      "title": "Repair five tour-page main landmarks",
+      "acceptance": "Each published tour page provides one main-content skip target.",
+      "previous": [
+        2
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 5
+    },
+    {
+      "group": "A",
+      "title": "Repair the Resources skip target",
+      "acceptance": "The Resources page provides a focusable main landmark around its content.",
+      "previous": [
+        2
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 6
+    },
+    {
+      "group": "A",
+      "title": "Make not-found recovery accessible",
+      "acceptance": "The recovery page provides a named main-content target and existing recovery navigation.",
+      "previous": [
+        2,
+        10
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 7
+    },
+    {
+      "group": "A",
+      "title": "Repair New Zealand bird-guide anchor",
+      "acceptance": "The in-page bird-guide link targets its actual published section.",
+      "previous": [
+        6
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 8
+    },
+    {
+      "group": "A",
+      "title": "Add safe application error recovery",
+      "acceptance": "Retry and destination/account exits are available without displaying raw errors or claiming a save succeeded.",
+      "previous": [
+        10
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 9
+    },
+    {
+      "group": "A",
+      "title": "Add progressive inventory search feedback",
+      "acceptance": "The search submit control announces progress when JavaScript is available while preserving native GET navigation without JavaScript.",
+      "previous": [
+        10
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 10
+    },
+    {
+      "group": "A",
+      "title": "Handle broken inventory thumbnails",
+      "acceptance": "An unavailable image keeps the linked bird guide usable and labels the failure.",
+      "previous": [
+        10,
+        16
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 11
+    },
+    {
+      "group": "A",
+      "title": "Give empty inventory searches a direct reset",
+      "acceptance": "Zero matching records offer a country-specific reset next to the results.",
+      "previous": [
+        10
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 12
+    },
+    {
+      "group": "A",
+      "title": "Land searches at the results",
+      "acceptance": "Native GET searches link to the results anchor while retaining keyboard-accessible headings.",
+      "previous": [
+        2,
+        7
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 13
+    },
+    {
+      "group": "A",
+      "title": "Expose inventories in the global footer",
+      "acceptance": "A direct reference link makes the new inventory discoverable beyond country guides.",
+      "previous": [
+        6,
+        54
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 14
+    },
+    {
+      "group": "A",
+      "title": "Expose country inventories in the visible site map",
+      "acceptance": "All three canonical references appear in the human directory.",
+      "previous": [
+        6
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 15
+    },
+    {
+      "group": "A",
+      "title": "Publish country inventory canonical URLs in XML",
+      "acceptance": "The sitemap includes each country reference once and excludes private search queries.",
+      "previous": [
+        6
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 16
+    },
+    {
+      "group": "A",
+      "title": "Keep inventory indexing aligned with actual filters",
+      "acceptance": "Tracking parameters and empty defaults do not incorrectly turn a country reference into a filtered noindex page.",
+      "previous": [
+        6
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 17
+    },
+    {
+      "group": "A",
+      "title": "Show published taxonomy crosswalks",
+      "acceptance": "Source crosswalks are visible without implying a silent species merge.",
+      "previous": [
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 18
+    },
+    {
+      "group": "A",
+      "title": "Label unresolved common names",
+      "acceptance": "Scientific-name fallbacks explicitly say that a common name awaits source review.",
+      "previous": [
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 19
+    },
+    {
+      "group": "A",
+      "title": "Credit the actual common-name source",
+      "acceptance": "Country records link separately to their older name source when applicable.",
+      "previous": [
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 20
+    },
+    {
+      "group": "A",
+      "title": "Credit older population-status facts",
+      "acceptance": "Australian records distinguish and link the WLAB source separately from current species names.",
+      "previous": [
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 21
+    },
+    {
+      "group": "A",
+      "title": "Link original published source files",
+      "acceptance": "Readers can inspect the exact provider file behind an inventory edition.",
+      "previous": [
+        38,
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 22
+    },
+    {
+      "group": "A",
+      "title": "Expose source-file integrity hashes",
+      "acceptance": "The source details display recorded SHA-256 hashes for reproducible review.",
+      "previous": [
+        38,
+        70
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 23
+    },
+    {
+      "group": "A",
+      "title": "Format the inventory interaction and query modules",
+      "acceptance": "Complex compact JSX and query logic become readable without changing their intended source/data boundaries.",
+      "previous": [
+        20
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 24
+    },
+    {
+      "group": "A",
+      "title": "Make the public HTTP audit repeatable",
+      "acceptance": "A same-origin read-only audit checks sitemap routes, main landmarks, H1 counts, local anchors, alt attributes and duplicate IDs.",
+      "previous": [
+        21,
+        27
+      ],
+      "status": "Implemented and validated in this source release",
+      "id": 25
+    },
+    {
+      "group": "B",
+      "title": "Audit accessibility throughout",
+      "acceptance": "Review keyboard journeys, contrast, zoom and screen-reader names beyond the landmark repairs in this release.",
+      "previous": [
+        2
+      ],
+      "status": "Open",
+      "id": 26
+    },
+    {
+      "group": "B",
+      "title": "Automate responsive browser checks",
+      "acceptance": "Cover narrow phones, tablets, desktop, Firefox and Chromium without treating emulation as physical iPhone evidence.",
+      "previous": [
+        4
+      ],
+      "status": "Open",
+      "id": 27
+    },
+    {
+      "group": "B",
+      "title": "Protect mobile map space",
+      "acceptance": "Keep maps usable, controls reachable and the return path visible when text, credits or images open.",
+      "previous": [
+        5
+      ],
+      "status": "Open",
+      "id": 28
+    },
+    {
+      "group": "B",
+      "title": "Complete deep-link, refresh and Back/Forward journey coverage",
+      "acceptance": "Mounted-route history is repaired. Add cross-country browser journey coverage and verify restored titles, copy, selection and return paths.",
+      "previous": [
+        6
+      ],
+      "status": "Open",
+      "id": 29
+    },
+    {
+      "group": "B",
+      "title": "Simplify overlapping navigation controls",
+      "acceptance": "Reduce competing region, habitat and gallery controls while preserving their shared selection.",
+      "previous": [
+        7
+      ],
+      "status": "Open",
+      "id": 30
+    },
+    {
+      "group": "B",
+      "title": "Unify enquiry entry points",
+      "acceptance": "Preserve destination, region and intent through global, Colombian, Australian and New Zealand contact journeys.",
+      "previous": [
+        8
+      ],
+      "status": "Open",
+      "id": 31
+    },
+    {
+      "group": "B",
+      "title": "Simplify saving and importing choices",
+      "acceptance": "Reduce manual transfer steps for bird wishes, place ideas and private briefs without losing edits or changing sharing intent.",
+      "previous": [
+        9
+      ],
+      "status": "Open",
+      "id": 32
+    },
+    {
+      "group": "B",
+      "title": "Standardise loading and recovery",
+      "acceptance": "Check failed images, tiles, audio, requests and storage, with useful retry and fallback states.",
+      "previous": [
+        10
+      ],
+      "status": "Open",
+      "id": 33
+    },
+    {
+      "group": "B",
+      "title": "Verify overlay return behaviour",
+      "acceptance": "Check keyboard dismissal, focus, scroll and selected slide across expanded maps, photographs, credits and media.",
+      "previous": [
+        11
+      ],
+      "status": "Open",
+      "id": 34
+    },
+    {
+      "group": "B",
+      "title": "Verify sound identity and controls",
+      "acceptance": "Keep bird and regional sound cues aligned with playback, with clear stop, error and reduced motion behaviour.",
+      "previous": [
+        12
+      ],
+      "status": "Open",
+      "id": 35
+    },
+    {
+      "group": "B",
+      "title": "Reduce remaining homepage and planner JavaScript",
+      "acceptance": "The account-shell and NZ catalogue splits are finished. Profile remaining initial modules, preserve media handoff, and measure each reduction against the published build.",
+      "previous": [
+        15
+      ],
+      "status": "Open",
+      "id": 36
+    },
+    {
+      "group": "B",
+      "title": "Improve image delivery",
+      "acceptance": "Create appropriately sized modern image variants, defer hidden media and retain original rights and focal points.",
+      "previous": [
+        16
+      ],
+      "status": "Open",
+      "id": 37
+    },
+    {
+      "group": "B",
+      "title": "Defer remaining large map and country payloads",
+      "acceptance": "National inventories and NZ checklist media are already deferred. Review remaining geometry and country client imports, preserving progressive fallbacks.",
+      "previous": [
+        17
+      ],
+      "status": "Open",
+      "id": 38
+    },
+    {
+      "group": "B",
+      "title": "Refactor oversized page components",
+      "acceptance": "Separate embedded content and UI in the large articles, resources, team and partner pages.",
+      "previous": [
+        18
+      ],
+      "status": "Open",
+      "id": 39
+    },
+    {
+      "group": "B",
+      "title": "Consolidate duplicated components",
+      "acceptance": "The feather consolidation is finished. Review remaining duplicated audio/gallery controls and merge only equivalent behaviour.",
+      "previous": [
+        19
+      ],
+      "status": "Open",
+      "id": 40
+    },
+    {
+      "group": "B",
+      "title": "Format and explain complex interaction code",
+      "acceptance": "Format and explain remaining gesture, camera, upload and revision modules. Inventory formatting is covered by A24.",
+      "previous": [
+        20
+      ],
+      "status": "Open",
+      "id": 41
+    },
+    {
+      "group": "B",
+      "title": "Add browser journey checks to release automation",
+      "acceptance": "Complement existing unit and component checks with discovery, refresh, keyboard and save recovery journeys.",
+      "previous": [
+        21
+      ],
+      "status": "Open",
+      "id": 42
+    },
+    {
+      "group": "B",
+      "title": "Review dependency and override risks",
+      "acceptance": "Check current advisories, compatibility, lockfile overrides and supported versions before targeted updates.",
+      "previous": [
+        22
+      ],
+      "status": "Open",
+      "id": 43
+    },
+    {
+      "group": "B",
+      "title": "Clean verified obsolete code and documentation",
+      "acceptance": "Keep one active queue, archive superseded instructions and remove assets or code only after reference checks.",
+      "previous": [
+        23
+      ],
+      "status": "Open",
+      "id": 44
+    },
+    {
+      "group": "B",
+      "title": "Establish performance and error budgets",
+      "acceptance": "Measure real visitor loading, interaction, layout shifts, failed saves and service costs with appropriate privacy.",
+      "previous": [
+        24
+      ],
+      "status": "Open",
+      "id": 45
+    },
+    {
+      "group": "B",
+      "title": "Verify recovery and rollback",
+      "acceptance": "Document and test restoration of code, saved trip records and private files without assuming a code rollback restores data.",
+      "previous": [
+        26
+      ],
+      "status": "Open",
+      "id": 46
+    },
+    {
+      "group": "B",
+      "title": "Build Tasmania’s five-photo gallery",
+      "acceptance": "Review five distinct real photographs for locality, reuse rights, credits, alt text and capture dates. Reuse the existing regional gallery.",
+      "previous": [
+        28
+      ],
+      "status": "Open",
+      "id": 47
+    },
+    {
+      "group": "B",
+      "title": "Build South Australia’s five-photo gallery",
+      "acceptance": "Apply the same source, rights and visual review to five distinct photographs.",
+      "previous": [
+        29
+      ],
+      "status": "Open",
+      "id": 48
+    },
+    {
+      "group": "B",
+      "title": "Build Western Australia’s five-photo gallery",
+      "acceptance": "Review five distinct photographs and retain correct regional/place identities.",
+      "previous": [
+        30
+      ],
+      "status": "Open",
+      "id": 49
+    },
+    {
+      "group": "B",
+      "title": "Build Northern Territory’s five-photo gallery",
+      "acceptance": "Review five distinct photographs, including cultural context and any restrictions on depicted material.",
+      "previous": [
+        31
+      ],
+      "status": "Open",
+      "id": 50
+    },
+    {
+      "group": "B",
+      "title": "Build the Australian Capital Territory’s five-photo gallery",
+      "acceptance": "Review five distinct photographs within the correct territory.",
+      "previous": [
+        32
+      ],
+      "status": "Open",
+      "id": 51
+    },
+    {
+      "group": "B",
+      "title": "Build Jervis Bay Territory’s five-photo gallery",
+      "acceptance": "Verify territory boundaries. Do not substitute nearby New South Wales beaches.",
+      "previous": [
+        33
+      ],
+      "status": "Open",
+      "id": 52
+    },
+    {
+      "group": "B",
+      "title": "Finish Australia’s country overview",
+      "acceptance": "Represent all nine reviewed regional collections using the same records. The current overview covers three regions with six photographs.",
+      "previous": [
+        34
+      ],
+      "status": "Open",
+      "id": 53
+    },
+    {
+      "group": "B",
+      "title": "Check gallery parity across all three destinations",
+      "acceptance": "Verify counts, balanced overview selection, region/map synchronisation, photo controls, credits, enlargement, empty states and narrow layouts.",
+      "previous": [
+        35
+      ],
+      "status": "Open",
+      "id": 54
+    },
+    {
+      "group": "B",
+      "title": "Extend official New Zealand route references",
+      "acceptance": "Add compact, route-specific birding and ecotourism references to the existing pilot. Retain provenance.",
+      "previous": [
+        36
+      ],
+      "status": "Open",
+      "id": 55
+    },
+    {
+      "group": "B",
+      "title": "Add dated first-hand trip reports and blogs",
+      "acceptance": "Attribute sources and distinguish personal experience from official access, safety or supplier guidance.",
+      "previous": [
+        37
+      ],
+      "status": "Open",
+      "id": 56
+    },
+    {
+      "group": "B",
+      "title": "Track source freshness",
+      "acceptance": "Record review dates and flag stale access or supplier claims without inventing current availability.",
+      "previous": [
+        38
+      ],
+      "status": "Open",
+      "id": 57
+    },
+    {
+      "group": "B",
+      "title": "Build and map the New Zealand conservation directory pilot",
+      "acceptance": "Use official evidence for each organisation, location and stated contribution. Distinguish listings from AVES partnerships. Add an optional layer with readable markers, accessible details and dated source links.",
+      "previous": [
+        39,
+        40
+      ],
+      "status": "Open",
+      "id": 58
+    },
+    {
+      "group": "B",
+      "title": "Verify and map a bounded B Corp supplier directory",
+      "acceptance": "Check entity-level certification evidence and review dates. Avoid certification claims about an entire place or unrelated business. Reuse the existing map and layer controls. Show exactly which listed entity has verified evidence.",
+      "previous": [
+        41,
+        42
+      ],
+      "status": "Open",
+      "id": 59
+    },
+    {
+      "group": "B",
+      "title": "Extend the conservation-directory pilot to Colombian and Australian corridors",
+      "acceptance": "Use a bounded set of reviewed organisations and appropriate public locations. Apply the same evidence, locality and partnership distinctions.",
+      "previous": [
+        43,
+        44
+      ],
+      "status": "Open",
+      "id": 60
+    },
+    {
+      "group": "B",
+      "title": "Audit shared bird filters",
+      "acceptance": "Check habitat, native/introduced, endemic and conservation facets across maps, carousels and relevant selections. Preserve saved choices and unknown statuses.",
+      "previous": [
+        45
+      ],
+      "status": "Open",
+      "id": 61
+    },
+    {
+      "group": "B",
+      "title": "Extend practical seasonal planning rules",
+      "acceptance": "Use reviewed seasonal and opening-day sources for the pilot corridors.",
+      "previous": [
+        46
+      ],
+      "status": "Open",
+      "id": 62
+    },
+    {
+      "group": "B",
+      "title": "Add useful weather or access alternatives",
+      "acceptance": "Provide one sourced alternative for each pilot corridor, with realistic transport and access limits.",
+      "previous": [
+        47
+      ],
+      "status": "Open",
+      "id": 63
+    },
+    {
+      "group": "B",
+      "title": "Improve partial price comparisons",
+      "acceptance": "Keep currency, units, missing costs and quote requirements explicit. Never present incomplete totals as a complete trip price.",
+      "previous": [
+        48
+      ],
+      "status": "Open",
+      "id": 64
+    },
+    {
+      "group": "B",
+      "title": "Clarify estimate-to-quote handoff",
+      "acceptance": "Make the traveller’s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
+      "previous": [
+        49
+      ],
+      "status": "Open",
+      "id": 65
+    },
+    {
+      "group": "B",
+      "title": "Review the next Colombian bird-photo batch",
+      "acceptance": "Check identity, locality, creator permission, rights and credits against the actual originals and trip evidence.",
+      "previous": [
+        50
+      ],
+      "status": "Open",
+      "id": 66
+    },
+    {
+      "group": "B",
+      "title": "Complete release checks on actual visitor flows",
+      "acceptance": "Verify privacy, accessibility, performance, media loading and private save/reopen/edit journeys. Retain the physical-device and independent-visitor requirements.",
+      "previous": [
+        51
+      ],
+      "status": "Open",
+      "id": 67
+    },
+    {
+      "group": "B",
+      "title": "Enforce access on every shared item",
+      "acceptance": "Test owner and audience permissions for entries, files, previews and downloads.",
+      "previous": [
+        52
+      ],
+      "status": "Open",
+      "id": 68
+    },
+    {
+      "group": "B",
+      "title": "Names and pronunciation",
+      "acceptance": "Verify Indigenous bird/place names where available, language or tradition, regional scope, spelling, diacritics, source and review date. Use attributed community/language-authority sources and permitted pronunciation references or audio. Never invent a name, translation, etymology or pronunciation. Extend the existing pilot.",
+      "previous": [
+        53
+      ],
+      "status": "Open",
+      "id": 69
+    },
+    {
+      "group": "B",
+      "title": "Comprehensive species inventories and place connections",
+      "acceptance": "Extend the published national inventory into comprehensive sourced regional evidence, reconcile taxonomies, retain legitimate overlaps, and independently verify species/place/business/activity links. Commercial eBird access remains unresolved. National records are already published; regional completeness is not claimed.",
+      "previous": [
+        70
+      ],
+      "status": "Open",
+      "id": 70
+    },
+    {
+      "group": "B",
+      "title": "Add unified search",
+      "acceptance": "Search countries, regions and reviewed places through a consistent interface.",
+      "previous": [
+        54
+      ],
+      "status": "Open",
+      "id": 71
+    },
+    {
+      "group": "B",
+      "title": "Save favourite places across trips",
+      "acceptance": "Use explicit owner-controlled saves and stable place records.",
+      "previous": [
+        55
+      ],
+      "status": "Open",
+      "id": 72
+    },
+    {
+      "group": "B",
+      "title": "Compare two saved itineraries",
+      "acceptance": "Present meaningful differences without fabricating missing prices or timings.",
+      "previous": [
+        56
+      ],
+      "status": "Open",
+      "id": 73
+    },
+    {
+      "group": "B",
+      "title": "Generate a downloadable trip pack",
+      "acceptance": "Include the itinerary and explicitly selected practical records with appropriate privacy.",
+      "previous": [
+        57
+      ],
+      "status": "Open",
+      "id": 74
+    },
+    {
+      "group": "B",
+      "title": "Offer a lower-bandwidth mode",
+      "acceptance": "Use smaller images and restrained media loading while preserving usable maps and credits.",
+      "previous": [
+        58
+      ],
+      "status": "Open",
+      "id": 75
+    },
+    {
+      "group": "B",
+      "title": "Make AVES installable",
+      "acceptance": "Evaluate installation and offline behaviour after the essential saved-trip pilot.",
+      "previous": [
+        59
+      ],
+      "status": "Open",
+      "id": 76
+    },
+    {
+      "group": "B",
+      "title": "Complete English and Spanish consistency",
+      "acceptance": "Review maintained journeys, terminology, controls and original editorial copy.",
+      "previous": [
+        60
+      ],
+      "status": "Open",
+      "id": 77
+    },
+    {
+      "group": "B",
+      "title": "Original bird storytelling",
+      "acceptance": "Write original, fact-checked bird stories with accurate local settings and source attribution; validate placement before a wider rollout.",
+      "previous": [
+        61
+      ],
+      "status": "Open",
+      "id": 78
+    },
+    {
+      "group": "C",
+      "title": "Update the professional AVES business plan",
+      "acceptance": "Revise the existing November plan for the current travel guide, planning service and bird album. Include founder pay from month one, actual cash and costs, pricing, capacity, monthly cash flow, downside cases, customer acquisition, supplier roles and measurable B Lab stewardship actions. Separate facts, assumptions and later ambitions. Produce a polished owner edition and an external edition after review.",
+      "previous": [
+        0
+      ],
+      "status": "Open",
+      "id": 79
+    },
+    {
+      "group": "C",
+      "title": "Confirm public business relationships",
+      "acceptance": "Get your current list of team, advisory and supplier roles, then correct unsupported appointments and partnership wording.",
+      "previous": [
+        62
+      ],
+      "status": "Open",
+      "id": 80
+    },
+    {
+      "group": "C",
+      "title": "Set the service operating limits",
+      "acceptance": "Get your support hours, capacity and escalation contacts, then prepare a practical enquiry and disruption playbook.",
+      "previous": [
+        63
+      ],
+      "status": "Open",
+      "id": 81
+    },
+    {
+      "group": "C",
+      "title": "Create the private bird-album foundation",
+      "acceptance": "Use stable species records and owner-controlled observations. Prepare a reusable basis for later collectibles without exposing sensitive locations.",
+      "previous": [
+        64
+      ],
+      "status": "Open",
+      "id": 82
+    },
+    {
+      "group": "C",
+      "title": "Separate desired, observed and verified birds",
+      "acceptance": "Keep each status explicit. A saved wish or uploaded photograph must not automatically become a verified sighting.",
+      "previous": [
+        65
+      ],
+      "status": "Open",
+      "id": 83
+    },
+    {
+      "group": "C",
+      "title": "Reconstruct the Colombia trip route",
+      "acceptance": "Use actual trip records. Keep traveller identities and private itinerary details private.",
+      "previous": [
+        66
+      ],
+      "status": "Open",
+      "id": 84
+    },
+    {
+      "group": "C",
+      "title": "Populate the private Colombia journal",
+      "acceptance": "Add only reviewed trip material, linked to the correct places and days.",
+      "previous": [
+        67
+      ],
+      "status": "Open",
+      "id": 85
+    },
+    {
+      "group": "C",
+      "title": "Make essential saved trip information available offline",
+      "acceptance": "Define what is stored, how it is refreshed and how the traveller clears private local data.",
+      "previous": [
+        68
+      ],
+      "status": "Open",
+      "id": 86
+    },
+    {
+      "group": "C",
+      "title": "Prototype optional 3D terrain",
+      "acceptance": "Keep the useful shared map, a lightweight fallback and acceptable mobile performance.",
+      "previous": [
+        69
+      ],
+      "status": "Open",
+      "id": 87
+    },
+    {
+      "group": "C",
+      "title": "Collectible 3D bird assets",
+      "acceptance": "Identify the previously used web app if evidence becomes available. Inventory existing 3D MP4s and assets, then review one accurate, licensed bird pilot. Distinguish an editable 3D model from a rendered image or video. Retain stable species IDs, creator/source/rights, reusable model exports, lightweight logo/animation renditions, static/reduced-motion fallbacks and future album/game compatibility. Sightings-based unlocking remains a later game mechanic; it is not implemented.",
+      "previous": [
+        71
+      ],
+      "status": "Open",
+      "id": 88
+    },
+    {
+      "group": "D",
+      "title": "Resolve synthetic test fixture cleanup",
+      "acceptance": "Inspect only. Destructive fixture cleanup needs separately verified disposable records and current exact authorization; previous cleanup approval is not reused.",
+      "previous": [
+        25
+      ],
+      "status": "Open",
+      "id": 89
+    },
+    {
+      "group": "D",
+      "title": "Confirm contributor permissions and participant consent",
+      "acceptance": "Record the permitted uses and credits for each selected contribution before publication or sharing.",
+      "previous": [
+        72
+      ],
+      "status": "Open",
+      "id": 90
+    },
+    {
+      "group": "D",
+      "title": "Preview a shareable journal edition",
+      "acceptance": "Exclude private fields and sensitive locations. Preview before any sharing action.",
+      "previous": [
+        73
+      ],
+      "status": "Open",
+      "id": 91
+    },
+    {
+      "group": "D",
+      "title": "Add revocable journal share links",
+      "acceptance": "Provide explicit owner control over audience, access and revocation.",
+      "previous": [
+        74
+      ],
+      "status": "Open",
+      "id": 92
+    },
+    {
+      "group": "D",
+      "title": "Prepare the selected Colombia edition and New Zealand invitation",
+      "acceptance": "Prepare for owner review. This task does not send invitations or publish private trip content.",
+      "previous": [
+        75
+      ],
+      "status": "Open",
+      "id": 93
+    },
+    {
+      "group": "D",
+      "title": "Define community consent and moderation rules",
+      "acceptance": "Set audience, reporting, blocking and moderation responsibilities before enabling community publication.",
+      "previous": [
+        76
+      ],
+      "status": "Open",
+      "id": 94
+    },
+    {
+      "group": "E",
+      "title": "Review launch readiness and decide the limited paid pilot",
+      "acceptance": "Reconcile the pilot decision, remaining defects, actual operating evidence, rollback and traveller feedback before choosing the next delivery cycle. Needs actual founder/cash/capacity inputs, physical-mobile acceptance and independent visitor evidence. Illustrative financial scenarios do not complete the decision.",
+      "previous": [
+        77,
+        81
+      ],
+      "status": "Open",
+      "id": 95
+    },
+    {
+      "group": "E",
+      "title": "Validate on physical iPhone/Safari",
+      "acceptance": "Needs an actual device test of map drag, double tap, pinch, scrolling, galleries, controls and return navigation. Desktop narrow-layout checks do not complete it.",
+      "previous": [
+        78
+      ],
+      "status": "Open",
+      "id": 96
+    },
+    {
+      "group": "E",
+      "title": "Run an independent New Zealand visitor test",
+      "acceptance": "Needs a participant to complete the full planning task, with observed friction and feedback recorded.",
+      "previous": [
+        79
+      ],
+      "status": "Open",
+      "id": 97
+    },
+    {
+      "group": "E",
+      "title": "Fix the main visitor-test friction",
+      "acceptance": "Depends on item 79. Prioritise the highest-impact issue and retest the affected journey.",
+      "previous": [
+        80
+      ],
+      "status": "Open",
+      "id": 98
+    },
+    {
+      "group": "E",
+      "title": "Incorporate invited traveller feedback",
+      "acceptance": "Use actual feedback to improve the planner and journal. Do not claim independent feedback before it exists.",
+      "previous": [
+        82
+      ],
+      "status": "Open",
+      "id": 99
+    },
+    {
+      "group": "E",
+      "title": "Choose the next cycle using real usage and costs",
+      "acceptance": "Review traveller feedback, operating costs and actual use before expanding further.",
+      "previous": [
+        83
+      ],
+      "status": "Open",
+      "id": 100
+    }
+  ]
+}

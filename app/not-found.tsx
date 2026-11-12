@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
+    <main id="main-content" tabIndex={-1} className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
       <div className="text-center px-4">
         <div className="mb-8">
           <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
@@ -35,6 +35,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

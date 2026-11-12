@@ -58,7 +58,7 @@ export function GlobalFooter({ country, navigationGroups = [], transparent = fal
         <div className="mt-7 flex flex-col justify-between gap-5 border-t border-gray-700 pt-7 text-sm md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} AVES. All rights reserved.</p>
           <nav aria-label="Website information" className="flex flex-wrap gap-x-5 gap-y-2">
-            {[["Privacy", "/privacy"], ["Terms", "/terms"], ["Cookies", "/cookies"], ["Photo & audio credits", "/credits"], ["Site map", "/site-map"]].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center underline-offset-4 hover:text-white hover:underline">{label}</Link>)}
+            {[["Bird inventories", "/species/reference"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Cookies", "/cookies"], ["Photo & audio credits", "/credits"], ["Site map", "/site-map"]].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center underline-offset-4 hover:text-white hover:underline">{label}</Link>)}
           </nav>
         </div>
       </div>
