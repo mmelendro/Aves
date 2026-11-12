@@ -42,3 +42,36 @@ test('photo preparation produces a smaller JPEG copy and releases the temporary 
  const load=loader({globals});
  const file=new File(['original private photo'],'original.jpg',{type:'image/jpeg'});const copy=await load('lib/prepare-journal-photo.ts').prepareJournalPhoto(file);assert.equal(canvas.width,2048);assert.equal(canvas.height,1536);assert.equal(copy.type,'image/jpeg');assert.equal(await file.text(),'original private photo');assert.ok(drawn&&released);
 });
+
+const settle=()=>new Promise(resolve=>setImmediate(resolve));
+function uploadSetup({pending=false,failFirst=false}={}){
+ const calls=[],replaced=[],entryId=item.entryId;
+ const h=componentHarness('components/account/trip-journal-media.tsx','TripJournalMedia',{entryId,enabled:true},{
+  runEffects:true,window:{addEventListener(){},removeEventListener(){}},
+  context:()=>({planId:'a13b0801-1c6d-41d4-94da-12e3adeebf13',items:pending?[{...item,state:'pending'}]:[],loading:false,error:'',reload:async()=>{},replace:saved=>replaced.push(saved)}),
+  mocks:{'./account-api':{errorMessage:e=>e.message,accountRequest:async(path,options)=>{calls.push({path,options});if(failFirst&&calls.length===1)throw Error('Connection interrupted');return {item:{...item,id:options.headers['Idempotency-Key']}}}}}
+ });
+ return {h,calls,replaced};
+}
+const wavCopy=()=>new File([Buffer.from('RIFF0000WAVE'+String.fromCharCode(0).repeat(32))],'sample.wav',{type:'audio/wav'});
+async function chooseCopy(h,file=wavCopy()){
+ find(h.render(),n=>n.type==='input'&&n.props.type==='file').props.onChange({target:{files:[file]}});await settle();
+}
+test('interrupted upload retains the selected bytes and reference for an exact retry',async()=>{
+ const {h,calls,replaced}=uploadSetup({failFirst:true});await chooseCopy(h);
+ button(h.render(),'Upload privately').props.onClick();await settle();
+ let tree=h.render();assert.equal(find(tree,n=>n.type==='input'&&n.props.type==='file').props.disabled,true);
+ button(tree,'Retry private upload').props.onClick();await settle();
+ assert.equal(calls.length,2);assert.equal(calls[0].options.body,calls[1].options.body);assert.equal(calls[0].options.headers['Idempotency-Key'],calls[1].options.headers['Idempotency-Key']);assert.equal(replaced.length,1);
+ assert.equal(find(h.render(),n=>n.type==='input'&&n.props.type==='file').props.disabled,false);
+});
+test('reopening an incomplete upload reuses its reserved reference instead of consuming another slot',async()=>{
+ const {h,calls}=uploadSetup({pending:true});find(h.render(),n=>n.type==='select').props.onChange({target:{value:item.id}});await chooseCopy(h);
+ button(h.render(),'Retry private upload').props.onClick();await settle();assert.equal(calls[0].options.headers['Idempotency-Key'],item.id);
+});
+test('incomplete-upload recovery rejects a different prepared size before sending bytes',async()=>{
+ const {h,calls}=uploadSetup({pending:true});find(h.render(),n=>n.type==='select').props.onChange({target:{value:item.id}});
+ await chooseCopy(h,new File([Buffer.from('RIFF0000WAVEextra')],'different.wav',{type:'audio/wav'}));
+ assert.equal(calls.length,0);assert.equal(button(h.render(),'Retry private upload').props.disabled,true);
+ assert.ok(nodes(h.render()).some(n=>n.props?.role==='status'&&String(n.props.children).includes('original file')));
+});

@@ -53,28 +53,34 @@ export function JournalMediaCard({item}:{item:TripMediaItem}){
 }
 export function TripJournalMedia({entryId,enabled}:{entryId:string;enabled:boolean}){
   const {planId,items,loading,error,reload,replace}=useMedia(),busyRef=useRef(false)
-  const [file,setFile]=useState<Blob|null>(null),[uploadId,setUploadId]=useState(""),[busy,setBusy]=useState(false),[feedback,setFeedback]=useState("")
+  const [file,setFile]=useState<Blob|null>(null),[uploadId,setUploadId]=useState(""),[retryId,setRetryId]=useState(""),[attempted,setAttempted]=useState(false),[busy,setBusy]=useState(false),[feedback,setFeedback]=useState("")
   const input=useRef<HTMLInputElement>(null)
   async function choose(selected:File|undefined){
-    setFile(null);setFeedback("");if(!selected)return
+    if(busyRef.current)return
+    setFile(null);setAttempted(false);setFeedback("");if(!selected)return
     busyRef.current=true;setBusy(true)
     try{
       const prepared=selected.type.startsWith("image/")?await prepareJournalPhoto(selected):selected
       if(prepared.size>MAX_TRIP_MEDIA_BYTES)throw Error("Choose a recording under 3 MiB, or a smaller photo.")
       const mime=mediaSignature(new Uint8Array(await prepared.arrayBuffer()));if(!mime)throw Error("Choose a JPEG, PNG, WebP, MP3, M4A, WAV, Ogg or WebM file.")
-      setFile(new Blob([prepared],{type:mime}));setUploadId(crypto.randomUUID());setFeedback("File ready. Choose Upload privately to save this copy.")
+      const pending=items.find(item=>item.id===retryId&&item.entryId===entryId&&item.state==="pending")
+      // Reuse the server reservation after a reload; the API also verifies the content hash.
+      if(retryId&&(!pending||pending.mime!==mime||pending.bytes!==prepared.size))throw Error("Choose the original file for this incomplete upload. Its format and prepared size must match.")
+      setFile(new Blob([prepared],{type:mime}));setUploadId(pending?.id||crypto.randomUUID());setFeedback(pending?"Original file ready. Retry to finish the existing upload.":"File ready. Choose Upload privately to save this copy.")
     }catch(e){setFeedback(errorMessage(e))}finally{busyRef.current=false;setBusy(false)}
   }
   useEffect(()=>{if(!file)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn)},[file])
   async function upload(){
-    if(!file||busyRef.current||!enabled)return;busyRef.current=true;setBusy(true);setFeedback("")
-    try{const r=await accountRequest<{item:unknown}>(`/api/account/plans/${planId}/media?entry=${entryId}`,{method:"POST",headers:{"Content-Type":file.type,"Idempotency-Key":uploadId},body:file});const saved=mediaItemSchema.parse(r.item);if(saved.id!==uploadId||saved.entryId!==entryId||saved.state!=="ready")throw Error("This upload could not be confirmed. Keep the selected file and retry.");replace(saved);setFile(null);if(input.current)input.current.value="";setFeedback("Your private upload is saved.")}catch(e){setFeedback(errorMessage(e))}finally{busyRef.current=false;setBusy(false)}
+    if(!file||busyRef.current||!enabled)return;busyRef.current=true;setBusy(true);setAttempted(true);setFeedback("")
+    try{const r=await accountRequest<{item:unknown}>(`/api/account/plans/${planId}/media?entry=${entryId}`,{method:"POST",headers:{"Content-Type":file.type,"Idempotency-Key":uploadId},body:file});const saved=mediaItemSchema.parse(r.item);if(saved.id!==uploadId||saved.entryId!==entryId||saved.state!=="ready")throw Error("This upload could not be confirmed. Keep the selected file and retry.");replace(saved);setFile(null);setRetryId("");setAttempted(false);if(input.current)input.current.value="";setFeedback("Your private upload is saved.")}catch(e){setFeedback(errorMessage(e))}finally{busyRef.current=false;setBusy(false)}
   }
   return <section aria-label="Journal photos and recordings" className="border-t border-emerald-100 pt-5 space-y-4">
-    <h3 className="font-medium text-emerald-950">Photos and recordings</h3><p className="text-xs leading-6 text-gray-600">Private to you. Photos are prepared as JPEG copies up to 2048 pixels; originals stay unchanged. Audio can be MP3, M4A, WAV, Ogg or WebM. Each saved file must be under 3 MiB. Up to 20 files across your trips in this pilot.</p>
+    <h3 className="font-medium text-emerald-950">Photos and recordings</h3><p className="text-xs leading-6 text-gray-600">Private to you. Photos are prepared as JPEG copies up to 2048 pixels; originals stay unchanged. Audio can be MP3, M4A, WAV, Ogg or WebM. Each saved file can be up to 3 MiB. Up to 20 files across your trips in this pilot. Incomplete uploads count towards that limit. Remove an unused upload to free space. A shared pilot limit also applies.</p>
     {!enabled&&<p className="text-sm text-emerald-800">Save your workspace changes before adding media to this entry.</p>}
     {error?<div role="alert"><p>{error}</p><Button type="button" variant="outline" onClick={()=>void reload()}>Retry loading uploads</Button></div>:loading?<p role="status">Loading private uploads…</p>:null}
-    <fieldset disabled={busy||!enabled||loading||Boolean(error)} className="space-y-3"><label className="block text-sm">Choose a photo or recording<input ref={input} type="file" accept="image/jpeg,image/png,image/webp,audio/mpeg,audio/mp4,audio/wav,audio/ogg,audio/webm,.mp3,.m4a,.wav,.ogg,.webm" className="mt-2 block w-full min-w-0 text-sm file:mr-3 file:rounded-full file:border file:border-emerald-200 file:bg-white file:px-4 file:py-3" onChange={e=>void choose(e.target.files?.[0])}/></label><Button type="button" variant="outline" disabled={!file||busy} onClick={()=>void upload()}>{busy?"Preparing or uploading…":"Upload privately"}</Button></fieldset>
+    {!error&&<Button type="button" variant="ghost" disabled={busy||loading} onClick={()=>void reload()}>Refresh saved uploads</Button>}
+    <fieldset disabled={busy||!enabled||loading||Boolean(error)} className="space-y-3">{items.some(item=>item.entryId===entryId&&item.state==="pending")&&<label className="block text-sm">Upload destination<select className={field} value={retryId} disabled={Boolean(file)} onChange={e=>{setRetryId(e.target.value);setFeedback("");if(input.current)input.current.value=""}}><option value="">New private upload</option>{items.filter(item=>item.entryId===entryId&&item.state==="pending").map((item,index)=><option key={item.id} value={item.id}>Finish incomplete {item.kind} {index+1} ({Math.ceil(item.bytes/1024)} KiB)</option>)}</select></label>}<label className="block text-sm">{retryId?"Choose the original photo or recording again":"Choose a photo or recording"}<input ref={input} disabled={Boolean(file)} type="file" accept="image/jpeg,image/png,image/webp,audio/mpeg,audio/mp4,audio/wav,audio/ogg,audio/webm,.mp3,.m4a,.wav,.ogg,.webm" className="mt-2 block w-full min-w-0 text-sm file:mr-3 file:rounded-full file:border file:border-emerald-200 file:bg-white file:px-4 file:py-3" onChange={e=>void choose(e.target.files?.[0])}/></label><Button type="button" variant="outline" disabled={!file||busy} onClick={()=>void upload()}>{busy?"Preparing or uploading…":attempted||retryId?"Retry private upload":"Upload privately"}</Button>{file&&<Button type="button" variant="ghost" onClick={()=>{setFile(null);setRetryId("");setAttempted(false);if(input.current)input.current.value="";setFeedback("Selected copy cleared from this page. Any saved or incomplete upload stays private. Reload uploads to review it before starting another.")}}>Clear selected copy</Button>}</fieldset>
+    {file&&<p className="text-sm text-gray-600">Selected copy: {Math.ceil(file.size/1024)} KiB. {attempted?"If the connection failed, retry this selected copy. AVES checks the same upload reference and file contents to avoid saving a second copy.":"Keep this page open until saving is confirmed."}</p>}
     {feedback&&<p role="status" className="text-sm text-emerald-950">{feedback}</p>}
     <div className="space-y-4">{items.filter(m=>m.entryId===entryId).sort((a,b)=>a.position-b.position).map(item=><JournalMediaCard key={item.id} item={item}/>)}</div>
   </section>
