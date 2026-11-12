@@ -17,3 +17,5 @@ The rollback-only database test creates reserved synthetic identities and record
 No actual traveller record is imported, shared or modified by the development checks. Physical Safari and independent visitor acceptance remain pending. Media uploads follow as the next bounded release. Existing private-schema advisor info and the pre-existing leaked-password-protection warning remain unchanged; this release introduces no new advisor finding.
 
 The migration was created with CLI2.81.3, then its filename was reconciled to hosted migration version20261112074154 after application. No historical migration was rerun.
+
+Accepted foundation runtime97a22210ce135df2cfc0f70df4a78f17bec85b24 / dpl_BetweZLDfDUtTPQcvv5UE1Sx6rXc, followed by the accepted media release.638 tests and strict production build passed for the foundation. Real synthetic Auth/application/database tests verified save/reopen, exact receipt retry, removal/restoration, conflict409, foreign-origin403, missing-plan404 and authenticated page200. Canonical save/reopen passed; no real traveller records were changed.

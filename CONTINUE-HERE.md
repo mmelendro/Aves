@@ -22,7 +22,7 @@ The direct satellite toggle is implemented beside the shared layers picker. The 
 
 Owner reprioritised galleries on 12 November 2026: the previous items 9 and 10 now come first. The completed Christchurch reference pilot stays delivered. Journal work remains planned and private. This is the only active queue; the former eight-stage sequence is historical context in the handoff, not a competing list.
 
-Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8 and12–21. The owner’s ten autonomous tasks12–21 are delivered in two reviewable releases, with the mobile gesture correction prioritised. Item22 remains an evidence decision; the next independent implementation batch is23–27. Items9–11 remain visibly pending and do not block that work.
+Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8,12–21 and23–32. The latest ten autonomous tasks23–32 are delivered in two reviewed releases:97a2221 and0c23021. Item22 remains an evidence decision; the next independent implementation items are33–36. Items9–11 remain visibly pending and do not block that work.
 
 Work in progress limit: one release. If a task is blocked by an unavailable device, person or source, record that limit and continue the next independent task; do not silently mark it complete. Validate, publish the exact accepted source and record evidence before beginning the next release. Combine adjacent items only when they form one reviewable outcome; never batch all country assets into an unreviewed release. An item is complete only when its stated outcome and relevant checks pass. Do not wait for all 90 items to open a bounded pilot.
 
@@ -74,25 +74,25 @@ Photo completion requires distinct real photographs with checked locality, right
 
 22. Make an evidence-based decision on opening the limited New Zealand pilot. Pending actual founder/cash/capacity inputs, physical-mobile acceptance and independent visitor evidence. Do not mark launch-ready from illustrative scenarios.
 
-23. Add a private per-trip preparation checklist.
+23. Add a private per-trip preparation checklist. Delivered in97a2221, with explicit save/reopen and ownership checks.
 
-24. Add optional checklist due dates and completion state.
+24. Add optional checklist due dates and completion state. Delivered in97a2221; completion remains distinct from arrangement confirmation.
 
-25. Attach private reference links to checklist items.
+25. Attach private reference links to checklist items. Delivered in97a2221; HTTPS references, notes, categories and arrangement states stay owner-only.
 
-26. Create private journal entries within an existing trip.
+26. Create private journal entries within an existing trip. Delivered in97a2221; separate from submitted planning/quote snapshots.
 
-27. Support journal editing and recoverable deletion.
+27. Support journal editing and recoverable deletion. Delivered in97a2221; removed entries/tasks can be restored. Existing IDs are retained by0c23021.
 
-28. Link journal entries to the correct day and public place.
+28. Link journal entries to the correct day and public place. Delivered in97a2221; optional owner-labelled day/date and country-validated public place, not proof of a visit.
 
-29. Add secure owner-only photo uploads.
+29. Add secure owner-only photo uploads. Delivered in0c23021; private bucket, ownership/RLS, bounded copies, hashes and exact retries.
 
-30. Add photo captions, ordering, creator details and dates.
+30. Add photo captions, ordering, creator details and dates. Delivered in0c23021; explicit saved revisions preserve conflicting edits.
 
-31. Add secure owner-only audio uploads.
+31. Add secure owner-only audio uploads. Delivered in0c23021; five supported audio formats,3MiB/file and20/account pilot cap.
 
-32. Add recording playback and recording notes.
+32. Add recording playback and recording notes. Delivered in0c23021; authenticated native playback, bounded byte ranges and private saved notes.
 
 33. Add private receipts and expense records.
 
