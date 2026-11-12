@@ -8,6 +8,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,
+  maxFailures: 5,
   workers: 2,
   reporter: [["list"], ["json", { outputFile: "test-results/browser-results.json" }]],
   use: { baseURL: "http://127.0.0.1:3100", colorScheme: "light", reducedMotion: "reduce", screenshot: "only-on-failure", trace: "retain-on-failure" },
