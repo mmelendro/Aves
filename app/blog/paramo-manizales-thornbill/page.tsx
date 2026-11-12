@@ -250,7 +250,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/witman2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Pipra filicauda - View on eBird
                 </a>
@@ -270,7 +270,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/gowman1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Masius chrysopterus - View on eBird
                 </a>
@@ -290,7 +290,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/orcman1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Manacus aurantiacus - View on eBird
                 </a>
@@ -386,7 +386,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/rabtho1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Páramo specialist
                 </a>
@@ -397,7 +397,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/witman2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Cloud forest understory
                 </a>
@@ -408,7 +408,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/gowman1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Colombian endemic
                 </a>
@@ -419,7 +419,7 @@ export default function ParamoManizalesThornbillPost() {
                   href="https://ebird.org/species/orcman1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-emerald-600 hover:text-emerald-700 underline"
                 >
                   Montane specialist
                 </a>

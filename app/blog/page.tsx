@@ -136,7 +136,7 @@ export default function BlogPage() {
                   <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
                     <div className="flex items-center">
                       <User className="w-4 h-4 mr-1" />
-                      <Link href="/team#martin-melendro" className="hover:text-emerald-600 transition-colors">
+                      <Link href="/team#martin-melendro" className="inline-flex min-h-6 items-center hover:text-emerald-600 transition-colors">
                         {post.author}
                       </Link>
                     </div>

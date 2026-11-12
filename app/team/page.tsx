@@ -264,7 +264,7 @@ export default function TeamPage() {
       role: "Adventure Tourism Specialist",
       badge: "Adventure Tourism",
       badgeColor: "bg-amber-100 text-amber-800",
-      roleColor: "text-amber-600",
+      roleColor: "text-amber-800",
       image: "/images/jose-luis-ropero.png",
       alt: "Jose Luis Ropero - Adventure Tourism Specialist and multi-ecosystem guide",
       bio: "Jose Luis Ropero is the founder of Ropero Aventuras and brings extensive experience in adventure tourism and multi-ecosystem birding expeditions. His comprehensive knowledge of Colombia's diverse regions and ability to navigate challenging terrains makes him exceptional for adventurous expeditions.",
@@ -281,19 +281,19 @@ export default function TeamPage() {
           icon: Instagram,
           text: "@roperoaventuras",
           url: "https://www.instagram.com/roperoaventuras",
-          color: "hover:text-amber-600",
+          color: "hover:text-amber-800",
         },
         {
           icon: Globe,
           text: "roperoaventuras.com",
           url: "https://roperoaventuras.com/",
-          color: "hover:text-amber-600",
+          color: "hover:text-amber-800",
         },
         {
           icon: Globe,
           text: "View eBird Profile",
           url: "https://ebird.org/profile/NjQ2ODY5/CO",
-          color: "text-amber-600 hover:text-amber-700",
+          color: "text-amber-800 hover:text-amber-700",
         },
       ],
     },
@@ -727,7 +727,7 @@ export default function TeamPage() {
                             Medical Research Advisor
                           </Badge>
                         </div>
-                        <p className="text-amber-600 font-medium text-sm md:text-base">
+                        <p className="text-amber-800 font-medium text-sm md:text-base">
                           Emeritus Professor of Respiratory Medicine & Pathology, UBC
                         </p>
                       </div>

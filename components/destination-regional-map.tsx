@@ -1,5 +1,5 @@
 import { placeInSentence } from "@/lib/place-language"
-import ColombiaRegionTargets from "./colombia-region-targets"
+import colombiaBoundaries from "@/content/colombia-planning-boundaries.json"
 /**
  * Connected homepage map: selection filters the birds and retains regional zoom.
  * Feather cues and the sage palette match the destination cards.
@@ -47,13 +47,20 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
     <div className="relative top-1/2 mx-auto aspect-[198/250] -translate-y-1/2" style={{ width: "min(100cqw, calc(100cqh * 198 / 250))" }} role="group" aria-label="Colombia planning-region map">
       <div className={`absolute inset-0 ${styles.pointZoom}`} style={selectedRegionId ? { transform: `scale(2.4) translate(${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.x ?? 50)}%, ${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.y ?? 50)}%)` } : undefined}>
       <ColombiaMapArtwork flat alt="" fill sizes="(max-width: 703px) 90vw, 560px" className="object-contain" />
-            <ColombiaRegionTargets onSelect={onSelectRegion} matchingRegionIds={matchingRegionIds}/>
+            <svg className="absolute inset-0 h-full w-full" viewBox={colombiaBoundaries.viewBox} preserveAspectRatio="xMidYMid meet" role="group" aria-label="Choose a Colombian planning region">
+              {colombiaBoundaries.regions.map(boundary => {
+                const region = colombiaMapMarkers.find(item => item.name === boundary.name)
+                if (!region) return null
+                return control(region.slug, region.name, `/regions/${region.slug}`, <path d={boundary.path} fill={matchingRegionIds?.includes(region.slug) ? "#04785755" : "transparent"} stroke={matchingRegionIds?.includes(region.slug) ? "#b45309" : "transparent"} vectorEffect="non-scaling-stroke" className={`${styles.regionLand} cursor-pointer`} />)
+              })}
+            </svg>
       {colombiaMapMarkers.map(region => {
         const selected = highlighted(region.slug)
-        const className = `absolute flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-800/40 text-[10px] font-semibold hover:z-10 hover:bg-emerald-800 hover:text-white focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-10 border-transparent" : "bg-white text-emerald-950"}`
+        const className = `absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-800/40 text-[10px] font-semibold hover:z-10 hover:bg-emerald-800 hover:text-white focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-950 ${selected ? "z-10 border-transparent" : "bg-white text-emerald-950"}`
         const props = { style: { left: `${region.x}%`, top: `${region.y}%` }, className, title: region.name }
-        return onSelectRegion ? <button key={region.slug} type="button" {...props} aria-label={`Preview ${region.name} birds`} aria-pressed={selected} onClick={() => onSelectRegion(region.slug)}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</button>
-          : <a key={region.slug} {...props} href={`/regions/${region.slug}`} aria-label={`Explore ${placeInSentence(region.name)}`}>{selected ? <MapFeatherMarker size={28}/> : <span aria-hidden="true" className="h-2 w-2 rounded-full bg-emerald-700"/>}</a>
+        // The complete named region owns the hit area. Decorative pins must not
+        // overlap it or introduce a second, tiny keyboard stop for the same place.
+        return <span key={region.slug} {...props} aria-hidden="true" className={`${className} pointer-events-none`}>{selected ? <MapFeatherMarker size={28}/> : <span className="h-2 w-2 rounded-full bg-emerald-700"/>}</span>
       })}
       </div>
     </div>
