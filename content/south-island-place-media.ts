@@ -60,6 +60,13 @@ export const additionalSouthIslandPlacePhotos: readonly PlacePhoto[] = [
   }
 ]
 
+/** Additional views reviewed on their Commons source pages, 12 November 2026. */
+export const secondPlacePhotos: readonly PlacePhoto[] = [
+  {src:"/images/places/nelson-rotoiti-kerr-bay.webp",alt:"Lake Rotoiti from the pebbled shore at Kerr Bay, with forested mountains and clouds",caption:"Kerr Bay shore · Lake Rotoiti",creator:"Michal Klajban",sourceUrl:"https://commons.wikimedia.org/wiki/File:Lake_Rotoiti,_New_Zealand_(1).JPG",licence:"CC BY-SA 4.0",licenceUrl:"https://creativecommons.org/licenses/by-sa/4.0/",modifications:"Resized and converted to WebP; cropped to fit. Web rendition retains CC BY-SA 4.0."},
+  {src:"/images/places/fiordland-te-anau-shore.webp",alt:"Lake Te Anau on a cloudy day, with a water taxi beside the town shore",caption:"Town lakeshore · Lake Te Anau",creator:"Σ64",sourceUrl:"https://commons.wikimedia.org/wiki/File:Lake_Te_Anau,_New_Zealand_01.jpg",licence:"CC BY 4.0",licenceUrl:"https://creativecommons.org/licenses/by/4.0/",modifications:"Resized and converted to WebP; cropped to fit. Historical photograph, not a current transport offer."},
+  {src:"/images/places/catlins-curio-bay-coast.webp",alt:"Waves breaking across the rocky coastline at Curio Bay in the Catlins",caption:"Rocky coastline · Curio Bay",creator:"Anagoria",sourceUrl:"https://commons.wikimedia.org/wiki/File:2019-01-15_123136_Curio_Bay_anagoria.jpg",licence:"CC BY 3.0",licenceUrl:"https://creativecommons.org/licenses/by/3.0/",modifications:"Resized and converted to WebP; cropped to fit."},
+]
+
 /** Public landscape reference points, not park/ecosystem boundaries or wildlife
  * locations. Non-Arthur points follow credited Commons geotags; the Lake Rotoiti
  * reference is from a separately geotagged South Island photograph, not a claim
@@ -67,7 +74,7 @@ export const additionalSouthIslandPlacePhotos: readonly PlacePhoto[] = [
  */
 export const southIslandPlaceContexts = [
   { id: "mountains", label: "Arthur’s Pass", habitat: "mountains", latitude: -42.9409528, longitude: 171.5628387, location: "Arthur’s Pass village", source: "https://www.openstreetmap.org/node/165076707", photos: arthursPassPhotos },
-  { id: "forest-and-lakes", label: "Nelson Lakes", habitat: "freshwater", latitude: -41.811469, longitude: 172.844331, location: "Lake Rotoiti", source: "https://commons.wikimedia.org/wiki/File:St_Arnaud_(New_Zealand)_banner_Lake_Rotoiti.jpg", photos: [additionalSouthIslandPlacePhotos[0]] },
-  { id: "southern-forest", label: "Fiordland", habitat: "forest", latitude: -45.231059, longitude: 167.811456, location: "Lake Te Anau", source: additionalSouthIslandPlacePhotos[1].sourceUrl, photos: [additionalSouthIslandPlacePhotos[1]] },
-  { id: "coast", label: "Otago & the Catlins", habitat: "coast", latitude: -46.662119, longitude: 169.098100, location: "Curio Bay", source: additionalSouthIslandPlacePhotos[2].sourceUrl, photos: [additionalSouthIslandPlacePhotos[2]] },
+  { id: "forest-and-lakes", label: "Nelson Lakes", habitat: "freshwater", latitude: -41.811469, longitude: 172.844331, location: "Lake Rotoiti", source: "https://commons.wikimedia.org/wiki/File:St_Arnaud_(New_Zealand)_banner_Lake_Rotoiti.jpg", photos: [additionalSouthIslandPlacePhotos[0], secondPlacePhotos[0]] },
+  { id: "southern-forest", label: "Fiordland", habitat: "forest", latitude: -45.231059, longitude: 167.811456, location: "Lake Te Anau", source: additionalSouthIslandPlacePhotos[1].sourceUrl, photos: [additionalSouthIslandPlacePhotos[1], secondPlacePhotos[1]] },
+  { id: "coast", label: "Otago & the Catlins", habitat: "coast", latitude: -46.662119, longitude: 169.098100, location: "Curio Bay", source: additionalSouthIslandPlacePhotos[2].sourceUrl, photos: [additionalSouthIslandPlacePhotos[2], secondPlacePhotos[2]] },
 ] as const

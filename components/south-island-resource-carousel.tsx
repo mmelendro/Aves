@@ -1,6 +1,7 @@
 "use client"
 
 import { useContext, useId, useState } from "react"
+import {CarouselButton,CarouselCount} from "./carousel-controls"
 import { BrandBird } from "@/components/brand-bird"
 import { BookOpen, ChevronLeft, ChevronRight, Feather, MapPin, Play } from "lucide-react"
 import { southIslandResources } from "@/content/south-island"
@@ -24,9 +25,9 @@ export default function SouthIslandResourceCarousel() {
         {southIslandResources.map((item, i) => <option key={item.id} value={i}>{item.kind} · {item.title}</option>)}
       </select>
       <div className="flex shrink-0 items-center gap-2">
-        <span className="text-xs tabular-nums text-emerald-800">{index + 1} / {southIslandResources.length}</span>
-        <button type="button" className={styles.feather} aria-label="Previous resource" title="Previous resource" onClick={() => select(index - 1)}><ChevronLeft size={19} aria-hidden="true" /></button>
-        <button type="button" className={styles.feather} aria-label="Next resource" title="Next resource" onClick={() => select(index + 1)}><ChevronRight size={19} aria-hidden="true" /></button>
+        <CarouselCount index={index+1} total={southIslandResources.length}/>
+        <CarouselButton aria-label="Previous resource" title="Previous resource" onClick={() => select(index - 1)}><ChevronLeft size={19} aria-hidden="true" /></CarouselButton>
+        <CarouselButton aria-label="Next resource" title="Next resource" onClick={() => select(index + 1)}><ChevronRight size={19} aria-hidden="true" /></CarouselButton>
       </div>
     </div>
     <article className={styles.card} aria-roledescription="slide" aria-label={`${index + 1} of ${southIslandResources.length}: ${resource.title}`}>

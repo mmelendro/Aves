@@ -496,6 +496,48 @@
       "alt": "Rocky coastal platform and ocean at Curio Bay in the Catlins",
       "modifications": "Resized and converted to WebP; cropped to fit. ",
       "verifiedOn": "2026-11-09"
+    },
+    {
+      "file": "nelson-rotoiti-kerr-bay.webp",
+      "path": "/images/places/nelson-rotoiti-kerr-bay.webp",
+      "title": "Kerr Bay shore · Lake Rotoiti",
+      "creator": "Michal Klajban",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Lake_Rotoiti,_New_Zealand_(1).JPG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Rotoiti,_New_Zealand_(1).JPG",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Kerr Bay shore · Lake Rotoiti. Photograph by Michal Klajban.",
+      "alt": "Lake Rotoiti from the pebbled shore at Kerr Bay, with forested mountains and clouds",
+      "modifications": "Resized and converted to WebP; cropped to fit. Web rendition retains CC BY-SA 4.0.",
+      "verifiedOn": "2026-11-12"
+    },
+    {
+      "file": "fiordland-te-anau-shore.webp",
+      "path": "/images/places/fiordland-te-anau-shore.webp",
+      "title": "Town lakeshore · Lake Te Anau",
+      "creator": "Σ64",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Lake_Te_Anau,_New_Zealand_01.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Te_Anau,_New_Zealand_01.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Town lakeshore · Lake Te Anau. Photograph by Σ64.",
+      "alt": "Lake Te Anau on a cloudy day, with a water taxi beside the town shore",
+      "modifications": "Resized and converted to WebP; cropped to fit. Historical photograph, not a current transport offer.",
+      "verifiedOn": "2026-11-12"
+    },
+    {
+      "file": "catlins-curio-bay-coast.webp",
+      "path": "/images/places/catlins-curio-bay-coast.webp",
+      "title": "Rocky coastline · Curio Bay",
+      "creator": "Anagoria",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:2019-01-15_123136_Curio_Bay_anagoria.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2019-01-15_123136_Curio_Bay_anagoria.jpg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "attribution": "Rocky coastline · Curio Bay. Photograph by Anagoria.",
+      "alt": "Waves breaking across the rocky coastline at Curio Bay in the Catlins",
+      "modifications": "Resized and converted to WebP; cropped to fit.",
+      "verifiedOn": "2026-11-12"
     }
   ]
 }

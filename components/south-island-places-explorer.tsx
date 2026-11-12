@@ -5,6 +5,8 @@
  */
 import { useContext, useId, useReducer, useRef, useState } from "react"
 import Image from "next/image"
+import {CarouselButton,CarouselCount} from "./carousel-controls"
+import PhotoCredit from "./photo-credit"
 import PhotoZoom from "./photo-zoom"
 import { ChevronLeft, ChevronRight, Info, X } from "lucide-react"
 import { southIslandPlaces } from "@/content/south-island"
@@ -48,12 +50,12 @@ export default function SouthIslandPlacesExplorer() {
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); showSlide(active + (event.key === "ArrowRight" ? 1 : -1)) }
       }}>
         <PhotoZoom key={photo.src} label={place.label}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 55vw" className={styles.image} /></PhotoZoom>
-        <div className={styles.top}><span className={styles.counter}>{active + 1} / {slides.length}</span>
-          <button ref={infoButton} type="button" className={styles.control} title="Place details & credits" aria-label="Place details & credits" aria-expanded={info} aria-controls={`${id}-info`} onClick={() => setInfo(index => index === active ? null : active)}><Info size={19} aria-hidden="true" /></button>
+        <div className={styles.top}><span className={styles.counter}><CarouselCount index={active + 1} total={slides.length}/></span>
+          <CarouselButton buttonRef={infoButton} tone="overlay" title="Place details & credits" aria-label="Place details & credits" aria-expanded={info} aria-controls={`${id}-info`} onClick={() => setInfo(index => index === active ? null : active)}><Info size={19} aria-hidden="true" /></CarouselButton>
         </div>
         {!info && <div className="absolute inset-x-3 top-16 z-20"><SouthIslandHabitatSelect value={habitat} onChange={filter} label="Habitat for place carousel" /></div>}
-        <div className={styles.arrows}><button type="button" className={styles.control} title="Previous landscape" aria-label="Previous landscape" onClick={() => showSlide(active - 1)}><ChevronLeft aria-hidden="true" /></button><button type="button" className={styles.control} title="Next landscape" aria-label="Next landscape" onClick={() => showSlide(active + 1)}><ChevronRight aria-hidden="true" /></button></div>
-        <div className={styles.caption} aria-live="polite"><p className="text-xs">South Island places</p><h3 className="text-xl font-medium">{place.label}</h3><p className="mt-1 text-xs">{photo.caption}</p><a href={photo.sourceUrl} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs underline">{photo.creator} · {photo.licence}<span className="sr-only"> (opens in a new tab)</span></a></div>
+        <div className={styles.arrows}><CarouselButton tone="overlay" title="Previous landscape" aria-label="Previous landscape" onClick={() => showSlide(active - 1)}><ChevronLeft aria-hidden="true" /></CarouselButton><CarouselButton tone="overlay" title="Next landscape" aria-label="Next landscape" onClick={() => showSlide(active + 1)}><ChevronRight aria-hidden="true" /></CarouselButton></div>
+        <div className={styles.caption} aria-live="polite"><p className="text-xs">South Island places</p><h3 className="text-xl font-medium">{place.label}</h3><p className="mt-1 text-xs">{photo.caption}</p><p className="mt-1 text-xs">Photo {place.photos.findIndex(item=>item.src===photo.src)+1} of {place.photos.length}</p><PhotoCredit key={photo.src} creator={photo.creator} sourceUrl={photo.sourceUrl} licence={photo.licence} licenceUrl={photo.licenceUrl} modifications={photo.modifications}/></div>
         {info && <div id={`${id}-info`} role="region" aria-label={`About ${place.label}`} className={styles.info} data-info-presentation="overlay">
           <div className="flex items-start justify-between gap-3"><h4 className="text-xl font-medium">{place.label}</h4><button type="button" aria-label="Close place details" className={styles.close} onClick={() => { setInfo(null); infoButton.current?.focus() }}><X size={19} aria-hidden="true" /></button></div>
           <p className="mt-2 text-sm font-medium">{guidance.habitat}</p><p className="mt-3 text-sm">{guidance.birds}</p>

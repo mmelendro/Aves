@@ -123,7 +123,7 @@ test("places cycle across all four areas, map selections change photos, and habi
   }
   const render = () => { hook = 0; return Explorer() }
   let pair = render()
-  const button = label => elements(pair).find(node => node.type === "button" && node.props["aria-label"] === label)
+  const button = label => elements(pair).find(node => node.props["aria-label"] === label)
   const selectedPlace = () => load("lib/south-island-discovery.ts").southIslandLandscapeSlides[shared.slideIndex].place.id
   assert.equal(selectedPlace(), "mountains")
   button("Next landscape").props.onClick(); pair = render()
@@ -137,7 +137,7 @@ test("places cycle across all four areas, map selections change photos, and habi
   assert.ok(!elements(pair).some(node => node.props["aria-label"]?.startsWith("About ")), "map-driven photo changes close stale Info")
   shared.select("forest"); pair = render()
   assert.equal(selectedPlace(), "southern-forest", "bird-map habitat also updates the place viewer")
-  for (let i = 0; i < 5; i++) { button("Next landscape").props.onClick(); pair = render() }
+  for (let i = 0; i < load("lib/south-island-discovery.ts").southIslandLandscapeSlides.length; i++) { button("Next landscape").props.onClick(); pair = render() }
   assert.equal(selectedPlace(), "southern-forest", "full collection wraps")
 })
 
@@ -148,6 +148,8 @@ test("all landscape assets carry credits and public reference pins fit the actua
   const { ecosystemMapPoint } = load("lib/ecosystem-map-camera.ts")
   assert.equal(southIslandPlaceContexts.length, 4)
   for (const place of southIslandPlaceContexts) {
+    assert.ok(place.photos.length >= 2, `${place.label} has multiple distinct views`)
+    assert.equal(new Set(place.photos.map(photo=>photo.src)).size,place.photos.length)
     const point = ecosystemMapPoint(place.longitude, place.latitude, map.bbox)
     assert.ok(point.x > 0 && point.x < 480 && point.y > 0 && point.y < 640)
     assert.ok(place.source.startsWith("https://"))

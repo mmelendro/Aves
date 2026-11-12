@@ -7,6 +7,8 @@
  */
 "use client"
 
+import {CarouselButton,CarouselCount} from "./carousel-controls"
+import PhotoCredit from "./photo-credit"
 import BirdFilterControls from "@/components/bird-filter-controls"
 import BirdConservationLabel from "@/components/bird-conservation-label"
 import {useBirdFilters} from "@/components/bird-filter-context"
@@ -42,15 +44,14 @@ interface HomepageBirdCarouselProps {
   imageTools?: ReactNode
 }
 
-const controlClass = "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-slate-950/50 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-slate-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:opacity-40 motion-reduce:transition-none"
-const linkClass = "text-emerald-800 underline underline-offset-2 hover:text-emerald-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
+
 
 // One icon button pattern keeps a spoken label even when its visible tooltip is hidden.
 // Native button props carry disabled, pressed and expanded states to assistive tools.
 type IconControlProps = ButtonHTMLAttributes<HTMLButtonElement> & { label: string; children: ReactNode; buttonClassName?: string; tooltipSide?: "left" | "right" | "bottom"; buttonRef?: Ref<HTMLButtonElement> }
 function IconControl({ label, children, className, buttonClassName, tooltipSide = "bottom", buttonRef, ...props }: IconControlProps) {
   return <span className={cn("group/control relative inline-flex", className)}>
-    <button ref={buttonRef} type="button" aria-label={label} className={cn(controlClass, buttonClassName)} {...props}>{children}</button>
+    <CarouselButton buttonRef={buttonRef} tone="overlay" aria-label={label} className={buttonClassName} {...props}>{children}</CarouselButton>
     <span aria-hidden="true" className={cn("pointer-events-none absolute z-30 w-max max-w-40 rounded-md bg-slate-950/95 px-2.5 py-1.5 text-center text-xs leading-4 text-white opacity-0 shadow-lg transition-opacity group-hover/control:opacity-100 group-focus-within/control:opacity-100 motion-reduce:transition-none", tooltipSide === "right" ? "left-full top-1/2 ml-2 -translate-y-1/2" : tooltipSide === "left" ? "right-full top-1/2 mr-2 -translate-y-1/2" : "right-0 top-full mt-2")}>{label}</span>
   </span>
 }
@@ -321,7 +322,7 @@ export default function HomepageBirdCarousel({
           {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
           {/* Image count describes this curated selection, not a destination species total. */}
-          <p className="absolute left-3 top-3 rounded-full border border-white/30 bg-slate-950/60 px-3 py-2 text-xs font-medium tabular-nums text-white backdrop-blur-md" aria-label={`Image ${selectedIndex + 1} of ${birds.length}`}>{selectedIndex + 1} / {birds.length}</p>
+          <p className="absolute left-3 top-3 rounded-full border border-white/30 bg-slate-950/60 px-3 py-2 text-xs font-medium tabular-nums text-white backdrop-blur-md" aria-label={`Image ${selectedIndex + 1} of ${birds.length}`}><CarouselCount index={selectedIndex+1} total={birds.length}/></p>
           {selection && <IconControl label={`${selection.isSelected(currentBird) ? "Remove" : "Add"} ${currentBird.commonName} ${selection.isSelected(currentBird) ? "from" : "to"} bird wish list`} aria-pressed={selection.isSelected(currentBird)} onClick={() => selection.onToggle(currentBird)} className="absolute left-3 top-16 z-20" buttonClassName={selection.isSelected(currentBird) ? "border-emerald-100 bg-emerald-700/90" : undefined}><Heart className="h-4 w-4" fill={selection.isSelected(currentBird) ? "currentColor" : "none"} aria-hidden="true" /></IconControl>}
           <div className="absolute right-2 top-2 z-20 flex gap-1 sm:right-3 sm:top-3 sm:gap-1.5">
             <IconControl label={isPlaying ? "Pause slideshow" : "Play slideshow"} data-slideshow-control onClick={() => {
@@ -354,15 +355,9 @@ export default function HomepageBirdCarousel({
           </div>}
         </div>
         {/* The photographer follows the selected slide; never keep a static card credit. */}
-        {isDestinationCard && <div className="border-b border-emerald-100 bg-emerald-50/40 px-4 text-xs text-gray-600">
-          <a href={currentBird.photoCredit.instagramPost || currentBird.photoCredit.teamLink || "/credits"}
-            target={currentBird.photoCredit.instagramPost ? "_blank" : undefined}
-            rel={currentBird.photoCredit.instagramPost ? "noopener noreferrer" : undefined}
-            title={currentBird.photoCredit.title}
-            className={cn(linkClass, "inline-flex min-h-11 items-center py-2 leading-5")}>
-            Photo: {currentBird.photoCredit.photographer}
-          </a>
-        </div>}
+        <div className="border-b border-emerald-100 bg-emerald-50/40 px-3 text-xs text-emerald-800">
+          <PhotoCredit key={currentBird.id} onOpen={()=>setIsPlaying(false)} creator={currentBird.photoCredit.photographer} sourceUrl={currentBird.photoCredit.instagramPost || currentBird.photoCredit.teamLink || "/credits"} title={currentBird.photoCredit.title}/>
+        </div>
         <div className="flex flex-wrap items-center gap-2 border-t border-emerald-100 bg-white px-3 py-2 text-emerald-950">
           <button type="button" className="min-h-11 rounded-lg border border-emerald-200 px-3 text-xs font-medium hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"
             aria-pressed={callsFollow} onClick={() => {
