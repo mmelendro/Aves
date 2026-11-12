@@ -111,3 +111,9 @@
   .pair[data-layout="guide"]:has([data-ecosystem-card]) { --discovery-panel-height:50rem; height:var(--discovery-panel-height); }
   .pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:60rem; height:var(--discovery-panel-height); }
 }
+
+/* One shared phone frame for world, country and regional maps. */
+@container (max-width:623.98px) {
+  .pair[data-layout="guide"]:has(:global([data-aves-map])) { --discovery-panel-height:60rem; height:var(--discovery-panel-height); }
+}
+.pair[data-layout="guide"] .mapBody :global([data-map-surface]) { min-height:28rem; flex:1 0 28rem; }

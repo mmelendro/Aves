@@ -27,3 +27,12 @@
 .viewer[data-geographic] .surface { overflow-y:auto; overscroll-behavior-y:contain; }
 .viewer[data-geographic] .content { height:auto; min-height:100%; }
 .viewer[data-geographic][data-expanded] .surface { flex:1 0 auto; min-height:24rem; overflow:visible; }
+
+/* Every map uses the same map-first frame. Controls never consume its canvas. */
+.surface { order:0; flex:1 0 28rem; min-height:28rem; }
+.toolbar { order:1; position:static; }
+.help { order:2; }
+@media(max-width:639px) {
+  .toolbar { gap:.25rem; }
+  .help { font-size:11px; }
+}
