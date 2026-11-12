@@ -1,6 +1,20 @@
 # AVES current handoff
 
-Runtime: 3003aa6c55ca3eadf04563ecbc4aaec6127a6826. Deployment: dpl_4NtSirGMHgKbdb91VAogZZyEwb9v, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: a30fd48234d0d3cbcc0a115a5d39cdc7e6f97e9b / dpl_HaYXPQDmiWvA1fLADwasevCy9UC3. Branch: feature/field-guide-card.
+Runtime: 1dd7ec600c336b0e28aacdc821fed16d85d4714d. Deployment: dpl_87uUuFZ5xJ6qzcizXphzHtQKxcHi, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: 3003aa6c55ca3eadf04563ecbc4aaec6127a6826 / dpl_4NtSirGMHgKbdb91VAogZZyEwb9v. Branch: feature/field-guide-card.
+
+## Calendar, content and private journey acceptance
+
+Second step 5 increment published. New generation/edit options enforce reviewed calendars, while old South Island drafts retain their selections with visible/copied review warnings. Orokonui Thursday–Monday, Memorial Grove's scoped 30-minute walk, Sulphur Bay's full-path 120-minute reference, Hamilton museum's indoor/Christmas exception and DOC Bushy Beach/Lake Gunn access context are delivered. See PLANNER-CALENDAR-2026-11-12.md.
+
+Node 22 strict TypeScript, all 602 tests, architecture audit (366 modules, no unreachable source), local and exact-SHA hosted 76-page builds passed. Hosted one-day Otago generated Orokonui for Thursday 19 November and excluded it for Tuesday 17 November. Native date entry was committed with ArrowUp/ArrowDown/Tab before generation, because plain automation fill did not commit React date state. Canonical North Island showed the scoped walking source and museum entry. Both aliases verified; deployment-scoped error/fatal scan 00:24–00:34 UTC returned no matching logs. Evidence: docs/evidence/2026-11-12-walking-reference.jpg.
+
+Real signed-in canonical private journey checked for both islands using two clearly labelled synthetic QA drafts. Imported itinerary notes and driving preferences, saved privately, navigated/reopened, edited and saved again. North Island and South Island blocks remained separate. No Share with AVES, enquiry, booking or mail was triggered. Existing guest records were not edited. Test drafts remain clearly labelled for traceability. No private screenshots/IDs/notes belong in public evidence. Step 7's core save/reopen/edit is verified; guided visual presentation is next.
+
+All 22 current Colombian catalogue image files opened locally, each at least 300 px on its shortest side and linked to an existing credit record. Licence labels distinguish Commons licences from original AVES attributions with no supplied public reuse licence. This checks inventory/credit presence, not new permission or species identification. Two focused Library searches did not resolve an additional Colombia photo archive; no unrelated returned images were imported. Wider archive and historical rights review remain incomplete.
+
+Latest owner direction: implement a previous/next visual journey using this same map, with arrival, transfer, stay/overnight and activity steps; selection should update sourced local bird/activity content. Verify exact airport/property points before displaying them; broad town references remain labelled. Preserve free exploration and reduced motion. Maintain consistent shared headers, footers, map/carousel surfaces, type/spacing and useful mobile map size across all pages. No new page-specific design system.
+
+NEXT: guided visual journey foundation in step 7, after this calendar release. Step 5's bounded practical pilot is delivered; further live weather/opening-hours, complete prices and precise addresses remain explicit limitations. Step 6 archive/rights expansion and step 8 physical Safari/touch plus independent visitor validation remain incomplete. Do not call the site launch-ready.
 
 ## Daily pace acceptance
 
