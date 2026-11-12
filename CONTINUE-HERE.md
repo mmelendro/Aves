@@ -22,7 +22,7 @@ The direct satellite toggle is implemented beside the shared layers picker. The 
 
 Owner reprioritised galleries on 12 November 2026: the previous items 9 and 10 now come first. The completed Christchurch reference pilot stays delivered. Journal work remains planned and private. This is the only active queue; the former eight-stage sequence is historical context in the handoff, not a competing list.
 
-Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8 and12–16. The owner now requests the next ten autonomous tasks:12–21, with the mobile gesture correction prioritised. Next remaining batch:17–21. Items9–11 remain visibly pending and do not block that work.
+Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8 and12–21. The owner’s ten autonomous tasks12–21 are delivered in two reviewable releases, with the mobile gesture correction prioritised. Item22 remains an evidence decision; the next independent implementation batch is23–27. Items9–11 remain visibly pending and do not block that work.
 
 Work in progress limit: one release. If a task is blocked by an unavailable device, person or source, record that limit and continue the next independent task; do not silently mark it complete. Validate, publish the exact accepted source and record evidence before beginning the next release. Combine adjacent items only when they form one reviewable outcome; never batch all country assets into an unreviewed release. An item is complete only when its stated outcome and relevant checks pass. Do not wait for all 90 items to open a bounded pilot.
 
@@ -62,17 +62,17 @@ Photo completion requires distinct real photographs with checked locality, right
 
 16. Verify reduced motion, free exploration and return to the map. Delivered in5c92d36. One map, opt-in airport, exact selected stay, sourced schematic transfer, static mode and cleanup verified.
 
-17. Review arrival/departure time constraints in daily plans.
+17. Review arrival/departure time constraints in daily plans. Delivered in edd3589. First/final day cards and copied plans flag actual timing as open on both islands.
 
-18. Carry selected landscape references into the private trip brief.
+18. Carry selected landscape references into the private trip brief. Delivered in edd3589. All30 reviewed NZ images carry caption, creator, licence and source through the existing explicit place-idea import.
 
-19. Check accommodation, activity and transport cost units in the pilot.
+19. Check accommodation, activity and transport cost units in the pilot. Delivered in edd3589. Room/adult arithmetic checked; unsupported units and unknown transport require a quote.
 
-20. Review the business model, founder pay, costs and viable pilot scope privately.
+20. Review the business model, founder pay, costs and viable pilot scope privately. Review completed12 November2026 in a private pilot pack. Actual owner inputs and financial viability remain unconfirmed.
 
-21. Prepare a small New Zealand pilot invitation and feedback task.
+21. Prepare a small New Zealand pilot invitation and feedback task. Prepared12 November2026 in the private pilot pack. Draft invitation and five-task test are unsent; no independent feedback is claimed.
 
-22. Make an evidence-based decision on opening the limited New Zealand pilot.
+22. Make an evidence-based decision on opening the limited New Zealand pilot. Pending actual founder/cash/capacity inputs, physical-mobile acceptance and independent visitor evidence. Do not mark launch-ready from illustrative scenarios.
 
 23. Add a private per-trip preparation checklist.
 
@@ -233,7 +233,7 @@ For functional changes, follow the required tests/build and hosted acceptance, p
 
 ## Shared design requirement
 
-Latest gallery direction: use one shared control/count and compact in-place credit pattern for bird, place, resource and team carousels. Place galleries target at least five distinct, relevant, locality-checked and credited photographs per subregion across all countries, also applying to more detailed place galleries. Every country overview should curate a balanced selection from each subregion using those same photo records, with region labels, map/gallery selection sync and an All regions return. Arthur’s Pass now has five photographs. Nelson Lakes, Fiordland and Otago/the Catlins have two each and each needs three more. Bird portraits, repeated crops and illustrations do not count. Opening references must preserve the active slide, page and enlargement state. Bird slideshows pause when credits open. The original eight-photo South Island pilot was accepted at c75a535. The connected-gallery increment expands it to eleven South Island photographs and adds one North Island and one Rakiura reference. Current acceptance and runtime are in HANDOFF-CURRENT.md.
+Latest gallery direction: use one shared control/count and compact in-place credit pattern for bird, place, resource and team carousels. Place galleries target at least five distinct, relevant, locality-checked and credited photographs per subregion across all countries, also applying to more detailed place galleries. Every country overview should curate a balanced selection from each subregion using those same photo records, with region labels, map/gallery selection sync and an All regions return. Arthur’s Pass, Nelson Lakes, Fiordland and Otago/the Catlins each have five photographs. North Island and Rakiura each have five; the current shared New Zealand library has30. Bird portraits, repeated crops and illustrations do not count. Opening references must preserve the active slide, page and enlargement state. Bird slideshows pause when credits open. The original eight-photo South Island pilot was accepted at c75a535. The connected-gallery increment expands it to eleven South Island photographs and adds one North Island and one Rakiura reference. Current acceptance and runtime are in HANDOFF-CURRENT.md.
 
 Keep headers, footers, map controls, carousel interactions, typography, spacing and colours consistent through shared components. Every release checks visual hierarchy, actual unclipped map size, current-stop labels, easy return from text/images, marker overlap, mobile overflow and clarity. Make each page beautiful through deliberate layout and useful content, without introducing a separate design system per destination.
 

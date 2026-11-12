@@ -19,3 +19,7 @@ Room-night references divide the chosen number of rooms by the selected adults; 
 The current owner-review business plan informed a private model review: founder cash pay from month one, contribution, capacity, replacement-labour separation and a bounded one-corridor service. Figures remain illustrative and actual owner cash, pay, capacity and operating inputs remain unconfirmed. A generic invitation and five-task volunteer feedback protocol are drafted, not sent. No participant feedback, physical-device result or paid launch decision is claimed.
 
 B Lab stewardship guidance is used as an evidence framework, not certification: https://usca.bcorporation.net/putting-stewardship-to-work-tracking-esc-standards/ . Private journal material, recipient details and financial assumptions are excluded from this public release.
+
+## Accepted release
+
+Runtime edd3589aa46e12a48c61fed599d3cc815c7bdf79, deployment dpl_2qEVDUs9j4TP1dxtjw1ZJDhsKtRR. Both canonical domains verified.629 tests, strict types,76-page build and375 reachable modules passed. Hosted checks covered both island planners’ first/final-day messages and copied text, both landscape surfaces, credited selected-photo notes, regional account links and340px no-overflow layout. Private-save provider behaviour was not retested live; existing exact-receipt merge/consumption tests passed. Owner/independent/device evidence remains pending.
