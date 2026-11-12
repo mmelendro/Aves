@@ -15,7 +15,7 @@ export const placeGalleryPhotos: readonly GalleryPhoto[] = [
     ...photo, id: photo.src, countryId: "new-zealand", regionId: "south-island",
     placeId: place.id, placeName: place.label,
   }))),
-  ...additions.photos.filter(photo => photo.regionId !== "south-island").map(photo => ({ ...photo, id: photo.src })),
+  ...additions.photos.filter(photo => photo.countryId !== "new-zealand" || photo.regionId !== "south-island").map(photo => ({ ...photo, id: photo.src })),
 ];
 
 /** Round-robin places before regions so a larger library cannot crowd out a

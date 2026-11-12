@@ -27,7 +27,9 @@ test('region scopes expose the full same-photo collection and fail closed for un
  assert.equal(galleryPhotos('new-zealand','south-island').length,20);
  assert.equal(galleryPhotos('new-zealand','north-island').length,5);
  assert.equal(galleryPhotos('new-zealand','rakiura').length,5);
- assert.equal(placeGalleryPhotos.length,30);
+ assert.equal(placeGalleryPhotos.length,35);
+ assert.equal(galleryPhotos("colombia","central-andes").length,5);
+ assert.equal(galleryPhotos("colombia").length,2);
  assert.deepEqual(galleryPhotos('new-zealand','missing'),[]);
  assert.deepEqual(galleryPhotos('missing'),[]);
 });
@@ -43,3 +45,7 @@ test('every gallery image has unique identity, an existing local file, explicit 
   assert.doesNotMatch(p.licence,/NC|noncommercial/i);
  }
 });
+
+ test('Central Andes photographs are distinct licensed local references with matching file hashes',()=>{
+ const {createHash}=require('node:crypto');const additions=require('../content/place-gallery-additions.json').photos.filter(p=>p.countryId==='colombia');assert.equal(additions.length,5);assert.equal(new Set(additions.map(p=>p.placeId)).size,5);assert.equal(new Set(additions.map(p=>p.originalSha256)).size,5);for(const p of additions){assert.equal(p.regionId,'central-andes');assert.equal(p.licence,'CC BY-SA 4.0');assert.equal(createHash('sha256').update(fs.readFileSync(path.join(__dirname,'../public',p.src))).digest('hex'),p.webSha256);assert.match(p.capturedOn,/^\d{4}-\d{2}-\d{2}$/);assert.ok(p.localityReview.includes('editorial'));}
+ });
