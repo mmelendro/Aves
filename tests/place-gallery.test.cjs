@@ -27,9 +27,9 @@ test('region scopes expose the full same-photo collection and fail closed for un
  assert.equal(galleryPhotos('new-zealand','south-island').length,20);
  assert.equal(galleryPhotos('new-zealand','north-island').length,5);
  assert.equal(galleryPhotos('new-zealand','rakiura').length,5);
- assert.equal(placeGalleryPhotos.length,40);
+ assert.equal(placeGalleryPhotos.length,45);
  assert.equal(galleryPhotos("colombia","central-andes").length,5);
- assert.equal(galleryPhotos("colombia").length,4);
+ assert.equal(galleryPhotos("colombia").length,6);
  assert.deepEqual(galleryPhotos('new-zealand','missing'),[]);
  assert.deepEqual(galleryPhotos('missing'),[]);
 });
@@ -52,4 +52,8 @@ test('every gallery image has unique identity, an existing local file, explicit 
 
 test('Colombia preview balances both reviewed regions and Eastern Andes keeps five independent photographs',()=>{
  const {createHash}=require('node:crypto');const photos=galleryPhotos('colombia','eastern-andes');assert.equal(photos.length,5);assert.equal(new Set(photos.map(p=>p.placeId)).size,5);assert.equal(new Set(photos.map(p=>p.originalSha256)).size,5);const preview=galleryPhotos('colombia');assert.deepEqual(preview.slice(0,2).map(p=>p.regionId),['central-andes','eastern-andes']);for(const p of photos){assert.equal(createHash('sha256').update(fs.readFileSync(path.join(__dirname,'../public',p.src))).digest('hex'),p.webSha256);assert.match(p.capturedOn,/^\d{4}-\d{2}-\d{2}$/);assert.match(p.licence,/^CC (BY|BY-SA) 4.0$|^CC0$/);}
+});
+
+test('Western Andes curation preserves independent sources and represents distinct places before repeat views',()=>{
+ const {createHash}=require('node:crypto');const p=galleryPhotos('colombia','western-andes');assert.equal(p.length,5);assert.equal(new Set(p.map(p=>p.originalSha256)).size,5);assert.equal(new Set(p.slice(0,4).map(p=>p.placeId)).size,4);for(const x of p){assert.equal(createHash('sha256').update(fs.readFileSync(path.join(__dirname,'../public',x.src))).digest('hex'),x.webSha256);assert.match(x.contextSourceUrl,/parquesnacionales.gov.co/);assert.match(x.licence,/^CC BY-SA (2|4).0$/);}const preview=galleryPhotos('colombia');assert.deepEqual(preview.slice(0,3).map(p=>p.regionId),['central-andes','eastern-andes','western-andes']);
 });

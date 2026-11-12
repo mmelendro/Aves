@@ -15,3 +15,9 @@ Validation: 673 tests passed, strict TypeScript, architecture check and producti
 Five distinct landscapes add Chingaza, El Cocuy, Lake Tota, Sumapaz and Lake Guatavita. Photographer credit, commercial-compatible licence, original file hash, rendition hash and review date are retained for every image. The Colombia preview includes two photographs from each reviewed region. Other regions remain pending.
 
 Validation: 674 tests, strict TypeScript, architecture check and production build passed.
+
+## Western Andes increment
+
+Five independent Tatamá and Farallones de Cali landscape photographs retain photographer credits and CC BY-SA 2.0 or 4.0 terms. Country curation represents distinct places before repeating a view, and now alternates three reviewed Colombian regions. These historical photographs do not establish current park or trail access.
+
+Validation: 675 tests, strict TypeScript, architecture check and production build passed. Original roadmap item49 is complete; Cauca Valley is next.
