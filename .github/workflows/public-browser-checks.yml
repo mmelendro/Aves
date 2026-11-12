@@ -25,12 +25,17 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
-      - run: node scripts/prepare-browser-fixtures.mjs
-        env:
-          AVES_BROWSER_FIXTURES: '1'
-      - run: pnpm build
+      - name: Build the production application
+        run: pnpm build
       - run: pnpm check:catalogue-loading
       - run: node scripts/profile-route-bundles.mjs --check-deferred-geometry
       - run: node scripts/check-performance-budgets.mjs
       - run: pnpm exec playwright install --with-deps chromium firefox
+      # Synthetic routes change shared chunk allocation. Measure the deployable
+      # application above, then build the isolated form harness for browser QA.
+      - run: node scripts/prepare-browser-fixtures.mjs
+        env:
+          AVES_BROWSER_FIXTURES: '1'
+      - name: Build the isolated browser harness
+        run: pnpm build
       - run: pnpm test:browser
