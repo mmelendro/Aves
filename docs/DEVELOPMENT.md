@@ -12,6 +12,7 @@ pnpm typecheck
 pnpm test
 pnpm check:architecture
 pnpm build
+pnpm check:catalogue-loading
 ```
 
 The build now runs lint checks. The explicit lint command is also useful before the build. ESLint and the Next configuration are pinned together for the current Next 15 application. The linter's upstream support status must be reviewed with the framework migration under dependency task 22; a passing lint check is not a dependency security assessment.
@@ -19,3 +20,5 @@ The build now runs lint checks. The explicit lint command is also useful before 
 The source reachability check does not prove that every route is useful. Unit and component tests do not prove browser layout, physical touch behaviour or a complete authenticated visitor journey. Keep those acceptance results separate and use a synthetic dataset for private-flow tests.
 
 For a release, retain the tested commit, exact built deployment, browser acceptance and previous deployment. A code rollback does not reverse database or stored-file changes. Keep business finances, private traveller records and authentication material out of source and public release notes.
+
+`check:catalogue-loading` inspects emitted route chunks after a production build. It confirms the NZ checklist media is present in an async chunk and absent from initial homepage, account and island-planner JavaScript. It is a bounded payload regression check, not a browser or touch test.

@@ -10,7 +10,8 @@
     "start": "next start",
     "test": "node --test tests/*.test.cjs",
     "typecheck": "tsc --noEmit",
-    "check:architecture": "node scripts/audit-source.mjs"
+    "check:architecture": "node scripts/audit-source.mjs",
+    "check:catalogue-loading": "node scripts/check-catalogue-loading.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.11",

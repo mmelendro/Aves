@@ -28,7 +28,7 @@ test('reference media keeps living checklist IDs, per-file rights, local files a
  assert.ok(!nzChecklistMedia.has('nz-b09bf97ba22d'),'unidentified crane must not borrow a species photograph')
 })
 test('all living entries have a photo or an explicit pending slot; viewing remains separate from selection',()=>{
- const source=readFileSync(resolve(__dirname,'../components/new-zealand-bird-picker.tsx'),'utf8')
+ const source=readFileSync(resolve(__dirname,'../components/new-zealand-bird-search.tsx'),'utf8')
  assert.match(source,/Image pending/)
  assert.match(source,/nzChecklistMedia\.has\(bird.id\) \? <NewZealandChecklistPhoto/)
  const viewer=readFileSync(resolve(__dirname,'../components/new-zealand-checklist-photo.tsx'),'utf8')

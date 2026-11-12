@@ -11,9 +11,9 @@
 
 ## Validation
 
-- 696 tests pass, including seven new source/identity/pagination/evidence-boundary tests. Strict TypeScript and the production build pass.
+- 698 tests pass, including seven new source/identity/pagination/evidence-boundary tests and two search-loading/recovery tests. Strict TypeScript and the production build pass.
 - ESLint: zero errors, 34 existing warnings. Warnings remain follow-up work, not hidden failures or a dependency-security clearance.
-- Source reachability: 399 modules, no unreachable modules within the scanner. This does not establish that every route or branch is useful.
+- Source reachability: 400 modules, no unreachable modules within the scanner. This does not establish that every route or branch is useful.
 - Production dependency advisory check reports zero known advisories across 218 dependencies at this review. This is a point-in-time advisory check, not a general security guarantee.
 - Node 22 frozen-lockfile install passes. The production build generates 77 static pages and the dynamic reference route.
 - Local production HTTP checks pass for all three country inventories, pagination, source/country canonical metadata, NZ reviewed place links, Partners and contact main targets. Invalid foreign-region input renders the explicit noindex not-found recovery page without another country's results. With streamed Next rendering, that recovery can have HTTP 200 after headers were sent.
@@ -21,11 +21,18 @@
 | Build estimate | Baseline | This increment |
 | --- | ---: | ---: |
 | Sign-in first-load JavaScript | 612 kB | 236 kB |
-| Account dashboard | 629 kB | 399 kB |
-| Global homepage | 503 kB | 507 kB |
+| Account dashboard | 629 kB | 313 kB |
+| Global homepage | 503 kB | 445 kB |
+| South Island | 524 kB | 467 kB |
 | New national reference page | New route | 175 kB |
 
 These are build estimates, not mobile timing measurements. Homepage and existing planner payload work remains open.
+
+## Checklist-loading follow-up
+
+The existing private/public NZ picker now imports its media-heavy search module only after its native details control opens. Selected chips remain available immediately. Closing the search keeps its loaded filters mounted, while selections remain controlled by the parent. A failed module load exposes a retry without replacing or saving choices. A no-JavaScript link points to the server-rendered national inventory.
+
+`pnpm check:catalogue-loading` inspects the actual emitted route chunks. It confirms reference media still exists in an async module and is absent from the initial homepage, account and two island-planner route graphs. The two additional behavioural tests check removal during loading, reopening, failed loading and retry. Hosted browser acceptance is still separate.
 
 ## Open acceptance and data work
 
