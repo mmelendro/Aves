@@ -12,8 +12,14 @@ export default function NorthIslandPlanningLayer({
 }) {
   const trip = useTripMap(),
     { layers } = useMapLayers();
-  const selection = trip?.selectedBase;
-  const handledSelection = useRef(selection);
+  const journeyStep =
+    trip?.journey?.islandId === "north-island"
+      ? trip.journey.steps[trip.journey.index]
+      : undefined;
+  const selection = journeyStep || trip?.selectedBase;
+  const handledSelection = useRef<typeof selection>(
+    journeyStep ? undefined : selection,
+  );
   const fitCorridor = () =>
     map.fitBounds(
       planner.tripAreas.map(
@@ -21,7 +27,7 @@ export default function NorthIslandPlanningLayer({
       ),
       { padding: [40, 40], maxZoom: 9, animate: false },
     );
-  const selected = trip?.selectedBase?.id,
+  const selected = journeyStep?.baseId || trip?.selectedBase?.id,
     select = trip?.selectBase;
   const routeKey = trip?.bases.join("|") || "";
   useEffect(() => {
@@ -30,7 +36,9 @@ export default function NorthIslandPlanningLayer({
           const button = document.createElement("button");
           button.type = "button";
           button.textContent = area.name;
-          button.className = "geographic-map-target";
+          button.className =
+            "geographic-map-target" +
+            (journeyStep?.baseId === area.id ? " aves-journey-target" : "");
           button.setAttribute(
             "aria-label",
             `Preview planning base: ${area.name}`,
@@ -66,14 +74,29 @@ export default function NorthIslandPlanningLayer({
       points.forEach((p) => p.remove());
       route?.remove();
     };
-  }, [map, layers.planning, layers.itinerary, selected, select, routeKey]);
+  }, [
+    map,
+    layers.planning,
+    layers.itinerary,
+    selected,
+    select,
+    routeKey,
+    journeyStep,
+  ]);
   useEffect(() => {
     // Initial/remounted display preserves the geographic engine's camera. Only
     // a new explicit preview request focuses a base, including repeat clicks.
     if (handledSelection.current === selection) return;
     handledSelection.current = selection;
-    const a = planner.tripAreaById.get(selection?.id || "");
-    if (a) map.setView([a.latitude, a.longitude], 9, { animate: false });
+    const a = planner.tripAreaById.get(
+      journeyStep?.baseId || selection?.id || "",
+    );
+    if (a)
+      map.setView([a.latitude, a.longitude], 9, {
+        animate:
+          Boolean(journeyStep) &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      });
   }, [map, selection]);
   return (
     <div className="px-2 py-1 text-xs leading-5 text-emerald-950">

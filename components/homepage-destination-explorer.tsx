@@ -5,6 +5,8 @@
  */
 "use client"
 
+import {useTripMap} from "./trip-planner/trip-map-context"
+import TripJourneyControls from "./trip-planner/trip-journey-controls"
 import {useBirdFilters} from "./bird-filter-context"
 import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
 import { guideMapCue } from "@/lib/guide-map-cue"
@@ -83,9 +85,11 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const sharedHabitat = useContext(SouthIslandHabitatContext)
   const southIsland = zoomed && destination.id === "new-zealand" && region?.id === "south-island"
   const selectedPlace = sharedHabitat ? southIslandLandscapeSlides[sharedHabitat.slideIndex].place : undefined
-  const collection = zoomed ? getDestinationRegionBirds(destination?.id, region?.id) : destinations.flatMap(item=>getDestinationRegionBirds(item.id))
+  const journey=useTripMap()?.journey;
+  const journeyStep=journey&&zoomed&&destination.id==="new-zealand"&&journey.islandId===regionId ? journey.steps[journey.index] : null;
+  const collection = journeyStep ? getDestinationRegionBirds("new-zealand").filter(bird=>journeyStep.birdIds.includes(featuredNzBirdId(bird.scientificName)||"")) : zoomed ? getDestinationRegionBirds(destination?.id, region?.id) : destinations.flatMap(item=>getDestinationRegionBirds(item.id))
   const conservationBirds=filterConservationBirds(collection,filters)
-  const birds = southIsland ? filterSouthIslandBirds(conservationBirds, sharedHabitat?.value ?? "all") : conservationBirds
+  const birds = southIsland && !journeyStep ? filterSouthIslandBirds(conservationBirds, sharedHabitat?.value ?? "all") : conservationBirds
   const filtering=birdFiltersActive(filters)
   const matchingRegionIds=regions.filter(item=>filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters).length>0).map(item=>item.id)
   const matchingCountryIds=destinations.filter(item=>filterConservationBirds(getDestinationRegionBirds(item.id),filters).length>0).map(item=>item.id)
@@ -157,10 +161,11 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
                 </figcaption>
               </figure>}
             </div></MapViewer>}</div>}
-            media={<div key={zoomed ? `${destination.id}:${regionId}:${southIsland ? sharedHabitat?.value : ""}` : "world"} className={styles.mediaPanel}>
+            media={<div key={zoomed ? `${destination.id}:${regionId}:${journeyStep?.baseId || (southIsland ? sharedHabitat?.value : "")}` : "world"} className={styles.mediaPanel}>
               <DestinationCardMedia destination={destination} birds={birds} label={zoomed ? `${region?.name ?? destination.name} bird photographs` : "Birds across AVES destinations"} fillPanel selection={zoomed && destination.id==="new-zealand" ? {isSelected:bird=>wishIds.includes(featuredNzBirdId(bird.scientificName)||""),onToggle:bird=>{const id=featuredNzBirdId(bird.scientificName);if(id)chooseBirds(wishIds.includes(id)?wishIds.filter(value=>value!==id):[...wishIds,id])}} : undefined} />
             </div>} />
         </div>
+        {zoomed&&destination.id==="new-zealand"&&<TripJourneyControls islandId={regionId}/>}
         <div role="group" aria-label="Choose a country to preview" className="mb-6 flex flex-wrap justify-center gap-2 sm:gap-3">
           {destinations.map(country => (
             <button key={country.id} ref={node => { countryButtons.current[country.id] = node }} type="button" aria-pressed={zoomed && destination.id === country.id} aria-controls="homepage-country-preview"

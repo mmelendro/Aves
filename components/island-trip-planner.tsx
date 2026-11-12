@@ -20,6 +20,7 @@ import type {
   TripStyle,
 } from "@/lib/island-planning-types";
 import { useMapLayers } from "./map-layer-context";
+import { buildTripJourney } from "@/lib/trip-journey";
 import { useTripMap } from "./trip-planner/trip-map-context";
 import TripDayCard from "./trip-planner/trip-day-card";
 import TripCatalogue from "./trip-planner/trip-catalogue";
@@ -127,6 +128,7 @@ function IslandPlannerForm() {
   }
   function generate() {
     try {
+      tripMap?.stopJourney();
       const choices = buildPlans(input);
       setAlternatives(choices);
       setDraft(choices[0].draft);
@@ -142,6 +144,7 @@ function IslandPlannerForm() {
   }
   function changeDay(index: number, patch: Partial<TripDay>) {
     if (!draft) return;
+    tripMap?.stopJourney();
     const next = {
       ...draft,
       days: draft.days.map((day, i) =>
@@ -194,11 +197,15 @@ function IslandPlannerForm() {
     : [];
   const routeKey = activeBases.join("|");
   const setMapBases = tripMap?.setBases;
+  const stopMapJourney = tripMap?.stopJourney;
   const selectedMapBase = tripMap?.selectedBase;
   useEffect(() => {
     setMapBases?.(routeKey ? routeKey.split("|") : []);
-    return () => setMapBases?.([]);
-  }, [routeKey, setMapBases]);
+    return () => {
+      setMapBases?.([]);
+      stopMapJourney?.();
+    };
+  }, [routeKey, setMapBases, stopMapJourney]);
   useEffect(() => {
     if (
       !context.corridor &&
@@ -635,6 +642,7 @@ function IslandPlannerForm() {
                         disabled={dirty}
                         className="min-h-24 rounded-2xl border border-emerald-200 bg-white p-4 text-left text-emerald-950 aria-pressed:border-emerald-800 aria-pressed:bg-emerald-100 disabled:opacity-50"
                         onClick={() => {
+                          tripMap?.stopJourney();
                           setDraft(option.draft);
                           setNotice(
                             "Suggestion selected. Daily changes apply to this draft.",
@@ -695,14 +703,38 @@ function IslandPlannerForm() {
                       .join(" → ")}
                   </p>
                 </div>
-                <button
-                  type="button"
-                  className={button}
-                  disabled={dirty}
-                  onClick={carry}
-                >
-                  Review and save in My Trips
-                </button>
+                <div className="flex flex-wrap gap-2">
+                  <a
+                    href={context.mapAnchor}
+                    className={button}
+                    aria-disabled={dirty}
+                    onClick={(event) => {
+                      if (dirty) {
+                        event.preventDefault();
+                        return;
+                      }
+                      tripMap?.startJourney(
+                        context.id,
+                        buildTripJourney(draft, tripAreas, tripPlaces),
+                      );
+                      updateMapLayers({
+                        planning: true,
+                        itinerary: true,
+                        background: "satellite",
+                      });
+                    }}
+                  >
+                    Preview your journey step by step
+                  </a>
+                  <button
+                    type="button"
+                    className={button}
+                    disabled={dirty}
+                    onClick={carry}
+                  >
+                    Review and save in My Trips
+                  </button>
+                </div>
               </div>
               <p className="text-sm leading-6 text-emerald-900">
                 Start:{" "}

@@ -53,12 +53,17 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     if(centre)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
   },[map,layers.point,layers.park,latitude,longitude]);
   const bases=trip?.bases.join("|")??"";
+  const journeyStep=trip?.journey?.islandId==="south-island" ? trip.journey.steps[trip.journey.index] : undefined;
   useEffect(()=>{
     if(!map)return;
     const areas=layers.itinerary?bases.split("|").flatMap(id=>{const a=tripCatalogue.areas.find(a=>a.id===id);return a?[a]:[]}):[];
     const line=polyline(areas.map(a=>[a.latitude,a.longitude]),{color:"#38bdf8",weight:3,dashArray:"7 5",interactive:false}).addTo(map);
-    const markers=areas.map((area,i)=>labelMarker(map,[area.latitude,area.longitude],String(i+1),undefined,false,"routePane"));
+    const markers=areas.map((area,i)=>{
+      const m=labelMarker(map,[area.latitude,area.longitude],String(i+1),undefined,false,"routePane");
+      if(journeyStep?.baseId===area.id)m.getElement()?.querySelector("span")?.classList.add("aves-journey-target");
+      return m;
+    });
     return()=>{line.remove();markers.forEach(m=>m.remove());};
-  },[map,bases,layers.itinerary]);
+  },[map,bases,layers.itinerary,journeyStep]);
   return <><GeographicSatelliteMap country="new-zealand" region="south-island" selectRegion={onSelectIsland} onMapReady={setMap}/><p className="px-2 text-[10px] leading-4">Habitat shading: LCDB 2023/24, generalised to about 2 km · DOC conservation 9 November 2026 · Route connectors show base order, not roads.</p></>;
 }

@@ -1172,3 +1172,8 @@ body {
 
 /* Landscape phones and high browser zoom must be able to scroll past chrome. */
 @media(max-height:480px) { [data-site-header] { position:static; } }
+
+/* Two gentle emphasis cycles on an explicit journey step, never continuous flashing. */
+@keyframes aves-journey-emphasis { 0%,100% { box-shadow:0 0 0 3px #0e749044; } 50% { box-shadow:0 0 0 9px #0e749022; } }
+.aves-journey-target { outline:3px solid #0e7490; outline-offset:3px; animation:aves-journey-emphasis 1.6s ease-in-out 2; }
+@media (prefers-reduced-motion:reduce) { .aves-journey-target { animation:none; } }
