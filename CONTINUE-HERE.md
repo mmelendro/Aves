@@ -28,11 +28,11 @@ Priority bands: items 1–8 are the next gallery releases. Items 9–22 protect 
 
 Photo completion requires distinct real photographs with checked locality, rights, creator, source, alt text and compact accessible credits. Country views curate the regional records; no copied asset libraries, duplicate crops, illustrative bird portraits or invented counts. All pages retain the shared map, carousel controls, enlargement and navigation.
 
-1. Bring Nelson Lakes to five distinct, credited photographs.
+1. Bring Nelson Lakes to five distinct, credited photographs. Delivered in 0e1c9c5, with five photographs in the shared gallery.
 
-2. Bring Fiordland to five distinct, credited photographs.
+2. Bring Fiordland to five distinct, credited photographs. Delivered in 0e1c9c5, with five photographs in the shared gallery.
 
-3. Bring Otago and the Catlins to five distinct, credited photographs.
+3. Bring Otago and the Catlins to five distinct, credited photographs. Delivered in 0e1c9c5, with five photographs in the shared gallery.
 
 4. Bring the North Island collection to five distinct, credited photographs.
 
