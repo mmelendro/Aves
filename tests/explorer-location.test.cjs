@@ -29,14 +29,16 @@ test('unknown or cross-country regions never turn into a false selected place',(
  for(const country of ['missing','constructor','__proto__'])assert.deepEqual(readExplorerLocation('?explore='+country+'&region=south-island',fallback),fallback)
  assert.deepEqual(readExplorerLocation('?explore=colombia&region=south-island',fallback),explorerLocation('colombia'))
  assert.deepEqual(readExplorerLocation('?explore=world&region=caribbean',fallback),explorerLocation())
- assert.equal(explorerLocationHref('/regions/caribbean?explore=colombia&region=caribbean',explorerLocation()),'/?explore=world')
+ assert.equal(explorerLocationHref('/regions/caribbean?explore=colombia&region=caribbean',explorerLocation()),'/regions/caribbean?explore=world')
 })
 
-test('production and preview deployments share the same canonical country hierarchy',()=>{
- const choices=[['australia','new-south-wales','/australia/regions/new-south-wales'],['colombia','caribbean','/regions/caribbean'],['new-zealand','south-island','/new-zealand/south-island'],['new-zealand','north-island','/new-zealand']]
- for(const [country,region,path]of choices){
+test('explorer history preserves its mounted route and round-trips the selected scope on refresh',()=>{
+ const choices=[['australia','new-south-wales'],['colombia','caribbean'],['new-zealand','south-island'],['new-zealand','north-island']]
+ for(const origin of ['https://aves.bio','https://preview.vercel.app'])for(const path of ['/','/australia','/colombia','/new-zealand/south-island'])for(const [country,region]of choices){
   const scope=explorerLocation(country,region)
-  assert.equal(new URL(explorerLocationHref('https://aves.bio/australia',scope),'https://aves.bio').pathname,path)
-  assert.equal(new URL(explorerLocationHref('https://preview.vercel.app/australia',scope),'https://preview.vercel.app').pathname,path)
+  const restored=new URL(explorerLocationHref(origin+path+'?utm_source=example',scope),origin)
+  assert.equal(restored.pathname,path,'shallow history must not impersonate a different route')
+  assert.equal(restored.searchParams.get('utm_source'),'example')
+  assert.deepEqual(readExplorerLocation(restored.search,explorerLocation()),scope)
  }
 })

@@ -8,6 +8,9 @@
 
 import { useState, useEffect, createContext, useContext, type ReactNode } from "react"
 
+type ConsentValue = "granted" | "denied"
+type ConsentWindow = Window & { gtag?: (command: "consent", action: "update", values: Partial<Record<"analytics_storage" | "ad_storage" | "ad_user_data" | "ad_personalization", ConsentValue>>) => void }
+
 export interface CookiePreferences {
   essential: boolean
   analytics: boolean
@@ -123,42 +126,18 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
   }
 
   const applyPreferences = (prefs: CookiePreferences) => {
-    // Apply analytics preferences
-    if (prefs.analytics) {
-      // Enable Google Analytics or other analytics
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        ;(window as any).gtag("consent", "update", {
-          analytics_storage: "granted",
-        })
-      }
-    } else {
-      // Disable analytics
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        ;(window as any).gtag("consent", "update", {
-          analytics_storage: "denied",
-        })
-      }
-    }
-
-    // Apply marketing preferences
-    if (prefs.marketing) {
-      // Enable marketing cookies
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        ;(window as any).gtag("consent", "update", {
-          ad_storage: "granted",
-          ad_user_data: "granted",
-          ad_personalization: "granted",
-        })
-      }
-    } else {
-      // Disable marketing cookies
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        ;(window as any).gtag("consent", "update", {
-          ad_storage: "denied",
-          ad_user_data: "denied",
-          ad_personalization: "denied",
-        })
-      }
+    // Update an existing analytics integration; this does not load one.
+    const analyticsWindow = typeof window === "undefined" ? undefined : window as ConsentWindow
+    if (analyticsWindow?.gtag) {
+      analyticsWindow.gtag("consent", "update", {
+        analytics_storage: prefs.analytics ? "granted" : "denied",
+      })
+      const marketing: ConsentValue = prefs.marketing ? "granted" : "denied"
+      analyticsWindow.gtag("consent", "update", {
+        ad_storage: marketing,
+        ad_user_data: marketing,
+        ad_personalization: marketing,
+      })
     }
 
     // Dispatch custom event for other parts of the app

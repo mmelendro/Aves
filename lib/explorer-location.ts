@@ -22,13 +22,9 @@ export function readExplorerLocation(search:string, fallback:ExplorerLocation):E
 export function explorerLocationHref(href:string,location:ExplorerLocation):string {
   const url=new URL(href,"https://aves.bio")
   const known=explorerLocation(location.country,location.region)
-  // Every deployment contains the same public hierarchy, including previews.
-  {
-    url.pathname=!known.country ? "/" : known.country==="colombia" && known.region ? `/regions/${known.region}`
-      : known.country==="australia" && known.region ? `/australia/regions/${known.region}`
-      : known.country==="new-zealand" && known.region==="south-island" ? "/new-zealand/south-island"
-      : `/${known.country}`
-  }
+  // This is a change inside the mounted explorer, not a route navigation.
+  // Keep its page shell on refresh and Back/Forward. Explicit guide links still
+  // open the canonical country/region page through the existing hierarchy.
   url.searchParams.set("explore",known.country || "world")
   if(known.region)url.searchParams.set("region",known.region);else url.searchParams.delete("region")
   return `${url.pathname}${url.search}${url.hash}`

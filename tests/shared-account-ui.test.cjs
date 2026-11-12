@@ -374,7 +374,8 @@ test("public and account footers link to Colombia separately from all destinatio
   assert.ok(find(publicFooter, node => node.props.href === "/australia/contact?intent=waitlist"))
   assert.ok(find(publicFooter, node => node.props.href === "/account"))
   const accountShell = componentHarness("components/account/account-shell.tsx", "AccountShell", { title: "Account", description: "Trips" }, { mocks: { "@/components/page-shell": { PageShell: "PageShell" }, "@/features/australia/components/page-shell": { PageShell: "PageShell" } } }).render()
-  const accountFooter = accountShell.props.footer.type(accountShell.props.footer.props)
+  const accountFooterElement = find(accountShell, node => node.type?.name === "GlobalFooter")
+  const accountFooter = accountFooterElement.type(accountFooterElement.props)
   for (const footer of [publicFooter, accountFooter]) {
     assert.equal(find(footer, node => ["https://aves.bio/", "/"].includes(node.props.href)).props.children, "All destinations")
     assert.match(JSON.stringify(find(footer, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children), /Colombia/)
