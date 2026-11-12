@@ -23,6 +23,7 @@ Group ownership is explicit metadata. Renaming an editorial group cannot move it
 | Responsibility | Source |
 | --- | --- |
 | Shared country/region explorer | `components/destination-explorer-page.tsx`, `components/homepage-destination-explorer.tsx` |
+| Shared country landscape gallery and balanced regional curation | `components/place-gallery.tsx`, `lib/place-gallery.ts`, existing `content/south-island-place-media.ts` and reviewed `content/place-gallery-additions.json` |
 | Shared island input state, alternatives and explicit handoff | `components/island-trip-planner.tsx`, `components/trip-planner/island-planner-context.tsx`; South Island page compatibility wrapper retained |
 | Itinerary layer on the regional explorer | `components/trip-planner/trip-route-overlay.tsx`, `trip-map-context.tsx` |
 | One editable day | `components/trip-planner/trip-day-card.tsx` |
@@ -91,3 +92,5 @@ North Island/Rakiura parks: NewZealandProtectedAreas reuses ProtectedAreaExplore
 North Island map: `NorthIslandPlanningLayer` adds broad settlement references and itinerary order to the existing geographic surface. It never adds a second map. An explicit fit control uses the three reviewed coordinates. Only a new preview request focuses a base, preserving restored camera state on remounts. Selection filters the shared catalogue without breaking the fixed corridor. The shared layer picker exposes only supported NI bases/itinerary choices.
 
 Legacy conservation/resources correction: results need source/method/period records; the public page describes proposed actions and explicit non-certification. Unsupported current carbon-neutral/trust/ranking and podcast-endorsement claims were removed. Unused BeforeAfterSlider was retired. Do not restore the old comparison as evidence of an AVES impact result.
+
+Country gallery pilot: New Zealand overview and island views use the same credited photo records. Country curation alternates islands and caps overview contributions at two photos per island; selecting a region exposes its full reviewed collection. Photo selection previews a region without changing bird membership, geographic scope or camera memory. `GeographicScope.highlightRegion` is visual context only and must never enter the camera-effect dependencies. South Island retains its existing shared habitat/place discovery state and landscape viewer. Colombia/Australia photo rollout is queued, not implied by the reusable component.

@@ -70,3 +70,5 @@ First example: prepare an owner-reviewed Colombia pilot journal from actual supp
 ## Gallery priority update · 12 November 2026
 
 The owner prioritised five-photo regional galleries and country/subregion gallery connections before journal implementation. CONTINUE-HERE.md contains the sole ranked 90-item queue. Keep the journal example private and its feature work queued after gallery and New Zealand pilot checks. Country curation must remain balanced across available regions, label incomplete collections honestly and use the same reviewed photo records as detailed galleries. Reassess the candidate backlog after each release and pilot feedback; new defects and privacy risks outrank optional expansion.
+
+Published gallery pilot: Arthur’s Pass5; Nelson Lakes2; Fiordland2; Otago/the Catlins2; North Island1; Rakiura1. The four-photo New Zealand country preview reuses these same reviewed records, alternates islands and highlights the existing map without changing its camera. The next increment is Nelson Lakes to five. Wider country coverage is incomplete.
