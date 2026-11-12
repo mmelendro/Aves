@@ -432,7 +432,7 @@ test("public place layers deduplicate shared projects and distinguish business e
   const loader = createLoader()
   const {visiblePublicPlaces,publicPlaceCategories,publicPlaces} = loader("lib/south-island-public-places.ts")
   const all = Object.fromEntries(publicPlaceCategories.map(category=>[category.id,true]))
-  const points = visiblePublicPlaces(all,Date.parse("2026-11-11T12:00:00Z"))
+  const points = visiblePublicPlaces(all,Date.parse("2026-11-13T12:00:00Z"))
   assert.equal(points.length,30)
   assert.equal(new Set(points.map(point=>point.id)).size,30)
   const businesses = visiblePublicPlaces({...Object.fromEntries(publicPlaceCategories.map(category=>[category.id,false])),businesses:true})

@@ -92,11 +92,11 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const journey=useTripMap()?.journey;
   const journeyStep=journey&&zoomed&&destination.id==="new-zealand"&&journey.islandId===regionId ? journey.steps[journey.index] : null;
   const collection = journeyStep ? journeyBirdProfiles(getDestinationRegionBirds("new-zealand"),journeyStep,regionId,featuredNzBirdId) : zoomed ? getDestinationRegionBirds(destination?.id, region?.id) : destinations.flatMap(item=>getDestinationRegionBirds(item.id))
-  const conservationBirds=filterConservationBirds(collection,filters)
+  const conservationBirds=filterConservationBirds(collection,filters,destination.id)
   const birds = southIsland && !journeyStep ? filterSouthIslandBirds(conservationBirds, sharedHabitat?.value ?? "all") : conservationBirds
   const filtering=birdFiltersActive(filters)
-  const matchingRegionIds=regions.filter(item=>filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters).length>0).map(item=>item.id)
-  const matchingCountryIds=destinations.filter(item=>filterConservationBirds(getDestinationRegionBirds(item.id),filters).length>0).map(item=>item.id)
+  const matchingRegionIds=regions.filter(item=>filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters,destination.id).length>0).map(item=>item.id)
+  const matchingCountryIds=destinations.filter(item=>filterConservationBirds(getDestinationRegionBirds(item.id),filters,item.id).length>0).map(item=>item.id)
   useEffect(()=>{onScopeChange?.(zoomed ? destination.id : "",region?.id ?? "")},[zoomed,destination.id,region?.id,onScopeChange])
   const contactHref = enquiryHref(destination.id, region?.id)
   const galleryRegion = zoomed && !southIsland ? (galleryPhoto?.countryId === destination.id ? galleryPhoto.regionId : galleryPhotos(destination.id,regionId)[0]?.regionId ?? "") : ""
@@ -139,7 +139,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
               <div className={styles.islandScope}>
                 <button type="button" className={styles.backButton} onClick={backToWorld}>World</button>
                 <label className="sr-only" htmlFor="explorer-island">Explore an island</label>
-                <select id="explorer-island" aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}{filtering ? ` · ${filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters).length} matches` : ""}</option>)}</select>
+                <select id="explorer-island" aria-label="Explore a New Zealand island" value={regionId} className={styles.regionSelect} onChange={event=>selectRegion(event.target.value)}><option value="">All New Zealand</option>{regions.map(item=><option key={item.id} value={item.id}>{item.name}{filtering ? ` · ${filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters,destination.id).length} matches` : ""}</option>)}</select>
               </div>
             </div> : <MapViewer geographicScope={{country:zoomed?destination.id:"",region:regionId,highlightRegion:!regionId&&!showBirdAreas?galleryRegion:undefined,selectCountry:id=>id?selectDestination(id):backToWorld(),selectRegion}} layerControl={<CountrySatelliteControl country={zoomed ? destination.id : ""} region={regionId}/>} label="Destination explorer map" viewKey={`${selectedId}:${regionId}`} onZoomOutAtMinimum={zoomed ? ()=>region ? selectRegion("") : backToWorld() : undefined} credits="AVES planning regions · Natural Earth public-domain geography"><div className={styles.mapStage} data-map-view={zoomed ? "country" : "world"}>
               {/* Both views share one footprint. Inert also removes the hidden

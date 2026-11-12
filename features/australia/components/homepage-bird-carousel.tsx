@@ -58,7 +58,7 @@ export default function HomepageBirdCarousel({
   label = "Bird photographs",
 }: HomepageBirdCarouselProps) {
   const {filters}=useBirdFilters()
-  const birds=filterConservationBirds(suppliedBirds,filters)
+  const birds=filterConservationBirds(suppliedBirds,filters,"australia")
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
   const [currentIndex, setCurrentIndex] = useState(0)

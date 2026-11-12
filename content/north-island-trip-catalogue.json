@@ -273,7 +273,7 @@
       "tags": [
         "Captive/falconry"
       ],
-      "checkedAt": "2026-11-11",
+      "checkedAt": "2026-11-13",
       "sources": [
         "https://www.wingspan.co.nz/wingspan-bird-of-prey-centre-visits",
         "https://www.wingspan.co.nz/"
@@ -286,7 +286,8 @@
         4,
         5,
         6
-      ]
+      ],
+      "calendarSource": "https://www.wingspan.co.nz/wingspan-bird-of-prey-centre-visits"
     },
     {
       "id": "trip-ni-te-puia",
@@ -478,11 +479,12 @@
       "birdIds": [],
       "encounter": "not-applicable",
       "tags": [],
-      "checkedAt": "2026-11-12",
+      "checkedAt": "2026-11-13",
       "shortTransferStop": false,
       "sources": [
         "https://tewharetaonga.nz/visit"
-      ]
+      ],
+      "calendarSource": "https://tewharetaonga.nz/visit"
     }
   ]
 }

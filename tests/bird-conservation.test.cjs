@@ -5,6 +5,24 @@ const data=require('../content/bird-conservation.json')
 const {birdConservation,filterConservationBirds,matchesBirdFilters,defaultBirdFilters}=load('lib/bird-conservation.ts')
 const bird=name=>({scientificName:name})
 
+test('origin and endemic filters follow the selected country while leaving saved targets intact',()=>{
+ const {birdCountryOrigin}=load('lib/bird-conservation.ts')
+ const kea={scientificName:'Nestor notabilis'}, unknown={scientificName:'Unknown scientificus'}
+ const selected=[kea,unknown], before=structuredClone(selected)
+ assert.equal(birdCountryOrigin(kea,'new-zealand'),'endemic')
+ assert.equal(matchesBirdFilters(kea,{origin:'native',endemicOnly:true,status:'EN'},'new-zealand'),true)
+ assert.equal(matchesBirdFilters(kea,{endemicOnly:true,status:'all'},'australia'),false)
+ assert.equal(matchesBirdFilters(unknown,{origin:'unknown',endemicOnly:false,status:'unknown'},'colombia'),true)
+ assert.equal(matchesBirdFilters(unknown,{origin:'native',endemicOnly:false,status:'all'},'colombia'),false)
+ filterConservationBirds(selected,{origin:'native',endemicOnly:true,status:'EN'},'new-zealand')
+ assert.deepEqual(selected,before)
+ const {newZealandChecklist}=load('content/new-zealand-checklist.ts')
+ const introduced=newZealandChecklist.find(b=>b.origin==='Introduced')
+ assert.ok(introduced)
+ assert.equal(matchesBirdFilters(introduced,{origin:'introduced',endemicOnly:false,status:'all'},'new-zealand'),true)
+ assert.equal(matchesBirdFilters(introduced,{origin:'native',endemicOnly:false,status:'all'},'new-zealand'),false)
+})
+
 test('every photographed species has a dated, linked global status and unique species identity',()=>{
  const {destinationBirds}=load('content/destination-birds.ts')
  const names=new Set(Object.values(destinationBirds).flat().map(b=>b.scientificName.split(' ').slice(0,2).join(' ')))

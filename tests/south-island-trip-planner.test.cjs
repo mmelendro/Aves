@@ -6,6 +6,18 @@ const catalogue=load('content/south-island-trip-catalogue.json')
 const {selectableNzBirds}=load('content/new-zealand-checklist.ts')
 const id=name=>selectableNzBirds.find(b=>b.commonName===name).id
 const input=overrides=>({...p.defaultTripInput,birdIds:[id('Kea'),id('Northern Royal Albatross')],days:7,...overrides})
+
+test('reviewed seasons exclude boundary dates and Christmas closures and qualify local access alternatives',()=>{
+ const {placeFitsCalendar,tripDayWorkload}=p.southIslandPlanner
+ const market=p.tripPlaceById.get('trip-remarkables-market')
+ for(const date of ['2026-10-03','2027-04-10'])assert.equal(placeFitsCalendar(market,input({days:1,departureDate:date}),0),true,date)
+ for(const date of ['2026-09-26','2026-12-26','2027-04-17','2026-12-23'])assert.equal(placeFitsCalendar(market,input({days:1,departureDate:date}),0),false,date)
+ const access=p.tripPlaceById.get('trip-arthurs-pass-information')
+ assert.equal(placeFitsCalendar(access,input({days:1,departureDate:'2026-12-25'}),0),false)
+ const d=p.buildSouthIslandTrip(input({days:1,areaId:'arthurs-pass',birdIds:[id('Kea')],departureDate:'2026-12-24'}))
+ assert.ok(tripDayWorkload(d,0).notes.some(n=>n.includes('Local access alternative')))
+ assert.equal(access.indoorAlternative,undefined,'temporary information portacom is not promised as indoor recreation')
+})
 function storage(){const s=new Map();return{getItem:k=>s.get(k)||null,setItem:(k,v)=>s.set(k,v),removeItem:k=>s.delete(k)}}
 test('the broader catalogue covers every requested category, named stays and evidence-scoped food',()=>{
  assert.ok(catalogue.places.length>=40);assert.equal(catalogue.areas.length,15)
@@ -15,7 +27,7 @@ test('the broader catalogue covers every requested category, named stays and evi
  assert.ok(p.tripPlaces.filter(p=>p.categories.includes('markets')).length>=4)
  for(const place of p.tripPlaces){
   assert.ok(p.tripAreaById.has(place.base));assert.equal(new URL(place.url).protocol,'https:')
-  assert.match(place.checkedAt,/^2026-11-(11|12)$/)
+  assert.match(place.checkedAt,/^2026-11-(11|12|13)$/)
   assert.ok(place.birdIds.every(id=>selectableNzBirds.some(b=>b.id===id)))
   if(place.tags.includes('organic-ingredients')||place.tags.includes('farm-to-table'))assert.ok(place.eco?.kind==='operator')
  }

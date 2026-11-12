@@ -124,7 +124,7 @@ export default async function RegionPage({ params }: Props) {
           </div>
           <div className="mx-auto max-w-3xl">
             <ExpandableMedia label={`${region.state} regional bird photographs`}>
-              <HomepageBirdCarousel birds={regionalBirds} label={`${region.state} regional bird photographs`} variant="destination-card" autoPlay={false} priority={false} showBirdPicker />
+              <HomepageBirdCarousel countryId="australia" birds={regionalBirds} label={`${region.state} regional bird photographs`} variant="destination-card" autoPlay={false} priority={false} showBirdPicker />
             </ExpandableMedia>
           </div>
           <p className="mt-4 text-sm leading-6 text-gray-600">Choose a bird, then open its information for habitat, regional context and sources. <a href="#country-discovery-map" className="inline-flex min-h-11 items-center font-medium text-emerald-800 underline underline-offset-4">Back to the regional map</a></p>

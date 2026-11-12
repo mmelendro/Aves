@@ -48,7 +48,7 @@ const surroundingIslands = contextRegions.features.filter(f => f.properties.id !
 export default function SouthIslandEcosystemMap({ matchingHabitats, selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum, onSelectIsland }: Props) {
   const { layers } = useMapLayers()
   const {filters}=useBirdFilters()
-  const matches=matchingHabitats ?? (birdFiltersActive(filters) ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(filterConservationBirds(newZealandRegionBirds("south-island"),filters),item.id).length>0).map(item=>item.id) : undefined)
+  const matches=matchingHabitats ?? (birdFiltersActive(filters) ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(filterConservationBirds(newZealandRegionBirds("south-island"),filters,"new-zealand"),item.id).length>0).map(item=>item.id) : undefined)
   const satellite = layers.background === "satellite"
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)

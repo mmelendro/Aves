@@ -27,13 +27,13 @@ test('published sanctuary opening days block price comparison for a closed day',
  assert.equal(r.referenceAmounts('trip-orokonui',input(),'2027-01-19',now).low,null)
  assert.equal(r.referenceAmounts('trip-orokonui',input(),'2027-01-17',now).low,27)
 })
-test('daily activity comparisons aggregate known outings and preserve missing costs',()=>{
+test('primary and alternative outings remain separate costs, including missing references',()=>{
  const draft={version:1,input:input({days:1,activityBasis:'day',allowances:{activities:50}}),days:[{baseId:'hanmer',birdingId:'trip-orokonui',extraId:'trip-hanmer',stayId:''}]}
  const review=r.priceReviewRows(draft,now)
- assert.equal(review.rows[0].low,70);assert.equal(r.comparisonLabel(review.rows[0]),'Reference above allowance')
+ assert.deepEqual(review.rows.map(row=>row.low),[27,43]);assert.match(review.rows[0].label,/Primary outing/);assert.match(review.rows[1].label,/Alternative/)
  draft.days[0].birdingId='trip-arthurs-birds'
- const partial=r.priceReviewRows(draft,now).rows[0]
- assert.equal(partial.low,43);assert.equal(partial.unknown,1);assert.match(r.comparisonLabel(partial),/other prices missing/)
+ const partial=r.priceReviewRows(draft,now).rows
+ assert.equal(partial[0].low,null);assert.equal(partial[0].unknown,1);assert.equal(partial[1].low,43);assert.match(r.comparisonLabel(partial[0]),/needs review/)
  draft.input.activityBasis='experience'
  assert.equal(r.priceReviewRows(draft,now).rows.length,2)
 })

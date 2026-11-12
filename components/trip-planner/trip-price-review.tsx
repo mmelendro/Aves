@@ -24,7 +24,7 @@ export default function TripPriceReview({ draft }: { draft: TripDraft }) {
           Compare references with your allowances
         </summary>
         <p className="mt-2 text-sm leading-6">
-          {result.reviewed} of {result.selected} selected stay/outing costs have
+          {result.reviewed} of {result.selected} candidate stay/outing costs have
           comparable published references. Adult costs only ·{" "}
           {draft.input.adults ?? 1}{" "}
           {draft.input.adults === 1 ? "adult" : "adults"} ·{" "}
@@ -36,13 +36,14 @@ export default function TripPriceReview({ draft }: { draft: TripDraft }) {
           Food, transport, extras and unpriced items remain open. A reference
           below your allowance does not confirm affordability or availability.
           Only NZD references are currently compared; other currencies require a
-          quote. Daily activity subtotals include the optional alternative;
-          choose one outing if it replaces the other.
+          quote. Primary and alternative outings are separate options. They are
+          compared individually against your allowance and are never added into
+          a combined trip price.
         </p>
         <p className="mt-2 text-xs leading-6 text-gray-600">
           Stays compare per night. Outings compare{" "}
           {draft.input.activityBasis === "day"
-            ? "the known daily subtotal"
+            ? "each outing option against your daily allowance"
             : "each planned experience"}
           .
         </p>

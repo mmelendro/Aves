@@ -3,7 +3,7 @@ const assert=require('node:assert/strict')
 const load=require('./helpers/load-ts.cjs')()
 const pilot=load('content/bcorp-south-island-pilot.json')
 const {bcorpPinEligible,eligibleBcorpPilotPins}=load('lib/bcorp-pilot.ts')
-const now=Date.parse('2026-11-11T12:00:00Z')
+const now=Date.parse('2026-11-13T12:00:00Z')
 function synthetic(){return{...structuredClone(pilot.records[0]),id:'synthetic-coordinate-fixture',location:{...pilot.records[0].location,coordinates:{latitude:-43,longitude:172},coordinateReview:'verified-public-location',coordinateSourceUrl:'https://example.invalid/synthetic-coordinate-proof'}}}
 test('reviewed pilot exposes five address references from four certified companies only in its region',()=>{
  assert.equal(pilot.records.length,5);assert.equal(pilot.accessReview.mapLayerEnabled,true);assert.equal(pilot.accessReview.logoUse,false)
@@ -26,7 +26,7 @@ test('display guard requires all manual provenance states and the exact official
  const record=synthetic();record.location.review='pending';assert.equal(bcorpPinEligible(record,now),false)
 })
 test('missing, invalid, stale or future provenance cannot yield a pin',()=>{
- for(const date of ['2020-01-01','2026-11-12','2026-02-30','']){
+ for(const date of ['2020-01-01','2026-11-14','2026-02-30','']){
   const record=synthetic();record.certification.checkedAt=date;assert.equal(bcorpPinEligible(record,now),false)
  }
  for(const coordinates of [null,{latitude:NaN,longitude:172},{latitude:-91,longitude:172},{latitude:-43,longitude:181}]){

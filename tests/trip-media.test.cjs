@@ -12,6 +12,25 @@ function harness(results=[],auth=0,storageOptions={}){let AccountError;const que
 const own={data:{id:plan,details:{country:'new-zealand'}},error:null},workspace={data:{data:{entries:[{id:entry,deleted:false}]}},error:null};
 const req=(bytes=wav,type='audio/wav',origin='https://aves.bio')=>new Request(`https://aves.bio/api/account/plans/${plan}/media?entry=${entry}`,{method:'POST',headers:{origin,'content-type':type,'idempotency-key':id},body:bytes});
 const patch=(body,method='PATCH')=>new Request('https://aves.bio/api/account/plans/'+plan+'/media/'+id,{method,headers:{origin:'https://aves.bio','content-type':'application/json'},body:JSON.stringify(body)});
+
+test('foreign trip IDs deny entry file lists, previews, range reads, downloads, edits and deletes before storage',async()=>{
+ const absent={data:null,error:null}
+ const cases=[h=>h.mediaGet(plan),h=>h.mediaContent(plan,id),h=>h.mediaContent(plan,id,'bytes=0-11'),h=>h.mediaContent(plan,id,null,true),h=>h.mediaPatch(patch({caption:'Private',creator:'Owner',recordedOn:'',position:0,notes:'',expectedRevision:1}),plan,id),h=>h.mediaDelete(patch({expectedRevision:1},'DELETE'),plan,id)]
+ for(const run of cases){
+  const h=harness([absent]);const r=await run(h)
+  assert.equal(r.status,404);assert.equal(h.storageCalls.length,0);assert.equal(h.queries.length,1)
+  assert.equal(h.queries[0].table,'trip_plans')
+  assert.ok(h.queries[0].ops.some(op=>op[0]==='eq'&&op[1]==='user_id'&&op[2]===owner))
+ }
+})
+test('a foreign media ID on an owned trip remains inaccessible through preview and attachment URLs',async()=>{
+ for(const download of [false,true]){
+  const h=harness([own,{data:null,error:null}]);const r=await h.mediaContent(plan,id,null,download)
+  assert.equal(r.status,404);assert.equal(h.storageCalls.length,0)
+  const ops=h.queries[1].ops
+  for(const [key,value]of [['plan_id',plan],['user_id',owner],['id',id]])assert.ok(ops.some(op=>op[0]==='eq'&&op[1]===key&&op[2]===value))
+ }
+})
 test('media supports bounded known formats and rejects HTML, SVG and malformed signatures',()=>{
  assert.equal(p.mediaSignature(wav),'audio/wav');assert.equal(p.mediaSignature(new Uint8Array(Buffer.from('<svg onload="alert(1)"></svg>'))),null);assert.equal(p.mediaSignature(new Uint8Array(2)),null);assert.equal(p.MAX_TRIP_MEDIA_BYTES,3145728);
  assert.equal(p.mediaDetailsSchema.safeParse({caption:'Lake',creator:'Photographer',recordedOn:'2026-02-30',position:0,notes:''}).success,false);

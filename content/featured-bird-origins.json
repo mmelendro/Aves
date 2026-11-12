@@ -1,0 +1,346 @@
+{
+  "reviewedOn": "2026-11-13",
+  "scope": "Country-level origin for featured birds, copied from the published national inventory. A country record is not proof of origin in a particular region.",
+  "countries": {
+    "colombia": {
+      "sources": [
+        {
+          "id": "ccro-2026",
+          "url": "https://ccro.asociacioncolombianadeornitologia.org/lista-oficial-de-aves-de-colombia/",
+          "edition": "July 2026",
+          "reviewed": "2026-11-13"
+        },
+        {
+          "id": "aco-2022",
+          "url": "https://doi.org/10.15472/qhsz0p",
+          "edition": "2022 checklist, dataset v1.5 (2023)",
+          "reviewed": "2026-11-13"
+        }
+      ],
+      "species": {
+        "Oxypogon guerinii": {
+          "origin": "endemic",
+          "sourceId": "ccro-2026"
+        },
+        "Chalcostigma herrani": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Andigena nigrirostris": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Grallaria ruficapilla": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Momotus aequatorialis": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Cardinalis phoeniceus": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Boissonneaua jardini": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Ceratopipra erythrocephala": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Machaeropterus striolatus": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Columbina squammata": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Ramphastos ambiguus": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Pharomachrus auriceps": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Atlapetes melanocephalus": {
+          "origin": "endemic",
+          "sourceId": "ccro-2026"
+        },
+        "Pyrrhura viridicata": {
+          "origin": "endemic",
+          "sourceId": "ccro-2026"
+        },
+        "Coeligena phalerata": {
+          "origin": "endemic",
+          "sourceId": "ccro-2026"
+        },
+        "Jabiru mycteria": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Eudocimus ruber": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Opisthocomus hoazin": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Ara macao": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Eurypyga helias": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Ramphastos brevis": {
+          "origin": "native",
+          "sourceId": "ccro-2026"
+        },
+        "Myiarchus apicalis": {
+          "origin": "endemic",
+          "sourceId": "ccro-2026"
+        }
+      }
+    },
+    "australia": {
+      "sources": [
+        {
+          "id": "bq-2026",
+          "url": "https://birdsqueensland.org.au/what-bird-is-this/bird-lists/",
+          "edition": "AviList 2026, release 2, 20 October 2026",
+          "reviewed": "2026-11-13"
+        },
+        {
+          "id": "wlab-2023",
+          "url": "https://birdata.birdlife.org.au/taxonomy-25",
+          "edition": "WLAB v4.3, 19 October 2023",
+          "reviewed": "2026-11-13"
+        }
+      ],
+      "species": {
+        "Malurus cyaneus": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Trichoglossus moluccanus": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Cacatua galerita": {
+          "origin": "native",
+          "sourceId": "bq-2026"
+        },
+        "Dacelo novaeguineae": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Gymnorhina tibicen": {
+          "origin": "native",
+          "sourceId": "bq-2026"
+        },
+        "Eolophus roseicapilla": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Dromaius novaehollandiae": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Casuarius casuarius": {
+          "origin": "native",
+          "sourceId": "bq-2026"
+        },
+        "Menura novaehollandiae": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Platycercus elegans": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Platycercus eximius": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Alisterus scapularis": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Ptilonorhynchus violaceus": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Sericulus chrysocephalus": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Ptiloris victoriae": {
+          "origin": "unknown",
+          "sourceId": "bq-2026"
+        },
+        "Malurus splendens": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Chloebia gouldiae": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Calyptorhynchus banksii": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Zanda latirostris": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        },
+        "Pardalotus quadragintus": {
+          "origin": "endemic",
+          "sourceId": "bq-2026"
+        }
+      }
+    },
+    "new-zealand": {
+      "sources": [
+        {
+          "id": "birdsnz-2024",
+          "url": "https://www.birdsnz.org.nz/society-publications/checklist/",
+          "edition": "Sixth edition, 2024",
+          "reviewed": "2026-11-13"
+        }
+      ],
+      "species": {
+        "Nestor notabilis": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Prosthemadera novaeseelandiae": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Rhipidura fuliginosa": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Porphyrio hochstetteri": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Eudyptula minor": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Apteryx australis": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Anthornis melanura": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Gerygone igata": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Nestor meridionalis": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Ninox novaeseelandiae": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Hemiphaga novaeseelandiae": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Falco novaeseelandiae": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Cyanoramphus novaezelandiae": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Cyanoramphus malherbi": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Petroica australis": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Tadorna variegata": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Xenicus gilviventris": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Philesturnus carunculatus": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Zosterops lateralis": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Petroica macrocephala": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Gallirallus australis": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Procellaria westlandica": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Ardea alba": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Megadyptes antipodes": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Mohoua ochrocephala": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Podiceps cristatus": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Himantopus novaezelandiae": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Hymenolaimus malacorhynchos": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Puffinus huttoni": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        },
+        "Botaurus poiciloptilus": {
+          "origin": "native",
+          "sourceId": "birdsnz-2024"
+        },
+        "Acanthisitta chloris": {
+          "origin": "endemic",
+          "sourceId": "birdsnz-2024"
+        }
+      }
+    }
+  }
+}

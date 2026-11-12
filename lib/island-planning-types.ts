@@ -36,7 +36,12 @@ export type TripPlace = {
   weekdays?: number[];
   months?: number[];
   excludedMonthDays?: string[];
+  excludedDates?: string[];
+  calendarValidFrom?: string;
+  calendarValidUntil?: string;
+  calendarSource?: string;
   indoorAlternative?: boolean;
+  accessAlternative?: boolean;
   visitReference?: {
     minutes: number;
     scope: string;

@@ -2,16 +2,16 @@ const {test}=require('node:test')
 const assert=require('node:assert/strict')
 const {componentHarness,nodes,find}=require('./helpers/component-harness.cjs')
 
-test('filter controls share both criteria, expose a native overlay and reset only bird filters',()=>{
+test('filter controls share origin and conservation criteria, expose a native overlay and reset only bird filters',()=>{
  let filters={endemicOnly:false,status:'all'}
  const h=componentHarness('components/bird-filter-controls.tsx','default',{}, {mocks:{'./bird-filter-context':{useBirdFilters:()=>({filters,setFilters:next=>{filters=next}})}}})
  let tree=h.render()
  assert.ok(nodes(tree).some(n=>n.props.popover==='auto'),'native top layer avoids map/card overflow clipping')
  find(tree,n=>n.type==='input').props.onChange({target:{checked:true}})
- tree=h.render();find(tree,n=>n.type==='select').props.onChange({target:{value:'EN'}})
+ tree=h.render();find(tree,n=>n.type==='select'&&n.props.id.endsWith('-status')).props.onChange({target:{value:'EN'}})
  assert.deepEqual(filters,{endemicOnly:true,status:'EN'})
  tree=h.render();find(tree,n=>n.type==='button'&&n.props.children==='Clear bird filters').props.onClick()
- assert.deepEqual(filters,{endemicOnly:false,status:'all'})
+ assert.deepEqual(filters,{endemicOnly:false,status:'all',origin:'all'})
 })
 test('the unified explorer uses the filtered set for map areas, bird cue, carousel and planning copy',()=>{
  const mocks={

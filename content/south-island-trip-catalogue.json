@@ -604,13 +604,13 @@
       "tags": [
         "local-produce"
       ],
-      "checkedAt": "2026-11-11",
+      "checkedAt": "2026-11-13",
       "eco": {
         "kind": "operator",
         "note": "The organiser describes waste reduction, recycling and composting practices; this does not certify each vendor or product.",
         "url": "https://remarkablesmarket.com/"
       },
-      "when": "Seasonal Saturdays; confirm the current season and dates.",
+      "when": "Published Saturday season: 3 October 2026 to 10 April 2027, 10:00 to 14:00. Closed 26 December 2026. A separate 23 December twilight event is not added to the regular Saturday rule. Confirm current operation.",
       "weekdays": [
         6
       ],
@@ -622,7 +622,13 @@
         10,
         11,
         12
-      ]
+      ],
+      "calendarValidFrom": "2026-10-03",
+      "calendarValidUntil": "2027-04-10",
+      "excludedDates": [
+        "2026-12-26"
+      ],
+      "calendarSource": "https://remarkablesmarket.com/"
     },
     {
       "id": "trip-hawea-stay",
@@ -1019,6 +1025,28 @@
       "encounter": "wild",
       "tags": [],
       "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "trip-arthurs-pass-information",
+      "name": "Arthur’s Pass DOC visitor information",
+      "base": "arthurs-pass",
+      "categories": [
+        "culture"
+      ],
+      "url": "https://www.doc.govt.nz/footer-links/contact-us/visitor-centres/arthurs-pass-national-park-visitor-centre/",
+      "description": "DOC visitor information operates from a temporary portacom opposite the old centre, which is closed for renovation. Review current track and weather information here before choosing an outing.",
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-13",
+      "excludedMonthDays": [
+        "12-25"
+      ],
+      "calendarSource": "https://www.doc.govt.nz/footer-links/contact-us/visitor-centres/arthurs-pass-national-park-visitor-centre/",
+      "when": "Published hours 08:30 to 16:30 daily, except 25 December.",
+      "access": "104 West Coast Road in Arthur’s Pass village. This is a short information stop, not a full indoor activity or assurance of a safe journey. Check road conditions before travelling.",
+      "shortTransferStop": true,
+      "accessAlternative": true
     }
   ]
 }

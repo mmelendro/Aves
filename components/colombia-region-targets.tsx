@@ -18,7 +18,7 @@ type Props = {
 /** Exact reviewed artwork boundaries, in stable paint order. */
 export default function ColombiaRegionTargets({ onSelect, onActivate, onActivateKey, matchingRegionIds }: Props) {
   const {filters}=useBirdFilters()
-  const matches=matchingRegionIds ?? (birdFiltersActive(filters) ? colombiaMapMarkers.filter(region=>filterConservationBirds(getDestinationRegionBirds("colombia",region.slug),filters).length>0).map(region=>region.slug) : undefined)
+  const matches=matchingRegionIds ?? (birdFiltersActive(filters) ? colombiaMapMarkers.filter(region=>filterConservationBirds(getDestinationRegionBirds("colombia",region.slug),filters,"colombia").length>0).map(region=>region.slug) : undefined)
   return <svg className="absolute inset-0 h-full w-full" viewBox={boundaries.viewBox} preserveAspectRatio="xMidYMid meet" role="group" aria-label="Choose a Colombian planning region">
     {boundaries.regions.map(boundary => {
       const region = colombiaMapMarkers.find(region => region.name === boundary.name)

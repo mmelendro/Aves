@@ -11,7 +11,7 @@ const resourceLink = "inline-flex min-h-11 items-center rounded text-sm font-sem
 export default function NewZealandBirdCarousel() {
   return (
     <div className="mx-auto w-full min-w-0 max-w-xl">
-      <HomepageBirdCarousel birds={newZealandCarouselBirds} autoPlay={false} showBirdPicker className="max-w-xl" />
+      <HomepageBirdCarousel countryId="new-zealand" birds={newZealandCarouselBirds} autoPlay={false} showBirdPicker className="max-w-xl" />
       <p className="mx-auto mt-4 max-w-md text-center text-sm leading-6 text-gray-600">{newZealandCarouselBirds.length} featured species, with a South Island focus. This is a selection, not a complete checklist. Open species details for range, habitat and source guides.</p>
     </div>
   )

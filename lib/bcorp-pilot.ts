@@ -1,5 +1,6 @@
 /** Eligibility is a display guard, never proof of certification or impact. */
 import pilot from "@/content/bcorp-south-island-pilot.json"
+import {sourceFreshness} from "./source-freshness"
 export const bcorpBusinessCategories = [
   { id: "accommodation", label: "Accommodation & farm experiences" },
   { id: "food-and-drink", label: "Food & drink" },
@@ -18,9 +19,7 @@ function https(value: string | null) {
   try { return value !== null && new URL(value).protocol === "https:" } catch { return false }
 }
 function reviewedRecently(value: string, now: number, maxAgeDays: number) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
-  const at=Date.parse(`${value}T00:00:00Z`)
-  return Number.isFinite(at) && new Date(at).toISOString().slice(0,10) === value && now >= at && now-at <= maxAgeDays*86400000
+  return sourceFreshness(value,now,maxAgeDays)==="reviewed"
 }
 export function bcorpPinEligible(record: BcorpPilotRecord, now=Date.now(), maxAgeDays=90) {
   let profile: URL

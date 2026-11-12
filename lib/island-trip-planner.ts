@@ -88,7 +88,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     index: number,
   ) {
     if (!marketFitsDay(place, input, index)) return false;
-    if (!place.weekdays && !place.months && !place.excludedMonthDays)
+    if (!place.weekdays && !place.months && !place.excludedMonthDays && !place.excludedDates && !place.calendarValidFrom && !place.calendarValidUntil)
       return true;
     const date = tripDayDate(input, index);
     if (!date) return false;
@@ -96,7 +96,10 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     return (
       (!place.weekdays || place.weekdays.includes(at.getUTCDay())) &&
       (!place.months || place.months.includes(at.getUTCMonth() + 1)) &&
-      !place.excludedMonthDays?.includes(date.slice(5))
+      !place.excludedMonthDays?.includes(date.slice(5)) &&
+      !place.excludedDates?.includes(date) &&
+      (!place.calendarValidFrom || date >= place.calendarValidFrom) &&
+      (!place.calendarValidUntil || date <= place.calendarValidUntil)
     );
   }
   function validTripInput(value: unknown): value is TripPlannerInput {
@@ -693,6 +696,11 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         notes.push(
           `Indoor alternative to review: ${indoor.name}. Replace an outing if wanted; check opening and travel conditions.`,
         );
+      const accessAlternative = placesAt(day.baseId).find(
+        (place) => place.accessAlternative && placeFitsCalendar(place, draft.input, index),
+      );
+      if (accessAlternative && accessAlternative.id !== stop.id)
+        notes.push(`Local access alternative to review: ${accessAlternative.name}. Check current conditions before choosing a replacement outing. This is an information stop, not an extra excursion or a weather-safe journey.`);
     }
     if (stop || extra)
       notes.push(

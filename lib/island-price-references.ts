@@ -128,12 +128,14 @@ export function createPriceReferences(context: IslandPlanningContext) {
         if (result.low !== null) reviewed++;
         return { id, ...result };
       });
-      if (draft.input.activityBasis === "experience")
+      // The second outing is a replacement option, not a second compulsory cost.
+      // Show each choice against the same daily allowance instead of adding them.
+      if (draft.input.activityBasis === "experience" || entries.length > 1)
         for (const e of entries)
           rows.push({
             day: i + 1,
             category: "activities",
-            label: placeNames.get(e.id) || "Outing",
+            label: `${entries.length > 1 ? e.id === day.extraId ? "Alternative: " : "Primary outing: " : ""}${placeNames.get(e.id) || "Outing"}`,
             low: e.low,
             high: e.high,
             allowance: draft.input.allowances.activities,

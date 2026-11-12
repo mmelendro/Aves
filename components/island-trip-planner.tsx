@@ -823,6 +823,15 @@ function IslandPlannerForm() {
                 Add Itinerary to Notes, review and Save My Draft. Saving and
                 sharing are separate steps. This does not book travel.
               </p>
+              <section aria-label="From draft to personal quote" className="rounded-xl border border-emerald-200 bg-white p-4 text-sm leading-6">
+                <h4 className="font-semibold text-emerald-950">From your draft to a personal quote</h4>
+                <ol className="mt-2 list-decimal space-y-2 pl-5">
+                  <li>Review your itinerary and carry it to your private brief in My Trips.</li>
+                  <li>Save your draft, then submit an enquiry when you are ready for a personal quote.</li>
+                  <li>Review the proposed services, complete price, availability and terms before accepting any arrangement.</li>
+                </ol>
+                <p className="mt-2">Your allowances are your spending preferences. Published reference prices are dated comparisons. A saved draft or submitted enquiry is not a reservation or a confirmed booking.</p>
+              </section>
             </div>
           )}
         </div>

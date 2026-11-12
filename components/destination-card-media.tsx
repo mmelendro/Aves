@@ -12,7 +12,7 @@ import type { ComponentProps } from "react"
 import type { BirdProfile } from "@/content/birds"
 
 export default function DestinationCardMedia({ destination, fillPanel = false, birds = destinationBirds[destination.id], label, selection }: { destination: Destination; fillPanel?: boolean; birds?: BirdProfile[]; label?: string; selection?: ComponentProps<typeof HomepageBirdCarousel>["selection"] }) {
-  if (birds && (birds.length || destinationBirds[destination.id])) return <HomepageBirdCarousel
+  if (birds && (birds.length || destinationBirds[destination.id])) return <HomepageBirdCarousel countryId={destination.id}
     birds={birds} variant="destination-card" label={label ?? `${destination.name} bird photographs`}
     selection={selection} autoPlay={false} priority={false} showBirdPicker fillPanel={fillPanel}
   />

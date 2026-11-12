@@ -11,6 +11,7 @@ import PhotoCredit from "./photo-credit";
 import PhotoZoom from "./photo-zoom";
 import CulturalNameContext from "./cultural-name-context";
 import ExpandableMedia from "./expandable-media";
+import ConservationDirectory from "./conservation-directory";
 import styles from "./south-island-places-explorer.module.css";
 
 /** A shared photo surface. Selecting a photograph previews its planning region
@@ -48,5 +49,6 @@ export default function PlaceGallery({countryId, countryName, regionId, regions,
     <CulturalNameContext key={photo.id} kind="place" entityId={photo.placeId} countryId={countryId}/>
     {countryId==="new-zealand"&&<NzPlaceIdeas placeId={`landscape:${photo.id}`} regionId={photo.regionId}/>}
     <p className="mt-3 text-xs leading-6 text-gray-600">{regionId ? `${photos.length} reviewed ${photos.length === 1 ? "photograph" : "photographs"} in this regional collection.` : "A balanced preview from the regions with reviewed photographs. Regions with no reviewed photos are still being researched."} Map preview: {region?.name}. <a href={mapHref} className="ml-2 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Show on the map above</a> <button type="button" className="ml-2 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange("")}>All regions</button>{region && !regionId && <button type="button" className="ml-4 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange(photo.regionId)}>Explore {region.name}</button>}</p></> : <div className="rounded-2xl border border-emerald-100 bg-white p-5"><p className="text-sm text-gray-600">Reviewed landscape photographs for this region are still being added.</p><button type="button" onClick={() => onRegionChange("")} className="mt-3 min-h-11 text-sm font-semibold text-emerald-800 underline">Return to available landscapes</button><a href={mapHref} className="ml-4 inline-flex min-h-11 items-center text-sm text-emerald-800 underline">Return to the map</a></div>}
+    <ConservationDirectory countryId={countryId} regions={regions} mapHref={mapHref} onRegionChange={onRegionChange}/>
   </section>;
 }

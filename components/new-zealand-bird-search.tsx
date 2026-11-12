@@ -25,7 +25,7 @@ export default function NewZealandBirdSearch({ selected, onChange }: { selected:
   const [filter, setFilter] = useState("all")
   const [limit, setLimit] = useState(40)
   const [origin, setOrigin] = useState<NzOriginFilter>("all")
-  const results = filterConservationBirds(filterNzBirds(newZealandChecklist, { query, origin, selectedOnly: filter === "selected", selected }),filters)
+  const results = filterConservationBirds(filterNzBirds(newZealandChecklist, { query, origin, selectedOnly: filter === "selected", selected }),filters,"new-zealand")
   function toggle(id: string) { onChange(selected.includes(id) ? selected.filter(value => value !== id) : [...selected, id]) }
 
 

@@ -46,7 +46,7 @@ export default function ColombiaHeroExplorer({ media, initialRegion, initialBird
   const backRef = useRef<HTMLButtonElement>(null)
   const selectRef = useRef<HTMLSelectElement>(null)
   useEffect(() => { if (chosenRegion && !media) backRef.current?.focus({ preventScroll: true }) }, [chosenRegion, media])
-  const birds = filterConservationBirds(chosenRegion ? colombiaRegionBirds(chosenRegion) : birdData,filters)
+  const birds = filterConservationBirds(chosenRegion ? colombiaRegionBirds(chosenRegion) : birdData,filters,"colombia")
   const chooseRegion = (id: string) => {
     if (!mapMarkers.some(region => region.slug === id)) return
     publish({country:"colombia",regionId:id})

@@ -3,6 +3,7 @@ import {useIslandPlanner} from "./island-planner-context"
 import {nzRouteReading} from "@/content/nz-route-reading"
 import {sourceFreshness} from "@/lib/source-freshness"
 import {useMapLayers} from "@/components/map-layer-context"
+import BcorpDirectory from "@/components/bcorp-directory"
 import {publicPlaces} from "@/lib/south-island-public-places"
 export default function RouteReading() {
  const {context}=useIslandPlanner()
@@ -23,5 +24,6 @@ export default function RouteReading() {
    <p className="mt-3">Two reviewed public references. The sanctuary and operator describe their own work. Listings are independent of AVES and do not establish a partnership or an audited impact result.</p>
    {publicPlaces.points.filter(point=>["orokonui","abel-tasman-eco-tours"].includes(point.id)).map(point=><article key={point.id} className="mt-4 border-t pt-3"><h4 className="font-semibold">{point.name}</h4><p>{point.description}</p><p className="text-xs">Source reviewed {point.checked}. {point.precision}.</p><div className="flex flex-wrap gap-4"><a href={point.evidenceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline">Organisation’s evidence<span className="sr-only">: {point.name} (opens in a new tab)</span></a><a href="#south-island-bird-map" className="inline-flex min-h-11 items-center underline" onClick={()=>update({projects:true,point:point.id})}>Show public reference on map<span className="sr-only">: {point.name}</span></a></div></article>)}
   </details>}
+  {region==="south-island" && <BcorpDirectory />}
  </section>
 }

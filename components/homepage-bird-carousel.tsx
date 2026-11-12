@@ -44,6 +44,7 @@ interface HomepageBirdCarouselProps {
   fillPanel?: boolean
   selection?: { isSelected: (bird: BirdProfile) => boolean; onToggle: (bird: BirdProfile) => void }
   imageTools?: ReactNode
+  countryId?: string
 }
 
 
@@ -71,9 +72,10 @@ export default function HomepageBirdCarousel({
   fillPanel = false,
   selection,
   imageTools,
+  countryId = "colombia",
 }: HomepageBirdCarouselProps) {
   const {filters}=useBirdFilters()
-  const birds=filterConservationBirds(suppliedBirds,filters)
+  const birds=filterConservationBirds(suppliedBirds,filters,countryId)
   const localizeHome = useColombiaHomeCopy()
 
   const isDestinationCard = variant === "destination-card"
