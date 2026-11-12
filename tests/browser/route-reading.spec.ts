@@ -13,7 +13,7 @@ test("route reading keeps historical accounts separate and opens a conservation 
   await expect(reading).toContainText("Sarah Mankelow")
   await expect(reading).toContainText("Published 2011-06-22. Historical account.")
   await reading.getByText("Conservation directory · South Island pilot", {exact: true}).click()
-  await reading.getByRole("link", {name: "Show public reference on map: Orokonui Ecosanctuary", exact: true}).click()
+  await reading.getByRole("link", {name: /Show public reference on map.*Orokonui Ecosanctuary/}).click()
   const selected = page.getByRole("region", {name: "Selected public place", exact: true})
   await expect(selected.getByRole("status")).toHaveText("Orokonui Ecosanctuary")
   await expect(page).toHaveURL(/#south-island-bird-map$/)
