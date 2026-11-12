@@ -22,6 +22,8 @@ The direct satellite toggle is implemented beside the shared layers picker. The 
 
 Owner reprioritised galleries on 12 November 2026: the previous items 9 and 10 now come first. The completed Christchurch reference pilot stays delivered. Journal work remains planned and private. This is the only active queue; the former eight-stage sequence is historical context in the handoff, not a competing list.
 
+Owner delivery preference: five eligible roadmap items at a time. Current completed batch:4–8. Next independent batch:12–16. Items9–11 remain visibly pending and do not block that work.
+
 Work in progress limit: one release. If a task is blocked by an unavailable device, person or source, record that limit and continue the next independent task; do not silently mark it complete. Validate, publish the exact accepted source and record evidence before beginning the next release. Combine adjacent items only when they form one reviewable outcome; never batch all country assets into an unreviewed release. An item is complete only when its stated outcome and relevant checks pass. Do not wait for all 90 items to open a bounded pilot.
 
 Priority bands: items 1–8 are the next gallery releases. Items 9–22 protect the New Zealand visitor journey and pilot economics. Items 23–45 extend the private trip workspace after the gallery and pilot checks. Items 46–90 are a ranked, dependency-aware candidate backlog, not a fixed delivery promise. Reassess after every release and after visitor feedback; a privacy defect, broken map or failed save moves ahead of content expansion. Reach a go/no-go at item 22 before investing in community features or completing every country gallery.
@@ -34,21 +36,21 @@ Photo completion requires distinct real photographs with checked locality, right
 
 3. Bring Otago and the Catlins to five distinct, credited photographs. Delivered in 0e1c9c5, with five photographs in the shared gallery.
 
-4. Bring the North Island collection to five distinct, credited photographs.
+4. Bring the North Island collection to five distinct, credited photographs. Delivered in d805201, with shared gallery records and hosted acceptance.
 
-5. Bring the Rakiura collection to five distinct, credited photographs.
+5. Bring the Rakiura collection to five distinct, credited photographs. Delivered in d805201, with shared gallery records and hosted acceptance.
 
-6. Check regional gallery counts and filtering against the shared photo library.
+6. Check regional gallery counts and filtering against the shared photo library. Delivered in d805201, with shared gallery records and hosted acceptance.
 
-7. Reuse reviewed regional photos in New Zealand overview cards.
+7. Reuse reviewed regional photos in New Zealand overview cards. Delivered in d805201, with shared gallery records and hosted acceptance.
 
-8. Recheck narrow layouts, keyboard navigation, enlargement and credit return.
+8. Recheck narrow layouts, keyboard navigation, enlargement and credit return. Delivered in d805201, with shared gallery records and hosted acceptance.
 
-9. Validate the shared map and galleries on physical iPhone/Safari.
+9. Validate the shared map and galleries on physical iPhone/Safari. Pending physical-device access. Browser narrow-layout checks do not complete this item.
 
-10. Run an independent visitor through a complete New Zealand planning task.
+10. Run an independent visitor through a complete New Zealand planning task. Pending an independent participant.
 
-11. Fix the highest-impact friction found in that visitor test.
+11. Fix the highest-impact friction found in that visitor test. Depends on item10 feedback.
 
 12. Add a reviewed Auckland airport reference to the existing journey viewer.
 
