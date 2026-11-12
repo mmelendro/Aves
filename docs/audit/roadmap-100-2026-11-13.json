@@ -611,7 +611,7 @@
         41,
         42
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 59
     },
     {
@@ -622,7 +622,7 @@
         43,
         44
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 60
     },
     {
@@ -632,7 +632,7 @@
       "previous": [
         45
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 61
     },
     {
@@ -642,7 +642,7 @@
       "previous": [
         46
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 62
     },
     {
@@ -652,7 +652,7 @@
       "previous": [
         47
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 63
     },
     {
@@ -662,7 +662,7 @@
       "previous": [
         48
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 64
     },
     {
@@ -672,7 +672,7 @@
       "previous": [
         49
       ],
-      "status": "Open",
+      "status": "Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented",
       "id": 65
     },
     {
@@ -682,7 +682,7 @@
       "previous": [
         50
       ],
-      "status": "Open",
+      "status": "Partial: private itinerary and historical eBird report located; actual photo originals, per-photo identity/locality and display rights remain pending owner access; no new photo published",
       "id": 66
     },
     {
@@ -692,7 +692,7 @@
       "previous": [
         51
       ],
-      "status": "Open",
+      "status": "Partial: CI 43315437439 passes automated public/media/recovery checks; physical Safari, independent visitor and real hosted private save/reopen/edit evidence remain",
       "id": 67
     },
     {
@@ -702,7 +702,7 @@
       "previous": [
         52
       ],
-      "status": "Open",
+      "status": "Partial: owner-only API denial tests and live read-only RLS/bucket metadata reviewed; live two-account acceptance remains; granular audience sharing is not enabled",
       "id": 68
     },
     {

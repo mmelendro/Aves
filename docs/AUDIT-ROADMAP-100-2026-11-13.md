@@ -273,43 +273,43 @@ These are not invented requests for approval. Much of this work can continue aut
 
 59. Verify and map a bounded B Corp supplier directory
 
-   Acceptance: Check entity-level certification evidence and review dates. Avoid certification claims about an entire place or unrelated business. Reuse the existing map and layer controls. Show exactly which listed entity has verified evidence. Previous audit IDs: 41, 42. Status: Open.
+   Acceptance: Check entity-level certification evidence and review dates. Avoid certification claims about an entire place or unrelated business. Reuse the existing map and layer controls. Show exactly which listed entity has verified evidence. Previous audit IDs: 41, 42. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 60. Extend the conservation-directory pilot to Colombian and Australian corridors
 
-   Acceptance: Use a bounded set of reviewed organisations and appropriate public locations. Apply the same evidence, locality and partnership distinctions. Previous audit IDs: 43, 44. Status: Open.
+   Acceptance: Use a bounded set of reviewed organisations and appropriate public locations. Apply the same evidence, locality and partnership distinctions. Previous audit IDs: 43, 44. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 61. Audit shared bird filters
 
-   Acceptance: Check habitat, native/introduced, endemic and conservation facets across maps, carousels and relevant selections. Preserve saved choices and unknown statuses. Previous audit IDs: 45. Status: Open.
+   Acceptance: Check habitat, native/introduced, endemic and conservation facets across maps, carousels and relevant selections. Preserve saved choices and unknown statuses. Previous audit IDs: 45. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 62. Extend practical seasonal planning rules
 
-   Acceptance: Use reviewed seasonal and opening-day sources for the pilot corridors. Previous audit IDs: 46. Status: Open.
+   Acceptance: Use reviewed seasonal and opening-day sources for the pilot corridors. Previous audit IDs: 46. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 63. Add useful weather or access alternatives
 
-   Acceptance: Provide one sourced alternative for each pilot corridor, with realistic transport and access limits. Previous audit IDs: 47. Status: Open.
+   Acceptance: Provide one sourced alternative for each pilot corridor, with realistic transport and access limits. Previous audit IDs: 47. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 64. Improve partial price comparisons
 
-   Acceptance: Keep currency, units, missing costs and quote requirements explicit. Never present incomplete totals as a complete trip price. Previous audit IDs: 48. Status: Open.
+   Acceptance: Keep currency, units, missing costs and quote requirements explicit. Never present incomplete totals as a complete trip price. Previous audit IDs: 48. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 65. Clarify estimate-to-quote handoff
 
-   Acceptance: Make the traveller’s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement. Previous audit IDs: 49. Status: Open.
+   Acceptance: Make the traveller’s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement. Previous audit IDs: 49. Status: Published; runtime 8f6920c, CI 43315437439: 721 unit and 93 browser checks passed; bounded scope documented.
 
 66. Review the next Colombian bird-photo batch
 
-   Acceptance: Check identity, locality, creator permission, rights and credits against the actual originals and trip evidence. Previous audit IDs: 50. Status: Open.
+   Acceptance: Check identity, locality, creator permission, rights and credits against the actual originals and trip evidence. Previous audit IDs: 50. Status: Partial: private itinerary and historical eBird report located; actual photo originals, per-photo identity/locality and display rights remain pending owner access; no new photo published.
 
 67. Complete release checks on actual visitor flows
 
-   Acceptance: Verify privacy, accessibility, performance, media loading and private save/reopen/edit journeys. Retain the physical-device and independent-visitor requirements. Previous audit IDs: 51. Status: Open.
+   Acceptance: Verify privacy, accessibility, performance, media loading and private save/reopen/edit journeys. Retain the physical-device and independent-visitor requirements. Previous audit IDs: 51. Status: Partial: CI 43315437439 passes automated public/media/recovery checks; physical Safari, independent visitor and real hosted private save/reopen/edit evidence remain.
 
 68. Enforce access on every shared item
 
-   Acceptance: Test owner and audience permissions for entries, files, previews and downloads. Previous audit IDs: 52. Status: Open.
+   Acceptance: Test owner and audience permissions for entries, files, previews and downloads. Previous audit IDs: 52. Status: Partial: owner-only API denial tests and live read-only RLS/bucket metadata reviewed; live two-account acceptance remains; granular audience sharing is not enabled.
 
 69. Names and pronunciation
 
@@ -492,3 +492,13 @@ Items 49 to 58 were processed. Items 49 to 51 and 54 to 58 are published. Austra
 Runtime `fb28d7402a4e6d08287ac670faad8521a9f0a2dc`, deployment `dpl_6135M1kGFLySijKjrwHi9XRPigUN`, on both `aves.bio` and `www.aves.bio`. [CI run 43309387682](https://github.com/mmelendro/Aves/actions/runs/43309387682). 716 unit tests and 91 browser checks pass; 53 project-specific checks intentionally skipped. Lint, TypeScript, production build, catalogue loading, deferred geometry and build budgets pass. The selected live routes and new media were checked after deployment. Rollback for both domains: `dpl_Gz4uCsuLBrThcGAddNCy51inMept`. No database, private traveller, authentication or consent configuration was changed.
 
 Next batch: 59 to 68. Keep items 45, 46, 52 and 53 visible as outstanding, and preserve physical Safari, independent visitor and business-financial evidence requirements. The Eco-Tourism Business Plan remains item 79, deferred until the independent product work and actual founder financial inputs are ready.
+
+## Batch 59 to 68 published, 13 November 2026 Sydney
+
+Items 59 to 68 were processed. Items 59 to 65 are published. Company and conservation directories now connect to the existing maps, country origin and endemic filters respect context, reviewed calendars constrain new suggestions, alternative outing prices remain separate, and the personal-quote handoff is explicit. There are 61 completed items among the first 68.
+
+Items 66, 67 and 68 remain partial: original Colombian photo evidence is forthcoming; physical Safari, an independent visitor and real hosted private save/reopen/edit checks remain; live two-account access acceptance is still required. Current journal access remains owner-only. Earlier items 45, 46, 52 and 53 remain outstanding. Processing a batch does not complete missing acceptance evidence.
+
+Runtime `8f6920c9d0ab908d64f120307d10f7cad1ce8761`, deployment `dpl_H1uMZn5P7ZsbBiniAqmL9vENZ9h4`, on both `aves.bio` and `www.aves.bio`. [CI run 43315437439](https://github.com/mmelendro/Aves/actions/runs/43315437439). 721 unit tests and 93 browser checks pass; 57 project-specific checks intentionally skipped. Lint, TypeScript, production build, catalogue loading, deferred geometry, build budgets and the 422-module reachability check pass. Changed public pages and origin/privacy responses were checked after deployment. The CI browser suite covers the 78 public routes. Rollback for both domains: `dpl_6135M1kGFLySijKjrwHi9XRPigUN`. Database policies, authentication and consent configuration were not changed. No additional Colombia photograph or private trip data was published.
+
+Next batch: 69 to 78. Preserve all seven outstanding items and their evidence requirements. The Eco-Tourism Business Plan remains item 79, deferred until the independent product work and actual founder financial inputs are ready.
