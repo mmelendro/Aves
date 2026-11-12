@@ -20,7 +20,7 @@ import {
   Building2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { NavigationHeader } from "@/components/navigation-header"
@@ -303,7 +303,7 @@ const partners = [
       "Endemic bird photography",
     ],
     category: "reserves",
-    logo: "/placeholder.svg?height=80&width=120&text=Rio+Blanco",
+    logo: "",
     tags: ["Cloud Forest", "Antpitta", "Mountain-Toucan", "Research"],
   },
   {
@@ -331,7 +331,7 @@ const partners = [
       "Environmental education",
     ],
     category: "reserves",
-    logo: "/placeholder.svg?height=80&width=120&text=Sutu",
+    logo: "",
     tags: ["Private Reserve", "Conservation", "Community", "Ecotourism"],
   },
   {
@@ -358,7 +358,7 @@ const partners = [
       "Montane forest species diversity",
     ],
     category: "lodges",
-    logo: "/placeholder.svg?height=80&width=120&text=Jardin+Rocas",
+    logo: "",
     tags: ["Cock-of-the-rock", "Cloud Forest", "Photography", "Expert Guides"],
   },
 ]
@@ -407,7 +407,7 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
       <CardHeader className="pb-3">
         <div className="flex items-start gap-4 mb-3">
           <div className="flex-shrink-0 flex items-center justify-center">
-            <OptimizedImage
+            {partner.logo && <OptimizedImage
               src={partner.logo}
               alt={`${partner.name} logo`}
               width={100}
@@ -419,14 +419,14 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
                 minWidth: "96px",
                 minHeight: "72px",
               }}
-            />
+            />}
           </div>
           <div className="flex-1 min-w-0">
-            <CardTitle className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
+            <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
               <a href={`#${partner.id}`} className="hover:text-emerald-600 transition-colors">
                 {partner.name}
               </a>
-            </CardTitle>
+            </h3>
             <CardDescription className="text-sm text-gray-600 mb-2">
               <div className="flex items-center gap-1 mb-1">
                 <MapPin className="h-3 w-3 flex-shrink-0" />
@@ -565,32 +565,35 @@ const CollapsibleSection = ({
 }) => {
   return (
     <div id={`${category}-section`} className="scroll-mt-32">
-      <div
-        className={`flex items-center justify-between p-4 bg-gradient-to-r ${categoryData.color} rounded-lg cursor-pointer ${categoryData.hoverColor} transition-all duration-200 border border-gray-200 shadow-sm`}
+      <h2>
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={`${category}-list`}
+        className={`flex min-h-11 w-full items-center justify-between p-4 text-left bg-gradient-to-r ${categoryData.color} rounded-lg ${categoryData.hoverColor} transition-all duration-200 border border-gray-200 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700`}
         onClick={onToggle}
       >
-        <div className="flex items-center gap-3">
+        <span className="flex items-center gap-3">
           <span className="text-2xl">{categoryData.icon}</span>
-          <div>
-            <h2 className="text-xl font-bold text-gray-900">{categoryData.title}</h2>
-            <p className="text-gray-600 text-sm mt-0.5 hidden sm:block">{categoryData.description}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <Badge variant="outline" className="bg-white text-xs font-medium px-2 py-1">
+          <span>
+            <span className="block text-xl font-bold text-gray-900">{categoryData.title}</span>
+            <span className="text-gray-600 text-sm mt-0.5 hidden sm:block">{categoryData.description}</span>
+          </span>
+        </span>
+        <span className="flex items-center gap-3">
+          <span className="rounded-full border border-gray-200 bg-white text-xs font-medium px-2 py-1">
             {categoryPartners.length}
-          </Badge>
+          </span>
           {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
-        </div>
-      </div>
+        </span>
+      </button>
+      </h2>
 
-      {isOpen && (
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div id={`${category}-list`} hidden={!isOpen} className={isOpen ? "mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" : "hidden"}>
           {categoryPartners.map((partner) => (
             <PartnerCard key={partner.id} partner={partner} />
           ))}
         </div>
-      )}
     </div>
   )
 }
@@ -698,6 +701,7 @@ const PartnersPage = () => {
   return (
     <div className="min-h-screen bg-gray-50" style={{ scrollBehavior: "smooth" }}>
       <NavigationHeader currentPage="/about/partners" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 text-white">
@@ -770,6 +774,7 @@ const PartnersPage = () => {
         </div>
       </div>
 
+      </main>
       <Footer />
     </div>
   )

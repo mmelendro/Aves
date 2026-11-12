@@ -18,6 +18,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       <NavigationHeader currentPage="/contact" />
+      <main id="main-content" tabIndex={-1}>
 
       {/* Redesigned Hero Section with Text and Badges */}
       <section className="py-16 lg:py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
@@ -131,6 +132,7 @@ export default function ContactPage() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   )
