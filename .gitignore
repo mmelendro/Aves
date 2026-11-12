@@ -30,3 +30,7 @@ next-env.d.ts
 # Python importer caches
 __pycache__/
 *.pyc
+
+# Isolated browser test outputs
+/test-results/
+/playwright-report/

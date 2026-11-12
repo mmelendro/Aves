@@ -1194,3 +1194,12 @@ body {
 @keyframes aves-night-arrive { from { box-shadow:0 0 0 14px #0e749000; opacity:.45; } to { box-shadow:0 0 0 3px #0e749044; opacity:1; } }
 [data-journey-animation="off"] .aves-journey-target,[data-journey-animation="off"] .aves-journey-night { animation:none; }
 @media(prefers-reduced-motion:reduce) { .aves-journey-night { animation:none; } }
+
+/* A visible default for links and native controls without a component-specific
+   focus treatment. It does not remove or suppress existing focus indicators. */
+@layer base {
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid #b45309;
+    outline-offset: 3px;
+  }
+}

@@ -36,3 +36,8 @@
   .toolbar { gap:.25rem; }
   .help { font-size:11px; }
 }
+
+/* Full-screen close/zoom controls stay above the canvas, including landscape
+   phones and enlarged text. Inline maps retain their map-first arrangement. */
+.viewer[data-expanded] .toolbar { order:0; position:sticky; top:0; z-index:5; }
+.viewer[data-expanded] .surface { order:1; min-height:14rem; flex:1 0 14rem; }
