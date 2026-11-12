@@ -208,6 +208,21 @@ Photo completion requires distinct real photographs with checked locality, right
 
 90. Review public-launch readiness, outstanding risks, rollback and the feedback-led next backlog.
 
+## Proposed follow-ons 91 to 100
+
+These ten ideas were shown in chat after the published90-item queue. They remain proposed candidates, not completed or committed releases. Review them at the later backlog checkpoint. They do not displace the gallery-first priorities above.
+
+91. Add unified search for countries, regions and reviewed places.
+92. Save favourite places across trips.
+93. Compare two saved itineraries side by side.
+94. Generate a downloadable trip pack with the itinerary and selected practical records.
+95. Offer a lower bandwidth mode with smaller images.
+96. Make essential saved trip information available offline.
+97. Make AVES installable as an app.
+98. Complete English and Spanish consistency across the maintained experience.
+99. Prototype optional3D terrain while preserving the useful shared map.
+100. Review actual usage, costs and traveller feedback to choose the next development cycle.
+
 ## Run each round
 
 Read [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md), [ARCHITECTURE.md](docs/ARCHITECTURE.md) and [CONTRIBUTING.md](CONTRIBUTING.md), then inspect current source/GitHub head. Deliver the smallest useful increment in the next unfinished step. Reuse shared modules and one regional map. Explain non-obvious code; remove superseded implementations while preserving provenance, compatibility and drafts.

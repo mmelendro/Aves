@@ -22,7 +22,8 @@ test('region scopes expose the full same-photo collection and fail closed for un
   const shared=galleryPhotos('new-zealand','south-island').find(p=>p.src===photo.src);
   assert.ok(shared);assert.equal(shared.sourceUrl,photo.sourceUrl);assert.equal(shared.licence,photo.licence);assert.equal(shared.creator,photo.creator);
  }
- assert.equal(southIslandPlaceContexts.find(p=>p.id==='mountains').photos.length,5);
+ for(const place of southIslandPlaceContexts)assert.equal(place.photos.length,5,place.label);
+ assert.equal(galleryPhotos('new-zealand','south-island').length,20);
  assert.equal(galleryPhotos('new-zealand','north-island').length,1);
  assert.deepEqual(galleryPhotos('new-zealand','missing'),[]);
  assert.deepEqual(galleryPhotos('missing'),[]);
