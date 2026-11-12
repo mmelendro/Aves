@@ -1177,3 +1177,8 @@ body {
 @keyframes aves-journey-emphasis { 0%,100% { box-shadow:0 0 0 3px #0e749044; } 50% { box-shadow:0 0 0 9px #0e749022; } }
 .aves-journey-target { outline:3px solid #0e7490; outline-offset:3px; animation:aves-journey-emphasis 1.6s ease-in-out 2; }
 @media (prefers-reduced-motion:reduce) { .aves-journey-target { animation:none; } }
+
+/* The map must be usable before a traveller chooses full screen. */
+@media (max-width:639px) {
+  .geographic-map-canvas { flex-basis:28rem; min-height:28rem; }
+}

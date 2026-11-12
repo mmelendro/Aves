@@ -106,3 +106,8 @@
 @container (max-width:623.98px) {
   .pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:clamp(50rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem),58rem); height:var(--discovery-panel-height); }
 }
+
+@container (max-width:623.98px) {
+  .pair[data-layout="guide"]:has([data-ecosystem-card]) { --discovery-panel-height:50rem; height:var(--discovery-panel-height); }
+  .pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:60rem; height:var(--discovery-panel-height); }
+}

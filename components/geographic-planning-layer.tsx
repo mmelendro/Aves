@@ -24,7 +24,7 @@ export default function GeographicPlanningLayer({map,country,region,onSelect}:{m
       if(country==="new-zealand" && region==="south-island"){
         const selected=data.features.find(f=>f.properties.id===region);
         if(selected?.geometry.type==="MultiPolygon") geoJSON({type:"Feature",properties:selected.properties,geometry:{type:"Polygon",coordinates:[
-          [[-180,-85],[180,-85],[180,85],[-180,85],[-180,-85]],
+          [[-360,-85],[360,-85],[360,85],[-360,85],[-360,-85]],
           ...selected.geometry.coordinates.map(polygon=>polygon[0]),
         ]}} as Feature,{pane:"planningRegionsPane",interactive:false,style:{fillColor:"#f1f7f3",fillOpacity:.48,fillRule:"evenodd",stroke:false}}).addTo(group);
       }

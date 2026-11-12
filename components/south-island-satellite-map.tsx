@@ -20,7 +20,11 @@ const colours:Record<string,string>={forest:"#537b5d",mountains:"#ae9761",freshw
 function labelMarker(map:GeographicMap,point:[number,number],name:string,onClick?:()=>void,pressed=false,pane="markerPane"){
   const element=document.createElement(onClick?"button":"span");element.textContent=name;element.className="geographic-map-target";
   if(element instanceof HTMLButtonElement){element.type="button";element.setAttribute("aria-pressed",String(pressed));element.onclick=onClick??null;}
-  return marker(point,{icon:divIcon({html:element,className:"geographic-map-marker",iconSize:[0,0]}),keyboard:false,pane}).addTo(map);
+  const item=marker(point,{icon:divIcon({html:element,className:"geographic-map-marker",iconSize:[0,0]}),keyboard:false,pane}).addTo(map);
+  // At country scale use small targets, retaining full names for assistive technology.
+  const resizeLabel=()=>{const compact=Boolean(onClick)&&map.getZoom()<7;element.textContent=compact?"•":name;element.setAttribute("aria-label",name);element.title=name;element.style.minWidth=compact?"24px":"";element.style.padding=compact?"0":"";};
+  resizeLabel();map.on("zoomend",resizeLabel);item.on("remove",()=>map.off("zoomend",resizeLabel));
+  return item;
 }
 export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitude,longitude}:{selected:string;onSelectIsland?:(id:string)=>void;latitude?:number;longitude?:number}){
   const[map,setMap]=useState<GeographicMap|null>(null);
