@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect,useId,useRef,useState} from "react"
+import {TripMediaProvider,TripJournalMedia} from "./trip-journal-media"
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
 import {accountRequest,errorMessage} from "./account-api"
@@ -48,7 +49,7 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
   const places=journalPlaces(country)
   if(loading)return <p role="status">Opening your private trip workspace…</p>
   if(failed)return <div role="alert" className="rounded-2xl border border-emerald-200 bg-white p-6"><p>{feedback}</p><p className="mt-3">Reopen this page to try again. No empty workspace has been saved over your records.</p></div>
-  return <div className="space-y-7 min-w-0">
+  return <TripMediaProvider planId={planId}><div className="space-y-7 min-w-0">
     <section className="rounded-2xl border border-emerald-200 bg-white p-5 sm:p-7 shadow-sm" aria-label="Private trip workspace">
       <div className="flex flex-wrap items-center justify-between gap-4"><div><p className="text-xs uppercase tracking-widest text-emerald-700">Just for you</p><h2 className="mt-2 text-2xl font-medium text-emerald-950">Prepare. Explore. Remember.</h2></div><Button type="button" onClick={()=>void save()} disabled={busy||!dirty} className="bg-emerald-700 hover:bg-emerald-800">{busy?"Saving…":"Save workspace"}</Button></div>
       <p className="mt-4 text-sm leading-6 text-gray-600">Your checklist and journal belong to this trip. Sharing a planning brief with AVES does not share these records. A checked task does not confirm a booking.</p>
@@ -85,10 +86,10 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
           <div className="grid sm:grid-cols-2 gap-4"><label className="text-sm">Date, optional<input className={field} type="date" value={item.date} onChange={e=>entry(item.id,{date:e.target.value})}/></label><label className="text-sm">Trip day, optional<input className={field} type="number" min={1} max={365} value={item.day??""} onChange={e=>entry(item.id,{day:e.target.value?Number(e.target.value):null})}/></label></div>
           <label className="block text-sm">Public place or region, optional<select className={field} value={item.placeId} onChange={e=>entry(item.id,{placeId:e.target.value})}><option value="">No place selected</option>{places.map(place=><option key={place.id} value={place.id}>{place.label}</option>)}</select></label>
           <label className="block text-sm">Journal notes<textarea className={field} value={item.body} rows={5} maxLength={3000} onChange={e=>entry(item.id,{body:e.target.value})}/></label>
-          <Button type="button" variant="ghost" onClick={()=>entry(item.id,{deleted:true})}>Move entry to removed items</Button>
+          <TripJournalMedia entryId={item.id} enabled={!dirty&&!busy}/><Button type="button" variant="ghost" onClick={()=>entry(item.id,{deleted:true})}>Move entry to removed items</Button>
         </article>)}</div>
       </section>
       <section className="rounded-2xl border border-emerald-100 bg-white p-5"><Button type="button" variant="outline" aria-expanded={trash} onClick={()=>setTrash(!trash)}>Removed items ({data.tasks.filter(t=>t.deleted).length+data.entries.filter(e=>e.deleted).length})</Button>{trash&&<div className="mt-4 space-y-3"><p className="text-sm text-gray-600">Removed items stay private and can be restored. Save to keep a removal or restoration.</p>{data.tasks.filter(t=>t.deleted).map(t=><div key={t.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{t.title}</span><Button type="button" variant="outline" onClick={()=>task(t.id,{deleted:false})}>Restore preparation</Button></div>)}{data.entries.filter(e=>e.deleted).map(e=><div key={e.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{e.title}</span><Button type="button" variant="outline" onClick={()=>entry(e.id,{deleted:false})}>Restore journal entry</Button></div>)}</div>}</section>
     </fieldset>
-  </div>
+  </div></TripMediaProvider>
 }

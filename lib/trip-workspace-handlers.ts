@@ -8,7 +8,7 @@ import { isKnownTripCountry } from "@/content/trip-options"
 import type { SupabaseClient } from "@supabase/supabase-js"
 
 const unavailable = () => new AccountError(503,"Your trip workspace could not be confirmed. Keep your notes and try again.")
-async function ownTrip(client:SupabaseClient,userId:string,id:string) {
+export async function requireOwnedTrip(client:SupabaseClient,userId:string,id:string) {
   if(!z.uuid().safeParse(id).success)throw new AccountError(404,"This trip could not be found.")
   const {data,error}=await client.from("trip_plans").select("id,details").eq("id",id).eq("user_id",userId).maybeSingle()
   if(error)throw unavailable()
@@ -27,13 +27,13 @@ async function readWorkspace(client:SupabaseClient,id:string) {
 }
 export const workspaceGet=(id:string)=>accountHandler(async()=>{
   const {user,client}=await requireAccountUser()
-  await ownTrip(client,user.id,id)
+  await requireOwnedTrip(client,user.id,id)
   return readWorkspace(client,id)
 })
 export const workspacePut=(request:Request,id:string)=>accountHandler(async()=>{
   const {user,client}=await requireAccountUser()
   const body=await accountBody(request,workspaceWriteSchema)
-  const country=await ownTrip(client,user.id,id)
+  const country=await requireOwnedTrip(client,user.id,id)
   if(!workspacePlacesValid(body.data,country))throw new AccountError(400,"Choose a public place in this trip’s country.")
   const next=body.expectedRevision+1
   const query=body.expectedRevision===0

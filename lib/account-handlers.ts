@@ -142,6 +142,7 @@ export const planDelete = (request: Request, id: string) => accountHandler(async
   const plan = await ownPlan(client, user.id, id)
   if (plan.status !== "draft" || plan.updated_at !== body.expectedUpdatedAt) throw new AccountError(409, "Only the current draft can be deleted.")
   const { data, error } = await client.from("trip_plans").delete().eq("id", id).eq("user_id", user.id).eq("status", "draft").eq("updated_at", body.expectedUpdatedAt).select("id").maybeSingle()
+  if (error?.code === "23503") throw new AccountError(409, "Remove this trip’s private uploads before deleting the draft.")
   if (error) storageFailed()
   if (!data) throw new AccountError(409, "This plan changed while you were deleting it. Refresh and try again.")
   return { success: true }
