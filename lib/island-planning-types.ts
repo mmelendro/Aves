@@ -35,6 +35,14 @@ export type TripPlace = {
   shortTransferStop?: boolean;
   weekdays?: number[];
   months?: number[];
+  excludedMonthDays?: string[];
+  indoorAlternative?: boolean;
+  visitReference?: {
+    minutes: number;
+    scope: string;
+    url: string;
+    reviewedAt: string;
+  };
   eco?: { kind: string; note: string; url: string };
   when?: string;
   access?: string;

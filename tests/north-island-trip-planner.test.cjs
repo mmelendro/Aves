@@ -9,7 +9,7 @@ test('North Island has one canonical operational guide and an independently scop
  assert.equal(islandPlanner('north-island'),p);assert.equal(islandPlanner('__proto__'),null);
  assert.equal(load('lib/new-zealand-region-links.ts').newZealandRegionHref('north-island'),'/new-zealand/north-island');
  assert.equal(p.context.accountHref,'/account?country=new-zealand&region=north-island');
- assert.equal(p.tripPlaces.length,18);assert.equal(p.tripAreas.length,3);
+ assert.equal(p.tripPlaces.length,19);assert.equal(p.tripAreas.length,3);
  for(const place of p.tripPlaces){assert.ok(p.tripAreaById.has(place.base));assert.ok(place.categories.every(c=>p.tripCategories.some(k=>k.id===c)));assert.equal(new URL(place.url).protocol,'https:');assert.ok(place.birdIds.every(id=>selectableNzBirds.some(b=>b.id===id)))}
  assert.equal(p.prices.priceByPlace.has('trip-apam'),false);
  assert.equal(p.prices.priceByPlace.get('trip-ni-hamilton-gardens').low,27.5);

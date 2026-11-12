@@ -81,6 +81,24 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       (!place.months || place.months.includes(at.getUTCMonth() + 1))
     );
   }
+  /** New suggestions honour reviewed calendars. Validation keeps legacy guest drafts intact. */
+  function placeFitsCalendar(
+    place: TripPlace,
+    input: TripPlannerInput,
+    index: number,
+  ) {
+    if (!marketFitsDay(place, input, index)) return false;
+    if (!place.weekdays && !place.months && !place.excludedMonthDays)
+      return true;
+    const date = tripDayDate(input, index);
+    if (!date) return false;
+    const at = new Date(`${date}T12:00:00Z`);
+    return (
+      (!place.weekdays || place.weekdays.includes(at.getUTCDay())) &&
+      (!place.months || place.months.includes(at.getUTCMonth() + 1)) &&
+      !place.excludedMonthDays?.includes(date.slice(5))
+    );
+  }
   function validTripInput(value: unknown): value is TripPlannerInput {
     if (!value || typeof value !== "object") return false;
     const v = value as TripPlannerInput;
@@ -328,7 +346,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
           .filter(
             (p) =>
               p.base === baseId &&
-              marketFitsDay(p, input, days.length) &&
+              placeFitsCalendar(p, input, days.length) &&
               (!(context.corridor && b > 0 && d === 0) || p.shortTransferStop),
           )
           .sort(
@@ -358,7 +376,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
             !p.categories.includes("stays") &&
             !p.categories.includes("birding") &&
             p.categories.some((c) => input.interests.includes(c)) &&
-            marketFitsDay(p, input, days.length),
+            placeFitsCalendar(p, input, days.length),
         );
         const extra = style === "variety" ? extras.at(-1) : extras[0];
         if (extra) usedExtras.add(extra.id);
@@ -654,6 +672,27 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
           ? "Check the selected date against current opening and operating conditions."
           : "A calendar date is needed to review opening days and seasonal availability.",
       );
+    for (const place of [stop, extra].filter((p): p is TripPlace =>
+      Boolean(p),
+    )) {
+      if (!placeFitsCalendar(place, draft.input, index))
+        notes.push(
+          `${place.name}: ${draft.input.departureDate ? "selected date conflicts with the reviewed calendar" : "choose a date to check the reviewed calendar"}. Your selection is kept for review; replace it or change the dates.`,
+        );
+      if (place.visitReference)
+        notes.push(
+          `${place.name}: about ${place.visitReference.minutes} minutes for ${place.visitReference.scope}. Local travel, birding and breaks are additional.`,
+        );
+    }
+    if (stop && !stop.indoorAlternative) {
+      const indoor = placesAt(day.baseId).find(
+        (p) => p.indoorAlternative && placeFitsCalendar(p, draft.input, index),
+      );
+      if (indoor)
+        notes.push(
+          `Indoor alternative to review: ${indoor.name}. Replace an outing if wanted; check opening and travel conditions.`,
+        );
+    }
     if (stop || extra)
       notes.push(
         "Activity duration, local travel and weather suitability still need review.",
@@ -709,6 +748,15 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       ...draft.days.map(
         (d, i) =>
           `Day ${i + 1}${tripDayDate(draft.input, i) ? ` (${tripDayDate(draft.input, i)})` : ""}: ${d.transferFrom ? `Transfer ${tripAreaById.get(d.transferFrom)?.name} to ` : ""}${tripAreaById.get(d.baseId)?.name}. ${[tripPlaceById.get(d.birdingId)?.name, d.extraId ? `Optional: ${tripPlaceById.get(d.extraId)?.name}` : "", d.stayId ? `Night: ${stayName(d.stayId)}` : "Final day, no overnight included"].filter(Boolean).join("; ")}.${d.transferFrom ? `\n${tripRoadNote(draft, i)}` : ""}`,
+      ),
+      ...draft.days.flatMap((_, i) =>
+        tripDayWorkload(draft, i)
+          .notes.filter(
+            (note) =>
+              note.includes("selected date conflicts") ||
+              note.includes("choose a date to check"),
+          )
+          .map((note) => `Day ${i + 1} calendar review: ${note}`),
       ),
       ...tripPriceNotes(draft),
       coverage.unmatched.length
@@ -810,6 +858,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     placesAt,
     tripDayDate,
     marketFitsDay,
+    placeFitsCalendar,
     validTripInput,
     buildTrip,
     tripStyles,

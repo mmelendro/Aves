@@ -1,7 +1,7 @@
 {
   "version": 1,
   "region": "north-island",
-  "checkedAt": "2026-11-11",
+  "checkedAt": "2026-11-12",
   "coverage": "Auckland, Hamilton and Rotorua corridor pilot, not a complete North Island directory. Public references do not imply partnerships or booking availability.",
   "coordinateProvenance": {
     "dataset": "Natural Earth populated places simple 5.1.2",
@@ -243,12 +243,18 @@
       ],
       "encounter": "wild",
       "tags": [],
-      "checkedAt": "2026-11-11",
+      "checkedAt": "2026-11-12",
       "sources": [
         "https://www.doc.govt.nz/parks-and-recreation/places-to-go/bay-of-plenty/places/sulphur-bay-wildlife-refuge/",
         "https://www.rotoruanz.com/visit/things-to-do/sulphur-point"
       ],
-      "shortTransferStop": true
+      "shortTransferStop": true,
+      "visitReference": {
+        "minutes": 120,
+        "scope": "the full Sulphur Bay path",
+        "url": "https://www.rotoruanz.com/visit/featured-stories/10-wonderful-walks-in-rotorua",
+        "reviewedAt": "2026-11-12"
+      }
     },
     {
       "id": "trip-ni-wingspan",
@@ -343,24 +349,31 @@
     },
     {
       "id": "trip-ni-redwoods",
-      "name": "The Redwoods / Tītokorangi & Whakarewarewa Forest",
+      "name": "Redwood Memorial Grove ground track",
       "base": "rotorua",
       "categories": [
         "hikes"
       ],
       "url": "https://www.rotorualakescouncil.nz/parks-lakes-recreation/the-redwoods-titokorangi-whakarewarewa-forest",
-      "description": "Public forest ground tracks are free; paid Redwoods Treewalk is a distinct product.",
-      "access": "Choose a signposted track appropriate to ability; check current forest closures and gate times. No locally verified bird list attached.",
+      "description": "Free 2 km ground-level forest loop, with a published 30-minute walking reference. Paid Redwoods Treewalk is a separate product.",
+      "access": "Use the signposted Memorial Grove track, rather than assuming the whole forest fits a short visit. Check closures and gate times. No locally verified bird list attached.",
       "birdIds": [],
       "encounter": "not-applicable",
       "tags": [],
-      "checkedAt": "2026-11-11",
+      "checkedAt": "2026-11-12",
       "sources": [
         "https://www.rotorualakescouncil.nz/parks-lakes-recreation/the-redwoods-titokorangi-whakarewarewa-forest",
         "https://redwoods.co.nz/walk/",
-        "https://redwoods.co.nz/info/opening-hours/"
+        "https://redwoods.co.nz/info/opening-hours/",
+        "https://redwoods.co.nz/walk/short-walks/"
       ],
-      "shortTransferStop": true
+      "shortTransferStop": true,
+      "visitReference": {
+        "minutes": 30,
+        "scope": "the 2 km Memorial Grove ground track",
+        "url": "https://redwoods.co.nz/walk/short-walks/",
+        "reviewedAt": "2026-11-12"
+      }
     },
     {
       "id": "trip-ni-ibis-airport",
@@ -446,6 +459,30 @@
       "encounter": "not-applicable",
       "tags": [],
       "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-ni-waikato-museum",
+      "name": "Te Whare Taonga o Waikato Museum & Gallery",
+      "base": "hamilton",
+      "categories": [
+        "culture"
+      ],
+      "url": "https://tewharetaonga.nz/visit",
+      "description": "Indoor galleries in central Hamilton. General admission is free; Exscite and some exhibitions or activities have separate fees.",
+      "access": "1 Grantham Street. Published hours 10:00 to 17:00 daily except 25 December. Review exhibitions, access and current hours. No visit duration or weather-safe journey is assumed.",
+      "when": "Closed 25 December. Indoor alternative is an AVES planning suggestion, not a live weather recommendation.",
+      "excludedMonthDays": [
+        "12-25"
+      ],
+      "indoorAlternative": true,
+      "birdIds": [],
+      "encounter": "not-applicable",
+      "tags": [],
+      "checkedAt": "2026-11-12",
+      "shortTransferStop": false,
+      "sources": [
+        "https://tewharetaonga.nz/visit"
+      ]
     }
   ]
 }

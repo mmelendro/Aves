@@ -15,7 +15,7 @@ test('the broader catalogue covers every requested category, named stays and evi
  assert.ok(p.tripPlaces.filter(p=>p.categories.includes('markets')).length>=4)
  for(const place of p.tripPlaces){
   assert.ok(p.tripAreaById.has(place.base));assert.equal(new URL(place.url).protocol,'https:')
-  assert.match(place.checkedAt,/^2026-11-11$/)
+  assert.match(place.checkedAt,/^2026-11-(11|12)$/)
   assert.ok(place.birdIds.every(id=>selectableNzBirds.some(b=>b.id===id)))
   if(place.tags.includes('organic-ingredients')||place.tags.includes('farm-to-table'))assert.ok(place.eco?.kind==='operator')
  }

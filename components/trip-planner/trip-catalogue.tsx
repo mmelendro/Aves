@@ -11,7 +11,13 @@ import {
 } from "@/lib/nz-place-ideas";
 import { type TripCategory, type TripPlace } from "@/lib/island-planning-types";
 
-import { button, external, field, SourceLink } from "./presentation";
+import {
+  button,
+  external,
+  field,
+  SourceLink,
+  VisitReference,
+} from "./presentation";
 
 /** Browsing and place ideas are independent of generated route and private save state. */
 export default function TripCatalogue({ areaId }: { areaId: string }) {
@@ -190,6 +196,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
               Source reviewed {place.checkedAt}. Check current access and
               arrangements.
             </p>
+            <VisitReference place={place} />
             <SourceLink place={place} />
             <TripPriceReference placeId={place.id} />
             <div>

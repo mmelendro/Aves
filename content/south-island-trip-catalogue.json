@@ -667,8 +667,20 @@
       ],
       "encounter": "sanctuary",
       "tags": [],
-      "checkedAt": "2026-11-11",
-      "access": "Conservation sanctuary populations. Check opening, tickets and current visitor arrangements."
+      "checkedAt": "2026-11-12",
+      "access": "Self-guided entry needs no booking under the reviewed visitor information. Guided 1.5-hour tours are a separate booked product. No daytime kiwi encounter is promised.",
+      "weekdays": [
+        0,
+        1,
+        4,
+        5,
+        6
+      ],
+      "when": "Self-guided entry Thursday to Monday, 09:30 to 16:30. Closed Tuesday and Wednesday. Confirm current hours before travel.",
+      "sources": [
+        "https://orokonui.nz/orokonuibirds/",
+        "https://orokonui.nz/visit/"
+      ]
     },
     {
       "id": "trip-taiaroa",
@@ -703,8 +715,8 @@
       ],
       "encounter": "wild",
       "tags": [],
-      "checkedAt": "2026-11-11",
-      "access": "Ōamaru is a separate excursion north of Dunedin. Check DOC access rules; do not enter penguin areas or approach nests."
+      "checkedAt": "2026-11-12",
+      "access": "Separate excursion near Ōamaru, north of Dunedin. Use the clifftop track and viewing hide. Keep off the beach 15:00 to 09:00, stay at least 20 m from marine wildlife, and do not approach nests. No dogs or toilets. Check current DOC restrictions."
     },
     {
       "id": "trip-larnach",
@@ -789,8 +801,8 @@
       ],
       "encounter": "wild",
       "tags": [],
-      "checkedAt": "2026-11-11",
-      "access": "Around 78 km from Te Anau: plan a dedicated Milford Road outing and check road, track and weather alerts."
+      "checkedAt": "2026-11-12",
+      "access": "Cascade Creek car park is about 78 km from Te Anau. Plan a dedicated Milford Road outing. Alpine weather can change rapidly; check current road, track and weather notices. Walking time is not treated as a complete outing duration."
     },
     {
       "id": "trip-fiordland-lodge",

@@ -32,3 +32,23 @@ export function SourceLink({ place }: { place: TripPlace }) {
     </div>
   );
 }
+
+/** Scoped walking references never imply a complete activity or day duration. */
+export function VisitReference({ place }: { place: TripPlace }) {
+  const reference = place.visitReference;
+  if (!reference) return null;
+  return (
+    <p className="mt-2 text-xs leading-6 text-gray-600">
+      Published walking reference: about {reference.minutes} minutes for{" "}
+      {reference.scope}. Local travel, birding and breaks are additional.{" "}
+      <a
+        href={reference.url}
+        {...external}
+        className="font-semibold text-emerald-800 underline"
+      >
+        Walking source, reviewed {reference.reviewedAt}
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+    </p>
+  );
+}

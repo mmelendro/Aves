@@ -4,7 +4,7 @@ import TripPriceReference from "./trip-price-reference";
 import { type TripDay, type TripDraft } from "@/lib/island-planning-types";
 
 import { nzBirdName } from "@/content/new-zealand-checklist";
-import { external, field, SourceLink } from "./presentation";
+import { external, field, SourceLink, VisitReference } from "./presentation";
 
 /** One editable itinerary day; transfers and the fixed departure day stay unscheduled. */
 export default function TripDayCard({
@@ -23,7 +23,7 @@ export default function TripDayCard({
     canScheduleDay,
     airbnbAreaUrl,
     gatewayById,
-    marketFitsDay,
+    placeFitsCalendar,
     placesAt,
     tripAreaById,
     tripDayDate,
@@ -47,7 +47,7 @@ export default function TripDayCard({
     (p) =>
       p.categories.includes("birding") &&
       (!arrival || p.shortTransferStop) &&
-      marketFitsDay(p, draft.input, index) &&
+      (p.id === day.birdingId || placeFitsCalendar(p, draft.input, index)) &&
       (draft.input.includeManaged || p.encounter === "wild"),
   );
   return (
@@ -186,8 +186,15 @@ export default function TripDayCard({
             >
               <option value="">Leave open / local research day</option>
               {birdStops.map((p) => (
-                <option key={p.id} value={p.id}>
+                <option
+                  key={p.id}
+                  value={p.id}
+                  disabled={!placeFitsCalendar(p, draft.input, index)}
+                >
                   {p.name}
+                  {!placeFitsCalendar(p, draft.input, index)
+                    ? " · review date"
+                    : ""}
                 </option>
               ))}
             </select>
@@ -198,9 +205,11 @@ export default function TripDayCard({
               <p className="mt-1 font-medium text-emerald-800">
                 {stop.encounter === "restored-sanctuary"
                   ? "Free living restoration sanctuary · "
-                  : stop.encounter === "managed"
-                    ? "Managed or captive encounter · "
-                    : "Wild outing · "}
+                  : stop.encounter === "sanctuary"
+                    ? "Conservation sanctuary · "
+                    : stop.encounter === "managed"
+                      ? "Managed or captive encounter · "
+                      : "Wild outing · "}
                 {stop.birdIds
                   .filter((id) => draft.input.birdIds.includes(id))
                   .map(nzBirdName)
@@ -209,6 +218,7 @@ export default function TripDayCard({
               {stop.access && (
                 <p className="mt-1 text-xs text-gray-600">{stop.access}</p>
               )}
+              <VisitReference place={stop} />
               <SourceLink place={stop} />
               <TripPriceReference
                 placeId={stop.id}
@@ -245,11 +255,10 @@ export default function TripDayCard({
                   <option
                     key={p.id}
                     value={p.id}
-                    disabled={!marketFitsDay(p, draft.input, index)}
+                    disabled={!placeFitsCalendar(p, draft.input, index)}
                   >
                     {p.name}
-                    {p.categories.includes("markets") &&
-                    !marketFitsDay(p, draft.input, index)
+                    {!placeFitsCalendar(p, draft.input, index)
                       ? " · needs a matching date"
                       : ""}
                   </option>
@@ -275,6 +284,7 @@ export default function TripDayCard({
                   time requires a full day.
                 </p>
               )}
+              <VisitReference place={extra} />
               <SourceLink place={extra} />
               <TripPriceReference
                 placeId={extra.id}
@@ -304,7 +314,11 @@ export default function TripDayCard({
               {local
                 .filter((p) => p.categories.includes("stays"))
                 .map((p) => (
-                  <option key={p.id} value={p.id}>
+                  <option
+                    key={p.id}
+                    value={p.id}
+                    disabled={!placeFitsCalendar(p, draft.input, index)}
+                  >
                     {p.name}
                   </option>
                 ))}
