@@ -2,6 +2,9 @@ import { southIslandPlaceContexts, type PlacePhoto } from "@/content/south-islan
 import additions from "@/content/place-gallery-additions.json";
 
 export type GalleryPhoto = PlacePhoto & {
+  capturedOn?: string;
+  dateBasis?: string;
+  reviewedOn?: string;
   id: string;
   countryId: string;
   regionId: string;

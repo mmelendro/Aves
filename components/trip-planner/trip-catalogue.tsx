@@ -1,4 +1,5 @@
 "use client";
+import {sourceFreshness} from "@/lib/source-freshness";
 import { useIslandPlanner } from "./island-planner-context";
 
 import TripPriceReference from "./trip-price-reference";
@@ -193,8 +194,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
               </details>
             )}
             <p className="mt-2 text-[11px] text-gray-500">
-              Source reviewed {place.checkedAt}. Check current access and
-              arrangements.
+              Source reviewed {place.checkedAt}. {sourceFreshness(place.checkedAt)==="reviewed" ? "Check current access and arrangements." : "Review due. Recheck the original source before relying on access or supplier details."}
             </p>
             <VisitReference place={place} />
             <SourceLink place={place} />

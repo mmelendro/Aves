@@ -24,6 +24,7 @@ import { buildTripJourney } from "@/lib/trip-journey";
 import { useTripMap } from "./trip-planner/trip-map-context";
 import TripDayCard from "./trip-planner/trip-day-card";
 import TripCatalogue from "./trip-planner/trip-catalogue";
+import RouteReading from "./trip-planner/route-reading";
 import TripPriceReview from "./trip-planner/trip-price-review";
 import TripAllowanceSummary from "./trip-planner/trip-allowance-summary";
 import { button, field } from "./trip-planner/presentation";
@@ -825,6 +826,7 @@ function IslandPlannerForm() {
             </div>
           )}
         </div>
+        <RouteReading />
         <TripCatalogue
           key={context.corridor ? selectedMapBase?.id : input.areaId}
           areaId={

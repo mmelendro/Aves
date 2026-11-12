@@ -1380,6 +1380,60 @@
         }
       ]
     },
+    "/images/places/au-booroomba.webp": {
+      "width": 800,
+      "height": 600,
+      "variants": [
+        {
+          "src": "/images/renditions/fb594d1ebdbc95f9c46d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b626c200891b0a4c0fd7-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/e00fb5341023de0d129e-800.webp",
+          "width": 800
+        }
+      ]
+    },
+    "/images/places/au-cape-le-grand.webp": {
+      "width": 1600,
+      "height": 615,
+      "variants": [
+        {
+          "src": "/images/renditions/440875f011a693334c08-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b5e5a44fb15123841ac5-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/4a210912a853483624f0-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-darwin-city.webp": {
+      "width": 1600,
+      "height": 528,
+      "variants": [
+        {
+          "src": "/images/renditions/3e0aa33f4d8d1da4c9d4-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/6019355e96347890319f-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/20a9fb8d95364da8bc21-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
     "/images/places/au-dove-lake.webp": {
       "width": 1600,
       "height": 916,
@@ -1394,6 +1448,60 @@
         },
         {
           "src": "/images/renditions/d76193097d519b09a593-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-florence-falls.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/c1aab8ceab089b3f23b7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0d8b92cb745fe45ad029-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/0115012c5d086b930619-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-gibraltar-falls.webp": {
+      "width": 1600,
+      "height": 2138,
+      "variants": [
+        {
+          "src": "/images/renditions/b81bab8cdc4566840924-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/e332f04201bb0b1222c9-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/458492b6b7e1f5ea140a-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-hamersley-gorge.webp": {
+      "width": 1600,
+      "height": 2133,
+      "variants": [
+        {
+          "src": "/images/renditions/b661e6b5ef45ccc94d31-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/dab7916ce011b3153a09-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/cd70dff1f9c1e53eebe8-1280.webp",
           "width": 1280
         }
       ]
@@ -1416,6 +1524,42 @@
         }
       ]
     },
+    "/images/places/au-kings-canyon.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/9c6abc505d5f1efa6c1d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/69d6ef40e5fa06a02000-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/7383477b8e88c6156bf9-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-lake-burley-griffin.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/3bf5979a2f203daf9df4-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c585472b1dfcc347af93-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/c6f28f66bc340a72af73-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
     "/images/places/au-mount-gambier.webp": {
       "width": 1600,
       "height": 1200,
@@ -1430,6 +1574,78 @@
         },
         {
           "src": "/images/renditions/3b1da70bee59ffcf09a4-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-nambung.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/3b55d11bf542fed1c4b7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/41c8ecb9338b33cf3ea8-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/cdf57068c38b4b48e514-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-nightcliff-jetty.webp": {
+      "width": 1600,
+      "height": 2133,
+      "variants": [
+        {
+          "src": "/images/renditions/aa4ee19072c08e7cfc0e-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/9fa6322356ef17c96bed-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/2d7fc2f2ab17718ae058-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-nitmiluk-gorge.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/7e9b02ad60446fcf7fcb-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/c45362f9d944f62e2f72-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/350c7774153759ba5fb6-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-orroral-homestead.webp": {
+      "width": 1600,
+      "height": 1066,
+      "variants": [
+        {
+          "src": "/images/renditions/610e3ebcb7571713c65d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/202bd0e930647d661e37-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/054e7d351666d8ecb8f1-1280.webp",
           "width": 1280
         }
       ]
@@ -1452,6 +1668,24 @@
         }
       ]
     },
+    "/images/places/au-shark-bay-big-lagoon.webp": {
+      "width": 1600,
+      "height": 1067,
+      "variants": [
+        {
+          "src": "/images/renditions/8bcf751f1d454c18131d-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/1d212ad11e116426dfad-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d6b8bcd12c6e229fefa4-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
     "/images/places/au-tessellated-pavement.webp": {
       "width": 1600,
       "height": 1067,
@@ -1466,6 +1700,42 @@
         },
         {
           "src": "/images/renditions/99d98ab685239e18eb56-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-tidbinbilla.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/1640d21007778b627757-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/6f1fb271b2689d2b03f3-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/8a830d7b2d3928c7c825-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-valley-of-giants.webp": {
+      "width": 1600,
+      "height": 2133,
+      "variants": [
+        {
+          "src": "/images/renditions/8006f91e7963bbed9d70-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8cebdcd33ce839e338e5-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/d9d625386fa87779597e-1280.webp",
           "width": 1280
         }
       ]

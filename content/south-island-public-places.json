@@ -30,14 +30,15 @@
       "url": "https://orokonui.nz/visit/",
       "coordinateSource": "DOC Public Conservation Land",
       "precision": "Approximate reserve reference",
-      "checked": "2026-11-09",
+      "checked": "2026-11-13",
       "evidenceUrl": "https://orokonui.nz/visit/"
     },
     {
       "id": "abel-tasman-eco-tours",
       "name": "Abel Tasman Eco Tours",
       "categories": [
-        "businesses"
+        "businesses",
+        "projects"
       ],
       "longitude": 172.898462,
       "latitude": -40.979632,
@@ -45,7 +46,7 @@
       "url": "https://www.abeltasmanecotours.co.nz/contact/",
       "coordinateSource": "Mārahau area shown on the operator contact map",
       "precision": "Approximate Mārahau departure area",
-      "checked": "2026-11-09",
+      "checked": "2026-11-13",
       "evidenceUrl": "https://www.abeltasmanecotours.co.nz/conservation-projects/"
     },
     {

@@ -27,7 +27,7 @@ test('region scopes expose the full same-photo collection and fail closed for un
  assert.equal(galleryPhotos('new-zealand','south-island').length,20);
  assert.equal(galleryPhotos('new-zealand','north-island').length,5);
  assert.equal(galleryPhotos('new-zealand','rakiura').length,5);
- assert.equal(placeGalleryPhotos.length,110);
+ assert.equal(placeGalleryPhotos.length,125);
  assert.equal(galleryPhotos("colombia","central-andes").length,5);
  assert.equal(galleryPhotos("colombia").length,22);
  assert.deepEqual(galleryPhotos('new-zealand','missing'),[]);

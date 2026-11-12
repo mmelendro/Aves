@@ -2156,6 +2156,90 @@
       ]
     },
     {
+      "source": "/images/places/au-booroomba.webp",
+      "sourceSha256": "43293e3af80ef32c7e4fdec9fecea0703f8f7a13c110b44db4bf2c5c27760907",
+      "sourceBytes": 120708,
+      "variants": [
+        {
+          "src": "/images/renditions/fb594d1ebdbc95f9c46d-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4794,
+          "sha256": "fb594d1ebdbc95f9c46dd8c44f3408131362e5c4c7ba1285302bb4094279bb5d"
+        },
+        {
+          "src": "/images/renditions/b626c200891b0a4c0fd7-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 57930,
+          "sha256": "b626c200891b0a4c0fd70e56c7514e70b6a9153647dd3939a8055ea4a6e7ce03"
+        },
+        {
+          "src": "/images/renditions/e00fb5341023de0d129e-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 111412,
+          "sha256": "e00fb5341023de0d129e56b740055b1b9b24a7500fd7b38fa3761e3f7e93f65d"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-cape-le-grand.webp",
+      "sourceSha256": "479776f7806d3343981c1097ff39638702989dd959a8a38af7064ff992bcaf77",
+      "sourceBytes": 183994,
+      "variants": [
+        {
+          "src": "/images/renditions/440875f011a693334c08-160.webp",
+          "width": 160,
+          "height": 62,
+          "bytes": 2538,
+          "sha256": "440875f011a693334c08f42c5c11467da1f159fb6efa1bd444fabb88ac13f0fb"
+        },
+        {
+          "src": "/images/renditions/b5e5a44fb15123841ac5-640.webp",
+          "width": 640,
+          "height": 246,
+          "bytes": 27880,
+          "sha256": "b5e5a44fb15123841ac5b1eec6e5cdda53ba9cd63d291ed270bf3d343070142c"
+        },
+        {
+          "src": "/images/renditions/4a210912a853483624f0-1280.webp",
+          "width": 1280,
+          "height": 492,
+          "bytes": 87852,
+          "sha256": "4a210912a853483624f0d09bf345c31e12bf2909574188eedfcb2597a1239952"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-darwin-city.webp",
+      "sourceSha256": "5a32ddf1a3c5e51c862343437de54f4d28b812b2e8507a899b7d450edde0d566",
+      "sourceBytes": 124470,
+      "variants": [
+        {
+          "src": "/images/renditions/3e0aa33f4d8d1da4c9d4-160.webp",
+          "width": 160,
+          "height": 53,
+          "bytes": 2698,
+          "sha256": "3e0aa33f4d8d1da4c9d488550e162c2a41cd6fa6bb33048985f3e0c8852de0b6"
+        },
+        {
+          "src": "/images/renditions/6019355e96347890319f-640.webp",
+          "width": 640,
+          "height": 211,
+          "bytes": 24234,
+          "sha256": "6019355e96347890319fd347d2557880e52254f296125e30b5ffaa104b006fb4"
+        },
+        {
+          "src": "/images/renditions/20a9fb8d95364da8bc21-1280.webp",
+          "width": 1280,
+          "height": 422,
+          "bytes": 69070,
+          "sha256": "20a9fb8d95364da8bc21dd6dd241a27e2382aa6e96e7c67311d73c2e769fdaec"
+        }
+      ]
+    },
+    {
       "source": "/images/places/au-dove-lake.webp",
       "sourceSha256": "80c9b4f93df131d33cac5fed955436b03387e16e818b10775977a9252fbe9680",
       "sourceBytes": 311430,
@@ -2180,6 +2264,90 @@
           "height": 733,
           "bytes": 153434,
           "sha256": "d76193097d519b09a593cfbe6ed1dd7ffaa467bd34e21669af234534b2b1adad"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-florence-falls.webp",
+      "sourceSha256": "2f0fa8e56ef8800623f5377c526627612d420f791fc72dd8e52fd38d0e885fc0",
+      "sourceBytes": 545660,
+      "variants": [
+        {
+          "src": "/images/renditions/c1aab8ceab089b3f23b7-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 6050,
+          "sha256": "c1aab8ceab089b3f23b7f8e5b97870ace9f09655a7c748db871c872a769cc8e4"
+        },
+        {
+          "src": "/images/renditions/0d8b92cb745fe45ad029-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 86196,
+          "sha256": "0d8b92cb745fe45ad0292d48e887887d6c5617dd0675825794997fa7a0c366fd"
+        },
+        {
+          "src": "/images/renditions/0115012c5d086b930619-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 288402,
+          "sha256": "0115012c5d086b930619f5247f661c41b4ea6b496d2768600ae324136dea8167"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-gibraltar-falls.webp",
+      "sourceSha256": "8c41cf6d26fb2325f2d847a3bd830eb4bcfd23c1e693df05abf8144b076ac1b1",
+      "sourceBytes": 407276,
+      "variants": [
+        {
+          "src": "/images/renditions/b81bab8cdc4566840924-160.webp",
+          "width": 160,
+          "height": 214,
+          "bytes": 7830,
+          "sha256": "b81bab8cdc456684092492723d62d3326aa1984d314b65558f477648ed775d42"
+        },
+        {
+          "src": "/images/renditions/e332f04201bb0b1222c9-640.webp",
+          "width": 640,
+          "height": 855,
+          "bytes": 83440,
+          "sha256": "e332f04201bb0b1222c9cfe7adf1975e07cf7595f7163487f44c8ac5eddaf441"
+        },
+        {
+          "src": "/images/renditions/458492b6b7e1f5ea140a-1280.webp",
+          "width": 1280,
+          "height": 1710,
+          "bytes": 218046,
+          "sha256": "458492b6b7e1f5ea140a1464d6611e96f4087e6ceef65f661e93678f8805a033"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-hamersley-gorge.webp",
+      "sourceSha256": "c87bcc81cdbff6fbe6ca19fc0d6a0785c17765355470b845cb9320efcfd5d349",
+      "sourceBytes": 730104,
+      "variants": [
+        {
+          "src": "/images/renditions/b661e6b5ef45ccc94d31-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 9144,
+          "sha256": "b661e6b5ef45ccc94d318a692ab9517848bd7b10a3081ad72f2ff5e167becff8"
+        },
+        {
+          "src": "/images/renditions/dab7916ce011b3153a09-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 116600,
+          "sha256": "dab7916ce011b3153a0955f0d377b5aea723414841d94ca393ffaf3073bc6a67"
+        },
+        {
+          "src": "/images/renditions/cd70dff1f9c1e53eebe8-1280.webp",
+          "width": 1280,
+          "height": 1706,
+          "bytes": 369652,
+          "sha256": "cd70dff1f9c1e53eebe8c96669f5b6b91a78461879b1db2fcf2793deef25f146"
         }
       ]
     },
@@ -2212,6 +2380,62 @@
       ]
     },
     {
+      "source": "/images/places/au-kings-canyon.webp",
+      "sourceSha256": "09cc1098568114262ea87303e5b044e070fe10d9b27a9293789cd1771b0489ee",
+      "sourceBytes": 248710,
+      "variants": [
+        {
+          "src": "/images/renditions/9c6abc505d5f1efa6c1d-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4032,
+          "sha256": "9c6abc505d5f1efa6c1d79d682908fe357531beda9391917182da5cb914cb088"
+        },
+        {
+          "src": "/images/renditions/69d6ef40e5fa06a02000-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 44690,
+          "sha256": "69d6ef40e5fa06a02000ece1e9db1bf4f2be8f385c95195e3e64fa49c0312d23"
+        },
+        {
+          "src": "/images/renditions/7383477b8e88c6156bf9-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 132370,
+          "sha256": "7383477b8e88c6156bf906085fc3b3d308d644427fcb2fc636c83192f543b4e5"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-lake-burley-griffin.webp",
+      "sourceSha256": "c622b25f2df7b0880721e0d7de464d3f1b13567e73bf33cd799d9de83d0c34b4",
+      "sourceBytes": 304032,
+      "variants": [
+        {
+          "src": "/images/renditions/3bf5979a2f203daf9df4-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 3378,
+          "sha256": "3bf5979a2f203daf9df45c797b32b96c6f1d6cdbf57af3b1e4c54a850e2c3f28"
+        },
+        {
+          "src": "/images/renditions/c585472b1dfcc347af93-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 42750,
+          "sha256": "c585472b1dfcc347af9384d878d809ff2bb9196eabb1a185cbb64e7a1fd4365c"
+        },
+        {
+          "src": "/images/renditions/c6f28f66bc340a72af73-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 157258,
+          "sha256": "c6f28f66bc340a72af73728e2aec92d7447f5771c743aac59d14e5882025190d"
+        }
+      ]
+    },
+    {
       "source": "/images/places/au-mount-gambier.webp",
       "sourceSha256": "cd039f7902244af744327d6eb075bf34b5648bd257bc47b01ff791221bf6ab35",
       "sourceBytes": 193204,
@@ -2236,6 +2460,118 @@
           "height": 960,
           "bytes": 95316,
           "sha256": "3b1da70bee59ffcf09a4c4970265be9050cf5fe8b58a057bb9f9521d9cafaf93"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-nambung.webp",
+      "sourceSha256": "92d4b806051fb4571f758c5291ab5e27e50206b1c088f5894e46824185590f68",
+      "sourceBytes": 390588,
+      "variants": [
+        {
+          "src": "/images/renditions/3b55d11bf542fed1c4b7-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4458,
+          "sha256": "3b55d11bf542fed1c4b793713473830c176af78773af507c0485245e1d4bcc97"
+        },
+        {
+          "src": "/images/renditions/41c8ecb9338b33cf3ea8-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 53298,
+          "sha256": "41c8ecb9338b33cf3ea8d411066f59d5334c94b7a9eaf2b5b089c7c1b7a9db40"
+        },
+        {
+          "src": "/images/renditions/cdf57068c38b4b48e514-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 192176,
+          "sha256": "cdf57068c38b4b48e51444fc7967255e666abb94485d2a6483539d97bc92d24f"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-nightcliff-jetty.webp",
+      "sourceSha256": "d3c677625a6cff84949751248c08222df4054ab741cea9cabb204b6f111fd51c",
+      "sourceBytes": 178264,
+      "variants": [
+        {
+          "src": "/images/renditions/aa4ee19072c08e7cfc0e-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 9292,
+          "sha256": "aa4ee19072c08e7cfc0e063dce5f36fe680164abfa1f22f5136c81495ce3ef7b"
+        },
+        {
+          "src": "/images/renditions/9fa6322356ef17c96bed-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 51716,
+          "sha256": "9fa6322356ef17c96bed9e2cc6d54ba783202b02cf5c73639e840a76df9e3c1b"
+        },
+        {
+          "src": "/images/renditions/2d7fc2f2ab17718ae058-1280.webp",
+          "width": 1280,
+          "height": 1706,
+          "bytes": 112222,
+          "sha256": "2d7fc2f2ab17718ae058e99489e00e9eb299b2a55a172e284bfc57b96b9eafab"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-nitmiluk-gorge.webp",
+      "sourceSha256": "dfacf1a06fddffcabd2300466fff7991ba067eb4b440782a1e5ed1546929db80",
+      "sourceBytes": 559266,
+      "variants": [
+        {
+          "src": "/images/renditions/7e9b02ad60446fcf7fcb-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5634,
+          "sha256": "7e9b02ad60446fcf7fcb34b1196a1913d07e7cd865d85c12287c855d099d52fb"
+        },
+        {
+          "src": "/images/renditions/c45362f9d944f62e2f72-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 79370,
+          "sha256": "c45362f9d944f62e2f729372c59a218d4501ddba20754c55da98bdaa5484ef73"
+        },
+        {
+          "src": "/images/renditions/350c7774153759ba5fb6-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 281418,
+          "sha256": "350c7774153759ba5fb60fd406c7b6a64e37f5dd526035bd4e5e445597259d9a"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-orroral-homestead.webp",
+      "sourceSha256": "c1eeef9eb92ac70d70e6ea3e724a18a6696928ab937a929e0622247a0fb0b4c6",
+      "sourceBytes": 482120,
+      "variants": [
+        {
+          "src": "/images/renditions/610e3ebcb7571713c65d-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5290,
+          "sha256": "610e3ebcb7571713c65d6b9861dbf87aa4d8f2b2e01f1a23250a59e1d56def35"
+        },
+        {
+          "src": "/images/renditions/202bd0e930647d661e37-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 72420,
+          "sha256": "202bd0e930647d661e3701a0c1eb4c64c2d6cf89de1bfd48c4ccca0fcb6932be"
+        },
+        {
+          "src": "/images/renditions/054e7d351666d8ecb8f1-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 245574,
+          "sha256": "054e7d351666d8ecb8f161cb039914a81ad57635d1be8b807549b7b514995e1c"
         }
       ]
     },
@@ -2268,6 +2604,34 @@
       ]
     },
     {
+      "source": "/images/places/au-shark-bay-big-lagoon.webp",
+      "sourceSha256": "2917376fa5e618ca5967adbd1e0f07be01bce1151d4f5b4a3376ce69f3816c4c",
+      "sourceBytes": 127046,
+      "variants": [
+        {
+          "src": "/images/renditions/8bcf751f1d454c18131d-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 1990,
+          "sha256": "8bcf751f1d454c18131d60abf89239a36f5c275667f659926cf0b59ba0932159"
+        },
+        {
+          "src": "/images/renditions/1d212ad11e116426dfad-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 17966,
+          "sha256": "1d212ad11e116426dfad1418474f57d24d5e75db916bf6acd0fcb22bac95dde8"
+        },
+        {
+          "src": "/images/renditions/d6b8bcd12c6e229fefa4-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 58806,
+          "sha256": "d6b8bcd12c6e229fefa470d1921cd74abf3266d4f30495bfb69400a07b019ee0"
+        }
+      ]
+    },
+    {
       "source": "/images/places/au-tessellated-pavement.webp",
       "sourceSha256": "467400744fd2f165ddaa7d2626b54f0472636404d35eb4bb2e663caf3ff5c0c0",
       "sourceBytes": 341186,
@@ -2292,6 +2656,62 @@
           "height": 854,
           "bytes": 163332,
           "sha256": "99d98ab685239e18eb56d179fafb371c242bf495d64a12007a8ef5132bf634a1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-tidbinbilla.webp",
+      "sourceSha256": "0fc404ac3857250f282c5e0ce1767eeeb197c5d53d443176335b3dc6d6e2ab3f",
+      "sourceBytes": 387078,
+      "variants": [
+        {
+          "src": "/images/renditions/1640d21007778b627757-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 4136,
+          "sha256": "1640d21007778b627757826d4f2ae49bfcd3debb466951db69644afecd0d22eb"
+        },
+        {
+          "src": "/images/renditions/6f1fb271b2689d2b03f3-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 62982,
+          "sha256": "6f1fb271b2689d2b03f3db2c7b8798a8a944f1b7e1db3ae23cd2444a9c09e775"
+        },
+        {
+          "src": "/images/renditions/8a830d7b2d3928c7c825-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 204864,
+          "sha256": "8a830d7b2d3928c7c825876f3c6998e70255e8ae9a5d9b78e31111cec05c2bc1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-valley-of-giants.webp",
+      "sourceSha256": "4b3d617538136979ee1a92321197bd7114e4bf6642d42b28abded45774bb8dac",
+      "sourceBytes": 842826,
+      "variants": [
+        {
+          "src": "/images/renditions/8006f91e7963bbed9d70-160.webp",
+          "width": 160,
+          "height": 213,
+          "bytes": 10444,
+          "sha256": "8006f91e7963bbed9d706fd2b95353ce9b81874f873ea0712ea98f3a56f51dde"
+        },
+        {
+          "src": "/images/renditions/8cebdcd33ce839e338e5-640.webp",
+          "width": 640,
+          "height": 853,
+          "bytes": 134884,
+          "sha256": "8cebdcd33ce839e338e5e3fd225c581a69859de55c7996e89a5b123ab45f1620"
+        },
+        {
+          "src": "/images/renditions/d9d625386fa87779597e-1280.webp",
+          "width": 1280,
+          "height": 1706,
+          "bytes": 430290,
+          "sha256": "d9d625386fa87779597ec3443b05109acbb88cb4a2df818fa57c9809024641a4"
         }
       ]
     },

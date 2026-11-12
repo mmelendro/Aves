@@ -509,7 +509,7 @@
       "previous": [
         30
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 49
     },
     {
@@ -519,7 +519,7 @@
       "previous": [
         31
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 50
     },
     {
@@ -529,7 +529,7 @@
       "previous": [
         32
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 51
     },
     {
@@ -539,7 +539,7 @@
       "previous": [
         33
       ],
-      "status": "Open",
+      "status": "Pending external evidence: Booderee existing-image permission and acknowledgement must be resolved; no NSW substitutes",
       "id": 52
     },
     {
@@ -549,7 +549,7 @@
       "previous": [
         34
       ],
-      "status": "Open",
+      "status": "Partial: eight reviewed regions represented; ninth collection depends on item 52",
       "id": 53
     },
     {
@@ -559,7 +559,7 @@
       "previous": [
         35
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 54
     },
     {
@@ -569,7 +569,7 @@
       "previous": [
         36
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 55
     },
     {
@@ -579,7 +579,7 @@
       "previous": [
         37
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 56
     },
     {
@@ -589,7 +589,7 @@
       "previous": [
         38
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 57
     },
     {
@@ -600,7 +600,7 @@
         39,
         40
       ],
-      "status": "Open",
+      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
       "id": 58
     },
     {
