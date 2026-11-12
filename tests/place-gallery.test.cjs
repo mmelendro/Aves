@@ -27,9 +27,9 @@ test('region scopes expose the full same-photo collection and fail closed for un
  assert.equal(galleryPhotos('new-zealand','south-island').length,20);
  assert.equal(galleryPhotos('new-zealand','north-island').length,5);
  assert.equal(galleryPhotos('new-zealand','rakiura').length,5);
- assert.equal(placeGalleryPhotos.length,55);
+ assert.equal(placeGalleryPhotos.length,85);
  assert.equal(galleryPhotos("colombia","central-andes").length,5);
- assert.equal(galleryPhotos("colombia").length,10);
+ assert.equal(galleryPhotos("colombia").length,22);
  assert.deepEqual(galleryPhotos('new-zealand','missing'),[]);
  assert.deepEqual(galleryPhotos('missing'),[]);
 });
@@ -59,7 +59,7 @@ test('Western Andes curation preserves independent sources and represents distin
 });
 
 test('Cauca Valley landscapes preserve real wetland sources and balance the two places',()=>{
- const {createHash}=require('node:crypto');const p=galleryPhotos('colombia','cauca-valley');assert.equal(p.length,5);assert.equal(new Set(p.map(p=>p.originalSha256)).size,5);assert.deepEqual(p.slice(0,2).map(p=>p.placeId),['laguna-de-sonso','videles']);for(const x of p){assert.equal(createHash('sha256').update(fs.readFileSync(path.join(__dirname,'../public',x.src))).digest('hex'),x.webSha256);assert.match(x.contextSourceUrl,/cvc.gov.co/);assert.equal(x.licence,'CC BY-SA 4.0');}const preview=galleryPhotos('colombia');assert.equal(preview.length,10);for(const id of new Set(preview.map(p=>p.regionId)))assert.equal(preview.filter(p=>p.regionId===id).length,2);
+ const {createHash}=require('node:crypto');const p=galleryPhotos('colombia','cauca-valley');assert.equal(p.length,5);assert.equal(new Set(p.map(p=>p.originalSha256)).size,5);assert.deepEqual(p.slice(0,2).map(p=>p.placeId),['laguna-de-sonso','videles']);for(const x of p){assert.equal(createHash('sha256').update(fs.readFileSync(path.join(__dirname,'../public',x.src))).digest('hex'),x.webSha256);assert.match(x.contextSourceUrl,/cvc.gov.co/);assert.equal(x.licence,'CC BY-SA 4.0');}const preview=galleryPhotos('colombia');assert.equal(preview.length,22);for(const id of new Set(preview.map(p=>p.regionId)))assert.equal(preview.filter(p=>p.regionId===id).length,2);
 });
 
 test('Magdalena Valley gallery preserves four distinct places and source-specific licences',()=>{

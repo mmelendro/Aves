@@ -2,17 +2,20 @@ import { australiaMetadata } from "@/features/australia/lib/metadata"
 /*
  * One reusable regional-guide template, populated by the matching record in content/regions.ts.
  * The URL slug selects the region; this file controls the section order and layout.
- * The featured carousel joins the separate species catalogue through RegionalBirdCarousel.
+ * The shared photo carousel uses stable regional species IDs and credited profiles.
  */
 import { placeInSentence } from "@/lib/place-language"
 import type { Metadata } from "next"
 import Image from "next/image"
 import { SiteLink as Link } from "@/features/australia/components/site-link"
 import { notFound } from "next/navigation"
-import { ArrowRight, Bird, CalendarDays, ChevronRight, Clock3, ExternalLink, Footprints, Leaf, MapPin } from "lucide-react"
+import { ArrowRight, CalendarDays, ChevronRight, Clock3, ExternalLink, Footprints, Leaf, MapPin } from "lucide-react"
 import { PageShell } from "@/features/australia/components/page-shell"
 import { Button } from "@/components/ui/button"
 import { regions } from "@/features/australia/content/regions"
+import { getDestinationRegionBirds } from "@/content/destination-regions"
+import HomepageBirdCarousel from "@/components/homepage-bird-carousel"
+import ExpandableMedia from "@/components/expandable-media"
 import { canonicalUrl, sitePath } from "@/features/australia/lib/site-path"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -50,6 +53,7 @@ export default async function RegionPage({ params }: Props) {
   const region = findRegion((await params).slug)
   // Carry the region into the form as a preselection; nothing is booked by following this link.
   const inquiryHref = `/contact?region=${region.id}`
+  const regionalBirds = getDestinationRegionBirds("australia", region.id)
 
   return (
     <PageShell path={`/regions/${region.id}`} title={`Birding in ${placeInSentence(region.state)}`} description={region.description} eyebrow="Australian regions" explorerRegion={region.id}>
@@ -111,20 +115,19 @@ export default async function RegionPage({ params }: Props) {
         </div>
       </section>
 
-      {/* These short regional bird notes complement the media carousel above. */}
+      {/* Reuse the photographed regional collection, with context and sources in Info. */}
       <section className="py-16 lg:py-20" aria-labelledby="birds-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-8">
             <h2 id="birds-heading" className="text-2xl sm:text-3xl font-bold text-gray-900">Birds worth getting to know</h2>
             <p className="mt-4 text-gray-600 leading-relaxed">A few birds connected with these habitats. They offer a way into the landscape, not a promised sightings list.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {region.birds.map(bird => <article key={bird.name} className="rounded-2xl border border-emerald-100 p-6 sm:p-7">
-              <Bird className="h-7 w-7 text-emerald-700 mb-4" aria-hidden="true" />
-              <h3 className="text-xl font-semibold text-gray-900">{bird.name}</h3>
-              <p className="mt-3 text-sm font-medium text-emerald-800"><span className="font-semibold">Where to find it:</span> {bird.whereFound}</p><p className="mt-3 text-gray-600 leading-relaxed">{bird.note}</p>
-            </article>)}
+          <div className="mx-auto max-w-3xl">
+            <ExpandableMedia label={`${region.state} regional bird photographs`}>
+              <HomepageBirdCarousel birds={regionalBirds} label={`${region.state} regional bird photographs`} variant="destination-card" autoPlay={false} priority={false} showBirdPicker />
+            </ExpandableMedia>
           </div>
+          <p className="mt-4 text-sm leading-6 text-gray-600">Choose a bird, then open its information for habitat, regional context and sources. <a href="#country-discovery-map" className="inline-flex min-h-11 items-center font-medium text-emerald-800 underline underline-offset-4">Back to the regional map</a></p>
           <p className="mt-6 text-sm text-gray-600">Give birds space, keep away from nests and avoid using call playback to attract them. <a href="https://birdlife.org.au/how-to/ethical-birdwatching-guidelines" className="text-emerald-800 underline underline-offset-4">Read BirdLife Australia’s ethical birdwatching guidance.</a></p>
         </div>
       </section>

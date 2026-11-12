@@ -1,11 +1,9 @@
 # AVES current product increment
 
-The current sequence follows Colombia galleries, Australia galleries, gallery consistency, route references, conservation and B Corp directories, bird filters, seasonal planning, private albums, image rights, launch checks and the updated business plan.
+Current owner order: Colombia galleries, Australia galleries, gallery consistency, route evidence, conservation/B Corp directories, bird filters, seasonal planning, private albums, image rights, launch checks and the updated business plan.
 
-Completed here: five landscape photographs each for Central Andes, Eastern Andes, Western Andes, Cauca Valley and Magdalena Valley, with reviewed locality, photographer attribution and reuse terms. Colombia’s country preview balances both reviewed regions. Unavailable regional galleries retain return controls.
+Roadmap52–58 adds the six remaining Colombian regional galleries. All eleven Colombian regions now contain five reviewed landscape photographs, and the shared country overview represents every region with two photographs. See GALLERY-ROLLOUT-52-61.md for this release.
 
-Names and pronunciation are now a shared display for place and bird records. The first sourced examples are Kumanday and kea. Te Aka’s pronunciation reference opens at its publisher. Preserve spelling and diacritics, distinguish historical attribution, and never invent language, translation or pronunciation.
+Next:59 Australian landscape candidate inventory,60 New South Wales gallery,61 Queensland gallery. Later regions remain pending. Sourced names and pronunciation continue throughout; the first published examples are Kumanday and kea. Keep names, spelling and attribution tied to evidence. Do not invent pronunciation or copy unlicensed recordings.
 
-Next: build the Sierra Nevada de Santa Marta gallery, then continue the remaining Colombian regional galleries, then the sequence above. Names and pronunciation continue throughout. See RELEASE-2026-11-12-CULTURAL-NAMES.md for this increment. Later items remain pending. Physical-device and independent visitor checks require actual evidence.
-
-Validation: 677 tests, strict TypeScript, architecture check and production build passed.
+Validation:684 tests, strict TypeScript, architecture audit and production build passed. Physical-device and independent visitor checks still require actual evidence.
