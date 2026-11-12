@@ -101,3 +101,7 @@
 .pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:clamp(44rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem),52rem); height:var(--discovery-panel-height); }
 
 @media(max-height:480px) { .guideToolbar { position:static; } }
+
+/* A guided trip leaves room for its navigation below the same map. The map's
+   own minimum canvas and internal scrolling still protect wrapped controls. */
+.pair[data-layout="guide"][data-guided-journey="true"] { --discovery-panel-height:clamp(32rem,50svh,36rem); height:var(--discovery-panel-height); }

@@ -13,6 +13,7 @@ import { useMapLayers } from "./map-layer-context"
 import SouthIslandMapLayers from "./south-island-map-layers"
 import { satelliteHabitatStyle } from "@/lib/satellite-overlay.mjs"
 import catalogue from "@/content/south-island-layer-catalogue.json"
+import { useTripMap } from "./trip-planner/trip-map-context"
 import TripRouteOverlay from "./trip-planner/trip-route-overlay"
 import PublicPlaceOverlay, { PublicPlaceDetails } from "./south-island-public-place-overlay"
 import { publicPlaces, visiblePublicPlaces } from "@/lib/south-island-public-places"
@@ -42,6 +43,8 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const satellite = layers.background === "satellite"
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
+  const journey=useTripMap()?.journey
+  const guidedJourney=journey?.islandId==="south-island"
   const id = useId()
   const detailsRef = useRef<HTMLDetailsElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
@@ -77,7 +80,12 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     if (!focusedPoint) return
     setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(focusedPoint.longitude,focusedPoint.latitude,map.bbox)))
   }, [focusedPoint?.id, focusedPoint?.longitude, focusedPoint?.latitude])
-  useEffect(()=>{if(focusedPoint && detailsRef.current)detailsRef.current.open=true},[focusedPoint?.id])
+  useEffect(()=>{
+    if(!detailsRef.current)return
+    // Guided steps must keep the map visible. Direct exploration keeps its existing details behaviour.
+    if(guidedJourney)detailsRef.current.open=false
+    else if(focusedPoint)detailsRef.current.open=true
+  },[focusedPoint?.id,guidedJourney,journey?.index])
   const scale = ecosystemMapScale(camera, map.bbox, svgPixelsPerUnit)
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
@@ -181,6 +189,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     <details ref={detailsRef} className={styles.mapDetails}>
       <summary>Places, habitats &amp; map details</summary>
       <div className={styles.detailsPanel}>
+        <button type="button" className="mb-2 min-h-11 rounded px-2 text-sm font-semibold text-emerald-800 underline" onClick={()=>{if(detailsRef.current){detailsRef.current.open=false;detailsRef.current.querySelector("summary")?.focus();}}}>Back to the map</button>
         <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>
         <p className="mb-2 text-xs leading-5 text-gray-600">{satellite ? "Drag to explore. Use two fingers to move on touch screens. Use the habitat filters below to change the birds." : "Use Move to drag or pinch the map. Turn it off to select habitats. Keyboard: + / −, arrow keys and Home."}</p>
     <PublicPlaceDetails />

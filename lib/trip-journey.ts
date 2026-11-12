@@ -1,3 +1,4 @@
+import type { BirdProfile } from "@/content/birds";
 import type { TripDraft, TripArea, TripPlace } from "./island-planning-types";
 export type TripJourneyStep = {
   id: string;
@@ -8,6 +9,7 @@ export type TripJourneyStep = {
   title: string;
   note: string;
   birdIds: string[];
+  birdSources: Record<string, { title: string; url: string }[]>;
   places: { id: string; name: string; description: string; url: string }[];
 };
 /** A preview of the existing draft, not a reservation, precise address or timed schedule. */
@@ -23,17 +25,23 @@ export function buildTripJourney(
     const area = areaById.get(day.baseId);
     if (!area) continue;
     const local = places.filter((p) => p.base === day.baseId);
+    const birdPlaces = local.filter(
+      (p) => draft.input.includeManaged || p.encounter === "wild",
+    );
+    const birdIds = [...new Set(birdPlaces.flatMap((p) => p.birdIds))];
     const common = {
       day: index + 1,
       baseId: area.id,
       baseName: area.name,
-      birdIds: [
-        ...new Set(
-          local
-            .filter((p) => draft.input.includeManaged || p.encounter === "wild")
-            .flatMap((p) => p.birdIds),
-        ),
-      ],
+      birdIds,
+      birdSources: Object.fromEntries(
+        birdIds.map((id) => [
+          id,
+          birdPlaces
+            .filter((p) => p.birdIds.includes(id))
+            .map((p) => ({ title: p.name, url: p.url })),
+        ]),
+      ),
       places: local
         .filter((p) => !p.categories.includes("transport"))
         .map((p) => ({
@@ -99,4 +107,32 @@ export function buildTripJourney(
       );
   }
   return steps;
+}
+
+/** Keep photographed species and original credits, replacing unrelated regional examples. */
+export function journeyBirdProfiles(
+  birds: readonly BirdProfile[],
+  step: TripJourneyStep,
+  islandId: string,
+  checklistId: (scientificName: string) => string | undefined,
+): BirdProfile[] {
+  return birds.flatMap((bird) => {
+    const id = checklistId(bird.scientificName),
+      sources = id ? step.birdSources[id] : undefined;
+    if (!id || !step.birdIds.includes(id) || !sources?.length) return [];
+    return [
+      {
+        ...bird,
+        primaryRegion: step.baseName,
+        regionSlug: islandId,
+        regionHref: `/new-zealand/${islandId}`,
+        localOccurrence: `Local references near ${step.baseName}: ${sources.map((s) => s.title).join(", ")}. Follow the linked visitor guidance; sightings and access are not guaranteed.`,
+        sources: [
+          ...new Map(
+            [...bird.sources, ...sources].map((s) => [s.url, s]),
+          ).values(),
+        ],
+      },
+    ];
+  });
 }

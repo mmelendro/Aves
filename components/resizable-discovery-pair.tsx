@@ -16,10 +16,10 @@ import { FieldGuideContext, type GuidePreviewOpener } from "./field-guide-contex
 import styles from "./resizable-discovery-pair.module.css"
 
 type BirdCue = { commonName: string; image: string; imagePosition?: string }
-type Props = { initialFace?: "birds" | "map"; mapCue?: GuideMapCue; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
+type Props = { guidedJourney?: boolean; initialFace?: "birds" | "map"; mapCue?: GuideMapCue; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
 type Drag = { pointerId: number; startX: number; share: number; width: number }
 
-export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mapCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds" }: Props) {
+export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, birdCue, mapCue, mediaFirst = false, mediaLabel = "bird photographs", initialFace = "birds", guidedJourney = false }: Props) {
   const localizeHome = useColombiaHomeCopy()
 
   const id = useId()
@@ -152,7 +152,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />Reset layout
       </button>
     </div>
-    <div ref={cardRef} className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face}>
+    <div ref={cardRef} className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face} data-guided-journey={guidedJourney || undefined}>
       {/* Media comes first on mobile; desktop can place it on either side. */}
       <div id={`${id}-birds`} className={styles.mediaPanel} inert={layout === "guide" && face !== "birds"} aria-hidden={layout === "guide" && face !== "birds"}>
         <div className={styles.mediaBody}><div id={mediaId}><ExpandableMedia label={`${mapCue?.label || "Regional"} birds`}>{media}</ExpandableMedia></div></div>

@@ -17,3 +17,11 @@ test('excluding managed encounters also excludes their bird evidence from visual
  const d=n.buildTrip({...n.defaultTripInput,days:3,includeManaged:false});const steps=buildTripJourney(d,n.tripAreas,n.tripPlaces);
  for(const step of steps)assert.ok(step.birdIds.every(id=>n.tripPlaces.some(p=>p.base===step.baseId&&p.encounter==='wild'&&p.birdIds.includes(id))));
 });
+
+test('visual bird profiles show current-base evidence while retaining original photo credits',()=>{
+ const {journeyBirdProfiles}=load('lib/trip-journey.ts'),{getDestinationRegionBirds}=load('content/destination-regions.ts'),{featuredNzBirdId}=load('content/new-zealand-checklist.ts');
+ const d=n.buildTrip({...n.defaultTripInput,days:3}),step=buildTripJourney(d,n.tripAreas,n.tripPlaces).find(s=>s.baseId==='hamilton');
+ const source=getDestinationRegionBirds('new-zealand'),before=JSON.stringify(source),birds=journeyBirdProfiles(source,step,'north-island',featuredNzBirdId);
+ assert.ok(birds.length);assert.equal(JSON.stringify(source),before);
+ for(const b of birds){assert.match(b.localOccurrence,/Local references near Hamilton/);assert.equal(b.regionHref,'/new-zealand/north-island');assert.equal(b.photoCredit,source.find(x=>x.id===b.id).photoCredit);assert.ok(b.sources.some(s=>step.birdSources[featuredNzBirdId(b.scientificName)].some(ref=>ref.url===s.url)));}
+});
