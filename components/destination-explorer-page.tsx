@@ -21,7 +21,16 @@ export default function DestinationExplorerPage({ map, children, initialRegionId
   const country=destinations.find(item=>item.id===scope.country)
   const title=country ? `${titleStyle==="birding" && region ? "Birding in" : "Explore"} ${placeInSentence(region?.name || country.name)}` : "Explore the world"
   // The mounted route remains stable while the tab title follows the visible place.
-  useEffect(() => { document.title = `${title} | AVES` }, [title])
+  useEffect(() => {
+    const expected = `${title} | AVES`
+    const apply = () => { if (document.title !== expected) document.title = expected }
+    apply()
+    // Next can stream the route metadata after hydration. The visible explorer
+    // owns its selected-place title until this mounted page is left.
+    const observer = new MutationObserver(apply)
+    observer.observe(document.head, { childList: true, subtree: true, characterData: true })
+    return () => observer.disconnect()
+  }, [title])
   return localizeHome(<SouthIslandHabitatProvider>
     <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50 py-6 sm:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

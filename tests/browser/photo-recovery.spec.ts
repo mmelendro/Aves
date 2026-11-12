@@ -1,4 +1,4 @@
-import { test, expect } from "./public-fixture"
+import { test, expect, declineOptionalCookies } from "./public-fixture"
 import type { Route } from "@playwright/test"
 
 test("a failed landscape photograph retries the same credited source", async ({ page }, info) => {
@@ -6,6 +6,7 @@ test("a failed landscape photograph retries the same credited source", async ({ 
   const failImages = (route: Route) => route.request().resourceType() === "image" ? route.abort() : route.fallback()
   await page.route("**/*", failImages)
   await page.goto("/australia/regions/new-south-wales")
+  await declineOptionalCookies(page)
   const gallery = page.locator("#place-gallery")
   await expect(gallery.getByRole("button", { name: "Try Photograph Again", exact: true })).toBeVisible()
   const caption = await gallery.locator("h3").allTextContents()

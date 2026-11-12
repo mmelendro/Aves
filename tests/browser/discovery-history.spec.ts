@@ -5,7 +5,7 @@ test("country and region history restores selection, copy and return paths", asy
   await page.goto("/")
   await declineOptionalCookies(page)
   const title = await page.title()
-  const heading = await page.getByRole("heading", { level: 1 }).innerText()
+  const heading = await page.getByRole("heading", { level: 1 }).getAttribute("aria-label")
   const choices = page.getByRole("group", { name: "Choose a country to preview", exact: true })
   const selected = (scope: string) => page.locator(`[data-explorer-content="${scope}"]`)
   for (const [country, id, region, label] of [
@@ -33,7 +33,7 @@ test("country and region history restores selection, copy and return paths", asy
   await page.goForward()
   await expect(selected("new-zealand:north-island")).toContainText("North Island")
   await expect(page).toHaveTitle(title)
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(heading)
+  await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName(heading!)
   await page.getByRole("button", { name: "Back to world", exact: true }).click()
   await expect(page.locator("[data-explorer-content]")).toHaveCount(0)
   await expect(page.getByRole("heading", { name: "Choose your next destination", exact: true })).toBeVisible()
