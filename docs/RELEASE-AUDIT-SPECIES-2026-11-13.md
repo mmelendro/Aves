@@ -49,3 +49,12 @@ Following owner review, both `aves.bio` and `www.aves.bio` were assigned to the 
 Public, anonymous post-release HTTP checks returned 200 for `/` and `/species/reference?country=colombia`, `australia`, and `new-zealand`. Each inventory response contained the national-source-version content. No private account records or writes were used for these checks.
 
 Rollback reference for both domains: `dpl_3XTdjnTiiJpyZyNGq6r9937ZW2eg`, previously recorded runtime `9f833142281caaeb685cc13483671082396bdfea`. This release made no database changes. Task 70's remaining regional, commercial-data-access and business-evidence work remains open.
+
+
+## Audit batch published, 13 November 2026 Sydney
+
+The 25 immediate, input-free improvements in the [100-item roadmap](AUDIT-ROADMAP-100-2026-11-13.md) are published on `aves.bio` and `www.aves.bio`. Runtime commit: `05f52dfddb683a41058e27c828785d421519236c`. Deployment: `dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3`. The new source tree matched the locally tested checkout before push.
+
+704 tests pass on declared Node 22.23.5 (and the local Node 24 runner). TypeScript, production build, zero-error lint and catalogue split checks pass. There are 34 pre-existing lint warnings. The live read-only public HTTP audit passes all 78 routes with no failures in its status, main/H1 landmark, missing-alt, local-anchor or duplicate-ID checks. The browser confirms `offset=99999` now shows Colombia entries 1921 to 1945 rather than an empty page. Production HTTP evidence: `docs/audit/public-http-production-2026-11-13.json`.
+
+Rollback for both domains: `dpl_AZhmj9YyGNkoFqQwXc8fLUjRL5dd`, runtime `fd1c588b40f55b36f086382f769737517428028d`. No database changes, private fixture cleanup, customer writes or outbound messages were made. Physical Safari, signed-in save acceptance and financial validation remain open. The roadmap retains 75 further improvements; publication of category A is not completion of the whole queue.

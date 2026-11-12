@@ -18,7 +18,7 @@
         49,
         48
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 1
     },
     {
@@ -30,7 +30,7 @@
         10,
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 2
     },
     {
@@ -41,7 +41,7 @@
         10,
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 3
     },
     {
@@ -52,7 +52,7 @@
         10,
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 4
     },
     {
@@ -62,7 +62,7 @@
       "previous": [
         2
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 5
     },
     {
@@ -72,7 +72,7 @@
       "previous": [
         2
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 6
     },
     {
@@ -83,7 +83,7 @@
         2,
         10
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 7
     },
     {
@@ -93,7 +93,7 @@
       "previous": [
         6
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 8
     },
     {
@@ -103,7 +103,7 @@
       "previous": [
         10
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 9
     },
     {
@@ -113,7 +113,7 @@
       "previous": [
         10
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 10
     },
     {
@@ -124,7 +124,7 @@
         10,
         16
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 11
     },
     {
@@ -134,7 +134,7 @@
       "previous": [
         10
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 12
     },
     {
@@ -145,7 +145,7 @@
         2,
         7
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 13
     },
     {
@@ -156,7 +156,7 @@
         6,
         54
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 14
     },
     {
@@ -166,7 +166,7 @@
       "previous": [
         6
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 15
     },
     {
@@ -176,7 +176,7 @@
       "previous": [
         6
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 16
     },
     {
@@ -186,7 +186,7 @@
       "previous": [
         6
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 17
     },
     {
@@ -196,7 +196,7 @@
       "previous": [
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 18
     },
     {
@@ -206,7 +206,7 @@
       "previous": [
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 19
     },
     {
@@ -216,7 +216,7 @@
       "previous": [
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 20
     },
     {
@@ -226,7 +226,7 @@
       "previous": [
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 21
     },
     {
@@ -237,7 +237,7 @@
         38,
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 22
     },
     {
@@ -248,7 +248,7 @@
         38,
         70
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 23
     },
     {
@@ -258,7 +258,7 @@
       "previous": [
         20
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 24
     },
     {
@@ -269,7 +269,7 @@
         21,
         27
       ],
-      "status": "Implemented and validated in this source release",
+      "status": "Published; production HTTP checks passed",
       "id": 25
     },
     {
@@ -1026,5 +1026,17 @@
       "status": "Open",
       "id": 100
     }
-  ]
+  ],
+  "release": {
+    "runtimeCommit": "05f52dfddb683a41058e27c828785d421519236c",
+    "deploymentId": "dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3",
+    "publishedDomains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "rollbackDeployment": "dpl_AZhmj9YyGNkoFqQwXc8fLUjRL5dd",
+    "tests": 704,
+    "publicRoutesPassed": 78,
+    "date": "2026-11-13"
+  }
 }

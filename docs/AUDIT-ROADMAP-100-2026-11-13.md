@@ -467,3 +467,12 @@ These require observed evidence. Automated tests and owner-reported review do no
 704 tests pass. Strict TypeScript, the production build and the emitted-catalogue split check pass. ESLint has zero errors and 34 existing warnings. The production dependency advisory check reports zero known advisories. The local production audit checks all 78 public URLs with no HTTP failures, missing/duplicate main or H1 landmarks, missing alt attributes, duplicate IDs or broken local anchors within this check. Stale-page recovery, empty search reset and Sierra Nevada enquiry regressions also pass. These checks do not establish measured mobile performance, physical touch behaviour or authenticated save acceptance.
 
 Build estimates remain 445 kB for the homepage, 236 kB for sign-in and 175 kB for the inventory reference. This batch does not claim a new mobile speed improvement.
+
+
+## Audit batch published, 13 November 2026 Sydney
+
+The 25 immediate, input-free improvements in the 100-item roadmap are published on `aves.bio` and `www.aves.bio`. Runtime commit: `05f52dfddb683a41058e27c828785d421519236c`. Deployment: `dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3`. The new source tree matched the locally tested checkout before push.
+
+704 tests pass on declared Node 22.23.5 (and the local Node 24 runner). TypeScript, production build, zero-error lint and catalogue split checks pass. There are 34 pre-existing lint warnings. The live read-only public HTTP audit passes all 78 routes with no failures in its status, main/H1 landmark, missing-alt, local-anchor or duplicate-ID checks. The browser confirms `offset=99999` now shows Colombia entries 1921 to 1945 rather than an empty page. Production HTTP evidence: `docs/audit/public-http-production-2026-11-13.json`.
+
+Rollback for both domains: `dpl_AZhmj9YyGNkoFqQwXc8fLUjRL5dd`, runtime `fd1c588b40f55b36f086382f769737517428028d`. No database changes, private fixture cleanup, customer writes or outbound messages were made. Physical Safari, signed-in save acceptance and financial validation remain open. The roadmap retains 75 further improvements; publication of category A is not completion of the whole queue.
