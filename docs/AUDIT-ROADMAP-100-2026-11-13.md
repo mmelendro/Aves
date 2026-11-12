@@ -193,83 +193,83 @@ These are not invented requests for approval. Much of this work can continue aut
 
 39. Refactor oversized page components
 
-   Acceptance: Separate embedded content and UI in the large articles, resources, team and partner pages. Previous audit IDs: 18. Status: Open.
+   Acceptance: Separate embedded content and UI in the large articles, resources, team and partner pages. Previous audit IDs: 18. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 40. Consolidate duplicated components
 
-   Acceptance: The feather consolidation is finished. Review remaining duplicated audio/gallery controls and merge only equivalent behaviour. Previous audit IDs: 19. Status: Open.
+   Acceptance: The feather consolidation is finished. Review remaining duplicated audio/gallery controls and merge only equivalent behaviour. Previous audit IDs: 19. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 41. Format and explain complex interaction code
 
-   Acceptance: Format and explain remaining gesture, camera, upload and revision modules. Inventory formatting is covered by A24. Previous audit IDs: 20. Status: Open.
+   Acceptance: Format and explain remaining gesture, camera, upload and revision modules. Inventory formatting is covered by A24. Previous audit IDs: 20. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 42. Add browser journey checks to release automation
 
-   Acceptance: Complement existing unit and component checks with discovery, refresh, keyboard and save recovery journeys. Previous audit IDs: 21. Status: Open.
+   Acceptance: Complement existing unit and component checks with discovery, refresh, keyboard and save recovery journeys. Previous audit IDs: 21. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 43. Review dependency and override risks
 
-   Acceptance: Check current advisories, compatibility, lockfile overrides and supported versions before targeted updates. Previous audit IDs: 22. Status: Open.
+   Acceptance: Check current advisories, compatibility, lockfile overrides and supported versions before targeted updates. Previous audit IDs: 22. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 44. Clean verified obsolete code and documentation
 
-   Acceptance: Keep one active queue, archive superseded instructions and remove assets or code only after reference checks. Previous audit IDs: 23. Status: Open.
+   Acceptance: Keep one active queue, archive superseded instructions and remove assets or code only after reference checks. Previous audit IDs: 23. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 45. Establish performance and error budgets
 
-   Acceptance: Measure real visitor loading, interaction, layout shifts, failed saves and service costs with appropriate privacy. Previous audit IDs: 24. Status: Open.
+   Acceptance: Measure real visitor loading, interaction, layout shifts, failed saves and service costs with appropriate privacy. Previous audit IDs: 24. Status: Partial: release budgets established; real visitor vital/save rates and project costs unverified.
 
 46. Verify recovery and rollback
 
-   Acceptance: Document and test restoration of code, saved trip records and private files without assuming a code rollback restores data. Previous audit IDs: 26. Status: Open.
+   Acceptance: Document and test restoration of code, saved trip records and private files without assuming a code rollback restores data. Previous audit IDs: 26. Status: Partial: rollback/runbook and adversarial tests reviewed; hosted row/object restore still unverified.
 
 47. Build Tasmania’s five-photo gallery
 
-   Acceptance: Review five distinct real photographs for locality, reuse rights, credits, alt text and capture dates. Reuse the existing regional gallery. Previous audit IDs: 28. Status: Open.
+   Acceptance: Review five distinct real photographs for locality, reuse rights, credits, alt text and capture dates. Reuse the existing regional gallery. Previous audit IDs: 28. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 48. Build South Australia’s five-photo gallery
 
-   Acceptance: Apply the same source, rights and visual review to five distinct photographs. Previous audit IDs: 29. Status: Open.
+   Acceptance: Apply the same source, rights and visual review to five distinct photographs. Previous audit IDs: 29. Status: Published; release 98c2ba5 and CI run 43295959662 verified.
 
 49. Build Western Australia’s five-photo gallery
 
-   Acceptance: Review five distinct photographs and retain correct regional/place identities. Previous audit IDs: 30. Status: Open.
+   Acceptance: Review five distinct photographs and retain correct regional/place identities. Previous audit IDs: 30. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 50. Build Northern Territory’s five-photo gallery
 
-   Acceptance: Review five distinct photographs, including cultural context and any restrictions on depicted material. Previous audit IDs: 31. Status: Open.
+   Acceptance: Review five distinct photographs, including cultural context and any restrictions on depicted material. Previous audit IDs: 31. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 51. Build the Australian Capital Territory’s five-photo gallery
 
-   Acceptance: Review five distinct photographs within the correct territory. Previous audit IDs: 32. Status: Open.
+   Acceptance: Review five distinct photographs within the correct territory. Previous audit IDs: 32. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 52. Build Jervis Bay Territory’s five-photo gallery
 
-   Acceptance: Verify territory boundaries. Do not substitute nearby New South Wales beaches. Previous audit IDs: 33. Status: Open.
+   Acceptance: Verify territory boundaries. Do not substitute nearby New South Wales beaches. Previous audit IDs: 33. Status: Pending external evidence: Booderee existing-image permission and acknowledgement must be resolved; no NSW substitutes.
 
 53. Finish Australia’s country overview
 
-   Acceptance: Represent all nine reviewed regional collections using the same records. The current overview covers three regions with six photographs. Previous audit IDs: 34. Status: Open.
+   Acceptance: Represent all nine reviewed regional collections using the same records. The current overview covers three regions with six photographs. Previous audit IDs: 34. Status: Partial: eight reviewed regions represented; ninth collection depends on item 52.
 
 54. Check gallery parity across all three destinations
 
-   Acceptance: Verify counts, balanced overview selection, region/map synchronisation, photo controls, credits, enlargement, empty states and narrow layouts. Previous audit IDs: 35. Status: Open.
+   Acceptance: Verify counts, balanced overview selection, region/map synchronisation, photo controls, credits, enlargement, empty states and narrow layouts. Previous audit IDs: 35. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 55. Extend official New Zealand route references
 
-   Acceptance: Add compact, route-specific birding and ecotourism references to the existing pilot. Retain provenance. Previous audit IDs: 36. Status: Open.
+   Acceptance: Add compact, route-specific birding and ecotourism references to the existing pilot. Retain provenance. Previous audit IDs: 36. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 56. Add dated first-hand trip reports and blogs
 
-   Acceptance: Attribute sources and distinguish personal experience from official access, safety or supplier guidance. Previous audit IDs: 37. Status: Open.
+   Acceptance: Attribute sources and distinguish personal experience from official access, safety or supplier guidance. Previous audit IDs: 37. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 57. Track source freshness
 
-   Acceptance: Record review dates and flag stale access or supplier claims without inventing current availability. Previous audit IDs: 38. Status: Open.
+   Acceptance: Record review dates and flag stale access or supplier claims without inventing current availability. Previous audit IDs: 38. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 58. Build and map the New Zealand conservation directory pilot
 
-   Acceptance: Use official evidence for each organisation, location and stated contribution. Distinguish listings from AVES partnerships. Add an optional layer with readable markers, accessible details and dated source links. Previous audit IDs: 39, 40. Status: Open.
+   Acceptance: Use official evidence for each organisation, location and stated contribution. Distinguish listings from AVES partnerships. Add an optional layer with readable markers, accessible details and dated source links. Previous audit IDs: 39, 40. Status: Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented.
 
 59. Verify and map a bounded B Corp supplier directory
 
@@ -483,4 +483,12 @@ The owner extended the active instruction to items 26 through 78. Items 26 to 28
 
 The source fixes shared contrast, named form/photo controls, underlines, target size and obstruction. Colombian map shapes now own each region's named activation area; pins are decorative, avoiding overlapping duplicate focus stops while retaining preview, direct links, selection, filters and geometry. Rollback for both domains is `dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3`. No database or customer records were changed.
 
-Items 29 to 38 are published on both custom domains from `36611d7a2e0e582d81de89128a95ef1684f6493a`, deployment `dpl_9UMkipYRDK7Yiiin7vbj2ZtuEQRm`. CI run 43289737797 passes lint, types, 710 unit checks, production build and 83 browser checks. 37 project-duplicate journeys are intentionally skipped. The 78 public production sitemap routes pass HTTP checks. The previous 26–28 deployment is retained for rollback. Items 39 to 48 are in development. [Implementation and measurement](audit/BATCH-29-38-2026-11-13.md).
+Items 29 to 38 are published on both custom domains from `36611d7a2e0e582d81de89128a95ef1684f6493a`, deployment `dpl_9UMkipYRDK7Yiiin7vbj2ZtuEQRm`. CI run 43289737797 passes lint, types, 710 unit checks, production build and 83 browser checks. 37 project-duplicate journeys are intentionally skipped. The 78 public production sitemap routes pass HTTP checks. The previous 26–28 deployment is retained for rollback. Items 39 to 48 were subsequently deployed as runtime 98c2ba5; field measurement and hosted recovery remain partial. [Implementation and measurement](audit/BATCH-29-38-2026-11-13.md).
+
+## Batch 49 to 58 published, 13 November 2026 Sydney
+
+Items 49 to 58 were processed. Items 49 to 51 and 54 to 58 are published. Australia has 40 reviewed photographs across eight regions and a balanced 16-photo overview. Item 52 remains open for Booderee image permission and acknowledgement, and item 53 remains partial until the ninth regional collection is available. Earlier items 45 and 46 retain their field-measurement and hosted-restoration requirements. There are 54 completed items among the first 58.
+
+Runtime `fb28d7402a4e6d08287ac670faad8521a9f0a2dc`, deployment `dpl_6135M1kGFLySijKjrwHi9XRPigUN`, on both `aves.bio` and `www.aves.bio`. [CI run 43309387682](https://github.com/mmelendro/Aves/actions/runs/43309387682). 716 unit tests and 91 browser checks pass; 53 project-specific checks intentionally skipped. Lint, TypeScript, production build, catalogue loading, deferred geometry and build budgets pass. The selected live routes and new media were checked after deployment. Rollback for both domains: `dpl_Gz4uCsuLBrThcGAddNCy51inMept`. No database, private traveller, authentication or consent configuration was changed.
+
+Next batch: 59 to 68. Keep items 45, 46, 52 and 53 visible as outstanding, and preserve physical Safari, independent visitor and business-financial evidence requirements. The Eco-Tourism Business Plan remains item 79, deferred until the independent product work and actual founder financial inputs are ready.

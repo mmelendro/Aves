@@ -1,0 +1,32 @@
+{
+  "checkedOn": "2026-11-13",
+  "runtime": "fb28d7402a4e6d08287ac670faad8521a9f0a2dc",
+  "deployment": "dpl_6135M1kGFLySijKjrwHi9XRPigUN",
+  "routes": [
+    {
+      "url": "https://aves.bio/australia/regions/western-australia",
+      "status": 200,
+      "deploymentMatches": true
+    },
+    {
+      "url": "https://aves.bio/australia/regions/northern-territory",
+      "status": 200,
+      "deploymentMatches": true
+    },
+    {
+      "url": "https://aves.bio/australia/regions/australian-capital-territory",
+      "status": 200,
+      "deploymentMatches": true
+    },
+    {
+      "url": "https://aves.bio/new-zealand/north-island",
+      "status": 200,
+      "deploymentMatches": true
+    },
+    {
+      "url": "https://aves.bio/new-zealand/south-island",
+      "status": 200,
+      "deploymentMatches": true
+    }
+  ]
+}

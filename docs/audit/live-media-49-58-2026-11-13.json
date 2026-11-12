@@ -1,0 +1,92 @@
+[
+  {
+    "path": "/images/places/au-nambung.webp",
+    "status": 200,
+    "bytes": 390588,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-hamersley-gorge.webp",
+    "status": 200,
+    "bytes": 730104,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-shark-bay-big-lagoon.webp",
+    "status": 200,
+    "bytes": 127046,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-cape-le-grand.webp",
+    "status": 200,
+    "bytes": 183994,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-valley-of-giants.webp",
+    "status": 200,
+    "bytes": 842826,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-tidbinbilla.webp",
+    "status": 200,
+    "bytes": 387078,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-orroral-homestead.webp",
+    "status": 200,
+    "bytes": 482120,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-lake-burley-griffin.webp",
+    "status": 200,
+    "bytes": 304032,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-gibraltar-falls.webp",
+    "status": 200,
+    "bytes": 407276,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-booroomba.webp",
+    "status": 200,
+    "bytes": 120708,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-nitmiluk-gorge.webp",
+    "status": 200,
+    "bytes": 559266,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-florence-falls.webp",
+    "status": 200,
+    "bytes": 545660,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-kings-canyon.webp",
+    "status": 200,
+    "bytes": 248710,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-darwin-city.webp",
+    "status": 200,
+    "bytes": 124470,
+    "sha256Matches": true
+  },
+  {
+    "path": "/images/places/au-nightcliff-jetty.webp",
+    "status": 200,
+    "bytes": 178264,
+    "sha256Matches": true
+  }
+]

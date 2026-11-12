@@ -1,13 +1,11 @@
 # Continue AVES development
 
-The only active numbered backlog is [the 100-item roadmap](docs/AUDIT-ROADMAP-100-2026-11-13.md), with machine-readable state in [the roadmap JSON](docs/audit/roadmap-100-2026-11-13.json).
+The only active numbered backlog is [the 100-item roadmap](docs/AUDIT-ROADMAP-100-2026-11-13.md), with [machine-readable state](docs/audit/roadmap-100-2026-11-13.json). The owner authorised ten-item batches through item 78.
 
-The owner authorised batches of ten through item 78. Items 1 through 38 are published. Continue 39 through 48, then 49 through 58, 59 through 68 and 69 through 78. Keep evidence-dependent acceptance open where the actual evidence is missing. Do not rebuild completed work from historical prompts.
+Items 49 to 58 were processed. Items 49 to 51 and 54 to 58 are published. Australia has 40 reviewed photographs across eight regions and a balanced 16-photo overview. Item 52 remains open for Booderee image permission and acknowledgement, and item 53 remains partial until the ninth regional collection is available. Earlier items 45 and 46 retain their field-measurement and hosted-restoration requirements. There are 54 completed items among the first 58.
 
-Current public runtime: `36611d7a2e0e582d81de89128a95ef1684f6493a`, deployment `dpl_9UMkipYRDK7Yiiin7vbj2ZtuEQRm`. Both `aves.bio` and `www.aves.bio` use it. Rollback: `dpl_HZwyZT4z835C9eNxEvo4pgWvhrNM`.
+Runtime `fb28d7402a4e6d08287ac670faad8521a9f0a2dc`, deployment `dpl_6135M1kGFLySijKjrwHi9XRPigUN`, on both `aves.bio` and `www.aves.bio`. [CI run 43309387682](https://github.com/mmelendro/Aves/actions/runs/43309387682). 716 unit tests and 91 browser checks pass; 53 project-specific checks intentionally skipped. Lint, TypeScript, production build, catalogue loading, deferred geometry and build budgets pass. The selected live routes and new media were checked after deployment. Rollback for both domains: `dpl_Gz4uCsuLBrThcGAddNCy51inMept`. No database, private traveller, authentication or consent configuration was changed.
 
-[CI run 43289737797](https://github.com/mmelendro/Aves/actions/runs/43289737797) passes 710 unit checks, production build, lint/types and 83 browser checks. The live HTTP scan passes all 78 public routes. Physical Safari, authenticated hosted acceptance, source rights and financial facts remain separate.
+Next batch: 59 to 68. Keep items 45, 46, 52 and 53 visible as outstanding, and preserve physical Safari, independent visitor and business-financial evidence requirements. The Eco-Tourism Business Plan remains item 79, deferred until the independent product work and actual founder financial inputs are ready.
 
-Use [development checks](docs/DEVELOPMENT.md) and the release-specific report. Do not publish customer records, invent sightings, infer commercial API permission or claim that a code rollback restores database records and private files.
-
-The earlier 54-item queue is retained in Git history and the [archive](docs/archive/2026-11-13-before-audit-queue/CONTINUE-HERE.md). Its numbering is superseded. The professional Eco-Tourism Business Plan remains item 79, deferred until the independent product changes and actual founder financial inputs are ready.
+See [the batch evidence](docs/audit/BATCH-49-58-2026-11-13.md). Do not recreate completed work from older prompts.

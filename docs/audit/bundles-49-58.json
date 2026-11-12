@@ -1,13 +1,13 @@
 {
-  "source": "batch-49-58",
+  "source": "91f4d601392f36c8f70955be71167860343ff7d9",
   "kind": "Per-file local build compression estimates, not field performance",
   "routes": [
     {
       "route": "/page",
       "js": {
-        "raw": 1354323,
-        "gzip": 357738,
-        "brotli": 352610
+        "raw": 1354270,
+        "gzip": 357874,
+        "brotli": 351614
       },
       "css": {
         "raw": 159776,
@@ -16,28 +16,28 @@
       },
       "files": [
         {
-          "path": "static/chunks/webpack-b1df16a8d500b29a.js",
-          "raw": 5661,
-          "gzip": 2781,
-          "brotli": 2838
+          "path": "static/chunks/webpack-14b9cc39816e73ba.js",
+          "raw": 5670,
+          "gzip": 2778,
+          "brotli": 2835
         },
         {
-          "path": "static/chunks/461d7862-c865372c751174b1.js",
-          "raw": 173025,
-          "gzip": 54366,
-          "brotli": 54591
+          "path": "static/chunks/00240099-c630c4efba9c8e16.js",
+          "raw": 173024,
+          "gzip": 54365,
+          "brotli": 54347
         },
         {
-          "path": "static/chunks/6031-c68c987696aafcb1.js",
-          "raw": 174662,
-          "gzip": 46788,
-          "brotli": 45262
+          "path": "static/chunks/477-45c4826f2b2d982b.js",
+          "raw": 174625,
+          "gzip": 47009,
+          "brotli": 45319
         },
         {
-          "path": "static/chunks/main-app-45b6a25c6bf86399.js",
-          "raw": 574,
-          "gzip": 238,
-          "brotli": 219
+          "path": "static/chunks/main-app-b51d7d8eaf32cc10.js",
+          "raw": 572,
+          "gzip": 236,
+          "brotli": 220
         },
         {
           "path": "static/css/771834c6f850b4d4.css",
@@ -52,52 +52,52 @@
           "brotli": 9205
         },
         {
-          "path": "static/chunks/2006-28060a9050416be4.js",
+          "path": "static/chunks/5132-41bb40c7ef76363a.js",
           "raw": 21292,
-          "gzip": 7323,
-          "brotli": 7415
+          "gzip": 7318,
+          "brotli": 7318
         },
         {
-          "path": "static/chunks/7950-7c7c56203a898045.js",
-          "raw": 33871,
-          "gzip": 11640,
-          "brotli": 11852
+          "path": "static/chunks/7372-4a1bcba8cdee942c.js",
+          "raw": 33868,
+          "gzip": 11615,
+          "brotli": 11978
         },
         {
-          "path": "static/chunks/7826-574c7c9d115da007.js",
-          "raw": 15266,
-          "gzip": 5571,
-          "brotli": 5642
+          "path": "static/chunks/2630-3422e8844e72156f.js",
+          "raw": 15271,
+          "gzip": 5546,
+          "brotli": 5646
         },
         {
-          "path": "static/chunks/8624-411aac69ecec8696.js",
-          "raw": 7670,
-          "gzip": 2992,
-          "brotli": 3020
+          "path": "static/chunks/2122-0be90bc4e08df57a.js",
+          "raw": 7669,
+          "gzip": 2985,
+          "brotli": 3072
         },
         {
-          "path": "static/chunks/963-72d91d632c5cbe7e.js",
-          "raw": 48273,
-          "gzip": 16553,
-          "brotli": 16790
+          "path": "static/chunks/4306-5f23abcd99da06a4.js",
+          "raw": 48274,
+          "gzip": 16574,
+          "brotli": 16895
         },
         {
-          "path": "static/chunks/656-e171ce19b1ea448a.js",
+          "path": "static/chunks/3132-68e9c20aefb40669.js",
           "raw": 63261,
-          "gzip": 7419,
-          "brotli": 7462
+          "gzip": 7429,
+          "brotli": 7456
         },
         {
-          "path": "static/chunks/6238-8a241d347c2ca613.js",
+          "path": "static/chunks/8831-cd9bc1a2ccaa9235.js",
           "raw": 21416,
-          "gzip": 7396,
+          "gzip": 7383,
           "brotli": 7475
         },
         {
-          "path": "static/chunks/app/layout-2cbd1d7894ebdd15.js",
-          "raw": 17417,
-          "gzip": 5475,
-          "brotli": 5665
+          "path": "static/chunks/app/layout-805914c328d0bb84.js",
+          "raw": 17415,
+          "gzip": 5463,
+          "brotli": 5684
         },
         {
           "path": "static/css/ab90003ded04e21b.css",
@@ -106,45 +106,45 @@
           "brotli": 597
         },
         {
-          "path": "static/chunks/8153-7ad2397f45680778.js",
-          "raw": 7812,
-          "gzip": 3261,
+          "path": "static/chunks/343-ce62e5ba966e050c.js",
+          "raw": 7803,
+          "gzip": 3259,
           "brotli": 3294
         },
         {
-          "path": "static/chunks/9995-702d59bac88fa301.js",
-          "raw": 9434,
-          "gzip": 3091,
-          "brotli": 3150
+          "path": "static/chunks/423-7fa04040784c04f4.js",
+          "raw": 9432,
+          "gzip": 3083,
+          "brotli": 3134
         },
         {
-          "path": "static/chunks/5566-e7faa949a1634e9e.js",
-          "raw": 41308,
-          "gzip": 12600,
-          "brotli": 12903
+          "path": "static/chunks/7538-91fcf97dd9100e62.js",
+          "raw": 41305,
+          "gzip": 12611,
+          "brotli": 12762
         },
         {
-          "path": "static/chunks/9859-f959ffde88098960.js",
-          "raw": 77381,
-          "gzip": 16336,
-          "brotli": 15781
+          "path": "static/chunks/7557-5bf4573a58a4d6aa.js",
+          "raw": 77379,
+          "gzip": 15956,
+          "brotli": 15737
         },
         {
-          "path": "static/chunks/2424-84c6ac3fee6a1959.js",
-          "raw": 9116,
-          "gzip": 3448,
-          "brotli": 3478
+          "path": "static/chunks/2286-75cb6c520b92ca73.js",
+          "raw": 9115,
+          "gzip": 3443,
+          "brotli": 3449
         },
         {
-          "path": "static/chunks/2444-714deda024945621.js",
-          "raw": 224100,
-          "gzip": 64317,
-          "brotli": 60217
+          "path": "static/chunks/488-237f788436882959.js",
+          "raw": 224099,
+          "gzip": 64337,
+          "brotli": 59408
         },
         {
-          "path": "static/chunks/5943-c20a93323e1ceb8d.js",
+          "path": "static/chunks/4279-f9de72dbedcad476.js",
           "raw": 91751,
-          "gzip": 14913,
+          "gzip": 14912,
           "brotli": 14885
         },
         {
@@ -154,37 +154,37 @@
           "brotli": 11573
         },
         {
-          "path": "static/chunks/128-b4e5abe9062b71c5.js",
+          "path": "static/chunks/752-c6f3c526e93e3ed9.js",
           "raw": 191271,
-          "gzip": 35874,
-          "brotli": 34559
+          "gzip": 36049,
+          "brotli": 34403
         },
         {
-          "path": "static/chunks/6805-d9e140f774ab0961.js",
+          "path": "static/chunks/3996-ac47875c1cbfdd95.js",
           "raw": 14289,
           "gzip": 4718,
-          "brotli": 4711
+          "brotli": 4817
         },
         {
-          "path": "static/chunks/4701-4ce771ab600b9c83.js",
-          "raw": 61275,
-          "gzip": 18483,
-          "brotli": 19085
+          "path": "static/chunks/2249-8d0793eda143e3b9.js",
+          "raw": 61276,
+          "gzip": 18655,
+          "brotli": 19150
         },
         {
-          "path": "static/chunks/app/page-bbffd4c41ed6f9b7.js",
-          "raw": 1585,
-          "gzip": 756,
-          "brotli": 743
+          "path": "static/chunks/app/page-fa0d72f53ee6884f.js",
+          "raw": 1580,
+          "gzip": 751,
+          "brotli": 757
         }
       ]
     },
     {
       "route": "/account/page",
       "js": {
-        "raw": 1306350,
-        "gzip": 344860,
-        "brotli": 344777
+        "raw": 1306313,
+        "gzip": 344612,
+        "brotli": 344473
       },
       "css": {
         "raw": 158122,
@@ -193,28 +193,28 @@
       },
       "files": [
         {
-          "path": "static/chunks/webpack-b1df16a8d500b29a.js",
-          "raw": 5661,
-          "gzip": 2781,
-          "brotli": 2838
+          "path": "static/chunks/webpack-14b9cc39816e73ba.js",
+          "raw": 5670,
+          "gzip": 2778,
+          "brotli": 2835
         },
         {
-          "path": "static/chunks/461d7862-c865372c751174b1.js",
-          "raw": 173025,
-          "gzip": 54366,
-          "brotli": 54591
+          "path": "static/chunks/00240099-c630c4efba9c8e16.js",
+          "raw": 173024,
+          "gzip": 54365,
+          "brotli": 54347
         },
         {
-          "path": "static/chunks/6031-c68c987696aafcb1.js",
-          "raw": 174662,
-          "gzip": 46788,
-          "brotli": 45262
+          "path": "static/chunks/477-45c4826f2b2d982b.js",
+          "raw": 174625,
+          "gzip": 47009,
+          "brotli": 45319
         },
         {
-          "path": "static/chunks/main-app-45b6a25c6bf86399.js",
-          "raw": 574,
-          "gzip": 238,
-          "brotli": 219
+          "path": "static/chunks/main-app-b51d7d8eaf32cc10.js",
+          "raw": 572,
+          "gzip": 236,
+          "brotli": 220
         },
         {
           "path": "static/css/771834c6f850b4d4.css",
@@ -229,87 +229,87 @@
           "brotli": 9205
         },
         {
-          "path": "static/chunks/2006-28060a9050416be4.js",
+          "path": "static/chunks/5132-41bb40c7ef76363a.js",
           "raw": 21292,
-          "gzip": 7323,
-          "brotli": 7415
+          "gzip": 7318,
+          "brotli": 7318
         },
         {
-          "path": "static/chunks/7950-7c7c56203a898045.js",
-          "raw": 33871,
-          "gzip": 11640,
-          "brotli": 11852
+          "path": "static/chunks/7372-4a1bcba8cdee942c.js",
+          "raw": 33868,
+          "gzip": 11615,
+          "brotli": 11978
         },
         {
-          "path": "static/chunks/7826-574c7c9d115da007.js",
-          "raw": 15266,
-          "gzip": 5571,
-          "brotli": 5642
+          "path": "static/chunks/2630-3422e8844e72156f.js",
+          "raw": 15271,
+          "gzip": 5546,
+          "brotli": 5646
         },
         {
-          "path": "static/chunks/8624-411aac69ecec8696.js",
-          "raw": 7670,
-          "gzip": 2992,
-          "brotli": 3020
+          "path": "static/chunks/2122-0be90bc4e08df57a.js",
+          "raw": 7669,
+          "gzip": 2985,
+          "brotli": 3072
         },
         {
-          "path": "static/chunks/963-72d91d632c5cbe7e.js",
-          "raw": 48273,
-          "gzip": 16553,
-          "brotli": 16790
+          "path": "static/chunks/4306-5f23abcd99da06a4.js",
+          "raw": 48274,
+          "gzip": 16574,
+          "brotli": 16895
         },
         {
-          "path": "static/chunks/656-e171ce19b1ea448a.js",
+          "path": "static/chunks/3132-68e9c20aefb40669.js",
           "raw": 63261,
-          "gzip": 7419,
-          "brotli": 7462
+          "gzip": 7429,
+          "brotli": 7456
         },
         {
-          "path": "static/chunks/6238-8a241d347c2ca613.js",
+          "path": "static/chunks/8831-cd9bc1a2ccaa9235.js",
           "raw": 21416,
-          "gzip": 7396,
+          "gzip": 7383,
           "brotli": 7475
         },
         {
-          "path": "static/chunks/app/layout-2cbd1d7894ebdd15.js",
-          "raw": 17417,
-          "gzip": 5475,
-          "brotli": 5665
+          "path": "static/chunks/app/layout-805914c328d0bb84.js",
+          "raw": 17415,
+          "gzip": 5463,
+          "brotli": 5684
         },
         {
-          "path": "static/chunks/app/account/layout-b4ea337d224b7c60.js",
-          "raw": 420,
+          "path": "static/chunks/app/account/layout-4cd1ba47f7cd3e10.js",
+          "raw": 419,
           "gzip": 275,
-          "brotli": 255
+          "brotli": 254
         },
         {
-          "path": "static/chunks/361ef2c6-46ddd5579d29dd89.js",
-          "raw": 67600,
-          "gzip": 14369,
-          "brotli": 14951
+          "path": "static/chunks/9926dc95-fd42eefb029d6996.js",
+          "raw": 67602,
+          "gzip": 14371,
+          "brotli": 14959
         },
         {
-          "path": "static/chunks/8153-7ad2397f45680778.js",
-          "raw": 7812,
-          "gzip": 3261,
+          "path": "static/chunks/343-ce62e5ba966e050c.js",
+          "raw": 7803,
+          "gzip": 3259,
           "brotli": 3294
         },
         {
-          "path": "static/chunks/5484-332e66e6db7dfeb7.js",
-          "raw": 197619,
-          "gzip": 55915,
-          "brotli": 55789
+          "path": "static/chunks/3480-5994328a9335020a.js",
+          "raw": 197629,
+          "gzip": 55336,
+          "brotli": 55611
         },
         {
-          "path": "static/chunks/5566-e7faa949a1634e9e.js",
-          "raw": 41308,
-          "gzip": 12600,
-          "brotli": 12903
+          "path": "static/chunks/7538-91fcf97dd9100e62.js",
+          "raw": 41305,
+          "gzip": 12611,
+          "brotli": 12762
         },
         {
-          "path": "static/chunks/5943-c20a93323e1ceb8d.js",
+          "path": "static/chunks/4279-f9de72dbedcad476.js",
           "raw": 91751,
-          "gzip": 14913,
+          "gzip": 14912,
           "brotli": 14885
         },
         {
@@ -319,43 +319,43 @@
           "brotli": 11573
         },
         {
-          "path": "static/chunks/128-b4e5abe9062b71c5.js",
+          "path": "static/chunks/752-c6f3c526e93e3ed9.js",
           "raw": 191271,
-          "gzip": 35874,
-          "brotli": 34559
+          "gzip": 36049,
+          "brotli": 34403
         },
         {
-          "path": "static/chunks/6805-d9e140f774ab0961.js",
+          "path": "static/chunks/3996-ac47875c1cbfdd95.js",
           "raw": 14289,
           "gzip": 4718,
-          "brotli": 4711
+          "brotli": 4817
         },
         {
-          "path": "static/chunks/92-47f05a05714da7f5.js",
-          "raw": 24143,
-          "gzip": 8477,
-          "brotli": 8767
+          "path": "static/chunks/7403-4557682ad24c3cc3.js",
+          "raw": 24145,
+          "gzip": 8446,
+          "brotli": 8594
         },
         {
-          "path": "static/chunks/9059-5ad7bcff6c58b586.js",
-          "raw": 14200,
-          "gzip": 5019,
-          "brotli": 5041
+          "path": "static/chunks/3888-3ba7f443d1df9cdc.js",
+          "raw": 14197,
+          "gzip": 5022,
+          "brotli": 5187
         },
         {
-          "path": "static/chunks/app/account/page-4dc531701d3c76fc.js",
-          "raw": 30936,
-          "gzip": 9498,
-          "brotli": 9818
+          "path": "static/chunks/app/account/page-61e1e2c212151089.js",
+          "raw": 30932,
+          "gzip": 9513,
+          "brotli": 9889
         }
       ]
     },
     {
       "route": "/new-zealand/north-island/page",
       "js": {
-        "raw": 1426922,
-        "gzip": 379622,
-        "brotli": 375101
+        "raw": 1426874,
+        "gzip": 379711,
+        "brotli": 374144
       },
       "css": {
         "raw": 159776,
@@ -364,28 +364,28 @@
       },
       "files": [
         {
-          "path": "static/chunks/webpack-b1df16a8d500b29a.js",
-          "raw": 5661,
-          "gzip": 2781,
-          "brotli": 2838
+          "path": "static/chunks/webpack-14b9cc39816e73ba.js",
+          "raw": 5670,
+          "gzip": 2778,
+          "brotli": 2835
         },
         {
-          "path": "static/chunks/461d7862-c865372c751174b1.js",
-          "raw": 173025,
-          "gzip": 54366,
-          "brotli": 54591
+          "path": "static/chunks/00240099-c630c4efba9c8e16.js",
+          "raw": 173024,
+          "gzip": 54365,
+          "brotli": 54347
         },
         {
-          "path": "static/chunks/6031-c68c987696aafcb1.js",
-          "raw": 174662,
-          "gzip": 46788,
-          "brotli": 45262
+          "path": "static/chunks/477-45c4826f2b2d982b.js",
+          "raw": 174625,
+          "gzip": 47009,
+          "brotli": 45319
         },
         {
-          "path": "static/chunks/main-app-45b6a25c6bf86399.js",
-          "raw": 574,
-          "gzip": 238,
-          "brotli": 219
+          "path": "static/chunks/main-app-b51d7d8eaf32cc10.js",
+          "raw": 572,
+          "gzip": 236,
+          "brotli": 220
         },
         {
           "path": "static/css/771834c6f850b4d4.css",
@@ -400,52 +400,52 @@
           "brotli": 9205
         },
         {
-          "path": "static/chunks/2006-28060a9050416be4.js",
+          "path": "static/chunks/5132-41bb40c7ef76363a.js",
           "raw": 21292,
-          "gzip": 7323,
-          "brotli": 7415
+          "gzip": 7318,
+          "brotli": 7318
         },
         {
-          "path": "static/chunks/7950-7c7c56203a898045.js",
-          "raw": 33871,
-          "gzip": 11640,
-          "brotli": 11852
+          "path": "static/chunks/7372-4a1bcba8cdee942c.js",
+          "raw": 33868,
+          "gzip": 11615,
+          "brotli": 11978
         },
         {
-          "path": "static/chunks/7826-574c7c9d115da007.js",
-          "raw": 15266,
-          "gzip": 5571,
-          "brotli": 5642
+          "path": "static/chunks/2630-3422e8844e72156f.js",
+          "raw": 15271,
+          "gzip": 5546,
+          "brotli": 5646
         },
         {
-          "path": "static/chunks/8624-411aac69ecec8696.js",
-          "raw": 7670,
-          "gzip": 2992,
-          "brotli": 3020
+          "path": "static/chunks/2122-0be90bc4e08df57a.js",
+          "raw": 7669,
+          "gzip": 2985,
+          "brotli": 3072
         },
         {
-          "path": "static/chunks/963-72d91d632c5cbe7e.js",
-          "raw": 48273,
-          "gzip": 16553,
-          "brotli": 16790
+          "path": "static/chunks/4306-5f23abcd99da06a4.js",
+          "raw": 48274,
+          "gzip": 16574,
+          "brotli": 16895
         },
         {
-          "path": "static/chunks/656-e171ce19b1ea448a.js",
+          "path": "static/chunks/3132-68e9c20aefb40669.js",
           "raw": 63261,
-          "gzip": 7419,
-          "brotli": 7462
+          "gzip": 7429,
+          "brotli": 7456
         },
         {
-          "path": "static/chunks/6238-8a241d347c2ca613.js",
+          "path": "static/chunks/8831-cd9bc1a2ccaa9235.js",
           "raw": 21416,
-          "gzip": 7396,
+          "gzip": 7383,
           "brotli": 7475
         },
         {
-          "path": "static/chunks/app/layout-2cbd1d7894ebdd15.js",
-          "raw": 17417,
-          "gzip": 5475,
-          "brotli": 5665
+          "path": "static/chunks/app/layout-805914c328d0bb84.js",
+          "raw": 17415,
+          "gzip": 5463,
+          "brotli": 5684
         },
         {
           "path": "static/css/ab90003ded04e21b.css",
@@ -454,45 +454,45 @@
           "brotli": 597
         },
         {
-          "path": "static/chunks/8153-7ad2397f45680778.js",
-          "raw": 7812,
-          "gzip": 3261,
+          "path": "static/chunks/343-ce62e5ba966e050c.js",
+          "raw": 7803,
+          "gzip": 3259,
           "brotli": 3294
         },
         {
-          "path": "static/chunks/9995-702d59bac88fa301.js",
-          "raw": 9434,
-          "gzip": 3091,
-          "brotli": 3150
+          "path": "static/chunks/423-7fa04040784c04f4.js",
+          "raw": 9432,
+          "gzip": 3083,
+          "brotli": 3134
         },
         {
-          "path": "static/chunks/5566-e7faa949a1634e9e.js",
-          "raw": 41308,
-          "gzip": 12600,
-          "brotli": 12903
+          "path": "static/chunks/7538-91fcf97dd9100e62.js",
+          "raw": 41305,
+          "gzip": 12611,
+          "brotli": 12762
         },
         {
-          "path": "static/chunks/9859-f959ffde88098960.js",
-          "raw": 77381,
-          "gzip": 16336,
-          "brotli": 15781
+          "path": "static/chunks/7557-5bf4573a58a4d6aa.js",
+          "raw": 77379,
+          "gzip": 15956,
+          "brotli": 15737
         },
         {
-          "path": "static/chunks/2424-84c6ac3fee6a1959.js",
-          "raw": 9116,
-          "gzip": 3448,
-          "brotli": 3478
+          "path": "static/chunks/2286-75cb6c520b92ca73.js",
+          "raw": 9115,
+          "gzip": 3443,
+          "brotli": 3449
         },
         {
-          "path": "static/chunks/2444-714deda024945621.js",
-          "raw": 224100,
-          "gzip": 64317,
-          "brotli": 60217
+          "path": "static/chunks/488-237f788436882959.js",
+          "raw": 224099,
+          "gzip": 64337,
+          "brotli": 59408
         },
         {
-          "path": "static/chunks/5943-c20a93323e1ceb8d.js",
+          "path": "static/chunks/4279-f9de72dbedcad476.js",
           "raw": 91751,
-          "gzip": 14913,
+          "gzip": 14912,
           "brotli": 14885
         },
         {
@@ -502,49 +502,49 @@
           "brotli": 11573
         },
         {
-          "path": "static/chunks/128-b4e5abe9062b71c5.js",
+          "path": "static/chunks/752-c6f3c526e93e3ed9.js",
           "raw": 191271,
-          "gzip": 35874,
-          "brotli": 34559
+          "gzip": 36049,
+          "brotli": 34403
         },
         {
-          "path": "static/chunks/6805-d9e140f774ab0961.js",
+          "path": "static/chunks/3996-ac47875c1cbfdd95.js",
           "raw": 14289,
           "gzip": 4718,
-          "brotli": 4711
+          "brotli": 4817
         },
         {
-          "path": "static/chunks/4701-4ce771ab600b9c83.js",
-          "raw": 61275,
-          "gzip": 18483,
-          "brotli": 19085
+          "path": "static/chunks/2249-8d0793eda143e3b9.js",
+          "raw": 61276,
+          "gzip": 18655,
+          "brotli": 19150
         },
         {
-          "path": "static/chunks/92-47f05a05714da7f5.js",
-          "raw": 24143,
-          "gzip": 8477,
-          "brotli": 8767
+          "path": "static/chunks/7403-4557682ad24c3cc3.js",
+          "raw": 24145,
+          "gzip": 8446,
+          "brotli": 8594
         },
         {
-          "path": "static/chunks/9028-18cd21de77034cd1.js",
-          "raw": 49215,
-          "gzip": 13704,
-          "brotli": 14022
+          "path": "static/chunks/7632-18597418c0486846.js",
+          "raw": 49214,
+          "gzip": 13680,
+          "brotli": 14249
         },
         {
-          "path": "static/chunks/app/new-zealand/north-island/page-07fc5fe572412bc1.js",
-          "raw": 826,
-          "gzip": 459,
-          "brotli": 445
+          "path": "static/chunks/app/new-zealand/north-island/page-6bdb785a1d21f161.js",
+          "raw": 825,
+          "gzip": 462,
+          "brotli": 444
         }
       ]
     },
     {
       "route": "/new-zealand/south-island/page",
       "js": {
-        "raw": 1432027,
-        "gzip": 381488,
-        "brotli": 376978
+        "raw": 1431981,
+        "gzip": 381581,
+        "brotli": 376108
       },
       "css": {
         "raw": 159776,
@@ -553,28 +553,28 @@
       },
       "files": [
         {
-          "path": "static/chunks/webpack-b1df16a8d500b29a.js",
-          "raw": 5661,
-          "gzip": 2781,
-          "brotli": 2838
+          "path": "static/chunks/webpack-14b9cc39816e73ba.js",
+          "raw": 5670,
+          "gzip": 2778,
+          "brotli": 2835
         },
         {
-          "path": "static/chunks/461d7862-c865372c751174b1.js",
-          "raw": 173025,
-          "gzip": 54366,
-          "brotli": 54591
+          "path": "static/chunks/00240099-c630c4efba9c8e16.js",
+          "raw": 173024,
+          "gzip": 54365,
+          "brotli": 54347
         },
         {
-          "path": "static/chunks/6031-c68c987696aafcb1.js",
-          "raw": 174662,
-          "gzip": 46788,
-          "brotli": 45262
+          "path": "static/chunks/477-45c4826f2b2d982b.js",
+          "raw": 174625,
+          "gzip": 47009,
+          "brotli": 45319
         },
         {
-          "path": "static/chunks/main-app-45b6a25c6bf86399.js",
-          "raw": 574,
-          "gzip": 238,
-          "brotli": 219
+          "path": "static/chunks/main-app-b51d7d8eaf32cc10.js",
+          "raw": 572,
+          "gzip": 236,
+          "brotli": 220
         },
         {
           "path": "static/css/771834c6f850b4d4.css",
@@ -589,52 +589,52 @@
           "brotli": 9205
         },
         {
-          "path": "static/chunks/2006-28060a9050416be4.js",
+          "path": "static/chunks/5132-41bb40c7ef76363a.js",
           "raw": 21292,
-          "gzip": 7323,
-          "brotli": 7415
+          "gzip": 7318,
+          "brotli": 7318
         },
         {
-          "path": "static/chunks/7950-7c7c56203a898045.js",
-          "raw": 33871,
-          "gzip": 11640,
-          "brotli": 11852
+          "path": "static/chunks/7372-4a1bcba8cdee942c.js",
+          "raw": 33868,
+          "gzip": 11615,
+          "brotli": 11978
         },
         {
-          "path": "static/chunks/7826-574c7c9d115da007.js",
-          "raw": 15266,
-          "gzip": 5571,
-          "brotli": 5642
+          "path": "static/chunks/2630-3422e8844e72156f.js",
+          "raw": 15271,
+          "gzip": 5546,
+          "brotli": 5646
         },
         {
-          "path": "static/chunks/8624-411aac69ecec8696.js",
-          "raw": 7670,
-          "gzip": 2992,
-          "brotli": 3020
+          "path": "static/chunks/2122-0be90bc4e08df57a.js",
+          "raw": 7669,
+          "gzip": 2985,
+          "brotli": 3072
         },
         {
-          "path": "static/chunks/963-72d91d632c5cbe7e.js",
-          "raw": 48273,
-          "gzip": 16553,
-          "brotli": 16790
+          "path": "static/chunks/4306-5f23abcd99da06a4.js",
+          "raw": 48274,
+          "gzip": 16574,
+          "brotli": 16895
         },
         {
-          "path": "static/chunks/656-e171ce19b1ea448a.js",
+          "path": "static/chunks/3132-68e9c20aefb40669.js",
           "raw": 63261,
-          "gzip": 7419,
-          "brotli": 7462
+          "gzip": 7429,
+          "brotli": 7456
         },
         {
-          "path": "static/chunks/6238-8a241d347c2ca613.js",
+          "path": "static/chunks/8831-cd9bc1a2ccaa9235.js",
           "raw": 21416,
-          "gzip": 7396,
+          "gzip": 7383,
           "brotli": 7475
         },
         {
-          "path": "static/chunks/app/layout-2cbd1d7894ebdd15.js",
-          "raw": 17417,
-          "gzip": 5475,
-          "brotli": 5665
+          "path": "static/chunks/app/layout-805914c328d0bb84.js",
+          "raw": 17415,
+          "gzip": 5463,
+          "brotli": 5684
         },
         {
           "path": "static/css/ab90003ded04e21b.css",
@@ -643,45 +643,45 @@
           "brotli": 597
         },
         {
-          "path": "static/chunks/8153-7ad2397f45680778.js",
-          "raw": 7812,
-          "gzip": 3261,
+          "path": "static/chunks/343-ce62e5ba966e050c.js",
+          "raw": 7803,
+          "gzip": 3259,
           "brotli": 3294
         },
         {
-          "path": "static/chunks/9995-702d59bac88fa301.js",
-          "raw": 9434,
-          "gzip": 3091,
-          "brotli": 3150
+          "path": "static/chunks/423-7fa04040784c04f4.js",
+          "raw": 9432,
+          "gzip": 3083,
+          "brotli": 3134
         },
         {
-          "path": "static/chunks/5566-e7faa949a1634e9e.js",
-          "raw": 41308,
-          "gzip": 12600,
-          "brotli": 12903
+          "path": "static/chunks/7538-91fcf97dd9100e62.js",
+          "raw": 41305,
+          "gzip": 12611,
+          "brotli": 12762
         },
         {
-          "path": "static/chunks/9859-f959ffde88098960.js",
-          "raw": 77381,
-          "gzip": 16336,
-          "brotli": 15781
+          "path": "static/chunks/7557-5bf4573a58a4d6aa.js",
+          "raw": 77379,
+          "gzip": 15956,
+          "brotli": 15737
         },
         {
-          "path": "static/chunks/2424-84c6ac3fee6a1959.js",
-          "raw": 9116,
-          "gzip": 3448,
-          "brotli": 3478
+          "path": "static/chunks/2286-75cb6c520b92ca73.js",
+          "raw": 9115,
+          "gzip": 3443,
+          "brotli": 3449
         },
         {
-          "path": "static/chunks/2444-714deda024945621.js",
-          "raw": 224100,
-          "gzip": 64317,
-          "brotli": 60217
+          "path": "static/chunks/488-237f788436882959.js",
+          "raw": 224099,
+          "gzip": 64337,
+          "brotli": 59408
         },
         {
-          "path": "static/chunks/5943-c20a93323e1ceb8d.js",
+          "path": "static/chunks/4279-f9de72dbedcad476.js",
           "raw": 91751,
-          "gzip": 14913,
+          "gzip": 14912,
           "brotli": 14885
         },
         {
@@ -691,40 +691,40 @@
           "brotli": 11573
         },
         {
-          "path": "static/chunks/128-b4e5abe9062b71c5.js",
+          "path": "static/chunks/752-c6f3c526e93e3ed9.js",
           "raw": 191271,
-          "gzip": 35874,
-          "brotli": 34559
+          "gzip": 36049,
+          "brotli": 34403
         },
         {
-          "path": "static/chunks/6805-d9e140f774ab0961.js",
+          "path": "static/chunks/3996-ac47875c1cbfdd95.js",
           "raw": 14289,
           "gzip": 4718,
-          "brotli": 4711
+          "brotli": 4817
         },
         {
-          "path": "static/chunks/4701-4ce771ab600b9c83.js",
-          "raw": 61275,
-          "gzip": 18483,
-          "brotli": 19085
+          "path": "static/chunks/2249-8d0793eda143e3b9.js",
+          "raw": 61276,
+          "gzip": 18655,
+          "brotli": 19150
         },
         {
-          "path": "static/chunks/92-47f05a05714da7f5.js",
-          "raw": 24143,
-          "gzip": 8477,
-          "brotli": 8767
+          "path": "static/chunks/7403-4557682ad24c3cc3.js",
+          "raw": 24145,
+          "gzip": 8446,
+          "brotli": 8594
         },
         {
-          "path": "static/chunks/9028-18cd21de77034cd1.js",
-          "raw": 49215,
-          "gzip": 13704,
-          "brotli": 14022
+          "path": "static/chunks/7632-18597418c0486846.js",
+          "raw": 49214,
+          "gzip": 13680,
+          "brotli": 14249
         },
         {
-          "path": "static/chunks/app/new-zealand/south-island/page-c6d01cb2a9c7caea.js",
-          "raw": 5931,
-          "gzip": 2325,
-          "brotli": 2322
+          "path": "static/chunks/app/new-zealand/south-island/page-d76fabfd90079408.js",
+          "raw": 5932,
+          "gzip": 2332,
+          "brotli": 2408
         }
       ]
     }

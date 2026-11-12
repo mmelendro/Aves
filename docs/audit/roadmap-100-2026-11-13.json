@@ -409,7 +409,7 @@
       "previous": [
         18
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 39
     },
     {
@@ -419,7 +419,7 @@
       "previous": [
         19
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 40
     },
     {
@@ -429,7 +429,7 @@
       "previous": [
         20
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 41
     },
     {
@@ -439,7 +439,7 @@
       "previous": [
         21
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 42
     },
     {
@@ -449,7 +449,7 @@
       "previous": [
         22
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 43
     },
     {
@@ -459,7 +459,7 @@
       "previous": [
         23
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 44
     },
     {
@@ -484,57 +484,57 @@
     },
     {
       "group": "B",
-      "title": "Build Tasmania\u2019s five-photo gallery",
+      "title": "Build Tasmania’s five-photo gallery",
       "acceptance": "Review five distinct real photographs for locality, reuse rights, credits, alt text and capture dates. Reuse the existing regional gallery.",
       "previous": [
         28
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 47
     },
     {
       "group": "B",
-      "title": "Build South Australia\u2019s five-photo gallery",
+      "title": "Build South Australia’s five-photo gallery",
       "acceptance": "Apply the same source, rights and visual review to five distinct photographs.",
       "previous": [
         29
       ],
-      "status": "Implemented; batch browser verification pending",
+      "status": "Published; release 98c2ba5 and CI run 43295959662 verified",
       "id": 48
     },
     {
       "group": "B",
-      "title": "Build Western Australia\u2019s five-photo gallery",
+      "title": "Build Western Australia’s five-photo gallery",
       "acceptance": "Review five distinct photographs and retain correct regional/place identities.",
       "previous": [
         30
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 49
     },
     {
       "group": "B",
-      "title": "Build Northern Territory\u2019s five-photo gallery",
+      "title": "Build Northern Territory’s five-photo gallery",
       "acceptance": "Review five distinct photographs, including cultural context and any restrictions on depicted material.",
       "previous": [
         31
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 50
     },
     {
       "group": "B",
-      "title": "Build the Australian Capital Territory\u2019s five-photo gallery",
+      "title": "Build the Australian Capital Territory’s five-photo gallery",
       "acceptance": "Review five distinct photographs within the correct territory.",
       "previous": [
         32
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 51
     },
     {
       "group": "B",
-      "title": "Build Jervis Bay Territory\u2019s five-photo gallery",
+      "title": "Build Jervis Bay Territory’s five-photo gallery",
       "acceptance": "Verify territory boundaries. Do not substitute nearby New South Wales beaches.",
       "previous": [
         33
@@ -544,7 +544,7 @@
     },
     {
       "group": "B",
-      "title": "Finish Australia\u2019s country overview",
+      "title": "Finish Australia’s country overview",
       "acceptance": "Represent all nine reviewed regional collections using the same records. The current overview covers three regions with six photographs.",
       "previous": [
         34
@@ -559,7 +559,7 @@
       "previous": [
         35
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 54
     },
     {
@@ -569,7 +569,7 @@
       "previous": [
         36
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 55
     },
     {
@@ -579,7 +579,7 @@
       "previous": [
         37
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 56
     },
     {
@@ -589,7 +589,7 @@
       "previous": [
         38
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 57
     },
     {
@@ -600,7 +600,7 @@
         39,
         40
       ],
-      "status": "Implemented; batch verification pending (bounded pilot scope documented)",
+      "status": "Published; runtime fb28d74, CI 43309387682: 716 unit and 91 browser checks passed; bounded pilot scope documented",
       "id": 58
     },
     {
@@ -668,7 +668,7 @@
     {
       "group": "B",
       "title": "Clarify estimate-to-quote handoff",
-      "acceptance": "Make the traveller\u2019s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
+      "acceptance": "Make the traveller’s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
       "previous": [
         49
       ],
