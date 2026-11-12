@@ -23,3 +23,23 @@ test('place viewers do not replace the registered bird preview',()=>{
  const h=componentHarness('components/expandable-media.tsx','default',{children:'places',label:'Landscapes',kind:'place'},{runEffects:true,context:()=>({registerBirds:()=>registered++}),mocks:{'./guide-map-thumbnail':{__esModule:true,default:'MapThumbnail'},'./field-guide-context':{FieldGuideContext:'Guide'},'./expandable-media.module.css':{__esModule:true,default:{}}}})
  h.render();assert.equal(registered,0)
 })
+
+test('closing an enlarged place restores its page position after the inline layout returns',()=>{
+ const previousDocument=global.document
+ global.document={body:{style:{overflow:''}}}
+ try {
+  const returned=[]
+  const viewport={scrollX:0,scrollY:2400,scrollTo(position){returned.push(position);this.scrollY=position.top}}
+  const h=componentHarness('components/expandable-media.tsx','default',{children:'photo',label:'Island preview',kind:'place'},{runEffects:true,window:viewport,mocks:{'./guide-map-thumbnail':{__esModule:true,default:'MapThumbnail'},'./field-guide-context':{FieldGuideContext:'Guide'},'./expandable-media.module.css':{__esModule:true,default:{}}}})
+  let tree=h.render()
+  tree.props.ref.current={close(){},show(){viewport.scrollY=50},showModal(){viewport.scrollY=0}}
+  find(tree,n=>n.props['aria-label']==='Expand Island preview').props.onClick()
+  tree=h.render()
+  find(tree,n=>n.props['aria-label']==='Close full-screen Island preview').props.onClick()
+  assert.equal(viewport.scrollY,50)
+  tree=h.render()
+  assert.equal(viewport.scrollY,2400)
+  assert.deepEqual(returned,[{left:0,top:2400,behavior:'instant'}])
+  assert.equal(tree.props['data-expanded'],undefined)
+ } finally {global.document=previousDocument}
+})

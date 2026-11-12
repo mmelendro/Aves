@@ -24,6 +24,7 @@ function componentHarness(file, name, props, overrides = {}) {
       if (!previous || deps.some((value,i) => value !== previous[i])) { effectDeps.set(index,deps); pendingEffects.push(callback) }
     }, useCallback: callback => callback,
   }
+  react.useLayoutEffect = react.useEffect
   const jsx = (type, props) => ({ type, props: props || {} })
   class FormValues {
     constructor(form) { this.values = form.values }

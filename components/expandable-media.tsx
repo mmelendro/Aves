@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react"
 import { Maximize2, Minimize2 } from "lucide-react"
 import { FieldGuideContext } from "./field-guide-context"
 import GuideMapThumbnail from "./guide-map-thumbnail"
@@ -20,6 +20,16 @@ export default function ExpandableMedia({ children, label, enabled = true, kind 
   const dialog = useRef<HTMLDialogElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const [expanded, setExpanded] = useState(false)
+  const returnPosition = useRef<{ x: number; y: number } | null>(null)
+
+  // Native dialog show/close can move document focus and scroll. Restore only
+  // after React has put this same viewer back into the page layout.
+  useLayoutEffect(() => {
+    if (expanded || !returnPosition.current) return
+    const position = returnPosition.current
+    returnPosition.current = null
+    window.scrollTo({ left: position.x, top: position.y, behavior: "instant" })
+  }, [expanded])
 
   useEffect(() => {
     if (!expanded) return
@@ -28,9 +38,11 @@ export default function ExpandableMedia({ children, label, enabled = true, kind 
     return () => { document.body.style.overflow = previous }
   }, [expanded])
 
-  function resize(open: boolean) {
+  function resize(open: boolean, returnToPage = true) {
     const element = dialog.current
     if (!element) return
+    if (open) returnPosition.current = { x: window.scrollX, y: window.scrollY }
+    else if (!returnToPage || closePreview.current) returnPosition.current = null
     // Switching a non-modal dialog to modal requires closing it first.
     // Its children stay mounted, so playback and selection are not duplicated.
     element.close()
@@ -46,7 +58,7 @@ export default function ExpandableMedia({ children, label, enabled = true, kind 
   return <dialog ref={dialog} open className={styles.viewer} data-expanded={expanded || undefined}
     role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label}
     onCancel={event => { event.preventDefault(); resize(false) }}>
-    {expanded && kind === "bird" && guide?.mapCue && guide.openMap && <button type="button" className={styles.mapPreview} aria-label={`View ${guide.mapCue.label} on the map`} onClick={()=>{resize(false);guide.openMap?.()}}><GuideMapThumbnail map={guide.mapCue}/><span>{guide.mapCue.label}</span></button>}
+    {expanded && kind === "bird" && guide?.mapCue && guide.openMap && <button type="button" className={styles.mapPreview} aria-label={`View ${guide.mapCue.label} on the map`} onClick={()=>{resize(false, false);guide.openMap?.()}}><GuideMapThumbnail map={guide.mapCue}/><span>{guide.mapCue.label}</span></button>}
     <ExpandedMediaContext.Provider value={expanded}>{children}</ExpandedMediaContext.Provider>
     <button ref={trigger} type="button" className={styles.control} data-kind={kind}
       aria-label={expanded ? `Close full-screen ${label}` : `Expand ${label}`}
