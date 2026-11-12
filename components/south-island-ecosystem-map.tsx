@@ -91,7 +91,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
   function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(false) }
   return <MapViewer label="South Island explorer map" gestures={false} listenControl={<SouthIslandSoundscapes />}><section data-ecosystem-card="true" className={styles.card} aria-labelledby={`${id}-title`}>
-    <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{place ? place.label : "South Island habitats"}</h2></div>
+    <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{guidedJourney && focusedPoint ? focusedPoint.name.split(" · ")[0] : place ? place.label : "South Island habitats"}</h2></div>
     <p id={`${id}-gestures`} className="sr-only">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
     <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
       {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
