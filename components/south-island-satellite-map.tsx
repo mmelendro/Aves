@@ -67,7 +67,10 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     const line=polyline(areas.map(a=>[a.latitude,a.longitude]),{color:"#38bdf8",weight:3,dashArray:"7 5",interactive:false}).addTo(map);
     const markers=areas.map((area,i)=>{
       const m=labelMarker(map,[area.latitude,area.longitude],String(i+1),undefined,false,"routePane");
-      if(journeyStep?.baseId===area.id)m.getElement()?.querySelector("span")?.classList.add("aves-journey-target");
+      const label=m.getElement()?.querySelector("span");
+      label?.classList.add("aves-route-ordinal");
+      label?.setAttribute("aria-label",`Itinerary stop ${i+1}: ${area.name}`);
+      if(journeyStep?.baseId===area.id)label?.classList.add("aves-journey-target");
       return m;
     });
     return()=>{line.remove();markers.forEach(m=>m.remove());};

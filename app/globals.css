@@ -1182,3 +1182,7 @@ body {
 @media (max-width:639px) {
   .geographic-map-canvas { flex-basis:28rem; min-height:28rem; }
 }
+
+/* Ordinals sit above the place label, retaining the actual geographic anchor. */
+.geographic-map-marker .geographic-map-target.aves-route-ordinal { min-height:28px; min-width:28px; padding:4px; border-radius:50%; background:#0369a1; color:white; border:2px solid white; transform:translate(-50%,calc(-50% - 3rem)); text-align:center; }
+.geographic-map-target.aves-route-ordinal::after { content:""; position:absolute; top:100%; left:calc(50% - 1px); width:2px; height:14px; background:#0369a1; pointer-events:none; }
