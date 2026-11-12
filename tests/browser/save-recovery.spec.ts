@@ -15,7 +15,7 @@ test("a lost save receipt preserves answers and an unchanged retry uses the same
   await page.getByLabel("Give Your Plan a Name", {exact: false}).fill("Synthetic North Island plan")
   await page.getByLabel("Your Interests and Ideas", {exact: true}).fill("Synthetic notes retained after failure")
   await page.getByRole("button", {name: "Save My Draft", exact: true}).click()
-  await expect(page.getByRole("alert")).toContainText("Keep your answers")
+  await expect(page.locator("form").getByRole("alert")).toContainText("Keep your answers")
   await expect(page.getByLabel("Your Interests and Ideas", {exact: true})).toHaveValue("Synthetic notes retained after failure")
   await expect(page.getByRole("heading", {name: "Confirmed synthetic draft"})).toHaveCount(0)
   await page.getByRole("button", {name: "Save My Draft", exact: true}).click()
@@ -24,3 +24,4 @@ test("a lost save receipt preserves answers and an unchanged retry uses the same
   expect(attempts[0].key).toBeTruthy()
   expect(attempts[1]).toEqual(attempts[0])
 })
+
