@@ -30,11 +30,13 @@ export default function TripDayCard({
     tripPlaceById,
     tripTransferUrl,
     tripTransferContext,
+    tripDayWorkload,
     roads,
   } = useIslandPlanner();
   const { roadReferenceData, roadTimeLabel } = roads;
   const day = draft.days[index];
   const journey = tripTransferContext(draft, index);
+  const workload = tripDayWorkload(draft, index);
   const base = tripAreaById.get(day.baseId)!,
     local = placesAt(day.baseId),
     stop = tripPlaceById.get(day.birdingId),
@@ -59,6 +61,21 @@ export default function TripDayCard({
           ? ` · ${tripDayDate(draft.input, index)}`
           : ""}
       </h4>
+      <details className="rounded-xl border border-emerald-100 p-3">
+        <summary className="min-h-11 cursor-pointer font-medium text-emerald-950">
+          Daily pace review · {workload.label}
+        </summary>
+        {workload.abovePreference && (
+          <p className="mt-2 font-semibold text-amber-900">
+            Driving reference above your preference
+          </p>
+        )}
+        <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-gray-600">
+          {workload.notes.map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      </details>
       {day.transferFrom && (
         <>
           <p className="text-sm leading-6">

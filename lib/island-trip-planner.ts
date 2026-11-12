@@ -93,6 +93,8 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         (Number.isInteger(v.rooms) &&
           v.rooms >= 1 &&
           v.rooms <= (v.adults ?? 1))) &&
+      (v.maxDrivingMinutes === undefined ||
+        [120, 180, 240, 300].includes(v.maxDrivingMinutes)) &&
       Number.isInteger(v.days) &&
       v.days >= 1 &&
       v.days <= 30 &&
@@ -605,6 +607,73 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         .length,
     };
   }
+  /** References are partial town-to-town driving, never a complete day duration. */
+  function tripDayWorkload(draft: TripDraft, index: number) {
+    const day = draft.days[index],
+      journey = tripTransferContext(draft, index);
+    const minutes = journey?.reference?.minutes ?? null;
+    const stop = tripPlaceById.get(day.birdingId),
+      extra = tripPlaceById.get(day.extraId);
+    const label = day.transferFrom
+      ? context.corridor
+        ? "Travel and one local outing"
+        : "Travel focus"
+      : !canScheduleDay(draft, index)
+        ? "Departure time"
+        : stop?.separateDay
+          ? "Dedicated excursion day"
+          : stop || extra
+            ? "Local outings to review"
+            : "Flexible local day";
+    const abovePreference =
+      minutes !== null &&
+      draft.input.maxDrivingMinutes !== undefined &&
+      minutes > draft.input.maxDrivingMinutes;
+    const notes: string[] = [];
+    if (day.transferFrom)
+      notes.push(
+        minutes === null
+          ? "No reviewed road time for this transfer. Review the route before adding activities."
+          : "Town-to-town driving only. Add breaks, exact stay access and local travel.",
+      );
+    if (abovePreference)
+      notes.push(
+        "The published driving reference exceeds your preference. Consider an overnight break, fewer bases or a different route.",
+      );
+    if (stop?.separateDay)
+      notes.push(
+        "Keep this day for the excursion and its access arrangements.",
+      );
+    if (extra && stop)
+      notes.push(
+        "The extra outing is an alternative, not a confirmed combined schedule.",
+      );
+    if ([stop, extra].some((p) => p?.weekdays || p?.months || p?.when))
+      notes.push(
+        draft.input.departureDate
+          ? "Check the selected date against current opening and operating conditions."
+          : "A calendar date is needed to review opening days and seasonal availability.",
+      );
+    if (stop || extra)
+      notes.push(
+        "Activity duration, local travel and weather suitability still need review.",
+      );
+    if (index === draft.days.length - 1 && draft.input.endCity !== "flexible")
+      notes.push(
+        "Allow for your actual departure time and check-in. This draft does not confirm a flight or ferry connection.",
+      );
+    return { label, minutes, abovePreference, notes };
+  }
+  function tripWorkloadSummary(draft: TripDraft) {
+    const days = draft.days.map((_, i) => tripDayWorkload(draft, i));
+    return {
+      knownDrivingMinutes: days.reduce((n, d) => n + (d.minutes ?? 0), 0),
+      unknownTransfers: draft.days.filter(
+        (d, i) => d.transferFrom && days[i].minutes === null,
+      ).length,
+      abovePreference: days.filter((d) => d.abovePreference).length,
+    };
+  }
   function tripRoadNote(draft: TripDraft, index: number) {
     const context = tripTransferContext(draft, index);
     if (!context) return "";
@@ -625,6 +694,11 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
       budget = tripAllowanceSummary(draft);
     return [
       `[AVES ${context.name} itinerary v1]`,
+      ...(draft.input.maxDrivingMinutes
+        ? [
+            `Driving preference: up to ${roadTimeLabel(draft.input.maxDrivingMinutes)} per day. Published town references exclude breaks and local travel.`,
+          ]
+        : []),
       `${draft.input.days} days / ${draft.input.days - 1} nights. Draft only; access, road times and availability to confirm.`,
       `Start: ${gatewayById.get(draft.input.startCity)?.name || "Open to suggestions"}. Finish: ${gatewayById.get(draft.input.endCity)?.name || "Open to suggestions"}${draft.input.departureDate ? ` on ${draft.input.departureDate}` : ""}.`,
       budget.rows.length
@@ -749,6 +823,8 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     tripTransferContext,
     tripTransferUrl,
     tripRoadSummary,
+    tripDayWorkload,
+    tripWorkloadSummary,
     tripRoadNote,
     tripDraftText,
     mergeTripNotes,

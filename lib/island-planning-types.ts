@@ -69,6 +69,7 @@ export type TripPlannerInput = {
   currency: (typeof tripCurrencies)[number];
   allowances: TripAllowances;
   activityBasis: "day" | "experience";
+  maxDrivingMinutes?: number;
   adults?: number;
   rooms?: number;
 };

@@ -56,6 +56,7 @@ function IslandPlannerForm() {
     tripCategories,
     tripCoverage,
     tripRoadSummary,
+    tripWorkloadSummary,
     tripDraftText,
     validTripInput,
     writeTripDraft,
@@ -348,6 +349,36 @@ function IslandPlannerForm() {
                 }}
               />
             </label>
+            <label
+              className="block text-sm font-medium"
+              htmlFor={`${id}-drive`}
+            >
+              Preferred maximum driving per day
+              <select
+                id={`${id}-drive`}
+                className={`${field} mt-1`}
+                value={input.maxDrivingMinutes ?? ""}
+                onChange={(e) =>
+                  setInput((current) => ({
+                    ...current,
+                    maxDrivingMinutes: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  }))
+                }
+              >
+                <option value="">Open to suggestions</option>
+                {[120, 180, 240, 300].map((minutes) => (
+                  <option key={minutes} value={minutes}>
+                    {minutes / 60} hours
+                  </option>
+                ))}
+              </select>
+              <span className="mt-2 block text-xs leading-5 text-gray-600">
+                A comparison preference, not a routing guarantee. Published
+                times exclude breaks and local travel.
+              </span>
+            </label>
             {input.departureDate && validTripInput(input) && (
               <p className="text-sm text-emerald-800">
                 First day: {tripDayDate(input, 0)} · Last day:{" "}
@@ -595,6 +626,7 @@ function IslandPlannerForm() {
                 >
                   {alternatives.map((option) => {
                     const c = tripCoverage(option.draft);
+                    const pace = tripWorkloadSummary(option.draft);
                     return (
                       <button
                         key={option.id}
@@ -611,6 +643,17 @@ function IslandPlannerForm() {
                       >
                         <span className="block font-semibold">
                           {option.label}
+                        </span>
+                        <span className="mt-2 block text-xs leading-6">
+                          Known driving references:{" "}
+                          {Math.floor(pace.knownDrivingMinutes / 60)} h{" "}
+                          {pace.knownDrivingMinutes % 60} min ·{" "}
+                          {pace.unknownTransfers} transfers without reviewed
+                          times
+                          {pace.abovePreference
+                            ? ` · ${pace.abovePreference} above your driving preference`
+                            : ""}
+                          . Local travel and breaks additional.
                         </span>
                         <span className="mt-2 block text-xs leading-6">
                           {new Set(option.draft.days.map((d) => d.baseId)).size}{" "}
