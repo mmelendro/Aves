@@ -1,6 +1,14 @@
 # AVES current handoff
 
-Runtime: a30fd48234d0d3cbcc0a115a5d39cdc7e6f97e9b. Deployment: dpl_HaYXPQDmiWvA1fLADwasevCy9UC3, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio assigned within the owner's approved continuation. Rollback: 1eb6947db550c10721ed4738c0d8588e75efe26d / dpl_G22URh5bCqUUS563PY2oqZv9Tdyv. Branch: feature/field-guide-card.
+Runtime: 3003aa6c55ca3eadf04563ecbc4aaec6127a6826. Deployment: dpl_4NtSirGMHgKbdb91VAogZZyEwb9v, READY on combined project prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv. Both aves.bio and www.aves.bio verified. Rollback: a30fd48234d0d3cbcc0a115a5d39cdc7e6f97e9b / dpl_HaYXPQDmiWvA1fLADwasevCy9UC3. Branch: feature/field-guide-card.
+
+## Daily pace acceptance
+
+Pathway step 5 increment delivered. Optional two-to-five-hour driving preference compares published references without changing routes. Daily disclosures separate transfer, local, dedicated-excursion and departure workloads. Alternatives show known driving subtotal, unknown transfers and references above preference. Unknown activity/local travel is never counted as a complete day total. See PLANNER-PACE-2026-11-12.md.
+
+Node 22 strict TypeScript, all 599 tests, source audit and local/exact-SHA hosted builds passed. Hosted North Island three-day route showed 3 h 18 min partial driving references. South Island Christchurch to Queenstown showed 7 h 15 min and one above-preference transfer for a two-hour choice, with overnight/fewer-base advice. Explicit My Trips handoff reached sign-in, then back restored North Island three days and the two-hour preference. Canonical five-day planner showed the new daily disclosure. Both aliases verified; scoped error/fatal scan 00:10–00:20 UTC returned no matching logs. Browser zoom did not reduce the actual viewport this round, so no new narrow-screen acceptance is claimed. Physical Safari and real provider save/reopen remain untested in this increment.
+
+Evidence: docs/evidence/2026-11-12-daily-pace.jpg. Next increment: opening-day constraints, scoped walk durations and an indoor Hamilton alternative. Step 5 remains in progress, followed by content/rights, private journey and launch checks in steps 6–8.
 
 ## Legacy claims and final round acceptance
 
