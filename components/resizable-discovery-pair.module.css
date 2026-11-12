@@ -101,3 +101,8 @@
 .pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:clamp(44rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem),52rem); height:var(--discovery-panel-height); }
 
 @media(max-height:480px) { .guideToolbar { position:static; } }
+
+/* Wrapped phone controls and source text must not consume the real map canvas. */
+@container (max-width:623.98px) {
+  .pair[data-layout="guide"]:has([data-geographic-satellite]) { --discovery-panel-height:clamp(50rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem),58rem); height:var(--discovery-panel-height); }
+}
