@@ -1,6 +1,6 @@
 # AVES agile pathway
 
-The single active numbered pathway and resume prompt is [CONTINUE-HERE.md](../CONTINUE-HERE.md).
+The single active numbered pathway is [the 100-item roadmap](AUDIT-ROADMAP-100-2026-11-13.md). [CONTINUE-HERE.md](../CONTINUE-HERE.md) records the current release and resume range.
 
 Do not maintain a second ordered backlog here. Current production, acceptance limits and recovery belong in [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md). Source/layer coverage belongs in [MAP-LAYER-COVERAGE.md](MAP-LAYER-COVERAGE.md).
 

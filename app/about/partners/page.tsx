@@ -4,9 +4,9 @@
  * manages open sections and URL-hash navigation. Listed relationships are editorial
  * claims, not confirmed by the code or fetched from partner systems.
  */
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   ChevronDown,
   ChevronUp,
@@ -18,386 +18,32 @@ import {
   Instagram,
   Facebook,
   Building2,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { NavigationHeader } from "@/components/navigation-header"
-import { Footer } from "@/components/footer"
-import OptimizedImage from "@/components/optimized-image"
-
-const partners = [
-  {
-    id: "fundacion-proaves",
-    name: "Fundación ProAves",
-    type: "Conservation Organization",
-    location: "Colombia",
-    description:
-      "Colombia's leading conservation organization dedicated to protecting birds and their habitats. ProAves manages numerous reserves across the country, conducting vital conservation research, habitat protection, and community engagement programs. They are pioneers in bird conservation in Colombia with over 25 years of experience.",
-    specialties: [
-      "Bird Conservation",
-      "Habitat Preservation",
-      "Research",
-      "Community Engagement",
-      "Reserve Management",
-    ],
-    website: "https://proaves.org/",
-    socialMedia: {
-      facebook: "https://www.facebook.com/ProAves",
-      instagram: "https://www.instagram.com/proaves_colombia/",
-    },
-    established: "1998",
-    area: "Multiple reserves nationwide",
-    elevation: "Sea level to 4,000m",
-    highlights: [
-      "Over 25 years of conservation experience",
-      "Manages 30+ nature reserves",
-      "Protects 78+ endemic bird species",
-      "Community-based conservation programs",
-      "Scientific research and monitoring",
-      "Environmental education initiatives",
-    ],
-    category: "conservation",
-    logo: "/images/partners/proaves.gif",
-    tags: ["Endemic Species", "Research", "Community Conservation", "Multiple Reserves"],
-  },
-  {
-    id: "proaves-el-dorado-reserve",
-    name: "ProAves El Dorado Reserve",
-    type: "Bird Reserve",
-    location: "Sierra Nevada de Santa Marta",
-    description:
-      "The crown jewel of ProAves reserves, El Dorado is home to over 20 endemic bird species found nowhere else on Earth. Located in the Sierra Nevada de Santa Marta, this reserve offers world-class birding opportunities and comfortable accommodations for researchers and birders alike.",
-    specialties: ["Endemic Birds", "Research Station", "Birding Tours", "Scientific Research", "Photography"],
-    website: "https://proaves.org/el-dorado/",
-    parentOrganization: {
-      name: "Fundación ProAves",
-      website: "https://proaves.org/",
-    },
-    established: "2006",
-    area: "1,200 hectares",
-    elevation: "1,800-2,600m",
-    highlights: [
-      "20+ endemic bird species",
-      "Santa Marta Parakeet breeding site",
-      "Research station facilities",
-      "Comfortable eco-lodge accommodation",
-      "Professional birding guides",
-      "Photography blinds and feeders",
-    ],
-    category: "reserves",
-    logo: "/images/partners/el-dorado.png",
-    tags: ["Endemics", "Sierra Nevada", "Research", "Accommodation"],
-  },
-  {
-    id: "montezuma-rainforest-lodge",
-    name: "Montezuma Rainforest Lodge",
-    type: "Ecolodge",
-    location: "El Cairo, Valle del Cauca",
-    description:
-      "Nestled in the heart of the Chocó biogeographic region, Montezuma Rainforest Lodge provides exclusive access to some of the most biodiverse habitats on Earth. This family-owned lodge combines comfort with conservation, offering incredible birding and wildlife viewing in pristine rainforest settings.",
-    specialties: ["Chocó Endemics", "Rainforest Birding", "Wildlife Observation", "Hiking", "Night Birding"],
-    website: "https://montezumarainforest.com/",
-    socialMedia: {
-      instagram: "https://www.instagram.com/montezumarainforest/",
-    },
-    established: "2005",
-    area: "Private rainforest reserve",
-    elevation: "1,300-1,800m",
-    highlights: [
-      "Chocó endemic bird species",
-      "Pristine rainforest habitat",
-      "Professional naturalist guides",
-      "Comfortable eco-lodge facilities",
-      "Night birding opportunities",
-      "Wildlife photography",
-    ],
-    category: "lodges",
-    logo: "/images/partners/montezuma.webp",
-    tags: ["Chocó Endemics", "Rainforest", "Wildlife", "Night Birding"],
-  },
-  {
-    id: "hacienda-el-bosque",
-    name: "Hacienda El Bosque",
-    type: "Eco-Hacienda",
-    location: "Colombia",
-    description:
-      "A traditional Colombian hacienda transformed into an eco-friendly birding destination. Hacienda El Bosque offers authentic cultural experiences combined with excellent birding opportunities in diverse habitats including coffee plantations, secondary forest, and wetlands.",
-    specialties: ["Coffee Plantation Birding", "Cultural Tourism", "Wetland Birds", "Traditional Architecture"],
-    website: "https://haciendaelbosque.com/",
-    established: "2010",
-    area: "Traditional hacienda with diverse habitats",
-    elevation: "1,200-1,600m",
-    highlights: [
-      "Coffee plantation birding",
-      "Traditional Colombian architecture",
-      "Wetland bird species",
-      "Cultural immersion experiences",
-      "Sustainable agriculture practices",
-      "Local community involvement",
-    ],
-    category: "lodges",
-    logo: "/images/partners/hacienda-el-bosque.png",
-    tags: ["Coffee Plantation", "Cultural", "Wetlands", "Sustainable"],
-  },
-  {
-    id: "fundacion-selva",
-    name: "Fundación Selva",
-    type: "Conservation Foundation",
-    location: "Colombia",
-    description:
-      "Dedicated to the conservation of Colombia's tropical forests and their biodiversity. Fundación Selva works on habitat protection, research, and community-based conservation programs, with a special focus on forest bird species and their ecosystems.",
-    specialties: ["Forest Conservation", "Biodiversity Research", "Community Programs", "Habitat Protection"],
-    website: "https://selva.org.co/",
-    socialMedia: {
-      facebook: "https://www.facebook.com/FundacionSelva",
-      instagram: "https://www.instagram.com/fundacion_selva/",
-    },
-    established: "2008",
-    area: "Multiple forest conservation projects",
-    elevation: "Varies by project",
-    highlights: [
-      "Tropical forest conservation",
-      "Biodiversity research programs",
-      "Community-based initiatives",
-      "Habitat restoration projects",
-      "Environmental education",
-      "Scientific publications",
-    ],
-    category: "conservation",
-    logo: "/images/partners/logo-selva.png",
-    tags: ["Forest Conservation", "Research", "Community", "Restoration"],
-  },
-  {
-    id: "refugio-la-esmeralda",
-    name: "Refugio La Esmeralda",
-    type: "Mountain Refuge",
-    location: "Colombian Andes",
-    description:
-      "A high-altitude mountain refuge offering access to Andean bird species and spectacular mountain scenery. Refugio La Esmeralda provides rustic but comfortable accommodation for birders seeking high-elevation species in pristine montane environments.",
-    specialties: ["High-altitude Birding", "Andean Species", "Mountain Hiking", "Photography"],
-    website: "https://www.chec.com.co/",
-    socialMedia: {
-      instagram: "https://www.instagram.com/refugiolaesmeraldaoficial/",
-    },
-    parentOrganization: {
-      name: "CHEC (Central Hidroeléctrica de Caldas)",
-      website: "https://www.chec.com.co/",
-    },
-    established: "2012",
-    area: "High-altitude mountain refuge",
-    elevation: "3,200-3,800m",
-    highlights: [
-      "High-altitude bird species",
-      "Spectacular mountain views",
-      "Andean endemic species",
-      "Photography opportunities",
-      "Hiking trails",
-      "Rustic mountain accommodation",
-    ],
-    category: "lodges",
-    logo: "/images/partners/refugio-la-esmeralda.png",
-    tags: ["High Altitude", "Andean Species", "Photography", "Hiking"],
-  },
-  {
-    id: "finca-suasie",
-    name: "Finca Suasie",
-    type: "Private Reserve",
-    location: "Colombia",
-    description:
-      "A private farm dedicated to sustainable agriculture and bird conservation. Finca Suasie demonstrates how agricultural practices can coexist with wildlife conservation, offering birding opportunities in a working farm environment with diverse habitats.",
-    specialties: ["Sustainable Agriculture", "Farm Birding", "Habitat Diversity", "Conservation Education"],
-    socialMedia: {
-      instagram: "https://www.instagram.com/finca_suasie/",
-    },
-    isPrivateReserve: true,
-    established: "2015",
-    area: "Private farm with conservation areas",
-    elevation: "1,000-1,400m",
-    highlights: [
-      "Sustainable farming practices",
-      "Diverse bird habitats",
-      "Agricultural birding",
-      "Conservation education",
-      "Habitat restoration",
-      "Community involvement",
-    ],
-    category: "reserves",
-    logo: "/images/partners/finca-suasie.png",
-    tags: ["Private Reserve", "Sustainable Agriculture", "Farm Birding", "Education"],
-  },
-  {
-    id: "termales-del-ruiz",
-    name: "Termales del Ruiz",
-    type: "Thermal Resort & Reserve",
-    location: "Manizales, Caldas",
-    description:
-      "A renowned ecotourism destination in the Central Andes, famous for its spectacular hummingbird feeders and pristine paramo ecosystem. Termales del Ruiz offers comfortable lodging, natural hot springs, and world-class birdwatching opportunities in one of Colombia's most scenic locations.",
-    specialties: ["Hummingbird Photography", "Paramo Birding", "Thermal Baths", "High-altitude Species"],
-    website: "https://termalesdelruiz.com/",
-    socialMedia: {
-      facebook: "https://www.facebook.com/TermalesdelRuiz",
-      instagram: "https://www.instagram.com/termalesdelruiz/",
-    },
-    established: "1984",
-    area: "Paramo ecosystem reserve",
-    elevation: "3,400m",
-    highlights: [
-      "World-famous hummingbird feeders",
-      "Natural thermal hot springs",
-      "Paramo ecosystem birding",
-      "High-altitude species",
-      "Photography opportunities",
-      "Comfortable accommodation",
-    ],
-    category: "lodges",
-    logo: "/images/partners/termales-del-ruiz.png",
-    tags: ["Hummingbirds", "Hot Springs", "Paramo", "Photography"],
-  },
-  {
-    id: "observatorio-aves-el-faunal",
-    name: "Observatorio de Aves El Faunal",
-    type: "Bird Observatory & Ecolodge",
-    location: "Minca, Sierra Nevada de Santa Marta",
-    description:
-      "A specialized bird observatory and ecolodge located in the heart of Minca, offering exceptional birding opportunities in the Sierra Nevada de Santa Marta. El Faunal provides comfortable eco-friendly accommodation surrounded by lush tropical vegetation, making it an ideal base for exploring the incredible avian diversity of this UNESCO Biosphere Reserve.",
-    specialties: ["Bird Observatory", "Sierra Nevada Birding", "Eco-accommodation", "Tropical Species", "Photography"],
-    website: "https://www.observatoriodeavesdeminca.com/",
-    socialMedia: {
-      facebook: "https://www.facebook.com/FaunalMinca/",
-    },
-    established: "2015",
-    area: "Private reserve in tropical forest",
-    elevation: "600-1,200m",
-    highlights: [
-      "Strategic location in Sierra Nevada",
-      "Specialized bird observation facilities",
-      "Eco-friendly lodge accommodation",
-      "Tropical forest birding",
-      "Photography opportunities",
-      "Expert local guides",
-    ],
-    category: "lodges",
-    logo: "/images/partners/el-faunal.jpg",
-    tags: ["Sierra Nevada", "Observatory", "Tropical Forest", "Photography"],
-  },
-  {
-    id: "reserva-rio-blanco",
-    name: "Reserva Río Blanco",
-    type: "Cloud Forest Reserve",
-    location: "Manizales, Caldas",
-    description:
-      "A pristine cloud forest reserve in the Central Andes, home to spectacular endemic birds including the famous Chestnut-crowned Antpitta and Black-billed Mountain-Toucan. This protected area offers exceptional birding opportunities in montane ecosystems with well-maintained trails and research facilities.",
-    specialties: ["Cloud Forest Birds", "Antpitta Feeding", "Mountain-Toucan", "Research Station"],
-    website: "https://reservarioblanco.co/",
-    established: "1985",
-    area: "4,932 hectares",
-    elevation: "2,150-2,800m",
-    highlights: [
-      "Chestnut-crowned Antpitta feeding station",
-      "Black-billed Mountain-Toucan",
-      "Cloud forest ecosystem",
-      "Research station facilities",
-      "Well-maintained trails",
-      "Endemic bird photography",
-    ],
-    category: "reserves",
-    logo: "",
-    tags: ["Cloud Forest", "Antpitta", "Mountain-Toucan", "Research"],
-  },
-  {
-    id: "reserva-sutu",
-    name: "Reserva Sutu",
-    type: "Private Nature Reserve",
-    location: "Colombia",
-    description:
-      "A private nature reserve dedicated to bird conservation and sustainable ecotourism. Reserva Sutu offers pristine habitats and excellent birding opportunities while supporting local conservation efforts and community development programs.",
-    specialties: ["Private Reserve", "Conservation", "Ecotourism", "Community Development"],
-    socialMedia: {
-      facebook: "https://www.facebook.com/reservasutu/",
-      instagram: "https://www.instagram.com/reservasutu/",
-    },
-    isPrivateReserve: true,
-    established: "2018",
-    area: "Private nature reserve",
-    elevation: "1,500-2,200m",
-    highlights: [
-      "Private conservation area",
-      "Sustainable ecotourism",
-      "Community development",
-      "Bird conservation programs",
-      "Habitat protection",
-      "Environmental education",
-    ],
-    category: "reserves",
-    logo: "",
-    tags: ["Private Reserve", "Conservation", "Community", "Ecotourism"],
-  },
-  {
-    id: "jardin-de-rocas",
-    name: "Jardín de Rocas",
-    type: "Ecolodge & Nature Reserve",
-    location: "Central Andes, Colombia",
-    description:
-      "A premier ecolodge and nature reserve specializing in cloud forest birding experiences. Jardín de Rocas offers exceptional opportunities to observe spectacular Neotropical species including the iconic Andean Cock-of-the-rock in their natural habitat. The lodge combines comfortable accommodation with expert guiding services in pristine montane forest environments.",
-    specialties: ["Cock-of-the-rock", "Cloud Forest Birding", "Montane Species", "Photography", "Expert Guiding"],
-    website: "https://www.jardinderocas.org/",
-    socialMedia: {
-      instagram: "https://www.instagram.com/jardinderocas/",
-    },
-    established: "2010",
-    area: "Private cloud forest reserve",
-    elevation: "1,400 - 2,400m",
-    highlights: [
-      "Andean Cock-of-the-rock observation",
-      "Cloud forest ecosystem",
-      "Expert naturalist guides",
-      "Photography opportunities",
-      "Comfortable ecolodge facilities",
-      "Montane forest species diversity",
-    ],
-    category: "lodges",
-    logo: "",
-    tags: ["Cock-of-the-rock", "Cloud Forest", "Photography", "Expert Guides"],
-  },
-]
-
-const categories = {
-  conservation: {
-    title: "Conservation Organizations",
-    description: "Leading foundations and organizations dedicated to bird conservation and habitat protection",
-    icon: "🦅",
-    color: "from-emerald-50 to-green-50",
-    hoverColor: "hover:from-emerald-100 hover:to-green-100",
-  },
-  lodges: {
-    title: "Ecolodges & Accommodations",
-    description: "Premium lodges and eco-resorts offering exceptional birding experiences with comfortable stays",
-    icon: "🏨",
-    color: "from-blue-50 to-cyan-50",
-    hoverColor: "hover:from-blue-100 hover:to-cyan-100",
-  },
-  reserves: {
-    title: "Nature Reserves & Protected Areas",
-    description: "Protected areas and private reserves providing access to pristine habitats and endemic species",
-    icon: "🌲",
-    color: "from-green-50 to-emerald-50",
-    hoverColor: "hover:from-green-100 hover:to-emerald-100",
-  },
-}
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { NavigationHeader } from "@/components/navigation-header";
+import { Footer } from "@/components/footer";
+import OptimizedImage from "@/components/optimized-image";
+import { partners, categories } from "@/content/partners";
 
 const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
   const getSocialIcon = (platform: string) => {
     switch (platform) {
       case "instagram":
-        return <Instagram className="h-3 w-3" />
+        return <Instagram className="h-3 w-3" />;
       case "facebook":
-        return <Facebook className="h-3 w-3" />
+        return <Facebook className="h-3 w-3" />;
       default:
-        return <ExternalLink className="h-3 w-3" />
+        return <ExternalLink className="h-3 w-3" />;
     }
-  }
+  };
 
   return (
     <Card
@@ -407,23 +53,28 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
       <CardHeader className="pb-3">
         <div className="flex items-start gap-4 mb-3">
           <div className="flex-shrink-0 flex items-center justify-center">
-            {partner.logo && <OptimizedImage
-              src={partner.logo}
-              alt={`${partner.name} logo`}
-              width={100}
-              height={75}
-              className="w-24 h-18 object-contain rounded-lg bg-white p-3 border shadow-sm"
-              style={{
-                maxWidth: "96px",
-                maxHeight: "72px",
-                minWidth: "96px",
-                minHeight: "72px",
-              }}
-            />}
+            {partner.logo && (
+              <OptimizedImage
+                src={partner.logo}
+                alt={`${partner.name} logo`}
+                width={100}
+                height={75}
+                className="w-24 h-18 object-contain rounded-lg bg-white p-3 border shadow-sm"
+                style={{
+                  maxWidth: "96px",
+                  maxHeight: "72px",
+                  minWidth: "96px",
+                  minHeight: "72px",
+                }}
+              />
+            )}
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
-              <a href={`#${partner.id}`} className="hover:text-emerald-600 transition-colors">
+              <a
+                href={`#${partner.id}`}
+                className="hover:text-emerald-600 transition-colors"
+              >
                 {partner.name}
               </a>
             </h3>
@@ -462,13 +113,18 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
 
         {partner.isPrivateReserve && (
           <div className="mb-3">
-            <Badge variant="outline" className="bg-amber-50 text-amber-800 border-amber-200 font-medium">
+            <Badge
+              variant="outline"
+              className="bg-amber-50 text-amber-800 border-amber-200 font-medium"
+            >
               Private Reserve
             </Badge>
           </div>
         )}
 
-        <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">{partner.description}</p>
+        <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">
+          {partner.description}
+        </p>
       </CardHeader>
 
       <CardContent className="pt-0 space-y-4">
@@ -476,7 +132,11 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
         <div>
           <div className="flex flex-wrap gap-1.5">
             {partner.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs px-2 py-1 font-medium">
+              <Badge
+                key={index}
+                variant="secondary"
+                className="text-xs px-2 py-1 font-medium"
+              >
                 {tag}
               </Badge>
             ))}
@@ -499,16 +159,25 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
 
         {/* Key Highlights */}
         <div>
-          <h4 className="font-semibold text-gray-900 mb-2 text-sm">Key Highlights</h4>
+          <h4 className="font-semibold text-gray-900 mb-2 text-sm">
+            Key Highlights
+          </h4>
           <ul className="space-y-1.5 max-h-28 overflow-y-auto">
             {partner.highlights.slice(0, 4).map((highlight, index) => (
-              <li key={index} className="text-xs text-gray-600 flex items-start gap-2">
-                <span className="text-emerald-500 mt-0.5 flex-shrink-0 font-bold">•</span>
+              <li
+                key={index}
+                className="text-xs text-gray-600 flex items-start gap-2"
+              >
+                <span className="text-emerald-500 mt-0.5 flex-shrink-0 font-bold">
+                  •
+                </span>
                 <span className="line-clamp-1">{highlight}</span>
               </li>
             ))}
             {partner.highlights.length > 4 && (
-              <li className="text-xs text-gray-500 italic">+{partner.highlights.length - 4} more highlights...</li>
+              <li className="text-xs text-gray-500 italic">
+                +{partner.highlights.length - 4} more highlights...
+              </li>
             )}
           </ul>
         </div>
@@ -547,8 +216,8 @@ const PartnerCard = ({ partner }: { partner: (typeof partners)[0] }) => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const CollapsibleSection = ({
   category,
@@ -557,227 +226,264 @@ const CollapsibleSection = ({
   isOpen,
   onToggle,
 }: {
-  category: string
-  categoryData: (typeof categories)[keyof typeof categories]
-  partners: typeof partners
-  isOpen: boolean
-  onToggle: () => void
+  category: string;
+  categoryData: (typeof categories)[keyof typeof categories];
+  partners: typeof partners;
+  isOpen: boolean;
+  onToggle: () => void;
 }) => {
   return (
     <div id={`${category}-section`} className="scroll-mt-32">
       <h2>
-      <button
-        type="button"
-        aria-expanded={isOpen}
-        aria-controls={`${category}-list`}
-        className={`flex min-h-11 w-full items-center justify-between p-4 text-left bg-gradient-to-r ${categoryData.color} rounded-lg ${categoryData.hoverColor} transition-all duration-200 border border-gray-200 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700`}
-        onClick={onToggle}
-      >
-        <span className="flex items-center gap-3">
-          <span className="text-2xl">{categoryData.icon}</span>
-          <span>
-            <span className="block text-xl font-bold text-gray-900">{categoryData.title}</span>
-            <span className="text-gray-600 text-sm mt-0.5 hidden sm:block">{categoryData.description}</span>
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls={`${category}-list`}
+          className={`flex min-h-11 w-full items-center justify-between p-4 text-left bg-gradient-to-r ${categoryData.color} rounded-lg ${categoryData.hoverColor} transition-all duration-200 border border-gray-200 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700`}
+          onClick={onToggle}
+        >
+          <span className="flex items-center gap-3">
+            <span className="text-2xl">{categoryData.icon}</span>
+            <span>
+              <span className="block text-xl font-bold text-gray-900">
+                {categoryData.title}
+              </span>
+              <span className="text-gray-600 text-sm mt-0.5 hidden sm:block">
+                {categoryData.description}
+              </span>
+            </span>
           </span>
-        </span>
-        <span className="flex items-center gap-3">
-          <span className="rounded-full border border-gray-200 bg-white text-xs font-medium px-2 py-1">
-            {categoryPartners.length}
+          <span className="flex items-center gap-3">
+            <span className="rounded-full border border-gray-200 bg-white text-xs font-medium px-2 py-1">
+              {categoryPartners.length}
+            </span>
+            {isOpen ? (
+              <ChevronUp className="h-5 w-5 text-gray-500" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-gray-500" />
+            )}
           </span>
-          {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
-        </span>
-      </button>
+        </button>
       </h2>
 
-        <div id={`${category}-list`} hidden={!isOpen} className={isOpen ? "mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" : "hidden"}>
-          {categoryPartners.map((partner) => (
-            <PartnerCard key={partner.id} partner={partner} />
-          ))}
-        </div>
+      <div
+        id={`${category}-list`}
+        hidden={!isOpen}
+        className={
+          isOpen
+            ? "mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+            : "hidden"
+        }
+      >
+        {categoryPartners.map((partner) => (
+          <PartnerCard key={partner.id} partner={partner} />
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 const PartnersPage = () => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     conservation: true,
     lodges: true,
     reserves: true,
-  })
+  });
 
   // Enhanced anchor navigation with proper scroll behavior
   useEffect(() => {
     // Handle direct anchor navigation on page load and hash changes
     const handleAnchorNavigation = () => {
-      const hash = window.location.hash.substring(1)
+      const hash = window.location.hash.substring(1);
       if (hash) {
         // Small delay to ensure page is fully loaded and sections are expanded
         setTimeout(() => {
-          const element = document.getElementById(hash)
+          const element = document.getElementById(hash);
           if (element) {
             // Ensure the section containing this partner is open
-            const partner = partners.find((p) => p.id === hash)
+            const partner = partners.find((p) => p.id === hash);
             if (partner) {
               setOpenSections((prev) => ({
                 ...prev,
                 [partner.category]: true,
-              }))
+              }));
 
               // Additional delay to allow section to expand
               setTimeout(() => {
-                const headerOffset = 120
-                const elementPosition = element.getBoundingClientRect().top
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+                const headerOffset = 120;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition =
+                  elementPosition + window.pageYOffset - headerOffset;
 
                 window.scrollTo({
                   top: offsetPosition,
                   behavior: "smooth",
-                })
+                });
 
                 // Highlight the target element briefly
-                element.classList.add("ring-2", "ring-emerald-500", "ring-offset-2", "shadow-2xl")
+                element.classList.add(
+                  "ring-2",
+                  "ring-emerald-500",
+                  "ring-offset-2",
+                  "shadow-2xl",
+                );
                 setTimeout(() => {
-                  element.classList.remove("ring-2", "ring-emerald-500", "ring-offset-2", "shadow-2xl")
-                }, 3000)
-              }, 300)
+                  element.classList.remove(
+                    "ring-2",
+                    "ring-emerald-500",
+                    "ring-offset-2",
+                    "shadow-2xl",
+                  );
+                }, 3000);
+              }, 300);
             }
           }
-        }, 500)
+        }, 500);
       }
-    }
+    };
 
     // Handle initial load
-    handleAnchorNavigation()
+    handleAnchorNavigation();
 
     // Handle hash changes (back/forward navigation)
-    window.addEventListener("hashchange", handleAnchorNavigation)
+    window.addEventListener("hashchange", handleAnchorNavigation);
 
     return () => {
-      window.removeEventListener("hashchange", handleAnchorNavigation)
-    }
-  }, [])
+      window.removeEventListener("hashchange", handleAnchorNavigation);
+    };
+  }, []);
 
   const toggleSection = (category: string) => {
     setOpenSections((prev) => ({
       ...prev,
       [category]: !prev[category],
-    }))
-  }
+    }));
+  };
 
   const expandAll = () => {
     setOpenSections({
       conservation: true,
       lodges: true,
       reserves: true,
-    })
-  }
+    });
+  };
 
   const collapseAll = () => {
     setOpenSections({
       conservation: false,
       lodges: false,
       reserves: false,
-    })
-  }
+    });
+  };
 
   // Enhanced scroll to section function
   const scrollToSection = (sectionKey: string) => {
-    const element = document.getElementById(`${sectionKey}-section`)
+    const element = document.getElementById(`${sectionKey}-section`);
     if (element) {
-      const headerOffset = 120
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+      const headerOffset = 120;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
 
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
-      })
+      });
     }
     if (!openSections[sectionKey]) {
-      toggleSection(sectionKey)
+      toggleSection(sectionKey);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50" style={{ scrollBehavior: "smooth" }}>
+    <div
+      className="min-h-screen bg-gray-50"
+      style={{ scrollBehavior: "smooth" }}
+    >
       <NavigationHeader currentPage="/about/partners" />
       <main id="main-content" tabIndex={-1}>
-
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 text-white">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Valued Partners</h1>
-            <p className="text-xl md:text-2xl text-emerald-100 mb-8 leading-relaxed">
-              Collaborating with Colombia's finest conservation organizations, ecolodges, and nature reserves to deliver
-              exceptional birding experiences while supporting local communities and conservation efforts.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                onClick={expandAll}
-                variant="secondary"
-                size="lg"
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20 font-medium"
-              >
-                Expand All Sections
-              </Button>
-              <Button
-                onClick={collapseAll}
-                variant="secondary"
-                size="lg"
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20 font-medium"
-              >
-                Collapse All Sections
-              </Button>
+        {/* Hero Section */}
+        <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 text-white">
+          <div className="container mx-auto px-4 py-16">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Our Valued Partners
+              </h1>
+              <p className="text-xl md:text-2xl text-emerald-100 mb-8 leading-relaxed">
+                Collaborating with Colombia's finest conservation organizations,
+                ecolodges, and nature reserves to deliver exceptional birding
+                experiences while supporting local communities and conservation
+                efforts.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button
+                  onClick={expandAll}
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white/10 hover:bg-white/20 text-white border-white/20 font-medium"
+                >
+                  Expand All Sections
+                </Button>
+                <Button
+                  onClick={collapseAll}
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white/10 hover:bg-white/20 text-white border-white/20 font-medium"
+                >
+                  Collapse All Sections
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Enhanced Quick Navigation with Smooth Scrolling */}
-      <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-wrap justify-center gap-3">
-            {Object.entries(categories).map(([key, category]) => (
-              <Button
-                key={key}
-                variant="ghost"
-                size="sm"
-                onClick={() => scrollToSection(key)}
-                className="flex items-center gap-2 text-sm h-10 px-4 font-medium hover:bg-gray-100 transition-all duration-200"
-              >
-                <span className="text-lg">{category.icon}</span>
-                <span className="hidden sm:inline">{category.title}</span>
-                <span className="sm:hidden">{category.title.split(" ")[0]}</span>
-              </Button>
-            ))}
+        {/* Enhanced Quick Navigation with Smooth Scrolling */}
+        <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex flex-wrap justify-center gap-3">
+              {Object.entries(categories).map(([key, category]) => (
+                <Button
+                  key={key}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => scrollToSection(key)}
+                  className="flex items-center gap-2 text-sm h-10 px-4 font-medium hover:bg-gray-100 transition-all duration-200"
+                >
+                  <span className="text-lg">{category.icon}</span>
+                  <span className="hidden sm:inline">{category.title}</span>
+                  <span className="sm:hidden">
+                    {category.title.split(" ")[0]}
+                  </span>
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-7xl mx-auto space-y-8">
-          {Object.entries(categories).map(([categoryKey, categoryData]) => {
-            const categoryPartners = partners.filter((p) => p.category === categoryKey)
-            return (
-              <CollapsibleSection
-                key={categoryKey}
-                category={categoryKey}
-                categoryData={categoryData}
-                partners={categoryPartners}
-                isOpen={openSections[categoryKey]}
-                onToggle={() => toggleSection(categoryKey)}
-              />
-            )
-          })}
+        {/* Main Content */}
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-7xl mx-auto space-y-8">
+            {Object.entries(categories).map(([categoryKey, categoryData]) => {
+              const categoryPartners = partners.filter(
+                (p) => p.category === categoryKey,
+              );
+              return (
+                <CollapsibleSection
+                  key={categoryKey}
+                  category={categoryKey}
+                  categoryData={categoryData}
+                  partners={categoryPartners}
+                  isOpen={openSections[categoryKey]}
+                  onToggle={() => toggleSection(categoryKey)}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default PartnersPage
+export default PartnersPage;

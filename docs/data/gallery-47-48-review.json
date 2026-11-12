@@ -1,0 +1,155 @@
+{
+  "scope": "Source declarations, original-byte hashes and manual visual/locality review. Historical views do not establish access, sightings or partnerships.",
+  "accepted": [
+    {
+      "id": "au-bay-of-fires",
+      "regionId": "tasmania",
+      "placeName": "Bay of Fires",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bay_of_Fires,_Tasmania_(landscape).jpg",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "capturedOn": "2021-04-15",
+      "sourceDateText": "2021-04-15 20:30:52",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "fde4fd6da7f7336b6e432b51ff343bf7d8b006b760fa939ec2b74c0abaf954c1",
+      "webSha256": "b46cd4853e3055bcdbc35c2b9364dfb9f1ed723b083f32da54f2b3eb8ad52f3a"
+    },
+    {
+      "id": "au-dove-lake",
+      "regionId": "tasmania",
+      "placeName": "Dove Lake",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boat_shed_and_Cradle_Mountain_at_Dove_Lake,_Tas.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "capturedOn": "2017-04-21",
+      "sourceDateText": "2017-04-21 17:33:07",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "cad27fc7ff6182d7d4bb90bd195be01132cfa7fab275ef59671eb3b0fcbcc00e",
+      "webSha256": "80c9b4f93df131d33cac5fed955436b03387e16e818b10775977a9252fbe9680"
+    },
+    {
+      "id": "au-walls-of-jerusalem",
+      "regionId": "tasmania",
+      "placeName": "Walls of Jerusalem",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Looking_north_west_from_Solomon's_Throne_-_Walls_of_Jerusalem.jpg",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "capturedOn": "2012-01-05",
+      "sourceDateText": "2012-01-05 12:46:19",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "5477308822e2885747cf74abc74905055bd298c43cdb78f83f350b7ac059a13c",
+      "webSha256": "62d7cb57e8eb28b7a8bda326cf9b797c9889c61fd669ca894d01115d9974c106"
+    },
+    {
+      "id": "au-tessellated-pavement",
+      "regionId": "tasmania",
+      "placeName": "Tessellated Pavement",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tessellated_Pavement_Sunrise_Landscape.jpg",
+      "licence": "CC BY-SA 2.5",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "capturedOn": "2009-01-28",
+      "sourceDateText": "2009-01-28",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "af1bf1b8b7cf2b706751ac43812f0a83e35771ac506150253fcfffd83041c89f",
+      "webSha256": "467400744fd2f165ddaa7d2626b54f0472636404d35eb4bb2e663caf3ff5c0c0"
+    },
+    {
+      "id": "au-hartz-mountains",
+      "regionId": "tasmania",
+      "placeName": "Hartz Mountains",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_West_of_Hartz_Mountain.jpg",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "capturedOn": "",
+      "sourceDateText": "",
+      "dateBasis": "Source date unnormalised or missing; no exact capture date claimed.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "fbd8a5b8a6ca0f5030e6cb1ee9faa74897d92cef066032b245d859d0ff016b2d",
+      "webSha256": "c3f61d64fdd637ed69800d443b78a55d33202bf5559d7d882e71c92062668204"
+    },
+    {
+      "id": "au-adelaide",
+      "regionId": "south-australia",
+      "placeName": "Adelaide",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adelaide_skyline,_December_2022_b.jpg",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "capturedOn": "",
+      "sourceDateText": "2024-07-01 10:16",
+      "dateBasis": "Source description identifies December 2022, while derivative metadata says 2024-07-01. Exact original capture date not normalised.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "b3dee64730a2c9b699fdfb00dc4639a209a376e1a1ef4574ce9a9ff7240930f6",
+      "webSha256": "8c25126ec4b4f13dafb5e6dda8fd8f94d216c4074c7bff0ac0b8914604c48d50"
+    },
+    {
+      "id": "au-wilpena-pound",
+      "regionId": "south-australia",
+      "placeName": "Wilpena Pound",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:150906-001_Wilpena_Pound_from_Moralana_Scenic_Drive_Pano_50pc.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "capturedOn": "2015-09-06",
+      "sourceDateText": "2015-09-06 17:25:26",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "7285127b113b661628ddf2d4e8a70a4efa30e5f6c92978882c3924035f52af76",
+      "webSha256": "8c8e032eb199a5b91e71fd28078c717a83a35cf798d9978cac96bb2aae5e68f6"
+    },
+    {
+      "id": "au-remarkable-rocks",
+      "regionId": "south-australia",
+      "placeName": "Remarkable Rocks",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Remarkable_Rocks_granite_dome.jpg",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+      "capturedOn": "2024-02-18",
+      "sourceDateText": "2024-02-18 15:18:59",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "1d7a5b296e52938375362c1f0ebbc4622e462d65a40b0fe1bcedb5186fd3790a",
+      "webSha256": "1fd75287c376a7bf7596b9707372d5b572385e563d7f22a13fb51865c9ca158c"
+    },
+    {
+      "id": "au-belton",
+      "regionId": "south-australia",
+      "placeName": "Belton landscape",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Landscape_view_near_Belton,_Flinders_Ranges_South_Australia_(2097419904).jpg",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+      "capturedOn": "2007-01-24",
+      "sourceDateText": "2007-01-24 13:31",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "0e14bc2d5cfa2a5ccc8698ab47ee30e770bdf263f2dc9f149aef9b4e179f277e",
+      "webSha256": "e13556b3e9e2628d3df9113be838e6ec18d6251e573e665fc8906b2dded1fc27"
+    },
+    {
+      "id": "au-mount-gambier",
+      "regionId": "south-australia",
+      "placeName": "Mount Gambier",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blue_Lake,_Mount_Gambier,_November_2018.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "capturedOn": "2018-11-24",
+      "sourceDateText": "2018-11-24 09:38:12",
+      "dateBasis": "Capture date normalised from source metadata.",
+      "reviewedOn": "2026-11-13",
+      "originalSha256": "cdaf1da9c2ea8a393017b437c926cabb0c1fb0daeab3a1d9249bf558767b46d2",
+      "webSha256": "cd039f7902244af744327d6eb075bf34b5648bd257bc47b01ff791221bf6ab35"
+    }
+  ],
+  "rejected": [
+    {
+      "title": "The Coorong (59698054).jpeg",
+      "reason": "Conflicting locality tag; not used."
+    },
+    {
+      "title": "Mount Lofty Botanic Garden, Crafers 20250919-134207.jpg",
+      "reason": "Visual review shows a sculpture and an inscribed text; photo licence alone does not resolve depicted-work rights."
+    }
+  ]
+}

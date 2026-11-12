@@ -38,3 +38,6 @@ __pycache__/
 # Reproducible public renditions are emitted by the checked build recipes.
 /public/images/renditions/
 /public/images/map-cues/*-*.svg
+
+# Temporary route copied only by the isolated CI browser fixture build.
+/app/browser-fixtures/

@@ -309,7 +309,7 @@
       "previous": [
         6
       ],
-      "status": "Implemented; expanded browser checks and title restoration under verification",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 29
     },
     {
@@ -319,7 +319,7 @@
       "previous": [
         7
       ],
-      "status": "Implemented; single region targets and explicit gallery label under verification",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 30
     },
     {
@@ -329,7 +329,7 @@
       "previous": [
         8
       ],
-      "status": "Implemented; enquiry context and matching receipt tests passed, browser checks under verification",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 31
     },
     {
@@ -339,7 +339,7 @@
       "previous": [
         9
       ],
-      "status": "Implemented; atomic combined import and failure preservation tests passed, release checks pending",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 32
     },
     {
@@ -349,7 +349,7 @@
       "previous": [
         10
       ],
-      "status": "Implemented; photo, satellite and audio retry paths under verification",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 33
     },
     {
@@ -359,7 +359,7 @@
       "previous": [
         11
       ],
-      "status": "Implemented; media focus fixes and expanded overlay browser checks under verification",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 34
     },
     {
@@ -369,7 +369,7 @@
       "previous": [
         12
       ],
-      "status": "Implemented; playback country identity, stop and recovery checks under verification",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 35
     },
     {
@@ -379,7 +379,7 @@
       "previous": [
         15
       ],
-      "status": "Implemented; 710 tests and production build passed, final browser release checks pending",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 36
     },
     {
@@ -389,7 +389,7 @@
       "previous": [
         16
       ],
-      "status": "Implemented; 710 tests and production build passed, final browser release checks pending",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 37
     },
     {
@@ -399,7 +399,7 @@
       "previous": [
         17
       ],
-      "status": "Implemented; 710 tests and production build passed, final browser release checks pending",
+      "status": "Published; CI 710 unit and 83 browser checks passed; 78 production HTTP routes passed",
       "id": 38
     },
     {
@@ -409,7 +409,7 @@
       "previous": [
         18
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 39
     },
     {
@@ -419,7 +419,7 @@
       "previous": [
         19
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 40
     },
     {
@@ -429,7 +429,7 @@
       "previous": [
         20
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 41
     },
     {
@@ -439,7 +439,7 @@
       "previous": [
         21
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 42
     },
     {
@@ -449,7 +449,7 @@
       "previous": [
         22
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 43
     },
     {
@@ -459,7 +459,7 @@
       "previous": [
         23
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 44
     },
     {
@@ -469,7 +469,7 @@
       "previous": [
         24
       ],
-      "status": "Open",
+      "status": "Partial: release budgets established; real visitor vital/save rates and project costs unverified",
       "id": 45
     },
     {
@@ -479,32 +479,32 @@
       "previous": [
         26
       ],
-      "status": "Open",
+      "status": "Partial: rollback/runbook and adversarial tests reviewed; hosted row/object restore still unverified",
       "id": 46
     },
     {
       "group": "B",
-      "title": "Build Tasmania’s five-photo gallery",
+      "title": "Build Tasmania\u2019s five-photo gallery",
       "acceptance": "Review five distinct real photographs for locality, reuse rights, credits, alt text and capture dates. Reuse the existing regional gallery.",
       "previous": [
         28
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 47
     },
     {
       "group": "B",
-      "title": "Build South Australia’s five-photo gallery",
+      "title": "Build South Australia\u2019s five-photo gallery",
       "acceptance": "Apply the same source, rights and visual review to five distinct photographs.",
       "previous": [
         29
       ],
-      "status": "Open",
+      "status": "Implemented; batch browser verification pending",
       "id": 48
     },
     {
       "group": "B",
-      "title": "Build Western Australia’s five-photo gallery",
+      "title": "Build Western Australia\u2019s five-photo gallery",
       "acceptance": "Review five distinct photographs and retain correct regional/place identities.",
       "previous": [
         30
@@ -514,7 +514,7 @@
     },
     {
       "group": "B",
-      "title": "Build Northern Territory’s five-photo gallery",
+      "title": "Build Northern Territory\u2019s five-photo gallery",
       "acceptance": "Review five distinct photographs, including cultural context and any restrictions on depicted material.",
       "previous": [
         31
@@ -524,7 +524,7 @@
     },
     {
       "group": "B",
-      "title": "Build the Australian Capital Territory’s five-photo gallery",
+      "title": "Build the Australian Capital Territory\u2019s five-photo gallery",
       "acceptance": "Review five distinct photographs within the correct territory.",
       "previous": [
         32
@@ -534,7 +534,7 @@
     },
     {
       "group": "B",
-      "title": "Build Jervis Bay Territory’s five-photo gallery",
+      "title": "Build Jervis Bay Territory\u2019s five-photo gallery",
       "acceptance": "Verify territory boundaries. Do not substitute nearby New South Wales beaches.",
       "previous": [
         33
@@ -544,7 +544,7 @@
     },
     {
       "group": "B",
-      "title": "Finish Australia’s country overview",
+      "title": "Finish Australia\u2019s country overview",
       "acceptance": "Represent all nine reviewed regional collections using the same records. The current overview covers three regions with six photographs.",
       "previous": [
         34
@@ -668,7 +668,7 @@
     {
       "group": "B",
       "title": "Clarify estimate-to-quote handoff",
-      "acceptance": "Make the traveller’s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
+      "acceptance": "Make the traveller\u2019s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
       "previous": [
         49
       ],
@@ -1067,5 +1067,16 @@
       "www.aves.bio"
     ],
     "rollback": "dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3"
+  },
+  "currentDelivery": {
+    "publishedThrough": 38,
+    "activeRange": [
+      39,
+      78
+    ],
+    "runtime": "36611d7a2e0e582d81de89128a95ef1684f6493a",
+    "deployment": "dpl_9UMkipYRDK7Yiiin7vbj2ZtuEQRm",
+    "ci": "https://github.com/mmelendro/Aves/actions/runs/43289737797",
+    "rollbackDeployment": "dpl_HZwyZT4z835C9eNxEvo4pgWvhrNM"
   }
 }

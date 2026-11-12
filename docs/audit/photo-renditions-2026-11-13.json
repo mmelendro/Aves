@@ -2079,6 +2079,279 @@
       ]
     },
     {
+      "source": "/images/places/au-adelaide.webp",
+      "sourceSha256": "8c25126ec4b4f13dafb5e6dda8fd8f94d216c4074c7bff0ac0b8914604c48d50",
+      "sourceBytes": 352254,
+      "variants": [
+        {
+          "src": "/images/renditions/5266bc6e4cc1dbf857a5-160.webp",
+          "width": 160,
+          "height": 77,
+          "bytes": 4596,
+          "sha256": "5266bc6e4cc1dbf857a5215f0f41ad56e53f1c00d8da383b846de74dbcf20c40"
+        },
+        {
+          "src": "/images/renditions/5c2372ce549a14b0f36f-640.webp",
+          "width": 640,
+          "height": 307,
+          "bytes": 56050,
+          "sha256": "5c2372ce549a14b0f36f1122f50010dc8905de1b5720363872a9bea877728b58"
+        },
+        {
+          "src": "/images/renditions/b278a68ccfda1861bc48-1280.webp",
+          "width": 1280,
+          "height": 614,
+          "bytes": 192882,
+          "sha256": "b278a68ccfda1861bc48ecb062469bed1557a317ebf2bd5df607658e9fa96385"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-bay-of-fires.webp",
+      "sourceSha256": "b46cd4853e3055bcdbc35c2b9364dfb9f1ed723b083f32da54f2b3eb8ad52f3a",
+      "sourceBytes": 418052,
+      "variants": [
+        {
+          "src": "/images/renditions/ccea8b9ce252da449549-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 5570,
+          "sha256": "ccea8b9ce252da4495498ca86677ff56595bd739f7b140315f98d1cb625c58db"
+        },
+        {
+          "src": "/images/renditions/2315c639d6a1d389050a-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 62606,
+          "sha256": "2315c639d6a1d389050a9a8b214420918979498a4f9e6c4871a6ac8261d1f4c9"
+        },
+        {
+          "src": "/images/renditions/1048d8a635f4e6bc608d-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 213824,
+          "sha256": "1048d8a635f4e6bc608d6da844af49e84712741f36ce7835c12ad66f6c36708f"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-belton.webp",
+      "sourceSha256": "e13556b3e9e2628d3df9113be838e6ec18d6251e573e665fc8906b2dded1fc27",
+      "sourceBytes": 33524,
+      "variants": [
+        {
+          "src": "/images/renditions/1e950428896a4c228bc0-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2544,
+          "sha256": "1e950428896a4c228bc0e66b8a00bcba5a36dee52531b000f95162152239ba98"
+        },
+        {
+          "src": "/images/renditions/8459919f4ef993b198c7-500.webp",
+          "width": 500,
+          "height": 333,
+          "bytes": 31952,
+          "sha256": "8459919f4ef993b198c7b276f41b6585f1af5667a45a284172eca239bd9a32ce"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-dove-lake.webp",
+      "sourceSha256": "80c9b4f93df131d33cac5fed955436b03387e16e818b10775977a9252fbe9680",
+      "sourceBytes": 311430,
+      "variants": [
+        {
+          "src": "/images/renditions/9a0b5053d390777531bf-160.webp",
+          "width": 160,
+          "height": 92,
+          "bytes": 3954,
+          "sha256": "9a0b5053d390777531bf59cc5757282e65b7d8e259a67391624c90db1dd187da"
+        },
+        {
+          "src": "/images/renditions/b7efa6d5c5322e3bf8a9-640.webp",
+          "width": 640,
+          "height": 366,
+          "bytes": 46474,
+          "sha256": "b7efa6d5c5322e3bf8a9d2e342687fd8025cc61e7047962e0a522c8a4815616e"
+        },
+        {
+          "src": "/images/renditions/d76193097d519b09a593-1280.webp",
+          "width": 1280,
+          "height": 733,
+          "bytes": 153434,
+          "sha256": "d76193097d519b09a593cfbe6ed1dd7ffaa467bd34e21669af234534b2b1adad"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-hartz-mountains.webp",
+      "sourceSha256": "c3f61d64fdd637ed69800d443b78a55d33202bf5559d7d882e71c92062668204",
+      "sourceBytes": 141186,
+      "variants": [
+        {
+          "src": "/images/renditions/5060e16298a743e454b1-160.webp",
+          "width": 160,
+          "height": 34,
+          "bytes": 2088,
+          "sha256": "5060e16298a743e454b14dd7d711a23791d104fee63653731e4b2fa51b979a93"
+        },
+        {
+          "src": "/images/renditions/8b2f2d79398bc5658e14-640.webp",
+          "width": 640,
+          "height": 137,
+          "bytes": 21776,
+          "sha256": "8b2f2d79398bc5658e14bd1aaeffa5d8f6cddeead5ba7f6427837741d5807f51"
+        },
+        {
+          "src": "/images/renditions/15ee6b9d0472798db510-1280.webp",
+          "width": 1280,
+          "height": 274,
+          "bytes": 72202,
+          "sha256": "15ee6b9d0472798db510d5b91acefd6093524c42f0a4f08cd9866774fa45f967"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-mount-gambier.webp",
+      "sourceSha256": "cd039f7902244af744327d6eb075bf34b5648bd257bc47b01ff791221bf6ab35",
+      "sourceBytes": 193204,
+      "variants": [
+        {
+          "src": "/images/renditions/f7279586d52bfdb8e084-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 2646,
+          "sha256": "f7279586d52bfdb8e084e62269b2ace9383871c3f5154ea551b884a903e80005"
+        },
+        {
+          "src": "/images/renditions/9e9a3623608888cc1a98-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 28188,
+          "sha256": "9e9a3623608888cc1a9886b719fd01f1e38f7dec11a0a9bafc652e2a62d68d5a"
+        },
+        {
+          "src": "/images/renditions/3b1da70bee59ffcf09a4-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 95316,
+          "sha256": "3b1da70bee59ffcf09a4c4970265be9050cf5fe8b58a057bb9f9521d9cafaf93"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-remarkable-rocks.webp",
+      "sourceSha256": "1fd75287c376a7bf7596b9707372d5b572385e563d7f22a13fb51865c9ca158c",
+      "sourceBytes": 377442,
+      "variants": [
+        {
+          "src": "/images/renditions/c6eb22480a10516b0ef5-160.webp",
+          "width": 160,
+          "height": 82,
+          "bytes": 3786,
+          "sha256": "c6eb22480a10516b0ef509207239a7346d45e1646ea8d3b5677bd7464b1a579c"
+        },
+        {
+          "src": "/images/renditions/4c70154663260ebd6f51-640.webp",
+          "width": 640,
+          "height": 326,
+          "bytes": 52084,
+          "sha256": "4c70154663260ebd6f5139b816e36508a533617516ad7a1c4a9074a6d7937c53"
+        },
+        {
+          "src": "/images/renditions/7695be63a597a46b7f78-1280.webp",
+          "width": 1280,
+          "height": 653,
+          "bytes": 196620,
+          "sha256": "7695be63a597a46b7f7850969e5e12d806228aeb769e13e6eba6aed1ca2022fc"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-tessellated-pavement.webp",
+      "sourceSha256": "467400744fd2f165ddaa7d2626b54f0472636404d35eb4bb2e663caf3ff5c0c0",
+      "sourceBytes": 341186,
+      "variants": [
+        {
+          "src": "/images/renditions/a23ca31c6a237658ba2c-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 4408,
+          "sha256": "a23ca31c6a237658ba2c3b645721f63568cfededb3606e7320dfb52e914f8ecc"
+        },
+        {
+          "src": "/images/renditions/31bab564a6370b9e998e-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 50492,
+          "sha256": "31bab564a6370b9e998e15a4c7dcddc173bc66480080f444b572dc3da90f2c66"
+        },
+        {
+          "src": "/images/renditions/99d98ab685239e18eb56-1280.webp",
+          "width": 1280,
+          "height": 854,
+          "bytes": 163332,
+          "sha256": "99d98ab685239e18eb56d179fafb371c242bf495d64a12007a8ef5132bf634a1"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-walls-of-jerusalem.webp",
+      "sourceSha256": "62d7cb57e8eb28b7a8bda326cf9b797c9889c61fd669ca894d01115d9974c106",
+      "sourceBytes": 256552,
+      "variants": [
+        {
+          "src": "/images/renditions/6fe61957294e7c35d6a1-160.webp",
+          "width": 160,
+          "height": 49,
+          "bytes": 2810,
+          "sha256": "6fe61957294e7c35d6a1813d5f9a37b0e0df7288445b1c805e7d5dec50e98c52"
+        },
+        {
+          "src": "/images/renditions/d8429c2471874799aa9c-640.webp",
+          "width": 640,
+          "height": 196,
+          "bytes": 38266,
+          "sha256": "d8429c2471874799aa9c2b02103f5aac4c672d03a103641a6797997ca5cf10f9"
+        },
+        {
+          "src": "/images/renditions/305dbf056d168159c14e-1280.webp",
+          "width": 1280,
+          "height": 392,
+          "bytes": 129658,
+          "sha256": "305dbf056d168159c14e25aaa4943745505fd024350c268992ee705ea4e890fe"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-wilpena-pound.webp",
+      "sourceSha256": "8c8e032eb199a5b91e71fd28078c717a83a35cf798d9978cac96bb2aae5e68f6",
+      "sourceBytes": 150224,
+      "variants": [
+        {
+          "src": "/images/renditions/0b2015b16c17137a374f-160.webp",
+          "width": 160,
+          "height": 56,
+          "bytes": 1874,
+          "sha256": "0b2015b16c17137a374f8f77879a0e3cb042147848bb6d08a6b2f62efab3587e"
+        },
+        {
+          "src": "/images/renditions/e21264aa2ef28b1fd915-640.webp",
+          "width": 640,
+          "height": 224,
+          "bytes": 20386,
+          "sha256": "e21264aa2ef28b1fd915bdc862894ecb9f2643025482ba1a43c7cf285e526f6a"
+        },
+        {
+          "src": "/images/renditions/3abad7cd7bb025ae9c79-1280.webp",
+          "width": 1280,
+          "height": 448,
+          "bytes": 68372,
+          "sha256": "3abad7cd7bb025ae9c7971b7296d754368babcfec376415a772dedd867672b47"
+        }
+      ]
+    },
+    {
       "source": "/images/places/auckland-rangitoto.webp",
       "sourceSha256": "95e334a18214d553715158c56253a6cb1343a15959e9466405758522eb612c01",
       "sourceBytes": 106298,

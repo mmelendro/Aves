@@ -1,0 +1,25 @@
+{
+  "reviewedOn": "2026-11-13",
+  "scope": "Release budgets. Build gzip estimates are not field measurements.",
+  "initialGzipBytes": {
+    "/": 367210,
+    "/account": 356026
+  },
+  "fieldTargets": {
+    "percentile": 75,
+    "lcpMs": 2500,
+    "inpMs": 200,
+    "cls": 0.1
+  },
+  "fieldStatus": "No verified field sample available. Do not report an achieved target from synthetic checks.",
+  "saveFailures": {
+    "unconfirmedReceiptMustPreserveAnswers": true,
+    "errorRateStatus": "Not measured"
+  },
+  "serviceCosts": {
+    "status": "Not established",
+    "policy": "Use project-attributed actual invoices; do not substitute team totals or estimates."
+  },
+  "privacy": "Exclude private account URLs, titles, notes, identities, query strings and media metadata from analytics. Do not enable paid collection or change consent defaults.",
+  "buildPolicy": "Initial JavaScript must stay within 5% of the independently verified batch 29\u201338 build estimates, 349724 and 339072 bytes. This margin covers chunk variance but fails material growth."
+}
