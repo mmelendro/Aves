@@ -21,3 +21,9 @@ Validation: 674 tests, strict TypeScript, architecture check and production buil
 Five independent Tatamá and Farallones de Cali landscape photographs retain photographer credits and CC BY-SA 2.0 or 4.0 terms. Country curation represents distinct places before repeating a view, and now alternates three reviewed Colombian regions. These historical photographs do not establish current park or trail access.
 
 Validation: 675 tests, strict TypeScript, architecture check and production build passed. Original roadmap item49 is complete; Cauca Valley is next.
+
+## Cauca Valley increment
+
+Five independent photographs show Laguna de Sonso and Madre Vieja Videles. Regional ordering alternates the two places; the country preview retains two images per reviewed region. Photographer credit, CC BY-SA 4.0 terms and source/rendition hashes remain attached. Rejected candidates include a low-resolution river image and a close-up unsuitable for the landscape collection.
+
+Validation: 676 tests, strict TypeScript, architecture check and production build passed. Original roadmap item50 is complete; Magdalena Valley is next.
