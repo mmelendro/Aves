@@ -453,7 +453,7 @@ test("the opening world map has no selected country and uses the global bird col
  const Explore = load("components/homepage-destination-explorer.tsx").default
  const html=renderToStaticMarkup(React.createElement(Explore,{map:null}))
  assert.match(html,/No destination selected/)
- assert.doesNotMatch(html,/aria-pressed="true"/)
+ assert.doesNotMatch(html,/<button[^>]+aria-label="(?:Preview|Choose|Explore) [^"]*"[^>]+aria-pressed="true"/)
  assert.match(html,/Birds across AVES destinations/)
  assert.match(html,/Choose your next destination/)
  const bird=load("lib/regional-brand.ts").regionalBrandBird("global")

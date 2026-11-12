@@ -7,14 +7,14 @@ import type { GeographicScope } from "./geographic-satellite-map"
 const GeographicSatelliteMap = dynamic(()=>import("./geographic-satellite-map"),{ssr:false,loading:()=> <p role="status" className="p-4 text-xs">Opening satellite map…</p>})
 
 import { Hand, Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react"
-import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, type MapView } from "@/lib/map-gestures.mjs"
+import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, isMapDoubleTap, type MapView } from "@/lib/map-gestures.mjs"
 import BirdFilterControls from "./bird-filter-controls"
 import { FieldGuideContext } from "./field-guide-context"
 import styles from "./map-viewer.module.css"
 
 /** Enlarge the same mounted map, preserving selection, credits and native links.
- * Inline touch gestures require explicit Move; page/browser zoom remains native
- * elsewhere. Expanded maps own their gesture surface, not the whole document.
+ * Drag, pinch and double tap work immediately on the map. Page/browser zoom
+ * remains native outside its surface; the optional hand button pauses gestures.
  */
 export function MapViewer({ geographicScope, children, label, gestures = true, credits, listenControl, layerControl, viewKey, onZoomOutAtMinimum }: { geographicScope?: GeographicScope; viewKey?: string; onZoomOutAtMinimum?: () => void; children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode; layerControl?: ReactNode }) {
   const {layers}=useMapLayers()
@@ -23,16 +23,17 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
   const guide = useContext(FieldGuideContext)
   const closePreview = useRef<(()=>void)|null>(null)
   const dialog = useRef<HTMLDialogElement>(null), surface = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null)
-  const [expanded, setExpanded] = useState(false), [move, setMove] = useState(false), [view, setView] = useState<MapView>(fitMapView), [gesturing, setGesturing] = useState(false)
+  const [expanded, setExpanded] = useState(false), [move, setMove] = useState(true), [view, setView] = useState<MapView>(fitMapView), [gesturing, setGesturing] = useState(false)
   const viewRef = useRef(view), points = useRef(new Map<number,{x:number;y:number}>())
   const start = useRef<{ view: MapView; points: {x:number;y:number}[] } | null>(null)
   const dragged = useRef(false), suppress = useRef(false), frame = useRef(0)
+  const lastTap=useRef<{x:number;y:number;at:number}|null>(null)
   const active = gestures && (move || expanded)
   const box = () => ({ width: surface.current?.clientWidth || 1, height: surface.current?.clientHeight || 1 })
   function commit(next: MapView) { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) }
   function reset() { points.current.clear(); start.current = null; setGesturing(false); commit(fitMapView) }
   useEffect(()=>{ reset() },[viewKey])
-  function zoom(factor: number) { const b = box(); commit(zoomMapAt(viewRef.current, factor, {x:b.width/2,y:b.height/2}, b)) }
+  function zoom(factor: number) { const b = box(); commit(zoomMapAt(viewRef.current, factor, {x:b.width/2,y:b.height/2}, b,.35)) }
   function resize(open: boolean) {
     const element = dialog.current
     if (!element) return
@@ -54,7 +55,7 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
   useEffect(() => {
     const element = surface.current
     if (!element) return
-    const observer = new ResizeObserver(() => { points.current.clear(); start.current = null; commit(constrainMapView(viewRef.current,box())) })
+    const observer = new ResizeObserver(() => { points.current.clear(); start.current = null; commit(constrainMapView(viewRef.current,box(),.35)) })
     observer.observe(element)
     return () => { observer.disconnect(); cancelAnimationFrame(frame.current) }
   }, [])
@@ -70,12 +71,12 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
       {layerControl}
       <div className="ml-auto flex items-center gap-1">{expanded && guide?.bird && <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 text-sm text-emerald-950" onClick={()=>{resize(false);if(guide.openBirds)guide.openBirds();else guide.showBirds()}} aria-label={`View ${guide.bird.commonName} in the bird guide`}><img src={guide.bird.image} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover" style={{objectPosition:guide.bird.imagePosition}}/><span>{guide.bird.commonName}</span></button>}<BirdFilterControls/>{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
     </div>
-    {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Home to reset" : "Use the controls to zoom, or turn on Move for dragging and pinching. Page scrolling stays available."}</p>}
+    {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Double tap to zoom · Home to reset" : "Map gestures paused. Double tap to resume, or use the hand button. Scroll the page outside the map."}</p>}
     <div ref={surface} data-map-surface="true" data-gesturing={gesturing || undefined} className={styles.surface} tabIndex={gestures ? 0 : undefined} role={gestures ? "group" : undefined} aria-label={gestures ? `${label} gesture surface` : undefined} style={{touchAction: active ? "none" : "pan-y pinch-zoom",cursor:active ? "grab" : undefined}}
-      onKeyDown={e=>{if(!gestures || e.target!==e.currentTarget)return;const step=35; const keys:Record<string,[number,number]>={ArrowLeft:[step,0],ArrowRight:[-step,0],ArrowUp:[0,step],ArrowDown:[0,-step]};if(keys[e.key]){e.preventDefault();const [x,y]=keys[e.key];commit(constrainMapView({...viewRef.current,x:viewRef.current.x+x,y:viewRef.current.y+y},box()))}else if(['+','=','-','Home'].includes(e.key)){e.preventDefault();if(e.key==='Home')reset();else zoom(e.key==='-'?1/1.3:1.3)}}}
-      onPointerDown={e=>{if(!active || (e.pointerType==='mouse' && e.button!==0))return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});if(points.current.size>2){points.current.delete(e.pointerId);return}setGesturing(true);dragged.current=false;suppress.current=points.current.size>1;start.current={view:viewRef.current,points:[...points.current.values()]}}}
-      onPointerMove={e=>{if(!active || !points.current.has(e.pointerId) || !start.current)return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});const current=[...points.current.values()];const moved=current.some((p,i)=>Math.hypot(p.x-start.current!.points[i].x,p.y-start.current!.points[i].y)>5);if(!dragged.current && !moved)return;dragged.current=true;suppress.current=true;e.preventDefault();if(!e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.setPointerCapture(e.pointerId);commit(mapGestureView(start.current.view,start.current.points,current,box()))}}
-      onPointerUp={e=>{points.current.delete(e.pointerId);if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}
+      onKeyDown={e=>{if(!gestures || e.target!==e.currentTarget)return;const step=35; const keys:Record<string,[number,number]>={ArrowLeft:[step,0],ArrowRight:[-step,0],ArrowUp:[0,step],ArrowDown:[0,-step]};if(keys[e.key]){e.preventDefault();const [x,y]=keys[e.key];commit(constrainMapView({...viewRef.current,x:viewRef.current.x+x,y:viewRef.current.y+y},box(),.35))}else if(['+','=','-','Home'].includes(e.key)){e.preventDefault();if(e.key==='Home')reset();else zoom(e.key==='-'?1/1.3:1.3)}}}
+      onPointerDown={e=>{if(!active || (e.pointerType==='mouse' && e.button!==0))return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});if(points.current.size>2){points.current.delete(e.pointerId);return}setGesturing(true);dragged.current=points.current.size>1;suppress.current=points.current.size>1;start.current={view:viewRef.current,points:[...points.current.values()]}}}
+      onPointerMove={e=>{if(!active || !points.current.has(e.pointerId) || !start.current)return;const rect=e.currentTarget.getBoundingClientRect();points.current.set(e.pointerId,{x:e.clientX-rect.left,y:e.clientY-rect.top});const current=[...points.current.values()];const moved=current.some((p,i)=>Math.hypot(p.x-start.current!.points[i].x,p.y-start.current!.points[i].y)>5);if(!dragged.current && !moved)return;dragged.current=true;suppress.current=true;e.preventDefault();if(!e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.setPointerCapture(e.pointerId);commit(mapGestureView(start.current.view,start.current.points,current,box(),.35))}}
+      onPointerUp={e=>{if(gestures&&!dragged.current&&points.current.size<=1){const tap={x:e.clientX,y:e.clientY,at:e.timeStamp};if(isMapDoubleTap(lastTap.current,tap)){const rect=e.currentTarget.getBoundingClientRect();setMove(true);commit(zoomMapAt(viewRef.current,1.5,{x:e.clientX-rect.left,y:e.clientY-rect.top},box(),.35));suppress.current=true;lastTap.current=null}else lastTap.current=tap}else lastTap.current=null;points.current.delete(e.pointerId);if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}
       onPointerLeave={e=>{if(!e.currentTarget.hasPointerCapture(e.pointerId)){points.current.delete(e.pointerId);start.current=null;setGesturing(points.current.size>0)}}}
       onPointerCancel={()=>{points.current.clear();start.current=null;setGesturing(false)}}
       onLostPointerCapture={e=>{points.current.delete(e.pointerId);start.current=points.current.size?{view:viewRef.current,points:[...points.current.values()]}:null;setGesturing(points.current.size>0)}}

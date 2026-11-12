@@ -25,7 +25,7 @@ const credit='EOxCloudless <a href="https://cloudless.eox.at">EOX IT Services Gm
  */
 export default function GeographicSatelliteMap({country,region="",highlightRegion="",selectCountry,selectRegion,onMapReady}:GeographicScope){
   const container=useRef<HTMLDivElement>(null),map=useRef<GeographicMap|null>(null);
-  const [ready,setReady]=useState(false),[failed,setFailed]=useState(false),[tileFailed,setTileFailed]=useState(false),[move,setMove]=useState(false);
+  const [ready,setReady]=useState(false),[failed,setFailed]=useState(false),[tileFailed,setTileFailed]=useState(false),[move,setMove]=useState(true);
   const {layers}=useMapLayers();
   const regionPicker=useRef<HTMLSelectElement>(null);
   const cameraScope=useRef(mapCameraKey(country,region));
@@ -43,7 +43,7 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
     if(!container.current)return;
     let current:GeographicMap;
     try{
-      current=createMap(container.current,{center:[12,-45],zoom:1,minZoom:1,maxZoom:14,scrollWheelZoom:false,dragging:false,zoomControl:false,attributionControl:true,worldCopyJump:true});
+      current=createMap(container.current,{center:[12,-45],zoom:1,minZoom:1,maxZoom:14,scrollWheelZoom:false,dragging:true,touchZoom:true,doubleClickZoom:true,zoomControl:false,attributionControl:true,worldCopyJump:true});
       map.current=current;
       current.on("moveend",()=>{const centre=current.getCenter();cameraMemory.remember(cameraScope.current,{centre:[centre.lat,centre.lng],zoom:current.getZoom()});});
       tileLayer(tiles,{tileSize:256,maxNativeZoom:14,maxZoom:14,attribution:credit,keepBuffer:1,updateWhenIdle:true}).on("tileerror",()=>setTileFailed(true)).addTo(current);
@@ -52,8 +52,8 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
       current.createPane("routePane").style.zIndex="650";
       current.createPane("planningRegionsPane").style.zIndex="340";
       control.zoom({position:"topright"}).addTo(current);control.scale({imperial:false}).addTo(current);
-      container.current.setAttribute("aria-label","Satellite map. Use arrow keys to pan, plus and minus to zoom.");
-      if(window.matchMedia("(pointer:fine)").matches){current.dragging.enable();setMove(true);}
+      container.current.setAttribute("aria-label","Satellite map. Drag to pan, pinch or double tap to zoom. Arrow keys and plus or minus also work.");
+      current.dragging.enable();current.touchZoom.enable();current.doubleClickZoom.enable();
       setReady(true);onMapReady?.(current);
     }catch{setFailed(true);return;}
     const observer=new ResizeObserver(()=>current.invalidateSize({pan:false}));observer.observe(container.current);
@@ -97,6 +97,6 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
     {ready&&map.current&&showPlanning&&<GeographicPlanningLayer map={map.current} country={country} region={region||highlightRegion} onSelect={activateRegion}/>}
     {country&&<p className="px-2 py-1 text-[10px] leading-4 text-emerald-950">{country==="colombia"?"Planning regions: adjoining AVES areas with shared edges. Approximate planning boundaries, not official boundaries or bird ranges.":country==="australia"?"Planning regions follow generalised state and territory boundaries.":"Planning regions follow the three main island groups; outlying islands are omitted."} <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer" className="underline">Natural Earth geography</a>{country==="colombia"?" · Areas authored by AVES":" · Public domain"}.</p>}
     {(failed||tileFailed)&&<p role="status" className="px-2 text-xs">{failed?"The satellite map could not open. The planning map remains available.":"Some satellite tiles could not load. Try another area or return to the planning map."}</p>}
-    <p className="px-2 py-1 text-[10px] leading-4 text-gray-600">Satellite · 2016 composite · Historical landscape, not current conditions. Regional labels mark broad planning areas, not bird locations or ecological boundaries. Use Move for dragging; pinch or use + / − for detail.</p>
+    <p className="px-2 py-1 text-[10px] leading-4 text-gray-600">Satellite · 2016 composite · Historical landscape, not current conditions. Regional labels mark broad planning areas, not bird locations or ecological boundaries. Drag to move; pinch or double tap to zoom. The Move control can pause dragging. Scroll the page outside the map.</p>
   </section>;
 }

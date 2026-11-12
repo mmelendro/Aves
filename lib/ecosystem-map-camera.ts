@@ -6,19 +6,19 @@ export type MapCamera = { x: number; y: number; zoom: number }
 export const ecosystemMapFrame = { width: 480, height: 640, maxZoom: 4 } as const
 export const initialMapCamera: MapCamera = { x: 0, y: 0, zoom: 1 }
 
-export function clampMapCamera(camera: MapCamera): MapCamera {
+export function clampMapCamera(camera: MapCamera, panMargin = 0): MapCamera {
   const zoom = Math.min(ecosystemMapFrame.maxZoom, Math.max(1, camera.zoom))
-  return { zoom, x: Math.min(480 - 480 / zoom, Math.max(0, camera.x)), y: Math.min(640 - 640 / zoom, Math.max(0, camera.y)) }
+  return { zoom, x: Math.min(480 - 480 / zoom + 480*panMargin/zoom, Math.max(panMargin?-480*panMargin/zoom:0, camera.x)), y: Math.min(640 - 640 / zoom + 640*panMargin/zoom, Math.max(panMargin?-640*panMargin/zoom:0, camera.y)) }
 }
 
 /** Zoom around the current view centre, including when clamped at an edge. */
-export function zoomMapCamera(camera: MapCamera, factor: number): MapCamera {
+export function zoomMapCamera(camera: MapCamera, factor: number, panMargin = 0): MapCamera {
   const zoom = clampMapCamera({ ...camera, zoom: camera.zoom * factor }).zoom
-  return clampMapCamera({ zoom, x: camera.x + 240 / camera.zoom - 240 / zoom, y: camera.y + 320 / camera.zoom - 320 / zoom })
+  return clampMapCamera({ zoom, x: camera.x + 240 / camera.zoom - 240 / zoom, y: camera.y + 320 / camera.zoom - 320 / zoom },panMargin)
 }
 
-export function panMapCamera(camera: MapCamera, dx: number, dy: number): MapCamera {
-  return clampMapCamera({ ...camera, x: camera.x + dx, y: camera.y + dy })
+export function panMapCamera(camera: MapCamera, dx: number, dy: number, panMargin = 0): MapCamera {
+  return clampMapCamera({ ...camera, x: camera.x + dx, y: camera.y + dy },panMargin)
 }
 
 export function ecosystemMapPoint(longitude: number, latitude: number, bbox: readonly number[]) {

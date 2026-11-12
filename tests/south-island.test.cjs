@@ -262,7 +262,7 @@ test("controlled habitat map has equivalent keyboard map/legend choices, honest 
       assert.ok(html.includes(`aria-label="Show ${name} birds on map"`), name)
     }
     assert.match(html,/role="button" tabindex="0"/)
-    assert.equal((html.match(/aria-pressed="true"/g)||[]).length,selected==="all"?1:2,"one state controls map and legend; All reset is separate")
+    assert.equal((html.replace(/<button[^>]*aria-label="Move ecosystem map by dragging"[^>]*>[\s\S]*?<\/button>/g,"").match(/aria-pressed="true"/g)||[]).length,selected==="all"?1:2,"habitat state controls map and legend independently of touch controls")
   }
 })
 

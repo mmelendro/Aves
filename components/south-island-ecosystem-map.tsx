@@ -2,7 +2,7 @@
 import Link from "next/link"
 import SouthIslandSoundscapes from "./south-island-soundscapes"
 import { MapViewer } from "./map-viewer"
-import { mapGestureView } from "@/lib/map-gestures.mjs"
+import { mapGestureView,isMapDoubleTap } from "@/lib/map-gestures.mjs"
 
 /** Attributed land-cover overview, controlled by the existing explorer.
  * SVG geometry is generated offline from official LCDB data; the browser sends
@@ -61,7 +61,8 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const pointers = useRef(new Map<number, { x: number; y: number }>())
   const drag = useRef<{ points: { x: number; y: number }[]; camera: MapCamera; pixelsPerUnit: number } | null>(null)
   const [camera, setCamera] = useState(initialMapCamera)
-  const [panMode, setPanMode] = useState(false)
+  const [panMode, setPanMode] = useState(true)
+  const mapDragged=useRef(false),lastTap=useRef<{x:number;y:number;at:number}|null>(null)
   const [svgPixelsPerUnit, setSvgPixelsPerUnit] = useState(0)
   const place = places?.find(item => item.id === selectedPlace)
   const latitude = place?.latitude
@@ -103,9 +104,9 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     if(reference)setCamera(current=>focusEcosystemMapPoint(current,ecosystemMapPoint(reference.longitude,reference.latitude,map.bbox)));
   },[reference]);
   const scale = ecosystemMapScale(camera, map.bbox, svgPixelsPerUnit)
-  function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
-  function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
-  function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(false) }
+  function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor,.35)) }
+  function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom,.35)) }
+  function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(true) }
   const mapControls = <>
       {!satellite && <>
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
@@ -118,7 +119,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   </>
   return <MapViewer label="South Island explorer map" layerControl={mapControls} gestures={false} listenControl={<SouthIslandSoundscapes />}><section data-ecosystem-card="true" className={styles.card} aria-labelledby={`${id}-title`}>
     <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{reference ? reference.name : guidedJourney && focusedPoint ? focusedPoint.name.split(" · ")[0] : place ? place.label : "South Island habitats"}</h2></div>
-    <p id={`${id}-gestures`} className="sr-only">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
+    <p id={`${id}-gestures`} className="sr-only">{panMode ? "Drag to pan. Pinch or double tap to zoom. Tap a habitat to select it. Scroll the page outside the map." : "Map gestures paused. Double tap to resume. Focus the map for + / −, arrow keys and Home."}</p>
     <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
       {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
       <svg ref={svgRef} viewBox={camera.zoom === 1 ? "0 -360 725 1020" : map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
@@ -130,30 +131,31 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
         }}
         onPointerDown={event => {
           if (!panMode || (event.pointerType === "mouse" && event.button !== 0) || pointers.current.size >= 2 || !(svgPixelsPerUnit > 0)) return
-          event.preventDefault()
+          mapDragged.current=pointers.current.size>0
           const rect = event.currentTarget.getBoundingClientRect()
           const offsetX = (rect.width - 480 * svgPixelsPerUnit) / 2
           const offsetY = (rect.height - 640 * svgPixelsPerUnit) / 2
           pointers.current.set(event.pointerId, { x: event.clientX - rect.left - offsetX, y: event.clientY - rect.top - offsetY })
-          event.currentTarget.setPointerCapture(event.pointerId)
           drag.current = { points: [...pointers.current.values()], camera, pixelsPerUnit: svgPixelsPerUnit }
         }}
         onPointerMove={event => {
           const start = drag.current
           if (!start || !pointers.current.has(event.pointerId)) return
-          event.preventDefault()
           const rect = event.currentTarget.getBoundingClientRect(), ppu = start.pixelsPerUnit
           pointers.current.set(event.pointerId, { x: event.clientX - rect.left - (rect.width - 480 * ppu) / 2, y: event.clientY - rect.top - (rect.height - 640 * ppu) / 2 })
-          const view = mapGestureView({ x: -start.camera.x * start.camera.zoom * ppu, y: -start.camera.y * start.camera.zoom * ppu, zoom: start.camera.zoom }, start.points, [...pointers.current.values()], { width: 480 * ppu, height: 640 * ppu })
+          const contacts=[...pointers.current.values()];if(!contacts.some((p,i)=>Math.hypot(p.x-start.points[i].x,p.y-start.points[i].y)>5))return;
+          mapDragged.current=true;event.preventDefault();if(!event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.setPointerCapture(event.pointerId)
+          const view = mapGestureView({ x: -start.camera.x * start.camera.zoom * ppu, y: -start.camera.y * start.camera.zoom * ppu, zoom: start.camera.zoom }, start.points, [...pointers.current.values()], { width: 480 * ppu, height: 640 * ppu },.35)
           setCamera({ x: -view.x / (view.zoom * ppu), y: -view.y / (view.zoom * ppu), zoom: view.zoom })
         }}
         onPointerUp={event => {
+          if(!mapDragged.current&&pointers.current.size<=1){const tap={x:event.clientX,y:event.clientY,at:event.timeStamp};if(isMapDoubleTap(lastTap.current,tap)){setPanMode(true);zoom(1.5);mapDragged.current=true;lastTap.current=null}else lastTap.current=tap}else lastTap.current=null
           pointers.current.delete(event.pointerId)
           if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId)
           drag.current = pointers.current.size ? { points: [...pointers.current.values()], camera, pixelsPerUnit: svgPixelsPerUnit } : null
         }}
         onPointerCancel={() => { pointers.current.clear(); drag.current = null }} onLostPointerCapture={event => { if (pointers.current.delete(event.pointerId)) drag.current = null }}
-        onClickCapture={event => { if (panMode) { event.preventDefault(); event.stopPropagation() } }}>
+        onClickCapture={event => { if (mapDragged.current) { event.preventDefault(); event.stopPropagation();mapDragged.current=false } }}>
         <title id={`${id}-map-title`}>{satellite ? "South Island satellite overview and conservation layers" : "South Island land cover and coastline"}</title>
         <defs><clipPath id={`${id}-island-clip`}><path d={map.outline} fillRule="evenodd" clipRule="evenodd"/></clipPath></defs>
         <desc id={`${id}-map-description`}>{satellite ? "Historical NASA satellite composite from 2004 in the same Mercator frame. Only the selected habitat areas are shaded; opacity controls the shading, not the imagery. Parks, conservation and public places are independent overlays. " : ""}North-up Mercator overview, with the Tasman Sea to the west and South Pacific Ocean to the east. Sea colour and labels provide orientation only, not mapped marine habitats or boundaries. Select a visible coloured ecosystem area or a labelled habitat button to filter the birds. Land cover is generalised from 2023/24 LCDB data, not current sightings or a complete ecosystem survey. Coastline is context only; offshore habitat is not mapped. Place markers show public references, not wildlife locations or permission to enter.</desc>
@@ -207,7 +209,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <div className={styles.detailsPanel}>
         <button type="button" className="mb-2 min-h-11 rounded px-2 text-sm font-semibold text-emerald-800 underline" onClick={()=>{if(detailsRef.current){detailsRef.current.open=false;detailsRef.current.querySelector("summary")?.focus();}}}>Back to the map</button>
         <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>
-        <p className="mb-2 text-xs leading-5 text-gray-600">{satellite ? "Drag to explore. Use two fingers to move on touch screens. Use the habitat filters below to change the birds." : "Use Move to drag or pinch the map. Turn it off to select habitats. Keyboard: + / −, arrow keys and Home."}</p>
+        <p className="mb-2 text-xs leading-5 text-gray-600">{satellite ? "Drag to explore. Pinch or double tap to zoom. Use the habitat filters below to change the birds." : "Drag to pan. Pinch or double tap to zoom. Tap habitats to select them. Keyboard: + / −, arrow keys and Home."}</p>
     <PublicPlaceDetails />
     <div className={styles.scale} aria-label="Map distance scale">
       {scale ? <><div style={{ width: scale.widthPixels }} className={styles.scaleBar} /><p>{scale.distanceMetres / 1000} km at {Math.abs(scale.latitude).toFixed(1)}° S · map centre</p></> : <p>Distance scale appears when the map is measured.</p>}

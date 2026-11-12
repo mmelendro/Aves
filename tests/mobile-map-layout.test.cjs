@@ -18,6 +18,7 @@ test('mobile map options stay collapsed until requested and selections close the
 test('the shared viewer owns regional controls and long details start collapsed',()=>{
  const h=componentHarness('components/south-island-ecosystem-map.tsx','default',{selected:'all',onSelect(){}},{mocks:{'next/dynamic':()=> 'ConservationOverlay','./south-island-soundscapes':{__esModule:true,default:'Sounds'},'./map-viewer':{MapViewer:'MapViewer'},'./south-island-map-layers':{__esModule:true,default:'Layers'},'./south-island-public-place-overlay':{__esModule:true,default:'Places',PublicPlaceDetails:'PlaceDetails'},'./map-layer-context':{useMapLayers:()=>({layers:initial})},'./south-island-ecosystem-map.module.css':{__esModule:true,default:{}}}})
  const tree=h.render(),all=nodes(tree)
+ const svg=find(tree,n=>n.type==='svg'&&n.props.onPointerDown);assert.equal(svg.props.style.touchAction,'none');let prevented=false;svg.props.onClickCapture({preventDefault(){prevented=true},stopPropagation(){}});assert.equal(prevented,false,'single taps still select habitats');
  const viewer=find(tree,n=>n.type==='MapViewer')
  assert.equal(all.filter(n=>n.type==='MapViewer').length,1)
  assert.ok(nodes(viewer.props.layerControl).some(n=>n.props['aria-label']==='Zoom ecosystem map in'))

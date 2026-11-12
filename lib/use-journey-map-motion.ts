@@ -23,14 +23,14 @@ export function useJourneyMapMotion(map:GeographicMap|null,islandId:string){
   label.textContent=step.kind==='overnight'?`Overnight · ${step.mapPoint?.name??area.name}`:step.mapPoint?.name??'';
   label.setAttribute('role','img');label.setAttribute('aria-label',step.kind==='overnight'?`Overnight reference: ${step.mapPoint?.name??area.name}`:`Journey reference: ${step.mapPoint?.name??area.name}`);
   const pin=(step.mapPoint||step.kind==='overnight')?marker([target.latitude,target.longitude],{pane:'routePane',icon:divIcon({html:label,className:'geographic-map-marker',iconSize:[0,0]}),keyboard:false}).addTo(map):null;
-  if(!step.transfer)map.setView([target.latitude,target.longitude],step.mapPoint?12:9,{animate});
+  if(!step.transfer)map.setView([target.latitude,target.longitude],step.mapPoint?12:9,{animate:false});
   let frame=0;
   const travel=step.transfer;
   const line=travel?polyline([[travel.from.latitude,travel.from.longitude],[travel.to.latitude,travel.to.longitude]],{pane:'routePane',color:'#0e7490',weight:4,dashArray:'5 7',interactive:false}).addTo(map):null;
   const beadElement=document.createElement('span');beadElement.className='aves-journey-bead';beadElement.setAttribute('role','img');beadElement.setAttribute('aria-label','Illustrated transfer progress, not a road or live location');
   const bead=travel?marker([travel.to.latitude,travel.to.longitude],{pane:'routePane',icon:divIcon({html:beadElement,className:'geographic-map-marker',iconSize:[0,0]}),keyboard:false}).addTo(map):null;
   if(travel){
-   map.fitBounds([[travel.from.latitude,travel.from.longitude],[travel.to.latitude,travel.to.longitude]],{padding:[55,55],maxZoom:9,animate});
+   map.fitBounds([[travel.from.latitude,travel.from.longitude],[travel.to.latitude,travel.to.longitude]],{padding:[55,55],maxZoom:9,animate:false});
    if(animate&&bead){let start:number|undefined;const tick=(now:number)=>{start??=now;const t=Math.min(1,(now-start)/1200),smooth=t*t*(3-2*t);bead.setLatLng([travel.from.latitude+(travel.to.latitude-travel.from.latitude)*smooth,travel.from.longitude+(travel.to.longitude-travel.from.longitude)*smooth]);if(t<1)frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick)}
   }
   return()=>{cancelAnimationFrame(frame);pin?.remove();line?.remove();bead?.remove();map.stop();delete container.dataset.journeyAnimation};

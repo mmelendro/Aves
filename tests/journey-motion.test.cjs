@@ -14,6 +14,6 @@ for(const [name,reduced,enabled,expected] of [['system reduced motion',true,true
   const map={getContainer:()=>({dataset}),fitBounds:(points,options)=>fits.push({points,options}),setView(){},stop(){}};
   const entry=()=>({addTo(){return this},remove(){},setLatLng(){}});
   const h=componentHarness('components/north-island-planning-layer.tsx','default',{map},{runEffects:true,window:{matchMedia:()=>({matches:reduced,addEventListener(){},removeEventListener(){}})},mocks:{leaflet:{marker:entry,polyline:entry,divIcon:x=>x},'./trip-planner/trip-map-context':{useTripMap:()=>trip},'@/components/trip-planner/trip-map-context':{useTripMap:()=>trip},'./map-layer-context':{useMapLayers:()=>layer},'@/components/map-layer-context':{useMapLayers:()=>layer}}});
-  h.render();assert.equal(frames,expected);assert.equal(fits.length,1);assert.equal(fits[0].options.animate,Boolean(expected));assert.deepEqual(fits[0].points,[[from.latitude,from.longitude],[to.latitude,to.longitude]]);assert.equal(dataset.journeyAnimation,expected?'on':'off');
+  h.render();assert.equal(frames,expected);assert.equal(fits.length,1);assert.equal(fits[0].options.animate,false);assert.deepEqual(fits[0].points,[[from.latitude,from.longitude],[to.latitude,to.longitude]]);assert.equal(dataset.journeyAnimation,expected?'on':'off');
  } finally {global.document=oldDocument;global.requestAnimationFrame=oldRaf;global.cancelAnimationFrame=oldCancel}
 });
