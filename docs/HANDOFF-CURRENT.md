@@ -1,9 +1,11 @@
 # AVES current product increment
 
-Current owner order: Colombia galleries, Australia galleries, gallery consistency, route evidence, conservation/B Corp directories, bird filters, seasonal planning, private albums, image rights, launch checks and the updated business plan.
+Roadmap52–61 is implemented: six remaining Colombian five-photo galleries; the shared country overview covering all eleven regions; a 45-candidate Australian landscape inventory; and five-photo New South Wales and Queensland galleries. Colombia has 55 photographs and a 22-photo country preview. Australia has 10 photographs and a balanced four-photo preview. Every gallery keeps source-specific rights and credits.
 
-Roadmap52–58 adds the six remaining Colombian regional galleries. All eleven Colombian regions now contain five reviewed landscape photographs, and the shared country overview represents every region with two photographs. See GALLERY-ROLLOUT-52-61.md for this release.
+The lower Australian regional bird section now uses the shared photo carousel instead of generic-icon text cards. Regional context, information, credits and enlargement remain available, with a link back to the map.
 
-Next:59 Australian landscape candidate inventory,60 New South Wales gallery,61 Queensland gallery. Later regions remain pending. Sourced names and pronunciation continue throughout; the first published examples are Kumanday and kea. Keep names, spelling and attribution tied to evidence. Do not invent pronunciation or copy unlicensed recordings.
+Next:62 Victoria, then the remaining Australian regional galleries through68, the full Australia overview69 and parity check70. Continue the owner-selected sequence through89 after those galleries. Physical Safari, independent visitor and owner financial/capacity evidence gates remain open.
 
-Validation:684 tests, strict TypeScript, architecture audit and production build passed. Physical-device and independent visitor checks still require actual evidence.
+Keep sourced names and pronunciation throughout. Original Spanish bird stories should be vivid and grounded in verified behaviour. A privately saved motmot passage guides tone. The future 3D bird collection includes reusable models, logo-style assets and short animations for an album or game. The prior modelling app remains unidentified; Gamma appears only in an earlier 3D-style image discussion. See AVES-CREATIVE-DIRECTION.md and GALLERY-ROLLOUT-52-61.md.
+
+Validation:688 tests, strict TypeScript, architecture audit and production build passed. No schema, authentication or private-record changes.
