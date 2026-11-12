@@ -15,6 +15,10 @@ import DestinationExplorerPage from "@/components/destination-explorer-page"
 import WorldDestinationMap from "@/components/world-destination-map"
 import { newZealandContactHref, newZealandRegions } from "@/content/new-zealand"
 import { canonicalUrl } from "@/lib/site-path"
+import { galleryPhotos } from "@/lib/place-gallery"
+import PhotoCredit from "@/components/photo-credit"
+import PhotoZoom from "@/components/photo-zoom"
+import ExpandableMedia from "@/components/expandable-media"
 
 const description = "Discover Aotearoa New Zealand with AVES: native birds, island landscapes, food and culture at your pace. Explore our developing destination and share your trip ideas."
 export const metadata: Metadata = publicMetadata({
@@ -65,14 +69,15 @@ export default function NewZealandPage() {
             <h2 id="regions-heading" className="text-3xl font-medium tracking-tight sm:text-4xl">Three islands. Many ways to explore.</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">Choose the landscapes that speak to you. A rewarding trip can focus on one part of the country, with time to settle in.</p>
             <a href="#nz-discovery-map" className="mt-4 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Explore these islands on the map above</a>
-            <div className="mt-9 grid gap-6 lg:grid-cols-3">{newZealandRegions.map((region, index) => <article key={region.id} id={`region-${region.id}`} tabIndex={-1} aria-labelledby={`region-${region.id}-heading`} className="flex scroll-mt-28 flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 to-white p-6 sm:p-7 target:border-emerald-600 target:ring-2 target:ring-emerald-100 focus:outline focus:outline-2 focus:outline-emerald-700">
+            <div className="mt-9 grid gap-6 lg:grid-cols-3">{newZealandRegions.map((region, index) => { const photo = galleryPhotos("new-zealand", region.id)[0]; return <article key={region.id} id={`region-${region.id}`} tabIndex={-1} aria-labelledby={`region-${region.id}-heading`} className="flex scroll-mt-28 flex-col rounded-3xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 to-white p-6 sm:p-7 target:border-emerald-600 target:ring-2 target:ring-emerald-100 focus:outline focus:outline-2 focus:outline-emerald-700">
+              {photo && <div className="mb-6"><ExpandableMedia label={`${region.name} preview`} kind="place"><div data-place-image className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-emerald-950 text-white"><PhotoZoom label={photo.placeName}><Image src={photo.src} alt={photo.alt} fill sizes="(min-width:1024px) 30vw, 100vw" className="object-cover" /></PhotoZoom><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pb-2 pt-12"><p className="text-xs">{photo.caption}</p><PhotoCredit creator={photo.creator} sourceUrl={photo.sourceUrl} licence={photo.licence} licenceUrl={photo.licenceUrl} modifications={photo.modifications} /></div></div></ExpandableMedia></div>}
               <span className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-sm font-medium text-emerald-800">0{index + 1}</span>
               <h3 id={`region-${region.id}-heading`} className="text-2xl font-medium">{region.name}</h3><p className="mt-2 font-medium text-emerald-700">{region.subtitle}</p>
               <p className="mt-5 leading-7 text-gray-600">{region.description}</p><p className="mt-5 text-sm leading-6 text-emerald-900"><strong>Birdlife:</strong> {region.birds}</p>
               <p className="mb-5 mt-4 text-sm leading-6 text-gray-600">{region.balance}</p>
               {region.id === "south-island" && <Link href="/new-zealand/south-island" className="mb-3 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700">Explore the South Island<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
               <a href={region.source} target="_blank" rel="noreferrer" className="mt-auto inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-emerald-800 underline underline-offset-4">Read the DOC place guide<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
-            </article>)}</div>
+            </article>})}</div>
           </div>
         </section>
 

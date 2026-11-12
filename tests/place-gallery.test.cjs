@@ -10,9 +10,10 @@ const credits=require('../content/image-credits.json').images;
 
 test('country curation represents all reviewed islands before repeating an island or place',()=>{
  const photos=galleryPhotos('new-zealand');
+ assert.equal(photos.length,6);
  assert.equal(new Set(photos.slice(0,3).map(p=>p.regionId)).size,3);
  assert.deepEqual([...new Set(photos.map(p=>p.regionId))].sort(),destinationRegions['new-zealand'].map(r=>r.id).sort());
- for(const id of new Set(photos.map(p=>p.regionId)))assert.ok(photos.filter(p=>p.regionId===id).length<=2);
+ for(const id of new Set(photos.map(p=>p.regionId)))assert.ok(photos.filter(p=>p.regionId===id).length===2);
  const south=photos.filter(p=>p.regionId==='south-island');
  assert.equal(new Set(south.map(p=>p.placeId)).size,south.length);
 });
@@ -24,7 +25,9 @@ test('region scopes expose the full same-photo collection and fail closed for un
  }
  for(const place of southIslandPlaceContexts)assert.equal(place.photos.length,5,place.label);
  assert.equal(galleryPhotos('new-zealand','south-island').length,20);
- assert.equal(galleryPhotos('new-zealand','north-island').length,1);
+ assert.equal(galleryPhotos('new-zealand','north-island').length,5);
+ assert.equal(galleryPhotos('new-zealand','rakiura').length,5);
+ assert.equal(placeGalleryPhotos.length,30);
  assert.deepEqual(galleryPhotos('new-zealand','missing'),[]);
  assert.deepEqual(galleryPhotos('missing'),[]);
 });
