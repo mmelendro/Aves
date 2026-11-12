@@ -13,9 +13,9 @@ import styles from "./south-island-places-explorer.module.css";
 
 /** A shared photo surface. Selecting a photograph previews its planning region
  * on the existing map; it does not navigate, zoom or change the bird collection. */
-export default function PlaceGallery({countryId, countryName, regionId, regions, selectedPhotoId, onPhotoChange, onRegionChange}: {
+export default function PlaceGallery({countryId, countryName, regionId, regions, selectedPhotoId, onPhotoChange, onRegionChange, mapHref}: {
   countryId: string; countryName: string; regionId: string;
-  regions: readonly DestinationRegion[]; selectedPhotoId?: string;
+  regions: readonly DestinationRegion[]; selectedPhotoId?: string; mapHref: string;
   onPhotoChange: (photo: GalleryPhoto) => void; onRegionChange: (id: string) => void;
 }) {
   const id = useId();
@@ -42,6 +42,6 @@ export default function PlaceGallery({countryId, countryName, regionId, regions,
         <div className={styles.caption} aria-live="polite"><p className="text-xs">{region?.name ?? photo.regionId}</p><h3 className="text-xl font-medium">{photo.placeName}</h3><p className="mt-1 text-xs">{photo.caption}</p><PhotoCredit key={photo.src} creator={photo.creator} sourceUrl={photo.sourceUrl} licence={photo.licence} licenceUrl={photo.licenceUrl} modifications={photo.modifications}/></div>
       </div>
     </section></ExpandableMedia>
-    <p className="mt-3 text-xs leading-6 text-gray-600">{regionId ? `${photos.length} reviewed ${photos.length === 1 ? "photograph" : "photographs"} in this regional collection.` : "A balanced preview from each island’s reviewed collection. More regional photographs are being added."} Map preview: {region?.name}. <button type="button" className="ml-2 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange("")}>All regions</button>{region && !regionId && <button type="button" className="ml-4 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange(photo.regionId)}>Explore {region.name}</button>}</p>
+    <p className="mt-3 text-xs leading-6 text-gray-600">{regionId ? `${photos.length} reviewed ${photos.length === 1 ? "photograph" : "photographs"} in this regional collection.` : "A balanced preview from each island’s reviewed collection. More regional photographs are being added."} Map preview: {region?.name}. <a href={mapHref} className="ml-2 inline-flex min-h-11 items-center font-semibold text-emerald-800 underline">Show on the map above</a> <button type="button" className="ml-2 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange("")}>All regions</button>{region && !regionId && <button type="button" className="ml-4 min-h-11 font-semibold text-emerald-800 underline" onClick={() => onRegionChange(photo.regionId)}>Explore {region.name}</button>}</p>
   </section>;
 }
