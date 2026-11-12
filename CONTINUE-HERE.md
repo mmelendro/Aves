@@ -22,7 +22,7 @@ The direct satellite toggle is implemented beside the shared layers picker. The 
 
 Owner reprioritised galleries on 12 November 2026: the previous items 9 and 10 now come first. The completed Christchurch reference pilot stays delivered. Journal work remains planned and private. This is the only active queue; the former eight-stage sequence is historical context in the handoff, not a competing list.
 
-Owner delivery preference: five eligible roadmap items at a time. Current completed batch:4–8. Next independent batch:12–16. Items9–11 remain visibly pending and do not block that work.
+Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8 and12–16. The owner now requests the next ten autonomous tasks:12–21, with the mobile gesture correction prioritised. Next remaining batch:17–21. Items9–11 remain visibly pending and do not block that work.
 
 Work in progress limit: one release. If a task is blocked by an unavailable device, person or source, record that limit and continue the next independent task; do not silently mark it complete. Validate, publish the exact accepted source and record evidence before beginning the next release. Combine adjacent items only when they form one reviewable outcome; never batch all country assets into an unreviewed release. An item is complete only when its stated outcome and relevant checks pass. Do not wait for all 90 items to open a bounded pilot.
 
@@ -52,15 +52,15 @@ Photo completion requires distinct real photographs with checked locality, right
 
 11. Fix the highest-impact friction found in that visitor test. Depends on item10 feedback.
 
-12. Add a reviewed Auckland airport reference to the existing journey viewer.
+12. Add a reviewed Auckland airport reference to the existing journey viewer. Delivered in5c92d36. One map, opt-in airport, exact selected stay, sourced schematic transfer, static mode and cleanup verified.
 
-13. Add one reviewed North Island accommodation reference.
+13. Add one reviewed North Island accommodation reference. Delivered in5c92d36. One map, opt-in airport, exact selected stay, sourced schematic transfer, static mode and cleanup verified.
 
-14. Animate one sourced transfer within the existing map.
+14. Animate one sourced transfer within the existing map. Delivered in5c92d36. One map, opt-in airport, exact selected stay, sourced schematic transfer, static mode and cleanup verified.
 
-15. Add a restrained overnight transition between journey steps.
+15. Add a restrained overnight transition between journey steps. Delivered in5c92d36. One map, opt-in airport, exact selected stay, sourced schematic transfer, static mode and cleanup verified.
 
-16. Verify reduced motion, free exploration and return to the map.
+16. Verify reduced motion, free exploration and return to the map. Delivered in5c92d36. One map, opt-in airport, exact selected stay, sourced schematic transfer, static mode and cleanup verified.
 
 17. Review arrival/departure time constraints in daily plans.
 
