@@ -22,7 +22,7 @@ function labelMarker(map:GeographicMap,point:[number,number],name:string,onClick
   if(element instanceof HTMLButtonElement){element.type="button";element.setAttribute("aria-pressed",String(pressed));element.onclick=onClick??null;}
   const item=marker(point,{icon:divIcon({html:element,className:"geographic-map-marker",iconSize:[0,0]}),keyboard:false,pane}).addTo(map);
   // At country scale use small targets, retaining full names for assistive technology.
-  const resizeLabel=()=>{const compact=Boolean(onClick)&&map.getZoom()<7;element.textContent=compact?"•":name;element.setAttribute("aria-label",name);element.title=name;element.style.minWidth=compact?"24px":"";element.style.padding=compact?"0":"";};
+  const resizeLabel=()=>{const compact=Boolean(onClick)&&map.getZoom()<7;element.textContent=compact?"•":name;element.setAttribute("aria-label",name);element.title=name;element.style.minWidth=compact?"24px":"";element.style.padding=compact?"0":"";element.style.backgroundColor=compact?"transparent":"";element.style.borderColor=compact?"transparent":"";element.style.boxShadow=compact?"none":"";element.style.fontSize=compact?"20px":"";};
   resizeLabel();map.on("zoomend",resizeLabel);item.on("remove",()=>map.off("zoomend",resizeLabel));
   return item;
 }
