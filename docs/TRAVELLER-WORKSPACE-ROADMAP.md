@@ -52,3 +52,9 @@ Reuse the shared gallery controls, counters, enlargement and compact in-place cr
 Each counted photograph needs a checked locality, useful alt text, creator, original source, explicit reuse permission/licence and any modification statement. Prefer complementary views of landscape, habitat, public access/arrival, local nature and visitor context where suitable. Do not imply current access, seasonal conditions, wildlife sightings or supplier endorsement from a photograph. Keep sensitive wildlife sites private.
 
 Deliver one coherent subregion batch at a time, beginning with existing galleries and then extending the same component and data model to the other countries. Track reviewed gallery photographs separately from unreviewed repository candidates. Keep incomplete collections visible and useful while clearly retaining their real counts; never pad a gallery to meet a number.
+
+## Country galleries connected to subregions
+
+Every country overview should show a balanced selection of photographs from each of its subregions, using the same reviewed photo records as the regional galleries. Label each image with its subregion and place. Do not let regions with larger collections crowd out others. Preserve the five-photo target for each subregion; the country overview is a curated window into those collections, not a separate set of duplicate assets.
+
+Selecting a region on the country map or in the gallery selector filters the shared place gallery to that region. Browsing a photo identifies/highlights its associated region on the existing map, without an unsolicited close-up or disruptive page jump. Offer a clear All regions return, retain the active bird/landscape mode, and preserve slide and scroll through enlargement and credits. Keep bird occurrence claims separate from landscape-photo locality.
