@@ -1,5 +1,6 @@
 "use client"
 
+import MapBackgroundToggle from "./map-background-toggle";
 import {renderMapLayerPicker,useMapLayerPicker} from "./map-layer-picker"
 import catalogue from "@/content/south-island-layer-catalogue.json"
 import { initialMapLayers, useMapLayers } from "./map-layer-context"
@@ -16,7 +17,7 @@ export default function SouthIslandMapLayers() {
   const selected = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const points = visiblePublicPlaces(layers)
   const count = Number(layers.itinerary) + Number(layers.nationalParks) + Number(layers.conservation) + Number(layers.background==="satellite"&&Boolean(layers.planningRegions)) + publicPlaceCategories.filter(category => layers[category.id]).length
-  return renderMapLayerPicker({picker,scope:"south-island",title:"South Island",count,children:<>
+  return renderMapLayerPicker({picker,scope:"south-island",title:"South Island",count,backgroundControl:<MapBackgroundToggle/>,children:<>
       <fieldset className="flex flex-wrap gap-1.5"><legend className="sr-only">Map background</legend>
         {([['habitats','Habitats','Habitats'],['satellite','Satellite','Satellite']] as const).map(([value,label,accessible]) => <label key={value} className={`flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border px-3 text-xs ${layers.background === value ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}><input type="radio" name={`${id}-background`} aria-label={accessible} value={value} checked={layers.background === value} onChange={() => { update({background:value}); close() }}/>{label}</label>)}
       </fieldset>
