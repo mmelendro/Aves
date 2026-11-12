@@ -24,6 +24,7 @@ import {newZealandRegionBirds} from "@/content/new-zealand-carousel"
 import {filterSouthIslandBirds} from "@/content/south-island-ecosystems"
 import { Hand, Minus, Plus, RotateCcw } from "lucide-react"
 import map from "@/content/south-island-ecosystem-map.json"
+import contextRegions from "@/content/geographic-planning-regions/new-zealand.json"
 import { southIslandEcosystems, type SouthIslandEcosystemFilter, type SouthIslandEcosystem } from "@/content/south-island-ecosystems"
 import styles from "./south-island-ecosystem-map.module.css"
 import { ecosystemMapPoint, ecosystemMapScale, focusEcosystemMapPoint, initialMapCamera, panMapCamera, zoomMapCamera, type MapCamera } from "@/lib/ecosystem-map-camera"
@@ -36,6 +37,14 @@ const colours: Record<SouthIslandEcosystem, string> = { forest: "#537b5d", mount
 type MapPlace = { id: string; label: string; latitude: number; longitude: number; location: string; source: string }
 type Props = { matchingHabitats?:readonly string[]; onSelectIsland?: (id:string) => void; onZoomOutAtMinimum?: () => void; selected: SouthIslandEcosystemFilter; onSelect: (id: SouthIslandEcosystemFilter) => void; places?: readonly MapPlace[]; selectedPlace?: string; onSelectPlace?: (id: string) => void }
 
+// Context coastlines share the LCDB Mercator frame, so they remain registered while panning.
+const surroundingIslands = contextRegions.features.filter(f => f.properties.id !== "south-island").map(feature => ({
+  name: feature.properties.name,
+  path: (feature.geometry.type === "MultiPolygon" ? feature.geometry.coordinates as number[][][][] : [feature.geometry.coordinates as number[][][]]).map(polygon => polygon.map(ring => ring.map((point, i) => {
+    const p = ecosystemMapPoint(point[0], point[1], map.bbox)
+    return `${i ? "L" : "M"}${p.x},${p.y}`
+  }).join(" ") + "Z").join(" ")).join(" "),
+}))
 export default function SouthIslandEcosystemMap({ matchingHabitats, selected, onSelect, places, selectedPlace, onSelectPlace, onZoomOutAtMinimum, onSelectIsland }: Props) {
   const { layers } = useMapLayers()
   const {filters}=useBirdFilters()
@@ -56,22 +65,25 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const place = places?.find(item => item.id === selectedPlace)
   const latitude = place?.latitude
   const longitude = place?.longitude
+  const previousPlace = useRef(selectedPlace)
   // A place slide changes the camera target. Habitat filters, panel resize and
   // bird selection do not reset a visitor's chosen camera position.
   useEffect(() => {
+    if (previousPlace.current === selectedPlace) return
+    previousPlace.current = selectedPlace
     if (latitude === undefined || longitude === undefined) return
     setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(longitude, latitude, map.bbox)))
-  }, [latitude, longitude])
+  }, [latitude, longitude, selectedPlace])
   useEffect(() => {
     const svg = svgRef.current
     if (!svg) return
     const observer = new ResizeObserver(entries => {
       const { width, height } = entries[0].contentRect
-      setSvgPixelsPerUnit(Math.min(width / 480, height / 640))
+      setSvgPixelsPerUnit(camera.zoom === 1 ? Math.min(width / 725, height / 1020) : Math.min(width / 480, height / 640))
     })
     observer.observe(svg)
     return () => observer.disconnect()
-  }, [])
+  }, [satellite, camera.zoom])
   useEffect(() => {
     if (!focusedPark) return
     setCamera(current => focusEcosystemMapPoint(current, {x:focusedPark.point[0],y:focusedPark.point[1]}))
@@ -95,7 +107,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     <p id={`${id}-gestures`} className="sr-only">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
     <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
       {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
-      <svg ref={svgRef} viewBox={map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
+      <svg ref={svgRef} viewBox={camera.zoom === 1 ? "0 -360 725 1020" : map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
         onKeyDown={event => {
           if (event.target !== event.currentTarget) return
           const moves: Record<string, [number, number]> = { ArrowLeft: [-.15, 0], ArrowRight: [.15, 0], ArrowUp: [0, -.15], ArrowDown: [0, .15] }
@@ -131,12 +143,13 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
         <title id={`${id}-map-title`}>{satellite ? "South Island satellite overview and conservation layers" : "South Island land cover and coastline"}</title>
         <defs><clipPath id={`${id}-island-clip`}><path d={map.outline} fillRule="evenodd" clipRule="evenodd"/></clipPath></defs>
         <desc id={`${id}-map-description`}>{satellite ? "Historical NASA satellite composite from 2004 in the same Mercator frame. Only the selected habitat areas are shaded; opacity controls the shading, not the imagery. Parks, conservation and public places are independent overlays. " : ""}North-up Mercator overview, with the Tasman Sea to the west and South Pacific Ocean to the east. Sea colour and labels provide orientation only, not mapped marine habitats or boundaries. Select a visible coloured ecosystem area or a labelled habitat button to filter the birds. Land cover is generalised from 2023/24 LCDB data, not current sightings or a complete ecosystem survey. Coastline is context only; offshore habitat is not mapped. Place markers show public references, not wildlife locations or permission to enter.</desc>
-        <rect x="0" y="0" width="480" height="640" fill="#edf8fa" pointerEvents="none" />
+        <rect x="-1000" y="-1000" width="3000" height="3000" fill="#edf8fa" pointerEvents="none" />
         <g transform={`translate(${-camera.x * camera.zoom} ${-camera.y * camera.zoom}) scale(${camera.zoom})`} data-map-camera={`${camera.x},${camera.y},${camera.zoom}`}>
         <g aria-hidden="true" pointerEvents="none" className={styles.seaLabels} fontSize={12 / (camera.zoom * Math.max(svgPixelsPerUnit, .25))}>
           <text x="94" y="180" textAnchor="middle">Tasman Sea</text>
           <text x="362" y="460" textAnchor="middle"><tspan x="362">South Pacific</tspan><tspan x="362" dy="1.25em">Ocean</tspan></text>
         </g>
+        {surroundingIslands.map(island => <path key={island.name} d={island.path} fill="#d7e4dc" fillOpacity={.5} stroke="#91a99a" strokeOpacity={.55} vectorEffect="non-scaling-stroke" fillRule="evenodd" pointerEvents="none"><title>{island.name} · surrounding New Zealand</title></path>)}
         <path d={map.outline} fill={satellite ? "none" : "#e7ede8"} stroke="#829c8c" strokeWidth="1" vectorEffect="non-scaling-stroke" fillRule="evenodd" />
         {map.layers.filter(layer => !satellite || layer.id === selected).map(layer => {
           const habitat = layer.id as SouthIslandEcosystem

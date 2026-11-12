@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import {marker,divIcon,imageOverlay,polyline,type Map as GeographicMap} from "leaflet";
 import {protectedAreaPalette as palette} from "@/lib/protected-area-palette";
 import GeographicSatelliteMap from "./geographic-satellite-map";
@@ -24,6 +24,7 @@ function labelMarker(map:GeographicMap,point:[number,number],name:string,onClick
 }
 export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitude,longitude}:{selected:string;onSelectIsland?:(id:string)=>void;latitude?:number;longitude?:number}){
   const[map,setMap]=useState<GeographicMap|null>(null);
+  const previousLocation=useRef({latitude,longitude});
   const{layers,update}=useMapLayers(),trip=useTripMap();
   useEffect(()=>{
     if(!map)return;
@@ -48,7 +49,9 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
   useEffect(()=>{
     if(!map)return;
     const place=visiblePublicPlaces(layers).find(p=>p.id===layers.point),park=parks.parks.find(p=>layers.nationalParks&&p.id===layers.park);
-    const centre=place?[place.latitude,place.longitude] as[number,number]:park?geographicPoint(park.point[0],park.point[1]):longitude!==undefined&&latitude!==undefined?[latitude,longitude] as[number,number]:null;
+    const changed=previousLocation.current.latitude!==latitude||previousLocation.current.longitude!==longitude;
+    previousLocation.current={latitude,longitude};
+    const centre=place?[place.latitude,place.longitude] as[number,number]:park?geographicPoint(park.point[0],park.point[1]):changed&&longitude!==undefined&&latitude!==undefined?[latitude,longitude] as[number,number]:null;
     // Visibility toggles must not move a camera the visitor has already panned.
     if(centre)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
   },[map,layers.point,layers.park,latitude,longitude]);

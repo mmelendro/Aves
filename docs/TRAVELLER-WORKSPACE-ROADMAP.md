@@ -30,3 +30,9 @@ Conversations can begin with traveller-added notes and selected references. Any 
 6. Optional reminders and selected imports, followed by user-tested mobile refinements.
 
 Keep the map-led visual itinerary connected to the trip workspace. Start with useful, verified functionality and preserve older drafts at each increment. Do not treat a new checklist as confirmation of live availability, payment, travel access or launch readiness.
+
+## Route reading and evidence
+
+Use official birding, walking, transport and ecotourism guides to ground route planning. Selected dated blogs and first-hand trip reports can add season, pacing, logistics and lived experience. Record publisher, URL, publication/review date, geography and scope. Keep historical accounts separate from current official access, closures, availability and operator arrangements. Conflicts and stale references need review rather than silent merging.
+
+Use reviewed structured facts to inform itinerary suggestions, with provenance retained. Offer a compact “Read before you go” section beside relevant routes when the original source adds useful context. Link and attribute, summarize briefly, and avoid copying entire itineraries or articles. Do not present an old sighting or personal recommendation as current access, guaranteed bird occurrence or verified environmental performance. Supplier stewardship claims require their own evidence.

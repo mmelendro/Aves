@@ -35,7 +35,7 @@ export default function GeographicSatelliteMap({country,region="",selectCountry,
   const resetCamera=()=>{
     const current=map.current;if(!current)return;
     current.stop();
-    const bounds=countries[country]?.regions[region]??countries[country]?.bounds;
+    const bounds=country==="new-zealand"&&region==="south-island" ? countries[country].bounds : countries[country]?.regions[region]??countries[country]?.bounds;
     if(bounds)current.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[28,28],maxZoom:11,animate:false});
     else current.setView([12,-45],1,{animate:false});
   };
