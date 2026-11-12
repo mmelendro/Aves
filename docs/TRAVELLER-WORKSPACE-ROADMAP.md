@@ -42,3 +42,13 @@ Use reviewed structured facts to inform itinerary suggestions, with provenance r
 Keep the unexpanded phone map useful: prioritise geographic canvas height, selected-place visibility, a clear scale and straightforward layers/expansion controls. Keep long details dismissible and out of the map canvas. Verify real unclipped dimensions rather than only the outer card.
 
 Add a sourced conservation and environmental organisation directory, with an optional map layer sharing the same records. Include organisation type, focus, operating region, official website, review date, and documented visitor, volunteer or support opportunities. Distinguish office locations from project areas and visitor sites. Include community-led and Indigenous-led organisations on their own published terms. Protect sensitive wildlife/project locations. Do not infer endorsement, charitable registration, environmental performance or B Corp certification from directory inclusion. Begin with a reviewed corridor pilot before widening coverage.
+
+## Five photographs per subregion
+
+Aim for at least five distinct, relevant landscape/place photographs in each subregion gallery across Colombia, Australia and New Zealand. Apply the same target to more detailed place galleries as they are added, including the four current South Island place contexts. A country-wide collection or a five-photo total shared across several subregions does not satisfy the target for each gallery.
+
+Reuse the shared gallery controls, counters, enlargement and compact in-place credits. Preserve active photo, geographic selection, page scroll and return focus. Keep multiple photographs of one place grouped together and make its own photo count clear. Do not count bird portraits, alternate crops, duplicates, illustrations or unrelated neighbouring locations towards the landscape-photo target.
+
+Each counted photograph needs a checked locality, useful alt text, creator, original source, explicit reuse permission/licence and any modification statement. Prefer complementary views of landscape, habitat, public access/arrival, local nature and visitor context where suitable. Do not imply current access, seasonal conditions, wildlife sightings or supplier endorsement from a photograph. Keep sensitive wildlife sites private.
+
+Deliver one coherent subregion batch at a time, beginning with existing galleries and then extending the same component and data model to the other countries. Track reviewed gallery photographs separately from unreviewed repository candidates. Keep incomplete collections visible and useful while clearly retaining their real counts; never pad a gallery to meet a number.
