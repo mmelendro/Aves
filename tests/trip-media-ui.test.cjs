@@ -44,12 +44,12 @@ test('photo preparation produces a smaller JPEG copy and releases the temporary 
 });
 
 const settle=()=>new Promise(resolve=>setImmediate(resolve));
-function uploadSetup({pending=false,failFirst=false}={}){
+function uploadSetup({pending=false,failFirst=false,timeout=false}={}){
  const calls=[],replaced=[],entryId=item.entryId;
  const h=componentHarness('components/account/trip-journal-media.tsx','TripJournalMedia',{entryId,enabled:true},{
   runEffects:true,window:{addEventListener(){},removeEventListener(){}},
   context:()=>({planId:'a13b0801-1c6d-41d4-94da-12e3adeebf13',items:pending?[{...item,state:'pending'}]:[],loading:false,error:'',reload:async()=>{},replace:saved=>replaced.push(saved)}),
-  mocks:{'./account-api':{errorMessage:e=>e.message,accountRequest:async(path,options)=>{calls.push({path,options});if(failFirst&&calls.length===1)throw Error('Connection interrupted');return {item:{...item,id:options.headers['Idempotency-Key']}}}}}
+  mocks:{'./account-api':{errorMessage:e=>e.message,accountRequest:async(path,options)=>{calls.push({path,options});if((failFirst||timeout)&&calls.length===1){const e=Error('Connection interrupted');if(timeout)e.name='AbortError';throw e;}return {item:{...item,id:options.headers['Idempotency-Key']}}}}}
  });
  return {h,calls,replaced};
 }
@@ -75,3 +75,13 @@ test('incomplete-upload recovery rejects a different prepared size before sendin
  assert.equal(calls.length,0);assert.equal(button(h.render(),'Retry private upload').props.disabled,true);
  assert.ok(nodes(h.render()).some(n=>n.props?.role==='status'&&String(n.props.children).includes('original file')));
 });
+
+test('private PDF cards expose authenticated downloads and never embed executable document previews',()=>{
+ const document={...item,kind:'document',mime:'application/pdf',caption:'Synthetic ticket'};
+ const h=componentHarness('components/account/trip-journal-media.tsx','JournalMediaCard',{item:document},{context:()=>({planId:'a13b0801-1c6d-41d4-94da-12e3adeebf13',replace(){},remove(){}})});
+ let tree=h.render();const link=find(tree,n=>n.type==='a'&&n.props.children==='Download private copy');assert.match(link.props.href,/\/content\?download=1$/);button(tree,'Document details').props.onClick();tree=h.render();assert.equal(nodes(tree).filter(n=>['iframe','object','embed','audio','img'].includes(n.type)).length,0);
+});
+
+ test('an upload timeout keeps its selected copy and retry reference with a clear recovery message',async()=>{
+ const {h,calls}=uploadSetup({timeout:true});await chooseCopy(h);button(h.render(),'Upload privately').props.onClick();await settle();let tree=h.render();assert.ok(nodes(tree).some(n=>n.props?.role==='status'&&String(n.props.children).includes('took too long')));assert.ok(calls[0].options.signal instanceof AbortSignal);button(tree,'Retry private upload').props.onClick();await settle();assert.equal(calls[0].options.headers['Idempotency-Key'],calls[1].options.headers['Idempotency-Key']);
+ });

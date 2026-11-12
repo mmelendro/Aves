@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect,useId,useRef,useState} from "react"
+import {TripTravelRecords} from "./trip-travel-records"
 import {TripMediaProvider,TripJournalMedia} from "./trip-journal-media"
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
@@ -81,7 +82,7 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
           <label className="min-w-0 flex-1 text-sm">New journal entry<Input aria-label="New journal entry" value={entryTitle} onChange={e=>setEntryTitle(e.target.value)} maxLength={160} required className="mt-2" placeholder="A morning beside the lake"/></label><Button type="submit" variant="outline" disabled={data.entries.length>=50}>Add journal entry</Button>
         </form>
         {data.entries.length>=50&&<p className="mt-3 text-sm">This trip has reached its 50 journal entry limit, including removed items.</p>}
-        <div className="mt-5 space-y-5">{data.entries.filter(item=>!item.deleted).map(item=><article key={item.id} className="rounded-xl border border-emerald-100 bg-emerald-50/30 p-4 sm:p-5 space-y-4">
+        <div className="mt-5 space-y-5">{data.entries.filter(item=>!item.deleted).map(item=><article key={item.id} id={`journal-entry-${item.id}`} className="scroll-mt-24 rounded-xl border border-emerald-100 bg-emerald-50/30 p-4 sm:p-5 space-y-4">
           <label className="block text-sm">Entry title<input className={field} value={item.title} maxLength={160} onChange={e=>entry(item.id,{title:e.target.value})}/></label>
           <div className="grid sm:grid-cols-2 gap-4"><label className="text-sm">Date, optional<input className={field} type="date" value={item.date} onChange={e=>entry(item.id,{date:e.target.value})}/></label><label className="text-sm">Trip day, optional<input className={field} type="number" min={1} max={365} value={item.day??""} onChange={e=>entry(item.id,{day:e.target.value?Number(e.target.value):null})}/></label></div>
           <label className="block text-sm">Public place or region, optional<select className={field} value={item.placeId} onChange={e=>entry(item.id,{placeId:e.target.value})}><option value="">No place selected</option>{places.map(place=><option key={place.id} value={place.id}>{place.label}</option>)}</select></label>
@@ -91,5 +92,6 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
       </section>
       <section className="rounded-2xl border border-emerald-100 bg-white p-5"><Button type="button" variant="outline" aria-expanded={trash} onClick={()=>setTrash(!trash)}>Removed items ({data.tasks.filter(t=>t.deleted).length+data.entries.filter(e=>e.deleted).length})</Button>{trash&&<div className="mt-4 space-y-3"><p className="text-sm text-gray-600">Removed items stay private and can be restored. Save to keep a removal or restoration.</p>{data.tasks.filter(t=>t.deleted).map(t=><div key={t.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{t.title}</span><Button type="button" variant="outline" onClick={()=>task(t.id,{deleted:false})}>Restore preparation</Button></div>)}{data.entries.filter(e=>e.deleted).map(e=><div key={e.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{e.title}</span><Button type="button" variant="outline" onClick={()=>entry(e.id,{deleted:false})}>Restore journal entry</Button></div>)}</div>}</section>
     </fieldset>
+    <TripTravelRecords planId={planId} entries={data.entries} workspaceSaved={!dirty&&!busy}/>
   </div></TripMediaProvider>
 }

@@ -22,7 +22,7 @@ The direct satellite toggle is implemented beside the shared layers picker. The 
 
 Owner reprioritised galleries on 12 November 2026: the previous items 9 and 10 now come first. The completed Christchurch reference pilot stays delivered. Journal work remains planned and private. This is the only active queue; the former eight-stage sequence is historical context in the handoff, not a competing list.
 
-Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8,12–21 and23–32. The latest ten autonomous tasks23–32 are delivered in two reviewed releases:97a2221 and0c23021. Item22 remains an evidence decision; the next independent implementation items are33–36. Items9–11 remain visibly pending and do not block that work.
+Owner delivery preference: ten eligible autonomous items, released in reviewable groups. Current completed batches:4–8,12–21 and23–32. The latest ten autonomous tasks23–32 are delivered in two reviewed releases:97a2221 and0c23021. Item22 remains an evidence decision; the next independent implementation item is37 after the bounded33–36 release acceptance. Items9–11 remain visibly pending and do not block that work.
 
 Work in progress limit: one release. If a task is blocked by an unavailable device, person or source, record that limit and continue the next independent task; do not silently mark it complete. Validate, publish the exact accepted source and record evidence before beginning the next release. Combine adjacent items only when they form one reviewable outcome; never batch all country assets into an unreviewed release. An item is complete only when its stated outcome and relevant checks pass. Do not wait for all 90 items to open a bounded pilot.
 
@@ -94,13 +94,13 @@ Photo completion requires distinct real photographs with checked locality, right
 
 32. Add recording playback and recording notes. Delivered in0c23021; authenticated native playback, bounded byte ranges and private saved notes.
 
-33. Add private receipts and expense records.
+33. Add private receipts and expense records. Implemented in the current bounded travel-records release: explicit expense save, integer money units, payment states, currency-separated totals and journal receipt links. Acceptance is recorded in HANDOFF-CURRENT.md.
 
-34. Add private tickets, confirmations and booking documents.
+34. Add private tickets, confirmations and booking documents. Implemented as private provider/reference/status records, journal document links and bounded PDF copies. No automatic booking or inbox import.
 
-35. Handle interrupted uploads, size limits and storage quotas clearly.
+35. Handle interrupted uploads, size limits and storage quotas clearly. Existing same-reference recovery is extended with a bounded confirmation wait, retained retry bytes and distinct preparation/upload states. The3MiB pilot and hard quotas remain; larger resumable files are future work.
 
-36. Provide owner export and attachment deletion controls.
+36. Provide owner export and attachment deletion controls. Saved private JSON export and individual authenticated file downloads join existing confirmed permanent attachment removal. JSON excludes file bytes and unsaved edits; recoverable travel-record removal/restoration is separate.
 
 37. Reconstruct the Colombia route from actual trip records.
 

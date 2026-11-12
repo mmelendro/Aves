@@ -52,3 +52,14 @@ test('private audio supports bounded range seeking and rejects invalid byte rang
  const h=harness([own,{data:ready,error:null}]);const r=await h.mediaContent(plan,id,'bytes=0-11');assert.equal(r.status,206);assert.equal(r.headers.get('content-range'),`bytes 0-11/${wav.length}`);assert.equal((await r.arrayBuffer()).byteLength,12);
  const invalid=harness([own,{data:ready,error:null}]);assert.equal((await invalid.mediaContent(plan,id,'bytes=9999-')).status,416);
 });
+
+test('private PDF copies require a PDF signature and always download as sandboxed attachments',async()=>{
+ const pdf=new Uint8Array(Buffer.from('%PDF-1.4\nSynthetic receipt only\n%%EOF\n'));
+ assert.equal(p.mediaSignature(pdf),'application/pdf');assert.equal(p.mediaSignature(new Uint8Array(Buffer.from('%PDF-9.9\nunsupported\n%%EOF'))),null);assert.equal(p.mediaSignature(new Uint8Array(Buffer.from('%PDF-1.4\ntruncated'))),null);
+ const pdfRow={...row,kind:'document',mime:'application/pdf',object_path:row.object_path.replace('.wav','.pdf'),byte_size:pdf.length,content_hash:createHash('sha256').update(pdf).digest('hex'),state:'ready',revision:2};
+ const h=harness([own,{data:pdfRow,error:null}],0,{download:{data:new Blob([pdf],{type:'application/pdf'}),error:null}});
+ const r=await h.mediaContent(plan,id);assert.equal(r.status,200);assert.equal(r.headers.get('content-type'),'application/pdf');assert.match(r.headers.get('content-disposition'),/^attachment; filename="aves-journal.pdf"/);assert.match(r.headers.get('content-security-policy'),/sandbox/);assert.deepEqual(new Uint8Array(await r.arrayBuffer()),pdf);
+});
+test('an explicit owner download sends attachment disposition for a photograph or recording',async()=>{
+ const h=harness([own,{data:{...row,state:'ready',revision:2},error:null}]);const r=await h.mediaContent(plan,id,null,true);assert.equal(r.status,200);assert.match(r.headers.get('content-disposition'),/^attachment/);assert.equal(r.headers.get('cache-control'),'private, no-store');
+});

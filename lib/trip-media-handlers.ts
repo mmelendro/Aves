@@ -8,7 +8,7 @@ import {requireOwnedTrip} from "./trip-workspace-handlers"
 import {MAX_TRIP_MEDIA_BYTES,TRIP_MEDIA_BUCKET,mediaDetailsSchema,mediaPatchSchema,mediaDeleteSchema,mediaSignature,mediaTypes,type TripMediaItem} from "./trip-media"
 import type {SupabaseClient} from "@supabase/supabase-js"
 const columns="id,plan_id,user_id,entry_id,object_path,kind,mime,byte_size,content_hash,state,caption,creator,recorded_on,position,notes,revision"
-type MediaRow={id:string;plan_id:string;user_id:string;entry_id:string;object_path:string;kind:"photo"|"audio";mime:keyof typeof mediaTypes;byte_size:number;content_hash:string;state:"pending"|"ready"|"deleting";caption:string;creator:string;recorded_on:string|null;position:number;notes:string;revision:number}
+type MediaRow={id:string;plan_id:string;user_id:string;entry_id:string;object_path:string;kind:"photo"|"audio"|"document";mime:keyof typeof mediaTypes;byte_size:number;content_hash:string;state:"pending"|"ready"|"deleting";caption:string;creator:string;recorded_on:string|null;position:number;notes:string;revision:number}
 const unavailable=()=>new AccountError(503,"This upload could not be confirmed. Keep your file and retry.")
 function mapMedia(r:MediaRow):TripMediaItem{return {id:r.id,entryId:r.entry_id,kind:r.kind,mime:r.mime,bytes:r.byte_size,state:r.state,caption:r.caption,creator:r.creator,recordedOn:r.recorded_on||"",position:r.position,notes:r.notes,revision:r.revision}}
 async function ownMedia(client:SupabaseClient,planId:string,userId:string,id:string){
@@ -19,14 +19,17 @@ async function ownMedia(client:SupabaseClient,planId:string,userId:string,id:str
 async function uploadBytes(request:Request){
   const reader=request.body?.getReader();if(!reader)throw new AccountError(400,"Choose a file to upload.")
   const chunks:Uint8Array[]=[];let size=0
-  try{while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>MAX_TRIP_MEDIA_BYTES){await reader.cancel();throw new AccountError(413,"Choose a file under 3 MiB.")}chunks.push(value)}}finally{reader.releaseLock()}
+  try{while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>MAX_TRIP_MEDIA_BYTES){await reader.cancel();throw new AccountError(413,"Choose a file up to 3 MiB.")}chunks.push(value)}}finally{reader.releaseLock()}
   if(!size)throw new AccountError(400,"This file is empty.")
   const bytes=new Uint8Array(size);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length}return bytes
 }
+export async function readTripMedia(client:SupabaseClient,planId:string,userId:string){
+  const {data,error}=await client.from("trip_media").select(columns).eq("plan_id",planId).eq("user_id",userId).order("position").order("created_at").limit(20)
+  if(error||!data)throw unavailable();return {items:(data as MediaRow[]).map(mapMedia)}
+}
 export const mediaGet=(planId:string)=>accountHandler(async()=>{
   const {user,client}=await requireAccountUser();await requireOwnedTrip(client,user.id,planId)
-  const {data,error}=await client.from("trip_media").select(columns).eq("plan_id",planId).eq("user_id",user.id).order("position").order("created_at").limit(20)
-  if(error||!data)throw unavailable();return {items:(data as MediaRow[]).map(mapMedia)}
+  return readTripMedia(client,planId,user.id)
 })
 export const mediaPost=(request:Request,planId:string)=>accountHandler(async()=>{
   const {user,client}=await requireAccountUser();requireSameOrigin(request);await requireOwnedTrip(client,user.id,planId)
@@ -36,7 +39,7 @@ export const mediaPost=(request:Request,planId:string)=>accountHandler(async()=>
   if(workspaceError)throw unavailable()
   if(!workspace?.data?.entries?.some((e:{id:string;deleted:boolean})=>e.id===entryId&&!e.deleted))throw new AccountError(409,"Save and reopen this journal entry before uploading.")
   const bytes=await uploadBytes(request),mime=mediaSignature(bytes)
-  if(!mime||request.headers.get("content-type")?.split(";")[0]!==mime)throw new AccountError(415,"Use a supported photo or audio file with the correct format.")
+  if(!mime||request.headers.get("content-type")?.split(";")[0]!==mime)throw new AccountError(415,"Use a supported photo, audio or PDF file with the correct format.")
   const format=mediaTypes[mime],hash=createHash("sha256").update(bytes).digest("hex")
   let row=await ownMedia(client,planId,user.id,id)
   if(row&&(row.content_hash!==hash||row.entry_id!==entryId||row.mime!==mime))throw new AccountError(409,"Choose this file again to start a new upload.")
@@ -85,14 +88,14 @@ export const mediaDelete=(request:Request,planId:string,id:string)=>accountHandl
   const {data,error}=await client.from("trip_media").delete().eq("id",id).eq("plan_id",planId).eq("user_id",user.id).eq("revision",reserved.revision).eq("state","deleting").select("id").maybeSingle()
   if(error||!data)throw unavailable();return {removed:true,id}
 })
-export async function mediaContent(planId:string,id:string,range?:string|null){
+export async function mediaContent(planId:string,id:string,range?:string|null,download=false){
   try{
     const {user,client}=await requireAccountUser();await requireOwnedTrip(client,user.id,planId)
     const row=await ownMedia(client,planId,user.id,id);if(!row||row.state!=="ready")throw new AccountError(404,"This upload could not be found.")
     const {data,error}=await client.storage.from(TRIP_MEDIA_BUCKET).download(row.object_path);if(error||!data)throw unavailable()
     const bytes=new Uint8Array(await data.arrayBuffer())
     if(bytes.length!==row.byte_size||mediaSignature(bytes)!==row.mime||createHash("sha256").update(bytes).digest("hex")!==row.content_hash)throw unavailable()
-    const headers:Record<string,string>={"Content-Type":row.mime,"Content-Length":String(bytes.length),"Content-Disposition":`inline; filename="aves-journal.${mediaTypes[row.mime].extension}"`,"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff","Content-Security-Policy":"default-src 'none'; sandbox","Accept-Ranges":"bytes"}
+    const headers:Record<string,string>={"Content-Type":row.mime,"Content-Length":String(bytes.length),"Content-Disposition":`${download||row.kind==="document"?"attachment":"inline"}; filename="aves-journal.${mediaTypes[row.mime].extension}"`,"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff","Content-Security-Policy":"default-src 'none'; sandbox","Accept-Ranges":"bytes"}
     if(range){
       const match=/^bytes=(\d*)-(\d*)$/.exec(range)
       const start=match?.[1]?Number(match[1]):match?.[2]?Math.max(0,bytes.length-Number(match[2])):NaN

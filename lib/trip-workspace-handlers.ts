@@ -17,7 +17,7 @@ export async function requireOwnedTrip(client:SupabaseClient,userId:string,id:st
   if(!isKnownTripCountry(country))throw unavailable()
   return country
 }
-async function readWorkspace(client:SupabaseClient,id:string) {
+export async function readWorkspace(client:SupabaseClient,id:string) {
   const {data,error}=await client.from("trip_workspaces").select("revision,data").eq("plan_id",id).maybeSingle()
   if(error)throw unavailable()
   if(!data)return {revision:0,data:emptyWorkspace()}

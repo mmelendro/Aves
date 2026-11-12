@@ -18,5 +18,5 @@ export default async function TripWorkspacePage({params}:{params:Promise<{id:str
   if(!data)notFound()
   const country=data.details?.country??"australia"
   if(!isKnownTripCountry(country))notFound()
-  return <AccountShell title={data.title} description="Your private preparations and travel journal. Save what matters, then return to your journey."><a href="/account" className="mb-6 inline-flex min-h-11 items-center text-emerald-800 underline">Back to My Trips</a><TripWorkspace planId={id} country={country}/></AccountShell>
+  return <AccountShell title={data.title} description="Your private preparations and travel journal. Save what matters, then return to your journey."><a href="/account" className="mb-6 inline-flex min-h-11 items-center text-emerald-800 underline">Back to My Trips</a><TripWorkspace key={id} planId={id} country={country}/></AccountShell>
 }
