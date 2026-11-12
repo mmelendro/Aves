@@ -15,10 +15,13 @@ test('mobile map options stay collapsed until requested and selections close the
  find(tree,n=>n.props['aria-label']==='Map layers').props.onClick();tree=h.render()
  assert.ok(nodes(tree).some(n=>n.props.type==='range'),'satellite opacity remains available inside options')
 })
-test('the actual map precedes controls and long details start collapsed',()=>{
+test('the shared viewer owns regional controls and long details start collapsed',()=>{
  const h=componentHarness('components/south-island-ecosystem-map.tsx','default',{selected:'all',onSelect(){}},{mocks:{'next/dynamic':()=> 'ConservationOverlay','./south-island-soundscapes':{__esModule:true,default:'Sounds'},'./map-viewer':{MapViewer:'MapViewer'},'./south-island-map-layers':{__esModule:true,default:'Layers'},'./south-island-public-place-overlay':{__esModule:true,default:'Places',PublicPlaceDetails:'PlaceDetails'},'./map-layer-context':{useMapLayers:()=>({layers:initial})},'./south-island-ecosystem-map.module.css':{__esModule:true,default:{}}}})
  const tree=h.render(),all=nodes(tree)
- assert.ok(all.indexOf(find(tree,n=>n.type==='figure'))<all.indexOf(find(tree,n=>n.props['aria-label']==='Ecosystem map view controls')))
+ const viewer=find(tree,n=>n.type==='MapViewer')
+ assert.equal(all.filter(n=>n.type==='MapViewer').length,1)
+ assert.ok(nodes(viewer.props.layerControl).some(n=>n.props['aria-label']==='Zoom ecosystem map in'))
+ assert.equal(nodes(find(tree,n=>n.type==='figure')).filter(n=>n.type==='Layers').length,0)
  const details=find(tree,n=>n.type==='details'&&nodes(n).some(child=>child.type==='summary'&&child.props.children==='Places, habitats & map details'))
  assert.equal(details.props.open,undefined)
 })
