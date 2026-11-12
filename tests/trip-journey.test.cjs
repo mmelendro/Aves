@@ -25,3 +25,22 @@ test('visual bird profiles show current-base evidence while retaining original p
  assert.ok(birds.length);assert.equal(JSON.stringify(source),before);
  for(const b of birds){assert.match(b.localOccurrence,/Local references near Hamilton/);assert.equal(b.regionHref,'/new-zealand/north-island');assert.equal(b.photoCredit,source.find(x=>x.id===b.id).photoCredit);assert.ok(b.sources.some(s=>step.birdSources[featuredNzBirdId(b.scientificName)].some(ref=>ref.url===s.url)));}
 });
+test('reviewed property points apply only to the selected stay and airport arrivals remain opt-in',()=>{
+ const p=islandPlanner('south-island'),d=p.buildTrip({...p.defaultTripInput,days:3});
+ d.days[0]={...d.days[0],baseId:'christchurch',stayId:'trip-novotel-chc'};
+ const before=JSON.stringify(d),steps=buildTripJourney(d,p.tripAreas,p.tripPlaces);
+ assert.equal(steps[0].mapPoint,undefined,'starting city never implies a flight');
+ const night=steps.find(s=>s.day===1&&s.kind==='overnight');
+ assert.equal(night.mapPoint.id,'novotel-chc');assert.match(night.note,/not a room reservation/);
+ assert.equal(night.mapPoint.latitude,-43.486398);assert.equal(JSON.stringify(d),before);
+ d.days[0].stayId='airbnb:christchurch';
+ assert.equal(buildTripJourney(d,p.tripAreas,p.tripPlaces).find(s=>s.day===1&&s.kind==='overnight').mapPoint,undefined);
+});
+test('airport references are limited by base and step kind with explicit provenance',()=>{
+ const {arrivalReferences}=load('lib/journey-reference-points.ts');
+ assert.equal(arrivalReferences('christchurch','arrival')[0].id,'chc-airport');
+ assert.equal(arrivalReferences('christchurch','departure').length,1);
+ assert.equal(arrivalReferences('christchurch','overnight').length,0);
+ assert.equal(arrivalReferences('auckland','arrival').length,0);
+ const point=arrivalReferences('christchurch','arrival')[0];assert.match(point.scope,/not a terminal door/);assert.ok(point.sourceUrl&&point.coordinateSourceUrl&&point.reviewedAt);
+});

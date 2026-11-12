@@ -1,6 +1,8 @@
+import {journeyReferenceForStay,type JourneyReferencePoint} from "./journey-reference-points";
 import type { BirdProfile } from "@/content/birds";
 import type { TripDraft, TripArea, TripPlace } from "./island-planning-types";
 export type TripJourneyStep = {
+  mapPoint?: JourneyReferencePoint;
   id: string;
   day: number;
   baseId: string;
@@ -51,9 +53,10 @@ export function buildTripJourney(
           url: p.url,
         })),
     };
-    const add = (kind: TripJourneyStep["kind"], title: string, note: string) =>
+    const add = (kind: TripJourneyStep["kind"], title: string, note: string, mapPoint?:JourneyReferencePoint) =>
       steps.push({
         ...common,
+        ...(mapPoint ? {mapPoint} : {}),
         id: `day-${index + 1}-${kind}`,
         kind,
         title,
@@ -91,12 +94,14 @@ export function buildTripJourney(
       );
     if (day.stayId) {
       const stay = placeById.get(day.stayId);
+      const point=journeyReferenceForStay(day.stayId,area.id);
       add(
         "overnight",
-        `Overnight near ${area.name}`,
-        stay
+        point ? `Overnight at ${point.name}` : `Overnight near ${area.name}`,
+        point ? point.scope : stay
           ? `${stay.name}. Exact property location, availability and check-in still need confirmation.`
           : "Accommodation still to choose. The map shows the planning base, not a reviewed home or hotel.",
+        point,
       );
     }
     if (index === draft.days.length - 1)

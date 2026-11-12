@@ -1,4 +1,5 @@
 "use client";
+import {arrivalReferences} from "@/lib/journey-reference-points";
 import { useEffect } from "react";
 import { useTripMap } from "./trip-map-context";
 import { useMapLayers } from "../map-layer-context";
@@ -38,7 +39,7 @@ export default function TripJourneyControls({
             aria-atomic="true"
             className="mt-2 text-xl font-medium text-emerald-950"
           >
-            {step.title}
+            {step.mapPoint && step.kind!=="overnight" ? step.mapPoint.name : step.title}
           </h3>
         </div>
         <button
@@ -52,6 +53,12 @@ export default function TripJourneyControls({
       <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
         {step.note}
       </p>
+      {arrivalReferences(step.baseId,step.kind).length>0&&<label className="mt-3 block text-sm text-emerald-950">Arrival / departure map reference
+        <select className={field} value={step.mapPoint?.id??""} onChange={e=>trip?.selectArrivalReference(e.target.value)}>
+          <option value="">Town reference · arrival still to choose</option>
+          {arrivalReferences(step.baseId,step.kind).map(p=><option key={p.id} value={p.id}>{p.name} · only if using this airport</option>)}
+        </select>
+      </label>}
       <div className="mt-3 grid grid-cols-2 items-center gap-2">
         <button
           type="button"
@@ -86,9 +93,8 @@ export default function TripJourneyControls({
         </button>
       </div>
       <p className="mt-3 text-xs leading-5 text-gray-500">
-        Map highlight: {step.baseName}, a broad town reference. Bird photographs
-        follow sourced local opportunities, never guaranteed sightings. Exact
-        airports and properties still need reviewed coordinates.
+        Map highlight: {step.mapPoint ? <>{step.mapPoint.name}. {step.mapPoint.scope} Reviewed {step.mapPoint.reviewedAt}. <a href={step.mapPoint.sourceUrl} {...external} className="underline">Location source</a> · <a href={step.mapPoint.coordinateSourceUrl} {...external} className="underline">Coordinate source</a></> : <>{step.baseName}, a broad town reference. Exact points have not been reviewed for this step.</>}
+        {" "}Bird photographs follow sourced opportunities around the planning base, not a checklist for an airport or property.
       </p>
       <details className="mt-2">
         <summary className="min-h-11 cursor-pointer content-center text-sm font-semibold text-emerald-800">

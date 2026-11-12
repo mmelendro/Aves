@@ -22,7 +22,7 @@ function labelMarker(map:GeographicMap,point:[number,number],name:string,onClick
   if(element instanceof HTMLButtonElement){element.type="button";element.setAttribute("aria-pressed",String(pressed));element.onclick=onClick??null;}
   const item=marker(point,{icon:divIcon({html:element,className:"geographic-map-marker",iconSize:[0,0]}),keyboard:false,pane}).addTo(map);
   // At country scale use small targets, retaining full names for assistive technology.
-  const resizeLabel=()=>{const compact=Boolean(onClick)&&map.getZoom()<7;element.textContent=compact?"•":name;element.setAttribute("aria-label",name);element.title=name;element.style.minWidth=compact?"24px":"";element.style.padding=compact?"0":"";element.style.backgroundColor=compact?"transparent":"";element.style.borderColor=compact?"transparent":"";element.style.boxShadow=compact?"none":"";element.style.fontSize=compact?"20px":"";};
+  const resizeLabel=()=>{const compact=Boolean(onClick)&&map.getZoom()<7;element.textContent=compact?"•":name;if(!element.classList.contains("aves-route-ordinal"))element.setAttribute("aria-label",name);element.title=name;element.style.minWidth=compact?"24px":"";element.style.padding=compact?"0":"";element.style.backgroundColor=compact?"transparent":"";element.style.borderColor=compact?"transparent":"";element.style.boxShadow=compact?"none":"";element.style.fontSize=compact?"20px":"";};
   resizeLabel();map.on("zoomend",resizeLabel);item.on("remove",()=>map.off("zoomend",resizeLabel));
   return item;
 }
@@ -61,6 +61,14 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
   },[map,layers.point,layers.park,latitude,longitude]);
   const bases=trip?.bases.join("|")??"";
   const journeyStep=trip?.journey?.islandId==="south-island" ? trip.journey.steps[trip.journey.index] : undefined;
+  const reference=journeyStep?.mapPoint;
+  useEffect(()=>{
+    if(!map||!reference)return;
+    const pin=labelMarker(map,[reference.latitude,reference.longitude],reference.name,undefined,false,"routePane");
+    pin.getElement()?.querySelector("span")?.classList.add("aves-journey-target");
+    map.setView([reference.latitude,reference.longitude],12,{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
+    return()=>{pin.remove()};
+  },[map,reference]);
   useEffect(()=>{
     if(!map)return;
     const areas=layers.itinerary?bases.split("|").flatMap(id=>{const a=tripCatalogue.areas.find(a=>a.id===id);return a?[a]:[]}):[];

@@ -1,0 +1,8 @@
+/** Bounded public-location pilot. Airport coordinates are not a terminal entrance. */
+export type JourneyReferencePoint={id:string;baseId:string;name:string;kind:"airport"|"stay";latitude:number;longitude:number;sourceUrl:string;coordinateSourceUrl:string;scope:string;reviewedAt:string;stayId?:string};
+export const journeyReferencePoints:readonly JourneyReferencePoint[]=[
+ {id:"chc-airport",baseId:"christchurch",name:"Christchurch Airport (CHC)",kind:"airport",latitude:-43.489029,longitude:172.532065,sourceUrl:"https://www.christchurchairport.co.nz/travellers/at-the-airport/airport-maps/",coordinateSourceUrl:"https://github.com/davidmegginson/ourairports-data/blob/main/airports.csv",scope:"Airport-area reference from OurAirports public-domain data, not a terminal door, pick-up point or navigation instruction. Check the airport terminal map and your actual flight.",reviewedAt:"2026-11-12"},
+ {id:"novotel-chc",baseId:"christchurch",name:"Novotel Christchurch Airport",kind:"stay",stayId:"trip-novotel-chc",latitude:-43.486398,longitude:172.53687,sourceUrl:"https://all.accor.com/hotel/A542/index.en.shtml",coordinateSourceUrl:"https://all.accor.com/hotel/A542/index.en.shtml",scope:"Operator-published property GPS at 30 Durey Road. Confirm your booking, check-in and public entrance directly. This is not a room reservation or a walking route.",reviewedAt:"2026-11-12"},
+];
+export function journeyReferenceForStay(stayId:string,baseId:string){return journeyReferencePoints.find(p=>p.kind==="stay"&&p.stayId===stayId&&p.baseId===baseId)}
+export function arrivalReferences(baseId:string,kind:string){return kind==="arrival"||kind==="departure"?journeyReferencePoints.filter(p=>p.kind==="airport"&&p.baseId===baseId):[]}

@@ -54,6 +54,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   const journey=useTripMap()?.journey
   const guidedJourney=journey?.islandId==="south-island"
+  const reference=guidedJourney?journey?.steps[journey.index]?.mapPoint:undefined
   const id = useId()
   const detailsRef = useRef<HTMLDetailsElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
@@ -98,6 +99,9 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     if(guidedJourney)detailsRef.current.open=false
     else if(focusedPoint)detailsRef.current.open=true
   },[focusedPoint?.id,guidedJourney,journey?.index])
+  useEffect(()=>{
+    if(reference)setCamera(current=>focusEcosystemMapPoint(current,ecosystemMapPoint(reference.longitude,reference.latitude,map.bbox)));
+  },[reference]);
   const scale = ecosystemMapScale(camera, map.bbox, svgPixelsPerUnit)
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom)) }
@@ -113,7 +117,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <SouthIslandMapLayers />
   </>
   return <MapViewer label="South Island explorer map" layerControl={mapControls} gestures={false} listenControl={<SouthIslandSoundscapes />}><section data-ecosystem-card="true" className={styles.card} aria-labelledby={`${id}-title`}>
-    <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{guidedJourney && focusedPoint ? focusedPoint.name.split(" · ")[0] : place ? place.label : "South Island habitats"}</h2></div>
+    <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{reference ? reference.name : guidedJourney && focusedPoint ? focusedPoint.name.split(" · ")[0] : place ? place.label : "South Island habitats"}</h2></div>
     <p id={`${id}-gestures`} className="sr-only">{panMode ? "Move is on: drag to pan or pinch with two fingers. Turn Move off to select habitats." : "Use Move for dragging and pinching. Focus the map for + / −, arrow keys and Home."}</p>
     <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
       {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
@@ -189,6 +193,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
             <circle cx={point.x} cy={point.y} r={(selected ? 8 : 5) * unit} fill={selected ? "#065f46" : "#fff"} stroke={selected ? "white" : "#065f46"} strokeWidth="2" vectorEffect="non-scaling-stroke" />
           </g>
         })}
+        {reference&&(()=>{const p=ecosystemMapPoint(reference.longitude,reference.latitude,map.bbox),unit=1/(camera.zoom*Math.max(svgPixelsPerUnit,.25));return <g role="img" aria-label={`Reviewed location: ${reference.name}`}><title>{reference.name} · {reference.scope}</title><circle cx={p.x} cy={p.y} r={8*unit} fill="#0e7490" stroke="white" strokeWidth="2" vectorEffect="non-scaling-stroke"/></g>})()}
         <PublicPlaceOverlay unit={1 / (camera.zoom * Math.max(svgPixelsPerUnit,.25))} />
         <TripRouteOverlay />
         </g>

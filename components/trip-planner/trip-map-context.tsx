@@ -1,4 +1,5 @@
 "use client";
+import {arrivalReferences} from "@/lib/journey-reference-points";
 import {
   createContext,
   useCallback,
@@ -22,6 +23,7 @@ const Context = createContext<{
   startJourney: (islandId: string, steps: TripJourneyStep[]) => void;
   goToStep: (index: number) => void;
   stopJourney: () => void;
+  selectArrivalReference:(id:string)=>void;
 } | null>(null);
 export function TripMapProvider({ children }: { children: ReactNode }) {
   const [bases, setBases] = useState<string[]>([]),
@@ -48,6 +50,12 @@ export function TripMapProvider({ children }: { children: ReactNode }) {
       ),
     [],
   );
+  const selectArrivalReference=useCallback((id:string)=>setJourney(current=>{
+    if(!current)return current;
+    const step=current.steps[current.index],point=arrivalReferences(step.baseId,step.kind).find(p=>p.id===id);
+    if(id&&!point)return current;
+    return {...current,steps:current.steps.map((s,i)=>i===current.index?{...s,mapPoint:point}:s)};
+  }),[]);
   const stopJourney = useCallback(() => setJourney(null), []);
   return (
     <Context.Provider
@@ -60,6 +68,7 @@ export function TripMapProvider({ children }: { children: ReactNode }) {
         startJourney,
         goToStep,
         stopJourney,
+        selectArrivalReference,
       }}
     >
       {children}

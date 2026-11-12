@@ -1005,6 +1005,20 @@
         "self-catering"
       ],
       "checkedAt": "2026-11-11"
+    },
+    {
+      "id": "trip-novotel-chc",
+      "name": "Novotel Christchurch Airport",
+      "base": "christchurch",
+      "categories": [
+        "stays"
+      ],
+      "url": "https://all.accor.com/hotel/A542/index.en.shtml",
+      "description": "Airport-adjacent hotel at 30 Durey Road, with operator-published GPS. Choose it explicitly in your draft and confirm arrangements directly. No environmental certification is asserted.",
+      "birdIds": [],
+      "encounter": "wild",
+      "tags": [],
+      "checkedAt": "2026-11-12"
     }
   ]
 }
