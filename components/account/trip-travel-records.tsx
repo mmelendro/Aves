@@ -1,15 +1,16 @@
 "use client"
 import {useEffect,useId,useRef,useState} from "react"
 import {Button} from "@/components/ui/button"
+import TripPackDownload from "./trip-pack-download"
 import {accountRequest,errorMessage} from "./account-api"
-import {privateReferenceUrl,preparationCategories,type JournalEntry} from "@/lib/trip-workspace"
+import {privateReferenceUrl,preparationCategories,type JournalEntry,type Preparation} from "@/lib/trip-workspace"
 import {bookingStates,expenseStates,expenseTotals,emptyTravelRecords,newTravelRecord,parseRecordAmount,recordAmountText,recordCurrencies,recordMoney,recordsReceiptSchema,recordsSchema,type RecordCurrency,type TravelRecord,type TravelRecords} from "@/lib/trip-records"
 const field="mt-1 block min-h-11 w-full min-w-0 rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm"
 function ExpenseAmount({record,onChange,onInvalid}:{record:Extract<TravelRecord,{kind:"expense"}>;onChange:(amount:number)=>void;onInvalid:(invalid:boolean)=>void}){
  const [value,setValue]=useState(()=>recordAmountText(record.amountMinor,record.currency))
  return <label className="text-sm">Amount in {record.currency}<input className={field} inputMode={record.currency==="JPY"?"numeric":"decimal"} value={value} aria-invalid={parseRecordAmount(value,record.currency)===null} onChange={e=>{const next=e.target.value;setValue(next);const amount=parseRecordAmount(next,record.currency);onInvalid(amount===null);if(amount!==null)onChange(amount)}}/><span className="text-xs text-gray-600">{record.currency==="JPY"?"Whole yen only.":"Use a decimal point and up to two decimal places."}</span></label>
 }
-export function TripTravelRecords({planId,entries,workspaceSaved}:{planId:string;entries:JournalEntry[];workspaceSaved:boolean}){
+export function TripTravelRecords({planId,entries,workspaceSaved,preparations=[],workspaceRevision=0}:{planId:string;entries:JournalEntry[];workspaceSaved:boolean;preparations?:Preparation[];workspaceRevision?:number}){
  const prefix=useId(),busyRef=useRef(false)
  const [data,setData]=useState<TravelRecords>(emptyTravelRecords),[revision,setRevision]=useState(0),[loading,setLoading]=useState(true),[failed,setFailed]=useState(false)
  const [busy,setBusy]=useState(false),[dirty,setDirty]=useState(false),[feedback,setFeedback]=useState("")
@@ -56,6 +57,7 @@ export function TripTravelRecords({planId,entries,workspaceSaved}:{planId:string
    <Button type="button" variant="outline" aria-expanded={showRemoved} onClick={()=>setShowRemoved(!showRemoved)}>Removed travel records ({data.records.filter(r=>r.deleted).length})</Button>
    {showRemoved&&<div className="space-y-3"><p className="text-sm">Removed records can be restored. Save to keep a removal or restoration.</p>{data.records.filter(r=>r.deleted).map(r=><div key={r.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{r.title}</span><Button type="button" variant="outline" onClick={()=>change(r.id,{deleted:false})}>Restore travel record</Button></div>)}</div>}
   </fieldset>
+  <TripPackDownload planId={planId} preparations={preparations} records={data.records} workspaceRevision={workspaceRevision} recordsRevision={revision} ready={workspaceSaved&&!dirty&&!busy&&!title}/>
   <details><summary className="min-h-11 cursor-pointer text-sm text-emerald-800">Export your records</summary><p className="text-sm leading-6 text-gray-600">Download the saved trip, checklist, journal, travel records and attachment details as JSON. This includes private references and removed records. Unsaved edits and attachment files are excluded. Save both sections first if you want current edits included. Download files individually from their journal entries. Keep your export private.</p><a href={`/api/account/plans/${planId}/export`} className="mt-3 inline-flex min-h-11 items-center text-emerald-800 underline">Download saved private trip JSON</a></details>
  </section>
 }

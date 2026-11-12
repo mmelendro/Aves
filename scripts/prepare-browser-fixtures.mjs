@@ -6,3 +6,5 @@ if (process.env.GITHUB_ACTIONS !== 'true' || process.env.VERCEL || process.env.A
 }
 await mkdir('app/browser-fixtures/trip-editor', { recursive: true })
 await copyFile('tests/browser/fixtures/trip-editor.tsx', 'app/browser-fixtures/trip-editor/page.tsx')
+await mkdir('app/browser-fixtures/trip-tools', { recursive: true })
+await copyFile('tests/browser/fixtures/trip-tools.tsx', 'app/browser-fixtures/trip-tools/page.tsx')

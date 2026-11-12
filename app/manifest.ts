@@ -1,0 +1,2 @@
+import type {MetadataRoute} from "next"
+export default function manifest():MetadataRoute.Manifest{return {id:"/",name:"AVES · Follow the birds",short_name:"AVES",description:"Bird guides and personally planned nature journeys.",start_url:"/",scope:"/",display:"standalone",background_color:"#f7fdf9",theme_color:"#064e3b",icons:[{src:"/icons/aves-192.png",sizes:"192x192",type:"image/png",purpose:"any"},{src:"/icons/aves-512.png",sizes:"512x512",type:"image/png",purpose:"any"}]}}

@@ -11,6 +11,7 @@ import {
 import { nzChecklistMedia } from "@/content/new-zealand-checklist-media";
 import northIsland from "@/content/north-island-trip-catalogue.json";
 import southIsland from "@/content/south-island-trip-catalogue.json";
+import regionalEvidence from "@/content/species-regional-evidence.json";
 import type {
   ReferenceResult,
   SpeciesCountry,
@@ -78,9 +79,11 @@ const indexed = Object.fromEntries(
       const curatedRegions = profile
         ? getBirdRegionIds(countryId, profile.id)
         : [];
+      const evidence=regionalEvidence.edges.filter(edge=>edge.countryId===countryId&&edge.speciesId===bird.id&&edge.scientificName===bird.scientificName)
       const regionIds = new Set([
         ...curatedRegions,
         ...places.map((place) => place.regionId),
+        ...evidence.map(edge=>edge.regionId),
       ]);
       const regions = (destinationRegions[countryId] ?? [])
         .filter((region) => regionIds.has(region.id))
@@ -101,7 +104,7 @@ const indexed = Object.fromEntries(
             name: profile.commonName,
           }
         : undefined;
-      return { ...bird, regions, places, guide } satisfies ReferenceResult;
+      return { ...bird, regions, places, guide,regionEvidence:evidence.map(edge=>({regionId:edge.regionId,sourceId:edge.sourceId,reviewed:edge.reviewed,sourceName:edge.sourceName})) } satisfies ReferenceResult;
     });
     return [countryId, records];
   }),
@@ -166,7 +169,8 @@ export function searchSpeciesReference(
     name: catalogue.name,
     scope: catalogue.scope,
     reviewed: catalogue.reviewed,
-    sources: catalogue.sources,
+    sources: [...catalogue.sources,...regionalEvidence.sources.filter(source=>source.countryId===country)],
+    regionalExclusions:regionalEvidence.excludedRows.filter(row=>regionalEvidence.sources.some(source=>source.id===row.sourceId&&source.countryId===country)).map(row=>({sourceId:row.sourceId,sourceName:row.sourceName,reason:row.reason})),
     total: all.length,
     defaultTotal: all.filter((bird) => !(bird.historical || bird.referenceOnly))
       .length,

@@ -1,4 +1,7 @@
 "use client"
+import {useMediaPreferences} from "@/components/media-preferences"
+import CulturalNameContext from "@/components/cultural-name-context"
+import BirdStory from "@/components/bird-story"
 
 import BirdFilterControls from "@/components/bird-filter-controls"
 import BirdConservationLabel from "@/components/bird-conservation-label"
@@ -58,6 +61,7 @@ export default function HomepageBirdCarousel({
   label = "Bird photographs",
 }: HomepageBirdCarouselProps) {
   const {filters}=useBirdFilters()
+  const {lowBandwidth}=useMediaPreferences()
   const birds=filterConservationBirds(suppliedBirds,filters,"australia")
   // State values redraw the UI: slide, slideshow, details panel, image load and recording status.
   const reportBirdToMap = useContext(BirdDiscoveryContext)
@@ -118,10 +122,10 @@ export default function HomepageBirdCarousel({
     // Respect reduced-motion settings. This governs automatic slides, never automatic sound.
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)")
     const updatePreference = () => { if (preference.matches) setIsPlaying(false) }
-    setIsPlaying(autoPlay && !preference.matches)
+    setIsPlaying(autoPlay && !lowBandwidth && !preference.matches)
     preference.addEventListener("change", updatePreference)
     return () => preference.removeEventListener("change", updatePreference)
-  }, [autoPlay])
+  }, [autoPlay,lowBandwidth])
 
   useEffect(() => {
     // Notify a parent explorer after the selected bird changes, rather than setting parent state during render.
@@ -304,6 +308,7 @@ export default function HomepageBirdCarousel({
         {/* Announce manual changes, but avoid repeated screen-reader announcements during the slideshow. */}
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>
         <div className="relative z-30 flex items-center justify-between gap-2 border-t border-emerald-100 bg-white px-3 py-1 text-emerald-950"><BirdConservationLabel bird={currentBird}/><BirdFilterControls/></div>
+        <div className="bg-white px-3"><CulturalNameContext key={currentBird.id} kind="bird" entityId={currentBird.id} countryId="australia" onOpen={()=>setIsPlaying(false)}/><BirdStory key={currentBird.id+"-story"} birdId={currentBird.id} countryId="australia" onOpen={()=>setIsPlaying(false)}/></div>
       </Card>
     </div>
   )

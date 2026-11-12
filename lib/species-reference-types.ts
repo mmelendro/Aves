@@ -24,12 +24,14 @@ export type SpeciesPlace = {
   activities: string[]; access: string; reviewed: string
 }
 export type ReferenceResult = ReferenceSpecies & {
+  regionEvidence?:{regionId:string;sourceId:string;reviewed:string;sourceName:string}[]
   regions: { id: string; name: string; href: string }[]
   places: SpeciesPlace[]
   guide?: { href: string; image: string; name: string }
   media?: NzChecklistMedia
 }
 export type SpeciesReferenceResponse = {
+  regionalExclusions?:{sourceId:string;sourceName:string;reason:string}[]
   countryId: SpeciesCountry; name: string; scope: string; reviewed: string; sources: SpeciesSource[]
   total: number; defaultTotal: number; matched: number; offset: number; limit: number
   excludedRows: SpeciesReference["excludedRows"]; regions: SpeciesRegion[]; regionalCoverage: number

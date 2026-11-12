@@ -1,0 +1,2076 @@
+{
+  "reviewedOn": "2026-11-13",
+  "scope": "Attributed regional evidence within the stated dataset or source scope. Not a comprehensive regional checklist, modern sighting, precise location or supplier/activity relationship. Common names flag review but do not supply occurrence evidence.",
+  "sources": [
+    {
+      "id": "umagdalena-2025",
+      "countryId": "colombia",
+      "title": "Universidad del Magdalena CBUMAG bird records",
+      "url": "https://ipt.biodiversidad.co/sib/resource?r=umagdalena_aves",
+      "dataUrl": "https://ipt.biodiversidad.co/sib/archive.do?r=umagdalena_aves",
+      "edition": "2022-06-13 to 2023-08-25",
+      "reviewed": "2026-11-13",
+      "sha256": "680c1bf97406a93855afb6d8144c0509dc1d1e6b31b7dcf2011232050b7dfae7",
+      "license": "CC BY 4.0",
+      "usage": "Sampled birds in northern and western slopes of Sierra Nevada de Santa Marta, Don Diego and Fundación basins. Historical specimens and human/camera observations. Entire regional fauna and present-day encounter probability are not established. Quevedo-Ossa J, Pardo-Romero V D, Tamaris-Turizo D (2025). Colección de Aves (Chordata: Aves) del Centro de Colecciones Biológicas de la Universidad del Magdalena. v1.0. Universidad del Magdalena. Dataset/Occurrence. https://doi.org/10.15472/sfa5w9"
+    },
+    {
+      "id": "santa-marta-tourism-guide",
+      "countryId": "colombia",
+      "title": "Guía de avistamiento de aves endémicas de la Sierra Nevada de Santa Marta",
+      "url": "https://www.discoversantamarta.travel/wp-content/uploads/2024/03/07032024-GUIA-AVES-DIGITAL-ESP.pdf",
+      "dataUrl": "https://www.discoversantamarta.travel/wp-content/uploads/2024/03/07032024-GUIA-AVES-DIGITAL-ESP.pdf",
+      "edition": "Published primary source; broad regional presence only",
+      "reviewed": "2026-11-13",
+      "sha256": "54fcc4cce56294e3d13d335a1a57e95d321c298b63c7e5492bb16d7d6bd79991",
+      "usage": "Twelve manually verified factual species/region relationships. No illustrations, photographs, descriptive text or layout is copied. No public image or text reuse licence is supplied. Exact current scientific-name matches only."
+    },
+    {
+      "id": "proaves-wren-2012",
+      "countryId": "colombia",
+      "title": "Primera fotografía en su habitat y nuevo avistamiento del Cucarachero de Santa Marta Troglodytes monticola, especie en peligro crítico",
+      "url": "https://www.proaves.org/wp-content/uploads/2012/11/Con_Col_17_31-32_Troglodytes.pdf",
+      "dataUrl": "https://www.proaves.org/wp-content/uploads/2012/11/Con_Col_17_31-32_Troglodytes.pdf",
+      "edition": "Published primary source; broad regional presence only",
+      "reviewed": "2026-11-13",
+      "sha256": "",
+      "usage": "One manually verified factual species/region relationship from primary field observations. No photograph, text or precise observation locality is copied. This does not import the article’s historical threat category."
+    }
+  ],
+  "edges": [
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-e2a781474e26",
+      "scientificName": "Aburria aburri",
+      "sourceName": "Aburria aburri",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-8f60c7efb261",
+      "scientificName": "Amazilia tzacatl",
+      "sourceName": "Amazilia tzacatl",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b4a7bc2c031f",
+      "scientificName": "Amazona amazonica",
+      "sourceName": "Amazona amazonica",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9529969780a1",
+      "scientificName": "Amazona farinosa",
+      "sourceName": "Amazona farinosa",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f20c8e531044",
+      "scientificName": "Amazona ochrocephala",
+      "sourceName": "Amazona ochrocephala",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-0adde0032686",
+      "scientificName": "Anthocephala floriceps",
+      "sourceName": "Anthocephala floriceps",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f6eb13b3d250",
+      "scientificName": "Ara militaris",
+      "sourceName": "Ara militaris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ce0ae3cad189",
+      "scientificName": "Aramus guarauna",
+      "sourceName": "Aramus guarauna",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5cfd67401327",
+      "scientificName": "Ardea alba",
+      "sourceName": "Ardea alba",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-30e1fbadd6c7",
+      "scientificName": "Ardea cocoi",
+      "sourceName": "Ardea cocoi",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-95829ec6de98",
+      "scientificName": "Arremon basilicus",
+      "sourceName": "Arremon basilicus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-45e7f5fea9de",
+      "scientificName": "Arremon schlegeli",
+      "sourceName": "Arremon schlegeli",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-681f3042a177",
+      "scientificName": "Asio clamator",
+      "sourceName": "Asio clamator",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b1d6f5cdcc9b",
+      "scientificName": "Atlapetes melanocephalus",
+      "sourceName": "Atlapetes melanocephalus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9d800c98f019",
+      "scientificName": "Attila spadiceus",
+      "sourceName": "Attila spadiceus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-59a26deb7dad",
+      "scientificName": "Aulacorhynchus sulcatus",
+      "sourceName": "Aulacorhynchus sulcatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-71f1d445c4f3",
+      "scientificName": "Brotogeris jugularis",
+      "sourceName": "Brotogeris jugularis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-398d62bbf17a",
+      "scientificName": "Bubo virginianus",
+      "sourceName": "Bubo virginianus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c1dc1a0f1f51",
+      "scientificName": "Bubulcus ibis",
+      "sourceName": "Bubulcus ibis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ec25fc1cc9c3",
+      "scientificName": "Buteo nitidus",
+      "sourceName": "Buteo nitidus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-d461ca64ca2d",
+      "scientificName": "Buteogallus anthracinus",
+      "sourceName": "Buteogallus anthracinus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-29367f95c601",
+      "scientificName": "Buteogallus meridionalis",
+      "sourceName": "Buteogallus meridionalis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-e85a11b53906",
+      "scientificName": "Cacicus cela",
+      "sourceName": "Cacicus cela",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c76b7b9f867e",
+      "scientificName": "Calidris minutilla",
+      "sourceName": "Calidris minutilla",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4cfa9d323966",
+      "scientificName": "Campephilus melanoleucos",
+      "sourceName": "Campephilus melanoleucos",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-6a13a369df7c",
+      "scientificName": "Camptostoma obsoletum",
+      "sourceName": "Camptostoma obsoletum",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-33a2597d8085",
+      "scientificName": "Campylorhynchus griseus",
+      "sourceName": "Campylorhynchus griseus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-46198c6fbe82",
+      "scientificName": "Campylorhynchus nuchalis",
+      "sourceName": "Campylorhynchus nuchalis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5a680b0498c3",
+      "scientificName": "Campylorhynchus zonatus",
+      "sourceName": "Campylorhynchus zonatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-d123e4d87295",
+      "scientificName": "Cantorchilus leucotis",
+      "sourceName": "Cantorchilus leucotis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-2057e3fc6db3",
+      "scientificName": "Ceratopipra erythrocephala",
+      "sourceName": "Ceratopipra erythrocephala",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-80579f02cbb0",
+      "scientificName": "Chalybura buffonii",
+      "sourceName": "Chalybura buffonii",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9b2f1a385dfa",
+      "scientificName": "Chiroxiphia lanceolata",
+      "sourceName": "Chiroxiphia lanceolata",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-28c091c0a26a",
+      "scientificName": "Chloroceryle aenea",
+      "sourceName": "Chloroceryle aenea",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f03f1b264009",
+      "scientificName": "Chloroceryle amazona",
+      "sourceName": "Chloroceryle amazona",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-18f38721240d",
+      "scientificName": "Chloroceryle americana",
+      "sourceName": "Chloroceryle americana",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9f1b297133e5",
+      "scientificName": "Chlorophonia cyanea",
+      "sourceName": "Chlorophonia cyanea",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b4f17e71a928",
+      "scientificName": "Chlorostilbon gibsoni",
+      "sourceName": "Chlorostilbon gibsoni",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-df128904ceca",
+      "scientificName": "Cnemotriccus fuscatus",
+      "sourceName": "Cnemotriccus fuscatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-242f3b71dd13",
+      "scientificName": "Coereba flaveola",
+      "sourceName": "Coereba flaveola",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f377a91e2543",
+      "scientificName": "Columba livia",
+      "sourceName": "Columba livia",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ecbd5ba06ced",
+      "scientificName": "Columbina passerina",
+      "sourceName": "Columbina passerina",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9b9a90cba532",
+      "scientificName": "Columbina talpacoti",
+      "sourceName": "Columbina talpacoti",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9a57d3ec1fe4",
+      "scientificName": "Contopus cooperi",
+      "sourceName": "Contopus cooperi",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ea97691d3cf6",
+      "scientificName": "Coragyps atratus",
+      "sourceName": "Coragyps atratus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9061f70e449f",
+      "scientificName": "Crotophaga ani",
+      "sourceName": "Crotophaga ani",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ba70e3a26950",
+      "scientificName": "Crotophaga sulcirostris",
+      "sourceName": "Crotophaga sulcirostris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-8b7ff980fc95",
+      "scientificName": "Cyanerpes caeruleus",
+      "sourceName": "Cyanerpes caeruleus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-6dbf73fdca43",
+      "scientificName": "Cyanocorax affinis",
+      "sourceName": "Cyanocorax affinis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-55877a651704",
+      "scientificName": "Cyclarhis gujanensis",
+      "sourceName": "Cyclarhis gujanensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-39b7b9849554",
+      "scientificName": "Dendrocygna autumnalis",
+      "sourceName": "Dendrocygna autumnalis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-543b3bcf87f0",
+      "scientificName": "Dendroplex picus",
+      "sourceName": "Dendroplex picus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-2036e4d3756b",
+      "scientificName": "Diglossa sittoides",
+      "sourceName": "Diglossa sittoides",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-534a88024008",
+      "scientificName": "Dryocopus lineatus",
+      "sourceName": "Dryocopus lineatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-1350ac077587",
+      "scientificName": "Egretta caerulea",
+      "sourceName": "Egretta caerulea",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c41e9a134c14",
+      "scientificName": "Egretta thula",
+      "sourceName": "Egretta thula",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-a9519b76fee8",
+      "scientificName": "Egretta tricolor",
+      "sourceName": "Egretta tricolor",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4de65050f123",
+      "scientificName": "Elaenia flavogaster",
+      "sourceName": "Elaenia flavogaster",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-52d943dedfb5",
+      "scientificName": "Elaenia frantzii",
+      "sourceName": "Elaenia frantzii",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-a17a467766a5",
+      "scientificName": "Empidonax traillii",
+      "sourceName": "Empidonax traillii",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-6b9a0ab1b230",
+      "scientificName": "Empidonax virescens",
+      "sourceName": "Empidonax virescens",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-242dd051ef5d",
+      "scientificName": "Eucometis penicillata",
+      "sourceName": "Eucometis penicillata",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-fa8a0d6bbfca",
+      "scientificName": "Euphonia laniirostris",
+      "sourceName": "Euphonia laniirostris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-809a42149b7d",
+      "scientificName": "Eupsittula pertinax",
+      "sourceName": "Eupsittula pertinax",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-21915592b2e4",
+      "scientificName": "Falco rufigularis",
+      "sourceName": "Falco rufigularis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-16195b390663",
+      "scientificName": "Falco sparverius",
+      "sourceName": "Falco sparverius",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-7548caa6cd1d",
+      "scientificName": "Florisuga mellivora",
+      "sourceName": "Florisuga mellivora",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-849ccd502207",
+      "scientificName": "Fluvicola pica",
+      "sourceName": "Fluvicola pica",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ff3cd270f5a2",
+      "scientificName": "Formicivora grisea",
+      "sourceName": "Formicivora grisea",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c6748c40d330",
+      "scientificName": "Furnarius leucopus",
+      "sourceName": "Furnarius leucopus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-68039101e484",
+      "scientificName": "Galbula ruficauda",
+      "sourceName": "Galbula ruficauda",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-a176e0bfb467",
+      "scientificName": "Gampsonyx swainsonii",
+      "sourceName": "Gampsonyx swainsonii",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-3cb67d3ebfd4",
+      "scientificName": "Glaucidium brasilianum",
+      "sourceName": "Glaucidium brasilianum",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-e7f6e11274b2",
+      "scientificName": "Glaucis hirsutus",
+      "sourceName": "Glaucis hirsutus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c3276f113ff4",
+      "scientificName": "Hemitriccus margaritaceiventer",
+      "sourceName": "Hemitriccus margaritaceiventer",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-48c8f96dc700",
+      "scientificName": "Herpetotheres cachinnans",
+      "sourceName": "Herpetotheres cachinnans",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-59a52a171565",
+      "scientificName": "Hypnelus ruficollis",
+      "sourceName": "Hypnelus ruficollis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-08c5ab06002b",
+      "scientificName": "Icterus auricapillus",
+      "sourceName": "Icterus auricapillus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4f16b996e4c4",
+      "scientificName": "Icterus chrysater",
+      "sourceName": "Icterus chrysater",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4733ff47c8b7",
+      "scientificName": "Icterus galbula",
+      "sourceName": "Icterus galbula",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-374e535c6460",
+      "scientificName": "Icterus mesomelas",
+      "sourceName": "Icterus mesomelas",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-978389a0d0eb",
+      "scientificName": "Icterus nigrogularis",
+      "sourceName": "Icterus nigrogularis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-7b9f6517454f",
+      "scientificName": "Jacana jacana",
+      "sourceName": "Jacana jacana",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-cb562edbcad8",
+      "scientificName": "Lepidocolaptes lacrymiger",
+      "sourceName": "Lepidocolaptes lacrymiger",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-966e7165eb0a",
+      "scientificName": "Leptotila verreauxi",
+      "sourceName": "Leptotila verreauxi",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b98d80726f62",
+      "scientificName": "Lurocalis semitorquatus",
+      "sourceName": "Lurocalis semitorquatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-6b52bec25783",
+      "scientificName": "Machetornis rixosa",
+      "sourceName": "Machetornis rixosa",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-657c68a8bb89",
+      "scientificName": "Manacus manacus",
+      "sourceName": "Manacus manacus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-a386ffc3fe46",
+      "scientificName": "Megaceryle torquata",
+      "sourceName": "Megaceryle torquata",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-56422af352aa",
+      "scientificName": "Megarynchus pitangua",
+      "sourceName": "Megarynchus pitangua",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-92c629d348b7",
+      "scientificName": "Melanerpes rubricapillus",
+      "sourceName": "Melanerpes rubricapillus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-70df0102507d",
+      "scientificName": "Microcerculus marginatus",
+      "sourceName": "Microcerculus marginatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-651e08d8f55b",
+      "scientificName": "Mimus gilvus",
+      "sourceName": "Mimus gilvus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-940e7b5360de",
+      "scientificName": "Mionectes oleagineus",
+      "sourceName": "Mionectes oleagineus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-0dde5cb961da",
+      "scientificName": "Molothrus bonariensis",
+      "sourceName": "Molothrus bonariensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-50a8b5870d22",
+      "scientificName": "Momotus subrufescens",
+      "sourceName": "Momotus subrufescens",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ef88d3c5148d",
+      "scientificName": "Myiarchus panamensis",
+      "sourceName": "Myiarchus panamensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-998ebcd318f7",
+      "scientificName": "Myiarchus tuberculifer",
+      "sourceName": "Myiarchus tuberculifer",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-82bba8394098",
+      "scientificName": "Myiarchus tyrannulus",
+      "sourceName": "Myiarchus tyrannulus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-0e154077ae6c",
+      "scientificName": "Myiodynastes maculatus",
+      "sourceName": "Myiodynastes maculatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-8bb904f481f0",
+      "scientificName": "Myiozetetes cayanensis",
+      "sourceName": "Myiozetetes cayanensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-0f6087d661af",
+      "scientificName": "Myiozetetes similis",
+      "sourceName": "Myiozetetes similis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-132455701fae",
+      "scientificName": "Myrmeciza longipes",
+      "sourceName": "Myrmeciza longipes",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f2be0f7314c4",
+      "scientificName": "Ortalis garrula",
+      "sourceName": "Ortalis garrula",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f52cffa36638",
+      "scientificName": "Pachyramphus rufus",
+      "sourceName": "Pachyramphus rufus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c632bf9f321f",
+      "scientificName": "Pandion haliaetus",
+      "sourceName": "Pandion haliaetus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b2955da6ace1",
+      "scientificName": "Parkesia noveboracensis",
+      "sourceName": "Parkesia noveboracensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-2bb0c0c3c547",
+      "scientificName": "Patagioenas cayennensis",
+      "sourceName": "Patagioenas cayennensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-465fcae1fbb8",
+      "scientificName": "Patagioenas speciosa",
+      "sourceName": "Patagioenas speciosa",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5f34aaa6ebb1",
+      "scientificName": "Penelope argyrotis",
+      "sourceName": "Penelope argyrotis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ea5b570e74f1",
+      "scientificName": "Phaethornis anthophilus",
+      "sourceName": "Phaethornis anthophilus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ac67e8b6b77c",
+      "scientificName": "Phaethornis longirostris",
+      "sourceName": "Phaethornis longirostris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-115161d1379c",
+      "scientificName": "Pheugopedius rutilus",
+      "sourceName": "Pheugopedius rutilus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f8c6c41ab4be",
+      "scientificName": "Piaya cayana",
+      "sourceName": "Piaya cayana",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-caa0775a6599",
+      "scientificName": "Pionus menstruus",
+      "sourceName": "Pionus menstruus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-92543c1e305c",
+      "scientificName": "Piranga rubra",
+      "sourceName": "Piranga rubra",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-df24d7decfdf",
+      "scientificName": "Pitangus sulphuratus",
+      "sourceName": "Pitangus sulphuratus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ba5fa4abeb4f",
+      "scientificName": "Progne tapera",
+      "sourceName": "Progne tapera",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f05b54085c82",
+      "scientificName": "Protonotaria citrea",
+      "sourceName": "Protonotaria citrea",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5cc360d5a9c2",
+      "scientificName": "Psarocolius decumanus",
+      "sourceName": "Psarocolius decumanus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-cad6a6e33f01",
+      "scientificName": "Psittacara wagleri",
+      "sourceName": "Psittacara wagleri",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-6c514ca4d63a",
+      "scientificName": "Pteroglossus torquatus",
+      "sourceName": "Pteroglossus torquatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-a302e10c6c5e",
+      "scientificName": "Pulsatrix perspicillata",
+      "sourceName": "Pulsatrix perspicillata",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-8d4a0d87e5fb",
+      "scientificName": "Quiscalus lugubris",
+      "sourceName": "Quiscalus lugubris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-6120b38211ed",
+      "scientificName": "Quiscalus mexicanus",
+      "sourceName": "Quiscalus mexicanus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-89817d28bff4",
+      "scientificName": "Ramphastos sulfuratus",
+      "sourceName": "Ramphastos sulfuratus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-1c0806e22ce0",
+      "scientificName": "Ramphocaenus melanurus",
+      "sourceName": "Ramphocaenus melanurus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-40d47f367ded",
+      "scientificName": "Ramphocelus dimidiatus",
+      "sourceName": "Ramphocelus dimidiatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9edd36adffbd",
+      "scientificName": "Ramphomicron dorsale",
+      "sourceName": "Ramphomicron dorsale",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4a23ab0c48d3",
+      "scientificName": "Rupornis magnirostris",
+      "sourceName": "Rupornis magnirostris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-e9cd1301f3f6",
+      "scientificName": "Sakesphorus canadensis",
+      "sourceName": "Sakesphorus canadensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-3291c4705277",
+      "scientificName": "Saltator coerulescens",
+      "sourceName": "Saltator coerulescens",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b8b0d5fe57cb",
+      "scientificName": "Saltator maximus",
+      "sourceName": "Saltator maximus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-960ea8347e32",
+      "scientificName": "Saltator olivascens",
+      "sourceName": "Saltator olivascens",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-cf6ea3fca657",
+      "scientificName": "Saltator striatipectus",
+      "sourceName": "Saltator striatipectus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-fbbd725e4cda",
+      "scientificName": "Saucerottia saucerottei",
+      "sourceName": "Saucerottia saucerottei",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-002d51a92209",
+      "scientificName": "Setophaga petechia",
+      "sourceName": "Setophaga petechia",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-11793be928a2",
+      "scientificName": "Setophaga pitiayumi",
+      "sourceName": "Setophaga pitiayumi",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-881a59f09248",
+      "scientificName": "Setophaga ruticilla",
+      "sourceName": "Setophaga ruticilla",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-1fea366f9948",
+      "scientificName": "Setophaga striata",
+      "sourceName": "Setophaga striata",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-e2669dceb177",
+      "scientificName": "Sicalis flaveola",
+      "sourceName": "Sicalis flaveola",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-12671c0a109b",
+      "scientificName": "Spinus psaltria",
+      "sourceName": "Spinus psaltria",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f05d0cc5763d",
+      "scientificName": "Sporophila funerea",
+      "sourceName": "Sporophila funerea",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-02c05fec3de7",
+      "scientificName": "Sporophila intermedia",
+      "sourceName": "Sporophila intermedia",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c37f86d06fb5",
+      "scientificName": "Sporophila luctuosa",
+      "sourceName": "Sporophila luctuosa",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-72c0b56f0e10",
+      "scientificName": "Sporophila minuta",
+      "sourceName": "Sporophila minuta",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-deb2eb9ce9a3",
+      "scientificName": "Sporophila nigricollis",
+      "sourceName": "Sporophila nigricollis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-ce16f7e7e268",
+      "scientificName": "Stelgidopteryx ruficollis",
+      "sourceName": "Stelgidopteryx ruficollis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5ec73d1449a0",
+      "scientificName": "Sternula superciliaris",
+      "sourceName": "Sternula superciliaris",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5f3416c47e93",
+      "scientificName": "Strix nigrolineata",
+      "sourceName": "Strix nigrolineata",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-1606ab3aa315",
+      "scientificName": "Tachyphonus rufus",
+      "sourceName": "Tachyphonus rufus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-37893fdb2681",
+      "scientificName": "Tangara gyrola",
+      "sourceName": "Tangara gyrola",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-1d83c717b3d8",
+      "scientificName": "Tersina viridis",
+      "sourceName": "Tersina viridis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-d29d6378a2cb",
+      "scientificName": "Thalurania colombica",
+      "sourceName": "Thalurania colombica",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-74ffbbb31a76",
+      "scientificName": "Thamnophilus atrinucha",
+      "sourceName": "Thamnophilus atrinucha",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-9e0f3c63e2dc",
+      "scientificName": "Thamnophilus doliatus",
+      "sourceName": "Thamnophilus doliatus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-7d770a5cb9eb",
+      "scientificName": "Thraupis episcopus",
+      "sourceName": "Thraupis episcopus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-d53290dc41dc",
+      "scientificName": "Thraupis glaucocolpa",
+      "sourceName": "Thraupis glaucocolpa",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-8ad255df3e26",
+      "scientificName": "Thraupis palmarum",
+      "sourceName": "Thraupis palmarum",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-7770b21c91c5",
+      "scientificName": "Thryophilus rufalbus",
+      "sourceName": "Thryophilus rufalbus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5dde405af770",
+      "scientificName": "Todirostrum cinereum",
+      "sourceName": "Todirostrum cinereum",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-43da00ca4e76",
+      "scientificName": "Todirostrum nigriceps",
+      "sourceName": "Todirostrum nigriceps",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-a06285477c30",
+      "scientificName": "Tolmomyias sulphurescens",
+      "sourceName": "Tolmomyias sulphurescens",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c322b095fd47",
+      "scientificName": "Tringa solitaria",
+      "sourceName": "Tringa solitaria",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f168356034b6",
+      "scientificName": "Troglodytes aedon",
+      "sourceName": "Troglodytes aedon",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-007fefd499c4",
+      "scientificName": "Turdus flavipes",
+      "sourceName": "Turdus flavipes",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-05f3726aa3cf",
+      "scientificName": "Turdus grayi",
+      "sourceName": "Turdus grayi",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-738873542c38",
+      "scientificName": "Turdus leucomelas",
+      "sourceName": "Turdus leucomelas",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-2bfeaa97353c",
+      "scientificName": "Tyrannus melancholicus",
+      "sourceName": "Tyrannus melancholicus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c01ab491ee8f",
+      "scientificName": "Tyrannus savana",
+      "sourceName": "Tyrannus savana",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-3b6c0fcdf04c",
+      "scientificName": "Tyrannus tyrannus",
+      "sourceName": "Tyrannus tyrannus",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4df4e0e47dee",
+      "scientificName": "Vanellus chilensis",
+      "sourceName": "Vanellus chilensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-5dd2c3796339",
+      "scientificName": "Vireo leucophrys",
+      "sourceName": "Vireo leucophrys",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-37d004a63b01",
+      "scientificName": "Volatinia jacarina",
+      "sourceName": "Volatinia jacarina",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-8bd41ffee44c",
+      "scientificName": "Xiphorhynchus susurrans",
+      "sourceName": "Xiphorhynchus susurrans",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-18cbfc602e37",
+      "scientificName": "Zimmerius chrysops",
+      "sourceName": "Zimmerius chrysops",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-c2fc85accef7",
+      "scientificName": "Zonotrichia capensis",
+      "sourceName": "Zonotrichia capensis",
+      "match": "exact",
+      "sourceId": "umagdalena-2025",
+      "reviewed": "2026-11-13"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-eb0ba5f11642",
+      "scientificName": "Chaetocercus astreans",
+      "sourceName": "Chaetocercus astreans",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        12,
+        24,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-0adde0032686",
+      "scientificName": "Anthocephala floriceps",
+      "sourceName": "Anthocephala floriceps",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        23,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-bf8ebc4fb22e",
+      "scientificName": "Campylopterus phainopeplus",
+      "sourceName": "Campylopterus phainopeplus",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        25,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-4cb7d129dab4",
+      "scientificName": "Megascops gilesi",
+      "sourceName": "Megascops gilesi",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        27,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-de721231b9a5",
+      "scientificName": "Pyrrhura viridicata",
+      "sourceName": "Pyrrhura viridicata",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        17,
+        32,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-efe472b655d4",
+      "scientificName": "Drymophila hellmayri",
+      "sourceName": "Drymophila hellmayri",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        20,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-391201e04e77",
+      "scientificName": "Grallaria bangsi",
+      "sourceName": "Grallaria bangsi",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        31,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-074dec1793f8",
+      "scientificName": "Scytalopus sanctaemartae",
+      "sourceName": "Scytalopus sanctaemartae",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        22,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-47cf89136e50",
+      "scientificName": "Clibanornis rufipectus",
+      "sourceName": "Clibanornis rufipectus",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        25,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-fbb9f135e9f6",
+      "scientificName": "Myiotheretes pernix",
+      "sourceName": "Myiotheretes pernix",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        33,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-cad62b9c5684",
+      "scientificName": "Troglodytes monticola",
+      "sourceName": "Troglodytes monticola",
+      "match": "exact",
+      "sourceId": "proaves-wren-2012",
+      "reviewed": "2026-11-13",
+      "pdfPages": []
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-b1d6f5cdcc9b",
+      "scientificName": "Atlapetes melanocephalus",
+      "sourceName": "Atlapetes melanocephalus",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        20,
+        58
+      ]
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "sierra-nevada-de-santa-marta",
+      "speciesId": "co-f3c525c67bee",
+      "scientificName": "Myiothlypis basilica",
+      "sourceName": "Myiothlypis basilica",
+      "match": "exact",
+      "sourceId": "santa-marta-tourism-guide",
+      "reviewed": "2026-11-13",
+      "pdfPages": [
+        8,
+        30,
+        58
+      ]
+    }
+  ],
+  "excludedRows": [
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Anthracothorax prevosti",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": []
+    },
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Daptrius chimachima",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": [
+        {
+          "id": "co-a192471ef601",
+          "scientificName": "Milvago chimachima",
+          "previousScientificName": "",
+          "sourceCrosswalk": "Daptrius chimachima"
+        }
+      ]
+    },
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Furnarius longirostris",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": []
+    },
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Nannopterum brasilianum",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": [
+        {
+          "id": "co-ac22abadf7bf",
+          "scientificName": "Phalacrocorax brasilianus",
+          "previousScientificName": "",
+          "sourceCrosswalk": "Nannopterum brasilianum"
+        }
+      ]
+    },
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Setophaga pitayumi",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": []
+    },
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Threskiornithidae",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": []
+    },
+    {
+      "sourceId": "umagdalena-2025",
+      "sourceName": "Xenops minutus",
+      "reason": "No exact canonical-name match; crosswalk is not automatic range evidence",
+      "candidates": [
+        {
+          "id": "co-2886503883a3",
+          "scientificName": "Xenops mexicanus",
+          "previousScientificName": "Xenops minutus",
+          "sourceCrosswalk": null
+        },
+        {
+          "id": "co-407be36f5439",
+          "scientificName": "Xenops genibarbis",
+          "previousScientificName": "Xenops minutus",
+          "sourceCrosswalk": null
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,8 @@
 import {CarouselButton,CarouselCount} from "./carousel-controls"
 import PhotoCredit from "./photo-credit"
 import CulturalNameContext from "./cultural-name-context"
+import BirdStory from "./bird-story"
+import {useMediaPreferences} from "./media-preferences"
 import BirdFilterControls from "@/components/bird-filter-controls"
 import BirdConservationLabel from "@/components/bird-conservation-label"
 import {useBirdFilters} from "@/components/bird-filter-context"
@@ -75,6 +77,7 @@ export default function HomepageBirdCarousel({
   countryId = "colombia",
 }: HomepageBirdCarouselProps) {
   const {filters}=useBirdFilters()
+  const {lowBandwidth}=useMediaPreferences()
   const birds=filterConservationBirds(suppliedBirds,filters,countryId)
   const localizeHome = useColombiaHomeCopy()
 
@@ -145,10 +148,10 @@ export default function HomepageBirdCarousel({
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)")
     const updatePreference = () => { if (preference.matches) setIsPlaying(false) }
-    setIsPlaying(autoPlay && !preference.matches)
+    setIsPlaying(autoPlay && !lowBandwidth && !preference.matches)
     preference.addEventListener("change", updatePreference)
     return () => preference.removeEventListener("change", updatePreference)
-  }, [autoPlay])
+  }, [autoPlay,lowBandwidth])
 
   // Let the country wrapper update its map; the carousel does not own geographic data.
   useEffect(() => {
@@ -365,6 +368,7 @@ export default function HomepageBirdCarousel({
           <PhotoCredit key={currentBird.id} onOpen={()=>setIsPlaying(false)} creator={currentBird.photoCredit.photographer} sourceUrl={currentBird.photoCredit.instagramPost || currentBird.photoCredit.teamLink || "/credits"} title={currentBird.photoCredit.title}/>
         </div>
         <div className="bg-white px-3"><CulturalNameContext key={currentBird.id} kind="bird" entityId={currentBird.id} onOpen={()=>setIsPlaying(false)}/></div>
+        <div className="bg-white px-3"><BirdStory key={currentBird.id+"-story"} birdId={currentBird.id} countryId={countryId} onOpen={()=>setIsPlaying(false)}/></div>
         <div className="flex flex-wrap items-center gap-2 border-t border-emerald-100 bg-white px-3 py-2 text-emerald-950">
           <button type="button" className="min-h-11 rounded-lg border border-emerald-200 px-3 text-xs font-medium hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"
             aria-pressed={callsFollow} onClick={() => {

@@ -16,6 +16,7 @@ const links = [
   { href: "/#planning", label: "How it works" },
   { href: "/account", label: "My Trips" },
   { href: "/site-map", label: "Site map" },
+  { href: "/search", label: "Search" },
 ]
 const linkClass = "inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
 
@@ -38,7 +39,7 @@ export function NewZealandHeader({ country = "new-zealand", navigationLinks, sur
     const target = href.split("?")[0]
     return pathname === target || (target === "/aves-explorer" && (pathname === "/regions" || pathname.startsWith("/regions/"))) || (target !== "/" && pathname.startsWith(target + "/"))
   }
-  const menuLinks = navigationLinks ?? links
+  const menuLinks = navigationLinks ? [...navigationLinks,{href:"/search",label:"Search"}] : links
   const desktopLinks = navigationLinks?.filter(link => link.href !== "/site-map") ?? links.slice(0, 3)
   const hasCountryNavigation = !!navigationLinks
   const desktopClass = hasCountryNavigation ? "xl:flex" : "sm:flex"

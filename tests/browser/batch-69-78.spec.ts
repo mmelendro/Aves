@@ -1,0 +1,63 @@
+import {test,expect,declineOptionalCookies} from "./public-fixture"
+
+test("unified search finds Santa Marta places and keeps Spanish controls consistent",async({page},info)=>{
+ test.skip(!["desktop","phone-390"].includes(info.project.name),"Search journey on desktop and phone")
+ await page.goto("/search?lang=es");await declineOptionalCookies(page)
+ await page.getByLabel("¿Qué quieres explorar?",{exact:true}).fill("El Dorado")
+ await page.getByLabel("País",{exact:true}).selectOption("colombia")
+ await page.getByRole("button",{name:"Buscar",exact:true}).click()
+ await expect(page.getByRole("heading",{name:/El Dorado conservation area/})).toBeVisible()
+ await page.getByRole("link",{name:/El Dorado conservation area/}).click()
+ await expect(page).toHaveURL(/colombia\?region=sierra-nevada-de-santa-marta#place-gallery/)
+})
+
+test("lower-bandwidth preference survives navigation and keeps small photos and maps available",async({page},info)=>{
+ test.skip(!["desktop","phone-390"].includes(info.project.name),"Media preference on desktop and phone")
+ await page.goto("/preferences");await declineOptionalCookies(page)
+ await page.getByRole("checkbox",{name:"Lower-bandwidth mode",exact:true}).check()
+ await page.goto("/australia")
+ await page.getByRole("button",{name:"Turn to the birds",exact:true}).click()
+ const source=page.locator("[data-carousel-image] picture source").first()
+ await expect(source).toHaveAttribute("srcset",/640w$/)
+ await expect(source).not.toHaveAttribute("srcset",/,/)
+ await expect(page.getByRole("button",{name:"Play slideshow",exact:true}).first()).toBeVisible()
+ await page.goto("/preferences")
+ await expect(page.getByRole("checkbox",{name:"Lower-bandwidth mode",exact:true})).toBeChecked()
+})
+
+test("public offline shell caches no account pages or private APIs",async({page,context},info)=>{
+ test.skip(info.project.name!=="desktop","One Chromium service-worker acceptance")
+ await page.goto("/preferences");await declineOptionalCookies(page)
+ await page.getByRole("button",{name:"Enable offline information page",exact:true}).click()
+ await expect(page.getByRole("status").filter({hasText:"Offline information page enabled"})).toBeVisible()
+ await page.evaluate(async()=>{await navigator.serviceWorker.ready})
+ await page.reload()
+ const cached=await page.evaluate(async()=>{const names=await caches.keys();return (await Promise.all(names.filter(n=>n.startsWith("aves-public-information-")).map(async n=>(await(await caches.open(n)).keys()).map(r=>new URL(r.url).pathname)))).flat()})
+ expect(cached).toEqual(["/offline.html"])
+ await context.setOffline(true)
+ await page.goto("/colombia")
+ await expect(page.getByRole("heading",{name:"You are offline",exact:true})).toBeVisible()
+ expect(await page.evaluate(()=>fetch("/api/account/plans").then(()=>"unexpected response",()=>"network unavailable"))).toBe("network unavailable")
+ await context.setOffline(false)
+})
+
+test("saved tools retain original itineraries and confirm favourite reuse before showing a saved change",async({page},info)=>{
+ test.skip(!["desktop","phone-390"].includes(info.project.name),"Synthetic owner journey on desktop and phone")
+ const place={id:"place:new-zealand:trip-arthurs-pass-information",kind:"place",countryId:"new-zealand",name:"Arthur’s Pass National Park Visitor Centre",description:"Synthetic public reference",href:"/new-zealand/south-island#trip-planner",sourceUrl:"https://www.doc.govt.nz/"}
+ let ids:string[]=[],savedMessage=""
+ await page.route("**/api/account/favourites",async route=>{const request=route.request();if(request.method()==="GET")return route.fulfill({json:{ids,places:[place]}});const body=request.postDataJSON();ids=request.method()==="DELETE"?ids.filter(id=>id!==body.placeId):[body.placeId];return route.fulfill({json:{placeId:body.placeId,...(request.method()==="DELETE"?{removed:true}:{stored:true})}})})
+ await page.route("**/api/account/plans/a13b0801-1c6d-41d4-94da-12e3adeebf13",async route=>{const body=route.request().postDataJSON();savedMessage=body.message;await route.fulfill({json:{plan:{...body,id:"a13b0801-1c6d-41d4-94da-12e3adeebf13",status:"draft",updatedAt:"2026-11-13T01:00:00Z"}}})})
+ await page.goto("/browser-fixtures/trip-tools");await declineOptionalCookies(page)
+ await page.getByLabel("Place",{exact:true}).selectOption(place.id)
+ await page.getByRole("button",{name:"Save favourite place",exact:true}).click()
+ await expect(page.getByRole("status").filter({hasText:"Place saved to your private favourites"})).toBeVisible()
+ await page.getByLabel("Your trip",{exact:true}).selectOption("a13b0801-1c6d-41d4-94da-12e3adeebf13")
+ await page.getByRole("button",{name:"Add place to this saved trip",exact:true}).click()
+ await expect(page.getByRole("status").filter({hasText:"Place added to the saved trip"})).toBeVisible()
+ expect(savedMessage).toContain("Day 1: original southern itinerary")
+ expect(savedMessage).toContain(`[${place.id}]`)
+ await expect(page.getByRole("region",{name:"Compare saved itineraries",exact:true})).toContainText("Day 1: original northern itinerary")
+ await expect(page.getByRole("table")).toContainText("Different")
+ await page.getByText("Download a practical trip pack",{exact:true}).click()
+ await expect(page.getByRole("checkbox",{name:"Saved itinerary and planning notes",exact:true})).toBeChecked()
+})

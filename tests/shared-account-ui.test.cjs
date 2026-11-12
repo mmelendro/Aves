@@ -360,7 +360,7 @@ test("shared desktop and mobile navigation distinguishes all destinations from t
   assert.equal(find(tree, node => ["https://aves.bio/colombia", "/colombia"].includes(node.props.href)).props.children, "Colombia")
   assert.ok(find(tree, node => node.props.href === "https://aves.bio/australia"))
   const mobile = find(tree, node => node.type === "nav" && node.props["aria-label"] === "Mobile navigation")
-  assert.deepEqual(nodes(mobile).filter(node => node.type === "a").map(node => node.props.href), ["/account", "https://aves.bio/", "https://aves.bio/colombia", "https://aves.bio/australia", "https://aves.bio/new-zealand", "/contact?topic=account#inquiry"])
+  assert.deepEqual(nodes(mobile).filter(node => node.type === "a").map(node => node.props.href), ["/account", "https://aves.bio/", "https://aves.bio/colombia", "https://aves.bio/australia", "https://aves.bio/new-zealand", "/contact?topic=account#inquiry", "/search"])
 })
 
 test("Australia desktop and mobile navigation can return to the global destination chooser", () => {

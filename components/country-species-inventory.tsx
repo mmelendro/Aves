@@ -288,6 +288,7 @@ export function CountrySpeciesInventory({
                   Regional associations awaiting review.
                 </p>
               )}
+              {!!bird.regionEvidence?.length&&<details className="mt-3 rounded-lg border border-emerald-100 px-3 text-xs"><summary className="min-h-11 cursor-pointer content-center">Regional evidence and source dates</summary><p className="leading-6">Broad regional association within each source’s scope. Historical sampling does not establish a present-day sighting or complete regional coverage.</p>{bird.regionEvidence.map(edge=>{const source=sourceById.get(edge.sourceId);return source?<p key={edge.regionId+edge.sourceId} className="my-2 leading-6"><a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.title}</a> · {edge.sourceName} · checked {edge.reviewed}</p>:null})}</details>}
               {bird.places.length > 0 && (
                 <details className="mt-3 rounded-lg bg-emerald-50 px-3">
                   <summary className="min-h-11 cursor-pointer content-center text-sm font-medium text-emerald-900">
@@ -396,6 +397,7 @@ export function CountrySpeciesInventory({
             publish public place references, not nest sites or private
             observation coordinates.
           </p>
+          {!!data.regionalExclusions?.length&&<details className="rounded-lg border p-3"><summary className="min-h-11 cursor-pointer">Regional source names awaiting taxonomy review ({data.regionalExclusions.length})</summary><ul className="space-y-2">{data.regionalExclusions.map(row=><li key={row.sourceId+row.sourceName}><span className="italic">{row.sourceName}</span>: {row.reason}. No regional join added from this source name.</li>)}</ul></details>}
           {data.sources.map((source) => (
             <div key={source.id}>
               <a
@@ -423,9 +425,9 @@ export function CountrySpeciesInventory({
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </p>
-              <p className="break-all text-xs">
+              {source.sha256&&<p className="break-all text-xs">
                 Source file SHA-256: {source.sha256}
-              </p>
+              </p>}
             </div>
           ))}
           {data.excludedRows.length > 0 && (

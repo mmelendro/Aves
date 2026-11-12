@@ -5,12 +5,14 @@ import {ListFilter} from "lucide-react"
 import {useBirdFilters} from "./bird-filter-context"
 import {birdFiltersActive,defaultBirdFilters,statusLabels,type BirdStatusFilter,type BirdOriginFilter} from "@/lib/bird-conservation"
 import styles from "./bird-filter-controls.module.css"
+import {useColombiaHomeCopy} from "@/components/colombia-home-language"
 
 /** Each map/carousel edits one shared, page-session filter. Native popovers overlay, never resize the map. */
 export default function BirdFilterControls(_props:{align?:"left"|"right"}={}) {
  const {filters,setFilters}=useBirdFilters(), id=useId(), ref=useRef<HTMLDivElement>(null)
+ const localizeHome=useColombiaHomeCopy()
  function close(){ref.current?.hidePopover()}
- return <div className={styles.control} data-bird-filters>
+ return localizeHome(<div className={styles.control} data-bird-filters>
   <button type="button" popoverTarget={`${id}-filters`} className={styles.trigger} aria-label="Bird filters" title="Endemic and conservation filters"><ListFilter size={18} aria-hidden="true"/>{birdFiltersActive(filters)&&<span className={styles.active} aria-hidden="true"/>}<span className="sr-only">{birdFiltersActive(filters) ? "Filters active" : "All birds"}</span></button>
   <div ref={ref} id={`${id}-filters`} popover="auto" role="dialog" aria-label="Bird filters" className={styles.panel}>
    <h3 className="font-semibold">Explore by bird</h3>
@@ -27,5 +29,5 @@ export default function BirdFilterControls(_props:{align?:"left"|"right"}={}) {
    <p className="mt-2 text-xs text-gray-600">Global species assessments are a dated GBIF/IUCN snapshot. National listings appear separately in bird details. Unverified status stays unknown. Highlighted planning areas are based on featured birds, not complete ranges or live sightings.</p>
    <div className="mt-3 flex flex-wrap gap-2"><button type="button" className="min-h-11 rounded-lg border border-emerald-200 px-3" onClick={()=>setFilters(defaultBirdFilters)}>Clear bird filters</button><button type="button" className="min-h-11 rounded-lg px-3 underline" onClick={close}>Close bird filters</button></div>
   </div>
- </div>
+ </div>)
 }

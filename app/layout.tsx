@@ -16,6 +16,7 @@ import { AvesMediaProvider } from "@/components/aves-media-provider"
 import { CookieBanner } from "@/components/cookie-banner"
 import { CookieConsentProvider } from "@/components/cookie-consent-manager"
 import { CookiePreferenceCenter } from "@/components/cookie-preference-center"
+import {MediaPreferencesProvider} from "@/components/media-preferences"
 
 // Search-engine and link-preview information; this object is not visible page copy.
 export const metadata: Metadata = {
@@ -96,7 +97,7 @@ export default function RootLayout({
       <body>
         <PreviewModeProvider readOnly={isReadOnlyPreview()}>
           <CookieConsentProvider>
-            <MapBackgroundProvider><BirdFilterProvider><HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider></BirdFilterProvider></MapBackgroundProvider>
+            <MediaPreferencesProvider><MapBackgroundProvider><BirdFilterProvider><HeaderLandscapeProvider><AvesMediaProvider navigationPaths={publicNavigationPaths}>{children}</AvesMediaProvider></HeaderLandscapeProvider></BirdFilterProvider></MapBackgroundProvider></MediaPreferencesProvider>
             <CookiePreferenceCenter />
             <CookieBanner />
           </CookieConsentProvider>
