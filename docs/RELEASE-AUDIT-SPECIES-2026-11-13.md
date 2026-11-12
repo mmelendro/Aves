@@ -36,8 +36,16 @@ The existing private/public NZ picker now imports its media-heavy search module 
 
 ## Open acceptance and data work
 
-The protected hosted candidate could not be inspected because its browser surface required Vercel login. Automatic approval review rejected a fetch method that would create a temporary share link. No access protection was weakened. Local HTTP, unit and build results do not establish hosted visual acceptance, physical Safari touch behaviour or authenticated save flows. Do not claim the candidate is live on the canonical domain solely because its build is READY.
+Earlier agent-side hosted inspection was blocked by Vercel login, and automatic approval review rejected a temporary-share-link method. No share link was created and no access protection was weakened. The owner then reviewed the supplied build and reported that it looked good. That is owner-reported acceptance, not an independently recorded physical-device or authenticated-save test.
 
 Task 70 is a delivered national-reference increment, not a claim of complete regional inventories or one reconciled global taxonomy. Source coverage and limitations are in [SPECIES-DATA-ROADMAP.md](SPECIES-DATA-ROADMAP.md). Commercial eBird access remains unresolved. Further business connections require independently reviewed evidence and must not turn nearby businesses into species-presence or partnership claims.
 
 The owner requested the full investor/lender business-plan rewrite after independent website changes. The current owner draft is not financially validated or ready for external reliance. No business financials or private traveller records belong in repository release evidence.
+
+## Production release, 13 November 2026 Sydney
+
+Following owner review, both `aves.bio` and `www.aves.bio` were assigned to the reviewed READY deployment `dpl_AZhmj9YyGNkoFqQwXc8fLUjRL5dd`, runtime commit `fd1c588b40f55b36f086382f769737517428028d`. The promotion endpoint reported that it was already the project's production deployment, while the custom domains still pointed to the earlier build. Their explicit alias assignments completed the release. The `aves.bio` alias was read back and confirmed against the intended deployment.
+
+Public, anonymous post-release HTTP checks returned 200 for `/` and `/species/reference?country=colombia`, `australia`, and `new-zealand`. Each inventory response contained the national-source-version content. No private account records or writes were used for these checks.
+
+Rollback reference for both domains: `dpl_3XTdjnTiiJpyZyNGq6r9937ZW2eg`, previously recorded runtime `9f833142281caaeb685cc13483671082396bdfea`. This release made no database changes. Task 70's remaining regional, commercial-data-access and business-evidence work remains open.
