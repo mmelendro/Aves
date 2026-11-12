@@ -153,31 +153,31 @@ These are not invented requests for approval. Much of this work can continue aut
 
 29. Complete deep-link, refresh and Back/Forward journey coverage
 
-   Acceptance: Mounted-route history is repaired. Add cross-country browser journey coverage and verify restored titles, copy, selection and return paths. Previous audit IDs: 6. Status: Implemented; cross-country browser verification pending.
+   Acceptance: Mounted-route history is repaired. Add cross-country browser journey coverage and verify restored titles, copy, selection and return paths. Previous audit IDs: 6. Status: Implemented; expanded browser checks and title restoration under verification.
 
 30. Simplify overlapping navigation controls
 
-   Acceptance: Reduce competing region, habitat and gallery controls while preserving their shared selection. Previous audit IDs: 7. Status: Implemented; redundant pin targets removed, shared-selection browser verification pending.
+   Acceptance: Reduce competing region, habitat and gallery controls while preserving their shared selection. Previous audit IDs: 7. Status: Implemented; single region targets and explicit gallery label under verification.
 
 31. Unify enquiry entry points
 
-   Acceptance: Preserve destination, region and intent through global, Colombian, Australian and New Zealand contact journeys. Previous audit IDs: 8. Status: Implemented; enquiry context and receipt tests passed, browser verification pending.
+   Acceptance: Preserve destination, region and intent through global, Colombian, Australian and New Zealand contact journeys. Previous audit IDs: 8. Status: Implemented; enquiry context and matching receipt tests passed, browser checks under verification.
 
 32. Simplify saving and importing choices
 
-   Acceptance: Reduce manual transfer steps for bird wishes, place ideas and private briefs without losing edits or changing sharing intent. Previous audit IDs: 9. Status: Open.
+   Acceptance: Reduce manual transfer steps for bird wishes, place ideas and private briefs without losing edits or changing sharing intent. Previous audit IDs: 9. Status: Implemented; atomic combined import and failure preservation tests passed, release checks pending.
 
 33. Standardise loading and recovery
 
-   Acceptance: Check failed images, tiles, audio, requests and storage, with useful retry and fallback states. Previous audit IDs: 10. Status: Open.
+   Acceptance: Check failed images, tiles, audio, requests and storage, with useful retry and fallback states. Previous audit IDs: 10. Status: Implemented; photo, satellite and audio retry paths under verification.
 
 34. Verify overlay return behaviour
 
-   Acceptance: Check keyboard dismissal, focus, scroll and selected slide across expanded maps, photographs, credits and media. Previous audit IDs: 11. Status: Open.
+   Acceptance: Check keyboard dismissal, focus, scroll and selected slide across expanded maps, photographs, credits and media. Previous audit IDs: 11. Status: Implemented; media focus fixes and expanded overlay browser checks under verification.
 
 35. Verify sound identity and controls
 
-   Acceptance: Keep bird and regional sound cues aligned with playback, with clear stop, error and reduced motion behaviour. Previous audit IDs: 12. Status: Open.
+   Acceptance: Keep bird and regional sound cues aligned with playback, with clear stop, error and reduced motion behaviour. Previous audit IDs: 12. Status: Implemented; playback country identity, stop and recovery checks under verification.
 
 36. Reduce remaining homepage and planner JavaScript
 
@@ -484,3 +484,7 @@ The owner extended the active instruction to items 26 through 78. Items 26 to 28
 The source fixes shared contrast, named form/photo controls, underlines, target size and obstruction. Colombian map shapes now own each region's named activation area; pins are decorative, avoiding overlapping duplicate focus stops while retaining preview, direct links, selection, filters and geometry. Rollback for both domains is `dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3`. No database or customer records were changed.
 
 Items 29 to 31 are in verification: cross-country refresh/history journeys, connected map/gallery state and a common enquiry context. New Zealand enquiry regions now survive through the receiving form and country-specific receipt validation. Do not treat their implementation as publication before the expanded browser run and release checks pass.
+
+The live HTTP audit for the accessibility release passes all 78 public routes: `docs/audit/public-http-accessibility-26-28-2026-11-13.json`. The expanded journey run exposed an ambiguous gallery selector label and stale tab titles; the next source corrects them. Tests now expect the current selected heading to survive refresh, rather than incorrectly expecting the original country heading. Contact checks use the visible accessible combobox because Next streaming may temporarily retain hidden server fragments.
+
+Items 32 to 35 are also in verification. Combined imports merge public tab ideas into unsaved fields atomically, preserving existing notes and stopping every partial change on validation/length errors. No import saves, shares or clears tab storage. Failed landscape photos retry their same credited source; failed tiles retry without resetting the camera; audio retry retains its position where metadata permits. Player Escape and close restore the current control, and browser checks verify selected photos, credits, scroll and country identity.

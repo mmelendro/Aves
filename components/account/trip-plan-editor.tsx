@@ -6,6 +6,7 @@
  * Saving a draft does not request a quote, reserve dates, or make a payment.
  */
 
+import { importPlanningIdeas } from "@/lib/import-planning-ideas"
 import { useEffect, useId, useRef, useState } from "react"
 import { nzPublicPlanningPlaces, readNzPlaceIdeas, mergeNzPlaceNotes, consumeSavedNzPlaceIdeas } from "@/lib/nz-place-ideas"
 import {islandPlanners,islandPlanner} from "@/lib/island-planners"
@@ -125,6 +126,17 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       <div className="grid sm:grid-cols-2 gap-4"><div><label htmlFor={`${prefix}-when`} className="block text-sm font-medium text-gray-700 mb-2">Travel Timing</label><Input id={`${prefix}-when`} name="travelWhen" defaultValue={plan?.travelWhen || ""} maxLength={160} placeholder={country === "new-zealand" ? "Dates including year, or a flexible window" : "A month, a season, or flexible"} /></div><div><label htmlFor={`${prefix}-party`} className="block text-sm font-medium text-gray-700 mb-2">Group Size</label><select id={`${prefix}-party`} name="partySize" defaultValue={plan?.partySize || ""} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"><option value="">Still deciding</option><option>1 person</option><option>2 people</option><option>3–4 people</option><option>5+ people</option></select></div></div>
       {country === "new-zealand" && <><p className="text-sm text-gray-500">Please include the year in your timing. No dates are assumed or reserved.</p><PlanningQuestions key={country} prefix={prefix} answers={plan?.country === country ? plan.questionnaire : undefined} /></>}
       {country === "new-zealand" && <BudgetQuestions key={`${country}-${plan?.id || "new"}`} prefix={prefix} budget={plan?.country === country ? plan.questionnaire?.budget : undefined} />}
+      {country === "new-zealand" && (incomingBirds.length > 0 || incomingPlaces.length > 0 || incomingItineraries.length > 0) && <section aria-label="Bring ideas from this tab" className="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+        <h3 className="font-medium text-emerald-950">Bring your ideas together</h3>
+        <p className="mt-2 text-sm leading-6">{incomingBirds.length} bird choices, {incomingPlaces.length} place ideas and {incomingItineraries.length} itineraries are available in this tab. Add them together, or use the individual choices below.</p>
+        <button type="button" className="mt-3 min-h-11 rounded-lg bg-emerald-800 px-4 text-sm font-medium text-white" onClick={() => {
+          const merged = importPlanningIdeas({ message, birdIds, regions: selectedRegions }, { birdIds: incomingBirds, placeIds: incomingPlaces, itineraries: incomingItineraries })
+          if (merged.error) { setPlaceNotice(merged.error); return }
+          setMessage(merged.message); setBirdIds(merged.birdIds); setSelectedRegions(merged.regions)
+          setPlaceNotice("Your ideas have been added to this draft. Review your notes and choices, then Save My Draft to save privately. Nothing has been shared.")
+        }}>Add All Ideas to This Draft</button>
+        <p className="mt-2 text-xs leading-6">Existing notes and choices stay intact. Adding ideas does not save or share the draft. Repeating this action does not duplicate the same ideas.</p>
+      </section>}
       {country === "new-zealand" && <section aria-labelledby={`${prefix}-birds`} className="space-y-4 rounded-xl border border-emerald-200 p-5"><h3 id={`${prefix}-birds`} className="font-medium text-emerald-950">Birds you would love to see (optional)</h3><p className="text-sm leading-6 text-gray-600">These choices join this private draft only when you save. Review the full checklist here, or bring choices from this browser tab. They are wishes, not guaranteed sightings or an itinerary.</p>{plan && incomingBirds.length > 0 && <button type="button" onClick={() => { setBirdIds(current => [...new Set([...current, ...incomingBirds])]); setIncomingBirds([]) }} className="min-h-11 rounded-md border border-emerald-300 px-4 text-sm font-medium text-emerald-900">Add {incomingBirds.length} bird choices from this tab</button>}<NewZealandBirdPicker selected={birdIds} onChange={setBirdIds} /></section>}
       {country === "new-zealand" && incomingItineraries.map(incomingItinerary=>{ const planner=islandPlanner(incomingItinerary.input.islandId||"south-island"); if(!planner)return null; return <section key={planner.context.id} aria-label="Itinerary from this browser tab" className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
         <h3 className="font-medium text-emerald-950">Your {incomingItinerary.input.days} day {planner.context.name} itinerary</h3>

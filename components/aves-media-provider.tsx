@@ -118,6 +118,8 @@ export function AvesMediaProvider({ children, assetBase = "", navigationPaths = 
   const opener = useRef<HTMLElement | null>(null)
   const play = useCallback((resource: Resource) => {
     if (!resource.playback) return
+    const active = document.activeElement
+    if (active instanceof HTMLElement && active !== document.body && !active.closest('[aria-label="AVES travel media player"]')) opener.current = active
     document.dispatchEvent(new CustomEvent("aves:media-request", { detail: resource.id }))
     if (currentId.current === resource.id && document.querySelector("audio[data-aves-resource-audio]")) {
       document.dispatchEvent(new CustomEvent("aves:resume-media", { detail: resource.id }))
@@ -179,6 +181,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
   reportPlaying: (playing: boolean) => void; initial: MediaHandoff | null; remember: (id: string, position: number, muted: boolean) => void
 }) {
   const audio = useRef<HTMLAudioElement>(null)
+  const expandControl = useRef<HTMLButtonElement>(null)
   const frame = useRef<HTMLDivElement>(null)
   const video = useRef<VideoPlayer | null>(null)
   const [playing, setPlaying] = useState(false)
@@ -284,8 +287,16 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
   }, [playback, remember, resource.id])
 
   function toggle() {
+    const retryFailedAudio = Boolean(error)
     setError("")
     if (audio.current) {
+      if (retryFailedAudio) {
+        const element = audio.current, resumeAt = element.currentTime
+        if (Number.isFinite(resumeAt) && resumeAt > 0) element.addEventListener("loadedmetadata", () => {
+          if (Number.isFinite(element.duration)) element.currentTime = Math.min(resumeAt, element.duration)
+        }, { once: true })
+        element.load()
+      }
       if (audio.current.paused) {
         document.querySelectorAll<HTMLMediaElement>("audio:not([data-aves-ambience]),video").forEach(item => { if (item !== audio.current) item.pause() })
         playForegroundMedia(audio.current).catch(() => setError("Unable to play. Try the original source below."))
@@ -300,11 +311,11 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
     else video.current?.mute()
     setMuted(!muted)
   }
-  return <aside onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); if (expanded) setExpanded(false); else close() } }} aria-label="AVES travel media player" className={`${styles.dock} ${expanded ? styles.expanded : ""}`}>
+  return <aside onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); if (expanded) { setExpanded(false); expandControl.current?.focus({ preventScroll: true }) } else close() } }} aria-label="AVES travel media player" data-aves-media-country={resource.country} data-aves-media-resource={resource.id} className={`${styles.dock} ${expanded ? styles.expanded : ""}`}>
     <div className={styles.heading}>
       <BrandBird country={resource.country} regionId={resource.regionId ?? (resource.country === "new-zealand" ? "south-island" : undefined)} placeId={resource.mapPlace?.id} size={36} />
-      <div className={styles.title}><span>{identity.country} · {resource.kind}</span><strong title={resource.title}>{resource.title}</strong></div>
-      <button className={styles.feather} onClick={() => setExpanded(!expanded)} aria-label={expanded ? "Compact player" : "Expand player"} title={expanded ? "Compact player" : "Expand player"}>{expanded ? <Minimize2 size={17} /> : <Maximize2 size={17} />}</button>
+      <div className={styles.title}><span>{identity.country} · {resource.kind}</span><strong id="aves-media-title" title={resource.title}>{resource.title}</strong></div>
+      <button ref={expandControl} className={styles.feather} onClick={() => setExpanded(!expanded)} aria-label={expanded ? "Compact player" : "Expand player"} title={expanded ? "Compact player" : "Expand player"}>{expanded ? <Minimize2 size={17} /> : <Maximize2 size={17} />}</button>
       <button className={styles.feather} onClick={close} aria-label="Close player and stop playback" title="Close and stop"><X size={18} /></button>
     </div>
     {/* This iframe stays in the same tree position when docking/expanding or
@@ -316,7 +327,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
       onDurationChange={event => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
       onError={() => { setPlaying(false); setError("Unable to load the recording. Try the original source below.") }} />}
     <div className={styles.controls}>
-      <button className={styles.feather} onClick={toggle} disabled={playback.type === "youtube" && !ready} aria-label={playing ? "Pause media" : "Play media"} title={playing ? "Pause" : "Play"}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
+      <button className={styles.feather} onClick={toggle} disabled={playback.type === "youtube" && !ready} aria-describedby="aves-media-title" aria-label={playing ? "Pause media" : "Play media"} title={playing ? "Pause" : "Play"}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
       {playback.type === "audio" && <div className={styles.seek}><label htmlFor="aves-media-seek" className="sr-only">Media position</label><input id="aves-media-seek" type="range" min={0} max={duration || 1} value={position} step={1} disabled={!duration} aria-valuetext={`${time(position)} of ${time(duration)}`} onChange={event => { if (audio.current) audio.current.currentTime = Number(event.target.value); setPosition(Number(event.target.value)) }} /><span>{time(position)} / {time(duration)}</span></div>}
       {playback.type === "youtube" && <span className={styles.videoHint}>DOC · YouTube</span>}
       <button className={styles.feather} onClick={toggleMute} disabled={playback.type === "youtube" && !ready} aria-label={muted ? "Unmute media" : "Mute media"} title={muted ? "Unmute" : "Mute"} aria-pressed={muted}>{muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>

@@ -309,7 +309,7 @@
       "previous": [
         6
       ],
-      "status": "Implemented; cross-country browser verification pending",
+      "status": "Implemented; expanded browser checks and title restoration under verification",
       "id": 29
     },
     {
@@ -319,7 +319,7 @@
       "previous": [
         7
       ],
-      "status": "Implemented; redundant pin targets removed, shared-selection browser verification pending",
+      "status": "Implemented; single region targets and explicit gallery label under verification",
       "id": 30
     },
     {
@@ -329,7 +329,7 @@
       "previous": [
         8
       ],
-      "status": "Implemented; enquiry context and receipt tests passed, browser verification pending",
+      "status": "Implemented; enquiry context and matching receipt tests passed, browser checks under verification",
       "id": 31
     },
     {
@@ -339,7 +339,7 @@
       "previous": [
         9
       ],
-      "status": "Open",
+      "status": "Implemented; atomic combined import and failure preservation tests passed, release checks pending",
       "id": 32
     },
     {
@@ -349,7 +349,7 @@
       "previous": [
         10
       ],
-      "status": "Open",
+      "status": "Implemented; photo, satellite and audio retry paths under verification",
       "id": 33
     },
     {
@@ -359,7 +359,7 @@
       "previous": [
         11
       ],
-      "status": "Open",
+      "status": "Implemented; media focus fixes and expanded overlay browser checks under verification",
       "id": 34
     },
     {
@@ -369,7 +369,7 @@
       "previous": [
         12
       ],
-      "status": "Open",
+      "status": "Implemented; playback country identity, stop and recovery checks under verification",
       "id": 35
     },
     {
@@ -1046,7 +1046,11 @@
     "currentBatch": [
       29,
       30,
-      31
+      31,
+      32,
+      33,
+      34,
+      35
     ],
     "publishedThrough": 28
   },

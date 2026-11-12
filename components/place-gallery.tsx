@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, type KeyboardEvent } from "react";
-import Image from "next/image";
+import RecoverablePhoto from "./recoverable-photo";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { galleryPhotos, type GalleryPhoto } from "@/lib/place-gallery";
 import type { DestinationRegion } from "@/content/destination-regions";
@@ -35,11 +35,11 @@ export default function PlaceGallery({countryId, countryName, regionId, regions,
   return <section id="place-gallery" aria-labelledby={`${id}-heading`} className="mt-7 scroll-mt-28">
     <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
       <div><h2 id={`${id}-heading`} className="text-2xl font-medium text-emerald-950">A window into {countryName}</h2><p className="mt-2 text-sm leading-6 text-gray-600">Explore reviewed landscapes by region. These photographs show places, not current conditions or promised wildlife.</p></div>
-      <label className="block text-sm text-emerald-950">Landscape region<select className="mt-1 block min-h-11 max-w-full rounded-xl border border-emerald-200 bg-white px-3" value={regionId} onChange={event => onRegionChange(event.target.value)}><option value="">All regions</option>{regions.map(item => <option key={item.id} value={item.id}>{item.name} ({galleryPhotos(countryId, item.id).length} photos)</option>)}</select></label>
+      <label className="block text-sm text-emerald-950">Landscape region<select aria-label="Landscape region" className="mt-1 block min-h-11 max-w-full rounded-xl border border-emerald-200 bg-white px-3" value={regionId} onChange={event => onRegionChange(event.target.value)}><option value="">All regions</option>{regions.map(item => <option key={item.id} value={item.id}>{item.name} ({galleryPhotos(countryId, item.id).length} photos)</option>)}</select></label>
     </div>
     {photo ? <><ExpandableMedia label={`${countryName} landscapes`} kind="place"><section className={styles.card} aria-label={`${countryName} places carousel`}>
       <div data-place-image className={styles.frame} tabIndex={0} onKeyDown={keydown}>
-        <PhotoZoom key={photo.src} label={photo.placeName}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 70vw" className={styles.image}/></PhotoZoom>
+        <PhotoZoom key={photo.src} label={photo.placeName}><RecoverablePhoto src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 70vw" className={styles.image}/></PhotoZoom>
         <div className={styles.top}><span className={styles.counter}><CarouselCount index={active + 1} total={photos.length}/></span></div>
         <div className={styles.arrows}><CarouselButton tone="overlay" aria-label="Previous landscape" title="Previous landscape" disabled={photos.length < 2} onClick={() => move(-1)}><ChevronLeft aria-hidden="true"/></CarouselButton><CarouselButton tone="overlay" aria-label="Next landscape" title="Next landscape" disabled={photos.length < 2} onClick={() => move(1)}><ChevronRight aria-hidden="true"/></CarouselButton></div>
         <div className={styles.caption} aria-live="polite"><p className="text-xs">{region?.name ?? photo.regionId}</p><h3 className="text-xl font-medium">{photo.placeName}</h3><p className="mt-1 text-xs">{photo.caption}</p><PhotoCredit key={photo.src} creator={photo.creator} sourceUrl={photo.sourceUrl} licence={photo.licence} licenceUrl={photo.licenceUrl} modifications={photo.modifications}/></div>

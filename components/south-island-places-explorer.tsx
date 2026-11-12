@@ -4,7 +4,7 @@
  * Place pins are public reference points, never wildlife sightings or boundaries.
  */
 import { useContext, useId, useReducer, useRef, useState } from "react"
-import Image from "next/image"
+import RecoverablePhoto from "./recoverable-photo"
 import {CarouselButton,CarouselCount} from "./carousel-controls"
 import PhotoCredit from "./photo-credit"
 import PhotoZoom from "./photo-zoom"
@@ -49,7 +49,7 @@ export default function SouthIslandPlacesExplorer() {
         if (event.target !== event.currentTarget) return
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); showSlide(active + (event.key === "ArrowRight" ? 1 : -1)) }
       }}>
-        <PhotoZoom key={photo.src} label={place.label}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 55vw" className={styles.image} /></PhotoZoom>
+        <PhotoZoom key={photo.src} label={place.label}><RecoverablePhoto src={photo.src} alt={photo.alt} fill sizes="(max-width: 623px) 100vw, 55vw" className={styles.image} /></PhotoZoom>
         <div className={styles.top}><span className={styles.counter}><CarouselCount index={active + 1} total={slides.length}/></span>
           <CarouselButton buttonRef={infoButton} tone="overlay" title="Place details & credits" aria-label="Place details & credits" aria-expanded={info} aria-controls={`${id}-info`} onClick={() => setInfo(index => index === active ? null : active)}><Info size={19} aria-hidden="true" /></CarouselButton>
         </div>
