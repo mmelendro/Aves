@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface BirdingEvent {
   id: string
@@ -22,7 +21,7 @@ interface BirdingEvent {
   location: string
   region: string
   dates2025: string
-  dates2026: string
+
   type: "festival" | "congress" | "fair" | "count" | "workshop" | "camp"
   description: string
   activities: string[]
@@ -42,15 +41,15 @@ const birdingEvents: BirdingEvent[] = [
     location: "Cali, Valle del Cauca",
     region: "Valle del Cauca",
     dates2025: "13–16 Feb 2025 (pre-fair activities from 11 Feb)",
-    dates2026: "12–15 Feb 2026",
+
     type: "fair",
     description:
       "Colombia's most important birding event, combining daily birding trips, conferences, workshops, a trade show and family activities.",
     activities: ["Daily birding trips", "Conferences", "Workshops", "Trade show", "Family activities"],
-    cost: "Workshops ~COP 200,000; trips ~COP 170,000–200,000 (2019 prices)",
+    cost: "Current cost not verified",
     website: "https://colombiabirdfair.com",
     organizer: "Colombia Birdfair Organization",
-    registrationInfo: "Monitor official website for 2026 registration updates",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["International speakers", "Premium birding locations", "Photography workshops", "Trade exhibitions"],
     difficulty: "all",
     featured: true,
@@ -61,14 +60,14 @@ const birdingEvents: BirdingEvent[] = [
     location: "Salento, Quindío",
     region: "Quindío",
     dates2025: "12–14 Sep 2025",
-    dates2026: "12–14 Sep 2026 (estimated)",
+
     type: "fair",
     description: "Second edition emphasizing ancestral themes with pre-sale discounts available until 30 July.",
     activities: ["Birdwatching routes", "Conferences", "Immersive concert", "Art workshops", "Scientific illustration"],
-    cost: "Conference pass COP 315,000; Scientific illustration workshop COP 108,000; Ceramics workshop COP 90,000; Immersive concert COP 112,500",
+    cost: "Current cost not verified",
     website: "https://salentobirdfair.com",
     organizer: "Salento BirdFair Committee",
-    registrationInfo: "Pre-sale discounts available until 30 July",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Coffee region birding", "Ancestral themes", "Art integration", "Cultural immersion"],
     difficulty: "all",
     featured: true,
@@ -79,15 +78,15 @@ const birdingEvents: BirdingEvent[] = [
     location: "Pereira, Risaralda",
     region: "Risaralda",
     dates2025: "20–24 Mar 2025",
-    dates2026: "20–24 Mar 2026 (estimated)",
+
     type: "festival",
     description:
       "Eighth edition featuring academic sessions, cultural activities, parades and community birdwatching routes named after emblematic species.",
     activities: ["Academic sessions", "Cultural parades", "Community birdwatching routes", "Educational talks"],
-    cost: "Registration fees not yet published",
+    cost: "Current cost not verified",
     website: "https://www.risaraldabirdfestival.com",
     organizer: "Risaralda Tourism Board",
-    registrationInfo: "Check official website for updates",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Community involvement", "Endemic species focus", "Cultural integration", "Educational emphasis"],
     difficulty: "all",
     featured: true,
@@ -98,15 +97,15 @@ const birdingEvents: BirdingEvent[] = [
     location: "Cali, Universidad del Valle",
     region: "Valle del Cauca",
     dates2025: "10–12 Dec 2025",
-    dates2026: "10–12 Dec 2026 (estimated)",
+
     type: "congress",
     description:
       "National ornithology congress organized by the Asociación Colombiana de Ornitología, serving as the principal academic forum for researchers and students.",
     activities: ["Research presentations", "Academic sessions", "Student forums", "Networking events"],
-    cost: "ACO members: COP 110,000 (students) / COP 200,000 (professionals); Non-members: COP 210,000 / COP 370,000",
+    cost: "Current cost not verified",
     website: "https://viiicongreso.asociacioncolombianadeornitologia.org",
     organizer: "Asociación Colombiana de Ornitología",
-    registrationInfo: "Different rates for ACO members and students",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Academic research", "Scientific networking", "Student participation", "Professional development"],
     difficulty: "advanced",
     featured: true,
@@ -117,15 +116,15 @@ const birdingEvents: BirdingEvent[] = [
     location: "Manizales, Caldas",
     region: "Caldas",
     dates2025: "14–16 Nov 2025",
-    dates2026: "14–16 Nov 2026 (estimated)",
+
     type: "congress",
     description:
       "Congress focusing on bird tourism, mixing academic sessions with practical birding workshops across Caldas bird-rich hotspots.",
     activities: ["Academic lectures", "Symposia", "Education forums", "Practical birding workshops"],
-    cost: "Registration details pending",
+    cost: "Current cost not verified",
     website: "https://www.avescaldas.com",
     organizer: "Aves Caldas",
-    registrationInfo: "Details to be announced",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Tourism focus", "Practical workshops", "Hotspot visits", "Industry networking"],
     difficulty: "intermediate",
     featured: true,
@@ -136,13 +135,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Pacific Coast",
     region: "Pacific Coast",
     dates2025: "15 Jan – 15 Feb 2025",
-    dates2026: "15 Jan – 15 Feb 2026 (estimated)",
+
     type: "count",
     description: "Citizen-science shorebird count along the Pacific coast.",
     activities: ["Shorebird counting", "Data collection", "Citizen science participation"],
-    cost: "Free citizen-science event",
+    cost: "Current cost not verified",
     organizer: "Colombian Ornithological Association",
-    registrationInfo: "Open to all volunteers",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Citizen science", "Shorebird focus", "Conservation data", "Coastal birding"],
     difficulty: "beginner",
     featured: false,
@@ -153,13 +152,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Nationwide",
     region: "National",
     dates2025: "1–16 Feb 2025",
-    dates2026: "1–16 Feb 2026 (estimated)",
+
     type: "count",
     description: "Nationwide waterfowl census as part of the Neotropical waterbird count.",
     activities: ["Waterfowl counting", "Wetland surveys", "Data recording"],
-    cost: "Volunteer count; no fee",
+    cost: "Current cost not verified",
     organizer: "Wetlands International",
-    registrationInfo: "Volunteer participation",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Wetland conservation", "International coordination", "Waterfowl focus", "Habitat monitoring"],
     difficulty: "beginner",
     featured: false,
@@ -170,13 +169,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Jericó, Antioquia",
     region: "Antioquia",
     dates2025: "7–9 Feb 2025",
-    dates2026: "7–9 Feb 2026 (estimated)",
+
     type: "festival",
     description: "Community fair with tours, talks and crafts celebrating local bird diversity.",
     activities: ["Community tours", "Educational talks", "Local crafts", "Cultural activities"],
-    cost: "Free or low-cost; excursion fees vary",
+    cost: "Current cost not verified",
     organizer: "Jericó Municipality",
-    registrationInfo: "Community event with open participation",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Community involvement", "Local culture", "Affordable participation", "Regional birds"],
     difficulty: "beginner",
     featured: false,
@@ -187,13 +186,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Mistrató, Risaralda",
     region: "Risaralda",
     dates2025: "21–23 Feb 2025",
-    dates2026: "21–23 Feb 2026 (estimated)",
+
     type: "festival",
     description: "Celebrates the endemic black-and-gold tanager with community activities.",
     activities: ["Endemic species focus", "Community celebrations", "Educational programs"],
-    cost: "Community festival; entry usually free with low-cost excursions",
+    cost: "Current cost not verified",
     organizer: "Mistrató Community",
-    registrationInfo: "Open community participation",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Endemic species", "Community celebration", "Conservation awareness", "Local involvement"],
     difficulty: "beginner",
     featured: false,
@@ -204,13 +203,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Laguna de la Cocha, Pasto (Nariño)",
     region: "Nariño",
     dates2025: "28 Feb – 2 Mar 2025",
-    dates2026: "28 Feb – 2 Mar 2026 (estimated)",
+
     type: "festival",
     description: "Wetland bird conservation festival at the Ramsar site.",
     activities: ["Wetland birding", "Conservation education", "Community involvement"],
-    cost: "Community festival; costs not published",
+    cost: "Current cost not verified",
     organizer: "Local Conservation Groups",
-    registrationInfo: "Community participation",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Ramsar wetland", "Conservation focus", "High-altitude birding", "Endemic species"],
     difficulty: "intermediate",
     featured: false,
@@ -221,13 +220,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Nationwide",
     region: "National",
     dates2025: "10 May 2025",
-    dates2026: "9 May 2026 (likely)",
+
     type: "count",
     description: "Global citizen-science bird count where Colombia consistently ranks among top countries.",
     activities: ["24-hour bird counting", "eBird submissions", "Team participation"],
-    cost: "Free participation",
+    cost: "Current cost not verified",
     organizer: "Cornell Lab of Ornithology",
-    registrationInfo: "Open to all participants via eBird",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Global participation", "Colombia leadership", "Citizen science", "Competition element"],
     difficulty: "all",
     featured: true,
@@ -238,13 +237,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Nationwide",
     region: "National",
     dates2025: "11 Oct 2025",
-    dates2026: "10 Oct 2026 (likely)",
+
     type: "count",
     description: "Global citizen-science bird count focusing on fall migration patterns.",
     activities: ["Migration monitoring", "Species counting", "Data contribution"],
-    cost: "Free participation",
+    cost: "Current cost not verified",
     organizer: "Cornell Lab of Ornithology",
-    registrationInfo: "eBird participation",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Migration focus", "Fall birding", "Global coordination", "Scientific contribution"],
     difficulty: "all",
     featured: false,
@@ -255,13 +254,13 @@ const birdingEvents: BirdingEvent[] = [
     location: "Nationwide",
     region: "National",
     dates2025: "14 Dec 2025 – 5 Jan 2026",
-    dates2026: "14 Dec 2026 – 5 Jan 2027 (estimated)",
+
     type: "count",
     description: "Nationwide Christmas bird counts following the traditional Christmas Bird Count format.",
     activities: ["Christmas bird counts", "Winter bird surveys", "Community participation"],
-    cost: "Free citizen-science counts",
+    cost: "Current cost not verified",
     organizer: "Colombian Ornithological Groups",
-    registrationInfo: "Local group coordination",
+    registrationInfo: "Check current arrangements with the organiser",
     highlights: ["Holiday tradition", "Winter birding", "Community involvement", "Long-term data"],
     difficulty: "all",
     featured: false,
@@ -287,7 +286,7 @@ export function BirdingCalendar() {
   const [selectedRegion, setSelectedRegion] = useState("All Regions")
   const [selectedType, setSelectedType] = useState("All Types")
   const [selectedDifficulty, setSelectedDifficulty] = useState("All Levels")
-  const [selectedYear, setSelectedYear] = useState("2025")
+  const selectedYear = "2025"
   // Favourites are temporary for this mount; they are not persisted to My Trips or storage.
   const [favorites, setFavorites] = useState<string[]>([])
   const [showFilters, setShowFilters] = useState(false)
@@ -343,21 +342,12 @@ export function BirdingCalendar() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Colombia Birding Events Calendar</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Colombia Birding Events Archive</h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-          Discover major birding festivals, ornithological congresses, and citizen science events across Colombia. Plan
-          your birding adventures with our comprehensive events calendar.
+          Explore past examples of birding festivals, congresses and citizen science events. The dates below are historical source entries, not a verified calendar of upcoming events. Confirm current dates, venue, access and costs directly with the organiser before planning travel.
         </p>
 
-        {/* Year Selector */}
-        <div className="flex justify-center mb-8">
-          <Tabs value={selectedYear} onValueChange={setSelectedYear} className="w-full max-w-md">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="2025">2025 Events</TabsTrigger>
-              <TabsTrigger value="2026">2026 Predicted</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
+        <p className="text-sm text-amber-900">Historical 2025 examples. No current registration, availability or price is confirmed.</p>
       </div>
 
       {/* Search and Filters */}
@@ -435,7 +425,7 @@ export function BirdingCalendar() {
       {/* Results Summary */}
       <div className="mb-6">
         <p className="text-gray-600">
-          Showing {filteredEvents.length} events for {selectedYear}
+          Showing {filteredEvents.length} historical examples from {selectedYear}
           {searchTerm && ` matching "${searchTerm}"`}
         </p>
       </div>
@@ -494,18 +484,18 @@ export function BirdingCalendar() {
         <h3 className="text-lg font-semibold text-blue-900 mb-3">Important Notes</h3>
         <ul className="text-blue-800 space-y-2 text-sm">
           <li>
-            • <strong>2026 dates are predictions</strong> based on 2025 patterns. Always verify with official sources.
+            • <strong>Upcoming dates are not verified here.</strong> The archive does not project annual dates.
           </li>
           <li>
             • <strong>Costs vary widely</strong> - from free community events to premium international fairs.
           </li>
           <li>
-            • <strong>Early registration discounts</strong> are common for major events.
+            • <strong>Registration and prices</strong> require current organiser confirmation.
           </li>
           <li>
             • <strong>Citizen science events</strong> like Global Big Day are free and open to all skill levels.
           </li>
-          <li>• Many local festivals may not have published their 2025-26 dates yet.</li>
+          <li>• An archived listing does not confirm that an event will recur.</li>
         </ul>
       </div>
     </div>
@@ -529,7 +519,7 @@ function EventCard({
   getEventTypeColor,
   getDifficultyColor,
 }: EventCardProps) {
-  const eventDates = selectedYear === "2025" ? event.dates2025 : event.dates2026
+  const eventDates = `Historical source date: ${event.dates2025}`
 
   return (
     <Card className="h-full hover:shadow-lg transition-shadow duration-300 relative">
@@ -603,7 +593,7 @@ function EventCard({
 }
 
 function EventDetails({ event, selectedYear }: { event: BirdingEvent; selectedYear: string }) {
-  const eventDates = selectedYear === "2025" ? event.dates2025 : event.dates2026
+  const eventDates = `Historical source date: ${event.dates2025}`
 
   return (
     <div className="space-y-6">
