@@ -32,7 +32,7 @@ test('the main conversation link follows all country previews and stays general 
  test.skip(info.project.name!=='desktop','Destination context')
  await page.goto('/');await declineOptionalCookies(page)
  const conversation=page.getByRole('link',{name:'Start a conversation',exact:true});await expect(conversation).toHaveAttribute('href','/contact?topic=general#inquiry')
- for(const [country,id] of [['Colombia','colombia'],['Australia','australia'],['New Zealand','new-zealand']]){await page.getByRole('button',{name:country,exact:true}).click();await expect(conversation).toHaveAttribute('href',new RegExp(`country=${id}`));if(id==='colombia'){await page.getByRole('combobox',{name:'Choose a region in Colombia',exact:true}).selectOption('central-andes');await expect(conversation).toHaveAttribute('href',/region=central-andes/)}}
+ for(const [country,id] of [['Colombia','colombia'],['Australia','australia'],['New Zealand','new-zealand']]){await page.getByRole('button',{name:country,exact:true}).click();await expect(conversation).toHaveAttribute('href',new RegExp(`country=${id}`));if(id==='colombia'){await page.getByRole('combobox',{name:'Map region',exact:true}).selectOption('central-andes');await expect(conversation).toHaveAttribute('href',/region=central-andes/)}}
 })
 test('the shared enquiry form protects edited answers and clears its guard after a stored receipt',async({page},info)=>{
  test.skip(!['desktop','phone-390'].includes(info.project.name),'Shared enquiry guard')
