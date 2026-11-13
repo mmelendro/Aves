@@ -2,6 +2,7 @@
 
 import {useEffect,useId,useRef,useState} from "react"
 import dynamic from "next/dynamic"
+import {JournalPreview} from "./journal-preview"
 import {TripTravelRecords} from "./trip-travel-records"
 import {TripMediaProvider,TripJournalMedia} from "./trip-journal-media"
 import {Button} from "@/components/ui/button"
@@ -94,7 +95,7 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
       </section>
       <section className="rounded-2xl border border-emerald-100 bg-white p-5"><Button type="button" variant="outline" aria-expanded={trash} onClick={()=>setTrash(!trash)}>Removed items ({data.tasks.filter(t=>t.deleted).length+data.entries.filter(e=>e.deleted).length})</Button>{trash&&<div className="mt-4 space-y-3"><p className="text-sm text-gray-600">Removed items stay private and can be restored. Save to keep a removal or restoration.</p>{data.tasks.filter(t=>t.deleted).map(t=><div key={t.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{t.title}</span><Button type="button" variant="outline" onClick={()=>task(t.id,{deleted:false})}>Restore preparation</Button></div>)}{data.entries.filter(e=>e.deleted).map(e=><div key={e.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{e.title}</span><Button type="button" variant="outline" onClick={()=>entry(e.id,{deleted:false})}>Restore journal entry</Button></div>)}</div>}</section>
     </fieldset>
-    <PrivateBirdAlbum planId={planId} country={country}/>
+    <JournalPreview data={data} country={country} ready={!dirty&&!busy&&!loading&&!failed}/><PrivateBirdAlbum planId={planId} country={country}/>
     <TripTravelRecords planId={planId} entries={data.entries} preparations={data.tasks} workspaceRevision={revision} workspaceSaved={!dirty&&!busy}/>
   </div></TripMediaProvider>
 }
