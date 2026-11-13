@@ -313,43 +313,43 @@ These are not invented requests for approval. Much of this work can continue aut
 
 69. Names and pronunciation
 
-   Acceptance: Verify Indigenous bird/place names where available, language or tradition, regional scope, spelling, diacritics, source and review date. Use attributed community/language-authority sources and permitted pronunciation references or audio. Never invent a name, translation, etymology or pronunciation. Extend the existing pilot. Previous audit IDs: 53. Status: Open.
+   Acceptance: Verify Indigenous bird/place names where available, language or tradition, regional scope, spelling, diacritics, source and review date. Use attributed community/language-authority sources and permitted pronunciation references or audio. Never invent a name, translation, etymology or pronunciation. Extend the existing pilot. Previous audit IDs: 53. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 70. Comprehensive species inventories and place connections
 
-   Acceptance: Extend the published national inventory into comprehensive sourced regional evidence, reconcile taxonomies, retain legitimate overlaps, and independently verify species/place/business/activity links. Commercial eBird access remains unresolved. National records are already published; regional completeness is not claimed. Previous audit IDs: 70. Status: Open.
+   Acceptance: Extend the published national inventory into comprehensive sourced regional evidence, reconcile taxonomies, retain legitimate overlaps, and independently verify species/place/business/activity links. Commercial eBird access remains unresolved. National records are already published; regional completeness is not claimed. Previous audit IDs: 70. Status: Partial: 177 exact dataset matches plus independently sourced links for all 13 Santa Marta-named species; 189 reviewed Sierra Nevada species; wider comprehensive regional coverage and commercial eBird access remain unresolved.
 
 71. Add unified search
 
-   Acceptance: Search countries, regions and reviewed places through a consistent interface. Previous audit IDs: 54. Status: Open.
+   Acceptance: Search countries, regions and reviewed places through a consistent interface. Previous audit IDs: 54. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 72. Save favourite places across trips
 
-   Acceptance: Use explicit owner-controlled saves and stable place records. Previous audit IDs: 55. Status: Open.
+   Acceptance: Use explicit owner-controlled saves and stable place records. Previous audit IDs: 55. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 73. Compare two saved itineraries
 
-   Acceptance: Present meaningful differences without fabricating missing prices or timings. Previous audit IDs: 56. Status: Open.
+   Acceptance: Present meaningful differences without fabricating missing prices or timings. Previous audit IDs: 56. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 74. Generate a downloadable trip pack
 
-   Acceptance: Include the itinerary and explicitly selected practical records with appropriate privacy. Previous audit IDs: 57. Status: Open.
+   Acceptance: Include the itinerary and explicitly selected practical records with appropriate privacy. Previous audit IDs: 57. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 75. Offer a lower-bandwidth mode
 
-   Acceptance: Use smaller images and restrained media loading while preserving usable maps and credits. Previous audit IDs: 58. Status: Open.
+   Acceptance: Use smaller images and restrained media loading while preserving usable maps and credits. Previous audit IDs: 58. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 76. Make AVES installable
 
-   Acceptance: Evaluate installation and offline behaviour after the essential saved-trip pilot. Previous audit IDs: 59. Status: Open.
+   Acceptance: Evaluate installation and offline behaviour after the essential saved-trip pilot. Previous audit IDs: 59. Status: Partial: manifest, icons, installation guidance and public offline-information pilot implemented; physical-device installation and essential hosted saved-trip acceptance remain.
 
 77. Complete English and Spanish consistency
 
-   Acceptance: Review maintained journeys, terminology, controls and original editorial copy. Previous audit IDs: 60. Status: Open.
+   Acceptance: Review maintained journeys, terminology, controls and original editorial copy. Previous audit IDs: 60. Status: Partial: bilingual search, preferences, bird stories and maintained Colombia controls improved; account, island-planning and wider editorial translation/review remain.
 
 78. Original bird storytelling
 
-   Acceptance: Write original, fact-checked bird stories with accurate local settings and source attribution; validate placement before a wider rollout. Previous audit IDs: 61. Status: Open.
+   Acceptance: Write original, fact-checked bird stories with accurate local settings and source attribution; validate placement before a wider rollout. Previous audit IDs: 61. Status: Published; runtime a7b8c1f, CI 43337012029: 734 unit and 100 browser checks passed; bounded scope documented.
 
 
 ## C. One initial owner briefing, records or product choice (10)
@@ -502,3 +502,17 @@ Items 66, 67 and 68 remain partial: original Colombian photo evidence is forthco
 Runtime `8f6920c9d0ab908d64f120307d10f7cad1ce8761`, deployment `dpl_H1uMZn5P7ZsbBiniAqmL9vENZ9h4`, on both `aves.bio` and `www.aves.bio`. [CI run 43315437439](https://github.com/mmelendro/Aves/actions/runs/43315437439). 721 unit tests and 93 browser checks pass; 57 project-specific checks intentionally skipped. Lint, TypeScript, production build, catalogue loading, deferred geometry, build budgets and the 422-module reachability check pass. Changed public pages and origin/privacy responses were checked after deployment. The CI browser suite covers the 78 public routes. Rollback for both domains: `dpl_6135M1kGFLySijKjrwHi9XRPigUN`. Database policies, authentication and consent configuration were not changed. No additional Colombia photograph or private trip data was published.
 
 Next batch: 69 to 78. Preserve all seven outstanding items and their evidence requirements. The Eco-Tourism Business Plan remains item 79, deferred until the independent product work and actual founder financial inputs are ready.
+
+## Batch 69 to 78 published, 13 November 2026 Sydney
+
+Items 69 to 78 were processed. Items 69, 71 to 75 and 78 are published. Search, private account favourites, saved-itinerary comparisons, selected trip packs, lower-bandwidth mode and two original bilingual bird stories are available. Four Indigenous-name records extend the existing pilot. There are 68 completed items among the first 78.
+
+Item 70 remains partial despite substantial new evidence: all 13 Santa Marta-named national inventory species now have independently sourced Sierra Nevada de Santa Marta links. A 177-species exact-match dataset extraction and primary range sources produce 190 evidence edges for 188 distinct species. Existing evidence brings the region's reviewed selection to 189. This is not a complete regional inventory, a new sighting, a photo-location record or a business relationship. Wider regional coverage and commercial eBird access remain unresolved.
+
+Items 76 and 77 remain partial: the public manifest and restricted offline-information pilot need physical-device installation and essential hosted saved-trip acceptance; full bilingual coverage still needs the account, island-planning and wider editorial journeys. Earlier items 45, 46, 52, 53, 66, 67 and 68 remain outstanding. The ten incomplete items among the first 78 are not retired or renumbered.
+
+Runtime `a7b8c1f5fa014e2e0b7a8872fe6cd93485cb75ab`, deployment `dpl_J3CrfGYqLeWcZUvpQvD87WQ2JS4B`, on both `aves.bio` and `www.aves.bio`. [CI run 43337012029](https://github.com/mmelendro/Aves/actions/runs/43337012029). 734 unit tests and 100 browser checks pass; 74 project-specific checks intentionally skipped. Lint, TypeScript, production build, catalogue loading, deferred geometry and build budgets pass. The local 440-module reachability check also passes. Changed live public pages, regional inventory, manifest/assets and anonymous private-access responses were checked. Rollback for both domains: `dpl_H1uMZn5P7ZsbBiniAqmL9vENZ9h4`.
+
+The additive owner-only favourites table is deployed as migration `20261112222359_account_place_favourites`; live RLS/privilege metadata is verified and no release-created traveller favourite is stored. Existing trip/Auth/consent settings are unchanged. The prepared hosted two-account rollback test did not run because its confirmation expired. Synthetic tests do not establish a real signed-in provider session.
+
+The authorised batches through 78 are now processed. Next is item 79, the professional Eco-Tourism Business Plan, with actual founder cash, pay, capacity and operating figures still required. Keep the ten unresolved acceptance scopes visible and do not invent financial inputs or participant evidence.
