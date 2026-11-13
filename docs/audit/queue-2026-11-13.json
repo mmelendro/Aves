@@ -280,7 +280,8 @@
       "previous": [
         45
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "acceptance": "Agree measurement and spending limits. Review the existing disabled leaked-password protection setting, confirm Supabase plan eligibility and project settings access before enabling it. The official feature is Pro plan and above; no plan upgrade or authentication setting change was made."
     },
     {
       "id": 25,
@@ -478,5 +479,21 @@
       20,
       35
     ]
+  },
+  "securityAdvisors": {
+    "reviewedOn": "2026-11-13",
+    "findings": [
+      {
+        "name": "rls_enabled_no_policy",
+        "level": "INFO"
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "level": "WARN",
+        "currentQueueItem": 24
+      }
+    ],
+    "source": "https://supabase.com/docs/guides/auth/password-security",
+    "scope": "Existing advisory types, retained explicitly for platform review. No paid feature was enabled."
   }
 }

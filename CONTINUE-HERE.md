@@ -15,3 +15,5 @@ Account and planner Spanish controls are published, including a tested multiline
 The current owner Eco Tourism Business Plan v3 and cash model remain authoritative. Actual cash, pay, costs and capacity stay unknown until supplied. No invitations, public private-journal sharing, actual test-data deletion or production restore are authorised by the audit request.
 
 See [the independent group evidence](docs/audit/INDEPENDENT-0-19-2026-11-13.md). The next owner decision is 20; do not invent figures to close it.
+
+Existing leaked-password-protection configuration remains visible under item 24. Confirm Supabase Pro eligibility, settings access and any cost decision before enabling it. The private RLS information is recorded in the queue; do not invent a completed security-setting change.

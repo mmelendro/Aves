@@ -60,3 +60,5 @@ CI initial gzip estimates: homepage 366440 / 367210 bytes, account 290280 / 3560
 Item 21 also retains the remaining commercial, cultural and legal Spanish editorial review. Old task 77 is not marked wholly complete. Old broad acceptance task 67 maps to real accounts (29), physical device checks (30) and independent visitor participation (31).
 
 The live browser review found a multiline translation lookup defect. A regression test and a separate item 19 correction were added, the complete release workflow reran successfully, then both domains moved to the corrected production build. Prior application deployment `dpl_2MTiqPsVevLD2PLUhiMA3BPjh7t2` is retained, alongside the pre-audit baseline `dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn`.
+
+The final Supabase security review reports the existing `rls_enabled_no_policy` information and `auth_leaked_password_protection` warning. The disabled password check remains under current item 24 for plan eligibility and project settings review. The [official password guidance](https://supabase.com/docs/guides/auth/password-security) lists this feature on Pro and above. No paid upgrade or Auth setting change was made.
