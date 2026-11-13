@@ -18,8 +18,10 @@ export const metadata: Metadata = publicMetadata({
 })
 
 const sections = [
+  { title: "Private Trip Tools and Downloads", text: "Favourite public places, checklist items, journal entries, practical travel records and bird albums are private account records. Album observations are owner entered and unverified. Removing an item inside a workspace keeps it recoverable until its parent draft is permanently deleted. The complete JSON backup includes saved sections, independent revisions, removed entries and the bird album, plus attachment metadata. Original attachment files and unsaved edits are excluded. A selected practical HTML pack includes only the saved itinerary, preparations and practical records you choose. It excludes journal entries, photographs and attachment files. Journal previews stay private and require your review before any future sharing. Downloads may contain private notes and booking references. Signing out does not remove files or printed copies from your devices or synced storage. Delete those copies yourself when no longer needed. The app does not cache private trips for offline editing." },
+
   { title: "Explore and Ask", text: "Destinations, bird profiles and trip styles help start a planning conversation. They do not confirm a departure, availability, access or wildlife sighting. Share your preferred country, regions, timing and interests so we can discuss the practical details." },
-  { title: "Saved Plans and Quote Requests", text: "One AVES account supports Australia and Colombia. You can save and edit a draft plan. Requesting a quote saves a snapshot for AVES to review; create a new draft if your plans change. A request does not reserve a place or create a booking." },
+  { title: "Saved Plans and Quote Requests", text: "One AVES account supports Australia, Colombia and the New Zealand planning beta. A saved trip keeps its original destination. You can save and edit a draft plan. Confirmed draft deletion permanently removes its related checklist, journal, practical records and bird album, after private uploads have been removed. Requesting a quote saves a snapshot for AVES to review; create a new draft if your plans change. A request does not reserve a place or create a booking." },
   { title: "Your Proposal", text: "A proposal sets out the suggested itinerary, price in Australian dollars (AUD), inclusions, exclusions and any stated validity date. Check those details with AVES. An issued proposal is visible in your account, with an email notification attempted. A revised proposal is a new version." },
   { title: "Before Any Booking", text: "Availability, dates, guides, group size, accommodation, access, inclusions and final booking arrangements must be confirmed directly with AVES. Any payment, cancellation or refund terms must be provided for the particular arrangement before you decide to book. This website does not accept payments or automatically confirm bookings." },
   { title: "Updates and Responsible Planning", text: "Optional trip news or launch-list signup does not reserve a place. Wildlife encounters depend on conditions and cannot be guaranteed. AVES aims to prepare for B Corp certification and is not currently certified." },
@@ -30,7 +32,7 @@ export default function TermsPage() {
     <NavigationHeader currentPage="/terms" />
     <main id="main-content" tabIndex={-1}>
       <PageIntroduction title="About Inquiries and Proposals" eyebrow="AVES" description="What happens between exploring a destination and discussing a booking with AVES.">
-        <p className="text-sm text-gray-500">Updated: 6 November 2026</p>
+        <p className="text-sm text-gray-500">Updated: 13 November 2026</p>
       </PageIntroduction>
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="prose prose-lg max-w-none">

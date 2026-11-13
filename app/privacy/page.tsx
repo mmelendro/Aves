@@ -18,6 +18,8 @@ export const metadata: Metadata = publicMetadata({
 })
 
 const sections = [
+  { title: "Private Trip Tools and Downloads", text: "Favourite public places, checklist items, journal entries, practical travel records and bird albums are private account records. Album observations are owner entered and unverified. Removing an item inside a workspace keeps it recoverable until its parent draft is permanently deleted. The complete JSON backup includes saved sections, independent revisions, removed entries and the bird album, plus attachment metadata. Original attachment files and unsaved edits are excluded. A selected practical HTML pack includes only the saved itinerary, preparations and practical records you choose. It excludes journal entries, photographs and attachment files. Journal previews stay private and require your review before any future sharing. Downloads may contain private notes and booking references. Signing out does not remove files or printed copies from your devices or synced storage. Delete those copies yourself when no longer needed. The app does not cache private trips for offline editing." },
+
   { title: "What You Share", text: "Inquiry forms collect your name, email and travel preferences, with optional details such as phone number, timing, group size, birding experience and a message. An account stores your email, saved plans, quote requests and proposal history. The optional New Zealand planning questionnaire stores your pace, birding frequency, accommodation preference, interests, desired bird species and notes in your private trip plan. Unsaved bird choices use this browser tab’s session storage for up to one day so you can carry them into a signed-in draft; only species identifiers and an expiry timestamp are stored there. Questionnaire answers and contact details are not stored in this browser basket. Saving the draft is a separate action, and signing out clears the basket. You choose when to share a submitted copy with authorized AVES staff; answers are not published. New Zealand notification emails link to the private owner inbox without including your answers. Share only the information needed for your trip conversation." },
   { title: "How AVES Uses It", text: "We use this information to respond to inquiries, manage your account, prepare proposals and keep a record of the conversation and your update preferences. A saved inquiry or quote request is not a booking or payment." },
   { title: "One Account Across Destinations", text: "Australia, Colombia and New Zealand use one AVES account and database. Private account records are not public; signed-in clients can access their own records. The authorised AVES owner can review submitted requests and prepare proposals. Draft plans can be edited or deleted in your account." },
@@ -35,7 +37,7 @@ export default function PrivacyPage() {
     <NavigationHeader currentPage="/privacy" />
     <main id="main-content" tabIndex={-1}>
       <PageIntroduction title="Privacy Notice" eyebrow="AVES" description="How AVES handles inquiries, accounts and trip planning, including the New Zealand planning beta.">
-        <p className="text-sm text-gray-500">Updated: 12 November 2026</p>
+        <p className="text-sm text-gray-500">Updated: 13 November 2026</p>
       </PageIntroduction>
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="prose prose-lg max-w-none">
