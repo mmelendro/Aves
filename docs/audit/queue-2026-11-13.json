@@ -27,7 +27,7 @@
       "id": 0,
       "group": "A",
       "title": "Consolidate the active queue and release metadata",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -35,7 +35,7 @@
       "id": 1,
       "group": "A",
       "title": "Protect the destination of a saved trip",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -43,7 +43,7 @@
       "id": 2,
       "group": "A",
       "title": "Include bird albums in the complete private backup",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -51,7 +51,7 @@
       "id": 3,
       "group": "A",
       "title": "Prune unavailable offline pack selections",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -59,15 +59,17 @@
       "id": 4,
       "group": "A",
       "title": "Allow confirmed deletion of unused drafts",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
-      "dependsOn": []
+      "dependsOn": [
+        2
+      ]
     },
     {
       "id": 5,
       "group": "A",
       "title": "Repair country navigation and cross page fragments",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -75,7 +77,7 @@
       "id": 6,
       "group": "A",
       "title": "Present tours as proposed personal itineraries",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -83,7 +85,7 @@
       "id": 7,
       "group": "A",
       "title": "Align public impact and relationship claims with evidence",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -91,7 +93,7 @@
       "id": 8,
       "group": "A",
       "title": "Make photo controls and credits accessible",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -99,7 +101,7 @@
       "id": 9,
       "group": "A",
       "title": "Describe current privacy and account behaviour",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -107,7 +109,7 @@
       "id": 10,
       "group": "A",
       "title": "Separate historical calendar examples from current events",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -115,7 +117,7 @@
       "id": 11,
       "group": "A",
       "title": "Make terrain controls work by touch",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -123,7 +125,7 @@
       "id": 12,
       "group": "A",
       "title": "Offer reviewed places in country journals",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -131,17 +133,19 @@
       "id": 13,
       "group": "A",
       "title": "Preview selected journal content privately",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [
         91
       ],
-      "dependsOn": []
+      "dependsOn": [
+        12
+      ]
     },
     {
       "id": 14,
       "group": "A",
       "title": "Protect unsaved plan edits",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": []
     },
@@ -149,37 +153,47 @@
       "id": 15,
       "group": "A",
       "title": "Complete Spanish sign in and saved plan controls",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [
         77
       ],
-      "dependsOn": []
+      "dependsOn": [
+        14
+      ]
     },
     {
       "id": 16,
       "group": "A",
       "title": "Complete Spanish private workspace controls",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [
         77
       ],
-      "dependsOn": []
+      "dependsOn": [
+        2,
+        3,
+        12,
+        13,
+        15
+      ]
     },
     {
       "id": 17,
       "group": "A",
       "title": "Complete Spanish New Zealand planner controls",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [
         77
       ],
-      "dependsOn": []
+      "dependsOn": [
+        15
+      ]
     },
     {
       "id": 18,
       "group": "A",
       "title": "Complete Jervis Bay and Australian overview imagery",
-      "status": "Implemented; final CI and publication pending",
+      "status": "Published and verified",
       "previous": [
         52,
         53
@@ -190,7 +204,7 @@
       "id": 19,
       "group": "A",
       "title": "Verify and publish the independent group",
-      "status": "In verification",
+      "status": "Published and verified",
       "previous": [],
       "dependsOn": [
         0,
@@ -324,6 +338,7 @@
       "status": "Open",
       "previous": [
         46,
+        67,
         68
       ],
       "dependsOn": [
@@ -352,6 +367,7 @@
       "title": "Observe an independent New Zealand planner trial",
       "status": "Open",
       "previous": [
+        67,
         97
       ],
       "dependsOn": [
@@ -415,5 +431,52 @@
       ]
     }
   ],
-  "verification": "docs/audit/INDEPENDENT-0-19-2026-11-13.md"
+  "verification": "docs/audit/INDEPENDENT-0-19-2026-11-13.md",
+  "release": {
+    "runtime": "bfe1192176813c4e273c1636d5fabc22807161e0",
+    "deployment": "dpl_FkVGxkbsQay9K36rDz9ZX1ei4Qbr",
+    "url": "aves-australia-b8wve0ugr-mmelendro-9273s-projects.vercel.app",
+    "baselineRuntime": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
+    "baselineDeployment": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
+    "firstRelease": "e7d1334edccf61b2f24dc151bd68ca45e5e60925",
+    "firstDeployment": "dpl_2MTiqPsVevLD2PLUhiMA3BPjh7t2",
+    "firstCiRun": 43357370463,
+    "firstCiJob": 131662505915,
+    "domains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
+    "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
+    "ciRun": 43359012336,
+    "ciJob": 131667812588,
+    "unitTests": 751,
+    "browserPassed": 109,
+    "browserSkipped": 101,
+    "focusedPassed": 9,
+    "focusedSkipped": 3,
+    "publicRoutesPassed": 81,
+    "sourceModules": 451,
+    "unreachable": 0,
+    "lintErrors": 0,
+    "lintWarnings": 32,
+    "publishedAt": "2026-11-13T03:42:47.319301+00:00",
+    "initialGzipBytes": {
+      "/page": 366440,
+      "/account/page": 290280,
+      "/new-zealand/north-island/page": 391512,
+      "/new-zealand/south-island/page": 393380
+    }
+  },
+  "activeScope": {
+    "completed": [
+      0,
+      19
+    ],
+    "nextOwnerDecision": 20,
+    "pending": [
+      20,
+      35
+    ]
+  }
 }

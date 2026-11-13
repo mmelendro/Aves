@@ -1,0 +1,38 @@
+{
+  "source": "working-tree",
+  "routes": [
+    {
+      "route": "/page",
+      "js": {
+        "raw": 1389044,
+        "gzip": 366440,
+        "brotli": 360467
+      }
+    },
+    {
+      "route": "/account/page",
+      "js": {
+        "raw": 1048049,
+        "gzip": 290280,
+        "brotli": 290740
+      }
+    },
+    {
+      "route": "/new-zealand/north-island/page",
+      "js": {
+        "raw": 1475141,
+        "gzip": 391512,
+        "brotli": 386487
+      }
+    },
+    {
+      "route": "/new-zealand/south-island/page",
+      "js": {
+        "raw": 1480246,
+        "gzip": 393380,
+        "brotli": 388417
+      }
+    }
+  ],
+  "deferredGeometryCheck": "passed"
+}

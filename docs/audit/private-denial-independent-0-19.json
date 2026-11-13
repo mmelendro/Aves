@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/api/account/plans",
+    "status": 401,
+    "cache": "private, no-store",
+    "type": "application/json",
+    "body": "{\"error\":\"Please sign in to continue.\"}"
+  },
+  {
+    "path": "/api/account/plans/a13b0801-1c6d-41d4-94da-12e3adeebf13/album",
+    "status": 401,
+    "cache": "private, no-store",
+    "type": "application/json",
+    "body": "{\"error\":\"Please sign in to continue.\"}"
+  },
+  {
+    "path": "/api/account/plans/a13b0801-1c6d-41d4-94da-12e3adeebf13/export",
+    "status": 401,
+    "cache": "private, no-store",
+    "type": "application/json",
+    "body": "{\"error\":\"Please sign in to continue.\"}"
+  },
+  {
+    "path": "/browser-fixtures/trip-editor",
+    "status": 404,
+    "cache": "public, max-age=0, must-revalidate",
+    "type": "text/html; charset=utf-8",
+    "body": "Public fixture route absent"
+  }
+]

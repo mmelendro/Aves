@@ -539,8 +539,9 @@
       "previous": [
         33
       ],
-      "status": "Pending external evidence: Booderee existing-image permission and acknowledgement must be resolved; no NSW substitutes",
-      "id": 52
+      "status": "Published through current queue item 18. Five licensed actual Jervis Bay Territory alternatives complete the gallery and nine-region overview.",
+      "id": 52,
+      "previousStatusBeforeNewAudit": "Pending external evidence: Booderee existing-image permission and acknowledgement must be resolved; no NSW substitutes"
     },
     {
       "group": "B",
@@ -549,8 +550,9 @@
       "previous": [
         34
       ],
-      "status": "Partial: eight reviewed regions represented; ninth collection depends on item 52",
-      "id": 53
+      "status": "Published through current queue item 18. Five licensed actual Jervis Bay Territory alternatives complete the gallery and nine-region overview.",
+      "id": 53,
+      "previousStatusBeforeNewAudit": "Partial: eight reviewed regions represented; ninth collection depends on item 52"
     },
     {
       "group": "B",
@@ -792,7 +794,7 @@
       "previous": [
         60
       ],
-      "status": "Partial: bilingual search, preferences, bird stories and maintained Colombia controls improved; account, island-planning and wider editorial translation/review remain",
+      "status": "Partial: account and New Zealand planner controls published through current items 15 to 17. Remaining source editorial Spanish review is current item 21.",
       "id": 77
     },
     {
@@ -932,7 +934,7 @@
       "previous": [
         73
       ],
-      "status": "Open",
+      "status": "Partial: owner-only selected journal preview published through current item 13. Actual selection and sharing review remain current item 28.",
       "id": 91
     },
     {
@@ -1028,23 +1030,44 @@
     }
   ],
   "release": {
-    "runtimeCommit": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
-    "deploymentId": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
-    "publishedDomains": [
+    "runtime": "bfe1192176813c4e273c1636d5fabc22807161e0",
+    "deployment": "dpl_FkVGxkbsQay9K36rDz9ZX1ei4Qbr",
+    "url": "aves-australia-b8wve0ugr-mmelendro-9273s-projects.vercel.app",
+    "baselineRuntime": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
+    "baselineDeployment": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
+    "firstRelease": "e7d1334edccf61b2f24dc151bd68ca45e5e60925",
+    "firstDeployment": "dpl_2MTiqPsVevLD2PLUhiMA3BPjh7t2",
+    "firstCiRun": 43357370463,
+    "firstCiJob": 131662505915,
+    "domains": [
       "aves.bio",
       "www.aves.bio"
     ],
-    "rollbackDeployment": "dpl_J3CrfGYqLeWcZUvpQvD87WQ2JS4B",
-    "unitTests": 741,
-    "browserPassed": 105,
-    "browserSkipped": 87,
+    "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
+    "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
+    "ciRun": 43359012336,
+    "ciJob": 131667812588,
+    "unitTests": 751,
+    "browserPassed": 109,
+    "browserSkipped": 101,
+    "focusedPassed": 9,
+    "focusedSkipped": 3,
     "publicRoutesPassed": 81,
-    "ci": "https://github.com/mmelendro/Aves/actions/runs/43344621251"
+    "sourceModules": 451,
+    "unreachable": 0,
+    "lintErrors": 0,
+    "lintWarnings": 32,
+    "publishedAt": "2026-11-13T03:42:47.319301+00:00",
+    "initialGzipBytes": {
+      "/page": 366440,
+      "/account/page": 290280,
+      "/new-zealand/north-island/page": 391512,
+      "/new-zealand/south-island/page": 393380
+    }
   },
   "activeScope": {
-    "queue": "queue-2026-11-13.json",
-    "from": 0,
-    "through": 19
+    "archived": true,
+    "currentQueue": "docs/audit/queue-2026-11-13.json"
   },
   "accessibilityRelease": {
     "runtime": "edffc49aa462045693a5839d8ef08859764f4a28",
@@ -1061,8 +1084,17 @@
     "rollback": "dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3"
   },
   "currentDelivery": {
-    "queue": "queue-2026-11-13.json",
-    "status": "Read-only audit complete. Independent group authorised."
+    "queue": "docs/audit/queue-2026-11-13.json",
+    "publishedGroup": [
+      0,
+      19
+    ],
+    "pending": [
+      20,
+      35
+    ],
+    "runtime": "bfe1192176813c4e273c1636d5fabc22807161e0",
+    "deployment": "dpl_FkVGxkbsQay9K36rDz9ZX1ei4Qbr"
   },
   "archived": true,
   "supersededBy": "docs/audit/queue-2026-11-13.json"

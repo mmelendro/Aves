@@ -50,3 +50,13 @@ A requires no owner input and is authorised for implementation and publication n
 Commit 26 preserves reviewed national inventories and regional matches. A common name containing Santa Marta is a review lead, not complete range evidence. Commit 25 distinguishes planned itinerary from actual travel and owner entered observations from verified records. Commit 29 must not restore over production. Commit 33 must not delete unidentified records. Invitations and public private-journal sharing are not authorised by this audit.
 
 Detailed findings are in source control and the chat list. New automated checks should target real failure modes rather than mirror implementation.
+
+## Verified release
+
+Independent group 0 to 19 is published on both aves.bio and www.aves.bio. Runtime `bfe1192176813c4e273c1636d5fabc22807161e0`, production deployment `dpl_FkVGxkbsQay9K36rDz9ZX1ei4Qbr`. [CI 43359012336](https://github.com/mmelendro/Aves/actions/runs/43359012336): 751 unit tests, 109 browser checks, 101 intentional project-specific skips. Nine focused checks also pass with three intentional skips. Lint: zero errors and 32 existing warnings. Production build, TypeScript, catalogue deferral, performance budgets and geometry checks pass. Source reachability: 451 modules, none unreachable. 81 public URLs pass the live HTTP/basic structure check. Anonymous private plans, album and export return application JSON 401 with private, no-store caching. The CI fixture route is 404 in production.
+
+CI initial gzip estimates: homepage 366440 / 367210 bytes, account 290280 / 356026. These are build estimates, not visitor speed. Live browser checks confirm proposal wording, table selection, photo disclosure and Escape focus, and Spanish multiline planning warnings. No auth, traveller data or application protection settings were changed for browser access. The staged host stayed protected.
+
+Item 21 also retains the remaining commercial, cultural and legal Spanish editorial review. Old task 77 is not marked wholly complete. Old broad acceptance task 67 maps to real accounts (29), physical device checks (30) and independent visitor participation (31).
+
+The live browser review found a multiline translation lookup defect. A regression test and a separate item 19 correction were added, the complete release workflow reran successfully, then both domains moved to the corrected production build. Prior application deployment `dpl_2MTiqPsVevLD2PLUhiMA3BPjh7t2` is retained, alongside the pre-audit baseline `dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn`.
