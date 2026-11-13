@@ -1,6 +1,6 @@
 # Shared explorer camera and hydrated text reflow
 
-Status: **awaiting complete CI; not published**. Exact candidate: `85ba58ee885b082bab48018e0fde1d30f46a2f70`. [CI 43526436679](https://github.com/mmelendro/Aves/actions/runs/43526436679).
+Status: **awaiting complete CI; not published**. Exact candidate: `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`. [CI 43528648162](https://github.com/mmelendro/Aves/actions/runs/43528648162).
 
 ## Scope
 
@@ -35,3 +35,7 @@ Rollback: `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`, source `a4acaedc130548eb3e94af9f86
 ## Remaining scope
 
 The specialist South Island habitat/itinerary map still has its own illustrated renderer and is the next R04 increment. Its LCDB/DOC geometry, habitat selection, places and itinerary behavior must survive any renderer change. The wider touch-label interaction, decorative motion, regional species/conservation evidence and Colombia journal remain separate roadmap items.
+
+### Final inventory-test correction
+
+CI 43526436679 passed every map and accessibility check, with 178 full-suite checks passing and one inventory locator failure: streamed markup briefly matched two conservation labels. The test now scopes the same status and species assertions to the accessible Tinamou result card (3c7d1ed). Six repeated phone/desktop checks passed locally; the corrected map-credit build also passed desktop/Firefox resizing and the full public-sitemap accessibility sweep. Full CI 43528648162 is required before publication. No failed candidate was deployed.

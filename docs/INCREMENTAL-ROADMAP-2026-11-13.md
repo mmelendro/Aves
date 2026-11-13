@@ -16,7 +16,7 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 | **Other local drafts** | Team/guide profiles, creator album/credits, About/copy/footer, admin-plan cleanup | Preserve and review as separate increments. Not included in the pushed feature candidate; no live deletion authorized |
 | **Content work queued** | Comprehensive regional evidence/status coverage, Colombia journal, stories, contribution invitations, drones and 3D | Existing national catalogues are substantial; regional evidence and verified conservation coverage remain incomplete. See R32 audit below |
 
-**Next action:** verify [CI 43526436679](https://github.com/mmelendro/Aves/actions/runs/43526436679) for exact candidate `85ba58ee885b082bab48018e0fde1d30f46a2f70`, then deploy to aves.bio only if every gate passes. This combines the text-reflow repair with the main explorer camera increment. The specialist South Island habitat map follows separately.
+**Next action:** verify [CI 43528648162](https://github.com/mmelendro/Aves/actions/runs/43528648162) for exact candidate `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, then deploy to aves.bio only if every gate passes. This combines the text-reflow repair with the main explorer camera increment. The specialist South Island habitat map follows separately.
 
 **Latest diagnostic and correction:** CI 43515115628 identified the landscape-region label/select as the concrete width offender: its box extended from x=16 to x=350 on a 320px screen. The label and select now have explicit bounded width and `min-width: 0`. The correction passed full CI and live checks; earlier cookie/map-containment attempts were insufficient.
 
@@ -63,7 +63,7 @@ Updated from the pasted Revamp conversation and subsequent requests on 13 Novemb
 
 **Latest live release:** `a4acaed`, deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`, on aves.bio. www redirects to that same canonical address. CI 43516111175 passed 782 unit tests, 33 priority journeys and 161 full-suite browser checks, with lint/types/build/audits/accessibility/budgets. Normal-width live region, inventory, photo and resize checks passed. The extended 200% text finding above remains open until the next candidate is deployed. The previous inventory release `231e8e9` remains a rollback reference, not the current release.
 
-**Current candidate:** `85ba58ee885b082bab48018e0fde1d30f46a2f70`, including ancestor `997fde8`, awaiting complete CI 43526436679. Background switching preserves geographic centre, scale, bounds, canvas dimensions and selected region in the main explorer. Fullscreen/resize retain centre and zoom; explicit location selection and Reset may change the camera. Country names in the planning world view appear on hover/focus. Do not claim completion for the separate South Island habitat map or the entire touch-label design.
+**Current candidate:** `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, including ancestor `997fde8`, awaiting complete CI 43528648162. Background switching preserves geographic centre, scale, bounds, canvas dimensions and selected region in the main explorer. Fullscreen/resize retain centre and zoom; explicit location selection and Reset may change the camera. Country names in the planning world view appear on hover/focus. Do not claim completion for the separate South Island habitat map or the entire touch-label design.
 
 **R31 live behavior:** desktop resizing from all map/guide edges and corners, bounded to the page. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Keyboard controls, Escape cancellation, Reset and narrow-screen stacking are live and verified. The camera increment adds exact geographic centre retention through fullscreen/resize. Team, creator, search-input and admin drafts remain separate.
 
@@ -159,7 +159,7 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R12 | Copy | Warm, light Spanish-inspired charm and discreet bird puns across discovery; factual range caveats retained quietly; broaden About beyond Colombia | Inventory copy live; About/footer/voice work remains |
 | R13 | Creator album | Photo/sound contributors browse as an album; exact source links; Nicolás filter and contributor attribution throughout | Draft |
 | R14 | Admin cleanup | Admin-only old-plan selection across all users, preview/count and explicit confirmation; ordinary users denied by server/database; verify owner admin access | Draft |
-| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; latest candidate requires full CI 43526436679 before deployment |
+| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; latest candidate requires full CI 43528648162 before deployment |
 | R16 | Species links | Canonical eBird links using verified exact taxonomy mapping; no guessed codes | Ready after core release |
 | R17 | Soundscapes | Review 15 source candidates; source/listen cards with locality, creator and licence; resolve seven regional gaps; compact follow-call control with clear playback errors | Research only |
 | R18 | Content growth | Reviewed regional/endemic coverage, better source images, place/business videos and guide introduction videos | Needs content |
@@ -230,3 +230,7 @@ For each increment record: scope, commit, acceptance evidence, deployment if any
 - docs/handoff/2026-11-13/HANDOFF.md: transferred repairs, map gaps, soundscape research and prior validation limits.
 - docs/AUDIT-QUEUE-2026-11-13.md and docs/audit/queue-2026-11-13.json: retained owner-dependent work and historical production record.
 - Local git status/log and saved test-results.txt/lint-results.txt inspected on 13 November 2026.
+
+### Final inventory-test correction
+
+CI 43526436679 passed every map and accessibility check, with 178 full-suite checks passing and one inventory locator failure: streamed markup briefly matched two conservation labels. The test now scopes the same status and species assertions to the accessible Tinamou result card (3c7d1ed). Six repeated phone/desktop checks passed locally; the corrected map-credit build also passed desktop/Firefox resizing and the full public-sitemap accessibility sweep. Full CI 43528648162 is required before publication. No failed candidate was deployed.
