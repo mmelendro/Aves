@@ -2,7 +2,7 @@ import "server-only"
 import {requireAccountUser} from "@/lib/account-auth"
 import {accountBody,accountHandler} from "./account-http"
 import {AccountError} from "./account-errors"
-import {requireOwnedTrip} from "./trip-workspace-handlers"
+import {requireOwnedTrip,requireOwnedTripDetails} from "./trip-workspace-handlers"
 import {albumSchema,albumWriteSchema,emptyAlbum,type BirdAlbum} from "./bird-album"
 import {getReferenceSpecies,isSpeciesCountry} from "./species-reference"
 import {countryRegionOptions,type TripCountry} from "@/content/trip-options"
@@ -24,10 +24,12 @@ function validBirds(data:BirdAlbum,country:TripCountry){
  })
 }
 export const albumGet=(id:string)=>accountHandler(async()=>{
- const {client,user}=await requireAccountUser();const country=await requireOwnedTrip(client,user.id,id)
+ const {client,user}=await requireAccountUser();const {country,details}=await requireOwnedTripDetails(client,user.id,id)
  if(!isSpeciesCountry(country))throw new AccountError(400,"This destination does not yet have a bird album catalogue.")
  const saved=await readAlbum(client,id)
- return {...saved,species:[...new Set(saved.data.birds.map(b=>b.speciesId))].map(id=>{const b=getReferenceSpecies(country,id);return {id,name:b?.commonName||"Species needs review",scientificName:b?.scientificName||""}})}
+ const ids:unknown[]=country==="new-zealand"&&Array.isArray(details?.questionnaire?.birdIds)?details.questionnaire.birdIds:[]
+ const wishes=[...new Set(ids)].flatMap(id=>{const b=typeof id==="string"?getReferenceSpecies(country,id):null;return b?[{id:b.id,name:b.commonName,scientificName:b.scientificName}]:[]})
+ return {...saved,species:[...new Set(saved.data.birds.map(b=>b.speciesId))].map(id=>{const b=getReferenceSpecies(country,id);return {id,name:b?.commonName||"Species needs review",scientificName:b?.scientificName||""}}),wishes,unmatchedWishCount:ids.length-wishes.length}
 })
 export const albumPut=(request:Request,id:string)=>accountHandler(async()=>{
  const {client,user}=await requireAccountUser(),body=await accountBody(request,albumWriteSchema)

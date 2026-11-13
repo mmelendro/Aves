@@ -3,7 +3,7 @@ import {useUnsavedChanges} from "./unsaved-changes"
 import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useRef,useState} from "react"
 import {accountRequest,errorMessage} from "./account-api"
-import {albumReceiptSchema,albumSchema,albumStateLabel,emptyAlbum,type AlbumBird,type BirdAlbum} from "@/lib/bird-album"
+import {albumReceiptSchema,albumSchema,appendDesiredWishes,albumStateLabel,emptyAlbum,type AlbumBird,type BirdAlbum} from "@/lib/bird-album"
 import {countryRegionOptions,type TripCountry} from "@/content/trip-options"
 type Species={id:string;commonName:string;scientificName:string}
 const field="mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-emerald-200 bg-white px-3 py-2"
@@ -12,8 +12,9 @@ export default function PrivateBirdAlbum({planId,country}:{planId:string;country
 
  const [data,setData]=useState<BirdAlbum>(emptyAlbum),[revision,setRevision]=useState(0),[loading,setLoading]=useState(true),[failed,setFailed]=useState(false),[busy,setBusy]=useState(false),[dirty,setDirty]=useState(false),[feedback,setFeedback]=useState("")
  const [query,setQuery]=useState(""),[matches,setMatches]=useState<Species[]>([]),[names,setNames]=useState<Record<string,string>>({}),[searching,setSearching]=useState(false),[selected,setSelected]=useState(""),[state,setState]=useState<AlbumBird["state"]>("desired")
+ const [wishes,setWishes]=useState<{id:string;name:string;scientificName:string}[]>([]),[selectedWishes,setSelectedWishes]=useState<string[]>([]),[unmatchedWishes,setUnmatchedWishes]=useState(0)
  const lock=useRef(false),serial=useRef(0)
- useEffect(()=>{let live=true;accountRequest<unknown>(`/api/account/plans/${planId}/album`).then(raw=>{const r=albumReceiptSchema.parse(raw);if(live){setData(r.data);setRevision(r.revision);setNames(Object.fromEntries((r.species||[]).map(s=>[s.id,s.name])));setFailed(false)}}).catch(e=>{if(live){setFeedback(errorMessage(e));setFailed(true)}}).finally(()=>{if(live)setLoading(false)});return ()=>{live=false}},[planId])
+ useEffect(()=>{let live=true;accountRequest<unknown>(`/api/account/plans/${planId}/album`).then(raw=>{const r=albumReceiptSchema.parse(raw);if(live){setData(r.data);setRevision(r.revision);setWishes(r.wishes??[]);setUnmatchedWishes(r.unmatchedWishCount??0);setNames(Object.fromEntries((r.species||[]).map(s=>[s.id,s.name])));setFailed(false)}}).catch(e=>{if(live){setFeedback(errorMessage(e));setFailed(true)}}).finally(()=>{if(live)setLoading(false)});return ()=>{live=false}},[planId])
  useUnsavedChanges(dirty,uiCopy("You have unsaved album edits. Leave and discard them?"))
  function change(next:BirdAlbum){setData(next);setDirty(true);setFeedback("")}
  function patch(id:string,p:Partial<AlbumBird>){change({...data,birds:data.birds.map(b=>b.id===id?{...b,...p}:b)})}
@@ -28,6 +29,8 @@ export default function PrivateBirdAlbum({planId,country}:{planId:string;country
   <p className="text-sm text-emerald-800">{active.filter(b=>b.state==="desired").length} {uiCopy(" desired · ")}{active.filter(b=>b.state==="observed").length} {uiCopy(" observed, unverified · 0 verified")}</p>
   <p className="text-sm">{uiCopy("Use broad regions. Keep nest sites and sensitive locations out of notes.")}</p>
   {dirty&&<p role="status">{uiCopy("You have unsaved album changes.")}</p>}{feedback&&<p role="status">{uiCopy(feedback)}</p>}
+  {wishes.length>0&&<details className="rounded-xl border border-emerald-200 p-4"><summary className="min-h-11 cursor-pointer">{uiCopy("Add saved bird wishes to this album")}</summary><p className="text-sm">{uiCopy("Select birds to add as desired. Existing observations stay unchanged. Review and Save bird album afterwards.")}</p><fieldset disabled={busy} className="max-h-72 overflow-auto">{wishes.map(b=><label key={b.id} className="flex min-h-11 items-center gap-3"><input type="checkbox" checked={selectedWishes.includes(b.id)} onChange={e=>setSelectedWishes(ids=>e.target.checked?[...ids,b.id]:ids.filter(id=>id!==b.id))}/>{b.name}</label>)}</fieldset><button type="button" disabled={busy||!selectedWishes.length} className="min-h-11 underline" onClick={()=>{const result=appendDesiredWishes(data,selectedWishes,wishes.map(b=>b.id));if(result.error){setFeedback(result.error);return}if(result.added)change(result.data);setNames(n=>({...n,...Object.fromEntries(wishes.map(b=>[b.id,b.name]))}));setSelectedWishes([]);setFeedback(result.added?"Selected wishes added as desired. Review and save your bird album.":"These birds are already active in this album. Existing records were preserved.")}}>{uiCopy("Add selected wishes as desired")}</button></details>}
+  {unmatchedWishes>0&&<p className="text-sm">{uiCopy("Some saved wishes need catalogue review before importing.")}</p>}
   <fieldset disabled={busy} className="space-y-4">
    <form className="flex flex-wrap items-end gap-3" onSubmit={e=>{e.preventDefault();void search()}}><label className="flex-1 min-w-0 text-sm">{uiCopy("Find a bird")}<input value={query} onChange={e=>{setQuery(e.target.value);setSelected("");setMatches([]);serial.current++;setSearching(false)}} maxLength={120} className={field}/></label><button className="min-h-11 rounded-lg border border-emerald-400 px-4" disabled={searching} type="submit">{searching ? uiCopy("Searching…") : uiCopy("Search birds")}</button></form>
    {matches.length>0&&<form className="grid gap-4 sm:grid-cols-2" onSubmit={e=>{e.preventDefault();if(!selected||data.birds.length>=100)return;change({...data,birds:[...data.birds,{id:crypto.randomUUID(),speciesId:selected,state,date:"",regionId:"",notes:"",deleted:false}]});setSelected("")}}>

@@ -17,7 +17,7 @@ const unavailable = () =>
     503,
     "Your trip workspace could not be confirmed. Keep your notes and try again.",
   );
-export async function requireOwnedTrip(
+export async function requireOwnedTripDetails(
   client: SupabaseClient,
   userId: string,
   id: string,
@@ -34,8 +34,9 @@ export async function requireOwnedTrip(
   if (!data) throw new AccountError(404, "This trip could not be found.");
   const country = data.details?.country ?? "australia";
   if (!isKnownTripCountry(country)) throw unavailable();
-  return country;
+  return {country,details:data.details};
 }
+export async function requireOwnedTrip(client:SupabaseClient,userId:string,id:string){return (await requireOwnedTripDetails(client,userId,id)).country}
 export async function readWorkspace(client: SupabaseClient, id: string) {
   const { data, error } = await client
     .from("trip_workspaces")
