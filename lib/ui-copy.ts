@@ -10,7 +10,7 @@ function messageTemplates(dictionary:Record<string,string>){
 export function translateUiCopy(text:string,dictionary:Record<string,string>,values:Record<string,string|number>={}){
  const normalized=text.replace(/\s+/g," ").trim();let translated=dictionary[normalized]
  if(!translated)for(const template of messageTemplates(dictionary)){const match=normalized.match(template.expression);if(match){translated=template.translated;template.keys.forEach((key,i)=>{translated=translated!.replaceAll(`{${key}}`,match[i+1])});break}}
- let result=translated?text.replace(normalized,translated):text
+ let result=translated?`${text.match(/^\s*/)?.[0]||""}${translated}${text.match(/\s*$/)?.[0]||""}`:text
  for(const [key,value] of Object.entries(values))result=result.replaceAll(`{${key}}`,String(value))
  return result
 }
