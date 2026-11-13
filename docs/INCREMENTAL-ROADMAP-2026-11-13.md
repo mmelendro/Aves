@@ -6,17 +6,17 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 **One public address:** https://aves.bio. The www spelling redirects to the same path and query on aves.bio (verified with the homepage and a Colombia bird-list URL). Future releases must update only the main domain deployment and preserve this redirect.
 
-**Additional live finding:** an extended, fully loaded 320px homepage check found horizontal overflow at 200% text. Earlier quick checks and CI did not catch this timing-sensitive case. A focused hydration/font-ready regression and repairs are in progress alongside the camera increment; no camera draft has been published.
+**Additional live finding:** an extended, fully loaded 320px homepage check found horizontal overflow at 200% text. Earlier quick checks and CI did not catch this timing-sensitive case. The repair is pushed as `997fde8`, with a hydration/font-ready regression. It is included in the next candidate; no camera draft has been published.
 
 | State | What is included | Evidence / next action |
 |---|---|---|
-| **Live and verified** | Carousel/map repairs, national inventories, region-aware AVES labels and bird-list links, all-edge desktop map/guide resizing, keyboard/reset controls and narrow-phone layout fix | Production `a4acaed` on both aves.bio and www.aves.bio; deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`. Full CI and live 320px/1365px checks passed |
+| **Live and verified** | Carousel/map repairs, national inventories, region-aware AVES labels and bird-list links, all-edge desktop map/guide resizing, keyboard/reset controls and narrow-phone layout fix | Production `a4acaed` on aves.bio (www redirects); deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`. Full CI and live 320px/1365px checks passed |
 | **Release gate passed** | Landscape-region dropdown no longer expands the phone page | CI 43516111175: 782 unit tests, 33 priority journeys, 161 full browser checks, lint/types/build/audits/accessibility passed. Both domain assignments independently verified |
 | **Next locally tested draft** | Bounded desktop search input, real header search submission and 200% text sizing | Production build plus 3 focused Chromium/Firefox checks pass. Still uncommitted; requires its own clean full release check |
 | **Other local drafts** | Team/guide profiles, creator album/credits, About/copy/footer, admin-plan cleanup | Preserve and review as separate increments. Not included in the pushed feature candidate; no live deletion authorized |
 | **Content work queued** | Comprehensive regional evidence/status coverage, Colombia journal, stories, contribution invitations, drones and 3D | Existing national catalogues are substantial; regional evidence and verified conservation coverage remain incomplete. See R32 audit below |
 
-**Next action:** develop and verify R04 camera continuity as a separate increment. A shared geographic canvas is in development for the main explorer; the specialist South Island habitat map requires its own follow-up. Do not publish either until the applicable full checks pass.
+**Next action:** verify [CI 43522860439](https://github.com/mmelendro/Aves/actions/runs/43522860439) for exact candidate `37afecd0091b5db2c13b9bbe3fc012341a8e72a0`, then deploy to aves.bio only if every gate passes. This combines the text-reflow repair with the main explorer camera increment. The specialist South Island habitat map follows separately.
 
 **Latest diagnostic and correction:** CI 43515115628 identified the landscape-region label/select as the concrete width offender: its box extended from x=16 to x=350 on a 320px screen. The label and select now have explicit bounded width and `min-width: 0`. The correction passed full CI and live checks; earlier cookie/map-containment attempts were insufficient.
 
@@ -24,9 +24,11 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 Switching Planning ↔ Satellite must change the map style only. Preserve geographic centre, zoom/ground scale, visible geographic extent, viewport size, and selected country/region/place in both directions. Example: a visitor viewing Colombia in the planning layer must see the same Colombia framing immediately after selecting satellite, without a world reset, extra pan or auto-fit. Preserve subsequent pan/zoom changes when switching back. Apply the same rule to other base layers, desktop/mobile, fullscreen and panel resizing; resizing may change visible extent with the new viewport, but must not silently reset the camera.
 
-Implementation should share geographic camera state between renderers (or use one renderer with multiple layers), rather than equating unrelated SVG scale and tile zoom values. Keep geographic size and framing consistent; decorative planning shapes must not force a different extent. Acceptance tests must switch both directions after country, region and place selection and after manual pan/zoom. This is **in development, not published**, prioritized ahead of decorative map motion.
+Implementation should share geographic camera state between renderers (or use one renderer with multiple layers), rather than equating unrelated SVG scale and tile zoom values. Keep geographic size and framing consistent; decorative planning shapes must not force a different extent. Acceptance tests must switch both directions after country, region and place selection and after manual pan/zoom. The main explorer implementation is **pushed and awaiting full CI, not published**. It preserves one geographic engine across Planning, Satellite, Roads and Topographic. The specialist South Island habitat/itinerary adapter remains a separate R04 follow-up.
 
 ### Pushed implementation commits
+
+Latest candidate: `997fde8` fixes hydrated text reflow; `37afecd` adds the shared geographic camera, reviewed planning-world geometry and browser regressions. Local evidence: 785 unit tests (including unrelated drafts), production build, source/cleanup audits, 18 final focused camera/reflow/region-selection checks across phone, Chromium and Firefox. Album, control, branding and resize journeys also passed in the broader run; an earlier Firefox movement-timing failure was corrected and rerun. Only exact-commit CI can authorize publication.
 
 | Commit | Increment | Publication status |
 |---|---|---|
@@ -59,11 +61,11 @@ Updated from the pasted Revamp conversation and subsequent requests on 13 Novemb
 
 ### Current candidate and deployment gate
 
-**Latest live release:** `231e8e9`, deployment `dpl_2eyPYqT6PZu3wvGbuuXu9kH9AJhu`, on both live domains. The inventory/search album passed CI 43462694524 (777 unit tests, 33 priority browser journeys and 157 full-suite browser checks), then live desktop/phone checks for all three national inventories, conservation sources and Spanish search navigation. The duplicate search photo/title link uncovered by the earlier run was combined into a single accessible destination link. See `docs/RELEASE-2026-11-14-INVENTORY-ALBUM.md`. Regional data completeness and new assessments remain open.
+**Latest live release:** `a4acaed`, deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`, on aves.bio. www redirects to that same canonical address. CI 43516111175 passed 782 unit tests, 33 priority journeys and 161 full-suite browser checks, with lint/types/build/audits/accessibility/budgets. Normal-width live region, inventory, photo and resize checks passed. The extended 200% text finding above remains open until the next candidate is deployed. The previous inventory release `231e8e9` remains a rollback reference, not the current release.
 
-**Current candidate:** `a4acaedc130548eb3e94af9f86b87674fb3a8e4f`, awaiting complete CI 43516111175. The earlier application snapshot `a4527a0` passed the isolated local 84-check matrix; Linux diagnostics subsequently identified the native landscape-region selector as the remaining width offender. Its label/select now have bounded width and can shrink. The newest correction is not yet fully verified or published.
+**Current candidate:** `37afecd0091b5db2c13b9bbe3fc012341a8e72a0`, including ancestor `997fde8`, awaiting complete CI 43522860439. Background switching preserves geographic centre, scale, bounds, canvas dimensions and selected region in the main explorer. Fullscreen/resize retain centre and zoom; explicit location selection and Reset may change the camera. Country names in the planning world view appear on hover/focus. Do not claim completion for the separate South Island habitat map or the entire touch-label design.
 
-**R31 candidate behavior:** desktop resizing from all map/guide edges and corners, bounded to the available page width. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Includes keyboard controls, Escape cancellation, Reset and a narrow-screen stacked fallback. Four new geometry tests pass; the local suite passes 785 tests including unrelated drafts. Exact-commit CI remains required. Restored team/creator content and admin drafts are separate unpublished work.
+**R31 live behavior:** desktop resizing from all map/guide edges and corners, bounded to the page. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Keyboard controls, Escape cancellation, Reset and narrow-screen stacking are live and verified. The camera increment adds exact geographic centre retention through fullscreen/resize. Team, creator, search-input and admin drafts remain separate.
 
 **Unpublished navigation draft:** the replacement desktop search input in `components/new-zealand-header.tsx` caused the two local enlarged-text failures. Its width is now bounded, the input can shrink, and focus no longer expands it. A new local production build and 3 focused browser checks pass: 200% text in Chromium/Firefox and real header search submission (1 intentional project skip). This remains excluded from the current release; retain the existing Search link in production until a separate exact-commit release check. The earlier broad local run otherwise passed 82 checks (12 intentional project skips).
 
@@ -103,7 +105,7 @@ Last documented production runtime is 43943bb, deployment dpl_49nEtSR46vpeufJSdL
 
 The saved local test run reports 780 tests: 769 passed and 11 failed. Lint stopped on missing eslint-plugin-react-hooks resolution. Subsequent edits mean these logs are historical diagnostics, not validation of the final candidate. Earlier passing CI applies to older source only.
 
-## Committed repairs awaiting release verification
+## Historical repair commit inventory
 
 | Commit | Scope |
 |---|---|
@@ -121,9 +123,9 @@ The saved local test run reports 780 tests: 769 passed and 11 failed. Lint stopp
 
 Old audit items 0–7 have corresponding repair commits; item 8 is partial because business-plan evidence still needs refreshing after release. Do not repeat the repairs or label them published without checking the candidate and deployment.
 
-## Proposed commit groups for current local changes
+## Recovered work groups
 
-These are review units, not commits already created. Shared files require selective staging and dependency review.
+These grouping IDs are retained for traceability. C1/C2 and the regional parts of C4 are already released; C3/C5 and the remaining navigation copy are unpublished drafts. Use the R states below for current priorities. Shared files require selective staging.
 
 | Group | Current files and purpose | Remaining completion |
 |---|---|---|
@@ -143,21 +145,21 @@ Status Draft means some local implementation exists but acceptance remains open.
 
 | ID | Category | Increment and acceptance | State |
 |---|---|---|---|
-| R01 | Release foundation | Resolve local dependency lookup; classify all 11 failures; verify geometry bytes without weakening integrity assertions | Repair release live; new candidate has one Linux phone blocker |
+| R01 | Release foundation | Resolve local dependency lookup; classify all 11 failures; verify geometry bytes without weakening integrity assertions | Original failures resolved and release live; new reflow/camera candidate awaits full CI |
 | R02 | Carousel | One compact album treatment across bird carousels, including Australia/NZ/article/standalone views; thumbnails; visible eyes; no empty oversized frame on load, slide or resize | Shared framing repairs live; continue visual refinement incrementally |
 | R03 | Map controls | Remove overlap and duplicate hand controls; one working zoom/reset/layers/fullscreen set on satellite, roads and topographic, including South Island | Core control repairs live; continued regression gate |
-| R04 | Map continuity | Planning ↔ Satellite must preserve geographic centre, scale, visible extent, viewport size and selected country/region/place. Colombia must remain identically framed when changing layers. Preserve manual pan/zoom in both directions; use shared geographic camera state, not unrelated SVG/tile zoom values. Also retain map/place continuity and honest media states | Newly clarified priority; exact layer-camera continuity not yet implemented |
+| R04 | Map continuity | Planning ↔ Satellite must preserve geographic centre, scale, visible extent, viewport size and selected country/region/place. Colombia must remain identically framed when changing layers. Preserve manual pan/zoom in both directions; use shared geographic camera state, not unrelated SVG/tile zoom values. Also retain map/place continuity and honest media states | Main explorer pushed in `37afecd`; 18 final focused checks pass; full CI pending. South Island habitat adapter remains |
 | R05 | Map finish | Layer menu positioning, keyboard/Escape, opacity zero, city labels/click-to-zoom, business address/map links; correct world frame without stretching geography | Core repairs live; broader polish remains |
 | R06 | Bird guide | Photo/video-first collectible cards with accessible identity/habitat/range reveal; concise copy and source disclosure; preserve search/filter/pagination and non-JS access | National album/reveal experience live; further media expansion queued |
 | R07 | Search | Search expands into focused silent input; visual album results; working empty states, query URLs and browser history | Visual results live; header input draft tested locally, not pushed |
 | R08 | Trip wishlist | Heart on shared cards; correct species IDs, login/save feedback and trip association; preserve existing wishes | Existing wishes preserved; continued integration work remains |
 | R09 | Team | Restore all recovered profiles and original links; compact profile carousel with portrait thumbnails, keyboard and mobile browsing | Local draft; not published |
-| R10 | Global navigation | Consistent menu/footer design for Colombia, Australia and NZ; locally relevant travel tips and regional links, including South Island; simplify Colombia where redundant. Location-aware logo label: AVES with the country name on country pages and the region name on regional pages (for example, AVES · Colombia → AVES · Sierra Nevada). On place pages retain the region beneath AVES and put the place name in the page heading. Keep the country available in a small breadcrumb on regional/place pages. Update from the current page or explicitly selected destination, never from map panning alone; verify mobile fit and navigation continuity | Regional labels/links pushed; combined release held; other navigation drafts remain |
-| R11 | Brand | Species-changing hover/focus bird with reduced motion; AVES leads home, bird leads to displayed species; global/country/region species selection backed by evidence | Implemented and pushed in regional candidate; not live |
+| R10 | Global navigation | Consistent menu/footer design for Colombia, Australia and NZ; locally relevant travel tips and regional links, including South Island; simplify Colombia where redundant. Location-aware logo label: AVES with the country name on country pages and the region name on regional pages (for example, AVES · Colombia → AVES · Sierra Nevada). On place pages retain the region beneath AVES and put the place name in the page heading. Keep the country available in a small breadcrumb on regional/place pages. Update from the current page or explicitly selected destination, never from map panning alone; verify mobile fit and navigation continuity | Regional labels and bird-list links live; inventory-filter context and other navigation drafts remain |
+| R11 | Brand | Species-changing hover/focus bird with reduced motion; AVES leads home, bird leads to displayed species; global/country/region species selection backed by evidence | Regional brand and separate home/species links live |
 | R12 | Copy | Warm, light Spanish-inspired charm and discreet bird puns across discovery; factual range caveats retained quietly; broaden About beyond Colombia | Inventory copy live; About/footer/voice work remains |
 | R13 | Creator album | Photo/sound contributors browse as an album; exact source links; Nicolás filter and contributor attribution throughout | Draft |
 | R14 | Admin cleanup | Admin-only old-plan selection across all users, preview/count and explicit confirmation; ordinary users denied by server/database; verify owner admin access | Draft |
-| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Blocked by Linux narrow-phone overflow; do not deploy current candidate |
+| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; latest candidate requires full CI 43522860439 before deployment |
 | R16 | Species links | Canonical eBird links using verified exact taxonomy mapping; no guessed codes | Ready after core release |
 | R17 | Soundscapes | Review 15 source candidates; source/listen cards with locality, creator and licence; resolve seven regional gaps; compact follow-call control with clear playback errors | Research only |
 | R18 | Content growth | Reviewed regional/endemic coverage, better source images, place/business videos and guide introduction videos | Needs content |
@@ -166,7 +168,7 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R21 | Reporting | Refresh release register, runbooks, audit and business-plan product evidence after validation | Roadmap/release records updated at this checkpoint |
 | R22 | Heading flock | Birds change their relative positions into flowing formations, rather than translating a rigid group; subtle wing variation; pause/reduce motion appropriately | Requested; not implemented |
 | R23 | Birds and map transition | One coherent switch inspired by the AVES/Birds word flip: page turn toward the guide, restrained globe-like turn toward the map only where it improves orientation. Keep controls stationary, preserve each view's state, prevent hidden-face interaction and offer an immediate reduced-motion switch. Check phone portrait/landscape and rapid repeated taps; do not intercept map gestures | UX direction selected; implementation pending |
-| R24 | Map labels | Overview country names hidden at rest, revealed on hover and keyboard focus. On touch, selection reveals the name and an explicit explore action. Accessible names remain present. Keep the selected label readable and avoid confusing the change with removal of useful city/place labels | Requested; implementation pending |
+| R24 | Map labels | Overview country names hidden at rest, revealed on hover and keyboard focus. On touch, selection reveals the name and an explicit explore action. Accessible names remain present. Keep the selected label readable and avoid confusing the change with removal of useful city/place labels | Planning-world hover/focus labels in camera candidate; touch explore flow and other renderers remain |
 | R25 | Trip evidence | Populate the first Colombia trip from the planning spreadsheet, saved eBird PDF, live report and AVES Colombia album. Use actual checklists to anchor the route; flag planning/calendar discrepancies and approximate photo matches | Public taxa/checklist source data retrieved; import pending |
 | R26 | Trip media | Curate best originals, preserve credits/capture dates and connect each to species, place and chapter where evidence supports it. Make the broader trip album browsable; inspect potentially personal media before public use | Existing Royann originals available; Google Photos album accessible, bulk download not confirmed |
 | R27 | Journal and public stories | A beautiful chronological journal with full species inventory, photo discoveries, linked map, visited places and verified guides; public highlights may use the existing blog with a story per trip section. Paladin: Learn History inspires short chapters and interactive discovery, without copying its branding | Requested; implementation pending |
@@ -174,9 +176,22 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R29 | Shared journey | Prepare eventual invitation/contribution experience for Lisa, Peter, Royann and Sylvain; use the Colombia journal as an introduction before shared South Island planning. Define read/contribute permissions and attribution | Future scope; no invitations sent or sending authorized |
 | R30 | Future media | Add user-supplied drone videos and 3D models to appropriate places/chapters with lightweight mobile previews | Waiting for assets |
 | R32 | Species coverage and conservation | Comprehensive sourced country checklists for Colombia, Australia and New Zealand, plus region-level occurrence lists. Include every supported species even without a local photograph; keep missing media distinct from absent species. Show conservation category, assessment/source date and source link; distinguish global IUCN status from national listings and explicitly label unassessed/unknown values. Preserve taxonomy IDs, synonyms and checklist scope; identify regional evidence gaps rather than inferring presence from country membership. Audit actual coverage/counts, then import and validate each country and its regions incrementally | P1 content priority after release repairs; requested |
-| R31 | Adaptive split view | Let visitors resize map and bird guide from all panel edges and corners on desktop, changing width and height; this is broader than a shared divider. The neighbouring panel and containing layout adapt without overlap, with the shared divider also available. Provide keyboard resizing, accessible separator values and reset. Enforce usable minimum panel sizes; use stacked panels or the existing view switch on narrow phones. Resize the map correctly, preserve camera/selected bird, keep bird eyes visible, and test touch, rotation, zoom and repeated changes. Deliver alongside R23 after P0 repair verification | Implemented and pushed; local and CI resize journeys pass; combined release held |
+| R31 | Adaptive split view | Let visitors resize map and bird guide from all panel edges and corners on desktop, changing width and height; this is broader than a shared divider. The neighbouring panel and containing layout adapt without overlap, with the shared divider also available. Provide keyboard resizing, accessible separator values and reset. Enforce usable minimum panel sizes; use stacked panels or the existing view switch on narrow phones. Resize the map correctly, preserve camera/selected bird, keep bird eyes visible, and test touch, rotation, zoom and repeated changes. Deliver alongside R23 after P0 repair verification | Live; local, full CI and live resize/reset journeys pass |
 
 The personal Spanish style note remains unfound; existing translation dictionaries are not that note. Nicolás consent was stated by the user; his exact Instagram account remains unresolved in the recovered chat. A filter is not a completed library import. Do not fabricate missing photographs, footage, biographies or regional presence.
+
+## Input-dependent work, easiest first
+
+Continue autonomous code and public-source work before requesting these inputs.
+
+| Order | Input needed | Work it unlocks |
+|---|---|---|
+| 1 | Exact Nicolás account/link and confirmation of contributor display names | Attribution/import pilot; no guessing accounts |
+| 2 | The original barranquero passage, if it cannot be recovered from the saved conversations | Faithful story voice; do not invent a recovered quotation |
+| 3 | Short physical-phone feedback and review of public guide/profile details | Device acceptance and people/creator publication |
+| 4 | Who may read/contribute and which media may be public | Journal sharing and invitation drafts; sending remains separately authorized |
+| 5 | Drone footage and 3D assets when available | Later place/chapter media |
+| 6 | Business facts, operating commitments and any explicit cleanup scope | Commercial/admin work; no deletion inferred |
 
 ## Retained business and owner-dependent backlog
 
@@ -194,9 +209,9 @@ All 19 remaining scopes from old audit 9–27 are retained here without renumber
 
 ## Incremental delivery sequence
 
-Immediate continuation: (1) verify the dropdown correction and publish the regional/resizing release only after all checks pass; (2) implement R04 planning/satellite camera continuity; (3) finish the locally tested desktop search draft and preserve identity through inventory filters; (4) grow R32 regional/conservation evidence in sourced batches; (5) finish flock and map-label polish; (6) review people/creator content; (7) assemble the Colombia journal. Each remains a separate tested increment. Retain the broader sequence below as the original dependency plan.
+Immediate continuation: (1) pass full CI for `37afecd`, publish and verify the reflow/main-camera increment; (2) carry the same camera contract into the South Island habitat/itinerary map; (3) finish the locally tested desktop search draft and inventory-filter identity; (4) grow R32 regional/conservation evidence in sourced batches; (5) flock, touch labels and transition polish; (6) review people/creator content; (7) assemble the Colombia journal. Keep commits and release evidence separate.
 
-1. Stabilize R01, then deliver R02–R05 as a visually checked discovery repair. These are the latest explicit blockers to publication.
+1. Continue R04 from the released repair foundation; retain full regression gates for R01–R05.
 2. Complete the album/search/wishlist experience R06–R08 using the shared carousel foundation.
 3. Finish team, contextual navigation, brand, copy and creators R09–R13 in small reviewable commits.
 4. Validate R14 separately because it changes administrative access and deletion capability. Do not let media polish conceal an unverified permission boundary.
