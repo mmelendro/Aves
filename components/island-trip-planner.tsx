@@ -684,10 +684,13 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <a
-                    href={context.mapAnchor}
+                    href={onSave?`/new-zealand/${context.id}${context.mapAnchor}`:context.mapAnchor}
+                    target={onSave?"_blank":undefined}
+                    rel={onSave?"noreferrer":undefined}
                     className={button}
                     aria-disabled={dirty}
                     onClick={(event) => {
+                      if(onSave)return;
                       if (dirty) {
                         event.preventDefault();
                         return;
@@ -703,7 +706,7 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                       });
                     }}
                   >
-                    {uiCopy("\n                    Preview your journey step by step\n                  ")}</a>
+                    {onSave ? uiCopy("Review the island map") : uiCopy("\n                    Preview your journey step by step\n                  ")}</a>
                   <button
                     type="button"
                     className={button}

@@ -15,11 +15,11 @@ function referenceImage(entry:CollectionEntry){
  if(!isSpeciesCountry(entry.country))return null
  if(entry.country==="new-zealand"){
   const m=nzChecklistMedia.get(entry.speciesId)
-  if(m)return {src:m.bird.image,kind:m.kind==="illustration"?"Reference illustration":"Reference photograph",creator:m.credit.creator,license:m.credit.license,sourceUrl:m.credit.sourceUrl,licenseUrl:m.credit.licenseUrl}
+  if(m)return {src:m.bird.image,kind:m.kind==="illustration"?"Reference illustration":"Reference photograph",creator:m.credit.creator,license:m.credit.license,sourceUrl:m.credit.sourceUrl,licenseUrl:m.credit.licenseUrl,location:m.credit.location,modifications:m.credit.modifications}
  }
  const guide=getReferenceSpecies(entry.country,entry.speciesId)?.guide,credit=guide&&imageCredits.images.find(i=>i.path===guide.image)
  if(!guide||!credit||!/^(?:CC BY|CC0|Public domain)/i.test(credit.license))return null
- return {src:guide.image,kind:"Reference photograph",creator:credit.creator,license:credit.license,sourceUrl:credit.sourceUrl,licenseUrl:credit.licenseUrl}
+ return {src:guide.image,kind:"Reference photograph",creator:credit.creator,license:credit.license,sourceUrl:credit.sourceUrl,licenseUrl:credit.licenseUrl,location:"location" in credit?String(credit.location):"",modifications:"modifications" in credit?String(credit.modifications):""}
 }
 export const birdCollectionGet=(request:Request)=>accountHandler(async()=>{
  const {client,user}=await requireAccountUser(),url=new URL(request.url),parsed=collectionQuerySchema.safeParse(Object.fromEntries(url.searchParams))
@@ -36,7 +36,8 @@ export const birdCollectionGet=(request:Request)=>accountHandler(async()=>{
  const term=query.q.normalize("NFKD").replace(/\p{M}/gu,"").toLowerCase()
  const matches=entries.filter(e=>(!query.country||query.country===e.country)&&(query.state==="all"||e[query.state])&&`${e.commonName} ${e.scientificName}`.normalize("NFKD").replace(/\p{M}/gu,"").toLowerCase().includes(term))
  const offset=Math.min(Math.floor(query.offset/24)*24,Math.max(0,Math.floor((matches.length-1)/24)*24)),page=matches.slice(offset,offset+24)
- let media:{id:string;plan_id:string;entry_id:string;creator:string;caption:string}[]=[],activeEntries=new Map<string,Set<string>>()
+ let media:{id:string;plan_id:string;entry_id:string;creator:string;caption:string}[]=[]
+ const activeEntries=new Map<string,Set<string>>()
  if(page.some(e=>e.references.some(r=>r.photoId))){
   const pagePlans=[...new Set(page.flatMap(e=>e.references.map(r=>r.planId)))]
   const [uploads,workspaces]=await Promise.all([client.from("trip_media").select("id,plan_id,entry_id,creator,caption").eq("user_id",user.id).in("plan_id",pagePlans).eq("state","ready").eq("kind","photo"),client.from("trip_workspaces").select("plan_id,data").in("plan_id",pagePlans)])

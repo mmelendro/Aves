@@ -1,7 +1,7 @@
 "use client"
 import dynamic from "next/dynamic"
 import {useEffect,useRef,useState} from "react"
-import {useUiCopy} from "@/components/ui-copy-context"
+import {UiText,useUiCopy} from "@/components/ui-copy-context"
 import {islandPlanners,islandPlanner} from "@/lib/island-planners"
 import {readPlannerRecovery} from "@/lib/planner-recovery"
 import {emptyItineraries,itineraryReceiptSchema,itinerariesSchema,replaceSavedRoute} from "@/lib/saved-itineraries"
@@ -10,7 +10,7 @@ import {accountRequest,errorMessage} from "./account-api"
 import {confirmDiscardPendingEdits} from "./unsaved-changes"
 import {MapLayerProvider} from "../map-layer-context"
 import {TripMapProvider} from "../trip-planner/trip-map-context"
-const IslandEditor=dynamic(()=>import("../island-trip-planner"),{loading:()=> <p role="status">Opening the itinerary editor…</p>})
+const IslandEditor=dynamic(()=>import("../island-trip-planner"),{loading:()=> <p role="status"><UiText source="Opening the itinerary editor…"/></p>})
 export default function SavedItineraryEditor({planId}:{planId:string}){
  const uiCopy=useUiCopy(),lock=useRef(false)
  const [saved,setSaved]=useState({revision:0,data:emptyItineraries()}),[incoming,setIncoming]=useState<TripDraft[]>([]),[loading,setLoading]=useState(true),[failed,setFailed]=useState(false),[busy,setBusy]=useState(false),[notice,setNotice]=useState(""),[attempt,setAttempt]=useState(0),[editing,setEditing]=useState<string|null>(null)

@@ -27,7 +27,7 @@ export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChe
       <HoverCardTrigger asChild>
         <DialogTrigger asChild>
           <button type="button" onBlur={() => { dismissUntilExit.current = false }} onPointerLeave={() => { dismissUntilExit.current = false }} onClick={() => setQuickLook(false)} aria-label={`View image and credits for ${name}`} className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-emerald-200 bg-emerald-50 text-xs text-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
-            {thumbnailFailed ? <span>Image unavailable</span> : <Image src={photo.bird.image} alt="" width={64} height={64} sizes="64px" loading="lazy" decoding="async" onError={() => setThumbnailFailed(true)} className="h-full w-full object-cover" />}
+            {thumbnailFailed ? <span>Image unavailable</span> : <Image src={photo.bird.image} alt="" width={64} height={64} loading="lazy" sizes="64px" decoding="async" onError={() => setThumbnailFailed(true)} className="h-full w-full object-cover" />}
             {photo.kind === "illustration" && <span className="absolute inset-x-0 bottom-0 bg-white/90 text-[9px]">Illustration</span>}
           </button>
         </DialogTrigger>
