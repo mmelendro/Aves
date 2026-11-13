@@ -99,3 +99,35 @@ The requested batches 35 to 44 and 45 to 54 are released. Technical items 36 to 
 Runtime `0e832635514f1ec2232f63d7776996ed64993d1e`, deployment `dpl_XmJLienyDhuJRqRrVBUweQUyGK1L`, on both aves.bio and www.aves.bio. [Release checks](https://github.com/mmelendro/Aves/actions/runs/43379516403): 770 unit tests, 118 full browser checks and 128 intentional project-specific skips. 14 focused checks pass with 4 intentional skips. Build, TypeScript, unchanged performance budgets, catalogue deferral, geometry and gallery snapshots pass. Lint: zero errors, 31 warnings. Source reachability: 470 modules, none unreachable.
 
 [Detailed evidence](audit/BATCHES-35-54-2026-11-13.md).
+
+## Design and flow release, 56 to 76
+
+All requested design and flow increments 56 to 76 are implemented, tested, synced to GitHub and published. The active queue now contains 60 completed scopes and 17 pending scopes. Items 20 to 35 and 55 remain open for actual figures, decisions, files, permissions or participation.
+
+Runtime `43943bb2740dfce0fafd43577ffbafec3037ed5a`, deployment `dpl_49nEtSR46vpeufJSdLncJ8r9i8Te`, on both aves.bio and www.aves.bio. [Release checks](https://github.com/mmelendro/Aves/actions/runs/43392941281): 775 unit tests, 128 full browser checks, 160 intentional project-specific skips. 24 focused checks pass with 8 intentional skips. TypeScript, production build, unchanged JavaScript budgets, catalogue deferral and geometry checks pass. Lint has zero errors and 31 warnings. Source reachability: 471 modules, none unreachable. Gallery snapshots remain reproducible.
+
+| Item | Scope | Status |
+|---|---|---|
+| 56 | Compact the My Trips dashboard | Published and verified |
+| 57 | Give the trip workspace clear sections and a Resume action | Published and verified |
+| 58 | Break planning into manageable stages | Published and verified |
+| 59 | Remove repeated destination introductions and self-links | Published and verified |
+| 60 | Expose Search consistently | Published and verified |
+| 61 | Place inventories inside their countries in the site tree | Published and verified |
+| 62 | Preserve destination context in Contact | Published and verified |
+| 63 | Fix nested navigation controls | Published and verified |
+| 64 | Prevent misleading collection results while filters load | Published and verified |
+| 65 | Recover failed reference photographs | Published and verified |
+| 66 | Replace technical receipt errors with useful recovery text | Published and verified |
+| 67 | Reduce repeated warnings through progressive disclosure | Published and verified |
+| 68 | Distinguish map preview from selected planning region | Published and verified |
+| 69 | Make recovered guest work visible | Published and verified |
+| 70 | Inventory duplicate assets before consolidation | Published and verified |
+| 71 | Extend cleanup checks beyond import reachability | Published and verified |
+| 72 | Format dense private-feature code and extract clear responsibilities | Published and verified |
+| 73 | Comment the important invariants and correct false comments | Published and verified |
+| 74 | Update the active architecture documentation | Published and verified |
+| 75 | Define the role of the design-review gallery | Published and verified |
+| 76 | Budget decoded HTML as well as initial JavaScript | Published and verified |
+
+[Evidence and cleanup decisions](audit/DESIGN-FLOW-56-76-2026-11-13.md).
