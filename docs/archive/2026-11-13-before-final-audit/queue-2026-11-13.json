@@ -1,0 +1,1300 @@
+{
+  "date": "2026-11-13",
+  "authority": "Current queue, explicitly renumbered from 0 at owner request. Previous IDs reference the archived 100 item roadmap. No completion is inferred from renumbering.",
+  "baseline": {
+    "runtimeCommit": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
+    "deploymentId": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
+    "publishedDomains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "rollbackDeployment": "dpl_J3CrfGYqLeWcZUvpQvD87WQ2JS4B",
+    "unitTests": 741,
+    "browserPassed": 105,
+    "browserSkipped": 87,
+    "publicRoutesPassed": 81,
+    "ci": "https://github.com/mmelendro/Aves/actions/runs/43344621251"
+  },
+  "sourceAudit": "All requested design and flow increments 56 to 76 are published and verified. Items 0 to 19 and 36 to 54 remain complete. Items 20 to 35 and 55 remain pending actual figures, decisions, source material, permissions or participation. Synthetic CI and public live verification do not close physical Safari, independent traveller acceptance or real two-account/restore proof.",
+  "groups": {
+    "A": "No new owner input required. Items 0 to 19, 36 to 54 and 56 to 76 are published and verified.",
+    "B": "Owner decisions or actual figures.",
+    "C": "Files permissions or authorised environment access.",
+    "D": "Participation actual feedback or later release decision."
+  },
+  "items": [
+    {
+      "id": 0,
+      "group": "A",
+      "title": "Consolidate the active queue and release metadata",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 1,
+      "group": "A",
+      "title": "Protect the destination of a saved trip",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 2,
+      "group": "A",
+      "title": "Include bird albums in the complete private backup",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 3,
+      "group": "A",
+      "title": "Prune unavailable offline pack selections",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 4,
+      "group": "A",
+      "title": "Allow confirmed deletion of unused drafts",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [
+        2
+      ]
+    },
+    {
+      "id": 5,
+      "group": "A",
+      "title": "Repair country navigation and cross page fragments",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 6,
+      "group": "A",
+      "title": "Present tours as proposed personal itineraries",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 7,
+      "group": "A",
+      "title": "Align public impact and relationship claims with evidence",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 8,
+      "group": "A",
+      "title": "Make photo controls and credits accessible",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 9,
+      "group": "A",
+      "title": "Describe current privacy and account behaviour",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 10,
+      "group": "A",
+      "title": "Separate historical calendar examples from current events",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 11,
+      "group": "A",
+      "title": "Make terrain controls work by touch",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 12,
+      "group": "A",
+      "title": "Offer reviewed places in country journals",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 13,
+      "group": "A",
+      "title": "Preview selected journal content privately",
+      "status": "Published and verified",
+      "previous": [
+        91
+      ],
+      "dependsOn": [
+        12
+      ]
+    },
+    {
+      "id": 14,
+      "group": "A",
+      "title": "Protect unsaved plan edits",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 15,
+      "group": "A",
+      "title": "Complete Spanish sign in and saved plan controls",
+      "status": "Published and verified",
+      "previous": [
+        77
+      ],
+      "dependsOn": [
+        14
+      ]
+    },
+    {
+      "id": 16,
+      "group": "A",
+      "title": "Complete Spanish private workspace controls",
+      "status": "Published and verified",
+      "previous": [
+        77
+      ],
+      "dependsOn": [
+        2,
+        3,
+        12,
+        13,
+        15
+      ]
+    },
+    {
+      "id": 17,
+      "group": "A",
+      "title": "Complete Spanish New Zealand planner controls",
+      "status": "Published and verified",
+      "previous": [
+        77
+      ],
+      "dependsOn": [
+        15
+      ]
+    },
+    {
+      "id": 18,
+      "group": "A",
+      "title": "Complete Jervis Bay and Australian overview imagery",
+      "status": "Published and verified",
+      "previous": [
+        52,
+        53
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 19,
+      "group": "A",
+      "title": "Verify and publish the independent group",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "id": 20,
+      "group": "B",
+      "title": "Complete actual business financials and investor edition",
+      "status": "Open",
+      "previous": [
+        79
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 21,
+      "group": "B",
+      "title": "Confirm current business roles and relationships",
+      "status": "Open",
+      "previous": [
+        77,
+        80
+      ],
+      "dependsOn": [],
+      "acceptance": "Confirm current names, roles and display permission. Review remaining source-authored commercial, cultural and legal Spanish editorial. Old task 77 is partial until this review and publication finish."
+    },
+    {
+      "id": 22,
+      "group": "B",
+      "title": "Confirm support hours capacity and backup",
+      "status": "Open",
+      "previous": [
+        81
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 23,
+      "group": "B",
+      "title": "Agree sharing consent and moderation rules",
+      "status": "Open",
+      "previous": [
+        90,
+        92,
+        94
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 24,
+      "group": "B",
+      "title": "Agree measurement and spending limits",
+      "status": "Open",
+      "previous": [
+        45
+      ],
+      "dependsOn": [],
+      "acceptance": "Agree measurement and spending limits. Review the existing disabled leaked-password protection setting, confirm Supabase plan eligibility and project settings access before enabling it. The official feature is Pro plan and above; no plan upgrade or authentication setting change was made."
+    },
+    {
+      "id": 25,
+      "group": "C",
+      "title": "Complete the evidenced Colombia trip album and journal",
+      "status": "Open",
+      "previous": [
+        66,
+        84,
+        85
+      ],
+      "dependsOn": [
+        23
+      ]
+    },
+    {
+      "id": 26,
+      "group": "C",
+      "title": "Complete supported regional species coverage",
+      "status": "Open",
+      "previous": [
+        70
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 27,
+      "group": "C",
+      "title": "Add original videos and editable bird models",
+      "status": "Open",
+      "previous": [
+        88
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 28,
+      "group": "C",
+      "title": "Review the selected trip story and invitation",
+      "status": "Open",
+      "previous": [
+        91,
+        93
+      ],
+      "dependsOn": [
+        13,
+        23,
+        25
+      ]
+    },
+    {
+      "id": 29,
+      "group": "C",
+      "title": "Prove isolated restore and two account separation",
+      "status": "Open",
+      "previous": [
+        46,
+        67,
+        68
+      ],
+      "dependsOn": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 30,
+      "group": "D",
+      "title": "Accept the experience on physical iPhone Safari",
+      "status": "Open",
+      "previous": [
+        67,
+        76,
+        96
+      ],
+      "dependsOn": [
+        11,
+        19
+      ]
+    },
+    {
+      "id": 31,
+      "group": "D",
+      "title": "Observe an independent New Zealand planner trial",
+      "status": "Open",
+      "previous": [
+        67,
+        97
+      ],
+      "dependsOn": [
+        19
+      ]
+    },
+    {
+      "id": 32,
+      "group": "D",
+      "title": "Address observed traveller feedback",
+      "status": "Open",
+      "previous": [
+        98,
+        99
+      ],
+      "dependsOn": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": 33,
+      "group": "D",
+      "title": "Remove specifically authorised disposable records",
+      "status": "Open",
+      "previous": [
+        89
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 34,
+      "group": "D",
+      "title": "Decide the first paid pilot",
+      "status": "Open",
+      "previous": [
+        95
+      ],
+      "dependsOn": [
+        20,
+        21,
+        22,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "id": 35,
+      "group": "D",
+      "title": "Select the next cycle using actual evidence",
+      "status": "Open",
+      "previous": [
+        100
+      ],
+      "dependsOn": [
+        24,
+        32,
+        34
+      ],
+      "review": "Reviewed for these two batches. Actual evidence dependencies 24, 32 and 34 remain open. See docs/audit/CYCLE-35-2026-11-13.md."
+    },
+    {
+      "id": 36,
+      "title": "Keep calendar dates unchanged across time zones",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "components/account/account-api.ts:55 anchors date-only strings at UTC noon. Source execution renders 2026-11-13 as 14 Nov 2026 in Pacific/Auckland, while UTC and Sydney render 13 Nov.",
+      "acceptance": "Separate calendar dates from timestamps. Test New Zealand summer and winter, Sydney, UTC and a negative UTC offset. Preserve legitimate timestamp localisation.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 37,
+      "title": "Recover guest itinerary edits and respect cleared bird wishes",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Live North Island journey generated a seven-day draft with entered allowances. Reload before handoff restored the five-day default. components/island-trip-planner.tsx:80,134,154,175 stores only when carrying to My Trips. Its restore path overlays only nonempty bird baskets, so an explicitly cleared basket can resurrect old wishes.",
+      "acceptance": "Provide an explicit, truthful tab recovery contract for generated routes and day edits. Preserve per-island separation, expiry, empty selections and blocked-storage feedback. Do not imply an account save.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 38,
+      "title": "Prevent copying an outdated itinerary",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Live seven-day North Island draft changed to six days. Carry was disabled, but Copy itinerary remained enabled and copied the seven-day route. components/island-trip-planner.tsx:173 guards carry, while :185 does not guard copy.",
+      "acceptance": "Copy must use the current reviewed draft or require rebuilding. Cover changes to days, dates, currency, allowances and bird wishes. Keep a readable fallback when clipboard access fails.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 39,
+      "title": "Carry valid longer routes without overflowing planning notes",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Source reproduction: valid 30-day South Island Christchurch to Queenstown route, 15 sourced bird wishes and four allowances creates 5,659 characters. mergeTripNotes rejects it even with empty notes because of its 5,000-character limit. Existing notes are correctly preserved.",
+      "acceptance": "Support a valid maximum-length draft through private handoff without silent truncation or dropped warnings. Preserve existing notes and an inspectable full route. Do not merely raise a client limit without checking API, database and backup contracts.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 40,
+      "title": "Price optional alternatives consistently",
+      "type": "Repair",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "lib/island-trip-planner.ts:432 counts primary and optional alternative experiences together. A valid three-day draft at 100 per experience increases from 300 to 400 after adding an alternative to day one. The workload and reference-price views describe that outing as an alternative.",
+      "acceptance": "Distinguish replacements from additional outings consistently in scheduling, allowance totals, copied output and reference comparisons. Leave free and unquoted references clearly distinct.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 41,
+      "title": "Apply world bird filters using each bird's country",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "components/homepage-destination-explorer.tsx:87,95 uses the default country, Colombia, to filter the combined world catalogue. Source reproduction returns five endemics rather than 45 combined country matches, and 22 native birds rather than 72. DestinationCardMedia and HomepageBirdCarousel repeat the country filter.",
+      "acceptance": "Retain country provenance through world filtering and the carousel. World counts must equal combined country results. Keep map highlighting, bird identity and sound context consistent.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 42,
+      "title": "Open the exact place selected in search or favourites",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "lib/discovery-index.ts:20 gives Cocora Valley, Nevado del Ruiz and Laguna del Otun the same regional gallery URL. components/place-gallery.tsx keeps photo choice only in memory. Favourites reuse the broad URLs.",
+      "acceptance": "Use validated stable place identifiers. Search, favourites, refresh and Back must focus the chosen public place and correct region without inventing precise wildlife coordinates. Check North and South Island place destinations too.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 43,
+      "title": "Protect unsaved album journal and media edits during navigation",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        14
+      ],
+      "evidence": "components/account/bird-album.tsx:16 and trip-workspace.tsx:34 use unload warnings only. They do not register with the shared unsaved-changes guard used by the plan editor. Logo/footer Next navigation and history can bypass unload. Source-evidenced gap, not a reproduced loss of real private data.",
+      "acceptance": "Register all dirty private editors with the shared guard. Test cancel and discard through logo, footer and Back. Successful saves must clear only the saved editor's warning.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 44,
+      "title": "Finish evidence-based wording in media credits and tour features",
+      "type": "Repair",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "content/birds-catalogue.json:19,100,129 retains AVES Guide appointments and obsolete partner fragments rendered by species-details-panel.tsx. Live tours still links maximum-four participation to minimal environmental impact and describes services without the point-of-use qualifications added to the price table.",
+      "acceptance": "Preserve creator attribution using neutral roles and valid reviewed links. Qualify proposed group size and unconfirmed services. Remove unsupported impact guarantees. Current appointments and commercial/editorial review remain item 21.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 45,
+      "title": "Use smaller existing renditions throughout the NZ bird picker",
+      "type": "Repair",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "components/new-zealand-checklist-photo.tsx:13,29 uses original image sources instead of the existing responsive-photo adapter. The kea original is 1,267,937 bytes despite an available 640-pixel rendition. This bypasses the lower-bandwidth preference. Source and asset-size finding, not measured visitor bandwidth.",
+      "acceptance": "Use existing responsive renditions for thumbnails, quick looks and dialogs. A fresh lower-bandwidth test must avoid the original, retain attribution and illustration labels, and recover from failed images.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 46,
+      "title": "Load country gallery data only when needed",
+      "type": "Performance",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Published homepage estimated initial gzip is 366,440 bytes against 367,210. lib/place-gallery.ts imports all gallery data and responsive-photo.tsx imports the full rendition map. Their source JSON files total 287,464 raw bytes. Raw source size is not emitted transfer size.",
+      "acceptance": "Defer noncurrent-country media data or pass bounded records from the server. Measure resulting production chunks without increasing budgets. Preserve switching, focus, credits, language and failure states.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 47,
+      "title": "Verify and publish the repaired planning journey",
+      "type": "Verification",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "evidence": "This audit found integration failures despite individually passing release checks. Existing release evidence remains valid for its original scopes, not these new findings.",
+      "acceptance": "Run focused regressions and required release checks, then follow a synthetic public route through recovery, copying and private handoff. Publish only passing changes, verify both domains and retain rollback. Real positive account, restore, Safari and independent-person acceptance remain 29 to 31.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 48,
+      "title": "Store an owned versioned editable itinerary",
+      "type": "New capability",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        39,
+        47
+      ],
+      "evidence": "Confirmed private save consumes the tab draft, while persisted itinerary content is prose. lib/island-trip-planner.ts already defines a validated structured draft. Saved plans currently do not retain that complete editable representation.",
+      "acceptance": "Add a bounded versioned owner-only itinerary contract with revision conflicts, destination validation, complete backup coverage and compatibility for existing prose-only plans. Additive migration, no fabricated legacy routes and no production restore.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 49,
+      "title": "Review and import structured travel preferences",
+      "type": "New capability",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        48
+      ],
+      "evidence": "trip-plan-editor.tsx:140 imports notes, bird IDs and regions, while timing, party and questionnaire preferences remain separate. Public allowances include currency, transport and per-experience basis that do not map directly to the private budget questions.",
+      "acceptance": "Preview dates, adults, rooms, currency, activity basis and transport preferences before explicit import. Preserve existing answers unless the owner chooses replacement. Never silently convert currency or reinterpret daily and per-experience figures.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 50,
+      "title": "Reopen and edit saved itinerary days",
+      "type": "New capability",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        48,
+        49
+      ],
+      "evidence": "Existing private comparison and notes editing work, but do not reopen the saved daily TripDraft in the island planner.",
+      "acceptance": "Reopen the owned saved route, edit days and save with conflict handling. Preserve notes, expenses and journal data. Changing a generated route must never claim to change an actual booking.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 51,
+      "title": "Include selected saved brief details in the offline pack",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        48,
+        49
+      ],
+      "evidence": "trip-pack-handler.ts reads complete details but sends only details.message and title into the renderer. A useful saved destination, timing, party or budget can be omitted if not repeated in notes. Existing selected tasks and practical records work.",
+      "acceptance": "Offer an explicit saved-brief selection covering destination, timing, party and entered budget with currency and basis. Include a saved structured route when selected. Preserve no-script offline behaviour, exclusions, revision checks and private-only delivery.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 52,
+      "title": "Add selected planning wishes to the private bird album",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        47
+      ],
+      "evidence": "The planning bird wishes and the private desired/observed album are separate working features. There is no explicit bridge for the owner to choose which wishes become album records.",
+      "acceptance": "Preview and add selected stable species IDs as desired only. Make repeated imports idempotent, preserve existing observations, apply catalogue and record limits, and never invent an observation date or sighting.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 53,
+      "title": "Link owned journal entries and photos to bird records",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        43,
+        52
+      ],
+      "evidence": "lib/bird-album.ts stores species, state, date, region and notes. Existing private media attaches to journal entries rather than bird records. This is a missing connection, not a missing uploader.",
+      "acceptance": "Let the owner explicitly link an existing journal entry or photo. Enforce same-owner and same-trip access, retain creator information and handle removed media. Photo linking grants no verified-sighting status. Original Colombia imports remain item 25.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 54,
+      "title": "Show a private bird collection across trips",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        52,
+        53
+      ],
+      "evidence": "bird-album.tsx and its handlers scope each working album to one plan. No owner-level view brings those albums together.",
+      "acceptance": "Show distinct desired and owner-observed species with linked trips, licensed reference or owned photos and clear no-photo states. Deduplicate stable IDs while retaining repeated observations. Name the catalogue denominator and award no verification, invented rarity or competitive score.",
+      "status": "Published and verified",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+    },
+    {
+      "id": 55,
+      "title": "Preview and reconcile a supplied eBird trip import",
+      "type": "New capability",
+      "priority": "Later",
+      "group": "C",
+      "dependsOn": [
+        23,
+        25,
+        26,
+        52
+      ],
+      "evidence": "The user intends to supply the trip report and originals. The current reviewed route is planned travel, not a source of actual daily records. No exact export schema, original sightings or reuse rights were supplied in this audit.",
+      "acceptance": "Once source prerequisites are supplied, map the actual export in a private dry run. Show matched species, unmatched taxonomy, dates, duplicate records and withheld sensitive places before an explicit import. Keep evidence and owner-entered status distinct and never publish automatically.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 56,
+      "title": "Compact the My Trips dashboard",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Show title, destination, timing, last update and one primary Open trip action. Collapse full notes and secondary actions. Confirm ten long plans remain easy to scan.",
+      "originalEvidence": "Full notes and questionnaire answers render in every plan card. The current notes allowance can reach 60,000 characters. Return visits should open a useful overview, not an entire document.",
+      "evidenceKind": "Source + live account review",
+      "sourceBeforeImplementation": "components/account/account-dashboard.tsx:114",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 57,
+      "title": "Give the trip workspace clear sections and a Resume action",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Use a clear workspace name and accessible Overview, Route, Checklist, Journal, Album and Offline pack navigation. Reopening a trip should make the next action obvious without auto-changing records.",
+      "originalEvidence": "The dashboard entry still says Open checklist and journal although the destination now includes editable routes and other trip tools.",
+      "evidenceKind": "Source + live account review",
+      "sourceBeforeImplementation": "components/account/account-dashboard.tsx:114",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 58,
+      "title": "Break planning into manageable stages",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Separate preferences, route comparison and day editing. Keep a compact route summary and accessible map return. Preserve all current choices and source checks.",
+      "originalEvidence": "A recovered six-day North Island page measured about 14,065 pixels and 4,056 visible main-content words at the audited desktop viewport. That is one state, not every visit.",
+      "evidenceKind": "Live desktop measurement",
+      "sourceBeforeImplementation": "components/island-trip-planner.tsx",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 59,
+      "title": "Remove repeated destination introductions and self-links",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Keep the map first. Make the homepage a concise preview with a clear country entry. Remove same-page Explore calls and duplicate paragraphs while retaining bird/map context.",
+      "originalEvidence": "The homepage expands a country guide, then its country page repeats the explorer, introduction and selected-place introduction. New Zealand contains an Explore New Zealand link back to the same page.",
+      "evidenceKind": "Live navigation",
+      "sourceBeforeImplementation": "components/homepage-destination-explorer.tsx",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 60,
+      "title": "Expose Search consistently",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Add a visible desktop Search action and test keyboard access without crowding the mobile header.",
+      "originalEvidence": "The default desktop header shows only the first three navigation entries. Search is available in the mobile menu and footer.",
+      "evidenceKind": "Source + live navigation",
+      "sourceBeforeImplementation": "components/new-zealand-header.tsx:42",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 61,
+      "title": "Place inventories inside their countries in the site tree",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Each country branch should expose Regions, Birds and available Planning. Keep shared Search/Display separate from About/Help/Legal. Reuse existing canonical routes.",
+      "originalEvidence": "All three national bird inventories appear under Website information, alongside settings and legal pages.",
+      "evidenceKind": "Source + live site-map expansion",
+      "sourceBeforeImplementation": "lib/public-navigation.ts:28",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 62,
+      "title": "Preserve destination context in Contact",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Build contextual enquiries through one helper. Confirm Colombia, Australia, New Zealand and global entries retain the appropriate country and never imply a booking.",
+      "originalEvidence": "The shared footer Contact AVES link always points to the Australian contact route with a general topic. It loads, but loses the selected destination.",
+      "evidenceKind": "Source + live link inspection",
+      "sourceBeforeImplementation": "components/global-navigation.tsx:46",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 63,
+      "title": "Fix nested navigation controls",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Use a single styled link or Button asChild. Confirm one keyboard focus target and correct navigation per action.",
+      "originalEvidence": "Australian tour templates nest a default button inside a link. This is invalid interactive composition, even though previous accessibility tests passed elsewhere.",
+      "evidenceKind": "Source confirmed, not live reproduced",
+      "sourceBeforeImplementation": "app/australia/[...slug]/page.tsx:38",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 64,
+      "title": "Prevent misleading collection results while filters load",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Associate results with request parameters. Mark previous results clearly or replace them with a stable loading state. Test slow, failed and out-of-order requests and expired sessions.",
+      "originalEvidence": "Collection data remains rendered after country/state/search changes and after request errors. The selected filters can describe a different set of cards.",
+      "evidenceKind": "Source confirmed",
+      "sourceBeforeImplementation": "components/account/bird-collection.tsx:23",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 65,
+      "title": "Recover failed reference photographs",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Offer explicit retry for both photo types. Preserve credits and text during failure. Test failed reference image, retry success and preference changes.",
+      "originalEvidence": "Collection reference-photo failure hides the image, but only owner photos have a retry control. Refresh keeps the same child key and can retain failure state.",
+      "evidenceKind": "Source confirmed",
+      "sourceBeforeImplementation": "components/account/bird-collection.tsx:14",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 66,
+      "title": "Replace technical receipt errors with useful recovery text",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Map malformed API receipts to concise recovery messages. Preserve unsaved content, actionable field errors and authentication/conflict distinctions.",
+      "originalEvidence": "Zod receipt parsing errors can reach errorMessage and expose technical validation text. Validation should remain strict; its visitor-facing message should be clear.",
+      "evidenceKind": "Source confirmed",
+      "sourceBeforeImplementation": "components/account/account-api.ts:65",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 67,
+      "title": "Reduce repeated warnings through progressive disclosure",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Keep short safety and booking limitations at the decision point. Group detailed source/access material in labelled disclosures. Do not hide biodiversity precautions or turn unconfirmed references into promises.",
+      "originalEvidence": "Planner descriptions repeat source, access, price and booking qualifications across controls, generated days and the directory. These facts matter, but repetition obscures the decisions.",
+      "evidenceKind": "Live reading + source review",
+      "sourceBeforeImplementation": "components/island-trip-planner.tsx",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 68,
+      "title": "Distinguish map preview from selected planning region",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Label preview versus selected planning region and explain the action that commits a region. Test gallery arrows, region selection, Back and reload together.",
+      "originalEvidence": "On the New Zealand country page, a gallery preview can highlight South Island while the region selector remains All featured birds and the landscape selector says All regions. This supports photo/map coordination but makes the different states unclear.",
+      "evidenceKind": "Live state observation",
+      "sourceBeforeImplementation": "components/homepage-destination-explorer.tsx",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 69,
+      "title": "Make recovered guest work visible",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Show a compact recovered-this-tab notice with Continue and explicit Start again. Keep account saves distinct. Do not add automatic emails or new tracking.",
+      "originalEvidence": "Guest choices recover automatically from tab storage without a clear recovered-draft cue. Existing text explains the one-day tab limit, but a returning visitor has little indication of why old values appeared.",
+      "evidenceKind": "Live reload + source review",
+      "sourceBeforeImplementation": "components/island-trip-planner.tsx:90",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 70,
+      "title": "Inventory duplicate assets before consolidation",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Map files to live references, provenance records and compatibility URLs. Consolidate only proven redundant storage. Preserve the independent Australia branch and old working image URLs.",
+      "originalEvidence": "SHA-256 review found 392 identical-file groups representing 11,750,378 extra repository bytes, largely Australian mirrors. This is not measured visitor transfer waste.",
+      "evidenceKind": "Fresh content-hash scan",
+      "sourceBeforeImplementation": "public/",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 71,
+      "title": "Extend cleanup checks beyond import reachability",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Add separate route-purpose, export/dependency and asset-reference inventories. Review findings manually before deletion. Do not equate an unlinked route with an unused module.",
+      "originalEvidence": "The current audit finds 470 modules and none unreachable, but treats every app route as a root. It cannot prove no unused exports, dependencies, assets or redundant reachable pages remain.",
+      "evidenceKind": "Fresh audit + script review",
+      "sourceBeforeImplementation": "scripts/audit-source.mjs",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 72,
+      "title": "Format dense private-feature code and extract clear responsibilities",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Format first, then extract coherent filters/cards/import controls and pack sections. Preserve owner, trip, revision, receipt and backup contracts. No broad rewrite of working logic.",
+      "originalEvidence": "Bird album, collection and pack code compress async state, validation and large render expressions into very long lines. This raises review and maintenance effort.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "components/account/bird-album.tsx",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 73,
+      "title": "Comment the important invariants and correct false comments",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Explain why critical rules exist. Correct inaccurate comments. Avoid narrating every obvious statement or adding comments that duplicate code.",
+      "originalEvidence": "Some code needs explanations of replay/revision rules, historical IDs and country-specific identities. The account shell calls itself a server component despite use client.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "components/account/account-shell.tsx:1",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 74,
+      "title": "Update the active architecture documentation",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "State current app, route, deployment and account boundaries clearly. Archive dated decisions without erasing their history. Correct stale file paths and New Zealand directory labels.",
+      "originalEvidence": "The architecture document still describes separately deployed roots and an unshipped site tree, while the current application and released tree differ. Shared-account comments also retain old architecture wording.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "docs/SITE-ARCHITECTURE.md:9",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 75,
+      "title": "Define the role of the design-review gallery",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Document it as an internal review tool with a clear return path, or relocate its review presentation after checking purpose. Do not remove shared art resources by association.",
+      "originalEvidence": "The unlisted noindex /design/landscapes route contains review studies and lacks the usual site navigation. Shared artwork helpers are still used, so this is not evidence that all its code is dead.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "app/design/landscapes/page.tsx",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    },
+    {
+      "id": 76,
+      "title": "Budget decoded HTML as well as initial JavaScript",
+      "group": "A",
+      "status": "Published and verified",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Profile server payload and rendered DOM separately from JavaScript. Paginate or defer nonessential long directories where appropriate, preserve credits/source access, and measure before/after on representative devices.",
+      "originalEvidence": "Fresh public audit measured about 1.16 MB decoded HTML for Credits and 0.92 MB for South Island. These sizes are not compressed transfer measurements or observed speed.",
+      "evidenceKind": "Fresh HTTP measurement",
+      "sourceBeforeImplementation": "scripts/audit-public-http.py",
+      "audit": "Design and flow audit, 13 November 2026",
+      "releaseEvidence": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md"
+    }
+  ],
+  "verification": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md",
+  "release": {
+    "published": true,
+    "ciConclusion": "success",
+    "domainsVerified": true,
+    "htmlBudgetsPassed": true,
+    "runtime": "43943bb2740dfce0fafd43577ffbafec3037ed5a",
+    "deployment": "dpl_49nEtSR46vpeufJSdLncJ8r9i8Te",
+    "url": "aves-australia-871lni245-mmelendro-9273s-projects.vercel.app",
+    "ciRun": 43392941281,
+    "ciJob": 131776965015,
+    "unitTests": 775,
+    "browserPassed": 128,
+    "browserSkipped": 160,
+    "focusedPassed": 24,
+    "focusedSkipped": 8,
+    "publicRoutesPassed": 81,
+    "publishedAt": "2026-11-13T08:35:44.129Z",
+    "initialGzipBytes": {
+      "/page": 325118,
+      "/account/page": 319233
+    },
+    "decodedHtmlBytes": {
+      "/new-zealand/south-island": 918082,
+      "/credits": 492018
+    },
+    "todoVersion": 15,
+    "designVersion": 0,
+    "intermediateRelease": {
+      "runtime": "99d681e3bbcc9225b89da44e6fec8d4c5ac28862",
+      "deployment": "dpl_Ff62cQY2HJe6e6wnme1Xk1hL4ed8",
+      "publishedAt": "2026-11-13T08:20:13.828Z",
+      "ciRun": 43391065741,
+      "unitTests": 775,
+      "browserPassed": 128,
+      "publicRoutesPassed": 81,
+      "status": "Intermediate publication; superseded by the verified planner-anchor repair"
+    },
+    "domains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
+    "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
+    "rollbackDeployment": "dpl_XmJLienyDhuJRqRrVBUweQUyGK1L",
+    "sourceModules": 471,
+    "unreachable": 0,
+    "lintErrors": 0,
+    "lintWarnings": 31
+  },
+  "activeScope": {
+    "completedRanges": [
+      [
+        0,
+        19
+      ],
+      [
+        36,
+        54
+      ],
+      [
+        56,
+        76
+      ]
+    ],
+    "pendingIds": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      55
+    ],
+    "nextOwnerDecision": 20,
+    "nextIndependent": null,
+    "sourceDependentExtension": 55
+  },
+  "securityAdvisors": {
+    "reviewedOn": "2026-11-13",
+    "findings": [
+      {
+        "name": "rls_enabled_no_policy",
+        "level": "INFO"
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "level": "WARN",
+        "currentQueueItem": 24
+      }
+    ],
+    "source": "https://supabase.com/docs/guides/auth/password-security",
+    "scope": "Existing advisory types, retained explicitly for platform review. No paid feature was enabled."
+  },
+  "productAudit": {
+    "report": "docs/audit/PRODUCT-AUDIT-2026-11-13.md",
+    "sourceHead": "1cd1aaf2b69b370a373bed252e4f9434539c3c3c",
+    "runtime": "bfe1192176813c4e273c1636d5fabc22807161e0",
+    "appChanged": false,
+    "newItems": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "verificationLimit": "Positive real accounts, isolated restore, physical Safari and independent traveller acceptance remain unverified under items 29 to 31.",
+    "implementationEvidence": "docs/audit/BATCHES-35-54-2026-11-13.md"
+  },
+  "releaseHistory": [
+    {
+      "runtime": "bfe1192176813c4e273c1636d5fabc22807161e0",
+      "deployment": "dpl_FkVGxkbsQay9K36rDz9ZX1ei4Qbr",
+      "url": "aves-australia-b8wve0ugr-mmelendro-9273s-projects.vercel.app",
+      "baselineRuntime": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
+      "baselineDeployment": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
+      "firstRelease": "e7d1334edccf61b2f24dc151bd68ca45e5e60925",
+      "firstDeployment": "dpl_2MTiqPsVevLD2PLUhiMA3BPjh7t2",
+      "firstCiRun": 43357370463,
+      "firstCiJob": 131662505915,
+      "domains": [
+        "aves.bio",
+        "www.aves.bio"
+      ],
+      "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
+      "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
+      "ciRun": 43359012336,
+      "ciJob": 131667812588,
+      "unitTests": 751,
+      "browserPassed": 109,
+      "browserSkipped": 101,
+      "focusedPassed": 9,
+      "focusedSkipped": 3,
+      "publicRoutesPassed": 81,
+      "sourceModules": 451,
+      "unreachable": 0,
+      "lintErrors": 0,
+      "lintWarnings": 32,
+      "publishedAt": "2026-11-13T03:42:47.319301+00:00",
+      "initialGzipBytes": {
+        "/page": 366440,
+        "/account/page": 290280,
+        "/new-zealand/north-island/page": 391512,
+        "/new-zealand/south-island/page": 393380
+      }
+    },
+    {
+      "runtime": "278e1ae7110bcdc75a5f688384910269bf82dea2",
+      "deployment": "dpl_4o6Y8kZPgUb52UgWBGoRSj2BgENb",
+      "batch": [
+        35,
+        44
+      ],
+      "completed": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "ciRun": 43372734840,
+      "unitTests": 758,
+      "browserPassed": 113,
+      "browserSkipped": 115,
+      "note": "Item 35 reviewed, actual evidence still pending."
+    },
+    {
+      "published": true,
+      "ciConclusion": "success",
+      "domainsVerified": true,
+      "runtime": "0e832635514f1ec2232f63d7776996ed64993d1e",
+      "deployment": "dpl_XmJLienyDhuJRqRrVBUweQUyGK1L",
+      "url": "aves-australia-8hoockkgz-mmelendro-9273s-projects.vercel.app",
+      "ciRun": 43379516403,
+      "ciJob": 131733752879,
+      "unitTests": 770,
+      "browserPassed": 118,
+      "browserSkipped": 128,
+      "focusedPassed": 14,
+      "focusedSkipped": 4,
+      "publicRoutesPassed": 81,
+      "publishedAt": "2026-11-13T06:44:30.559Z",
+      "domains": [
+        "aves.bio",
+        "www.aves.bio"
+      ],
+      "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
+      "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
+      "rollbackDeployment": "dpl_4o6Y8kZPgUb52UgWBGoRSj2BgENb",
+      "lintErrors": 0,
+      "lintWarnings": 31,
+      "sourceModules": 470,
+      "unreachable": 0,
+      "initialGzipBytes": {
+        "/page": 323706,
+        "/account/page": 318440,
+        "/new-zealand/north-island/page": 357998,
+        "/new-zealand/south-island/page": 360626
+      }
+    },
+    {
+      "runtime": "99d681e3bbcc9225b89da44e6fec8d4c5ac28862",
+      "deployment": "dpl_Ff62cQY2HJe6e6wnme1Xk1hL4ed8",
+      "publishedAt": "2026-11-13T08:20:13.828Z",
+      "ciRun": 43391065741,
+      "unitTests": 775,
+      "browserPassed": 128,
+      "publicRoutesPassed": 81,
+      "status": "Intermediate publication; superseded by the verified planner-anchor repair"
+    }
+  ],
+  "designAudit": {
+    "report": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md",
+    "sourceBaseline": "f6edfdc5df7e31b43b13fd47d8e2775da25408bd",
+    "runtimeBaseline": "0e832635514f1ec2232f63d7776996ed64993d1e",
+    "requestedScope": [
+      56,
+      76
+    ],
+    "status": "Published and verified",
+    "noNewOwnerInput": true,
+    "implementationRuntime": "43943bb2740dfce0fafd43577ffbafec3037ed5a",
+    "ciRun": 43392941281
+  }
+}
