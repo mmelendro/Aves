@@ -1,0 +1,467 @@
+[
+  {
+    "id": "place:colombia:cocora-valley",
+    "countryId": "colombia",
+    "label": "Cocora Valley"
+  },
+  {
+    "id": "place:colombia:nevado-del-ruiz",
+    "countryId": "colombia",
+    "label": "Nevado del Ruiz"
+  },
+  {
+    "id": "place:colombia:laguna-del-otun",
+    "countryId": "colombia",
+    "label": "Laguna del Otún"
+  },
+  {
+    "id": "place:colombia:santa-rosa-de-cabal",
+    "countryId": "colombia",
+    "label": "Santa Rosa de Cabal"
+  },
+  {
+    "id": "place:colombia:rio-navarco",
+    "countryId": "colombia",
+    "label": "Río Navarco"
+  },
+  {
+    "id": "place:colombia:chingaza",
+    "countryId": "colombia",
+    "label": "Chingaza"
+  },
+  {
+    "id": "place:colombia:cocuy",
+    "countryId": "colombia",
+    "label": "El Cocuy"
+  },
+  {
+    "id": "place:colombia:tota",
+    "countryId": "colombia",
+    "label": "Lake Tota"
+  },
+  {
+    "id": "place:colombia:sumapaz",
+    "countryId": "colombia",
+    "label": "Sumapaz"
+  },
+  {
+    "id": "place:colombia:guatavita",
+    "countryId": "colombia",
+    "label": "Lake Guatavita"
+  },
+  {
+    "id": "place:colombia:tatama",
+    "countryId": "colombia",
+    "label": "Tatamá"
+  },
+  {
+    "id": "place:colombia:farallones-de-cali",
+    "countryId": "colombia",
+    "label": "Farallones de Cali"
+  },
+  {
+    "id": "place:colombia:penas-blancas",
+    "countryId": "colombia",
+    "label": "Peñas Blancas"
+  },
+  {
+    "id": "place:colombia:pico-de-loro",
+    "countryId": "colombia",
+    "label": "Pico de Loro"
+  },
+  {
+    "id": "place:colombia:laguna-de-sonso",
+    "countryId": "colombia",
+    "label": "Laguna de Sonso"
+  },
+  {
+    "id": "place:colombia:videles",
+    "countryId": "colombia",
+    "label": "Madre Vieja Videles"
+  },
+  {
+    "id": "place:colombia:tatacoa",
+    "countryId": "colombia",
+    "label": "Tatacoa"
+  },
+  {
+    "id": "place:colombia:honda",
+    "countryId": "colombia",
+    "label": "Honda"
+  },
+  {
+    "id": "place:colombia:prado-reservoir",
+    "countryId": "colombia",
+    "label": "Prado Reservoir"
+  },
+  {
+    "id": "place:colombia:guarinocito",
+    "countryId": "colombia",
+    "label": "Guarinocito"
+  },
+  {
+    "id": "place:colombia:san-lorenzo",
+    "countryId": "colombia",
+    "label": "Cuchilla de San Lorenzo"
+  },
+  {
+    "id": "place:colombia:cerro-kennedy",
+    "countryId": "colombia",
+    "label": "Cerro Kennedy"
+  },
+  {
+    "id": "place:colombia:sierra-coast",
+    "countryId": "colombia",
+    "label": "Coastal foothills near Santa Marta"
+  },
+  {
+    "id": "place:colombia:pozo-azul",
+    "countryId": "colombia",
+    "label": "Pozo Azul, Minca"
+  },
+  {
+    "id": "place:colombia:macuira",
+    "countryId": "colombia",
+    "label": "Macuira dunes"
+  },
+  {
+    "id": "place:colombia:cienaga-grande",
+    "countryId": "colombia",
+    "label": "Ciénaga Grande de Santa Marta"
+  },
+  {
+    "id": "place:colombia:cabo-de-la-vela",
+    "countryId": "colombia",
+    "label": "Cabo de la Vela"
+  },
+  {
+    "id": "place:colombia:utria",
+    "countryId": "colombia",
+    "label": "Ensenada de Utría"
+  },
+  {
+    "id": "place:colombia:gorgona",
+    "countryId": "colombia",
+    "label": "Gorgona"
+  },
+  {
+    "id": "place:colombia:nuqui",
+    "countryId": "colombia",
+    "label": "Nuquí"
+  },
+  {
+    "id": "place:colombia:mecana",
+    "countryId": "colombia",
+    "label": "Playa Mecana"
+  },
+  {
+    "id": "place:colombia:bahia-solano",
+    "countryId": "colombia",
+    "label": "Bahía Solano"
+  },
+  {
+    "id": "place:colombia:casanare",
+    "countryId": "colombia",
+    "label": "Casanare"
+  },
+  {
+    "id": "place:colombia:cabuyaro",
+    "countryId": "colombia",
+    "label": "Río Meta at Cabuyaro"
+  },
+  {
+    "id": "place:colombia:orocue",
+    "countryId": "colombia",
+    "label": "Río Meta at Orocué"
+  },
+  {
+    "id": "place:colombia:cano-cristales",
+    "countryId": "colombia",
+    "label": "Caño Cristales"
+  },
+  {
+    "id": "place:colombia:amazon-border-river",
+    "countryId": "colombia",
+    "label": "Amazon River border region"
+  },
+  {
+    "id": "place:colombia:puerto-narino",
+    "countryId": "colombia",
+    "label": "Puerto Nariño"
+  },
+  {
+    "id": "place:colombia:tarapoto",
+    "countryId": "colombia",
+    "label": "Lake Tarapoto"
+  },
+  {
+    "id": "place:colombia:puerto-asis",
+    "countryId": "colombia",
+    "label": "Río Putumayo at Puerto Asís"
+  },
+  {
+    "id": "place:colombia:leticia-river",
+    "countryId": "colombia",
+    "label": "Amazon River at Leticia"
+  },
+  {
+    "id": "place:colombia:purace",
+    "countryId": "colombia",
+    "label": "Puracé"
+  },
+  {
+    "id": "place:colombia:paramo-papas",
+    "countryId": "colombia",
+    "label": "Páramo de las Papas"
+  },
+  {
+    "id": "place:colombia:sotara",
+    "countryId": "colombia",
+    "label": "Sotará"
+  },
+  {
+    "id": "place:australia:three-sisters",
+    "countryId": "australia",
+    "label": "Three Sisters"
+  },
+  {
+    "id": "place:australia:wattamolla",
+    "countryId": "australia",
+    "label": "Wattamolla"
+  },
+  {
+    "id": "place:australia:kosciuszko",
+    "countryId": "australia",
+    "label": "Mount Kosciuszko"
+  },
+  {
+    "id": "place:australia:hawkesbury",
+    "countryId": "australia",
+    "label": "Hawkesbury River entrance"
+  },
+  {
+    "id": "place:australia:dangar-falls",
+    "countryId": "australia",
+    "label": "Dangar Falls"
+  },
+  {
+    "id": "place:australia:daintree",
+    "countryId": "australia",
+    "label": "Daintree River"
+  },
+  {
+    "id": "place:australia:lake-eacham",
+    "countryId": "australia",
+    "label": "Lake Eacham"
+  },
+  {
+    "id": "place:australia:eubenangee",
+    "countryId": "australia",
+    "label": "Eubenangee Swamp National Park"
+  },
+  {
+    "id": "place:australia:girraween",
+    "countryId": "australia",
+    "label": "Girraween"
+  },
+  {
+    "id": "place:australia:carnarvon",
+    "countryId": "australia",
+    "label": "Wards Canyon, Carnarvon Gorge"
+  },
+  {
+    "id": "place:australia:twelve-apostles",
+    "countryId": "australia",
+    "label": "Twelve Apostles"
+  },
+  {
+    "id": "place:australia:big-drift",
+    "countryId": "australia",
+    "label": "Big Drift, Wilsons Promontory"
+  },
+  {
+    "id": "place:australia:grampians",
+    "countryId": "australia",
+    "label": "Grampians National Park"
+  },
+  {
+    "id": "place:australia:lake-tyrrell",
+    "countryId": "australia",
+    "label": "Lake Tyrrell"
+  },
+  {
+    "id": "place:australia:tarra-falls",
+    "countryId": "australia",
+    "label": "Tarra Falls, Tarra-Bulga"
+  },
+  {
+    "id": "place:australia:bay-of-fires",
+    "countryId": "australia",
+    "label": "Bay of Fires"
+  },
+  {
+    "id": "place:australia:dove-lake",
+    "countryId": "australia",
+    "label": "Dove Lake"
+  },
+  {
+    "id": "place:australia:walls-of-jerusalem",
+    "countryId": "australia",
+    "label": "Walls of Jerusalem"
+  },
+  {
+    "id": "place:australia:tessellated-pavement",
+    "countryId": "australia",
+    "label": "Tessellated Pavement"
+  },
+  {
+    "id": "place:australia:hartz-mountains",
+    "countryId": "australia",
+    "label": "Hartz Mountains"
+  },
+  {
+    "id": "place:australia:adelaide",
+    "countryId": "australia",
+    "label": "Adelaide"
+  },
+  {
+    "id": "place:australia:wilpena-pound",
+    "countryId": "australia",
+    "label": "Wilpena Pound"
+  },
+  {
+    "id": "place:australia:remarkable-rocks",
+    "countryId": "australia",
+    "label": "Remarkable Rocks"
+  },
+  {
+    "id": "place:australia:belton",
+    "countryId": "australia",
+    "label": "Belton landscape"
+  },
+  {
+    "id": "place:australia:mount-gambier",
+    "countryId": "australia",
+    "label": "Mount Gambier"
+  },
+  {
+    "id": "place:australia:nambung",
+    "countryId": "australia",
+    "label": "The Pinnacles, Nambung National Park"
+  },
+  {
+    "id": "place:australia:hamersley-gorge",
+    "countryId": "australia",
+    "label": "Hamersley Gorge"
+  },
+  {
+    "id": "place:australia:shark-bay-big-lagoon",
+    "countryId": "australia",
+    "label": "Big Lagoon, Shark Bay"
+  },
+  {
+    "id": "place:australia:cape-le-grand",
+    "countryId": "australia",
+    "label": "Lucky Bay, Cape Le Grand"
+  },
+  {
+    "id": "place:australia:valley-of-giants",
+    "countryId": "australia",
+    "label": "Valley of the Giants"
+  },
+  {
+    "id": "place:australia:tidbinbilla",
+    "countryId": "australia",
+    "label": "Tidbinbilla Nature Reserve"
+  },
+  {
+    "id": "place:australia:orroral-homestead",
+    "countryId": "australia",
+    "label": "Orroral Homestead"
+  },
+  {
+    "id": "place:australia:lake-burley-griffin",
+    "countryId": "australia",
+    "label": "Lake Burley Griffin"
+  },
+  {
+    "id": "place:australia:gibraltar-falls",
+    "countryId": "australia",
+    "label": "Gibraltar Falls"
+  },
+  {
+    "id": "place:australia:booroomba",
+    "countryId": "australia",
+    "label": "Booroomba Rocks"
+  },
+  {
+    "id": "place:australia:nitmiluk-gorge",
+    "countryId": "australia",
+    "label": "Nitmiluk Gorge"
+  },
+  {
+    "id": "place:australia:florence-falls",
+    "countryId": "australia",
+    "label": "Florence Falls"
+  },
+  {
+    "id": "place:australia:kings-canyon",
+    "countryId": "australia",
+    "label": "Kings Canyon"
+  },
+  {
+    "id": "place:australia:darwin-city",
+    "countryId": "australia",
+    "label": "Darwin skyline"
+  },
+  {
+    "id": "place:australia:nightcliff-jetty",
+    "countryId": "australia",
+    "label": "Nightcliff Jetty"
+  },
+  {
+    "id": "place:australia:jbt-murrays-beach",
+    "countryId": "australia",
+    "label": "Murrays Beach"
+  },
+  {
+    "id": "place:australia:jbt-green-patch",
+    "countryId": "australia",
+    "label": "Green Patch"
+  },
+  {
+    "id": "place:australia:jbt-cave-beach",
+    "countryId": "australia",
+    "label": "Cave Beach"
+  },
+  {
+    "id": "place:australia:jbt-bowen-island",
+    "countryId": "australia",
+    "label": "Bowen Island from Murrays Beach"
+  },
+  {
+    "id": "place:australia:jbt-cape-st-george",
+    "countryId": "australia",
+    "label": "Cape St George lighthouse"
+  },
+  {
+    "id": "place:colombia:proaves-el-dorado",
+    "countryId": "colombia",
+    "label": "El Dorado conservation area · Fundación ProAves"
+  },
+  {
+    "id": "place:colombia:proaves-reinita",
+    "countryId": "colombia",
+    "label": "Reserva ProAves Reinita Cielo Azul"
+  },
+  {
+    "id": "place:australia:birdlife-discovery-centre",
+    "countryId": "australia",
+    "label": "BirdLife Australia Discovery Centre"
+  },
+  {
+    "id": "place:australia:birdlife-gluepot",
+    "countryId": "australia",
+    "label": "BirdLife Australia Gluepot Reserve"
+  }
+]

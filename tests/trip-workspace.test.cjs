@@ -43,3 +43,7 @@ test('cross-site, forged fields, malformed IDs and country mismatches never writ
  const malformed=harness();assert.equal((await malformed.workspaceGet('not-an-id')).status,404);assert.equal(malformed.queries.length,0);
  const places=harness([{data:{id,details:{country:'colombia'}},error:null}]);assert.equal((await places.workspacePut(request({expectedRevision:0,data}),id)).status,400);assert.equal(places.queries.length,1);
 });
+
+test('reviewed Australian and Colombian places retain stable IDs and reject foreign associations',()=>{
+ for(const country of ['australia','colombia']){const places=p.journalPlaces(country);const place=places.find(p=>p.id.startsWith(`place:${country}:`));assert.ok(place);assert.equal(p.workspacePlacesValid({...data,entries:[{...entry,placeId:place.id}]},country),true);assert.equal(p.workspacePlacesValid({...data,entries:[{...entry,placeId:place.id}]},country==='australia'?'colombia':'australia'),false);assert.equal(new Set(places.map(p=>p.id)).size,places.length)}
+});

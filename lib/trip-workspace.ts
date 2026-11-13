@@ -1,4 +1,5 @@
 /** Owner-only trip preparations and journal data. Sharing a brief never shares this workspace. */
+import reviewedPlaces from "@/content/journal-places.json"
 import { z } from "zod"
 import { nzPublicPlanningPlaces } from "./nz-place-ideas"
 import { countryRegionOptions, type TripCountry } from "@/content/trip-options"
@@ -32,7 +33,7 @@ export const emptyWorkspace = (): TripWorkspaceData => ({version:1,tasks:[],entr
 /** Public choices only. A journal association is the owner's label, not proof of a visit. */
 export function journalPlaces(country: TripCountry) {
   const regions=countryRegionOptions[country].map(region=>({id:`region:${region.id}`,label:region.label}))
-  return country === "new-zealand" ? [...regions,...nzPublicPlanningPlaces] : regions
+  return country === "new-zealand" ? [...regions,...nzPublicPlanningPlaces] : [...regions,...reviewedPlaces.filter(place=>place.countryId===country).map(({id,label})=>({id,label}))]
 }
 export function workspacePlacesValid(data:TripWorkspaceData,country:TripCountry) {
   const ids=new Set(journalPlaces(country).map(place=>place.id))
