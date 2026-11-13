@@ -5,6 +5,7 @@
  * Showing a link does not grant access to its destination; private APIs enforce it.
  */
 
+import {useUiCopy} from "@/components/ui-language"
 import { NewZealandHeader } from "@/components/new-zealand-header"
 
 const portalLinks = [
@@ -20,5 +21,6 @@ const portalLinks = [
  * Render shared account/country links and highlight currentPage; the overlay manages its mobile menu state.
  */
 export function PortalNavigation({ currentPage }: { currentPage: string }) {
-  return <NewZealandHeader country="global" surface="account" currentPage={currentPage} navigationLinks={portalLinks} />
+  const uiCopy=useUiCopy()
+  return <NewZealandHeader country="global" surface="account" currentPage={currentPage} navigationLinks={portalLinks.map(link=>({...link,label:uiCopy(link.label)}))} />
 }

@@ -1,4 +1,5 @@
 "use client"
+import {useUiCopy} from "@/components/ui-language"
 import { useReadOnlyPreview } from "@/components/preview-mode"
 
 /**
@@ -33,6 +34,8 @@ function callbackUrl(next: string) {
  * Render mode-specific Auth actions. next is allowlisted again, and oauthProviders contains server-approved names.
  */
 export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mode: Mode; next?: string; oauthProviders?: OAuthProvider[] }) {
+ const uiCopy=useUiCopy()
+
   const readOnly = useReadOnlyPreview()
   const destination = accountReturnPath(next)
   const prefix = useId()
@@ -152,33 +155,33 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
 
   return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8">
     <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6"><LockKeyhole className="w-6 h-6 text-emerald-700" /></div>
-    <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? "Welcome Back" : mode === "sign-up" ? "Make Room for Your Next Adventure" : mode === "forgot-password" ? "Let's Get You Back In" : "Choose a New Password"}</h2>
-    <p className="text-gray-600 mb-8">{mode === "sign-in" ? "One AVES account for your AVES destination ideas, saved plans and quote requests." : mode === "sign-up" ? "Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES." : mode === "forgot-password" ? "Enter your account email to request a password reset link." : "Use a unique password with at least 12 characters."}</p>
-    {socialMode && <label className="flex items-start gap-3 mb-6 text-sm"><input type="checkbox" checked={emailUpdates} disabled={busy || readOnly} onChange={event => setEmailUpdates(event.target.checked)} className="mt-1 accent-emerald-700" /><span>I'd like optional AVES email updates. After signing in, I'll confirm my subscription. This is optional and I can unsubscribe at any time.</span></label>}
+    <h2 className="text-2xl font-bold text-gray-900 mb-3">{mode === "sign-in" ? uiCopy("Welcome Back") : mode === "sign-up" ? uiCopy("Make Room for Your Next Adventure") : mode === "forgot-password" ? uiCopy("Let's Get You Back In") : uiCopy("Choose a New Password")}</h2>
+    <p className="text-gray-600 mb-8">{mode === "sign-in" ? uiCopy("One AVES account for your AVES destination ideas, saved plans and quote requests.") : mode === "sign-up" ? uiCopy("Save travel ideas for Colombia or Australia and discuss a personal proposal with AVES.") : mode === "forgot-password" ? uiCopy("Enter your account email to request a password reset link.") : uiCopy("Use a unique password with at least 12 characters.")}</p>
+    {socialMode && <label className="flex items-start gap-3 mb-6 text-sm"><input type="checkbox" checked={emailUpdates} disabled={busy || readOnly} onChange={event => setEmailUpdates(event.target.checked)} className="mt-1 accent-emerald-700" /><span>{uiCopy("I'd like optional AVES email updates. After signing in, I'll confirm my subscription. This is optional and I can unsubscribe at any time.")}</span></label>}
     {socialMode && oauthProviders.length > 0 ? <div className="mb-6 space-y-3">
       {/* Google's unmodified artwork includes its current logo and lettering.
           Keeping it local avoids loading Google's scripts or fonts before a visitor chooses to sign in. */}
-      {oauthProviders.map(provider => provider === "google" ? <button key={provider} type="button" aria-label="Sign in with Google" className="mx-auto block h-10 w-[180px] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-50" disabled={busy || readOnly} onClick={() => signInWithProvider(provider)}><img src="/google-sign-in.svg" width={180} height={40} alt="" aria-hidden="true" /></button> : <Button key={provider} type="button" aria-label="Continue with Facebook" variant="outline" size="lg" className="w-full" disabled={busy || readOnly} onClick={() => signInWithProvider(provider)}>Continue with Facebook</Button>)}
-      <p className="text-center text-sm text-gray-500">Or continue with email</p>
+      {oauthProviders.map(provider => provider === "google" ? <button key={provider} type="button" aria-label={uiCopy("Sign in with Google")} className="mx-auto block h-10 w-[180px] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-50" disabled={busy || readOnly} onClick={() => signInWithProvider(provider)}><img src="/google-sign-in.svg" width={180} height={40} alt="" aria-hidden="true" /></button> : <Button key={provider} type="button" aria-label={uiCopy("Continue with Facebook")} variant="outline" size="lg" className="w-full" disabled={busy || readOnly} onClick={() => signInWithProvider(provider)}>{uiCopy("Continue with Facebook")}</Button>)}
+      <p className="text-center text-sm text-gray-500">{uiCopy("Or continue with email")}</p>
     </div> : null}
     <form onSubmit={submit} className="space-y-6">
-      {readOnly && <p className="text-sm text-amber-800">Sign-in and account changes are disabled in this preview.</p>}
+      {readOnly && <p className="text-sm text-amber-800">{uiCopy("Sign-in and account changes are disabled in this preview.")}</p>}
       <fieldset disabled={readOnly || busy || !recoveryReady || (mode === "reset-password" && success)} className="space-y-6">
-        {mode !== "reset-password" && <div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">Email Address</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div>}
-        {mode !== "forgot-password" && <div><label htmlFor={`${prefix}-password`} className="block text-sm font-medium text-gray-700 mb-2">{newPassword ? "New Password" : "Password"}</label><Input id={`${prefix}-password`} name="password" type={showPassword ? "text" : "password"} autoComplete={newPassword ? "new-password" : "current-password"} minLength={newPassword ? 12 : undefined} required />{newPassword && <p className="text-sm text-gray-500 mt-2">At least 12 characters. A password manager or a long, unique passphrase works well.</p>}</div>}
-        {newPassword && <div><label htmlFor={`${prefix}-confirm`} className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label><Input id={`${prefix}-confirm`} name="confirmPassword" type={showPassword ? "text" : "password"} autoComplete="new-password" minLength={12} required /></div>}
-        {mode !== "forgot-password" && <Button type="button" variant="ghost" size="sm" aria-pressed={showPassword} onClick={() => setShowPassword(value => !value)}>{showPassword ? "Hide Password" : "Show Password"}{newPassword ? "s" : ""}</Button>}
-        {mode === "sign-up" && <p className="text-sm text-gray-500">Your account helps you save plans and request a quote. Read our <Link href="/privacy" className="text-emerald-700 underline">privacy information</Link> and <Link href="/terms" className="text-emerald-700 underline">information about inquiries and bookings</Link>.</p>}
-        <Button type="submit" size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">{busy ? "Please wait…" : label}<ArrowRight className="w-4 h-4 ml-2" /></Button>
+        {mode !== "reset-password" && <div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Email Address")}</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div>}
+        {mode !== "forgot-password" && <div><label htmlFor={`${prefix}-password`} className="block text-sm font-medium text-gray-700 mb-2">{newPassword ? uiCopy("New Password") : uiCopy("Password")}</label><Input id={`${prefix}-password`} name="password" type={showPassword ? "text" : "password"} autoComplete={newPassword ? "new-password" : "current-password"} minLength={newPassword ? 12 : undefined} required />{newPassword && <p className="text-sm text-gray-500 mt-2">{uiCopy("At least 12 characters. A password manager or a long, unique passphrase works well.")}</p>}</div>}
+        {newPassword && <div><label htmlFor={`${prefix}-confirm`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Confirm New Password")}</label><Input id={`${prefix}-confirm`} name="confirmPassword" type={showPassword ? "text" : "password"} autoComplete="new-password" minLength={12} required /></div>}
+        {mode !== "forgot-password" && <Button type="button" variant="ghost" size="sm" aria-pressed={showPassword} onClick={() => setShowPassword(value => !value)}>{showPassword ? uiCopy("Hide Password") : uiCopy("Show Password")}{newPassword ? "s" : ""}</Button>}
+        {mode === "sign-up" && <p className="text-sm text-gray-500">{uiCopy("Your account helps you save plans and request a quote. Read our ")}<Link href="/privacy" className="text-emerald-700 underline">{uiCopy("privacy information")}</Link> and <Link href="/terms" className="text-emerald-700 underline">{uiCopy("information about inquiries and bookings")}</Link>.</p>}
+        <Button type="submit" size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">{busy ? uiCopy("Please wait…") : label}<ArrowRight className="w-4 h-4 ml-2" /></Button>
       </fieldset>
-      {!recoveryChecked && <p className="text-sm text-gray-600" role="status">Checking your reset link…</p>}
-      {feedback && <p className={`text-sm ${success ? "text-emerald-700" : "text-red-700"}`} role={success ? "status" : "alert"}>{feedback}</p>}
+      {!recoveryChecked && <p className="text-sm text-gray-600" role="status">{uiCopy("Checking your reset link…")}</p>}
+      {feedback && <p className={`text-sm ${success ? "text-emerald-700" : "text-red-700"}`} role={success ? "status" : "alert"}>{uiCopy(feedback)}</p>}
     </form>
     <div className="mt-8 pt-6 border-t border-gray-200 space-y-3 text-sm">
-      {mode === "sign-in" && <><p><Link href="/account/forgot-password" className="text-emerald-700 underline">Forgot your password?</Link></p><p><Link href={accountEntryHref("/account/check-email", signUpDestination)} className="text-emerald-700 underline">Need a new confirmation link?</Link></p><p className="text-gray-600">New to AVES? <Link href={accountEntryHref("/account/sign-up", destination)} className="text-emerald-700 underline">Create an account</Link>.</p></>}
-      {mode === "sign-up" && <p className="text-gray-600">Already have an account? <Link href={accountEntryHref("/account/sign-in", destination)} className="text-emerald-700 underline">Sign in</Link>.</p>}
-      {mode === "forgot-password" && <Link href="/account/sign-in" className="text-emerald-700 underline">Return to sign in</Link>}
-      {mode === "reset-password" && <Link href={success ? "/account" : "/account/forgot-password"} className="text-emerald-700 underline">{success ? "Return to My Trip Plans" : "Request a New Reset Link"}</Link>}
+      {mode === "sign-in" && <><p><Link href="/account/forgot-password" className="text-emerald-700 underline">{uiCopy("Forgot your password?")}</Link></p><p><Link href={accountEntryHref("/account/check-email", signUpDestination)} className="text-emerald-700 underline">{uiCopy("Need a new confirmation link?")}</Link></p><p className="text-gray-600">{uiCopy("New to AVES? ")}<Link href={accountEntryHref("/account/sign-up", destination)} className="text-emerald-700 underline">{uiCopy("Create an account")}</Link>.</p></>}
+      {mode === "sign-up" && <p className="text-gray-600">{uiCopy("Already have an account? ")}<Link href={accountEntryHref("/account/sign-in", destination)} className="text-emerald-700 underline">{uiCopy("Sign in")}</Link>.</p>}
+      {mode === "forgot-password" && <Link href="/account/sign-in" className="text-emerald-700 underline">{uiCopy("Return to sign in")}</Link>}
+      {mode === "reset-password" && <Link href={success ? "/account" : "/account/forgot-password"} className="text-emerald-700 underline">{success ? uiCopy("Return to My Trip Plans") : uiCopy("Request a New Reset Link")}</Link>}
     </div>
   </CardContent></Card>
 }
@@ -187,6 +190,8 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
  * Offer confirmation guidance and an explicit resend request; generic success wording does not disclose account existence.
  */
 export function CheckEmail({ next = "/account" }: { next?: string }) {
+ const uiCopy=useUiCopy()
+
   const readOnly = useReadOnlyPreview()
   const prefix = useId()
   const busyRef = useRef(false)
@@ -207,11 +212,11 @@ export function CheckEmail({ next = "/account" }: { next?: string }) {
   }
   return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8">
     <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6"><Mail className="w-6 h-6 text-emerald-700" /></div>
-    <h2 className="text-2xl font-bold text-gray-900 mb-4">Confirm Your Email</h2>
-    <p className="text-gray-600 mb-5">Check your inbox for an AVES account confirmation link. If a confirmation was issued, follow the link to finish setting up your account. Check your spam folder too.</p>
-    <p className="text-gray-600 mb-8">Already confirmed your email or have an account? You can sign in to continue.</p>
-    <Button asChild size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"><Link href={accountEntryHref("/account/sign-in", next)}><CheckCircle className="w-4 h-4 mr-2" />Continue to Sign In</Link></Button>
-    <form onSubmit={resend} className="mt-8 pt-6 border-t border-gray-200 space-y-4"><fieldset disabled={busy || readOnly} className="space-y-4"><legend className="font-semibold text-gray-900 mb-3">Need a New Confirmation Link?</legend><div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">Account Email Address</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div><Button type="submit" variant="outline" className="w-full">{busy ? "Requesting…" : "Request a Confirmation Link"}</Button></fieldset>{feedback && <p role={failed ? "alert" : "status"} className={`text-sm ${failed ? "text-red-700" : "text-emerald-700"}`}>{feedback}</p>}</form>
-    <p className="text-sm text-gray-500 mt-6">Need help? <Link href="/contact?topic=account#inquiry" className="text-emerald-700 underline">Contact AVES</Link>.</p>
+    <h2 className="text-2xl font-bold text-gray-900 mb-4">{uiCopy("Confirm Your Email")}</h2>
+    <p className="text-gray-600 mb-5">{uiCopy("Check your inbox for an AVES account confirmation link. If a confirmation was issued, follow the link to finish setting up your account. Check your spam folder too.")}</p>
+    <p className="text-gray-600 mb-8">{uiCopy("Already confirmed your email or have an account? You can sign in to continue.")}</p>
+    <Button asChild size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"><Link href={accountEntryHref("/account/sign-in", next)}><CheckCircle className="w-4 h-4 mr-2" />{uiCopy("Continue to Sign In")}</Link></Button>
+    <form onSubmit={resend} className="mt-8 pt-6 border-t border-gray-200 space-y-4"><fieldset disabled={busy || readOnly} className="space-y-4"><legend className="font-semibold text-gray-900 mb-3">{uiCopy("Need a New Confirmation Link?")}</legend><div><label htmlFor={`${prefix}-email`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Account Email Address")}</label><Input id={`${prefix}-email`} name="email" type="email" autoComplete="email" maxLength={254} required /></div><Button type="submit" variant="outline" className="w-full">{busy ? uiCopy("Requesting…") : uiCopy("Request a Confirmation Link")}</Button></fieldset>{feedback && <p role={failed ? "alert" : "status"} className={`text-sm ${failed ? "text-red-700" : "text-emerald-700"}`}>{uiCopy(feedback)}</p>}</form>
+    <p className="text-sm text-gray-500 mt-6">{uiCopy("Need help? ")}<Link href="/contact?topic=account#inquiry" className="text-emerald-700 underline">{uiCopy("Contact AVES")}</Link>.</p>
   </CardContent></Card>
 }

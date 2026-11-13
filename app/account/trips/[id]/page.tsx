@@ -4,6 +4,7 @@ import {z} from "zod"
 import {requireAccountUser} from "@/lib/account-auth"
 import {AccountError} from "@/lib/account-errors"
 import {AccountShell} from "@/components/account/account-shell"
+import {UiText} from "@/components/ui-language"
 import {TripWorkspace} from "@/components/account/trip-workspace"
 import {isKnownTripCountry} from "@/content/trip-options"
 export const dynamic="force-dynamic"
@@ -18,5 +19,5 @@ export default async function TripWorkspacePage({params}:{params:Promise<{id:str
   if(!data)notFound()
   const country=data.details?.country??"australia"
   if(!isKnownTripCountry(country))notFound()
-  return <AccountShell title={data.title} description="Your private preparations and travel journal. Save what matters, then return to your journey."><a href="/account" className="mb-6 inline-flex min-h-11 items-center text-emerald-800 underline">Back to My Trips</a><TripWorkspace key={id} planId={id} country={country}/></AccountShell>
+  return <AccountShell privateTitle title={data.title} description="Your private preparations and travel journal. Save what matters, then return to your journey."><a href="/account" className="mb-6 inline-flex min-h-11 items-center text-emerald-800 underline"><UiText source="Back to My Trips"/></a><TripWorkspace key={id} planId={id} country={country}/></AccountShell>
 }

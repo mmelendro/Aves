@@ -4,6 +4,7 @@
  * API handlers still verify the user before returning personal data.
  */
 
+import {UiLanguageProvider} from "@/components/ui-language"
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
@@ -14,5 +15,5 @@ export const metadata: Metadata = { title: { default: "AVES Account", template: 
  * Pass nested account screens through; authentication happens in the page/API, not in this wrapper.
  */
 export default function AccountLayout({ children }: { children: ReactNode }) {
-  return children
+  return <UiLanguageProvider scope="account">{children}</UiLanguageProvider>
 }
