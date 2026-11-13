@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useId,useRef,useState} from "react"
 import {Button} from "@/components/ui/button"
 import TripPackDownload from "./trip-pack-download"

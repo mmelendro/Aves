@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import { useReadOnlyPreview } from "@/components/preview-mode"
 
 /**

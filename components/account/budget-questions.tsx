@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 
 import { useState } from "react"
 import { budgetCategories, budgetCurrencies, type TripBudget } from "@/content/trip-budget"

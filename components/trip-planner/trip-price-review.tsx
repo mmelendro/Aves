@@ -1,5 +1,5 @@
 "use client";
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import { useIslandPlanner } from "./island-planner-context";
 
 import type { TripDraft } from "@/lib/south-island-trip-planner";

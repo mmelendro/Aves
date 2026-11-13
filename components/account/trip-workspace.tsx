@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy,UiText} from "@/components/ui-language"
+import {useUiCopy,UiText} from "@/components/ui-copy-context"
 
 import {useEffect,useId,useRef,useState} from "react"
 import dynamic from "next/dynamic"

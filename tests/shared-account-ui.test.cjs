@@ -214,7 +214,8 @@ test("a saved retired destination remains correctly selected without becoming a 
   find(tree, node => node.props.name === "country").props.onChange({ target: { value: "test-islands" } })
   tree = editor.render()
   assert.equal(find(tree, node => node.props.name === "country").props.value, "test-islands")
-  assert.deepEqual(boxes(tree).filter(node => node.props.checked), [])
+  assert.deepEqual(boxes(tree).filter(node => node.props.checked).map(node=>node.props.value),plan.regions)
+  assert.equal(find(tree,node=>node.props.name === "country").props.disabled,true)
   const fresh = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { onSaved() {}, onCancel() {} }, { mocks })
   const freshSelect = find(fresh.render(), node => node.props.name === "country")
   assert.deepEqual(nodes(freshSelect).filter(node => node.type === "option").map(node => node.props.value), ["australia", "colombia", "new-zealand"])
@@ -243,14 +244,15 @@ test("country selector clears incompatible checked regions and announces the cha
   assert.equal(boxes(tree).filter(node => node.props.checked).length, 0)
 })
 
-test("legacy Australian selections remain visible until the user changes country", () => {
+test("legacy Australian selections remain attached to their saved country", () => {
   const harness = componentHarness("components/account/trip-plan-editor.tsx", "TripPlanEditor", { plan: { id: "legacy", title: "Saved", regions: ["Queensland", "Earlier custom place"] }, onSaved() {}, onCancel() {} })
   let tree = harness.render()
   assert.equal(find(tree, node => node.props.name === "country").props.value, "australia")
   assert.deepEqual(boxes(tree).filter(node => node.props.checked).map(node => node.props.value), ["queensland", "Earlier custom place"])
   find(tree, node => node.props.name === "country").props.onChange({ target: { value: "colombia" } })
   tree = harness.render()
-  assert.equal(boxes(tree).some(node => node.props.value === "Earlier custom place"), false)
+  assert.equal(boxes(tree).some(node => node.props.value === "Earlier custom place"), true)
+  assert.equal(find(tree,node=>node.props.name === "country").props.disabled,true)
 })
 
 test("Colombia draft submits its country and retains its request key after an uncertain response", async () => {
@@ -427,7 +429,7 @@ test("budget controls reopen zero values, preserve numbers on currency changes a
   tree = h.render()
   assert.equal(find(tree, node => node.props.name === "budget-food").props.value, "450")
   assert.equal(find(tree, node => node.props.name === "budget-accommodation").props.value, "0")
-  find(tree, node => node.type === "button" && node.props.children.join?.("") === "Leave accommodation open").props.onClick()
+  find(tree, node => node.type === "button" && [node.props.children].flat().join("") === "Leave accommodation open").props.onClick()
   tree = h.render()
   assert.equal(find(tree, node => node.props.name === "budget-accommodation").props.value, "")
   assert.equal(find(tree, node => node.props.name === "budgetCurrency").props.value, "GBP")

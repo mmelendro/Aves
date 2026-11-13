@@ -27,7 +27,7 @@
       "id": 0,
       "group": "A",
       "title": "Consolidate the active queue and release metadata",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -35,7 +35,7 @@
       "id": 1,
       "group": "A",
       "title": "Protect the destination of a saved trip",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -43,7 +43,7 @@
       "id": 2,
       "group": "A",
       "title": "Include bird albums in the complete private backup",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -51,7 +51,7 @@
       "id": 3,
       "group": "A",
       "title": "Prune unavailable offline pack selections",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -59,7 +59,7 @@
       "id": 4,
       "group": "A",
       "title": "Allow confirmed deletion of unused drafts",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -67,7 +67,7 @@
       "id": 5,
       "group": "A",
       "title": "Repair country navigation and cross page fragments",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -75,7 +75,7 @@
       "id": 6,
       "group": "A",
       "title": "Present tours as proposed personal itineraries",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -83,7 +83,7 @@
       "id": 7,
       "group": "A",
       "title": "Align public impact and relationship claims with evidence",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -91,7 +91,7 @@
       "id": 8,
       "group": "A",
       "title": "Make photo controls and credits accessible",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -99,7 +99,7 @@
       "id": 9,
       "group": "A",
       "title": "Describe current privacy and account behaviour",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -107,7 +107,7 @@
       "id": 10,
       "group": "A",
       "title": "Separate historical calendar examples from current events",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -115,7 +115,7 @@
       "id": 11,
       "group": "A",
       "title": "Make terrain controls work by touch",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -123,7 +123,7 @@
       "id": 12,
       "group": "A",
       "title": "Offer reviewed places in country journals",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -131,7 +131,7 @@
       "id": 13,
       "group": "A",
       "title": "Preview selected journal content privately",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [
         91
       ],
@@ -141,7 +141,7 @@
       "id": 14,
       "group": "A",
       "title": "Protect unsaved plan edits",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [],
       "dependsOn": []
     },
@@ -149,7 +149,7 @@
       "id": 15,
       "group": "A",
       "title": "Complete Spanish sign in and saved plan controls",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [
         77
       ],
@@ -159,7 +159,7 @@
       "id": 16,
       "group": "A",
       "title": "Complete Spanish private workspace controls",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [
         77
       ],
@@ -169,7 +169,7 @@
       "id": 17,
       "group": "A",
       "title": "Complete Spanish New Zealand planner controls",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [
         77
       ],
@@ -179,7 +179,7 @@
       "id": 18,
       "group": "A",
       "title": "Complete Jervis Bay and Australian overview imagery",
-      "status": "Open",
+      "status": "Implemented; final CI and publication pending",
       "previous": [
         52,
         53
@@ -190,7 +190,7 @@
       "id": 19,
       "group": "A",
       "title": "Verify and publish the independent group",
-      "status": "Open",
+      "status": "In verification",
       "previous": [],
       "dependsOn": [
         0,
@@ -230,9 +230,11 @@
       "title": "Confirm current business roles and relationships",
       "status": "Open",
       "previous": [
+        77,
         80
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "acceptance": "Confirm current names, roles and display permission. Review remaining source-authored commercial, cultural and legal Spanish editorial. Old task 77 is partial until this review and publication finish."
     },
     {
       "id": 22,
@@ -412,5 +414,6 @@
         34
       ]
     }
-  ]
+  ],
+  "verification": "docs/audit/INDEPENDENT-0-19-2026-11-13.md"
 }

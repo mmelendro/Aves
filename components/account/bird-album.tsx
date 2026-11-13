@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useRef,useState} from "react"
 import {accountRequest,errorMessage} from "./account-api"
 import {albumReceiptSchema,albumSchema,albumStateLabel,emptyAlbum,type AlbumBird,type BirdAlbum} from "@/lib/bird-album"

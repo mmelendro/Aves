@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 /** The first small questionnaire: optional preferences, without guessed guest defaults. */
 import { planningChoices, planningSummary, type PlanningQuestionnaire } from "@/content/planning-questionnaire"
 

@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import {useState} from "react"
 import {selectedJournalPreview} from "@/lib/journal-preview"
 import type {TripWorkspaceData} from "@/lib/trip-workspace"

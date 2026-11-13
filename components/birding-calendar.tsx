@@ -592,7 +592,7 @@ function EventCard({
   )
 }
 
-function EventDetails({ event, selectedYear }: { event: BirdingEvent; selectedYear: string }) {
+function EventDetails({ event }: { event: BirdingEvent; selectedYear: string }) {
   const eventDates = `Historical source date: ${event.dates2025}`
 
   return (

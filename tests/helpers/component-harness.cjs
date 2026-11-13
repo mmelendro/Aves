@@ -11,7 +11,7 @@ function componentHarness(file, name, props, overrides = {}) {
   const react = {
     createContext: value => ({Provider:"ContextProvider",defaultValue:value}),
     useId: () => "test-id",
-    useContext: context => overrides.context?.(context) ?? null,
+    useContext: context => context.defaultValue?.copy ? context.defaultValue : overrides.context?.(context) ?? context.defaultValue,
     useState(initial) {
       const index = cursor++
       if (!(index in state)) state[index] = typeof initial === "function" ? initial() : initial
@@ -33,6 +33,7 @@ function componentHarness(file, name, props, overrides = {}) {
   }
   const mocks = {
     react,
+    "./unsaved-changes": {useUnsavedChanges(){},confirmDiscardPendingEdits:()=>true},
     "@/components/colombia-home-language": { useColombiaHomeCopy: () => node => node, ColombiaHomeLanguageToggle: "ColombiaHomeLanguageToggle" },
     "@/components/header-contour": { HeaderContour: "HeaderContour" },
     "@/components/header-landscape-context": { useHeaderLandscape: () => ({selection:null,publish(){}}) },

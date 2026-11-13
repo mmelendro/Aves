@@ -1,5 +1,5 @@
 "use client";
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import {sourceFreshness} from "@/lib/source-freshness";
 import { useIslandPlanner } from "./island-planner-context";
 

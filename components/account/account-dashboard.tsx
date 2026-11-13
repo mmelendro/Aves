@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy,UiText} from "@/components/ui-language"
+import {useUiCopy,UiText} from "@/components/ui-copy-context"
 
 /**
  * Signed-in visitor's browser workspace for drafts, quote requests, and proposals.

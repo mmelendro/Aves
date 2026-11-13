@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 /**
  * Read-only presentation of a proposal returned by the account/admin API.
  * The owner prop changes displayed details, not permission to fetch the record.

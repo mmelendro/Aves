@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useId,useRef,useState} from "react"
 import {accountRequest,errorMessage,tripCountry,type TripPlan} from "./account-api"
 import type {DiscoveryItem} from "@/lib/discovery-index"

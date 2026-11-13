@@ -1,5 +1,5 @@
 "use client";
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import {arrivalReferences} from "@/lib/journey-reference-points";
 import { useEffect } from "react";
 import { useTripMap } from "./trip-map-context";

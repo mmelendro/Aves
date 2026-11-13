@@ -1,5 +1,5 @@
 "use client"
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 
 import { useState, type ComponentType } from "react"
 import { newZealandChecklist, nzBirdName } from "@/content/new-zealand-checklist"

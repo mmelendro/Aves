@@ -5,7 +5,7 @@
  * Showing a link does not grant access to its destination; private APIs enforce it.
  */
 
-import {useUiCopy} from "@/components/ui-language"
+import {useUiCopy} from "@/components/ui-copy-context"
 import { NewZealandHeader } from "@/components/new-zealand-header"
 
 const portalLinks = [
