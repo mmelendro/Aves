@@ -80,8 +80,8 @@ export default function CookiesPage() {
                       <h3 className="text-lg font-semibold text-gray-900">Performance</h3>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      These cookies collect information about how visitors use our website, such as which pages are
-                      visited most often.
+                      The current AVES application does not install a performance analytics loader. This preference
+                      records your choice for a future supported integration; it does not start tracking.
                     </p>
                   </div>
 
@@ -102,7 +102,8 @@ export default function CookiesPage() {
                       <h3 className="text-lg font-semibold text-gray-900">Targeting</h3>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      These cookies are used to deliver advertisements that are more relevant to you and your interests.
+                      The current AVES application does not install an advertising or retargeting loader. Marketing
+                      consent is optional and does not itself load advertisements.
                     </p>
                   </div>
                 </div>
