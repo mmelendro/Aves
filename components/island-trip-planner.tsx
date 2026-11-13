@@ -356,7 +356,7 @@ function IslandPlannerForm({
           {[
             ["preferences", "1. Your preferences"],
             ["compare", "2. Compare routes"],
-            ["days", "3. Edit your days"],
+            ["edit-days", "3. Edit your days"],
           ].map(([part, label]) =>
             part === "preferences" || draft ? (
               <a
@@ -1074,7 +1074,7 @@ function IslandPlannerForm({
                 </div>
               )}
               <section
-                id={`${id}-days`}
+                id={`${id}-edit-days`}
                 className="scroll-mt-48 space-y-4"
                 aria-label={uiCopy("Edit itinerary days")}
               >

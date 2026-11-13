@@ -71,6 +71,13 @@ test("one-day editing preserves changes through day navigation and tab recovery"
   await expect(
     page.getByRole("article", { name: "Itinerary day 2", exact: true }),
   ).toHaveCount(0);
+  const editStage = page.getByRole("link", { name: "3. Edit your days", exact: true });
+  const editor = page.getByRole("region", { name: "Edit itinerary days", exact: true });
+  const editorId = await editor.getAttribute("id");
+  await expect(editStage).toHaveAttribute("href", `#${editorId}`);
+  await expect(page.locator(`[id="${editorId}"]`)).toHaveCount(1);
+  await editStage.click();
+  await expect(editor).toBeInViewport();
   await page.getByRole("button", { name: "Next day", exact: true }).click();
   await page
     .getByRole("article", { name: "Itinerary day 2", exact: true })
