@@ -62,4 +62,6 @@ export function dateLabel(value: string | null | undefined) {
 /**
  * Choose the caught error's user-facing text, or a generic fallback for non-Error failures.
  */
-export function errorMessage(error: unknown) { return error instanceof Error ? error.message : "Something went wrong. Please try again." }
+export function errorMessage(error: unknown) {
+  if (error instanceof Error && error.name === "ZodError") return "The saved result could not be confirmed. Keep your edits and retry."
+ return error instanceof Error ? error.message : "Something went wrong. Please try again." }
