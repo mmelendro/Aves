@@ -17,10 +17,10 @@ for(const photo of placeGalleryPhotos){
  const id=`place:${photo.countryId}:${photo.placeId}`
  if(items.some(item=>item.id===id))continue
  const region=destinationRegions[photo.countryId]?.find(r=>r.id===photo.regionId)
- const href=photo.countryId==="new-zealand"?`/new-zealand/${photo.regionId}${photo.regionId==="south-island"?"#places":"#place-gallery"}`:`${countries.get(photo.countryId)?.href??"/"}?region=${photo.regionId}#place-gallery`
+ const href=photo.countryId==="new-zealand"?`/new-zealand/${photo.regionId}${photo.regionId==="south-island"?"#places":"#place-gallery"}`:`${countries.get(photo.countryId)?.href??"/"}?explore=${photo.countryId}&region=${photo.regionId}#place-gallery`
  items.push({id,kind:"place",countryId:photo.countryId,regionId:photo.regionId,name:photo.placeName,description:`Reviewed landscape reference in ${region?.name??photo.regionId}. A photograph is not current access or a promised sighting.`,href,sourceUrl:photo.sourceUrl})
 }
-for(const r of conservation.records)items.push({id:`place:${r.countryId}:${r.id}`,kind:"place",countryId:r.countryId,regionId:r.regionId,name:r.name,description:r.description,href:`${countries.get(r.countryId)?.href??"/"}?region=${r.regionId}#place-gallery`,sourceUrl:r.sourceUrl})
+for(const r of conservation.records)items.push({id:`place:${r.countryId}:${r.id}`,kind:"place",countryId:r.countryId,regionId:r.regionId,name:r.name,description:r.description,href:`${countries.get(r.countryId)?.href??"/"}?explore=${r.countryId}&region=${r.regionId}#place-gallery`,sourceUrl:r.sourceUrl})
 export const discoveryItems:readonly DiscoveryItem[]=items
 export const publicFavouritePlaces=items.filter(item=>item.kind==="place")
 export const publicPlaceById=new Map(publicFavouritePlaces.map(item=>[item.id,item]))

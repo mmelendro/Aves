@@ -9,6 +9,7 @@ test('unified search keeps stable public references, accent matching, bounded re
  const last=searchDiscovery('','','',999999);assert.ok(last.items.length>0&&last.items.length<=30);assert.equal(last.offset%30,0)
  assert.equal(searchDiscovery('a place that does not exist 818181').total,0)
  for(const p of discoveryItems){assert.ok(p.href.startsWith('/'));assert.ok(!p.href.startsWith('//'));assert.ok(!/\/(account|admin|api|auth)(\/|$)/.test(p.href));if(p.sourceUrl)assert.equal(new URL(p.sourceUrl).protocol,'https:')}
+ for(const p of publicFavouritePlaces.filter(p=>p.countryId!=='new-zealand')){const url=new URL(p.href,'https://aves.bio');assert.equal(url.searchParams.get('explore'),p.countryId);assert.equal(url.searchParams.get('region'),p.regionId)}
 })
 test('favourite public places append once without replacing notes, crossing countries or overflowing',()=>{
  const place=publicFavouritePlaces.find(p=>p.countryId==='new-zealand'),message='Keep my earlier notes.'
