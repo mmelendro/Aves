@@ -202,7 +202,7 @@ test("collection filters hide previous results and recover from malformed and ex
   await page
     .getByRole("searchbox", { name: "Find a bird", exact: true })
     .fill("malformed");
-  await expect(page.getByRole("alert")).toHaveText(
+  await expect(page.getByRole("region", {name:"Your private bird collection", exact:true}).getByRole("alert")).toHaveText(
     "The saved result could not be confirmed. Keep your edits and retry.",
   );
   await expect(
