@@ -101,10 +101,9 @@ export default function SoulsPage() {
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Heart className="w-8 h-8 text-red-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Indigenous Partnerships</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Community visits by invitation</h3>
               <p className="text-gray-600">
-                Authentic cultural exchanges with indigenous communities, learning traditional bird knowledge and
-                supporting community-based conservation initiatives.
+                Discuss opportunities to learn from local hosts, where they choose to welcome visitors. Participation, cultural knowledge and permitted activities need their agreement.
               </p>
             </Card>
 
@@ -125,8 +124,7 @@ export default function SoulsPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Community Impact</h3>
               <p className="text-gray-600">
-                Direct support for indigenous communities through fair-trade partnerships, with a portion of proceeds
-                funding local conservation projects.
+                Any community visit, payment or conservation contribution needs specific agreement. No standing partnership or allocation of proceeds is confirmed here.
               </p>
             </Card>
           </div>

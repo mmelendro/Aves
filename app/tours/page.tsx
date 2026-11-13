@@ -28,7 +28,7 @@ export default function ToursPage() {
         <div className="container mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
           <div className="order-2 w-full"><ColombiaHeroExplorer /></div>
           <div className="order-1 mx-auto max-w-4xl text-center">
-            <PageHeading eyebrow="AVES Colombia" title="Explore Our Tours" description="From adventure expeditions to luxury experiences, discover Colombia's incredible avian diversity through our carefully crafted tour offerings. Each journey supports conservation and local communities." />
+            <PageHeading eyebrow="AVES Colombia" title="Explore Our Tours" description="From adventure expeditions to luxury experiences, discover Colombia's incredible avian diversity through our carefully crafted tour offerings. Our planning aims to consider conservation and local communities." />
             <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-2xl font-bold text-emerald-600">1,900+</div>
@@ -43,8 +43,8 @@ export default function ToursPage() {
                 <div className="text-sm text-gray-600">Bioregions</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-emerald-600">100%</div>
-                <div className="text-sm text-gray-600">Carbon Neutral</div>
+                <div className="text-2xl font-bold text-emerald-600">Considered</div>
+                <div className="text-sm text-gray-600">Travel planning</div>
               </div>
             </div>
           </div>
@@ -266,7 +266,7 @@ export default function ToursPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Conservation Focus</h3>
               <p className="text-gray-600">
-                Every tour directly supports habitat protection and community conservation initiatives.
+                Any conservation contribution must be agreed for the trip and supported by a documented recipient, amount and outcome.
               </p>
             </Card>
             <Card className="text-center p-8 border-0 shadow-lg">

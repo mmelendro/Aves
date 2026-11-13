@@ -22,7 +22,7 @@ const sections = [
   { title: "Saved Plans and Quote Requests", text: "One AVES account supports Australia and Colombia. You can save and edit a draft plan. Requesting a quote saves a snapshot for AVES to review; create a new draft if your plans change. A request does not reserve a place or create a booking." },
   { title: "Your Proposal", text: "A proposal sets out the suggested itinerary, price in Australian dollars (AUD), inclusions, exclusions and any stated validity date. Check those details with AVES. An issued proposal is visible in your account, with an email notification attempted. A revised proposal is a new version." },
   { title: "Before Any Booking", text: "Availability, dates, guides, group size, accommodation, access, inclusions and final booking arrangements must be confirmed directly with AVES. Any payment, cancellation or refund terms must be provided for the particular arrangement before you decide to book. This website does not accept payments or automatically confirm bookings." },
-  { title: "Updates and Responsible Planning", text: "Optional trip news or launch-list signup does not reserve a place. Wildlife encounters depend on conditions and cannot be guaranteed. AVES is pursuing B Corp certification and is not currently certified." },
+  { title: "Updates and Responsible Planning", text: "Optional trip news or launch-list signup does not reserve a place. Wildlife encounters depend on conditions and cannot be guaranteed. AVES aims to prepare for B Corp certification and is not currently certified." },
 ]
 
 export default function TermsPage() {

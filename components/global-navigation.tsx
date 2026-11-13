@@ -34,7 +34,7 @@ export function GlobalFooter({ country, navigationGroups = [], transparent = fal
           <div>
             <BrandMark country={country} inverse size="footer" />
             <p className="mt-4 max-w-xs leading-7">From mountains to ocean.</p>
-            {country === "colombia" && <p className="mt-3 max-w-xs text-sm leading-6">Pursuing B Corp certification. AVES is not yet certified.</p>}
+            {country === "colombia" && <p className="mt-3 max-w-xs text-sm leading-6">B Corp certification is an ambition. AVES is not yet certified.</p>}
           </div>
           <nav aria-label="Explore destinations">
             <h2 className="mb-3 font-semibold text-white">Choose your destination</h2>

@@ -156,7 +156,7 @@ export function ContactFormSection({
     {
       question: "What makes AVES different from other tour operators?",
       answer:
-        "We're pursuing B Corp certification. We shape personal birding itineraries around your interests, with guiding, access, group size and inclusions confirmed in your proposal.",
+        "B Corp certification is an ambition. We shape personal birding itineraries around your interests, with guiding, access, group size and inclusions confirmed in your proposal.",
     },
   ]
 
@@ -460,9 +460,9 @@ export function ContactFormSection({
                     <div className="flex items-start space-x-3">
                       <Award className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-gray-900">Pursuing B Corp Certification</div>
+                        <div className="font-semibold text-gray-900">B Corp Preparation</div>
                         <div className="text-sm text-gray-600">
-                          Certification is in progress; AVES is not currently certified
+                          AVES is not currently certified; no assessment outcome is claimed
                         </div>
                       </div>
                     </div>

@@ -73,7 +73,7 @@ export default function SierraNevadaBlogPost() {
           <ArticleHero
             article="sierra"
             title="Guardians of the Sky"
-            eyebrow="Indigenous Partnerships"
+            eyebrow="Birding and cultural learning"
             location="Sierra Nevada de Santa Marta"
             date="March 15, 2025"
             readTime="8 min read"
@@ -322,7 +322,7 @@ export default function SierraNevadaBlogPost() {
                     <Info className="w-5 h-5 text-gray-500" />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>El Dorado Reserve is managed by our partner ProAves</p>
+                    <p>El Dorado is a ProAves conservation reference. Confirm current visitor arrangements directly.</p>
                   </TooltipContent>
                 </Tooltip>
               </h2>
@@ -807,7 +807,7 @@ export default function SierraNevadaBlogPost() {
                 providing economic incentives for habitat protection. This model
                 demonstrates how responsible birding tourism can support both
                 conservation goals and indigenous rights. For couples seeking a
-                more intimate experience of these partnerships, our{" "}
+                a possible nature and cultural itinerary, our{" "}
                 <Link
                   href="/tours/souls"
                   className="text-red-600 hover:text-red-700"

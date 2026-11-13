@@ -47,9 +47,7 @@ export default function AboutPage() {
               <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">🌿 About AVES</Badge>
               <h1 className="mb-5 text-3xl font-medium tracking-tight text-emerald-950 md:text-4xl lg:text-5xl">Connecting Hearts to Colombia's Avian Wonders</h1>
               <p className="text-xl text-gray-600 mb-8">
-                We're more than a birding company—we're conservation partners, cultural bridges, and guardians of
-                Colombia's extraordinary biodiversity. Every journey creates lasting impact for birds, communities, and
-                the travelers who join our mission.
+                AVES is developing personal nature travel with careful attention to birds, local knowledge and the places you visit. Our aim is to document the effects of each journey and agree responsibilities before making impact claims.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/shopping">
@@ -64,7 +62,7 @@ export default function AboutPage() {
                     variant="outline"
                     className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 bg-transparent"
                   >
-                    Our Conservation Impact
+                    Our Conservation Approach
                   </Button>
                 </Link>
               </div>
@@ -122,9 +120,7 @@ export default function AboutPage() {
               </p>
 
               <p className="mb-6">
-                Our approach is holistic: we work directly with local communities, employ indigenous and local guides,
-                support conservation research, and ensure that every tour contributes to long-term habitat protection.
-                We're not just showing you birds—we're inviting you to become part of their conservation story.
+                Our intended approach is to agree fair arrangements with local guides and hosts, respect community invitations and describe any conservation contribution explicitly in the proposal. Current roles, access and contributions need confirmation for each journey.
               </p>
             </div>
           </div>
@@ -152,8 +148,7 @@ export default function AboutPage() {
                   Conservation First
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Every tour directly funds habitat protection and restoration projects. We're committed to leaving
-                  ecosystems healthier than we found them.
+                  We aim to consider habitat protection in trip planning. Any funded project, recipient, amount and resulting evidence must be identified before we describe a contribution as delivered.
                 </p>
                 <div className="flex items-center justify-center text-emerald-600 group-hover:text-emerald-700 opacity-0 group-hover:opacity-100 transition-all">
                   <span className="text-sm font-medium mr-1">Learn more</span>

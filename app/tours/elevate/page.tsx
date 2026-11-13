@@ -113,7 +113,7 @@ export default function ElevatePage() {
               <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Coffee Farm Partnerships</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Possible coffee farm visits</h3>
               <p className="text-gray-600">
                 Exclusive access to sustainable coffee farms in the cloud forest, combining birding with cultural
                 immersion and conservation education.

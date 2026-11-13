@@ -125,7 +125,7 @@ export default function AdventurePage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Conservation Project Visits</h3>
               <p className="text-gray-600">
-                Exclusive access to active conservation projects, meeting researchers and seeing conservation in action.
+                Discuss possible visits to conservation projects. Access and participation depend on the organisation’s agreement.
               </p>
             </Card>
           </div>
@@ -215,7 +215,7 @@ export default function AdventurePage() {
                   <Badge className="absolute top-4 left-4 bg-emerald-600 text-white">Featured Story</Badge>
                 </div>
                 <CardContent className="p-8 flex flex-col justify-center">
-                  <Badge className="bg-emerald-100 text-emerald-800 w-fit mb-4">Indigenous Partnerships</Badge>
+                  <Badge className="bg-emerald-100 text-emerald-800 w-fit mb-4">Community visits by invitation</Badge>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     Guardians of the Sky: Birding with the Kogi and Wayuu
                   </h3>

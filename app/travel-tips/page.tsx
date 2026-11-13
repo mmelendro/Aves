@@ -269,22 +269,19 @@ export default function TravelTipsPage() {
                   <li className="flex items-start">
                     <Heart className="w-5 h-5 mr-2 text-red-500 mt-0.5 flex-shrink-0" />
                     <span>
-                      <strong>Community Partnership:</strong> We work directly with local communities, ensuring fair
-                      compensation and meaningful participation
+                      <strong>Community Partnership:</strong> We aim to agree compensation, invitation and participation with each host before including a visit
                     </span>
                   </li>
                   <li className="flex items-start">
                     <Leaf className="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0" />
                     <span>
-                      <strong>Conservation Focus:</strong> Every tour contributes to habitat protection and species
-                      monitoring
+                      <strong>Conservation Focus:</strong> Any contribution needs a named recipient, agreed amount and documented result
                     </span>
                   </li>
                   <li className="flex items-start">
                     <Users className="w-5 h-5 mr-2 text-blue-500 mt-0.5 flex-shrink-0" />
                     <span>
-                      <strong>Local Expertise:</strong> Our guides are from the regions we visit, providing authentic
-                      cultural exchange
+                      <strong>Local Expertise:</strong> Guide identity, local knowledge and responsibilities must be confirmed for the proposed route
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -307,13 +304,13 @@ export default function TravelTipsPage() {
                   <div className="bg-emerald-100 p-4 rounded-lg">
                     <h4 className="font-semibold text-emerald-800 mb-2">Economic Impact</h4>
                     <p className="text-emerald-700 text-sm">
-                      Your tour directly supports 15-20 local families through employment, services, and purchases.
+                      The people and businesses paid for a trip should be recorded. No number of supported households has been verified.
                     </p>
                   </div>
                   <div className="bg-blue-100 p-4 rounded-lg">
                     <h4 className="font-semibold text-blue-800 mb-2">Conservation Contribution</h4>
                     <p className="text-blue-700 text-sm">
-                      A portion of tour fees funds habitat protection and species research programs.
+                      No automatic conservation allocation is included here. Any contribution must be specified in the proposal.
                     </p>
                   </div>
                   <div className="bg-purple-100 p-4 rounded-lg">

@@ -15,7 +15,7 @@ import { canonicalUrl } from "@/lib/site-path"
 
 export const metadata: Metadata = publicMetadata({
   title: "Our B Corp Journey",
-  description: "AVES is pursuing B Corp certification and is not yet certified. Explore our planned preparation and review milestones.",
+  description: "AVES aims to prepare for B Corp certification and is not yet certified. Explore our planned preparation and review milestones.",
   alternates: { canonical: canonicalUrl("/about/b-corp") },
 })
 
@@ -96,7 +96,7 @@ export default function BCorpPage() {
           <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Our B Corp Journey</h1>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto border border-emerald-100">
             <p className="text-xl text-gray-700 font-medium leading-relaxed">
-              AVES is pursuing B Corp certification. We are not yet a certified B Corporation. Our aim is to strengthen
+              AVES aims to prepare for B Corp certification. We are not yet a certified B Corporation. Our aim is to strengthen
               how we care for the people, communities and habitats connected to our birding journeys.
             </p>
           </div>

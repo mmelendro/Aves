@@ -136,7 +136,7 @@ export default function AVESLandingPage({ map }: { map?: ReactNode } = {}) {
           </div>
         </section>
 
-        <p className="mx-auto max-w-7xl px-4 pb-8 text-center text-sm text-gray-600">AVES is pursuing B Corp certification and is not yet certified. <Link href="/about/b-corp" className="inline-flex min-h-11 items-center font-medium text-emerald-800 underline underline-offset-4">Our B Corp journey</Link></p>
+        <p className="mx-auto max-w-7xl px-4 pb-8 text-center text-sm text-gray-600">AVES aims to prepare for B Corp certification and is not yet certified. <Link href="/about/b-corp" className="inline-flex min-h-11 items-center font-medium text-emerald-800 underline underline-offset-4">Our B Corp journey</Link></p>
 
         <div id="contact" className="scroll-mt-24">
           <ContactFormSection showTitle={true} showFAQ={false} />
