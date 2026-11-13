@@ -1,0 +1,36 @@
+import {test,expect,declineOptionalCookies} from './public-fixture'
+test('opening the scheduler never submits an empty or valid enquiry',async({page},info)=>{
+ test.skip(!['desktop','phone-390'].includes(info.project.name),'Scheduling trigger on desktop and phone')
+ let submissions=0;await page.route('**/api/inquiries',route=>{submissions++;return route.fulfill({json:{success:true,status:'stored',country:'colombia',intent:'inquiry'}})})
+ await page.goto('/contact');await declineOptionalCookies(page)
+ const schedule=page.getByRole('button',{name:'Schedule Call',exact:true});await expect(schedule).toHaveAttribute('type','button')
+ await schedule.click();await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Close',exact:true}).first().click();expect(submissions).toBe(0)
+ await page.getByRole('textbox',{name:'First name',exact:true}).fill('Synthetic');await page.getByRole('textbox',{name:'Last name',exact:true}).fill('Visitor');await page.getByRole('textbox',{name:'Email address',exact:true}).fill('synthetic@example.invalid')
+ await schedule.click();await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Close',exact:true}).first().click();expect(submissions).toBe(0)
+ await expect(page.getByRole('textbox',{name:'First name',exact:true})).toHaveValue('Synthetic')
+})
+test('two dirty editors allow section Back and Forward but protect departure',async({page},info)=>{
+ test.skip(!['desktop','phone-390'].includes(info.project.name),'Shared navigation guard')
+ await page.goto('/browser-fixtures/unsaved-workspace#overview');await declineOptionalCookies(page)
+ await page.getByLabel('First editor',{exact:true}).fill('First unsaved note');await page.getByLabel('Second editor',{exact:true}).fill('Second unsaved note')
+ let prompts=0;page.on('dialog',async dialog=>{prompts++;await dialog.dismiss()})
+ await page.getByRole('link',{name:'Journal section',exact:true}).click();await expect(page).toHaveURL(/#journal$/);await page.goBack();await expect(page).toHaveURL(/#overview$/);await page.goForward();await expect(page).toHaveURL(/#journal$/);expect(prompts).toBe(0)
+ await page.getByRole('link',{name:'Leave workspace',exact:true}).click();expect(prompts).toBe(1);await expect(page).toHaveURL(/unsaved-workspace#journal$/)
+ await expect(page.getByLabel('First editor',{exact:true})).toHaveValue('First unsaved note');await expect(page.getByLabel('Second editor',{exact:true})).toHaveValue('Second unsaved note')
+})
+test('enquiry edits survive cancelled navigation and failed receipts, and clear only after stored success',async({page},info)=>{
+ test.skip(!['desktop','phone-390'].includes(info.project.name),'Public enquiry guard')
+ await page.goto('/contact');await declineOptionalCookies(page)
+ await page.getByRole('textbox',{name:'First name',exact:true}).fill('Synthetic');await page.getByRole('textbox',{name:'Last name',exact:true}).fill('Visitor');await page.getByRole('textbox',{name:'Email address',exact:true}).fill('synthetic@example.invalid')
+ const message=page.getByRole('textbox',{name:'Special interests or requests',exact:true});await message.fill('Keep this private draft')
+ page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(message).toHaveValue('Keep this private draft');await expect(page).toHaveURL(/\/contact$/)
+ await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByRole('alert')).toContainText("couldn't confirm")
+ page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(message).toHaveValue('Keep this private draft')
+ await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true,status:'stored',country:'colombia',intent:'inquiry'}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByText(/Your inquiry has been saved/)).toBeVisible();await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(page).toHaveURL(/\/tours$/)
+})
+test('the main conversation link follows all country previews and stays general on the world view',async({page},info)=>{
+ test.skip(info.project.name!=='desktop','Destination context')
+ await page.goto('/');await declineOptionalCookies(page)
+ const conversation=page.getByRole('link',{name:'Start a conversation',exact:true});await expect(conversation).toHaveAttribute('href','/contact?topic=general#inquiry')
+ for(const [country,id] of [['Colombia','colombia'],['Australia','australia'],['New Zealand','new-zealand']]){await page.getByRole('button',{name:country,exact:true}).click();await expect(conversation).toHaveAttribute('href',new RegExp(`country=${id}`))}
+})
