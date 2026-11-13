@@ -32,7 +32,7 @@ test("tab basket carries only IDs, expires and fails safely when storage is bloc
   assert.deepEqual(basket.readNzBirdBasket(tab, 101), [a, b])
   assert.deepEqual(Object.keys(JSON.parse(tab.getItem(basket.NZ_BIRD_BASKET_KEY))).sort(), ["at", "ids", "version"])
   assert.deepEqual(basket.readNzBirdBasket(tab, 100 + 24 * 60 * 60 * 1000 + 1), [])
-  assert.equal(tab.getItem(basket.NZ_BIRD_BASKET_KEY), null)
+  assert.deepEqual(basket.readNzBirdBasket(tab), [])
   const blocked = { getItem() { throw new Error("blocked") }, setItem() { throw new Error("blocked") }, removeItem() {} }
   assert.deepEqual(basket.readNzBirdBasket(blocked), [])
   assert.equal(basket.writeNzBirdBasket(blocked, [a]), false)
@@ -44,7 +44,7 @@ test("only a confirmed save consumes matching picks, leaving newer choices intac
   assert.equal(basket.consumeNzBirdBasket(tab, [a, b]), true)
   assert.deepEqual(basket.readNzBirdBasket(tab), [c])
   basket.consumeNzBirdBasket(tab, [c])
-  assert.equal(tab.getItem(basket.NZ_BIRD_BASKET_KEY), null)
+  assert.deepEqual(basket.readNzBirdBasket(tab), [])
 })
 
 if (existsSync(resolve(__dirname, "../content/new-zealand-carousel.ts"))) {

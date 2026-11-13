@@ -20,7 +20,7 @@ test('combined import retains notes and regions, joins both islands, and remains
 })
 
 test('failed combined import retains every field, including choices merged before an overflowing itinerary',()=>{
-  const current={message:'x'.repeat(4990),birdIds:[],regions:['rakiura']}
+  const current={message:'x'.repeat(59990),birdIds:[],regions:['rakiura']}
   const incoming={birdIds:[],placeIds:[],itineraries:[south.buildTrip(south.defaultTripInput)]}
   const result=importPlanningIdeas(current,incoming)
   assert.ok(result.error)

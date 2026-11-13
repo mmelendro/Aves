@@ -21,7 +21,7 @@ test('place note import preserves guest text, avoids duplicates and refuses over
  const first=p.mergeNzPlaceNotes(original,['mountains','coast'])
  assert.equal(first.error,undefined);assert.ok(first.message.startsWith(original))
  assert.equal(p.mergeNzPlaceNotes(first.message,['mountains']).message,first.message)
- const full='x'.repeat(4995), result=p.mergeNzPlaceNotes(full,['coast'])
+ const full='x'.repeat(59995), result=p.mergeNzPlaceNotes(full,['coast'])
  assert.ok(result.error);assert.equal(result.message,full)
  assert.equal(p.mergeNzPlaceNotes(original,['unknown']).message,original)
 })
@@ -73,5 +73,5 @@ test('landscape ideas are consumed only from exact server-confirmed note text',(
  const s=storage(),photo=p.nzLandscapeIdeas[0];p.writeNzPlaceIdeas(s,[photo.id,'coast']);
  p.consumeSavedNzPlaceIdeas(s,'Unrelated saved notes');assert.ok(p.readNzPlaceIdeas(s).includes(photo.id));
  p.consumeSavedNzPlaceIdeas(s,p.nzPlaceIdeaText([photo.id]));assert.deepEqual(p.readNzPlaceIdeas(s),['coast']);
- const full='x'.repeat(4995);assert.equal(p.mergeNzPlaceNotes(full,[photo.id]).message,full);
+ const full='x'.repeat(59995);assert.equal(p.mergeNzPlaceNotes(full,[photo.id]).message,full);
 });

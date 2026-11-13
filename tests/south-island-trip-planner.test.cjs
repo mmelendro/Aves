@@ -106,7 +106,7 @@ test('itinerary import preserves existing guest notes, avoids exact retry duplic
  const result=p.mergeTripNotes(original,d)
  assert.ok(!result.error);assert.ok(result.message.startsWith(original));assert.match(result.message,/Day 7:/)
  assert.equal(p.mergeTripNotes(result.message,d).message,result.message)
- const full='x'.repeat(4990);assert.equal(p.mergeTripNotes(full,d).message,full);assert.ok(p.mergeTripNotes(full,d).error)
+ const full='x'.repeat(59990);assert.equal(p.mergeTripNotes(full,d).message,full);assert.ok(p.mergeTripNotes(full,d).error)
 })
 test('tab draft expiry, corruption, blocked storage and server-confirmed consumption preserve pending work',()=>{
  const s=storage(),d=p.buildSouthIslandTrip(input())
@@ -137,7 +137,7 @@ test('private editor imports the explicit itinerary without replacing guest note
 })
 test('private editor refuses itinerary overflow while retaining notes, birds and regions',()=>{
  const s=storage(),draft=p.buildSouthIslandTrip(input({days:3,areaId:'arthurs-pass'}));p.writeTripDraft(s,draft)
- const existing={id:'synthetic',title:'Synthetic full brief',country:'new-zealand',regions:['north-island'],message:'x'.repeat(4990)}
+ const existing={id:'synthetic',title:'Synthetic full brief',country:'new-zealand',regions:['north-island'],message:'x'.repeat(59990)}
  const h=componentHarness('components/account/trip-plan-editor.tsx','TripPlanEditor',{plan:existing,onSaved(){},onCancel(){}},{window:{sessionStorage:s},runEffects:true})
  h.render();let tree=h.render();find(tree,n=>n.type==='button'&&n.props.children==='Add Itinerary to Notes').props.onClick();tree=h.render()
  assert.equal(find(tree,n=>n.props.name==='message').props.value,existing.message)
