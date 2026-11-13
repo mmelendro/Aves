@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
+import Image from "./responsive-photo"
 import { Portal as HoverCardPortal } from "@radix-ui/react-hover-card"
 import type { NzChecklistMedia } from "@/content/new-zealand-checklist-media"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
@@ -10,7 +11,7 @@ function Photograph({ photo }: { photo: NzChecklistMedia }) {
   const [failed, setFailed] = useState(false)
   return failed
     ? <p role="status" className="rounded-lg bg-emerald-50 p-6 text-sm text-emerald-950">Image unavailable. You can still select this bird.</p>
-    : <img src={photo.bird.image} alt={`${photo.bird.commonName} (${photo.bird.scientificName}) reference ${photo.kind === "illustration" ? "illustration" : "photograph"}`} loading="lazy" decoding="async" onError={() => setFailed(true)} className="max-h-[45dvh] w-full rounded-lg object-contain" />
+    : <Image src={photo.bird.image} width={1600} height={1200} sizes="(max-width: 767px) 90vw, 640px" alt={`${photo.bird.commonName} (${photo.bird.scientificName}) reference ${photo.kind === "illustration" ? "illustration" : "photograph"}`} loading="lazy" decoding="async" onError={() => setFailed(true)} className="max-h-[45dvh] h-auto w-full rounded-lg object-contain" />
 }
 
 /** Hover/focus is a quick look; the independent button opens a keyboard/touch
@@ -26,7 +27,7 @@ export default function NewZealandChecklistPhoto({ photo, name }: { photo: NzChe
       <HoverCardTrigger asChild>
         <DialogTrigger asChild>
           <button type="button" onBlur={() => { dismissUntilExit.current = false }} onPointerLeave={() => { dismissUntilExit.current = false }} onClick={() => setQuickLook(false)} aria-label={`View image and credits for ${name}`} className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-emerald-200 bg-emerald-50 text-xs text-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
-            {thumbnailFailed ? <span>Image unavailable</span> : <img src={photo.bird.image} alt="" width={64} height={64} loading="lazy" decoding="async" onError={() => setThumbnailFailed(true)} className="h-full w-full object-cover" />}
+            {thumbnailFailed ? <span>Image unavailable</span> : <Image src={photo.bird.image} alt="" width={64} height={64} sizes="64px" loading="lazy" decoding="async" onError={() => setThumbnailFailed(true)} className="h-full w-full object-cover" />}
             {photo.kind === "illustration" && <span className="absolute inset-x-0 bottom-0 bg-white/90 text-[9px]">Illustration</span>}
           </button>
         </DialogTrigger>
