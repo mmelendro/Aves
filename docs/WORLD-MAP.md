@@ -1,5 +1,15 @@
 # Homepage world map — AVES-003a
 
+## Camera continuity increment — November 2026
+
+The main interactive explorer now uses the existing Leaflet geographic engine for Planning, Satellite, Roads and Topographic backgrounds. Only the background layer changes; the mounted map, centre, zoom, geographic bounds and selected region remain. The Equal Earth artwork described below remains the server-rendered/no-JavaScript fallback and the static destination-card illustration. The specialist South Island habitat explorer is a separate follow-up, not covered by this increment.
+
+The planning background uses `public/data/planning-world.geojson`, generated from the same pinned Natural Earth source below. `node scripts/generate-geographic-planning-world.mjs PATH-TO-COUNTRIES.geojson` preserves its geographic coordinates, removes unused metadata and retains only destination IDs and country names. The public-domain file loads when planning geography is displayed, outside the initial JavaScript bundle. Country names appear on hover/focus; destination choices also remain in a native selector. This is planning geography, not official access, bird ranges or current conditions.
+
+Background switches never call fitBounds/setView. Explicit location selection and Reset remain the camera-changing actions. Resize/fullscreen retain the centre and zoom while adapting the visible extent to the new viewport. Browser regressions compare the engine's actual camera and canvas dimensions after manual pan/zoom and repeated switches in both directions, including blocked remote tiles.
+
+The sections below document the original illustrated implementation.
+
 The homepage centers its title above an Equal Earth world map and one connected bird carousel. AVES-003a-2 adds country zoom: select Colombia, Australia or New Zealand to reveal its regional map, choose a region to preview its verified birds, and use Back to world to restore the overview and full country collection. This supersedes the earlier three-card-carousel layout and unpromoted map version `27cc9bd`. Ecological layers remain AVES-003b. Country pages retain their viewers/dividers; shared image framing now preserves intrinsic-photo focal points during resizing.
 
 ## Source and projection

@@ -2,9 +2,8 @@
 
 import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import dynamic from "next/dynamic"
-import { useMapLayers } from "./map-layer-context"
 import type { GeographicScope } from "./geographic-satellite-map"
-const GeographicSatelliteMap = dynamic(()=>import("./geographic-satellite-map"),{ssr:false,loading:()=> <p role="status" className="p-4 text-xs">Opening satellite map…</p>})
+const GeographicSatelliteMap = dynamic(()=>import("./geographic-satellite-map"),{ssr:false,loading:()=> <p role="status" className="p-4 text-xs">Opening map…</p>})
 
 import { Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react"
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, isMapDoubleTap, type MapView } from "@/lib/map-gestures.mjs"
@@ -20,8 +19,11 @@ import styles from "./map-viewer.module.css"
  * remains native outside its surface; the optional hand button pauses gestures.
  */
 export function MapViewer({ geographicScope, children, label, gestures = true, credits, listenControl, layerControl, viewKey, onZoomOutAtMinimum }: { geographicScope?: GeographicScope; viewKey?: string; onZoomOutAtMinimum?: () => void; children: ReactNode; label: string; gestures?: boolean; credits?: ReactNode; listenControl?: ReactNode; layerControl?: ReactNode }) {
-  const {layers}=useMapLayers()
-  const geographic=layers.background !== "habitats" && Boolean(geographicScope)
+  // Keep the illustrated guide and its native links available in server HTML.
+  // After hydration all background choices share the same geographic instance.
+  const [mounted,setMounted]=useState(false)
+  useEffect(()=>setMounted(true),[])
+  const geographic=Boolean(geographicScope)&&mounted
   gestures=gestures && !geographic
   const [engineControls,setEngineControls]=useState<MapZoomControls|null>(null)
   const registerControls=useCallback((controls:MapZoomControls)=>{setEngineControls(controls);return()=>setEngineControls(null)},[])
