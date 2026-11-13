@@ -14,6 +14,8 @@ Account and planner Spanish controls are published, including a tested multiline
 
 The current owner Eco Tourism Business Plan v3 and cash model remain authoritative. Actual cash, pay, costs and capacity stay unknown until supplied. No invitations, public private-journal sharing, actual test-data deletion or production restore are authorised by the audit request.
 
-See [the independent group evidence](docs/audit/INDEPENDENT-0-19-2026-11-13.md). The next owner decision is 20; do not invent figures to close it.
+See [the independent group evidence](docs/audit/INDEPENDENT-0-19-2026-11-13.md). The next owner decision is 20; do not invent figures to close it. The product audit adds independent work starting at 36, so owner actuals do not block those technical scopes.
 
 Existing leaked-password-protection configuration remains visible under item 24. Confirm Supabase Pro eligibility, settings access and any cost decision before enabling it. The private RLS information is recorded in the queue; do not invent a completed security-setting change.
+
+The [product journey audit](docs/audit/PRODUCT-AUDIT-2026-11-13.md) adds open items 36 to 55. Preserve published 0 to 19 and unchanged pending 20 to 35. Repair 36 to 46, then verify/publish under 47. New capabilities 48 to 54 follow; source-dependent eBird preview 55 waits for the originals and rights work. No app change or deployment was made by this audit.

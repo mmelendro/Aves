@@ -45,7 +45,7 @@ Reference: current owner Eco Tourism Business Plan v3. Founder pay, current cash
 | 34 | D | Decide the first paid pilot | 95 | 20, 21, 22, 29, 30, 31, 32 |
 | 35 | D | Select the next cycle using actual evidence | 100 | 24, 32, 34 |
 
-A requires no owner input and is authorised for implementation and publication now. B needs short decisions or figures. C needs originals, permissions or isolated test access. D needs physical device participation, actual feedback or a specific irreversible cleanup decision.
+A requires no owner input. Original items 0 to 19 are published. New items 36 to 54 are open product-audit scopes; this audit made no application changes. B needs short decisions or figures. C needs originals, permissions or isolated test access. D needs physical device participation, actual feedback or a specific irreversible cleanup decision.
 
 Commit 26 preserves reviewed national inventories and regional matches. A common name containing Santa Marta is a review lead, not complete range evidence. Commit 25 distinguishes planned itinerary from actual travel and owner entered observations from verified records. Commit 29 must not restore over production. Commit 33 must not delete unidentified records. Invitations and public private-journal sharing are not authorised by this audit.
 
@@ -62,3 +62,32 @@ Item 21 also retains the remaining commercial, cultural and legal Spanish editor
 The live browser review found a multiline translation lookup defect. A regression test and a separate item 19 correction were added, the complete release workflow reran successfully, then both domains moved to the corrected production build. Prior application deployment `dpl_2MTiqPsVevLD2PLUhiMA3BPjh7t2` is retained, alongside the pre-audit baseline `dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn`.
 
 The final Supabase security review reports the existing `rls_enabled_no_policy` information and `auth_leaked_password_protection` warning. The disabled password check remains under current item 24 for plan eligibility and project settings review. The [official password guidance](https://supabase.com/docs/guides/auth/password-security) lists this feature on Pro and above. No paid upgrade or Auth setting change was made.
+
+## Product journey audit extension
+
+[Evidence and completion criteria](audit/PRODUCT-AUDIT-2026-11-13.md). Existing 20 to 35 are unchanged. The new list below precedes implementation of these scopes. Priority order: repair 36 to 47, then useful additions 48 to 54. Item 55 waits for actual source prerequisites.
+
+| Commit | Group | Type | Scope | Dependencies | State |
+|---|---|---|---|---|---|
+| 36 | A | Repair | Keep calendar dates unchanged across time zones | None | Open |
+| 37 | A | Repair | Recover guest itinerary edits and respect cleared bird wishes | None | Open |
+| 38 | A | Repair | Prevent copying an outdated itinerary | None | Open |
+| 39 | A | Repair | Carry valid longer routes without overflowing planning notes | None | Open |
+| 40 | A | Repair | Price optional alternatives consistently | None | Open |
+| 41 | A | Repair | Apply world bird filters using each bird's country | None | Open |
+| 42 | A | Repair | Open the exact place selected in search or favourites | None | Open |
+| 43 | A | Repair | Protect unsaved album journal and media edits during navigation | 14 | Open |
+| 44 | A | Repair | Finish evidence-based wording in media credits and tour features | None | Open |
+| 45 | A | Repair | Use smaller existing renditions throughout the NZ bird picker | None | Open |
+| 46 | A | Performance | Load country gallery data only when needed | None | Open |
+| 47 | A | Verification | Verify and publish the repaired planning journey | 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 | Open |
+| 48 | A | New capability | Store an owned versioned editable itinerary | 39, 47 | Open |
+| 49 | A | New capability | Review and import structured travel preferences | 48 | Open |
+| 50 | A | New capability | Reopen and edit saved itinerary days | 48, 49 | Open |
+| 51 | A | New capability | Include selected saved brief details in the offline pack | 48, 49 | Open |
+| 52 | A | New capability | Add selected planning wishes to the private bird album | 47 | Open |
+| 53 | A | New capability | Link owned journal entries and photos to bird records | 43, 52 | Open |
+| 54 | A | New capability | Show a private bird collection across trips | 52, 53 | Open |
+| 55 | C | New capability | Preview and reconcile a supplied eBird trip import | 23, 25, 26, 52 | Open |
+
+No new production deployment was made for the audit. The release block above remains the published runtime evidence, not a claim that these new items are complete.

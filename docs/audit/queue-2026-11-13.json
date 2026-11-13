@@ -15,9 +15,9 @@
     "publicRoutesPassed": 81,
     "ci": "https://github.com/mmelendro/Aves/actions/runs/43344621251"
   },
-  "sourceAudit": "81 live public URLs: 0 HTTP/basic structure errors. Source review, browser review, current owner business plan v3 and B Lab ESC guidance. Physical Safari and actual hosted positive flows remain unverified.",
+  "sourceAudit": "81 live public URLs: 0 HTTP/basic structure errors. Source review, browser review, current owner business plan v3 and B Lab ESC guidance. Physical Safari and actual hosted positive flows remain unverified. Product journey follow-up: live North Island copy and reload checks, source reproductions for dates, world filters, route length, alternatives and place URLs. New scopes 36 to 55 are open.",
   "groups": {
-    "A": "No owner involvement. Implement and publish now.",
+    "A": "No owner input required. Original 0 to 19 published. New 36 to 54 are audited scopes, not implemented by this audit.",
     "B": "Owner decisions or actual figures.",
     "C": "Files permissions or authorised environment access.",
     "D": "Participation actual feedback or later release decision."
@@ -430,6 +430,304 @@
         32,
         34
       ]
+    },
+    {
+      "id": 36,
+      "title": "Keep calendar dates unchanged across time zones",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "components/account/account-api.ts:55 anchors date-only strings at UTC noon. Source execution renders 2026-11-13 as 14 Nov 2026 in Pacific/Auckland, while UTC and Sydney render 13 Nov.",
+      "acceptance": "Separate calendar dates from timestamps. Test New Zealand summer and winter, Sydney, UTC and a negative UTC offset. Preserve legitimate timestamp localisation.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 37,
+      "title": "Recover guest itinerary edits and respect cleared bird wishes",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Live North Island journey generated a seven-day draft with entered allowances. Reload before handoff restored the five-day default. components/island-trip-planner.tsx:80,134,154,175 stores only when carrying to My Trips. Its restore path overlays only nonempty bird baskets, so an explicitly cleared basket can resurrect old wishes.",
+      "acceptance": "Provide an explicit, truthful tab recovery contract for generated routes and day edits. Preserve per-island separation, expiry, empty selections and blocked-storage feedback. Do not imply an account save.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 38,
+      "title": "Prevent copying an outdated itinerary",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Live seven-day North Island draft changed to six days. Carry was disabled, but Copy itinerary remained enabled and copied the seven-day route. components/island-trip-planner.tsx:173 guards carry, while :185 does not guard copy.",
+      "acceptance": "Copy must use the current reviewed draft or require rebuilding. Cover changes to days, dates, currency, allowances and bird wishes. Keep a readable fallback when clipboard access fails.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 39,
+      "title": "Carry valid longer routes without overflowing planning notes",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Source reproduction: valid 30-day South Island Christchurch to Queenstown route, 15 sourced bird wishes and four allowances creates 5,659 characters. mergeTripNotes rejects it even with empty notes because of its 5,000-character limit. Existing notes are correctly preserved.",
+      "acceptance": "Support a valid maximum-length draft through private handoff without silent truncation or dropped warnings. Preserve existing notes and an inspectable full route. Do not merely raise a client limit without checking API, database and backup contracts.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 40,
+      "title": "Price optional alternatives consistently",
+      "type": "Repair",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "lib/island-trip-planner.ts:432 counts primary and optional alternative experiences together. A valid three-day draft at 100 per experience increases from 300 to 400 after adding an alternative to day one. The workload and reference-price views describe that outing as an alternative.",
+      "acceptance": "Distinguish replacements from additional outings consistently in scheduling, allowance totals, copied output and reference comparisons. Leave free and unquoted references clearly distinct.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 41,
+      "title": "Apply world bird filters using each bird's country",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "components/homepage-destination-explorer.tsx:87,95 uses the default country, Colombia, to filter the combined world catalogue. Source reproduction returns five endemics rather than 45 combined country matches, and 22 native birds rather than 72. DestinationCardMedia and HomepageBirdCarousel repeat the country filter.",
+      "acceptance": "Retain country provenance through world filtering and the carousel. World counts must equal combined country results. Keep map highlighting, bird identity and sound context consistent.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 42,
+      "title": "Open the exact place selected in search or favourites",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "lib/discovery-index.ts:20 gives Cocora Valley, Nevado del Ruiz and Laguna del Otun the same regional gallery URL. components/place-gallery.tsx keeps photo choice only in memory. Favourites reuse the broad URLs.",
+      "acceptance": "Use validated stable place identifiers. Search, favourites, refresh and Back must focus the chosen public place and correct region without inventing precise wildlife coordinates. Check North and South Island place destinations too.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 43,
+      "title": "Protect unsaved album journal and media edits during navigation",
+      "type": "Repair",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        14
+      ],
+      "evidence": "components/account/bird-album.tsx:16 and trip-workspace.tsx:34 use unload warnings only. They do not register with the shared unsaved-changes guard used by the plan editor. Logo/footer Next navigation and history can bypass unload. Source-evidenced gap, not a reproduced loss of real private data.",
+      "acceptance": "Register all dirty private editors with the shared guard. Test cancel and discard through logo, footer and Back. Successful saves must clear only the saved editor's warning.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 44,
+      "title": "Finish evidence-based wording in media credits and tour features",
+      "type": "Repair",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "content/birds-catalogue.json:19,100,129 retains AVES Guide appointments and obsolete partner fragments rendered by species-details-panel.tsx. Live tours still links maximum-four participation to minimal environmental impact and describes services without the point-of-use qualifications added to the price table.",
+      "acceptance": "Preserve creator attribution using neutral roles and valid reviewed links. Qualify proposed group size and unconfirmed services. Remove unsupported impact guarantees. Current appointments and commercial/editorial review remain item 21.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 45,
+      "title": "Use smaller existing renditions throughout the NZ bird picker",
+      "type": "Repair",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "components/new-zealand-checklist-photo.tsx:13,29 uses original image sources instead of the existing responsive-photo adapter. The kea original is 1,267,937 bytes despite an available 640-pixel rendition. This bypasses the lower-bandwidth preference. Source and asset-size finding, not measured visitor bandwidth.",
+      "acceptance": "Use existing responsive renditions for thumbnails, quick looks and dialogs. A fresh lower-bandwidth test must avoid the original, retain attribution and illustration labels, and recover from failed images.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 46,
+      "title": "Load country gallery data only when needed",
+      "type": "Performance",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [],
+      "evidence": "Published homepage estimated initial gzip is 366,440 bytes against 367,210. lib/place-gallery.ts imports all gallery data and responsive-photo.tsx imports the full rendition map. Their source JSON files total 287,464 raw bytes. Raw source size is not emitted transfer size.",
+      "acceptance": "Defer noncurrent-country media data or pass bounded records from the server. Measure resulting production chunks without increasing budgets. Preserve switching, focus, credits, language and failure states.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 47,
+      "title": "Verify and publish the repaired planning journey",
+      "type": "Verification",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "evidence": "This audit found integration failures despite individually passing release checks. Existing release evidence remains valid for its original scopes, not these new findings.",
+      "acceptance": "Run focused regressions and required release checks, then follow a synthetic public route through recovery, copying and private handoff. Publish only passing changes, verify both domains and retain rollback. Real positive account, restore, Safari and independent-person acceptance remain 29 to 31.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 48,
+      "title": "Store an owned versioned editable itinerary",
+      "type": "New capability",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        39,
+        47
+      ],
+      "evidence": "Confirmed private save consumes the tab draft, while persisted itinerary content is prose. lib/island-trip-planner.ts already defines a validated structured draft. Saved plans currently do not retain that complete editable representation.",
+      "acceptance": "Add a bounded versioned owner-only itinerary contract with revision conflicts, destination validation, complete backup coverage and compatibility for existing prose-only plans. Additive migration, no fabricated legacy routes and no production restore.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 49,
+      "title": "Review and import structured travel preferences",
+      "type": "New capability",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        48
+      ],
+      "evidence": "trip-plan-editor.tsx:140 imports notes, bird IDs and regions, while timing, party and questionnaire preferences remain separate. Public allowances include currency, transport and per-experience basis that do not map directly to the private budget questions.",
+      "acceptance": "Preview dates, adults, rooms, currency, activity basis and transport preferences before explicit import. Preserve existing answers unless the owner chooses replacement. Never silently convert currency or reinterpret daily and per-experience figures.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 50,
+      "title": "Reopen and edit saved itinerary days",
+      "type": "New capability",
+      "priority": "High",
+      "group": "A",
+      "dependsOn": [
+        48,
+        49
+      ],
+      "evidence": "Existing private comparison and notes editing work, but do not reopen the saved daily TripDraft in the island planner.",
+      "acceptance": "Reopen the owned saved route, edit days and save with conflict handling. Preserve notes, expenses and journal data. Changing a generated route must never claim to change an actual booking.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 51,
+      "title": "Include selected saved brief details in the offline pack",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        48,
+        49
+      ],
+      "evidence": "trip-pack-handler.ts reads complete details but sends only details.message and title into the renderer. A useful saved destination, timing, party or budget can be omitted if not repeated in notes. Existing selected tasks and practical records work.",
+      "acceptance": "Offer an explicit saved-brief selection covering destination, timing, party and entered budget with currency and basis. Include a saved structured route when selected. Preserve no-script offline behaviour, exclusions, revision checks and private-only delivery.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 52,
+      "title": "Add selected planning wishes to the private bird album",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        47
+      ],
+      "evidence": "The planning bird wishes and the private desired/observed album are separate working features. There is no explicit bridge for the owner to choose which wishes become album records.",
+      "acceptance": "Preview and add selected stable species IDs as desired only. Make repeated imports idempotent, preserve existing observations, apply catalogue and record limits, and never invent an observation date or sighting.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 53,
+      "title": "Link owned journal entries and photos to bird records",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        43,
+        52
+      ],
+      "evidence": "lib/bird-album.ts stores species, state, date, region and notes. Existing private media attaches to journal entries rather than bird records. This is a missing connection, not a missing uploader.",
+      "acceptance": "Let the owner explicitly link an existing journal entry or photo. Enforce same-owner and same-trip access, retain creator information and handle removed media. Photo linking grants no verified-sighting status. Original Colombia imports remain item 25.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 54,
+      "title": "Show a private bird collection across trips",
+      "type": "New capability",
+      "priority": "Medium",
+      "group": "A",
+      "dependsOn": [
+        52,
+        53
+      ],
+      "evidence": "bird-album.tsx and its handlers scope each working album to one plan. No owner-level view brings those albums together.",
+      "acceptance": "Show distinct desired and owner-observed species with linked trips, licensed reference or owned photos and clear no-photo states. Deduplicate stable IDs while retaining repeated observations. Name the catalogue denominator and award no verification, invented rarity or competitive score.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 55,
+      "title": "Preview and reconcile a supplied eBird trip import",
+      "type": "New capability",
+      "priority": "Later",
+      "group": "C",
+      "dependsOn": [
+        23,
+        25,
+        26,
+        52
+      ],
+      "evidence": "The user intends to supply the trip report and originals. The current reviewed route is planned travel, not a source of actual daily records. No exact export schema, original sightings or reuse rights were supplied in this audit.",
+      "acceptance": "Once source prerequisites are supplied, map the actual export in a private dry run. Show matched species, unmatched taxonomy, dates, duplicate records and withheld sensitive places before an explicit import. Keep evidence and owner-entered status distinct and never publish automatically.",
+      "status": "Open",
+      "previous": [],
+      "audit": "Product journey audit, 13 November 2026"
     }
   ],
   "verification": "docs/audit/INDEPENDENT-0-19-2026-11-13.md",
@@ -477,8 +775,18 @@
     "nextOwnerDecision": 20,
     "pending": [
       20,
-      35
-    ]
+      55
+    ],
+    "nextIndependent": 36,
+    "repairBatch": [
+      36,
+      47
+    ],
+    "newCapabilityBatch": [
+      48,
+      54
+    ],
+    "sourceDependentExtension": 55
   },
   "securityAdvisors": {
     "reviewedOn": "2026-11-13",
@@ -495,5 +803,34 @@
     ],
     "source": "https://supabase.com/docs/guides/auth/password-security",
     "scope": "Existing advisory types, retained explicitly for platform review. No paid feature was enabled."
+  },
+  "productAudit": {
+    "report": "docs/audit/PRODUCT-AUDIT-2026-11-13.md",
+    "sourceHead": "1cd1aaf2b69b370a373bed252e4f9434539c3c3c",
+    "runtime": "bfe1192176813c4e273c1636d5fabc22807161e0",
+    "appChanged": false,
+    "newItems": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "verificationLimit": "Positive real accounts, isolated restore, physical Safari and independent traveller acceptance remain unverified under items 29 to 31."
   }
 }
