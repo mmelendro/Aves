@@ -50,12 +50,14 @@ export function countryLabel(country?: TripCountry) { return countryLabels[tripC
  */
 export function regionSummary(regions: string[], country?: TripCountry) { const labels = countryRegionLabels[tripCountry(country)]; return regions.map(region => labels[region] || region).join(", ") || "Open to inspiration" }
 /**
- * Format a date for display; anchor date-only values at UTC noon to reduce timezone day-shift surprises.
+ * Calendar dates keep their named day. Instants use the viewer's time zone.
  */
 export function dateLabel(value: string | null | undefined) {
   if (!value) return "Not specified"
-  const date = new Date(value.length === 10 ? `${value}T12:00:00Z` : value)
-  return Number.isNaN(date.getTime()) ? "Not specified" : new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric" }).format(date)
+  const calendar = /^\d{4}-\d{2}-\d{2}$/.test(value)
+  const date = new Date(calendar ? `${value}T00:00:00Z` : value)
+  if (Number.isNaN(date.getTime()) || (calendar && date.toISOString().slice(0,10) !== value)) return "Not specified"
+  return new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric", ...(calendar ? {timeZone:"UTC"} : {}) }).format(date)
 }
 /**
  * Choose the caught error's user-facing text, or a generic fallback for non-Error failures.
