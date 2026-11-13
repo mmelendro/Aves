@@ -36,11 +36,11 @@ export default function ToursPage() {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-emerald-600">4</div>
-                <div className="text-sm text-gray-600">Max Group Size</div>
+                <div className="text-sm text-gray-600">Proposed group size</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-emerald-600">10</div>
-                <div className="text-sm text-gray-600">Bioregions</div>
+                <div className="text-sm text-gray-600">Planning regions</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-emerald-600">Considered</div>
@@ -66,18 +66,18 @@ export default function ToursPage() {
                   Our signature birding expeditions across Colombia's prime hotspots. 7-14 days of immersive wildlife
                   discovery through diverse ecosystems.
                 </p>
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 mb-6"><p className="text-xs text-gray-600">Planning ideas, subject to a personal proposal and availability.</p>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-emerald-600 mr-2" />
-                    Professional ornithologist guides
+                    Specialist guiding to discuss
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-emerald-600 mr-2" />
-                    Premium eco-lodges
+                    Lodge options to review
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-emerald-600 mr-2" />
-                    Conservation project visits
+                    Possible conservation visits, subject to host consent
                   </div>
                 </div>
                 <div className="space-y-4">
@@ -105,21 +105,20 @@ export default function ToursPage() {
                   <Badge className="bg-purple-100 text-purple-800">V</Badge>
                 </div>
                 <p className="text-gray-600 mb-6">
-                  Specialized photography and videography workshops with professional wildlife photographers capturing
-                  Colombia's avian beauty.
+                  A proposed photography journey. Discuss your experience and goals before confirming instruction, guides or access.
                 </p>
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 mb-6"><p className="text-xs text-gray-600">Planning ideas, subject to a personal proposal and availability.</p>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-600 mr-2" />
-                    Exclusive photography hides
+                    Hide access to confirm
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-600 mr-2" />
-                    Personalized technical instruction
+                    Photography instruction to discuss
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-600 mr-2" />
-                    Post-processing sessions
+                    Editing sessions to discuss
                   </div>
                 </div>
                 <div className="space-y-4">
@@ -147,21 +146,20 @@ export default function ToursPage() {
                   <Badge className="bg-yellow-100 text-yellow-800">E</Badge>
                 </div>
                 <p className="text-gray-600 mb-6">
-                  Premium expeditions with luxury amenities in exclusive locations for the ultimate comfort experience
-                  in Colombia's finest reserves.
+                  A proposed style for travellers seeking greater comfort. Stays, access, amenities and supplier availability need a personal review.
                 </p>
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 mb-6"><p className="text-xs text-gray-600">Planning ideas, subject to a personal proposal and availability.</p>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-yellow-500 mr-2" />
-                    Customized itineraries
+                    A route tailored to your interests
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-yellow-500 mr-2" />
-                    Gourmet dining experiences
+                    Dining preferences to discuss
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-yellow-500 mr-2" />
-                    Wellness facilities access
+                    Wellness access to confirm
                   </div>
                 </div>
                 <div className="space-y-4">
@@ -192,7 +190,7 @@ export default function ToursPage() {
                   Romantic retreats combining birding with intimate experiences in secluded, breathtaking locations
                   perfect for couples.
                 </p>
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 mb-6"><p className="text-xs text-gray-600">Planning ideas, subject to a personal proposal and availability.</p>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-red-500 mr-2" />
                     Couples-only experiences
@@ -257,7 +255,7 @@ export default function ToursPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Small Groups</h3>
               <p className="text-gray-600">
-                Maximum 4 participants per tour ensures personalized attention and minimal environmental impact.
+                We propose groups of up to four. Confirm the final group size, guiding arrangements and site restrictions in your personal proposal. A small group alone does not establish environmental impact.
               </p>
             </Card>
             <Card className="text-center p-8 border-0 shadow-lg">
@@ -273,9 +271,9 @@ export default function ToursPage() {
               <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Award className="w-8 h-8 text-emerald-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Expert Guides</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Guiding to Discuss</h3>
               <p className="text-gray-600">
-                Professional ornithologists and local experts provide unmatched knowledge and insights.
+                Discuss the guiding expertise your route needs. Named guides, credentials, languages and availability require confirmation before agreement.
               </p>
             </Card>
           </div>

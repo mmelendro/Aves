@@ -16,11 +16,11 @@
     ],
     "photoCredit": {
       "photographer": "Nicolás Rozo",
-      "title": "AVES Guide",
+      "title": "Photographer",
       "teamLink": "/credits",
       "instagramPost": "https://www.instagram.com/p/C247ZDJgXBa/",
       "reserve": "Parque Natural Del Sumapaz",
-      "reserveLink": "/about/partners#parque-natural-del-sumapaz"
+      "reserveLink": "/regions/eastern-andes"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gnbhel1-jW2PKUzvLWZei8669aA02TqmJyaG67.mp3",
     "audioLabel": "Recording retained from the original AVES collection"
@@ -44,7 +44,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "Termales del Ruiz",
-      "reserveLink": "/about/partners#termales-del-ruiz",
+      "reserveLink": "/regions/central-andes",
       "teamLink": "/credits"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rabtho1-wSpzpHneonuPjIv0HlwJvDekyiIOFS.mp3",
@@ -70,7 +70,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "Reserva Río Blanco",
-      "reserveLink": "/about/partners#reserva-rio-blanco",
+      "reserveLink": "/regions/central-andes",
       "teamLink": "/credits"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bbmtou1-2FO9udCERF00OCxv3mOYD7NSsuBka4.mp3",
@@ -97,10 +97,10 @@
     ],
     "photoCredit": {
       "photographer": "Martin Melendro",
-      "title": "AVES Guide",
+      "title": "Photographer",
       "teamLink": "/credits",
       "reserve": "Reserva Río Blanco",
-      "reserveLink": "/about/partners#reserva-rio-blanco"
+      "reserveLink": "/regions/central-andes"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chcant2-Ki53m2SAfspPkf802ytalVJP6ydkP6.mp3",
     "audioLabel": "Recording retained from the original AVES collection"
@@ -126,10 +126,10 @@
     ],
     "photoCredit": {
       "photographer": "Martin Meléndro",
-      "title": "AVES Guide",
+      "title": "Photographer",
       "teamLink": "/credits",
       "reserve": "Reserva Río Blanco",
-      "reserveLink": "/about/partners#reserva-rio-blanco"
+      "reserveLink": "/regions/central-andes"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/higmot1-eVTxTFPesSMAvyUuvDpYGmBUOvhIou.mp3",
     "audioLabel": "Recording retained from the original AVES collection"
@@ -153,7 +153,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "La Guajira",
-      "reserveLink": "/about/partners#la-guajira",
+      "reserveLink": "/regions/caribbean",
       "teamLink": "/credits"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vercar1-WoATFgG9uKl13LGTrEjhszPdrlkyqU.mp3",
@@ -176,10 +176,10 @@
     ],
     "photoCredit": {
       "photographer": "Martin Melendro",
-      "title": "AVES Lead Guide & Founder",
+      "title": "Photographer",
       "teamLink": "/credits",
       "reserve": "Jardín de Rocas",
-      "reserveLink": "/about/partners#jardin-de-rocas"
+      "reserveLink": "/regions/western-andes"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vepcor1-SUWzqmkywsyiGwsIZnfR6EeBx65w9e.mp3",
     "audioLabel": "Recording retained from the original AVES collection"
@@ -209,7 +209,7 @@
     ],
     "photoCredit": {
       "photographer": "Martin Melendro",
-      "title": "AVES Lead Guide & Founder",
+      "title": "Photographer",
       "teamLink": "/credits"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gohman1-sOmUeeC5xVszFJSmeZ66Try02jkzGB.mp3",
@@ -242,7 +242,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "Refugio La Esmeralda",
-      "reserveLink": "/about/partners#refugio-la-esmeralda",
+      "reserveLink": "/regions/cauca-valley",
       "teamLink": "/credits"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/strman5-M7ePaDFfvKHcN4hSew56PkYN1C7B8N.mp3",
@@ -268,7 +268,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "La Guajira",
-      "reserveLink": "/about/partners#la-guajira",
+      "reserveLink": "/regions/caribbean",
       "teamLink": "/credits"
     },
     "audioFile": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/scadov1-ZY5P1ezfAmzpRMfahJV0otL1QasgoJ.mp3",
@@ -294,7 +294,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "Chamicero de Perija",
-      "reserveLink": "/about/partners#proaves",
+      "reserveLink": "/regions/eastern-andes",
       "teamLink": "/credits"
     },
     "audioFile": "/audio/co-yellow-throated-toucan.mp3",
@@ -320,7 +320,7 @@
       "photographer": "Royann",
       "title": "Wildlife Photographer",
       "reserve": "Chamicero de Perija",
-      "reserveLink": "/about/partners#fundacion-proaves",
+      "reserveLink": "/regions/eastern-andes",
       "teamLink": "/credits"
     },
     "audioFile": "/audio/co-golden-headed-quetzal.mp3",
