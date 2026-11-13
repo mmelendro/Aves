@@ -16,7 +16,7 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 | **Other local drafts** | Team/guide profiles, creator album/credits, About/copy/footer, admin-plan cleanup | Preserve and review as separate increments. Not included in the pushed feature candidate; no live deletion authorized |
 | **Content work queued** | Comprehensive regional evidence/status coverage, Colombia journal, stories, contribution invitations, drones and 3D | Existing national catalogues are substantial; regional evidence and verified conservation coverage remain incomplete. See R32 audit below |
 
-**Next action:** verify [CI 43524486102](https://github.com/mmelendro/Aves/actions/runs/43524486102) for exact candidate `0d8ab5e0a412ed9a0f9dd130f652361f110ee306`, then deploy to aves.bio only if every gate passes. This combines the text-reflow repair with the main explorer camera increment. The specialist South Island habitat map follows separately.
+**Next action:** verify [CI 43526436679](https://github.com/mmelendro/Aves/actions/runs/43526436679) for exact candidate `85ba58ee885b082bab48018e0fde1d30f46a2f70`, then deploy to aves.bio only if every gate passes. This combines the text-reflow repair with the main explorer camera increment. The specialist South Island habitat map follows separately.
 
 **Latest diagnostic and correction:** CI 43515115628 identified the landscape-region label/select as the concrete width offender: its box extended from x=16 to x=350 on a 320px screen. The label and select now have explicit bounded width and `min-width: 0`. The correction passed full CI and live checks; earlier cookie/map-containment attempts were insufficient.
 
@@ -28,15 +28,15 @@ Implementation should share geographic camera state between renderers (or use on
 
 ### Pushed implementation commits
 
-Latest candidate: `997fde8` fixes hydrated text reflow; `37afecd` adds the shared geographic camera, reviewed planning-world geometry and browser regressions; `0d8ab5e` updates enquiry/history tests to use the new map selectors. Local evidence: 785 unit tests (including unrelated drafts), production build, source/cleanup audits, 18 final focused camera/reflow/region-selection checks across phone, Chromium and Firefox. Album, control, branding and resize journeys also passed in the broader run; an earlier Firefox movement-timing failure was corrected and rerun. Only exact-commit CI can authorize publication. The first camera CI run (43522860439) passed build/audits/budgets but stopped on the enquiry test’s obsolete selector name. The replacement retains its country/region enquiry-link assertions; that journey and all 12 history/deep-link checks now pass locally. The complete suite is rerunning on `0d8ab5e`.
+Latest candidate: `997fde8` fixes hydrated text reflow; `37afecd` adds the shared geographic camera, reviewed planning-world geometry and browser regressions; `0d8ab5e` updates enquiry/history tests to use the new map selectors. Local evidence: 785 unit tests (including unrelated drafts), production build, source/cleanup audits, 18 final focused camera/reflow/region-selection checks across phone, Chromium and Firefox. Album, control, branding and resize journeys also passed in the broader run; an earlier Firefox movement-timing failure was corrected and rerun. Only exact-commit CI can authorize publication. The first camera CI run (43522860439) passed build/audits/budgets but stopped on the enquiry test’s obsolete selector name. The replacement retains its country/region enquiry-link assertions; that journey and all 12 history/deep-link checks now pass locally. CI 43524486102 then passed all camera/history/enquiry checks and 176 full-suite browser checks, but three accessibility checks flagged the same undersized Leaflet attribution link. `85ba58e` gives map-credit links a minimum 24×24px target without removing attribution. Full CI is rerunning on that correction.
 
 | Commit | Increment | Publication status |
 |---|---|---|
 | `f5319dd` | Regional AVES identity and country/regional bird-list entry links | Live in `a4acaed` |
 | `54ff0ae` | Landscape navigation wrapping and browser readiness checks | Live in `a4acaed` |
 | `4d8ad0d` | Desktop map/guide edge and corner resizing, keyboard controls and geometry/browser tests | Live in `a4acaed`; CI and live resize/reset checks pass |
-| `2c87765` | Separate, scrollable cookie choices with adequate touch targets | Pushed; did not resolve the underlying page-width problem |
-| `a4527a0` | Paint containment for zoomed map artwork | Pushed; local matrix passes; Linux page overflow remains |
+| `2c87765` | Separate, scrollable cookie choices with adequate touch targets | Live; hardening retained, with the actual width cause fixed in `a4acaed` |
+| `a4527a0` | Paint containment for zoomed map artwork | Live; paint containment retained, with the actual width cause fixed in `a4acaed` |
 | `a4acaed` | Bound the actual landscape-region label/select width | Live; full CI and phone checks pass |
 | `1e229d4` through `c8b7376` | Phone touch/viewport diagnostics and early deployable-page regression gate | Pushed; diagnostic/test changes, not additional public features |
 
@@ -63,7 +63,7 @@ Updated from the pasted Revamp conversation and subsequent requests on 13 Novemb
 
 **Latest live release:** `a4acaed`, deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`, on aves.bio. www redirects to that same canonical address. CI 43516111175 passed 782 unit tests, 33 priority journeys and 161 full-suite browser checks, with lint/types/build/audits/accessibility/budgets. Normal-width live region, inventory, photo and resize checks passed. The extended 200% text finding above remains open until the next candidate is deployed. The previous inventory release `231e8e9` remains a rollback reference, not the current release.
 
-**Current candidate:** `0d8ab5e0a412ed9a0f9dd130f652361f110ee306`, including ancestor `997fde8`, awaiting complete CI 43524486102. Background switching preserves geographic centre, scale, bounds, canvas dimensions and selected region in the main explorer. Fullscreen/resize retain centre and zoom; explicit location selection and Reset may change the camera. Country names in the planning world view appear on hover/focus. Do not claim completion for the separate South Island habitat map or the entire touch-label design.
+**Current candidate:** `85ba58ee885b082bab48018e0fde1d30f46a2f70`, including ancestor `997fde8`, awaiting complete CI 43526436679. Background switching preserves geographic centre, scale, bounds, canvas dimensions and selected region in the main explorer. Fullscreen/resize retain centre and zoom; explicit location selection and Reset may change the camera. Country names in the planning world view appear on hover/focus. Do not claim completion for the separate South Island habitat map or the entire touch-label design.
 
 **R31 live behavior:** desktop resizing from all map/guide edges and corners, bounded to the page. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Keyboard controls, Escape cancellation, Reset and narrow-screen stacking are live and verified. The camera increment adds exact geographic centre retention through fullscreen/resize. Team, creator, search-input and admin drafts remain separate.
 
@@ -159,7 +159,7 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R12 | Copy | Warm, light Spanish-inspired charm and discreet bird puns across discovery; factual range caveats retained quietly; broaden About beyond Colombia | Inventory copy live; About/footer/voice work remains |
 | R13 | Creator album | Photo/sound contributors browse as an album; exact source links; Nicolás filter and contributor attribution throughout | Draft |
 | R14 | Admin cleanup | Admin-only old-plan selection across all users, preview/count and explicit confirmation; ordinary users denied by server/database; verify owner admin access | Draft |
-| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; latest candidate requires full CI 43524486102 before deployment |
+| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; latest candidate requires full CI 43526436679 before deployment |
 | R16 | Species links | Canonical eBird links using verified exact taxonomy mapping; no guessed codes | Ready after core release |
 | R17 | Soundscapes | Review 15 source candidates; source/listen cards with locality, creator and licence; resolve seven regional gaps; compact follow-call control with clear playback errors | Research only |
 | R18 | Content growth | Reviewed regional/endemic coverage, better source images, place/business videos and guide introduction videos | Needs content |
