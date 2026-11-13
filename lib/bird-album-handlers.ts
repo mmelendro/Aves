@@ -2,12 +2,22 @@ import "server-only"
 import {requireAccountUser} from "@/lib/account-auth"
 import {accountBody,accountHandler} from "./account-http"
 import {AccountError} from "./account-errors"
-import {requireOwnedTrip,requireOwnedTripDetails} from "./trip-workspace-handlers"
-import {albumSchema,albumWriteSchema,emptyAlbum,type BirdAlbum} from "./bird-album"
+import {requireOwnedTrip,requireOwnedTripDetails,readWorkspace} from "./trip-workspace-handlers"
+import {readTripMedia} from "./trip-media-handlers"
+import {albumSchema,albumWriteSchema,emptyAlbum,albumLinksValid,type BirdAlbum} from "./bird-album"
 import {getReferenceSpecies,isSpeciesCountry} from "./species-reference"
 import {countryRegionOptions,type TripCountry} from "@/content/trip-options"
 import type {SupabaseClient} from "@supabase/supabase-js"
 const unavailable=()=>new AccountError(503,"Your bird album could not be confirmed. Keep your edits and retry.")
+export async function readAlbumLinks(client:SupabaseClient,id:string,userId:string){
+ const [workspace,media]=await Promise.all([readWorkspace(client,id),readTripMedia(client,id,userId)])
+ const entries=workspace.data.entries.filter(e=>!e.deleted).map(e=>({id:e.id,title:e.title}))
+ const photos=media.items.filter(m=>m.kind==="photo"&&m.state==="ready"&&entries.some(e=>e.id===m.entryId)).map(m=>({id:m.id,entryId:m.entryId,caption:m.caption,creator:m.creator}))
+ return {entries,photos}
+}
+export const albumLinksGet=(id:string)=>accountHandler(async()=>{
+ const {client,user}=await requireAccountUser();await requireOwnedTrip(client,user.id,id);return readAlbumLinks(client,id,user.id)
+})
 export async function readAlbum(client:SupabaseClient,id:string){
  const {data,error}=await client.from("trip_bird_albums").select("revision,data").eq("plan_id",id).maybeSingle()
  if(error)throw unavailable()
@@ -35,6 +45,12 @@ export const albumPut=(request:Request,id:string)=>accountHandler(async()=>{
  const {client,user}=await requireAccountUser(),body=await accountBody(request,albumWriteSchema)
  const country=await requireOwnedTrip(client,user.id,id)
  if(!validBirds(body.data,country))throw new AccountError(400,"Choose a species and broad region from this trip’s country.")
+ if(body.data.birds.some(b=>b.journalEntryId||b.photoId)){
+  const previous=await readAlbum(client,id)
+  if(previous.revision!==body.expectedRevision)throw new AccountError(409,"Your album changed in another tab. Keep your edits before refreshing.")
+  const links=await readAlbumLinks(client,id,user.id)
+  if(!albumLinksValid(body.data,previous.data,links))throw new AccountError(400,"Choose an active saved journal entry and photo from this trip. Review removed links and photo attribution before saving.")
+ }
  const next=body.expectedRevision+1
  const query=body.expectedRevision===0?client.from("trip_bird_albums").insert({plan_id:id,revision:next,data:body.data}):client.from("trip_bird_albums").update({revision:next,data:body.data}).eq("plan_id",id).eq("revision",body.expectedRevision)
  const {data,error}=await query.select("revision,data").maybeSingle()
