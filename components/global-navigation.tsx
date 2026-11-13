@@ -39,8 +39,8 @@ export function GlobalFooter({
 } = {}) {
   const localizeHome = useColombiaHomeCopy();
   const { selection } = useHeaderLandscape();
-  const contactCountry =
-    country && country !== "global" ? country : selection?.country;
+  // The current map scope takes priority over the page's initial country.
+  const contactCountry = selection ? (selection.country === "global" ? undefined : selection.country) : country && country !== "global" ? country : undefined;
   const contactHref =
     contactCountry && contactCountry !== "global"
       ? enquiryHref(

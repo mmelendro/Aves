@@ -174,7 +174,7 @@ function IslandPlannerForm({
       window.removeEventListener(NZ_BIRD_BASKET_EVENT, restoreBirds);
       window.removeEventListener("aves:trip-base", selectBase);
     };
-  }, [planner, readTripDraft, context.corridor, tripAreaById, onSave]);
+  }, [planner, readTripDraft, context.corridor, tripAreaById, onSave, defaultTripInput]);
   useEffect(() => {
     if (onSave || !recovered || !validTripInput(input)) return;
     let kept = false;
