@@ -47,6 +47,8 @@ jobs:
           AVES_BROWSER_FIXTURES: '1'
       - name: Build the isolated browser harness
         run: pnpm build
+      - name: Check narrow-phone consent and regional navigation first
+        run: pnpm exec playwright test tests/browser/brand-location.spec.ts --project=phone-320
       - name: Check the new private album and offline journeys first
         run: pnpm exec playwright test tests/browser/batch-79-88.spec.ts tests/browser/audit-queue.spec.ts tests/browser/private-itinerary-collection.spec.ts tests/browser/design-polish.spec.ts tests/browser/final-repairs.spec.ts --project=desktop --project=phone-390
       - run: pnpm test:browser

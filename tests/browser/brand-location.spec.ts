@@ -10,8 +10,13 @@ test('regional identity retains a country return link and fits a narrow header',
   const a=(await accept.boundingBox())!,r=(await reject.boundingBox())!
   expect(r.y).toBeGreaterThanOrEqual(a.y+a.height)
   expect(r.height).toBeGreaterThanOrEqual(44)
+  await reject.scrollIntoViewIfNeeded()
+  const hit=await reject.evaluate(element=>{const box=element.getBoundingClientRect(),x=box.x+box.width/2,y=box.y+box.height/2,target=document.elementFromPoint(x,y);return {correct:target===element||element.contains(target),target:target?.textContent,box:box.toJSON(),viewport:{width:innerWidth,height:innerHeight,scale:visualViewport?.scale,top:visualViewport?.offsetTop},scroll:scrollY}})
+  expect(hit,JSON.stringify(hit)).toMatchObject({correct:true})
+  await reject.tap()
+ }else{
+  await declineOptionalCookies(page)
  }
- await declineOptionalCookies(page)
  const header=page.getByRole('banner').first()
  await expect(header.getByRole('link',{name:'AVES Sierra Nevada de Santa Marta home',exact:true})).toBeVisible()
  await expect(header.getByRole('link',{name:'Back to Colombia',exact:true})).toHaveAttribute('href','/colombia')
