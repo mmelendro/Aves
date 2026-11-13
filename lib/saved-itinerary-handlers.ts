@@ -6,6 +6,8 @@ import {requireOwnedTrip} from "./trip-workspace-handlers"
 import {emptyItineraries,itinerariesSchema,itineraryWriteSchema,itinerarySourcesValid} from "./saved-itineraries"
 import type {SupabaseClient} from "@supabase/supabase-js"
 const unavailable=()=>new AccountError(503,"Your saved itineraries could not be confirmed. Keep your edits and retry.")
+/** Reads preserve structurally valid historical references for complete backups.
+ * Writes below additionally require current island sources and the owned NZ trip. */
 export async function readItineraries(client:SupabaseClient,id:string){
  const {data,error}=await client.from("trip_itineraries").select("revision,data").eq("plan_id",id).maybeSingle()
  if(error)throw unavailable();if(!data)return {revision:0,data:emptyItineraries()}

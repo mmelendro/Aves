@@ -1,5 +1,5 @@
 /**
- * Public editorial content for informational routes rendered by app/[...slug]/page.tsx.
+ * Public editorial content for informational routes rendered by app/australia/[...slug]/page.tsx.
  * Each entry supplies a page title, introduction and sections. This is public copy,
  * not private account records. Editing legal or operational wording needs factual review.
  */

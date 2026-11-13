@@ -21,6 +21,9 @@ function referenceImage(entry:CollectionEntry){
  if(!guide||!credit||!/^(?:CC BY|CC0|Public domain)/i.test(credit.license))return null
  return {src:guide.image,kind:"Reference photograph",creator:credit.creator,license:credit.license,sourceUrl:credit.sourceUrl,licenseUrl:credit.licenseUrl,location:"location" in credit?String(credit.location):"",modifications:"modifications" in credit?String(credit.modifications):""}
 }
+/** Bound the owner-level read to the latest 100 plans and disclose that scope.
+ * Country IDs remain part of species identity; desired and observed references
+ * can coexist. Photo access is rechecked against active same-trip journal data. */
 export const birdCollectionGet=(request:Request)=>accountHandler(async()=>{
  const {client,user}=await requireAccountUser(),url=new URL(request.url),parsed=collectionQuerySchema.safeParse(Object.fromEntries(url.searchParams))
  if(!parsed.success)throw new AccountError(400,"Choose a country, record state and a short search.")

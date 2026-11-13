@@ -7,6 +7,7 @@ export const metadata: Metadata = publicMetadata({ title: "AVES landscape studie
 
 export default function LandscapeStudies() {
   return <main className="mx-auto max-w-6xl px-5 py-10 text-emerald-950">
+    <p className="mb-4 text-sm">Unlisted public design review · <a className="inline-flex min-h-11 items-center underline" href="/">Return to AVES</a></p>
     <h1 className="text-3xl font-medium">Landscapes shaped by place</h1>
     <p className="mt-4 max-w-3xl leading-7">Thirty vector studies for the existing country, planning-region and South Island place contexts. These are reference studies, not surveyed views. Released routes use reviewed adaptations; this gallery is not the live header inventory. Inland scenes use rivers, sheltered water or land. Exact bird silhouettes and local species still need visual review.</p>
     <nav aria-label="Study groups" className="my-6 flex flex-wrap gap-5">{["country", "region", "place"].map(level => <a key={level} href={`#${level}`} className="inline-flex min-h-11 items-center underline underline-offset-4">{level === "place" ? "Place / subregion contexts" : `${level} studies`}</a>)}</nav>

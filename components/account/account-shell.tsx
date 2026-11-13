@@ -3,7 +3,7 @@ import {useUiCopy} from "@/components/ui-copy-context"
 import {UiLanguageToggle} from "@/components/ui-language"
 /**
  * Shared visual frame for account pages: heading, navigation, and content width.
- * This server component does not authorize access; pages and APIs do that separately.
+ * This client-rendered visual shell does not authorize access; pages and APIs do that separately.
  */
 
 import type { ReactNode } from "react"

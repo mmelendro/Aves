@@ -32,7 +32,7 @@ export function sharedAccountPath(region?: string): string {
   return `/account?${query}`
 }
 
-// Native links cross into the shared portal's independently deployed Next app.
+// Native compatibility links enter the shared account routes in this application.
 export function sharedAccountHref(region?: string): string {
   return sharedAccountPath(region)
 }
