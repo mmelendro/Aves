@@ -52,7 +52,7 @@ export function CookieBanner() {
   }
 
   return localizeHome((
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/20 backdrop-blur-sm">
+    <div data-cookie-banner className="fixed bottom-0 left-0 right-0 z-[70] max-h-[90svh] overflow-y-auto overscroll-contain p-4 bg-black/20 backdrop-blur-sm">
       <Card className="max-w-4xl mx-auto shadow-2xl border-0">
         <CardContent className="p-6">
           <div className="flex items-start justify-between mb-4">
@@ -82,7 +82,7 @@ export function CookieBanner() {
             </Button>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 [&>button]:relative [&>button]:isolate [&>button]:h-auto [&>button]:min-h-11 [&>button]:min-w-0 [&>button]:whitespace-normal">
             <Button onClick={handleAcceptAll} className="bg-emerald-600 hover:bg-emerald-700 text-white" type="button">
               Accept All Cookies
             </Button>
