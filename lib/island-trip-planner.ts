@@ -1,4 +1,5 @@
 import { createRoadReferences } from "./island-road-references";
+import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "./planning-limits";
 import { createPriceReferences } from "./island-price-references";
 import {
   tripCategories,
@@ -786,12 +787,12 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     if (message.includes(text)) return { message };
     // Earlier generated blocks are left for the guest to review; never erase their edits.
     const merged = `${message}${message ? "\n\n" : ""}${text}`;
-    return merged.length <= 5000
+    return merged.length <= MAX_PLAN_NOTES && new TextEncoder().encode(merged).length <= MAX_PLAN_NOTES_BYTES
       ? { message: merged }
       : {
           message,
           error:
-            "The itinerary and notes exceed 5,000 characters. Shorten the itinerary or notes before adding it; existing notes are unchanged.",
+            "The itinerary and notes exceed the private planning limit. Keep a backup before shortening your notes; existing notes are unchanged.",
         };
   }
   function writeTripDraft(

@@ -1,4 +1,6 @@
 "use client"
+import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "@/lib/planning-limits"
+
 import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useId,useRef,useState} from "react"
 import {accountRequest,errorMessage,tripCountry,type TripPlan} from "./account-api"
@@ -19,7 +21,7 @@ export default function FavouritePlaces({plans,onSaved}:{plans:TripPlan[];onSave
   if(busyRef.current||!plan||!place||plan.status!=="draft"||tripCountry(plan.country)!==place.countryId)return
   const line=`Place idea [${place.id}]: ${place.name}. Reference: ${place.sourceUrl??"https://aves.bio"+place.href}`
   const message=plan.message.split(/\r?\n/).map(s=>s.trim()).includes(line)?plan.message:`${plan.message}${plan.message?"\n\n":""}${line}`
-  if(message.length>5000){setFeedback("Your notes are nearly full. Shorten them before adding this place.");return}
+  if(message.length>MAX_PLAN_NOTES || new TextEncoder().encode(message).length>MAX_PLAN_NOTES_BYTES){setFeedback("Your notes are nearly full. Shorten them before adding this place.");return}
   busyRef.current=true;setBusy(true);setFeedback("")
   try{const {title,country,regions,travelWhen,partySize,questionnaire}=plan
    const r=await accountRequest<{plan:TripPlan}>(`/api/account/plans/${plan.id}`,{method:"PATCH",body:JSON.stringify({title,country,regions,travelWhen,partySize,message,...(questionnaire?{questionnaire}:{}),expectedUpdatedAt:plan.updatedAt})})

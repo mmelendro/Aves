@@ -1,3 +1,4 @@
+import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "@/lib/planning-limits"
 import {placeGalleryPhotos} from "@/lib/place-gallery"
 import northCatalogue from "@/content/north-island-trip-catalogue.json"
 import catalogue from "@/content/south-island-trip-catalogue.json"
@@ -52,7 +53,7 @@ export function mergeNzPlaceNotes(message: string, ids: string[]): {message:stri
   const existing = new Set(message.split(/\r?\n/).map(line => line.trim()))
   const added = ids.map(lineFor).filter(line => !existing.has(line))
   const merged = added.length ? `${message}${message && !message.endsWith("\n") ? "\n\n" : ""}${added.join("\n")}` : message
-  return merged.length <= 5000 ? {message:merged} : {message,error:"Your notes are nearly full. Shorten them before adding place ideas; your existing notes are unchanged."}
+  return merged.length <= MAX_PLAN_NOTES && new TextEncoder().encode(merged).length <= MAX_PLAN_NOTES_BYTES ? {message:merged} : {message,error:"Your notes are nearly full. Shorten them before adding place ideas; your existing notes are unchanged."}
 }
 /** Call only with the server-confirmed saved message. Preserve newer ideas. */
 export function consumeSavedNzPlaceIdeas(storage: Pick<Storage,"getItem" | "removeItem" | "setItem">, savedMessage: string) {

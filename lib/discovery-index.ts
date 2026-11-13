@@ -1,3 +1,4 @@
+import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "@/lib/planning-limits"
 import {destinations} from "@/content/destinations"
 import {destinationRegions} from "@/content/destination-regions"
 import {placeGalleryPhotos} from "./place-gallery"
@@ -40,5 +41,5 @@ export function appendFavouritePlaces(message:string,ids:string[],countryId:stri
  const existing=new Set(message.split(/\r?\n/).map(line=>line.trim()))
  const added=lines.filter(line=>!existing.has(line))
  const merged=added.length?`${message}${message?"\n\n":""}${added.join("\n")}`:message
- return merged.length<=5000?{message:merged}:{message,error:"Your notes are nearly full. Shorten them before adding favourite places."}
+ return merged.length<=MAX_PLAN_NOTES && new TextEncoder().encode(merged).length<=MAX_PLAN_NOTES_BYTES?{message:merged}:{message,error:"Your notes are nearly full. Shorten them before adding favourite places."}
 }

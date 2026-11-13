@@ -61,7 +61,7 @@ export function requestKey(request: Request) {
  * Read at most 32 KiB of same-origin JSON, validate with the supplied Zod schema, and return typed data.
  * Malformed/oversized input throws a safe error before database work begins.
  */
-export async function accountBody<T>(request: Request, schema: z.ZodType<T>): Promise<T> {
+export async function accountBody<T>(request: Request, schema: z.ZodType<T>, maxBytes = 32_768): Promise<T> {
   requireSameOrigin(request)
   if (request.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") throw new AccountError(415, "Please submit your request as JSON.")
   const reader = request.body?.getReader()
@@ -75,7 +75,7 @@ export async function accountBody<T>(request: Request, schema: z.ZodType<T>): Pr
       const { done, value } = await reader.read()
       if (done) break
       size += value.byteLength
-      if (size > 32_768) { await reader.cancel(); throw new AccountError(413, "Your request is too long.") }
+      if (size > maxBytes) { await reader.cancel(); throw new AccountError(413, "Your request is too long.") }
       text += decoder.decode(value, { stream: true })
     }
     const result = schema.safeParse(JSON.parse(text + decoder.decode()))

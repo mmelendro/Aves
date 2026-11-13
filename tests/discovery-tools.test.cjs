@@ -16,7 +16,7 @@ test('favourite public places append once without replacing notes, crossing coun
  const first=appendFavouritePlaces(message,[place.id],'new-zealand');assert.ok(first.message.startsWith(message));assert.ok(first.message.includes(`[${place.id}]`))
  assert.equal(appendFavouritePlaces(first.message,[place.id],'new-zealand').message,first.message)
  assert.ok(appendFavouritePlaces(message,[place.id],'colombia').error)
- assert.equal(appendFavouritePlaces('x'.repeat(5000),[place.id],'new-zealand').message,'x'.repeat(5000))
+ assert.equal(appendFavouritePlaces('x'.repeat(60000),[place.id],'new-zealand').message,'x'.repeat(60000))
  assert.ok(appendFavouritePlaces(message,['https://else.test'],'new-zealand').error)
 })
 test('saved trip comparisons preserve explicit currencies, missing details and original plans',()=>{

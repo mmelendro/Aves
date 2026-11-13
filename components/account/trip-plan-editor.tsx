@@ -1,4 +1,6 @@
 "use client"
+import {MAX_PLAN_NOTES} from "@/lib/planning-limits"
+
 import {useUiCopy} from "@/components/ui-copy-context"
 
 /**
@@ -167,7 +169,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
         <p className="mt-2 text-xs leading-6">{uiCopy("Adding notes does not save or share your plan. Existing notes stay intact. These are ideas to discuss, not confirmed visits or bookings.")}</p>
       </section>}
       <p role="status" className="text-sm text-emerald-800">{uiCopy(placeNotice)}</p>
-      <div><label htmlFor={`${prefix}-message`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Your Interests and Ideas")}</label><Textarea id={`${prefix}-message`} name="message" value={message} onChange={event => setMessage(event.target.value)} maxLength={5000} rows={6} placeholder={uiCopy("Birds, landscapes, photography, your preferred pace, or anything else you'd like us to know…")} /></div>
+      <div><label htmlFor={`${prefix}-message`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Your Interests and Ideas")}</label><Textarea id={`${prefix}-message`} name="message" value={message} onChange={event => setMessage(event.target.value)} maxLength={MAX_PLAN_NOTES} rows={6} placeholder={uiCopy("Birds, landscapes, photography, your preferred pace, or anything else you'd like us to know…")} /></div>
       <p className="text-sm text-gray-500">{country === "new-zealand" ? uiCopy("Optional notes: already-arranged plans, arrival/departure points, budget with currency, must-haves or practical access needs. Share only what is needed, without passport, payment or medical details. Save before leaving this page; unfinished answers are not autosaved. Sharing is a separate choice after review.") : uiCopy("Saving a draft does not request a quote or create a booking.")}</p>
       <div className="flex flex-wrap gap-3"><Button type="submit" className="bg-emerald-600 hover:bg-emerald-700"><Save className="w-4 h-4 mr-2" />{busy ? uiCopy("Saving…") : uiCopy("Save My Draft")}</Button><Button type="button" variant="outline" onClick={()=>{if(confirmDiscardPendingEdits())onCancel()}}>{uiCopy("Cancel")}</Button></div>
     </fieldset>{feedback && <p role="alert" className="text-sm text-red-700">{uiCopy(feedback)}</p>}</form>

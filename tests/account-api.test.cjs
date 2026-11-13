@@ -345,7 +345,7 @@ test("failed owner lookup hides the inbox link while leaving the client's own pl
 
 test("account payload size is bounded in UTF-8 bytes before any database query", async () => {
   const h = harness()
-  assert.equal((await h.plansPost(request({ id: planId, ...values, message: "é".repeat(17000) }))).status, 413)
+  assert.equal((await h.plansPost(request({ id: planId, ...values, message: "é".repeat(140000) }))).status, 413)
   assert.equal(h.queries.length, 0)
 })
 

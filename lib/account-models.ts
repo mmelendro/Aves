@@ -9,6 +9,7 @@ import { isKnownTripCountry, type TripCountry } from "@/content/trip-options"
 import { budgetCurrencies } from "@/content/trip-budget"
 import { planningChoices, type PlanningQuestionnaire } from "@/content/planning-questionnaire"
 import { selectableNzBirds, validNzBirdIds } from "@/content/new-zealand-checklist"
+import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "./planning-limits"
 
 // A small structured model can grow by version without mixing answers into prose.
 export const questionnaireSchema = z.object({
@@ -33,7 +34,7 @@ export const revision = z.string().min(1).max(50).refine(value => Number.isFinit
  */
 export const planFields = {
   title: singleLine(120).min(1), country: z.custom<TripCountry>(isKnownTripCountry, "Choose a known destination country").optional(), regions: z.array(singleLine(160).min(1)).max(20),
-  travelWhen: singleLine(160), partySize: singleLine(40), message: z.string().trim().max(5000),
+  travelWhen: singleLine(160), partySize: singleLine(40), message: z.string().trim().max(MAX_PLAN_NOTES).refine(value=>new TextEncoder().encode(value).length<=MAX_PLAN_NOTES_BYTES),
   questionnaire: questionnaireSchema.optional(),
 }
 /**

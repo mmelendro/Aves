@@ -14,6 +14,7 @@ import { z } from "zod"
 import { requireAccountUser } from "@/lib/account-auth"
 import { AccountError } from "@/lib/account-errors"
 import { accountBody, accountHandler, requestKey } from "@/lib/account-http"
+import {MAX_PLAN_REQUEST_BYTES} from "./planning-limits"
 import { accountRpc } from "@/lib/account-service"
 import { notifyAccount } from "@/lib/account-notifications"
 import { canonicalUrl } from "@/lib/site-path"
@@ -68,7 +69,7 @@ export const plansGet = () => accountHandler(async () => {
  */
 export const plansPost = (request: Request) => accountHandler(async () => {
   const { user, client } = await requireAccountUser()
-  const body = await accountBody(request, createPlanSchema)
+  const body = await accountBody(request, createPlanSchema, MAX_PLAN_REQUEST_BYTES)
   if (requestKey(request) !== body.id) throw new AccountError(400, "Please retry this plan with its original request reference.")
   const values = planValues(body), payloadHash = hash(values)
   const country = body.country ?? DEFAULT_TRIP_COUNTRY
@@ -114,7 +115,7 @@ export const plansPost = (request: Request) => accountHandler(async () => {
  */
 export const planPatch = (request: Request, id: string) => accountHandler(async () => {
   const { user, client } = await requireAccountUser()
-  const body = await accountBody(request, updatePlanSchema)
+  const body = await accountBody(request, updatePlanSchema, MAX_PLAN_REQUEST_BYTES)
   const plan = await ownPlan(client, user.id, id)
   const country = body.country || "australia"
   if (country !== (plan.details.country ?? DEFAULT_TRIP_COUNTRY)) throw new AccountError(400, "A saved trip keeps its destination. Start a separate plan for another country.")
