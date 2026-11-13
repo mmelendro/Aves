@@ -1,9 +1,11 @@
 # Current AVES handoff
 
-[Continue here](../CONTINUE-HERE.md) and use [the active queue](AUDIT-QUEUE-2026-11-13.md). The previous 100 item roadmap is archived.
+Use [the active queue](AUDIT-QUEUE-2026-11-13.md) and [machine readable state](audit/queue-2026-11-13.json). Earlier numbering is archived.
 
-Independent group 0 to 19 is published and verified. Pending 20 to 35 preserve actual owner figures, roles, permissions, private source files, real accounts/restore, physical Safari and independent feedback. The subsequent product journey audit adds unblocked technical scopes 36 to 54. They are open, not implemented.
+The requested batches 35 to 44 and 45 to 54 are released. Technical items 36 to 54 are completed. Item 35 was reviewed and remains pending actual cost, usage, paid-pilot and traveller evidence under dependencies 24, 32 and 34. Items 20 to 35 and 55 remain open. No independent technical item remains in this queue.
 
-Runtime `bfe1192176813c4e273c1636d5fabc22807161e0`, deployment `dpl_FkVGxkbsQay9K36rDz9ZX1ei4Qbr` on both public domains. CI: https://github.com/mmelendro/Aves/actions/runs/43359012336 . 751 unit tests and 109 browser checks pass. No emails, invitations, public private-journal links, real cleanup or restore were performed. The current business owner PDF and its actuals caveats remain authoritative.
+Runtime `0e832635514f1ec2232f63d7776996ed64993d1e`, deployment `dpl_XmJLienyDhuJRqRrVBUweQUyGK1L`, on both aves.bio and www.aves.bio. [Release checks](https://github.com/mmelendro/Aves/actions/runs/43379516403): 770 unit tests, 118 full browser checks and 128 intentional project-specific skips. 14 focused checks pass with 4 intentional skips. Build, TypeScript, unchanged performance budgets, catalogue deferral, geometry and gallery snapshots pass. Lint: zero errors, 31 warnings. Source reachability: 470 modules, none unreachable.
 
-See [the product audit](audit/PRODUCT-AUDIT-2026-11-13.md) for new evidence and individual acceptance criteria. Next independent scope: 36. Keep the original business and acceptance work 20 to 35. The audit itself changed documentation only.
+[Detailed release evidence](audit/BATCHES-35-54-2026-11-13.md). Application rollback: `dpl_4o6Y8kZPgUb52UgWBGoRSj2BgENb`. Keep additive migrations and destination, owner, revision and photo-link guards. No production restore, deletion of real records, invitations or public private-journal sharing is authorised.
+
+The current owner Eco Tourism Business Plan v3 remains the reference. Actual costs, founder pay, cash and capacity stay unknown until supplied. Remaining commercial, cultural and legal Spanish editorial review is 21. Colombia originals and actual travel are 25, regional taxonomy/range evidence is 26, hosted two-account/restore is 29, physical Safari is 30 and independent feedback is 31 to 32. eBird reconciliation remains 55. Do not infer regional occurrence solely from a common name.
