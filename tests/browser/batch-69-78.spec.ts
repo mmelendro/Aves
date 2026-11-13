@@ -10,7 +10,7 @@ test("unified search finds Santa Marta places and keeps Spanish controls consist
  await page.getByRole("link",{name:/El Dorado conservation area/}).click()
  await expect.poll(()=>new URL(page.url()).searchParams.get("region")).toBe("sierra-nevada-de-santa-marta")
  expect(new URL(page.url()).searchParams.get("explore")).toBe("colombia")
- await expect(page.locator("#place-gallery").getByLabel("Landscape region",{exact:true})).toHaveValue("sierra-nevada-de-santa-marta")
+ await expect(page.getByRole("main").locator("#place-gallery").getByLabel("Landscape region",{exact:true})).toHaveValue("sierra-nevada-de-santa-marta")
 })
 
 test("lower-bandwidth preference survives navigation and keeps small photos and maps available",async({page},info)=>{
