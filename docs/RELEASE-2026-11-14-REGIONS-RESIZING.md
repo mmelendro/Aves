@@ -33,3 +33,10 @@ Rollback: `dpl_2eyPYqT6PZu3wvGbuuXu9kH9AJhu`, commit `231e8e9d819294e8a1aa3464f3
 Regional species coverage and conservation assessments remain incomplete. This release exposes existing inventories; it does not claim comprehensive regional coverage. Changing flock formation, additional motion refinement, team/creator review and the Colombia journal remain separate increments. Physical-device acceptance is still outstanding.
 
 The newly clarified planning/satellite requirement is the next map priority: keep centre, geographic scale, extent and selected location unchanged when switching base layers. It is recorded in R04 and is not implemented by this candidate.
+
+
+### Follow-up findings
+
+The user selected aves.bio as the sole public address. www.aves.bio now redirects to aves.bio, preserving paths and query strings; root and Colombia inventory URLs were verified. Preserve that redirect when publishing later releases.
+
+A later, fully loaded live run reproduced 147px horizontal overflow at 320px with doubled text on the homepage. This qualifies the earlier quick enlarged-text pass. A hydration/font-ready test and header/card/tooltip corrections are in development; the ordinary-width regional, carousel and resizing release remains live.

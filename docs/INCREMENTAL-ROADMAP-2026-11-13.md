@@ -4,6 +4,10 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 ## Where we are — 14 November 2026
 
+**One public address:** https://aves.bio. The www spelling redirects to the same path and query on aves.bio (verified with the homepage and a Colombia bird-list URL). Future releases must update only the main domain deployment and preserve this redirect.
+
+**Additional live finding:** an extended, fully loaded 320px homepage check found horizontal overflow at 200% text. Earlier quick checks and CI did not catch this timing-sensitive case. A focused hydration/font-ready regression and repairs are in progress alongside the camera increment; no camera draft has been published.
+
 | State | What is included | Evidence / next action |
 |---|---|---|
 | **Live and verified** | Carousel/map repairs, national inventories, region-aware AVES labels and bird-list links, all-edge desktop map/guide resizing, keyboard/reset controls and narrow-phone layout fix | Production `a4acaed` on both aves.bio and www.aves.bio; deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`. Full CI and live 320px/1365px checks passed |
