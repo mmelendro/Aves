@@ -1,38 +1,39 @@
 {
-  "source": "working-tree",
+  "source": "CI cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
   "routes": [
     {
       "route": "/page",
       "js": {
-        "raw": 1379678,
-        "gzip": 365423,
-        "brotli": 358907
+        "raw": 1379721,
+        "gzip": 365574,
+        "brotli": 360051
       }
     },
     {
       "route": "/account/page",
       "js": {
-        "raw": 1324730,
-        "gzip": 349771,
-        "brotli": 349419
+        "raw": 1324754,
+        "gzip": 350129,
+        "brotli": 349704
       }
     },
     {
       "route": "/new-zealand/north-island/page",
       "js": {
-        "raw": 1456083,
-        "gzip": 387948,
-        "brotli": 382179
+        "raw": 1456120,
+        "gzip": 388126,
+        "brotli": 383486
       }
     },
     {
       "route": "/new-zealand/south-island/page",
       "js": {
-        "raw": 1461190,
-        "gzip": 389820,
-        "brotli": 384143
+        "raw": 1461225,
+        "gzip": 389995,
+        "brotli": 385417
       }
     }
   ],
-  "deferredGeometryCheck": "passed"
+  "deferredGeometryCheck": "passed",
+  "kind": "Per-file build compression estimates, not field performance"
 }

@@ -358,43 +358,43 @@ Give the relevant initial information once, then execution can proceed within th
 
 79. Update the professional AVES business plan
 
-   Acceptance: Revise the existing November plan for the current travel guide, planning service and bird album. Include founder pay from month one, actual cash and costs, pricing, capacity, monthly cash flow, downside cases, customer acquisition, supplier roles and measurable B Lab stewardship actions. Separate facts, assumptions and later ambitions. Produce a polished owner edition and an external edition after review. Previous audit IDs: 0. Status: Open.
+   Acceptance: Revise the existing November plan for the current travel guide, planning service and bird album. Include founder pay from month one, actual cash and costs, pricing, capacity, monthly cash flow, downside cases, customer acquisition, supplier roles and measurable B Lab stewardship actions. Separate facts, assumptions and later ambitions. Produce a polished owner edition and an external edition after review. Previous audit IDs: 0. Status: Partial: owner business plan v3 and an editable owner cash model prepared for the current product, founder pay, capacity, monthly cash flow, downside cases and B Lab measures; actual cash/pay/cost inputs and a reviewed external edition remain required.
 
 80. Confirm public business relationships
 
-   Acceptance: Get your current list of team, advisory and supplier roles, then correct unsupported appointments and partnership wording. Previous audit IDs: 62. Status: Open.
+   Acceptance: Get your current list of team, advisory and supplier roles, then correct unsupported appointments and partnership wording. Previous audit IDs: 62. Status: Partial: unsupported team and advisory appointments removed; partner claims replaced by reviewed public organisation references; current consenting business-role list still needed.
 
 81. Set the service operating limits
 
-   Acceptance: Get your support hours, capacity and escalation contacts, then prepare a practical enquiry and disruption playbook. Previous audit IDs: 63. Status: Open.
+   Acceptance: Get your support hours, capacity and escalation contacts, then prepare a practical enquiry and disruption playbook. Previous audit IDs: 63. Status: Partial: practical enquiry, handover and disruption playbook prepared; actual support hours, operating cap and consenting backup/escalation contacts remain unknown.
 
 82. Create the private bird-album foundation
 
-   Acceptance: Use stable species records and owner-controlled observations. Prepare a reusable basis for later collectibles without exposing sensitive locations. Previous audit IDs: 64. Status: Open.
+   Acceptance: Use stable species records and owner-controlled observations. Prepare a reusable basis for later collectibles without exposing sensitive locations. Previous audit IDs: 64. Status: Published: private trip bird-album foundation (up to 100 records per trip), stable species records, owner controls, recoverable removal and stale-edit protection; bounded release scope documented.
 
 83. Separate desired, observed and verified birds
 
-   Acceptance: Keep each status explicit. A saved wish or uploaded photograph must not automatically become a verified sighting. Previous audit IDs: 65. Status: Open.
+   Acceptance: Keep each status explicit. A saved wish or uploaded photograph must not automatically become a verified sighting. Previous audit IDs: 65. Status: Published: desired and owner-observed records remain explicit; every observation is unverified; client and database reject verified states and extra coordinates; photos and wishes never create sightings.
 
 84. Reconstruct the Colombia trip route
 
-   Acceptance: Use actual trip records. Keep traveller identities and private itinerary details private. Previous audit IDs: 66. Status: Open.
+   Acceptance: Use actual trip records. Keep traveller identities and private itinerary details private. Previous audit IDs: 66. Status: Partial: original Colombia itinerary and matching mirror reviewed; 35 dated planned-route entries reconstructed privately with source cells; actual daily travel not established by the available group report.
 
 85. Populate the private Colombia journal
 
-   Acceptance: Add only reviewed trip material, linked to the correct places and days. Previous audit IDs: 67. Status: Open.
+   Acceptance: Add only reviewed trip material, linked to the correct places and days. Previous audit IDs: 67. Status: Partial: 35 reviewed private itinerary-source notes prepared by date; original trip journal, dated checklist localities and photos still needed before populating actual observed events.
 
 86. Make essential saved trip information available offline
 
-   Acceptance: Define what is stored, how it is refreshed and how the traveller clears private local data. Previous audit IDs: 68. Status: Open.
+   Acceptance: Define what is stored, how it is refreshed and how the traveller clears private local data. Previous audit IDs: 68. Status: Published: selected saved trip details open in a self-contained offline file with dated snapshot, explicit refresh and local deletion instructions; no private service-worker cache or offline app editing.
 
 87. Prototype optional 3D terrain
 
-   Acceptance: Keep the useful shared map, a lightweight fallback and acceptable mobile performance. Previous audit IDs: 69. Status: Open.
+   Acceptance: Keep the useful shared map, a lightweight fallback and acceptable mobile performance. Previous audit IDs: 69. Status: Published: optional bounded 33 by 33 elevation-tile terrain prototype for three landscapes, no new renderer dependency, no automatic tile loading, mobile controls and persistent shared-map fallback.
 
 88. Collectible 3D bird assets
 
-   Acceptance: Identify the previously used web app if evidence becomes available. Inventory existing 3D MP4s and assets, then review one accurate, licensed bird pilot. Distinguish an editable 3D model from a rendered image or video. Retain stable species IDs, creator/source/rights, reusable model exports, lightweight logo/animation renditions, static/reduced-motion fallbacks and future album/game compatibility. Sightings-based unlocking remains a later game mechanic; it is not implemented. Previous audit IDs: 71. Status: Open.
+   Acceptance: Identify the previously used web app if evidence becomes available. Inventory existing 3D MP4s and assets, then review one accurate, licensed bird pilot. Distinguish an editable 3D model from a rendered image or video. Retain stable species IDs, creator/source/rights, reusable model exports, lightweight logo/animation renditions, static/reduced-motion fallbacks and future album/game compatibility. Sightings-based unlocking remains a later game mechanic; it is not implemented. Previous audit IDs: 71. Status: Partial: existing static artwork and reference photograph inventoried with species IDs and rights gaps; original four videos/modelling app/editable source and a licensed accurate 3D pilot remain unavailable.
 
 
 ## D. Defined consent, access or publication checkpoints (6)
@@ -516,3 +516,19 @@ Runtime `a7b8c1f5fa014e2e0b7a8872fe6cd93485cb75ab`, deployment `dpl_J3CrfGYqLeWc
 The additive owner-only favourites table is deployed as migration `20261112222359_account_place_favourites`; live RLS/privilege metadata is verified and no release-created traveller favourite is stored. Existing trip/Auth/consent settings are unchanged. The prepared hosted two-account rollback test did not run because its confirmation expired. Synthetic tests do not establish a real signed-in provider session.
 
 The authorised batches through 78 are now processed. Next is item 79, the professional Eco-Tourism Business Plan, with actual founder cash, pay, capacity and operating figures still required. Keep the ten unresolved acceptance scopes visible and do not invent financial inputs or participant evidence.
+
+## Batch 79 to 88 published, 13 November 2026 Sydney
+
+Items 79 to 88 were processed. Items 82, 83, 86 and 87 are published. The release adds a private bird album, explicit desired/observed states, offline snapshot guidance and an optional bounded 3D terrain preview. Unsupported team/advisory appointments and partnership wording were removed. There are 72 completed items among the first 88.
+
+Six scopes in this batch remain partial: 79 business actuals and external edition, 80 current business-role confirmations, 81 actual service hours/capacity/contacts, 84 actual Colombia daily route, 85 actual journal population, 88 original 3D assets/rights. The other ten unresolved scopes among the first 78 remain visible. No item was retired or renumbered to hide missing evidence.
+
+The owner business plan v3 and companion cash model include founder pay from month one, capacity, monthly illustrative cash flow, downside cases, acquisition and B Lab stewardship measures. The model starts with unknowns blank and keeps its illustrative example separate. Its integer-cent cash, capacity and reserve calculations were checked. Current business cash, owner pay, costs and hours were not invented. The original Colombia itinerary and imported mirror match in the reviewed range: 35 dated entries support a private planned-route review, not proof of actual attendance or individual sightings. No traveller identities, source-document URLs, private itinerary details, contact records or original photo bytes were committed to Git or published on the site.
+
+Runtime `cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54`, deployment `dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn`, on both `aves.bio` and `www.aves.bio`. [CI run 43344621251](https://github.com/mmelendro/Aves/actions/runs/43344621251). 741 unit tests and 105 browser checks passed, with 87 intentionally skipped project-specific checks. Five focused album/offline/terrain checks also pass before the full suite. Lint has zero errors and 32 existing warnings. TypeScript, production build, catalogue loading, deferred geometry and production budgets pass. Source reachability covers 444 modules with none unreachable. Changed live public pages, bounded species-name search and anonymous denial for the new private album endpoint were checked after release. Rollback: `dpl_J3CrfGYqLeWcZUvpQvD87WQ2JS4B`.
+
+The additive `20261113005622_private_bird_album` migration is deployed with owner-only SELECT/INSERT/UPDATE policies, protected identity/revision, no anonymous SELECT and no client-writable verified state. Live schema/privilege metadata and pure SQL validation were checked. No traveller observation was fabricated or inserted for release testing. Browser account flows use synthetic intercepted HTTP, not a real hosted session. Security advisors show the same pre-existing private-schema informational notices and leaked-password-protection warning, with no new album finding.
+
+Offline acceptance means an explicitly downloaded selected trip snapshot. It does not promise private app access, automatic refresh or editing without connectivity. The terrain sample uses one public tile up to 512 KB, at 33 by 33 samples with 3x vertical exaggeration. It is not a route, hazard or wildlife-location source. Field performance and physical iPhone acceptance remain unverified.
+
+The next numbered item is 89. Preserve unresolved acceptance from earlier batches and do not invent business decisions, confirmed route history, photos, model licences or verifier identities.
