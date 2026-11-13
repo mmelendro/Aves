@@ -10,6 +10,7 @@ import { budgetCurrencies } from "@/content/trip-budget"
 import { planningChoices, type PlanningQuestionnaire } from "@/content/planning-questionnaire"
 import { selectableNzBirds, validNzBirdIds } from "@/content/new-zealand-checklist"
 import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "./planning-limits"
+import {routePreferencesSchema} from "./route-preferences"
 
 // A small structured model can grow by version without mixing answers into prose.
 export const questionnaireSchema = z.object({
@@ -20,6 +21,7 @@ export const questionnaireSchema = z.object({
   interests: z.array(z.enum(Object.keys(planningChoices.interests) as [keyof typeof planningChoices.interests, ...Array<keyof typeof planningChoices.interests>])).max(7).refine(values => new Set(values).size === values.length),
   budget: z.object({ currency: z.enum(budgetCurrencies), accommodation: z.number().int().min(0).max(10000).optional(), food: z.number().int().min(0).max(10000).optional(), activities: z.number().int().min(0).max(10000).optional() }).strict().refine(b => b.accommodation !== undefined || b.food !== undefined || b.activities !== undefined, "Enter at least one budget amount").optional(),
   birdIds: z.array(z.string().max(32)).max(selectableNzBirds.length).refine(validNzBirdIds, "Choose distinct living birds from the New Zealand checklist").optional(),
+  routePreferences: routePreferencesSchema.optional(),
 }).strict()
 /**
  * Build a trimmed single-line text validator with a caller-selected maximum length.

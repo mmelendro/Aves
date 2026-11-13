@@ -1,6 +1,9 @@
 "use client"
 import {MAX_PLAN_NOTES} from "@/lib/planning-limits"
 
+import RoutePreferenceImport from "./route-preference-import"
+import {routePreferences,routeParty,routeTiming} from "@/lib/route-preferences"
+import {itineraryReceiptSchema} from "@/lib/saved-itineraries"
 import {useUiCopy} from "@/components/ui-copy-context"
 
 /**
@@ -51,6 +54,11 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   const [incomingBirds, setIncomingBirds] = useState<string[]>([])
   const [incomingPlaces, setIncomingPlaces] = useState<string[]>([])
   const [incomingItineraries, setIncomingItineraries] = useState<TripDraft[]>([])
+  const [savedRoutes,setSavedRoutes]=useState<TripDraft[]>([])
+  const [importedPreferences,setImportedPreferences]=useState(plan?.questionnaire?.routePreferences)
+  const [travelWhen,setTravelWhen]=useState(plan?.travelWhen||"")
+  const [partySize,setPartySize]=useState(plan?.partySize||"")
+  useEffect(()=>{if(!plan?.id||country!=="new-zealand")return;let live=true;accountRequest<unknown>(`/api/account/plans/${plan.id}/itineraries`).then(raw=>{if(live)setSavedRoutes(itineraryReceiptSchema.parse(raw).data.routes)}).catch(()=>{});return()=>{live=false}},[plan?.id,country])
   const [message, setMessage] = useState(plan?.message || "")
   const [placeNotice, setPlaceNotice] = useState("")
   // Guest choices prefill a new form. Existing saved answers are never silently
@@ -74,7 +82,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
     if (plan || !isEnabledTripCountry(value) || value === country) return
     setCountry(value)
     setSelectedRegions([])
-    setBirdIds([])
+    setBirdIds([]);setImportedPreferences(undefined);setTravelWhen("");setPartySize("");setSavedRoutes([])
     setRegionNotice(`Choose regions in ${countryLabels[value]}. Previous region selections have been cleared.`)
   }
 
@@ -93,6 +101,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       comfort: String(values.get("comfort") || "open") as PlanningQuestionnaire["comfort"],
       interests: values.getAll("interests").map(String) as PlanningQuestionnaire["interests"],
       ...(birdIds.length ? { birdIds } : {}),
+      ...(importedPreferences ? {routePreferences:importedPreferences} : {}),
     }
     if (fields.questionnaire) {
       const amounts = Object.fromEntries(budgetCategories.flatMap(({key}) => {
@@ -132,8 +141,10 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
       <div><label htmlFor={`${prefix}-title`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Give Your Plan a Name *")}</label><Input id={`${prefix}-title`} name="title" defaultValue={plan?.title || ""} maxLength={120} placeholder={uiCopy("A spring birding escape")} required /></div>
       <div><label htmlFor={`${prefix}-country`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Destination Country *")}</label><select id={`${prefix}-country`} name="country" disabled={Boolean(plan)} value={country} onChange={event => changeCountry(event.target.value)} aria-describedby={`${prefix}-country-help`} className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">{enabledCountries.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}{plan?.country && !isEnabledTripCountry(plan.country) && <option value={plan.country}>{countryLabels[plan.country]} {uiCopy(" (saved destination)")}</option>}</select><p id={`${prefix}-country-help`} className="text-sm text-gray-500 mt-2">{plan ? uiCopy("A saved trip keeps its destination so its journal and bird album stay together. Start a separate plan for another country.") : uiCopy("Choose one country per plan. You can save separate plans for different destinations.")}</p></div>
       <fieldset><legend className="block text-sm font-medium text-gray-700 mb-3">{uiCopy("Regions in ")}{countryLabels[country]}</legend><div className="flex flex-wrap gap-x-4 gap-y-2">{options.map(({ id, label }) => <label key={id} className="flex min-h-11 items-center gap-2 text-sm text-gray-700"><input type="checkbox" name="regions" value={id} checked={selectedRegions.includes(id)} onChange={event => toggleRegion(id, event.target.checked)} className="accent-emerald-600" />{label}</label>)}{olderSelections.map(value => <label key={value} className="flex min-h-11 items-center gap-2 text-sm text-amber-800"><input type="checkbox" name="regions" value={value} checked onChange={event => toggleRegion(value, event.target.checked)} className="accent-emerald-600" />{value} {uiCopy(" (saved selection)")}</label>)}</div>{olderSelections.length > 0 && <p className="text-sm text-amber-800 mt-2">{uiCopy("Review these older place names before saving. You can move additional places into Your Interests and Ideas.")}</p>}<p className="text-sm text-gray-500 mt-2">{uiCopy("Leave these open if you're looking for inspiration. You can mention other places below.")}</p><p role="status" aria-live="polite" className="text-sm text-emerald-700 mt-2">{uiCopy(regionNotice)}</p></fieldset>
-      <div className="grid sm:grid-cols-2 gap-4"><div><label htmlFor={`${prefix}-when`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Travel Timing")}</label><Input id={`${prefix}-when`} name="travelWhen" defaultValue={plan?.travelWhen || ""} maxLength={160} placeholder={country === "new-zealand" ? "Dates including year, or a flexible window" : "A month, a season, or flexible"} /></div><div><label htmlFor={`${prefix}-party`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Group Size")}</label><select id={`${prefix}-party`} name="partySize" defaultValue={plan?.partySize || ""} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"><option value="">{uiCopy("Still deciding")}</option><option value={"1 person"}>{uiCopy("1 person")}</option><option value={"2 people"}>{uiCopy("2 people")}</option><option value={"3–4 people"}>{uiCopy("3–4 people")}</option><option value={"5+ people"}>{uiCopy("5+ people")}</option></select></div></div>
+      <div className="grid sm:grid-cols-2 gap-4"><div><label htmlFor={`${prefix}-when`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Travel Timing")}</label><Input id={`${prefix}-when`} name="travelWhen" value={travelWhen} onChange={event=>setTravelWhen(event.target.value)} maxLength={160} placeholder={country === "new-zealand" ? "Dates including year, or a flexible window" : "A month, a season, or flexible"} /></div><div><label htmlFor={`${prefix}-party`} className="block text-sm font-medium text-gray-700 mb-2">{uiCopy("Group Size")}</label><select id={`${prefix}-party`} name="partySize" value={partySize} onChange={event=>setPartySize(event.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"><option value="">{uiCopy("Still deciding")}</option><option value={"1 person"}>{uiCopy("1 person")}</option><option value={"2 people"}>{uiCopy("2 people")}</option><option value={"3–4 people"}>{uiCopy("3–4 people")}</option><option value={"5+ people"}>{uiCopy("5+ people")}</option></select></div></div>
       {country === "new-zealand" && <><p className="text-sm text-gray-500">{uiCopy("Please include the year in your timing. No dates are assumed or reserved.")}</p><PlanningQuestions key={country} prefix={prefix} answers={plan?.country === country ? plan.questionnaire : undefined} /></>}
+      {country === "new-zealand" && <RoutePreferenceImport routes={[...incomingItineraries,...savedRoutes.filter(r=>!incomingItineraries.some(i=>i.input.islandId===r.input.islandId))]} onApply={draft=>{const p=routePreferences(draft);setImportedPreferences(p);setTravelWhen(routeTiming(p));setPartySize(routeParty(p));setDirty(true);setPlaceNotice("Route preferences added to this unsaved brief. Review the timing, party and separate general budget before saving.")}}/>}
+      {importedPreferences&&<p className="text-sm">{uiCopy("Imported route preferences")}: {importedPreferences.currency} · {routeTiming(importedPreferences)} · {importedPreferences.adults} {uiCopy("adults")} · {importedPreferences.rooms} {uiCopy("rooms/units")}. <button type="button" className="min-h-11 underline" onClick={()=>{setImportedPreferences(undefined);setDirty(true)}}>{uiCopy("Remove imported preferences")}</button></p>}
       {country === "new-zealand" && <BudgetQuestions key={`${country}-${plan?.id || "new"}`} prefix={prefix} budget={plan?.country === country ? plan.questionnaire?.budget : undefined} />}
       {country === "new-zealand" && (incomingBirds.length > 0 || incomingPlaces.length > 0 || incomingItineraries.length > 0) && <section aria-label={uiCopy("Bring ideas from this tab")} className="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
         <h3 className="font-medium text-emerald-950">{uiCopy("Bring your ideas together")}</h3>

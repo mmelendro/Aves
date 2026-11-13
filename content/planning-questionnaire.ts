@@ -3,6 +3,7 @@
  */
 import { budgetCategories, type TripBudget } from "./trip-budget"
 import { nzBirdName } from "./new-zealand-checklist"
+import {routeTiming,type RoutePreferences} from "@/lib/route-preferences"
 
 export const planningChoices = {
   pace: { open: "Open to suggestions", relaxed: "Relaxed, with free time", balanced: "A balance of outings and downtime", active: "Active, with full days" },
@@ -19,6 +20,7 @@ export type PlanningQuestionnaire = {
   interests: (keyof typeof planningChoices.interests)[]
   birdIds?: string[]
   budget?: TripBudget
+  routePreferences?: RoutePreferences
 }
 
 /** One readable representation is reused for the guest's review and owner inbox. */
@@ -30,5 +32,10 @@ export function planningSummary(answers: PlanningQuestionnaire) {
     { label: "Interests", value: answers.interests.map(id => planningChoices.interests[id]).join(", ") || "Open to suggestions" },
     ...(answers.budget ? budgetCategories.filter(({key}) => answers.budget?.[key] !== undefined).map(({key,label,unit}) => ({ label: `${label} budget`, value: `${new Intl.NumberFormat("en-NZ", {style:"currency",currency:answers.budget!.currency,currencyDisplay:"code",maximumFractionDigits:0}).format(answers.budget![key]!)} ${unit}` })) : []),
     ...(answers.birdIds?.length ? [{ label: `Birds you would love to see (${answers.birdIds.length})`, value: answers.birdIds.map(nzBirdName).join(", ") }] : []),
+    ...(answers.routePreferences ? [
+      {label:"Route preference dates",value:`${answers.routePreferences.islandId}: ${routeTiming(answers.routePreferences)}`},
+      {label:"Route party preferences",value:`${answers.routePreferences.adults} adults, ${answers.routePreferences.rooms} rooms/units`},
+      {label:"Route allowance preferences",value:`${answers.routePreferences.currency}; activities ${answers.routePreferences.activityBasis === "day" ? "per day" : "per primary or alternative outing"}. `+Object.entries(answers.routePreferences.allowances).map(([key,value])=>`${key}: ${value}`).join('; ')+'. Spending preferences, not quoted prices. General budget answers remain separate.'},
+    ] : []),
   ]
 }
