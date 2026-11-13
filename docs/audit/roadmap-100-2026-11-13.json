@@ -484,7 +484,7 @@
     },
     {
       "group": "B",
-      "title": "Build Tasmania’s five-photo gallery",
+      "title": "Build Tasmania\u2019s five-photo gallery",
       "acceptance": "Review five distinct real photographs for locality, reuse rights, credits, alt text and capture dates. Reuse the existing regional gallery.",
       "previous": [
         28
@@ -494,7 +494,7 @@
     },
     {
       "group": "B",
-      "title": "Build South Australia’s five-photo gallery",
+      "title": "Build South Australia\u2019s five-photo gallery",
       "acceptance": "Apply the same source, rights and visual review to five distinct photographs.",
       "previous": [
         29
@@ -504,7 +504,7 @@
     },
     {
       "group": "B",
-      "title": "Build Western Australia’s five-photo gallery",
+      "title": "Build Western Australia\u2019s five-photo gallery",
       "acceptance": "Review five distinct photographs and retain correct regional/place identities.",
       "previous": [
         30
@@ -514,7 +514,7 @@
     },
     {
       "group": "B",
-      "title": "Build Northern Territory’s five-photo gallery",
+      "title": "Build Northern Territory\u2019s five-photo gallery",
       "acceptance": "Review five distinct photographs, including cultural context and any restrictions on depicted material.",
       "previous": [
         31
@@ -524,7 +524,7 @@
     },
     {
       "group": "B",
-      "title": "Build the Australian Capital Territory’s five-photo gallery",
+      "title": "Build the Australian Capital Territory\u2019s five-photo gallery",
       "acceptance": "Review five distinct photographs within the correct territory.",
       "previous": [
         32
@@ -534,7 +534,7 @@
     },
     {
       "group": "B",
-      "title": "Build Jervis Bay Territory’s five-photo gallery",
+      "title": "Build Jervis Bay Territory\u2019s five-photo gallery",
       "acceptance": "Verify territory boundaries. Do not substitute nearby New South Wales beaches.",
       "previous": [
         33
@@ -544,7 +544,7 @@
     },
     {
       "group": "B",
-      "title": "Finish Australia’s country overview",
+      "title": "Finish Australia\u2019s country overview",
       "acceptance": "Represent all nine reviewed regional collections using the same records. The current overview covers three regions with six photographs.",
       "previous": [
         34
@@ -668,7 +668,7 @@
     {
       "group": "B",
       "title": "Clarify estimate-to-quote handoff",
-      "acceptance": "Make the traveller’s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
+      "acceptance": "Make the traveller\u2019s next action clear and distinguish a planning estimate, personal quote and confirmed arrangement.",
       "previous": [
         49
       ],
@@ -1028,31 +1028,23 @@
     }
   ],
   "release": {
-    "runtimeCommit": "05f52dfddb683a41058e27c828785d421519236c",
-    "deploymentId": "dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3",
+    "runtimeCommit": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
+    "deploymentId": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
     "publishedDomains": [
       "aves.bio",
       "www.aves.bio"
     ],
-    "rollbackDeployment": "dpl_AZhmj9YyGNkoFqQwXc8fLUjRL5dd",
-    "tests": 704,
-    "publicRoutesPassed": 78,
-    "date": "2026-11-13"
+    "rollbackDeployment": "dpl_J3CrfGYqLeWcZUvpQvD87WQ2JS4B",
+    "unitTests": 741,
+    "browserPassed": 105,
+    "browserSkipped": 87,
+    "publicRoutesPassed": 81,
+    "ci": "https://github.com/mmelendro/Aves/actions/runs/43344621251"
   },
   "activeScope": {
-    "from": 26,
-    "through": 78,
-    "requested": "2026-11-12",
-    "currentBatch": [
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35
-    ],
-    "publishedThrough": 28
+    "queue": "queue-2026-11-13.json",
+    "from": 0,
+    "through": 19
   },
   "accessibilityRelease": {
     "runtime": "edffc49aa462045693a5839d8ef08859764f4a28",
@@ -1069,14 +1061,9 @@
     "rollback": "dpl_2pZhHBMruM9KzVoLBehP7nsjcgD3"
   },
   "currentDelivery": {
-    "publishedThrough": 38,
-    "activeRange": [
-      39,
-      78
-    ],
-    "runtime": "36611d7a2e0e582d81de89128a95ef1684f6493a",
-    "deployment": "dpl_9UMkipYRDK7Yiiin7vbj2ZtuEQRm",
-    "ci": "https://github.com/mmelendro/Aves/actions/runs/43289737797",
-    "rollbackDeployment": "dpl_HZwyZT4z835C9eNxEvo4pgWvhrNM"
-  }
+    "queue": "queue-2026-11-13.json",
+    "status": "Read-only audit complete. Independent group authorised."
+  },
+  "archived": true,
+  "supersededBy": "docs/audit/queue-2026-11-13.json"
 }

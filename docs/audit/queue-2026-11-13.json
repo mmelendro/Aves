@@ -1,0 +1,416 @@
+{
+  "date": "2026-11-13",
+  "authority": "Current queue, explicitly renumbered from 0 at owner request. Previous IDs reference the archived 100 item roadmap. No completion is inferred from renumbering.",
+  "baseline": {
+    "runtimeCommit": "cc448cd3e02d208aca4ac6e3f28b1e502b6fbb54",
+    "deploymentId": "dpl_3Ehyc4qsBCgHcw6LFj7YgpdQpAAn",
+    "publishedDomains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "rollbackDeployment": "dpl_J3CrfGYqLeWcZUvpQvD87WQ2JS4B",
+    "unitTests": 741,
+    "browserPassed": 105,
+    "browserSkipped": 87,
+    "publicRoutesPassed": 81,
+    "ci": "https://github.com/mmelendro/Aves/actions/runs/43344621251"
+  },
+  "sourceAudit": "81 live public URLs: 0 HTTP/basic structure errors. Source review, browser review, current owner business plan v3 and B Lab ESC guidance. Physical Safari and actual hosted positive flows remain unverified.",
+  "groups": {
+    "A": "No owner involvement. Implement and publish now.",
+    "B": "Owner decisions or actual figures.",
+    "C": "Files permissions or authorised environment access.",
+    "D": "Participation actual feedback or later release decision."
+  },
+  "items": [
+    {
+      "id": 0,
+      "group": "A",
+      "title": "Consolidate the active queue and release metadata",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 1,
+      "group": "A",
+      "title": "Protect the destination of a saved trip",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 2,
+      "group": "A",
+      "title": "Include bird albums in the complete private backup",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 3,
+      "group": "A",
+      "title": "Prune unavailable offline pack selections",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 4,
+      "group": "A",
+      "title": "Allow confirmed deletion of unused drafts",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 5,
+      "group": "A",
+      "title": "Repair country navigation and cross page fragments",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 6,
+      "group": "A",
+      "title": "Present tours as proposed personal itineraries",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 7,
+      "group": "A",
+      "title": "Align public impact and relationship claims with evidence",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 8,
+      "group": "A",
+      "title": "Make photo controls and credits accessible",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 9,
+      "group": "A",
+      "title": "Describe current privacy and account behaviour",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 10,
+      "group": "A",
+      "title": "Separate historical calendar examples from current events",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 11,
+      "group": "A",
+      "title": "Make terrain controls work by touch",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 12,
+      "group": "A",
+      "title": "Offer reviewed places in country journals",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 13,
+      "group": "A",
+      "title": "Preview selected journal content privately",
+      "status": "Open",
+      "previous": [
+        91
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 14,
+      "group": "A",
+      "title": "Protect unsaved plan edits",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": []
+    },
+    {
+      "id": 15,
+      "group": "A",
+      "title": "Complete Spanish sign in and saved plan controls",
+      "status": "Open",
+      "previous": [
+        77
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 16,
+      "group": "A",
+      "title": "Complete Spanish private workspace controls",
+      "status": "Open",
+      "previous": [
+        77
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 17,
+      "group": "A",
+      "title": "Complete Spanish New Zealand planner controls",
+      "status": "Open",
+      "previous": [
+        77
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 18,
+      "group": "A",
+      "title": "Complete Jervis Bay and Australian overview imagery",
+      "status": "Open",
+      "previous": [
+        52,
+        53
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 19,
+      "group": "A",
+      "title": "Verify and publish the independent group",
+      "status": "Open",
+      "previous": [],
+      "dependsOn": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "id": 20,
+      "group": "B",
+      "title": "Complete actual business financials and investor edition",
+      "status": "Open",
+      "previous": [
+        79
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 21,
+      "group": "B",
+      "title": "Confirm current business roles and relationships",
+      "status": "Open",
+      "previous": [
+        80
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 22,
+      "group": "B",
+      "title": "Confirm support hours capacity and backup",
+      "status": "Open",
+      "previous": [
+        81
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 23,
+      "group": "B",
+      "title": "Agree sharing consent and moderation rules",
+      "status": "Open",
+      "previous": [
+        90,
+        92,
+        94
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 24,
+      "group": "B",
+      "title": "Agree measurement and spending limits",
+      "status": "Open",
+      "previous": [
+        45
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 25,
+      "group": "C",
+      "title": "Complete the evidenced Colombia trip album and journal",
+      "status": "Open",
+      "previous": [
+        66,
+        84,
+        85
+      ],
+      "dependsOn": [
+        23
+      ]
+    },
+    {
+      "id": 26,
+      "group": "C",
+      "title": "Complete supported regional species coverage",
+      "status": "Open",
+      "previous": [
+        70
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 27,
+      "group": "C",
+      "title": "Add original videos and editable bird models",
+      "status": "Open",
+      "previous": [
+        88
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 28,
+      "group": "C",
+      "title": "Review the selected trip story and invitation",
+      "status": "Open",
+      "previous": [
+        91,
+        93
+      ],
+      "dependsOn": [
+        13,
+        23,
+        25
+      ]
+    },
+    {
+      "id": 29,
+      "group": "C",
+      "title": "Prove isolated restore and two account separation",
+      "status": "Open",
+      "previous": [
+        46,
+        68
+      ],
+      "dependsOn": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 30,
+      "group": "D",
+      "title": "Accept the experience on physical iPhone Safari",
+      "status": "Open",
+      "previous": [
+        67,
+        76,
+        96
+      ],
+      "dependsOn": [
+        11,
+        19
+      ]
+    },
+    {
+      "id": 31,
+      "group": "D",
+      "title": "Observe an independent New Zealand planner trial",
+      "status": "Open",
+      "previous": [
+        97
+      ],
+      "dependsOn": [
+        19
+      ]
+    },
+    {
+      "id": 32,
+      "group": "D",
+      "title": "Address observed traveller feedback",
+      "status": "Open",
+      "previous": [
+        98,
+        99
+      ],
+      "dependsOn": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": 33,
+      "group": "D",
+      "title": "Remove specifically authorised disposable records",
+      "status": "Open",
+      "previous": [
+        89
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": 34,
+      "group": "D",
+      "title": "Decide the first paid pilot",
+      "status": "Open",
+      "previous": [
+        95
+      ],
+      "dependsOn": [
+        20,
+        21,
+        22,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "id": 35,
+      "group": "D",
+      "title": "Select the next cycle using actual evidence",
+      "status": "Open",
+      "previous": [
+        100
+      ],
+      "dependsOn": [
+        24,
+        32,
+        34
+      ]
+    }
+  ]
+}
