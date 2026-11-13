@@ -20,7 +20,8 @@ export function useMapLayers() {
   const update = useCallback((next: Partial<MapLayers>) => setLocal(current => ({ ...current, ...next })), []);
   const background = useMapBackground()
   const value = shared ?? { layers: local, update }
+  const updateLayers=value.update
   const setBackground=background?.setBackground
-  const updateShared=useCallback((next:Partial<MapLayers>)=>{if(next.background)setBackground?.(next.background);value.update(next)},[setBackground,value.update])
+  const updateShared=useCallback((next:Partial<MapLayers>)=>{if(next.background)setBackground?.(next.background);updateLayers(next)},[setBackground,updateLayers])
   return background ? { layers: {...value.layers,background:background.background}, update:updateShared } : value
 }

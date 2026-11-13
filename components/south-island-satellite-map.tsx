@@ -51,14 +51,16 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
     if(layers.nationalParks)for(const park of parks.parks)markers.push(labelMarker(map,geographicPoint(park.point[0],park.point[1]),park.name,()=>update({park:park.id,point:""}),layers.park===park.id));
     return()=>markers.forEach(m=>m.remove());
   },[map,layers,update,trip]);
+  const cameraContext=useRef({layers,journey:trip?.journey});cameraContext.current={layers,journey:trip?.journey};
   useEffect(()=>{
     if(!map)return;
+    const {layers,journey}=cameraContext.current;
     const place=visiblePublicPlaces(layers).find(p=>p.id===layers.point),park=parks.parks.find(p=>layers.nationalParks&&p.id===layers.park);
     const changed=previousLocation.current.latitude!==latitude||previousLocation.current.longitude!==longitude;
     previousLocation.current={latitude,longitude};
     const centre=place?[place.latitude,place.longitude] as[number,number]:park?geographicPoint(park.point[0],park.point[1]):changed&&longitude!==undefined&&latitude!==undefined?[latitude,longitude] as[number,number]:null;
     // Visibility toggles must not move a camera the visitor has already panned.
-    if(centre&&!trip?.journey)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
+    if(centre&&!journey)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
   },[map,layers.point,layers.park,latitude,longitude]);
   const bases=trip?.bases.join("|")??"";
   const journeyStep=trip?.journey?.islandId==="south-island" ? trip.journey.steps[trip.journey.index] : undefined;

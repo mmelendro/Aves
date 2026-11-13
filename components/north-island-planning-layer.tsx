@@ -98,7 +98,7 @@ export default function NorthIslandPlanningLayer({
           Boolean(journeyStep) &&
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
       });
-  }, [map, selection]);
+  }, [map, selection, journeyStep]);
   useJourneyMapMotion(map,"north-island");
   return (
     <div className="px-2 py-1 text-xs leading-5 text-emerald-950">

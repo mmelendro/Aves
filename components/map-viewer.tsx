@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import dynamic from "next/dynamic"
 import { useMapLayers } from "./map-layer-context"
 import type { GeographicScope } from "./geographic-satellite-map"
@@ -30,9 +30,9 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
   const lastTap=useRef<{x:number;y:number;at:number}|null>(null)
   const active = gestures && (move || expanded)
   const box = () => ({ width: surface.current?.clientWidth || 1, height: surface.current?.clientHeight || 1 })
-  function commit(next: MapView) { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) }
-  function reset() { points.current.clear(); start.current = null; setGesturing(false); commit(fitMapView) }
-  useEffect(()=>{ reset() },[viewKey])
+  const commit=useCallback((next: MapView) => { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) },[])
+  const reset=useCallback(() => { points.current.clear(); start.current = null; setGesturing(false); commit(fitMapView) },[commit])
+  useEffect(()=>{ reset() },[viewKey,reset])
   function zoom(factor: number) { const b = box(); commit(zoomMapAt(viewRef.current, factor, {x:b.width/2,y:b.height/2}, b,.35)) }
   function resize(open: boolean) {
     const element = dialog.current
@@ -45,7 +45,8 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
     document.dispatchEvent(new Event("aves:map-resize"))
     if (!open) { const restore=closePreview.current; closePreview.current=null; if(restore)restore();else trigger.current?.focus({ preventScroll: true }) }
   }
-  useEffect(()=>guide?.registerMap?.(restore=>{closePreview.current=restore;resize(true)}),[guide?.registerMap])
+  const registerMap=guide?.registerMap
+  useEffect(()=>registerMap?.(restore=>{closePreview.current=restore;resize(true)}),[registerMap])
   useEffect(() => {
     if (!expanded) return
     const previous = document.body.style.overflow
@@ -58,7 +59,7 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
     const observer = new ResizeObserver(() => { points.current.clear(); start.current = null; commit(constrainMapView(viewRef.current,box(),.35)) })
     observer.observe(element)
     return () => { observer.disconnect(); cancelAnimationFrame(frame.current) }
-  }, [])
+  }, [commit])
   return <dialog data-aves-map="true" data-geographic={geographic || undefined} ref={dialog} open data-expanded={expanded || undefined} className={styles.viewer} role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label} onCancel={e=>{e.preventDefault();resize(false)}}>
     <div data-map-controls="true" className={styles.toolbar} role="group" aria-label={`${label} view controls`}>
       {gestures && <>
@@ -69,6 +70,7 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
         <span className="text-xs tabular-nums text-emerald-900" aria-live="off">{view.zoom.toFixed(1)}×</span>
       </>}
       {layerControl}
+      {/* eslint-disable-next-line @next/next/no-img-element -- A fixed 32px decorative thumbnail belongs to the labelled bird action. */}
       <div className="ml-auto flex items-center gap-1">{expanded && guide?.bird && <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 text-sm text-emerald-950" onClick={()=>{resize(false);if(guide.openBirds)guide.openBirds();else guide.showBirds()}} aria-label={`View ${guide.bird.commonName} in the bird guide`}><img src={guide.bird.image} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover" style={{objectPosition:guide.bird.imagePosition}}/><span>{guide.bird.commonName}</span></button>}<BirdFilterControls/>{listenControl}<button ref={trigger} className={styles.control} type="button" aria-expanded={expanded} aria-label={expanded ? `Close expanded ${label}` : `Enlarge ${label}`} onClick={()=>resize(!expanded)}>{expanded ? <Minimize2 size={18} aria-hidden="true"/> : <Maximize2 size={18} aria-hidden="true"/>}</button></div>
     </div>
     {gestures && <p className={styles.help}>{active ? "Drag to move · Pinch with two fingers · + / − to zoom · Double tap to zoom · Home to reset" : "Map gestures paused. Double tap to resume, or use the hand button. Scroll the page outside the map."}</p>}

@@ -284,7 +284,7 @@ function MediaDock({ resource, expanded, setExpanded, close, initial, remember, 
       video.current?.destroy(); video.current = null
       container?.replaceChildren()
     }
-  }, [playback, remember, resource.id])
+  }, [playback, remember, resource.id, resource.title])
 
   function toggle() {
     const retryFailedAudio = Boolean(error)

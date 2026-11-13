@@ -61,18 +61,20 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   useEffect(()=>{if(!plan?.id||country!=="new-zealand")return;let live=true;accountRequest<unknown>(`/api/account/plans/${plan.id}/itineraries`).then(raw=>{if(live)setSavedRoutes(itineraryReceiptSchema.parse(raw).data.routes)}).catch(()=>{});return()=>{live=false}},[plan?.id,country])
   const [message, setMessage] = useState(plan?.message || "")
   const [placeNotice, setPlaceNotice] = useState("")
+  const initialRegionsKey = initial?.regions.join("|") || ""
+  const isNew = !plan
   // Guest choices prefill a new form. Existing saved answers are never silently
   // overwritten: explicitly merge, review and save to modify an owned plan.
   useEffect(() => {
     if (country !== "new-zealand") return
     try {
       setIncomingPlaces(readNzPlaceIdeas(window.sessionStorage))
-      setIncomingItineraries(islandPlanners.filter(p=>!initial?.regions.length||initial.regions.includes(p.context.id)).flatMap(p=>{const draft=p.readTripDraft(window.sessionStorage);return draft?[draft]:[]}))
+      setIncomingItineraries(islandPlanners.filter(p=>!initialRegionsKey||initialRegionsKey.split("|").includes(p.context.id)).flatMap(p=>{const draft=p.readTripDraft(window.sessionStorage);return draft?[draft]:[]}))
       const incoming = readNzBirdBasket(window.sessionStorage)
       setIncomingBirds(incoming)
-      if (!plan) setBirdIds(incoming)
+      if (isNew) setBirdIds(incoming)
     } catch { /* The complete picker also works without browser storage. */ }
-  }, [country, plan?.id, initial?.regions.join("|")])
+  }, [country, plan?.id, isNew, initialRegionsKey])
   const options = countryRegionOptions[country]
   const olderSelections = selectedRegions.filter(value => !options.some(option => option.id === value))
 

@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import {useEffect,useRef,useState} from "react";
+import {useCallback,useEffect,useRef,useState} from "react";
 import {map as createMap,tileLayer,marker,divIcon,control,type TileLayer,type Map as GeographicMap} from "leaflet";
 import "leaflet/dist/leaflet.css";
 import focus from "@/content/geographic-map-focus.json";
@@ -34,13 +34,13 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
   const showPlanning=Boolean(country&&layers.planningRegions);
   const activateRegion=(id:string)=>{callbacks.current.selectRegion?.(id);regionPicker.current?.focus({preventScroll:true});};
   const callbacks=useRef({selectCountry,selectRegion});callbacks.current={selectCountry,selectRegion};
-  const resetCamera=()=>{
+  const resetCamera=useCallback(()=>{
     const current=map.current;if(!current)return;
     current.stop();
     const bounds=country==="new-zealand"&&region==="south-island" ? countries[country].bounds : countries[country]?.regions[region]??countries[country]?.bounds;
     if(bounds)current.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[28,28],maxZoom:11,animate:false});
     else current.setView([12,-45],1,{animate:false});
-  };
+  },[country,region]);
   useEffect(()=>{
     if(!container.current)return;
     let current:GeographicMap;
@@ -56,12 +56,13 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
       control.zoom({position:"topright"}).addTo(current);control.scale({imperial:false}).addTo(current);
       container.current.setAttribute("aria-label","Satellite map. Drag to pan, pinch or double tap to zoom. Arrow keys and plus or minus also work.");
       current.dragging.enable();current.touchZoom.enable();current.doubleClickZoom.enable();
-      setReady(true);onMapReady?.(current);
-    }catch{map.current?.remove();map.current=null;basemap.current=null;setReady(false);setFailed(true);onMapReady?.(null);return;}
+      setReady(true);
+    }catch{map.current?.remove();map.current=null;basemap.current=null;setReady(false);setFailed(true);return;}
     const observer=new ResizeObserver(()=>current.invalidateSize({pan:false}));observer.observe(container.current);
     const resize=()=>current.invalidateSize({pan:false});document.addEventListener("aves:map-resize",resize);
-    return()=>{observer.disconnect();document.removeEventListener("aves:map-resize",resize);onMapReady?.(null);current.remove();map.current=null;basemap.current=null;};
+    return()=>{observer.disconnect();document.removeEventListener("aves:map-resize",resize);current.remove();map.current=null;basemap.current=null;};
   },[initAttempt]);
+  useEffect(()=>{onMapReady?.(map.current);return()=>onMapReady?.(null)},[onMapReady,ready]);
   useEffect(()=>{
     const current=map.current;if(!current||!ready)return;
     // A scope selection must finish even if expansion/resizing interrupts a zoom animation.
@@ -70,7 +71,7 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
     current.stop();cameraScope.current=key;
     if(remembered)current.setView(remembered.centre,remembered.zoom,{animate:false});
     else resetCamera();
-  },[country,region,ready]);
+  },[country,region,ready,resetCamera]);
   useEffect(()=>{
     const current=map.current;if(!current||!ready)return;
     const targets=country?(destinationRegions[country]??[]).map(r=>({id:r.id,name:r.name,bounds:countries[country]?.regions[r.id]})):["colombia","australia","new-zealand"].map(id=>({id,name:id==="new-zealand"?"New Zealand":id==="australia"?"Australia":"Colombia",bounds:countries[id].bounds}));

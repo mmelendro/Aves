@@ -312,7 +312,7 @@ function IslandPlannerForm({
       tripAreaById.has(selectedMapBase.id)
     )
       setInput((current) => ({ ...current, areaId: selectedMapBase.id }));
-  }, [selectedMapBase]);
+  }, [selectedMapBase, context.corridor, tripAreaById]);
   useEffect(() => {
     if (tripAreaById.has(input.areaId))
       updateMapLayers({
@@ -320,7 +320,7 @@ function IslandPlannerForm({
         point: `planning-base-${input.areaId}`,
         park: "",
       });
-  }, [input.areaId, updateMapLayers]);
+  }, [input.areaId, updateMapLayers, tripAreaById]);
   return (
     <section
       id="trip-planner"

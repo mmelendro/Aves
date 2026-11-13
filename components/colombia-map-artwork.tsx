@@ -30,7 +30,7 @@ export default function ColombiaMapArtwork({ style, flat = false, selectedRegion
         </filter>
       </defs>
     </svg>
-    <Image {...props} src="/images/birding-regions-colombia-final.png" style={{ ...style, filter: `url(#${filterId})` }} />
+    <Image {...props} alt={props.alt} src="/images/birding-regions-colombia-final.png" style={{ ...style, filter: `url(#${filterId})` }} />
     <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox={boundaries.viewBox} preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" data-colombia-boundaries="true">
       {boundaries.regions.map(region => <path key={region.name} d={region.path} fill={region.name === selectedRegion ? "#065f46" : "none"} stroke="#6e9582" strokeWidth=".85" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke"/>)}
     </svg>

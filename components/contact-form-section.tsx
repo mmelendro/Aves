@@ -23,6 +23,28 @@ import { GoogleCalendarButton } from "@/components/google-calendar-button"
 import { makeColombiaInquiry } from "@/lib/colombia-inquiry"
 import { canonicalColombiaRegion, sharedAccountHref } from "@/lib/shared-account"
 
+const tourTypes = [
+  { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
+  { id: "vision", label: "Vision Tours", icon: "👁️" },
+  { id: "elevate", label: "Elevate Tours", icon: "⬆️" },
+  { id: "souls", label: "Souls Tours", icon: "💫" },
+]
+
+const bioregions = [
+  { id: "caribbean", label: "Caribbean Coast", emoji: "🏖️" },
+  { id: "sierra-nevada", label: "Sierra Nevada de Santa Marta", emoji: "🏔️" },
+  { id: "pacific-choco", label: "Pacific Coast Chocó", emoji: "🌊" },
+  { id: "western-andes", label: "Western Andes", emoji: "⛰️" },
+  { id: "cauca-valley", label: "Cauca Valley", emoji: "🌄" },
+  { id: "central-andes", label: "Central Andes", emoji: "🗻" },
+  { id: "magdalena-valley", label: "Magdalena Valley", emoji: "🏞️" },
+  { id: "eastern-andes", label: "Eastern Andes", emoji: "🏔️" },
+  { id: "eastern-plains", label: "Eastern Plains", emoji: "🌾" },
+  { id: "amazon", label: "Amazon Rainforest", emoji: "🌳" },
+  { id: "colombian-massif", label: "Colombian Massif", emoji: "🏕️" },
+  { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
+]
+
 interface ContactFormSectionProps {
   showTitle?: boolean
   showFAQ?: boolean
@@ -62,28 +84,6 @@ export function ContactFormSection({
   const inFlight = useRef(false)
   const submission = useRef<{body: string; key: string} | null>(null)
 
-  const tourTypes = [
-    { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
-    { id: "vision", label: "Vision Tours", icon: "👁️" },
-    { id: "elevate", label: "Elevate Tours", icon: "⬆️" },
-    { id: "souls", label: "Souls Tours", icon: "💫" },
-  ]
-
-  const bioregions = [
-    { id: "caribbean", label: "Caribbean Coast", emoji: "🏖️" },
-    { id: "sierra-nevada", label: "Sierra Nevada de Santa Marta", emoji: "🏔️" },
-    { id: "pacific-choco", label: "Pacific Coast Chocó", emoji: "🌊" },
-    { id: "western-andes", label: "Western Andes", emoji: "⛰️" },
-    { id: "cauca-valley", label: "Cauca Valley", emoji: "🌄" },
-    { id: "central-andes", label: "Central Andes", emoji: "🗻" },
-    { id: "magdalena-valley", label: "Magdalena Valley", emoji: "🏞️" },
-    { id: "eastern-andes", label: "Eastern Andes", emoji: "🏔️" },
-    { id: "eastern-plains", label: "Eastern Plains", emoji: "🌾" },
-    { id: "amazon", label: "Amazon Rainforest", emoji: "🌳" },
-    { id: "colombian-massif", label: "Colombian Massif", emoji: "🏕️" },
-    { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
-  ]
-
   // Region/tour links can prefill the form. Only recognised values are accepted here;
   // this convenience is not a substitute for validation by the receiving API.
   useEffect(() => {
@@ -103,11 +103,13 @@ export function ContactFormSection({
 
   const toggleTourType = (tourType: string) => {
     setDirty(true)
+    setSubmitStatus("idle")
     setSelectedTourTypes((prev) => (prev.includes(tourType) ? prev.filter((t) => t !== tourType) : [...prev, tourType]))
   }
 
   const toggleRegion = (region: string) => {
     setDirty(true)
+    setSubmitStatus("idle")
     setSelectedRegions((prev) => (prev.includes(region) ? prev.filter((r) => r !== region) : [...prev, region]))
   }
 
@@ -191,7 +193,7 @@ export function ContactFormSection({
                     The more details you provide, the better we can customize your Colombian birding experience.
                   </p>
 
-                  <form className="space-y-6" onSubmit={handleSubmit} onChange={() => setDirty(true)}>
+                  <form className="space-y-6" onSubmit={handleSubmit} onChange={() => {setDirty(true);setSubmitStatus("idle")}}>
                     {/* Personal Information */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>

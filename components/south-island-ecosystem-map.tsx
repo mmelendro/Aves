@@ -90,16 +90,18 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     if (!focusedPark) return
     setCamera(current => focusEcosystemMapPoint(current, {x:focusedPark.point[0],y:focusedPark.point[1]}))
   }, [focusedPark])
+  const focusedLongitude=focusedPoint?.longitude,focusedLatitude=focusedPoint?.latitude,focusedId=focusedPoint?.id
+  const hasFocusedPoint=Boolean(focusedPoint)
   useEffect(() => {
-    if (!focusedPoint) return
-    setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(focusedPoint.longitude,focusedPoint.latitude,map.bbox)))
-  }, [focusedPoint?.id, focusedPoint?.longitude, focusedPoint?.latitude])
+    if (focusedLongitude===undefined||focusedLatitude===undefined) return
+    setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(focusedLongitude,focusedLatitude,map.bbox)))
+  }, [focusedId, focusedLongitude, focusedLatitude])
   useEffect(()=>{
     if(!detailsRef.current)return
     // Guided steps must keep the map visible. Direct exploration keeps its existing details behaviour.
     if(guidedJourney)detailsRef.current.open=false
-    else if(focusedPoint)detailsRef.current.open=true
-  },[focusedPoint?.id,guidedJourney,journey?.index])
+    else if(hasFocusedPoint)detailsRef.current.open=true
+  },[focusedId,hasFocusedPoint,guidedJourney,journey?.index])
   useEffect(()=>{
     if(reference)setCamera(current=>focusEcosystemMapPoint(current,ecosystemMapPoint(reference.longitude,reference.latitude,map.bbox)));
   },[reference]);

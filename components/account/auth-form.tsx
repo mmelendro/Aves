@@ -161,6 +161,7 @@ export function AuthForm({ mode, next = "/account", oauthProviders = [] }: { mod
     {socialMode && oauthProviders.length > 0 ? <div className="mb-6 space-y-3">
       {/* Google's unmodified artwork includes its current logo and lettering.
           Keeping it local avoids loading Google's scripts or fonts before a visitor chooses to sign in. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- Display the original local Google SVG provider artwork without transformation. */}
       {oauthProviders.map(provider => provider === "google" ? <button key={provider} type="button" aria-label={uiCopy("Sign in with Google")} className="mx-auto block h-10 w-[180px] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-50" disabled={busy || readOnly} onClick={() => signInWithProvider(provider)}><img src="/google-sign-in.svg" width={180} height={40} alt="" aria-hidden="true" /></button> : <Button key={provider} type="button" aria-label={uiCopy("Continue with Facebook")} variant="outline" size="lg" className="w-full" disabled={busy || readOnly} onClick={() => signInWithProvider(provider)}>{uiCopy("Continue with Facebook")}</Button>)}
       <p className="text-center text-sm text-gray-500">{uiCopy("Or continue with email")}</p>
     </div> : null}
