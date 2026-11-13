@@ -5,7 +5,7 @@
 .control:focus-visible,.surface:focus-visible { outline:2px solid #047857; outline-offset:3px; }
 .control:disabled { opacity:.4; }
 .help { margin:.2rem .4rem .4rem; font-size:11px; line-height:1.6; color:#476459; }
-.surface { position:relative; flex:1; min-width:0; min-height:12rem; overflow:hidden; border-radius:.75rem; }
+.surface { position:relative; flex:1; min-width:0; min-height:12rem; overflow:hidden; contain:paint; border-radius:.75rem; }
 .content { height:100%; width:100%; transform-origin:0 0; transition:transform 140ms ease-out; }
 .surface[data-gesturing] .content { transition:none; }
 @media(prefers-reduced-motion:reduce) { .content { transition:none; } }
