@@ -1,4 +1,5 @@
 "use client"
+import {useUnsavedChanges} from "./unsaved-changes"
 import {useUiCopy} from "@/components/ui-copy-context"
 import {createContext,useCallback,useContext,useEffect,useId,useRef,useState,type ReactNode} from "react"
 import {Button} from "@/components/ui/button"
@@ -27,7 +28,7 @@ export function JournalMediaCard({item}:{item:TripMediaItem}){
   const [details,setDetails]=useState(()=>mediaDetailsSchema.strip().parse(item)),[dirty,setDirty]=useState(false),[busy,setBusy]=useState(false),[feedback,setFeedback]=useState("")
   const [view,setView]=useState(false),[confirmRemove,setConfirmRemove]=useState(false)
   useEffect(()=>{setDetails(mediaDetailsSchema.strip().parse(item));setDirty(false)},[item.id,item.revision])
-  useEffect(()=>{if(!dirty)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn)},[dirty])
+  useUnsavedChanges(dirty,uiCopy("You have unsaved media details. Leave and discard them?"))
   async function save(){
     if(busyRef.current)return
     const parsed=mediaDetailsSchema.safeParse(details);if(!parsed.success){setFeedback("Check the date and note lengths before saving.");return}
@@ -75,7 +76,7 @@ export function TripJournalMedia({entryId,enabled}:{entryId:string;enabled:boole
       setFile(new Blob([prepared],{type:mime}));setUploadId(pending?.id||crypto.randomUUID());setFeedback(pending?"Original file ready. Retry to finish the existing upload.":"File ready. Choose Upload privately to save this copy.")
     }catch(e){setFeedback(errorMessage(e))}finally{busyRef.current=false;setBusy(false);setPhase(null)}
   }
-  useEffect(()=>{if(!file)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn)},[file])
+  useUnsavedChanges(Boolean(file)||busy,uiCopy("A selected upload is not confirmed saved. Leave this page?"))
   async function upload(){
     if(!file||busyRef.current||!enabled)return;busyRef.current=true;setBusy(true);setPhase("uploading");setAttempted(true);setFeedback("")
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),60_000)

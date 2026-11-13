@@ -1,4 +1,5 @@
 "use client"
+import {useUnsavedChanges} from "./unsaved-changes"
 import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useRef,useState} from "react"
 import {accountRequest,errorMessage} from "./account-api"
@@ -13,7 +14,7 @@ export default function PrivateBirdAlbum({planId,country}:{planId:string;country
  const [query,setQuery]=useState(""),[matches,setMatches]=useState<Species[]>([]),[names,setNames]=useState<Record<string,string>>({}),[searching,setSearching]=useState(false),[selected,setSelected]=useState(""),[state,setState]=useState<AlbumBird["state"]>("desired")
  const lock=useRef(false),serial=useRef(0)
  useEffect(()=>{let live=true;accountRequest<unknown>(`/api/account/plans/${planId}/album`).then(raw=>{const r=albumReceiptSchema.parse(raw);if(live){setData(r.data);setRevision(r.revision);setNames(Object.fromEntries((r.species||[]).map(s=>[s.id,s.name])));setFailed(false)}}).catch(e=>{if(live){setFeedback(errorMessage(e));setFailed(true)}}).finally(()=>{if(live)setLoading(false)});return ()=>{live=false}},[planId])
- useEffect(()=>{if(!dirty)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return ()=>window.removeEventListener("beforeunload",warn)},[dirty])
+ useUnsavedChanges(dirty,uiCopy("You have unsaved album edits. Leave and discard them?"))
  function change(next:BirdAlbum){setData(next);setDirty(true);setFeedback("")}
  function patch(id:string,p:Partial<AlbumBird>){change({...data,birds:data.birds.map(b=>b.id===id?{...b,...p}:b)})}
  async function search(){const attempt=++serial.current;setSearching(true);setSelected("");setFeedback("");try{const r=await fetch(`/api/species/reference?${new URLSearchParams({country,q:query})}`,{cache:"no-store"});if(!r.ok)throw Error("Bird search is unavailable. Please retry.");const raw=await r.json();if(attempt===serial.current){const birds=raw.results as Species[];setMatches(birds);setNames(n=>({...n,...Object.fromEntries(birds.map(b=>[b.id,b.commonName]))}));setFeedback(birds.length?"Choose a species from the results.":"No matching species. Try another name.")}}catch(e){if(attempt===serial.current)setFeedback(errorMessage(e))}finally{if(attempt===serial.current)setSearching(false)}}

@@ -1,4 +1,5 @@
 "use client"
+import {useUnsavedChanges} from "./unsaved-changes"
 import {useUiCopy,UiText} from "@/components/ui-copy-context"
 
 import {useEffect,useId,useRef,useState} from "react"
@@ -31,12 +32,7 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
     }).catch(error=>{if(active){setFeedback(errorMessage(error));setFailed(true)}}).finally(()=>{if(active)setLoading(false)})
     return ()=>{active=false}
   },[planId])
-  useEffect(()=>{
-    if(!dirty&&!taskTitle&&!entryTitle)return
-    const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();event.returnValue=""}
-    window.addEventListener("beforeunload",warn)
-    return ()=>window.removeEventListener("beforeunload",warn)
-  },[dirty,taskTitle,entryTitle])
+  useUnsavedChanges(dirty||Boolean(taskTitle)||Boolean(entryTitle),uiCopy("You have unsaved workspace edits. Leave and discard them?"))
   function change(next:TripWorkspaceData){setData(next);setDirty(true);setFeedback("")}
   function task(id:string,values:Partial<Preparation>){change({...data,tasks:data.tasks.map(item=>item.id===id?{...item,...values}:item)})}
   function entry(id:string,values:Partial<JournalEntry>){change({...data,entries:data.entries.map(item=>item.id===id?{...item,...values}:item)})}
