@@ -37,16 +37,20 @@ import { button, field } from "./trip-planner/presentation";
 /** Owns trip inputs, suggestions and explicit private handoff. Child modules own display and browsing. */
 export default function IslandTripPlannerView({
   planner,
+  initialDraft,
+  onSave,
 }: {
   planner: IslandTripPlanner;
+  initialDraft?:TripDraft;
+  onSave?:(draft:TripDraft)=>Promise<void>;
 }) {
   return (
     <UiLanguageProvider scope="island"><UiLanguageToggle/><IslandPlannerProvider planner={planner}>
-      <IslandPlannerForm key={planner.context.id} />
+      <IslandPlannerForm key={planner.context.id} initialDraft={initialDraft} onSave={onSave}/>
     </IslandPlannerProvider></UiLanguageProvider>
   );
 }
-function IslandPlannerForm() {
+function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave?:(draft:TripDraft)=>Promise<void>}) {
  const uiCopy=useUiCopy()
  const planner=useIslandPlanner();
 
@@ -75,16 +79,18 @@ function IslandPlannerForm() {
   const { update: updateMapLayers } = useMapLayers();
   const id = useId(),
     output = useRef<HTMLDivElement>(null);
-  const [input, setInput] = useState<TripPlannerInput>(defaultTripInput);
-  const [draft, setDraft] = useState<TripDraft | null>(null);
+  const [input, setInput] = useState<TripPlannerInput>(initialDraft?.input??defaultTripInput);
+  const [draft, setDraft] = useState<TripDraft | null>(initialDraft??null);
+  const [privateBusy,setPrivateBusy]=useState(false),privateLock=useRef(false);
   const [alternatives, setAlternatives] = useState<
     { id: TripStyle; label: string; draft: TripDraft }[]
   >([]);
   const [notice, setNotice] = useState("");
   const [recovered,setRecovered]=useState(false);
   const [recoveryAvailable,setRecoveryAvailable]=useState(true);
-  useUnsavedChanges(!recoveryAvailable&&Boolean(draft),uiCopy("This itinerary could not be kept in this tab. Leave and discard it?"));
+  useUnsavedChanges(Boolean(onSave)&&(JSON.stringify(input)!==JSON.stringify(initialDraft?.input)||JSON.stringify(draft)!==JSON.stringify(initialDraft))||!onSave&&!recoveryAvailable&&(Boolean(draft)||JSON.stringify(input)!==JSON.stringify(defaultTripInput)),uiCopy("You have unsaved itinerary edits. Leave and discard them?"));
   useEffect(() => {
+    if(onSave)return;
     try {
       const recovery=readPlannerRecovery(window.sessionStorage,planner);
       const saved = readTripDraft(window.sessionStorage),
@@ -127,14 +133,14 @@ function IslandPlannerForm() {
       window.removeEventListener(NZ_BIRD_BASKET_EVENT, restoreBirds);
       window.removeEventListener("aves:trip-base", selectBase);
     };
-  }, []);
+  }, [planner,readTripDraft,context.corridor,tripAreaById,onSave]);
   useEffect(()=>{
-    if(!recovered||!validTripInput(input))return;
+    if(onSave||!recovered||!validTripInput(input))return;
     let kept=false;
     try{kept=writePlannerRecovery(window.sessionStorage,planner,input,draft)}catch{}
     setRecoveryAvailable(kept);
     if(!kept)setNotice("Tab recovery is unavailable. Copy your reviewed itinerary before leaving.");
-  },[recovered,input,draft,planner,validTripInput]);
+  },[recovered,input,draft,planner,validTripInput,onSave]);
   function chooseBirds(ids: string[]) {
     setInput((current) => ({ ...current, birdIds: ids }));
     try {
@@ -186,8 +192,13 @@ function IslandPlannerForm() {
   const dirty = Boolean(
     draft && JSON.stringify(input) !== JSON.stringify(draft.input),
   );
-  function carry() {
+  async function carry() {
     if (!draft || dirty) return;
+    if(onSave){
+      if(privateLock.current)return;privateLock.current=true;setPrivateBusy(true);
+      try{await onSave(draft);setNotice("Your editable itinerary is saved privately.")}catch(error){setNotice(error instanceof Error?error.message:"Your itinerary could not be confirmed. Keep your edits and retry.")}finally{privateLock.current=false;setPrivateBusy(false)}
+      return;
+    }
     try {
       if (!writeTripDraft(window.sessionStorage, draft)) throw Error();
       if (!writeNzBirdBasket(window.sessionStorage, draft.input.birdIds))
@@ -696,10 +707,10 @@ function IslandPlannerForm() {
                   <button
                     type="button"
                     className={button}
-                    disabled={dirty}
+                    disabled={dirty||privateBusy}
                     onClick={carry}
                   >
-                    {uiCopy("\n                    Review and save in My Trips\n                  ")}</button>
+                    {onSave ? uiCopy(privateBusy?"Saving…":"Save editable itinerary") : uiCopy("\n                    Review and save in My Trips\n                  ")}</button>
                 </div>
               </div>
               <p className="text-sm leading-6 text-emerald-900">

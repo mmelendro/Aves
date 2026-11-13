@@ -14,6 +14,7 @@ import {arrangementStates,privateReferenceUrl,emptyWorkspace,journalPlaces,prepa
 import type {TripCountry} from "@/content/trip-options"
 
 const PrivateBirdAlbum=dynamic(()=>import("./bird-album"),{loading:()=> <p><UiText source="Opening your bird album…"/></p>})
+const SavedItineraryEditor=dynamic(()=>import("./saved-itinerary-editor"),{loading:()=> <p role="status"><UiText source="Opening saved itineraries…"/></p>})
 const field="block min-h-11 w-full min-w-0 rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-emerald-950"
 export function TripWorkspace({planId,country}:{planId:string;country:TripCountry}) {
  const uiCopy=useUiCopy()
@@ -53,6 +54,7 @@ export function TripWorkspace({planId,country}:{planId:string;country:TripCountr
   if(loading)return <p role="status">{uiCopy("Opening your private trip workspace…")}</p>
   if(failed)return <div role="alert" className="rounded-2xl border border-emerald-200 bg-white p-6"><p>{uiCopy(feedback)}</p><p className="mt-3">{uiCopy("Reopen this page to try again. No empty workspace has been saved over your records.")}</p></div>
   return <TripMediaProvider planId={planId}><div className="space-y-7 min-w-0">
+    {country==="new-zealand"&&<SavedItineraryEditor planId={planId}/>}
     <section className="rounded-2xl border border-emerald-200 bg-white p-5 sm:p-7 shadow-sm" aria-label={uiCopy("Private trip workspace")}>
       <div className="flex flex-wrap items-center justify-between gap-4"><div><p className="text-xs uppercase tracking-widest text-emerald-700">{uiCopy("Just for you")}</p><h2 className="mt-2 text-2xl font-medium text-emerald-950">{uiCopy("Prepare. Explore. Remember.")}</h2></div><Button type="button" onClick={()=>void save()} disabled={busy||!dirty} className="bg-emerald-700 hover:bg-emerald-800">{busy ? uiCopy("Saving…") : uiCopy("Save workspace")}</Button></div>
       <p className="mt-4 text-sm leading-6 text-gray-600">{uiCopy("Your checklist and journal belong to this trip. Sharing a planning brief with AVES does not share these records. A checked task does not confirm a booking.")}</p>
