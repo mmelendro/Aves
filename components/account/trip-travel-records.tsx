@@ -1,4 +1,5 @@
 "use client"
+import {useUnsavedChanges} from "./unsaved-changes"
 import {useUiCopy} from "@/components/ui-copy-context"
 import {useEffect,useId,useRef,useState} from "react"
 import {Button} from "@/components/ui/button"
@@ -21,7 +22,8 @@ export function TripTravelRecords({planId,entries,workspaceSaved,preparations=[]
  const [busy,setBusy]=useState(false),[dirty,setDirty]=useState(false),[feedback,setFeedback]=useState("")
  const [title,setTitle]=useState(""),[kind,setKind]=useState<TravelRecord["kind"]>("expense"),[showRemoved,setShowRemoved]=useState(false),[invalid,setInvalid]=useState<Record<string,boolean>>({})
  useEffect(()=>{let active=true;setLoading(true);accountRequest<unknown>(`/api/account/plans/${planId}/records`).then(raw=>{const saved=recordsReceiptSchema.parse(raw);if(active){setData(saved.data);setRevision(saved.revision);setFailed(false)}}).catch(e=>{if(active){setFailed(true);setFeedback(errorMessage(e))}}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[planId])
- useEffect(()=>{if(!dirty&&!title)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn)},[dirty,title])
+ useUnsavedChanges(dirty||Boolean(title),uiCopy("You have unsaved travel records. Leave and discard them?"))
+
  function change(id:string,values:Partial<TravelRecord>){setData(current=>({...current,records:current.records.map(r=>r.id===id?{...r,...values} as TravelRecord:r)}));setDirty(true);setFeedback("")}
  async function save(){
   if(busyRef.current)return
@@ -62,7 +64,7 @@ export function TripTravelRecords({planId,entries,workspaceSaved,preparations=[]
    <Button type="button" variant="outline" aria-expanded={showRemoved} onClick={()=>setShowRemoved(!showRemoved)}>{uiCopy("Removed travel records (")}{data.records.filter(r=>r.deleted).length})</Button>
    {showRemoved&&<div className="space-y-3"><p className="text-sm">{uiCopy("Removed records can be restored. Save to keep a removal or restoration.")}</p>{data.records.filter(r=>r.deleted).map(r=><div key={r.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{r.title}</span><Button type="button" variant="outline" onClick={()=>change(r.id,{deleted:false})}>{uiCopy("Restore travel record")}</Button></div>)}</div>}
   </fieldset>
-  <TripPackDownload planId={planId} preparations={preparations} records={data.records} workspaceRevision={workspaceRevision} recordsRevision={revision} ready={workspaceSaved&&!dirty&&!busy&&!title}/>
+  <div id="trip-pack" className="scroll-mt-64"><TripPackDownload planId={planId} preparations={preparations} records={data.records} workspaceRevision={workspaceRevision} recordsRevision={revision} ready={workspaceSaved&&!dirty&&!busy&&!title}/></div>
   <details><summary className="min-h-11 cursor-pointer text-sm text-emerald-800">{uiCopy("Export your records")}</summary><p className="text-sm leading-6 text-gray-600">{uiCopy("Download the saved trip, checklist, journal, travel records and attachment details as JSON. This includes private references and removed records. Unsaved edits and attachment files are excluded. Save both sections first if you want current edits included. Download files individually from their journal entries. Keep your export private.")}</p><a href={`/api/account/plans/${planId}/export`} className="mt-3 inline-flex min-h-11 items-center text-emerald-800 underline">{uiCopy("Download saved private trip JSON")}</a></details>
  </section>
 }
