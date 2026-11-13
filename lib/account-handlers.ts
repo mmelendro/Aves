@@ -117,6 +117,7 @@ export const planPatch = (request: Request, id: string) => accountHandler(async 
   const body = await accountBody(request, updatePlanSchema)
   const plan = await ownPlan(client, user.id, id)
   const country = body.country || "australia"
+  if (country !== (plan.details.country ?? DEFAULT_TRIP_COUNTRY)) throw new AccountError(400, "A saved trip keeps its destination. Start a separate plan for another country.")
   if (!isEnabledTripCountry(country) && country !== (plan.details.country ?? DEFAULT_TRIP_COUNTRY)) {
     throw new AccountError(400, "This destination is not available for new plans.")
   }

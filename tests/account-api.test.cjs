@@ -534,3 +534,12 @@ test('generated itinerary notes and bird choices survive private save and immuta
  assert.equal(saved.message,message);assert.deepEqual(saved.questionnaire.birdIds,draft.input.birdIds)
  assert.doesNotMatch(h.notices.flat().join(' '),/Day 1:|Original synthetic notes|Arthur’s Pass/)
 })
+
+for (const [before,after] of [[undefined,"colombia"],["colombia","new-zealand"],["new-zealand","australia"]]) {
+ test(`a saved ${before || "legacy Australian"} trip cannot move to ${after}`,async()=>{
+  const h=harness({results:[{data:{...planRow,details:{...details,...(before?{country:before}:{})}},error:null}]})
+  const response=await h.planPatch(request({...values,country:after,regions:[],expectedUpdatedAt:stamp}),planId)
+  assert.equal(response.status,400);assert.match((await response.json()).error,/saved trip keeps its destination/)
+  assert.equal(h.queries.length,1)
+ })
+}
