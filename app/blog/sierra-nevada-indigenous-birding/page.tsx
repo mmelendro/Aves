@@ -212,7 +212,7 @@ export default function SierraNevadaBlogPost() {
                           <span>
                             <strong>
                               <Link
-                                href="/team#david-jara"
+                                href="/team#historical-credits"
                                 className="text-emerald-700 hover:text-emerald-800"
                               >
                                 David Jara
@@ -234,7 +234,7 @@ export default function SierraNevadaBlogPost() {
                           <span>
                             <strong>
                               <Link
-                                href="/team#david-faunal"
+                                href="/team#historical-credits"
                                 className="text-emerald-700 hover:text-emerald-800"
                               >
                                 David Faunal
@@ -256,7 +256,7 @@ export default function SierraNevadaBlogPost() {
                           <span>
                             <strong>
                               <Link
-                                href="/team#dagoberto-rudas"
+                                href="/team#historical-credits"
                                 className="text-emerald-700 hover:text-emerald-800"
                               >
                                 Dagoberto Rudas
@@ -292,7 +292,7 @@ export default function SierraNevadaBlogPost() {
                           <span>
                             <strong>
                               <Link
-                                href="/team#yeferson-guale-epiayu"
+                                href="/team#historical-credits"
                                 className="text-emerald-700 hover:text-emerald-800"
                               >
                                 Yeferson Guale Epiayu
@@ -331,14 +331,14 @@ export default function SierraNevadaBlogPost() {
                 Our expedition began with three full days in the misty cloud
                 forests of{" "}
                 <Link
-                  href="/about/partners#el-dorado"
+                  href="/about/partners#proaves-el-dorado"
                   className="text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   El Dorado Reserve
                 </Link>
                 , where{" "}
                 <Link
-                  href="/team#david-jara"
+                  href="/team#historical-credits"
                   className="text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   David Jara's
@@ -377,14 +377,14 @@ export default function SierraNevadaBlogPost() {
                 Our two days in Minca brought us to a remarkable location with
                 deep historical significance.{" "}
                 <Link
-                  href="/team#david-faunal"
+                  href="/team#historical-credits"
                   className="text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   David Faunal
                 </Link>{" "}
                 guided us through his family's property,{" "}
                 <Link
-                  href="/about/partners#el-faunal"
+                  href="/about/partners"
                   className="text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   El Observatorio de Aves
@@ -437,7 +437,7 @@ export default function SierraNevadaBlogPost() {
                 Two full days in Tayrona's diverse habitats provided
                 unparalleled access to this complex ecosystem with{" "}
                 <Link
-                  href="/team#dagoberto-rudas"
+                  href="/team#historical-credits"
                   className="text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   Dagoberto Rudas
@@ -478,9 +478,9 @@ export default function SierraNevadaBlogPost() {
                     height={300}
                     photographer="Royann, Early Guest"
                     guide="Dagoberto Rudas"
-                    guideLink="/team#dagoberto-rudas"
+                    guideLink="/team#historical-credits"
                     location="Tayrona National Park"
-                    locationLink="/about/partners#tayrona"
+                    locationLink="/regions/sierra-nevada-de-santa-marta"
                     species={{
                       commonName: "Blue-billed Curassow",
                       spanishName: "Paujil Piquiazul",
@@ -633,9 +633,9 @@ export default function SierraNevadaBlogPost() {
                       height={300}
                       photographer="Royann, Early Guest"
                       guide="David Jara"
-                      guideLink="/team#david-jara"
+                      guideLink="/team#historical-credits"
                       location="El Dorado Reserve"
-                      locationLink="/about/partners#el-dorado"
+                      locationLink="/about/partners#proaves-el-dorado"
                       species={{
                         commonName: "Scarlet-fronted Parakeet",
                         spanishName: "Perico Frentirrojo",
@@ -758,9 +758,9 @@ export default function SierraNevadaBlogPost() {
                       height={300}
                       photographer="Royann, Early Guest"
                       guide="Dagoberto Rudas"
-                      guideLink="/team#dagoberto-rudas"
+                      guideLink="/team#historical-credits"
                       location="Tayrona National Park"
-                      locationLink="/about/partners#tayrona"
+                      locationLink="/regions/sierra-nevada-de-santa-marta"
                       species={{
                         commonName: "Blue-headed Parrot",
                         spanishName: "Loro Cabecizul",
