@@ -10,4 +10,8 @@ test('deferred country catalogues preserve all licensed photos and the original 
  }
  const expected=placeGalleryPhotos.filter(p=>p.countryId==='new-zealand').map(p=>({id:`landscape:${p.id}`,label:p.caption,regionId:p.regionId,sourceUrl:p.sourceUrl,creator:p.creator,licence:p.licence}));
  assert.deepEqual(require('../content/nz-landscape-ideas.json'),expected);
+ const contexts=load('content/south-island-place-media.ts').southIslandPlaceContexts;
+ const index=require('../content/south-island-discovery-index.json');
+ assert.deepEqual(index.slides,contexts.flatMap(p=>p.photos.map(()=>({place:{id:p.id,habitat:p.habitat}}))));
+ assert.deepEqual(require('../content/south-island-gallery-additions.json').photos,require('../content/place-gallery-additions.json').photos.filter(p=>p.countryId==='new-zealand'&&p.regionId==='south-island'));
 });

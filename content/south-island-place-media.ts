@@ -1,4 +1,4 @@
-import galleryAdditions from "./place-gallery-additions.json"
+import galleryAdditions from "./south-island-gallery-additions.json"
 export type PlacePhoto = {
   src: string; alt: string; caption: string; creator: string
   sourceUrl: string; licence: string; licenceUrl: string; modifications: string

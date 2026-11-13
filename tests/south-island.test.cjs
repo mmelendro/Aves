@@ -99,7 +99,8 @@ test("the dedicated South Island page has canonical metadata, one local explorer
   assert.match(html, /South Island/)
   assert.doesNotMatch(html, /in development/i)
   assert.doesNotMatch(html, /Peter|Lisa|Royann|Sylvain|mmelendro@gmail\.com/)
-  assert.equal((html.match(/aria-label="South Island places carousel"/g) || []).length, 1)
+  assert.equal((html.match(/aria-label="A few places to build around\."/g) || []).length, 1)
+  assert.match(html,/Opening South Island landscapes|South Island places carousel/)
   for (const name of ["Nelson Lakes", "Fiordland", "Otago &amp; the Catlins"]) assert.ok(html.includes(name), name)
 })
 
