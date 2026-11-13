@@ -37,6 +37,7 @@ export function GoogleCalendarButton({ variant = "default", size = "sm", classNa
   return (
     <>
       <Button
+        type="button"
         onClick={handleOpenModal}
         variant={variant}
         size={size}
