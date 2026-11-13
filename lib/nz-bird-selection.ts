@@ -9,20 +9,22 @@ export const NZ_BIRD_BASKET_EVENT = "aves:nz-bird-basket-changed"
 export const NZ_BIRD_BASKET_KEY = "aves:nz-bird-basket:v1"
 const lifetime = 24 * 60 * 60 * 1000
 
-export function readNzBirdBasket(storage: Pick<Storage, "getItem" | "removeItem">, now = Date.now()): string[] {
+export function readNzBirdBasketSelection(storage: Pick<Storage, "getItem" | "removeItem">, now = Date.now()): string[] | null {
   try {
     const value = JSON.parse(storage.getItem(NZ_BIRD_BASKET_KEY) || "null")
     if (value?.version === 1 && Number.isFinite(value.at) && now >= value.at && now - value.at <= lifetime && validNzBirdIds(value.ids)) return value.ids
     storage.removeItem(NZ_BIRD_BASKET_KEY)
   } catch { /* Blocked storage is handled by keeping the visible basket in memory. */ }
-  return []
+  return null
+}
+export function readNzBirdBasket(storage: Pick<Storage, "getItem" | "removeItem">, now = Date.now()): string[] {
+  return readNzBirdBasketSelection(storage,now) ?? []
 }
 
 export function writeNzBirdBasket(storage: Pick<Storage, "setItem" | "removeItem">, ids: string[], now = Date.now()): boolean {
   if (!validNzBirdIds(ids)) return false
   try {
-    if (ids.length) storage.setItem(NZ_BIRD_BASKET_KEY, JSON.stringify({ version: 1, at: now, ids }))
-    else storage.removeItem(NZ_BIRD_BASKET_KEY)
+    storage.setItem(NZ_BIRD_BASKET_KEY, JSON.stringify({ version: 1, at: now, ids }))
     if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") window.dispatchEvent(new Event(NZ_BIRD_BASKET_EVENT))
     return true
   } catch { return false }

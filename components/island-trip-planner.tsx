@@ -3,6 +3,8 @@ import {useUiCopy} from "@/components/ui-copy-context"
 
 import {UiLanguageProvider,UiLanguageToggle} from "@/components/ui-language"
 import type { IslandTripPlanner } from "@/lib/island-trip-planner";
+import {readPlannerRecovery,writePlannerRecovery} from "@/lib/planner-recovery";
+import {useUnsavedChanges} from "./account/unsaved-changes";
 import {
   IslandPlannerProvider,
   useIslandPlanner,
@@ -11,6 +13,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import NewZealandBirdPicker from "./new-zealand-bird-picker";
 import {
   readNzBirdBasket,
+  readNzBirdBasketSelection,
   writeNzBirdBasket,
   NZ_BIRD_BASKET_EVENT,
 } from "@/lib/nz-bird-selection";
@@ -45,6 +48,7 @@ export default function IslandTripPlannerView({
 }
 function IslandPlannerForm() {
  const uiCopy=useUiCopy()
+ const planner=useIslandPlanner();
 
   const {
     context,
@@ -77,25 +81,31 @@ function IslandPlannerForm() {
     { id: TripStyle; label: string; draft: TripDraft }[]
   >([]);
   const [notice, setNotice] = useState("");
+  const [recovered,setRecovered]=useState(false);
+  const [recoveryAvailable,setRecoveryAvailable]=useState(true);
+  useUnsavedChanges(!recoveryAvailable&&Boolean(draft),uiCopy("This itinerary could not be kept in this tab. Leave and discard it?"));
   useEffect(() => {
     try {
+      const recovery=readPlannerRecovery(window.sessionStorage,planner);
       const saved = readTripDraft(window.sessionStorage),
-        birds = readNzBirdBasket(window.sessionStorage);
-      if (saved) {
-        setDraft(saved);
+        birds = readNzBirdBasketSelection(window.sessionStorage);
+      if (recovery || saved) {
+        setDraft(recovery ? recovery.draft : saved);
         setInput({
-          ...saved.input,
-          ...(birds.length ? { birdIds: birds } : {}),
+          ...(recovery?.input ?? saved!.input),
+          ...(birds !== null ? { birdIds: birds } : {}),
         });
-      } else setInput((current) => ({ ...current, birdIds: birds }));
+      } else setInput((current) => ({ ...current, birdIds: birds ?? [] }));
       const base = new URLSearchParams(window.location.search).get("base");
       if (!context.corridor && base && tripAreaById.has(base))
         setInput((current) => ({ ...current, areaId: base }));
     } catch {
+      setRecoveryAvailable(false);
       setNotice(
         "Your choices work here, but this browser may not carry them between pages. Use Copy itinerary if needed.",
       );
     }
+    setRecovered(true);
     const restoreBirds = () => {
       try {
         const birds = readNzBirdBasket(window.sessionStorage);
@@ -118,6 +128,13 @@ function IslandPlannerForm() {
       window.removeEventListener("aves:trip-base", selectBase);
     };
   }, []);
+  useEffect(()=>{
+    if(!recovered||!validTripInput(input))return;
+    let kept=false;
+    try{kept=writePlannerRecovery(window.sessionStorage,planner,input,draft)}catch{}
+    setRecoveryAvailable(kept);
+    if(!kept)setNotice("Tab recovery is unavailable. Copy your reviewed itinerary before leaving.");
+  },[recovered,input,draft,planner,validTripInput]);
   function chooseBirds(ids: string[]) {
     setInput((current) => ({ ...current, birdIds: ids }));
     try {
