@@ -22,3 +22,5 @@ await copyFile("tests/browser/fixtures/trip-dashboard.tsx", "app/browser-fixture
 
 await mkdir('app/browser-fixtures/unsaved-workspace', {recursive:true})
 await copyFile('tests/browser/fixtures/unsaved-workspace.tsx','app/browser-fixtures/unsaved-workspace/page.tsx')
+await mkdir('app/browser-fixtures/contact', {recursive:true})
+await copyFile('tests/browser/fixtures/contact.tsx','app/browser-fixtures/contact/page.tsx')

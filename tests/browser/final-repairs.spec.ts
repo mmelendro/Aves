@@ -20,7 +20,7 @@ test('two dirty editors allow section Back and Forward but protect departure',as
 })
 test('enquiry edits survive cancelled navigation and failed receipts, and clear only after stored success',async({page},info)=>{
  test.skip(!['desktop','phone-390'].includes(info.project.name),'Public enquiry guard')
- await page.goto('/contact');await declineOptionalCookies(page)
+ await page.goto('/browser-fixtures/contact');await declineOptionalCookies(page)
  await page.getByRole('textbox',{name:'First name',exact:true}).fill('Synthetic');await page.getByRole('textbox',{name:'Last name',exact:true}).fill('Visitor');await page.getByRole('textbox',{name:'Email address',exact:true}).fill('synthetic@example.invalid')
  const message=page.getByRole('textbox',{name:'Special interests or requests',exact:true});await message.fill('Keep this private draft')
  page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(message).toHaveValue('Keep this private draft');await expect(page).toHaveURL(/\/contact$/)
@@ -36,7 +36,7 @@ test('the main conversation link follows all country previews and stays general 
 })
 test('the shared enquiry form protects edited answers and clears its guard after a stored receipt',async({page},info)=>{
  test.skip(!['desktop','phone-390'].includes(info.project.name),'Shared enquiry guard')
- await page.goto('/contact?country=australia');await declineOptionalCookies(page)
+ await page.goto('/browser-fixtures/contact?country=australia');await declineOptionalCookies(page)
  await page.locator('input[name="name"]').fill('Synthetic Visitor');await page.locator('input[name="email"]').fill('synthetic@example.invalid');await page.locator('textarea[name="message"]').fill('Keep my shared enquiry')
  page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'how we care for your information',exact:true}).click();await expect(page.locator('textarea[name="message"]')).toHaveValue('Keep my shared enquiry')
  await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true,status:'stored',country:'australia',intent:'inquiry'}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByRole('status').filter({hasText:'Your inquiry has been saved'})).toBeVisible()
