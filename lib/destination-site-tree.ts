@@ -79,7 +79,12 @@ export function buildDestinationSiteTree(
       {
         id: "website-information",
         label: "Website information",
-        children: groupsFor(null).flatMap((group) => group.children ?? []),
+        children: groupsFor(null).filter(group => group.id !== "discovery-tools").flatMap((group) => group.children ?? []),
+      },
+      {
+        id: "shared-tools",
+        label: "Search and display",
+        children: groupsFor(null).filter(group => group.id === "discovery-tools").flatMap(group => group.children ?? []),
       },
     ],
   };

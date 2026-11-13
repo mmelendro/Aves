@@ -25,7 +25,7 @@ export const publicNavigationGroups: (Omit<PublicPageGroup, "country"> & {
   country: "colombia" | "australia" | "new-zealand" | null;
 })[] = [
   {id:"discovery-tools",title:"Search and display",country:null,pages:[{href:"/search",label:"Search destinations and places"},{href:"/preferences",label:"Display and installation preferences"}]},
-  { id: "species-inventories", title: "Country species inventories", country: null, pages: ["colombia", "australia", "new-zealand"].map(country => ({ href: `/species/reference?country=${country}`, label: `${country === "new-zealand" ? "New Zealand" : country === "colombia" ? "Colombia" : "Australia"} national bird inventory` })) },
+  ...(["colombia", "australia", "new-zealand"] as const).map(country => ({ id: `${country}-species-inventory`, title: "Birds", country, pages: [{ href: `/species/reference?country=${country}`, label: `${country === "new-zealand" ? "New Zealand" : country === "colombia" ? "Colombia" : "Australia"} national bird inventory` }] })),
   ...publicPageGroups,
   ...australianGroups.map((group) => ({
     ...group,

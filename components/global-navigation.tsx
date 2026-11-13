@@ -8,6 +8,8 @@ import { useColombiaHomeCopy } from "@/components/colombia-home-language"
  */
 import { BrandMark, type BrandCountry } from "@/components/brand-mark"
 import Link from "next/link"
+import { enquiryHref } from "@/lib/enquiry-entry"
+import { useHeaderLandscape } from "./header-landscape-context"
 import { ArrowRight } from "lucide-react"
 import { destinations } from "@/content/destinations"
 import { NewZealandHeader } from "@/components/new-zealand-header"
@@ -27,6 +29,9 @@ export interface FooterNavigationGroup {
 
 export function GlobalFooter({ country, navigationGroups = [], transparent = false, accountHref = "/account" }: GlobalBrandProps & { navigationGroups?: readonly FooterNavigationGroup[]; transparent?: boolean; accountHref?: string } = {}) {
   const localizeHome = useColombiaHomeCopy()
+  const {selection} = useHeaderLandscape()
+  const contactCountry = country && country !== "global" ? country : selection?.country
+  const contactHref = contactCountry && contactCountry !== "global" ? enquiryHref(contactCountry, selection?.country === contactCountry ? selection.regionId : "") : "/contact?topic=general#inquiry"
   const tree = (
     <footer className={`${transparent ? "bg-gray-900/90 backdrop-blur-lg" : "bg-gray-900"} py-12 text-gray-300`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -43,7 +48,7 @@ export function GlobalFooter({ country, navigationGroups = [], transparent = fal
           </nav>
           <div>
             <h2 className="mb-3 font-semibold text-white">Keep in touch</h2>
-            <a href="/australia/contact?topic=general#inquiry" className="inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">Contact AVES</a>
+            <a href={contactHref} className="inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">Contact AVES</a>
             <a href={accountHref} className="ml-5 inline-flex min-h-11 items-center text-emerald-300 underline-offset-4 hover:underline">My Trips</a>
             <p className="mt-2 text-sm leading-6">Have a trip in mind? Explore a destination and start a conversation with us.</p>
           </div>

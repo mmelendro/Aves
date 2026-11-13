@@ -40,7 +40,7 @@ export function NewZealandHeader({ country = "new-zealand", navigationLinks, sur
     return pathname === target || (target === "/aves-explorer" && (pathname === "/regions" || pathname.startsWith("/regions/"))) || (target !== "/" && pathname.startsWith(target + "/"))
   }
   const menuLinks = navigationLinks ? [...navigationLinks,{href:"/search",label:"Search"}] : links
-  const desktopLinks = navigationLinks?.filter(link => link.href !== "/site-map") ?? links.slice(0, 3)
+  const desktopLinks = navigationLinks?.filter(link => link.href !== "/site-map") ?? links.filter(link => link.href !== "/site-map")
   const hasCountryNavigation = !!navigationLinks
   const desktopClass = hasCountryNavigation ? "xl:flex" : "sm:flex"
   const mobileClass = hasCountryNavigation ? "xl:hidden" : "sm:hidden"
