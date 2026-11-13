@@ -1,4 +1,5 @@
 "use client";
+import {useUiCopy} from "@/components/ui-language"
 import {sourceFreshness} from "@/lib/source-freshness";
 import { useIslandPlanner } from "./island-planner-context";
 
@@ -22,6 +23,8 @@ import {
 
 /** Browsing and place ideas are independent of generated route and private save state. */
 export default function TripCatalogue({ areaId }: { areaId: string }) {
+ const uiCopy=useUiCopy()
+
   const {
     airbnbAreaUrl,
     categoryName,
@@ -85,17 +88,12 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
   return (
     <section className="mt-12" aria-labelledby={`${id}-browse`}>
       <h3 id={`${id}-browse`} className="text-2xl font-medium text-emerald-950">
-        Build in the things you enjoy
-      </h3>
+        {uiCopy("\n        Build in the things you enjoy\n      ")}</h3>
       <p className="mt-3 text-sm leading-6 text-gray-600">
-        Browse all categories, save individual ideas, or choose them in your
-        daily draft. Organic and farm to table tags describe sourced operator
-        statements, not a blanket certification.
-      </p>
+        {uiCopy("\n        Browse all categories, save individual ideas, or choose them in your\n        daily draft. Organic and farm to table tags describe sourced operator\n        statements, not a blanket certification.\n      ")}</p>
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
         <label className="text-sm" htmlFor={`${id}-search`}>
-          Find a place
-          <input
+          {uiCopy("\n          Find a place\n          ")}<input
             className={`${field} mt-1`}
             id={`${id}-search`}
             type="search"
@@ -104,12 +102,11 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
               setQuery(e.target.value);
               setLimit(12);
             }}
-            placeholder="Name or experience"
+            placeholder={uiCopy("Name or experience")}
           />
         </label>
         <label className="text-sm" htmlFor={`${id}-category`}>
-          Category
-          <select
+          {uiCopy("\n          Category\n          ")}<select
             id={`${id}-category`}
             className={`${field} mt-1`}
             value={category}
@@ -118,17 +115,16 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
               setLimit(12);
             }}
           >
-            <option value="all">All categories</option>
+            <option value="all">{uiCopy("All categories")}</option>
             {tripCategories.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.label}
+                {uiCopy(c.label)}
               </option>
             ))}
           </select>
         </label>
         <label className="text-sm" htmlFor={`${id}-evidence`}>
-          Food & eco evidence
-          <select
+          {uiCopy("\n          Food & eco evidence\n          ")}<select
             className={`${field} mt-1`}
             id={`${id}-evidence`}
             value={claim}
@@ -137,23 +133,20 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
               setLimit(12);
             }}
           >
-            <option value="all">All reviewed references</option>
-            <option value="eco">Published operator evidence</option>
-            <option value="priced">Published price reference</option>
+            <option value="all">{uiCopy("All reviewed references")}</option>
+            <option value="eco">{uiCopy("Published operator evidence")}</option>
+            <option value="priced">{uiCopy("Published price reference")}</option>
             <option value="organic-ingredients">
-              Organic ingredient statements
-            </option>
+              {uiCopy("\n              Organic ingredient statements\n            ")}</option>
             <option value="farm-to-table">
-              Farm / garden to table statements
-            </option>
-            <option value="local-produce">Local produce</option>
-            <option value="natural-thermal">Natural thermal pools</option>
+              {uiCopy("\n              Farm / garden to table statements\n            ")}</option>
+            <option value="local-produce">{uiCopy("Local produce")}</option>
+            <option value="natural-thermal">{uiCopy("Natural thermal pools")}</option>
           </select>
         </label>
       </div>
       <p role="status" className="mt-4 text-sm text-gray-600">
-        {results.length} references in this view
-        {areaId !== "all" ? ` · ${tripAreaById.get(areaId)?.name}` : ""}.
+        {results.length} {uiCopy(" references in this view\n        ")}{areaId !== "all" ? ` · ${tripAreaById.get(areaId)?.name}` : ""}.
       </p>
       <div className="mt-4 grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
         {results.slice(0, limit).map((place) => (
@@ -175,8 +168,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
             {place.eco && (
               <details className="mt-3 text-xs leading-6 text-emerald-900">
                 <summary className="min-h-11 cursor-pointer font-semibold">
-                  Operator evidence & scope
-                </summary>
+                  {uiCopy("\n                  Operator evidence & scope\n                ")}</summary>
                 {place.eco.note}
               </details>
             )}
@@ -188,13 +180,12 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
             {place.access && (
               <details className="mt-2 text-xs leading-6 text-gray-600">
                 <summary className="min-h-11 cursor-pointer font-semibold">
-                  Access & planning
-                </summary>
+                  {uiCopy("\n                  Access & planning\n                ")}</summary>
                 {place.access}
               </details>
             )}
             <p className="mt-2 text-[11px] text-gray-500">
-              Source reviewed {place.checkedAt}. {sourceFreshness(place.checkedAt)==="reviewed" ? "Check current access and arrangements." : "Review due. Recheck the original source before relying on access or supplier details."}
+              {uiCopy("\n              Source reviewed ")}{place.checkedAt}. {sourceFreshness(place.checkedAt)==="reviewed" ? uiCopy("Check current access and arrangements.") : uiCopy("Review due. Recheck the original source before relying on access or supplier details.")}
             </p>
             <VisitReference place={place} />
             <SourceLink place={place} />
@@ -206,9 +197,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
                 aria-pressed={ideas.includes(place.id)}
                 onClick={() => toggleIdea(place)}
               >
-                {ideas.includes(place.id)
-                  ? "Remove place idea"
-                  : "Add place idea"}
+                {ideas.includes(place.id) ? uiCopy("Remove place idea") : uiCopy("Add place idea")}
                 <span className="sr-only">: {place.name}</span>
               </button>
             </div>
@@ -217,9 +206,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
       </div>
       {results.length === 0 && (
         <p className="mt-5 text-sm text-gray-600">
-          No reviewed matches here yet. Change the category, evidence filter or
-          planning base.
-        </p>
+          {uiCopy("\n          No reviewed matches here yet. Change the category, evidence filter or\n          planning base.\n        ")}</p>
       )}
       {results.length > limit && (
         <button
@@ -227,18 +214,13 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
           className={`${button} mt-5`}
           onClick={() => setLimit((n) => n + 12)}
         >
-          Show more places and experiences
-        </button>
+          {uiCopy("\n          Show more places and experiences\n        ")}</button>
       )}
       <details className="mt-6 rounded-2xl border border-emerald-200 bg-white p-4">
         <summary className="min-h-11 cursor-pointer font-semibold text-emerald-950">
-          Airbnb searches & area reference sources
-        </summary>
+          {uiCopy("\n          Airbnb searches & area reference sources\n        ")}</summary>
         <p className="mt-3 text-xs leading-6 text-gray-600">
-          These are public area searches. AVES has not checked individual homes,
-          host eco claims, prices or availability. Broad bases can span long
-          drives; verify exact locations before choosing.
-        </p>
+          {uiCopy("\n          These are public area searches. AVES has not checked individual homes,\n          host eco claims, prices or availability. Broad bases can span long\n          drives; verify exact locations before choosing.\n        ")}</p>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           {tripAreas
             .filter((a) => areaId === "all" || a.id === areaId)
@@ -252,8 +234,8 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
                   {...external}
                   className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline"
                 >
-                  Airbnb homes · {a.name}
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  {uiCopy("\n                  Airbnb homes · ")}{a.name}
+                  <span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
                 </a>
                 <br />
                 <a
@@ -261,15 +243,14 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
                   {...external}
                   className="inline-flex min-h-11 items-center text-xs text-gray-600 underline"
                 >
-                  Area map reference
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  {uiCopy("\n                  Area map reference\n                  ")}<span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
                 </a>
               </div>
             ))}
         </div>
       </details>
       <p role="status" className="mt-3 text-sm text-emerald-900">
-        {notice}
+        {uiCopy(notice)}
       </p>
     </section>
   );

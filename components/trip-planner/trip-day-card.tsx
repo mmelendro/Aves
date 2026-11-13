@@ -1,4 +1,5 @@
 "use client";
+import {useUiCopy} from "@/components/ui-language"
 import { useIslandPlanner } from "./island-planner-context";
 import TripPriceReference from "./trip-price-reference";
 import { type TripDay, type TripDraft } from "@/lib/island-planning-types";
@@ -18,6 +19,8 @@ export default function TripDayCard({
   index: number;
   onChange: (patch: Partial<TripDay>) => void;
 }) {
+ const uiCopy=useUiCopy()
+
   const {
     context,
     canScheduleDay,
@@ -52,50 +55,45 @@ export default function TripDayCard({
   );
   return (
     <article
-      aria-label={`Itinerary day ${index + 1}`}
+      aria-label={uiCopy("Itinerary day {day}",{day:index+1})}
       className="min-w-0 space-y-3 rounded-2xl border border-emerald-200 bg-white p-5"
     >
       <h4 className="text-lg font-semibold text-emerald-950">
-        Day {index + 1} · {base.name}
+        {uiCopy("\n        Day ")}{index + 1} · {base.name}
         {tripDayDate(draft.input, index)
           ? ` · ${tripDayDate(draft.input, index)}`
           : ""}
       </h4>
       {(index === 0 || index === draft.days.length - 1) && (
         <div className="space-y-2 rounded-xl border border-amber-100 bg-amber-50/50 p-3 text-sm leading-6 text-emerald-950">
-          {index === 0 && <p>Arrival timing is open. Check your actual arrival, local travel and rest before committing to this day’s outings.</p>}
-          {index === draft.days.length - 1 && <p>Departure timing is open. Allow for onward travel, check-in and returning transport before keeping this day’s outing.</p>}
+          {index === 0 && <p>{uiCopy("Arrival timing is open. Check your actual arrival, local travel and rest before committing to this day’s outings.")}</p>}
+          {index === draft.days.length - 1 && <p>{uiCopy("Departure timing is open. Allow for onward travel, check-in and returning transport before keeping this day’s outing.")}</p>}
         </div>
       )}
       <details className="rounded-xl border border-emerald-100 p-3">
         <summary className="min-h-11 cursor-pointer font-medium text-emerald-950">
-          Daily pace review · {workload.label}
+          {uiCopy("\n          Daily pace review · ")}{uiCopy(workload.label)}
         </summary>
         {workload.abovePreference && (
           <p className="mt-2 font-semibold text-amber-900">
-            Driving reference above your preference
-          </p>
+            {uiCopy("\n            Driving reference above your preference\n          ")}</p>
         )}
         <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-gray-600">
           {workload.notes.map((note) => (
-            <li key={note}>{note}</li>
+            <li key={note}>{uiCopy(note)}</li>
           ))}
         </ul>
       </details>
       {day.transferFrom && (
         <>
           <p className="text-sm leading-6">
-            Transfer from {tripAreaById.get(day.transferFrom)?.name}.{" "}
-            {context.corridor
-              ? "Keep time for travel, breaks and one optional short outing."
-              : "Keep this day for travel, breaks and checking in."}
+            {uiCopy("\n            Transfer from ")}{tripAreaById.get(day.transferFrom)?.name}.{" "}
+            {context.corridor ? uiCopy("Keep time for travel, breaks and one optional short outing.") : uiCopy("Keep this day for travel, breaks and checking in.")}
           </p>
           {journey && (
             <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-3 text-sm leading-6">
               <p className="font-medium text-emerald-950">
-                {journey.reference
-                  ? `Published road reference · about ${roadTimeLabel(journey.reference.minutes)}`
-                  : "Road time still needs review"}
+                {journey.reference ? uiCopy("Published road reference · about {time}",{time:roadTimeLabel(journey.reference.minutes)}) : uiCopy("Road time still needs review")}
               </p>
               <p>
                 {journey.from.name} ↔ {journey.to.name}
@@ -103,8 +101,8 @@ export default function TripDayCard({
               {journey.reference ? (
                 <>
                   <p className="mt-1 text-xs text-gray-600">
-                    {journey.reference.publisher} · reviewed{" "}
-                    {journey.reference.reviewedAt}. Stops:{" "}
+                    {journey.reference.publisher} {uiCopy(" · reviewed")}{" "}
+                    {journey.reference.reviewedAt}{uiCopy(". Stops:")}{" "}
                     {journey.reference.stopPolicy}.
                   </p>
                   <a
@@ -112,33 +110,25 @@ export default function TripDayCard({
                     href={journey.reference.url}
                     {...external}
                   >
-                    Read journey source
-                    <span className="sr-only"> (opens in a new tab)</span>
+                    {uiCopy("\n                    Read journey source\n                    ")}<span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
                   </a>
                   {journey.reference.minutes >= 300 && (
                     <p className="font-medium text-amber-900">
-                      Long driving reference. Consider breaking the journey
-                      overnight or choosing fewer bases.
-                    </p>
+                      {uiCopy("\n                      Long driving reference. Consider breaking the journey\n                      overnight or choosing fewer bases.\n                    ")}</p>
                   )}
                 </>
               ) : (
                 <p className="mt-1 text-xs text-gray-600">
-                  No reviewed time for these towns yet. Do not assume a direct
-                  or short connection.
-                </p>
+                  {uiCopy("\n                  No reviewed time for these towns yet. Do not assume a direct\n                  or short connection.\n                ")}</p>
               )}
               <p className="mt-1 text-xs text-gray-600">
-                Town references, not exact stay addresses or live traffic.
-                Direction, weather, stops and local travel can change the time.
-              </p>
+                {uiCopy("\n                Town references, not exact stay addresses or live traffic.\n                Direction, weather, stops and local travel can change the time.\n              ")}</p>
               <a
                 className="inline-flex min-h-11 items-center font-semibold text-emerald-800 underline"
                 href={roadReferenceData.conditionsUrl}
                 {...external}
               >
-                Check NZTA road conditions
-                <span className="sr-only"> (opens in a new tab)</span>
+                {uiCopy("\n                Check NZTA road conditions\n                ")}<span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
               </a>
             </div>
           )}
@@ -147,34 +137,26 @@ export default function TripDayCard({
             href={tripTransferUrl(draft, index)}
             {...external}
           >
-            Check this transfer in Google Maps
-            <span className="sr-only"> (opens in a new tab)</span>
+            {uiCopy("\n            Check this transfer in Google Maps\n            ")}<span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
           </a>
         </>
       )}
       {!canScheduleDay(draft, index) ? (
         !day.transferFrom && (
           <p className="text-sm leading-6">
-            Departure day in {gatewayById.get(draft.input.endCity)?.name}. Keep
-            time for local travel and your departure arrangements; flight, ferry
-            and check-in times must be checked separately.
-          </p>
+            {uiCopy("\n            Departure day in ")}{gatewayById.get(draft.input.endCity)?.name}{uiCopy(". Keep\n            time for local travel and your departure arrangements; flight, ferry\n            and check-in times must be checked separately.\n          ")}</p>
         )
       ) : (
         <>
           {arrival && (
             <p className="text-sm leading-6">
-              Choose at most one short local outing after travel, breaks and
-              checking in. Local travel is additional. Keep your onward
-              departure time free.
-            </p>
+              {uiCopy("\n              Choose at most one short local outing after travel, breaks and\n              checking in. Local travel is additional. Keep your onward\n              departure time free.\n            ")}</p>
           )}
           <label
             className="block text-sm font-medium"
             htmlFor={`${id}-bird-${index}`}
           >
-            Birding or nature outing
-            <select
+            {uiCopy("\n            Birding or nature outing\n            ")}<select
               className={`${field} mt-1`}
               id={`${id}-bird-${index}`}
               value={day.birdingId}
@@ -190,7 +172,7 @@ export default function TripDayCard({
                 })
               }
             >
-              <option value="">Leave open / local research day</option>
+              <option value="">{uiCopy("Leave open / local research day")}</option>
               {birdStops.map((p) => (
                 <option
                   key={p.id}
@@ -198,9 +180,7 @@ export default function TripDayCard({
                   disabled={!placeFitsCalendar(p, draft.input, index)}
                 >
                   {p.name}
-                  {!placeFitsCalendar(p, draft.input, index)
-                    ? " · review date"
-                    : ""}
+                  {!placeFitsCalendar(p, draft.input, index) ? uiCopy(" · review date") : ""}
                 </option>
               ))}
             </select>
@@ -209,17 +189,11 @@ export default function TripDayCard({
             <div className="text-sm leading-6">
               <p>{stop.description}</p>
               <p className="mt-1 font-medium text-emerald-800">
-                {stop.encounter === "restored-sanctuary"
-                  ? "Free living restoration sanctuary · "
-                  : stop.encounter === "sanctuary"
-                    ? "Conservation sanctuary · "
-                    : stop.encounter === "managed"
-                      ? "Managed or captive encounter · "
-                      : "Wild outing · "}
+                {stop.encounter === "restored-sanctuary" ? uiCopy("Free living restoration sanctuary · ") : stop.encounter === "sanctuary" ? uiCopy("Conservation sanctuary · ") : stop.encounter === "managed" ? uiCopy("Managed or captive encounter · ") : uiCopy("Wild outing · ")}
                 {stop.birdIds
                   .filter((id) => draft.input.birdIds.includes(id))
                   .map(nzBirdName)
-                  .join(", ") || "Documented local bird opportunities"}
+                  .join(", ") || uiCopy("Documented local bird opportunities")}
               </p>
               {stop.access && (
                 <p className="mt-1 text-xs text-gray-600">{stop.access}</p>
@@ -236,8 +210,7 @@ export default function TripDayCard({
             className="block text-sm font-medium"
             htmlFor={`${id}-extra-${index}`}
           >
-            Food, market or optional alternative
-            <select
+            {uiCopy("\n            Food, market or optional alternative\n            ")}<select
               className={`${field} mt-1`}
               id={`${id}-extra-${index}`}
               value={day.extraId}
@@ -248,7 +221,7 @@ export default function TripDayCard({
                 })
               }
             >
-              <option value="">Keep time free</option>
+              <option value="">{uiCopy("Keep time free")}</option>
               {local
                 .filter(
                   (p) =>
@@ -264,9 +237,7 @@ export default function TripDayCard({
                     disabled={!placeFitsCalendar(p, draft.input, index)}
                   >
                     {p.name}
-                    {!placeFitsCalendar(p, draft.input, index)
-                      ? " · needs a matching date"
-                      : ""}
+                    {!placeFitsCalendar(p, draft.input, index) ? uiCopy(" · needs a matching date") : ""}
                   </option>
                 ))}
             </select>
@@ -276,7 +247,7 @@ export default function TripDayCard({
               <p>{extra.description}</p>
               {extra.when && (
                 <p className="mt-1 text-xs font-medium text-amber-900">
-                  Date dependent: {extra.when}
+                  {uiCopy("\n                  Date dependent: ")}{extra.when}
                 </p>
               )}
               {extra.access && (
@@ -286,9 +257,7 @@ export default function TripDayCard({
                 ["adventures", "ecotourism", "hikes"].includes(c),
               ) && (
                 <p className="mt-1 text-xs text-gray-600">
-                  Consider this instead of the main outing if travel or activity
-                  time requires a full day.
-                </p>
+                  {uiCopy("\n                  Consider this instead of the main outing if travel or activity\n                  time requires a full day.\n                ")}</p>
               )}
               <VisitReference place={extra} />
               <SourceLink place={extra} />
@@ -306,17 +275,16 @@ export default function TripDayCard({
             className="block text-sm font-medium"
             htmlFor={`${id}-stay-${index}`}
           >
-            Stay after day {index + 1}
+            {uiCopy("\n            Stay after day ")}{index + 1}
             <select
               className={`${field} mt-1`}
               id={`${id}-stay-${index}`}
               value={day.stayId}
               onChange={(e) => onChange({ stayId: e.target.value })}
             >
-              <option value="">Choose accommodation later</option>
+              <option value="">{uiCopy("Choose accommodation later")}</option>
               <option value={`airbnb:${base.id}`}>
-                Airbnb home near {base.name} · listing to choose
-              </option>
+                {uiCopy("\n                Airbnb home near ")}{base.name} {uiCopy(" · listing to choose\n              ")}</option>
               {local
                 .filter((p) => p.categories.includes("stays"))
                 .map((p) => (
@@ -335,7 +303,7 @@ export default function TripDayCard({
               <p>{stay.description}</p>
               {stay.eco && (
                 <p className="mt-1 text-xs text-emerald-900">
-                  Operator evidence: {stay.eco.note}
+                  {uiCopy("\n                  Operator evidence: ")}{stay.eco.note}
                 </p>
               )}
               <SourceLink place={stay} />
@@ -350,19 +318,14 @@ export default function TripDayCard({
             {...external}
             className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline"
           >
-            Find Airbnb homes near this base
-            <span className="sr-only"> (opens in a new tab)</span>
+            {uiCopy("\n            Find Airbnb homes near this base\n            ")}<span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
           </a>
           <p className="text-xs leading-5 text-gray-600">
-            A location search, not a reviewed listing or eco filter. Choose a
-            property and add its link in your private brief. Check exact
-            location, total cost, host claims and availability.
-          </p>
+            {uiCopy("\n            A location search, not a reviewed listing or eco filter. Choose a\n            property and add its link in your private brief. Check exact\n            location, total cost, host claims and availability.\n          ")}</p>
         </>
       ) : (
         <p className="text-sm text-gray-600">
-          Final day · no overnight included.
-        </p>
+          {uiCopy("\n          Final day · no overnight included.\n        ")}</p>
       )}
     </article>
   );

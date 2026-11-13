@@ -1,4 +1,5 @@
 "use client";
+import {useUiCopy} from "@/components/ui-language"
 import {arrivalReferences} from "@/lib/journey-reference-points";
 import { useEffect } from "react";
 import { useTripMap } from "./trip-map-context";
@@ -10,6 +11,8 @@ export default function TripJourneyControls({
 }: {
   islandId: string;
 }) {
+ const uiCopy=useUiCopy()
+
   const trip = useTripMap(),
     { update,layers } = useMapLayers();
   const journey = trip?.journey?.islandId === islandId ? trip.journey : null;
@@ -26,13 +29,13 @@ export default function TripJourneyControls({
   if (!journey || !step) return null;
   return (
     <section
-      aria-label="Your journey step by step"
+      aria-label={uiCopy("Your journey step by step")}
       className="mb-6 rounded-2xl border border-emerald-200 bg-white p-4 sm:p-5"
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">
-            Day {step.day} · {step.kind}
+            {uiCopy("\n            Day ")}{step.day} · {uiCopy(step.kind)}
           </p>
           <h3
             aria-live="polite"
@@ -47,20 +50,18 @@ export default function TripJourneyControls({
           className={button}
           onClick={() => trip?.stopJourney()}
         >
-          Explore freely
-        </button>
+          {uiCopy("\n          Explore freely\n        ")}</button>
       </div>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-        {step.mapPoint && (step.kind==="arrival" || step.kind==="departure") ? "Confirm your flight details and timing. The map highlights the selected airport area." : step.note}
+        {step.mapPoint && (step.kind==="arrival" || step.kind==="departure") ? uiCopy("Confirm your flight details and timing. The map highlights the selected airport area.") : step.note}
       </p>
-      <label className="mt-3 flex min-h-11 items-center gap-2 text-sm text-emerald-950"><input type="checkbox" checked={trip?.journeyMotion??true} onChange={e=>trip?.setJourneyMotion(e.target.checked)}/>Animate journey transitions</label>
-      <p className="text-xs leading-5 text-gray-500">Reduced motion uses static highlights. Steps advance only when you choose. {layers.background!=="satellite"&&"Choose Satellite for geographic location and transfer highlights."}</p>
-      {step.kind==="overnight"&&<p role="status" className="mt-2 text-sm text-emerald-900">Rest overnight, then choose Next step when you are ready. No automatic advance.</p>}
-      {step.transfer&&<p className="mt-2 text-xs leading-5 text-gray-600">Illustrated town-to-town sequence, not a road or live location. About {step.transfer.minutes} minutes driving reference from {step.transfer.publisher}; breaks and local travel are additional. <a href={step.transfer.sourceUrl} {...external} className="underline">Transfer source</a></p>}
-      {arrivalReferences(step.baseId,step.kind).length>0&&<label className="mt-3 block text-sm text-emerald-950">Arrival / departure map reference
-        <select className={field} value={step.mapPoint?.id??""} onChange={e=>trip?.selectArrivalReference(e.target.value)}>
-          <option value="">Town reference · arrival still to choose</option>
-          {arrivalReferences(step.baseId,step.kind).map(p=><option key={p.id} value={p.id}>{p.name} · only if using this airport</option>)}
+      <label className="mt-3 flex min-h-11 items-center gap-2 text-sm text-emerald-950"><input type="checkbox" checked={trip?.journeyMotion??true} onChange={e=>trip?.setJourneyMotion(e.target.checked)}/>{uiCopy("Animate journey transitions")}</label>
+      <p className="text-xs leading-5 text-gray-500">{uiCopy("Reduced motion uses static highlights. Steps advance only when you choose. ")}{layers.background!=="satellite"&&"Choose Satellite for geographic location and transfer highlights."}</p>
+      {step.kind==="overnight"&&<p role="status" className="mt-2 text-sm text-emerald-900">{uiCopy("Rest overnight, then choose Next step when you are ready. No automatic advance.")}</p>}
+      {step.transfer&&<p className="mt-2 text-xs leading-5 text-gray-600">{uiCopy("Illustrated town-to-town sequence, not a road or live location. About ")}{step.transfer.minutes} {uiCopy(" minutes driving reference from ")}{step.transfer.publisher}{uiCopy("; breaks and local travel are additional. ")}<a href={step.transfer.sourceUrl} {...external} className="underline">{uiCopy("Transfer source")}</a></p>}
+      {arrivalReferences(step.baseId,step.kind).length>0&&<label className="mt-3 block text-sm text-emerald-950">{uiCopy("Arrival / departure map reference\n        ")}<select className={field} value={step.mapPoint?.id??""} onChange={e=>trip?.selectArrivalReference(e.target.value)}>
+          <option value="">{uiCopy("Town reference · arrival still to choose")}</option>
+          {arrivalReferences(step.baseId,step.kind).map(p=><option key={p.id} value={p.id}>{p.name} {uiCopy(" · only if using this airport")}</option>)}
         </select>
       </label>}
       <div className="mt-3 grid grid-cols-2 items-center gap-2">
@@ -70,19 +71,18 @@ export default function TripJourneyControls({
           disabled={journey.index === 0}
           onClick={() => trip?.goToStep(journey.index - 1)}
         >
-          Previous step
-        </button>
+          {uiCopy("\n          Previous step\n        ")}</button>
         <label className="order-first col-span-2 min-w-0 text-xs">
-          <span className="sr-only">Journey step</span>
+          <span className="sr-only">{uiCopy("Journey step")}</span>
           <select
             className={field}
-            aria-label="Journey step"
+            aria-label={uiCopy("Journey step")}
             value={journey.index}
             onChange={(e) => trip?.goToStep(Number(e.target.value))}
           >
             {journey.steps.map((s, i) => (
               <option key={s.id} value={i}>
-                {i + 1}/{journey.steps.length} · Day {s.day} · {s.title}
+                {i + 1}/{journey.steps.length} {uiCopy(" · Day ")}{s.day} · {uiCopy(s.title)}
               </option>
             ))}
           </select>
@@ -93,19 +93,17 @@ export default function TripJourneyControls({
           disabled={journey.index === journey.steps.length - 1}
           onClick={() => trip?.goToStep(journey.index + 1)}
         >
-          Next step
-        </button>
+          {uiCopy("\n          Next step\n        ")}</button>
       </div>
       <p className="mt-3 text-xs leading-5 text-gray-500">
-        Map highlight: {step.mapPoint ? <>{step.mapPoint.name}. {step.mapPoint.scope} Reviewed {step.mapPoint.reviewedAt}. <a href={step.mapPoint.sourceUrl} {...external} className="underline">Location source</a> · <a href={step.mapPoint.coordinateSourceUrl} {...external} className="underline">Coordinate source</a></> : <>{step.baseName}, a broad town reference. Exact points have not been reviewed for this step.</>}
-        {" "}Bird photographs follow sourced opportunities around the planning base, not a checklist for an airport or property.
-      </p>
+        {uiCopy("\n        Map highlight: ")}{step.mapPoint ? <>{step.mapPoint.name}. {step.mapPoint.scope} {uiCopy(" Reviewed ")}{step.mapPoint.reviewedAt}. <a href={step.mapPoint.sourceUrl} {...external} className="underline">{uiCopy("Location source")}</a> · <a href={step.mapPoint.coordinateSourceUrl} {...external} className="underline">{uiCopy("Coordinate source")}</a></> : <>{step.baseName}{uiCopy(", a broad town reference. Exact points have not been reviewed for this step.")}</>}
+        {" "}{uiCopy("Bird photographs follow sourced opportunities around the planning base, not a checklist for an airport or property.\n      ")}</p>
       <details className="mt-2">
         <summary className="min-h-11 cursor-pointer content-center text-sm font-semibold text-emerald-800">
-          Places and activities around {step.baseName}
+          {uiCopy("\n          Places and activities around ")}{step.baseName}
         </summary>
         <ul
-          aria-label={`Ideas around ${step.baseName}`}
+          aria-label={uiCopy("Ideas around {place}",{place:step.baseName})}
           className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3"
         >
           {step.places.map((place) => (
@@ -122,8 +120,7 @@ export default function TripJourneyControls({
                 href={place.url}
                 {...external}
               >
-                Visitor source
-                <span className="sr-only"> (opens in a new tab)</span>
+                {uiCopy("\n                Visitor source\n                ")}<span className="sr-only"> {uiCopy(" (opens in a new tab)")}</span>
               </a>
             </li>
           ))}
@@ -133,14 +130,15 @@ export default function TripJourneyControls({
         className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline"
         href="#trip-planner"
       >
-        Return to your editable days
-      </a>
+        {uiCopy("\n        Return to your editable days\n      ")}</a>
     </section>
   );
 }
 
 /** Compact navigation lives in the shared guide toolbar on narrow layouts. */
 export function TripJourneyMapNavigation({ islandId }: { islandId: string }) {
+ const uiCopy=useUiCopy()
+
   const trip = useTripMap();
   const journey = trip?.journey?.islandId === islandId ? trip.journey : null;
   if (!journey) return null;
@@ -154,30 +152,28 @@ export function TripJourneyMapNavigation({ islandId }: { islandId: string }) {
   return (
     <div
       role="group"
-      aria-label="Map journey navigation"
+      aria-label={uiCopy("Map journey navigation")}
       className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 lg:hidden"
     >
       <button
         type="button"
         className={button}
-        aria-label="Previous map step"
+        aria-label={uiCopy("Previous map step")}
         disabled={journey.index === 0}
         onClick={() => go(journey.index - 1)}
       >
-        Previous
-      </button>
+        {uiCopy("\n        Previous\n      ")}</button>
       <p className="min-w-0 truncate text-center text-xs font-semibold text-emerald-950">
-        {journey.index + 1}/{journey.steps.length} · {step.title}
+        {journey.index + 1}/{journey.steps.length} · {uiCopy(step.title)}
       </p>
       <button
         type="button"
         className={button}
-        aria-label="Next map step"
+        aria-label={uiCopy("Next map step")}
         disabled={journey.index === journey.steps.length - 1}
         onClick={() => go(journey.index + 1)}
       >
-        Next
-      </button>
+        {uiCopy("\n        Next\n      ")}</button>
     </div>
   );
 }
