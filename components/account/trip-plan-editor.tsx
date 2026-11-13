@@ -6,6 +6,7 @@
  * Saving a draft does not request a quote, reserve dates, or make a payment.
  */
 
+import {useUnsavedChanges,confirmDiscardPendingEdits} from "./unsaved-changes"
 import { importPlanningIdeas } from "@/lib/import-planning-ideas"
 import { useEffect, useId, useRef, useState } from "react"
 import { nzPublicPlanningPlaces, readNzPlaceIdeas, mergeNzPlaceNotes, consumeSavedNzPlaceIdeas } from "@/lib/nz-place-ideas"
@@ -31,6 +32,8 @@ import { normalizePlanRegions, type PlanIntent } from "./plan-intent"
  * onCancel discards this form view, not a previously saved database plan.
  */
 export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: TripPlan; initial?: PlanIntent; onSaved: (plan: TripPlan) => void; onCancel: () => void }) {
+  const [dirty,setDirty]=useState(false)
+  useUnsavedChanges(dirty)
   const prefix = useId()
   const busyRef = useRef(false)
   const request = useRef<{ payload: string; key: string } | null>(null)
@@ -63,7 +66,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   // Regions belong to one country; do not carry a previous country's selected
   // IDs into the new form. Old disabled destinations may remain on saved plans.
   function changeCountry(value: string) {
-    if (plan || (!isEnabledTripCountry(value) && value !== plan?.country) || value === country) return
+    if (plan || !isEnabledTripCountry(value) || value === country) return
     setCountry(value)
     setSelectedRegions([])
     setBirdIds([])
@@ -112,6 +115,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
         try { consumeSavedNzPlaceIdeas(window.sessionStorage, result.plan.message || "") } catch { /* Confirmed private save remains successful if browser storage is blocked. */ }
         try { consumeNzBirdBasket(window.sessionStorage, fields.questionnaire?.birdIds || []) } catch { /* Server save is already confirmed. */ }
       }
+      setDirty(false)
       onSaved(result.plan)
     } catch (error) { setFeedback(error instanceof AccountRequestError && error.status === 409 ? `${error.message} Your unsaved details are still here. Cancel editing, then choose Refresh Saved Plans to load the current version.` : errorMessage(error)) }
     finally { busyRef.current = false; setBusy(false) }
@@ -119,7 +123,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
 
   return <Card className="border-0 shadow-xl bg-white"><CardContent className="p-6 lg:p-8">
     <h2 className="text-2xl font-bold text-gray-900 mb-3">{country === "new-zealand" ? "Your New Zealand starting points" : plan ? "Refine Your Trip Plan" : "Start with What Inspires You"}</h2><p className="text-gray-600 mb-8">{country === "new-zealand" ? "A short planning questionnaire. Save privately, review your answers, then choose whether to share the brief with AVES. New Zealand is a planning beta, not a confirmed tour." : "Save a few ideas now. You can return to your draft before asking AVES for a quote."}</p>
-    <form onSubmit={submit} className="space-y-6"><fieldset disabled={busy} className="space-y-6">
+    <form onChange={()=>setDirty(true)} onSubmit={submit} className="space-y-6"><fieldset disabled={busy} className="space-y-6">
       <div><label htmlFor={`${prefix}-title`} className="block text-sm font-medium text-gray-700 mb-2">Give Your Plan a Name *</label><Input id={`${prefix}-title`} name="title" defaultValue={plan?.title || ""} maxLength={120} placeholder="A spring birding escape" required /></div>
       <div><label htmlFor={`${prefix}-country`} className="block text-sm font-medium text-gray-700 mb-2">Destination Country *</label><select id={`${prefix}-country`} name="country" disabled={Boolean(plan)} value={country} onChange={event => changeCountry(event.target.value)} aria-describedby={`${prefix}-country-help`} className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">{enabledCountries.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}{plan?.country && !isEnabledTripCountry(plan.country) && <option value={plan.country}>{countryLabels[plan.country]} (saved destination)</option>}</select><p id={`${prefix}-country-help`} className="text-sm text-gray-500 mt-2">{plan ? "A saved trip keeps its destination so its journal and bird album stay together. Start a separate plan for another country." : "Choose one country per plan. You can save separate plans for different destinations."}</p></div>
       <fieldset><legend className="block text-sm font-medium text-gray-700 mb-3">Regions in {countryLabels[country]}</legend><div className="flex flex-wrap gap-x-4 gap-y-2">{options.map(({ id, label }) => <label key={id} className="flex min-h-11 items-center gap-2 text-sm text-gray-700"><input type="checkbox" name="regions" value={id} checked={selectedRegions.includes(id)} onChange={event => toggleRegion(id, event.target.checked)} className="accent-emerald-600" />{label}</label>)}{olderSelections.map(value => <label key={value} className="flex min-h-11 items-center gap-2 text-sm text-amber-800"><input type="checkbox" name="regions" value={value} checked onChange={event => toggleRegion(value, event.target.checked)} className="accent-emerald-600" />{value} (saved selection)</label>)}</div>{olderSelections.length > 0 && <p className="text-sm text-amber-800 mt-2">Review these older place names before saving. You can move additional places into Your Interests and Ideas.</p>}<p className="text-sm text-gray-500 mt-2">Leave these open if you're looking for inspiration. You can mention other places below.</p><p role="status" aria-live="polite" className="text-sm text-emerald-700 mt-2">{regionNotice}</p></fieldset>
@@ -132,7 +136,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
         <button type="button" className="mt-3 min-h-11 rounded-lg bg-emerald-800 px-4 text-sm font-medium text-white" onClick={() => {
           const merged = importPlanningIdeas({ message, birdIds, regions: selectedRegions }, { birdIds: incomingBirds, placeIds: incomingPlaces, itineraries: incomingItineraries })
           if (merged.error) { setPlaceNotice(merged.error); return }
-          setMessage(merged.message); setBirdIds(merged.birdIds); setSelectedRegions(merged.regions)
+          setMessage(merged.message);setDirty(true); setBirdIds(merged.birdIds); setSelectedRegions(merged.regions)
           setPlaceNotice("Your ideas have been added to this draft. Review your notes and choices, then Save My Draft to save privately. Nothing has been shared.")
         }}>Add All Ideas to This Draft</button>
         <p className="mt-2 text-xs leading-6">Existing notes and choices stay intact. Adding ideas does not save or share the draft. Repeating this action does not duplicate the same ideas.</p>
@@ -144,7 +148,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
         <button type="button" className="mt-3 min-h-11 rounded-lg border border-emerald-300 bg-white px-4 text-sm font-medium text-emerald-950" onClick={()=>{
           const merged=planner.mergeTripNotes(message,incomingItinerary)
           if(merged.error){setPlaceNotice(merged.error);return}
-          setMessage(merged.message);setBirdIds(current=>[...new Set([...current,...incomingItinerary.input.birdIds])]);setSelectedRegions(current=>[...new Set([...current,planner.context.id])])
+          setMessage(merged.message);setDirty(true);setBirdIds(current=>[...new Set([...current,...incomingItinerary.input.birdIds])]);setSelectedRegions(current=>[...new Set([...current,planner.context.id])])
           setPlaceNotice("Itinerary added to your notes. Review, then Save My Draft to save privately.")
         }}>Add Itinerary to Notes</button>
         <p className="mt-2 text-xs leading-6">A draft route only. Access, road times, dates, rooms and bookings require confirmation. Importing does not save or share it.</p>
@@ -155,14 +159,14 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
         <button type="button" disabled={busy} className="mt-3 min-h-11 rounded-md border border-emerald-300 bg-white px-4 text-sm font-medium text-emerald-950" onClick={() => {
           const merged = mergeNzPlaceNotes(message, incomingPlaces)
           if (merged.error) { setPlaceNotice(merged.error); return }
-          setMessage(merged.message); setPlaceNotice("Place ideas added to your notes below. Review them, then Save My Draft to save privately.")
+          setMessage(merged.message);setDirty(true); setPlaceNotice("Place ideas added to your notes below. Review them, then Save My Draft to save privately.")
         }}>Add Place Ideas to Notes</button>
         <p className="mt-2 text-xs leading-6">Adding notes does not save or share your plan. Existing notes stay intact. These are ideas to discuss, not confirmed visits or bookings.</p>
       </section>}
       <p role="status" className="text-sm text-emerald-800">{placeNotice}</p>
       <div><label htmlFor={`${prefix}-message`} className="block text-sm font-medium text-gray-700 mb-2">Your Interests and Ideas</label><Textarea id={`${prefix}-message`} name="message" value={message} onChange={event => setMessage(event.target.value)} maxLength={5000} rows={6} placeholder="Birds, landscapes, photography, your preferred pace, or anything else you'd like us to know…" /></div>
       <p className="text-sm text-gray-500">{country === "new-zealand" ? "Optional notes: already-arranged plans, arrival/departure points, budget with currency, must-haves or practical access needs. Share only what is needed, without passport, payment or medical details. Save before leaving this page; unfinished answers are not autosaved. Sharing is a separate choice after review." : "Saving a draft does not request a quote or create a booking."}</p>
-      <div className="flex flex-wrap gap-3"><Button type="submit" className="bg-emerald-600 hover:bg-emerald-700"><Save className="w-4 h-4 mr-2" />{busy ? "Saving…" : "Save My Draft"}</Button><Button type="button" variant="outline" onClick={onCancel}>Cancel</Button></div>
+      <div className="flex flex-wrap gap-3"><Button type="submit" className="bg-emerald-600 hover:bg-emerald-700"><Save className="w-4 h-4 mr-2" />{busy ? "Saving…" : "Save My Draft"}</Button><Button type="button" variant="outline" onClick={()=>{if(confirmDiscardPendingEdits())onCancel()}}>Cancel</Button></div>
     </fieldset>{feedback && <p role="alert" className="text-sm text-red-700">{feedback}</p>}</form>
   </CardContent></Card>
 }
