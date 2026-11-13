@@ -5,6 +5,7 @@
  */
 "use client"
 
+import { TourProposal } from "@/components/tour-proposal"
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -26,7 +27,7 @@ export default function VisionPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <NavigationHeader currentPage="/tours/vision" />
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content" tabIndex={-1}><p className="mx-auto max-w-4xl px-5 pt-6 text-sm leading-6 text-emerald-900">Trip inspiration. Sample activities, duration and group sizes are ideas to discuss, subject to availability and your personal proposal.</p>
 
       {/* Hero Section */}
       <section className="relative py-8 lg:py-12 overflow-hidden">
@@ -50,7 +51,7 @@ export default function VisionPage() {
             <div className="mx-auto w-full max-w-3xl space-y-8"><div className="flex flex-col justify-center sm:flex-row gap-4">
                 <Link href="/shopping?preset=vision">
                   <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-4">
-                    Book Vision Journey
+                    Discuss your journey
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
@@ -67,8 +68,8 @@ export default function VisionPage() {
 
               <div className="grid grid-cols-3 gap-8 pt-8 border-t">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">$1,250</div>
-                  <div className="text-sm text-gray-600">per person/day</div>
+                  <div className="text-3xl font-bold text-purple-600">Personal quote</div>
+                  <div className="text-sm text-gray-600">Route reviewed with you</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-600">7-14</div>
@@ -244,98 +245,7 @@ export default function VisionPage() {
       </section>
 
       {/* Pricing & Booking */}
-      <section className="py-20 bg-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Vision Tour Pricing</h2>
-            <p className="text-xl text-gray-600">
-              Premium photography expeditions with specialized equipment and expert instruction
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <Card className="p-8 border-0 shadow-xl">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="text-6xl font-bold text-purple-600 mb-4">$1,250</div>
-                  <div className="text-xl text-gray-600 mb-6">per person per day</div>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-purple-600 mr-3" />
-                      <span className="text-gray-700">Professional photography guide</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-purple-600 mr-3" />
-                      <span className="text-gray-700">Photography equipment provided</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-purple-600 mr-3" />
-                      <span className="text-gray-700">Chocó endemic species access</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-purple-600 mr-3" />
-                      <span className="text-gray-700">Photo editing workshops</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-purple-600 mr-3" />
-                      <span className="text-gray-700">Digital portfolio creation</span>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-lg p-4 mb-6">
-                    <div className="text-sm text-gray-600 mb-2">Sample pricing for 2 people, 8 days:</div>
-                    <div className="text-2xl font-bold text-gray-900">$20,000 total</div>
-                    <div className="text-sm text-gray-500">($10,000 per person)</div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Flexible Duration Options</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">7 days</span>
-                        <span className="text-purple-600 font-bold">$8,750/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-purple-100 rounded-lg border-2 border-purple-500">
-                        <span className="font-medium">8 days (Recommended)</span>
-                        <span className="text-purple-600 font-bold">$10,000/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">10 days</span>
-                        <span className="text-purple-600 font-bold">$12,500/person</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-white rounded-lg">
-                        <span className="font-medium">14 days</span>
-                        <span className="text-purple-600 font-bold">$17,500/person</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
-                    <Link href="/shopping?preset=vision" className="w-full">
-                      <Button size="lg" className="w-full bg-purple-600 hover:bg-purple-700 text-lg py-4">
-                        Book Vision Tour
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </Button>
-                    </Link>
-                    <Link href="/contact" className="w-full">
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="w-full border-purple-600 text-purple-600 hover:bg-purple-50 text-lg py-4 bg-transparent"
-                      >
-                        Ask Questions
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <TourProposal style="vision"/>
 
       </main>
       <Footer />

@@ -21,7 +21,7 @@ export default function ToursPage() {
     <div className="min-h-screen bg-white">
       {/* Shared public navigation */}
       <NavigationHeader currentPage="/tours" />
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content" tabIndex={-1}><p className="mx-auto max-w-4xl px-5 pt-6 text-sm leading-6 text-emerald-900">Explore proposed trip styles. Sample group sizes, activities and inclusions require a personal proposal and availability review. No departure or price is confirmed here.</p>
 
       {/* Hero Section */}
       <section className="relative py-8 sm:py-10 lg:py-12 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
@@ -83,8 +83,8 @@ export default function ToursPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-2xl font-bold text-emerald-600">$8,000</div>
-                      <div className="text-sm text-gray-500">avg. per person</div>
+                      <div className="text-2xl font-bold text-emerald-600">Personal quote</div>
+                      <div className="text-sm text-gray-500">After reviewing your route</div>
                     </div>
                   </div>
                   <Link href="/tours/adventure" className="block">
@@ -125,8 +125,8 @@ export default function ToursPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-2xl font-bold text-purple-600">$10,000</div>
-                      <div className="text-sm text-gray-500">avg. per person</div>
+                      <div className="text-2xl font-bold text-purple-600">Personal quote</div>
+                      <div className="text-sm text-gray-500">After reviewing your route</div>
                     </div>
                   </div>
                   <Link href="/tours/vision" className="block">
@@ -167,8 +167,8 @@ export default function ToursPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-2xl font-bold text-yellow-500">$12,000</div>
-                      <div className="text-sm text-gray-500">avg. per person</div>
+                      <div className="text-2xl font-bold text-yellow-500">Personal quote</div>
+                      <div className="text-sm text-gray-500">After reviewing your route</div>
                     </div>
                   </div>
                   <Link href="/tours/elevate" className="block">
@@ -209,8 +209,8 @@ export default function ToursPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-2xl font-bold text-red-500">$14,000</div>
-                      <div className="text-sm text-gray-500">avg. per person</div>
+                      <div className="text-2xl font-bold text-red-500">Personal quote</div>
+                      <div className="text-sm text-gray-500">After reviewing your route</div>
                     </div>
                   </div>
                   <Link href="/tours/souls" className="block">
@@ -293,7 +293,7 @@ export default function ToursPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/shopping">
               <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100 text-lg px-8 py-4">
-                Book Your Tour
+                Discuss your journey
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
