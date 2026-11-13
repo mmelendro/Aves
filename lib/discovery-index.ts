@@ -13,15 +13,15 @@ for(const d of destinations){
  items.push({id:`country:${d.id}`,kind:"country",countryId:d.id,name:d.name,description:d.description,href:d.href})
  for(const r of destinationRegions[d.id]??[])items.push({id:`region:${d.id}:${r.id}`,kind:"region",countryId:d.id,regionId:r.id,name:r.name,description:r.description??"Broad planning region",href:r.href})
 }
-for(const catalogue of [north,south])for(const place of catalogue.places)items.push({id:`place:new-zealand:${place.id}`,kind:"place",countryId:"new-zealand",regionId:catalogue.region,name:place.name,description:place.description,href:`/new-zealand/${catalogue.region}?base=${place.base}#trip-planner`,sourceUrl:place.url})
+for(const catalogue of [north,south])for(const place of catalogue.places)items.push({id:`place:new-zealand:${place.id}`,kind:"place",countryId:"new-zealand",regionId:catalogue.region,name:place.name,description:place.description,href:`/new-zealand/${catalogue.region}?base=${place.base}&place=${place.id}#public-place-${place.id}`,sourceUrl:place.url})
 for(const photo of placeGalleryPhotos){
  const id=`place:${photo.countryId}:${photo.placeId}`
  if(items.some(item=>item.id===id))continue
  const region=destinationRegions[photo.countryId]?.find(r=>r.id===photo.regionId)
- const href=photo.countryId==="new-zealand"?`/new-zealand/${photo.regionId}${photo.regionId==="south-island"?"#places":"#place-gallery"}`:`${countries.get(photo.countryId)?.href??"/"}?explore=${photo.countryId}&region=${photo.regionId}#place-gallery`
+ const href=photo.countryId==="new-zealand"?`/new-zealand/${photo.regionId}?place=${photo.placeId}${photo.regionId==="south-island"?"#places":"#place-gallery"}`:`${countries.get(photo.countryId)?.href??"/"}?explore=${photo.countryId}&region=${photo.regionId}&place=${photo.placeId}#place-gallery`
  items.push({id,kind:"place",countryId:photo.countryId,regionId:photo.regionId,name:photo.placeName,description:`Reviewed landscape reference in ${region?.name??photo.regionId}. A photograph is not current access or a promised sighting.`,href,sourceUrl:photo.sourceUrl})
 }
-for(const r of conservation.records)items.push({id:`place:${r.countryId}:${r.id}`,kind:"place",countryId:r.countryId,regionId:r.regionId,name:r.name,description:r.description,href:`${countries.get(r.countryId)?.href??"/"}?explore=${r.countryId}&region=${r.regionId}#place-gallery`,sourceUrl:r.sourceUrl})
+for(const r of conservation.records)items.push({id:`place:${r.countryId}:${r.id}`,kind:"place",countryId:r.countryId,regionId:r.regionId,name:r.name,description:r.description,href:`${countries.get(r.countryId)?.href??"/"}?explore=${r.countryId}&region=${r.regionId}&place=${r.id}#reference-${r.id}`,sourceUrl:r.sourceUrl})
 export const discoveryItems:readonly DiscoveryItem[]=items
 export const publicFavouritePlaces=items.filter(item=>item.kind==="place")
 export const publicPlaceById=new Map(publicFavouritePlaces.map(item=>[item.id,item]))

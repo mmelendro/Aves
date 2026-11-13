@@ -22,6 +22,7 @@ export function readExplorerLocation(search:string, fallback:ExplorerLocation):E
 export function explorerLocationHref(href:string,location:ExplorerLocation):string {
   const url=new URL(href,"https://aves.bio")
   const known=explorerLocation(location.country,location.region)
+  url.searchParams.delete("place")
   // This is a change inside the mounted explorer, not a route navigation.
   // Keep its page shell on refresh and Back/Forward. Explicit guide links still
   // open the canonical country/region page through the existing hierarchy.

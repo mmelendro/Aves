@@ -40,6 +40,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
     [query, setQuery] = useState(""),
     [claim, setClaim] = useState("all"),
     [limit, setLimit] = useState(12);
+  const [focusedPlace,setFocusedPlace]=useState("");
   const [ideas, setIdeas] = useState<string[]>([]),
     [notice, setNotice] = useState("");
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
     window.addEventListener(NZ_PLACE_IDEAS_EVENT, restore);
     return () => window.removeEventListener(NZ_PLACE_IDEAS_EVENT, restore);
   }, []);
+  useEffect(()=>{const restore=()=>{const id=new URLSearchParams(window.location.search).get("place");setFocusedPlace(id&&tripPlaces.some(p=>p.id===id)?id:"")};restore();window.addEventListener("popstate",restore);return()=>window.removeEventListener("popstate",restore)},[tripPlaces]);
   function toggleIdea(place: TripPlace) {
     const next = ideas.includes(place.id)
       ? ideas.filter((x) => x !== place.id)
@@ -75,7 +77,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
   }
   const results = tripPlaces.filter(
     (p) =>
-      (areaId === "all" || p.base === areaId) &&
+      (focusedPlace ? p.id === focusedPlace : areaId === "all" || p.base === areaId) &&
       (category === "all" || p.categories.includes(category as TripCategory)) &&
       (claim === "all" ||
         (claim === "priced" && priceByPlace.has(p.id)) ||
@@ -91,6 +93,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
         {uiCopy("\n        Build in the things you enjoy\n      ")}</h3>
       <p className="mt-3 text-sm leading-6 text-gray-600">
         {uiCopy("\n        Browse all categories, save individual ideas, or choose them in your\n        daily draft. Organic and farm to table tags describe sourced operator\n        statements, not a blanket certification.\n      ")}</p>
+      {focusedPlace&&<button type="button" className={button} onClick={()=>{setFocusedPlace("");setCategory("all");setQuery("");setClaim("all");try{const url=new URL(window.location.href);url.searchParams.delete("place");window.history.pushState(window.history.state,"",`${url.pathname}${url.search}#trip-planner`)}catch{}}}>{uiCopy("Show all references")}</button>}
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
         <label className="text-sm" htmlFor={`${id}-search`}>
           {uiCopy("\n          Find a place\n          ")}<input
@@ -151,6 +154,7 @@ export default function TripCatalogue({ areaId }: { areaId: string }) {
       <div className="mt-4 grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
         {results.slice(0, limit).map((place) => (
           <article
+ id={`public-place-${place.id}`}
             key={place.id}
             aria-label={place.name}
             className="min-w-0 rounded-2xl border border-emerald-200 bg-white p-5"

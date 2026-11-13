@@ -4,17 +4,20 @@ import directory from "@/content/conservation-directory.json"
 import {sourceFreshness} from "@/lib/source-freshness"
 import type {DestinationRegion} from "@/content/destination-regions"
 import {useColombiaHomeCopy} from "@/components/colombia-home-language"
+import {useEffect,useState} from "react"
 
 export default function ConservationDirectory({countryId, regions, mapHref, onRegionChange}: {
   countryId:string; regions:readonly DestinationRegion[]; mapHref:string; onRegionChange:(id:string)=>void
 }) {
   const localizeHome=useColombiaHomeCopy()
   const records = directory.records.filter(record => record.countryId === countryId)
+  const [open,setOpen]=useState(false)
+  useEffect(()=>{const restore=()=>setOpen(directory.records.some(r=>r.countryId===countryId&&r.id===new URLSearchParams(window.location.search).get("place")));restore();window.addEventListener("popstate",restore);return()=>window.removeEventListener("popstate",restore)},[countryId])
   if (!records.length) return null
-  return localizeHome(<details className="mt-6 rounded-xl border border-emerald-200 bg-white p-4 text-sm leading-6">
+  return localizeHome(<details open={open} onToggle={e=>setOpen(e.currentTarget.open)} className="mt-6 rounded-xl border border-emerald-200 bg-white p-4 text-sm leading-6">
     <summary className="min-h-11 cursor-pointer font-medium text-emerald-950">Conservation directory · reviewed regional references</summary>
     <p className="mt-3">Explore organisations and their published work. Map links show the broad planning region. Listings do not imply an AVES partnership, certification, current access or independently measured impact.</p>
-    {records.map(record => <article key={record.id} className="mt-4 border-t pt-3">
+    {records.map(record => <article id={`reference-${record.id}`} key={record.id} className="mt-4 border-t pt-3">
       <h3 className="font-semibold">{record.name}</h3>
       <p className="text-xs text-gray-600">{record.location}</p>
       <p className="mt-2">{record.description}</p>
