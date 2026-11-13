@@ -782,6 +782,10 @@ export function HomepageDestinationExplorerCore({
                   a bird’s information for its habitat, wider range and sources.
                   These photographs are a selection, not a complete checklist.
                 </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a href={`/species/reference?country=${destination.id}`} className="inline-flex min-h-11 items-center rounded-full border border-emerald-700 bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Explore the {destination.name} bird list</a>
+                  {region && <a href={`/species/reference?country=${destination.id}&region=${region.id}`} className="inline-flex min-h-11 items-center rounded-full border border-emerald-300 px-4 py-2 text-sm font-medium text-emerald-900 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Reviewed birds in {region.name}</a>}
+                </div>
                 <ul className="mt-3 space-y-2 text-sm leading-6 text-gray-700">
                   {birds.slice(0, 3).map((bird) => (
                     <li key={bird.id}>
