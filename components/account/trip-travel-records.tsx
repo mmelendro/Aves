@@ -1,70 +1,627 @@
-"use client"
-import {useUnsavedChanges} from "./unsaved-changes"
-import {useUiCopy} from "@/components/ui-copy-context"
-import {useEffect,useId,useRef,useState} from "react"
-import {Button} from "@/components/ui/button"
-import TripPackDownload from "./trip-pack-download"
-import {accountRequest,errorMessage} from "./account-api"
-import {privateReferenceUrl,preparationCategories,type JournalEntry,type Preparation} from "@/lib/trip-workspace"
-import {bookingStates,expenseStates,expenseTotals,emptyTravelRecords,newTravelRecord,parseRecordAmount,recordAmountText,recordCurrencies,recordMoney,recordsReceiptSchema,recordsSchema,type RecordCurrency,type TravelRecord,type TravelRecords} from "@/lib/trip-records"
-const field="mt-1 block min-h-11 w-full min-w-0 rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm"
-function ExpenseAmount({record,onChange,onInvalid}:{record:Extract<TravelRecord,{kind:"expense"}>;onChange:(amount:number)=>void;onInvalid:(invalid:boolean)=>void}){
- const uiCopy=useUiCopy()
+"use client";
+import { useUnsavedChanges } from "./unsaved-changes";
+import { useUiCopy } from "@/components/ui-copy-context";
+import { useEffect, useId, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import TripPackDownload from "./trip-pack-download";
+import { accountRequest, errorMessage } from "./account-api";
+import {
+  privateReferenceUrl,
+  preparationCategories,
+  type JournalEntry,
+  type Preparation,
+} from "@/lib/trip-workspace";
+import {
+  bookingStates,
+  expenseStates,
+  expenseTotals,
+  emptyTravelRecords,
+  newTravelRecord,
+  parseRecordAmount,
+  recordAmountText,
+  recordCurrencies,
+  recordMoney,
+  recordsReceiptSchema,
+  recordsSchema,
+  type RecordCurrency,
+  type TravelRecord,
+  type TravelRecords,
+} from "@/lib/trip-records";
+const field =
+  "mt-1 block min-h-11 w-full min-w-0 rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm";
+function ExpenseAmount({
+  record,
+  onChange,
+  onInvalid,
+}: {
+  record: Extract<TravelRecord, { kind: "expense" }>;
+  onChange: (amount: number) => void;
+  onInvalid: (invalid: boolean) => void;
+}) {
+  const uiCopy = useUiCopy();
 
- const [value,setValue]=useState(()=>recordAmountText(record.amountMinor,record.currency))
- return <label className="text-sm">{uiCopy("Amount in ")}{record.currency}<input className={field} inputMode={record.currency==="JPY"?"numeric":"decimal"} value={value} aria-invalid={parseRecordAmount(value,record.currency)===null} onChange={e=>{const next=e.target.value;setValue(next);const amount=parseRecordAmount(next,record.currency);onInvalid(amount===null);if(amount!==null)onChange(amount)}}/><span className="text-xs text-gray-600">{record.currency==="JPY" ? uiCopy("Whole yen only.") : uiCopy("Use a decimal point and up to two decimal places.")}</span></label>
+  const [value, setValue] = useState(() =>
+    recordAmountText(record.amountMinor, record.currency),
+  );
+  return (
+    <label className="text-sm">
+      {uiCopy("Amount in ")}
+      {record.currency}
+      <input
+        className={field}
+        inputMode={record.currency === "JPY" ? "numeric" : "decimal"}
+        value={value}
+        aria-invalid={parseRecordAmount(value, record.currency) === null}
+        onChange={(e) => {
+          const next = e.target.value;
+          setValue(next);
+          const amount = parseRecordAmount(next, record.currency);
+          onInvalid(amount === null);
+          if (amount !== null) onChange(amount);
+        }}
+      />
+      <span className="text-xs text-gray-600">
+        {record.currency === "JPY"
+          ? uiCopy("Whole yen only.")
+          : uiCopy("Use a decimal point and up to two decimal places.")}
+      </span>
+    </label>
+  );
 }
-export function TripTravelRecords({planId,entries,workspaceSaved,preparations=[],workspaceRevision=0}:{planId:string;entries:JournalEntry[];workspaceSaved:boolean;preparations?:Preparation[];workspaceRevision?:number}){
- const uiCopy=useUiCopy()
+export function TripTravelRecords({
+  planId,
+  entries,
+  workspaceSaved,
+  preparations = [],
+  workspaceRevision = 0,
+}: {
+  planId: string;
+  entries: JournalEntry[];
+  workspaceSaved: boolean;
+  preparations?: Preparation[];
+  workspaceRevision?: number;
+}) {
+  const uiCopy = useUiCopy();
 
- const prefix=useId(),busyRef=useRef(false)
- const [data,setData]=useState<TravelRecords>(emptyTravelRecords),[revision,setRevision]=useState(0),[loading,setLoading]=useState(true),[failed,setFailed]=useState(false)
- const [busy,setBusy]=useState(false),[dirty,setDirty]=useState(false),[feedback,setFeedback]=useState("")
- const [title,setTitle]=useState(""),[kind,setKind]=useState<TravelRecord["kind"]>("expense"),[showRemoved,setShowRemoved]=useState(false),[invalid,setInvalid]=useState<Record<string,boolean>>({})
- useEffect(()=>{let active=true;setLoading(true);accountRequest<unknown>(`/api/account/plans/${planId}/records`).then(raw=>{const saved=recordsReceiptSchema.parse(raw);if(active){setData(saved.data);setRevision(saved.revision);setFailed(false)}}).catch(e=>{if(active){setFailed(true);setFeedback(errorMessage(e))}}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[planId])
- useUnsavedChanges(dirty||Boolean(title),uiCopy("You have unsaved travel records. Leave and discard them?"))
+  const prefix = useId(),
+    busyRef = useRef(false);
+  const [data, setData] = useState<TravelRecords>(emptyTravelRecords),
+    [revision, setRevision] = useState(0),
+    [loading, setLoading] = useState(true),
+    [failed, setFailed] = useState(false);
+  const [busy, setBusy] = useState(false),
+    [dirty, setDirty] = useState(false),
+    [feedback, setFeedback] = useState("");
+  const [title, setTitle] = useState(""),
+    [kind, setKind] = useState<TravelRecord["kind"]>("expense"),
+    [showRemoved, setShowRemoved] = useState(false),
+    [invalid, setInvalid] = useState<Record<string, boolean>>({});
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    accountRequest<unknown>(`/api/account/plans/${planId}/records`)
+      .then((raw) => {
+        const saved = recordsReceiptSchema.parse(raw);
+        if (active) {
+          setData(saved.data);
+          setRevision(saved.revision);
+          setFailed(false);
+        }
+      })
+      .catch((e) => {
+        if (active) {
+          setFailed(true);
+          setFeedback(errorMessage(e));
+        }
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [planId]);
+  useUnsavedChanges(
+    dirty || Boolean(title),
+    uiCopy("You have unsaved travel records. Leave and discard them?"),
+  );
 
- function change(id:string,values:Partial<TravelRecord>){setData(current=>({...current,records:current.records.map(r=>r.id===id?{...r,...values} as TravelRecord:r)}));setDirty(true);setFeedback("")}
- async function save(){
-  if(busyRef.current)return
-  if(!workspaceSaved){setFeedback("Save the checklist and journal before saving travel records.");return}
-  if(title||Object.values(invalid).some(Boolean)){setFeedback("Add or clear the new title, and check expense amounts before saving.");return}
-  const parsed=recordsSchema.safeParse(data);if(!parsed.success){setFeedback(parsed.error.issues[0]?.message||"Check your record details.");return}
-  busyRef.current=true;setBusy(true);setFeedback("")
-  try{const saved=recordsReceiptSchema.parse(await accountRequest<unknown>(`/api/account/plans/${planId}/records`,{method:"PUT",body:JSON.stringify({expectedRevision:revision,data:parsed.data})}));if(saved.revision!==revision+1||JSON.stringify(saved.data)!==JSON.stringify(parsed.data))throw Error("The saved records did not match your edits. Keep them here and retry.");setData(saved.data);setRevision(saved.revision);setDirty(false);setFeedback("Your private travel records are saved.")}catch(e){setFeedback(errorMessage(e))}finally{busyRef.current=false;setBusy(false)}
- }
- if(loading)return <p role="status">{uiCopy("Opening private expenses and booking records…")}</p>
- if(failed)return <section role="alert" className="rounded-2xl border bg-white p-5"><p>{uiCopy(feedback)}</p><p className="mt-2 text-sm">{uiCopy("Reopen to try again. No empty replacement has been saved.")}</p></section>
- const totals=expenseTotals(data.records)
- return <section aria-labelledby={`${prefix}-records`} className="rounded-2xl border border-emerald-100 bg-white p-5 sm:p-7 space-y-5 min-w-0">
-  <div className="flex flex-wrap justify-between items-center gap-3"><div><p className="text-xs uppercase tracking-widest text-emerald-700">{uiCopy("Your practical records")}</p><h2 id={`${prefix}-records`} className="mt-2 text-2xl text-emerald-950">{uiCopy("Expenses and bookings")}</h2></div><Button type="button" disabled={!dirty||busy||!workspaceSaved} onClick={()=>void save()}>{busy ? uiCopy("Saving records…") : uiCopy("Save travel records")}</Button></div>
-  <p className="text-sm leading-6 text-gray-600">{uiCopy("Private to you. Record an estimate, payment or refund, or keep a ticket and booking reference. Expense amounts are totals for the record, separate from per-person planning allowances. Your labels do not verify payment, availability or a reservation. Add receipt photos and PDF documents to a linked journal entry.")}</p>
-  {!workspaceSaved&&<p className="text-sm text-emerald-800">{uiCopy("Save your checklist and journal changes before saving these records.")}</p>}
-  <p role="status" className="text-sm text-emerald-800">{feedback||(dirty?"Travel records have unsaved changes.":revision?"Showing saved travel records.":"No travel records saved yet.")}</p>
-  {totals.length>0&&<div className="overflow-x-auto"><table className="w-full text-left text-sm"><caption className="text-left pb-3 text-gray-600">{uiCopy("Entered amounts by currency. No exchange conversion or complete-trip cost is implied.")}{dirty ? uiCopy(" Includes unsaved edits.") : ""}</caption><thead><tr><th className="pr-4 py-2">{uiCopy("Currency")}</th><th className="pr-4">{uiCopy("Estimated")}</th><th className="pr-4">{uiCopy("Paid")}</th><th>{uiCopy("Refunded")}</th></tr></thead><tbody>{totals.map(g=><tr key={g.currency}><th className="pr-4 py-2">{g.currency}</th><td className="pr-4 whitespace-nowrap">{recordMoney(g.estimated,g.currency)}</td><td className="pr-4 whitespace-nowrap">{recordMoney(g.paid,g.currency)}</td><td className="whitespace-nowrap">{recordMoney(g.refunded,g.currency)}</td></tr>)}</tbody></table></div>}
-  <fieldset disabled={busy} className="space-y-5 min-w-0">
-   <form className="flex flex-wrap items-end gap-3" onSubmit={e=>{e.preventDefault();if(!title.trim()||data.records.length>=50)return;setData(current=>({...current,records:[...current.records,newTravelRecord(kind,crypto.randomUUID(),title.trim())]}));setTitle("");setDirty(true);setFeedback("")}}>
-    <label className="text-sm">{uiCopy("Record type")}<select className={field} value={kind} onChange={e=>setKind(e.target.value as TravelRecord["kind"])}><option value="expense">{uiCopy("Expense or receipt")}</option><option value="booking">{uiCopy("Ticket or booking")}</option></select></label>
-    <label className="text-sm flex-1 min-w-0">{uiCopy("New record title")}<input className={field} value={title} onChange={e=>setTitle(e.target.value)} required maxLength={160} placeholder={uiCopy("Airport transfer receipt")}/></label><Button type="submit" variant="outline" disabled={data.records.length>=50}>{uiCopy("Add travel record")}</Button>
-   </form>
-   {data.records.length>=50&&<p className="text-sm">{uiCopy("This trip has reached its 50-record limit, including removed records.")}</p>}
-   {data.records.filter(r=>!r.deleted).map(r=><article key={r.id} className="rounded-xl border border-emerald-100 p-4 min-w-0 space-y-4">
-    <p className="font-medium text-emerald-950 break-words">{r.title} <span className="text-xs font-normal text-gray-600">{r.kind==="expense" ? uiCopy("Expense") : uiCopy("Booking")}</span></p>
-    <div className="grid sm:grid-cols-2 gap-4">
-     <label className="text-sm">{uiCopy("Record title")}<input className={field} value={r.title} maxLength={160} onChange={e=>change(r.id,{title:e.target.value})}/></label>
-     <label className="text-sm">{uiCopy("Record category")}<select className={field} value={r.category} onChange={e=>change(r.id,{category:e.target.value as TravelRecord["category"]})}>{preparationCategories.map(c=><option value={c} key={c}>{c}</option>)}</select></label>
-     <label className="text-sm">{uiCopy("Record date, optional")}<input type="date" className={field} value={r.date} onChange={e=>change(r.id,{date:e.target.value})}/></label>
-     {r.kind==="expense"?<><label className="text-sm">{uiCopy("Payment state")}<select className={field} value={r.status} onChange={e=>change(r.id,{status:e.target.value as typeof r.status})}>{expenseStates.map(s=><option key={s} value={s}>{s}</option>)}</select></label><label className="text-sm">{uiCopy("Currency")}<select className={field} value={r.currency} onChange={e=>{change(r.id,{currency:e.target.value as RecordCurrency,amountMinor:0});setInvalid(v=>({...v,[r.id]:false}))}}>{recordCurrencies.map(c=><option value={c} key={c}>{c}</option>)}</select><span className="text-xs text-gray-600">{uiCopy("Changing currency resets the amount to zero. Enter the amount again.")}</span></label><ExpenseAmount key={`${r.id}:${r.currency}`} record={r} onChange={amountMinor=>change(r.id,{amountMinor})} onInvalid={value=>{setInvalid(v=>({...v,[r.id]:value}));setDirty(true)}}/></>:<><label className="text-sm">{uiCopy("Booking status")}<select className={field} value={r.status} onChange={e=>change(r.id,{status:e.target.value as typeof r.status})}>{bookingStates.map(s=><option key={s} value={s}>{s}</option>)}</select></label><label className="text-sm">{uiCopy("Provider")}<input className={field} value={r.provider} maxLength={160} onChange={e=>change(r.id,{provider:e.target.value})}/></label><label className="text-sm">{uiCopy("Booking or ticket reference")}<input className={field} value={r.reference} maxLength={160} onChange={e=>change(r.id,{reference:e.target.value})}/></label></>}
-     <label className="text-sm sm:col-span-2">{uiCopy("Private receipt or booking link, optional")}<input type="url" className={field} value={r.url} maxLength={1500} placeholder="https://" onChange={e=>change(r.id,{url:e.target.value})}/></label>
-     <label className="text-sm sm:col-span-2">{uiCopy("Journal entry for receipt or documents")}<select className={field} value={r.entryId} onChange={e=>change(r.id,{entryId:e.target.value})}><option value="">{uiCopy("No entry linked")}</option>{entries.map(entry=><option key={entry.id} value={entry.id}>{entry.title}{entry.deleted ? uiCopy(" (removed entry)") : ""}</option>)}</select></label>
-     <label className="text-sm sm:col-span-2">{uiCopy("Private record notes")}<textarea className={field} value={r.notes} rows={3} maxLength={1000} onChange={e=>change(r.id,{notes:e.target.value})}/></label>
-    </div>
-    <div className="flex flex-wrap gap-3 items-center">{r.url&&privateReferenceUrl.safeParse(r.url).success&&<a className="text-sm underline text-emerald-800 min-h-11 inline-flex items-center" href={r.url} target="_blank" rel="noopener noreferrer">{uiCopy("Open private reference")}</a>}{r.entryId&&entries.some(e=>e.id===r.entryId&&!e.deleted)&&<a href={`#journal-entry-${r.entryId}`} className="text-sm underline text-emerald-800 min-h-11 inline-flex items-center">{uiCopy("Open linked journal entry")}</a>}<Button type="button" variant="ghost" onClick={()=>{change(r.id,{deleted:true});setInvalid(v=>({...v,[r.id]:false}))}}>{uiCopy("Move record to removed items")}</Button></div>
-   </article>)}
-   <Button type="button" variant="outline" aria-expanded={showRemoved} onClick={()=>setShowRemoved(!showRemoved)}>{uiCopy("Removed travel records (")}{data.records.filter(r=>r.deleted).length})</Button>
-   {showRemoved&&<div className="space-y-3"><p className="text-sm">{uiCopy("Removed records can be restored. Save to keep a removal or restoration.")}</p>{data.records.filter(r=>r.deleted).map(r=><div key={r.id} className="flex flex-wrap items-center justify-between gap-3"><span className="min-w-0 break-words">{r.title}</span><Button type="button" variant="outline" onClick={()=>change(r.id,{deleted:false})}>{uiCopy("Restore travel record")}</Button></div>)}</div>}
-  </fieldset>
-  <div id="trip-pack" className="scroll-mt-64"><TripPackDownload planId={planId} preparations={preparations} records={data.records} workspaceRevision={workspaceRevision} recordsRevision={revision} ready={workspaceSaved&&!dirty&&!busy&&!title}/></div>
-  <details><summary className="min-h-11 cursor-pointer text-sm text-emerald-800">{uiCopy("Export your records")}</summary><p className="text-sm leading-6 text-gray-600">{uiCopy("Download the saved trip, checklist, journal, travel records and attachment details as JSON. This includes private references and removed records. Unsaved edits and attachment files are excluded. Save both sections first if you want current edits included. Download files individually from their journal entries. Keep your export private.")}</p><a href={`/api/account/plans/${planId}/export`} className="mt-3 inline-flex min-h-11 items-center text-emerald-800 underline">{uiCopy("Download saved private trip JSON")}</a></details>
- </section>
+  function change(id: string, values: Partial<TravelRecord>) {
+    setData((current) => ({
+      ...current,
+      records: current.records.map((r) =>
+        r.id === id ? ({ ...r, ...values } as TravelRecord) : r,
+      ),
+    }));
+    setDirty(true);
+    setFeedback("");
+  }
+  async function save() {
+    if (busyRef.current) return;
+    if (!workspaceSaved) {
+      setFeedback(
+        "Save the checklist and journal before saving travel records.",
+      );
+      return;
+    }
+    if (title || Object.values(invalid).some(Boolean)) {
+      setFeedback(
+        "Add or clear the new title, and check expense amounts before saving.",
+      );
+      return;
+    }
+    const parsed = recordsSchema.safeParse(data);
+    if (!parsed.success) {
+      setFeedback(
+        parsed.error.issues[0]?.message || "Check your record details.",
+      );
+      return;
+    }
+    busyRef.current = true;
+    setBusy(true);
+    setFeedback("");
+    try {
+      const saved = recordsReceiptSchema.parse(
+        await accountRequest<unknown>(`/api/account/plans/${planId}/records`, {
+          method: "PUT",
+          body: JSON.stringify({
+            expectedRevision: revision,
+            data: parsed.data,
+          }),
+        }),
+      );
+      if (
+        saved.revision !== revision + 1 ||
+        JSON.stringify(saved.data) !== JSON.stringify(parsed.data)
+      )
+        throw Error(
+          "The saved records did not match your edits. Keep them here and retry.",
+        );
+      setData(saved.data);
+      setRevision(saved.revision);
+      setDirty(false);
+      setFeedback("Your private travel records are saved.");
+    } catch (e) {
+      setFeedback(errorMessage(e));
+    } finally {
+      busyRef.current = false;
+      setBusy(false);
+    }
+  }
+  if (loading)
+    return (
+      <p role="status">
+        {uiCopy("Opening private expenses and booking records…")}
+      </p>
+    );
+  if (failed)
+    return (
+      <section role="alert" className="rounded-2xl border bg-white p-5">
+        <p>{uiCopy(feedback)}</p>
+        <p className="mt-2 text-sm">
+          {uiCopy("Reopen to try again. No empty replacement has been saved.")}
+        </p>
+      </section>
+    );
+  const totals = expenseTotals(data.records);
+  return (
+    <section
+      aria-labelledby={`${prefix}-records`}
+      className="rounded-2xl border border-emerald-100 bg-white p-5 sm:p-7 space-y-5 min-w-0"
+    >
+      <div className="flex flex-wrap justify-between items-center gap-3">
+        <div>
+          <p className="text-xs uppercase tracking-widest text-emerald-700">
+            {uiCopy("Your practical records")}
+          </p>
+          <h2
+            id={`${prefix}-records`}
+            className="mt-2 text-2xl text-emerald-950"
+          >
+            {uiCopy("Expenses and bookings")}
+          </h2>
+        </div>
+        <Button
+          type="button"
+          disabled={!dirty || busy || !workspaceSaved}
+          onClick={() => void save()}
+        >
+          {busy ? uiCopy("Saving records…") : uiCopy("Save travel records")}
+        </Button>
+      </div>
+      <p className="text-sm leading-6 text-gray-600">
+        {uiCopy(
+          "Private to you. Record an estimate, payment or refund, or keep a ticket and booking reference. Expense amounts are totals for the record, separate from per-person planning allowances. Your labels do not verify payment, availability or a reservation. Add receipt photos and PDF documents to a linked journal entry.",
+        )}
+      </p>
+      {!workspaceSaved && (
+        <p className="text-sm text-emerald-800">
+          {uiCopy(
+            "Save your checklist and journal changes before saving these records.",
+          )}
+        </p>
+      )}
+      <p role="status" className="text-sm text-emerald-800">
+        {feedback ||
+          (dirty
+            ? "Travel records have unsaved changes."
+            : revision
+              ? "Showing saved travel records."
+              : "No travel records saved yet.")}
+      </p>
+      {totals.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <caption className="text-left pb-3 text-gray-600">
+              {uiCopy(
+                "Entered amounts by currency. No exchange conversion or complete-trip cost is implied.",
+              )}
+              {dirty ? uiCopy(" Includes unsaved edits.") : ""}
+            </caption>
+            <thead>
+              <tr>
+                <th className="pr-4 py-2">{uiCopy("Currency")}</th>
+                <th className="pr-4">{uiCopy("Estimated")}</th>
+                <th className="pr-4">{uiCopy("Paid")}</th>
+                <th>{uiCopy("Refunded")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {totals.map((g) => (
+                <tr key={g.currency}>
+                  <th className="pr-4 py-2">{g.currency}</th>
+                  <td className="pr-4 whitespace-nowrap">
+                    {recordMoney(g.estimated, g.currency)}
+                  </td>
+                  <td className="pr-4 whitespace-nowrap">
+                    {recordMoney(g.paid, g.currency)}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {recordMoney(g.refunded, g.currency)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <fieldset disabled={busy} className="space-y-5 min-w-0">
+        <form
+          className="flex flex-wrap items-end gap-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!title.trim() || data.records.length >= 50) return;
+            setData((current) => ({
+              ...current,
+              records: [
+                ...current.records,
+                newTravelRecord(kind, crypto.randomUUID(), title.trim()),
+              ],
+            }));
+            setTitle("");
+            setDirty(true);
+            setFeedback("");
+          }}
+        >
+          <label className="text-sm">
+            {uiCopy("Record type")}
+            <select
+              className={field}
+              value={kind}
+              onChange={(e) => setKind(e.target.value as TravelRecord["kind"])}
+            >
+              <option value="expense">{uiCopy("Expense or receipt")}</option>
+              <option value="booking">{uiCopy("Ticket or booking")}</option>
+            </select>
+          </label>
+          <label className="text-sm flex-1 min-w-0">
+            {uiCopy("New record title")}
+            <input
+              className={field}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              maxLength={160}
+              placeholder={uiCopy("Airport transfer receipt")}
+            />
+          </label>
+          <Button
+            type="submit"
+            variant="outline"
+            disabled={data.records.length >= 50}
+          >
+            {uiCopy("Add travel record")}
+          </Button>
+        </form>
+        {data.records.length >= 50 && (
+          <p className="text-sm">
+            {uiCopy(
+              "This trip has reached its 50-record limit, including removed records.",
+            )}
+          </p>
+        )}
+        {data.records
+          .filter((r) => !r.deleted)
+          .map((r) => (
+            <article
+              key={r.id}
+              className="rounded-xl border border-emerald-100 p-4 min-w-0 space-y-4"
+            >
+              <p className="font-medium text-emerald-950 break-words">
+                {r.title}{" "}
+                <span className="text-xs font-normal text-gray-600">
+                  {r.kind === "expense" ? uiCopy("Expense") : uiCopy("Booking")}
+                </span>
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <label className="text-sm">
+                  {uiCopy("Record title")}
+                  <input
+                    className={field}
+                    value={r.title}
+                    maxLength={160}
+                    onChange={(e) => change(r.id, { title: e.target.value })}
+                  />
+                </label>
+                <label className="text-sm">
+                  {uiCopy("Record category")}
+                  <select
+                    className={field}
+                    value={r.category}
+                    onChange={(e) =>
+                      change(r.id, {
+                        category: e.target.value as TravelRecord["category"],
+                      })
+                    }
+                  >
+                    {preparationCategories.map((c) => (
+                      <option value={c} key={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="text-sm">
+                  {uiCopy("Record date, optional")}
+                  <input
+                    type="date"
+                    className={field}
+                    value={r.date}
+                    onChange={(e) => change(r.id, { date: e.target.value })}
+                  />
+                </label>
+                {r.kind === "expense" ? (
+                  <>
+                    <label className="text-sm">
+                      {uiCopy("Payment state")}
+                      <select
+                        className={field}
+                        value={r.status}
+                        onChange={(e) =>
+                          change(r.id, {
+                            status: e.target.value as typeof r.status,
+                          })
+                        }
+                      >
+                        {expenseStates.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="text-sm">
+                      {uiCopy("Currency")}
+                      <select
+                        className={field}
+                        value={r.currency}
+                        onChange={(e) => {
+                          change(r.id, {
+                            currency: e.target.value as RecordCurrency,
+                            amountMinor: 0,
+                          });
+                          setInvalid((v) => ({ ...v, [r.id]: false }));
+                        }}
+                      >
+                        {recordCurrencies.map((c) => (
+                          <option value={c} key={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="text-xs text-gray-600">
+                        {uiCopy(
+                          "Changing currency resets the amount to zero. Enter the amount again.",
+                        )}
+                      </span>
+                    </label>
+                    <ExpenseAmount
+                      key={`${r.id}:${r.currency}`}
+                      record={r}
+                      onChange={(amountMinor) => change(r.id, { amountMinor })}
+                      onInvalid={(value) => {
+                        setInvalid((v) => ({ ...v, [r.id]: value }));
+                        setDirty(true);
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <label className="text-sm">
+                      {uiCopy("Booking status")}
+                      <select
+                        className={field}
+                        value={r.status}
+                        onChange={(e) =>
+                          change(r.id, {
+                            status: e.target.value as typeof r.status,
+                          })
+                        }
+                      >
+                        {bookingStates.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="text-sm">
+                      {uiCopy("Provider")}
+                      <input
+                        className={field}
+                        value={r.provider}
+                        maxLength={160}
+                        onChange={(e) =>
+                          change(r.id, { provider: e.target.value })
+                        }
+                      />
+                    </label>
+                    <label className="text-sm">
+                      {uiCopy("Booking or ticket reference")}
+                      <input
+                        className={field}
+                        value={r.reference}
+                        maxLength={160}
+                        onChange={(e) =>
+                          change(r.id, { reference: e.target.value })
+                        }
+                      />
+                    </label>
+                  </>
+                )}
+                <label className="text-sm sm:col-span-2">
+                  {uiCopy("Private receipt or booking link, optional")}
+                  <input
+                    type="url"
+                    className={field}
+                    value={r.url}
+                    maxLength={1500}
+                    placeholder="https://"
+                    onChange={(e) => change(r.id, { url: e.target.value })}
+                  />
+                </label>
+                <label className="text-sm sm:col-span-2">
+                  {uiCopy("Journal entry for receipt or documents")}
+                  <select
+                    className={field}
+                    value={r.entryId}
+                    onChange={(e) => change(r.id, { entryId: e.target.value })}
+                  >
+                    <option value="">{uiCopy("No entry linked")}</option>
+                    {entries.map((entry) => (
+                      <option key={entry.id} value={entry.id}>
+                        {entry.title}
+                        {entry.deleted ? uiCopy(" (removed entry)") : ""}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="text-sm sm:col-span-2">
+                  {uiCopy("Private record notes")}
+                  <textarea
+                    className={field}
+                    value={r.notes}
+                    rows={3}
+                    maxLength={1000}
+                    onChange={(e) => change(r.id, { notes: e.target.value })}
+                  />
+                </label>
+              </div>
+              <div className="flex flex-wrap gap-3 items-center">
+                {r.url && privateReferenceUrl.safeParse(r.url).success && (
+                  <a
+                    className="text-sm underline text-emerald-800 min-h-11 inline-flex items-center"
+                    href={r.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {uiCopy("Open private reference")}
+                  </a>
+                )}
+                {r.entryId &&
+                  entries.some((e) => e.id === r.entryId && !e.deleted) && (
+                    <a
+                      href={`#journal-entry-${r.entryId}`}
+                      className="text-sm underline text-emerald-800 min-h-11 inline-flex items-center"
+                    >
+                      {uiCopy("Open linked journal entry")}
+                    </a>
+                  )}
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => {
+                    change(r.id, { deleted: true });
+                    setInvalid((v) => ({ ...v, [r.id]: false }));
+                  }}
+                >
+                  {uiCopy("Move record to removed items")}
+                </Button>
+              </div>
+            </article>
+          ))}
+        <Button
+          type="button"
+          variant="outline"
+          aria-expanded={showRemoved}
+          onClick={() => setShowRemoved(!showRemoved)}
+        >
+          {uiCopy("Removed travel records (")}
+          {data.records.filter((r) => r.deleted).length})
+        </Button>
+        {showRemoved && (
+          <div className="space-y-3">
+            <p className="text-sm">
+              {uiCopy(
+                "Removed records can be restored. Save to keep a removal or restoration.",
+              )}
+            </p>
+            {data.records
+              .filter((r) => r.deleted)
+              .map((r) => (
+                <div
+                  key={r.id}
+                  className="flex flex-wrap items-center justify-between gap-3"
+                >
+                  <span className="min-w-0 break-words">{r.title}</span>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => change(r.id, { deleted: false })}
+                  >
+                    {uiCopy("Restore travel record")}
+                  </Button>
+                </div>
+              ))}
+          </div>
+        )}
+      </fieldset>
+      <div id="trip-pack" className="scroll-mt-64">
+        <TripPackDownload
+          planId={planId}
+          preparations={preparations}
+          records={data.records}
+          workspaceRevision={workspaceRevision}
+          recordsRevision={revision}
+          ready={workspaceSaved && !dirty && !busy && !title}
+        />
+      </div>
+      <details>
+        <summary className="min-h-11 cursor-pointer text-sm text-emerald-800">
+          {uiCopy("Export your records")}
+        </summary>
+        <p className="text-sm leading-6 text-gray-600">
+          {uiCopy(
+            "Download the saved trip, checklist, journal, travel records and attachment details as JSON. This includes private references and removed records. Unsaved edits and attachment files are excluded. Save both sections first if you want current edits included. Download files individually from their journal entries. Keep your export private.",
+          )}
+        </p>
+        <a
+          href={`/api/account/plans/${planId}/export`}
+          className="mt-3 inline-flex min-h-11 items-center text-emerald-800 underline"
+        >
+          {uiCopy("Download saved private trip JSON")}
+        </a>
+      </details>
+    </section>
+  );
 }

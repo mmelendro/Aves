@@ -1,12 +1,87 @@
-import {z} from "zod"
-import type {Preparation} from "./trip-workspace"
-import {recordMoney,type TravelRecord} from "./trip-records"
-export const tripPackInfoSchema=z.object({planUpdatedAt:z.string().min(1).max(50),itineraryRevision:z.number().int().nonnegative(),routeCount:z.number().int().min(0).max(2)}).strict()
-export const tripPackSelection=z.object({includeItinerary:z.boolean(),includeBrief:z.boolean().optional().default(false),includeEditableRoutes:z.boolean().optional().default(false),planUpdatedAt:z.string().min(1).max(50).optional(),itineraryRevision:z.number().int().nonnegative().optional(),preparationIds:z.array(z.uuid()).max(50),recordIds:z.array(z.uuid()).max(50),workspaceRevision:z.number().int().nonnegative(),recordsRevision:z.number().int().nonnegative()}).strict().refine(v=>v.includeItinerary||v.includeBrief||v.includeEditableRoutes||v.preparationIds.length||v.recordIds.length,"Select something for your pack.").refine(v=>!(v.includeBrief||v.includeEditableRoutes)||Boolean(v.planUpdatedAt),"Review the current saved brief before downloading.").refine(v=>!v.includeEditableRoutes||v.itineraryRevision!==undefined,"Review the saved route before downloading.").refine(v=>new Set(v.preparationIds).size===v.preparationIds.length&&new Set(v.recordIds).size===v.recordIds.length,"Choose each record once.")
-const escape=(s:string)=>s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]!))
-const paragraph=(s:string)=>`<p>${escape(s).replace(/\n/g,"<br>")}</p>`
-export function renderTripPack({title,itinerary,preparations,records,generatedOn,brief=null,routes=[]}:{title:string;itinerary:string|null;preparations:Preparation[];records:TravelRecord[];generatedOn:string;brief?:{label:string;value:string}[]|null;routes?:{name:string;text:string}[]}){
- const taskHtml=preparations.map(t=>`<article><h3>${escape(t.title)}</h3>${paragraph(`${t.category} · ${t.arrangement} · ${t.done?"Checklist marked done":"Checklist open"}${t.dueDate?" · Due "+t.dueDate:""}`)}${t.notes?paragraph(t.notes):""}${t.url?paragraph("Private reference: "+t.url):""}</article>`).join("")
- const recordHtml=records.map(r=>`<article><h3>${escape(r.title)}</h3>${paragraph(`${r.kind} · ${r.status}${r.date?" · "+r.date:""}`)}${r.kind==="expense"?paragraph(recordMoney(r.amountMinor,r.currency)+" · "+r.status):paragraph(`${r.provider}${r.reference?" · Reference: "+r.reference:""}`)}${r.notes?paragraph(r.notes):""}${r.url?paragraph("Private reference: "+r.url):""}</article>`).join("")
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} | AVES private trip pack</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#143d30;max-width:52rem;margin:2rem auto;padding:0 1.3rem;overflow-wrap:anywhere}h1{font-size:2rem;line-height:1.2}h2{margin-top:2rem;border-bottom:1px solid #bdd1c7}article{break-inside:avoid;border:1px solid #d9e4de;padding:1rem;margin:1rem 0;border-radius:.7rem}small{color:#52665c}@media print{body{font-size:11pt;margin:0;max-width:none}h2{break-after:avoid}article{box-shadow:none}}</style></head><body><p>AVES · Just for you</p><h1>${escape(title)}</h1><p><small>Created ${escape(generatedOn)} from saved records. Keep this file private. Offline snapshot: download a replacement after saved trip changes.</small></p><p>This pack contains only the sections you selected. Journal entries, removed items, photographs and attachment files are excluded. Statuses and notes are owner-entered, not independent confirmation of bookings, payments, access or sightings.</p>${brief!==null?`<h2>Selected saved brief</h2><p>Entered preferences, not confirmed dates, bookings or quoted prices. Currency codes retain their original basis.</p><dl>${brief.map(r=>`<dt>${escape(r.label)}</dt><dd>${escape(r.value)}</dd>`).join("")}</dl>`:""}${routes.length?`<h2>Selected editable itineraries</h2>${routes.map(r=>`<article><h3>${escape(r.name)}</h3>${paragraph(r.text)}</article>`).join("")}`:""}${itinerary!==null?`<h2>Saved itinerary and planning notes</h2>${paragraph(itinerary||"No itinerary notes saved.")}`:""}${preparations.length?`<h2>Selected preparations</h2>${taskHtml}`:""}${records.length?`<h2>Selected practical records</h2>${recordHtml}`:""}<p><small>Private reference links are plain text. This file loads no remote assets and runs no scripts. Open it offline and use your browser’s Print command if you want a PDF. This snapshot does not refresh itself or confirm current supplier information. To clear it, delete this file and any PDF, printed or synced copies, then empty Recently Deleted or Trash. Signing out of AVES does not delete downloaded files.</small></p></body></html>`
+import { z } from "zod";
+import type { Preparation } from "./trip-workspace";
+import { recordMoney, type TravelRecord } from "./trip-records";
+export const tripPackInfoSchema = z
+  .object({
+    planUpdatedAt: z.string().min(1).max(50),
+    itineraryRevision: z.number().int().nonnegative(),
+    routeCount: z.number().int().min(0).max(2),
+  })
+  .strict();
+export const tripPackSelection = z
+  .object({
+    includeItinerary: z.boolean(),
+    includeBrief: z.boolean().optional().default(false),
+    includeEditableRoutes: z.boolean().optional().default(false),
+    planUpdatedAt: z.string().min(1).max(50).optional(),
+    itineraryRevision: z.number().int().nonnegative().optional(),
+    preparationIds: z.array(z.uuid()).max(50),
+    recordIds: z.array(z.uuid()).max(50),
+    workspaceRevision: z.number().int().nonnegative(),
+    recordsRevision: z.number().int().nonnegative(),
+  })
+  .strict()
+  .refine(
+    (v) =>
+      v.includeItinerary ||
+      v.includeBrief ||
+      v.includeEditableRoutes ||
+      v.preparationIds.length ||
+      v.recordIds.length,
+    "Select something for your pack.",
+  )
+  .refine(
+    (v) =>
+      !(v.includeBrief || v.includeEditableRoutes) || Boolean(v.planUpdatedAt),
+    "Review the current saved brief before downloading.",
+  )
+  .refine(
+    (v) => !v.includeEditableRoutes || v.itineraryRevision !== undefined,
+    "Review the saved route before downloading.",
+  )
+  .refine(
+    (v) =>
+      new Set(v.preparationIds).size === v.preparationIds.length &&
+      new Set(v.recordIds).size === v.recordIds.length,
+    "Choose each record once.",
+  );
+const escape = (s: string) =>
+  s.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ]!,
+  );
+const paragraph = (s: string) => `<p>${escape(s).replace(/\n/g, "<br>")}</p>`;
+export function renderTripPack({
+  title,
+  itinerary,
+  preparations,
+  records,
+  generatedOn,
+  brief = null,
+  routes = [],
+}: {
+  title: string;
+  itinerary: string | null;
+  preparations: Preparation[];
+  records: TravelRecord[];
+  generatedOn: string;
+  brief?: { label: string; value: string }[] | null;
+  routes?: { name: string; text: string }[];
+}) {
+  const taskHtml = preparations
+    .map(
+      (t) =>
+        `<article><h3>${escape(t.title)}</h3>${paragraph(`${t.category} · ${t.arrangement} · ${t.done ? "Checklist marked done" : "Checklist open"}${t.dueDate ? " · Due " + t.dueDate : ""}`)}${t.notes ? paragraph(t.notes) : ""}${t.url ? paragraph("Private reference: " + t.url) : ""}</article>`,
+    )
+    .join("");
+  const recordHtml = records
+    .map(
+      (r) =>
+        `<article><h3>${escape(r.title)}</h3>${paragraph(`${r.kind} · ${r.status}${r.date ? " · " + r.date : ""}`)}${r.kind === "expense" ? paragraph(recordMoney(r.amountMinor, r.currency) + " · " + r.status) : paragraph(`${r.provider}${r.reference ? " · Reference: " + r.reference : ""}`)}${r.notes ? paragraph(r.notes) : ""}${r.url ? paragraph("Private reference: " + r.url) : ""}</article>`,
+    )
+    .join("");
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} | AVES private trip pack</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#143d30;max-width:52rem;margin:2rem auto;padding:0 1.3rem;overflow-wrap:anywhere}h1{font-size:2rem;line-height:1.2}h2{margin-top:2rem;border-bottom:1px solid #bdd1c7}article{break-inside:avoid;border:1px solid #d9e4de;padding:1rem;margin:1rem 0;border-radius:.7rem}small{color:#52665c}@media print{body{font-size:11pt;margin:0;max-width:none}h2{break-after:avoid}article{box-shadow:none}}</style></head><body><p>AVES · Just for you</p><h1>${escape(title)}</h1><p><small>Created ${escape(generatedOn)} from saved records. Keep this file private. Offline snapshot: download a replacement after saved trip changes.</small></p><p>This pack contains only the sections you selected. Journal entries, removed items, photographs and attachment files are excluded. Statuses and notes are owner-entered, not independent confirmation of bookings, payments, access or sightings.</p>${brief !== null ? `<h2>Selected saved brief</h2><p>Entered preferences, not confirmed dates, bookings or quoted prices. Currency codes retain their original basis.</p><dl>${brief.map((r) => `<dt>${escape(r.label)}</dt><dd>${escape(r.value)}</dd>`).join("")}</dl>` : ""}${routes.length ? `<h2>Selected editable itineraries</h2>${routes.map((r) => `<article><h3>${escape(r.name)}</h3>${paragraph(r.text)}</article>`).join("")}` : ""}${itinerary !== null ? `<h2>Saved itinerary and planning notes</h2>${paragraph(itinerary || "No itinerary notes saved.")}` : ""}${preparations.length ? `<h2>Selected preparations</h2>${taskHtml}` : ""}${records.length ? `<h2>Selected practical records</h2>${recordHtml}` : ""}<p><small>Private reference links are plain text. This file loads no remote assets and runs no scripts. Open it offline and use your browser’s Print command if you want a PDF. This snapshot does not refresh itself or confirm current supplier information. To clear it, delete this file and any PDF, printed or synced copies, then empty Recently Deleted or Trash. Signing out of AVES does not delete downloaded files.</small></p></body></html>`;
 }

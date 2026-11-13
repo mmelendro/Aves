@@ -1,10 +1,14 @@
 "use client";
-import {useUiCopy} from "@/components/ui-copy-context"
+import { useUiCopy } from "@/components/ui-copy-context";
 
-import {UiLanguageProvider,UiLanguageToggle} from "@/components/ui-language"
+import { UiLanguageProvider, UiLanguageToggle } from "@/components/ui-language";
 import type { IslandTripPlanner } from "@/lib/island-trip-planner";
-import {readPlannerRecovery,writePlannerRecovery,recoveryKey} from "@/lib/planner-recovery";
-import {useUnsavedChanges} from "./account/unsaved-changes";
+import {
+  readPlannerRecovery,
+  writePlannerRecovery,
+  recoveryKey,
+} from "@/lib/planner-recovery";
+import { useUnsavedChanges } from "./account/unsaved-changes";
 import {
   IslandPlannerProvider,
   useIslandPlanner,
@@ -41,18 +45,31 @@ export default function IslandTripPlannerView({
   onSave,
 }: {
   planner: IslandTripPlanner;
-  initialDraft?:TripDraft;
-  onSave?:(draft:TripDraft)=>Promise<void>;
+  initialDraft?: TripDraft;
+  onSave?: (draft: TripDraft) => Promise<void>;
 }) {
   return (
-    <UiLanguageProvider scope="island"><UiLanguageToggle/><IslandPlannerProvider planner={planner}>
-      <IslandPlannerForm key={planner.context.id} initialDraft={initialDraft} onSave={onSave}/>
-    </IslandPlannerProvider></UiLanguageProvider>
+    <UiLanguageProvider scope="island">
+      <UiLanguageToggle />
+      <IslandPlannerProvider planner={planner}>
+        <IslandPlannerForm
+          key={planner.context.id}
+          initialDraft={initialDraft}
+          onSave={onSave}
+        />
+      </IslandPlannerProvider>
+    </UiLanguageProvider>
   );
 }
-function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave?:(draft:TripDraft)=>Promise<void>}) {
- const uiCopy=useUiCopy()
- const planner=useIslandPlanner();
+function IslandPlannerForm({
+  initialDraft,
+  onSave,
+}: {
+  initialDraft?: TripDraft;
+  onSave?: (draft: TripDraft) => Promise<void>;
+}) {
+  const uiCopy = useUiCopy();
+  const planner = useIslandPlanner();
 
   const {
     context,
@@ -79,23 +96,35 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
   const { update: updateMapLayers } = useMapLayers();
   const id = useId(),
     output = useRef<HTMLDivElement>(null);
-  const [input, setInput] = useState<TripPlannerInput>(initialDraft?.input??defaultTripInput);
-  const [draft, setDraft] = useState<TripDraft | null>(initialDraft??null);
-  const [privateBusy,setPrivateBusy]=useState(false),privateLock=useRef(false);
+  const [input, setInput] = useState<TripPlannerInput>(
+    initialDraft?.input ?? defaultTripInput,
+  );
+  const [draft, setDraft] = useState<TripDraft | null>(initialDraft ?? null);
+  const [privateBusy, setPrivateBusy] = useState(false),
+    privateLock = useRef(false);
   const [alternatives, setAlternatives] = useState<
     { id: TripStyle; label: string; draft: TripDraft }[]
   >([]);
   const [notice, setNotice] = useState("");
-  const [recovered,setRecovered]=useState(false);
-  const [resumeNotice,setResumeNotice]=useState(false);
-  const [activeDay,setActiveDay]=useState(0);
-  const [showAllDays,setShowAllDays]=useState(false);
-  const [recoveryAvailable,setRecoveryAvailable]=useState(true);
-  useUnsavedChanges(Boolean(onSave)&&(JSON.stringify(input)!==JSON.stringify(initialDraft?.input)||JSON.stringify(draft)!==JSON.stringify(initialDraft))||!onSave&&!recoveryAvailable&&(Boolean(draft)||JSON.stringify(input)!==JSON.stringify(defaultTripInput)),uiCopy("You have unsaved itinerary edits. Leave and discard them?"));
+  const [recovered, setRecovered] = useState(false);
+  const [resumeNotice, setResumeNotice] = useState(false);
+  const [activeDay, setActiveDay] = useState(0);
+  const [showAllDays, setShowAllDays] = useState(false);
+  const [recoveryAvailable, setRecoveryAvailable] = useState(true);
+  useUnsavedChanges(
+    (Boolean(onSave) &&
+      (JSON.stringify(input) !== JSON.stringify(initialDraft?.input) ||
+        JSON.stringify(draft) !== JSON.stringify(initialDraft))) ||
+      (!onSave &&
+        !recoveryAvailable &&
+        (Boolean(draft) ||
+          JSON.stringify(input) !== JSON.stringify(defaultTripInput))),
+    uiCopy("You have unsaved itinerary edits. Leave and discard them?"),
+  );
   useEffect(() => {
-    if(onSave)return;
+    if (onSave) return;
     try {
-      const recovery=readPlannerRecovery(window.sessionStorage,planner);
+      const recovery = readPlannerRecovery(window.sessionStorage, planner);
       const saved = readTripDraft(window.sessionStorage),
         birds = readNzBirdBasketSelection(window.sessionStorage);
       if (recovery || saved) {
@@ -137,14 +166,19 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
       window.removeEventListener(NZ_BIRD_BASKET_EVENT, restoreBirds);
       window.removeEventListener("aves:trip-base", selectBase);
     };
-  }, [planner,readTripDraft,context.corridor,tripAreaById,onSave]);
-  useEffect(()=>{
-    if(onSave||!recovered||!validTripInput(input))return;
-    let kept=false;
-    try{kept=writePlannerRecovery(window.sessionStorage,planner,input,draft)}catch{}
+  }, [planner, readTripDraft, context.corridor, tripAreaById, onSave]);
+  useEffect(() => {
+    if (onSave || !recovered || !validTripInput(input)) return;
+    let kept = false;
+    try {
+      kept = writePlannerRecovery(window.sessionStorage, planner, input, draft);
+    } catch {}
     setRecoveryAvailable(kept);
-    if(!kept)setNotice("Tab recovery is unavailable. Copy your reviewed itinerary before leaving.");
-  },[recovered,input,draft,planner,validTripInput,onSave]);
+    if (!kept)
+      setNotice(
+        "Tab recovery is unavailable. Copy your reviewed itinerary before leaving.",
+      );
+  }, [recovered, input, draft, planner, validTripInput, onSave]);
   function chooseBirds(ids: string[]) {
     setInput((current) => ({ ...current, birdIds: ids }));
     try {
@@ -168,7 +202,12 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
       setNotice(
         `${choices.length} distinct draft${choices.length === 1 ? "" : "s"} ready below. Compare them, then adjust outings and stays.`,
       );
-      output.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      output.current?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start",
+      });
     } catch (error) {
       setNotice(
         error instanceof Error ? error.message : "Review your choices.",
@@ -199,9 +238,23 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
   );
   async function carry() {
     if (!draft || dirty) return;
-    if(onSave){
-      if(privateLock.current)return;privateLock.current=true;setPrivateBusy(true);
-      try{await onSave(draft);setNotice("Your editable itinerary is saved privately.")}catch(error){setNotice(error instanceof Error?error.message:"Your itinerary could not be confirmed. Keep your edits and retry.")}finally{privateLock.current=false;setPrivateBusy(false)}
+    if (onSave) {
+      if (privateLock.current) return;
+      privateLock.current = true;
+      setPrivateBusy(true);
+      try {
+        await onSave(draft);
+        setNotice("Your editable itinerary is saved privately.");
+      } catch (error) {
+        setNotice(
+          error instanceof Error
+            ? error.message
+            : "Your itinerary could not be confirmed. Keep your edits and retry.",
+        );
+      } finally {
+        privateLock.current = false;
+        setPrivateBusy(false);
+      }
       return;
     }
     try {
@@ -268,24 +321,106 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-sm font-medium uppercase tracking-widest text-emerald-700">
-          {uiCopy("\n          Make room for the whole trip\n        ")}</p>
+          {uiCopy("\n          Make room for the whole trip\n        ")}
+        </p>
         <h2
           id={`${id}-heading`}
           className="mt-3 text-3xl font-medium tracking-tight text-emerald-950 sm:text-4xl"
         >
-          {uiCopy("\n          Your birds. Your days. Your ")}{context.name}.
+          {uiCopy("\n          Your birds. Your days. Your ")}
+          {context.name}.
         </h2>
         <p className="mt-4 max-w-3xl leading-7 text-gray-600">
-          {uiCopy("\n          Choose your birds and trip length, then shape a day by day draft with\n          stays, local food, markets, walks, hot pools and experiences.")}{" "}
-          {tripPlaces.length} {uiCopy(" source-linked places and experiences across")}{" "}
-          {tripAreas.length} {uiCopy(" planning bases. B Corp certification is optional.\n        ")}</p>
-        <nav aria-label={uiCopy("Planning stages")} className="mt-5 flex flex-wrap gap-3 rounded-xl border border-emerald-200 bg-white p-3">{[["preferences","1. Your preferences"],["compare","2. Compare routes"],["days","3. Edit your days"]].map(([part,label])=><a key={part} href={`#${id}-${part}`} className="inline-flex min-h-11 items-center px-3 text-sm underline">{uiCopy(label)}</a>)}</nav>
-        {resumeNotice&&!onSave&&<section aria-label={uiCopy("Recovered draft")} className="mt-5 rounded-xl border border-emerald-200 bg-white p-4 text-sm"><p>{uiCopy("Recovered your choices from this browser tab. They are not an account save.")}</p><div className="flex flex-wrap gap-4"><button className={button} type="button" onClick={()=>{setResumeNotice(false);output.current?.scrollIntoView({block:"start"})}}>{uiCopy("Continue this draft")}</button><button className={button} type="button" onClick={()=>{if(!window.confirm(uiCopy("Start a new route and discard this tab's route edits? Bird wishes and saved account records stay intact.")))return;try{window.sessionStorage.removeItem(recoveryKey(planner));window.sessionStorage.removeItem(context.draftKey)}catch{setRecoveryAvailable(false)}setInput({...defaultTripInput,birdIds:input.birdIds});setDraft(null);setAlternatives([]);setActiveDay(0);setResumeNotice(false);setNotice("New route started. Your bird wishes are kept.")}}>{uiCopy("Start a new route")}</button></div></section>}
+          {uiCopy(
+            "\n          Choose your birds and trip length, then shape a day by day draft with\n          stays, local food, markets, walks, hot pools and experiences.",
+          )}{" "}
+          {tripPlaces.length}{" "}
+          {uiCopy(" source-linked places and experiences across")}{" "}
+          {tripAreas.length}{" "}
+          {uiCopy(
+            " planning bases. B Corp certification is optional.\n        ",
+          )}
+        </p>
+        <nav
+          aria-label={uiCopy("Planning stages")}
+          className="mt-5 flex flex-wrap gap-3 rounded-xl border border-emerald-200 bg-white p-3"
+        >
+          {[
+            ["preferences", "1. Your preferences"],
+            ["compare", "2. Compare routes"],
+            ["days", "3. Edit your days"],
+          ].map(([part, label]) => (
+            <a
+              key={part}
+              href={`#${id}-${part}`}
+              className="inline-flex min-h-11 items-center px-3 text-sm underline"
+            >
+              {uiCopy(label)}
+            </a>
+          ))}
+        </nav>
+        {resumeNotice && !onSave && (
+          <section
+            aria-label={uiCopy("Recovered draft")}
+            className="mt-5 rounded-xl border border-emerald-200 bg-white p-4 text-sm"
+          >
+            <p>
+              {uiCopy(
+                "Recovered your choices from this browser tab. They are not an account save.",
+              )}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button
+                className={button}
+                type="button"
+                onClick={() => {
+                  setResumeNotice(false);
+                  output.current?.scrollIntoView({ block: "start" });
+                }}
+              >
+                {uiCopy("Continue this draft")}
+              </button>
+              <button
+                className={button}
+                type="button"
+                onClick={() => {
+                  if (
+                    !window.confirm(
+                      uiCopy(
+                        "Start a new route and discard this tab's route edits? Bird wishes and saved account records stay intact.",
+                      ),
+                    )
+                  )
+                    return;
+                  try {
+                    window.sessionStorage.removeItem(recoveryKey(planner));
+                    window.sessionStorage.removeItem(context.draftKey);
+                  } catch {
+                    setRecoveryAvailable(false);
+                  }
+                  setInput({ ...defaultTripInput, birdIds: input.birdIds });
+                  setDraft(null);
+                  setAlternatives([]);
+                  setActiveDay(0);
+                  setResumeNotice(false);
+                  setNotice("New route started. Your bird wishes are kept.");
+                }}
+              >
+                {uiCopy("Start a new route")}
+              </button>
+            </div>
+          </section>
+        )}
         <div className="mt-7 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,.6fr)]">
-          <div id={`${id}-preferences`} style={{scrollMarginTop:"12rem"}} className="min-w-0 space-y-5 rounded-3xl border border-emerald-200 bg-white p-5 sm:p-7">
+          <div
+            id={`${id}-preferences`}
+            style={{ scrollMarginTop: "12rem" }}
+            className="min-w-0 space-y-5 rounded-3xl border border-emerald-200 bg-white p-5 sm:p-7"
+          >
             <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_8rem]">
               <label className="text-sm font-medium" htmlFor={`${id}-area`}>
-                {uiCopy("\n                Plan around\n                ")}<select
+                {uiCopy("\n                Plan around\n                ")}
+                <select
                   id={`${id}-area`}
                   value={input.areaId}
                   disabled={Boolean(context.corridor)}
@@ -299,7 +434,9 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 >
                   <option value="all">
                     {context.name} ·{" "}
-                    {context.corridor ? uiCopy("Auckland to Rotorua pilot") : uiCopy("suggest bases for my birds")}
+                    {context.corridor
+                      ? uiCopy("Auckland to Rotorua pilot")
+                      : uiCopy("suggest bases for my birds")}
                   </option>
                   {tripAreas.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -309,7 +446,8 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 </select>
               </label>
               <label className="text-sm font-medium" htmlFor={`${id}-days`}>
-                {uiCopy("\n                Number of days\n                ")}<input
+                {uiCopy("\n                Number of days\n                ")}
+                <input
                   id={`${id}-days`}
                   className={`${field} mt-2`}
                   type="number"
@@ -328,7 +466,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="text-sm font-medium" htmlFor={`${id}-start`}>
-                {uiCopy("\n                Starting city / town\n                ")}<select
+                {uiCopy(
+                  "\n                Starting city / town\n                ",
+                )}
+                <select
                   id={`${id}-start`}
                   className={`${field} mt-2`}
                   value={input.startCity}
@@ -340,7 +481,9 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                     }))
                   }
                 >
-                  <option value="flexible">{uiCopy("Open to suggestions")}</option>
+                  <option value="flexible">
+                    {uiCopy("Open to suggestions")}
+                  </option>
                   {tripGateways.map((g) => (
                     <option key={g.id} value={g.id}>
                       {g.name}
@@ -349,7 +492,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 </select>
               </label>
               <label className="text-sm font-medium" htmlFor={`${id}-finish`}>
-                {uiCopy("\n                Departure city / town\n                ")}<select
+                {uiCopy(
+                  "\n                Departure city / town\n                ",
+                )}
+                <select
                   id={`${id}-finish`}
                   className={`${field} mt-2`}
                   value={input.endCity}
@@ -361,7 +507,9 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                     }))
                   }
                 >
-                  <option value="flexible">{uiCopy("Open to suggestions")}</option>
+                  <option value="flexible">
+                    {uiCopy("Open to suggestions")}
+                  </option>
                   {tripGateways.map((g) => (
                     <option key={g.id} value={g.id}>
                       {g.name}
@@ -374,7 +522,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
               className="block text-sm font-medium"
               htmlFor={`${id}-departure`}
             >
-              {uiCopy("\n              Departure / final day (optional)\n              ")}<input
+              {uiCopy(
+                "\n              Departure / final day (optional)\n              ",
+              )}
+              <input
                 id={`${id}-departure`}
                 type="date"
                 className={`${field} mt-2`}
@@ -390,7 +541,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
               className="block text-sm font-medium"
               htmlFor={`${id}-drive`}
             >
-              {uiCopy("\n              Preferred maximum driving per day\n              ")}<select
+              {uiCopy(
+                "\n              Preferred maximum driving per day\n              ",
+              )}
+              <select
                 id={`${id}-drive`}
                 className={`${field} mt-1`}
                 value={input.maxDrivingMinutes ?? ""}
@@ -406,20 +560,32 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 <option value="">{uiCopy("Open to suggestions")}</option>
                 {[120, 180, 240, 300].map((minutes) => (
                   <option key={minutes} value={minutes}>
-                    {minutes / 60} {uiCopy(" hours\n                  ")}</option>
+                    {minutes / 60} {uiCopy(" hours\n                  ")}
+                  </option>
                 ))}
               </select>
               <span className="mt-2 block text-xs leading-5 text-gray-600">
-                {uiCopy("\n                A comparison preference, not a routing guarantee. Published\n                times exclude breaks and local travel.\n              ")}</span>
+                {uiCopy(
+                  "\n                A comparison preference, not a routing guarantee. Published\n                times exclude breaks and local travel.\n              ",
+                )}
+              </span>
             </label>
             {input.departureDate && validTripInput(input) && (
               <p className="text-sm text-emerald-800">
-                {uiCopy("\n                First day: ")}{tripDayDate(input, 0)} {uiCopy(" · Last day:")}{" "}
-                {input.departureDate}{uiCopy(". Add flight and check-in times in your\n                private brief.\n              ")}</p>
+                {uiCopy("\n                First day: ")}
+                {tripDayDate(input, 0)} {uiCopy(" · Last day:")}{" "}
+                {input.departureDate}
+                {uiCopy(
+                  ". Add flight and check-in times in your\n                private brief.\n              ",
+                )}
+              </p>
             )}
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="text-sm font-medium" htmlFor={`${id}-adults`}>
-                {uiCopy("\n                Adults sharing costs\n                ")}<input
+                {uiCopy(
+                  "\n                Adults sharing costs\n                ",
+                )}
+                <input
                   id={`${id}-adults`}
                   className={`${field} mt-2`}
                   type="number"
@@ -436,7 +602,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 />
               </label>
               <label className="text-sm font-medium" htmlFor={`${id}-rooms`}>
-                {uiCopy("\n                Rooms / units per night\n                ")}<input
+                {uiCopy(
+                  "\n                Rooms / units per night\n                ",
+                )}
+                <input
                   id={`${id}-rooms`}
                   className={`${field} mt-2`}
                   type="number"
@@ -454,15 +623,23 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
               </label>
             </div>
             <p className="text-xs leading-6 text-gray-600">
-              {uiCopy("\n              Allowances stay per person. Room references divide across the\n              adults and units above. Child rates and exact room availability\n              need a quote.\n            ")}</p>
+              {uiCopy(
+                "\n              Allowances stay per person. Room references divide across the\n              adults and units above. Child rates and exact room availability\n              need a quote.\n            ",
+              )}
+            </p>
             <details className="rounded-2xl border border-emerald-100 p-4">
               <summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">
-                {uiCopy("\n                Your daily allowances · ")}{input.currency}
+                {uiCopy("\n                Your daily allowances · ")}
+                {input.currency}
               </summary>
               <p className="mt-2 text-xs leading-6 text-gray-600">
-                {uiCopy("\n                Per person. Accommodation is per night; food and transport per\n                day. Leave any amount open. These are your allowances, not\n                checked room or activity prices.\n              ")}</p>
+                {uiCopy(
+                  "\n                Per person. Accommodation is per night; food and transport per\n                day. Leave any amount open. These are your allowances, not\n                checked room or activity prices.\n              ",
+                )}
+              </p>
               <label className="mt-3 block text-sm" htmlFor={`${id}-currency`}>
-                {uiCopy("\n                Currency\n                ")}<select
+                {uiCopy("\n                Currency\n                ")}
+                <select
                   id={`${id}-currency`}
                   className={`${field} mt-1`}
                   value={input.currency}
@@ -474,7 +651,9 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                   }
                 >
                   {tripCurrencies.map((c) => (
-                    <option value={c} key={c}>{c}</option>
+                    <option value={c} key={c}>
+                      {c}
+                    </option>
                   ))}
                 </select>
               </label>
@@ -485,7 +664,8 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                     className="text-sm"
                     htmlFor={`${id}-allowance-${c.id}`}
                   >
-                    {uiCopy(c.label)} {uiCopy(" allowance (")}{input.currency})
+                    {uiCopy(c.label)} {uiCopy(" allowance (")}
+                    {input.currency})
                     <input
                       id={`${id}-allowance-${c.id}`}
                       type="number"
@@ -511,7 +691,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 className="mt-3 block text-sm"
                 htmlFor={`${id}-activity-basis`}
               >
-                {uiCopy("\n                Activities allowance is\n                ")}<select
+                {uiCopy(
+                  "\n                Activities allowance is\n                ",
+                )}
+                <select
                   id={`${id}-activity-basis`}
                   className={`${field} mt-1`}
                   value={input.activityBasis}
@@ -522,16 +705,24 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                     }))
                   }
                 >
-                  <option value="day">{uiCopy("Per day, across all activities")}</option>
-                  <option value="experience">{uiCopy("Per planned experience")}</option>
+                  <option value="day">
+                    {uiCopy("Per day, across all activities")}
+                  </option>
+                  <option value="experience">
+                    {uiCopy("Per planned experience")}
+                  </option>
                 </select>
               </label>
               <p className="mt-2 text-xs leading-6 text-gray-600">
-                {uiCopy("\n                Changing currency keeps the numbers; it does not convert them.\n                Per-experience allowances reserve for each planned outing,\n                including walks that may have no entry charge. Check actual\n                prices separately.\n              ")}</p>
+                {uiCopy(
+                  "\n                Changing currency keeps the numbers; it does not convert them.\n                Per-experience allowances reserve for each planned outing,\n                including walks that may have no entry charge. Check actual\n                prices separately.\n              ",
+                )}
+              </p>
             </details>
             <details className="rounded-2xl border border-emerald-100 p-4">
               <summary className="min-h-11 cursor-pointer font-semibold text-emerald-900">
-                {uiCopy("\n                Your bird choices · ")}{input.birdIds.length}
+                {uiCopy("\n                Your bird choices · ")}
+                {input.birdIds.length}
               </summary>
               <div className="mt-3">
                 <NewZealandBirdPicker
@@ -542,7 +733,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
             </details>
             <fieldset>
               <legend className="text-sm font-semibold text-emerald-950">
-                {uiCopy("\n                What else belongs in your trip?\n              ")}</legend>
+                {uiCopy(
+                  "\n                What else belongs in your trip?\n              ",
+                )}
+              </legend>
               <div className="mt-2 flex flex-wrap gap-2">
                 {tripCategories
                   .filter(
@@ -582,25 +776,53 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                   }))
                 }
               />
-              {uiCopy("\n              Include sanctuary and managed conservation encounters, labelled\n              separately from wild outings\n            ")}</label>
+              {uiCopy(
+                "\n              Include sanctuary and managed conservation encounters, labelled\n              separately from wild outings\n            ",
+              )}
+            </label>
             <button
               type="button"
               className={`${button} bg-emerald-800 text-white hover:bg-emerald-900`}
               disabled={!validTripInput(input)}
               onClick={generate}
             >
-              {draft ? uiCopy("Update my suggestions") : uiCopy("Suggest my itineraries")}
+              {draft
+                ? uiCopy("Update my suggestions")
+                : uiCopy("Suggest my itineraries")}
             </button>
-            <p className="text-xs leading-6 text-gray-600">{uiCopy("Draft only. Check access, travel times and availability. Nothing is booked.")}</p><details className="text-xs leading-6 text-gray-600"><summary className="min-h-11 cursor-pointer font-medium">{uiCopy("How this draft is built")}</summary><p className="text-xs leading-6 text-gray-600">
-              {uiCopy("\n              A planning draft built from documented bird/site links, not live\n              sightings.")}{" "}
-              {context.corridor ? uiCopy("This pilot runs Auckland to Hamilton to Rotorua in 3 to 7 days. Short transfers allow one reviewed local outing on arrival. Final city is not a confirmed flight connection.") : uiCopy("Transfers get their own day.")}{" "}
-              {uiCopy("\n              Road times, within-base travel, track access, season, prices and\n              availability need checking. Longer outings may replace that day’s\n              birding.\n            ")}</p></details>
+            <p className="text-xs leading-6 text-gray-600">
+              {uiCopy(
+                "Draft only. Check access, travel times and availability. Nothing is booked.",
+              )}
+            </p>
+            <details className="text-xs leading-6 text-gray-600">
+              <summary className="min-h-11 cursor-pointer font-medium">
+                {uiCopy("How this draft is built")}
+              </summary>
+              <p className="text-xs leading-6 text-gray-600">
+                {uiCopy(
+                  "\n              A planning draft built from documented bird/site links, not live\n              sightings.",
+                )}{" "}
+                {context.corridor
+                  ? uiCopy(
+                      "This pilot runs Auckland to Hamilton to Rotorua in 3 to 7 days. Short transfers allow one reviewed local outing on arrival. Final city is not a confirmed flight connection.",
+                    )
+                  : uiCopy("Transfers get their own day.")}{" "}
+                {uiCopy(
+                  "\n              Road times, within-base travel, track access, season, prices and\n              availability need checking. Longer outings may replace that day’s\n              birding.\n            ",
+                )}
+              </p>
+            </details>
           </div>
           <div className="rounded-3xl border border-emerald-200 bg-white p-5 text-sm leading-6">
             <h3 className="font-semibold text-emerald-950">
-              {uiCopy("\n              Your route on the map\n            ")}</h3>
+              {uiCopy("\n              Your route on the map\n            ")}
+            </h3>
             <p className="mt-2">
-              {uiCopy("\n              Planning bases and your itinerary share the explorer above. The\n              itinerary layer shows base order, not roads or confirmed travel\n              times.\n            ")}</p>
+              {uiCopy(
+                "\n              Planning bases and your itinerary share the explorer above. The\n              itinerary layer shows base order, not roads or confirmed travel\n              times.\n            ",
+              )}
+            </p>
             <a
               onClick={() => {
                 if (context.corridor)
@@ -613,7 +835,10 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
               href={context.mapAnchor}
               className="mt-3 inline-flex min-h-11 items-center rounded font-semibold text-emerald-800 underline"
             >
-              {uiCopy("\n              View your itinerary on the map\n            ")}</a>
+              {uiCopy(
+                "\n              View your itinerary on the map\n            ",
+              )}
+            </a>
           </div>
         </div>
         <p role="status" className="mt-5 text-sm leading-6 text-emerald-900">
@@ -649,13 +874,25 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                           {uiCopy(option.label)}
                         </span>
                         <span className="mt-2 block text-xs leading-6">
-                          {uiCopy("\n                          Known driving references:")}{" "}
+                          {uiCopy(
+                            "\n                          Known driving references:",
+                          )}{" "}
                           {Math.floor(pace.knownDrivingMinutes / 60)} h{" "}
                           {pace.knownDrivingMinutes % 60} {uiCopy(" min ·")}{" "}
-                          {pace.unknownTransfers} {uiCopy(" transfers without reviewed\n                          times\n                          ")}{pace.abovePreference
-                            ? uiCopy(" · {count} above your driving preference",{count:pace.abovePreference})
+                          {pace.unknownTransfers}{" "}
+                          {uiCopy(
+                            " transfers without reviewed\n                          times\n                          ",
+                          )}
+                          {pace.abovePreference
+                            ? uiCopy(
+                                " · {count} above your driving preference",
+                                { count: pace.abovePreference },
+                              )
                             : ""}
-                          {uiCopy("\n                          . Local travel and breaks additional.\n                        ")}</span>
+                          {uiCopy(
+                            "\n                          . Local travel and breaks additional.\n                        ",
+                          )}
+                        </span>
                         <span className="mt-2 block text-xs leading-6">
                           {new Set(option.draft.days.map((d) => d.baseId)).size}{" "}
                           {uiCopy("\n                          bases ·")}{" "}
@@ -665,9 +902,15 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                           }{" "}
                           transfer{" "}
                           {option.draft.days.filter((d) => d.transferFrom)
-                            .length === 1 ? uiCopy("day") : uiCopy("days")}{" "}
+                            .length === 1
+                            ? uiCopy("day")
+                            : uiCopy("days")}{" "}
                           · {c.covered.length}/
-                          {option.draft.input.birdIds.length} {uiCopy(" bird wishes linked\n                        ")}</span>
+                          {option.draft.input.birdIds.length}{" "}
+                          {uiCopy(
+                            " bird wishes linked\n                        ",
+                          )}
+                        </span>
                       </button>
                     );
                   })}
@@ -675,12 +918,18 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
               )}
               {alternatives.length === 1 && (
                 <p className="text-sm text-gray-600">
-                  {uiCopy("\n                  One distinct route fits this set of choices. More days, a\n                  wider area or different interests may produce more\n                  alternatives.\n                ")}</p>
+                  {uiCopy(
+                    "\n                  One distinct route fits this set of choices. More days, a\n                  wider area or different interests may produce more\n                  alternatives.\n                ",
+                  )}
+                </p>
               )}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <h3 className="text-2xl font-medium text-emerald-950">
-                    {uiCopy("Your {days} day draft",{days:draft.input.days})}</h3>
+                    {uiCopy("Your {days} day draft", {
+                      days: draft.input.days,
+                    })}
+                  </h3>
                   <p className="mt-2 text-sm text-gray-600">
                     {draft.input.days - 1} overnight
                     {draft.input.days === 2 ? "" : "s"} ·{" "}
@@ -691,13 +940,17 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <a
-                    href={onSave?`/new-zealand/${context.id}${context.mapAnchor}`:context.mapAnchor}
-                    target={onSave?"_blank":undefined}
-                    rel={onSave?"noreferrer":undefined}
+                    href={
+                      onSave
+                        ? `/new-zealand/${context.id}${context.mapAnchor}`
+                        : context.mapAnchor
+                    }
+                    target={onSave ? "_blank" : undefined}
+                    rel={onSave ? "noreferrer" : undefined}
                     className={button}
                     aria-disabled={dirty}
                     onClick={(event) => {
-                      if(onSave)return;
+                      if (onSave) return;
                       if (dirty) {
                         event.preventDefault();
                         return;
@@ -713,23 +966,39 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                       });
                     }}
                   >
-                    {onSave ? uiCopy("Review the island map") : uiCopy("\n                    Preview your journey step by step\n                  ")}</a>
+                    {onSave
+                      ? uiCopy("Review the island map")
+                      : uiCopy(
+                          "\n                    Preview your journey step by step\n                  ",
+                        )}
+                  </a>
                   <button
                     type="button"
                     className={button}
-                    disabled={dirty||privateBusy}
+                    disabled={dirty || privateBusy}
                     onClick={carry}
                   >
-                    {onSave ? uiCopy(privateBusy?"Saving…":"Save editable itinerary") : uiCopy("\n                    Review and save in My Trips\n                  ")}</button>
+                    {onSave
+                      ? uiCopy(
+                          privateBusy ? "Saving…" : "Save editable itinerary",
+                        )
+                      : uiCopy(
+                          "\n                    Review and save in My Trips\n                  ",
+                        )}
+                  </button>
                 </div>
               </div>
               <p className="text-sm leading-6 text-emerald-900">
                 {uiCopy("\n                Start:")}{" "}
-                {gatewayById.get(draft.input.startCity)?.name || uiCopy("Open to suggestions")}{" "}
+                {gatewayById.get(draft.input.startCity)?.name ||
+                  uiCopy("Open to suggestions")}{" "}
                 {uiCopy("\n                · Finish:")}{" "}
-                {gatewayById.get(draft.input.endCity)?.name || uiCopy("Open to suggestions")}
+                {gatewayById.get(draft.input.endCity)?.name ||
+                  uiCopy("Open to suggestions")}
                 {draft.input.departureDate
-                  ? uiCopy(" · Depart {date}",{date:draft.input.departureDate})
+                  ? uiCopy(" · Depart {date}", {
+                      date: draft.input.departureDate,
+                    })
                   : ""}
                 .
               </p>
@@ -737,48 +1006,141 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
               <TripPriceReview draft={draft} />
               {roads && roads.total > 0 && (
                 <p className="text-sm leading-6 text-emerald-900">
-                  {roads.total} transfer {roads.total === 1 ? uiCopy("day") : uiCopy("days")} ·{" "}
+                  {roads.total} transfer{" "}
+                  {roads.total === 1 ? uiCopy("day") : uiCopy("days")} ·{" "}
                   {roads.reviewed} {uiCopy(" with published road references ·")}{" "}
-                  {roads.unknown} {uiCopy(" awaiting road-time review\n                  ")}{roads.long ? uiCopy(" · {count} long driving references",{count:roads.long}) : ""}
-                  {uiCopy("\n                  . References do not confirm an entire route's feasibility.\n                ")}</p>
+                  {roads.unknown}{" "}
+                  {uiCopy(" awaiting road-time review\n                  ")}
+                  {roads.long
+                    ? uiCopy(" · {count} long driving references", {
+                        count: roads.long,
+                      })
+                    : ""}
+                  {uiCopy(
+                    "\n                  . References do not confirm an entire route's feasibility.\n                ",
+                  )}
+                </p>
               )}
               {dirty && (
                 <p
                   role="alert"
                   className="rounded-xl bg-amber-50 p-4 text-sm text-amber-950"
                 >
-                  {uiCopy("\n                  Your choices changed. Rebuild before carrying this itinerary\n                  to your private brief.\n                ")}</p>
+                  {uiCopy(
+                    "\n                  Your choices changed. Rebuild before carrying this itinerary\n                  to your private brief.\n                ",
+                  )}
+                </p>
               )}
               <p className="text-sm leading-6 text-emerald-900">
-                {coverage!.covered.length} of {draft.input.birdIds.length} {uiCopy(" bird\n                wishes linked to scheduled, sourced opportunities. This is\n                coverage of your choices, not the chance of a sighting.\n              ")}</p>
+                {coverage!.covered.length} of {draft.input.birdIds.length}{" "}
+                {uiCopy(
+                  " bird\n                wishes linked to scheduled, sourced opportunities. This is\n                coverage of your choices, not the chance of a sighting.\n              ",
+                )}
+              </p>
               {coverage!.unmatched.length > 0 && (
                 <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
                   <h4 className="font-semibold text-amber-950">
-                    {uiCopy("\n                    Still needs a suitable site or more days\n                  ")}</h4>
+                    {uiCopy(
+                      "\n                    Still needs a suitable site or more days\n                  ",
+                    )}
+                  </h4>
                   <p className="mt-2 text-sm leading-6">
-                    {coverage!.unmatched.map(nzBirdName).join(", ")}{uiCopy(". These\n                    birds have no scheduled sourced stop in this draft. They may\n                    need another region, season, guide or more catalogue\n                    research.\n                  ")}</p>
+                    {coverage!.unmatched.map(nzBirdName).join(", ")}
+                    {uiCopy(
+                      ". These\n                    birds have no scheduled sourced stop in this draft. They may\n                    need another region, season, guide or more catalogue\n                    research.\n                  ",
+                    )}
+                  </p>
                 </div>
               )}
-              <section id={`${id}-days`} className="scroll-mt-48 space-y-4" aria-label={uiCopy("Edit itinerary days")}>
-              <div className="flex flex-wrap items-end gap-4 rounded-xl bg-white p-4"><label className="text-sm">{uiCopy("Day to edit")}<select aria-label={uiCopy("Day to edit")} className={field} value={Math.min(activeDay,draft.days.length-1)} onChange={event=>{setActiveDay(Number(event.target.value));setShowAllDays(false)}}>{draft.days.map((day,index)=><option key={index} value={index}>{uiCopy("Day")} {index+1} · {tripAreaById.get(day.baseId)?.name}</option>)}</select></label><button type="button" className={button} aria-pressed={showAllDays} onClick={()=>setShowAllDays(value=>!value)}>{uiCopy(showAllDays?"Show one day":"Show all days")}</button><button type="button" className={button} disabled={activeDay===0} onClick={()=>{setShowAllDays(false);setActiveDay(value=>value-1)}}>{uiCopy("Previous day")}</button><button type="button" className={button} disabled={activeDay>=draft.days.length-1} onClick={()=>{setShowAllDays(false);setActiveDay(value=>value+1)}}>{uiCopy("Next day")}</button></div>
-              <div className="grid items-start gap-4 xl:grid-cols-2">
-                {draft.days.map((_, index) => (showAllDays||index===Math.min(activeDay,draft.days.length-1))&&(
-                  <TripDayCard
-                    key={index}
-                    id={id}
-                    draft={draft}
-                    index={index}
-                    onChange={(patch) => changeDay(index, patch)}
-                  />
-                ))}
-              </div></section>
+              <section
+                id={`${id}-days`}
+                className="scroll-mt-48 space-y-4"
+                aria-label={uiCopy("Edit itinerary days")}
+              >
+                <div className="flex flex-wrap items-end gap-4 rounded-xl bg-white p-4">
+                  <label className="text-sm">
+                    {uiCopy("Day to edit")}
+                    <select
+                      aria-label={uiCopy("Day to edit")}
+                      className={field}
+                      value={Math.min(activeDay, draft.days.length - 1)}
+                      onChange={(event) => {
+                        setActiveDay(Number(event.target.value));
+                        setShowAllDays(false);
+                      }}
+                    >
+                      {draft.days.map((day, index) => (
+                        <option key={index} value={index}>
+                          {uiCopy("Day")} {index + 1} ·{" "}
+                          {tripAreaById.get(day.baseId)?.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <button
+                    type="button"
+                    className={button}
+                    aria-pressed={showAllDays}
+                    onClick={() => setShowAllDays((value) => !value)}
+                  >
+                    {uiCopy(showAllDays ? "Show one day" : "Show all days")}
+                  </button>
+                  <button
+                    type="button"
+                    className={button}
+                    disabled={activeDay === 0}
+                    onClick={() => {
+                      setShowAllDays(false);
+                      setActiveDay((value) => value - 1);
+                    }}
+                  >
+                    {uiCopy("Previous day")}
+                  </button>
+                  <button
+                    type="button"
+                    className={button}
+                    disabled={activeDay >= draft.days.length - 1}
+                    onClick={() => {
+                      setShowAllDays(false);
+                      setActiveDay((value) => value + 1);
+                    }}
+                  >
+                    {uiCopy("Next day")}
+                  </button>
+                </div>
+                <div className="grid items-start gap-4 xl:grid-cols-2">
+                  {draft.days.map(
+                    (_, index) =>
+                      (showAllDays ||
+                        index ===
+                          Math.min(activeDay, draft.days.length - 1)) && (
+                        <TripDayCard
+                          key={index}
+                          id={id}
+                          draft={draft}
+                          index={index}
+                          onChange={(patch) => changeDay(index, patch)}
+                        />
+                      ),
+                  )}
+                </div>
+              </section>
               <details className="rounded-2xl border border-emerald-200 bg-white p-4">
                 <summary className="min-h-11 cursor-pointer font-medium text-emerald-900">
-                  {uiCopy("\n                  Copy or review the complete itinerary text\n                ")}</summary>
+                  {uiCopy(
+                    "\n                  Copy or review the complete itinerary text\n                ",
+                  )}
+                </summary>
                 <textarea
                   aria-label={uiCopy("Itinerary text to copy")}
                   readOnly
-                  value={dirty ? uiCopy("Your choices changed. Rebuild before copying this itinerary.") : tripDraftText(draft)}
+                  value={
+                    dirty
+                      ? uiCopy(
+                          "Your choices changed. Rebuild before copying this itinerary.",
+                        )
+                      : tripDraftText(draft)
+                  }
                   rows={10}
                   className={`${field} mt-3 font-mono text-xs`}
                 />
@@ -788,18 +1150,45 @@ function IslandPlannerForm({initialDraft,onSave}:{initialDraft?:TripDraft;onSave
                   onClick={copy}
                   disabled={dirty}
                 >
-                  {uiCopy("\n                  Copy itinerary\n                ")}</button>
+                  {uiCopy(
+                    "\n                  Copy itinerary\n                ",
+                  )}
+                </button>
               </details>
               <p className="text-xs leading-6 text-gray-600">
-                {uiCopy("\n                Your choices, date and allowances use this tab for up to one\n                day; they are not sent to booking platforms. In My Trips, choose\n                Add Itinerary to Notes, review and Save My Draft. Saving and\n                sharing are separate steps. This does not book travel.\n              ")}</p>
-              <details aria-label={uiCopy("From draft to personal quote")} className="rounded-xl border border-emerald-200 bg-white p-4 text-sm leading-6">
-                <summary className="min-h-11 cursor-pointer font-semibold text-emerald-950">{uiCopy("From your draft to a personal quote")}</summary>
+                {uiCopy(
+                  "\n                Your choices, date and allowances use this tab for up to one\n                day; they are not sent to booking platforms. In My Trips, choose\n                Add Itinerary to Notes, review and Save My Draft. Saving and\n                sharing are separate steps. This does not book travel.\n              ",
+                )}
+              </p>
+              <details
+                aria-label={uiCopy("From draft to personal quote")}
+                className="rounded-xl border border-emerald-200 bg-white p-4 text-sm leading-6"
+              >
+                <summary className="min-h-11 cursor-pointer font-semibold text-emerald-950">
+                  {uiCopy("From your draft to a personal quote")}
+                </summary>
                 <ol className="mt-2 list-decimal space-y-2 pl-5">
-                  <li>{uiCopy("Review your itinerary and carry it to your private brief in My Trips.")}</li>
-                  <li>{uiCopy("Save your draft, then submit an enquiry when you are ready for a personal quote.")}</li>
-                  <li>{uiCopy("Review the proposed services, complete price, availability and terms before accepting any arrangement.")}</li>
+                  <li>
+                    {uiCopy(
+                      "Review your itinerary and carry it to your private brief in My Trips.",
+                    )}
+                  </li>
+                  <li>
+                    {uiCopy(
+                      "Save your draft, then submit an enquiry when you are ready for a personal quote.",
+                    )}
+                  </li>
+                  <li>
+                    {uiCopy(
+                      "Review the proposed services, complete price, availability and terms before accepting any arrangement.",
+                    )}
+                  </li>
                 </ol>
-                <p className="mt-2">{uiCopy("Your allowances are your spending preferences. Published reference prices are dated comparisons. A saved draft or submitted enquiry is not a reservation or a confirmed booking.")}</p>
+                <p className="mt-2">
+                  {uiCopy(
+                    "Your allowances are your spending preferences. Published reference prices are dated comparisons. A saved draft or submitted enquiry is not a reservation or a confirmed booking.",
+                  )}
+                </p>
               </details>
             </div>
           )}
