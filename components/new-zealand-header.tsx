@@ -129,7 +129,7 @@ export function NewZealandHeader({
           regionId={selected?.regionId}
           placeId={selected?.placeId}
         />
-        <div className="relative mx-auto flex max-w-7xl items-start justify-between gap-4 px-3 pt-2 sm:px-6 lg:px-8">
+        <div className="relative mx-auto flex max-w-7xl flex-wrap items-start justify-between gap-4 px-3 pt-2 sm:px-6 lg:px-8">
           <BrandMark
             country={activeCountry ?? "global"}
             priority

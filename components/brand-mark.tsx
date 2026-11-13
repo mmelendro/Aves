@@ -64,7 +64,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
   const subtitleHref = labelHref || location?.href || (displayCountry ? `/${displayCountry}` : homeHref)
 
   return (
-    <span onPointerEnter={()=>setFlying(true)} onPointerLeave={()=>{setFlying(false);setFrame(0)}} onFocus={()=>setFlying(true)} onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget)){setFlying(false);setFrame(0)}}} className={cn("relative inline-flex shrink-0 items-center pb-4", isFooter ? "gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
+    <span onPointerEnter={()=>setFlying(true)} onPointerLeave={()=>{setFlying(false);setFrame(0)}} onFocus={()=>setFlying(true)} onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget)){setFlying(false);setFrame(0)}}} className={cn("relative inline-flex min-w-0 max-w-full items-center pb-4", isFooter ? "gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
       <svg aria-hidden="true" focusable="false" viewBox="0 0 240 40" fill="none" className={cn("pointer-events-none absolute inset-x-0 bottom-0 h-6 w-full", isFooter && "h-9", unifiedHeaderContour && "invisible", inverse ? "text-emerald-200" : "text-emerald-600")}>
         <BrandLandscape {...context} />
       </svg>
@@ -73,7 +73,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
           <BrandBird country={active.key==="base"?context.country:activeCountry} regionId={active.key==="base"?context.regionId:active.key.split("/").slice(1).join("/")} placeId={active.key==="base"?context.placeId:undefined} alt="" size={isFooter?80:48} priority={priority} className={cn("block object-contain",isFooter?"h-20 w-20":"h-11 w-11 sm:h-12 sm:w-12")} />
         </span>
       </Link>
-      <span className={cn("relative z-10 block max-w-[9rem] rounded-sm leading-none sm:max-w-[13rem]", unifiedHeaderContour && !inverse && "bg-white")}>
+      <span className={cn("relative z-10 block min-w-0 max-w-[9rem] rounded-sm leading-none sm:max-w-[13rem]", unifiedHeaderContour && !inverse && "bg-white")}>
         <Link href={homeHref} aria-label="AVES home" data-brand-wordmark="true" className={cn("block w-fit rounded-sm font-sans font-medium tracking-[0.14em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", isFooter ? "text-[2rem]" : "text-2xl sm:text-[1.75rem]", inverse ? "text-white focus-visible:outline-emerald-300" : "text-emerald-950 focus-visible:outline-emerald-700")}>AVES</Link>
         {subtitle && <CountryLink href={subtitleHref} aria-label={label || `AVES ${subtitle} home`} className={cn("pointer-events-auto relative z-10 mt-1.5 flex min-h-6 min-w-6 items-center rounded-sm font-sans font-medium leading-snug tracking-[0.06em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4", isFooter ? "text-xs" : "text-[10px] sm:text-[11px]", inverse ? "text-emerald-100 focus-visible:outline-emerald-300" : "text-emerald-800 focus-visible:outline-emerald-700")}>{subtitle}</CountryLink>}
         {location?.regional && !isFooter && <CountryLink href={location.countryHref} aria-label={`Back to ${location.countryName}`} className={cn("flex min-h-6 items-center text-[10px] leading-snug underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",inverse?"text-emerald-100":"text-emerald-700")}>{location.countryName}</CountryLink>}

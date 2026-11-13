@@ -53,14 +53,14 @@ export default function HomePage() {
           </div>
         </section>
         <section aria-labelledby="personal-journey-heading" className="bg-stone-50/70 py-14 sm:py-20">
-          <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
             <figure className="min-w-0">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-emerald-50">
                 <Image src="/images/martin-melendro.jpg" alt="Martín Melendro looking through binoculars in a mountain landscape" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
               </div>
               <figcaption className="mt-3 text-xs text-gray-600">Martín Melendro · Developing AVES</figcaption>
             </figure>
-            <div>
+            <div className="min-w-0 [overflow-wrap:anywhere]">
               <p className="mb-3 text-sm font-medium uppercase tracking-widest text-emerald-800">Personal from the beginning</p>
               <h2 id="personal-journey-heading" className="text-balance text-3xl font-medium leading-tight tracking-tight sm:text-4xl">The birds bring you here.<br />The whole journey matters.</h2>
               <p className="mt-5 text-lg leading-relaxed text-gray-600">A morning in the forest, a meal worth lingering over, a place you’re glad to return to. Tell us what makes a trip feel right for you.</p>

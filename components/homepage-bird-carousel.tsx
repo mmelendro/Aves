@@ -57,7 +57,7 @@ type IconControlProps = ButtonHTMLAttributes<HTMLButtonElement> & { label: strin
 function IconControl({ label, children, className, buttonClassName, tooltipSide = "bottom", buttonRef, ...props }: IconControlProps) {
   return <span className={cn("group/control relative inline-flex", className)}>
     <CarouselButton buttonRef={buttonRef} tone="overlay" aria-label={label} className={buttonClassName} {...props}>{children}</CarouselButton>
-    <span aria-hidden="true" className={cn("pointer-events-none absolute z-30 w-max max-w-40 rounded-md bg-slate-950/95 px-2.5 py-1.5 text-center text-xs leading-4 text-white opacity-0 shadow-lg transition-opacity group-hover/control:opacity-100 group-focus-within/control:opacity-100 motion-reduce:transition-none", tooltipSide === "right" ? "left-full top-1/2 ml-2 -translate-y-1/2" : tooltipSide === "left" ? "right-full top-1/2 mr-2 -translate-y-1/2" : "right-0 top-full mt-2")}>{label}</span>
+    <span aria-hidden="true" className={cn("pointer-events-none absolute z-30 hidden w-max max-w-[min(10rem,calc(100vw-2rem))] rounded-md bg-slate-950/95 px-2.5 py-1.5 text-center text-xs leading-4 text-white opacity-0 shadow-lg transition-opacity group-hover/control:block group-focus-within/control:block group-hover/control:opacity-100 group-focus-within/control:opacity-100 motion-reduce:transition-none", tooltipSide === "right" ? "left-full top-1/2 ml-2 -translate-y-1/2" : tooltipSide === "left" ? "right-full top-1/2 mr-2 -translate-y-1/2" : "right-0 top-full mt-2")}>{label}</span>
   </span>
 }
 
