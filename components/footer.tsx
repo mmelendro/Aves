@@ -9,6 +9,7 @@ const exploreLinks = [
   { href: "/species", label: "Colombian Birdlife" },
   { href: "/blog", label: "Birding Blog" },
   { href: "/resources", label: "Birding Resources" },
+  { href: "/terrain", label: "3D Landscape Preview" },
   { href: "/travel-tips", label: "Travel Tips" },
 ]
 
@@ -24,7 +25,7 @@ const planningLinks = [
 const aboutLinks = [
   { href: "/about", label: "About AVES" },
   { href: "/team", label: "Our Team" },
-  { href: "/about/partners", label: "Our Partners" },
+  { href: "/about/partners", label: "Places and Organisations" },
   { href: "/about/b-corp", label: "Our B Corp Journey" },
   { href: "/conservation", label: "Responsible Birding" },
 ]

@@ -19,6 +19,7 @@ export type PublicPageGroup = {
 };
 
 export const publicPageGroups: PublicPageGroup[] = [
+  {id:"terrain",country:null,title:"Landscape preview",pages:[{href:"/terrain",label:"Optional 3D landscape preview"}]},
   {
     id: "new-zealand",
     country: "new-zealand",
@@ -96,7 +97,7 @@ export const publicPageGroups: PublicPageGroup[] = [
     pages: [
       { href: "/about", label: "About AVES Colombia" },
       { href: "/team", label: "Our Team" },
-      { href: "/about/partners", label: "Our Partners" },
+      { href: "/about/partners", label: "Places and Organisations" },
       { href: "/about/b-corp", label: "Our B Corp Journey" },
       { href: "/conservation", label: "Responsible Birding" },
     ],

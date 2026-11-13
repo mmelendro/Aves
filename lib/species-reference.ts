@@ -110,6 +110,11 @@ const indexed = Object.fromEntries(
   }),
 ) as Record<SpeciesCountry, ReferenceResult[]>;
 
+/** Exact stable identity lookup for owner records, never a fuzzy name join. */
+export function getReferenceSpecies(country:SpeciesCountry,id:string){
+  return indexed[country].find(bird=>bird.id===id)
+}
+
 /** Bounded anonymous reference search. No saved wishes, accounts or live sightings. */
 export function searchSpeciesReference(
   country: SpeciesCountry,
