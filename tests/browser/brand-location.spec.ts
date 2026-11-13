@@ -13,7 +13,9 @@ test('regional identity retains a country return link and fits a narrow header',
   await reject.scrollIntoViewIfNeeded()
   const hit=await reject.evaluate(element=>{const box=element.getBoundingClientRect(),x=box.x+box.width/2,y=box.y+box.height/2,target=document.elementFromPoint(x,y);return {correct:target===element||element.contains(target),target:target?.textContent,box:box.toJSON(),viewport:{width:innerWidth,height:innerHeight,scale:visualViewport?.scale,top:visualViewport?.offsetTop},scroll:scrollY}})
   expect(hit,JSON.stringify(hit)).toMatchObject({correct:true})
+  console.info('Phone consent hit test:',JSON.stringify(hit))
   await reject.tap()
+  await expect(page.locator('[data-cookie-banner]')).toHaveCount(0)
  }else{
   await declineOptionalCookies(page)
  }
