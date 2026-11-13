@@ -8,7 +8,7 @@ import {getReferenceSpecies,isSpeciesCountry} from "./species-reference"
 import {countryRegionOptions,type TripCountry} from "@/content/trip-options"
 import type {SupabaseClient} from "@supabase/supabase-js"
 const unavailable=()=>new AccountError(503,"Your bird album could not be confirmed. Keep your edits and retry.")
-async function readAlbum(client:SupabaseClient,id:string){
+export async function readAlbum(client:SupabaseClient,id:string){
  const {data,error}=await client.from("trip_bird_albums").select("revision,data").eq("plan_id",id).maybeSingle()
  if(error)throw unavailable()
  if(!data)return {revision:0,data:emptyAlbum()}
