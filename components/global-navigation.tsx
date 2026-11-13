@@ -8,8 +8,7 @@ import { useColombiaHomeCopy } from "@/components/colombia-home-language";
  */
 import { BrandMark, type BrandCountry } from "@/components/brand-mark";
 import Link from "next/link";
-import { enquiryHref } from "@/lib/enquiry-entry";
-import { useHeaderLandscape } from "./header-landscape-context";
+import { useContextualEnquiryHref } from "./contextual-enquiry-link";
 import { ArrowRight } from "lucide-react";
 import { destinations } from "@/content/destinations";
 import { NewZealandHeader } from "@/components/new-zealand-header";
@@ -38,16 +37,7 @@ export function GlobalFooter({
   accountHref?: string;
 } = {}) {
   const localizeHome = useColombiaHomeCopy();
-  const { selection } = useHeaderLandscape();
-  // The current map scope takes priority over the page's initial country.
-  const contactCountry = selection ? (selection.country === "global" ? undefined : selection.country) : country && country !== "global" ? country : undefined;
-  const contactHref =
-    contactCountry && contactCountry !== "global"
-      ? enquiryHref(
-          contactCountry,
-          selection?.country === contactCountry ? selection.regionId : "",
-        )
-      : "/contact?topic=general#inquiry";
+  const contactHref = useContextualEnquiryHref(country && country !== "global" ? country : undefined);
   const tree = (
     <footer
       className={`${transparent ? "bg-gray-900/90 backdrop-blur-lg" : "bg-gray-900"} py-12 text-gray-300`}

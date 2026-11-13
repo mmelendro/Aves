@@ -11,6 +11,7 @@ import { ArrowRight, Bird, Compass, MessageCircle, NotebookPen } from "lucide-re
 import { GlobalFooter, GlobalHeader } from "@/components/global-navigation"
 import WorldDestinationMap from "@/components/world-destination-map"
 import HomepageDestinationExplorer from "@/components/homepage-destination-explorer"
+import { ContextualEnquiryLink } from "@/components/contextual-enquiry-link"
 import BirdsBrandWord from "@/components/birds-brand-word"
 import { canonicalUrl } from "@/lib/site-path"
 
@@ -65,7 +66,7 @@ export default function HomePage() {
               <p className="mt-5 text-lg leading-relaxed text-gray-600">A morning in the forest, a meal worth lingering over, a place you’re glad to return to. Tell us what makes a trip feel right for you.</p>
               <p className="mt-4 leading-7 text-gray-600">Martín is developing AVES around a love of birds, nature and thoughtful travel. Planning starts with a personal conversation about your interests, comfort and pace, with arrangements agreed before you commit.</p>
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <a href="/australia/contact?topic=general#inquiry" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-emerald-700 px-6 py-3 font-medium text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Start a conversation<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+                <ContextualEnquiryLink className="inline-flex min-h-12 items-center gap-2 rounded-full bg-emerald-700 px-6 py-3 font-medium text-white hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Start a conversation<ArrowRight className="h-4 w-4" aria-hidden="true" /></ContextualEnquiryLink>
                 <Link href="/team#martin-melendro" className="inline-flex min-h-11 items-center text-sm font-medium text-emerald-800 underline underline-offset-4">Meet Martín</Link>
               </div>
             </div>

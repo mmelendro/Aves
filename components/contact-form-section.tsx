@@ -6,6 +6,8 @@
  */
 "use client"
 import { useReadOnlyPreview } from "@/components/preview-mode"
+import { useUnsavedChanges } from "@/components/account/unsaved-changes"
+import { ContextualEnquiryLink } from "@/components/contextual-enquiry-link"
 
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import React, { useEffect, useRef, useState } from "react"
@@ -53,6 +55,8 @@ export function ContactFormSection({
   const [feedback, setFeedback] = useState("")
   const [updates, setUpdates] = useState(false)
   const [website, setWebsite] = useState("")
+  const [dirty, setDirty] = useState(false)
+  useUnsavedChanges(dirty, "You have an unfinished enquiry. Leave and discard your answers?")
   // Refs update immediately: the lock catches double-clicks before React re-renders.
   // An unchanged retry reuses its request key, allowing the API to avoid duplicate inquiries.
   const inFlight = useRef(false)
@@ -93,14 +97,17 @@ export function ContactFormSection({
   }, [])
 
   const handleInputChange = (field: string, value: string) => {
+    setDirty(true)
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const toggleTourType = (tourType: string) => {
+    setDirty(true)
     setSelectedTourTypes((prev) => (prev.includes(tourType) ? prev.filter((t) => t !== tourType) : [...prev, tourType]))
   }
 
   const toggleRegion = (region: string) => {
+    setDirty(true)
     setSelectedRegions((prev) => (prev.includes(region) ? prev.filter((r) => r !== region) : [...prev, region]))
   }
 
@@ -127,6 +134,7 @@ export function ContactFormSection({
       if (result?.success !== true || result?.status !== "stored" || result?.intent !== "inquiry" || result?.country !== "colombia") {
         throw new Error("We couldn't confirm that your inquiry was saved. Please try again.")
       }
+      setDirty(false)
       setSubmitStatus("success")
     } catch (error) {
       setSubmitStatus("error")
@@ -183,7 +191,7 @@ export function ContactFormSection({
                     The more details you provide, the better we can customize your Colombian birding experience.
                   </p>
 
-                  <form className="space-y-6" onSubmit={handleSubmit}>
+                  <form className="space-y-6" onSubmit={handleSubmit} onChange={() => setDirty(true)}>
                     {/* Personal Information */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
@@ -488,9 +496,9 @@ export function ContactFormSection({
                       <Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Have a question?</div>
-                        <a href="/australia/contact?topic=general#inquiry" className="inline-flex min-h-11 items-center text-emerald-600 hover:text-emerald-700 underline">
+                        <ContextualEnquiryLink country="colombia" className="inline-flex min-h-11 items-center text-emerald-600 hover:text-emerald-700 underline">
                           Send AVES a message
-                        </a>
+                        </ContextualEnquiryLink>
                         <div className="text-sm text-gray-600">Contact AVES about your inquiry or proposal</div>
                       </div>
                     </div>

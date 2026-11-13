@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer"
 import { ContactFormSection } from "@/components/contact-form-section"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { ContextualEnquiryLink } from "@/components/contextual-enquiry-link"
 import { Mail, MapPin, Clock } from "lucide-react"
 
 export const metadata: Metadata = { title: "Plan My Trip", alternates: { canonical: canonicalUrl("/contact") } }
@@ -79,12 +80,12 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Send a Message</h3>
                   <p className="text-gray-600 mb-4">Contact AVES about your inquiry or proposal</p>
-                  <a
-                    href="/australia/contact?topic=general#inquiry"
+                  <ContextualEnquiryLink
+                    country="colombia"
                     className="text-emerald-600 hover:text-emerald-700 font-semibold text-lg"
                   >
                     Open the contact form
-                  </a>
+                  </ContextualEnquiryLink>
                 </CardContent>
               </Card>
 

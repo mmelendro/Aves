@@ -1,5 +1,6 @@
 "use client"
 import { useReadOnlyPreview } from "@/components/preview-mode"
+import { useUnsavedChanges } from "@/components/account/unsaved-changes"
 
 /*
  * Interactive inquiry / launch-list form, also reused for general AVES contact topics.
@@ -33,6 +34,8 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
   const [feedback, setFeedback] = useState("")
   const [tourStyle, setTourStyle] = useState("")
+  const [dirty, setDirty] = useState(false)
+  useUnsavedChanges(dirty, "You have an unfinished enquiry. Leave and discard your answers?")
   const Title = variant === "contact-page" ? "h1" : "h2"
   // A ref blocks same-tick double submits. The request key is reused when retrying an unchanged body.
   const inFlight = useRef(false)
@@ -81,6 +84,7 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
       }
       // The success copy promises saving for review, not delivery, a priced quote or a confirmed booking.
       submission.current = null
+      setDirty(false)
       setStatus("success")
       setFeedback(topic ? "Your message has been saved for AVES to review. We will reply to the email address you provided." : submittedIntent === "waitlist" ? "Your Australian launch-list request and email preference have been saved. Thank you for being part of the beginning." : "Your inquiry has been saved for AVES to review. Thank you for sharing your Australian travel interests.")
       form.reset()
@@ -101,7 +105,7 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
           <p className="text-gray-600 mb-8">{topic ? "Your message goes directly to AVES for a personal response." : intent === "inquiry" ? "Share your ideas so we can discuss a journey around your interests. No fixed plans needed." : "Receive launch news and updates as our Australian journeys develop."}</p>
           {/* Editable fields. Keep name attributes aligned with the payload builder and server validation. */}
           {readOnly && <p className="mb-4 text-sm text-amber-800">Sending is disabled in this preview.</p>}
-          <form className="space-y-6" onSubmit={submit}>
+          <form className="space-y-6" onSubmit={submit} onChange={() => setDirty(true)}>
             {topic && region && <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-900">Your selected place: {countryRegionLabels[country][region] || region} · {countryLabels[country]}</p>}
             {!topic && tourStyle && intent === "inquiry" && <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">Your interest: <strong>{tourStyle}</strong></p>}
             <div className="grid md:grid-cols-2 gap-4"><div><label htmlFor={id("name")} className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label><Input id={id("name")} name="name" autoComplete="name" placeholder="Your name" maxLength={100} required /></div><div><label htmlFor={id("email")} className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label><Input id={id("email")} name="email" type="email" autoComplete="email" placeholder="Your email address" maxLength={254} required /></div></div>
