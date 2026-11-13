@@ -15,6 +15,14 @@ test('regional identity retains a country return link and fits a narrow header',
   expect(hit,JSON.stringify(hit)).toMatchObject({correct:true})
   console.info('Phone consent hit test:',JSON.stringify(hit))
   const overflow=await page.evaluate(()=>({client:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,leaves:[...document.querySelectorAll('body *')].filter(e=>e.children.length===0&&e.getBoundingClientRect().right>320.5).slice(0,30).map(e=>({tag:e.tagName,class:e.getAttribute('class'),text:e.textContent?.slice(0,90),rect:e.getBoundingClientRect().toJSON()}))}))
+  if(overflow.scroll>320){
+   console.info('Overflow owners:',JSON.stringify(await page.evaluate(()=>{
+    const elements=[...document.querySelectorAll<HTMLElement>('header,footer,[data-field-guide],[data-explorer-content],[data-cookie-banner]')]
+    const probes=elements.map(e=>{const before=e.style.display;e.style.display='none';const width=document.documentElement.scrollWidth;e.style.display=before;return {tag:e.tagName,class:e.className,width}})
+    const boxes=[...document.querySelectorAll<HTMLElement>('body *')].filter(e=>e instanceof HTMLElement&&e.getBoundingClientRect().right>320.5).slice(0,45).map(e=>({tag:e.tagName,class:e.className,rect:e.getBoundingClientRect().toJSON(),overflow:getComputedStyle(e).overflow,minWidth:getComputedStyle(e).minWidth}))
+    return {probes,boxes}
+   })))
+  }
   expect(overflow,JSON.stringify(overflow)).toMatchObject({scroll:320})
   await reject.tap()
   await expect(page.locator('[data-cookie-banner]')).toHaveCount(0)
