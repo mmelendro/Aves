@@ -7,6 +7,7 @@ import ts from "typescript";
 const root=process.cwd();
 function walk(dir){return fs.existsSync(dir)?fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]):[]}
 const sources=["app","components","content","features","lib","hooks","scripts","tests"].flatMap(walk).filter(p=>/\.(?:[cm]?[jt]sx?|json|css)$/.test(p));
+sources.push(...fs.readdirSync(".").filter(p=>/^(?:next|tailwind|postcss|eslint|playwright)\.config\./.test(p)));
 const texts=new Map(sources.map(p=>[p,fs.readFileSync(p,"utf8")]));
 const imports=new Set();const identifiers=new Map();const exports=[];
 for(const [file,text] of texts){

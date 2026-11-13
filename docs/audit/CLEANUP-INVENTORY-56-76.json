@@ -483,24 +483,7 @@
       "review": "Verify dynamic paths and directory ownership; a route file is not proof of navigation necessity."
     }
   ],
-  "dependencyReview": [
-    {
-      "name": "@radix-ui/react-accordion",
-      "status": "Review framework/config/CLI/dynamic usage before removal"
-    },
-    {
-      "name": "@radix-ui/react-scroll-area",
-      "status": "Review framework/config/CLI/dynamic usage before removal"
-    },
-    {
-      "name": "@radix-ui/react-separator",
-      "status": "Review framework/config/CLI/dynamic usage before removal"
-    },
-    {
-      "name": "tailwindcss-animate",
-      "status": "Review framework/config/CLI/dynamic usage before removal"
-    }
-  ],
+  "dependencyReview": [],
   "exportReview": [
     {
       "file": "app/about/b-corp/page.tsx",
