@@ -5,7 +5,7 @@ const plan={data:{title:'Selected brief',updated_at:stamp,details:{country:'new-
 function harness(results=[]){
  const queue=[...results],queries=[];
  const client={from(table){queries.push(table);const builder={};for(const method of ['select','eq','order','limit'])builder[method]=()=>builder;builder.maybeSingle=async()=>queue.shift()||{data:null,error:null};return builder}};
- const load=loader({mocks:{'./account-auth':{requireAccountUser:async()=>({client,user:{id:owner}})}}});
+ const load=loader({mocks:{'@/lib/account-auth':{requireAccountUser:async()=>({client,user:{id:owner}})}}});
  return {...load('lib/trip-pack-handler.ts'),queries};
 }
 const request=body=>new Request('https://aves.bio/api/account/plans/'+id+'/pack',{method:'POST',headers:{origin:'https://aves.bio','content-type':'application/json'},body:JSON.stringify(body)});
