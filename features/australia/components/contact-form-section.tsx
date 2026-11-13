@@ -105,7 +105,7 @@ export function ContactFormSection({ showTitle = true, showFAQ = false, variant 
           <p className="text-gray-600 mb-8">{topic ? "Your message goes directly to AVES for a personal response." : intent === "inquiry" ? "Share your ideas so we can discuss a journey around your interests. No fixed plans needed." : "Receive launch news and updates as our Australian journeys develop."}</p>
           {/* Editable fields. Keep name attributes aligned with the payload builder and server validation. */}
           {readOnly && <p className="mb-4 text-sm text-amber-800">Sending is disabled in this preview.</p>}
-          <form className="space-y-6" onSubmit={submit} onChange={() => setDirty(true)}>
+          <form className="space-y-6" onSubmit={submit} onChange={() => {setDirty(true);setStatus("idle");setFeedback("")}}>
             {topic && region && <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-900">Your selected place: {countryRegionLabels[country][region] || region} · {countryLabels[country]}</p>}
             {!topic && tourStyle && intent === "inquiry" && <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">Your interest: <strong>{tourStyle}</strong></p>}
             <div className="grid md:grid-cols-2 gap-4"><div><label htmlFor={id("name")} className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label><Input id={id("name")} name="name" autoComplete="name" placeholder="Your name" maxLength={100} required /></div><div><label htmlFor={id("email")} className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label><Input id={id("email")} name="email" type="email" autoComplete="email" placeholder="Your email address" maxLength={254} required /></div></div>

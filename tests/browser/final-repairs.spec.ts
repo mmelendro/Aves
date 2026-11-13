@@ -4,7 +4,7 @@ test('opening the scheduler never submits an empty or valid enquiry',async({page
  let submissions=0;await page.route('**/api/inquiries',route=>{submissions++;return route.fulfill({json:{success:true,status:'stored',country:'colombia',intent:'inquiry'}})})
  await page.goto('/contact');await declineOptionalCookies(page)
  const schedule=page.getByRole('button',{name:'Schedule Call',exact:true});await expect(schedule).toHaveAttribute('type','button')
- await schedule.click();await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Close',exact:true}).first().click();expect(submissions).toBe(0)
+ await schedule.click();await expect(page.getByRole('dialog')).toBeVisible();await expect(page.getByRole('button',{name:'Close',exact:true})).toHaveCount(1);await expect(page.getByRole('button',{name:'Close',exact:true})).toBeInViewport();await page.getByRole('button',{name:'Close',exact:true}).click();expect(submissions).toBe(0)
  await page.getByRole('textbox',{name:'First name',exact:true}).fill('Synthetic');await page.getByRole('textbox',{name:'Last name',exact:true}).fill('Visitor');await page.getByRole('textbox',{name:'Email address',exact:true}).fill('synthetic@example.invalid')
  await schedule.click();await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Close',exact:true}).first().click();expect(submissions).toBe(0)
  await expect(page.getByRole('textbox',{name:'First name',exact:true})).toHaveValue('Synthetic')
@@ -24,7 +24,7 @@ test('enquiry edits survive cancelled navigation and failed receipts, and clear 
  await page.getByRole('textbox',{name:'First name',exact:true}).fill('Synthetic');await page.getByRole('textbox',{name:'Last name',exact:true}).fill('Visitor');await page.getByRole('textbox',{name:'Email address',exact:true}).fill('synthetic@example.invalid')
  const message=page.getByRole('textbox',{name:'Special interests or requests',exact:true});await message.fill('Keep this private draft')
  page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(message).toHaveValue('Keep this private draft');await expect(page).toHaveURL(/\/contact$/)
- await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByRole('alert')).toContainText("couldn't confirm")
+ await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByText("We couldn't confirm that your inquiry was saved. Please try again.",{exact:true})).toBeVisible()
  page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(message).toHaveValue('Keep this private draft')
  await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true,status:'stored',country:'colombia',intent:'inquiry'}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByText(/Your inquiry has been saved/)).toBeVisible();await page.getByRole('link',{name:'Browse All Tours',exact:true}).click();await expect(page).toHaveURL(/\/tours$/)
 })
@@ -32,5 +32,13 @@ test('the main conversation link follows all country previews and stays general 
  test.skip(info.project.name!=='desktop','Destination context')
  await page.goto('/');await declineOptionalCookies(page)
  const conversation=page.getByRole('link',{name:'Start a conversation',exact:true});await expect(conversation).toHaveAttribute('href','/contact?topic=general#inquiry')
- for(const [country,id] of [['Colombia','colombia'],['Australia','australia'],['New Zealand','new-zealand']]){await page.getByRole('button',{name:country,exact:true}).click();await expect(conversation).toHaveAttribute('href',new RegExp(`country=${id}`))}
+ for(const [country,id] of [['Colombia','colombia'],['Australia','australia'],['New Zealand','new-zealand']]){await page.getByRole('button',{name:country,exact:true}).click();await expect(conversation).toHaveAttribute('href',new RegExp(`country=${id}`));if(id==='colombia'){await page.getByRole('combobox',{name:'Choose a region in Colombia',exact:true}).selectOption('central-andes');await expect(conversation).toHaveAttribute('href',/region=central-andes/)}}
+})
+test('the shared enquiry form protects edited answers and clears its guard after a stored receipt',async({page},info)=>{
+ test.skip(!['desktop','phone-390'].includes(info.project.name),'Shared enquiry guard')
+ await page.goto('/contact?country=australia');await declineOptionalCookies(page)
+ await page.locator('input[name="name"]').fill('Synthetic Visitor');await page.locator('input[name="email"]').fill('synthetic@example.invalid');await page.locator('textarea[name="message"]').fill('Keep my shared enquiry')
+ page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('link',{name:'how we care for your information',exact:true}).click();await expect(page.locator('textarea[name="message"]')).toHaveValue('Keep my shared enquiry')
+ await page.route('**/api/inquiries',route=>route.fulfill({json:{success:true,status:'stored',country:'australia',intent:'inquiry'}}));await page.getByRole('button',{name:'Send My Inquiry',exact:true}).click();await expect(page.getByRole('status').filter({hasText:'Your inquiry has been saved'})).toBeVisible()
+ await page.getByRole('link',{name:'how we care for your information',exact:true}).click();await expect(page).toHaveURL(/\/privacy$/)
 })
