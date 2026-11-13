@@ -128,7 +128,15 @@ function IslandPlannerForm({
       const saved = readTripDraft(window.sessionStorage),
         birds = readNzBirdBasketSelection(window.sessionStorage);
       if (recovery || saved) {
-        setResumeNotice(true);
+        setResumeNotice(
+          Boolean(
+            saved ||
+              recovery?.draft ||
+              (recovery &&
+                JSON.stringify(recovery.input) !==
+                  JSON.stringify(defaultTripInput)),
+          ),
+        );
         setDraft(recovery ? recovery.draft : saved);
         setInput({
           ...(recovery?.input ?? saved!.input),
@@ -349,15 +357,25 @@ function IslandPlannerForm({
             ["preferences", "1. Your preferences"],
             ["compare", "2. Compare routes"],
             ["days", "3. Edit your days"],
-          ].map(([part, label]) => (
-            <a
-              key={part}
-              href={`#${id}-${part}`}
-              className="inline-flex min-h-11 items-center px-3 text-sm underline"
-            >
-              {uiCopy(label)}
-            </a>
-          ))}
+          ].map(([part, label]) =>
+            part === "preferences" || draft ? (
+              <a
+                key={part}
+                href={`#${id}-${part}`}
+                className="inline-flex min-h-11 items-center px-3 text-sm underline"
+              >
+                {uiCopy(label)}
+              </a>
+            ) : (
+              <span
+                key={part}
+                aria-disabled="true"
+                className="inline-flex min-h-11 items-center px-3 text-sm text-gray-500"
+              >
+                {uiCopy(label)}
+              </span>
+            ),
+          )}
         </nav>
         {resumeNotice && !onSave && (
           <section
@@ -375,7 +393,10 @@ function IslandPlannerForm({
                 type="button"
                 onClick={() => {
                   setResumeNotice(false);
-                  output.current?.scrollIntoView({ block: "start" });
+                  (draft
+                    ? output.current
+                    : document.getElementById(`${id}-preferences`)
+                  )?.scrollIntoView({ block: "start" });
                 }}
               >
                 {uiCopy("Continue this draft")}

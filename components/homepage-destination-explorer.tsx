@@ -653,6 +653,11 @@ export function HomepageDestinationExplorerCore({
           </div>
           <div
             id="homepage-country-preview"
+            data-explorer-content={
+              zoomed && !detailView
+                ? `${destination.id}:${region?.id ?? ""}`
+                : undefined
+            }
             className="mb-5 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"
           >
             <div className="max-w-3xl">

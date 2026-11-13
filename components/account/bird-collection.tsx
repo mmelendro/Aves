@@ -1,136 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Bird } from "lucide-react";
-import { accountRequest, errorMessage, dateLabel } from "./account-api";
+import CollectionPhoto from "./collection-photo";
+import {
+  accountRequest,
+  AccountRequestError,
+  errorMessage,
+  dateLabel,
+} from "./account-api";
 import {
   collectionResponseSchema,
   type BirdCollectionResponse,
 } from "@/lib/bird-collection";
 import { useUiCopy } from "@/components/ui-copy-context";
-import { useMediaPreferences } from "@/components/media-preferences";
-import Image from "../responsive-photo";
-function CollectionPhoto({
-  item,
-}: {
-  item: BirdCollectionResponse["items"][number];
-}) {
-  const uiCopy = useUiCopy(),
-    { lowBandwidth, resolved } = useMediaPreferences(),
-    [requested, setRequested] = useState(false),
-    [failed, setFailed] = useState(false),
-    [photoAttempt, setPhotoAttempt] = useState(0);
-  const photo = item.ownerPhoto,
-    reference = item.referenceImage,
-    showOwner = photo && (requested || (resolved && !lowBandwidth));
-  return (
-    <div className="space-y-2">
-      <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-emerald-50">
-        {showOwner && !failed ? (
-          <img
-            src={photo.src}
-            alt={
-              photo.caption ||
-              `${uiCopy("Your linked photo")}: ${item.commonName}`
-            }
-            loading="lazy"
-            className="h-full w-full object-contain"
-            onError={() => setFailed(true)}
-          />
-        ) : !photo && reference && !failed ? (
-          <Image
-            key={photoAttempt}
-            src={reference.src}
-            width={384}
-            height={288}
-            sizes="(max-width: 767px) 90vw, 320px"
-            alt={`${uiCopy(reference.kind)}: ${item.commonName}`}
-            className="h-full w-full object-contain"
-            onError={() => setFailed(true)}
-          />
-        ) : (
-          <div className="p-5 text-center text-emerald-800">
-            <Bird className="mx-auto h-12 w-12" aria-hidden="true" />
-            <p className="mt-2 text-sm">
-              {uiCopy(
-                photo
-                  ? "Your linked photo is ready to open"
-                  : "No collection image available yet",
-              )}
-            </p>
-          </div>
-        )}
-      </div>
-      {photo ? (
-        <>
-          <p className="text-xs">
-            {uiCopy("Your linked photo")} ·{" "}
-            {photo.creator || uiCopy("Creator not entered")}
-          </p>
-          {(!showOwner || failed) && (
-            <button
-              type="button"
-              className="min-h-11 underline text-sm"
-              onClick={() => {
-                setRequested(true);
-                setFailed(false);
-              }}
-            >
-              {uiCopy(failed ? "Retry linked photo" : "Load your linked photo")}
-            </button>
-          )}
-        </>
-      ) : reference ? (
-        <p className="text-xs leading-5">
-          {uiCopy(reference.kind)} · {reference.creator} ·{" "}
-          <a
-            className="underline"
-            href={reference.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {uiCopy("Source")}
-          </a>{" "}
-          ·{" "}
-          <a
-            className="underline"
-            href={reference.licenseUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {reference.license}
-          </a>
-          {reference.location && <span> · {reference.location}</span>}
-          {reference.modifications && (
-            <span className="block">{reference.modifications}</span>
-          )}
-        </p>
-      ) : (
-        <p className="text-xs">
-          {uiCopy(
-            "Link one of your existing journal photos from a trip's bird album.",
-          )}
-        </p>
-      )}
-      {failed && reference && !photo && (
-        <button
-          type="button"
-          className="min-h-11 underline text-sm"
-          onClick={() => {
-            setPhotoAttempt((n) => n + 1);
-            setFailed(false);
-          }}
-        >
-          {uiCopy("Retry reference image")}
-        </button>
-      )}
-      {failed && (
-        <p role="status" className="text-xs">
-          {uiCopy("Image unavailable. Your records remain available below.")}
-        </p>
-      )}
-    </div>
-  );
-}
 export default function PrivateBirdCollection() {
   const uiCopy = useUiCopy();
   const [data, setData] = useState<BirdCollectionResponse | null>(null),
@@ -141,6 +22,7 @@ export default function PrivateBirdCollection() {
     [loading, setLoading] = useState(true),
     [feedback, setFeedback] = useState(""),
     [refresh, setRefresh] = useState(0);
+  const [sessionExpired, setSessionExpired] = useState(false);
   const requestKey = JSON.stringify([country, state, query, offset]);
   const [dataKey, setDataKey] = useState("");
   // Results belong to the exact requested filters, including during a failed refresh.
@@ -148,6 +30,7 @@ export default function PrivateBirdCollection() {
     let live = true;
     const abort = new AbortController();
     setLoading(true);
+    setSessionExpired(false);
     const timer = setTimeout(
       () => {
         const params = new URLSearchParams({
@@ -168,7 +51,12 @@ export default function PrivateBirdCollection() {
             }
           })
           .catch((e) => {
-            if (live) setFeedback(errorMessage(e));
+            if (live) {
+              setFeedback(errorMessage(e));
+              setSessionExpired(
+                e instanceof AccountRequestError && e.status === 401,
+              );
+            }
           })
           .finally(() => {
             if (live) setLoading(false);
@@ -258,6 +146,14 @@ export default function PrivateBirdCollection() {
         <p role="status">{uiCopy("Loading your private collection…")}</p>
       )}
       {feedback && <p role="alert">{uiCopy(feedback)}</p>}
+      {sessionExpired && (
+        <a
+          className="inline-flex min-h-11 items-center underline"
+          href="/account/sign-in?next=%2Faccount%2Fcollection"
+        >
+          {uiCopy("Sign in to reopen your collection")}
+        </a>
+      )}
       {data && dataKey === requestKey && !loading && !feedback && (
         <>
           <div className="grid gap-4 md:grid-cols-3">
