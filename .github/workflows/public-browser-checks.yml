@@ -40,6 +40,8 @@ jobs:
           trap 'kill "$candidate_pid" 2>/dev/null || true' EXIT
           python3 scripts/audit-public-http.py --base-url http://127.0.0.1:3100 --wait-for-ready --check-budgets --output /tmp/aves-candidate-http.json
       - run: pnpm exec playwright install --with-deps chromium firefox
+      - name: Check narrow-phone consent and regional navigation first
+        run: pnpm exec playwright test tests/browser/brand-location.spec.ts --project=phone-320
       # Synthetic routes change shared chunk allocation. Measure the deployable
       # application above, then build the isolated form harness for browser QA.
       - run: node scripts/prepare-browser-fixtures.mjs
@@ -47,8 +49,6 @@ jobs:
           AVES_BROWSER_FIXTURES: '1'
       - name: Build the isolated browser harness
         run: pnpm build
-      - name: Check narrow-phone consent and regional navigation first
-        run: pnpm exec playwright test tests/browser/brand-location.spec.ts --project=phone-320
       - name: Check the new private album and offline journeys first
         run: pnpm exec playwright test tests/browser/batch-79-88.spec.ts tests/browser/audit-queue.spec.ts tests/browser/private-itinerary-collection.spec.ts tests/browser/design-polish.spec.ts tests/browser/final-repairs.spec.ts --project=desktop --project=phone-390
       - run: pnpm test:browser
