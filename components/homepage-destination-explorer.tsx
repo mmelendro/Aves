@@ -4,6 +4,7 @@
  * geometry does not become a browser JavaScript dependency.
  */
 "use client";
+import {clearMapPhotos} from "@/lib/map-photo-request";
 
 import { usePathname } from "next/navigation";
 import { enquiryHref } from "@/lib/enquiry-entry";
@@ -144,6 +145,7 @@ export function HomepageDestinationExplorerCore({
     return () => window.removeEventListener("popstate", restore);
   }, [initialCountryId, initialRegionId]);
   function navigate(next: ExplorerLocation) {
+    clearMapPhotos();
     setScope(next);
     try {
       const href = explorerLocationHref(window.location.href, next);

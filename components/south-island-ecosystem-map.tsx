@@ -1,4 +1,5 @@
 "use client"
+import {requestMapPhotos} from "@/lib/map-photo-request"
 import Link from "next/link"
 import SouthIslandSoundscapes from "./south-island-soundscapes"
 import { MapViewer } from "./map-viewer"
@@ -109,6 +110,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor,.35)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom,.35)) }
   function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(true) }
+  function selectPhotoPlace(id:string){onSelectPlace?.(id);const place=places?.find(p=>p.id===id);if(place)requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:id,name:place.label})}
   const mapControls = <>
       {!satellite && <>
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
@@ -123,7 +125,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{reference ? reference.name : guidedJourney && focusedPoint ? focusedPoint.name.split(" · ")[0] : place ? place.label : "South Island habitats"}</h2></div>
     <p id={`${id}-gestures`} className="sr-only">{panMode ? "Drag to pan. Pinch or double tap to zoom. Tap a habitat to select it. Scroll the page outside the map." : "Map gestures paused. Double tap to resume. Focus the map for + / −, arrow keys and Home."}</p>
     <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
-      {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
+      {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude} places={places} onSelectPlace={selectPhotoPlace}/> : <>
       <svg ref={svgRef} viewBox={camera.zoom === 1 ? "0 -360 725 1020" : map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
         onKeyDown={event => {
           if (event.target !== event.currentTarget) return
@@ -191,7 +193,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
           const point = ecosystemMapPoint(item.longitude, item.latitude, map.bbox)
           const selected = item.id === selectedPlace
           const unit = 1 / (camera.zoom * Math.max(svgPixelsPerUnit, .25))
-          return <g key={item.id} role="button" tabIndex={0} aria-label={`Show place: ${item.label}`} aria-pressed={selected} className={styles.area} onClick={() => onSelectPlace?.(item.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectPlace?.(item.id) } }}>
+          return <g key={item.id} role="button" tabIndex={0} aria-label={`Show place: ${item.label}`} aria-pressed={selected} className={styles.area} onClick={() => selectPhotoPlace(item.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectPhotoPlace(item.id) } }}>
             <title>{`${item.label} — ${item.location}`}</title>
             <circle cx={point.x} cy={point.y} r={22 * unit} fill="transparent" />
             <circle cx={point.x} cy={point.y} r={(selected ? 8 : 5) * unit} fill={selected ? "#065f46" : "#fff"} stroke={selected ? "white" : "#065f46"} strokeWidth="2" vectorEffect="non-scaling-stroke" />
@@ -217,7 +219,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       {scale ? <><div style={{ width: scale.widthPixels }} className={styles.scaleBar} /><p>{scale.distanceMetres / 1000} km at {Math.abs(scale.latitude).toFixed(1)}° S · map centre</p></> : <p>Distance scale appears when the map is measured.</p>}
     </div>
     {places && <div className="mt-2 grid grid-cols-2 gap-1" aria-label="South Island places">
-      {places.map(item => <button key={item.id} type="button" aria-pressed={item.id === selectedPlace} onClick={() => onSelectPlace?.(item.id)} className={`min-h-11 rounded-lg border px-2 py-2 text-left text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 ${item.id === selectedPlace ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}>{item.label}</button>)}
+      {places.map(item => <button key={item.id} type="button" aria-pressed={item.id === selectedPlace} onClick={() => selectPhotoPlace(item.id)} className={`min-h-11 rounded-lg border px-2 py-2 text-left text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 ${item.id === selectedPlace ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}>{item.label}</button>)}
     </div>}
     {place && <p className="mt-2 text-xs leading-5 text-emerald-900" role="status"><a href={place.source} target="_blank" rel="noreferrer" className="inline-flex min-h-6 items-center underline">{place.location}</a> · public landscape reference. Bird filters describe broad habitats across the South Island, not a checklist for this place.</p>}
     <details open={!places && !satellite} className={styles.filters}><summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800">Habitat filters</summary>

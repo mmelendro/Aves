@@ -10,6 +10,8 @@ import { Hand, Maximize2, Minimize2, Minus, Plus, RotateCcw } from "lucide-react
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, isMapDoubleTap, type MapView } from "@/lib/map-gestures.mjs"
 import BirdFilterControls from "./bird-filter-controls"
 import { FieldGuideContext } from "./field-guide-context"
+import MapLocationPhotos from "./map-location-photos"
+import {MAP_PHOTO_EVENT,CLEAR_MAP_PHOTOS_EVENT,noteMapPhotoOwner,type MapPhotoRequest} from "@/lib/map-photo-request"
 import styles from "./map-viewer.module.css"
 
 /** Enlarge the same mounted map, preserving selection, credits and native links.
@@ -28,6 +30,13 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
   const start = useRef<{ view: MapView; points: {x:number;y:number}[] } | null>(null)
   const dragged = useRef(false), suppress = useRef(false), frame = useRef(0)
   const lastTap=useRef<{x:number;y:number;at:number}|null>(null)
+  const [photoRequest,setPhotoRequest]=useState<MapPhotoRequest|null>(null)
+  useEffect(()=>{
+    const open=(event:Event)=>{const detail=(event as CustomEvent<{owner:HTMLElement;request:MapPhotoRequest}>).detail;if(detail?.owner===dialog.current){if(dialog.current?.getAttribute('data-expanded')==='true')resize(false);setPhotoRequest(detail.request)}else setPhotoRequest(null)}
+    const clear=()=>setPhotoRequest(null)
+    window.addEventListener(MAP_PHOTO_EVENT,open);window.addEventListener(CLEAR_MAP_PHOTOS_EVENT,clear);window.addEventListener('popstate',clear)
+    return()=>{window.removeEventListener(MAP_PHOTO_EVENT,open);window.removeEventListener(CLEAR_MAP_PHOTOS_EVENT,clear);window.removeEventListener('popstate',clear)}
+  },[])
   const active = gestures && (move || expanded)
   const box = () => ({ width: surface.current?.clientWidth || 1, height: surface.current?.clientHeight || 1 })
   const commit=useCallback((next: MapView) => { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) },[])
@@ -60,7 +69,7 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
     observer.observe(element)
     return () => { observer.disconnect(); cancelAnimationFrame(frame.current) }
   }, [commit])
-  return <dialog data-aves-map="true" data-geographic={geographic || undefined} ref={dialog} open data-expanded={expanded || undefined} className={styles.viewer} role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label} onCancel={e=>{e.preventDefault();resize(false)}}>
+  return <><dialog onClickCapture={()=>noteMapPhotoOwner(dialog.current)} onKeyDownCapture={()=>noteMapPhotoOwner(dialog.current)} onChangeCapture={()=>noteMapPhotoOwner(dialog.current)} data-aves-map="true" data-geographic={geographic || undefined} ref={dialog} open data-expanded={expanded || undefined} className={styles.viewer} role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label} onCancel={e=>{e.preventDefault();resize(false)}}>
     <div data-map-controls="true" className={styles.toolbar} role="group" aria-label={`${label} view controls`}>
       {gestures && <>
         <button className={styles.control} type="button" aria-label={`Zoom ${label} in`} disabled={view.zoom >= 4} onClick={()=>zoom(1.3)}><Plus size={18} aria-hidden="true"/></button>
@@ -86,5 +95,5 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
       <div className={styles.content} style={gestures ? {transform:`translate(${view.x}px,${view.y}px) scale(${view.zoom})`} : undefined}>{geographic && geographicScope ? <GeographicSatelliteMap {...geographicScope}/> : children}</div>
     </div>
     {expanded && credits && <div className="shrink-0 px-2 py-2 text-xs leading-5 text-emerald-900">{credits}</div>}
-  </dialog>
+  </dialog>{photoRequest&&<MapLocationPhotos request={photoRequest} onReturn={()=>{setPhotoRequest(null);dialog.current?.scrollIntoView({block:'start'});dialog.current?.querySelector('button')?.focus({preventScroll:true})}}/>}</>
 }

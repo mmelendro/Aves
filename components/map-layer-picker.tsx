@@ -21,13 +21,9 @@ export function useMapLayerPicker() {
   useEffect(() => {
     const element = dialog.current;
     if (!open || !element) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    element.showModal();
-    return () => {
-      element.close();
-      document.body.style.overflow = previous;
-    };
+    // Non-modal: layers remain selectable while the map can still be panned.
+    element.show();
+    return () => { element.close(); };
   }, [open]);
   return { open, setOpen, button, dialog, id, close };
 }
@@ -50,7 +46,7 @@ export function renderMapLayerPicker({
 }) {
   return (
     <div
-      className="static flex shrink-0 items-center gap-1"
+      className="relative flex shrink-0 items-center gap-1"
       data-map-layer-panel={scope}
     >
       {backgroundControl}
@@ -79,7 +75,8 @@ export function renderMapLayerPicker({
           ref={picker.dialog}
           id={`${picker.id}-layers`}
           aria-label={`${title} layer choices`}
-          className="fixed inset-4 m-auto h-fit max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm overflow-y-auto overscroll-contain rounded-2xl border border-emerald-200 bg-white p-3 text-left text-xs leading-5 text-emerald-950 shadow-2xl backdrop:bg-emerald-950/40"
+          className="absolute bottom-full left-0 z-[1000] mb-2 m-0 h-fit max-h-[min(65svh,32rem)] w-[min(21rem,calc(100vw-2rem))] overflow-y-auto overscroll-contain rounded-2xl border border-emerald-200 bg-white p-3 text-left text-xs leading-5 text-emerald-950 shadow-xl motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2"
+          onKeyDown={(event) => {if(event.key==="Escape"){event.preventDefault();event.stopPropagation();picker.close();}}}
           onCancel={(event) => {
             event.preventDefault();
             event.stopPropagation();

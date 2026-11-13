@@ -1,3 +1,4 @@
+import {requestMapPhotos} from "@/lib/map-photo-request"
 import { placeInSentence } from "@/lib/place-language"
 import colombiaBoundaries from "@/content/colombia-planning-boundaries.json"
 /**
@@ -36,8 +37,8 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
   // the explorer provide an equivalent choice for small or clustered shapes.
   const control = (id: string, name: string, href: string, children: ReactNode) => onSelectRegion ? (
     <g key={id} data-bird-filter-match={matchingRegionIds ? matchingRegionIds.includes(id) : undefined} role="button" tabIndex={0} aria-label={`Preview ${name} birds`} aria-pressed={highlighted(id)}
-      className={styles.regionControl} onClick={() => onSelectRegion(id)}
-      onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectRegion(id) } }}>
+      className={styles.regionControl} onClick={() => {onSelectRegion(id);requestMapPhotos({countryId:country,kind:"region",regionId:id,name})}}
+      onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectRegion(id);requestMapPhotos({countryId:country,kind:"region",regionId:id,name}) } }}>
       {children}
     </g>
   ) : <a key={id} href={href} aria-label={`Explore ${placeInSentence(name)}`} className={styles.regionControl}>{children}</a>

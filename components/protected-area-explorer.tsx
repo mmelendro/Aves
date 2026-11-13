@@ -1,4 +1,5 @@
 "use client";
+import {requestMapPhotos} from "@/lib/map-photo-request";
 import {useEffect,useId,useRef,useState} from "react";
 import {geoJSON,tooltip,type Map as GeographicMap,type GeoJSON,type Path} from "leaflet";
 import type {FeatureCollection,Polygon,MultiPolygon} from "geojson";
@@ -15,7 +16,7 @@ type Areas=FeatureCollection<Polygon|MultiPolygon,Area>;
 /** One optional national snapshot on the existing map. Selection moves only the
  * camera; it never assigns bird occurrence, access permission or a trip stop.
  */
-export default function ProtectedAreaExplorer({map,catalogue,presentation}:{map:GeographicMap;catalogue:ProtectedCatalogue;presentation:ProtectedPresentation}){
+export default function ProtectedAreaExplorer({map,catalogue,presentation,countryId}:{countryId:string;map:GeographicMap;catalogue:ProtectedCatalogue;presentation:ProtectedPresentation}){
   const {layers,update}=useMapLayers(),enabled=layers.protectedAreas;
   const [data,setData]=useState<Areas|null>(null),[status,setStatus]=useState("idle");
   const selected=layers.protectedAreaSelections[catalogue.geometryPath]??"";
@@ -26,7 +27,7 @@ export default function ProtectedAreaExplorer({map,catalogue,presentation}:{map:
   const area=catalogue.areas.find(item=>item.id===selected);
   const choose=(value:string)=>{
     const target=catalogue.areas.find(item=>item.id===value);setSelected(value);
-    if(target){const b=target.bounds;map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[48,48],maxZoom:13,animate:false});}
+    if(target){requestMapPhotos({countryId,kind:"place",placeId:target.id,name:target.name});const b=target.bounds;map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[48,48],maxZoom:13,animate:false});}
   };
   const activate=useRef<(value:string)=>void>(()=>{});
   activate.current=value=>{choose(value);setOpen(true);};
@@ -52,7 +53,7 @@ export default function ProtectedAreaExplorer({map,catalogue,presentation}:{map:
   },[map,enabled,presentation.credit]);
   useEffect(()=>{
     if(!enabled||!data)return;
-    const layer=geoJSON(data,{pane:"protectedAreasPane",style:{color:palette.colour,weight:palette.outlineWeight,fillColor:palette.colour,fillOpacity:palette.fillOpacity,opacity:.95},onEachFeature:(feature,path)=>{
+    const layer=geoJSON(data,{pane:"protectedAreasPane",style:{color:palette.colour,weight:palette.outlineWeight,fillColor:palette.colour,fillOpacity:layers.overlayOpacity*.65,opacity:.95},onEachFeature:(feature,path)=>{
       const properties=feature.properties as Area;
       const name=document.createElement("span");name.textContent=`${properties.name} · ${properties.category}`;
       path.bindTooltip(name,{sticky:true});
@@ -69,11 +70,11 @@ export default function ProtectedAreaExplorer({map,catalogue,presentation}:{map:
       });
     }}).addTo(map);group.current=layer;
     return()=>{layer.remove();group.current=null;};
-  },[map,data,enabled]);
+  },[map,data,enabled,layers.overlayOpacity]);
   useEffect(()=>{
     group.current?.eachLayer(layer=>{
       const path=layer as Path&{feature:{properties:Area}};
-      path.setStyle({weight:path.feature.properties.id===selected?palette.selectedWeight:palette.outlineWeight,fillOpacity:path.feature.properties.id===selected?palette.selectedFillOpacity:palette.fillOpacity});
+      path.setStyle({weight:path.feature.properties.id===selected?palette.selectedWeight:palette.outlineWeight,fillOpacity:path.feature.properties.id===selected?Math.max(layers.overlayOpacity,.45):layers.overlayOpacity*.65});
       path.getElement()?.setAttribute("aria-pressed",String(path.feature.properties.id===selected));
     });
     if(!enabled||!area||!data)return;
@@ -81,7 +82,7 @@ export default function ProtectedAreaExplorer({map,catalogue,presentation}:{map:
     const marker=tooltip({permanent:true,direction:"center",className:"geographic-region-name",interactive:false})
       .setLatLng([area.labelPoint[1],area.labelPoint[0]]).setContent(label).addTo(map);
     return()=>{marker.remove();};
-  },[map,selected,enabled,data,area]);
+  },[map,selected,enabled,data,area,layers.overlayOpacity]);
   useEffect(()=>{if(open)picker.current?.focus({preventScroll:true});},[open,status]);
   useEffect(()=>{if(!enabled)setOpen(false);},[enabled]);
   return <div className="relative z-[700] flex min-h-11 flex-wrap items-center gap-2 px-2 text-xs text-emerald-950">

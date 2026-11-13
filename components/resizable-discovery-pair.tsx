@@ -36,6 +36,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   const registerBirds = useCallback((open:GuidePreviewOpener) => { birdOpener.current=open; return ()=>{if(birdOpener.current===open)birdOpener.current=null} },[])
   const separatorRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<Drag | null>(null)
+  const [previewRequestCount,setPreviewRequestCount]=useState(0)
   const [layout, setLayout] = useState<"guide" | "paired">("guide")
   const [face, setFace] = useState<"birds" | "map">(initialFace)
   const [width, setWidth] = useState(0)
@@ -109,7 +110,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         target?.focus({preventScroll:true})
       })
     })
-  },[face,layout])
+  },[face,layout,previewRequestCount])
 
   // CSS uses these proportions only when both cards fit. No browser storage or account setting is needed.
   const leftShare = mediaFirst ? 100 - effectiveShare : effectiveShare
@@ -125,6 +126,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   const showBirds = () => showFace("birds")
   function openPreview(target:"map"|"birds",trigger?:HTMLElement) {
     pendingPreview.current={target,origin:face,trigger:trigger ?? turnRef.current}
+    setPreviewRequestCount(value=>value+1)
     showFace(target)
   }
 
@@ -139,6 +141,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     <div className={styles.guideToolbar}>
       <div className={styles.guideTitle}><BookOpen size={20} aria-hidden="true"/><span>Your bird guide</span><span className={styles.pageLabel}>{layout === "paired" ? "Map & birds" : face === "birds" ? "Birds" : "Map"}</span></div>
       <div className={styles.guideActions}>
+        <button type="button" className={styles.reset} aria-label="Open map full screen" onClick={()=>openPreview("map")}><Maximize2 size={17} aria-hidden="true"/>Full screen map</button>
         <button type="button" ref={turnRef} className={styles.turnButton} aria-controls={`${id}-birds ${id}-map`} onClick={() => { revealAfterTurn.current = true; setLayout("guide"); setFace(face === "birds" ? "map" : "birds") }}>
           <FlipHorizontal2 size={19} aria-hidden="true"/>{face === "birds" ? "Turn to the map" : "Turn to the birds"}
         </button>
@@ -160,7 +163,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         <div className={styles.mediaBody}><div id={mediaId}><ExpandableMedia label={`${mapCue?.label || "Regional"} birds`}>{media}</ExpandableMedia></div></div>
         <button type="button" className={styles.birdCue} aria-haspopup="dialog" onClick={event => openPreview("map",event?.currentTarget)} aria-label={`View ${mapCue?.label || "this region"} on the map`}>
           {mapCue ? <GuideMapThumbnail map={mapCue}/> : <MapIcon size={28} aria-hidden="true"/>}
-          <span><span className={styles.cueCaption}>Map</span><span className={styles.cueName}>{mapCue?.label || "Your selected region"}</span></span><Maximize2 size={16} aria-hidden="true"/>
+          <span><span className={styles.cueCaption}>Map</span><span className={styles.cueName}>{mapCue?.label || "Your selected region"}</span></span><FlipHorizontal2 size={16} aria-hidden="true"/>
         </button>
       </div>
       <div ref={separatorRef} role="separator" aria-orientation="vertical" aria-label={mapLabel}
@@ -202,7 +205,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         <div className={styles.mapBody}>{map}</div>
         {birdCue && <button type="button" className={styles.birdCue} aria-haspopup="dialog" onClick={event => openPreview("birds",event?.currentTarget)} aria-label={`View ${birdCue.commonName} in the bird guide`}>
           <ResponsivePhoto src={birdCue.image} alt="" width={36} height={36} sizes="36px" loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
-          <span><span className={styles.cueCaption}>Birds</span><span className={styles.cueName}>{birdCue.commonName}</span></span><Maximize2 size={16} aria-hidden="true"/>
+          <span><span className={styles.cueCaption}>Birds</span><span className={styles.cueName}>{birdCue.commonName}</span></span><FlipHorizontal2 size={16} aria-hidden="true"/>
         </button>}
       </div>
     </div>
