@@ -432,9 +432,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
     const { input } = draft;
     const experiences = draft.days.reduce(
       (n, d) =>
-        n +
-        Number(Boolean(d.birdingId)) +
-        Number(
+        n + Number(Boolean(d.birdingId) ||
           Boolean(
             d.extraId &&
             tripPlaceById
@@ -442,7 +440,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
               ?.categories.some(
                 (c) => !["food", "markets", "transport"].includes(c),
               ),
-          ),
+          )
         ),
       0,
     );
@@ -755,6 +753,7 @@ export function createIslandTripPlanner(context: IslandPlanningContext) {
         : "Budget allowances still open; prices not checked.",
       `Cost sharing: ${draft.input.adults ?? 1} ${(draft.input.adults ?? 1) === 1 ? "adult" : "adults"}, ${draft.input.rooms ?? 1} ${(draft.input.rooms ?? 1) === 1 ? "room/unit" : "rooms/units"}. Adult references only; dates and availability are not quoted.`,
       `Bird wishes: ${draft.input.birdIds.map(nzBirdName).join(", ") || "Open to suggestions"}.`,
+      `Activity allowance basis: ${draft.input.activityBasis === "experience" ? "one primary or alternative outing per day, not both" : "per day"}. Optional alternatives do not confirm a combined schedule.`,
       ...draft.days.map(
         (d, i) =>
           `Day ${i + 1}${tripDayDate(draft.input, i) ? ` (${tripDayDate(draft.input, i)})` : ""}: ${d.transferFrom ? `Transfer ${tripAreaById.get(d.transferFrom)?.name} to ` : ""}${tripAreaById.get(d.baseId)?.name}. ${[tripPlaceById.get(d.birdingId)?.name, d.extraId ? `Optional: ${tripPlaceById.get(d.extraId)?.name}` : "", d.stayId ? `Night: ${stayName(d.stayId)}` : "Final day, no overnight included"].filter(Boolean).join("; ")}.${d.transferFrom ? `\n${tripRoadNote(draft, i)}` : ""}`,

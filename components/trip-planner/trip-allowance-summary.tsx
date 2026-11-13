@@ -49,6 +49,7 @@ export default function TripAllowanceSummary({ draft }: { draft: TripDraft }) {
         </table>
       </div>
       <p className="mt-3 text-xs leading-6 text-gray-600">
+        {draft.input.activityBasis === "experience" && uiCopy("An outing allowance counts one primary or alternative outing per day, not both. ")}
         {budget.complete ? uiCopy("All four category allowances are entered.") : uiCopy("This total includes entered categories only; other costs remain open.")}{" "}
         {uiCopy("\n        This is a spending envelope, not a priced proposal. Accommodation,\n        meals, activity charges, transport and connections have not been checked\n        against live prices.\n      ")}</p>
     </div>
