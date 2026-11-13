@@ -18,6 +18,7 @@ class Page(HTMLParser):
   if self.title:self.titleText+=s
 parser=argparse.ArgumentParser(description='Read-only public-route regression audit; no accounts, cookies or writes.')
 parser.add_argument('--base-url',default='https://aves.bio')
+parser.add_argument('--check-budgets',action='store_true')
 parser.add_argument('--output',default='public-http-audit.json')
 args=parser.parse_args()
 base=args.base_url.rstrip('/')
@@ -46,4 +47,11 @@ Path(args.output).write_text(json.dumps(results,indent=2))
 print('routes',len(results),'errors',sum('error'in r for r in results));print(json.dumps([r for r in results if r.get('h1')!=1 or r.get('main')!=1 or r.get('missingAlt') or r.get('brokenLocalAnchors') or r.get('duplicateIds')],indent=2));print('largest',[(r['url'],r.get('bytes'))for r in sorted(results,key=lambda r:r.get('bytes',0),reverse=True)[:5]])
 
 failed=[r for r in results if 'error'in r or r.get('h1')!=1 or r.get('main')!=1 or r.get('missingAlt') or r.get('brokenLocalAnchors') or r.get('duplicateIds')]
+if args.check_budgets:
+ budgets=json.loads(Path('content/performance-budgets.json').read_text()).get('decodedHtmlBytes',{})
+ for route,limit in budgets.items():
+  entry=next((r for r in results if urllib.parse.urlsplit(r['url']).path==route),None)
+  if not entry or entry.get('bytes',limit+1)>limit:
+   failed.append({'route':route,'budget':limit,'actual':entry.get('bytes') if entry else None})
+   print('HTML budget exceeded',failed[-1])
 sys.exit(bool(failed))

@@ -21,5 +21,10 @@
     "policy": "Use project-attributed actual invoices; do not substitute team totals or estimates."
   },
   "privacy": "Exclude private account URLs, titles, notes, identities, query strings and media metadata from analytics. Do not enable paid collection or change consent defaults.",
-  "buildPolicy": "Initial JavaScript must stay within 5% of the independently verified batch 29\u201338 build estimates, 349724 and 339072 bytes. This margin covers chunk variance but fails material growth."
+  "buildPolicy": "Initial JavaScript must stay within 5% of the independently verified batch 29\u201338 build estimates, 349724 and 339072 bytes. This margin covers chunk variance but fails material growth.",
+  "decodedHtmlBytes": {
+    "/credits": 750000,
+    "/new-zealand/south-island": 1000000
+  },
+  "htmlPolicy": "Decoded public HTML limits are separate from compressed transfer and observed visitor speed. Credits must retain attribution and old audio/checklist anchor access."
 }
