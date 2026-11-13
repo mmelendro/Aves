@@ -304,7 +304,9 @@ test("credit pagination keeps recording anchors and complete image-source access
     .getByRole("link", { name: "Next checklist credits", exact: true })
     .click();
   await expect(page).toHaveURL(/checklist=2/);
-  expect(await page.locator('[id^="audio-"]').count()).toBe(anchors);
+  // The URL can update before a streamed navigation finishes replacing the
+  // previous document. Wait for the final directory before comparing anchors.
+  await expect(page.locator('[id^="audio-"]')).toHaveCount(anchors);
   await expect(
     page.getByRole("link", { name: "Previous checklist credits", exact: true }),
   ).toBeVisible();
