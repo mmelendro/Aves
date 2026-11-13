@@ -11,10 +11,12 @@ import australianCatalogue from "./global-australian-birds.json"
 export const destinationBirds: Record<string, BirdProfile[] | undefined> = {
   colombia: birdData.map(bird => ({
     ...bird,
+    countryId: "colombia",
     regionHref: `/regions/${bird.regionSlug}`,
   })),
   australia: australianCatalogue.map(bird => ({
     ...bird,
+    countryId: "australia",
     image: `/australia${bird.image}`,
     audioFile: bird.audioFile ? `/australia${bird.audioFile}` : undefined,
     regionHref: `/australia/regions/${bird.regionSlug}`,
@@ -23,6 +25,7 @@ export const destinationBirds: Record<string, BirdProfile[] | undefined> = {
   })),
   "new-zealand": newZealandCarouselBirds.map(bird => ({
     ...bird,
+    countryId: "new-zealand",
     regionHref: bird.regionHref || "/new-zealand#regions",
   })),
 }

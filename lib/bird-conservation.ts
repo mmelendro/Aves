@@ -2,7 +2,7 @@
 import snapshot from "@/content/bird-conservation.json"
 import origins from "@/content/featured-bird-origins.json"
 
-export type ConservationBird = { scientificName: string; origin?: string }
+export type ConservationBird = { scientificName: string; origin?: string; countryId?: string }
 export type GlobalBirdStatus = "CR" | "EN" | "VU" | "NT" | "LC" | "DD" | "NE" | "EW" | "EX" | "unknown"
 export type BirdStatusFilter = "all" | "threatened" | "national-threatened" | GlobalBirdStatus
 export type BirdOriginFilter = "all" | "native" | "introduced" | "unknown"
@@ -23,6 +23,7 @@ export function birdCountryOrigin(bird:ConservationBird,countryId?:string) {
  return countryId ? countries[countryId]?.species[birdSpeciesName(bird.scientificName)]?.origin ?? "unknown" : "unknown"
 }
 export function matchesBirdFilters(bird:ConservationBird,filters:BirdFilters,countryId?:string) {
+ countryId=countryId==="world"||!countryId ? bird.countryId : countryId
  const record=birdConservation(bird), status=record?.globalStatus ?? "unknown"
  const origin=birdCountryOrigin(bird,countryId)
  const countryName=({colombia:"Colombia",australia:"Australia","new-zealand":"New Zealand"} as Record<string,string>)[countryId ?? ""]

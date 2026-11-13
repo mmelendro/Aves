@@ -93,7 +93,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
   const journey=useTripMap()?.journey;
   const journeyStep=journey&&zoomed&&destination.id==="new-zealand"&&journey.islandId===regionId ? journey.steps[journey.index] : null;
   const collection = journeyStep ? journeyBirdProfiles(getDestinationRegionBirds("new-zealand"),journeyStep,regionId,featuredNzBirdId) : zoomed ? getDestinationRegionBirds(destination?.id, region?.id) : destinations.flatMap(item=>getDestinationRegionBirds(item.id))
-  const conservationBirds=filterConservationBirds(collection,filters,destination.id)
+  const conservationBirds=filterConservationBirds(collection,filters,zoomed ? destination.id : "world")
   const birds = southIsland && !journeyStep ? filterSouthIslandBirds(conservationBirds, sharedHabitat?.value ?? "all") : conservationBirds
   const filtering=birdFiltersActive(filters)
   const matchingRegionIds=regions.filter(item=>filterConservationBirds(getDestinationRegionBirds(destination.id,item.id),filters,destination.id).length>0).map(item=>item.id)
@@ -168,7 +168,7 @@ export function HomepageDestinationExplorerCore({ map, initialCountryId, initial
               </figure>}
             </div></MapViewer>}</div>}
             media={<div key={zoomed ? `${destination.id}:${regionId}:${journeyStep?.baseId || (southIsland ? sharedHabitat?.value : "")}` : "world"} className={styles.mediaPanel}>
-              <DestinationCardMedia destination={destination} birds={birds} label={zoomed ? `${region?.name ?? destination.name} bird photographs` : "Birds across AVES destinations"} fillPanel selection={zoomed && destination.id==="new-zealand" ? {isSelected:bird=>wishIds.includes(featuredNzBirdId(bird.scientificName)||""),onToggle:bird=>{const id=featuredNzBirdId(bird.scientificName);if(id)chooseBirds(wishIds.includes(id)?wishIds.filter(value=>value!==id):[...wishIds,id])}} : undefined} />
+              <DestinationCardMedia destination={destination} countryId={zoomed ? destination.id : "world"} birds={birds} label={zoomed ? `${region?.name ?? destination.name} bird photographs` : "Birds across AVES destinations"} fillPanel selection={zoomed && destination.id==="new-zealand" ? {isSelected:bird=>wishIds.includes(featuredNzBirdId(bird.scientificName)||""),onToggle:bird=>{const id=featuredNzBirdId(bird.scientificName);if(id)chooseBirds(wishIds.includes(id)?wishIds.filter(value=>value!==id):[...wishIds,id])}} : undefined} />
             </div>} />
         {zoomed&&destination.id==="new-zealand"&&<TripJourneyControls islandId={regionId}/>}
         </div>

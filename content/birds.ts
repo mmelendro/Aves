@@ -7,6 +7,7 @@ import catalogue from "./birds-catalogue.json"
 
 export type BirdSource = { title: string; url: string }
 export type BirdProfile = {
+  countryId?: string
   id: string
   commonName: string
   scientificName: string
