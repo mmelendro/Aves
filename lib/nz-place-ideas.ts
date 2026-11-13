@@ -1,5 +1,5 @@
 import {MAX_PLAN_NOTES,MAX_PLAN_NOTES_BYTES} from "@/lib/planning-limits"
-import {placeGalleryPhotos} from "@/lib/place-gallery"
+import landscapeIdeas from "@/content/nz-landscape-ideas.json"
 import northCatalogue from "@/content/north-island-trip-catalogue.json"
 import catalogue from "@/content/south-island-trip-catalogue.json"
 import pilot from "@/content/bcorp-south-island-pilot.json"
@@ -12,7 +12,7 @@ export const nzPlanningPlaces = [
   { id: "southern-forest", label: "Fiordland" },
   { id: "coast", label: "Otago & the Catlins" },
 ] as const
-export const nzLandscapeIdeas = placeGalleryPhotos.filter(photo=>photo.countryId==="new-zealand").map(photo=>({id:`landscape:${photo.id}`,label:photo.caption,regionId:photo.regionId,sourceUrl:photo.sourceUrl,creator:photo.creator,licence:photo.licence}))
+export const nzLandscapeIdeas = landscapeIdeas
 const landscapes=new Map(nzLandscapeIdeas.map(photo=>[photo.id,photo]))
 export const nzPublicPlanningPlaces = [...nzLandscapeIdeas,...nzPlanningPlaces, ...publicPlaces.points.map(({id,name})=>({id,label:name})), ...pilot.records.map(({id,name})=>({id,label:name})), ...catalogue.places.map(({id,name})=>({id,label:name})), ...northCatalogue.places.map(({id,name})=>({id,label:name}))]
 const names = new Map<string, string>(nzPublicPlanningPlaces.map(place => [place.id, place.label]))

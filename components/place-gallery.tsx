@@ -1,9 +1,10 @@
 "use client";
 
-import { useId, type KeyboardEvent } from "react";
+import { useEffect, useId, type KeyboardEvent } from "react";
 import RecoverablePhoto from "./recoverable-photo";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { galleryPhotos, type GalleryPhoto } from "@/lib/place-gallery";
+import type {GalleryPhoto} from "@/lib/place-gallery";
+import {orderGalleryPhotos} from "@/lib/gallery-order";
 import type { DestinationRegion } from "@/content/destination-regions";
 import { CarouselButton, CarouselCount } from "./carousel-controls";
 import NzPlaceIdeas from "./nz-place-ideas";
@@ -16,17 +17,21 @@ import styles from "./south-island-places-explorer.module.css";
 
 /** A shared photo surface. Selecting a photograph previews its planning region
  * on the existing map; it does not navigate, zoom or change the bird collection. */
-export default function PlaceGallery({countryId, countryName, regionId, regions, selectedPhotoId, onPhotoChange, onRegionChange, mapHref}: {
+export default function PlaceGallery({countryId, countryName, regionId, regions, selectedPhotoId, selectedPlaceId, photos:collection, onPhotoPreview, onPhotoChange, onRegionChange, mapHref}: {
   countryId: string; countryName: string; regionId: string;
-  regions: readonly DestinationRegion[]; selectedPhotoId?: string; mapHref: string;
+  regions: readonly DestinationRegion[]; selectedPhotoId?: string; selectedPlaceId?: string; mapHref: string;
+  photos:readonly GalleryPhoto[]; onPhotoPreview?:(photo:GalleryPhoto)=>void;
   onPhotoChange: (photo: GalleryPhoto) => void; onRegionChange: (id: string) => void;
 }) {
   const id = useId();
+  const galleryPhotos=(_country:string,region="")=>orderGalleryPhotos(collection,region);
   const photos = galleryPhotos(countryId, regionId);
-  const available = galleryPhotos(countryId);
-  if (!available.length) return null;
-  const active = Math.max(0, photos.findIndex(photo => photo.id === selectedPhotoId));
+  const available = collection;
+
+  const active = Math.max(0, photos.findIndex(photo => selectedPhotoId ? photo.id === selectedPhotoId : photo.placeId === selectedPlaceId));
   const photo = photos[active];
+  useEffect(()=>{if(photo)onPhotoPreview?.(photo)},[photo,onPhotoPreview]);
+  if (!available.length) return null;
   const region = regions.find(item => item.id === photo?.regionId);
   function move(delta: number) { if (!photos.length) return; onPhotoChange(photos[(active + delta + photos.length) % photos.length]); }
   function keydown(event: KeyboardEvent<HTMLDivElement>) {
