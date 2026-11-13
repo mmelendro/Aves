@@ -125,3 +125,8 @@
   height:var(--discovery-panel-height);
 }
 .pair[data-layout="guide"] .mapBody :global(dialog[data-aves-map]:not([data-expanded])) { min-height:100%; height:auto; overflow:visible; }
+
+/* The compact album is independent of the map canvas height. */
+.pair[data-layout="guide"][data-face="birds"] { height:min(48rem,calc(66.667cqw + 22rem)); --discovery-panel-height:min(48rem,calc(66.667cqw + 22rem)); }
+.pair[data-layout="guide"] > .mediaPanel :global([data-carousel-image]) { height:auto; aspect-ratio:3/2; }
+.birdCue img { object-fit:contain; }

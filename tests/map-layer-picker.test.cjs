@@ -7,10 +7,10 @@ test('shared country picker offers only available overlays and changing the back
  let layers={...initial,protectedAreas:true,protectedAreaSelections:{"/data/australia-national-parks-pilot.geojson":"NSW_N0030"}};
  const h=componentHarness('components/country-satellite-layer.tsx','CountrySatelliteControl',{country:'australia'},{mocks:{'./map-layer-context':{useMapLayers:()=>({layers,update:next=>{layers={...layers,...next}}})}}});
  let tree=h.render();assert.equal(nodes(tree).filter(n=>n.type==='input').length,0);button(tree).props.onClick();tree=h.render();
- assert.equal(nodes(tree).filter(n=>n.props.type==='radio').length,2);assert.equal(nodes(tree).filter(n=>n.props.type==='checkbox').length,0);
+ assert.equal(nodes(tree).filter(n=>n.props.type==='radio').length,4);assert.equal(nodes(tree).filter(n=>n.props.type==='checkbox').length,0);
  find(tree,n=>n.props['aria-label']==='Satellite').props.onChange();tree=h.render();
- assert.equal(layers.background,'satellite');assert.equal(layers.protectedAreas,true);assert.equal(layers.planningRegions,true);assert.equal(layers.protectedAreaSelections['/data/australia-national-parks-pilot.geojson'],'NSW_N0030');assert.equal(button(tree).props['aria-expanded'],false);
- button(tree).props.onClick();tree=h.render();assert.equal(nodes(tree).filter(n=>n.props.type==='checkbox').length,2);
+ assert.equal(layers.background,'satellite');assert.equal(layers.protectedAreas,true);assert.equal(layers.planningRegions,true);assert.equal(layers.protectedAreaSelections['/data/australia-national-parks-pilot.geojson'],'NSW_N0030');assert.equal(button(tree).props['aria-expanded'],true);
+ assert.equal(nodes(tree).filter(n=>n.props.type==='checkbox').length,2);
  const world=componentHarness('components/country-satellite-layer.tsx','CountrySatelliteControl',{country:''},{mocks:{'./map-layer-context':{useMapLayers:()=>({layers,update(){}})}}});
  let w=world.render();button(w).props.onClick();w=world.render();assert.equal(nodes(w).filter(n=>n.props.type==='checkbox').length,0,'world must not advertise unsupported reserve coverage');
 });

@@ -23,7 +23,7 @@ import {useBirdFilters} from "./bird-filter-context"
 import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
 import {newZealandRegionBirds} from "@/content/new-zealand-carousel"
 import {filterSouthIslandBirds} from "@/content/south-island-ecosystems"
-import { Hand, Minus, Plus, RotateCcw } from "lucide-react"
+import { Minus, Plus, RotateCcw } from "lucide-react"
 import map from "@/content/south-island-ecosystem-map.json"
 import contextRegions from "@/content/geographic-planning-regions/new-zealand.json"
 import { southIslandEcosystems, type SouthIslandEcosystemFilter, type SouthIslandEcosystem } from "@/content/south-island-ecosystems"
@@ -50,7 +50,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const { layers } = useMapLayers()
   const {filters}=useBirdFilters()
   const matches=matchingHabitats ?? (birdFiltersActive(filters) ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(filterConservationBirds(newZealandRegionBirds("south-island"),filters,"new-zealand"),item.id).length>0).map(item=>item.id) : undefined)
-  const satellite = layers.background === "satellite"
+  const satellite = layers.background !== "habitats"
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   const journey=useTripMap()?.journey
@@ -116,7 +116,6 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1 && !onZoomOutAtMinimum} onClick={() => camera.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
       <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>
       </>}
       <SouthIslandMapLayers />

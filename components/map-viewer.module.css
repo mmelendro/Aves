@@ -41,3 +41,8 @@
    phones and enlarged text. Inline maps retain their map-first arrangement. */
 .viewer[data-expanded] .toolbar { order:0; position:sticky; top:0; z-index:5; }
 .viewer[data-expanded] .surface { order:1; min-height:14rem; flex:1 0 14rem; }
+
+/* Keep native hidden and wrap controls in normal flow. */
+.surface[hidden] { display:none; }
+.toolbar { position:relative; isolation:isolate; height:auto; min-height:3.25rem; overflow:visible; }
+.toolbar > * { max-width:100%; }

@@ -2,7 +2,7 @@
  * Run after editing source media; --check verifies without changing files. */
 const fs=require('node:fs');
 const check=process.argv.includes('--check');
-function output(path,value){const text=JSON.stringify(value)+'\n';if(check){if(fs.readFileSync(path,'utf8')!==text)throw Error(`Refresh ${path} with node scripts/generate-gallery-snapshots.cjs`)}else fs.writeFileSync(path,text)}
+function output(path,value){const text=JSON.stringify(value)+'\n';if(check){if(fs.readFileSync(path,'utf8').replace(/\r\n/g,'\n')!==text)throw Error(`Refresh ${path} with node scripts/generate-gallery-snapshots.cjs`)}else fs.writeFileSync(path,text)}
 const additions=JSON.parse(fs.readFileSync('content/place-gallery-additions.json','utf8'));
 output('content/south-island-gallery-additions.json',{photos:additions.photos.filter(p=>p.countryId==='new-zealand'&&p.regionId==='south-island')});
 const load=require('../tests/helpers/load-ts.cjs')();

@@ -45,6 +45,8 @@ function componentHarness(file, name, props, overrides = {}) {
     "@/lib/supabase/client": { createClient() { throw new Error("Unexpected provider call") } },
     ...overrides.mocks,
   }
+  const testWindow = overrides.window || {}
+  testWindow.dispatchEvent ??= () => true
   function module(filename) {
     if (cache.has(filename)) return cache.get(filename)
     if (filename.endsWith(".json")) return JSON.parse(readFileSync(filename, "utf8"))
@@ -64,7 +66,7 @@ function componentHarness(file, name, props, overrides = {}) {
       }
       return require(id)
     }
-    new Function("require", "exports", "FormData", "crypto", "window", "fetch", code)(requireModule, exports, FormValues, { randomUUID }, overrides.window || {}, overrides.fetch || (() => { throw new Error("Unexpected network request") }))
+    new Function("require", "exports", "FormData", "crypto", "window", "fetch", code)(requireModule, exports, FormValues, { randomUUID }, testWindow, overrides.fetch || (() => { throw new Error("Unexpected network request") }))
     return exports
   }
   const Component = module(resolve(root, file))[name]

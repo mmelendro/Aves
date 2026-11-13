@@ -1,11 +1,11 @@
 /**
  * Shared photo-and-sound carousel used by destination, region and editorial pages.
  * The caller chooses the birds; this file owns slide navigation, audio and details.
- * The default portrait frame is 9:16 and capped at 320px wide; the global
- * homepage viewer uses a shorter 4:5 frame that fills its existing card. Photos
- * cover either frame; imagePosition names a focal point kept centred on resize.
+ * Every surface uses the same compact 3:2 album frame. Contained photographs
+ * retain the complete bird, including its eyes, at every viewport size.
  */
 "use client"
+import {BirdWishButton} from "@/components/bird-wish-button"
 
 import {CarouselButton,CarouselCount} from "./carousel-controls"
 import PhotoCredit from "./photo-credit"
@@ -289,7 +289,7 @@ export default function HomepageBirdCarousel({
 
   return localizeHome((
     <div
-      className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, !isDestinationCard && !fillPanel && "max-w-[20rem]")}
+      className={cn("relative mx-auto w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4", className, "max-w-3xl")}
       data-info-presentation="overlay" role="region" aria-roledescription="carousel" aria-label={label} tabIndex={0}
       onKeyDown={handleKeyDown}
       onFocusCapture={event => { if (!(event.target as HTMLElement).closest("[data-slideshow-control]")) setIsPlaying(false) }}
@@ -313,25 +313,26 @@ export default function HomepageBirdCarousel({
       />}
       <Card className={cn("overflow-hidden rounded-2xl border border-emerald-100 shadow-lg", isDestinationCard && "rounded-none border-0 shadow-none")}>
         <div data-carousel-image data-has-bird-selection={selection ? "true" : undefined}
-          className={cn("relative w-full overflow-hidden bg-stone-100", isDestinationCard ? "aspect-[4/5]" : "aspect-[9/16]")}
-          style={{ containerType: "size", touchAction: "pan-y pinch-zoom", ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) }}
+          className={cn("relative w-full overflow-hidden bg-stone-100", "aspect-[3/2]")}
+          style={{ containerType: "size", touchAction: "pan-y pinch-zoom",  }}
           onTouchStart={event => { touchStartRef.current = !(event.target as HTMLElement).closest("button, a, input, select, textarea, [data-species-overlay]") && event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null }}
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
           {/* One edge-to-edge photo, with a per-species focal point for the portrait crop. */}
           {renderPhoto && imageStatus !== "error" ? <PhotoZoom key={currentBird.id} label={currentBird.commonName}><Image
             key={currentBird.id} ref={imageRef} src={sitePath(currentBird.image || "/placeholder.svg")} alt={currentBird.commonName} fill
-            className={cn("object-cover transition-opacity duration-300 motion-reduce:transition-none", imageStatus === "loaded" ? "opacity-100" : "opacity-0")}
-            style={{ objectPosition: currentBird.imagePosition || "center" }}
+            className={cn("object-contain transition-opacity duration-300 motion-reduce:transition-none", imageStatus === "loaded" ? "opacity-100" : "opacity-0")}
+            style={{ objectPosition: "center" }}
             onLoad={() => setImageState({ image: currentBird.image, status: "loaded" })}
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
             priority={priority && selectedIndex === 0}
-            sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
+            sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 767px) 100vw, 768px"}
           /></PhotoZoom> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>{renderPhoto ? "Image unavailable" : "Turn to the birds to load this photograph."}</p></div>}
           {renderPhoto && imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
           {/* Image count describes this curated selection, not a destination species total. */}
           <p className="absolute left-3 top-3 rounded-full border border-white/30 bg-slate-950/60 px-3 py-2 text-xs font-medium tabular-nums text-white backdrop-blur-md" aria-label={`Image ${selectedIndex + 1} of ${birds.length}`}><CarouselCount index={selectedIndex+1} total={birds.length}/></p>
+          {!selection && (currentBird.countryId ?? countryId) === "australia" && <div className="absolute left-3 top-16 z-20"><BirdWishButton id={currentBird.id} name={currentBird.commonName} country="australia" /></div>}
           {selection && <IconControl label={`${selection.isSelected(currentBird) ? "Remove" : "Add"} ${currentBird.commonName} ${selection.isSelected(currentBird) ? "from" : "to"} bird wish list`} aria-pressed={selection.isSelected(currentBird)} onClick={() => selection.onToggle(currentBird)} className="absolute left-3 top-16 z-20" buttonClassName={selection.isSelected(currentBird) ? "border-emerald-100 bg-emerald-700/90" : undefined}><Heart className="h-4 w-4" fill={selection.isSelected(currentBird) ? "currentColor" : "none"} aria-hidden="true" /></IconControl>}
           <div className="absolute right-2 top-2 z-20 flex gap-1 sm:right-3 sm:top-3 sm:gap-1.5">
             <IconControl label={isPlaying ? "Pause slideshow" : "Play slideshow"} data-slideshow-control onClick={() => {
@@ -356,13 +357,17 @@ export default function HomepageBirdCarousel({
             <IconControl label="Previous image" tooltipSide="right" className="pointer-events-auto" onClick={() => goToSlide(selectedIndex - 1)}><ChevronLeft className="h-5 w-5" aria-hidden="true" /></IconControl>
             <IconControl label="Next image" tooltipSide="left" className="pointer-events-auto" onClick={() => goToSlide(selectedIndex + 1)}><ChevronRight className="h-5 w-5" aria-hidden="true" /></IconControl>
           </div>}
-          {!showInfo && <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent px-4 pb-3 pt-12 text-white sm:px-5 sm:pb-4">
+
+        </div>
+          {!showInfo && <div className="bg-emerald-950 px-4 py-3 text-white sm:px-5">
             <h3 className="text-base font-semibold leading-tight sm:text-lg">{currentBird.commonName}</h3>
             <p className="mt-1 text-xs italic text-white/90 sm:text-sm">{currentBird.scientificName}</p>
             <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-white/95"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span>{currentBird.primaryRegion}</span></p>
             <BirdConservationLabel bird={currentBird}/>
           </div>}
-        </div>
+        <nav aria-label="Choose a bird photograph" className="flex gap-2 overflow-x-auto border-t border-emerald-100 bg-white p-3">
+          {birds.map((bird,index)=><button key={bird.id} type="button" aria-label={`Show ${bird.commonName}`} aria-pressed={index===selectedIndex} onClick={()=>goToSlide(index)} className={cn("w-16 shrink-0 rounded-lg p-1 text-[10px] leading-4 text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700",index===selectedIndex?"bg-emerald-100 ring-2 ring-inset ring-emerald-700":"hover:bg-emerald-50")}><Image src={sitePath(bird.image)} alt="" width={64} height={64} sizes="64px" className="h-14 w-14 rounded-md bg-stone-50 object-contain"/><span className="mt-1 line-clamp-2 block">{bird.commonName}</span></button>)}
+        </nav>
         {/* The photographer follows the selected slide; never keep a static card credit. */}
         <div className="border-b border-emerald-100 bg-emerald-50/40 px-3 text-xs text-emerald-800">
           <PhotoCredit key={currentBird.id} onOpen={()=>setIsPlaying(false)} creator={currentBird.photoCredit.photographer} sourceUrl={currentBird.photoCredit.instagramPost || currentBird.photoCredit.teamLink || "/credits"} title={currentBird.photoCredit.title}/>
@@ -379,6 +384,7 @@ export default function HomepageBirdCarousel({
             }}>Listen as you change birds: {callsFollow ? "On" : "Off"}</button><BirdFilterControls/>
           <p className="text-xs leading-5" role="status">{sharedAudio.available ? callsFollow ? (currentBird.audioFile ? "Listening follows your bird choices in the shared player." : "No recording for this bird. Choose another to continue.") : "Optional for this viewer. Stops when you leave or hide this page." : followStatus === "blocked" ? "Playback stopped. Press Listen again to resume." : followStatus === "missing" ? "No recording for this bird. Choose another to continue." : followStatus === "loading" ? "Loading this bird’s call…" : followStatus === "playing" ? "Listening follows your bird choices. Pause to stop." : followStatus === "ready" ? "Choose another bird to hear its call." : "Optional for this viewer. Stops when you leave or hide this page."}</p>
         </div>
+
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}
         {/* Announce manual changes politely; automatic playback must not repeatedly interrupt speech. */}
         <p className="sr-only" role="status" aria-live={isPlaying ? "off" : "polite"}>{currentBird.commonName}, image {selectedIndex + 1} of {birds.length}. {currentBird.localOccurrence || currentBird.distribution}</p>

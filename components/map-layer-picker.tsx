@@ -46,7 +46,7 @@ export function renderMapLayerPicker({
 }) {
   return (
     <div
-      className="relative flex shrink-0 items-center gap-1"
+      className="relative flex min-w-0 flex-wrap items-center gap-1"
       data-map-layer-panel={scope}
     >
       {backgroundControl}
@@ -75,7 +75,7 @@ export function renderMapLayerPicker({
           ref={picker.dialog}
           id={`${picker.id}-layers`}
           aria-label={`${title} layer choices`}
-          className="absolute bottom-full left-0 z-[1000] mb-2 m-0 h-fit max-h-[min(65svh,32rem)] w-[min(21rem,calc(100vw-2rem))] overflow-y-auto overscroll-contain rounded-2xl border border-emerald-200 bg-white p-3 text-left text-xs leading-5 text-emerald-950 shadow-xl motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2"
+          className="relative basis-full z-10 m-0 h-fit max-h-[min(65svh,32rem)] w-full max-w-full overflow-y-auto overscroll-contain rounded-2xl border border-emerald-200 bg-white p-3 text-left text-xs leading-5 text-emerald-950 shadow-xl motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2"
           onKeyDown={(event) => {if(event.key==="Escape"){event.preventDefault();event.stopPropagation();picker.close();}}}
           onCancel={(event) => {
             event.preventDefault();

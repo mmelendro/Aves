@@ -2,7 +2,7 @@
  * their rights records and authored focal points are never overwritten. */
 import { readFile, writeFile, mkdir } from "node:fs/promises"
 import { existsSync, readFileSync } from "node:fs"
-import { resolve, dirname, extname, join } from "node:path"
+import { resolve, dirname, extname, join, sep } from "node:path"
 import { createHash } from "node:crypto"
 import ts from "typescript"
 import sharp from "sharp"
@@ -11,7 +11,7 @@ const root = process.cwd(), cache = new Map()
 function dataModule(path) {
   const candidate = resolve(root, path)
   const file = existsSync(candidate) ? candidate : [".ts", ".json"].map(ext => candidate + ext).find(existsSync)
-  if (!file || !file.startsWith(root + "/")) throw Error(`Unknown public data module: ${path}`)
+  if (!file || !file.startsWith(root + sep)) throw Error(`Unknown public data module: ${path}`)
   if (cache.has(file)) return cache.get(file)
   if (file.endsWith(".json")) return JSON.parse(readFileSync(file, "utf8"))
   const output = {}; cache.set(file, output)
@@ -42,7 +42,7 @@ const emitted = new Map()
 for (const src of sources) {
   if (typeof src !== "string" || !src.startsWith("/") || src.startsWith("//") || ![".png", ".jpg", ".jpeg", ".webp"].includes(extname(src).toLowerCase())) continue
   const input = resolve(root, "public", src.slice(1))
-  if (!input.startsWith(join(root, "public") + "/")) throw Error("Invalid public photo path")
+  if (!input.startsWith(join(root, "public") + sep)) throw Error("Invalid public photo path")
   const original = await readFile(input), sourceSha256 = createHash("sha256").update(original).digest("hex")
   const metadata = await sharp(original).metadata()
   const width = metadata.autoOrient?.width || metadata.width, height = metadata.autoOrient?.height || metadata.height

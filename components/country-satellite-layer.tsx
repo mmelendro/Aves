@@ -1,6 +1,7 @@
 "use client";
 import type {ReactNode} from "react";
 import {MapLayerProvider,useMapLayers} from "./map-layer-context";
+import MapBackgroundToggle from "./map-background-toggle";
 import {mapBackgroundChoices} from "@/content/map-basemaps";
 import {renderMapLayerPicker,useMapLayerPicker} from "./map-layer-picker";
 const names:Record<string,string>={colombia:"Colombia",australia:"Australia","new-zealand":"New Zealand"};
@@ -12,7 +13,7 @@ export function CountrySatelliteControl({country,region=""}:{country:string;regi
   const satellite=layers.background!=="habitats",title=names[country]??"World";
   const north=country==="new-zealand"&&region==="north-island";
   const count=satellite&&country?Number(layers.planningRegions)+Number(layers.protectedAreas)+(north?Number(layers.planning)+Number(layers.itinerary):0):0;
-  return renderMapLayerPicker({picker,scope:country||"world",title,count,backgroundControl:undefined,children:<>
+  return renderMapLayerPicker({picker,scope:country||"world",title,count,backgroundControl:<MapBackgroundToggle/>,children:<>
     <fieldset className="mt-2"><legend className="font-semibold">Map background</legend>
       {mapBackgroundChoices.map(([value,label])=><label key={value} className="flex min-h-11 cursor-pointer items-center gap-2"><input type="radio" name={`${picker.id}-background`} aria-label={label} checked={layers.background===value} onChange={()=>{update({background:value});}}/>{label}</label>)}
     </fieldset>

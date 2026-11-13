@@ -9,7 +9,7 @@
     "content/colombia-planning-boundaries.json": "4cba646a298c260dc9c659775d660f9653877c26c119ca6e58f42db3f162d480",
     "content/colombia-map-markers.ts": "8ed0245fbd1d6530707c195d80a80867d78508249df6f6091be6fe1fc11406f6",
     "lib/region-links.ts": "ec1d8a9993f45b5846968ecf0dfeea57cc5c6fbf3d94c76ed6d3716fd319d7b9",
-    "scripts/generate-guide-map-cues.cjs": "c172772b512f4b2fc3e4f74561eb56cf689393506e92e1f2ffb689d7eb449547"
+    "scripts/generate-guide-map-cues.cjs": "3234e31f8d2355ffb15c75f6dec5ae1dbcf8b5149a8a57d5ce5e4f6f01fb4894"
   },
   "cues": {
     "world": {
