@@ -200,7 +200,7 @@ function IslandPlannerForm() {
     }
   }
   async function copy() {
-    if (!draft) return;
+    if (!draft || dirty) return;
     try {
       await navigator.clipboard.writeText(tripDraftText(draft));
       setNotice(
@@ -755,7 +755,7 @@ function IslandPlannerForm() {
                 <textarea
                   aria-label={uiCopy("Itinerary text to copy")}
                   readOnly
-                  value={tripDraftText(draft)}
+                  value={dirty ? uiCopy("Your choices changed. Rebuild before copying this itinerary.") : tripDraftText(draft)}
                   rows={10}
                   className={`${field} mt-3 font-mono text-xs`}
                 />
@@ -763,6 +763,7 @@ function IslandPlannerForm() {
                   type="button"
                   className={`${button} mt-3`}
                   onClick={copy}
+                  disabled={dirty}
                 >
                   {uiCopy("\n                  Copy itinerary\n                ")}</button>
               </details>
