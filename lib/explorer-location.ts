@@ -1,3 +1,4 @@
+import galleryPlaceIndex from "@/content/gallery-place-index.json"
 import { destinations } from "@/content/destinations"
 import { destinationRegions } from "@/content/destination-regions"
 
@@ -29,4 +30,14 @@ export function explorerLocationHref(href:string,location:ExplorerLocation):stri
   url.searchParams.set("explore",known.country || "world")
   if(known.region)url.searchParams.set("region",known.region);else url.searchParams.delete("region")
   return `${url.pathname}${url.search}${url.hash}`
+}
+
+/** A small authored index preserves old root-gallery bookmarks without making
+ * every homepage visit load the complete media catalogue. Unknown or cross-region
+ * IDs never opt a concise preview into the detailed place view. */
+export function isReviewedGalleryPlace(location:ExplorerLocation,placeId:string):boolean {
+ const index=galleryPlaceIndex as Record<string,Record<string,string>>
+ if(!Object.hasOwn(index,location.country))return false
+ const places=index[location.country]
+ return Object.hasOwn(places,placeId)&&(!location.region||places[placeId]===location.region)
 }

@@ -323,3 +323,10 @@ test("credit pagination keeps recording anchors and complete image-source access
       .first(),
   ).toBeVisible();
 });
+
+test('a legacy world gallery bookmark still opens its exact reviewed photograph',async({page},info)=>{
+ test.skip(!['desktop','phone-390'].includes(info.project.name),'World gallery bookmark compatibility');
+ await page.goto('/?explore=colombia&region=central-andes&place=nevado-del-ruiz#place-gallery');await declineOptionalCookies(page);
+ await expect(page.locator('#place-gallery').getByRole('heading',{name:'Nevado del Ruiz',exact:true})).toBeVisible();
+ await page.reload();await expect(page.locator('#place-gallery').getByRole('heading',{name:'Nevado del Ruiz',exact:true})).toBeVisible();
+});

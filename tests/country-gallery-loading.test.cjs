@@ -8,6 +8,7 @@ test('deferred country catalogues preserve all licensed photos and the original 
   assert.deepEqual(photos,placeGalleryPhotos.filter(p=>p.countryId===country));
   for(const region of ['',...new Set(photos.map(p=>p.regionId))])assert.deepEqual(orderGalleryPhotos(photos,region),galleryPhotos(country,region));
  }
+ assert.deepEqual(require('../content/gallery-place-index.json'),Object.fromEntries(['colombia','australia','new-zealand'].map(country=>[country,Object.fromEntries(placeGalleryPhotos.filter(p=>p.countryId===country).map(p=>[p.placeId,p.regionId]))])));
  const expected=placeGalleryPhotos.filter(p=>p.countryId==='new-zealand').map(p=>({id:`landscape:${p.id}`,label:p.caption,regionId:p.regionId,sourceUrl:p.sourceUrl,creator:p.creator,licence:p.licence}));
  assert.deepEqual(require('../content/nz-landscape-ideas.json'),expected);
  const contexts=load('content/south-island-place-media.ts').southIslandPlaceContexts;

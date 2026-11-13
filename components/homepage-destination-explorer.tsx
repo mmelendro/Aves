@@ -23,6 +23,7 @@ import { guideMapCue, mapCueSources } from "@/lib/guide-map-cue";
 import {
   explorerLocation,
   readExplorerLocation,
+  isReviewedGalleryPlace,
   explorerLocationHref,
   type ExplorerLocation,
 } from "@/lib/explorer-location";
@@ -115,7 +116,6 @@ export function HomepageDestinationExplorerCore({
   onScopeChange,
 }: ExplorerProps) {
   const currentPath = usePathname() || "/";
-  const detailView = Boolean(initialCountryId);
   const { filters } = useBirdFilters();
   const localizeHome = useColombiaHomeCopy();
   const { publish } = useHeaderLandscape();
@@ -131,6 +131,8 @@ export function HomepageDestinationExplorerCore({
     function restore() {
       const next = readExplorerLocation(window.location.search, fallback);
       setScope(next);
+    setGalleryPlaceId("");
+    setGalleryPhoto(null);
       setBirdId("");
       setShowBirdAreas(false);
       const place = new URLSearchParams(window.location.search).get("place");
@@ -158,6 +160,7 @@ export function HomepageDestinationExplorerCore({
   const [birdId, setBirdId] = useState("");
   const [showBirdAreas, setShowBirdAreas] = useState(false);
   const [galleryPlaceId, setGalleryPlaceId] = useState("");
+  const detailView = Boolean(initialCountryId) || isReviewedGalleryPlace({country:selectedId,region:regionId},galleryPlaceId);
   const [galleryPhoto, setGalleryPhoto] = useState<GalleryPhoto | null>(null);
   const [wishIds, setWishIds] = useState<string[]>([]);
   const [storageAvailable, setStorageAvailable] = useState(true);

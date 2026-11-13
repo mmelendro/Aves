@@ -29,3 +29,12 @@ test('consolidated legacy image URLs retain byte-identical canonical files throu
   assert.ok(!fs.existsSync('public'+row.old));
  }
 });
+
+test('old gallery bookmark intent requires a reviewed place in the selected country and region',()=>{
+ const {isReviewedGalleryPlace:valid}=load('lib/explorer-location.ts');
+ assert.ok(valid({country:'colombia',region:'central-andes'},'nevado-del-ruiz'));
+ assert.ok(valid({country:'colombia',region:''},'nevado-del-ruiz'));
+ assert.ok(!valid({country:'colombia',region:'eastern-andes'},'nevado-del-ruiz'));
+ assert.ok(!valid({country:'australia',region:''},'nevado-del-ruiz'));
+ assert.ok(!valid({country:'__proto__',region:''},'constructor'));
+});

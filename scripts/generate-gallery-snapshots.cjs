@@ -11,4 +11,5 @@ output('content/south-island-discovery-index.json',{places:places.map(({id,label
 const {placeGalleryPhotos}=load('lib/place-gallery.ts');
 for(const country of ['colombia','australia','new-zealand'])output(`content/gallery-${country}.json`,placeGalleryPhotos.filter(p=>p.countryId===country));
 output('content/nz-landscape-ideas.json',placeGalleryPhotos.filter(p=>p.countryId==='new-zealand').map(p=>({id:`landscape:${p.id}`,label:p.caption,regionId:p.regionId,sourceUrl:p.sourceUrl,creator:p.creator,licence:p.licence})));
+output('content/gallery-place-index.json',Object.fromEntries(['colombia','australia','new-zealand'].map(country=>[country,Object.fromEntries(placeGalleryPhotos.filter(p=>p.countryId===country).map(p=>[p.placeId,p.regionId]))])));
 console.log(check?'Deferred gallery snapshots match reviewed sources.':'Updated deferred gallery snapshots.');
