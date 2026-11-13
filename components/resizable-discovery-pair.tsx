@@ -15,6 +15,7 @@ import ResponsivePhoto from "./responsive-photo"
 import GuideMapThumbnail from "./guide-map-thumbnail"
 import { FieldGuideContext, type GuidePreviewOpener } from "./field-guide-context"
 import styles from "./resizable-discovery-pair.module.css"
+import { useDiscoveryPanelResize } from "./discovery-panel-resize"
 
 type BirdCue = { commonName: string; image: string; imagePosition?: string }
 type Props = { journeyNavigation?: ReactNode; guidedJourney?: boolean; initialFace?: "birds" | "map"; mapCue?: GuideMapCue; birdCue?: BirdCue; map: ReactNode; media: ReactNode; mapLabel: string; mediaId?: string; mediaFirst?: boolean; mediaLabel?: string }
@@ -43,8 +44,9 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   const [share, setShare] = useState(50)
   const [dragging, setDragging] = useState(false)
   const paired = layout === "paired" && width >= DISCOVERY_PAIR_MIN_WIDTH
-  const effectiveShare = clampDiscoverySplit(share, width)
-  const bounds = discoverySplitBounds(width)
+  const resize = useDiscoveryPanelResize({width,enabled:paired,mediaFirst,share,onShare:setShare})
+  const effectiveShare = clampDiscoverySplit(share, resize.frameWidth)
+  const bounds = discoverySplitBounds(resize.frameWidth)
 
   useEffect(() => {
     const container = containerRef.current
@@ -58,7 +60,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
       const active = dragRef.current
       // Content-box and bounding-box readings can differ by a fraction of a
       // pixel. A height-only observer update must not interrupt an active drag.
-      if (active && Math.abs(active.width - nextWidth) > 1) {
+      if (active && Math.abs(active.width - (cardRef.current?.getBoundingClientRect().width ?? nextWidth)) > 1) {
         dragRef.current = null
         setDragging(false)
         const separator = separatorRef.current
@@ -115,7 +117,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   // CSS uses these proportions only when both cards fit. No browser storage or account setting is needed.
   const leftShare = mediaFirst ? 100 - effectiveShare : effectiveShare
   const direction = mediaFirst ? -1 : 1
-  const layoutStyle = { "--discovery-columns": `minmax(0, ${leftShare}fr) 44px minmax(0, ${100 - leftShare}fr)` } as CSSProperties
+  const layoutStyle = { ...resize.style, "--discovery-columns": `minmax(0, ${leftShare}fr) 44px minmax(0, ${100 - leftShare}fr)` } as CSSProperties
 
   function showFace(next: "birds" | "map") {
     revealAfterTurn.current = true
@@ -152,14 +154,15 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     <p className={styles.guideHelp}>Turn the card to explore the map and meet its birds. Your place and bird stay selected.</p>
     <span className="sr-only" role="status">{layout === "paired" ? "Map and birds shown together." : face === "birds" ? "Bird photographs side of the guide." : "Map side of the guide."}</span>
     <div className={styles.controls} hidden={layout === "guide"}>
-      <p id={`${id}-help`}>Drag the divider or use its arrow keys to resize.</p>
-      <button type="button" onClick={() => setShare(50)} className={styles.reset}>
+      <p id={`${id}-help`}>Drag any panel edge or corner to resize. Use arrow keys on a corner or divider; Shift moves faster.</p>
+      <button type="button" onClick={resize.reset} className={styles.reset}>
         <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />Reset layout
       </button>
     </div>
-    <div ref={cardRef} className={styles.pair} style={layoutStyle} data-dragging={dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face} data-guided-journey={guidedJourney || undefined}>
+    <div ref={cardRef} className={styles.pair} style={layoutStyle} data-resizable={paired || undefined} data-dragging={dragging || resize.dragging} data-media-first={mediaFirst} data-layout={layout} data-face={face} data-guided-journey={guidedJourney || undefined}>
       {/* Media comes first on mobile; desktop can place it on either side. */}
       <div id={`${id}-birds`} className={styles.mediaPanel} inert={layout === "guide" && face !== "birds"} aria-hidden={layout === "guide" && face !== "birds"}>
+        {resize.handles('birds')}
         <div className={styles.mediaBody}><div id={mediaId}><ExpandableMedia label={`${mapCue?.label || "Regional"} birds`}>{media}</ExpandableMedia></div></div>
         <button type="button" className={styles.birdCue} aria-haspopup="dialog" onClick={event => openPreview("map",event?.currentTarget)} aria-label={`View ${mapCue?.label || "this region"} on the map`}>
           {mapCue ? <GuideMapThumbnail map={mapCue}/> : <MapIcon size={28} aria-hidden="true"/>}
@@ -174,7 +177,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         onKeyDown={event => {
           // Read current geometry in case input follows a window resize before
           // ResizeObserver has committed its next React update.
-          const activeWidth = containerRef.current?.getBoundingClientRect().width ?? width
+          const activeWidth = cardRef.current?.getBoundingClientRect().width ?? width
           if (activeWidth < DISCOVERY_PAIR_MIN_WIDTH) return
           const activeBounds = discoverySplitBounds(activeWidth)
           const activeShare = clampDiscoverySplit(share, activeWidth)
@@ -185,7 +188,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
           setShare(clampDiscoverySplit(next, activeWidth))
         }}
         onPointerDown={event => {
-          const activeWidth = containerRef.current?.getBoundingClientRect().width ?? width
+          const activeWidth = cardRef.current?.getBoundingClientRect().width ?? width
           if (activeWidth < DISCOVERY_PAIR_MIN_WIDTH || !event.isPrimary || event.button !== 0) return
           event.preventDefault()
           event.currentTarget.focus({ preventScroll: true })
@@ -202,6 +205,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
         <span className={styles.grip}><GripVertical className="h-5 w-5" aria-hidden="true" /></span>
       </div>
       <div ref={mapPanelRef} id={`${id}-map`} className={styles.mapPanel} inert={layout === "guide" && face !== "map"} aria-hidden={layout === "guide" && face !== "map"}>
+        {resize.handles('map')}
         <div className={styles.mapBody}>{map}</div>
         {birdCue && <button type="button" className={styles.birdCue} aria-haspopup="dialog" onClick={event => openPreview("birds",event?.currentTarget)} aria-label={`View ${birdCue.commonName} in the bird guide`}>
           <ResponsivePhoto src={birdCue.image} alt="" width={36} height={36} sizes="36px" loading="lazy" style={{objectPosition:birdCue.imagePosition}}/>
