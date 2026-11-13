@@ -748,6 +748,279 @@
       "status": "Open",
       "previous": [],
       "audit": "Product journey audit, 13 November 2026"
+    },
+    {
+      "id": 56,
+      "title": "Compact the My Trips dashboard",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Show title, destination, timing, last update and one primary Open trip action. Collapse full notes and secondary actions. Confirm ten long plans remain easy to scan.",
+      "originalEvidence": "Full notes and questionnaire answers render in every plan card. The current notes allowance can reach 60,000 characters. Return visits should open a useful overview, not an entire document.",
+      "evidenceKind": "Source + live account review",
+      "sourceBeforeImplementation": "components/account/account-dashboard.tsx:114",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 57,
+      "title": "Give the trip workspace clear sections and a Resume action",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Use a clear workspace name and accessible Overview, Route, Checklist, Journal, Album and Offline pack navigation. Reopening a trip should make the next action obvious without auto-changing records.",
+      "originalEvidence": "The dashboard entry still says Open checklist and journal although the destination now includes editable routes and other trip tools.",
+      "evidenceKind": "Source + live account review",
+      "sourceBeforeImplementation": "components/account/account-dashboard.tsx:114",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 58,
+      "title": "Break planning into manageable stages",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Separate preferences, route comparison and day editing. Keep a compact route summary and accessible map return. Preserve all current choices and source checks.",
+      "originalEvidence": "A recovered six-day North Island page measured about 14,065 pixels and 4,056 visible main-content words at the audited desktop viewport. That is one state, not every visit.",
+      "evidenceKind": "Live desktop measurement",
+      "sourceBeforeImplementation": "components/island-trip-planner.tsx",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 59,
+      "title": "Remove repeated destination introductions and self-links",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Keep the map first. Make the homepage a concise preview with a clear country entry. Remove same-page Explore calls and duplicate paragraphs while retaining bird/map context.",
+      "originalEvidence": "The homepage expands a country guide, then its country page repeats the explorer, introduction and selected-place introduction. New Zealand contains an Explore New Zealand link back to the same page.",
+      "evidenceKind": "Live navigation",
+      "sourceBeforeImplementation": "components/homepage-destination-explorer.tsx",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 60,
+      "title": "Expose Search consistently",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Add a visible desktop Search action and test keyboard access without crowding the mobile header.",
+      "originalEvidence": "The default desktop header shows only the first three navigation entries. Search is available in the mobile menu and footer.",
+      "evidenceKind": "Source + live navigation",
+      "sourceBeforeImplementation": "components/new-zealand-header.tsx:42",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 61,
+      "title": "Place inventories inside their countries in the site tree",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Each country branch should expose Regions, Birds and available Planning. Keep shared Search/Display separate from About/Help/Legal. Reuse existing canonical routes.",
+      "originalEvidence": "All three national bird inventories appear under Website information, alongside settings and legal pages.",
+      "evidenceKind": "Source + live site-map expansion",
+      "sourceBeforeImplementation": "lib/public-navigation.ts:28",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 62,
+      "title": "Preserve destination context in Contact",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Build contextual enquiries through one helper. Confirm Colombia, Australia, New Zealand and global entries retain the appropriate country and never imply a booking.",
+      "originalEvidence": "The shared footer Contact AVES link always points to the Australian contact route with a general topic. It loads, but loses the selected destination.",
+      "evidenceKind": "Source + live link inspection",
+      "sourceBeforeImplementation": "components/global-navigation.tsx:46",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 63,
+      "title": "Fix nested navigation controls",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Use a single styled link or Button asChild. Confirm one keyboard focus target and correct navigation per action.",
+      "originalEvidence": "Australian tour templates nest a default button inside a link. This is invalid interactive composition, even though previous accessibility tests passed elsewhere.",
+      "evidenceKind": "Source confirmed, not live reproduced",
+      "sourceBeforeImplementation": "app/australia/[...slug]/page.tsx:38",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 64,
+      "title": "Prevent misleading collection results while filters load",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Associate results with request parameters. Mark previous results clearly or replace them with a stable loading state. Test slow, failed and out-of-order requests and expired sessions.",
+      "originalEvidence": "Collection data remains rendered after country/state/search changes and after request errors. The selected filters can describe a different set of cards.",
+      "evidenceKind": "Source confirmed",
+      "sourceBeforeImplementation": "components/account/bird-collection.tsx:23",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 65,
+      "title": "Recover failed reference photographs",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Offer explicit retry for both photo types. Preserve credits and text during failure. Test failed reference image, retry success and preference changes.",
+      "originalEvidence": "Collection reference-photo failure hides the image, but only owner photos have a retry control. Refresh keeps the same child key and can retain failure state.",
+      "evidenceKind": "Source confirmed",
+      "sourceBeforeImplementation": "components/account/bird-collection.tsx:14",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 66,
+      "title": "Replace technical receipt errors with useful recovery text",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Map malformed API receipts to concise recovery messages. Preserve unsaved content, actionable field errors and authentication/conflict distinctions.",
+      "originalEvidence": "Zod receipt parsing errors can reach errorMessage and expose technical validation text. Validation should remain strict; its visitor-facing message should be clear.",
+      "evidenceKind": "Source confirmed",
+      "sourceBeforeImplementation": "components/account/account-api.ts:65",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 67,
+      "title": "Reduce repeated warnings through progressive disclosure",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Keep short safety and booking limitations at the decision point. Group detailed source/access material in labelled disclosures. Do not hide biodiversity precautions or turn unconfirmed references into promises.",
+      "originalEvidence": "Planner descriptions repeat source, access, price and booking qualifications across controls, generated days and the directory. These facts matter, but repetition obscures the decisions.",
+      "evidenceKind": "Live reading + source review",
+      "sourceBeforeImplementation": "components/island-trip-planner.tsx",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 68,
+      "title": "Distinguish map preview from selected planning region",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Label preview versus selected planning region and explain the action that commits a region. Test gallery arrows, region selection, Back and reload together.",
+      "originalEvidence": "On the New Zealand country page, a gallery preview can highlight South Island while the region selector remains All featured birds and the landscape selector says All regions. This supports photo/map coordination but makes the different states unclear.",
+      "evidenceKind": "Live state observation",
+      "sourceBeforeImplementation": "components/homepage-destination-explorer.tsx",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 69,
+      "title": "Make recovered guest work visible",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Show a compact recovered-this-tab notice with Continue and explicit Start again. Keep account saves distinct. Do not add automatic emails or new tracking.",
+      "originalEvidence": "Guest choices recover automatically from tab storage without a clear recovered-draft cue. Existing text explains the one-day tab limit, but a returning visitor has little indication of why old values appeared.",
+      "evidenceKind": "Live reload + source review",
+      "sourceBeforeImplementation": "components/island-trip-planner.tsx:90",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 70,
+      "title": "Inventory duplicate assets before consolidation",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Map files to live references, provenance records and compatibility URLs. Consolidate only proven redundant storage. Preserve the independent Australia branch and old working image URLs.",
+      "originalEvidence": "SHA-256 review found 392 identical-file groups representing 11,750,378 extra repository bytes, largely Australian mirrors. This is not measured visitor transfer waste.",
+      "evidenceKind": "Fresh content-hash scan",
+      "sourceBeforeImplementation": "public/",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 71,
+      "title": "Extend cleanup checks beyond import reachability",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Add separate route-purpose, export/dependency and asset-reference inventories. Review findings manually before deletion. Do not equate an unlinked route with an unused module.",
+      "originalEvidence": "The current audit finds 470 modules and none unreachable, but treats every app route as a root. It cannot prove no unused exports, dependencies, assets or redundant reachable pages remain.",
+      "evidenceKind": "Fresh audit + script review",
+      "sourceBeforeImplementation": "scripts/audit-source.mjs",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 72,
+      "title": "Format dense private-feature code and extract clear responsibilities",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Format first, then extract coherent filters/cards/import controls and pack sections. Preserve owner, trip, revision, receipt and backup contracts. No broad rewrite of working logic.",
+      "originalEvidence": "Bird album, collection and pack code compress async state, validation and large render expressions into very long lines. This raises review and maintenance effort.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "components/account/bird-album.tsx",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 73,
+      "title": "Comment the important invariants and correct false comments",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Explain why critical rules exist. Correct inaccurate comments. Avoid narrating every obvious statement or adding comments that duplicate code.",
+      "originalEvidence": "Some code needs explanations of replay/revision rules, historical IDs and country-specific identities. The account shell calls itself a server component despite use client.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "components/account/account-shell.tsx:1",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 74,
+      "title": "Update the active architecture documentation",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "State current app, route, deployment and account boundaries clearly. Archive dated decisions without erasing their history. Correct stale file paths and New Zealand directory labels.",
+      "originalEvidence": "The architecture document still describes separately deployed roots and an unshipped site tree, while the current application and released tree differ. Shared-account comments also retain old architecture wording.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "docs/SITE-ARCHITECTURE.md:9",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 75,
+      "title": "Define the role of the design-review gallery",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Document it as an internal review tool with a clear return path, or relocate its review presentation after checking purpose. Do not remove shared art resources by association.",
+      "originalEvidence": "The unlisted noindex /design/landscapes route contains review studies and lacks the usual site navigation. Shared artwork helpers are still used, so this is not evidence that all its code is dead.",
+      "evidenceKind": "Source review",
+      "sourceBeforeImplementation": "app/design/landscapes/page.tsx",
+      "audit": "Design and flow audit, 13 November 2026"
+    },
+    {
+      "id": 76,
+      "title": "Budget decoded HTML as well as initial JavaScript",
+      "group": "A",
+      "status": "Implemented; release verification pending",
+      "previous": [],
+      "dependsOn": [],
+      "acceptance": "Profile server payload and rendered DOM separately from JavaScript. Paginate or defer nonessential long directories where appropriate, preserve credits/source access, and measure before/after on representative devices.",
+      "originalEvidence": "Fresh public audit measured about 1.16 MB decoded HTML for Credits and 0.92 MB for South Island. These sizes are not compressed transfer measurements or observed speed.",
+      "evidenceKind": "Fresh HTTP measurement",
+      "sourceBeforeImplementation": "scripts/audit-public-http.py",
+      "audit": "Design and flow audit, 13 November 2026"
     }
   ],
   "verification": "docs/audit/BATCHES-35-54-2026-11-13.md",
@@ -830,7 +1103,11 @@
     "reviewedPendingEvidence": [
       35
     ],
-    "sourceDependentExtension": 55
+    "sourceDependentExtension": 55,
+    "implementationInProgress": [
+      56,
+      76
+    ]
   },
   "securityAdvisors": {
     "reviewedOn": "2026-11-13",
@@ -939,5 +1216,16 @@
       "browserSkipped": 115,
       "note": "Item 35 reviewed, actual evidence still pending."
     }
-  ]
+  ],
+  "designAudit": {
+    "report": "docs/audit/DESIGN-FLOW-56-76-2026-11-13.md",
+    "sourceBaseline": "f6edfdc5df7e31b43b13fd47d8e2775da25408bd",
+    "runtimeBaseline": "0e832635514f1ec2232f63d7776996ed64993d1e",
+    "requestedScope": [
+      56,
+      76
+    ],
+    "status": "Implemented; release verification pending",
+    "noNewOwnerInput": true
+  }
 }

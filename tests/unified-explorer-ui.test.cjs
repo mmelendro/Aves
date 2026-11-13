@@ -34,7 +34,7 @@ test('one South Island layer map zooms out to country and world and restores on 
  assert.equal(maps(h).length,1);assert.equal(maps(h)[0].type,'SouthIslandMap')
 })
 test('each country and region selection updates the same in-place map, photo collection and planning scope',()=>{
- const h=harness({})
+ const h=harness({initialCountryId:'colombia'})
  for(const country of ['Colombia','Australia','New Zealand']){
   button(h,country).props.onClick()
   let select=find(pair(h).props.map,n=>n.type==='select')
@@ -114,3 +114,11 @@ test('world entry uses a world map thumbnail without selecting a country',()=>{
  assert.match(asset,/Natural Earth public-domain world overview/)
  assert.doesNotMatch(asset,/<script|https?:\/\/(?!www.w3.org)/)
 })
+
+test('the world homepage keeps country previews concise and links to the full guide',()=>{
+ const h=harness({});button(h,'New Zealand').props.onClick();
+ assert.ok(!nodes(h.render()).some(n=>n.type==='section'&&n.props['aria-label']==='Selected place planning'));
+ assert.equal(find(h.render(),n=>n.props['data-explorer-content']).props['data-explorer-content'],'new-zealand:');
+ assert.ok(nodes(h.render()).some(n=>n.type==='a'&&n.props.href==='/new-zealand'));
+ assert.ok(pair(h).props.media.props.children.props.birds.length>0);
+});

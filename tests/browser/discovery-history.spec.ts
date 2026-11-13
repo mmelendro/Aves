@@ -19,8 +19,9 @@ test("country and region history restores selection, copy and return paths", asy
     await expect(page.getByRole("group", { name: mapName, exact: true })).toBeVisible()
     await page.locator("#homepage-region").selectOption(region)
     await expect(selected(`${id}:${region}`)).toContainText(label)
-    await expect(page.getByLabel("Landscape region", { exact: true })).toHaveValue(region)
-    await expect(selected(`${id}:${region}`).getByRole("link", { name: /Discuss your/ })).toHaveAttribute("href", new RegExp(region))
+    await expect(page.getByLabel("Landscape region", { exact: true })).toHaveCount(0)
+    await expect(selected(`${id}:${region}`).getByRole("link", { name: /Explore/ })).toHaveAttribute("href", new RegExp(region))
+    await expect(selected(`${id}:${region}`).getByRole("link", { name: /Discuss your/ })).toHaveCount(0)
     await expect(page.getByRole("button", { name: `Back to ${country}`, exact: true })).toBeVisible()
   }
   await page.reload()

@@ -16,3 +16,6 @@ await mkdir('app/browser-fixtures/bird-album-nz', { recursive: true })
 await copyFile('tests/browser/fixtures/bird-album-nz.tsx', 'app/browser-fixtures/bird-album-nz/page.tsx')
 await mkdir('app/browser-fixtures/bird-collection', { recursive: true })
 await copyFile('tests/browser/fixtures/bird-collection.tsx', 'app/browser-fixtures/bird-collection/page.tsx')
+
+await mkdir("app/browser-fixtures/trip-dashboard", { recursive: true })
+await copyFile("tests/browser/fixtures/trip-dashboard.tsx", "app/browser-fixtures/trip-dashboard/page.tsx")
