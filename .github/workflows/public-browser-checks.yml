@@ -38,4 +38,6 @@ jobs:
           AVES_BROWSER_FIXTURES: '1'
       - name: Build the isolated browser harness
         run: pnpm build
+      - name: Check the new private album and offline journeys first
+        run: pnpm exec playwright test tests/browser/batch-79-88.spec.ts --project=desktop --project=phone-390
       - run: pnpm test:browser
