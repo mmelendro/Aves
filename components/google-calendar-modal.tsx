@@ -8,7 +8,7 @@
 import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Loader2 } from "lucide-react"
+import { X, ExternalLink, Loader2 } from "lucide-react"
 
 interface GoogleCalendarModalProps {
   isOpen: boolean
