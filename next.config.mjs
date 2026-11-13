@@ -4,6 +4,7 @@
  * redirects() moves visitors to canonical routes. See docs/BEGINNERS-GUIDE.md
  * before changing legacy paths: this app preserves all existing destination URLs.
  */
+import assetAliases from "./content/legacy-asset-aliases.json" with { type: "json" }
 import { securityHeaders, privateHeaders } from "./security-headers.mjs"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,6 +17,7 @@ const nextConfig = {
   async rewrites() {
     // Legacy callback/API URLs stay valid; every destination is local to this app.
     return [
+      ...Object.entries(assetAliases).map(([source,destination])=>({source,destination})),
       { source: "/australia/robots.txt", destination: "/robots.txt" },
       { source: "/australia/api/contact", destination: "/api/inquiries" },
       { source: "/australia/api/:path*", destination: "/api/:path*" },

@@ -1,0 +1,17 @@
+{
+  "policy": "Two byte-identical, unreferenced active-source names retain their old public URLs through rewrites. All Australia mirrors and provenance are retained.",
+  "aliases": [
+    {
+      "old": "/images/bird-nest-natural.jpg",
+      "target": "/images/natural-nest.jpg",
+      "sha256": "b4240d5095ea11f3b29e47ac84adbe037b974a50805d5277ec29c05567ff4634",
+      "bytesSaved": 807473
+    },
+    {
+      "old": "/images/red-headed-parrot.jpg",
+      "target": "/images/king-vulture.jpg",
+      "sha256": "1441a0e3278a9a3a4a18dcf01648623f73d36c190b3e8322381dc2843c9c7515",
+      "bytesSaved": 484360
+    }
+  ]
+}
