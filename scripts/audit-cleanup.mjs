@@ -64,7 +64,13 @@ for (const [file, text] of texts) {
       node.name &&
       ts.isIdentifier(node.name)
     )
-      exports.push({ file, name: node.name.text });
+      exports.push({
+        file,
+        name: node.name.text,
+        isDefault: node.modifiers.some(
+          (m) => m.kind === ts.SyntaxKind.DefaultKeyword,
+        ),
+      });
     ts.forEachChild(node, visit);
   }
   visit(ast);
@@ -132,7 +138,7 @@ const output = {
   routes,
   dependencyReview,
   exportReview: exports
-    .filter((e) => (identifiers.get(e.name) || 0) <= 1)
+    .filter((e) => !e.isDefault && (identifiers.get(e.name) || 0) <= 1)
     .map((e) => ({
       ...e,
       decision:

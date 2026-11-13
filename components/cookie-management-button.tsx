@@ -1,6 +1,5 @@
 /**
- * Cookie preference openers. The button is used on /cookies; the second export is
- * an optional link-styled button. Both change provider state instead of navigating
+ * Cookie preference opener used on /cookies. It changes provider state instead of navigating
  * to another page or saving consent immediately.
  */
 "use client"
@@ -47,36 +46,5 @@ export function CookieManagementButton({
       {showIcon && <Settings className="w-4 h-4 mr-2" />}
       {children}
     </Button>
-  )
-}
-
-// Alternative link-style component for footer usage
-export function CookieManagementLink({
-  className,
-  children = "Cookie Preferences",
-}: {
-  className?: string
-  children?: React.ReactNode
-}) {
-  const { setShowPreferenceCenter } = useCookieConsent()
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setShowPreferenceCenter(true)
-  }
-
-  return (
-    <button
-      onClick={handleClick}
-      className={cn(
-        "text-left hover:text-emerald-600 transition-colors duration-200 cursor-pointer bg-transparent border-none p-0 font-inherit",
-        className,
-      )}
-      aria-label="Open cookie preferences"
-      role="button"
-      tabIndex={0}
-    >
-      {children}
-    </button>
   )
 }

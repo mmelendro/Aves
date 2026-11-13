@@ -28,7 +28,6 @@ export const workspaceReceiptSchema = z.object({revision:z.number().int().nonneg
 export type Preparation = z.infer<typeof preparationSchema>
 export type JournalEntry = z.infer<typeof journalEntrySchema>
 export type TripWorkspaceData = z.infer<typeof workspaceSchema>
-export type WorkspaceReceipt = z.infer<typeof workspaceReceiptSchema>
 export const emptyWorkspace = (): TripWorkspaceData => ({version:1,tasks:[],entries:[]})
 /** Public choices only. A journal association is the owner's label, not proof of a visit. */
 export function journalPlaces(country: TripCountry) {

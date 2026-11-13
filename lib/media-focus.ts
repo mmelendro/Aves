@@ -29,22 +29,3 @@ export function foregroundMediaStatus(elements: readonly Pick<HTMLMediaElement, 
     uncertain: states.includes("unknown"),
   }
 }
-
-export function readForegroundMedia() {
-  return foregroundMediaStatus(Array.from(document.querySelectorAll<HTMLMediaElement>("audio:not([data-aves-ambience]),video")), [...embedded.values()], pending.size > 0)
-}
-
-export function subscribeForegroundMedia(update: () => void) {
-  const events = ["play", "playing", "pause", "ended", "error", "emptied", "volumechange"]
-  events.forEach(name => document.addEventListener(name, update, true))
-  window.addEventListener("aves:media-focus", update)
-  // Removed media must not leave a stale ducking reservation behind.
-  const observer = new MutationObserver(update)
-  observer.observe(document.body, { childList: true, subtree: true })
-  update()
-  return () => {
-    events.forEach(name => document.removeEventListener(name, update, true))
-    window.removeEventListener("aves:media-focus", update)
-    observer.disconnect()
-  }
-}

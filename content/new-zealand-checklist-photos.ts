@@ -9,5 +9,3 @@ export const nzChecklistPhotos = new Map(newZealandCarouselBirds.flatMap(bird =>
   const credit = newZealandPhotoCredits.find(photo => ("image" in photo ? photo.image === bird.image && photo.scientificName === bird.scientificName : photo.path === bird.image && photo.id === bird.id))
   return id && credit ? [[id, { bird, credit }] as const] : []
 }))
-
-export type NzChecklistPhoto = NonNullable<ReturnType<typeof nzChecklistPhotos.get>>

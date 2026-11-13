@@ -90,8 +90,3 @@ export function createCountryOptions<R extends Record<string, DestinationDefinit
 }
 
 export const { countryLabels, countryRegionOptions, countryRegionLabels, enabledCountries, isKnownTripCountry, isConfiguredTripCountry, isEnabledTripCountry, normalizeTripCountry, countryConsentVersion, isCountryRegion, isOtherCountryRegion, isContactRegion } = createCountryOptions(destinationRegistry, DEFAULT_TRIP_COUNTRY)
-
-// Retained for historical callers. New validation handles all registered countries.
-export function isColombiaRegion(region: string) {
-  return countryRegionOptions.colombia.some(option => option.id === region || option.label === region)
-}
