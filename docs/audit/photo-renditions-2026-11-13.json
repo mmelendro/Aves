@@ -1,6 +1,6 @@
 {
   "generator": "scripts/generate-responsive-photos.mjs",
-  "recipeSha256": "9bcedc2c4918620fce289592c790af8cb6de8fe35773e81f0ec85405aa18ca3e",
+  "recipeSha256": "d5cc1ea04f15c6acdec877edc06e23389e7632c9aed3ce587de1ee90e33fbad9",
   "sharp": "0.35.5",
   "policy": {
     "widths": [

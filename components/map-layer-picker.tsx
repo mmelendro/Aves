@@ -6,8 +6,8 @@ import { Layers } from "lucide-react";
 export const mapControlButtonClass =
   "relative inline-flex min-h-11 min-w-11 items-center justify-center gap-1 rounded-full border border-emerald-200 px-3 text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700";
 
-/** Native top-layer dialogs avoid clipping inside either guide faces or an
- * expanded map. Cancel never bubbles into the underlying map's own dialog. */
+/** A non-modal layer panel stays in the toolbar flow without covering controls.
+ * Cancel never bubbles into the underlying map's own dialog. */
 export function useMapLayerPicker() {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null),
@@ -23,7 +23,15 @@ export function useMapLayerPicker() {
     if (!open || !element) return;
     // Non-modal: layers remain selectable while the map can still be panned.
     element.show();
-    return () => { element.close(); };
+    // Escape also closes the non-modal panel after using the map controls.
+    const escape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault(); event.stopPropagation();
+      element.close(); setOpen(false);
+      button.current?.focus({ preventScroll: true });
+    };
+    document.addEventListener("keydown", escape, true);
+    return () => { document.removeEventListener("keydown", escape, true); element.close(); };
   }, [open]);
   return { open, setOpen, button, dialog, id, close };
 }

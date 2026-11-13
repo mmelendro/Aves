@@ -30,7 +30,7 @@ const directory = join(root, "public/images/renditions")
 await mkdir(directory, { recursive: true })
 sharp.concurrency(2)
 const manifest = { version: 1, format: "webp", images: {} }
-const recipeSha256 = createHash("sha256").update(await readFile(new URL(import.meta.url))).digest("hex")
+const recipeSha256 = createHash("sha256").update((await readFile(new URL(import.meta.url), "utf8")).replace(/\r\n/g, "\n")).digest("hex")
 const provenance = { generator: "scripts/generate-responsive-photos.mjs", recipeSha256, sharp: sharp.versions.sharp, policy: { widths: [160, 640, 1280], quality: 82, crop: false, enlarge: false }, images: [] }
 // Reuse only bytes matching this exact recipe, source and output digest.
 // A warm developer build checks the artifacts instead of recompressing them.
@@ -82,7 +82,7 @@ const auditPath = join(root, "docs/audit/photo-renditions-2026-11-13.json")
 const manifestText = JSON.stringify(manifest, null, 2) + "\n"
 const auditText = JSON.stringify(provenance, null, 2) + "\n"
 if (process.argv.includes("--check")) {
-  if (await readFile(manifestPath, "utf8") !== manifestText || await readFile(auditPath, "utf8") !== auditText) throw Error("Photo sources or rendition recipes changed. Run node scripts/generate-responsive-photos.mjs and commit its manifests before building.")
+  if ((await readFile(manifestPath, "utf8")).replace(/\r\n/g, "\n") !== manifestText || (await readFile(auditPath, "utf8")).replace(/\r\n/g, "\n") !== auditText) throw Error("Photo sources or rendition recipes changed. Run node scripts/generate-responsive-photos.mjs and commit its manifests before building.")
 } else {
   await writeFile(manifestPath, manifestText)
   await writeFile(auditPath, auditText)
