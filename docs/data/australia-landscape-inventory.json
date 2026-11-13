@@ -1,6 +1,6 @@
 {
   "scope": "Australian landscape candidate inventory, five per AVES planning region. Per-file public reuse declarations checked on Commons. Candidate screening does not establish current access, community consent, personality releases, endorsement or permission for restricted cultural material. Only separately reviewed gallery selections are published.",
-  "reviewedOn": "2026-11-12",
+  "reviewedOn": "2026-11-13",
   "candidates": [
     {
       "regionId": "new-south-wales",
@@ -484,63 +484,63 @@
     },
     {
       "regionId": "jervis-bay-territory",
-      "title": "File:Booderee National Park fire regrowth.jpg",
-      "creator": "Mark.d.f.whittaker",
-      "licence": "CC BY-SA 4.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Booderee_National_Park_fire_regrowth.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Booderee_National_Park_fire_regrowth.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "sourceDateText": "2019-03-25",
-      "reviewedOn": "2026-11-12",
-      "status": "candidate rights declaration screened; visual, locality and cultural-context review required before publication"
-    },
-    {
-      "regionId": "jervis-bay-territory",
       "title": "File:Murrays Beach, Booderee National Park.jpg",
       "creator": "Maksym Kozlenko",
       "licence": "CC BY-SA 4.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Murrays_Beach,_Booderee_National_Park.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Murrays_Beach%2C_Booderee_National_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Murrays_Beach%2C_Booderee_National_Park.jpg",
       "sourceDateText": "2017-01-22 13:41:52",
-      "reviewedOn": "2026-11-12",
-      "status": "candidate rights declaration screened; visual, locality and cultural-context review required before publication"
+      "reviewedOn": "2026-11-13",
+      "status": "Selected for gallery publication; visual, locality and rights review completed"
     },
     {
       "regionId": "jervis-bay-territory",
       "title": "File:Green Patch, Jervis Bay Territory.jpg",
       "creator": "Mx. Granger",
       "licence": "CC0",
-      "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Green_Patch,_Jervis_Bay_Territory.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Green_Patch%2C_Jervis_Bay_Territory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Green_Patch%2C_Jervis_Bay_Territory.jpg",
       "sourceDateText": "2022-07-31 14:26:22",
-      "reviewedOn": "2026-11-12",
-      "status": "candidate rights declaration screened; visual, locality and cultural-context review required before publication"
+      "reviewedOn": "2026-11-13",
+      "status": "Selected for gallery publication; visual, locality and rights review completed"
+    },
+    {
+      "regionId": "jervis-bay-territory",
+      "title": "File:CaveBeach.jpg",
+      "creator": "Vadim Gerasimov",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CaveBeach.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/CaveBeach.jpg",
+      "sourceDateText": "Taken on 20 January 2007",
+      "reviewedOn": "2026-11-13",
+      "status": "Selected for gallery publication; visual, locality and rights review completed"
+    },
+    {
+      "regionId": "jervis-bay-territory",
+      "title": "File:Bowen Island from Murrays Beach.jpg",
+      "creator": "Mx. Granger",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bowen_Island_from_Murrays_Beach.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Bowen_Island_from_Murrays_Beach.jpg",
+      "sourceDateText": "2022-07-31 11:26:42",
+      "reviewedOn": "2026-11-13",
+      "status": "Selected for gallery publication; visual, locality and rights review completed"
     },
     {
       "regionId": "jervis-bay-territory",
       "title": "File:Cape St George lighthouse ruins.jpg",
       "creator": "John Eggers",
       "licence": "CC BY-SA 3.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_St_George_lighthouse_ruins.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/84/Cape_St_George_lighthouse_ruins.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/84/Cape_St_George_lighthouse_ruins.jpg",
       "sourceDateText": "2008-01-27 09:25",
-      "reviewedOn": "2026-11-12",
-      "status": "candidate rights declaration screened; visual, locality and cultural-context review required before publication"
-    },
-    {
-      "regionId": "jervis-bay-territory",
-      "title": "File:Booderee Botanic Gardens, January 2026 02.jpg",
-      "creator": "DaHuzyBru",
-      "licence": "CC BY-SA 4.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Booderee_Botanic_Gardens,_January_2026_02.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Booderee_Botanic_Gardens%2C_January_2026_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "sourceDateText": "2026-01-01 11:59:03",
-      "reviewedOn": "2026-11-12",
-      "status": "candidate rights declaration screened; visual, locality and cultural-context review required before publication"
+      "reviewedOn": "2026-11-13",
+      "status": "Selected for gallery publication; visual, locality and rights review completed"
     }
   ],
   "rejectedExamples": [

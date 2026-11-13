@@ -2064,6 +2064,71 @@
       "capturedOn": "2018-04-30",
       "dateBasis": "Capture date normalised from source metadata.",
       "reviewedOn": "2026-11-13"
+    },
+    {
+      "file": "au-jbt-murrays-beach.webp",
+      "path": "/images/places/au-jbt-murrays-beach.webp",
+      "title": "Murrays Beach · Booderee National Park, Jervis Bay Territory",
+      "creator": "Maksym Kozlenko",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Murrays_Beach,_Booderee_National_Park.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Murrays_Beach,_Booderee_National_Park.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Murrays Beach · Booderee National Park, Jervis Bay Territory. Photograph by Maksym Kozlenko · CC BY-SA 4.0.",
+      "alt": "Clear turquoise water beside a white-sand beach and wooded headland at Murrays Beach, Booderee National Park",
+      "modifications": "Resized without enlargement and converted to WebP. Display may crop to fit the card. The web rendition retains CC BY-SA 4.0."
+    },
+    {
+      "file": "au-jbt-green-patch.webp",
+      "path": "/images/places/au-jbt-green-patch.webp",
+      "title": "Green Patch creek and coastal forest · Booderee National Park, Jervis Bay Territory",
+      "creator": "Mx. Granger",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Green_Patch,_Jervis_Bay_Territory.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Green_Patch,_Jervis_Bay_Territory.jpg",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "Green Patch creek and coastal forest · Booderee National Park, Jervis Bay Territory. Photograph by Mx. Granger · CC0.",
+      "alt": "Rippled sand beside a shallow creek and coastal forest at Green Patch in Booderee National Park",
+      "modifications": "Resized without enlargement and converted to WebP. Display may crop to fit the card. The web rendition remains under CC0."
+    },
+    {
+      "file": "au-jbt-cave-beach.webp",
+      "path": "/images/places/au-jbt-cave-beach.webp",
+      "title": "Cave Beach and sandstone cliffs · Booderee National Park, Jervis Bay Territory",
+      "creator": "Vadim Gerasimov",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:CaveBeach.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CaveBeach.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Cave Beach and sandstone cliffs · Booderee National Park, Jervis Bay Territory. Photograph by Vadim Gerasimov · CC BY-SA 3.0.",
+      "alt": "A sandy beach beneath a wooded sandstone cliff and sea cave at Cave Beach in Booderee National Park",
+      "modifications": "Resized without enlargement and converted to WebP. Display may crop to fit the card. The web rendition retains CC BY-SA 3.0."
+    },
+    {
+      "file": "au-jbt-bowen-island.webp",
+      "path": "/images/places/au-jbt-bowen-island.webp",
+      "title": "Bowen Island viewed from Murrays Beach · Booderee National Park, Jervis Bay Territory",
+      "creator": "Mx. Granger",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Bowen_Island_from_Murrays_Beach.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bowen_Island_from_Murrays_Beach.jpg",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "Bowen Island viewed from Murrays Beach · Booderee National Park, Jervis Bay Territory. Photograph by Mx. Granger · CC0.",
+      "alt": "Low, wooded Bowen Island seen across the water from Murrays Beach in Jervis Bay Territory",
+      "modifications": "Resized without enlargement and converted to WebP. Display may crop to fit the card. The web rendition remains under CC0."
+    },
+    {
+      "file": "au-jbt-cape-st-george.webp",
+      "path": "/images/places/au-jbt-cape-st-george.webp",
+      "title": "Cape St George lighthouse ruins · Booderee National Park, Jervis Bay Territory",
+      "creator": "John Eggers",
+      "creatorUrl": "https://commons.wikimedia.org/wiki/File:Cape_St_George_lighthouse_ruins.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_St_George_lighthouse_ruins.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Cape St George lighthouse ruins · Booderee National Park, Jervis Bay Territory. Photograph by John Eggers · CC BY-SA 3.0.",
+      "alt": "Sandstone lighthouse ruins surrounded by grass and coastal vegetation at Cape St George, Booderee National Park",
+      "modifications": "Resized without enlargement and converted to WebP. Display may crop to fit the card. The web rendition retains CC BY-SA 3.0."
     }
   ]
 }

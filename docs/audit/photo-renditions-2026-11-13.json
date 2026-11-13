@@ -2380,6 +2380,146 @@
       ]
     },
     {
+      "source": "/images/places/au-jbt-bowen-island.webp",
+      "sourceSha256": "116fa9b0994092baa9c5428040639ff110b77a2b5f59f85a98d6468ad7c6be7f",
+      "sourceBytes": 108914,
+      "variants": [
+        {
+          "src": "/images/renditions/0d72987b4b48548392c6-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 1744,
+          "sha256": "0d72987b4b48548392c6ee29bce9826436257f6d52da9daed49eecee0d459efb"
+        },
+        {
+          "src": "/images/renditions/8512e7a14edc58441692-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 17382,
+          "sha256": "8512e7a14edc5844169245b41ebfb148e635f7f2ebaa834c6fe3307d85000813"
+        },
+        {
+          "src": "/images/renditions/88e6d16f5b667c79af07-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 51976,
+          "sha256": "88e6d16f5b667c79af0789640ffb04a601bab8324cf51f9ea517223a29ebf1a6"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-jbt-cape-st-george.webp",
+      "sourceSha256": "cb417fd30d867cf23255276d63d2f2e3fc821bfd2dfe77e206c1893f21c18a13",
+      "sourceBytes": 504856,
+      "variants": [
+        {
+          "src": "/images/renditions/bc078bb7e9b496efc7a7-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 6598,
+          "sha256": "bc078bb7e9b496efc7a782a84939f3299d83de13fd64ca96d4189c19cf315983"
+        },
+        {
+          "src": "/images/renditions/b02f5501cf3bbb41967a-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 83340,
+          "sha256": "b02f5501cf3bbb41967a7b0b661c9a0cfa41af9c3a7181be9e22b985081057f9"
+        },
+        {
+          "src": "/images/renditions/9330a131ce55e6312870-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 279808,
+          "sha256": "9330a131ce55e6312870385d02514ca76aad1d4d9ac09153274c5a41bf8ecd63"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-jbt-cave-beach.webp",
+      "sourceSha256": "8730b0d25c13e9d738a92a809d71856a52fde44eaa3e3e2124f07998dffb120d",
+      "sourceBytes": 219480,
+      "variants": [
+        {
+          "src": "/images/renditions/61d0af58d77467e1af29-160.webp",
+          "width": 160,
+          "height": 107,
+          "bytes": 2686,
+          "sha256": "61d0af58d77467e1af292bcfb692de5ee18d7bc6461ad6d32d22969d22356ba5"
+        },
+        {
+          "src": "/images/renditions/0c19fb05090754d9fc4f-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 36044,
+          "sha256": "0c19fb05090754d9fc4fcf98d96689649fd25b967d384b55960daf486adcbd65"
+        },
+        {
+          "src": "/images/renditions/372fcf7b3a1d45c71415-1280.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 127674,
+          "sha256": "372fcf7b3a1d45c7141573726e8aa42cf41d985dfaf4fbb1af257f75baea493a"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-jbt-green-patch.webp",
+      "sourceSha256": "717abdbadeb8b3b0de44c5f00d2d4fa25900e266df4ebeb3019cffbe41367f47",
+      "sourceBytes": 514716,
+      "variants": [
+        {
+          "src": "/images/renditions/784f9278176553eae732-160.webp",
+          "width": 160,
+          "height": 120,
+          "bytes": 5736,
+          "sha256": "784f9278176553eae732013e07ff8b02228c92acf84d34f0fad2f442a6e26a7d"
+        },
+        {
+          "src": "/images/renditions/078376a7735de08aa317-640.webp",
+          "width": 640,
+          "height": 480,
+          "bytes": 82292,
+          "sha256": "078376a7735de08aa31797ba447d26f7032c4fd577192fc2b09f884381733c0e"
+        },
+        {
+          "src": "/images/renditions/fa0ff051155df8818370-1280.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 269470,
+          "sha256": "fa0ff051155df881837020fa44a3e842b19f372601a32c18326f0a3ec3d7d31d"
+        }
+      ]
+    },
+    {
+      "source": "/images/places/au-jbt-murrays-beach.webp",
+      "sourceSha256": "b134b8d30f8782fafb4848c18827a40385758197026056a447533a783834eec8",
+      "sourceBytes": 179662,
+      "variants": [
+        {
+          "src": "/images/renditions/f05372a17370446e6dd2-160.webp",
+          "width": 160,
+          "height": 98,
+          "bytes": 3112,
+          "sha256": "f05372a17370446e6dd29df159b284e9d62552777f6feccc9a144f3a28aca96c"
+        },
+        {
+          "src": "/images/renditions/4406eb7fde08bbd29694-640.webp",
+          "width": 640,
+          "height": 390,
+          "bytes": 33034,
+          "sha256": "4406eb7fde08bbd29694ae88ede39e72181ee0f8207049b764c81372d289bc08"
+        },
+        {
+          "src": "/images/renditions/22a0ff751456b7366674-1280.webp",
+          "width": 1280,
+          "height": 781,
+          "bytes": 94236,
+          "sha256": "22a0ff751456b736667428cdfeb4656ebada21913fc52af761c2badf4cce610d"
+        }
+      ]
+    },
+    {
       "source": "/images/places/au-kings-canyon.webp",
       "sourceSha256": "09cc1098568114262ea87303e5b044e070fe10d9b27a9293789cd1771b0489ee",
       "sourceBytes": 248710,

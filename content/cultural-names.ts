@@ -6,6 +6,11 @@ export type CulturalNameRecord={
   pronunciationGuide?:{label:string;url:string};
 }
 export const culturalNames:readonly CulturalNameRecord[]=[
+ ...["jbt-murrays-beach","jbt-green-patch","jbt-cave-beach","jbt-bowen-island","jbt-cape-st-george"].map(entityId=>({
+  id:`booderee-${entityId}`,kind:"place" as const,entityId,countryId:"australia",name:"Booderee",language:"Dhurga",
+  context:"The management plan records Booderee as a Dhurga name. The park is Wreck Bay Aboriginal land, jointly managed with Parks Australia. This photograph establishes no access or commercial permission.",
+  publisher:"Parks Australia / Booderee management plan",sourceUrl:"https://www.dcceew.gov.au/sites/default/files/documents/booderee-management-plan-2015-2025-web.pdf",reviewedOn:"2026-11-13",
+ })),
  {id:"tui-te-aka",kind:"bird",entityId:"nz-tui",countryId:"new-zealand",name:"tūī",language:"te reo Māori",context:"Te Aka records this Māori name for Prosthemadera novaeseelandiae. This dictionary entry does not establish a preferred form for every iwi or dialect.",publisher:"Te Aka Māori Dictionary",sourceUrl:"https://maoridictionary.co.nz/word/8660",reviewedOn:"2026-11-13"},
  {id:"kaka-te-aka",kind:"bird",entityId:"nz-kaka",countryId:"new-zealand",name:"kākā",language:"te reo Māori",context:"Te Aka identifies Nestor meridionalis under this name. The dictionary also records a broader parrot meaning, so the species context matters. No universal iwi or dialect preference is implied.",publisher:"Te Aka Māori Dictionary",sourceUrl:"https://maoridictionary.co.nz/word/2081",reviewedOn:"2026-11-13"},
  {id:"kereru-te-aka",kind:"bird",entityId:"nz-kereru",countryId:"new-zealand",name:"kererū",language:"te reo Māori",context:"Te Aka records this Māori name for Hemiphaga novaeseelandiae and lists alternative names. This entry is language context, not a claim that every iwi uses the same form.",publisher:"Te Aka Māori Dictionary",sourceUrl:"https://maoridictionary.co.nz/word/2574",reviewedOn:"2026-11-13"},

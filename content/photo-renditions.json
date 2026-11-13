@@ -1524,6 +1524,96 @@
         }
       ]
     },
+    "/images/places/au-jbt-bowen-island.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/0d72987b4b48548392c6-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/8512e7a14edc58441692-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/88e6d16f5b667c79af07-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-jbt-cape-st-george.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/bc078bb7e9b496efc7a7-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/b02f5501cf3bbb41967a-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/9330a131ce55e6312870-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-jbt-cave-beach.webp": {
+      "width": 1296,
+      "height": 864,
+      "variants": [
+        {
+          "src": "/images/renditions/61d0af58d77467e1af29-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/0c19fb05090754d9fc4f-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/372fcf7b3a1d45c71415-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-jbt-green-patch.webp": {
+      "width": 1600,
+      "height": 1200,
+      "variants": [
+        {
+          "src": "/images/renditions/784f9278176553eae732-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/078376a7735de08aa317-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/fa0ff051155df8818370-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "/images/places/au-jbt-murrays-beach.webp": {
+      "width": 1600,
+      "height": 976,
+      "variants": [
+        {
+          "src": "/images/renditions/f05372a17370446e6dd2-160.webp",
+          "width": 160
+        },
+        {
+          "src": "/images/renditions/4406eb7fde08bbd29694-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/images/renditions/22a0ff751456b7366674-1280.webp",
+          "width": 1280
+        }
+      ]
+    },
     "/images/places/au-kings-canyon.webp": {
       "width": 1600,
       "height": 1067,
