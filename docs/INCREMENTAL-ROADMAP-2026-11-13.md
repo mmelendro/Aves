@@ -6,36 +6,35 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 | State | What is included | Evidence / next action |
 |---|---|---|
-| **Live and verified** | Consistent carousel framing, visible bird photographs, map control repairs, national bird albums, visual search cards and existing conservation-source disclosure | Production `231e8e9` on both aves.bio and www.aves.bio. Release checks and live phone/desktop verification passed |
-| **Implemented, tested locally and pushed; not deployment-ready** | Region-aware AVES identity, country return links, country/regional bird-list links, all-edge/corner desktop resizing, keyboard/Reset/Escape, landscape header wrapping | Source through `c8b7376` is on `feature/album-experience`. Isolated application build at `a4527a0` passed **84 browser checks**, with 12 intentional project skips. Latest commits after that change diagnostics only |
-| **Current release gate** | Verify the landscape-region dropdown width correction | Diagnostics identified a 334px native select extending to x=350 on a 320px page. Correction `a4acaed` is pushed and lint passes; [CI 43516111175](https://github.com/mmelendro/Aves/actions/runs/43516111175) is running. Previous full CI passed 782 unit tests, 33 priority journeys and 160 browser checks, with this one phone failure. No new candidate has been published |
+| **Live and verified** | Carousel/map repairs, national inventories, region-aware AVES labels and bird-list links, all-edge desktop map/guide resizing, keyboard/reset controls and narrow-phone layout fix | Production `a4acaed` on both aves.bio and www.aves.bio; deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`. Full CI and live 320px/1365px checks passed |
+| **Release gate passed** | Landscape-region dropdown no longer expands the phone page | CI 43516111175: 782 unit tests, 33 priority journeys, 161 full browser checks, lint/types/build/audits/accessibility passed. Both domain assignments independently verified |
 | **Next locally tested draft** | Bounded desktop search input, real header search submission and 200% text sizing | Production build plus 3 focused Chromium/Firefox checks pass. Still uncommitted; requires its own clean full release check |
 | **Other local drafts** | Team/guide profiles, creator album/credits, About/copy/footer, admin-plan cleanup | Preserve and review as separate increments. Not included in the pushed feature candidate; no live deletion authorized |
 | **Content work queued** | Comprehensive regional evidence/status coverage, Colombia journal, stories, contribution invitations, drones and 3D | Existing national catalogues are substantial; regional evidence and verified conservation coverage remain incomplete. See R32 audit below |
 
-**Next action:** resolve the Linux overflow, pass the complete exact-commit checks, then publish and verify both domains. There is currently no newer candidate that meets the deployment gate. Keep the verified live release until that changes.
+**Next action:** develop and verify R04 camera continuity as a separate increment. A shared geographic canvas is in development for the main explorer; the specialist South Island habitat map requires its own follow-up. Do not publish either until the applicable full checks pass.
 
-**Latest diagnostic and correction:** CI 43515115628 identified the landscape-region label/select as the concrete width offender: its box extended from x=16 to x=350 on a 320px screen. The label and select now have explicit bounded width and `min-width: 0`. This correction needs fresh CI verification; earlier cookie/map-containment attempts were insufficient.
+**Latest diagnostic and correction:** CI 43515115628 identified the landscape-region label/select as the concrete width offender: its box extended from x=16 to x=350 on a 320px screen. The label and select now have explicit bounded width and `min-width: 0`. The correction passed full CI and live checks; earlier cookie/map-containment attempts were insufficient.
 
 ### Next map priority: one camera across planning and satellite layers
 
 Switching Planning ↔ Satellite must change the map style only. Preserve geographic centre, zoom/ground scale, visible geographic extent, viewport size, and selected country/region/place in both directions. Example: a visitor viewing Colombia in the planning layer must see the same Colombia framing immediately after selecting satellite, without a world reset, extra pan or auto-fit. Preserve subsequent pan/zoom changes when switching back. Apply the same rule to other base layers, desktop/mobile, fullscreen and panel resizing; resizing may change visible extent with the new viewport, but must not silently reset the camera.
 
-Implementation should share geographic camera state between renderers (or use one renderer with multiple layers), rather than equating unrelated SVG scale and tile zoom values. Keep geographic size and framing consistent; decorative planning shapes must not force a different extent. Acceptance tests must switch both directions after country, region and place selection and after manual pan/zoom. This is **requested and not yet implemented**, prioritized immediately after the release blocker and ahead of decorative map motion.
+Implementation should share geographic camera state between renderers (or use one renderer with multiple layers), rather than equating unrelated SVG scale and tile zoom values. Keep geographic size and framing consistent; decorative planning shapes must not force a different extent. Acceptance tests must switch both directions after country, region and place selection and after manual pan/zoom. This is **in development, not published**, prioritized ahead of decorative map motion.
 
 ### Pushed implementation commits
 
 | Commit | Increment | Publication status |
 |---|---|---|
-| `f5319dd` | Regional AVES identity and country/regional bird-list entry links | Pushed; held by release gate |
-| `54ff0ae` | Landscape navigation wrapping and browser readiness checks | Pushed; held by release gate |
-| `4d8ad0d` | Desktop map/guide edge and corner resizing, keyboard controls and geometry/browser tests | Pushed; local and CI resize journeys pass; combined release held |
+| `f5319dd` | Regional AVES identity and country/regional bird-list entry links | Live in `a4acaed` |
+| `54ff0ae` | Landscape navigation wrapping and browser readiness checks | Live in `a4acaed` |
+| `4d8ad0d` | Desktop map/guide edge and corner resizing, keyboard controls and geometry/browser tests | Live in `a4acaed`; CI and live resize/reset checks pass |
 | `2c87765` | Separate, scrollable cookie choices with adequate touch targets | Pushed; did not resolve the underlying page-width problem |
 | `a4527a0` | Paint containment for zoomed map artwork | Pushed; local matrix passes; Linux page overflow remains |
-| `a4acaed` | Bound the actual landscape-region label/select width | Pushed; lint passes; fresh complete CI pending |
+| `a4acaed` | Bound the actual landscape-region label/select width | Live; full CI and phone checks pass |
 | `1e229d4` through `c8b7376` | Phone touch/viewport diagnostics and early deployable-page regression gate | Pushed; diagnostic/test changes, not additional public features |
 
-Supporting records: [repair release](RELEASE-2026-11-14-ALBUM-MAP-REPAIRS.md), [inventory release](RELEASE-2026-11-14-INVENTORY-ALBUM.md), [held regional/resizing candidate](RELEASE-2026-11-14-REGIONS-RESIZING.md).
+Supporting records: [repair release](RELEASE-2026-11-14-ALBUM-MAP-REPAIRS.md), [inventory release](RELEASE-2026-11-14-INVENTORY-ALBUM.md), [regional/resizing release](RELEASE-2026-11-14-REGIONS-RESIZING.md).
 
 ## Prioritized delivery plan
 
