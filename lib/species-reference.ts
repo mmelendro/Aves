@@ -114,6 +114,9 @@ const indexed = Object.fromEntries(
 export function getReferenceSpecies(country:SpeciesCountry,id:string){
   return indexed[country].find(bird=>bird.id===id)
 }
+export function collectionCatalogue(country:SpeciesCountry){
+ const c=catalogues[country];return {countryId:country,name:c.name,reviewed:c.reviewed,scope:c.scope,total:indexed[country].filter(b=>!b.historical&&!b.referenceOnly).length,sources:c.sources.map(s=>({title:s.title,edition:s.edition,url:s.url}))}
+}
 
 /** Bounded anonymous reference search. No saved wishes, accounts or live sightings. */
 export function searchSpeciesReference(
