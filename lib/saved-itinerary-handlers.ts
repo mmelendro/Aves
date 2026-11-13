@@ -26,6 +26,8 @@ export const itinerariesPut=(request:Request,id:string)=>accountHandler(async()=
  if(error&&error.code!=="23505")throw unavailable()
  if(!error&&data)return {revision:data.revision,data:itinerariesSchema.parse(data.data)}
  const current=await readItineraries(client,id)
+ // An identical replay after a lost receipt is success, not a second write.
+ // A different payload at that revision remains a conflict; keep client edits.
  if(current.revision===next&&JSON.stringify(current.data)===JSON.stringify(body.data))return current
  throw new AccountError(409,"This saved itinerary changed in another tab. Keep your edits before refreshing the saved route.")
 })
