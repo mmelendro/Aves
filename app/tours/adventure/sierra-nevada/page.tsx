@@ -21,11 +21,11 @@ export default function SierraNevadaTourPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between gap-6">
           <div className="flex items-center space-x-2">
             <BrandMark country="colombia" />
           </div>
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden min-w-0 flex-1 flex-wrap justify-end gap-x-5 gap-y-3 md:flex items-center [&>a]:inline-flex [&>a]:min-h-6 [&>a]:items-center">
             <Link href="/tours" className="text-emerald-600 font-medium">
               Tours
             </Link>

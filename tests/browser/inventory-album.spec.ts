@@ -13,6 +13,7 @@ test('national album keeps complete results, source-backed status and keyboard c
  await expect(results.getByText(/checked \d{4}-\d{2}-\d{2}/).first()).toBeVisible()
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1)
  await page.goto('/species/reference?country=colombia&q=Nothocercus+julius')
+ await expect(results.getByRole('heading',{level:2})).toHaveText('1 bird to discover')
  await expect(page.locator('#inventory-results').getByText('Global conservation: Status not verified',{exact:true})).toBeVisible()
  await expect(page.getByRole('heading',{name:'Tawny-breasted Tinamou',exact:true})).toBeVisible()
 })
