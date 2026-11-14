@@ -4,6 +4,10 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 ## Where we are — 14 November 2026
 
+**Current visual candidate:** `db3cee9` includes the compact carousel/map presentation and eBird links. [CI 43582332051](https://github.com/mmelendro/Aves/actions/runs/43582332051) is pending/running; no deployment. Ten local visual browser checks and eleven eBird/reference unit tests pass. The species carousel retains paginated loading; regional wing animation, map search and gallery fallback remain open.
+
+**Latest direction:** work resumed for map/carousel presentation, with a five-commit batch maximum. See [visual direction and continuation](VISUAL-DIRECTION-2026-11-14.md). Previous spacing CI 43577619807 failed and has not been deployed. The new visual candidate requires fresh exact-commit gates. This update supersedes the earlier paused-batch notice below.
+
 **Batch paused:** user requested two further commits then a pause, with future batches capped at five. Spacing candidate `ded0e2f` is pushed and [CI 43577619807](https://github.com/mmelendro/Aves/actions/runs/43577619807) is in progress. No deployment occurred in this batch. South Island camera work is an uncommitted draft with Firefox timeouts still to resolve. See [the continuation handoff](PAUSED-BATCH-2026-11-14.md).
 
 **One public address:** https://aves.bio. The www spelling redirects to the same path and query on aves.bio (verified with the homepage and a Colombia bird-list URL). Future releases must update only the main domain deployment and preserve this redirect.
@@ -166,7 +170,7 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R13 | Creator album | Photo/sound contributors browse as an album; exact source links; Nicolás filter and contributor attribution throughout | Draft |
 | R14 | Admin cleanup | Admin-only old-plan selection across all users, preview/count and explicit confirmation; ordinary users denied by server/database; verify owner admin access | Draft |
 | R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; reflow release passed full CI 43568426791 and live verification |
-| R16 | Species links | Canonical eBird links using verified exact taxonomy mapping; no guessed codes | Ready after core release |
+| R16 | Species links | Canonical eBird links using verified exact taxonomy mapping; no guessed codes | Pushed db3cee9: 2,946 exact-name URLs, 92 explicitly labelled searches; exact CI and publication pending |
 | R17 | Soundscapes | Review 15 source candidates; source/listen cards with locality, creator and licence; resolve seven regional gaps; compact follow-call control with clear playback errors | Research only |
 | R18 | Content growth | Reviewed regional/endemic coverage, better source images, place/business videos and guide introduction videos | Needs content |
 | R19 | Community media | Nicolás Instagram import pilot, then discreet Instagram/TikTok/Facebook links/integrations and partner submissions | Needs exact account and supported import route |

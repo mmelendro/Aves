@@ -1,5 +1,7 @@
 # Current AVES development handoff
 
+> **Latest batch:** map/album visual work and eBird links are pushed as `500e6e0` and `db3cee9`. Read [the visual batch handoff](VISUAL-DIRECTION-2026-11-14.md). CI 43582332051 is pending/running; no deployment. South Island remains an excluded local draft. Future batches: five commits maximum. This supersedes the earlier paused-checkpoint notice below.
+
 > **Paused at the user’s request.** Read [the batch handoff](PAUSED-BATCH-2026-11-14.md) first. Spacing candidate `ded0e2f` is pushed; CI 43577619807 is in progress. Production remains `036fa28`. South Island is an uncommitted draft. Future batches: at most five commits.
 
 Updated 14 November 2026. The active implementation queue is [the incremental roadmap](INCREMENTAL-ROADMAP-2026-11-13.md). Its R identifiers supersede older implementation queues; historical audit IDs remain evidence and retain owner-dependent scopes.
