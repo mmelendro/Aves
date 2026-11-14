@@ -59,7 +59,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
       const toolbarHeight = toolbar.getBoundingClientRect().height
       // If enlarged controls occupy most of a short viewport, let the toolbar
       // scroll normally so the destination selector remains reachable.
-      const sticky = innerHeight > 480 && headerHeight + toolbarHeight < innerHeight * .55
+      const sticky = innerHeight > 480 && headerHeight + toolbarHeight < innerHeight * .35
       container.style.setProperty('--guide-header-offset', `${headerHeight}px`)
       container.style.setProperty('--guide-scroll-offset', `${headerHeight + (sticky ? toolbarHeight : 0) + 16}px`)
       container.dataset.toolbarSticky = String(sticky)
