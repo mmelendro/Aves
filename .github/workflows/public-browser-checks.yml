@@ -31,14 +31,14 @@ jobs:
       - run: node scripts/generate-gallery-snapshots.cjs --check
       - name: Check candidate public HTML and decoded budgets
         run: |
-          pnpm start --port 3100 --hostname 127.0.0.1 > /tmp/aves-html-check.log 2>&1 &
+          node node_modules/next/dist/bin/next start --port 3111 --hostname 127.0.0.1 > /tmp/aves-html-check.log 2>&1 &
           AVES_HTML_SERVER_PID=$!
           trap 'kill "$AVES_HTML_SERVER_PID"' EXIT
           for attempt in $(seq 1 60); do
-            if curl --fail --silent http://127.0.0.1:3100/sitemap.xml > /dev/null; then break; fi
+            if curl --fail --silent http://127.0.0.1:3111/sitemap.xml > /dev/null; then break; fi
             sleep 1
           done
-          python3 scripts/audit-public-http.py --base-url http://127.0.0.1:3100 --check-budgets --output /tmp/aves-candidate-http.json
+          python3 scripts/audit-public-http.py --base-url http://127.0.0.1:3111 --check-budgets --output /tmp/aves-candidate-http.json
       - run: pnpm check:catalogue-loading
       - run: node scripts/profile-route-bundles.mjs --check-deferred-geometry
       - run: node scripts/check-performance-budgets.mjs
