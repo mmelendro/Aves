@@ -12,7 +12,7 @@ Status: **published and verified for camera continuity and horizontal text reflo
 
 Implementation: `997fde8` (text reflow), `37afecd` (camera/geography), `0d8ab5e` (updated history/enquiry control locators, preserving the same assertions), `85ba58e` (accessible map-credit click targets).
 
-## Verification observed locally
+## Historical development verification (superseded by final release below)
 
 - Production build, lint/type validation and source/cleanup audits passed.
 - 785 unit tests passed locally, including three unrelated unpublished draft tests. Exact-commit CI is the authority for included tests.
@@ -40,7 +40,7 @@ The specialist South Island habitat/itinerary map still has its own illustrated 
 
 CI 43526436679 passed every map and accessibility check, with 178 full-suite checks passing and one inventory locator failure: streamed markup briefly matched two conservation labels. The test now scopes the same status and species assertions to the accessible Tinamou result card (3c7d1ed). Six repeated phone/desktop checks passed locally; the corrected map-credit build also passed desktop/Firefox resizing and the full public-sitemap accessibility sweep. Full CI 43528648162 subsequently passed before publication. No failed candidate was deployed.
 
-## Publication evidence and follow-up
+## Historical pre-release evidence and follow-up
 
 Exact CI passed 782 unit tests, 33 priority journeys and 179 full browser checks (211 intentional project skips), plus lint/types/build/audits/budgets/accessibility. Live phone and desktop checks passed actual satellite tiles, exact pan/zoom and background continuity, newly selected region framing and www redirects. Screenshots were inspected. No error/fatal runtime rows appeared in the scoped 10-minute scan.
 

@@ -1,3 +1,5 @@
+> Historical reference. Current runtime, authorization and implementation order are in [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) and [the incremental roadmap](INCREMENTAL-ROADMAP-2026-11-13.md). Older pending/release statements below describe their dated checkpoint.
+
 # AVES active pending queue, restarted at 0
 
 28 pending scopes numbered 0 to 27:9 with no owner involvement,5 owner decisions,8 files/access scopes and6 participation/conditional scopes. The previous 60 published scopes remain in the archive. Former 17 open scopes are all retained; two bundled scopes were split so measurement/security and videos/models can be handled independently.

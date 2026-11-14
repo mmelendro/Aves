@@ -173,7 +173,7 @@
       "urgency": "High",
       "status": "Needs owner input",
       "acceptance": "Confirm the contracting identity, current team and supplier roles, permissions and any office claims. Review remaining source-authored commercial, cultural and legal Spanish. Publish only supported claims.",
-      "evidence": "Old21 remains open. Live Colombia contact page labels Our Offices, Sydney Operations Hub and Bogot\u00e1 Field Operations Center. These are owner facts, not facts inferred from code.",
+      "evidence": "Old21 remains open. Live Colombia contact page labels Our Offices, Sydney Operations Hub and Bogotá Field Operations Center. These are owner facts, not facts inferred from code.",
       "previousQueueIds": [
         21
       ],
@@ -537,5 +537,8 @@
     "priorPublishedScopeCount": 60,
     "implementationStarted": false
   },
-  "verification": "docs/audit/FINAL-COMPLETE-AUDIT-2026-11-13.md"
+  "verification": "docs/audit/FINAL-COMPLETE-AUDIT-2026-11-13.md",
+  "status": "historical-reference",
+  "currentAuthority": "docs/INCREMENTAL-ROADMAP-2026-11-13.md",
+  "releaseRecordScope": "Historical 13 November checkpoint; consult HANDOFF-CURRENT.md for current deployment."
 }

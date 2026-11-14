@@ -2,7 +2,7 @@
 
 One Next.js application for the global homepage, Colombia, Australia, New Zealand and the shared AVES account portal. Public brand: AVES. Public domain: [aves.bio](https://aves.bio). Package: `aves-web`.
 
-The combined application is live on aves.bio. Current source branch: `feature/field-guide-card`. Read [CONTINUE-HERE.md](CONTINUE-HERE.md) for the single numbered pathway and resume prompt, with verified runtime and rollback in [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md), and [ARCHITECTURE.md](docs/ARCHITECTURE.md) before editing. Earlier consolidation plans are historical.
+The combined application is live on aves.bio. Current source branch: `feature/album-experience`. Read [CONTINUE-HERE.md](CONTINUE-HERE.md) for the active incremental pathway and resume prompt, with verified runtime and rollback in [HANDOFF-CURRENT.md](docs/HANDOFF-CURRENT.md), and [ARCHITECTURE.md](docs/ARCHITECTURE.md) before editing. Earlier consolidation plans are historical.
 
 ## Development
 

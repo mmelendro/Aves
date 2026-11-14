@@ -141,16 +141,18 @@ These grouping IDs are retained for traceability. C1/C2 and the regional parts o
 
 Do not include raw lint-results.txt or test-results.txt as product source. Preserve useful failure evidence in the release record. Avoid sweeping unrelated work from older worktrees into this branch.
 
+The C1–C7 grouping above is historical draft classification, not current pending status. C1/C2/core C7 have shipped; use the current status and R rows below. C3/C4/C5 retain separate drafts.
+
 ## Ordered implementation backlog
 
 Status Draft means some local implementation exists but acceptance remains open. Ready means a clear next implementation task. Later means deliberately outside the first repair release.
 
 | ID | Category | Increment and acceptance | State |
 |---|---|---|---|
-| R01 | Release foundation | Resolve local dependency lookup; classify all 11 failures; verify geometry bytes without weakening integrity assertions | Original failures resolved and release live; new reflow/camera candidate awaits full CI |
+| R01 | Release foundation | Resolve local dependency lookup; classify all 11 failures; verify geometry bytes without weakening integrity assertions | Resolved and live in 036fa28; exact CI and live verification passed |
 | R02 | Carousel | One compact album treatment across bird carousels, including Australia/NZ/article/standalone views; thumbnails; visible eyes; no empty oversized frame on load, slide or resize | Shared framing repairs live; continue visual refinement incrementally |
 | R03 | Map controls | Remove overlap and duplicate hand controls; one working zoom/reset/layers/fullscreen set on satellite, roads and topographic, including South Island | Core control repairs live; continued regression gate |
-| R04 | Map continuity | Planning ↔ Satellite must preserve geographic centre, scale, visible extent, viewport size and selected country/region/place. Colombia must remain identically framed when changing layers. Preserve manual pan/zoom in both directions; use shared geographic camera state, not unrelated SVG/tile zoom values. Also retain map/place continuity and honest media states | Main explorer pushed in `37afecd`; 18 final focused checks pass; full CI pending. South Island habitat adapter remains |
+| R04 | Map continuity | Planning ↔ Satellite must preserve geographic centre, scale, visible extent, viewport size and selected country/region/place. Colombia must remain identically framed when changing layers. Preserve manual pan/zoom in both directions; use shared geographic camera state, not unrelated SVG/tile zoom values. Also retain map/place continuity and honest media states | Main explorer live in 036fa28 with full CI and live verification. South Island habitat adapter remains |
 | R05 | Map finish | Layer menu positioning, keyboard/Escape, opacity zero, city labels/click-to-zoom, business address/map links; correct world frame without stretching geography | Core repairs live; broader polish remains |
 | R06 | Bird guide | Photo/video-first collectible cards with accessible identity/habitat/range reveal; concise copy and source disclosure; preserve search/filter/pagination and non-JS access | National album/reveal experience live; further media expansion queued |
 | R07 | Search | Search expands into focused silent input; visual album results; working empty states, query URLs and browser history | Visual results live; header input draft tested locally, not pushed |
@@ -170,7 +172,7 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R21 | Reporting | Refresh release register, runbooks, audit and business-plan product evidence after validation | Roadmap/release records updated at this checkpoint |
 | R22 | Heading flock | Birds change their relative positions into flowing formations, rather than translating a rigid group; subtle wing variation; pause/reduce motion appropriately | Requested; not implemented |
 | R23 | Birds and map transition | One coherent switch inspired by the AVES/Birds word flip: page turn toward the guide, restrained globe-like turn toward the map only where it improves orientation. Keep controls stationary, preserve each view's state, prevent hidden-face interaction and offer an immediate reduced-motion switch. Check phone portrait/landscape and rapid repeated taps; do not intercept map gestures | UX direction selected; implementation pending |
-| R24 | Map labels | Overview country names hidden at rest, revealed on hover and keyboard focus. On touch, selection reveals the name and an explicit explore action. Accessible names remain present. Keep the selected label readable and avoid confusing the change with removal of useful city/place labels | Planning-world hover/focus labels in camera candidate; touch explore flow and other renderers remain |
+| R24 | Map labels | Overview country names hidden at rest, revealed on hover and keyboard focus. On touch, selection reveals the name and an explicit explore action. Accessible names remain present. Keep the selected label readable and avoid confusing the change with removal of useful city/place labels | Planning-world hover/focus labels live in 036fa28; touch explore flow and other renderers remain |
 | R25 | Trip evidence | Populate the first Colombia trip from the planning spreadsheet, saved eBird PDF, live report and AVES Colombia album. Use actual checklists to anchor the route; flag planning/calendar discrepancies and approximate photo matches | Public taxa/checklist source data retrieved; import pending |
 | R26 | Trip media | Curate best originals, preserve credits/capture dates and connect each to species, place and chapter where evidence supports it. Make the broader trip album browsable; inspect potentially personal media before public use | Existing Royann originals available; Google Photos album accessible, bulk download not confirmed |
 | R27 | Journal and public stories | A beautiful chronological journal with full species inventory, photo discoveries, linked map, visited places and verified guides; public highlights may use the existing blog with a story per trip section. Paladin: Learn History inspires short chapters and interactive discovery, without copying its branding | Requested; implementation pending |
@@ -211,7 +213,7 @@ All 19 remaining scopes from old audit 9–27 are retained here without renumber
 
 ## Incremental delivery sequence
 
-Immediate continuation: (1) pass full CI for `37afecd`, publish and verify the reflow/main-camera increment; (2) carry the same camera contract into the South Island habitat/itinerary map; (3) finish the locally tested desktop search draft and inventory-filter identity; (4) grow R32 regional/conservation evidence in sourced batches; (5) flock, touch labels and transition polish; (6) review people/creator content; (7) assemble the Colombia journal. Keep commits and release evidence separate.
+Immediate continuation: (1) fix enlarged-text sticky header/toolbar spacing as a separate tested release; (2) carry the same camera contract into the South Island habitat/itinerary map; (3) finish the locally tested desktop search draft and inventory-filter identity; (4) grow R32 regional/conservation evidence in sourced batches; (5) flock, touch labels and transition polish; (6) review people/creator content; (7) assemble the Colombia journal. Keep commits and release evidence separate.
 
 1. Continue R04 from the released repair foundation; retain full regression gates for R01–R05.
 2. Complete the album/search/wishlist experience R06–R08 using the shared carousel foundation.

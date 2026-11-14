@@ -1,3 +1,5 @@
+> Historical reference. Current runtime, authorization and implementation order are in [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) and [the incremental roadmap](INCREMENTAL-ROADMAP-2026-11-13.md). Older pending/release statements below describe their dated checkpoint.
+
 # AVES detailed acceptance criteria
 
 Read [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) for current delivered scope, runtime

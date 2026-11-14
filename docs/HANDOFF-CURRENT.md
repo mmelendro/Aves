@@ -1,15 +1,17 @@
-# Current AVES audit handoff
+# Current AVES development handoff
 
-28 pending scopes numbered 0 to 27:9 with no owner involvement,5 owner decisions,8 files/access scopes and6 participation/conditional scopes. The previous 60 published scopes remain in the archive. Former 17 open scopes are all retained; two bundled scopes were split so measurement/security and videos/models can be handled independently.
+Updated 14 November 2026. The active implementation queue is [the incremental roadmap](INCREMENTAL-ROADMAP-2026-11-13.md). Its R identifiers supersede older implementation queues; historical audit IDs remain evidence and retain owner-dependent scopes.
 
-Use [the active pending queue](AUDIT-QUEUE-2026-11-13.md), [machine-readable state](audit/queue-2026-11-13.json) and [full audit](audit/FINAL-COMPLETE-AUDIT-2026-11-13.md). IDs0 to 27 are the new pending IDs. Never confuse them with the archived published 0 to76 register.
+Published application: `036fa286dfd063298cc201894331557438400c12`, production deployment `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME`, https://aves.bio. Exact CI [43568426791](https://github.com/mmelendro/Aves/actions/runs/43568426791) succeeded: 782 unit tests, 33 priority journeys, 179 full browser checks and 211 intentional project skips, plus build/lint/types/audits/budgets/accessibility. Domain assignment and CI success rechecked on 14 November. Detailed live checks are recorded in the camera release record; they were not rerun by the records audit.
 
-The live application remains runtime `43943bb2740dfce0fafd43577ffbafec3037ed5a`, deployment `dpl_49nEtSR46vpeufJSdLncJ8r9i8Te`. This audit changes only the task register and handoff documentation. It does not implement the new list or change application data, authentication settings, tracking or deployments.
+Development branch: `feature/album-experience`. The two commits after the live application, `3b2e52f` and `75a09f2`, contain documentation only and are already pushed. Work continues in the isolated `release-sticky-camera` checkout to preserve unrelated drafts in `album-current`.
 
-Next independent item0. Suggested first repair batch 0 to4, then 5 to8. No new application implementation was requested as part of this audit. Follow an explicit subsequent implementation request.
+Authorized sequence: reconcile records; fix enlarged-text sticky header/toolbar spacing; complete South Island habitat-map camera continuity. Develop, test, push and deploy each application increment after exact-commit checks pass; record live acceptance and rollback. Documentation-only changes do not require a runtime deployment.
 
-The unchanged runtime retains successful CI 43392941281: 775 unit tests, 128 full browser passes and 160 deliberate project-specific skips; 24 focused passes and 8 skips. Build, TypeScript, catalogue deferral, geometry and unchanged JavaScript budgets pass. Lint has zero errors and 31 warnings. This audit reused that exact-runtime evidence rather than claiming a new full browser run.
+Main world/country/regional camera continuity, national inventory albums, regional branding, panel resizing and horizontal phone reflow are live. Remaining immediate issues are sticky vertical overlap and the specialist South Island adapter. Preserve LCDB/DOC overlays, habitat/place selection and itinerary behavior.
 
-Private account/media/export handlers were sampled at source level and existing synthetic tests were reviewed. No new confirmed ownership bypass was found in that bounded review. No new live two-account, database restore, physical Safari, independent-traveller or commercial-readiness proof is claimed. A local lint recheck could not use the shared dependency environment; the exact-runtime CI result is authoritative. The prior managed preview remains unavailable because its launcher passes unsupported Next flags, so fresh UI inspection used the published site.
+Unpublished drafts: header search, global navigation, team profiles, creator album, About copy and admin cleanup. Do not sweep these into a release. Admin tooling does not authorize record deletion; invitations and private-journal publication require their separately defined scope.
 
-Preserve australia/preview, active compatibility routes, owner/revision/destination guards and media provenance. Application rollback remains `dpl_XmJLienyDhuJRqRrVBUweQUyGK1L`. Never restore test data over production or delete unnamed records. No invitation, public private-journal sharing, new recurring spend or authentication change is authorised by this audit. The owner business plan v3 remains authoritative and actual costs, founder pay and capacity remain unknown.
+Immediate rollback: `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, deployment `dpl_C4u25RDNJZAw1tywRvyxph64PQS3`. Preserve the www-to-aves.bio path/query redirect.
+
+Historical audit and business requirements remain available in `docs/AUDIT-QUEUE-2026-11-13.md` and its JSON. Their numbered items are not a competing active implementation order. Live two-account isolation, restore drills, physical-device acceptance, independent traveller testing and business facts are not established by public browser CI.

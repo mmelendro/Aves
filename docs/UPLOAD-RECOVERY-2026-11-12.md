@@ -1,3 +1,5 @@
+> Historical reference. Current runtime, authorization and implementation order are in [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) and [the incremental roadmap](INCREMENTAL-ROADMAP-2026-11-13.md). Older pending/release statements below describe their dated checkpoint.
+
 # Journal upload recovery
 
 Published 12 November 2026 on aves.bio and www.aves.bio. Source: 1ba4c8fd13515ac180698d1c390eaa238d88b93c.
