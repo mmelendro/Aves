@@ -1,6 +1,6 @@
 # Shared explorer camera and hydrated text reflow
 
-Status: **published; camera verified, narrow doubled-text follow-up pending**. Live source `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, deployment `dpl_C4u25RDNJZAw1tywRvyxph64PQS3`, at https://aves.bio. [CI 43528648162](https://github.com/mmelendro/Aves/actions/runs/43528648162) passed all gates.
+Status: **published and verified for camera continuity and horizontal text reflow**. Current source `036fa286dfd063298cc201894331557438400c12`, deployment `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME`, at https://aves.bio. [CI 43568426791](https://github.com/mmelendro/Aves/actions/runs/43568426791) passed all gates.
 
 ## Scope
 
@@ -28,7 +28,7 @@ These runs overlap; do not add them together as a unique total. Local builds con
 
 The single public address is **https://aves.bio**. `www.aves.bio` redirects to the same path/query on aves.bio; the homepage and Colombia bird-list URL were verified. Future deployment alias changes must preserve this redirect.
 
-Publication remains gated on complete CI and a READY build of the exact passing commit. After publication, verify real satellite tiles, both background-switch directions, newly selected region framing, hydrated doubled-text reflow, canonical redirects and scoped runtime logs.
+Publication used the exact passing commits and READY production builds. Final live verification is recorded below.
 
 Rollback: `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`, source `a4acaedc130548eb3e94af9f86b87674fb3a8e4f`.
 
@@ -38,10 +38,20 @@ The specialist South Island habitat/itinerary map still has its own illustrated 
 
 ### Final inventory-test correction
 
-CI 43526436679 passed every map and accessibility check, with 178 full-suite checks passing and one inventory locator failure: streamed markup briefly matched two conservation labels. The test now scopes the same status and species assertions to the accessible Tinamou result card (3c7d1ed). Six repeated phone/desktop checks passed locally; the corrected map-credit build also passed desktop/Firefox resizing and the full public-sitemap accessibility sweep. Full CI 43528648162 is required before publication. No failed candidate was deployed.
+CI 43526436679 passed every map and accessibility check, with 178 full-suite checks passing and one inventory locator failure: streamed markup briefly matched two conservation labels. The test now scopes the same status and species assertions to the accessible Tinamou result card (3c7d1ed). Six repeated phone/desktop checks passed locally; the corrected map-credit build also passed desktop/Firefox resizing and the full public-sitemap accessibility sweep. Full CI 43528648162 subsequently passed before publication. No failed candidate was deployed.
 
 ## Publication evidence and follow-up
 
 Exact CI passed 782 unit tests, 33 priority journeys and 179 full browser checks (211 intentional project skips), plus lint/types/build/audits/budgets/accessibility. Live phone and desktop checks passed actual satellite tiles, exact pan/zoom and background continuity, newly selected region framing and www redirects. Screenshots were inspected. No error/fatal runtime rows appeared in the scoped 10-minute scan.
 
 Desktop doubled-text reflow passed; 320px still overflowed. The remaining causes were the nonwrapping toolbar, footer brand and account CTA. Candidate 036fa286dfd063298cc201894331557438400c12 fixes these and strengthens the regression. It passed the local production build and 14 focused browser checks, with one intentional phone resize skip. Full CI 43568426791 and live confirmation remain required. The earlier local text checks were insufficient; the live finding remains open.
+
+## Final reflow release — 14 November 2026
+
+Published `036fa286dfd063298cc201894331557438400c12` as `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME` after CI 43568426791 passed: 782 unit, 33 priority, 179 full browser checks, 211 intentional full-suite skips, plus lint/types/build/audits/budgets/accessibility. The local production build and 14 focused checks also passed (one intentional phone resize skip).
+
+Live 320px/1365px checks passed real satellite tiles, exact pan/zoom/background continuity, newly selected region framing, doubled-text document width, footer bounds and canonical redirects. Phone and desktop screenshots were inspected. The deployment-scoped 10-minute error/fatal scan returned no rows. The former 147px horizontal overflow is resolved.
+
+Visual follow-up: at doubled text, sticky toolbar/header offsets can still partially cover the world selector near the top of the page. This is separate from the resolved horizontal overflow and remains queued before decorative polish. The specialist South Island camera adapter is also still pending.
+
+Immediate rollback: `dpl_C4u25RDNJZAw1tywRvyxph64PQS3`, source `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`. Preserve the www-to-aves.bio redirect during any future release or rollback.
