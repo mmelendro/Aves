@@ -1,3 +1,4 @@
+import EbirdLink from "./ebird-link";
 import AlbumRail from "./album-rail";
 /** Server-rendered, paginated public inventory. Only 40 rows and their media are
  * sent to a traveller. Native GET forms work without client JavaScript. */
@@ -209,6 +210,7 @@ export function CountrySpeciesInventory({
                 </div>
               </div>
               <p className="mt-3 text-xs leading-5 text-emerald-900">Global conservation: {statusLabels[birdConservation(bird)?.globalStatus ?? "unknown"]}</p>
+              <EbirdLink scientificName={bird.scientificName}/>
               <details className="mt-3 border-t border-emerald-100 pt-2"><summary className="min-h-11 cursor-pointer content-center text-sm font-medium text-emerald-800">Turn the card · meet this bird</summary>
                 <BirdConservationLabel bird={bird} sources />
                 {bird.media && <details className="source-note"><summary>Photo credit</summary><p className="text-xs leading-6 text-gray-600">Image: {bird.media.credit.creator} · <a className="underline" href={bird.media.credit.sourceUrl} target="_blank" rel="noreferrer">Original source</a> · <a className="underline" href={bird.media.credit.licenseUrl} target="_blank" rel="noreferrer">{bird.media.credit.license}</a></p></details>}
