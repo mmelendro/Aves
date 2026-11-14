@@ -65,7 +65,7 @@ Updated from the pasted Revamp conversation and subsequent requests on 13 Novemb
 
 **Latest live release:** `036fa28`, deployment `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME`, on aves.bio. The camera and horizontal text-reflow fixes passed full CI and live checks; see the current status above.
 
-**Current candidate:** no additional application candidate is queued. Latest tested source is published. Next work is enlarged-text sticky spacing and the South Island adapter; preserved drafts require independent review and full checks.
+**Current candidate:** measured sticky header/toolbar spacing in the isolated release-sticky-camera checkout. Local lint and all 782 unit tests pass. Production build, focused browser acceptance and exact-commit CI must pass before deployment. South Island camera continuity follows as a separate increment; unrelated drafts remain excluded.
 
 **R31 live behavior:** desktop resizing from all map/guide edges and corners, bounded to the page. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Keyboard controls, Escape cancellation, Reset and narrow-screen stacking are live and verified. The camera increment adds exact geographic centre retention through fullscreen/resize. Team, creator, search-input and admin drafts remain separate.
 

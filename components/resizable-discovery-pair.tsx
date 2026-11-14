@@ -26,6 +26,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
 
   const id = useId()
   const containerRef = useRef<HTMLDivElement>(null)
+  const toolbarRef = useRef<HTMLDivElement>(null)
   const turnRef = useRef<HTMLButtonElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const mapPanelRef = useRef<HTMLDivElement>(null)
@@ -47,6 +48,28 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   const resize = useDiscoveryPanelResize({width,enabled:paired,mediaFirst,share,onShare:setShare})
   const effectiveShare = clampDiscoverySplit(share, resize.frameWidth)
   const bounds = discoverySplitBounds(resize.frameWidth)
+
+  useEffect(() => {
+    const container = containerRef.current, toolbar = toolbarRef.current
+    if (!container || !toolbar) return
+    const header = document.querySelector<HTMLElement>('[data-site-header]')
+    const measure = () => {
+      const headerHeight = header?.getBoundingClientRect().height ?? 0
+      const toolbarHeight = toolbar.getBoundingClientRect().height
+      // If enlarged controls occupy most of a short viewport, let the toolbar
+      // scroll normally so the destination selector remains reachable.
+      const sticky = innerHeight > 480 && headerHeight + toolbarHeight < innerHeight * .55
+      container.style.setProperty('--guide-header-offset', `${headerHeight}px`)
+      container.style.setProperty('--guide-scroll-offset', `${headerHeight + (sticky ? toolbarHeight : 0) + 16}px`)
+      container.dataset.toolbarSticky = String(sticky)
+    }
+    const observer = new ResizeObserver(measure)
+    if (header) observer.observe(header)
+    observer.observe(toolbar)
+    window.addEventListener('resize', measure)
+    measure()
+    return () => { observer.disconnect(); window.removeEventListener('resize', measure) }
+  }, [])
 
   useEffect(() => {
     const container = containerRef.current
@@ -140,7 +163,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   }
 
   return localizeHome(<FieldGuideContext.Provider value={{mediaVisible:layout === "paired" || face === "birds",bird:birdCue,mapCue,showBirds,openMap:()=>openPreview("map"),openBirds:()=>openPreview("birds"),registerMap,registerBirds}}><div ref={containerRef} className={styles.container} data-field-guide="true">
-    <div className={styles.guideToolbar}>
+    <div ref={toolbarRef} data-guide-toolbar="true" className={styles.guideToolbar}>
       <div className={styles.guideTitle}><BookOpen size={20} aria-hidden="true"/><span>Your bird guide</span><span className={styles.pageLabel}>{layout === "paired" ? "Map & birds" : face === "birds" ? "Birds" : "Map"}</span></div>
       <div className={styles.guideActions}>
         <button type="button" className={styles.reset} aria-label="Open map full screen" onClick={()=>openPreview("map")}><Maximize2 size={17} aria-hidden="true"/>Full screen map</button>

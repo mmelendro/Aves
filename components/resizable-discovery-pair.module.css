@@ -50,7 +50,7 @@
 .turnButton:focus-visible,.birdCue:focus-visible { outline:3px solid #b45309; outline-offset:3px; }
 .guideHelp { display:none; font-size:.8rem; line-height:1.6; color:#52635b; margin:0 0 .75rem; }
 .controls[hidden] { display:none; }
-.pair[data-layout="guide"] { display:block; position:relative; perspective:1500px; height:min(44rem,max(15rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem))); scroll-margin-top:calc(var(--guide-header-offset,8.25rem) + 4rem); --discovery-panel-height:min(44rem,max(15rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem))); --discovery-cue-space:140px; --guide-photo-height:calc(var(--discovery-panel-height) - 47px - var(--discovery-cue-space,0px)); --discovery-media-height:calc(var(--discovery-panel-height) - 47px - var(--discovery-cue-space,0px)); }
+.pair[data-layout="guide"] { display:block; position:relative; perspective:1500px; height:min(44rem,max(15rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem))); scroll-margin-top:var(--guide-scroll-offset,calc(var(--guide-header-offset,132px) + 4rem)); --discovery-panel-height:min(44rem,max(15rem,calc(100svh - var(--guide-header-offset,8.25rem) - 5rem))); --discovery-cue-space:140px; --guide-photo-height:calc(var(--discovery-panel-height) - 47px - var(--discovery-cue-space,0px)); --discovery-media-height:calc(var(--discovery-panel-height) - 47px - var(--discovery-cue-space,0px)); }
 .pair[data-layout="guide"] > .mediaPanel,.pair[data-layout="guide"] > .mapPanel { position:absolute; inset:0; max-width:none; height:100%; overflow:auto; border:1px solid #c5dfd1; border-radius:1.5rem; background:#f7fdf9; backface-visibility:hidden; transform-style:preserve-3d; visibility:visible; transition:transform 650ms cubic-bezier(.2,.75,.25,1),box-shadow 650ms,visibility 0s; box-shadow:0 12px 32px #064e3b14; }
 .pair[data-layout="guide"] > .mediaPanel { transform:rotateY(0deg); display:flex; flex-direction:column; overflow:hidden; padding:.5rem; }
 .pair[data-layout="guide"] > .mapPanel { transform:rotateY(180deg); padding:.5rem; display:flex; flex-direction:column; overflow:hidden; }
@@ -137,3 +137,6 @@
 .pair[data-resizable="true"] > .mediaPanel,.pair[data-resizable="true"] > .mapPanel {position:relative;height:100%;min-height:0;padding:14px;border:1px solid #b7dccc;border-radius:1rem;background:#f7fdf9;display:flex;flex-direction:column;}
 .pair[data-resizable="true"] .mediaBody,.pair[data-resizable="true"] .mapBody {flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;}
 .pair[data-resizable="true"] .divider {height:100%;}
+
+/* Enlarged controls must leave room to reach the content below them. */
+.container[data-toolbar-sticky="false"] .guideToolbar { position:static; }

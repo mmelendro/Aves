@@ -121,7 +121,7 @@ export function NewZealandHeader({
       </a>
       <header
         data-site-header="true"
-        className="sticky top-0 z-40 h-[132px] isolate"
+        className="sticky top-0 z-40 min-h-[132px] isolate"
       >
         <HeaderContour
           profile={profile}

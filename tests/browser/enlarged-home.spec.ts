@@ -18,3 +18,23 @@ test('hydrated homepage fits narrow screens with doubled text',async({page},info
  await expect(page.getByRole('link',{name:'AVES home',exact:true}).first()).toBeVisible()
  await page.screenshot({path:`test-results/enlarged-home-${info.project.name}.png`})
 })
+
+ test('enlarged header and toolbar leave the map selector reachable',async({page},info)=>{
+  test.skip(!['phone-320','desktop','firefox','landscape'].includes(info.project.name),'Representative text and viewport sizes')
+  await page.goto('/');await declineOptionalCookies(page)
+  await page.addStyleTag({content:'html {font-size:200% !important}'})
+  await page.evaluate(()=>document.fonts.ready)
+  await page.getByRole('button',{name:'Turn to the map',exact:true}).first().click()
+  const selector=page.getByRole('combobox',{name:'Map destination',exact:true}).first()
+  await selector.scrollIntoViewIfNeeded()
+  await expect(selector).toBeVisible()
+  await expect.poll(()=>selector.evaluate(node=>{
+   const box=node.getBoundingClientRect(),x=box.left+box.width/2,y=box.top+box.height/2
+   const hit=document.elementFromPoint(x,y)
+   return hit===node||node.contains(hit)
+  })).toBe(true)
+  await selector.selectOption('colombia')
+  await expect(selector).toHaveValue('colombia')
+  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1)
+  await page.screenshot({path:`test-results/sticky-spacing-${info.project.name}.png`})
+ })
