@@ -54,7 +54,8 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     if (!container || !toolbar) return
     const header = document.querySelector<HTMLElement>('[data-site-header]')
     const measure = () => {
-      const headerHeight = header?.getBoundingClientRect().height ?? 0
+      const measuredHeader = header?.getBoundingClientRect().height ?? 0
+      const headerHeight = measuredHeader <= innerHeight * .25 ? measuredHeader : 0
       const toolbarHeight = toolbar.getBoundingClientRect().height
       // If enlarged controls occupy most of a short viewport, let the toolbar
       // scroll normally so the destination selector remains reachable.
