@@ -1,6 +1,6 @@
 # Shared explorer camera and hydrated text reflow
 
-Status: **awaiting complete CI; not published**. Exact candidate: `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`. [CI 43528648162](https://github.com/mmelendro/Aves/actions/runs/43528648162).
+Status: **published; camera verified, narrow doubled-text follow-up pending**. Live source `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, deployment `dpl_C4u25RDNJZAw1tywRvyxph64PQS3`, at https://aves.bio. [CI 43528648162](https://github.com/mmelendro/Aves/actions/runs/43528648162) passed all gates.
 
 ## Scope
 
@@ -39,3 +39,9 @@ The specialist South Island habitat/itinerary map still has its own illustrated 
 ### Final inventory-test correction
 
 CI 43526436679 passed every map and accessibility check, with 178 full-suite checks passing and one inventory locator failure: streamed markup briefly matched two conservation labels. The test now scopes the same status and species assertions to the accessible Tinamou result card (3c7d1ed). Six repeated phone/desktop checks passed locally; the corrected map-credit build also passed desktop/Firefox resizing and the full public-sitemap accessibility sweep. Full CI 43528648162 is required before publication. No failed candidate was deployed.
+
+## Publication evidence and follow-up
+
+Exact CI passed 782 unit tests, 33 priority journeys and 179 full browser checks (211 intentional project skips), plus lint/types/build/audits/budgets/accessibility. Live phone and desktop checks passed actual satellite tiles, exact pan/zoom and background continuity, newly selected region framing and www redirects. Screenshots were inspected. No error/fatal runtime rows appeared in the scoped 10-minute scan.
+
+Desktop doubled-text reflow passed; 320px still overflowed. The remaining causes were the nonwrapping toolbar, footer brand and account CTA. Candidate 036fa286dfd063298cc201894331557438400c12 fixes these and strengthens the regression. It passed the local production build and 14 focused browser checks, with one intentional phone resize skip. Full CI 43568426791 and live confirmation remain required. The earlier local text checks were insufficient; the live finding remains open.

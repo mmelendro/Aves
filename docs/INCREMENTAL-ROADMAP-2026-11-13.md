@@ -6,25 +6,23 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 **One public address:** https://aves.bio. The www spelling redirects to the same path and query on aves.bio (verified with the homepage and a Colombia bird-list URL). Future releases must update only the main domain deployment and preserve this redirect.
 
-**Additional live finding:** an extended, fully loaded 320px homepage check found horizontal overflow at 200% text. Earlier quick checks and CI did not catch this timing-sensitive case. The repair is pushed as `997fde8`, with a hydration/font-ready regression. It is included in the next candidate; no camera draft has been published.
+**Current live release:** `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, deployment `dpl_C4u25RDNJZAw1tywRvyxph64PQS3`. The shared world/country/regional camera is live. Exact CI 43528648162 passed 782 unit tests, 33 priority journeys, 179 full browser checks, accessibility, builds, audits and budgets (211 intentional full-suite project skips).
 
-| State | What is included | Evidence / next action |
-|---|---|---|
-| **Live and verified** | Carousel/map repairs, national inventories, region-aware AVES labels and bird-list links, all-edge desktop map/guide resizing, keyboard/reset controls and narrow-phone layout fix | Production `a4acaed` on aves.bio (www redirects); deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`. Full CI and live 320px/1365px checks passed |
-| **Release gate passed** | Landscape-region dropdown no longer expands the phone page | CI 43516111175: 782 unit tests, 33 priority journeys, 161 full browser checks, lint/types/build/audits/accessibility passed. Both domain assignments independently verified |
-| **Next locally tested draft** | Bounded desktop search input, real header search submission and 200% text sizing | Production build plus 3 focused Chromium/Firefox checks pass. Still uncommitted; requires its own clean full release check |
-| **Other local drafts** | Team/guide profiles, creator album/credits, About/copy/footer, admin-plan cleanup | Preserve and review as separate increments. Not included in the pushed feature candidate; no live deletion authorized |
-| **Content work queued** | Comprehensive regional evidence/status coverage, Colombia journal, stories, contribution invitations, drones and 3D | Existing national catalogues are substantial; regional evidence and verified conservation coverage remain incomplete. See R32 audit below |
+Live 320px/1365px checks passed real satellite imagery, pan/zoom continuity in both background-switch directions, newly selected region framing and canonical redirects. Desktop doubled-text reflow passed. Scoped deployment runtime logs reported no error/fatal rows over 10 minutes.
 
-**Next action:** verify [CI 43528648162](https://github.com/mmelendro/Aves/actions/runs/43528648162) for exact candidate `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, then deploy to aves.bio only if every gate passes. This combines the text-reflow repair with the main explorer camera increment. The specialist South Island habitat map follows separately.
+**Open live finding:** the fully loaded 320px homepage still overflowed at doubled text. Live inspection identified the nonwrapping guide toolbar, footer brand and account CTA. A temporary browser application of the fixes reduced document width from 467px to 320px.
 
-**Latest diagnostic and correction:** CI 43515115628 identified the landscape-region label/select as the concrete width offender: its box extended from x=16 to x=350 on a 320px screen. The label and select now have explicit bounded width and `min-width: 0`. The correction passed full CI and live checks; earlier cookie/map-containment attempts were insufficient.
+**Next candidate:** `036fa286dfd063298cc201894331557438400c12`, [CI 43568426791](https://github.com/mmelendro/Aves/actions/runs/43568426791). Footer branding and phone controls wrap, the account CTA stays within its container, and the enlarged-text regression now waits for the geographic map and checks footer/control bounds. Production build and 14 focused phone/Chromium/Firefox checks passed locally, with one intentional phone-only resize skip. Publish only after full CI; then repeat live text checks. Do not describe the 320px enlarged-text issue as closed before that verification.
+
+**Preserved drafts:** desktop search input; team/guide profiles; creator album/credits; About/footer copy; admin-plan cleanup. These remain separate increments. No live deletion or invitation sending is authorized.
+
+**Next after reflow:** specialist South Island habitat camera continuity, then bounded header search, regional species/conservation evidence and the Colombia journal, following the priorities below.
 
 ### Next map priority: one camera across planning and satellite layers
 
 Switching Planning ↔ Satellite must change the map style only. Preserve geographic centre, zoom/ground scale, visible geographic extent, viewport size, and selected country/region/place in both directions. Example: a visitor viewing Colombia in the planning layer must see the same Colombia framing immediately after selecting satellite, without a world reset, extra pan or auto-fit. Preserve subsequent pan/zoom changes when switching back. Apply the same rule to other base layers, desktop/mobile, fullscreen and panel resizing; resizing may change visible extent with the new viewport, but must not silently reset the camera.
 
-Implementation should share geographic camera state between renderers (or use one renderer with multiple layers), rather than equating unrelated SVG scale and tile zoom values. Keep geographic size and framing consistent; decorative planning shapes must not force a different extent. Acceptance tests must switch both directions after country, region and place selection and after manual pan/zoom. The main explorer implementation is **pushed and awaiting full CI, not published**. It preserves one geographic engine across Planning, Satellite, Roads and Topographic. The specialist South Island habitat/itinerary adapter remains a separate R04 follow-up.
+Implementation should share geographic camera state between renderers (or use one renderer with multiple layers), rather than equating unrelated SVG scale and tile zoom values. Keep geographic size and framing consistent; decorative planning shapes must not force a different extent. Acceptance tests must switch both directions after country, region and place selection and after manual pan/zoom. The main explorer implementation is **live and verified for camera continuity**. It preserves one geographic engine across Planning, Satellite, Roads and Topographic. The specialist South Island habitat/itinerary adapter remains a separate R04 follow-up.
 
 ### Pushed implementation commits
 
@@ -61,9 +59,9 @@ Updated from the pasted Revamp conversation and subsequent requests on 13 Novemb
 
 ### Current candidate and deployment gate
 
-**Latest live release:** `a4acaed`, deployment `dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy`, on aves.bio. www redirects to that same canonical address. CI 43516111175 passed 782 unit tests, 33 priority journeys and 161 full-suite browser checks, with lint/types/build/audits/accessibility/budgets. Normal-width live region, inventory, photo and resize checks passed. The extended 200% text finding above remains open until the next candidate is deployed. The previous inventory release `231e8e9` remains a rollback reference, not the current release.
+**Latest live release:** `3c7d1ed`, deployment `dpl_C4u25RDNJZAw1tywRvyxph64PQS3`, on aves.bio. See the current status above for exact CI and live evidence. The 320px doubled-text correction is the next separately gated increment.
 
-**Current candidate:** `3c7d1ed6a14057ab5c16295a0118b9a71479e4d6`, including ancestor `997fde8`, awaiting complete CI 43528648162. Background switching preserves geographic centre, scale, bounds, canvas dimensions and selected region in the main explorer. Fullscreen/resize retain centre and zoom; explicit location selection and Reset may change the camera. Country names in the planning world view appear on hover/focus. Do not claim completion for the separate South Island habitat map or the entire touch-label design.
+**Current candidate:** `036fa286dfd063298cc201894331557438400c12`, awaiting full CI 43568426791. This fixes the remaining enlarged-text wrapping; the shared geographic camera is already live.
 
 **R31 live behavior:** desktop resizing from all map/guide edges and corners, bounded to the page. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Keyboard controls, Escape cancellation, Reset and narrow-screen stacking are live and verified. The camera increment adds exact geographic centre retention through fullscreen/resize. Team, creator, search-input and admin drafts remain separate.
 
@@ -159,7 +157,7 @@ Status Draft means some local implementation exists but acceptance remains open.
 | R12 | Copy | Warm, light Spanish-inspired charm and discreet bird puns across discovery; factual range caveats retained quietly; broaden About beyond Colombia | Inventory copy live; About/footer/voice work remains |
 | R13 | Creator album | Photo/sound contributors browse as an album; exact source links; Nicolás filter and contributor attribution throughout | Draft |
 | R14 | Admin cleanup | Admin-only old-plan selection across all users, preview/count and explicit confirmation; ordinary users denied by server/database; verify owner admin access | Draft |
-| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; latest candidate requires full CI 43528648162 before deployment |
+| R15 | Release | Typecheck, lint, unit/browser checks, build and budgets on exact candidate; desktop/mobile visual acceptance; publish then verify live URLs, admin access and rollback record | Previous release passed and is live; reflow candidate requires full CI 43568426791 before deployment |
 | R16 | Species links | Canonical eBird links using verified exact taxonomy mapping; no guessed codes | Ready after core release |
 | R17 | Soundscapes | Review 15 source candidates; source/listen cards with locality, creator and licence; resolve seven regional gaps; compact follow-call control with clear playback errors | Research only |
 | R18 | Content growth | Reviewed regional/endemic coverage, better source images, place/business videos and guide introduction videos | Needs content |
