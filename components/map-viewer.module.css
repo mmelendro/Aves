@@ -58,3 +58,6 @@
 .viewer .toolbar :global([data-map-layer-panel]) { position:static; }
 .viewer .toolbar :global([data-map-layer-panel]) > dialog { max-width:100%; }
 @media(max-width:639px) { .viewer .toolbar :global([data-map-layer-panel]) > dialog { max-height:30svh; } }
+
+/* Anchor actions inside the canvas, above source notes and attribution. */
+.viewer:not([data-expanded]) .toolbar { top:var(--map-dock-top,1rem); bottom:auto; }

@@ -40,4 +40,30 @@ CI 43577619807 for ded0e2f finished with failure; the candidate was not deployed
 
 Unrelated team, About, creator and admin drafts remain in album-current. The current credits change uses the committed page and does not import the older CreatorAlbum draft or its biographies/account claims.
 
-Working checkout: release-sticky-camera, local branch release/sticky-camera-2026-11-14; reviewed source pushes target feature/album-experience. Stage only the visual files listed by each commit; geographic-satellite-map.tsx contains the committed compact-info change and a separate unstaged South Island status-space draft.
+Current release checkout: release-map-search, local branch release/map-search-2026-11-14; reviewed source pushes target feature/album-experience. The original release-sticky-camera worktree retains the uncommitted South Island draft. See STATUS-AUDIT-2026-11-14.md before continuing; do not combine those drafts accidentally.
+
+
+## Flock identity — owner clarification, 14 November
+
+The heading birds should gather into recognisable, evolving flock formations and suggest natural flocking: alignment, cohesion, separation, gentle changes in relative position and staggered wing beats. Avoid a rigid group merely sliding across the header. Roadmap R22 retains this scope; it is requested and not implemented.
+
+Logo birds should visibly flap their actual wings while moving in flight, with region-appropriate species and reduced-motion support. Translating or rotating a flattened bird image is not completion. This is requested and not implemented.
+
+Use “our flock” consistently as the community metaphor: partners, patrons and contributors can be described as members of the AVES flock. Carry the tone naturally through community, creator and people pages, rather than repeating bird puns everywhere. Add this to R09/R12 copy acceptance.
+
+
+## Requested global biodiversity layers — 14 November
+
+Add independent world-map toggles for Megadiverse countries and Biodiversity hotspots, with small legends and source details behind the map credits disclosure. This is newly requested, researched and queued; no layer is published yet.
+
+Use the Conservation International / UNEP-WCMC set of 17 megadiverse countries: Australia, Brazil, China, Colombia, Democratic Republic of the Congo, Ecuador, India, Indonesia, Madagascar, Malaysia, Mexico, Papua New Guinea, Peru, Philippines, South Africa, United States of America and Venezuela. Source: UNEP-WCMC Biodiversity A–Z, https://www.biodiversitya-z.org/content/megadiverse-countries.pdf . Do not substitute the different membership of the Like-Minded Megadiverse Countries negotiating group.
+
+For hotspots, use sourced polygon boundaries rather than country fills. Candidate primary dataset: UNEP-WCMC Biodiversity Hotspots (2016), version 2016.1, 36 recognised hotspots: https://data-gis.unep-wcmc.org/portal/home/item.html?id=124b9a66d1c642b5bc41d1ff703a0d21 . Confirm redistribution terms, record dataset date/version and simplify geometry for a deferred map overlay before implementation. Source boundaries describe this prioritisation system; preserve their original scope and attribution.
+
+The current batch still prioritises release repairs, the supplied landscape-photo redesign, map search and complete album navigation, within five commits. Natural flock formations, actual logo wing beats and community “our flock” language remain requested follow-ups.
+
+## Logo-to-carousel behaviour and pause — owner clarification
+
+When a page already contains a bird carousel, clicking a logo bird must reveal that existing carousel and select the matching species. Do not force navigation to a separate inventory page when the current carousel can handle the request. Keep a normal inventory URL as the non-JavaScript/new-tab fallback. Multiple carousels need a deterministic visible/active target and only one handler; stop automatic slide advancement and preserve the map/guide face relationship. Match stable species identity/scientific-name aliases, not common-name text alone. If a bird is absent from the local featured list, resolve it through the public inventory without inventing a sighting or media. Filter conflicts need a clear resolution. Inventory result collections themselves should remain carousel-based, including subsequent server pages and missing-media entries.
+
+This is recorded acceptance scope, not implemented behaviour. The owner subsequently requested a pause after the next map-dock change, commit, push and audit. Photo, search and full-inventory navigation drafts are preserved separately; no additional feature implementation should proceed until resumed.

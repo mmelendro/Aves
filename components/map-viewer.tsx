@@ -74,6 +74,22 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
     observer.observe(element)
     return () => { observer.disconnect(); cancelAnimationFrame(frame.current) }
   }, [commit])
+  useEffect(() => {
+    const root = dialog.current;
+    const toolbar = root?.querySelector<HTMLElement>('[data-map-controls]');
+    const canvas = root?.querySelector<HTMLElement>('.geographic-map-canvas') ?? surface.current;
+    if (!root || !toolbar || !canvas) return;
+    const measure = () => {
+      const box = canvas.getBoundingClientRect(), parent = root.getBoundingClientRect();
+      root.style.setProperty('--map-dock-top', `${Math.max(box.top - parent.top + 8, box.bottom - parent.top - toolbar.offsetHeight - 8)}px`);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(canvas); observer.observe(toolbar); observer.observe(root);
+    // Opening credits can scroll the inner surface without resizing its canvas.
+    root.addEventListener('scroll', measure, true);
+    measure();
+    return () => { observer.disconnect(); root.removeEventListener('scroll', measure, true); };
+  }, [engineControls, expanded, photoRequest]);
   return <MapControlsContext.Provider value={registerControls}><dialog onClickCapture={()=>noteMapPhotoOwner(dialog.current)} onKeyDownCapture={()=>noteMapPhotoOwner(dialog.current)} onChangeCapture={()=>noteMapPhotoOwner(dialog.current)} data-aves-map="true" data-geographic={geographic || undefined} ref={dialog} open data-expanded={expanded || undefined} className={styles.viewer} role={expanded ? "dialog" : "group"} aria-modal={expanded || undefined} aria-label={label} onCancel={e=>{e.preventDefault();resize(false)}}>
     <div data-map-controls="true" className={styles.toolbar} role="group" aria-label={`${label} view controls`}>
       {engineControls ? <>
