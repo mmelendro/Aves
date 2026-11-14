@@ -1,5 +1,7 @@
 # Current AVES development handoff
 
+> **Paused at the user’s request.** Read [the batch handoff](PAUSED-BATCH-2026-11-14.md) first. Spacing candidate `ded0e2f` is pushed; CI 43577619807 is in progress. Production remains `036fa28`. South Island is an uncommitted draft. Future batches: at most five commits.
+
 Updated 14 November 2026. The active implementation queue is [the incremental roadmap](INCREMENTAL-ROADMAP-2026-11-13.md). Its R identifiers supersede older implementation queues; historical audit IDs remain evidence and retain owner-dependent scopes.
 
 Published application: `036fa286dfd063298cc201894331557438400c12`, production deployment `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME`, https://aves.bio. Exact CI [43568426791](https://github.com/mmelendro/Aves/actions/runs/43568426791) succeeded: 782 unit tests, 33 priority journeys, 179 full browser checks and 211 intentional project skips, plus build/lint/types/audits/budgets/accessibility. Domain assignment and CI success rechecked on 14 November. Detailed live checks are recorded in the camera release record; they were not rerun by the records audit.

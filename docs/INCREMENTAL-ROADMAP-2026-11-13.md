@@ -4,6 +4,8 @@ Reset on 13 November 2026 from Revamp bird inventory experience, the recovered h
 
 ## Where we are — 14 November 2026
 
+**Batch paused:** user requested two further commits then a pause, with future batches capped at five. Spacing candidate `ded0e2f` is pushed and [CI 43577619807](https://github.com/mmelendro/Aves/actions/runs/43577619807) is in progress. No deployment occurred in this batch. South Island camera work is an uncommitted draft with Firefox timeouts still to resolve. See [the continuation handoff](PAUSED-BATCH-2026-11-14.md).
+
 **One public address:** https://aves.bio. The www spelling redirects to the same path and query on aves.bio (verified with the homepage and a Colombia bird-list URL). Future releases must update only the main domain deployment and preserve this redirect.
 
 **Current live release:** `036fa286dfd063298cc201894331557438400c12`, deployment `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME`, at https://aves.bio. The shared world/country/regional camera and final narrow-screen wrapping corrections are published.
@@ -65,7 +67,7 @@ Updated from the pasted Revamp conversation and subsequent requests on 13 Novemb
 
 **Latest live release:** `036fa28`, deployment `dpl_6LNCBWt2DXAVBSHRpQHXPVrAz2ME`, on aves.bio. The camera and horizontal text-reflow fixes passed full CI and live checks; see the current status above.
 
-**Current candidate:** measured sticky header/toolbar spacing in the isolated release-sticky-camera checkout. Local lint and all 782 unit tests pass. Production build, focused browser acceptance and exact-commit CI must pass before deployment. South Island camera continuity follows as a separate increment; unrelated drafts remain excluded.
+**Current candidate:** `ded0e2f`, measured sticky header/toolbar spacing and deterministic consent/page accessibility checks. Await exact CI 43577619807 before deployment. Prior CI 43576247764 failed one Firefox target-size check despite 182 full browser passes. Six corrected local consent/page checks pass. South Island remains a separate unpublished draft; detailed evidence and next actions are in the paused batch handoff.
 
 **R31 live behavior:** desktop resizing from all map/guide edges and corners, bounded to the page. Shared edges adjust the split; outer edges adjust workspace width; top/bottom edges adjust height. Keyboard controls, Escape cancellation, Reset and narrow-screen stacking are live and verified. The camera increment adds exact geographic centre retention through fullscreen/resize. Team, creator, search-input and admin drafts remain separate.
 
