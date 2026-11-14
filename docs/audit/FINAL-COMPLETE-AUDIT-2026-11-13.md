@@ -1,3 +1,5 @@
+> Historical findings from 13 November. Independent items 0–8 were resolved in the 14 November release. Read the active queue for current status.
+
 # Final complete AVES audit, 13 November 2026
 
 The live application remains runtime `43943bb2740dfce0fafd43577ffbafec3037ed5a`, deployment `dpl_49nEtSR46vpeufJSdLncJ8r9i8Te`. This audit changes only the task register and handoff documentation. It does not implement the new list or change application data, authentication settings, tracking or deployments.

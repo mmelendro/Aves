@@ -5,53 +5,30 @@
   "authority": "Pending work explicitly restarted at 0. IDs0-27 supersede the previous active numbering. Previous60 completed scopes remain archived, not reopened.",
   "previousQueueArchive": "docs/archive/2026-11-13-before-final-audit/queue-2026-11-13.json",
   "release": {
+    "runtime": "e0c310842e4c83dc92613afa5e7543646e6c56e5",
+    "deployment": "dpl_39xyvffhn7J92MABNbJhHxFrUXVK",
+    "ciRun": 43551637153,
+    "unitTests": 785,
+    "browserPassed": 167,
+    "browserSkipped": 205,
+    "publicRoutesPassed": 81,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "sourceModules": 481,
+    "unreachable": 0,
     "published": true,
-    "ciConclusion": "success",
     "domainsVerified": true,
     "htmlBudgetsPassed": true,
-    "runtime": "43943bb2740dfce0fafd43577ffbafec3037ed5a",
-    "deployment": "dpl_49nEtSR46vpeufJSdLncJ8r9i8Te",
-    "url": "aves-australia-871lni245-mmelendro-9273s-projects.vercel.app",
-    "ciRun": 43392941281,
-    "ciJob": 131776965015,
-    "unitTests": 775,
-    "browserPassed": 128,
-    "browserSkipped": 160,
-    "focusedPassed": 24,
-    "focusedSkipped": 8,
-    "publicRoutesPassed": 81,
-    "publishedAt": "2026-11-13T08:35:44.129Z",
     "initialGzipBytes": {
-      "/page": 325118,
-      "/account/page": 319233
+      "/page": 338669,
+      "/account/page": 323879
     },
     "decodedHtmlBytes": {
-      "/new-zealand/south-island": 918082,
-      "/credits": 492018
+      "/credits": 516448,
+      "/new-zealand/south-island": 941003
     },
-    "todoVersion": 15,
-    "designVersion": 0,
-    "intermediateRelease": {
-      "runtime": "99d681e3bbcc9225b89da44e6fec8d4c5ac28862",
-      "deployment": "dpl_Ff62cQY2HJe6e6wnme1Xk1hL4ed8",
-      "publishedAt": "2026-11-13T08:20:13.828Z",
-      "ciRun": 43391065741,
-      "unitTests": 775,
-      "browserPassed": 128,
-      "publicRoutesPassed": 81,
-      "status": "Intermediate publication; superseded by the verified planner-anchor repair"
-    },
-    "domains": [
-      "aves.bio",
-      "www.aves.bio"
-    ],
-    "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
-    "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
-    "rollbackDeployment": "dpl_XmJLienyDhuJRqRrVBUweQUyGK1L",
-    "sourceModules": 471,
-    "unreachable": 0,
-    "lintErrors": 0,
-    "lintWarnings": 31
+    "ciConclusion": "success",
+    "publishedAt": "2026-11-14T03:43:53.027126+00:00"
   },
   "groups": {
     "A": "No owner involvement. Source/UI/document changes and isolated regression checks.",
@@ -70,101 +47,119 @@
       "title": "Make Schedule Call open without submitting an enquiry",
       "group": "A",
       "urgency": "High",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Give the scheduler trigger an explicit button type. Test empty and valid enquiry forms in isolation: opening and closing the scheduler must never POST, trigger unrelated validation or lose answers. Check dismissal on a small viewport.",
       "evidence": "Live DOM on /contact: declared type absent, effective type submit, form owner present. Source: components/google-calendar-button.tsx:39 and components/contact-form-section.tsx:426. No enquiry was submitted in this audit.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 1,
       "title": "Keep workspace section history separate from leaving unsaved work",
       "group": "A",
       "urgency": "High",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Allow hash-only Back and Forward between workspace sections while preserving every dirty editor. Keep discard guards for leaving the trip, another path or a changed search scope. Regress two dirty editors and cancelled departure.",
       "evidence": "components/account/unsaved-changes.ts:7 compares full href including fragment; line16 allows section clicks. Read-only synthetic reproduction produced one false discard prompt and pushed history back to the dirty-start anchor.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 2,
       "title": "Protect unfinished public enquiries",
       "group": "A",
       "urgency": "High",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Apply the shared dirty-form guard to both public enquiry implementations after task 1. Confirm Stay preserves answers, Leave discards deliberately, and a stored success clears dirty state. Do not automatically persist personal messages. Cover sidebar links and reload.",
       "evidence": "Live /contact: a harmless audit-only message disappeared after reload with no beforeunload dialog. Both public form implementations lack the shared guard. One sidebar-link attempt did not settle in the cloud browser; reproduce it in the isolated fixture rather than infer a universal navigation failure.",
       "previousQueueIds": [],
       "dependsOn": [
         1
-      ]
+      ],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 3,
       "title": "Preserve destination context in remaining conversation links",
       "group": "A",
       "urgency": "High",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Use the existing enquiry-context helper for the homepage Start a conversation CTA and Colombian message links. Test world, all three countries and selected regions. Leave the already-correct footer intact.",
       "evidence": "Live homepage with Colombia selected: main CTA remains /australia/contact?topic=general#inquiry while footer is /contact?country=colombia#inquiry. app/page.tsx:68; components/contact-form-section.tsx and features/colombia/contact-page.tsx also contain general Australian message links.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 4,
       "title": "Describe saved-record exports accurately before deletion",
       "group": "A",
       "urgency": "High",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Replace complete private backup wording with saved-record JSON export guidance. Explain that attachment files and unsaved edits are not included and must be handled separately. Preserve existing exports, ownership and deletion confirmation.",
       "evidence": "components/account/delete-draft.tsx:16 says complete private backup. lib/trip-export-handler.ts:16 and components/account/trip-travel-records.tsx:615 exclude attachment bytes and unsaved edits.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 5,
       "title": "Make current source and HTML checks release gates",
       "group": "A",
       "urgency": "Medium",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Gate candidate production output on source reachability, generated gallery snapshots and decoded HTML budgets before browser-fixture mutation. Keep JavaScript limits and existing browser tests. Compare cleanup inventory changes for review, without automatically deleting retained aliases or media.",
       "evidence": ".github/workflows/public-browser-checks.yml omits audit-source.mjs, generate-gallery-snapshots.cjs --check and decoded HTML checks. check-performance-budgets.mjs checks initial JavaScript only. HTML limits currently require a separate live audit.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 6,
       "title": "Align cookie wording with the implemented tracking inventory",
       "group": "A",
       "urgency": "Medium",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Inventory the actual deployed loaders and cookies. State which optional categories are active and which are only future choices. Remove unsupported current advertising/performance claims. Preserve opt-in defaults and do not install tracking to match old copy.",
       "evidence": "app/cookies/page.tsx:83-105 describes performance and targeting cookies as operating. Reviewed source contains a conditional consent bridge but no installed analytics or ad loader in the sampled app. External deployment-level tracking is not claimed absent.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 7,
       "title": "Resolve or document the remaining lint warnings",
       "group": "A",
       "urgency": "Medium",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Review the 31 exact-runtime warnings in small coherent commits. Correct real hook dependency, accessibility and image-delivery issues. Document narrowly justified exceptions instead of globally suppressing rules or blindly adding unstable dependencies.",
       "evidence": "Exact-runtime CI 43392941281: zero lint errors and 31 warnings, including hook dependencies, unused props, image delivery and one alt-text warning. This is not evidence that every warning is a user-visible bug.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 8,
       "title": "Refresh remaining runbooks and business-plan product evidence",
       "group": "A",
       "urgency": "Medium",
-      "status": "Ready",
+      "status": "Published",
       "acceptance": "Label historic release examples clearly and update current runtime, test and feature facts in operational documents and the owner plan. Keep actual finances unknown and keep the external investor edition pending owner figures. Do not claim hosted restore or physical acceptance.",
       "evidence": "RECOVERY-2026-11-13.md still presents an earlier deployment/78-route snapshot as current evidence. Current owner plan v3 page 2 cites cc448cd/741 tests, while the audited runtime is43943bb with 775 tests. Architecture and this active queue are already current.",
       "previousQueueIds": [],
-      "dependsOn": []
+      "dependsOn": [],
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/INDEPENDENT-REPAIRS-2026-11-14.md"
     },
     {
       "id": 9,
@@ -514,8 +509,13 @@
     ]
   },
   "activeScope": {
-    "pendingCount": 28,
-    "newAutomaticScopes": [
+    "pendingCount": 19,
+    "newAutomaticScopes": [],
+    "nextIndependent": null,
+    "firstRepairBatch": [],
+    "priorPublishedScopeCount": 60,
+    "implementationStarted": true,
+    "completedIndependent": [
       0,
       1,
       2,
@@ -526,16 +526,202 @@
       7,
       8
     ],
-    "nextIndependent": 0,
-    "firstRepairBatch": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
-    "priorPublishedScopeCount": 60,
-    "implementationStarted": false
+    "independentBatchComplete": true
   },
-  "verification": "docs/audit/FINAL-COMPLETE-AUDIT-2026-11-13.md"
+  "verification": "docs/audit/FINAL-COMPLETE-AUDIT-2026-11-13.md",
+  "previousCheckpointRelease": {
+    "published": true,
+    "ciConclusion": "success",
+    "domainsVerified": true,
+    "htmlBudgetsPassed": true,
+    "runtime": "43943bb2740dfce0fafd43577ffbafec3037ed5a",
+    "deployment": "dpl_49nEtSR46vpeufJSdLncJ8r9i8Te",
+    "url": "aves-australia-871lni245-mmelendro-9273s-projects.vercel.app",
+    "ciRun": 43392941281,
+    "ciJob": 131776965015,
+    "unitTests": 775,
+    "browserPassed": 128,
+    "browserSkipped": 160,
+    "focusedPassed": 24,
+    "focusedSkipped": 8,
+    "publicRoutesPassed": 81,
+    "publishedAt": "2026-11-13T08:35:44.129Z",
+    "initialGzipBytes": {
+      "/page": 325118,
+      "/account/page": 319233
+    },
+    "decodedHtmlBytes": {
+      "/new-zealand/south-island": 918082,
+      "/credits": 492018
+    },
+    "todoVersion": 15,
+    "designVersion": 0,
+    "intermediateRelease": {
+      "runtime": "99d681e3bbcc9225b89da44e6fec8d4c5ac28862",
+      "deployment": "dpl_Ff62cQY2HJe6e6wnme1Xk1hL4ed8",
+      "publishedAt": "2026-11-13T08:20:13.828Z",
+      "ciRun": 43391065741,
+      "unitTests": 775,
+      "browserPassed": 128,
+      "publicRoutesPassed": 81,
+      "status": "Intermediate publication; superseded by the verified planner-anchor repair"
+    },
+    "domains": [
+      "aves.bio",
+      "www.aves.bio"
+    ],
+    "project": "prj_YyVKn3ztqSrB6qdeEdxta6MdpTdv",
+    "team": "team_Th6ddqWyWKU1mLzTbJPlduDx",
+    "rollbackDeployment": "dpl_XmJLienyDhuJRqRrVBUweQUyGK1L",
+    "sourceModules": 471,
+    "unreachable": 0,
+    "lintErrors": 0,
+    "lintWarnings": 31
+  },
+  "previousRelease": {
+    "runtime": "a4acaedc130548eb3e94af9f86b87674fb3a8e4f",
+    "deployment": "dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy"
+  },
+  "updatedAt": "2026-11-14T03:43:53.027126+00:00",
+  "additionalRequests": {
+    "published": [
+      "Preserved the newer a4acaed published album, panel resizing, geographic engines and zero-warning repairs",
+      "Map expansion follows world/country/island replacement; explicit Expand map button",
+      "Expanded world stage fills the canvas without changing its Equal Earth projection",
+      "Uniform map controls retain the published functional toolbar; redundant hand controls remain removed",
+      "Shared Map/Place info toggle retains the mounted map, photo panel and selected photograph",
+      "Compact icon for follow-bird calls",
+      "Photo-sized bird face; actual larger originals offered on large displays",
+      "331 same-file Commons preview requests with small local fallback; original rights retained",
+      "73 featured eBird links, with four explicit parent-species links",
+      "Exact eBird inventory links: 1955 Colombia, 977 Australia, 373 New Zealand",
+      "15 locally labelled external soundscape source links"
+    ],
+    "stillOpen": [
+      "Reliable delivery and permitted usable soundscapes for all remaining regions; new direct audio playback is not claimed",
+      "Source-specific taxonomy review for 28 Colombian and 59 New Zealand national records without an exact current eBird match",
+      "Physical iPhone/Safari and independent visitor acceptance remain required"
+    ],
+    "soundscapeGaps": {
+      "colombia": [
+        "western-andes",
+        "cauca-river",
+        "magdalena-valley",
+        "llanos",
+        "colombian-massif"
+      ],
+      "australia": [
+        "jervis-bay-territory"
+      ],
+      "new-zealand": [
+        "rakiura"
+      ]
+    },
+    "taxonomyReview": {
+      "colombia": {
+        "total": 1983,
+        "exactMatches": 1955,
+        "unmatched": [
+          "Hydropsalis maculicaudus",
+          "Anurolimnas viridis",
+          "Anurolimnas fasciatus",
+          "Coturnicops notatus",
+          "Micropygia schomburgkii",
+          "Porzana flaviventer",
+          "Limosa lipponica",
+          "Phalacrocorax brasilianus",
+          "Phalacrocorax auritum",
+          "Phalacrocorax bougainvillii",
+          "Ixobrychus exilis",
+          "Ixobrychus involucris",
+          "Bubulcus ibis",
+          "Accipiter cooperii",
+          "Accipiter bicolor",
+          "Dryobates fumigatus",
+          "Dryobates kirkii",
+          "Dryobates passerinus",
+          "Dryobates callonotus",
+          "Dryobates dignus",
+          "Dryobates nigriceps",
+          "Dryobates affinis",
+          "Dryobates chocoensis",
+          "Phalcoboenus carunculatus",
+          "Milvago chimachima",
+          "Cranioleuca gutturata",
+          "Vireo approximans",
+          "Lonchura oryzivora"
+        ]
+      },
+      "australia": {
+        "total": 977,
+        "exactMatches": 977,
+        "unmatched": []
+      },
+      "new-zealand": {
+        "total": 432,
+        "exactMatches": 373,
+        "unmatched": [
+          "Megalapteryx didinus",
+          "Anomalopteryx didiformis",
+          "Pachyornis geranoides",
+          "Pachyornis elephantopus",
+          "Pachyornis australis",
+          "Emeus crassus",
+          "Euryapteryx curtus",
+          "Dinornis novaezealandiae",
+          "Dinornis robustus",
+          "Cygnus sumnerensis",
+          "Cnemiornis gracilis",
+          "Cnemiornis calcitrans",
+          "Malacorhynchus scarletti",
+          "Oxyura vantetsi",
+          "Biziura delautouri",
+          "Mergus milleneri",
+          "Anas chathamica",
+          "Streptopelia risoria",
+          "Streptopelia chinensis",
+          "Cacomantis pallidus",
+          "Chrysococcyx lucidus",
+          "Eudynamys taitensis",
+          "Aegotheles novaezealandiae",
+          "Aptornis otidiformis",
+          "Aptornis defossor",
+          "Fulica prisca",
+          "Fulica chathamensis",
+          "Hypotaenidia philippensis",
+          "Hypotaenidia dieffenbachii",
+          "Cabalus modestus",
+          "Capellirallus karamu",
+          "Grus sp. indet.",
+          "Pluvialis dominicus",
+          "Charadrius melanops",
+          "Charadrius novaeseelandiae",
+          "Coenocorypha chathamica",
+          "Anous albivittus",
+          "Chlidonias hybridus",
+          "Eudyptes warhami",
+          "Thalassarche impavida",
+          "Pelagodroma albiclunis",
+          "Lugensa brevirostris",
+          "Pterodroma imberi",
+          "Pachyptila pyramidalis",
+          "Puffinus spelaeus",
+          "Leucocarbo septentrionalis",
+          "Leucocarbo stewarti",
+          "Leucocarbo purpurascens",
+          "Bubulcus ibis",
+          "Ixobrychus minutus",
+          "Ixobrychus novaezelandiae",
+          "Circus teauteensis",
+          "Haliaeetus leucogaster",
+          "Aquila moorei",
+          "Nestor chathamensis",
+          "Xenicus jagmi",
+          "Xenicus yaldwyni",
+          "Dendroscansor decurvirostris",
+          "Corvus moriorum"
+        ]
+      }
+    }
+  }
 }

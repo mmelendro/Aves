@@ -33,3 +33,7 @@ Production JavaScript budgets remain in content/performance-budgets.json. Decode
 scripts/audit-source.mjs checks import reachability. scripts/audit-cleanup.mjs inventories route purpose, export/dependency candidates and duplicate assets. Neither tool proves all reachable code is necessary or authorizes automatic deletion. Generated paths, provenance, tests, framework entry points and compatibility consumers need review. The latest reviewed inventory is docs/audit/CLEANUP-INVENTORY-56-76.json.
 
 The prior architecture text is retained in [the dated archive](archive/2026-11-13-before-design-polish/SITE-ARCHITECTURE.md). It describes the historical two-root deployment and earlier tree proposal, not current production boundaries.
+
+## Bird references and shared discovery state
+
+`lib/ebird-profile.ts` owns the featured taxonomy-checked profile links. National exact-match links remain server-side in `lib/species-reference.ts`; the small NZ search index loads with that search. Parent-species references are labelled and unmatched national concepts remain explicit review work. `FieldGuideContext` carries expanded-map intent across country/island renderer replacement. `MapViewer` keeps the map and selected place information mounted while toggling their visibility. Responsive photo metadata supplies the actual image ratio and larger originals; lower-bandwidth limits remain bounded. New regional soundscapes are credited external creator links, not unverified embedded streams.

@@ -1,8 +1,6 @@
-# AVES active pending queue, restarted at 0
+# AVES current queue, updated 14 November 2026
 
-28 pending scopes numbered 0 to 27:9 with no owner involvement,5 owner decisions,8 files/access scopes and6 participation/conditional scopes. The previous 60 published scopes remain in the archive. Former 17 open scopes are all retained; two bundled scopes were split so measurement/security and videos/models can be handled independently.
-
-The live application remains runtime `43943bb2740dfce0fafd43577ffbafec3037ed5a`, deployment `dpl_49nEtSR46vpeufJSdLncJ8r9i8Te`. This audit changes only the task register and handoff documentation. It does not implement the new list or change application data, authentication settings, tracking or deployments.
+Independent tasks 0–8 are published. Nineteen original tasks remain open, IDs 9–27. Earlier completed scopes stay archived. Runtime `e0c310842e4c83dc92613afa5e7543646e6c56e5`, deployment `dpl_39xyvffhn7J92MABNbJhHxFrUXVK`. CI 43551637153: 785 unit tests and 167 browser checks passed, with 205 project-specific skips. All 81 public URLs and decoded HTML budgets passed. Lint: zero errors, zero warnings. Physical iPhone/Safari, independent visitors, live two-account/restore proof and actual commercial figures remain open.
 
 A. No owner involvement. Source/UI/document changes and isolated regression checks.
 B. Short owner decisions, facts or figures.
@@ -11,15 +9,6 @@ D. Physical device use, another participant, observed feedback or a specific rel
 
 | ID | Task | Urgency | Owner involvement | Status | Previous IDs | Dependencies |
 |---|---|---|---|---|---|---|
-| 0 | Make Schedule Call open without submitting an enquiry | High | A | Ready | New finding | None |
-| 1 | Keep workspace section history separate from leaving unsaved work | High | A | Ready | New finding | None |
-| 2 | Protect unfinished public enquiries | High | A | Ready | New finding | 1 |
-| 3 | Preserve destination context in remaining conversation links | High | A | Ready | New finding | None |
-| 4 | Describe saved-record exports accurately before deletion | High | A | Ready | New finding | None |
-| 5 | Make current source and HTML checks release gates | Medium | A | Ready | New finding | None |
-| 6 | Align cookie wording with the implemented tracking inventory | Medium | A | Ready | New finding | None |
-| 7 | Resolve or document the remaining lint warnings | Medium | A | Ready | New finding | None |
-| 8 | Refresh remaining runbooks and business-plan product evidence | Medium | A | Ready | New finding | None |
 | 9 | Confirm business identity, roles and public claims | High | B | Needs owner input | 21 | None |
 | 10 | Confirm support hours, timezone and emergency arrangements | High | B | Needs owner input | 22 | None |
 | 11 | Supply actual financials and complete the investor edition | High | B | Needs owner input | 20 | None |
@@ -42,6 +31,10 @@ D. Physical device use, another participant, observed feedback or a specific rel
 
 [Full evidence and completion checks](audit/FINAL-COMPLETE-AUDIT-2026-11-13.md). [Previous numbering and release history](archive/2026-11-13-before-final-audit/AUDIT-QUEUE-2026-11-13.md).
 
+Historical audit baseline below. Current acceptance is recorded above.
+
 Fresh checks: 81 public URLs return 200 with one main and one H1, no missing image-alt attributes, no duplicate rendered IDs or broken same-document anchors in the inspected HTML. Decoded HTML budgets pass: credits 492,018 bytes and South Island 918,082. Source reachability is 471 modules with none unreachable. Generated gallery snapshots match reviewed source. These HTTP checks do not exercise every client interaction or external link.
 
-The unchanged runtime retains successful CI 43392941281: 775 unit tests, 128 full browser passes and 160 deliberate project-specific skips; 24 focused passes and 8 skips. Build, TypeScript, catalogue deferral, geometry and unchanged JavaScript budgets pass. Lint has zero errors and 31 warnings. This audit reused that exact-runtime evidence rather than claiming a new full browser run.
+The historical 13 November runtime retained successful CI 43392941281: 775 unit tests, 128 full browser passes and 160 deliberate project-specific skips; 24 focused passes and 8 skips. Build, TypeScript, catalogue deferral, geometry and unchanged JavaScript budgets pass. Lint has zero errors and 31 warnings. This audit reused that exact-runtime evidence rather than claiming a new full browser run.
+
+Completed tasks 0–8 are archived in INDEPENDENT-REPAIRS-2026-11-14.md. Active IDs 9–27 are preserved.
