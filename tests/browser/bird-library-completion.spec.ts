@@ -11,7 +11,7 @@ test('map fullscreen and Map/Place state survive country and island changes',asy
  await map.getByRole('combobox').filter({has:page.locator('option[value="south-island"]')}).selectOption('south-island')
  map=page.locator('dialog[data-aves-map][data-expanded]');await expect(map).toHaveAttribute('aria-label','South Island explorer map')
  await expect(map.getByRole('button',{name:'Close expanded South Island explorer map',exact:true})).toBeInViewport()
- await map.getByRole('button',{name:'Back to New Zealand',exact:true}).click()
+ await map.getByRole('button',{name:'Zoom ecosystem map out',exact:true}).click()
  await expect(page.locator('dialog[data-aves-map][data-expanded]')).toHaveAttribute('aria-label','Destination explorer map')
  await page.keyboard.press('Escape');await expect(page.locator('dialog[data-aves-map][data-expanded]')).toHaveCount(0)
 })
