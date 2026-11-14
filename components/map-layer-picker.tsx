@@ -61,7 +61,7 @@ export function renderMapLayerPicker({
       <button
         ref={picker.button}
         type="button"
-        className={`${mapControlButtonClass} bg-white text-emerald-950`}
+        className={`${mapControlButtonClass} bg-white/80 backdrop-blur-md text-emerald-950`}
         aria-label="Map layers"
         title="Map layers and background"
         aria-expanded={picker.open}

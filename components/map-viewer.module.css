@@ -46,3 +46,15 @@
 .surface[hidden] { display:none; }
 .toolbar { position:relative; isolation:isolate; height:auto; min-height:3.25rem; overflow:visible; }
 .toolbar > * { max-width:100%; }
+
+/* Map actions float over the map, with one compact glass surface. */
+.viewer:not([data-expanded]) .toolbar { position:absolute; inset:auto .65rem .65rem auto; z-index:15; width:fit-content; max-width:calc(100% - 1.3rem); border:1px solid #ffffffb3; box-shadow:0 4px 18px #064e3b1a; background:#ffffffe0; backdrop-filter:blur(14px); }
+.viewer:not([data-expanded]) .surface { flex:1 1 auto; }
+.viewer:not([data-expanded]) .help { position:absolute; bottom:.5rem; left:.5rem; max-width:40%; font-size:10px; pointer-events:none; }
+.viewer .toolbar :global([data-map-layer-panel]) > dialog { position:absolute; inset:auto 0 calc(100% + .5rem) auto; width:min(22rem,calc(100vw - 2rem)); max-width:none; background:#ffffffed; backdrop-filter:blur(16px); }
+@media(max-width:639px) { .viewer:not([data-expanded]) .help { display:none; } }
+
+/* The dropdown belongs to the whole control dock, not the narrow Layers button. */
+.viewer .toolbar :global([data-map-layer-panel]) { position:static; }
+.viewer .toolbar :global([data-map-layer-panel]) > dialog { max-width:100%; }
+@media(max-width:639px) { .viewer .toolbar :global([data-map-layer-panel]) > dialog { max-height:30svh; } }

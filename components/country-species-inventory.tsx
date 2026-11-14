@@ -1,3 +1,4 @@
+import AlbumRail from "./album-rail";
 /** Server-rendered, paginated public inventory. Only 40 rows and their media are
  * sent to a traveller. Native GET forms work without client JavaScript. */
 import InventorySearchSubmit from "./inventory-search-submit";
@@ -62,7 +63,7 @@ export function CountrySpeciesInventory({
             key={country.id}
             href={`/species/reference?country=${country.id}`}
             aria-current={country.id === data.countryId ? "page" : undefined}
-            className={`${linkStyle} ${country.id === data.countryId ? "bg-emerald-100" : "bg-white"}`}
+            className={`${linkStyle} ${country.id === data.countryId ? "bg-emerald-900 text-white" : "bg-emerald-50"}`}
           >
             {country.name}
           </a>
@@ -178,14 +179,14 @@ export function CountrySpeciesInventory({
             Reset this search
           </a>
         )}
-        <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <AlbumRail label="Bird album"><ul className="mt-6">
           {data.results.map((bird) => (
             <li
               key={bird.id}
               className="min-w-0 overflow-hidden rounded-2xl border border-emerald-100 bg-white p-3 shadow-sm"
             >
               <div className="mb-4 overflow-hidden rounded-xl bg-emerald-50">
-                {bird.media || bird.guide ? <InventoryBirdImage src={bird.media?.bird.image ?? bird.guide!.image} name={bird.commonName} album /> : <div className="flex aspect-[4/5] items-center justify-center bg-gradient-to-br from-emerald-50 to-amber-50 p-6 text-center text-sm text-emerald-800">A face still to discover<br />Photograph coming later</div>}
+                {bird.media || bird.guide ? <InventoryBirdImage src={bird.media?.bird.image ?? bird.guide!.image} name={bird.commonName} album /> : <div className="flex aspect-[3/2] items-center justify-center bg-gradient-to-br from-emerald-50 to-amber-50 p-6 text-center text-sm text-emerald-800">A face still to discover<br />Photograph coming later</div>}
                 {bird.media?.kind === "illustration" && <p className="px-3 py-1 text-xs text-gray-600">Reference illustration</p>}
               </div>
               <div className="flex items-start justify-between gap-4">
@@ -210,7 +211,7 @@ export function CountrySpeciesInventory({
               <p className="mt-3 text-xs leading-5 text-emerald-900">Global conservation: {statusLabels[birdConservation(bird)?.globalStatus ?? "unknown"]}</p>
               <details className="mt-3 border-t border-emerald-100 pt-2"><summary className="min-h-11 cursor-pointer content-center text-sm font-medium text-emerald-800">Turn the card · meet this bird</summary>
                 <BirdConservationLabel bird={bird} sources />
-                {bird.media && <p className="text-xs leading-6 text-gray-600">Image: {bird.media.credit.creator} · <a className="underline" href={bird.media.credit.sourceUrl} target="_blank" rel="noreferrer">Original source</a> · <a className="underline" href={bird.media.credit.licenseUrl} target="_blank" rel="noreferrer">{bird.media.credit.license}</a></p>}
+                {bird.media && <details className="source-note"><summary>Photo credit</summary><p className="text-xs leading-6 text-gray-600">Image: {bird.media.credit.creator} · <a className="underline" href={bird.media.credit.sourceUrl} target="_blank" rel="noreferrer">Original source</a> · <a className="underline" href={bird.media.credit.licenseUrl} target="_blank" rel="noreferrer">{bird.media.credit.license}</a></p></details>}
                 {bird.guide && <a href={bird.guide.href} className="inline-flex min-h-11 items-center text-sm text-emerald-800 underline">Open bird guide & media</a>}
               <p className="mt-3 text-sm capitalize text-emerald-900">
                 {bird.origin === "unknown"
@@ -342,7 +343,7 @@ export function CountrySpeciesInventory({
               </details>
             </li>
           ))}
-        </ul>
+        </ul></AlbumRail>
         <nav
           aria-label="Species result pages"
           className="mt-6 flex flex-wrap gap-3"
@@ -373,11 +374,7 @@ export function CountrySpeciesInventory({
         </summary>
         <div className="mt-3 space-y-4 text-sm leading-6 text-gray-700">
           <p>
-            Reviewed {data.reviewed}. These are national source versions, not
-            one fully reconciled global taxonomy. Previous names and source
-            crosswalks are preserved without silently merging species. We
-            publish public place references, not nest sites or private
-            observation coordinates.
+            Updated {data.reviewed}. Names and classifications follow the country sources below. Earlier names remain available in each bird’s details.
           </p>
           {!!data.regionalExclusions?.length&&<details className="rounded-lg border p-3"><summary className="min-h-11 cursor-pointer">Regional source names awaiting taxonomy review ({data.regionalExclusions.length})</summary><ul className="space-y-2">{data.regionalExclusions.map(row=><li key={row.sourceId+row.sourceName}><span className="italic">{row.sourceName}</span>: {row.reason}. No regional join added from this source name.</li>)}</ul></details>}
           {data.sources.map((source) => (

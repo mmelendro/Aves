@@ -13,7 +13,7 @@ export default function InventoryBirdImage({
 }) {
   const [failed, setFailed] = useState(false);
   return failed ? (
-    <span className={album ? "flex aspect-[4/5] items-center justify-center text-sm text-gray-600" : "flex h-20 w-20 items-center justify-center rounded-lg bg-emerald-50 px-2 text-center text-xs text-gray-600"}>
+    <span className={album ? "flex aspect-[3/2] items-center justify-center text-sm text-gray-600" : "flex h-20 w-20 items-center justify-center rounded-lg bg-emerald-50 px-2 text-center text-xs text-gray-600"}>
       Image unavailable
     </span>
   ) : (
@@ -21,10 +21,10 @@ export default function InventoryBirdImage({
       src={src}
       alt={name}
       width={album ? 600 : 80}
-      height={album ? 750 : 80}
+      height={album ? 400 : 80}
       loading="lazy"
       onError={() => setFailed(true)}
-      className={album ? "aspect-[4/5] h-auto w-full object-contain" : "h-20 w-20 rounded-lg object-cover"}
+      className={album ? "aspect-[3/2] h-auto w-full object-contain" : "h-20 w-20 rounded-lg object-cover"}
     />
   );
 }

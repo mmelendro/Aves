@@ -1,3 +1,4 @@
+import AlbumRail from "@/components/album-rail";
 import { publicMetadata } from "@/lib/public-metadata";
 /**
  * Public attribution directory built from the media-credit JSON files.
@@ -201,7 +202,7 @@ export default async function CreditsPage({
             )}
           </nav>
         </div>
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto px-4"><AlbumRail label="Photograph credits"><div className="album-credit-cards">
           {credits.images
             .slice((photoPage - 1) * pageSize, photoPage * pageSize)
             .map((photo) => (
@@ -220,7 +221,7 @@ export default async function CreditsPage({
                 </div>
                 <CardContent className="p-6">
                   <h2 className="font-bold text-xl mb-3">{photo.title}</h2>
-                  <p className="text-gray-600 mb-3">{photo.attribution}</p>
+                  <details className="source-note"><summary>Credit & licence</summary><p className="text-gray-600 mb-3">{photo.attribution}</p>
                   <div className="flex flex-wrap gap-4 text-sm text-emerald-700 underline">
                     <a href={photo.creatorUrl} target="_blank" rel="noreferrer">
                       {photo.creator}
@@ -234,11 +235,11 @@ export default async function CreditsPage({
                   </div>
                   <p className="text-sm text-gray-500 mt-4">
                     {photo.modifications}
-                  </p>
+                  </p></details>
                 </CardContent>
               </Card>
             ))}
-        </div>
+        </div></AlbumRail></div>
       </section>
       <section
         className="py-12 bg-emerald-50"
