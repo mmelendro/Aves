@@ -64,7 +64,7 @@ export function BrandMark({ country, inverse = false, size = "header", priority 
   const subtitleHref = labelHref || location?.href || (displayCountry ? `/${displayCountry}` : homeHref)
 
   return (
-    <span onPointerEnter={()=>setFlying(true)} onPointerLeave={()=>{setFlying(false);setFrame(0)}} onFocus={()=>setFlying(true)} onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget)){setFlying(false);setFrame(0)}}} className={cn("relative inline-flex min-w-0 max-w-full items-center pb-4", isFooter ? "gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
+    <span onPointerEnter={()=>setFlying(true)} onPointerLeave={()=>{setFlying(false);setFrame(0)}} onFocus={()=>setFlying(true)} onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget)){setFlying(false);setFrame(0)}}} className={cn("relative inline-flex min-w-0 max-w-full items-center pb-4", isFooter ? "flex-wrap gap-3 pb-6" : "gap-1.5 sm:gap-2")}>
       <svg aria-hidden="true" focusable="false" viewBox="0 0 240 40" fill="none" className={cn("pointer-events-none absolute inset-x-0 bottom-0 h-6 w-full", isFooter && "h-9", unifiedHeaderContour && "invisible", inverse ? "text-emerald-200" : "text-emerald-600")}>
         <BrandLandscape {...context} />
       </svg>
