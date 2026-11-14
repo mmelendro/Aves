@@ -14,6 +14,6 @@ test('national album keeps complete results, source-backed status and keyboard c
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1)
  await page.goto('/species/reference?country=colombia&q=Nothocercus+julius')
  await expect(results.getByRole('heading',{level:2})).toHaveText('1 bird to discover')
- await expect(results.locator('li > p').filter({hasText:/^Global conservation: Status not verified$/})).toBeVisible()
+ await expect(results.locator('li > p:visible').filter({hasText:/^Global conservation: Status not verified$/})).toBeVisible()
  await expect(page.getByRole('heading',{name:'Tawny-breasted Tinamou',exact:true})).toBeVisible()
 })

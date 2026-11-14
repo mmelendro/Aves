@@ -317,8 +317,9 @@ test("credit pagination keeps recording anchors and complete image-source access
   await expect(
     page.getByRole("link", { name: "Previous checklist credits", exact: true }),
   ).toBeVisible();
-  await page.getByText(/Find all .* checklist image credits/).click();
-  const link = page.locator('a[href*="?entry="]').last();
+  const checklist = page.getByRole("region", {name:"New Zealand checklist reference images",exact:true});
+  await checklist.locator("summary").click();
+  const link = checklist.locator('a[href*="?entry="]:visible').last();
   const href = await link.getAttribute("href");
   await link.click();
   await expect(page).toHaveURL(
