@@ -1,4 +1,4 @@
-import urllib.request,urllib.error,urllib.parse,xml.etree.ElementTree as ET,concurrent.futures,json,gzip,argparse,sys
+import urllib.request,urllib.error,urllib.parse,xml.etree.ElementTree as ET,concurrent.futures,json,gzip,argparse,sys,time
 from html.parser import HTMLParser
 from pathlib import Path
 class Page(HTMLParser):
@@ -19,6 +19,7 @@ class Page(HTMLParser):
 parser=argparse.ArgumentParser(description='Read-only public-route regression audit; no accounts, cookies or writes.')
 parser.add_argument('--base-url',default='https://aves.bio')
 parser.add_argument('--check-budgets',action='store_true')
+parser.add_argument('--wait-for-ready',action='store_true',help='Wait up to 45 seconds for a CI candidate server')
 parser.add_argument('--output',default='public-http-audit.json')
 args=parser.parse_args()
 base=args.base_url.rstrip('/')
@@ -30,7 +31,14 @@ class Redirects(urllib.request.HTTPRedirectHandler):
   if urllib.parse.urlsplit(newurl).netloc!=origin.netloc:raise ValueError('Cross-origin redirect rejected')
   return super().redirect_request(request,fp,code,msg,headers,newurl)
 opener=urllib.request.build_opener(Redirects())
-root=ET.fromstring(opener.open(base+'/sitemap.xml',timeout=30).read())
+deadline=time.monotonic()+45
+while True:
+ try:
+  with opener.open(base+'/sitemap.xml',timeout=5 if args.wait_for_ready else 30)as response:root=ET.fromstring(response.read())
+  break
+ except (OSError,urllib.error.URLError):
+  if not args.wait_for_ready or time.monotonic()>=deadline:raise
+  time.sleep(.25)
 paths=[urllib.parse.urlsplit(n.text).path+('?' + urllib.parse.urlsplit(n.text).query if urllib.parse.urlsplit(n.text).query else '') for n in root.findall('.//{*}loc') if urllib.parse.urlsplit(n.text).hostname=='aves.bio']
 if any(p.startswith(('/account','/admin','/api','/auth','/dashboard','/shopping')) for p in paths):raise SystemExit('Private path unexpectedly included in public sitemap')
 urls=[base+p for p in paths[:150]]

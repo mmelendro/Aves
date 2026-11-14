@@ -7,7 +7,7 @@
 "use client"
 import { useReadOnlyPreview } from "@/components/preview-mode"
 import { useUnsavedChanges } from "@/components/account/unsaved-changes"
-import { enquiryHref } from "@/lib/enquiry-entry"
+import { ContextualEnquiryLink } from "@/components/contextual-enquiry-link"
 
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import React, { useEffect, useRef, useState } from "react"
@@ -23,34 +23,33 @@ import { GoogleCalendarButton } from "@/components/google-calendar-button"
 import { makeColombiaInquiry } from "@/lib/colombia-inquiry"
 import { canonicalColombiaRegion, sharedAccountHref } from "@/lib/shared-account"
 
+const tourTypes = [
+  { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
+  { id: "vision", label: "Vision Tours", icon: "👁️" },
+  { id: "elevate", label: "Elevate Tours", icon: "⬆️" },
+  { id: "souls", label: "Souls Tours", icon: "💫" },
+]
+
+const bioregions = [
+  { id: "caribbean", label: "Caribbean Coast", emoji: "🏖️" },
+  { id: "sierra-nevada", label: "Sierra Nevada de Santa Marta", emoji: "🏔️" },
+  { id: "pacific-choco", label: "Pacific Coast Chocó", emoji: "🌊" },
+  { id: "western-andes", label: "Western Andes", emoji: "⛰️" },
+  { id: "cauca-valley", label: "Cauca Valley", emoji: "🌄" },
+  { id: "central-andes", label: "Central Andes", emoji: "🗻" },
+  { id: "magdalena-valley", label: "Magdalena Valley", emoji: "🏞️" },
+  { id: "eastern-andes", label: "Eastern Andes", emoji: "🏔️" },
+  { id: "eastern-plains", label: "Eastern Plains", emoji: "🌾" },
+  { id: "amazon", label: "Amazon Rainforest", emoji: "🌳" },
+  { id: "colombian-massif", label: "Colombian Massif", emoji: "🏕️" },
+  { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
+]
+
 interface ContactFormSectionProps {
   showTitle?: boolean
   showFAQ?: boolean
   className?: string
 }
-
-  const tourTypes = [
-    { id: "adventure", label: "Adventure Tours", icon: "🏔️" },
-    { id: "vision", label: "Vision Tours", icon: "👁️" },
-    { id: "elevate", label: "Elevate Tours", icon: "⬆️" },
-    { id: "souls", label: "Souls Tours", icon: "💫" },
-  ]
-
-  const bioregions = [
-    { id: "caribbean", label: "Caribbean Coast", emoji: "🏖️" },
-    { id: "sierra-nevada", label: "Sierra Nevada de Santa Marta", emoji: "🏔️" },
-    { id: "pacific-choco", label: "Pacific Coast Chocó", emoji: "🌊" },
-    { id: "western-andes", label: "Western Andes", emoji: "⛰️" },
-    { id: "cauca-valley", label: "Cauca Valley", emoji: "🌄" },
-    { id: "central-andes", label: "Central Andes", emoji: "🗻" },
-    { id: "magdalena-valley", label: "Magdalena Valley", emoji: "🏞️" },
-    { id: "eastern-andes", label: "Eastern Andes", emoji: "🏔️" },
-    { id: "eastern-plains", label: "Eastern Plains", emoji: "🌾" },
-    { id: "amazon", label: "Amazon Rainforest", emoji: "🌳" },
-    { id: "colombian-massif", label: "Colombian Massif", emoji: "🏕️" },
-    { id: "multiple", label: "Multiple Regions", emoji: "🗺️" },
-  ]
-
 
 export function ContactFormSection({
   showTitle = true,
@@ -104,11 +103,13 @@ export function ContactFormSection({
 
   const toggleTourType = (tourType: string) => {
     setDirty(true)
+    setSubmitStatus("idle")
     setSelectedTourTypes((prev) => (prev.includes(tourType) ? prev.filter((t) => t !== tourType) : [...prev, tourType]))
   }
 
   const toggleRegion = (region: string) => {
     setDirty(true)
+    setSubmitStatus("idle")
     setSelectedRegions((prev) => (prev.includes(region) ? prev.filter((r) => r !== region) : [...prev, region]))
   }
 
@@ -135,8 +136,8 @@ export function ContactFormSection({
       if (result?.success !== true || result?.status !== "stored" || result?.intent !== "inquiry" || result?.country !== "colombia") {
         throw new Error("We couldn't confirm that your inquiry was saved. Please try again.")
       }
-      setSubmitStatus("success")
       setDirty(false)
+      setSubmitStatus("success")
     } catch (error) {
       setSubmitStatus("error")
       setFeedback(error instanceof Error ? error.message : "Your inquiry could not be saved. Please try again.")
@@ -192,8 +193,7 @@ export function ContactFormSection({
                     The more details you provide, the better we can customize your Colombian birding experience.
                   </p>
 
-                  <form className="space-y-6" onChangeCapture={() => setDirty(true)} onSubmit={handleSubmit}>
-            <fieldset disabled={readOnly || isSubmitting} className="contents">
+                  <form className="space-y-6" onSubmit={handleSubmit} onChange={() => {setDirty(true);setSubmitStatus("idle")}}>
                     {/* Personal Information */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
@@ -321,7 +321,7 @@ export function ContactFormSection({
                         </label>
                         <Link
                           href="/tours"
-                          className="text-emerald-600 hover:text-emerald-700 text-sm flex min-h-11 items-center gap-1"
+                          className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1"
                         >
                           View All Tours <ExternalLink className="w-3 h-3" />
                         </Link>
@@ -354,12 +354,12 @@ export function ContactFormSection({
                         </label>
                         <Link
                           href="/aves-explorer"
-                          className="text-emerald-600 hover:text-emerald-700 text-sm flex min-h-11 items-center gap-1"
+                          className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1"
                         >
                           Explore Map <ExternalLink className="w-3 h-3" />
                         </Link>
                       </div>
-                      <div tabIndex={0} className="grid md:grid-cols-2 gap-3 max-h-48 overflow-y-auto border rounded-lg p-4 bg-gray-50">
+                      <div className="grid md:grid-cols-2 gap-3 max-h-48 overflow-y-auto border rounded-lg p-4 bg-gray-50">
                         {bioregions.map((region) => (
                           <div key={region.id} className="flex items-center space-x-3">
                             <Checkbox
@@ -396,7 +396,7 @@ export function ContactFormSection({
 
                     {/* Empty bot-trap field; real visitors skip it. Updates require a separate opt-in. */}
                     <div className="hidden" aria-hidden="true"><label>Website<input name="website" autoComplete="off" tabIndex={-1} value={website} onChange={event => setWebsite(event.target.value)} /></label></div>
-                    <label className="flex items-start gap-3 text-sm text-gray-700"><input type="checkbox" className="mt-1 h-6 w-6 shrink-0 accent-emerald-600" checked={updates} onChange={event => setUpdates(event.target.checked)} /><span>Email me AVES Colombia trip news and updates. I can unsubscribe at any time.</span></label>
+                    <label className="flex items-start gap-3 text-sm text-gray-700"><input type="checkbox" className="mt-1 accent-emerald-600" checked={updates} onChange={event => setUpdates(event.target.checked)} /><span>Email me AVES Colombia trip news and updates. I can unsubscribe at any time.</span></label>
                     <p className="text-sm text-gray-500">Updates are optional. We'll use your details to respond to this inquiry. <Link href="/privacy" className="text-emerald-700 underline">Read our privacy information</Link>.</p>
 
                     {/* Submit Button */}
@@ -437,8 +437,7 @@ export function ContactFormSection({
                         </div>
                       </div>
                     </div>
-                  </fieldset>
-          </form>
+                  </form>
                 </CardContent>
               </Card>
             </div>
@@ -499,9 +498,9 @@ export function ContactFormSection({
                       <Mail className="text-emerald-600 flex-shrink-0 w-5 h-5 mt-0.5" />
                       <div>
                         <div className="font-semibold text-gray-900">Have a question?</div>
-                        <a href={enquiryHref("colombia")} className="inline-flex min-h-11 items-center text-emerald-600 hover:text-emerald-700 underline">
+                        <ContextualEnquiryLink country="colombia" className="inline-flex min-h-11 items-center text-emerald-600 hover:text-emerald-700 underline">
                           Send AVES a message
-                        </a>
+                        </ContextualEnquiryLink>
                         <div className="text-sm text-gray-600">Contact AVES about your inquiry or proposal</div>
                       </div>
                     </div>

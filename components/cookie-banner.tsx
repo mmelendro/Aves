@@ -52,7 +52,7 @@ export function CookieBanner() {
   }
 
   return localizeHome((
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/20 backdrop-blur-sm">
+    <div data-cookie-banner className="fixed bottom-0 left-0 right-0 z-[70] max-h-[90svh] overflow-y-auto overscroll-contain p-4 bg-black/20 backdrop-blur-sm">
       <Card className="max-w-4xl mx-auto shadow-2xl border-0">
         <CardContent className="p-6">
           <div className="flex items-start justify-between mb-4">
@@ -61,8 +61,8 @@ export function CookieBanner() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">We Value Your Privacy</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  We use essential cookies for account sessions and to remember your choices. Optional tracking is
-                  off by default. The app currently installs no analytics or advertising loader. You can customize your
+                  We use cookies to enhance your browsing experience, serve personalized content, and analyze our
+                  traffic. By clicking "Accept All", you consent to our use of cookies. You can customize your
                   preferences or learn more in our{" "}
                   <a href="/cookies" className="text-emerald-600 hover:text-emerald-700 underline">
                     Cookie Policy
@@ -82,7 +82,7 @@ export function CookieBanner() {
             </Button>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 [&>button]:relative [&>button]:isolate [&>button]:h-auto [&>button]:min-h-11 [&>button]:min-w-0 [&>button]:whitespace-normal">
             <Button onClick={handleAcceptAll} className="bg-emerald-600 hover:bg-emerald-700 text-white" type="button">
               Accept All Cookies
             </Button>

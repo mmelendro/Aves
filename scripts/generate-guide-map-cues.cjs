@@ -49,10 +49,10 @@ for(const region of colombiaMapMarkers) {
 }
 for(const [file,content] of Object.entries(files))writeFileSync(resolve(directory,file),content)
 const inputs=['content/global-australian-map.ts','content/new-zealand-map.json','content/colombia-planning-boundaries.json','content/colombia-map-markers.ts','lib/region-links.ts','scripts/generate-guide-map-cues.cjs']
-const sourceDigests=Object.fromEntries(inputs.map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')]))
+const sourceDigests=Object.fromEntries(inputs.map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file),'utf8').replace(/\r\n/g,'\n')).digest('hex')]))
 const index=JSON.stringify({sources:{australia:exportsAu.australiaMapProvenance.sourceUrl,'new-zealand':nz.source.url},sourceDigests,cues},null,2)+'\n'
 const indexPath=resolve(root,'content/guide-map-cues.json')
 if(process.argv.includes('--check')) {
- if(readFileSync(indexPath,'utf8')!==index)throw Error('Map geometry changed. Run node scripts/generate-guide-map-cues.cjs and commit its index before building.')
+ if(readFileSync(indexPath,'utf8').replace(/\r\n/g,'\n')!==index)throw Error('Map geometry changed. Run node scripts/generate-guide-map-cues.cjs and commit its index before building.')
 } else writeFileSync(indexPath,index)
 console.log(`Generated ${Object.keys(files).length} map cue assets from existing geometry`)

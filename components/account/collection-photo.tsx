@@ -23,6 +23,7 @@ export default function CollectionPhoto({
     <div className="space-y-2">
       <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-emerald-50">
         {showOwner && !failed ? (
+          // eslint-disable-next-line @next/next/no-img-element -- Private media must use browser session cookies; reference photos use ResponsivePhoto.
           <img
             src={photo.src}
             alt={

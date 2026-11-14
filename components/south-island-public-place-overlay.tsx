@@ -1,5 +1,6 @@
 "use client"
 
+import {requestMapPhotos} from "@/lib/map-photo-request"
 import GoogleMapsActions from "./google-maps-actions"
 import { useTripMap } from "./trip-planner/trip-map-context"
 import NzPlaceIdeas from "./nz-place-ideas"
@@ -16,7 +17,7 @@ export default function SouthIslandPublicPlaceOverlay({ unit }: { unit: number }
       const xy = ecosystemMapPoint(point.longitude, point.latitude, map.bbox)
       const selected = point.id === layers.point
       const colour = publicPlaceCategories.find(category => point.categories.includes(category.id) && layers[category.id])!.colour
-      return <g key={point.id} role="button" tabIndex={0} aria-label={`Preview public place: ${point.name}`} aria-pressed={selected} className="cursor-pointer outline-none [&:focus-visible>circle:first-of-type]:stroke-emerald-700" onClick={() => update({point:point.id,park:""})} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); update({point:point.id,park:""}) } }}>
+      return <g key={point.id} role="button" tabIndex={0} aria-label={`Preview public place: ${point.name}`} aria-pressed={selected} className="cursor-pointer outline-none [&:focus-visible>circle:first-of-type]:stroke-emerald-700" onClick={() => {update({point:point.id,park:""});requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:point.id,name:point.name})}} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); update({point:point.id,park:""});requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:point.id,name:point.name}) } }}>
         <title>{point.name} · {point.precision}</title>
         <circle cx={xy.x} cy={xy.y} r={22*unit} fill="transparent" />
         <circle cx={xy.x} cy={xy.y} r={(selected ? 9 : 6)*unit} fill={selected ? colour : "#fff"} stroke={colour} strokeWidth="2" vectorEffect="non-scaling-stroke" />

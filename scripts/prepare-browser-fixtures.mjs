@@ -19,9 +19,8 @@ await copyFile('tests/browser/fixtures/bird-collection.tsx', 'app/browser-fixtur
 
 await mkdir("app/browser-fixtures/trip-dashboard", { recursive: true })
 await copyFile("tests/browser/fixtures/trip-dashboard.tsx", "app/browser-fixtures/trip-dashboard/page.tsx")
-await mkdir('app/browser-fixtures/unsaved-sections', { recursive: true })
-await copyFile('tests/browser/fixtures/unsaved-sections.tsx', 'app/browser-fixtures/unsaved-sections/page.tsx')
-for (const name of ['public-enquiry-colombia','public-enquiry-australia']) {
-  await mkdir(`app/browser-fixtures/${name}`, {recursive:true})
-  await copyFile(`tests/browser/fixtures/${name}.tsx`, `app/browser-fixtures/${name}/page.tsx`)
-}
+
+await mkdir('app/browser-fixtures/unsaved-workspace', {recursive:true})
+await copyFile('tests/browser/fixtures/unsaved-workspace.tsx','app/browser-fixtures/unsaved-workspace/page.tsx')
+await mkdir('app/browser-fixtures/contact', {recursive:true})
+await copyFile('tests/browser/fixtures/contact.tsx','app/browser-fixtures/contact/page.tsx')

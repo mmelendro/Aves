@@ -19,6 +19,8 @@ for(const path of pages) test(`public accessibility and reflow: ${path}`, async 
 })
 test('keyboard skip link reaches main and map dismissal restores focus',async({page})=>{
   await page.goto('/')
+  // Wait for the first-visit client shell before checking its initial tab order.
+  await expect(page.getByRole('button',{name:'Reject Non-Essential',exact:true})).toBeVisible()
   await page.keyboard.press('Tab')
   const skip=page.getByRole('link',{name:'Skip to content'})
   await expect(skip).toBeFocused()

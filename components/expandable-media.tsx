@@ -52,7 +52,8 @@ export default function ExpandableMedia({ children, label, enabled = true, kind 
     if (!open) {const restore=closePreview.current;closePreview.current=null;if(restore)restore();else trigger.current?.focus({ preventScroll: true })}
   }
 
-  useEffect(()=>{if(enabled&&kind==="bird")return guide?.registerBirds?.(restore=>{closePreview.current=restore;resize(true)})},[enabled,kind,guide?.registerBirds])
+  const registerBirds=guide?.registerBirds
+  useEffect(()=>{if(enabled&&kind==="bird")return registerBirds?.(restore=>{closePreview.current=restore;resize(true)})},[enabled,kind,registerBirds])
 
   if (!enabled) return children
   return <dialog ref={dialog} open className={styles.viewer} data-expanded={expanded || undefined}

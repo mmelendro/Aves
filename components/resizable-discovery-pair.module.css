@@ -126,10 +126,20 @@
 }
 .pair[data-layout="guide"] .mapBody :global(dialog[data-aves-map]:not([data-expanded])) { min-height:100%; height:auto; overflow:visible; }
 
-/* On the bird face the photograph sets the card height. A hidden map must not
-   reserve its tall canvas around a landscape photo. Expanded viewers keep their
-   own viewport sizing and the reverse map remains mounted. */
-.pair[data-layout="guide"][data-face="birds"] { height:auto; --discovery-media-height:auto; --guide-photo-height:auto; }
-.pair[data-layout="guide"][data-face="birds"] > .mediaPanel { position:relative; inset:auto; height:auto; overflow:visible; }
-.pair[data-layout="guide"][data-face="birds"] .mediaBody { flex:none; overflow:visible; }
-.pair[data-layout="guide"][data-face="birds"] .mediaPanel :global(dialog:not([data-expanded]) [data-carousel-image]) { height:auto !important; aspect-ratio:var(--bird-photo-aspect,4/5); }
+/* The compact album is independent of the map canvas height. */
+.pair[data-layout="guide"][data-face="birds"] { height:min(48rem,calc(66.667cqw + 22rem)); --discovery-panel-height:min(48rem,calc(66.667cqw + 22rem)); }
+.pair[data-layout="guide"] > .mediaPanel :global([data-carousel-image]) { height:auto; aspect-ratio:3/2; }
+.birdCue img { object-fit:contain; }
+
+/* Resize the workspace in normal document flow. Its contents scroll independently,
+   while mounted map/photo components retain their camera and selected species. */
+.pair[data-resizable="true"] {width:var(--resize-width);margin-left:var(--resize-left);margin-top:calc(var(--resize-top) + 1rem);height:var(--resize-height);--discovery-panel-height:var(--resize-height);--discovery-media-height:var(--resize-height);}
+.pair[data-resizable="true"] > .mediaPanel,.pair[data-resizable="true"] > .mapPanel {position:relative;height:100%;min-height:0;padding:14px;border:1px solid #b7dccc;border-radius:1rem;background:#f7fdf9;display:flex;flex-direction:column;}
+.pair[data-resizable="true"] .mediaBody,.pair[data-resizable="true"] .mapBody {flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;}
+.pair[data-resizable="true"] .divider {height:100%;}
+
+/* The source photograph, rather than a fixed landscape crop, sets the bird face. */
+.pair[data-layout="guide"][data-face="birds"] {height:auto;--discovery-media-height:auto;}
+.pair[data-layout="guide"][data-face="birds"] > .mediaPanel {position:relative;inset:auto;height:auto;overflow:visible;}
+.pair[data-layout="guide"][data-face="birds"] .mediaBody {flex:none;overflow:visible;}
+.pair[data-layout="guide"][data-face="birds"] .mediaPanel :global(dialog:not([data-expanded]) [data-carousel-image]) {height:auto!important;aspect-ratio:var(--bird-photo-aspect,3/2);}

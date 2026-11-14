@@ -5,7 +5,7 @@
 .control:focus-visible,.surface:focus-visible { outline:2px solid #047857; outline-offset:3px; }
 .control:disabled { opacity:.4; }
 .help { margin:.2rem .4rem .4rem; font-size:11px; line-height:1.6; color:#476459; }
-.surface { position:relative; flex:1; min-width:0; min-height:12rem; overflow:hidden; border-radius:.75rem; }
+.surface { position:relative; flex:1; min-width:0; min-height:12rem; overflow:hidden; contain:paint; border-radius:.75rem; }
 .content { height:100%; width:100%; transform-origin:0 0; transition:transform 140ms ease-out; }
 .surface[data-gesturing] .content { transition:none; }
 @media(prefers-reduced-motion:reduce) { .content { transition:none; } }
@@ -42,6 +42,14 @@
 .viewer[data-expanded] .toolbar { order:0; position:sticky; top:0; z-index:5; }
 .viewer[data-expanded] .surface { order:1; min-height:14rem; flex:1 0 14rem; }
 
-/* A narrow-page container query must not give the expanded world stage an
-   automatic height. Fill the real canvas while preserving the SVG projection. */
-.viewer[data-expanded] .content :global([data-map-view]) { height:100%; min-height:0; }
+/* Keep native hidden and wrap controls in normal flow. */
+.surface[hidden] { display:none; }
+.toolbar { position:relative; isolation:isolate; height:auto; min-height:3.25rem; overflow:visible; }
+.toolbar > * { max-width:100%; }
+
+/* The expanded world fills its canvas without changing the geographic projection. */
+.viewer[data-expanded] .content :global([data-map-view]) {height:100%;min-height:0;}
+
+.viewer [data-map-place-info][hidden] {display:none;}
+@media(prefers-reduced-motion:no-preference){.viewer [data-map-place-info]:not([hidden]){animation:placeInfoRise 180ms ease-out;}}
+@keyframes placeInfoRise{from{opacity:0;transform:translateY(1rem)}to{opacity:1;transform:translateY(0)}}

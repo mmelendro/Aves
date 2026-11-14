@@ -28,7 +28,7 @@ export async function generateMetadata({
     ? [...params.keys()].some((key) => key !== "country")
     : true;
   return publicMetadata({
-    title: `${name} Bird Species Inventory`,
+    title: `${name} Bird Album`,
     description: `Browse the dated ${name} bird reference, with reviewed regional associations, sources and public places.`,
     alternates: {
       canonical: `https://aves.bio/species/reference?country=${isSpeciesCountry(country) ? country : "colombia"}`,
@@ -53,14 +53,13 @@ export default async function SpeciesReferencePage({ searchParams }: Props) {
         className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8"
       >
         <p className="text-sm font-medium text-emerald-700">
-          AVES species reference
+          The AVES bird album
         </p>
         <h1 className="mt-3 text-balance text-3xl font-medium text-emerald-950 sm:text-4xl">
-          Explore {data.name}’s bird inventory
+          Explore {data.name}’s bird album
         </h1>
         <p className="mb-8 mt-4 max-w-2xl leading-7 text-gray-700">
-          Search beyond the featured photographs. Discover the source behind
-          each record and the places we have reviewed so far.
+          Open a little window into the wild. Browse the birds, follow your curiosity, and find a few favourites for the journey.
         </p>
         <CountrySpeciesInventory data={data} params={params} />
       </main>

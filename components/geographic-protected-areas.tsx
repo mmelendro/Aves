@@ -8,5 +8,5 @@ const presentation={
   credit:'Protected areas: <a href="https://runap.parquesnacionales.gov.co/cifras">PNN / RUNAP · 6 Nov 2026</a> (AVES adaptation · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>)',
 };
 export default function GeographicProtectedAreas({map}:{map:GeographicMap}){
-  return <ProtectedAreaExplorer map={map} catalogue={catalogue} presentation={presentation}/>;
+  return <ProtectedAreaExplorer countryId="colombia" map={map} catalogue={catalogue} presentation={presentation}/>;
 }

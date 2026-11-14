@@ -2,7 +2,7 @@
  * their rights records and authored focal points are never overwritten. */
 import { readFile, writeFile, mkdir } from "node:fs/promises"
 import { existsSync, readFileSync } from "node:fs"
-import { resolve, dirname, extname, join } from "node:path"
+import { resolve, dirname, extname, join, sep } from "node:path"
 import { createHash } from "node:crypto"
 import ts from "typescript"
 import sharp from "sharp"
@@ -11,7 +11,7 @@ const root = process.cwd(), cache = new Map()
 function dataModule(path) {
   const candidate = resolve(root, path)
   const file = existsSync(candidate) ? candidate : [".ts", ".json"].map(ext => candidate + ext).find(existsSync)
-  if (!file || !file.startsWith(root + "/")) throw Error(`Unknown public data module: ${path}`)
+  if (!file || !file.startsWith(root + sep)) throw Error(`Unknown public data module: ${path}`)
   if (cache.has(file)) return cache.get(file)
   if (file.endsWith(".json")) return JSON.parse(readFileSync(file, "utf8"))
   const output = {}; cache.set(file, output)
@@ -30,7 +30,7 @@ const directory = join(root, "public/images/renditions")
 await mkdir(directory, { recursive: true })
 sharp.concurrency(2)
 const manifest = { version: 1, format: "webp", images: {} }
-const recipeSha256 = createHash("sha256").update(await readFile(new URL(import.meta.url))).digest("hex")
+const recipeSha256 = createHash("sha256").update((await readFile(new URL(import.meta.url), "utf8")).replace(/\r\n/g, "\n")).digest("hex")
 const provenance = { generator: "scripts/generate-responsive-photos.mjs", recipeSha256, sharp: sharp.versions.sharp, policy: { widths: [160, 640, 1280], quality: 82, crop: false, enlarge: false }, images: [] }
 // Reuse only bytes matching this exact recipe, source and output digest.
 // A warm developer build checks the artifacts instead of recompressing them.
@@ -42,7 +42,7 @@ const emitted = new Map()
 for (const src of sources) {
   if (typeof src !== "string" || !src.startsWith("/") || src.startsWith("//") || ![".png", ".jpg", ".jpeg", ".webp"].includes(extname(src).toLowerCase())) continue
   const input = resolve(root, "public", src.slice(1))
-  if (!input.startsWith(join(root, "public") + "/")) throw Error("Invalid public photo path")
+  if (!input.startsWith(join(root, "public") + sep)) throw Error("Invalid public photo path")
   const original = await readFile(input), sourceSha256 = createHash("sha256").update(original).digest("hex")
   const metadata = await sharp(original).metadata()
   const width = metadata.autoOrient?.width || metadata.width, height = metadata.autoOrient?.height || metadata.height
@@ -82,7 +82,7 @@ const auditPath = join(root, "docs/audit/photo-renditions-2026-11-13.json")
 const manifestText = JSON.stringify(manifest, null, 2) + "\n"
 const auditText = JSON.stringify(provenance, null, 2) + "\n"
 if (process.argv.includes("--check")) {
-  if (await readFile(manifestPath, "utf8") !== manifestText || await readFile(auditPath, "utf8") !== auditText) throw Error("Photo sources or rendition recipes changed. Run node scripts/generate-responsive-photos.mjs and commit its manifests before building.")
+  if ((await readFile(manifestPath, "utf8")).replace(/\r\n/g, "\n") !== manifestText || (await readFile(auditPath, "utf8")).replace(/\r\n/g, "\n") !== auditText) throw Error("Photo sources or rendition recipes changed. Run node scripts/generate-responsive-photos.mjs and commit its manifests before building.")
 } else {
   await writeFile(manifestPath, manifestText)
   await writeFile(auditPath, auditText)

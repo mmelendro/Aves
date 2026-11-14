@@ -1,3 +1,4 @@
+import {BirdWishButton} from "@/components/bird-wish-button"
 import { australiaMetadata } from "@/features/australia/lib/metadata"
 /*
  * Public species directory: the same bird catalogue powers both the featured carousel and
@@ -22,8 +23,8 @@ export default function SpeciesPage() {
       <h2 id="bird-directory-heading" className="text-3xl font-bold text-gray-900">Birds and the places they call home</h2>
       <p className="mt-4 max-w-3xl leading-relaxed text-gray-600">A closer look at each species, with links to the sources behind its range and habitat notes.</p>
       <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">{birdData.map(bird => <article key={bird.id} id={bird.id} className="scroll-mt-24 overflow-hidden rounded-xl border border-emerald-100 bg-white shadow-md">
-        <div className="relative aspect-[4/3]"><Image src={sitePath(bird.image)} alt={bird.commonName} fill sizes="(max-width:767px) 100vw, (max-width:1279px) 50vw, 33vw" className="object-cover" style={{ objectPosition: bird.imagePosition || "center center" }} /></div>
-        <div className="p-6"><h3 className="text-xl font-bold text-gray-900">{bird.commonName}</h3><p className="mt-1 text-sm italic text-gray-500">{bird.scientificName}</p>
+        <div className="relative aspect-[4/3]"><Image src={sitePath(bird.image)} alt={bird.commonName} fill sizes="(max-width:767px) 100vw, (max-width:1279px) 50vw, 33vw" className="object-contain bg-emerald-50" style={{ objectPosition: "center" }} /></div>
+        <div className="p-6"><div className="float-right ml-3"><BirdWishButton id={bird.id} name={bird.commonName} country="australia" /></div><h3 className="text-xl font-bold text-gray-900">{bird.commonName}</h3><p className="mt-1 text-sm italic text-gray-500">{bird.scientificName}</p>
           <h4 className="mt-5 flex items-center gap-2 text-sm font-semibold text-emerald-800"><MapPin className="h-4 w-4" aria-hidden="true" />Where to find it</h4><p className="mt-2 text-sm leading-relaxed text-gray-600">{bird.distribution}</p>
           <h4 className="mt-4 text-sm font-semibold text-gray-900">Habitat</h4><p className="mt-2 text-sm leading-relaxed text-gray-600">{bird.habitat}</p>
           <ul className="mt-4 space-y-2 text-xs text-emerald-800">{bird.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer" className="underline underline-offset-4">{source.title}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul>

@@ -1,4 +1,6 @@
 "use client"
+import {readBirdWishes} from "@/components/bird-wish-button"
+import {birdData as australianBirds} from "@/features/australia/content/birds"
 import {MAX_PLAN_NOTES} from "@/lib/planning-limits"
 
 import RoutePreferenceImport from "./route-preference-import"
@@ -61,18 +63,20 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
   useEffect(()=>{if(!plan?.id||country!=="new-zealand")return;let live=true;accountRequest<unknown>(`/api/account/plans/${plan.id}/itineraries`).then(raw=>{if(live)setSavedRoutes(itineraryReceiptSchema.parse(raw).data.routes)}).catch(()=>{});return()=>{live=false}},[plan?.id,country])
   const [message, setMessage] = useState(plan?.message || "")
   const [placeNotice, setPlaceNotice] = useState("")
+  const initialRegionsKey = initial?.regions.join("|") || ""
+  const isNew = !plan
   // Guest choices prefill a new form. Existing saved answers are never silently
   // overwritten: explicitly merge, review and save to modify an owned plan.
   useEffect(() => {
     if (country !== "new-zealand") return
     try {
       setIncomingPlaces(readNzPlaceIdeas(window.sessionStorage))
-      setIncomingItineraries(islandPlanners.filter(p=>!initial?.regions.length||initial.regions.includes(p.context.id)).flatMap(p=>{const draft=p.readTripDraft(window.sessionStorage);return draft?[draft]:[]}))
+      setIncomingItineraries(islandPlanners.filter(p=>!initialRegionsKey||initialRegionsKey.split("|").includes(p.context.id)).flatMap(p=>{const draft=p.readTripDraft(window.sessionStorage);return draft?[draft]:[]}))
       const incoming = readNzBirdBasket(window.sessionStorage)
       setIncomingBirds(incoming)
-      if (!plan) setBirdIds(incoming)
+      if (isNew) setBirdIds(incoming)
     } catch { /* The complete picker also works without browser storage. */ }
-  }, [country, plan?.id, initial?.regions.join("|")])
+  }, [country, plan?.id, isNew, initialRegionsKey])
   const options = countryRegionOptions[country]
   const olderSelections = selectedRegions.filter(value => !options.some(option => option.id === value))
 
@@ -157,6 +161,7 @@ export function TripPlanEditor({ plan, initial, onSaved, onCancel }: { plan?: Tr
         }}>{uiCopy("Add All Ideas to This Draft")}</button>
         <p className="mt-2 text-xs leading-6">{uiCopy("Existing notes and choices stay intact. Adding ideas does not save or share the draft. Repeating this action does not duplicate the same ideas.")}</p>
       </section>}
+      {country === "australia" && <button type="button" className="min-h-11 rounded-lg border border-emerald-300 px-4 text-emerald-800" onClick={()=>{const ids=readBirdWishes(country);const wishes=australianBirds.filter(bird=>ids.includes(bird.id)).map(bird=>`Bird wish: ${bird.commonName} (${bird.scientificName})`);const existing=new Set(message.split("\n"));const added=wishes.filter(line=>!existing.has(line));const merged=[message,...added].filter(Boolean).join("\n");if(merged.length>MAX_PLAN_NOTES){setPlaceNotice("Shorten your notes before adding these birds.");return}setMessage(merged);setDirty(true);setPlaceNotice(added.length?`${added.length} bird wishes added. Save this plan to keep them.`:"No new bird wishes in this tab.")}}>Add bird wishes from this tab</button>}
       {country === "new-zealand" && <section aria-labelledby={`${prefix}-birds`} className="space-y-4 rounded-xl border border-emerald-200 p-5"><h3 id={`${prefix}-birds`} className="font-medium text-emerald-950">{uiCopy("Birds you would love to see (optional)")}</h3><p className="text-sm leading-6 text-gray-600">{uiCopy("These choices join this private draft only when you save. Review the full checklist here, or bring choices from this browser tab. They are wishes, not guaranteed sightings or an itinerary.")}</p>{plan && incomingBirds.length > 0 && <button type="button" onClick={() => { setBirdIds(current => [...new Set([...current, ...incomingBirds])]);setDirty(true); setIncomingBirds([]) }} className="min-h-11 rounded-md border border-emerald-300 px-4 text-sm font-medium text-emerald-900">{uiCopy("Add ")}{incomingBirds.length} {uiCopy(" bird choices from this tab")}</button>}<NewZealandBirdPicker selected={birdIds} onChange={value=>{setBirdIds(value);setDirty(true)}} /></section>}
       {country === "new-zealand" && incomingItineraries.map(incomingItinerary=>{ const planner=islandPlanner(incomingItinerary.input.islandId||"south-island"); if(!planner)return null; return <section key={planner.context.id} aria-label={uiCopy("Itinerary from this browser tab")} className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
         <h3 className="font-medium text-emerald-950">{uiCopy("Your ")}{incomingItinerary.input.days} {uiCopy(" day ")}{planner.context.name} {uiCopy(" itinerary")}</h3>

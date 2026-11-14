@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useState, type ReactNode } from
 
 import { useMapBackground } from "./map-background-context"
 
-export type MapLayers = { background: "habitats" | "satellite"; overlayOpacity: number; satelliteError: string; nationalParks: boolean; protectedAreas: boolean; protectedAreaSelections: Record<string,string>; conservation: boolean; park: string; nature: boolean; projects: boolean; heritage: boolean; towns: boolean; businesses: boolean; bcorps: boolean; planningRegions: boolean; planning: boolean; itinerary: boolean; point: string }
+export type MapLayers = { background: "habitats" | "satellite" | "roads" | "topographic"; overlayOpacity: number; satelliteError: string; nationalParks: boolean; protectedAreas: boolean; protectedAreaSelections: Record<string,string>; conservation: boolean; park: string; nature: boolean; projects: boolean; heritage: boolean; towns: boolean; businesses: boolean; bcorps: boolean; planningRegions: boolean; planning: boolean; itinerary: boolean; point: string }
 export const initialMapLayers: MapLayers = { background: "habitats", overlayOpacity: .45, satelliteError: "", nationalParks: false, protectedAreas: false, protectedAreaSelections: {}, conservation: false, park: "", nature: false, projects: false, heritage: false, towns: false, businesses: false, bcorps: false, planningRegions: true, planning: true, itinerary: true, point: "" }
 const Context = createContext<{ layers: MapLayers; update: (next: Partial<MapLayers>) => void } | null>(null)
 
@@ -20,8 +20,8 @@ export function useMapLayers() {
   const update = useCallback((next: Partial<MapLayers>) => setLocal(current => ({ ...current, ...next })), []);
   const background = useMapBackground()
   const value = shared ?? { layers: local, update }
-  const updateValue=value.update
+  const updateLayers=value.update
   const setBackground=background?.setBackground
-  const updateShared=useCallback((next:Partial<MapLayers>)=>{if(next.background)setBackground?.(next.background);updateValue(next)},[setBackground,updateValue])
+  const updateShared=useCallback((next:Partial<MapLayers>)=>{if(next.background)setBackground?.(next.background);updateLayers(next)},[setBackground,updateLayers])
   return background ? { layers: {...value.layers,background:background.background}, update:updateShared } : value
 }

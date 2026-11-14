@@ -15,7 +15,7 @@ const navigationLinks = [
 ] as const
 
 /** Shared public shell. Account intent and Colombia-home language choice survive. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Retain currentPage for existing country-page callers; active state comes from the route.
 export function NavigationHeader(_props: { currentPage?: string }) {
-  void _props
   return <NewZealandHeader country="colombia" navigationLinks={navigationLinks} />
 }

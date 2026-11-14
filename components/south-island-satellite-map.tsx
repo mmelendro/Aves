@@ -1,4 +1,5 @@
 "use client";
+import {requestMapPhotos} from "@/lib/map-photo-request";
 import {useJourneyMapMotion} from "@/lib/use-journey-map-motion";
 import {useEffect,useRef,useState} from "react";
 import {marker,divIcon,imageOverlay,polyline,type Map as GeographicMap} from "leaflet";
@@ -27,7 +28,7 @@ function labelMarker(map:GeographicMap,point:[number,number],name:string,onClick
   resizeLabel();map.on("zoomend",resizeLabel);item.on("remove",()=>map.off("zoomend",resizeLabel));
   return item;
 }
-export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitude,longitude}:{selected:string;onSelectIsland?:(id:string)=>void;latitude?:number;longitude?:number}){
+export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitude,longitude,places=[],onSelectPlace}:{places?:readonly {id:string;label:string;latitude:number;longitude:number}[];onSelectPlace?:(id:string)=>void;selected:string;onSelectIsland?:(id:string)=>void;latitude?:number;longitude?:number}){
   const[map,setMap]=useState<GeographicMap|null>(null);
   const previousLocation=useRef({latitude,longitude});
   const{layers,update}=useMapLayers(),trip=useTripMap();
@@ -47,18 +48,21 @@ export default function SouthIslandSatelliteMap({selected,onSelectIsland,latitud
   },[map,selected,layers.overlayOpacity,layers.conservation,layers.nationalParks,layers.park]);
   useEffect(()=>{
     if(!map)return;
-    const markers=visiblePublicPlaces(layers).map(point=>labelMarker(map,[point.latitude,point.longitude],point.name,()=>{update({point:point.id,park:""});if(point.tripAreaId)trip?.selectBase(point.tripAreaId);},layers.point===point.id));
+    const markers=visiblePublicPlaces(layers).map(point=>labelMarker(map,[point.latitude,point.longitude],point.name,()=>{update({point:point.id,park:""});if(point.categories.includes("towns"))map.setView([point.latitude,point.longitude],12,{animate:false});requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:point.id,name:point.name});if(point.tripAreaId)trip?.selectBase(point.tripAreaId);},layers.point===point.id));
     if(layers.nationalParks)for(const park of parks.parks)markers.push(labelMarker(map,geographicPoint(park.point[0],park.point[1]),park.name,()=>update({park:park.id,point:""}),layers.park===park.id));
+    for(const place of places)markers.push(labelMarker(map,[place.latitude,place.longitude],place.label,()=>{onSelectPlace?.(place.id);requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:place.id,name:place.label})}));
     return()=>markers.forEach(m=>m.remove());
-  },[map,layers,update,trip]);
+  },[map,layers,update,trip,places,onSelectPlace]);
+  const cameraContext=useRef({layers,journey:trip?.journey});cameraContext.current={layers,journey:trip?.journey};
   useEffect(()=>{
     if(!map)return;
+    const {layers,journey}=cameraContext.current;
     const place=visiblePublicPlaces(layers).find(p=>p.id===layers.point),park=parks.parks.find(p=>layers.nationalParks&&p.id===layers.park);
     const changed=previousLocation.current.latitude!==latitude||previousLocation.current.longitude!==longitude;
     previousLocation.current={latitude,longitude};
     const centre=place?[place.latitude,place.longitude] as[number,number]:park?geographicPoint(park.point[0],park.point[1]):changed&&longitude!==undefined&&latitude!==undefined?[latitude,longitude] as[number,number]:null;
     // Visibility toggles must not move a camera the visitor has already panned.
-    if(centre&&!trip?.journey)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
+    if(centre&&!journey)map.setView(centre,Math.max(map.getZoom(),9),{animate:!window.matchMedia("(prefers-reduced-motion: reduce)").matches});
   },[map,layers.point,layers.park,latitude,longitude]);
   const bases=trip?.bases.join("|")??"";
   const journeyStep=trip?.journey?.islandId==="south-island" ? trip.journey.steps[trip.journey.index] : undefined;

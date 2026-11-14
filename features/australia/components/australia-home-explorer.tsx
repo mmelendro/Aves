@@ -46,7 +46,8 @@ export function AustraliaHomeExplorer({ media, initialRegion, resizable = false 
   const birds = filterConservationBirds(australianRegionBirds(focusedRegion?.id),filters,"australia")
   // React state remembers the displayed bird. The stable callback avoids unnecessary effect retriggers.
   const [bird, setBird] = useState<BirdProfile>(birds[0] ?? birdData[0])
-  const onBirdChange = useCallback((nextBird: BirdProfile) => setBird(nextBird), [])
+  const onBirdChange = useCallback((nextBird: BirdProfile) => setBird(previous =>
+    previous.id === nextBird.id && previous.regionSlug === nextBird.regionSlug ? previous : nextBird), [])
   // This featured region is one place to look, not a map of the species' entire distribution.
   const cueBird = birds.find(item=>item.id===bird.id) ?? birds[0]
   const highlightedRegion = focusedRegion ?? regionOptions.find(region => region.id === bird.regionSlug)

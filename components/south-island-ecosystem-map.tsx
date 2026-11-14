@@ -1,4 +1,5 @@
 "use client"
+import {requestMapPhotos} from "@/lib/map-photo-request"
 import Link from "next/link"
 import SouthIslandSoundscapes from "./south-island-soundscapes"
 import { MapViewer } from "./map-viewer"
@@ -22,7 +23,7 @@ import {useBirdFilters} from "./bird-filter-context"
 import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
 import {newZealandRegionBirds} from "@/content/new-zealand-carousel"
 import {filterSouthIslandBirds} from "@/content/south-island-ecosystems"
-import { Hand, Minus, Plus, RotateCcw, Map as MapIcon, Info } from "lucide-react"
+import { Minus, Plus, RotateCcw } from "lucide-react"
 import map from "@/content/south-island-ecosystem-map.json"
 import contextRegions from "@/content/geographic-planning-regions/new-zealand.json"
 import { southIslandEcosystems, type SouthIslandEcosystemFilter, type SouthIslandEcosystem } from "@/content/south-island-ecosystems"
@@ -49,14 +50,13 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const { layers } = useMapLayers()
   const {filters}=useBirdFilters()
   const matches=matchingHabitats ?? (birdFiltersActive(filters) ? southIslandEcosystems.filter(item=>filterSouthIslandBirds(filterConservationBirds(newZealandRegionBirds("south-island"),filters,"new-zealand"),item.id).length>0).map(item=>item.id) : undefined)
-  const satellite = layers.background === "satellite"
+  const satellite = layers.background !== "habitats"
   const focusedPark = layers.nationalParks ? catalogue.parks.find(park => park.id === layers.park) : undefined
   const focusedPoint = visiblePublicPlaces(layers).find(point => point.id === layers.point)
   const journey=useTripMap()?.journey
   const guidedJourney=journey?.islandId==="south-island"
   const reference=guidedJourney?journey?.steps[journey.index]?.mapPoint:undefined
   const id = useId()
-  const [detailsOpen,setDetailsOpen]=useState(false)
   const detailsRef = useRef<HTMLDetailsElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const pointers = useRef(new Map<number, { x: number; y: number }>())
@@ -91,16 +91,18 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     if (!focusedPark) return
     setCamera(current => focusEcosystemMapPoint(current, {x:focusedPark.point[0],y:focusedPark.point[1]}))
   }, [focusedPark])
+  const focusedLongitude=focusedPoint?.longitude,focusedLatitude=focusedPoint?.latitude,focusedId=focusedPoint?.id
+  const hasFocusedPoint=Boolean(focusedPoint)
   useEffect(() => {
-    if (!focusedPoint) return
-    setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(focusedPoint.longitude,focusedPoint.latitude,map.bbox)))
-  }, [focusedPoint?.id, focusedPoint?.longitude, focusedPoint?.latitude])
+    if (focusedLongitude===undefined||focusedLatitude===undefined) return
+    setCamera(current => focusEcosystemMapPoint(current, ecosystemMapPoint(focusedLongitude,focusedLatitude,map.bbox)))
+  }, [focusedId, focusedLongitude, focusedLatitude])
   useEffect(()=>{
     if(!detailsRef.current)return
     // Guided steps must keep the map visible. Direct exploration keeps its existing details behaviour.
     if(guidedJourney)detailsRef.current.open=false
-    else if(focusedPoint)detailsRef.current.open=true
-  },[focusedPoint?.id,guidedJourney,journey?.index])
+    else if(hasFocusedPoint)detailsRef.current.open=true
+  },[focusedId,hasFocusedPoint,guidedJourney,journey?.index])
   useEffect(()=>{
     if(reference)setCamera(current=>focusEcosystemMapPoint(current,ecosystemMapPoint(reference.longitude,reference.latitude,map.bbox)));
   },[reference]);
@@ -108,12 +110,12 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   function zoom(factor: number) { setCamera(current => zoomMapCamera(current, factor,.35)) }
   function pan(dx: number, dy: number) { setCamera(current => panMapCamera(current, dx * 480 / current.zoom, dy * 640 / current.zoom,.35)) }
   function reset() { drag.current = null; pointers.current.clear(); setCamera(initialMapCamera); setPanMode(true) }
+  function selectPhotoPlace(id:string){onSelectPlace?.(id);const place=places?.find(p=>p.id===id);if(place)requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:id,name:place.label})}
   const mapControls = <>
       {!satellite && <>
       <button type="button" className={styles.control} title="Zoom in" aria-label="Zoom ecosystem map in" disabled={camera.zoom >= 4} onClick={() => zoom(1.5)}><Plus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Zoom out" aria-label="Zoom ecosystem map out" disabled={camera.zoom <= 1 && !onZoomOutAtMinimum} onClick={() => camera.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1 / 1.5)}><Minus size={17} aria-hidden="true" /></button>
       <button type="button" className={styles.control} title="Reset map view" aria-label="Reset ecosystem map view" onClick={reset}><RotateCcw size={16} aria-hidden="true" /></button>
-      <button type="button" className={styles.control} title="Toggle drag to move map" aria-label="Move ecosystem map by dragging" aria-pressed={panMode} onClick={() => { pointers.current.clear(); drag.current = null; setPanMode(value => !value) }}><Hand size={17} aria-hidden="true" /></button>
       <span className="px-1 text-xs tabular-nums text-emerald-900" role="status">{camera.zoom.toFixed(1)}×</span>
       </>}
       <SouthIslandMapLayers />
@@ -122,7 +124,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
     <div className={styles.mapHeading}><h2 id={`${id}-title`} className="text-sm font-medium text-emerald-950">{reference ? reference.name : guidedJourney && focusedPoint ? focusedPoint.name.split(" · ")[0] : place ? place.label : "South Island habitats"}</h2></div>
     <p id={`${id}-gestures`} className="sr-only">{panMode ? "Drag to pan. Pinch or double tap to zoom. Tap a habitat to select it. Scroll the page outside the map." : "Map gestures paused. Double tap to resume. Focus the map for + / −, arrow keys and Home."}</p>
     <figure className={styles.figure} data-map-layer={satellite ? "satellite" : undefined}>
-      {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude}/> : <>
+      {satellite ? <SouthIslandSatelliteMap selected={selected} onSelectIsland={onSelectIsland} latitude={latitude} longitude={longitude} places={places} onSelectPlace={selectPhotoPlace}/> : <>
       <svg ref={svgRef} viewBox={camera.zoom === 1 ? "0 -360 725 1020" : map.viewBox} className={styles.map} role="group" tabIndex={0} aria-describedby={`${id}-gestures`} aria-labelledby={`${id}-map-title ${id}-map-description`} style={{ touchAction: panMode ? "none" : "pan-y pinch-zoom", cursor: panMode ? "grab" : undefined }}
         onKeyDown={event => {
           if (event.target !== event.currentTarget) return
@@ -190,7 +192,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
           const point = ecosystemMapPoint(item.longitude, item.latitude, map.bbox)
           const selected = item.id === selectedPlace
           const unit = 1 / (camera.zoom * Math.max(svgPixelsPerUnit, .25))
-          return <g key={item.id} role="button" tabIndex={0} aria-label={`Show place: ${item.label}`} aria-pressed={selected} className={styles.area} onClick={() => onSelectPlace?.(item.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectPlace?.(item.id) } }}>
+          return <g key={item.id} role="button" tabIndex={0} aria-label={`Show place: ${item.label}`} aria-pressed={selected} className={styles.area} onClick={() => selectPhotoPlace(item.id)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectPhotoPlace(item.id) } }}>
             <title>{`${item.label} — ${item.location}`}</title>
             <circle cx={point.x} cy={point.y} r={22 * unit} fill="transparent" />
             <circle cx={point.x} cy={point.y} r={(selected ? 8 : 5) * unit} fill={selected ? "#065f46" : "#fff"} stroke={selected ? "white" : "#065f46"} strokeWidth="2" vectorEffect="non-scaling-stroke" />
@@ -205,10 +207,10 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · EOxCloudless · 2016 composite · Historical landscape" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && selected !== "all" && selected !== "coast" && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
     </figure>
     {(layers.bcorps || layers.planning) && <p className="shrink-0 text-[10px] leading-4 text-emerald-900"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="inline-flex min-h-6 items-center underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>}
-    <details ref={detailsRef} onToggle={event=>setDetailsOpen(event.currentTarget.open)} className={styles.mapDetails}>
-      <summary aria-label="Places, habitats & map details" title={detailsOpen?"Return to the map":"Open place information"}>{detailsOpen?<MapIcon size={18} aria-hidden="true"/>:<Info size={18} aria-hidden="true"/>}<span>{detailsOpen?"Map":"Place info"}</span></summary>
+    <details ref={detailsRef} className={styles.mapDetails}>
+      <summary>Places, habitats &amp; map details</summary>
       <div className={styles.detailsPanel}>
-        <div className="sticky top-0 z-10 mb-2 flex items-center justify-between gap-2 bg-[#f7fdf9] pb-2"><h3 className="text-sm font-semibold">Place info</h3><button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-700 bg-white px-4 text-sm font-semibold text-emerald-800" onClick={()=>{if(detailsRef.current){detailsRef.current.open=false;detailsRef.current.querySelector("summary")?.focus();}}}><MapIcon size={18} aria-hidden="true"/>Map</button></div>
+        <button type="button" className="mb-2 min-h-11 rounded px-2 text-sm font-semibold text-emerald-800 underline" onClick={()=>{if(detailsRef.current){detailsRef.current.open=false;detailsRef.current.querySelector("summary")?.focus();}}}>Back to the map</button>
         <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>
         <p className="mb-2 text-xs leading-5 text-gray-600">{satellite ? "Drag to explore. Pinch or double tap to zoom. Use the habitat filters below to change the birds." : "Drag to pan. Pinch or double tap to zoom. Tap habitats to select them. Keyboard: + / −, arrow keys and Home."}</p>
     <PublicPlaceDetails />
@@ -216,7 +218,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       {scale ? <><div style={{ width: scale.widthPixels }} className={styles.scaleBar} /><p>{scale.distanceMetres / 1000} km at {Math.abs(scale.latitude).toFixed(1)}° S · map centre</p></> : <p>Distance scale appears when the map is measured.</p>}
     </div>
     {places && <div className="mt-2 grid grid-cols-2 gap-1" aria-label="South Island places">
-      {places.map(item => <button key={item.id} type="button" aria-pressed={item.id === selectedPlace} onClick={() => onSelectPlace?.(item.id)} className={`min-h-11 rounded-lg border px-2 py-2 text-left text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 ${item.id === selectedPlace ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}>{item.label}</button>)}
+      {places.map(item => <button key={item.id} type="button" aria-pressed={item.id === selectedPlace} onClick={() => selectPhotoPlace(item.id)} className={`min-h-11 rounded-lg border px-2 py-2 text-left text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700 ${item.id === selectedPlace ? "border-emerald-700 bg-emerald-50 font-semibold text-emerald-950" : "border-emerald-100 bg-white text-emerald-900"}`}>{item.label}</button>)}
     </div>}
     {place && <p className="mt-2 text-xs leading-5 text-emerald-900" role="status"><a href={place.source} target="_blank" rel="noreferrer" className="inline-flex min-h-6 items-center underline">{place.location}</a> · public landscape reference. Bird filters describe broad habitats across the South Island, not a checklist for this place.</p>}
     <details open={!places && !satellite} className={styles.filters}><summary className="min-h-11 cursor-pointer content-center rounded text-xs font-medium text-emerald-800">Habitat filters</summary>

@@ -6,7 +6,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { X, ExternalLink, Loader2 } from "lucide-react"
 
@@ -61,9 +61,9 @@ export function GoogleCalendarModal({ isOpen, onClose }: GoogleCalendarModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl w-full h-[90vh] max-h-[800px] p-0 gap-0 bg-white border-0 shadow-2xl fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[100] focus:outline-none">
+      <DialogContent className="flex flex-col max-w-4xl w-full h-[90svh] max-h-[800px] p-0 gap-0 bg-white border-0 shadow-2xl fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[100] focus:outline-none">
         {/* Fixed Header with proper z-index and positioning */}
-        <DialogHeader className="px-6 py-4 border-b border-gray-200 flex-shrink-0 bg-white relative z-10 rounded-t-lg">
+        <DialogHeader className="pl-6 pr-14 py-4 border-b border-gray-200 flex-shrink-0 bg-white relative z-10 rounded-t-lg">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-xl font-semibold text-gray-900 pr-4">
               Schedule Your Birding Consultation
@@ -73,28 +73,17 @@ export function GoogleCalendarModal({ isOpen, onClose }: GoogleCalendarModalProp
                 variant="outline"
                 size="sm"
                 onClick={openInNewTab}
-                className="text-emerald-600 border-emerald-300 hover:bg-emerald-50 bg-white hover:border-emerald-400 transition-colors"
+                className="hidden sm:inline-flex text-emerald-600 border-emerald-300 hover:bg-emerald-50 bg-white hover:border-emerald-400 transition-colors"
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Open in New Tab
               </Button>
-              <DialogClose asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 w-8 p-0 hover:bg-gray-100 transition-colors"
-                  onClick={handleClose}
-                >
-                  <X className="h-4 w-4" />
-                  <span className="sr-only">Close</span>
-                </Button>
-              </DialogClose>
             </div>
           </div>
         </DialogHeader>
 
         {/* Content Area with proper isolation */}
-        <div className="flex-1 relative overflow-hidden bg-white">
+        <div className="min-h-0 flex-1 relative overflow-hidden bg-white">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-20">
               <div className="text-center">
@@ -143,7 +132,7 @@ export function GoogleCalendarModal({ isOpen, onClose }: GoogleCalendarModalProp
               allow="camera; microphone; geolocation"
               sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation allow-popups-to-escape-sandbox"
               style={{
-                minHeight: "600px",
+                minHeight: 0,
                 isolation: "isolate",
               }}
             />

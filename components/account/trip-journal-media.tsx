@@ -27,7 +27,9 @@ export function JournalMediaCard({item}:{item:TripMediaItem}){
   const {planId,replace,remove}=useMedia(),busyRef=useRef(false),prefix=useId()
   const [details,setDetails]=useState(()=>mediaDetailsSchema.strip().parse(item)),[dirty,setDirty]=useState(false),[busy,setBusy]=useState(false),[feedback,setFeedback]=useState("")
   const [view,setView]=useState(false),[confirmRemove,setConfirmRemove]=useState(false)
-  useEffect(()=>{setDetails(mediaDetailsSchema.strip().parse(item));setDirty(false)},[item.id,item.revision])
+  const incomingVersion = useRef({id:item.id,revision:item.revision})
+  // A same-revision parent refresh must not overwrite an unsaved caption.
+  useEffect(()=>{if(incomingVersion.current.id===item.id&&incomingVersion.current.revision===item.revision)return;incomingVersion.current={id:item.id,revision:item.revision};setDetails(mediaDetailsSchema.strip().parse(item));setDirty(false)},[item])
   useUnsavedChanges(dirty,uiCopy("You have unsaved media details. Leave and discard them?"))
   async function save(){
     if(busyRef.current)return
@@ -42,6 +44,7 @@ export function JournalMediaCard({item}:{item:TripMediaItem}){
   const src=`/api/account/plans/${planId}/media/${item.id}/content`
   return <article className="rounded-xl border border-emerald-100 bg-white p-4 space-y-4">
     <div className="flex flex-wrap items-center justify-between gap-3"><p className="font-medium text-emerald-950 break-words">{item.caption||uiCopy("Private {kind}",{kind:uiCopy(item.kind)})}</p><span className="text-xs text-gray-500">{(item.bytes/1024).toFixed(0)} KiB</span></div>
+    {/* eslint-disable-next-line @next/next/no-img-element -- Private previews retain browser authentication and existing upload limits. */}
     {item.state==="ready"?<><Button type="button" variant="outline" aria-expanded={view} onClick={()=>setView(!view)}>{view ? uiCopy("Hide upload") : item.kind==="photo" ? uiCopy("View private photo") : item.kind==="audio" ? uiCopy("Play recording") : uiCopy("Document details")}</Button>{view&&(item.kind==="document"?<p className="text-sm text-gray-600">{uiCopy("PDF documents download as private copies. They are not embedded or opened automatically.")}</p>:item.kind==="photo"?<div className="relative h-72 sm:h-96 overflow-hidden rounded-xl bg-emerald-50"><PhotoZoom label={item.caption||"Private journal photo"}>{/* Keep the authenticated URL out of Next's public image cache. */}<img src={src} alt={item.caption||"Your private journal photograph"} className="h-full w-full object-contain" onError={()=>setFeedback("This photo could not be loaded. Hide it and try again.")}/></PhotoZoom></div>:<audio aria-label={item.caption||"Your private recording"} controls preload="none" src={src} className="w-full" onError={()=>setFeedback("This recording could not be played. Hide it and try again, or use a supported audio copy.")}/>)}
     <a href={`${src}?download=1`} className="inline-flex min-h-11 items-center text-sm text-emerald-800 underline">{uiCopy("Download private copy")}</a>
     <details><summary className="min-h-11 cursor-pointer text-sm text-emerald-800">{uiCopy("Caption, creator, date and notes")}</summary><fieldset disabled={busy} className="grid gap-4 sm:grid-cols-2">

@@ -63,6 +63,7 @@ export default function AlbumJournalLinks({
             </button>
           )}
           {view && !failed && (
+            // eslint-disable-next-line @next/next/no-img-element -- Private media must use browser session cookies, without an image proxy.
             <img
               src={`/api/account/plans/${planId}/media/${bird.photoId}/content`}
               alt={

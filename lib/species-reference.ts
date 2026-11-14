@@ -105,8 +105,8 @@ const indexed = Object.fromEntries(
             name: profile.commonName,
           }
         : undefined;
-      const code = (ebirdLinks as Record<string,string>)[bird.scientificName];
-      const ebirdUrl = code ? `https://ebird.org/species/${code}` : undefined;
+      const code=(ebirdLinks as Record<string,string>)[bird.scientificName];
+      const ebirdUrl=code?`https://ebird.org/species/${code}`:undefined;
       return { ...bird, regions, places, guide,ebirdUrl,regionEvidence:evidence.map(edge=>({regionId:edge.regionId,sourceId:edge.sourceId,reviewed:edge.reviewed,sourceName:edge.sourceName})) } satisfies ReferenceResult;
     });
     return [countryId, records];

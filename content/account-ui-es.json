@@ -578,7 +578,6 @@
   "Only the current draft can be deleted.": "Solo se puede eliminar el borrador actual.",
   "Remove this trip’s private uploads before deleting the draft.": "Elimina los archivos privados cargados de este viaje antes de borrar el borrador.",
   "This plan changed while you were deleting it. Refresh and try again.": "Este plan cambió mientras lo eliminabas. Actualízalo e inténtalo de nuevo.",
-  "Permanently delete this draft and its checklist, journal, practical records and bird album? Download a complete private backup from the trip workspace first if you want to keep them. Private uploads must be removed before deletion.": "¿Quieres eliminar de forma permanente este borrador y su lista de preparativos, diario, registros prácticos y álbum de aves? Primero descarga una copia privada completa desde el espacio de viaje si deseas conservarlos. Debes eliminar los archivos privados cargados antes de borrar el borrador.",
   "Keep draft": "Conservar borrador",
   "Delete unused draft": "Eliminar borrador que no usas",
   "Permanently delete this draft": "Eliminar este borrador de forma permanente",
@@ -839,5 +838,6 @@
   "Edit itinerary days": "Ajustar los días del viaje",
   "Day": "Día",
   "Draft only. Check access, travel times and availability. Nothing is booked.": "Es un borrador. Revisa el acceso, los tiempos de traslado y la disponibilidad. No hay ninguna reserva.",
-  "How this draft is built": "Cómo se prepara este borrador"
+  "How this draft is built": "Cómo se prepara este borrador",
+  "Permanently delete this draft and its checklist, journal, practical records and bird album? Download the saved-record JSON export first. It excludes attachment files and unsaved edits. Save your edits and download attachments separately before removing private uploads and deleting the draft.": "¿Quieres eliminar de forma permanente este borrador y su lista de preparativos, diario, registros prácticos y álbum de aves? Primero descarga la exportación JSON de los registros guardados. No incluye archivos adjuntos ni cambios sin guardar. Guarda tus cambios y descarga los archivos por separado antes de eliminar los archivos privados y el borrador."
 }

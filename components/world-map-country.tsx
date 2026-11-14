@@ -1,6 +1,7 @@
 /** Only the three interactive country shapes need client-side selection state. */
 "use client"
 
+import {requestMapPhotos} from "@/lib/map-photo-request"
 import { useDestinationSelection } from "@/components/destination-selection-context"
 import styles from "./world-destination-map.module.css"
 
@@ -16,11 +17,12 @@ export default function WorldMapCountry({ id, name, path, anchor, label }: World
   const { selectedId, selectDestination, matchingCountryIds } = useDestinationSelection()
   return (
     <g data-bird-filter-match={matchingCountryIds ? matchingCountryIds.includes(id) : undefined} role="button" tabIndex={0} aria-label={`Show ${name} birds`} aria-pressed={selectedId === id} aria-controls="homepage-country-preview" className={styles.destination}
-      onClick={() => selectDestination(id)}
+      onClick={() => {selectDestination(id);requestMapPhotos({countryId:id,kind:"country",name})}}
       onKeyDown={event => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault()
           selectDestination(id)
+          requestMapPhotos({countryId:id,kind:"country",name})
         }
       }}>
       <path d={path} className={styles.country} strokeWidth="1.5" fillRule="evenodd" />

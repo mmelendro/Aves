@@ -2,7 +2,9 @@
  * sent to a traveller. Native GET forms work without client JavaScript. */
 import InventorySearchSubmit from "./inventory-search-submit";
 import InventoryBirdImage from "./inventory-bird-image";
-import NewZealandChecklistPhoto from "@/components/new-zealand-checklist-photo";
+import BirdConservationLabel from "./bird-conservation-label";
+import { birdConservation, statusLabels } from "@/lib/bird-conservation";
+
 import type {
   SpeciesCountry,
   SpeciesReferenceResponse,
@@ -66,20 +68,8 @@ export function CountrySpeciesInventory({
           </a>
         ))}
       </nav>
-      <div className="max-w-3xl space-y-3 text-sm leading-6 text-gray-700">
-        <p>
-          {data.total.toLocaleString("en")} entries in this national source
-          version. {data.defaultTotal.toLocaleString("en")} appear by default.
-          Historical and other reference-only records can be included below.
-        </p>
-        <p>{data.scope}</p>
-        <p>
-          Regional evidence currently covers {data.regionalCoverage} entries.
-          Region filters show a reviewed selection, not a complete regional
-          checklist. A missing association means we have not established it
-          here. Records and photographs do not promise a sighting.
-        </p>
-      </div>
+      <p className="max-w-2xl text-lg leading-8 text-emerald-950">A whole flock of possibilities. Find a familiar face, meet a new favourite, and turn a card to discover where its story unfolds.</p>
+      <details className="max-w-3xl text-sm leading-6 text-gray-600"><summary className="min-h-11 cursor-pointer">About this collection · {data.total.toLocaleString("en")} birds</summary><p>{data.defaultTotal.toLocaleString("en")} birds appear in the main collection. You can include historical and reference records with the filters below.</p><p className="mt-2">{data.scope}</p><p className="mt-2">We’ve reviewed regional links for {data.regionalCoverage} entries so far. Region filters are a growing selection; a missing link does not mean a bird is absent. Wildlife keeps its own calendar—records and photographs cannot promise a sighting.</p></details>
       <form
         method="get"
         action="/species/reference#inventory-results"
@@ -172,14 +162,13 @@ export function CountrySpeciesInventory({
           tabIndex={-1}
           className="text-2xl font-medium text-emerald-950"
         >
-          {data.matched.toLocaleString("en")} matching entries
+          {data.matched.toLocaleString("en")} {data.matched === 1 ? "bird" : "birds"} to discover
         </h2>
         <p className="mt-2 text-sm text-gray-600">
           {data.results.length
             ? `Showing ${data.offset + 1} to ${data.offset + data.results.length}.`
             : "No birds match these filters. Try another name or clear the filters."}{" "}
-          Origin and occurrence describe the dated source. Unknown is not an
-          absence claim.
+          Turn a card to explore its places and sources.
         </p>
         {data.results.length === 0 && (
           <a
@@ -189,12 +178,16 @@ export function CountrySpeciesInventory({
             Reset this search
           </a>
         )}
-        <ul className="mt-6 grid gap-4 md:grid-cols-2">
+        <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.results.map((bird) => (
             <li
               key={bird.id}
-              className="min-w-0 rounded-xl border border-emerald-100 bg-white p-4 sm:p-5"
+              className="min-w-0 overflow-hidden rounded-2xl border border-emerald-100 bg-white p-3 shadow-sm"
             >
+              <div className="mb-4 overflow-hidden rounded-xl bg-emerald-50">
+                {bird.media || bird.guide ? <InventoryBirdImage src={bird.media?.bird.image ?? bird.guide!.image} name={bird.commonName} album /> : <div className="flex aspect-[4/5] items-center justify-center bg-gradient-to-br from-emerald-50 to-amber-50 p-6 text-center text-sm text-emerald-800">A face still to discover<br />Photograph coming later</div>}
+                {bird.media?.kind === "illustration" && <p className="px-3 py-1 text-xs text-gray-600">Reference illustration</p>}
+              </div>
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h3 className="break-words text-lg font-semibold text-gray-900">
@@ -213,24 +206,13 @@ export function CountrySpeciesInventory({
                     <p className="mt-1 text-xs text-gray-600">{bird.family}</p>
                   )}
                 </div>
-                {bird.media ? (
-                  <NewZealandChecklistPhoto
-                    photo={bird.media}
-                    name={bird.commonName}
-                  />
-                ) : bird.guide ? (
-                  <a
-                    href={bird.guide.href}
-                    className="shrink-0 rounded-lg"
-                    aria-label={`View ${bird.guide.name}, photograph and credits`}
-                  >
-                    <InventoryBirdImage
-                      src={bird.guide.image}
-                      name={bird.guide.name}
-                    />
-                  </a>
-                ) : null}
               </div>
+              <p className="mt-3 text-xs leading-5 text-emerald-900">Global conservation: {statusLabels[birdConservation(bird)?.globalStatus ?? "unknown"]}</p>
+              {bird.ebirdUrl && <a href={bird.ebirdUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-sm text-emerald-800 underline">Explore on eBird</a>}
+              <details className="mt-3 border-t border-emerald-100 pt-2"><summary className="min-h-11 cursor-pointer content-center text-sm font-medium text-emerald-800">Turn the card · meet this bird</summary>
+                <BirdConservationLabel bird={bird} sources />
+                {bird.media && <p className="text-xs leading-6 text-gray-600">Image: {bird.media.credit.creator} · <a className="underline" href={bird.media.credit.sourceUrl} target="_blank" rel="noreferrer">Original source</a> · <a className="underline" href={bird.media.credit.licenseUrl} target="_blank" rel="noreferrer">{bird.media.credit.license}</a></p>}
+                {bird.guide && <a href={bird.guide.href} className="inline-flex min-h-11 items-center text-sm text-emerald-800 underline">Open bird guide & media</a>}
               <p className="mt-3 text-sm capitalize text-emerald-900">
                 {bird.origin === "unknown"
                   ? "Origin not confirmed"
@@ -324,7 +306,6 @@ export function CountrySpeciesInventory({
                 </details>
               )}
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs leading-6 text-emerald-800">
-                {bird.ebirdUrl && <a href={bird.ebirdUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline underline-offset-4">Explore on eBird</a>}
                 {bird.guide && (
                   <a
                     href={bird.guide.href}
@@ -359,6 +340,7 @@ export function CountrySpeciesInventory({
                     </a>
                   ))}
               </div>
+              </details>
             </li>
           ))}
         </ul>

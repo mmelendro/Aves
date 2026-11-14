@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { Hand, Minus, Plus, RotateCcw } from "lucide-react"
 import { ExpandedMediaContext } from "./expandable-media"
 import { constrainMapView, fitMapView, mapGestureView, zoomMapAt, type MapView } from "@/lib/map-gestures.mjs"
@@ -23,13 +23,13 @@ export default function PhotoZoom({ children, label }: { children: ReactNode; la
     viewRef.current = bounded
     setView(bounded)
   }
-  function clearPointers() { pointers.current.clear(); start.current = null }
-  function reset() { clearPointers(); viewRef.current = fitMapView; setView(fitMapView) }
-  function measure() {
+  const clearPointers=useCallback(() => { pointers.current.clear(); start.current = null },[])
+  const reset=useCallback(() => { clearPointers(); viewRef.current = fitMapView; setView(fitMapView) },[clearPointers])
+  const measure=useCallback(() => {
     const image = surface.current?.querySelector("img")
     const size = box()
     setLimit(image ? photoZoomLimit(image.naturalWidth, image.naturalHeight, size.width, size.height) : 1)
-  }
+  },[])
   function zoom(factor: number) {
     const size = box()
     const target = Math.max(1, Math.min(limit, viewRef.current.zoom * factor))
@@ -43,7 +43,7 @@ export default function PhotoZoom({ children, label }: { children: ReactNode; la
     observer.observe(element)
     measure()
     return () => { observer.disconnect(); clearPointers() }
-  }, [expanded])
+  }, [expanded,reset,measure,clearPointers])
   const active = expanded && move
   return <>
     <div ref={surface} className={styles.surface} onLoadCapture={measure}

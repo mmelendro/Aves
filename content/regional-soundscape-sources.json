@@ -16,7 +16,7 @@
     },
     {
       "country": "colombia",
-      "region": "pacific-choco",
+      "region": "pacific",
       "creator": "jaime_enrique",
       "id": "424763",
       "title": "Choc\u00f3 jungle",
@@ -156,6 +156,30 @@
       "source": "https://freesound.org/people/datajam/sounds/494729/",
       "licence": "CC0 1.0",
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "colombia",
+      "region": "sierra-nevada-de-santa-marta",
+      "creator": "Santi_SF",
+      "id": "545399",
+      "title": "Tropical Forrest Ambient",
+      "location": "Minca, Sierra Nevada de Santa Marta, Colombia",
+      "source": "https://freesound.org/people/Santi_SF/sounds/545399/",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "colombia",
+      "region": "amazonia",
+      "creator": "AdrienPola",
+      "id": "413977",
+      "title": "Caqueton birds in primary forest around Nainekulodge, Amacayacu, Amazon",
+      "location": "Primary forest around Nainekulodge, Amacayacu, Colombian Amazon",
+      "source": "https://freesound.org/people/AdrienPola/sounds/413977/",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
       "delivery": "source link only; direct audio delivery not verified"
     }
   ]

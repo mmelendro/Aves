@@ -1,0 +1,42 @@
+{
+  "candidateCount": 15,
+  "existingSouthIsland": "Three Desmond178 Canterbury ambience assets already shipped; not duplicated.",
+  "missingRegions": [
+    {
+      "countryId": "colombia",
+      "regionId": "western-andes"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "cauca-valley"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "magdalena-valley"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "llanos"
+    },
+    {
+      "countryId": "colombia",
+      "regionId": "colombian-massif"
+    },
+    {
+      "countryId": "australia",
+      "regionId": "jervis-bay-territory"
+    },
+    {
+      "countryId": "new-zealand",
+      "regionId": "rakiura"
+    }
+  ],
+  "limits": [
+    "Not all regions have verified suitable recording sources.",
+    "No downloads, originals or direct preview URLs were verified in this bounded research. A single unauthenticated Freesound HTML fetch returned403; no retries/bypasses.",
+    "Snares albatross recording had misleading StewartIsland geotag but explicitly Snares description, so excluded from Rakiura.",
+    "LamingtonCommons file has pending external licence review; excluded from confirmed candidates.",
+    "Excluded a Minca insect recording with NonCommercial licence and Apiay collection CC-BY-NC4.0.",
+    "Excluded recordings containing identifiable Indigenous narratives/children as a general ambient track."
+  ]
+}

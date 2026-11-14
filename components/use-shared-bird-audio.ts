@@ -16,7 +16,9 @@ export function useSharedBirdAudio(bird: BirdProfile | undefined) {
   const play = media?.play, stop = media?.stop
   useEffect(() => () => { if (id) stop?.(id) }, [id, stop])
   useEffect(() => {
-    if (following && current.current) play?.(current.current)
+    // Follow identity changes, not a newly allocated metadata object each render.
+    const next=current.current
+    if (following && next) play?.(next)
   }, [id, following, play])
   useEffect(() => {
     const hidden = () => { if (document.hidden) { setFollowing(false); if (current.current) stop?.(current.current.id) } }

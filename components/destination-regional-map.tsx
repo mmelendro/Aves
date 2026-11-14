@@ -1,3 +1,4 @@
+import {requestMapPhotos} from "@/lib/map-photo-request"
 import { placeInSentence } from "@/lib/place-language"
 import colombiaBoundaries from "@/content/colombia-planning-boundaries.json"
 /**
@@ -36,14 +37,14 @@ export default function DestinationRegionalMap({ country, selectedRegionId, high
   // the explorer provide an equivalent choice for small or clustered shapes.
   const control = (id: string, name: string, href: string, children: ReactNode) => onSelectRegion ? (
     <g key={id} data-bird-filter-match={matchingRegionIds ? matchingRegionIds.includes(id) : undefined} role="button" tabIndex={0} aria-label={`Preview ${name} birds`} aria-pressed={highlighted(id)}
-      className={styles.regionControl} onClick={() => onSelectRegion(id)}
-      onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectRegion(id) } }}>
+      className={styles.regionControl} onClick={() => {onSelectRegion(id);requestMapPhotos({countryId:country,kind:"region",regionId:id,name})}}
+      onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelectRegion(id);requestMapPhotos({countryId:country,kind:"region",regionId:id,name}) } }}>
       {children}
     </g>
   ) : <a key={id} href={href} aria-label={`Explore ${placeInSentence(name)}`} className={styles.regionControl}>{children}</a>
 
   if (country === "colombia") return (
-    <div className="h-full w-full overflow-hidden" style={{ containerType: "size" }}>
+    <div className="h-full w-full min-w-0 overflow-hidden" style={{ containerType: "size", contain: "paint" }}>
     <div className="relative top-1/2 mx-auto aspect-[198/250] -translate-y-1/2" style={{ width: "min(100cqw, calc(100cqh * 198 / 250))" }} role="group" aria-label="Colombia planning-region map">
       <div className={`absolute inset-0 ${styles.pointZoom}`} style={selectedRegionId ? { transform: `scale(2.4) translate(${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.x ?? 50)}%, ${50 - (colombiaMapMarkers.find(region => region.slug === selectedRegionId)?.y ?? 50)}%)` } : undefined}>
       <ColombiaMapArtwork flat alt="" fill sizes="(max-width: 703px) 90vw, 560px" className="object-contain" />

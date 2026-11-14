@@ -1,4 +1,5 @@
 "use client";
+import {requestMapPhotos} from "@/lib/map-photo-request";
 import {useJourneyMapMotion} from "@/lib/use-journey-map-motion";
 import { useEffect, useRef } from "react";
 import { marker, divIcon, polyline, type Map as GeographicMap } from "leaflet";
@@ -45,7 +46,7 @@ export default function NorthIslandPlanningLayer({
             `Preview planning base: ${area.name}`,
           );
           button.setAttribute("aria-pressed", String(selected === area.id));
-          button.onclick = () => select?.(area.id);
+          button.onclick = () => {select?.(area.id);map.setView([area.latitude,area.longitude],12,{animate:false});requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:area.id,name:area.name});};
           return marker([area.latitude, area.longitude], {
             pane: "routePane",
             icon: divIcon({
@@ -98,7 +99,7 @@ export default function NorthIslandPlanningLayer({
           Boolean(journeyStep) &&
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
       });
-  }, [map, selection]);
+  }, [map, selection, journeyStep]);
   useJourneyMapMotion(map,"north-island");
   return (
     <div className="px-2 py-1 text-xs leading-5 text-emerald-950">
@@ -114,7 +115,7 @@ export default function NorthIslandPlanningLayer({
         <select
           aria-label="Preview a North Island planning base"
           value={planner.tripAreaById.has(selected || "") ? selected : ""}
-          onChange={(e) => select?.(e.target.value)}
+          onChange={(e) => {select?.(e.target.value);const area=planner.tripAreaById.get(e.target.value);if(area){map.setView([area.latitude,area.longitude],12,{animate:false});requestMapPhotos({countryId:"new-zealand",kind:"place",placeId:area.id,name:area.name})}}}
           className="min-h-11 max-w-full rounded-lg border bg-white px-2"
         >
           <option value="">Choose a base</option>

@@ -8,8 +8,8 @@ import styles from "./bird-filter-controls.module.css"
 import {useColombiaHomeCopy} from "@/components/colombia-home-language"
 
 /** Each map/carousel edits one shared, page-session filter. Native popovers overlay, never resize the map. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Accept the legacy align prop while the shared popover owns placement.
 export default function BirdFilterControls(_props:{align?:"left"|"right"}={}) {
- void _props
  const {filters,setFilters}=useBirdFilters(), id=useId(), ref=useRef<HTMLDivElement>(null)
  const localizeHome=useColombiaHomeCopy()
  function close(){ref.current?.hidePopover()}
