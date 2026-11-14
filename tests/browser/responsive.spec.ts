@@ -9,8 +9,24 @@ test.beforeEach(async ({context}) => {
     return url.origin==="http://127.0.0.1:3100" && ["GET","HEAD"].includes(request.method()) ? route.continue() : route.abort()
   })
 })
+async function settleConsent(page: import("@playwright/test").Page) {
+  const reject=page.getByRole('button',{name:'Reject Non-Essential',exact:true})
+  await expect(reject).toBeVisible()
+  await reject.click()
+  await expect(page.locator('[data-cookie-banner]')).toHaveCount(0)
+}
+
+test('first-visit cookie controls are accessible before the page audit',async({page})=>{
+ await page.goto('/australia/regions/new-south-wales')
+ await expect(page.locator('[data-cookie-banner]')).toBeVisible()
+ const scan=await new AxeBuilder({page}).include('[data-cookie-banner]').withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()
+ expect(scan.violations).toEqual([])
+ await settleConsent(page)
+})
+
 for(const path of pages) test(`public accessibility and reflow: ${path}`, async ({page}) => {
   await page.goto(path)
+  await settleConsent(page)
   await expect(page.locator("main")).toHaveCount(1)
   await expect(page.getByRole("heading",{level:1})).toHaveCount(1)
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1)
@@ -65,6 +81,7 @@ test('desktop accessibility audit covers every public sitemap route',async({page
     return url.pathname+url.search
   }))]
   expect(routes.length).toBeGreaterThanOrEqual(78)
+  await page.goto('/');await settleConsent(page)
   const findings=[]
   for(const path of routes){
     await page.goto(path)
