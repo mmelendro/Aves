@@ -24,10 +24,11 @@ test('hydrated homepage fits narrow screens with doubled text',async({page},info
   await page.goto('/');await declineOptionalCookies(page)
   await page.addStyleTag({content:'html {font-size:200% !important}'})
   await page.evaluate(()=>document.fonts.ready)
+  await expect(page.locator('.geographic-map-canvas').first()).toHaveAttribute('data-map-camera',/.+/)
   const turn=page.getByRole('button',{name:'Turn to the map',exact:true}).first()
   if(await turn.isVisible())await turn.click()
   const selector=page.getByRole('combobox',{name:'Map destination',exact:true}).first()
-  await selector.scrollIntoViewIfNeeded()
+  await selector.evaluate(node=>node.scrollIntoView({block:'center'}))
   await expect(selector).toBeVisible()
   await expect.poll(()=>selector.evaluate(node=>{
    const box=node.getBoundingClientRect(),x=box.left+box.width/2,y=box.top+box.height/2
