@@ -5,9 +5,9 @@
   "authority": "Pending work explicitly restarted at 0. IDs0-27 supersede the previous active numbering. Previous60 completed scopes remain archived, not reopened.",
   "previousQueueArchive": "docs/archive/2026-11-13-before-final-audit/queue-2026-11-13.json",
   "release": {
-    "runtime": "e0c310842e4c83dc92613afa5e7543646e6c56e5",
-    "deployment": "dpl_39xyvffhn7J92MABNbJhHxFrUXVK",
-    "ciRun": 43551637153,
+    "runtime": "1f46aaaced42ac953c467296aa98cb61a844a4d3",
+    "deployment": "dpl_4vQc1NY4MqBTWEW3zt5E4kAzTtMM",
+    "ciRun": 43561930017,
     "unitTests": 785,
     "browserPassed": 167,
     "browserSkipped": 205,
@@ -28,7 +28,11 @@
       "/new-zealand/south-island": 941003
     },
     "ciConclusion": "success",
-    "publishedAt": "2026-11-14T03:43:53.027126+00:00"
+    "publishedAt": "2026-11-14T06:16:15.361312+00:00",
+    "rollbackDeployment": "dpl_39xyvffhn7J92MABNbJhHxFrUXVK",
+    "focusedBrowserPassed": 41,
+    "focusedBrowserSkipped": 9,
+    "narrowPhonePassed": 1
   },
   "groups": {
     "A": "No owner involvement. Source/UI/document changes and isolated regression checks.",
@@ -166,98 +170,118 @@
       "title": "Confirm business identity, roles and public claims",
       "group": "B",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Public claims corrected; contracting details required",
       "acceptance": "Confirm the contracting identity, current team and supplier roles, permissions and any office claims. Review remaining source-authored commercial, cultural and legal Spanish. Publish only supported claims.",
       "evidence": "Old21 remains open. Live Colombia contact page labels Our Offices, Sydney Operations Hub and Bogot\u00e1 Field Operations Center. These are owner facts, not facts inferred from code.",
       "previousQueueIds": [
         21
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 10,
       "title": "Confirm support hours, timezone and emergency arrangements",
       "group": "B",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Public promises corrected; operating details required",
       "acceptance": "Choose realistic response hours, timezone, capacity and backup. Replace unconfirmed weekday and weekend emergency promises with confirmed wording.",
       "evidence": "Old22 remains open. Live Colombia contact page promises9 am to 6 pm PST weekdays and weekend emergency support.",
       "previousQueueIds": [
         22
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 11,
       "title": "Supply actual financials and complete the investor edition",
       "group": "B",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Actual business figures required",
       "acceptance": "Provide current business cash, obligations, operating costs, founder pay from month one and available delivery hours. Reconcile the editable cash model, scenarios and investor claims. Separate assumptions from actuals and do not invent an investment return.",
       "evidence": "Old20 remains open. Current Eco-tourism Business Plan owner edition v3 pages 1-2 explicitly states that financial/customer evidence does not yet establish commercial readiness.",
       "previousQueueIds": [
         20
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 12,
       "title": "Approve sharing, contributor consent and moderation rules",
       "group": "B",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Complete: private pilot rules adopted",
       "acceptance": "Agree default audience, photo and story permissions, attribution, sensitive wildlife location handling and review rules. Private records remain private until specific publication approval.",
-      "evidence": "Old23 remains open. Required before publishing originals, trip stories, invitations or any future public journal.",
+      "evidence": "Completed 14 November 2026. See docs/audit/PRIVATE-PILOT-RULES-2026-11-14.md",
       "previousQueueIds": [
         23
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md",
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/PRIVATE-PILOT-RULES-2026-11-14.md"
     },
     {
       "id": 13,
       "title": "Choose measurement, stewardship indicators and spending limits",
       "group": "B",
       "urgency": "Medium",
-      "status": "Needs owner input",
+      "status": "Complete: manual measures and zero new recurring spend",
       "acceptance": "Choose a small consent-respecting set of completion, return-use and delivery-effort measures with spending limits. Select proportionate environmental/supplier indicators and evidence owners. Record unknown baselines rather than invent scores, offsets or impact.",
-      "evidence": "Measurement part of old24. Current plan is a bounded planning service; B Lab ESC reference emphasises measured impacts and supplier accountability. No new tracking or recurring spend is authorised.",
+      "evidence": "Completed 14 November 2026. See docs/audit/PRIVATE-PILOT-RULES-2026-11-14.md",
       "previousQueueIds": [
         24
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md",
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/PRIVATE-PILOT-RULES-2026-11-14.md"
     },
     {
       "id": 14,
       "title": "Review hosted password-protection settings and eligibility",
       "group": "C",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Reviewed: Free plan; Pro entitlement decision required",
       "acceptance": "Confirm the current project setting, available entitlement and authorised settings access. Assess the recorded disabled leaked-password protection and agree a supported configuration without an unapproved plan upgrade. Validate the chosen sign-up/reset behaviour.",
       "evidence": "Security part of old24. The disabled-setting observation comes from the earlier read-only advisory record, not a fresh live settings read in this audit. Current Supabase password-security documentation was checked.",
       "previousQueueIds": [
         24
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 15,
       "title": "Prove isolated restore and separation between two accounts",
       "group": "C",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Complete: isolated hosted restore and real two-account proof",
       "acceptance": "Use an authorised isolated environment and disposable test accounts. Restore both saved rows and private file bytes, compare hashes and test owner/second-account access. Record outcomes and recovery time. Never restore over production for a test.",
-      "evidence": "Old29 remains open. Current recovery register explicitly lacks hosted row-and-file restore and real two-account proof. Sampled owner checks and synthetic tests are useful but do not close this gap.",
+      "evidence": "Completed 14 November 2026. See docs/audit/RECOVERY-2026-11-13.md",
       "previousQueueIds": [
         29
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md",
+      "completedOn": "2026-11-14",
+      "completionEvidence": "docs/audit/RECOVERY-2026-11-13.md"
     },
     {
       "id": 16,
       "title": "Complete the Colombia album and journal from originals",
       "group": "C",
       "urgency": "Medium",
-      "status": "Needs owner input",
+      "status": "786 originals inventoried; identity and rights review required",
       "acceptance": "Supply actual trip records and original photos with usable rights. Reconcile dates, people, taxonomy and photo provenance privately. Distinguish planned route, group totals, wishes and individual observations. Publish only selected approved material.",
       "evidence": "Old25 remains open. Prior promise of source access does not supply the actual photos, daily observations or reuse permissions.",
       "previousQueueIds": [
@@ -265,27 +289,31 @@
       ],
       "dependsOn": [
         12
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 17,
       "title": "Complete supported regional species coverage",
       "group": "C",
       "urgency": "Medium",
-      "status": "Needs owner input",
+      "status": "Regional source evidence incomplete",
       "acceptance": "Expand and reconcile regional evidence using reviewed sources and the existing coherent national format. Keep unsupported distributions and dates visible as gaps. A Santa Marta name is a regional review lead, not proof of a complete range or trip observation.",
       "evidence": "Old26 remains open. National inventories and current reviewed regional matches are already implemented. Comprehensive regional evidence remains incomplete.",
       "previousQueueIds": [
         26
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 18,
       "title": "Preview and reconcile an actual eBird trip import",
       "group": "C",
       "urgency": "Medium",
-      "status": "Needs owner input",
+      "status": "Actual-source dry run prepared; acceptance and checklist CSV required",
       "acceptance": "Supply the real export/report. In a private dry run, show taxonomy matches, unmatched species, duplicates, dates and withheld locations. Import only explicitly accepted records and never publish automatically.",
       "evidence": "Old55 remains open. No exact source export or daily-sighting evidence was supplied in this audit.",
       "previousQueueIds": [
@@ -295,14 +323,16 @@
         12,
         16,
         17
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 19,
       "title": "Add approved original trip videos",
       "group": "C",
       "urgency": "Later",
-      "status": "Needs owner input",
+      "status": "Original video source and rights required",
       "acceptance": "Provide original files, dates, credited contributors and display permission. Prepare web variants while retaining provenance and distinguish reference footage from actual trip evidence.",
       "evidence": "Video portion of old27. Existing placeholders or public references are not the missing original files.",
       "previousQueueIds": [
@@ -310,27 +340,31 @@
       ],
       "dependsOn": [
         12
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 20,
       "title": "Add one accurate editable bird model",
       "group": "C",
       "urgency": "Later",
-      "status": "Needs owner input",
+      "status": "Licensed editable species model required",
       "acceptance": "Supply or commission a licensed editable source asset for one reviewed species. Validate accuracy, source files, web delivery and mobile limits before expanding the model library.",
       "evidence": "Model portion of old27. Existing static bird artwork and optional terrain preview do not supply a licensed editable species model.",
       "previousQueueIds": [
         27
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 21,
       "title": "Review a selected trip story and any invitation",
       "group": "C",
       "urgency": "Medium",
-      "status": "Needs owner input",
+      "status": "Private preview reviewed; exact audience and permissions required",
       "acceptance": "Select the exact private story preview, audience and recipient. Review contributor permission and sensitive-location omissions. Keep previewing separate from public publication or sending an invitation.",
       "evidence": "Old28 remains open. Private story preview capability is complete; selected content and person-specific approval are not.",
       "previousQueueIds": [
@@ -339,14 +373,16 @@
       "dependsOn": [
         12,
         16
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 22,
       "title": "Accept the experience on a physical iPhone",
       "group": "D",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Physical iPhone participation required",
       "acceptance": "Run a real Safari journey: touch/pinch/double-tap maps, overlays/credits/scheduler, enquiry sidebar links and draft protection, planner navigation, account edits, image orientation, reload and the downloaded offline pack. Record device/browser results.",
       "evidence": "Old30 remains open. Emulated phone and Firefox checks do not establish physical-device behaviour.",
       "previousQueueIds": [
@@ -358,14 +394,16 @@
         2,
         3,
         4
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 23,
       "title": "Observe an independent New Zealand planning trial",
       "group": "D",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Independent traveller participation required",
       "acceptance": "Have a traveller complete destination selection, bird wishes, route comparison, day editing, saving/reopening and export without coaching. Record completion, confusion and elapsed effort using agreed consent.",
       "evidence": "Old31 remains open. Founder-led and synthetic checks are not independent traveller acceptance.",
       "previousQueueIds": [
@@ -376,14 +414,16 @@
         1,
         2,
         3
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 24,
       "title": "Fix the issues actually observed in the traveller trial",
       "group": "D",
       "urgency": "Medium",
-      "status": "Waiting for observed feedback",
+      "status": "Waiting for observed traveller feedback",
       "acceptance": "Turn observed feedback into small prioritised changes and verify them with the participant. Do not invent findings before the trial. Keep unproven feature requests separate from broken behaviour.",
       "evidence": "Old32 remains open and conditional. No independent traveller findings are available yet.",
       "previousQueueIds": [
@@ -391,27 +431,31 @@
       ],
       "dependsOn": [
         23
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 25,
       "title": "Remove only specifically identified disposable records",
       "group": "D",
       "urgency": "Later",
-      "status": "Optional; needs named records and decision",
+      "status": "Deferred: optional; no named disposable records",
       "acceptance": "Name the exact disposable records, preserve required copies and obtain the specific deletion decision. Use normal recoverability where available. No generic production cleanup or unidentified deletion.",
       "evidence": "Old33 remains open and optional. The audit does not identify records as disposable or authorise deletion.",
       "previousQueueIds": [
         33
       ],
-      "dependsOn": []
+      "dependsOn": [],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 26,
       "title": "Decide whether to run the first paid planning pilot",
       "group": "D",
       "urgency": "High",
-      "status": "Needs owner input",
+      "status": "Waiting for commercial facts and trial results",
       "acceptance": "Review actual economics, contracting role, support capacity, recovery/security proof and trial outcomes. Define one bounded offer, terms, capacity, price and go/no-go decision. A working app is not proof of commercial readiness.",
       "evidence": "Old34 remains open. Current owner business plan supports a planning-service-first sequence rather than unconfirmed bookable tours.",
       "previousQueueIds": [
@@ -433,14 +477,16 @@
         22,
         23,
         24
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     },
     {
       "id": 27,
       "title": "Choose the next cycle from actual use and delivery evidence",
       "group": "D",
       "urgency": "Medium",
-      "status": "Waiting for pilot evidence",
+      "status": "Post-pilot evidence required",
       "acceptance": "After a pilot, compare completion, return use, time to deliver, support load, cost and proportionate impact evidence. Keep useful changes and retire unsupported ideas based on the agreed measures.",
       "evidence": "Old35 remains open and conditional. No real retention, paid demand or delivery-cost result was established by this audit.",
       "previousQueueIds": [
@@ -450,7 +496,9 @@
         13,
         24,
         26
-      ]
+      ],
+      "lastReviewed": "2026-11-14",
+      "reviewEvidence": "docs/audit/REMAINING-WORK-REVIEW-2026-11-14.md"
     }
   ],
   "previousIdMap": {
@@ -509,7 +557,7 @@
     ]
   },
   "activeScope": {
-    "pendingCount": 19,
+    "pendingCount": 15,
     "newAutomaticScopes": [],
     "nextIndependent": null,
     "firstRepairBatch": [],
@@ -526,7 +574,24 @@
       7,
       8
     ],
-    "independentBatchComplete": true
+    "independentBatchComplete": true,
+    "completedCurrentAudit": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      12,
+      13,
+      15
+    ],
+    "deferred": [
+      25
+    ]
   },
   "verification": "docs/audit/FINAL-COMPLETE-AUDIT-2026-11-13.md",
   "previousCheckpointRelease": {
@@ -579,10 +644,32 @@
     "lintWarnings": 31
   },
   "previousRelease": {
-    "runtime": "a4acaedc130548eb3e94af9f86b87674fb3a8e4f",
-    "deployment": "dpl_7BwVzLgpDKJvWfCHGHMgjieihJdy"
+    "runtime": "e0c310842e4c83dc92613afa5e7543646e6c56e5",
+    "deployment": "dpl_39xyvffhn7J92MABNbJhHxFrUXVK",
+    "ciRun": 43551637153,
+    "unitTests": 785,
+    "browserPassed": 167,
+    "browserSkipped": 205,
+    "publicRoutesPassed": 81,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "sourceModules": 481,
+    "unreachable": 0,
+    "published": true,
+    "domainsVerified": true,
+    "htmlBudgetsPassed": true,
+    "initialGzipBytes": {
+      "/page": 338669,
+      "/account/page": 323879
+    },
+    "decodedHtmlBytes": {
+      "/credits": 516448,
+      "/new-zealand/south-island": 941003
+    },
+    "ciConclusion": "success",
+    "publishedAt": "2026-11-14T03:43:53.027126+00:00"
   },
-  "updatedAt": "2026-11-14T03:43:53.027126+00:00",
+  "updatedAt": "2026-11-14T06:15:13.186232+00:00",
   "additionalRequests": {
     "published": [
       "Preserved the newer a4acaed published album, panel resizing, geographic engines and zero-warning repairs",
@@ -723,5 +810,52 @@
         ]
       }
     }
+  },
+  "remainingReview": {
+    "date": "2026-11-14",
+    "photosInventoried": 786,
+    "filenameCandidates": 95,
+    "photoBytes": 252351884,
+    "sourceReportSpecies": 506,
+    "sourceReportChecklists": 42,
+    "reportRows": 507,
+    "catalogueMatches": 496,
+    "unmatchedSpecies": 10,
+    "hybridsHeld": 1,
+    "individualObservationsImported": 0,
+    "newPublicPhotos": 0,
+    "privateRules": "docs/audit/PRIVATE-PILOT-RULES-2026-11-14.md",
+    "organizationPlan": "free",
+    "leakedPasswordProtection": "disabled; requires Pro or above per current documentation",
+    "developmentBranches": 0,
+    "quotedBranchCost": {
+      "amount": 0.01344,
+      "recurrence": "hourly",
+      "currency": "USD; verified against public pricing",
+      "source": "https://supabase.com/docs/guides/platform/manage-your-usage/branching",
+      "toolCurrencyFieldAbsent": true
+    },
+    "newRecurringSpendAuthorized": 0,
+    "physicalDeviceAccepted": false,
+    "independentTrialObserved": false,
+    "isolatedProject": "botweogevvnmzlzthlkp",
+    "isolatedProjectQuotedMonthlyCost": 0,
+    "hostedRecoveryComplete": true,
+    "actualApplicationChecks": {
+      "realVerifiedOwnerSession": true,
+      "realVerifiedSecondSession": true,
+      "ownerWorkspaceReopen": true,
+      "anonymousDenied": true,
+      "secondWorkspaceDenied": true,
+      "ownerFileSHA256": true,
+      "secondFileDenied": true,
+      "ownerEditSaved": true,
+      "secondEditDenied": true,
+      "staleRevisionRejected": true,
+      "ownerEditReopened": true,
+      "actualTripPageRendered": true
+    },
+    "fixturesRemoved": true,
+    "harnessDisabled": true
   }
 }
