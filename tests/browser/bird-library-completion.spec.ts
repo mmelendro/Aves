@@ -6,7 +6,7 @@ test('map fullscreen and Map/Place state survive country and island changes',asy
  let map=page.locator('dialog[data-aves-map][data-expanded]');await expect(map).toBeVisible()
  await expect(page.locator('dialog[data-expanded]:not([data-aves-map])')).toHaveCount(0)
  const surface=await map.locator('[data-map-surface]').boundingBox(),stage=await map.locator('[data-map-view]').boundingBox();expect(stage!.height).toBeGreaterThanOrEqual(surface!.height-2)
- await map.getByRole('button',{name:'Show New Zealand birds',exact:true}).click()
+ const destination=map.getByRole('button',{name:'Show New Zealand birds',exact:true});await destination.focus();await destination.press('Enter')
  const mapTab=map.getByRole('button',{name:'Map',exact:true});if(await mapTab.isVisible())await mapTab.click()
  await map.getByRole('combobox').filter({has:page.locator('option[value="south-island"]')}).selectOption('south-island')
  map=page.locator('dialog[data-aves-map][data-expanded]');await expect(map).toHaveAttribute('aria-label','South Island explorer map')
