@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Multiple ways to reach our expert team for personalized birding consultation
+                Tell Martín about your interests, travel dates and ideas for Colombia.
               </p>
             </div>
 
@@ -95,35 +95,35 @@ export default function ContactPage() {
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <MapPin className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Our Offices</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Colombia Trip Planning</h3>
                   <div className="space-y-3 text-gray-600">
                     <div>
-                      <div className="font-semibold text-gray-900">Sydney, Australia</div>
-                      <div className="text-sm">Operations Hub</div>
+                      <div className="font-semibold text-gray-900">Your destination</div>
+                      <div className="text-sm">Explore Colombia’s birds, landscapes and local culture.</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Bogotá, Colombia</div>
-                      <div className="text-sm">Field Operations Center</div>
+                      <div className="font-semibold text-gray-900">Your journey</div>
+                      <div className="text-sm">Discuss your route, pace and preferences before confirming arrangements.</div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Business Hours */}
+              {/* Replies and Trip Support */}
               <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-purple-50 to-pink-50">
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Clock className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Business Hours</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Replies and Trip Support</h3>
                   <div className="space-y-2 text-gray-600">
                     <div>
-                      <div className="font-semibold text-gray-900">Monday - Friday</div>
-                      <div className="text-sm">9:00 AM - 6:00 PM PST</div>
+                      <div className="font-semibold text-gray-900">Preferred contact time</div>
+                      <div className="text-sm">Include your time zone and when you are available.</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Weekend</div>
-                      <div className="text-sm">Emergency support available</div>
+                      <div className="font-semibold text-gray-900">Agreed arrangements</div>
+                      <div className="text-sm">Response and trip-support arrangements are agreed individually before you book.</div>
                     </div>
                   </div>
                 </CardContent>
