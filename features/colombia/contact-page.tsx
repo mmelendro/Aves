@@ -26,12 +26,12 @@ export default function ContactPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-6">
-              🌿 Expert Birding Consultations
+              Colombia Trip Planning
             </Badge>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Contact Our
-              <span className="text-emerald-600 block">Birding Experts</span>
+              Contact Martín
+              <span className="text-emerald-600 block">Your Colombia Trip</span>
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -41,16 +41,16 @@ export default function ContactPage() {
             {/* Core Value Badges */}
             <div className="flex flex-wrap justify-center gap-3 mb-4">
               <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-200 px-4 py-2 text-sm font-medium">
-                🏆 Expert Consultation
+                Personal Planning
               </Badge>
               <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 text-sm font-medium">
-                👥 Personalized Service
+                Your Pace
               </Badge>
               <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 px-4 py-2 text-sm font-medium">
-                🌍 Local Knowledge
+                Birds and Landscapes
               </Badge>
               <Badge className="bg-green-100 text-green-800 hover:bg-green-200 px-4 py-2 text-sm font-medium">
-                🌿 Sustainable Tourism
+                Thoughtful Travel
               </Badge>
             </div>
           </div>
