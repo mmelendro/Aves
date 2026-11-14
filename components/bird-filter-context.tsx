@@ -9,4 +9,4 @@ export function BirdFilterProvider({children}:{children:ReactNode}) {
  return <BirdFilterContext.Provider value={{filters,setFilters}}>{children}</BirdFilterContext.Provider>
 }
 /** No provider leaves editorial/server-rendered callers at their unfiltered default. */
-export function useBirdFilters() { const value=useContext(BirdFilterContext); return value?.filters ? value : {filters:defaultBirdFilters,setFilters:(_filters:BirdFilters)=>{}} }
+export function useBirdFilters() { const value=useContext(BirdFilterContext); return value?.filters ? value : {filters:defaultBirdFilters,setFilters:()=>{}} }

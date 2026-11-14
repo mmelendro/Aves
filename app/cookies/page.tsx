@@ -55,11 +55,10 @@ export default function CookiesPage() {
                   <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
                     <Settings className="w-6 h-6 text-emerald-600" />
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900">Types of Cookies We Use</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">Cookies and Browser Storage</h2>
                 </div>
                 <p className="text-gray-600 mb-8">
-                  We use first-party and third-party cookies for several purposes. First-party cookies are set by us,
-                  while third-party cookies are set by third-party domains.
+                  AVES uses account session cookies and remembers your consent choices in browser storage with a cookie fallback. Some guide preferences and saved selections also use local or session storage. The application currently installs no analytics or advertising loader.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -80,8 +79,7 @@ export default function CookiesPage() {
                       <h3 className="text-lg font-semibold text-gray-900">Performance</h3>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      These cookies collect information about how visitors use our website, such as which pages are
-                      visited most often.
+                      No analytics cookie integration is currently installed by the AVES application. The Analytics preference is reserved for a future optional integration and defaults to off.
                     </p>
                   </div>
 
@@ -91,8 +89,7 @@ export default function CookiesPage() {
                       <h3 className="text-lg font-semibold text-gray-900">Functionality</h3>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      These cookies allow our website to remember choices you make and provide enhanced, personalized
-                      features.
+                      Guide settings and selected birds may be remembered in your browser. These local and session storage choices are distinct from tracking cookies. You can clear them through your browser settings.
                     </p>
                   </div>
 
@@ -102,7 +99,7 @@ export default function CookiesPage() {
                       <h3 className="text-lg font-semibold text-gray-900">Targeting</h3>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      These cookies are used to deliver advertisements that are more relevant to you and your interests.
+                      No advertising cookie integration is currently installed by the AVES application. The Marketing preference is reserved for a future optional integration and defaults to off.
                     </p>
                   </div>
                 </div>
@@ -125,8 +122,7 @@ export default function CookiesPage() {
                     accept or refuse cookies.
                   </p>
                   <p>
-                    If you choose to reject cookies, you may still use our website though your access to some
-                    functionality and areas of our website may be restricted.
+                    Rejecting optional categories does not prevent public browsing. Account sessions require essential cookies. External services, such as the scheduler, may use their own cookies when you choose to open them. Their policies apply on those services.
                   </p>
                 </div>
 

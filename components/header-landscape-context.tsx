@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 /** Public display state only. Stable geographic IDs can be reused by a future app. */
 export type HeaderLandscapeSelection = { country: string; regionId?: string; placeId?: string }
-const noop = (_selection: HeaderLandscapeSelection) => {}
+const noop = () => {}
 const Context = createContext<{ selection: HeaderLandscapeSelection | null; publish: (selection: HeaderLandscapeSelection) => void }>({selection:null,publish:noop})
 
 export function HeaderLandscapeProvider({children}:{children:ReactNode}) {

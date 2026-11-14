@@ -16,5 +16,6 @@ const navigationLinks = [
 
 /** Shared public shell. Account intent and Colombia-home language choice survive. */
 export function NavigationHeader(_props: { currentPage?: string }) {
+  void _props
   return <NewZealandHeader country="colombia" navigationLinks={navigationLinks} />
 }

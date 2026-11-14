@@ -9,6 +9,7 @@ import {useColombiaHomeCopy} from "@/components/colombia-home-language"
 
 /** Each map/carousel edits one shared, page-session filter. Native popovers overlay, never resize the map. */
 export default function BirdFilterControls(_props:{align?:"left"|"right"}={}) {
+ void _props
  const {filters,setFilters}=useBirdFilters(), id=useId(), ref=useRef<HTMLDivElement>(null)
  const localizeHome=useColombiaHomeCopy()
  function close(){ref.current?.hidePopover()}

@@ -61,8 +61,8 @@ export function CookieBanner() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">We Value Your Privacy</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  We use cookies to enhance your browsing experience, serve personalized content, and analyze our
-                  traffic. By clicking "Accept All", you consent to our use of cookies. You can customize your
+                  We use essential cookies for account sessions and to remember your choices. Optional tracking is
+                  off by default. The app currently installs no analytics or advertising loader. You can customize your
                   preferences or learn more in our{" "}
                   <a href="/cookies" className="text-emerald-600 hover:text-emerald-700 underline">
                     Cookie Policy

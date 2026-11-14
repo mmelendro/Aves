@@ -3,7 +3,7 @@
 import { Children, cloneElement, createContext, isValidElement, useContext, useState, type ReactNode } from "react"
 import translations from "@/content/colombia-home-es.json"
 
-const LanguageContext = createContext({ spanish: false, setSpanish: (_value: boolean) => {} })
+const LanguageContext = createContext<{spanish:boolean;setSpanish:(value:boolean)=>void}>({ spanish: false, setSpanish: () => {} })
 
 /** English on every fresh visit; Spanish is an explicit, page-local choice. */
 export function ColombiaHomeLanguage({ children }: { children: ReactNode }) {
