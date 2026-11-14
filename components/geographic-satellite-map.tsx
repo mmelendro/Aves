@@ -52,6 +52,8 @@ export default function GeographicSatelliteMap({country,region="",highlightRegio
     try{
       current=createMap(container.current,{center:[12,0],zoom:0,minZoom:0,maxZoom:19,trackResize:false,scrollWheelZoom:false,dragging:true,touchZoom:true,doubleClickZoom:true,zoomControl:false,attributionControl:true,worldCopyJump:true});
       map.current=current;
+      // Floating map actions must never cover the required attribution links.
+      current.attributionControl.setPosition("topleft");
       current.on("moveend",()=>{const centre=current.getCenter();cameraMemory.remember(cameraScope.current,{centre:[centre.lat,centre.lng],zoom:current.getZoom()});});
       const reportCamera=()=>{const centre=current.getCenter();container.current?.setAttribute("data-map-camera",JSON.stringify({centre:[centre.lat,centre.lng],zoom:current.getZoom(),bounds:current.getBounds(),size:current.getSize()}));};
       current.on("movestart",()=>container.current?.setAttribute("data-map-moving","true"));
