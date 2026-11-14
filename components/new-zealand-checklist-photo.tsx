@@ -1,5 +1,6 @@
 "use client"
 
+import {useMediaPreferences} from "./media-preferences"
 import { useRef, useState } from "react"
 import Image from "./responsive-photo"
 import { Portal as HoverCardPortal } from "@radix-ui/react-hover-card"
@@ -9,9 +10,12 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 
 function Photograph({ photo }: { photo: NzChecklistMedia }) {
   const [failed, setFailed] = useState(false)
+  const [previewFailed,setPreviewFailed]=useState(false)
+  const {lowBandwidth}=useMediaPreferences()
+  const large=Boolean(photo.preview&&!previewFailed&&!lowBandwidth)
   return failed
     ? <p role="status" className="rounded-lg bg-emerald-50 p-6 text-sm text-emerald-950">Image unavailable. You can still select this bird.</p>
-    : <Image src={photo.bird.image} width={1600} height={1200} sizes="(max-width: 767px) 90vw, 640px" alt={`${photo.bird.commonName} (${photo.bird.scientificName}) reference ${photo.kind === "illustration" ? "illustration" : "photograph"}`} loading="lazy" decoding="async" onError={() => setFailed(true)} className="max-h-[45dvh] h-auto w-full rounded-lg object-contain" />
+    : <Image src={large?photo.preview!:photo.bird.image} width={1600} height={1200} sizes="(max-width: 767px) 90vw, 640px" alt={`${photo.bird.commonName} (${photo.bird.scientificName}) reference ${photo.kind === "illustration" ? "illustration" : "photograph"}`} loading="lazy" decoding="async" onError={() => {if(large)setPreviewFailed(true);else setFailed(true)}} className={`max-h-[45dvh] h-auto rounded-lg object-contain ${photo.preview&&!large?"mx-auto w-auto max-w-[120px]":"w-full"}`} />
 }
 
 /** Hover/focus is a quick look; the independent button opens a keyboard/touch

@@ -1,0 +1,446 @@
+{
+  "reviewed": "2026-11-14",
+  "source": "https://www.birds.cornell.edu/clementschecklist/introduction/updateindex/october-2025/2026-citation-checklist-downloads/",
+  "taxonomySha256": "dcabf48e85abb2494e80780258a21da0c6ec0425fbe0577a7cbb5e0e61b9c4ab",
+  "policy": "Exact scientific-name matches to species records. Four authored subspecies profiles link explicitly to their parent species, not a silently changed taxonomic concept. Links only; no occurrence data, descriptions, recordings or photographs imported.",
+  "birds": {
+    "co-green-bearded-helmetcrest": {
+      "scientificName": "Oxypogon guerinii",
+      "targetScientificName": "Oxypogon guerinii",
+      "code": "gnbhel1",
+      "scope": "species"
+    },
+    "co-rainbow-bearded-thornbill": {
+      "scientificName": "Chalcostigma herrani",
+      "targetScientificName": "Chalcostigma herrani",
+      "code": "rabtho1",
+      "scope": "species"
+    },
+    "co-black-billed-mountain-toucan": {
+      "scientificName": "Andigena nigrirostris",
+      "targetScientificName": "Andigena nigrirostris",
+      "code": "bbmtou1",
+      "scope": "species"
+    },
+    "co-chestnut-crowned-antpitta": {
+      "scientificName": "Grallaria ruficapilla",
+      "targetScientificName": "Grallaria ruficapilla",
+      "code": "chcant2",
+      "scope": "species"
+    },
+    "co-andean-motmot": {
+      "scientificName": "Momotus aequatorialis",
+      "targetScientificName": "Momotus aequatorialis",
+      "code": "higmot1",
+      "scope": "species"
+    },
+    "co-vermilion-cardinal": {
+      "scientificName": "Cardinalis phoeniceus",
+      "targetScientificName": "Cardinalis phoeniceus",
+      "code": "vercar1",
+      "scope": "species"
+    },
+    "co-velvet-purple-coronet": {
+      "scientificName": "Boissonneaua jardini",
+      "targetScientificName": "Boissonneaua jardini",
+      "code": "vepcor1",
+      "scope": "species"
+    },
+    "co-golden-headed-manakin": {
+      "scientificName": "Ceratopipra erythrocephala",
+      "targetScientificName": "Ceratopipra erythrocephala",
+      "code": "gohman1",
+      "scope": "species"
+    },
+    "co-striolated-manakin": {
+      "scientificName": "Machaeropterus striolatus",
+      "targetScientificName": "Machaeropterus striolatus",
+      "code": "strman5",
+      "scope": "species"
+    },
+    "co-scaled-dove": {
+      "scientificName": "Columbina squammata",
+      "targetScientificName": "Columbina squammata",
+      "code": "scadov1",
+      "scope": "species"
+    },
+    "co-yellow-throated-toucan": {
+      "scientificName": "Ramphastos ambiguus",
+      "targetScientificName": "Ramphastos ambiguus",
+      "code": "bkmtou1",
+      "scope": "species"
+    },
+    "co-golden-headed-quetzal": {
+      "scientificName": "Pharomachrus auriceps",
+      "targetScientificName": "Pharomachrus auriceps",
+      "code": "gohque1",
+      "scope": "species"
+    },
+    "co-santa-marta-brushfinch": {
+      "scientificName": "Atlapetes melanocephalus",
+      "targetScientificName": "Atlapetes melanocephalus",
+      "code": "smbfin1",
+      "scope": "species"
+    },
+    "co-santa-marta-parakeet": {
+      "scientificName": "Pyrrhura viridicata",
+      "targetScientificName": "Pyrrhura viridicata",
+      "code": "sampar1",
+      "scope": "species"
+    },
+    "co-white-tailed-starfrontlet": {
+      "scientificName": "Coeligena phalerata",
+      "targetScientificName": "Coeligena phalerata",
+      "code": "whtsta1",
+      "scope": "species"
+    },
+    "co-jabiru": {
+      "scientificName": "Jabiru mycteria",
+      "targetScientificName": "Jabiru mycteria",
+      "code": "jabiru",
+      "scope": "species"
+    },
+    "co-scarlet-ibis": {
+      "scientificName": "Eudocimus ruber",
+      "targetScientificName": "Eudocimus ruber",
+      "code": "scaibi",
+      "scope": "species"
+    },
+    "co-hoatzin": {
+      "scientificName": "Opisthocomus hoazin",
+      "targetScientificName": "Opisthocomus hoazin",
+      "code": "hoatzi1",
+      "scope": "species"
+    },
+    "co-scarlet-macaw": {
+      "scientificName": "Ara macao",
+      "targetScientificName": "Ara macao",
+      "code": "scamac1",
+      "scope": "species"
+    },
+    "co-sunbittern": {
+      "scientificName": "Eurypyga helias",
+      "targetScientificName": "Eurypyga helias",
+      "code": "sunbit1",
+      "scope": "species"
+    },
+    "co-choco-toucan": {
+      "scientificName": "Ramphastos brevis",
+      "targetScientificName": "Ramphastos brevis",
+      "code": "chotou1",
+      "scope": "species"
+    },
+    "co-apical-flycatcher": {
+      "scientificName": "Myiarchus apicalis",
+      "targetScientificName": "Myiarchus apicalis",
+      "code": "apifly1",
+      "scope": "species"
+    },
+    "au-fairywren": {
+      "scientificName": "Malurus cyaneus",
+      "targetScientificName": "Malurus cyaneus",
+      "code": "supfai1",
+      "scope": "species"
+    },
+    "au-lorikeet": {
+      "scientificName": "Trichoglossus moluccanus",
+      "targetScientificName": "Trichoglossus moluccanus",
+      "code": "railor5",
+      "scope": "species"
+    },
+    "au-cockatoo": {
+      "scientificName": "Cacatua galerita",
+      "targetScientificName": "Cacatua galerita",
+      "code": "succoc",
+      "scope": "species"
+    },
+    "au-laughing-kookaburra": {
+      "scientificName": "Dacelo novaeguineae",
+      "targetScientificName": "Dacelo novaeguineae",
+      "code": "laukoo1",
+      "scope": "species"
+    },
+    "au-australian-magpie": {
+      "scientificName": "Gymnorhina tibicen",
+      "targetScientificName": "Gymnorhina tibicen",
+      "code": "ausmag2",
+      "scope": "species"
+    },
+    "au-galah": {
+      "scientificName": "Eolophus roseicapilla",
+      "targetScientificName": "Eolophus roseicapilla",
+      "code": "galah",
+      "scope": "species"
+    },
+    "au-emu": {
+      "scientificName": "Dromaius novaehollandiae",
+      "targetScientificName": "Dromaius novaehollandiae",
+      "code": "emu1",
+      "scope": "species"
+    },
+    "au-southern-cassowary": {
+      "scientificName": "Casuarius casuarius",
+      "targetScientificName": "Casuarius casuarius",
+      "code": "soucas1",
+      "scope": "species"
+    },
+    "au-superb-lyrebird": {
+      "scientificName": "Menura novaehollandiae",
+      "targetScientificName": "Menura novaehollandiae",
+      "code": "suplyr1",
+      "scope": "species"
+    },
+    "au-crimson-rosella": {
+      "scientificName": "Platycercus elegans",
+      "targetScientificName": "Platycercus elegans",
+      "code": "criros2",
+      "scope": "species"
+    },
+    "au-eastern-rosella": {
+      "scientificName": "Platycercus eximius",
+      "targetScientificName": "Platycercus eximius",
+      "code": "easros1",
+      "scope": "species"
+    },
+    "au-australian-king-parrot": {
+      "scientificName": "Alisterus scapularis",
+      "targetScientificName": "Alisterus scapularis",
+      "code": "aukpar1",
+      "scope": "species"
+    },
+    "au-satin-bowerbird": {
+      "scientificName": "Ptilonorhynchus violaceus",
+      "targetScientificName": "Ptilonorhynchus violaceus",
+      "code": "satbow1",
+      "scope": "species"
+    },
+    "au-regent-bowerbird": {
+      "scientificName": "Sericulus chrysocephalus",
+      "targetScientificName": "Sericulus chrysocephalus",
+      "code": "regbow1",
+      "scope": "species"
+    },
+    "au-victorias-riflebird": {
+      "scientificName": "Ptiloris victoriae",
+      "targetScientificName": "Ptiloris victoriae",
+      "code": "vicrif1",
+      "scope": "species"
+    },
+    "au-splendid-fairywren": {
+      "scientificName": "Malurus splendens",
+      "targetScientificName": "Malurus splendens",
+      "code": "splfai1",
+      "scope": "species"
+    },
+    "au-gouldian-finch": {
+      "scientificName": "Chloebia gouldiae",
+      "targetScientificName": "Chloebia gouldiae",
+      "code": "goufin3",
+      "scope": "species"
+    },
+    "au-red-tailed-black-cockatoo": {
+      "scientificName": "Calyptorhynchus banksii",
+      "targetScientificName": "Calyptorhynchus banksii",
+      "code": "rtbcoc1",
+      "scope": "species"
+    },
+    "au-carnabys-black-cockatoo": {
+      "scientificName": "Zanda latirostris",
+      "targetScientificName": "Zanda latirostris",
+      "code": "slbblc1",
+      "scope": "species"
+    },
+    "au-forty-spotted-pardalote": {
+      "scientificName": "Pardalotus quadragintus",
+      "targetScientificName": "Pardalotus quadragintus",
+      "code": "fospar1",
+      "scope": "species"
+    },
+    "nz-kea": {
+      "scientificName": "Nestor notabilis",
+      "targetScientificName": "Nestor notabilis",
+      "code": "kea1",
+      "scope": "species"
+    },
+    "nz-tui": {
+      "scientificName": "Prosthemadera novaeseelandiae",
+      "targetScientificName": "Prosthemadera novaeseelandiae",
+      "code": "tui1",
+      "scope": "species"
+    },
+    "nz-fantail": {
+      "scientificName": "Rhipidura fuliginosa",
+      "targetScientificName": "Rhipidura fuliginosa",
+      "code": "nezfan1",
+      "scope": "species"
+    },
+    "nz-takahe": {
+      "scientificName": "Porphyrio hochstetteri",
+      "targetScientificName": "Porphyrio hochstetteri",
+      "code": "takahe3",
+      "scope": "species"
+    },
+    "nz-little-penguin": {
+      "scientificName": "Eudyptula minor",
+      "targetScientificName": "Eudyptula minor",
+      "code": "litpen1",
+      "scope": "species"
+    },
+    "nz-tokoeka": {
+      "scientificName": "Apteryx australis",
+      "targetScientificName": "Apteryx australis",
+      "code": "sobkiw1",
+      "scope": "species"
+    },
+    "nz-bellbird": {
+      "scientificName": "Anthornis melanura",
+      "targetScientificName": "Anthornis melanura",
+      "code": "nezbel1",
+      "scope": "species"
+    },
+    "nz-grey-warbler": {
+      "scientificName": "Gerygone igata",
+      "targetScientificName": "Gerygone igata",
+      "code": "gryger1",
+      "scope": "species"
+    },
+    "nz-kaka": {
+      "scientificName": "Nestor meridionalis",
+      "targetScientificName": "Nestor meridionalis",
+      "code": "nezkak1",
+      "scope": "species"
+    },
+    "nz-morepork": {
+      "scientificName": "Ninox novaeseelandiae",
+      "targetScientificName": "Ninox novaeseelandiae",
+      "code": "morepo2",
+      "scope": "species"
+    },
+    "nz-kereru": {
+      "scientificName": "Hemiphaga novaeseelandiae",
+      "targetScientificName": "Hemiphaga novaeseelandiae",
+      "code": "nezpig2",
+      "scope": "species"
+    },
+    "nz-new-zealand-falcon": {
+      "scientificName": "Falco novaeseelandiae",
+      "targetScientificName": "Falco novaeseelandiae",
+      "code": "nezfal1",
+      "scope": "species"
+    },
+    "nz-red-crowned-parakeet": {
+      "scientificName": "Cyanoramphus novaezelandiae",
+      "targetScientificName": "Cyanoramphus novaezelandiae",
+      "code": "refpar4",
+      "scope": "species"
+    },
+    "nz-orange-fronted-parakeet": {
+      "scientificName": "Cyanoramphus malherbi",
+      "targetScientificName": "Cyanoramphus malherbi",
+      "code": "malpar2",
+      "scope": "species"
+    },
+    "nz-south-island-robin": {
+      "scientificName": "Petroica australis",
+      "targetScientificName": "Petroica australis",
+      "code": "nezrob3",
+      "scope": "species"
+    },
+    "nz-paradise-shelduck": {
+      "scientificName": "Tadorna variegata",
+      "targetScientificName": "Tadorna variegata",
+      "code": "parshe1",
+      "scope": "species"
+    },
+    "nz-rock-wren": {
+      "scientificName": "Xenicus gilviventris",
+      "targetScientificName": "Xenicus gilviventris",
+      "code": "soiwre1",
+      "scope": "species"
+    },
+    "nz-south-island-saddleback": {
+      "scientificName": "Philesturnus carunculatus",
+      "targetScientificName": "Philesturnus carunculatus",
+      "code": "saddle3",
+      "scope": "species"
+    },
+    "nz-silvereye": {
+      "scientificName": "Zosterops lateralis",
+      "targetScientificName": "Zosterops lateralis",
+      "code": "silver3",
+      "scope": "species"
+    },
+    "nz-south-island-tomtit": {
+      "scientificName": "Petroica macrocephala macrocephala",
+      "targetScientificName": "Petroica macrocephala",
+      "code": "tomtit1",
+      "scope": "parent species"
+    },
+    "nz-western-weka": {
+      "scientificName": "Gallirallus australis australis",
+      "targetScientificName": "Gallirallus australis",
+      "code": "weka1",
+      "scope": "parent species"
+    },
+    "nz-westland-petrel": {
+      "scientificName": "Procellaria westlandica",
+      "targetScientificName": "Procellaria westlandica",
+      "code": "wespet1",
+      "scope": "species"
+    },
+    "nz-white-heron": {
+      "scientificName": "Ardea alba modesta",
+      "targetScientificName": "Ardea alba",
+      "code": "greegr",
+      "scope": "parent species"
+    },
+    "nz-yellow-eyed-penguin": {
+      "scientificName": "Megadyptes antipodes",
+      "targetScientificName": "Megadyptes antipodes",
+      "code": "yeepen1",
+      "scope": "species"
+    },
+    "nz-yellowhead": {
+      "scientificName": "Mohoua ochrocephala",
+      "targetScientificName": "Mohoua ochrocephala",
+      "code": "yellow3",
+      "scope": "species"
+    },
+    "nz-australasian-crested-grebe": {
+      "scientificName": "Podiceps cristatus australis",
+      "targetScientificName": "Podiceps cristatus",
+      "code": "grcgre1",
+      "scope": "parent species"
+    },
+    "nz-black-stilt": {
+      "scientificName": "Himantopus novaezelandiae",
+      "targetScientificName": "Himantopus novaezelandiae",
+      "code": "blasti1",
+      "scope": "species"
+    },
+    "nz-blue-duck": {
+      "scientificName": "Hymenolaimus malacorhynchos",
+      "targetScientificName": "Hymenolaimus malacorhynchos",
+      "code": "bluduc1",
+      "scope": "species"
+    },
+    "nz-huttons-shearwater": {
+      "scientificName": "Puffinus huttoni",
+      "targetScientificName": "Puffinus huttoni",
+      "code": "hutshe1",
+      "scope": "species"
+    },
+    "nz-australasian-bittern": {
+      "scientificName": "Botaurus poiciloptilus",
+      "targetScientificName": "Botaurus poiciloptilus",
+      "code": "ausbit1",
+      "scope": "species"
+    },
+    "nz-extra-rifleman": {
+      "scientificName": "Acanthisitta chloris",
+      "targetScientificName": "Acanthisitta chloris",
+      "code": "riflem1",
+      "scope": "species"
+    }
+  }
+}

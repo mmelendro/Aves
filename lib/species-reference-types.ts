@@ -24,6 +24,7 @@ export type SpeciesPlace = {
   activities: string[]; access: string; reviewed: string
 }
 export type ReferenceResult = ReferenceSpecies & {
+  ebirdUrl?: string
   regionEvidence?:{regionId:string;sourceId:string;reviewed:string;sourceName:string}[]
   regions: { id: string; name: string; href: string }[]
   places: SpeciesPlace[]

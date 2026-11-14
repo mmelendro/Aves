@@ -21,13 +21,13 @@ import { FollowBirdCalls, type FollowCallStatus } from "@/lib/follow-bird-calls"
 import { playForegroundMedia } from "@/lib/media-focus"
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
 import { FieldGuideContext } from "./field-guide-context"
-import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
+import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent, type CSSProperties } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import SpeciesDetailsPanel from "@/components/species-details-panel"
 import { Card } from "@/components/ui/card"
-import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, VolumeX, Loader2, Heart } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, VolumeX, Loader2, Heart, AudioLines } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Image from "./responsive-photo"
+import Image, { photoAspectRatio } from "./responsive-photo"
 import PhotoZoom from "./photo-zoom"
 import { sitePath } from "@/lib/site-path"
 import { coverFocalPosition } from "@/lib/cover-focal-position"
@@ -314,7 +314,7 @@ export default function HomepageBirdCarousel({
       <Card className={cn("overflow-hidden rounded-2xl border border-emerald-100 shadow-lg", isDestinationCard && "rounded-none border-0 shadow-none")}>
         <div data-carousel-image data-has-bird-selection={selection ? "true" : undefined}
           className={cn("relative w-full overflow-hidden bg-stone-100", isDestinationCard ? "aspect-[4/5]" : "aspect-[9/16]")}
-          style={{ containerType: "size", touchAction: "pan-y pinch-zoom", ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) }}
+          style={{ containerType: "size", touchAction: "pan-y pinch-zoom", "--bird-photo-aspect": photoAspectRatio(sitePath(currentBird.image)), ...(!fillPanel && !isDestinationCard ? {aspectRatio:photoAspectRatio(sitePath(currentBird.image))} : {}), ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) } as CSSProperties}
           onTouchStart={event => { touchStartRef.current = !(event.target as HTMLElement).closest("button, a, input, select, textarea, [data-species-overlay]") && event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null }}
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
@@ -326,7 +326,7 @@ export default function HomepageBirdCarousel({
             onLoad={() => setImageState({ image: currentBird.image, status: "loaded" })}
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
             priority={priority && selectedIndex === 0}
-            sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
+            sizes={fillPanel ? "(max-width: 960px) 100vw, 960px" : isDestinationCard ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 400px" : "(max-width: 576px) calc(100vw - 32px), 544px"}
           /></PhotoZoom> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>{renderPhoto ? "Image unavailable" : "Turn to the birds to load this photograph."}</p></div>}
           {renderPhoto && imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 
@@ -371,13 +371,14 @@ export default function HomepageBirdCarousel({
         <div className="bg-white px-3"><BirdStory key={currentBird.id+"-story"} birdId={currentBird.id} countryId={currentBird.countryId ?? countryId} onOpen={()=>setIsPlaying(false)}/></div>
         <div className="flex flex-wrap items-center gap-2 border-t border-emerald-100 bg-white px-3 py-2 text-emerald-950">
           <button type="button" className="min-h-11 rounded-lg border border-emerald-200 px-3 text-xs font-medium hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"
+            aria-label="Follow bird calls" title={callsFollow ? "Stop following bird calls" : "Follow bird calls as you browse"}
             aria-pressed={callsFollow} onClick={() => {
               setIsPlaying(false); playAttemptRef.current += 1
               if (sharedAudio.available) { sharedAudio.toggleFollow(); return }
               if (follow.current?.enabled) follow.current.stop()
               else follow.current?.start(audioRef.current)
-            }}>Listen as you change birds: {callsFollow ? "On" : "Off"}</button><BirdFilterControls/>
-          <p className="text-xs leading-5" role="status">{sharedAudio.available ? callsFollow ? (currentBird.audioFile ? "Listening follows your bird choices in the shared player." : "No recording for this bird. Choose another to continue.") : "Optional for this viewer. Stops when you leave or hide this page." : followStatus === "blocked" ? "Playback stopped. Press Listen again to resume." : followStatus === "missing" ? "No recording for this bird. Choose another to continue." : followStatus === "loading" ? "Loading this bird’s call…" : followStatus === "playing" ? "Listening follows your bird choices. Pause to stop." : followStatus === "ready" ? "Choose another bird to hear its call." : "Optional for this viewer. Stops when you leave or hide this page."}</p>
+            }}><AudioLines size={18} aria-hidden="true"/></button><BirdFilterControls/>
+          <p className="text-xs leading-5" role="status">{followStatus === "blocked" ? "Playback paused. Try again." : callsFollow && !currentBird.audioFile ? "No recording for this bird." : followStatus === "loading" ? "Loading call…" : ""}</p>
         </div>
         {(audioError || audioLoading) && <p role="status" className="bg-white px-4 py-2 text-xs text-emerald-950">{audioError ? "The recording could not play. Use the sound button to try again." : "Loading the recording..."}</p>}
         {/* Announce manual changes politely; automatic playback must not repeatedly interrupt speech. */}

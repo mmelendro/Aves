@@ -37,6 +37,7 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
   const separatorRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<Drag | null>(null)
   const [layout, setLayout] = useState<"guide" | "paired">("guide")
+  const [mapExpanded, setMapExpanded] = useState(false)
   const [face, setFace] = useState<"birds" | "map">(initialFace)
   const [width, setWidth] = useState(0)
   const [share, setShare] = useState(50)
@@ -135,10 +136,11 @@ export default function ResizableDiscoveryPair({ map, media, mapLabel, mediaId, 
     if (separatorRef.current?.hasPointerCapture(pointerId)) separatorRef.current.releasePointerCapture(pointerId)
   }
 
-  return localizeHome(<FieldGuideContext.Provider value={{mediaVisible:layout === "paired" || face === "birds",bird:birdCue,mapCue,showBirds,openMap:()=>openPreview("map"),openBirds:()=>openPreview("birds"),registerMap,registerBirds}}><div ref={containerRef} className={styles.container} data-field-guide="true">
+  return localizeHome(<FieldGuideContext.Provider value={{mapExpanded,setMapExpanded,mediaVisible:layout === "paired" || face === "birds",bird:birdCue,mapCue,showBirds,openMap:()=>openPreview("map"),openBirds:()=>openPreview("birds"),registerMap,registerBirds}}><div ref={containerRef} className={styles.container} data-field-guide="true">
     <div className={styles.guideToolbar}>
       <div className={styles.guideTitle}><BookOpen size={20} aria-hidden="true"/><span>Your bird guide</span><span className={styles.pageLabel}>{layout === "paired" ? "Map & birds" : face === "birds" ? "Birds" : "Map"}</span></div>
       <div className={styles.guideActions}>
+        {face === "map" && <button type="button" className={styles.reset} onClick={()=>openPreview("map")} aria-label="Expand current map"><Maximize2 size={18} aria-hidden="true"/><span>Expand map</span></button>}
         <button type="button" ref={turnRef} className={styles.turnButton} aria-controls={`${id}-birds ${id}-map`} onClick={() => { revealAfterTurn.current = true; setLayout("guide"); setFace(face === "birds" ? "map" : "birds") }}>
           <FlipHorizontal2 size={19} aria-hidden="true"/>{face === "birds" ? "Turn to the map" : "Turn to the birds"}
         </button>

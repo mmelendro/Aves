@@ -48,3 +48,26 @@ test('homepage conversation follows world and country/region context without pri
  else {const u=new URL(href,'https://aves.bio');assert.equal(u.searchParams.get('country'),selection.country);assert.equal(u.searchParams.get('region'),selection.regionId)}
  }
 })
+
+test('every featured bird has an exact, current eBird identity link with explicit parent scope',()=>{
+ const load=loader(),{destinationBirds}=load('content/destination-birds.ts'),{ebirdProfile}=load('lib/ebird-profile.ts')
+ let count=0,parents=0
+ for(const birds of Object.values(destinationBirds))for(const bird of birds){const link=ebirdProfile(bird);assert.match(link.url,/^https:\/\/ebird\.org\/species\/[a-z0-9]+$/);count++;if(link.parentSpecies)parents++}
+ assert.equal(count,73);assert.equal(parents,4)
+ assert.equal(ebirdProfile({id:'nz-kea',scientificName:'Wrong identity'}),null)
+})
+
+test('large responsive cards can choose actual originals while light mode remains bounded',()=>{
+ const manifest=require('../content/photo-renditions.json'),[src,row]=Object.entries(manifest.images).find(([,r])=>r.width>1280)
+ const h=componentHarness('components/responsive-photo.tsx','default',{src,alt:'Credited original',fill:true},{mocks:{'./media-preferences':{useMediaPreferences:()=>({lowBandwidth:false,resolved:true})}}})
+ const source=find(h.render(),n=>n.type==='source');assert.ok(source.props.srcSet.endsWith(`${src} ${row.width}w`));assert.equal(source.props.type,undefined)
+})
+
+test('national references offer only exact current taxonomy links and keep unmatched records usable',()=>{
+ const load=loader(),{searchSpeciesReference}=load('lib/species-reference.ts')
+ for(const country of ['colombia','australia','new-zealand']){
+ const results=searchSpeciesReference(country,new URLSearchParams('q=kea&reference=1'))
+ for(const bird of results.results??results.species??[])if(bird.ebirdUrl)assert.match(bird.ebirdUrl,/^https:\/\/ebird\.org\/species\/[a-z0-9]+$/)
+ }
+ const registry=require('../content/ebird-reference-links.json');assert.equal(registry['Nestor notabilis'],'kea1');assert.equal(registry['unreviewed invented species'],undefined)
+})

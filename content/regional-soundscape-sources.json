@@ -1,0 +1,162 @@
+{
+  "reviewed": "2026-11-14",
+  "policy": "Specific creator-labelled local samples, not live sound, a selected-place recording or a complete regional soundscape. No direct stream, download, remix or voice content is imported. Existing South Island playback remains separately credited.",
+  "recordings": [
+    {
+      "country": "colombia",
+      "region": "caribbean",
+      "creator": "fran_marenco",
+      "id": "796625",
+      "title": "Forest ambience",
+      "location": "Santa Marta, Magdalena",
+      "source": "https://freesound.org/people/fran_marenco/sounds/796625/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "colombia",
+      "region": "pacific-choco",
+      "creator": "jaime_enrique",
+      "id": "424763",
+      "title": "Choc\u00f3 jungle",
+      "location": "Choc\u00f3, Colombia",
+      "source": "https://freesound.org/people/jaime_enrique/sounds/424763/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "colombia",
+      "region": "eastern-andes",
+      "creator": "PaisajesSonorosUrbanos",
+      "id": "271537",
+      "title": "Birds in an eucalyptus forest",
+      "location": "Quebrada La Vieja, Bogot\u00e1",
+      "source": "https://freesound.org/people/PaisajesSonorosUrbanos/sounds/271537/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "colombia",
+      "region": "central-andes",
+      "creator": "jaime_enrique",
+      "id": "742218",
+      "title": "Guadua forest",
+      "location": "Pereira, Risaralda",
+      "source": "https://freesound.org/people/jaime_enrique/sounds/742218/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "new-south-wales",
+      "creator": "DavidLamhauge",
+      "id": "501741",
+      "title": "Rainforest ambience",
+      "location": "Dorrigo National Park, New South Wales",
+      "source": "https://freesound.org/people/DavidLamhauge/sounds/501741/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "queensland",
+      "creator": "EvilDavo",
+      "id": "507156",
+      "title": "Rainforest water, insects and birds",
+      "location": "A national park in Queensland",
+      "source": "https://freesound.org/people/EvilDavo/sounds/507156/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "tasmania",
+      "creator": "Hanbaal",
+      "id": "486418",
+      "title": "Birds, wind and occasional traffic",
+      "location": "Oyster Cove, Tasmania",
+      "source": "https://freesound.org/people/Hanbaal/sounds/486418/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "south-australia",
+      "creator": "roisin.gleeson",
+      "id": "699141",
+      "title": "Night breeze and crickets",
+      "location": "Kuitpo Forest, South Australia",
+      "source": "https://freesound.org/people/roisin.gleeson/sounds/699141/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "victoria",
+      "creator": "kangaroovindaloo",
+      "id": "266635",
+      "title": "Wind through she-oaks",
+      "location": "Pink Lakes, Murray-Sunset National Park, Victoria",
+      "source": "https://freesound.org/people/kangaroovindaloo/sounds/266635/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "western-australia",
+      "creator": "samarobryn",
+      "id": "467066",
+      "title": "Morning chorus",
+      "location": "Yalgorup National Park, Western Australia",
+      "source": "https://freesound.org/people/samarobryn/sounds/467066/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "new-zealand",
+      "region": "north-island",
+      "creator": "lemmuh",
+      "id": "220860",
+      "title": "Bellbird forest recording",
+      "location": "K\u0101piti Island, North Island",
+      "source": "https://freesound.org/people/lemmuh/sounds/220860/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "australian-capital-territory",
+      "creator": "freesoundjon01",
+      "id": "202025",
+      "title": "Birds by the lake",
+      "location": "Weston Park, Canberra",
+      "source": "https://freesound.org/people/freesoundjon01/sounds/202025/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    },
+    {
+      "country": "australia",
+      "region": "northern-territory",
+      "creator": "datajam",
+      "id": "494729",
+      "title": "Savannah dawn chorus",
+      "location": "Northern Territory (creator describes Kakadu)",
+      "source": "https://freesound.org/people/datajam/sounds/494729/",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "delivery": "source link only; direct audio delivery not verified"
+    }
+  ]
+}

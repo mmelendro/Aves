@@ -16,13 +16,13 @@ import { useSharedBirdAudio } from "./use-shared-bird-audio"
  * kept centred as the frame resizes. Audio starts only after activating the sound control.
  */
 
-import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent } from "react"
+import { useState, useContext, useEffect, useCallback, useRef, useId, type Ref, type ButtonHTMLAttributes, type ReactNode, type KeyboardEvent, type TouchEvent, type CSSProperties } from "react"
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context"
 import SpeciesDetailsPanel from "@/features/australia/components/species-details-panel"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Play, Pause, Info, Camera, MapPin, Volume2, VolumeX, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
+import Image, { photoAspectRatio } from "@/components/responsive-photo"
 import { sitePath } from "@/features/australia/lib/site-path"
 import { coverFocalPosition } from "@/lib/cover-focal-position"
 import { birdData as allBirds, type BirdProfile } from "@/features/australia/content/birds"
@@ -261,7 +261,7 @@ export default function HomepageBirdCarousel({
         <div
           data-carousel-image
           className="relative aspect-[9/16] w-full overflow-hidden bg-stone-100"
-          style={{ containerType: "size", touchAction: "pan-y pinch-zoom", ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) }}
+          style={{ containerType: "size", touchAction: "pan-y pinch-zoom", "--bird-photo-aspect":photoAspectRatio(sitePath(currentBird.image)), ...(!fillPanel ? {aspectRatio:photoAspectRatio(sitePath(currentBird.image))} : {}), ...(fillPanel ? { height: "var(--discovery-media-height, auto)" } : {}) } as CSSProperties}
           onTouchStart={event => { touchStartRef.current = !(event.target as HTMLElement).closest("button, a, input, select, textarea, [data-species-overlay]") && event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null }}
           onTouchEnd={handleTouchEnd} onTouchCancel={() => { touchStartRef.current = null }}
         >
@@ -271,7 +271,7 @@ export default function HomepageBirdCarousel({
             style={{ objectPosition: currentBird.imagePosition || "center" }}
             onLoad={() => setImageState({ image: currentBird.image, status: "loaded" })}
             onError={() => setImageState({ image: currentBird.image, status: "error" })}
-            priority={selectedIndex === 0} sizes={fillPanel ? "(max-width: 703px) 100vw, (max-width: 1279px) 60vw, 704px" : "(max-width: 352px) calc(100vw - 32px), 320px"}
+            priority={selectedIndex === 0} sizes={fillPanel ? "(max-width: 960px) 100vw, 960px" : "(max-width: 576px) calc(100vw - 32px), 544px"}
           /> : <div className="flex h-full items-center justify-center gap-2 text-stone-600"><Camera className="h-6 w-6" aria-hidden="true" /><p>Image unavailable</p></div>}
           {imageStatus === "loading" && <div className="absolute inset-0 flex items-center justify-center bg-stone-100 text-sm text-emerald-900" role="status">Loading photograph...</div>}
 

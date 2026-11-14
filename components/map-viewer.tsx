@@ -28,7 +28,7 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
   const start = useRef<{ view: MapView; points: {x:number;y:number}[] } | null>(null)
   const dragged = useRef(false), suppress = useRef(false), frame = useRef(0)
   const lastTap=useRef<{x:number;y:number;at:number}|null>(null)
-  const active = gestures && (move || expanded)
+  const active = gestures && move
   const box = () => ({ width: surface.current?.clientWidth || 1, height: surface.current?.clientHeight || 1 })
   function commit(next: MapView) { viewRef.current = next; cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setView(next)) }
   function reset() { points.current.clear(); start.current = null; setGesturing(false); commit(fitMapView) }
@@ -42,10 +42,18 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
     if (open) element.showModal(); else element.show()
     points.current.clear(); start.current = null; setGesturing(false)
     setExpanded(open)
+    guide?.setMapExpanded?.(open)
     document.dispatchEvent(new Event("aves:map-resize"))
     if (!open) { const restore=closePreview.current; closePreview.current=null; if(restore)restore();else trigger.current?.focus({ preventScroll: true }) }
   }
   useEffect(()=>guide?.registerMap?.(restore=>{closePreview.current=restore;resize(true)}),[guide?.registerMap])
+  const resizeCurrent = useRef(resize)
+  resizeCurrent.current = resize
+  useEffect(()=>{
+    // World, country and island viewers can replace one another. The shared
+    // guide owns this display choice so the next mounted map remains expanded.
+    if (guide?.mapExpanded !== undefined && guide.mapExpanded !== expanded) resizeCurrent.current(guide.mapExpanded)
+  },[guide?.mapExpanded,expanded])
   useEffect(() => {
     if (!expanded) return
     const previous = document.body.style.overflow
@@ -65,7 +73,7 @@ export function MapViewer({ geographicScope, children, label, gestures = true, c
         <button className={styles.control} type="button" aria-label={`Zoom ${label} in`} disabled={view.zoom >= 4} onClick={()=>zoom(1.3)}><Plus size={18} aria-hidden="true"/></button>
         <button className={styles.control} type="button" aria-label={`Zoom ${label} out`} disabled={view.zoom <= 1 && !onZoomOutAtMinimum} onClick={()=>view.zoom <= 1 ? onZoomOutAtMinimum?.() : zoom(1/1.3)}><Minus size={18} aria-hidden="true"/></button>
         <button className={styles.control} type="button" aria-label={`Reset ${label} view`} onClick={reset}><RotateCcw size={18} aria-hidden="true"/></button>
-        {!expanded && <button className={styles.control} type="button" aria-label={`Use touch gestures on ${label}`} aria-pressed={move} onClick={()=>{setMove(!move);points.current.clear();start.current=null}}><Hand size={18} aria-hidden="true"/></button>}
+        {<button className={styles.control} type="button" aria-label={`Use touch gestures on ${label}`} aria-pressed={move} onClick={()=>{setMove(!move);points.current.clear();start.current=null}}><Hand size={18} aria-hidden="true"/></button>}
         <span className="text-xs tabular-nums text-emerald-900" aria-live="off">{view.zoom.toFixed(1)}×</span>
       </>}
       {layerControl}

@@ -324,6 +324,7 @@ export function CountrySpeciesInventory({
                 </details>
               )}
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs leading-6 text-emerald-800">
+                {bird.ebirdUrl && <a href={bird.ebirdUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline underline-offset-4">Explore on eBird</a>}
                 {bird.guide && (
                   <a
                     href={bird.guide.href}

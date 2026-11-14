@@ -6,6 +6,7 @@
  * picker behavior and media rights while the presentation changes.
  */
 import { useColombiaHomeCopy } from "@/components/colombia-home-language"
+import { ebirdProfile } from "@/lib/ebird-profile"
 import BirdConservationLabel from "@/components/bird-conservation-label"
 import Link from "next/link"
 import { ExternalLink, MapPin, X } from "lucide-react"
@@ -29,6 +30,7 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
   const localizeHome = useColombiaHomeCopy()
 
   const speciesSource = bird.sources[0]
+  const ebird = ebirdProfile(bird)
   const content = <>
     <BirdConservationLabel bird={bird} sources/>
     {showBirdPicker && birds.length > 1 && <div>
@@ -42,6 +44,7 @@ export default function SpeciesDetailsPanel({ id, bird, birds, selectedIndex, sh
     <div><p className="font-semibold text-emerald-900">Habitat</p><p className="mt-1 leading-relaxed text-gray-700">{bird.habitat}</p></div>
     <p className="text-xs leading-relaxed text-gray-600">Distribution describes the species’ range, not a guaranteed sighting. Photograph and recording locations may differ.</p>
     {(bird.regionHref || bird.regionSlug) && <a href={bird.regionHref || `/aves-explorer?region=${bird.regionSlug}`} className={cn(linkClass, "flex min-h-11 items-center gap-2")}><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />Explore {bird.primaryRegion}</a>}
+    {ebird && <a href={ebird.url} target="_blank" rel="noopener noreferrer" className={cn(linkClass, "flex min-h-11 items-center gap-2")}><ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />{ebird.parentSpecies ? "Parent species on eBird" : "Explore on eBird"}</a>}
     {speciesSource && <a href={speciesSource.url} target="_blank" rel="noopener noreferrer" className={cn(linkClass, "flex min-h-11 items-center gap-2")}><ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />Read species guide</a>}
     <details className="border-t border-emerald-200 pt-2">
       <summary className="min-h-11 cursor-pointer rounded py-3 text-sm font-semibold text-emerald-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">Photo & recording credits</summary>

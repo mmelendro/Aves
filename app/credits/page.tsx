@@ -1,3 +1,4 @@
+import regionalSources from "@/content/regional-soundscape-sources.json";
 import { publicMetadata } from "@/lib/public-metadata";
 /**
  * Public attribution directory built from the media-credit JSON files.
@@ -287,6 +288,7 @@ export default async function CreditsPage({
           </div>
         </div>
       </section>
+      <section className="py-12 bg-white" aria-labelledby="regional-source-heading"><div className="container mx-auto px-4"><h2 id="regional-source-heading" className="text-2xl font-semibold text-emerald-950">Regional soundscape sources</h2><p className="mt-3 text-sm text-gray-600">Locally labelled samples from their creators. Links open Freesound. These recordings are not embedded by AVES. Reviewed 14 November 2026.</p><ul className="mt-5 grid gap-4 sm:grid-cols-2">{regionalSources.recordings.map(r=><li key={r.id} className="rounded-xl border border-emerald-100 p-4"><h3 className="font-medium">{r.location}</h3><p className="mt-2 text-sm">{r.title} · {r.creator}</p><a href={r.source} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-sm text-emerald-800 underline">Open recording source</a><span> · </span><a href={r.licenceUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-sm text-emerald-800 underline">{r.licence}</a></li>)}</ul></div></section>
       <section className="py-16 bg-white" aria-labelledby="recording-credits">
         <div className="max-w-6xl mx-auto px-4">
           <h2 id="recording-credits" className="text-3xl font-bold mb-8">

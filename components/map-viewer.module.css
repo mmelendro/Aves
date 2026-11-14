@@ -41,3 +41,7 @@
    phones and enlarged text. Inline maps retain their map-first arrangement. */
 .viewer[data-expanded] .toolbar { order:0; position:sticky; top:0; z-index:5; }
 .viewer[data-expanded] .surface { order:1; min-height:14rem; flex:1 0 14rem; }
+
+/* A narrow-page container query must not give the expanded world stage an
+   automatic height. Fill the real canvas while preserving the SVG projection. */
+.viewer[data-expanded] .content :global([data-map-view]) { height:100%; min-height:0; }

@@ -23,6 +23,6 @@ test('the shared viewer owns regional controls and long details start collapsed'
  assert.equal(all.filter(n=>n.type==='MapViewer').length,1)
  assert.ok(nodes(viewer.props.layerControl).some(n=>n.props['aria-label']==='Zoom ecosystem map in'))
  assert.equal(nodes(find(tree,n=>n.type==='figure')).filter(n=>n.type==='Layers').length,0)
- const details=find(tree,n=>n.type==='details'&&nodes(n).some(child=>child.type==='summary'&&child.props.children==='Places, habitats & map details'))
+ const details=find(tree,n=>n.type==='details'&&nodes(n).some(child=>child.type==='summary'&&child.props['aria-label']==='Places, habitats & map details'))
  assert.equal(details.props.open,undefined)
 })

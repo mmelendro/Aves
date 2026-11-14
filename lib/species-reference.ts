@@ -1,4 +1,5 @@
 import "server-only";
+import ebirdLinks from "@/content/ebird-reference-links.json";
 
 import colombia from "@/content/species/colombia.json";
 import australia from "@/content/species/australia.json";
@@ -104,7 +105,9 @@ const indexed = Object.fromEntries(
             name: profile.commonName,
           }
         : undefined;
-      return { ...bird, regions, places, guide,regionEvidence:evidence.map(edge=>({regionId:edge.regionId,sourceId:edge.sourceId,reviewed:edge.reviewed,sourceName:edge.sourceName})) } satisfies ReferenceResult;
+      const code = (ebirdLinks as Record<string,string>)[bird.scientificName];
+      const ebirdUrl = code ? `https://ebird.org/species/${code}` : undefined;
+      return { ...bird, regions, places, guide,ebirdUrl,regionEvidence:evidence.map(edge=>({regionId:edge.regionId,sourceId:edge.sourceId,reviewed:edge.reviewed,sourceName:edge.sourceName})) } satisfies ReferenceResult;
     });
     return [countryId, records];
   }),

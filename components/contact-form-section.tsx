@@ -321,7 +321,7 @@ export function ContactFormSection({
                         </label>
                         <Link
                           href="/tours"
-                          className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1"
+                          className="text-emerald-600 hover:text-emerald-700 text-sm flex min-h-11 items-center gap-1"
                         >
                           View All Tours <ExternalLink className="w-3 h-3" />
                         </Link>
@@ -354,12 +354,12 @@ export function ContactFormSection({
                         </label>
                         <Link
                           href="/aves-explorer"
-                          className="text-emerald-600 hover:text-emerald-700 text-sm flex items-center gap-1"
+                          className="text-emerald-600 hover:text-emerald-700 text-sm flex min-h-11 items-center gap-1"
                         >
                           Explore Map <ExternalLink className="w-3 h-3" />
                         </Link>
                       </div>
-                      <div className="grid md:grid-cols-2 gap-3 max-h-48 overflow-y-auto border rounded-lg p-4 bg-gray-50">
+                      <div tabIndex={0} className="grid md:grid-cols-2 gap-3 max-h-48 overflow-y-auto border rounded-lg p-4 bg-gray-50">
                         {bioregions.map((region) => (
                           <div key={region.id} className="flex items-center space-x-3">
                             <Checkbox
@@ -396,7 +396,7 @@ export function ContactFormSection({
 
                     {/* Empty bot-trap field; real visitors skip it. Updates require a separate opt-in. */}
                     <div className="hidden" aria-hidden="true"><label>Website<input name="website" autoComplete="off" tabIndex={-1} value={website} onChange={event => setWebsite(event.target.value)} /></label></div>
-                    <label className="flex items-start gap-3 text-sm text-gray-700"><input type="checkbox" className="mt-1 accent-emerald-600" checked={updates} onChange={event => setUpdates(event.target.checked)} /><span>Email me AVES Colombia trip news and updates. I can unsubscribe at any time.</span></label>
+                    <label className="flex items-start gap-3 text-sm text-gray-700"><input type="checkbox" className="mt-1 h-6 w-6 shrink-0 accent-emerald-600" checked={updates} onChange={event => setUpdates(event.target.checked)} /><span>Email me AVES Colombia trip news and updates. I can unsubscribe at any time.</span></label>
                     <p className="text-sm text-gray-500">Updates are optional. We'll use your details to respond to this inquiry. <Link href="/privacy" className="text-emerald-700 underline">Read our privacy information</Link>.</p>
 
                     {/* Submit Button */}

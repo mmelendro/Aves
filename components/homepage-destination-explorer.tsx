@@ -63,6 +63,7 @@ import { DestinationSelectionContext } from "@/components/destination-selection-
 import { BirdDiscoveryContext } from "@/components/bird-discovery-context";
 import { useHeaderLandscape } from "./header-landscape-context";
 import { MapViewer } from "./map-viewer";
+import RegionalSoundscapeSource from "./regional-soundscape-source";
 import DestinationRegionalMap from "@/components/deferred-country-map";
 import ResizableDiscoveryPair from "@/components/resizable-discovery-pair";
 import SouthIslandHabitatProvider, {
@@ -414,6 +415,7 @@ export function HomepageDestinationExplorerCore({
                     </div>
                   ) : (
                     <MapViewer
+                      listenControl={<RegionalSoundscapeSource country={zoomed ? destination.id : ""} region={regionId}/>}
                       geographicScope={{
                         country: zoomed ? destination.id : "",
                         region: regionId,

@@ -9,6 +9,8 @@ import {useMediaPreferences} from "./media-preferences"
 type Rendition = { width: number; height: number; variants: { src: string; width: number }[] }
 const images: Record<string, Rendition> = manifest.images
 
+export function photoAspectRatio(src:string) { const row=images[src]; return row ? `${row.width} / ${row.height}` : "4 / 5" }
+
 /** React 19 passes the native image ref through props. Use a small web rendition
  * in cards and thumbnails; expanded photos retain their full original source.
  * The same img stays mounted, preserving focal points, load events and zoom. */
@@ -21,8 +23,14 @@ export default function ResponsivePhoto(props: ImageProps & { ref?: Ref<HTMLImag
   // Start conservatively until a stored preference is read, so a full reload
   // cannot download a large rendition ahead of the traveller's saved choice.
   const restrained=lowBandwidth||resolved===false
+  // High-density and resized cards may need more than the 1280px web rendition.
+  // Offer the actual original at its real width, while keeping light mode bounded.
+  const variants = restrained ? [lightVariant] : [
+    ...rendition.variants,
+    ...(rendition.width > rendition.variants.at(-1)!.width ? [{src: props.src as string, width: rendition.width}] : []),
+  ]
   return <picture style={{ display: "contents" }}>
-    {(!expanded||restrained) && <source type="image/webp" srcSet={(restrained?[lightVariant]:rendition.variants).map(image => `${image.src} ${image.width}w`).join(", ")} sizes={restrained?`${lightVariant.width}px`:props.sizes || "100vw"} />}
+    {(!expanded||restrained) && <source type={restrained ? "image/webp" : undefined} srcSet={variants.map(image => `${image.src} ${image.width}w`).join(", ")} sizes={restrained?`${lightVariant.width}px`:props.sizes || "100vw"} />}
     <Image {...props} alt={props.alt} priority={false} loading={props.priority ? "eager" : props.loading} fetchPriority={props.priority ? "high" : props.fetchPriority} />
   </picture>
 }

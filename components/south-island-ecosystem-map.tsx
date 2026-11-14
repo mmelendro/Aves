@@ -22,7 +22,7 @@ import {useBirdFilters} from "./bird-filter-context"
 import {filterConservationBirds,birdFiltersActive} from "@/lib/bird-conservation"
 import {newZealandRegionBirds} from "@/content/new-zealand-carousel"
 import {filterSouthIslandBirds} from "@/content/south-island-ecosystems"
-import { Hand, Minus, Plus, RotateCcw } from "lucide-react"
+import { Hand, Minus, Plus, RotateCcw, Map as MapIcon, Info } from "lucide-react"
 import map from "@/content/south-island-ecosystem-map.json"
 import contextRegions from "@/content/geographic-planning-regions/new-zealand.json"
 import { southIslandEcosystems, type SouthIslandEcosystemFilter, type SouthIslandEcosystem } from "@/content/south-island-ecosystems"
@@ -56,6 +56,7 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
   const guidedJourney=journey?.islandId==="south-island"
   const reference=guidedJourney?journey?.steps[journey.index]?.mapPoint:undefined
   const id = useId()
+  const [detailsOpen,setDetailsOpen]=useState(false)
   const detailsRef = useRef<HTMLDetailsElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const pointers = useRef(new Map<number, { x: number; y: number }>())
@@ -204,10 +205,10 @@ export default function SouthIslandEcosystemMap({ matchingHabitats, selected, on
       <figcaption className="text-center text-[11px] leading-5 text-gray-600">{satellite ? "Satellite · EOxCloudless · 2016 composite · Historical landscape" : "Land cover · 2023/24 · Approx. 2 km source detail; zoom adds no new data"}{satellite && selected !== "all" && selected !== "coast" && <span className="block">Ecosystems · LCDB 2023/24 · Generalised land cover</span>}{(layers.nationalParks || layers.conservation) && <span className="block">DOC conservation boundaries · 9 November 2026 · CC BY 4.0</span>}</figcaption>
     </figure>
     {(layers.bcorps || layers.planning) && <p className="shrink-0 text-[10px] leading-4 text-emerald-900"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="inline-flex min-h-6 items-center underline">© OpenStreetMap contributors · ODbL<span className="sr-only"> (opens in a new tab)</span></a></p>}
-    <details ref={detailsRef} className={styles.mapDetails}>
-      <summary>Places, habitats &amp; map details</summary>
+    <details ref={detailsRef} onToggle={event=>setDetailsOpen(event.currentTarget.open)} className={styles.mapDetails}>
+      <summary aria-label="Places, habitats & map details" title={detailsOpen?"Return to the map":"Open place information"}>{detailsOpen?<MapIcon size={18} aria-hidden="true"/>:<Info size={18} aria-hidden="true"/>}<span>{detailsOpen?"Map":"Place info"}</span></summary>
       <div className={styles.detailsPanel}>
-        <button type="button" className="mb-2 min-h-11 rounded px-2 text-sm font-semibold text-emerald-800 underline" onClick={()=>{if(detailsRef.current){detailsRef.current.open=false;detailsRef.current.querySelector("summary")?.focus();}}}>Back to the map</button>
+        <div className="sticky top-0 z-10 mb-2 flex items-center justify-between gap-2 bg-[#f7fdf9] pb-2"><h3 className="text-sm font-semibold">Place info</h3><button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-700 bg-white px-4 text-sm font-semibold text-emerald-800" onClick={()=>{if(detailsRef.current){detailsRef.current.open=false;detailsRef.current.querySelector("summary")?.focus();}}}><MapIcon size={18} aria-hidden="true"/>Map</button></div>
         <button type="button" onClick={() => onSelect("all")} aria-pressed={selected === "all"} className="min-h-11 rounded px-2 text-xs font-semibold text-emerald-800 underline">All habitats</button>
         <p className="mb-2 text-xs leading-5 text-gray-600">{satellite ? "Drag to explore. Pinch or double tap to zoom. Use the habitat filters below to change the birds." : "Drag to pan. Pinch or double tap to zoom. Tap habitats to select them. Keyboard: + / −, arrow keys and Home."}</p>
     <PublicPlaceDetails />

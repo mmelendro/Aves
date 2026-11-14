@@ -30,3 +30,7 @@
 .mapDetails > summary { display:flex; align-items:center; min-height:44px; cursor:pointer; border-top:1px solid #d1e9db; padding-inline:.25rem; color:#065f46; font-size:.75rem; }
 .detailsPanel { position:absolute; z-index:20; inset-inline:.5rem; bottom:44px; max-height:75%; overflow:auto; overscroll-behavior:contain; padding:.75rem; border:1px solid #b7dccc; border-radius:1rem; background:#f7fdf9f5; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:0 8px 24px #064e3b1a; }
 .mapDetails > summary:focus-visible { outline:2px solid #047857; outline-offset:-2px; }
+
+.mapDetails > summary { justify-content:center; gap:.5rem; border:1px solid #065f46; border-radius:999px; background:#065f46; color:white; font-weight:600; margin-top:.35rem; }
+@media(prefers-reduced-motion:no-preference) { .mapDetails[open] .detailsPanel { animation:placeInfoRise 180ms ease-out; } }
+@keyframes placeInfoRise { from { opacity:0; transform:translateY(1rem); } to { opacity:1; transform:translateY(0); } }
